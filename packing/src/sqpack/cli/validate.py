@@ -111,8 +111,48 @@ DEFAULT_TIMEOUT_SECONDS = 900.0
 #: `test_every_boolean_flag_is_classified` refuses a new `store_true` flag that appears in
 #: neither this tuple nor its allow-list, so a tier cannot be added without deciding
 #: whether it needs a ceiling.
-TIER_FLAGS = ("push", "records", "edit", "suite", "checks", "sweeps", "geometry", "fast")
-TIER_IDS = (*TIER_FLAGS, "full")
+TIER_FLAGS = (
+    "push",
+    "records",
+    "edit",
+    "suite",
+    "checks",
+    "sweeps",
+    "geometry",
+    "typecheck",
+    "fast",
+)
+#: How many runners a pull request divides `fast behavioral tests` across, by test file.
+#:
+#: Two, and the reason is the measurement that took the lane off one runner rather than
+#: a preference for a number. On 2026-09-15 the `suite` job was the longest required job
+#: in 34 of 35 pull-request runs: 262 s of pytest over 6,095 tests on the workbench stack
+#: and 243 s over 5,664 on PRs into `main`, 870 and 825 test-seconds, and four runs that
+#: day failed the tier's 275 s ceiling with every test passing. No test was the cause --
+#: the largest file was 9 per cent of the lane and the top hundred 92 per cent -- so no
+#: marker could buy it back, and four xdist workers on a four-cpu runner cannot divide
+#: that much work under the ceiling however it is scheduled. A second runner can: the
+#: audit's real file partitions of the same per-file medians predicted 138 s and 134 s.
+#: A third buys nothing until the other pull-request jobs are shorter than two shards.
+#:
+#: The partition is `devtools.suite_files`: recorded per-file costs packed longest first,
+#: and a hash of the path for any file the record does not name, so each file is in
+#: exactly one shard whatever is added. Each shard is a tier with its own ceiling, because
+#: a slice of a tier has no declared cost (`D-466`).
+SUITE_SHARDS = 2
+SUITE_SHARD_TIER_IDS = tuple(
+    f"suite-{index}-of-{SUITE_SHARDS}" for index in range(1, SUITE_SHARDS + 1)
+)
+TIER_IDS = (*TIER_FLAGS, *SUITE_SHARD_TIER_IDS, "full")
+#: The pull-request run whose success on this exact tree a post-merge run may lean on.
+#:
+#: Set only by the workflow, from `devtools.verified_merge_tree`, and only on a push to
+#: `main`. When it names a run, the complete surface leaves out the steps that run already
+#: passed on byte-identical inputs -- every `fast` step -- except the ones whose verdict
+#: reads more than the tree (`Step.reads_beyond_tree`). The deferred steps still run,
+#: which is what keeps `OR-13` whole: nothing that a pull request cannot afford stops
+#: running after the merge, and nothing a pull request ran is re-run on the same bytes.
+TREE_VERIFIED_ENVIRONMENT = "PACKING_VALIDATE_TREE_VERIFIED_BY_RUN"
 #: The budget of the whole non-exhaustive suite, read by `fast behavioral tests` and by
 #: `--push` when its selector expands to everything (D-432). The two run the same suite
 #: through two entry points, so they carry one number; the argument for the number is
@@ -411,6 +451,8 @@ class Context:
     this run, and a step quietly opting out of that is the bug, not the feature."""
 
     step_name: str = ""
+    shard: tuple[int, int] | None = None
+    """`(index, count)` when this run is one shard of the quick behavioural lane."""
     artifact_run_id: str = field(default_factory=lambda: uuid.uuid4().hex)
     processes: _ProcessRegistry = field(
         default_factory=_ProcessRegistry, compare=False, repr=False
@@ -548,9 +590,10 @@ class Step:
     Two rules bound which steps may carry this flag, and the balance is chosen inside
     them rather than over the whole tier:
 
-    * **only a `broad` step**, so `--edit` stays wholly inside `--checks` and a
-      contributor's edit loop never spans two selections. `test_the_edit_tier_cannot_
-      under_run` is where that is enforced;
+    * **only a `broad` step**, so `--edit` stays inside `--checks` and a contributor's
+      edit loop never spans two selections. `test_the_edit_tier_cannot_under_run` is where
+      that is enforced, and since 2026-09-15 it names the one exception it allows: the
+      type floor, which `Step.typecheck` argues on its own runner;
     * **no `needs_engine` step and nothing that runs cargo**, so exactly one of the two
       jobs pays the serial `cargo build --release` that `_build_engine` puts in front of
       every step -- about 25s on a cold runner -- and this job needs no Rust toolchain at
@@ -566,6 +609,46 @@ class Step:
 
     Like `sweep` and `suite` it defaults to False, so the failure mode of forgetting it is
     a slower `checks` job rather than a step nobody runs."""
+
+    typecheck: bool = False
+    """This step is the type floor, and a pull request runs it on a runner of its own.
+
+    The one non-`broad` step outside `--checks`, so it is the one exception to the rule
+    `geometry` above states, and it is argued as one. On 2026-09-15 `checks` sat exactly
+    at its cpu floor -- `cargo build` plus step time divided by three slots, which a
+    replay of one run's step times reproduced to within a second -- and basedpyright was
+    79 s of that step time on `main` and 104 s on the workbench stack, grown from 57 s in
+    nine days. It is one process that no `--jobs` setting divides, it has no persistent
+    cache or incremental CLI mode, and `--threads` bought about 8 per cent locally for
+    twice the cpu. So the lever is where it runs: the same replay moved it out and put the
+    `checks` wall from 135 s to 129 s on its own, and to 109 s beside a parallel `exact
+    verification`, which was the other floor.
+
+    What this does not change is what a contributor runs. `--edit` still selects it, so
+    the edit loop is one selection on one machine; what is split is only which CI runner
+    reports it. `test_the_edit_tier_cannot_under_run` holds the rule in its new form:
+    `--edit` lies inside `--checks` and `--typecheck` together, and this is the only step
+    that may carry the flag. Like the other three placement flags it defaults to False, so
+    forgetting it makes `checks` slower rather than leaving a step unrun."""
+
+    reads_beyond_tree: bool = False
+    """This step's verdict depends on something other than the tracked tree's bytes.
+
+    A post-merge run whose tree a successful pull-request run already validated leaves
+    out the fast steps that run passed (`TREE_VERIFIED_ENVIRONMENT`), because equal tree
+    ids are equal bytes for every tracked file, the verifying code included. Three steps
+    answer to more than that, and `development.md` names them from the measurement that
+    first priced a tree-identity skip: `campaign record` judges deadlines against HEAD's
+    committer date, which a merge commit changes; `bead tree` reads the bead store in a
+    sync worktree that is in no tree; and `provenance: recorded commits are reachable`
+    reads the git graph and the clone depth. Those still run after every merge.
+
+    **The default is the unsafe direction, and that is stated rather than hidden.** A new
+    step that reads the clock, the network or git state and forgets this flag would be
+    left out of a verified post-merge run. It still ran on the pull request, on the same
+    bytes, so what it loses is a second reading at a later instant, not its only one;
+    `test_a_verified_merge_repeats_only_what_reads_beyond_the_tree` pins the set, so
+    adding a name is a thing someone has to type."""
 
     touches: tuple[str, ...] = ()
     """Repo-relative path globs whose change can affect this step's verdict.
@@ -649,6 +732,8 @@ class Step:
             tags.append("suite")
         elif self.geometry:
             tags.append("geometry")
+        elif self.typecheck:
+            tags.append("typecheck")
         elif self.fast:
             tags.append("checks")
         if self.fast and not self.broad:
@@ -847,6 +932,11 @@ def _run(
         # `--durations-min` is its ceiling, and pytest would take the last value given.
         if not any(argument.startswith("--durations") for argument in arguments):
             arguments.extend(("--durations=0", "--durations-min=0"))
+        # The per-file cost report, beside the junit file, wherever the lane loads the
+        # plugin that writes it: test count and seconds by file, so growth in a lane is
+        # priced and attributable on the run that introduced it.
+        if _SUITE_FILES_PLUGIN in arguments:
+            arguments.append(f"--test-file-costs={stem}.test-files.json")
         arguments.append(f"--junitxml={stem}.junit.xml")
     environment = dict(context.environment)
     # Nested test subprocesses must not reuse this gate's artifact configuration.
@@ -985,6 +1075,60 @@ def _commands(
     context: Context, commands: Sequence[Sequence[str]], *, cwd: Path = PROJECT_ROOT
 ) -> str:
     outputs = [_run(context, command, cwd=cwd) for command in commands]
+    return "\n".join(output for output in outputs if output)
+
+
+def _command_workers(jobs: int) -> int:
+    """How many of a step's independent subprocesses may run at once: what the box has left.
+
+    The same `cpus - jobs + 1` `_pytest_workers` argues, for the same reason: this step is
+    one of the `jobs` outer slots, so it may take the cpus the other slots leave and no
+    more, and total concurrency lands at about the cpu count rather than over it. At a
+    pull request's `--checks --jobs 3` on four cpus that is two; locally, where `--jobs`
+    defaults to the cpu count, it is one and the step runs exactly as it did serially.
+    """
+    return _pytest_workers(jobs)
+
+
+def _concurrent_commands(
+    context: Context,
+    commands: Sequence[Sequence[str]],
+    *,
+    workers: int,
+    cwd: Path = PROJECT_ROOT,
+) -> str:
+    """`_commands` for subprocesses that share nothing: the same joined output, sooner.
+
+    Each command is already its own process, so the pool here only decides how many wait
+    at once; a process pool around `subprocess` would add a process per command and
+    nothing else. Outputs are joined in declared order, whatever order they finish in, so
+    a substring check over the result reads what the serial run printed.
+
+    A failure stops what has not started and lets what is running finish, and the error
+    raised is the earliest declared command's -- the one the serial loop would have
+    stopped on -- so which failure a run reports does not depend on scheduling.
+    """
+    if workers <= 1:
+        return _commands(context, commands, cwd=cwd)
+    outputs = [""] * len(commands)
+    failures: list[tuple[int, Exception]] = []
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {
+            pool.submit(_run, context, command, cwd=cwd): index
+            for index, command in enumerate(commands)
+        }
+        for future in as_completed(futures):
+            index = futures[future]
+            if future.cancelled():
+                continue
+            try:
+                outputs[index] = future.result()
+            except Exception as error:  # noqa: BLE001 - re-raised below, earliest first
+                failures.append((index, error))
+                for pending in futures:
+                    _ = pending.cancel()
+    if failures:
+        raise min(failures, key=lambda failure: failure[0])[1]
     return "\n".join(output for output in outputs if output)
 
 
@@ -1243,8 +1387,13 @@ def _xdist_distribution(jobs: int) -> tuple[str, ...]:
     return () if workers == 1 else ("-n", str(workers))
 
 
-def _quick_lane_command(jobs: int) -> tuple[str, ...]:
+#: The quick lane's file plugin: the shard partition and the per-file cost report.
+_SUITE_FILES_PLUGIN = "devtools.suite_files"
+
+
+def _quick_lane_command(jobs: int, shard: tuple[int, int] | None = None) -> tuple[str, ...]:
     distribution = _xdist_distribution(jobs)
+    selection = () if shard is None else (f"--suite-shard={shard[0]}/{shard[1]}",)
     return (
         sys.executable,
         "-m",
@@ -1254,6 +1403,9 @@ def _quick_lane_command(jobs: int) -> tuple[str, ...]:
         "-m",
         QUICK_TESTS,
         *distribution,
+        "-p",
+        _SUITE_FILES_PLUGIN,
+        *selection,
         "-p",
         _CPU_DURATIONS_PLUGIN,
         "--durations=0",
@@ -1265,7 +1417,7 @@ def _quick_lane_command(jobs: int) -> tuple[str, ...]:
 
 def _fast_tests(context: Context) -> str:
     """Enforce call wall time; retain CPU counters as diagnostics without attribution."""
-    output = _run(context, _quick_lane_command(context.jobs))
+    output = _run(context, _quick_lane_command(context.jobs, context.shard))
     _require_durations(output, "quick", "the observed CPU diagnostics", _CPU_DURATION_HEADER)
     wall_rule = f"the {QUICK_TEST_WALL_BACKSTOP_SECONDS:g}s wall ceiling"
     _require_durations(output, "quick", wall_rule)
@@ -1942,8 +2094,17 @@ def _stromquist_rejection(context: Context) -> str:
 def _exact_verification(context: Context) -> str:
     """The exact certificates, and a sampled stand-in for the grid replay among them.
 
-    `_commands` runs its list in one process after another, so this step's wall is the
-    sum of seventeen subcommands and the gate's `--jobs` pool cannot see inside it. At
+    **Since 2026-09-15 the seventeen run concurrently, up to `_command_workers`.** They
+    share no state -- none reads another's output, and the only coupling is the
+    order-independent substring check at the end -- and serially they were the floor under
+    the `checks` job: 116-120 s of CI step time, `dilation_corollary` 57-61 s of it, in a
+    queue whose wall was step time over three slots. At `--checks --jobs 3` on four cpus
+    this takes the two cpus the other slots leave, so the step's wall is its longest
+    member's rather than the sum.
+
+    Before that, `_commands` ran the list one process after another, so this step's wall
+    was the sum of seventeen subcommands and the gate's `--jobs` pool could not see inside
+    it. At
     `n=1..324` the step was 84.21s on an idle ten-cpu box (three readings, spread 0.7 per
     cent) and 133.4s on CI, where it was 70.6 per cent of a `checks` job that ran 189.09s
     against a 195s ceiling. One member grows with the corpus and it is the one that grew:
@@ -1958,7 +2119,7 @@ def _exact_verification(context: Context) -> str:
     when the corpus widens. The largest is now `dilation_corollary` at 26.35s, which is
     where the next second on this step would have to come from.
     """
-    output = _commands(
+    output = _concurrent_commands(
         context,
         (
             (
@@ -2055,6 +2216,7 @@ def _exact_verification(context: Context) -> str:
                 "witnesses/schadt-n029-2025-rational.yaml",
             ),
         ),
+        workers=_command_workers(context.jobs),
     )
     _require_text(
         output,
@@ -2874,7 +3036,16 @@ STEPS: tuple[Step, ...] = (
         touches=(*_CORE, *_ENGINE_SRC, "packing/devtools/check_soundness_perimeter.py"),
     ),
     Step("lint floor (ruff)", _lint_floor, fast=True, records=True, touches=_ANY_PYTHON),
-    Step("type floor (basedpyright)", _type_floor, fast=True, touches=_ANY_PYTHON),
+    # `typecheck=True`: basedpyright is one process no `--jobs` divides, and it was 79 s of
+    # the `checks` queue on `main` and 104 s on the workbench stack on 2026-09-15. It stays
+    # in `--edit`; only the pull-request runner that reports it moved (`Step.typecheck`).
+    Step(
+        "type floor (basedpyright)",
+        _type_floor,
+        fast=True,
+        typecheck=True,
+        touches=_ANY_PYTHON,
+    ),
     # 9.63s.
     Step(
         "basin atlas",
@@ -3191,6 +3362,7 @@ STEPS: tuple[Step, ...] = (
         _bead_tree,
         fast=True,
         records=True,
+        reads_beyond_tree=True,
         # The bead data lives in a sync worktree, not the tracked tree, so a bead-only
         # change produces no changed path at all -- which selects the whole gate.
         touches=(*_CORE, ".tbd/*", "packing/devtools/check_bead_tree.py"),
@@ -3793,6 +3965,7 @@ STEPS: tuple[Step, ...] = (
         "provenance: recorded commits are reachable",
         _provenance,
         fast=True,
+        reads_beyond_tree=True,
         # Also depends on git history and where HEAD points, which no path expresses. An
         # empty changed-path set already selects the whole gate, so that is bounded.
         touches=(*_CORE, *_RESULTS),
@@ -3802,6 +3975,7 @@ STEPS: tuple[Step, ...] = (
         _campaign_record,
         fast=True,
         records=True,
+        reads_beyond_tree=True,
         touches=(
             *_CORE,
             "packing/campaign/*",
@@ -4012,9 +4186,13 @@ def _select_steps(
     sweeps: bool = False,
     suite: bool = False,
     geometry: bool = False,
+    typecheck: bool = False,
     skip: Sequence[str] = (),
 ) -> list[Step]:
     """The steps a tier and its name filters select.
+
+    `--typecheck` joined the four parts below on 2026-09-15 and is the fifth, selected the
+    same way: the fast steps marked `typecheck`, which `--checks` then leaves out.
 
     `--checks`, `--suite`, `--sweeps` and `--geometry` are the four parts of `--fast`,
     and they exist because the pull request runs them as four concurrent GitHub jobs.
@@ -4057,11 +4235,13 @@ def _select_steps(
         selected = [step for step in STEPS if step.suite]
     elif geometry:
         selected = [step for step in STEPS if step.geometry]
+    elif typecheck:
+        selected = [step for step in STEPS if step.typecheck]
     elif checks:
         selected = [
             step
             for step in STEPS
-            if step.fast and not (step.sweep or step.suite or step.geometry)
+            if step.fast and not (step.sweep or step.suite or step.geometry or step.typecheck)
         ]
     else:
         selected = [step for step in STEPS if not (fast or edit) or step.fast]
@@ -4097,6 +4277,37 @@ def _select_steps(
             "`packing-validate --list` shows names"
         )
     return selected
+
+
+def _after_verified_pull_request(selected: Sequence[Step]) -> list[Step]:
+    """What a post-merge run still owes a tree a pull-request run already passed.
+
+    Every step that run could not afford -- everything not `fast` -- and the fast steps
+    whose verdict reads more than the tree. The rest ran on byte-identical inputs, the
+    verifying code included, and repeating them is repetition rather than coverage.
+    """
+    return [step for step in selected if not step.fast or step.reads_beyond_tree]
+
+
+def _unless_verified(namespace: argparse.Namespace, selected: list[Step]) -> list[Step]:
+    """Apply `TREE_VERIFIED_ENVIRONMENT`, which only a complete post-merge run may carry."""
+    verified_run = os.environ.get(TREE_VERIFIED_ENVIRONMENT, "").strip()
+    if not verified_run:
+        return selected
+    if _tier_id(namespace) != "full" or namespace.push:
+        raise UsageError(
+            f"{TREE_VERIFIED_ENVIRONMENT} narrows the complete surface after a merge; it "
+            "is not combined with a tier, --only or --since"
+        )
+    narrowed = _after_verified_pull_request(selected)
+    print(
+        f"== pull-request run {verified_run} passed this exact tree: "
+        f"{len(selected) - len(narrowed)} fast steps are not repeated, and the "
+        f"{len(narrowed)} that were deferred or read beyond the tree still run ==\n",
+        # Never into a JSON document a machine is about to parse.
+        file=sys.stderr if namespace.format == "json" else sys.stdout,
+    )
+    return narrowed
 
 
 def _execute_step(step: Step, context: Context) -> StepResult:
@@ -4283,6 +4494,9 @@ def _tier_id(namespace: argparse.Namespace) -> str | None:
     """
     if namespace.only or (namespace.since and not namespace.push):
         return None
+    if namespace.shard is not None:
+        index, count = _shard(namespace.shard)
+        return f"suite-{index}-of-{count}"
     return next((flag for flag in TIER_FLAGS if getattr(namespace, flag)), "full")
 
 
@@ -4464,6 +4678,22 @@ def _parser() -> ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--shard",
+        metavar="K/N",
+        help=(
+            f"with --suite, run only shard K of N={SUITE_SHARDS}: the test files the "
+            "recorded partition in devtools/suite-file-costs.json assigns to it"
+        ),
+    )
+    parser.add_argument(
+        "--typecheck",
+        action="store_true",
+        help=(
+            "run the part of --fast that is the type floor; the pull request gives it a "
+            "runner of its own because no --jobs setting divides it"
+        ),
+    )
+    parser.add_argument(
         "--sweeps",
         action="store_true",
         help=(
@@ -4561,36 +4791,63 @@ def _validate_invocation(
     sweeps: bool = False,
     suite: bool = False,
     geometry: bool = False,
+    typecheck: bool = False,
+    shard: str | None = None,
     since: str | None = None,
     push: bool = False,
     skip: Sequence[str] = (),
 ) -> None:
-    parts = checks or sweeps or suite or geometry
+    parts = checks or sweeps or suite or geometry or typecheck
     narrowed = only or skip or fast or records or edit or parts or since or push
     if strict and narrowed:
         raise UsageError(
             "--strict cannot be combined with --only, --skip, --fast, --checks, "
-            "--suite, --sweeps, --geometry, --records, --edit, --push, or --since"
+            "--suite, --sweeps, --geometry, --typecheck, --records, --edit, --push, "
+            "or --since"
         )
     if edit and fast:
         raise UsageError(
             "--edit and --fast select different tiers; --fast is the wider of the two"
         )
-    if [checks, sweeps, suite, geometry].count(True) > 1:
+    if [checks, sweeps, suite, geometry, typecheck].count(True) > 1:
         raise UsageError(
-            "--checks, --geometry, --suite and --sweeps are the four parts of --fast; "
-            "ask for --fast to run them all, or for one of them to run that part"
+            "--checks, --geometry, --suite, --sweeps and --typecheck are the five parts of "
+            "--fast; ask for --fast to run them all, or for one of them to run that part"
         )
     if parts and (fast or records or edit or push):
         raise UsageError(
-            "--checks, --geometry, --suite and --sweeps are parts of --fast and are not "
-            "combined with another tier; --fast is all four of them"
+            "--checks, --geometry, --suite, --sweeps and --typecheck are parts of --fast "
+            "and are not combined with another tier; --fast is all five of them"
         )
+    if shard is not None:
+        if not suite:
+            raise UsageError("--shard divides the quick behavioral lane; use it with --suite")
+        if only or skip or since:
+            raise UsageError(
+                "--shard is already a slice with its own ceiling; it takes no --only, "
+                "--skip or --since"
+            )
+        _ = _shard(shard)
     if push and (fast or records or edit):
         raise UsageError(
             "--push is its own tier: the edit tier plus reachable tests; "
             "combine it only with --since to change the base ref"
         )
+
+
+def _shard(text: str) -> tuple[int, int]:
+    """`K/N` as `(K, N)`, refusing any N but the one the partition is recorded for."""
+    head, separator, tail = text.partition("/")
+    if not separator or not head.isdigit() or not tail.isdigit():
+        raise UsageError(f"--shard is written K/N, not {text!r}")
+    index, count = int(head), int(tail)
+    if count != SUITE_SHARDS or not 1 <= index <= count:
+        raise UsageError(
+            f"--shard {text!r} is not one of 1/{SUITE_SHARDS} .. "
+            f"{SUITE_SHARDS}/{SUITE_SHARDS}; each shard is a declared tier, and "
+            "SUITE_SHARDS is the count the partition and the register are recorded for"
+        )
+    return index, count
 
 
 def _validate_runtime() -> None:
@@ -4615,6 +4872,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             sweeps=namespace.sweeps,
             suite=namespace.suite,
             geometry=namespace.geometry,
+            typecheck=namespace.typecheck,
+            shard=namespace.shard,
             since=namespace.since,
             push=namespace.push,
             skip=namespace.skip,
@@ -4654,8 +4913,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             sweeps=namespace.sweeps,
             suite=namespace.suite,
             geometry=namespace.geometry,
+            typecheck=namespace.typecheck,
             skip=namespace.skip,
         )
+        selected = _unless_verified(namespace, selected)
         if namespace.push:
             base = namespace.since or "origin/main"
             step = _push_test_step(base)
@@ -4682,6 +4943,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _render_early_exit(namespace, selected)
         environment = os.environ.copy()
         environment["PACK_JOBS"] = str(inner_jobs)
+        # Spent on this run's selection; a nested gate a step starts judges its own tree.
+        _ = environment.pop(TREE_VERIFIED_ENVIRONMENT, None)
         context = Context(
             deep=deep,
             strict=strict,
@@ -4690,6 +4953,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             environment=environment,
             timeout_seconds=timeout_seconds,
             timeout_is_explicit=timeout_is_explicit,
+            shard=None if namespace.shard is None else _shard(namespace.shard),
         )
         _begin_artifacts(context, selected)
         summary = _run_selected(selected, context, namespace.only, namespace.skip)

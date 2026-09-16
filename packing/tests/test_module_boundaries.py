@@ -292,7 +292,14 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
 
-    for job_name in ("validate", "suite", "exhaustive", "screen", "macos-portability"):
+    for job_name in (
+        "validate",
+        "suite-1-of-2",
+        "suite-2-of-2",
+        "exhaustive",
+        "screen",
+        "macos-portability",
+    ):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
         steps = [_mapping(step) for step in raw_steps]
@@ -343,10 +350,11 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     validate_steps = _mapping(jobs["validate"])["steps"]
     assert isinstance(validate_steps, list)
-    # The pull-request surface is four concurrent jobs since 2026-09-06: `--checks`
-    # here, `--geometry` in the `geometry` job, `--suite` in the `suite` job and
-    # `--sweeps` in the `sweeps` job, so a pull request waits for the longest of them
-    # rather than their sum. That they partition `--fast` is proved against the CLI's own
+    # The pull-request surface is concurrent jobs since 2026-09-06: `--checks` here,
+    # `--geometry` in the `geometry` job, `--sweeps` in the `sweeps` job, and since
+    # 2026-09-15 `--typecheck` in the `typecheck` job and `--suite` divided by `--shard`
+    # across `suite-1-of-2` and `suite-2-of-2`, so a pull request waits for the longest of
+    # them rather than their sum. That they partition `--fast` is proved against the CLI's own
     # selector by `test_the_pull_request_jobs_partition_the_surface`; what is pinned here
     # is only that the commands in the file are the ones that test resolves.
     #
@@ -357,7 +365,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     #   headroom. `--jobs 4` was tried on run 34016999060 and refused -- saturating the
     #   runner inflated every step by thirty to eighty per cent, so four workers over 790
     #   worker-seconds finished no sooner than three over 470;
-    # * `--jobs 1` in the `suite` job is what hands the behavioural lane four xdist
+    # * `--jobs 1` in each `suite` shard is what hands the behavioural lane four xdist
     #   workers instead of two -- `_pytest_workers` sizes itself to `cpus - jobs + 1`, so
     #   a larger number there is a quieter, slower job;
     # * `--inner-jobs 2` sets the escape screen's PACK_JOBS cap. The chunk census and
@@ -394,27 +402,42 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
     )
     assert "fetch-depth" not in _mapping(geometry_checkout["with"])
-    suite_job = _mapping(jobs["suite"])
-    assert suite_job["if"] == "github.event_name == 'pull_request'"
-    suite_steps = suite_job["steps"]
-    assert isinstance(suite_steps, list)
-    suite_step = next(
+    # Two shard jobs since 2026-09-15, one runner each, differing only in `--shard`.
+    for index in (1, 2):
+        suite_job = _mapping(jobs[f"suite-{index}-of-2"])
+        assert suite_job["if"] == "github.event_name == 'pull_request'"
+        suite_steps = suite_job["steps"]
+        assert isinstance(suite_steps, list)
+        suite_step = next(
+            _mapping(step)
+            for step in suite_steps
+            if _mapping(step).get("name")
+            == f"Run shard {index} of the required pull-request behavioral lane"
+        )
+        assert " ".join(str(suite_step["run"]).split()) == (
+            "uv run --frozen --all-extras --group dev packing-validate --suite "
+            f"--shard {index}/2 --jobs 1 --inner-jobs 1"
+        )
+        # Full history, like `validate` and unlike `sweeps`: the behavioural lane includes
+        # tests that shell out to git, and which shard holds them is the partition's call.
+        suite_checkout = next(
+            _mapping(step)
+            for step in suite_steps
+            if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
+        )
+        assert _mapping(suite_checkout["with"])["fetch-depth"] == 0
+    # The type floor alone at `--jobs 1`: one process, nothing beside it, shallow.
+    typecheck_steps = _mapping(jobs["typecheck"])["steps"]
+    assert isinstance(typecheck_steps, list)
+    typecheck_step = next(
         _mapping(step)
-        for step in suite_steps
-        if _mapping(step).get("name") == "Run the required pull-request behavioral lane"
+        for step in typecheck_steps
+        if _mapping(step).get("name") == "Run the required pull-request type floor"
     )
-    assert " ".join(str(suite_step["run"]).split()) == (
-        "uv run --frozen --all-extras --group dev packing-validate --suite "
+    assert " ".join(str(typecheck_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --typecheck "
         "--jobs 1 --inner-jobs 1"
     )
-    # Full history, like `validate` and unlike `sweeps`: the behavioural lane includes
-    # tests that shell out to git, and they read whatever the checkout gave them.
-    suite_checkout = next(
-        _mapping(step)
-        for step in suite_steps
-        if str(_mapping(step).get("uses", "")).startswith("actions/checkout@")
-    )
-    assert _mapping(suite_checkout["with"])["fetch-depth"] == 0
     sweep_steps = _mapping(jobs["sweeps"])["steps"]
     assert isinstance(sweep_steps, list)
     sweep_step = next(
@@ -494,8 +517,18 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # mandatory. Splitting `--fast` across concurrent jobs buys wall time only if a pull
     # request still cannot merge without all of them, so a `needs` naming three of the
     # four would turn the fourth into an advisory check that nothing blocks on -- the
-    # failure mode the split is otherwise a clean win against.
-    assert required_job["needs"] == ["validate", "geometry", "suite", "sweeps"]
+    # failure mode the split is otherwise a clean win against. Derived from the jobs that
+    # run on a pull request rather than typed, so a job added to the surface without
+    # being added here fails this line.
+    # `validate` carries no `if`, because it also runs the post-merge surface.
+    pull_request_jobs = {
+        name
+        for name, job in jobs.items()
+        if _mapping(job).get("if") == "github.event_name == 'pull_request'"
+    }
+    assert isinstance(required_job["needs"], list)
+    assert set(required_job["needs"]) == {"validate", *pull_request_jobs}
+    assert len(required_job["needs"]) == len(pull_request_jobs) + 1
     # `!cancelled()`, not `always()`, and the difference is D-380. With `always()` a run
     # superseded by the next push -- routine, since the workflow sets
     # `cancel-in-progress: true` and OR-3 says to push and keep working -- reached this job
@@ -511,17 +544,16 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # make a job's failure fatal here: this job runs under `!cancelled()`, so it is reached
     # even when a prerequisite failed, and it is the shell that decides. A missing line
     # would leave that part of the surface green whatever it reported.
+    variables = {
+        name: name.upper().replace("-", "_") + "_RESULT" for name in required_job["needs"]
+    }
     required_command = " ".join(str(_mapping(required_job_steps[0])["run"]).split())
-    assert required_command == (
-        'test "$VALIDATE_RESULT" = "success" test "$GEOMETRY_RESULT" = "success" '
-        'test "$SUITE_RESULT" = "success" test "$SWEEPS_RESULT" = "success"'
+    assert required_command == " ".join(
+        f'test "${variable}" = "success"' for variable in variables.values()
     )
     required_env = _mapping(_mapping(required_job_steps[0])["env"])
     assert required_env == {
-        "VALIDATE_RESULT": "${{ needs.validate.result }}",
-        "GEOMETRY_RESULT": "${{ needs.geometry.result }}",
-        "SUITE_RESULT": "${{ needs.suite.result }}",
-        "SWEEPS_RESULT": "${{ needs.sweeps.result }}",
+        variable: f"${{{{ needs.{name}.result }}}}" for name, variable in variables.items()
     }
 
     # The macOS job is a second-architecture smoke check, not a second full gate.

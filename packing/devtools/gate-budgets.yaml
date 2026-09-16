@@ -466,15 +466,78 @@ tiers:
   # is what keeps this honest.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
-    The pull request's quick behavioural lane, alone on a runner. It is one step, and it
-    is a tier for two reasons that are the same reason: a job cannot be shorter than its
-    longest step, and this step was 142.43s of a 221.70s job it shared with 57 others. On
-    its own it stops setting that job's wall and it stops being throttled to two xdist
-    workers, because `_pytest_workers` sizes the lane to what the runner has free. What
-    it is not is a coverage change -- the step runs on every pull request either way,
-    which `test_the_pull_request_surface_defers_only_what_was_measured` re-checks from
-    the workflow. `--suite` rather than `--fast --only` because a slice of a tier has no
+    The quick behavioural lane whole, which since 2026-09-15 no CI job runs: a pull
+    request divides it by test file across `suite-1-of-2` and `suite-2-of-2` below, so the
+    live bands are there and this entry is what the two add up to. It keeps a ceiling
+    because it is still a real tier -- what a contributor runs to see the whole lane on one
+    machine -- and its record stands as the last whole-lane reading CI took, at 4,635
+    tests; the lane is now 5,664 on `main` and would fail the drift rule at the reference
+    shape, which is the reason it stopped being one job rather than a reason to raise it.
+    It is one step, and it became a tier for two reasons that are the same reason: a job
+    cannot be shorter than its longest step, and this step was 142.43s of a 221.70s job it
+    shared with 57 others. What it is not is a coverage change -- the step runs on every
+    pull request either way, which
+    `test_the_pull_request_surface_defers_only_what_was_measured` re-checks from the
+    workflow. `--suite` rather than `--fast --only` because a slice of a tier has no
     declared cost and this job needed one, which is `D-466`.
+
+- id: suite-1-of-2
+  command: packing-validate --suite --shard 1/2
+  # Half of the quick lane by test file, alone on a runner. The partition is
+  # `devtools.suite_files`: recorded per-file costs packed longest first, a path hash for
+  # any file the record does not name. Predicted from the 2026-09-15 audit's real file
+  # partition of the per-file medians on slow runners: 138s of pytest over 441
+  # test-seconds, with the lane's measured model `13.3s + 0.2824 x test-seconds`.
+  #
+  # 200s until a hosted reading exists at this shape: it clears the slow-runner
+  # prediction by 1.45x and is below the 275s the whole lane was failing, so a shard that
+  # stopped dividing the lane fails here. The first run at the reference shape prints the
+  # line to write, and rule 2 then re-argues this number against a real one.
+  ceiling_seconds: 200.0
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 1, inner_jobs: 1, cpus: 4}
+  argument: >-
+    One of the two shards of `fast behavioral tests`. They exist because the lane grew by
+    accretion past what one four-cpu runner divides -- 262s of pytest over 6,095 tests on
+    the stack on 2026-09-15, four red runs that day with every test passing -- and the
+    growth was in the many rather than in any test a marker could move. Two shards are a
+    partition of the lane's test files by construction, and
+    `test_the_suite_shards_partition_every_test_file` proves it over the files on disk.
+    Each is a tier so each has a declared cost (`D-466`).
+
+- id: suite-2-of-2
+  command: packing-validate --suite --shard 2/2
+  # The other half; the argument and the prediction are on `suite-1-of-2`. The audit's
+  # partition put this side at 134s of pytest over 428 test-seconds.
+  ceiling_seconds: 200.0
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 1, inner_jobs: 1, cpus: 4}
+  argument: >-
+    The second shard of `fast behavioral tests`; see `suite-1-of-2`. The two differ only
+    in which files the recorded partition assigns them.
+
+- id: typecheck
+  command: packing-validate --typecheck
+  # One step, basedpyright, alone on a runner. Inside `checks` on 2026-09-15 it was 79s of
+  # step time on PRs into `main` and 104s on the workbench stack, beside two other slots
+  # on a four-cpu runner; a local `--stats` run put 87 per cent of it in the Check phase.
+  #
+  # 150s until a hosted reading exists at this shape: about 1.9x the contended `main`
+  # reading, which a runner a third slower still clears, and a regression of a half on
+  # what that job paid fails here.
+  ceiling_seconds: 150.0
+  measured_seconds: null
+  measured_on: null
+  measured_where: null
+  reference: {jobs: 1, inner_jobs: 1, cpus: 4}
+  argument: >-
+    The type floor, moved off the `checks` queue because it was one of that queue's two
+    largest units and the one no `--jobs` setting divides; `Step.typecheck` carries the
+    measurement. It stays in `--edit`, so a contributor's edit loop is unchanged.
 
 - id: sweeps
   command: packing-validate --sweeps

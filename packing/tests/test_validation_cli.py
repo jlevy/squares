@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import io
 import json
@@ -134,6 +135,12 @@ def test_artifacts_keep_a_steps_own_durations_filter(
     assert quick.count("--durations=0") == 1
     assert bare[-3:-1] == ["--durations=0", "--durations-min=0"]
     assert all(command[-1].startswith("--junitxml=") for command in commands)
+    # The quick lane also writes its per-file cost report into the same artifact, under the
+    # junit file's stem, and a pytest command without the plugin is not asked for one.
+    [costs] = [argument for argument in quick if argument.startswith("--test-file-costs=")]
+    stem = quick[-1].removeprefix("--junitxml=").removesuffix(".junit.xml")
+    assert costs == f"--test-file-costs={stem}.test-files.json"
+    assert not any(argument.startswith("--test-file-costs=") for argument in bare)
 
 
 def test_artifact_provenance_reports_a_git_failure_as_a_step_failure(
@@ -706,6 +713,18 @@ def test_the_quick_lane_asks_for_no_xdist_worker_on_a_single_core_machine(
         f"--durations-min={validate.QUICK_TEST_WALL_BACKSTOP_SECONDS:g}",
         "--cpu-durations=0",
         f"--cpu-durations-min={validate.QUICK_TEST_CPU_REPORT_SECONDS:g}",
+    )
+
+
+def test_the_quick_lane_loads_the_file_plugin_and_names_its_shard() -> None:
+    """Every quick-lane run writes its per-file costs; only a shard run filters files."""
+    whole = validate._quick_lane_command(1)
+    shard = validate._quick_lane_command(1, (2, validate.SUITE_SHARDS))
+    assert whole[whole.index("devtools.suite_files") - 1] == "-p"
+    assert not any(argument.startswith("--suite-shard") for argument in whole)
+    assert f"--suite-shard=2/{validate.SUITE_SHARDS}" in shard
+    assert [argument for argument in shard if not argument.startswith("--suite-shard")] == list(
+        whole
     )
 
 
@@ -1500,6 +1519,52 @@ def test_lint_floor_reaches_the_handwritten_skill_assets(
         validate._handwritten_skill_directories()
 
 
+def test_concurrent_commands_join_in_declared_order_and_report_the_first_declared_failure(
+    tmp_path: Path,
+) -> None:
+    """`exact verification`'s seventeen subprocesses run at once and must read as serial.
+
+    The step checks its joined output for substrings, so the join is in declared order
+    whichever command finishes first; and a failure reports the earliest declared command
+    that failed -- the one the serial loop would have stopped on -- so which error a run
+    names does not depend on scheduling.
+    """
+    context = _budget_context(timeout_seconds=30, explicit=False)
+    slow_first = (
+        (sys.executable, "-c", "import time; time.sleep(0.4); print('first')"),
+        (sys.executable, "-c", "print('second')"),
+        (sys.executable, "-c", "print('third')"),
+    )
+    started = time.perf_counter()
+    output = validate._concurrent_commands(context, slow_first, workers=3)
+    assert output.splitlines() == ["first", "second", "third"]
+    assert time.perf_counter() - started < 2.0
+
+    marker = tmp_path / "never-started"
+    failing = (
+        (sys.executable, "-c", "import time; time.sleep(0.4); raise SystemExit(11)"),
+        (sys.executable, "-c", "raise SystemExit(12)"),
+        (sys.executable, "-c", "import time; time.sleep(1.5)"),
+        (sys.executable, "-c", f"from pathlib import Path; Path({str(marker)!r}).touch()"),
+    )
+    with pytest.raises(validate.StepFailureError, match="command exited 11"):
+        validate._concurrent_commands(context, failing, workers=2)
+    # The two-second command held a worker, so the fourth was still queued when the first
+    # failure arrived and was cancelled rather than started.
+    assert not marker.exists()
+
+
+def test_exact_verification_takes_the_cpus_its_neighbours_leave(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Two of four cpus at the pull request's `--checks --jobs 3`, serial where `--jobs`
+    already fills the machine -- the same `cpus - jobs + 1` the quick lane sizes by."""
+    monkeypatch.setattr(os, "process_cpu_count", lambda: 4)
+    assert validate._command_workers(3) == 2
+    assert validate._command_workers(4) == 1
+    assert validate._command_workers(1) == 4
+
+
 def test_multi_command_step_stops_at_first_failure_without_printing_success(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -1856,31 +1921,37 @@ def test_the_edit_tier_cannot_under_run() -> None:
     sweeps = names(fast=False, sweeps=True)
     suite = names(fast=False, suite=True)
     geometry = names(fast=False, geometry=True)
+    typecheck = names(fast=False, typecheck=True)
 
     assert records <= edit <= fast <= everything
     assert fast - edit == {step.name for step in validate.STEPS if step.broad}, (
         "the only steps --fast adds over --edit are the ones marked broad"
     )
-    # The pull request's four jobs are a partition of `--fast` and not four filters,
-    # which is what makes it safe to run them on separate runners: no step can be in two
-    # and none in none.
-    parts = [checks, geometry, suite, sweeps]
+    # The pull request's five jobs of steps are a partition of `--fast` and not five
+    # filters, which is what makes it safe to run them on separate runners: no step can be
+    # in two and none in none.
+    parts = [checks, typecheck, geometry, suite, sweeps]
     assert set().union(*parts) == fast
     for index, part in enumerate(parts):
         for other in parts[index + 1 :]:
             assert not part & other
-    # `--edit` lands wholly inside `--checks`, and since 2026-09-06 that is a rule rather
-    # than an accident. Every sweep and the behavioural lane are `broad`, and
-    # `Step.geometry` may be carried only by a `broad` step for exactly this reason: a
-    # contributor's edit loop never spans two of the pull request's runners, and the one
-    # job it does depend on is the one that already builds the engine.
-    assert edit <= checks
+    # `--edit` lands inside `--checks` and `--typecheck` together, and since 2026-09-06
+    # that is a rule rather than an accident. Every sweep and the behavioural lane are
+    # `broad`, and `Step.geometry` may be carried only by a `broad` step for exactly this
+    # reason: a contributor's edit loop never spans the pull request's geometry, suite or
+    # sweeps runners. The type floor is the one argued exception, since 2026-09-15: it is
+    # in `--edit`, it has a runner of its own because no `--jobs` divides it, and it is
+    # pinned to exactly that one step so the exception cannot quietly widen.
+    assert edit <= checks | typecheck
+    assert typecheck == {"type floor (basedpyright)"}, (
+        "the type floor is the only edit-tier step allowed off the checks runner"
+    )
     assert all(step.broad for step in validate.STEPS if step.geometry), (
         "a non-broad step in --geometry would put part of --edit on a second runner"
     )
-    assert not any(step.needs_engine for step in validate.STEPS if step.geometry), (
-        "an engine step in --geometry would make both halves compile Rust"
-    )
+    assert not any(
+        step.needs_engine for step in validate.STEPS if step.geometry or step.typecheck
+    ), "an engine step off the checks runner would make a second job compile Rust"
 
 
 @pytest.mark.parametrize(
@@ -2203,6 +2274,15 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
     assert {step.name for step in validate.STEPS if step.suite} == {
         "fast behavioral tests",
     }
+    # The type floor is one step and its rule is the suite's, a floor rather than a kind:
+    # 79s of the `checks` job's step time on PRs into `main` and 104s on the workbench
+    # stack on 2026-09-15, one process no `--jobs` divides, in a queue that a replay of
+    # one run reproduced to within a second as cargo plus step time over three slots.
+    # Moved out, that replay put `checks` at 129s from 135s, and at 109s beside a
+    # concurrent `exact verification`.
+    assert {step.name for step in validate.STEPS if step.typecheck} == {
+        "type floor (basedpyright)",
+    }
     assert {step.name for step in validate.STEPS if step.geometry} == {
         "D-034's n=5 identity pair still reproduces",
         "historical regressions",
@@ -2222,13 +2302,36 @@ def test_the_pull_request_runs_its_sweeps_and_its_suite_apart() -> None:
         {step.name for step in validate.STEPS if step.sweep},
         {step.name for step in validate.STEPS if step.suite},
         {step.name for step in validate.STEPS if step.geometry},
+        {step.name for step in validate.STEPS if step.typecheck},
     ]
     assert all(
-        step.fast for step in validate.STEPS if step.sweep or step.suite or step.geometry
+        step.fast
+        for step in validate.STEPS
+        if step.sweep or step.suite or step.geometry or step.typecheck
     )
     for index, marked in enumerate(marks):
         for other in marks[index + 1 :]:
             assert not marked & other
+
+
+def _workflow_commands(*, pull_request: bool) -> dict[str, argparse.Namespace]:
+    """Each Linux gate job's parsed `packing-validate` command on this event, by job name."""
+    condition = "github.event_name == 'pull_request'"
+    negation = "github.event_name != 'pull_request'"
+    excluded = negation if pull_request else condition
+    document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
+    commands: dict[str, argparse.Namespace] = {}
+    for job_name, job in document["jobs"].items():
+        if job_name == "macos-portability" or excluded in str(job.get("if", "")):
+            continue
+        for step in job.get("steps", []):
+            command = str(step.get("run", ""))
+            if "packing-validate" not in command or excluded in str(step.get("if", "")):
+                continue
+            tokens = shlex.split(command)
+            arguments = tokens[tokens.index("packing-validate") + 1 :]
+            commands[job_name] = validate._parser().parse_args(arguments)
+    return commands
 
 
 def _workflow_selections(*, pull_request: bool) -> dict[str, set[str]]:
@@ -2270,6 +2373,7 @@ def _workflow_selections(*, pull_request: bool) -> dict[str, set[str]]:
                     sweeps=namespace.sweeps,
                     suite=namespace.suite,
                     geometry=namespace.geometry,
+                    typecheck=namespace.typecheck,
                 )
             }
     return selections
@@ -2303,9 +2407,23 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
     runs.
     """
     selections = _workflow_selections(pull_request=True)
+    commands = _workflow_commands(pull_request=True)
+    shard_jobs = {f"suite-{index}-of-{validate.SUITE_SHARDS}" for index in _shard_indexes()}
 
-    assert set(selections) == {"validate", "geometry", "suite", "sweeps"}
-    names = list(selections)
+    assert set(selections) == {"validate", "typecheck", "geometry", "sweeps", *shard_jobs}
+    # The shards are the one pair that shares a step, and they share exactly the lane they
+    # divide: each selects the behavioural lane and nothing else, the shard numbers are
+    # every shard once, and `test_the_suite_shards_partition_every_test_file` is what
+    # proves the files inside the lane are divided rather than duplicated.
+    suite_steps = {step.name for step in validate.STEPS if step.suite}
+    assert all(selections[job] == suite_steps for job in shard_jobs)
+    assert sorted(validate._shard(str(commands[job].shard)) for job in shard_jobs) == [
+        (index, validate.SUITE_SHARDS) for index in _shard_indexes()
+    ]
+    assert all(
+        validate._tier_id(commands[job]) == job and commands[job].suite for job in shard_jobs
+    )
+    names = [job for job in selections if job not in shard_jobs] + [min(shard_jobs)]
     for index, job in enumerate(names):
         for other in names[index + 1 :]:
             assert not selections[job] & selections[other], f"{job} and {other} overlap"
@@ -2313,8 +2431,80 @@ def test_the_pull_request_jobs_partition_the_surface() -> None:
         step.name for step in validate.STEPS if step.fast
     }
     assert selections["sweeps"] == {step.name for step in validate.STEPS if step.sweep}
-    assert selections["suite"] == {step.name for step in validate.STEPS if step.suite}
     assert selections["geometry"] == {step.name for step in validate.STEPS if step.geometry}
+    assert selections["typecheck"] == {step.name for step in validate.STEPS if step.typecheck}
+
+
+def _shard_indexes() -> range:
+    return range(1, validate.SUITE_SHARDS + 1)
+
+
+def test_a_verified_merge_repeats_only_what_reads_beyond_the_tree(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """After a merge whose tree a pull-request run passed, what still runs, and why.
+
+    Equal tree ids are equal bytes for every tracked file, the verifying code and this
+    workflow included, so a fast step that passed on the tree in the pull request is not
+    re-evidenced by passing on it after the merge. On 2026-09-15 that repetition was 830s
+    of the post-merge `validate` job's step time (run 35002298828, the merge of #177).
+
+    Two sets are what keep `OR-13` whole, and both are asserted from the workflow rather
+    than from flags. Everything the pull-request jobs do not run still runs after the
+    merge: together the two selections are the whole gate. And the only steps both run are
+    the ones whose verdict reads more than the tree, named from `development.md`'s
+    measurement: `campaign record` against HEAD's committer date, `bead tree` against a
+    store in no tree, and provenance against the git graph and clone depth.
+    """
+    post_merge = _workflow_commands(pull_request=False)["validate"]
+    post_merge_selections = _workflow_selections(pull_request=False)
+    complete = post_merge_selections.pop("validate")
+    other_post_merge = set().union(*post_merge_selections.values())
+    pull_request = set().union(*_workflow_selections(pull_request=True).values())
+    narrowed = {
+        step.name
+        for step in validate._after_verified_pull_request(
+            [step for step in validate.STEPS if step.name in complete]
+        )
+    }
+
+    assert narrowed | other_post_merge | pull_request == {step.name for step in validate.STEPS}
+    assert narrowed & pull_request == {
+        step.name for step in validate.STEPS if step.reads_beyond_tree
+    }
+    assert {step.name for step in validate.STEPS if step.reads_beyond_tree} == {
+        "bead tree",
+        "provenance: recorded commits are reachable",
+        "campaign record",
+    }
+
+    # The CLI applies it only to the complete surface, and only from the environment the
+    # workflow sets from `devtools.verified_merge_tree`'s output after a push.
+    monkeypatch.setenv(validate.TREE_VERIFIED_ENVIRONMENT, "12345")
+    assert main(["--checks", "--list"]) == 2
+    assert validate.TREE_VERIFIED_ENVIRONMENT in capsys.readouterr().err
+    arguments = [part for pattern in post_merge.skip for part in ("--skip", pattern)]
+    assert main([*arguments, "--list", "--format", "json"]) == 0
+    listed = json.loads(capsys.readouterr().out)
+    assert {entry["name"] for entry in listed} == narrowed
+
+    document = safe_load(WORKFLOW.read_text(encoding="utf-8"))
+    steps = document["jobs"]["validate"]["steps"]
+    [finder] = [step for step in steps if step.get("id") == "verified-tree"]
+    assert finder["if"] == "github.event_name == 'push'"
+    assert "devtools.verified_merge_tree" in finder["run"]
+    [gate] = [
+        step
+        for step in steps
+        if "packing-validate" in str(step.get("run", "")) and "!=" in str(step.get("if", ""))
+    ]
+    assert gate["env"] == {
+        validate.TREE_VERIFIED_ENVIRONMENT: "${{ steps.verified-tree.outputs.run }}"
+    }
+    assert document["jobs"]["validate"]["permissions"] == {
+        "contents": "read",
+        "actions": "read",
+    }
 
 
 def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
@@ -2362,7 +2552,13 @@ def test_every_tier_band_is_declared_for_the_shape_ci_runs() -> None:
             assert tier.reference.jobs == int(namespace.jobs), tier_id
             assert tier.reference.inner_jobs == int(namespace.inner_jobs), tier_id
             checked.add(tier_id)
-    assert checked == {"checks", "geometry", "suite", "sweeps"}
+    assert checked == {
+        "checks",
+        "typecheck",
+        "geometry",
+        *validate.SUITE_SHARD_TIER_IDS,
+        "sweeps",
+    }
 
 
 def test_the_post_merge_jobs_partition_the_gate() -> None:

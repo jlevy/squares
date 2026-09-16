@@ -162,10 +162,12 @@ alone is not full pre-merge evidence.
 | `--records` | contributor, before touching a registry; also every pull request | 32 of 74 | 300 s | 11.0 s |
 | `--edit` | contributor, in the edit loop | — | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; a broad diff selects the whole suite and needs `--jobs 1`, see below |
-| `--fast` | contributor, at a block boundary; the union of the four tiers below | 63 of 74 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 49 of 74 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
+| `--fast` | contributor, at a block boundary; the union of the five tiers below | 63 of 74 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 74 | 195 s | record cleared 2026-09-07 when the grid replay was deferred; 87.6 s locally, only the ceiling applies |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 74 | 150 s | new on 2026-09-15; only the ceiling applies until CI clocks it |
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 74 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | **CI, on every pull request**, in the `suite` job, concurrently | 1 of 74 | 275 s | 183.4 s on CI, one reading of the lane as it now stands |
+| `--suite` | contributor, to run the quick lane whole; CI divides it into the two shards below | 1 of 74 | 275 s | 183.4 s on CI at 4,635 tests, the last whole-lane reading |
+| `--suite --shard 1/2`, `--suite --shard 2/2` | **CI, on every pull request**, in the `suite-1-of-2` and `suite-2-of-2` jobs, concurrently | the lane’s test files, divided | 200 s each | new on 2026-09-15; only the ceilings apply until CI clocks them |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 74 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 74 of 74 | 3600 s | split across four jobs; not clocked whole |
 
@@ -403,12 +405,18 @@ uv run --frozen --all-extras --group dev packing-validate --push
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
-# The four parts CI runs concurrently on a pull request. They partition --fast, so
-# running all four is running the surface and running one is running a part of it.
+# The five parts CI runs concurrently on a pull request. They partition --fast, so
+# running all five is running the surface and running one is running a part of it.
 uv run --frozen --all-extras --group dev packing-validate --checks
+uv run --frozen --all-extras --group dev packing-validate --typecheck
 uv run --frozen --all-extras --group dev packing-validate --geometry
 uv run --frozen --all-extras --group dev packing-validate --suite
 uv run --frozen --all-extras --group dev packing-validate --sweeps
+
+# CI divides --suite by test file into two shards, one per runner. Every test file is in
+# exactly one; the partition is devtools.suite_files, recorded from CI's per-file costs.
+uv run --frozen --all-extras --group dev packing-validate --suite --shard 1/2
+uv run --frozen --all-extras --group dev packing-validate --suite --shard 2/2
 
 # One named component. --only is repeatable and matches displayed step names.
 uv run --frozen --all-extras --group dev packing-validate --only "basin identity"

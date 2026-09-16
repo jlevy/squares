@@ -332,6 +332,11 @@ def test_the_tier_of_an_invocation_is_always_one_the_register_declares() -> None
         ["--fast"],
         ["--push"],
         ["--records", "--fast"],
+        ["--typecheck"],
+        *(
+            ["--suite", "--shard", f"{index}/{validate.SUITE_SHARDS}"]
+            for index in range(1, validate.SUITE_SHARDS + 1)
+        ),
     ):
         namespace = validate._parser().parse_args(flags)
         tier = validate._tier_id(namespace)
