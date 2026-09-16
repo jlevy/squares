@@ -5,11 +5,11 @@ title: The mutation-snapshot cap has 0.9% headroom and the record keeps growing
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-05T23:06:30.837Z
-updated_at: 2026-09-09T16:23:17.601Z
+updated_at: 2026-09-16T19:37:30.958Z
 ---
 Measured 2026-09-05 after pruning packing/site/ and the link-preview card: the snapshot is 66,490,716 bytes against a 67,108,864 cap, 99.1% of it, 618,148 bytes of headroom. SNAPSHOT_MAX_BYTES' own comment says a guard with 2% headroom fires for the wrong reason; 0.9% is worse than the case it warns about, and the next committed artifact of any size trips it.
 
@@ -49,3 +49,5 @@ record keeps rather than a size argument.
 
 The 1,193,568 bytes are also the scale to keep in mind: it is under 1% of the tree, so
 even taking the evidence prune buys roughly one more registration, not headroom.
+
+2026-09-16: PR #189 measured the clean hosted mutation snapshot at 168,058,379 bytes, 286,219 bytes over the 160 MiB ceiling. This is tracked source growth, not cache drift; the Animate branch itself added only compact retained evidence plus maintained source. The ceiling was reset to 192 MiB, restoring about 32 MiB of operating headroom and bounding three portable workers at 576 MiB. The bead stays open for its durable generated-file dependency audit; the cap reset is not that audit.

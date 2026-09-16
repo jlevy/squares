@@ -5,11 +5,11 @@ title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 12
+version: 13
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-14T02:25:16.172Z
+updated_at: 2026-09-16T17:43:56.675Z
 ---
 On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 
@@ -40,3 +40,5 @@ September 13 new retained occurrence: Pages run34774787868 attempt1 failed on PR
 September 13 PR125 occurrence after refreshing onto main: Pages run 34790001091 build failed at --check-artifact, with both normalized PDFs 843168 bytes and first byte difference 511882 in object 137. Diagnostics were downloaded before any rerun from artifact explainer-pdf-check/pdf-check-j5f4o0dc into /private/tmp/squares-pr125-pdf-diagnostics; SHA256 reference d141f788ca6622d6b39e07aff8cf568749683ba77ad247643e156b8b54a52b15, replay 3adda4a7a8db72c43e74d0183363392ce4e13961e737b0ba759f70d6ba4dfc12. The report states cause unknown. No rerun or root-cause claim made.
 
 PR125 run 34790001091 attempt 2 completed successfully after the failure pair had been downloaded. This passing retry does not establish a cause or resolve D-490.
+
+September 16, 2026 PR188 occurrence: Certificate page run 35127260004 attempt 1 failed on PR188 head 2f6193031169dc5b3bc312cead2cc1246c81977d at the stored-artifact versus fresh-draw check. Diagnostics were downloaded before any rerun and are retained under packing/benchmarks/math-startup/runs/ci-35127260004 with the exact prepared HTML and provenance. Reference.pdf is 843258 bytes, SHA256 c49cbc6a8287d88e680531b28a83a4ee75a9b8e3bcdd166405a8e8f254133631; replay.pdf is 843259 bytes, SHA256 9c0a292791992aca43f18051edf42cc0f576ca45fa5d2b52d55ca666592e2f68. Both contain 1298 objects. After date normalization and Flate decoding, only object 137 differs: page 12 writes `267.65625 10365.2188 Tm` versus `267.65625 10365 Tm`, shifting only the plus sign in `B(cos d + sin d)` by a Poppler bbox of 0.164096 pt. Extracted text and 150/300 dpi Poppler rasters are identical. This matches the earlier retained page-15 variable-decimal signature but does not establish its upstream cause. The current c5a33270 head passed the strict check in run 35128357962; its prepared source receipt differs, so that pass is current-head gate evidence, not a same-input reproduction or a resolution of D-490. Keep exact comparison and this issue open.
