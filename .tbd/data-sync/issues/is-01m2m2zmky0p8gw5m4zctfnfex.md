@@ -5,15 +5,16 @@ title: "Workbench motion: gentle, smooth, chunking, and a setting for the append
 kind: task
 status: open
 priority: 1
-version: 5
+version: 6
 labels: []
 dependencies: []
 parent_id: is-01m2gyhqfmr0xpcjsr34na3acq
 child_order_hints:
   - is-01m2nhc3zsdr07t84vxt8xy3qf
   - is-01m2nhcg6g9a6k67dsz5n7363v
+  - is-01m2nhycvy9kh5cht5e3a0dn08
 created_at: 2026-09-16T03:08:21.501Z
-updated_at: 2026-09-16T16:40:06.780Z
+updated_at: 2026-09-16T16:49:03.869Z
 ---
 Owner feedback on the published page, 2026-09-15:
 
