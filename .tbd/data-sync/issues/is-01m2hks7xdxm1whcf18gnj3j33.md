@@ -5,11 +5,11 @@ title: The suite tier runs at its 275 s ceiling on main and the stack; fix it by
 kind: bug
 status: open
 priority: 1
-version: 4
+version: 5
 labels: []
 dependencies: []
 created_at: 2026-09-15T04:04:14.381Z
-updated_at: 2026-09-15T22:53:10.784Z
+updated_at: 2026-09-16T03:09:02.973Z
 ---
 The pull-request `suite` job (`packing-validate --suite`, one step: `fast behavioral tests`) runs against its 275 s ceiling on `main`'s own PRs and across the workbench stack. Its recorded cost, 183.44 s, is stale.
 
@@ -48,3 +48,5 @@ This is `main`'s infrastructure. The stack only adds tests, so the fix belongs o
 - #180 at `1bed9751` (run 35017206696): 6,118 tests in 282.28 s.
 
 The failed jobs were rerun once. The fix is lane 2 of `think-xfqk` (shard `suite`), now resumed on top of main at `21a68102`.
+
+**2026-09-16:** lane 2 (PR #185) shards `suite` in two, which is the measured fix this bead asks for. The shards read 104.85 s and its pair on their first hosted run, against a 275 s ceiling the whole lane was failing. This bead closes when those shards have recorded costs from hosted runs of the new shape.
