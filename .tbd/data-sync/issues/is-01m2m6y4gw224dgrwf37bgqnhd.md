@@ -5,7 +5,7 @@ title: "Address review: PR #180 — no-exception browser floor"
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 labels: []
 dependencies:
   - type: blocks
@@ -20,10 +20,10 @@ child_order_hints:
   - is-01m2m6zrysz50dnrmahfmh4cf7
   - is-01m2m6zsddpzdefgjcjh1xmrq9
 created_at: 2026-09-16T04:17:26.555Z
-updated_at: 2026-09-16T08:08:45.308Z
+updated_at: 2026-09-16T08:40:55.097Z
 ---
 Track and disposition every published review and addendum finding on PR #180. Reuse think-7o6d for the effective-tsc-coverage fix; create children only for distinct remaining findings. Completion requires fixes or explicit rebuttal/defer, propagation from the final PR #181 head, exact-head CI, and a published disposition map.
 
 ## Notes
 
-PR #180 review remediation is integrated locally through 84ca6cf3 on parent main 398e59e4 (merge ba2cde3b; no push). think-7z01 is closed: both Motion Labs have a rendered-pixel paint invariant, file-backed layer removal/restoration probe, live opacity-zero and transparent-paint mutants, and an installed-Chrome 36+12-state committed-golden pass. The final #181 probe-type isolation is preserved while #180 keeps one effective ESLint configuration and repository-wide invocation. Root npm typecheck includes tsconfig.explainer.json with parity coverage (think-b9qy updated but remains open for command deduplication). The 280,487-byte golden's branch-owned mutation-snapshot cap regression is fixed by excluding that generated/non-control input, with executable control-census and change-scope tests. Integrated evidence: 192 focused tests; browser floor over 552 files plus isolated probe gate and 146 Node tests; npm run typecheck; Ruff 1,963 files; BasedPyright 0/0/0; full workbench Chrome check; Motion Lab Chrome check. Full fast reached 3,139/3,138 tests per shard; remaining failures were sandbox/editable-install artifacts or the inherited PR182 closed-debt baseline. The unrelated session-record hotfix is intentionally excluded and will be integrated from main before publication. Remaining: integrate that main hotfix, rerun exact focused/fast surfaces, update PR body/dispositions, and require exact-head hosted CI.
+PR #180 review remediation is integrated locally at exact HEAD 3a9bb2f6e4abf916f4b823e14ca32d1676cd1b5f, a conflict-free merge of held fix head 84ca6cf38fe1d2b88018b7b0ed28816761a742cf with exact main b1b2d30f0aeebaf53cbe4b3acc70938a1864c0a3 (PR #187 session-record hotfix); both are verified ancestors. think-7z01 is closed: both Motion Labs now enforce rendered-pixel paint, ancestor display/visibility/opacity, representative geometry, file-backed layer removal/restoration, and opacity-zero/transparent-paint negative controls, with exact/general committed golden coverage. Root npm typecheck includes tsconfig.explainer.json with parity coverage; think-b9qy remains open only for broader command deduplication. The 280,487-byte golden snapshot-cap regression is fixed with executable proof that no control names or copies it and with change-scope replay coverage. Final integrated validation: git diff --check clean; 212 of 213 focused tests passed in sandbox and the sole uv-cache-restricted synopsis negative control passed 1/1 outside sandbox; browser floor passed over 552 files with isolated probe gate and 146 Node tests; records tier passed all 33 steps including session gate and synopsis; canonical Ruff/Rust lint passed (1,963 Python files); BasedPyright 0 errors/0 warnings/0 notes; installed Chrome Motion Lab drove exact 36 and general 12 states with visible drawings matching the committed report. Earlier full workbench Chrome and behavioral shard reruns remain valid because the final main delta is record-only. No remaining review finding in PR #180; remaining external publication work is PR body/disposition update, exact-head hosted CI, and deferred checkpoint after the parent pushes.
