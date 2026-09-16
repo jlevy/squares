@@ -19,11 +19,20 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _test_files() -> set[str]:
-    """Every file pytest would collect as a test module under `tests`, repository-relative."""
+    """Every file pytest would collect for the quick lane, repository-relative.
+
+    From the lane's own roots rather than a path typed here, so a root added to
+    `BEHAVIORAL_TEST_ROOTS` -- as the workbench package's tests were -- is covered without
+    an edit. The browser floor's liveness tests are the one file the lane ignores; they
+    run in the `frontend` job instead.
+    """
     return {
         suite_files.repository_path(path)
-        for path in (PROJECT_ROOT / "tests").rglob("test_*.py")
+        for root in validate.BEHAVIORAL_TEST_ROOTS
+        for path in (PROJECT_ROOT / root).rglob("test_*.py")
         if "__pycache__" not in path.parts
+        and suite_files.repository_path(path)
+        != suite_files.repository_path(PROJECT_ROOT / validate.BROWSER_FLOOR_LIVENESS_TESTS)
     }
 
 

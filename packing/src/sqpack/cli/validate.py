@@ -620,8 +620,9 @@ class Step:
 
     * **only a `broad` step**, so `--edit` stays inside `--checks` and a contributor's
       edit loop never spans two selections. `test_the_edit_tier_cannot_under_run` is where
-      that is enforced, and since 2026-09-15 it names the one exception it allows: the
-      type floor, which `Step.typecheck` argues on its own runner;
+      that is enforced, and it names the two exceptions it allows: the browser floor,
+      which `Step.frontend` puts where its Node toolchain is, and since 2026-09-15 the
+      type floor, which `Step.typecheck` argues onto a runner of its own;
     * **no `needs_engine` step and nothing that runs cargo**, so exactly one of the two
       jobs pays the serial `cargo build --release` that `_build_engine` puts in front of
       every step -- about 25s on a cold runner -- and this job needs no Rust toolchain at
@@ -641,7 +642,8 @@ class Step:
     typecheck: bool = False
     """This step is the type floor, and a pull request runs it on a runner of its own.
 
-    The one non-`broad` step outside `--checks`, so it is the one exception to the rule
+    One of the two non-`broad` steps outside `--checks` -- the browser floor is the other,
+    and needs a toolchain rather than a runner -- so it is an exception to the rule
     `geometry` above states, and it is argued as one. On 2026-09-15 `checks` sat exactly
     at its cpu floor -- `cargo build` plus step time divided by three slots, which a
     replay of one run's step times reproduced to within a second -- and basedpyright was
@@ -655,9 +657,9 @@ class Step:
     What this does not change is what a contributor runs. `--edit` still selects it, so
     the edit loop is one selection on one machine; what is split is only which CI runner
     reports it. `test_the_edit_tier_cannot_under_run` holds the rule in its new form:
-    `--edit` lies inside `--checks` and `--typecheck` together, and this is the only step
-    that may carry the flag. Like the other three placement flags it defaults to False, so
-    forgetting it makes `checks` slower rather than leaving a step unrun."""
+    `--edit` lies inside `--checks`, `--frontend` and `--typecheck` together, and this is
+    the only step that may carry this flag. Like the other placement flags it defaults to
+    False, so forgetting it makes `checks` slower rather than leaving a step unrun."""
 
     reads_beyond_tree: bool = False
     """This step's verdict depends on something other than the tracked tree's bytes.

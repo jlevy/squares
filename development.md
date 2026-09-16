@@ -162,18 +162,18 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 32 of 76 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 46 of 76 | 240 s | 59.4 s |
+| `--records` | contributor, before touching a registry; also every pull request | 32 of 77 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 46 of 77 | 240 s | 59.4 s |
 | `--push` | contributor, before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; a broad diff selects the whole suite and needs `--jobs 1`, see below |
-| `--fast` | contributor, at a block boundary; the union of the tiers below | 65 of 76 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 76 | 195 s | composition changed after two PR 160 runs exceeded the ceiling, which did not end the overruns (`think-lrs0`); only the ceiling applies |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 2 of 76 | 150 s | new partition; the first hosted run establishes its baseline |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 76 | 150 s | new on 2026-09-15; only the ceiling applies until CI clocks it |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 76 | 180 s | 91.6 s on CI, the mean of four readings |
-| `--suite` | contributor, to run the quick lane whole; CI divides it into the two shards below | 1 of 76 | 275 s | 183.4 s on CI at 4,635 tests, the last whole-lane reading |
+| `--fast` | contributor, at a block boundary; the union of the tiers below | 66 of 77 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 48 of 77 | 195 s | composition changed after two PR 160 runs exceeded the ceiling, which did not end the overruns (`think-lrs0`); only the ceiling applies |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 3 of 77 | 150 s | new partition; the first hosted run establishes its baseline |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 77 | 150 s | new on 2026-09-15; only the ceiling applies until CI clocks it |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 77 | 180 s | 91.6 s on CI, the mean of four readings |
+| `--suite` | contributor, to run the quick lane whole; CI divides it into the two shards below | 1 of 77 | 275 s | 183.4 s on CI at 4,635 tests, the last whole-lane reading |
 | `--suite --shard 1/2`, `--suite --shard 2/2` | **CI, on every pull request**, in the `suite-1-of-2` and `suite-2-of-2` jobs, concurrently | the lane’s test files, divided | 200 s each | new on 2026-09-15; only the ceilings apply until CI clocks them |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 76 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 76 of 76 | 3600 s | split across the jobs above; not clocked whole |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 77 | 210 s | record cleared 2026-09-07 when two of its four steps were split; 58.5 s locally, only the ceiling applies |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 77 of 77 | 3600 s | split across the jobs above; not clocked whole |
 
 `--geometry`’s cost is a geometric mean of four readings at the reference shape.
 `--suite`’s is a single reading, because the lane it measures is new: merging PR 137
