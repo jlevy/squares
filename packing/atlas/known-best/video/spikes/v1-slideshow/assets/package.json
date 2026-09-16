@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "description": "The slideshow's page script runs as a classic script, not an ES module. \"commonjs\" is how a package.json says so, and it is why Biome keeps the script's \"use strict\" directive.",
+  "type": "commonjs"
+}

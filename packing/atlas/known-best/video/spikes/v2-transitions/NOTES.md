@@ -24,6 +24,8 @@ manifest, per-n renderings and composite record; nothing in the worktree was mod
 > (`think-tn0j`). What remains here is these notes, the instruments, and
 > `transition-stats.json` and `stats-summary.md`, which are frozen historical output,
 > last regenerated at `0281a508` and compared with nothing.
+> `calibrate.py`, which Revision 16 cites, was retired on 2026-09-14; the spike README
+> says why and where its source is kept.
 
 ## What was built
 

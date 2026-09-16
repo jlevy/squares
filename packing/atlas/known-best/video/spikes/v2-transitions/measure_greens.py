@@ -23,7 +23,11 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 JND = 0.02
 
 
@@ -66,10 +70,12 @@ def main() -> int:
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(900)
-        book = page.evaluate("atlasTransitions.colour()")
+        book = page.evaluate(probe(PROBES, "measure_greens/colour"))
         ramp: list[str] = book["greens"]
         stride: int = book["greenStride"]
-        by_identity: list[str] = page.evaluate(f"atlasTransitions.identityFills({identities})")
+        by_identity: list[str] = page.evaluate(
+            probe(PROBES, "measure_greens/identity-fills"), {"count": identities}
+        )
         browser.close()
 
     period = len(ramp)

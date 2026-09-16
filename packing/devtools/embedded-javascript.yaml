@@ -52,50 +52,9 @@ script_code: '[A-Za-z_$][\w$]*\s*[(.=;]'
 # think-m0zb closes.
 #
 # Written from `--inventory` on 2026-09-14 at 477 sites in 48 files, and lowered as files
-# came off it. Now 460 sites in 42 files:
-#   think-3pox  packing/devtools and packing/tests       324 sites in 25 files
-#   think-53dt  the video spikes                          123 sites in 13 files
-#   think-xvjf  packages/workbench tools and tests         13 sites in  4 files
+# came off it. This comment carries no running total, because every file that leaves the list
+# would make one stale; `--inventory` prints the current totals by bead.
 allowlist:
-  - path: packing/atlas/known-best/video/spikes/v1-slideshow/build_candidate.py
-    sites: 1
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v1-slideshow/render_review.py
-    sites: 10
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/calibrate.py
-    sites: 8
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/compare_palette.py
-    sites: 19
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/dump_fills.py
-    sites: 7
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/grade_motion.py
-    sites: 9
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/measure_greens.py
-    sites: 2
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/measure_law.py
-    sites: 6
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/measure_modes.py
-    sites: 5
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/measure_optimize.py
-    sites: 6
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/measure_stall.py
-    sites: 5
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/measure_standardize.py
-    sites: 2
-    bead: think-53dt
-  - path: packing/atlas/known-best/video/spikes/v2-transitions/smoke_styles.py
-    sites: 43
-    bead: think-53dt
   - path: packing/devtools/check_katex.py
     sites: 1
     bead: think-3pox

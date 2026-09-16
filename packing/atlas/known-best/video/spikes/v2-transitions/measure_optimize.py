@@ -19,7 +19,11 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 DEFAULT_PAGE = HERE.parents[4] / "site/workbench/index.html"
 KINDS = ("previous", "random", "grid")
 
@@ -59,26 +63,15 @@ def main() -> int:
         for n in ns:
             for kind in KINDS:
                 # Throughput: a real playing run for 2 s of wall clock.
-                page.evaluate(
-                    "([n, k]) => { const A = window.atlasTransitions;"
-                    " A.setStepN(n); A.setSpeed(2);"
-                    "  A.setInitial(k); A.optimize(true); }",
-                    [n, kind],
-                )
+                page.evaluate(probe(PROBES, "measure_optimize/play"), {"n": n, "kind": kind})
                 page.wait_for_timeout(2000)
-                live = page.evaluate(
-                    "() => { const A = window.atlasTransitions; A.pause();"
-                    " return A.optimizeState(); }"
-                )
+                live = page.evaluate(probe(PROBES, "measure_optimize/pause-state"))
                 # Progress: the same start, driven by exact step counts with no clock in it.
-                page.evaluate(
-                    "([n, k]) => { const A = window.atlasTransitions;"
-                    " A.setStepN(n); A.setInitial(k);"
-                    "  A.optimize(true); A.pause(); }",
-                    [n, kind],
+                page.evaluate(probe(PROBES, "measure_optimize/prepare"), {"n": n, "kind": kind})
+                start = page.evaluate(probe(PROBES, "measure_optimize/optimize-state"))
+                done = page.evaluate(
+                    probe(PROBES, "measure_optimize/optimize-step"), {"steps": steps}
                 )
-                start = page.evaluate("atlasTransitions.optimizeState()")
-                done = page.evaluate("(k) => atlasTransitions.optimizeStep(k)", steps)
                 best = done["best"]
                 excess = (best / done["record"] - 1) * 100 if best else float("nan")
                 print(
@@ -87,7 +80,7 @@ def main() -> int:
                     f"{(best or float('nan')):>8.3f} {done['record']:>8.3f} "
                     f"{excess:>7.2f}% {(done['penetration'] or 0):>8.4f}"
                 )
-        page.evaluate("atlasTransitions.setSpeed(1); atlasTransitions.setInitial('previous')")
+        page.evaluate(probe(PROBES, "measure_optimize/restore"))
         browser.close()
         if errs:
             print("\nPAGE ERRORS:", errs)

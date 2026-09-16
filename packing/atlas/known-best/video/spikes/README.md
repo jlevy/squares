@@ -9,9 +9,11 @@ was learned is rebuildable rather than remembered.
 into the workbench and moved to
 [`packages/workbench/`](../../../../../packages/workbench/) at `15d97a59`; what stays
 here is the v1 slideshow, the v2 notes and instruments, and two frozen outputs.
-The Python here is held to the repository’s Ruff and BasedPyright floor and the
-slideshow’s script to the browser floor, but no validation tier runs the slideshow’s
-test or the instruments.
+The Python here is held to the repository’s Ruff and BasedPyright floor.
+None of it holds JavaScript: the slideshow’s page script, its test harness and every
+probe a tool runs in a page are files under the browser floor, and the page script and
+the probes are type-checked at the strict floor by `tsconfig.packing-probes.json`. No
+validation tier runs the slideshow’s test or the instruments.
 Read them as evidence for the plan’s decisions.
 
 ## What is here, and what is not
@@ -36,18 +38,29 @@ Pass `--repo` to the slideshow, whose default is one machine’s absolute path.
 The slideshow’s `test_candidate.py` asserts that two builds are byte-identical, and so
 does `workbench_tools.check_candidate` for the workbench.
 The published page is built by `squares-workbench-build` into
-`packing/site/workbench/index.html`; the v2 instruments that open a page default to it,
-except `calibrate.py`, which takes the page as its argument.
+`packing/site/workbench/index.html`, and the v2 instruments that open a page default to
+it.
 
 | Path | What it is |
 | --- | --- |
 | `v1-slideshow/build_candidate.py` | Reads the composite figure record, the frontier records and the 324 renderings; writes one self-contained page holding every packing |
+| `v1-slideshow/assets/slideshow.js`, `assets/package.json` | The page script the generator inlines byte for byte. It is a classic script, not a module, and `package.json` declares it one, which is why its `"use strict"` directive stands |
 | `v1-slideshow/test_candidate.py`, `timeline_harness.js`, `node-harness.d.ts` | The slideshow’s checks, with the stub-DOM harness its timeline test runs in |
 | `v1-slideshow/render_review.py` | The slideshow’s review stills |
+| `v1-slideshow/probes/`, `v2-transitions/probes/` | The JavaScript each tool runs in a page, one file per probe in a directory per tool, loaded by `sqpack.probes`. `atlas-video.d.ts` declares the slideshow’s `window.atlasVideo`, and the page script is checked against it |
 | `v1-slideshow/NOTES.md` | Sizes, the font composition, the fact provenance tables, the capture sketch, four revisions of owner feedback |
 | `v2-transitions/NOTES.md` | The first build and its revisions through 16, with the measurements that answer the plan’s open questions; a dated correction at the top says what moved |
 | `v2-transitions/transition-stats.json`, `v2-transitions/stats-summary.md` | **Frozen historical output**, last regenerated at `0281a508`: per pair, the matching method, the identity chain, block statistics, displacements and turns, and their summary. Nothing rebuilds them or compares them with a build. At `f3874426` a fresh record differed from this one only in `generated_by`; the summary’s closing run times omit `correct`, where the generator now prints the run time the page reports |
-| `v2-transitions/calibrate.py`, `compare_palette.py`, `dump_fills.py`, `experiment_*.py`, `grade_motion.py`, `measure_*.py`, `smoke_styles.py` | The instruments that produced the measured tables in the notes |
+| `v2-transitions/compare_palette.py`, `dump_fills.py`, `experiment_*.py`, `grade_motion.py`, `measure_*.py`, `smoke_styles.py` | The instruments that produced the measured tables in the notes |
+
+**Retired: `v2-transitions/calibrate.py`**, on 2026-09-14 (`think-53dt`). It swept eight
+arms over six cases by driving Pack through `window.atlasTransitions`, which the
+workbench now refuses outside the Animate view, so it no longer ran against any page
+this repository builds.
+Its 48 runs, and the guards they argued for, are recorded under Revision 16 of the v2
+notes, and the held-out semantics a real Calibrate needs belong to `think-gfqt`,
+`think-vhgz` and `think-3yma`. The source is kept by history:
+`git show 7dd0233d:packing/atlas/known-best/video/spikes/v2-transitions/calibrate.py`.
 
 The moved check, `workbench_tools.check_candidate`, is not run by any tier and fails on
 stale text needles (`think-tn0j`). Its browser checks run only once every other

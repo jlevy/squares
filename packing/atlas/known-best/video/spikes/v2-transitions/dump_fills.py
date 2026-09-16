@@ -14,21 +14,15 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 DEFAULT_PAGE = HERE.parents[4] / "site/workbench/index.html"
 PAIRS = [1, 4, 10, 17, 100, 110, 272, 307, 323]
 STYLES = ["tween", "physics", "bodies"]
 RULES = ["continuous", "house"]
-
-SELECT_JS = (
-    "([i, s, r]) => { atlasTransitions.select(i); "
-    "atlasTransitions.setStyle(s); atlasTransitions.setColorRule(r); }"
-)
-FILLS_JS = (
-    "Array.from(document.querySelectorAll('#squares g'))"
-    ".filter(g => g.style.display !== 'none')"
-    ".map(g => [g.dataset.identity, g.firstElementChild.getAttribute('fill')])"
-)
 
 
 def main() -> int:
@@ -48,17 +42,26 @@ def main() -> int:
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(800)
-        index_of = {p_["n"]: p_["index"] for p_ in page.evaluate("atlasTransitions.pairs()")}
+        index_of = {
+            p_["n"]: p_["index"] for p_ in page.evaluate(probe(PROBES, "dump_fills/pairs"))
+        }
         for n in PAIRS:
             if n not in index_of:
                 continue
             for style in STYLES:
                 for rule in RULES:
-                    page.evaluate(SELECT_JS, [index_of[n], style, rule])
+                    page.evaluate(
+                        probe(PROBES, "dump_fills/select"),
+                        {"index": index_of[n], "style": style, "rule": rule},
+                    )
                     for label, t in (("dwell", 0.5), ("start", 0.0), ("end", None)):
-                        tt = page.evaluate("atlasTransitions.duration()") if t is None else t
-                        page.evaluate("t => atlasTransitions.seek(t)", tt)
-                        fills = page.evaluate(FILLS_JS)
+                        tt = (
+                            page.evaluate(probe(PROBES, "dump_fills/duration"))
+                            if t is None
+                            else t
+                        )
+                        page.evaluate(probe(PROBES, "dump_fills/seek"), {"t": tt})
+                        fills = page.evaluate(probe(PROBES, "dump_fills/fills"))
                         snap[f"{n}/{style}/{rule}/{label}"] = fills
         if errors:
             print("ERRORS:", errors)

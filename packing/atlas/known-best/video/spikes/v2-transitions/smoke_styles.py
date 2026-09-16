@@ -21,7 +21,11 @@ import sys
 import time
 from pathlib import Path
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 PAGE = HERE.parents[4] / "site/workbench/index.html"
 REVIEW = HERE / "review"
 
@@ -37,29 +41,6 @@ TIMED = [100, 272, 323]
 END_TOLERANCE = 1e-6
 STYLES = ["tween", "physics", "bodies"]
 
-# The scene as drawn: the view, the container and every shown pool element's pose and
-# fill. (The pool keeps hidden elements for every identity ever shown, so the raw
-# outerHTML grows with the pairs visited; the picture does not.)
-SCENE_JS = (
-    "JSON.stringify([document.getElementById('packing-svg').getAttribute('viewBox'),"
-    " document.getElementById('container').getAttribute('width'),"
-    " Array.from(document.querySelectorAll('#squares g'))"
-    ".filter(g => g.style.display !== 'none')"
-    "  .map(g => [g.dataset.identity, g.getAttribute('transform'),"
-    " g.getAttribute('opacity'), g.firstElementChild.getAttribute('fill')]),"
-    " document.getElementById('mark').getAttribute('opacity'),"
-    " document.getElementById('mark').getAttribute('transform')])"
-)
-VIEWBOX_JS = "document.getElementById('packing-svg').getAttribute('viewBox')"
-VIEWBOX_WIDTH_JS = (
-    "document.getElementById('packing-svg').getAttribute('viewBox').split(' ')[2]"
-)
-NON_FINITE_JS = (
-    "Array.from(document.querySelectorAll('#squares g'))"
-    ".map(g => g.getAttribute('transform') || '')"
-    ".filter(t => /NaN|Infinity/.test(t)).length"
-)
-
 
 def angle_error(a: float, b: float) -> float:
     """Distance between two angles modulo 90 degrees."""
@@ -72,8 +53,10 @@ def end_error(page, index: int, style: str) -> tuple[float, float, dict]:
 
     Measured against the target poses for n+1.
     """
-    info = page.evaluate(f"window.atlasTransitions.physics({index}, '{style}')")
-    data = page.evaluate("JSON.parse(document.getElementById('atlas-data').textContent)")
+    info = page.evaluate(
+        probe(PROBES, "smoke_styles/physics"), {"index": index, "style": style}
+    )
+    data = page.evaluate(probe(PROBES, "smoke_styles/atlas-data"))
     pair = data["pairs"][index]
     target = data["frames"][str(pair["n"] + 1)]["squares"]
     max_pos = 0.0
@@ -115,77 +98,79 @@ def main() -> int:
             )
             page.on("pageerror", lambda exc: errors.append(f"pageerror: {exc}"))
             page.goto(PAGE.resolve().as_uri(), wait_until="load")
-            page.evaluate("document.fonts.ready")
-            page.evaluate("window.atlasTransitions.setCapture(true)")
-            api = "window.atlasTransitions"
-            pairs = page.evaluate(f"{api}.pairs().map(p => p.n)")
+            page.evaluate(probe(PROBES, "smoke_styles/fonts-ready"))
+            page.evaluate(probe(PROBES, "smoke_styles/capture-on"))
+            pairs = page.evaluate(probe(PROBES, "smoke_styles/pair-sizes"))
             index_of = {n: i for i, n in enumerate(pairs)}
             print(f"loaded {PAGE.name} ({PAGE.stat().st_size} bytes): {len(pairs)} pairs")
             check(
-                page.evaluate(f"{api}.styles()") == STYLES,
+                page.evaluate(probe(PROBES, "smoke_styles/styles")) == STYLES,
                 "styles() is not tween, physics, bodies",
             )
             check(
-                page.evaluate(f"{api}.state().style") == "tween",
+                page.evaluate(probe(PROBES, "smoke_styles/style")) == "tween",
                 "the page does not start in the tween",
             )
 
             # Style A's frame of 100->101 mid-move on a fresh page, compared at the end
             # with the same frame after visits to B and C.
-            page.evaluate(f"{api}.select({index_of[100]})")
-            page.evaluate(f"{api}.seek(1.7)")
-            tween_fresh = page.evaluate(SCENE_JS)
+            page.evaluate(probe(PROBES, "smoke_styles/select"), {"index": index_of[100]})
+            page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": 1.7})
+            tween_fresh = page.evaluate(probe(PROBES, "smoke_styles/scene"))
 
             # The p key cycles tween -> physics -> bodies -> tween; the select follows.
             for expected in ("physics", "bodies", "tween"):
                 page.keyboard.press("p")
                 check(
-                    page.evaluate(f"{api}.state().style") == expected,
+                    page.evaluate(probe(PROBES, "smoke_styles/style")) == expected,
                     f"the p key did not reach {expected}",
                 )
             for style, letter in (("physics", "B"), ("bodies", "C")):
-                page.evaluate(f"{api}.setStyle('{style}')")
+                page.evaluate(probe(PROBES, "smoke_styles/set-style"), {"style": style})
                 check(
-                    page.evaluate(f"{api}.state().style") == style,
+                    page.evaluate(probe(PROBES, "smoke_styles/style")) == style,
                     f"setStyle('{style}') did not take",
                 )
                 check(
-                    page.evaluate("document.getElementById('style-select').value") == style,
+                    page.evaluate(probe(PROBES, "smoke_styles/select-value")) == style,
                     f"the select does not show {style}",
                 )
                 # Revision 9 removed the legend line that named the style; the select is
                 # the one place the page says which style is on, and `state()` is the one
                 # place the API does.
                 check(
-                    page.evaluate(f"{api}.state().style") == style,
+                    page.evaluate(probe(PROBES, "smoke_styles/style")) == style,
                     f"state() does not report style {letter}",
                 )
 
             for style in ("physics", "bodies"):
-                page.evaluate(f"{api}.setStyle('{style}')")
-                page.evaluate(f"{api}.select({index_of[100]})")
+                page.evaluate(probe(PROBES, "smoke_styles/set-style"), {"style": style})
+                page.evaluate(probe(PROBES, "smoke_styles/select"), {"index": index_of[100]})
                 # Three instants render finite poses.
                 for seconds in (1.12, 1.7, 2.4):
-                    page.evaluate(f"{api}.seek({seconds})")
-                    bad = page.evaluate(NON_FINITE_JS)
+                    page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": seconds})
+                    bad = page.evaluate(probe(PROBES, "smoke_styles/non-finite-transforms"))
                     check(bad == 0, f"{style}: {bad} non-finite transforms at t = {seconds}")
-                    vb = page.evaluate(VIEWBOX_JS)
+                    vb = page.evaluate(probe(PROBES, "smoke_styles/view-box"))
                     check(
                         "NaN" not in vb,
                         f"{style}: viewBox is not finite at t = {seconds}: {vb}",
                     )
                 # seek is idempotent.
-                page.evaluate(f"{api}.seek(1.7)")
-                first = page.evaluate(SCENE_JS)
-                page.evaluate(f"{api}.seek(0.2)")
-                page.evaluate(f"{api}.seek(2.6)")
-                page.evaluate(f"{api}.seek(1.7)")
-                check(first == page.evaluate(SCENE_JS), f"{style}: seek(1.7) is not idempotent")
+                page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": 1.7})
+                first = page.evaluate(probe(PROBES, "smoke_styles/scene"))
+                page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": 0.2})
+                page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": 2.6})
+                page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": 1.7})
+                check(
+                    first == page.evaluate(probe(PROBES, "smoke_styles/scene")),
+                    f"{style}: seek(1.7) is not idempotent",
+                )
                 # The held scale: at t = 1.7 the view is n's; at the end of the settle it
                 # is n+1's.
-                view_mid = float(page.evaluate(VIEWBOX_WIDTH_JS))
-                page.evaluate(f"{api}.seek(2.8)")
-                view_end = float(page.evaluate(VIEWBOX_WIDTH_JS))
+                view_mid = float(page.evaluate(probe(PROBES, "smoke_styles/view-box-width")))
+                page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": 2.8})
+                view_end = float(page.evaluate(probe(PROBES, "smoke_styles/view-box-width")))
                 check(
                     abs(view_mid - 10.9) < 1e-6,
                     f"{style}: the view is not held at n's scale mid-move ({view_mid})",
@@ -215,7 +200,10 @@ def main() -> int:
                 for n in TIMED:
                     if n == 100 or n not in index_of:
                         continue
-                    info = page.evaluate(f"{api}.physics({index_of[n]}, '{style}')")
+                    info = page.evaluate(
+                        probe(PROBES, "smoke_styles/physics"),
+                        {"index": index_of[n], "style": style},
+                    )
                     print(
                         f"{style} precompute n = {n}: {info['ms']:.1f} ms"
                         f" for {info['steps']} steps ({info['n'] + 1} squares,"
@@ -224,7 +212,10 @@ def main() -> int:
                         f" deepest overlap {info['maxPenetration']:.3f} firm,"
                         f" {info['maxPenetrationLate']:.3f} after lock-in"
                     )
-                info = page.evaluate(f"{api}.physics({index_of[100]}, '{style}')")
+                info = page.evaluate(
+                    probe(PROBES, "smoke_styles/physics"),
+                    {"index": index_of[100], "style": style},
+                )
                 print(f"{style} precompute n = 100: {info['ms']:.1f} ms (cached run above)")
 
             # The stills.
@@ -232,18 +223,18 @@ def main() -> int:
                 if n not in index_of:
                     print(f"skip {name}: pair {n} is not embedded")
                     continue
-                page.evaluate(f"{api}.setStyle('{style}')")
-                page.evaluate(f"{api}.select({index_of[n]})")
-                page.evaluate(f"{api}.seek({seconds})")
+                page.evaluate(probe(PROBES, "smoke_styles/set-style"), {"style": style})
+                page.evaluate(probe(PROBES, "smoke_styles/select"), {"index": index_of[n]})
+                page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": seconds})
                 page.screenshot(path=str(REVIEW / f"{name}.png"), type="png")
                 print("wrote", REVIEW / f"{name}.png")
 
             # Style A is untouched by the switches: the same instant renders the same DOM
             # as on the fresh page.
-            page.evaluate(f"{api}.setStyle('tween')")
-            page.evaluate(f"{api}.select({index_of[100]})")
-            page.evaluate(f"{api}.seek(1.7)")
-            tween_after = page.evaluate(SCENE_JS)
+            page.evaluate(probe(PROBES, "smoke_styles/set-style"), {"style": "tween"})
+            page.evaluate(probe(PROBES, "smoke_styles/select"), {"index": index_of[100]})
+            page.evaluate(probe(PROBES, "smoke_styles/seek"), {"seconds": 1.7})
+            tween_after = page.evaluate(probe(PROBES, "smoke_styles/scene"))
             check(
                 tween_fresh == tween_after,
                 "style A renders differently after visits to B and C",

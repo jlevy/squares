@@ -12,7 +12,11 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 DEFAULT_PAGE = HERE.parents[4] / "site/workbench/index.html"
 
 
@@ -46,16 +50,16 @@ def main() -> int:
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         page.goto(f"file://{HERE / page_name}")
         page.wait_for_timeout(600)
-        index_of = {q["n"]: q["index"] for q in page.evaluate("atlasTransitions.pairs()")}
+        index_of = {
+            q["n"]: q["index"] for q in page.evaluate(probe(PROBES, "measure_modes/pairs"))
+        }
         print("| pair | style | max centre | max angle | side reached | record | excess |")
         print("| --- | --- | ---: | ---: | ---: | ---: | ---: |")
         for n in ns:
             for style in ("physics", "bodies"):
                 r = page.evaluate(
-                    "([i, s, m]) => { const r = atlasTransitions.physics(i, s, m);"
-                    " return {miss: r.miss, ms: r.ms, bodies: r.bodies,"
-                    " pen: r.maxPenetration, penLate: r.maxPenetrationLate}; }",
-                    [index_of[n], style, mode],
+                    probe(PROBES, "measure_modes/physics"),
+                    {"index": index_of[n], "style": style, "mode": mode},
                 )
                 m = r["miss"]
                 print(
@@ -79,7 +83,9 @@ def sweep(page_name: str, mode: str, ns: list[int], levels: list[int]) -> int:
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
         page.goto(f"file://{HERE / page_name}")
         page.wait_for_timeout(700)
-        index_of = {q["n"]: q["index"] for q in page.evaluate("atlasTransitions.pairs()")}
+        index_of = {
+            q["n"]: q["index"] for q in page.evaluate(probe(PROBES, "measure_modes/pairs"))
+        }
         print(
             "| pair | style | level | shake | decay | span | max centre | max angle |"
             " side reached | excess | deepest overlap |"
@@ -92,14 +98,8 @@ def sweep(page_name: str, mode: str, ns: list[int], levels: list[int]) -> int:
             for style in ("physics", "bodies"):
                 for level in levels:
                     r = page.evaluate(
-                        "([i, s, m, L]) => { const A = window.atlasTransitions;"
-                        " A.setStyle(s); A.setAnneal(L);"
-                        " const r = A.physics(i, s, m); const a = A.anneal();"
-                        " return {miss: r.miss, ms: r.ms,"
-                        " pen: Math.max(r.maxPenetration, r.maxPenetrationLate),"
-                        "         steps: r.steps, amp: a.amplitude, dec: a.decayPower,"
-                        " span: a.span}; }",
-                        [index_of[n], style, mode, level],
+                        probe(PROBES, "measure_modes/physics-at-level"),
+                        {"index": index_of[n], "style": style, "mode": mode, "level": level},
                     )
                     m = r["miss"]
                     print(
@@ -110,7 +110,7 @@ def sweep(page_name: str, mode: str, ns: list[int], levels: list[int]) -> int:
                         f"{m['excess']:+.2f}% | {r['pen']:.2f} |"
                         f"  ({r['steps']} steps, {r['ms']:.0f} ms)"
                     )
-        page.evaluate("atlasTransitions.setAnneal(3)")
+        page.evaluate(probe(PROBES, "measure_modes/restore-anneal"))
         print("ERRORS:", errors or "none")
         browser.close()
     return 0

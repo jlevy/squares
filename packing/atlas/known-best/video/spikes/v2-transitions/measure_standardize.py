@@ -20,7 +20,11 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 
 
 def fold(angle: float) -> float:
@@ -102,9 +106,8 @@ def main() -> int:
         page.wait_for_timeout(700)
 
         if "--classes" in flags:
-            frames = json.loads(
-                page.evaluate("document.getElementById('atlas-data').textContent")
-            )["frames"]
+            data = page.evaluate(probe(PROBES, "measure_standardize/atlas-data"))
+            frames = json.loads(data)["frames"]
             probes = [
                 n for n in (5, 10, 11, 17, 26, 29, 100, 110, 272, 324) if str(n) in frames
             ]
@@ -158,39 +161,8 @@ def main() -> int:
                 for kind in ("grid", "random"):
                     for level in (0, 3, 10):
                         out = page.evaluate(
-                            """([n, kind, level]) => {
-                              const A = window.atlasTransitions;
-                              A.setStepN(n); A.setAnneal(level); A.setInitial(kind);
-                              A.optimizeStep(3600);
-                              const before = A.optimizeState();
-                              const poseOf = () =>
-                                Array.from(document.querySelectorAll('#squares g'))
-                                .filter(g => g.style.display !== 'none')
-                                .map(g => g.getAttribute('transform'));
-                              const a = poseOf();
-                              A.optimizeStep(12);   // a tenth of a simulated second
-                              const b = poseOf();
-                              A.optimizeStep(108);  // out to a whole one
-                              const c = poseOf();
-                              const num = (s) =>
-                                (s.match(/-?\\d+\\.?\\d*(e-?\\d+)?/g) || []).map(Number);
-                              let max = 0, sum = 0, count = 0, turn = 0;
-                              for (let i = 0; i < a.length; i++) {
-                                const p = num(a[i]), q = num(b[i]), r = num(c[i]);
-                                if (p.length < 2 || q.length < 2) continue;
-                                const d = Math.hypot(q[0] - p[0], q[1] - p[1]) * 10;
-                                if (d > max) max = d;
-                                sum += d; count++;
-                                if (p.length >= 3 && r.length >= 3) {
-                                  const g = Math.abs(r[2] - p[2]) % 90;
-                                  const f = Math.min(g, 90 - g);
-                                  if (f > turn) turn = f;
-                                }
-                              }
-                              return {steps: before.steps, max,
-                                      mean: count ? sum / count : 0, turn};
-                            }""",
-                            [n, kind, level],
+                            probe(PROBES, "measure_standardize/late-motion"),
+                            {"n": n, "kind": kind, "level": level},
                         )
                         print(
                             f"{n:>5}  {kind:<7} {level:>5}  {out['steps']:>6}   "

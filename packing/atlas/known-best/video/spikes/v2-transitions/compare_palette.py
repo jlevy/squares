@@ -17,7 +17,6 @@ and the scarlet accent, which is a mark rather than a member of a family.
 """
 
 import argparse
-import json
 import math
 import re
 import sys
@@ -25,7 +24,11 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 PACKING = HERE.parents[4]
 RENDERINGS = PACKING / "atlas/known-best/rendering"
 DEFAULT_PAGE = PACKING / "site/workbench/index.html"
@@ -38,14 +41,6 @@ SQUARE_FILL = re.compile(
     r'data-feature="square-fill"[^>]*?\bfill="(#[0-9a-fA-F]{6})"'
     r'|fill="(#[0-9a-fA-F]{6})"[^>]*?data-feature="square-fill"'
 )
-
-
-#: What the stage is actually painting, read off the DOM: the page has no accessor that
-#: reports the frame's fills, and reading the elements is the only answer that cannot
-#: disagree with what a viewer sees.
-DRAWN_FILLS = """() => Array.from(document.querySelectorAll('#squares g[data-identity]'))
-  .filter((g) => g.style.display !== 'none')
-  .map((g) => g.firstElementChild.getAttribute('fill'))"""
 
 
 def oklch(hex_colour: str) -> tuple[float, float, float]:
@@ -88,25 +83,23 @@ def workbench_fills(page_path: Path, pairs: int) -> dict[str, dict[str, int]]:
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
         page.goto(page_path.resolve().as_uri(), wait_until="load")
-        page.evaluate("document.fonts.ready")
-        page.evaluate("window.atlasTransitions.setMode('animate')")
-        page.evaluate("window.atlasTransitions.setCapture(true)")
+        page.evaluate(probe(PROBES, "compare_palette/fonts-ready"))
+        page.evaluate(probe(PROBES, "compare_palette/animate"))
+        page.evaluate(probe(PROBES, "compare_palette/capture"))
         # The stage trims chroma to compensate for drawing one packing where the atlas
         # draws a page of them. Set to 1 here: the claim being checked is that the stage's
         # colours ARE the atlas's, and the trim is a presentation setting on top of that
         # rather than a palette.
-        page.evaluate("window.atlasTransitions.setStageChroma(1)")
-        count = page.evaluate("window.atlasTransitions.pairs().length")
+        page.evaluate(probe(PROBES, "compare_palette/full-chroma"))
+        count = page.evaluate(probe(PROBES, "compare_palette/pair-count"))
         picks = sorted({round(i * (count - 1) / max(1, pairs - 1)) for i in range(pairs)})
-        for scheme in page.evaluate("window.atlasTransitions.colorSchemes()"):
-            page.evaluate(f"window.atlasTransitions.setColorScheme({json.dumps(scheme)})")
+        for scheme in page.evaluate(probe(PROBES, "compare_palette/color-schemes")):
+            page.evaluate(probe(PROBES, "compare_palette/set-color-scheme"), {"scheme": scheme})
             tally: dict[str, int] = {}
             for index in picks:
-                page.evaluate(f"window.atlasTransitions.select({index})")
-                page.evaluate(
-                    "window.atlasTransitions.seek(window.atlasTransitions.duration())"
-                )
-                for fill in page.evaluate(DRAWN_FILLS):
+                page.evaluate(probe(PROBES, "compare_palette/select"), {"index": index})
+                page.evaluate(probe(PROBES, "compare_palette/seek-end"))
+                for fill in page.evaluate(probe(PROBES, "compare_palette/drawn-fills")):
                     key = str(fill).lower()
                     tally[key] = tally.get(key, 0) + 1
             out[scheme] = tally
@@ -127,15 +120,15 @@ def per_n(page_path: Path, wanted: list[int]) -> None:
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
         page.goto(page_path.resolve().as_uri(), wait_until="load")
-        page.evaluate("document.fonts.ready")
-        page.evaluate("window.atlasTransitions.setMode('animate')")
-        page.evaluate("window.atlasTransitions.setCapture(true)")
+        page.evaluate(probe(PROBES, "compare_palette/fonts-ready"))
+        page.evaluate(probe(PROBES, "compare_palette/animate"))
+        page.evaluate(probe(PROBES, "compare_palette/capture"))
         # The stage trims chroma to compensate for drawing one packing where the atlas
         # draws a page of them. Set to 1 here: the claim being checked is that the stage's
         # colours ARE the atlas's, and the trim is a presentation setting on top of that
         # rather than a palette.
-        page.evaluate("window.atlasTransitions.setStageChroma(1)")
-        pairs = page.evaluate("window.atlasTransitions.pairs().map((p) => p.n)")
+        page.evaluate(probe(PROBES, "compare_palette/full-chroma"))
+        pairs = page.evaluate(probe(PROBES, "compare_palette/pair-ns"))
         for n in wanted:
             svg = RENDERINGS / f"n-{n:03d}.svg"
             if not svg.exists() or (n - 1) not in pairs:
@@ -145,10 +138,12 @@ def per_n(page_path: Path, wanted: list[int]) -> None:
             for before, after in SQUARE_FILL.findall(svg.read_text(encoding="utf-8")):
                 key = (before or after).lower()
                 want[key] = want.get(key, 0) + 1
-            page.evaluate(f"window.atlasTransitions.select({pairs.index(n - 1)})")
-            page.evaluate("window.atlasTransitions.seek(window.atlasTransitions.duration())")
+            page.evaluate(
+                probe(PROBES, "compare_palette/select"), {"index": pairs.index(n - 1)}
+            )
+            page.evaluate(probe(PROBES, "compare_palette/seek-end"))
             got: dict[str, int] = {}
-            for fill in page.evaluate(DRAWN_FILLS):
+            for fill in page.evaluate(probe(PROBES, "compare_palette/drawn-fills")):
                 key = str(fill).lower()
                 got[key] = got.get(key, 0) + 1
             if want == got:

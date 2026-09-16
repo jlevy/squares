@@ -52,9 +52,13 @@ export default [
     rules: promiseRules,
   },
   {
-    // The probes the Python tools under `packing/` load through `sqpack.probes`, and the Node
-    // scripts those tools run. Both programs are strict; neither inherits a relaxation.
-    files: ["packing/**/probes/**/*.js"],
+    // The probes the Python tools under `packing/` load through `sqpack.probes`, with the v1
+    // slideshow's page script that shares their program, and the Node scripts those tools run.
+    // Both programs are strict; neither inherits a relaxation.
+    files: [
+      "packing/**/probes/**/*.js",
+      "packing/atlas/known-best/video/spikes/v1-slideshow/assets/*.js",
+    ],
     languageOptions: {
       parser,
       parserOptions: { project: "./tsconfig.packing-probes.json" },

@@ -15,26 +15,12 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-HERE = Path(__file__).resolve().parent
-DEFAULT_PAGE = HERE.parents[4] / "site/workbench/index.html"
+from sqpack.probes import probe
 
-PROBE = """
-([startN, style, prefetch]) => {
-  const A = window.atlasTransitions;
-  A.stopAll(); A.setStyle(style); A.goTo(startN); A.setContinuous({prefetch});
-  window.__frames = [];
-  const token = (window.__token = (window.__token || 0) + 1);
-  const probe = (ts) => {
-    if (window.__token !== token) return;   // one probe per run: an earlier loop stops here
-    const s = A.state();
-    window.__frames.push([ts, s.pair, s.t, A.schedule().moveStart]);
-    requestAnimationFrame(probe);
-  };
-  requestAnimationFrame(probe);
-  A.playAll();
-  return A.state().pair;
-}
-"""
+HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
+DEFAULT_PAGE = HERE.parents[4] / "site/workbench/index.html"
 
 
 def note_console(errors: list[str], message) -> None:
@@ -62,16 +48,19 @@ def main() -> int:
         page.goto(f"file://{page_path}")
         page.wait_for_timeout(900)
         for style in args.styles.split(","):
-            first = page.evaluate(PROBE, [args.start, style, not args.no_prefetch])
+            first = page.evaluate(
+                probe(PROBES, "measure_stall/play-from"),
+                {"startN": args.start, "style": style, "prefetch": not args.no_prefetch},
+            )
             target = first + args.pairs
             page.wait_for_function(
-                "t => atlasTransitions.state().pair >= t || !atlasTransitions.state().playing",
-                arg=target,
+                probe(PROBES, "measure_stall/played"),
+                arg={"target": target},
                 timeout=300000,
                 polling=200,
             )
-            page.evaluate("atlasTransitions.stopAll()")
-            frames = page.evaluate("window.__frames")
+            page.evaluate(probe(PROBES, "measure_stall/stop-all"))
+            frames = page.evaluate(probe(PROBES, "measure_stall/frames"))
             # Each frame delta is classified by what happened across it: the pair changed
             # (the DOM of the next pair is built there), the move began (where an
             # unprefetched simulation runs), or neither.

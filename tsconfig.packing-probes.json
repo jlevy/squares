@@ -5,12 +5,18 @@
   // in a `.d.ts` beside it; `window.atlasTransitions` is the workbench's own declaration,
   // read from where the workbench's probes are checked against it.
   //
+  // The v1 slideshow's page script is here too. It is page code rather than a probe, but it
+  // is the same kind of file on the same terms: browser JavaScript that a Python generator
+  // under `packing/` hands to a page, and one expression that declares nothing at the top
+  // level. It is checked against `probes/atlas-video.d.ts`, the declaration its own probes read.
+  //
   // No relaxations: these files are new, and new files land under the strict floor
   // (floor rule 8). The relaxed programs are the ones files move out of.
   "extends": "./tsconfig.base.json",
   "include": [
     "packing/**/probes/**/*.js",
     "packing/**/probes/**/*.d.ts",
+    "packing/atlas/known-best/video/spikes/v1-slideshow/assets/*.js",
     "packages/workbench/probes/atlas-transitions.d.ts"
   ]
 }

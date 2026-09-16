@@ -24,43 +24,23 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
+from sqpack.probes import probe
+
 HERE = Path(__file__).resolve().parent
+#: The JavaScript this runs in the page, as files (`sqpack.probes`).
+PROBES = HERE / "probes"
 PAGE = HERE.parents[4] / "site/workbench/index.html"
 STEPS = 2400
 SIZES = (17, 29)
-
-
-def drive(page, script: str):
-    prelude = "(() => {\n  const api = window.atlasTransitions;\n"
-    return page.evaluate(prelude + script + "\n})()")
 
 
 def settle(
     page, n: int, *, law: str, start: str, relationship: str = "general", steps: int = STEPS
 ) -> dict:
     """Run one open-ended settle and report what it reached."""
-    return drive(
-        page,
-        f"""
-  api.reset();
-  api.setStepN({n});
-  api.setBlind(true);
-  api.setLawPreset({law!r});
-  api.setRelationship({relationship!r});
-  api.setInitial({start!r});
-  api.optimize(true);
-  api.pause();
-  api.optimizeStep({steps});
-  const o = api.optimizeState();
-  const rel = api.relationship();
-  return {{
-    n: {n}, law: {law!r}, start: {start!r}, graph: {relationship!r},
-    side: o.side, required: o.required, best: o.best, bestPen: o.bestPenetration,
-    pen: o.penetration, record: o.record, excess: o.excess, steps: o.steps,
-    near: o.near === undefined ? null : o.near,
-    edges: rel.edges, met: rel.met, fraction: rel.fraction,
-  }};
-""",
+    return page.evaluate(
+        probe(PROBES, "measure_law/settle"),
+        {"n": n, "law": law, "start": start, "relationship": relationship, "steps": steps},
     )
 
 
@@ -97,11 +77,7 @@ DRAWN_GRAPHS = ("ring", "chain", "record")
 
 def drawn_graph(page, kind: str, n: int) -> list[list[int]]:
     if kind == "record":
-        flat = page.evaluate(
-            "(n) => { const A = window.atlasTransitions; A.setStepN(n);"
-            "  A.setTargetSource('record'); return A.targetGraph(); }",
-            n,
-        )
+        flat = page.evaluate(probe(PROBES, "measure_law/record-graph"), {"n": n})
         return [[flat[i], flat[i + 1]] for i in range(0, len(flat), 2)]
     edges = [[i, i + 1] for i in range(n - 1)]
     if kind == "ring" and n > 2:
@@ -117,53 +93,19 @@ def drawn_table(page, sizes, steps: int = STEPS) -> list[dict]:
             graph = drawn_graph(page, kind, n)
             rows.append(
                 page.evaluate(
-                    """([n, kind, graph, steps]) => {
-  const api = window.atlasTransitions;
-  api.reset();
-  api.setStepN(n);
-  api.setBlind(true);
-  api.setLawPreset('sticky');
-  api.setEdges(graph);
-  api.setRelationship('contact');
-  api.setInitial('grid');
-  api.optimize(true);
-  api.pause();
-  const before = api.relationship();
-  api.optimizeStep(steps);
-  const rel = api.relationship();
-  const o = api.optimizeState();
-  return {n, graph: kind, source: rel.target, edges: rel.edges, metAtStart: before.met,
-          met: rel.met, fraction: rel.fraction, side: rel.side, record: rel.record,
-          excess: o.excess, pen: o.penetration, steps: o.steps};
-}""",
-                    [n, kind, graph, steps],
+                    probe(PROBES, "measure_law/drawn"),
+                    {"n": n, "kind": kind, "graph": graph, "steps": steps},
                 )
             )
     return rows
 
 
 def grow_table(page, sizes) -> list[dict]:
-    rows = []
-    for n in sizes:
-        for rule in ("constant", "clean"):
-            script = f"""
-  api.reset();
-  api.setStepN({n});
-  api.setBlind(true);
-  api.setGrowth({{ size: 0.3, rate: 0.05, rule: {rule!r}, on: true }});
-  api.setInitial('grid');
-  api.optimize(true);
-  api.pause();
-  api.optimizeStep(7200);
-  const g = api.growth();
-  const o = api.optimizeState();
-  return {{ n: {n}, rule: {rule!r}, size: g.size, growing: g.growing, stalled: g.stalled,
-           tight: g.sideAtSize, unitSide: g.unitSide, record: g.record,
-           pen: g.penetration, packing: g.packing, suspect: g.suspect, excess: g.excess,
-           steps: o.steps }};
-"""
-            rows.append(drive(page, script))
-    return rows
+    return [
+        page.evaluate(probe(PROBES, "measure_law/grow"), {"n": n, "rule": rule})
+        for n in sizes
+        for rule in ("constant", "clean")
+    ]
 
 
 def show(title: str, rows: list[dict]) -> None:
