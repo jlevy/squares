@@ -5,18 +5,20 @@ title: Stabilize Animate physical trajectories and enforce frame-continuity budg
 kind: bug
 status: in_progress
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 delegate: codex@spud10
 labels:
   - workbench
   - animation
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m2p0wmnwn2dt3qnxwj4wwses
 parent_id: is-01m2m2zmky0p8gw5m4zctfnfex
 hold: null
 hold_until: null
 created_at: 2026-09-16T16:39:04.951Z
-updated_at: 2026-09-16T18:43:10.220Z
+updated_at: 2026-09-16T21:10:14.971Z
 started_at: 2026-09-16T16:49:14.497Z
 ---
 Current main a4f801e8 still runs Animate styles B/C with one semi-implicit Euler step per stored frame. Pack calls forceLawSubsteps, but buildTrajectory does not. On the current corpus at 16→17 with the rigid preset and default anneal, the current path reaches 0.3699 square widths per stored step, 0.7399 second difference, 945 direction reversals, and 0.6484 penetration; using the helper-required two finer steps reduces those to 0.1617, 0.0754, 0 reversals, and 0.0558. At 89→90 the current path has 7,832 reversals; two finer steps reduce that to 3. The 0.3699 displacement is maxSpeed × timestep and 0.7399 is a cap-to-cap reversal, proving the teleporting is solver ringing plus the clamp, not missing renderer interpolation.
