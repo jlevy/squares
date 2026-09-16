@@ -3,14 +3,19 @@ type: is
 id: is-01m1tcybvd468gnrscjqb4a362
 title: The pull-request surface's 5s per-test ceiling is not stable at its own concurrency
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 2
+version: 4
 labels:
   - tooling
 dependencies: []
 created_at: 2026-09-06T03:42:10.284Z
-updated_at: 2026-09-06T08:07:42.669Z
+updated_at: 2026-09-16T00:20:45.967Z
+closed_at: 2026-09-16T00:20:45.964Z
+close_reason: |
+  Obsolete, verified against the repository on 2026-09-15. The quick lane now runs alone on its own runner in the suite job (packing-validate --suite --jobs 1 --inner-jobs 1, four xdist workers under cpus - jobs + 1), so the contention that made the ceiling arbitrary is gone, and the per-test bound is no longer 5 s but the 12 s call-phase backstop QUICK_TEST_WALL_BACKSTOP_SECONDS in packing/src/sqpack/cli/validate.py, with CPU time diagnostic-only at 6 s. That is option 1 of the three this bead listed. Aggregate lane cost is bounded by the tier record in packing/devtools/gate-budgets.yaml, which think-z121 requires to be non-empty for every pull-request tier.
+resolution: null
+duplicate_of: null
 ---
 `fast behavioral tests` fails on a different, essentially arbitrary set of tests each run,
 so the `checks` surface has never been green and cannot be made green by marking.
@@ -66,3 +71,6 @@ gap was sized for.
 ## Notes
 
 PR #93 review R2 (https://github.com/jlevy/squares/pull/93#issuecomment-5557862664) reproduced missing forkserver worker CPU: >=0.5 process CPU seconds in worker reported as 0.01 by parent plugin. Review remediation keeps the plugin diagnostic-only and labels terminal and serialized observations as incomplete lower bounds. Before using CPU thresholds, implement and test complete descendant accounting (including forkserver, direct children, xdist, and cross-phase reaping) without altering workload process semantics. Existing wall-clock threshold remains active; complete CPU accounting is follow-up here.
+
+
+2026-09-15 (think-z121): closing as obsolete, checked against the repository rather than assumed. Both halves of the cause above are gone. The quick lane no longer shares four cpus with two other gate steps: `.github/workflows/packing-validation.yml` runs it alone on its own runner in the `suite` job as `packing-validate --suite --jobs 1 --inner-jobs 1`, which `_pytest_workers` sizes to four xdist workers under `cpus - jobs + 1` with nothing else on the box -- and that job's own comment names BC-218 and the nineteen contended failures as why. The ceiling is no longer 5 s either: `QUICK_TEST_WALL_BACKSTOP_SECONDS = 12.0` in `packing/src/sqpack/cli/validate.py` is the enforced `call`-phase backstop, six times the 2 s marking threshold rather than two and a half, with CPU time reported at 6 s as diagnostic only; `development.md`'s Validation Loops table states the same rule. That is option 1 of the three listed above, taken with the ceiling raised only as far as the uncontended measurement supports. The aggregate cost the per-test ceiling was standing in for is bounded separately by the tier record in `packing/devtools/gate-budgets.yaml`, which think-z121 now requires to be non-empty for any tier a pull request runs. The CPU-accounting follow-up from PR #93 review R2 is not carried by this closure; it belongs with the diagnostic-only plugin, not with the wall ceiling.

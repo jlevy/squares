@@ -3,17 +3,17 @@ type: is
 id: is-01m21mgmrpatjx0n66y23mmjc8
 title: Refresh the CI suite timing baseline from current hosted runs
 kind: bug
-status: closed
-priority: 1
-version: 4
+status: open
+priority: 2
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-07-math-text-face.md
 labels: []
 dependencies: []
 parent_id: is-01m20v1mq20k9d9p1wg9s5qdsq
 created_at: 2026-09-08T23:09:10.292Z
-updated_at: 2026-09-09T03:00:31.102Z
-closed_at: 2026-09-09T03:00:31.102Z
-close_reason: "Implemented, reviewed, merged in Squares PR #135 (merge 171bba339321b8d63d85a59ab5f2db946270be0e) with reusable work in KPress PR #68 (merge a6203389c0a6d1f6e542b1f50fa177121eae7f4a). All PR and post-merge CI passed; Pages serves edition 171bba33; live publication 34/34 and delayed-font smoke pass. HTML/PDF opened locally. Native reload retains 3000px exactly in Chromium, Firefox, and WebKit with JS on/off. Bullet raster-shape follow-up think-x65m remains open because measured geometry is already square."
+updated_at: 2026-09-16T00:19:23.119Z
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -22,3 +22,6 @@ Final rendering CI run34288782986 at a10569d1 passed all4,283 behavioral tests i
 ## Notes
 
 CI baseline refresh verified on merged-main integration131b9758: all Squares checks pass, including suite34291135875/job102277711311 and packing-required aggregator. Previous too-fast result was4283testsPASS88.84s against stale162.62s record; refreshed118.72geomean/237ceiling retains policy. Final typography integration will receive a fresh gate before closing.
+
+
+2026-09-15 (think-z121): reopening at P2, because this bead's done-when is contradicted by its own lane. The 118.72 s record written here was superseded the same week by 183.44 s, and on 2026-09-15 `packing/devtools/read_tier_walls.py` read `suite` at 210.21 s across seven hosted pull-request runs (34924677097, 34925616821, 34926777301, 34929890466, 34930296150, 35012847055, 35013703659) -- 1.15x the standing record, on a lane that has grown from 4,639 to about 5,700 quick tests since this closed. The baseline is stale again in exactly the way this bead existed to stop. Lane 2 (think-t7zm) shards `suite` and owns the new record; under rule 6 that think-z121 adds to `packing/devtools/check_gate_budgets.py`, the next record above 123.40 s -- 1.2x of the 102.83 s that heads this tier's history -- has to carry per-file test-cost attribution rather than another re-base.
