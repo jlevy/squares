@@ -5,7 +5,7 @@ title: "N11 strategy reset: significant bound improvements or a much simpler pro
 kind: epic
 status: open
 priority: 1
-version: 22
+version: 23
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
@@ -26,8 +26,9 @@ child_order_hints:
   - is-01m2h0jb1n3shr0xjh5y25fab4
   - is-01m2h4xzkgqqhsy4tf19gys41f
   - is-01m2hcvb50hvx8m8x7pbasnr3f
+  - is-01m2q2j7jz8y0sgg0c6smcrsz0
 created_at: 2026-09-14T03:04:47.426Z
-updated_at: 2026-09-15T16:21:39.482Z
+updated_at: 2026-09-17T06:58:45.462Z
 ---
 Owner direction, 2026-09-14: stop heavy computer-assisted work aimed at microscopic lower-bound gains. Prefer routes capable of a material n=11 bound improvement, a substantially simpler proof of s(11) >= 3.82, or a transferable technique that could resolve another small n. BC-339/think-uqa4 owns the checked roll-up, BC-347/think-oj12 owns the completed Astra Max audit, and BC-346/think-9y7p selected the due BC-340/think-1ydi W5 checkpoint. No scientific route is authorized before W5 closes and the fresh post-W5 W10 under think-d3h5 selects one.
 
