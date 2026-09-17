@@ -5,7 +5,7 @@ title: Reconcile CI topology PRs 183, 185, and 186 after the no-JS stack
 kind: task
 status: in_progress
 priority: 1
-version: 21
+version: 22
 labels: []
 dependencies:
   - type: blocks
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m2phfjztg9q7vckn8he9jb9e
   - is-01m2phtqcr35drpbd01xrh0g8q
 created_at: 2026-09-16T04:00:45.195Z
-updated_at: 2026-09-17T04:18:28.841Z
+updated_at: 2026-09-17T05:45:46.443Z
 ---
 After PRs 175, 178, 179, 181, and 180 reach main, reconcile rather than wholesale-merge the three overlapping CI branches. Preserve PR 183 parallel Pages architecture after fixing its critical-path checkout and remeasuring; selectively port PR 185 fixture, browser-floor, standalone typecheck, and per-file-cost improvements without replacing the admitted suite-a/suite-b sharder; preserve PR 186 wall-measurement framework after fixing its Python 3.14 Ruff syntax and rewiring it to the final topology. Require exact-head hosted measurements, one consistent 180-second wall authority, and clean fast/Page gates.
 
@@ -44,3 +44,6 @@ Independent senior reviews and a separate reconciliation audit agree: do not reb
 
 
 2026-09-17 owner decision: make the pull-request wall advisory on #188 (measured and reported, not failing the required aggregates) until think-g4n9 brings the worst case under 180 s and re-enforces it; everything else stays blocking. Committed on #188: 957e37af (review nits: exact deploy conditions, guarded artifact-id downloads, pruning comment), c4f0660d (suite shards rebalanced from same-speed cohort 35175474610; 16 phantom cost rows removed; blobless and sparse suite checkouts measured and refused). In progress: advisory wall implementation; then pre-push gate, push, three exact-head hosted samples with per-attempt artifact capture, register recalibration from those, session 137 update (review S1, N2, N3), final review of the delta.
+
+
+2026-09-17 05:50Z: PR 188 pushed at 16d5e14d. be28ad5a: push tier passed locally (6,628 passed, 49 of 80 steps); hosted Packing run 35182460400 attempt 1 failed (think-g4n9 not yet on tbd-sync), attempt 2 failed suite_a drift (133.91 s vs 84 s), attempt 3 passed every job; Pages green; PR was CLEAN. 16d5e14d recalibrates suite_a to 109.92 s (attributed: ~1,000 tests moved into shard A by c4f0660d, prior record one fast-runner reading) and suite_b to 124.78 s, corrects the earlier suite_b attribution, and adds a Session 137 phase covering 21642ed8..be28ad5a plus the review's record nits (N1, N2, N3). Remaining: green aggregates on 16d5e14d, merge, close PR 185 (think-lop3), first Pages deploy (think-w7oy). PR 190 is mergeable (CLEAN) at 903e2277.
