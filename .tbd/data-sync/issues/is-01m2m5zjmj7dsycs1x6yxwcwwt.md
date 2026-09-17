@@ -5,7 +5,7 @@ title: Reconcile CI topology PRs 183, 185, and 186 after the no-JS stack
 kind: task
 status: in_progress
 priority: 1
-version: 23
+version: 24
 labels: []
 dependencies:
   - type: blocks
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m2phfjztg9q7vckn8he9jb9e
   - is-01m2phtqcr35drpbd01xrh0g8q
 created_at: 2026-09-16T04:00:45.195Z
-updated_at: 2026-09-17T06:35:50.435Z
+updated_at: 2026-09-17T12:07:22.195Z
 ---
 After PRs 175, 178, 179, 181, and 180 reach main, reconcile rather than wholesale-merge the three overlapping CI branches. Preserve PR 183 parallel Pages architecture after fixing its critical-path checkout and remeasuring; selectively port PR 185 fixture, browser-floor, standalone typecheck, and per-file-cost improvements without replacing the admitted suite-a/suite-b sharder; preserve PR 186 wall-measurement framework after fixing its Python 3.14 Ruff syntax and rewiring it to the final topology. Require exact-head hosted measurements, one consistent 180-second wall authority, and clean fast/Page gates.
 
@@ -50,3 +50,6 @@ Independent senior reviews and a separate reconciliation audit agree: do not reb
 
 
 2026-09-17: independent review of 21642ed8..16d5e14d APPROVE WITH NITS, no blockers; a disposition audit of all 44 findings across every review round found 32 fixed, 6 accepted by owner decision or deferred to beads, 6 partial or unaddressed. A fix pass for the should-fixes (tree-reusable budget step, wall-reading comment), the stale wall records and suite prose, the session 137 push-order correction, dead suite_shard.py and nits is in progress. Merge rehearsal: GO for #188 at an exact head (merge tree equals CI-tested tree; deploy path traced; delete_branch_on_merge true, no branch protection). Still needed: green aggregates on the fix commit, the Deferred checkpoint via the deep-gate label, the review-disposition comment on the PR, owner go-ahead to merge.
+
+
+2026-09-17 05:06 PT: #188 head 7f387990 (0d10d6c4 final review fixes; 7f387990 unmarks a sub-floor slow test). Hosted Packing and Pages aggregates green; Deferred checkpoint run 35213757305 passed every job; review-disposition comment posted (issuecomment-5714064819: 44 findings, 37 fixed, 3 owner decision, 3 deferred, 1 kept); PR description rewritten. Ready to merge on owner go-ahead, first in the sequence #188 -> #185 -> #190 -> #191 -> #192.
