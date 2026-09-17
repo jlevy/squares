@@ -3,9 +3,9 @@ type: is
 id: is-01m2m5zjmj7dsycs1x6yxwcwwt
 title: Reconcile CI topology PRs 183, 185, and 186 after the no-JS stack
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 24
+version: 25
 labels: []
 dependencies:
   - type: blocks
@@ -25,7 +25,11 @@ child_order_hints:
   - is-01m2phfjztg9q7vckn8he9jb9e
   - is-01m2phtqcr35drpbd01xrh0g8q
 created_at: 2026-09-16T04:00:45.195Z
-updated_at: 2026-09-17T12:07:22.195Z
+updated_at: 2026-09-17T16:07:38.045Z
+closed_at: 2026-09-17T16:07:38.010Z
+close_reason: "Landed with PR #188 (merge 042e791c, 2026-09-17T15:54Z): hosted aggregates and the Deferred checkpoint passed on 7f387990; review dispositions in https://github.com/jlevy/squares/pull/188#issuecomment-5714064819. The first main push deployed GitHub Pages at 042e791c with verify-deployment passing."
+resolution: null
+duplicate_of: null
 ---
 After PRs 175, 178, 179, 181, and 180 reach main, reconcile rather than wholesale-merge the three overlapping CI branches. Preserve PR 183 parallel Pages architecture after fixing its critical-path checkout and remeasuring; selectively port PR 185 fixture, browser-floor, standalone typecheck, and per-file-cost improvements without replacing the admitted suite-a/suite-b sharder; preserve PR 186 wall-measurement framework after fixing its Python 3.14 Ruff syntax and rewiring it to the final topology. Require exact-head hosted measurements, one consistent 180-second wall authority, and clean fast/Page gates.
 

@@ -3,16 +3,20 @@ type: is
 id: is-01m2nhy9nsqpwzpdgccyah2myd
 title: Overlap Pages browser setup with prepared-page production
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 labels:
   - ci
   - validation
 dependencies: []
 parent_id: is-01m2m5zjmj7dsycs1x6yxwcwwt
 created_at: 2026-09-16T16:49:00.600Z
-updated_at: 2026-09-17T03:29:03.303Z
+updated_at: 2026-09-17T16:07:40.072Z
+closed_at: 2026-09-17T16:07:40.071Z
+close_reason: "Landed with PR #188 (merge 042e791c, 2026-09-17T15:54Z): hosted aggregates and the Deferred checkpoint passed on 7f387990; review dispositions in https://github.com/jlevy/squares/pull/188#issuecomment-5714064819. The first main push deployed GitHub Pages at 042e791c with verify-deployment passing."
+resolution: null
+duplicate_of: null
 ---
 PR #188 exact-head Pages run 35123561787 measured 235 seconds against OR-14's 180-second wall. browser-geometry (webkit) was critical: 3 seconds queued, 95 setup, 40 work, after the serialized scope+prepare chain. Start browser setup after scope and overlap it with prepare, then wait through a reusable fail-closed artifact-readiness tool before download; require an exact-head wall at or below 180 seconds.
 

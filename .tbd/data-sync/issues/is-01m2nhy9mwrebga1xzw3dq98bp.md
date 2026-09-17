@@ -3,18 +3,18 @@ type: is
 id: is-01m2nhy9mwrebga1xzw3dq98bp
 title: Restore negative-control snapshot headroom without raising its cap
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 labels:
   - ci
   - validation
 dependencies: []
 parent_id: is-01m2m5zjmj7dsycs1x6yxwcwwt
 created_at: 2026-09-16T16:49:00.571Z
-updated_at: 2026-09-17T01:50:50.925Z
-closed_at: null
-close_reason: null
+updated_at: 2026-09-17T16:07:42.419Z
+closed_at: 2026-09-17T16:07:42.396Z
+close_reason: "Landed with PR #188 (merge 042e791c, 2026-09-17T15:54Z): hosted aggregates and the Deferred checkpoint passed on 7f387990; review dispositions in https://github.com/jlevy/squares/pull/188#issuecomment-5714064819. The first main push deployed GitHub Pages at 042e791c with verify-deployment passing."
 resolution: null
 duplicate_of: null
 ---
