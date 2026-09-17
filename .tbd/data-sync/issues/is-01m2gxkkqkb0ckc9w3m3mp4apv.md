@@ -5,7 +5,7 @@ title: Extract each rung's hint from a record at declared tolerances, one implem
 kind: feature
 status: open
 priority: 1
-version: 7
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies:
@@ -17,9 +17,11 @@ dependencies:
     target: is-01m2gxkvbndg46r6pjy3352cb8
   - type: blocks
     target: is-01m2gxkzqdxb01e2h4tpkvczw7
+  - type: blocks
+    target: is-01m2pkfjyz4vn6cb3xvxhz61jc
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:36:41.202Z
-updated_at: 2026-09-16T21:23:37.216Z
+updated_at: 2026-09-17T02:36:03.915Z
 ---
 One implementation that turns a record's poses into each rung's hint, at declared tolerances, retained as data per n and shared by the Python search lane and the workbench.
 
@@ -37,3 +39,6 @@ Also feeds think-hk37: the same extraction is what decides rigidity marks.
 ## Notes
 
 2026-09-16 requirement transfer from duplicate think-1han: extraction must include oriented face-pair targets, symmetry/correspondence rules, declared ambiguity handling, and refusal when a target cannot be interpreted uniquely enough for the requested rung. Reuse the contact atlas feature representation.
+
+
+2026-09-17 (PR #190 revision): extraction must report, per record, the touching-component count, feature coverage by contact kind (edge-edge, corner-edge, corner-corner) and the remaining degrees of freedom a target leaves. The only featured records today, n=11 and n=29, are each one touching component, so the partition contrast excludes single-component cells; oriented-face alignment is defined for edge-edge contacts only. think-05o4 freezes cells from this output.

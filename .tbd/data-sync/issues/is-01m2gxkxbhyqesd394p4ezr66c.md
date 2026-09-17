@@ -5,13 +5,15 @@ title: "Strategies in Pack and Search: pick, run and compare, labelled by guidan
 kind: feature
 status: open
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m2cm04t1enrq3zreb3rjjhpd
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:36:51.040Z
-updated_at: 2026-09-16T21:23:38.192Z
+updated_at: 2026-09-17T02:35:21.721Z
 ---
 The rung and its use become visible, labelled settings in the workbench, because a structure-informed run must never read as discovery.
 

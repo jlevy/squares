@@ -5,7 +5,7 @@ title: Add calibration and held-out presets within Search
 kind: feature
 status: open
 priority: 2
-version: 9
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - packing
@@ -14,11 +14,9 @@ labels:
 dependencies:
   - type: blocks
     target: is-01m2cm04t1enrq3zreb3rjjhpd
-  - type: blocks
-    target: is-01m2p0xq9nac6ftmr19978krh3
 parent_id: is-01m2b7n9tyq13n0zw4tkq4rfss
 created_at: 2026-09-09T05:13:40.284Z
-updated_at: 2026-09-16T21:24:05.036Z
+updated_at: 2026-09-17T02:36:05.231Z
 ---
 Phase 5: use the shared Search scheduler for known-record parameter sweeps and a fixed tuning/held-out partition declared before the campaign starts. Record the partition in the campaign manifest and reference it from every run; replay/resume preserves it. Report both best individual arrangement and configuration-level distributions/hit rates under equal work, plus held-out scores. Acceptance: no tuning on held-out outcomes, explicit cohort labels and seed blocks, exact manifest replay, same Pack run API. No separate Calibrate tab. Coordinate older think-wffa as research-acceptance follow-up, not duplicate UI work.
 
@@ -27,3 +25,6 @@ Phase 5: use the shared Search scheduler for known-record parameter sweeps and a
 2026-09-12 plan disposition: Calibrate becomes a parameter-sweep/held-out preset within deferred Search (think-vhgz), using the same single-run API. Do not implement a fourth tab or a separate optimization loop. New source belongs in top-level packages/workbench/ after current cleanup and extraction phases.
 
 2026-09-16 guidance addition from duplicate think-1han: split known-answer cases into declared calibration and held-out sets before tuning any stickiness or structural-guidance schedule. Do not make open-instance claims until held-out known packings reproduce valid high-quality results.
+
+
+2026-09-17 (PR #190 revision): the calibration and held-out cells are frozen headlessly by think-05o4; these Search presets read that partition rather than define it. think-0epc no longer waits on this bead.

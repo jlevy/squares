@@ -5,7 +5,7 @@ title: "Close PR #185 as superseded once PR #188 merges"
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels:
   - ci
@@ -13,6 +13,10 @@ labels:
 dependencies: []
 parent_id: is-01m2m5zjmj7dsycs1x6yxwcwwt
 created_at: 2026-09-17T01:50:18.246Z
-updated_at: 2026-09-17T01:50:18.246Z
+updated_at: 2026-09-17T01:52:26.563Z
 ---
 PR #188's description says it replaces the conflicting topology branches in #185 (claude/ci-validation-shard, still OPEN and CONFLICTING) and #186 (closed). After #188 merges, confirm from the merged tree that every #185 contribution is carried or deliberately superseded, close #185 with a comment linking the merge, and move think-t7zm (the lane bead that names #185's branch) to its terminal state.
+
+## Notes
+
+2026-09-16 audit of #185 and #186 against #188 da2259fb: every #185 contribution is carried, deliberately changed (post-collection --suite-a/--suite-b instead of --shard K/N; hosted records re-measured), or fixed (think-ysy5, think-e5os, think-iwxt), except concurrent exact verification, now tracked separately as a W5 task. #186 is fully carried; its wall check now runs inside packing-required and pages-required. Draft closing comment: Superseded by #188, which rebuilds this topology on current main and carries the fixture cuts, recorded-cost sharding (behind --suite-a/--suite-b), the standalone typecheck runner, browser-floor liveness on frontend, the Rust engine cache repair and exact-tree reuse, plus fixes for this PR's review findings (think-ysy5, think-e5os, think-iwxt). Concurrent exact verification was not carried and is tracked for a follow-up port.

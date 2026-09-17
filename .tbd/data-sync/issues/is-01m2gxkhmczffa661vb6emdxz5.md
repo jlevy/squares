@@ -5,7 +5,7 @@ title: "[epic] Strategies with declared guidance, compared in one evaluation loo
 kind: epic
 status: open
 priority: 1
-version: 14
+version: 18
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 refs:
   - kind: pr
@@ -24,8 +24,12 @@ child_order_hints:
   - is-01m2gyp18kcxq2g8gq7hjacg3n
   - is-01m2gyp41nh48d2kc155rrvzy7
   - is-01m2p0xq9nac6ftmr19978krh3
+  - is-01m2phc0kn0epvb9xnvzee5956
+  - is-01m2pkfjhe627n9qa4761eb6zm
+  - is-01m2pkfjyz4vn6cb3xvxhz61jc
+  - is-01m2pkfk9z36garp9891702grd
 created_at: 2026-09-14T21:36:39.047Z
-updated_at: 2026-09-16T22:15:34.938Z
+updated_at: 2026-09-17T02:35:10.526Z
 ---
 Owner, 2026-09-14: "the likeliness of how well this works is going to depend very much on how the structure and strategy work, and there are many midpoints that are not fully blind nor fully guided... different levels of configuration mapped everywhere, from just partitioning the connected components to the contact graphs to the contacts where the sides are flush, to simplified contact graphs where the touching components are simplified to be parallel initially... by contracting further, they could pull apart... build the simplified, highly efficient versions of each of these and use those as intermediate targets that are not fully blind but not fully showing the optimal solution."
 

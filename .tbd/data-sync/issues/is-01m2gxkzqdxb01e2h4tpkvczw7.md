@@ -5,17 +5,19 @@ title: Register the guidance ladder's hypotheses before the first round
 kind: task
 status: open
 priority: 1
-version: 5
+version: 8
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies:
   - type: blocks
-    target: is-01m2gxkvbndg46r6pjy3352cb8
-  - type: blocks
     target: is-01m2p0xq9nac6ftmr19978krh3
+  - type: blocks
+    target: is-01m2pkfjyz4vn6cb3xvxhz61jc
+  - type: blocks
+    target: is-01m2pkfk9z36garp9891702grd
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:36:53.481Z
-updated_at: 2026-09-16T21:24:05.021Z
+updated_at: 2026-09-17T02:35:20.894Z
 ---
 Register the ladder's hypotheses before any round, per the experiment loop, with the instrument marked not ready until the extraction and kernel mechanics exist. Candidates, each stated so it can fail:
 

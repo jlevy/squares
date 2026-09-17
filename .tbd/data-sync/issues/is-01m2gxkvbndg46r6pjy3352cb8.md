@@ -5,7 +5,7 @@ title: "The strategy evaluation loop: documents x n x disjoint seed blocks, with
 kind: feature
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels: []
 dependencies:
@@ -13,9 +13,11 @@ dependencies:
     target: is-01m2gxkxbhyqesd394p4ezr66c
   - type: blocks
     target: is-01m2p0xq9nac6ftmr19978krh3
+  - type: blocks
+    target: is-01m2pkfjhe627n9qa4761eb6zm
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-14T21:36:49.012Z
-updated_at: 2026-09-16T21:24:05.010Z
+updated_at: 2026-09-17T02:35:09.732Z
 ---
 Benchmark cells keyed by (n, rung, use), where use is start, welds, forces, shake or phases, measured on the package instrument with retained final poses, repaired-then-validated scoring and disjoint seed blocks at equal work.
 

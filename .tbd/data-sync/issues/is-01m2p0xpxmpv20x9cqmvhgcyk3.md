@@ -5,7 +5,7 @@ title: Implement shared headless guidance forces and schedules
 kind: feature
 status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels:
   - backend
@@ -13,12 +13,10 @@ labels:
   - animation
 dependencies:
   - type: blocks
-    target: is-01m2p0xq9nac6ftmr19978krh3
-  - type: blocks
     target: is-01m2p0xqsgzwv3pdx0a5rhq6zn
 parent_id: is-01m2p0wmnwn2dt3qnxwj4wwses
 created_at: 2026-09-16T21:10:50.035Z
-updated_at: 2026-09-16T21:24:14.761Z
+updated_at: 2026-09-17T01:58:15.803Z
 closed_at: 2026-09-16T21:24:14.760Z
 close_reason: Schedule composition and zero-strength/test requirements moved to think-os1n; CLI and deterministic receipt obligations moved to think-qx88 and think-gfqt.
 resolution: duplicate
