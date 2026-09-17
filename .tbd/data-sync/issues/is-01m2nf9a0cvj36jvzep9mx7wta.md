@@ -5,12 +5,13 @@ title: Make post-merge tree reuse classification fail closed
 kind: bug
 status: open
 priority: 1
-version: 2
+version: 3
+spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels: []
 dependencies: []
-parent_id: is-01m2m5zjmj7dsycs1x6yxwcwwt
+parent_id: is-01m1vrrktbrd2scnaqfe40eby4
 created_at: 2026-09-16T16:02:35.659Z
-updated_at: 2026-09-17T02:06:20.866Z
+updated_at: 2026-09-17T20:39:20.308Z
 ---
 PR #185 review: Step.reads_beyond_tree defaults False, so a newly added clock/network/git-dependent fast step is silently classified reusable and omitted after merge. Replace it with an explicit safe-default tree_reusable classification, and add a contract that every fast step is deliberately classified before exact-tree reuse may omit it.
 
