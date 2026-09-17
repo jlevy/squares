@@ -5,7 +5,7 @@ title: Reconcile CI topology PRs 183, 185, and 186 after the no-JS stack
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 labels: []
 dependencies:
   - type: blocks
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m2phfjztg9q7vckn8he9jb9e
   - is-01m2phtqcr35drpbd01xrh0g8q
 created_at: 2026-09-16T04:00:45.195Z
-updated_at: 2026-09-17T03:29:02.786Z
+updated_at: 2026-09-17T04:18:28.841Z
 ---
 After PRs 175, 178, 179, 181, and 180 reach main, reconcile rather than wholesale-merge the three overlapping CI branches. Preserve PR 183 parallel Pages architecture after fixing its critical-path checkout and remeasuring; selectively port PR 185 fixture, browser-floor, standalone typecheck, and per-file-cost improvements without replacing the admitted suite-a/suite-b sharder; preserve PR 186 wall-measurement framework after fixing its Python 3.14 Ruff syntax and rewiring it to the final topology. Require exact-head hosted measurements, one consistent 180-second wall authority, and clean fast/Page gates.
 
@@ -41,3 +41,6 @@ Independent senior reviews and a separate reconciliation audit agree: do not reb
 
 
 2026-09-17 hosted evidence at 21642ed8: Pages run 35176748416 green. Packing run 35176748398 attempt 1 failed only the suite_b drift rule (work 82.6 s vs recorded 143.98 s, 0.57x; 4,003 passed); attempt 2 passed suite_b (137-141 s) but packing-required failed the pull-request wall at 216 s against 180 s (suite-b last: queued 3 s, setup 60 s including a 49 s full-history checkout, work 141 s). At 7d76b044 the wall was 178 s. Hosted variance on identical code is up to 1.8x per tier. Independent review of cb705c67..21642ed8: APPROVE WITH NITS for the code; merge blocked by the red required aggregate. Should-fix: session 137 must record 21642ed8, the push and these runs. Nits: agendas 031 and 033-035 wording, cap-comment diff description, SYNOPSIS "repaired" wording, exact deploy-condition test, guard empty artifact ids. In progress: wall stability (checkout cost, multi-cohort shard rebalance), code nits, then register recalibration from new exact-head runs (a record between ~92 and ~138 s accepts all three suite_b readings; 82.6 would not).
+
+
+2026-09-17 owner decision: make the pull-request wall advisory on #188 (measured and reported, not failing the required aggregates) until think-g4n9 brings the worst case under 180 s and re-enforces it; everything else stays blocking. Committed on #188: 957e37af (review nits: exact deploy conditions, guarded artifact-id downloads, pruning comment), c4f0660d (suite shards rebalanced from same-speed cohort 35175474610; 16 phantom cost rows removed; blobless and sparse suite checkouts measured and refused). In progress: advisory wall implementation; then pre-push gate, push, three exact-head hosted samples with per-attempt artifact capture, register recalibration from those, session 137 update (review S1, N2, N3), final review of the delta.
