@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m2p0xq9nac6ftmr19978krh3
-title: Run pre-registered stickiness and guidance sweeps on known packings
+title: Run the pre-registered systematic guidance sweep on known packings
 kind: task
 status: open
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 refs:
   - kind: pr
@@ -17,9 +17,9 @@ labels:
 dependencies: []
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-16T21:10:50.420Z
-updated_at: 2026-09-17T02:36:05.658Z
+updated_at: 2026-09-17T03:01:06.163Z
 ---
-Use the durable experiment loop to run paired, interleaved seed sweeps over ordinary stickiness and each guidance tier. Start with known-answer controls spanning small, medium, crowded, symmetric, and multi-component contact structures; tune only on the declared calibration set and judge on held-out cases. Record every accepted, rejected, invalid, and no-effect round with median/range or stronger intervals, fixed budgets, exact engine commit/configuration, and generated ledger views. Only after the known controls recover high-quality valid packings may the campaign test open instances or claim search benefit.
+Use the durable experiment loop to run paired, interleaved seed sweeps over each structural guidance tier, at the stickiness level think-9hdg confirmed. Start with known-answer controls spanning small, medium, crowded, symmetric, and multi-component contact structures; tune only on the frozen calibration cells (think-05o4) and judge on held-out cells under the registered deciding statistic. Record every accepted, rejected, invalid, ineligible and no-effect round with fixed budgets, realized work ratios, exact engine commit/configuration, and generated ledger views. Only after the known controls recover high-quality valid packings may the campaign test open instances or claim search benefit.
 
 ## Notes
 

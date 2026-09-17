@@ -5,7 +5,7 @@ title: Reconcile CI topology PRs 183, 185, and 186 after the no-JS stack
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 20
 labels: []
 dependencies:
   - type: blocks
@@ -25,7 +25,7 @@ child_order_hints:
   - is-01m2phfjztg9q7vckn8he9jb9e
   - is-01m2phtqcr35drpbd01xrh0g8q
 created_at: 2026-09-16T04:00:45.195Z
-updated_at: 2026-09-17T02:06:18.006Z
+updated_at: 2026-09-17T03:29:02.786Z
 ---
 After PRs 175, 178, 179, 181, and 180 reach main, reconcile rather than wholesale-merge the three overlapping CI branches. Preserve PR 183 parallel Pages architecture after fixing its critical-path checkout and remeasuring; selectively port PR 185 fixture, browser-floor, standalone typecheck, and per-file-cost improvements without replacing the admitted suite-a/suite-b sharder; preserve PR 186 wall-measurement framework after fixing its Python 3.14 Ruff syntax and rewiring it to the final topology. Require exact-head hosted measurements, one consistent 180-second wall authority, and clean fast/Page gates.
 
@@ -35,3 +35,9 @@ Independent senior reviews and a separate reconciliation audit agree: do not reb
 
 
 2026-09-16 recovery (Claude session after both Codex continuation threads stopped at ~22:17Z): local head da2259fb is 15 commits ahead of GitHub (remote c5a33270, stale CI, shows CONFLICTING only because it predates the main merge; local is 0 behind origin/main 035d84c6). cb705c67 (review gaps, think-f5cc) was independently approved; 27a53a8a differs from it only by the 192 MiB cap; da2259fb restores 160 MiB with a dated note. Gate receipts: 27a53a8a pre-push 6,558 passed / 28 skipped, browser floor unrun (no node_modules); da2259fb pre-push running. Remaining: exact-head pre-push pass, push, PR body refresh, green hosted Packing+Pages aggregates under 180 s, fresh independent review of that head, merge, then think-lop3 (#185) and think-z74z (session record). Child bead evidence audit in progress.
+
+
+2026-09-17 update: pushed 7d76b044 (c5a33270..7d76b044) after the pre-push gate passed there (6,599 passed, 9 skipped, 49 of 80 steps). New since the recovery note: 2def8265 Pages deploy fix (think-w7oy), 9bac5b7f negative tests (think-pu7l, think-ysy5, think-iwxt), 7d76b044 session 137 record and plan checklist corrections (think-z74z, closed). think-30sx closed on the da2259fb receipt. Remaining: hosted exact-head aggregates at 7d76b044 and their wall readings into gate-budgets.yaml (which moves the head), fresh independent review of the final head, merge, then think-lop3 and the first post-merge deploy (think-w7oy).
+
+
+2026-09-17 hosted evidence at 21642ed8: Pages run 35176748416 green. Packing run 35176748398 attempt 1 failed only the suite_b drift rule (work 82.6 s vs recorded 143.98 s, 0.57x; 4,003 passed); attempt 2 passed suite_b (137-141 s) but packing-required failed the pull-request wall at 216 s against 180 s (suite-b last: queued 3 s, setup 60 s including a 49 s full-history checkout, work 141 s). At 7d76b044 the wall was 178 s. Hosted variance on identical code is up to 1.8x per tier. Independent review of cb705c67..21642ed8: APPROVE WITH NITS for the code; merge blocked by the red required aggregate. Should-fix: session 137 must record 21642ed8, the push and these runs. Nits: agendas 031 and 033-035 wording, cap-comment diff description, SYNOPSIS "repaired" wording, exact deploy-condition test, guard empty artifact ids. In progress: wall stability (checkout cost, multi-cohort shard rebalance), code nits, then register recalibration from new exact-head runs (a record between ~92 and ~138 s accepts all three suite_b readings; 82.6 would not).

@@ -5,7 +5,7 @@ title: "Senior-review and merge PR #190, the graded guidance plan"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 7
 spec_path: docs/project/specs/active/plan-2026-09-11-annealing-as-a-search.md
 labels:
   - workbench-roadmap
@@ -13,7 +13,7 @@ labels:
 dependencies: []
 parent_id: is-01m2gxkhmczffa661vb6emdxz5
 created_at: 2026-09-17T01:58:15.924Z
-updated_at: 2026-09-17T02:38:11.052Z
+updated_at: 2026-09-17T03:22:22.498Z
 ---
 PR #190 (codex/guided-annealing-plan) adds O8/Phase 5A to the workbench plan, the graded-guidance section of the annealing plan and exploration X-036. Its senior review of 08264a4a was interrupted at 15:17 on 2026-09-16 with no verdict. The recovery added a9b19b7a (timing sits beside the receipt; the full-poses rung stays outside GuidanceTarget/v1). Done when an independent senior review approves the exact pushed head, the PR body's review line names that head and verdict, hosted checks are green, and the PR is merged.
 
@@ -43,3 +43,27 @@ CHECKED FINE: all 17 referenced beads exist with sensible states; generated ledg
 
 
 2026-09-17: cdd9aad8 resolves the a9b19b7a findings (plan revision by a Claude sub-agent, coordinator-checked; records tier passed). tbd changes applied to match the prose: created think-10yz, think-05o4, think-9hdg; removed think-0epc<-think-3yma and think-qx88<-think-gdkd; added think-9hdg<-think-05o4, think-3yma<-think-05o4, think-czav<-think-10yz, think-wln2<-(think-czav, think-10yz), think-0epc<-(think-10yz, think-9hdg, think-05o4), think-9sdr<-(think-o4wo, think-5tyy); notes updated on think-8ocb (corrects the springs misattribution), think-rey9, think-os1n, think-gfqt, think-3yma, think-0epc. Re-review of cdd9aad8 in progress.
+
+
+2026-09-17 independent senior re-review of PR #190 at exact head cdd9aad8 (read-only): CHANGES REQUESTED, no blockers. Resolved: S1, S2, S3, S9, S10, N1-N7; B1, S4, S5 mostly; S6, S7, S8 partly.
+
+SHOULD-FIX
+SF1. Grid start is not label-agnostic (AP:444-449, X36:152-157, ideas.md:558): createGridPackStart(n) (pack.ts:350-363) is unseeded and places square i at cell i, so numbering decides initial adjacency identically in every block; if record ids are ordered (n=11 classes at 0-5, 6-10) the true partition and true graph (184) get a head start. Only seeded random has interchangeable labels. Fix: seed-derived relabelling for every structural arm at grid, or treat grid as label-dependent; Search's label-dependent start is record-append (no previous/blocks proposal in Search).
+SF2. Product acceptance waits on research registration: tbd think-wln2 <- think-3yma <- think-05o4 <- think-gdkd (05o4 labelled research), contradicting WP:694-698; WP:621 still says 3yma fixes partitions. Fix: drop 3yma<-05o4 (presets read any manifest partition, tested on a fixture) or state O5 waits; update WP:621.
+SF3. AP:547 falsely says o4wo/5tyy do not block receipt work; 10yz <- gfqt <- 9sdr <- o4wo/5tyy (WP:665-666 is right). Fix: they don't block contract, extraction or kernel work; guided receipts wait on them via the base scheduler.
+SF4. "Animate replays of reported trials" is not implementable (AP:540-546, X36:214-216, README:405): Animate's TrajectoryRequest (trajectory.ts:65-82) is a corpus transition in blind/free/snap with adaptive substeps; Search trials from grid/random/record-append with a squeezing container have no equivalent, Pack keeps no trajectory, re-integration changes the path. Fix: define replay as resampling a retained Pack trajectory at presentation rate and assign a bead, or drop the o4wo/5tyy blockers from the headless rounds.
+SF5. Work-matching underspecified (AP:504-515, X36:189-195): "same slots per block" vs "comparator gets extra slots" contradict; extra slots' seeds break pairing; calibration multiplier applied to held-out without check. Fix: shared base slots; compensation slots from a reserved disjoint seed range; multiplier fixed per (contrast, setting) before calibration; report realized held-out work ratio, invalid (not re-tuned) outside a declared tolerance.
+SF6. Which arms decide is unclear: AP:480 says oriented must beat both, but table AP:496-501 lists nearest-face torque under other required arms with non-deciding arms. Fix: mark each arm deciding vs reported.
+SF7. X-035:164-165 says first measurements wait for a frozen guidance contract; X36:148-149 and README:701 say the first round needs none. Reword.
+Also: think-10yz done-when requires O8 identical overlays, but overlays are think-czav's and czav is blocked by 10yz (cycle). Fix: 10yz covers receipts and reports; overlays move to czav or wln2.
+
+NITS
+SearchTrialValue.configuration copies the declared config (pack-runner.ts:549-559, 692): successor must store canonical effective config. Exact zero-strength replay requires the guidance force in a separate pass (else broad-phase cells or summation order change). Deciding statistic: define worst as +inf, touching endpoints count as overlap, require >=1 calibration and >=1 held-out eligible cell per contrast, define selection pooling across calibration cells, 186 when no tier carried a setting, small-strength pass criterion. Wrong-feature control permutes within contact kind. Define the thinned twin explicitly (keep means kept for thinned, moved for rewired; schema:72-75). Stale: X-034:270 "shuffled"; WP:18-19 describes 0epc as stickiness and guidance; WP:696 and X36:135 omit 05o4/9hdg/10yz; X36:148-151 omits i5pg/i08r; "Search cohort CLI" is not a gfqt deliverable and no Node Search CLI exists. Beads: think-gdkd candidate hypotheses use valid rate not block-best side; think-0epc title still includes stickiness. Flowmark not applied at AP:563, 580, 584, 591.
+
+CHECKED: tbd edges match the brief for 10yz, 05o4, 9hdg, 0epc, 3yma, qx88, czav, wln2, 9sdr and most prose; contact counts n=11 14 (7/6/1), n=29 52 (28/19/5), both single components; broad-phase widening holds only when range exceeds cell - sqrt(2) (~0.086 at cell 1.5); defaults marked as not results; generated records consistent.
+
+
+2026-09-17: ecb44f8f resolves the cdd9aad8 re-review (SF1-SF7, 10yz/czav overlay cycle, nits); records tier passed. tbd applied: removed think-3yma<-think-05o4, think-9hdg<-(think-o4wo, think-5tyy), think-0epc<-(think-o4wo, think-5tyy); think-0epc retitled 'Run the pre-registered systematic guidance sweep on known packings' with a narrowed description; think-gdkd hypotheses restated against the deciding statistic; think-10yz and think-9hdg descriptions narrowed; think-czav owns O8 overlays; think-gfqt owns the Node Search command. Confirming review of ecb44f8f in progress.
+
+
+2026-09-17: the confirming review of ecb44f8f requested one should-fix (only a lighter comparator was compensated while the work-ratio band invalidated in both directions); 8eda51f1 resolves it (the lighter arm, candidate or comparator, runs compensation slots; the work-only pilot covers every frozen cell; the band has a lower bound; an invalid held-out comparison makes its stage invalid). The independent senior review of 8eda51f1 APPROVED with four nits: 903e2277 applies the two wording nits (carried-forward settings freeze before any held-out outcome run; compensation is decided per comparison), and the two design nits (a per-cell compensation multiplier; what an invalid calibration comparison does to selection) are recorded on think-gdkd. Verified mergeable at exact head 903e2277 (local worktree and PR head agree, worktree clean): packing-validate --records passed 33/33 selected steps in 102.80s wall; packing-ledger check passed; git diff --check origin/main...HEAD clean; hosted checks 13 passed, 21 skipped by scope, none failed (Packing validation, Certificate page, Branch mergeability all success on 903e2277; Deferred checkpoint skipped); GitHub mergeable=MERGEABLE, mergeStateStatus=CLEAN; 0 commits behind origin/main (035d84c6); reviewDecision is empty because the reviews were independent agent reviews and main has no branch protection or rulesets. One known formatting drift: the annealing plan paragraph at lines 554-556, edited in 903e2277, is not reflowed under flowmark-rs 0.4.0; drift does not fail CI and the commit hook reflows it on the next commit. PR body review and validation lines updated to this state. Remaining: merge, then close this bead.
