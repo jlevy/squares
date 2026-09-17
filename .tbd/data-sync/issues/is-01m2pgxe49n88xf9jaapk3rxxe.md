@@ -5,7 +5,7 @@ title: "Close PR #185 as superseded once PR #188 merges"
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 labels:
   - ci
@@ -13,7 +13,7 @@ labels:
 dependencies: []
 parent_id: is-01m2m5zjmj7dsycs1x6yxwcwwt
 created_at: 2026-09-17T01:50:18.246Z
-updated_at: 2026-09-17T06:09:14.140Z
+updated_at: 2026-09-17T06:35:49.466Z
 ---
 PR #188's description says it replaces the conflicting topology branches in #185 (claude/ci-validation-shard, still OPEN and CONFLICTING) and #186 (closed). After #188 merges, confirm from the merged tree that every #185 contribution is carried or deliberately superseded, close #185 with a comment linking the merge, and move think-t7zm (the lane bead that names #185's branch) to its terminal state.
 
@@ -23,3 +23,6 @@ PR #188's description says it replaces the conflicting topology branches in #185
 
 
 2026-09-17 owner request: make PR #185 ready to merge and sequence it with #188 rather than only closing it. Plan: merge #188 first; rebuild #185 as a stacked follow-up on codex/ci-topology-reconcile carrying only the work #188 lacks (think-5hfr's concurrent exact-verification subprocesses and anything else the compatibility analysis finds unique), base codex/ci-topology-reconcile until #188 merges, then main. Close as superseded only if nothing unique remains. Old head f462ccbb will be backed up before the branch is updated.
+
+
+2026-09-17 superseded by the owner's request to make #185 mergeable: #185 is rebuilt as a stacked follow-up on #188 (branch claude/ci-validation-shard-rebuild, commits 485f9236 concurrent exact verification for think-5hfr and c9596d89 guard tests); everything else in #185 was classified present in or superseded by #188 (attic/pr185/compat.txt in the consolidate-stack worktree). Sequence: #188, then #185 (auto-retargets to main when #188's branch is deleted on merge), then #190 (conflicts with #188 only in SYNOPSIS generated counts), then the workbench PRs. Close this bead when #185 merges.
