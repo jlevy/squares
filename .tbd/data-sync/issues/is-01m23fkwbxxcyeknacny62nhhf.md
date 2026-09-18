@@ -5,7 +5,7 @@ title: "Certificate format cannot express two atom classes: K5 clique and K6 flo
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
   - is-01m25255yg6wqveyja558g7sys
   - is-01m254319zrn2ezbzsqnejdn72
 created_at: 2026-09-09T16:22:02.365Z
-updated_at: 2026-09-10T16:04:49.415Z
+updated_at: 2026-09-18T02:40:40.223Z
 ---
 Extend the certificate format and both covering routes to retain the weighted and floor charges already returned by the separator. Source: agenda034 lane A4 finding P10 and lane A5 F6. This is a representation and verification prerequisite, not evidence that the unconditional language or conditional route is exhausted.
 
@@ -27,5 +27,7 @@ Implement exact event-cell coverage and the separately structured interval route
 The retained A5 value10 is exact for its finite final row set and an upper bound for the full rank-one closure on that fixed support. The corrected H155 conditional route remains live; this format may be useful to either strand. Primary paths use packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/.
 
 ## Notes
+
+X-037 2026-09-18: the language is admitted. Weighted-majority, k-of-S, and floor atoms may enter a retained certificate once this bead lands a verifier that preserves T-025/T-026 bytes in 2-of-3 threshold mode. Format admission is not a bound and does not unblock H-217 until the verifier, sites-1, and guarded colgen exist. Implementation continues here.
 
 The private floor counting proof and both numerical routes passed bounded independent source review. Sol repaired serializer/loader round-trip and inert-row NumPy overflow; Astra xhigh independently passed both corrections in /private/tmp/n11-floor-atom-correction-review.md, with 30 maintained controls and separate unequal-gap, extreme inert-operand and active-bound controls. Root applies the reviewed nonuniform test fixture improvement. Children think-h1ju and think-k1pe remain open for post-merge adoption. Production dispatch, legacy threshold migration, low-memory support, source manifests and K5 are separate unfinished obligations. No scientific target ran.
