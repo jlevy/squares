@@ -639,6 +639,15 @@ M2, M4, M5, M6, and M8 stay retired in agenda-037 BC-360. `exp-161` remains Rout
 | 187 | A helper-free point-atom certificate exists for n=6 at side 299/100 | registered | [H-216](hypotheses/H-216-point-certificate-at-n6-299-100.md) | Confirm with a frozen covering below 6 that both decide_certificate routes accept; kill with an exact depth-one family of total at least 6. Attic scratch does not decide it. Calibration only; s(6)=3 does not move. |
 | 188 | Rows-complete majority, k-of-S, and floor covering at 153/40 falls below 11 | registered | [H-217](hypotheses/H-217-route-f1-majority-floor-at-153-40.md) | Kill with a depth-one mass-11 family feasible for every admitted majority, k-of-S, and floor atom; confirm with decide_threshold_certificate (or the think-g3j7 successor) at budget < 11 and least charge >= 1. Blocked on the new reader, sites-1, and guarded colgen. |
 
+## N<=100 lower-bound survey — X-038
+
+[X-038](explorations/X-038-n100-lower-bound-survey.md) ranks the open floors at
+`n <= 100` against the stock colgen. Session-140 runs the first wave.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 189 | Stock colgen raises a verified floor at n in {12, 17, 19, 20} | registered | [H-218](hypotheses/H-218-existing-colgen-raises-a-small-n-floor.md) | Confirm only on RETAINABLE at a side above the current floor. A site set above n is a construction negative, not a wall. n=11 stays T-026. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

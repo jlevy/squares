@@ -1,0 +1,61 @@
+# Session-140 second-wave covering queue. Nagamochi-only floors from
+# second-wave-nagamochi-triage.md. No first-party seed certificate.
+# Start only after the first-wave probes (and the n=20 longer wall) finish.
+# Producer: python -m devtools.run_covering_queue --queue this file.
+probes:
+  - id: n32-29-5-auto-windows5
+    n: 32
+    side: '29/5'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9
+  - id: n31-57-10-auto-windows5
+    n: 31
+    side: '57/10'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9
+  - id: n30-559-100-auto-windows5
+    n: 30
+    side: '559/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9
+  - id: n26-513-100-auto-windows5
+    n: 26
+    side: '513/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9
+  - id: n27-525-100-auto-windows5
+    n: 27
+    side: '525/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9
+  - id: n29-548-100-auto-windows5
+    n: 29
+    side: '548/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9
+  - id: n45-684-100-auto-windows5
+    n: 45
+    side: '684/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9
+  - id: n44-675-100-auto-windows5
+    n: 44
+    side: '675/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-b6n9

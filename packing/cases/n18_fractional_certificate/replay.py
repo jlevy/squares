@@ -1,12 +1,13 @@
 """Load the retained n = 18 certificate and hand it to the exact verifier.
 
-One certificate is retained. ``certificate.json`` sits at container side 467/100
-with total mass 8937839/500000. The atoms carry more than one registered case
-each: only Condition 2 mentions n among the five conditions, so a set of total
-mass M certifies its side for every integer strictly above M. This mass lies in
-[17, 18), so it certifies n = 18 and says nothing about n = 17, where T-019's
-459/100 certificate still holds the register. From n = 19 on the register already
-holds 24/5, so the certificate is true there and weaker.
+Two certificates are retained. ``certificate.json`` sits at container side 187/40
+with total mass 35758287/2000000; ``certificate-467-100.json`` is the previous
+rung that was the top until 2026-09-19. The atoms carry more than one registered
+case each: only Condition 2 mentions n among the five conditions, so a set of
+total mass M certifies its side for every integer strictly above M. Both masses
+lie in [17, 18), so each certifies n = 18 and says nothing about n = 17, where
+T-019's 459/100 certificate still holds the register. From n = 19 on the
+register already holds 24/5, so both certificates are true there and weaker.
 
 The JSON carries exact rationals as strings, so a replay reconstructs the same
 object the generator proposed.
@@ -24,6 +25,9 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
+#: The rung that was the top until 2026-09-19. Named rather than globbed so the
+#: T-027 replay stays pinned after the live pointer moved to 187/40.
+RUNG_467_100_PATH = Path(__file__).with_name("certificate-467-100.json")
 
 
 def _from_record(record: dict) -> Certificate:

@@ -918,15 +918,15 @@
           "state": "closed-form"
         },
         "lower": {
-          "display": "s(18) ≥ 4.67",
+          "display": "s(18) ≥ 4.675",
           "evidence": [
             "E-fractional-interval-decision",
-            "E-n018-fractional-certificate"
+            "E-n018-t028-fractional-certificate"
           ],
           "first_proved_here": true,
           "provenance": "frontier",
           "shown": true,
-          "value": "4.67"
+          "value": "4.675"
         },
         "n": 18,
         "optimality": {

@@ -36,6 +36,9 @@ from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from cases.n18_fractional_certificate.__main__ import replay as replay_n18
+from cases.n18_fractional_certificate.replay import RUNG_467_100_PATH
+from cases.n18_fractional_certificate.replay import declared as n18_declared
+from cases.n18_fractional_certificate.replay import load as n18_load
 from cases.n20_fractional_certificate.__main__ import replay as replay_n20
 from cases.n20_fractional_certificate.replay import RUNG_24_5_PATH
 from cases.n20_fractional_certificate.replay import declared as n20_declared
@@ -576,6 +579,33 @@ def test_the_n17_certificate_is_accepted() -> None:
     assert verdict.minimum_cell_mass is not None
     assert verdict.minimum_cell_mass >= 1
     assert n17_declared()["least_cell_mass"] == str(verdict.minimum_cell_mass)
+
+
+def test_the_n18_certificate_displaces_the_previous_rung() -> None:
+    """s(18) >= 187/40 beats T-027, decided from the file.
+
+    What the live pointer claims is checked here; the named 467/100 file stays
+    the T-027 artifact after the pointer moved. Acceptance is the exhaustive
+    interval test on the live bytes.
+    """
+    certificate = n18_load()
+    assert certificate.n == 18
+    assert certificate.bounded_side == Fraction(187, 40)
+    assert certificate.bounded_side > Fraction(467, 100)
+    assert certificate.total_mass == Fraction(35758287, 2000000)
+    assert certificate.total_mass < 18
+    assert len(certificate.atoms) == 725
+
+    record = n18_declared()
+    assert record["claim"] == "s(18) >= 187/40"
+    assert record["total_mass"] == str(certificate.total_mass)
+    assert record["least_cell_mass"] == "4000013/4000000"
+
+    rung = n18_load(RUNG_467_100_PATH)
+    assert rung.bounded_side == Fraction(467, 100)
+    assert rung.total_mass == Fraction(8937839, 500000)
+    assert len(rung.atoms) == 769
+    assert n18_declared(RUNG_467_100_PATH)["least_cell_mass"] == "2000007/2000000"
 
 
 def test_the_n17_certificate_does_not_reach_n20() -> None:

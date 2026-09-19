@@ -154,6 +154,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-137](agent-sessions/session-137-ci-topology-continuation-recovery.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `remediation` (correctness) | 3 | think-97we | think-97we closed when PR 188 and PR 185 merged, and the remaining closeout debt on the final head now sits under think-g4n9: hold both pull-request walls at or under 180 s over the declared run of consecutive exact-head hosted runs, then switch the wall check back to enforcing. Then resume BC-343 under think-ufmk without changing its scientific claim or allocating exp-161 from this block. |
 | [session-138](agent-sessions/session-138-n11-overnight-review.md) | stopped | mixed | `factual-review` (insight) | `documentation-pass` (process) | 6 | think-4woh | Close M7's n=6 bracket at 299/100 under BC-357 / think-qqzs. H-216 is the registered determination. G1, G2, G3, and G5 are on main; G4 remains on this bead. |
 | [session-139](agent-sessions/session-139-n11-overnight-research.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (process) | 4 | think-mcb6 | Continue H-216 under think-qqzs. Route S encode-only timed out unresolved; a later block re-runs encode before --search. |
+| [session-140](agent-sessions/session-140-lb-survey.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `review-planning-oversight` (process) | 3 | think-8x4t | Continue H-216 under think-qqzs. |
 
 ### Workflow summary
 
@@ -166,11 +167,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 24 | 1 | 80 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 10 | 1 | 36 | 1 |
-| `research-loop` | 27 | 4 | 99 | 8 |
+| `research-loop` | 27 | 4 | 100 | 8 |
 | `pipeline-improvement` | 33 | 2 | 151 | 5 |
 | `documentation-pass` | 1 | 0 | 24 | 1 |
 | `remediation` | 0 | 1 | 0 | 3 |
-| `review-planning-oversight` | 3 | 0 | 17 | 2 |
+| `review-planning-oversight` | 4 | 0 | 19 | 2 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
@@ -780,7 +781,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 129 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 130 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -941,6 +942,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | H-215 | open question | search | Which headless kinetic measurements, if any, predict that a fixed-budg |  | 0 |  |  |
 | H-216 | open | proof | A helper-free point-atom certificate exists for n=6 at container side  |  | 0 |  |  |
 | H-217 | blocked | proof | The rows-complete covering LP with weighted-majority, k-of-S, and floo |  | 0 |  |  |
+| H-218 | abandoned | proof | A rows-complete covering of mass strictly below n exists at a containe | n: 12 17 19 20* | 1 |  | 238.0m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -989,12 +991,13 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | exp-211 | series-000 | 17 | Codex with delegated measurement agents | H-213 | Every solver-transition group at the frozen commit misses at least one required 60 Hz budget; the instrument is ready, but physical tuning remains open. |
 | exp-212 | series-000 | 17 | Codex with delegated measurement agents | H-214 | Both predicted orders reverse in at least one transition: rigid exceeds soft penetration in Physics at n = 90, and sticky has fewer mean contacts than balanced at n = 90 in both solvers; continuity guards also fail at the frozen commit. |
 
-### abandoned (2)
+### abandoned (3)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
+| exp-162 | series-000 | 20 | Cursor session-140 | H-218 | The Session-140 research wall expired with no RETAINABLE freeze on the H-218 sweep. Closest masses were leftover n=20 971/200 at 19.910044 unconverged and leftover n=12 3969/1000 at 12.091168 after crossing 12. T-028 at n=18 does not confirm H-218. |
 
 ### unresolved (31)
 
@@ -1130,6 +1133,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | exp-158 | H-160 |  | dependency |  |  |
 | exp-160 | H-162 |  | dependency |  |  |
 | exp-161 | H-163 | 180.1m wall | timebox | Re-run encode-only under a new lease; no partial encoding wa |  |
+| exp-162 | H-218 | 238.0m wall | timebox | Leftover n=18 1871/400 T-028 auto plus windows 5, then secon | A new named site set at n in {12, 17, 19, 20} whose restrict |
 | exp-207 | H-207 | 1 round unrecorded | dependency |  |  |
 | exp-208 | H-212 | 1 round unrecorded | dependency |  |  |
 | exp-209 | H-212 | 1 round unrecorded | dependency |  |  |
@@ -1137,7 +1141,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 
 ## Effort
 
-129 rounds, 2512.1 agent-minutes, 1979.8 wall-minutes.
+130 rounds, 2512.1 agent-minutes, 2217.8 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

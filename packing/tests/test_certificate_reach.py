@@ -269,7 +269,7 @@ def test_an_empty_tilt_inventory_is_refused() -> None:
 def test_the_packing_limited_ratios_sit_inside_a_tight_band() -> None:
     """The packing-limited rows at n = 11 and n = 17 land within 0.001 of each other.
 
-    n = 18 is packing-limited too, at a lower ratio: T-027's 467/100 covering was not
+    n = 18 is packing-limited too, at a lower ratio: T-028's 187/40 covering was not
     pushed to the packing. n = 11 and n = 17 are the tight pair. It was three until
     T-021: the n = 20 package keyed to n = 19, where the best packing bound it, and
     the 97/20 rung moved it to n = 20, where the ceiling 4.9885 sits below the best

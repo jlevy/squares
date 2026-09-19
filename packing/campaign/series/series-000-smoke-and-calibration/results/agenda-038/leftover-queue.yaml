@@ -1,0 +1,44 @@
+# Session-140 leftover first-wave probes. Start only after first-wave-queue.yaml
+# finishes (n=20 2400 s, then n=21). Ranking is leftover-side-ranking.md.
+# Untried sides or site sets only. Do not replay a set already above n.
+probes:
+  - id: n19-241-50-t020-auto-windows6
+    n: 19
+    side: '241/50'
+    grid_counts: auto
+    seed_certificate: cases/n20_fractional_certificate/certificate-24-5.json
+    seed_windows: 6
+    deadline_seconds: 1200
+    bead: think-zoq4
+  - id: n17-461-100-t019-auto-windows5
+    n: 17
+    side: '461/100'
+    grid_counts: auto
+    seed_certificate: cases/n17_fractional_certificate/certificate.json
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-5q81
+  - id: n20-971-200-t021-auto-windows6
+    n: 20
+    side: '971/200'
+    grid_counts: auto
+    seed_certificate: cases/n20_fractional_certificate/certificate.json
+    seed_windows: 6
+    deadline_seconds: 1200
+    bead: think-d2ad
+  - id: n12-3969-1000-t017-grid4-windows7
+    n: 12
+    side: '3969/1000'
+    grid_counts: '26,35,43,48'
+    seed_certificate: cases/n12_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-h02v
+  - id: n18-1871-400-t028-auto-windows5
+    n: 18
+    side: '1871/400'
+    grid_counts: auto
+    seed_certificate: cases/n18_fractional_certificate/certificate.json
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-avmz
