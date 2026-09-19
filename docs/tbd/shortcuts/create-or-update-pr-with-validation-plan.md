@@ -39,6 +39,11 @@ Create a to-do list with the following items then perform all of them:
    If `.github/PULL_REQUEST_TEMPLATE.md` exists, use its section order and retain every
    applicable section. For a terminal research agenda, use the repository close command
    to generate the cost-first description from the checked agenda closeout.
+   Cost is two to four sentences, or the generated rollup, not a list of every
+   experiment wall. Dispositions are one row per decision.
+   Write the body to a file and, from `packing/`, run
+   `python -m devtools.check_pr_description --file BODY.md` before opening or updating
+   the pull request.
 
    Use conventional commit prefixes: `feat`, `fix`, `docs`, `style`, `refactor`, `test`,
    `chore`, `plan`, `research`, `ops`, `process`. Scope is optional—only add when it

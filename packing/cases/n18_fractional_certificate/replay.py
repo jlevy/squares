@@ -1,13 +1,16 @@
 """Load the retained n = 18 certificate and hand it to the exact verifier.
 
-Two certificates are retained. ``certificate.json`` sits at container side 187/40
-with total mass 35758287/2000000; ``certificate-467-100.json`` is the previous
-rung that was the top until 2026-09-19. The atoms carry more than one registered
-case each: only Condition 2 mentions n among the five conditions, so a set of
-total mass M certifies its side for every integer strictly above M. Both masses
-lie in [17, 18), so each certifies n = 18 and says nothing about n = 17, where
-T-019's 459/100 certificate still holds the register. From n = 19 on the
-register already holds 24/5, so both certificates are true there and weaker.
+Four certificates are retained. ``certificate.json`` sits at container side
+4679/1000 with total mass 71573611/4000000; ``certificate-1871-400.json`` is the
+rung that was the top until later on 2026-09-19; ``certificate-187-40.json`` is the
+rung that was the top until later on 2026-09-19; ``certificate-467-100.json``
+is the rung that was the top until 2026-09-19. The atoms carry more than one
+registered case each: only Condition 2 mentions n among the five conditions, so a
+set of total mass M certifies its side for every integer strictly above M. All
+four masses lie in [17, 18), so each certifies n = 18 and says nothing about
+n = 17, where T-019's 459/100 certificate still holds the register. From n = 19
+on the register already holds 24/5, so all four certificates are true there and
+weaker.
 
 The JSON carries exact rationals as strings, so a replay reconstructs the same
 object the generator proposed.
@@ -25,6 +28,12 @@ from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom
 
 CERTIFICATE_PATH = Path(__file__).with_name("certificate.json")
+#: The rung that was the top until later on 2026-09-19. Named rather than globbed
+#: so the T-029 replay stays pinned after the live pointer moved to 4679/1000.
+RUNG_1871_400_PATH = Path(__file__).with_name("certificate-1871-400.json")
+#: The rung that was the top until later on 2026-09-19. Named rather than globbed
+#: so the T-028 replay stays pinned after the live pointer moved to 1871/400.
+RUNG_187_40_PATH = Path(__file__).with_name("certificate-187-40.json")
 #: The rung that was the top until 2026-09-19. Named rather than globbed so the
 #: T-027 replay stays pinned after the live pointer moved to 187/40.
 RUNG_467_100_PATH = Path(__file__).with_name("certificate-467-100.json")

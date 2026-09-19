@@ -1,0 +1,155 @@
+# Session-141 ranked covering queue. Ranking is ranked-queue.md.
+# Untried sides or site sets only. Do not replay a set already above n.
+# First walker --stop-at 2026-09-19T10:26:00Z (W5). Resume the same file after 11:26Z
+# with --stop-at 2026-09-19T15:26:00Z.
+probes:
+  - id: n18-1871-400-t028-auto-windows5
+    n: 18
+    side: '1871/400'
+    grid_counts: auto
+    seed_certificate: cases/n18_fractional_certificate/certificate.json
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-u11x
+    hypothesis: H-219
+  - id: n20-971-200-t021-grid4-windows7
+    n: 20
+    side: '971/200'
+    grid_counts: '34,46,56,64'
+    seed_certificate: cases/n20_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 2400
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n20-243-50-t021-grid4-windows7
+    n: 20
+    side: '243/50'
+    grid_counts: '34,46,56,64'
+    seed_certificate: cases/n20_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n32-29-5-auto-windows5
+    n: 32
+    side: '29/5'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  - id: n31-57-10-auto-windows5
+    n: 31
+    side: '57/10'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  - id: n30-559-100-auto-windows5
+    n: 30
+    side: '559/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  - id: n26-513-100-auto-windows5
+    n: 26
+    side: '513/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  - id: n27-525-100-auto-windows5
+    n: 27
+    side: '525/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  - id: n29-548-100-auto-windows5
+    n: 29
+    side: '548/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  - id: n45-684-100-auto-windows5
+    n: 45
+    side: '684/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  - id: n44-675-100-auto-windows5
+    n: 44
+    side: '675/100'
+    grid_counts: auto
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-coet
+    hypothesis: H-220
+  # H-218 long-shots after Nagamochi. n=17 231/50 stays off this file: nearby
+  # auto plus windows 5 already crossed 17 at 461/100. n=20 243/50 stays in
+  # optional-queue.yaml until rank 2 finishes below 20 unconverged.
+  - id: n19-481-100-t020-grid4-windows7
+    n: 19
+    side: '481/100'
+    grid_counts: '34,45,56,64'
+    seed_certificate: cases/n20_fractional_certificate/certificate-24-5.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n12-793-200-t017-auto-windows7
+    n: 12
+    side: '793/200'
+    grid_counts: auto
+    seed_certificate: cases/n12_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n12-397-100-t017-auto-windows7
+    n: 12
+    side: '397/100'
+    grid_counts: auto
+    seed_certificate: cases/n12_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n19-241-50-t020-grid4-windows7
+    n: 19
+    side: '241/50'
+    grid_counts: '34,45,56,64'
+    seed_certificate: cases/n20_fractional_certificate/certificate-24-5.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n12-793-200-t017-grid4-windows7
+    n: 12
+    side: '793/200'
+    grid_counts: '26,35,43,48'
+    seed_certificate: cases/n12_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  # H-221 next-rung. Register a new experiment before this probe starts
+  # (exp-164 must be terminal). Seed is the live T-029 pointer.
+  - id: n18-4679-1000-t029-auto-windows5
+    n: 18
+    side: '4679/1000'
+    grid_counts: auto
+    seed_certificate: cases/n18_fractional_certificate/certificate.json
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-u11x
+    hypothesis: H-221

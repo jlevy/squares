@@ -2790,8 +2790,8 @@ evidence:
         private correspondence, or unpublished work. The 2026-09-07 GitHub check closed
         that hole for n = 17; n = 18 was not searched there separately. The label
         records apparent novelty within that search, not absolute priority.
-    certificate: cases/n18_fractional_certificate/certificate.json
-    replay: uv run --frozen --all-extras python -m cases.n18_fractional_certificate
+    certificate: cases/n18_fractional_certificate/certificate-187-40.json
+    replay: uv run --frozen --all-extras python -m cases.n18_fractional_certificate cases/n18_fractional_certificate/certificate-187-40.json
     replay_status: passed
     limitations: >-
       Decides five conditions in exact rational arithmetic over 725 atoms on a
@@ -2800,6 +2800,8 @@ evidence:
       pi/4, containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event
       cell at every net direction carries mass at least 1, the least being 4000013/4000000.
       The bound proved is the container side itself, 187/40.
+      The live n = 18 pointer later moved to T-029 at 1871/400; these bytes stay at
+      certificate-187-40.json.
       One size, and not by monotonicity. Only Condition 2 mentions n among the five
       conditions, so this atom set certifies its side for every integer strictly above
       its own mass, which is 18 and upward. It says nothing about n = 17, where 459/100
@@ -2814,6 +2816,145 @@ evidence:
       The site set is BC-191 auto grids (32, 43, 53) unioned with T-027's 769 atom
       sites scaled from 467/100 plus a windows-5 lattice (1169 seed sites). The row
       loop never crossed 18 and converged below it.
+  - id: E-n018-t029-fractional-certificate
+    claim: lower-bound
+    source_reviewed: '2026-09-19'
+    scope:
+      n_values:
+        - 18
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 18 hold Nagamochi's 2005 closed form, Massaccesi's 2026
+        certificate carried by monotonicity as T-016 (22529/5000 = 4.5058), this
+        project's own T-019 at 459/100 = 4.59, T-027 at 467/100 = 4.67, T-028 at
+        187/40 = 4.675, Friedman's record tables, anabologyco-maker's GitHub candidate
+        9141/2000 = 4.5705, and MacIver's 2026 manuscript corollary. The frozen arXiv,
+        Crossref, OpenAlex, and Zenodo search receipts are retained at
+        resources/web/literature-refresh-2026-09-05/README.md. The 2026-09-07 GitHub check
+        that found the three n = 17 certificates is archived under
+        resources/web/n17-github-certificates-2026/.
+      searched: >-
+        Searched the archived corpus and the n = 18 case record for any lower bound on
+        s(18) above T-028's 187/40 = 4.675. Nothing in that corpus sits above 4.675:
+        the strongest public candidate named in n-018.md is 9141/2000 = 4.5705, not
+        replayed here, and MacIver's corollary is approximately 4.4502. This rung
+        raises this project's own T-028 value at n = 18 rather than a published one.
+        No n = 18-specific GitHub search was run on 2026-09-19 beyond the n = 17
+        repositories already archived.
+      novel_object: >-
+        The certificate and the side. The method is Burns's, the parametrisation
+        Massaccesi's, and the seed T-028's own atoms scaled to 1871/400 plus a windows-5
+        lattice; what is new is a certificate at 1871/400, found after T-028 retained
+        187/40 and 117/25 locked at 18.000000.
+      gaps: >-
+        The refresh is a bounded public-record search, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed sources,
+        private correspondence, or unpublished work. The 2026-09-07 GitHub check closed
+        that hole for n = 17; n = 18 was not searched there separately. The label
+        records apparent novelty within that search, not absolute priority.
+    certificate: cases/n18_fractional_certificate/certificate-1871-400.json
+    replay: uv run --frozen --all-extras python -m cases.n18_fractional_certificate cases/n18_fractional_certificate/certificate-1871-400.json
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 804 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 17889361/1000000 = 17.889361, the 181-direction net reaches
+      pi/4, containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event
+      cell at every net direction carries mass at least 1, the least being 250001/250000.
+      The bound proved is the container side itself, 1871/400.
+      The live n = 18 pointer later moved to T-030 at 4679/1000; these bytes stay at
+      certificate-1871-400.json.
+      One size, and not by monotonicity. Only Condition 2 mentions n among the five
+      conditions, so this atom set certifies its side for every integer strictly above
+      its own mass, which is 18 and upward. It says nothing about n = 17, where 459/100
+      remains the register's bound; from n = 19 on the register already holds 24/5, so
+      the certificate is true there and weaker.
+      It was decided from its bytes by two verifiers that fail differently. The exact
+      event-cell sweep accepted in 5 s at 250001/250000; the interval branch and bound
+      certified all 361 doubled-net directions in 2,997,789 boxes with none stalled and
+      an enclosure equal to that same value, in 28 s. Both were run by this repository
+      on the frozen file, and the sha256 the gate printed on acceptance is
+      dd06c0e39639f06af475459a2a63f9fc8d5836b0b83ea3b6c3a4de8f212892d4.
+      The site set is BC-191 auto grids (32, 43, 54) unioned with T-028's 725 atom
+      sites scaled from 187/40 plus a windows-5 lattice (1125 seed sites). The row
+      loop never crossed 18 and converged below it. Auto at 1871/400 resolved to
+      (32, 43, 54), not T-028's (32, 43, 53).
+  - id: E-n018-t030-fractional-certificate
+    claim: lower-bound
+    source_reviewed: '2026-09-19'
+    scope:
+      n_values:
+        - 18
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 18 hold Nagamochi's 2005 closed form, Massaccesi's 2026
+        certificate carried by monotonicity as T-016 (22529/5000 = 4.5058), this
+        project's own T-019 at 459/100 = 4.59, T-027 at 467/100 = 4.67, T-028 at
+        187/40 = 4.675, T-029 at 1871/400 = 4.6775, Friedman's record tables,
+        anabologyco-maker's GitHub candidate 9141/2000 = 4.5705, and MacIver's 2026
+        manuscript corollary. The frozen arXiv, Crossref, OpenAlex, and Zenodo search
+        receipts are retained at
+        resources/web/literature-refresh-2026-09-05/README.md. The 2026-09-07 GitHub check
+        that found the three n = 17 certificates is archived under
+        resources/web/n17-github-certificates-2026/.
+      searched: >-
+        Searched the archived corpus and the n = 18 case record for any lower bound on
+        s(18) above T-029's 1871/400 = 4.6775. Nothing in that corpus sits above 4.6775:
+        the strongest public candidate named in n-018.md is 9141/2000 = 4.5705, not
+        replayed here, and MacIver's corollary is approximately 4.4502. This rung
+        raises this project's own T-029 value at n = 18 rather than a published one.
+        No n = 18-specific GitHub search was run on 2026-09-19 beyond the n = 17
+        repositories already archived.
+      novel_object: >-
+        The certificate and the side. The method is Burns's, the parametrisation
+        Massaccesi's, and the seed T-029's own atoms scaled to 4679/1000 plus a windows-5
+        lattice; what is new is a certificate at 4679/1000, found after T-029 retained
+        1871/400 and 117/25 locked at 18.000000.
+      gaps: >-
+        The refresh is a bounded public-record search, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed sources,
+        private correspondence, or unpublished work. The 2026-09-07 GitHub check closed
+        that hole for n = 17; n = 18 was not searched there separately. The label
+        records apparent novelty within that search, not absolute priority.
+    certificate: cases/n18_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n18_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 957 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 71573611/4000000 = 17.89340275, the 181-direction net reaches
+      pi/4, containment B(1 + D) < 1 holds at B = 9977/10000, and every reachable event
+      cell at every net direction carries mass at least 1, the least being 200001/200000.
+      The bound proved is the container side itself, 4679/1000.
+      One size, and not by monotonicity. Only Condition 2 mentions n among the five
+      conditions, so this atom set certifies its side for every integer strictly above
+      its own mass, which is 18 and upward. It says nothing about n = 17, where 459/100
+      remains the register's bound; from n = 19 on the register already holds 24/5, so
+      the certificate is true there and weaker.
+      It was decided from its bytes by two verifiers that fail differently. The exact
+      event-cell sweep accepted in 7 s at 200001/200000; the interval branch and bound
+      certified all 361 doubled-net directions in 3,449,053 boxes with none stalled and
+      an enclosure equal to that same value, in 36 s. Both were run by this repository
+      on the frozen file, and the sha256 the gate printed on acceptance is
+      b62ead6f5b6aed68704487ad6a1b78beb7a3e585676e55825c6f84942c39cd63.
+      The site set is BC-191 auto grids (32, 43, 54) unioned with T-029's 804 atom
+      sites scaled from 1871/400 plus a windows-5 lattice (1204 seed sites). The row
+      loop never crossed 18 and converged below it. Auto at 4679/1000 resolved to
+      (32, 43, 54), the same triple T-029 used.
   - id: E-n020-fractional-certificate-97-20
     claim: lower-bound
     source_reviewed: '2026-09-05'
@@ -2985,9 +3126,11 @@ evidence:
       establish the equality Condition 1 asserts.
       Results, 361 of 361 directions certified in every case and none stalled. The five
       retained top rungs, decided from their frozen bytes: n = 20 at 24/5, 2260 atoms,
-      5,638,343 boxes; n = 18 at 187/40, 725 atoms, 2,684,845 boxes; n = 17 at 459/100,
+      5,638,343 boxes; n = 18 at 4679/1000, 957 atoms, 3,449,053 boxes; n = 17 at 459/100,
       1184 atoms, 3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11
       at 381/100, 1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 18 at
+      1871/400 in 2,997,789 boxes, n = 18 at
+      187/40 in 2,684,845 boxes, n = 18 at
       467/100 in 2,543,909 boxes, n = 17 at 229/50 in
       2,653,407 boxes, n = 11 at 19/5 in
       1,195,755 boxes, n = 12 at 197/50 in 1,846,439 and at 393/100 in 1,486,159, and
@@ -2997,9 +3140,11 @@ evidence:
       because every one of these runs shared a contended machine.
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
-      12501/12500 at n = 12's, 200009/200000 at n = 17's, 4000013/4000000 at n = 18's
+      12501/12500 at n = 12's, 200009/200000 at n = 17's, 200001/200000 at n = 18's
       and 50007/50000 at n = 20's, each matching the
-      least_cell_mass its own certificate declares, and 12501/12500 at the 229/50 rung,
+      least_cell_mass its own certificate declares, and 250001/250000 at the 1871/400
+      rung, 4000013/4000000 at the 187/40
+      rung, 12501/12500 at the 229/50 rung,
       50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
       side-4 container are refuted at direction 0 after 407 boxes, and an atom lowered by
       1/10000 after 127.

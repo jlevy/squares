@@ -44,8 +44,18 @@ Create a to-do list with the following items then perform all of them:
    - If `.github/PULL_REQUEST_TEMPLATE.md` exists, preserve its section order and fill
      every applicable section.
      Do not replace it with a commit chronology.
+   - Cost is two to four sentences: what the slice is, the honest wall, and what it does
+     not do. Do not enumerate every experiment.
+     Dispositions are one row per decision (result or hypothesis), not per probe.
+     GitHub #196 and #197 are the filled template; #199, #200, and the first #201 drafts
+     are the dump this forbids.
+   - Write the body to a file and, from `packing/`, run
+     `python -m devtools.check_pr_description --file BODY.md`. A body that fails is
+     unfinished; do not open or update the pull request with it.
    - For a terminal research agenda, use the repository close command to generate the
      cost-first description from the agenda’s checked closeout record.
+     That generated Cost is a rollup, not a probe list; do not append every experiment
+     wall underneath it.
    - After the cost block, summarize the actual result at the smallest honest scope.
      If no result exists, distinguish completed bounded-negative work from a time limit,
      correct guard refusal, technical failure, unopened route, or inconclusive evidence.
@@ -59,6 +69,8 @@ Create a to-do list with the following items then perform all of them:
      summary.
 
 6. Create or update the PR:
+   - Cloud agents in this repository use ManagePullRequest (`gh` is read-only for
+     writes). Local operators may use `gh` as below.
    - If creating:
      `gh pr create --repo $REPO --head $BRANCH --base main --title "..." --body "..."`
    - If updating: `gh pr edit $BRANCH --repo $REPO --title "..." --body "..."`

@@ -36,7 +36,11 @@ from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
 from cases.n18_fractional_certificate.__main__ import replay as replay_n18
-from cases.n18_fractional_certificate.replay import RUNG_467_100_PATH
+from cases.n18_fractional_certificate.replay import (
+    RUNG_187_40_PATH,
+    RUNG_467_100_PATH,
+    RUNG_1871_400_PATH,
+)
 from cases.n18_fractional_certificate.replay import declared as n18_declared
 from cases.n18_fractional_certificate.replay import load as n18_load
 from cases.n20_fractional_certificate.__main__ import replay as replay_n20
@@ -582,24 +586,36 @@ def test_the_n17_certificate_is_accepted() -> None:
 
 
 def test_the_n18_certificate_displaces_the_previous_rung() -> None:
-    """s(18) >= 187/40 beats T-027, decided from the file.
+    """s(18) >= 4679/1000 beats T-029, decided from the file.
 
-    What the live pointer claims is checked here; the named 467/100 file stays
-    the T-027 artifact after the pointer moved. Acceptance is the exhaustive
-    interval test on the live bytes.
+    What the live pointer claims is checked here; the named 1871/400 file stays
+    the T-029 artifact after the pointer moved, 187/40 stays T-028, and 467/100
+    stays T-027. Acceptance is the exhaustive interval test on the live bytes.
     """
     certificate = n18_load()
     assert certificate.n == 18
-    assert certificate.bounded_side == Fraction(187, 40)
-    assert certificate.bounded_side > Fraction(467, 100)
-    assert certificate.total_mass == Fraction(35758287, 2000000)
+    assert certificate.bounded_side == Fraction(4679, 1000)
+    assert certificate.bounded_side > Fraction(1871, 400)
+    assert certificate.total_mass == Fraction(71573611, 4000000)
     assert certificate.total_mass < 18
-    assert len(certificate.atoms) == 725
+    assert len(certificate.atoms) == 957
 
     record = n18_declared()
-    assert record["claim"] == "s(18) >= 187/40"
+    assert record["claim"] == "s(18) >= 4679/1000"
     assert record["total_mass"] == str(certificate.total_mass)
-    assert record["least_cell_mass"] == "4000013/4000000"
+    assert record["least_cell_mass"] == "200001/200000"
+
+    t029 = n18_load(RUNG_1871_400_PATH)
+    assert t029.bounded_side == Fraction(1871, 400)
+    assert t029.total_mass == Fraction(17889361, 1000000)
+    assert len(t029.atoms) == 804
+    assert n18_declared(RUNG_1871_400_PATH)["least_cell_mass"] == "250001/250000"
+
+    t028 = n18_load(RUNG_187_40_PATH)
+    assert t028.bounded_side == Fraction(187, 40)
+    assert t028.total_mass == Fraction(35758287, 2000000)
+    assert len(t028.atoms) == 725
+    assert n18_declared(RUNG_187_40_PATH)["least_cell_mass"] == "4000013/4000000"
 
     rung = n18_load(RUNG_467_100_PATH)
     assert rung.bounded_side == Fraction(467, 100)

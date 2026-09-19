@@ -1,3 +1,9 @@
+<!-- A description that is not this section order is unfinished (OR-9).
+Cost is 2–4 sentences: what the slice is, the honest wall, what it does not do.
+Do not list every experiment. Dispositions are decisions, not probes.
+From packing/: `python -m devtools.check_pr_description --file BODY.md`
+-->
+
 ## What this branch cost
 
 <!-- Replace this placeholder with the exact generated cost block.

@@ -937,7 +937,7 @@ results:
       above read in the other direction. This result stays true as stated at all three
       of its sizes and keeps its rungs.
       For n = 17 the reading is unchanged and the runway is 0.3985 to the ceiling and
-      0.0855 to the packing. For n = 18, T-028 now certifies 187/40; T-027's 467/100
+      0.0855 to the packing. For n = 18, T-030 now certifies 4679/1000; T-029's 1871/400
       remains as the previous rung. 117/25 remains the open probe this next_rung named.
 
   - id: T-020
@@ -1636,19 +1636,144 @@ results:
       - E-n018-t028-fractional-certificate
       - E-fractional-interval-decision
     artifacts:
-      - packing/cases/n18_fractional_certificate/certificate.json
+      - packing/cases/n18_fractional_certificate/certificate-187-40.json
       - packing/src/sqpack/fractional/colgen.py
       - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n18-4675-1000-t027-auto-windows5-receipt.md
     controls:
       - packing/tests/test_fractional_certificate.py
     next_rung: >-
-      The retained certificate's total is 35758287/2000000 = 17.8791435, leaving
-      241713/2000000 = 0.1208565 below eighteen, and that margin is what a further
-      rung has to be found inside. The side above it, 117/25 = 4.68, locked at
-      18.000000 on the T-019-seeded construction, on T-027's own atoms, and on three
-      earlier site sets; adding sites can still lower a restricted optimum, so 117/25
-      is not barred. The method's ceiling is 5B = 4.9885, and the best known packing
-      is 4.82287566, so the real runway is 0.1479 to the packing. C5 is review-ready
-      under epistemics.md -- a mapped, non-superseded review artifact -- and none has
+      T-029 took the next rung at 1871/400 on 2026-09-19. This result stays true as
+      stated and keeps its bytes at certificate-187-40.json. The remaining runway
+      to the packing is now T-029's business. C5 is review-ready under
+      epistemics.md -- a mapped, non-superseded review artifact -- and none has
       been written for this result.
+
+  - id: T-029
+    claim: >-
+      s(18) >= 1871/400 = 4.6775, from a first-party weighted fractional unavoidable-set
+      certificate at container side 1871/400. The case previously held 187/40 = 4.675
+      from T-028; the movement is +0.0025. The selected external report 9141/2000 = 4.5705
+      (GitHub, not peer reviewed, not replayed here) lies 0.107 below this result.
+      One size, and not by monotonicity. Only Condition 2 mentions n among the five
+      conditions, so an atom set of mass 17889361/1000000 = 17.889361 certifies the
+      side for every integer strictly above that mass, which is 18 and upward. It does
+      not reach n = 17, where T-019 still holds 459/100. From n = 19 on the register
+      already holds 24/5 = 4.80, so the certificate is true there and weaker.
+      One rung is retained rather than a ladder. The side was reached by seeding the
+      generator's site set with T-028's own atoms scaled from 187/40 and adding a
+      windows-5 lattice. Auto at 1871/400 resolved to (32, 43, 54), not T-028's
+      (32, 43, 53). n = 18 is off the H-218 sweep, so this retain confirms H-219,
+      not H-218.
+    scope:
+      n_values:
+        - 18
+    verification: V4
+    confirmation: C4
+    significance:
+      score: 3
+      rationale: >-
+        Scored at S3 by the calibration note T-020 wrote for exactly this case:
+        "Further sizes from the same generator, absent a new technique or a case that
+        changes character, belong at S3." This is the same generator at n = 18, one
+        size-specific covering rather than T-019's Condition 2 carry, and n = 18 does
+        not change character at 4.6775. The movement is +0.0025 against T-028's verified
+        field and 0.107 against the strongest named public candidate. Held below S4
+        because the technique is the one T-017 already banked, the displacement is of
+        this project's own prior rung rather than a published closed form, and n = 18
+        is not the central open case.
+      scored: '2026-09-19'
+      by: session-141 (repository; no independent evaluator, see composition)
+    novelty: apparently-novel
+    composition: >-
+      Primary at n = 18: one certificate, one accepted verdict, the bound being the
+      container side directly, with no monotonicity or composition step between the
+      artifact and the claim.
+      C4 is earned by two evidence entries whose method values differ, the exact
+      event-cell sweep and the interval branch and bound, both run in this repository on
+      the frozen bytes. As with T-028 there is no independent evaluator and no review
+      artifact, so C5 -- review-ready, a mapped review -- is as far away here as there.
+    produced_by:
+      session: session-141
+    evidence:
+      - E-n018-t029-fractional-certificate
+      - E-fractional-interval-decision
+    artifacts:
+      - packing/cases/n18_fractional_certificate/certificate-1871-400.json
+      - packing/src/sqpack/fractional/colgen.py
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-039/n18-1871-400-t028-auto-windows5-receipt.md
+    controls:
+      - packing/tests/test_fractional_certificate.py
+    next_rung: >-
+      T-030 took the next rung at 4679/1000 on 2026-09-19. This result stays true as
+      stated and keeps its bytes at certificate-1871-400.json. The remaining runway
+      to the packing is now T-030's business. C5 is review-ready under
+      epistemics.md -- a mapped, non-superseded review artifact -- and none has
+      been written for this result.
+
+  - id: T-030
+    claim: >-
+      s(18) >= 4679/1000 = 4.679, from a first-party weighted fractional unavoidable-set
+      certificate at container side 4679/1000. The case previously held 1871/400 = 4.6775
+      from T-029; the movement is +0.0015. The selected external report 9141/2000 = 4.5705
+      (GitHub, not peer reviewed, not replayed here) lies 0.1085 below this result.
+      One size, and not by monotonicity. Only Condition 2 mentions n among the five
+      conditions, so an atom set of mass 71573611/4000000 = 17.89340275 certifies the
+      side for every integer strictly above that mass, which is 18 and upward. It does
+      not reach n = 17, where T-019 still holds 459/100. From n = 19 on the register
+      already holds 24/5 = 4.80, so the certificate is true there and weaker.
+      One rung is retained rather than a ladder. The side was reached by seeding the
+      generator's site set with T-029's own atoms scaled from 1871/400 and adding a
+      windows-5 lattice. Auto at 4679/1000 resolved to (32, 43, 54), the same triple
+      T-029 used. n = 18 is off the H-218 sweep, so this retain confirms H-221,
+      not H-218.
+    scope:
+      n_values:
+        - 18
+    verification: V4
+    confirmation: C4
+    significance:
+      score: 3
+      rationale: >-
+        Scored at S3 by the calibration note T-020 wrote for exactly this case:
+        "Further sizes from the same generator, absent a new technique or a case that
+        changes character, belong at S3." This is the same generator at n = 18, one
+        size-specific covering rather than T-019's Condition 2 carry, and n = 18 does
+        not change character at 4.679. The movement is +0.0015 against T-029's verified
+        field and 0.1085 against the strongest named public candidate. Held below S4
+        because the technique is the one T-017 already banked, the displacement is of
+        this project's own prior rung rather than a published closed form, and n = 18
+        is not the central open case.
+      scored: '2026-09-19'
+      by: session-141 (repository; no independent evaluator, see composition)
+    novelty: apparently-novel
+    composition: >-
+      Primary at n = 18: one certificate, one accepted verdict, the bound being the
+      container side directly, with no monotonicity or composition step between the
+      artifact and the claim.
+      C4 is earned by two evidence entries whose method values differ, the exact
+      event-cell sweep and the interval branch and bound, both run in this repository on
+      the frozen bytes. As with T-029 there is no independent evaluator and no review
+      artifact, so C5 -- review-ready, a mapped review -- is as far away here as there.
+    produced_by:
+      session: session-141
+    evidence:
+      - E-n018-t030-fractional-certificate
+      - E-fractional-interval-decision
+    artifacts:
+      - packing/cases/n18_fractional_certificate/certificate.json
+      - packing/src/sqpack/fractional/colgen.py
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-039/n18-4679-1000-t029-auto-windows5-receipt.md
+    controls:
+      - packing/tests/test_fractional_certificate.py
+    next_rung: >-
+      The retained certificate's total is 71573611/4000000 = 17.89340275, leaving
+      426389/4000000 = 0.10659725 below eighteen, and that margin is what a further
+      rung has to be found inside. The side above it, 117/25 = 4.68, locked at
+      18.000000 on the T-019-seeded construction, on T-027's own atoms, on T-028's
+      own atoms, and on three earlier site sets; adding sites can still lower a
+      restricted optimum, so 117/25 is not barred. The remaining interval to that
+      plateau is 0.001. The method's ceiling is 5B = 4.9885, and the best known
+      packing is 4.82287566, so the real runway is 0.1439 to the packing. C5 is
+      review-ready under epistemics.md -- a mapped, non-superseded review artifact
+      -- and none has been written for this result.
 

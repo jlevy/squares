@@ -24,8 +24,8 @@ known packing, otherwise whichever of the two the limit is.
 **`prize` is what the limit allows, not what a search will reach.** The real
 limit is the covering value: a certificate exists at side `L` only where the
 least total mass that covers every admissible `B`-square falls below `n`, and
-that value can bind well below either cap. 70 restricted optima
-have been reported at 33 sides, one per site set, and
+that value can bind well below either cap. 87 restricted optima
+have been reported at 45 sides, one per site set, and
 `frontier/covering-values.yaml` registers each with whether its row loop
 converged; every one is at best an upper bound on the unrestricted covering
 value there. What survives here beside each is a frozen certificate or nothing
@@ -64,7 +64,9 @@ at all:
 | 17 | 4.61 | t019-seed-auto-32-43-53-windows5 | 17.195968 | no | The 1200 s deadline stopped the row loop after 56 LP rounds with 18 placements still violated. The objective crossed 17 at round 11 (17.030928) and finished at 17.195968 on 7253 sites / 975 orbits, including 1584 T-019 seed sites. It sat on 17.195968 from round 45. | nothing frozen here. Session-140 leftover rank 2. T-019 459/100 seed plus auto (32, 43, 53) plus windows 5 at 461/100, one cent above 23/5. Unconverged mass still above seventeen refutes this site set only; remaining rows can only raise it. Adding sites can still lower the covering value, so 461/100 is not barred. T-019 is unchanged. T-029 was not offered. |
 | 18 | 4.67 | auto-32-43-53 | 18.000000 | no | The 600 s deadline stopped the row loop after 57 LP rounds with 336 placements still violated. The objective crossed 18 at round 15 (18.000000) and held that value through the stop. | nothing frozen here. Session-139 auto-grid probe at 467/100, just below the historical n=18 probes at 117/25. Unconverged mass 18.000000 on 5669 sites / 763 orbits cannot confirm; remaining rows can only raise it. Adding sites can still lower the covering value, so 467/100 is not barred. No covering freeze was retained. |
 | 18 | 4.67 | t019-seed-auto-32-43-53 | 17.875567 | yes | The row loop converged at LP round 44 (violated 0) at 17.875567 on 6853 sites / 920 orbits, including 1184 T-019 seed sites scaled from 459/100. least_covered 1. Column generation then entered check_ceiling on the untruncated dual (--support-cap 0) and was interrupted after 31 minutes; run.json was not written. Wall of the row loop 420.5 s. | frozen 769-atom certificate, feasible mass 17.875678. Session-139 T-019-seeded auto-grid at 467/100. The seed dropped the unseeded locked 18.000000 to a converged 17.875567. Freeze-then-decide retained the candidate: 769 atoms, total mass 8937839/500000 = 17.875678, least cell mass 2000007/2000000. Both decide_certificate routes accept. T-027. The covering objective and the artifact mass are different numbers. The live pointer later moved to T-028; these bytes stay at certificate-467-100.json. |
-| 18 | 4.675 | t027-seed-auto-32-43-53-windows5 | 17.879034 | yes | The row loop converged at LP round 38 (violated 0) at 17.879034 on 6837 sites / 921 orbits, including 1169 T-027 seed sites scaled from 467/100 plus windows 5. least_covered 1. Never crossed 18. Wall 319.6 s. | frozen 725-atom certificate, feasible mass 17.879144. Session-140 T-027-seeded auto-grid plus windows 5 at 187/40. Freeze-then-decide retained the candidate: 725 atoms, total mass 35758287/2000000 = 17.8791435, least cell mass 4000013/4000000. Both decide_certificate routes accept. T-028. The covering objective and the artifact mass are different numbers. n=18 is off the H-218 sweep, so this retain does not confirm that claim. |
+| 18 | 4.675 | t027-seed-auto-32-43-53-windows5 | 17.879034 | yes | The row loop converged at LP round 38 (violated 0) at 17.879034 on 6837 sites / 921 orbits, including 1169 T-027 seed sites scaled from 467/100 plus windows 5. least_covered 1. Never crossed 18. Wall 319.6 s. | frozen 725-atom certificate, feasible mass 17.879144. Session-140 T-027-seeded auto-grid plus windows 5 at 187/40. Freeze-then-decide retained the candidate: 725 atoms, total mass 35758287/2000000 = 17.8791435, least cell mass 4000013/4000000. Both decide_certificate routes accept. T-028. The covering objective and the artifact mass are different numbers. n=18 is off the H-218 sweep, so this retain does not confirm that claim. The live pointer later moved to T-029; these bytes stay at certificate-187-40.json. |
+| 18 | 4.6775 | t028-seed-auto-32-43-54-windows5 | 17.889237 | yes | The row loop converged at LP round 56 (violated 0) at 17.889237 on 6905 sites / 921 orbits, including 1125 T-028 seed sites scaled from 187/40 plus windows 5. least_covered 1. Never crossed 18. Wall 650.3 s. Auto resolved to (32, 43, 54), not T-028's (32, 43, 53). | frozen 804-atom certificate, feasible mass 17.889361. Session-141 leftover T-028-seeded auto-grid plus windows 5 at 1871/400. Freeze-then-decide retained the candidate: 804 atoms, total mass 17889361/1000000 = 17.889361, least cell mass 250001/250000. Both decide_certificate routes accept. T-029. The covering objective and the artifact mass are different numbers. Confirms H-219. n=18 is off the H-218 sweep, so this retain does not confirm that claim. The live pointer later moved to T-030; these bytes stay at certificate-1871-400.json. |
+| 18 | 4.679 | t029-seed-auto-32-43-54-windows5 | 17.893285 | yes | The row loop converged at LP round 39 (violated 0) at 17.893285 on 6985 sites / 929 orbits, including 1204 T-029 seed sites scaled from 1871/400 plus windows 5. least_covered 1. Never crossed 18. Wall 432.9 s. Auto resolved to (32, 43, 54), the same triple T-029 used. | frozen 957-atom certificate, feasible mass 17.893403. Session-141 H-221 T-029-seeded auto-grid plus windows 5 at 4679/1000. Freeze-then-decide retained the candidate: 957 atoms, total mass 71573611/4000000 = 17.89340275, least cell mass 200001/200000. Both decide_certificate routes accept. T-030. The covering objective and the artifact mass are different numbers. Confirms H-221. n=18 is off the H-218 sweep, so this retain does not confirm that claim. |
 | 18 | 4.68 | 538-orbits | 18.000000 | no | Followed by a larger site set at the same side after returning exactly 18.000000; whether its own row loop exhausted is not recorded. | nothing frozen here. 538 orbits under D4; the site count is not recorded, nor rows or rounds. No raw run was retained and nothing was frozen: an objective of exactly eighteen admits no certificate. Across the three site sets the optimum did not move at all. |
 | 18 | 4.68 | 578-orbits | 18.000000 | no | Followed by a larger site set at the same side after returning exactly 18.000000; whether its own row loop exhausted is not recorded. | nothing frozen here. 578 orbits under D4; the site count is not recorded, nor rows or rounds. No raw run was retained and nothing was frozen: an objective of exactly eighteen admits no certificate. |
 | 18 | 4.68 | 618-orbits | 18.000000 | no | Stopped on cost after 157 row-generation rounds and 7056 s, the last round two hours, before the run could separate a covering value at or above eighteen from a site set still short of one. | nothing frozen here. 618 orbits under D4; the site count is not recorded. The row set grew from 15888 to 27516 over the run. Both readings stay open, a covering value at or above eighteen or an optimum on a degenerate vertex, which the collapse of pricing from 90 s to 1--3 s suggests. No raw run was retained and nothing was frozen. |
@@ -75,7 +77,9 @@ at all:
 | 18 | 4.7 | t019-seed-auto-33-44-54 | 18.165413 | yes | The row loop converged at LP round 44 (violated 0) at 18.165413 on 7117 sites / 939 orbits, including 1184 T-019 seed sites scaled from 459/100. Exact total mass 18165509/1000000 = 18.165509. Crossed 18 at round 7. Wall 390.4 s. | nothing frozen here. Session-139 T-019-seeded auto-grid at 47/10, above T-027 at 467/100. Converged above 18, so this site set cannot carry a certificate. Adding sites can still lower a restricted optimum, so 47/10 is not barred. No covering freeze was retained. |
 | 19 | 4.85 | t020-seed-auto-34-45-56-windows6 | 19.808958 | no | The 900 s deadline stopped the row loop after 34 LP rounds with 321 placements still violated. The objective crossed 19 at round 5 (19.114379) and finished at 19.808958 on 8865 sites / 1172 orbits, including 2836 seed sites (2260 T-020 plus 576 ceiling-window lattice sites from --seed-windows 6). | nothing frozen here. Session-139 T-020-seeded auto-grid plus windows 6 at 97/20 for n=19, seeded from certificate-24-5.json. Unconverged mass 19.808958 still refutes this site set only; remaining rows can only raise it. Adding sites can still lower the covering value, so 97/20 is not barred for n=19. No covering freeze was retained. T-020 at 24/5 is unchanged. |
 | 19 | 4.81 | t020-seed-auto-34-45-56-windows6 | 19.132115 | no | The 1200 s deadline stopped the row loop after 37 LP rounds with 333 placements still violated. The objective crossed 19 at round 16 (19.000170) and finished at 19.132115 on 8865 sites / 1172 orbits, including 2836 T-020 seed sites. | nothing frozen here. Session-140 X-038 rank 4. T-020 24/5 seed plus auto (34, 45, 56) plus windows 6 at 481/100, one hundredth above the verified floor. Unconverged mass still above nineteen refutes this site set only; remaining rows can only raise it. Closer than the same construction at 97/20 (19.808958). Adding sites can still lower the covering value, so 481/100 is not barred. T-020 is unchanged. |
+| 19 | 4.81 | t020-seed-four-grid-34-45-56-64-windows7 | 19.111435 | no | The 1200 s deadline stopped the row loop after 34 LP rounds with 369 placements still violated. The objective crossed 19 at round 15 (19.017579) and finished at 19.111435 on 13153 sites / 1724 orbits, including 3044 T-020 plus window-lattice seed sites. Four-grid resolved to (34, 45, 56, 64). | nothing frozen here. Session-141 exp-174. T-020 24/5 seed plus four-grid (34, 45, 56, 64) plus windows 7 at 481/100. Unconverged mass still above nineteen refutes this site set only; remaining rows can only raise it. Closer than leftover auto plus windows 6 at this side (19.132115). T-020 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
 | 19 | 4.82 | t020-seed-auto-34-45-56-windows6 | 19.247109 | no | The 1200 s deadline stopped the row loop after 38 LP rounds with 291 placements still violated. The objective crossed 19 at round 12 (19.011201) and finished at 19.247109 on 8865 sites / 1172 orbits, including 2836 T-020 seed sites. | nothing frozen here. Session-140 leftover rank 1. T-020 24/5 seed plus auto (34, 45, 56) plus windows 6 at 241/50, two hundredths above the verified floor. Unconverged mass still above nineteen refutes this site set only; remaining rows can only raise it. Farther than the same construction at 481/100 (19.132115), closer than 97/20 (19.808958). Adding sites can still lower the covering value, so 241/50 is not barred. T-020 is unchanged. T-029 was not offered. |
+| 19 | 4.82 | t020-seed-four-grid-34-45-56-64-windows7 | 19.224565 | no | The 1200 s deadline stopped the row loop after 34 LP rounds with 387 placements still violated. The objective crossed 19 at round 13 (19.006821) and finished at 19.224565 on 13153 sites / 1724 orbits, including 3044 T-020 plus window-lattice seed sites. Four-grid resolved to (34, 45, 56, 64). | nothing frozen here. Session-141 exp-177. T-020 24/5 seed plus four-grid (34, 45, 56, 64) plus windows 7 at 241/50. Unconverged mass still above nineteen refutes this site set only; remaining rows can only raise it. Closer than leftover auto plus windows 6 at this side (19.247109). T-020 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
 | 21 | 4.985 | grid | 25.000000 | no | Stopped by the ladder inside the row loop at its refutation budget, unconverged; the objective had crossed twenty-one at round 4 (21.179460) and then stood at exactly 25.000000 from round 12 through round 24 with least covered mass 0.841490. | nothing frozen here. BC-197 of agenda 021 (exp-061). The exactly round value is an artefact with a mechanism at this side: with 5B - L = 0.0035 the twenty-five axis-parallel B-squares overlap only in strips of that width, the restricted dual is checked at sites only, and no uniform inset-1/2 grid the lane could afford puts a site in every strip, so twenty-five unit weights are dual-feasible whatever the covering value is. A second construction, the 24/5 atoms scaled, reached 24.315238 unconverged. |
 | 21 | 4.85 | t021-seed-auto-34-45-56-windows6 | 19.814820 | no | The 1200 s deadline stopped the row loop after 45 LP rounds with 162 placements still violated. The objective finished at 19.814820 on 7197 sites / 950 orbits, including 2256 T-021 seed sites, and sat on that value from round 39. It did not cross 21. | nothing frozen here. Session-140 X-038 rank 6. T-021 seed plus auto (34, 45, 56) plus windows 6 at the already-verified 97/20 side. Unconverged mass still below 21 is a covering measurement, not a floor raise. T-021 is unchanged. T-029 was not offered. |
 | 20 | 4.895 | grid | 20.111615 | no | Stopped by the ladder on the crossing: the objective crossed twenty at LP round 8 with least covered mass 0.729083 and placements still violated, and rows only raise a restricted optimum, so the rung walls without convergence. | nothing frozen here. BC-197 of agenda 021 (exp-061). The seeded construction crossed at round 7 (20.006183) and reached 20.070683 at round 9, so both of H-062's constructions wall here. |
@@ -87,6 +91,8 @@ at all:
 | 20 | 4.865 | certificate-seeded | 20.000223 | no | Stopped by the cell on the crossing at LP round 34 with 213 placements still violated, after 1072.6 s of round time. | nothing frozen here. BC-213 of agenda 022 (exp-062). The grids above unioned with T-021's 1680 atoms scaled by 973/970. Both constructions walling here closes H-062's bracket to [97/20, 973/200], width 0.015 against the registered 0.02, and 0.1235 below the ceiling 9977/2000 -- so at m = 5 the covering value binds and the ceiling never does. This is the closest crossing in the register: it cleared twenty by 2.23 parts in a hundred thousand, against four parts in ten thousand for the grid at 97/20, on a walk of 19.996458, 19.997545, 19.998396, 19.999167, 19.999837, 20.000223 with the violated count collapsing at 480, 363, 381, 279, 213. The pre-registered rule does not read margins and was applied as written; a denser site set is where any doubt about this rung would go, since adding sites lowers a restricted optimum. |
 | 20 | 4.865 | t021-seed-four-grid-34-46-56-64-windows7 | 19.939212 | no | The 2400 s follow-up stopped the row loop after 45 LP rounds with 255 placements still violated. The objective finished at 19.939212 on 12676 sites / 1646 orbits, including 2464 T-021 seed sites, and did not cross 20. The 1200 s run of the same site set stopped at 19.930198 after 34 rounds. | nothing frozen here. Session-140 X-038 rank 1 and its 2400 s follow-up. T-021 seed plus four-grid (34, 46, 56, 64) plus windows 7. Unconverged mass still below twenty is not a covering below 20; remaining rows can only raise it. More wall on this set raised 19.930198 to 19.939212 and did not converge. H-062's two named site sets at this side already crossed. No covering freeze was retained. H-218 stays unconfirmed. |
 | 20 | 4.855 | t021-seed-auto-34-45-56-windows6 | 19.910044 | no | The 1200 s deadline stopped the row loop after 48 LP rounds with 6 placements still violated. The objective finished at 19.910044 on 8285 sites / 1093 orbits, including 2256 T-021 seed sites, and sat on that value from round 40. It did not cross 20. | nothing frozen here. Session-140 leftover rank 3. T-021 seed plus auto (34, 45, 56) plus windows 6 at 971/200, between the T-021 floor and 973/200. Unconverged mass still below twenty is not a covering below 20; remaining rows can only raise it. Adding sites can still lower the covering value, so 971/200 is not barred. T-021 is unchanged. T-029 was not offered. H-218 stays unconfirmed. |
+| 20 | 4.855 | t021-seed-four-grid-34-46-56-64-windows7 | 19.857588 | no | The 2400 s deadline stopped the row loop after 48 LP rounds with 225 placements still violated. The objective finished at 19.857588 on 12676 sites / 1646 orbits, including 2464 T-021 seed sites, and sat near that value from round 41. It did not cross 20. | nothing frozen here. Session-141 exp-164. T-021 seed plus four-grid (34, 46, 56, 64) plus windows 7 at 971/200. Unconverged mass still below twenty is not a covering below 20; remaining rows can only raise it. The mass is below leftover auto plus windows 6 at this side (19.910044) and below the same four-grid at 973/200 (19.939212). T-021 is unchanged. T-030 was not offered. H-218 stays unconfirmed. The same four-grid at 243/50 finished 19.887914 unconverged. |
+| 20 | 4.86 | t021-seed-four-grid-34-46-56-64-windows7 | 19.887914 | no | The 1200 s deadline stopped the row loop after 36 LP rounds with 459 placements still violated. The objective finished at 19.887914 on 12676 sites / 1646 orbits, including 2464 T-021 seed sites. It did not cross 20. | nothing frozen here. Session-141 exp-165. T-021 seed plus four-grid (34, 46, 56, 64) plus windows 7 at 243/50. Unconverged mass still below twenty is not a covering below 20; remaining rows can only raise it. The mass is above the same four-grid at 971/200 (19.857588) and below leftover auto plus windows 6 at 971/200 (19.910044). T-021 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
 | 20 | 4.80 | unrecorded | 18.916941 | no | Halted at round 9 on projected cost: four more rounds would have cost about 3.75 h to buy margin nothing needed. The side above it was never attempted. | frozen 2,260-atom certificate, feasible mass 18.922620. A single resumed column-generation run; the record names no site set and retains no site or row count. The reported objective has no raw run, and it is not the artifact's mass, 946131/50000 = 18.922620, which certifies n = 19 upward and is what keeps n = 19 standing at 24/5 after T-021 raised n = 20 and n = 21 to 97/20. The artifact named here is the immutable 24/5 rung, not the package's moving certificate.json pointer, which now holds the heavier 97/20 rung. |
 | 12 | 3.969 | grid | 12.363498 | yes | The row loop converged at LP round 25 (violated 0) at 12.363498 on 3737 sites / 511 orbits. It crossed twelve at round 4 (12.043810). A later column-generation pricing round was killed after the 600 s deadline while adding one orbit and did not change the reported optimum. | nothing frozen here. Session-139 scout probe between T-017 at 99/25 and BC-206's 397/100 grid wall. Same auto grids (26, 35, 43) and scale 4,000,000 as BC-206. Above twelve on a converged loop, so this site set carries no certificate at 3.969; adding sites can only lower it, so the side is not barred. No covering freeze was retained. |
 | 12 | 3.969 | t017-seed-auto-26-35-43 | 12.118036 | no | The 600 s deadline stopped the row loop after 29 LP rounds with 186 placements still violated. The objective had already crossed 12 at round 8 (12.003410). | nothing frozen here. Session-139 T-017-seeded auto-grid probe at 3969/1000. The seed dropped the restricted optimum from the unseeded 12.363498 to 12.118036. Unconverged mass still above twelve refutes this site set only; remaining rows can only raise it. Adding sites can still lower the covering value, so 3969/1000 is not barred. No covering freeze was retained. |
@@ -96,6 +102,7 @@ at all:
 | 12 | 3.97 | certificate-seeded | 12.016263 | no | Crossed twelve at LP round 8 with placements still violated; the loop reached 12.095824 by round 14 before the cell stopped it. 213 s. | nothing frozen here. BC-206 of agenda 022. The grids unioned with T-017's 2097 atoms scaled to the side. Rows only raise a restricted optimum, so this site set's converged optimum is at least 12.016263. |
 | 12 | 3.97 | t017-seed-four-grid-26-35-43-48 | 12.122748 | no | The 900 s deadline stopped the row loop after 33 LP rounds with 108 placements still violated. The objective crossed 12 at round 8 (12.001574) and finished at 12.122748 on 8133 sites / 1120 orbits, including 2097 T-017 seed sites. | nothing frozen here. Session-139 T-017-seeded four-grid at 397/100. Unconverged mass still above twelve refutes this site set only; remaining rows can only raise it. Adding sites can still lower the covering value, so 397/100 is not barred. No covering freeze was retained. |
 | 12 | 3.97 | t017-seed-four-grid-28-38-46-54-windows7 | 12.133391 | yes | The row loop converged: every placement covers mass 1. Objective 12.133391 on 9685 sites / 1307 orbits, including 2533 T-017 seed sites. Freeze mass 48534459/4000000. | nothing frozen here. Session-140 X-038 rank 2. T-017 seed plus four-grid (28, 38, 46, 54) plus windows 7. Converged above twelve refutes this site set. Adding sites can still lower the covering value, so 397/100 is not barred. The freeze sits under agenda-038 and is not a retained case. T-017 is unchanged. |
+| 12 | 3.97 | t017-seed-auto-26-35-43-windows7 | 12.097146 | no | The 1200 s deadline stopped the row loop after 34 LP rounds with 33 placements still violated. The objective crossed 12 at round 8 (12.021858) and finished at 12.097146 on 6269 sites / 885 orbits, including 2533 T-017 plus window-lattice seed sites. Auto resolved to (26, 35, 43). The objective sat at 12.097146 from round 32. | nothing frozen here. Session-141 exp-176. T-017 seed plus auto (26, 35, 43) plus windows 7 at 397/100. Unconverged mass still above twelve refutes this site set only; remaining rows can only raise it. Closer than four-grid plus windows 7 at this side (12.133391). Side 3.97 already exists. T-017 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
 | 12 | 3.98 | grid | 16.000000 | no | Locked at exactly 16.000000 from LP round 5 and held it to round 16; 128 s. | nothing frozen here. BC-206 of agenda 022. The round value is the site set's artefact and not the covering value, one order below BC-197's 25.000000 at m = 5: with delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB] admits sixteen dual-feasible unit weights whatever the covering value is. The auto grid places 43 to 44 sites per axis where those windows need hundreds to thousands. |
 | 12 | 3.985 | grid | 16.000000 | no | Locked at exactly 16.000000 from LP round 6 and held it to round 12; 55 s. | nothing frozen here. BC-206 of agenda 022. The round value is the site set's artefact and not the covering value, one order below BC-197's 25.000000 at m = 5: with delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB] admits sixteen dual-feasible unit weights whatever the covering value is. The auto grid places 43 to 44 sites per axis where those windows need hundreds to thousands. |
 | 12 | 3.99 | grid | 16.000000 | no | Locked at exactly 16.000000 from LP round 7 and held it to round 12; 60 s. | nothing frozen here. BC-206 of agenda 022. The round value is the site set's artefact and not the covering value, one order below BC-197's 25.000000 at m = 5: with delta = 4B - L, a support missing all three windows [L - (4 - k)B, kB] admits sixteen dual-feasible unit weights whatever the covering value is. The auto grid places 43 to 44 sites per axis where those windows need hundreds to thousands. |
@@ -103,21 +110,31 @@ at all:
 | 12 | 3.985 | certificate-seeded | 12.104043 | no | Crossed twelve at LP round 3 with placements still violated; the loop reached 12.414845 by round 13 before the cell stopped it. 115 s. | nothing frozen here. BC-206 of agenda 022. Across the four tested sides, the seeded constructions crossed twelve at rounds 8, 5, 3, 3. No higher certified rung was found in these runs; they do not exclude other constructions above 99/25. |
 | 12 | 3.99 | certificate-seeded | 12.056180 | no | Crossed twelve at LP round 3 with placements still violated; the loop reached 12.398218 by round 8 before the cell stopped it. 150 s. | nothing frozen here. BC-206 of agenda 022. Across the four tested sides, the seeded constructions crossed twelve at rounds 8, 5, 3, 3. No higher certified rung was found in these runs; they do not exclude other constructions above 99/25. |
 | 12 | 3.97 | cutting-plane | 12.248227 | yes | The row LP reportedly converged at 12.248227 under devtools.run_fractional_cutting, the instrument BC-200 used. The log also reports a depth-scaled floor, but its generating family and state were not retained for replay. | nothing frozen here. BC-206 of agenda 022, unregistered follow-up at a pre-registered side. The log reports a cutting floor of approximately 10.845594 and a converged row-LP value of 12.248227 at 3.97. The floor has not been replayed after the D-476 and D-477 cutting corrections because its generating family and state were not retained. This does not show the historical floor invalid, but the log supplies no revalidated exact bracket. The side remains undecided. The retained certificate at 3.96 gives an upper bound of 11.998960 on its covering value. Subtracting two upper bounds does not bound the increase in the true optima. These data establish neither a lower slope bound nor the side where the covering value reaches twelve. Correction, 2026-09-06: the previous endpoint estimate 3.96004 and the claim that the gap to the fixed-B ceiling 4B = 3.9908 was exhausted are withdrawn. The recorded run log preserves that historical inference; the attainable part of the remaining 0.0308 below the ceiling is unresolved. |
+| 32 | 5.8 | auto-42-56-70-windows5 | 29.803318 | no | The 1200 s deadline stopped the row loop after 35 LP rounds with 546 placements still violated. The objective finished at 29.803318 on 10417 sites / 1356 orbits, including 625 window-lattice seed sites. Auto resolved to (42, 56, 70). It did not cross 32. | nothing frozen here. Session-141 exp-166. First first-party covering row at n=32. Seedless auto plus windows 5 at 29/5, above the Nagamochi floor 1 + sqrt(23). Unconverged mass still below 32 is not a covering below 32; remaining rows can only raise it. T-030 was not offered. H-220 stays unconfirmed. Do not more-wall this set. |
+| 31 | 5.7 | auto-41-55-68-windows5 | 28.331329 | no | The 1200 s deadline stopped the row loop after 38 LP rounds with 462 placements still violated. The objective finished at 28.331329 on 9941 sites / 1318 orbits, including 625 window-lattice seed sites. Auto resolved to (41, 55, 68). It did not cross 31. | nothing frozen here. Session-141 exp-167. First first-party covering row at n=31. Seedless auto plus windows 5 at 57/10, above the Nagamochi floor 1 + sqrt(22). Unconverged mass still below 31 is not a covering below 31; remaining rows can only raise it. T-030 was not offered. H-220 stays unconfirmed. Do not more-wall this set. |
+| 30 | 5.59 | auto-40-54-67-windows5 | 27.178193 | no | The 1200 s deadline stopped the row loop after 50 LP rounds with 93 placements still violated. The objective finished at 27.178193 on 9609 sites / 1269 orbits, including 625 window-lattice seed sites. Auto resolved to (40, 54, 67). It did not cross 30. | nothing frozen here. Session-141 exp-168. First first-party covering row at n=30. Seedless auto plus windows 5 at 559/100, above the Nagamochi floor 1 + sqrt(21). Unconverged mass still below 30 is not a covering below 30; remaining rows can only raise it. T-030 was not offered. H-220 stays unconfirmed. Do not more-wall this set. |
+| 26 | 5.13 | auto-36-49-60-windows5 | 25.000000 | no | The 1200 s deadline stopped the row loop after 42 LP rounds with 546 placements still violated. The objective sat at 25.000000 from round 11 and finished there on 7913 sites / 1049 orbits, including 625 window-lattice seed sites. Auto resolved to (36, 49, 60). It did not cross 26. | nothing frozen here. Session-141 exp-169. First first-party covering row at n=26. Seedless auto plus windows 5 at 513/100, above the Nagamochi floor 1 + sqrt(17). The 25.000000 plateau with 546 still violated is not a covering below 26; remaining rows can only raise it. T-030 was not offered. H-220 stays unconfirmed. Do not more-wall this set. |
+| 27 | 5.25 | auto-37-50-62-windows5 | 25.000000 | no | The 1200 s deadline stopped the row loop after 38 LP rounds with 546 placements still violated. The objective sat at 25.000000 and finished there on 8329 sites / 1099 orbits, including 625 window-lattice seed sites. Auto resolved to (37, 50, 62). It did not cross 27. | nothing frozen here. Session-141 exp-170. First first-party covering row at n=27. Seedless auto plus windows 5 at 525/100, above the Nagamochi floor 1 + sqrt(18). The 25.000000 plateau with 546 still violated is not a covering below 27; remaining rows can only raise it. T-030 was not offered. H-220 stays unconfirmed. Do not more-wall this set. |
+| 29 | 5.48 | auto-39-53-65-windows5 | 26.040745 | yes | The row loop converged at LP round 52 (violated 0) at 26.040745 on 9145 sites / 1230 orbits, including 625 window-lattice seed sites. least_covered 1. Freeze mass 52081879/2000000 = 26.0409395. Never crossed 29. Wall 1068.7 s. Auto resolved to (39, 53, 65). declare_least_cell_mass accepted least 4000013/4000000. decide_certificate refused the interval route: 272 stalled boxes, Condition 5, enclosure (398409/400000, 4000013/4000000). | nothing frozen here. Session-141 exp-171. First first-party covering row at n=29. Seedless auto plus windows 5 at 548/100, above the Nagamochi floor 1 + sqrt(20). The first Nagamochi freeze with mass below n. Interval route refused; T-030 was not offered. H-220 stays unconfirmed. Do not more-wall this set. |
+| 45 | 6.84 | auto-51-68-84-windows5 | 42.137360 | no | The 1200 s deadline stopped the row loop after 26 LP rounds with 546 placements still violated. The objective finished at 42.137360 on 15173 sites / 1967 orbits, including 900 window-lattice seed sites. Auto resolved to (51, 68, 84). It did not cross 45. | nothing frozen here. Session-141 exp-172. First first-party covering row at n=45. Seedless auto plus windows 5 at 684/100, above the Nagamochi floor 1 + sqrt(34). Unconverged mass still below 45 is not a covering below 45; remaining rows can only raise it. T-030 was not offered. H-220 stays unconfirmed. Do not more-wall this set. |
+| 44 | 6.75 | auto-50-67-83-windows5 | 41.236782 | no | The 1200 s deadline stopped the row loop after 28 LP rounds with 546 placements still violated. The objective finished at 41.236782 on 14765 sites / 1939 orbits, including 900 window-lattice seed sites. Auto resolved to (50, 67, 83). It did not cross 44. | nothing frozen here. Session-141 exp-173. First first-party covering row at n=44. Seedless auto plus windows 5 at 675/100, above the Nagamochi floor 1 + sqrt(33). Unconverged mass still below 44 is not a covering below 44; remaining rows can only raise it. T-030 was not offered. The eight queued Nagamochi sides are measured. H-220 stays unconfirmed. Do not more-wall this set. |
+| 12 | 3.965 | t017-seed-auto-26-35-43-windows7 | 12.067502 | no | The 1200 s deadline stopped the row loop after 38 LP rounds with 102 placements still violated. The objective crossed 12 at round 11 (12.005485) and finished at 12.067502 on 6269 sites / 885 orbits, including 2533 T-017 plus window-lattice seed sites. Auto resolved to (26, 35, 43). The objective sat at 12.067502 from round 32. | nothing frozen here. Session-141 exp-175. First first-party covering row at 793/200. T-017 seed plus auto (26, 35, 43) plus windows 7, one two-hundredth above T-017. Unconverged mass still above twelve refutes this site set only; remaining rows can only raise it. Closer than four-grid plus windows 7 at 397/100 (12.133391) and 3969/1000 (12.091168). T-017 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
+| 12 | 3.965 | t017-seed-four-grid-26-35-43-48-windows7 | 12.066995 | no | The 1200 s deadline stopped the row loop after 35 LP rounds with 192 placements still violated. The objective crossed 12 at round 13 (12.016486) and finished at 12.066995 on 8569 sites / 1184 orbits, including 2533 T-017 plus window-lattice seed sites. Four-grid resolved to (26, 35, 43, 48). The objective sat at 12.06699 from round 32. | nothing frozen here. Session-141 exp-178. T-017 seed plus four-grid (26, 35, 43, 48) plus windows 7 at 793/200. Unconverged mass still above twelve refutes this site set only; remaining rows can only raise it. Closer than leftover auto plus windows 7 at this side (12.067502). T-017 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
 
 No covering-search run log or solver checkpoint was retained for any of them, so
 not one of the reported values can be recomputed here. What a frozen certificate
 recomputes is its own feasible mass — a total that covers every admissible
 `B`-square at that side, and so an upper bound on the covering value there,
 rather than the objective a search reported. Only at `3.95` and `4.85` is
-the reported value the artifact's own mass; at `3.96`, `4.58`, `4.59`, `4.67`, `4.675`, `4.80` and `4.825` the
+the reported value the artifact's own mass; at `3.96`, `4.58`, `4.59`, `4.67`, `4.675`, `4.6775`, `4.679`, `4.80` and `4.825` the
 artifact's mass and the reported objective are different numbers.
 
 They are also reports of different kinds rather than one series measured the same
-way, and the `converged` column is where the difference lives: 28 of
-the 70 ran their row loop to convergence, and the rest stopped for the
+way, and the `converged` column is where the difference lives: 31 of
+the 87 ran their row loop to convergence, and the rest stopped for the
 reason beside each — or for none the record kept — and stand as upper bounds on
-their own site sets only. 70 heterogeneous reports across a side band
-2.00 wide do not support a growth trend or a fitted curve, and no rung in
+their own site sets only. 87 heterogeneous reports across a side band
+3.85 wide do not support a growth trend or a fitted curve, and no rung in
 this register has ever been claimed from one. Rank on `prize` to choose where to
 look; measure and retain the run before believing any extrapolation.
 
@@ -349,9 +366,9 @@ lower bound, so nothing was on offer.
 | 138 | 12 | 11.8167 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.1558 |
 | 45 | 7 | 6.8310 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.1530 |
 | 281 | 17 | 16.8114 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.1496 |
-| 18 | 5 | 4.6750 | 4.8229 | 4.9885 | 4.8216 | 4.8216 | cap | +0.1466 |
 | 218 | 15 | 14.8203 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1453 |
 | 95 | 10 | 9.8318 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.1453 |
+| 18 | 5 | 4.6790 | 4.8229 | 4.9885 | 4.8216 | 4.8216 | cap | +0.1426 |
 | 20 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 |
 | 21 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 |
 | 163 | 13 | 12.8322 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.1380 |
@@ -408,15 +425,15 @@ the other one was never in reach.
 | 11 | n11_fractional_certificate | 3.8100 | 3.8771 | 3.9908 | packing | 0.98270 |
 | 12 | n12_fractional_certificate | 3.9600 | 4.0000 | 3.9908 | ceiling | 0.99228 |
 | 17 | n17_fractional_certificate | 4.5900 | 4.6755 | 4.9885 | packing | 0.98171 |
-| 18 | n18_fractional_certificate | 4.6750 | 4.8229 | 4.9885 | packing | 0.96934 |
+| 18 | n18_fractional_certificate | 4.6790 | 4.8229 | 4.9885 | packing | 0.97017 |
 | 20 | n20_fractional_certificate | 4.8500 | 5.0000 | 4.9885 | ceiling | 0.97223 |
 
 ## What three points would predict, if the ratio held
 
 **This is an extrapolation from three points, not a measurement.** The three
 packing-limited rows above -- n = 11, n = 17, n = 18 -- land inside a band
-0.01336 wide, and their mean is the `ratio` this section's numbers all
-come from: `0.97791`. That the three numbers are exact rationals decided
+0.01253 wide, and their mean is the `ratio` this section's numbers all
+come from: `0.97819`. That the three numbers are exact rationals decided
 by an exact verifier does not make their mean a rate. No rung in this register
 has ever been claimed from a fitted curve, and this one is not the exception:
 it is offered here as a place to look, not as a result.
@@ -445,268 +462,268 @@ reaches, not this extrapolation.
 
 | n | m | lower | best packing | ceiling | cap | limit | limited by | prize | predicted | predicted gain |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | ---: |
-| 26 | 6 | 5.1231 | 5.6213 | 5.9862 | — | 5.9862 | packing | +0.4982 | 5.4972 | +0.3741 |
-| 39 | 7 | 6.2915 | 6.8107 | 6.9839 | — | 6.9839 | packing | +0.5192 | 6.6603 | +0.3688 |
-| 51 | 8 | 7.1644 | 7.7008 | 7.9816 | — | 7.9816 | packing | +0.5364 | 7.5307 | +0.3663 |
-| 38 | 7 | 6.1962 | 6.7071 | 6.9839 | — | 6.9839 | packing | +0.5110 | 6.5590 | +0.3628 |
-| 37 | 7 | 6.0990 | 6.5986 | 6.9839 | — | 6.9839 | packing | +0.4996 | 6.4529 | +0.3539 |
-| 27 | 6 | 5.2426 | 5.7071 | 5.9862 | — | 5.9862 | packing | +0.4645 | 5.5811 | +0.3384 |
-| 28 | 6 | 5.3589 | 5.8244 | 5.9862 | — | 5.9862 | packing | +0.4655 | 5.6958 | +0.3369 |
-| 29 | 6 | 5.4721 | 5.9338 | 5.9862 | 5.9308 | 5.9308 | cap | +0.4587 | 5.8028 | +0.3306 |
-| 68 | 9 | 8.2801 | 8.8034 | 8.9793 | — | 8.9793 | packing | +0.5233 | 8.6090 | +0.3288 |
-| 53 | 8 | 7.3246 | 7.8229 | 7.9816 | — | 7.9816 | packing | +0.4983 | 7.6501 | +0.3255 |
-| 66 | 9 | 8.1414 | 8.6569 | 8.9793 | — | 8.9793 | packing | +0.5154 | 8.4657 | +0.3242 |
-| 50 | 8 | 7.0828 | 7.5714 | 7.9816 | — | 7.9816 | packing | +0.4887 | 7.4042 | +0.3214 |
-| 84 | 10 | 9.1854 | 9.7071 | 9.9770 | — | 9.9770 | packing | +0.5218 | 9.4927 | +0.3074 |
-| 67 | 9 | 8.2111 | 8.7071 | 8.9793 | — | 8.9793 | packing | +0.4960 | 8.5148 | +0.3037 |
-| 103 | 11 | 10.1652 | 10.7038 | 10.9747 | — | 10.9747 | packing | +0.5386 | 10.4674 | +0.3022 |
-| 86 | 10 | 9.3066 | 9.8229 | 9.9770 | — | 9.9770 | packing | +0.5163 | 9.6059 | +0.2993 |
-| 83 | 10 | 9.1240 | 9.6348 | 9.9770 | — | 9.9770 | packing | +0.5108 | 9.4220 | +0.2980 |
-| 41 | 7 | 6.4772 | 6.9267 | 6.9839 | — | 6.9839 | packing | +0.4495 | 6.7737 | +0.2965 |
-| 105 | 11 | 10.2736 | 10.8078 | 10.9747 | — | 10.9747 | packing | +0.5342 | 10.5691 | +0.2955 |
-| 40 | 7 | 6.3852 | 6.8284 | 6.9839 | — | 6.9839 | packing | +0.4433 | 6.6776 | +0.2925 |
-| 52 | 8 | 7.2450 | 7.7071 | 7.9816 | — | 7.9816 | packing | +0.4621 | 7.5369 | +0.2919 |
-| 55 | 8 | 7.4807 | 7.9458 | 7.9816 | — | 7.9816 | packing | +0.4650 | 7.7703 | +0.2895 |
-| 30 | 6 | 5.5826 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.4036 | 5.8675 | +0.2849 |
-| 69 | 9 | 8.3485 | 8.8272 | 8.9793 | — | 8.9793 | packing | +0.4787 | 8.6323 | +0.2838 |
-| 85 | 10 | 9.2462 | 9.7426 | 9.9770 | — | 9.9770 | packing | +0.4964 | 9.5275 | +0.2813 |
-| 42 | 7 | 6.5678 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.4162 | 6.8454 | +0.2776 |
-| 65 | 9 | 8.0711 | 8.5355 | 8.9793 | — | 8.9793 | packing | +0.4645 | 8.3470 | +0.2760 |
-| 54 | 8 | 7.4031 | 7.8467 | 7.9816 | — | 7.9816 | packing | +0.4435 | 7.6734 | +0.2702 |
-| 70 | 9 | 8.4162 | 8.8817 | 8.9793 | — | 8.9793 | packing | +0.4655 | 8.6855 | +0.2693 |
-| 126 | 12 | 11.2470 | 11.7762 | 11.9724 | — | 11.9724 | packing | +0.5292 | 11.5161 | +0.2691 |
-| 102 | 11 | 10.1104 | 10.6114 | 10.9747 | — | 10.9747 | packing | +0.5010 | 10.3770 | +0.2666 |
-| 127 | 12 | 11.2956 | 11.8229 | 11.9724 | — | 11.9724 | packing | +0.5272 | 11.5618 | +0.2661 |
-| 56 | 8 | 7.5574 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.4242 | 7.8233 | +0.2659 |
-| 71 | 9 | 8.4833 | 8.9441 | 8.9793 | — | 8.9793 | packing | +0.4608 | 8.7465 | +0.2632 |
-| 82 | 10 | 9.0623 | 9.5355 | 9.9770 | — | 9.9770 | packing | +0.4733 | 9.3249 | +0.2627 |
-| 106 | 11 | 10.3274 | 10.8230 | 10.9747 | — | 10.9747 | packing | +0.4956 | 10.5839 | +0.2566 |
-| 87 | 10 | 9.3666 | 9.8388 | 9.9770 | — | 9.9770 | packing | +0.4722 | 9.6215 | +0.2549 |
-| 72 | 9 | 8.5498 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.4295 | 8.8012 | +0.2514 |
-| 104 | 11 | 10.2195 | 10.7071 | 10.9747 | — | 10.9747 | packing | +0.4876 | 10.4706 | +0.2511 |
-| 108 | 11 | 10.4340 | 10.9259 | 10.9747 | — | 10.9747 | packing | +0.4919 | 10.6846 | +0.2506 |
-| 124 | 12 | 11.1489 | 11.6569 | 11.9724 | — | 11.9724 | packing | +0.5080 | 11.3994 | +0.2505 |
-| 125 | 12 | 11.1980 | 11.7071 | 11.9724 | — | 11.9724 | packing | +0.5091 | 11.4485 | +0.2505 |
-| 101 | 11 | 10.0554 | 10.5355 | 10.9747 | — | 10.9747 | packing | +0.4801 | 10.3028 | +0.2475 |
-| 123 | 12 | 11.0995 | 11.6014 | 11.9724 | — | 11.9724 | packing | +0.5019 | 11.3452 | +0.2457 |
-| 89 | 10 | 9.4853 | 9.9497 | 9.9770 | — | 9.9770 | packing | +0.4645 | 9.7300 | +0.2447 |
-| 88 | 10 | 9.4261 | 9.8882 | 9.9770 | — | 9.9770 | packing | +0.4620 | 9.6698 | +0.2436 |
-| 147 | 13 | 12.1355 | 12.6569 | 12.9702 | — | 12.9702 | packing | +0.5213 | 12.3773 | +0.2418 |
-| 90 | 10 | 9.5440 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.4330 | 9.7791 | +0.2351 |
-| 146 | 13 | 12.0905 | 12.6009 | 12.9702 | — | 12.9702 | packing | +0.5104 | 12.3226 | +0.2321 |
-| 122 | 12 | 11.0499 | 11.5355 | 11.9724 | — | 11.9724 | packing | +0.4857 | 11.2808 | +0.2309 |
-| 176 | 14 | 13.2882 | 13.8229 | 13.9679 | — | 13.9679 | packing | +0.5347 | 13.5176 | +0.2294 |
-| 129 | 12 | 11.3923 | 11.8813 | 11.9724 | — | 11.9724 | packing | +0.4890 | 11.6189 | +0.2266 |
-| 150 | 13 | 12.2694 | 12.7782 | 12.9702 | — | 12.9702 | packing | +0.5087 | 12.4960 | +0.2265 |
-| 175 | 14 | 13.2474 | 13.7782 | 13.9679 | — | 13.9679 | packing | +0.5307 | 13.4739 | +0.2264 |
-| 107 | 11 | 10.3808 | 10.8467 | 10.9747 | — | 10.9747 | packing | +0.4658 | 10.6071 | +0.2263 |
-| 151 | 13 | 12.3137 | 12.8229 | 12.9702 | — | 12.9702 | packing | +0.5092 | 12.5397 | +0.2260 |
-| 109 | 11 | 10.4868 | 10.9497 | 10.9747 | — | 10.9747 | packing | +0.4629 | 10.7079 | +0.2211 |
-| 128 | 12 | 11.3441 | 11.8251 | 11.9724 | — | 11.9724 | packing | +0.4810 | 11.5639 | +0.2198 |
-| 110 | 11 | 10.5394 | 10.9968 | 10.9747 | — | 10.9747 | ceiling | +0.4354 | 10.7539 | +0.2145 |
-| 145 | 13 | 12.0454 | 12.5355 | 12.9702 | — | 12.9702 | packing | +0.4902 | 12.2587 | +0.2133 |
-| 130 | 12 | 11.4403 | 11.9112 | 11.9724 | — | 11.9724 | packing | +0.4709 | 11.6481 | +0.2078 |
-| 131 | 12 | 11.4881 | 11.9565 | 11.9724 | — | 11.9724 | packing | +0.4685 | 11.6925 | +0.2044 |
-| 149 | 13 | 12.2250 | 12.7071 | 12.9702 | — | 12.9702 | packing | +0.4821 | 12.4265 | +0.2015 |
-| 154 | 13 | 12.4455 | 12.9317 | 12.9702 | — | 12.9702 | packing | +0.4862 | 12.6461 | +0.2006 |
-| 174 | 14 | 13.2066 | 13.7071 | 13.9679 | — | 13.9679 | packing | +0.5006 | 13.4044 | +0.1978 |
-| 148 | 13 | 12.1803 | 12.6569 | 12.9702 | — | 12.9702 | packing | +0.4765 | 12.3773 | +0.1970 |
-| 153 | 13 | 12.4018 | 12.8817 | 12.9702 | — | 12.9702 | packing | +0.4799 | 12.5972 | +0.1954 |
-| 170 | 14 | 13.0416 | 13.5355 | 13.9679 | — | 13.9679 | packing | +0.4939 | 13.2366 | +0.1950 |
-| 172 | 14 | 13.1244 | 13.6190 | 13.9679 | — | 13.9679 | packing | +0.4946 | 13.3182 | +0.1938 |
-| 201 | 15 | 14.1909 | 14.7071 | 14.9656 | — | 14.9656 | packing | +0.5162 | 14.3823 | +0.1914 |
-| 204 | 15 | 14.3041 | 14.8229 | 14.9656 | — | 14.9656 | packing | +0.5187 | 14.4955 | +0.1914 |
-| 132 | 12 | 11.5357 | 11.9914 | 11.9724 | — | 11.9724 | ceiling | +0.4368 | 11.7266 | +0.1909 |
-| 57 | 8 | 7.6332 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.3484 | 7.8233 | +0.1901 |
-| 152 | 13 | 12.3578 | 12.8310 | 12.9702 | — | 12.9702 | packing | +0.4732 | 12.5476 | +0.1898 |
-| 173 | 14 | 13.1655 | 13.6569 | 13.9679 | — | 13.9679 | packing | +0.4913 | 13.3552 | +0.1897 |
-| 177 | 14 | 13.3288 | 13.8230 | 13.9679 | — | 13.9679 | packing | +0.4942 | 13.5177 | +0.1889 |
-| 171 | 14 | 13.0830 | 13.5714 | 13.9679 | — | 13.9679 | packing | +0.4884 | 13.2717 | +0.1886 |
-| 43 | 7 | 6.6569 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.3271 | 6.8454 | +0.1885 |
-| 73 | 9 | 8.6158 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.3636 | 8.8012 | +0.1855 |
-| 203 | 15 | 14.2665 | 14.7782 | 14.9656 | — | 14.9656 | packing | +0.5117 | 14.4518 | +0.1853 |
-| 155 | 13 | 12.4891 | 12.9585 | 12.9702 | — | 12.9702 | packing | +0.4694 | 12.6723 | +0.1832 |
-| 232 | 16 | 15.2478 | 15.7782 | 15.9633 | — | 15.9633 | packing | +0.5304 | 15.4297 | +0.1819 |
-| 199 | 15 | 14.1149 | 14.6190 | 14.9656 | — | 14.9656 | packing | +0.5041 | 14.2961 | +0.1812 |
-| 200 | 15 | 14.1529 | 14.6569 | 14.9656 | — | 14.9656 | packing | +0.5039 | 14.3331 | +0.1802 |
-| 179 | 14 | 13.4097 | 13.8954 | 13.9679 | — | 13.9679 | packing | +0.4857 | 13.5885 | +0.1788 |
-| 180 | 14 | 13.4499 | 13.9351 | 13.9679 | — | 13.9679 | packing | +0.4852 | 13.6274 | +0.1775 |
-| 31 | 6 | 5.6904 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.2958 | 5.8675 | +0.1771 |
-| 91 | 10 | 9.6023 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.3747 | 9.7791 | +0.1768 |
-| 197 | 15 | 14.0384 | 14.5355 | 14.9656 | — | 14.9656 | packing | +0.4971 | 14.2145 | +0.1761 |
-| 202 | 15 | 14.2288 | 14.7279 | 14.9656 | — | 14.9656 | packing | +0.4992 | 14.4026 | +0.1739 |
-| 198 | 15 | 14.0767 | 14.5714 | 14.9656 | — | 14.9656 | packing | +0.4947 | 14.2496 | +0.1729 |
-| 178 | 14 | 13.3693 | 13.8467 | 13.9679 | — | 13.9679 | packing | +0.4774 | 13.5409 | +0.1715 |
-| 229 | 16 | 15.1421 | 15.6569 | 15.9633 | — | 15.9633 | packing | +0.5147 | 15.3111 | +0.1689 |
-| 111 | 11 | 10.5917 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.3831 | 10.7571 | +0.1654 |
-| 206 | 15 | 14.3791 | 14.8725 | 14.9656 | — | 14.9656 | packing | +0.4934 | 14.5441 | +0.1650 |
-| 156 | 13 | 12.5326 | 12.9822 | 12.9702 | — | 12.9702 | ceiling | +0.4376 | 12.6955 | +0.1629 |
-| 230 | 16 | 15.1774 | 15.6829 | 15.9633 | — | 15.9633 | packing | +0.5055 | 15.3366 | +0.1591 |
-| 181 | 14 | 13.4900 | 13.9570 | 13.9679 | — | 13.9679 | packing | +0.4670 | 13.6487 | +0.1587 |
-| 228 | 16 | 15.1067 | 15.6090 | 15.9633 | — | 15.9633 | packing | +0.5023 | 15.2643 | +0.1576 |
-| 226 | 16 | 15.0357 | 15.5355 | 15.9633 | — | 15.9633 | packing | +0.4999 | 15.1924 | +0.1568 |
-| 260 | 17 | 16.1327 | 16.6569 | 16.9610 | — | 16.9610 | packing | +0.5241 | 16.2890 | +0.1562 |
-| 227 | 16 | 15.0712 | 15.5711 | 15.9633 | — | 15.9633 | packing | +0.4998 | 15.2272 | +0.1559 |
-| 234 | 16 | 15.3178 | 15.8229 | 15.9633 | — | 15.9633 | packing | +0.5051 | 15.4734 | +0.1556 |
-| 205 | 15 | 14.3417 | 14.8245 | 14.9656 | — | 14.9656 | packing | +0.4828 | 14.4970 | +0.1554 |
-| 208 | 15 | 14.4536 | 14.9378 | 14.9656 | — | 14.9656 | packing | +0.4842 | 14.6079 | +0.1543 |
-| 133 | 12 | 11.5830 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.3894 | 11.7350 | +0.1520 |
-| 261 | 17 | 16.1658 | 16.6829 | 16.9610 | — | 16.9610 | packing | +0.5172 | 16.3145 | +0.1487 |
-| 207 | 15 | 14.4164 | 14.8940 | 14.9656 | — | 14.9656 | packing | +0.4776 | 14.5650 | +0.1486 |
-| 231 | 16 | 15.2127 | 15.7071 | 15.9633 | — | 15.9633 | packing | +0.4944 | 15.3602 | +0.1475 |
-| 233 | 16 | 15.2829 | 15.7782 | 15.9633 | — | 15.9633 | packing | +0.4953 | 15.4297 | +0.1468 |
-| 264 | 17 | 16.2643 | 16.7782 | 16.9610 | — | 16.9610 | packing | +0.5138 | 16.4076 | +0.1433 |
-| 263 | 17 | 16.2315 | 16.7426 | 16.9610 | — | 16.9610 | packing | +0.5111 | 16.3729 | +0.1413 |
-| 237 | 16 | 15.4222 | 15.9142 | 15.9633 | — | 15.9633 | packing | +0.4920 | 15.5627 | +0.1405 |
-| 262 | 17 | 16.1987 | 16.7071 | 16.9610 | — | 16.9610 | packing | +0.5084 | 16.3381 | +0.1394 |
-| 258 | 17 | 16.0665 | 16.5711 | 16.9610 | — | 16.9610 | packing | +0.5045 | 16.2051 | +0.1386 |
-| 236 | 16 | 15.3875 | 15.8761 | 15.9633 | — | 15.9633 | packing | +0.4886 | 15.5254 | +0.1379 |
-| 209 | 15 | 14.4907 | 14.9587 | 14.9656 | — | 14.9656 | packing | +0.4679 | 14.6283 | +0.1376 |
-| 157 | 13 | 12.5758 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.3943 | 12.7129 | +0.1370 |
-| 257 | 17 | 16.0333 | 16.5355 | 16.9610 | — | 16.9610 | packing | +0.5022 | 16.1703 | +0.1370 |
-| 259 | 17 | 16.0997 | 16.6026 | 16.9610 | — | 16.9610 | packing | +0.5029 | 16.2359 | +0.1362 |
-| 182 | 14 | 13.5300 | 13.9744 | 13.9679 | — | 13.9679 | ceiling | +0.4379 | 13.6658 | +0.1358 |
-| 238 | 16 | 15.4568 | 15.9398 | 15.9633 | — | 15.9633 | packing | +0.4830 | 15.5878 | +0.1310 |
-| 295 | 18 | 17.1864 | 17.7071 | 17.9587 | — | 17.9587 | packing | +0.5207 | 17.3160 | +0.1296 |
-| 235 | 16 | 15.3527 | 15.8266 | 15.9633 | — | 15.9633 | packing | +0.4739 | 15.4771 | +0.1244 |
-| 266 | 17 | 16.3297 | 16.8231 | 16.9610 | — | 16.9610 | packing | +0.4934 | 16.4515 | +0.1218 |
-| 183 | 14 | 13.5698 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.3981 | 13.6908 | +0.1210 |
-| 292 | 18 | 17.0935 | 17.6026 | 17.9587 | — | 17.9587 | packing | +0.5091 | 17.2138 | +0.1203 |
-| 293 | 18 | 17.1245 | 17.6341 | 17.9587 | — | 17.9587 | packing | +0.5096 | 17.2447 | +0.1202 |
-| 74 | 9 | 8.6811 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.2982 | 8.8012 | +0.1201 |
-| 299 | 18 | 17.3095 | 17.8229 | 17.9587 | — | 17.9587 | packing | +0.5134 | 17.4292 | +0.1197 |
-| 92 | 10 | 9.6603 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.3168 | 9.7791 | +0.1189 |
-| 290 | 18 | 17.0312 | 17.5355 | 17.9587 | — | 17.9587 | packing | +0.5043 | 17.1482 | +0.1170 |
-| 210 | 15 | 14.5277 | 14.9742 | 14.9656 | — | 14.9656 | ceiling | +0.4378 | 14.6435 | +0.1157 |
-| 58 | 8 | 7.7082 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.2734 | 7.8233 | +0.1151 |
-| 112 | 11 | 10.6437 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.3311 | 10.7571 | +0.1134 |
-| 239 | 16 | 15.4914 | 15.9564 | 15.9633 | — | 15.9633 | packing | +0.4651 | 15.6040 | +0.1126 |
-| 267 | 17 | 16.3623 | 16.8467 | 16.9610 | — | 16.9610 | packing | +0.4844 | 16.4746 | +0.1123 |
-| 268 | 17 | 16.3948 | 16.8793 | 16.9610 | — | 16.9610 | packing | +0.4845 | 16.5065 | +0.1117 |
-| 294 | 18 | 17.1555 | 17.6569 | 17.9587 | — | 17.9587 | packing | +0.5014 | 17.2669 | +0.1114 |
-| 265 | 17 | 16.2971 | 16.7782 | 16.9610 | — | 16.9610 | packing | +0.4811 | 16.4076 | +0.1106 |
-| 270 | 17 | 16.4596 | 16.9407 | 16.9610 | — | 16.9610 | packing | +0.4811 | 16.5666 | +0.1070 |
-| 298 | 18 | 17.2788 | 17.7782 | 17.9587 | — | 17.9587 | packing | +0.4994 | 17.3855 | +0.1067 |
-| 269 | 17 | 16.4272 | 16.9060 | 16.9610 | — | 16.9610 | packing | +0.4787 | 16.5326 | +0.1053 |
-| 134 | 12 | 11.6301 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.3423 | 11.7350 | +0.1048 |
-| 211 | 15 | 14.5647 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.4009 | 14.6687 | +0.1041 |
-| 301 | 18 | 17.3707 | 17.8690 | 17.9587 | — | 17.9587 | packing | +0.4983 | 17.4743 | +0.1036 |
-| 303 | 18 | 17.4317 | 17.9313 | 17.9587 | — | 17.9587 | packing | +0.4996 | 17.5353 | +0.1036 |
-| 297 | 18 | 17.2481 | 17.7412 | 17.9587 | — | 17.9587 | packing | +0.4931 | 17.3493 | +0.1013 |
-| 44 | 7 | 6.7446 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.2394 | 6.8454 | +0.1008 |
-| 296 | 18 | 17.2173 | 17.7071 | 17.9587 | — | 17.9587 | packing | +0.4898 | 17.3160 | +0.0988 |
-| 240 | 16 | 15.5258 | 15.9756 | 15.9633 | — | 15.9633 | ceiling | +0.4374 | 15.6228 | +0.0969 |
-| 158 | 13 | 12.6190 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.3512 | 12.7129 | +0.0939 |
-| 304 | 18 | 17.4621 | 17.9492 | 17.9587 | — | 17.9587 | packing | +0.4871 | 17.5528 | +0.0907 |
-| 302 | 18 | 17.4012 | 17.8867 | 17.9587 | — | 17.9587 | packing | +0.4855 | 17.4917 | +0.0905 |
-| 300 | 18 | 17.3401 | 17.8241 | 17.9587 | — | 17.9587 | packing | +0.4840 | 17.4305 | +0.0903 |
-| 271 | 17 | 16.4919 | 16.9551 | 16.9610 | — | 16.9610 | packing | +0.4632 | 16.5806 | +0.0887 |
-| 291 | 18 | 17.0624 | 17.5355 | 17.9587 | — | 17.9587 | packing | +0.4732 | 17.1482 | +0.0859 |
-| 184 | 14 | 13.6095 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.3583 | 13.6908 | +0.0813 |
-| 241 | 16 | 15.5602 | 15.9909 | 15.9633 | — | 15.9633 | ceiling | +0.4030 | 15.6377 | +0.0775 |
-| 305 | 18 | 17.4924 | 17.9608 | 17.9587 | — | 17.9587 | ceiling | +0.4663 | 17.5641 | +0.0717 |
-| 32 | 6 | 5.7958 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.1904 | 5.8675 | +0.0717 |
-| 272 | 17 | 16.5242 | 16.9698 | 16.9610 | — | 16.9610 | ceiling | +0.4368 | 16.5950 | +0.0708 |
-| 212 | 15 | 14.6015 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.3641 | 14.6687 | +0.0672 |
-| 113 | 11 | 10.6954 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.2794 | 10.7571 | +0.0617 |
-| 93 | 10 | 9.7178 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.2592 | 9.7791 | +0.0613 |
-| 135 | 12 | 11.6771 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.2954 | 11.7350 | +0.0579 |
-| 273 | 17 | 16.5563 | 16.9883 | 16.9610 | — | 16.9610 | ceiling | +0.4046 | 16.6131 | +0.0568 |
-| 75 | 9 | 8.7460 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.2334 | 8.8012 | +0.0553 |
-| 242 | 16 | 15.5945 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.3687 | 15.6466 | +0.0521 |
-| 159 | 13 | 12.6619 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.3082 | 12.7129 | +0.0510 |
-| 306 | 18 | 17.5227 | 17.9693 | 17.9587 | — | 17.9587 | ceiling | +0.4360 | 17.5724 | +0.0497 |
-| 185 | 14 | 13.6491 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.3187 | 13.6908 | +0.0417 |
-| 18 | 5 | 4.6750 | 4.8229 | 4.9885 | 4.8216 | 4.8216 | cap | +0.1466 | 4.7164 | +0.0414 |
-| 59 | 8 | 7.7823 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.1993 | 7.8233 | +0.0410 |
-| 20 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 | 4.8896 | +0.0396 |
-| 21 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 | 4.8896 | +0.0396 |
-| 274 | 17 | 16.5885 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3725 | 16.6245 | +0.0361 |
-| 307 | 18 | 17.5529 | 17.9828 | 17.9587 | — | 17.9587 | ceiling | +0.4057 | 17.5857 | +0.0327 |
-| 213 | 15 | 14.6382 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.3274 | 14.6687 | +0.0305 |
-| 308 | 18 | 17.5831 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.3755 | 17.6025 | +0.0193 |
-| 243 | 16 | 15.6287 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.3345 | 15.6466 | +0.0179 |
-| 45 | 7 | 6.8310 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.1530 | 6.8454 | +0.0144 |
-| 136 | 12 | 11.7238 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.2486 | 11.7350 | +0.0112 |
-| 114 | 11 | 10.7468 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.2280 | 10.7571 | +0.0103 |
-| 160 | 13 | 12.7047 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.2655 | 12.7129 | +0.0082 |
-| 94 | 10 | 9.7750 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.2021 | 9.7791 | +0.0042 |
-| 275 | 17 | 16.6205 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3405 | 16.6245 | +0.0040 |
-| 186 | 14 | 13.6886 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.2793 | 13.6908 | +0.0022 |
-| 11 | 4 | 3.8264 | 3.8771 | 3.9908 | 3.8690 | 3.8690 | cap | +0.0426 | 3.7915 | +0.0000 |
-| 12 | 4 | 3.9600 | 4.0000 | 3.9908 | 3.9908 | 3.9908 | ceiling | +0.0308 | 3.9117 | +0.0000 |
-| 17 | 5 | 4.5900 | 4.6755 | 4.9885 | 4.6710 | 4.6710 | cap | +0.0810 | 4.5723 | +0.0000 |
-| 19 | 5 | 4.8000 | 4.8856 | 4.9885 | — | 4.9885 | packing | +0.0856 | 4.7777 | +0.0000 |
-| 60 | 8 | 7.8557 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.1260 | 7.8233 | +0.0000 |
-| 61 | 8 | 7.9282 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.0534 | 7.8233 | +0.0000 |
-| 76 | 9 | 8.8102 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.1691 | 8.8012 | +0.0000 |
-| 77 | 9 | 8.8740 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.1053 | 8.8012 | +0.0000 |
-| 78 | 9 | 8.9373 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.0421 | 8.8012 | +0.0000 |
-| 95 | 10 | 9.8318 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.1453 | 9.7791 | +0.0000 |
-| 96 | 10 | 9.8882 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0888 | 9.7791 | +0.0000 |
-| 97 | 10 | 9.9443 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0328 | 9.7791 | +0.0000 |
-| 115 | 11 | 10.7980 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.1768 | 10.7571 | +0.0000 |
-| 116 | 11 | 10.8489 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.1259 | 10.7571 | +0.0000 |
-| 117 | 11 | 10.8995 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.0753 | 10.7571 | +0.0000 |
-| 118 | 11 | 10.9499 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.0249 | 10.7571 | +0.0000 |
-| 137 | 12 | 11.7703 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.2021 | 11.7350 | +0.0000 |
-| 138 | 12 | 11.8167 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.1558 | 11.7350 | +0.0000 |
-| 139 | 12 | 11.8628 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.1097 | 11.7350 | +0.0000 |
-| 140 | 12 | 11.9087 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.0637 | 11.7350 | +0.0000 |
-| 141 | 12 | 11.9545 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.0180 | 11.7350 | +0.0000 |
-| 161 | 13 | 12.7473 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.2228 | 12.7129 | +0.0000 |
-| 162 | 13 | 12.7898 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.1803 | 12.7129 | +0.0000 |
-| 163 | 13 | 12.8322 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.1380 | 12.7129 | +0.0000 |
-| 164 | 13 | 12.8743 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.0958 | 12.7129 | +0.0000 |
-| 165 | 13 | 12.9164 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.0538 | 12.7129 | +0.0000 |
-| 166 | 13 | 12.9583 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.0119 | 12.7129 | +0.0000 |
-| 187 | 14 | 13.7279 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.2399 | 13.6908 | +0.0000 |
-| 188 | 14 | 13.7671 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.2007 | 13.6908 | +0.0000 |
-| 189 | 14 | 13.8062 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.1616 | 13.6908 | +0.0000 |
-| 190 | 14 | 13.8452 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.1226 | 13.6908 | +0.0000 |
-| 191 | 14 | 13.8841 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.0838 | 13.6908 | +0.0000 |
-| 192 | 14 | 13.9228 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.0450 | 13.6908 | +0.0000 |
-| 193 | 14 | 13.9615 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.0064 | 13.6908 | +0.0000 |
-| 214 | 15 | 14.6748 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.2908 | 14.6687 | +0.0000 |
-| 215 | 15 | 14.7113 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.2543 | 14.6687 | +0.0000 |
-| 216 | 15 | 14.7477 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.2178 | 14.6687 | +0.0000 |
-| 217 | 15 | 14.7840 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1815 | 14.6687 | +0.0000 |
-| 218 | 15 | 14.8203 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1453 | 14.6687 | +0.0000 |
-| 219 | 15 | 14.8564 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1092 | 14.6687 | +0.0000 |
-| 220 | 15 | 14.8924 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.0731 | 14.6687 | +0.0000 |
-| 221 | 15 | 14.9284 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.0372 | 14.6687 | +0.0000 |
-| 222 | 15 | 14.9642 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.0013 | 14.6687 | +0.0000 |
-| 244 | 16 | 15.6629 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.3004 | 15.6466 | +0.0000 |
-| 245 | 16 | 15.6969 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.2663 | 15.6466 | +0.0000 |
-| 246 | 16 | 15.7309 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.2323 | 15.6466 | +0.0000 |
-| 247 | 16 | 15.7648 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.1984 | 15.6466 | +0.0000 |
-| 248 | 16 | 15.7986 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.1646 | 15.6466 | +0.0000 |
-| 249 | 16 | 15.8324 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.1309 | 15.6466 | +0.0000 |
-| 250 | 16 | 15.8661 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.0972 | 15.6466 | +0.0000 |
-| 251 | 16 | 15.8997 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.0636 | 15.6466 | +0.0000 |
-| 252 | 16 | 15.9332 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.0301 | 15.6466 | +0.0000 |
-| 276 | 17 | 16.6525 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3085 | 16.6245 | +0.0000 |
-| 277 | 17 | 16.6844 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.2766 | 16.6245 | +0.0000 |
-| 278 | 17 | 16.7162 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.2447 | 16.6245 | +0.0000 |
-| 279 | 17 | 16.7480 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.2130 | 16.6245 | +0.0000 |
-| 280 | 17 | 16.7797 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.1812 | 16.6245 | +0.0000 |
-| 281 | 17 | 16.8114 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.1496 | 16.6245 | +0.0000 |
-| 282 | 17 | 16.8430 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.1180 | 16.6245 | +0.0000 |
-| 283 | 17 | 16.8745 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.0865 | 16.6245 | +0.0000 |
-| 284 | 17 | 16.9060 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.0550 | 16.6245 | +0.0000 |
-| 285 | 17 | 16.9374 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.0236 | 16.6245 | +0.0000 |
-| 309 | 18 | 17.6132 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.3454 | 17.6025 | +0.0000 |
-| 310 | 18 | 17.6433 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.3154 | 17.6025 | +0.0000 |
-| 311 | 18 | 17.6733 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.2853 | 17.6025 | +0.0000 |
-| 312 | 18 | 17.7033 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.2554 | 17.6025 | +0.0000 |
-| 313 | 18 | 17.7332 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.2255 | 17.6025 | +0.0000 |
-| 314 | 18 | 17.7631 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1956 | 17.6025 | +0.0000 |
-| 315 | 18 | 17.7929 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1658 | 17.6025 | +0.0000 |
-| 316 | 18 | 17.8226 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1361 | 17.6025 | +0.0000 |
-| 317 | 18 | 17.8523 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1064 | 17.6025 | +0.0000 |
-| 318 | 18 | 17.8819 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.0767 | 17.6025 | +0.0000 |
-| 319 | 18 | 17.9115 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.0471 | 17.6025 | +0.0000 |
-| 320 | 18 | 17.9411 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.0176 | 17.6025 | +0.0000 |
+| 26 | 6 | 5.1231 | 5.6213 | 5.9862 | — | 5.9862 | packing | +0.4982 | 5.4987 | +0.3756 |
+| 39 | 7 | 6.2915 | 6.8107 | 6.9839 | — | 6.9839 | packing | +0.5192 | 6.6622 | +0.3707 |
+| 51 | 8 | 7.1644 | 7.7008 | 7.9816 | — | 7.9816 | packing | +0.5364 | 7.5329 | +0.3684 |
+| 38 | 7 | 6.1962 | 6.7071 | 6.9839 | — | 6.9839 | packing | +0.5110 | 6.5608 | +0.3647 |
+| 37 | 7 | 6.0990 | 6.5986 | 6.9839 | — | 6.9839 | packing | +0.4996 | 6.4547 | +0.3557 |
+| 27 | 6 | 5.2426 | 5.7071 | 5.9862 | — | 5.9862 | packing | +0.4645 | 5.5826 | +0.3400 |
+| 28 | 6 | 5.3589 | 5.8244 | 5.9862 | — | 5.9862 | packing | +0.4655 | 5.6974 | +0.3385 |
+| 29 | 6 | 5.4721 | 5.9338 | 5.9862 | 5.9308 | 5.9308 | cap | +0.4587 | 5.8044 | +0.3323 |
+| 68 | 9 | 8.2801 | 8.8034 | 8.9793 | — | 8.9793 | packing | +0.5233 | 8.6114 | +0.3313 |
+| 53 | 8 | 7.3246 | 7.8229 | 7.9816 | — | 7.9816 | packing | +0.4983 | 7.6523 | +0.3277 |
+| 66 | 9 | 8.1414 | 8.6569 | 8.9793 | — | 8.9793 | packing | +0.5154 | 8.4681 | +0.3266 |
+| 50 | 8 | 7.0828 | 7.5714 | 7.9816 | — | 7.9816 | packing | +0.4887 | 7.4063 | +0.3235 |
+| 84 | 10 | 9.1854 | 9.7071 | 9.9770 | — | 9.9770 | packing | +0.5218 | 9.4954 | +0.3100 |
+| 67 | 9 | 8.2111 | 8.7071 | 8.9793 | — | 8.9793 | packing | +0.4960 | 8.5172 | +0.3061 |
+| 103 | 11 | 10.1652 | 10.7038 | 10.9747 | — | 10.9747 | packing | +0.5386 | 10.4703 | +0.3052 |
+| 86 | 10 | 9.3066 | 9.8229 | 9.9770 | — | 9.9770 | packing | +0.5163 | 9.6086 | +0.3020 |
+| 83 | 10 | 9.1240 | 9.6348 | 9.9770 | — | 9.9770 | packing | +0.5108 | 9.4247 | +0.3007 |
+| 105 | 11 | 10.2736 | 10.8078 | 10.9747 | — | 10.9747 | packing | +0.5342 | 10.5721 | +0.2985 |
+| 41 | 7 | 6.4772 | 6.9267 | 6.9839 | — | 6.9839 | packing | +0.4495 | 6.7756 | +0.2984 |
+| 40 | 7 | 6.3852 | 6.8284 | 6.9839 | — | 6.9839 | packing | +0.4433 | 6.6795 | +0.2943 |
+| 52 | 8 | 7.2450 | 7.7071 | 7.9816 | — | 7.9816 | packing | +0.4621 | 7.5390 | +0.2940 |
+| 55 | 8 | 7.4807 | 7.9458 | 7.9816 | — | 7.9816 | packing | +0.4650 | 7.7725 | +0.2917 |
+| 30 | 6 | 5.5826 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.4036 | 5.8691 | +0.2866 |
+| 69 | 9 | 8.3485 | 8.8272 | 8.9793 | — | 8.9793 | packing | +0.4787 | 8.6347 | +0.2862 |
+| 85 | 10 | 9.2462 | 9.7426 | 9.9770 | — | 9.9770 | packing | +0.4964 | 9.5302 | +0.2840 |
+| 42 | 7 | 6.5678 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.4162 | 6.8473 | +0.2796 |
+| 65 | 9 | 8.0711 | 8.5355 | 8.9793 | — | 8.9793 | packing | +0.4645 | 8.3494 | +0.2783 |
+| 54 | 8 | 7.4031 | 7.8467 | 7.9816 | — | 7.9816 | packing | +0.4435 | 7.6755 | +0.2724 |
+| 126 | 12 | 11.2470 | 11.7762 | 11.9724 | — | 11.9724 | packing | +0.5292 | 11.5193 | +0.2724 |
+| 70 | 9 | 8.4162 | 8.8817 | 8.9793 | — | 8.9793 | packing | +0.4655 | 8.6880 | +0.2718 |
+| 102 | 11 | 10.1104 | 10.6114 | 10.9747 | — | 10.9747 | packing | +0.5010 | 10.3800 | +0.2695 |
+| 127 | 12 | 11.2956 | 11.8229 | 11.9724 | — | 11.9724 | packing | +0.5272 | 11.5650 | +0.2694 |
+| 56 | 8 | 7.5574 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.4242 | 7.8255 | +0.2681 |
+| 71 | 9 | 8.4833 | 8.9441 | 8.9793 | — | 8.9793 | packing | +0.4608 | 8.7490 | +0.2657 |
+| 82 | 10 | 9.0623 | 9.5355 | 9.9770 | — | 9.9770 | packing | +0.4733 | 9.3276 | +0.2653 |
+| 106 | 11 | 10.3274 | 10.8230 | 10.9747 | — | 10.9747 | packing | +0.4956 | 10.5869 | +0.2596 |
+| 87 | 10 | 9.3666 | 9.8388 | 9.9770 | — | 9.9770 | packing | +0.4722 | 9.6242 | +0.2576 |
+| 104 | 11 | 10.2195 | 10.7071 | 10.9747 | — | 10.9747 | packing | +0.4876 | 10.4736 | +0.2540 |
+| 72 | 9 | 8.5498 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.4295 | 8.8037 | +0.2539 |
+| 125 | 12 | 11.1980 | 11.7071 | 11.9724 | — | 11.9724 | packing | +0.5091 | 11.4518 | +0.2537 |
+| 124 | 12 | 11.1489 | 11.6569 | 11.9724 | — | 11.9724 | packing | +0.5080 | 11.4026 | +0.2537 |
+| 108 | 11 | 10.4340 | 10.9259 | 10.9747 | — | 10.9747 | packing | +0.4919 | 10.6876 | +0.2537 |
+| 101 | 11 | 10.0554 | 10.5355 | 10.9747 | — | 10.9747 | packing | +0.4801 | 10.3058 | +0.2504 |
+| 123 | 12 | 11.0995 | 11.6014 | 11.9724 | — | 11.9724 | packing | +0.5019 | 11.3484 | +0.2489 |
+| 89 | 10 | 9.4853 | 9.9497 | 9.9770 | — | 9.9770 | packing | +0.4645 | 9.7328 | +0.2475 |
+| 88 | 10 | 9.4261 | 9.8882 | 9.9770 | — | 9.9770 | packing | +0.4620 | 9.6725 | +0.2464 |
+| 147 | 13 | 12.1355 | 12.6569 | 12.9702 | — | 12.9702 | packing | +0.5213 | 12.3808 | +0.2453 |
+| 90 | 10 | 9.5440 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.4330 | 9.7819 | +0.2379 |
+| 146 | 13 | 12.0905 | 12.6009 | 12.9702 | — | 12.9702 | packing | +0.5104 | 12.3261 | +0.2356 |
+| 122 | 12 | 11.0499 | 11.5355 | 11.9724 | — | 11.9724 | packing | +0.4857 | 11.2840 | +0.2341 |
+| 176 | 14 | 13.2882 | 13.8229 | 13.9679 | — | 13.9679 | packing | +0.5347 | 13.5214 | +0.2332 |
+| 175 | 14 | 13.2474 | 13.7782 | 13.9679 | — | 13.9679 | packing | +0.5307 | 13.4777 | +0.2302 |
+| 150 | 13 | 12.2694 | 12.7782 | 12.9702 | — | 12.9702 | packing | +0.5087 | 12.4995 | +0.2301 |
+| 129 | 12 | 11.3923 | 11.8813 | 11.9724 | — | 11.9724 | packing | +0.4890 | 11.6222 | +0.2299 |
+| 151 | 13 | 12.3137 | 12.8229 | 12.9702 | — | 12.9702 | packing | +0.5092 | 12.5432 | +0.2295 |
+| 107 | 11 | 10.3808 | 10.8467 | 10.9747 | — | 10.9747 | packing | +0.4658 | 10.6101 | +0.2293 |
+| 109 | 11 | 10.4868 | 10.9497 | 10.9747 | — | 10.9747 | packing | +0.4629 | 10.7109 | +0.2241 |
+| 128 | 12 | 11.3441 | 11.8251 | 11.9724 | — | 11.9724 | packing | +0.4810 | 11.5672 | +0.2231 |
+| 110 | 11 | 10.5394 | 10.9968 | 10.9747 | — | 10.9747 | ceiling | +0.4354 | 10.7570 | +0.2176 |
+| 145 | 13 | 12.0454 | 12.5355 | 12.9702 | — | 12.9702 | packing | +0.4902 | 12.2621 | +0.2168 |
+| 130 | 12 | 11.4403 | 11.9112 | 11.9724 | — | 11.9724 | packing | +0.4709 | 11.6514 | +0.2111 |
+| 131 | 12 | 11.4881 | 11.9565 | 11.9724 | — | 11.9724 | packing | +0.4685 | 11.6958 | +0.2077 |
+| 149 | 13 | 12.2250 | 12.7071 | 12.9702 | — | 12.9702 | packing | +0.4821 | 12.4300 | +0.2050 |
+| 154 | 13 | 12.4455 | 12.9317 | 12.9702 | — | 12.9702 | packing | +0.4862 | 12.6497 | +0.2042 |
+| 174 | 14 | 13.2066 | 13.7071 | 13.9679 | — | 13.9679 | packing | +0.5006 | 13.4082 | +0.2016 |
+| 148 | 13 | 12.1803 | 12.6569 | 12.9702 | — | 12.9702 | packing | +0.4765 | 12.3808 | +0.2005 |
+| 153 | 13 | 12.4018 | 12.8817 | 12.9702 | — | 12.9702 | packing | +0.4799 | 12.6007 | +0.1990 |
+| 170 | 14 | 13.0416 | 13.5355 | 13.9679 | — | 13.9679 | packing | +0.4939 | 13.2403 | +0.1987 |
+| 172 | 14 | 13.1244 | 13.6190 | 13.9679 | — | 13.9679 | packing | +0.4946 | 13.3220 | +0.1976 |
+| 204 | 15 | 14.3041 | 14.8229 | 14.9656 | — | 14.9656 | packing | +0.5187 | 14.4996 | +0.1955 |
+| 201 | 15 | 14.1909 | 14.7071 | 14.9656 | — | 14.9656 | packing | +0.5162 | 14.3864 | +0.1955 |
+| 132 | 12 | 11.5357 | 11.9914 | 11.9724 | — | 11.9724 | ceiling | +0.4368 | 11.7299 | +0.1943 |
+| 173 | 14 | 13.1655 | 13.6569 | 13.9679 | — | 13.9679 | packing | +0.4913 | 13.3590 | +0.1935 |
+| 152 | 13 | 12.3578 | 12.8310 | 12.9702 | — | 12.9702 | packing | +0.4732 | 12.5512 | +0.1934 |
+| 177 | 14 | 13.3288 | 13.8230 | 13.9679 | — | 13.9679 | packing | +0.4942 | 13.5216 | +0.1927 |
+| 171 | 14 | 13.0830 | 13.5714 | 13.9679 | — | 13.9679 | packing | +0.4884 | 13.2754 | +0.1924 |
+| 57 | 8 | 7.6332 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.3484 | 7.8255 | +0.1923 |
+| 43 | 7 | 6.6569 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.3271 | 6.8473 | +0.1905 |
+| 203 | 15 | 14.2665 | 14.7782 | 14.9656 | — | 14.9656 | packing | +0.5117 | 14.4559 | +0.1894 |
+| 73 | 9 | 8.6158 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.3636 | 8.8037 | +0.1879 |
+| 155 | 13 | 12.4891 | 12.9585 | 12.9702 | — | 12.9702 | packing | +0.4694 | 12.6759 | +0.1868 |
+| 232 | 16 | 15.2478 | 15.7782 | 15.9633 | — | 15.9633 | packing | +0.5304 | 15.4341 | +0.1863 |
+| 199 | 15 | 14.1149 | 14.6190 | 14.9656 | — | 14.9656 | packing | +0.5041 | 14.3002 | +0.1853 |
+| 200 | 15 | 14.1529 | 14.6569 | 14.9656 | — | 14.9656 | packing | +0.5039 | 14.3372 | +0.1843 |
+| 179 | 14 | 13.4097 | 13.8954 | 13.9679 | — | 13.9679 | packing | +0.4857 | 13.5924 | +0.1827 |
+| 180 | 14 | 13.4499 | 13.9351 | 13.9679 | — | 13.9679 | packing | +0.4852 | 13.6312 | +0.1813 |
+| 197 | 15 | 14.0384 | 14.5355 | 14.9656 | — | 14.9656 | packing | +0.4971 | 14.2185 | +0.1801 |
+| 91 | 10 | 9.6023 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.3747 | 9.7819 | +0.1796 |
+| 31 | 6 | 5.6904 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.2958 | 5.8691 | +0.1787 |
+| 202 | 15 | 14.2288 | 14.7279 | 14.9656 | — | 14.9656 | packing | +0.4992 | 14.4067 | +0.1780 |
+| 198 | 15 | 14.0767 | 14.5714 | 14.9656 | — | 14.9656 | packing | +0.4947 | 14.2536 | +0.1769 |
+| 178 | 14 | 13.3693 | 13.8467 | 13.9679 | — | 13.9679 | packing | +0.4774 | 13.5447 | +0.1754 |
+| 229 | 16 | 15.1421 | 15.6569 | 15.9633 | — | 15.9633 | packing | +0.5147 | 15.3154 | +0.1733 |
+| 206 | 15 | 14.3791 | 14.8725 | 14.9656 | — | 14.9656 | packing | +0.4934 | 14.5482 | +0.1691 |
+| 111 | 11 | 10.5917 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.3831 | 10.7601 | +0.1684 |
+| 156 | 13 | 12.5326 | 12.9822 | 12.9702 | — | 12.9702 | ceiling | +0.4376 | 12.6991 | +0.1665 |
+| 230 | 16 | 15.1774 | 15.6829 | 15.9633 | — | 15.9633 | packing | +0.5055 | 15.3409 | +0.1634 |
+| 181 | 14 | 13.4900 | 13.9570 | 13.9679 | — | 13.9679 | packing | +0.4670 | 13.6526 | +0.1626 |
+| 228 | 16 | 15.1067 | 15.6090 | 15.9633 | — | 15.9633 | packing | +0.5023 | 15.2686 | +0.1619 |
+| 226 | 16 | 15.0357 | 15.5355 | 15.9633 | — | 15.9633 | packing | +0.4999 | 15.1967 | +0.1610 |
+| 260 | 17 | 16.1327 | 16.6569 | 16.9610 | — | 16.9610 | packing | +0.5241 | 16.2936 | +0.1608 |
+| 227 | 16 | 15.0712 | 15.5711 | 15.9633 | — | 15.9633 | packing | +0.4998 | 15.2315 | +0.1602 |
+| 234 | 16 | 15.3178 | 15.8229 | 15.9633 | — | 15.9633 | packing | +0.5051 | 15.4778 | +0.1600 |
+| 205 | 15 | 14.3417 | 14.8245 | 14.9656 | — | 14.9656 | packing | +0.4828 | 14.5011 | +0.1595 |
+| 208 | 15 | 14.4536 | 14.9378 | 14.9656 | — | 14.9656 | packing | +0.4842 | 14.6120 | +0.1584 |
+| 133 | 12 | 11.5830 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.3894 | 11.7383 | +0.1553 |
+| 261 | 17 | 16.1658 | 16.6829 | 16.9610 | — | 16.9610 | packing | +0.5172 | 16.3191 | +0.1533 |
+| 207 | 15 | 14.4164 | 14.8940 | 14.9656 | — | 14.9656 | packing | +0.4776 | 14.5692 | +0.1527 |
+| 231 | 16 | 15.2127 | 15.7071 | 15.9633 | — | 15.9633 | packing | +0.4944 | 15.3645 | +0.1519 |
+| 233 | 16 | 15.2829 | 15.7782 | 15.9633 | — | 15.9633 | packing | +0.4953 | 15.4341 | +0.1512 |
+| 264 | 17 | 16.2643 | 16.7782 | 16.9610 | — | 16.9610 | packing | +0.5138 | 16.4123 | +0.1479 |
+| 263 | 17 | 16.2315 | 16.7426 | 16.9610 | — | 16.9610 | packing | +0.5111 | 16.3775 | +0.1460 |
+| 237 | 16 | 15.4222 | 15.9142 | 15.9633 | — | 15.9633 | packing | +0.4920 | 15.5671 | +0.1449 |
+| 262 | 17 | 16.1987 | 16.7071 | 16.9610 | — | 16.9610 | packing | +0.5084 | 16.3427 | +0.1441 |
+| 258 | 17 | 16.0665 | 16.5711 | 16.9610 | — | 16.9610 | packing | +0.5045 | 16.2097 | +0.1431 |
+| 236 | 16 | 15.3875 | 15.8761 | 15.9633 | — | 15.9633 | packing | +0.4886 | 15.5298 | +0.1423 |
+| 209 | 15 | 14.4907 | 14.9587 | 14.9656 | — | 14.9656 | packing | +0.4679 | 14.6324 | +0.1417 |
+| 257 | 17 | 16.0333 | 16.5355 | 16.9610 | — | 16.9610 | packing | +0.5022 | 16.1749 | +0.1416 |
+| 259 | 17 | 16.0997 | 16.6026 | 16.9610 | — | 16.9610 | packing | +0.5029 | 16.2405 | +0.1408 |
+| 157 | 13 | 12.5758 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.3943 | 12.7165 | +0.1406 |
+| 182 | 14 | 13.5300 | 13.9744 | 13.9679 | — | 13.9679 | ceiling | +0.4379 | 13.6697 | +0.1397 |
+| 238 | 16 | 15.4568 | 15.9398 | 15.9633 | — | 15.9633 | packing | +0.4830 | 15.5922 | +0.1354 |
+| 295 | 18 | 17.1864 | 17.7071 | 17.9587 | — | 17.9587 | packing | +0.5207 | 17.3209 | +0.1345 |
+| 235 | 16 | 15.3527 | 15.8266 | 15.9633 | — | 15.9633 | packing | +0.4739 | 15.4814 | +0.1287 |
+| 266 | 17 | 16.3297 | 16.8231 | 16.9610 | — | 16.9610 | packing | +0.4934 | 16.4562 | +0.1265 |
+| 292 | 18 | 17.0935 | 17.6026 | 17.9587 | — | 17.9587 | packing | +0.5091 | 17.2187 | +0.1252 |
+| 293 | 18 | 17.1245 | 17.6341 | 17.9587 | — | 17.9587 | packing | +0.5096 | 17.2496 | +0.1250 |
+| 183 | 14 | 13.5698 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.3981 | 13.6947 | +0.1249 |
+| 299 | 18 | 17.3095 | 17.8229 | 17.9587 | — | 17.9587 | packing | +0.5134 | 17.4342 | +0.1247 |
+| 74 | 9 | 8.6811 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.2982 | 8.8037 | +0.1226 |
+| 290 | 18 | 17.0312 | 17.5355 | 17.9587 | — | 17.9587 | packing | +0.5043 | 17.1531 | +0.1219 |
+| 92 | 10 | 9.6603 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.3168 | 9.7819 | +0.1217 |
+| 210 | 15 | 14.5277 | 14.9742 | 14.9656 | — | 14.9656 | ceiling | +0.4378 | 14.6476 | +0.1199 |
+| 58 | 8 | 7.7082 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.2734 | 7.8255 | +0.1173 |
+| 239 | 16 | 15.4914 | 15.9564 | 15.9633 | — | 15.9633 | packing | +0.4651 | 15.6084 | +0.1171 |
+| 267 | 17 | 16.3623 | 16.8467 | 16.9610 | — | 16.9610 | packing | +0.4844 | 16.4793 | +0.1170 |
+| 112 | 11 | 10.6437 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.3311 | 10.7601 | +0.1164 |
+| 268 | 17 | 16.3948 | 16.8793 | 16.9610 | — | 16.9610 | packing | +0.4845 | 16.5112 | +0.1164 |
+| 294 | 18 | 17.1555 | 17.6569 | 17.9587 | — | 17.9587 | packing | +0.5014 | 17.2718 | +0.1163 |
+| 265 | 17 | 16.2971 | 16.7782 | 16.9610 | — | 16.9610 | packing | +0.4811 | 16.4123 | +0.1152 |
+| 270 | 17 | 16.4596 | 16.9407 | 16.9610 | — | 16.9610 | packing | +0.4811 | 16.5713 | +0.1116 |
+| 298 | 18 | 17.2788 | 17.7782 | 17.9587 | — | 17.9587 | packing | +0.4994 | 17.3904 | +0.1116 |
+| 269 | 17 | 16.4272 | 16.9060 | 16.9610 | — | 16.9610 | packing | +0.4787 | 16.5373 | +0.1100 |
+| 301 | 18 | 17.3707 | 17.8690 | 17.9587 | — | 17.9587 | packing | +0.4983 | 17.4793 | +0.1086 |
+| 303 | 18 | 17.4317 | 17.9313 | 17.9587 | — | 17.9587 | packing | +0.4996 | 17.5402 | +0.1085 |
+| 211 | 15 | 14.5647 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.4009 | 14.6729 | +0.1082 |
+| 134 | 12 | 11.6301 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.3423 | 11.7383 | +0.1081 |
+| 297 | 18 | 17.2481 | 17.7412 | 17.9587 | — | 17.9587 | packing | +0.4931 | 17.3542 | +0.1062 |
+| 296 | 18 | 17.2173 | 17.7071 | 17.9587 | — | 17.9587 | packing | +0.4898 | 17.3209 | +0.1037 |
+| 44 | 7 | 6.7446 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.2394 | 6.8473 | +0.1028 |
+| 240 | 16 | 15.5258 | 15.9756 | 15.9633 | — | 15.9633 | ceiling | +0.4374 | 15.6272 | +0.1013 |
+| 158 | 13 | 12.6190 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.3512 | 12.7165 | +0.0975 |
+| 304 | 18 | 17.4621 | 17.9492 | 17.9587 | — | 17.9587 | packing | +0.4871 | 17.5577 | +0.0956 |
+| 302 | 18 | 17.4012 | 17.8867 | 17.9587 | — | 17.9587 | packing | +0.4855 | 17.4967 | +0.0954 |
+| 300 | 18 | 17.3401 | 17.8241 | 17.9587 | — | 17.9587 | packing | +0.4840 | 17.4354 | +0.0953 |
+| 271 | 17 | 16.4919 | 16.9551 | 16.9610 | — | 16.9610 | packing | +0.4632 | 16.5853 | +0.0934 |
+| 291 | 18 | 17.0624 | 17.5355 | 17.9587 | — | 17.9587 | packing | +0.4732 | 17.1531 | +0.0907 |
+| 184 | 14 | 13.6095 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.3583 | 13.6947 | +0.0852 |
+| 241 | 16 | 15.5602 | 15.9909 | 15.9633 | — | 15.9633 | ceiling | +0.4030 | 15.6422 | +0.0819 |
+| 305 | 18 | 17.4924 | 17.9608 | 17.9587 | — | 17.9587 | ceiling | +0.4663 | 17.5690 | +0.0766 |
+| 272 | 17 | 16.5242 | 16.9698 | 16.9610 | — | 16.9610 | ceiling | +0.4368 | 16.5997 | +0.0755 |
+| 32 | 6 | 5.7958 | 6.0000 | 5.9862 | 5.9862 | 5.9862 | ceiling | +0.1904 | 5.8691 | +0.0733 |
+| 212 | 15 | 14.6015 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.3641 | 14.6729 | +0.0714 |
+| 113 | 11 | 10.6954 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.2794 | 10.7601 | +0.0647 |
+| 93 | 10 | 9.7178 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.2592 | 9.7819 | +0.0641 |
+| 273 | 17 | 16.5563 | 16.9883 | 16.9610 | — | 16.9610 | ceiling | +0.4046 | 16.6178 | +0.0615 |
+| 135 | 12 | 11.6771 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.2954 | 11.7383 | +0.0612 |
+| 75 | 9 | 8.7460 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.2334 | 8.8037 | +0.0578 |
+| 242 | 16 | 15.5945 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.3687 | 15.6511 | +0.0565 |
+| 306 | 18 | 17.5227 | 17.9693 | 17.9587 | — | 17.9587 | ceiling | +0.4360 | 17.5774 | +0.0547 |
+| 159 | 13 | 12.6619 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.3082 | 12.7165 | +0.0546 |
+| 185 | 14 | 13.6491 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.3187 | 13.6947 | +0.0456 |
+| 59 | 8 | 7.7823 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.1993 | 7.8255 | +0.0432 |
+| 20 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 | 4.8910 | +0.0410 |
+| 21 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 | 4.8910 | +0.0410 |
+| 274 | 17 | 16.5885 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3725 | 16.6292 | +0.0408 |
+| 18 | 5 | 4.6790 | 4.8229 | 4.9885 | 4.8216 | 4.8216 | cap | +0.1426 | 4.7177 | +0.0387 |
+| 307 | 18 | 17.5529 | 17.9828 | 17.9587 | — | 17.9587 | ceiling | +0.4057 | 17.5906 | +0.0377 |
+| 213 | 15 | 14.6382 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.3274 | 14.6729 | +0.0347 |
+| 308 | 18 | 17.5831 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.3755 | 17.6074 | +0.0243 |
+| 243 | 16 | 15.6287 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.3345 | 15.6511 | +0.0223 |
+| 45 | 7 | 6.8310 | 7.0000 | 6.9839 | 6.9839 | 6.9839 | ceiling | +0.1530 | 6.8473 | +0.0164 |
+| 136 | 12 | 11.7238 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.2486 | 11.7383 | +0.0145 |
+| 114 | 11 | 10.7468 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.2280 | 10.7601 | +0.0133 |
+| 160 | 13 | 12.7047 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.2655 | 12.7165 | +0.0118 |
+| 275 | 17 | 16.6205 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3405 | 16.6292 | +0.0087 |
+| 94 | 10 | 9.7750 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.2021 | 9.7819 | +0.0069 |
+| 186 | 14 | 13.6886 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.2793 | 13.6947 | +0.0061 |
+| 11 | 4 | 3.8264 | 3.8771 | 3.9908 | 3.8690 | 3.8690 | cap | +0.0426 | 3.7925 | +0.0000 |
+| 12 | 4 | 3.9600 | 4.0000 | 3.9908 | 3.9908 | 3.9908 | ceiling | +0.0308 | 3.9128 | +0.0000 |
+| 17 | 5 | 4.5900 | 4.6755 | 4.9885 | 4.6710 | 4.6710 | cap | +0.0810 | 4.5736 | +0.0000 |
+| 19 | 5 | 4.8000 | 4.8856 | 4.9885 | — | 4.9885 | packing | +0.0856 | 4.7791 | +0.0000 |
+| 60 | 8 | 7.8557 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.1260 | 7.8255 | +0.0000 |
+| 61 | 8 | 7.9282 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.0534 | 7.8255 | +0.0000 |
+| 76 | 9 | 8.8102 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.1691 | 8.8037 | +0.0000 |
+| 77 | 9 | 8.8740 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.1053 | 8.8037 | +0.0000 |
+| 78 | 9 | 8.9373 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.0421 | 8.8037 | +0.0000 |
+| 95 | 10 | 9.8318 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.1453 | 9.7819 | +0.0000 |
+| 96 | 10 | 9.8882 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0888 | 9.7819 | +0.0000 |
+| 97 | 10 | 9.9443 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.0328 | 9.7819 | +0.0000 |
+| 115 | 11 | 10.7980 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.1768 | 10.7601 | +0.0000 |
+| 116 | 11 | 10.8489 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.1259 | 10.7601 | +0.0000 |
+| 117 | 11 | 10.8995 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.0753 | 10.7601 | +0.0000 |
+| 118 | 11 | 10.9499 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.0249 | 10.7601 | +0.0000 |
+| 137 | 12 | 11.7703 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.2021 | 11.7383 | +0.0000 |
+| 138 | 12 | 11.8167 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.1558 | 11.7383 | +0.0000 |
+| 139 | 12 | 11.8628 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.1097 | 11.7383 | +0.0000 |
+| 140 | 12 | 11.9087 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.0637 | 11.7383 | +0.0000 |
+| 141 | 12 | 11.9545 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.0180 | 11.7383 | +0.0000 |
+| 161 | 13 | 12.7473 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.2228 | 12.7165 | +0.0000 |
+| 162 | 13 | 12.7898 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.1803 | 12.7165 | +0.0000 |
+| 163 | 13 | 12.8322 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.1380 | 12.7165 | +0.0000 |
+| 164 | 13 | 12.8743 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.0958 | 12.7165 | +0.0000 |
+| 165 | 13 | 12.9164 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.0538 | 12.7165 | +0.0000 |
+| 166 | 13 | 12.9583 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.0119 | 12.7165 | +0.0000 |
+| 187 | 14 | 13.7279 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.2399 | 13.6947 | +0.0000 |
+| 188 | 14 | 13.7671 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.2007 | 13.6947 | +0.0000 |
+| 189 | 14 | 13.8062 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.1616 | 13.6947 | +0.0000 |
+| 190 | 14 | 13.8452 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.1226 | 13.6947 | +0.0000 |
+| 191 | 14 | 13.8841 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.0838 | 13.6947 | +0.0000 |
+| 192 | 14 | 13.9228 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.0450 | 13.6947 | +0.0000 |
+| 193 | 14 | 13.9615 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.0064 | 13.6947 | +0.0000 |
+| 214 | 15 | 14.6748 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.2908 | 14.6729 | +0.0000 |
+| 215 | 15 | 14.7113 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.2543 | 14.6729 | +0.0000 |
+| 216 | 15 | 14.7477 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.2178 | 14.6729 | +0.0000 |
+| 217 | 15 | 14.7840 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1815 | 14.6729 | +0.0000 |
+| 218 | 15 | 14.8203 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1453 | 14.6729 | +0.0000 |
+| 219 | 15 | 14.8564 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1092 | 14.6729 | +0.0000 |
+| 220 | 15 | 14.8924 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.0731 | 14.6729 | +0.0000 |
+| 221 | 15 | 14.9284 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.0372 | 14.6729 | +0.0000 |
+| 222 | 15 | 14.9642 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.0013 | 14.6729 | +0.0000 |
+| 244 | 16 | 15.6629 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.3004 | 15.6511 | +0.0000 |
+| 245 | 16 | 15.6969 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.2663 | 15.6511 | +0.0000 |
+| 246 | 16 | 15.7309 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.2323 | 15.6511 | +0.0000 |
+| 247 | 16 | 15.7648 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.1984 | 15.6511 | +0.0000 |
+| 248 | 16 | 15.7986 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.1646 | 15.6511 | +0.0000 |
+| 249 | 16 | 15.8324 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.1309 | 15.6511 | +0.0000 |
+| 250 | 16 | 15.8661 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.0972 | 15.6511 | +0.0000 |
+| 251 | 16 | 15.8997 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.0636 | 15.6511 | +0.0000 |
+| 252 | 16 | 15.9332 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.0301 | 15.6511 | +0.0000 |
+| 276 | 17 | 16.6525 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3085 | 16.6292 | +0.0000 |
+| 277 | 17 | 16.6844 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.2766 | 16.6292 | +0.0000 |
+| 278 | 17 | 16.7162 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.2447 | 16.6292 | +0.0000 |
+| 279 | 17 | 16.7480 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.2130 | 16.6292 | +0.0000 |
+| 280 | 17 | 16.7797 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.1812 | 16.6292 | +0.0000 |
+| 281 | 17 | 16.8114 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.1496 | 16.6292 | +0.0000 |
+| 282 | 17 | 16.8430 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.1180 | 16.6292 | +0.0000 |
+| 283 | 17 | 16.8745 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.0865 | 16.6292 | +0.0000 |
+| 284 | 17 | 16.9060 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.0550 | 16.6292 | +0.0000 |
+| 285 | 17 | 16.9374 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.0236 | 16.6292 | +0.0000 |
+| 309 | 18 | 17.6132 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.3454 | 17.6074 | +0.0000 |
+| 310 | 18 | 17.6433 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.3154 | 17.6074 | +0.0000 |
+| 311 | 18 | 17.6733 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.2853 | 17.6074 | +0.0000 |
+| 312 | 18 | 17.7033 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.2554 | 17.6074 | +0.0000 |
+| 313 | 18 | 17.7332 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.2255 | 17.6074 | +0.0000 |
+| 314 | 18 | 17.7631 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1956 | 17.6074 | +0.0000 |
+| 315 | 18 | 17.7929 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1658 | 17.6074 | +0.0000 |
+| 316 | 18 | 17.8226 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1361 | 17.6074 | +0.0000 |
+| 317 | 18 | 17.8523 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1064 | 17.6074 | +0.0000 |
+| 318 | 18 | 17.8819 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.0767 | 17.6074 | +0.0000 |
+| 319 | 18 | 17.9115 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.0471 | 17.6074 | +0.0000 |
+| 320 | 18 | 17.9411 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.0176 | 17.6074 | +0.0000 |
 
 ## Foreclosed
 

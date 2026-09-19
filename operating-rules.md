@@ -320,6 +320,24 @@ Validation, documentation decisions, limitations, ranked follow-up candidates, a
 one selected next entry follow.
 Agenda chronology may support that account; it may not stand in for it.
 
+**The description is the template.**
+[`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) is the section
+order.
+`devtools.check_pr_description` refuses a body that drops those headings, replaces
+the disposition table with a session chronology, or opens Cost with every experiment
+wall. Session-141’s first [#201](https://github.com/jlevy/squares/pull/201) draft was a
+heading-less chronology; the first rewrite had the headings and still listed fifteen
+covering walls. [#196](https://github.com/jlevy/squares/pull/196) and
+[#197](https://github.com/jlevy/squares/pull/197) are the filled template: Cost is two
+to four sentences of what the slice is, what it cost, and what it does not do.
+Dispositions are one row per decision, not per probe.
+A contextual dump is an unfinished pull request, the same as a missing cost block.
+From `packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.check_pr_description --file BODY.md
+```
+
 ## OR-10: Treat matched agent and host handoffs as continuation, not a reset
 
 An interrupted session may move between Claude and Codex, or between Linux and macOS,

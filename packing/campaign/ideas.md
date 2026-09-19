@@ -648,6 +648,18 @@ M2, M4, M5, M6, and M8 stay retired in agenda-037 BC-360. `exp-161` remains Rout
 | --- | --- | --- | --- | --- |
 | 189 | Stock colgen raises a verified floor at n in {12, 17, 19, 20} | registered | [H-218](hypotheses/H-218-existing-colgen-raises-a-small-n-floor.md) | Confirm only on RETAINABLE at a side above the current floor. A site set above n is a construction negative, not a wall. n=11 stays T-026. |
 
+## N<100 re-rank after Session-140 — X-039
+
+[X-039](explorations/X-039-n100-re-rank-after-session-140.md) re-ranks the open floors
+from Session-140 masses. Leftover n=18 is a new claim. The Nagamochi-only sizes are a
+new claim. H-218 stays row 189; its reopen is a new site set at n=20, not a replay.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 190 | T-028-seeded colgen raises s(18) above 187/40 | confirmed | [H-219](hypotheses/H-219-t028-seeded-colgen-raises-s18.md) | T-029 retained leftover 1871/400, auto plus windows 5. Off the H-218 sweep. |
+| 191 | Seedless colgen raises a Nagamochi-only floor in {32, 31, 30, 26, 27, 29, 45, 44} | registered | [H-220](hypotheses/H-220-seedless-colgen-raises-nagamochi-floor.md) | Session-141 exp-166–173: all eight queued sides measured; n=32/31/30/45/44 unconverged, n=26/27 plateau, n=29 freeze interval-refused. No RETAINABLE. Confirm only on RETAINABLE. |
+| 192 | T-029-seeded colgen raises s(18) above 1871/400 | confirmed | [H-221](hypotheses/H-221-t029-seeded-colgen-raises-s18.md) | T-030 retained 4679/1000, auto plus windows 5. Off the H-218 sweep. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

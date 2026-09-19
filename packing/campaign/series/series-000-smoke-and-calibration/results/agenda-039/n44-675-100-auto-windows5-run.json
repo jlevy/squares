@@ -1,0 +1,337 @@
+{
+ "settings": {
+  "n": 44,
+  "outer_side": "27/4",
+  "square_side": "9977/10000",
+  "grid_counts": [
+   50,
+   67,
+   83
+  ],
+  "inset": "1/2",
+  "angle_limit": "207107/500000",
+  "direction_steps": 181,
+  "scale": 4000000,
+  "column_rounds": 1,
+  "max_rounds": 60,
+  "rows_per_direction": 3,
+  "seed_certificate": null,
+  "seed_map": "scale",
+  "seed_windows": 5,
+  "support_cap": 32
+ },
+ "seconds": 1300.316631623995,
+ "stopped": "deadline reached after 28 rounds",
+ "converged": false,
+ "objective": 41.23678212573179,
+ "least_covered": 0.9160746458192287,
+ "rounds": [
+  {
+   "index": 0,
+   "rows": 10055,
+   "orbits": 1939,
+   "sites": 14765,
+   "lp_rounds": 28,
+   "objective": 41.23678212573179,
+   "least_covered": 0.9160746458192287,
+   "averaged_depth": null,
+   "reduced_cost": null,
+   "added": 0,
+   "seconds": 1300.1264056810032,
+   "note": "deadline reached after 28 rounds"
+  }
+ ],
+ "total_mass": null,
+ "total_mass_float": null,
+ "atoms": 0,
+ "ceiling_proved": null,
+ "ceiling_detail": null,
+ "frozen": null,
+ "least_cell_mass": null,
+ "family_frozen": null,
+ "priced_support_rows": null,
+ "merge": null,
+ "seed_sites": 900,
+ "lp_log": [
+  {
+   "index": 0,
+   "rows": 520,
+   "added": 520,
+   "violated": 546,
+   "support": 0,
+   "objective": 24.2941176470588,
+   "separation_s": 12.606,
+   "lp_s": 0.139
+  },
+  {
+   "index": 1,
+   "rows": 1056,
+   "added": 536,
+   "violated": 546,
+   "support": 216,
+   "objective": 34.284209751762354,
+   "separation_s": 0.366,
+   "lp_s": 0.393
+  },
+  {
+   "index": 2,
+   "rows": 1354,
+   "added": 298,
+   "violated": 546,
+   "support": 1000,
+   "objective": 36.359250171650565,
+   "separation_s": 15.7,
+   "lp_s": 0.377
+  },
+  {
+   "index": 3,
+   "rows": 1787,
+   "added": 433,
+   "violated": 546,
+   "support": 768,
+   "objective": 37.397056624309876,
+   "separation_s": 7.562,
+   "lp_s": 0.584
+  },
+  {
+   "index": 4,
+   "rows": 2174,
+   "added": 387,
+   "violated": 546,
+   "support": 720,
+   "objective": 38.30380155209195,
+   "separation_s": 6.592,
+   "lp_s": 0.787
+  },
+  {
+   "index": 5,
+   "rows": 2580,
+   "added": 406,
+   "violated": 546,
+   "support": 860,
+   "objective": 38.83577495839248,
+   "separation_s": 9.203,
+   "lp_s": 1.18
+  },
+  {
+   "index": 6,
+   "rows": 2977,
+   "added": 397,
+   "violated": 546,
+   "support": 1009,
+   "objective": 39.08216934588139,
+   "separation_s": 13.201,
+   "lp_s": 1.249
+  },
+  {
+   "index": 7,
+   "rows": 3356,
+   "added": 379,
+   "violated": 546,
+   "support": 1244,
+   "objective": 39.317253847423196,
+   "separation_s": 22.842,
+   "lp_s": 1.546
+  },
+  {
+   "index": 8,
+   "rows": 3713,
+   "added": 357,
+   "violated": 546,
+   "support": 1180,
+   "objective": 39.70111062995395,
+   "separation_s": 20.959,
+   "lp_s": 1.432
+  },
+  {
+   "index": 9,
+   "rows": 4089,
+   "added": 376,
+   "violated": 546,
+   "support": 1028,
+   "objective": 39.829236253991816,
+   "separation_s": 14.259,
+   "lp_s": 2.1
+  },
+  {
+   "index": 10,
+   "rows": 4419,
+   "added": 330,
+   "violated": 546,
+   "support": 1248,
+   "objective": 40.06976466766994,
+   "separation_s": 22.875,
+   "lp_s": 2.223
+  },
+  {
+   "index": 11,
+   "rows": 4780,
+   "added": 361,
+   "violated": 546,
+   "support": 1088,
+   "objective": 40.241646922670235,
+   "separation_s": 16.097,
+   "lp_s": 2.33
+  },
+  {
+   "index": 12,
+   "rows": 5155,
+   "added": 375,
+   "violated": 546,
+   "support": 1252,
+   "objective": 40.42734419512606,
+   "separation_s": 23.401,
+   "lp_s": 2.605
+  },
+  {
+   "index": 13,
+   "rows": 5520,
+   "added": 365,
+   "violated": 546,
+   "support": 1236,
+   "objective": 40.554272811958555,
+   "separation_s": 21.86,
+   "lp_s": 3.227
+  },
+  {
+   "index": 14,
+   "rows": 5856,
+   "added": 336,
+   "violated": 546,
+   "support": 1444,
+   "objective": 40.62246212389752,
+   "separation_s": 31.015,
+   "lp_s": 3.504
+  },
+  {
+   "index": 15,
+   "rows": 6214,
+   "added": 358,
+   "violated": 546,
+   "support": 1276,
+   "objective": 40.72485163152922,
+   "separation_s": 23.852,
+   "lp_s": 4.311
+  },
+  {
+   "index": 16,
+   "rows": 6540,
+   "added": 326,
+   "violated": 546,
+   "support": 1540,
+   "objective": 40.81290365931217,
+   "separation_s": 35.466,
+   "lp_s": 3.84
+  },
+  {
+   "index": 17,
+   "rows": 6929,
+   "added": 389,
+   "violated": 546,
+   "support": 1564,
+   "objective": 40.85974096664841,
+   "separation_s": 36.369,
+   "lp_s": 4.468
+  },
+  {
+   "index": 18,
+   "rows": 7249,
+   "added": 320,
+   "violated": 546,
+   "support": 1676,
+   "objective": 40.91368427085539,
+   "separation_s": 43.851,
+   "lp_s": 5.949
+  },
+  {
+   "index": 19,
+   "rows": 7591,
+   "added": 342,
+   "violated": 546,
+   "support": 1888,
+   "objective": 40.964238166998754,
+   "separation_s": 57.365,
+   "lp_s": 7.359
+  },
+  {
+   "index": 20,
+   "rows": 7899,
+   "added": 308,
+   "violated": 546,
+   "support": 1972,
+   "objective": 41.02716095184115,
+   "separation_s": 62.239,
+   "lp_s": 6.781
+  },
+  {
+   "index": 21,
+   "rows": 8256,
+   "added": 357,
+   "violated": 546,
+   "support": 1976,
+   "objective": 41.05962221475057,
+   "separation_s": 64.722,
+   "lp_s": 8.172
+  },
+  {
+   "index": 22,
+   "rows": 8564,
+   "added": 308,
+   "violated": 546,
+   "support": 1988,
+   "objective": 41.10913129312848,
+   "separation_s": 64.855,
+   "lp_s": 9.313
+  },
+  {
+   "index": 23,
+   "rows": 8852,
+   "added": 288,
+   "violated": 546,
+   "support": 2288,
+   "objective": 41.142124419068715,
+   "separation_s": 86.644,
+   "lp_s": 8.603
+  },
+  {
+   "index": 24,
+   "rows": 9154,
+   "added": 302,
+   "violated": 546,
+   "support": 2348,
+   "objective": 41.176576204006544,
+   "separation_s": 92.974,
+   "lp_s": 10.123
+  },
+  {
+   "index": 25,
+   "rows": 9474,
+   "added": 320,
+   "violated": 546,
+   "support": 2484,
+   "objective": 41.19648360109631,
+   "separation_s": 109.051,
+   "lp_s": 11.466
+  },
+  {
+   "index": 26,
+   "rows": 9768,
+   "added": 294,
+   "violated": 546,
+   "support": 2624,
+   "objective": 41.21480837820853,
+   "separation_s": 123.041,
+   "lp_s": 12.105
+  },
+  {
+   "index": 27,
+   "rows": 10055,
+   "added": 287,
+   "violated": 546,
+   "support": 2736,
+   "objective": 41.23678212573179,
+   "separation_s": 132.343,
+   "lp_s": 12.64
+  }
+ ]
+}

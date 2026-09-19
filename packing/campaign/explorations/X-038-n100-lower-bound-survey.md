@@ -126,6 +126,10 @@ Do not replay a set whose restricted optimum is already above `n`. Kill a probe 
 deadline. If the freeze mass is below `n`, stop new probes and run the retain recipe.
 If not, record the row and take the next rank.
 
+Session-141 re-ranks from these masses in
+[X-039](X-039-n100-re-rank-after-session-140.md). Leftover n=18 `1871/400` and the
+Nagamochi second wave did not start here.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

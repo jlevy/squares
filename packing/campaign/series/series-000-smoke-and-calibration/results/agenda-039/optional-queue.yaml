@@ -1,0 +1,56 @@
+# Session-141 optional probes. Start only after a coordinator decision.
+# Rank 1b: leftover n=18 still below 18 unconverged on auto plus windows 5.
+#   Do not start: rank 1 retained T-029.
+# n=20 243/50: done on rank-queue.yaml at 19.887914 unconverged. Do not
+#   start this file as a second walker.
+# n=19 481/100 four-grid, n=12 793/200, n=12 397/100 auto, n=19 241/50
+#   four-grid, n=12 793/200 four-grid, and n=18 4679/1000 now sit on
+#   rank-queue.yaml (ranks 11–16). Do not start this file as a second walker.
+# n=17 231/50 stays here and is not walked: 461/100 auto plus windows 5
+#   already crossed 17.
+probes:
+  - id: n18-1871-400-t028-grid4-windows5
+    n: 18
+    side: '1871/400'
+    grid_counts: '32,43,53,60'
+    seed_certificate: cases/n18_fractional_certificate/certificate.json
+    seed_windows: 5
+    deadline_seconds: 1800
+    bead: think-u11x
+    hypothesis: H-219
+  - id: n20-243-50-t021-grid4-windows7
+    n: 20
+    side: '243/50'
+    grid_counts: '34,46,56,64'
+    seed_certificate: cases/n20_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n12-793-200-t017-auto-windows7
+    n: 12
+    side: '793/200'
+    grid_counts: auto
+    seed_certificate: cases/n12_fractional_certificate/certificate.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n19-481-100-t020-grid4-windows7
+    n: 19
+    side: '481/100'
+    grid_counts: '34,45,56,64'
+    seed_certificate: cases/n20_fractional_certificate/certificate-24-5.json
+    seed_windows: 7
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218
+  - id: n17-231-50-t019-auto-windows5
+    n: 17
+    side: '231/50'
+    grid_counts: auto
+    seed_certificate: cases/n17_fractional_certificate/certificate.json
+    seed_windows: 5
+    deadline_seconds: 1200
+    bead: think-so2k
+    hypothesis: H-218

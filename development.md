@@ -783,6 +783,19 @@ uv run --frozen --all-extras --group dev python -m devtools.close_session \
   --render --session session-NNN --agenda agenda-NNN
 ```
 
+A session that did not close an agenda still fills
+[`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) by hand.
+The cost block is the opening, not the description.
+Check the filled body before updating the pull request:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.check_pr_description --file BODY.md
+```
+
+The same command with no arguments checks that the template still carries the required
+headings. Filled mode also refuses a Cost that enumerates every experiment wall.
+`OR-9` treats that dump as unfinished, headings or not.
+
 **The attribution is a bound and the block says so.** `turns.by_branch` is the only
 branch-aware field in `ClaudeEfficiencyRollup`, so a log that ran on more than one
 branch has an exact turn count here and no way to split its tokens or tool calls.

@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 140
+count: 141
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 87
-  sessions_unmeasured: 53
+  sessions_unmeasured: 54
   attributed:
     rollups: 129
     turns: 40048
@@ -2305,6 +2305,16 @@ sessions:
   title: "N<=100 Lower-Bound Survey"
   status: stopped
   primary_bead: think-8x4t
+  phases: 3
+  measured: false
+  unmeasured_reason: >-
+    native harness data unavailable; This Cursor cloud-agent run has no ClaudeEfficiencyRollup or CodexTaskTreeDelta receipt. Session clocks and covering walls are not a substitute.
+  rollups: []
+  codex_receipts: []
+- id: session-141
+  title: "N<100 Research Loop"
+  status: stopped
+  primary_bead: think-ul7y
   phases: 3
   measured: false
   unmeasured_reason: >-

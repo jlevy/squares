@@ -54,6 +54,28 @@ hypothesis:
     and does not confirm the claim. Session-140 leftover n=20 971/200 stopped at
     19.910044 unconverged below 20, and leftover n=12 3969/1000 stopped at
     12.091168 after crossing 12. Neither freeze was offered. The claim stays open.
+    Session-141 reopens it on a new named set: n=20 971/200 with T-021 four-grid
+    (34,46,56,64) plus windows 7, as exp-164, after exp-163 accepted T-029. That
+    probe stopped at 19.857588 unconverged below 20; remaining rows raise. The
+    follow-up exp-165 at 243/50 on the same four-grid stopped at 19.887914
+    unconverged below 20; remaining rows raise. Do not replay leftover auto plus
+    windows 6 at 971/200 or the Session-141 four-grid at 971/200 or 243/50.
+    T-029 does not confirm this claim. After the eight H-220 Nagamochi sides
+    finished without RETAINABLE, Session-141 continues on this sweep at n=19
+    481/100 T-020 four-grid (34,45,56,64) plus windows 7 as exp-174, which
+    stopped at 19.111435 unconverged after crossing 19; remaining rows raise.
+    leftover auto plus windows 6 at 481/100 already crossed 19. Follow-up
+    exp-175 at n=12 793/200 T-017 auto plus windows 7 stopped at 12.067502
+    unconverged after crossing 12; remaining rows raise. Follow-up exp-176 at
+    n=12 397/100 T-017 auto plus windows 7 stopped at 12.097146 unconverged
+    after crossing 12; remaining rows raise. Follow-up exp-177 at n=19
+    241/50 T-020 four-grid plus windows 7 stopped at 19.224565 unconverged
+    after crossing 19; remaining rows raise. Follow-up exp-178 at n=12
+    793/200 T-017 four-grid plus windows 7 stopped at 12.066995 unconverged
+    after crossing 12; remaining rows raise. Follow-up exp-179 / H-221 retained
+    T-030 at n=18 4679/1000. Do not replay the Session-141 four-grid at 481/100
+    or 241/50 or 793/200 or auto at 793/200 or 397/100. Do not more-wall
+    4679/1000.
 ---
 # H-218: Stock Colgen Raises One Small-n Floor
 
