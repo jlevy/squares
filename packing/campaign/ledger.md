@@ -153,6 +153,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-136](agent-sessions/session-136-ci-topology-reconciliation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `pipeline-improvement` (efficiency) | 1 | think-97we | think-97we closed when PR 188 and PR 185 merged, and the pending closeout checks it carried -- as carried forward by Session 137 -- now sit under think-g4n9: hold both pull-request walls at or under 180 s over the declared run of consecutive exact-head hosted runs, then switch the wall check back to enforcing. Then resume BC-343 under think-ufmk without changing its scientific claim or allocating exp-161 from this block. |
 | [session-137](agent-sessions/session-137-ci-topology-continuation-recovery.md) | stopped | retrospective | `pipeline-improvement` (correctness) | `remediation` (correctness) | 3 | think-97we | think-97we closed when PR 188 and PR 185 merged, and the remaining closeout debt on the final head now sits under think-g4n9: hold both pull-request walls at or under 180 s over the declared run of consecutive exact-head hosted runs, then switch the wall check back to enforcing. Then resume BC-343 under think-ufmk without changing its scientific claim or allocating exp-161 from this block. |
 | [session-138](agent-sessions/session-138-n11-overnight-review.md) | stopped | mixed | `factual-review` (insight) | `documentation-pass` (process) | 6 | think-4woh | Close M7's n=6 bracket at 299/100 under BC-357 / think-qqzs. H-216 is the registered determination. G1, G2, G3, and G5 are on main; G4 remains on this bead. |
+| [session-139](agent-sessions/session-139-n11-overnight-research.md) | stopped | contemporaneous | `research-loop` (insight) | `documentation-pass` (process) | 4 | think-mcb6 | Continue H-216 under think-qqzs. Route S encode-only timed out unresolved; a later block re-runs encode before --search. |
 
 ### Workflow summary
 
@@ -165,9 +166,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 24 | 1 | 80 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 10 | 1 | 36 | 1 |
-| `research-loop` | 26 | 4 | 96 | 8 |
+| `research-loop` | 27 | 4 | 99 | 8 |
 | `pipeline-improvement` | 33 | 2 | 151 | 5 |
-| `documentation-pass` | 1 | 0 | 23 | 1 |
+| `documentation-pass` | 1 | 0 | 24 | 1 |
 | `remediation` | 0 | 1 | 0 | 3 |
 | `review-planning-oversight` | 3 | 0 | 17 | 2 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
@@ -754,7 +755,7 @@ Status: **active**. Reconcile the merged research record, then choose among rout
 | BC-354 | tool_validation | 11 | complete | 0 | think-0t5y | Reopen only after one proposal supplies the complete 80-stratum negative-root producer, a rows-complete matched baseline, and two method-distinct exact coverage routes with shared physical variables. |
 | BC-341 | research | 11 | tentative | 1 | think-9y6q | Preserve the named Route A gaps and reconsider this discriminator only through a future W10 after a complete representation discharges them. |
 | BC-342 | research | 6, 11 | tentative | 1 | think-ol1z | Specify the n=6 control and the conflict-edge soundness obligation before selecting a solver. |
-| BC-343 | research | 11 | blocked | 0 | think-ufmk | After BC-355 closes, under think-ufmk, use a fresh branch to register exp-161, its exact source, target budget, accept rule, stop rule, independent-review boundary, and retained evidence paths before changing any weight or running coverage. |
+| BC-343 | research | 11 | blocked | 0 | think-ufmk | Session 139 registered exp-161 on 2026-09-18 and closed the admission-synthetic accept hole: live `admit_threshold_compression --check`, `--authorize-target exp-161`, forbidden control-manifest SHA-256 values, `generating_account`, and timeout maps to unresolved. The named producer is in-tree and emits no candidate; a coverage-encoding search is still required before any scientific target. BC-355's pull-request walls remain advisory under think-g4n9; that does not reopen the admitted instrument. |
 | BC-344 | research | 11 | tentative | 2 | think-29ch | Reproduce the 6+5 control at Trump's angle before interpreting any solver infeasibility. |
 | BC-345 | research | 11 | tentative | 3 | think-7n2w | Design the positive-control and endpoint-polishing contract before allocating the background search. |
 | BC-348 | research | 11 | tentative | 1 | think-u15l | Test the valid angle-count rows against the entire retained optimal face before building a larger certificate. |
@@ -770,8 +771,8 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-356 | research | 6, 10, 11 | complete | 0 | think-4woh | The five X-037 decisions are resolved; H-216 and H-217 are registered. BC-357 closes the n=6 bracket under H-216. |
-| BC-357 | measurement_validation | 6, 10 | ready | 1 | think-qqzs | A rows-complete covering below 6 on a named site set that both routes of decide_certificate accept, or an exact polish of a large placement union at 299/100 whose ceiling family has total at least 6. |
-| BC-358 | research | 11 | blocked | 1 | think-gyzw | The think-g3j7 reader, then the guarded colgen tool run to one of H-217's two terminal states. |
+| BC-357 | measurement_validation | 6, 10 | in_progress | 1 | think-qqzs | Session 139 froze covering total 76027/12500 = 6.08216 (does not confirm) and polished a depth-one family of exact total 76/13 that both independent_ceiling_reader and verify_ceiling accept as depth <= 1 and reject on K3 (does not kill). A second named site set on grids 18/24/29/34 froze covering 151931/25000 = 6.07724 (does not confirm). H-216 stays open. Confirm still needs covering < 6 on a named site set that both decide_certificate routes accept. Not an n=11 result. Exit the chase at 08:33Z. |
+| BC-358 | research | 11 | blocked | 1 | think-gyzw | Session 139 landed packing/src/sqpack/fractional/relational.py and packing/devtools/decide_relational_certificate.py without mutating T-025/T-026 verify_claim.py. Remaining: retain or regenerate the sites-1 checkpoint (think-3xbr), then the guarded colgen tool (think-gyzw). Do not close think-g3j7 or think-gyzw. |
 | BC-359 | research | 11 | tentative | 2 | think-k4vb | The integer program’s optimum on the coarse net, with the winner decided exactly at full angle. |
 | BC-360 | research | 11 | stopped | 4 | think-4woh | None; reopen a mechanism only when its stated reopening condition holds. |
 
@@ -779,7 +780,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 128 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 129 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -923,7 +924,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | H-160 | blocked | proof | On the frozen BC293 377-atom measure and every one of the 182 eligible |  | 1 |  |  |
 | H-161 | refuted | proof | In the frozen BC303 377-atom measure, the closed literal parent Q0=[0, |  | 1 |  | 0s wall |
 | H-162 | blocked | proof | On the frozen BC293 377-atom measure and every one of the 182 eligible |  | 1 |  |  |
-| H-163 | open | proof | T-025's exact 119-orbit atom-support universe admits a D4-symmetric no |  | 0 |  |  |
+| H-163 | unresolved | proof | T-025's exact 119-orbit atom-support universe admits a D4-symmetric no |  | 1 |  | 180.1m wall |
 | H-201 | refuted | search | With a simultaneous perturbation proposal added to the ordinary move m | n: 5 10 11* 17 19 26 27 29 37 50 52 | 2 |  | 155m agent + 105.7m wall |
 | H-202 | refuted | search | Adding an aggregate inward wall-pressure term to the annealing energy, | n: 5 10 11* 17 19 26 27 29 37 50 52 | 1 |  | 25m agent + 39.1m wall |
 | H-203 | confirmed | search | At an equal budget of refined local optima, basin hopping -- perturbin | n: 5 10 11* 17 19 | 1 |  | 40m agent + 81.2m wall |
@@ -995,7 +996,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 
-### unresolved (30)
+### unresolved (31)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1024,6 +1025,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | exp-140 | series-000 | 11 | GPT-6 Astra, max; session-113 coordinator | H-139 | Process exit0 preserved a valid partial receipt, but it did not mean scientific completion: only unrestricted converged. Point exhausted60 rounds without convergence, triangle and endpoint were not run, and the primary difference was not measured. The partial point objective is not a covering value or negative result for H139. |
 | exp-148 | series-000 | 11 | GPT-6 Astra coordinator; implementation by GPT-5.6 Sol extra high; mathematical admission by GPT-6 Astra max | H-146 | The seed-stage guard expired before any complete seed direction or candidate check. Two valid retained escapes give reusable negative evidence for49152 labels, but neither a new cover nor an all-label refutation was completed. |
 | exp-156 | series-000 | 11 | Codex root coordinator; prospective strategy independently audited by GPT-6 Astra Max | H-158 | The sole run found that the old B-only model already excludes the first selected owner, making parent-domain gain impossible there by set inclusion. The later owners were not tested, so this complete fixed-protocol result neither accepts nor rejects H-158. |
+| exp-161 | series-000 | 11 | Cursor session-139 Lane C | H-163 | Encode-only hit timeout 10800 at 15:24:31Z with no JSON and no candidate. Timeout is unresolved, never rejected. No --search. |
 | exp-206 | series-000 | 11 | claude-opus-5 | H-205 | The guard clause is met decisively and is the point of the round: 16 of 16 runs end on packings that an independent oracle confirms, against 0 of 48 for the penalty physics, which settles the precondition the 2026-09-08 calibration failed. The accuracy clause is missed by three cells of four. The failure is localised rather than diffuse -- every failed run failed at the first tightening and never moved -- so the repair is in the container schedule and the restart policy, not in the projections. |
 | exp-207 | series-000 | 5 | claude-opus-5, unattended | H-207 | At n = 5 the best of the first 1,000 repaired runs is 0.28% above the record while a single run is worse than the grid, but these are prefix values from one seed stream with no spread, and no schedule was compared at equal cost, so H-207's criterion was not tested. |
 | exp-208 | series-000 | 11 | claude-opus-5, unattended | H-212 | At levels 0, 2 and 4 no repaired run in 3,000 beat the grid at n = 5, 10 or 11, and at levels 6, 8 and 10 the best run did in eight of nine cells, the ninth within 5,000 seeds, but each value is one prefix from one seed stream and the page's own level 3 was not measured on repaired runs. |
@@ -1127,6 +1129,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 | exp-148 | H-146 | 1.2m wall | timebox | Exp149 tests the separately registered explicit tuple(0,0,0, |  |
 | exp-158 | H-160 |  | dependency |  |  |
 | exp-160 | H-162 |  | dependency |  |  |
+| exp-161 | H-163 | 180.1m wall | timebox | Re-run encode-only under a new lease; no partial encoding wa |  |
 | exp-207 | H-207 | 1 round unrecorded | dependency |  |  |
 | exp-208 | H-212 | 1 round unrecorded | dependency |  |  |
 | exp-209 | H-212 | 1 round unrecorded | dependency |  |  |
@@ -1134,7 +1137,7 @@ Status: **active**. Pursue n=11 results beyond the one-body ceiling L* = 38200/9
 
 ## Effort
 
-128 rounds, 2512.1 agent-minutes, 1799.7 wall-minutes.
+129 rounds, 2512.1 agent-minutes, 1979.8 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

@@ -31,8 +31,10 @@ to the case's lower bound. It is an upper bound on the prize and not a forecast:
 a search actually reaches is set by the covering value at that side, which is lower.
 
 A second join adds what the record now shows about that gap between prize and
-reach: the packing-limited certificates land within 0.001 of the same fraction of
-their cases' best known packings. Ceiling-limited certificates are excluded from that
+reach: the packing-limited certificates at n = 11 and n = 17 land within 0.001 of
+the same fraction of their cases' best known packings. n = 18 is packing-limited
+too, at a lower ratio, because that covering was not pushed to the packing.
+Ceiling-limited certificates are excluded from that
 comparison, because their ratio measures the method's own ceiling rather than a
 packing. How many rows are on each side is read from the corpus and never written
 down here -- a retained rung that gains enough side moves from one side to the other,
@@ -416,6 +418,10 @@ STOP_REASONS = {
         "n = 17 has no stop reason recorded for its own build at all -- the stop "
         "narrated in its `next_rung` belongs to an adjacent probe at n = 18, not to "
         "the certificate this row measures."
+    ),
+    18: (
+        "n = 18's 467/100 certificate is the T-019-seeded covering that converged "
+        "below 18 and was freeze-then-decided; the side was not pushed to the packing."
     ),
     19: (
         "n = 19 was halted at round 9 on projected cost, four rounds short of where "

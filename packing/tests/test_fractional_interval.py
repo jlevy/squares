@@ -26,6 +26,8 @@ from cases.n12_fractional_certificate.replay import load as load_n12
 from cases.n17_fractional_certificate.replay import BURNS_CONTROL_PATH
 from cases.n17_fractional_certificate.replay import declared as declared_n17
 from cases.n17_fractional_certificate.replay import load as load_n17
+from cases.n18_fractional_certificate.replay import declared as declared_n18
+from cases.n18_fractional_certificate.replay import load as load_n18
 from cases.n20_fractional_certificate.replay import declared as declared_n20
 from cases.n20_fractional_certificate.replay import load as load_n20
 from sqpack.fractional import interval as interval_module
@@ -386,6 +388,27 @@ def test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert enclosure is not None
     assert certificate.bounded_side == Fraction(97, 20)
     assert declared_n20()["least_cell_mass"] == str(enclosure[0])
+
+
+@pytest.mark.exhaustive_exact
+def test_the_retained_n18_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """The interval-certified decision of s(18) >= 467/100, every direction.
+
+    T-027 stands at C4 on the strength of this route. The decide_certificate
+    gate already accepted these bytes; this test is the named replay
+    E-fractional-interval-decision points at for the new rung.
+    """
+    certificate = load_n18()
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
+    assert len(verdict.directions) == 361
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    enclosure = verdict.enclosure
+    assert enclosure == (Fraction(2000007, 2000000), Fraction(2000007, 2000000))
+    assert enclosure is not None
+    assert certificate.bounded_side == Fraction(467, 100)
+    assert declared_n18()["least_cell_mass"] == str(enclosure[0])
 
 
 # --- the published-value control ----------------------------------------------

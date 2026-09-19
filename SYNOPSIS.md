@@ -97,6 +97,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
 | [T-002](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 4426213/1000000, by monotonicity from T-001 (a packing of 18 unit squares contains a packing of 17). |
 | [T-021](packing/frontier/RESULTS.md) | 20, 21 | `V4` | `C4` | `S3` | `apparently-novel` | s(20) >= 97/20 and s(21) >= 97/20, from a first-party weighted fractional unavoidable-set certificate at container side 97/20 = 4.85. |
+| [T-027](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 467/100 = 4.67, from a first-party weighted fractional unavoidable-set certificate at container side 467/100. |
 | [T-004](packing/frontier/RESULTS.md) | 46 | `V4` | `C3` | `S3` | `previously-published` | Bentz 2010, Theorem 8: the printed 45-point unavoidable-set argument for s(46) >= 7 is correct as printed, machine-audited in full. |
 | [T-008](packing/frontier/RESULTS.md) | 46 | `V4` | `C3` | `S3` | `previously-published` | s(46) = 7: the lower half by T-004’s audited unavoidable set, the upper half by the exact 7 x 7 grid packing of 46 squares. |
 | [T-009](packing/frontier/RESULTS.md) | 29 | `V4` | `C3` | `S3` | `apparently-novel` | s(29) <= 5.93383346267692918974379895098, by a Krawczyk interval certificate over the retained rational 29-square witness at a declared relaxation of 1e-20. |
@@ -138,12 +139,12 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 36 | 16 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 349 | 178 complete; 60 stopped; 66 blocked; 16 ready; 21 tentative; 8 in progress |
-| Sessions | 138 | 84 completed; 54 stopped; all terminal |
+| Commitments | 349 | 178 complete; 60 stopped; 66 blocked; 15 ready; 21 tentative; 9 in progress |
+| Sessions | 139 | 84 completed; 55 stopped; all terminal |
 | Explorations | 35 | 21 linked to proposed hypotheses; 14 uncodified |
-| Hypotheses | 155 | 26 confirmed; 29 refuted; 51 blocked; 12 unresolved; 6 open; 28 open questions; 2 result registered; 1 abandoned; 0 running |
-| Experiments | 128 | 39 accepted; 34 rejected; 30 unresolved; 12 baseline; 11 blocked; 2 abandoned; 0 in progress |
-| Frontier results | 26 | 26 registered |
+| Hypotheses | 155 | 26 confirmed; 29 refuted; 51 blocked; 13 unresolved; 5 open; 28 open questions; 2 result registered; 1 abandoned; 0 running |
+| Experiments | 129 | 39 accepted; 34 rejected; 31 unresolved; 12 baseline; 11 blocked; 2 abandoned; 0 in progress |
+| Frontier results | 27 | 27 registered |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -161,9 +162,13 @@ strategy-reset queue, and
 is the current relational-certificate queue opened by the overnight review.
 The generated agenda map, not this narrative, summarizes commitment state.
 
-Session 138 is the latest terminal handoff: PR 193 merged its records as `4ad98e90`,
-`think-4woh` is closed, and certification debt now sits under `think-qqzs`. Five owner
-decisions in X-037 remain outstanding.
+[Session 139](packing/campaign/agent-sessions/session-139-n11-overnight-research.md)
+is the latest terminal closeout: encode-only timed out unresolved, T-027 retained
+`s(18) >= 467/100`, and `think-qqzs` remains the next entry.
+[Session 138](packing/campaign/agent-sessions/session-138-n11-overnight-review.md)
+is the preceding route-selection handoff: PR 193 merged its records as `4ad98e90`,
+`think-4woh` is closed, and certification debt now sits under `think-qqzs`. The five
+X-037 owner decisions are resolved under [`epistemics.md`](epistemics.md).
 `stopped` is not a scientific failure; it includes time limits, guarded refusals,
 administrative handoffs, and work deliberately ended after its next evidence was
 identified. The late-session arc moved from certificate production and exact dilation
@@ -190,10 +195,12 @@ Stromquist-to-Trump interval.
 The pure point/density ceiling `38200/9977 ≈ 3.8288` lies only about `0.00236` above
 T-026, so additional heavy work for microscopic gains in that language is paused.
 H-160/exp-158 and H-162/exp-160 are registered but blocked before target invocation.
-H-163 is registered and open but untested; its target-blind instrument merged in PR 182,
-and no `exp-161` exists.
-The `think-ufmk` planning block must register that experiment before any target is
-authorized. The retained source and control work carries no scientific verdict.
+H-163 is registered and unresolved via exp-161; its target-blind instrument merged in PR
+182. Encode-only timed out with no JSON. `--search` did not run.
+`think-ufmk` registered that experiment; a scientific target still requires the live
+`--check`, `--authorize-target exp-161`, and a coverage-encoding search that is not an
+admission-control manifest. The retained source and control work carries no scientific
+verdict.
 
 BC-339’s W7 pipeline-improvement and W8 reconciliation are complete and certified.
 BC-347’s source-bound
@@ -244,7 +251,8 @@ record. The current order is:
    Its source-distinct re-audit returned ADMIT after one symlink-alias boundary repair.
    PR 182 merged the instrument as `1d9c49c4` from reviewed head `609d7d62` after
    exact-head validation.
-   No optimizer, candidate, coverage target, or `exp-161` has run.
+   Session 139 registered exp-161 and landed the named producer, which emits no
+   candidate. Encode-only timed out unresolved. `--search` did not run.
 4. Treat A, S, global angular resources, and B as the first advisory tier.
    A is the strongest route to a material `n = 11` lower bound; S is the best bounded
    deliverable; angular resources offer a cheap optimal-face screen; and B is the
@@ -261,9 +269,11 @@ The detailed
 originally allocated five sequential merge-bounded blocks.
 BC-354 activated that schedule’s guard-refusal branch, so the Route A discriminator no
 longer follows it. BC-343’s no-target Route S instrument is admitted and merged.
-Its remaining Route S path is the `think-ufmk` planning block, which may register
-`exp-161` and authorize one bounded target; agenda-037’s relational-certificate queue
-now runs ahead of it.
+Its remaining Route S path is the `think-ufmk` planning block, which registered
+`exp-161`; the named producer exists and emits no candidate. Encode-only timed out
+unresolved. A later encode still needs a live `--check` and `--authorize-target
+exp-161` before `--search`; agenda-037’s relational-certificate queue now runs
+ahead of it.
 Each block starts from the preceding merge on a fresh branch and gets its own session,
 bead disposition, validation receipt, and pull request.
 
@@ -433,6 +443,45 @@ case or experiment separately.
 | [Exact Threshold-Atom Orbit Admission](packing/cases/n11_fractional_certificate/threshold-atom-orbit-admission.md) | research synthesis | record | retained | — |
 | [H157 and Conditional-Claim Review at ee98c4ba](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/review.md) | dated review record | record | retained | — |
 | [Bounded Review of the H157 Corrections](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/h157-independent-review/correction-review.md) | dated review record | record | retained | — |
+| [H-216 n=6 299/100 Freeze Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/h216-n6-299-100-receipt.md) | research synthesis | record | retained | — |
+| [H-216 n=6 299/100 Sites2 Freeze Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/h216-n6-299-100-sites2-receipt.md) | research synthesis | record | retained | — |
+| [n=12 3969/1000 Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n12-3969-1000-grid-receipt.md) | research synthesis | record | retained | — |
+| [n=11 383/100 Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-383-100-grid-receipt.md) | research synthesis | record | retained | — |
+| [n=11 383/100 Four-Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-383-100-grid4-receipt.md) | research synthesis | record | retained | — |
+| [n=11 383/100 T-025-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-383-100-t025-seed-receipt.md) | research synthesis | record | retained | — |
+| [n=11 191/50 Four-Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-191-50-grid4-receipt.md) | research synthesis | record | retained | — |
+| [n=11 191/50 Auto-Plus-60 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-191-50-auto60-receipt.md) | research synthesis | record | retained | — |
+| [n=11 191/50 T-025-Seeded Auto-Plus-60 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-191-50-t025-auto60-receipt.md) | research synthesis | record | retained | — |
+| [n=11 191/50 T-025-Seeded Auto-Plus-60 Window-Lattice Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-191-50-t025-windows5-receipt.md) | research synthesis | record | retained | — |
+| [n=11 191/50 T-026-Seeded Auto-Plus-60 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-191-50-t026-auto60-receipt.md) | research synthesis | record | retained | — |
+| [n=11 381/100 T-025-Seeded Auto-Plus-60 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-381-100-t025-auto60-receipt.md) | research synthesis | record | retained | — |
+| [n=11 77/20 T-025-Seeded Auto-Plus-60 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-77-20-t025-auto60-receipt.md) | research synthesis | record | retained | — |
+| [n=11 31/8 T-025-Seeded Auto-Plus-60 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-31-8-t025-auto60-receipt.md) | research synthesis | record | retained | — |
+| [n=11 96/25 T-025-Seeded Auto-Plus-60 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n11-96-25-t025-auto60-receipt.md) | research synthesis | record | retained | — |
+| [G4 n=11 31/8 Nine-Direction Threshold-Atom Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/g4-n11-31-8-net9/g4-n11-31-8-net9-receipt.md) | research synthesis | record | retained | — |
+| [n=12 3969/1000 T-017-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n12-3969-1000-t017-seed-receipt.md) | research synthesis | record | retained | — |
+| [n=12 3969/1000 T-017-Seeded Four-Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n12-3969-1000-t017-grid4-receipt.md) | research synthesis | record | retained | — |
+| [n=12 397/100 T-017-Seeded Four-Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n12-397-100-t017-grid4-receipt.md) | research synthesis | record | retained | — |
+| [n=18 467/100 Auto-Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-467-100-grid-receipt.md) | research synthesis | record | retained | — |
+| [n=18 467/100 T-019-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-467-100-t019-seed-receipt.md) | research synthesis | record | retained | — |
+| [n=18 117/25 T-019-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-117-25-t019-seed-receipt.md) | research synthesis | record | retained | — |
+| [n=18 117/25 T-019-Seeded Window-Lattice Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-117-25-t019-windows5-receipt.md) | research synthesis | record | retained | — |
+| [n=18 117/25 T-027-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-117-25-t027-seed-receipt.md) | research synthesis | record | retained | — |
+| [n=18 47/10 T-019-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-47-10-t019-seed-receipt.md) | research synthesis | record | retained | — |
+| [n=18 469/100 T-019-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-469-100-t019-seed-receipt.md) | research synthesis | record | retained | — |
+| [M3 T-018 Selftest Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/m3-t018-selftest/README.md) | research synthesis | record | retained | — |
+| [M3 T-018 9-Direction Search Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/m3-t018-net8/README.md) | research synthesis | record | retained | — |
+| [M3 T-018 Selftest After Span-Sweep Encoding](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/m3-t018-selftest-span/README.md) | research synthesis | record | retained | — |
+| [n=17 23/5 Grid Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n17-23-5-grid-receipt.md) | research synthesis | record | retained | — |
+| [n=17 23/5 T-019-Seeded Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n17-23-5-t019-seed-receipt.md) | research synthesis | record | retained | — |
+| [n=17 23/5 T-019-Seeded Window-Lattice Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n17-23-5-t019-windows5-receipt.md) | research synthesis | record | retained | — |
+| [n=17 23/5 T-019-Seeded Window-6 Lattice Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n17-23-5-t019-windows6-receipt.md) | research synthesis | record | retained | — |
+| [n=17 23/5 T-019-Seeded Window-7 Lattice Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n17-23-5-t019-windows7-receipt.md) | research synthesis | record | retained | — |
+| [n=19 97/20 T-020-Seeded Window-6 Lattice Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/n19-97-20-t020-windows6-receipt.md) | research synthesis | record | retained | — |
+| [G4 n=11 191/50 Nine-Direction Threshold-Atom Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/g4-n11-191-50-net9/g4-n11-191-50-net9-receipt.md) | research synthesis | record | retained | — |
+| [Exp-161 Blocks 5–7 Command](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/exp-161-block57-command.md) | research synthesis | record | retained | — |
+| [M3 T-018 9-Direction Search After Span-Sweep Encoding](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/m3-t018-net8-span/README.md) | research synthesis | record | retained | — |
+| [G4 n=11 191/50 Seventeen-Direction Threshold-Atom Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/g4-n11-191-50-net17/g4-n11-191-50-net17-receipt.md) | research synthesis | record | retained | — |
 | [Unit-Parent Centre Restriction: Author-Lane Proof Check](docs/project/reviews/review-2026-09-10-n11-parent-centre-author-check.md) | dated review record | record | retained | — |
 | [N11 Research: Definitions, Findings, and the Inference Chain](docs/project/research/research-2026-09-09-n11-evidence-and-inference.md) | research synthesis | record | retained | — |
 | [Inference Audit: Owner Geometry and Fixed-D Continuation](docs/project/research/research-2026-09-09-n11-inference-audit.md) | research synthesis | record | retained | — |
@@ -930,8 +979,12 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
-[Session 138](packing/campaign/agent-sessions/session-138-n11-overnight-review.md) is
-the latest terminal handoff, and the latest scientific one.
+[Session 139](packing/campaign/agent-sessions/session-139-n11-overnight-research.md)
+is the latest terminal scientific closeout.
+It retained T-027 `s(18) >= 467/100`, stopped after Route S encode-only timed out
+unresolved, and left H-216 open.
+[Session 138](packing/campaign/agent-sessions/session-138-n11-overnight-review.md)
+is the preceding route-selection handoff.
 It reviewed the n=11 record, ranked eight mechanisms that price relations between
 squares, subjected them to an independent adversarial review, and measured two.
 [X-037](packing/campaign/explorations/X-037-n11-overnight-review-and-route-slate.md)
@@ -967,6 +1020,9 @@ admitted and M2 stays retired.
 **Selected next entry:** `think-qqzs`, BC-357: close M7’s n=6 bracket at 299/100 under
 H-216. G1, G2, G3, and G5 are on main.
 G4 remains on this bead and is not H-216’s instrument.
+[Session 139](packing/campaign/agent-sessions/session-139-n11-overnight-research.md)
+stopped after encode-only timed out unresolved and T-027 retained `s(18) >= 467/100`.
+H-216 stays open. `think-qqzs` remains the next entry.
 
 BC-358, Route F1 / H-217, is blocked on the `think-g3j7` reader, `think-3xbr`, and
 `think-gyzw`. BC-359, the M3 kill test under `think-k4vb`, is tentative.
@@ -1004,8 +1060,11 @@ source and verdict boundary,
 prospective scientific claim, and T-026 is only a support-and-rescaling provenance
 sentinel. BC-343 stays open in
 [agenda-036](packing/campaign/agendas/agenda-036-n11-strategy-reset-roadmap.md) under
-`think-ufmk`, whose fresh planning branch must register `exp-161` before any target
-access.
+`think-ufmk`.
+[Session 139](packing/campaign/agent-sessions/session-139-n11-overnight-research.md)
+registered
+[exp-161](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-161-h163-route-s-threshold-compression.md)
+and ran encode-only; that process timed out unresolved. `--search` did not run.
 
 BC-340, BC-353, and BC-354 are terminal.
 BC-341 remains tentative behind a future W10 reselection and the named Route A
@@ -3926,7 +3985,7 @@ round that names the hypothesis, control roles included.
 | [H-160](packing/campaign/hypotheses/H-160-bc303-t2-charge-filters.md) | blocked | Every frozen BC303 C charge is at least 4524200 and every S first-owner strip charge is at least 4524185 | 1 | exp-158 paused before target invocation; no scientific verdict |
 | [H-161](packing/campaign/hypotheses/H-161-bc303-literal-parent-union.md) | refuted | The frozen literal closed Q0 has integer mass `N>=4262074`, excluding the named four-corner tuple under the imported BC303 floor | 1 | exp-159: `N=4000015`; neither the four-corner nor one-parent threshold rejects |
 | [H-162](packing/campaign/hypotheses/H-162-bc303-floor-normalized-t2-filter.md) | blocked | Frozen BC303 C and S first-owner strip minima are each at least 4524132 | 1 | exp-160 paused without an exp-158 receipt; no scientific verdict |
-| [H-163](packing/campaign/hypotheses/H-163-route-s-threshold-compression.md) | open | T-025’s exact support universe admits a certificate with at most 23 positive D4 orbit representatives | 0 | Target-blind instrument admitted; no exp-161, candidate, optimizer, coverage target, or scientific verdict |
+| [H-163](packing/campaign/hypotheses/H-163-route-s-threshold-compression.md) | unresolved | T-025’s exact support universe admits a certificate with at most 23 positive D4 orbit representatives | 1 | exp-161 encode-only timeout; 180.1m wall |
 | [H-201](packing/campaign/hypotheses/H-201-simultaneous-perturbation-move.md) | refuted | A collective move takes n = 17 from the trivial grid to within 0.002 of Bidwell cold, and is inert above n = 26 | 2 | 105.7m wall |
 | [H-202](packing/campaign/hypotheses/H-202-wall-pressure-dense-objective.md) | refuted | Isotropic wall pressure optimises a disc, returning exactly 2*sqrt(2) at n = 5, so pressure must be directional | 1 | 39.2m wall |
 | [H-203](packing/campaign/hypotheses/H-203-basin-hopping-over-the-lp-quench.md) | confirmed | Basin hopping beats multistart at an equal budget of refined local optima | 1 | 81.2m wall |
@@ -4219,8 +4278,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 87 |
-| unmeasured | 51 |
-| **total** | **138** |
+| unmeasured | 52 |
+| **total** | **139** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -4236,9 +4295,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 128 rounds registered in `series-000`.
+There are 129 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 1799.7 wall-minutes.
+They record 2512.1 agent-minutes and 1979.8 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -4396,6 +4455,7 @@ archive beside it.
 | [exp-158](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-158-bc303-t2-charge-filters.md) | 11 | target | H-160 | Prospective exact all-chart C and S first-owner charge filters after source and synthetic-control admission | Paused by strategy reset before target invocation; no scientific result | blocked |
 | [exp-159](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-159-bc303-literal-parent-union.md) | 11 | target | H-161 | Source-bound exact mass of closed `Q0=[0,1]^2` against frozen one-parent and four-corner budgets | `N=4000015`; both tests retain `1048233` units of slack | rejected |
 | [exp-160](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-160-bc303-floor-normalized-t2-filter-analysis.md) | 11 | target | H-162 | Prospective receipt-only comparison of admitted exp-158 C and S-strip minima with 4524132 | Paused without an exp-158 receipt; no comparison or scientific result | blocked |
+| [exp-161](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-161-h163-route-s-threshold-compression.md) | 11 | target | H-163 | T-025 U025 reweighting to at most 23 positive D4 orbits | Encode-only timed out with no JSON; no --search | unresolved |
 | [exp-201](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-201-arm-calibration.md) | 18 | control | H-201 | Sparsity of the single-square move set at a trivial grid | At every scale tried no single-square proposal lowers the container side; the grid is a strict local minimum under the whole move set | baseline |
 | [exp-202](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md) | 11 | target | H-201 | Gensane’s simultaneous all-square perturbation on the ordinary move menu | Takes n = 17 from exactly 5.0 to within 0.002 of Bidwell cold, and is inert above n = 26 | rejected |
 | [exp-203](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-203-round-1-pressure.md) | 11 | target | H-202 | Aggregate wall-pressure term against the plain required-side objective | Isotropic pressure optimises a disc, returning exactly 2*sqrt(2) at n = 5, so pressure must be directional | rejected |
@@ -4529,6 +4589,7 @@ archive beside it.
 | exp-158 | one all-chart invocation, at most 30 minutes after controls | — | — | not started | source and control admission pending; no target charge |
 | exp-159 | one source-bound literal target invocation; no pose sweep or retry | 0.16s | — | criterion | execution head `f27c8ec7`; independent 377-atom and D4 audit retained |
 | exp-160 | one admitted retained exp-158 receipt; zero new charge sweeps | — | — | not started | future receipt-only H-162 comparison; source admission remains separate |
+| exp-161 | one overnight target after this registration; 3h once the producer exists | — | 10806s | timebox | encode-only timeout 2026-09-18; no JSON; no --search |
 | exp-201 | 1.25e9 pair tests per chain, 8 chains, 5 seeds | 2681.0 s | 95 m | criterion | `9ae7700` |
 | exp-202 | 1.25e9 pair tests per chain, 8 chains, 5 seeds, 11 cells | 3663.0 s | 60 m | criterion | `9ae7700` |
 | exp-203 | 400,000 steps per anneal, 5 seeds, 5 cells | 2349.0 s | 25 m | criterion | `9ae7700` |
@@ -4542,9 +4603,9 @@ archive beside it.
 | exp-211 | 24 deterministic trajectory cells shared with exp-212 | shared; no duplicate charge | — | criterion | `9cca493c17ab61d5efb3e1032f32c54a9b87320e` |
 | exp-212 | 48 deterministic trajectory cells | 86.689 s | — | criterion | `9cca493c17ab61d5efb3e1032f32c54a9b87320e` |
 
-### What the 128 rounds jointly establish
+### What the 129 rounds jointly establish
 
-The 128 rounds use 2512.1 agent-minutes and 1799.7 wall-minutes under the campaign’s
+The 129 rounds use 2512.1 agent-minutes and 1979.8 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
@@ -5392,13 +5453,32 @@ the best known packing runs near half a unit — eleven cases above `+0.49`, hea
 `n = 51` at `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and
 `26`. Two cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side. 18 values have been reported for the restricted program, at sides `3.82`, `3.85`,
-`3.95`, `3.96`, `3.97`, `3.98`, `3.985`, `3.99`, `4.58`, `4.59`, `4.68`, `4.80`,
-`4.825`, `4.85`, `4.865`, `4.875`, `4.895` and `4.985` — the first eight reports, not
-measurements this repository can reproduce, since no covering-search run log or solver
-checkpoint was retained for any of them; the ten added on 2026-09-05 by Agenda 021’s
-`BC-200` and `BC-197` and Agenda 022’s `BC-213` and `BC-206` carry run logs; retained
-checkpoint and frozen-certificate availability differs by row.
+side. 28 values have been reported for the restricted program, at sides `2.99`, `3.81`, `3.82`,
+`3.83`, `3.84`, `3.85`, `3.875`, `3.95`, `3.96`, `3.969`, `3.97`, `3.98`, `3.985`, `3.99`, `4.58`, `4.59`,
+`4.6`, `4.67`, `4.68`, `4.69`, `4.7`, `4.80`, `4.825`, `4.85`, `4.865`, `4.875`, `4.895` and `4.985` — the first eight
+reports, not measurements this repository can reproduce, since no covering-search run log
+or solver checkpoint was retained for any of them; the ten added on 2026-09-05 by Agenda
+021’s `BC-200` and `BC-197` and Agenda 022’s `BC-213` and `BC-206` carry run logs; the
+`2.99` pair added on 2026-09-18 by session-139 is H-216 calibration at n=6 (covering
+`6.08216` and `6.07724` on two named site sets, both ≥ 6, not a bound); `3.81` is the
+session-139 T-025-seeded auto-plus-60 at 381/100, covering `11.000000` unconverged on
+the eleven plateau, site set refuted, side open; `3.82` also has the session-139 T-025-seeded auto-plus-60 plus `--seed-windows 5` at
+191/50, covering `11.018646` converged, closest session-139 point-atom construction,
+site set refuted; T-026-seeded auto-plus-60 at the same side converged `11.033743`,
+worse than the threshold seed; `3.83` is the
+session-139 n=11 probes at 383/100, covering `11.192598` (auto grids), `11.142857`
+(four-grid), and `11.140351` (T-025-seeded four-grid), all site sets refuted, side open;
+`3.84` is the same T-025-seeded auto-plus-60 construction at 96/25, covering
+`11.371819` converged, site set refuted; `3.85` also has the session-139 T-025-seeded auto-plus-60 at 77/20, covering `11.456576`
+converged, site set refuted; `3.875` is the same construction at 31/8, covering
+`11.561186` converged, site set refuted, 0.002 below the packing; `3.969` T-017-seeded auto-grid dropped to `12.118036`
+unconverged, still above twelve; T-017-seeded four-grid at the same side dropped to
+`12.116115` unconverged; `4.6` is the session-139 n=17 auto-grid probe at 23/5,
+covering `17.331710` unconverged, site set refuted, side open; the T-019-seeded auto
+grid at the same side dropped to `17.049597` unconverged, still above seventeen; T-019-seeded auto plus `--seed-windows 5` dropped to `17.042346` unconverged; `4.67` is the session-139
+n=18 auto-grid probe at 467/100, covering `18.000000` unconverged, cannot confirm; the
+T-019-seeded auto grid at the same side converged `17.875567` with least_covered 1, freeze-then-decide retained `T-027` at `s(18) >= 467/100`; `4.68` T-019-seeded auto-grid locked at exact mass `18.000043` converged, cannot confirm; T-019-seeded auto plus `--seed-windows 5` at `4.68` locked `18.000000` unconverged; T-027-seeded auto at the same side locked `18.000000` unconverged; `4.69` T-019-seeded auto-grid locked `18.000000` unconverged; `4.7` T-019-seeded auto-grid converged `18.165413`, cannot confirm;
+retained checkpoint and frozen-certificate availability differs by row.
 Several sides are reported more than once from site sets built differently, which is the
 point of reporting them that way: at `4.85` the difference is between a wall and the
 certificate `T-021` rests on, at `4.865` it is two independent walls, and at `3.97` it

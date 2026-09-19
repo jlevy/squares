@@ -1,0 +1,7 @@
+command: python -m devtools.compress_threshold_certificate --authorize-target exp-161 --output /workspace/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-036/exp-161-producer-authorized-receipt.json
+started_utc: 2026-09-18T06:11:38Z
+----- stdout+stderr -----
+Route S compression producer receipt written: /workspace/packing/campaign/series/series-000-smoke-and-calibration/results/agenda-036/exp-161-producer-authorized-receipt.json
+----- end -----
+exit_code: 0
+finished_utc: 2026-09-18T06:11:39Z

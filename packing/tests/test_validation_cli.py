@@ -3113,8 +3113,9 @@ def test_the_longest_steps_are_submitted_first() -> None:
     checks; the 2026-09-05 promotion put eleven steps and 476s there, which greedy
     submission would have spent delaying the suite's start rather than running beside it.
 
-    Budget precedence remains ahead of early-start hints. The unbudgeted exact verifier
-    has a measured late tail, so it starts ahead of the remaining declaration-order work.
+    Budget precedence remains ahead of early-start hints. Two unbudgeted steps have
+    measured late tails, so they start ahead of the remaining declaration-order work:
+    Chromium (declared first) and exact verification.
 
     `fast behavioral tests` is no longer in this list, and its absence is the point rather
     than an omission. It carried an 1800s exception to the shared cap for as long as it
@@ -3135,11 +3136,15 @@ def test_the_longest_steps_are_submitted_first() -> None:
         "slow behavioral tests",  # 1800s, the non-exhaustive suite's own bound
     ]
     budgeted_count = sum(step.budget_seconds is not None for step in validate.STEPS)
-    assert order[budgeted_count] == "exact verification"
-    assert order[budgeted_count + 1 :] == [
+    early = (
+        "workbench browser behavior in Chromium",
+        "exact verification",
+    )
+    assert order[budgeted_count : budgeted_count + 2] == list(early)
+    assert order[budgeted_count + 2 :] == [
         step.name
         for step in validate.STEPS
-        if step.budget_seconds is None and step.name != "exact verification"
+        if step.budget_seconds is None and step.name not in early
     ]
 
 
@@ -3206,6 +3211,21 @@ def test_submission_order_does_not_change_the_reported_order(
         "declared second",
         "declared first",
     ]
+
+
+def test_workbench_chromium_starts_ahead_of_the_other_frontend_steps() -> None:
+    """`--jobs 2` otherwise starts biome and liveness, and Chromium is the late tail."""
+    chromium = next(
+        step for step in validate.STEPS if step.name == "workbench browser behavior in Chromium"
+    )
+    assert chromium.start_early is True
+    assert chromium.frontend is True
+    frontend = [step for step in validate.STEPS if step.frontend]
+    assert next(step.name for step in validate._submission_order(frontend)) == chromium.name
+    assert {step.name for step in validate.STEPS if step.start_early} == {
+        "exact verification",
+        "workbench browser behavior in Chromium",
+    }
 
 
 def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:

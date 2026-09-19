@@ -21,6 +21,7 @@ import pytest
 
 import cases.n12_fractional_certificate.__main__ as n12_entrypoint
 import cases.n17_fractional_certificate.__main__ as n17_entrypoint
+import cases.n18_fractional_certificate.__main__ as n18_entrypoint
 import cases.n20_fractional_certificate.__main__ as n20_entrypoint
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
 from cases.n11_fractional_certificate.replay import STROMQUIST_RUNG_PATH
@@ -34,6 +35,7 @@ from cases.n17_fractional_certificate.replay import BURNS_CONTROL_PATH
 from cases.n17_fractional_certificate.replay import declared as n17_declared
 from cases.n17_fractional_certificate.replay import load as n17_load
 from cases.n17_weighted_certificate.fixture import load_retained_fixture
+from cases.n18_fractional_certificate.__main__ import replay as replay_n18
 from cases.n20_fractional_certificate.__main__ import replay as replay_n20
 from cases.n20_fractional_certificate.replay import RUNG_24_5_PATH
 from cases.n20_fractional_certificate.replay import declared as n20_declared
@@ -156,7 +158,11 @@ def test_n12_replay_refuses_declared_value_drift(
     assert message in capsys.readouterr().out
 
 
-@pytest.mark.parametrize("replay", [replay_n17, replay_n20], ids=["n17", "n20"])
+@pytest.mark.parametrize(
+    "replay",
+    [replay_n17, replay_n18, replay_n20],
+    ids=["n17", "n18", "n20"],
+)
 @pytest.mark.parametrize("mutation", DECLARED_VALUE_DRIFT)
 def test_n17_and_n20_replays_refuse_declared_value_drift(
     tmp_path: Path,
@@ -177,8 +183,8 @@ def test_n17_and_n20_replays_refuse_declared_value_drift(
 
 @pytest.mark.parametrize(
     "entrypoint",
-    [n12_entrypoint, n17_entrypoint, n20_entrypoint],
-    ids=["n12", "n17", "n20"],
+    [n12_entrypoint, n17_entrypoint, n18_entrypoint, n20_entrypoint],
+    ids=["n12", "n17", "n18", "n20"],
 )
 def test_the_guarded_replays_refuse_a_file_changed_during_verification(
     tmp_path: Path,

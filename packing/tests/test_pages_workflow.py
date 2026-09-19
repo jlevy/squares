@@ -539,6 +539,30 @@ def test_saved_font_geometry_runs_as_two_bounded_pairs() -> None:
     assert lines.index(waits[1]) < lines.index(launches[2])
 
 
+def test_print_layout_runs_the_overflow_self_check_beside_the_page() -> None:
+    """Two Chromium launches, one page each; serializing them was 66 s of this job."""
+    steps = load()["jobs"]["print-layout"]["steps"]
+    command = next(
+        step["run"]
+        for step in steps
+        if step.get("name") == "Check the print layout and its overflow self-check"
+    )
+    lines = command.splitlines()
+    launches = [line for line in lines if "python -m devtools.check_print_layout" in line]
+    waits = [line for line in lines if line.strip().startswith("wait ")]
+    assert len(launches) == 2
+    assert all(line.rstrip().endswith(" &") for line in launches)
+    assert sum("--self-check" in line for line in launches) == 1
+    assert len(waits) == 2
+    assert 'wait "$layout_pid"' in command
+    assert 'wait "$self_pid"' in command
+    assert 'test "$layout_status" -eq 0' in command
+    assert 'test "$self_status" -eq 0' in command
+    last_launch = max(lines.index(line) for line in launches)
+    first_wait = min(lines.index(line) for line in waits)
+    assert last_launch < first_wait
+
+
 def test_every_browser_check_waits_for_deployment() -> None:
     """Splitting one queue into jobs must not let a check fall off the deploy's `needs`."""
     jobs = load()["jobs"]

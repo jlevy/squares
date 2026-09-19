@@ -625,7 +625,7 @@ T-026 is only a support-and-rescaling provenance sentinel.
 
 | # | Idea | Status | H | Crux |
 | --- | --- | --- | --- | --- |
-| 166 | Compress T-025 on its exact support universe to at most 23 positive D4 orbits | registered | [H-163](hypotheses/H-163-route-s-threshold-compression.md) | A literal fivefold reduction from T-025’s 119 positive orbit representatives requires `N+ <= 23`. Confirmation also requires exact budget below eleven, agreement of the unchanged complete coverage routes, deterministic decompression, and source-distinct replay. The admission branch allocates no experiment and runs no target. |
+| 166 | Compress T-025 on its exact support universe to at most 23 positive D4 orbits | registered | [H-163](hypotheses/H-163-route-s-threshold-compression.md) | A literal fivefold reduction from T-025’s 119 positive orbit representatives requires `N+ <= 23`. Confirmation also requires exact budget below eleven, agreement of the unchanged complete coverage routes, deterministic decompression, source-distinct replay, a generating account, and a live `admit_threshold_compression --check`. The three admission-control manifests cannot confirm. Session 139 registered [exp-161](series/series-000-smoke-and-calibration/experiments/exp-161-h163-route-s-threshold-compression.md); encode-only timed out unresolved and `--search` did not run. |
 
 ## N11 Overnight Route Slate — X-037
 

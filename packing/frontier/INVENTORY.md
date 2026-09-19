@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **79** evidence records. **63** are formal; **57** of those were established here.
+- **80** evidence records. **64** are formal; **58** of those were established here.
 - **11** rest on an argument made elsewhere, of which **8** have been read by nobody here.
-- **26** claim to be first established here. **8** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **27** claim to be first established here. **8** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -67,13 +67,13 @@ results, it is a statement about what this repository has itself examined.
 | `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-green17-sixteen-point-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-green17-interval-audit` | 0 | lower-bound | verified | strict inequalities only | here | - | *not assessed* |
-| `E-n017-massaccesi-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
+| `E-n017-massaccesi-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
 | `E-n017-burns-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
 | `E-n017-burns-control-decision` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n017-mira-point-certificate-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | not-reviewed | previously-published |
 | `E-n017-fort-point-certificate-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | not-reviewed | previously-published |
 | `E-n017-anabologyco-weighted-certificate` | 2 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
-| `E-n017-massaccesi-h052-agreement` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
+| `E-n017-massaccesi-h052-agreement` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
 | `E-n012-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n012-independent-verifier` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-fractional-certificate` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
@@ -90,7 +90,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-n011-threshold-net1440-dilation-limit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-threshold-net720-certificate` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-threshold-net720-dilation-limit` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-n017-fractional-certificate` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n017-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n018-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n020-fractional-certificate-97-20` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n020-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-fractional-interval-decision` | 6 | lower-bound | verified | strict inequalities only | here | - | previously-published |
@@ -102,9 +103,9 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 12, verified 63
-- **method**: exact-algebraic 49, interval-certified 6, numerical-multiprecision 4, proof-audited 2, published-proof 6, reported 12
-- **novelty**: apparently-novel 26, common-knowledge 4, not assessed 8, previously-published 41
+- **assurance**: numerically-checked 4, reported 12, verified 64
+- **method**: exact-algebraic 50, interval-certified 6, numerical-multiprecision 4, proof-audited 2, published-proof 6, reported 12
+- **novelty**: apparently-novel 27, common-knowledge 4, not assessed 8, previously-published 41
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -115,7 +116,6 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
 | `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 303 | numerically-checked |
-| `E-n017-fractional-certificate` | 17, 18, 19 | The certificate and the side. The method is Burns's and the parametrisation is Massaccesi's own; what is new is a denser certificate at a larger side than his, found by this project's generator once its separation oracle was corrected. | 2 | verified |
 | `E-n020-fractional-certificate-97-20` | 20, 21 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the previous rung this project's own; what is new is a certificate at 97/20, found by seeding the generator's site set with the 24/5 certificate's own atoms scaled to the new side after the uniform grid walled there. | 2 | verified |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
@@ -124,6 +124,8 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n011-threshold-net1440-dilation-limit` | 11 | The exact lower-bound value obtained by combining the 1440-step re-certification of T-025's threshold atoms with T-022's sharpened containment lemma, every strict rational uniform dilation it admits, rational density, and upward embedding. The lemma and the dilation argument are T-022's and T-024's; carrying them over threshold atoms needs no new theorem, and the bound is new. | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
 | `E-n012-fractional-certificate` | 12 | The certificate and the bound it carries, not the method. The weighted fractional unavoidable-set technique is Burns's, with Massaccesi's parameters; what is new here is a first-party certificate ladder at n = 12, reaching 99/25, and the generator that produced it. The first instance was retained at 19/5. Anyone holding Burns's note could have run this search. | 1 | verified |
+| `E-n017-fractional-certificate` | 17, 18, 19 | The certificate and the side. The method is Burns's and the parametrisation is Massaccesi's own; what is new is a denser certificate at a larger side than his, found by this project's generator once its separation oracle was corrected. | 1 | verified |
+| `E-n018-fractional-certificate` | 18 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the seed T-019's own atoms scaled to 467/100; what is new is a certificate at 467/100, found after the uniform grid walled there. | 1 | verified |
 | `E-n020-fractional-certificate` | 19, 20, 21 | The certificate and the side. The method is Burns's and the parametrisation is Massaccesi's; what is new is a certificate at a side no published bound reaches at any of these three sizes, found by this project's generator. | 1 | verified |
 | `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 1 | verified |
 | `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |

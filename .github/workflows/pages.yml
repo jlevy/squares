@@ -624,12 +624,20 @@ jobs:
       # blocks the page declares centred, where the list markers sit, whether a footnote
       # reference opens a line -- at the column the PDF actually has, and the second
       # measures the same thing on a page mutated to overflow, so the probe is held to
-      # catching what it exists to catch.
-      - name: Check the print layout
-        run: uv run --frozen --group dev python -m devtools.check_print_layout
-
-      - name: Check the print-layout probe still catches a page-width overflow
-        run: uv run --frozen --group dev python -m devtools.check_print_layout --self-check
+      # catching what it exists to catch. The two Chromium launches do not share a page.
+      - name: Check the print layout and its overflow self-check
+        run: |
+          set -euo pipefail
+          uv run --frozen --group dev python -m devtools.check_print_layout &
+          layout_pid=$!
+          uv run --frozen --group dev python -m devtools.check_print_layout --self-check &
+          self_pid=$!
+          layout_status=0
+          self_status=0
+          wait "$layout_pid" || layout_status=$?
+          wait "$self_pid" || self_status=$?
+          test "$layout_status" -eq 0
+          test "$self_status" -eq 0
 
   typography:
     needs: scope

@@ -1,0 +1,7 @@
+command: uv run --frozen --all-extras --group dev python -m devtools.compress_threshold_certificate --selftest
+started_utc: 2026-09-18T06:11:26Z
+----- stdout+stderr -----
+Route S compression producer selftest passed
+----- end -----
+exit_code: 0
+finished_utc: 2026-09-18T06:11:27Z

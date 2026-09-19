@@ -1,0 +1,86 @@
+{
+ "trajectory": [
+  {
+   "stage": "control",
+   "objective": 15.999999999999998,
+   "rows": 119,
+   "atom_orbits": 0,
+   "site_support": 7,
+   "seconds": 0.317498328999136
+  },
+  {
+   "stage": "atoms-0",
+   "objective": 11.191256830601093,
+   "rows": 119,
+   "atom_orbits": 6,
+   "atom_budget": 5.398907103825136,
+   "positive_atoms": 5,
+   "site_support": 8,
+   "seconds": 0.3469801470000675
+  },
+  {
+   "stage": "atoms-1",
+   "objective": 10.64935064935065,
+   "rows": 119,
+   "atom_orbits": 14,
+   "atom_budget": 6.493506493506494,
+   "positive_atoms": 8,
+   "site_support": 7,
+   "seconds": 7.6114510409988725
+  },
+  {
+   "stage": "atoms-2",
+   "objective": 10.27972027972028,
+   "rows": 119,
+   "atom_orbits": 22,
+   "atom_budget": 7.2027972027972025,
+   "positive_atoms": 9,
+   "site_support": 7,
+   "seconds": 9.850647146999108
+  },
+  {
+   "stage": "atoms-3",
+   "objective": 9.968931325743664,
+   "rows": 119,
+   "atom_orbits": 30,
+   "atom_budget": 6.834226955563717,
+   "positive_atoms": 12,
+   "site_support": 8,
+   "seconds": 11.42171040699941
+  },
+  {
+   "stage": "sweep-0",
+   "least_charge": 0.365773049,
+   "violated_cells": 18,
+   "seconds": 11.785062863998974
+  },
+  {
+   "stage": "rows-0",
+   "objective": 11.299090959790309,
+   "rows": 137,
+   "atom_orbits": 30,
+   "atom_budget": 4.331269867826668,
+   "positive_atoms": 8,
+   "site_support": 15,
+   "seconds": 11.792530311999144
+  },
+  {
+   "stage": "sweep-1",
+   "least_charge": 0.58741844,
+   "violated_cells": 18,
+   "seconds": 12.14236772699951
+  },
+  {
+   "stage": "rows-1",
+   "objective": 11.610187541741126,
+   "rows": 155,
+   "atom_orbits": 30,
+   "atom_budget": 4.315517770437356,
+   "positive_atoms": 8,
+   "site_support": 18,
+   "seconds": 12.150611417999244
+  }
+ ],
+ "note": "final",
+ "n": 11
+}

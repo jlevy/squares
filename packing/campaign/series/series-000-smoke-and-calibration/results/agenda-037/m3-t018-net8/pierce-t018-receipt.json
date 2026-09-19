@@ -1,0 +1,32 @@
+{
+  "kind": "t018_integral_piercing_receipt",
+  "schema": "packing.squares:T018IntegralPiercing/v1",
+  "side": "19/5",
+  "square_side": "1",
+  "t018_shrink": "9977/10000",
+  "using_unit_squares": true,
+  "square_side_reason": "Memo II ownership is closed unit squares in the container. T-018's shrink 9977/10000 is a fractional-certificate device (Condition 4), not the ownership object.",
+  "angle_limit": "207107/500000",
+  "direction_steps": 8,
+  "direction_count": 9,
+  "unique_sites": 1121,
+  "sites_in_container": 1121,
+  "certificate": "cases/n11_fractional_certificate/certificate.json",
+  "optimizer_ran": false,
+  "search_status": "timeout",
+  "piercing": null,
+  "m3_verdict": "unresolved",
+  "selected_sites": null,
+  "reachable_cells": null,
+  "cover_rows": null,
+  "truncated_rows": false,
+  "float_lp_used": false,
+  "time_limit_s": 180.0,
+  "interval_audit": {
+    "ran": false,
+    "certified": null,
+    "error": null
+  },
+  "scope": "A coarse-net IP optimum is a kill-test measurement, not a verified s(11) movement. A float LP relaxation is not a verdict.",
+  "message": "event-cell encoding hit the time limit; timeout is unresolved"
+}

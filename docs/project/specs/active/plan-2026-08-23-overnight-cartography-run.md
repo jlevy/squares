@@ -352,11 +352,11 @@ Session 138’s overnight review measured M1 and M7 at stated scope and moved no
 owns its queue.
 Route S (BC-343) stays open in agenda-036: Session 135 admitted the fixed
 T-025 support family, PR 182 merged the instrument as `1d9c49c4` from reviewed head
-`609d7d62`, and its fresh planning branch must register `exp-161` before scientific
-target access. BC-354 stopped at Route A’s representation boundary, and BC-341 remains
-tentative behind a future W10 reselection and the complete Route A representation it
-still lacks. The current evidence, candidate dispositions, and post-W5 scientific order
-are in the synopsis’s
+`609d7d62`, and session 139 registered `exp-161` before any scientific target access.
+BC-354 stopped at Route A’s representation boundary, and BC-341 remains tentative behind
+a future W10 reselection and the complete Route A representation it still lacks.
+The current evidence, candidate dispositions, and post-W5 scientific order are in the
+synopsis’s
 [Research Program Status and Roadmap](../../../../SYNOPSIS.md#research-program-status-and-roadmap),
 and
 [agenda-036](../../../../packing/campaign/agendas/agenda-036-n11-strategy-reset-roadmap.md)

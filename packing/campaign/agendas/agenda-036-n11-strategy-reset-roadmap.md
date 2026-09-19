@@ -433,9 +433,13 @@ agenda:
     bead: think-ufmk
     depends_on: [BC-354, BC-355]
     next_evidence: >-
-      After BC-355 closes, under think-ufmk, use a fresh branch to register exp-161, its
-      exact source, target budget, accept rule, stop rule, independent-review boundary,
-      and retained evidence paths before changing any weight or running coverage.
+      Session 139 registered exp-161 on 2026-09-18 and closed the admission-synthetic
+      accept hole: live `admit_threshold_compression --check`, `--authorize-target
+      exp-161`, forbidden control-manifest SHA-256 values, `generating_account`, and
+      timeout maps to unresolved. The named producer is in-tree and emits no candidate;
+      a coverage-encoding search is still required before any scientific target.
+      BC-355's pull-request walls remain advisory under think-g4n9; that does not
+      reopen the admitted instrument.
     workflows: [pipeline-improvement, factual-review, research-loop]
     program: n11-strategy-reset
     artifacts:
@@ -444,6 +448,7 @@ agenda:
     - packing/campaign/agent-sessions/session-134-n11-route-s-admission.md
     - packing/campaign/agent-sessions/session-135-n11-route-s-guard-discharge.md
     - packing/cases/n11_threshold_certificate/route-s-compression-admission-receipt.json
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-161-h163-route-s-threshold-compression.md
     parallel_group: proof-simplification
   - id: BC-344
     purpose: research
@@ -642,11 +647,11 @@ gaps.
 The W10 review originally mapped six active hours into five sequential PR-bounded
 blocks. BC-340 and BC-353 completed, and BC-354 activated the selected-route admission’s
 guard-refusal branch.
-After BC-355 closes, the remaining conditional path begins with a fresh planning branch
-under `think-ufmk`. That branch must register `exp-161`, its exact target, budget,
-accept rule, stop rule, and review boundary before any target access.
-Review and replanning follow the bounded run; no later branch starts before the prior PR
-merges.
+After BC-355’s topology merge, the remaining conditional path is the exp-161 target
+under `think-ufmk`. Session 139 registered that experiment; the producer it names must
+exist before any target access.
+Review and replanning follow the bounded run.
+BC-355’s pull-request walls stay advisory under `think-g4n9` until they hold 180 s.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

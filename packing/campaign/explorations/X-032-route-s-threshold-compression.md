@@ -30,12 +30,14 @@ exploration:
 ---
 # X-032: Route S Fixed-Support Threshold-Certificate Compression
 
-**Status: target-blind instrument admitted, with no scientific target.** This report
-fixes the objects, metric, and verdict boundary for BC-343 before any compression
+**Status: target-blind instrument admitted; exp-161 registered and untested.** This
+report fixes the objects, metric, and verdict boundary for BC-343 before any compression
 candidate is produced.
-It registers H-163 but does not allocate `exp-161`, run an optimizer, change an atom,
-replay candidate coverage, or make a compression claim.
-T-025 and T-026 retain their existing results and assurance levels.
+It registered H-163 without a round.
+Session 139 later allocated
+[exp-161](../series/series-000-smoke-and-calibration/experiments/exp-161-h163-route-s-threshold-compression.md)
+as in-progress. No optimizer, candidate, coverage replay, or compression claim exists
+yet. T-025 and T-026 retain their existing results and assurance levels.
 
 ## Frozen Control
 
@@ -160,6 +162,13 @@ Admission requires controls whose outcomes do not depend on a compression candid
 
 These controls admit a producer and checker.
 They are not candidate certificates and cannot resolve H-163.
+Their retained SHA-256 values are therefore excluded from any later accept:
+the full T-025 control
+`53fbe28bd6dd022600515663ea1e3609ed2bd36a83e69e350b4bb3b45d7b7176`, the synthetic
+23-orbit decompressor control
+`007b394f48b0b11565ca87d09ad961258534c426bfd623a3e9bfc15aa6495e8a`, and the rejected
+24-orbit policy control
+`194f1f9f47fc94e7f945920c38a4efdb43476719eba025ea446a1d7b91fde27e`.
 
 ## Scope
 

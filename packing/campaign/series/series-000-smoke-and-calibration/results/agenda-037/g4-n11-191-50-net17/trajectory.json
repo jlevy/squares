@@ -1,0 +1,202 @@
+{
+ "trajectory": [
+  {
+   "stage": "control",
+   "objective": 11.644268774703066,
+   "rows": 203,
+   "atom_orbits": 0,
+   "site_support": 16,
+   "seconds": 1.2714247959993372
+  },
+  {
+   "stage": "atoms-0",
+   "objective": 11.161790017211704,
+   "rows": 203,
+   "atom_orbits": 8,
+   "atom_budget": 1.0671256454388982,
+   "positive_atoms": 4,
+   "site_support": 18,
+   "seconds": 3.2150611680008296
+  },
+  {
+   "stage": "atoms-1",
+   "objective": 10.87402258905303,
+   "rows": 203,
+   "atom_orbits": 16,
+   "atom_budget": 1.7181838658814483,
+   "positive_atoms": 5,
+   "site_support": 19,
+   "seconds": 6.137555645000248
+  },
+  {
+   "stage": "atoms-2",
+   "objective": 10.533960995292535,
+   "rows": 203,
+   "atom_orbits": 24,
+   "atom_budget": 3.958305312710154,
+   "positive_atoms": 8,
+   "site_support": 16,
+   "seconds": 12.600145682998118
+  },
+  {
+   "stage": "atoms-3",
+   "objective": 10.334941419710544,
+   "rows": 203,
+   "atom_orbits": 32,
+   "atom_budget": 5.867677463818053,
+   "positive_atoms": 11,
+   "site_support": 14,
+   "seconds": 18.615673501000856
+  },
+  {
+   "stage": "atoms-4",
+   "objective": 9.714285714285715,
+   "rows": 203,
+   "atom_orbits": 40,
+   "atom_budget": 8.285714285714286,
+   "positive_atoms": 5,
+   "site_support": 4,
+   "seconds": 23.810928134000278
+  },
+  {
+   "stage": "atoms-5",
+   "objective": 9.636363636363635,
+   "rows": 203,
+   "atom_orbits": 48,
+   "atom_budget": 8.969696969696967,
+   "positive_atoms": 9,
+   "site_support": 3,
+   "seconds": 25.003559533000953
+  },
+  {
+   "stage": "sweep-0",
+   "least_charge": 0.0,
+   "violated_cells": 34,
+   "seconds": 25.70551892599906
+  },
+  {
+   "stage": "rows-0",
+   "objective": 10.691682004393519,
+   "rows": 237,
+   "atom_orbits": 48,
+   "atom_budget": 3.5944902927032003,
+   "positive_atoms": 10,
+   "site_support": 16,
+   "seconds": 25.721306767998612
+  },
+  {
+   "stage": "sweep-1",
+   "least_charge": 0.570296279,
+   "violated_cells": 34,
+   "seconds": 26.679173280001123
+  },
+  {
+   "stage": "rows-1",
+   "objective": 10.916242480333176,
+   "rows": 271,
+   "atom_orbits": 48,
+   "atom_budget": 3.023600185099487,
+   "positive_atoms": 9,
+   "site_support": 17,
+   "seconds": 26.696937263997825
+  },
+  {
+   "stage": "sweep-2",
+   "least_charge": 0.80807498,
+   "violated_cells": 34,
+   "seconds": 27.67530934000024
+  },
+  {
+   "stage": "rows-2",
+   "objective": 11.146978557504873,
+   "rows": 305,
+   "atom_orbits": 48,
+   "atom_budget": 2.382066276803118,
+   "positive_atoms": 7,
+   "site_support": 13,
+   "seconds": 27.694284524997784
+  },
+  {
+   "stage": "sweep-3",
+   "least_charge": 0.785575061,
+   "violated_cells": 34,
+   "seconds": 28.430542383997818
+  },
+  {
+   "stage": "rows-3",
+   "objective": 11.264861088127677,
+   "rows": 339,
+   "atom_orbits": 48,
+   "atom_budget": 2.6663724787173386,
+   "positive_atoms": 9,
+   "site_support": 17,
+   "seconds": 28.45115506699949
+  },
+  {
+   "stage": "sweep-4",
+   "least_charge": 0.830391464,
+   "violated_cells": 34,
+   "seconds": 29.40129492900087
+  },
+  {
+   "stage": "rows-4",
+   "objective": 11.345642540620386,
+   "rows": 373,
+   "atom_orbits": 48,
+   "atom_budget": 2.591621532906615,
+   "positive_atoms": 8,
+   "site_support": 22,
+   "seconds": 29.42439166300028
+  },
+  {
+   "stage": "sweep-5",
+   "least_charge": 0.841426647,
+   "violated_cells": 34,
+   "seconds": 30.396071332997963
+  },
+  {
+   "stage": "rows-5",
+   "objective": 11.394126738794437,
+   "rows": 407,
+   "atom_orbits": 48,
+   "atom_budget": 2.6769706336939856,
+   "positive_atoms": 9,
+   "site_support": 17,
+   "seconds": 30.420684148000873
+  },
+  {
+   "stage": "sweep-6",
+   "least_charge": 0.89258115,
+   "violated_cells": 20,
+   "seconds": 31.365417527998943
+  },
+  {
+   "stage": "rows-6",
+   "objective": 11.43671969072819,
+   "rows": 427,
+   "atom_orbits": 48,
+   "atom_budget": 1.850560872045121,
+   "positive_atoms": 9,
+   "site_support": 18,
+   "seconds": 31.390636000000086
+  },
+  {
+   "stage": "sweep-7",
+   "least_charge": 0.951327725,
+   "violated_cells": 32,
+   "seconds": 32.40303201500137
+  },
+  {
+   "stage": "rows-7",
+   "objective": 11.449456700691472,
+   "rows": 459,
+   "atom_orbits": 48,
+   "atom_budget": 2.2422346613983097,
+   "positive_atoms": 9,
+   "site_support": 19,
+   "seconds": 32.42919044299924
+  }
+ ],
+ "note": "final",
+ "n": 11
+}

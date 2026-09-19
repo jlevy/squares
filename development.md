@@ -171,7 +171,7 @@ alone is not full pre-merge evidence.
 | `--fast` | contributor, at a block boundary; the union of the seven tiers below | 69 of 80 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 50 of 80 | 140 s | 75.67 s, the geometric mean of 90.19 s and 63.48 s on PR 185 heads `e8c79fe4` and `80a5976f`, the first two readings with `exact verification` concurrent |
 | `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 3 of 80 | 150 s | 85.25 s on the three-step, two-worker topology, the mean of two readings |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 80 | 130 s | 67.26 s on CI, the mean of two readings |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 80 | 111 s | 55.67 s on CI, the mean of three readings |
 | `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 80 | 180 s | 102.73 s on the predecessor topology, the mean of seven readings |
 | `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 80 | 168 s | 109.92 s on exact head `be28ad5a`, the geometric mean of attempts 1–3 of run 35182460400 |
 | `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 80 | 180 s | 124.78 s on exact head `be28ad5a`, the geometric mean of attempts 2–3 of run 35182460400 |

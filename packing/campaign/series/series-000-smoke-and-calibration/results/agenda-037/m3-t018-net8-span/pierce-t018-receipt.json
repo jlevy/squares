@@ -1,0 +1,69 @@
+{
+  "kind": "t018_integral_piercing_receipt",
+  "schema": "packing.squares:T018IntegralPiercing/v1",
+  "side": "19/5",
+  "square_side": "1",
+  "t018_shrink": "9977/10000",
+  "using_unit_squares": true,
+  "square_side_reason": "Memo II ownership is closed unit squares in the container. T-018's shrink 9977/10000 is a fractional-certificate device (Condition 4), not the ownership object.",
+  "angle_limit": "207107/500000",
+  "direction_steps": 8,
+  "direction_count": 9,
+  "unique_sites": 1121,
+  "sites_in_container": 1121,
+  "certificate": "cases/n11_fractional_certificate/certificate.json",
+  "optimizer_ran": true,
+  "search_status": "feasible",
+  "piercing": 9,
+  "m3_verdict": "unresolved",
+  "selected_sites": [
+    [
+      "831/1100",
+      "381/200"
+    ],
+    [
+      "1849127/1853400",
+      "1849127/1853400"
+    ],
+    [
+      "1849127/1853400",
+      "5212327/1853400"
+    ],
+    [
+      "37/20",
+      "199/200"
+    ],
+    [
+      "371/200",
+      "563/200"
+    ],
+    [
+      "381/200",
+      "381/200"
+    ],
+    [
+      "5212327/1853400",
+      "1849127/1853400"
+    ],
+    [
+      "5212327/1853400",
+      "5212327/1853400"
+    ],
+    [
+      "563/200",
+      "387/200"
+    ]
+  ],
+  "reachable_cells": 25223634,
+  "cover_rows": 31940,
+  "truncated_rows": true,
+  "float_lp_used": false,
+  "time_limit_s": 45.0,
+  "interval_audit": {
+    "ran": false,
+    "certified": null,
+    "error": null
+  },
+  "scope": "A coarse-net IP optimum is a kill-test measurement, not a verified s(11) movement. A float LP relaxation is not a verdict.",
+  "message": "integral set-cover incumbent; coarse-net measurement, not a retained bound"
+}

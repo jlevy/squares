@@ -1,0 +1,22 @@
+START 2026-09-18T06:59:14Z attempt=1
+control: n=11 sites 456/65 orbits, 119 rows, objective 16.000000000, round limit 8 reached
+  dual family: 24 placements, total 16.000000
+  top violation 2.000000; classes {'axis-axis-axis': 6}
+  added 6 atom orbits
+[atoms-0] objective 11.191256831 atom orbits 6 rows 119
+  dual family: 160 placements, total 11.191257
+  top violation 0.792350; classes {'axis-other-other': 57, 'other-other-other': 5103, '29-axis-other': 8, 'axis-axis-other': 3, '29-other-other': 1674, '29-29-other': 127, '29-29-29': 2}
+  added 8 atom orbits
+[atoms-1] objective 10.649350649 atom orbits 14 rows 119
+  dual family: 128 placements, total 10.649351
+  top violation 0.753247; classes {'axis-other-other': 65, 'other-other-other': 520, '29-other-other': 704, '29-29-other': 255, 'axis-axis-other': 11, '29-29-29': 37, '29-axis-other': 29, '29-29-axis': 4}
+  added 8 atom orbits
+[atoms-2] objective 10.279720280 atom orbits 22 rows 119
+  dual family: 120 placements, total 10.279720
+  top violation 0.393357; classes {'other-other-other': 312, 'axis-other-other': 33, '29-other-other': 429, '29-29-other': 190, 'axis-axis-other': 3, '29-axis-other': 14, '29-29-29': 24, '29-29-axis': 6}
+  added 8 atom orbits
+[atoms-3] objective 9.968931326 atom orbits 30 rows 119
+[rows-0] objective 11.299090960 atom orbits 30 rows 137
+[rows-1] objective 11.610187542 atom orbits 30 rows 155
+unresolved n=11 objective 11.610187542 rows 155 atom orbits 30; not a refute
+EXIT 0 2026-09-18T06:59:27Z

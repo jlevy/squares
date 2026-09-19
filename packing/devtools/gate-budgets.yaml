@@ -640,14 +640,22 @@ tiers:
   # BasedPyright is one indivisible unit. Inside `checks` it occupied one of three slots
   # on a four-cpu runner; moving it to a one-step job gives it the runner without changing
   # the edit tier, which still contains the same type floor.
-  ceiling_seconds: 130.0
-  measured_seconds: 67.26
-  measured_on: '2026-09-16'
+  ceiling_seconds: 111.0
+  measured_seconds: 55.67
+  measured_on: '2026-09-18'
   measured_where: >-
-    The geometric mean of two green readings at the reference shape: 65.90 s in run
-    35050021006 and 68.64 s in run 35052543153, job typecheck, on PR 185. The latter
-    selected one of 77 steps. Refresh after the reconciliation topology runs on its exact
-    head.
+    Geometric mean of three hosted packing-validate --typecheck walls at the reference
+    shape: 65.90 s in run 35050021006 and 68.64 s in run 35052543153, job typecheck, on
+    PR 185, and 38.15 s in run 35311746708, job typecheck, on PR 199, which failed the
+    stale rule against 67.26 s (0.57x). Ceiling is 2.0x of this mean.
+  history:
+  - measured_seconds: 67.26
+    measured_on: '2026-09-16'
+    measured_where: >-
+      The geometric mean of two green readings at the reference shape: 65.90 s in run
+      35050021006 and 68.64 s in run 35052543153, job typecheck, on PR 185. The latter
+      selected one of 77 steps. Refresh after the reconciliation topology runs on its exact
+      head.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     The type floor, isolated because it is one of the checks queue's largest units and no

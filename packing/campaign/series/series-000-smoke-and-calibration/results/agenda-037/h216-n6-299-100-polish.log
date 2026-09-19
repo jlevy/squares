@@ -1,0 +1,4 @@
+{"stage": "arrangement", "vertices": 143280, "nonzeros": 3666708, "seconds": 0.3}
+{"stage": "solve", "iteration": 0, "rows": 20604, "columns": 24, "objective_float": 5.857142857142859, "screen_max_depth_float": 1.0714285714285734, "screen_violated": 56, "screen_near_tight": 15600, "added_violated": 56, "added_near_tight": 1414, "seconds": 0.4}
+{"stage": "solve", "iteration": 1, "rows": 22074, "columns": 24, "objective_float": 5.846153846153846, "screen_max_depth_float": 1.0000000000000002, "screen_violated": 0, "screen_near_tight": 12868, "added_violated": 0, "added_near_tight": 154, "seconds": 0.3}
+{"stage": "exact", "round": 0, "kind": "vertex", "scalings": 0, "total": "76/13", "total_float": 5.846153846153846, "basis_rows": 7, "support": 7, "at_bound": 0, "dual_bound": "76/13", "dual_exact": false, "dual_rows": 12, "max_depth": "1", "vertices": 143280, "decided_exactly": 14303, "seconds": 17.1}

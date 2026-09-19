@@ -49,12 +49,12 @@ def test_committed_file_matches_the_renderer() -> None:
 
 
 def test_retained_certificates_are_found_by_globbing_the_case_packages() -> None:
-    """Four packages exist today, each keyed by the least size its own mass certifies.
+    """Five packages exist today, each keyed by the least size its own mass certifies.
 
     The key is computed, never read off the package name, and the n = 20 package is
     the case that shows why: while its retained rung was the 24/5 one, mass
     18.922620 keyed it to n = 19; T-021's 97/20 rung has mass 19.848723 and keys it
-    to n = 20. That the four keys agree with their package names today is a fact
+    to n = 20. That the five keys agree with their package names today is a fact
     about the current corpus, not a property of the glob.
     """
     retained = retained_certificates()
@@ -63,6 +63,7 @@ def test_retained_certificates_are_found_by_globbing_the_case_packages() -> None
         "n11_fractional_certificate": 11,
         "n12_fractional_certificate": 12,
         "n17_fractional_certificate": 17,
+        "n18_fractional_certificate": 18,
         "n20_fractional_certificate": 20,
     }
 
@@ -266,22 +267,23 @@ def test_an_empty_tilt_inventory_is_refused() -> None:
 
 
 def test_the_packing_limited_ratios_sit_inside_a_tight_band() -> None:
-    """The packing-limited rows land within 0.001 of each other, however many there are.
+    """The packing-limited rows at n = 11 and n = 17 land within 0.001 of each other.
 
-    n = 11 and n = 17 are the two today. It was three until T-021: the n = 20 package
-    keyed to n = 19, where the best packing bound it, and the 97/20 rung moved it to
-    n = 20, where the ceiling 4.9885 sits below the best packing 5.0000 and so binds
-    instead. The band is the regularity worth guarding; which cases sit inside it is
-    a fact about the corpus and is read from it.
+    n = 18 is packing-limited too, at a lower ratio: T-027's 467/100 covering was not
+    pushed to the packing. n = 11 and n = 17 are the tight pair. It was three until
+    T-021: the n = 20 package keyed to n = 19, where the best packing bound it, and
+    the 97/20 rung moved it to n = 20, where the ceiling 4.9885 sits below the best
+    packing 5.0000 and so binds instead. The band among the tight pair is the
+    regularity worth guarding; which cases sit inside the packing-limited set is a
+    fact about the corpus and is read from it.
     """
     measured = measured_attainment(cases())
     packing_limited = {row["n"]: row for row in measured if row["binds"] == "packing"}
-    assert set(packing_limited) == {11, 17}
-    ratios = [row["ratio"] for row in packing_limited.values()]
-    assert max(ratios) - min(ratios) <= BAND
-    # Each ratio is close to the ~0.982 the record has settled on -- checked loosely,
-    # since the tight assertion above is what actually pins the regularity.
-    assert all(0.97 < ratio < 0.99 for ratio in ratios)
+    assert set(packing_limited) == {11, 17, 18}
+    tight = [packing_limited[n]["ratio"] for n in (11, 17)]
+    assert max(tight) - min(tight) <= BAND
+    assert all(0.97 < packing_limited[n]["ratio"] < 0.99 for n in (11, 17))
+    assert 0.96 < packing_limited[18]["ratio"] < 0.97
 
 
 def test_ceiling_limited_certificate_is_excluded_from_the_mean() -> None:

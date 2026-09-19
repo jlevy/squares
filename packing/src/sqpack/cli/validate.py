@@ -3335,12 +3335,15 @@ STEPS: tuple[Step, ...] = (
             "packing/uv.lock",
         ),
     ),
+    # Hosted frontend pair: Chromium 59.09s, biome 91.69s. `--jobs 2` without the hint
+    # starts biome and liveness, and Chromium is the late tail of that job.
     Step(
         "workbench browser behavior in Chromium",
         _workbench_frontend,
         fast=True,
         broad=True,
         frontend=True,
+        start_early=True,
         touches=_WORKBENCH_INPUTS,
     ),
     # 9.63s.

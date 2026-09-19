@@ -1,0 +1,5 @@
+campaign/series/series-000-smoke-and-calibration/results/agenda-037/n18-467-100-t019-seed-certificate.json: n = 18, L = 467/100 = 4.670000, 769 atoms, mass 8937839/500000 = 17.875678
+  ceiling 4.988500, certifies every n >= 18
+  interval accepted=True enclosure=(Fraction(2000007, 2000000), Fraction(2000007, 2000000)) boxes=2543909 stalled=0 (24s)
+  exact    accepted=True least=2000007/2000000 (9s)
+  RETAINABLE: both routes accept and agree at 2000007/2000000; sha256 3a11b6303e0663b502b6c1e3fc9d8da285104e199b17022937369bc781479059

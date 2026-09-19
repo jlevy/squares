@@ -918,17 +918,15 @@
           "state": "closed-form"
         },
         "lower": {
-          "display": "s(18) ≥ 4.59",
+          "display": "s(18) ≥ 4.67",
           "evidence": [
             "E-fractional-interval-decision",
-            "E-n017-fractional-certificate",
-            "E-n017-massaccesi-h052-agreement",
-            "E-n017-massaccesi-source-replay"
+            "E-n018-fractional-certificate"
           ],
           "first_proved_here": true,
           "provenance": "frontier",
           "shown": true,
-          "value": "4.59"
+          "value": "4.67"
         },
         "n": 18,
         "optimality": {

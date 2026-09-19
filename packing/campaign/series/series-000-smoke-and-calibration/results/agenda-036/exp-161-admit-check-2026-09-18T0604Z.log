@@ -1,0 +1,8 @@
+command: uv run --frozen --all-extras --group dev python -m devtools.admit_threshold_compression --check
+cwd: /workspace/packing
+started_utc: 2026-09-18T06:04:57Z
+----- stdout+stderr -----
+Route S compression checkpoint check passed
+----- end -----
+exit_code: 0
+finished_utc: 2026-09-18T06:05:00Z

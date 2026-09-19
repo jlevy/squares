@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 138
+count: 139
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 87
-  sessions_unmeasured: 51
+  sessions_unmeasured: 52
   attributed:
     rollups: 129
     turns: 40048
@@ -2289,5 +2289,15 @@ sessions:
   measured: false
   unmeasured_reason: >-
     native harness data unavailable; The coordinator's Claude session was still live when this record was written, and its single log also carries the parallel pull-request threads and a session-quota exhaustion from about 00:15 to 02:50 PT. No per-log receipt was generated before terminalization, and the native log does not separate this program's usage from the pull-request work that shares it.
+  rollups: []
+  codex_receipts: []
+- id: session-139
+  title: "N11 Overnight Research"
+  status: stopped
+  primary_bead: think-mcb6
+  phases: 4
+  measured: false
+  unmeasured_reason: >-
+    native harness data unavailable; This Cursor cloud-agent run has no ClaudeEfficiencyRollup or CodexTaskTreeDelta receipt. Session clocks and the encode and covering walls are not a substitute.
   rollups: []
   codex_receipts: []

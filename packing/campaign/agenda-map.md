@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **8** in_progress, **16** ready, **21** tentative, **66** blocked, **60** stopped, **178** complete.
+- **9** in_progress, **15** ready, **21** tentative, **66** blocked, **60** stopped, **178** complete.
 
 - **24 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -63,7 +63,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-036 | `BC-350` | tentative | 2 | insight | research | Can one uniform boundary-capacity or deformation lemma for L = 4 - epsilon turn the open n12 bracket into a… | `think-0z9b` |
 | agenda-036 | `BC-345` | tentative | 3 | insight | research | What competing local optima appear under a serious orientation-profile-organized n=11 search, and can any… | `think-7n2w` |
 | agenda-036 | `BC-351` | tentative | 3 | insight | research | Can an orientation-sensitive two- or three-parent gap lemma be summed without double counting to prove… | `think-gzjq` |
-| agenda-037 | `BC-357` | ready | 1 | correctness | measurement_validation | Does a helper-free point-atom certificate exist for n=6 at side 299/100 with B = 9977/10000 on the… | `think-qqzs` |
+| agenda-037 | `BC-357` | in_progress | 1 | correctness | measurement_validation | Does a helper-free point-atom certificate exist for n=6 at side 299/100 with B = 9977/10000 on the… | `think-qqzs` |
 | agenda-037 | `BC-359` | tentative | 2 | insight | research | Is the integral piercing number of the T-018 site set at side 3.80 on a 37-direction net at most 11, as a… | `think-k4vb` |
 
 ## Blocked, and on what
@@ -196,7 +196,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-033 | completed |  |  |  |  | 1 | 8 | 9 |
 | agenda-035 | paused |  |  |  | 4 | 2 | 8 | 14 |
 | agenda-036 | active | 1 |  | 9 | 1 |  | 6 | 17 |
-| agenda-037 | active |  | 1 | 1 | 1 | 1 | 1 | 5 |
+| agenda-037 | active | 1 |  | 1 | 1 | 1 | 1 | 5 |
 
 ## By program
 
@@ -380,7 +380,7 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-036 | `BC-341` | tentative | At side 3.84, can one complete difficult occupancy or wall-contact root family be closed by proved… |
 | agenda-036 | `BC-343` | blocked | Does T-025's exact atom-support universe admit a certificate at side 3.82 with at most 23 positive… |
 | agenda-037 | `BC-356` | complete | Which mechanisms could give a significant n=11 result beyond the one-body ceiling, how do they… |
-| agenda-037 | `BC-357` | ready | Does a helper-free point-atom certificate exist for n=6 at side 299/100 with B = 9977/10000 on the… |
+| agenda-037 | `BC-357` | in_progress | Does a helper-free point-atom certificate exist for n=6 at side 299/100 with B = 9977/10000 on the… |
 | agenda-037 | `BC-358` | blocked | Is the rows-complete covering LP with weighted-majority, k-of-S, and floor atoms on… |
 | agenda-037 | `BC-359` | tentative | Is the integral piercing number of the T-018 site set at side 3.80 on a 37-direction net at most… |
 | agenda-037 | `BC-360` | stopped | Should mechanisms M2, M4, M5, M6, and M8 from the overnight slate run as lanes? |

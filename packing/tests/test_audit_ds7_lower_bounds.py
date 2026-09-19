@@ -88,7 +88,7 @@ def test_indexed_external17_report_is_non_strict_and_below_verified(n: int) -> N
     case = ds7.read_case(REPO, None, n)
     assert case["reported_lower_bound"]["exact_form"] == "9141/2000"
     assert "s(17) >= 9141/2000" in case["reported_lower_bound"]["note"]
-    assert case["verified_lower_bound"]["value"] == "4.59"
+    assert case["verified_lower_bound"]["value"] == {17: "4.59", 18: "4.67"}[n]
     assert ds7.select_update(case) is None
 
 

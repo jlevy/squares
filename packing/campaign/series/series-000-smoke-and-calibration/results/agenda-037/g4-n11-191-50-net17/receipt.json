@@ -1,0 +1,26 @@
+{
+ "n": 11,
+ "objective": 11.449456700691472,
+ "covering_ran": true,
+ "candidate_created": false,
+ "h216_verdict": null,
+ "scientific_target": null,
+ "status": "unresolved",
+ "reason": null,
+ "exact_gate_routes": [],
+ "outer_side": "191/50",
+ "square_side": "9977/10000",
+ "angle_limit": "207107/500000",
+ "direction_steps": 16,
+ "grid_counts": [
+  10,
+  14,
+  18
+ ],
+ "site_orbits": 86,
+ "sites": 612,
+ "rows": 459,
+ "atom_orbits": 48,
+ "seconds": 32.43100353399859,
+ "seed_stopped": "round limit 8 reached"
+}

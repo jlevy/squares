@@ -1,0 +1,109 @@
+status: missing-inputs
+stop_reason: missing-inputs
+rows_complete: False
+checkpoint_in_repo: False
+producer_ready: False
+{
+ "tool": "devtools.regenerate_sites1_checkpoint",
+ "bead": "think-3xbr",
+ "status": "missing-inputs",
+ "stop_reason": "missing-inputs",
+ "rows_complete": false,
+ "checkpoint_in_repo": false,
+ "producer_ready": false,
+ "expected": {
+  "outer_side": "153/40",
+  "square_side": "9977/10000",
+  "n": 11,
+  "rows": 15021,
+  "sites": 17389,
+  "site_orbits": 2250,
+  "atom_orbits": 2566,
+  "stage": "sites-1"
+ },
+ "observed": null,
+ "scratch_producer": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-lp-sites.py.txt",
+ "historical_lp_run4": "spike-b/resume/lp-run4",
+ "in_tree_colgen": "devtools.run_fractional_colgen drives sqpack.fractional.colgen.generate_adaptive (point-atom adaptive column generation). It does not carry two-of-three atom orbits, the 15,021 lp-run4 rows, or the arrangement-vertex site oracle, so it cannot emit the sites-1 matrix.",
+ "producer_gaps": [
+  "sepcore.FamilyGeometry.vertex_candidates",
+  "sepcore.atom_columns",
+  "lp383.HighsLP"
+ ],
+ "missing": [
+  "lp-run4-sites: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/lp-run4/sites.json",
+  "lp-run4-atoms: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/lp-run4/atoms.json",
+  "lp-run4-rows: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/lp-run4/rows.json",
+  "sepcore.FamilyGeometry.vertex_candidates",
+  "sepcore.atom_columns",
+  "lp383.HighsLP"
+ ],
+ "inputs": [
+  {
+   "role": "state-191-50",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/bc-200-state-191-50.json",
+   "present": true,
+   "sha256": "8df0b9aa530149b44367842a2e6389949b27189df038d68e9d1afa8fd87df8c6",
+   "detail": "BC-200 point-LP state; the original producer asserted it as the prefix of lp-run4 sites.json"
+  },
+  {
+   "role": "lp-run4-sites",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/lp-run4/sites.json",
+   "present": false,
+   "detail": "191/50 threshold site orbits; unretained with lp-run4"
+  },
+  {
+   "role": "lp-run4-atoms",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/lp-run4/atoms.json",
+   "present": false,
+   "detail": "191/50 two-of-three atom orbits; unretained with lp-run4"
+  },
+  {
+   "role": "lp-run4-rows",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/lp-run4/rows.json",
+   "present": false,
+   "detail": "15,021 rows-complete rows at 191/50; unretained with lp-run4"
+  },
+  {
+   "role": "scratch-producer",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-lp-sites.py.txt",
+   "present": true,
+   "sha256": "6356c49514158c00cf27223dab87b831a4a342a1e2cb04d3826d062f74ed2ef8",
+   "detail": "lane A3 site-loop record; not an importable module"
+  },
+  {
+   "role": "trajectory-record",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-034/lane-a3-trajectory-153-40-sites.json",
+   "present": true,
+   "sha256": "b69a4c2bcf27069d0f69fd4bc9a195f9b597f6146de690f9677319b56880f74e",
+   "detail": "A3 sites-1 counts only; not the matrix"
+  }
+ ],
+ "checkpoint_files": [
+  {
+   "role": "output-sites",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1-sites.json",
+   "present": false
+  },
+  {
+   "role": "output-atoms",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1-atoms.json",
+   "present": false
+  },
+  {
+   "role": "output-rows",
+   "path": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1-rows.json",
+   "present": false
+  }
+ ],
+ "outputs": {
+  "directory": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037",
+  "sites": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1-sites.json",
+  "atoms": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1-atoms.json",
+  "rows": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1-rows.json",
+  "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1-receipt.json",
+  "log": "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-037/sites-1.log"
+ },
+ "deadline_seconds": null,
+ "seconds": 0.0031
+}

@@ -1,0 +1,34 @@
+control: n=11 sites 612/86 orbits, 203 rows, objective 11.644268775, round limit 8 reached
+  dual family: 104 placements, total 11.644269
+  top violation 0.723320; classes {'29-other-other': 499, '29-29-other': 166, 'other-other-other': 322, 'axis-axis-other': 13, 'axis-other-other': 164, '29-axis-other': 162, '29-axis-axis': 9, '29-29-axis': 27, '29-29-29': 5}
+  added 8 atom orbits
+[atoms-0] objective 11.161790017 atom orbits 8 rows 203
+  dual family: 144 placements, total 11.161790
+  top violation 0.982788; classes {'29-axis-other': 237, '29-29-axis': 15, '29-29-other': 56, 'axis-other-other': 476, 'axis-axis-other': 118, 'other-other-other': 507, '29-axis-axis': 28, '29-other-other': 394, 'axis-axis-axis': 14, '29-29-29': 1}
+  added 8 atom orbits
+[atoms-1] objective 10.874022589 atom orbits 16 rows 203
+  dual family: 168 placements, total 10.874023
+  top violation 0.434405; classes {'other-other-other': 2344, 'axis-other-other': 804, '29-other-other': 1130, 'axis-axis-other': 92, 'axis-axis-axis': 4, '29-axis-other': 262, '29-29-other': 181, '29-29-axis': 16, '29-axis-axis': 18, '29-29-29': 1}
+  added 8 atom orbits
+[atoms-2] objective 10.533960995 atom orbits 24 rows 203
+  dual family: 168 placements, total 10.533961
+  top violation 0.563551; classes {'other-other-other': 2915, '29-other-other': 870, '29-axis-other': 228, '29-29-other': 87, 'axis-other-other': 924, '29-29-axis': 14, 'axis-axis-other': 69, 'axis-axis-axis': 3, '29-axis-axis': 15, '29-29-29': 1}
+  added 8 atom orbits
+[atoms-3] objective 10.334941420 atom orbits 32 rows 203
+  dual family: 176 placements, total 10.334941
+  top violation 0.287388; classes {'29-other-other': 993, 'other-other-other': 1115, 'axis-other-other': 661, '29-29-other': 310, '29-axis-other': 465, '29-29-axis': 75, '29-29-29': 31, 'axis-axis-other': 103, '29-axis-axis': 43, 'axis-axis-axis': 4}
+  added 8 atom orbits
+[atoms-4] objective 9.714285714 atom orbits 40 rows 203
+  dual family: 112 placements, total 9.714286
+  top violation 0.285714; classes {'other-other-other': 307, '29-other-other': 133, '29-29-other': 20, '29-29-29': 1}
+  added 8 atom orbits
+[atoms-5] objective 9.636363636 atom orbits 48 rows 203
+[rows-0] objective 10.691682004 atom orbits 48 rows 237
+[rows-1] objective 10.916242480 atom orbits 48 rows 271
+[rows-2] objective 11.146978558 atom orbits 48 rows 305
+[rows-3] objective 11.264861088 atom orbits 48 rows 339
+[rows-4] objective 11.345642541 atom orbits 48 rows 373
+[rows-5] objective 11.394126739 atom orbits 48 rows 407
+[rows-6] objective 11.436719691 atom orbits 48 rows 427
+[rows-7] objective 11.449456701 atom orbits 48 rows 459
+unresolved n=11 objective 11.449456701 rows 459 atom orbits 48; not a refute

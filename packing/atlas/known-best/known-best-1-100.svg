@@ -412,7 +412,7 @@
     <polygon data-feature="legend-star" points="1805.5,609.46 1807.555356666666666666666667,615.3711533333333333333333333 1813.81174,615.49934 1808.82557,619.2808466666666666666666667 1810.637663333333333333333333,625.27066 1805.5,621.696 1800.362336666666666666666667,625.27066 1802.17443,619.2808466666666666666666667 1797.18826,615.49934 1803.444643333333333333333333,615.3711533333333333333333333" fill="#a3123f" data-evidence="lower bound first proved here" />
     <text data-feature="side-bound" x="1680" y="646" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(18) ≤ 4.822876</tspan></text>
     <text data-feature="algebraic-degree" x="1838" y="646" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f">deg 2</text>
-    <text data-feature="lower-bound" x="1680" y="663" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(18) ≥ </tspan><tspan fill="#a3123f">4.59</tspan></text>
+    <text data-feature="lower-bound" x="1680" y="663" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(18) ≥ </tspan><tspan fill="#a3123f">4.67</tspan></text>
   </g>
   <g data-feature="packing-card" data-n="19" data-row="1" data-column="8" data-source-id="W-known-best-n019">
     <rect data-feature="container-outline" x="1908" y="438" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />

@@ -1,0 +1,10 @@
+round 0: rows=2522 orbits=393 sites=2885 lp_rounds=11 objective=6.081683168 depth=1.501547030 cost=-4.012376238 least_covered=1.000000000 seconds=12.0 | adding 1 orbits, deepest at (Fraction(3328891, 1681800), Fraction(1180537, 592600))
+round 1: rows=2522 orbits=394 sites=2893 lp_rounds=1 objective=6.081683168 depth=1.609529703 cost=-4.876237624 least_covered=1.000000000 seconds=0.5 | adding 1 orbits, deepest at (Fraction(110551, 109800), Fraction(1925053, 1929400))
+round 2: rows=2678 orbits=395 sites=2901 lp_rounds=2 objective=6.081683168 depth=1.344059406 cost=-2.752475248 least_covered=1.000000000 seconds=1.1 | adding 1 orbits, deepest at (Fraction(3131433, 1573400), Fraction(499397, 250600))
+round 3: rows=2678 orbits=396 sites=2909 lp_rounds=1 objective=6.081683168 depth=1.261912129 cost=-2.095297030 least_covered=1.000000000 seconds=0.5 | adding 1 orbits, deepest at (Fraction(107857, 108600), Fraction(545333, 273400))
+round 4: rows=2727 orbits=397 sites=2917 lp_rounds=2 objective=6.078060319 depth=1.239503253 cost=-1.916026020 least_covered=1.000000000 seconds=1.1 | adding 1 orbits, deepest at (Fraction(436063, 437400), Fraction(3756281, 1883800))
+round 5: rows=2748 orbits=398 sites=2925 lp_rounds=4 objective=6.076773567 depth=1.207482993 cost=-1.659863946 least_covered=1.000000000 seconds=2.6 | adding 1 orbits, deepest at (Fraction(1009443, 1011400), Fraction(1776403, 1779400))
+round 6: rows=2748 orbits=399 sites=2933 lp_rounds=1 objective=6.076773567 depth=1.249757046 cost=-1.998056365 least_covered=1.000000000 seconds=0.7 | adding 1 orbits, deepest at (Fraction(95701, 93800), Fraction(634109, 318200))
+round 7: rows=2797 orbits=400 sites=2941 lp_rounds=2 objective=6.076773567 depth=1.186710398 cost=-1.493683188 least_covered=1.000000000 seconds=1.3 | adding 1 orbits, deepest at (Fraction(1931209, 1938200), Fraction(65457, 64600))
+ceiling: proved=False total 6.076774 over 224 squares, max pointwise depth 1.186710 at 228440 vertices (35888 decided exactly), feasible total 5.120688
+rationalised total 151931/25000 = 6.077240000 against LP optimum 6.076773567 over 160 atoms
