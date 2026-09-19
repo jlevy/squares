@@ -5,12 +5,14 @@ title: n=18 push above T-028 187/40
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m2w96h39gz7m3kpjaqcdnewv
 parent_id: is-01m2vrr7a5nyff2c2d8cp61gjn
 created_at: 2026-09-19T04:27:51.860Z
-updated_at: 2026-09-19T06:53:06.261Z
+updated_at: 2026-09-19T07:30:54.185Z
 ---
 Next n=18 rung above 187/40. leftover-queue has 1871/400 with the T-028 seed. Do not treat 117/25 plateau as a retain lead.
 
