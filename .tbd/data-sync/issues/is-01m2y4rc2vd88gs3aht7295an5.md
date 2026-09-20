@@ -5,13 +5,13 @@ title: Size workers for costly partial pre-push test selections
 kind: task
 status: open
 priority: 1
-version: 6
+version: 8
 labels:
   - pipeline
 dependencies: []
 parent_id: is-01m2ymyxppsc63e2m2jd9w24hs
 created_at: 2026-09-20T00:51:44.858Z
-updated_at: 2026-09-20T05:43:05.666Z
+updated_at: 2026-09-20T06:31:45.553Z
 ---
 Session 142 exposed a local scheduling gap at 4c202aeb: `packing-validate --push --since 2aaa296d` selected 72 of 350 test files, including expensive atlas and evidence tests, but ten implicit outer jobs left pytest serial under the 900-second command cap. Every non-test step passed; pytest printed an `F`, but the timeout prevented the final traceback and summary. A direct ten-worker diagnostic completed the same selection in 814.31 seconds under a different `PACK_JOBS` shape; it is an observed workaround, not a controlled validation of the proposed allocation. The final local push used `--jobs 2 --inner-jobs 2 --timeout-seconds 1800 --since 4c202aeb` and passed 49 steps and 1,619 tests in 392.33 seconds, but it selected a different change set and likewise does not validate the proposal. Selected for the owner-requested W7 pipeline block think-177v: use measured selection cost to allocate workers without relaxing per-test or tier ceilings. Complete a controlled comparison in that preparatory block before resuming H-216. H-216 remains the next scientific target; this scheduling improvement does not change the mathematical acceptance criteria.
 
@@ -73,3 +73,7 @@ allocation using the same revision, test selection, host, and resource ceilings;
 record both correctness results and measured duration. Do not label the historical
 unmatched runs above as a speedup. H-216 remains the next scientific target, and
 the broader `think-g4n9` wall-time work remains separate.
+
+Publication-audit follow-up on 2026-09-19: a 59-of-351-file selection at unchanged test code, jobs=2/inner_jobs=2 and pytest -n9, passed 1,672 tests but the empty-selection case of test_slow_lane_distinguishes_worker_collection_failure_from_empty_selection timed out while starting nested xdist workers at its existing 30-second limit. The isolated two-case test passed in 24.44 seconds. Retain the nested-subprocess contention case in the allocation assessment; a different worker shape is a retry, not a controlled speedup. Root is rerunning the complete floor with uv (the first invocation also omitted the venv PATH needed to locate Ruff/BasedPyright), jobs=7/inner_jobs=1, and unchanged timeouts. No test was weakened or marker changed.
+
+Further publication-audit observation: the uv rerun at jobs=7/inner_jobs=1 selected 60/351 files and finished in 680.73 seconds: all 48 non-behavioral steps passed, 1683 affected tests passed, and one source-coverage test failed because the concurrent workbench API test wrote transient .ts fixtures inside the checkout. The earlier nested-pytest startup timeout did not recur. Fixture isolation is tracked separately as think-fpwp and fixed in 93e88a3f; this is not a scheduler fix. The earlier 59-file selection and this run differ and do not establish a controlled speedup. Keep worker allocation, nested-process startup cost and source-tree mutation isolation separate in the W7 analysis.
