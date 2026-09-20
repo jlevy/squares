@@ -4,14 +4,16 @@ id: is-01m2y4rc2vd88gs3aht7295an5
 title: Size workers for costly partial pre-push test selections
 kind: task
 status: open
-priority: 2
-version: 4
-labels: []
+priority: 1
+version: 6
+labels:
+  - pipeline
 dependencies: []
+parent_id: is-01m2ymyxppsc63e2m2jd9w24hs
 created_at: 2026-09-20T00:51:44.858Z
-updated_at: 2026-09-20T01:34:17.246Z
+updated_at: 2026-09-20T05:43:05.666Z
 ---
-Session 142 exposed a local scheduling gap at 4c202aeb: `packing-validate --push --since 2aaa296d` selected 72 of 350 test files, including expensive atlas and evidence tests, but ten implicit outer jobs left pytest serial under the 900-second command cap. Every non-test step passed; pytest printed an `F`, but the timeout prevented the final traceback and summary. A direct ten-worker diagnostic completed the same selection in 814.31 seconds under a different `PACK_JOBS` shape; it is an observed workaround, not a controlled validation of the proposed allocation. The final local push used `--jobs 2 --inner-jobs 2 --timeout-seconds 1800 --since 4c202aeb` and passed 49 steps and 1,619 tests in 392.33 seconds, but it selected a different change set and likewise does not validate the proposal. Follow up in an efficiency block: use measured selection cost to allocate workers without relaxing per-test or tier ceilings. This does not block mathematical correctness or replace H-216 as the selected research entry.
+Session 142 exposed a local scheduling gap at 4c202aeb: `packing-validate --push --since 2aaa296d` selected 72 of 350 test files, including expensive atlas and evidence tests, but ten implicit outer jobs left pytest serial under the 900-second command cap. Every non-test step passed; pytest printed an `F`, but the timeout prevented the final traceback and summary. A direct ten-worker diagnostic completed the same selection in 814.31 seconds under a different `PACK_JOBS` shape; it is an observed workaround, not a controlled validation of the proposed allocation. The final local push used `--jobs 2 --inner-jobs 2 --timeout-seconds 1800 --since 4c202aeb` and passed 49 steps and 1,619 tests in 392.33 seconds, but it selected a different change set and likewise does not validate the proposal. Selected for the owner-requested W7 pipeline block think-177v: use measured selection cost to allocate workers without relaxing per-test or tier ceilings. Complete a controlled comparison in that preparatory block before resuming H-216. H-216 remains the next scientific target; this scheduling improvement does not change the mathematical acceptance criteria.
 
 ## Notes
 
@@ -53,15 +55,21 @@ Session 142 exposed a local scheduling gap at 4c202aeb: `packing-validate --push
   process/output coverage.
   `tests/test_validation_cli.py` passed 125 tests in 25.04 seconds, Ruff passed, and
   BasedPyright reported zero findings.
-  This fixed defect is tracked by `think-u5zn`, which remains open for closure after
-  final CI.
+  This fixed defect is tracked by `think-u5zn`, which was closed after the
+  successful Session 142 full checkpoint.
 - The final local push used
   `packing-validate --push --since 4c202aeb --jobs 2 --inner-jobs 2 --timeout-seconds 1800`
   and passed 49 steps and 1,619 tests in 392.33 seconds.
   It selected a different change set from the 72-file run, so it does not provide a
   controlled validation of the proposed allocation.
 
-Detailed analysis: `/private/tmp/stack-review-pipeline-followup.md`. Leave this bead
-open for the future efficiency block.
-This work does not replace `think-qqzs`, selected research H-216, or the existing `g4n9`
-work.
+Detailed analysis: `/private/tmp/stack-review-pipeline-followup.md`; durable context:
+D-502 and `docs/project/reviews/review-2026-09-19-pr199-201-correctness.md`.
+
+Owner-requested sequencing: this bead is now a required deliverable of the small W7
+pipeline block `think-177v`, after landing-readiness `think-n3fl` and before resuming
+`think-qqzs` / H-216. Validate the proposed implicit allocation against the current
+allocation using the same revision, test selection, host, and resource ceilings;
+record both correctness results and measured duration. Do not label the historical
+unmatched runs above as a speedup. H-216 remains the next scientific target, and
+the broader `think-g4n9` wall-time work remains separate.
