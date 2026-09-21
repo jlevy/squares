@@ -5,13 +5,13 @@ title: "Land T-031: s(17) >= 461300/99999 from two external certificates (PR 211
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m32e1sjhf4phdnmcwgwfh17j
 created_at: 2026-09-20T08:20:10.625Z
-updated_at: 2026-09-21T16:51:08.496Z
+updated_at: 2026-09-21T18:22:49.857Z
 ---
 Land the n = 17 external adoption (T-031) in PR 211.
 
@@ -51,24 +51,50 @@ endpoint minimum of f gives exactly the union of legal parent centres.
 Five fast controls in packing/tests/test_n17_external_weighted_certificates.py pin the
 archived bytes, the tight placements, and a forged measure that both routes refuse.
 
+## THIS BEAD OWES A CERTIFICATION RECEIPT. DO NOT CLOSE IT ON MERGE.
+
+session-149-n17-external-intake.md carries `certification_pending: think-pcd0` and
+`status: stopped`. Its validation never once succeeded, so it is an explicitly
+uncertified checkpoint, not a certified handover, and this bead is where the debt sits.
+
+Discharging it means all three of:
+
+1. A genuine passing certifying run of the fast or full tier on a tree that contains
+   this work, with its real run ids read from the run itself.
+2. That run recorded on the session record as
+   `full gate: <tier> at <commit>: passed (hosted run <id>; pages run <id>)`, with the
+   commit an ancestor of the head it certifies, and `certification_pending` removed at
+   the same time -- the field conflicts with a passing declaration by design.
+3. `status` moved from `stopped` to `completed` only if that is then true.
+
+Merging PR 211 does not do any of this. After the merge the post-merge gate on `main`
+is the run that can supply the receipt. Until the record carries it, closing this bead
+discharges a debt that is still owed.
+
+Why the receipt could not be taken before merge is written up in `think-3umt`: a session
+record authored `status: completed` in its first commit has no commit at which its gate
+can pass, and the `in_progress` state the usual lifecycle passes through is itself
+refused once the session's clocks have expired.
+
 ## To land it
 
-1. BLOCKER, bookkeeping only: the T-031 identifier collides with PR 208 from the open
-   overnight stack. The results register's contiguity rule leaves no free number below
-   it, so whichever lands second renumbers.
+1. DONE. The `T-031` identifier collided with PR 208 from the open overnight stack. The
+   stack merged into `main` first and kept `T-031` for the n = 11 octagon corner class;
+   this result took `T-032`, and its 82-line row moved to the end of
+   `frontier/results.yaml` because `devtools/check_results.py` reads contiguity
+   positionally. The two records that both claimed `session-148` were separated at the
+   same time: chunk 5 keeps 148 and the intake is `session-149`.
 
-2. CI is red on exactly one root cause, which is expected and is the last step: the
-   session record needs a `full gate: fast at <commit>: passed` line in its `checks:`
-   list, and no local packing-validate --fast run has yet completed end to end. Do NOT
-   write that line until one genuinely passes; the earlier runs failed on the workbench
-   star fixture (fixed in 48a3ad23), a hosted typecheck timing budget (runner variance),
-   and two subprocess signal tests that pass in isolation under lower load.
-   validate, packing-required and suite-b all fail on this one missing line; 17 other
-   checks pass.
+2. DONE, and not the way this bead first expected. CI's one remaining root cause was the
+   missing `full gate:` line, and it could not be earned: every hosted run on a branch
+   whose record is terminal fails that step, so no run could pass to be cited. No line
+   was invented. The record instead took the route `campaign/agent-sessions/README.md`
+   lines 187-193 prescribe -- `stopped` plus `certification_pending` plus the two real
+   `failed` declarations, hosted runs 35636483146 at `bf2821e2` and 35636079542 at
+   `9ca74721`. See the section above; the receipt is still owed.
 
-3. After the gate passes, update PR 211's Validation section with the real result.
-   Note that the local gate covers 48a3ad23; the later commit ecce10da adds only the
-   handoff document and a regenerated document map, and touches no code or record.
+3. DONE. PR 211's description carries the renumber, the corrected public ladder and the
+   uncertified-checkpoint status.
 
 ## Environment notes that cost time
 
