@@ -3,15 +3,22 @@ type: is
 id: is-01m32fbx44m2ppg9a0y1t085hf
 title: Cut the full-ascent video, n = 1..324, and a 1..100 social excerpt
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
-spec_path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
+version: 5
+spec_path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
 labels: []
 dependencies: []
 parent_id: is-01m1z68hzazv9yjs9k7cddmf82
+child_order_hints:
+  - is-01m32g304kea12cznwatefa8cc
+  - is-01m32g30j5v17f8289ww4zwra3
 created_at: 2026-09-21T17:14:08.387Z
-updated_at: 2026-09-21T17:14:08.387Z
+updated_at: 2026-09-21T19:55:58.422Z
+closed_at: 2026-09-21T19:55:58.421Z
+close_reason: End-to-end video cutting works and is validated. Superseded in part by the delivery-profile plan.
+resolution: null
+duplicate_of: null
 ---
 End-to-end run of `workbench_tools.capture_video` over the whole retained corpus and over n = 1..100, producing linkable MP4s with their receipts.
 
