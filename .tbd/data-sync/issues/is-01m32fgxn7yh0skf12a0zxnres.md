@@ -5,13 +5,14 @@ title: "Efficiency block (W5): the deep gate costs 45 minutes of wall and is 1.3
 kind: epic
 status: open
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m32g52666n96w3fwjqsysbw6
+  - is-01m32mqqnq9np89mnrpe07hgw3
 created_at: 2026-09-21T17:16:52.770Z
-updated_at: 2026-09-21T17:27:52.770Z
+updated_at: 2026-09-21T18:47:58.903Z
 ---
 OR-12 opens an efficiency block by measuring the gate. Measured 2026-09-21 on two complete deep-gate runs of PR 208, both at the same tree.
 
