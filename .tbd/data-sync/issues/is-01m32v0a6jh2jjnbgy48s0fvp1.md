@@ -5,12 +5,12 @@ title: A check that adopts the tracked tree must carry its precedent's fallback,
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32dvmtc77znp14556p7c5w2
 created_at: 2026-09-21T20:37:31.461Z
-updated_at: 2026-09-21T20:37:31.461Z
+updated_at: 2026-09-21T21:01:04.416Z
 ---
 Main went red at c2cc1cf6 on the `validate` job (hosted run 35645657481). One of 167
 negative controls did not fire: `README - retired workflow identifier survives a
@@ -51,3 +51,17 @@ Two things to carry forward from it:
 
 Recorded from the repair session. The premise itself is corrected in place at
 `packing/devtools/check_readme.py`'s `NO_INDEX`.
+
+## Notes
+
+Scope for the follow-up audit, measured on this tree: `repo_scope.tracked_files` has
+three consumers -- `devtools/check_readme.py`, `devtools/check_class_record_claims.py`
+and `devtools/check_archive_annotations.py`. Only `check_readme` has a registered
+negative control, which is why the refusal is what CI saw and the fallback half was
+latent. The audit is whether each of the three still makes the right choice on `None`,
+and whether a fourth adopter can be made to state that choice without reading
+`run_negative_controls`.
+
+Repaired on `claude/fix-readme-no-index` (PR 217): the worker snapshot is now a git
+checkout of itself, so all three answer from an index inside a control. The bead stays
+open for the audit and for the durable form of the rule.
