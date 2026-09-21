@@ -5,13 +5,13 @@ title: "Land T-032: s(17) >= 461300/99999 from two external certificates (PR 211
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m32e1sjhf4phdnmcwgwfh17j
 created_at: 2026-09-20T08:20:10.625Z
-updated_at: 2026-09-21T18:23:10.912Z
+updated_at: 2026-09-21T18:27:31.846Z
 ---
 Land the n = 17 external adoption (T-032) in PR 211.
 
@@ -52,30 +52,28 @@ endpoint minimum of f gives exactly the union of legal parent centres.
 Five fast controls in packing/tests/test_n17_external_weighted_certificates.py pin the
 archived bytes, the tight placements, and a forged measure that both routes refuse.
 
-## THIS BEAD OWES A CERTIFICATION RECEIPT. DO NOT CLOSE IT ON MERGE.
+## Certification: obtained, at 4479f2f5
 
-session-149-n17-external-intake.md carries `certification_pending: think-pcd0` and
-`status: stopped`. Its validation never once succeeded, so it is an explicitly
-uncertified checkpoint, not a certified handover, and this bead is where the debt sits.
+The debt this bead briefly carried is discharged. `packing-validate --fast` ran on
+`4479f2f5` and passed in full -- hosted run 35637803410, pages run 35637803857, every
+job green -- and the session record declares it:
 
-Discharging it means all three of:
+    full gate: fast at 4479f2f5: passed (hosted run 35637803410; pages run 35637803857)
 
-1. A genuine passing certifying run of the fast or full tier on a tree that contains
-   this work, with its real run ids read from the run itself.
-2. That run recorded on the session record as
-   `full gate: <tier> at <commit>: passed (hosted run <id>; pages run <id>)`, with the
-   commit an ancestor of the head it certifies, and `certification_pending` removed at
-   the same time -- the field conflicts with a passing declaration by design.
-3. `status` moved from `stopped` to `completed` only if that is then true.
+`session-149-n17-external-intake.md` is `completed` again and no longer carries
+`certification_pending`, which is what the schema means by removing the field only after
+an actual qualifying pass covers the handed-over source. Its two `failed` declarations
+stay, naming hosted runs 35636483146 at `bf2821e2` and 35636079542 at `9ca74721`: they
+are the real history of how the branch got there.
 
-Merging PR 211 does not do any of this. After the merge the post-merge gate on `main`
-is the run that can supply the receipt. Until the record carries it, closing this bead
-discharges a debt that is still owed.
-
-Why the receipt could not be taken before merge is written up in `think-3umt`: a session
-record authored `status: completed` in its first commit has no commit at which its gate
-can pass, and the `in_progress` state the usual lifecycle passes through is itself
-refused once the session's clocks have expired.
+The route was not obvious and is worth reading before the next record is written. A
+record authored `status: completed` in its first commit can never earn its own first
+receipt, because the step that reads one fails at every commit where the record is
+terminal; and the `in_progress` state the usual lifecycle passes through is itself
+refused once the session's clocks have expired. The record had to first say something
+true about having no receipt -- `stopped` with `certification_pending` -- before any run
+could go green and be cited. `think-3umt` carries that ordering constraint, which no
+document states.
 
 ## To land it
 
@@ -86,13 +84,10 @@ refused once the session's clocks have expired.
    positionally. The two records that both claimed `session-148` were separated at the
    same time: chunk 5 keeps 148 and the intake is `session-149`.
 
-2. DONE, and not the way this bead first expected. CI's one remaining root cause was the
-   missing `full gate:` line, and it could not be earned: every hosted run on a branch
-   whose record is terminal fails that step, so no run could pass to be cited. No line
-   was invented. The record instead took the route `campaign/agent-sessions/README.md`
-   lines 187-193 prescribe -- `stopped` plus `certification_pending` plus the two real
-   `failed` declarations, hosted runs 35636483146 at `bf2821e2` and 35636079542 at
-   `9ca74721`. See the section above; the receipt is still owed.
+2. DONE. CI's one remaining root cause was the missing `full gate:` line. No line was
+   invented at any point: the record first declared itself uncertified, which let a run
+   go green, and that run is what the passing declaration now names. See the section
+   above.
 
 3. DONE. PR 211's description carries the renumber, the corrected public ladder and the
    uncertified-checkpoint status.
