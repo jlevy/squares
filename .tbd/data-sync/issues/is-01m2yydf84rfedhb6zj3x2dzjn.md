@@ -1,24 +1,25 @@
 ---
 type: is
 id: is-01m2yydf84rfedhb6zj3x2dzjn
-title: "Land T-031: s(17) >= 461300/99999 from two external certificates (PR 211)"
+title: "Land T-032: s(17) >= 461300/99999 from two external certificates (PR 211)"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 8
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m32e1sjhf4phdnmcwgwfh17j
 created_at: 2026-09-20T08:20:10.625Z
-updated_at: 2026-09-21T16:51:08.496Z
+updated_at: 2026-09-21T18:27:31.846Z
 ---
-Land the n = 17 external adoption (T-031) in PR 211.
+Land the n = 17 external adoption (T-032) in PR 211.
 
 ## State
 
 PR 211 (branch claude/n17-mira-guzhou-4613-intake, from main 061e9ffb) registers
-s(17) >= 461300/99999 = 4.61304613... as T-031 at V4/C4, up from 459/100 (T-019).
+s(17) >= 461300/99999 = 4.61304613... as T-032 at V4/C4, up from 459/100 (T-019).
+It registered as T-031 until the agenda-040 stack landed that id first.
 Movement +0.02305; gap to Bidwell's 4.67553009 packing now 0.0625. It is the first
 verified bound at any size in this project that came from outside it.
 
@@ -51,24 +52,45 @@ endpoint minimum of f gives exactly the union of legal parent centres.
 Five fast controls in packing/tests/test_n17_external_weighted_certificates.py pin the
 archived bytes, the tight placements, and a forged measure that both routes refuse.
 
+## Certification: obtained, at 4479f2f5
+
+The debt this bead briefly carried is discharged. `packing-validate --fast` ran on
+`4479f2f5` and passed in full -- hosted run 35637803410, pages run 35637803857, every
+job green -- and the session record declares it:
+
+    full gate: fast at 4479f2f5: passed (hosted run 35637803410; pages run 35637803857)
+
+`session-149-n17-external-intake.md` is `completed` again and no longer carries
+`certification_pending`, which is what the schema means by removing the field only after
+an actual qualifying pass covers the handed-over source. Its two `failed` declarations
+stay, naming hosted runs 35636483146 at `bf2821e2` and 35636079542 at `9ca74721`: they
+are the real history of how the branch got there.
+
+The route was not obvious and is worth reading before the next record is written. A
+record authored `status: completed` in its first commit can never earn its own first
+receipt, because the step that reads one fails at every commit where the record is
+terminal; and the `in_progress` state the usual lifecycle passes through is itself
+refused once the session's clocks have expired. The record had to first say something
+true about having no receipt -- `stopped` with `certification_pending` -- before any run
+could go green and be cited. `think-3umt` carries that ordering constraint, which no
+document states.
+
 ## To land it
 
-1. BLOCKER, bookkeeping only: the T-031 identifier collides with PR 208 from the open
-   overnight stack. The results register's contiguity rule leaves no free number below
-   it, so whichever lands second renumbers.
+1. DONE. The `T-031` identifier collided with PR 208 from the open overnight stack. The
+   stack merged into `main` first and kept `T-031` for the n = 11 octagon corner class;
+   this result took `T-032`, and its 82-line row moved to the end of
+   `frontier/results.yaml` because `devtools/check_results.py` reads contiguity
+   positionally. The two records that both claimed `session-148` were separated at the
+   same time: chunk 5 keeps 148 and the intake is `session-149`.
 
-2. CI is red on exactly one root cause, which is expected and is the last step: the
-   session record needs a `full gate: fast at <commit>: passed` line in its `checks:`
-   list, and no local packing-validate --fast run has yet completed end to end. Do NOT
-   write that line until one genuinely passes; the earlier runs failed on the workbench
-   star fixture (fixed in 48a3ad23), a hosted typecheck timing budget (runner variance),
-   and two subprocess signal tests that pass in isolation under lower load.
-   validate, packing-required and suite-b all fail on this one missing line; 17 other
-   checks pass.
+2. DONE. CI's one remaining root cause was the missing `full gate:` line. No line was
+   invented at any point: the record first declared itself uncertified, which let a run
+   go green, and that run is what the passing declaration now names. See the section
+   above.
 
-3. After the gate passes, update PR 211's Validation section with the real result.
-   Note that the local gate covers 48a3ad23; the later commit ecce10da adds only the
-   handoff document and a regenerated document map, and touches no code or record.
+3. DONE. PR 211's description carries the renumber, the corrected public ladder and the
+   uncertified-checkpoint status.
 
 ## Environment notes that cost time
 
