@@ -3,14 +3,18 @@ type: is
 id: is-01m32dtr6vcxbhe76ej1fabqba
 title: Replay the Kleddamag n=17 certificate on this machine
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32dt0p76c4bvp3amxtmyt2p
 created_at: 2026-09-21T16:47:17.723Z
-updated_at: 2026-09-21T16:47:17.723Z
+updated_at: 2026-09-21T17:08:29.931Z
+closed_at: 2026-09-21T17:08:29.930Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 Independent mechanical replay of attic/17-squares-certified-bound in its own throwaway venv (NOT the host project's, which pins Python 3.14 and must not take third-party deps).
 

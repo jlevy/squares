@@ -3,14 +3,18 @@ type: is
 id: is-01m32dtrtvte19pensvfq0rtk5
 title: Proof-review the Kleddamag n=17 bound (Fable, adversarial)
 kind: task
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32dt0p76c4bvp3amxtmyt2p
 created_at: 2026-09-21T16:47:18.363Z
-updated_at: 2026-09-21T16:47:18.363Z
+updated_at: 2026-09-21T17:08:29.937Z
+closed_at: 2026-09-21T17:08:29.937Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 Adversarial proof review of PROOF.md and the certificate structure, in the house review style with numbered severity-graded findings.
 

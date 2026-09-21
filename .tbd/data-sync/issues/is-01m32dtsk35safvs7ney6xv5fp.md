@@ -5,12 +5,14 @@ title: Retain the Kleddamag n=17 artifact under the archive convention
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32dt0p76c4bvp3amxtmyt2p
+child_order_hints:
+  - is-01m32f1hew684z85fk6c5d9g2x
 created_at: 2026-09-21T16:47:19.139Z
-updated_at: 2026-09-21T16:47:19.139Z
+updated_at: 2026-09-21T17:08:28.763Z
 ---
 Retain the external source following the convention the existing n=17 intake used (packing/resources/web/n17-weighted-certificates-2026-09-20/ with receipts), not an invented one: directory naming, receipts, hashing, the archive annotation census in packing/resources/README.md, and whatever .flowmarkignore requires for archived source.
 
