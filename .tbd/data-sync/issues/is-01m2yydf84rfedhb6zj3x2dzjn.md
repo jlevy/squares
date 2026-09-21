@@ -1,24 +1,25 @@
 ---
 type: is
 id: is-01m2yydf84rfedhb6zj3x2dzjn
-title: "Land T-031: s(17) >= 461300/99999 from two external certificates (PR 211)"
+title: "Land T-032: s(17) >= 461300/99999 from two external certificates (PR 211)"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m32e1sjhf4phdnmcwgwfh17j
 created_at: 2026-09-20T08:20:10.625Z
-updated_at: 2026-09-21T18:22:49.857Z
+updated_at: 2026-09-21T18:23:10.912Z
 ---
-Land the n = 17 external adoption (T-031) in PR 211.
+Land the n = 17 external adoption (T-032) in PR 211.
 
 ## State
 
 PR 211 (branch claude/n17-mira-guzhou-4613-intake, from main 061e9ffb) registers
-s(17) >= 461300/99999 = 4.61304613... as T-031 at V4/C4, up from 459/100 (T-019).
+s(17) >= 461300/99999 = 4.61304613... as T-032 at V4/C4, up from 459/100 (T-019).
+It registered as T-031 until the agenda-040 stack landed that id first.
 Movement +0.02305; gap to Bidwell's 4.67553009 packing now 0.0625. It is the first
 verified bound at any size in this project that came from outside it.
 
