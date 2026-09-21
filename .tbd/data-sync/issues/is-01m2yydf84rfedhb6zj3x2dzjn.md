@@ -5,11 +5,13 @@ title: "Land T-031: s(17) >= 461300/99999 from two external certificates (PR 211
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m32e1sjhf4phdnmcwgwfh17j
 created_at: 2026-09-20T08:20:10.625Z
-updated_at: 2026-09-21T08:22:35.265Z
+updated_at: 2026-09-21T16:51:08.496Z
 ---
 Land the n = 17 external adoption (T-031) in PR 211.
 

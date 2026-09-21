@@ -5,7 +5,7 @@ title: "Research block (W1): the Kleddamag n=17 certified bound 461300/99853"
 kind: epic
 status: open
 priority: 1
-version: 6
+version: 8
 labels: []
 dependencies: []
 child_order_hints:
@@ -14,8 +14,10 @@ child_order_hints:
   - is-01m32dtsk35safvs7ney6xv5fp
   - is-01m32dttakchrezsyqkyew4jet
   - is-01m32dz753apsmvrx2mybxqzhb
+  - is-01m32e146z8pd8bjx4d7kxw2sr
+  - is-01m32e153zhsye4s1xafvyvkq1
 created_at: 2026-09-21T16:46:53.639Z
-updated_at: 2026-09-21T16:49:44.099Z
+updated_at: 2026-09-21T16:50:47.551Z
 ---
 External artifact published 2026-09-21 claiming s(17) > 461300/99853 = 4.6197910929..., above both the 461300/99999 = 4.613046 that PR 211 registers and the intermediate 461300/99951 = 4.614154.
 
