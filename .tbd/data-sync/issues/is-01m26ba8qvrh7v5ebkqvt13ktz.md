@@ -5,11 +5,11 @@ title: Intermittent explainer PDF byte disagreement has no identified cause
 kind: bug
 status: open
 priority: 1
-version: 13
+version: 14
 labels: []
 dependencies: []
 created_at: 2026-09-10T19:04:36.347Z
-updated_at: 2026-09-16T17:43:56.675Z
+updated_at: 2026-09-22T21:32:13.117Z
 ---
 On September 10, 2026, Pages run 34453706991 at `3a18a05a` reported unequal normalized PDF lengths: `786119` and `786117` bytes. The job passed on a rerun, and the earlier PR run 34449286960 at `0c4c41b4` also passed. This establishes intermittent reproduction failure; the lengths alone do not establish truncation, an exact-prefix relationship, a race, or a particular cause. They also do not prove that the rendered pages look different.
 
@@ -42,3 +42,5 @@ September 13 PR125 occurrence after refreshing onto main: Pages run 34790001091 
 PR125 run 34790001091 attempt 2 completed successfully after the failure pair had been downloaded. This passing retry does not establish a cause or resolve D-490.
 
 September 16, 2026 PR188 occurrence: Certificate page run 35127260004 attempt 1 failed on PR188 head 2f6193031169dc5b3bc312cead2cc1246c81977d at the stored-artifact versus fresh-draw check. Diagnostics were downloaded before any rerun and are retained under packing/benchmarks/math-startup/runs/ci-35127260004 with the exact prepared HTML and provenance. Reference.pdf is 843258 bytes, SHA256 c49cbc6a8287d88e680531b28a83a4ee75a9b8e3bcdd166405a8e8f254133631; replay.pdf is 843259 bytes, SHA256 9c0a292791992aca43f18051edf42cc0f576ca45fa5d2b52d55ca666592e2f68. Both contain 1298 objects. After date normalization and Flate decoding, only object 137 differs: page 12 writes `267.65625 10365.2188 Tm` versus `267.65625 10365 Tm`, shifting only the plus sign in `B(cos d + sin d)` by a Poppler bbox of 0.164096 pt. Extracted text and 150/300 dpi Poppler rasters are identical. This matches the earlier retained page-15 variable-decimal signature but does not establish its upstream cause. The current c5a33270 head passed the strict check in run 35128357962; its prepared source receipt differs, so that pass is current-head gate evidence, not a same-input reproduction or a resolution of D-490. Keep exact comparison and this issue open.
+
+September 22, 2026 PR222 occurrence: Certificate-page run 35784981711 attempt 1 failed on head 819ade7ca8afbe634a6ee54f215f0878f5674031 in PDF job 106939656962. The failed pair was downloaded before rerunning and is retained with its neutral report and object-level analysis under `packing/campaign/agent-sessions/session-152-validation/`. The normalized first difference is byte 568134 in object 220. After Flate decoding, the only content change among 1,311 objects is the first version-history `≥`: its text matrix y coordinate is 18483.219 in the reference and 18483 in the replay, moving its Poppler bounding box 0.164246 pt vertically. Every other object content and extracted text position agrees; page rasters agree. Attempt 2's PDF job passed, while its aggregate rejected mixed partial-rerun timestamps as unmeasurable. Attempt 3 reran the full workflow in one attempt and passed PDF and `pages-required`. No PDF code, test, normalization or gate change was made. This matches the retained single-glyph baseline-instability signature but does not identify its upstream cause; keep this issue open.
