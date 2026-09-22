@@ -3,13 +3,17 @@ type: is
 id: is-01m356gsjz9rg590k4sagxy090
 title: "D-490 returns: name the explainer PDF's one-line layout wobble and make the check bound it"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 created_at: 2026-09-22T18:37:14.710Z
-updated_at: 2026-09-22T19:29:42.548Z
+updated_at: 2026-09-22T20:28:21.883Z
+closed_at: 2026-09-22T20:28:21.882Z
+close_reason: "Done in 5a4a68d5c: the explainer PDF draws until two prints of one page agree; the cause is the page repainting itself on beforeprint/afterprint, measured at 366 mutations per print."
+resolution: null
+duplicate_of: null
 ---
 PR 218 run 35764316182 failed the pages `pdf` job: `render_explainer_pdf --check-artifact` reported 843296 then 843299 bytes, first difference in object 163, a page content stream. Decompressed, the only difference in the whole document is one inline KaTeX math box's text matrix: three `Tm` lines move from y=14906 to y=14905.2188, a 0.78125 CSS px baseline shift on the math `500000000/498684619`. Object 1 (the dates) is the only other object that differs. Reproduced locally from the run's own prepared page. D-490 records the incident class.
 

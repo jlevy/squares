@@ -5,11 +5,11 @@ title: The mutation-snapshot cap has 0.9% headroom and the record keeps growing
 kind: task
 status: open
 priority: 1
-version: 5
+version: 6
 labels: []
 dependencies: []
 created_at: 2026-09-05T23:06:30.837Z
-updated_at: 2026-09-17T01:51:03.363Z
+updated_at: 2026-09-22T19:46:18.161Z
 ---
 Measured 2026-09-05 after pruning packing/site/ and the link-preview card: the snapshot is 66,490,716 bytes against a 67,108,864 cap, 99.1% of it, 618,148 bytes of headroom. SNAPSHOT_MAX_BYTES' own comment says a guard with 2% headroom fires for the wrong reason; 0.9% is worse than the case it warns about, and the next committed artifact of any size trips it.
 
@@ -54,3 +54,44 @@ even taking the evidence prune buys roughly one more registration, not headroom.
 
 
 2026-09-16 recovery: the 192 MiB reset above is undone on PR #188 (da2259fb). With c302b330's prune of the agenda 031-035 and exp-201/202 output roots, the merged snapshot is 144,637,123 bytes against 160 MiB. The durable generated-file dependency audit this bead owns is still outstanding; between 2026-09-09 (135,122,909 bytes) and 2026-09-16 (168,058,379 unpruned) the record grew about 33 MB, of which 23.2 MB was output roots now pruned, so the unprunable growth rate is closer to 10 MB/week and 22 MiB of headroom is a few weeks, not a standing margin.
+
+2026-09-22, PR 218 (bead think-gatp). The composite-SVG candidate this bead nominated is
+disproved, and the trace it asked for is done for that half.
+
+Traced rather than inferred: no registered control drives `build_known_best_atlas --check`,
+`render_composite_pdf --check`, or any atlas step. The two controls that name
+`atlas/known-best/` reach the small contact JSONs at its top level, the `touches` glob
+control matches paths without reading them, and the single full-suite control refuses at
+collection before a test runs. So nothing a control runs reads either composite vector's
+content.
+
+But the prune still cannot pay, for a reason this bead did not anticipate. `README.md`
+links both vectors inline -- `known-best-1-100.svg` on line 31, `known-best-1-324.svg` on
+line 39 -- and the root README is one of the documents `linked_pruned_targets` scans.
+`snapshot_source_bytes()` returns the identical 168,251,525 with the poster pruned, with
+the n=1..100 vector pruned, and with both. The copy-back is load-bearing rather than
+accounting noise: four controls run `devtools.check_readme`, which calls
+`check_synopsis.check_links`, which refuses any relative link whose target does not exist.
+Remove the copy-back and all four report a dead link instead of the refusal they rehearse.
+
+Four exports already in `PRUNE` are inert for the same reason: `known-best-1-324.png`,
+`known-best-1-100@2x.png`, `known-best-1-100.png` and `known-best-1-324.pdf` are all
+linked from `README.md` and all copied straight back, 4,646,026 bytes that never leave a
+snapshot.
+
+So the bead narrows. Struck from its scope: the composite vectors, and any prune whose
+target a checked document links inline. What remains is (a) the four large generated JSONs
+-- `chunk-components.json`, `chunk-partitions.json`, `exp-042`'s result and
+`translation-escape-screen.json`, 23.7 MB together -- which still need the same trace, and
+(b) the structural fix this measurement newly identifies: a link scan that tolerates a
+pruned target, or a placeholder for one, which is the only thing that would let the
+composite vectors and the four inert exports actually leave the snapshot.
+
+The 2026-09-22 breach itself was answered without any of that. Agenda 041's output root
+joined `PRUNE` for a net 10,624,188 bytes -- the same retained-output class as agendas 031
+and 033--035 -- taking the snapshot to 157,627,337 with the 160 MiB cap unchanged. Agendas
+037, 038 and 040 were examined and excluded: tests and `devtools/check_class_record_claims.py`
+read them from outside the record.
+
+Do not close this bead on the strength of the above. Half its trace is done and the other
+half is not.

@@ -5,7 +5,7 @@ title: Stage layout revision for the ascent video
 kind: epic
 status: open
 priority: 1
-version: 26
+version: 27
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
@@ -35,8 +35,9 @@ child_order_hints:
   - is-01m354ty99aychrjcyq62qvwyn
   - is-01m354tywpqgb1eek5dwddvbaq
   - is-01m354v0cb5an8kycvyh93n1xf
+  - is-01m35c489az736z9t99x6n7vvf
 created_at: 2026-09-21T20:21:29.084Z
-updated_at: 2026-09-22T18:07:52.202Z
+updated_at: 2026-09-22T20:15:15.241Z
 ---
 One pass over the 1920x1080 poster the video is captured from, gathering the owner's requests from the 2026-09-21 review of the first cuts. They are one piece of work because they all move the same space: the middle gap between the packing box and the facts column.
 
