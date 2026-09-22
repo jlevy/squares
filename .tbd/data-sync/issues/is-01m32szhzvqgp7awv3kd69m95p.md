@@ -5,12 +5,13 @@ title: Shrink the n headline slightly and enlarge the packing box
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
+parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:19:38.106Z
-updated_at: 2026-09-21T20:19:38.106Z
+updated_at: 2026-09-21T20:21:38.976Z
 ---
 Owner's request, two adjustments to the stage:
 

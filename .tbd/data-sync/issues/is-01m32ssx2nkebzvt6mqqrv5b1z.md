@@ -5,12 +5,13 @@ title: Draw the outer container border under the squares, not over them
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md
 labels: []
 dependencies: []
+parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:16:32.852Z
-updated_at: 2026-09-21T20:16:32.852Z
+updated_at: 2026-09-21T20:21:41.067Z
 ---
 Owner's report: where a packed square meets the container wall, the green outer box's border paints over the square's black border. The black border should win.
 

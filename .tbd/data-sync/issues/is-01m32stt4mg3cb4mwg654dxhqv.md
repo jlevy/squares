@@ -5,12 +5,13 @@ title: Put the composite's explanatory text and an attribution in the stage's bo
 kind: feature
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
 labels: []
 dependencies: []
+parent_id: is-01m32t2yc3xenfb97kxn844rc7
 created_at: 2026-09-21T20:17:02.611Z
-updated_at: 2026-09-21T20:17:02.611Z
+updated_at: 2026-09-21T20:21:40.019Z
 ---
 Owner's request: carry the explanatory text from the main composite SVG onto the video stage, bottom right, in a smaller font, and add `github.com/jlevy/squares` as an attribution at the bottom lower right.
 
