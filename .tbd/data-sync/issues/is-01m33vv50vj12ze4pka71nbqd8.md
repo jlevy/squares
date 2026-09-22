@@ -3,9 +3,9 @@ type: is
 id: is-01m33vv50vj12ze4pka71nbqd8
 title: Generate the stage's citation data from the frontier register
 kind: feature
-status: open
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md
 labels: []
 dependencies:
@@ -13,7 +13,11 @@ dependencies:
     target: is-01m33vv5f5q79jmfva33r5bx2j
 parent_id: is-01m33vv4hs6kbe1c349y8wsgsf
 created_at: 2026-09-22T06:11:25.338Z
-updated_at: 2026-09-22T06:26:54.331Z
+updated_at: 2026-09-22T19:24:35.609Z
+closed_at: 2026-09-22T19:24:35.600Z
+close_reason: "Done in a4bdfae4c: build_bound_citations generates bound-citations.json from the frontier register and bibliography, with a schema, --update/--check/--review and 53 tests."
+resolution: null
+duplicate_of: null
 ---
 A generated JSON file of citations per n for the stage: for the current lower and upper bound of each n, the value it cites, who established it (authors and year for a published or external source, this project for its own), and a concise academic reference line. Built from packing/frontier/results.yaml (priority, previously-published, source_key), packing/frontier/evidence.yaml (source, source_key) and the literature archive under packing/resources, never typed in. Needs a schema, a drift check that fails when the register changes and the JSON does not, and tests over recorded register entries. Omit an n's line where the register has no number or no attributable source, and say which in the generator's report rather than guessing.
 
