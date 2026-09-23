@@ -281,6 +281,16 @@ PRUNE = frozenset(
         # The receipt the register lists as an artifact returns through
         # linked_pruned_targets, as agenda 034's did.
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-041",
+        # Agenda 042 (Session 156) holds the overnight lanes' numerical receipts from the
+        # start, so its bulk never enters the ~107 KB of headroom PR 230 left. No control
+        # names it; its Markdown receipts return through linked_pruned_targets.
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-042",
+        # The per-log cost rollups are 4.7 MB of harness telemetry, and every session adds
+        # a dozen. No control names a file under them, and validate_schemas only globs the
+        # directory, so a worker without them validates fewer datasets rather than failing.
+        # Session 156 measured the combined W3 and overnight tree at 168,208,704 bytes
+        # against the unchanged cap; this prune is the answer rather than raising it.
+        ROOT / "campaign/resource-usage",
         ROOT
         / "campaign/series/series-000-smoke-and-calibration/results/exp-201-arm-calibration",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/exp-202-round-1",

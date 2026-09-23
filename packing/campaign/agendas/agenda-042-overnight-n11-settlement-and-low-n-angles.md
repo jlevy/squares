@@ -106,7 +106,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: >-
       Do exp-013's exact stresses and a second-order remainder certify side at least U
@@ -126,6 +126,20 @@ agenda:
     - packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md
     parallel_group: overnight-n11-b
     note: A confirm needs a Fable max adversarial review before it is used as a leaf.
+    outcomes:
+    - scope: H-237 by the growth-cone route over all 128 branches and 66 faces (exp-227).
+      classification: bounded-negative
+      result: >-
+        An exhaustion lemma caps every per-row-remainder certificate at the BC-199
+        modulus, and the exact computation confirms it on all 8,448 faces; the growth
+        minimum 0.05177 is healthy, but the route cannot exceed rho. Along the binding
+        direction 36 of 42 rows do not recover at second order, so the loose part is the
+        remainder model.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-227-h237-growth-cone-and-route-radius.json
+      disposition: retire-negative
+      follow_up: null
   - id: BC-377
     purpose: research
     owner_focus: insight

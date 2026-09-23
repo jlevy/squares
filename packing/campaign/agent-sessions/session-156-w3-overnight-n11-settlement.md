@@ -246,6 +246,27 @@ session:
     elapsed_seconds: 1055.035
     elapsed_quality: platform_measured
     next_action: Registered as H-240 and H-241; BC-380 builds the clip.
+  - task: BC-376 H-237 Trump angular capture radius (exp-227)
+    operator: Fable, extra-high
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: >-
+      Bounded negative: an exhaustion lemma caps the growth-cone route at the BC-199
+      modulus, confirmed exactly on all 8,448 faces; the growth minimum is 0.05177, and
+      36 of 42 rows do not recover at second order along the binding direction.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md
+    files:
+    - packing/cases/trump11/capture_radius.py
+    - packing/tests/test_capture_radius.py
+    checks:
+    - Ruff, format and BasedPyright clean; four fast tests pass (coordinator re-run).
+    - The control reproduces BC-199's modulus to 32 digits on all 128 branches.
+    uncertainty: The kill is relative to the per-row remainder model, which is the model BC-199 uses.
+    elapsed_seconds: 2001.641
+    elapsed_quality: platform_measured
+    next_action: Idea row 246, a second-order-exact isolation theorem.
   outputs: []
   checks: []
   stop_reason: null

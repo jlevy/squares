@@ -828,7 +828,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-374 | research | 11, 12, 17, 18, 19, 20, 21, 26, 29 | complete | 0 | think-nbij | docs/project/reviews/review-2026-09-23-pr230-w3-directions.md, X-046 and X-047. |
 | BC-375 | research | 11 | in_progress | 1 | think-ie35 | The frozen instrument digests and the run output, admitted from attic/rung0/ into results/agenda-042/. |
-| BC-376 | research | 11 | in_progress | 1 | think-cj7r | packing/cases/trump11/capture_radius.py and its receipt. |
+| BC-376 | research | 11 | complete | 1 | think-cj7r | packing/cases/trump11/capture_radius.py and its receipt. |
 | BC-377 | research | 11 | ready | 2 | think-cdc2 | The census receipt under results/agenda-042/. |
 | BC-378 | research | 21 | ready | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
 | BC-379 | research | 12 | ready | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
@@ -838,7 +838,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 155 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 156 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1015,7 +1015,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | H-231 | open question | proof | Whether a Lovász theta certificate on a sound, non-uniform pose-cell c |  | 0 |  |  |
 | H-232 | blocked | proof | At n=11, side 96/25, B = 9977/10000 on the 181-direction net, the rest |  | 0 |  |  |
 | H-236 | blocked | proof | In the family of six unit squares at actual orientation 0 and five sha |  | 0 |  |  |
-| H-237 | blocked | proof | There is an explicit rational r > rho = 808514697/200000000000 such th |  | 0 |  |  |
+| H-237 | exhausted | proof | There is an explicit rational r > rho = 808514697/200000000000 such th |  | 1 |  | 7.4m wall |
 | H-238 | blocked | search | Every descent-stable local minimum of the n=11 problem reached by the  |  | 0 |  |  |
 | H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
 | H-240 | open | search | A weighted fractional unavoidable-set certificate with point atoms on  |  | 0 |  |  |
@@ -1069,6 +1069,12 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-212 | series-000 | 17 | Codex with delegated measurement agents | H-214 | Both predicted orders reverse in at least one transition: rigid exceeds soft penetration in Physics at n = 90, and sticky has fewer mean contacts than balanced at n = 90 in both solvers; continuity guards also fail at the frozen commit. |
 | exp-216 | series-000 | 21 | Claude session-144 (Fable lane, Opus port, Fable review) | H-226 | The registered proof strategy cannot close n=21: 3,461 D2-orbits of exceptional structures (for example red (1, 9/10) uncovered with blue (1/2, 9/10) and (9/2, 9/10) uncovered) leave at most four charging boxes on each vertical wall line with no confined partial box, and the paper's toolkit has no further move or contradiction to apply; s(21) = 5 itself is untouched, and the 22,603 needs-geometry orbits name the claim Q(i, j) a stronger lemma would need. |
 | exp-217 | series-000 | 32 | Claude session-144 (Fable lane, Opus port, Fable review) | H-227 | With the m=6 vertical budget 2(sqrt 2 - 1/2) + 1.6 + 3 sqrt 3 / 2 - 6 = 0.0265, any frozen row above a six-point row kills that row's shift and end-point move, so every structure whose red spare lies outside red row 1 or blue spare outside blue row 6 leaves at most five charges on every wall line and no shorter slide recovers a sixth; s(32) = 6 itself is untouched. |
+
+### exhausted (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-227 | series-000 | 11 | Claude Session 156, Fable extra-high lane | H-237 | The route cannot exceed the BC-199 modulus by a proved lemma, and the exact computation confirms that on every face, so re-running under the per-row remainder model adds nothing. The binding constant is that model, not the growth minimum, which is 4.5 times kappa. Along the binding direction 36 of 42 rows do not recover at second order (exp-227 curvature record), so only a second-order exact isolation theorem, a named change of instrument, should reopen the radius. |
 
 ### abandoned (3)
 
@@ -1258,7 +1264,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 
 ## Effort
 
-155 rounds, 2512.1 agent-minutes, 2696.2 wall-minutes.
+156 rounds, 2512.1 agent-minutes, 2703.7 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

@@ -768,6 +768,7 @@ the registered rows.
 | 243 | A parent-centre clip lifts n21 to 4.9 and n18 to 4.70 on the native verifier | shaped | — | Blocked on the BC-380 instrument and its controls. |
 | 244 | An excess-4 occupancy-allocation cut toward s(12) = 4 | shaped | — | One unrealizable surviving pattern is a new cut; one legal allocation refutes only that pattern. |
 | 245 | A parent-disjointness no-good closes a largest surviving n21 exact-five kill orbit | shaped | — | Extends H-226’s inventory; a realizable structure leaves the orbit open. |
+| 246 | A second-order-exact isolation theorem enlarges Trump’s ball beyond the BC-199 modulus | shaped | — | exp-227: 36 of 42 rows do not recover at second order along the binding direction; needs exact Hessians, a cubic remainder and a face-wise enclosure. |
 
 ## Dead ends
 
