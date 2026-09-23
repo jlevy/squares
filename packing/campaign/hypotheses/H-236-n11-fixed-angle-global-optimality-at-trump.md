@@ -34,8 +34,10 @@ hypothesis:
     threshold: U
   instrument: >-
     packing/cases/trump11/fixed_angle_tree.py with its independent reader
-    fixed_angle_tree_check.py, on sqpack.exact_lp; frozen by git hash-object before the
-    n=11 run
+    fixed_angle_tree_check.py: HiGHS float proposals through scipy, every decision in
+    exact Fraction arithmetic; frozen by git hash-object before the n=11 run, with a
+    resume-only amendment; producer and reader share cases/trump11/packing.py and
+    sqpack.field.NumberField
   instrument_ready: false
   regime: >-
     n=11; six squares at orientation 0, five at one common orientation in the stated

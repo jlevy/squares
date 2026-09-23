@@ -880,6 +880,7 @@ case or experiment separately.
 | [Mathematical Review: Kleddamag’s `s(11) > 31/8`](docs/project/reviews/review-2026-09-22-kleddamag-n11-mathematics.md) | dated review record | record | retained | — |
 | [Native Adaptive Parent-Core Verification](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md) | dated review record | record | retained | — |
 | [Review of PR 230’s W3 Directions, 23 September 2026](docs/project/reviews/review-2026-09-23-pr230-w3-directions.md) | dated review record | record | retained | — |
+| [Review of the Rung-0 Certificate Contract, 23 September 2026](docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
