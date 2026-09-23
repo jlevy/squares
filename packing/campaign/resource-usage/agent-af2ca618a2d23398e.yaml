@@ -7,74 +7,204 @@ rollup:
   source:
     harness: claude-code
     filename: agent-af2ca618a2d23398e.jsonl
-    sha256: 8b024d74b64e05f15a84ceb0ad69311f38a4baa53309876b850b7088b588a1bc
-    bytes: 799304
-    records: 84
+    sha256: 7e174076e77af7dff7105b86b64e85b6d58d31d308216bc12a442803af2178f3
+    bytes: 1690455
+    records: 386
     session_id: e8d698c4-206a-4921-bcc4-4f7e12fa474f
     harness_versions:
     - 2.1.280
   span:
     started_at: '2026-09-23T07:45:41.483Z'
-    ended_at: '2026-09-23T07:57:09.193Z'
-    wall_seconds: 687.71
+    ended_at: '2026-09-23T08:19:03.120Z'
+    wall_seconds: 2001.637
   turns:
-    assistant: 32
-    sidechain: 32
+    assistant: 167
+    sidechain: 167
     by_model:
-      claude-fable-5-1: 32
+      claude-fable-5-1: 167
     by_thinking_level:
-      xhigh: 32
+      xhigh: 167
     by_model_and_thinking_level:
-      claude-fable-5-1 @ xhigh: 32
+      claude-fable-5-1 @ xhigh: 167
     by_branch:
-      claude/w3-overnight-2026-09-23: 32
+      claude/w3-overnight-2026-09-23: 167
     latency:
-      count: 32
-      total_seconds: 681.139
-      median_seconds: 1.41
+      count: 167
+      total_seconds: 1662.556
+      median_seconds: 2.13
       max_seconds: 341.737
   tokens:
-    cache_creation_input_tokens: 1308096
-    cache_read_input_tokens: 2904325
+    cache_creation_input_tokens: 2212594
+    cache_read_input_tokens: 42088104
     ephemeral_1h_input_tokens: 0
-    ephemeral_5m_input_tokens: 1308096
-    input_tokens: 934
-    output_tokens: 54670
-    thinking_tokens: 50661
+    ephemeral_5m_input_tokens: 2212594
+    input_tokens: 5074
+    output_tokens: 144538
+    thinking_tokens: 81411
   tokens_by_thinking_level:
     xhigh:
-      cache_creation_input_tokens: 1308096
-      cache_read_input_tokens: 2904325
+      cache_creation_input_tokens: 2212594
+      cache_read_input_tokens: 42088104
       ephemeral_1h_input_tokens: 0
-      ephemeral_5m_input_tokens: 1308096
-      input_tokens: 934
-      output_tokens: 54670
-      thinking_tokens: 50661
+      ephemeral_5m_input_tokens: 2212594
+      input_tokens: 5074
+      output_tokens: 144538
+      thinking_tokens: 81411
   tool_calls:
-    total: 18
-    total_seconds: 6.35
-    share_of_wall: 0.0092
-    errors: 1
+    total: 106
+    total_seconds: 737.86
+    share_of_wall: 0.3686
+    errors: 3
     denied: 0
     unpaired_results: 0
     outstanding_at_snapshot: 0
     one_off_code:
-      count: 2
-      total_seconds: 3.026
-      median_seconds: 1.513
-      max_seconds: 1.525
+      count: 7
+      total_seconds: 110.034
+      median_seconds: 1.538
+      max_seconds: 95.483
     by_tool:
       Bash:
-        count: 13
-        total_seconds: 5.496
-        median_seconds: 0.095
-        max_seconds: 1.525
+        count: 53
+        total_seconds: 648.828
+        median_seconds: 1.538
+        max_seconds: 95.483
+      Edit:
+        count: 38
+        total_seconds: 87.613
+        median_seconds: 0.059
+        max_seconds: 85.163
       Read:
-        count: 5
-        total_seconds: 0.854
-        median_seconds: 0.218
+        count: 10
+        total_seconds: 1.203
+        median_seconds: 0.076
         max_seconds: 0.319
+      Write:
+        count: 3
+        total_seconds: 0.134
+        median_seconds: 0.042
+        max_seconds: 0.055
+      ToolSearch:
+        count: 1
+        total_seconds: 0.043
+        median_seconds: 0.043
+        max_seconds: 0.043
+      Monitor:
+        count: 1
+        total_seconds: 0.039
+        median_seconds: 0.039
+        max_seconds: 0.039
     by_command:
+      grep:
+        count: 6
+        total_seconds: 141.783
+        median_seconds: 0.139
+        max_seconds: 94.168
+      ruff && ruff && basedpyright && pytest:
+        count: 2
+        total_seconds: 103.646
+        median_seconds: 51.823
+        max_seconds: 55.359
+      cases.trump11.capture_radius && python3:
+        count: 1
+        total_seconds: 95.483
+        median_seconds: 95.483
+        max_seconds: 95.483
+      ruff && ruff && basedpyright:
+        count: 4
+        total_seconds: 62.461
+        median_seconds: 11.606
+        max_seconds: 32.947
+      git status:
+        count: 1
+        total_seconds: 54.971
+        median_seconds: 54.971
+        max_seconds: 54.971
+      time uv run pytest:
+        count: 1
+        total_seconds: 40.627
+        median_seconds: 40.627
+        max_seconds: 40.627
+      uv run python directional_curvature.py:
+        count: 1
+        total_seconds: 26.638
+        median_seconds: 26.638
+        max_seconds: 26.638
+      sys.path.insert(0, && debug_vertex.py:
+        count: 1
+        total_seconds: 14.139
+        median_seconds: 14.139
+        max_seconds: 14.139
+      uv run ruff check:
+        count: 1
+        total_seconds: 13.186
+        median_seconds: 13.186
+        max_seconds: 13.186
+      ruff && ruff && basedpyright && cases.trump11.capture_radius:
+        count: 1
+        total_seconds: 12.528
+        median_seconds: 12.528
+        max_seconds: 12.528
+      time uv run python -m cases.trump11.capture_radius:
+        count: 1
+        total_seconds: 10.418
+        median_seconds: 10.418
+        max_seconds: 10.418
+      mkdir && cases.trump11.capture_radius:
+        count: 1
+        total_seconds: 10.182
+        median_seconds: 10.182
+        max_seconds: 10.182
+      tail:
+        count: 1
+        total_seconds: 9.188
+        median_seconds: 9.188
+        max_seconds: 9.188
+      uv run python -m cases.trump11.capture_radius:
+        count: 3
+        total_seconds: 8.76
+        median_seconds: 1.324
+        max_seconds: 6.274
+      pytest && ls:
+        count: 1
+        total_seconds: 7.961
+        median_seconds: 7.961
+        max_seconds: 7.961
+      uv run pytest:
+        count: 1
+        total_seconds: 7.623
+        median_seconds: 7.623
+        max_seconds: 7.623
+      sys.path.insert(0, && sys.path.insert(0, && field && ident:
+        count: 1
+        total_seconds: 7.192
+        median_seconds: 7.192
+        max_seconds: 7.192
+      uv run python faces_b0.py:
+        count: 1
+        total_seconds: 6.207
+        median_seconds: 6.207
+        max_seconds: 6.207
+      pkill && pgrep:
+        count: 1
+        total_seconds: 2.762
+        median_seconds: 2.762
+        max_seconds: 2.762
+      git && git && git:
+        count: 1
+        total_seconds: 1.984
+        median_seconds: 1.984
+        max_seconds: 1.984
+      field && sparse:
+        count: 1
+        total_seconds: 1.542
+        median_seconds: 1.542
+        max_seconds: 1.542
+      .venv_missing && python3:
+        count: 1
+        total_seconds: 1.538
+        median_seconds: 1.538
+        max_seconds: 1.538
       ls && ls && ls && ls && python3:
         count: 1
         total_seconds: 1.525
@@ -90,78 +220,159 @@ rollup:
         total_seconds: 1.42
         median_seconds: 1.42
         max_seconds: 1.42
+      full-v3.json && python3:
+        count: 1
+        total_seconds: 1.253
+        median_seconds: 1.253
+        max_seconds: 1.253
+      ruff && ruff:
+        count: 1
+        total_seconds: 0.703
+        median_seconds: 0.703
+        max_seconds: 0.703
+      cat:
+        count: 5
+        total_seconds: 0.449
+        median_seconds: 0.088
+        max_seconds: 0.101
+      ls:
+        count: 4
+        total_seconds: 0.421
+        median_seconds: 0.099
+        max_seconds: 0.159
       sed:
         count: 2
         total_seconds: 0.279
         median_seconds: 0.139
         max_seconds: 0.192
-      ls:
-        count: 3
-        total_seconds: 0.262
-        median_seconds: 0.092
-        max_seconds: 0.107
+      cd:
+        count: 1
+        total_seconds: 0.183
+        median_seconds: 0.183
+        max_seconds: 0.183
       head:
         count: 2
         total_seconds: 0.18
         median_seconds: 0.09
         max_seconds: 0.095
-      cat:
-        count: 2
-        total_seconds: 0.166
-        median_seconds: 0.083
-        max_seconds: 0.084
-      grep:
+      ^):
         count: 1
-        total_seconds: 0.163
-        median_seconds: 0.163
-        max_seconds: 0.163
+        total_seconds: 0.095
+        median_seconds: 0.095
+        max_seconds: 0.095
+      full-v3.json:
+        count: 1
+        total_seconds: 0.039
+        median_seconds: 0.039
+        max_seconds: 0.039
     by_command_family:
-      vcs:
-        count: 2
-        total_seconds: 2.921
-        median_seconds: 1.46
-        max_seconds: 1.501
+      toolchain:
+        count: 12
+        total_seconds: 248.735
+        median_seconds: 12.857
+        max_seconds: 55.359
       inspection:
-        count: 11
-        total_seconds: 2.575
-        median_seconds: 0.092
-        max_seconds: 1.525
+        count: 21
+        total_seconds: 153.825
+        median_seconds: 0.097
+        max_seconds: 94.168
+      project:
+        count: 5
+        total_seconds: 114.661
+        median_seconds: 6.274
+        max_seconds: 95.483
+      other:
+        count: 10
+        total_seconds: 61.405
+        median_seconds: 2.152
+        max_seconds: 26.638
+      vcs:
+        count: 4
+        total_seconds: 59.876
+        median_seconds: 1.742
+        max_seconds: 54.971
+      filesystem:
+        count: 1
+        total_seconds: 10.182
+        median_seconds: 10.182
+        max_seconds: 10.182
+      shell:
+        count: 1
+        total_seconds: 0.183
+        median_seconds: 0.183
+        max_seconds: 0.183
     invoked:
-      head: 15
-      cd: 13
-      ls: 9
+      cd: 46
+      head: 23
+      tail: 22
+      grep: 16
+      ls: 11
+      uv run ruff check: 9
+      cat: 8
       sed: 8
-      cat: 3
-      grep: 2
-      git status: 1
+      uv run ruff format: 8
+      uv run basedpyright: 7
+      echo: 5
+      python3: 4
+      uv run python -m cases.trump11.capture_radius: 4
+      git status: 3
+      time uv run python -m cases.trump11.capture_radius: 3
+      sys.path.insert(0,: 3
+      sleep: 3
+      uv run pytest: 3
+      wc: 2
+      field: 2
+      time uv run pytest: 2
+      full-v3.json: 2
       git log: 1
-      wc: 1
-      python3: 1
       git: 1
+      mkdir: 1
+      sparse: 1
+      sort: 1
+      uniq: 1
+      uv run python debug_vertex.py: 1
+      ident: 1
+      uv run python faces_b0.py: 1
+      uv run python directional_curvature.py: 1
+      .venv_missing: 1
+      pkill: 1
+      pgrep: 1
+      ^): 1
+      git diff: 1
+      git check-ignore: 1
     invoked_families:
-      inspection: 38
-      shell: 13
-      vcs: 3
-      toolchain: 1
+      inspection: 92
+      shell: 54
+      toolchain: 33
+      other: 16
+      vcs: 7
+      project: 7
+      filesystem: 1
     by_shell_shape:
-      python_heredoc:
-        count: 2
-        total_seconds: 3.026
-        median_seconds: 1.513
-        max_seconds: 1.525
       compound:
-        count: 11
-        total_seconds: 2.47
-        median_seconds: 0.092
-        max_seconds: 1.42
+        count: 46
+        total_seconds: 538.732
+        median_seconds: 1.702
+        max_seconds: 94.168
+      python_heredoc:
+        count: 7
+        total_seconds: 110.034
+        median_seconds: 1.538
+        max_seconds: 95.483
+      pipeline:
+        count: 1
+        total_seconds: 0.101
+        median_seconds: 0.101
+        max_seconds: 0.101
     by_thinking_level:
       xhigh:
-        count: 18
-        total_seconds: 6.35
-        median_seconds: 0.101
-        max_seconds: 1.525
+        count: 106
+        total_seconds: 737.86
+        median_seconds: 0.094
+        max_seconds: 95.483
     shell_traits:
-      pipes: 10
+      pipes: 39
+      redirects_output: 6
   session_events:
     compact_boundaries: 0
     stop_hook_summaries: 0

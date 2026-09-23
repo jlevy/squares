@@ -131,12 +131,12 @@ session:
       independent reader over the complete tree; put n21's certificate through its
       Fable max W2 review and register it if accepted; consolidate every lane into the
       record.
-    status: in_progress
+    status: completed
     entered_by: user_request
     switch_reason: The owner returned after the quota stop and asked to resume the schedule from where things stood.
-    budget_minutes: 222
+    budget_minutes: 202
     started_at: '2026-09-23T15:48:00Z'
-    deadline_at: '2026-09-23T19:30:00Z'
+    deadline_at: '2026-09-23T19:10:00Z'
     expected_output: >-
       A reader verdict on the complete rung-0 tree, a reviewed n21 register decision,
       and terminal records for every agenda-042 lane.
@@ -144,19 +144,54 @@ session:
       cd packing && uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: The resumed tree yields a non-degenerate leaf below U, or the n21 review rejects.
     fallback: Record the bounded negative or the rejection at its scope and hand off.
+    outcome: >-
+      n21's certificate passed the Fable max W2 review on three routes and is
+      registered as T-034, s(21) >= 122/25. Rung 0's last resume closed 21 more
+      subtrees, 198 of 256 in all, before its launch cutoff; exp-231 records the bounded
+      stop with no leaf below U. The rung-0 instrument, the census filter and the
+      capture-radius tool are committed with their tests.
+    evidence:
+    - docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md
+    - packing/frontier/results.yaml
+    stop_reason: Rung 0 reached its declared launch cutoff and hard stop; the n21 registration is complete.
+    next_action: Close the session, refresh the handoff and cost block, and certify the head with a hosted full gate.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: finalization
+    objective: >-
+      Close Session 156: dispositions for every agenda-042 lane, the SYNOPSIS handoff,
+      refreshed rollups and PR description, beads, and one hosted full gate on the
+      final head.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: The continuation phase's two decisions, rung 0 and n21, reached their terminal states.
+    budget_minutes: 80
+    started_at: '2026-09-23T19:10:00Z'
+    deadline_at: '2026-09-23T20:30:00Z'
+    expected_output: A terminal session record, a current handoff, a refreshed PR 231, and a hosted full-gate verdict.
+    validation_command: gh workflow run packing-validation.yml --ref claude/w3-overnight-2026-09-23
+    kill_condition: The hosted full gate reports a substantive failure on the final head.
+    fallback: Record the failure with its receipts and leave the session stopped with the repair named.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Admit rung 0's final reader output and the n21 review.
+    next_action: Dispatch the hosted full gate on the final head.
   resource_rollups:
   - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  - packing/campaign/resource-usage/agent-a02d3ea2494f86951.yaml
   - packing/campaign/resource-usage/agent-a13483195f4dfc5a9.yaml
   - packing/campaign/resource-usage/agent-a43ecc4a5da6bff2f.yaml
   - packing/campaign/resource-usage/agent-a4c84504ee430d506.yaml
   - packing/campaign/resource-usage/agent-a52c911b359009127.yaml
+  - packing/campaign/resource-usage/agent-a75d58d431cb7a954.yaml
+  - packing/campaign/resource-usage/agent-a79d7c5283b8dfd07.yaml
   - packing/campaign/resource-usage/agent-aa1c5d289c1525899.yaml
   - packing/campaign/resource-usage/agent-aa76cdfe9b6c41496.yaml
   - packing/campaign/resource-usage/agent-abbf45cef11131bb3.yaml
+  - packing/campaign/resource-usage/agent-ac14c344407b67eb0.yaml
+  - packing/campaign/resource-usage/agent-ac3c7beef82e81c76.yaml
   - packing/campaign/resource-usage/agent-ad13995165f6a74fc.yaml
   - packing/campaign/resource-usage/agent-af1805a9e25246340.yaml
   - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
@@ -164,7 +199,7 @@ session:
   budget:
     wall_minutes: 820
     slice_minutes: 120
-    finalization_minutes: 60
+    finalization_minutes: 80
   stop_conditions:
   - The owner ends the run; a self-declared budget is not a stop condition (OR-8).
   - No bound or frontier promotion without a W2 review at Fable max.
@@ -175,7 +210,13 @@ session:
     before: >-
       PR 230 retains 31 shaped candidates at exploration scope with no selected entry;
       the verified bracket is 31/8 < s(11) <= U.
-    after: In progress.
+    after: >-
+      One new bound: T-034, s(21) >= 122/25, reviewed and registered. At n11 the first
+      rung of the settlement ladder is 198 of 256 subtrees closed with no leaf below U;
+      the capture-radius route is exhausted at the BC-199 modulus; a descent-filtered
+      census finds no third-class minimum below Stromquist's value but two new minima
+      within U + 0.02. The n12 ceiling is unsettled and the ParentClip build never
+      opened.
   delegations:
   - task: Fable extra-high review of X-045 (n11 global capture)
     operator: Fable, extra-high
@@ -402,10 +443,29 @@ session:
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Deferred to a later session under think-m9iz.
-  outputs: []
-  checks: []
+  outputs:
+  - docs/project/reviews/review-2026-09-23-pr230-w3-directions.md
+  - docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md
+  - docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md
+  - packing/campaign/explorations/X-046-n11-settlement-program.md
+  - packing/campaign/explorations/X-047-low-n-angles-after-the-parent-core-advance.md
+  - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md
+  - packing/cases/n21_fractional_certificate/certificate.json
+  - packing/cases/trump11/fixed_angle_tree.py
+  - packing/cases/trump11/fixed_angle_tree_check.py
+  - packing/cases/trump11/capture_radius.py
+  - packing/src/sqpack/research/descent_filter.py
+  checks:
+  - packing-validate --records passed at every committed checkpoint (35 of 82 steps, the records tier).
+  - The n21 certificate was accepted by three routes in the W2 review, including a standard-library verifier.
+  - Every rung-0 certificate the reader checked was accepted; the contract review found it sound.
   stop_reason: null
-  next_action: Run chunk 1 of agenda-042 and review its lanes at the chunk boundary.
+  next_action: Dispatch the hosted full gate on the final head and record its verdict.
 ---
 # Overnight W3 Continuation, Planning and Research Loop
 

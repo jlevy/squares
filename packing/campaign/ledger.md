@@ -170,7 +170,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-153](agent-sessions/session-153-native-n11-parent-core.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (correctness) | 4 | think-d010 | Publish the coordinator-approved PR 223 closure for completed think-d010 and require its final hosted checks before ready; the separately requested W3 review owns the next research ordering. Preserve the c183cc9ab proof scope and do not merge either stacked PR. |
 | [session-154](agent-sessions/session-154-pr221-pr222-reconciliation.md) | completed | contemporaneous | `remediation` (correctness) | `remediation` (correctness) | 1 | think-t30b | Render T-033's missing standalone claim document under think-vx26. |
 | [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
-| [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (correctness) | 4 | think-nbij | Run chunk 1 of agenda-042 and review its lanes at the chunk boundary. |
+| [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 5 | think-nbij | Dispatch the hosted full gate on the final head and record its verdict. |
 
 ### Workflow summary
 
@@ -187,7 +187,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `pipeline-improvement` | 36 | 2 | 154 | 5 |
 | `documentation-pass` | 1 | 0 | 25 | 1 |
 | `remediation` | 2 | 1 | 2 | 3 |
-| `review-planning-oversight` | 6 | 0 | 31 | 2 |
+| `review-planning-oversight` | 6 | 0 | 32 | 2 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
