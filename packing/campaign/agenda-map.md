@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **14** in_progress, **17** ready, **21** tentative, **68** blocked, **62** stopped, **187** complete.
+- **13** in_progress, **17** ready, **21** tentative, **68** blocked, **63** stopped, **187** complete.
 
 - **26 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -70,7 +70,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-041 | `BC-371` | in_progress | 0 | insight | research | Does the external n = 17 measure, which is stated in a restricted parent-centre language this repository does… | `think-xdoh` |
 | agenda-041 | `BC-369` | in_progress | 1 | efficiency | tool_validation | The deep gate costs about 45 minutes of wall and its exhaustive tier runs at 1.376x its own declared price,… | `think-zmos` |
 | agenda-041 | `BC-372` | in_progress | 2 | insight | research | Can this repository's own site sets cover at the external side L = 4613/1000 at all, and at which shrink do… | `think-xdoh` |
-| agenda-042 | `BC-375` | in_progress | 1 | correctness | research | Does a fixed-shape cell tree with rotational cores and exact leaf certificates prove H-236 on the… | `think-ie35` |
 | agenda-042 | `BC-380` | ready | 3 | correctness | tool_validation | Can a direction-dependent parent-centre clip behind colgen's clip parameter, and a converter from a frozen… | `think-m9iz` |
 
 ## Blocked, and on what
@@ -208,7 +207,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-037 | active | 1 |  | 1 | 1 | 1 | 1 | 5 |
 | agenda-040 | active |  | 1 |  | 2 | 1 | 3 | 7 |
 | agenda-041 | active | 4 |  |  |  |  | 2 | 6 |
-| agenda-042 | active | 1 | 1 |  |  | 1 | 4 | 7 |
+| agenda-042 | active |  | 1 |  |  | 2 | 4 | 7 |
 
 ## By program
 
@@ -386,11 +385,11 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda | id | state | question |
 | --- | --- | --- | --- |
 | agenda-042 | `BC-374` | complete | Which of PR 230's 31 shaped candidates, and which new directions, could move n11 significantly or… |
-| agenda-042 | `BC-375` | in_progress | Does a fixed-shape cell tree with rotational cores and exact leaf certificates prove H-236 on the… |
+| agenda-042 | `BC-375` | stopped | Does a fixed-shape cell tree with rotational cores and exact leaf certificates prove H-236 on the… |
 | agenda-042 | `BC-376` | complete | Do exp-013's exact stresses and a second-order remainder certify side at least U on a sup-norm ball… |
 | agenda-042 | `BC-377` | complete | With a descent filter that rejects the X-046 stalls, does any census minimum with three or more… |
 
-Open frontier: `BC-375`.
+Open frontier: none; every cell is terminal.
 
 ### `n11-strategy-reset`
 

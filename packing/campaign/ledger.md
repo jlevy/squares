@@ -827,7 +827,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
 | BC-374 | research | 11, 12, 17, 18, 19, 20, 21, 26, 29 | complete | 0 | think-nbij | docs/project/reviews/review-2026-09-23-pr230-w3-directions.md, X-046 and X-047. |
-| BC-375 | research | 11 | in_progress | 1 | think-ie35 | The frozen instrument digests and the run output, admitted from attic/rung0/ into results/agenda-042/. |
+| BC-375 | research | 11 | stopped | 1 | think-ie35 | The frozen instrument digests and the run output, admitted from attic/rung0/ into results/agenda-042/. |
 | BC-376 | research | 11 | complete | 1 | think-cj7r | packing/cases/trump11/capture_radius.py and its receipt. |
 | BC-377 | research | 11 | complete | 2 | think-cdc2 | The census receipt under results/agenda-042/. |
 | BC-378 | research | 21 | complete | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
@@ -838,7 +838,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 159 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 160 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1014,7 +1014,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | H-230 | blocked | proof | There is a proved wall-wedge conflict lemma for a tilted unit square a |  | 0 |  |  |
 | H-231 | open question | proof | Whether a Lovász theta certificate on a sound, non-uniform pose-cell c |  | 0 |  |  |
 | H-232 | blocked | proof | At n=11, side 96/25, B = 9977/10000 on the 181-direction net, the rest |  | 0 |  |  |
-| H-236 | blocked | proof | In the family of six unit squares at actual orientation 0 and five sha |  | 0 |  |  |
+| H-236 | abandoned | proof | In the family of six unit squares at actual orientation 0 and five sha |  | 1 |  | 397.1m wall |
 | H-237 | exhausted | proof | There is an explicit rational r > rho = 808514697/200000000000 such th |  | 1 |  | 7.4m wall |
 | H-238 | confirmed | search | Every descent-stable local minimum of the n=11 problem reached by the  |  | 1 |  | 62.0m wall |
 | H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
@@ -1076,13 +1076,14 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | --- | --- | --- | --- | --- | --- |
 | exp-227 | series-000 | 11 | Claude Session 156, Fable extra-high lane | H-237 | The route cannot exceed the BC-199 modulus by a proved lemma, and the exact computation confirms that on every face, so re-running under the per-row remainder model adds nothing. The binding constant is that model, not the growth minimum, which is 4.5 times kappa. Along the binding direction 36 of 42 rows do not recover at second order (exp-227 curvature record), so only a second-order exact isolation theorem, a named change of instrument, should reopen the radius. |
 
-### abandoned (3)
+### abandoned (4)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 | exp-162 | series-000 | 20 | Cursor session-140 | H-218 | The Session-140 research wall expired with no RETAINABLE freeze on the H-218 sweep. Closest masses were leftover n=20 971/200 at 19.910044 unconverged and leftover n=12 3969/1000 at 12.091168 after crossing 12. T-028 at n=18 does not confirm H-218. The unfinished float LPs remain unresolved; their objectives do not refute their site sets. |
+| exp-231 | series-000 | 11 | Claude Session 156, Opus extra-high lane and coordinator | H-236 | The declared caps ran out with 58 of 256 subtrees open and no counterexample candidate, so H-236 is neither confirmed nor refuted; the remaining subtrees are a bounded computation for the unchanged frozen instrument. |
 
 ### unresolved (51)
 
@@ -1265,10 +1266,11 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-210 | H-212 | 1 round unrecorded | dependency |  |  |
 | exp-215 | H-225 | 62.6m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res |  |
 | exp-230 | H-241 | 150.0m wall | timebox | The leg-3 warm state, retained as results/agenda-042/exp-230 |  |
+| exp-231 | H-236 | 397.1m wall | timebox | The top tree and 198 closed subtree files in attic/rung0 of  | Run the 58 wall-cap subtrees with the unchanged Amendment 1  |
 
 ## Effort
 
-159 rounds, 2512.1 agent-minutes, 3022.6 wall-minutes.
+160 rounds, 2512.1 agent-minutes, 3419.7 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

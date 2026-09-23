@@ -1,0 +1,43 @@
+{
+  "preset": "control-n5-capture",
+  "tree": "../attic/rung0/controls/control-n5-capture.jsonl.gz",
+  "nodes_solved": 153,
+  "lp_solves": 789,
+  "leaves": {
+    "b": 26,
+    "c": 103,
+    "f": 23,
+    "t": 1
+  },
+  "branch_nodes": 26,
+  "stopped": "complete",
+  "closed": true,
+  "wall_seconds": 0.284,
+  "nodes_per_second": 537.9,
+  "closed_measure": 1.0,
+  "depth_histogram": {
+    "0": 1,
+    "1": 4,
+    "2": 12,
+    "3": 32,
+    "4": 44,
+    "5": 28,
+    "6": 16,
+    "7": 8,
+    "8": 8
+  },
+  "leaf_depth_histogram": {
+    "1": 1,
+    "2": 5,
+    "3": 25,
+    "4": 40,
+    "5": 26,
+    "6": 15,
+    "7": 7,
+    "8": 8
+  },
+  "max_lp_value_expanded": 2.706986097145841,
+  "max_enclosure_reach_beyond_image": 0.0022413680814161703,
+  "unresolved_sample": [],
+  "unresolved_recorded": 0
+}

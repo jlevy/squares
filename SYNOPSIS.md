@@ -161,11 +161,11 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 369 | 187 complete; 62 stopped; 68 blocked; 17 ready; 21 tentative; 14 in progress |
+| Commitments | 369 | 187 complete; 63 stopped; 68 blocked; 17 ready; 21 tentative; 13 in progress |
 | Sessions | 156 | 96 completed; 59 stopped; 1 nonterminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 176 | 31 confirmed; 31 refuted; 56 blocked; 18 unresolved; 5 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 159 | 45 accepted; 36 rejected; 51 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 176 | 31 confirmed; 31 refuted; 55 blocked; 18 unresolved; 5 open; 30 open questions; 2 result registered; 3 abandoned; 0 running; 1 exhausted |
+| Experiments | 160 | 45 accepted; 36 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 34 | 34 registered |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -4370,7 +4370,7 @@ round that names the hypothesis, control roles included.
 | [H-230](packing/campaign/hypotheses/H-230-a6-family-violates-a-gap-wedge-conflict.md) | blocked | A gap-g wall-wedge conflict edge cuts the A6 64-family; blocked on the gap extension and a conflict-edge atom class | 0 | — |
 | [H-231](packing/campaign/hypotheses/H-231-theta-on-pose-cells.md) | open question | Theta on a sound pose-cell graph at n=11; stays retired under X-037’s condition | 0 | — |
 | [H-232](packing/campaign/hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | blocked | The all-deep corner class at n=11, 96/25 has covering value below 7 in the point-plus-2-of-3 language on the box-cut domain; blocked on the box cut, the refund and an exact 2-of-3 reader | 0 | — |
-| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | blocked | Trump is globally optimal at its own angle: every six-axis plus five-common-angle packing with half-tangent within 10^-6 of Trump’s has side at least U; rung 0 of the H-112 ladder, blocked on the cell-tree instrument | 0 | — |
+| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | abandoned | Trump is globally optimal at its own angle on the 10^-6 half-tangent box; exp-231 closed 198 of 256 subtrees with no leaf below U before its caps, and resumes with the unchanged instrument | 1 | — |
 | [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | The growth-cone route to a sup-norm ball around Trump’s pose larger than the BC-240 radius; capped at the BC-199 modulus by an exhaustion lemma (exp-227) | 1 | — |
 | [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | confirmed | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; confirmed at census scope by exp-228, support never proof | 1 | — |
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
@@ -4688,9 +4688,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 159 rounds registered in `series-000`.
+There are 160 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 3022.6 wall-minutes.
+They record 2512.1 agent-minutes and 3419.7 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -4891,6 +4891,7 @@ archive beside it.
 | [exp-228](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md) | 11 | target | H-238 | Descent-filtered census of 1,000 jolted starts about Trump and Stromquist | No descent-stable three-class minimum below 3.885618; new minima at 3.8867460 and 3.8943219 | accepted |
 | [exp-229](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md) | 21 | target | H-240 | Column generation at side 122/25 on three site sets, then the gate | RETAINABLE on set C; 1,228 atoms; mass 20.145724; registered as T-034 after the W2 review | accepted |
 | [exp-230](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md) | 12 | target | H-241 | Cutting loop with the ceiling check at side 39609/10000, three legs | No proved family at 12 (best 10.704); row objective unsettled near 11.98 | unresolved |
+| [exp-231](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md) | 11 | target | H-236 | Rung-0 fixed-angle cell tree with an independent reader on Trump’s half-tangent box | 198 of 256 subtrees closed on 1.19e8 nodes; three Trump-degenerate leaves; no leaf below U | abandoned |
 
 ### Cost and provenance
 
@@ -5055,10 +5056,11 @@ archive beside it.
 | exp-228 | About three hours; census 41 + 21 min | 3720 s | — | criterion | `84e41069` |
 | exp-229 | One or two runs of at most 3,600 s, then the gate | 6414 s | — | criterion | `69dac09a` |
 | exp-230 | About 90 minutes per leg; three legs | 9000 s | — | timebox | `69dac09a` |
+| exp-231 | 3,300 s frozen run plus two capped resumes | 23827 s | — | timebox | `821b0e30` |
 
-### What the 159 rounds jointly establish
+### What the 160 rounds jointly establish
 
-The 159 rounds use 2512.1 agent-minutes and 3022.6 wall-minutes under the campaign’s
+The 160 rounds use 2512.1 agent-minutes and 3419.7 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

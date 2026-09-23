@@ -1,0 +1,31 @@
+{
+  "verdict": "closed",
+  "tree": "../attic/rung0/controls/control-n5.jsonl.gz",
+  "leaves": {
+    "b": 38,
+    "c": 169,
+    "f": 22
+  },
+  "subtree_files": 0,
+  "unresolved_by_reason": {},
+  "leaf_depths": {
+    "1": 1,
+    "2": 9,
+    "3": 26,
+    "4": 40,
+    "5": 75,
+    "6": 40
+  },
+  "smallest_certified_margin": 0.0008793159592919643,
+  "largest_enclosure_reach_beyond_image": 0.0,
+  "statement": {
+    "family": "4 axis + 1 tilted",
+    "half_tangent_box": [
+      "414113562373/1000000000000",
+      "207156781187/500000000000"
+    ],
+    "target_label": "s5-1/1000",
+    "target_upper": "346381667991878083123308078349420677028459/128000000000000000000000000000000000000000"
+  },
+  "reader_seconds": 0.021
+}

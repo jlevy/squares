@@ -73,7 +73,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: stopped
     priority: 1
     question: >-
       Does a fixed-shape cell tree with rotational cores and exact leaf certificates
@@ -102,6 +102,19 @@ agenda:
     note: >-
       The node count prices H-112 and every later rung; a bounded negative at the cap is
       a result about the instrument, not about n11.
+    outcomes:
+    - scope: H-236 on the half-tangent box around Trump's tilt, frozen run and two resumes (exp-231).
+      classification: time-limited
+      result: >-
+        198 of 256 subtrees closed on 1.19e8 nodes with every checked certificate
+        accepted and three Trump-degenerate leaves; 58 subtrees remain at the wall cap and
+        no leaf below U appeared. The tree is about a thousand times X-046's estimate, so
+        rung 1 needs a stronger relaxation.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md
+      - docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md
+      disposition: continue
+      follow_up: think-ie35
   - id: BC-376
     purpose: research
     owner_focus: insight

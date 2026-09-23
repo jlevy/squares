@@ -1,0 +1,47 @@
+{
+  "verdict": "closed",
+  "tree": "../attic/rung0/controls/control-n5-capture.jsonl.gz",
+  "leaves": {
+    "b": 26,
+    "c": 103,
+    "f": 23,
+    "t": 1
+  },
+  "subtree_files": 0,
+  "unresolved_by_reason": {},
+  "leaf_depths": {
+    "1": 1,
+    "2": 5,
+    "3": 25,
+    "4": 40,
+    "5": 26,
+    "6": 15,
+    "7": 7,
+    "8": 8
+  },
+  "smallest_certified_margin": 0.04775863191858383,
+  "largest_enclosure_reach_beyond_image": 0.0022413680814161703,
+  "statement": {
+    "family": "4 axis + 1 tilted",
+    "half_tangent_box": [
+      "414113562373/1000000000000",
+      "207156781187/500000000000"
+    ],
+    "target_label": "s5+1/1000",
+    "target_upper": "1354053390593273762200422181052424519642417969/500000000000000000000000000000000000000000000",
+    "capture_only": true,
+    "image": {
+      "name": "goebel5",
+      "rotation": 0,
+      "labels": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "radius": "1/20"
+    }
+  },
+  "reader_seconds": 0.012
+}

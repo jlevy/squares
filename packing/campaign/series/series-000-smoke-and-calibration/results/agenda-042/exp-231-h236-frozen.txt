@@ -1,0 +1,68 @@
+H-236 rung-0 instrument, frozen 2026-09-23T08:19:47Z by Lane N1 (Session 156).
+Worktree HEAD: 69dac09a029de16ecb86c2072c1f18a67bd42794 (the three files below are untracked additions on top of it).
+Interpreter / scipy: 1.17.1 3.14.7  (HiGHS via scipy.optimize._highspy._core, float proposals only)
+
+git hash-object:
+  af1179a5eddf121b19479a638d67ce0dbdbb94fe  packing/cases/trump11/fixed_angle_tree.py
+  c4ae4e489fcfe9b69470c3834ce18b5151485f47  packing/cases/trump11/fixed_angle_tree_check.py
+  de97a0cc3dd125ac4366b0a78c56176bd86dea0a  packing/tests/test_fixed_angle_tree.py
+
+Declared configuration of the H-236 measurement:
+  family F_{6,5}; half-tangent box = [floor((u_lo - 1e-6) 1e12)/1e12, ceil((u_hi + 1e-6) 1e12)/1e12]
+  core: square core, half-tangent = box midpoint, side floor(lambda 1e15)/1e15
+  target: U, closure requires bound > U_hi (enclose(U) at 45 field digits)
+  symmetry: quadrant rows on the tilted class; order rows x + y/4 within each class
+  degenerate leaves: enclosure within BC-240 rho = 808514697/200000000000 of the labelled
+    Trump image (rotation 1 CCW, labels [3,4,2,5,0,1,8,10,6,9,7])
+  branching: fail-first over the 6 most violated pairs (--strong 6); natural child order
+  CAPS: wall 3300 s total (shared deadline), 8 worker processes, split depth 5,
+        per-file node cap 20,000,000 (not expected to bind). Anything unfinished at the
+        deadline is written as an unresolved leaf 'wall-cap'.
+
+Commands (from packing/), in order:
+  C1 uv run --frozen --all-extras --group dev pytest -q tests/test_fixed_angle_tree.py
+  C2 for p in control-axis-2-below control-axis-4-below control-axis-5-below control-axis-5-above control-n5 control-n5-capture control-n11-negative-cell; do
+       .venv/bin/python3 -m cases.trump11.fixed_angle_tree $p --strong 6 --out ../attic/rung0/controls/$p.jsonl.gz --summary ../attic/rung0/controls/$p.json
+       .venv/bin/python3 -m cases.trump11.fixed_angle_tree_check ../attic/rung0/controls/$p.jsonl.gz --out ../attic/rung0/controls/$p.reader.json
+     done
+  C3 .venv/bin/python3 -m cases.trump11.fixed_angle_tree control-n11-negative --strong 6 --node-cap 100000 --wall-cap 600 --out ../attic/rung0/controls/control-n11-negative.jsonl.gz --summary ../attic/rung0/controls/control-n11-negative.json
+  M1 .venv/bin/python3 -m cases.trump11.fixed_angle_tree h236 --strong 6 --workers 8 --split-depth 5 --node-cap 20000000 --wall-cap 3300 --out ../attic/rung0/h236.jsonl.gz --summary ../attic/rung0/h236-summary.json
+  M2 .venv/bin/python3 -m cases.trump11.fixed_angle_tree_check ../attic/rung0/h236.jsonl.gz --workers 8 --out ../attic/rung0/h236-reader.json
+  P1 .venv/bin/python3 -m cases.trump11.fixed_angle_tree h236 --strong 6 --probes 20000 --seed 11 --out /dev/null --summary ../attic/rung0/knuth-strong6.json
+  P2 .venv/bin/python3 -m cases.trump11.fixed_angle_tree h236 --strong 1 --probes 100000 --seed 12 --out /dev/null --summary ../attic/rung0/knuth-strong1.json
+
+RUN LOG (appended after the runs; instrument unchanged, hashes re-checked below):
+  M1 launched 01:20:30 PDT, ended at the 3300 s deadline (02:15:31); 256 subtree files.
+  M2 first attempt (--workers 8) and P2 first attempt were killed by an external signal
+     (shell exit 144, no traceback, memory 47% free, load average ~150) within a minute
+     of launch at 02:16. M2 was rerun unchanged except --workers 4 (02:17:52-02:27:21,
+     exit 0). P2 rerun unchanged afterwards.
+  post-run af1179a5eddf121b19479a638d67ce0dbdbb94fe  packing/cases/trump11/fixed_angle_tree.py
+  post-run c4ae4e489fcfe9b69470c3834ce18b5151485f47  packing/cases/trump11/fixed_angle_tree_check.py
+  post-run de97a0cc3dd125ac4366b0a78c56176bd86dea0a  packing/tests/test_fixed_angle_tree.py
+
+AMENDMENT 1 (2026-09-23T09:33:34Z), coordinator decision "finish rung 0".
+The amendment adds scheduling/resume only, not mathematics: leaf semantics, LP
+construction, branching, certificate format and the reader are unchanged. The original
+digests above stay the record of M1; the files now hash to:
+  9c92406093e248b3a70773f9cf0ffcd675897a7a  packing/cases/trump11/fixed_angle_tree.py
+  c4ae4e489fcfe9b69470c3834ce18b5151485f47  packing/cases/trump11/fixed_angle_tree_check.py  (unchanged)
+  e841735fd70a6e002bf1dc314a5831f72f507113  packing/tests/test_fixed_angle_tree.py
+Diff summary (copies of the M1 bytes kept at attic/rung0/*.frozen.py):
+  fixed_angle_tree.py: +99 / -0 lines. New: frontier_paths (reads the top tree's
+    frontier in 's'-leaf order), _grow_resumed (re-grows one subtree from scratch into
+    sub-NNNNN.jsonl.gz.part and renames it over the old file only when done; a task that
+    starts after the launch deadline writes its root as a 'wall-cap' leaf), run_resume
+    (checks each old file's root_path against the top tree, then a spawn pool), and the
+    CLI flags --resume-subtrees, --stop-launching-at, --stop-at. No existing line changed.
+  test_fixed_angle_tree.py: +44 / -0 lines: one new test (resume replaces files, the
+    reader replays them, a late launch is capped). 13 tests pass; ruff and basedpyright clean.
+Partial subtrees are re-run from scratch (not stitched); they are queued first.
+  R1 .venv/bin/python3 -m cases.trump11.fixed_angle_tree h236 --strong 6 --node-cap 20000000 --workers 8 --resume-subtrees 21,40,41,93,87,92,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255, --stop-launching-at 2026-09-23T12:15:00+00:00 --stop-at 2026-09-23T12:35:00+00:00 --out ../attic/rung0/h236.jsonl.gz --summary ../attic/rung0/h236-resume-summary.json
+  R2 .venv/bin/python3 -m cases.trump11.fixed_angle_tree_check ../attic/rung0/h236.jsonl.gz --workers 8 --out ../attic/rung0/h236-reader-final.json
+  Note (02:34 PDT): R1's first launch exited at argument parsing (the index list built with
+  BSD `seq -s,` ended in a trailing comma, rejected by int('')); no subtree ran and no file
+  was touched. The list was fixed (167 indices, no trailing comma, attic/rung0/resume-indices.txt)
+  and R1 relaunched with the same command.
+  R3 (2026-09-23T15:49:51Z) session-156 continuation after the quota stop: same amended bytes (9c92406/c4ae4e4), the 79 wall-cap subtrees from R1 re-run from scratch, 10 workers on an idle host; stop launching 18:30Z, stop 19:00Z.
+  R2' (2026-09-23T19:00:21Z) reader over the whole tree after R3 (198/256 subtrees closed, 58 at wall-cap), 10 workers.

@@ -1,0 +1,5 @@
+{
+  "verdict": "rejected",
+  "tree": "../attic/rung0/controls/control-n11-negative-cell.jsonl.gz",
+  "reason": "a top-level tree must start at the empty cell"
+}
