@@ -31,7 +31,7 @@ session:
       and develop the directions that follow: an n11 settlement program (X-046) and
       distinct low-n angles (X-047), each with mechanism, falsifier, expected
       information, limits and a first bounded discriminator.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 100
@@ -48,10 +48,69 @@ session:
     fallback: >-
       Record the error, scope the affected directions out, and plan only from the
       surviving evidence.
+    outcome: >-
+      Four reviews found no fatal error in PR 230. X-046 lays out the n11 settlement
+      ladder and dissolves the census's apparent third-class minima; X-047 maps the
+      additive ceiling at each low n and selects n21 at 4.88 and n12's ceiling.
+    evidence:
+    - docs/project/reviews/review-2026-09-23-pr230-w3-directions.md
+    - packing/campaign/explorations/X-046-n11-settlement-program.md
+    - packing/campaign/explorations/X-047-low-n-angles-after-the-parent-core-advance.md
+    stop_reason: Both W3 lanes returned their explorations.
+    next_action: Codify the selected directions in the W10 planning block.
+  - workflow: review-planning-oversight
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Register the selected directions as hypotheses, write agenda-042 with beads and
+      parallel groups, add the idea-board rows, and dispatch the first chunk.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: The W3 lanes returned X-046 and X-047.
+    budget_minutes: 45
+    started_at: '2026-09-23T07:40:00Z'
+    deadline_at: '2026-09-23T08:25:00Z'
+    expected_output: >-
+      H-236 to H-241, agenda-042 with BC-374 to BC-380 and their beads, idea rows 235
+      to 245, and a pushed checkpoint.
+    validation_command: >-
+      cd packing && uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: A registration cannot state a frozen criterion with a decisive kill.
+    fallback: Keep the direction as an open question or a shaped idea row.
+    outcome: >-
+      Six hypotheses registered from H-236, since H-233 to H-235 are used as labels in
+      X-042 without registration. Agenda-042 holds seven commitments; the two
+      instrument-free n11 lanes were dispatched during codification.
+    evidence:
+    - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
+    - packing/campaign/ideas.md
+    stop_reason: Every selected direction has a hypothesis, commitment and bead.
+    next_action: Run chunk 1 of agenda-042.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Chunk 1 of agenda-042: BC-375's instrument and controls, BC-376's derivation, and
+      the BC-378 and BC-379 stock runs.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: The planning block registered the chunk's hypotheses.
+    budget_minutes: 158
+    started_at: '2026-09-23T07:52:00Z'
+    deadline_at: '2026-09-23T10:30:00Z'
+    expected_output: >-
+      A controlled rung-0 instrument, a capture-radius outcome, and decided or
+      time-limited n21 and n12 runs.
+    validation_command: >-
+      cd packing && uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: An instrument fails its positive or negative control.
+    fallback: Record the failure as an instrument result and move the slot to the next ready item.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Receive X-046 and X-047, then open the W10 planning block.
+    next_action: Collect lane reports and review them at the chunk boundary.
   budget:
     wall_minutes: 430
     slice_minutes: 120
@@ -136,10 +195,48 @@ session:
     elapsed_quality: platform_measured
     uncertainty: Replays ran on macOS only.
     next_action: None.
+  - task: Fable max n11 settlement ideation (X-046)
+    operator: Fable, max
+    status: completed
+    recording: contemporaneous
+    phase: 1
+    outcome: >-
+      No provable dimension-reduction lemma short of the conjecture; a ladder of
+      restricted-family theorems with rung 0 at Trump's angle; exploratory probes show
+      the certificate has no transferable slack at U and that the census's six
+      three-class endpoints descend to Trump.
+    evidence:
+    - packing/campaign/explorations/X-046-n11-settlement-program.md
+    files:
+    - packing/campaign/explorations/X-046-n11-settlement-program.md
+    checks:
+    - Schema validation, documentation links and 239 of 239 math spans passed on X-046.
+    uncertainty: Probe numbers are float and unretained; X-046 labels them so.
+    elapsed_seconds: 3323.082
+    elapsed_quality: platform_measured
+    next_action: Registered as H-236 to H-239.
+  - task: Fable extra-high low-n angles (X-047)
+    operator: Fable, extra-high
+    status: completed
+    recording: contemporaneous
+    phase: 1
+    outcome: >-
+      The additive-ceiling map: headroom about 0.001 at n12, 0.01 at n18 to n20 and
+      0.036 at n21; the ParentClip instrument specified against existing colgen hooks.
+    evidence:
+    - packing/campaign/explorations/X-047-low-n-angles-after-the-parent-core-advance.md
+    files:
+    - packing/campaign/explorations/X-047-low-n-angles-after-the-parent-core-advance.md
+    checks:
+    - Frontmatter validates; the frozen-weight deadness recomputed exactly.
+    uncertainty: Crossing sides are linear estimates, not bounds.
+    elapsed_seconds: 1055.035
+    elapsed_quality: platform_measured
+    next_action: Registered as H-240 and H-241; BC-380 builds the clip.
   outputs: []
   checks: []
   stop_reason: null
-  next_action: Receive X-046 and X-047, then open the W10 planning block.
+  next_action: Run chunk 1 of agenda-042 and review its lanes at the chunk boundary.
 ---
 # Overnight W3 Continuation, Planning and Research Loop
 

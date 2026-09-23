@@ -159,11 +159,11 @@ hypothesis status and summarizes experiment verdicts, and the
 
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
-| Agendas | 38 | 18 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 362 | 183 complete; 61 stopped; 68 blocked; 16 ready; 21 tentative; 13 in progress |
+| Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
+| Commitments | 369 | 184 complete; 61 stopped; 68 blocked; 20 ready; 21 tentative; 15 in progress |
 | Sessions | 156 | 96 completed; 59 stopped; 1 nonterminal |
-| Explorations | 43 | 24 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 170 | 29 confirmed; 31 refuted; 55 blocked; 17 unresolved; 5 open; 29 open questions; 2 result registered; 2 abandoned; 0 running |
+| Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
+| Hypotheses | 176 | 29 confirmed; 31 refuted; 58 blocked; 17 unresolved; 7 open; 30 open questions; 2 result registered; 2 abandoned; 0 running |
 | Experiments | 155 | 43 accepted; 36 rejected; 50 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress |
 | Frontier results | 33 | 33 registered |
 
@@ -4366,6 +4366,12 @@ round that names the hypothesis, control roles included.
 | [H-230](packing/campaign/hypotheses/H-230-a6-family-violates-a-gap-wedge-conflict.md) | blocked | A gap-g wall-wedge conflict edge cuts the A6 64-family; blocked on the gap extension and a conflict-edge atom class | 0 | — |
 | [H-231](packing/campaign/hypotheses/H-231-theta-on-pose-cells.md) | open question | Theta on a sound pose-cell graph at n=11; stays retired under X-037’s condition | 0 | — |
 | [H-232](packing/campaign/hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | blocked | The all-deep corner class at n=11, 96/25 has covering value below 7 in the point-plus-2-of-3 language on the box-cut domain; blocked on the box cut, the refund and an exact 2-of-3 reader | 0 | — |
+| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | blocked | Trump is globally optimal at its own angle: every six-axis plus five-common-angle packing with half-tangent within 10^-6 of Trump’s has side at least U; rung 0 of the H-112 ladder, blocked on the cell-tree instrument | 0 | — |
+| [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | blocked | An explicit sup-norm ball around Trump’s pose larger than the BC-240 radius on which every feasible pose has side at least U | 0 | — |
+| [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | blocked | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; blocked on the descent filter | 0 | — |
+| [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
+| [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | open | A window-enriched point certificate retains s(21) >= 122/25 below mass 21 | 0 | — |
+| [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | open | A proved depth-one ceiling of at least 12 at n12, side 39609/10000, kills every additive n12 route above 3.9609 | 0 | — |
 
 ### Confirmed
 

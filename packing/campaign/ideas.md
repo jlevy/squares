@@ -746,6 +746,29 @@ hypothesis ids.
 | 233 | Weaken H-121 to resource-forced angle and position tubes | shaped | — | Prove one complete coarse role domain maps into an explicit tube union, then validate the full-family angular thickening; a feasible pose outside the claimed union kills an all-feasible theorem, while existential representative claims need every proposed representative excluded. |
 | 234 | Extend X-005/H-120/BC-282 with an exact map of one continuous restricted family | shaped | — | Close one fresh domain through births, ties, legal touches and singleton fibers; a missing legal boundary pose kills the cover, while a finite chamber count or successful sample proves nothing by itself. |
 
+## The n11 Settlement Ladder and Low-n Angles — X-046 and X-047
+
+[X-046](explorations/X-046-n11-settlement-program.md) replaces the counting bridge at
+n11 with a ladder of restricted-family theorems, and
+[X-047](explorations/X-047-low-n-angles-after-the-parent-core-advance.md) maps where the
+additive route dies at each low n.
+[Agenda 042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) selected
+the registered rows.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 235 | Trump is globally optimal at its own angle, by a rotational-core cell tree | registered | [H-236](hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | Every leaf an exact Farkas or dual certificate or a matched Trump-degenerate leaf; the node count prices H-112. |
+| 236 | A quantified angular capture radius around Trump beyond the BC-240 radius | registered | [H-237](hypotheses/H-237-n11-trump-angular-capture-radius.md) | The minimum of the first-order growth over the whole direction sphere, not only its faces, is the crux. |
+| 237 | No descent-stable third-class minimum below Stromquist’s value | registered | [H-238](hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | The census needs a descent filter first: the quench reports class-coordinate stalls as converged. |
+| 238 | The rotational-core relaxation constant at generic angle vectors | open question | [H-239](hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | Prices whether a full verified search at n11 is a bounded program. |
+| 239 | An angle-profile counting certificate excludes angle sets away from Trump’s | shaped | — | Write the profile LP over retained atoms and read its dual; a dual fractional packing on the excluded set kills it. |
+| 240 | The H-112 ladder beyond rung 1: axis plus one angle at every multiplicity, then two orientations (H-113) | shaped | — | Priced by H-236’s node count and H-239’s constant. |
+| 241 | A point certificate at s(21) ≥ 4.88 | registered | [H-240](hypotheses/H-240-n21-additive-certificate-at-4-88.md) | The one low case with real additive headroom; the crossing near 4.886 is an estimate. |
+| 242 | The additive route at n12 is dead above 3.9609 | registered | [H-241](hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | One ceiling run decides every additive n12 route in one direction. |
+| 243 | A parent-centre clip lifts n21 to 4.9 and n18 to 4.70 on the native verifier | shaped | — | Blocked on the BC-380 instrument and its controls. |
+| 244 | An excess-4 occupancy-allocation cut toward s(12) = 4 | shaped | — | One unrealizable surviving pattern is a new cut; one legal allocation refutes only that pattern. |
+| 245 | A parent-disjointness no-good closes a largest surviving n21 exact-five kill orbit | shaped | — | Extends H-226’s inventory; a realizable structure leaves the orbit open. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

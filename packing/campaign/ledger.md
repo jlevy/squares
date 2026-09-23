@@ -170,7 +170,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-153](agent-sessions/session-153-native-n11-parent-core.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (correctness) | 4 | think-d010 | Publish the coordinator-approved PR 223 closure for completed think-d010 and require its final hosted checks before ready; the separately requested W3 review owns the next research ordering. Preserve the c183cc9ab proof scope and do not merge either stacked PR. |
 | [session-154](agent-sessions/session-154-pr221-pr222-reconciliation.md) | completed | contemporaneous | `remediation` (correctness) | `remediation` (correctness) | 1 | think-t30b | Render T-033's missing standalone claim document under think-vx26. |
 | [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
-| [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 1 | think-nbij | Receive X-046 and X-047, then open the W10 planning block. |
+| [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 3 | think-nbij | Run chunk 1 of agenda-042 and review its lanes at the chunk boundary. |
 
 ### Workflow summary
 
@@ -183,11 +183,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 27 | 1 | 84 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 37 | 1 |
-| `research-loop` | 30 | 4 | 105 | 8 |
+| `research-loop` | 30 | 4 | 106 | 8 |
 | `pipeline-improvement` | 36 | 2 | 154 | 5 |
 | `documentation-pass` | 1 | 0 | 25 | 1 |
 | `remediation` | 2 | 1 | 2 | 3 |
-| `review-planning-oversight` | 6 | 0 | 30 | 2 |
+| `review-planning-oversight` | 6 | 0 | 31 | 2 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
@@ -820,6 +820,20 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | BC-372 | research | 17 | in_progress | 2 | think-xdoh | The sweep receipt under results/agenda-041. |
 | BC-373 | research | 11 | complete | 2 | think-gvlg | The refinement work file and its receipt under results/agenda-041. |
 
+### [agenda-042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) — Overnight n11 Settlement Ladder and Low-n Angles After PR 230
+
+Status: **active**. Turn PR 230's W3 review and the two explorations it led to, X-046 and X-047, into one night of bounded work. At n11 no counting certificate can prove equality and Kleddamag's certificate has no side headroom, so the night starts the verified settlement ladder instead: rung 0 of H-112 (Trump is globally optimal at its own angle), a quantified capture radius around Trump, and a repaired census of minima near U. At low n the additive-ceiling map selects n21 at 4.88 as the one material point-certificate rung and n12's additive ceiling as a decisive negative; the parent-centre clip that would carry both further is built as a W7 instrument. At most about three sub-agents run at once: Opus 5.5 builds and runs, Fable extra-high does the mathematics and reviews each chunk, and Fable max reviews anything that would move a bound.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-374 | research | 11, 12, 17, 18, 19, 20, 21, 26, 29 | complete | 0 | think-nbij | docs/project/reviews/review-2026-09-23-pr230-w3-directions.md, X-046 and X-047. |
+| BC-375 | research | 11 | in_progress | 1 | think-ie35 | The frozen instrument digests and the run output, admitted from attic/rung0/ into results/agenda-042/. |
+| BC-376 | research | 11 | in_progress | 1 | think-cj7r | packing/cases/trump11/capture_radius.py and its receipt. |
+| BC-377 | research | 11 | ready | 2 | think-cdc2 | The census receipt under results/agenda-042/. |
+| BC-378 | research | 21 | ready | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
+| BC-379 | research | 12 | ready | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
+| BC-380 | tool_validation | 12, 18, 21 | ready | 3 | think-m9iz | parent_clip.py, freeze_to_parent_core.py and their tests. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -1000,6 +1014,12 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | H-230 | blocked | proof | There is a proved wall-wedge conflict lemma for a tilted unit square a |  | 0 |  |  |
 | H-231 | open question | proof | Whether a Lovász theta certificate on a sound, non-uniform pose-cell c |  | 0 |  |  |
 | H-232 | blocked | proof | At n=11, side 96/25, B = 9977/10000 on the 181-direction net, the rest |  | 0 |  |  |
+| H-236 | blocked | proof | In the family of six unit squares at actual orientation 0 and five sha |  | 0 |  |  |
+| H-237 | blocked | proof | There is an explicit rational r > rho = 808514697/200000000000 such th |  | 0 |  |  |
+| H-238 | blocked | search | Every descent-stable local minimum of the n=11 problem reached by the  |  | 0 |  |  |
+| H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
+| H-240 | open | search | A weighted fractional unavoidable-set certificate with point atoms on  |  | 0 |  |  |
+| H-241 | open | search | At n=12, side 39609/10000, shrink 9977/10000, a depth-one family of cl |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
