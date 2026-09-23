@@ -3,9 +3,9 @@ type: is
 id: is-01m24sm7wm3s5eh8ke6vze7mw1
 title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
-status: closed
+status: open
 priority: 1
-version: 52
+version: 53
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -44,9 +44,9 @@ child_order_hints:
   - is-01m2mm43z5rhrhwg1ac775r1sc
   - is-01m2mmq0d31xcfva6p0nspxv9n
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-23T03:37:25.692Z
-closed_at: 2026-09-23T03:37:25.692Z
-close_reason: "PR 224 reconciliation is complete at df0cb3032d5412964b717a46f861abdd31d3346e: all hosted packing and certificate-page checks passed, GitHub reports CLEAN/MERGEABLE, BC-373 is complete, and Session 151 remains historically stopped."
+updated_at: 2026-09-23T04:48:12.320Z
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -91,3 +91,5 @@ Current controller, September 12: PR #148 is the completed T-026/explainer miles
 The BC329 target remains unregistered and unrun. The active gate is the second calibration correction: CAL-1 and CAL-7 closed; CAL-2 through CAL-6 remain open; `think-1arg` owns source-distinct rereview; `think-zypf`, profiles `think-vy5i`, admission `think-1mma`, runner integration `think-qw9w`, documentation `think-zd1b`, and target `think-17qa` remain in dependency order. The preflight behaviors are accepted off-branch, with integration and Ruff cleanup under `think-cur4` and `think-yiay`.
 
 The structural lane is separately tracked: first-principles analysis `think-979p`, source-distinct review and durable retention `think-gldo`, complete one-corner BC303 surplus test `think-ms9l`, and adjacent/opposite forced-type pair test `think-cexv`. These tests target two explicit missing routing lemmas and retain local scope. The active 30-minute heartbeat was updated to this state and continues from beads and durable records rather than chat history. No broader method ranking follows from these pending tests.
+
+Reopened: Administrative hierarchy correction after PR 224 validation found 14 retained open or in-progress children. BC-373 and Session 154 remain completed; this broader n11 umbrella stays open until its surviving children are dispositioned or reparented.
