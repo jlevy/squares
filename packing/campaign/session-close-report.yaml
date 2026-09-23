@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 155
+count: 156
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 101
-  sessions_unmeasured: 54
+  sessions_unmeasured: 55
   attributed:
     rollups: 188
     turns: 50776
@@ -2630,3 +2630,13 @@ sessions:
     active_union_hours: 3.2
     wall_hours: 3.2
     snapshot_incomplete: true
+- id: session-156
+  title: "Overnight W3 Continuation, Planning and Research Loop"
+  status: in_progress
+  primary_bead: think-nbij
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no resource measurement
+  rollups: []
+  codex_receipts: []
