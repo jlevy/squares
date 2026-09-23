@@ -4540,9 +4540,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 188 | 50,776 | 27,914 | 549 | 4,234 | 436.81 h |
+| claimed by a session | 200 | 51,812 | 28,543 | 555 | 4,289 | 441.26 h |
 | claimed by none | 61 | 13,190 | 7,606 | 177 | 1,122 | 60.64 h |
-| **measured** | **249** | **63,966** | **35,520** | **726** | **5,356** | **497.45 h** |
+| **measured** | **261** | **65,002** | **36,149** | **732** | **5,411** | **501.9 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -4592,7 +4592,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-149](packing/campaign/agent-sessions/session-149-n17-external-intake.md) | 3 | 1 | 370 | 185 | 2 | 18.66 h |
 | [session-150](packing/campaign/agent-sessions/session-150-n17-consolidation-and-correctness.md) | 4 | 15 | 3,783 | 2,015 | 37 | 17.66 h |
 | [session-151](packing/campaign/agent-sessions/session-151-low-n-review-and-first-party-n17.md) | 4 | 12 | 2,714 | 1,602 | 27 | 8.51 h |
-| *shared by 46 sessions* | — | 7 | 23,948 | 13,058 | 282 | 304.17 h |
+| [session-156](packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md) | 3 | 12 | 1,036 | 629 | 6 | 4.45 h |
+| *shared by 47 sessions* | — | 7 | 23,948 | 13,058 | 282 | 304.17 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -4665,8 +4666,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 101 |
-| unmeasured | 55 |
+| measured | 102 |
+| unmeasured | 54 |
 | **total** | **156** |
 
 <!-- END GENERATED: session-close-report -->

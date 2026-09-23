@@ -111,6 +111,19 @@ session:
     evidence: []
     stop_reason: null
     next_action: Collect lane reports and review them at the chunk boundary.
+  resource_rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  - packing/campaign/resource-usage/agent-a13483195f4dfc5a9.yaml
+  - packing/campaign/resource-usage/agent-a43ecc4a5da6bff2f.yaml
+  - packing/campaign/resource-usage/agent-a4c84504ee430d506.yaml
+  - packing/campaign/resource-usage/agent-a52c911b359009127.yaml
+  - packing/campaign/resource-usage/agent-aa1c5d289c1525899.yaml
+  - packing/campaign/resource-usage/agent-aa76cdfe9b6c41496.yaml
+  - packing/campaign/resource-usage/agent-abbf45cef11131bb3.yaml
+  - packing/campaign/resource-usage/agent-ad13995165f6a74fc.yaml
+  - packing/campaign/resource-usage/agent-af1805a9e25246340.yaml
+  - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
+  - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
   budget:
     wall_minutes: 430
     slice_minutes: 120

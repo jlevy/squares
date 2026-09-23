@@ -11,15 +11,15 @@ count: 156
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 101
-  sessions_unmeasured: 55
+  sessions_measured: 102
+  sessions_unmeasured: 54
   attributed:
-    rollups: 188
-    turns: 50776
-    tool_calls: 27914
-    tool_errors: 549
-    one_off_code: 4234
-    wall_hours: 436.81
+    rollups: 200
+    turns: 51812
+    tool_calls: 28543
+    tool_errors: 555
+    one_off_code: 4289
+    wall_hours: 441.26
   unattributed:
     rollups: 61
     turns: 13190
@@ -28,12 +28,12 @@ totals:
     one_off_code: 1122
     wall_hours: 60.64
   measured:
-    rollups: 249
-    turns: 63966
-    tool_calls: 35520
-    tool_errors: 726
-    one_off_code: 5356
-    wall_hours: 497.45
+    rollups: 261
+    turns: 65002
+    tool_calls: 36149
+    tool_errors: 732
+    one_off_code: 5411
+    wall_hours: 501.9
 codex_receipts:
   attributed: 64
   unattributed: 2
@@ -2635,8 +2635,23 @@ sessions:
   status: in_progress
   primary_bead: think-nbij
   phases: 3
-  measured: false
-  unmeasured_reason: >-
-    declares no resource measurement
-  rollups: []
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  - packing/campaign/resource-usage/agent-a13483195f4dfc5a9.yaml
+  - packing/campaign/resource-usage/agent-a43ecc4a5da6bff2f.yaml
+  - packing/campaign/resource-usage/agent-a4c84504ee430d506.yaml
+  - packing/campaign/resource-usage/agent-a52c911b359009127.yaml
+  - packing/campaign/resource-usage/agent-aa1c5d289c1525899.yaml
+  - packing/campaign/resource-usage/agent-aa76cdfe9b6c41496.yaml
+  - packing/campaign/resource-usage/agent-abbf45cef11131bb3.yaml
+  - packing/campaign/resource-usage/agent-ad13995165f6a74fc.yaml
+  - packing/campaign/resource-usage/agent-af1805a9e25246340.yaml
+  - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
+  - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
+  turns: 1036
+  tool_calls: 629
+  tool_errors: 6
+  one_off_code: 55
+  wall_hours: 4.45
   codex_receipts: []
