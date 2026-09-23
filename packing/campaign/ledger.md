@@ -815,6 +815,18 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | BC-372 | research | 17 | in_progress | 2 | think-xdoh | The sweep receipt under results/agenda-041. |
 | BC-373 | research | 11 | in_progress | 2 | think-gvlg | The refinement work file and its receipt under results/agenda-041. |
 
+### [agenda-042](agendas/agenda-042-efficiency-block-the-development-cycle.md) — Efficiency Block — the Development Cycle
+
+Status: **active**. A W5 efficiency-loop block entered on the owner's direction on 2026-09-23, right after PR #221 merged. Merging main into that branch hit seven conflicts, six of them committed atlas rasters and PDFs, and it needed two full atlas rebuilds to land. The owner asked two things: how much time goes to checking rasters and PDFs, and where CI testing and review time should be prioritised to keep development cycles fast. BASELINE, measured by four delegated lanes against main at f5c9c8453. The Packing pull-request wall has a median of 189 s over 13 recent runs, and 8 of the 13 are over OR-14's 180 s. 42 of 151 CI cycles went red (27.8%) across the last twenty merged pull requests. A full build_known_best_atlas --update costs about 4m45s, and main's DATA_REVISION rule requires one after every data commit and after every merge where both sides changed the data. PROFILE. Checking the atlas exports costs under one CPU-second per pull request and none of the wall. About 97% of an atlas rebuild's per-case pool re-proves the non-overlap of unchanged witnesses in mpmath; drawing the six exports is about 20 s. The pull-request wall is set by suite-a or suite-b in 10 of 15 runs and by frontend in 5, where biome, eslint and tsc have replaced Chromium as the tail. Of 15 sampled red runs, 6 were causes the --push floor catches locally, 4 were gate-budget timing findings, and 4 were inherited from a red main. TARGET. The Packing pull-request wall at or under 180 s on five consecutive exact-head runs, which is think-g4n9's own re-enforcement condition. An atlas re-pin under 60 s. The pre-push floor enforced by a hook at a measured cost. No pull request failed by a finding its change did not cause. GUARD. No check is deleted and none becomes optional. Nothing leaves the pull-request surface without OR-13's own measurement. Any faster regeneration path must produce output byte-identical to a full --update on the same tree, and the deep gate keeps its full rebuild from source.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-374 | tool_validation | 11 | ready | 0 | think-g4n9 | check_pr_wall --sample over the first five runs after the shard lands, recorded in gate-budgets.yaml's pull_request_walls. |
+| BC-375 | tool_validation | 11 | ready | 0 | think-6grx | Timed --update --composites against a full --update on one tree, and a byte comparison of their outputs. |
+| BC-376 | tool_validation | 11 | ready | 0 | think-oc16 | --push walls on five recent narrow diffs, with and without a cached type check. |
+| BC-377 | tool_validation | 11 | blocked | 1 | think-du2j | The owner's answer, then the lane B count re-run over the next twenty merged pull requests. |
+| BC-378 | tool_validation | 11 | ready | 2 | think-d3z8 | The tool's output over the same twenty pull requests lane B counted, reconciled against the receipt. |
+
 ## Series
 
 | id | status | title | rounds | opened because |

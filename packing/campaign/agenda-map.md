@@ -2,7 +2,7 @@
 
 # Agenda map
 
-362 agenda commitments across 38 agendas, as declared in each agenda's own frontmatter.
+367 agenda commitments across 39 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **14** in_progress, **16** ready, **21** tentative, **68** blocked, **61** stopped, **182** complete.
+- **14** in_progress, **20** ready, **21** tentative, **69** blocked, **61** stopped, **182** complete.
 
-- **26 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **27 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`, `BC-377`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -71,6 +71,10 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-041 | `BC-369` | in_progress | 1 | efficiency | tool_validation | The deep gate costs about 45 minutes of wall and its exhaustive tier runs at 1.376x its own declared price,… | `think-zmos` |
 | agenda-041 | `BC-372` | in_progress | 2 | insight | research | Can this repository's own site sets cover at the external side L = 4613/1000 at all, and at which shrink do… | `think-xdoh` |
 | agenda-041 | `BC-373` | in_progress | 2 | insight | research | Does T-026's threshold family still decide at the 2880-step net, and what does the finer net buy over the… | `think-gvlg` |
+| agenda-042 | `BC-374` | ready | 0 | efficiency | tool_validation | Does a third suite shard, plus splitting frontend's lint and type work away from its Chromium step, bring the… | `think-g4n9` |
+| agenda-042 | `BC-375` | ready | 0 | efficiency | tool_validation | Can a re-pin, or a regeneration after a merge, redraw the two atlas composites and their six exports without… | `think-6grx` |
+| agenda-042 | `BC-376` | ready | 0 | process | tool_validation | Can the --push floor be enforced by a pre-push hook at a cost low enough that nobody bypasses it, and what… | `think-oc16` |
+| agenda-042 | `BC-378` | ready | 2 | efficiency | tool_validation | Can a pull request's cycle cost be read by a tool instead of narrated: its cycles, red share, runner-minutes,… | `think-d3z8` |
 
 ## Blocked, and on what
 
@@ -146,6 +150,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-037 | `BC-358` | 1 | — | no | think-g3j7 must land a new reader for weighted-majority and floor atoms without mutating T-025/T-026 verify_claim.py.… |
 | agenda-040 | `BC-364` | 2 | `BC-363` | yes | The non-convex box-avoidance domain predicate (BC-204) and a conflict-edge atom class in the relational reader. |
 | agenda-040 | `BC-365` | 3 | — | no | An unshrunk exact-orientation verifier generalised from cases/green17/interval_audit.py and an unshrunk column… |
+| agenda-042 | `BC-377` | 1 | — | no | The owner's decision on which gate-budget rules fail a pull request. OR-17 and OR-14 were both set by the owner, so the… |
 
 ## Discharged elsewhere
 
@@ -207,10 +212,23 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-037 | active | 1 |  | 1 | 1 | 1 | 1 | 5 |
 | agenda-040 | active |  | 1 |  | 2 | 1 | 3 | 7 |
 | agenda-041 | active | 5 |  |  |  |  | 1 | 6 |
+| agenda-042 | active |  | 4 |  | 1 |  |  | 5 |
 
 ## By program
 
 A program is a line of work that spans agendas; its cells carry one `program` slug. Each is listed in dependency order where `depends_on` gives one and by id otherwise, and its open frontier is the cells not yet terminal.
+
+### `development-cycle`
+
+| agenda | id | state | question |
+| --- | --- | --- | --- |
+| agenda-042 | `BC-374` | ready | Does a third suite shard, plus splitting frontend's lint and type work away from its Chromium step,… |
+| agenda-042 | `BC-375` | ready | Can a re-pin, or a regeneration after a merge, redraw the two atlas composites and their six… |
+| agenda-042 | `BC-376` | ready | Can the --push floor be enforced by a pre-push hook at a cost low enough that nobody bypasses it,… |
+| agenda-042 | `BC-377` | blocked | Which gate-budget findings should fail a pull request, and how is a red main kept from failing… |
+| agenda-042 | `BC-378` | ready | Can a pull request's cycle cost be read by a tool instead of narrated: its cycles, red share,… |
+
+Open frontier: `BC-374`, `BC-375`, `BC-376`, `BC-377`, `BC-378`.
 
 ### `gate-cost`
 

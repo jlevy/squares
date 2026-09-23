@@ -145,8 +145,8 @@ hypothesis status and summarizes experiment verdicts, and the
 
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
-| Agendas | 38 | 18 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 362 | 182 complete; 61 stopped; 68 blocked; 16 ready; 21 tentative; 14 in progress |
+| Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
+| Commitments | 367 | 182 complete; 61 stopped; 69 blocked; 20 ready; 21 tentative; 14 in progress |
 | Sessions | 151 | 92 completed; 59 stopped; all terminal |
 | Explorations | 40 | 24 linked to proposed hypotheses; 16 uncodified |
 | Hypotheses | 170 | 29 confirmed; 31 refuted; 55 blocked; 17 unresolved; 5 open; 29 open questions; 2 result registered; 2 abandoned; 0 running |
@@ -555,6 +555,10 @@ case or experiment separately.
 | [Exp-224 n=19 at Four Times the Budget](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-224-n19-10x/exp-224-n19-10x-receipt.md) | research synthesis | record | retained | — |
 | [Exp-225 n=27, n=28 and n=29 at 548/100 by Re-Bumping the n=29 Atoms](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-225-n27-n28-548-100-rebump-receipt.md) | research synthesis | record | retained | — |
 | [Exp-226 The `n = 11` Threshold Atoms at the 2880-Step Net](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-226-n11-net2880-receipt.md) | research synthesis | record | retained | — |
+| [Atlas Exports Receipt (W5 efficiency block, agenda-042, `think-6grx`)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/atlas-exports-receipt.md) | research synthesis | record | retained | — |
+| [Pull-Request Cycle Receipt (W5 efficiency block, agenda-042, `think-oc16`, `think-du2j`)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/pr-cycle-receipt.md) | research synthesis | record | retained | — |
+| [Pull-Request Wall Receipt (W5 efficiency block, agenda-042, `think-g4n9`)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/pr-wall-receipt.md) | research synthesis | record | retained | — |
+| [Suite Shards Receipt (W5 efficiency block, agenda-042, `think-g4n9`)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/suite-shards-receipt.md) | research synthesis | record | retained | — |
 | [Handoff: the Low-`n` Review, the Efficiency Block, and the 2880 Rung, 22 September 2026](docs/project/handoff-2026-09-22-low-n-review-and-the-2880-rung.md) | dated handoff record | record | retained | — |
 | [n=20 973/200 T-021-Seeded Four-Grid Window-7 Covering Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-receipt.md) | research synthesis | record | retained | — |
 | [n=20 973/200 T-021-Seeded Four-Grid Window-7 2400 s Receipt](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-2400-receipt.md) | research synthesis | record | retained | — |
