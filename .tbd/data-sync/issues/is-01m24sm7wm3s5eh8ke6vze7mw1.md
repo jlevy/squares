@@ -3,9 +3,9 @@ type: is
 id: is-01m24sm7wm3s5eh8ke6vze7mw1
 title: "N11 daytime: strategic research blocks after the combined merge"
 kind: epic
-status: in_progress
+status: closed
 priority: 1
-version: 51
+version: 52
 spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
@@ -44,7 +44,11 @@ child_order_hints:
   - is-01m2mm43z5rhrhwg1ac775r1sc
   - is-01m2mmq0d31xcfva6p0nspxv9n
 created_at: 2026-09-10T04:36:14.355Z
-updated_at: 2026-09-16T08:18:13.026Z
+updated_at: 2026-09-23T03:37:25.692Z
+closed_at: 2026-09-23T03:37:25.692Z
+close_reason: "PR 224 reconciliation is complete at df0cb3032d5412964b717a46f861abdd31d3346e: all hosted packing and certificate-page checks passed, GitHub reports CLEAN/MERGEABLE, BC-373 is complete, and Session 151 remains historically stopped."
+resolution: null
+duplicate_of: null
 ---
 The interrupted consecutive overnight run has been replaced by independent daytime
 blocks. Each block lasts 60–120 minutes, except the 30-minute strategy intake, and gets
