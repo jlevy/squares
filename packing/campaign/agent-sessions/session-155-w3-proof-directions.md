@@ -294,8 +294,11 @@ session:
     bound.
   stop_reason: null
   next_action: >-
-    Update generated views, verify final snapshot headroom, run the selected push gate,
-    and publish a draft PR for one required hosted full gate before session closure.
+    Wait for the root-reviewed PR 224 repair to pass exact-head CI and merge. Then merge
+    resulting main into W3, preserve every frozen proof and research artifact, regenerate
+    views, directly remeasure the combined snapshot, run the applicable local push gate,
+    publish the draft PR, and dispatch exactly one hosted full checkpoint. After closure,
+    the user chooses among the shaped candidates; no experiment is selected automatically.
 ---
 # W3 Proof-Direction Integration
 
@@ -316,6 +319,43 @@ Its task-tree interval includes the small final PR 224 monitoring, body and read
 closeout after that sibling’s own cost cutoff; it does not overlap the costs recorded by
 Session 154. Root coordination time is excluded from the two cost receipts that will
 close the session.
+
+## Publication handoff
+
+The reviewed research checkpoint is `9de34efe5`, followed by the record-only validation
+replan `3a0d163bf`. The required base repair was root-reviewed at PR 224 data head
+`e7c8cca1b` and export head `63bec4a54`; its final merge commit is deliberately not
+guessed here. This branch remains local until that repair passes exact-head CI and
+merges.
+
+The main integration must preserve four byte-level boundaries: the native n11 full
+receipt, row journal and all 19 frozen proof inputs; T-033’s source certificate,
+dilation-limit corollary and earlier result identifiers; all 20 current promoted case
+bounds; and both Sessions 153 and 154 with their five cost receipts.
+It must also retain X-043, X-044 and X-045, all three W3 diagnostic tools, and all seven
+original JSON receipts byte for byte.
+Any merge conflict or semantic generated-view delta returns to root review before push.
+
+After integration, regenerate the ledger, Session close view, SYNOPSIS, document map and
+any data-pinned exports selected by the actual diff.
+Measure the real combined mutation snapshot instead of carrying forward the provisional
+three-branch arithmetic.
+Run the repository-selected local push gate with `PYTHON_CPU_COUNT=2`, one outer job and
+two inner workers, then publish a draft PR titled **“W3: integrate Kleddamag and
+Tokoharu results into new proof strategies.”** Its description leads with the measured
+branch cost, credits Kleddamag, Tokoharu, wand125 and inherited Guzhou checking at their
+pinned upstream revisions, and states that this is reviewed ideation with bounded
+diagnostics and no new proved bound.
+Dispatch exactly one fresh hosted full checkpoint on the stable integrated research
+head; do not repeat the native proof or sibling full gates.
+
+The pre-merge selected push on `9de34efe5` ended with exit 130 when the owner changed
+the required base. It entered the reachable-step executor, emitted no completed-step
+result and supplies no pass evidence.
+Session closure requires the final cost refresh, the exact merged-head local and hosted
+results, a direct snapshot measurement, and a handoff that asks the user to prioritize
+the shaped W3 candidates rather than automatically opening a numerical campaign or a new
+H id.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
