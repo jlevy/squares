@@ -137,8 +137,15 @@ agenda:
       development.md and enforced nowhere; lefthook has only a pre-commit hook. The
       --edit tier inside it measured 181.1 s at four CPUs on 2026-09-23, with
       basedpyright its longest step, so the floor costs about three minutes before any
-      reachable test runs. Measure --push on a sample of narrow diffs, and measure what
-      an incremental or scoped type check buys, before proposing the hook.
+      reachable test runs. The first narrow-diff reading is this block's own commit
+      d1d43d0f2, which changed only Markdown and YAML. --push against origin/main
+      selected 55 of 365 test files and took 464 s of wall at four CPUs. 360.6 s of that
+      was reachable behavioural tests (1,641 of them), and basedpyright took 130.5 s. A
+      documentation change should not reach six minutes of tests, so the selector's
+      always-included walkers and text-mention rule are the first thing to measure,
+      ahead of the type floor. Measure --push on a sample of narrow diffs, and measure
+      what a narrower selection and an incremental or scoped type check buy, before
+      proposing the hook.
       Kill: a hook whose median exceeds a declared ceiling on narrow diffs. A slow
       mandatory hook is bypassed, and a bypassed hook reports nothing.
     entry: >-
@@ -264,7 +271,7 @@ What is slow is **regenerating** and **merging**:
 | One full `build_known_best_atlas --update` | about 4m45s |
 | … share that re-proves unchanged witnesses in mpmath | about 97% of the per-case pool |
 | … share that draws the six exports | about 20 s |
-| Re-pins of `DATA_REVISION` on 2026-09-22, one full rebuild each | 5, about 24 min |
+| Re-pins of `DATA_REVISION` on 2026-09-22, one full rebuild each | 5, so about 24 min at 4m45s each |
 | PR #221’s merge of `main`: one rebuild to resolve, one to re-stamp | 9m29s |
 | Merges since the exports appeared (2026-08-26) with both parents changing them | 4, 2 of them conflicting |
 | The six exports’ history in the pack after 28 days | 88.1 MB of 525 MiB |
@@ -282,6 +289,10 @@ Ranked by what each costs every contributor, not by how easy it is:
    Every red cycle costs a full wall plus the author’s attention to diagnose and
    re-push. Of fifteen sampled red runs, six were causes the `--push` floor catches
    locally, and nothing enforces that floor.
+   It is also expensive: on this block’s own commit, which changed only Markdown and
+   YAML, `--push` reached 55 test files and took 464 s. A floor that costs almost eight
+   minutes for a documentation change gets skipped, so `BC-376` measures the selector
+   before it proposes a hook.
    Eight were not caused by the change under review at all: four gate-budget timing
    findings and four inherited from a red `main`. Those need an owner decision, so
    `BC-377` is blocked on it.
