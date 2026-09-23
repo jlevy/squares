@@ -181,7 +181,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [21]
-    state: ready
+    state: complete
     priority: 2
     question: Does a window-enriched point certificate retain at n21, side 122/25, below mass 21?
     hypotheses: [H-240]
@@ -201,11 +201,24 @@ agenda:
     - packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md
     parallel_group: overnight-low-n
     note: A retain would move s(21) from 4.85 to 4.88, the largest low-n point rung left.
+    outcomes:
+    - scope: H-240 on three site sets at n=21, side 122/25 (exp-229).
+      classification: achieved
+      result: >-
+        Set C's point certificate (1,228 atoms, mass 20.145724) is RETAINABLE from both
+        routes of decide_certificate at least cell mass 250001/250000. Set B converged
+        but its interval route stalled on a degenerate seam and refused; set A reached
+        its deadline. The register entry waits for the Fable max W2 review.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-122-25-receipt.md
+      disposition: continue
+      follow_up: think-gkki
   - id: BC-379
     purpose: research
     owner_focus: correctness
     instances: [12]
-    state: ready
+    state: stopped
     priority: 2
     question: Does the cutting loop certify an additive ceiling at n12, side 39609/10000?
     hypotheses: [H-241]
@@ -221,6 +234,17 @@ agenda:
     - packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md
     parallel_group: overnight-low-n
     note: A confirm is a decisive negative about a method and leaves n12 to thresholds or structure.
+    outcomes:
+    - scope: H-241, three cutting legs at n=12, side 39609/10000 (exp-230).
+      classification: time-limited
+      result: >-
+        No proved ceiling: the best family totals were 10.704 and 9.878 against 12,
+        while the unconverged row objective stayed near 11.98. Neither criterion was
+        reached; a later attempt needs a converged row loop or a larger family support.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md
+      disposition: defer-dependency
+      follow_up: think-xmm4
   - id: BC-380
     purpose: tool_validation
     owner_focus: correctness
@@ -246,6 +270,17 @@ agenda:
     - packing/campaign/explorations/X-047-low-n-angles-after-the-parent-core-advance.md
     parallel_group: overnight-low-n
     note: The first target runs of the clip are a later session's registered hypotheses.
+    outcomes:
+    - scope: The ParentClip build, dispatched at 03:10 PT.
+      classification: never-opened
+      result: >-
+        The lane was stopped by the harness session quota at about 03:15 PT before it
+        wrote any file; no instrument exists. It remains the enabling build for the n21
+        4.9 and n18 4.70 rungs.
+      evidence:
+      - packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md
+      disposition: defer-dependency
+      follow_up: think-m9iz
 ---
 # Agenda 042: The n11 Settlement Ladder and Low-n Angles
 

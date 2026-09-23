@@ -2634,7 +2634,7 @@ sessions:
   title: "Overnight W3 Continuation, Planning and Research Loop"
   status: in_progress
   primary_bead: think-nbij
-  phases: 3
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml

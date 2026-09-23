@@ -1,0 +1,10 @@
+../attic/agenda-042-lown/n21/B-covering-declared.json: n = 21, L = 122/25 = 4.880000, 1460 atoms, mass 20132143/1000000 = 20.132143
+  ceiling 4.988500, certifies every n >= 21
+  interval accepted=False enclosure=(Fraction(3756841, 4000000), Fraction(2000013, 2000000)) boxes=4894465 stalled=1608 (206s)
+../attic/agenda-042-lown/n21/B-covering-declared.json: REFUSED: the interval route refused it: ('Condition 5 every admissible centre covers mass 1',)
+../attic/agenda-042-lown/n21/B-covering-declared.json: REFUSED: 1608 boxes stalled; the interval route decided nothing there
+../attic/agenda-042-lown/n21/B-covering-declared.json: REFUSED: the enclosure has width: (Fraction(3756841, 4000000), Fraction(2000013, 2000000))
+
+real	3m25.945s
+user	1m26.553s
+sys	0m1.652s

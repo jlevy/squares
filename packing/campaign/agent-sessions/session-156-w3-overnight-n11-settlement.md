@@ -10,7 +10,7 @@ session:
   title: Overnight W3 Continuation, Planning and Research Loop
   date: '2026-09-23'
   started_at: '2026-09-23T06:50:00Z'
-  deadline_at: '2026-09-23T14:00:00Z'
+  deadline_at: '2026-09-23T20:30:00Z'
   branch: claude/w3-overnight-2026-09-23
   primary_bead: think-nbij
   status: in_progress
@@ -94,7 +94,7 @@ session:
     objective: >-
       Chunk 1 of agenda-042: BC-375's instrument and controls, BC-376's derivation, and
       the BC-378 and BC-379 stock runs.
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: The planning block registered the chunk's hypotheses.
     budget_minutes: 158
@@ -107,10 +107,47 @@ session:
       cd packing && uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: An instrument fails its positive or negative control.
     fallback: Record the failure as an instrument result and move the slot to the next ready item.
+    outcome: >-
+      H-237 exhausted (exp-227) and H-238 confirmed at census scope (exp-228). The
+      rung-0 instrument and reader were built, controlled and reviewed; its frozen run
+      and first resume closed 177 of 256 subtrees with three Trump-degenerate leaves
+      and no counterexample candidate. n21's point certificate at 122/25 is RETAINABLE
+      (exp-229); n12's ceiling run ended unsettled (exp-230). At about 03:15 PT the
+      harness session quota stopped every agent; the BC-380 build had written nothing.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md
+    - docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md
+    stop_reason: The harness session quota stopped all agents at about 03:15 PT; nothing resumed until the owner returned at 08:45 PT.
+    next_action: The owner asked to resume and replan; the continuation phase finishes rung 0 and reviews n21.
+  - workflow: research-loop
+    focus: correctness
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Continuation after the quota stop: finish rung 0's last 79 subtrees and run the
+      independent reader over the complete tree; put n21's certificate through its
+      Fable max W2 review and register it if accepted; consolidate every lane into the
+      record.
+    status: in_progress
+    entered_by: user_request
+    switch_reason: The owner returned after the quota stop and asked to resume the schedule from where things stood.
+    budget_minutes: 222
+    started_at: '2026-09-23T15:48:00Z'
+    deadline_at: '2026-09-23T19:30:00Z'
+    expected_output: >-
+      A reader verdict on the complete rung-0 tree, a reviewed n21 register decision,
+      and terminal records for every agenda-042 lane.
+    validation_command: >-
+      cd packing && uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: The resumed tree yields a non-degenerate leaf below U, or the n21 review rejects.
+    fallback: Record the bounded negative or the rejection at its scope and hand off.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Collect lane reports and review them at the chunk boundary.
+    next_action: Admit rung 0's final reader output and the n21 review.
   resource_rollups:
   - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
   - packing/campaign/resource-usage/agent-a13483195f4dfc5a9.yaml
@@ -125,7 +162,7 @@ session:
   - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
   - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
   budget:
-    wall_minutes: 430
+    wall_minutes: 820
     slice_minutes: 120
     finalization_minutes: 60
   stop_conditions:
@@ -292,6 +329,79 @@ session:
     elapsed_seconds: 4909.482
     elapsed_quality: platform_measured
     next_action: None; the two new minima inform any profile theorem.
+  - task: BC-378 and BC-379 stock runs at n21 and n12 (exp-229, exp-230)
+    operator: Opus 5.5, high
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: >-
+      n21 set C RETAINABLE at 122/25 with mass 20.145724; n12's cutting loop unsettled
+      near 11.98 with no proved family at 12. The agent itself was stopped by the
+      session quota after its runs and receipts were complete.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-122-25-receipt.md
+    files: []
+    checks:
+    - Both routes of decide_certificate accepted set C; sha256 b230f7cd.
+    uncertainty: An external SIGTERM of unknown source killed three processes at 09:17:27Z; each was rerun unchanged.
+    elapsed_seconds: 6890.038
+    elapsed_quality: platform_measured
+    next_action: Fable max W2 review of set C before a register entry.
+  - task: BC-375 H-236 rung-0 cell tree, build, controls, frozen run and first resume
+    operator: Opus 5.5, extra-high
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: >-
+      Producer and independent reader built and controlled; the frozen run solved 1.1e7
+      nodes in 3,300 s and the resume 6.7e7 more in 9,118 s; 177 of 256 subtrees closed
+      with every certificate reader-accepted and three Trump-degenerate leaves; 79
+      subtrees remained at the wall cap when the quota stopped the lane.
+    evidence:
+    - docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md
+    files:
+    - packing/cases/trump11/fixed_angle_tree.py
+    - packing/cases/trump11/fixed_angle_tree_check.py
+    - packing/tests/test_fixed_angle_tree.py
+    checks:
+    - Thirteen tests pass; ruff and BasedPyright clean; digests recorded before each run.
+    uncertainty: The tree is about 1,000 times larger than X-046 estimated; the lever for rung 1 is a stronger per-node relaxation.
+    elapsed_seconds: 6303.792
+    elapsed_quality: platform_measured
+    next_action: The coordinator relaunched the last 79 subtrees unchanged at 08:49 PT.
+  - task: W2 review of the rung-0 certificate contract
+    operator: Fable, extra-high
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: >-
+      Sound: core containment, separating axes, symmetry rows, leaf certificates,
+      degenerate leaves and completeness all hold; H-236 may be confirmed at verified,
+      exact, pending BC-241 if the reader closes the tree with at least one
+      Trump-degenerate leaf.
+    evidence:
+    - docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md
+    files: []
+    checks:
+    - Sixteen tampering probes refused with the right reason.
+    uncertainty: The registered n11 negative control is met only at producer level.
+    elapsed_seconds: 785.408
+    elapsed_quality: platform_measured
+    next_action: Apply the review's record corrections when admitting the final tree.
+  - task: BC-380 ParentClip and converter build
+    operator: Opus 5.5, extra-high
+    status: canceled
+    recording: contemporaneous
+    phase: 3
+    outcome: Stopped by the session quota a few minutes after dispatch, before writing any file.
+    evidence:
+    - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
+    files: []
+    checks: []
+    uncertainty: None; nothing was built.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Deferred to a later session under think-m9iz.
   outputs: []
   checks: []
   stop_reason: null

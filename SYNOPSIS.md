@@ -160,11 +160,11 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 369 | 186 complete; 61 stopped; 68 blocked; 19 ready; 21 tentative; 14 in progress |
+| Commitments | 369 | 187 complete; 62 stopped; 68 blocked; 17 ready; 21 tentative; 14 in progress |
 | Sessions | 156 | 96 completed; 59 stopped; 1 nonterminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 176 | 30 confirmed; 31 refuted; 56 blocked; 17 unresolved; 7 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 157 | 44 accepted; 36 rejected; 50 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 176 | 31 confirmed; 31 refuted; 56 blocked; 18 unresolved; 5 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 159 | 45 accepted; 36 rejected; 51 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 33 | 33 registered |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -573,6 +573,7 @@ case or experiment separately.
 | [H-222 Registration Review of exp-219 (Session 146, chunk 3)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-040/h222-registration-review.md) | research synthesis | record | retained | — |
 | [n=11 96/25 Corner-Clipped Covering Receipt (exp-219)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-040/exp-219-n11-96-25-clip-receipt.md) | research synthesis | record | retained | — |
 | [Bootstrap Receipt: a Fresh Clone Cannot Run the Research Loop (BC-368)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/bootstrap-receipt.md) | research synthesis | record | retained | — |
+| [BC-378 / H-240 receipt: n=21, L = 122/25, B = 9977/10000](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-122-25-receipt.md) | research synthesis | record | retained | — |
 | [Deep-Gate Wall Clock Receipt (W5 efficiency block, `think-zmos`)](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/deep-gate-wall-clock-receipt.md) | research synthesis | record | retained | — |
 | [Exp-221 n=17 Kleddamag Measure, Read Unrestricted](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-221-n17-kleddamag-unrestricted-receipt.md) | research synthesis | record | retained | — |
 | [Exp-222 Re-pricing the n=17 Kleddamag Measure on Its Own Catalogue](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-222-n17-repricing-receipt.md) | research synthesis | record | retained | — |
@@ -4371,8 +4372,8 @@ round that names the hypothesis, control roles included.
 | [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | The growth-cone route to a sup-norm ball around Trump’s pose larger than the BC-240 radius; capped at the BC-199 modulus by an exhaustion lemma (exp-227) | 1 | — |
 | [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | confirmed | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; confirmed at census scope by exp-228, support never proof | 1 | — |
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
-| [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | open | A window-enriched point certificate retains s(21) >= 122/25 below mass 21 | 0 | — |
-| [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | open | A proved depth-one ceiling of at least 12 at n12, side 39609/10000, kills every additive n12 route above 3.9609 | 0 | — |
+| [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | confirmed | A window-free point certificate retains s(21) >= 122/25 below mass 21 (exp-229); registration waits for the Fable max W2 review | 1 | — |
+| [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | unresolved | A proved depth-one ceiling of at least 12 at n12, side 39609/10000; exp-230’s loop ended unsettled near 11.98 | 1 | — |
 
 ### Confirmed
 
@@ -4593,7 +4594,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-149](packing/campaign/agent-sessions/session-149-n17-external-intake.md) | 3 | 1 | 370 | 185 | 2 | 18.66 h |
 | [session-150](packing/campaign/agent-sessions/session-150-n17-consolidation-and-correctness.md) | 4 | 15 | 3,783 | 2,015 | 37 | 17.66 h |
 | [session-151](packing/campaign/agent-sessions/session-151-low-n-review-and-first-party-n17.md) | 4 | 12 | 2,714 | 1,602 | 27 | 8.51 h |
-| [session-156](packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md) | 3 | 12 | 1,036 | 629 | 6 | 4.45 h |
+| [session-156](packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md) | 4 | 12 | 1,036 | 629 | 6 | 4.45 h |
 | *shared by 47 sessions* | — | 7 | 23,948 | 13,058 | 282 | 304.17 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
@@ -4685,9 +4686,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 157 rounds registered in `series-000`.
+There are 159 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 2765.7 wall-minutes.
+They record 2512.1 agent-minutes and 3022.6 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -4886,6 +4887,8 @@ archive beside it.
 | [exp-220](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-220-h222-n11-96-25-class-refreeze.md) | 11 | target | H-222 | Re-freeze of the exp-219 class certificate under the class claim strings | RETAINABLE UNDER THE CORNER CLASS HYPOTHESIS; the same 680 atoms; mass 10.868617 | accepted |
 | [exp-227](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md) | 11 | target | H-237 | Exact growth cone over 128 branches and 66 faces at Trump’s pose, with the BC-199 modulus as control | Growth minimum 0.05177; route radius capped at the BC-199 modulus by an exhaustion lemma | exhausted |
 | [exp-228](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md) | 11 | target | H-238 | Descent-filtered census of 1,000 jolted starts about Trump and Stromquist | No descent-stable three-class minimum below 3.885618; new minima at 3.8867460 and 3.8943219 | accepted |
+| [exp-229](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md) | 21 | target | H-240 | Column generation at side 122/25 on three site sets, then the gate | RETAINABLE on set C; 1,228 atoms; mass 20.145724; register waits for the W2 review | accepted |
+| [exp-230](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md) | 12 | target | H-241 | Cutting loop with the ceiling check at side 39609/10000, three legs | No proved family at 12 (best 10.704); row objective unsettled near 11.98 | unresolved |
 
 ### Cost and provenance
 
@@ -5048,10 +5051,12 @@ archive beside it.
 | exp-220 | One run of at most 2400 s, then the gate twice | 263 s | — | criterion | `ea7ea453` |
 | exp-227 | About four hours of derivation and exact LPs | 446 s | — | criterion | `04e08a00` |
 | exp-228 | About three hours; census 41 + 21 min | 3720 s | — | criterion | `84e41069` |
+| exp-229 | One or two runs of at most 3,600 s, then the gate | 6414 s | — | criterion | `69dac09a` |
+| exp-230 | About 90 minutes per leg; three legs | 9000 s | — | timebox | `69dac09a` |
 
-### What the 157 rounds jointly establish
+### What the 159 rounds jointly establish
 
-The 157 rounds use 2512.1 agent-minutes and 2765.7 wall-minutes under the campaign’s
+The 159 rounds use 2512.1 agent-minutes and 3022.6 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

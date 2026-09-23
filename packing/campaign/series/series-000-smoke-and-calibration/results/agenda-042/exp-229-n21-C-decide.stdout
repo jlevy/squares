@@ -1,0 +1,9 @@
+../attic/agenda-042-lown/n21/C-covering-declared.json: n = 21, L = 122/25 = 4.880000, 1228 atoms, mass 5036431/250000 = 20.145724
+  ceiling 4.988500, certifies every n >= 21
+  interval accepted=True enclosure=(Fraction(250001, 250000), Fraction(250001, 250000)) boxes=4289657 stalled=0 (67s)
+  exact    accepted=True least=250001/250000 (15s)
+  RETAINABLE: both routes accept and agree at 250001/250000; sha256 b230f7cd6806343f115331caf53f02019cc634a8959359684581835a0cc7fb0f
+
+real	1m22.519s
+user	1m43.863s
+sys	0m0.996s

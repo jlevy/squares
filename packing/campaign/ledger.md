@@ -170,7 +170,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-153](agent-sessions/session-153-native-n11-parent-core.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (correctness) | 4 | think-d010 | Publish the coordinator-approved PR 223 closure for completed think-d010 and require its final hosted checks before ready; the separately requested W3 review owns the next research ordering. Preserve the c183cc9ab proof scope and do not merge either stacked PR. |
 | [session-154](agent-sessions/session-154-pr221-pr222-reconciliation.md) | completed | contemporaneous | `remediation` (correctness) | `remediation` (correctness) | 1 | think-t30b | Render T-033's missing standalone claim document under think-vx26. |
 | [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
-| [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 3 | think-nbij | Run chunk 1 of agenda-042 and review its lanes at the chunk boundary. |
+| [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (correctness) | 4 | think-nbij | Run chunk 1 of agenda-042 and review its lanes at the chunk boundary. |
 
 ### Workflow summary
 
@@ -183,7 +183,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 27 | 1 | 84 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 37 | 1 |
-| `research-loop` | 30 | 4 | 106 | 8 |
+| `research-loop` | 30 | 4 | 107 | 8 |
 | `pipeline-improvement` | 36 | 2 | 154 | 5 |
 | `documentation-pass` | 1 | 0 | 25 | 1 |
 | `remediation` | 2 | 1 | 2 | 3 |
@@ -830,15 +830,15 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | BC-375 | research | 11 | in_progress | 1 | think-ie35 | The frozen instrument digests and the run output, admitted from attic/rung0/ into results/agenda-042/. |
 | BC-376 | research | 11 | complete | 1 | think-cj7r | packing/cases/trump11/capture_radius.py and its receipt. |
 | BC-377 | research | 11 | complete | 2 | think-cdc2 | The census receipt under results/agenda-042/. |
-| BC-378 | research | 21 | ready | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
-| BC-379 | research | 12 | ready | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
+| BC-378 | research | 21 | complete | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
+| BC-379 | research | 12 | stopped | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
 | BC-380 | tool_validation | 12, 18, 21 | ready | 3 | think-m9iz | parent_clip.py, freeze_to_parent_core.py and their tests. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 157 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 159 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1018,8 +1018,8 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | H-237 | exhausted | proof | There is an explicit rational r > rho = 808514697/200000000000 such th |  | 1 |  | 7.4m wall |
 | H-238 | confirmed | search | Every descent-stable local minimum of the n=11 problem reached by the  |  | 1 |  | 62.0m wall |
 | H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
-| H-240 | open | search | A weighted fractional unavoidable-set certificate with point atoms on  |  | 0 |  |  |
-| H-241 | open | search | At n=12, side 39609/10000, shrink 9977/10000, a depth-one family of cl |  | 0 |  |  |
+| H-240 | confirmed | search | A weighted fractional unavoidable-set certificate with point atoms on  |  | 1 |  | 106.9m wall |
+| H-241 | unresolved | search | At n=12, side 39609/10000, shrink 9977/10000, a depth-one family of cl |  | 1 |  | 150.0m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1084,7 +1084,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 | exp-162 | series-000 | 20 | Cursor session-140 | H-218 | The Session-140 research wall expired with no RETAINABLE freeze on the H-218 sweep. Closest masses were leftover n=20 971/200 at 19.910044 unconverged and leftover n=12 3969/1000 at 12.091168 after crossing 12. T-028 at n=18 does not confirm H-218. The unfinished float LPs remain unresolved; their objectives do not refute their site sets. |
 
-### unresolved (50)
+### unresolved (51)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1138,6 +1138,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-214 | series-000 | 13 | Claude session-144 Opus runner | H-223 | The converged restricted optimum 15.5656 refutes this site set only, and the accepted depth-one family has total 85/8, below 13, so H-223 is neither confirmed nor killed at this scope. |
 | exp-215 | series-000 | 26 | Claude session-144 Opus runner | H-225 | The loop hit its deadline with rows still violated at the exact-integer plateau 25.000000 that Session 141 also saw at n=26; an unfinished loop decides nothing and this site set is not even refuted. |
 | exp-218 | series-000 | 17 | Claude session-144 Opus runner | H-224 | The converged restricted optimum 17.0423 refutes point certificates on this site set only, and the accepted depth-one family has total just below 14, not 17, so H-224 is neither confirmed nor killed at this scope; the fixed-shrink point route at n=17 is bounded below by 14 for every site set at 23/5 and above by this site set's 17.04. |
+| exp-230 | series-000 | 12 | Claude Session 156, Opus high lane | H-241 | The loop ran to its time limits with the covering value unsettled just below 12 and no family reaching 12, so whether additive routes at n12 survive above 3.9609 is still open; a row objective of 11.98 is suggestive of a little headroom but is not a value. |
 
 ### blocked (11)
 
@@ -1155,7 +1156,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-158 | series-000 | 11 | Codex BC303 T2 charge-sweep agent | H-160 | The September 14 strategy reset paused this route before the target charge ran; no target receipt or scientific verdict exists. |
 | exp-160 | series-000 | 11 | Codex BC303 H-162 retained-receipt analyst | H-162 | The September 14 strategy reset paused this route with no exp-158 target receipt; no H-162 comparison or scientific verdict exists. |
 
-### accepted (44)
+### accepted (45)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1203,6 +1204,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-219 | series-000 | 11 | Claude session-145 coordinator | H-222 | Both gate routes accept the clipped covering of mass 10868617/1000000 < 11 with least charge 2000013/2000000 >= 1 on the corner-clipped domain at 96/25, so no packing of eleven unit squares in a square of side 96/25 has every square avoiding the four corner triangles x + y <= 1/2; this confirms H-222 at its registered scope and is a conditional exclusion, not a bound on s(11). |
 | exp-220 | series-000 | 11 | Claude session-146 Opus lane | H-222 | The same 680-atom covering as exp-219, now frozen with the claim "corner class d = 1/2 excluded at s(11) >= 96/25" and the id C-n011-fractional-96-25-clip-1-2; both gate routes accept it under the flag and the gate refuses it without the flag, so the retained bytes declare what they prove. The corrected gate now refuses exp-219's bytes on their unconditional claim string, and exp-220 supersedes exp-219 as the record of the exclusion; the registration of the reviewed statement remains BC-367. |
 | exp-228 | series-000 | 11 | Claude Session 156, Opus extra-high lane | H-238 | The census found none, and every apparent candidate was refuted by an exact descending packing; this confirms H-238 at its declared census scope only, since descent-stability is empirical and starts are jolts of at most 0.3 about two known packings. |
+| exp-229 | series-000 | 21 | Claude Session 156, Opus high lane | H-240 | Both routes accept set C's certificate at least cell mass 250001/250000 with total mass 20.145724 < 21, so the gate certifies the covering at side 122/25; the claim s(21) >= 122/25 is registered only after the W2 review the hypothesis requires. |
 
 ### baseline (12)
 
@@ -1262,10 +1264,11 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-209 | H-212 | 1 round unrecorded | dependency |  |  |
 | exp-210 | H-212 | 1 round unrecorded | dependency |  |  |
 | exp-215 | H-225 | 62.6m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res |  |
+| exp-230 | H-241 | 150.0m wall | timebox | The leg-3 warm state, retained as results/agenda-042/exp-230 |  |
 
 ## Effort
 
-157 rounds, 2512.1 agent-minutes, 2765.7 wall-minutes.
+159 rounds, 2512.1 agent-minutes, 3022.6 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 
