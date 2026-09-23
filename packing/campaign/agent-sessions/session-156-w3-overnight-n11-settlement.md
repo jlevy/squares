@@ -143,8 +143,8 @@ session:
 ---
 # Overnight W3 Continuation, Planning and Research Loop
 
-The owner asked on 22 September for a thorough review of PR 230’s research directions,
-a map of the most promising, and an overnight run: a W3 continuation that looks for
+The owner asked on 22 September for a thorough review of PR 230’s research directions, a
+map of the most promising, and an overnight run: a W3 continuation that looks for
 creative routes to a significant or conclusive n11 result, with separate agents taking
 different angles on the other small cases, then a planning block and a research loop.
 Opus 5.5 coordinates and does mechanical work; Fable extra-high and Fable max do the

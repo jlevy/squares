@@ -5,8 +5,8 @@ Four independent reviews of [PR 230](https://github.com/jlevy/squares/pull/230) 
 [X-043](../../../packing/campaign/explorations/X-043-new-lower-bound-proof-directions.md),
 [X-044](../../../packing/campaign/explorations/X-044-low-n-certificate-transfer.md) and
 [X-045](../../../packing/campaign/explorations/X-045-n11-global-capture-and-exact-optimality.md)
-(Fable, extra-high thinking), and one audit of the retained tools, receipts and PR status
-(Opus 5.5, extra-high thinking).
+(Fable, extra-high thinking), and one audit of the retained tools, receipts and PR
+status (Opus 5.5, extra-high thinking).
 [Session 156](../../../packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md)
 commissioned them at the start of the overnight W3 continuation, and they set its
 direction.
@@ -31,15 +31,14 @@ arithmetic rather than runs.
    Markót and Csendes proved circle packings $n=28$–$30$ this way by interval
    branch-and-bound; Montanher and coauthors did rigorous unit squares in a circle.
    At fixed angles the centre problem is an exact disjunctive LP, so **the bottleneck is
-   the eleven angles**.
-   The X-045 reviewer proposes a rigorous form of H-112 as the first theorem milestone:
-   every packing with six axis-aligned squares and five sharing one angle has side at
-   least $U$, with equality only at Trump.
+   the eleven angles**. The X-045 reviewer proposes a rigorous form of H-112 as the
+   first theorem milestone: every packing with six axis-aligned squares and five sharing
+   one angle has side at least $U$, with equality only at Trump.
 
 3. **Kleddamag’s certificate has no side headroom.** Over its 12,028 rows the least core
-   collar $A-B$ is $3.26\times10^{-9}$, so the unchanged-core ceiling is
-   $31/8+10^{-8}$. The charge is pinned by the corner-flush parent pose at every angle:
-   11,981 rows attain their minimum there, at $1{,}000{,}047{,}518$ units.
+   collar $A-B$ is $3.26\times10^{-9}$, so the unchanged-core ceiling is $31/8+10^{-8}$.
+   The charge is pinned by the corner-flush parent pose at every angle: 11,981 rows
+   attain their minimum there, at $1{,}000{,}047{,}518$ units.
    Any n11 certificate gain therefore needs an **adaptive parent-core producer with
    two-of-five and three-of-five features**, which the record does not have; the
    cheapest sound next form is a corner two-band count $4g_c+7g_o>M$ (H-155’s question).
@@ -50,16 +49,15 @@ arithmetic rather than runs.
    The live form is a re-priced LP with a direction-dependent parent-centre clip in the
    existing column generator, decided by the n-general native parent-core verifier.
    Per-target slack at a 720-step net: n12 at 3.97, 0.017%; n18 at 4.70, 0.593%; n19 at
-   4.82, 0.421%; **n21 at 4.90, 5.48%**.
-   A cutting-loop run at n12 with the ceiling reader is a shared kill switch: a certified
-   depth-one family of value at least 12 kills every additive route at n12 from 3.97 up.
+   4.82, 0.421%; **n21 at 4.90, 5.48%**. A cutting-loop run at n12 with the ceiling
+   reader is a shared kill switch: a certified depth-one family of value at least 12
+   kills every additive route at n12 from 3.97 up.
 
 5. **The retained evidence is sound.** All seven receipts replay to identical exact
    values, every figure the three reports quote matches its receipt, and hosted
-   checkpoint
-   [35822748072](https://github.com/jlevy/squares/actions/runs/35822748072) passed.
-   Three older receipts came from unretained tool versions; the margins, count-slack and
-   corrected structural receipts are authoritative.
+   checkpoint [35822748072](https://github.com/jlevy/squares/actions/runs/35822748072)
+   passed. Three older receipts came from unretained tool versions; the margins,
+   count-slack and corrected structural receipts are authoritative.
 
 ## Soundness Findings
 
