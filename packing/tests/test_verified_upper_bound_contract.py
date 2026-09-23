@@ -70,6 +70,10 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/cases/w3_lower_bound_directions/frontier_transfer_audit.py": (
+        "reads the verified ceiling to measure a bounded transfer-diagnostic gap; it "
+        "does not identify that ceiling with s(n) or claim optimality"
+    ),
     "packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md": (
         "a retained prototype's notes, listing the record fields the slideshow panel "
         "deliberately does not draw; it names this field to say the figure omits it "

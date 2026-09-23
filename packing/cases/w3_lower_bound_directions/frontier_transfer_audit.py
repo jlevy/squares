@@ -17,7 +17,7 @@ from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
 
-import yaml
+from sqpack.yamlio import safe_load
 
 
 def git(root: Path, *args: str) -> str:
@@ -47,7 +47,7 @@ def main() -> None:
     for n in range(11, 26):
         source = f"packing/frontier/n-{n:03d}.md"
         text = git(args.repo, "show", f"{commit}:{source}")
-        record = yaml.safe_load(text.split("---", 2)[1])["packing"]
+        record = safe_load(text.split("---", 2)[1])["packing"]
         lower = record["verified_lower_bound"]
         upper = record["verified_upper_bound"]
         reported = record["reported_upper_bound"]
