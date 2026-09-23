@@ -267,6 +267,31 @@ session:
     elapsed_seconds: 2001.641
     elapsed_quality: platform_measured
     next_action: Idea row 246, a second-order-exact isolation theorem.
+  - task: BC-377 H-238 descent-filtered census (exp-228)
+    operator: Opus 5.5, extra-high
+    status: completed
+    recording: contemporaneous
+    phase: 3
+    outcome: >-
+      Support only: no descent-stable three-class minimum below Stromquist's value in
+      1,000 starts; new descent-stable minima at 3.8867460 (two classes) and 3.8943219
+      (three classes).
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md
+    files:
+    - packing/src/sqpack/research/descent_filter.py
+    - packing/devtools/run_basin_hopping.py
+    - packing/tests/test_descent_filter.py
+    checks:
+    - Ruff, format and BasedPyright clean; nine tests pass (coordinator re-run).
+    - Ten census controls passed before launch.
+    uncertainty: >-
+      Empirical; not replayable bit for bit under wall-clock quench limits. An external
+      SIGTERM of unknown source interrupted the first run after 604 starts, and a
+      resume-only flag carried the records forward.
+    elapsed_seconds: 4909.482
+    elapsed_quality: platform_measured
+    next_action: None; the two new minima inform any profile theorem.
   outputs: []
   checks: []
   stop_reason: null

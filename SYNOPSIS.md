@@ -160,11 +160,11 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 369 | 185 complete; 61 stopped; 68 blocked; 20 ready; 21 tentative; 14 in progress |
+| Commitments | 369 | 186 complete; 61 stopped; 68 blocked; 19 ready; 21 tentative; 14 in progress |
 | Sessions | 156 | 96 completed; 59 stopped; 1 nonterminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 176 | 29 confirmed; 31 refuted; 57 blocked; 17 unresolved; 7 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 156 | 43 accepted; 36 rejected; 50 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 176 | 30 confirmed; 31 refuted; 56 blocked; 17 unresolved; 7 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 157 | 44 accepted; 36 rejected; 50 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 33 | 33 registered |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -4368,7 +4368,7 @@ round that names the hypothesis, control roles included.
 | [H-232](packing/campaign/hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | blocked | The all-deep corner class at n=11, 96/25 has covering value below 7 in the point-plus-2-of-3 language on the box-cut domain; blocked on the box cut, the refund and an exact 2-of-3 reader | 0 | — |
 | [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | blocked | Trump is globally optimal at its own angle: every six-axis plus five-common-angle packing with half-tangent within 10^-6 of Trump’s has side at least U; rung 0 of the H-112 ladder, blocked on the cell-tree instrument | 0 | — |
 | [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | The growth-cone route to a sup-norm ball around Trump’s pose larger than the BC-240 radius; capped at the BC-199 modulus by an exhaustion lemma (exp-227) | 1 | — |
-| [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | blocked | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; blocked on the descent filter | 0 | — |
+| [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | confirmed | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; confirmed at census scope by exp-228, support never proof | 1 | — |
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
 | [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | open | A window-enriched point certificate retains s(21) >= 122/25 below mass 21 | 0 | — |
 | [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | open | A proved depth-one ceiling of at least 12 at n12, side 39609/10000, kills every additive n12 route above 3.9609 | 0 | — |
@@ -4684,9 +4684,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 156 rounds registered in `series-000`.
+There are 157 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 2703.7 wall-minutes.
+They record 2512.1 agent-minutes and 2765.7 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -4884,6 +4884,7 @@ archive beside it.
 | [exp-219](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-219-h222-n11-96-25-octagon-class.md) | 11 | target | H-222 | Corner-clipped covering at 96/25, d = 1/2 | RETAINABLE UNDER THE CORNER CLASS HYPOTHESIS; mass 10.868617 | accepted |
 | [exp-220](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-220-h222-n11-96-25-class-refreeze.md) | 11 | target | H-222 | Re-freeze of the exp-219 class certificate under the class claim strings | RETAINABLE UNDER THE CORNER CLASS HYPOTHESIS; the same 680 atoms; mass 10.868617 | accepted |
 | [exp-227](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md) | 11 | target | H-237 | Exact growth cone over 128 branches and 66 faces at Trump’s pose, with the BC-199 modulus as control | Growth minimum 0.05177; route radius capped at the BC-199 modulus by an exhaustion lemma | exhausted |
+| [exp-228](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md) | 11 | target | H-238 | Descent-filtered census of 1,000 jolted starts about Trump and Stromquist | No descent-stable three-class minimum below 3.885618; new minima at 3.8867460 and 3.8943219 | accepted |
 
 ### Cost and provenance
 
@@ -5045,10 +5046,11 @@ archive beside it.
 | exp-219 | One run of at most 2400 s, then the gate | 307 s | — | criterion | `8f4eca7d` |
 | exp-220 | One run of at most 2400 s, then the gate twice | 263 s | — | criterion | `ea7ea453` |
 | exp-227 | About four hours of derivation and exact LPs | 446 s | — | criterion | `04e08a00` |
+| exp-228 | About three hours; census 41 + 21 min | 3720 s | — | criterion | `84e41069` |
 
-### What the 156 rounds jointly establish
+### What the 157 rounds jointly establish
 
-The 156 rounds use 2512.1 agent-minutes and 2703.7 wall-minutes under the campaign’s
+The 157 rounds use 2512.1 agent-minutes and 2765.7 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

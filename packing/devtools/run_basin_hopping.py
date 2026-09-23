@@ -47,7 +47,19 @@ from pathlib import Path
 from typing import Any
 
 from sqpack.project import configured_project_root
-from sqpack.research.quench import quench_bracket
+from sqpack.research.descent_filter import (
+    STROMQUIST_11_SIDE,
+    DescentFilterConfig,
+    DescentFilterResult,
+    bounding_side,
+    class_summary,
+    descent_filter,
+    exact_witness,
+    min_pair_gap,
+    rattling_squares,
+    stromquist_11_pose,
+)
+from sqpack.research.quench import quench_bracket, solve_to_fixed_point
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
 from sqpack.yamlio import safe_load
 
@@ -266,6 +278,11 @@ def run_seed(
 
 
 def main(argv: list[str] | None = None) -> int:
+    # The census is a subcommand dispatched before the stock parser, so every existing
+    # invocation parses exactly as it did.
+    raw = sys.argv[1:] if argv is None else argv
+    if raw and raw[0] == "census":
+        return census_main(raw[1:])
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cells", required=True, help="comma-separated n")
     parser.add_argument("--seeds", required=True, help="comma-separated seeds")
@@ -381,6 +398,438 @@ def main(argv: list[str] | None = None) -> int:
     meta["host"]["loadavg_after"] = os.getloadavg()
     (out / "meta.json").write_text(json.dumps(meta, indent=2, sort_keys=True) + "\n")
     print(json.dumps({"wrote": shown(out)}))
+    return 0
+
+
+# --- Census mode (H-238) -------------------------------------------------------------
+#
+#   run_basin_hopping.py census --starts 1000 --out ../attic/census/run --stalls FILE
+#
+# Jolted starts about Trump's and Stromquist's n = 11 packings, each quenched by the stock
+# `quench_bracket` and then passed through `sqpack.research.descent_filter`, which
+# searches the full pose space for a verified side decrease. An endpoint the filter
+# certifies a decrease from is rejected; the filter's terminal pose is recorded either
+# way, and every descent-stable terminal carries an exact rational witness. The census
+# refuses to run unless its controls pass first: Trump and Stromquist stable, two
+# non-minimal Trump variants rejected, and every supplied stall rejected.
+
+CENSUS_KILL_SIDE = 3.885618  # H-238's frozen threshold, just below 2 + 4 sqrt 2 / 3
+CENSUS_CLASS_TOL = 1e-3  # orientation classes are counted at this angle tolerance
+CENSUS_SIDE_TOL = 1e-9  # distinct minima are sides further apart than this
+
+
+def trump_11_pose() -> tuple[list[float], list[float], list[float], float]:
+    """Trump's packing rounded to floats: centres, angles, and its exact side as a float."""
+    from cases.trump11.packing import build  # noqa: PLC0415 - case data, loaded on demand
+
+    squares, side, field = build()
+    field.refine_to(60)
+
+    def value(element: Any) -> float:
+        return float(field.decimal(element, 40))
+
+    x = [sum(value(p[0]) for p in sq) / 4.0 for sq in squares]
+    y = [sum(value(p[1]) for p in sq) / 4.0 for sq in squares]
+    theta = [
+        math.atan2(value(sq[1][1]) - value(sq[0][1]), value(sq[1][0]) - value(sq[0][0]))
+        % QUARTER
+        for sq in squares
+    ]
+    return x, y, theta, value(side)
+
+
+def census_bases() -> dict[str, tuple[list[float], list[float], list[float]]]:
+    """The two packings the census jolts about."""
+    tx, ty, tt, _ = trump_11_pose()
+    return {"trump": (tx, ty, tt), "stromquist": stromquist_11_pose()}
+
+
+def _filter_config(seconds: float, seed: int) -> DescentFilterConfig:
+    return DescentFilterConfig(time_budget=seconds, seed=seed)
+
+
+def _control(
+    name: str,
+    pose: tuple[list[float], list[float], list[float]],
+    reference: float | None,
+    expect: str,
+    seconds: float,
+) -> dict[str, Any]:
+    x, y, t = pose
+    result = descent_filter(
+        x, y, t, reference_side=reference, config=_filter_config(seconds, 0)
+    )
+    if expect == "stable":
+        passed = result.status == "stable" and not result.rejected
+    else:
+        passed = result.rejected
+    record = result.as_dict(with_pose=False)
+    record.update(
+        {
+            "control": name,
+            "expect": expect,
+            "passed": passed,
+            "terminal_classes": class_summary(result.theta, CENSUS_CLASS_TOL),
+        }
+    )
+    print(
+        f"control {name:24s} expect={expect:8s} passed={passed} status={result.status} "
+        f"rejected={result.rejected} ref={result.reference_side:.12f} "
+        f"terminal={result.terminal_side:.12f} {result.seconds:.1f}s",
+        file=sys.stderr,
+        flush=True,
+    )
+    return record
+
+
+def census_controls(stalls: Path | None, seconds: float) -> list[dict[str, Any]]:
+    """Run every control the frozen criterion names; the census needs all to pass."""
+    tx, ty, tt, u_side = trump_11_pose()
+    records = [
+        _control("trump", (tx, ty, tt), u_side, "stable", seconds),
+        _control("stromquist", stromquist_11_pose(), STROMQUIST_11_SIDE, "stable", seconds),
+    ]
+    # Trivially non-minimal: centres scaled apart, one square turned, side enlarged.
+    cx, cy = sum(tx) / len(tx), sum(ty) / len(ty)
+    nx = [cx + 1.002 * (v - cx) for v in tx]
+    ny = [cy + 1.002 * (v - cy) for v in ty]
+    nt = list(tt)
+    nt[10] += 0.003
+    if min_pair_gap(nx, ny, nt) <= 0.0:
+        raise RuntimeError("nudged Trump control overlaps; the control is mis-built")
+    records.append(
+        _control("trump-nudged", (nx, ny, nt), bounding_side(nx, ny, nt), "reject", seconds)
+    )
+    # Non-minimal in the angles only: square 10 released by 0.02 rad, centres optimal.
+    rt = list(tt)
+    rt[10] += 0.02
+    released = solve_to_fixed_point(rt, tx, ty, len(tx))
+    records.append(
+        _control(
+            "trump-released-sq10",
+            (list(released.x), list(released.y), rt),
+            released.side,
+            "reject",
+            seconds,
+        )
+    )
+    if stalls is not None:
+        rows = [json.loads(line) for line in stalls.read_text().splitlines() if line.strip()]
+        targets = [r for r in rows if 1e-9 < r["side"] - u_side < 0.006]
+        records.extend(
+            _control(
+                f"stall {row['kind']} {row['detail']}",
+                (row["x"], row["y"], row["theta"]),
+                row["side"],
+                "reject",
+                seconds,
+            )
+            for row in targets
+        )
+    return records
+
+
+def _census_task(task: dict[str, Any]) -> dict[str, Any]:
+    """One start: jolt, quench, filter. Runs in a worker process."""
+    started = time.time()
+    rng = random.Random(task["rng_seed"])
+    x0, y0, t0 = task["pose"]
+    proposal = jolt((list(x0), list(y0), list(t0)), task["scale"], rng)
+    quenched = quench_bracket(*proposal, time_budget=task["quench_seconds"])
+    quench_seconds = time.time() - started
+    record: dict[str, Any] = {
+        "base": task["base"],
+        "index": task["index"],
+        "scale": task["scale"],
+        "rng_seed": task["rng_seed"],
+        "quench": {
+            "side": quenched.side,
+            "converged": quenched.converged,
+            "reason": quenched.reason,
+            "lp_solves": quenched.lp_solves,
+            "seconds": round(quench_seconds, 3),
+            "classes": class_summary(quenched.theta, CENSUS_CLASS_TOL),
+            "x": list(quenched.x),
+            "y": list(quenched.y),
+            "theta": list(quenched.theta),
+        },
+    }
+    if not math.isfinite(quenched.side):
+        record["filter"] = None
+        return record
+    result: DescentFilterResult = descent_filter(
+        quenched.x,
+        quenched.y,
+        quenched.theta,
+        reference_side=quenched.side,
+        config=_filter_config(task["filter_seconds"], task["rng_seed"]),
+    )
+    record["filter"] = result.as_dict(with_pose=True)
+    record["filter"]["terminal_classes"] = class_summary(result.theta, CENSUS_CLASS_TOL)
+    record["seconds"] = round(time.time() - started, 3)
+    return record
+
+
+def census_tasks(options: argparse.Namespace) -> list[dict[str, Any]]:
+    """Interleaved over bases and cycling over scales, so any prefix is balanced."""
+    bases = census_bases()
+    names = options.bases.split(",")
+    scales = [float(v) for v in options.scales.split(",")]
+    per_base = options.starts // len(names)
+    return [
+        {
+            "base": name,
+            "index": index,
+            "scale": scales[index % len(scales)],
+            "rng_seed": zlib.crc32(f"{options.seed}:{name}:{index}".encode()),
+            "pose": bases[name],
+            "quench_seconds": options.quench_seconds,
+            "filter_seconds": options.filter_seconds,
+        }
+        for index in range(per_base)
+        for name in names
+    ]
+
+
+def _stable_terminals(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    out = []
+    for record in records:
+        result = record.get("filter")
+        if not result or result["status"] != "stable":
+            continue
+        witness = result["terminal_witness"]
+        if not witness or not witness["valid"]:
+            continue
+        out.append(record)
+    return out
+
+
+def census_minima(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Distinct descent-stable terminals: side within 1e-9, class count, multiplicities."""
+    stable = sorted(_stable_terminals(records), key=lambda r: r["filter"]["terminal_side"])
+    clusters: list[dict[str, Any]] = []
+    for record in stable:
+        result = record["filter"]
+        classes = result["terminal_classes"]
+        key = (classes["classes"], tuple(classes["multiplicities"]))
+        for cluster in clusters:
+            if (
+                cluster["key"] == key
+                and abs(result["terminal_side"] - cluster["side_max"]) <= CENSUS_SIDE_TOL
+            ):
+                cluster["members"].append(record)
+                cluster["side_max"] = result["terminal_side"]
+                break
+        else:
+            clusters.append(
+                {"key": key, "side_max": result["terminal_side"], "members": [record]}
+            )
+    table = []
+    for cluster in clusters:
+        members = cluster["members"]
+        rep = members[0]["filter"]
+        free = rattling_squares(rep["x"], rep["y"], rep["theta"], rep["terminal_side"])
+        fixed_theta = [t for k, t in enumerate(rep["theta"]) if k not in free]
+        essential = class_summary(fixed_theta, CENSUS_CLASS_TOL) if fixed_theta else None
+        table.append(
+            {
+                "side": rep["terminal_side"],
+                "side_spread": cluster["side_max"] - rep["terminal_side"],
+                "witness_side_min": min(
+                    m["filter"]["terminal_witness"]["side"] for m in members
+                ),
+                "classes": cluster["key"][0],
+                "multiplicities": list(cluster["key"][1]),
+                "class_degrees": rep["terminal_classes"]["class_degrees"],
+                "rattling_squares": free,
+                "classes_without_rattlers": essential["classes"] if essential else 0,
+                "count": len(members),
+                "immediate_survivors": sum(1 for m in members if not m["filter"]["rejected"]),
+                "after_certified_descent": sum(1 for m in members if m["filter"]["rejected"]),
+                "bases": sorted({m["base"] for m in members}),
+                "example": {"base": members[0]["base"], "index": members[0]["index"]},
+            }
+        )
+    return table
+
+
+def census_summary(
+    records: list[dict[str, Any]], minima: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Counts, the minima table, and the frozen H-238 verdict."""
+    filtered = [r for r in records if r.get("filter")]
+    rejected = [r for r in filtered if r["filter"]["rejected"]]
+    survivors = [
+        r for r in filtered if not r["filter"]["rejected"] and r["filter"]["status"] == "stable"
+    ]
+    kills = [
+        m for m in minima if m["classes"] >= 3 and m["witness_side_min"] < CENSUS_KILL_SIDE
+    ]
+    return {
+        "starts": len(records),
+        "by_base": {
+            name: sum(1 for r in records if r["base"] == name)
+            for name in sorted({r["base"] for r in records})
+        },
+        "quench_converged": sum(1 for r in records if r["quench"]["converged"]),
+        "quench_endpoint_three_plus_classes_below_kill_side": sum(
+            1
+            for r in records
+            if r["quench"]["classes"]["classes"] >= 3 and r["quench"]["side"] < CENSUS_KILL_SIDE
+        ),
+        "filtered": len(filtered),
+        "descent_rejected": len(rejected),
+        "survivors": len(survivors),
+        "filter_budget_exhausted": sum(
+            1 for r in filtered if r["filter"]["status"] == "budget"
+        ),
+        "stable_terminals": len(_stable_terminals(records)),
+        "distinct_minima": len(minima),
+        "kill_candidates": kills,
+        "verdict": (
+            "KILL: a descent-stable minimum with at least three classes below 3.885618"
+            if kills
+            else "SUPPORT ONLY: no descent-stable minimum with at least three classes "
+            "below 3.885618 among the census terminals"
+        ),
+    }
+
+
+def census_carried(path: Path | None, tasks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Records of an interrupted run, refused unless each matches one of these tasks.
+
+    A record is matched on its base, index and random seed, so a file from a census with
+    different arguments cannot be carried into this one. Records are carried unchanged;
+    only the starts they do not cover are run again.
+    """
+    if path is None:
+        return []
+    planned = {(t["base"], t["index"]): t["rng_seed"] for t in tasks}
+    carried = []
+    for line in path.read_text().splitlines():
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        key = (record["base"], record["index"])
+        if planned.get(key) != record["rng_seed"]:
+            raise SystemExit(f"resume record {key} is not a task of this census")
+        carried.append(record)
+    if len({(r["base"], r["index"]) for r in carried}) != len(carried):
+        raise SystemExit("resume file repeats a start")
+    return carried
+
+
+def census_main(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(
+        prog="run_basin_hopping.py census",
+        description="H-238 census: jolted starts, stock quench, full-pose descent filter.",
+    )
+    parser.add_argument("--bases", default="trump,stromquist")
+    parser.add_argument("--starts", type=int, default=1000, help="total starts over bases")
+    parser.add_argument("--scales", default="0.02,0.05,0.1,0.2,0.3")
+    parser.add_argument("--seed", type=int, default=238)
+    parser.add_argument("--quench-seconds", type=float, default=8.0)
+    parser.add_argument("--filter-seconds", type=float, default=60.0)
+    parser.add_argument("--control-seconds", type=float, default=120.0)
+    parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument(
+        "--wall-seconds", type=float, default=None, help="stop the census after this wall"
+    )
+    parser.add_argument("--stalls", type=Path, default=None, help="probe-C JSONL of stalls")
+    parser.add_argument("--controls-only", action="store_true")
+    parser.add_argument(
+        "--resume-from",
+        type=Path,
+        default=None,
+        help="census.jsonl of an interrupted run with these same arguments; its starts are "
+        "carried into this run and skipped",
+    )
+    parser.add_argument("--out", type=Path, required=True)
+    options = parser.parse_args(argv)
+    out = options.out if options.out.is_absolute() else Path.cwd() / options.out
+    out.mkdir(parents=True, exist_ok=True)
+    started = time.time()
+    meta: dict[str, Any] = {
+        "argv": argv,
+        "filter_config": _filter_config(options.filter_seconds, 0).as_dict(),
+        "kill_side": CENSUS_KILL_SIDE,
+        "class_tol": CENSUS_CLASS_TOL,
+        "side_tol": CENSUS_SIDE_TOL,
+        "host": {"platform": platform.platform(), "cpu_count": os.cpu_count()},
+        "loadavg_before": os.getloadavg(),
+    }
+    controls = census_controls(options.stalls, options.control_seconds)
+    (out / "controls.json").write_text(json.dumps(controls, indent=1) + "\n")
+    failed = [c["control"] for c in controls if not c["passed"]]
+    meta["controls_passed"] = not failed
+    meta["controls_seconds"] = round(time.time() - started, 1)
+    if failed or options.controls_only:
+        (out / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
+        print(json.dumps({"controls_failed": failed, "wrote": shown(out)}))
+        return 1 if failed else 0
+
+    import multiprocessing  # noqa: PLC0415 - only the census needs worker processes
+
+    tasks = census_tasks(options)
+    carried = census_carried(options.resume_from, tasks)
+    done = {(r["base"], r["index"]) for r in carried}
+    tasks = [t for t in tasks if (t["base"], t["index"]) not in done]
+    meta["resumed_from"] = str(options.resume_from) if options.resume_from else None
+    meta["carried_records"] = len(carried)
+    records: list[dict[str, Any]] = list(carried)
+    census_started = time.time()
+    wall_stop = False
+    with (out / "census.jsonl").open("w", encoding="utf-8") as handle:
+        handle.writelines(json.dumps(r, sort_keys=True) + "\n" for r in carried)
+        handle.flush()
+        pool = multiprocessing.get_context("spawn").Pool(options.workers)
+        try:
+            for record in pool.imap_unordered(_census_task, tasks, chunksize=1):
+                records.append(record)
+                handle.write(json.dumps(record, sort_keys=True) + "\n")
+                handle.flush()
+                result = record.get("filter") or {}
+                print(
+                    f"[{len(records)}/{len(tasks)}] {record['base']:10s} "
+                    f"scale={record['scale']:.2f} quench={record['quench']['side']:.9f} "
+                    f"conv={record['quench']['converged']} "
+                    f"rejected={result.get('rejected')} status={result.get('status')} "
+                    f"terminal={result.get('terminal_side', float('nan')):.9f} "
+                    f"classes={(result.get('terminal_classes') or {}).get('multiplicities')}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                if (
+                    options.wall_seconds is not None
+                    and time.time() - census_started > options.wall_seconds
+                ):
+                    wall_stop = True
+                    break
+        finally:
+            pool.terminate()
+            pool.join()
+    minima = census_minima(records)
+    summary = census_summary(records, minima)
+    summary["wall_stop"] = wall_stop
+    summary["tasks_planned"] = len(tasks)
+    summary["census_seconds"] = round(time.time() - census_started, 1)
+    meta["loadavg_after"] = os.getloadavg()
+    meta["seconds"] = round(time.time() - started, 1)
+    (out / "minima.json").write_text(json.dumps(minima, indent=1) + "\n")
+    (out / "summary.json").write_text(json.dumps(summary, indent=1) + "\n")
+    (out / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
+    kill_poses = []
+    for record in _stable_terminals(records):
+        result = record["filter"]
+        classes = result["terminal_classes"]["classes"]
+        if classes >= 3 and result["terminal_witness"]["side"] < CENSUS_KILL_SIDE:
+            witness = exact_witness(result["x"], result["y"], result["theta"])
+            kill_poses.append({**record, "exact_witness": witness.as_dict(with_pose=True)})
+    if kill_poses:
+        (out / "kill-candidates.jsonl").write_text(
+            "".join(json.dumps(r, sort_keys=True) + "\n" for r in kill_poses)
+        )
+    print(json.dumps({"verdict": summary["verdict"], "wrote": shown(out)}))
     return 0
 
 

@@ -1,0 +1,646 @@
+[
+ {
+  "status": "stable",
+  "rejected": false,
+  "reference_side": 3.877083590022814,
+  "start_side": 3.8770835900228144,
+  "start_settled": true,
+  "terminal_side": 3.8770835900228144,
+  "total_decrease": -4.440892098500626e-16,
+  "certified_decrease": null,
+  "certificate": null,
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.8770835900256966,
+   "side_exact": "21615463313641856303110660528917945936340729/5575186299632655785383929568162090376495104",
+   "margin": 1.0017763568394002e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 1,
+  "accepted_steps": 0,
+  "probe_steps": 0,
+  "milp_solves": 10,
+  "fixed_point_solves": 117,
+  "seconds": 6.233,
+  "reason": "no first-order decrease and no probe decrease",
+  "control": "trump",
+  "expect": "stable",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": false,
+  "reference_side": 3.885618083164127,
+  "start_side": 3.8856180831641263,
+  "start_settled": true,
+  "terminal_side": 3.8856180831641263,
+  "total_decrease": 8.881784197001252e-16,
+  "certified_decrease": null,
+  "certificate": null,
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.8856180831670195,
+   "side_exact": "21663044702877668825699980759564743679181353/5575186299632655785383929568162090376495104",
+   "margin": 1.0026645352591004e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 1,
+  "accepted_steps": 0,
+  "probe_steps": 0,
+  "milp_solves": 10,
+  "fixed_point_solves": 221,
+  "seconds": 5.798,
+  "reason": "no first-order decrease and no probe decrease",
+  "control": "stromquist",
+  "expect": "stable",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    45.0
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.88283775720286,
+  "start_side": 3.87748648201204,
+  "start_settled": true,
+  "terminal_side": 3.8770835900124956,
+  "total_decrease": 0.005754167190364257,
+  "certified_decrease": 0.005351275187940097,
+  "certificate": {
+   "valid": true,
+   "side": 3.8774864820149197,
+   "side_exact": "43235419023080810833001517499377715999981859/11150372599265311570767859136324180752990208",
+   "margin": 1.0008881784197001e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.8770835905225933,
+   "side_exact": "42217701789867474700709391911560615611827/10889035741470030830827987437816582766592",
+   "margin": 1.772967549723271e-10,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 11,
+  "accepted_steps": 5,
+  "probe_steps": 0,
+  "milp_solves": 20,
+  "fixed_point_solves": 200,
+  "seconds": 9.749,
+  "reason": "first-order decrease not realised at any radius; probes clean",
+  "control": "trump-nudged",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.8797636032212273,
+  "start_side": 3.8797636032212273,
+  "start_settled": true,
+  "terminal_side": 3.877083590024048,
+  "total_decrease": 0.002680013197179143,
+  "certified_decrease": 0.0019308100104407089,
+  "certificate": {
+   "valid": true,
+   "side": 3.8778327932107866,
+   "side_exact": "43239280521950022440743723240907333866063455/11150372599265311570767859136324180752990208",
+   "margin": 1.00044408920985e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.877083590026948,
+   "side_exact": "10807731656824417012182082959671623898509979/2787593149816327892691964784081045188247552",
+   "margin": 1.0079936057773011e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 9,
+  "accepted_steps": 3,
+  "probe_steps": 0,
+  "milp_solves": 18,
+  "fixed_point_solves": 198,
+  "seconds": 6.115,
+  "reason": "first-order decrease not realised at any radius; probes clean",
+  "control": "trump-released-sq10",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.8808312846125532,
+  "start_side": 3.8808312846125532,
+  "start_settled": true,
+  "terminal_side": 3.8770835900228198,
+  "total_decrease": 0.0037476945897334524,
+  "certified_decrease": 0.0007513749675132075,
+  "certificate": {
+   "valid": true,
+   "side": 3.88007990964504,
+   "side_exact": "43264336707465881300329868922125022465200199/11150372599265311570767859136324180752990208",
+   "margin": 1.00044408920985e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.8770835900257166,
+   "side_exact": "21615463313641967931781969991773608845828959/5575186299632655785383929568162090376495104",
+   "margin": 1.006883382752676e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 6,
+  "accepted_steps": 5,
+  "probe_steps": 0,
+  "milp_solves": 15,
+  "fixed_point_solves": 122,
+  "seconds": 5.903,
+  "reason": "no first-order decrease and no probe decrease",
+  "control": "stall release1 sq10 +0.05",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.8796117201366807,
+  "start_side": 3.8796117201366807,
+  "start_settled": true,
+  "terminal_side": 3.87708359000769,
+  "total_decrease": 0.0025281301289905578,
+  "certified_decrease": 0.0004904706284842852,
+  "certificate": {
+   "valid": true,
+   "side": 3.8791212495081964,
+   "side_exact": "21626823644872005284517922922462700749858317/5575186299632655785383929568162090376495104",
+   "margin": 1.0008881784197001e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.877083590508279,
+   "side_exact": "84435403579423218148634476478815918143837/21778071482940061661655974875633165533184",
+   "margin": 1.7399184307262294e-10,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 8,
+  "accepted_steps": 7,
+  "probe_steps": 0,
+  "milp_solves": 17,
+  "fixed_point_solves": 126,
+  "seconds": 7.971,
+  "reason": "no first-order decrease and no probe decrease",
+  "control": "stall release1 sq10 -0.05",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.881980295292158,
+  "start_side": 3.881980295292158,
+  "start_settled": true,
+  "terminal_side": 3.8770835900228175,
+  "total_decrease": 0.0048967052693402735,
+  "certified_decrease": 0.0004532986670904293,
+  "certificate": {
+   "valid": true,
+   "side": 3.8815269966250674,
+   "side_exact": "43280472266476731702696490385409089947504583/11150372599265311570767859136324180752990208",
+   "margin": 1.0017763568394002e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.877083590025743,
+   "side_exact": "43230926627284231653890675666283169924789353/11150372599265311570767859136324180752990208",
+   "margin": 1.0168753899743024e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 7,
+  "accepted_steps": 6,
+  "probe_steps": 0,
+  "milp_solves": 16,
+  "fixed_point_solves": 123,
+  "seconds": 6.446,
+  "reason": "no first-order decrease and no probe decrease",
+  "control": "stall release2 sq6+.1 sq10-.1",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.879858778982452,
+  "start_side": 3.879858778982452,
+  "start_settled": true,
+  "terminal_side": 3.8770835900228153,
+  "total_decrease": 0.0027751889596365764,
+  "certified_decrease": 0.0016708427834806194,
+  "certificate": {
+   "valid": true,
+   "side": 3.8781879361989713,
+   "side_exact": "43243240498594297078858948243175220365024893/11150372599265311570767859136324180752990208",
+   "margin": 1.0008881784197001e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.877083590025718,
+   "side_exact": "10807731656820987613946968200370607147034757/2787593149816327892691964784081045188247552",
+   "margin": 1.0088817841970012e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 5,
+  "accepted_steps": 4,
+  "probe_steps": 0,
+  "milp_solves": 14,
+  "fixed_point_solves": 121,
+  "seconds": 4.288,
+  "reason": "no first-order decrease and no probe decrease",
+  "control": "stall jolt scale=0.02 k=5",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.87874095296555,
+  "start_side": 3.87874095296555,
+  "start_settled": true,
+  "terminal_side": 3.8770835900376253,
+  "total_decrease": 0.0016573629279248436,
+  "certified_decrease": 0.0005009425816799862,
+  "certificate": {
+   "valid": true,
+   "side": 3.87824001038387,
+   "side_exact": "21621910572579360913199230990604424105693781/5575186299632655785383929568162090376495104",
+   "margin": 1.0033306690738754e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.8770835900405114,
+   "side_exact": "43230926627448901499105983109548818191047337/11150372599265311570767859136324180752990208",
+   "margin": 1.0031086244689504e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 13,
+  "accepted_steps": 7,
+  "probe_steps": 0,
+  "milp_solves": 22,
+  "fixed_point_solves": 202,
+  "seconds": 10.031,
+  "reason": "first-order decrease not realised at any radius; probes clean",
+  "control": "stall jolt scale=0.05 k=1",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ },
+ {
+  "status": "stable",
+  "rejected": true,
+  "reference_side": 3.878750942227405,
+  "start_side": 3.878750942227405,
+  "start_settled": true,
+  "terminal_side": 3.877083590025763,
+  "total_decrease": 0.0016673522016419362,
+  "certified_decrease": 0.0007467485615193503,
+  "certificate": {
+   "valid": true,
+   "side": 3.878004193665886,
+   "side_exact": "21620595850444031871845393722538082210710643/5575186299632655785383929568162090376495104",
+   "margin": 1.0008881784197001e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "terminal_witness": {
+   "valid": true,
+   "side": 3.8770835900286915,
+   "side_exact": "21615463313658552586134404242782079665894257/5575186299632655785383929568162090376495104",
+   "margin": 1.0177635683940025e-12,
+   "attempts": 1,
+   "touching_pairs": 0,
+   "failures": []
+  },
+  "iterations": 9,
+  "accepted_steps": 3,
+  "probe_steps": 0,
+  "milp_solves": 18,
+  "fixed_point_solves": 198,
+  "seconds": 5.635,
+  "reason": "first-order decrease not realised at any radius; probes clean",
+  "control": "stall jolt scale=0.3 k=1",
+  "expect": "reject",
+  "passed": true,
+  "terminal_classes": {
+   "classes": 2,
+   "multiplicities": [
+    6,
+    5
+   ],
+   "class_degrees": [
+    0.0,
+    40.1819
+   ],
+   "members": [
+    [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   ]
+  }
+ }
+]

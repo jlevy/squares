@@ -1,0 +1,20 @@
+{
+ "starts": 1000,
+ "by_base": {
+  "stromquist": 500,
+  "trump": 500
+ },
+ "quench_converged": 94,
+ "quench_endpoint_three_plus_classes_below_kill_side": 85,
+ "filtered": 1000,
+ "descent_rejected": 655,
+ "survivors": 345,
+ "filter_budget_exhausted": 0,
+ "stable_terminals": 1000,
+ "distinct_minima": 34,
+ "kill_candidates": [],
+ "verdict": "SUPPORT ONLY: no descent-stable minimum with at least three classes below 3.885618 among the census terminals",
+ "wall_stop": false,
+ "tasks_planned": 396,
+ "census_seconds": 1170.0
+}

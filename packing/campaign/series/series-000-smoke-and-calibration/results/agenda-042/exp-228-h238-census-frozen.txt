@@ -1,0 +1,27 @@
+H-238 census freeze (BC-377, Lane N2), written before the census launched
+date_utc: 2026-09-23T08:36:39Z
+worktree: /Users/levy/wrk/github/squares/.claude/worktrees/w3-review
+branch: claude/w3-overnight-2026-09-23  head: 69dac09a029de16ecb86c2072c1f18a67bd42794
+instrument files (untracked/modified working-tree bytes), git hash-object:
+  4b7c57d4db4f336d4130a0f3412eccdcd6558ffa  packing/src/sqpack/research/descent_filter.py
+  9260d0f4da008c660e57107f81b611e375b720ed  packing/devtools/run_basin_hopping.py
+  4214cb241bd2f97fc5f72c7a34a7905d41183666  packing/src/sqpack/research/quench.py (stock, unmodified)
+  77ea87b9aa9fa63a2554ab51265aa4b0e658337e  packing/src/sqpack/verify.py (stock, unmodified)
+  3abd6e195f713ea80ac600e3152733e91b7529fb  attic/x046/probe_c.jsonl (stall controls input, gitignored)
+interpreter: 3.14.7 scipy 1.17.1 numpy 2.5.2
+command: cd packing && uv run --frozen --all-extras --group dev python -m devtools.run_basin_hopping census --starts 1000 --bases trump,stromquist --scales 0.02,0.05,0.1,0.2,0.3 --seed 238 --quench-seconds 8 --filter-seconds 60 --control-seconds 120 --workers 4 --wall-seconds 6600 --stalls ../attic/x046/probe_c.jsonl --out ../attic/census/run
+controls gate: census refuses to run unless trump+stromquist stable, trump-nudged + trump-released-sq10 rejected, all six probe-C stalls rejected (controls2 run passed 10/10 under these bytes)
+verdict rule (H-238, frozen): KILL iff some descent-stable terminal has >=3 classes (tol 1e-3 rad, mod pi/2) and exact-witness side < 3.885618; else support only
+declared tolerances: certify_tol 1e-8 (rejection needs exact witness this far below reference), step_tol 1e-11, dedup side 1e-9, class tol 1e-3
+host load at freeze:  1:36  up 5 days,  3:59, 1 user, load averages: 142.19 112.57 78.52
+addendum 2026-09-23T08:37:44Z: tests written after launch, not read by the census:
+  feed5c3c69b8eb3f1cd10d0021af4049c19b9176  packing/tests/test_descent_filter.py (8 passed in 9.58s)
+  instrument bytes re-hashed unchanged: 4b7c57d4db4f336d4130a0f3412eccdcd6558ffa 9260d0f4da008c660e57107f81b611e375b720ed
+INTERRUPTION 2026-09-23T09:19:06Z: the frozen census (attic/census/run) received SIGTERM (exit 143) at 2026-09-23T09:17:26Z after 604/1000 starts, all flushed and parseable; no summary written. The signal was not sent by this lane; its source is unknown.
+RESUME: post-freeze change to packing/devtools/run_basin_hopping.py adds only --resume-from (census_carried + task skip + carried-record write); diff in attic/census/resume-flag.diff; frozen bytes preserved at attic/census/run_basin_hopping.frozen-9260d0f.py.
+  new hash: 10635d6732fe936117547caeb3107a47199c3f71  packing/devtools/run_basin_hopping.py
+  unchanged: 4b7c57d4db4f336d4130a0f3412eccdcd6558ffa  descent_filter.py; _census_task, census_tasks, census_minima, census_summary, controls byte-identical
+  interrupted-run records: dbb9f97c1e213cdd36caa857faf41a7ec961d22c  attic/census/run/census.jsonl (604 lines)
+  resume command: cd packing && uv run --frozen --all-extras --group dev python -m devtools.run_basin_hopping census --starts 1000 --bases trump,stromquist --scales 0.02,0.05,0.1,0.2,0.3 --seed 238 --quench-seconds 8 --filter-seconds 60 --control-seconds 120 --workers 4 --wall-seconds 6600 --stalls ../attic/x046/probe_c.jsonl --resume-from ../attic/census/run/census.jsonl --out ../attic/census/run-resumed
+  interim results seen before resuming: 203-record tabulation (no terminal with >=3 classes below 3.885618)
+RESULT 2026-09-23T09:40:55Z: 1000/1000 starts (604 carried + 396 resumed); verdict SUPPORT ONLY; census.jsonl 6a20615f0aba4e4f5388d75111e35fb90baf8d82; summary.json e81e4ca8559e3605ce34e5e6a8d70f12d512ab4b; minima.json b6e3fecf8dc66705f3b570d0ff03fa2abd1e7663; tests ec07f518f1dd88a4260d4b877764134621d56822 9 passed

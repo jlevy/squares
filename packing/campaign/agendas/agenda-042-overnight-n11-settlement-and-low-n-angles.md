@@ -144,7 +144,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       With a descent filter that rejects the X-046 stalls, does any census minimum with
@@ -164,6 +164,19 @@ agenda:
     - packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md
     parallel_group: overnight-n11-c
     note: Support, never proof; its kill would make the three-orientation rung mandatory.
+    outcomes:
+    - scope: H-238 on 1,000 jolted starts about Trump and Stromquist (exp-228).
+      classification: achieved
+      result: >-
+        Support only, as registered: no descent-stable minimum with three or more
+        classes below 3.885618; all 85 such quench endpoints descend. New minima within
+        U + 0.02: a two-class 0/41.56 degree packing at 3.8867460 and a genuine
+        three-class packing at 3.8943219.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-228-h238-census-minima.json
+      disposition: retire-success
+      follow_up: null
   - id: BC-378
     purpose: research
     owner_focus: insight
