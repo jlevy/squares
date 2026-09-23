@@ -3,13 +3,17 @@ type: is
 id: is-01m368ws3yapx1pzes6y3jtfjp
 title: Keep every edition in the version history, dated by first publication
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-09-23T04:37:59.036Z
-updated_at: 2026-09-23T04:37:59.036Z
+updated_at: 2026-09-23T06:28:29.836Z
+closed_at: 2026-09-23T06:28:29.823Z
+close_reason: "PR 229 merged as 840bedba5: every edition kept, dated by first publication"
+resolution: null
+duplicate_of: null
 ---
 The owner (2026-09-22): the explainer lost the version history for v0.3.0; the first version in the history should be the proof of s(11) >= 381/100; its date should be when it was first published; and the top of the paper should show the original date and the latest edition, linking the full history.
 
