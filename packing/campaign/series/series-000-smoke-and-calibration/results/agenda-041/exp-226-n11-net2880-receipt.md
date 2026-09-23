@@ -4,6 +4,13 @@ Status: **`RETAINABLE`, and the dilation-limit theorem moves the bound.** Both r
 the retention gate accept the frozen bytes and agree at exactly 1. Nothing is registered
 by this receipt; the register entry is a separate decision.
 
+**Reconciliation note, 2026-09-22.** This receipt records the first-party move from
+T-026 to T-033. Session 152 subsequently verified Kleddamag’s stronger
+`s(11) > 31/8 = 3.875` certificate, which is the current Frontier lower bound.
+The unchanged fixed-core family’s refinement ceiling `955000/249507 ≈ 3.82755` is below
+`3.875`; this run remains auditable method and calibration evidence and does not support
+a current public-bound advance.
+
 This is `X-042`’s slate row A6 and the `H-G` of the `n = 11` review lane, which `X-041`
 called a rung to be run in an idle CPU slot and never as a block.
 It was run that way, beside the review lanes, and it is the one bound movement of the
@@ -103,10 +110,10 @@ The theorem gives `s(11) >=` the supremum and **supplies no individual certifica
 that side**; it does not establish a strict inequality there.
 The tool says so in its own output and the claim must not be quoted without it.
 
-Nothing here touches the gap to Trump’s `3.877084`, which remains open by `0.050086`
-after this movement.
-Nothing here bears on global optimality, and nothing here is a new mechanism: this is
-the same frozen measure on a finer net, which is why `X-041` called it a rung.
+At the time of this first-party run, it left a `0.050086` gap to Trump’s `3.877084`. The
+later external certificate narrows the current gap to about `0.0020836`. Nothing here
+bears on global optimality, and nothing here is a new mechanism: this is the same frozen
+measure on a finer net, which is why `X-041` called it a rung.
 The remaining series headroom, `L/B* - 3.826998 = 0.000550`, is now half what it was.
 
 The register entry is not written by this receipt.

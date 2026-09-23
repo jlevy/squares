@@ -131,9 +131,9 @@ session:
     recording: contemporaneous
     clock_role: work
     objective: >-
-      Wait for the authorized PR 224 merge, integrate the resulting main into W3,
-      regenerate record views, directly remeasure the combined snapshot, run the
-      applicable local gate, and publish the reviewed research for hosted validation.
+      Integrate the root-reviewed PR 224 export into W3, regenerate record views,
+      directly remeasure the combined snapshot, run the applicable local gate, and
+      publish the reviewed research for hosted validation on the merged main branch.
     status: in_progress
     entered_by: user_request
     switch_reason: The owner made merged PR 224 a publication dependency after the prior local checkpoint.
@@ -141,9 +141,9 @@ session:
     started_at: '2026-09-23T04:18:38Z'
     deadline_at: '2026-09-23T06:25:52.784Z'
     expected_output: >-
-      A root-reviewed W3 integration on current main, direct combined-tree snapshot
-      evidence, a passing applicable local gate, and a draft pull request dispatched to
-      one hosted full checkpoint.
+      A root-reviewed W3 integration on the reviewed PR 224 export, direct combined-tree
+      snapshot evidence, a passing applicable local gate, and a draft pull request on
+      main before its one hosted full checkpoint.
     validation_command: >-
       cd packing && env PYTHON_CPU_COUNT=2 .venv/bin/packing-validate --push --jobs 1 --inner-jobs 2
     kill_condition: >-
@@ -158,7 +158,7 @@ session:
     - packing/campaign/agent-sessions/session-155-w3-proof-directions.md
     - packing/campaign/session-close-report.yaml
     stop_reason: null
-    next_action: Integrate main after PR 224 merges, then regenerate, remeasure and validate before publication.
+    next_action: Integrate the ancestry-only main merge, finish the local gate, and publish the reviewed draft before hosted validation.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-155-integration.yaml
@@ -182,9 +182,9 @@ session:
     after: >-
       X-043, X-044 and X-045 are reviewed and integrated with three diagnostic tools,
       seven original receipts and 31 shaped idea-board rows. No registered bound or
-      formal hypothesis changed. Generated views agree, and the finished draft snapshot
-      leaves conservative combined-sibling headroom; draft publication and hosted
-      validation remain.
+      formal hypothesis changed. Generated views agree, and the directly measured
+      combined snapshot is below its unchanged cap after one exact historical-bulk
+      exclusion; draft publication and hosted validation remain.
   delegations:
   - task: W3 proof-direction review and n11 exact-value extension
     operator: GPT-6 Astra, max; task 01a0cbf9-faa2-73f0-bc32-1770b4680623
@@ -259,11 +259,12 @@ session:
     - The agenda-039 real-copy regression passes with all registered dependencies and W3 artifacts preserved.
     uncertainty: >-
       The integration receipt is a lower bound because this session was live at its
-      cutoff. At checkpoint 9de34efe5, applying the W3 snapshot's 211,180-byte net
-      increase and PR 224's conservatively counted 24,988-byte delta to PR 223's
-      separately measured 403,826 byte headroom leaves 167,658 bytes under the unchanged
-      cap. This is a conservative pre-merge calculation; the integrated tree must
-      remeasure the contract directly.
+      cutoff. The combined PR 224 and W3 tree initially measured 167,851,810 bytes,
+      79,650 above the unchanged 167,772,160-byte cap. Excluding one exact 190,861-byte
+      Session 106 historical archive that no control consumes leaves a 167,664,112-byte
+      snapshot and 108,048 bytes of measured headroom. The archive remains in Git, and
+      its session record and all current native and W3 artifacts remain byte-identical
+      in worker copies.
     elapsed_seconds: 1935.009
     elapsed_quality: platform_measured
     next_action: Finalize generated views, run the selected gate, and publish the draft checkpoint.
@@ -286,6 +287,12 @@ session:
     24,988-byte delta against PR 223's measured headroom leaves 167,658 bytes before the
     required direct measurement of the integrated tree.
   - >-
+    Direct measurement of the combined PR 224 and W3 tree first found 167,851,810 bytes,
+    79,650 above the unchanged cap. The reviewed exact Session 106 archive exclusion
+    removes 190,861 bytes of unused historical bulk; with its support code and
+    real-worker regression included, the snapshot is 167,664,112 bytes with 108,048
+    bytes of headroom. All current native and W3 records remain present byte for byte.
+  - >-
     Cost cutoff 2026-09-23T03:38:48Z: creative research used 1.52 agent-hours,
     1.49 active-union hours, 188 model responses and 134,746 output tokens. Mechanical
     integration and publication used 0.56 agent-hours, 0.54 active-union hours, 144
@@ -294,11 +301,11 @@ session:
     bound.
   stop_reason: null
   next_action: >-
-    Wait for the root-reviewed PR 224 repair to pass exact-head CI and merge. Then merge
-    resulting main into W3, preserve every frozen proof and research artifact, regenerate
-    views, directly remeasure the combined snapshot, run the applicable local push gate,
-    publish the draft PR, and dispatch exactly one hosted full checkpoint. After closure,
-    the user chooses among the shaped candidates; no experiment is selected automatically.
+    Integrate PR 224's ancestry-only merge commit from main, run the applicable local
+    push gate and publish the reviewed draft on main. Then dispatch exactly one hosted
+    full checkpoint while preserving every frozen proof and research artifact. After
+    closure, the user chooses among the shaped candidates; no experiment is selected
+    automatically.
 ---
 # W3 Proof-Direction Integration
 
@@ -324,9 +331,8 @@ close the session.
 
 The reviewed research checkpoint is `9de34efe5`, followed by the record-only validation
 replan `3a0d163bf`. The required base repair was root-reviewed at PR 224 data head
-`e7c8cca1b` and export head `63bec4a54`; its final merge commit is deliberately not
-guessed here. This branch remains local until that repair passes exact-head CI and
-merges.
+`e7c8cca1b` and export head `63bec4a54`; its final merge commit is `a41a14cd1`. That
+export is integrated, so the research draft publishes directly on main.
 
 The main integration must preserve four byte-level boundaries: the native n11 full
 receipt, row journal and all 19 frozen proof inputs; T-033’s source certificate,

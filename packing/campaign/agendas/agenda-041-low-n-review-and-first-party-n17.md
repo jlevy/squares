@@ -211,7 +211,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 2
     question: >-
       Does T-026's threshold family still decide at the 2880-step net, and what does the
@@ -234,6 +234,24 @@ agenda:
     note: >-
       X-041 calls this a rung rather than a mechanism and says to run it in an idle CPU
       slot and never as a block. That is exactly how it is run here.
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-226-n11-net2880-receipt.md
+    - packing/frontier/results.yaml
+    - packing/frontier/evidence.yaml
+    outcomes:
+    - scope: T-026 threshold refinement from the retained 1440-step net to 2880 steps.
+      classification: achieved
+      result: >-
+        The 2880-step certificate is retained as T-033 at the exact value
+        3.826997548829543624. It improves the first-party fixed-core rung but remains
+        below the independently verified strict external bound s(11) > 31/8; the
+        unchanged fixed-core family has ceiling 955000/249507, so finer net refinement
+        alone cannot recover that gap.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-226-n11-net2880-receipt.md
+      - packing/frontier/results.yaml
+      disposition: retire-success
+      follow_up: think-vx26
 ---
 # agenda-041: A Deep Low-n Review, an Efficiency Block, and the First-Party `n = 17` Question
 

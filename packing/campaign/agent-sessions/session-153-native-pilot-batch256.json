@@ -1,0 +1,96 @@
+{
+  "schema": "NativeParentCoreIntervalReceipt/v1",
+  "status": "PASS_PARTIAL",
+  "method": "directed-rounding box branch-and-bound with direct threshold counts",
+  "provenance": {
+    "git_commit": "7d4a755fc9ab42340d5d72e57f277a3cd0152450",
+    "dirty": true,
+    "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "command": [
+      "/private/tmp/squares-n11-parent-core-verifier/packing/devtools/verify_kleddamag_n11_native.py",
+      "--pilot",
+      "--batch-size",
+      "256",
+      "--output",
+      "/private/tmp/squares-n11-parent-core-verifier/packing/campaign/agent-sessions/session-153-native-pilot-batch256.json"
+    ],
+    "certificate_sha256": "57e9927da5c13f42dd8bcbf8f08c84363635fece626657ee63a810c61cd44458"
+  },
+  "bound": "31/8",
+  "parent_side": "764/775",
+  "minimum_charge": "31248829/31250000",
+  "budget": "1374934993/125000000",
+  "scale": 1000000000,
+  "threshold_units": 999962528,
+  "catalogue_rows": 12028,
+  "complete": false,
+  "accepted": false,
+  "premises": {
+    "budget": "1374934993/125000000",
+    "minimum_containment_numerator": "1/1000000000000",
+    "final_half_tangent": "207107/500000",
+    "rows": 12028
+  },
+  "batch": {
+    "boxes": 256,
+    "workers": 1,
+    "sites": 5284,
+    "features": 2716,
+    "member_slots": 13580,
+    "site_mask_bytes": 1352704,
+    "gathered_member_bytes": 3476480,
+    "int16_count_bytes": 1390592
+  },
+  "peak_traced_bytes": 11577533,
+  "peak_process_rss_bytes": 103923712,
+  "seconds": 16.50640666601248,
+  "rows": [
+    {
+      "label": "0",
+      "status": "certified",
+      "lower": 1000047518,
+      "upper": 1000047518,
+      "witness": [
+        0.6700492578537083,
+        3.1499578189629385
+      ],
+      "boxes": 20255,
+      "stalled": 0,
+      "budget_exhausted": false,
+      "index": 0,
+      "seconds": 2.3416391670471057
+    },
+    {
+      "label": "11962",
+      "status": "certified",
+      "lower": 999962528,
+      "upper": 999979403,
+      "witness": [
+        2.873318956453279,
+        -0.15208242064298896
+      ],
+      "boxes": 14387,
+      "stalled": 0,
+      "budget_exhausted": false,
+      "index": 11962,
+      "seconds": 1.5479380839969963
+    },
+    {
+      "label": "12027",
+      "status": "certified",
+      "lower": 1000030057,
+      "upper": 1000047566,
+      "witness": [
+        3.567908289822677,
+        -0.8482366799503457
+      ],
+      "boxes": 11763,
+      "stalled": 0,
+      "budget_exhausted": false,
+      "index": 12027,
+      "seconds": 1.4204815839766525
+    }
+  ],
+  "refutations": []
+}

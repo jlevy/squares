@@ -32,6 +32,18 @@ The image is available in [**SVG**](packing/atlas/known-best/known-best-1-100.sv
 [**PDF**](https://jlevy.github.io/squares/known-best-1-100.pdf), and
 [**high-resolution PNG**](packing/atlas/known-best/known-best-1-100@2x.png).*
 
+**The atlas is also a film.** The same drawing is built one square at a time, at
+1080p60, each step naming the bound it reaches, where that bound comes from, and whether
+this repository has certified it:
+[**`n = 1…100`**](https://github.com/jlevy/squares/releases/download/v0.4.1/ascent-n1-100-1080p60-citations.mp4)
+(2m 20s, 38 MB) and the
+[**full `n = 1…324` ascent**](https://github.com/jlevy/squares/releases/download/v0.4.1/ascent-n1-324-1080p60-citations.mp4)
+(8m 14s, 206 MB), both on the
+[`v0.4.1` release](https://github.com/jlevy/squares/releases/tag/v0.4.1) with the
+receipt that records what each file is and the page it was drawn from.
+GitHub strips `<video>` from Markdown, so these are links rather than an inline player;
+the [explainer page](https://jlevy.github.io/squares/) plays them.
+
 The register now runs to `n = 324`, the end of the catalogue’s audited range, and a
 second, poster-sized composite draws all of it:
 [**`known-best-1-324`**](packing/atlas/known-best/known-best-1-324.png), an 18-by-18
@@ -122,11 +134,14 @@ Results first established here, as far as the recorded source searches show:
   establishes the stronger current bound `s(11) > 31/8 = 3.875` from Kleddamag’s
   certificate and verifies Tokoharu’s rectangle-density bounds `s(26) >= 5.508` and
   `s(29) >= 5.71`. Complete replays and mathematical reviews support those Frontier
-  bounds. The records state each checker’s scope; a second complete method remains
-  additional confirmation.
-  The explainer uses the `3.81` certificate as its visual worked example, then proves
-  the threshold-counting and dilation steps that establish `T-026`’s `3.8264474…`
-  directly; it is generated against that rung and has not been rebuilt on `T-033`’s net.
+  bounds. The
+  [native n11 decision](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md)
+  independently covers all 12,028 parent-angle intervals by interval branch and bound.
+  Together with the exact source replay and reviewed transfer theorem, it confirms the
+  strict `3.875` bound at `V4/C4`. The explainer uses the `3.81` certificate as its
+  visual worked example, then proves the threshold-counting and dilation steps that
+  establish `T-026`’s `3.8264474…` directly; it is generated against that rung and has
+  not been rebuilt on `T-033`’s net.
 - **T-019: `s(17), s(18), s(19) ≥ 459/100`, improving the register (`S4`).** The adopted
   bound for [these](packing/frontier/n-017.md) three cases was Massaccesi’s `4.5058`,
   taken from a source rather than proved here.

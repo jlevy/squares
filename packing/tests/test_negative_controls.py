@@ -334,6 +334,33 @@ def test_dual_salvage_receipt_is_not_a_mutation_worker_input(
     assert not (tree / relative).exists()
 
 
+def test_retired_transition_statistics_are_not_a_mutation_worker_input(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    source = ROOT / "atlas/known-best/video/spikes/v2-transitions/transition-stats.json"
+    relative = source.relative_to(controls.REPO)
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert source.is_file()
+    assert source in PRUNE
+    assert all(
+        (ROOT / control["file"]).resolve() != source
+        and "transition-stats.json" not in control["run"]
+        for control in specification["controls"]
+    )
+    assert relative not in copied_targets
+    assert not (tree / relative).exists()
+    # Both the live native audit's inputs and the linked historical narrative stay.
+    for retained in (
+        ROOT / "campaign/agent-sessions/session-153-native-full.json",
+        ROOT / "campaign/agent-sessions/session-153-native-full.rows.jsonl",
+        source.with_name("NOTES.md"),
+    ):
+        assert (
+            tree / retained.relative_to(controls.REPO)
+        ).read_bytes() == retained.read_bytes()
+
+
 def test_individually_rescued_paths_reach_the_worker(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -442,6 +469,49 @@ def test_agenda_039_bulk_is_pruned_while_record_and_w3_inputs_survive(
     for source in retained_w3:
         relative = source.relative_to(controls.REPO)
         assert (tree / relative).read_bytes() == source.read_bytes()
+
+
+def test_old_validation_archive_is_pruned_while_current_records_survive(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Old compressed bulk leaves workers; its record and current evidence stay."""
+    tree, copied_targets = control_snapshot
+    archive = (
+        ROOT
+        / "campaign/agent-sessions/session-106-validation"
+        / "full-46ee41af-validate.tar.gz"
+    )
+    session = ROOT / "campaign/agent-sessions/session-106-n26-source-consistency.md"
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    packing_relative = archive.relative_to(ROOT).as_posix()
+
+    assert archive in PRUNE
+    assert archive.is_file()
+    assert all(
+        (ROOT / control["file"]).resolve() != archive.resolve()
+        for control in specification["controls"]
+    )
+    assert all(packing_relative not in control["run"] for control in specification["controls"])
+    relative = archive.relative_to(controls.REPO)
+    assert relative not in copied_targets
+    assert not (tree / relative).exists()
+    assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+    retained = [
+        ROOT / "campaign/agent-sessions/session-153-native-full.json",
+        ROOT / "campaign/agent-sessions/session-153-native-full.rows.jsonl",
+        ROOT / "campaign/explorations/X-043-new-lower-bound-proof-directions.md",
+        ROOT / "campaign/explorations/X-044-low-n-certificate-transfer.md",
+        ROOT / "campaign/explorations/X-045-n11-global-capture-and-exact-optimality.md",
+    ]
+    retained.extend(
+        path
+        for path in (ROOT / "cases/w3_lower_bound_directions").rglob("*")
+        if path.is_file() and path.suffix in {".py", ".json", ".md"}
+    )
+    for source in retained:
+        landed = tree / source.relative_to(controls.REPO)
+        assert landed.read_bytes() == source.read_bytes()
 
 
 def test_math_startup_reports_are_pruned_but_record_sources_survive(

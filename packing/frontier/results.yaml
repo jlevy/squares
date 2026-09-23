@@ -1280,7 +1280,7 @@ results:
       n_values:
         - 11
     verification: V4
-    confirmation: C4
+    confirmation: C3
     significance:
       score: 5
       rationale: >-
@@ -1302,11 +1302,13 @@ results:
       scaling equivariance for Condition 1, invariance of Conditions 2 and 3,
       inverse-dilation preservation of Condition 5, and the sharpened containment lemma
       T-022 proved by an exact rational-square comparison; rational density and upward
-      embedding supply the limit step. C4 rests on the two machine decisions of the
-      source certificate, which fail differently: the exact event-cell sweep and the
-      interval branch and bound. No source-distinct review has been mapped for this
-      result, so it does not reach C5. The 720-step certificate retained beside it is
-      the rung the standalone reader also decides; its own limit,
+      embedding supply the limit step. The source certificate reaches C4 because the
+      exact event-cell sweep and the interval branch and bound decide its frozen bytes
+      by distinct methods. The derived lower bound does not inherit that rung: its
+      load-bearing dilation-limit step has one exact-algebraic decision, so the whole
+      result takes C3 under the derived-claim minimum rule. No source-distinct review has
+      been mapped for this result. The 720-step certificate retained beside it is the
+      rung the standalone reader also decides; its own limit,
       38100000*sqrt(129600042893309449)/3594594251080001, is registered as evidence and
       is weaker.
     evidence:
@@ -1330,9 +1332,11 @@ results:
       - packing/tests/test_fractional_certificate.py
       - packing/tests/test_fractional_interval.py
     next_rung: >-
-      C5 needs a mapped, non-superseded source-distinct review of the corollary and of
-      the two frozen certificates; T-022's review covered the argument at the 181-step
-      net and this result reuses it unchanged with new B and D. The standalone reader
+      C4 needs a method-distinct decision of the corollary itself, rather than a second
+      decision of only the source certificate. C5 needs a mapped, non-superseded
+      source-distinct review of the corollary and the two frozen certificates; T-022's
+      review covered the argument at the 181-step net and this result reuses it unchanged
+      with new B and D. The standalone reader
       verify_claim.py decides the 720-step rung and refuses the 1440-step rung by its
       declared 1000-direction ceiling; a new reader release that lifts the ceiling would
       let a stranger decide the registered rung without trusting this project, and that
@@ -1990,44 +1994,36 @@ results:
       What that conclusion does not carry is stated with it. No individual certificate is
       supplied at the supremum, because the sharpened containment test is equality there;
       no strict inequality is established there; and 191/50 remains the largest side at
-      which this repository holds an individual certificate, which is T-025's and not
-      this result's.
+      which the retained T-025/T-026/T-033 fixed-core family holds an individual-side
+      certificate, which is T-025's and not this result's.
     scope:
       n_values:
         - 11
     verification: V4
     confirmation: C3
     significance:
-      score: 5
+      score: 3
       rationale: >-
-        The rubric's S5 anchor is movement on a central open case, and this raises the
-        proved lower bound for the smallest open case from T-026's 3.826447410572939744
-        to 3.826997548829543624, a movement of 0.000550138257, leaving the interval
-        [3.826997548829543, 3.877084] and a bound gap of about 0.050086 against Trump's
-        1979 packing. The movement is entirely the halving of D inside T-022's
+        This is a substantive controlled case result and machine audit of the retained
+        first-party threshold family. It moves T-026 from 3.826447410572939744 to
+        3.826997548829543624 by halving D inside T-022's
         sharpened containment factor sqrt(1 + D^2)/(B(1 + D)), at T-026's own crossing
         shrink, which does not rise under refinement; Condition 4's own coarse test
         B(1 + D) < 1 has the lower ceiling 152800000000000/39926861627361 =
-        3.826997509248, which this value exceeds and the sharpened factor is what
-        reaches; no atom was
-        re-optimised and no new theorem was needed, since Conditions 1, 1', 2' and 3 are
-        untouched by common scaling and Condition 5' is preserved by inverse dilation of
-        placements exactly as Condition 5 is. The certificate is the same measure T-026 registered:
+        3.826997509248, which this value exceeds. The sharpened factor is what reaches;
+        no atom was re-optimised and no new theorem was needed, since Conditions 1, 1',
+        2' and 3 are untouched by common scaling and Condition 5' is preserved by inverse
+        dilation of placements exactly as Condition 5 is. The certificate is the same
+        measure T-026 registered:
         the rescaled budget is unchanged at 5483661432/498684619 = 10.996251384, still
         strictly below the eleven a certificate may not reach, and only the net and the
-        half-gap tangent it fixes differ. The size of the movement is what separates this
-        from T-024 and T-026, which scored the same anchor at about ten times the value
-        each. It is not the smallest movement the anchor has carried: T-022 was scored
-        S5 on 2026-09-06 for 0.0000257236147034, twenty-one times smaller than this
-        one, so scoring this rung lower would be the inconsistent choice rather than
-        the conservative one. This is the third turn of one lever and the turn that halves what is left
-        of it: the distance from the registered side up to 955000/249507, the ceiling the
-        retained shrink leaves for any further refinement, falls from about 0.001100 to
-        about 0.000550, so this rung visibly buys half of what the previous one did.
-        These finite measurements leave the effect of another net, a different core side,
-        re-optimized weights, changed sites, and richer charge atoms unresolved.
+        half-gap tangent differ. The unchanged family cannot reach the stronger current
+        verified bound 31/8: its refinement ceiling 955000/249507 is about 3.82755,
+        already below 3.875. The result therefore records controlled method and
+        calibration evidence, rather than a current public-bound advance. Changed
+        weights, sites, parent domains, and richer charge atoms remain unresolved.
       scored: '2026-09-22'
-      by: repository replay of the two-route retention gate and the corollary tool, with no mapped review
+      by: session-154 reconciliation after the external n = 11 certificate review
     novelty: apparently-novel
     composition: >-
       Derived from a full replay of the 2880-step threshold source's Conditions 1, 1',
@@ -2045,14 +2041,14 @@ results:
       epistemics.md takes a derived claim to the minimum over its inputs and the
       derivation itself, so the derivation is the part that sets the rung and the rung
       is C3. T-022 read its own case the same way and declined C4 for want of a
-      method-distinct second derivation; T-024 declared C4 on this shape without that
-      reading and is a rung high by the same rule, which is a finding about that row
-      rather than a licence for this one. What would lift this result to C4 is a
-      method-distinct decision of the corollary itself, an interval enclosure of the
-      strict factor test and of c squared recorded as its own interval-certified entry,
-      not the source's two routes. No source-distinct review has been mapped either, so
-      C5 is not in reach. The step is T-022's argument reused unchanged, at the same B
-      and a halved D, whose proof note is cited here rather than rewritten. T-026's
+      method-distinct second derivation. This reconciliation applies the same rule to
+      T-024, whose earlier C4 declaration counted only the source certificate's two
+      routes. What would lift this result to C4 is a method-distinct decision of the
+      corollary itself, an interval enclosure of the strict factor test and of c squared
+      recorded as its own interval-certified entry, not the source's two routes. No
+      source-distinct review has been mapped either, so C5 is not in reach. The step is
+      T-022's argument reused unchanged, at the same B and a halved D, whose proof note
+      is cited here rather than rewritten. T-026's
       1440-step rung is the control at the coarser net -- the same atoms, the same
       weights and the same crossing shrink, the two records differing in
       direction_steps, in their id and provenance, and in no other field -- and the
@@ -2081,8 +2077,9 @@ results:
       - packing/tests/test_fractional_threshold.py
       - packing/tests/test_fractional_threshold_interval.py
     next_rung: >-
-      C5 needs a mapped, non-superseded source-distinct review of this corollary and of
-      the frozen 2880-step certificate: a document under docs/project/reviews/ entered in
+      C4 needs a method-distinct decision of the corollary itself. C5 needs a mapped,
+      non-superseded source-distinct review of this corollary and the frozen 2880-step
+      certificate: a document under docs/project/reviews/ entered in
       docs/project/document-map.yaml with role review. T-026's mapped review is scoped to
       the 1440-step claim and reviewing that one is not reviewing this one, so it is not
       cited here. No self-contained verifiable-claim document is rendered for this rung

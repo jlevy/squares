@@ -583,6 +583,7 @@
         "lower": {
           "display": "s(11) ≥ 3.875000",
           "evidence": [
+            "E-n011-kleddamag-3875-native-parent-core",
             "E-n011-kleddamag-3875-source-replay"
           ],
           "first_proved_here": false,

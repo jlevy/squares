@@ -294,21 +294,64 @@ is what says which.
    refuses a file that does not conform to its profile, and prices the range against the
    page. Run `squares-workbench-check-cadence` on the result and record where its
    smoothness stands.
+
 2. **Tag and create the release** from the commit the page was built at.
-3. **Upload the mp4 with an explicit content type.** `gh release upload` has no
-   content-type flag and infers one, and a release asset uploaded without a type is
-   served as `application/octet-stream` with `Content-Disposition: attachment`
-   (observed). A `<video>` element ignores the disposition and browsers sniff the bytes,
-   so it generally plays either way, but the honest fix is to set
-   `Content-Type: video/mp4` through the API rather than rely on sniffing.
+
+3. **Upload the mp4, and do not expect the content type to reach a reader.** Set
+   `Content-Type: video/mp4` through the API -- `gh release upload` has no flag for it
+   -- because that is what the API and the release page then report the asset as.
+   It is **not** what is served.
+   Measured on the published `v0.4.1` assets: whatever type an asset is stored with, the
+   download redirects to a signed URL that pins
+   `response-content-type=application/octet-stream` and
+   `Content-Disposition: attachment`. An earlier draft of this section had that
+   backwards and said setting the type was what made an embed work.
+
+   What makes it work was measured against the live asset instead: a `<video>` pointed
+   at it reached `readyState 4` at 1920 x 1080 and 140.02 s with no error, and seeking
+   to 120 s buffered 109.6-134.6 s -- a byte range from the middle of the file rather
+   than a download from its start.
+   So the browser sniffs past the octet-stream, the `type` attribute on the `<source>`
+   is what tells it what to expect, and the range support the table above relies on is
+   real.
+
 4. **Upload each receipt beside its video.** The receipt is the provenance — frames,
    duration, the file’s digest, the page’s digest, the citation file’s digest, the beat
    and the grid-fill factor.
    A published video whose receipt is not published is a claim without its evidence.
+
 5. **Verify what is served**, rather than assuming: the status, the content type, and
    that a range request returns 206.
+
 6. **Link or embed** from `templates/explainer-article.md`, which is the explainer’s
    prose source.
+
+### What was published
+
+`v0.4.1`, tagged at `d5b1c2e1b` on 2026-09-22:
+<https://github.com/jlevy/squares/releases/tag/v0.4.1>. Four assets — both cuts and both
+receipts.
+
+| Asset | Frames | Length | Size | Profile |
+| --- | ---: | ---: | ---: | --- |
+| `ascent-n1-100-1080p60-citations.mp4` | 8,401 | 140.02 s | 38.0 MB | `social` |
+| `ascent-n1-324-1080p60-citations.mp4` | 29,639 | 493.98 s | 206.1 MB | `archive` |
+
+Both drawn from page `575ccc8e` and stamped `v0.4.1-b7690c`. Their clocks are exact to
+0.7 microseconds of 1/60 s; repeated frames inside motion are 11 and 39, 0.13% of each,
+and ten of the eleven in the excerpt are the one beat `think-dh9j` tracks.
+
+The explainer plays the excerpt under Figure 2, in a `screen-only` block so the typeset
+PDF does not carry a black rectangle where a player would be; the PDF still renders 22
+pages and reproduces itself.
+
+**GitHub strips `<video>` from Markdown**, so the README links the files rather than
+embedding them. Measured through GitHub’s own Markdown API on 2026-09-22: both
+`<video src=…>` and the `<source>` form render to an empty paragraph, while `<img>`,
+`<a>` and `<details>` survive in the same request, and a bare asset URL becomes a plain
+link. The `user-attachments` URL form GitHub produces for drag-and-dropped video is
+rendered by its frontend, not by the Markdown pipeline, and cannot be pointed at a
+release asset.
 
 ### The embed
 

@@ -178,11 +178,26 @@ The proof presented here is of this kind.
 
 <figure>
   <div class="stage"><a href="known-best-1-100.pdf"><img src="known-best-1-100.svg" alt="{{COMPOSITE_ALT}}" width="2400" height="2896"></a></div>
+
+  <div class="stage screen-only">
+
+<video class="film" controls preload="none" playsinline width="1920" height="1080"
+    poster="ascent-n1-100-poster.png"
+    aria-label="The atlas built one unit square at a time, from n = 1 to n = 100, at 1080p60.">
+<source src="https://github.com/jlevy/squares/releases/download/v0.4.1/ascent-n1-100-1080p60-citations.mp4" type="video/mp4; codecs=&quot;avc1.640028&quot;">
+<a href="https://github.com/jlevy/squares/releases/download/v0.4.1/ascent-n1-100-1080p60-citations.mp4">Download
+the film</a>. </video>
+
+  </div>
+
   <figcaption><strong>Figure 2.</strong> The best known packings of 1 through 100 unit squares, with upper bounds
   and, for unsettled cases, the current lower bounds verified here. A crimson star marks a lower bound this project
   proved: {{N_STARRED}} of the hundred. The <a href="{{ATLAS_URL}}">repository</a> records every witness and its
   provenance. PDFs are available for <a href="known-best-1-100.pdf">this figure</a> and the
-  <a href="known-best-1-324.pdf">full 324-case poster</a>.</figcaption>
+  <a href="known-best-1-324.pdf">full 324-case poster</a>. The film below the atlas draws the same hundred
+  packings one square at a time, each step naming the bound it reaches and where that bound comes from; the
+  <a href="https://github.com/jlevy/squares/releases/download/v0.4.1/ascent-n1-324-1080p60-citations.mp4">full
+  <span class="tex">n = 1 \ldots 324</span> ascent</a> runs 8m 14s.</figcaption>
 </figure>
 
 For eleven squares, T-026 proves $s(11) \ge {{CURRENT_BOUND_DEC}}$. We first prove the

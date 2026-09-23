@@ -96,12 +96,15 @@ from fractions import Fraction
 from functools import partial
 from math import lcm
 from queue import Empty, SimpleQueue
+from typing import Protocol
 
 import numpy as np
 from numpy.typing import NDArray
 
 from sqpack.fractional.interval import (
+    BATCH,
     INT64_MASS_LIMIT,
+    MAX_BATCH_SITES,
     MAX_INTERVAL_ATOMS,
     AtomData,
     DirectionOutcome,
@@ -114,8 +117,10 @@ from sqpack.fractional.interval import (
     _condition_containment,
     _condition_net_reaches_eighth_turn,
     doubled_net,
+    interval_batch_size,
 )
-from sqpack.fractional.threshold import Point, ThresholdCertificate
+from sqpack.fractional.model import Atom
+from sqpack.fractional.threshold import Point, ThresholdAtom, ThresholdCertificate
 
 Floats = NDArray[np.float64]
 Ints = NDArray[np.int64]
@@ -125,12 +130,27 @@ Ints = NDArray[np.int64]
 # The cap keeps the gathered block at twice the point route's mask bound and the count
 # block under it; an input past it is refused before any array exists.
 MAX_MEMBER_SLOTS = 2 * MAX_INTERVAL_ATOMS
+# Retained intp members occupy at most 128 KiB, independently of batch size.
+MAX_BATCH_MEMBER_SLOTS = 2 * MAX_MEMBER_SLOTS
 #: Tokens per atom. `charge` sums a member row into one `int16`, so a row has to stay
 #: inside that lane; this cap is far above any admitted atom and exists so a weighted
 #: atom fails loudly rather than overflowing a count.
 MAX_TOKENS_PER_ATOM = 4096
 
 CONDITION_5 = "Condition 5' every admissible centre is charged at least 1"
+
+
+class ThresholdCharges(Protocol):
+    """The charge table shared by uniform-net and adaptive parent-core certificates."""
+
+    @property
+    def n(self) -> int: ...
+
+    @property
+    def atoms(self) -> tuple[Atom, ...]: ...
+
+    @property
+    def threshold_atoms(self) -> tuple[ThresholdAtom, ...]: ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -156,15 +176,19 @@ class ThresholdAtomData:
     budget: int
     point_count: int
     threshold_count: int
+    batch_size: int = BATCH
 
     @classmethod
-    def of(cls, certificate: ThresholdCertificate) -> ThresholdAtomData:
+    def of(cls, certificate: ThresholdCharges, *, batch_size: int = BATCH) -> ThresholdAtomData:
+        batch_size = interval_batch_size(batch_size)
+        max_rows = min(MAX_BATCH_SITES, MAX_INTERVAL_ATOMS * BATCH // batch_size)
+        max_slots = min(MAX_BATCH_MEMBER_SLOTS, MAX_MEMBER_SLOTS * BATCH // batch_size)
         # Preflight dimensions from the compact atom records, before any token-sized
         # row or NumPy array exists. Multiplicity can make a one-site record enormous.
         rows = len(certificate.atoms) + len(certificate.threshold_atoms)
-        if rows > MAX_INTERVAL_ATOMS:
+        if rows > max_rows:
             raise IntervalInputError(
-                f"the interval verifier supports at most {MAX_INTERVAL_ATOMS} atoms"
+                f"the interval verifier supports at most {max_rows} atoms at this batch size"
             )
         width = 1
         for threshold_atom in certificate.threshold_atoms:
@@ -175,20 +199,20 @@ class ThresholdAtomData:
                     f"{MAX_TOKENS_PER_ATOM} this verifier counts in one int16 lane"
                 )
             width = max(width, tokens)
-        if rows * width > MAX_MEMBER_SLOTS:
+        if rows * width > max_slots:
             raise IntervalInputError(
                 f"the member table would hold {rows * width} slots, above the "
-                f"{MAX_MEMBER_SLOTS} this verifier gathers per batch"
+                f"{max_slots} this verifier gathers per batch"
             )
         scale, point_masses, threshold_masses, budget = scaled_threshold_masses(certificate)
         index: dict[Point, int] = {}
 
         def site(point: Point) -> None:
             if point not in index:
-                if len(index) >= MAX_INTERVAL_ATOMS:
+                if len(index) >= max_rows:
                     raise IntervalInputError(
                         "the interval verifier supports at most "
-                        f"{MAX_INTERVAL_ATOMS} distinct sites"
+                        f"{max_rows} distinct sites at this batch size"
                     )
                 index[point] = len(index)
 
@@ -231,11 +255,12 @@ class ThresholdAtomData:
             budget=budget,
             point_count=len(certificate.atoms),
             threshold_count=len(certificate.threshold_atoms),
+            batch_size=batch_size,
         )
 
 
 def scaled_threshold_masses(
-    certificate: ThresholdCertificate,
+    certificate: ThresholdCharges,
 ) -> tuple[int, list[int], list[int], int]:
     """The common scale, every point and threshold weight on it, and the total budget.
 
@@ -287,8 +312,17 @@ class ThresholdDirectionSearch(DirectionSearch):
         rotation: Rotation,
         outer_side: Interval,
         square_side: Interval,
+        *,
+        centre_margin: Interval | None = None,
     ) -> None:
-        super().__init__(data.sites, rotation, outer_side, square_side)
+        super().__init__(
+            data.sites,
+            rotation,
+            outer_side,
+            square_side,
+            centre_margin=centre_margin,
+            batch_size=data.batch_size,
+        )
         self.members = data.members
         self.thresholds = data.thresholds
         # Mass per atom, replacing the inherited per-site array, which is all zeros here.

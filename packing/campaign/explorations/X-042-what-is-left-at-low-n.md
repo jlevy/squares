@@ -43,6 +43,14 @@ are reported here with their rungs; no bound moved and no hypothesis was decided
 document. `X-041` is its predecessor and this report contradicts it in nine places, each
 named below with the recomputation that settles it.
 
+**Reconciliation note, 2026-09-22.** The later external-certificate intake verified
+Kleddamag’s stronger `s(11) > 31/8 = 3.875` result.
+The T-033 passages below retain the earlier first-party result and the review’s
+sequence; they no longer describe the current Frontier lower bound.
+The unchanged T-025/T-026/T-033 fixed-core family has ceiling `955000/249507 ≈ 3.82755`,
+below `3.875`, so further net refinement alone cannot improve the current bound.
+Changed weights, sites, parent domains, and charge atoms stay outside that conclusion.
+
 ## The Three Claims a Reader Should Carry Away
 
 Stated first, with their evidence, because each one redirects work that `X-041` ranked

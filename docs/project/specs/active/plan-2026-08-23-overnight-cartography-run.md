@@ -341,16 +341,17 @@ on.
 It is not the next thing, because a reassessment of what to search is queued in front
 of it.
 
-For the next supervised exact-research goal, after PR 222 is green and mergeable, start
-two separate branches from its head in parallel.
-The selected `think-d010` branch decides the complete n11 adaptive parent-core catalogue
-by an independent coverage method while preserving its admissible centre domain and
-addressing the native site and feature-slot limits.
-The other branch reconciles PR 221 while retaining every historical result and the
-strongest justified current bounds.
-Existing identifiers from PR 221 take precedence; any later conflicting identifiers are
-renumbered after PR 221’s sequence with every reference.
-PR 222 introduces no T-ID.
+PR 222 and PR 223 are merged into `main`. The completed `think-d010` branch certifies
+all 12,028 native n11 adaptive parent-core rows while preserving the admissible
+parent-centre domain, strict containment, bounded site and feature tables, and the clean
+`c183cc9ab` proof provenance.
+PR 224 is the current completion step: it reconciles PR 221 while retaining every
+historical result, the strongest justified current bounds, and the native C4 evidence.
+The owner’s separately requested W3 publication follows that merge and owns the next
+research ordering.
+
+The separate bounded publication gap remains `think-vx26`, which renders T-033’s missing
+standalone claim document from the retained result and evidence records.
 
 The W5 efficiency block that stood here is discharged.
 Its headline turned out to be a correction rather than a confirmation: the exhaustive
@@ -448,6 +449,10 @@ Session095’s fixed collision-augmented axis cover returned `no_chain` without 
 H124 and restricted H036 remain unresolved, and that representation receives no retry.
 Do not repeat a completed experiment or create another candidate without a registered
 result; a float optimum is never a result.
+For the next supervised exact-research goal, treat standalone bead `think-d010` as
+fulfilled by PR 223’s merge.
+This preserves Session 153’s latest observed terminal handoff; the owner’s newer W3
+request is the actual next work and will supply a new session handoff when published.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the current evidence
 and allocation boundaries.
 

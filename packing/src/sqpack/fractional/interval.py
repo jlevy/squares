@@ -143,6 +143,17 @@ BOX_BUDGET = 500_000
 # batch; this cap keeps one mask under 16 MiB and refuses an input-driven allocation
 # in the hundreds of megabytes before it happens.
 MAX_INTERVAL_ATOMS = 4096
+# A smaller batch may admit more sites, but must not turn a one-box request into
+# millions of retained coordinate enclosures. At this cap four float arrays use
+# 256 KiB; the per-batch mask still obeys its original 16 MiB ceiling.
+MAX_BATCH_SITES = 2 * MAX_INTERVAL_ATOMS
+
+
+def interval_batch_size(batch_size: int) -> int:
+    """Validate an explicit batch without increasing the existing allocation ceiling."""
+    if type(batch_size) is not int or not 1 <= batch_size <= BATCH:
+        raise IntervalInputError(f"batch size must be an integer in 1..{BATCH}")
+    return batch_size
 
 
 # ---------------------------------------------------------------------------
@@ -430,7 +441,16 @@ class DirectionSearch:
         outer_side: Interval,
         square_side: Interval,
         clip: CornerClip | None = None,
+        *,
+        centre_margin: Interval | None = None,
+        batch_size: int = BATCH,
     ) -> None:
+        self.batch_size = interval_batch_size(batch_size)
+        if (
+            len(atoms.xlo) > MAX_BATCH_SITES
+            or len(atoms.xlo) * self.batch_size > MAX_INTERVAL_ATOMS * BATCH
+        ):
+            raise IntervalInputError("the site mask exceeds the 16 MiB batch ceiling")
         self.label = rotation.label
         self.mass = atoms.mass
         self.scale = atoms.scale
@@ -452,7 +472,13 @@ class DirectionSearch:
         self.outer = (u_low[0], u_high[1], v_low[0], v_high[1])
         _require_finite(*self.inner, *self.outer)
         # The domain [h, L - h]^2 in container coordinates.
-        self.margin = square_side * (rotation.cosine + rotation.sine) / TWO
+        self.margin = (
+            square_side * (rotation.cosine + rotation.sine) / TWO
+            if centre_margin is None
+            else centre_margin
+        )
+        if self.margin.lo < 0:
+            raise IntervalInputError("the centre margin must be nonnegative")
         self.far = outer_side - self.margin
         if self.far.lo <= self.margin.hi:
             raise IntervalInputError("the square does not fit the container at this direction")
@@ -656,9 +682,9 @@ class DirectionSearch:
         stuck_bounds: list[int] = []
         while pending:
             batch = pending.pop()
-            if len(batch) > BATCH:
-                pending.append(batch[BATCH:])
-                batch = batch[:BATCH]
+            if len(batch) > self.batch_size:
+                pending.append(batch[self.batch_size :])
+                batch = batch[: self.batch_size]
             tight = self.tighten(batch)
             _require_finite(tight)
             tight = tight[(tight[:, 0] <= tight[:, 1]) & (tight[:, 2] <= tight[:, 3])]
@@ -695,7 +721,10 @@ class DirectionSearch:
                 # a sound lower bound for every unresolved box because no weight is
                 # negative; a sampled point below the threshold has refuted already.
                 exhausted: Literal["refuted", "undecided"] = (
-                    "refuted" if upper is not None and upper < self.scale else "undecided"
+                    "refuted"
+                    if upper is not None
+                    and upper < (self.scale if prune_at is None else prune_at)
+                    else "undecided"
                 )
                 abandoned = sum(
                     1 for value in stuck_bounds if threshold is None or value < threshold

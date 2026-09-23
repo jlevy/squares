@@ -167,6 +167,14 @@ PRUNE = frozenset(
         ROOT / "atlas/known-best/known-best-1-324.pdf",
         ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/rendering",
+        # The pre-migration transition statistics are frozen historical output;
+        # v2-transitions/NOTES.md records that the live builder now generates its
+        # own statistics elsewhere. No registered control reads this old JSON,
+        # and no checked document links it inline. Its 1,371,919 bytes are omitted
+        # when Session153's complete proof artifacts take the snapshot to
+        # 168,630,664 bytes, 858,504 above the unchanged 160 MiB cap. Those proof
+        # artifacts stay: their live audit and inline links need the retained files.
+        ROOT / "atlas/known-best/video/spikes/v2-transitions/transition-stats.json",
         ROOT / "atlas/prospective/rendering",
         # The Motion Lab's deterministic report is generated output, replayed by the
         # browser-golden check, and no registered mutation control names it. The report
@@ -192,6 +200,18 @@ PRUNE = frozenset(
         # dependencies below these roots still return through snapshot_pruned_targets.
         ROOT / "benchmarks/math-startup/runs",
         ROOT / "benchmarks/math-startup/fixtures",
+        # Session 106's compressed validate archive is frozen historical bulk. The
+        # owning session names it once as a plain `outputs` path; no mutation target,
+        # registered command, test, devtool, result, document-map row or inline link
+        # opens it. The archive stays in Git, while the session record stays in every
+        # worker. On the combined native/reconciliation/W3 tree, retaining the archive
+        # put the portable snapshot at 167,851,810 bytes, 79,650 above the unchanged
+        # cap. After the support code and regression are included, omitting this exact
+        # 190,861-byte file leaves a 167,664,112-byte snapshot and 108,048 bytes of
+        # measured headroom without dropping a current proof or research artifact.
+        ROOT
+        / "campaign/agent-sessions/session-106-validation"
+        / "full-46ee41af-validate.tar.gz",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private
@@ -255,7 +275,11 @@ PRUNE = frozenset(
         # in think-t1lk for PR 218 found no control or external code reader of its bulk
         # numerical output. Inline-linked receipts and registered artifacts still return
         # through snapshot_pruned_targets. Reuse that prune here instead of raising the
-        # portable ceiling for this intake's 8,847-byte source-growth breach.
+        # portable ceiling. Registering T-033 copied a 674 KB certificate into `cases/`,
+        # while the pruned directory itself holds about 10.8 MB of numerical receipts,
+        # gate stdout, and copied measurements that `controls.yaml` does not name.
+        # The receipt the register lists as an artifact returns through
+        # linked_pruned_targets, as agenda 034's did.
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-041",
         ROOT
         / "campaign/series/series-000-smoke-and-calibration/results/exp-201-arm-calibration",

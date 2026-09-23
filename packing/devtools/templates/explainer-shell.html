@@ -598,6 +598,19 @@ body {
   max-width: 42rem;
   width: 100%;
 }
+/* The film under the atlas. Sized like a canvas, and its box is settled before a byte of
+   video arrives: the `width`/`height` attributes give the intrinsic 16:9, the poster is a
+   frame of the film at that same ratio, and `aspect-ratio` holds it if either is missing.
+   Without them a `preload="none"` player is drawn at the 300x150 default and then jumps to
+   1920x1080 when someone presses play (the owner, 2026-09-22). */
+.stage video.film {
+  aspect-ratio: 16 / 9;
+  background: var(--kpress-doc-text);
+  display: block;
+  height: auto;
+  max-width: 42rem;
+  width: 100%;
+}
 .stage canvas.draggable {
   cursor: grab;
   touch-action: pan-y;

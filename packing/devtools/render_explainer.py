@@ -312,10 +312,18 @@ COMPOSITE_STEM = PACKING / "atlas" / "known-best" / "known-best-1-100"
 #: who follows the link to the vector is not sent back to the repository. It has no card
 #: of its own; the link preview stays the figure's landscape crop.
 POSTER_STEM = PACKING / "atlas" / "known-best" / "known-best-1-324"
+#: The film's poster frame, published beside the figure since 2026-09-22 so the player
+#: under it has something to show before anyone presses play. It is a frame of the film
+#: itself -- n = 88, at 1280x720, the video's own 16:9 -- so the box the page reserves for
+#: the poster is the box the video fills, and starting playback moves nothing. It lives
+#: with the workbench, whose stage drew it, rather than in the atlas: the atlas directory
+#: is a data path, and a file added there would move the version every artifact prints.
+FILM_POSTER = REPO / "packages" / "workbench" / "assets" / "ascent-n1-100-poster.png"
 COMPOSITE_ASSETS = (
     *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
     COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png"),
     *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    FILM_POSTER,
 )
 #: The full-canvas raster, which the published Markdown shows to a reader whose context
 #: cannot render the vector. The 1x rather than the committed `@2x`: every consumer

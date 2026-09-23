@@ -141,13 +141,73 @@ evidence:
       the first-party reconciliation and adverse controls are in
       packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/independent-audit.json.
       The two complete scanners share the event-cell method, so replay supports
-      V4/C3 and does not establish C4. Selected boundary and dense-array controls
+      V4/C3 by itself and does not establish C4. The separate complete native
+      decision E-n011-kleddamag-3875-native-parent-core supplies the second method.
+      Selected boundary and dense-array controls
       are not a second complete coverage decision. The exact optimum remains
       open, and the older T-026 certificate remains valid historical evidence.
       Portable variable definitions, the isolated pinned runtime, writable
       source-copy preparation and actual historical command are recorded in
       packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/README.md.
       The immutable source archive is not an execution cache or output directory.
+    source_reviewed: '2026-09-22'
+
+  - id: E-n011-kleddamag-3875-native-parent-core
+    claim: lower-bound
+    scope: {n_values: [11]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[Kleddamag n11 2026]'
+    certificate: resources/web/external-square-certificates-2026-09-22/kleddamag-11/global-certificate.json
+    replay: >-
+      uv run --frozen --all-extras --group dev python -m devtools.verify_kleddamag_n11_native
+      --all --workers 2 --output /tmp/kleddamag-native-replay.json
+    replay_status: passed
+    proof:
+      source: packing/src/sqpack/fractional/parent_core.py
+      theorem: Eleven independently rotated unit squares cannot fit in a square of side 31/8; compactness gives s(11) > 31/8.
+      scope: Unrestricted square packing with disjoint interiors and boundary contact allowed.
+      pinpoints: >-
+        validate_parent_core and the parent-centre domain derivation;
+        parent_core_interval.py verify_parent_core_rows; the directed-rounding
+        interval and threshold_interval searches; the complete frozen receipt
+        and row journal in campaign/agent-sessions/session-153-native-full.*.
+      assumptions:
+        - Exact nonnegative point and threshold charges are D4 invariant, including physical-site multiplicities; each k-of-m charge contributes at most floor(m/k) times its weight to the packing budget.
+        - The contiguous 12028-row half-tangent partition covers all folded parent orientations; rational vertex-projection quadratics prove each closed core lies strictly inside every parent in its row.
+        - The complete union of parent-admissible centre domains uses the parent side A, while core membership uses the independently specified row side B.
+        - Directed-rounding boxes cover each entire parent-centre domain and count only sites guaranteed inside the closed core; every row certifies at the exact ceil(Gamma times scale) threshold with no stalled or exhausted boxes.
+        - Disjoint parent interiors make their closed cores disjoint; the exact margin 11 Gamma minus budget is 13483/125000000, strictly positive.
+        - Uniform scaling with L=191/50 and A=764/775 gives L/A=31/8; compactness of feasible packings makes the minimum side attained and the lower bound strict.
+      audit_record: docs/project/reviews/review-2026-09-22-native-n11-parent-core.md
+    external_review:
+      state: informally-verified
+      date: '2026-09-22'
+      reviewed_by: GPT-6 Astra at max reasoning, with independent coordinator mathematical and complete-receipt review; Sol supplied adverse controls.
+      note: >-
+        The complete transfer theorem, exact parent-domain and containment premises,
+        direct threshold counting, bounded worker execution and every row outcome
+        were reviewed. No unresolved premise or coverage box remains.
+    limitations: >-
+      The complete native run on clean c183cc9abe93eedcb268a5390cdd1cdc6e7bbb39
+      accepted all 12028 rows in 6197.381 seconds, with 136081500 boxes, zero
+      stalls, no exhausted budgets and no refutations. Its least certified lower
+      bound is 999962528 integer weight units. The immutable receipt and journal
+      are packing/campaign/agent-sessions/session-153-native-full.json and
+      packing/campaign/agent-sessions/session-153-native-full.rows.jsonl.
+      The external source remains pinned v1.0.2 at 6a733f339395c3514f2ab63d8c4aa64cf63c0b5a,
+      certificate SHA-256 57e9927da5c13f42dd8bcbf8f08c84363635fece626657ee63a810c61cd44458.
+      This direct closed-box coverage differs from the source event-cell scans;
+      the two complete methods plus the reviewed transfer theorem support C4 for
+      the strict bound. They share the external certificate and counting theorem.
+      There is no new numerical bound, result identifier, priority claim or C5
+      promotion. The fast audit tool only reconciles receipts, exact premises and
+      unchanged historical Git inputs; it neither replays coverage nor authenticates
+      coordinated invented receipt and journal data. The exact optimum remains open.
     source_reviewed: '2026-09-22'
 
   - id: E-n011-kleddamag-3875-report
@@ -3193,7 +3253,9 @@ evidence:
         project the search surfaced, wand125/square-packing-bounds, states bounds for
         n = 26, 29 and 39 and none for n = 11. The side 191/50 is this project's own
         rung and this re-certification is derived from the frozen T-025 bytes, so
-        neither was searched separately.
+        neither was searched separately. Later on 2026-09-22, Session 152 acquired and
+        verified Kleddamag's stronger s(11) > 31/8 certificate. That later source
+        supersedes any reading of this search as a current public-bound claim.
       novel_object: >-
         The re-certification of the retained T-025 threshold atoms on the 2880-step net
         at shrink 249507/250000. The atoms, the threshold theorem, the two decision
@@ -3207,7 +3269,9 @@ evidence:
         2026-09-22, and not an exhaustive review of subscription-only indexes, theses,
         proceedings,
         non-English or unindexed sources, code-hosting sites, private correspondence, or
-        unpublished work. Apparent novelty is not a priority claim.
+        unpublished work. The subsequently archived Kleddamag certificate is stronger.
+        Apparent novelty here is confined to the project-specific frozen rung and is not
+        a priority claim.
     certificate: cases/n11_threshold_certificate/certificate-191-50-net2880.json
     replay: uv run --frozen --all-extras --group dev python -m devtools.decide_threshold_certificate cases/n11_threshold_certificate/certificate-191-50-net2880.json
     replay_status: passed
@@ -3308,15 +3372,16 @@ evidence:
     novelty: apparently-novel
     novelty_basis:
       corpus: >-
-        The corpus of E-n011-threshold-net2880-certificate, which carries the 2026-09-09
-        bounded search for an s(11) lower bound above Stromquist's.
+        The corpus of E-n011-threshold-net2880-certificate, plus the external certificate
+        packet reviewed in Session 152, including Kleddamag's stronger s(11) > 31/8
+        result.
       searched: >-
         The 2026-09-09 search under E-n011-fractional-net1440-certificate, which returned
         no source stating any lower bound on s(11) above Stromquist's outside this
         repository, and its 2026-09-22 repetition under
-        E-n011-threshold-net2880-certificate, which returned the same. This bound's own
-        decimal 3.826998 and its radicand 2073600042893309449 were not searched
-        separately.
+        E-n011-threshold-net2880-certificate, which returned the same. Session 152 later
+        acquired and verified the stronger Kleddamag certificate. This rung's own decimal
+        3.826998 and radicand 2073600042893309449 were not searched separately.
       novel_object: >-
         The exact value obtained for this repository's retained T-025 atoms by combining
         their 2880-step re-certification with T-022's sharpened containment lemma, every
@@ -3326,7 +3391,8 @@ evidence:
         new; the stronger current public lower bound is not this result.
       gaps: >-
         A bounded search of one general index, dated 2026-09-09 and repeated on
-        2026-09-22. Apparent novelty is not a priority claim.
+        2026-09-22. Apparent novelty is confined to the retained fixed-core rung and is
+        not a priority claim.
     certificate: cases/n11_threshold_certificate/t-033-dilation-limit-corollary.json
     replay: uv run --frozen --all-extras --group dev python -m devtools.dilation_corollary cases/n11_threshold_certificate/certificate-191-50-net2880.json --source-name packing/cases/n11_threshold_certificate/certificate-191-50-net2880.json --check-limit-record cases/n11_threshold_certificate/t-033-dilation-limit-corollary.json
     replay_status: passed

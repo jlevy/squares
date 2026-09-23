@@ -1,0 +1,102 @@
+{
+  "schema": "NativeParentCoreReceiptReconciliation/v1",
+  "status": "RECONCILED_RECEIPT_NOT_COVERAGE_REPLAY",
+  "coverage_replayed": false,
+  "additional_confirmation_method": false,
+  "proof_commit": "c183cc9abe93eedcb268a5390cdd1cdc6e7bbb39",
+  "certificate_sha256": "57e9927da5c13f42dd8bcbf8f08c84363635fece626657ee63a810c61cd44458",
+  "proof_inputs": [
+    {
+      "path": "packing/devtools/__init__.py",
+      "git_blob": "48070c5f34b8af5bad1450aee1750bd463eea8b4"
+    },
+    {
+      "path": "packing/devtools/verify_kleddamag_n11_native.py",
+      "git_blob": "af1acb97a4f168413ee6425a5f7dbc1cdb0087a6"
+    },
+    {
+      "path": "packing/src/sqpack/__init__.py",
+      "git_blob": "4667aa98055094dccef89081153ba194791200d1"
+    },
+    {
+      "path": "packing/src/sqpack/field.py",
+      "git_blob": "a75fa0d3bc8c0386ab2b06f726a2919e95a7873b"
+    },
+    {
+      "path": "packing/src/sqpack/verify.py",
+      "git_blob": "77ea87b9aa9fa63a2554ab51265aa4b0e658337e"
+    },
+    {
+      "path": "packing/src/sqpack/workers.py",
+      "git_blob": "965c5ccde8a55b4979c0c91d3a984af0383f9262"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/__init__.py",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/certificate.py",
+      "git_blob": "5c48d1709b19fc65d39e3abe89cfad43e2123cbe"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/corner_clip.py",
+      "git_blob": "d4ce7bd44a13315e695f066a2b4a6d9a98905685"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/model.py",
+      "git_blob": "a5df6094eadfe441dba66fee8fe37a4e5530b6f6"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/sweep.py",
+      "git_blob": "81aaa87307d88f7397051eacaa6518b525e0dffc"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/threshold.py",
+      "git_blob": "51a2c76ecf5df605e060937f92eba92cce10f490"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/interval.py",
+      "git_blob": "3947d525cf1141f676dbac2f7d3abfa2701b0f03"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/threshold_interval.py",
+      "git_blob": "4690b83ea094f4aef6d117281730a7865ae5a9d4"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/parent_core.py",
+      "git_blob": "54cd698975ea0fd3d092865f866046abebc8d85a"
+    },
+    {
+      "path": "packing/src/sqpack/fractional/parent_core_interval.py",
+      "git_blob": "1a6222cc85fe1e27e9e03f68580afce366de95ca"
+    },
+    {
+      "path": "packing/.python-version",
+      "git_blob": "a128d5c0d975a5b333e78950665709c8e2d88597"
+    },
+    {
+      "path": "packing/pyproject.toml",
+      "git_blob": "29a17dad3e5ed43c34167f31b07723d21f193193"
+    },
+    {
+      "path": "packing/uv.lock",
+      "git_blob": "22e3cd25b36a5a1b45cf4c42f3c33aac0ce9dcf6"
+    }
+  ],
+  "rows_reconciled": 12028,
+  "minimum_recorded_lower_units": 999962528,
+  "threshold_units": 999962528,
+  "total_recorded_boxes": 136081500,
+  "counting_gap": "13483/125000000",
+  "exact_premises": {
+    "budget": "1374934993/125000000",
+    "minimum_containment_numerator": "1/1000000000000",
+    "final_half_tangent": "207107/500000",
+    "rows": 12028
+  },
+  "limitations": [
+    "Receipt and journal are related outputs of one historical execution; matching cannot authenticate coordinated invented data.",
+    "Git identity establishes unchanged proof inputs, not historical execution. Coverage evidence remains the original complete run and its reviewed method.",
+    "The pinned runtime describes the original run; this reconciliation may run on another supported host and does not reproduce its memory or timing."
+  ]
+}
