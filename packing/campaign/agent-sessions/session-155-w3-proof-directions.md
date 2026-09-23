@@ -261,8 +261,8 @@ session:
       The integration receipt is a lower bound because this session was live at its
       cutoff. The combined PR 224 and W3 tree initially measured 167,851,810 bytes,
       79,650 above the unchanged 167,772,160-byte cap. Excluding one exact 190,861-byte
-      Session 106 historical archive that no control consumes leaves a 167,664,112-byte
-      snapshot and 108,048 bytes of measured headroom. The archive remains in Git, and
+      Session 106 historical archive that no control consumes leaves a 167,664,650-byte
+      snapshot and 107,510 bytes of measured headroom. The archive remains in Git, and
       its session record and all current native and W3 artifacts remain byte-identical
       in worker copies.
     elapsed_seconds: 1935.009
@@ -290,7 +290,7 @@ session:
     Direct measurement of the combined PR 224 and W3 tree first found 167,851,810 bytes,
     79,650 above the unchanged cap. The reviewed exact Session 106 archive exclusion
     removes 190,861 bytes of unused historical bulk; with its support code and
-    real-worker regression included, the snapshot is 167,664,112 bytes with 108,048
+    real-worker regression included, the snapshot is 167,664,650 bytes with 107,510
     bytes of headroom. All current native and W3 records remain present byte for byte.
   - >-
     Cost cutoff 2026-09-23T03:38:48Z: creative research used 1.52 agent-hours,

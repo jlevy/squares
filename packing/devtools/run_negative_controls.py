@@ -207,7 +207,7 @@ PRUNE = frozenset(
         # worker. On the combined native/reconciliation/W3 tree, retaining the archive
         # put the portable snapshot at 167,851,810 bytes, 79,650 above the unchanged
         # cap. After the support code and regression are included, omitting this exact
-        # 190,861-byte file leaves a 167,664,112-byte snapshot and 108,048 bytes of
+        # 190,861-byte file leaves a 167,664,650-byte snapshot and 107,510 bytes of
         # measured headroom without dropping a current proof or research artifact.
         ROOT
         / "campaign/agent-sessions/session-106-validation"
