@@ -394,6 +394,56 @@ def test_agenda_041_bulk_output_is_pruned_but_linked_receipts_survive(
     assert not (tree / journal.relative_to(controls.REPO)).exists()
 
 
+def test_agenda_039_bulk_is_pruned_while_record_and_w3_inputs_survive(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The combined native/W3 snapshot keeps every checked record and drops old bulk."""
+    tree, copied_targets = control_snapshot
+    directory = ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-039"
+    packing_relative = directory.relative_to(ROOT).as_posix()
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+
+    assert directory in PRUNE
+    assert all(
+        not (ROOT / control["file"]).resolve().is_relative_to(directory)
+        for control in specification["controls"]
+    )
+    assert all(packing_relative not in control["run"] for control in specification["controls"])
+
+    document_map = safe_load((controls.REPO / "docs/project/document-map.yaml").read_text())
+    mapped = {
+        controls.REPO / row["path"]
+        for row in document_map["documents"]
+        if row["path"].startswith(f"packing/{packing_relative}/")
+    }
+    assert mapped
+    for source in mapped:
+        relative = source.relative_to(controls.REPO)
+        assert relative in copied_targets
+        assert (tree / relative).read_bytes() == source.read_bytes()
+
+    unused_bulk = directory / "n18-4679-1000-t029-auto-windows5-certificate.json"
+    assert unused_bulk.is_file()
+    assert unused_bulk.relative_to(controls.REPO) not in copied_targets
+    assert not (tree / unused_bulk.relative_to(controls.REPO)).exists()
+
+    retained_w3 = [
+        ROOT / "campaign/explorations/X-043-new-lower-bound-proof-directions.md",
+        ROOT / "campaign/explorations/X-044-low-n-certificate-transfer.md",
+        ROOT / "campaign/explorations/X-045-n11-global-capture-and-exact-optimality.md",
+    ]
+    cases = ROOT / "cases/w3_lower_bound_directions"
+    retained_w3.extend(
+        path
+        for path in cases.rglob("*")
+        if path.is_file() and path.suffix in {".py", ".json", ".md"}
+    )
+    assert len(retained_w3) > 4
+    for source in retained_w3:
+        relative = source.relative_to(controls.REPO)
+        assert (tree / relative).read_bytes() == source.read_bytes()
+
+
 def test_math_startup_reports_are_pruned_but_record_sources_survive(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:

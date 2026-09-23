@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 152
+count: 153
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 98
+  sessions_measured: 99
   sessions_unmeasured: 54
   attributed:
     rollups: 188
@@ -35,9 +35,9 @@ totals:
     one_off_code: 5356
     wall_hours: 497.45
 codex_receipts:
-  attributed: 57
+  attributed: 59
   unattributed: 2
-  measured: 59
+  measured: 61
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -2541,4 +2541,31 @@ sessions:
     agent_hours: 12.27
     active_union_hours: 4.31
     wall_hours: 4.31
+    snapshot_incomplete: true
+- id: session-155
+  title: "W3 Lower-Bound Proof Directions"
+  status: in_progress
+  primary_bead: think-4kov
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-155-integration.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
+    model_responses: 188
+    agent_hours: 1.52
+    active_union_hours: 1.49
+    wall_hours: 1.72
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-155-integration.yaml
+    model_responses: 144
+    agent_hours: 0.56
+    active_union_hours: 0.54
+    wall_hours: 0.54
     snapshot_incomplete: true

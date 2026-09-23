@@ -1,0 +1,120 @@
+{
+  "status": "COMPLETE_BOUNDED_DIAGNOSTIC",
+  "source_sha256": "57e9927da5c13f42dd8bcbf8f08c84363635fece626657ee63a810c61cd44458",
+  "controls": "PASS",
+  "selection": "one representative of each positive 2-of-5 orbit; at most 32 partners sharing >=2 sites; union <=8; include all positive features contained in the union",
+  "anchors": 10,
+  "groups": 4,
+  "groups_with_strict_saving": 0,
+  "max_saving_units": 0,
+  "scope": "arbitrary token partitions; no geometry, no complete support-family enumeration, no stronger packing bound",
+  "rows": [
+    {
+      "sites": [
+        1112,
+        1210,
+        1218,
+        1280,
+        1358,
+        1826,
+        3826,
+        3882
+      ],
+      "features": [
+        [
+          52,
+          0
+        ],
+        [
+          59,
+          2
+        ]
+      ],
+      "joint_capacity_units": 63234010,
+      "separate_capacity_units": 63234010,
+      "saving_units": 0
+    },
+    {
+      "sites": [
+        1192,
+        1193,
+        2088,
+        4056,
+        4057,
+        4508,
+        4509
+      ],
+      "features": [
+        [
+          130,
+          0
+        ],
+        [
+          130,
+          1
+        ]
+      ],
+      "joint_capacity_units": 56846076,
+      "separate_capacity_units": 56846076,
+      "saving_units": 0
+    },
+    {
+      "sites": [
+        284,
+        3501,
+        3503,
+        3647,
+        4489,
+        4491
+      ],
+      "features": [
+        [
+          131,
+          0
+        ],
+        [
+          131,
+          1
+        ]
+      ],
+      "joint_capacity_units": 16334140,
+      "separate_capacity_units": 16334140,
+      "saving_units": 0
+    },
+    {
+      "sites": [
+        4596,
+        4597,
+        5120,
+        5121,
+        5188,
+        5189
+      ],
+      "features": [
+        [
+          251,
+          0
+        ],
+        [
+          251,
+          1
+        ]
+      ],
+      "joint_capacity_units": 1756468,
+      "separate_capacity_units": 1756468,
+      "saving_units": 0
+    }
+  ],
+  "seconds": 0.04149683302966878,
+  "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "command": [
+    "/private/tmp/mw3-frontier-review/innovation_probes.py",
+    "token-groups",
+    "--source",
+    "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/global-certificate.json",
+    "--output",
+    "/private/tmp/mw3-frontier-review/token-groups.json",
+    "--seconds",
+    "30"
+  ]
+}

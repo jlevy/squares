@@ -236,13 +236,21 @@ PRUNE = frozenset(
         # `tests/test_n11_corner_class_certificate.py` reach agenda 040; and
         # `devtools/check_class_record_claims.py` names agenda 040's directory outright.
         # No control drives any of those steps today, which makes pruning them safe now
-        # and a trap for whoever registers one of those checks as a control later. That
-        # leaves 036 and 039, worth 421,136 bytes between them, which does not pay for the
-        # two list entries.
+        # and a trap for whoever registers one of those checks as a control later. Agenda
+        # 036 remains too small to justify another exception. Agenda 039 joined this list
+        # with the W3 direction reviews: their retained reports and receipts add about
+        # 0.56 MiB to the same snapshot surface, while the native n11 sibling left only
+        # 403,826 bytes of headroom. An initial dependency probe found that pruning
+        # agenda 039's unused numerical bulk recovered about 415 KB after about 128 KB
+        # of linked and registered dependencies returned byte for byte. No control names
+        # the directory or opens its outputs. The files stay in Git; the worker keeps
+        # every document-map receipt reached through the checked SYNOPSIS and every
+        # registered result dependency. Session 155 retains the finished-tree measure.
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-031",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-033",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-034",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-035",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-039",
         # Agenda 041 is the same retained-output class. The dependency audit recorded
         # in think-t1lk for PR 218 found no control or external code reader of its bulk
         # numerical output. Inline-linked receipts and registered artifacts still return
