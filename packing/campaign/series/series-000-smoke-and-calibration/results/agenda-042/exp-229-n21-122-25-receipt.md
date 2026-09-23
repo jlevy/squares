@@ -38,7 +38,7 @@ Set C’s first launch (09:04:49Z) was killed by an external SIGTERM at 09:17:27
 same SIGTERM ended the n12 leg-2 run and a ceiling reader in the same second.
 The system load average was 148 at the time.
 The partial run is kept in `C-killed-1/`, and nothing from it was used.
-C was relaunched unchanged from `run-C.sh`.
+C was relaunched unchanged from `exp-229-n21-run-C.command.txt`.
 
 ## Gate
 

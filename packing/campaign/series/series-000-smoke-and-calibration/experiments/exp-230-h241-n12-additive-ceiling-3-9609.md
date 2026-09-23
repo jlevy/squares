@@ -42,7 +42,7 @@ experiment:
       cd packing && uv run --frozen --all-extras --group dev python -m
       devtools.run_fractional_cutting --n 12 --side 39609/10000 --shrink 9977/10000
       --seed-certificate cases/n12_fractional_certificate/certificate.json, then two
-      warm legs (exp-230-n12-run-leg2.sh, exp-230-n12-run-leg3.sh)
+      warm legs (exp-230-n12-run-leg2.command.txt, exp-230-n12-run-leg3.command.txt)
     budget: About 90 minutes of cutting plus the readers; three legs used about 2.5 hours.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/
   effort:
@@ -74,7 +74,7 @@ experiment:
     resume_from: >-
       The leg-3 warm state, retained as
       results/agenda-042/exp-230-n12-leg3-state.json.gz (about 17,500 sites and 10,356
-      rows); exp-230-n12-run-leg3.sh names the settings to warm-start from it.
+      rows); exp-230-n12-run-leg3.command.txt names the settings to warm-start from it.
 ---
 # Exp-230: The Additive Ceiling at n12, Side 39609/10000
 

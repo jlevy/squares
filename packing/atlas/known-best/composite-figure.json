@@ -1051,15 +1051,15 @@
           "state": "closed-form"
         },
         "lower": {
-          "display": "s(21) ≥ 4.850000",
+          "display": "s(21) ≥ 4.880000",
           "evidence": [
             "E-fractional-interval-decision",
-            "E-n020-fractional-certificate-97-20"
+            "E-n021-fractional-certificate-122-25"
           ],
           "first_proved_here": true,
           "provenance": "frontier",
           "shown": true,
-          "value": "4.85"
+          "value": "4.88"
         },
         "n": 21,
         "optimality": {

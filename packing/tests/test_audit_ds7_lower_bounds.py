@@ -117,7 +117,8 @@ def test_opaque21_stays_nonexact_and_cannot_replace_a_stronger_exact_identity() 
     case = ds7.read_case(REPO, None, 21)
     assert case["reported_lower_bound"]["exact_form"] is None
     assert case["reported_lower_bound"]["value"] == "4.7438"
-    assert case["verified_lower_bound"]["value"] == "4.85"
+    # T-034's 122/25 since 2026-09-23; T-021's 97/20 before it.
+    assert case["verified_lower_bound"]["value"] == "4.88"
     case["reported_lower_bound"].update(value="4.7", exact_form="19/4")
     before = deepcopy(case)
     assert ds7.select_update(case) is None

@@ -28,7 +28,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `461300/99999` | `4679/1000` | open | replayed here, audited here | formal lower differs from report | 2026-09-07 |
 | [`19`](n-019.md) | `3 + (4/3)√2` | `3 + (4/3)√2` | `4*√5/5 + 2*√2` | `24/5` | open | replayed here, audited here | formal lower differs from report | 2026-09-07 |
 | [`20`](n-020.md) | `5` | `5` | `4*√5/5 + 2*√2` | `97/20` | open | replayed here, audited here | formal lower differs from report | 2026-09-07 |
-| [`21`](n-021.md) | `5` | `5` | `4.7438` | `97/20` | open | replayed here, audited here | formal lower differs from report | 2026-09-07 |
+| [`21`](n-021.md) | `5` | `5` | `4.7438` | `122/25` | open | replayed here, audited here | formal lower differs from report | 2026-09-07 |
 | [`22`](n-022.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-25 |
 | [`23`](n-023.md) | `5` | `5` | `5` | `5` | proved | replayed here, external proof | — | 2026-08-24 |
 | [`24`](n-024.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-24 |

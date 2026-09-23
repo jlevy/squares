@@ -109,6 +109,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-020](packing/frontier/RESULTS.md) | 19, 20, 21 | `V4` | `C4` | `S4` | `apparently-novel` | s(19) >= 24/5, s(20) >= 24/5 and s(21) >= 24/5, from a first-party weighted fractional unavoidable-set certificate at container side 24/5 = 4.80. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
+| [T-034](packing/frontier/RESULTS.md) | 21 | `V4` | `C5` | `S3` | `apparently-novel` | s(21) >= 122/25, from a first-party weighted fractional unavoidable-set certificate at container side 122/25 = 4.88. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
 | [T-002](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 4426213/1000000, by monotonicity from T-001 (a packing of 18 unit squares contains a packing of 17). |
 | [T-021](packing/frontier/RESULTS.md) | 20, 21 | `V4` | `C4` | `S3` | `apparently-novel` | s(20) >= 97/20 and s(21) >= 97/20, from a first-party weighted fractional unavoidable-set certificate at container side 97/20 = 4.85. |
@@ -165,7 +166,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 176 | 31 confirmed; 31 refuted; 56 blocked; 18 unresolved; 5 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 159 | 45 accepted; 36 rejected; 51 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 33 | 33 registered |
+| Frontier results | 34 | 34 registered |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -882,6 +883,7 @@ case or experiment separately.
 | [Native Adaptive Parent-Core Verification](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md) | dated review record | record | retained | — |
 | [Review of PR 230’s W3 Directions, 23 September 2026](docs/project/reviews/review-2026-09-23-pr230-w3-directions.md) | dated review record | record | retained | — |
 | [Review of the Rung-0 Certificate Contract, 23 September 2026](docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md) | dated review record | record | retained | — |
+| [Review of the n21 Certificate at 122/25, 23 September 2026](docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
@@ -4372,7 +4374,7 @@ round that names the hypothesis, control roles included.
 | [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | The growth-cone route to a sup-norm ball around Trump’s pose larger than the BC-240 radius; capped at the BC-199 modulus by an exhaustion lemma (exp-227) | 1 | — |
 | [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | confirmed | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; confirmed at census scope by exp-228, support never proof | 1 | — |
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
-| [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | confirmed | A window-free point certificate retains s(21) >= 122/25 below mass 21 (exp-229); registration waits for the Fable max W2 review | 1 | — |
+| [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | confirmed | A window-free point certificate retains s(21) >= 122/25 below mass 21 (exp-229); registered as T-034 after the Fable max W2 review accepted it | 1 | — |
 | [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | unresolved | A proved depth-one ceiling of at least 12 at n12, side 39609/10000; exp-230’s loop ended unsettled near 11.98 | 1 | — |
 
 ### Confirmed
@@ -4887,7 +4889,7 @@ archive beside it.
 | [exp-220](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-220-h222-n11-96-25-class-refreeze.md) | 11 | target | H-222 | Re-freeze of the exp-219 class certificate under the class claim strings | RETAINABLE UNDER THE CORNER CLASS HYPOTHESIS; the same 680 atoms; mass 10.868617 | accepted |
 | [exp-227](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md) | 11 | target | H-237 | Exact growth cone over 128 branches and 66 faces at Trump’s pose, with the BC-199 modulus as control | Growth minimum 0.05177; route radius capped at the BC-199 modulus by an exhaustion lemma | exhausted |
 | [exp-228](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md) | 11 | target | H-238 | Descent-filtered census of 1,000 jolted starts about Trump and Stromquist | No descent-stable three-class minimum below 3.885618; new minima at 3.8867460 and 3.8943219 | accepted |
-| [exp-229](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md) | 21 | target | H-240 | Column generation at side 122/25 on three site sets, then the gate | RETAINABLE on set C; 1,228 atoms; mass 20.145724; register waits for the W2 review | accepted |
+| [exp-229](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md) | 21 | target | H-240 | Column generation at side 122/25 on three site sets, then the gate | RETAINABLE on set C; 1,228 atoms; mass 20.145724; registered as T-034 after the W2 review | accepted |
 | [exp-230](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md) | 12 | target | H-241 | Cutting loop with the ceiling check at side 39609/10000, three legs | No proved family at 12 (best 10.704); row objective unsettled near 11.98 | unresolved |
 
 ### Cost and provenance
@@ -5916,26 +5918,26 @@ the best known packing runs near half a unit — eleven cases above `+0.49`, hea
 `n = 51` at `+0.5364`, then `68`, `84`, `39`, `86`, `66`, `38`, `83`, `37`, `53` and
 `26`. Two cautions travel with that ranking.
 The prize is what the *ceiling* allows; the real limit is the covering value at that
-side. 45 values have been reported for the restricted program, at sides `2.99`, `3.81`,
+side. 46 values have been reported for the restricted program, at sides `2.99`, `3.81`,
 `3.82`, `3.83`, `3.84`, `3.85`, `3.875`, `3.95`, `3.96`, `3.965`, `3.969`, `3.97`,
 `3.98`, `3.985`, `3.99`, `4.58`, `4.59`, `4.6`, `4.61`, `4.67`, `4.675`, `4.6775`,
 `4.679`, `4.68`, `4.69`, `4.7`, `4.80`, `4.81`, `4.82`, `4.825`, `4.85`, `4.855`,
-`4.86`, `4.865`, `4.875`, `4.895`, `4.985`, `5.13`, `5.25`, `5.48`, `5.59`, `5.7`,
-`5.8`, `6.75` and `6.84` — the first eight reports, not measurements this repository can
-reproduce, since no covering-search run log or solver checkpoint was retained for any of
-them; the ten added on 2026-09-05 by Agenda 021’s `BC-200` and `BC-197` and Agenda 022’s
-`BC-213` and `BC-206` carry run logs; the `2.99` pair added on 2026-09-18 by session-139
-is H-216 calibration at n=6 (covering `6.08216` and `6.07724` on two named site sets,
-both ≥ 6, not a bound); `3.81` is the session-139 T-025-seeded auto-plus-60 at 381/100,
-covering `11.000000` unconverged on the eleven plateau, site set refuted, side open;
-`3.82` also has the session-139 T-025-seeded auto-plus-60 plus `--seed-windows 5` at
-191/50, covering `11.018646` converged, closest session-139 point-atom construction,
-site set refuted; T-026-seeded auto-plus-60 at the same side converged `11.033743`,
-worse than the threshold seed; `3.83` is the session-139 n=11 probes at 383/100,
-covering `11.192598` (auto grids), `11.142857` (four-grid), and `11.140351`
-(T-025-seeded four-grid), all site sets refuted, side open; `3.84` is the same
-T-025-seeded auto-plus-60 construction at 96/25, covering `11.371819` converged, site
-set refuted; `3.85` also has the session-139 T-025-seeded auto-plus-60 at 77/20,
+`4.86`, `4.865`, `4.875`, `4.88`, `4.895`, `4.985`, `5.13`, `5.25`, `5.48`, `5.59`,
+`5.7`, `5.8`, `6.75` and `6.84` — the first eight reports, not measurements this
+repository can reproduce, since no covering-search run log or solver checkpoint was
+retained for any of them; the ten added on 2026-09-05 by Agenda 021’s `BC-200` and
+`BC-197` and Agenda 022’s `BC-213` and `BC-206` carry run logs; the `2.99` pair added on
+2026-09-18 by session-139 is H-216 calibration at n=6 (covering `6.08216` and `6.07724`
+on two named site sets, both ≥ 6, not a bound); `3.81` is the session-139 T-025-seeded
+auto-plus-60 at 381/100, covering `11.000000` unconverged on the eleven plateau, site
+set refuted, side open; `3.82` also has the session-139 T-025-seeded auto-plus-60 plus
+`--seed-windows 5` at 191/50, covering `11.018646` converged, closest session-139
+point-atom construction, site set refuted; T-026-seeded auto-plus-60 at the same side
+converged `11.033743`, worse than the threshold seed; `3.83` is the session-139 n=11
+probes at 383/100, covering `11.192598` (auto grids), `11.142857` (four-grid), and
+`11.140351` (T-025-seeded four-grid), all site sets refuted, side open; `3.84` is the
+same T-025-seeded auto-plus-60 construction at 96/25, covering `11.371819` converged,
+site set refuted; `3.85` also has the session-139 T-025-seeded auto-plus-60 at 77/20,
 covering `11.456576` converged, site set refuted; `3.875` is the same construction at
 31/8, covering `11.561186` converged, site set refuted, 0.002 below the packing; `3.965`
 is the session-141 n=12 T-017-seeded auto plus windows 7 at 793/200, covering
@@ -5976,13 +5978,19 @@ still above nineteen.
 `4.855` is the session-140 leftover n=20 T-021-seeded auto plus windows 6 at 971/200,
 covering `19.910044` unconverged, still below 20. `4.86` is the session-141 n=20
 T-021-seeded four-grid plus windows 7 at 243/50, covering `19.887914` unconverged, still
-below 20. `5.13` is the session-141 n=26 seedless auto plus windows 5 at 513/100,
-covering `25.000000` unconverged, still below 26, the first first-party covering row at
-that size. `5.25` is the session-141 n=27 seedless auto plus windows 5 at 525/100,
-covering `25.000000` unconverged, still below 27, the first first-party covering row at
-that size. `5.48` is the session-141 n=29 seedless auto plus windows 5 at 548/100,
-covering `26.040745` converged with freeze mass `26.0409395`; the interval route refused
-the freeze, the first first-party covering row at that size.
+below 20. `4.88` is the session-156 n=21 exp-229 trio at 122/25: a T-021-seeded auto
+plus windows 6 stopped at its deadline at `20.040960` unconverged; seedless auto plus
+windows 5 converged at `20.131946`, but the interval route stalled on a seam where
+window rows sit exactly `B` apart and refused the freeze, which decides nothing;
+seedless auto with no windows converged at `20.145556`, and freeze-then-decide retained
+`T-034` at `s(21) >= 122/25`. `5.13` is the session-141 n=26 seedless auto plus windows
+5 at 513/100, covering `25.000000` unconverged, still below 26, the first first-party
+covering row at that size.
+`5.25` is the session-141 n=27 seedless auto plus windows 5 at 525/100, covering
+`25.000000` unconverged, still below 27, the first first-party covering row at that
+size. `5.48` is the session-141 n=29 seedless auto plus windows 5 at 548/100, covering
+`26.040745` converged with freeze mass `26.0409395`; the interval route refused the
+freeze, the first first-party covering row at that size.
 `5.59` is the session-141 n=30 seedless auto plus windows 5 at 559/100, covering
 `27.178193` unconverged, still below 30, the first first-party covering row at that
 size. `5.7` is the session-141 n=31 seedless auto plus windows 5 at 57/10, covering

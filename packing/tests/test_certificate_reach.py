@@ -49,13 +49,14 @@ def test_committed_file_matches_the_renderer() -> None:
 
 
 def test_retained_certificates_are_found_by_globbing_the_case_packages() -> None:
-    """Five packages exist today, each keyed by the least size its own mass certifies.
+    """Six packages exist today, each keyed by the least size its own mass certifies.
 
     The key is computed, never read off the package name, and the n = 20 package is
     the case that shows why: while its retained rung was the 24/5 one, mass
     18.922620 keyed it to n = 19; T-021's 97/20 rung has mass 19.848723 and keys it
-    to n = 20. That the five keys agree with their package names today is a fact
-    about the current corpus, not a property of the glob.
+    to n = 20. T-034's 122/25 rung has mass 20.145724 and keys its own package to
+    n = 21. That the six keys agree with their package names today is a fact about
+    the current corpus, not a property of the glob.
     """
     retained = retained_certificates()
     keyed_n = {row["package"]: row["n"] for row in retained}
@@ -65,6 +66,7 @@ def test_retained_certificates_are_found_by_globbing_the_case_packages() -> None
         "n17_fractional_certificate": 17,
         "n18_fractional_certificate": 18,
         "n20_fractional_certificate": 20,
+        "n21_fractional_certificate": 21,
     }
 
 

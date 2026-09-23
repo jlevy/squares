@@ -43,6 +43,11 @@ hypothesis:
     above the T-021 mass that pins n20; the estimate is not a bound and 4.88 is frozen
     below it. X-047's lane table wrote the side as 22/5, which is 4.4; the target is
     122/25.
+    Outcome note (Session 156): the confirming certificate, exp-229 set C, used the
+    auto grids with no windows; the two window-enriched sets did not decide. The
+    criterion's metric does not depend on the site set, so the confirmation stands as
+    registered, and the claim's "window-enriched" wording records the plan, not the
+    certificate. Registered as T-034 after the W2 review.
 ---
 # H-240: A Point Certificate at s(21) ≥ 4.88
 

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-09-22'
+last_reviewed: '2026-09-23'
 results:
   - id: T-001
     claim: >-
@@ -1130,6 +1130,11 @@ results:
       exactly 25.000000 whatever the covering value is. No uniform inset-1/2 grid at any
       count the lane could afford puts a site in every strip. The exactly round value
       this register has learned to distrust has, at m = 5, a mechanism.
+      The n = 21 half of the margin was taken on 2026-09-23: T-034 certifies
+      122/25 = 4.88 at n = 21 from an unseeded site set and supersedes this result there.
+      What this result still holds alone is n = 20, whose bound stays 97/20 because
+      T-034's atoms are too heavy for it. This result stays true as stated at both of its
+      sizes.
 
   - id: T-022
     claim: >-
@@ -2094,3 +2099,89 @@ results:
       remain distinct hypotheses rather than a continuation of this one. A further
       assurance step would require proof-assistant formalization, external review, or an
       independently reproduced full decision.
+
+  - id: T-034
+    claim: >-
+      s(21) >= 122/25, from a first-party weighted fractional unavoidable-set certificate
+      at container side 122/25 = 4.88. The case held 97/20 = 4.85 from T-021 in this
+      register's verified field, and the movement is +0.03. The certificate does not
+      reach n = 20: its total mass is 5036431/250000 = 20.145724, above twenty, so
+      Condition 2 gives it n = 21 and upward, and T-021's 97/20 rung, retained beside
+      it, still carries n = 20.
+      The size takes no monotonicity step, for the reason T-020 gives: only Condition 2
+      mentions n among the five conditions, so an atom set of mass M certifies its side
+      for every integer strictly above M. From n = 22 on the register already holds 5,
+      so the certificate is true there and weaker.
+      The site set is the plainest the generator offers: auto grids (34, 46, 56) at
+      inset 1/2 with no seed and no windows, converged below twenty-one in 36 LP rounds.
+      At the same side a T-021-seeded set ran out its deadline unconverged, and a
+      five-window set converged but stalled the interval route on a seam where atom
+      rows sit exactly B apart; neither run decides anything about the side.
+    scope:
+      n_values:
+        - 21
+    verification: V4
+    confirmation: C5
+    significance:
+      score: 3
+      rationale: >-
+        Scored at S3 by the calibration note T-020 wrote and T-021 applied: "Further
+        sizes from the same generator, absent a new technique or a case that changes
+        character, belong at S3." This is the same generator at one of the same sizes,
+        one rung higher, and n = 21 does not change character at 4.88.
+        What it adds beyond the rung is a reading about the instrument rather than a
+        theorem: the stock generator with no seed and no windows converged where the
+        seeded and windowed site sets did not decide. The side also sits above
+        39/8 = 4.875, where both of H-062's constructions crossed twenty at n = 20; a
+        mass above twenty is consistent with that wall and says nothing about n = 20.
+      scored: '2026-09-23'
+      by: registration, adopting the 2026-09-23 certificate review's recommendation (repository)
+    novelty: apparently-novel
+    composition: >-
+      Primary at n = 21: one certificate, one accepted verdict, the bound being the
+      container side directly, with no monotonicity or composition step between the
+      artifact and the claim.
+      C4 is earned by two evidence entries whose method values differ, the exact
+      event-cell sweep and the interval branch and bound, both run in this repository on
+      the frozen bytes, as for T-021. The standard-library verifier the review also ran
+      is a second implementation of the sweep's method, so it adds nothing to that
+      count.
+      C5 adds the mapped 2026-09-23 review, which covers the complete claim: it
+      re-decided the frozen bytes by three routes, checked each of the five conditions
+      and the n = 21-only scope, and found nothing that refutes them. A different agent
+      than the lane that produced the certificate wrote it, inside the same session; it
+      is not an external review.
+    produced_by:
+      hypothesis: H-240
+      agenda_cell: BC-378
+      session: session-156
+      experiment: exp-229
+    review_artifact: docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md
+    evidence:
+      - E-n021-fractional-certificate-122-25
+      - E-fractional-interval-decision
+    artifacts:
+      - packing/cases/n21_fractional_certificate/certificate.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-122-25-receipt.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-C-family.json
+      - packing/devtools/run_fractional_colgen.py
+      - packing/src/sqpack/fractional/colgen.py
+    controls:
+      - packing/tests/test_fractional_certificate.py
+      - packing/tests/test_fractional_interval.py
+    next_rung: >-
+      The margin is 0.854276 below twenty-one, more than five times T-021's 0.151277
+      below twenty, so the side was not pushed to where the covering value stops it.
+      H-240 froze it below X-047's estimated additive crossing near 4.886, which is an
+      estimate and not a bound, and this run did not test it.
+      A certificate for n = 21 cannot exist above ceil(sqrt(21)) * B = 4.9885, leaving
+      0.1085 of runway above 122/25, and the best known packing is the trivial 5, so the
+      ceiling binds first: the method could in principle close the case to within 0.0115
+      of the upper bound and can never reach it.
+      The next rung is a pre-registered side above 122/25 on the same unseeded
+      construction, read from the restricted optimum a converged run reaches. Set B's
+      refusal is the instrument note to carry with it: a window lattice at pitch B puts
+      atom rows exactly B apart, and the interval route stalls on the seam where an
+      upright square has both closed edges on such a pair. A stall there is not a
+      counterexample, and it decides nothing.
+      C5 is reached; V5 would need a proof-assistant port of the five-condition theorem.

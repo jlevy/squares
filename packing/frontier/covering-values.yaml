@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:CoveringValues/v1
   schema: covering-values.schema.yaml
   status: enforced
-last_reviewed: '2026-09-19'
+last_reviewed: '2026-09-23'
 values:
   - n: 6
     side: '299/100'
@@ -2083,3 +2083,79 @@ values:
       remaining rows can only raise it. Closer than leftover auto plus windows 7 at
       this side (12.067502). T-017 is unchanged. T-030 was not offered. H-218 stays
       unconfirmed. Do not more-wall this set.
+  - n: 21
+    side: '122/25'
+    side_decimal: '4.88'
+    objective: '20.040960'
+    site_set: t021-seed-auto-34-46-56-windows6
+    sites: 8472
+    rows: 13227
+    rounds: 54
+    converged: false
+    stop_reason: >-
+      The 3600 s deadline stopped the row loop after 54 LP rounds with 144 placements
+      still violated and least covered mass 0.993953. The objective finished at
+      20.040960 on 8472 sites / 1106 orbits, including 2256 T-021 seed sites, and did
+      not cross 21. No freeze was written.
+    least_covered_mass: '0.993953'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-122-25-receipt.md
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md
+    notes: >-
+      Session-156 exp-229 set A, BC-378 under H-240. T-021 certificate seed (scale map)
+      plus auto (34, 46, 56) at inset 1/2 plus windows 6. The float objective is a
+      restricted optimum on an incomplete row set, not a covering value, and a deadline
+      decides nothing. Set C at the same side converged and is retained as T-034.
+  - n: 21
+    side: '122/25'
+    side_decimal: '4.88'
+    objective: '20.131946'
+    site_set: auto-34-46-56-windows5
+    sites: 6616
+    rows: 12376
+    rounds: 61
+    converged: true
+    stop_reason: >-
+      The row loop converged at LP round 61 -- every placement covers mass one -- in
+      1908.8 s on 6616 sites / 861 orbits, including 400 window seed sites; covering
+      freeze mass 20132143/1000000 over 1460 atoms.
+    least_covered_mass: '1'
+    frozen_artifact: null
+    recorded_in:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-122-25-receipt.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-B-run.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-B-decide.stdout
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md
+    notes: >-
+      Session-156 exp-229 set B. Auto (34, 46, 56) at inset 1/2 plus windows 5, no
+      certificate seed. The exact sweep accepted the declared freeze at least cell mass
+      2000013/2000000, and the interval route stalled on 1608 boxes at direction 0,
+      where window rows sit exactly B apart, so the gate refused it. A stall is not a
+      counterexample and decides nothing about the side. The freeze stays in the
+      session attic; nothing was frozen into packing/cases/.
+  - n: 21
+    side: '122/25'
+    side_decimal: '4.88'
+    objective: '20.145556'
+    site_set: auto-34-46-56
+    sites: 6216
+    rows: 8895
+    rounds: 36
+    converged: true
+    stop_reason: >-
+      The row loop converged at LP round 36 -- every placement covers mass one -- in
+      690.9 s on 6216 sites / 806 orbits with no seed sites; covering freeze mass
+      5036431/250000 over 1228 atoms.
+    least_covered_mass: '1'
+    frozen_artifact: packing/cases/n21_fractional_certificate/certificate.json
+    recorded_in:
+      - packing/frontier/results.yaml
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-122-25-receipt.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-229-n21-C-run.json
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md
+    notes: >-
+      Session-156 exp-229 set C. Auto (34, 46, 56) at inset 1/2 with no seed and no
+      windows. Rationalised at scale 4,000,000 to 5036431/250000 over 1228 atoms,
+      declared at least cell mass 250001/250000, accepted by both gate routes, and
+      retained as T-034's certificate.

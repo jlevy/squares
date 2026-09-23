@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-09-22'
+last_reviewed: '2026-09-23'
 evidence:
   - id: E-wand125-point-source-replay
     claim: lower-bound
@@ -3946,6 +3946,78 @@ evidence:
       rather than climbed, so there is no weaker retained certificate at this size to
       compare against.
     source_reviewed: '2026-09-05'
+  - id: E-n021-fractional-certificate-122-25
+    claim: lower-bound
+    source_reviewed: '2026-09-23'
+    scope:
+      n_values:
+        - 21
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 21 hold Nagamochi's 2005 closed form, Bentz's 2016 proof at
+        n = 22, Friedman's DS7 survey with its opaque Table 2 decimal 4.7438, and this
+        project's own T-020 at 24/5 and T-021 at 97/20. The frozen arXiv, Crossref,
+        OpenAlex, and Zenodo search receipts are retained at
+        resources/web/literature-refresh-2026-09-05/README.md, and the 2026-09-07 DS7
+        source audit at frontier/ds7-lower-bound-audit.json.
+      searched: >-
+        No new external search was run for this registration. The corpus search is
+        E-n020-fractional-certificate-97-20's, extended by the DS7 audit, and it holds no
+        lower bound on s(21) above T-021's 97/20; the strongest external report is
+        Friedman's 4.7438, below both project rungs. This rung raises this project's own
+        value rather than a published one. The 2026-09-23 certificate review restates that
+        reading from the same corpus and ran no search of its own.
+      novel_object: >-
+        The certificate and the side. The method is Burns's, the parametrisation
+        Massaccesi's, and the previous rung this project's own; what is new is a
+        certificate at 122/25, found by the stock generator on auto grids (34, 46, 56) at
+        inset 1/2 with no seed and no windows, after a T-021-seeded site set at the same
+        side ran out its deadline unconverged.
+      gaps: >-
+        The refresh is a bounded public-record search, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed sources,
+        private correspondence, or unpublished work, and it was not repeated between the
+        DS7 audit and this registration. The label records apparent novelty within that
+        search, not absolute priority.
+    certificate: cases/n21_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n21_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 1228 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 5036431/250000 = 20.145724, the 182-direction net produced by
+      181 steps reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000 with
+      D = 207107/90500000, and every reachable event cell at every net direction carries
+      mass at least 1, the least being 250001/250000.
+      The bound proved is the container side itself, 122/25.
+      One size, and not by monotonicity. Only Condition 2 mentions n among the five
+      conditions, so this atom set certifies its side for every integer strictly above
+      its own mass, which is 21 and upward. It says nothing about n = 20, where T-021's
+      97/20 remains the register's bound; from n = 22 on the register already holds 5, so
+      the certificate is true there and weaker.
+      It was decided from its bytes by two verifiers that fail differently. The exact
+      event-cell sweep accepted in 15 s at 250001/250000; the interval branch and bound
+      certified all 363 doubled-net directions in 4,289,657 boxes with none stalled and
+      an enclosure equal to that same value, in 67 s. Both were run by this repository
+      through devtools.decide_certificate on the frozen file, and the sha256 the gate
+      printed on acceptance is
+      b230f7cd6806343f115331caf53f02019cc634a8959359684581835a0cc7fb0f. The replay this
+      entry names was run again at registration on the retained copy, one worker, and
+      printed five PASS lines and VERIFIED for every m >= 21 in 71 s.
+      The site set is BC-191 auto grids (34, 46, 56) at inset 1/2 with no seed and no
+      windows; the row loop converged below twenty-one in 36 LP rounds and 691 s. The
+      file's least_cell_mass was declared by a one-worker sweep before the gate ran, which
+      changed that one field from null; the gate treats a declaration as something to
+      check, never as an input. The receipt records instrument commit 69dac09a; the run
+      was relaunched after 84e410691, and the generator, declaration and gate paths are
+      byte-identical between the two.
   - id: E-fractional-interval-decision
     claim: lower-bound
     scope:
@@ -3985,11 +4057,14 @@ evidence:
       pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
       and Condition 1 is not needed at all, which matters because interval arithmetic cannot
       establish the equality Condition 1 asserts.
-      Results, 361 of 361 directions certified in every case and none stalled. The five
-      retained top rungs, decided from their frozen bytes: n = 20 at 24/5, 2260 atoms,
-      5,638,343 boxes; n = 18 at 4679/1000, 957 atoms, 3,449,053 boxes; n = 17 at 459/100,
+      Results: every direction of each doubled net certified and none stalled, 361
+      directions on the 180-step nets and 363 on the 181-step nets the n = 18 and n = 21
+      certificates use. The six retained top rungs, decided from their frozen bytes:
+      n = 21 at 122/25, 1228 atoms, 4,289,657 boxes; n = 20 at 97/20, 1680 atoms,
+      4,850,263 boxes; n = 18 at 4679/1000, 957 atoms, 3,449,053 boxes; n = 17 at 459/100,
       1184 atoms, 3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11
-      at 381/100, 1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 18 at
+      at 381/100, 1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 20 at 24/5,
+      2260 atoms, in 5,638,343 boxes, n = 18 at
       1871/400 in 2,997,789 boxes, n = 18 at
       187/40 in 2,684,845 boxes, n = 18 at
       467/100 in 2,543,909 boxes, n = 17 at 229/50 in
@@ -4002,8 +4077,9 @@ evidence:
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
       12501/12500 at n = 12's, 200009/200000 at n = 17's, 200001/200000 at n = 18's
-      and 50007/50000 at n = 20's, each matching the
-      least_cell_mass its own certificate declares, and 250001/250000 at the 1871/400
+      and n = 20's, and 250001/250000 at n = 21's, each matching the
+      least_cell_mass its own certificate declares, and 50007/50000 at the 24/5 rung,
+      250001/250000 at the 1871/400
       rung, 4000013/4000000 at the 187/40
       rung, 12501/12500 at the 229/50 rung,
       50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a

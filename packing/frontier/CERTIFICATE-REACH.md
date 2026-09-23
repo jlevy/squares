@@ -26,8 +26,8 @@ known packing, otherwise whichever of the two the limit is.
 **`prize` is what the limit allows, not what a search will reach.** The real
 limit is the covering value: a certificate exists at side `L` only where the
 least total mass that covers every admissible `B`-square falls below `n`, and
-that value can bind well below either cap. 87 restricted optima
-have been reported at 45 sides, one per site set, and
+that value can bind well below either cap. 90 restricted optima
+have been reported at 46 sides, one per site set, and
 `frontier/covering-values.yaml` registers each with whether its row loop
 converged; every one is at best an upper bound on the unrestricted covering
 value there. What survives here beside each is a frozen certificate or nothing
@@ -122,20 +122,23 @@ at all:
 | 44 | 6.75 | auto-50-67-83-windows5 | 41.236782 | no | The 1200 s deadline stopped the row loop after 28 LP rounds with 546 placements still violated. The objective finished at 41.236782 on 14765 sites / 1939 orbits, including 900 window-lattice seed sites. Auto resolved to (50, 67, 83). It did not cross 44. | nothing frozen here. Session-141 exp-173. First first-party covering row at n=44. Seedless auto plus windows 5 at 675/100, above the Nagamochi floor 1 + sqrt(33). Unconverged mass still below 44 is not a covering below 44; remaining rows can only raise it. T-030 was not offered. The eight queued Nagamochi sides are measured. H-220 stays unconfirmed. Do not more-wall this set. |
 | 12 | 3.965 | t017-seed-auto-26-35-43-windows7 | 12.067502 | no | The 1200 s deadline stopped the row loop after 38 LP rounds with 102 placements still violated. The objective crossed 12 at round 11 (12.005485) and finished at 12.067502 on 6269 sites / 885 orbits, including 2533 T-017 plus window-lattice seed sites. Auto resolved to (26, 35, 43). The objective sat at 12.067502 from round 32. | nothing frozen here. Session-141 exp-175. First first-party covering row at 793/200. T-017 seed plus auto (26, 35, 43) plus windows 7, one two-hundredth above T-017. Unconverged mass still above twelve refutes this site set only; remaining rows can only raise it. Closer than four-grid plus windows 7 at 397/100 (12.133391) and 3969/1000 (12.091168). T-017 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
 | 12 | 3.965 | t017-seed-four-grid-26-35-43-48-windows7 | 12.066995 | no | The 1200 s deadline stopped the row loop after 35 LP rounds with 192 placements still violated. The objective crossed 12 at round 13 (12.016486) and finished at 12.066995 on 8569 sites / 1184 orbits, including 2533 T-017 plus window-lattice seed sites. Four-grid resolved to (26, 35, 43, 48). The objective sat at 12.06699 from round 32. | nothing frozen here. Session-141 exp-178. T-017 seed plus four-grid (26, 35, 43, 48) plus windows 7 at 793/200. Unconverged mass still above twelve refutes this site set only; remaining rows can only raise it. Closer than leftover auto plus windows 7 at this side (12.067502). T-017 is unchanged. T-030 was not offered. H-218 stays unconfirmed. Do not more-wall this set. |
+| 21 | 4.88 | t021-seed-auto-34-46-56-windows6 | 20.040960 | no | The 3600 s deadline stopped the row loop after 54 LP rounds with 144 placements still violated and least covered mass 0.993953. The objective finished at 20.040960 on 8472 sites / 1106 orbits, including 2256 T-021 seed sites, and did not cross 21. No freeze was written. | nothing frozen here. Session-156 exp-229 set A, BC-378 under H-240. T-021 certificate seed (scale map) plus auto (34, 46, 56) at inset 1/2 plus windows 6. The float objective is a restricted optimum on an incomplete row set, not a covering value, and a deadline decides nothing. Set C at the same side converged and is retained as T-034. |
+| 21 | 4.88 | auto-34-46-56-windows5 | 20.131946 | yes | The row loop converged at LP round 61 -- every placement covers mass one -- in 1908.8 s on 6616 sites / 861 orbits, including 400 window seed sites; covering freeze mass 20132143/1000000 over 1460 atoms. | nothing frozen here. Session-156 exp-229 set B. Auto (34, 46, 56) at inset 1/2 plus windows 5, no certificate seed. The exact sweep accepted the declared freeze at least cell mass 2000013/2000000, and the interval route stalled on 1608 boxes at direction 0, where window rows sit exactly B apart, so the gate refused it. A stall is not a counterexample and decides nothing about the side. The freeze stays in the session attic; nothing was frozen into packing/cases/. |
+| 21 | 4.88 | auto-34-46-56 | 20.145556 | yes | The row loop converged at LP round 36 -- every placement covers mass one -- in 690.9 s on 6216 sites / 806 orbits with no seed sites; covering freeze mass 5036431/250000 over 1228 atoms. | frozen 1,228-atom certificate, feasible mass 20.145724. Session-156 exp-229 set C. Auto (34, 46, 56) at inset 1/2 with no seed and no windows. Rationalised at scale 4,000,000 to 5036431/250000 over 1228 atoms, declared at least cell mass 250001/250000, accepted by both gate routes, and retained as T-034's certificate. |
 
 No covering-search run log or solver checkpoint was retained for any of them, so
 not one of the reported values can be recomputed here. What a frozen certificate
 recomputes is its own feasible mass — a total that covers every admissible
 `B`-square at that side, and so an upper bound on the covering value there,
 rather than the objective a search reported. Only at `3.95` and `4.85` is
-the reported value the artifact's own mass; at `3.96`, `4.58`, `4.59`, `4.67`, `4.675`, `4.6775`, `4.679`, `4.80` and `4.825` the
+the reported value the artifact's own mass; at `3.96`, `4.58`, `4.59`, `4.67`, `4.675`, `4.6775`, `4.679`, `4.80`, `4.825` and `4.88` the
 artifact's mass and the reported objective are different numbers.
 
 They are also reports of different kinds rather than one series measured the same
-way, and the `converged` column is where the difference lives: 31 of
-the 87 ran their row loop to convergence, and the rest stopped for the
+way, and the `converged` column is where the difference lives: 33 of
+the 90 ran their row loop to convergence, and the rest stopped for the
 reason beside each — or for none the record kept — and stand as upper bounds on
-their own site sets only. 87 heterogeneous reports across a side band
+their own site sets only. 90 heterogeneous reports across a side band
 3.85 wide do not support a growth trend or a fitted curve, and no rung in
 this register has ever been claimed from one. Rank on `prize` to choose where to
 look; measure and retain the run before believing any extrapolation.
@@ -371,7 +374,6 @@ lower bound, so nothing was on offer.
 | 95 | 10 | 9.8318 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.1453 |
 | 18 | 5 | 4.6790 | 4.8229 | 4.9885 | 4.8216 | 4.8216 | cap | +0.1426 |
 | 20 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 |
-| 21 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 |
 | 163 | 13 | 12.8322 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.1380 |
 | 316 | 18 | 17.8226 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1361 |
 | 249 | 16 | 15.8324 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.1309 |
@@ -382,6 +384,7 @@ lower bound, so nothing was on offer.
 | 26 | 6 | 5.5080 | 5.6213 | 5.9862 | — | 5.9862 | packing | +0.1133 |
 | 139 | 12 | 11.8628 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.1097 |
 | 219 | 15 | 14.8564 | 15.0000 | 14.9656 | 14.9656 | 14.9656 | ceiling | +0.1092 |
+| 21 | 5 | 4.8800 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1085 |
 | 317 | 18 | 17.8523 | 18.0000 | 17.9587 | 17.9587 | 17.9587 | ceiling | +0.1064 |
 | 77 | 9 | 8.8740 | 9.0000 | 8.9793 | 8.9793 | 8.9793 | ceiling | +0.1053 |
 | 250 | 16 | 15.8661 | 16.0000 | 15.9633 | 15.9633 | 15.9633 | ceiling | +0.0972 |
@@ -428,6 +431,7 @@ the other one was never in reach.
 | 17 | n17_fractional_certificate | 4.5900 | 4.6755 | 4.9885 | packing | 0.98171 |
 | 18 | n18_fractional_certificate | 4.6790 | 4.8229 | 4.9885 | packing | 0.97017 |
 | 20 | n20_fractional_certificate | 4.8500 | 5.0000 | 4.9885 | ceiling | 0.97223 |
+| 21 | n21_fractional_certificate | 4.8800 | 5.0000 | 4.9885 | ceiling | 0.97825 |
 
 ## What three points would predict, if the ratio held
 
@@ -636,7 +640,6 @@ reaches, not this extrapolation.
 | 185 | 14 | 13.6491 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.3187 | 13.6947 | +0.0456 |
 | 59 | 8 | 7.7823 | 8.0000 | 7.9816 | 7.9816 | 7.9816 | ceiling | +0.1993 | 7.8255 | +0.0432 |
 | 20 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 | 4.8910 | +0.0410 |
-| 21 | 5 | 4.8500 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1385 | 4.8910 | +0.0410 |
 | 274 | 17 | 16.5885 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3725 | 16.6292 | +0.0408 |
 | 18 | 5 | 4.6790 | 4.8229 | 4.9885 | 4.8216 | 4.8216 | cap | +0.1426 | 4.7177 | +0.0387 |
 | 307 | 18 | 17.5529 | 17.9828 | 17.9587 | — | 17.9587 | ceiling | +0.4057 | 17.5906 | +0.0377 |
@@ -647,6 +650,7 @@ reaches, not this extrapolation.
 | 136 | 12 | 11.7238 | 12.0000 | 11.9724 | 11.9724 | 11.9724 | ceiling | +0.2486 | 11.7383 | +0.0145 |
 | 114 | 11 | 10.7468 | 11.0000 | 10.9747 | 10.9747 | 10.9747 | ceiling | +0.2280 | 10.7601 | +0.0133 |
 | 160 | 13 | 12.7047 | 13.0000 | 12.9702 | 12.9702 | 12.9702 | ceiling | +0.2655 | 12.7165 | +0.0118 |
+| 21 | 5 | 4.8800 | 5.0000 | 4.9885 | 4.9885 | 4.9885 | ceiling | +0.1085 | 4.8910 | +0.0110 |
 | 275 | 17 | 16.6205 | 17.0000 | 16.9610 | 16.9610 | 16.9610 | ceiling | +0.3405 | 16.6292 | +0.0087 |
 | 94 | 10 | 9.7750 | 10.0000 | 9.9770 | 9.9770 | 9.9770 | ceiling | +0.2021 | 9.7819 | +0.0069 |
 | 186 | 14 | 13.6886 | 14.0000 | 13.9679 | 13.9679 | 13.9679 | ceiling | +0.2793 | 13.6947 | +0.0061 |

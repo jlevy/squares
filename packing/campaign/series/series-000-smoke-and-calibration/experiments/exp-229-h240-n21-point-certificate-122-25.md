@@ -45,7 +45,7 @@ experiment:
       --column-rounds 1 --max-rounds 80 --deadline-seconds 2700 --seed-windows 0
       --freeze C-covering.json --freeze-family C-family.json --json C-run.json
       --row-log C-rows.jsonl --log C.log; then declare_least_cell_mass and
-      decide_certificate on the declared copy (exp-229-n21-run-C.sh)
+      decide_certificate on the declared copy (exp-229-n21-run-C.command.txt)
     budget: One or two runs of at most 3,600 s each, then the gate.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/
   effort:
@@ -84,8 +84,9 @@ experiment:
       Fable max W2 review.
     reason: >-
       Both routes accept set C's certificate at least cell mass 250001/250000 with total
-      mass 20.145724 < 21, so the gate certifies the covering at side 122/25; the claim
-      s(21) >= 122/25 is registered only after the W2 review the hypothesis requires.
+      mass 20.145724 < 21, so the gate certifies the covering at side 122/25. The Fable
+      max W2 review H-240 requires accepted it on three routes, and it is registered as
+      T-034.
 ---
 # Exp-229: A Point Certificate at n21, Side 122/25
 
@@ -99,7 +100,9 @@ including set B’s refusal: its window lattice put atom rows exactly $B$ apart,
 interval route stalled on the seam where an upright square has both closed edges on such
 a pair. That is a refusal, not a counterexample, and set C has no such pair.
 
-Registering the bound waits for the Fable max review H-240 names.
+The
+[Fable max review](../../../../../docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md)
+accepted it on three routes, and it is registered as T-034.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
