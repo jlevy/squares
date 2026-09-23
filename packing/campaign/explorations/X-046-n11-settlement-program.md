@@ -366,9 +366,41 @@ On X-045 and the review of it:
 Limits of this block: every number from the probes is `f64` and unretained; probe A is
 restricted to Trump-containing cells; probe B samples 18 of 12,028 rows; probes C and D
 sample one neighbourhood; no hypothesis identifier is allocated and no bound changes.
-The coordinator owns the follow-ups this file creates: the exploration count in
-`SYNOPSIS.md` (43 → 44, one more uncodified), an `ideas.md` section, and the decision
-whether probes A, C and D become tools under `OR-1`.
+Session 156 codified the candidates as H-236 to H-239 and retained probe C and D’s
+purpose as a tool, the descent filter behind exp-228.
+
+## Measured Against This Report
+
+Session 156 ran three of the lanes above the same night, and three estimates here were
+wrong in ways that change the plan:
+
+- **The cell tree is about a thousand times larger than estimated.** Rung 0’s box needed
+  more than $7.8\times10^7$ nodes before its last 79 of 256 subtrees, against the
+  $10^3$–$10^5$ LPs per box estimated in “The H-112 Milestone”.
+  Each added square multiplies the tree by roughly six or seven (the $n=5$ control
+  closes in 229 nodes).
+  Rung 1 is out of reach with this relaxation, and the lever is a stronger bound per
+  node, not more boxes.
+  The instrument itself held up: an independent reader accepted every certificate, and a
+  [W2 review](../../../docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md)
+  found the contract sound.
+- **Candidate H-d cannot beat $\rho$.**
+  [exp-227](../series/series-000-smoke-and-calibration/experiments/exp-227-h237-trump-growth-cone-capture-radius.md)
+  proves that any certificate bounding each row’s second-order remainder separately is
+  capped by BC-199’s weighted modulus.
+  The growth minimum over the whole sphere is $0.05177$, and along the binding direction
+  36 of 42 rows keep decreasing at second order, so a second-order-exact isolation
+  theorem is the route to a larger ball.
+  The floor quoted above as $0.0057$ per radian used a far-row constant; the corrected
+  uniform-ball floor is $\sigma\ge0.0111\,t$.
+- **The census found no third class below Stromquist’s value, but did find two new
+  minima within $U+0.02$.**
+  [exp-228](../series/series-000-smoke-and-calibration/experiments/exp-228-h238-descent-filtered-census.md)
+  filtered 1,000 jolted starts: every one of 85 apparent three-class minima below
+  $3.885618$ descends.
+  A two-orientation minimum at $3.8867460$ ($0°$ and $41.56°$) and a genuine
+  three-orientation minimum at $3.8943219$ set the sharpness any profile theorem must
+  reach.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
