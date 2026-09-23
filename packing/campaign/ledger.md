@@ -167,7 +167,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-150](agent-sessions/session-150-n17-consolidation-and-correctness.md) | completed | contemporaneous | `remediation` (correctness) | `review-planning-oversight` (process) | 4 | think-b7pr | Run the W5 efficiency block under `think-zmos`: the deep gate's exhaustive-tier step against its own declared budget, the deferred-steps wall, and the duplicate run over a byte-identical tree, now that every routine gate has a wall ceiling to be measured against. |
 | [session-151](agent-sessions/session-151-low-n-review-and-first-party-n17.md) | stopped | contemporaneous | `efficiency-loop` (efficiency) | `research-loop` (insight) | 4 | think-gvlg | Under think-gvlg: obtain a qualifying fast-gate pass on a host where the three environment failures above do not apply, then register the n = 11 rung, which is accepted by both routes and has no T-id, following the handoff's three steps. |
 | [session-152](agent-sessions/session-152-external-density-and-n11-review.md) | completed | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-6xoc | After PR 222 is green and mergeable, start two separate branches from its head in parallel: decide the complete n11 adaptive parent-core catalogue under think-d010, and reconcile PR 221 while retaining every historical result and the strongest justified current bounds. Existing identifiers from PR 221 take precedence; renumber any later conflicting identifiers after PR 221's sequence and update every reference. PR 222 introduces no T-ID. The density-method and continuation-driver work remain separately assigned as recorded above. |
-| [session-155](agent-sessions/session-155-w3-proof-directions.md) | in_progress | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-4kov | Update generated views, verify final snapshot headroom, run the selected push gate, and publish a draft PR for one required hosted full gate before session closure. |
+| [session-155](agent-sessions/session-155-w3-proof-directions.md) | in_progress | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 4 | think-4kov | Update generated views, verify final snapshot headroom, run the selected push gate, and publish a draft PR for one required hosted full gate before session closure. |
 
 ### Workflow summary
 
@@ -184,7 +184,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `pipeline-improvement` | 35 | 2 | 153 | 5 |
 | `documentation-pass` | 1 | 0 | 25 | 1 |
 | `remediation` | 1 | 1 | 1 | 3 |
-| `review-planning-oversight` | 6 | 0 | 26 | 2 |
+| `review-planning-oversight` | 6 | 0 | 27 | 2 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas

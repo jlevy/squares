@@ -10,7 +10,7 @@ session:
   title: W3 Lower-Bound Proof Directions
   date: '2026-09-22'
   started_at: '2026-09-23T03:06:21.883Z'
-  deadline_at: '2026-09-23T05:55:52.784Z'
+  deadline_at: '2026-09-23T06:55:52.784Z'
   branch: codex/w3-proof-directions
   primary_bead: think-4kov
   status: in_progress
@@ -99,7 +99,7 @@ session:
     objective: >-
       Run the selected local push gate, publish the reviewed draft checkpoint, and
       dispatch and monitor its one required hosted full validation.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The local checkpoint and focused record and snapshot checks passed.
     budget_minutes: 89
@@ -116,12 +116,49 @@ session:
     fallback: >-
       Retain the exact failing job and focused reproduction, repair only the affected
       contract, and keep the pull request in draft.
+    outcome: >-
+      The reviewed checkpoint was committed locally. Its selected push gate entered the
+      reachable-step executor but was interrupted at the owner's request before any
+      completed-step result because PR 224 had become a required new base. It supplies
+      no publication or pass evidence.
+    evidence:
+    - packing/campaign/agent-sessions/session-155-w3-proof-directions.md
+    - packing/campaign/session-close-report.yaml
+    stop_reason: The owner required PR 224 to merge before W3 publication, superseding this validation base.
+    next_action: Merge the repaired stack from main, remeasure the actual combined snapshot, and validate that tree.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: work
+    objective: >-
+      Wait for the authorized PR 224 merge, integrate the resulting main into W3,
+      regenerate record views, directly remeasure the combined snapshot, run the
+      applicable local gate, and publish the reviewed research for hosted validation.
+    status: in_progress
+    entered_by: user_request
+    switch_reason: The owner made merged PR 224 a publication dependency after the prior local checkpoint.
+    budget_minutes: 128
+    started_at: '2026-09-23T04:18:38Z'
+    deadline_at: '2026-09-23T06:25:52.784Z'
+    expected_output: >-
+      A root-reviewed W3 integration on current main, direct combined-tree snapshot
+      evidence, a passing applicable local gate, and a draft pull request dispatched to
+      one hosted full checkpoint.
+    validation_command: >-
+      cd packing && env PYTHON_CPU_COUNT=2 .venv/bin/packing-validate --push --jobs 1 --inner-jobs 2
+    kill_condition: >-
+      The main integration loses a reviewed research artifact or registered result, the
+      actual combined snapshot exceeds its unchanged cap, or an applicable validation
+      reports a substantive failure.
+    fallback: >-
+      Preserve the exact conflict or failure, repair only the affected integration
+      contract under root review, and keep the research branch unpublished.
     outcome: null
     evidence:
     - packing/campaign/agent-sessions/session-155-w3-proof-directions.md
     - packing/campaign/session-close-report.yaml
     stop_reason: null
-    next_action: Run the selected local push gate, then publish the reviewed draft and dispatch hosted validation.
+    next_action: Integrate main after PR 224 merges, then regenerate, remeasure and validate before publication.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
   - packing/campaign/resource-usage/codex-task-tree-session-155-integration.yaml
@@ -180,10 +217,10 @@ session:
     operator: GPT-5.6 Sol, high
     status: in_progress
     recording: contemporaneous
-    phase: 3
-    budget_minutes: 110
+    phase: 4
+    budget_minutes: 170
     started_at: '2026-09-23T03:36:21.883Z'
-    deadline_at: '2026-09-23T05:25:52.784Z'
+    deadline_at: '2026-09-23T06:25:52.784Z'
     expected_output: >-
       A root-reviewed draft checkpoint with generated views, measured snapshot headroom
       and a passing selected push gate.
@@ -222,11 +259,11 @@ session:
     - The agenda-039 real-copy regression passes with all registered dependencies and W3 artifacts preserved.
     uncertainty: >-
       The integration receipt is a lower bound because this session was live at its
-      cutoff. Applying the finished W3 snapshot's 211,180-byte net increase and PR 224's
-      conservatively counted 24,988-byte delta to PR 223's separately measured 403,826
-      byte headroom leaves 167,658 bytes under the unchanged cap. This is a conservative
-      pre-merge calculation; the eventual three-branch tree must remeasure the contract
-      after its merge.
+      cutoff. At checkpoint 9de34efe5, applying the W3 snapshot's 211,180-byte net
+      increase and PR 224's conservatively counted 24,988-byte delta to PR 223's
+      separately measured 403,826 byte headroom leaves 167,658 bytes under the unchanged
+      cap. This is a conservative pre-merge calculation; the integrated tree must
+      remeasure the contract directly.
     elapsed_seconds: 1935.009
     elapsed_quality: platform_measured
     next_action: Finalize generated views, run the selected gate, and publish the draft checkpoint.
@@ -242,12 +279,12 @@ session:
   - Preliminary retained-tool Ruff checks passed.
   - Preliminary X-045 immutable-source replay matched the corrected receipt outside runtime metadata.
   - >-
-    The finished draft snapshot is 161,768,163 bytes against the unchanged 167,772,160
-    byte cap. Relative to be736b0ef05ac2f256691bc3ded21873ad1f2ab1, agenda-039
-    pruning recovers about 415 KB and the exact net increase is 211,180 bytes.
-    Conservatively counting PR 224's 24,988-byte delta against PR 223's measured
-    headroom leaves a conservative pre-merge 167,658 bytes for the eventual
-    three-branch tree.
+    The reviewed pre-merge checkpoint 9de34efe5 has a 161,768,163-byte snapshot against
+    the unchanged 167,772,160 byte cap. Relative to
+    be736b0ef05ac2f256691bc3ded21873ad1f2ab1, agenda-039 pruning recovers about 415 KB
+    and the exact net increase is 211,180 bytes. Conservatively counting PR 224's
+    24,988-byte delta against PR 223's measured headroom leaves 167,658 bytes before the
+    required direct measurement of the integrated tree.
   - >-
     Cost cutoff 2026-09-23T03:38:48Z: creative research used 1.52 agent-hours,
     1.49 active-union hours, 188 model responses and 134,746 output tokens. Mechanical

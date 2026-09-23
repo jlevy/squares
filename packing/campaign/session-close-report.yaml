@@ -2546,7 +2546,7 @@ sessions:
   title: "W3 Lower-Bound Proof Directions"
   status: in_progress
   primary_bead: think-4kov
-  phases: 3
+  phases: 4
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
