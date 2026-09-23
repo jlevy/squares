@@ -169,7 +169,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-152](agent-sessions/session-152-external-density-and-n11-review.md) | completed | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-6xoc | After PR 222 is green and mergeable, start two separate branches from its head in parallel: decide the complete n11 adaptive parent-core catalogue under think-d010, and reconcile PR 221 while retaining every historical result and the strongest justified current bounds. Existing identifiers from PR 221 take precedence; renumber any later conflicting identifiers after PR 221's sequence and update every reference. PR 222 introduces no T-ID. The density-method and continuation-driver work remain separately assigned as recorded above. |
 | [session-153](agent-sessions/session-153-native-n11-parent-core.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (correctness) | 4 | think-d010 | Publish the coordinator-approved PR 223 closure for completed think-d010 and require its final hosted checks before ready; the separately requested W3 review owns the next research ordering. Preserve the c183cc9ab proof scope and do not merge either stacked PR. |
 | [session-154](agent-sessions/session-154-pr221-pr222-reconciliation.md) | completed | contemporaneous | `remediation` (correctness) | `remediation` (correctness) | 1 | think-t30b | Render T-033's missing standalone claim document under think-vx26. |
-| [session-155](agent-sessions/session-155-w3-proof-directions.md) | in_progress | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 4 | think-4kov | Integrate PR 224's ancestry-only merge commit from main, run the applicable local push gate and publish the reviewed draft on main. Then dispatch exactly one hosted full checkpoint while preserving every frozen proof and research artifact. After closure, the user chooses among the shaped candidates; no experiment is selected automatically. |
+| [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
 
 ### Workflow summary
 
@@ -186,7 +186,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `pipeline-improvement` | 36 | 2 | 154 | 5 |
 | `documentation-pass` | 1 | 0 | 25 | 1 |
 | `remediation` | 2 | 1 | 2 | 3 |
-| `review-planning-oversight` | 6 | 0 | 29 | 2 |
+| `review-planning-oversight` | 6 | 0 | 30 | 2 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas

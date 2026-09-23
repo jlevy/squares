@@ -161,7 +161,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 38 | 18 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 362 | 183 complete; 61 stopped; 68 blocked; 16 ready; 21 tentative; 13 in progress |
-| Sessions | 155 | 95 completed; 59 stopped; 1 nonterminal |
+| Sessions | 155 | 96 completed; 59 stopped; all terminal |
 | Explorations | 43 | 24 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 170 | 29 confirmed; 31 refuted; 55 blocked; 17 unresolved; 5 open; 29 open questions; 2 result registered; 2 abandoned; 0 running |
 | Experiments | 155 | 43 accepted; 36 rejected; 50 unresolved; 12 baseline; 11 blocked; 3 abandoned; 0 in progress |
@@ -1164,20 +1164,22 @@ twenty promoted fields remain current.
 BC-373 is complete on the retained T-033 receipt and full-gate evidence; Session 151
 stays stopped as the historical record of its cutoff.
 
-PR 224 is the current integration step.
-After it merges, the owner’s W3 frontier review uses the combined C4 evidence and owns
-the next research ordering.
+PR 224 is merged.
+**[Session 155](packing/campaign/agent-sessions/session-155-w3-proof-directions.md)**
+publishes the owner’s W3 frontier review as PR 230: three reviewed explorations, three
+diagnostic tools, seven original receipts and 31 shaped idea rows.
+It changes no bound or registered hypothesis.
+Ordinary PR checks and the exact-head five-job full checkpoint passed.
 Session 154’s earlier `think-vx26` selection remains a bounded publication gap: render
 T-033’s missing standalone claim document from the retained result and evidence records.
 `think-tzg7` owns the frozen producer-provenance limitation, `think-380b` owns the
 broader significance rubric, `think-ck07` owns a second complete density-verification
 method, and `think-c0xc` owns the continuation-driver admission guard.
 
-**Selected next entry:** `think-d010`, Session 153’s recorded publication handoff.
-PR 223’s merge has now fulfilled it; the marker remains here because Session 153 is the
-latest observed terminal handoff.
-The owner’s newer W3 request is the actual next work and will supply a new session
-handoff when published.
+**Selected next entry:** `think-5zjd`, user prioritization of the shaped W3 candidates
+from X-043 through X-045. This is a planning choice: do not allocate a hypothesis id or
+start an experiment campaign automatically.
+Session 153’s earlier `think-d010` publication handoff is fulfilled by PR 223’s merge.
 
 **Selected next entry at the Session 151 cutoff:** `think-gvlg`, registering the
 `n = 11` rung Session 151 left accepted and unregistered.
@@ -4649,7 +4651,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-154-takeover.yaml` | session-154 | 72 | 0.49 h | 0.49 h | 0.49 h | yes |
 | `codex-task-tree-session-154.yaml` | session-154 | 358 | 3.03 h | 2.95 h | 3.63 h | yes |
 | `codex-task-tree-session-155-creative.yaml` | session-155 | 188 | 1.52 h | 1.49 h | 1.72 h | no |
-| `codex-task-tree-session-155-integration.yaml` | session-155 | 144 | 0.56 h | 0.54 h | 0.54 h | yes |
+| `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |

@@ -2605,9 +2605,9 @@ sessions:
     snapshot_incomplete: true
 - id: session-155
   title: "W3 Lower-Bound Proof Directions"
-  status: in_progress
+  status: completed
   primary_bead: think-4kov
-  phases: 4
+  phases: 5
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
@@ -2625,8 +2625,8 @@ sessions:
     wall_hours: 1.72
     snapshot_incomplete: false
   - path: packing/campaign/resource-usage/codex-task-tree-session-155-integration.yaml
-    model_responses: 144
-    agent_hours: 0.56
-    active_union_hours: 0.54
-    wall_hours: 0.54
+    model_responses: 634
+    agent_hours: 3.31
+    active_union_hours: 3.2
+    wall_hours: 3.2
     snapshot_incomplete: true
