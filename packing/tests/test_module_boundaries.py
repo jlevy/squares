@@ -940,6 +940,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_certificate_refuses_a_displaced_point",  # 2.2s
             "test_certificate_builds_and_charges_every_point",  # 2.1s
         },
+        # 41s of call time across 2, measured locally on 2026-09-23. The second reuses
+        # the first's exact branch-0 system, so alone it pays the 40s build itself.
+        "test_capture_radius.py": {
+            "test_branch_zero_reproduces_bc199_and_the_lemma_caps_the_route",  # 40.0s
+            "test_row_jets_refuse_a_row_that_is_not_the_retained_gradient",  # 0.7s
+        },
         # 3s of call time across 1.
         "test_campaign_runner_trust_boundary.py": {
             "test_each_cell_gets_its_own_share_of_the_timebox",  # 3.0s
