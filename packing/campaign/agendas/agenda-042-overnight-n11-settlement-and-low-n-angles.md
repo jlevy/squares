@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-042
   title: Overnight n11 Settlement Ladder and Low-n Angles After PR 230
-  updated: '2026-09-23'
+  updated: '2026-09-24'
   status: active
   objective: >-
     Turn PR 230's W3 review and the two explorations it led to, X-046 and X-047, into
@@ -73,7 +73,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: stopped
+    state: complete
     priority: 1
     question: >-
       Does a fixed-shape cell tree with rotational cores and exact leaf certificates
@@ -115,6 +115,17 @@ agenda:
       - docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md
       disposition: continue
       follow_up: think-ie35
+    - scope: H-236, the 58 remaining subtrees and the reader over the complete tree (exp-232).
+      classification: achieved
+      result: >-
+        All 256 subtrees closed; the independent reader accepted the whole tree
+        (119,556,859 leaf certificates, 19,883,887 branch nodes, three Trump-degenerate
+        leaves, no unresolved leaf). H-236 is confirmed at its registered scope, pending
+        BC-241 for the local theorem its terminal leaves use.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
+      disposition: retire-success
+      follow_up: think-6w2y
   - id: BC-376
     purpose: research
     owner_focus: insight
@@ -231,7 +242,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [12]
-    state: stopped
+    state: complete
     priority: 2
     question: Does the cutting loop certify an additive ceiling at n12, side 39609/10000?
     hypotheses: [H-241]
@@ -258,6 +269,17 @@ agenda:
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md
       disposition: defer-dependency
       follow_up: think-xmm4
+    - scope: H-241 round 2, the warm-started cutting loop with more rows and a larger support (exp-233).
+      classification: bounded-negative
+      result: >-
+        The row loop converged at a covering value of 11.980175 < 12 with no family
+        reaching 12, so H-241 is rejected as registered: the additive route at n12 is not
+        shown dead above 3.9609. Freezing the converged covering for the stock gate is a
+        cheap follow-up, not selected.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-233-h241-n12-ceiling-settles-below-12.md
+      disposition: retire-negative
+      follow_up: null
   - id: BC-380
     purpose: tool_validation
     owner_focus: correctness
@@ -294,6 +316,29 @@ agenda:
       - packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md
       disposition: defer-dependency
       follow_up: think-m9iz
+  - id: BC-381
+    purpose: research
+    owner_focus: correctness
+    instances: [11]
+    state: ready
+    priority: 1
+    question: >-
+      Does a Fable max adversarial W2 review of the closed rung-0 tree (exp-232) accept
+      H-236 at its registered scope, and what register entry, rated by epistemics.md,
+      does it support?
+    hypotheses: [H-236]
+    budget: One Fable max review lane, daytime, reading the retained reader verdict and the 5.5 GB tree in place.
+    entry: exp-232 closed with the reader's verdict retained; the rung-0 contract review of 2026-09-23.
+    exit: An accepting or rejecting review, and a register entry or a stated reason for none.
+    bead: think-6w2y
+    depends_on: []
+    next_evidence: A dated review under docs/project/reviews/ and, if accepted, a results.yaml row.
+    workflows: [factual-review]
+    program: n11-settlement
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
+    parallel_group: n11-rung0-review
+    note: The terminal leaves inherit BC-240's scope, pending the BC-241 closure.
 ---
 # Agenda 042: The n11 Settlement Ladder and Low-n Angles
 

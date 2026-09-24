@@ -79,14 +79,15 @@ experiment:
 decisive negative: a family of cores proving that no additive certificate can reach
 $s(12)>3.9609$. The second round, with three times the rows per round and twice the
 family support of [exp-230](exp-230-h241-n12-additive-ceiling-3-9609.md), let the row
-loop converge, and it converged below twelve, at $11.980$. That rejects the hypothesis as
-registered: on this support the additive route is not dead at $3.9609$.
+loop converge, and it converged below twelve, at $11.980$. That rejects the hypothesis
+as registered: on this support the additive route is not dead at $3.9609$.
 
-The converged value is a floating-point covering LP, not a certificate. Freezing it and
-deciding it with the stock gate would test whether a point certificate proves
-$s(12)\ge3.9609$, about $0.0009$ above T-017’s $3.96$, which X-047 estimated as n12’s
-remaining additive headroom. That is a small increment of the kind the owner has asked to
-deprioritize, recorded here as a cheap follow-up rather than selected.
+The converged value is a floating-point covering LP, not a certificate.
+Freezing it and deciding it with the stock gate would test whether a point certificate
+proves $s(12)\ge3.9609$, about $0.0009$ above T-017’s $3.96$, which X-047 estimated as
+n12’s remaining additive headroom.
+That is a small increment of the kind the owner has asked to deprioritize, recorded here
+as a cheap follow-up rather than selected.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

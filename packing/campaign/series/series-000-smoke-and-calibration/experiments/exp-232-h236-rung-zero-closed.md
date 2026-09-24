@@ -59,9 +59,9 @@ experiment:
     checked_by: >-
       All 58 remaining subtrees completed (5.12e7 nodes, 2.62e8 LP solves, 14,350 s; the
       largest, subtree 128, 7,987,265 nodes). The reader replayed the whole tree in
-      2,414 s: verdict closed, unresolved leaves none, 139,440,746 exact leaf
-      certificates accepted (19,883,887 dual-bound, 21,834,304 Farkas, 97,722,555 closed
-      by the fail-first leaf rule), three Trump-degenerate leaves closed by the BC-240
+      2,414 s: verdict closed, unresolved leaves none; 19,883,887 branch nodes and
+      119,556,859 exact leaf certificates accepted (21,834,304 dual-bound and 97,722,555
+      Farkas), three Trump-degenerate leaves closed by the BC-240
       local theorem, smallest certified margin 6.04e-10 above U's upper end, largest
       enclosure reach 2.93e-5 beyond the matched Trump image; statement
       target_is_at_least_U true and half-tangent box [91442076901/250000000000,
@@ -72,7 +72,7 @@ experiment:
     outcome: criterion_met
     checked_by: >-
       About 1.70e8 nodes and 8.6e8 LP solves over four producer runs (3,300 s, 9,118 s,
-      11,409 s and 14,350 s of wall on 8 to 10 workers), and 139 million certificates.
+      11,409 s and 14,350 s of wall on 8 to 10 workers), and about 1.2e8 leaf certificates.
       Against X-046's estimate of 10^3 to 10^5 LPs per box this is roughly four orders
       of magnitude larger, which prices rung 1 out of reach with this relaxation
   verdict:
@@ -91,26 +91,28 @@ experiment:
 # Exp-232: Rung 0 Closes
 
 [H-236](../../../hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) is
-confirmed at its registered scope. Freeze the tilt of Trump’s five tilted squares to
-within $10^{-6}$ in the half-tangent, keep the other six axis-aligned, and let every
-centre and contact vary: no such packing fits in a square smaller than $U$, and the only
-packings at $U$ are Trump’s own, up to symmetry and relabelling.
-It is the first global optimality statement in any $n = 11$ family, and the first rung of
-[X-046](../../../explorations/X-046-n11-settlement-program.md)’s settlement ladder.
+confirmed at its registered scope.
+Freeze the tilt of Trump’s five tilted squares to within $10^{-6}$ in the half-tangent,
+keep the other six axis-aligned, and let every centre and contact vary: no such packing
+fits in a square smaller than $U$, and the only packings at $U$ are Trump’s own, up to
+symmetry and relabelling.
+It is the first global optimality statement in any $n = 11$ family, and the first rung
+of [X-046](../../../explorations/X-046-n11-settlement-program.md)’s settlement ladder.
 
 [Exp-231](exp-231-h236-rung-zero-cell-tree.md) had closed 198 of 256 subtrees before its
 caps. The remaining 58 ran overnight with the unchanged instrument, heaviest first, and
 all completed; the independent reader then replayed every one of the 256 subtree files
-and accepted all 139 million leaf certificates, with the three leaves containing Trump’s
-packing closed by the quantified local theorem, as the
+and accepted all 119.6 million leaf certificates and the 19.9 million branch nodes
+between them, with the three leaves containing Trump’s packing closed by the quantified
+local theorem, as the
 [contract review](../../../../../docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md)
 required.
 
 The statement is narrow: it says nothing about any other tilt, and its terminal leaves
-inherit BC-240’s scope, pending the BC-241 closure. Registering it as a frontier result
-waits for a Fable max W2 review of the closed tree. The cost is the other finding: about
-$1.7\times10^8$ nodes for one box, so the next rung needs a stronger bound per node
-before it needs more boxes.
+inherit BC-240’s scope, pending the BC-241 closure.
+Registering it as a frontier result waits for a Fable max W2 review of the closed tree.
+The cost is the other finding: about $1.7\times10^8$ nodes for one box, so the next rung
+needs a stronger bound per node before it needs more boxes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

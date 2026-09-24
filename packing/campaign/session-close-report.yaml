@@ -11,15 +11,15 @@ count: 157
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 102
-  sessions_unmeasured: 55
+  sessions_measured: 103
+  sessions_unmeasured: 54
   attributed:
     rollups: 205
-    turns: 53524
-    tool_calls: 29404
+    turns: 53742
+    tool_calls: 29494
     tool_errors: 571
-    one_off_code: 4423
-    wall_hours: 471.36
+    one_off_code: 4448
+    wall_hours: 478.79
   unattributed:
     rollups: 62
     turns: 13277
@@ -29,11 +29,11 @@ totals:
     wall_hours: 60.77
   measured:
     rollups: 267
-    turns: 66801
-    tool_calls: 37068
+    turns: 67019
+    tool_calls: 37158
     tool_errors: 748
-    one_off_code: 5545
-    wall_hours: 532.13
+    one_off_code: 5570
+    wall_hours: 539.56
 codex_receipts:
   attributed: 64
   unattributed: 2
@@ -2654,19 +2654,23 @@ sessions:
   - packing/campaign/resource-usage/agent-af1805a9e25246340.yaml
   - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
   - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
-  turns: 2748
-  tool_calls: 1490
+  turns: 2966
+  tool_calls: 1580
   tool_errors: 22
-  one_off_code: 189
-  wall_hours: 34.55
+  one_off_code: 214
+  wall_hours: 41.98
   codex_receipts: []
 - id: session-157
   title: "Overnight CPU Runs, Finishing Rung 0 and Resuming the n12 Ceiling"
-  status: in_progress
+  status: stopped
   primary_bead: think-ie35
-  phases: 1
-  measured: false
-  unmeasured_reason: >-
-    declares no resource measurement
-  rollups: []
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  turns: 953
+  tool_calls: 412
+  tool_errors: 2
+  one_off_code: 66
+  wall_hours: 30.55
   codex_receipts: []
