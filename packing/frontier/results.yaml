@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-09-23'
+last_reviewed: '2026-09-24'
 results:
   - id: T-001
     claim: >-
@@ -2185,3 +2185,161 @@ results:
       upright square has both closed edges on such a pair. A stall there is not a
       counterexample, and it decides nothing.
       C5 is reached; V5 would need a proof-assistant port of the five-condition theorem.
+
+  - id: T-035
+    claim: >-
+      Every packing of eleven unit squares in a square container, six at orientation 0
+      and five sharing one orientation modulo pi/2 with half-tangent in
+      [91442076901/250000000000, 73154061521/200000000000] (an interval containing
+      [t* - 10^-6, t* + 10^-6] for Trump's exact half-tangent t* = 0.365769307604677...),
+      whose side is at most the rational U_hi of the certificate header
+      (U_hi - U = 2.03e-45), lies, after the quarter turn that puts its tilted centroid
+      in the closed upper-right quadrant and the relabelling that orders each class by
+      x + y/4, strictly within rho = 808514697/200000000000 of Trump's labelled image
+      (rotation 1, labels [3,4,2,5,0,1,8,10,6,9,7]) in every centre coordinate, with
+      every tilted orientation within 2.0e-6 radians of Trump's; every other packing in
+      the family has side greater than U_hi.
+      The statement is a machine-verified reduction, not optimality: a closed exact
+      cell tree of 139,441,005 records, replayed in full by an independent reader, puts
+      every small packing in the family near Trump's pose. It does not invoke the BC-240
+      local theorem. T-036 composes it with that theorem's first clause.
+    scope:
+      n_values:
+        - 11
+    verification: V4
+    confirmation: C5
+    significance:
+      score: 3
+      rationale: >-
+        A substantive case result and machine audit at the smallest open case: one
+        certificate tree, closed with no unresolved leaf, reduces a whole restricted
+        family to a neighbourhood of Trump's pose. It moves no bound on s(11), its family
+        is one box of half-tangents 2e-6 wide, and its cost, about 1.7e8 nodes for that
+        one box, argues against S4's reusable technique. The 2026-09-24 closed-tree
+        review scored the composed theorem S3 on the same grounds.
+      scored: '2026-09-24'
+      by: registration, adopting the 2026-09-24 closed-tree review's recommendation (repository)
+    novelty: apparently-novel
+    composition: >-
+      Not compound. One certificate tree and one reader verdict carry the whole
+      statement, with no local theorem, monotonicity or composition step between them.
+      The reader closes a Trump-degenerate leaf by exact arithmetic, bounding every centre
+      coordinate of the cell's packings within rho of the labelled image, which is why the
+      statement stops at the rho-ball rather than at Trump's pose.
+      C5 is the entry's C3 (repository-origin, exact-algebraic, a certificate, a replay
+      and a passing status) plus the mapped 2026-09-24 closed-tree review. That review is
+      a Fable max W2 review by a different agent than the lanes that produced the tree,
+      inside the same project; it is not an external review.
+    produced_by:
+      hypothesis: H-236
+      agenda_cell: BC-375
+      session: session-157
+      experiment: exp-232
+    review_artifact: docs/project/reviews/review-2026-09-24-rung0-closed-tree.md
+    evidence:
+      - E-n011-h236-rung0-reduction
+    artifacts:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-232-h236-reader-final2.json.gz
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-232-h236-tree-manifest.sha256
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-232-h236-frozen.txt
+      - packing/cases/trump11/fixed_angle_tree.py
+      - packing/cases/trump11/fixed_angle_tree_check.py
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
+    controls:
+      - packing/tests/test_fixed_angle_tree.py
+    next_rung: >-
+      C5 is reached; V5 would need a proof-assistant port of the cell-tree contract and
+      its reader. Three steps would strengthen the record without moving a rung. The
+      certificate could be retained where a gate can reach it; until then the manifest
+      is the record's only hold on it. The reader could compare the declared box with
+      t* +- 10^-6 itself, a comparison only the review has made. A reader that accepts a
+      non-root cell would make the n = 11 negative control reader-checked.
+      The mathematics beyond this result is rung 1 of the ladder, H-112, which H-242's
+      pilot (BC-383) prices: a per-node bound that closes this box in far fewer than
+      1.7e8 nodes comes before more boxes.
+
+  - id: T-036
+    claim: >-
+      Every packing of eleven unit squares in a square container, six at orientation 0
+      and five sharing one orientation modulo pi/2 with half-tangent in
+      [91442076901/250000000000, 73154061521/200000000000] (an interval containing
+      [t* - 10^-6, t* + 10^-6] for Trump's exact half-tangent t*), has container side at
+      least U = 3.877083590022814..., the exact side of Trump's packing, and a packing in
+      the family has side exactly U only if it is a quarter-turn image of Trump's pose
+      with the squares relabelled within the two classes.
+      Reflections leave the family, since they send the tilt theta* to pi/2 - theta*,
+      whose half-tangent 0.464 is outside the box, so that Z/4 x S6 x S5 orbit is the
+      whole equality set. The statement is T-035's reduction composed with the first
+      clause of the BC-240 local theorem at Trump's pose. It says nothing about any other
+      tilt, about packings whose orientation classes are not six plus five, or about
+      s(11).
+    scope:
+      n_values:
+        - 11
+    verification: V3
+    confirmation: C2
+    significance:
+      score: 3
+      rationale: >-
+        A substantive case result and machine audit: the first optimality statement with
+        an equality case for a family containing Trump's packing. Stromquist 2003's bound
+        for squares at 0 and 45 degrees is an earlier restricted-orientation statement,
+        and it is not attained and its family does not contain Trump's packing. It moves
+        no bound on s(11), and its cost, about 1.7e8 nodes for one box, argues against
+        S4's reusable technique.
+      scored: '2026-09-24'
+      by: registration, adopting the 2026-09-24 closed-tree review's recommendation (repository)
+    novelty: apparently-novel
+    composition: >-
+      Compound, and the minimum is set by BC-240's first clause. The reduction, T-035 on
+      E-n011-h236-rung0-reduction, is V4/C5. The first clause, on
+      E-n011-trump-local-theorem-first-clause, is an audited proof whose steps are prose
+      and whose radius computation alone is machine-checked, so method proof-audited with
+      a proof block supports V3 and nothing higher, which fixes the composed theorem at
+      V3. The checker derives V4 and C5 from the reduction's entry; this note is why the
+      declared rungs are lower.
+      The composing step is the one the closed-tree review derived again: undoing the
+      quarter turn carries a Trump-degenerate leaf's packing at side s' <= U to a
+      translate by (0, U - s') inside [0,U]^2, a sup-norm isometry on centre
+      differences, so the first clause forces Trump's labelled pose and the four wall
+      contacts force s' = U. The angle window, 2.0e-6 radians, is below rho_row.
+      Confirmation is C2 by the C table: the clause's replay command, the source-distinct
+      BC-241 checker, passes at this head, and a proof-audited entry does not derive
+      above C2. The radius generator has no replay mode, so its full 2026-09-24 replay is
+      a retained comparison, not a replay command.
+    produced_by:
+      hypothesis: H-236
+      agenda_cell: BC-381
+      session: session-158
+      experiment: exp-232
+    review_artifact: docs/project/reviews/review-2026-09-24-rung0-closed-tree.md
+    evidence:
+      - E-n011-h236-rung0-reduction
+      - E-n011-trump-local-theorem-first-clause
+    artifacts:
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-232-h236-reader-final2.json.gz
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-232-h236-tree-manifest.sha256
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-232-h236-frozen.txt
+      - packing/cases/trump11/fixed_angle_tree.py
+      - packing/cases/trump11/fixed_angle_tree_check.py
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
+      - packing/cases/trump11/isolation-theorem.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/bc-199-trump-isolation-radius.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/bc382-isolation-radius-replay.json.gz
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/bc382-capture-radius-replay.json.gz
+      - docs/project/reviews/review-2026-09-24-bc241-closure.md
+    controls:
+      - packing/tests/test_fixed_angle_tree.py
+      - packing/tests/test_trump_isolation_radius.py
+      - packing/tests/test_review_trump_local_theorem.py
+    next_rung: >-
+      The closed-tree review reads C3, and C5 since both reviews are mapped, as following
+      once cases.trump11.isolation_radius gains a replay mode (the closure review's
+      residual 3), so that the radius can carry an exact-algebraic entry of its own. By
+      the C table a proof-audited entry does not derive above C2, so that reading also
+      needs a composition note judging that the audited prose steps do not set the
+      confirmation minimum.
+      V4 would need BC-240's closing steps mechanised rather than only the quantities
+      they consume. Retaining the per-face dual witnesses and recomputing the gap cap
+      from distinct source are the closure review's two bounded residual tasks.

@@ -115,7 +115,9 @@ experiment:
 whether Trump’s packing is globally optimal once its angles are frozen: six squares at
 $0°$, five at Trump’s tilt within $10^{-6}$ in the half-tangent.
 It is the first rung of [X-046](../../../explorations/X-046-n11-settlement-program.md)’s
-ladder, and the first global statement anyone has attempted in an n11 family.
+ladder, and the first attempt at an optimality statement with an equality case for a
+family containing Trump’s packing; Stromquist 2003’s $0°/45°$ bound is an earlier
+restricted-orientation statement.
 
 The instrument works, and a
 [W2 review](../../../../../docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md)

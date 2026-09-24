@@ -110,6 +110,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-014](packing/frontier/RESULTS.md) | 5 | `V3` | `C5` | `S3` | `apparently-novel` | For s = 2 + sqrt(2)/2 and Goebel’s labeled pose P0 in C = (R^2 x S^1)^5, P0 is an isolated point of Feas(s) -- closed unit squares in [0, s]^2, pairwise disjoint interiors -- equivalently there is no nonconstant continuous feasible path from P0 and no sequence of distinct feasible poses converging to it; hence the n = 5 optimum is rigid at fixed side in the catalogue’s sense. |
 | [T-034](packing/frontier/RESULTS.md) | 21 | `V4` | `C5` | `S3` | `apparently-novel` | s(21) >= 122/25, from a first-party weighted fractional unavoidable-set certificate at container side 122/25 = 4.88. |
+| [T-035](packing/frontier/RESULTS.md) | 11 | `V4` | `C5` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t* = 0.365769307604677 …), whose side is at most the rational U_hi of the certificate header (U_hi - U = 2.03e-45), lies, after the quarter turn that puts its tilted centroid in the closed upper-right quadrant and the relabelling that orders each class by x + y/4, strictly within rho = 808514697/200000000000 of Trump’s labelled image (rotation 1, labels [3,4,2,5,0,1,8,10,6,9,7]) in every centre coordinate, with every tilted orientation within 2.0e-6 radians of Trump’s; every other packing in the family has side greater than U_hi. |
 | [T-001](packing/frontier/RESULTS.md) | 17 | `V4` | `C4` | `S3` | `apparently-novel` | Sixteen points make [0, 4426213/1000000]^2 unavoidable for open squares of side above one, so s(17) >= 4426213/1000000 = 4.426213. |
 | [T-002](packing/frontier/RESULTS.md) | 18 | `V4` | `C4` | `S3` | `apparently-novel` | s(18) >= 4426213/1000000, by monotonicity from T-001 (a packing of 18 unit squares contains a packing of 17). |
 | [T-021](packing/frontier/RESULTS.md) | 20, 21 | `V4` | `C4` | `S3` | `apparently-novel` | s(20) >= 97/20 and s(21) >= 97/20, from a first-party weighted fractional unavoidable-set certificate at container side 97/20 = 4.85. |
@@ -127,6 +128,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-016](packing/frontier/RESULTS.md) | 18, 19 | `V4` | `C3` | `S3` | `previously-published` | s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a packing of n >= 17 unit squares contains a packing of 17). |
 | [T-023](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S3` | `apparently-novel` | At q = 96/25, if four distinct unit squares have selected strict cores of side B = 9977/10000 containing, respectively, the four closed rational patches in arms.endpoint.footprint_union of the retained exp143 receipt, at most five further unit squares fit. |
 | [T-033](packing/frontier/RESULTS.md) | 11 | `V4` | `C3` | `S3` | `apparently-novel` | s(11) >= 955000*sqrt(2073600042893309449)/359341754646249 = 3.826997548829543624, proved by an exact dilation-limit corollary of T-025’s threshold certificate re-certified on the 2880-step direction net. |
+| [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-006](packing/frontier/RESULTS.md) | 13 | `V3` | `C1` | `S3` | `previously-published` | s(13) = 4 (Bentz 2010, Theorem 9). |
 | [T-007](packing/frontier/RESULTS.md) | 4-100 | `V3` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 100, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V4` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
@@ -161,12 +163,12 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 372 | 190 complete; 61 stopped; 68 blocked; 17 ready; 21 tentative; 15 in progress |
+| Commitments | 372 | 191 complete; 61 stopped; 68 blocked; 17 ready; 21 tentative; 14 in progress |
 | Sessions | 158 | 98 completed; 59 stopped; 1 nonterminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 177 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 31 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 162 | 46 accepted; 37 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 34 | 34 registered |
+| Frontier results | 36 | 36 registered |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -884,6 +886,7 @@ case or experiment separately.
 | [Review of PR 230’s W3 Directions, 23 September 2026](docs/project/reviews/review-2026-09-23-pr230-w3-directions.md) | dated review record | record | retained | — |
 | [Review of the Rung-0 Certificate Contract, 23 September 2026](docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md) | dated review record | record | retained | — |
 | [Closing BC-241: The Trump Local Theorem After a Full Generator Replay](docs/project/reviews/review-2026-09-24-bc241-closure.md) | dated review record | record | retained | — |
+| [Review of the Closed Rung-0 Tree, 24 September 2026](docs/project/reviews/review-2026-09-24-rung0-closed-tree.md) | dated review record | record | retained | — |
 | [Review of the n21 Certificate at 122/25, 23 September 2026](docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
@@ -1211,8 +1214,9 @@ independent reader accepted the complete tree: 119,556,859 leaf certificates, th
 Trump-degenerate leaves, no unresolved leaf
 ([exp-232](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md)).
 `H-236` is confirmed: at Trump’s own angle, no packing of eleven unit squares beats `U`,
-the first global optimality statement in any `n = 11` family, pending BC-241 for the
-local theorem its terminal leaves use.
+the first optimality statement with an equality case for a family containing Trump’s
+packing (Stromquist 2003’s `0°`/`45°` bound is an earlier restricted-orientation
+statement), pending BC-241 for the local theorem its terminal leaves use.
 The n12 cutting loop converged at `11.980175 < 12`, rejecting `H-241`
 ([exp-233](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-233-h241-n12-ceiling-settles-below-12.md)).
 D-508 corrects exp-231’s certificate count, which had included branch nodes.
@@ -3975,6 +3979,8 @@ the certificate carries no transferable slack to `U`.
   **`H-236` is confirmed**: at Trump’s own angle, within `10^-6` in the half-tangent, no
   packing beats `U`; its terminal leaves use BC-240’s first clause, verified and exact
   since the BC-241 closure.
+  After a Fable max review it is registered as `T-035`, the machine-verified reduction
+  to the BC-240 ball, and `T-036`, the composed optimality theorem.
   The whole tree cost about `1.7e8` nodes.
   Each added square multiplies the tree by roughly six or seven, so rung 1 is out of
   reach with this relaxation; the lever is a stronger bound per node, not more boxes.
@@ -4010,7 +4016,7 @@ name.
 
 | Hypothesis | Ledger status | What it would establish | Blocker, and the next step the record names |
 | --- | --- | --- | --- |
-| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle, the first global statement in any `n = 11` family | Confirmed by [exp-232](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md); a Fable max review (`think-6w2y`) precedes any register entry |
+| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle, the first optimality statement with an equality case for a family containing Trump’s packing | Confirmed by [exp-232](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md); after the Fable max review, registered as `T-035` (the reduction, `V4/C5`) and `T-036` (the composed theorem, `V3/C0` until the BC-241 checker’s replay passes again) |
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | Whether a full verified angle search is a bounded program, by measuring `c` and `V(ε)` | Registered to run on the `H-236` cell-tree driver once admitted (prerequisite `think-nbij`), at an estimated hour |
 | [H-112](packing/campaign/hypotheses/H-112-six-axis-five-common-angle-optimum.md) | blocked | Rung 1: any improvement on Trump has a different multiplicity or more orientation classes | Priced out by exp-231 with the present relaxation; needs a per-node bound that closes rung 0’s box in far fewer nodes |
 | [H-113](packing/campaign/hypotheses/H-113-at-most-two-angle-optimum.md) | blocked | Rung 3: Stromquist’s Theorem 3 with `{0°, 45°}` replaced by every pair of orientations | Depends on rungs 0–2 |
@@ -4063,6 +4069,9 @@ Montanher and coauthors’ unit squares in a circle.
 `s(11) ≤ U`, machine-verified as `T-011`. Trump’s pose is strictly locally side-optimal
 (machine-verified, `exp-013`), with a quantified radius of about `0.004`, verified and
 exact since the BC-241 closure.
+With six squares axis-aligned and five at a common tilt within `10^-6` of Trump’s in the
+half-tangent, no packing beats `U` and only Trump’s pose attains it: `T-036`, composed
+from the machine-verified reduction `T-035` and BC-240’s first clause.
 Packings oriented only at `0°` and `45°` need side at least `3.885618` (Stromquist’s
 Theorem 3, from the literature).
 X-045 proves that at most three squares touch any wall in the bracket and that there are
@@ -4071,19 +4080,19 @@ and neither statement is registered as a result.
 
 **What is observed, not proved.** No descent-stable minimum with three or more
 orientation classes below Stromquist’s value among 1,000 jolted starts (`exp-228`); no
-side below `3.897` among 200 refined uniform starts (`exp-204`, as X-046 reads it); and
-no leaf below `U` in the rung-0 tree so far, whose 198 closed subtrees are
-machine-checked but whose 58 open ones are not.
+side below `3.897` among 200 refined uniform starts (`exp-204`, as X-046 reads it).
 
 **What is conjectured.** `s(11) = U`: Trump’s packing has stood since 1979.
 
 The road has three segments, and only the first is priced in the record.
 
 1. **Rung 0 is done; re-price the ladder.** Exp-232 closed the tree, so `H-236` is
-   confirmed at “verified, exact”, now that BC-241 is closed: the first global
-   optimality statement in any `n = 11` family, about Trump’s own angle only.
-   A Fable max review precedes any register entry (`think-6w2y`). The consequential work
-   is the stronger per-node bound exp-231 calls for.
+   confirmed at “verified, exact”, now that BC-241 is closed: the first optimality
+   statement with an equality case for a family containing Trump’s packing, about
+   Trump’s own angle only; Stromquist’s `0°`/`45°` bound is an earlier
+   restricted-orientation statement.
+   After the Fable max review it is registered as `T-035` and `T-036`. The consequential
+   work is the stronger per-node bound exp-231 calls for.
    Tools the record names that bear on it are second-order convergent bounds from a
    fixed dual at the box centre (X-046), descent leaves (idea 227), and symmetry
    canonicalization (the PR 230 review); idea 246’s larger ball would save about three
@@ -4852,7 +4861,7 @@ round that names the hypothesis, control roles included.
 | [H-230](packing/campaign/hypotheses/H-230-a6-family-violates-a-gap-wedge-conflict.md) | blocked | A gap-g wall-wedge conflict edge cuts the A6 64-family; blocked on the gap extension and a conflict-edge atom class | 0 | — |
 | [H-231](packing/campaign/hypotheses/H-231-theta-on-pose-cells.md) | open question | Theta on a sound pose-cell graph at n=11; stays retired under X-037’s condition | 0 | — |
 | [H-232](packing/campaign/hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | blocked | The all-deep corner class at n=11, 96/25 has covering value below 7 in the point-plus-2-of-3 language on the box-cut domain; blocked on the box cut, the refund and an exact 2-of-3 reader | 0 | — |
-| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle on the 10^-6 half-tangent box; exp-232 closed all 256 subtrees and the reader accepted the whole tree; its local theorem is verified since the BC-241 closure | 2 | — |
+| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle on the 10^-6 half-tangent box; exp-232 closed all 256 subtrees and the reader accepted the whole tree; its local theorem is verified since the BC-241 closure; registered as T-035 and T-036 after the Fable max W2 review | 2 | — |
 | [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | The growth-cone route to a sup-norm ball around Trump’s pose larger than the BC-240 radius; capped at the BC-199 modulus by an exhaustion lemma (exp-227) | 1 | — |
 | [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | confirmed | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; confirmed at census scope by exp-228, support never proof | 1 | — |
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
@@ -5376,7 +5385,7 @@ archive beside it.
 | [exp-229](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-229-h240-n21-point-certificate-122-25.md) | 21 | target | H-240 | Column generation at side 122/25 on three site sets, then the gate | RETAINABLE on set C; 1,228 atoms; mass 20.145724; registered as T-034 after the W2 review | accepted |
 | [exp-230](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-230-h241-n12-additive-ceiling-3-9609.md) | 12 | target | H-241 | Cutting loop with the ceiling check at side 39609/10000, three legs | No proved family at 12 (best 10.704); row objective unsettled near 11.98 | unresolved |
 | [exp-231](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md) | 11 | target | H-236 | Rung-0 fixed-angle cell tree with an independent reader on Trump’s half-tangent box | 198 of 256 subtrees closed on 1.19e8 nodes; three Trump-degenerate leaves; no leaf below U | abandoned |
-| [exp-232](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md) | 11 | target | H-236 | The 58 remaining rung-0 subtrees, then the independent reader over the complete tree | Closed: 119,556,859 leaf certificates, three Trump-degenerate leaves, no unresolved leaf | accepted |
+| [exp-232](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md) | 11 | target | H-236 | The 58 remaining rung-0 subtrees, then the independent reader over the complete tree | Closed: 119,556,859 leaf certificates, three Trump-degenerate leaves, no unresolved leaf; registered as T-035 and T-036 after the Fable max W2 review | accepted |
 | [exp-233](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-233-h241-n12-ceiling-settles-below-12.md) | 12 | target | H-241 | Warm-started cutting loop at side 39609/10000 with six row rounds and support 192 | Row loop converged at covering value 11.980175 < 12; no family reaches 12 | rejected |
 
 ### Cost and provenance

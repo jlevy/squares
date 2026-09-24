@@ -267,7 +267,7 @@ Either way the slice prices the tree, which is the only unknown in the milestone
 
 | Rung | Family | Angle parameters | What it proves | Cost order |
 | --- | --- | --- | --- | --- |
-| 0 | $\mathcal F_{6,5}$ on one box around $t^*$ | 0 | Trump is globally optimal at its own angle: the first global optimality statement in any $n=11$ family | One cell tree |
+| 0 | $\mathcal F_{6,5}$ on one box around $t^*$ | 0 | Trump is globally optimal at its own angle: the first optimality statement with an equality case for a family containing Trump’s packing | One cell tree |
 | 1 | $\mathcal F_{6,5}$, all $\theta$ (H-112) | 1 | Any improvement on Trump has a different multiplicity or more classes | $10^2$–$10^3$ boxes |
 | 2 | Axis plus one angle, $m=1..11$ tilted squares | 1 each | Any improvement uses two distinct non-axis orientations | 11 rungs like 1 |
 | 3 | Two arbitrary orientations (H-113) | 2 | Any improvement has at least three orientations: Stromquist’s Theorem 3 with $\{0°,45°\}$ replaced by every pair | $10^4$–$10^5$ boxes per multiplicity |

@@ -52,8 +52,13 @@ hypothesis:
   replication: false
   registered: '2026-09-23'
   notes: >-
-    Rung 0 of the H-112 ladder in X-046. It is the first global optimality statement in
-    any n=11 family, and its node count prices every later rung.
+    Rung 0 of the H-112 ladder in X-046. It is the first optimality statement with an
+    equality case for a family containing Trump's packing (Stromquist 2003's 0/45-degree
+    bound is an earlier restricted-orientation statement), and its node count prices
+    every later rung.
+    Outcome note (2026-09-24): confirmed by exp-232; after the Fable max W2 review,
+    registered as T-035, the machine-verified reduction to the BC-240 ball, and T-036,
+    the composed theorem.
 ---
 # H-236: Trump Is Globally Optimal at Its Own Angle
 

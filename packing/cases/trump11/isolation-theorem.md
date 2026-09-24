@@ -1,12 +1,6 @@
 # A Quantitative Local Theorem at Trump’s 11-Square Packing
 
-Status: BC-240 terminal author packet.
-Accepted at local scope by the source-distinct BC-241 review on 2026-09-06; closed
-2026-09-24 after a full radius-generator replay (4,954 values identical to BC-199) and
-the method-distinct capture_radius control on all 8,448 faces
-([closure review](../../../docs/project/reviews/review-2026-09-24-bc241-closure.md)).
-First clause verified, exact; per-face dual witnesses are recomputed on demand, not
-retained.\
+Status: BC-240 terminal author packet, awaiting the source-distinct BC-241 review.\
 Launch revision: `c55726e1e885227f63110131c0a914665175ff89`.\
 Official T+0: `2026-09-06T03:31:00Z`.
 

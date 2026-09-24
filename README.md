@@ -231,6 +231,22 @@ erratum.
   A [review](docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md)
   re-decided the certificate by three routes and accepted it.
 
+- **T-035 / T-036: Trump’s packing is optimal at its own angle (`S3`).** Six squares
+  stay axis-aligned and five share a tilt within `10^-6` of Trump’s in the half-tangent;
+  centres and contacts are free.
+  `T-035` shows by a closed exact cell tree of 139,441,005 records, replayed in full by
+  an independent reader, that every packing in that family at side at most `U` lies
+  within the BC-240 radius of Trump’s labelled pose.
+  `T-036` composes it with BC-240’s first clause: no packing in the family has side
+  below `U`, and only Trump’s pose, up to quarter turns and relabelling, attains it.
+  It is the first optimality statement with an equality case for a family containing
+  Trump’s packing; Stromquist’s `0°`/`45°` bound is an earlier restricted-orientation
+  statement. It says nothing about any other tilt and moves no bound on `s(11)`. The
+  certificate tree (7.8 GB) is kept outside the repository, pinned by a SHA-256
+  manifest, and a [review](docs/project/reviews/review-2026-09-24-rung0-closed-tree.md)
+  accepted it. `T-035` is `V4/C5`; `T-036` is `V3/C2`, the minimum of its parts: the
+  local theorem it rests on is an audited proof whose replay passes.
+
 - **T-032: `s(17) ≥ 461300/99999 = 4.61304613…`, the first verified bound here that came
   from outside (`S3`).** Two certificates arrived together in September 2026, both built
   on `T-019`’s atoms and both crediting it.

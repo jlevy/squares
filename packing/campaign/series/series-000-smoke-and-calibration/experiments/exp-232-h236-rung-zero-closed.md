@@ -86,7 +86,9 @@ experiment:
       common tilt within 10^-6 of Trump's half-tangent has side at least U, with
       equality only on Trump's orbit; the local theorem it relies on is BC-240, accepted
       at retained-record-dependent scope pending BC-241, and the certificate tree
-      itself (5.5 GB) is retained outside the record.
+      itself (5.5 GB) is retained outside the record. The Fable max W2 review of
+      2026-09-24 accepted it, and it is registered as T-035 (the reduction) and
+      T-036 (the composed theorem).
 ---
 # Exp-232: Rung 0 Closes
 
@@ -96,8 +98,10 @@ Freeze the tilt of Trump’s five tilted squares to within $10^{-6}$ in the half
 keep the other six axis-aligned, and let every centre and contact vary: no such packing
 fits in a square smaller than $U$, and the only packings at $U$ are Trump’s own, up to
 symmetry and relabelling.
-It is the first global optimality statement in any $n = 11$ family, and the first rung
-of [X-046](../../../explorations/X-046-n11-settlement-program.md)’s settlement ladder.
+It is the first optimality statement with an equality case for a family containing
+Trump’s packing, and the first rung of
+[X-046](../../../explorations/X-046-n11-settlement-program.md)’s settlement ladder;
+Stromquist 2003’s $0°/45°$ bound is an earlier restricted-orientation statement.
 
 [Exp-231](exp-231-h236-rung-zero-cell-tree.md) had closed 198 of 256 subtrees before its
 caps. The remaining 58 ran overnight with the unchanged instrument, heaviest first, and
@@ -110,7 +114,10 @@ required.
 
 The statement is narrow: it says nothing about any other tilt, and its terminal leaves
 inherit BC-240’s scope, pending the BC-241 closure.
-Registering it as a frontier result waits for a Fable max W2 review of the closed tree.
+The
+[Fable max W2 review](../../../../../docs/project/reviews/review-2026-09-24-rung0-closed-tree.md)
+of the closed tree accepted it, and it is registered as T-035, the machine-verified
+reduction to the BC-240 ball, and T-036, the composed optimality theorem.
 The cost is the other finding: about $1.7\times10^8$ nodes for one box, so the next rung
 needs a stronger bound per node before it needs more boxes.
 

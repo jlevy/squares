@@ -320,7 +320,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: >-
       Does a Fable max adversarial W2 review of the closed rung-0 tree (exp-232) accept
@@ -339,6 +339,20 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
     parallel_group: n11-rung0-review
     note: The terminal leaves use BC-240's first clause, verified and exact since BC-382 closed BC-241.
+    outcomes:
+    - scope: The Fable max W2 review of the closed rung-0 tree and the register decision.
+      classification: achieved
+      result: >-
+        Accepted, with the scope split: the machine-verified reduction to Trump's ball is
+        T-035 (V4/C5/S3), and the composed optimality theorem, which adds BC-240's audited
+        first clause, is T-036 (V3/C2/S3). Eleven subtrees re-replayed independently and
+        all 259 archived files match the manifest. "First global optimality statement in
+        any n = 11 family" was narrowed, since Stromquist's 0/45-degree bound is earlier.
+      evidence:
+      - docs/project/reviews/review-2026-09-24-rung0-closed-tree.md
+      - packing/frontier/results.yaml
+      disposition: retire-success
+      follow_up: null
   - id: BC-382
     purpose: research
     owner_focus: correctness

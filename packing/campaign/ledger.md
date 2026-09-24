@@ -835,7 +835,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | BC-378 | research | 21 | complete | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
 | BC-379 | research | 12 | complete | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
 | BC-380 | tool_validation | 12, 18, 21 | ready | 3 | think-m9iz | parent_clip.py, freeze_to_parent_core.py and their tests. |
-| BC-381 | research | 11 | in_progress | 1 | think-6w2y | A dated review under docs/project/reviews/ and, if accepted, a results.yaml row. |
+| BC-381 | research | 11 | complete | 1 | think-6w2y | A dated review under docs/project/reviews/ and, if accepted, a results.yaml row. |
 | BC-382 | research | 11 | complete | 1 | think-mlz3 | docs/project/reviews/review-2026-09-24-bc241-closure.md |
 | BC-383 | research | 11 | in_progress | 1 | think-6b12 | The pilot receipts under results/agenda-042/ and an experiment record. |
 
@@ -1019,7 +1019,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | H-230 | blocked | proof | There is a proved wall-wedge conflict lemma for a tilted unit square a |  | 0 |  |  |
 | H-231 | open question | proof | Whether a Lovász theta certificate on a sound, non-uniform pose-cell c |  | 0 |  |  |
 | H-232 | blocked | proof | At n=11, side 96/25, B = 9977/10000 on the 181-direction net, the rest |  | 0 |  |  |
-| H-236 | confirmed | proof | In the family of six unit squares at actual orientation 0 and five sha |  | 2 |  | 676.5m wall |
+| H-236 | confirmed | proof | In the family of six unit squares at actual orientation 0 and five sha |  | 2 | T-035, T-036 | 676.5m wall |
 | H-237 | exhausted | proof | There is an explicit rational r > rho = 808514697/200000000000 such th |  | 1 |  | 7.4m wall |
 | H-238 | confirmed | search | Every descent-stable local minimum of the n=11 problem reached by the  |  | 1 |  | 62.0m wall |
 | H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
@@ -1213,7 +1213,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-220 | series-000 | 11 | Claude session-146 Opus lane | H-222 | The same 680-atom covering as exp-219, now frozen with the claim "corner class d = 1/2 excluded at s(11) >= 96/25" and the id C-n011-fractional-96-25-clip-1-2; both gate routes accept it under the flag and the gate refuses it without the flag, so the retained bytes declare what they prove. The corrected gate now refuses exp-219's bytes on their unconditional claim string, and exp-220 supersedes exp-219 as the record of the exclusion; the registration of the reviewed statement remains BC-367. |
 | exp-228 | series-000 | 11 | Claude Session 156, Opus extra-high lane | H-238 | The census found none, and every apparent candidate was refuted by an exact descending packing; this confirms H-238 at its declared census scope only, since descent-stability is empirical and starts are jolts of at most 0.3 about two known packings. |
 | exp-229 | series-000 | 21 | Claude Session 156, Opus high lane | H-240 | Both routes accept set C's certificate at least cell mass 250001/250000 with total mass 20.145724 < 21, so the gate certifies the covering at side 122/25. The Fable max W2 review H-240 requires accepted it on three routes, and it is registered as T-034. |
-| exp-232 | series-000 | 11 | Claude Session 157 coordinator | H-236 | The independent reader closes all 256 subtrees with no unresolved leaf and three Trump-degenerate leaves, so every packing of six axis-aligned squares and five at a common tilt within 10^-6 of Trump's half-tangent has side at least U, with equality only on Trump's orbit; the local theorem it relies on is BC-240, accepted at retained-record-dependent scope pending BC-241, and the certificate tree itself (5.5 GB) is retained outside the record. |
+| exp-232 | series-000 | 11 | Claude Session 157 coordinator | H-236 | The independent reader closes all 256 subtrees with no unresolved leaf and three Trump-degenerate leaves, so every packing of six axis-aligned squares and five at a common tilt within 10^-6 of Trump's half-tangent has side at least U, with equality only on Trump's orbit; the local theorem it relies on is BC-240, accepted at retained-record-dependent scope pending BC-241, and the certificate tree itself (5.5 GB) is retained outside the record. The Fable max W2 review of 2026-09-24 accepted it, and it is registered as T-035 (the reduction) and T-036 (the composed theorem). |
 
 ### baseline (12)
 

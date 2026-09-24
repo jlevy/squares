@@ -26,9 +26,14 @@ reduction: every packing in the family with side at most $U_{hi}$ lies, after th
 declared turn and relabelling, strictly within BC-240’s radius of Trump’s labelled
 image.
 H-236’s optimality and equality statement is that reduction composed with BC-240’s
-first two clauses, which are still awaiting the source-distinct BC-241 review (BC-382).
+first clause. While this review ran, BC-382 closed BC-241
+([closure review](review-2026-09-24-bc241-closure.md), commit `4199eab69`): the radius
+generator replayed value-for-value on all 4,954 retained values and the method-distinct
+`capture_radius` control agreed on all 8,448 faces, so the clause is an audited proof
+whose computational core has been replayed here.
 By the predicates in [`epistemics.md`](../../../epistemics.md) the reduction supports
-`V4/C3` now; the composed theorem takes BC-240’s rung until BC-241 closes.
+`V4/C3` now; the composed theorem is `V3`, the audited proof setting its minimum, with
+its confirmation rung fixed by how the radius replay is cited (see Registration).
 
 ## The Closure Conditions
 
@@ -38,13 +43,14 @@ By the predicates in [`epistemics.md`](../../../epistemics.md) the reduction sup
 | At least one Trump-degenerate leaf | yes | Three, in subtrees 93, 109 and 117; each re-replayed here with one `t` leaf. |
 | `target_is_at_least_U: true` | yes | Reader field true; this review recomputed $U$ to 60 digits from the witness field: the header’s upper end exceeds $U$ by $2.03\times10^{-45}$, and the closed form $(6u+4)/(1+2u-u^2)$ the reader brackets equals `packing.py`’s side exactly. |
 | Declared box covers the registered box | yes, exactly | Declared $[91442076901/250000000000,\ 73154061521/200000000000]$; with $u$ isolated to $10^{-60}$, the left end is $6.8\times10^{-13}$ below $u_{lo}-10^{-6}$ and the right end $3.2\times10^{-13}$ above $u_{hi}+10^{-6}$, and both equal the declared floor/ceil recipe at $10^{-12}$. The reader does not perform this comparison; it is this review’s. |
-| Reader bytes unchanged | yes | `git hash-object` of the working tree and the `HEAD` blob: `c4ae4e489fcf…`, the digest in `FROZEN.txt` before and after Amendment 1. |
-| Producer bytes per surviving file | yes, with one nuance | 167 files carry `extra.resumed: true` and were written by the Amendment 1 bytes `9c92406…` (the `HEAD` blob): R1 wrote 88 (mtimes 09:41–12:02Z, header wall cap 10,843 s), R3 21 (15:49–18:57Z, 11,408 s), R4 58 (06:43–10:42Z on the 24th, 21,700 s). The other 89 were written by the frozen run M1 (08:20–09:11Z, cap 3,300 s) with the pre-amendment bytes `af1179a5…`; the attic copy hashes to that digest and differs from Amendment 1 by 99 added and 0 removed lines. No file falls outside the four windows. |
+| Reader bytes unchanged | yes | `git hash-object` of the working tree and the blob at `99582155c`, the head this review ran at, and still the blob at `060d5b373`: `c4ae4e489fcf…`, the digest in `FROZEN.txt` before and after Amendment 1. |
+| Producer bytes per surviving file | yes, with one nuance | 167 files carry `extra.resumed: true` and were written by the Amendment 1 bytes `9c92406…` (the blob at `99582155c`; commit `1a6316a52` has since added 71 lines and removed none for a box preset, after the tree was produced): R1 wrote 88 (mtimes 09:41–12:02Z, header wall cap 10,843 s), R3 21 (15:49–18:57Z, 11,408 s), R4 58 (06:43–10:42Z on the 24th, 21,700 s). The other 89 were written by the frozen run M1 (08:20–09:11Z, cap 3,300 s) with the pre-amendment bytes `af1179a5…`; the attic copy hashes to that digest and differs from Amendment 1 by 99 added and 0 removed lines. No file falls outside the four windows. |
 | No stitched or partial file | yes | No `.part` file survives; the 256 names are exactly `sub-00000` to `sub-00255`; every subtree header matches the top tree on every key the reader compares and its `root_path` equals the frontier cell the reader’s own walk of the top tree assigns to that index; the amended producer writes to `.part` and renames only on completion, never stitches. |
-| The reader replayed these files | yes | The reader opens `h236.sub/sub-NNNNN.jsonl.gz` for the 256 frontier indices; the verdict (11:23Z on the 24th) postdates the last subtree write (10:42Z), and the retained manifest hashes the same 256 files plus the top tree, `FROZEN.txt` and the verdict. |
+| The reader replayed these files | yes | The reader opens `h236.sub/sub-NNNNN.jsonl.gz` for the 256 frontier indices; the verdict (11:23Z on the 24th) postdates the last subtree write (10:42Z), and the retained manifest `exp-232-h236-tree-manifest.sha256` (committed in `4199eab69`) hashes the same 256 files plus the top tree, `FROZEN.txt` and the verdict; `shasum -a 256 -c` over `attic/rung0` returns OK for all 259 entries. |
 
-The 13 tests in `packing/tests/test_fixed_angle_tree.py` pass under the project
-interpreter; the frozen copy of the test file already contained the tampering test.
+The 13 tests in `packing/tests/test_fixed_angle_tree.py` at `99582155c` pass under the
+project interpreter; the frozen copy of the test file already contained the tampering
+test.
 
 ## The Re-replay
 
@@ -57,7 +63,29 @@ subtree 128 (471 MB, 7,987,265 nodes), a seeded sample stratified by producer ru
 and 90 from M1, 138 and 157 from R1, 177 and 190 from R3, 244 from R4), then the rest
 heaviest-first.
 
-REPLAY_RESULTS
+| Subtree | Run | Records | Leaves accepted | `t` | Unresolved | Smallest margin | Enclosure reach |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 93 | R1 | 4,369,961 | c 650,857; f 3,119,205 | 1 | none | $7.02\times10^{-7}$ | $2.93\times10^{-5}$ |
+| 109 | R1 | 651,957 | c 92,776; f 465,421 | 1 | none | $3.19\times10^{-6}$ | $2.93\times10^{-5}$ |
+| 117 | R1 | 227,901 | c 34,216; f 161,875 | 1 | none | $3.00\times10^{-6}$ | $2.93\times10^{-5}$ |
+| 128 | R4 | 7,987,265 | c 1,233,853; f 5,638,097 | 0 | none | $3.13\times10^{-7}$ | 0 |
+| 50, 90, 138, 190 | M1, M1, R1, R3 | 1 each | one Farkas leaf each | 0 | none | 1, 3, 2, 2 | 0 |
+| 157 | R1 | 374,965 | c 64,903; f 255,963 | 0 | none | $4.54\times10^{-6}$ | 0 |
+| 177 | R3 | 2,896,513 | c 452,550; f 2,023,825 | 0 | none | $6.92\times10^{-7}$ | 0 |
+| 244 | R4 | 1,048,957 | c 158,209; f 742,659 | 0 | none | $1.03\times10^{-6}$ | 0 |
+
+Every subtree in the sample is accepted with nothing unresolved; the three `t` leaves
+reach $2.93\times10^{-5}$ beyond the image, the reader’s recorded maximum, and no
+subtree file was rejected for any reason.
+The eleven subtrees hold 17,557,523 of the tree’s 139,441,005 records, 12.6 percent, and
+subtree 128’s record count equals the 7,987,265 nodes its producer summary reports.
+The margins are exact rationals in the results file
+(`attic/review-rung0-closed/replay-results.jsonl`); the run was stopped after the sample
+rather than hold three cores for two more hours on a host at load 148, since a full
+rerun would replicate the reader’s own pass over the same files with the same code
+rather than add an independent check.
+The four one-leaf subtrees are frontier cells the top tree already made infeasible
+(Farkas margins 1 to 3), which is why 89 subtrees could complete inside M1’s 3,300 s.
 
 ## Scope
 
@@ -74,6 +102,11 @@ about the container’s centre carries a leaf’s packing at side $s'\le U$ to a
 by $(0, U-s')$ inside $[0,U]^2$, a sup-norm isometry on centre differences, so BC-240’s
 first clause forces it to be Trump’s labelled pose and the four wall contacts force
 $s'=U$. The angle window reaches $2.0\times10^{-6}$ radians, below $\rho_{row}=0.00404$.
+Only the first clause is used, never the quadratic constant; BC-241 accepted it at local
+scope on 6 September and the closure review of 24 September replayed its radius
+generator in full, leaving two residuals that do not touch the rung leaves (per-face
+dual witnesses are recomputed rather than retained, and the inactive-feature gap cap is
+single-source and non-binding).
 The declared image (rotation 1, labels `[3,4,2,5,0,1,8,10,6,9,7]`) satisfies every
 symmetry row strictly and is the only turn with both centroid offsets positive, so the
 row-satisfying element of Trump’s orbit is unique and must sit in a `t` leaf, which it
@@ -129,13 +162,26 @@ The results checker resolves `artifacts`, `controls` and `review_artifact` paths
 `certificate`, so an off-record certificate does not fail it; the manifest and the
 verdict are what make the entry auditable, and the limitations field must say the tree
 is off-record. `C3` also needs a retained control path:
-`packing/tests/test_fixed_angle_tree.py`. H-236 itself is compound; its minimum is the
-BC-240 part, which has no register entry, is a proof packet awaiting its audit (so not
-`V3`), and whose radius generator has not been independently replayed (so not `C2`).
-Literally that is `V0/C0` with a `composition` note today, and `V3` with `C3` or better
-(`C5` with the reviews mapped) when BC-241 closes with a passing radius replay.
-Registering the reduction now and the composed theorem on BC-241’s return is the reading
-that neither promotes nor understates.
+`packing/tests/test_fixed_angle_tree.py`. This review is not yet mapped in
+`document-map.yaml`, so `C5` waits on that mapping.
+H-236 itself is compound and takes the minimum of its parts.
+The BC-240 part has no register entry; as evidence it is a proof audited by the
+source-distinct BC-241 review and the closure review, so `method: proof-audited` with a
+`proof` block supports `V3` and nothing higher, since the proof’s steps are prose and
+only its radius computation is machine-checked.
+That fixes the composed theorem at `V3`; the checker will derive `V4` from the tree’s
+entry, so the result must declare `V3` with a `composition` note naming the local
+theorem. For confirmation the radius part is exact-algebraic with a retained record
+(BC-199) and a passing full replay retained as `bc382-isolation-radius-replay.json.gz`,
+which is `C3`-shaped structurally; the closure review, though, records that the
+comparison lives in `attic/bc241/` and the generator has no `--replay`, and advises
+against registering the radius until that command exists.
+Under that reading the composed theorem declares `C2` today, with the composition note
+saying why, and `C3` (`C5` with both reviews mapped) once `isolation_radius --replay` is
+built.
+Registering the reduction now at `V4/C3` and the composed theorem at `V3` with the
+confirmation rung the coordinator’s reading of the replay supports is what the
+predicates give; it lands where T-014 landed, by the same rule rather than by analogy.
 
 **Significance** `S3`: a substantive case result and machine audit, the first optimality
 statement with an equality case for a family containing Trump’s packing; it moves no
@@ -163,8 +209,14 @@ soundness and the symmetry lemma, `novelty_basis`, and `limitations` (off-record
 certificate, shared trust base, producer-level n = 11 negative control, the angle
 window); `artifacts` in the record (`exp-232-h236-reader-final2.json.gz`,
 `exp-232-h236-tree-manifest.sha256`, `exp-232-h236-frozen.txt`, the producer, the
-reader, exp-232, and for the composed theorem `isolation-theorem.md`); `controls`; and
-`review_artifact` mapped in `document-map.yaml` for `C5`.
+reader, exp-232); `controls`; and `review_artifact` mapped in `document-map.yaml` for
+`C5`. The composed theorem adds a second evidence entry for the local theorem
+(`method: proof-audited`, a `proof` block with `audit_record` naming the BC-241 closure
+review, `origin: audited-here`, `limitations` carrying the two residuals), the artifacts
+`isolation-theorem.md`, `bc-240-trump-local-theorem.json`,
+`bc382-isolation-radius-replay.json.gz` and `bc382-capture-radius-replay.json.gz`, and
+the controls `packing/tests/test_trump_isolation_radius.py` and
+`packing/tests/test_review_trump_local_theorem.py`.
 
 ## Findings to Carry Into the Record
 
@@ -172,7 +224,8 @@ reader, exp-232, and for the composed theorem `isolation-theorem.md`); `controls
 | --- | --- |
 | minor | The reader does not compare the declared box with the registered $\pm10^{-6}$; the register must cite this review’s computation, or the reader should gain the check. |
 | minor | 89 surviving subtree files were written by the pre-amendment bytes `af1179a5…`, not Amendment 1; the record should say so rather than “Amendment 1 for every run”. The difference is 99 added lines and none removed. |
-| minor | The tree manifest `exp-232-h236-tree-manifest.sha256` is untracked at the time of this review; it must be committed with the entry. This review verified it in place: `shasum -a 256 -c` over `attic/rung0` returns OK for all 259 entries (the 256 subtree files, the top tree, `FROZEN.txt` and the verdict). |
+| minor | The producer file moved after the tree was produced (`1a6316a52`, 71 lines added, none removed); the register must cite the frozen digests `af1179a5…` and `9c92406…`, not a head, and the reader `c4ae4e48…` is unchanged. |
+| minor | The composed theorem’s confirmation rung turns on whether `isolation_radius --record` plus the retained replay record counts as a replay command; the closure review says it should not until `--replay` exists, which is a bounded tool change (its residual 3). |
 | minor | “First global optimality statement in any n = 11 family” overstates against Stromquist’s $0°/45°$ bound; narrow it as above. |
 | minor | The n = 11 negative control is producer-level only; a stated limitation, for the reasons in Scope. |
 
