@@ -77,6 +77,12 @@ this module.
 
     uv run --frozen python -m cases.trump11.fixed_angle_tree h236 \\
         --out ../attic/rung0/h236.jsonl.gz --summary ../attic/rung0/h236-summary.json
+
+**Boxes (rung 1, H-112).**  The ``box`` preset runs the same family, cores, rows and
+certificates on a declared box ``--t-lo``/``--t-hi``, taken as exact rationals, against
+U's rational upper end or a declared ``--target``; `box_setup` says when the Trump image
+applies.  It stops at the first open leaf, since no branching inside the box can close
+one.  The ``h236`` preset and every control are unchanged.
 """
 
 from __future__ import annotations
@@ -552,6 +558,41 @@ def goebel_setup(half_width: Fraction, radius: Fraction) -> tuple[Family, Interv
     centres = (*corners, (middle, middle))
     image = Image("goebel5", 0, (0, 1, 2, 3, 4), tuple(centres), radius, theorem=False)
     return family, (s_lo, s_hi), image
+
+
+def box_setup(
+    left: Fraction,
+    right: Fraction,
+    *,
+    axis_count: int = 6,
+    tilted_count: int = 5,
+    trump: bool = True,
+) -> tuple[Family, Interval, Image | None, dict[str, Any]]:
+    """The declared box ``[left, right]``, U's enclosure, and the Trump image if it applies.
+
+    With ``trump``, a six-plus-five box that meets the enclosure of Trump's half-tangent
+    ``t*`` gets the labelled image only if it holds that whole enclosure and its angle
+    reach ``2 max(u_hi - left, right - u_lo)`` is below ``rho``, the reader's own test at
+    a wider enclosure; any other box meeting ``t*`` is refused, since it would need the
+    theorem it cannot use.  A box away from ``t*`` has no image, so the producer cannot
+    write a ``t`` leaf there and the reader refuses one.
+    """
+    if not 0 <= left < right < 1:
+        raise ValueError("a box needs 0 <= t_lo < t_hi < 1")
+    if axis_count < 0 or tilted_count < 1:
+        raise ValueError("a box needs at least one tilted square")
+    _, u_enclosure, trump_image, setup = trump_setup(Fraction(1, 10**6))
+    root_lo, root_hi = (Fraction(bound) for bound in setup["u_enclosure"])
+    meets = (axis_count, tilted_count) == (6, 5) and left <= root_hi and root_lo <= right
+    image = None
+    if trump and meets:
+        if not left <= root_lo <= root_hi <= right:
+            raise ValueError("the box straddles an end of t*'s enclosure")
+        if 2 * max(root_hi - left, right - root_lo) >= trump_image.radius:
+            raise ValueError("the box holds t* but is too wide for rho; split it")
+        image = trump_image
+    family = Family(axis_count, tilted_count, left, right)
+    return family, u_enclosure, image, {"u_enclosure": setup["u_enclosure"]}
 
 
 # -- the search -------------------------------------------------------------------------
@@ -1064,6 +1105,30 @@ def preset(name: str, args: argparse.Namespace) -> tuple[Config, dict[str, Any]]
         return Config(
             family, answer + delta, label, "axis", image=None, stop_on_open=True, **common
         ), {"axis_answer": answer}
+    if name == "box":
+        # U's upper end with the Trump image where it applies; a declared target never
+        # takes the image, so a t leaf cannot stand in for a bound above that target
+        counts = (args.axis_count, args.tilted_count)
+        if args.t_lo is None or args.t_hi is None:
+            raise SystemExit("the box preset needs --t-lo and --t-hi")
+        if args.target is None and counts != (6, 5):
+            raise SystemExit("U is the six-plus-five target; other counts need --target")
+        if args.target is not None and not 0 < args.target < VARIABLE_CAP:
+            raise SystemExit("the target must lie inside the variable box")
+        try:
+            family, (_, u_hi), image, extra = box_setup(
+                args.t_lo,
+                args.t_hi,
+                axis_count=counts[0],
+                tilted_count=counts[1],
+                trump=args.target is None,
+            )
+        except ValueError as error:
+            raise SystemExit(str(error)) from error
+        target, label = (u_hi, "U") if args.target is None else (args.target, str(args.target))
+        return Config(
+            family, target, label, "tilted", image=image, stop_on_open=True, **common
+        ), extra
     raise SystemExit(f"unknown preset {name!r}")
 
 
@@ -1079,6 +1144,7 @@ PRESETS = (
     "control-axis-4-above",
     "control-axis-5-below",
     "control-axis-5-above",
+    "box",
 )
 
 
@@ -1277,6 +1343,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--resume-subtrees", help="comma-separated subtree indices of --out")
     parser.add_argument("--stop-launching-at", help="ISO time; later subtrees start capped")
     parser.add_argument("--stop-at", help="ISO time at which running subtrees stop")
+    parser.add_argument("--t-lo", type=Fraction, help="box preset: exact lower half-tangent")
+    parser.add_argument("--t-hi", type=Fraction, help="box preset: exact upper half-tangent")
+    parser.add_argument("--target", type=Fraction, help="box preset: exact target, not U")
+    parser.add_argument("--axis-count", type=int, default=6, help="box preset only")
+    parser.add_argument("--tilted-count", type=int, default=5, help="box preset only")
     args = parser.parse_args(argv)
     config, extra = preset(args.preset, args)
     if args.probes:

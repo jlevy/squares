@@ -15,6 +15,8 @@ import time
 from fractions import Fraction
 from pathlib import Path
 
+import pytest
+
 from cases.trump11 import fixed_angle_tree as tree
 from cases.trump11 import fixed_angle_tree_check as check
 
@@ -278,3 +280,68 @@ def test_resumed_subtrees_replace_their_files_and_replay(tmp_path: Path) -> None
     )
     assert late["leaves"] == {"u": 1}
     assert check.replay(out)["verdict"] == "incomplete"
+
+
+def _box_options(**overrides: object) -> argparse.Namespace:
+    box: dict[str, object] = {"t_lo": None, "t_hi": None, "target": None}
+    box |= {"axis_count": 6, "tilted_count": 5}
+    return _options(**(box | overrides))
+
+
+def _box(tmp_path: Path, name: str, **overrides: object) -> tuple[Path, dict[str, object]]:
+    """A four-plus-one box at t in [1/5, 201/1000], about 22.6 degrees, far from 45."""
+    options: dict[str, object] = {"t_lo": Fraction(1, 5), "t_hi": Fraction(201, 1000)}
+    options |= {"axis_count": 4, "tilted_count": 1} | overrides
+    config, extra = tree.preset("box", _box_options(**options))
+    out = tmp_path / f"{name}.jsonl.gz"
+    return out, tree.run(config, extra, out, lambda _: None)
+
+
+def test_box_preset_closes_below_s5_and_opens_above_a_packing(tmp_path: Path) -> None:
+    # every five unit squares need side s(5) > 27/10; four corners and a centred square
+    # of any tilt fit in side 3, so 3001/1000 must meet an open leaf
+    below, summary = _box(tmp_path, "below", target=Fraction(27, 10))
+    assert summary["closed"]
+    replayed = check.replay(below)
+    assert replayed["verdict"] == "closed"
+    assert replayed["statement"]["half_tangent_box"] == ["1/5", "201/1000"]
+    above, summary = _box(tmp_path, "above", target=Fraction(3001, 1000))
+    assert summary["stopped"] == "stopped-on-open"
+    assert check.replay(above)["unresolved_by_reason"]["open"] == 1
+    lines = _lines(below)
+    bound_leaf = next(k for k, line in enumerate(lines) if "c" in line)
+    degenerate = [dict(line) for line in lines]
+    degenerate[bound_leaf] = {"o": lines[bound_leaf]["o"], "t": {"lo": [], "hi": []}}
+    _write(tmp_path / "degenerate.jsonl.gz", degenerate)
+    assert _rejected(tmp_path / "degenerate.jsonl.gz")
+    for key, value in (("right", "21/100"), ("left", "19/100")):
+        header = json.loads(json.dumps(lines[0]))
+        header["header"]["family"][key] = value
+        _write(tmp_path / f"wider-{key}.jsonl.gz", [header, *lines[1:]])
+        assert _rejected(tmp_path / f"wider-{key}.jsonl.gz")
+
+
+def test_box_preset_takes_the_trump_image_only_around_t_star() -> None:
+    h236, extra = tree.preset("h236", _options())
+    left, right = h236.family.left, h236.family.right
+    root_lo, root_hi = (Fraction(bound) for bound in extra["u_enclosure"])
+    same, _ = tree.preset("box", _box_options(t_lo=left, t_hi=right))
+    assert tree.header(same, {}) == tree.header(h236, {})
+    far, _ = tree.preset("box", _box_options(t_lo=Fraction(1, 5), t_hi=Fraction(201, 1000)))
+    assert far.image is None
+    assert far.target == h236.target
+    program = check.build_program(tree.header(far, {}))
+    assert check.check_target_and_image(tree.header(far, {}), program)["target_is_at_least_U"]
+    declared, _ = tree.preset("box", _box_options(t_lo=left, t_hi=right, target=Fraction(3)))
+    assert declared.image is None
+    far_box: dict[str, object] = {"t_lo": Fraction(1, 5), "t_hi": Fraction(201, 1000)}
+    refused: list[tuple[dict[str, object], str]] = [
+        ({"t_lo": Fraction(36, 100), "t_hi": Fraction(37, 100)}, "too wide for rho"),
+        ({"t_lo": left, "t_hi": (root_lo + root_hi) / 2}, "straddles an end"),
+        ({"t_lo": Fraction(1, 5), "t_hi": Fraction(1, 5)}, "a box needs 0"),
+        (far_box | {"axis_count": 4}, "other counts need --target"),
+        (far_box | {"target": Fraction(4)}, "inside the variable box"),
+    ]
+    for case, reason in refused:
+        with pytest.raises(SystemExit, match=reason):
+            tree.preset("box", _box_options(**case))
