@@ -10,7 +10,7 @@ session:
   title: Overnight W3 Continuation, Planning and Research Loop
   date: '2026-09-23'
   started_at: '2026-09-23T06:50:00Z'
-  deadline_at: '2026-09-23T20:30:00Z'
+  deadline_at: '2026-09-24T05:00:00Z'
   branch: claude/w3-overnight-2026-09-23
   primary_bead: think-nbij
   status: in_progress
@@ -167,9 +167,9 @@ session:
     status: in_progress
     entered_by: planned_checkpoint
     switch_reason: The continuation phase's two decisions, rung 0 and n21, reached their terminal states.
-    budget_minutes: 80
+    budget_minutes: 590
     started_at: '2026-09-23T19:10:00Z'
-    deadline_at: '2026-09-23T20:30:00Z'
+    deadline_at: '2026-09-24T05:00:00Z'
     expected_output: A terminal session record, a current handoff, a refreshed PR 231, and a hosted full-gate verdict.
     validation_command: gh workflow run packing-validation.yml --ref claude/w3-overnight-2026-09-23
     kill_condition: The hosted full gate reports a substantive failure on the final head.
@@ -177,7 +177,11 @@ session:
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Dispatch the hosted full gate on the final head.
+    next_action: >-
+      Hosted run 35942198969 passed every job except the campaign-record clock check,
+      which failed only because this phase's original 20:30Z deadline had passed while it
+      waited on a second session-quota stop and two gate runs; the finalization window is
+      extended to 05:00Z and the fast tier certifies the extended head.
   resource_rollups:
   - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
   - packing/campaign/resource-usage/agent-a02d3ea2494f86951.yaml
@@ -197,9 +201,9 @@ session:
   - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
   - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
   budget:
-    wall_minutes: 820
+    wall_minutes: 1330
     slice_minutes: 120
-    finalization_minutes: 80
+    finalization_minutes: 590
   stop_conditions:
   - The owner ends the run; a self-declared budget is not a stop condition (OR-8).
   - No bound or frontier promotion without a W2 review at Fable max.
