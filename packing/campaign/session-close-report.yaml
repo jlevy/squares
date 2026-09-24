@@ -15,25 +15,25 @@ totals:
   sessions_unmeasured: 54
   attributed:
     rollups: 205
-    turns: 53361
-    tool_calls: 29332
+    turns: 53524
+    tool_calls: 29404
     tool_errors: 571
-    one_off_code: 4408
-    wall_hours: 460.87
+    one_off_code: 4423
+    wall_hours: 471.36
   unattributed:
-    rollups: 61
-    turns: 13190
-    tool_calls: 7606
+    rollups: 62
+    turns: 13277
+    tool_calls: 7664
     tool_errors: 177
     one_off_code: 1122
-    wall_hours: 60.64
+    wall_hours: 60.77
   measured:
-    rollups: 266
-    turns: 66551
-    tool_calls: 36938
+    rollups: 267
+    turns: 66801
+    tool_calls: 37068
     tool_errors: 748
-    one_off_code: 5530
-    wall_hours: 521.51
+    one_off_code: 5545
+    wall_hours: 532.13
 codex_receipts:
   attributed: 64
   unattributed: 2
@@ -2632,7 +2632,7 @@ sessions:
     snapshot_incomplete: true
 - id: session-156
   title: "Overnight W3 Continuation, Planning and Research Loop"
-  status: in_progress
+  status: stopped
   primary_bead: think-nbij
   phases: 5
   measured: true
@@ -2654,9 +2654,9 @@ sessions:
   - packing/campaign/resource-usage/agent-af1805a9e25246340.yaml
   - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
   - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
-  turns: 2585
-  tool_calls: 1418
+  turns: 2748
+  tool_calls: 1490
   tool_errors: 22
-  one_off_code: 174
-  wall_hours: 24.06
+  one_off_code: 189
+  wall_hours: 34.55
   codex_receipts: []

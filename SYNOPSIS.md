@@ -162,7 +162,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 369 | 187 complete; 63 stopped; 68 blocked; 17 ready; 21 tentative; 13 in progress |
-| Sessions | 156 | 96 completed; 59 stopped; 1 nonterminal |
+| Sessions | 156 | 96 completed; 60 stopped; all terminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 176 | 31 confirmed; 31 refuted; 55 blocked; 18 unresolved; 5 open; 30 open questions; 2 result registered; 3 abandoned; 0 running; 1 exhausted |
 | Experiments | 160 | 45 accepted; 36 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -1200,21 +1200,22 @@ relaxation. The capture-radius route is exhausted at the BC-199 modulus, and a
 descent-filtered census found no third-orientation minimum below Stromquist’s value but
 two new minima within `U + 0.02`. The n12 ceiling run ended unsettled, and the
 ParentClip build never opened: the harness session quota stopped every agent from about
-03:15 to 08:45 PT.
+03:15 to 08:45 PT. Session 156 is stopped with certification pending on `think-ska6`:
+its hosted full gate passed every job except the clock check on the then in-progress
+record.
 
-**Proposed next entry, selected when Session 156 closes:** `think-ie35`, finishing rung
-0\. Run the 58 wall-cap subtrees with the unchanged Amendment 1 bytes and then the
-reader over the whole tree; the index list is in `exp-231`’s retained summary and the
-5.5 GB tree sits in the Session 156 worktree’s `attic/rung0/`, outside the record.
+**Selected next entry:** `think-ie35`, BC-375, finishing rung 0. Run the 58 wall-cap
+subtrees with the unchanged Amendment 1 bytes and then the reader over the whole tree;
+the index list is in `exp-231`’s retained summary and the 5.5 GB tree sits in the
+Session 156 worktree’s `attic/rung0/`, outside the record.
 Deferred behind it: a stronger per-node relaxation for rung 1, a second-order-exact
 isolation theorem (idea 246), `think-m9iz` (ParentClip, for n21 at 4.9 and n18 at 4.70)
 and `think-xmm4` (the n12 ceiling with a converged row loop).
 The owner’s decision on retiring H-121 as a route, which X-046 recommends, is open.
 
-**Selected next entry:** `think-5zjd`, user prioritization of the shaped W3 candidates
-from X-043 through X-045, fulfilled by Session 156. This is a planning choice: do not
-allocate a hypothesis id or start an experiment campaign automatically.
-Session 153’s earlier `think-d010` publication handoff is fulfilled by PR 223’s merge.
+**Selected next entry at the Session 155 cutoff:** `think-5zjd`, user prioritization of
+the shaped W3 candidates from X-043 through X-045, fulfilled by Session 156. Session
+153’s earlier `think-d010` publication handoff is fulfilled by PR 223’s merge.
 
 **Selected next entry at the Session 151 cutoff:** `think-gvlg`, registering the
 `n = 11` rung Session 151 left accepted and unregistered.
@@ -4574,9 +4575,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 205 | 53,361 | 29,332 | 571 | 4,408 | 460.87 h |
-| claimed by none | 61 | 13,190 | 7,606 | 177 | 1,122 | 60.64 h |
-| **measured** | **266** | **66,551** | **36,938** | **748** | **5,530** | **521.51 h** |
+| claimed by a session | 205 | 53,524 | 29,404 | 571 | 4,423 | 471.36 h |
+| claimed by none | 62 | 13,277 | 7,664 | 177 | 1,122 | 60.77 h |
+| **measured** | **267** | **66,801** | **37,068** | **748** | **5,545** | **532.13 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -4626,7 +4627,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-149](packing/campaign/agent-sessions/session-149-n17-external-intake.md) | 3 | 1 | 370 | 185 | 2 | 18.66 h |
 | [session-150](packing/campaign/agent-sessions/session-150-n17-consolidation-and-correctness.md) | 4 | 15 | 3,783 | 2,015 | 37 | 17.66 h |
 | [session-151](packing/campaign/agent-sessions/session-151-low-n-review-and-first-party-n17.md) | 4 | 12 | 2,714 | 1,602 | 27 | 8.51 h |
-| [session-156](packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md) | 5 | 17 | 2,585 | 1,418 | 22 | 24.06 h |
+| [session-156](packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md) | 5 | 17 | 2,748 | 1,490 | 22 | 34.55 h |
 | *shared by 47 sessions* | — | 7 | 23,948 | 13,058 | 282 | 304.17 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |

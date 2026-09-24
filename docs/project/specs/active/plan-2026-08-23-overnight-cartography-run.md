@@ -451,9 +451,9 @@ H124 and restricted H036 remain unresolved, and that representation receives no 
 Do not repeat a completed experiment or create another candidate without a registered
 result; a float optimum is never a result.
 The former standalone publication handoff `think-d010` is fulfilled by PR 223’s merge.
-For the next supervised exact-research goal, use planning bead `think-5zjd`: ask the
-user to prioritize, defer or reject the shaped X-043 through X-045 candidates before
-allocating a hypothesis id or starting an experiment campaign.
+For the next supervised exact-research goal, take agenda-042’s BC-375 under
+`think-ie35`: run rung 0’s 58 wall-cap subtrees with the unchanged Amendment 1 bytes,
+then the independent reader over the whole tree, and record H-236’s verdict.
 See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the current evidence
 and allocation boundaries.
 
