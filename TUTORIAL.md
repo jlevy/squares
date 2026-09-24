@@ -454,6 +454,12 @@ The
 records how the five dots were found; the exact replay and transfer review establish the
 covering claim.
 
+To follow `n = 11` past this tutorial’s scope, read the synopsis’s
+[`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end).
+It covers the ceilings these certificate languages reach, the external certificate that
+now holds the verified lower bound, and why no counting certificate can prove `s(11)`
+equal to Trump’s side.
+
 ## 2. The Configuration Space
 
 A **configuration** places every square and fixes the container.
@@ -1270,6 +1276,9 @@ its formal assurance.
 The synopsis’s
 [Assurance, Methods, and Claims](SYNOPSIS.md#assurance-methods-and-claims) owns the
 definition and the one-place list of apparently novel results.
+For `n = 11` in particular, [`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end) keeps
+the current bracket, what each result does and does not prove, and the hypotheses and
+ideas still open, under the same distinctions.
 
 ### Established
 
@@ -1569,6 +1578,7 @@ An optional system is used only to rederive one constant.
 | the mutable size-by-size experiment priority queue | [Basin confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | what has gone wrong and what now stops it recurring | [`defects.md`](defects.md) |
 | the mathematics of `s(11)` in depth | [Packing 11 Unit Squares](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) |
+| the whole `n = 11` story, from what a proof must do to what is left | [`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end) |
 | how packings are found, refined and verified | [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) |
 | why pointing should beat scaling | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) |
 | what is known for every `n ≤ 100` | [`frontier/`](packing/frontier/README.md) |
