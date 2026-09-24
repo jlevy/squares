@@ -320,7 +320,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: ready
+    state: in_progress
     priority: 1
     question: >-
       Does a Fable max adversarial W2 review of the closed rung-0 tree (exp-232) accept
@@ -339,6 +339,55 @@ agenda:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
     parallel_group: n11-rung0-review
     note: The terminal leaves inherit BC-240's scope, pending the BC-241 closure.
+  - id: BC-382
+    purpose: research
+    owner_focus: correctness
+    instances: [11]
+    state: in_progress
+    priority: 1
+    question: >-
+      What did BC-241 leave open on the BC-240 isolation packet, and does an independent
+      radius-generator replay close it, so that results ending in Trump-degenerate leaves
+      no longer carry the pending-BC-241 qualifier?
+    hypotheses: []
+    budget: One Fable extra-high lane; the radius replay is about six minutes of CPU.
+    entry: The BC-240 packet, the BC-241 review, and exp-227's method-distinct modulus control.
+    exit: A dated review closing BC-241 or scoping exactly what remains retained-record-dependent.
+    bead: think-mlz3
+    depends_on: []
+    next_evidence: docs/project/reviews/review-2026-09-24-bc241-closure.md
+    workflows: [factual-review]
+    program: n11-settlement
+    artifacts:
+    - packing/cases/trump11/isolation-theorem.md
+    parallel_group: n11-lock-in
+    note: Every rung of the settlement ladder closes its Trump leaves with BC-240's first clause.
+  - id: BC-383
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: in_progress
+    priority: 1
+    question: >-
+      What does the rung-0 cell tree cost on boxes away from Trump's tilt, and does rung 1
+      (H-112) become a tiling computation or need a stronger relaxation first?
+    hypotheses: [H-242]
+    budget: >-
+      Opus extra-high builds an additive parameterized box preset with h236 unchanged, a
+      short Fable review admits it, then one overnight CPU pilot on about nine workers.
+    entry: exp-232's closed tree and its cost; the reviewed instrument contract.
+    exit: >-
+      Per-box closed/unresolved verdicts and node counts from the reader for the pilot
+      boxes, and a pricing of H-112.
+    bead: think-6b12
+    depends_on: []
+    next_evidence: The pilot receipts under results/agenda-042/ and an experiment record.
+    workflows: [pipeline-improvement, research-loop]
+    program: n11-settlement
+    artifacts:
+    - packing/campaign/hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md
+    parallel_group: n11-rung1-pilot
+    note: A measurement that prices H-112; it moves no bound.
 ---
 # Agenda 042: The n11 Settlement Ladder and Low-n Angles
 

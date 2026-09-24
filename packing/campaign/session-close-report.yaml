@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 157
+count: 158
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 103
-  sessions_unmeasured: 54
+  sessions_unmeasured: 55
   attributed:
     rollups: 205
     turns: 53742
@@ -2673,4 +2673,14 @@ sessions:
   tool_errors: 2
   one_off_code: 66
   wall_hours: 30.55
+  codex_receipts: []
+- id: session-158
+  title: "Lock In Rung 0, Close BC-241, Price Rung 1"
+  status: in_progress
+  primary_bead: think-svmp
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no resource measurement
+  rollups: []
   codex_receipts: []

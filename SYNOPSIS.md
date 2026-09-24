@@ -161,10 +161,10 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 370 | 189 complete; 61 stopped; 68 blocked; 18 ready; 21 tentative; 13 in progress |
-| Sessions | 157 | 98 completed; 59 stopped; all terminal |
+| Commitments | 372 | 189 complete; 61 stopped; 68 blocked; 17 ready; 21 tentative; 16 in progress |
+| Sessions | 158 | 98 completed; 59 stopped; 1 nonterminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 176 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Hypotheses | 177 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 31 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 162 | 46 accepted; 37 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 34 | 34 registered |
 
@@ -4854,6 +4854,7 @@ round that names the hypothesis, control roles included.
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
 | [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | confirmed | A window-free point certificate retains s(21) >= 122/25 below mass 21 (exp-229); registered as T-034 after the Fable max W2 review accepted it | 1 | — |
 | [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | refuted | A proved depth-one ceiling of at least 12 at n12, side 39609/10000; exp-233’s row loop converged at 11.980175 < 12 | 2 | — |
+| [H-242](packing/campaign/hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md) | open question | What the rung-0 cell tree costs on angle boxes away from Trump’s tilt, which prices rung 1 (H-112) | 0 | — |
 
 ### Confirmed
 
@@ -5150,8 +5151,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 103 |
-| unmeasured | 54 |
-| **total** | **157** |
+| unmeasured | 55 |
+| **total** | **158** |
 
 <!-- END GENERATED: session-close-report -->
 

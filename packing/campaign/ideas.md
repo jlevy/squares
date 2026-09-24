@@ -769,6 +769,7 @@ the registered rows.
 | 244 | An excess-4 occupancy-allocation cut toward s(12) = 4 | shaped | — | One unrealizable surviving pattern is a new cut; one legal allocation refutes only that pattern. |
 | 245 | A parent-disjointness no-good closes a largest surviving n21 exact-five kill orbit | shaped | — | Extends H-226’s inventory; a realizable structure leaves the orbit open. |
 | 246 | A second-order-exact isolation theorem enlarges Trump’s ball beyond the BC-199 modulus | shaped | — | exp-227: 36 of 42 rows do not recover at second order along the binding direction; needs exact Hessians, a cubic remainder and a face-wise enclosure. |
+| 247 | Price rung 1 by running the rung-0 tree on boxes away from Trump’s tilt | registered | [H-242](hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md) | Rung 0 cost 1.7e8 nodes on a box containing Trump; boxes with a positive margin may be far cheaper, and the pilot decides whether H-112 is compute or needs a stronger relaxation. |
 
 ## Dead ends
 

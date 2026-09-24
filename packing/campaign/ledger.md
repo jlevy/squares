@@ -172,6 +172,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
 | [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 5 | think-nbij | BC-375 (think-ie35): run rung 0's 58 wall-cap subtrees with the unchanged Amendment 1 bytes, then the reader over the whole tree. |
 | [session-157](agent-sessions/session-157-n11-rung0-overnight-cpu.md) | completed | contemporaneous | `research-loop` (correctness) | `review-planning-oversight` (process) | 2 | think-ie35 | BC-381 (think-6w2y): a Fable max W2 review of the closed rung-0 tree and the register decision. |
+| [session-158](agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | in_progress | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-svmp | Collect the three lanes, then register and launch the pilot. |
 
 ### Workflow summary
 
@@ -180,7 +181,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 3 | 2 | 15 | 2 |
-| `factual-review` | 8 | 0 | 58 | 2 |
+| `factual-review` | 9 | 0 | 59 | 2 |
 | `insight-iteration` | 27 | 1 | 84 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 37 | 1 |
@@ -834,7 +835,9 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | BC-378 | research | 21 | complete | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
 | BC-379 | research | 12 | complete | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
 | BC-380 | tool_validation | 12, 18, 21 | ready | 3 | think-m9iz | parent_clip.py, freeze_to_parent_core.py and their tests. |
-| BC-381 | research | 11 | ready | 1 | think-6w2y | A dated review under docs/project/reviews/ and, if accepted, a results.yaml row. |
+| BC-381 | research | 11 | in_progress | 1 | think-6w2y | A dated review under docs/project/reviews/ and, if accepted, a results.yaml row. |
+| BC-382 | research | 11 | in_progress | 1 | think-mlz3 | docs/project/reviews/review-2026-09-24-bc241-closure.md |
+| BC-383 | research | 11 | in_progress | 1 | think-6b12 | The pilot receipts under results/agenda-042/ and an experiment record. |
 
 ## Series
 
@@ -1022,6 +1025,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
 | H-240 | confirmed | search | A weighted fractional unavoidable-set certificate with point atoms on  |  | 1 | T-034 | 106.9m wall |
 | H-241 | refuted | search | At n=12, side 39609/10000, shrink 9977/10000, a depth-one family of cl |  | 2 |  | 282.4m wall |
+| H-242 | open question | proof | Whether the rung-0 fixed-angle cell tree, run unchanged on half-tangen |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
