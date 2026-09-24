@@ -13,9 +13,8 @@ session:
   deadline_at: '2026-09-24T05:00:00Z'
   branch: claude/w3-overnight-2026-09-23
   primary_bead: think-nbij
-  status: stopped
+  status: completed
   ended_at: '2026-09-24T05:28:00Z'
-  certification_pending: think-ska6
   goal: >-
     Find and begin the work that would significantly move s(11) or settle it, and give
     the other small cases distinct angles. Continue PR 230's W3 review into two new
@@ -166,7 +165,7 @@ session:
       Close Session 156: dispositions for every agenda-042 lane, the SYNOPSIS handoff,
       refreshed rollups and PR description, beads, and one hosted full gate on the
       final head.
-    status: stopped
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: The continuation phase's two decisions, rung 0 and n21, reached their terminal states.
     budget_minutes: 590
@@ -186,8 +185,8 @@ session:
     - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
     - packing/frontier/results.yaml
     stop_reason: >-
-      Closed at the owner's request for a clean consolidation, with certification
-      pending on think-ska6 rather than another in-progress gate race against the clock.
+      Closed at the owner's request for a clean consolidation; hosted full run
+      35960673750 then certified the closed head a08ce5289 on every job.
     next_action: >-
       Hosted run 35942198969 passed every job except the campaign-record clock check,
       which failed only because this phase's original 20:30Z deadline had passed while it
@@ -476,17 +475,18 @@ session:
   - packing/cases/trump11/capture_radius.py
   - packing/src/sqpack/research/descent_filter.py
   checks:
+  - 'full gate: full at a08ce5289d82d46ec187790b2f710242aca1eaa9: passed (hosted run 35960673750; validate, exhaustive, slow-lane, screen and macOS portability all passed)'
   - 'full gate: full at 045f97578bd5ff66adc3b154bcdc6dfe574ee64c: failed (hosted run 35942198969; every job passed except the campaign-record clock check on the then in-progress record)'
   - packing-validate --records passed at every committed checkpoint (35 of 82 steps, the records tier).
   - The n21 certificate was accepted by three routes in the W2 review, including a standard-library verifier.
   - Every rung-0 certificate the reader checked was accepted; the contract review found it sound.
   stop_reason: >-
     The owner asked for a clean consolidation. Every lane is terminal or handed off, one
-    bound moved (T-034), and certification of the closed head is pending on think-ska6.
+    bound moved (T-034), and the closed head is certified by hosted full run
+    35960673750 at a08ce5289.
   next_action: >-
-    think-ska6 certifies this closed head with one passing fast or full gate; the research
-    entry is BC-375 (think-ie35): run rung 0's 58 wall-cap subtrees with the unchanged
-    Amendment 1 bytes, then the reader over the whole tree.
+    BC-375 (think-ie35): run rung 0's 58 wall-cap subtrees with the unchanged Amendment 1
+    bytes, then the reader over the whole tree.
 ---
 # Overnight W3 Continuation, Planning and Research Loop
 

@@ -162,7 +162,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 369 | 187 complete; 63 stopped; 68 blocked; 17 ready; 21 tentative; 13 in progress |
-| Sessions | 156 | 96 completed; 60 stopped; all terminal |
+| Sessions | 156 | 97 completed; 59 stopped; all terminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 176 | 31 confirmed; 31 refuted; 55 blocked; 18 unresolved; 5 open; 30 open questions; 2 result registered; 3 abandoned; 0 running; 1 exhausted |
 | Experiments | 160 | 45 accepted; 36 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -1200,9 +1200,8 @@ relaxation. The capture-radius route is exhausted at the BC-199 modulus, and a
 descent-filtered census found no third-orientation minimum below Stromquist’s value but
 two new minima within `U + 0.02`. The n12 ceiling run ended unsettled, and the
 ParentClip build never opened: the harness session quota stopped every agent from about
-03:15 to 08:45 PT. Session 156 is stopped with certification pending on `think-ska6`:
-its hosted full gate passed every job except the clock check on the then in-progress
-record.
+03:15 to 08:45 PT. Session 156 is closed and certified by hosted full run 35960673750 at
+`a08ce5289`.
 
 **Selected next entry:** `think-ie35`, BC-375, finishing rung 0. Run the 58 wall-cap
 subtrees with the unchanged Amendment 1 bytes and then the reader over the whole tree;

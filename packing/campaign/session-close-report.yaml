@@ -2632,7 +2632,7 @@ sessions:
     snapshot_incomplete: true
 - id: session-156
   title: "Overnight W3 Continuation, Planning and Research Loop"
-  status: stopped
+  status: completed
   primary_bead: think-nbij
   phases: 5
   measured: true
