@@ -198,10 +198,9 @@ def test_branch_zero_reproduces_bc199_and_the_lemma_caps_the_route() -> None:
     assert detail["second_order_exclusion_unbounded"] is True
     assert detail["largest_quadratic_over_half_K_float"] < 1.0
 
-
-@pytest.mark.slow
-def test_row_jets_refuse_a_row_that_is_not_the_retained_gradient() -> None:
-    field, rows, _curvature = branch_zero()
+    # The jet refusals reuse the same exact branch-0 system rather than paying for it in a
+    # test of their own, which would sit below the slow floor in the lane that already
+    # built it.
     jets = tool.row_jets(witness(), rows[:3])
     assert all(jet.dimension == tool.VARIABLES for jet in jets)
     scaled = LinearRow(rows[0].label, tuple(value + value for value in rows[0].coefficients))

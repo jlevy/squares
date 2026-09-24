@@ -77,10 +77,10 @@ convention.
 
 Below that hard ceiling the covering value climbs continuously toward `k^2` as the side
 grows; the additive route dies at the **crossing side** where the value first reaches
-`n`. The crossing is not proved — it is estimated here from the retained certificate
+`n`. The crossing is not proved; it is estimated here from the retained certificate
 masses and X-042’s own measurement that the value is `~19.81` at `4.85` and reaches the
-grid `25` at `5B` — but its message is robust: the additive headroom is `current bound`
-to `crossing`.
+grid `25` at `5B`. Its message is still robust: the additive headroom runs from the
+current bound to the crossing.
 
 | Case | Verified lower | Grid ceiling `kB` | Est. additive crossing (value = n) | Additive headroom |
 | --- | --- | --- | --- | --- |
@@ -113,8 +113,8 @@ Two consequences:
   `run_fractional_cutting --n 12 --side 39609/10000 --shrink 9977/10000`, seeded from
   T-017’s atoms, and read `colgen.check_ceiling` (`colgen.py:969`). A depth-one family
   with `total / maxdepth >= 12` proves the covering value is at least 12 at `3.9609`,
-  and by monotonicity in `L` at every larger side — killing every additive/point/density
-  route to `s(12) > ~3.961`. Machine-checkable exit: `CeilingResult.proved` with
+  and by monotonicity in `L` at every larger side, which kills every additive, point and
+  density route to `s(12) > ~3.961`. Machine-checkable exit: `CeilingResult.proved` with
   `feasible_total >= 12`. Falsifier: converged value `< 12`, which would mean additive
   headroom survives and a window-enriched point run should be retried.
   **Not run by this lane; presented as the discriminator, not a result.**
@@ -129,7 +129,7 @@ Two consequences:
   **Cheap discriminator:** enumerate the excess-4 occupancy patterns of the 16-point set
   and test each survivor against an exact parent-footprint / maximal box-diagonal
   (`1.01*sqrt(2)`) constraint; a machine-checkable pass is a single surviving pattern
-  that no packing can realize, a machine-checkable fail is one validated legal
+  that no packing can realize; a machine-checkable fail is one validated legal
   allocation. This is the n12 sibling of the H-226 one-spare inventory and reuses its
   `devtools/bentz2016` scaffolding.
 
@@ -142,10 +142,10 @@ restriction is load-bearing (exact row-6512 witness).
 So the only live headroom is **new columns**, not re-weighting.
 
 - **Angle:** synthesize five-site and weighted threshold features and price their
-  reduced cost (X-043 eq.
-  4\) against the retained exp-222 dual; a negative reduced cost names a violated valid
-  budget. Discriminator (finite, overnight-suitable, X-043 B3): LP primal on a frozen
-  common-row set below the matched ordinary-point control dual, both rational.
+  reduced cost (X-043 equation 4) against the retained exp-222 dual; a negative reduced
+  cost names a violated valid budget.
+  Discriminator (finite, overnight-suitable, X-043 B3): LP primal on a frozen common-row
+  set below the matched ordinary-point control dual, both rational.
   Machine-checkable exit: the rational primal/dual gap.
   Falsifier: the old optimal dual survives every synthesized column (X-027’s whole-face
   test), or the realized incidence pattern is geometrically unrealizable.
@@ -163,7 +163,7 @@ Additive crossings sit `~0.01` above the current bounds, and the frozen-`B` `L/B
 ceilings (X-044) are `4.6898` (n18) and `4.8111` (n19). A `+0.01` additive rung is
 owner-disfavoured as microscopic.
 To reach `4.70` (n18) or `4.82` (n19) the core must shrink below `B`: the frozen-weight
-transfer is **arithmetically dead** — at the net’s half-step the core reaches
+transfer is **arithmetically dead**: at the net’s half-step the core reaches
 `B*(cos + sin) = 0.99885` past centre, exceeding the shrunk parents
 `A = 4679/4700 = 0.99553` (n18) and `240/241 = 0.99585` (n19), so the core pokes out of
 the parent and containment fails (recomputed in `attic/x047/checks.py`). The **live**
@@ -197,9 +197,9 @@ refutation), or incomplete coverage.
   n22. The one-spare wall-charge lemma (H-226) was **rejected as stated**: exp-216’s
   inventory leaves `3,461` D2-orbits with at most four charges on every wall line and no
   confined partial box, which the paper’s toolkit cannot close, plus `22,603` orbits
-  that need an unproved claim `Q(i, j)`. The creative move is to attack the 3,461 kill
-  orbits with a resource the paper does not use — a threshold charge on the finishing
-  segment, or a parent-compatibility no-good from the ParentClip’s two-body geometry —
+  that need an unproved claim `Q(i, j)`. The proposed move is to attack the 3,461 kill
+  orbits with a resource the paper does not use (a threshold charge on the finishing
+  segment, or a parent-compatibility no-good from the ParentClip’s two-body geometry),
   since those orbits are exactly where “too few charges” survives.
   High payoff (`s(21) = 5`), high risk, days of casework; a bounded first probe is to
   take the largest surviving pattern (`(2,2),(2,3)`, 16,468 raw pairs) and ask whether
@@ -211,19 +211,18 @@ refutation), or incomplete coverage.
 
 The lower bounds here jumped to Tokoharu’s density values `5.508` (n26–28) and `5.71`
 (n29). A first-party point or threshold certificate would have to beat those from
-Nagamochi’s grid floor — a large jump — and the density-plus-floor hybrid that could do
-it (X-043 Direction C, eq.
-6\) is an unbuilt instrument.
+Nagamochi’s grid floor, a large jump, and the density-plus-floor hybrid that could do it
+(X-043 Direction C, equation 6) is an unbuilt instrument.
 Upper bounds leave room (`5.62`, `5.71`, `6`, `5.93`), but the room is above bounds
 nobody here can currently reproduce first-party.
 **These were never tried with the parent-centre restriction or with thresholds**
-(brief), so the one cheap, honest tonight-probe is: add the ParentClip to a small n26
+(brief), so the one cheap probe for tonight is to add the ParentClip to a small n26
 point/density family at a side just under `5.508` and measure whether the restriction
-buys any charge at all — a calibration of whether the lever does anything at this scale,
+buys any charge at all: a calibration of whether the lever does anything at this scale,
 not a bound attempt.
 Expected value low; include only if a slot is idle.
 
-## The Shared Instrument: ParentClip + Freeze-to-Parent-Core (W7)
+## The Shared Instrument: ParentClip and Freeze-to-Parent-Core (W7)
 
 Several lanes above need the same two pieces.
 The frozen-weight transfer is dead; the covering LP must be **re-priced on the
@@ -234,7 +233,7 @@ parent-core validators decide.
 per net direction, insets the centre domain to the axis-aligned square
 `[r_k, L - r_k]^2`, with
 
-```
+```text
 r_k = A * min_{u in row}( cos(u) + sin(u) ) / 2
 ```
 
@@ -255,7 +254,7 @@ rational polygon.
 excluded) keeps the open interior, so dropping only weakens a ceiling; the
 `half_planes`/`clip_polygon` side (consumed by the sweep, which *quantifies* Condition
 5\) keeps the **closed** inset, retaining the measure-zero boundary band as extra rows
-and a strictly harder Condition 5 — the safe direction for a covering program.
+and a strictly harder Condition 5, which is the safe direction for a covering program.
 A core exactly on the parent boundary is the closed case, and it must be decided, not
 tidied away.
 
@@ -267,13 +266,13 @@ Decision is then the existing `validate_parent_core` (`:155`) for the exact prem
 centre-coverage, which already re-checks every refutation with an exact
 `exact_parent_charge` witness.
 
-**Controls (soundness, non-negotiable).**
+**Controls (required for soundness).**
 
 1. **Regression:** T-017 at side `99/25` must still be accepted after the ParentClip and
    converter are in the path (the clip at that geometry must not spuriously refuse a
    known-good family, and the converter round-trip must preserve its decision).
-2. **Refutation:** a *planted* undercharged pose — an atom-poor legal parent whose core
-   charge is below `minimum_charge` — must be refuted, with `verify_parent_core_rows`
+2. **Refutation:** a *planted* undercharged pose (an atom-poor legal parent whose core
+   charge is below `minimum_charge`) must be refuted, with `verify_parent_core_rows`
    returning an exact admissible witness.
    A run that accepts it is a broken instrument.
 3. **Closed-boundary:** a core whose centre sits exactly at `r_k` (parent boundary) must
@@ -281,12 +280,12 @@ centre-coverage, which already re-checks every refutation with an exact
    `test_the_two_kept_sets_differ_exactly_on_the_boundary_band`.
 
 **First runs and consumers.** Order by cost and slack: **n21 at `4.9` first** (largest
-slack, `A = 97/98`), then **n12 at `3.97` with the check_ceiling kill run in parallel**
-— the kill decides whether additive is dead there while the clipped run tests whether
-the restricted domain escapes the grid obstruction (the clip removes wall-adjacent
-placements, which can drop the grid ceiling below `n`); then n18 at `4.70` and n19 at
-`4.82` as the mid-slack consumers.
-Downstream consumers: the n18/n19/n20 producer-calibration lanes and, via its two-body
+slack, `A = 97/98`), then **n12 at `3.97` with the check_ceiling kill run in parallel**,
+then n18 at `4.70` and n19 at `4.82` as the mid-slack consumers.
+At n12 the kill decides whether additive is dead there while the clipped run tests
+whether the restricted domain escapes the grid obstruction (the clip removes
+wall-adjacent placements, which can drop the grid ceiling below `n`). Downstream
+consumers: the n18/n19/n20 producer-calibration lanes and, via its two-body
 parent-disjointness output, the n21 exact-five kill-orbit probe.
 
 ## Adversarial: What Is Likely Dead on Arrival
@@ -294,15 +293,16 @@ parent-disjointness output, the n21 exact-five kill-orbit probe.
 - **Frozen-weight transfer at the old nets (rows 216, 219 “as stated”):** dead, proved
   arithmetically. The core exceeds the shrunk parent at the half-step in every case
   checked. Only re-priced live LPs survive.
-- **Net-refinement + `dilation_corollary` rungs on T-017/T-030/T-020/T-021:** alive but
-  microscopic (`+0.007`–`0.0085`), and for n12 capped by `L/B = 3.9691` below the `3.97`
-  target. Owner-disfavoured; keep only as free idle-slot controls, never as a lane.
+- **Net-refinement and `dilation_corollary` rungs on T-017/T-030/T-020/T-021:** alive
+  but microscopic (`+0.007`–`0.0085`), and for n12 capped by `L/B = 3.9691` below the
+  `3.97` target. Owner-disfavoured; keep only as free idle-slot controls, never as a
+  lane.
 - **n12 additive above `~3.961`:** dead (grid ceiling proved above `3.9908`; kill-switch
   would sharpen to `~3.961`). Any n12 point/density retry above there is wasted.
 - **n17 gate-retained rung tonight:** dead on the `4096`-atom cap; only a finite LP gain
   is reachable. Re-pricing beyond `+0.0034` is dead on the exp-222 floor.
 - **n26–n29 first-party bound above the external density values:** effectively dead
-  tonight — no instrument reaches it; only a calibration probe is honest.
+  tonight: no instrument reaches it, and only a calibration probe is justified.
 - **n21 exact-five via the paper’s toolkit unchanged:** dead (H-226 rejected, 3,461
   unclosable orbits). Only a new resource on those orbits is live, and it is not
   tonight-sized.
@@ -316,14 +316,14 @@ Ranked by expected information per hour against instruments that exist.
 
 | Rank | Lane | Question | Entry | Discriminator | Machine-checkable exit | Falsifier | Budget | Owned files |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | **n21 pure-additive at 4.88** (W6) | Does a window-enriched point certificate reach mass `< 21` at side `4.88`, above the grid floor and below the estimated crossing? | `run_fractional_colgen --n 21 --side 22/5 --shrink 9977/10000` with window-enriched grids; freeze; `decide_certificate` | `decide_certificate` verdict on the freeze | `RETAINABLE` on mass `< 21` (`+~0.03`) | Converged value `>= 21` on two site sets, or grid returned | 1–2 runs `<= 3600 s` + gate | `attic/x047-n21/`, a candidate JSON under `cases/n21_fractional_certificate/` (coordinator registers) |
+| 1 | **n21 pure-additive at 4.88** (W6) | Does a window-enriched point certificate reach mass `< 21` at side `4.88`, above the grid floor and below the estimated crossing? | `run_fractional_colgen --n 21 --side 22/5 --shrink 9977/10000` with window-enriched grids; freeze; `decide_certificate` | `decide_certificate` verdict on the freeze | `RETAINABLE` on mass `< 21` (`+~0.03`) | Converged value `>= 21` on two site sets, or grid returned | 1–2 runs `<= 3600 s`, then the gate | `attic/x047-n21/`, a candidate JSON under `cases/n21_fractional_certificate/` (coordinator registers) |
 | 2 | **n12 additive kill-switch** (W6) | Is the additive route dead at n12 above `~3.961`? | `run_fractional_cutting --n 12 --side 39609/10000 --shrink 9977/10000 --seed-certificate cases/n12_fractional_certificate/certificate.json` | `colgen.check_ceiling` (`colgen.py:969`) | `CeilingResult.proved` with `feasible_total >= 12` | Converged `< 12` after the loop settles | one cutting run + log | `attic/x047-n12/`, run log/state |
-| 3 | **ParentClip + converter, first consumer n21 at 4.9** (W7) | Can a re-priced clipped LP convert to a parent-core certificate accepted below `21*Gamma`? | Build `ParentClip` behind colgen’s `clip`; `freeze_to_parent_core`; run clipped colgen at `L=97/20`, `A=97/98` | `parent_core_interval.verify_parent_core_rows` on the frozen certificate | `verify_parent_core_rows(...).accepted == True` on a complete row inventory | A planted or found exact undercharged pose refutes; coverage incomplete; regression control T-017 refuses | instrument build (hours) + first run | new `sqpack/fractional/parent_clip.py`, `devtools/freeze_to_parent_core.py`, their tests, `attic/x047-parentclip/` |
+| 3 | **ParentClip and converter, first consumer n21 at 4.9** (W7) | Can a re-priced clipped LP convert to a parent-core certificate accepted below `21*Gamma`? | Build `ParentClip` behind colgen’s `clip`; `freeze_to_parent_core`; run clipped colgen at `L=97/20`, `A=97/98` | `parent_core_interval.verify_parent_core_rows` on the frozen certificate | `verify_parent_core_rows(...).accepted == True` on a complete row inventory | A planted or found exact undercharged pose refutes; coverage incomplete; regression control T-017 refuses | instrument build (hours), then a first run | new `sqpack/fractional/parent_clip.py`, `devtools/freeze_to_parent_core.py`, their tests, `attic/x047-parentclip/` |
 
 Lanes 1 and 2 have disjoint deliverables (different `n`, different drivers, separate
-attic subdirs) and run concurrently on stock instruments; Lane 3 is the enabling W7
-build whose first run supersedes Lane 1’s reach if it lands, and whose two-body output
-later feeds the n21 exact-five probe.
+attic subdirectories) and run concurrently on stock instruments; Lane 3 is the enabling
+W7 build whose first run supersedes Lane 1’s reach if it lands, and whose two-body
+output later feeds the n21 exact-five probe.
 The n17 richer-feature LP and the n26 calibration probe are held below the cut: n17 for
 its retention cap, n26 for absent instrument.
 
@@ -351,8 +351,9 @@ Each needs the coordinator to freeze target, family and instrument before execut
   *Positive:* a single unrealizable survivor is a new cut toward `s(12) = 4`.
   *Negative:* one validated legal allocation refutes that pattern only.
 - **The n21 kill-orbit resource.** One parent-disjointness no-good or finishing-segment
-  threshold charge removes a largest surviving H-226 kill pattern (e.g. `(2,2),(2,3)`).
-  *Negative:* a validated realizable structure leaves the orbit unclosable.
+  threshold charge removes a largest surviving H-226 kill pattern (for example
+  `(2,2),(2,3)`). *Negative:* a validated realizable structure leaves the orbit
+  unclosable.
 
 ## Expected Information and Limits
 
@@ -372,8 +373,8 @@ ParentClip build are discriminators, not results.
 The crossing sides are estimates and must be frozen before any retain.
 The n17 payoff is capped at a finite LP gain by the gate’s `4096`-atom wall until
 chunking lands. The n26–29 band has no tonight-sized route.
-And a `+0.01` additive rung at n18/19/20 is real but microscopic and owner-disfavoured —
-the material low-n moves tonight are n21 (additive then ParentClip) and, as a decisive
+A `+0.01` additive rung at n18/19/20 is real but microscopic and owner-disfavoured; the
+material low-n moves tonight are n21 (additive then ParentClip) and, as a decisive
 negative, the n12 kill.
 
 <!-- This document follows common-doc-guidelines.md.

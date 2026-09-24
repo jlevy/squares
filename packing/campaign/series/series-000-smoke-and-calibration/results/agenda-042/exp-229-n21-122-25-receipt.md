@@ -101,7 +101,7 @@ It is not a covering failure.
   B’s refusal is an instrument stall on a degenerate seam, and it neither confirms nor
   rejects.
 
-## Artifacts (bytes)
+## Artifacts (Bytes)
 
 | File | Bytes | SHA-256 |
 | --- | ---: | --- |

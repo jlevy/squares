@@ -311,7 +311,7 @@ family, with the ball covering the margin-zero end.
 - **Labelled matching.** The ball is stated for one labelled anchored chart; every
   Trump-degenerate leaf must be matched to one of the $4\cdot6!\cdot5!$ images by exact
   comparison, and the cover must be shown to reach each image’s leaf.
-  Symmetry-breaking rows reduce this to a handful of leaves but the argument that they
+  Symmetry-breaking rows reduce this to a handful of leaves, but the argument that they
   lose no packing is part of the theorem.
 
 ## Candidate Hypotheses
@@ -366,8 +366,8 @@ On X-045 and the review of it:
 Limits of this block: every number from the probes is `f64` and unretained; probe A is
 restricted to Trump-containing cells; probe B samples 18 of 12,028 rows; probes C and D
 sample one neighbourhood; no hypothesis identifier is allocated and no bound changes.
-Session 156 codified the candidates as H-236 to H-239 and retained probe C and D’s
-purpose as a tool, the descent filter behind exp-228.
+Session 156 codified the candidates as H-236 to H-239 and retained the purpose of probes
+C and D as a tool, the descent filter behind exp-228.
 
 ## Measured Against This Report
 

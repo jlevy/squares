@@ -116,7 +116,7 @@ ladder, and the first global statement anyone has attempted in an n11 family.
 The instrument works, and a
 [W2 review](../../../../../docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md)
 found its contract sound.
-The tree is the problem: it is about a thousand times larger than X-046 estimated.
+The obstacle is the tree’s size: about a thousand times larger than X-046 estimated.
 After three runs, 198 of 256 subtrees are closed, every certificate the reader has
 checked is accepted, and the three leaves that contain Trump’s own packing close through
 the local theorem as they must.

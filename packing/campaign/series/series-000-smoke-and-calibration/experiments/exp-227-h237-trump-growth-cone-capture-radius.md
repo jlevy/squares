@@ -95,9 +95,9 @@ experiment:
 [H-237](../../../hypotheses/H-237-n11-trump-angular-capture-radius.md) asked for a ball
 around Trump’s packing larger than BC-240’s, from the exact growth of the side along
 every direction.
-The growth itself is healthy: its exact minimum over the whole sphere is
-about $0.0518$ per unit of sup-norm displacement.
-The radius is not, and the reason is structural.
+The growth is not what limits the ball: its exact minimum over the whole
+sphere is about $0.0518$ per unit of sup-norm displacement.
+The limit is structural.
 Any certificate that bounds each row’s second-order remainder separately is capped by
 BC-199’s weighted modulus, which is where $\rho$ came from, so this route can equal
 $\rho$ and never beat it.

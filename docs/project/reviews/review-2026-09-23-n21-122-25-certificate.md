@@ -10,8 +10,8 @@ commissioned it after the certificate passed the retention gate.
 
 ## Verdict
 
-**Accept.** The certificate is valid under the five-condition theorem T-020 and T-021
-use, and it establishes `s(21) >= 122/25`, non-strictly, for $n=21$ only.
+**Accept.** The certificate is valid under the five-condition theorem that T-020 and
+T-021 use, and it establishes `s(21) >= 122/25`, non-strictly, for $n=21$ only.
 Three routes accepted the bytes (sha256
 `b230f7cd6806343f115331caf53f02019cc634a8959359684581835a0cc7fb0f`) and nothing tried
 refuted them.
