@@ -171,6 +171,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-154](agent-sessions/session-154-pr221-pr222-reconciliation.md) | completed | contemporaneous | `remediation` (correctness) | `remediation` (correctness) | 1 | think-t30b | Render T-033's missing standalone claim document under think-vx26. |
 | [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
 | [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 5 | think-nbij | BC-375 (think-ie35): run rung 0's 58 wall-cap subtrees with the unchanged Amendment 1 bytes, then the reader over the whole tree. |
+| [session-157](agent-sessions/session-157-n11-rung0-overnight-cpu.md) | in_progress | contemporaneous | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-ie35 | Monitor the rung-0 run and start the n12 resume when cores free up. |
 
 ### Workflow summary
 
@@ -183,7 +184,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 27 | 1 | 84 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 37 | 1 |
-| `research-loop` | 30 | 4 | 107 | 8 |
+| `research-loop` | 31 | 4 | 108 | 8 |
 | `pipeline-improvement` | 36 | 2 | 154 | 5 |
 | `documentation-pass` | 1 | 0 | 25 | 1 |
 | `remediation` | 2 | 1 | 2 | 3 |

@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 156
+count: 157
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 102
-  sessions_unmeasured: 54
+  sessions_unmeasured: 55
   attributed:
     rollups: 205
     turns: 53524
@@ -2659,4 +2659,14 @@ sessions:
   tool_errors: 22
   one_off_code: 189
   wall_hours: 34.55
+  codex_receipts: []
+- id: session-157
+  title: "Overnight CPU Runs, Finishing Rung 0 and Resuming the n12 Ceiling"
+  status: in_progress
+  primary_bead: think-ie35
+  phases: 1
+  measured: false
+  unmeasured_reason: >-
+    declares no resource measurement
+  rollups: []
   codex_receipts: []

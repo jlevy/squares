@@ -162,7 +162,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 369 | 187 complete; 63 stopped; 68 blocked; 17 ready; 21 tentative; 13 in progress |
-| Sessions | 156 | 97 completed; 59 stopped; all terminal |
+| Sessions | 157 | 97 completed; 59 stopped; 1 nonterminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 176 | 31 confirmed; 31 refuted; 55 blocked; 18 unresolved; 5 open; 30 open questions; 2 result registered; 3 abandoned; 0 running; 1 exhausted |
 | Experiments | 160 | 45 accepted; 36 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -5127,8 +5127,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 102 |
-| unmeasured | 54 |
-| **total** | **156** |
+| unmeasured | 55 |
+| **total** | **157** |
 
 <!-- END GENERATED: session-close-report -->
 
