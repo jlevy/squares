@@ -13,9 +13,8 @@ session:
   deadline_at: '2026-09-24T15:00:00Z'
   branch: claude/n11-rung0-overnight-2026-09-24
   primary_bead: think-ie35
-  status: stopped
+  status: completed
   ended_at: '2026-09-24T13:03:00Z'
-  certification_pending: think-7b3b
   goal: >-
     Spend one night of CPU on registered work with frozen instruments and little agent
     reasoning, as the owner asked: finish rung 0 of the n11 settlement ladder (H-236,
@@ -64,7 +63,7 @@ session:
     objective: >-
       Record exp-232 and exp-233, agenda outcomes, the handoff and PR 233, and close with
       certification pending on one hosted full gate.
-    status: stopped
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: Both overnight runs finished and the reader closed the tree.
     budget_minutes: 20
@@ -106,15 +105,16 @@ session:
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-233-h241-n12-ceiling-settles-below-12.md
   checks:
+  - 'full gate: full at 211593fdc4b6f44bca8bcb782336aa843587e163: passed (hosted run 36003435328; validate, exhaustive, slow-lane, screen and macOS portability all passed)'
   - The rung-0 instrument digests matched Amendment 1 before the run.
   - The independent reader returned closed over all 256 subtree files.
   - packing-validate --records passed on the closed records.
   stop_reason: >-
-    Both overnight runs decided their hypotheses; certification of the closed head is
-    pending on think-7b3b.
+    Both overnight runs decided their hypotheses, and hosted full run 36003435328
+    certified the closed head.
   next_action: >-
     BC-381 (think-6w2y): a Fable max W2 review of the closed rung-0 tree and the register
-    decision; think-7b3b certifies this head with one hosted full gate.
+    decision.
 ---
 # Overnight CPU Runs: Finishing Rung 0 and Resuming the n12 Ceiling
 

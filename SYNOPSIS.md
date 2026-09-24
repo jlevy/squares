@@ -162,7 +162,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 370 | 189 complete; 61 stopped; 68 blocked; 18 ready; 21 tentative; 13 in progress |
-| Sessions | 157 | 97 completed; 60 stopped; all terminal |
+| Sessions | 157 | 98 completed; 59 stopped; all terminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 176 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 30 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 162 | 46 accepted; 37 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -1215,7 +1215,7 @@ local theorem its terminal leaves use.
 The n12 cutting loop converged at `11.980175 < 12`, rejecting `H-241`
 ([exp-233](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-233-h241-n12-ceiling-settles-below-12.md)).
 D-508 corrects exp-231’s certificate count, which had included branch nodes.
-The session is stopped with certification pending on `think-7b3b`.
+Hosted full run 36003435328 certified the closed session.
 
 **Selected next entry:** `think-6w2y`, BC-381: a Fable max W2 review of the closed
 rung-0 tree and the register decision it supports.

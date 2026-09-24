@@ -2662,7 +2662,7 @@ sessions:
   codex_receipts: []
 - id: session-157
   title: "Overnight CPU Runs, Finishing Rung 0 and Resuming the n12 Ceiling"
-  status: stopped
+  status: completed
   primary_bead: think-ie35
   phases: 2
   measured: true
