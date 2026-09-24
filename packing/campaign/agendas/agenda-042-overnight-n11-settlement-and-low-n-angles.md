@@ -395,7 +395,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: >-
       What does the rung-0 cell tree cost on boxes away from Trump's tilt, and does rung 1
@@ -417,6 +417,42 @@ agenda:
     - packing/campaign/hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md
     parallel_group: n11-rung1-pilot
     note: A measurement that prices H-112; it moves no bound.
+    outcomes:
+    - scope: H-242, eighteen boxes at six tilts and three widths, 150,000 nodes per subtree (exp-234).
+      classification: bounded-negative
+      result: >-
+        No box closed at the declared cap; every box closed about two-thirds of its
+        measure (0.624 to 0.672) for about four million nodes, with no trend in width or
+        tilt. Rung 1's cost lives in the fixed-angle centre enumeration, so a stronger
+        per-node bound is the prerequisite for H-112; wide boxes cost no more than narrow
+        ones once it exists.
+      evidence:
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md
+      disposition: retire-negative
+      follow_up: think-ggk5
+  - id: BC-384
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: ready
+    priority: 1
+    question: >-
+      Which stronger per-node bound for the fixed-angle cell tree closes a rung-0 subtree
+      or an exp-234 pilot box in orders of magnitude fewer nodes, with the reader's
+      certificate contract unchanged or reviewed?
+    hypotheses: []
+    budget: A W3 design note, then a W7 prototype measured against retained pilot and rung-0 trees.
+    entry: exp-234's flat response to width and tilt; X-046's second-order dual bound; exp-228's descent filter.
+    exit: A measured node-count reduction on retained boxes, or a scoped reason none of the candidates helps.
+    bead: think-ggk5
+    depends_on: []
+    next_evidence: A design note and a benchmark receipt.
+    workflows: [insight-iteration, pipeline-improvement]
+    program: n11-settlement
+    artifacts:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md
+    parallel_group: n11-rung1-relaxation
+    note: Rung 1 (H-112) is priced out with the present relaxation; this is its prerequisite.
 ---
 # Agenda 042: The n11 Settlement Ladder and Low-n Angles
 

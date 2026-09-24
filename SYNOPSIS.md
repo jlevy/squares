@@ -163,11 +163,11 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 372 | 191 complete; 61 stopped; 68 blocked; 17 ready; 21 tentative; 14 in progress |
-| Sessions | 158 | 98 completed; 59 stopped; 1 nonterminal |
+| Commitments | 373 | 192 complete; 61 stopped; 68 blocked; 18 ready; 21 tentative; 13 in progress |
+| Sessions | 158 | 98 completed; 60 stopped; all terminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 177 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 31 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 162 | 46 accepted; 37 rejected; 51 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
+| Experiments | 163 | 46 accepted; 37 rejected; 52 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 36 | 36 registered |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -1222,8 +1222,28 @@ The n12 cutting loop converged at `11.980175 < 12`, rejecting `H-241`
 D-508 corrects exp-231’s certificate count, which had included branch nodes.
 Hosted full run 36003435328 certified the closed session.
 
-**Selected next entry:** `think-6w2y`, BC-381: a Fable max W2 review of the closed
-rung-0 tree and the register decision it supports.
+**[Session 158](packing/campaign/agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md)**
+locked in rung 0 and priced rung 1, stacked on PR 233 as PR 234. A Fable max review
+accepted the closed tree, and it is registered in two parts: `T-035`, the
+machine-verified reduction of every packing in the family to Trump’s ball (`V4/C5`), and
+`T-036`, the composed theorem that Trump is optimal at its own angle, with equality only
+at Trump (`V3/C2`, the minimum of its parts).
+BC-382 closed BC-241 with a full radius-generator replay and a method-distinct control,
+so BC-240’s first clause is verified and exact.
+The 8 GB certificate tree is archived off-repo with its SHA-256 manifest in the record.
+The rung-1 pilot
+([exp-234](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md))
+ran eighteen boxes away from Trump’s tilt: none closed at 150,000 nodes per subtree, and
+every one closed about two-thirds of its measure for about four million nodes whatever
+its width or tilt. Rung 1’s cost is in the fixed-angle centre enumeration, so a stronger
+per-node bound comes before H-112. The session is stopped with certification pending on
+`think-5pyq`.
+
+**Selected next entry:** `think-ggk5`, BC-384: design and measure a stronger per-node
+bound for the fixed-angle cell tree.
+
+**Selected next entry at the Session 157 cutoff:** `think-6w2y`, BC-381, the closed-tree
+review, fulfilled by Session 158.
 
 **Selected next entry at the Session 156 cutoff:** `think-ie35`, BC-375, finishing rung
 0\. Run the 58 wall-cap subtrees with the unchanged Amendment 1 bytes and then the
@@ -4867,7 +4887,7 @@ round that names the hypothesis, control roles included.
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |
 | [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | confirmed | A window-free point certificate retains s(21) >= 122/25 below mass 21 (exp-229); registered as T-034 after the Fable max W2 review accepted it | 1 | — |
 | [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | refuted | A proved depth-one ceiling of at least 12 at n12, side 39609/10000; exp-233’s row loop converged at 11.980175 < 12 | 2 | — |
-| [H-242](packing/campaign/hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md) | open question | What the rung-0 cell tree costs on angle boxes away from Trump’s tilt, which prices rung 1 (H-112) | 0 | — |
+| [H-242](packing/campaign/hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md) | open question | What the rung-0 cell tree costs on angle boxes away from Trump’s tilt, which prices rung 1 (H-112) | 1 | — |
 
 ### Confirmed
 
@@ -5036,9 +5056,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 205 | 53,742 | 29,494 | 571 | 4,448 | 478.79 h |
-| claimed by none | 62 | 13,277 | 7,664 | 177 | 1,122 | 60.77 h |
-| **measured** | **267** | **67,019** | **37,158** | **748** | **5,570** | **539.56 h** |
+| claimed by a session | 210 | 54,585 | 29,955 | 574 | 4,509 | 491.56 h |
+| claimed by none | 64 | 13,577 | 7,855 | 177 | 1,122 | 61.29 h |
+| **measured** | **274** | **68,162** | **37,810** | **751** | **5,631** | **552.85 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -5090,7 +5110,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-151](packing/campaign/agent-sessions/session-151-low-n-review-and-first-party-n17.md) | 4 | 12 | 2,714 | 1,602 | 27 | 8.51 h |
 | [session-156](packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md) | 5 | 16 | 2,013 | 1,168 | 20 | 11.43 h |
 | [session-157](packing/campaign/agent-sessions/session-157-n11-rung0-overnight-cpu.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
-| *shared by 48 sessions* | — | 8 | 24,901 | 13,470 | 284 | 334.72 h |
+| [session-158](packing/campaign/agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | 1 | 5 | 646 | 379 | 3 | 1.89 h |
+| *shared by 49 sessions* | — | 8 | 25,098 | 13,552 | 284 | 345.6 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -5163,8 +5184,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 103 |
-| unmeasured | 55 |
+| measured | 104 |
+| unmeasured | 54 |
 | **total** | **158** |
 
 <!-- END GENERATED: session-close-report -->
@@ -5181,9 +5202,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 162 rounds registered in `series-000`.
+There are 163 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 3831.4 wall-minutes.
+They record 2512.1 agent-minutes and 4019.2 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -5387,6 +5408,7 @@ archive beside it.
 | [exp-231](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md) | 11 | target | H-236 | Rung-0 fixed-angle cell tree with an independent reader on Trump’s half-tangent box | 198 of 256 subtrees closed on 1.19e8 nodes; three Trump-degenerate leaves; no leaf below U | abandoned |
 | [exp-232](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md) | 11 | target | H-236 | The 58 remaining rung-0 subtrees, then the independent reader over the complete tree | Closed: 119,556,859 leaf certificates, three Trump-degenerate leaves, no unresolved leaf; registered as T-035 and T-036 after the Fable max W2 review | accepted |
 | [exp-233](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-233-h241-n12-ceiling-settles-below-12.md) | 12 | target | H-241 | Warm-started cutting loop at side 39609/10000 with six row rounds and support 192 | Row loop converged at covering value 11.980175 < 12; no family reaches 12 | rejected |
+| [exp-234](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md) | 11 | target | H-242 | Rung-0 cell tree on eighteen boxes away from Trump’s tilt, 150,000 nodes per subtree | No box closed; about two-thirds closed at about four million nodes each, flat in width and tilt | unresolved |
 
 ### Cost and provenance
 
@@ -5554,10 +5576,11 @@ archive beside it.
 | exp-231 | 3,300 s frozen run plus two capped resumes | 23827 s | — | timebox | `821b0e30` |
 | exp-232 | One night on 9 workers, then the reader | 16764 s | — | criterion | `7b4847aa` |
 | exp-233 | 345 minutes on one process | 7941 s | — | criterion | `7b4847aa` |
+| exp-234 | 150,000 nodes per subtree, eighteen boxes | 11264 s | — | criterion | `42d52c38` |
 
-### What the 162 rounds jointly establish
+### What the 163 rounds jointly establish
 
-The 162 rounds use 2512.1 agent-minutes and 3831.4 wall-minutes under the campaign’s
+The 163 rounds use 2512.1 agent-minutes and 4019.2 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

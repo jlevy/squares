@@ -13,7 +13,9 @@ session:
   deadline_at: '2026-09-25T15:00:00Z'
   branch: claude/n11-rung0-lock-in-and-rung1-pilot
   primary_bead: think-svmp
-  status: in_progress
+  status: stopped
+  ended_at: '2026-09-24T23:54:00Z'
+  certification_pending: think-5pyq
   goal: >-
     Lock in rung 0 of the n11 settlement ladder with a Fable max review, an off-repo
     archive of its certificate tree and a register decision rated by epistemics.md;
@@ -28,12 +30,12 @@ session:
     objective: >-
       BC-381 and BC-382: review the closed rung-0 tree and the BC-241 obligations, and
       admit the parameterized box preset for BC-383, while the tree is archived.
-    status: in_progress
+    status: stopped
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 240
+    budget_minutes: 360
     started_at: '2026-09-24T19:00:00Z'
-    deadline_at: '2026-09-24T23:00:00Z'
+    deadline_at: '2026-09-25T01:00:00Z'
     expected_output: >-
       Two dated reviews, an archived tree with a checksum manifest, an admitted preset
       and a register decision for H-236.
@@ -41,10 +43,18 @@ session:
       cd packing && uv run --frozen --all-extras --group dev packing-validate --records
     kill_condition: A review rejects the closed tree or finds the preset changes h236.
     fallback: Record the rejection or the defect and stop the dependent step.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Collect the three lanes, then register and launch the pilot.
+    outcome: >-
+      BC-381 accepted the closed rung-0 tree and registered T-035 (reduction, V4/C5/S3)
+      and T-036 (Trump optimal at its own angle, V3/C2/S3); BC-382 closed BC-241 by a
+      full radius replay and a method-distinct control; BC-383's pilot (exp-234) found no
+      box closing at 150,000 nodes per subtree, with about two-thirds of every box closed
+      regardless of width or tilt, so a stronger per-node bound is H-112's prerequisite.
+    evidence:
+    - docs/project/reviews/review-2026-09-24-rung0-closed-tree.md
+    - docs/project/reviews/review-2026-09-24-bc241-closure.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md
+    stop_reason: All three commitments reached their exits.
+    next_action: Close the session with certification pending on one hosted gate.
   budget:
     wall_minutes: 1200
     slice_minutes: 240
@@ -58,12 +68,33 @@ session:
     before: >-
       Rung 0 closed and H-236 confirmed at its scope pending BC-241 (exp-232); rung 1
       unpriced; the certificate tree only in a worktree attic.
-    after: In progress.
+    after: >-
+      Rung 0 is registered as T-035 and T-036; BC-241 is closed; rung 1 is priced out
+      with the present relaxation (exp-234), and BC-384 designs its prerequisite.
+  resource_rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  - packing/campaign/resource-usage/agent-ab689e6e38eba4fc1.yaml
+  - packing/campaign/resource-usage/agent-a68e3e4eecaf16386.yaml
+  - packing/campaign/resource-usage/agent-ab7b154b8a93c1b73.yaml
+  - packing/campaign/resource-usage/agent-af2ba803dd233242c.yaml
+  - packing/campaign/resource-usage/agent-a3cc5d0580f6e2dce.yaml
   delegations: []
-  outputs: []
-  checks: []
-  stop_reason: null
-  next_action: Collect the three lanes, then register and launch the pilot.
+  outputs:
+  - docs/project/reviews/review-2026-09-24-rung0-closed-tree.md
+  - docs/project/reviews/review-2026-09-24-bc241-closure.md
+  - packing/frontier/results.yaml
+  - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md
+  checks:
+  - check_results passes all 36 registered results.
+  - The BC-241 checker accepts at the closed head after the packet's pinned bytes were restored.
+  - The release data pin test passes after the re-pin.
+  - packing-validate --records passed on the closed records.
+  stop_reason: >-
+    All three commitments reached their exits; certification of the closed head is
+    pending on think-5pyq.
+  next_action: >-
+    BC-384 (think-ggk5): design and measure a stronger per-node bound for the fixed-angle
+    cell tree; think-5pyq certifies this head with one hosted full gate.
 ---
 # Lock In Rung 0, Close BC-241, Price Rung 1
 

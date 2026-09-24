@@ -172,7 +172,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
 | [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 5 | think-nbij | BC-375 (think-ie35): run rung 0's 58 wall-cap subtrees with the unchanged Amendment 1 bytes, then the reader over the whole tree. |
 | [session-157](agent-sessions/session-157-n11-rung0-overnight-cpu.md) | completed | contemporaneous | `research-loop` (correctness) | `review-planning-oversight` (process) | 2 | think-ie35 | BC-381 (think-6w2y): a Fable max W2 review of the closed rung-0 tree and the register decision. |
-| [session-158](agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | in_progress | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-svmp | Collect the three lanes, then register and launch the pilot. |
+| [session-158](agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | stopped | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-svmp | BC-384 (think-ggk5): design and measure a stronger per-node bound for the fixed-angle cell tree; think-5pyq certifies this head with one hosted full gate. |
 
 ### Workflow summary
 
@@ -837,13 +837,14 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | BC-380 | tool_validation | 12, 18, 21 | ready | 3 | think-m9iz | parent_clip.py, freeze_to_parent_core.py and their tests. |
 | BC-381 | research | 11 | complete | 1 | think-6w2y | A dated review under docs/project/reviews/ and, if accepted, a results.yaml row. |
 | BC-382 | research | 11 | complete | 1 | think-mlz3 | docs/project/reviews/review-2026-09-24-bc241-closure.md |
-| BC-383 | research | 11 | in_progress | 1 | think-6b12 | The pilot receipts under results/agenda-042/ and an experiment record. |
+| BC-383 | research | 11 | complete | 1 | think-6b12 | The pilot receipts under results/agenda-042/ and an experiment record. |
+| BC-384 | research | 11 | ready | 1 | think-ggk5 | A design note and a benchmark receipt. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 162 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 163 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1025,7 +1026,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
 | H-240 | confirmed | search | A weighted fractional unavoidable-set certificate with point atoms on  |  | 1 | T-034 | 106.9m wall |
 | H-241 | refuted | search | At n=12, side 39609/10000, shrink 9977/10000, a depth-one family of cl |  | 2 |  | 282.4m wall |
-| H-242 | open question | proof | Whether the rung-0 fixed-angle cell tree, run unchanged on half-tangen |  | 0 |  |  |
+| H-242 | open question | proof | Whether the rung-0 fixed-angle cell tree, run unchanged on half-tangen |  | 1 |  | 187.7m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1092,7 +1093,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-162 | series-000 | 20 | Cursor session-140 | H-218 | The Session-140 research wall expired with no RETAINABLE freeze on the H-218 sweep. Closest masses were leftover n=20 971/200 at 19.910044 unconverged and leftover n=12 3969/1000 at 12.091168 after crossing 12. T-028 at n=18 does not confirm H-218. The unfinished float LPs remain unresolved; their objectives do not refute their site sets. |
 | exp-231 | series-000 | 11 | Claude Session 156, Opus extra-high lane and coordinator | H-236 | The declared caps ran out with 58 of 256 subtrees open and no counterexample candidate, so H-236 is neither confirmed nor refuted; the remaining subtrees are a bounded computation for the unchanged frozen instrument. |
 
-### unresolved (51)
+### unresolved (52)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1147,6 +1148,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | exp-215 | series-000 | 26 | Claude session-144 Opus runner | H-225 | The loop hit its deadline with rows still violated at the exact-integer plateau 25.000000 that Session 141 also saw at n=26; an unfinished loop decides nothing and this site set is not even refuted. |
 | exp-218 | series-000 | 17 | Claude session-144 Opus runner | H-224 | The converged restricted optimum 17.0423 refutes point certificates on this site set only, and the accepted depth-one family has total just below 14, not 17, so H-224 is neither confirmed nor killed at this scope; the fixed-shrink point route at n=17 is bounded below by 14 for every site set at 23/5 and above by this site set's 17.04. |
 | exp-230 | series-000 | 12 | Claude Session 156, Opus high lane | H-241 | The loop ran to its time limits with the covering value unsettled just below 12 and no family reaching 12, so whether additive routes at n12 survive above 3.9609 is still open; a row objective of 11.98 is suggestive of a little headroom but is not a value. |
+| exp-234 | series-000 | 11 | Claude Session 158 coordinator | H-242 | No box closed at the cap, so rung 1's total cost is not measured, only bounded below; but the flat response to width and tilt shows the cost lives in the centre enumeration, so the stronger per-node relaxation, not more or narrower boxes, is the prerequisite for H-112, while wide boxes remain usable once it exists. |
 
 ### blocked (11)
 
@@ -1278,7 +1280,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 
 ## Effort
 
-162 rounds, 2512.1 agent-minutes, 3831.4 wall-minutes.
+163 rounds, 2512.1 agent-minutes, 4019.2 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

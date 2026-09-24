@@ -173,7 +173,7 @@ controls:
 # the one that announces itself.
 - name: synopsis - narrative round aggregate lagging the ledger
   file: ../SYNOPSIS.md
-  replace: ["There are 162 rounds", "There are 45 rounds"]
+  replace: ["There are 163 rounds", "There are 45 rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "registered-round aggregate is not"
 
@@ -1293,9 +1293,9 @@ controls:
 
 - name: synopsis handoff - selected entry is replaced by another bead
   file: ../SYNOPSIS.md
-  replace: ["**Selected next entry:** `think-6w2y`", "**Selected next entry:** `think-cyko`"]
+  replace: ["**Selected next entry:** `think-ggk5`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
-  expect: "exactly one canonical Selected next entry marker for think-6w2y"
+  expect: "exactly one canonical Selected next entry marker for think-ggk5"
 
 - name: session handoff - observed end precedes its start
   file: campaign/agent-sessions/session-128-research-state-rollup.md
