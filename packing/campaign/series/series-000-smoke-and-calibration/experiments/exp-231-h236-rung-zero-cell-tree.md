@@ -71,8 +71,9 @@ experiment:
     checked_by: >-
       198 of 256 subtrees closed across the frozen run and two resumes, on 1.19e8 nodes
       and about 5.9e8 LP solves; 58 subtrees remain at the wall cap. The independent
-      reader then replayed the whole tree in 3,101 s: 98,818,174 exact leaf certificates
-      accepted, three Trump-degenerate leaves closed by the BC-240 local theorem
+      reader then replayed the whole tree in 3,101 s: 14,041,104 branch
+      nodes and 84,777,070 exact leaf certificates (15,370,925 dual-bound and 69,406,145
+      Farkas) accepted, three Trump-degenerate leaves closed by the BC-240 local theorem
       (subtrees 93, 109 and 117), 240 unresolved wall-cap leaves, smallest certified
       margin 6.3e-8 above U, largest enclosure reach 2.9e-5 beyond the Trump image;
       verdict incomplete (exp-231-h236-reader-final.json.gz). No open or non-degenerate
@@ -121,8 +122,9 @@ The instrument works, and a
 found its contract sound.
 The obstacle is the tree’s size: about a thousand times larger than X-046 estimated.
 After three runs, 198 of 256 subtrees are closed, the independent reader has replayed
-the whole tree and accepted all 98,818,174 of its certificates, and the three leaves
-that contain Trump’s own packing close through the local theorem as they must.
+the whole tree and accepted all 84,777,070 leaf certificates and 14,041,104 branch nodes
+it contains, and the three leaves that contain Trump’s own packing close through the
+local theorem as they must.
 No leaf below $U$ has appeared anywhere.
 
 The remaining 58 subtrees need no new mathematics, only the same frozen command on a
