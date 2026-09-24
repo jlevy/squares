@@ -114,6 +114,12 @@ Registering it as a frontier result waits for a Fable max W2 review of the close
 The cost is the other finding: about $1.7\times10^8$ nodes for one box, so the next rung
 needs a stronger bound per node before it needs more boxes.
 
+**Update, 2026-09-24.** The
+[BC-241 closure review](../../../../../docs/project/reviews/review-2026-09-24-bc241-closure.md)
+replayed the full radius generator and confirmed BC-240’s first clause, the one the
+Trump-degenerate leaves use, as verified and exact, so the qualifier above no longer
+applies.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -161,7 +161,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 372 | 189 complete; 61 stopped; 68 blocked; 17 ready; 21 tentative; 16 in progress |
+| Commitments | 372 | 190 complete; 61 stopped; 68 blocked; 17 ready; 21 tentative; 15 in progress |
 | Sessions | 158 | 98 completed; 59 stopped; 1 nonterminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 177 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 31 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
@@ -883,6 +883,7 @@ case or experiment separately.
 | [Native Adaptive Parent-Core Verification](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md) | dated review record | record | retained | — |
 | [Review of PR 230’s W3 Directions, 23 September 2026](docs/project/reviews/review-2026-09-23-pr230-w3-directions.md) | dated review record | record | retained | — |
 | [Review of the Rung-0 Certificate Contract, 23 September 2026](docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md) | dated review record | record | retained | — |
+| [Closing BC-241: The Trump Local Theorem After a Full Generator Replay](docs/project/reviews/review-2026-09-24-bc241-closure.md) | dated review record | record | retained | — |
 | [Review of the n21 Certificate at 122/25, 23 September 2026](docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
@@ -3742,9 +3743,11 @@ The BC-240 [isolation theorem](packing/cases/trump11/isolation-theorem.md) quant
 this in one labelled, anchored 33-coordinate sup-norm chart: within
 `ρ_row = 808514697/200000000000 ≈ 0.0040426` of Trump’s pose, the only labelled packing
 at side at most `U` is Trump’s own.
-The source-distinct BC-241 review accepted the packet at retained-record-dependent
-scope, without an independent radius-generator replay, and its closure disposition is
-pending. It does not bear on a different contact class.
+The source-distinct BC-241 review accepted the packet, and a full radius-generator
+replay on 2026-09-24 reproduced it value-for-value, with the method-distinct
+`capture_radius` control agreeing on every face; its first clause is verified and exact
+([BC-241 closure](docs/project/reviews/review-2026-09-24-bc241-closure.md)). It does not
+bear on a different contact class.
 
 **Settling `s(11) = U` is a different kind of statement.** Trump’s packing is feasible
 at `U`, so a counting certificate can only exclude sides strictly below `U`. Equality
@@ -3970,7 +3973,8 @@ the certificate carries no transferable slack to `U`.
   119,556,859 leaf certificates and 19,883,887 branch nodes, three Trump-degenerate
   leaves, no unresolved leaf.
   **`H-236` is confirmed**: at Trump’s own angle, within `10^-6` in the half-tangent, no
-  packing beats `U`, pending BC-241 for the local theorem its terminal leaves use.
+  packing beats `U`; its terminal leaves use BC-240’s first clause, verified and exact
+  since the BC-241 closure.
   The whole tree cost about `1.7e8` nodes.
   Each added square multiplies the tree by roughly six or seven, so rung 1 is out of
   reach with this relaxation; the lever is a stronger bound per node, not more boxes.
@@ -4033,7 +4037,7 @@ older `n = 11` rows they touch:
 | 239 | shaped | An angle-profile counting certificate excluding angle sets away from Trump’s | Unwritten; the minima at `3.8867` and `3.8943` set the sharpness required. Write the profile LP on `T-025`’s atoms and read its dual |
 | 204–207 | shaped | Charge-deficit covers and low-charge occupancy; centre-dependent and polygonal cores | Blocked on the missing adaptive parent-core producer; the review reads 204–205 as `H-136`/`H-155` in parent-core language |
 | 210–212 | shaped | Geometry-aware trace groups; rectangle-reservoir floors | The spike found zero trace-group saving and the review no headroom; the floors are one-body and share the threshold family’s ceiling |
-| 213 | shaped | A coarse class impossible or captured by Trump neighbourhoods | Needs a complete class proof and the pending BC-241 closure |
+| 213 | shaped | A coarse class impossible or captured by Trump neighbourhoods | Needs a complete class proof; BC-241 is now closed |
 | 214 | shaped | A low-degree PSD kernel on the residual pose domain | Needs an exact PSD certificate that beats a control-strength optimum |
 | 215 | shaped | Jointly infeasible pair-compatible triples or quadruples | Needs complete local separation branches; one validated compatible tuple kills it |
 | 224 | shaped | An explicit local-minimum cutoff below `U` | The review: equivalent to the whole problem |
@@ -4057,8 +4061,8 @@ Montanher and coauthors’ unit squares in a circle.
 **What is established.** `s(11) > 31/8`, machine-verified by two complete methods, at
 `V4/C4` as the case record states it.
 `s(11) ≤ U`, machine-verified as `T-011`. Trump’s pose is strictly locally side-optimal
-(machine-verified, `exp-013`), with a quantified radius of about `0.004` accepted at
-retained-record-dependent scope pending BC-241’s closure.
+(machine-verified, `exp-013`), with a quantified radius of about `0.004`, verified and
+exact since the BC-241 closure.
 Packings oriented only at `0°` and `45°` need side at least `3.885618` (Stromquist’s
 Theorem 3, from the literature).
 X-045 proves that at most three squares touch any wall in the bracket and that there are
@@ -4076,8 +4080,8 @@ machine-checked but whose 58 open ones are not.
 The road has three segments, and only the first is priced in the record.
 
 1. **Rung 0 is done; re-price the ladder.** Exp-232 closed the tree, so `H-236` is
-   confirmed at “verified, exact, pending BC-241”: the first global optimality statement
-   in any `n = 11` family, about Trump’s own angle only.
+   confirmed at “verified, exact”, now that BC-241 is closed: the first global
+   optimality statement in any `n = 11` family, about Trump’s own angle only.
    A Fable max review precedes any register entry (`think-6w2y`). The consequential work
    is the stronger per-node bound exp-231 calls for.
    Tools the record names that bear on it are second-order convergent bounds from a
@@ -4848,7 +4852,7 @@ round that names the hypothesis, control roles included.
 | [H-230](packing/campaign/hypotheses/H-230-a6-family-violates-a-gap-wedge-conflict.md) | blocked | A gap-g wall-wedge conflict edge cuts the A6 64-family; blocked on the gap extension and a conflict-edge atom class | 0 | — |
 | [H-231](packing/campaign/hypotheses/H-231-theta-on-pose-cells.md) | open question | Theta on a sound pose-cell graph at n=11; stays retired under X-037’s condition | 0 | — |
 | [H-232](packing/campaign/hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | blocked | The all-deep corner class at n=11, 96/25 has covering value below 7 in the point-plus-2-of-3 language on the box-cut domain; blocked on the box cut, the refund and an exact 2-of-3 reader | 0 | — |
-| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle on the 10^-6 half-tangent box; exp-232 closed all 256 subtrees and the reader accepted the whole tree, pending BC-241 for the local theorem | 2 | — |
+| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle on the 10^-6 half-tangent box; exp-232 closed all 256 subtrees and the reader accepted the whole tree; its local theorem is verified since the BC-241 closure | 2 | — |
 | [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | The growth-cone route to a sup-norm ball around Trump’s pose larger than the BC-240 radius; capped at the BC-199 modulus by an exhaustion lemma (exp-227) | 1 | — |
 | [H-238](packing/campaign/hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | confirmed | No descent-stable census minimum with three or more orientation classes lies below Stromquist’s 3.885618; confirmed at census scope by exp-228, support never proof | 1 | — |
 | [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | The rotational-core relaxation constant at generic n11 angle vectors, which prices a full verified search | 0 | — |

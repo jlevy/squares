@@ -836,7 +836,7 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 | BC-379 | research | 12 | complete | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
 | BC-380 | tool_validation | 12, 18, 21 | ready | 3 | think-m9iz | parent_clip.py, freeze_to_parent_core.py and their tests. |
 | BC-381 | research | 11 | in_progress | 1 | think-6w2y | A dated review under docs/project/reviews/ and, if accepted, a results.yaml row. |
-| BC-382 | research | 11 | in_progress | 1 | think-mlz3 | docs/project/reviews/review-2026-09-24-bc241-closure.md |
+| BC-382 | research | 11 | complete | 1 | think-mlz3 | docs/project/reviews/review-2026-09-24-bc241-closure.md |
 | BC-383 | research | 11 | in_progress | 1 | think-6b12 | The pilot receipts under results/agenda-042/ and an experiment record. |
 
 ## Series

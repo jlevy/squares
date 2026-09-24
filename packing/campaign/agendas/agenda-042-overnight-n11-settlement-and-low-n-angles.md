@@ -338,12 +338,12 @@ agenda:
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md
     parallel_group: n11-rung0-review
-    note: The terminal leaves inherit BC-240's scope, pending the BC-241 closure.
+    note: The terminal leaves use BC-240's first clause, verified and exact since BC-382 closed BC-241.
   - id: BC-382
     purpose: research
     owner_focus: correctness
     instances: [11]
-    state: in_progress
+    state: complete
     priority: 1
     question: >-
       What did BC-241 leave open on the BC-240 isolation packet, and does an independent
@@ -362,6 +362,21 @@ agenda:
     - packing/cases/trump11/isolation-theorem.md
     parallel_group: n11-lock-in
     note: Every rung of the settlement ladder closes its Trump leaves with BC-240's first clause.
+    outcomes:
+    - scope: BC-241's open obligations on the BC-240 packet.
+      classification: achieved
+      result: >-
+        A full radius-generator replay reproduced BC-199 on all 4,954 values, the
+        method-distinct capture_radius control confirmed the weighted modulus on all 8,448
+        faces to 32 digits, and BC-241's checker accepts with its mutations rejected.
+        BC-240's first clause, the one rung leaves use, is verified and exact; per-face dual
+        witnesses are recomputed rather than retained and the gap cap is single-source and
+        non-binding.
+      evidence:
+      - docs/project/reviews/review-2026-09-24-bc241-closure.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/agenda-042/bc382-isolation-radius-replay.json.gz
+      disposition: retire-success
+      follow_up: null
   - id: BC-383
     purpose: research
     owner_focus: insight
