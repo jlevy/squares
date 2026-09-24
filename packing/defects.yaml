@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 507
+count: 508
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -16846,3 +16846,31 @@ defects:
     side beside it on every n=32 run, and the case-2 point is row 24 of
     devtools.bentz2016.replay_theorem11, evaluated at both values.
   recorded_in: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-040/bentz2016-one-spare-receipt.md
+- id: D-508
+  title: Rung-0 records counted the reader's branch nodes as leaf certificates
+  date: '2026-09-24'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: inspection
+  severity: low
+  status: fixed
+  bead: think-ie35
+  what: >-
+    exp-231, the SYNOPSIS n = 11 section and PR 231's description said the reader
+    accepted 98,818,174 exact leaf certificates. That figure summed the reader's three
+    node kinds: b, a branch node whose separating pair the reader re-derives, and c and
+    f, the dual-bound and Farkas leaf certificates. The leaf certificates were
+    84,777,070 (15,370,925 dual-bound and 69,406,145 Farkas), beside 14,041,104 branch
+    nodes. The coordinator caught it while writing exp-232 by reading the reader's
+    kind definitions in fixed_angle_tree_check.py.
+  consequence: >-
+    Every node the reader checked was accepted, so no verdict, margin or scope changes;
+    the count of certificates was overstated by about 17 per cent, in the flattering
+    direction.
+  fix: >-
+    Restated the counts as leaf certificates and branch nodes separately in exp-231, the
+    SYNOPSIS section and the PR description; exp-232 reports the closed tree the same
+    way (119,556,859 leaf certificates and 19,883,887 branch nodes).
+  regression: none
+  recorded_in: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-231-h236-rung-zero-cell-tree.md

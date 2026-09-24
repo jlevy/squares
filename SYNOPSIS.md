@@ -3945,12 +3945,13 @@ the certificate carries no transferable slack to `U`.
   registered `n = 11` negative control is met only at producer level
   ([rung-0 review](docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md)).
   In about 6.4 hours of wall, 198 of 256 subtrees closed on `1.19e8` nodes; 58 remain at
-  the wall cap. The reader accepted all 98,818,174 exact leaf certificates, the three
-  Trump-degenerate leaves close through the BC-240 local theorem, and no leaf below `U`
-  has appeared. The ledger records `H-236` as abandoned at the declared caps, a bounded
-  stop rather than a refutation.
-  Each added square multiplies the tree by roughly six or seven, so rung 1 is out of
-  reach with this relaxation; the lever is a stronger bound per node, not more boxes.
+  the wall cap. The reader accepted all 84,777,070 exact leaf certificates and 14,041,104
+  branch nodes, the three Trump-degenerate leaves close through the BC-240 local
+  theorem, and no leaf below `U` has appeared.
+  The ledger records `H-236` as abandoned at the declared caps, a bounded stop rather
+  than a refutation. Each added square multiplies the tree by roughly six or seven, so
+  rung 1 is out of reach with this relaxation; the lever is a stronger bound per node,
+  not more boxes.
 
 ### What worked and what did not
 
@@ -5722,14 +5723,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 507 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 508 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 103 | asserted something false about the mathematics |
 | validity | 127 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 190 | recorded something its own evidence contradicts |
+| bookkeeping | 191 | recorded something its own evidence contradicts |
 | robustness | 68 | did not finish, or finished only by luck |
 | performance | 19 | worked, but cost far more than it should |
 
@@ -5755,7 +5756,7 @@ Two observations the log exists to make.
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eighty defects in 507, and no soundness defect ever.**
+**The automated gate has caught eighty defects in 508, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -6106,7 +6107,7 @@ It is contained rather than fixed — such delegations are recorded on completio
 `read_only` flag is better than permitting an empty list that would be ambiguous between
 “writes nothing” and “nobody filled this in”.
 
-118 fixes left no regression check behind.
+119 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
