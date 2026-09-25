@@ -30,6 +30,8 @@ from cases.n18_fractional_certificate.replay import declared as declared_n18
 from cases.n18_fractional_certificate.replay import load as load_n18
 from cases.n20_fractional_certificate.replay import declared as declared_n20
 from cases.n20_fractional_certificate.replay import load as load_n20
+from cases.n21_fractional_certificate.replay import declared as declared_n21
+from cases.n21_fractional_certificate.replay import load as load_n21
 from sqpack.fractional import interval as interval_module
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.interval import (
@@ -413,6 +415,29 @@ def test_the_retained_n18_certificate_is_accepted_on_the_full_doubled_net() -> N
     assert declared_n18()["least_cell_mass"] == str(enclosure[0])
 
 
+@pytest.mark.exhaustive_exact
+def test_the_retained_n21_certificate_is_accepted_on_the_full_doubled_net() -> None:
+    """The interval-certified decision of s(21) >= 122/25, every direction.
+
+    T-034 stands at C4 on the strength of this route, as T-021 does at 97/20. The
+    decide_certificate gate accepted these bytes in 4,289,657 boxes; this test is
+    the named replay E-fractional-interval-decision points at for the n = 21 rung.
+    """
+    certificate = load_n21()
+    verdict = verify_by_intervals(certificate, enclose=True)
+    assert verdict.accepted, verdict.failures
+    assert not any(o.budget_exhausted for o in verdict.directions)
+    # 181 steps inclusive of both ends is 182 half-tangents; the doubled net
+    # drops only the upright reflection, so 2 * 182 - 1 = 363.
+    assert len(verdict.directions) == 363
+    assert sum(outcome.stalled for outcome in verdict.directions) == 0
+    enclosure = verdict.enclosure
+    assert enclosure == (Fraction(250001, 250000), Fraction(250001, 250000))
+    assert enclosure is not None
+    assert certificate.bounded_side == Fraction(122, 25)
+    assert declared_n21()["least_cell_mass"] == str(enclosure[0])
+
+
 # --- the published-value control ----------------------------------------------
 
 
@@ -786,7 +811,13 @@ def test_the_retained_certificates_have_no_seam_the_method_cannot_close() -> Non
     directions including reflected ones, and would flag a future certificate
     that happened to land on a seam.
     """
-    certificates = (load_n12(RETAINED_393_100), load_n12(), load_n11(), retained_certificate())
+    certificates = (
+        load_n12(RETAINED_393_100),
+        load_n12(),
+        load_n11(),
+        retained_certificate(),
+        load_n21(),
+    )
     for certificate in certificates:
         for index, reflected in ((0, False), (1, False), (57, True), (90, False), (180, True)):
             cosine, sine = _exact_rotation(certificate.half_tangents[index])

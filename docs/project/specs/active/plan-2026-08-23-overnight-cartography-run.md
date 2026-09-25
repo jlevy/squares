@@ -345,10 +345,11 @@ PR 222 and PR 223 are merged into `main`. The completed `think-d010` branch cert
 all 12,028 native n11 adaptive parent-core rows while preserving the admissible
 parent-centre domain, strict containment, bounded site and feature tables, and the clean
 `c183cc9ab` proof provenance.
-PR 224 is the current completion step: it reconciles PR 221 while retaining every
-historical result, the strongest justified current bounds, and the native C4 evidence.
-The owner’s separately requested W3 publication follows that merge and owns the next
-research ordering.
+PR 224 is merged after reconciling PR 221 while retaining every historical result, the
+strongest justified current bounds and the native C4 evidence.
+PR 230 publishes the owner’s separately requested W3 review with three explorations,
+bounded diagnostics and no new bound or registered hypothesis.
+Its ordinary checks and exact-head five-job full checkpoint passed.
 
 The separate bounded publication gap remains `think-vx26`, which renders T-033’s missing
 standalone claim document from the retained result and evidence records.
@@ -449,12 +450,12 @@ Session095’s fixed collision-augmented axis cover returned `no_chain` without 
 H124 and restricted H036 remain unresolved, and that representation receives no retry.
 Do not repeat a completed experiment or create another candidate without a registered
 result; a float optimum is never a result.
-For the next supervised exact-research goal, treat standalone bead `think-d010` as
-fulfilled by PR 223’s merge.
-This preserves Session 153’s latest observed terminal handoff; the owner’s newer W3
-request is the actual next work and will supply a new session handoff when published.
-See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the current evidence
-and allocation boundaries.
+The former standalone publication handoff `think-d010` is fulfilled by PR 223’s merge.
+For the next supervised exact-research goal, take agenda-042’s BC-384 under
+`think-ggk5`: design and measure a stronger per-node bound for the fixed-angle cell
+tree, the prerequisite exp-234 found for rung 1. See
+[Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the current evidence and
+allocation boundaries.
 
 ## The numeric runner launch gate
 

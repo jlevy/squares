@@ -1,0 +1,1068 @@
+[
+ {
+  "side": 3.8770835900006198,
+  "side_spread": 3.47508688491871e-11,
+  "witness_side_min": 3.877083590025694,
+  "classes": 2,
+  "multiplicities": [
+   6,
+   5
+  ],
+  "class_degrees": [
+   0.0,
+   40.1819
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 2,
+  "count": 363,
+  "immediate_survivors": 156,
+  "after_certified_descent": 207,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 440
+  }
+ },
+ {
+  "side": 3.885618083097462,
+  "side_spread": 8.039258148073714e-11,
+  "witness_side_min": 3.885618083167013,
+  "classes": 2,
+  "multiplicities": [
+   6,
+   5
+  ],
+  "class_degrees": [
+   90.0,
+   45.0
+  ],
+  "rattling_squares": [
+   5,
+   7
+  ],
+  "classes_without_rattlers": 2,
+  "count": 315,
+  "immediate_survivors": 120,
+  "after_certified_descent": 195,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 30
+  }
+ },
+ {
+  "side": 3.8856180831169866,
+  "side_spread": 5.516875845046343e-11,
+  "witness_side_min": 3.8856180831670133,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   45.0,
+   46.1897
+  ],
+  "rattling_squares": [
+   5,
+   7
+  ],
+  "classes_without_rattlers": 2,
+  "count": 89,
+  "immediate_survivors": 26,
+  "after_certified_descent": 63,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 131
+  }
+ },
+ {
+  "side": 3.885618083116987,
+  "side_spread": 5.495959243262405e-11,
+  "witness_side_min": 3.8856180831670137,
+  "classes": 3,
+  "multiplicities": [
+   5,
+   5,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   45.0,
+   3.3976
+  ],
+  "rattling_squares": [
+   5
+  ],
+  "classes_without_rattlers": 2,
+  "count": 52,
+  "immediate_survivors": 33,
+  "after_certified_descent": 19,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 116
+  }
+ },
+ {
+  "side": 3.8856180831169906,
+  "side_spread": 4.736833147944708e-11,
+  "witness_side_min": 3.8856180831670146,
+  "classes": 4,
+  "multiplicities": [
+   5,
+   4,
+   1,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   45.0,
+   1.7344,
+   45.5675
+  ],
+  "rattling_squares": [
+   5,
+   7
+  ],
+  "classes_without_rattlers": 2,
+  "count": 15,
+  "immediate_survivors": 6,
+  "after_certified_descent": 9,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 251
+  }
+ },
+ {
+  "side": 3.8867460285519795,
+  "side_spread": 2.1119106463629578e-11,
+  "witness_side_min": 3.886746028992701,
+  "classes": 4,
+  "multiplicities": [
+   6,
+   3,
+   1,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   48.4351,
+   48.1487,
+   42.9339
+  ],
+  "rattling_squares": [
+   7,
+   10
+  ],
+  "classes_without_rattlers": 2,
+  "count": 4,
+  "immediate_survivors": 1,
+  "after_certified_descent": 3,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 97
+  }
+ },
+ {
+  "side": 3.886746028564995,
+  "side_spread": 4.8891557469232794e-11,
+  "witness_side_min": 3.886746028608552,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   48.4351,
+   39.338
+  ],
+  "rattling_squares": [
+   10
+  ],
+  "classes_without_rattlers": 2,
+  "count": 40,
+  "immediate_survivors": 3,
+  "after_certified_descent": 37,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 418
+  }
+ },
+ {
+  "side": 3.8867460286000712,
+  "side_spread": 1.0031087072093214e-11,
+  "witness_side_min": 3.8867460286085533,
+  "classes": 4,
+  "multiplicities": [
+   5,
+   4,
+   1,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   48.4351,
+   89.3363,
+   42.0357
+  ],
+  "rattling_squares": [
+   2
+  ],
+  "classes_without_rattlers": 3,
+  "count": 23,
+  "immediate_survivors": 0,
+  "after_certified_descent": 23,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 348
+  }
+ },
+ {
+  "side": 3.886746028605662,
+  "side_spread": 7.37188088351104e-14,
+  "witness_side_min": 3.8867460286085516,
+  "classes": 2,
+  "multiplicities": [
+   7,
+   4
+  ],
+  "class_degrees": [
+   0.0,
+   41.5649
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 2,
+  "count": 8,
+  "immediate_survivors": 0,
+  "after_certified_descent": 8,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 449
+  }
+ },
+ {
+  "side": 3.894321873820884,
+  "side_spread": 2.1810997452575975e-11,
+  "witness_side_min": 3.894321873843229,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   54.5926,
+   55.5229
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 3,
+  "count": 38,
+  "immediate_survivors": 0,
+  "after_certified_descent": 38,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 44
+  }
+ },
+ {
+  "side": 3.8947708784031874,
+  "side_spread": 0.0,
+  "witness_side_min": 3.8947708784060873,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   52.3322,
+   0.0094,
+   86.4115
+  ],
+  "rattling_squares": [
+   1,
+   2
+  ],
+  "classes_without_rattlers": 2,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 339
+  }
+ },
+ {
+  "side": 3.8947708784111033,
+  "side_spread": 0.0,
+  "witness_side_min": 3.894770878414005,
+  "classes": 3,
+  "multiplicities": [
+   5,
+   5,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   37.6681,
+   35.3293
+  ],
+  "rattling_squares": [
+   0,
+   1,
+   8
+  ],
+  "classes_without_rattlers": 2,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 444
+  }
+ },
+ {
+  "side": 3.9060950300232458,
+  "side_spread": 0.0,
+  "witness_side_min": 3.90609503002728,
+  "classes": 2,
+  "multiplicities": [
+   6,
+   5
+  ],
+  "class_degrees": [
+   50.2208,
+   0.0
+  ],
+  "rattling_squares": [
+   1
+  ],
+  "classes_without_rattlers": 2,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 54
+  }
+ },
+ {
+  "side": 3.907471737953297,
+  "side_spread": 0.0,
+  "witness_side_min": 3.9074717379744746,
+  "classes": 3,
+  "multiplicities": [
+   7,
+   3,
+   1
+  ],
+  "class_degrees": [
+   90.0,
+   45.0,
+   40.9108
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 3,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 204
+  }
+ },
+ {
+  "side": 3.91028334323434,
+  "side_spread": 0.0,
+  "witness_side_min": 3.91028334381533,
+  "classes": 5,
+  "multiplicities": [
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   40.9625,
+   44.9711,
+   46.0932,
+   39.7128
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 5,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 434
+  }
+ },
+ {
+  "side": 3.9169308656938093,
+  "side_spread": 0.0,
+  "witness_side_min": 3.9169308661754276,
+  "classes": 4,
+  "multiplicities": [
+   7,
+   2,
+   1,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   40.0003,
+   51.4483,
+   47.0883
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 4,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 364
+  }
+ },
+ {
+  "side": 3.9231569872306005,
+  "side_spread": 0.0,
+  "witness_side_min": 3.9231569876013666,
+  "classes": 4,
+  "multiplicities": [
+   5,
+   4,
+   1,
+   1
+  ],
+  "class_degrees": [
+   49.3262,
+   90.0,
+   89.8894,
+   16.2566
+  ],
+  "rattling_squares": [
+   1
+  ],
+  "classes_without_rattlers": 3,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 474
+  }
+ },
+ {
+  "side": 3.9252754814622874,
+  "side_spread": 1.893063483748847e-11,
+  "witness_side_min": 3.9252754814838346,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   0.0005,
+   43.7699,
+   46.1298
+  ],
+  "rattling_squares": [
+   8
+  ],
+  "classes_without_rattlers": 2,
+  "count": 8,
+  "immediate_survivors": 0,
+  "after_certified_descent": 8,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 364
+  }
+ },
+ {
+  "side": 3.9252754814795057,
+  "side_spread": 1.7004175845158898e-12,
+  "witness_side_min": 3.925275481483835,
+  "classes": 2,
+  "multiplicities": [
+   6,
+   5
+  ],
+  "class_degrees": [
+   90.0,
+   43.7699
+  ],
+  "rattling_squares": [
+   8
+  ],
+  "classes_without_rattlers": 2,
+  "count": 8,
+  "immediate_survivors": 0,
+  "after_certified_descent": 8,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 239
+  }
+ },
+ {
+  "side": 3.9289146852033188,
+  "side_spread": 0.0,
+  "witness_side_min": 3.9289146852693966,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   41.7541,
+   90.0,
+   87.1352
+  ],
+  "rattling_squares": [
+   2,
+   10
+  ],
+  "classes_without_rattlers": 2,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 424
+  }
+ },
+ {
+  "side": 3.9289146852229773,
+  "side_spread": 2.149835864884153e-12,
+  "witness_side_min": 3.928914685225951,
+  "classes": 2,
+  "multiplicities": [
+   6,
+   5
+  ],
+  "class_degrees": [
+   90.0,
+   48.2459
+  ],
+  "rattling_squares": [
+   1,
+   2,
+   4
+  ],
+  "classes_without_rattlers": 2,
+  "count": 3,
+  "immediate_survivors": 0,
+  "after_certified_descent": 3,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 314
+  }
+ },
+ {
+  "side": 3.9353524427055424,
+  "side_spread": 1.9944046414366312e-12,
+  "witness_side_min": 3.9353524432639215,
+  "classes": 4,
+  "multiplicities": [
+   6,
+   2,
+   2,
+   1
+  ],
+  "class_degrees": [
+   90.0,
+   42.2738,
+   37.8618,
+   47.7566
+  ],
+  "rattling_squares": [
+   1
+  ],
+  "classes_without_rattlers": 4,
+  "count": 2,
+  "immediate_survivors": 0,
+  "after_certified_descent": 2,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 48
+  }
+ },
+ {
+  "side": 3.9353524427108657,
+  "side_spread": 1.8948398405882472e-11,
+  "witness_side_min": 3.935352442726941,
+  "classes": 5,
+  "multiplicities": [
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  "class_degrees": [
+   90.0,
+   42.2738,
+   37.8618,
+   88.6206,
+   47.757
+  ],
+  "rattling_squares": [
+   1
+  ],
+  "classes_without_rattlers": 4,
+  "count": 9,
+  "immediate_survivors": 0,
+  "after_certified_descent": 9,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 493
+  }
+ },
+ {
+  "side": 3.937937472928741,
+  "side_spread": 2.559286116365911e-12,
+  "witness_side_min": 3.937937472934241,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   52.1046,
+   61.5443
+  ],
+  "rattling_squares": [
+   5
+  ],
+  "classes_without_rattlers": 3,
+  "count": 2,
+  "immediate_survivors": 0,
+  "after_certified_descent": 2,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 419
+  }
+ },
+ {
+  "side": 3.9509561936077864,
+  "side_spread": 0.0,
+  "witness_side_min": 3.950956193610744,
+  "classes": 3,
+  "multiplicities": [
+   5,
+   4,
+   2
+  ],
+  "class_degrees": [
+   0.0,
+   42.1064,
+   51.4204
+  ],
+  "rattling_squares": [
+   1,
+   4
+  ],
+  "classes_without_rattlers": 3,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 194
+  }
+ },
+ {
+  "side": 3.979148550940829,
+  "side_spread": 0.0,
+  "witness_side_min": 3.9791485509438136,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   3,
+   2
+  ],
+  "class_degrees": [
+   0.0,
+   51.3985,
+   17.0014
+  ],
+  "rattling_squares": [
+   2
+  ],
+  "classes_without_rattlers": 3,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 184
+  }
+ },
+ {
+  "side": 3.980707250434087,
+  "side_spread": 7.915446076367516e-12,
+  "witness_side_min": 3.9807072509604002,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   4,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   28.593,
+   38.6146
+  ],
+  "rattling_squares": [
+   1,
+   2
+  ],
+  "classes_without_rattlers": 3,
+  "count": 2,
+  "immediate_survivors": 0,
+  "after_certified_descent": 2,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 294
+  }
+ },
+ {
+  "side": 3.986719985099845,
+  "side_spread": 4.57416327037663e-11,
+  "witness_side_min": 3.9867199851626656,
+  "classes": 4,
+  "multiplicities": [
+   5,
+   3,
+   2,
+   1
+  ],
+  "class_degrees": [
+   90.0,
+   26.2764,
+   62.4902,
+   75.6442
+  ],
+  "rattling_squares": [
+   2
+  ],
+  "classes_without_rattlers": 3,
+  "count": 2,
+  "immediate_survivors": 0,
+  "after_certified_descent": 2,
+  "bases": [
+   "stromquist",
+   "trump"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 9
+  }
+ },
+ {
+  "side": 3.9873052816227634,
+  "side_spread": 0.0,
+  "witness_side_min": 3.9873052816258823,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   3,
+   2
+  ],
+  "class_degrees": [
+   90.0,
+   13.9855,
+   48.2374
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 3,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 64
+  }
+ },
+ {
+  "side": 3.992449635292056,
+  "side_spread": 2.0827783941967937e-12,
+  "witness_side_min": 3.9924496356838475,
+  "classes": 3,
+  "multiplicities": [
+   7,
+   3,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   45.3741,
+   70.0956
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 3,
+  "count": 2,
+  "immediate_survivors": 0,
+  "after_certified_descent": 2,
+  "bases": [
+   "trump"
+  ],
+  "example": {
+   "base": "trump",
+   "index": 244
+  }
+ },
+ {
+  "side": 3.996267728261107,
+  "side_spread": 0.0,
+  "witness_side_min": 3.9962677282641073,
+  "classes": 3,
+  "multiplicities": [
+   6,
+   3,
+   2
+  ],
+  "class_degrees": [
+   90.0,
+   10.0912,
+   80.1734
+  ],
+  "rattling_squares": [],
+  "classes_without_rattlers": 3,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 344
+  }
+ },
+ {
+  "side": 4.0,
+  "side_spread": 0.0,
+  "witness_side_min": 4.000000000003001,
+  "classes": 7,
+  "multiplicities": [
+   5,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "class_degrees": [
+   0.0,
+   5.7296,
+   36.595,
+   10.4777,
+   35.6635,
+   21.762,
+   15.8601
+  ],
+  "rattling_squares": [
+   1,
+   2,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "classes_without_rattlers": 1,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 369
+  }
+ },
+ {
+  "side": 4.000000000000001,
+  "side_spread": 0.0,
+  "witness_side_min": 4.000000000003002,
+  "classes": 2,
+  "multiplicities": [
+   8,
+   3
+  ],
+  "class_degrees": [
+   0.0,
+   45.0193
+  ],
+  "rattling_squares": [
+   0,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "classes_without_rattlers": 1,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 359
+  }
+ },
+ {
+  "side": 4.000000000000003,
+  "side_spread": 0.0,
+  "witness_side_min": 4.000000000003012,
+  "classes": 4,
+  "multiplicities": [
+   6,
+   3,
+   1,
+   1
+  ],
+  "class_degrees": [
+   90.0,
+   10.2244,
+   88.5676,
+   18.5769
+  ],
+  "rattling_squares": [
+   1,
+   2,
+   4,
+   7,
+   8,
+   9,
+   10
+  ],
+  "classes_without_rattlers": 1,
+  "count": 1,
+  "immediate_survivors": 0,
+  "after_certified_descent": 1,
+  "bases": [
+   "stromquist"
+  ],
+  "example": {
+   "base": "stromquist",
+   "index": 49
+  }
+ }
+]

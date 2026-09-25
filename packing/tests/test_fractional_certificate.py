@@ -23,6 +23,7 @@ import cases.n12_fractional_certificate.__main__ as n12_entrypoint
 import cases.n17_fractional_certificate.__main__ as n17_entrypoint
 import cases.n18_fractional_certificate.__main__ as n18_entrypoint
 import cases.n20_fractional_certificate.__main__ as n20_entrypoint
+import cases.n21_fractional_certificate.__main__ as n21_entrypoint
 from cases.n11_fractional_certificate.replay import FIRST_RUNG_PATH as N11_FIRST_RUNG
 from cases.n11_fractional_certificate.replay import STROMQUIST_RUNG_PATH
 from cases.n11_fractional_certificate.replay import declared as n11_declared
@@ -47,6 +48,9 @@ from cases.n20_fractional_certificate.__main__ import replay as replay_n20
 from cases.n20_fractional_certificate.replay import RUNG_24_5_PATH
 from cases.n20_fractional_certificate.replay import declared as n20_declared
 from cases.n20_fractional_certificate.replay import load as n20_load
+from cases.n21_fractional_certificate.__main__ import replay as replay_n21
+from cases.n21_fractional_certificate.replay import declared as n21_declared
+from cases.n21_fractional_certificate.replay import load as n21_load
 from sqpack.fractional.certificate import (
     Certificate,
     Verdict,
@@ -167,8 +171,8 @@ def test_n12_replay_refuses_declared_value_drift(
 
 @pytest.mark.parametrize(
     "replay",
-    [replay_n17, replay_n18, replay_n20],
-    ids=["n17", "n18", "n20"],
+    [replay_n17, replay_n18, replay_n20, replay_n21],
+    ids=["n17", "n18", "n20", "n21"],
 )
 @pytest.mark.parametrize("mutation", DECLARED_VALUE_DRIFT)
 def test_n17_and_n20_replays_refuse_declared_value_drift(
@@ -190,8 +194,8 @@ def test_n17_and_n20_replays_refuse_declared_value_drift(
 
 @pytest.mark.parametrize(
     "entrypoint",
-    [n12_entrypoint, n17_entrypoint, n18_entrypoint, n20_entrypoint],
-    ids=["n12", "n17", "n18", "n20"],
+    [n12_entrypoint, n17_entrypoint, n18_entrypoint, n20_entrypoint, n21_entrypoint],
+    ids=["n12", "n17", "n18", "n20", "n21"],
 )
 def test_the_guarded_replays_refuse_a_file_changed_during_verification(
     tmp_path: Path,
@@ -733,6 +737,64 @@ def test_the_n20_rungs_do_not_contradict_the_packings_they_reach() -> None:
     assert least_size_certified(certificate.total_mass) == 20
 
 
+def test_the_n21_certificate_displaces_the_previous_rung() -> None:
+    """s(21) >= 122/25 beats T-021's 97/20, decided from the file.
+
+    The comparison with Nagamochi's closed form is decided in integers, as for n = 20:
+    1 + sqrt(14) < 122/25 iff 14 * 25^2 < 97^2. Friedman's opaque 4.7438 sits below
+    both project rungs.
+
+    What the certificate claims is checked here; that a verifier accepts it is the
+    exhaustive test below and the interval test in test_fractional_interval.py.
+    """
+    certificate = n21_load()
+    assert certificate.n == 21
+    assert certificate.bounded_side == Fraction(122, 25)
+    assert n20_load().bounded_side == Fraction(97, 20)
+    assert certificate.bounded_side > Fraction(97, 20)
+    assert certificate.total_mass == Fraction(5036431, 250000)
+    assert len(certificate.atoms) == 1228
+    assert len(certificate.half_tangents) == 182
+
+    assert 14 * 25**2 < 97**2, "1 + sqrt(14) < 122/25 at n = 21"
+    assert Fraction(47438, 10000) < certificate.bounded_side
+
+    record = n21_declared()
+    assert record["claim"] == "s(21) >= 122/25"
+    assert record["total_mass"] == str(certificate.total_mass)
+    assert record["least_cell_mass"] == "250001/250000"
+
+
+@pytest.mark.exhaustive_exact
+def test_the_n21_certificate_is_accepted() -> None:
+    """The 1228-atom certificate over 182 directions, decided exactly.
+
+    Marked exhaustive: the sweep took 71 s on one worker at registration, and the fast
+    test above already pins every number the record claims about the same file.
+    """
+    certificate = n21_load()
+    verdict = verify(certificate)
+    assert verdict.accepted, verdict.failures
+    assert verdict.minimum_cell_mass is not None
+    assert verdict.minimum_cell_mass >= 1
+    assert n21_declared()["least_cell_mass"] == str(verdict.minimum_cell_mass)
+
+
+def test_the_n21_certificate_carries_21_and_stops_there() -> None:
+    """One size out of Condition 2, and n = 20 out of reach below it.
+
+    These atoms are heavier than twenty, so Condition 2 refuses them at n = 20, where
+    T-021's lighter 97/20 rung still holds the register. The register already holds 5
+    from n = 22 on, so the certificate is true there and weaker; and 122/25 sits below
+    the trivial grid packing at 5, the best known at n = 21.
+    """
+    certificate = n21_load()
+    assert least_size_certified(certificate.total_mass) == 21
+    assert 20 < certificate.total_mass < 21, "Condition 2 refuses these atoms at n = 20"
+    assert certificate.bounded_side < 5, "n >= 22 already holds the trivial 5"
+    assert least_size_certified(n20_load().total_mass) == 20
+
+
 def test_the_grid_refutation_order_is_the_integer_ceiling_of_the_root() -> None:
     """``m`` is decided by integers, never by a float square root."""
     for n in range(1, 200):
@@ -748,7 +810,7 @@ def test_every_retained_certificate_sits_below_its_own_ceiling() -> None:
     A retained certificate above its ceiling would mean one of the two is wrong,
     so this is a check on the record and not only on the arithmetic.
     """
-    for certificate in (n11_load(), load(), n17_load(), n20_load()):
+    for certificate in (n11_load(), load(), n17_load(), n20_load(), n21_load()):
         ceiling = ceiling_side(certificate.n, certificate.square_side)
         assert certificate.outer_side <= ceiling, (
             f"n = {certificate.n} claims {certificate.outer_side} above its ceiling {ceiling}"

@@ -8,9 +8,9 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **105** evidence records. **83** are formal; **77** of those were established here.
+- **108** evidence records. **86** are formal; **80** of those were established here.
 - **15** rest on an argument made elsewhere, of which **8** have been read by nobody here.
-- **34** claim to be first established here. **10** make no novelty statement at all - not assessed, which is not the same as not novel.
+- **36** claim to be first established here. **11** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
 claim whether or not we read it. The count above is not a doubt about those
@@ -114,8 +114,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-n018-t028-fractional-certificate` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n018-t029-fractional-certificate` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n018-t030-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
-| `E-n020-fractional-certificate-97-20` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n020-fractional-certificate-97-20` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n020-fractional-certificate` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n021-fractional-certificate-122-25` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-fractional-interval-decision` | 5 | lower-bound | verified | strict inequalities only | here | - | previously-published |
 | `E-n011-five-dot-full-net` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
 | `E-n011-five-dot-independent-union` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | *not assessed* |
@@ -124,13 +125,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-n011-five-dot-physical-transfer` | 0 | derived-structure | verified | whatever its theorem states | here | - | apparently-novel |
 | `E-n011-corner-class-96-25-exact-decision` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
 | `E-n011-corner-class-96-25-interval-decision` | 0 | derived-structure | verified | strict inequalities only | here | - | apparently-novel |
+| `E-n011-h236-rung0-reduction` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel |
+| `E-n011-trump-local-theorem-first-clause` | 0 | derived-structure | verified | whatever its theorem states | here | - | *not assessed* |
 | `E-wand125-n068-derived-lower` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | *not assessed* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 18, verified 83
-- **method**: exact-algebraic 63, interval-certified 12, numerical-multiprecision 4, proof-audited 2, published-proof 6, reported 18
-- **novelty**: apparently-novel 34, common-knowledge 4, not assessed 10, previously-published 57
+- **assurance**: numerically-checked 4, reported 18, verified 86
+- **method**: exact-algebraic 65, interval-certified 12, numerical-multiprecision 4, proof-audited 3, published-proof 6, reported 18
+- **novelty**: apparently-novel 36, common-knowledge 4, not assessed 11, previously-published 57
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -141,13 +144,14 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
 | `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 303 | numerically-checked |
-| `E-n020-fractional-certificate-97-20` | 20, 21 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the previous rung this project's own; what is new is a certificate at 97/20, found by seeding the generator's site set with the 24/5 certificate's own atoms scaled to the new side after the uniform grid walled there. | 2 | verified |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
 | `E-n012-fractional-certificate` | 12 | The certificate and the bound it carries, not the method. The weighted fractional unavoidable-set technique is Burns's, with Massaccesi's parameters; what is new here is a first-party certificate ladder at n = 12, reaching 99/25, and the generator that produced it. The first instance was retained at 19/5. Anyone holding Burns's note could have run this search. | 1 | verified |
 | `E-n018-t030-fractional-certificate` | 18 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the seed T-029's own atoms scaled to 4679/1000 plus a windows-5 lattice; what is new is a certificate at 4679/1000, found after T-029 retained 1871/400 and 117/25 locked at 18.000000. | 1 | verified |
 | `E-n020-fractional-certificate` | 19, 20, 21 | The certificate and the side. The method is Burns's and the parametrisation is Massaccesi's; what is new is a certificate at a side no published bound reaches at any of these three sizes, found by this project's generator. | 1 | verified |
+| `E-n020-fractional-certificate-97-20` | 20, 21 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the previous rung this project's own; what is new is a certificate at 97/20, found by seeding the generator's site set with the 24/5 certificate's own atoms scaled to the new side after the uniform grid walled there. | 1 | verified |
+| `E-n021-fractional-certificate-122-25` | 21 | The certificate and the side. The method is Burns's, the parametrisation Massaccesi's, and the previous rung this project's own; what is new is a certificate at 122/25, found by the stock generator on auto grids (34, 46, 56) at inset 1/2 with no seed and no windows, after a T-021-seeded site set at the same side ran out its deadline unconverged. | 1 | verified |
 | `E-n029-interval-certified-upper` | 29 | An interval certificate for a square-in-square bound; the packing is Kingbird's | 1 | verified |
 | `E-n040-first-order-flexibility` | 40 | That the tilted block turns at first order and every turn is refused at second; DS7 asserts n = 40 is rigid and this refines rather than contradicts it | 1 | verified |
 | `E-green17-sixteen-point-lower` | 17, 18 | The certified object: sixteen rational points unavoidable in [0, 4426213/1000000]^2, every decision an exact rational sign. The bound's value sits below Green's reported number, so what is new is the verified certificate, not the frontier of reported claims. | 0 | verified |
@@ -160,6 +164,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | `E-n011-fractional-net1440-dilation-limit` | 11 | The exact lower-bound value obtained by combining the 1440-step re-certification of the retained atoms with T-022's sharpened containment lemma, every strict rational uniform dilation it admits, rational density, and upward embedding. The lemma and the dilation argument are T-022's; the bound is new. | 0 | verified |
 | `E-n011-fractional-net720-certificate` | 11 | The re-certification of the retained T-018 atoms on the 720-step net at shrink 9979243/10000000, the rung below the registered one and the one the standalone reader decides. | 0 | verified |
 | `E-n011-fractional-net720-dilation-limit` | 11 | The exact lower-bound value from the 720-step re-certification under T-022's dilation-limit argument. It is weaker than the registered bound and is retained because its source rung is the one the standalone reader decides. | 0 | verified |
+| `E-n011-h236-rung0-reduction` | 11 | A machine-verified reduction of one restricted family, six axis squares and five at a common tilt within 10^-6 of Trump's in the half-tangent, to the rho-ball of Trump's labelled pose. Composed with BC-240 it gives the first optimality statement with an equality case for a family containing Trump's packing. The method is a standard exact branch and bound; what is new is the closed certificate for this family. | 0 | verified |
 | `E-n011-repaired-lower` | 11 | A correct proof of a bound stated in 1979 and cited as proved since, whose printed argument does not close | 0 | verified |
 | `E-n011-threshold-certificate` | 11 | The threshold atoms themselves: rank-1 Chvatal-Gomory cuts on the certificate side, charging w to every core holding at least k points of S and costing w floor(|S| / k) of the budget. The unavoidable-set counting argument, the event-cell sweep and the interval route are not new objects; a certificate whose budget rests on the floor rule, and the side it reaches, are. | 0 | verified |
 | `E-n011-threshold-net1440-certificate` | 11 | The re-certification of the retained T-025 threshold atoms on the 1440-step net at shrink 249507/250000. The atoms, the threshold theorem, the two decision routes and the net-refinement measurement are not new objects; this certificate and the lower bound derived from it under E-n011-threshold-net1440-dilation-limit are. | 0 | verified |

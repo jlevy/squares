@@ -1,0 +1,33 @@
+{
+  "verdict": "incomplete",
+  "tree": "../attic/rung0/controls/control-axis-5-above.jsonl.gz",
+  "leaves": {
+    "b": 5,
+    "c": 1,
+    "u": 15
+  },
+  "subtree_files": 0,
+  "unresolved_by_reason": {
+    "open": 1,
+    "stopped-on-open": 14
+  },
+  "leaf_depths": {
+    "1": 3,
+    "2": 3,
+    "3": 3,
+    "4": 3,
+    "5": 4
+  },
+  "smallest_certified_margin": 0.3323333333333328,
+  "largest_enclosure_reach_beyond_image": 0.0,
+  "statement": {
+    "family": "5 axis + 0 tilted",
+    "half_tangent_box": [
+      "0",
+      "0"
+    ],
+    "target_label": "3+1/1000",
+    "target_upper": "3001/1000"
+  },
+  "reader_seconds": 0.001
+}

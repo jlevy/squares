@@ -66,7 +66,7 @@
   </g>
   <text data-feature="explainer" x="1621.572" y="4820" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="1.045">(</tspan><tspan font-style="italic">n</tspan><tspan dx="1.045">) is the side of the smallest square holding </tspan><tspan font-style="italic">n</tspan><tspan dx="1.045"> unit squares; deg is the algebraic degree of that side length</tspan></text>
   <text data-feature="credit" x="2112" y="4850" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">Diagram by Joshua Levy with assistance from Claude and Codex</text>
-  <text data-feature="release-stamp" x="2112" y="4880" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">v0.4.1-e7c8cc</text>
+  <text data-feature="release-stamp" x="2112" y="4880" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">v0.4.1-8ff67a</text>
   <g data-feature="packing-card" data-n="1" data-row="0" data-column="0" data-source-id="W-known-best-n001">
     <rect data-feature="container-outline" x="84" y="186" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />
     <g data-feature="square-fills" stroke="#000000" stroke-width="0.42" stroke-linejoin="round">
@@ -543,7 +543,7 @@
     <text x="688.5" y="622.7" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="650" fill="#ffffff">=</text>
     <polygon data-feature="legend-star" points="665.5,609.46 667.5553566666666666666666667,615.3711533333333333333333333 673.81174,615.49934 668.82557,619.2808466666666666666666667 670.6376633333333333333333333,625.27066 665.5,621.696 660.3623366666666666666666667,625.27066 662.17443,619.2808466666666666666666667 657.18826,615.49934 663.4446433333333333333333333,615.3711533333333333333333333" fill="#a3123f" data-evidence="lower bound first proved here" />
     <text data-feature="side-bound" x="540" y="646" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(21) ≤ 5</tspan></text>
-    <text data-feature="lower-bound" x="540" y="663" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(21) ≥ </tspan><tspan fill="#a3123f">4.850000</tspan></text>
+    <text data-feature="lower-bound" x="540" y="663" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="0.77">(21) ≥ </tspan><tspan fill="#a3123f">4.880000</tspan></text>
   </g>
   <g data-feature="packing-card" data-n="22" data-row="1" data-column="3" data-source-id="W-known-best-n022">
     <rect data-feature="container-outline" x="768" y="438" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />

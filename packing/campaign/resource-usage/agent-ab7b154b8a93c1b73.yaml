@@ -1,0 +1,435 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-ab7b154b8a93c1b73.jsonl
+    sha256: ea08b3b7cd5d0378cfa3ce25c178711eaec2a6c41fe504796cd9619ffb452f72
+    bytes: 840895
+    records: 185
+    session_id: e8d698c4-206a-4921-bcc4-4f7e12fa474f
+    harness_versions:
+    - 2.1.280
+  span:
+    started_at: '2026-09-24T18:59:51.258Z'
+    ended_at: '2026-09-24T19:10:53.933Z'
+    wall_seconds: 662.675
+  turns:
+    assistant: 81
+    sidechain: 81
+    by_model:
+      claude-opus-5-5: 81
+    by_thinking_level:
+      xhigh: 81
+    by_model_and_thinking_level:
+      claude-opus-5-5 @ xhigh: 81
+    by_branch:
+      claude/n11-rung0-lock-in-and-rung1-pilot: 51
+      claude/n11-rung0-overnight-2026-09-24: 30
+    latency:
+      count: 81
+      total_seconds: 456.582
+      median_seconds: 2.432
+      max_seconds: 89.071
+  tokens:
+    cache_creation_input_tokens: 305198
+    cache_read_input_tokens: 10577217
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 305198
+    input_tokens: 162
+    output_tokens: 48093
+    thinking_tokens: 25988
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 305198
+      cache_read_input_tokens: 10577217
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 305198
+      input_tokens: 162
+      output_tokens: 48093
+      thinking_tokens: 25988
+  tool_calls:
+    total: 45
+    total_seconds: 207.235
+    share_of_wall: 0.3127
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 10
+      total_seconds: 148.292
+      median_seconds: 3.875
+      max_seconds: 69.322
+    by_tool:
+      Bash:
+        count: 35
+        total_seconds: 206.446
+        median_seconds: 1.505
+        max_seconds: 69.322
+      Edit:
+        count: 5
+        total_seconds: 0.399
+        median_seconds: 0.084
+        max_seconds: 0.111
+      Read:
+        count: 3
+        total_seconds: 0.315
+        median_seconds: 0.041
+        max_seconds: 0.236
+      Write:
+        count: 1
+        total_seconds: 0.044
+        median_seconds: 0.044
+        max_seconds: 0.044
+      ToolSearch:
+        count: 1
+        total_seconds: 0.031
+        median_seconds: 0.031
+        max_seconds: 0.031
+    by_command:
+      cases.trump11.fixed_angle_tree && wait:
+        count: 2
+        total_seconds: 103.811
+        median_seconds: 51.905
+        max_seconds: 69.322
+      cases.trump11.fixed_angle_tree && cases.trump11.fixed_angle_tree:
+        count: 1
+        total_seconds: 20.84
+        median_seconds: 20.84
+        max_seconds: 20.84
+      U && cases.trump11.fixed_angle_tree:
+        count: 1
+        total_seconds: 12.89
+        median_seconds: 12.89
+        max_seconds: 12.89
+      mkdir && read && eval && python3:
+        count: 1
+        total_seconds: 10.127
+        median_seconds: 10.127
+        max_seconds: 10.127
+      mkdir && git && ls && cases.trump11.fixed_angle_tree && gzip && shasum:
+        count: 1
+        total_seconds: 9.304
+        median_seconds: 9.304
+        max_seconds: 9.304
+      git && git && git && cases.trump11.fixed_angle_tree && gzip && shasum && gzip && cmp:
+        count: 1
+        total_seconds: 7.287
+        median_seconds: 7.287
+        max_seconds: 7.287
+      ruff && ruff && basedpyright && pytest:
+        count: 1
+        total_seconds: 7.217
+        median_seconds: 7.217
+        max_seconds: 7.217
+      '{axis_count: && {tilted_count: && overrides))) && {axis_count: && overrides && {caps: && {caps:':
+        count: 1
+        total_seconds: 4.869
+        median_seconds: 4.869
+        max_seconds: 4.869
+      ruff && ruff && basedpyright:
+        count: 1
+        total_seconds: 3.677
+        median_seconds: 3.677
+        max_seconds: 3.677
+      python3:
+        count: 2
+        total_seconds: 3.039
+        median_seconds: 1.52
+        max_seconds: 1.534
+      'python3 && {axis_count: && pytest':
+        count: 1
+        total_seconds: 2.88
+        median_seconds: 2.88
+        max_seconds: 2.88
+      cases.trump11.fixed_angle_tree && cases.trump11.fixed_angle_tree_check:
+        count: 1
+        total_seconds: 2.448
+        median_seconds: 2.448
+        max_seconds: 2.448
+      awk:
+        count: 1
+        total_seconds: 2.177
+        median_seconds: 2.177
+        max_seconds: 2.177
+      uv run packing-validate:
+        count: 2
+        total_seconds: 2.142
+        median_seconds: 1.071
+        max_seconds: 1.319
+      '_box_options(**(options && {tilted_count: && {tilted_count:':
+        count: 1
+        total_seconds: 1.938
+        median_seconds: 1.938
+        max_seconds: 1.938
+      git && git && git:
+        count: 1
+        total_seconds: 1.6
+        median_seconds: 1.6
+        max_seconds: 1.6
+      '{axis_count: && overrides && four && {caps: && {caps: && case)))':
+        count: 1
+        total_seconds: 1.557
+        median_seconds: 1.557
+        max_seconds: 1.557
+      git diff:
+        count: 1
+        total_seconds: 1.458
+        median_seconds: 1.458
+        max_seconds: 1.458
+      ls:
+        count: 1
+        total_seconds: 1.431
+        median_seconds: 1.431
+        max_seconds: 1.431
+      git && git && git && ls:
+        count: 1
+        total_seconds: 1.421
+        median_seconds: 1.421
+        max_seconds: 1.421
+      cd:
+        count: 1
+        total_seconds: 1.375
+        median_seconds: 1.375
+        max_seconds: 1.375
+      '{axis_count: && overrides && overrides)) && {tilted_count:':
+        count: 1
+        total_seconds: 1.351
+        median_seconds: 1.351
+        max_seconds: 1.351
+      sed:
+        count: 2
+        total_seconds: 0.876
+        median_seconds: 0.438
+        max_seconds: 0.734
+      cat:
+        count: 2
+        total_seconds: 0.207
+        median_seconds: 0.103
+        max_seconds: 0.122
+      ls && ls:
+        count: 1
+        total_seconds: 0.143
+        median_seconds: 0.143
+        max_seconds: 0.143
+      ls && pgrep:
+        count: 1
+        total_seconds: 0.126
+        median_seconds: 0.126
+        max_seconds: 0.126
+      grep:
+        count: 1
+        total_seconds: 0.111
+        median_seconds: 0.111
+        max_seconds: 0.111
+      wc:
+        count: 1
+        total_seconds: 0.09
+        median_seconds: 0.09
+        max_seconds: 0.09
+      pgrep:
+        count: 1
+        total_seconds: 0.047
+        median_seconds: 0.047
+        max_seconds: 0.047
+      tail:
+        count: 1
+        total_seconds: 0.007
+        median_seconds: 0.007
+        max_seconds: 0.007
+    by_command_family:
+      project:
+        count: 6
+        total_seconds: 129.241
+        median_seconds: 11.644
+        max_seconds: 69.322
+      other:
+        count: 6
+        total_seconds: 22.652
+        median_seconds: 1.747
+        max_seconds: 12.89
+      filesystem:
+        count: 2
+        total_seconds: 19.431
+        median_seconds: 9.715
+        max_seconds: 10.127
+      toolchain:
+        count: 5
+        total_seconds: 16.813
+        median_seconds: 2.88
+        max_seconds: 7.217
+      vcs:
+        count: 4
+        total_seconds: 11.766
+        median_seconds: 1.529
+        max_seconds: 7.287
+      inspection:
+        count: 11
+        total_seconds: 5.168
+        median_seconds: 0.126
+        max_seconds: 2.177
+      shell:
+        count: 1
+        total_seconds: 1.375
+        median_seconds: 1.375
+        max_seconds: 1.375
+    invoked:
+      cd: 33
+      tail: 21
+      head: 12
+      sed: 10
+      grep: 7
+      ls: 6
+      cat: 6
+      python3 -m cases.trump11.fixed_angle_tree: 6
+      echo: 6
+      '{axis_count:': 5
+      python3: 4
+      git diff: 4
+      '{caps:': 4
+      '{tilted_count:': 4
+      wc: 3
+      git hash-object: 3
+      gzip: 3
+      overrides: 3
+      git status: 2
+      mkdir: 2
+      shasum: 2
+      tr: 2
+      wait: 2
+      python3 -m pytest: 2
+      uv run ruff check: 2
+      uv run ruff format: 2
+      uv run basedpyright: 2
+      uv run packing-validate: 2
+      sleep: 2
+      sort: 2
+      pgrep: 2
+      git log: 1
+      git check-ignore: 1
+      time cases.trump11.fixed_angle_tree h236: 1
+      cmp: 1
+      time cases.trump11.fixed_angle_tree box: 1
+      python3 -m cases.trump11.fixed_angle_tree_check: 1
+      U: 1
+      four: 1
+      case))): 1
+      overrides)): 1
+      _box_options(**(options: 1
+      overrides))): 1
+      export: 1
+      read: 1
+      eval: 1
+      uniq: 1
+      awk: 1
+      test: 1
+    invoked_families:
+      inspection: 69
+      shell: 43
+      other: 36
+      toolchain: 12
+      vcs: 11
+      project: 11
+      filesystem: 2
+    by_shell_shape:
+      python_inline:
+        count: 7
+        total_seconds: 139.192
+        median_seconds: 10.127
+        max_seconds: 69.322
+      compound:
+        count: 23
+        total_seconds: 56.475
+        median_seconds: 1.421
+        max_seconds: 12.89
+      python_heredoc:
+        count: 3
+        total_seconds: 9.1
+        median_seconds: 2.88
+        max_seconds: 4.869
+      heredoc:
+        count: 1
+        total_seconds: 1.557
+        median_seconds: 1.557
+        max_seconds: 1.557
+      pipeline:
+        count: 1
+        total_seconds: 0.122
+        median_seconds: 0.122
+        max_seconds: 0.122
+    by_thinking_level:
+      xhigh:
+        count: 45
+        total_seconds: 207.235
+        median_seconds: 1.351
+        max_seconds: 69.322
+    shell_traits:
+      pipes: 26
+      redirects_output: 7
+      substitutes: 3
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

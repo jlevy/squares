@@ -49,12 +49,12 @@ Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 
 ## Orientation
 
-The current certified bracket is
-`3.826447410572939744... <= s(11) <= 3.877083590022814...`. The upper end is Walter
-Trump’s 1979 packing — six axis-aligned squares plus a tightly constrained block of five
-tilted at `≈40.1819°`; the tilt is numerically characterized through a trigonometric
-equation, not established here as an algebraic number.
-The lower end is T-026; the
+The [current certified bracket](../frontier/n-011.md) is
+`3.875 < s(11) <= 3.877083590022814177...`. The strict lower end is Kleddamag’s verified
+`31/8` certificate. The upper end is Walter Trump’s 1979 packing — six axis-aligned
+squares plus a tightly constrained block of five tilted at `≈40.1819°` — and the case
+record carries its verified exact algebraic expression.
+The
 [combined evidence account](../../docs/project/research/research-2026-09-09-n11-evidence-and-inference.md)
 distinguishes the recent retained improvements from their open equality cases.
 [X-027](explorations/X-027-stromquist-fractional-and-structural-strategy.md) develops
@@ -683,6 +683,93 @@ handed an overnight loop ten registrations
 | 201 | A gap-g wall-wedge conflict edge cuts the A6 64-family | registered | [H-230](hypotheses/H-230-a6-family-violates-a-gap-wedge-conflict.md) | The family’s 7.11° orbit sits at gap 0.016; the zero-gap lemma is verified, the extension is the question. |
 | 202 | Theta on a sound pose-cell graph at n=11 | open question | [H-231](hypotheses/H-231-theta-on-pose-cells.md) | Stays retired: the screen cannot discriminate and the dual matrix is dense. No owner decision requested. |
 | 203 | The all-deep corner class at n=11, 96/25 under the ring-centre 2-of-3 atom | registered | [H-232](hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | The transported 88-family pays 5/4 against a budget of 1 on the named atom, the exact maximum; the counting proof is reviewed; blocked on the box cut, the refund and an exact 2-of-3 reader, with the fixed-support screen decisive on the kill side. |
+
+## Compatibility and Resource Directions — X-043
+
+[X-043](explorations/X-043-new-lower-bound-proof-directions.md) shapes six proof
+architectures after the external n11 and n17 advances.
+These rows preserve its complete candidate slate without assigning formal hypothesis
+ids.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 204 | A complete charge-deficit and parent-capacity cover clears a stronger frozen budget | shaped | — | Accept with a checked cover and rational count dual; a surviving count vector rejects only the chosen relaxation, while unresolved leaves are undecided. |
+| 205 | A declared low-charge parent domain has occupancy below n | shaped | — | Accept with complete domain and multiplicity proofs; one validated compatible tuple above the cap kills the proposed capacity. |
+| 206 | A finite centre-dependent core menu improves a frozen row’s worst selected charge | shaped | — | Accept on a complete max-over-menu lower bound above the old exact witness; a legal pose defeating every menu choice kills it. |
+| 207 | Polygonal or rectangle-union cores preserve demand at a smaller parent side | shaped | — | Require strict containment, complete centre coverage, and exact budget arithmetic; one legal defeating parent or insufficient gain kills the candidate. |
+| 208 | Geometrically realized five-site or weighted columns improve the matched n17 covering problem | shaped | — | Require a rational primal improvement against a rational control dual; an old dual surviving every new column kills the finite gain. |
+| 209 | The improved n17 producer plus complete separation certifies a frozen stronger target | shaped | — | Accept only with complete coverage and budget validation; an exact undercharged pose kills the frozen certificate, while timeout is undecided. |
+| 210 | A geometry-aware trace group has lower joint capacity than its separate capacities | shaped | — | Require a complete trace superset and exact partition bound; a saturating realizable tuple kills the saving. |
+| 211 | Rectangle-reservoir floors beat the matched additive basis on one frozen pose set | shaped | — | Require exact primal/dual separation; an old optimal dual feasible for every reservoir column kills the finite advantage. |
+| 212 | A floor-reservoir candidate covers every actual parent below the exact total budget | shaped | — | Accept with complete area and boundary-null proofs; a rigorously undercharged parent kills it and an interval seam refusal stays unresolved. |
+| 213 | A coarse n11 class at Trump’s side is impossible or captured by admitted Trump neighbourhoods | shaped | — | Require a complete class proof with symmetry and radius accounting; one verified feasible configuration outside every neighbourhood kills capture. |
+| 214 | A rational low-degree kernel lowers occupancy on the complete residual pose domain | shaped | — | Require an exact PSD certificate and compatible-pair inequalities; one exact violating pair or a control-strength optimum kills the kernel family. |
+| 215 | A selected pair-compatible triple or quadruple of parent regions is jointly infeasible | shaped | — | Require complete local separation branches; one validated compatible tuple kills the no-good. |
+
+## Low-n Transfer Screen — X-044
+
+[X-044](explorations/X-044-low-n-certificate-transfer.md) asks where the X-043 machinery
+has a sound first comparison.
+It keeps n11 primary, n12 next, and treats the later cases as distinct controls rather
+than automatic corollaries.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 216 | An adaptive parent/core catalogue raises n12 above 99/25 | shaped | — | Accept with complete premises, centre coverage, and exact budget; one exact undercharged pose kills the catalogue. |
+| 217 | A threshold or rectangle basis beats the matched ordinary-point optimum on frozen n12 adversaries | shaped | — | Require a rational treatment primal below the control dual; a surviving control dual or unrealizable geometry kills the finite comparison. |
+| 218 | A finite n12 template excludes a positive-width interval below side 4 | shaped | — | Require a complete parameter-domain proof including flexible boundary classes; one validated packing kills exclusion and a surviving box is undecided. |
+| 219 | T-030 weights and specified parent rows certify the illustrative n18 side 4.68 | shaped | — | Accept only on full exact-premise and coverage validation; an exact defeating pose kills the frozen proposal. |
+| 220 | One producer has a rational common-row advantage at both n18 and n19 | shaped | — | Require independent matched comparisons in both cases; a gain confined to one case kills only the two-case transfer claim. |
+| 221 | Smaller selected cores keep T-021 charge above the n21 threshold at a frozen target | shaped | — | Require full coverage and strict budget slack; one exact undercharged parent or budget equality kills the proposal. |
+| 222 | A named exceptional occupancy pattern from Bentz’s covers is impossible | shaped | — | Require a complete local proof across all continuous poses and boundaries; one validated tuple kills that local exclusion. |
+| 223 | A complete charge-band/count certificate improves one selected low-n case | shaped | — | Require verified pose cover, multiplicities, constraints, and rational composition; a surviving relaxation vector rejects only that relaxation. |
+
+## N11 Global Capture and Exact Optimality — X-045
+
+[X-045](explorations/X-045-n11-global-capture-and-exact-optimality.md) separates an
+explicit local-minimum cutoff below Trump’s exact upper value from the stronger task of
+classifying every equality packing.
+These rows preserve its proposed small discriminators without assigning formal
+hypothesis ids.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 224 | Prove an explicit local-minimum cutoff below Trump’s exact upper value | shaped | — | Close one complete non-endpoint minimum class first; an exact original-problem local minimum in the proposed interval kills that class cutoff, while an unresolved stationary box is undecided. |
+| 225 | Force a useful endpoint role profile with a redesigned mixed certificate | shaped | — | Freeze a valid selector and exact weights at the endpoint; one admissible undercharged pose kills the proposed charge floor, while finite controls only admit a complete coverage pilot. |
+| 226 | Use joint corner/contact information where unary conditioning is insufficient | shaped | — | Require one complete positive-width two-parent class and compare it after dropping shared contact; a compatible parent/residual witness kills only the local incompatibility. |
+| 227 | Certify descent or a descent route for one surviving non-endpoint family | shaped | — | Check every physical inequality and distinguish local descent from nonlocal routing; a verified local minimum kills the family claim, while a failed first-order direction leaves higher-order motion open. |
+| 228 | Combine valid charge profiles and capacities into admitted endpoint neighborhoods | shaped | — | Every surviving box must lie wholly inside a reviewed chart or close separately; a feasible packing outside all charts kills capture and an outer box leaves it unresolved. |
+| 229 | Isolate a complete critical-value polynomial set after structural pruning | shaped | — | Retain ties, abnormal branches, and open-boundary obligations; recovering only Trump’s root is insufficient, and one fully closed non-endpoint branch prices the architecture. |
+| 230 | Replace blind global pose search with a complete corner-chain alternative | shaped | — | Derive one implication under the exact minimum hypothesis while retaining complementary cases; Trump’s empty fourth corner already kills any all-four-corners premise. |
+| 231 | Continue H-117/H-121 with a side-nonincreasing angle-class reduction in the current band | shaped | — | On one complete two-nonaxis-component family, prove a feasible path in the actual allowed domain that merges angle classes; a proved obstruction to every such path kills that motion claim, while trapping inside the starting family does not. |
+| 232 | Continue X-003/H-044 with a small assembly cover that retains tangential slides | shaped | — | Parametrize one whole sliding-contact family and every boundary sibling; one feasible family member omitted by the parameters kills completeness, and recovering Trump alone proves neither a global grammar nor tractability. |
+| 233 | Weaken H-121 to resource-forced angle and position tubes | shaped | — | Prove one complete coarse role domain maps into an explicit tube union, then validate the full-family angular thickening; a feasible pose outside the claimed union kills an all-feasible theorem, while existential representative claims need every proposed representative excluded. |
+| 234 | Extend X-005/H-120/BC-282 with an exact map of one continuous restricted family | shaped | — | Close one fresh domain through births, ties, legal touches and singleton fibers; a missing legal boundary pose kills the cover, while a finite chamber count or successful sample proves nothing by itself. |
+
+## The n11 Settlement Ladder and Low-n Angles — X-046 and X-047
+
+[X-046](explorations/X-046-n11-settlement-program.md) replaces the counting bridge at
+n11 with a ladder of restricted-family theorems, and
+[X-047](explorations/X-047-low-n-angles-after-the-parent-core-advance.md) maps where the
+additive route dies at each low n.
+[Agenda 042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) selected
+the registered rows.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 235 | Trump is globally optimal at its own angle, by a rotational-core cell tree | registered | [H-236](hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | Every leaf an exact Farkas or dual certificate or a matched Trump-degenerate leaf; the node count prices H-112. |
+| 236 | A quantified angular capture radius around Trump beyond the BC-240 radius | registered | [H-237](hypotheses/H-237-n11-trump-angular-capture-radius.md) | The minimum of the first-order growth over the whole direction sphere, not only its faces, is the crux. |
+| 237 | No descent-stable third-class minimum below Stromquist’s value | registered | [H-238](hypotheses/H-238-n11-no-third-class-minimum-below-stromquist.md) | The census needs a descent filter first: the quench reports class-coordinate stalls as converged. |
+| 238 | The rotational-core relaxation constant at generic angle vectors | open question | [H-239](hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | Prices whether a full verified search at n11 is a bounded program. |
+| 239 | An angle-profile counting certificate excludes angle sets away from Trump’s | shaped | — | Write the profile LP over retained atoms and read its dual; a dual fractional packing on the excluded set kills it. |
+| 240 | The H-112 ladder beyond rung 1: axis plus one angle at every multiplicity, then two orientations (H-113) | shaped | — | Priced by H-236’s node count and H-239’s constant. |
+| 241 | A point certificate at s(21) ≥ 4.88 | registered | [H-240](hypotheses/H-240-n21-additive-certificate-at-4-88.md) | The one low case with real additive headroom; the crossing near 4.886 is an estimate. |
+| 242 | The additive route at n12 is dead above 3.9609 | registered | [H-241](hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | One ceiling run decides every additive n12 route in one direction. |
+| 243 | A parent-centre clip lifts n21 to 4.9 and n18 to 4.70 on the native verifier | shaped | — | Blocked on the BC-380 instrument and its controls. |
+| 244 | An excess-4 occupancy-allocation cut toward s(12) = 4 | shaped | — | One unrealizable surviving pattern is a new cut; one legal allocation refutes only that pattern. |
+| 245 | A parent-disjointness no-good closes a largest surviving n21 exact-five kill orbit | shaped | — | Extends H-226’s inventory; a realizable structure leaves the orbit open. |
+| 246 | A second-order-exact isolation theorem enlarges Trump’s ball beyond the BC-199 modulus | shaped | — | exp-227: 36 of 42 rows do not recover at second order along the binding direction; needs exact Hessians, a cubic remainder and a face-wise enclosure. |
+| 247 | Price rung 1 by running the rung-0 tree on boxes away from Trump’s tilt | measured (exp-234) | [H-242](hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md) | Rung 0 cost 1.7e8 nodes on a box containing Trump; boxes with a positive margin may be far cheaper, and the pilot decides whether H-112 is compute or needs a stronger relaxation. |
 
 ## Dead ends
 

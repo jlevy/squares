@@ -727,6 +727,9 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_the_n11_certificate_is_accepted",
             "test_the_n17_certificate_is_accepted",
             "test_the_n20_certificate_is_accepted",
+            # T-034's 1228-atom n = 21 rung: 41 s at PACK_JOBS=2 on 2026-09-23, on a
+            # machine shared with a ten-worker computation.
+            "test_the_n21_certificate_is_accepted",
         },
         # The interval route over the doubled net, 361 directions and one to six
         # million boxes each; untouched by the integer sweep, and still minutes each.
@@ -738,6 +741,8 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_the_retained_n17_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n18_certificate_is_accepted_on_the_full_doubled_net",
             "test_the_retained_n20_certificate_is_accepted_on_the_full_doubled_net",
+            # T-034's n = 21 rung, 363 directions: 147 s at PACK_JOBS=1 on 2026-09-23.
+            "test_the_retained_n21_certificate_is_accepted_on_the_full_doubled_net",
             "test_massaccesi_n17_reproduces_the_published_bound_on_the_full_doubled_net",
         },
         # The retention gate's own positive control: both routes on a retained rung,
@@ -939,6 +944,11 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_bentz46.py": {
             "test_certificate_refuses_a_displaced_point",  # 2.2s
             "test_certificate_builds_and_charges_every_point",  # 2.1s
+        },
+        # 41s of call time across 1, measured locally on 2026-09-23; the jet refusals run
+        # inside it on the same exact branch-0 system rather than as a second slow test.
+        "test_capture_radius.py": {
+            "test_branch_zero_reproduces_bc199_and_the_lemma_caps_the_route",  # 41s
         },
         # 3s of call time across 1.
         "test_campaign_runner_trust_boundary.py": {

@@ -182,7 +182,8 @@ Results first established here, as far as the recorded source searches show:
   [its own ceiling](packing/frontier/CERTIFICATE-REACH.md), and `0.0856` at `n = 19`
   before it would contradict the best-known packing.
   `T-021` has since raised the `n = 20` and `n = 21` bounds to `97/20`, leaving `0.1385`
-  of room there; this `24/5` rung remains current for `n = 19`.
+  of room there, and `T-034` has raised `n = 21` again to `122/25`, leaving `0.1085`;
+  this `24/5` rung remains current for `n = 19`.
 - **T-017: `s(12) ≥ 99/25`, from nothing case-specific at all (`S4`).**
   [`n = 12`](packing/frontier/n-012.md) had only the `n = 11` bound inherited by
   monotonicity; the frontier record said in as many words that nothing specific to
@@ -220,7 +221,33 @@ erratum.
   total mass `19848723/1000000 = 19.848723`, so the same exact object proves both cases
   without a monotonicity step.
   It raises each bound by `0.05` above `T-020`; the heavier atom set does not apply to
-  `n = 19`.
+  `n = 19`. `T-034` has since raised `n = 21` to `122/25`, and `97/20` remains current
+  for `n = 20`.
+
+- **T-034: `s(21) ≥ 122/25` (`S3`).** A
+  [certificate at `4.88`](packing/cases/n21_fractional_certificate/certificate.json) has
+  1228 atoms and total mass `5036431/250000 = 20.145724`, which moves only `n = 21`: the
+  mass is above twenty, so it does not reach `n = 20`. It raises the `n = 21` bound by
+  `0.03` above `T-021`, and the generator found it on its plainest site set, with no
+  seed and no windows.
+  A [review](docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md)
+  re-decided the certificate by three routes and accepted it.
+
+- **T-035 / T-036: Trump’s packing is optimal at its own angle (`S3`).** Six squares
+  stay axis-aligned and five share a tilt within `10^-6` of Trump’s in the half-tangent;
+  centres and contacts are free.
+  `T-035` shows by a closed exact cell tree of 139,441,005 records, replayed in full by
+  an independent reader, that every packing in that family at side at most `U` lies
+  within the BC-240 radius of Trump’s labelled pose.
+  `T-036` composes it with BC-240’s first clause: no packing in the family has side
+  below `U`, and only Trump’s pose, up to quarter turns and relabelling, attains it.
+  It is the first optimality statement with an equality case for a family containing
+  Trump’s packing; Stromquist’s `0°`/`45°` bound is an earlier restricted-orientation
+  statement. It says nothing about any other tilt and moves no bound on `s(11)`. The
+  certificate tree (7.8 GB) is kept outside the repository, pinned by a SHA-256
+  manifest, and a [review](docs/project/reviews/review-2026-09-24-rung0-closed-tree.md)
+  accepted it. `T-035` is `V4/C5`; `T-036` is `V3/C2`, the minimum of its parts: the
+  local theorem it rests on is an audited proof whose replay passes.
 
 - **T-027 / T-028 / T-029 / T-030: `s(18) ≥ 4.67, 4.675, 4.6775, 4.679` (`S3`).** Four
   retained weighted fractional unavoidable-set certificates form the latest `n = 18`

@@ -169,6 +169,10 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-152](agent-sessions/session-152-external-density-and-n11-review.md) | completed | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-6xoc | After PR 222 is green and mergeable, start two separate branches from its head in parallel: decide the complete n11 adaptive parent-core catalogue under think-d010, and reconcile PR 221 while retaining every historical result and the strongest justified current bounds. Existing identifiers from PR 221 take precedence; renumber any later conflicting identifiers after PR 221's sequence and update every reference. PR 222 introduces no T-ID. The density-method and continuation-driver work remain separately assigned as recorded above. |
 | [session-153](agent-sessions/session-153-native-n11-parent-core.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `review-planning-oversight` (correctness) | 4 | think-d010 | Publish the coordinator-approved PR 223 closure for completed think-d010 and require its final hosted checks before ready; the separately requested W3 review owns the next research ordering. Preserve the c183cc9ab proof scope and do not merge either stacked PR. |
 | [session-154](agent-sessions/session-154-pr221-pr222-reconciliation.md) | completed | contemporaneous | `remediation` (correctness) | `remediation` (correctness) | 1 | think-t30b | Render T-033's missing standalone claim document under think-vx26. |
+| [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
+| [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 5 | think-nbij | BC-375 (think-ie35): run rung 0's 58 wall-cap subtrees with the unchanged Amendment 1 bytes, then the reader over the whole tree. |
+| [session-157](agent-sessions/session-157-n11-rung0-overnight-cpu.md) | completed | contemporaneous | `research-loop` (correctness) | `review-planning-oversight` (process) | 2 | think-ie35 | BC-381 (think-6w2y): a Fable max W2 review of the closed rung-0 tree and the register decision. |
+| [session-158](agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | completed | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-svmp | BC-384 (think-ggk5): design and measure a stronger per-node bound for the fixed-angle cell tree. |
 
 ### Workflow summary
 
@@ -177,15 +181,15 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 3 | 2 | 15 | 2 |
-| `factual-review` | 8 | 0 | 58 | 2 |
-| `insight-iteration` | 26 | 1 | 83 | 4 |
+| `factual-review` | 9 | 0 | 59 | 2 |
+| `insight-iteration` | 27 | 1 | 84 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 37 | 1 |
-| `research-loop` | 30 | 4 | 105 | 8 |
+| `research-loop` | 31 | 4 | 108 | 8 |
 | `pipeline-improvement` | 36 | 2 | 154 | 5 |
 | `documentation-pass` | 1 | 0 | 25 | 1 |
 | `remediation` | 2 | 1 | 2 | 3 |
-| `review-planning-oversight` | 5 | 0 | 25 | 2 |
+| `review-planning-oversight` | 6 | 0 | 33 | 2 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
@@ -818,11 +822,29 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | BC-372 | research | 17 | in_progress | 2 | think-xdoh | The sweep receipt under results/agenda-041. |
 | BC-373 | research | 11 | complete | 2 | think-gvlg | The refinement work file and its receipt under results/agenda-041. |
 
+### [agenda-042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) — Overnight n11 Settlement Ladder and Low-n Angles After PR 230
+
+Status: **active**. Turn PR 230's W3 review and the two explorations it led to, X-046 and X-047, into one night of bounded work. At n11 no counting certificate can prove equality and Kleddamag's certificate has no side headroom, so the night starts the verified settlement ladder instead: rung 0 of H-112 (Trump is globally optimal at its own angle), a quantified capture radius around Trump, and a repaired census of minima near U. At low n the additive-ceiling map selects n21 at 4.88 as the one material point-certificate rung and n12's additive ceiling as a decisive negative; the parent-centre clip that would carry both further is built as a W7 instrument. At most about three sub-agents run at once: Opus 5.5 builds and runs, Fable extra-high does the mathematics and reviews each chunk, and Fable max reviews anything that would move a bound.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-374 | research | 11, 12, 17, 18, 19, 20, 21, 26, 29 | complete | 0 | think-nbij | docs/project/reviews/review-2026-09-23-pr230-w3-directions.md, X-046 and X-047. |
+| BC-375 | research | 11 | complete | 1 | think-ie35 | The frozen instrument digests and the run output, admitted from attic/rung0/ into results/agenda-042/. |
+| BC-376 | research | 11 | complete | 1 | think-cj7r | packing/cases/trump11/capture_radius.py and its receipt. |
+| BC-377 | research | 11 | complete | 2 | think-cdc2 | The census receipt under results/agenda-042/. |
+| BC-378 | research | 21 | complete | 2 | think-gkki | The run log, frozen certificate and decision receipt under results/agenda-042/. |
+| BC-379 | research | 12 | complete | 2 | think-xmm4 | The cutting-run log and ceiling receipt under results/agenda-042/. |
+| BC-380 | tool_validation | 12, 18, 21 | ready | 3 | think-m9iz | parent_clip.py, freeze_to_parent_core.py and their tests. |
+| BC-381 | research | 11 | complete | 1 | think-6w2y | A dated review under docs/project/reviews/ and, if accepted, a results.yaml row. |
+| BC-382 | research | 11 | complete | 1 | think-mlz3 | docs/project/reviews/review-2026-09-24-bc241-closure.md |
+| BC-383 | research | 11 | complete | 1 | think-6b12 | The pilot receipts under results/agenda-042/ and an experiment record. |
+| BC-384 | research | 11 | ready | 1 | think-ggk5 | A design note and a benchmark receipt. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 155 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 163 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -998,6 +1020,13 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | H-230 | blocked | proof | There is a proved wall-wedge conflict lemma for a tilted unit square a |  | 0 |  |  |
 | H-231 | open question | proof | Whether a Lovász theta certificate on a sound, non-uniform pose-cell c |  | 0 |  |  |
 | H-232 | blocked | proof | At n=11, side 96/25, B = 9977/10000 on the 181-direction net, the rest |  | 0 |  |  |
+| H-236 | confirmed | proof | In the family of six unit squares at actual orientation 0 and five sha |  | 2 | T-035, T-036 | 676.5m wall |
+| H-237 | exhausted | proof | There is an explicit rational r > rho = 808514697/200000000000 such th |  | 1 |  | 7.4m wall |
+| H-238 | confirmed | search | Every descent-stable local minimum of the n=11 problem reached by the  |  | 1 |  | 62.0m wall |
+| H-239 | open question | proof | Whether rotational-core LPs at n=11 lose at most about 1.5 in side per |  | 0 |  |  |
+| H-240 | confirmed | search | A weighted fractional unavoidable-set certificate with point atoms on  |  | 1 | T-034 | 106.9m wall |
+| H-241 | refuted | search | At n=12, side 39609/10000, shrink 9977/10000, a depth-one family of cl |  | 2 |  | 282.4m wall |
+| H-242 | open question | proof | Whether the rung-0 fixed-angle cell tree, run unchanged on half-tangen |  | 1 |  | 187.7m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1007,7 +1036,7 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 
 ## Rounds
 
-### rejected (36)
+### rejected (37)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1047,16 +1076,24 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | exp-212 | series-000 | 17 | Codex with delegated measurement agents | H-214 | Both predicted orders reverse in at least one transition: rigid exceeds soft penetration in Physics at n = 90, and sticky has fewer mean contacts than balanced at n = 90 in both solvers; continuity guards also fail at the frozen commit. |
 | exp-216 | series-000 | 21 | Claude session-144 (Fable lane, Opus port, Fable review) | H-226 | The registered proof strategy cannot close n=21: 3,461 D2-orbits of exceptional structures (for example red (1, 9/10) uncovered with blue (1/2, 9/10) and (9/2, 9/10) uncovered) leave at most four charging boxes on each vertical wall line with no confined partial box, and the paper's toolkit has no further move or contradiction to apply; s(21) = 5 itself is untouched, and the 22,603 needs-geometry orbits name the claim Q(i, j) a stronger lemma would need. |
 | exp-217 | series-000 | 32 | Claude session-144 (Fable lane, Opus port, Fable review) | H-227 | With the m=6 vertical budget 2(sqrt 2 - 1/2) + 1.6 + 3 sqrt 3 / 2 - 6 = 0.0265, any frozen row above a six-point row kills that row's shift and end-point move, so every structure whose red spare lies outside red row 1 or blue spare outside blue row 6 leaves at most five charges on every wall line and no shorter slide recovers a sixth; s(32) = 6 itself is untouched. |
+| exp-233 | series-000 | 12 | Claude Session 157 coordinator | H-241 | The row loop converged with covering value 11.980175 < 12, so no depth-one family reaching 12 exists on this support and the additive route at n12 is not shown dead above 3.9609; the converged value is a float LP, not a certificate, so it suggests rather than establishes a point certificate at 3.9609. |
 
-### abandoned (3)
+### exhausted (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-227 | series-000 | 11 | Claude Session 156, Fable extra-high lane | H-237 | The route cannot exceed the BC-199 modulus by a proved lemma, and the exact computation confirms that on every face, so re-running under the per-row remainder model adds nothing. The binding constant is that model, not the growth minimum, which is 4.5 times kappa. Along the binding direction 36 of 42 rows do not recover at second order (exp-227 curvature record), so only a second-order exact isolation theorem, a named change of instrument, should reopen the radius. |
+
+### abandoned (4)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-060 | series-000 | 11 | Claude (agent), Lane B of agenda-021 BC-200, bead think-1qjs, session-086 | H-064 | Both walls expired with depth still 1.12 to 1.24 rather than one, so the loop stalled below eleven at both sides and decides nothing about the covering value; what it establishes is nu*(3.82) >= 9.907905 and nu*(3.85) >= 9.049860, with downward-safe displayed endpoints whose exact rational values are retained in the two summary records. The converged row loop's restricted optimum 11.055617 on 12,761 sites supplies the upper end of the 3.82 bracket. |
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 | exp-162 | series-000 | 20 | Cursor session-140 | H-218 | The Session-140 research wall expired with no RETAINABLE freeze on the H-218 sweep. Closest masses were leftover n=20 971/200 at 19.910044 unconverged and leftover n=12 3969/1000 at 12.091168 after crossing 12. T-028 at n=18 does not confirm H-218. The unfinished float LPs remain unresolved; their objectives do not refute their site sets. |
+| exp-231 | series-000 | 11 | Claude Session 156, Opus extra-high lane and coordinator | H-236 | The declared caps ran out with 58 of 256 subtrees open and no counterexample candidate, so H-236 is neither confirmed nor refuted; the remaining subtrees are a bounded computation for the unchanged frozen instrument. |
 
-### unresolved (50)
+### unresolved (52)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1110,6 +1147,8 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | exp-214 | series-000 | 13 | Claude session-144 Opus runner | H-223 | The converged restricted optimum 15.5656 refutes this site set only, and the accepted depth-one family has total 85/8, below 13, so H-223 is neither confirmed nor killed at this scope. |
 | exp-215 | series-000 | 26 | Claude session-144 Opus runner | H-225 | The loop hit its deadline with rows still violated at the exact-integer plateau 25.000000 that Session 141 also saw at n=26; an unfinished loop decides nothing and this site set is not even refuted. |
 | exp-218 | series-000 | 17 | Claude session-144 Opus runner | H-224 | The converged restricted optimum 17.0423 refutes point certificates on this site set only, and the accepted depth-one family has total just below 14, not 17, so H-224 is neither confirmed nor killed at this scope; the fixed-shrink point route at n=17 is bounded below by 14 for every site set at 23/5 and above by this site set's 17.04. |
+| exp-230 | series-000 | 12 | Claude Session 156, Opus high lane | H-241 | The loop ran to its time limits with the covering value unsettled just below 12 and no family reaching 12, so whether additive routes at n12 survive above 3.9609 is still open; a row objective of 11.98 is suggestive of a little headroom but is not a value. |
+| exp-234 | series-000 | 11 | Claude Session 158 coordinator | H-242 | No box closed at the cap, so rung 1's total cost is not measured, only bounded below; but the flat response to width and tilt shows the cost lives in the centre enumeration, so the stronger per-node relaxation, not more or narrower boxes, is the prerequisite for H-112, while wide boxes remain usable once it exists. |
 
 ### blocked (11)
 
@@ -1127,7 +1166,7 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | exp-158 | series-000 | 11 | Codex BC303 T2 charge-sweep agent | H-160 | The September 14 strategy reset paused this route before the target charge ran; no target receipt or scientific verdict exists. |
 | exp-160 | series-000 | 11 | Codex BC303 H-162 retained-receipt analyst | H-162 | The September 14 strategy reset paused this route with no exp-158 target receipt; no H-162 comparison or scientific verdict exists. |
 
-### accepted (43)
+### accepted (46)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1174,6 +1213,9 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | exp-204 | series-000 | 11 | claude-opus-5 | H-203 | The proposal structure is worth its complexity at this budget: H-203 declared three of five cells improving by 0.01 and four did, two of them with disjoint seed ranges, but the other two overlap and no run came within 1e-2 of any record, so this accepts a proposer and settles nothing about record-finding. |
 | exp-219 | series-000 | 11 | Claude session-145 coordinator | H-222 | Both gate routes accept the clipped covering of mass 10868617/1000000 < 11 with least charge 2000013/2000000 >= 1 on the corner-clipped domain at 96/25, so no packing of eleven unit squares in a square of side 96/25 has every square avoiding the four corner triangles x + y <= 1/2; this confirms H-222 at its registered scope and is a conditional exclusion, not a bound on s(11). |
 | exp-220 | series-000 | 11 | Claude session-146 Opus lane | H-222 | The same 680-atom covering as exp-219, now frozen with the claim "corner class d = 1/2 excluded at s(11) >= 96/25" and the id C-n011-fractional-96-25-clip-1-2; both gate routes accept it under the flag and the gate refuses it without the flag, so the retained bytes declare what they prove. The corrected gate now refuses exp-219's bytes on their unconditional claim string, and exp-220 supersedes exp-219 as the record of the exclusion; the registration of the reviewed statement remains BC-367. |
+| exp-228 | series-000 | 11 | Claude Session 156, Opus extra-high lane | H-238 | The census found none, and every apparent candidate was refuted by an exact descending packing; this confirms H-238 at its declared census scope only, since descent-stability is empirical and starts are jolts of at most 0.3 about two known packings. |
+| exp-229 | series-000 | 21 | Claude Session 156, Opus high lane | H-240 | Both routes accept set C's certificate at least cell mass 250001/250000 with total mass 20.145724 < 21, so the gate certifies the covering at side 122/25. The Fable max W2 review H-240 requires accepted it on three routes, and it is registered as T-034. |
+| exp-232 | series-000 | 11 | Claude Session 157 coordinator | H-236 | The independent reader closes all 256 subtrees with no unresolved leaf and three Trump-degenerate leaves, so every packing of six axis-aligned squares and five at a common tilt within 10^-6 of Trump's half-tangent has side at least U, with equality only on Trump's orbit; the local theorem it relies on is BC-240, accepted at retained-record-dependent scope pending BC-241, and the certificate tree itself (5.5 GB) is retained outside the record. The Fable max W2 review of 2026-09-24 accepted it, and it is registered as T-035 (the reduction) and T-036 (the composed theorem). |
 
 ### baseline (12)
 
@@ -1233,10 +1275,12 @@ Status: **active**. Spend one four-hour run on three blocks in sequence, overlap
 | exp-209 | H-212 | 1 round unrecorded | dependency |  |  |
 | exp-210 | H-212 | 1 round unrecorded | dependency |  |  |
 | exp-215 | H-225 | 62.6m wall | timebox | packing/campaign/series/series-000-smoke-and-calibration/res |  |
+| exp-230 | H-241 | 150.0m wall | timebox | The leg-3 warm state, retained as results/agenda-042/exp-230 |  |
+| exp-231 | H-236 | 397.1m wall | timebox | The top tree and 198 closed subtree files in attic/rung0 of  | Run the 58 wall-cap subtrees with the unchanged Amendment 1  |
 
 ## Effort
 
-155 rounds, 2512.1 agent-minutes, 2696.2 wall-minutes.
+163 rounds, 2512.1 agent-minutes, 4019.2 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 
@@ -1258,6 +1302,9 @@ These totals exclude 4 historical rounds with unrecorded timing; their cost is u
 - X-036 — Graded Guidance for Annealing
 - X-041 — After the n = 17 Certified Bound, a Ranked Slate
 - X-042 — What Is Left at Low n, After the n = 17 Ladder Merged
+- X-043 — New Lower-Bound Proof Directions After the External Advances
+- X-044 — Transfer Opportunities at the Lowest Open Square-Packing Cases
+- X-045 — N11 Global Capture and Exact Optimality
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

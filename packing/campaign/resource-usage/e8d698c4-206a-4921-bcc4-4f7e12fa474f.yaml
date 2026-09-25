@@ -1,0 +1,806 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: e8d698c4-206a-4921-bcc4-4f7e12fa474f.jsonl
+    sha256: 9fee86531e5c08be0258a2dc6781ba5979c8f6fde5af3c4d5ba5c3509aed3498
+    bytes: 9133677
+    records: 4308
+    session_id: e8d698c4-206a-4921-bcc4-4f7e12fa474f
+    harness_versions:
+    - 2.1.280
+  span:
+    started_at: '2026-09-23T06:28:14.038Z'
+    ended_at: '2026-09-24T23:54:02.673Z'
+    wall_seconds: 149148.635
+  turns:
+    assistant: 1150
+    sidechain: 0
+    by_model:
+      claude-opus-5-5: 1138
+      <synthetic>: 12
+    by_thinking_level:
+      high: 754
+      xhigh: 384
+      None: 12
+    by_model_and_thinking_level:
+      claude-opus-5-5 @ high: 754
+      claude-opus-5-5 @ xhigh: 384
+      <synthetic> @ None: 12
+    by_branch:
+      claude/w3-overnight-2026-09-23: 624
+      claude/version-history: 227
+      claude/n11-rung0-overnight-2026-09-24: 167
+      claude/n11-rung0-lock-in-and-rung1-pilot: 132
+    latency:
+      count: 1150
+      total_seconds: 5719.34
+      median_seconds: 2.322
+      max_seconds: 905.696
+  tokens:
+    cache_creation_input_tokens: 15505004
+    cache_read_input_tokens: 580052158
+    ephemeral_1h_input_tokens: 15505004
+    ephemeral_5m_input_tokens: 0
+    input_tokens: 2498
+    output_tokens: 1080372
+    thinking_tokens: 292431
+  tokens_by_thinking_level:
+    None:
+      cache_creation_input_tokens: 0
+      cache_read_input_tokens: 0
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 0
+      output_tokens: 0
+    high:
+      cache_creation_input_tokens: 8821349
+      cache_read_input_tokens: 286619645
+      ephemeral_1h_input_tokens: 8821349
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 1650
+      output_tokens: 690627
+      thinking_tokens: 163941
+    xhigh:
+      cache_creation_input_tokens: 6683655
+      cache_read_input_tokens: 293432513
+      ephemeral_1h_input_tokens: 6683655
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 848
+      output_tokens: 389745
+      thinking_tokens: 128490
+  tool_calls:
+    total: 494
+    total_seconds: 10638.101
+    share_of_wall: 0.0713
+    errors: 2
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 1
+    one_off_code:
+      count: 87
+      total_seconds: 4927.255
+      median_seconds: 6.205
+      max_seconds: 553.878
+    by_tool:
+      Bash:
+        count: 419
+        total_seconds: 10580.973
+        median_seconds: 1.865
+        max_seconds: 601.786
+      Agent:
+        count: 22
+        total_seconds: 28.257
+        median_seconds: 1.22
+        max_seconds: 1.772
+      Monitor:
+        count: 11
+        total_seconds: 15.213
+        median_seconds: 1.395
+        max_seconds: 2.217
+      CronCreate:
+        count: 4
+        total_seconds: 5.56
+        median_seconds: 1.429
+        max_seconds: 1.613
+      ToolSearch:
+        count: 3
+        total_seconds: 2.726
+        median_seconds: 0.073
+        max_seconds: 2.606
+      CronDelete:
+        count: 1
+        total_seconds: 1.574
+        median_seconds: 1.574
+        max_seconds: 1.574
+      Write:
+        count: 24
+        total_seconds: 1.335
+        median_seconds: 0.056
+        max_seconds: 0.094
+      SendMessage:
+        count: 1
+        total_seconds: 1.295
+        median_seconds: 1.295
+        max_seconds: 1.295
+      Read:
+        count: 3
+        total_seconds: 0.618
+        median_seconds: 0.117
+        max_seconds: 0.442
+      Edit:
+        count: 5
+        total_seconds: 0.35
+        median_seconds: 0.078
+        max_seconds: 0.08
+      SendUserFile:
+        count: 1
+        total_seconds: 0.2
+        median_seconds: 0.2
+        max_seconds: 0.2
+    by_command:
+      make && packing-ledger && packing-validate && pytest:
+        count: 1
+        total_seconds: 601.786
+        median_seconds: 601.786
+        max_seconds: 601.786
+      python3 && devtools.build_known_best_atlas && packing-ledger && devtools.render_agenda_map && packing-validate:
+        count: 1
+        total_seconds: 553.878
+        median_seconds: 553.878
+        max_seconds: 553.878
+      devtools.build_known_best_atlas && git && git && pytest:
+        count: 1
+        total_seconds: 437.554
+        median_seconds: 437.554
+        max_seconds: 437.554
+      git && from && devtools.build_known_best_atlas:
+        count: 1
+        total_seconds: 408.188
+        median_seconds: 408.188
+        max_seconds: 408.188
+      devtools.close_session && packing-validate:
+        count: 3
+        total_seconds: 363.5
+        median_seconds: 123.259
+        max_seconds: 173.483
+      from && devtools.build_known_best_atlas && git && git && pytest && pytest && git && git:
+        count: 1
+        total_seconds: 345.687
+        median_seconds: 345.687
+        max_seconds: 345.687
+      from && devtools.build_known_best_atlas:
+        count: 1
+        total_seconds: 330.195
+        median_seconds: 330.195
+        max_seconds: 330.195
+      timeout uv run packing-validate:
+        count: 9
+        total_seconds: 314.73
+        median_seconds: 12.606
+        max_seconds: 94.278
+      devtools.build_known_best_atlas && git:
+        count: 1
+        total_seconds: 199.305
+        median_seconds: 199.305
+        max_seconds: 199.305
+      ? 'python && 245 && A && shaped && — && Extends && a && 246 && A && shaped && — && exp-227:
+        && needs && anchor+row) && open(p,w).write(s) && the && four && devtools.render_agenda_map
+        && devtools.close_session && make && packing-validate'
+      : count: 1
+        total_seconds: 179.282
+        median_seconds: 179.282
+        max_seconds: 179.282
+      ? devtools.log_rollup && python && f && print(len(files)) && devtools.render_agenda_map
+        && devtools.close_session && make && packing-validate
+      : count: 1
+        total_seconds: 173.141
+        median_seconds: 173.141
+        max_seconds: 173.141
+      ? Sessions && 156 && 97 && 59 && all && Sessions && 157 && 97 && 59 && 1 && packing-ledger
+        && packing-validate && make && git && git && git && git
+      : count: 1
+        total_seconds: 162.781
+        median_seconds: 162.781
+        max_seconds: 162.781
+      timeout uv run pytest:
+        count: 2
+        total_seconds: 160.507
+        median_seconds: 80.253
+        max_seconds: 156.439
+      python && assert && devtools.close_session && packing-validate && make && git && git && git:
+        count: 1
+        total_seconds: 152.861
+        median_seconds: 152.861
+        max_seconds: 152.861
+      rm && git && git && git && git && git && sync && packing-validate && pytest:
+        count: 1
+        total_seconds: 152.844
+        median_seconds: 152.844
+        max_seconds: 152.844
+      ? 'python && def && exp-220-, && exp-227-h237-trump-growth-cone-capture-radius.md) &&
+        11 && target && H-237 && Exact && Growth && route && exhausted && )
+
+        after( && exp-220 && One && , && exp-227 && About && 446 && — && criterion && `04e08a00`
+        && are && Commitments && 369 && 184 && 61 && 68 && 20 && 21 && 15 && , && Commitments
+        && 369 && 185 && 61 && 68 && 20 && 21 && 14 && Hypotheses && 176 && 29 && 31 && 58
+        && 17 && 7 && 30 && 2 && 2 && 0 && , && Hypotheses && 176 && 29 && 31 && 57 && 17
+        && 7 && 30 && 2 && 2 && 0 && 1 && Experiments && 155 && 43 && 36 && 50 && 12 && 11
+        && 3 && 0 && , && Experiments && 156 && 43 && 36 && 50 && 12 && 11 && 3 && 0 && 1
+        && packing-validate'
+      : count: 1
+        total_seconds: 150.713
+        median_seconds: 150.713
+        max_seconds: 150.713
+      packing-ledger && devtools.close_session && packing-validate:
+        count: 1
+        total_seconds: 148.397
+        median_seconds: 148.397
+        max_seconds: 148.397
+      ? python && its && open(p,w).write(s) && value && new && nine && not && packing-ledger
+        && devtools.render_agenda_map && devtools.close_session && packing-validate
+      : count: 1
+        total_seconds: 148.348
+        median_seconds: 148.348
+        max_seconds: 148.348
+      ? "gzip && ls && the && python && open(p,w).write(s) && def && assert && [exp-228](,\
+        \ && exp-230-h241-n12-additive-ceiling-3-9609.md) && 12 && target && H-241 && Cutting\
+        \ && No && row && unresolved && )\nafter( && [exp-228](, && exp-229-h240-n21-point-certificate-122-25.md)\
+        \ && 21 && target && H-240 && Column && RETAINABLE && 1,228 && mass && register &&\
+        \ accepted && )\nafter( && exp-228 && , && exp-230 && About && three && 9000 && —\
+        \ && timebox && `69dac09a` && )\nafter( && exp-228 && , && exp-229 && One && 6414\
+        \ && — && criterion && `69dac09a` && )\nfor hid,st,claim in [(H-240,confirmed,A &&\
+        \ registration && are && Commitments && 369 && 186 && 61 && 68 && 19 && 21 && 14 &&\
+        \ , && Commitments && 369 && 187 && 62 && 68 && 17 && 21 && 14 && ),\n ( && Hypotheses\
+        \ && 176 && 30 && 31 && 56 && 17 && 7 && , && Hypotheses && 176 && 31 && 31 && 56\
+        \ && 18 && 5 && ),\n ( && Experiments && 157 && 44 && 36 && 50 && , && Experiments\
+        \ && 159 && 45 && 36 && 51 && open(p,w).write(s) && packing-ledger && devtools.close_session\
+        \ && packing-validate"
+      : count: 1
+        total_seconds: 145.525
+        median_seconds: 145.525
+        max_seconds: 145.525
+      perl && python && growth-cone && capped && open(p,w).write(\n.join(lines)) && packing-validate:
+        count: 1
+        total_seconds: 143.95
+        median_seconds: 143.95
+        max_seconds: 143.95
+      ? python && the && nothing && consolidate && sha256 && each && the && 177 && 79 && ruff
+        && digests && the && devtools.render_agenda_map && devtools.close_session && packing-validate
+      : count: 1
+        total_seconds: 142.724
+        median_seconds: 142.724
+        max_seconds: 142.724
+      devtools.render_document_map && packing-ledger && make && packing-validate && git && git && git:
+        count: 1
+        total_seconds: 141.434
+        median_seconds: 141.434
+        max_seconds: 141.434
+      ? Commitments && 372 && 190 && 61 && 68 && 17 && 21 && 15 && Commitments && 372 && 191
+        && 61 && 68 && 17 && 21 && 14 && packing-validate && make && git && git && restore
+        && git
+      : count: 1
+        total_seconds: 139.878
+        median_seconds: 139.878
+        max_seconds: 139.878
+      devtools.render_document_map && packing-ledger && devtools.render_agenda_map && packing-validate:
+        count: 1
+        total_seconds: 127.583
+        median_seconds: 127.583
+        max_seconds: 127.583
+      make && packing-validate && git && git && git && git:
+        count: 1
+        total_seconds: 125.44
+        median_seconds: 125.44
+        max_seconds: 125.44
+      python && open(p,w).write(s) && packing-validate:
+        count: 1
+        total_seconds: 117.726
+        median_seconds: 117.726
+        max_seconds: 117.726
+      ? X-046 && the && the && devtools.render_document_map && devtools.close_session && packing-validate
+        && violation && STEPS? && PASSED) && drift
+      : count: 1
+        total_seconds: 115.78
+        median_seconds: 115.78
+        max_seconds: 115.78
+      ? "project && four && dedup && python && def && [exp-227](, && exp-228-h238-descent-filtered-census.md)\
+        \ && 11 && target && H-238 && Descent-filtered && No && new && accepted && )\nafter(\
+        \ && exp-227 && , && exp-228 && About && census && 3720 && — && criterion && `84e41069`\
+        \ && are && Commitments && 369 && 185 && 61 && 68 && 20 && 21 && 14 && , && Commitments\
+        \ && 369 && 186 && 61 && 68 && 19 && 21 && 14 && ),\n ( && Hypotheses && 176 && 29\
+        \ && 31 && 57 && , && Hypotheses && 176 && 30 && 31 && 56 && ),\n ( && Experiments\
+        \ && 156 && 43 && , && Experiments && 157 && 44 && open(p,w).write(s) && packing-validate"
+      : count: 1
+        total_seconds: 114.375
+        median_seconds: 114.375
+        max_seconds: 114.375
+      python && assert && open(p,w).write(s) && packing-validate:
+        count: 1
+        total_seconds: 113.385
+        median_seconds: 113.385
+        max_seconds: 113.385
+      git && sync && packing-validate && pytest:
+        count: 1
+        total_seconds: 110.913
+        median_seconds: 110.913
+        max_seconds: 110.913
+      ? "python && def && assert && [exp-230](, && exp-231-h236-rung-zero-cell-tree.md) &&\
+        \ 11 && target && H-236 && 198 && three && no && abandoned && )\nafter( && exp-230\
+        \ && , && exp-231 && 3,300 && 23827 && — && timebox && `821b0e30` && are && Commitments\
+        \ && 369 && 187 && 62 && 68 && 17 && 21 && 14 && , && Commitments && 369 && 187 &&\
+        \ 63 && 68 && 17 && 21 && 13 && ),\n (56 && 18 && 5 && 30 && 2 && 2 && ,55 && 18 &&\
+        \ 5 && 30 && 2 && 3 && ),\n ( && Experiments && 159 && 45 && 36 && 51 && 12 && 11\
+        \ && 3 && , && Experiments && 160 && 45 && 36 && 51 && 12 && 11 && 4 && open(p,w).write(s)\
+        \ && packing-validate"
+      : count: 1
+        total_seconds: 109.196
+        median_seconds: 109.196
+        max_seconds: 109.196
+      packing-ledger && devtools.render_agenda_map && packing-validate:
+        count: 1
+        total_seconds: 105.526
+        median_seconds: 105.526
+        max_seconds: 105.526
+      make && packing-validate && pytest:
+        count: 1
+        total_seconds: 103.335
+        median_seconds: 103.335
+        max_seconds: 103.335
+      perl && make && devtools.close_session && packing-validate && violation && STEPS? && PASSED) && drift:
+        count: 1
+        total_seconds: 102.854
+        median_seconds: 102.854
+        max_seconds: 102.854
+      ? Commitments && 372 && 189 && 61 && 68 && 17 && 21 && 16 && Commitments && 372 && 190
+        && 61 && 68 && 17 && 21 && 15 && packing-validate && git && git && frontier, && git
+      : count: 1
+        total_seconds: 99.9
+        median_seconds: 99.9
+        max_seconds: 99.9
+      pytest && make && git:
+        count: 1
+        total_seconds: 97.191
+        median_seconds: 97.191
+        max_seconds: 97.191
+      python && assert && devtools.close_session && packing-ledger && packing-validate:
+        count: 1
+        total_seconds: 97.19
+        median_seconds: 97.19
+        max_seconds: 97.19
+      python && assert && assert && open(p,w).write(s) && open(p,w).write(s) && packing-validate:
+        count: 1
+        total_seconds: 94.9
+        median_seconds: 94.9
+        max_seconds: 94.9
+      perl && devtools.close_session && git && packing-validate:
+        count: 1
+        total_seconds: 94.345
+        median_seconds: 94.345
+        max_seconds: 94.345
+      packing-ledger && devtools.render_agenda_map && devtools.close_session && packing-validate:
+        count: 1
+        total_seconds: 94.07
+        median_seconds: 94.07
+        max_seconds: 94.07
+    by_command_family:
+      toolchain:
+        count: 72
+        total_seconds: 4102.653
+        median_seconds: 12.543
+        max_seconds: 601.786
+      other:
+        count: 115
+        total_seconds: 2583.165
+        median_seconds: 1.486
+        max_seconds: 345.687
+      project:
+        count: 42
+        total_seconds: 2527.464
+        median_seconds: 16.914
+        max_seconds: 437.554
+      vcs:
+        count: 59
+        total_seconds: 1001.846
+        median_seconds: 3.164
+        max_seconds: 408.188
+      inspection:
+        count: 129
+        total_seconds: 191.237
+        median_seconds: 0.254
+        max_seconds: 75.886
+      filesystem:
+        count: 7
+        total_seconds: 170.545
+        median_seconds: 2.08
+        max_seconds: 152.844
+      shell:
+        count: 4
+        total_seconds: 7.031
+        median_seconds: 1.728
+        max_seconds: 2.0
+    invoked:
+      head: 349
+      cd: 249
+      grep: 247
+      tail: 205
+      sed: 129
+      timeout uv run packing-validate: 70
+      ls: 63
+      cut: 49
+      echo: 46
+      wc: 43
+      date: 40
+      git log: 39
+      git status: 39
+      python: 36
+      ',': 36
+      sleep: 35
+      cat: 32
+      awk: 32
+      git add: 32
+      open(p,w).write(s): 29
+      sort: 28
+      python -m devtools.close_session: 27
+      git push: 27
+      the: 27
+      python3: 25
+      —: 24
+      Commitments: 23
+      '21': 23
+      '68': 21
+      make format: 21
+      timeout uv run pytest: 20
+      assert: 20
+      pgrep: 20
+      gh pr: 19
+      git diff: 19
+      uv run packing-ledger render: 19
+      git commit: 19
+      '17': 19
+      Sessions: 18
+      cp: 18
+      '61': 17
+      '2': 17
+      Session: 13
+      '59': 12
+      '156': 12
+      '369': 12
+      python -m devtools.render_agenda_map: 12
+      Experiments: 12
+      du: 12
+      gh run: 12
+      exit: 12
+      all: 12
+      '##': 11
+      '11': 11
+      git worktree: 10
+      '1': 10
+      '31': 10
+      '30': 10
+      ? ')
+
+        after('
+      : 10
+      uptime: 10
+      ps: 9
+      violation: 9
+      '14': 9
+      Hypotheses: 9
+      target: 9
+      ? "),\n ("
+      : 9
+      'true': 9
+      tbd create: 8
+      def: 8
+      '5': 8
+      '176': 8
+      '0': 8
+      uv run python -m devtools.render_pr_rollup: 8
+      '12': 8
+      uniq: 8
+      gzip: 8
+      '157': 8
+      '97': 8
+      A: 7
+      '36': 7
+      '18': 7
+      '13': 7
+      git show: 6
+      git checkout: 6
+      '96': 6
+      STEPS: 6
+      STEPS?: 6
+      ^: 6
+      '3': 6
+      What: 6
+      'No': 6
+      Complete: 6
+      '**retire-success**': 6
+      '**continue**': 6
+      Result: 6
+      uv run python -m devtools.check_pr_description: 6
+      criterion: 6
+      are: 6
+      '51': 6
+      run: 6
+      timeout uv run python -m devtools.build_known_best_atlas: 6
+      '60': 6
+      '189': 6
+      '372': 6
+      n11: 5
+      perl: 5
+      drift: 5
+      PASSED): 5
+      blocked: 5
+      '45': 5
+      '58': 5
+      open: 5
+      uv run python -m devtools.log_rollup: 5
+      three: 5
+      Work: 5
+      Evidence: 5
+      Why: 5
+      Disposition: 5
+      Area: 5
+      Principal: 5
+      merge: 5
+      its: 5
+      (nohup: 5
+      'no': 5
+      gh workflow: 5
+      '32': 5
+      git fetch: 4
+      'path:': 4
+      python -m devtools.render_document_map: 4
+      '19': 4
+      '20': 4
+      '15': 4
+      '29': 4
+      '7': 4
+      mkdir: 4
+      a: 4
+      In: 4
+      Research: 4
+      FAILED: 4
+      accepted: 4
+      exp-228: 4
+      exp-230: 4
+      '187': 4
+      '198': 4
+      exp-231: 4
+      tbd sync: 4
+      merge-base: 4
+      pmset: 4
+      '55': 4
+      '{print': 3
+      tbd show: 3
+      phase: 3
+      fail: 3
+      printf: 3
+      error: 3
+      '155': 3
+      .*: 3
+      The: 3
+      Two: 3
+      uv run ruff check: 3
+      uv run ruff format: 3
+      uv run basedpyright: 3
+      One: 3
+      exp-227: 3
+      About: 3
+      '43': 3
+      '50': 3
+      tr: 3
+      (cd: 3
+      new: 3
+      '56': 3
+      git: 3
+      '79': 3
+      H-241: 3
+      'resumed: sub': 3
+      git hash-object: 3
+      '4': 3
+      owner: 3
+      registered: 3
+      '`': 3
+      and: 3
+      sort): 3
+      comm: 3
+      jq: 3
+      completed: 3
+      open(p,w).write(t): 3
+      from: 3
+      it: 3
+      rm: 3
+      git merge: 3
+      .bucket]: 3
+      group_by(.): 3
+      'map({(.[0]):': 3
+      git branch: 3
+      bookkeeping: 3
+      '190': 3
+      '191': 3
+      '46': 3
+      '37': 3
+      certification: 3
+      '98': 3
+      '247': 3
+      Price: 3
+      mismatch: 3
+      session-156: 2
+      expected: 2
+      <<EOF: 2
+      kill: 2
+      state: 2
+      uv run packing-validate: 2
+      X-046: 2
+      Explorations: 2
+      '184': 2
+      not: 2
+      .venv: 2
+      H-236-n11-fixed-angle-global-optimality-at-trump.md): 2
+      rung: 2
+      f: 2
+      Review: 2
+      Agenda: 2
+      'Running:': 2
+      agenda-042-overnight-n11-settlement-and-low-n-angles.md): 2
+      idea: 2
+      find: 2
+      shaped: 2
+      '246': 2
+      four: 2
+      python -m devtools.render_research_tables: 2
+      /: 2
+      '185': 2
+      '57': 2
+      xargs: 2
+      read: 2
+      Error: 2
+      full: 2
+      pkill: 2
+      '186': 2
+      '44': 2
+      select(.headSha: 2
+      frozen: 2
+      each: 2
+      '177': 2
+      '{path:': 2
+      '[exp-228](,': 2
+      unresolved: 2
+      RETAINABLE: 2
+      register: 2
+      timebox: 2
+      '`69dac09a`': 2
+      '62': 2
+      '159': 2
+      Fable: 2
+      mv: 2
+      H-236: 2
+      '63': 2
+      '160': 2
+      (other): 421
+    invoked_families:
+      other: 1532
+      inspection: 1162
+      shell: 383
+      vcs: 258
+      project: 179
+      toolchain: 134
+      filesystem: 29
+    by_shell_shape:
+      compound:
+        count: 291
+        total_seconds: 5380.524
+        median_seconds: 1.606
+        max_seconds: 601.786
+      python_heredoc:
+        count: 75
+        total_seconds: 3802.375
+        median_seconds: 6.884
+        max_seconds: 553.878
+      python_inline:
+        count: 12
+        total_seconds: 1124.88
+        median_seconds: 5.018
+        max_seconds: 408.188
+      pipeline:
+        count: 31
+        total_seconds: 267.305
+        median_seconds: 1.524
+        max_seconds: 89.959
+      heredoc:
+        count: 9
+        total_seconds: 14.869
+        median_seconds: 1.393
+        max_seconds: 4.291
+      simple:
+        count: 12
+        total_seconds: 6.233
+        median_seconds: 0.171
+        max_seconds: 1.652
+    by_thinking_level:
+      high:
+        count: 334
+        total_seconds: 6383.428
+        median_seconds: 1.487
+        max_seconds: 601.786
+      xhigh:
+        count: 160
+        total_seconds: 4254.673
+        median_seconds: 1.86
+        max_seconds: 553.878
+    shell_traits:
+      pipes: 376
+      redirects_output: 146
+      substitutes: 35
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 86
+    queue_operations:
+      enqueue: 250
+      remove: 144
+      dequeue: 99
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

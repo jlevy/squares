@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-09-22'
+last_reviewed: '2026-09-24'
 evidence:
   - id: E-wand125-point-source-replay
     claim: lower-bound
@@ -3946,6 +3946,78 @@ evidence:
       rather than climbed, so there is no weaker retained certificate at this size to
       compare against.
     source_reviewed: '2026-09-05'
+  - id: E-n021-fractional-certificate-122-25
+    claim: lower-bound
+    source_reviewed: '2026-09-23'
+    scope:
+      n_values:
+        - 21
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: audited-here
+    novelty: apparently-novel
+    novelty_basis:
+      corpus: >-
+        The retained literature archive under packing/resources/ and the frontier source
+        register, which for n = 21 hold Nagamochi's 2005 closed form, Bentz's 2016 proof at
+        n = 22, Friedman's DS7 survey with its opaque Table 2 decimal 4.7438, and this
+        project's own T-020 at 24/5 and T-021 at 97/20. The frozen arXiv, Crossref,
+        OpenAlex, and Zenodo search receipts are retained at
+        resources/web/literature-refresh-2026-09-05/README.md, and the 2026-09-07 DS7
+        source audit at frontier/ds7-lower-bound-audit.json.
+      searched: >-
+        No new external search was run for this registration. The corpus search is
+        E-n020-fractional-certificate-97-20's, extended by the DS7 audit, and it holds no
+        lower bound on s(21) above T-021's 97/20; the strongest external report is
+        Friedman's 4.7438, below both project rungs. This rung raises this project's own
+        value rather than a published one. The 2026-09-23 certificate review restates that
+        reading from the same corpus and ran no search of its own.
+      novel_object: >-
+        The certificate and the side. The method is Burns's, the parametrisation
+        Massaccesi's, and the previous rung this project's own; what is new is a
+        certificate at 122/25, found by the stock generator on auto grids (34, 46, 56) at
+        inset 1/2 with no seed and no windows, after a T-021-seeded site set at the same
+        side ran out its deadline unconverged.
+      gaps: >-
+        The refresh is a bounded public-record search, not an exhaustive review of
+        subscription-only indexes, theses, proceedings, non-English or unindexed sources,
+        private correspondence, or unpublished work, and it was not repeated between the
+        DS7 audit and this registration. The label records apparent novelty within that
+        search, not absolute priority.
+    certificate: cases/n21_fractional_certificate/certificate.json
+    replay: uv run --frozen --all-extras python -m cases.n21_fractional_certificate
+    replay_status: passed
+    limitations: >-
+      Decides five conditions in exact rational arithmetic over 1228 atoms on a
+      D4-symmetric site set: the atom multiset is closed under the container's D4 group,
+      the total mass is 5036431/250000 = 20.145724, the 182-direction net produced by
+      181 steps reaches pi/4, containment B(1 + D) < 1 holds at B = 9977/10000 with
+      D = 207107/90500000, and every reachable event cell at every net direction carries
+      mass at least 1, the least being 250001/250000.
+      The bound proved is the container side itself, 122/25.
+      One size, and not by monotonicity. Only Condition 2 mentions n among the five
+      conditions, so this atom set certifies its side for every integer strictly above
+      its own mass, which is 21 and upward. It says nothing about n = 20, where T-021's
+      97/20 remains the register's bound; from n = 22 on the register already holds 5, so
+      the certificate is true there and weaker.
+      It was decided from its bytes by two verifiers that fail differently. The exact
+      event-cell sweep accepted in 15 s at 250001/250000; the interval branch and bound
+      certified all 363 doubled-net directions in 4,289,657 boxes with none stalled and
+      an enclosure equal to that same value, in 67 s. Both were run by this repository
+      through devtools.decide_certificate on the frozen file, and the sha256 the gate
+      printed on acceptance is
+      b230f7cd6806343f115331caf53f02019cc634a8959359684581835a0cc7fb0f. The replay this
+      entry names was run again at registration on the retained copy, one worker, and
+      printed five PASS lines and VERIFIED for every m >= 21 in 71 s.
+      The site set is BC-191 auto grids (34, 46, 56) at inset 1/2 with no seed and no
+      windows; the row loop converged below twenty-one in 36 LP rounds and 691 s. The
+      file's least_cell_mass was declared by a one-worker sweep before the gate ran, which
+      changed that one field from null; the gate treats a declaration as something to
+      check, never as an input. The receipt records instrument commit 69dac09a; the run
+      was relaunched after 84e410691, and the generator, declaration and gate paths are
+      byte-identical between the two.
   - id: E-fractional-interval-decision
     claim: lower-bound
     scope:
@@ -3985,11 +4057,14 @@ evidence:
       pi/2 - theta_k, 361 directions -- so the D4 reflection argument is never invoked
       and Condition 1 is not needed at all, which matters because interval arithmetic cannot
       establish the equality Condition 1 asserts.
-      Results, 361 of 361 directions certified in every case and none stalled. The five
-      retained top rungs, decided from their frozen bytes: n = 20 at 24/5, 2260 atoms,
-      5,638,343 boxes; n = 18 at 4679/1000, 957 atoms, 3,449,053 boxes; n = 17 at 459/100,
+      Results: every direction of each doubled net certified and none stalled, 361
+      directions on the 180-step nets and 363 on the 181-step nets the n = 18 and n = 21
+      certificates use. The six retained top rungs, decided from their frozen bytes:
+      n = 21 at 122/25, 1228 atoms, 4,289,657 boxes; n = 20 at 97/20, 1680 atoms,
+      4,850,263 boxes; n = 18 at 4679/1000, 957 atoms, 3,449,053 boxes; n = 17 at 459/100,
       1184 atoms, 3,683,951 boxes; n = 12 at 99/25, 2097 atoms, 4,448,751 boxes; n = 11
-      at 381/100, 1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 18 at
+      at 381/100, 1121 atoms, 1,570,831 boxes. Lower rungs and the control: n = 20 at 24/5,
+      2260 atoms, in 5,638,343 boxes, n = 18 at
       1871/400 in 2,997,789 boxes, n = 18 at
       187/40 in 2,684,845 boxes, n = 18 at
       467/100 in 2,543,909 boxes, n = 17 at 229/50 in
@@ -4002,8 +4077,9 @@ evidence:
       In minimisation mode every enclosure of the least covered mass has width zero and
       equals the exact verifier's value to the digit: 4001/4000 at n = 11's top rung,
       12501/12500 at n = 12's, 200009/200000 at n = 17's, 200001/200000 at n = 18's
-      and 50007/50000 at n = 20's, each matching the
-      least_cell_mass its own certificate declares, and 250001/250000 at the 1871/400
+      and n = 20's, and 250001/250000 at n = 21's, each matching the
+      least_cell_mass its own certificate declares, and 50007/50000 at the 24/5 rung,
+      250001/250000 at the 1871/400
       rung, 4000013/4000000 at the 187/40
       rung, 12501/12500 at the 229/50 rung,
       50003/50000 and 100003/100000 at the earlier n = 11 and n = 12 rungs. Refusals: the n = 12 atoms in a
@@ -4289,6 +4365,225 @@ evidence:
         As for the exact decision; no separate search.
       gaps: >-
         As for the exact decision.
+
+  - id: E-n011-h236-rung0-reduction
+    claim: derived-structure
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: apparently-novel
+    source_reviewed: '2026-09-24'
+    certificate: >-
+      Off-record: the closed rung-0 cell tree h236.jsonl.gz with its 256 subtree files
+      h236.sub/sub-00000.jsonl.gz to sub-00255.jsonl.gz (257 files, 7.8 GB), archived at
+      /Volumes/spud-ext1/agent-scratch/squares-archives/rung0-h236-2026-09-24 and pinned by
+      campaign/series/series-000-smoke-and-calibration/results/agenda-042/exp-232-h236-tree-manifest.sha256
+      (SHA-256 45c2a0d24356bfa1f2c03deeda895eb5fb4358b6528e1d3b36e284b09f565265)
+    replay: >-
+      uv run --frozen --all-extras --group dev python -m cases.trump11.fixed_angle_tree_check
+      /Volumes/spud-ext1/agent-scratch/squares-archives/rung0-h236-2026-09-24/h236.jsonl.gz
+      --workers 10
+    replay_status: passed
+    proof:
+      source: >-
+        docs/project/reviews/review-2026-09-23-rung0-certificate-contract.md, the W2
+        review of the producer packing/cases/trump11/fixed_angle_tree.py and the
+        independent reader fixed_angle_tree_check.py at their frozen digests, and
+        docs/project/reviews/review-2026-09-24-rung0-closed-tree.md, the W2 review of the
+        closed tree.
+      theorem: >-
+        In the family of eleven unit squares with six at orientation 0 and five sharing
+        one orientation modulo pi/2 whose half-tangent lies in
+        [91442076901/250000000000, 73154061521/200000000000], every packing of side at
+        most the certificate header's U_hi lies, after the declared quarter turn and
+        relabelling, strictly within rho = 808514697/200000000000 of Trump's labelled
+        image in every centre coordinate; every other packing in the family has side
+        greater than U_hi.
+      scope: >-
+        One box of half-tangents, containing Trump's t* +- 10^-6, and the labelled image
+        with rotation 1 and labels [3,4,2,5,0,1,8,10,6,9,7]. Nothing about any other
+        tilt, about orientation classes other than six plus five, or about s(11).
+      pinpoints: >-
+        The contract review's six obligations: core containment, separating axes,
+        symmetry rows, leaf certificates, Trump-degenerate leaves and tree completeness.
+        The closed-tree review's closure-condition table, its re-replay table and its
+        registration section, which state the claim this entry carries.
+      assumptions:
+        - >-
+          Rotational cores: the square core at the box-midpoint half-tangent, of side
+          floor(lambda 1e15)/1e15, lies in each tilted square at every half-tangent in
+          the box. Rotations are exact at rational half-tangents and the swept window is
+          below pi/2.
+        - >-
+          The symmetry lemma: a quarter turn about the container's centre keeps the
+          tilted class's orientation modulo pi/2, so one of the four turns puts the
+          tilted centroid in the closed upper-right quadrant, and ordering each class by
+          x + y/4 is a relabelling. Trump's declared image is the only orbit element that
+          satisfies every row.
+        - >-
+          Each leaf's dual bound holds for any nonnegative multiplier on the box [0,4],
+          which contains every relevant packing, and is compared strictly with a 45-digit
+          upper end of U that the reader brackets again itself.
+        - >-
+          Every branch's children exhaust its disjunction, and the 256 subtree files
+          attach to exactly the frontier paths the top tree records.
+      audit_record: >-
+        Two Fable W2 reviews: the 2026-09-23 contract review, and the 2026-09-24
+        closed-tree review (BC-381, max thinking), which replayed eleven subtrees again
+        through the reader's own per-subtree path and itself computed the box comparison
+        and the U bracket the reader does not perform.
+    novelty_basis:
+      corpus: >-
+        The repository's recorded literature as the 2026-09-24 closed-tree review read
+        it: packing/resources/README.md, the n = 11 research bundle's files 12, 15 and 16
+        under packing/resources/papers/n11-complete-research-bundle-2026-09-07/source_packet/,
+        frontier/n-011.md, Stromquist 1984 and 2003, and Friedman's DS7.
+      searched: >-
+        Restricted-orientation and fixed-angle optimality statements at n = 11, and any
+        equality case for Trump's packing. The nearest prior is Stromquist 2003's Theorem
+        3, a lower bound of 2 + 4 sqrt(2)/3, about 3.885618, for packings whose squares
+        all sit at 0 or 45 degrees: an earlier restricted-orientation statement at
+        n = 11 that is not attained and whose family does not contain Trump's packing.
+        The local results at Trump's pose, exp-013's rigidity and BC-240's radius, are
+        local in one chart and global in no family.
+      novel_object: >-
+        A machine-verified reduction of one restricted family, six axis squares and five
+        at a common tilt within 10^-6 of Trump's in the half-tangent, to the rho-ball of
+        Trump's labelled pose. Composed with BC-240 it gives the first optimality
+        statement with an equality case for a family containing Trump's packing. The
+        method is a standard exact branch and bound; what is new is the closed
+        certificate for this family.
+      gaps: >-
+        Neither the review nor this registration ran an external search. Unarchived work
+        on fixed-angle or few-orientation optimality at n = 11, subscription-only
+        indexes, theses and non-English sources would not be found. The label records
+        apparent novelty within that corpus, not priority.
+    limitations: >-
+      The certificate is off-record. The tree lives outside the repository and outside
+      every gate; the record keeps its SHA-256 manifest of 259 entries (the 257 tree
+      files, the frozen-instrument record and the verdict), the reader, the frozen record
+      and the verdict. Replaying it needs the archive.
+      The replay this entry names was run by Session 157 on 2026-09-24, from the tree's
+      working copy, in 2,414 s on 10 workers, with the reader at git blob c4ae4e48,
+      unchanged at this head: verdict closed, no unresolved leaf, 19,883,887 branch
+      nodes, 21,834,304 dual-bound and 97,722,555 Farkas leaves, three Trump-degenerate
+      leaves in subtrees 93, 109 and 117, smallest certified margin 6.04e-10 above U's
+      upper end, and largest enclosure reach 2.93e-5 beyond the matched image. It is
+      retained as exp-232-h236-reader-final2.json.gz, whose decompressed bytes hash to
+      1a04c97a2f1583062ec69f66fbfcf3a99b6840b1e4db8533eac3816bb227c8aa.
+      At registration the full reader was not run again. The manifest was checked
+      against the archive with shasum -a 256 -c, and all 259 entries passed. The
+      closed-tree review had replayed eleven subtrees again, holding 17,557,523 of the
+      tree's 139,441,005 records, and accepted every one.
+      The producer is identified by frozen digests, not by a head. The frozen run M1
+      wrote 89 surviving subtree files with fixed_angle_tree.py at git blob af1179a5,
+      and the resume-only Amendment 1 bytes 9c92406 wrote the other 167 (R1 88, R3 21,
+      R4 58). The file changed again after the tree was produced, when 1a6316a52 added
+      71 lines for a box preset.
+      Producer and reader share one trust base: cases/trump11/packing.py,
+      sqpack.field.NumberField, Python's Fraction, and the gzip and JSON readers.
+      The reader does not compare the declared half-tangent box with t* +- 10^-6. The
+      closed-tree review did, with u isolated to 10^-60: the left end is 6.8e-13 below
+      and the right end 3.2e-13 above the registered interval.
+      The n = 11 negative control is producer-level only. The full tree at U + 10^-3
+      stopped at its 100,000-node cap with 57 unresolved leaves, all node-cap and none
+      open. The Trump-cell control has no reader verdict, because the reader refuses a
+      non-root cell. False acceptance is guarded by reader-checked controls instead:
+      control-axis-5-above returns incomplete with an open leaf, control-n5-capture
+      closes only as a capture, and a tampering test is in tests/test_fixed_angle_tree.py.
+      The angle window is narrow: the tilt ranges over 2.0e-6 radians. Nothing follows
+      for another tilt, for H-112's full family, or for s(11).
+      The reduction does not invoke BC-240. The reader accepts a Trump-degenerate leaf
+      only after checking by exact arithmetic that the cell's packings lie within rho of
+      the labelled image.
+
+  - id: E-n011-trump-local-theorem-first-clause
+    claim: derived-structure
+    scope:
+      n_values:
+        - 11
+    assurance: verified
+    method: proof-audited
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    source_reviewed: '2026-09-24'
+    certificate: campaign/series/series-000-smoke-and-calibration/results/bc-240-trump-local-theorem.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.review_trump_local_theorem
+    replay_status: passed
+    proof:
+      source: >-
+        packing/cases/trump11/isolation-theorem.md, the BC-240 terminal author packet, with
+        its retained records bc-240-trump-local-theorem.json, bc-199-trump-isolation-radius.json
+        and exp-013-h-026-trump-tangent.json under
+        packing/campaign/series/series-000-smoke-and-calibration/results/.
+      theorem: >-
+        Fixed-side isolation, the packet's first clause: if z is a labelled packing of the
+        eleven closed unit squares in [0,U]^2 and ||z - z*||_inf < rho_row =
+        808514697/200000000000 in the anchored 33-coordinate chart, then z = z*, Trump's
+        exact labelled pose. Because z* touches all four walls, a packing of the same
+        labelled pose in [0,s']^2 with s' <= U inside that ball has s' = U.
+      scope: >-
+        One labelled, anchored, fixed-side chart at Trump's exact witness, on the declared
+        curvature box ||z - z*||_inf <= 1/64, with labels and angle representatives fixed
+        and no quotient by symmetry. H-236 uses only the first clause and never the
+        quadratic side constant C_row. Nothing global follows from it.
+      pinpoints: >-
+        isolation-theorem.md: the Theorem's first clause, and Proof From the Retained
+        Certificates (the 128 derivative-distinct branches, the positive stresses with
+        A_b^T lambda_b = 0 and exact rank 33, the modulus kappa_b over the 66 faces of
+        the unit cube, the per-row curvature bounds, and the gap and branch-completeness
+        guards). The BC-241 review packet bc-241-trump-local-theorem-review.json. The
+        closure review's What Ran and Residuals.
+      assumptions:
+        - >-
+          The per-branch weighted moduli are lower bounds. BC-199 retains the argmin
+          face's exact vertex but not the other 65 faces' dual lower bounds; those were
+          computed again (the 2026-09-24 generator replay, and capture_radius on all
+          8,448 faces) and are not retained.
+        - >-
+          The inactive-feature gap cap 5875508797/1000000000000, from gap_radius and the
+          box-aware Lipschitz constants, is single-source. It exceeds rho_row by a factor
+          of 1.45 and does not bind.
+        - >-
+          exp-013's exact positive stresses and rank-33 certificates for all 128
+          branches, which E-n011-trump-local-rigidity replays.
+        - >-
+          The exact witness in packing/cases/trump11/packing.py, with U a root of its
+          degree-8 minimal polynomial.
+      audit_record: >-
+        BC-241, a source-distinct review of the BC-240 packet, accepted it on 2026-09-06
+        at retained-record-dependent local scope
+        (campaign/series/series-000-smoke-and-calibration/results/bc-241-trump-local-theorem-review.json,
+        checker devtools/review_trump_local_theorem.py). Its closure review,
+        docs/project/reviews/review-2026-09-24-bc241-closure.md (BC-382), then replayed
+        the full radius generator, reproducing all 4,954 retained BC-199 values, and the
+        method-distinct capture_radius control matched the weighted modulus on all 8,448
+        faces to 32 digits.
+    limitations: >-
+      The replay this entry names, the source-distinct BC-241 checker, binds its eight
+      inputs byte for byte to review revision f9ba790a. A status-line edit of
+      isolation-theorem.md in 4199eab69 briefly broke that binding; the file was restored to
+      its reviewed bytes and the checker accepts at this head: 128 branches, 56 distinct
+      rows, all three falsifying mutations rejected. It also accepted at 99582155c on
+      2026-09-24, retained as bc382-bc241-checker-rerun.json.gz.
+      The proof's steps are prose, and only its radius computation is machine-checked.
+      The radius generator cases.trump11.isolation_radius has no replay mode. Its full
+      2026-09-24 run, 474.5 s and value-for-value on all 4,954 retained values, is a
+      retained comparison (bc382-isolation-radius-replay.json.gz), not a replay command.
+      That run is an independent execution, not an independent implementation.
+      capture_radius is a second implementation of the face layer only; the checker is
+      source-distinct for rows, curvatures, stresses and the aggregate arithmetic.
+      Two residuals from the closure review remain, and neither touches the rung leaves.
+      Per-face dual witnesses are computed again on demand, not retained. The
+      inactive-feature gap cap is single-source and does not bind.
+      This entry makes no novelty statement. The novelty of the statement H-236 composes
+      from it is assessed on E-n011-h236-rung0-reduction.
 
   - id: E-wand125-n068-derived-lower
     claim: lower-bound

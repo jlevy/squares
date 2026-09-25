@@ -1,0 +1,11 @@
+# Session 157, H-241 round 2 (leg 4): warm from leg 3, more rows per round and a larger family support.
+cd packing
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+uv run --frozen --all-extras --group dev python -m devtools.run_fractional_cutting \
+  --n 12 --side 39609/10000 --shrink 9977/10000 \
+  --angle-limit 207107/500000 --steps 180 \
+  --minutes 345 --iterations 80 --cap 150 --support-cap 192 \
+  --rows-rounds 6 --rows-per-direction 6 --stop-on-covering-below-n \
+  --warm ../attic/agenda-042-lown/n12/leg3-state.json \
+  --log ../attic/agenda-042-lown/n12/leg4.log --state ../attic/agenda-042-lown/n12/leg4-state.json \
+  --freeze ../attic/agenda-042-lown/n12/leg4-family.json --json ../attic/agenda-042-lown/n12/leg4-summary.json

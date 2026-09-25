@@ -200,6 +200,18 @@ PRUNE = frozenset(
         # dependencies below these roots still return through snapshot_pruned_targets.
         ROOT / "benchmarks/math-startup/runs",
         ROOT / "benchmarks/math-startup/fixtures",
+        # Session 106's compressed validate archive is frozen historical bulk. The
+        # owning session names it once as a plain `outputs` path; no mutation target,
+        # registered command, test, devtool, result, document-map row or inline link
+        # opens it. The archive stays in Git, while the session record stays in every
+        # worker. On the combined native/reconciliation/W3 tree, retaining the archive
+        # put the portable snapshot at 167,851,810 bytes, 79,650 above the unchanged
+        # cap. After the support code and regression are included, omitting this exact
+        # 190,861-byte file leaves a 167,668,366-byte snapshot and 103,794 bytes of
+        # measured headroom without dropping a current proof or research artifact.
+        ROOT
+        / "campaign/agent-sessions/session-106-validation"
+        / "full-46ee41af-validate.tar.gz",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private
@@ -244,13 +256,21 @@ PRUNE = frozenset(
         # `tests/test_n11_corner_class_certificate.py` reach agenda 040; and
         # `devtools/check_class_record_claims.py` names agenda 040's directory outright.
         # No control drives any of those steps today, which makes pruning them safe now
-        # and a trap for whoever registers one of those checks as a control later. That
-        # leaves 036 and 039, worth 421,136 bytes between them, which does not pay for the
-        # two list entries.
+        # and a trap for whoever registers one of those checks as a control later. Agenda
+        # 036 remains too small to justify another exception. Agenda 039 joined this list
+        # with the W3 direction reviews: their retained reports and receipts add about
+        # 0.56 MiB to the same snapshot surface, while the native n11 sibling left only
+        # 403,826 bytes of headroom. An initial dependency probe found that pruning
+        # agenda 039's unused numerical bulk recovered about 415 KB after about 128 KB
+        # of linked and registered dependencies returned byte for byte. No control names
+        # the directory or opens its outputs. The files stay in Git; the worker keeps
+        # every document-map receipt reached through the checked SYNOPSIS and every
+        # registered result dependency. Session 155 retains the finished-tree measure.
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-031",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-033",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-034",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-035",
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-039",
         # Agenda 041 is the same retained-output class. The dependency audit recorded
         # in think-t1lk for PR 218 found no control or external code reader of its bulk
         # numerical output. Inline-linked receipts and registered artifacts still return
@@ -261,6 +281,16 @@ PRUNE = frozenset(
         # The receipt the register lists as an artifact returns through
         # linked_pruned_targets, as agenda 034's did.
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-041",
+        # Agenda 042 (Session 156) holds the overnight lanes' numerical receipts from the
+        # start, so its bulk never enters the ~107 KB of headroom PR 230 left. No control
+        # names it; its Markdown receipts return through linked_pruned_targets.
+        ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-042",
+        # The per-log cost rollups are 4.7 MB of harness telemetry, and every session adds
+        # a dozen. No control names a file under them, and validate_schemas only globs the
+        # directory, so a worker without them validates fewer datasets rather than failing.
+        # Session 156 measured the combined W3 and overnight tree at 168,208,704 bytes
+        # against the unchanged cap; this prune is the answer rather than raising it.
+        ROOT / "campaign/resource-usage",
         ROOT
         / "campaign/series/series-000-smoke-and-calibration/results/exp-201-arm-calibration",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/exp-202-round-1",

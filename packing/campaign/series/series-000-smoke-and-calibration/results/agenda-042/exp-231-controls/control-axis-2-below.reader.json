@@ -1,0 +1,26 @@
+{
+  "verdict": "closed",
+  "tree": "../attic/rung0/controls/control-axis-2-below.jsonl.gz",
+  "leaves": {
+    "b": 1,
+    "c": 3,
+    "f": 1
+  },
+  "subtree_files": 0,
+  "unresolved_by_reason": {},
+  "leaf_depths": {
+    "1": 4
+  },
+  "smallest_certified_margin": 0.001,
+  "largest_enclosure_reach_beyond_image": 0.0,
+  "statement": {
+    "family": "2 axis + 0 tilted",
+    "half_tangent_box": [
+      "0",
+      "0"
+    ],
+    "target_label": "2-1/1000",
+    "target_upper": "1999/1000"
+  },
+  "reader_seconds": 0.001
+}

@@ -1,0 +1,5 @@
+../attic/agenda-042-lown/n21/C-covering-declared.json: one-worker sweep: accepted=True failures=() least cell mass 250001/250000
+
+real	1m4.943s
+user	0m38.348s
+sys	0m0.196s

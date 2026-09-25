@@ -7,37 +7,37 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 154
+count: 158
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 100
+  sessions_measured: 104
   sessions_unmeasured: 54
   attributed:
-    rollups: 188
-    turns: 50776
-    tool_calls: 27914
-    tool_errors: 549
-    one_off_code: 4234
-    wall_hours: 436.81
+    rollups: 210
+    turns: 54585
+    tool_calls: 29955
+    tool_errors: 574
+    one_off_code: 4509
+    wall_hours: 491.56
   unattributed:
-    rollups: 61
-    turns: 13190
-    tool_calls: 7606
+    rollups: 64
+    turns: 13577
+    tool_calls: 7855
     tool_errors: 177
     one_off_code: 1122
-    wall_hours: 60.64
+    wall_hours: 61.29
   measured:
-    rollups: 249
-    turns: 63966
-    tool_calls: 35520
-    tool_errors: 726
-    one_off_code: 5356
-    wall_hours: 497.45
+    rollups: 274
+    turns: 68162
+    tool_calls: 37810
+    tool_errors: 751
+    one_off_code: 5631
+    wall_hours: 552.85
 codex_receipts:
-  attributed: 62
+  attributed: 64
   unattributed: 2
-  measured: 64
+  measured: 66
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -2603,3 +2603,93 @@ sessions:
     active_union_hours: 0.49
     wall_hours: 0.49
     snapshot_incomplete: true
+- id: session-155
+  title: "W3 Lower-Bound Proof Directions"
+  status: completed
+  primary_bead: think-4kov
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session-155-integration.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-155-creative.yaml
+    model_responses: 188
+    agent_hours: 1.52
+    active_union_hours: 1.49
+    wall_hours: 1.72
+    snapshot_incomplete: false
+  - path: packing/campaign/resource-usage/codex-task-tree-session-155-integration.yaml
+    model_responses: 634
+    agent_hours: 3.31
+    active_union_hours: 3.2
+    wall_hours: 3.2
+    snapshot_incomplete: true
+- id: session-156
+  title: "Overnight W3 Continuation, Planning and Research Loop"
+  status: completed
+  primary_bead: think-nbij
+  phases: 5
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  - packing/campaign/resource-usage/agent-a02d3ea2494f86951.yaml
+  - packing/campaign/resource-usage/agent-a13483195f4dfc5a9.yaml
+  - packing/campaign/resource-usage/agent-a43ecc4a5da6bff2f.yaml
+  - packing/campaign/resource-usage/agent-a4c84504ee430d506.yaml
+  - packing/campaign/resource-usage/agent-a52c911b359009127.yaml
+  - packing/campaign/resource-usage/agent-a75d58d431cb7a954.yaml
+  - packing/campaign/resource-usage/agent-a79d7c5283b8dfd07.yaml
+  - packing/campaign/resource-usage/agent-aa1c5d289c1525899.yaml
+  - packing/campaign/resource-usage/agent-aa76cdfe9b6c41496.yaml
+  - packing/campaign/resource-usage/agent-abbf45cef11131bb3.yaml
+  - packing/campaign/resource-usage/agent-ac14c344407b67eb0.yaml
+  - packing/campaign/resource-usage/agent-ac3c7beef82e81c76.yaml
+  - packing/campaign/resource-usage/agent-ad13995165f6a74fc.yaml
+  - packing/campaign/resource-usage/agent-af1805a9e25246340.yaml
+  - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
+  - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
+  turns: 3163
+  tool_calls: 1662
+  tool_errors: 22
+  one_off_code: 235
+  wall_hours: 52.86
+  codex_receipts: []
+- id: session-157
+  title: "Overnight CPU Runs, Finishing Rung 0 and Resuming the n12 Ceiling"
+  status: completed
+  primary_bead: think-ie35
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  turns: 1150
+  tool_calls: 494
+  tool_errors: 2
+  one_off_code: 87
+  wall_hours: 41.43
+  codex_receipts: []
+- id: session-158
+  title: "Lock In Rung 0, Close BC-241, Price Rung 1"
+  status: completed
+  primary_bead: think-svmp
+  phases: 1
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  - packing/campaign/resource-usage/agent-ab689e6e38eba4fc1.yaml
+  - packing/campaign/resource-usage/agent-a68e3e4eecaf16386.yaml
+  - packing/campaign/resource-usage/agent-ab7b154b8a93c1b73.yaml
+  - packing/campaign/resource-usage/agent-af2ba803dd233242c.yaml
+  - packing/campaign/resource-usage/agent-a3cc5d0580f6e2dce.yaml
+  turns: 1796
+  tool_calls: 873
+  tool_errors: 5
+  one_off_code: 127
+  wall_hours: 43.32
+  codex_receipts: []

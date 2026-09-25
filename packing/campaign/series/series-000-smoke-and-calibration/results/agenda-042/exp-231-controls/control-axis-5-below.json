@@ -1,0 +1,44 @@
+{
+  "preset": "control-axis-5-below",
+  "tree": "../attic/rung0/controls/control-axis-5-below.jsonl.gz",
+  "nodes_solved": 281,
+  "lp_solves": 941,
+  "leaves": {
+    "b": 70,
+    "c": 141,
+    "f": 70
+  },
+  "branch_nodes": 70,
+  "stopped": "complete",
+  "closed": true,
+  "wall_seconds": 0.116,
+  "nodes_per_second": 2432.4,
+  "closed_measure": 1.0,
+  "depth_histogram": {
+    "0": 1,
+    "1": 4,
+    "2": 12,
+    "3": 28,
+    "4": 44,
+    "5": 64,
+    "6": 72,
+    "7": 44,
+    "8": 8,
+    "9": 4
+  },
+  "leaf_depth_histogram": {
+    "1": 1,
+    "2": 5,
+    "3": 17,
+    "4": 28,
+    "5": 46,
+    "6": 61,
+    "7": 42,
+    "8": 7,
+    "9": 4
+  },
+  "max_lp_value_expanded": 2.916666666666669,
+  "max_enclosure_reach_beyond_image": 0.0,
+  "unresolved_sample": [],
+  "unresolved_recorded": 0
+}

@@ -1,0 +1,2017 @@
+{
+  "branches": [
+    {
+      "angle_faces_finite": 22,
+      "angle_faces_growth_lower_decimal": "0.0517714532056682325403293452347",
+      "branch": 0,
+      "directional_curvature": {
+        "angle_components_float": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          -1.0
+        ],
+        "decreasing_rows_never_recovering_to_second_order": 36,
+        "decreasing_rows_recovering": 5,
+        "face": {
+          "coordinate": 32,
+          "sign": -1
+        },
+        "largest_quadratic_over_half_K_float": 0.9963350818180988,
+        "rows": [
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.00680900762986845343916138865416",
+            "quadratic_over_half_K_float": 0.01925624329713929,
+            "recovery_scale_decimal": "0.209935729568389848550602177170",
+            "row": "wall:7:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.3523040849308797505167807024113",
+            "quadratic_over_half_K_float": 0.9963350818180988,
+            "recovery_scale_decimal": "0.00405744368446258090395941427104",
+            "row": "wall:10:right:corner-1"
+          },
+          {
+            "half_K": "9756268931/2000000000",
+            "linear_decimal": "-0.0197202170481113364692713014136",
+            "quadratic_decimal": "-0.0010205304648519932686761537243",
+            "quadratic_over_half_K_float": -0.0002092050705181598,
+            "recovery_scale_decimal": null,
+            "row": "pair:0-6:owner-6:axis-1:second-before-first:vertices-6.0-0.2"
+          },
+          {
+            "half_K": "4867507011/1000000000",
+            "linear_decimal": "-0.0196772547823330710875743582333",
+            "quadratic_decimal": "0.0069217061707224790601064811676",
+            "quadratic_over_half_K_float": 0.0014220228455922566,
+            "recovery_scale_decimal": "2.8428330092317663012015594148715",
+            "row": "pair:1-9:owner-9:axis-0:first-before-second:vertices-1.3-9.0"
+          },
+          {
+            "half_K": "9849443091/2000000000",
+            "linear_decimal": "-0.0199085487424783470829931505824",
+            "quadratic_decimal": "0.0195339429235550172820481979931",
+            "quadratic_over_half_K_float": 0.003966507089401694,
+            "recovery_scale_decimal": "1.019177173824523216973643650649",
+            "row": "pair:2-8:owner-8:axis-1:first-before-second:vertices-2.0-8.1"
+          },
+          {
+            "half_K": "9747939823/2000000000",
+            "linear_decimal": "-0.0197033815325327058377868258499",
+            "quadratic_decimal": "-0.8370325205551470655826131600",
+            "quadratic_over_half_K_float": -0.1717352662724059,
+            "recovery_scale_decimal": null,
+            "row": "pair:2-10:owner-10:axis-0:second-before-first:vertices-10.2-2.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.0-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.3-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.2-3.0"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.3-3.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-4:axis-0:second-before-first:vertices-5.2-4.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-4:axis-0:second-before-first:vertices-5.3-4.0"
+          },
+          {
+            "half_K": "9804326399/2000000000",
+            "linear_decimal": "-0.01981735497106581647557989735192",
+            "quadratic_decimal": "-0.0140468165355748004470013189492",
+            "quadratic_over_half_K_float": -0.002865432251828645,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-8:owner-8:axis-0:second-before-first:vertices-8.2-4.1"
+          },
+          {
+            "half_K": "4867311339/1000000000",
+            "linear_decimal": "-0.0196764637638940493308811252238",
+            "quadratic_decimal": "-0.0128449848410103014998585439043",
+            "quadratic_over_half_K_float": -0.0026390308624985826,
+            "recovery_scale_decimal": null,
+            "row": "pair:5-6:owner-6:axis-0:second-before-first:vertices-6.2-5.1"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.2-6.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.3-6.0"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.2"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.2"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.2-8.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.3-8.0"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "-0.0193724759926534153525706179136",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "recovery_scale_decimal": "0.05209491256018004701090547678652",
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.0-9.1"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "1.11964937641677629424064753035793",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.3-9.1"
+          }
+        ],
+        "second_order_exclusion_scale_decimal": null,
+        "second_order_exclusion_unbounded": true,
+        "uniform_model_scale_decimal": "0.00404257348533135396598905037166"
+      },
+      "domination": {
+        "comparable_faces": 66,
+        "largest_ratio_decimal": "1.000000000000005821405707348437",
+        "route_radius_at_most_modulus_lower": 47,
+        "route_radius_at_most_modulus_upper": 66
+      },
+      "faces": 66,
+      "finite_faces": 53,
+      "growth_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "growth_exact": true,
+      "growth_lower_decimal": "0.0517714532056682325403293452347",
+      "growth_upper_decimal": "0.0517714532056682325403293452347",
+      "infeasible_faces": 13,
+      "raw_selection_count": 4,
+      "route_radius_min_decimal": "0.00404257348533135396598905037166",
+      "seconds": 17.482,
+      "weighted_modulus_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "weighted_modulus_exact": true,
+      "weighted_modulus_lower_decimal": "0.00404257348533135396598905037166"
+    },
+    {
+      "angle_faces_finite": 22,
+      "angle_faces_growth_lower_decimal": "0.0517714532056682325403293452347",
+      "branch": 1,
+      "directional_curvature": {
+        "angle_components_float": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          -1.0
+        ],
+        "decreasing_rows_never_recovering_to_second_order": 36,
+        "decreasing_rows_recovering": 5,
+        "face": {
+          "coordinate": 32,
+          "sign": -1
+        },
+        "largest_quadratic_over_half_K_float": 0.9963350818180988,
+        "rows": [
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.00680900762986845343916138865416",
+            "quadratic_over_half_K_float": 0.01925624329713929,
+            "recovery_scale_decimal": "0.209935729568389848550602177170",
+            "row": "wall:7:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.3523040849308797505167807024113",
+            "quadratic_over_half_K_float": 0.9963350818180988,
+            "recovery_scale_decimal": "0.00405744368446258090395941427104",
+            "row": "wall:10:right:corner-1"
+          },
+          {
+            "half_K": "9756268931/2000000000",
+            "linear_decimal": "-0.0197202170481113364692713014136",
+            "quadratic_decimal": "-0.0010205304648519932686761537243",
+            "quadratic_over_half_K_float": -0.0002092050705181598,
+            "recovery_scale_decimal": null,
+            "row": "pair:0-6:owner-6:axis-1:second-before-first:vertices-6.0-0.2"
+          },
+          {
+            "half_K": "4867507011/1000000000",
+            "linear_decimal": "-0.0196772547823330710875743582333",
+            "quadratic_decimal": "0.0069217061707224790601064811676",
+            "quadratic_over_half_K_float": 0.0014220228455922566,
+            "recovery_scale_decimal": "2.8428330092317663012015594148715",
+            "row": "pair:1-9:owner-9:axis-0:first-before-second:vertices-1.3-9.0"
+          },
+          {
+            "half_K": "9849443091/2000000000",
+            "linear_decimal": "-0.0199085487424783470829931505824",
+            "quadratic_decimal": "0.0195339429235550172820481979931",
+            "quadratic_over_half_K_float": 0.003966507089401694,
+            "recovery_scale_decimal": "1.019177173824523216973643650649",
+            "row": "pair:2-8:owner-8:axis-1:first-before-second:vertices-2.0-8.1"
+          },
+          {
+            "half_K": "9747939823/2000000000",
+            "linear_decimal": "-0.0197033815325327058377868258499",
+            "quadratic_decimal": "-0.8370325205551470655826131600",
+            "quadratic_over_half_K_float": -0.1717352662724059,
+            "recovery_scale_decimal": null,
+            "row": "pair:2-10:owner-10:axis-0:second-before-first:vertices-10.2-2.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.0-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.3-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.2-3.0"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.3-3.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-5:axis-0:second-before-first:vertices-5.2-4.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-5:axis-0:second-before-first:vertices-5.2-4.1"
+          },
+          {
+            "half_K": "9804326399/2000000000",
+            "linear_decimal": "-0.01981735497106581647557989735192",
+            "quadratic_decimal": "-0.0140468165355748004470013189492",
+            "quadratic_over_half_K_float": -0.002865432251828645,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-8:owner-8:axis-0:second-before-first:vertices-8.2-4.1"
+          },
+          {
+            "half_K": "4867311339/1000000000",
+            "linear_decimal": "-0.0196764637638940493308811252238",
+            "quadratic_decimal": "-0.0128449848410103014998585439043",
+            "quadratic_over_half_K_float": -0.0026390308624985826,
+            "recovery_scale_decimal": null,
+            "row": "pair:5-6:owner-6:axis-0:second-before-first:vertices-6.2-5.1"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.2-6.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.3-6.0"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.2"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.2"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.2-8.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.3-8.0"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "-0.0193724759926534153525706179136",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "recovery_scale_decimal": "0.05209491256018004701090547678652",
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.0-9.1"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "1.11964937641677629424064753035793",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.3-9.1"
+          }
+        ],
+        "second_order_exclusion_scale_decimal": null,
+        "second_order_exclusion_unbounded": true,
+        "uniform_model_scale_decimal": "0.00404257348533135396598905037166"
+      },
+      "domination": {
+        "comparable_faces": 66,
+        "largest_ratio_decimal": "1.0000000000000049950639878800754",
+        "route_radius_at_most_modulus_lower": 45,
+        "route_radius_at_most_modulus_upper": 66
+      },
+      "faces": 66,
+      "finite_faces": 53,
+      "growth_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "growth_exact": true,
+      "growth_lower_decimal": "0.0517714532056682325403293452347",
+      "growth_upper_decimal": "0.0517714532056682325403293452347",
+      "infeasible_faces": 13,
+      "raw_selection_count": 4,
+      "route_radius_min_decimal": "0.00404149339741525114453697319228",
+      "seconds": 16.516,
+      "weighted_modulus_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "weighted_modulus_exact": true,
+      "weighted_modulus_lower_decimal": "0.00404257348533135396598905037166"
+    },
+    {
+      "angle_faces_finite": 21,
+      "angle_faces_growth_lower_decimal": "0.0517714532056682325403293452347",
+      "branch": 2,
+      "directional_curvature": {
+        "angle_components_float": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          -1.0
+        ],
+        "decreasing_rows_never_recovering_to_second_order": 36,
+        "decreasing_rows_recovering": 5,
+        "face": {
+          "coordinate": 32,
+          "sign": -1
+        },
+        "largest_quadratic_over_half_K_float": 0.9963350818180988,
+        "rows": [
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.00680900762986845343916138865416",
+            "quadratic_over_half_K_float": 0.01925624329713929,
+            "recovery_scale_decimal": "0.209935729568389848550602177170",
+            "row": "wall:7:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.3523040849308797505167807024113",
+            "quadratic_over_half_K_float": 0.9963350818180988,
+            "recovery_scale_decimal": "0.00405744368446258090395941427104",
+            "row": "wall:10:right:corner-1"
+          },
+          {
+            "half_K": "9756268931/2000000000",
+            "linear_decimal": "-0.0197202170481113364692713014136",
+            "quadratic_decimal": "-0.0010205304648519932686761537243",
+            "quadratic_over_half_K_float": -0.0002092050705181598,
+            "recovery_scale_decimal": null,
+            "row": "pair:0-6:owner-6:axis-1:second-before-first:vertices-6.0-0.2"
+          },
+          {
+            "half_K": "4867507011/1000000000",
+            "linear_decimal": "-0.0196772547823330710875743582333",
+            "quadratic_decimal": "0.0069217061707224790601064811676",
+            "quadratic_over_half_K_float": 0.0014220228455922566,
+            "recovery_scale_decimal": "2.8428330092317663012015594148715",
+            "row": "pair:1-9:owner-9:axis-0:first-before-second:vertices-1.3-9.0"
+          },
+          {
+            "half_K": "9849443091/2000000000",
+            "linear_decimal": "-0.0199085487424783470829931505824",
+            "quadratic_decimal": "0.0195339429235550172820481979931",
+            "quadratic_over_half_K_float": 0.003966507089401694,
+            "recovery_scale_decimal": "1.019177173824523216973643650649",
+            "row": "pair:2-8:owner-8:axis-1:first-before-second:vertices-2.0-8.1"
+          },
+          {
+            "half_K": "9747939823/2000000000",
+            "linear_decimal": "-0.0197033815325327058377868258499",
+            "quadratic_decimal": "-0.8370325205551470655826131600",
+            "quadratic_over_half_K_float": -0.1717352662724059,
+            "recovery_scale_decimal": null,
+            "row": "pair:2-10:owner-10:axis-0:second-before-first:vertices-10.2-2.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.0-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.3-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.2-3.0"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.3-3.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-5:axis-1:first-before-second:vertices-4.0-5.1"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-5:axis-1:first-before-second:vertices-4.3-5.1"
+          },
+          {
+            "half_K": "9804326399/2000000000",
+            "linear_decimal": "-0.01981735497106581647557989735192",
+            "quadratic_decimal": "-0.0140468165355748004470013189492",
+            "quadratic_over_half_K_float": -0.002865432251828645,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-8:owner-8:axis-0:second-before-first:vertices-8.2-4.1"
+          },
+          {
+            "half_K": "4867311339/1000000000",
+            "linear_decimal": "-0.0196764637638940493308811252238",
+            "quadratic_decimal": "-0.0128449848410103014998585439043",
+            "quadratic_over_half_K_float": -0.0026390308624985826,
+            "recovery_scale_decimal": null,
+            "row": "pair:5-6:owner-6:axis-0:second-before-first:vertices-6.2-5.1"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.2-6.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.3-6.0"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.2"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.2"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.2-8.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.3-8.0"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "-0.0193724759926534153525706179136",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "recovery_scale_decimal": "0.05209491256018004701090547678652",
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.0-9.1"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "1.11964937641677629424064753035793",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.3-9.1"
+          }
+        ],
+        "second_order_exclusion_scale_decimal": null,
+        "second_order_exclusion_unbounded": true,
+        "uniform_model_scale_decimal": "0.00404257348533135396598905037166"
+      },
+      "domination": {
+        "comparable_faces": 66,
+        "largest_ratio_decimal": "1.0000000000000066804838107592861",
+        "route_radius_at_most_modulus_lower": 37,
+        "route_radius_at_most_modulus_upper": 66
+      },
+      "faces": 66,
+      "finite_faces": 52,
+      "growth_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "growth_exact": true,
+      "growth_lower_decimal": "0.0517714532056682325403293452347",
+      "growth_upper_decimal": "0.0517714532056682325403293452347",
+      "infeasible_faces": 14,
+      "raw_selection_count": 4,
+      "route_radius_min_decimal": "0.00404257348533135396598905037166",
+      "seconds": 17.165,
+      "weighted_modulus_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "weighted_modulus_exact": true,
+      "weighted_modulus_lower_decimal": "0.00404257348533135396598905037166"
+    },
+    {
+      "angle_faces_finite": 21,
+      "angle_faces_growth_lower_decimal": "0.0517714532056682325403293452347",
+      "branch": 3,
+      "directional_curvature": {
+        "angle_components_float": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          0.1390218524094297,
+          -1.0
+        ],
+        "decreasing_rows_never_recovering_to_second_order": 36,
+        "decreasing_rows_recovering": 5,
+        "face": {
+          "coordinate": 32,
+          "sign": -1
+        },
+        "largest_quadratic_over_half_K_float": 0.9963350818180988,
+        "rows": [
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.00680900762986845343916138865416",
+            "quadratic_over_half_K_float": 0.01925624329713929,
+            "recovery_scale_decimal": "0.209935729568389848550602177170",
+            "row": "wall:7:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.001429453984413166762373728211420",
+            "quadratic_decimal": "0.3523040849308797505167807024113",
+            "quadratic_over_half_K_float": 0.9963350818180988,
+            "recovery_scale_decimal": "0.00405744368446258090395941427104",
+            "row": "wall:10:right:corner-1"
+          },
+          {
+            "half_K": "9756268931/2000000000",
+            "linear_decimal": "-0.0197202170481113364692713014136",
+            "quadratic_decimal": "-0.0010205304648519932686761537243",
+            "quadratic_over_half_K_float": -0.0002092050705181598,
+            "recovery_scale_decimal": null,
+            "row": "pair:0-6:owner-6:axis-1:second-before-first:vertices-6.0-0.2"
+          },
+          {
+            "half_K": "4867507011/1000000000",
+            "linear_decimal": "-0.0196772547823330710875743582333",
+            "quadratic_decimal": "0.0069217061707224790601064811676",
+            "quadratic_over_half_K_float": 0.0014220228455922566,
+            "recovery_scale_decimal": "2.8428330092317663012015594148715",
+            "row": "pair:1-9:owner-9:axis-0:first-before-second:vertices-1.3-9.0"
+          },
+          {
+            "half_K": "9849443091/2000000000",
+            "linear_decimal": "-0.0199085487424783470829931505824",
+            "quadratic_decimal": "0.0195339429235550172820481979931",
+            "quadratic_over_half_K_float": 0.003966507089401694,
+            "recovery_scale_decimal": "1.019177173824523216973643650649",
+            "row": "pair:2-8:owner-8:axis-1:first-before-second:vertices-2.0-8.1"
+          },
+          {
+            "half_K": "9747939823/2000000000",
+            "linear_decimal": "-0.0197033815325327058377868258499",
+            "quadratic_decimal": "-0.8370325205551470655826131600",
+            "quadratic_over_half_K_float": -0.1717352662724059,
+            "recovery_scale_decimal": null,
+            "row": "pair:2-10:owner-10:axis-0:second-before-first:vertices-10.2-2.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.0-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.3-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.2-3.0"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.3-3.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-4:axis-1:first-before-second:vertices-4.0-5.1"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0192628563410828308176972531630",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-4:axis-1:first-before-second:vertices-4.0-5.2"
+          },
+          {
+            "half_K": "9804326399/2000000000",
+            "linear_decimal": "-0.01981735497106581647557989735192",
+            "quadratic_decimal": "-0.0140468165355748004470013189492",
+            "quadratic_over_half_K_float": -0.002865432251828645,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-8:owner-8:axis-0:second-before-first:vertices-8.2-4.1"
+          },
+          {
+            "half_K": "4867311339/1000000000",
+            "linear_decimal": "-0.0196764637638940493308811252238",
+            "quadratic_decimal": "-0.0128449848410103014998585439043",
+            "quadratic_over_half_K_float": -0.0026390308624985826,
+            "recovery_scale_decimal": null,
+            "row": "pair:5-6:owner-6:axis-0:second-before-first:vertices-6.2-5.1"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.2-6.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.3-6.0"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.2"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0192770658736917129376097936274",
+            "quadratic_decimal": "-0.017871000669920991866836244651",
+            "quadratic_over_half_K_float": -0.0037477090101744825,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.2"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.2-8.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.01926348157358321913556434096159",
+            "quadratic_decimal": "-0.0101087963737095191303856759992",
+            "quadratic_over_half_K_float": -0.0021214001234861096,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.3-8.0"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "-0.0193724759926534153525706179136",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "recovery_scale_decimal": "0.05209491256018004701090547678652",
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.0-9.1"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "1.11964937641677629424064753035793",
+            "quadratic_decimal": "0.3718688647432574071494857956848",
+            "quadratic_over_half_K_float": 0.07760015876140253,
+            "row": "pair:9-10:owner-9:axis-1:second-before-first:vertices-10.3-9.1"
+          }
+        ],
+        "second_order_exclusion_scale_decimal": null,
+        "second_order_exclusion_unbounded": true,
+        "uniform_model_scale_decimal": "0.00404257348533135396598905037166"
+      },
+      "domination": {
+        "comparable_faces": 66,
+        "largest_ratio_decimal": "1.0000000000000044392145454036610",
+        "route_radius_at_most_modulus_lower": 54,
+        "route_radius_at_most_modulus_upper": 66
+      },
+      "faces": 66,
+      "finite_faces": 52,
+      "growth_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "growth_exact": true,
+      "growth_lower_decimal": "0.0517714532056682325403293452347",
+      "growth_upper_decimal": "0.0517714532056682325403293452347",
+      "infeasible_faces": 14,
+      "raw_selection_count": 4,
+      "route_radius_min_decimal": "0.00404257348533135396598905037166",
+      "seconds": 17.195,
+      "weighted_modulus_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": -1
+      },
+      "weighted_modulus_exact": true,
+      "weighted_modulus_lower_decimal": "0.00404257348533135396598905037166"
+    },
+    {
+      "angle_faces_finite": 22,
+      "angle_faces_growth_lower_decimal": "0.0744317670100057682173124044339",
+      "branch": 4,
+      "directional_curvature": {
+        "angle_components_float": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.19809533455218825,
+          0.19809533455218825,
+          0.19809533455218825,
+          0.19809533455218825,
+          1.0
+        ],
+        "decreasing_rows_never_recovering_to_second_order": 37,
+        "decreasing_rows_recovering": 4,
+        "face": {
+          "coordinate": 32,
+          "sign": 1
+        },
+        "largest_quadratic_over_half_K_float": 0.9963350818180988,
+        "rows": [
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:0:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:right:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:1:bottom:corner-1"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:2:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:3:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-2"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:4:top:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "wall:5:left:corner-3"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0.0138250329014678961205112553947",
+            "quadratic_over_half_K_float": 0.03909794372587075,
+            "recovery_scale_decimal": "0.14733135476158159871356314557",
+            "row": "wall:7:bottom:corner-0"
+          },
+          {
+            "half_K": "221/625",
+            "linear_decimal": "-0.0020368608269967043823338012675",
+            "quadratic_decimal": "0.3523040849308797505167807024113",
+            "quadratic_over_half_K_float": 0.9963350818180988,
+            "recovery_scale_decimal": "0.0057815418955369932782669915547",
+            "row": "wall:10:right:corner-1"
+          },
+          {
+            "half_K": "9756268931/2000000000",
+            "linear_decimal": "-0.0280997765882337570768591778532",
+            "quadratic_decimal": "-0.0020720886244331774103979300653",
+            "quadratic_over_half_K_float": -0.00042477070672974817,
+            "recovery_scale_decimal": null,
+            "row": "pair:0-6:owner-6:axis-1:second-before-first:vertices-6.0-0.2"
+          },
+          {
+            "half_K": "4867507011/1000000000",
+            "linear_decimal": "-0.0280385586986360765127381284279",
+            "quadratic_decimal": "0.014053856412902914001947236071",
+            "quadratic_over_half_K_float": 0.0028872801582294247,
+            "recovery_scale_decimal": "1.99507934867569439870715764807",
+            "row": "pair:1-9:owner-9:axis-0:first-before-second:vertices-1.3-9.0"
+          },
+          {
+            "half_K": "9849443091/2000000000",
+            "linear_decimal": "-0.0283681346150894177861242666155",
+            "quadratic_decimal": "0.0396617860184071301250103012756",
+            "quadratic_over_half_K_float": 0.008053609864429467,
+            "recovery_scale_decimal": "0.715251063124683754663399566667",
+            "row": "pair:2-8:owner-8:axis-1:first-before-second:vertices-2.0-8.1"
+          },
+          {
+            "half_K": "9747939823/2000000000",
+            "linear_decimal": "-0.0280757872870332128652577475325",
+            "quadratic_decimal": "-0.0917372569791161684128499843247",
+            "quadratic_over_half_K_float": -0.01882187593375671,
+            "recovery_scale_decimal": null,
+            "row": "pair:2-10:owner-10:axis-0:second-before-first:vertices-10.2-2.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0274480731279532075776865544212",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.0-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0274480731279532075776865544212",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-4:owner-3:axis-1:second-before-first:vertices-4.3-3.1"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0274480731279532075776865544212",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.2-3.0"
+          },
+          {
+            "half_K": "3049599/640000",
+            "linear_decimal": "-0.0274480731279532075776865544212",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:3-5:owner-3:axis-0:second-before-first:vertices-5.3-3.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0274480731279532075776865544212",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-4:axis-0:second-before-first:vertices-5.2-4.0"
+          },
+          {
+            "half_K": "4972105219/1000000000",
+            "linear_decimal": "-0.0274480731279532075776865544212",
+            "quadratic_decimal": "0",
+            "quadratic_over_half_K_float": 0.0,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-5:owner-4:axis-0:second-before-first:vertices-5.3-4.0"
+          },
+          {
+            "half_K": "9804326399/2000000000",
+            "linear_decimal": "-0.0282381905786379534243697355734",
+            "quadratic_decimal": "-0.028520705412832193404162889026",
+            "quadratic_over_half_K_float": -0.005817983663975362,
+            "recovery_scale_decimal": null,
+            "row": "pair:4-8:owner-8:axis-0:second-before-first:vertices-8.2-4.1"
+          },
+          {
+            "half_K": "4867311339/1000000000",
+            "linear_decimal": "-0.0280374315588404314359850175129",
+            "quadratic_decimal": "-0.026080502137615403325925775027",
+            "quadratic_over_half_K_float": -0.005358297491397725,
+            "recovery_scale_decimal": null,
+            "row": "pair:5-6:owner-6:axis-0:second-before-first:vertices-6.2-5.1"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.0274489640356716039699183997560",
+            "quadratic_decimal": "-0.0205249355056859357165935646438",
+            "quadratic_over_half_K_float": -0.004307298228852203,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.2-6.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.0274489640356716039699183997560",
+            "quadratic_decimal": "-0.0205249355056859357165935646438",
+            "quadratic_over_half_K_float": -0.004307298228852203,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-7:owner-6:axis-0:second-before-first:vertices-7.3-6.0"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0274683206075199221138748479905",
+            "quadratic_decimal": "-0.036285342251641115798651251361",
+            "quadratic_over_half_K_float": -0.0076093614792719635,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0274683206075199221138748479905",
+            "quadratic_decimal": "-0.036285342251641115798651251361",
+            "quadratic_over_half_K_float": -0.0076093614792719635,
+            "recovery_scale_decimal": null,
+            "row": "pair:6-8:owner-8:axis-1:second-before-first:vertices-8.0-6.2"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0274683206075199221138748479905",
+            "quadratic_decimal": "-0.036285342251641115798651251361",
+            "quadratic_over_half_K_float": -0.0076093614792719635,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.1"
+          },
+          {
+            "half_K": "9537026819/2000000000",
+            "linear_decimal": "-0.0274683206075199221138748479905",
+            "quadratic_decimal": "-0.036285342251641115798651251361",
+            "quadratic_over_half_K_float": -0.0076093614792719635,
+            "recovery_scale_decimal": null,
+            "row": "pair:7-9:owner-9:axis-1:second-before-first:vertices-9.0-7.2"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.0274489640356716039699183997560",
+            "quadratic_decimal": "-0.0205249355056859357165935646438",
+            "quadratic_over_half_K_float": -0.004307298228852203,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.2-8.0"
+          },
+          {
+            "half_K": "9530306199/2000000000",
+            "linear_decimal": "-0.0274489640356716039699183997560",
+            "quadratic_decimal": "-0.0205249355056859357165935646438",
+            "quadratic_over_half_K_float": -0.004307298228852203,
+            "recovery_scale_decimal": null,
+            "row": "pair:8-9:owner-8:axis-0:second-before-first:vertices-9.3-8.0"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "0.7743003928362880135272246358543",
+            "quadratic_decimal": "-0.33292338870435387392570690615",
+            "quadratic_over_half_K_float": -0.06947316720553819,
+            "row": "pair:9-10:owner-10:axis-1:second-before-first:vertices-10.0-9.1"
+          },
+          {
+            "half_K": "9584229483/2000000000",
+            "linear_decimal": "-0.0276042726115237224052586573190",
+            "quadratic_decimal": "-0.33292338870435387392570690615",
+            "quadratic_over_half_K_float": -0.06947316720553819,
+            "recovery_scale_decimal": null,
+            "row": "pair:9-10:owner-10:axis-1:second-before-first:vertices-10.0-9.2"
+          }
+        ],
+        "second_order_exclusion_scale_decimal": null,
+        "second_order_exclusion_unbounded": true,
+        "uniform_model_scale_decimal": "0.00576035301752461646587613480644"
+      },
+      "domination": {
+        "comparable_faces": 66,
+        "largest_ratio_decimal": "1.000000000000011163265993903613",
+        "route_radius_at_most_modulus_lower": 35,
+        "route_radius_at_most_modulus_upper": 66
+      },
+      "faces": 66,
+      "finite_faces": 53,
+      "growth_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": 1
+      },
+      "growth_exact": true,
+      "growth_lower_decimal": "0.0744317670100057682173124044339",
+      "growth_upper_decimal": "0.0744317670100057682173124044339",
+      "infeasible_faces": 13,
+      "raw_selection_count": 4,
+      "route_radius_min_decimal": "0.00575818619362472640506375669444",
+      "seconds": 18.718,
+      "weighted_modulus_argmin_face": {
+        "coordinate": 32,
+        "free_count": 32,
+        "sign": 1
+      },
+      "weighted_modulus_exact": true,
+      "weighted_modulus_lower_decimal": "0.00576035301752461646587613480644"
+    }
+  ],
+  "branches_computed": 5,
+  "chart": "anchored centre-angle chart of BC-240: container [0, U]^2 with a corner at the origin, square i = (x_i, y_i, theta_i), sup norm over the 33 coordinates",
+  "claim_boundary": "Exact lower bounds on the first-order growth g_b over every face of the sup-norm sphere in the anchored 33-coordinate chart at Trump's labelled pose, for every derivative-distinct branch of exp-013, and the radius the growth route certifies under the BC-199 per-row remainder bounds. The growth constants are new; the radius is bounded above by the BC-199 weighted modulus by the exhaustion lemma, so no claim here enlarges the BC-240 ball. Nothing global.",
+  "elapsed_seconds": 89.243,
+  "faces_per_branch": 66,
+  "growth": {
+    "all_faces_positive": true,
+    "angle_faces_min_lower_decimal": "0.0517714532056682325403293452347",
+    "definition": "g_b(d) = min { sigma : A_b d + sigma e >= 0 }, e = far-wall rows",
+    "sphere_min_exact": true,
+    "sphere_min_lower_decimal": "0.0517714532056682325403293452347",
+    "sphere_min_lower_rational": "158356917535354618679050516892748819941486529066548136991469110857844929377735006742530119859572549819952802355636438169795003305652216904247947071815052564779727068716182667129184176764192485674706761592846953616295100707/3058769026750379194460635616894794819017522595341675599298250345134467747723752498059097090845417684388490596389867633600120799853481881946408824289134068714248962564761190533848452475209733660093257025884356870144000000000",
+    "sphere_min_upper_decimal": "0.0517714532056682325403293452347"
+  },
+  "hypothesis": "H-237",
+  "inputs": {
+    "campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json": "60a4b7c48034b37063509a8a641974ed5eae86dccd056e9cbc6cf2fd7f2f0661",
+    "cases/trump11/packing.py": "3b4eae938c37c13af6252ac5d83fa99aa95f6b1627b99920c5df8be94c56bea9",
+    "cases/trump11/tangent_cones.py": "17302de574d9f7bc377cbc1dc4c537dc60976d6a1e4e63432adb5fa184058765"
+  },
+  "modulus_control": {
+    "comparable_faces": 330,
+    "largest_route_over_modulus_ratio_decimal": "1.000000000000011163265993903613",
+    "lemma_consequence_holds": true,
+    "reproduces_bc199_branch_0": true,
+    "route_radius_at_most_modulus_lower": 218,
+    "route_radius_at_most_modulus_upper": 330,
+    "weighted_modulus_min_lower_decimal": "0.00404257348533135396598905037166"
+  },
+  "route": {
+    "at_most_weighted_modulus_min": true,
+    "equals_weighted_modulus_min": false,
+    "exceeds_retained_rho_row": false,
+    "excess_over_retained_rho_row_float": -1.0800875847488554e-06,
+    "facewise_radius_decimal": "0.00404149339741525114453697319228",
+    "facewise_radius_over_rho_row": 0.9997328217807897,
+    "facewise_radius_rational_lower": "982524204376309827627981551126733576860270262420763951867542045017126199097433991978654813557391855982106820718034686400524987176810688225648111287133592466218696998061544902433371548076030957350399283840517849269410135710844308830582546219685422788971197106918561492821780129368580422315907493207/243109194488523979733514421335777342705607942712179420426996625543000790583315714550962725582393298212846778751428686623812653322873441737700625045850329059802182265907486991172264968346231141561244171090462508275890482262162480044847992351496354764102932346380841926179905386162410738261496304762880",
+    "note": "the retained rho_row is a rational lower bound on the exact BC-199 weighted modulus; an excess below 1e-12 is that shortening, not a larger ball",
+    "rho_row": "808514697/200000000000",
+    "rho_row_float": 0.004042573485,
+    "statement": "on a face with certified multipliers mu, side > U (or infeasibility) is certified for 0 < ||v||_inf < 2 beta(mu) / (mu^T K)"
+  },
+  "schema_version": 1
+}

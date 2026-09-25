@@ -1,0 +1,2 @@
+iteration 0: sites=15417 orbits=2036 rows=9226 support=282 rows_objective=11.979592 converged=False objective=11.979592 raw_total=11.979592 max_depth=4495216307/4000000000=1.123804 scaled_total=10.659858 vertices=26572516 decided=189 violating=2311652 seconds rows=1060.2 lp=68.4 sep=601.2
+  added 150 orbits, deepest 1.123176 at (1.965026, 1.980450)

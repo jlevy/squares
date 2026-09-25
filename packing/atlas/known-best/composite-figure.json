@@ -598,7 +598,7 @@
         },
         "rigidity": {
           "basis": "first-party-argument",
-          "evidence": "First order at the exact fixed-side pose, in open real orientation charts: all 128 derivative-distinct branchwise one-sided linearized cones are the zero cone, and a finite-branch subsequence argument upgrades that to local isolation and strict local side optimality in the anchored pose-side chart. No neighborhood radius is quantified by this certificate, and nothing here bears on global optimality. A quantified radius does exist elsewhere in the record and is not registered here: the BC-240 packet at cases/trump11/isolation-theorem.md states a sup-norm radius of at least 808514697/200000000000 and a quadratic side constant of at most 2574612531/200000000, which the source-distinct BC-241 review accepted at retained-record-dependent scope without an independent radius-generator replay and with its closure disposition still pending.",
+          "evidence": "First order at the exact fixed-side pose, in open real orientation charts: all 128 derivative-distinct branchwise one-sided linearized cones are the zero cone, and a finite-branch subsequence argument upgrades that to local isolation and strict local side optimality in the anchored pose-side chart. No neighborhood radius is quantified by this certificate, and nothing here bears on global optimality. A quantified radius does exist elsewhere in the record and is not registered here: the BC-240 packet at cases/trump11/isolation-theorem.md states a sup-norm radius of at least 808514697/200000000000 and a quadratic side constant of at most 2574612531/200000000, which the source-distinct BC-241 review accepted on 2026-09-06 and a full radius-generator replay on 2026-09-24 reproduced value-for-value on all 128 branches, with the weighted modulus confirmed on all 8,448 faces by the method-distinct capture_radius control; the first clause is verified, exact, with per-face dual witnesses recomputed rather than retained (docs/project/reviews/review-2026-09-24-bc241-closure.md).",
           "provenance": "frontier",
           "state": "established"
         },
@@ -1051,15 +1051,15 @@
           "state": "closed-form"
         },
         "lower": {
-          "display": "s(21) ≥ 4.850000",
+          "display": "s(21) ≥ 4.880000",
           "evidence": [
             "E-fractional-interval-decision",
-            "E-n020-fractional-certificate-97-20"
+            "E-n021-fractional-certificate-122-25"
           ],
           "first_proved_here": true,
           "provenance": "frontier",
           "shown": true,
-          "value": "4.85"
+          "value": "4.88"
         },
         "n": 21,
         "optimality": {
