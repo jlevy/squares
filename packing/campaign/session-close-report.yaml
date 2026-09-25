@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 158
+count: 159
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 104
+  sessions_measured: 105
   sessions_unmeasured: 54
   attributed:
-    rollups: 210
-    turns: 54585
-    tool_calls: 29955
-    tool_errors: 574
-    one_off_code: 4509
-    wall_hours: 491.56
+    rollups: 216
+    turns: 55713
+    tool_calls: 30572
+    tool_errors: 585
+    one_off_code: 4557
+    wall_hours: 503.37
   unattributed:
     rollups: 64
     turns: 13577
@@ -28,12 +28,12 @@ totals:
     one_off_code: 1122
     wall_hours: 61.29
   measured:
-    rollups: 274
-    turns: 68162
-    tool_calls: 37810
-    tool_errors: 751
-    one_off_code: 5631
-    wall_hours: 552.85
+    rollups: 280
+    turns: 69290
+    tool_calls: 38427
+    tool_errors: 762
+    one_off_code: 5679
+    wall_hours: 564.66
 codex_receipts:
   attributed: 64
   unattributed: 2
@@ -2654,11 +2654,11 @@ sessions:
   - packing/campaign/resource-usage/agent-af1805a9e25246340.yaml
   - packing/campaign/resource-usage/agent-af2ca618a2d23398e.yaml
   - packing/campaign/resource-usage/agent-afb6179c1c6c3c26a.yaml
-  turns: 3163
-  tool_calls: 1662
-  tool_errors: 22
-  one_off_code: 235
-  wall_hours: 52.86
+  turns: 3447
+  tool_calls: 1795
+  tool_errors: 23
+  one_off_code: 245
+  wall_hours: 62.33
   codex_receipts: []
 - id: session-157
   title: "Overnight CPU Runs, Finishing Rung 0 and Resuming the n12 Ceiling"
@@ -2668,11 +2668,11 @@ sessions:
   measured: true
   rollups:
   - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
-  turns: 1150
-  tool_calls: 494
-  tool_errors: 2
-  one_off_code: 87
-  wall_hours: 41.43
+  turns: 1434
+  tool_calls: 627
+  tool_errors: 3
+  one_off_code: 97
+  wall_hours: 50.9
   codex_receipts: []
 - id: session-158
   title: "Lock In Rung 0, Close BC-241, Price Rung 1"
@@ -2687,9 +2687,29 @@ sessions:
   - packing/campaign/resource-usage/agent-ab7b154b8a93c1b73.yaml
   - packing/campaign/resource-usage/agent-af2ba803dd233242c.yaml
   - packing/campaign/resource-usage/agent-a3cc5d0580f6e2dce.yaml
-  turns: 1796
-  tool_calls: 873
-  tool_errors: 5
-  one_off_code: 127
-  wall_hours: 43.32
+  turns: 2080
+  tool_calls: 1006
+  tool_errors: 6
+  one_off_code: 137
+  wall_hours: 52.79
+  codex_receipts: []
+- id: session-159
+  title: "Intake of Guzhou0806's R052 Certificate for s(17) > 231001/50000"
+  status: completed
+  primary_bead: think-ju2h
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/e8d698c4-206a-4921-bcc4-4f7e12fa474f.yaml
+  - packing/campaign/resource-usage/agent-a14838e74b93e7722.yaml
+  - packing/campaign/resource-usage/agent-a5b2f63f330c0def9.yaml
+  - packing/campaign/resource-usage/agent-a990900e039ea518c.yaml
+  - packing/campaign/resource-usage/agent-a4228d717a68a4701.yaml
+  - packing/campaign/resource-usage/agent-a567ff1432f455da2.yaml
+  - packing/campaign/resource-usage/agent-a86c3b35a080e2b9f.yaml
+  turns: 2278
+  tool_calls: 1111
+  tool_errors: 13
+  one_off_code: 135
+  wall_hours: 53.24
   codex_receipts: []

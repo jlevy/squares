@@ -43,6 +43,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-22-upper-bound-certification-blocks.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-09-25-after-r052-planning.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-reader-f6f7-overflow.md, role: review, authority: record, lifecycle: retained}
@@ -665,6 +666,10 @@ documents:
     authority: record
     lifecycle: retained
   - path: docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md
     role: review
     authority: record
     lifecycle: retained

@@ -451,11 +451,13 @@ H124 and restricted H036 remain unresolved, and that representation receives no 
 Do not repeat a completed experiment or create another candidate without a registered
 result; a float optimum is never a result.
 The former standalone publication handoff `think-d010` is fulfilled by PR 223’s merge.
-For the next supervised exact-research goal, take agenda-042’s BC-384 under
-`think-ggk5`: design and measure a stronger per-node bound for the fixed-angle cell
-tree, the prerequisite exp-234 found for rung 1. See
-[Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the current evidence and
-allocation boundaries.
+For the next supervised exact-research goal, take agenda-042’s BC-386 under
+`think-amx8`: lift the native coverage ceilings and decide Guzhou0806’s R052 natively,
+the first lane of [the after-R052 plan](plan-2026-09-25-after-r052-planning.md), with
+the n11 tilt-profile census beside it overnight.
+The stronger per-node bound for rung 1 waits for that census and the two-class
+certificate. See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the
+current evidence and allocation boundaries.
 
 ## The numeric runner launch gate
 

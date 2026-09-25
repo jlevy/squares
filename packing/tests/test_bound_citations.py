@@ -439,7 +439,7 @@ def test_the_recorded_register_gives_these_lines(n: int) -> None:
 
 @pytest.mark.parametrize(
     ("n", "author"),
-    [(11, "Kleddamag"), (17, "Kleddamag"), (26, "Tokoharu"), (29, "Tokoharu")],
+    [(11, "Kleddamag"), (17, "Guzhou0806"), (26, "Tokoharu"), (29, "Tokoharu")],
 )
 def test_promoted_external_bounds_keep_the_sources_credit(n: int, author: str) -> None:
     lower = _entry(n)["lower"]

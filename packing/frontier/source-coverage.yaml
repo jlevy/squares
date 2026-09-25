@@ -3,7 +3,7 @@ softschema:
   schema: source-coverage.schema.yaml
   status: enforced
 
-last_reviewed: '2026-09-22'
+last_reviewed: '2026-09-25'
 coverage_scope: >
   Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026
@@ -16,6 +16,26 @@ case_corpus:
   n_max: 324
   reader_view: frontier/STATUS.md
 sources:
+  - id: guzhou-n17-r052-2026
+    title: N17 square packing, R052 strict lower bound
+    role: source-repository
+    url: https://github.com/Guzhou0806/n17-square-packing
+    local: resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing/
+    source_key: '[Guzhou0806 n17 R052]'
+    scope: {n_values: [17]}
+    reviewed: '2026-09-25'
+    source_date: '2026-09-25'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by: [frontier/n-017.md]
+    evidence: [E-n017-guzhou-r052-report, E-n017-guzhou-r052-source-replay]
+    notes: >-
+      The complete R052 package at 3bf1095c68a28fb9b2750fb0bc99edd5c22b7a61
+      retained on 2026-09-25 with the R042, R043 and R050 publication records;
+      the Node checker is rebuilt offline from the retained R038 scanner. All
+      four source replay modes passed here, both full sweeps reproducing the
+      source's ledgers. Registered at V4/C3; the native route refuses the
+      certificate at its engine ceilings, so no method-distinct C4 is claimed.
   - id: kleddamag-n17-2026
     title: Seventeen unit squares — a certified lower bound
     role: source-repository
@@ -25,7 +45,7 @@ sources:
     scope: {n_values: [17]}
     reviewed: '2026-09-22'
     source_date: null
-    disposition: current-report
+    disposition: superseded-covered
     replay_disposition: case-specific
     represented_by: [frontier/n-017.md]
     evidence: [E-n017-kleddamag-461300-99853-report, E-n017-kleddamag-461300-99853-source-replay]
@@ -36,7 +56,8 @@ sources:
       the manifest-bound source RESULT.json byte-identically. Registered on
       2026-09-22 at V4/C3; no fresh replay or method-distinct C4 is claimed.
       Source outputs and the repository's execution attestation retain their
-      distinct provenance.
+      distinct provenance. Superseded on 2026-09-25 by Guzhou0806's R052
+      (guzhou-n17-r052-2026) and kept as the previous verified bound.
   - id: kleddamag-n11-2026
     title: Eleven unit squares — a certified lower bound
     role: source-repository

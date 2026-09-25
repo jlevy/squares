@@ -1,0 +1,74 @@
+name: R052 exact public replay / R052 精确公开复演
+on:
+  push:
+    paths:
+      - 'certificates/R052/**'
+      - 'R052_PUBLICATION.json'
+      - 'README.md'
+      - 'RESULTS.md'
+      - 'CHANGELOG.md'
+      - 'NOTICE.md'
+      - 'CITATION.cff'
+      - 'docs/**'
+      - 'scripts/check_release_hashes.py'
+      - 'verification/R052.json'
+      - '.github/workflows/r052.yml'
+  pull_request:
+    paths:
+      - 'certificates/R052/**'
+      - 'R052_PUBLICATION.json'
+      - '.github/workflows/r052.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  records-and-containment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out committed files / 检出已提交文件
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Show Python version / 显示 Python 版本
+        run: python3 --version
+      - name: Check frozen R052 records / 检查冻结 R052 记录
+        run: python3 -X utf8 -B -S certificates/R052/verify.py --output .replay-runs/r052-recorded-ci
+      - name: Check publication hashes / 检查发布哈希
+        run: python3 -X utf8 -B -S scripts/check_release_hashes.py
+      - name: Recompute independent containment / 重算独立包含
+        run: python3 -X utf8 -B -S certificates/R052/verify.py --containment --output .replay-runs/r052-containment-ci
+  python-full-exact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out committed files / 检出已提交文件
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Python / 配置 Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install replay dependencies / 安装复演依赖
+        run: python -m pip install --disable-pip-version-check -r certificates/R052/requirements-full.txt
+      - name: Recompute all Python exact rows / 重算全部 Python 精确行
+        run: python -X utf8 -B certificates/R052/verify.py --python-full --jobs 4 --output .replay-runs/r052-python-ci
+  bigint-full-exact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out committed files / 检出已提交文件
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Node.js / 配置 Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+      - name: Show runtime versions / 显示运行时版本
+        run: |
+          python3 --version
+          node --version
+      - name: Reconstruct checker and recompute all BigInt rows / 重建检查器并重算全部 BigInt 行
+        run: python3 -X utf8 -B -S certificates/R052/verify.py --bigint-full --jobs 5 --output .replay-runs/r052-bigint-ci

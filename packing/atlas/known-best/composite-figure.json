@@ -872,14 +872,14 @@
           "state": "minimal-polynomial"
         },
         "lower": {
-          "display": "s(17) ≥ 4.619791",
+          "display": "s(17) ≥ 4.620020",
           "evidence": [
-            "E-n017-kleddamag-461300-99853-source-replay"
+            "E-n017-guzhou-r052-source-replay"
           ],
           "first_proved_here": false,
           "provenance": "frontier",
           "shown": true,
-          "value": "4.619791092906572"
+          "value": "4.62002"
         },
         "n": 17,
         "optimality": {

@@ -697,7 +697,7 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
     """
     #: n -> why this case's bound cannot be bound to a certificate object at that side.
     external_reduction = {
-        17: "T-032: external parent-rescaling reduction, bound L/A is no container side",
+        17: "R052, after R012 (T-032): parent rescaling, bound L/A is no container side",
     }
     superseded_current_bound = {
         11: (
@@ -730,10 +730,11 @@ def test_every_case_page_binds_the_certificate_its_own_evidence_names() -> None:
                 continue
             try:
                 record = json.loads(target.read_text(encoding="utf-8"))
-            except OSError, json.JSONDecodeError:
+            except OSError, UnicodeDecodeError, json.JSONDecodeError:
                 continue
             # An evidence certificate need not be a JSON object at all: R012's measure
-            # ships as a bare list of orbit rows (E-n017-guzhou-r012-source-replay).
+            # ships as a bare list of orbit rows (E-n017-guzhou-r012-source-replay), and
+            # R052's as gzip bytes (E-n017-guzhou-r052-source-replay).
             if not isinstance(record, dict):
                 continue
             if record.get("schema") not in (

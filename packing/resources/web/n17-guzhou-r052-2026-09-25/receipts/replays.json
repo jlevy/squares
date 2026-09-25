@@ -1,0 +1,128 @@
+{
+  "schema": "ExternalCertificateReplayReceipts/v1",
+  "source": {
+    "url": "https://github.com/Guzhou0806/n17-square-packing",
+    "commit": "3bf1095c68a28fb9b2750fb0bc99edd5c22b7a61",
+    "certificate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825",
+    "package_manifest_sha256": "2a74ea2efef6be4435b227746d3e48f93075160b77ee5a0563a2dc81996952aa"
+  },
+  "host": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "cpus": 10,
+    "contention": "Unrelated processes were running during every sweep; walls are contended readings."
+  },
+  "working_directory": "packing/resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing",
+  "output_directory": "attic/r052/runs, outside the packet and not retained",
+  "interpreters": {
+    "project": "packing/.venv/bin/python3, CPython 3.14.7",
+    "python_full": "attic/r052/venv314/bin/python, CPython 3.14.7 with exactly numpy==2.5.3, numba==0.67.0, llvmlite==0.49.0 from certificates/R052/requirements-full.txt; the source tested CPython 3.12.14",
+    "node": "v24.19.0"
+  },
+  "runs": [
+    {
+      "mode": "records",
+      "command": "packing/.venv/bin/python3 -X utf8 -B -S certificates/R052/verify.py --output attic/r052/runs/r052-records",
+      "started_utc": "2026-09-25T08:05:26Z",
+      "wall_seconds": 0.16,
+      "exit": 0,
+      "status": "PASS_R052_RECORDS",
+      "result_sha256": "1ed1cb8bd61c972109c83b6763ab361a00b8d34e930f2bd7779fd71570480207",
+      "receipt": "records/"
+    },
+    {
+      "mode": "containment",
+      "command": "packing/.venv/bin/python3 -X utf8 -B -S certificates/R052/verify.py --containment --output attic/r052/runs/r052-containment",
+      "started_utc": "2026-09-25T08:05:26Z",
+      "wall_seconds": 3.81,
+      "exit": 0,
+      "status": "PASS_R052_CONTAINMENT",
+      "result_sha256": "e17824b45ef50370b3db346ec71820a8387a46f9db1d0c989292268857c7e83e",
+      "receipt": "containment/"
+    },
+    {
+      "mode": "python-full",
+      "command": "attic/r052/venv314/bin/python -X utf8 -B certificates/R052/verify.py --python-full --jobs 10 --output attic/r052/runs/r052-python",
+      "started_utc": "2026-09-25T08:06:19Z",
+      "ended_utc": "2026-09-25T08:21:24Z",
+      "wall_seconds": 904.45,
+      "cpu_user_seconds": 4996.67,
+      "exit": 0,
+      "status": "PASS_R052_PYTHON_FULL",
+      "checked_rows": 15721,
+      "result_sha256": "b5ecaab4bc8d1b21ed3b0359abe727c9b43ff72ebf5d0dbc43f0cb23755d10f5",
+      "fresh_rows_sha256": "f370defb30f8b25744eddbf5c2e9da65b4a8539f1f81c8b4990b7359a5ecd4b8",
+      "expected_fresh_rows_sha256": "f370defb30f8b25744eddbf5c2e9da65b4a8539f1f81c8b4990b7359a5ecd4b8",
+      "expected_from": "verification/R052.json executions.python-full.fresh_rows_sha256",
+      "receipt": "python/"
+    },
+    {
+      "mode": "bigint-full",
+      "command": "packing/.venv/bin/python3 -X utf8 -B -S certificates/R052/verify.py --bigint-full --jobs 10 --source packing/resources/web/external-square-certificates-2026-09-22/dependencies/guzhou-r038/certificates/R038/src/exact_parent_side_scan.js --output attic/r052/runs/r052-bigint",
+      "started_utc": "2026-09-25T08:21:24Z",
+      "ended_utc": "2026-09-25T08:32:37Z",
+      "wall_seconds": 673.6,
+      "cpu_user_seconds": 2166.57,
+      "exit": 0,
+      "status": "PASS_R052_BIGINT_FULL",
+      "checked_rows": 15721,
+      "chunks": 123,
+      "offline_source_sha256": "63e858e28c4dee40f5763a832e1cfdf1f1fce3a1e5c632d087525bf1ee20ed14",
+      "rebuilt_checker_sha256": "82fad041d66bc7a0f14d9dfe9b9282d8562d50fc4844649d2e684414a7ba24b1",
+      "rebuilt_checker_retained": false,
+      "result_sha256": "9edde87bc88a4be53feda8e4fe893dccadc4efe7160201cd668e52af8d093694",
+      "fresh_rows_sha256": "ee506dfec58a1324b7b35e02ef939828e59535fcdb673efc7a54673f09bb17d1",
+      "expected_fresh_rows_sha256": "ee506dfec58a1324b7b35e02ef939828e59535fcdb673efc7a54673f09bb17d1",
+      "expected_from": "SOURCE_PIN.json results/BIGINT_ROWS.json.gz decompressed_sha256, and verification/R052.json executions.bigint-full.fresh_rows_sha256",
+      "receipt": "bigint/"
+    }
+  ],
+  "cross_checks": [
+    {
+      "check": "Per-row minima of the fresh Python and BigInt ledgers are identical for all 15,721 rows",
+      "command": "cmp <(jq -c '[.[]|{row,minimum_units}]' r052-bigint/ROWS.json) <(jq -c '[.[]|{row,minimum_units}]' r052-python/ROWS.json)",
+      "exit": 0
+    },
+    {
+      "check": "The source ledger's minimum is 999426274093, reached only at rows 15555 and 15556; no other row is within 10^6 units of it",
+      "command": "gzip -dc certificates/R052/results/BIGINT_ROWS.json.gz | jq -c '(map(.minimum_units)|min) as $m | {min:$m, argmin:[.[]|select(.minimum_units==$m)|.row], within_1e6:[.[]|select(.minimum_units < 999426274093+1000000)|.row]|length}'",
+      "output": {"min": 999426274093, "argmin": [15555, 15556], "within_1e6": 2}
+    },
+    {
+      "check": "All 31 retained files equal their blobs at the pinned commit",
+      "command": "git hash-object --no-filters FILE, compared with git rev-parse 3bf1095c68a28fb9b2750fb0bc99edd5c22b7a61:FILE in a clone",
+      "output": {"files": 31, "mismatches": 0}
+    }
+  ],
+  "native": {
+    "tool": "packing/devtools/verify_guzhou_r052_native.py",
+    "runs": [
+      {
+        "command": "uv run --frozen --all-extras --group dev python -m devtools.verify_guzhou_r052_native --output resources/web/n17-guzhou-r052-2026-09-25/receipts/native/premises.json",
+        "started_utc": "2026-09-25T08:37:48Z",
+        "wall_seconds": 3.56,
+        "exit": 0,
+        "status": "PREMISES_VERIFIED_COVERAGE_NOT_REQUESTED",
+        "receipt": "native/premises.json"
+      },
+      {
+        "command": "uv run --frozen --all-extras --group dev python -m devtools.verify_guzhou_r052_native --pilot --output resources/web/n17-guzhou-r052-2026-09-25/receipts/native/pilot-refused.json",
+        "started_utc": "2026-09-25T08:37:52Z",
+        "wall_seconds": 3.17,
+        "exit": 1,
+        "status": "PREMISES_VERIFIED_COVERAGE_REFUSED",
+        "receipt": "native/pilot-refused.json"
+      },
+      {
+        "command": "uv run --frozen --all-extras --group dev python -m devtools.verify_guzhou_r052_native --pilot --sizing --output resources/web/n17-guzhou-r052-2026-09-25/receipts/native/sizing-pilot.json",
+        "started_utc": "2026-09-25T08:32:54Z",
+        "ended_utc": "2026-09-25T08:33:36Z",
+        "wall_seconds": 41.61,
+        "exit": 0,
+        "status": "SIZING_ONLY_RAISED_CEILINGS",
+        "scope": "Four rows, serial, batch 1024, with the frozen engine's allocation ceilings lifted in-process; not a coverage decision",
+        "receipt": "native/sizing-pilot.json"
+      }
+    ],
+    "provenance_note": "Run from packing/ on a dirty tree at db3f5f31c: the tool, its test and this packet were uncommitted."
+  }
+}

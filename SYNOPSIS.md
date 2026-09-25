@@ -89,6 +89,15 @@ The
 [complete native n11 decision](docs/project/reviews/review-2026-09-22-native-n11-parent-core.md)
 adds a distinct interval coverage method and supports `V4/C4` for Kleddamag’s strict
 `3.875` bound, with no new bound or C5 claim.
+The
+[R052 review of 25 September](docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md)
+verifies Guzhou0806’s strict `s(17) > 231001/50000 = 4.62002`, built with AI assistance
+on Kleddamag’s `v1.0.0` mixed point/threshold architecture, at `V4/C3`. All four of the
+source’s replay modes pass here, but both full sweeps are one event-cell method and the
+native interval route refuses the certificate at its engine ceilings, so there is no
+method-distinct decision.
+It supplies the verified Frontier bound for `n = 17`, about `0.000229` above Kleddamag’s
+previous `461300/99853`; like Kleddamag’s, it carries no `T-NNN` identifier.
 
 Every result this project has registered, in the reading order its significance scores
 set. The full claims, the rationale behind each score, and the next evidence-improving
@@ -163,10 +172,10 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 373 | 192 complete; 61 stopped; 68 blocked; 18 ready; 21 tentative; 13 in progress |
-| Sessions | 158 | 99 completed; 59 stopped; all terminal |
+| Commitments | 380 | 193 complete; 61 stopped; 69 blocked; 23 ready; 21 tentative; 13 in progress |
+| Sessions | 159 | 100 completed; 59 stopped; all terminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 177 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 31 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Hypotheses | 182 | 32 confirmed; 32 refuted; 58 blocked; 17 unresolved; 6 open; 32 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 163 | 46 accepted; 37 rejected; 52 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 36 | 36 registered |
 
@@ -461,6 +470,7 @@ case or experiment separately.
 | [BC329 Run-Set Verifier Contract](docs/project/specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md) | implementation plan | current | transient | — |
 | [Feature: Video delivery profiles](docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md) | implementation plan | current | transient | — |
 | [Plan: Certify the Reported Upper Bounds, One Validation Block at a Time](docs/project/specs/active/plan-2026-09-22-upper-bound-certification-blocks.md) | implementation plan | current | transient | — |
+| [Plan: What R052 and Rung 0 Change at n = 11 and n = 17](docs/project/specs/active/plan-2026-09-25-after-r052-planning.md) | implementation plan | current | transient | — |
 | [BC329 Calibration Reader: Source-Distinct Review](docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md) | dated review record | record | retained | — |
 | [BC329 Reader Repair: Exact-Commit Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md) | dated review record | record | retained | — |
 | [BC329 Reader F6/F7: Exact-Commit Admission Review](docs/project/reviews/review-2026-09-13-n11-bc329-reader-f6f7-overflow.md) | dated review record | record | retained | — |
@@ -888,6 +898,7 @@ case or experiment separately.
 | [Closing BC-241: The Trump Local Theorem After a Full Generator Replay](docs/project/reviews/review-2026-09-24-bc241-closure.md) | dated review record | record | retained | — |
 | [Review of the Closed Rung-0 Tree, 24 September 2026](docs/project/reviews/review-2026-09-24-rung0-closed-tree.md) | dated review record | record | retained | — |
 | [Review of the n21 Certificate at 122/25, 23 September 2026](docs/project/reviews/review-2026-09-23-n21-122-25-certificate.md) | dated review record | record | retained | — |
+| [Proof Review: Guzhou0806’s R052, `s(17) > 231001/50000`](docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md) | dated review record | record | retained | — |
 | [The Three-Lane Research Method](docs/project/three-lane-research-method.md) | component scope and use | record | retained | — |
 | [Handoff — 2026-09-04, close of the fractional-certificate block](docs/project/handoff-2026-09-04-block-close.md) | dated handoff record | record | retained | — |
 | [Handoff: Post-3.81 Portfolio at T+2](docs/project/handoff-2026-09-06-post-381-t2-commissioning.md) | dated handoff record | record | retained | — |
@@ -1239,8 +1250,31 @@ its width or tilt. Rung 1’s cost is in the fixed-angle centre enumeration, so 
 per-node bound comes before H-112. Hosted full run 36075268969 certified the closed
 session.
 
-**Selected next entry:** `think-ggk5`, BC-384: design and measure a stronger per-node
-bound for the fixed-angle cell tree.
+**[Session 159](packing/campaign/agent-sessions/session-159-n17-guzhou-r052-intake.md)**
+took in Guzhou0806’s R052, `s(17) > 231001/50000 = 4.62002`, built on Kleddamag’s
+architecture. All four of the source’s replay modes pass here, both full sweeps
+reproducing its row ledgers exactly, and a Fable max review found no mathematical defect
+([review](docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md)). It is the
+verified n = 17 lower bound at `V4/C3`; the native interval route refuses it at its
+engine ceilings, so there is no method-distinct decision yet.
+A planning block then asked what R052 and the closed rung 0 make possible
+([plan](docs/project/specs/active/plan-2026-09-25-after-r052-planning.md)). At n = 17,
+R052’s certificate is nearly saturated, so a first-party increment of `10^-4` is not
+worth building; an unreviewed lemma says a triangle-free overlap family of 34 squares at
+side `S` caps every capacity-one certificate at `S`, which a cheap search can price.
+At n = 11 the retained trees show the separating-axis LP reaches any target until about
+twenty pairs are fixed, so BC-384 waits on a tilt-profile census and a two-class
+counting certificate.
+Agenda-042 gains BC-386 to BC-391 and H-243 to H-247. Hosted full run 36121001128
+certified the closed session.
+
+**Selected next entry:** `think-amx8`, BC-386: lift the native coverage ceilings and
+decide R052 natively on two workers overnight, the first lane of the after-R052 order;
+BC-388’s n11 tilt-profile census runs beside it on seven workers and BC-387’s ceiling
+search fits in a free slot.
+
+**Selected next entry at the Session 158 cutoff:** `think-ggk5`, BC-384, now blocked on
+BC-388 and BC-389.
 
 **Selected next entry at the Session 157 cutoff:** `think-6w2y`, BC-381, the closed-tree
 review, fulfilled by Session 158.
@@ -4888,6 +4922,11 @@ round that names the hypothesis, control roles included.
 | [H-240](packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md) | confirmed | A window-free point certificate retains s(21) >= 122/25 below mass 21 (exp-229); registered as T-034 after the Fable max W2 review accepted it | 1 | — |
 | [H-241](packing/campaign/hypotheses/H-241-n12-additive-route-dead-above-3-9609.md) | refuted | A proved depth-one ceiling of at least 12 at n12, side 39609/10000; exp-233’s row loop converged at 11.980175 < 12 | 2 | — |
 | [H-242](packing/campaign/hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md) | open question | What the rung-0 cell tree costs on angle boxes away from Trump’s tilt, which prices rung 1 (H-112) | 1 | — |
+| [H-243](packing/campaign/hypotheses/H-243-n17-triangle-free-34-family-at-4-63.md) | blocked | A triangle-free overlap family of 34 unit squares fits at side 463/100 (then 465/100), which, if the capacity-one ceiling lemma survives review, caps every point or capacity-one certificate at n17; blocked on the lemma review and the exact checker (BC-387) | 0 | — |
+| [H-244](packing/campaign/hypotheses/H-244-n12-triangle-free-24-family-at-3-99.md) | blocked | The n12 sibling of H-243: 24 squares at side 399/100 (then 397/100); blocked on the same instrument | 0 | — |
+| [H-245](packing/campaign/hypotheses/H-245-n11-family-side-profile-along-the-tilt.md) | open question | The least side f(θ) along the six-axis plus five-common-angle family at 200 tilts, and the window within 0.01 of U; a pricing measurement that moves no bound | 0 | — |
+| [H-246](packing/campaign/hypotheses/H-246-n11-two-class-certificate-closes-a-rung1-box.md) | blocked | A two-class parent-core counting certificate closes the rung-1 box at half-tangent [0.1758, 0.1768] above U; blocked on the producer build (BC-389) | 0 | — |
+| [H-247](packing/campaign/hypotheses/H-247-n11-rung0-widened-to-half-width-1e-4.md) | open | Rung 0 widened: H-236’s statement on the half-tangent box of half-width 10^-4 around Trump’s tilt, by the unchanged instrument (BC-390) | 0 | — |
 
 ### Confirmed
 
@@ -5056,9 +5095,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 210 | 54,585 | 29,955 | 574 | 4,509 | 491.56 h |
+| claimed by a session | 216 | 55,713 | 30,572 | 585 | 4,557 | 503.37 h |
 | claimed by none | 64 | 13,577 | 7,855 | 177 | 1,122 | 61.29 h |
-| **measured** | **274** | **68,162** | **37,810** | **751** | **5,631** | **552.85 h** |
+| **measured** | **280** | **69,290** | **38,427** | **762** | **5,679** | **564.66 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -5111,7 +5150,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-156](packing/campaign/agent-sessions/session-156-w3-overnight-n11-settlement.md) | 5 | 16 | 2,013 | 1,168 | 20 | 11.43 h |
 | [session-157](packing/campaign/agent-sessions/session-157-n11-rung0-overnight-cpu.md) | 2 | 0 | 0 | 0 | 0 | 0 h |
 | [session-158](packing/campaign/agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | 1 | 5 | 646 | 379 | 3 | 1.89 h |
-| *shared by 49 sessions* | — | 8 | 25,098 | 13,552 | 284 | 345.6 h |
+| [session-159](packing/campaign/agent-sessions/session-159-n17-guzhou-r052-intake.md) | 2 | 6 | 844 | 484 | 10 | 2.34 h |
+| *shared by 50 sessions* | — | 8 | 25,382 | 13,685 | 285 | 355.07 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -5184,9 +5224,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 104 |
+| measured | 105 |
 | unmeasured | 54 |
-| **total** | **158** |
+| **total** | **159** |
 
 <!-- END GENERATED: session-close-report -->
 

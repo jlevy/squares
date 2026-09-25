@@ -1,0 +1,4 @@
+# 已测试的完整 Python 扫描依赖（Python 3.12.14）。 / Tested dependencies for the complete Python scan (Python 3.12.14).
+numpy==2.5.3
+numba==0.67.0
+llvmlite==0.49.0

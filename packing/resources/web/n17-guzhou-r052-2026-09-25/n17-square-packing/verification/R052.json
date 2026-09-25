@@ -1,0 +1,283 @@
+{
+  "schema": "n17.r052.publication-validation.v1",
+  "status": "PASS_ISOLATED_PUBLIC_REPLAYS",
+  "theorem": "s(17)>231001/50000=4.62002",
+  "package_manifest_sha256": "2a74ea2efef6be4435b227746d3e48f93075160b77ee5a0563a2dc81996952aa",
+  "full_replay_snapshot_manifest_sha256": "ae9a9a44a2b125be57b7c401f9e97c318aeb0cc71c6c7a189fdf80b259c018da",
+  "snapshot_difference": {
+    "changed_files": [
+      "PROOF.md",
+      "MANIFEST.json"
+    ],
+    "explanation": "全扫快照早于证明文档措辞修订；科学数据、代码和命令完全相同，最终清单另通过记录核查。 / Full scans used a snapshot preceding proof-prose revisions; scientific data, code and commands are identical, and final-manifest records were checked separately."
+  },
+  "identical_files": [
+    {
+      "path": "certificate/R052_CERTIFICATE.json.gz",
+      "sha256": "826b3eabb8f4881ad02f6e20df890c37f19bb5f5bf4a5e343d9c34441f878756"
+    },
+    {
+      "path": "KLED_MIT_LICENSE.txt",
+      "sha256": "3658a57c304f53d0c2be0009232e3622fab7013a13bebea180cfbe8c7608f31c"
+    },
+    {
+      "path": "KLED_MIT_LICENSE.zh-en.md",
+      "sha256": "b24a14a2fe57557710869a6147efe53982ea183940ef89bba85257681ff5b9f4"
+    },
+    {
+      "path": "LICENSE_SCOPE.md",
+      "sha256": "23cc72c1e140531c7d34cdd18309f73c633445dd704cf4c71c3e7abecc297eec"
+    },
+    {
+      "path": "README.md",
+      "sha256": "9a54055f0ff9f751e75f94fc3d66392f23cf8d0542157be6ec0cfaf832a90f3d"
+    },
+    {
+      "path": "REPRODUCIBILITY.md",
+      "sha256": "c5db358e6ed0343d836f939f619ce361040d42e80a393ad00f47bf6c5271388a"
+    },
+    {
+      "path": "requirements-full.txt",
+      "sha256": "1c395ff56bb6c8299070107b90e669a97b98d5eeaeb191e5f8de12c0fb894597"
+    },
+    {
+      "path": "results/BIGINT_BLOCKS.zip",
+      "sha256": "d3ea9b0c0a811246ced86a591d0793b5e8d9647eb02117f72bf564f8e218d991"
+    },
+    {
+      "path": "results/BIGINT_RESULT.json",
+      "sha256": "af3806efaf68370e9f300b5cd9c6773bc731ff250a315f4be72e03a0758a2726"
+    },
+    {
+      "path": "results/BIGINT_ROWS.json.gz",
+      "sha256": "09e4b0cf53de756b290ccde3b66f33a35d8023c25379a80653dc8603b0fe18c3"
+    },
+    {
+      "path": "SOURCE_NOTICES.md",
+      "sha256": "a70bef48342afab3848c024c30474edc2378b3f520c7c71d7371c3c28b905595"
+    },
+    {
+      "path": "SOURCE_PIN.json",
+      "sha256": "1945c02f6bc8c0032f5e94057610307e24293ee77f400d7ba3a51d722395d39a"
+    },
+    {
+      "path": "src/fast_ranges.py",
+      "sha256": "11e17d25c51e96ab3336ccff9209e5b7c15847fae42f39218cc7d2049643aaac"
+    },
+    {
+      "path": "src/geometry.py",
+      "sha256": "f98b8690aaef397d6f088dda77e136826fb2882a85244ee5bc208d7a625fae5c"
+    },
+    {
+      "path": "src/prepare_secondary.py",
+      "sha256": "f82dc39134c712035fd1ca57e242ae4f9bef6a39139a73b1b207794fa951a10e"
+    },
+    {
+      "path": "src/python_replay.py",
+      "sha256": "c2a28b419e1c16b5fc34d53586c842da7700f8856f87b76db47959af464a20d9"
+    },
+    {
+      "path": "src/r052-adaptation.json",
+      "sha256": "c04451ca9d335dad64e7b5f956cd66be06981a52d7101adc2eaca04f7b93d9e4"
+    },
+    {
+      "path": "src/secondary-adaptation.json",
+      "sha256": "827116faf382449676bdeefafe83adac1d04b96c997a058c8868fdb0e4e4b211"
+    },
+    {
+      "path": "src/structure.py",
+      "sha256": "28417d6bb6e6a5eb3dd98dfaebd28923390a19a1ec3d0eb5c7ad52053f3e69aa"
+    },
+    {
+      "path": "verify.py",
+      "sha256": "1ed3da8237a67857425a36857a6d4dde64e260eb5832f58b6f6b0fe4bbba4017"
+    }
+  ],
+  "executions": {
+    "containment": {
+      "command_equivalent_from_repository_root": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-S",
+        "certificates/R052/verify.py",
+        "--containment",
+        "--output",
+        ".replay-runs/r052-containment"
+      ],
+      "result": {
+        "status": "PASS_R052_CONTAINMENT",
+        "mode": "containment",
+        "bound": "231001/50000",
+        "candidate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825",
+        "manifest_sha256": "ae9a9a44a2b125be57b7c401f9e97c318aeb0cc71c6c7a189fdf80b259c018da",
+        "checked_rows": 0,
+        "archived_rows": 15721,
+        "minimum_units": 999426274093,
+        "budget_units": 16990246659579,
+        "strict_surplus_units": 2,
+        "structure": {
+          "physical_sites": 18585,
+          "point_orbits": 2354,
+          "threshold_orbits": 514,
+          "generic_orbits": 54,
+          "physical_trigger_groups": 4504,
+          "budget_units": 16990246659579,
+          "required_minimum_units": 999426274093,
+          "angular_rows": 15721,
+          "strict_containment_inequalities": 62884,
+          "minimum_containment_margin": "4613/9240040000000000000"
+        },
+        "seconds": 1.797000000020489,
+        "scope": "Fresh full centre replay only in full modes / 仅 full 模式重新计算完整中心空间"
+      },
+      "result_sha256": "9fa6d20573cfd904f73fe1f93ec8f5f9f0faecc3445d4412bc0198687c5375a1",
+      "input_sha256": "6d310e5430448f6ea83c7be05ccc9500a67656f5e388aaa43296256a95b9fbb2",
+      "environment": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "jobs": 4
+      }
+    },
+    "python-full": {
+      "command_equivalent_from_repository_root": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "certificates/R052/verify.py",
+        "--python-full",
+        "--jobs",
+        "8",
+        "--output",
+        ".replay-runs/r052-python"
+      ],
+      "result": {
+        "status": "PASS_R052_PYTHON_FULL",
+        "mode": "python-full",
+        "bound": "231001/50000",
+        "candidate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825",
+        "manifest_sha256": "ae9a9a44a2b125be57b7c401f9e97c318aeb0cc71c6c7a189fdf80b259c018da",
+        "checked_rows": 15721,
+        "archived_rows": 15721,
+        "minimum_units": 999426274093,
+        "budget_units": 16990246659579,
+        "strict_surplus_units": 2,
+        "structure": {
+          "physical_sites": 18585,
+          "point_orbits": 2354,
+          "threshold_orbits": 514,
+          "generic_orbits": 54,
+          "physical_trigger_groups": 4504,
+          "budget_units": 16990246659579,
+          "required_minimum_units": 999426274093,
+          "angular_rows": 15721,
+          "strict_containment_inequalities": 62884,
+          "minimum_containment_margin": "4613/9240040000000000000"
+        },
+        "seconds": 715.3910000000615,
+        "scope": "Fresh full centre replay only in full modes / 仅 full 模式重新计算完整中心空间"
+      },
+      "result_sha256": "3039237f581d62853047e38c3464ac2c851c3f83a64ab43cabb8e8366cb68e1d",
+      "input_sha256": "e099bdfadbcf63008ad51b15771f608ed878b0e3a9527833a704cccf2fd22cb5",
+      "environment": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "numpy": "2.5.3",
+        "numba": "0.67.0",
+        "llvmlite": "0.49.0",
+        "jobs": 8
+      },
+      "fresh_rows_sha256": "f370defb30f8b25744eddbf5c2e9da65b4a8539f1f81c8b4990b7359a5ecd4b8",
+      "per_row_minima_agree": true
+    },
+    "bigint-full": {
+      "command_equivalent_from_repository_root": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-S",
+        "certificates/R052/verify.py",
+        "--bigint-full",
+        "--jobs",
+        "4",
+        "--output",
+        ".replay-runs/r052-bigint"
+      ],
+      "result": {
+        "status": "PASS_R052_BIGINT_FULL",
+        "mode": "bigint-full",
+        "bound": "231001/50000",
+        "candidate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825",
+        "manifest_sha256": "ae9a9a44a2b125be57b7c401f9e97c318aeb0cc71c6c7a189fdf80b259c018da",
+        "checked_rows": 15721,
+        "archived_rows": 15721,
+        "minimum_units": 999426274093,
+        "budget_units": 16990246659579,
+        "strict_surplus_units": 2,
+        "structure": {
+          "physical_sites": 18585,
+          "point_orbits": 2354,
+          "threshold_orbits": 514,
+          "generic_orbits": 54,
+          "physical_trigger_groups": 4504,
+          "budget_units": 16990246659579,
+          "required_minimum_units": 999426274093,
+          "angular_rows": 15721,
+          "strict_containment_inequalities": 62884,
+          "minimum_containment_margin": "4613/9240040000000000000"
+        },
+        "seconds": 733.0779999999795,
+        "scope": "Fresh full centre replay only in full modes / 仅 full 模式重新计算完整中心空间"
+      },
+      "result_sha256": "c3c22151cbbc64aebaa616f38978e1502459a423a5ca0ebc8acfc58e878bb125",
+      "input_sha256": "ec83f728fe1f269bf951aff069cdf01ff3f33f91942aefe8ae7abe42733e7139",
+      "environment": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "node": "v24.18.0",
+        "jobs": 4
+      },
+      "fresh_rows_sha256": "ee506dfec58a1324b7b35e02ef939828e59535fcdb673efc7a54673f09bb17d1",
+      "per_row_minima_agree": true
+    },
+    "final-records": {
+      "command_equivalent_from_repository_root": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-S",
+        "certificates/R052/verify.py",
+        "--output",
+        ".replay-runs/r052-records"
+      ],
+      "result": {
+        "status": "PASS_R052_RECORDS",
+        "mode": "records",
+        "bound": "231001/50000",
+        "candidate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825",
+        "manifest_sha256": "2a74ea2efef6be4435b227746d3e48f93075160b77ee5a0563a2dc81996952aa",
+        "checked_rows": 0,
+        "archived_rows": 15721,
+        "minimum_units": 999426274093,
+        "budget_units": 16990246659579,
+        "strict_surplus_units": 2,
+        "structure": null,
+        "seconds": 0.23499999998603016,
+        "scope": "Fresh full centre replay only in full modes / 仅 full 模式重新计算完整中心空间"
+      },
+      "result_sha256": "6d9f70c80aac1255f825f5a6208773081ebe79ee5229d0360f16b881619032d8",
+      "input_sha256": "03d259f1ef5711815bae1d8e52033c6f2a5a0877462e1f270cbf9fb39c47503a",
+      "environment": {
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "jobs": 4
+      }
+    }
+  },
+  "review_scope": "本地计算机辅助证明及非提出者 AI 审查，不声称真人同行评审。 / Local computer-assisted proof and non-proposer AI review; no human peer-review claim.",
+  "ci_scope": "CI 状态按发布提交另查。 / CI status is tracked separately for the publication commit."
+}

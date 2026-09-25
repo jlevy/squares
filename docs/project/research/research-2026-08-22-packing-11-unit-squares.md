@@ -879,7 +879,7 @@ Use the structured form to query or plot; use these tables to read.
 | --- | --- | --- | --- | --- | --- | --- |
 | 11 | 3.87708359 | hand | 8 | 3.875 | elementary | 0.0021 |
 | 12 | 4 | grid | — | 3.788854 | monotone from `s(11)` | 0.2111 |
-| 17 | 4.67553009 | hand | 18 | 4.619791 | elementary | 0.0557 |
+| 17 | 4.67553009 | hand | 18 | 4.62002 | elementary | 0.0555 |
 | 18 | `(7/2) + (1/2)√7` = 4.82287566 | hand | — | 4.613046 | monotone from `s(17)` | 0.2098 |
 | 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.617282 | unavoidable points | 0.2683 |
 | 20 | 5 | grid | — | 4.617282 | monotone | 0.3827 |

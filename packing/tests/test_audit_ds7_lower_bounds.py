@@ -86,7 +86,7 @@ def test_table82_contradiction_is_excluded_without_rewriting_the_theorem() -> No
 @pytest.mark.parametrize(
     ("n", "reported_exact", "note_fragment", "verified_value"),
     [
-        (17, "461300/99853", "s(17) > 461300/99853", "4.619791092906572"),
+        (17, "231001/50000", "s(17) > 231001/50000", "4.62002"),
         (18, "461300/99999", "s(17) >= 461300/99999", "4.679"),
     ],
 )
@@ -97,9 +97,10 @@ def test_indexed_external17_report_never_exceeds_the_verified_lane(
 
     It was anabologyco-maker's 9141/2000, below the verified lane at both sizes.
     Since 2026-09-20 Guzhou0806's historical R012 has supplied the n = 18 report. At
-    n = 17 Kleddamag's later strict bound supersedes R012 and the reported and verified
-    fields hold the same value; at n = 18 R012 still sits below a stronger first-party
-    rung. Either way the
+    n = 17 later strict bounds supersede R012 -- Kleddamag's 461300/99853 from
+    2026-09-22, then Guzhou0806's R052 231001/50000 from 2026-09-25 -- and the reported
+    and verified fields hold the same value; at n = 18 R012 still sits below a stronger
+    first-party rung. Either way the
     audit's own selector must be at a fixed point: the reported lane is raised only by
     a report that exceeds it, and never past what the verified lane already carries.
     """

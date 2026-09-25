@@ -1,0 +1,15 @@
+# 来源与成果归属 / Sources and attribution
+
+R052 由 Guzhou0806 / N17 project 在 AI 辅助下完成探索、实现、计算、核查与文档；最终本地接受包括非提出者 AI 审查，不是另有真人同行审查或形式化证明助理验证。 / Guzhou0806 / N17 project used AI assistance for exploration, implementation, computation, checking and documentation of R052; final local acceptance included non-proposer AI review, not separate human peer review or proof-assistant verification.
+
+直接公开基线为 [R050 固定版本](https://github.com/Guzhou0806/n17-square-packing/tree/48ff059bbac892723eb4beeed6f4f6cfadb1d5c3/certificates/R050)，其严格下界为 4613000/998509；R052 扩大资源字典、重新赋权、增加中心点并对五个原角区间分别四分。 / The direct public baseline is [pinned R050](https://github.com/Guzhou0806/n17-square-packing/tree/48ff059bbac892723eb4beeed6f4f6cfadb1d5c3/certificates/R050), whose strict bound is 4613000/998509; R052 enlarges resources, reweights them, adds a centre point and divides each of five original angular intervals into four.
+
+主要混合证书架构与 Python 实现的来源为 [Kleddamag 的固定 v1.0.0](https://github.com/Kleddamag/17-squares-certified-bound/tree/a499e2c739ce7853fa04c8bcdc85caf1c2b01b37)。本发布保留 Kleddamag 的原始 MIT 许可，不声称重新发明加权覆盖或阈值收费。 / The principal mixed-certificate architecture and Python implementation derive from [Kleddamag's pinned v1.0.0](https://github.com/Kleddamag/17-squares-certified-bound/tree/a499e2c739ce7853fa04c8bcdc85caf1c2b01b37). This release retains Kleddamag's original MIT licence and does not claim to reinvent weighted covering or threshold charging.
+
+历史支撑与角目录来源还包括 [Mira-acc/17squares 固定版本](https://github.com/Mira-acc/17squares/tree/ac464dd06ded72e2f6eb2c2f3d510b01391c056d)，方法来源链还包括 [Joshua Levy 的 squares project](https://github.com/jlevy/squares)。 / Historical support and angular-catalogue sources include [pinned Mira-acc/17squares](https://github.com/Mira-acc/17squares/tree/ac464dd06ded72e2f6eb2c2f3d510b01391c056d), and the methodological lineage also includes [Joshua Levy's squares project](https://github.com/jlevy/squares).
+
+Node 实现通过 [固定 R038 原源](https://github.com/Guzhou0806/n17-square-packing/blob/32edfd3da78bf80a309398f552b3b602b9c45d6c/certificates/R038/src/exact_parent_side_scan.js) 及两个确定性编辑配方重建；第二阶段增加大整数 JSON 无损解析、通用 k-of-m 阈值与逐行账本。原源与最终字节锁定见 SOURCE_PIN.json 和配方。 / Node is reconstructed from [pinned R038 source](https://github.com/Guzhou0806/n17-square-packing/blob/32edfd3da78bf80a309398f552b3b602b9c45d6c/certificates/R038/src/exact_parent_side_scan.js) and two deterministic edit recipes; the second stage adds lossless large-integer JSON parsing, generic k-of-m thresholds and a per-row ledger. SOURCE_PIN.json and the recipes pin the original and final bytes.
+
+Kleddamag 的内部 4.62001 结果由维护者获知，仍归属于 Kleddamag；本发布未获得或独验其未公开证明，也不以其证书为前提。数值超过这一报告值不构成外部优先权声明。 / Kleddamag's internal 4.62001 result was reported to the maintainer and remains attributed to Kleddamag; this release neither obtained nor independently verified that unpublished proof and does not depend on its certificate. Exceeding the reported value numerically is not an external priority claim.
+
+来源链接与署名不意味着上游背书或共同署名。 / Source links and attribution do not imply upstream endorsement or coauthorship.

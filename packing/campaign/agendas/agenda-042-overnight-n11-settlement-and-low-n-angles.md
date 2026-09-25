@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-042
   title: Overnight n11 Settlement Ladder and Low-n Angles After PR 230
-  updated: '2026-09-24'
+  updated: '2026-09-25'
   status: active
   objective: >-
     Turn PR 230's W3 review and the two explorations it led to, X-046 and X-047, into
@@ -434,7 +434,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11]
-    state: ready
+    state: blocked
     priority: 1
     question: >-
       Which stronger per-node bound for the fixed-angle cell tree closes a rung-0 subtree
@@ -445,14 +445,236 @@ agenda:
     entry: exp-234's flat response to width and tilt; X-046's second-order dual bound; exp-228's descent filter.
     exit: A measured node-count reduction on retained boxes, or a scoped reason none of the candidates helps.
     bead: think-ggk5
-    depends_on: []
+    depends_on: [BC-388, BC-389]
     next_evidence: A design note and a benchmark receipt.
     workflows: [insight-iteration, pipeline-improvement]
     program: n11-settlement
     artifacts:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md
     parallel_group: n11-rung1-relaxation
-    note: Rung 1 (H-112) is priced out with the present relaxation; this is its prerequisite.
+    note: >-
+      Rung 1 (H-112) is priced out with the present relaxation; this is its prerequisite.
+      Narrowed by BC-385: the design note chooses between parametric-in-tilt
+      certificates, which certify a midpoint dual vector over a whole tilt interval by
+      univariate polynomial positivity, and per-square counting at each node, after
+      BC-388 and BC-389 report. The second-order dual bound, the descent filter,
+      symmetry reduction and LP warm starts are retired as BC-384 candidates; node
+      throughput is a separate efficiency item.
+  - id: BC-385
+    purpose: research
+    owner_focus: insight
+    instances: [11, 12, 17, 21]
+    state: complete
+    priority: 0
+    question: >-
+      What else do R052 at n17 and the closed rung 0 at n11 make possible, and which
+      bounded commitments should follow them?
+    hypotheses: [H-243, H-244, H-245, H-246, H-247]
+    budget: >-
+      Session 159's W10 planning block: two Fable max assessments in parallel, one per
+      case, each with at most ten minutes of probes, then codification.
+    entry: R052 integrated at V4/C3 with its review; rung 0 closed as T-035 and T-036; exp-234 retained.
+    exit: >-
+      The plan document retained, the selected directions registered as H-243 to H-247,
+      and BC-386 to BC-391 given beads, prices, stop conditions and an order.
+    bead: think-f0if
+    depends_on: []
+    next_evidence: docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+    workflows: [review-planning-oversight]
+    artifacts:
+    - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+    - docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md
+    parallel_group: after-r052-planning
+    note: >-
+      Not selected: a first-party n17 producer beyond 4.62002 waits for BC-387 and is
+      reconsidered only if the ceiling is at least 4.64; the n12 parent-core transfer
+      waits for BC-387's n12 price and BC-380's parent clip; any n11 lower-bound
+      increment stays under the owner's 2026-09-14 hold.
+    outcomes:
+    - scope: The Session 159 planning block after R052.
+      classification: achieved
+      result: >-
+        R052's certificate is nearly saturated and its public ladder is flattening, so a
+        first-party increment is not worth building until the architecture's ceiling is
+        priced; at n11 the cost of rung 1 is the relaxation, so a per-node bound must
+        price all pairs at once. Six commitments were selected, and BC-384 was narrowed
+        to two designs. Nothing in the block moves a bound.
+      evidence:
+      - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+      disposition: retire-success
+      follow_up: null
+  - id: BC-386
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [17]
+    state: ready
+    priority: 1
+    question: >-
+      Does this repository's native coverage engine decide every row of R052's
+      certificate at or above its charge once its memory-policy ceilings are lifted
+      behind an explicit byte budget, so that R052 can be rated C4?
+    hypotheses: []
+    budget: >-
+      Opus extra-high about two hours to lift the ceilings, add a contract test admitting
+      R052's dimensions and re-baseline the n11 native audit; about 15 CPU-hours, about
+      eight hours of wall on the tool's two workers; Fable extra-high checks the transfer
+      contract.
+    entry: >-
+      R052 at V4/C3; packing/devtools/verify_guzhou_r052_native.py; the sizing rows
+      that certified at or above the charge in Session 159.
+    exit: >-
+      Every row decided by the native engine on a clean reviewed commit, with the byte
+      budget recorded in the receipt, or the rows it refuses listed as refusals.
+    bead: think-amx8
+    depends_on: []
+    next_evidence: A native-decision receipt for R052 under results/agenda-042/ and the reviewed cap-lift commit.
+    workflows: [pipeline-improvement, factual-review]
+    program: low-n-angles
+    artifacts:
+    - docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md
+    - packing/devtools/verify_guzhou_r052_native.py
+    parallel_group: n17-native-c4
+    note: >-
+      The cap lift lands as a reviewed commit before the run starts. R052 has zero
+      slack, so a stalled or seam row is possible; it is recorded as a refusal, never as
+      a negative.
+  - id: BC-387
+    purpose: research
+    owner_focus: insight
+    instances: [17, 12]
+    state: ready
+    priority: 1
+    question: >-
+      Does the capacity-one ceiling lemma survive review, and do triangle-free overlap
+      families of 34 squares at 463/100 and 465/100, and of 24 at 397/100 and 399/100,
+      exist under an exact checker?
+    hypotheses: [H-243, H-244]
+    budget: >-
+      Fable extra-high lemma review about one hour; Opus extra-high build of the search
+      and exact checker four to six hours; the searches run in minutes wherever a slot
+      is free.
+    entry: The lemma as derived in the plan document; R052's certificate and Bidwell's packing as the two ends.
+    exit: >-
+      An accepting or rejecting lemma review, then an exact-checker verdict on a family
+      at each target or a search budget spent without one.
+    bead: think-68la
+    depends_on: []
+    next_evidence: A dated lemma review under docs/project/reviews/, then the checker receipts under results/agenda-042/.
+    workflows: [factual-review, pipeline-improvement, research-loop]
+    program: low-n-angles
+    artifacts:
+    - packing/campaign/hypotheses/H-243-n17-triangle-free-34-family-at-4-63.md
+    - packing/campaign/hypotheses/H-244-n12-triangle-free-24-family-at-3-99.md
+    parallel_group: architecture-ceiling
+    note: >-
+      Stop if the lemma fails review. No family found is inconclusive, not a negative.
+      The price decides the first-party n17 producer (reconsidered only at a ceiling of
+      at least 4.64) and the n12 parent-core transfer.
+  - id: BC-388
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: ready
+    priority: 1
+    question: >-
+      What is the least side f(theta) along the six-axis plus five-common-angle family at
+      200 tilts, and on which window is it within 0.01 of U?
+    hypotheses: [H-245]
+    budget: Opus high about two hours to build the frozen-angle census, then one night on seven workers.
+    entry: The exp-228 census driver and quench; H-245 registered.
+    exit: A table of f(theta) at 200 tilts with verified witnesses and the window where f(theta) - U < 0.01.
+    bead: think-91yk
+    depends_on: []
+    next_evidence: The census receipt under results/agenda-042/ and an experiment record.
+    workflows: [pipeline-improvement, research-loop]
+    program: n11-settlement
+    artifacts:
+    - packing/campaign/hypotheses/H-245-n11-family-side-profile-along-the-tilt.md
+    parallel_group: n11-family-profile
+    note: None as a stop; it is a measurement that prices BC-389 and BC-384 and moves no bound.
+  - id: BC-389
+    purpose: research
+    owner_focus: insight
+    instances: [11]
+    state: ready
+    priority: 2
+    question: >-
+      Does a two-class parent-core counting certificate close the rung-1 box at 20
+      degrees, half-tangent [0.1758, 0.1768], outright?
+    hypotheses: [H-246]
+    budget: >-
+      Opus extra-high one to two days of build and hours of CPU; Fable extra-high
+      reviews the two-class lemma.
+    entry: >-
+      sqpack.fractional.classcert, the parent-core and threshold separators, and the
+      native sweep; exp-234's box at 20 degrees.
+    exit: >-
+      A native-swept certificate with an accepting lemma review, or the mass still above
+      11 after site column generation with two-of-three and three-of-five atoms.
+    bead: think-nho8
+    depends_on: []
+    next_evidence: The frozen certificate, the native sweep receipt and a dated lemma review.
+    workflows: [pipeline-improvement, research-loop, factual-review]
+    program: n11-settlement
+    artifacts:
+    - packing/campaign/hypotheses/H-246-n11-two-class-certificate-closes-a-rung1-box.md
+    parallel_group: n11-two-class-closer
+    note: >-
+      Stop when the mass stays above 11 after site column generation with two-of-three
+      and three-of-five atoms. Aimed at a box, not at the side, so it is outside the
+      owner's hold on n11 lower-bound increments.
+  - id: BC-390
+    purpose: research
+    owner_focus: correctness
+    instances: [11]
+    state: ready
+    priority: 2
+    question: >-
+      Does the unchanged rung-0 instrument prove H-236's statement on the half-tangent
+      box of half-width 10^-4 around Trump's tilt?
+    hypotheses: [H-247]
+    budget: A launcher only; about 1.7e8 nodes, one night on nine workers, then the reader.
+    entry: The fixed_angle_tree box preset and reader at their exp-234 bytes; T-035 and T-036.
+    exit: >-
+      A reader-closed tree on the widened box, a verified counterexample candidate, or an
+      unresolved leaf list at the declared cap.
+    bead: think-7c17
+    depends_on: []
+    next_evidence: The frozen digests, run output and reader verdict under results/agenda-042/.
+    workflows: [research-loop]
+    program: n11-settlement
+    artifacts:
+    - packing/campaign/hypotheses/H-247-n11-rung0-widened-to-half-width-1e-4.md
+    parallel_group: n11-rung0-wide
+    note: Stop if the enclosure reach of a Trump-degenerate leaf meets the local-theorem radius rho.
+  - id: BC-391
+    purpose: research
+    owner_focus: insight
+    instances: [21]
+    state: ready
+    priority: 3
+    question: >-
+      Does the additive point certificate at n21 reach side 4.89 on stock column
+      generation, without the parent clip?
+    hypotheses: []
+    budget: Opus high, runs of under an hour each, in idle slots.
+    entry: >-
+      T-034's certificate at 4.88 and the stock column generator; an H-item registered
+      for the 4.89 claim before any run.
+    exit: >-
+      A value below 21 retained by the decision gate, or a converged value of at least 21
+      on two site sets.
+    bead: think-t50i
+    depends_on: []
+    next_evidence: The run logs and decision receipts under results/agenda-042/.
+    workflows: [research-loop]
+    program: low-n-angles
+    artifacts:
+    - packing/campaign/hypotheses/H-240-n21-additive-certificate-at-4-88.md
+    parallel_group: idle-slot
+    note: >-
+      Register the H-item before the first run. Stop when the value reaches 21 on two
+      site sets or when the certificate fails on both.
 ---
 # Agenda 042: The n11 Settlement Ladder and Low-n Angles
 
@@ -478,6 +700,19 @@ decide the most.
 
 No more than about three sub-agents run at once.
 A lane that finishes early frees its slot for the next ready item in priority order.
+
+## After R052
+
+Session 159’s planning block, BC-385, added six commitments after R052 was integrated;
+the [plan](../../../docs/project/specs/active/plan-2026-09-25-after-r052-planning.md)
+keeps the assessments behind them.
+Each runs within about three agents at once.
+
+| Step | n17 and low-n lanes | n11 lanes |
+| --- | --- | --- |
+| Day | BC-387’s lemma review; BC-386’s cap lift, landed as a reviewed commit | BC-388’s census build |
+| First night | BC-386’s full native run on 2 workers; BC-387’s searches in any free slot | BC-388’s census on 7 workers |
+| Next | BC-391 in idle slots | BC-389’s build, then BC-390’s night; a Fable max reading of BC-388 and BC-389 selects BC-384’s design |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

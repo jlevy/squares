@@ -1,0 +1,64 @@
+{
+  "schema": "NativeParentCoreR052Receipt/v1",
+  "provenance": {
+    "git_commit": "db3f5f31caf6400fa0a4f31c40dd7413578e268d",
+    "dirty": true,
+    "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "command": [
+      "/Users/levy/wrk/github/squares/.claude/worktrees/w3-review/packing/devtools/verify_guzhou_r052_native.py",
+      "--pilot",
+      "--output",
+      "resources/web/n17-guzhou-r052-2026-09-25/receipts/native/pilot-refused.json"
+    ],
+    "source_url": "https://github.com/Guzhou0806/n17-square-packing",
+    "source_commit": "3bf1095c68a28fb9b2750fb0bc99edd5c22b7a61",
+    "certificate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825"
+  },
+  "bound": "231001/50000",
+  "outer_side": "4613/1000",
+  "parent_side": "230650/231001",
+  "minimum_charge": "999426274093/1000000000000",
+  "budget": "16990246659579/1000000000000",
+  "counting_gap": "1/500000000000",
+  "counting_gap_units": 2,
+  "final_endpoint_excess": "309449/250000000000",
+  "source_counts": {
+    "point_orbits": 2354,
+    "threshold_orbits": 514,
+    "generic_orbits": 54,
+    "resource_columns": 2922,
+    "physical_points": 18585,
+    "physical_threshold_groups": 4504,
+    "angular_rows": 15721
+  },
+  "premises": {
+    "budget": "16990246659579/1000000000000",
+    "minimum_containment_numerator": "4613/4613131550180000000",
+    "final_half_tangent": "207107/500000",
+    "rows": 15721,
+    "containment_quadratics": 62884
+  },
+  "coverage_readiness": {
+    "batch_size": 2048,
+    "point_atoms": 6901,
+    "threshold_atoms": 2036,
+    "atom_rows": 8937,
+    "distinct_sites": 9261,
+    "member_width": 5,
+    "member_slots": 44685,
+    "ragged_member_slots": 13105,
+    "ceiling_atom_rows": 8192,
+    "ceiling_distinct_sites": 8192,
+    "ceiling_member_slots": 16384,
+    "admitted": false,
+    "refusal": "the interval verifier supports at most 8192 atoms at this batch size"
+  },
+  "sizing_raised_ceilings": null,
+  "timings": {
+    "load": 0.2739604579983279,
+    "premises": 2.5887981250416487
+  },
+  "status": "PREMISES_VERIFIED_COVERAGE_REFUSED",
+  "seconds": 2.908696250000503
+}

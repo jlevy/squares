@@ -1,0 +1,157 @@
+{
+  "schema": "n17.publication.v1",
+  "result": "N17-R042",
+  "publication_version": "r042-public-1",
+  "base_commit": "32edfd3da78bf80a309398f552b3b602b9c45d6c",
+  "scope": "R042 adds a new public certificate and updates current public presentation while leaving frozen R038, R012, and M19 scientific evidence unchanged. / R042 新增公开证书并更新当前公开展示，同时保持冻结的 R038、R012 与 M19 科学证据不变。",
+  "files": {
+    ".github/workflows/r042.yml": {
+      "bytes": 2785,
+      "sha256": "d6e47a176f17fb7b9c5f8d4e0a7e6a825974aab2016200169a6a80bcf9163859"
+    },
+    "CHANGELOG.md": {
+      "bytes": 2551,
+      "sha256": "199400b01b9b2d0d5bfff370352f338d9e50c6d4a494ef51d8d7c4a419ea3b58"
+    },
+    "CITATION.cff": {
+      "bytes": 960,
+      "sha256": "0271f45c89b4cd351d56a8197e652f2e61185f6a33a76d0ef15e5634b4f117d0"
+    },
+    "NOTICE.md": {
+      "bytes": 3071,
+      "sha256": "99f7378a28d7ad120559926c6ac8209666b63b4acd55da352b7da39b41569ced"
+    },
+    "README.md": {
+      "bytes": 5089,
+      "sha256": "bf27681c60392ee8cc5f0edcf6f0d7d2ba0f04e13f0c0e667bf941f874147c1d"
+    },
+    "RESULTS.md": {
+      "bytes": 3388,
+      "sha256": "13047c09139404d59e498ad59d569a705a9ca38df6884b069efda01d7b47333b"
+    },
+    "certificates/R042/ATTRIBUTION.md": {
+      "bytes": 3001,
+      "sha256": "05479de727613ce29e9c0a9e4a0ad2110ba6de743bb994e8ffac3c8d1c1ae5ce"
+    },
+    "certificates/R042/CLAIMS.json": {
+      "bytes": 1612,
+      "sha256": "87bc2a6d14b66a6c4c60e42f7c0a0349ba6bb651a26b8ea9a6da0febdbcd165f"
+    },
+    "certificates/R042/EXPERIMENTS.md": {
+      "bytes": 1566,
+      "sha256": "f30e5e71379ba8c44fb8e0481619b211cbc534237e48e2145a519927650acb0a"
+    },
+    "certificates/R042/KLED_MIT_LICENSE.zh-en.md": {
+      "bytes": 2272,
+      "sha256": "b24a14a2fe57557710869a6147efe53982ea183940ef89bba85257681ff5b9f4"
+    },
+    "certificates/R042/LICENSE_SCOPE.md": {
+      "bytes": 1116,
+      "sha256": "afe28dc9e58c71b09e34fbc261b79b263756909c44f10e949d1eac7927c72ad3"
+    },
+    "certificates/R042/MANIFEST.json": {
+      "bytes": 4080,
+      "sha256": "09bf53062936dd62e6ea13bae1acd3b14f59a2cdb1083fca000bde5b288fab00"
+    },
+    "certificates/R042/PROOF.md": {
+      "bytes": 6496,
+      "sha256": "8209a6068f7a0b017bcf7b783587bbd97aca37fb473141b019fcdf1611371dd0"
+    },
+    "certificates/R042/README.md": {
+      "bytes": 3228,
+      "sha256": "b88114550ca2890dfeec22ec5eca32e1f67ddd0f5536cdd4f7be7d9686d816b1"
+    },
+    "certificates/R042/REPRODUCIBILITY.md": {
+      "bytes": 3795,
+      "sha256": "0fbc89df78c96a26d0f0253d22f37fdc9cd1eabde354f8243837046c59df8e59"
+    },
+    "certificates/R042/SOURCE_PIN.json": {
+      "bytes": 1362,
+      "sha256": "5d35b0b39fcc63cae6c2ead498fbe30cd4c7cf21d7aafc213fba2d0c87290a9c"
+    },
+    "certificates/R042/certificate/R042_CERTIFICATE.json.gz": {
+      "bytes": 517733,
+      "sha256": "ec79424e30c65bbf31ad1f020b55cc8acebd0cb0f4fbea3e1841fa2b6dda8e28"
+    },
+    "certificates/R042/fetch_and_replay.ps1": {
+      "bytes": 617,
+      "sha256": "ec0581fd95c79eae312995966f9df3ea28f40c2f2c39e51605596ccc15989031"
+    },
+    "certificates/R042/results/R042_ACCEPTANCE.json": {
+      "bytes": 1418,
+      "sha256": "a024a879823d51d7670e2280493505114550392ba398a6d59528d34b4f8c18db"
+    },
+    "certificates/R042/results/R042_BIGINT_FULL_REPLAY.json": {
+      "bytes": 8039,
+      "sha256": "0b3e1763cff1d8c7deb27a81ba530e475876ba9a248caf30b9426640c5c55b87"
+    },
+    "certificates/R042/results/R042_DIFF.json": {
+      "bytes": 1141,
+      "sha256": "f053fc2eed252dd11739e880eb3a7cf93b8fff1e6012dcd45a1fb8b62d71d1ec"
+    },
+    "certificates/R042/results/R042_INDEPENDENT_CONTAINMENT.json": {
+      "bytes": 569,
+      "sha256": "9ff404db0db51f9e1b1f701174bd86924c4587b546917bbeffaadb4797b5d4f8"
+    },
+    "certificates/R042/results/R042_PYTHON_FULL_REPLAY.json": {
+      "bytes": 8170,
+      "sha256": "c663f481443f06f54fe9c0d8714f05e4a51c8bd0fd804fad81601aeeb5956877"
+    },
+    "certificates/R042/results/R042_SCHEMA_AUDIT.json": {
+      "bytes": 595,
+      "sha256": "75e9f28ef65fdab1017c74e106b44a84d9639371dd683fe8395561be57236f0b"
+    },
+    "certificates/R042/results/R042_STATIC_VALIDATION.json": {
+      "bytes": 525,
+      "sha256": "257d4e8887c1552855215bdea4cd8299534dc1ee4cf4e83886f3af54f02eec79"
+    },
+    "certificates/R042/src/exact_mixed.py": {
+      "bytes": 6283,
+      "sha256": "7e08ad62c1998e799d8cec3c8de6f90010f76d027a86b6bcca27feeb0e5ccd49"
+    },
+    "certificates/R042/src/independent_controls.py": {
+      "bytes": 7065,
+      "sha256": "600c28587f92f6b7092011836bf9b42dcab1dc53458698fbd0f1f69fbeff5724"
+    },
+    "certificates/R042/src/integer_sweep.py": {
+      "bytes": 1362,
+      "sha256": "3a2bfd8892a9693b4dfca72e4d8e547a7be8775b22306740f4e6b63d0928b34b"
+    },
+    "certificates/R042/src/prepare_secondary.py": {
+      "bytes": 3069,
+      "sha256": "fded50a7f51bdc882cf9b288d30700d0964ae2517b8d998f37ed07702ecac276"
+    },
+    "certificates/R042/src/replay_parallel.py": {
+      "bytes": 1956,
+      "sha256": "f15bc19ad09c9963840a7b887548d4b2db1c2b6ee0c7dbfbca02c3e32fb4283d"
+    },
+    "certificates/R042/src/secondary-adaptation.json": {
+      "bytes": 11220,
+      "sha256": "827116faf382449676bdeefafe83adac1d04b96c997a058c8868fdb0e4e4b211"
+    },
+    "certificates/R042/verify.py": {
+      "bytes": 11615,
+      "sha256": "26e91cde269283f2d651097dc5f67f4bfb981fed1cf4970b3c1418c2bdc65ff0"
+    },
+    "docs/EVIDENCE_MAP.md": {
+      "bytes": 2520,
+      "sha256": "a9968eda2991cb30a732b4cf7edc881b1521d8e1cea6bafefcb841395805ab81"
+    },
+    "docs/RELEASE_NOTES.md": {
+      "bytes": 1573,
+      "sha256": "912b2794e4a32a591b65ef74c76c1d0ed143fb0defa881eee5f5cece2c2225ba"
+    },
+    "docs/REPRODUCIBILITY.md": {
+      "bytes": 2957,
+      "sha256": "dd8c390357b522b6f17bb3cbf56414e37494c2838a233079526adeb16f22ce8a"
+    },
+    "scripts/check_release_hashes.py": {
+      "bytes": 1155,
+      "sha256": "1be3553a8e6a19831c9e371ac6d888ff2e504cb1e02b9a9bde45523b7c7a7325"
+    },
+    "verification/R042.json": {
+      "bytes": 1623,
+      "sha256": "4f55ff005a426fc3d2ecbae295d318f157abfbf3643612aefcaedd61587c0f17"
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 # Agenda map
 
-373 agenda commitments across 39 agendas, as declared in each agenda's own frontmatter.
+380 agenda commitments across 39 agendas, as declared in each agenda's own frontmatter.
 Source of truth is [`agendas/`](agendas/); this view is regenerated, never edited.
 
 An agenda's queue owns priority ordering, so this map preserves each agenda's
@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **13** in_progress, **18** ready, **21** tentative, **68** blocked, **61** stopped, **192** complete.
+- **13** in_progress, **23** ready, **21** tentative, **69** blocked, **61** stopped, **193** complete.
 
 - **26 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -70,8 +70,13 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-041 | `BC-371` | in_progress | 0 | insight | research | Does the external n = 17 measure, which is stated in a restricted parent-centre language this repository does… | `think-xdoh` |
 | agenda-041 | `BC-369` | in_progress | 1 | efficiency | tool_validation | The deep gate costs about 45 minutes of wall and its exhaustive tier runs at 1.376x its own declared price,… | `think-zmos` |
 | agenda-041 | `BC-372` | in_progress | 2 | insight | research | Can this repository's own site sets cover at the external side L = 4613/1000 at all, and at which shrink do… | `think-xdoh` |
-| agenda-042 | `BC-384` | ready | 1 | insight | research | Which stronger per-node bound for the fixed-angle cell tree closes a rung-0 subtree or an exp-234 pilot box… | `think-ggk5` |
+| agenda-042 | `BC-386` | ready | 1 | correctness | tool_validation | Does this repository's native coverage engine decide every row of R052's certificate at or above its charge… | `think-amx8` |
+| agenda-042 | `BC-387` | ready | 1 | insight | research | Does the capacity-one ceiling lemma survive review, and do triangle-free overlap families of 34 squares at… | `think-68la` |
+| agenda-042 | `BC-388` | ready | 1 | insight | research | What is the least side f(theta) along the six-axis plus five-common-angle family at 200 tilts, and on which… | `think-91yk` |
+| agenda-042 | `BC-389` | ready | 2 | insight | research | Does a two-class parent-core counting certificate close the rung-1 box at 20 degrees, half-tangent [0.1758,… | `think-nho8` |
+| agenda-042 | `BC-390` | ready | 2 | correctness | research | Does the unchanged rung-0 instrument prove H-236's statement on the half-tangent box of half-width 10^-4… | `think-7c17` |
 | agenda-042 | `BC-380` | ready | 3 | correctness | tool_validation | Can a direction-dependent parent-centre clip behind colgen's clip parameter, and a converter from a frozen… | `think-m9iz` |
+| agenda-042 | `BC-391` | ready | 3 | insight | research | Does the additive point certificate at n21 reach side 4.89 on stock column generation, without the parent… | `think-t50i` |
 
 ## Blocked, and on what
 
@@ -147,6 +152,7 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-037 | `BC-358` | 1 | — | no | think-g3j7 must land a new reader for weighted-majority and floor atoms without mutating T-025/T-026 verify_claim.py.… |
 | agenda-040 | `BC-364` | 2 | `BC-363` | yes | The non-convex box-avoidance domain predicate (BC-204) and a conflict-edge atom class in the relational reader. |
 | agenda-040 | `BC-365` | 3 | — | no | An unshrunk exact-orientation verifier generalised from cases/green17/interval_audit.py and an unshrunk column… |
+| agenda-042 | `BC-384` | 1 | `BC-388`, `BC-389` | no | — |
 
 ## Discharged elsewhere
 
@@ -208,7 +214,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-037 | active | 1 |  | 1 | 1 | 1 | 1 | 5 |
 | agenda-040 | active |  | 1 |  | 2 | 1 | 3 | 7 |
 | agenda-041 | active | 4 |  |  |  |  | 2 | 6 |
-| agenda-042 | active |  | 2 |  |  |  | 9 | 11 |
+| agenda-042 | active |  | 7 |  | 1 |  | 10 | 18 |
 
 ## By program
 
@@ -248,8 +254,11 @@ Open frontier: `BC-204`, `BC-205`, `BC-212`.
 | agenda-042 | `BC-378` | complete | Does a window-enriched point certificate retain at n21, side 122/25, below mass 21? |
 | agenda-042 | `BC-379` | complete | Does the cutting loop certify an additive ceiling at n12, side 39609/10000? |
 | agenda-042 | `BC-380` | ready | Can a direction-dependent parent-centre clip behind colgen's clip parameter, and a converter from a… |
+| agenda-042 | `BC-386` | ready | Does this repository's native coverage engine decide every row of R052's certificate at or above… |
+| agenda-042 | `BC-387` | ready | Does the capacity-one ceiling lemma survive review, and do triangle-free overlap families of 34… |
+| agenda-042 | `BC-391` | ready | Does the additive point certificate at n21 reach side 4.89 on stock column generation, without the… |
 
-Open frontier: `BC-380`.
+Open frontier: `BC-380`, `BC-386`, `BC-387`, `BC-391`.
 
 ### `n11-adaptive-fractional-frontier`
 
@@ -392,9 +401,12 @@ Open frontier: `BC-221`, `BC-222`, `BC-223`, `BC-224`, `BC-225`.
 | agenda-042 | `BC-381` | complete | Does a Fable max adversarial W2 review of the closed rung-0 tree (exp-232) accept H-236 at its… |
 | agenda-042 | `BC-382` | complete | What did BC-241 leave open on the BC-240 isolation packet, and does an independent radius-generator… |
 | agenda-042 | `BC-383` | complete | What does the rung-0 cell tree cost on boxes away from Trump's tilt, and does rung 1 (H-112) become… |
-| agenda-042 | `BC-384` | ready | Which stronger per-node bound for the fixed-angle cell tree closes a rung-0 subtree or an exp-234… |
+| agenda-042 | `BC-388` | ready | What is the least side f(theta) along the six-axis plus five-common-angle family at 200 tilts, and… |
+| agenda-042 | `BC-389` | ready | Does a two-class parent-core counting certificate close the rung-1 box at 20 degrees, half-tangent… |
+| agenda-042 | `BC-384` | blocked | Which stronger per-node bound for the fixed-angle cell tree closes a rung-0 subtree or an exp-234… |
+| agenda-042 | `BC-390` | ready | Does the unchanged rung-0 instrument prove H-236's statement on the half-tangent box of half-width… |
 
-Open frontier: `BC-384`.
+Open frontier: `BC-388`, `BC-389`, `BC-384`, `BC-390`.
 
 ### `n11-strategy-reset`
 
