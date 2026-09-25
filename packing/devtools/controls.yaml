@@ -1293,9 +1293,9 @@ controls:
 
 - name: synopsis handoff - selected entry is replaced by another bead
   file: ../SYNOPSIS.md
-  replace: ["**Selected next entry:** `think-ggk5`", "**Selected next entry:** `think-cyko`"]
+  replace: ["**Selected next entry:** `think-amx8`", "**Selected next entry:** `think-cyko`"]
   run: python3 -m devtools.check_synopsis
-  expect: "exactly one canonical Selected next entry marker for think-ggk5"
+  expect: "exactly one canonical Selected next entry marker for think-amx8"
 
 - name: session handoff - observed end precedes its start
   file: campaign/agent-sessions/session-128-research-state-rollup.md

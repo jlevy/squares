@@ -697,8 +697,8 @@ ids.
 | 205 | A declared low-charge parent domain has occupancy below n | shaped | — | Accept with complete domain and multiplicity proofs; one validated compatible tuple above the cap kills the proposed capacity. |
 | 206 | A finite centre-dependent core menu improves a frozen row’s worst selected charge | shaped | — | Accept on a complete max-over-menu lower bound above the old exact witness; a legal pose defeating every menu choice kills it. |
 | 207 | Polygonal or rectangle-union cores preserve demand at a smaller parent side | shaped | — | Require strict containment, complete centre coverage, and exact budget arithmetic; one legal defeating parent or insufficient gain kills the candidate. |
-| 208 | Geometrically realized five-site or weighted columns improve the matched n17 covering problem | shaped | — | Require a rational primal improvement against a rational control dual; an old dual surviving every new column kills the finite gain. |
-| 209 | The improved n17 producer plus complete separation certifies a frozen stronger target | shaped | — | Accept only with complete coverage and budget validation; an exact undercharged pose kills the frozen certificate, while timeout is undecided. |
+| 208 | Geometrically realized five-site or weighted columns improve the matched n17 covering problem | shaped | — | Require a rational primal improvement against a rational control dual; an old dual surviving every new column kills the finite gain. Waits on BC-387; reconsidered only if the architecture ceiling is at least 4.64. |
+| 209 | The improved n17 producer plus complete separation certifies a frozen stronger target | shaped | — | Accept only with complete coverage and budget validation; an exact undercharged pose kills the frozen certificate, while timeout is undecided. Waits on BC-387; reconsidered only if the architecture ceiling is at least 4.64. |
 | 210 | A geometry-aware trace group has lower joint capacity than its separate capacities | shaped | — | Require a complete trace superset and exact partition bound; a saturating realizable tuple kills the saving. |
 | 211 | Rectangle-reservoir floors beat the matched additive basis on one frozen pose set | shaped | — | Require exact primal/dual separation; an old optimal dual feasible for every reservoir column kills the finite advantage. |
 | 212 | A floor-reservoir candidate covers every actual parent below the exact total budget | shaped | — | Accept with complete area and boundary-null proofs; a rigorously undercharged parent kills it and an interval seam refusal stays unresolved. |
@@ -770,6 +770,25 @@ the registered rows.
 | 245 | A parent-disjointness no-good closes a largest surviving n21 exact-five kill orbit | shaped | — | Extends H-226’s inventory; a realizable structure leaves the orbit open. |
 | 246 | A second-order-exact isolation theorem enlarges Trump’s ball beyond the BC-199 modulus | shaped | — | exp-227: 36 of 42 rows do not recover at second order along the binding direction; needs exact Hessians, a cubic remainder and a face-wise enclosure. |
 | 247 | Price rung 1 by running the rung-0 tree on boxes away from Trump’s tilt | measured (exp-234) | [H-242](hypotheses/H-242-n11-rung1-pilot-cost-away-from-trump.md) | Rung 0 cost 1.7e8 nodes on a box containing Trump; boxes with a positive margin may be far cheaper, and the pilot decides whether H-112 is compute or needs a stronger relaxation. |
+
+## After R052 and Rung 0 — Session 159
+
+The
+[Session 159 plan](../../docs/project/specs/active/plan-2026-09-25-after-r052-planning.md)
+kept two Fable max assessments of what R052 at n17 and the closed rung 0 at n11 make
+possible. [Agenda 042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md)
+selected these rows as BC-386 to BC-391.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 248 | A capacity-one ceiling lemma: N unit squares with a triangle-free overlap graph make weight ½ dual-feasible for every point or capacity-one certificate | shaped | — | Derived, not reviewed: two cores that trigger a capacity-one atom must overlap. BC-387 reviews it before any search result is read through it. |
+| 249 | A triangle-free family of 34 squares prices the n17 certificate architecture at 4.63 and 4.65 | registered | [H-243](hypotheses/H-243-n17-triangle-free-34-family-at-4-63.md) | The ceiling lies between R052’s 4.62002 and two Bidwell copies at 4.6755; a found family needs an exact checker, and none found is inconclusive. |
+| 250 | A triangle-free family of 24 squares prices the n12 architecture at 3.99 and 3.97 | registered | [H-244](hypotheses/H-244-n12-triangle-free-24-family-at-3-99.md) | Same instrument as row 249; chains give only 18 at n12. Gates the n12 parent-core transfer. |
+| 251 | The side profile f(θ) along the six-axis plus five-common-angle family | open question | [H-245](hypotheses/H-245-n11-family-side-profile-along-the-tilt.md) | H-239’s unrun half for the rung-1 family; prices row 252 and BC-384. Known: f(41.56°) ≤ 3.8867, f(45°) ≤ 3.8856. |
+| 252 | A two-class parent-core certificate closes one rung-1 box outright | registered | [H-246](hypotheses/H-246-n11-two-class-certificate-closes-a-rung1-box.md) | R052’s architecture aimed at a box at 20° rather than at the side; row 239 aims the same producer at angle sets away from Trump’s. Near Trump’s tilt the ceiling is at most U, so that region still needs a tree. |
+| 253 | Parametric-in-tilt certificates: one dual vector certified over a whole tilt interval by univariate polynomial positivity | shaped | — | A BC-384 design candidate: rung 1 would cost about one rung-0 tree instead of forty or more. Chosen against per-square counting after BC-388 and BC-389. |
+| 254 | Rung 0 widened to a half-tangent half-width of 10⁻⁴ | registered | [H-247](hypotheses/H-247-n11-rung0-widened-to-half-width-1e-4.md) | Unchanged instrument; stops if the enclosure reach meets the local-theorem radius, near a half-width of 2.7e-4. |
+| 255 | The additive point certificate at n21 reaches 4.89 without the parent clip | shaped | — | BC-391; register an H-item before any run. Stop at 21 on two site sets. |
 
 ## Dead ends
 
