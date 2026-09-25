@@ -172,7 +172,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-155](agent-sessions/session-155-w3-proof-directions.md) | completed | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (process) | 5 | think-4kov | Under think-5zjd, ask the user to prioritize, defer or reject the shaped X-043, X-044 and X-045 candidates. Do not allocate a hypothesis id or start an experiment campaign automatically. |
 | [session-156](agent-sessions/session-156-w3-overnight-n11-settlement.md) | completed | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 5 | think-nbij | BC-375 (think-ie35): run rung 0's 58 wall-cap subtrees with the unchanged Amendment 1 bytes, then the reader over the whole tree. |
 | [session-157](agent-sessions/session-157-n11-rung0-overnight-cpu.md) | completed | contemporaneous | `research-loop` (correctness) | `review-planning-oversight` (process) | 2 | think-ie35 | BC-381 (think-6w2y): a Fable max W2 review of the closed rung-0 tree and the register decision. |
-| [session-158](agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | stopped | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-svmp | BC-384 (think-ggk5): design and measure a stronger per-node bound for the fixed-angle cell tree; think-5pyq certifies this head with one hosted full gate. |
+| [session-158](agent-sessions/session-158-n11-rung0-lock-in-and-rung1-pilot.md) | completed | contemporaneous | `factual-review` (correctness) | `factual-review` (correctness) | 1 | think-svmp | BC-384 (think-ggk5): design and measure a stronger per-node bound for the fixed-angle cell tree. |
 
 ### Workflow summary
 

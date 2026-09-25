@@ -2676,7 +2676,7 @@ sessions:
   codex_receipts: []
 - id: session-158
   title: "Lock In Rung 0, Close BC-241, Price Rung 1"
-  status: stopped
+  status: completed
   primary_bead: think-svmp
   phases: 1
   measured: true

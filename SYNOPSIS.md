@@ -164,7 +164,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 373 | 192 complete; 61 stopped; 68 blocked; 18 ready; 21 tentative; 13 in progress |
-| Sessions | 158 | 98 completed; 60 stopped; all terminal |
+| Sessions | 158 | 99 completed; 59 stopped; all terminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 177 | 32 confirmed; 32 refuted; 55 blocked; 17 unresolved; 5 open; 31 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 163 | 46 accepted; 37 rejected; 52 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -1236,8 +1236,8 @@ The rung-1 pilot
 ran eighteen boxes away from Trump’s tilt: none closed at 150,000 nodes per subtree, and
 every one closed about two-thirds of its measure for about four million nodes whatever
 its width or tilt. Rung 1’s cost is in the fixed-angle centre enumeration, so a stronger
-per-node bound comes before H-112. The session is stopped with certification pending on
-`think-5pyq`.
+per-node bound comes before H-112. Hosted full run 36075268969 certified the closed
+session.
 
 **Selected next entry:** `think-ggk5`, BC-384: design and measure a stronger per-node
 bound for the fixed-angle cell tree.

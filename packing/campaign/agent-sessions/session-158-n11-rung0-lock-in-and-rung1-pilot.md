@@ -13,9 +13,8 @@ session:
   deadline_at: '2026-09-25T15:00:00Z'
   branch: claude/n11-rung0-lock-in-and-rung1-pilot
   primary_bead: think-svmp
-  status: stopped
+  status: completed
   ended_at: '2026-09-24T23:54:00Z'
-  certification_pending: think-5pyq
   goal: >-
     Lock in rung 0 of the n11 settlement ladder with a Fable max review, an off-repo
     archive of its certificate tree and a register decision rated by epistemics.md;
@@ -30,7 +29,7 @@ session:
     objective: >-
       BC-381 and BC-382: review the closed rung-0 tree and the BC-241 obligations, and
       admit the parameterized box preset for BC-383, while the tree is archived.
-    status: stopped
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 360
@@ -85,16 +84,17 @@ session:
   - packing/frontier/results.yaml
   - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-234-h242-rung1-pilot.md
   checks:
+  - 'full gate: full at a42b0de8eef4acc8e6ea8f83c25ca3c7688094c1: passed (hosted run 36075268969; validate, exhaustive, slow-lane, screen and macOS portability all passed)'
   - check_results passes all 36 registered results.
   - The BC-241 checker accepts at the closed head after the packet's pinned bytes were restored.
   - The release data pin test passes after the re-pin.
   - packing-validate --records passed on the closed records.
   stop_reason: >-
-    All three commitments reached their exits; certification of the closed head is
-    pending on think-5pyq.
+    All three commitments reached their exits, and hosted full run 36075268969 certified
+    the closed head.
   next_action: >-
     BC-384 (think-ggk5): design and measure a stronger per-node bound for the fixed-angle
-    cell tree; think-5pyq certifies this head with one hosted full gate.
+    cell tree.
 ---
 # Lock In Rung 0, Close BC-241, Price Rung 1
 
