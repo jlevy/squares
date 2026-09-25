@@ -1,0 +1,133 @@
+{
+  "schema": "n17.publication.v1",
+  "result": "N17-R043",
+  "publication_version": "r043-public-1",
+  "base_commit": "b1e060ea3994ada87a46221fd1dcd1562d6565a6",
+  "scope": "R043 adds the accepted public theorem package and updates current public presentation while leaving earlier scientific evidence unchanged. / R043 新增已接受的公开定理成果包并更新当前公开展示，同时保持更早科学证据不变。",
+  "files": {
+    ".github/workflows/r043.yml": {
+      "bytes": 2786,
+      "sha256": "992b7718ef4875b7a2a6b56374f8d7a8c8278d184e361d3f8513aacc88469d16"
+    },
+    "CHANGELOG.md": {
+      "bytes": 1208,
+      "sha256": "08b4e48ad9a5e28cd25296f181a9ef796524b88471e56f372a9ce3502a06232f"
+    },
+    "CITATION.cff": {
+      "bytes": 879,
+      "sha256": "f1afbb244ad9d48acbdee7f34562a93400c4eddf7e07ec2b444f38f47e915ff7"
+    },
+    "NOTICE.md": {
+      "bytes": 1761,
+      "sha256": "4eeb6adf288706a87d2dba96307f8fad610f85c602e0829f6d2f6406da341024"
+    },
+    "README.md": {
+      "bytes": 4898,
+      "sha256": "8459cb587635141b7497b90389e7378f298c1f7296baee3016f0ef16edb62954"
+    },
+    "RESULTS.md": {
+      "bytes": 2925,
+      "sha256": "bb8dcf0a47125152a35d3d9053976089312c40089ad3830d3d2a52f3fe7e184a"
+    },
+    "certificates/R043/ATTRIBUTION.md": {
+      "bytes": 2009,
+      "sha256": "9261780e3e93bd3be4eadbb7ae46eaa6d4f70f3bdcdf4277989feab8859360fe"
+    },
+    "certificates/R043/CLAIMS.json": {
+      "bytes": 1617,
+      "sha256": "32e391b3d52ce28bbef7dbbe816f6f9f8633446774b67ad2a41205ae663e40e3"
+    },
+    "certificates/R043/LICENSE_SCOPE.md": {
+      "bytes": 990,
+      "sha256": "4981049fd0d56c9dd8df5e7552f8994630f6dbe508052a78d7bb1fe2db11d5ad"
+    },
+    "certificates/R043/MANIFEST.json": {
+      "bytes": 3147,
+      "sha256": "7b9f2856c54839dd4e229dee8fd6aea1f0f8522f02cb63b66fe387d1c81f711e"
+    },
+    "certificates/R043/PROOF.md": {
+      "bytes": 5315,
+      "sha256": "2741af50ab6b652f9dff492efbc3f06ecb662e93dbc8cb025d883bca9d4ced40"
+    },
+    "certificates/R043/README.md": {
+      "bytes": 1192,
+      "sha256": "53d65b423712ef597c3e6bcccf0f876742189ebb648bb310f681820601338112"
+    },
+    "certificates/R043/REPRODUCIBILITY.md": {
+      "bytes": 1922,
+      "sha256": "cf4392040b7d61be105fca68fa09772db1f26dc407cf2d24eb0134e6f214736d"
+    },
+    "certificates/R043/SOURCE_PIN.json": {
+      "bytes": 878,
+      "sha256": "e87eab4df56e8a3e85a4c9f0bf501d86f2ff3262e613099bf07a44dc82bb8f66"
+    },
+    "certificates/R043/certificate/R043_CERTIFICATE.json.gz": {
+      "bytes": 501603,
+      "sha256": "667ba3915534fe0005a6f7b97d4f99fa6139ab2f219aa033c722752387dba7d1"
+    },
+    "certificates/R043/results/R043_ACCEPTANCE.json": {
+      "bytes": 2565,
+      "sha256": "e1c8508d6948ac36e5ea728ba4a56b48134c6f921615107a8d6292fb88ed3639"
+    },
+    "certificates/R043/results/R043_BIGINT_FULL_REPLAY.json": {
+      "bytes": 6571,
+      "sha256": "72efe2086adc446344c0d8b2c2d15cc338bf20c66dde3ef77a4b381b111b91cf"
+    },
+    "certificates/R043/results/R043_INDEPENDENT_CONTAINMENT.json": {
+      "bytes": 505,
+      "sha256": "73f3719e8f2f0e44f697d193dc2adf8b258dda7421e6fdf65e24d64dae31a02b"
+    },
+    "certificates/R043/results/R043_PYTHON_FULL_REPLAY.json.gz": {
+      "bytes": 61343,
+      "sha256": "975bc585924e69e4fd604581b0f07e7c1fbe349bd0c5f2706a2380ed0b4de6fe"
+    },
+    "certificates/R043/src/exact_mixed.py": {
+      "bytes": 6283,
+      "sha256": "7e08ad62c1998e799d8cec3c8de6f90010f76d027a86b6bcca27feeb0e5ccd49"
+    },
+    "certificates/R043/src/independent_controls.py": {
+      "bytes": 7065,
+      "sha256": "600c28587f92f6b7092011836bf9b42dcab1dc53458698fbd0f1f69fbeff5724"
+    },
+    "certificates/R043/src/integer_sweep.py": {
+      "bytes": 1362,
+      "sha256": "3a2bfd8892a9693b4dfca72e4d8e547a7be8775b22306740f4e6b63d0928b34b"
+    },
+    "certificates/R043/src/prepare_secondary.py": {
+      "bytes": 3069,
+      "sha256": "fded50a7f51bdc882cf9b288d30700d0964ae2517b8d998f37ed07702ecac276"
+    },
+    "certificates/R043/src/replay_parallel.py": {
+      "bytes": 1956,
+      "sha256": "f15bc19ad09c9963840a7b887548d4b2db1c2b6ee0c7dbfbca02c3e32fb4283d"
+    },
+    "certificates/R043/src/secondary-adaptation.json": {
+      "bytes": 11220,
+      "sha256": "827116faf382449676bdeefafe83adac1d04b96c997a058c8868fdb0e4e4b211"
+    },
+    "certificates/R043/verify.py": {
+      "bytes": 6678,
+      "sha256": "e183b686507e13e6202162c1e9384112263d8f03e26540e637680a420d83e8c1"
+    },
+    "docs/EVIDENCE_MAP.md": {
+      "bytes": 2027,
+      "sha256": "6fb0ae968604aa8dd7918d83b43cb0de988954090e03502638d18d4573581f36"
+    },
+    "docs/RELEASE_NOTES.md": {
+      "bytes": 1711,
+      "sha256": "7f28ed6bdc63603afd812b1d553716629eee1bf2ad2bbba18cfd77c0c9ed794f"
+    },
+    "docs/REPRODUCIBILITY.md": {
+      "bytes": 2354,
+      "sha256": "c6689aa26cedae94c2a6370c009092485e3d629af4ab30a8bbeebd756e4d228c"
+    },
+    "scripts/check_release_hashes.py": {
+      "bytes": 1258,
+      "sha256": "356e3f0fef2012684b5d8fbe23bf92de0a879e9c645c9b2c6af204c55cd29328"
+    },
+    "verification/R043.json": {
+      "bytes": 589,
+      "sha256": "a7af6bd6cd6cb71c4dc3a69f45b10954a0935bf4b2ab2c5c24bcf57bae29aaea"
+    }
+  }
+}

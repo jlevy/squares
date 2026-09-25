@@ -1,0 +1,619 @@
+{
+  "format": "sha256-pinned-byte-edits-v1",
+  "source_url": "https://raw.githubusercontent.com/Guzhou0806/n17-square-packing/32edfd3da78bf80a309398f552b3b602b9c45d6c/certificates/R038/src/exact_parent_side_scan.js",
+  "source_sha256": "63e858e28c4dee40f5763a832e1cfdf1f1fce3a1e5c632d087525bf1ee20ed14",
+  "result_sha256": "b145b1ebbb2d3a0dccba62ee7b5ed64403bf0542ce5e8ee87113977df917faa4",
+  "source_commit": "32edfd3da78bf80a309398f552b3b602b9c45d6c",
+  "edits": [
+    {
+      "start": 0,
+      "end": 2,
+      "replacement": ""
+    },
+    {
+      "start": 3,
+      "end": 5,
+      "replacement": "/ Adapted f"
+    },
+    {
+      "start": 6,
+      "end": 8,
+      "replacement": "om the p"
+    },
+    {
+      "start": 10,
+      "end": 11,
+      "replacement": "n"
+    },
+    {
+      "start": 12,
+      "end": 12,
+      "replacement": "d Guzhou R038 sca"
+    },
+    {
+      "start": 13,
+      "end": 14,
+      "replacement": "ner."
+    },
+    {
+      "start": 15,
+      "end": 15,
+      "replacement": "New: threshold capture recta"
+    },
+    {
+      "start": 16,
+      "end": 18,
+      "replacement": "gl"
+    },
+    {
+      "start": 19,
+      "end": 19,
+      "replacement": "s."
+    },
+    {
+      "start": 417,
+      "end": 420,
+      "replacement": ""
+    },
+    {
+      "start": 421,
+      "end": 423,
+      "replacement": "as"
+    },
+    {
+      "start": 424,
+      "end": 425,
+      "replacement": ""
+    },
+    {
+      "start": 634,
+      "end": 634,
+      "replacement": "arg('--expected-sha',"
+    },
+    {
+      "start": 700,
+      "end": 700,
+      "replacement": ")"
+    },
+    {
+      "start": 789,
+      "end": 789,
+      "replacement": ";const POSDEN=BigInt(c.coordinate_denominator||100000)"
+    },
+    {
+      "start": 790,
+      "end": 790,
+      "replacement": "LONG=4613n*POSDEN/1000n;if(POSDEN<=0n||4613n*POSDEN%1000n!==0n||LONG>=9007199254740992n)throw Error('invalid coordinate denominator');const "
+    },
+    {
+      "start": 1915,
+      "end": 1924,
+      "replacement": ""
+    },
+    {
+      "start": 1925,
+      "end": 1934,
+      "replacement": "t"
+    },
+    {
+      "start": 1936,
+      "end": 1945,
+      "replacement": "s="
+    },
+    {
+      "start": 1946,
+      "end": 1972,
+      "replacement": ""
+    },
+    {
+      "start": 1973,
+      "end": 1985,
+      "replacement": ""
+    },
+    {
+      "start": 1986,
+      "end": 1987,
+      "replacement": ""
+    },
+    {
+      "start": 1993,
+      "end": 1996,
+      "replacement": "seen"
+    },
+    {
+      "start": 2001,
+      "end": 2004,
+      "replacement": "Set"
+    },
+    {
+      "start": 2007,
+      "end": 2007,
+      "replacement": "\n"
+    },
+    {
+      "start": 2028,
+      "end": 2028,
+      "replacement": "c.point_o"
+    },
+    {
+      "start": 2029,
+      "end": 2031,
+      "replacement": "bit"
+    },
+    {
+      "start": 2100,
+      "end": 2106,
+      "replacement": "Number(LONG)"
+    },
+    {
+      "start": 2127,
+      "end": 2133,
+      "replacement": "Number(LONG)"
+    },
+    {
+      "start": 2155,
+      "end": 2155,
+      "replacement": "let oo=[...imgs].map(z=>z.split(',').map(Number)).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);"
+    },
+    {
+      "start": 2165,
+      "end": 2166,
+      "replacement": "[X,Y]"
+    },
+    {
+      "start": 2170,
+      "end": 2174,
+      "replacement": "oo"
+    },
+    {
+      "start": 2176,
+      "end": 2176,
+      "replacement": "let k=X+','+Y;"
+    },
+    {
+      "start": 2179,
+      "end": 2182,
+      "replacement": "seen"
+    },
+    {
+      "start": 2203,
+      "end": 2209,
+      "replacement": "dup"
+    },
+    {
+      "start": 2211,
+      "end": 2211,
+      "replacement": "cate orbit');"
+    },
+    {
+      "start": 2212,
+      "end": 2214,
+      "replacement": "ee"
+    },
+    {
+      "start": 2215,
+      "end": 2237,
+      "replacement": ".add("
+    },
+    {
+      "start": 2240,
+      "end": 2261,
+      "replacement": ""
+    },
+    {
+      "start": 2266,
+      "end": 2268,
+      "replacement": ""
+    },
+    {
+      "start": 2269,
+      "end": 2273,
+      "replacement": ""
+    },
+    {
+      "start": 2274,
+      "end": 2279,
+      "replacement": "ush"
+    },
+    {
+      "start": 2280,
+      "end": 2318,
+      "replacement": ""
+    },
+    {
+      "start": 2328,
+      "end": 2329,
+      "replacement": "X"
+    },
+    {
+      "start": 2340,
+      "end": 2341,
+      "replacement": "Y"
+    },
+    {
+      "start": 2344,
+      "end": 2355,
+      "replacement": ""
+    },
+    {
+      "start": 2358,
+      "end": 2358,
+      "replacement": "}}\nconst tr"
+    },
+    {
+      "start": 2359,
+      "end": 2359,
+      "replacement": "ggers=[];"
+    },
+    {
+      "start": 2360,
+      "end": 2360,
+      "replacement": "or"
+    },
+    {
+      "start": 2361,
+      "end": 2361,
+      "replacement": "const o of c.threshold_orbits)for(const tri of o.triples)triggers.push({tri,w:o.weight});\nconst budget="
+    },
+    {
+      "start": 2367,
+      "end": 2368,
+      "replacement": "r"
+    },
+    {
+      "start": 2369,
+      "end": 2370,
+      "replacement": "duce((s,a)=>s+a.w,0)+tri"
+    },
+    {
+      "start": 2371,
+      "end": 2371,
+      "replacement": "gers.reduce((s,a)=>s+a.w,0);\nif(budge"
+    },
+    {
+      "start": 2372,
+      "end": 2373,
+      "replacement": ""
+    },
+    {
+      "start": 2376,
+      "end": 2377,
+      "replacement": "c.budget_units||ato"
+    },
+    {
+      "start": 2378,
+      "end": 2380,
+      "replacement": ""
+    },
+    {
+      "start": 2381,
+      "end": 2382,
+      "replacement": "."
+    },
+    {
+      "start": 2384,
+      "end": 2384,
+      "replacement": "duce((s,a)"
+    },
+    {
+      "start": 2385,
+      "end": 2392,
+      "replacement": ">s+a.w,0)+5*tr"
+    },
+    {
+      "start": 2393,
+      "end": 2394,
+      "replacement": "ggers.r"
+    },
+    {
+      "start": 2396,
+      "end": 2406,
+      "replacement": "uce((s,a)=>s+a.w,"
+    },
+    {
+      "start": 2408,
+      "end": 2408,
+      "replacement": ">=2**50"
+    },
+    {
+      "start": 2422,
+      "end": 2429,
+      "replacement": "b"
+    },
+    {
+      "start": 2430,
+      "end": 2431,
+      "replacement": "dge"
+    },
+    {
+      "start": 2441,
+      "end": 2442,
+      "replacement": ""
+    },
+    {
+      "start": 2443,
+      "end": 2465,
+      "replacement": "overflow"
+    },
+    {
+      "start": 3236,
+      "end": 3236,
+      "replacement": "\n"
+    },
+    {
+      "start": 3269,
+      "end": 3269,
+      "replacement": "("
+    },
+    {
+      "start": 3270,
+      "end": 3275,
+      "replacement": ""
+    },
+    {
+      "start": 3276,
+      "end": 3276,
+      "replacement": "*POSDEN)"
+    },
+    {
+      "start": 3291,
+      "end": 3298,
+      "replacement": "LONG"
+    },
+    {
+      "start": 3302,
+      "end": 3302,
+      "replacement": "("
+    },
+    {
+      "start": 3303,
+      "end": 3308,
+      "replacement": ""
+    },
+    {
+      "start": 3309,
+      "end": 3309,
+      "replacement": "*POSDEN)"
+    },
+    {
+      "start": 3477,
+      "end": 3477,
+      "replacement": "("
+    },
+    {
+      "start": 3478,
+      "end": 3483,
+      "replacement": ""
+    },
+    {
+      "start": 3484,
+      "end": 3484,
+      "replacement": "*POSDEN)"
+    },
+    {
+      "start": 3543,
+      "end": 3550,
+      "replacement": "LONG"
+    },
+    {
+      "start": 3568,
+      "end": 3575,
+      "replacement": "LONG"
+    },
+    {
+      "start": 3618,
+      "end": 3618,
+      "replacement": "}\nconst boxes=[];\nfunction put(indices,w){if(!w)return;let loU=U[indices[0]],hiU=loU,loV=V[indices[0]],hiV=loV;for(let i of indices){if(U[i]>loU)loU=U[i];if(U[i]<hiU)hiU=U[i];if(V[i]>loV)loV=V[i];if(V[i]<hiV)hiV=V[i];}loU-=half;hiU+=half;loV-=half;hiV+=half;if(loU>=hiU||loV>=hiV)return;let i=boxes.length;boxes.push({loV,hiV,w});"
+    },
+    {
+      "start": 3626,
+      "end": 3626,
+      "replacement": "lo"
+    },
+    {
+      "start": 3627,
+      "end": 3628,
+      "replacement": ",h"
+    },
+    {
+      "start": 3629,
+      "end": 3636,
+      "replacement": ""
+    },
+    {
+      "start": 3637,
+      "end": 3645,
+      "replacement": ""
+    },
+    {
+      "start": 3656,
+      "end": 3656,
+      "replacement": "lo"
+    },
+    {
+      "start": 3657,
+      "end": 3665,
+      "replacement": ""
+    },
+    {
+      "start": 3672,
+      "end": 3672,
+      "replacement": "hi"
+    },
+    {
+      "start": 3673,
+      "end": 3681,
+      "replacement": ""
+    },
+    {
+      "start": 3688,
+      "end": 3688,
+      "replacement": ";}\nfor(let i=0;i<atoms.length;i++)put([i],atoms[i].w);\nfor(let z of triggers){let[a,b,d]=z.tri;put([a,b],z.w);put([a,d],z.w);put([b,d],z.w);put([a,b,d],-2*z.w);"
+    },
+    {
+      "start": 3793,
+      "end": 3793,
+      "replacement": "\n"
+    },
+    {
+      "start": 3870,
+      "end": 3870,
+      "replacement": "\n"
+    },
+    {
+      "start": 3892,
+      "end": 3894,
+      "replacement": "b"
+    },
+    {
+      "start": 3895,
+      "end": 3896,
+      "replacement": "xe"
+    },
+    {
+      "start": 3924,
+      "end": 3926,
+      "replacement": "b"
+    },
+    {
+      "start": 3927,
+      "end": 3928,
+      "replacement": "xe"
+    },
+    {
+      "start": 3952,
+      "end": 3954,
+      "replacement": "b"
+    },
+    {
+      "start": 3955,
+      "end": 3956,
+      "replacement": "xe"
+    },
+    {
+      "start": 3985,
+      "end": 3986,
+      "replacement": "boxes"
+    },
+    {
+      "start": 3989,
+      "end": 3992,
+      "replacement": "."
+    },
+    {
+      "start": 3993,
+      "end": 3994,
+      "replacement": "oV"
+    },
+    {
+      "start": 4014,
+      "end": 4015,
+      "replacement": "boxes"
+    },
+    {
+      "start": 4018,
+      "end": 4019,
+      "replacement": "."
+    },
+    {
+      "start": 4020,
+      "end": 4023,
+      "replacement": "iV"
+    },
+    {
+      "start": 4028,
+      "end": 4028,
+      "replacement": "\n"
+    },
+    {
+      "start": 4238,
+      "end": 4240,
+      "replacement": "b"
+    },
+    {
+      "start": 4241,
+      "end": 4242,
+      "replacement": "xe"
+    },
+    {
+      "start": 4722,
+      "end": 4732,
+      "replacement": ""
+    },
+    {
+      "start": 4736,
+      "end": 4757,
+      "replacement": ""
+    },
+    {
+      "start": 4868,
+      "end": 4889,
+      "replacement": ""
+    },
+    {
+      "start": 4935,
+      "end": 4935,
+      "replacement": ";"
+    },
+    {
+      "start": 4936,
+      "end": 4936,
+      "replacement": "\n"
+    },
+    {
+      "start": 4968,
+      "end": 4968,
+      "replacement": ";"
+    },
+    {
+      "start": 5203,
+      "end": 5204,
+      "replacement": "c."
+    },
+    {
+      "start": 5205,
+      "end": 5219,
+      "replacement": ""
+    },
+    {
+      "start": 5221,
+      "end": 5247,
+      "replacement": "imum_units"
+    },
+    {
+      "start": 5327,
+      "end": 5337,
+      "replacement": ""
+    },
+    {
+      "start": 5338,
+      "end": 5345,
+      "replacement": "XA"
+    },
+    {
+      "start": 5348,
+      "end": 5348,
+      "replacement": "MOVA"
+    },
+    {
+      "start": 5349,
+      "end": 5353,
+      "replacement": "LE_SUPPOR"
+    },
+    {
+      "start": 5355,
+      "end": 5356,
+      "replacement": "SC"
+    },
+    {
+      "start": 5358,
+      "end": 5360,
+      "replacement": ""
+    },
+    {
+      "start": 5447,
+      "end": 5447,
+      "replacement": ",thresholds:triggers.length,budget_units:budget"
+    }
+  ]
+}

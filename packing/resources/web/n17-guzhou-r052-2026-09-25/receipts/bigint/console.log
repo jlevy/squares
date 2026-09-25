@@ -1,0 +1,19 @@
+{"mode": "bigint-full", "completed_chunks": 8, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 16, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 24, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 32, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 40, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 48, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 56, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 64, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 72, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 80, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 88, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 96, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 104, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 112, "total_chunks": 123}
+{"mode": "bigint-full", "completed_chunks": 120, "total_chunks": 123}
+{"status": "PASS_R052_BIGINT_FULL", "mode": "bigint-full", "bound": "231001/50000", "candidate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825", "manifest_sha256": "2a74ea2efef6be4435b227746d3e48f93075160b77ee5a0563a2dc81996952aa", "checked_rows": 15721, "archived_rows": 15721, "minimum_units": 999426274093, "budget_units": 16990246659579, "strict_surplus_units": 2, "structure": {"physical_sites": 18585, "point_orbits": 2354, "threshold_orbits": 514, "generic_orbits": 54, "physical_trigger_groups": 4504, "budget_units": 16990246659579, "required_minimum_units": 999426274093, "angular_rows": 15721, "strict_containment_inequalities": 62884, "minimum_containment_margin": "4613/9240040000000000000"}, "seconds": 673.4997074170387, "scope": "Fresh full centre replay only in full modes / 仅 full 模式重新计算完整中心空间"}
+real 673.60
+user 2166.57
+sys 71.38

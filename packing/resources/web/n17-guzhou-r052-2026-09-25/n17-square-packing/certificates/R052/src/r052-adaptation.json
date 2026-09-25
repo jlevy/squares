@@ -1,0 +1,227 @@
+{
+  "format": "sha256-pinned-byte-edits-v1",
+  "source_sha256": "b145b1ebbb2d3a0dccba62ee7b5ed64403bf0542ce5e8ee87113977df917faa4",
+  "result_sha256": "82fad041d66bc7a0f14d9dfe9b9282d8562d50fc4844649d2e684414a7ba24b1",
+  "edits": [
+    {
+      "start": 81,
+      "end": 81,
+      "replacement": ".\n// Further local adaptation: exact large-integer JSON coordinates and generic k-of-m.\n// Parent SHA-256: b145b1ebbb2d3a0dccba62ee7b5ed64403bf0542ce5e8ee87113977df917faa4\n// This checks centre minima; independent structure/containment checks remain necessary"
+    },
+    {
+      "start": 869,
+      "end": 869,
+      "replacement": ",(key,value,context)=>{if(typeof value==='number'&&!Number.isSafeInteger(value)){if(!context||!/^[-]?[0-9]+$/.test(context.source))throw Error('unsafe JSON numeric token');return BigInt(context.source)}return value}"
+    },
+    {
+      "start": 986,
+      "end": 1011,
+      "replacement": ""
+    },
+    {
+      "start": 2233,
+      "end": 2233,
+      "replacement": "x"
+    },
+    {
+      "start": 2234,
+      "end": 2234,
+      "replacement": "y"
+    },
+    {
+      "start": 2258,
+      "end": 2258,
+      "replacement": "const x=BigInt(xx),y=BigInt(yy);if(!Number.isSafeInteger(w)||w<0||x<0n||x>LONG||y<0n||y>LONG)throw Error('invalid point');"
+    },
+    {
+      "start": 2324,
+      "end": 2331,
+      "replacement": ""
+    },
+    {
+      "start": 2335,
+      "end": 2336,
+      "replacement": ""
+    },
+    {
+      "start": 2357,
+      "end": 2364,
+      "replacement": ""
+    },
+    {
+      "start": 2368,
+      "end": 2369,
+      "replacement": ""
+    },
+    {
+      "start": 2432,
+      "end": 2438,
+      "replacement": "BigInt"
+    },
+    {
+      "start": 2457,
+      "end": 2458,
+      "replacement": "<"
+    },
+    {
+      "start": 2462,
+      "end": 2464,
+      "replacement": "?-1:a[0]>b[0]?1:"
+    },
+    {
+      "start": 2468,
+      "end": 2469,
+      "replacement": "<"
+    },
+    {
+      "start": 2473,
+      "end": 2473,
+      "replacement": "?-1:a[1]>b[1]?1:0"
+    },
+    {
+      "start": 2584,
+      "end": 2591,
+      "replacement": ""
+    },
+    {
+      "start": 2592,
+      "end": 2593,
+      "replacement": ""
+    },
+    {
+      "start": 2596,
+      "end": 2603,
+      "replacement": ""
+    },
+    {
+      "start": 2604,
+      "end": 2605,
+      "replacement": ""
+    },
+    {
+      "start": 2707,
+      "end": 2707,
+      "replacement": "group:"
+    },
+    {
+      "start": 2710,
+      "end": 2710,
+      "replacement": ",k:2"
+    },
+    {
+      "start": 2724,
+      "end": 2724,
+      "replacement": "\nfor(const o of c.generic_trigger_orbits||[])for(const group of o.groups)triggers.push({group,k:o.k,w:o.weight});\nfunction choose(n,k){if(k<0||k>n)return 0;let v=1;for(let i=1;i<=k;i++)v=v*(n-i+1)/i;if(!Number.isSafeInteger(v))throw Error('binomial overflow');return v}"
+    },
+    {
+      "start": 2792,
+      "end": 2792,
+      "replacement": "Math.floor(a.group.length/a.k)*"
+    },
+    {
+      "start": 2799,
+      "end": 2799,
+      "replacement": "\nlet absolute=atoms.reduce((s,a)=>s+a.w,0);\nfor(const z of triggers){let m=z.group.length;if(!Number.isSafeInteger(z.w)||z.w<0||!Number.isSafeInteger(z.k)||z.k<1||z.k>m||new Set(z.group).size!==m||z.group.some(i=>!Number.isSafeInteger(i)||i<0||i>=atoms.length))throw Error('bad trigger');for(let j=z.k;j<=m;j++)absolute+=choose(m,j)*choose(j-1,z.k-1)*z.w}"
+    },
+    {
+      "start": 2828,
+      "end": 2828,
+      "replacement": "!Number.isS"
+    },
+    {
+      "start": 2829,
+      "end": 2829,
+      "replacement": "feIn"
+    },
+    {
+      "start": 2830,
+      "end": 2835,
+      "replacement": ""
+    },
+    {
+      "start": 2836,
+      "end": 2863,
+      "replacement": ""
+    },
+    {
+      "start": 2866,
+      "end": 2866,
+      "replacement": "(budget)||!Number.i"
+    },
+    {
+      "start": 2867,
+      "end": 2868,
+      "replacement": "SafeIntege"
+    },
+    {
+      "start": 2869,
+      "end": 2869,
+      "replacement": "(absolut"
+    },
+    {
+      "start": 2870,
+      "end": 2871,
+      "replacement": ")||absol"
+    },
+    {
+      "start": 2872,
+      "end": 2873,
+      "replacement": "t"
+    },
+    {
+      "start": 2874,
+      "end": 2890,
+      "replacement": ""
+    },
+    {
+      "start": 2938,
+      "end": 2938,
+      "replacement": "\nif(c.L!=='4613/1000'||c.A!==ASTR||!Number.isSafeInteger(c.minimum_units)||17*c.minimum_units<=budget)throw Error('wrong parent/counting threshold');\nconst subsets=[];for(const z of triggers){if(!z.w)continue;let m=z.group.length;for(let j=z.k;j<=m;j++){let coeff=((j-z.k)%2?-1:1)*choose(j-1,z.k-1)*z.w;function visit(at,sel){if(sel.length===j){subsets.push({group:sel.slice(),w:coeff});return}for(let i=at;i<=m-(j-sel.length);i++){sel.push(z.group[i]);visit(i+1,sel);sel.pop()}}visit(0,[])}}\n"
+    },
+    {
+      "start": 4527,
+      "end": 4529,
+      "replacement": "cons"
+    },
+    {
+      "start": 4536,
+      "end": 4536,
+      "replacement": "subse"
+    },
+    {
+      "start": 4537,
+      "end": 4543,
+      "replacement": ""
+    },
+    {
+      "start": 4545,
+      "end": 4563,
+      "replacement": ""
+    },
+    {
+      "start": 4567,
+      "end": 4572,
+      "replacement": "z.group"
+    },
+    {
+      "start": 4578,
+      "end": 4629,
+      "replacement": ""
+    },
+    {
+      "start": 5874,
+      "end": 5874,
+      "replacement": "rowResults=[];let "
+    },
+    {
+      "start": 5976,
+      "end": 5976,
+      "replacement": ");rowResults.push({row:i,minimum_units:r.minimum_units,slabs:r.slabs}"
+    },
+    {
+      "start": 6414,
+      "end": 6414,
+      "replacement": "rows:rowResults,"
+    }
+  ]
+}

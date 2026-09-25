@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-09-24'
+last_reviewed: '2026-09-25'
 evidence:
   - id: E-wand125-point-source-replay
     claim: lower-bound
@@ -2105,7 +2105,118 @@ evidence:
       registered on 2026-09-22 without a new full replay, correcting the prior
       admission-policy hold. T-032 retains its historical R012 statement and
       its separate method-distinct evidence; no new theorem identifier is created.
+      Since 2026-09-25 this is the previous verified bound for the case,
+      superseded by Guzhou0806's R052 (E-n017-guzhou-r052-source-replay); it
+      remains valid evidence.
     source_reviewed: '2026-09-22'
+
+  - id: E-n017-guzhou-r052-report
+    claim: lower-bound
+    scope: {n_values: [17]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Guzhou0806 n17 R052]'
+    certificate: resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing/certificates/R052/certificate/R052_CERTIFICATE.json.gz
+    replay_status: not-attempted
+    limitations: >-
+      Guzhou0806 / N17 project's R052 release at
+      3bf1095c68a28fb9b2750fb0bc99edd5c22b7a61 (2026-09-25) claims the strict
+      lower bound s(17) > 231001/50000 = 4.62002 for independently rotated unit
+      squares with disjoint interiors and boundary contact allowed. This entry
+      records that source claim; the local replay of 2026-09-25 is recorded
+      separately. The release was produced with AI assistance on Kleddamag's
+      v1.0.0 mixed point/threshold parent-core architecture
+      (a499e2c739ce7853fa04c8bcdc85caf1c2b01b37) and extends its own R050; it
+      credits Kleddamag, Mira-acc and this repository's threshold lineage,
+      discloses non-proposer AI review only, and claims neither priority nor
+      optimality. Its earlier R042 (115325/24963), R043 (461300/99851) and R050
+      (4613000/998509), all retained as publication records in the same packet
+      and not replayed, are superseded by R052. The source reports that Kleddamag
+      holds an unpublished strict bound of 4.62001; that report is second-hand,
+      unverified and not recorded as a bound here.
+    source_reviewed: '2026-09-25'
+
+  - id: E-n017-guzhou-r052-source-replay
+    claim: lower-bound
+    scope: {n_values: [17]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Guzhou0806 n17 R052]'
+    certificate: resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing/certificates/R052/certificate/R052_CERTIFICATE.json.gz
+    replay: >-
+      From the retained repository root
+      packing/resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing, run
+      certificates/R052/verify.py in records mode, --containment, --python-full
+      --jobs 10 (in an environment holding exactly the pinned numpy, numba and
+      llvmlite), and --bigint-full --jobs 10 --source with the retained R038
+      exact_parent_side_scan.js, each with --output outside the packet. The
+      exact commands, interpreters, walls and output digests are in
+      packing/resources/web/n17-guzhou-r052-2026-09-25/README.md and
+      receipts/replays.json.
+    replay_status: passed
+    proof:
+      source: packing/resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing/certificates/R052/PROOF.md
+      theorem: Seventeen independently rotated unit squares cannot fit at side 231001/50000; compactness gives s(17) > 231001/50000.
+      scope: Unrestricted square packing with disjoint interiors and boundary contact allowed.
+      pinpoints: >-
+        The six-step reduction in section 3 of the 2026-09-25 proof review, re-read
+        against R052's own files and resting on the 2026-09-21 Kleddamag review's
+        thirteen-step trace; the independent checks in its section 4 (exact
+        quadratic containment minimisation, the two binding rows and both end rows
+        re-swept without source code); and findings F1-F8 in its section 5.
+      assumptions:
+        - The exact nonnegative D4-invariant point, two-of-three and three-of-five charges have total budget 16990246659579 units of 10^-12.
+        - The 15721 contiguous rational parent-angle intervals cover every folded orientation up to 207107/500000, with a strictly contained closed core in each.
+        - Each row's centre envelope contains every legal parent centre, and the exact sweep decides every generic centre cell in it.
+        - Upper semicontinuity of the nonnegative closed-set charges extends the generic bound to boundary and event centres.
+        - Disjoint parent interiors contain disjoint strict cores; a group of m points with threshold k charges at most floor(m/k) disjoint cores.
+        - Exact arithmetic establishes minimum charge 999426274093, so 17 times that charge exceeds the budget by 2 units; compactness makes the packing minimum attained.
+      audit_record: docs/project/reviews/review-2026-09-25-n17-guzhou-r052.md
+    external_review:
+      state: informally-verified
+      date: '2026-09-25'
+      reviewed_by: Session 159 adversarial proof review (Fable, max thinking), reconciled with the replays by the Session 159 coordinator.
+      note: >-
+        The review finds no mathematical defect. Its one addition over Kleddamag's
+        reviewed architecture, three-of-five groups at capacity floor(5/3) = 1, is
+        the generic k-of-m rule already reviewed at n = 11. It minimised all 62,884
+        containment inequalities exactly as quadratics over whole intervals, so the
+        source's endpoint-only test is complete, and re-derived rows 0, 15555,
+        15556 and 15720 with its own exact sweep. Those controls are not a second
+        complete coverage method.
+    limitations: >-
+      Replays the source's own checkers over the retained bytes on 2026-09-25.
+      All four modes exited 0: records (PASS_R052_RECORDS); containment
+      (PASS_R052_CONTAINMENT, 62,884 strict inequalities, least margin
+      4613/9240040000000000000); python-full (PASS_R052_PYTHON_FULL, 15,721
+      rows in 904 s, fresh ledger SHA-256 f370defb...d4b8, equal to the source's
+      own Python sweep); and bigint-full (PASS_R052_BIGINT_FULL, 123 chunks in
+      674 s, fresh ledger ee506dfe...17d1, equal to the shipped BIGINT_ROWS).
+      The rebuilt Node checker hashes to the source's pin, 82fad041...24b1. The
+      two fresh ledgers agree on every row; the minimum charge 999426274093
+      falls only on rows 15555 and 15556, so the surplus
+      17 x 999426274093 - 16990246659579 = 2 units of 10^-12 is zero slack
+      beyond integer rounding. The certificate has 2,354 point orbits and 514
+      two-of-three and 54 three-of-five threshold orbits (18,585 sites, 4,504
+      groups, 2,922 columns) over 15,721 angular intervals, with container
+      side 4613/1000 and parent side 230650/231001. Both complete checkers
+      share one event-cell method, supporting V4/C3 rather than C4. The
+      method-distinct native route, devtools.verify_guzhou_r052_native, verifies
+      every exact premise but its frozen coverage engine refuses the
+      certificate at its ceilings (8,937 atoms against 8,192, 9,261 sites
+      against 8,192, 44,685 member slots against 16,384), so no independent
+      coverage decision exists; its four-row sizing run is not a decision.
+      Advance over the previous verified 461300/99853: 1142853/4992650000,
+      about 0.000229. No new theorem identifier is created.
+    source_reviewed: '2026-09-25'
 
   - id: E-n017-guzhou-r012-source-replay
     claim: lower-bound

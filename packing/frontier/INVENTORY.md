@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **108** evidence records. **86** are formal; **80** of those were established here.
-- **15** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **110** evidence records. **87** are formal; **81** of those were established here.
+- **16** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **36** claim to be first established here. **11** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
@@ -85,8 +85,10 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-anabologyco-weighted-certificate` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published |
 | `E-n017-mira-4613-exact-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
 | `E-n017-mira-4613-interval-decision` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published |
-| `E-n017-kleddamag-461300-99853-report` | 1 | lower-bound | reported | - | elsewhere | - | previously-published |
-| `E-n017-kleddamag-461300-99853-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
+| `E-n017-kleddamag-461300-99853-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published |
+| `E-n017-kleddamag-461300-99853-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
+| `E-n017-guzhou-r052-report` | 1 | lower-bound | reported | - | elsewhere | - | previously-published |
+| `E-n017-guzhou-r052-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
 | `E-n017-guzhou-r012-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published |
 | `E-n017-guzhou-r012-interval-decision` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published |
 | `E-n017-massaccesi-h052-agreement` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published |
@@ -131,9 +133,9 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 18, verified 86
-- **method**: exact-algebraic 65, interval-certified 12, numerical-multiprecision 4, proof-audited 3, published-proof 6, reported 18
-- **novelty**: apparently-novel 36, common-knowledge 4, not assessed 11, previously-published 57
+- **assurance**: numerically-checked 4, reported 19, verified 87
+- **method**: exact-algebraic 66, interval-certified 12, numerical-multiprecision 4, proof-audited 3, published-proof 6, reported 19
+- **novelty**: apparently-novel 36, common-knowledge 4, not assessed 11, previously-published 59
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

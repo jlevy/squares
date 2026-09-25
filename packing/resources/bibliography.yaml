@@ -76,6 +76,15 @@ sources:
       The retained v1.0.0 release and AUTHORS.md identify Kleddamag as the human
       project director and credit OpenAI Codex for research, implementation and
       verification (web/n17-kleddamag-certified-bound-2026-09-21/README.md).
+  - key: '[Guzhou0806 n17 R052]'
+    authors: [Guzhou0806]
+    year: 2026
+    venue: GitHub
+    note: >-
+      The R052 release of Guzhou0806/n17-square-packing at 3bf1095c, 2026-09-25,
+      which names itself as produced by "Guzhou0806 / N17 project with AI
+      assistance" on Kleddamag's v1.0.0 architecture
+      (web/n17-guzhou-r052-2026-09-25/README.md).
   - key: '[Kleddamag n11 2026]'
     authors: [Kleddamag]
     year: 2026

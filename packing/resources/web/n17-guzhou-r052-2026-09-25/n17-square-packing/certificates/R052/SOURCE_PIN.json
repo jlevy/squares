@@ -1,0 +1,38 @@
+{
+  "certificate_sha256": "d77743eadf7f4bf9c424549a37a4296ea3b23fceee4af8e3d774a5a07e62e825",
+  "accepted_bound": "231001/50000",
+  "source_files": {
+    "src/structure.py": {
+      "source_sha256": "28417d6bb6e6a5eb3dd98dfaebd28923390a19a1ec3d0eb5c7ad52053f3e69aa",
+      "adaptation": "unchanged / 原样保留"
+    },
+    "src/fast_ranges.py": {
+      "source_sha256": "11e17d25c51e96ab3336ccff9209e5b7c15847fae42f39218cc7d2049643aaac",
+      "adaptation": "unchanged / 原样保留"
+    },
+    "src/geometry.py": {
+      "origin_sha256": "038c0575313c2d95379cb1c3612216498ef8b7a8f8a91371a8f844712fbf8b81",
+      "functions": [
+        "require",
+        "trig",
+        "_add",
+        "_query",
+        "sweep_argmin",
+        "physical_sites",
+        "weight_vectors",
+        "row_geometry",
+        "build_event_grid"
+      ],
+      "adaptation": "Functions extracted without changes; standalone imports / 函数原样提取，独立导入"
+    }
+  },
+  "results/BIGINT_ROWS.json.gz": {
+    "decompressed_sha256": "ee506dfec58a1324b7b35e02ef939828e59535fcdb673efc7a54673f09bb17d1"
+  },
+  "results/BIGINT_RESULT.json": {
+    "decompressed_sha256": "af3806efaf68370e9f300b5cd9c6773bc731ff250a315f4be72e03a0758a2726"
+  },
+  "secondary_reconstructed_sha256": "82fad041d66bc7a0f14d9dfe9b9282d8562d50fc4844649d2e684414a7ba24b1",
+  "accepted_review_result_sha256": "045ab3afdc550177bcb6e4df2e86ca30e3ef6b247fa51d908eef48862389d924",
+  "review_scope": "Non-proposer AI acceptance; no human peer-review claim / 非提出者 AI 验收，不声称真人同行评审"
+}
