@@ -173,7 +173,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 380 | 193 complete; 61 stopped; 69 blocked; 23 ready; 21 tentative; 13 in progress |
-| Sessions | 159 | 99 completed; 60 stopped; all terminal |
+| Sessions | 159 | 100 completed; 59 stopped; all terminal |
 | Explorations | 45 | 26 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 182 | 32 confirmed; 32 refuted; 58 blocked; 17 unresolved; 6 open; 32 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 163 | 46 accepted; 37 rejected; 52 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -1265,7 +1265,8 @@ side `S` caps every capacity-one certificate at `S`, which a cheap search can pr
 At n = 11 the retained trees show the separating-axis LP reaches any target until about
 twenty pairs are fixed, so BC-384 waits on a tilt-profile census and a two-class
 counting certificate.
-Agenda-042 gains BC-386 to BC-391 and H-243 to H-247.
+Agenda-042 gains BC-386 to BC-391 and H-243 to H-247. Hosted full run 36121001128
+certified the closed session.
 
 **Selected next entry:** `think-amx8`, BC-386: lift the native coverage ceilings and
 decide R052 natively on two workers overnight, the first lane of the after-R052 order;

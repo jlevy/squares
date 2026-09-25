@@ -13,8 +13,7 @@ session:
   deadline_at: '2026-09-25T16:00:00Z'
   branch: claude/n17-guzhou-r052-intake
   primary_bead: think-ju2h
-  status: stopped
-  certification_pending: think-tdfj
+  status: completed
   ended_at: '2026-09-25T09:25:00Z'
   goal: >-
     Decide whether Guzhou0806's R052 certificate for s(17) > 231001/50000 is correct,
@@ -65,7 +64,7 @@ session:
     objective: >-
       BC-385: decide what R052 and the closed rung 0 make possible at n = 11 and n = 17,
       from two Fable max assessments, and select bounded next work.
-    status: stopped
+    status: completed
     entered_by: user_request
     switch_reason: >-
       The owner asked for an extra planning session on further improvements given the
@@ -92,8 +91,7 @@ session:
     - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
     - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
     stop_reason: The planning records are landed and the next entry is selected.
-    next_action: >-
-      Close the session with certification pending on one hosted gate.
+    next_action: Close the session with certification pending on one hosted gate.
   budget:
     wall_minutes: 480
     slice_minutes: 240
@@ -129,18 +127,19 @@ session:
   - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
   - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
   checks:
+  - 'full gate: full at b778a6e8ac96c9a2cdaea2a57a364b549bd75bdb: passed (hosted run 36121001128; validate, exhaustive, slow-lane, screen and macOS portability all passed)'
   - All four R052 source replay modes passed (records, containment, Python full, Node/BigInt full).
   - The native R052 tool's 19 tests pass; its coverage engine refuses at the frozen ceilings.
   - check_results passes all 36 registered results.
   - packing-validate --records passed on the closed records.
   stop_reason: >-
     The owner's two requests reached their exits: R052 is integrated with its credits
-    and fact-check, and the planning block selected the next work. One hosted full gate
-    remains.
+    and fact-check, and the planning block selected the next work. Hosted full run
+    36121001128 certified the closed head.
   next_action: >-
     BC-386 (think-amx8): lift the native coverage ceilings and decide R052 natively, the
     first lane of the after-R052 order, with the n11 tilt-profile census and the ceiling
-    search beside it; think-tdfj certifies this head with one hosted full gate.
+    search beside it.
 ---
 # Intake of Guzhou0806’s R052 Certificate
 

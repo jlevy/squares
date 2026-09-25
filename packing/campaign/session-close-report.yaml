@@ -2695,7 +2695,7 @@ sessions:
   codex_receipts: []
 - id: session-159
   title: "Intake of Guzhou0806's R052 Certificate for s(17) > 231001/50000"
-  status: stopped
+  status: completed
   primary_bead: think-ju2h
   phases: 2
   measured: true
