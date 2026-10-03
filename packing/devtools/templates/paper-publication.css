@@ -77,6 +77,15 @@ body {
 /* The values, and the `--paper-*` role scales, are in paper-type.css, shared with every
    page of the site; this page reads them under its own names. */
 :root {
+  /* The tints a paper paints with, each a share of a token colour in the rule that uses
+     it, so the dark theme's colours mix in where they are set
+     (`devtools.check_colour_tokens`): the accent's under a tag, a passed verdict and a
+     pressed button; the failing colour's under a failed verdict; the text's under a
+     hovered button; the probe's under a hovered handle. */
+  --paper-accent-tint: 12%;
+  --paper-below-tint: 16%;
+  --paper-hover-tint: 10%;
+  --paper-probe-tint: 12%;
   --cert-font-scale-sans: var(--paper-font-scale-sans);
   --cert-font-weight-sans-light: var(--kpress-font-weight-sans-regular);
   --cert-font-weight-sans-medium: var(--paper-font-weight-sans-medium);
@@ -679,7 +688,7 @@ body {
   padding: 0.7rem 1.1rem;
 }
 .tag {
-  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  background: color-mix(in srgb, var(--kpress-doc-accent) var(--paper-accent-tint), transparent);
   border-radius: var(--kpress-radius-sm);
   color: var(--kpress-doc-accent);
   font-family: var(--kpress-font-sans);
@@ -926,12 +935,12 @@ body {
 }
 /* biome-ignore lint/style/noDescendingSpecificity: historical selector order preserves the established KPress publication cascade. */
 .verdict.ok {
-  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  background: color-mix(in srgb, var(--kpress-doc-accent) var(--paper-accent-tint), transparent);
   color: var(--kpress-doc-accent);
 }
 /* biome-ignore lint/style/noDescendingSpecificity: historical selector order preserves the established KPress publication cascade. */
 .verdict.no {
-  background: color-mix(in srgb, var(--cert-below) 16%, transparent);
+  background: color-mix(in srgb, var(--cert-below) var(--paper-below-tint), transparent);
   color: var(--cert-below);
 }
 .verdict.out {
@@ -974,10 +983,14 @@ body {
 /* The theme's dark surface-hover is mostly muted text, which washes out a
    button's pale label. Tint the document ground instead. */
 .cert-page button:hover {
-  background: color-mix(in srgb, var(--kpress-doc-text) 10%, var(--kpress-doc-bg));
+  background: color-mix(
+    in srgb,
+    var(--kpress-doc-text) var(--paper-hover-tint),
+    var(--kpress-doc-bg)
+  );
 }
 .cert-page button[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  background: color-mix(in srgb, var(--kpress-doc-accent) var(--paper-accent-tint), transparent);
   border-color: var(--kpress-doc-accent);
   color: var(--kpress-doc-accent);
 }
@@ -1007,7 +1020,7 @@ body {
   width: 44px;
 }
 .cert-page .rotation-handle:hover {
-  background: color-mix(in srgb, var(--cert-probe) 12%, var(--kpress-doc-bg));
+  background: color-mix(in srgb, var(--cert-probe) var(--paper-probe-tint), var(--kpress-doc-bg));
 }
 .cert-page .rotation-handle:focus-visible {
   outline: 2px solid var(--kpress-doc-accent);
@@ -1075,7 +1088,11 @@ body {
   --cert-below: #e26e82;
   --cert-near: #c9a13a;
   --cert-probe-wash: color-mix(in srgb, var(--cert-probe) 14%, transparent);
-  --cert-accent-wash: color-mix(in srgb, var(--kpress-doc-accent) 12%, transparent);
+  --cert-accent-wash: color-mix(
+    in srgb,
+    var(--kpress-doc-accent) var(--paper-accent-tint),
+    transparent
+  );
 }
 :root:where([data-kpress-resolved-theme="dark"]) {
   --cert-probe: oklch(76% 0.13 60);
@@ -1260,7 +1277,7 @@ html[data-kpress-math-pending]
   .kpress-page-main {
     --kpress-doc-bg: oklch(100% 0 0);
     --kpress-doc-border: oklch(78.26% 0 0);
-    background: oklch(100% 0 0);
+    background: var(--kpress-doc-bg);
     color-scheme: light;
   }
   /* Print prose, captions, labels and the colophon in solid black. Reset both

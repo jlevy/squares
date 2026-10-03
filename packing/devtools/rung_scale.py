@@ -14,6 +14,11 @@ The status chips take fills from the same scale, a rule each in the stylesheet n
 a hue, a level and an optional chroma boost (`status_fills`, the owner, 2026-10-02,
 `think-c19o`), and are reported the same way.
 
+Significance is no chip since 2026-10-03 (`think-m3m4`): its rung is drawn in an ink of
+its own, `--site-significance`, on the page itself. The inks, that one and the
+new-result star's, are reported against the page's background in each theme
+(`inks`), each held to the contrast its use needs: text 4.5:1, and a symbol 3:1.
+
 It needs no browser. `tests/test_rung_scale.py` holds the scale to what the design
 system says of it (`templates/paper-design.md`, Color): saturation and strength rise
 with the level, every fill is in gamut, and the text keeps 4.5:1 on every one. The same
@@ -40,11 +45,15 @@ from sqpack.render.color import (
     _oklch_linear_rgb,  # pyright: ignore[reportPrivateUsage]
 )
 
-#: The ladders in the order the site lists them, significance first.
-LADDERS = ("S", "V", "C")
+#: The ladders drawn as chips, in the order the site lists them. Significance, which the
+#: site lists first, is drawn in an ink of its own (`INKS`).
+LADDERS = ("V", "C")
 THEMES = ("light", "dark")
 #: WCAG 2 AA for body text, which a chip's label is.
 MINIMUM_CONTRAST = 4.5
+#: The inks the site draws with on the page itself, each with the contrast against the
+#: page its use needs: significance is text, the star a symbol (WCAG 1.4.11, 3:1).
+INKS = {"--site-significance": MINIMUM_CONTRAST, "--site-new-result": 3.0}
 
 _COMMENT = re.compile(r"/\*.*?\*/", re.DOTALL)
 _BLOCK = re.compile(r"([^{}]+)\{([^{}]*)\}")
@@ -263,6 +272,62 @@ def status_fills() -> list[Fill]:
     return report
 
 
+def inks() -> list[Fill]:
+    """Every ink in each theme, its token as the `rung` and its contrast against the
+    page's background: the value a theme's rule declares, or the light one where the
+    dark theme declares none."""
+    pages = page_colours()
+    declared: dict[str, dict[str, str]] = {}
+    for selector, tokens in _blocks(SITE_CSS):
+        theme = "dark" if _is_dark(selector) else "light"
+        for name in INKS:
+            if name in tokens:
+                if name in declared.setdefault(theme, {}):
+                    raise SystemExit(f"site.css declares {name} twice for the {theme} theme")
+                declared[theme][name] = tokens[name]
+    report = []
+    for theme in THEMES:
+        for name in INKS:
+            written = declared.get(theme, {}).get(name) or declared.get("light", {}).get(name)
+            match = _OKLCH.fullmatch((written or "").strip())
+            if not match:
+                raise SystemExit(f"site.css gives {name} no oklch() in the {theme} theme")
+            lightness, chroma, hue = (float(part) for part in match.groups())
+            colour = (lightness / 100, chroma, hue)
+            report.append(
+                Fill(
+                    theme=theme,
+                    rung=name,
+                    lightness=colour[0],
+                    chroma=chroma,
+                    hue=hue,
+                    hex=hex_colour(colour),
+                    in_gamut=chroma <= _maximum_chroma(colour[0], hue),
+                    contrast=contrast(colour, pages[theme]["bg"]),
+                )
+            )
+    return report
+
+
+def ink_table(report: Sequence[Fill]) -> str:
+    """The inks as the design document carries them: one row a token, a theme a pair of
+    columns, the ink in OkLCh with its hex and its contrast against the page."""
+    by_token: dict[str, dict[str, Fill]] = {}
+    for ink in report:
+        by_token.setdefault(ink.rung, {})[ink.theme] = ink
+    lines = [
+        "| Ink | Light | Against the page | Dark | Against the page |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for token, themed in by_token.items():
+        cells = [f"`{token}`"]
+        for theme in THEMES:
+            ink = themed[theme]
+            cells += [f"`{ink.oklch}` `{ink.hex}`", f"{ink.contrast:.1f}:1"]
+        lines.append("| " + " | ".join(cells) + " |")
+    return "\n".join(lines)
+
+
 def markdown_table(report: Sequence[Fill], head: str = "Rung") -> str:
     """The scale as the design document carries it: one row a rung, a theme a pair of
     columns, the fill in OkLCh with its hex and the text's contrast on it."""
@@ -287,14 +352,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise SystemExit(__doc__)
     report = fills()
     statuses = status_fills()
+    drawn = inks()
     print(markdown_table(report))
     print()
     print(markdown_table(statuses, "Status"))
+    print()
+    print(ink_table(drawn))
     report += statuses
     pages = page_colours()
     for theme in THEMES:
         print(f"{theme}: text on the page background {contrast(*pages[theme].values()):.1f}:1")
     failed = [fill for fill in report if not fill.in_gamut or fill.contrast < MINIMUM_CONTRAST]
+    failed += [ink for ink in drawn if not ink.in_gamut or ink.contrast < INKS[ink.rung]]
     for fill in failed:
         print(
             f"{fill.theme} {fill.rung}: {fill.oklch} "

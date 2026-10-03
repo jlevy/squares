@@ -55,7 +55,11 @@
    on the dark page. The roadmap, local and endpoint diagrams are drawn in the theme's
    own tokens and take none, and the construction in Figure 1 carries no lettering and
    takes the theme as the first paper's does (`.trump`, in the publication layer). A
-   test holds this list to the diagrams that carry fixed ink. */
+   test holds this list to the diagrams that carry fixed ink. The ground is a token, as
+   every colour is (`devtools.check_colour_tokens`). */
+:root {
+  --n11-diagram-ground: oklch(100% 0 0);
+}
 :root[data-kpress-resolved-theme="dark"]
   .n11-paper
   :is(
@@ -68,7 +72,7 @@
     .n11-mechanism-charge,
     .n11-mechanism-symmetry
   ) {
-  background: #fff;
+  background: var(--n11-diagram-ground);
 }
 @media print {
   /* Chromium measures before pagination; fix the same Letter text-column width

@@ -6,7 +6,7 @@
 () => {
   const bar = document.querySelector(".site-result-filters");
   const box = bar?.querySelector('input[data-filter="current"]');
-  const table = bar?.nextElementSibling?.querySelector("table");
+  const table = bar?.parentElement?.querySelector(":scope > .site-table-wrap table");
   if (
     !(bar instanceof HTMLElement) ||
     !(box instanceof HTMLInputElement) ||

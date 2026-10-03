@@ -62,15 +62,14 @@ Contact [ojoshe](https://x.com/ojoshe) if you wish to join.
 
 ## Recent Results
 
-<!-- The table first, then its one action, then what it shows (the owner, 2026-10-02,
-     think-tgjv; the paragraph stood between the heading and the filter bar until that
-     day). The first paragraph is the headline of recent progress, with its result ids,
-     which check_results.READER_TIER holds to the register, the star legend and where
-     the filters start. The second says what the three ratings on a row mean, rung by
-     rung in brief, and the key under it shows every chip with its short meaning
-     (rung_key); the ladders that define each rung in full, and the ratings' kinds,
-     statuses and dating rule, are the Results page's. README carries its own fuller
-     account of the same progress (site_documents, think-ekw5). -->
+<!-- The table first, with its legend above it, then its one action, then the headline
+     of recent progress (the owner, 2026-10-02, think-tgjv; 2026-10-03, think-42dx). The
+     paragraph's result ids are held to the register by check_results.READER_TIER, and
+     it says where the filters start. The legend over the table (rung_legend) shows every
+     mark a row carries and links the ladders; what each rung means, the ratings' kinds,
+     statuses and dating rule are the Results page's, and this page no longer explains
+     them (the owner, 2026-10-03). README carries its own fuller account of the same
+     progress (site_documents, think-ekw5). -->
 
 {{RECENT}}
 
@@ -81,28 +80,14 @@ packing, by [T-060](all-results.html#t-060). Seventeen squares is bracketed by
 machine-checked bounds, [T-043](all-results.html#t-043) below and
 [T-065](all-results.html#t-065) above, and [$n = 21$](cases/21.html),
 [$32$](cases/32.html) and [$45$](cases/45.html) have new exact values.
-{{STAR_LEGEND}}
-The table above starts at significance S4 and up, max age 180 days and superseded
+The table above starts at significance S3 and up, max age 180 days and superseded
 hidden.
-
-Each row carries three ratings, each a rung of its own ladder.
-Significance, S1 to S5, is how much the result matters, from bookkeeping at S1 to a move
-on a central open case at S5. Verification, V0 to V5, is how it was first established: a
-bare claim at V0, a numerical check at V1, a checkable proof or machine certificate at
-V3, a formal proof at V5. Confirmation, C0 to C5, is how far it has been checked since:
-recorded at C0, read at C1, replayed at C2, replayed by machine at C3, and up to a
-formal confirmation at C5. The key below gives every rung in brief, and the
-[Verification Ladders](all-results.html#verification-ladders) on the Results page define
-each one in full.
-
-{{RUNG_KEY}}
 
 <!-- Verification Ladders stood here, between Recent Results and the atlas, until
      2026-10-02 (the owner, think-hqb3): the section is the Results page's, under its
-     table, and Recent Results' second paragraph says what the ratings mean, over a key
-     of every rung (think-tgjv), and links it. Its two
-     fragments, #verification-ladders and the older #verification-at-a-glance, are sent
-     there by forward.js (overview/forward.js). -->
+     table, and the legend over Recent Results links it (think-42dx). Its two fragments,
+     #verification-ladders and the older #verification-at-a-glance, are sent there by
+     forward.js (overview/forward.js). -->
 
 <!-- This section's fragment was #the-atlas until 2026-10-01. The empty anchor in its
      heading keeps an old link landing here. -->

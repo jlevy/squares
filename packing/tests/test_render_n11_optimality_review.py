@@ -447,9 +447,12 @@ def test_a_diagram_drawn_in_fixed_ink_keeps_a_light_ground_on_the_dark_theme() -
     assert fixed, "no diagram carries fixed ink: the ground rule has nothing to hold"
     assert themed, "no diagram follows the theme: the rule would apply to every diagram"
     css = paper.STYLE.read_text(encoding="utf-8")
+    # The ground is a token, as every colour is (`devtools.check_colour_tokens`,
+    # 2026-10-03), and the token is white.
+    assert "--n11-diagram-ground: oklch(100% 0 0);" in css
     rule = re.search(
         r':root\[data-kpress-resolved-theme="dark"\]\s+\.n11-paper\s+:is\(([^)]*)\)\s*'
-        r"\{\s*background: #fff;\s*\}",
+        r"\{\s*background: var\(--n11-diagram-ground\);\s*\}",
         css,
     )
     assert rule is not None

@@ -8,7 +8,7 @@
 // inner edge and `to` says so.
 //
 // A table is measured as the component a reader sees: its filter bar, when it has one,
-// and its wrap; a table inside a disclosure is measured as the disclosure, open or
+// the legend under the bar where it has one, and its wrap; a table inside a disclosure is measured as the disclosure, open or
 // closed, with the space inside it reported apart. Beside the space above and below it,
 // a table has its side gutters: how far its wrap, and its bar's, sit from the edges of
 // the window, or of the popover that holds it. A grid marked up with a table's roles, as
@@ -123,7 +123,12 @@
       continue;
     }
     seen.add(component);
-    const before = disclosure ? null : wrap.previousElementSibling;
+    // A table of results sets its legend between its bar and its wrap
+    // (`overview_sections.rung_legend`): the bar is the one above the legend.
+    let before = disclosure ? null : wrap.previousElementSibling;
+    while (before?.classList.contains("site-rung-legend")) {
+      before = before.previousElementSibling;
+    }
     const bar =
       before instanceof Element && before.matches(".site-table-tools") && shown(before)
         ? before

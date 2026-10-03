@@ -95,8 +95,13 @@ def test_the_head_states_the_result_as_the_site_does(
         record["verification"],
         record["confirmation"],
     )
+    # Significance is its mark, the others chips (`think-m3m4`).
     places = [
-        head.index(f'data-rung="{rung[0]}" data-level="{rung[1:]}">{rung}</span>')
+        head.index(
+            f'<span class="site-significance-label" aria-hidden="true">{rung}</span>'
+            if rung[0] == "S"
+            else f'data-rung="{rung[0]}" data-level="{rung[1:]}">{rung}</span>'
+        )
         for rung in rungs
     ]
     assert places == sorted(places)
