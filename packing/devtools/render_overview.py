@@ -628,7 +628,7 @@ def site_logo() -> str:
 
 
 @cache
-def favicon_html() -> str:
+def favicon_url() -> str:
     """The site's icon: case 11, Trump's packing of eleven squares, drawn small as a
     data URI, so it costs no fetch. It names its ink and paper, since a tab has no page
     colour to inherit."""
@@ -636,7 +636,14 @@ def favicon_html() -> str:
 
     svg = packing_svg(11, units=200, ink="#17202a", paper="#ffffff", frame_px=FAVICON_PX)
     svg = svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ', 1)
-    return f'<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,{quote(svg)}">'
+    return f"data:image/svg+xml,{quote(svg)}"
+
+
+def favicon_html() -> str:
+    """The site's icon as the link every page's head carries once: the site's pages, the
+    two papers, the workbench, each case's record file and each forwarder to a page of
+    the site (`check_published_site.head_problems`)."""
+    return f'<link rel="icon" type="image/svg+xml" href="{favicon_url()}">'
 
 
 def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
@@ -1095,6 +1102,33 @@ def result_fragments() -> list[Page]:
     ]
 
 
+def forwarder_meta(new: str, title: str) -> PageMeta:
+    """What a forwarder to `new`, a page of the site, says of itself: a preview of where
+    it leads. Its address is `new`'s, so its canonical link and `og:url` are the page's
+    and a consumer that keys a preview by `og:url` files the share under the page; its
+    name is the page's, `title`; and its description is the sentence its body says,
+    with the page's address in full."""
+    return PageMeta(
+        name=title, description=f"This page has moved to {canonical_url(new)}.", path=new
+    )
+
+
+def forwarder_head(new: str, title: str) -> str:
+    """A forwarder's identity, by the rule for where it leads (`forwarder_pages`).
+
+    To a page of the site, the site's whole set (`head_tags`, from `forwarder_meta`) and
+    the site's icon, held as any page's head is (`check_published_site.head_problems`).
+    Off the site, its title and a canonical link to that address and nothing else: the
+    site does not write the page it leads to, so a preview could not say what it shows.
+    """
+    if new.startswith("https://"):
+        return (
+            f"<title>{html.escape(title, quote=False)}</title>\n"
+            f'<link rel="canonical" href="{html.escape(new, quote=True)}">'
+        )
+    return f"{head_tags(forwarder_meta(new, title))}\n{favicon_html()}"
+
+
 def forwarder_pages() -> list[Page]:
     """A forwarder at each address a page used to have (`MOVED_PAGES`), so no link written
     before the change breaks.
@@ -1107,6 +1141,15 @@ def forwarder_pages() -> list[Page]:
     bar, no stamp and no styles, and is not among `PAGES`. A target is written as the
     old path's reader must follow it: relative for a page of the site, climbing out of
     the old path's directory where it has one, and whole for an address off it.
+
+    A forwarder to a page of the site also carries a link preview of that page
+    (`forwarder_head`), since an old address is still shared: GitHub Pages cannot answer
+    one with a redirect a crawler follows, and the crawlers that draw link previews run
+    no script and do not reliably follow a refresh, so a forwarder with a title and a
+    canonical link alone previewed as a bare title or as nothing (think-esmk,
+    2026-10-03). Its preview
+    names the page it leads to, at that page's address, with the site's card. The one
+    forwarder off the site, the defect log's, carries no preview.
     """
     import posixpath  # noqa: PLC0415
 
@@ -1121,7 +1164,7 @@ def forwarder_pages() -> list[Page]:
         values = {
             "TARGET": html.escape(target, quote=True),
             "TITLE": html.escape(titles[new]),
-            "CANONICAL_URL": html.escape(new if external else canonical_url(new), quote=True),
+            "HEAD": forwarder_head(new, titles[new]),
             "FORWARD_SCRIPT": _script_text(FORWARD_SCRIPT),
         }
         page = fill(template, values, where=FORWARDER.name)

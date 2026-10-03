@@ -76,14 +76,16 @@ HEAD_CHECKS = check_published_site.head_checks
 
 
 def head(path: str, *, description: str | None = None) -> str:
-    """A page's head as the site writes one (`render_overview.head_tags`), for the page
-    served at `path` under the root, saying something of its own."""
+    """A page's head as the site writes one (`render_overview.head_tags`, then the
+    site's icon), for the page served at `path` under the root, saying something of its
+    own."""
     meta = render_overview.PageMeta(
         name=f"Page {path}",
         description=description or f"What a reader finds at {path}.",
         path=path,
     )
-    return f'<!doctype html><html lang="en"><head>{render_overview.head_tags(meta)}</head>'
+    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html()}"
+    return f'<!doctype html><html lang="en"><head>{tags}</head>'
 
 
 def card(width: int = render_overview.SOCIAL_CARD_WIDTH, height: int = 630) -> bytes:
@@ -1027,10 +1029,11 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
 ) -> None:
     """Every page that can be shared is read for what it says of itself: the site's
     pages, the explainer, the optimality paper and the workbench, each at the address it
-    is served at. The forwarders, the paper's landing address among them, are read for
-    their canonical link, and the card is fetched from the site under test. A good
-    deploy passes, and the head checks cost one request, the card's: the pages are read
-    from the text already fetched."""
+    is served at, and the sampled case records, in one line. The forwarders, the paper's
+    landing address among them, are read by their rule: a preview of the page each leads
+    to, or, for the one that leads off the site, a canonical link and no card. The card is
+    fetched from the site under test. A good deploy passes, and the head checks cost one
+    request, the card's: the pages are read from the text already fetched."""
     requested: list[str] = []
     fetch = fake_site(site_pages(), requested=requested)
     assert failures(monkeypatch, fetch, heads=True) == []
@@ -1055,17 +1058,22 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
         render_case_pages.case_url(n)
         for n in sorted({1, check_published_site.RECORD_FILE_SAMPLE, CASE_COUNT})
     ]
-    for name in (*shared, *records):
+    for name in shared:
         assert f"{name}: {clean}" in lines, name
+    assert f"case records: each of {len(records)} carries {clean}" in lines
     pages = len(shared) + len(records)
     assert f"each of {pages} pages has a description of its own" in lines
     # The address the paper's directory had is one of the renderer's forwarders now.
     assert dict(render_overview.MOVED_PAGES)[landing] == OPTIMALITY_PAPER
     paper_url = render_overview.canonical_url(OPTIMALITY_PAPER)
     assert paper_url == f"{render_overview.SITE_URL}papers/n11-optimality-review.html"
-    assert f"forwarder {landing}: names {paper_url} as canonical, and carries no card" in lines
+    assert f"forwarder {landing}: previews {paper_url}, the page it leads to" in lines
+    defects = dict(render_overview.MOVED_PAGES)["defects.html"]
+    assert f"forwarder defects.html: names {defects} as canonical, and carries no card" in lines
+    verbs = ("names", "previews")
     for forwarder in render_overview.forwarder_pages():
-        assert any(line.startswith(f"forwarder {forwarder.name}: names ") for line in lines)
+        starts = tuple(f"forwarder {forwarder.name}: {verb} " for verb in verbs)
+        assert any(line.startswith(starts) for line in lines), forwarder.name
     assert f"card {render_overview.SOCIAL_CARD}: a PNG of 1200x630, 29 bytes" in lines
 
 
@@ -1133,8 +1141,8 @@ def test_check_fails_a_forwarder_whose_canonical_link_is_not_its_targets_address
 ) -> None:
     """The paper's landing address once named the paper by its file name alone, which a
     crawler has no base to resolve; a forwarder names its target's address in full. A
-    relative one fails twice: it is not the address the forwarder should name, and it is
-    not an address in full."""
+    relative one fails twice: where the forwarder says it sends a visit is not the address
+    it should name, and its preview's canonical link is not the page it leads to."""
     name = "n11-optimality/index.html"
     landing = site_pages()[name].decode()
     target = render_overview.canonical_url(OPTIMALITY_PAPER)
@@ -1146,5 +1154,5 @@ def test_check_fails_a_forwarder_whose_canonical_link_is_not_its_targets_address
     says, heads = failures(monkeypatch, fake_site(site_pages(**{name: relative})), heads=True)
     assert says.startswith(f"forwarder {name}: HTTP 200, says ")
     assert heads.startswith(
-        f"forwarder {name}: head: its canonical links are ['../papers/n11-optimality-review"
+        f"forwarder {name}: head: the canonical link is '../papers/n11-optimality-review"
     )

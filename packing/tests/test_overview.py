@@ -5456,7 +5456,8 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
     times, and they agree: as its canonical URL, in full; to the forwarding script, on
     the root element; in a refresh for a reader without scripts, inside `<noscript>` so
     it cannot outrun the script and drop the fragment; and in a link. It carries the
-    overview's own forwarding script whole, and nothing of a site page: no bar, no
+    overview's own forwarding script whole, the paper's preview by its title
+    (`render_overview.forwarder_head`), and nothing else of a site page: no bar, no
     stamp, no stylesheet. `check_published_site` reads a deployed one the same way."""
     from devtools import check_published_site  # noqa: PLC0415
 
@@ -5492,7 +5493,10 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
             f'<noscript><meta http-equiv="refresh" content="0; url={climbs}{new}"></noscript>'
         )
         assert refresh in page
-        assert f"<title>{html.escape(titles[new])}</title>" in page
+        title = render_overview.page_title(titles[new])
+        assert f"<title>{html.escape(title, quote=False)}</title>" in page
+        assert f'<meta property="og:title" content="{html.escape(titles[new])}">' in page
+        assert f">{html.escape(titles[new])}</a>.</p>" in page
         assert "site-nav" not in page
         assert "<style" not in page
         assert len(page) < 8_000, "a forwarder is a few lines, not a page"

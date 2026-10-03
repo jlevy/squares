@@ -1112,8 +1112,8 @@ def _description(case: dict[str, Any]) -> str:
 
 
 def case_records() -> list[Page]:
-    """Each case's record file, `cases/11.html`: its title, description and link
-    preview, the script that sends a reader with scripts on to the record page
+    """Each case's record file, `cases/11.html`: its title, description, link preview
+    and the site's icon, the script that sends a reader with scripts on to the record page
     (`overview/case-forward.js`), and the record itself, its links written from its own
     directory. A file is the record alone, with no styles or shell, so a reader without
     scripts reads it plain; the record page and every popover fetch it."""
@@ -1122,6 +1122,7 @@ def case_records() -> list[Page]:
         PageMeta,
         _script_text,  # pyright: ignore[reportPrivateUsage]
         assert_self_contained,
+        favicon_html,
         fill,
         head_tags,
     )
@@ -1135,7 +1136,7 @@ def case_records() -> list[Page]:
         meta = PageMeta(f"n = {n} · Case Records", _description(case), name)
         values = {
             "N": str(n),
-            "HEAD": head_tags(meta),
+            "HEAD": f"{head_tags(meta)}\n{favicon_html()}",
             "FORWARD_SCRIPT": _script_text(CASE_FORWARD_SCRIPT),
             "RECORD": rebase_links(records[n], CASES_DIR),
         }

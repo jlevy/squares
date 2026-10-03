@@ -1061,11 +1061,12 @@ workbench back into one tree; only a push to `main` uploads that tree to Pages.
 writes a forwarder at each old address: a page of a few lines whose script
 (`devtools/overview/forward.js`, the one the overview forwards its own old fragments
 with) sends the reader on with the query string and the fragment they came with, with a
-refresh and a link for a reader without scripts and the new address as its canonical
-URL. `render_overview.MOVED_FILES` lists each file that moved and cannot forward, a
-paper’s Markdown and PDF; the publish job copies each to its old address, and a test
-holds that step to the list.
-Nothing on the site links an old address.
+refresh and a link for a reader without scripts, the new address as its canonical URL,
+and, where it leads to a page of the site, that page’s link preview, so an old link
+shared now still shows where it goes.
+`render_overview.MOVED_FILES` lists each file that moved and cannot forward, a paper’s
+Markdown and PDF; the publish job copies each to its old address, and a test holds that
+step to the list. Nothing on the site links an old address.
 `check_published_site` asks the deployed site for every one of them, and visits each
 forwarder in the pinned browser with a query string and a fragment.
 To move a page again, add it to the list; do not delete an entry.

@@ -1289,12 +1289,13 @@ it.
   and every way to a case opens that record: an atlas tile, a frontier row and a link
   (the owner, 2026-10-02 and 03, `think-t21m`).
   - **The record file.** `cases/N.html`, one for each case, is a plain page: its own
-    head, a name (“n = 11 · Case Records”), a description, a canonical link and a link
-    preview (**Page Metadata and Social Cards**, below), no site shell, and the record
-    itself as HTML, an `article.site-case` that names its case in `data-case`, as the
-    root element does. A reader without scripts, and a crawler, reads the record there,
-    plain, under one small style of its own: a reading column, the drawing at the record
-    page’s size and each formula once, as its MathML. One inlined script in its head
+    head, a name (“n = 11 · Case Records”), a description, a canonical link, a link
+    preview and the site’s icon (**Page Metadata and Social Cards**, below), no site
+    shell, and the record itself as HTML, an `article.site-case` that names its case in
+    `data-case`, as the root element does.
+    A reader without scripts, and a crawler, reads the record there, plain, under one
+    small style of its own: a reading column, the drawing at the record page’s size and
+    each formula once, as its MathML. One inlined script in its head
     (`overview/case-forward.js`) sends a reader with scripts on at once to the record
     page, `./?n=11`, with the fragment they came with; `?raw` keeps a reader on the
     file, and so does a file read from disk.
@@ -1991,8 +1992,9 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `n11-optimality/t-060-explainer.html` with its directory, each serve a forwarder: a
   page of a few lines that sends a reader on with the query string and the fragment they
   came with (`overview/forward.js`, which reads the root element’s `data-moved-to`),
-  with a refresh and a link for a reader without scripts and the new address as its
-  canonical URL. Nothing on the site links an old address.
+  with a refresh and a link for a reader without scripts, the new address as its
+  canonical URL, and the paper’s link preview (**Page Metadata and Social Cards**,
+  below). Nothing on the site links an old address.
   The optimality paper has its own renderer, shell and Pages job
   (`render_n11_optimality_review`), and takes the publication layer and the site’s math
   pipeline from the shared functions (**Math**, above); it carries the bar as the
@@ -2106,24 +2108,44 @@ these tags itself, so the set cannot differ between page kinds.
 | `og:image:type`, `og:image:width`, `og:image:height` | `image/png`, 1200 and 630 |
 | `og:image:alt`, `twitter:image:alt` | What the card shows |
 | `twitter:card` | `summary_large_image` |
+| `link rel="icon"` | The site’s icon, once (`render_overview.favicon_html`), which each shell writes beside the set |
 
 The card is the overview’s hero, the best packing known of 53 squares, at 1200 by 630:
 the hero’s own drawing in the light theme’s ink on its background, with the project’s
 name under it as the bar sets the site’s name, drawn as outlines so no machine’s fonts
 decide it. `devtools.social_card` draws it when the site is built, and it is not checked
-in. Every page uses the one image.
+in. Every page uses the one image, the two papers included: their previews differ by
+title and description, and the alt text stays what the card shows, since Open Graph’s
+`og:image:alt` describes the picture and not the page.
 
-A forwarder carries a canonical link to the address it sends a reader to, in full, and
-no card. A result’s overview is a fragment fetched into a popover and has no head.
-A case’s record file is the record alone but has the whole set, since it is the address
-a case is shared by (**Case records**, above): its own name is “n = 11 · Case Records”,
-and its description a sentence of its own.
+A forwarder previews the page it leads to (`render_overview.forwarder_head`). An old
+address is still shared, from dated records, other people’s pages and bookmarks, and
+GitHub Pages cannot answer it with a redirect a crawler follows; the crawlers that draw
+link previews run no script and do not reliably follow a refresh.
+So a forwarder to a page of the site carries the whole set at that page’s address: its
+canonical link and `og:url` are where it leads, its name is the page’s
+(`FORWARDER_TITLES`, or a paper’s card title), its description is “This page has moved
+to” and the address in full, and the card and the icon are the site’s. Until 2026-10-03
+a forwarder carried only its title and its canonical link, so a shared old link
+previewed as a bare title or as nothing.
+The one forwarder that leads off the site, `defects.html` to the defect log on GitHub,
+carries its title and a canonical link to that address, in full, and no card: the site
+does not write the page it leads to, so its preview could not say what that page shows.
+
+A result’s overview is a fragment fetched into a popover and has no head.
+A case’s record file is the record alone but has the whole set and the icon, since it is
+the address a case is shared by (**Case records**, above): its own name is “n = 11 ·
+Case Records”, and its description a sentence of its own.
 
 `check_published_site` holds the deployed pages to these rules after each deploy: one of
-each tag, the canonical link and `og:url` equal to the page’s address, no description
-shared by two pages, and a card that is a PNG of the declared size.
-`check_published_site --local DIR` asks the same of a built directory;
+each tag and the site’s icon, the canonical link and `og:url` equal to the page’s
+address, no description shared by two pages, each forwarder by its rule, and a card that
+is a PNG of the declared size; it reads the case records it samples as pages.
+`check_published_site --local DIR` asks the same of a built directory, and reads every
+HTML file there with a head, every case record and any page no list names among them, so
+a page added later fails the check until it carries the set.
 `devtools.preview_site` and the Pages workflow’s `overview` job both run it.
+`check_published_site --local DIR --inventory` prints what every file’s head carries.
 
 ## Token Ownership
 
