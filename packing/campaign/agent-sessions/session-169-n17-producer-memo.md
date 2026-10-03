@@ -51,7 +51,7 @@ session:
       scientific lane.
     budget_minutes: 30
     started_at: '2026-10-03T20:56:00Z'
-    deadline_at: '2026-10-03T21:26:00Z'
+    deadline_at: '2026-10-03T21:16:09.780424+00:00'
     expected_output: packing/campaign/explorations/X048-session-169-pilots/README.md
     validation_command: uv run --frozen --all-extras --group dev packing-ledger check
     kill_condition: Ownership overlap, invalid equivalence, resource guard, or deadline.
@@ -76,7 +76,8 @@ session:
     entered_by: evidence_checkpoint
     switch_reason: The bounded primary result is decided; avoid further low-information compute.
       The four-hour ceiling is shortened prospectively to this30-minute finalization reserve
-      because the primary deliverable is decided.
+      because the primary deliverable is decided. The four-hour ceiling is shortened prospectively
+      to this30-minute finalization reserve because the primary deliverable is decided.
     budget_minutes: 30
     started_at: '2026-10-03T21:16:09.780424+00:00'
     deadline_at: '2026-10-03T21:46:09.780424+00:00'
