@@ -1,0 +1,53 @@
+         24678158 function calls (24678146 primitive calls) in 17.758 seconds
+
+   Ordered by: cumulative time
+   List reduced from 269 to 45 due to restriction <45>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.026    0.026   17.777   17.777 producer.py:828(produce)
+      672    0.077    0.000   14.083    0.021 producer.py:581(produce_row)
+     4686    0.233    0.000    7.278    0.002 producer.py:156(subtract)
+   766479    5.784    0.000    5.999    0.000 geometry.py:53(clip)
+     3360    0.285    0.000    3.960    0.001 producer.py:440(collision_region)
+    94770    1.544    0.000    3.861    0.000 induction.py:35(hull)
+      210    0.061    0.000    3.060    0.015 producer.py:525(partner_cover)
+  1292611    1.897    0.000    1.897    0.000 induction.py:41(turn)
+     3360    0.233    0.000    1.438    0.000 producer.py:491(_float_collision)
+    55574    0.232    0.000    1.133    0.000 induction.py:78(encode)
+   431263    0.914    0.000    1.126    0.000 producer.py:661(_float_clip)
+   102283    0.106    0.000    0.950    0.000 node.py:70(points)
+   400553    0.760    0.000    0.832    0.000 node.py:65(parse_point)
+   340747    0.280    0.000    0.817    0.000 {built-in method builtins.max}
+   101364    0.116    0.000    0.774    0.000 geometry.py:41(area2)
+     6497    0.088    0.000    0.707    0.000 covers.py:265(convex_halfplanes)
+   104523    0.227    0.000    0.661    0.000 {built-in method builtins.sum}
+      672    0.003    0.000    0.620    0.001 induction.py:162(forbidden_regions)
+     6497    0.146    0.000    0.618    0.000 covers.py:233(closed_convex_hull)
+     3360    0.094    0.000    0.617    0.000 induction.py:125(minkowski_sum)
+    21476    0.152    0.000    0.607    0.000 producer.py:432(_satisfies)
+   301864    0.212    0.000    0.535    0.000 {built-in method builtins.min}
+  6519028    0.533    0.000    0.533    0.000 {method 'append' of 'list' objects}
+    26080    0.248    0.000    0.509    0.000 producer.py:375(cached_collision_planes)
+    28641    0.020    0.000    0.501    0.000 {method 'extend' of 'list' objects}
+   142955    0.103    0.000    0.479    0.000 producer.py:505(<genexpr>)
+  2170093    0.451    0.000    0.451    0.000 producer.py:437(<genexpr>)
+   596710    0.424    0.000    0.424    0.000 geometry.py:47(<genexpr>)
+     1630    0.225    0.000    0.366    0.000 producer.py:418(_integer_planes)
+  3933163    0.258    0.000    0.258    0.000 {built-in method builtins.len}
+   244156    0.255    0.000    0.255    0.000 covers.py:229(_cross)
+   692008    0.247    0.000    0.247    0.000 producer.py:648(<genexpr>)
+       42    0.173    0.004    0.246    0.006 sequential.py:249(owner_extents)
+      672    0.006    0.000    0.242    0.000 induction.py:168(common_core_planes)
+   346004    0.194    0.000    0.194    0.000 induction.py:175(<genexpr>)
+        1    0.000    0.000    0.173    0.173 producer.py:104(build_seed)
+        6    0.000    0.000    0.164    0.027 producer.py:83(seed_points)
+       72    0.034    0.000    0.164    0.002 ownership.py:35(ownership)
+   101981    0.156    0.000    0.156    0.000 {built-in method builtins.sorted}
+   281152    0.152    0.000    0.152    0.000 producer.py:387(<genexpr>)
+   240019    0.123    0.000    0.123    0.000 {built-in method math.lcm}
+     1621    0.003    0.000    0.091    0.000 geometry.py:78(intersect)
+       42    0.013    0.000    0.089    0.002 producer.py:675(kernel_points)
+   736268    0.073    0.000    0.073    0.000 producer.py:511(<genexpr>)
+   670048    0.066    0.000    0.066    0.000 {method 'pop' of 'list' objects}
+
+

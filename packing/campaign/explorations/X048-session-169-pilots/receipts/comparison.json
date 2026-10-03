@@ -1,0 +1,58 @@
+{
+  "A": {
+    "checks": {
+      "steps": true,
+      "rows": true,
+      "closed": true,
+      "outcome": true,
+      "rounds": true,
+      "seed_canonical_bytes": true,
+      "node_canonical_bytes": true,
+      "seed_canonical_bytes_equal": true,
+      "node_canonical_bytes_equal": true
+    },
+    "producer_peak_reduction_bytes": 34754560,
+    "producer_peak_reduction_fraction": 0.21046234745510473,
+    "observed_wall_fraction": 0.8773820210584324,
+    "wall_caveat": "Includes observer scanning cost; not an isolated producer speedup claim.",
+    "baseline_checker": {
+      "status": "PASS_SAVED_STALL",
+      "steps_checked": 42,
+      "rows_checked": 672,
+      "events": 52871,
+      "collision_regions": 1630,
+      "excluded_orbits": 0,
+      "producer_imported": false,
+      "process_cpu_seconds": 13.3125,
+      "wall_seconds": 13.450223000021651
+    },
+    "candidate_checker": {
+      "status": "PASS_SAVED_STALL",
+      "steps_checked": 42,
+      "rows_checked": 672,
+      "events": 52871,
+      "collision_regions": 1630,
+      "excluded_orbits": 0,
+      "producer_imported": false,
+      "process_cpu_seconds": 12.203125,
+      "wall_seconds": 12.44954439997673
+    }
+  },
+  "W7": {
+    "checks": {
+      "steps": true,
+      "rows": true,
+      "closed": true,
+      "outcome": true,
+      "rounds": true,
+      "seed_canonical_bytes": true,
+      "node_canonical_bytes": true,
+      "seed_canonical_bytes_equal": true,
+      "node_canonical_bytes_equal": true
+    },
+    "producer_peak_reduction_bytes": 1314816,
+    "producer_peak_reduction_fraction": 0.015076084914521837,
+    "observed_wall_fraction": 1.040012356017408,
+    "wall_caveat": "Includes observer scanning cost; not an isolated producer speedup claim."
+  }
+}

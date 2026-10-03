@@ -182,6 +182,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-165](agent-sessions/session-165-post-optimality-overnight.md) | completed | contemporaneous | `insight-iteration` (insight) | `pipeline-improvement` (correctness) | 36 | think-kaqh | think-11ma: in a separately scheduled W3 block, preregister a small exact geometric-exclusion pilot below the certified endpoint. The overnight heartbeat is to be paused by15:00UTC; no new overnight research or H258 retry. |
 | [session-166](agent-sessions/session-166-n17-route-after-pr265.md) | stopped | mixed | `review-planning-oversight` (insight) | `review-planning-oversight` (process) | 2 | think-9fc1 | BC-406 (think-c7kv): dispatch the route review's lanes A1, B and C in parallel, then lane A2 once H-258 is accepted. Hosted certification of this handoff is owned by think-od9c. |
 | [session-167](agent-sessions/session-167-n17-parallel-lanes-after-route-review.md) | stopped | mixed | `review-planning-oversight` (insight) | `research-loop` (correctness) | 2 | think-c7kv | BC-418 (think-tmz6): close H-266's single-state item and H-268's slide bound, then re-record H-261 and H-266; build the H-267 selector and adapt the n11 kernel; pilot the capture contraction rate on the endpoint's occupancy state. Lanes G2 and H left a unique-state cover and the H-268 slide bounds built but unreviewed; H-268 must be re-run on the unique design, and B_W's faces a >= 0, b >= 0 and z <= 1/16 still need a capture-side argument. Hosted certification of this branch is owned by think-iuz2. |
+| [session-169](agent-sessions/session-169-n17-producer-memo.md) | in_progress | contemporaneous | `review-planning-oversight` (insight) | `efficiency-loop` (efficiency) | 2 | think-wn6x | Finish the frozen small W5 slice with one primary executor. |
 
 ### Workflow summary
 
@@ -193,12 +194,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 11 | 1 | 66 | 3 |
 | `insight-iteration` | 28 | 1 | 88 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 11 | 1 | 40 | 1 |
+| `efficiency-loop` | 11 | 1 | 41 | 1 |
 | `research-loop` | 31 | 4 | 116 | 8 |
 | `pipeline-improvement` | 38 | 2 | 208 | 6 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 2 | 3 |
-| `review-planning-oversight` | 6 | 2 | 41 | 4 |
+| `review-planning-oversight` | 7 | 2 | 42 | 4 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas

@@ -53,9 +53,9 @@ least 15 minutes reserved for finalization. No need to consume the full budget.
 
 ## Measured result
 
-Decision: **ADOPT the bounded cache-lifetime change**, subject to hosted validation. The
-only producer change drops replaced owner rows from `PartnerMemo` after a complete step.
-It changes no geometry, row schedule, exact arithmetic, certificate, or checker.
+Decision: **ADOPT the bounded cache-lifetime change**, subject to hosted validation.
+The only producer change drops replaced owner rows from `PartnerMemo` after a complete
+step. It changes no geometry, row schedule, exact arithmetic, certificate, or checker.
 
 | Frozen input | Baseline | Candidate | Same work |
 | --- | --- | --- | --- |
@@ -67,25 +67,24 @@ It changes no geometry, row schedule, exact arithmetic, certificate, or checker.
 | W7 correctness control | 14-step saved object | Byte-identical saved object | Same complete rounds, closure and row counts |
 
 The separate [profile](receipts/A-profile.txt) puts most time in row geometry:
-`produce_row` 14.08 s cumulative, subtraction 7.28 s and clipping 6.00 s. These nested
-times must not be added. The change addresses retained memory, not the dominant
-arithmetic path. Serialization took 0.414 s before and 0.379 s after; pipeline process
-peaks were 192,638,976 and 161,914,880 bytes.
+`produce_row` 14.08 s cumulative, subtraction 7.28 s and clipping 6.00 s.
+These nested times must not be added. The change addresses retained memory, not the
+dominant arithmetic path. Serialization took 0.414 s before and 0.379 s after;
+pipeline process peaks were 192,638,976 and 161,914,880 bytes.
 
 [The comparison receipt](receipts/comparison.json) and before/after receipts retain the
 measurements. One canonical copy of each identical certificate pair is saved under
 `objects-A/` and `objects-W7/`; the duplicate candidate is not published. Peak memory is
 the actual Python process high-water mark through producer completion, including imports
-and frame construction. The observer scans the memo and has lower overhead after
-eviction; the wall difference cannot all be attributed to the producer change. This is
-one cold process per version, not a general speed estimate or a Flag2 extrapolation.
+and frame construction. The observer scans the memo and has lower overhead after eviction;
+the wall difference cannot all be attributed to the producer change. This is one cold
+process per version, not a general speed estimate or a Flag2 extrapolation.
 
 A separate Sol 6.1 xhigh soundness read checked the complete-step boundary, adaptive
-predecessor lifetime, object-identity reuse, and observer references. It found no
-defect; it did not independently rerun the experiment. The targeted cache, adaptive
-split, tamper/refusal, and full blind/wall verifier tests passed: **73 tests in 20.91
-seconds**. The new regression bounds the retained generations across a multi-round W7
-production.
+predecessor lifetime, object-identity reuse, and observer references. It found no defect;
+it did not independently rerun the experiment. The targeted cache, adaptive split,
+tamper/refusal, and full blind/wall verifier tests passed: **73 tests in 20.91 seconds**.
+The new regression bounds the retained generations across a multi-round W7 production.
 
 Replay from `packing/` with the pinned environment:
 
@@ -98,8 +97,7 @@ uv run --frozen --all-extras --group dev python -m devtools.check_n17_subpattern
 Baseline production used unchanged `234a07f4` producer code; candidate measurements used
 the five-line eviction patch in this branch. The checker source was unchanged at
 `234e65efc`; its `dirty: false` field covers that checker entry point, not the entire
-working tree. The full source change and instrument are recorded in this PR's code
-commit.
+working tree. The full source change and instrument are recorded in this PR's code commit.
 
 ## Validation status
 
@@ -108,9 +106,9 @@ useful validation: its bounded subprocess runner explicitly refuses Windows. Thi
 environment limitation, not a proof failure. Targeted runs use a separately smoke-tested
 Windows Job supervisor. The branch remains uncertified until a supported-host full gate
 passes. Initial hosted validation passed the test shards but rejected this new README's
-missing document-map entry; that narrow metadata omission is fixed in this layer. The
-initial main-mergeability failure names the inherited `SYNOPSIS.md` conflict. No new
-scientific exclusion or full optimality result is claimed.
+missing document-map entry; that narrow metadata omission is fixed in this layer.
+The initial main-mergeability failure names the inherited `SYNOPSIS.md` conflict.
+No new scientific exclusion or full optimality result is claimed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
