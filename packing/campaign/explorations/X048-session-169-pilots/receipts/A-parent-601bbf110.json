@@ -1,0 +1,1540 @@
+{
+  "fixture": "A",
+  "bins": 16,
+  "max_rounds": 12,
+  "profiled": false,
+  "actual_python_pid": 44368,
+  "producer_wall_seconds": 13.098890999972355,
+  "producer_cpu_seconds": 13.046875,
+  "producer_peak_working_set_bytes": 130387968,
+  "save_wall_seconds": 0.4148132000118494,
+  "save_cpu_seconds": 0.40625,
+  "pipeline_peak_working_set_bytes": 135819264,
+  "seed_canonical_bytes": 49377,
+  "node_canonical_bytes": 14649116,
+  "steps": 42,
+  "rows": 672,
+  "closed": false,
+  "outcome": "stalled",
+  "rounds": [
+    {
+      "round": 0,
+      "steps": 6,
+      "extents": [
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "39044849/19226000"
+            ],
+            [
+              "1411/1000",
+              "39044849/19226000"
+            ]
+          ],
+          "residual_box_extent": [
+            "11916963/19226000",
+            "11916963/19226000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "21458825665/549755813888"
+        },
+        {
+          "owner": 17,
+          "cell": "interior-NW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "39044849/19226000"
+            ],
+            [
+              "50855927/19226000",
+              "653/200"
+            ]
+          ],
+          "residual_box_extent": [
+            "11916963/19226000",
+            "11916963/19226000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "21458855663/549755813888"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "1169/500"
+            ],
+            [
+              "161921649904143352371/77185615360000000000",
+              "113713297335450483913/44106065920000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "227/250",
+            "148306481731579977907/308742461440000000000"
+          ],
+          "owned_hull_vertices": 5,
+          "owned_hull_area2_physical": "617272553/274877906944"
+        },
+        {
+          "owner": 19,
+          "cell": "interior-S",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "3505538378915744961/1610547200000000000",
+              "51254649146439374028703/19797228416000000000000"
+            ],
+            [
+              "143/100",
+              "247762535336906917/106745139200000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "513597174270740718748528301/1245483234107392000000000000",
+            "95116986280906917/106745139200000000"
+          ],
+          "owned_hull_vertices": 4,
+          "owned_hull_area2_physical": "1253565025/1099511627776"
+        },
+        {
+          "owner": 20,
+          "cell": "interior-N",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "416102094828119268859/191668295680000000000",
+              "1339/500"
+            ],
+            [
+              "284688452285493083/120992665600000000",
+              "1623/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "97185601002920731141/191668295680000000000",
+            "108053740252106917/120992665600000000"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 22,
+          "cell": "interior-SE",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "123229/46000",
+              "653/200"
+            ],
+            [
+              "1411/1000",
+              "8021073729020718011501/3961967667200000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "26961/46000",
+            "2430737350601518011501/3961967667200000000000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "48511200619/1099511627776"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "steps": 12,
+      "extents": [
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "59072676828184056663683/29518595102720000000000"
+            ],
+            [
+              "1411/1000",
+              "18357120451502112662173/9167964098560000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "17421939138246136663683/29518595102720000000000",
+            "5421123108433952662173/9167964098560000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "58624264391/1099511627776"
+        },
+        {
+          "owner": 17,
+          "cell": "interior-NW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "983290614786300246413551/486508559872000000000000"
+            ],
+            [
+              "110643981085109318251849/41358709504000000000000",
+              "653/200"
+            ]
+          ],
+          "residual_box_extent": [
+            "296827036806908246413551/486508559872000000000000",
+            "24392205445450681748151/41358709504000000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "14656090885/274877906944"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "602988997281390825739/263286871040000000000"
+            ],
+            [
+              "416102136808754268859/191668295680000000000",
+              "3443375275961944957717/1341614417920000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "226488771694190825739/263286871040000000000",
+            "310477430604036248193373371/784744106880009920000000000"
+          ],
+          "owned_hull_vertices": 10,
+          "owned_hull_area2_physical": "37163159347/1099511627776"
+        },
+        {
+          "owner": 19,
+          "cell": "interior-S",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "3505538378915744961/1610547200000000000",
+              "51254649146439374028703/19797228416000000000000"
+            ],
+            [
+              "143/100",
+              "247762535336906917/106745139200000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "513597174270740718748528301/1245483234107392000000000000",
+            "95116986280906917/106745139200000000"
+          ],
+          "owned_hull_vertices": 7,
+          "owned_hull_area2_physical": "5101361603/1099511627776"
+        },
+        {
+          "owner": 20,
+          "cell": "interior-N",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "416102094828119268859/191668295680000000000",
+              "1339/500"
+            ],
+            [
+              "915566566608829786526267467/388786940748159180800000000",
+              "1623/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "97185601002920731141/191668295680000000000",
+            "346435843059694914350532533/388786940748159180800000000"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 22,
+          "cell": "interior-SE",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "123229/46000",
+              "653/200"
+            ],
+            [
+              "1411/1000",
+              "8021073729020718011501/3961967667200000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "26961/46000",
+            "2430737350601518011501/3961967667200000000000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "48511200619/1099511627776"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "steps": 18,
+      "extents": [
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "59009044010207318382433/29518595102720000000000"
+            ],
+            [
+              "1411/1000",
+              "9208548753100268069039/4881829888000000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "17358306320269398382433/29518595102720000000000",
+            "2320286781132268069039/4881829888000000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "140393493205/1099511627776"
+        },
+        {
+          "owner": 17,
+          "cell": "interior-NW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "980903424070198195632301/486508559872000000000000"
+            ],
+            [
+              "14339545051744946507/5284608000000000000",
+              "653/200"
+            ]
+          ],
+          "residual_box_extent": [
+            "294439846090806195632301/486508559872000000000000",
+            "2914700068255053493/5284608000000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "41208943151/549755813888"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "37467541842461433/17325128743387136"
+            ],
+            [
+              "416102136808754268859/191668295680000000000",
+              "3176813/1250000"
+            ]
+          ],
+          "residual_box_extent": [
+            "317315193485445713/433128218584678400",
+            "71013329914500003141/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "188098019697/1099511627776"
+        },
+        {
+          "owner": 19,
+          "cell": "interior-S",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "222548333/100000000",
+              "51254649146439374028703/19797228416000000000000"
+            ],
+            [
+              "143/100",
+              "247762535336906917/106745139200000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "7196247326429068748703/19797228416000000000000",
+            "95116986280906917/106745139200000000"
+          ],
+          "owned_hull_vertices": 9,
+          "owned_hull_area2_physical": "10879312119/1099511627776"
+        },
+        {
+          "owner": 20,
+          "cell": "interior-N",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "105994629068809602371/47917073920000000000",
+              "1339/500"
+            ],
+            [
+              "6535907835738746815774604411/2761788716916760166400000000",
+              "1623/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "22327294888950397629/47917073920000000000",
+            "2428858339373056684359795589/2761788716916760166400000000"
+          ],
+          "owned_hull_vertices": 4,
+          "owned_hull_area2_physical": "559000139/1099511627776"
+        },
+        {
+          "owner": 22,
+          "cell": "interior-SE",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "123229/46000",
+              "653/200"
+            ],
+            [
+              "1411/1000",
+              "8001912937202456292751/3961967667200000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "26961/46000",
+            "2411576558783256292751/3961967667200000000000"
+          ],
+          "owned_hull_vertices": 15,
+          "owned_hull_area2_physical": "27531025379/549755813888"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "steps": 24,
+      "extents": [
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "59009044010207318382433/29518595102720000000000"
+            ],
+            [
+              "1411/1000",
+              "3031344323509644077109/1639124992000000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "17358306320269398382433/29518595102720000000000",
+            "718538959797644077109/1639124992000000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "190003755847/1099511627776"
+        },
+        {
+          "owner": 17,
+          "cell": "interior-NW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "16533695796776543444877/8262068326400000000000"
+            ],
+            [
+              "571101239132497862609/191668295680000000000",
+              "653/200"
+            ]
+          ],
+          "residual_box_extent": [
+            "4875917388226143444877/8262068326400000000000",
+            "54695746262702137391/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "269790953141/1099511627776"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "216261261/100000000"
+            ],
+            [
+              "416102136808754268859/191668295680000000000",
+              "3176813/1250000"
+            ]
+          ],
+          "residual_box_extent": [
+            "73261261/100000000",
+            "71013329914500003141/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "193601732769/1099511627776"
+        },
+        {
+          "owner": 19,
+          "cell": "interior-S",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "222548333/100000000",
+              "51254649146439374028703/19797228416000000000000"
+            ],
+            [
+              "143/100",
+              "247762535336906917/106745139200000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "7196247326429068748703/19797228416000000000000",
+            "95116986280906917/106745139200000000"
+          ],
+          "owned_hull_vertices": 11,
+          "owned_hull_area2_physical": "12975945441/1099511627776"
+        },
+        {
+          "owner": 20,
+          "cell": "interior-N",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "445994556741495015435393101/200449803998457856000000000",
+              "1339/500"
+            ],
+            [
+              "352461757403407/148688614719488",
+              "1623/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "90810018366375122932606899/200449803998457856000000000",
+            "16272685747006381/18586076839936000"
+          ],
+          "owned_hull_vertices": 9,
+          "owned_hull_area2_physical": "4986507155/549755813888"
+        },
+        {
+          "owner": 22,
+          "cell": "interior-SE",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "123229/46000",
+              "653/200"
+            ],
+            [
+              "1411/1000",
+              "3998449507104035763563/1980983833600000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "26961/46000",
+            "1203281317894435763563/1980983833600000000000"
+          ],
+          "owned_hull_vertices": 15,
+          "owned_hull_area2_physical": "58176280195/1099511627776"
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "steps": 30,
+      "extents": [
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "59009044010207318382433/29518595102720000000000"
+            ],
+            [
+              "1411/1000",
+              "35939115404263238690933/19669499904000000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "17358306320269398382433/29518595102720000000000",
+            "8185451039719238690933/19669499904000000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "24658327747/137438953472"
+        },
+        {
+          "owner": 17,
+          "cell": "interior-NW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "16530912485354961413627/8262068326400000000000"
+            ],
+            [
+              "571101239132497862609/191668295680000000000",
+              "653/200"
+            ]
+          ],
+          "residual_box_extent": [
+            "4873134076804561413627/8262068326400000000000",
+            "54695746262702137391/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "278382821733/1099511627776"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "216261261/100000000"
+            ],
+            [
+              "416102136808754268859/191668295680000000000",
+              "3176813/1250000"
+            ]
+          ],
+          "residual_box_extent": [
+            "73261261/100000000",
+            "71013329914500003141/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "193690502139/1099511627776"
+        },
+        {
+          "owner": 19,
+          "cell": "interior-S",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "222548333/100000000",
+              "51254649146439374028703/19797228416000000000000"
+            ],
+            [
+              "143/100",
+              "247762535336906917/106745139200000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "7196247326429068748703/19797228416000000000000",
+            "95116986280906917/106745139200000000"
+          ],
+          "owned_hull_vertices": 11,
+          "owned_hull_area2_physical": "7294663855/549755813888"
+        },
+        {
+          "owner": 20,
+          "cell": "interior-N",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "111248439/50000000",
+              "1339/500"
+            ],
+            [
+              "237046903/100000000",
+              "1623/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "22651561/50000000",
+            "87553097/100000000"
+          ],
+          "owned_hull_vertices": 11,
+          "owned_hull_area2_physical": "10769834215/1099511627776"
+        },
+        {
+          "owner": 22,
+          "cell": "interior-SE",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "123229/46000",
+              "653/200"
+            ],
+            [
+              "1411/1000",
+              "7993542647097866449001/3961967667200000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "26961/46000",
+            "2403206268678666449001/3961967667200000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "30068679869/549755813888"
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "steps": 36,
+      "extents": [
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "59009044010207318382433/29518595102720000000000"
+            ],
+            [
+              "1411/1000",
+              "11974336992172804824061/6556499968000000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "17358306320269398382433/29518595102720000000000",
+            "2723115537324804824061/6556499968000000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "98708486995/549755813888"
+        },
+        {
+          "owner": 17,
+          "cell": "interior-NW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "16530912485354961413627/8262068326400000000000"
+            ],
+            [
+              "571101239132497862609/191668295680000000000",
+              "653/200"
+            ]
+          ],
+          "residual_box_extent": [
+            "4873134076804561413627/8262068326400000000000",
+            "54695746262702137391/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "278382821733/1099511627776"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "216261261/100000000"
+            ],
+            [
+              "416102136808754268859/191668295680000000000",
+              "3176813/1250000"
+            ]
+          ],
+          "residual_box_extent": [
+            "73261261/100000000",
+            "71013329914500003141/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "193690502139/1099511627776"
+        },
+        {
+          "owner": 19,
+          "cell": "interior-S",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "222548333/100000000",
+              "51254649146439374028703/19797228416000000000000"
+            ],
+            [
+              "143/100",
+              "247762535336906917/106745139200000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "7196247326429068748703/19797228416000000000000",
+            "95116986280906917/106745139200000000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "1829090601/137438953472"
+        },
+        {
+          "owner": 20,
+          "cell": "interior-N",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "111248439/50000000",
+              "1339/500"
+            ],
+            [
+              "237046903/100000000",
+              "1623/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "22651561/50000000",
+            "87553097/100000000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "10776429041/1099511627776"
+        },
+        {
+          "owner": 22,
+          "cell": "interior-SE",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "123229/46000",
+              "653/200"
+            ],
+            [
+              "1411/1000",
+              "7993433759478139886501/3961967667200000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "26961/46000",
+            "2403097381058939886501/3961967667200000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "60266529471/1099511627776"
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "steps": 42,
+      "extents": [
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "59009044010207318382433/29518595102720000000000"
+            ],
+            [
+              "1411/1000",
+              "11974336992172804824061/6556499968000000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "17358306320269398382433/29518595102720000000000",
+            "2723115537324804824061/6556499968000000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "98708486995/549755813888"
+        },
+        {
+          "owner": 17,
+          "cell": "interior-NW",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "16530912485354961413627/8262068326400000000000"
+            ],
+            [
+              "571101239132497862609/191668295680000000000",
+              "653/200"
+            ]
+          ],
+          "residual_box_extent": [
+            "4873134076804561413627/8262068326400000000000",
+            "54695746262702137391/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "278382821733/1099511627776"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "216261261/100000000"
+            ],
+            [
+              "416102136808754268859/191668295680000000000",
+              "3176813/1250000"
+            ]
+          ],
+          "residual_box_extent": [
+            "73261261/100000000",
+            "71013329914500003141/191668295680000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "193690502139/1099511627776"
+        },
+        {
+          "owner": 19,
+          "cell": "interior-S",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "222548333/100000000",
+              "51254649146439374028703/19797228416000000000000"
+            ],
+            [
+              "143/100",
+              "247762535336906917/106745139200000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "7196247326429068748703/19797228416000000000000",
+            "95116986280906917/106745139200000000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "1829090601/137438953472"
+        },
+        {
+          "owner": 20,
+          "cell": "interior-N",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "111248439/50000000",
+              "1339/500"
+            ],
+            [
+              "237046903/100000000",
+              "1623/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "22651561/50000000",
+            "87553097/100000000"
+          ],
+          "owned_hull_vertices": 12,
+          "owned_hull_area2_physical": "10776429041/1099511627776"
+        },
+        {
+          "owner": 22,
+          "cell": "interior-SE",
+          "rows": 16,
+          "live_rows": 16,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "123229/46000",
+              "653/200"
+            ],
+            [
+              "1411/1000",
+              "7993433759478139886501/3961967667200000000000"
+            ]
+          ],
+          "residual_box_extent": [
+            "26961/46000",
+            "2403097381058939886501/3961967667200000000000"
+          ],
+          "owned_hull_vertices": 16,
+          "owned_hull_area2_physical": "60266529471/1099511627776"
+        }
+      ]
+    }
+  ],
+  "memo_trace": [
+    {
+      "round": 0,
+      "step": 0,
+      "owner": "interior-SW",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 2048,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82108416
+    },
+    {
+      "round": 0,
+      "step": 1,
+      "owner": "interior-NW",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82108416
+    },
+    {
+      "round": 0,
+      "step": 2,
+      "owner": "interior-W",
+      "live_rows": 16,
+      "owned_hull_vertices": 5,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82710528
+    },
+    {
+      "round": 0,
+      "step": 3,
+      "owner": "interior-S",
+      "live_rows": 16,
+      "owned_hull_vertices": 4,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 84664320
+    },
+    {
+      "round": 0,
+      "step": 4,
+      "owner": "interior-N",
+      "live_rows": 16,
+      "owned_hull_vertices": 0,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 87085056
+    },
+    {
+      "round": 0,
+      "step": 5,
+      "owner": "interior-SE",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 87867392
+    },
+    {
+      "round": 1,
+      "step": 6,
+      "owner": "interior-SW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 88690688
+    },
+    {
+      "round": 1,
+      "step": 7,
+      "owner": "interior-NW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 89980928
+    },
+    {
+      "round": 1,
+      "step": 8,
+      "owner": "interior-W",
+      "live_rows": 16,
+      "owned_hull_vertices": 10,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 91144192
+    },
+    {
+      "round": 1,
+      "step": 9,
+      "owner": "interior-S",
+      "live_rows": 16,
+      "owned_hull_vertices": 7,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 92798976
+    },
+    {
+      "round": 1,
+      "step": 10,
+      "owner": "interior-N",
+      "live_rows": 16,
+      "owned_hull_vertices": 0,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4736,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 94969856
+    },
+    {
+      "round": 1,
+      "step": 11,
+      "owner": "interior-SE",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 95162368
+    },
+    {
+      "round": 2,
+      "step": 12,
+      "owner": "interior-SW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 96100352
+    },
+    {
+      "round": 2,
+      "step": 13,
+      "owner": "interior-NW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 97357824
+    },
+    {
+      "round": 2,
+      "step": 14,
+      "owner": "interior-W",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 98398208
+    },
+    {
+      "round": 2,
+      "step": 15,
+      "owner": "interior-S",
+      "live_rows": 16,
+      "owned_hull_vertices": 9,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 100536320
+    },
+    {
+      "round": 2,
+      "step": 16,
+      "owner": "interior-N",
+      "live_rows": 16,
+      "owned_hull_vertices": 4,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4800,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 102588416
+    },
+    {
+      "round": 2,
+      "step": 17,
+      "owner": "interior-SE",
+      "live_rows": 16,
+      "owned_hull_vertices": 15,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 102645760
+    },
+    {
+      "round": 3,
+      "step": 18,
+      "owner": "interior-SW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 103497728
+    },
+    {
+      "round": 3,
+      "step": 19,
+      "owner": "interior-NW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 104468480
+    },
+    {
+      "round": 3,
+      "step": 20,
+      "owner": "interior-W",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 105799680
+    },
+    {
+      "round": 3,
+      "step": 21,
+      "owner": "interior-S",
+      "live_rows": 16,
+      "owned_hull_vertices": 11,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 107917312
+    },
+    {
+      "round": 3,
+      "step": 22,
+      "owner": "interior-N",
+      "live_rows": 16,
+      "owned_hull_vertices": 9,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4800,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 109903872
+    },
+    {
+      "round": 3,
+      "step": 23,
+      "owner": "interior-SE",
+      "live_rows": 16,
+      "owned_hull_vertices": 15,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 109944832
+    },
+    {
+      "round": 4,
+      "step": 24,
+      "owner": "interior-SW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 110624768
+    },
+    {
+      "round": 4,
+      "step": 25,
+      "owner": "interior-NW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 111497216
+    },
+    {
+      "round": 4,
+      "step": 26,
+      "owner": "interior-W",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 112934912
+    },
+    {
+      "round": 4,
+      "step": 27,
+      "owner": "interior-S",
+      "live_rows": 16,
+      "owned_hull_vertices": 11,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 115138560
+    },
+    {
+      "round": 4,
+      "step": 28,
+      "owner": "interior-N",
+      "live_rows": 16,
+      "owned_hull_vertices": 11,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4928,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 116744192
+    },
+    {
+      "round": 4,
+      "step": 29,
+      "owner": "interior-SE",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 116748288
+    },
+    {
+      "round": 5,
+      "step": 30,
+      "owner": "interior-SW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 117317632
+    },
+    {
+      "round": 5,
+      "step": 31,
+      "owner": "interior-NW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 118284288
+    },
+    {
+      "round": 5,
+      "step": 32,
+      "owner": "interior-W",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 119754752
+    },
+    {
+      "round": 5,
+      "step": 33,
+      "owner": "interior-S",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 121937920
+    },
+    {
+      "round": 5,
+      "step": 34,
+      "owner": "interior-N",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4928,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 123219968
+    },
+    {
+      "round": 5,
+      "step": 35,
+      "owner": "interior-SE",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 123326464
+    },
+    {
+      "round": 6,
+      "step": 36,
+      "owner": "interior-SW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 124018688
+    },
+    {
+      "round": 6,
+      "step": 37,
+      "owner": "interior-NW",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 3072,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 125005824
+    },
+    {
+      "round": 6,
+      "step": 38,
+      "owner": "interior-W",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 126447616
+    },
+    {
+      "round": 6,
+      "step": 39,
+      "owner": "interior-S",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 5120,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 128577536
+    },
+    {
+      "round": 6,
+      "step": 40,
+      "owner": "interior-N",
+      "live_rows": 16,
+      "owned_hull_vertices": 12,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4928,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 129892352
+    },
+    {
+      "round": 6,
+      "step": 41,
+      "owner": "interior-SE",
+      "live_rows": 16,
+      "owned_hull_vertices": 16,
+      "memo_entries": 80,
+      "obsolete_entries": 0,
+      "domain_entries": 4096,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 130043904
+    }
+  ],
+  "files": [
+    "node-931fbed1c75dfa60bf7e9fb8f2d6583932f56dc2cd97444097f015e972bc5305.json.gz",
+    "seed-8cc0f19452006368d2e7b2ff8c06c0086998d62d05faa2bc089e06bdff653cc2.json.gz"
+  ],
+  "limits": "No standalone checker memory claim; no mathematical exclusion admitted."
+}

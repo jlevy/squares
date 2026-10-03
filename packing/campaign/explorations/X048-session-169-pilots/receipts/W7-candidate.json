@@ -1,0 +1,530 @@
+{
+  "fixture": "W7",
+  "bins": 8,
+  "max_rounds": 6,
+  "profiled": false,
+  "actual_python_pid": 52832,
+  "producer_wall_seconds": 0.7073695000144653,
+  "producer_cpu_seconds": 0.703125,
+  "producer_peak_working_set_bytes": 85897216,
+  "save_wall_seconds": 0.04176019999431446,
+  "save_cpu_seconds": 0.046875,
+  "pipeline_peak_working_set_bytes": 90451968,
+  "seed_canonical_bytes": 23580,
+  "node_canonical_bytes": 1376607,
+  "steps": 14,
+  "rows": 112,
+  "closed": false,
+  "outcome": "stalled",
+  "rounds": [
+    {
+      "round": 0,
+      "steps": 7,
+      "extents": [
+        {
+          "owner": 0,
+          "cell": "corner-SW",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "129/100"
+            ],
+            [
+              "1/2",
+              "129/100"
+            ]
+          ],
+          "residual_box_extent": [
+            "79/100",
+            "79/100"
+          ],
+          "owned_hull_vertices": 2,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 5,
+          "cell": "side-N0",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "129/100",
+              "2993/1500"
+            ],
+            [
+              "653/200",
+              "522/125"
+            ]
+          ],
+          "residual_box_extent": [
+            "529/750",
+            "911/1000"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 6,
+          "cell": "side-W0",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "1411/1000"
+            ],
+            [
+              "129/100",
+              "2993/1500"
+            ]
+          ],
+          "residual_box_extent": [
+            "911/1000",
+            "529/750"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 10,
+          "cell": "side-W1",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "143/100"
+            ],
+            [
+              "2993/1500",
+              "4021/1500"
+            ]
+          ],
+          "residual_box_extent": [
+            "93/100",
+            "257/375"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 14,
+          "cell": "side-W2",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "1411/1000"
+            ],
+            [
+              "4021/1500",
+              "1693/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "911/1000",
+            "529/750"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "39044849/19226000"
+            ],
+            [
+              "1411/1000",
+              "39044849/19226000"
+            ]
+          ],
+          "residual_box_extent": [
+            "11916963/19226000",
+            "11916963/19226000"
+          ],
+          "owned_hull_vertices": 7,
+          "owned_hull_area2_physical": "10032750709/1099511627776"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "1169/500"
+            ],
+            [
+              "16020078693570340159/7730140160000000000",
+              "1339/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "227/250",
+            "4681236654909659841/7730140160000000000"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "steps": 14,
+      "extents": [
+        {
+          "owner": 0,
+          "cell": "corner-SW",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "129/100"
+            ],
+            [
+              "1/2",
+              "129/100"
+            ]
+          ],
+          "residual_box_extent": [
+            "79/100",
+            "79/100"
+          ],
+          "owned_hull_vertices": 2,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 5,
+          "cell": "side-N0",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "129/100",
+              "2993/1500"
+            ],
+            [
+              "653/200",
+              "522/125"
+            ]
+          ],
+          "residual_box_extent": [
+            "529/750",
+            "911/1000"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 6,
+          "cell": "side-W0",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "1411/1000"
+            ],
+            [
+              "129/100",
+              "2993/1500"
+            ]
+          ],
+          "residual_box_extent": [
+            "911/1000",
+            "529/750"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 10,
+          "cell": "side-W1",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "143/100"
+            ],
+            [
+              "2993/1500",
+              "4021/1500"
+            ]
+          ],
+          "residual_box_extent": [
+            "93/100",
+            "257/375"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 14,
+          "cell": "side-W2",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1/2",
+              "1411/1000"
+            ],
+            [
+              "4021/1500",
+              "1693/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "911/1000",
+            "529/750"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        },
+        {
+          "owner": 16,
+          "cell": "interior-SW",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "1411/1000",
+              "39044849/19226000"
+            ],
+            [
+              "1411/1000",
+              "39044849/19226000"
+            ]
+          ],
+          "residual_box_extent": [
+            "11916963/19226000",
+            "11916963/19226000"
+          ],
+          "owned_hull_vertices": 7,
+          "owned_hull_area2_physical": "10032750709/1099511627776"
+        },
+        {
+          "owner": 18,
+          "cell": "interior-W",
+          "rows": 8,
+          "live_rows": 8,
+          "live_half_angle_width": "1",
+          "residual_box_physical": [
+            [
+              "143/100",
+              "1169/500"
+            ],
+            [
+              "16020078693570340159/7730140160000000000",
+              "1339/500"
+            ]
+          ],
+          "residual_box_extent": [
+            "227/250",
+            "4681236654909659841/7730140160000000000"
+          ],
+          "owned_hull_vertices": 0,
+          "owned_hull_area2_physical": "0"
+        }
+      ]
+    }
+  ],
+  "memo_trace": [
+    {
+      "round": 0,
+      "step": 0,
+      "owner": "corner-SW",
+      "live_rows": 8,
+      "owned_hull_vertices": 2,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 352,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82108416
+    },
+    {
+      "round": 0,
+      "step": 1,
+      "owner": "side-N0",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 608,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82108416
+    },
+    {
+      "round": 0,
+      "step": 2,
+      "owner": "side-W0",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1184,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82108416
+    },
+    {
+      "round": 0,
+      "step": 3,
+      "owner": "side-W1",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1280,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82108416
+    },
+    {
+      "round": 0,
+      "step": 4,
+      "owner": "side-W2",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1536,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82108416
+    },
+    {
+      "round": 0,
+      "step": 5,
+      "owner": "interior-SW",
+      "live_rows": 8,
+      "owned_hull_vertices": 7,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1280,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82432000
+    },
+    {
+      "round": 0,
+      "step": 6,
+      "owner": "interior-W",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1280,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 82968576
+    },
+    {
+      "round": 1,
+      "step": 7,
+      "owner": "corner-SW",
+      "live_rows": 8,
+      "owned_hull_vertices": 2,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1024,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 83292160
+    },
+    {
+      "round": 1,
+      "step": 8,
+      "owner": "side-N0",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1024,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 83525632
+    },
+    {
+      "round": 1,
+      "step": 9,
+      "owner": "side-W0",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1056,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 84094976
+    },
+    {
+      "round": 1,
+      "step": 10,
+      "owner": "side-W1",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1248,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 84963328
+    },
+    {
+      "round": 1,
+      "step": 11,
+      "owner": "side-W2",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1504,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 85164032
+    },
+    {
+      "round": 1,
+      "step": 12,
+      "owner": "interior-SW",
+      "live_rows": 8,
+      "owned_hull_vertices": 7,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1248,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 85352448
+    },
+    {
+      "round": 1,
+      "step": 13,
+      "owner": "interior-W",
+      "live_rows": 8,
+      "owned_hull_vertices": 0,
+      "memo_entries": 48,
+      "obsolete_entries": 0,
+      "domain_entries": 1248,
+      "obsolete_domain_entries": 0,
+      "process_peak_working_set_bytes": 85778432
+    }
+  ],
+  "files": [
+    "node-8120340cba08eb37e9edab89f45d29f70a8f826c6f88679ba1e9121551ff66d6.json.gz",
+    "seed-ada29c627aad3c29b9a252605d1d62377f9aa8f86263ba6f2da7966725a3701b.json.gz"
+  ],
+  "limits": "No standalone checker memory claim; no mathematical exclusion admitted."
+}

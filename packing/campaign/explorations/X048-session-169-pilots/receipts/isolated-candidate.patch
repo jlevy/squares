@@ -1,0 +1,16 @@
+diff --git a/packing/src/sqpack/hull_kernel/producer.py b/packing/src/sqpack/hull_kernel/producer.py
+index a98297306..a23f4834c 100644
+--- a/packing/src/sqpack/hull_kernel/producer.py
++++ b/packing/src/sqpack/hull_kernel/producer.py
+@@ -946,6 +946,11 @@ def produce(
+                     groups[owner] = hull(groups[owner] + new_points)
+                 step["compression_source_hull"] = encode(original)
+                 step["inner_grid_compression"] = receipt
++            # Only the current accepted generation can be queried as a partner.
++            # Drop its memo after this complete step, before replacing those rows;
++            # retaining old generations otherwise keeps their collision caches alive.
++            for prior_row in rows[owner]:
++                memo.pop(id(prior_row), None)
+             rows[owner] = [accepted for _, accepted, _ in produced]
+             plans[owner] = [(None, row) for row in rows[owner]]
+             steps.append(step)

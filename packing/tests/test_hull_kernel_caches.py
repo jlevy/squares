@@ -10,6 +10,7 @@ from typing import Any
 import pytest
 
 from devtools import check_n17_subpattern as tool
+from devtools.check_hull_kernel_mask0 import n17_unique_frame
 from sqpack.hull_kernel import Budget, RefusalError, collision, node, producer, sequential
 from sqpack.hull_kernel.frame import Frame, make_frame
 from sqpack.hull_kernel.induction import convex, hull
@@ -145,6 +146,36 @@ def test_the_cached_collision_planes_are_the_uncached_planes(
             if item["domain"]
         }
     )
+
+
+def test_production_does_not_retain_partner_generations(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    frame = n17_unique_frame()
+    mask = sorted(frame.cell_names.index(cell) for cell in tool.PATTERNS["W7"])
+    original = producer.partner_cover
+    observed: list[producer.PartnerMemo] = []
+    sizes: list[int] = []
+
+    def cover(
+        frame: Frame,
+        accepted: list[dict[str, Any]],
+        cores: dict[Any, Any],
+        memo: producer.PartnerMemo | None = None,
+    ) -> tuple[list[dict[str, Any]], list[producer.PartnerRow]]:
+        result = original(frame, accepted, cores, memo)
+        assert memo is not None
+        sizes.append(len(memo))
+        if not observed:
+            observed.append(memo)
+        return result
+
+    monkeypatch.setattr(producer, "partner_cover", cover)
+    result = producer.produce(frame, mask, bins=8, max_rounds=6, budget=budget())
+    assert len(result.node["steps"]) > len(mask)
+    # A run that revisits every owner may cache one generation, never its history.
+    assert max(sizes) <= len(mask) * 8
+    assert len(observed[0]) <= (len(mask) - 1) * 8
 
 
 def test_the_partner_memo_follows_the_accepted_row_object(

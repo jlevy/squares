@@ -273,7 +273,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 407 | 212 complete; 65 stopped; 70 blocked; 25 ready; 21 tentative; 14 in progress |
-| Sessions | 167 | 103 completed; 64 stopped; all terminal |
+| Sessions | 168 | 103 completed; 65 stopped; all terminal |
 | Explorations | 46 | 27 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 203 | 43 confirmed; 33 refuted; 60 blocked; 19 unresolved; 9 open; 34 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 179 | 57 accepted; 38 rejected; 56 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -566,6 +566,7 @@ case or experiment separately.
 | [Session 168 Handoff: Work Stopped Mid-Flight](packing/campaign/explorations/X048-session-168-pilots/handoff/README.md) | research synthesis | record | retained | — |
 | [n17 Optimality Route After PR 265](docs/project/reviews/review-2026-10-01-n17-route-after-pr265.md) | dated review record | record | retained | — |
 | [X-048 Session 168 Pilots: Receipts](packing/campaign/explorations/X048-session-168-pilots/README.md) | research synthesis | record | retained | — |
+| [Session 169: bounded producer memory investigation](packing/campaign/explorations/X048-session-169-pilots/README.md) | research synthesis | record | retained | — |
 | [X-048 Session 167 Pilots: Receipts](packing/campaign/explorations/X048-session-167-pilots/README.md) | research synthesis | record | retained | — |
 | [X-048 Route Review: Exploratory Receipts](packing/campaign/explorations/X048-route-review/README.md) | research synthesis | record | retained | — |
 | [H259 Mixed-Capacity Census: Independent Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-240-n17-mixed-capacity-census/output-review.md) | dated review record | record | retained | — |
@@ -5753,6 +5754,7 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
+| `codex-session-169.yaml` | session-169 | 195 | 1.52 h | 0.99 h | 0.99 h | yes |
 | `codex-task-tree-session-062.yaml` | session-062 | 607 | 2.84 h | 1.46 h | 1.46 h | yes |
 | `codex-task-tree-session-063.yaml` | session-063 | 441 | 2.08 h | 0.85 h | 0.85 h | yes |
 | `codex-task-tree-session-064.yaml` | session-064 | 3,444 | 17.57 h | 9.0 h | 9.0 h | yes |
@@ -5826,9 +5828,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 113 |
+| measured | 114 |
 | unmeasured | 54 |
-| **total** | **167** |
+| **total** | **168** |
 
 <!-- END GENERATED: session-close-report -->
 

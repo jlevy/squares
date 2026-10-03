@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 167
+count: 168
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 113
+  sessions_measured: 114
   sessions_unmeasured: 54
   attributed:
     rollups: 276
@@ -35,9 +35,9 @@ totals:
     one_off_code: 6570
     wall_hours: 641.91
 codex_receipts:
-  attributed: 68
+  attributed: 69
   unattributed: 2
-  measured: 70
+  measured: 71
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -2905,3 +2905,23 @@ sessions:
   one_off_code: 274
   wall_hours: 12.68
   codex_receipts: []
+- id: session-169
+  title: "Bounded n17 producer memo retention investigation"
+  status: stopped
+  primary_bead: think-wn6x
+  phases: 3
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-session-169.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-session-169.yaml
+    model_responses: 195
+    agent_hours: 1.52
+    active_union_hours: 0.99
+    wall_hours: 0.99
+    snapshot_incomplete: true
