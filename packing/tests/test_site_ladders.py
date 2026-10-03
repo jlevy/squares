@@ -9,9 +9,9 @@ overview's until 2026-10-02) and measures the diagram
 with the probe `devtools.measure_site_pages ladders` reports from, at the widths the
 design is shot at and at the ones where a description is narrowest: 716 pixels, the least
 window that sets three columns, and 715, where the ladders stack; 768, where the page's
-margin widens and the wide track is 4 pixels more than at 716; 908, the least that sets
-a rung's description beside its chip in three columns, and 907, the widest that sets it
-under; and on a phone 360, 320 and 296, the least that sets it beside, with 295 under. At
+margin widens and the wide track is 4 pixels more than at 716; 973, the least that sets
+a rung's description beside its chip in three columns, and 972, the widest that sets it
+under; and on a phone 360, 320 and 318, the least that sets it beside, with 317 under. At
 each the diagram also stands inside whatever clips the page sideways, with the wide
 track's gutter either side.
 
@@ -38,20 +38,23 @@ from tests import site_renders
 WIDTHS = {
     1280: 3,
     1024: 3,
-    908: 3,
-    907: 3,
+    973: 3,
+    972: 3,
     768: 3,
     716: 3,
     715: 1,
     390: 1,
     360: 1,
     320: 1,
-    296: 1,
-    295: 1,
+    318: 1,
+    317: 1,
 }
-#: The widths at which a cell has 16.5rem, so a rung's description stands beside its
-#: chip; at the others it lies under the chip, across the cell.
-BESIDE = frozenset({1280, 1024, 908, 715, 390, 360, 320, 296})
+#: The widths at which a cell has 17.85rem, the widest rail's, significance's, with the
+#: gap and the least description, so a rung's description stands beside its chip; at
+#: the others it lies under the chip, across the cell. The cells turned at 16.5rem, the
+#: chips' rail's, from a 908-pixel window and on a phone from 296, until significance
+#: took marks in a wider rail (2026-10-03).
+BESIDE = frozenset({1280, 1024, 973, 715, 390, 360, 320, 318})
 #: A rung's height in pixels where its description stands beside its chip, and where it
 #: lies under it: the two lines, or the chip's line and the two, and 0.4rem
 #: (`--site-ladders-row-space`) above and below, which is all that parts the rows.
@@ -60,6 +63,10 @@ RUNG_HEIGHT = {True: 64.1, False: 91.8}
 HEAD_RULE = 1
 #: `--site-ladders-meaning-min`, 13.5rem, in pixels: the narrowest a description is set.
 MEANING_MIN = 216
+#: How much narrower a significance description is than the others where it stands
+#: beside its rail: its rail, `--site-ladders-significance-rail`, 3.6rem, over the chips',
+#: `--site-ladders-rail`, 2.25rem, in pixels.
+SIGNIFICANCE_RAIL_MORE = 21.6
 #: `--site-wide-gutter`, 0.5rem, in pixels: the least room either side of a wide block.
 GUTTER = 8
 
@@ -94,7 +101,10 @@ def test_every_rung_is_one_height_and_its_description_two_lines(
 ) -> None:
     """At every width each rung's cell is the same height, its description's box is two
     lines tall and at least the least width, and no description takes a third line or
-    runs past its box, so nothing has to be clipped."""
+    runs past its box, so nothing has to be clipped. Each ladder's descriptions are one
+    width, verification's and confirmation's the same; significance's, beside the wider
+    rail its marks take, are that much narrower where they stand beside it, and the same
+    where they lie under it."""
     diagram = diagrams[width]
     rungs = diagram["rungs"]
     assert len(rungs) == len(overview_sections.rung_meanings())
@@ -102,7 +112,15 @@ def test_every_rung_is_one_height_and_its_description_two_lines(
     assert len(diagram["heights"]) == 1, diagram["heights"]
     assert {rung["beside"] for rung in rungs} == {width in BESIDE}
     assert diagram["heights"][0] == pytest.approx(RUNG_HEIGHT[width in BESIDE], abs=0.2)
-    assert len({rung["meaning_width"] for rung in rungs}) == 1
+    widths = {
+        ladder: {rung["meaning_width"] for rung in rungs if rung["ladder"] == ladder}
+        for ladder in ("S", "V", "C")
+    }
+    assert all(len(found) == 1 for found in widths.values()), widths
+    (significance,), (verification,), (confirmation,) = widths.values()
+    assert verification == confirmation
+    more = SIGNIFICANCE_RAIL_MORE if width in BESIDE else 0
+    assert verification - significance == pytest.approx(more, abs=0.2)
     for rung in rungs:
         assert rung["parts"] == 2, rung
         assert rung["meaning"] == overview_sections.rung_short_meanings()[rung["rung"]]

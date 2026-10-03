@@ -120,7 +120,8 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     as its HTML has it; the rows showing are the ones that page's defaults keep, and
     the count is theirs. The rows that carry the flag are, on both pages, every result
     that is not superseded: the current bests, the second certificates and the results
-    that claim no bound, which have no standing."""
+    that claim no bound, which have no standing, but for one the register declares a
+    later result implies whole (T-031, superseded by T-060)."""
     defaults = PAGES[name]
     page = opened(browser, pages[name], overview)
     try:
@@ -142,7 +143,9 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     )
     assert sorted(found["current"]) == current
     # What stays: every standing but superseded, and a result that is no bound whatever
-    # its evidence makes its standing, the limit of a method among them (T-003). No
+    # its evidence makes its standing, the limit of a method among them (T-003), unless
+    # a later result is declared to imply all of it: T-031 goes, and T-036, superseded
+    # only in part, stays. No
     # result has stood as a reported second certificate since 2 October 2026, when
     # T-055's replay made it a verified one.
     kept = [result for result in overview.results if result.id.lower() in current]
@@ -154,6 +157,8 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
         render_recent_results.SUPERSEDED,
     }
     assert [result.id for result in kept if result.standing == "superseded"] == ["T-003"]
+    assert "t-031" not in current
+    assert "t-036" in current
     if defaults.hide_superseded:
         assert set(found["shown"]) < set(found["current"])
     else:

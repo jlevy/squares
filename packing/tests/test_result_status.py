@@ -141,7 +141,7 @@ def test_every_registered_result_has_exactly_one_status_from_the_record() -> Non
             assert word == (CONFIRMED if rank >= 2 else REVIEWED if rank == 1 else RECORDED)
             assert open_issues(entry, evidence) == [], entry["id"]
         marks = render_recent_results.position_marks(
-            entry, render_recent_results.standing(entry, records)
+            entry, render_recent_results.standing(entry, records), records
         )
         line = status_line(
             entry, evidence, marks, how=render_results.confirmed_how(entry, evidence)
@@ -175,31 +175,48 @@ def test_a_status_line_is_the_status_then_the_activity_then_the_place() -> None:
     assert activity_label(None) == ""
 
 
-def test_superseded_is_marked_on_a_bound_and_on_nothing_else() -> None:
-    """Of a standing a table draws one mark, `superseded`, and only on a result whose
-    kind is a bound. That a bound is only reported is the status; a second proof of a
-    held value is the kind simplification; and a result that is no bound is never
-    superseded, though it may cite a bound's evidence and so derive the standing."""
+def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() -> None:
+    """Of a standing a table draws one mark, `superseded`, on a result whose kind is a
+    bound. That a bound is only reported is the status; a second proof of a held value
+    is the kind simplification; and a result that is no bound is not superseded by its
+    standing, though it may cite a bound's evidence and so derive it. Such a result is
+    marked only where its entry declares a later result that implies it
+    (`superseded_by`): `superseded` for the whole of it, `superseded in part` for some,
+    which keeps it current (think-nlo0). Every mark names what supersedes it."""
     view = render_recent_results
     bound = {"kind": "lower-bound"}
     for held in (view.HOLDS, view.HOLDS_REPORTED, view.NO_STANDING):
-        assert view.position_marks(bound, held) == [], held
+        assert not view.superseded(bound, held), held
     for held in (view.SECOND_CERTIFICATE, view.SECOND_CERTIFICATE_REPORTED):
-        assert view.position_marks({"kind": "simplification"}, held) == [], held
+        assert not view.superseded({"kind": "simplification"}, held), held
     for kind in check_results.KINDS:
-        marked = view.position_marks({"kind": kind}, view.SUPERSEDED)
-        assert marked == (["superseded"] if kind in check_results.BOUND_KINDS else []), kind
-        assert view.superseded({"kind": kind}, view.SUPERSEDED) is bool(marked), kind
-    # The live register: the limit of a method derives the standing and is not marked.
+        marked = view.superseded({"kind": kind}, view.SUPERSEDED)
+        assert marked is (kind in check_results.BOUND_KINDS), kind
     records = view.load_records()
+
+    def declared(extent: str) -> Record:
+        later = {"result": "T-060", "extent": extent, "what": "The bound."}
+        return {"kind": "case-exclusion", "superseded_by": [later]}
+
+    for held in (view.NO_STANDING, view.SUPERSEDED):
+        assert view.superseded(declared("whole"), held), held
+        assert not view.superseded(declared("part"), held), held
+        assert view.position_marks(declared("whole"), held, records) == ["superseded by T-060"]
+        assert view.position_marks(declared("part"), held, records) == [
+            "superseded in part by T-060"
+        ]
+    # The live register: the limit of a method derives the standing and is not marked.
     limit = records.results["T-003"]
     assert limit["kind"] == "method-limit"
     assert view.standing(limit, records) == view.SUPERSEDED
-    assert view.position_marks(limit, view.SUPERSEDED) == []
+    assert view.position_marks(limit, view.SUPERSEDED, records) == []
     marked = [
         str(entry["id"])
         for entry in records.register.results
         if view.superseded(entry, view.standing(entry, records))
+    ]
+    derived = [
+        entry for entry in marked if records.results[entry]["kind"] in check_results.BOUND_KINDS
     ]
     # Thirty since 2026-10-02, when wand125's replayed rectangle certificates (T-045,
     # T-070) superseded T-030 at n = 18, T-020 at n = 19, T-021 at n = 20 and T-047 at
@@ -207,9 +224,52 @@ def test_superseded_is_marked_on_a_bound_and_on_nothing_else() -> None:
     # the 1 October replays (T-074) beat wand125's point certificates (T-044) at the last
     # of their counts; thirty-two since 3 October, when squarepacker's rescaling (T-078)
     # superseded Daniel's s(12) >= 15680/3951 (T-049).
-    assert len(marked) == 32
-    assert {"T-020", "T-021", "T-030", "T-044", "T-047", "T-049"} <= set(marked)
-    assert {str(records.results[entry]["kind"]) for entry in marked} == {"lower-bound"}
+    assert len(derived) == 32
+    assert {"T-020", "T-021", "T-030", "T-044", "T-047", "T-049"} <= set(derived)
+    assert {str(records.results[entry]["kind"]) for entry in derived} == {"lower-bound"}
+    # A result of another kind is marked only where its entry declares the whole of it
+    # implied, and in part where it declares a part (think-rl2b).
+    assert [entry for entry in marked if entry not in derived] == ["T-031"]
+    in_part = [
+        str(entry["id"])
+        for entry in records.register.results
+        if any(item["extent"] == "part" for item in entry.get("superseded_by") or [])
+    ]
+    assert in_part == ["T-023", "T-036"]
+    # Each superseded bound names the results its cases' bounds rest on now.
+    for entry in derived:
+        by = view.superseding(records.results[entry], records)
+        assert by, entry
+        assert entry not in by, entry
+    assert view.superseding(records.results["T-037"], records) == ("T-060",)
+    assert view.position_marks(records.results["T-019"], view.SUPERSEDED, records) == [
+        "superseded by T-043, T-045, T-046, T-068 and T-074"
+    ]
+    # Only a bound supersedes: at n = 13 and 46 a correction and an audit carry the
+    # lower bound's evidence beside the optimality results that hold it.
+    for n, other in ((13, "T-005"), (46, "T-004")):
+        assert other in view.held(n, records).lower_holders
+        assert records.results[other]["kind"] not in check_results.BOUND_KINDS
+    lower = {"id": "T-999", "kind": "lower-bound", "scope": {"n_values": [13, 46]}}
+    assert view.superseding(lower, records) == ("T-006", "T-008")
+    # An exact value is superseded by a proof, never by a construction: Trump's packing,
+    # T-011, holds n = 11's upper bound and supersedes no proof of s(11).
+    assert view.held(11, records).upper_holders == {"T-011"}
+    exact = {"id": "T-999", "kind": "optimality", "scope": {"n_values": [11]}}
+    assert view.superseding(exact, records) == ("T-060",)
+    upper = {"id": "T-999", "kind": "upper-bound", "scope": {"n_values": [11]}}
+    assert view.superseding(upper, records) == ("T-011",)
+    # T-060 implies T-036's bound and not its equality case (think-7df0); it implies
+    # T-023's exclusion and not its count of the branch, and the whole of T-031's
+    # exclusion, since no packing of eleven squares fits at side 96/25 (think-rl2b).
+    expected = {
+        "T-036": ["superseded in part by T-060"],
+        "T-023": ["superseded in part by T-060"],
+        "T-031": ["superseded by T-060"],
+    }
+    for entry, marks in expected.items():
+        record = records.results[entry]
+        assert view.position_marks(record, view.standing(record, records), records) == marks
 
 
 def activity(**changes: Any) -> Record:

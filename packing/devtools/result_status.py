@@ -16,11 +16,13 @@ competes with `C`: it is the reader's summary of it. `incomplete` is the one val
 ladder cannot give.
 
 Two more things sit beside a status and are not part of it. Whether a result is
-*superseded* is its position on the frontier, derived from the case records
-(`render_recent_results.standing`). Its `activity` is who has the next move: this
-project, with work under way (`in analysis`), or another party, with a request on file
-(`waiting on …`). An activity is the one hand-recorded fact here, so it is dated, names
-the record that shows it, and expires (`activity_problems`).
+*superseded*, and by what, is its position on the frontier: derived from the case
+records for a bound (`render_recent_results.standing`, `superseding`), and declared in
+its entry for a result of another kind that a later result implies, wholly or in part
+(`superseded_by`, `render_recent_results.supersessions`). Its `activity` is who has the
+next move: this project, with work under way (`in analysis`), or another party, with a
+request on file (`waiting on …`). An activity is the one hand-recorded fact here, so it
+is dated, names the record that shows it, and expires (`activity_problems`).
 
 Provisional: the vocabulary, the rung at which a result is `confirmed`, and whether the
 two activities are marks beside the status or statuses of their own are the owner's to
@@ -150,11 +152,11 @@ def status_line(
     record: Record, evidence: Evidence, position: Sequence[str] = (), how: str = ""
 ) -> str:
     """A result's status as one cell of a Markdown table: the status, then its activity
-    and `superseded` where it is one (`render_recent_results.position_marks`), the
-    marks the site draws as chips beside it. A confirmed result says how, in `how`, as
-    the mark after the status: reproduced with the producer's code, or re-implemented
-    (epistemics.md, Confirmation). The status stays the first mark, so the cell reads
-    the same way whatever follows it."""
+    and `superseded` or `superseded in part` where it is one, with what supersedes it
+    (`render_recent_results.position_marks`), the marks the site draws as chips beside
+    it. A confirmed result says how, in `how`, as the mark after the status: reproduced
+    with the producer's code, or re-implemented (epistemics.md, Confirmation). The status
+    stays the first mark, so the cell reads the same way whatever follows it."""
     held = status(record, evidence)
     qualifier = how if held == CONFIRMED else ""
     marks = [held, qualifier, activity_label(record.get("activity")), *position]
@@ -222,7 +224,8 @@ def activity_problems(record: Mapping[str, Any], last_reviewed: str) -> list[str
 
 def listing() -> list[str]:
     """Every result's status as a Markdown table, in id order: the standing it had, the
-    status, the fact that decides it, whether it is superseded, and its activity."""
+    status, the fact that decides it, whether it is superseded and by what, and its
+    activity."""
     # `render_recent_results` reads `check_results`, which reads this module.
     from devtools.render_recent_results import (  # noqa: PLC0415
         load_records,
@@ -245,7 +248,7 @@ def listing() -> list[str]:
         lines.append(
             f"| {record['id']} | {stands} | {status(record, evidence)} "
             f"| {decided_by(record, evidence)} "
-            f"| {', '.join(position_marks(record, stands))} "
+            f"| {', '.join(position_marks(record, stands, records))} "
             f"| {doing} |"
         )
     return lines

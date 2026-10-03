@@ -239,7 +239,11 @@ Three things now sit under a result’s rungs, each answering one question.
   It draws its kind and its status, it is not hidden by “Hide superseded”, and
   `render_recent_results.superseded` is the one rule.
   T-004 and T-005 derive *current best*, which was never drawn, so nothing changes for
-  them.
+  them. **Update, 2026-10-03.** Still true of a standing, which marks only a bound; T-003
+  stays unmarked. A result of another kind is now marked where its entry declares a later
+  result that implies it (`superseded_by`): *superseded* for the whole, *superseded in
+  part* for some, as T-060 is of T-036’s bound (think-xm4t). Every mark also names what
+  supersedes it, a bound’s derived from its cases (*superseded by T-060*).
 - **Second certificate** is the kind *simplification*, which T-054 and T-055 carry.
   The mark is gone from the tables.
 - **Reported** is gone as a word.
@@ -524,6 +528,8 @@ significance, 34, with T-055, T-058, T-059 and T-063.
    and showing under “Hide superseded”.
    Recommended as built; the alternative is to mark any result whose evidence derives
    the standing, as before.
+   **Update, 2026-10-03.** Kept for the derived mark; the owner added a declared one for
+   other kinds (`superseded_by`, think-xm4t), which leaves T-003 unmarked.
 7. **Whether a recorded omission makes a result incomplete.** It would need the
    `omissions` list. Recommended: not until the register admits placeholder entries.
 8. **The homepage default.** An unassessed result shows on the homepage only if it is

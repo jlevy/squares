@@ -884,9 +884,7 @@ def overview_page() -> Page:
         "ATLAS_CARDS": overview_sections.atlas_cards(),
         "PAGE_CARDS": overview_sections.page_cards(),
         "RECENT": overview_sections.recent_table(overview),
-        "STAR_LEGEND": overview_sections.star_legend(),
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
-        "RUNG_KEY": overview_sections.rung_key(),
     }
     markdown = fill(
         OVERVIEW_ARTICLE.read_text(encoding="utf-8"), values, where=OVERVIEW_ARTICLE.name

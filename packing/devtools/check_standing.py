@@ -31,7 +31,9 @@ beaten at `n = 11, 27, 28, 31`.
 What a table of results draws of a standing is its place on the frontier, `superseded`
 or `second certificate`, beside the result's status (`devtools.result_status`); the
 "Hide superseded" filter reads the same word. So this check is what holds that mark,
-and that filter, to the numbers.
+and that filter, to the numbers, for a bound. A result of another kind is marked only
+where its entry declares a later result that implies it (`superseded_by`), which
+`devtools.check_results` holds to the register instead.
 
 A value written as cut decimals, `3.8100257…`, stands for every number that starts so,
 and equals a bound that does. Two lanes are never mixed: a verified bound is not beaten

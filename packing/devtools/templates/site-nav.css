@@ -5,9 +5,14 @@
    ============================================================ */
 /* The gentle wash of a hovered card or nav item, a table's group row and a targeted row,
    here because every page carries this file. KPress's own dark hover surface is a light
-   gray that light text cannot sit on, so dark mode washes with a tint of the text. */
+   gray that light text cannot sit on, so dark mode washes with a tint of the text. The
+   shadow under a floating panel, the theme menu and a popover, and the tint of the
+   current tab are here for the same reason. Every colour is a token
+   (`devtools.check_colour_tokens`, paper-design.md, Color). */
 :root {
   --site-wash: var(--kpress-doc-surface-hover);
+  --site-shadow: oklch(0% 0 0 / 0.15);
+  --site-tab-current-tint: 16%;
 }
 /* ---------- Motion ----------
    Every hover and focus change on the site runs on one timing, fast and smooth, here
@@ -228,7 +233,7 @@
 .site-theme-menu {
   background: var(--kpress-doc-bg);
   border: 1px solid var(--kpress-doc-border);
-  box-shadow: 0 0.5rem 2rem oklch(0% 0 0 / 0.15);
+  box-shadow: 0 0.5rem 2rem var(--site-shadow);
   color: var(--kpress-doc-text);
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
@@ -436,7 +441,11 @@ nav.site-tabs a:is(:hover, :focus-visible),
 }
 nav.site-tabs a[aria-current="page"],
 .site-tabs [role="tab"][aria-selected="true"] {
-  background: color-mix(in srgb, var(--kpress-doc-accent) 16%, var(--kpress-doc-bg));
+  background: color-mix(
+    in srgb,
+    var(--kpress-doc-accent) var(--site-tab-current-tint),
+    var(--kpress-doc-bg)
+  );
   color: var(--kpress-doc-text);
 }
 @media print {

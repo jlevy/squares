@@ -1362,8 +1362,11 @@ def chip_rows(report: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def column_rows(report: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """A `columns` report as a table, one row a column: the table it belongs to and that
-    table's width, the column's width and the share of the table it takes, the most lines
-    a cell of it takes, how many of its words a line break splits, and the tallest row
+    table's width, the column's width and the share of the table it takes, the width of
+    the widest content a cell of it holds (`held`) and the row whose cell holds it
+    (`held_by`), how many of its cells show something past their own box (`overflows`),
+    the most lines a cell of it takes,
+    how many of its words a line break splits, and the tallest row
     whose height its cell sets, with that row's height and the lines the cell takes
     there; a dash where it sets no row's height. Then what its lines may not do, as
     counts: `split`, the values of a list of cases cut across lines; `wrapped`, the
@@ -1392,6 +1395,9 @@ def column_rows(report: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     "column": column["column"],
                     "col_width": "-" if width is None else f"{width:g}",
                     "share": "-" if width is None else f"{100 * width / table:.0f}%",
+                    "held": f"{column['held']:g}" if "held" in column else "-",
+                    "held_by": column.get("held_by") or "-",
+                    "overflows": len(column.get("overflows", ())),
                     "max_lines": column["lines"],
                     "broken_words": len(column["broken"]),
                     "tallest_row": "-" if tallest is None else tallest["row"],

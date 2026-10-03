@@ -31,6 +31,38 @@ body {
   --kpress-doc-link: var(--kpress-doc-accent);
   --color-primary-light: var(--kpress-doc-accent);
 }
+/* The rung scale: a fill's lightness and chroma at level 0, and what one level adds to
+   each. Chips are light fills carrying the page's own text colour: level 0 sits close to
+   the page background, nearly neutral, and each level is darker and more saturated;
+   dark mode turns the lightness over (below). `devtools.rung_scale` measures every fill
+   these make and its text contrast (paper-design.md, Color). */
+:root {
+  --site-rung-base: 95%;
+  --site-rung-step: -5.5%;
+  --site-rung-chroma-base: 0.015;
+  --site-rung-chroma-step: 0.024;
+}
+/* The site's own colours, each a token, so that a colour is tried and changed in one
+   place (`devtools.check_colour_tokens` refuses a rule that names one of its own;
+   paper-design.md, Color). Significance's ink is a dark teal between the confirmation
+   green and the verification blue, darker and bluer than the accent so that it never
+   reads as a link, and light in dark mode (below): the colour of significance wherever
+   the site shows one (`overview_sections.significance_mark`; the owner, 2026-10-03,
+   `think-m3m4`), which `devtools.rung_scale` measures against the page in both themes.
+   The new-result star is the one warm mark. A popover's backdrop dims the page with a
+   scrim. A mix of the page's own colours keeps its mix in the rule that paints with it,
+   since a token resolves where it is declared and the dark theme's page colours are set
+   below the root; its ratio is the token: a plain chip's tint of the muted gray, and how
+   much accent a pressed action keeps. Both blocks stand before the dark theme's values,
+   which share their specificity on the root, so the dark ones win there as they do
+   below it (`think-uer5`). */
+:root {
+  --site-significance: oklch(42% 0.07 205);
+  --site-new-result: oklch(52% 0.19 25);
+  --site-scrim: oklch(0% 0 0 / 0.12);
+  --site-chip-tint: 16%;
+  --site-action-hover-accent: 85%;
+}
 :root:where([data-kpress-resolved-theme="dark"]),
 :where([data-kpress-resolved-theme="dark"]) :is(.kpress, .kpress-page-main, .kpress-tooltip),
 :is(.kpress, .kpress-page-main, .kpress-tooltip)[data-kpress-resolved-theme="dark"] {
@@ -41,18 +73,9 @@ body {
   --site-rung-step: 4.6%;
   --site-rung-chroma-base: 0.012;
   --site-rung-chroma-step: 0.019;
+  --site-significance: oklch(80% 0.085 205);
+  --site-new-result: oklch(66% 0.17 25);
   --site-hero-filter: brightness(0.88);
-}
-/* The rung scale: a fill's lightness and chroma at level 0, and what one level adds to
-   each. Chips are light fills carrying the page's own text colour: level 0 sits close to
-   the page background, nearly neutral, and each level is darker and more saturated;
-   dark mode turns the lightness over (above). `devtools.rung_scale` measures every fill
-   these make and its text contrast (paper-design.md, Color). */
-:root {
-  --site-rung-base: 95%;
-  --site-rung-step: -5.5%;
-  --site-rung-chroma-base: 0.015;
-  --site-rung-chroma-step: 0.024;
 }
 
 /* The paper typography profile, read from paper-type.css, which the explainer carries
@@ -78,6 +101,10 @@ body {
   /* A table stops at 100rem, short of the atlas's cap: past it, its columns only spread
      apart and a row gets harder to follow. */
   --site-table-max: 100rem;
+  /* The tables of results hold nine columns since 2026-10-03 (`think-m3m4`), and on a
+     very wide window they bleed further than the other tables (`think-bcmc`); at 1280
+     pixels and below they are as wide as before. */
+  --site-results-table-max: 112rem;
   /* The space above and below every table, on screen: a site table with its filter bar,
      and a document's own table (paper-design.md, Tables). */
   --site-table-space: 2rem;
@@ -148,14 +175,15 @@ body {
   margin-inline: calc((var(--site-table-wide) - 100%) / -2);
   max-width: var(--site-table-wide);
 }
-/* The tables of results hold eight columns since 2026-10-02 (`think-ybt5`,
-   `think-e4o3`): 1139 pixels at their floors where every row shows, more than the wide
-   track's 1104 at a 1280-pixel window. So they bleed from 74rem (1184 pixels), fit from
-   about 1220, and are 1200 pixels wide at 1280, as wide as the frontier table there;
-   narrower, they scroll in their wrap, as any table does where its floors outrun the
-   window. */
+/* The tables of results hold nine columns since 2026-10-03 (eight from 2026-10-02,
+   `think-ybt5`, `think-e4o3`; the significance's from `think-m3m4`): 1198 pixels at
+   their floors where every row shows, more than the wide track's 1104 at a 1280-pixel
+   window. So they bleed from 74rem (1184 pixels), fit from about 1278, and are 1200
+   pixels wide at 1280, as wide as the frontier table there, with 2 to spare; narrower,
+   they scroll in their wrap, as any table does where its floors outrun the window. */
 .site-page .site-wide:has(> .site-table-wrap .site-results) {
   --site-table-bleed-from: 74rem;
+  --site-table-max: var(--site-results-table-max);
 }
 .site-hero {
   text-align: center;
@@ -588,7 +616,7 @@ body {
   background: var(--kpress-doc-bg);
   border: 1px solid var(--kpress-doc-border);
   border-radius: 0;
-  box-shadow: 0 0.5rem 2rem oklch(0% 0 0 / 0.15);
+  box-shadow: 0 0.5rem 2rem var(--site-shadow);
   color: var(--kpress-doc-text);
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
@@ -634,7 +662,7 @@ body {
   );
 }
 .site-popover::backdrop {
-  background: oklch(0% 0 0 / 0.12);
+  background: var(--site-scrim);
 }
 .site-popover .site-popover-close {
   transition:
@@ -761,7 +789,11 @@ body {
 }
 .kpress :is(.site-popover a, button).site-popover-action:is(:hover, :focus-visible),
 .kpress :is(a, button).site-action:is(:hover, :focus-visible) {
-  background: color-mix(in oklch, var(--kpress-doc-accent) 85%, var(--kpress-doc-text));
+  background: color-mix(
+    in oklch,
+    var(--kpress-doc-accent) var(--site-action-hover-accent),
+    var(--kpress-doc-text)
+  );
   color: var(--kpress-doc-bg);
 }
 /* The row that holds the one action under a table or grid: centred, in the sans at the
@@ -875,6 +907,11 @@ body {
   .site-table-tools + .site-table-wrap {
     margin-block-start: 0;
   }
+  /* A table of results has its legend between the bar and the table, and stands as close
+     under it as under a bar. */
+  .site-rung-legend + .site-table-wrap {
+    margin-block-start: 0.6rem;
+  }
 }
 /* On a narrow pane KPress lets a document's table run past the column, across the
    document's gutter and under its clip. Here it keeps to the column and scrolls inside
@@ -969,7 +1006,7 @@ body {
 .site-table thead th {
   position: sticky;
   top: 0;
-  background: var(--kpress-doc-surface, var(--kpress-doc-bg));
+  background: var(--kpress-doc-bg);
   z-index: 1;
 }
 .site-table th[data-sort] {
@@ -1079,7 +1116,11 @@ body {
    the text light. A plain chip is a neutral tint; a status chip takes its status's
    fill (below). A rung chip adds `site-rung-fill`. */
 .site-chip {
-  background: color-mix(in oklch, var(--kpress-doc-muted) 16%, var(--kpress-doc-bg));
+  background: color-mix(
+    in oklch,
+    var(--kpress-doc-muted) var(--site-chip-tint),
+    var(--kpress-doc-bg)
+  );
   border-radius: 0;
   color: var(--kpress-doc-text);
   display: inline-block;
@@ -1137,8 +1178,8 @@ body {
 /* A rung's fill moves with its level on its own scale, always behind the page's text
    colour: level 0 is nearly the page background, and each level above it is stronger
    (darker in light mode, lighter in dark) and more saturated. Verification is the blue
-   and confirmation the green of the packing palette's squares. Significance is gray at
-   every level, so it takes the lightness steps and no chroma step. */
+   and confirmation the green of the packing palette's squares. Significance is no chip
+   (`.site-significance`, below). */
 .site-rung-fill {
   --rung-hue: 250;
   --rung-chroma-base: var(--site-rung-chroma-base);
@@ -1152,10 +1193,6 @@ body {
 }
 .site-rung-fill[data-rung="C"] {
   --rung-hue: 158;
-}
-.site-rung-fill[data-rung="S"] {
-  --rung-chroma-base: 0.008;
-  --rung-chroma-step: 0;
 }
 .site-rung-fill[data-level="1"] {
   --rung-level: 1;
@@ -1173,7 +1210,38 @@ body {
   --rung-level: 5;
 }
 .site-star {
-  color: oklch(52% 0.19 25);
+  color: var(--site-new-result);
+}
+/* A significance rung is its letter and level in the significance teal, medium weight,
+   then as many short bars in the same ink as its level, one to five, so a column of them
+   reads as a meter: no chip, since significance asks a different question from the
+   verification and confirmation chips beside it. The bars sit at the label's middle, a
+   line apart, and never wrap away from it. */
+.site-significance {
+  align-items: center;
+  color: var(--site-significance);
+  display: inline-flex;
+  font-family: var(--kpress-font-sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--site-font-weight-sans-medium);
+  gap: 0.2em;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+.site-significance-bars {
+  display: inline-flex;
+  gap: 0.08em;
+}
+.site-significance-bar {
+  background: currentcolor;
+  block-size: 0.26em;
+  border-radius: 0.06em;
+  inline-size: 0.36em;
+}
+@media (forced-colors: active) {
+  .site-significance-bar {
+    background: CanvasText;
+  }
 }
 @media print {
   .site-nav,
@@ -1213,13 +1281,19 @@ body {
 }
 /* A result's status has a column of its own, after the rungs (`think-ybt5`; it sat
    under the kind until 2026-10-02): the status chip, then who has the next move where
-   the register records it, then `superseded` where the result is. The chips wrap
+   the register records it, then `superseded` or `superseded in part` where the result
+   is, each with the results that supersede it (`supersession_marks`). The chips wrap
    between themselves, one under another where the cell is too narrow, a kind's gap
    apart, and never inside one: the column is as wide as its widest chip. */
 .site-table .site-standing {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
+}
+/* The results that supersede one are named by their ids, and an id never breaks at its
+   hyphen: `T-` at the end of one line and `020` on the next reads as two things. */
+:is(.site-superseded, .site-result-superseded) a {
+  white-space: nowrap;
 }
 
 .kpress .site-table {
@@ -1230,19 +1304,64 @@ body {
 }
 /* The result column carries the reading; the rest stay as narrow as their content. */
 .site-table .site-col-result {
-  min-width: 18rem;
+  min-width: 16.55rem;
 }
-/* A new result's star hangs after the last character of the result's text. It takes no
-   width of its own, so it can never wrap to a line by itself, and its cell keeps room
-   for it at the end of every line, so it never runs into the next column. */
-.site-results .site-col-result .site-star {
-  display: inline-block;
-  inset-inline-start: 0.2em;
-  position: relative;
-  width: 0;
+/* The legend right above a table of results (`overview_sections.rung_legend`): three
+   short lines in the support colour at the note size, every significance mark, every
+   verification and confirmation chip, and the star with the link to the ladders, each
+   line wrapping between its marks and never inside one. */
+.site-rung-legend {
+  color: var(--site-support-color);
+  display: grid;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+  font-weight: var(--site-font-weight-sans-light);
+  gap: 0.3rem;
+  margin-block: 0.4rem 0;
 }
-.kpress .site-results td.site-col-result:has(.site-star) {
-  padding-inline-end: calc(0.5rem + 1.1em);
+/* A line wraps between its groups, a rating's name and its marks, and a group between
+   its marks, so a rating that wraps starts its own line flush. */
+.kpress .site-rung-legend p {
+  align-items: center;
+  column-gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  row-gap: 0.3rem;
+}
+.site-rung-legend-group {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.4rem;
+}
+.site-rung-legend-name {
+  color: var(--kpress-doc-text);
+  font-weight: var(--site-font-weight-sans-medium);
+}
+.site-rung-legend .site-significance + .site-significance {
+  margin-inline-start: 0.3rem;
+}
+/* Significance is the second column, narrow but prominent: its mark on one line, and a
+   new result's star after the bars, where it stood after the result's text until
+   2026-10-03 (`think-m3m4`). The column is as wide as its widest mark, KPress's 6rem
+   floor given up as the cases' is: S5's and a star, 77.4px. The mark was trimmed to
+   that the same day (`think-r3rd`), its bars 0.36em wide and 0.2em after its label
+   (`.site-significance`, above), the cell's padding 0.2rem and the star's margin below,
+   from 90.4px, which set the nine columns' floors 7.8px past the 1200 a 1280-pixel
+   window gives the table; now they leave it 2. The padding went from 0.3rem to 0.2rem
+   when two results' tenth evidence links widened the details column by 6.3px. */
+.site-results .site-col-s {
+  white-space: nowrap;
+}
+.kpress .site-results :is(th, td).site-col-s {
+  min-width: 0;
+  padding-inline: 0.2rem;
+}
+/* The star takes the cell's end padding and a little of the result's start padding,
+   which still keeps it clear of the result's text. */
+.site-results .site-col-s .site-star {
+  margin-inline: 0.2em -0.4em;
 }
 /* On a wide table the result takes the spare width: past KPress's 40rem cell cap, and
    ahead of a long credit, which wraps at 20rem. */
@@ -1259,21 +1378,19 @@ body {
    line ("Queuingtheorydotcom", 167px of the 184), so a credit wraps between names, two
    or three to a line, and never inside one. KPress's own floor, 6rem, set a credit one
    word to a line while the result column kept the spare width. The rungs column is as
-   wide as its widest chip, since no chip wraps: the three rungs at 114px, and the
-   widest kind, "restricted optimality", at 180 where a row with one shows; no chip of
-   the status line is wider. The result
-   column's floor is its 18rem (above): the widest piece of a formula a line cannot end
-   inside is narrower than that, now that a long quotient may end a line after its
-   solidus (`overview_data.breakable_quotients`). A result's records are no column of
-   their own, which would set a link to a line; they sit under the summary, in the
-   result's cell, on a line or two. */
+   wide as its widest chip, since no chip wraps: the two rungs share a line, and the
+   widest kind, "restricted optimality", sets it at 180 where a row with one shows. The
+   result column's floor is its 16.55rem (above): the widest piece of a formula a line
+   cannot end inside, 248.5px, and the cell's padding are narrower than that, now that a
+   long quotient may end a line after its solidus (`overview_data.breakable_quotients`).
+   A result's records are its Details column, a link to a line (below). */
 @media (width >= 40rem) {
   .site-results .site-col-credit {
     min-width: 11.5rem;
   }
   /* As narrow as its widest chip, like the other short columns: the spare width is the
      result's and the credit's. */
-  .site-results :is(.site-rungs, .site-col-status, .site-col-details) {
+  .site-results :is(.site-col-s, .site-rungs, .site-col-status, .site-col-details) {
     width: 0;
   }
 }
@@ -1330,8 +1447,7 @@ body {
    after a formula, where with the last piece a box 148 of 214 widths had one. */
 .site-results .site-col-result :is(.kpress-math-inline, .katex-html > .base:last-child) {
   display: inline;
-}
-/* A result's records, its case link, the register, its evidence, source and reviews, are
+} /* A result's records, its case link, the register, its evidence, source and reviews, are
    its Details, a column of their own since 2026-10-02 (`think-e4o3`; they stood on a
    line under the summary until then): one link to a line, the column as narrow as its
    widest link, so the result's cell holds the claim alone. On a phone they are a line
@@ -1351,10 +1467,10 @@ body {
 }
 
 /* ---------- A table of results on a phone ----------
-   Six columns do not fit 390px, and scrolling a table sideways to read one claim is the
-   wrong trade: each row becomes a small card, id, cases and rungs on its first line,
-   then the claim with its records under it, and the credit and date; the status line
-   sits under the rungs. The results page's table and the overview's recent table are the one
+   Nine columns do not fit 390px, and scrolling a table sideways to read one claim is the
+   wrong trade: each row becomes a small card, id, cases and rungs on its first line, the
+   significance under the id and the status line under the rungs on its second, then the
+   claim with its records under it, and the credit and date. The results page's table and the overview's recent table are the one
    table (`.site-results`), so both take it. The card places its cells by class, not by
    column, and orders them (`order`): the wide table's row opens with the date and sets
    the credit before the status and the details, so the card reads as it did before the
@@ -1401,6 +1517,14 @@ body {
   }
   .site-results .site-rungs {
     grid-area: 1 / 3;
+  }
+  /* The significance opens the card's second line, under the id and the cases, level
+     with the status under the rungs. On the first line, between the id and the cases,
+     its track came out of the cases', the one that gives way, and next to a long status
+     a short list had none: n = 11 stood a word to a line across the rungs (`think-uer5`,
+     2026-10-03). */
+  .site-results .site-col-s {
+    grid-area: 2 / 1 / auto / 3;
   }
   /* The status stands right under the rungs, in their track, on the card's second line,
      as it did when it was in their cell. The track is as wide as its content, and a
@@ -1459,10 +1583,6 @@ body {
   }
   .site-results .site-col-result {
     min-width: 0;
-  }
-  /* A card's cells have no padding, so the star's room is all there is at the end. */
-  .kpress .site-results td.site-col-result:has(.site-star) {
-    padding-inline-end: 1.1em;
   }
 }
 
@@ -1698,6 +1818,7 @@ body {
   --site-ladders-line: calc(var(--site-font-size-note) * var(--site-ladders-leading));
   /* The rail holds a chip and nothing else, so it is the chip's own width. */
   --site-ladders-rail: 2.25rem;
+  --site-ladders-significance-rail: 3.6rem;
   --site-ladders-gap: 0.75rem;
   /* The narrowest a description is ever set: `SHORT_MEANING_LINE` characters a line. */
   --site-ladders-meaning-min: 13.5rem;
@@ -1768,14 +1889,32 @@ body {
   min-inline-size: var(--site-ladders-rail);
   text-align: center;
 }
+/* Significance's rungs are marks, not chips (`significance_mark`): its column's rail is
+   as wide as the widest, S5 and its five bars, so every description in it starts on one
+   line, as the chips' do. A mark stands as tall as a chip, the chip's line height and
+   margin, so a rung of it is as tall as any other where it stands on a line of its own
+   over its description, and its letters are level with its description's first line
+   where it stands beside it. */
+.site-ladders-cell[data-ladder="S"] {
+  --site-ladders-rail: var(--site-ladders-significance-rail);
+}
+.site-ladders-rung .site-significance {
+  grid-area: chip;
+  justify-self: start;
+  line-height: 1.45;
+  margin-block: 0.15rem;
+}
 .site-ladders-meaning {
   block-size: calc(2 * var(--site-ladders-line));
   grid-area: meaning;
 }
-/* A rung with room, 16.5rem (the rail, the gap and the least description): the chip in
-   its rail and the description beside it, its first line level with the chip's letters,
-   which the chip's own margin sets down. */
-@container (inline-size >= 16.5rem) {
+/* A rung with room, 17.85rem (the widest rail, significance's, the gap and the least
+   description): the chip in its rail and the description beside it, its first line
+   level with the chip's letters, which the chip's own margin sets down. Every cell
+   turns at that one width, so a row's rungs stay one height; at 16.5rem, the chips'
+   rail's, a significance description was set 21.6 pixels short of its least and took
+   a third line (2026-10-03). */
+@container (inline-size >= 17.85rem) {
   .site-ladders-rung {
     align-items: start;
     grid-template: "chip meaning" auto / var(--site-ladders-rail) minmax(0, 1fr);
@@ -2559,7 +2698,7 @@ body {
 }
 .site-page .site-film-frame .site-film {
   aspect-ratio: 16 / 9;
-  background: var(--kpress-doc-surface, var(--kpress-doc-bg));
+  background: var(--kpress-doc-bg);
   display: block;
   height: auto;
   width: 100%;

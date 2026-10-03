@@ -1,8 +1,9 @@
 // The table script wired to a stand-in results table and its tools bar: a flat list of
 // rows carrying the facets `overview_sections.result_facets` writes, under the controls
-// `overview_sections.result_filters` writes, Significance starting at S4 and up and
-// Max age and Hide superseded wherever the page under test starts them. The stand-ins
-// are only what the script reads, the day among them; the test reads what it then shows.
+// `overview_sections.result_filters` writes, Significance starting at S4 and up (a
+// stand-in level: the overview starts at S3) and Max age and Hide superseded wherever
+// the page under test starts them. The stand-ins are only what the script reads, the
+// day among them; the test reads what it then shows.
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
@@ -89,10 +90,18 @@ function clock(today) {
  * rows below it already hidden, Max age at `age`, empty for none, and Hide superseded
  * checked if `hide`. The reader opens it on `today`. Three rows are confirmed, one of
  * them superseded; of the other two, one is recorded and one is incomplete. Whether a
- * row is superseded is its `current`, and no status.
- * @param {{ search?: string, hash?: string, age?: string, hide?: boolean, today?: string }} [opened]
+ * row is superseded is its `current`, and no status. With `legend`, the table's wrapper
+ * follows a legend that follows the bar, as a table of results' does on the site.
+ * @param {{ search?: string, hash?: string, age?: string, hide?: boolean, today?: string, legend?: boolean }} [opened]
  */
-function page({ search = "", hash = "", age = "", hide = false, today = "2026-10-01" } = {}) {
+function page({
+  search = "",
+  hash = "",
+  age = "",
+  hide = false,
+  today = "2026-10-01",
+  legend = false,
+} = {}) {
   const ours = { source: "ours", status: "confirmed", current: "true" };
   const superseded = { source: "others", status: "confirmed", current: "false" };
   const structure = { source: "others", status: "incomplete", current: "true" };
@@ -150,6 +159,14 @@ function page({ search = "", hash = "", age = "", hide = false, today = "2026-10
     /** @param {string} type @param {() => void} listener */
     addEventListener: (type, listener) => listeners[type]?.push(listener),
   };
+  // The legend a table of results sets between its bar and its table: no bar itself.
+  const key = {
+    classList: {
+      /** @param {string} name */
+      contains: (name) => name === "site-rung-legend",
+    },
+    previousElementSibling: tools,
+  };
   /** @type {Record<string, string>} */
   const sortable = { "data-sort": "text" };
   const heading = {
@@ -177,7 +194,7 @@ function page({ search = "", hash = "", age = "", hide = false, today = "2026-10
     tHead: { rows: [{ cells: [heading] }] },
     hasAttribute: () => false,
     setAttribute: () => undefined,
-    closest: () => ({ previousElementSibling: tools }),
+    closest: () => ({ previousElementSibling: legend ? key : tools }),
   });
   const location = { search, hash };
   vm.runInContext(
@@ -238,6 +255,17 @@ void test("the bar's state in the HTML is the default: S4 and up, already filter
   const results = page();
   assert.deepEqual(results.shown(), { rows: ["t-001", "t-005"] });
   assert.equal(results.count.textContent, "2 of 5 results");
+});
+
+void test("a legend between the bar and the table leaves the bar the table's", () => {
+  // Unwired, the table would keep the rows the HTML hides whatever the reader chose, and
+  // a link's parameters would preset nothing.
+  const results = page({ legend: true });
+  assert.deepEqual(results.shown(), { rows: ["t-001", "t-005"] });
+  assert.equal(results.count.textContent, "2 of 5 results");
+  results.choose({ s: "3" });
+  assert.deepEqual(results.shown().rows, ["t-001", "t-002", "t-004", "t-005"]);
+  assert.equal(page({ legend: true, search: "?s-min=" }).shown().rows.length, 5);
 });
 
 void test("All shows every row, and the count is of every row", () => {
@@ -329,7 +357,8 @@ void test("the row the address names shows whatever the filters hide", () => {
 });
 
 void test("an age is measured from the reader's day, again on every load", () => {
-  // The overview's Recent Results: S4 and up, and no older than 180 days. The HTML's
+  // As the overview's Recent Results open: a significance floor, S4 here, and no older
+  // than 180 days. The HTML's
   // `hidden` rows and count are as of the day the page was built, and are settled here.
   const recent = page({ age: "180" });
   assert.deepEqual(recent.shown(), { rows: ["t-001", "t-005"] });

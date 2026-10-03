@@ -2,8 +2,9 @@
 // the overview's recent results.
 //
 // A classic script, inlined into each page by `devtools.render_overview`. It enhances
-// every `table.site-table` whose wrapper follows a `.site-table-tools` bar; the table is
-// complete in the HTML, so with scripting off every row is present and nothing is lost.
+// every `table.site-table` whose wrapper follows a `.site-table-tools` bar, directly or
+// with a table of results' legend between them (`toolsBefore`); the table is complete in
+// the HTML, so with scripting off every row is present and nothing is lost.
 //
 // Headings with `data-sort="num"` or `data-sort="text"` sort on click (a numeric sort
 // reads each cell's `data-value`, else its text). Filters are the bar's controls, each
@@ -366,16 +367,28 @@
     }
   }
 
+  /**
+   * The tools bar a table's wrapper follows: the element right before it, or the one
+   * before the legend a table of results sets between its bar and itself
+   * (`.site-rung-legend`, `overview_sections.rung_legend`). Null where there is none.
+   * @param {Element | null} wrap
+   * @returns {Element | null}
+   */
+  function toolsBefore(wrap) {
+    let before = wrap?.previousElementSibling ?? null;
+    while (before?.classList.contains("site-rung-legend")) {
+      before = before.previousElementSibling;
+    }
+    return before?.classList.contains("site-table-tools") ? before : null;
+  }
+
   /** Enhance every site table on the page. */
   function init() {
     for (const table of document.querySelectorAll("table.site-table")) {
       if (!(table instanceof HTMLTableElement)) {
         continue;
       }
-      const wrap = table.closest(".site-table-wrap");
-      const before = wrap?.previousElementSibling;
-      const tools = before?.classList.contains("site-table-tools") ? before : null;
-      enhance(table, tools);
+      enhance(table, toolsBefore(table.closest(".site-table-wrap")));
     }
   }
 

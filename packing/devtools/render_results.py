@@ -19,9 +19,11 @@ lower bound, an upper bound, optimality, or one of the kinds that are no bound o
 `s(n)`. Every row ends its ratings with the result's status (`devtools.result_status`,
 the function the site's tables use): recorded, reviewed, confirmed or incomplete,
 derived from the rungs and the cited evidence and never stored; then who has the next
-move, where the register records an `activity`; then `superseded`, where the result is
-a bound no case bound rests on now, which `devtools.render_recent_results.standing`
-derives from the case records.
+move, where the register records an `activity`; then `superseded`, with the results that
+supersede it (`devtools.render_recent_results.position_marks`): for a bound no case bound
+rests on now, the results its cases' bounds rest on instead, both derived from the case
+records; for a result of another kind, the later results its entry declares imply it
+(`superseded_by`), and `superseded in part` where they imply only some of it.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.render_results --update
@@ -83,7 +85,9 @@ explanations for every declared `V` and `C`.
 A result's status says how far the work on it here has gone, and follows `C`:
 *recorded* (`C0`), *reviewed* (`C1`), *confirmed* (`C2` and up), or *incomplete* while a
 defect found in it is open. After it come who has the next move, where one is recorded,
-and *superseded*, where the result is a bound that no case bound rests on now.
+and *superseded* by the results named, where the result is a bound that no case bound
+rests on now, or a result of another kind that a later result implies; *superseded in
+part* says a later result implies some of it and it still holds the rest.
 A confirmed result says how it was confirmed, from the code its confirming runs used:
 *reproduced with the producer's code*, where they re-ran the code that produced or
 verified it; *re-implemented, sharing the producer's components*, where separately
@@ -210,7 +214,7 @@ def render() -> str:
     evidence = records.register.evidence
 
     def status(record: dict) -> str:
-        position = position_marks(record, standing(record, records))
+        position = position_marks(record, standing(record, records), records)
         return status_line(record, evidence, position, how=confirmed_how(record, evidence))
 
     lines.append("| id | n | kind | credit | V | C | S | status | novelty | claim |")

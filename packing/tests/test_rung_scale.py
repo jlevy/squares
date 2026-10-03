@@ -95,17 +95,36 @@ def test_rung_zero_is_closest_to_the_neutral_background(
         assert lowest.chroma <= 0.02, lowest
 
 
-@pytest.mark.parametrize("theme", rung_scale.THEMES)
-def test_significance_is_gray_and_as_strong_as_the_hued_ladders(
-    theme: str, fills: list[rung_scale.Fill]
-) -> None:
-    """Significance takes the lightness steps and no chroma: its top rung is as dark (as
-    light, in dark mode) as verification's, and no rung of it is coloured."""
-    gray = _ladder(fills, theme, "S")
-    assert {fill.chroma for fill in gray} == {gray[0].chroma}
-    assert gray[0].chroma <= 0.01
-    blue = {fill.level: fill for fill in _ladder(fills, theme, "V")}
-    assert all(fill.lightness == blue[fill.level].lightness for fill in gray)
+def test_significance_is_drawn_in_its_own_teal_ink() -> None:
+    """Significance is no chip (`think-m3m4`): its rung is drawn on the page in
+    `--site-significance`, a teal between the confirmation green and the verification
+    blue in hue, so it reads as neither, and darker than the accent in light mode, so it
+    never reads as a link. It is text, held to 4.5:1 against the page in both themes, and
+    inside sRGB, so no browser maps its chroma down."""
+    drawn = [ink for ink in rung_scale.inks() if ink.rung == "--site-significance"]
+    assert [ink.theme for ink in drawn] == list(rung_scale.THEMES)
+    hues = {
+        ladder: float(tokens["--rung-hue"])
+        for ladder, tokens in rung_scale.ladder_tokens().items()
+    }
+    # The accent's light lightness, 51.09% (paper-design.md, Color).
+    accent_light = 0.5109
+    for ink in drawn:
+        assert hues["C"] < ink.hue < hues["V"], ink
+        assert ink.in_gamut, ink
+        assert ink.contrast >= rung_scale.MINIMUM_CONTRAST, ink
+    light = next(ink for ink in drawn if ink.theme == "light")
+    assert light.lightness < accent_light - 0.05, light
+
+
+def test_every_ink_keeps_the_contrast_its_use_needs() -> None:
+    """Each ink the site draws with on the page, in each theme: text at 4.5:1, the
+    new-result star, a symbol, at 3:1, and every one inside sRGB."""
+    drawn = rung_scale.inks()
+    assert {ink.rung for ink in drawn} == set(rung_scale.INKS)
+    for ink in drawn:
+        assert ink.in_gamut, ink
+        assert ink.contrast >= rung_scale.INKS[ink.rung], ink
 
 
 def test_every_fill_is_shown_as_written_and_keeps_its_text_readable(
@@ -205,4 +224,11 @@ def test_the_design_document_carries_the_status_fills() -> None:
     """The status table in `paper-design.md` is this tool's output."""
     design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
     for line in rung_scale.markdown_table(rung_scale.status_fills(), "Status").splitlines():
+        assert line in design, line
+
+
+def test_the_design_document_carries_the_inks() -> None:
+    """The ink table in `paper-design.md` is this tool's output."""
+    design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
+    for line in rung_scale.ink_table(rung_scale.inks()).splitlines():
         assert line in design, line

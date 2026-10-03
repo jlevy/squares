@@ -266,10 +266,22 @@ Two marks sit beside a status and are no part of it.
   `render_recent_results.standing`, and
   [`devtools/check_standing.py`](packing/devtools/check_standing.py) holds it to the
   bounds each entry states.
-  A confirmed result may be superseded, and a recorded one may hold a case’s reported
-  bound. A result of any other kind is never marked superseded, though it may cite the
-  evidence of the bound it is about: no later bound supersedes the limit of a method or
-  the audit of a proof.
+  The mark names the results that supersede it, the ones its cases’ bounds rest on now
+  (`render_recent_results.superseding`), so `T-037` reads *superseded by T-060*. A
+  confirmed result may be superseded, and a recorded one may hold a case’s reported
+  bound. A result of any other kind is not superseded by its standing, though it may cite
+  the evidence of the bound it is about: no later bound supersedes the limit of a method
+  or the audit of a proof.
+  Such a result is superseded only where a later result implies it, which nothing can
+  derive, so its entry declares it in `superseded_by`: the later result, whether it
+  implies the `whole` of this one or a `part`, and `what` it implies.
+  The whole is marked *superseded*; a part is marked *superseded in part* and the result
+  stays current, since it still holds the rest.
+  `T-060`’s $s(11) = T$ implies `T-036`’s bound for its family and not its equality
+  case, since `T-060` makes no claim of uniqueness, so `T-036` is superseded in part.
+  [`devtools/check_results.py`](packing/devtools/check_results.py) holds each named
+  result to one dated no earlier, on a case the two share, and refuses the field on a
+  bound, whose supersession is derived.
 - **Activity** says who has the next move, where the record shows it.
   A register entry may carry `activity`, with a `state` of `in-analysis` (a replay, a
   review or an audit of the result is under way here) or `waiting` (a question, a
@@ -394,9 +406,10 @@ state no relation on $s(n)$ in their headline.
 Method limit, correction and audit are told apart by review alone.
 
 A result’s standing, whether a case bound rests on it now, is about bounds.
-A result whose evidence claims no bound has no standing: nothing supersedes it.
-Of a standing, the register’s views show one thing, the *superseded* mark, and only on a
-result whose kind is a bound ([Status](#status)).
+A result whose evidence claims no bound has no standing, and no later bound supersedes
+it; a later result that implies it is declared instead ([Status](#status)). Of a
+standing, the register’s views show one thing, the *superseded* mark, which a standing
+gives only a bound; another kind carries the mark only where its entry declares it.
 
 ## Results by Others
 
@@ -426,7 +439,7 @@ A reported result enters at `V0/C0`, or `C1` once a review has read it, with a
 as this project’s own results.
 Its [status](#status) reads `recorded`, then `reviewed`, then `confirmed`, and every
 table that lists results lists it as a row like any other.
-Whether an entry is current or superseded is derived from the case records and never
+Whether a bound is current or superseded is derived from the case records and never
 stored.
 
 ### Parallel Projects and Their Credit

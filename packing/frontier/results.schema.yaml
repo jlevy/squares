@@ -231,6 +231,31 @@ $defs:
         minLength: 1
         description: The next evidence-improving action, or why no independent rung change applies.
       notes: {type: string, minLength: 1}
+      superseded_by:
+        type: array
+        minItems: 1
+        description: >-
+          The later results that imply this one, in whole or in part, declared on a result
+          whose kind is no bound (epistemics.md, Status). A bound's supersession is derived
+          from the case records, as the results its cases' bounds rest on now
+          (`render_recent_results.superseding`), and is never declared, so the checker
+          refuses this field on a lower bound, an upper bound or an optimality result.
+          `extent` is `whole` where the later result implies everything this one states,
+          which marks it superseded wherever results are listed, or `part` where it
+          implies some of it and this one still holds the rest, which marks it superseded
+          in part and keeps it current. `what` says what the later result implies and,
+          for a part, what this one still holds alone. `devtools.check_results` holds each
+          named result to the register: it exists, is not this one, is named once, is
+          dated no earlier (its source's publication, or the day this project established
+          it), and shares a case with it.
+        items:
+          type: object
+          additionalProperties: false
+          required: [result, extent, what]
+          properties:
+            result: {type: string, pattern: '^T-[0-9]{3}$'}
+            extent: {enum: [whole, part]}
+            what: {type: string, minLength: 1}
       activity:
         type: object
         additionalProperties: false

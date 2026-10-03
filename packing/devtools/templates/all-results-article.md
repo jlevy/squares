@@ -33,7 +33,12 @@ The status follows the confirmation rung and is never set by hand;
 [`epistemics.md`]({{EPISTEMICS_URL}}#status) defines it.
 Beside it, *in analysis* marks a replay or review under way here and *waiting on* a
 request that is with the source or another party.
-A bound that no case bound rests on now is marked *superseded*.
+A bound that no case bound rests on now is marked *superseded*, followed by the bounds
+its cases rest on instead.
+A result of another kind is marked *superseded* when the register records that a later
+result implies all of it, and *superseded*, *in part*, when a later result implies only
+some of it; either way the mark names the later result, and a result superseded in part
+stays current.
 
 {{STAR_LEGEND}}
 Open a row for the full claim and its novelty label, and follow its details, a link to a

@@ -4,8 +4,9 @@
 // belongs to, its column and its cell's height, then its description: the words, the
 // box's width and height, the line height, how many lines the words take, how far they
 // run past the box (0 when they fit), and whether the box sits beside the chip or under
-// it. A chip's title is reported as it reads, and `parts` counts what the rung holds: two,
-// its chip and its description. `head_rules` and `row_rules` are the distinct widths of
+// it. A significance rung's mark (`.site-significance`) stands for its chip throughout,
+// its label read from the mark's words. A chip's title is reported as it reads, and
+// `parts` counts what the rung holds: two, its chip and its description. `head_rules` and `row_rules` are the distinct widths of
 // the rule under a column's head and of the rules a cell draws above and below itself,
 // so `[1]` and `[0]` say one rule under the heads and none between the rows.
 // `gutter_left` and `gutter_right` are the room between the diagram and the nearest
@@ -15,6 +16,8 @@
 // means every row of the diagram is the same height; `empty` counts the cells that hold
 // no rung and whether each takes room.
 () => {
+  /** What draws a rung: a chip, or for significance its mark (`significance_mark`). */
+  const MARK = ".site-chip, .site-significance";
   /** @param {number} value */
   const round = (value) => Math.round(value * 10) / 10;
   /** The distinct widths of the block-side borders `sides` names, over `elements`.
@@ -51,14 +54,14 @@
       const box = diagram.getBoundingClientRect();
       const frame = clip(diagram);
       const cells = [...diagram.querySelectorAll(".site-ladders-cell")];
-      const rungs = cells.filter((cell) => cell.querySelector(".site-chip"));
+      const rungs = cells.filter((cell) => cell.querySelector(MARK));
       const lefts = [
         ...new Set(rungs.map((cell) => Math.round(cell.getBoundingClientRect().left))),
       ];
       lefts.sort((a, b) => a - b);
       const measured = rungs.map((cell) => {
         const rect = cell.getBoundingClientRect();
-        const chip = cell.querySelector(".site-chip");
+        const chip = cell.querySelector(MARK);
         const meaning = cell.querySelector(".site-ladders-meaning");
         const words = meaning?.getBoundingClientRect();
         return {
@@ -96,7 +99,7 @@
         row_rules: rules(rungs, ["borderBlockStartWidth", "borderBlockEndWidth"]),
         heights: [...new Set(measured.map((rung) => rung.height))],
         empty: cells
-          .filter((cell) => !cell.querySelector(".site-chip"))
+          .filter((cell) => !cell.querySelector(MARK))
           .map((cell) => round(cell.getBoundingClientRect().height)),
         rungs: measured,
       };
