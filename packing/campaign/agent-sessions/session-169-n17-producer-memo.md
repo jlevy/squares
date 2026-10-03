@@ -10,7 +10,7 @@ session:
   title: Bounded n17 producer memo retention investigation
   date: '2026-10-04'
   started_at: '2026-10-03T20:31:41Z'
-  deadline_at: '2026-10-04T00:31:41Z'
+  deadline_at: '2026-10-03T21:46:09.780424+00:00'
   branch: guzhou/n17-p01-partner-memo
   primary_bead: think-wn6x
   status: in_progress
@@ -45,7 +45,7 @@ session:
     clock_role: work
     objective: Retain unchanged baseline/profile, make one cache-lifetime change only if justified,
       compare exact objects and resource metrics.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Three candidate reads selected a frozen producer-memory profile; no duplicated
       scientific lane.
@@ -56,18 +56,45 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-ledger check
     kill_condition: Ownership overlap, invalid equivalence, resource guard, or deadline.
     fallback: Retain the measured limitation without a scientific or speedup claim.
-    outcome: null
-    evidence:
+    outcome: The frozen one-variable candidate reduced producer peak21.0% with identical A/W7
+      objects and73 passing controls. M1 landed an equivalent fix during execution; duplicate
+      implementation was removed after rebase to601bbf110. Fresh parent A reproduction is byte-identical
+      and its controls passed.
+    evidence: &id001
     - packing/campaign/explorations/X048-session-169-pilots/README.md
+    stop_reason: W5 measured decision reached; new parent ownership makes a second implementation
+      redundant.
+    next_action: Retain independent evidence and regression; certify our evidence-only layer
+      in hosted CI.
+  - workflow: review-planning-oversight
+    focus: correctness
+    recording: contemporaneous
+    clock_role: finalization
+    objective: Reconcile M1 overlap, observe required CI, repair only own deterministic failures,
+      finalize evidence and handoff.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: The bounded primary result is decided; avoid further low-information compute.
+      The four-hour ceiling is shortened prospectively to this30-minute finalization reserve
+      because the primary deliverable is decided.
+    budget_minutes: 30
+    started_at: '2026-10-03T21:16:09.780424+00:00'
+    deadline_at: '2026-10-03T21:46:09.780424+00:00'
+    expected_output: packing/campaign/explorations/X048-session-169-pilots/README.md
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Ownership overlap, invalid equivalence, resource guard, or deadline.
+    fallback: Retain the measured limitation without a scientific or speedup claim.
+    outcome: null
+    evidence: *id001
     stop_reason: null
-    next_action: Profile before any producer change.
+    next_action: Push only our layer and observe terminal required checks.
   budget:
-    wall_minutes: 240
+    wall_minutes: 74.47967373333333
     max_cycles: 8
     orientation_minutes: 10
     checkpoint_minutes: 20
     slice_minutes: 30
-    finalization_minutes: 15
+    finalization_minutes: 30
   stop_conditions:
   - No parent PR edits, merges, or force-pushes; no main merge.
   - Stop at 16 GiB per process, below 8 GiB available memory, or at a 1 GiB certificate.
@@ -167,14 +194,20 @@ session:
   checks:
   - Clean-base packing-ledger check passed at 234a07f4.
   - 'full gate: fast at 234a07f4: failed (bounded subprocess runner explicitly refuses Windows)'
+  - 73 targeted cache/split/standing-verifier tests passed on the isolated candidate; current-parent
+    repeat is retained separately.
+  - A and W7 canonical seed/node bytes, rounds and counts match; saved A checker passes without
+    producer import.
   stop_reason: null
-  next_action: Finish the frozen small W5 slice with one primary executor.
+  next_action: Finish PR325 CI and measured session closure; no additional scientific run is
+    opened.
 ---
 # Bounded producer memory investigation
 
 See [the frozen protocol](../explorations/X048-session-169-pilots/README.md) for the W3
-comparison, ownership map, acceptance, measurements, and limits. Native resource usage
-will be attached at finalization; this active record does not claim a passed full gate.
+comparison, ownership map, acceptance, measurements, and limits.
+Native resource usage will be attached at finalization; this active record does not
+claim a passed full gate.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
