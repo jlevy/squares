@@ -6,12 +6,14 @@
 from __future__ import annotations
 
 import copy
+import json
 from fractions import Fraction as Q
 from pathlib import Path
 
 import pytest
 import sympy as sp
 
+from devtools import check_n17_endpoint_feasibility as endpoint_module
 from devtools import check_n17_endpoint_features as features
 from devtools.check_n17_endpoint_feasibility import Box, _layout, symbolic_identities
 
@@ -169,19 +171,23 @@ def test_coverage_rejects_owner_loss_duplicate_corner_and_bool_label() -> None:
         features.validate_coverage(changed, walls)
 
 
-def test_tampered_frozen_prerequisite_refuses_without_target_io(
+def test_prerequisites_elsewhere_or_tampered_are_refused_without_target_io(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    root = tmp_path / "fake-root.json"
-    endpoint = tmp_path / "fake-endpoint.json"
+    """Prerequisites are named by revision and path, and their content is then checked."""
     source = tmp_path / "fake-source.json"
-    root.write_bytes(b"{}")
-    endpoint.write_bytes(b"{}")
     source.write_bytes(b"{}")
-
-    def refuse(_ref: str, _raw: bytes) -> None:
-        raise ValueError("receipt differs from frozen Git blob")
-
-    monkeypatch.setattr(features, "_frozen_bytes", refuse)
-    assert features.main([str(root), str(endpoint), "--source", str(source)]) == 2
-    assert '"criterion_passed": false' in capsys.readouterr().out
+    elsewhere = tmp_path / "fake-root.json"
+    assert features.main([str(elsewhere), str(elsewhere), "--source", str(source)]) == 2
+    assert "expected the retained" in json.loads(capsys.readouterr().out)["error"]
+    paths = []
+    for reference in (features.FROZEN_ROOT_REF, features.FROZEN_ENDPOINT_REF):
+        path = tmp_path / reference.partition(":")[2]
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"{}")
+        paths.append(str(path))
+    monkeypatch.setattr(endpoint_module, "REPO", tmp_path)
+    assert features.main([*paths, "--source", str(source)]) == 2
+    out = json.loads(capsys.readouterr().out)
+    assert out["criterion_passed"] is False
+    assert "retained" not in out["error"]

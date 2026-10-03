@@ -1,13 +1,21 @@
-"""Target-free symmetry audit controls: empty and one-unit occupancies only."""
+"""Symmetry audit controls: synthetic empty and one-unit occupancies, and the H260 replay."""
 
 from __future__ import annotations
 
+import json
 from copy import deepcopy
+from pathlib import Path
 from typing import cast
 
 import pytest
 
 from devtools import audit_grid_symmetry as audit
+
+RESULTS = Path(__file__).resolve().parents[1] / (
+    "campaign/series/series-000-smoke-and-calibration/results"
+)
+H259 = RESULTS / "exp-240-n17-mixed-capacity-census/run-001"
+H260 = RESULTS / "exp-241-n17-closed-cell-symmetry/run-001"
 
 
 def packet() -> dict[str, object]:
@@ -81,3 +89,24 @@ def test_nonintegral_numbers_and_duplicates_refused() -> None:
 def test_non_target_fixture_cannot_pass_fixed_cli_contract() -> None:
     with pytest.raises(ValueError, match="target"):
         audit.audit_payload(packet(), 25)
+
+
+def test_the_retained_h260_audit_replays_from_its_retained_inputs() -> None:
+    """Closed-form arithmetic over the two retained receipts reproduces audit.json."""
+    retained = json.loads((H260 / "audit.json").read_text())
+    assert audit.audit(H260 / "count.json", H259 / "mixed.json") == retained
+
+
+def test_identity_census_is_audited_by_content_not_bytes(tmp_path: Path) -> None:
+    census = json.loads((H259 / "mixed.json").read_text())
+    reformatted = tmp_path / "mixed.json"
+    reformatted.write_text(json.dumps(census, indent=2) + "\n")
+    result = audit.audit(H260 / "count.json", reformatted)
+    assert result["identity_count"] == 161100756
+    assert result["orbit_assignments"] == 20155518
+    with pytest.raises(ValueError, match="different grid"):
+        audit.identity_count_of(json.loads((H259 / "baseline.json").read_text()))
+    with pytest.raises(ValueError, match="different target"):
+        audit.identity_count_of(census, target=16)
+    with pytest.raises(ValueError, match="target count"):
+        audit.identity_count_of({**census, "target_assignments": 161100755})

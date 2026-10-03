@@ -1,0 +1,97 @@
+"""Micro-benchmark: the row cover (checker's indexed sweep, the verifier's area subtraction)
+on W7's step-3 rows, under Fraction, gmpy2 mpq and python-flint fmpq."""
+import json, sys, time
+from fractions import Fraction as Q
+sys.path.insert(0, "/home/user/squares/packing/src")
+from sqpack.hull_kernel import covers as CV
+from sqpack.hull_kernel.geometry import Budget, area2
+from sqpack.hull_kernel.induction import hull, convex, forbidden_regions
+from sqpack.hull_kernel.node import points
+from sqpack.hull_kernel.sweep import exact_union_cover
+D = json.load(open("bench_w7.json"))
+step = D["step"]; owner = step["owner"]
+prior = {int(k): hull(points(v)) for k, v in step["prior_owned_hulls"].items()}
+budget = Budget(time.monotonic() + 10**6, 10**9)
+rows = []
+for row in step["rows"]:
+    if not row["residual_polygons"]:
+        continue
+    domain = convex(points(row["input_domain"]))
+    if area2(domain) == 0: continue
+    core = convex(points(row["core_vertices"]))
+    forbidden = [r for r in forbidden_regions(prior, owner, core) if r]
+    collisions = [convex(points(c["vertices"])) for c in row["collision_regions"]]
+    residual = [convex(points(p)) for p in row["residual_polygons"]]
+    rows.append((domain, forbidden + collisions + residual))
+LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else len(rows)
+rows = rows[:LIMIT]
+print(f"rows={len(rows)} regions/row={sum(len(r) for _, r in rows)/len(rows):.1f}")
+
+def timed(name, fn, data):
+    t = time.perf_counter(); stats = []
+    for d, r in data: stats.append(fn(d, r))
+    dt = time.perf_counter() - t
+    print(f"{name:44s} {dt:8.3f} s  {1e3*dt/len(data):8.1f} ms/row  {str(stats[0])[:70]}")
+    return dt
+timed("checker indexed_union_cover (Fraction)", lambda d, r: CV.indexed_union_cover(d, r, budget=budget), rows)
+timed("checker fast_union_cover (Fraction)", lambda d, r: CV.fast_union_cover(d, r, budget=budget), rows)
+timed("reference exact_union_cover (Fraction)", lambda d, r: exact_union_cover(d, r, budget=budget), rows[:max(1, len(rows)//4)])
+
+# verifier-style area subtraction, generic over the number type
+def clip_closed(polygon, a, b, c):
+    out = []
+    n = len(polygon)
+    for i in range(n):
+        p, q = polygon[i], polygon[(i + 1) % n]
+        fp, fq = a * p[0] + b * p[1] - c, a * q[0] + b * q[1] - c
+        if fp <= 0: out.append(p)
+        if (fp < 0 < fq) or (fq < 0 < fp):
+            t = fp / (fp - fq)
+            out.append((p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])))
+    result = []
+    for p in out:
+        if not result or result[-1] != p: result.append(p)
+    if len(result) > 1 and result[0] == result[-1]: result.pop()
+    return result
+def planes_of(h):
+    out = []
+    for i in range(len(h)):
+        p, q = h[i], h[(i + 1) % len(h)]
+        a, b = q[1] - p[1], p[0] - q[0]
+        out.append((a, b, a * p[0] + b * p[1]))
+    return out
+def area2g(polygon):
+    if len(polygon) < 3: return 0
+    n = len(polygon)
+    return abs(sum(polygon[i][0] * polygon[(i + 1) % n][1] - polygon[(i + 1) % n][0] * polygon[i][1] for i in range(n)))
+def covered_by_area(domain, regions):
+    pieces = [domain]
+    for region in regions:
+        if len(region) < 3: continue
+        planes = planes_of(region); out = []
+        for piece in pieces:
+            rest = piece
+            for a, b, c in planes:
+                outside = clip_closed(rest, -a, -b, -c)
+                if outside and area2g(outside) > 0: out.append(outside)
+                rest = clip_closed(rest, a, b, c)
+                if not rest or area2g(rest) == 0: break
+        pieces = out
+        if not pieces: return True, 0
+    left = sum(area2g(p) for p in pieces)
+    return left == 0, len(pieces)
+timed("verifier covered_by_area (Fraction)", covered_by_area, rows)
+try:
+    from gmpy2 import mpq
+    conv = lambda poly: [(mpq(x.numerator, x.denominator), mpq(y.numerator, y.denominator)) for x, y in poly]
+    rows_q = [(conv(d), [conv(r) for r in rs]) for d, rs in rows]
+    timed("verifier covered_by_area (gmpy2 mpq)", covered_by_area, rows_q)
+    timed("checker indexed_union_cover (gmpy2 mpq)", lambda d, r: CV.indexed_union_cover(d, r, budget=budget), rows_q)
+except ImportError as e: print("no gmpy2", e)
+try:
+    from flint import fmpq
+    convf = lambda poly: [(fmpq(x.numerator, x.denominator), fmpq(y.numerator, y.denominator)) for x, y in poly]
+    rows_f = [(convf(d), [convf(r) for r in rs]) for d, rs in rows]
+    timed("verifier covered_by_area (flint fmpq)", covered_by_area, rows_f)
+    timed("checker indexed_union_cover (flint fmpq)", lambda d, r: CV.indexed_union_cover(d, r, budget=budget), rows_f)
+except ImportError as e: print("no flint", e)

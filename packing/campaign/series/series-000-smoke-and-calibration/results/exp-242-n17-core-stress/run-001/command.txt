@@ -1,0 +1,6 @@
+Working directory: packing/. Instrument devtools/check_n17_core_stress.py (uncommitted working tree; SHA-256 in instrument-sha256.txt); one worker.
+PYTHONDONTWRITEBYTECODE=1; PYTHONOPTIMIZE unset.
+ulimit -f 10240 (10 MiB per output); optional ulimit -d 1048576 (1 GiB) recorded in memory-guard.log.
+Controls: timeout --signal=TERM --kill-after=5s 300s .venv/bin/python3 -m devtools.check_n17_core_stress --controls-only > controls.json
+Target:   timeout --signal=TERM --kill-after=5s 300s .venv/bin/python3 -m devtools.check_n17_core_stress campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json campaign/series/series-000-smoke-and-calibration/results/exp-238-n17-endpoint-feasibility/run-001/certificate.json campaign/series/series-000-smoke-and-calibration/results/exp-239-n17-endpoint-features/run-001/certificate.json > certificate.json
+Wall times from bash TIMEFORMAT='%R real %U user %S sys' in controls-timing.log and timing.log.

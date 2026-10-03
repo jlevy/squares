@@ -272,11 +272,11 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | State at the cutoff |
 | --- | ---: | --- |
 | Agendas | 39 | 19 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 393 | 201 complete; 63 stopped; 71 blocked; 24 ready; 21 tentative; 13 in progress |
-| Sessions | 165 | 103 completed; 62 stopped; all terminal |
+| Commitments | 407 | 212 complete; 65 stopped; 70 blocked; 25 ready; 21 tentative; 14 in progress |
+| Sessions | 167 | 103 completed; 64 stopped; all terminal |
 | Explorations | 46 | 27 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 195 | 39 confirmed; 32 refuted; 61 blocked; 17 unresolved; 9 open; 32 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 170 | 53 accepted; 37 rejected; 52 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 203 | 43 confirmed; 33 refuted; 60 blocked; 19 unresolved; 9 open; 34 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 179 | 57 accepted; 38 rejected; 56 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 82 | 82 registered, 53 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -537,14 +537,41 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [The n = 17 Optimality Proof, Explained](docs/project/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
 | [Proof Review: wand125’s Point-Only Cover for `s(61) = 8`](docs/project/reviews/review-2026-10-02-wand125-s61-point-cover.md) | dated review record | record | retained | — |
 | [Eleven-Square Optimality Proof: The Delta for the Original Contributor](docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md) | dated review record | record | retained | — |
 | [Unified adversarial review of the tentative optimality proof for eleven squares](docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md) | dated review record | record | retained | — |
 | [Integration of GPT-6 Pro’s Adversarial Review of the Eleven-Square Optimality Proof](docs/project/reviews/review-2026-10-03-n11-gpt6-pro-review-integration.md) | dated review record | record | retained | — |
 | [Eleven-Square Optimality Paper: Adversarial Review](docs/project/reviews/review-2026-10-03-n11-optimality-paper-adversarial.md) | dated review record | record | retained | — |
 | [Review: The Site’s Documentation Cards and the Records Behind Them](docs/project/reviews/review-2026-10-01-site-documentation-records.md) | dated review record | record | retained | — |
+| [n17 Capture Feasibility by Local Radius](docs/project/reviews/review-2026-10-02-n17-capture-feasibility.md) | dated review record | record | retained | — |
+| [n17 Charge-Floor Pilot Review](docs/project/reviews/review-2026-10-02-n17-charge-floor-pilot.md) | dated review record | record | retained | — |
+| [n17 Bulk Exclusion Design](docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md) | dated review record | record | retained | — |
+| [n17 Widened Projection Theorem, Scope and Instrument](docs/project/reviews/review-2026-10-02-n17-widened-projection-scope.md) | dated review record | record | retained | — |
+| [n17 Local Theorem Modulo Sliders — Argument Review and Instrument Recipe](docs/project/reviews/review-2026-10-02-n17-local-theorem-recipe.md) | dated review record | record | retained | — |
+| [n17 Local Theorem Modulo Sliders — Independent Review of the H-261 Instrument](docs/project/reviews/review-2026-10-02-n17-local-theorem-instrument.md) | dated review record | record | retained | — |
+| [n17 Depth-Width Wall Lemma](docs/project/reviews/review-2026-10-02-n17-depth-width-wall-lemma.md) | dated review record | record | retained | — |
+| [n17 Unique-State Capacity-One Cover](docs/project/reviews/review-2026-10-02-n17-unique-state-cover.md) | dated review record | record | retained | — |
+| [n17 Kernel Adaptation Specification](docs/project/reviews/review-2026-10-02-n17-kernel-adaptation-spec.md) | dated review record | record | retained | — |
+| [n17 Local Half — Composition of the Local Theorem, the Slide Coverage and the Cover](docs/project/reviews/review-2026-10-02-n17-local-half-composition.md) | dated review record | record | retained | — |
+| [n17 W7 Closure Review](docs/project/reviews/review-2026-10-02-n17-w7-closure.md) | dated review record | record | retained | — |
+| [n17 Branch-and-Bound Certifier Review](docs/project/reviews/review-2026-10-02-n17-branch-and-bound-certifier.md) | dated review record | record | retained | — |
+| [n17 Residue Process](docs/project/reviews/review-2026-10-02-n17-residue-process.md) | dated review record | record | retained | — |
+| [n17 Capture After the Pilot](docs/project/reviews/review-2026-10-02-n17-capture-after-pilot.md) | dated review record | record | retained | — |
+| [n17 Cost Reduction by Pruning](docs/project/reviews/review-2026-10-02-n17-cost-reduction-pruning.md) | dated review record | record | retained | — |
+| [n17 Cost Reduction by Performance Engineering](docs/project/reviews/review-2026-10-02-n17-cost-reduction-performance.md) | dated review record | record | retained | — |
+| [n17 Verifier Rewrites Review](docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md) | dated review record | record | retained | — |
+| [n17 Local Theorem at a Larger Radius](docs/project/reviews/review-2026-10-03-n17-local-radius.md) | dated review record | record | retained | — |
+| [Integrity Ceremony Audit](docs/project/reviews/review-2026-10-03-integrity-ceremony-audit.md) | dated review record | record | retained | — |
+| [Session 168 Handoff: Work Stopped Mid-Flight](packing/campaign/explorations/X048-session-168-pilots/handoff/README.md) | research synthesis | record | retained | — |
+| [n17 Optimality Route After PR 265](docs/project/reviews/review-2026-10-01-n17-route-after-pr265.md) | dated review record | record | retained | — |
+| [X-048 Session 168 Pilots: Receipts](packing/campaign/explorations/X048-session-168-pilots/README.md) | research synthesis | record | retained | — |
+| [X-048 Session 167 Pilots: Receipts](packing/campaign/explorations/X048-session-167-pilots/README.md) | research synthesis | record | retained | — |
+| [X-048 Route Review: Exploratory Receipts](packing/campaign/explorations/X048-route-review/README.md) | research synthesis | record | retained | — |
 | [H259 Mixed-Capacity Census: Independent Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-240-n17-mixed-capacity-census/output-review.md) | dated review record | record | retained | — |
 | [October 1 Post-optimality Research Findings](docs/project/reviews/review-2026-10-01-post-optimality-morning.md) | dated review record | record | retained | — |
+| [H265 Catalogue Polynomial Identity: Independent Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-245-n17-catalogue-polynomial/output-review.md) | dated review record | record | retained | — |
+| [H258 Common-Core Stress: Independent Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-242-n17-core-stress/output-review.md) | dated review record | record | retained | — |
 | [H260 Closed-Cell Symmetry: Independent Output Review](packing/campaign/series/series-000-smoke-and-calibration/results/exp-241-n17-closed-cell-symmetry/output-review.md) | dated review record | record | retained | — |
 | [n17 Symmetry of Closed-Cell Assignment States](docs/project/reviews/review-2026-10-01-n17-closed-cell-symmetry.md) | dated review record | record | retained | — |
 | [n17 Mixed-Capacity Centre Cover](docs/project/reviews/review-2026-10-01-n17-mixed-capacity-cover.md) | dated review record | record | retained | — |
@@ -1420,6 +1447,108 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+[Session 167](packing/campaign/agent-sessions/session-167-n17-parallel-lanes-after-route-review.md)
+merged PR 283 onto current main and ran BC-406’s lanes, plus the follow-ups their
+results selected.
+Every verdict rests on an independent review and a clean committed-tree
+run.
+
+- **Accepted.** H-258, the common-core stress, is accepted
+  ([exp-242](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-242-h258-n17-core-stress.md)).
+  H-265 identifies the certified side with the catalogue’s irreducible degree-18
+  polynomial
+  ([exp-245](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-245-h265-n17-catalogue-polynomial.md)).
+- **Rejected.** H-262: R068’s charge at the cap excludes nothing, and one symmetric
+  linear per-cell floor vector leaves at least 30,966 orbits whatever the charge
+  ([exp-243](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-243-h262-n17-charge-floor-pilot.md)).
+- **Unresolved, each with a stated closing item.** The local minimum modulo sliders is
+  certified at radius $1/5000$ over a declared slider box, worst ratio $0.926$, but the
+  claim names the whole physical slider domain, and H-268 owes the bound
+  ([exp-244](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-244-h261-n17-local-minimum.md)).
+  A 24-cell capacity-one cover is certified with 43,593 orbits, against 7.7 million on
+  the H259 grid, but the endpoint family realises a second state through an overlapping
+  cell
+  ([exp-246](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-246-h266-n17-capacity-one-cover.md)).
+- **Replanned.** n11’s focused radii were of the n17 scale, so capture is priced as
+  logarithmic in the radius
+  ([capture review](docs/project/reviews/review-2026-10-02-n17-capture-feasibility.md)).
+  The global half’s next engine is isolated sub-pattern exclusion on the minimal cover
+  ([design review](docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md)).
+
+No bound, frontier field or open status changed.
+
+**Selected next entry:** `think-tmz6`, the BC-418 coordinator.
+It first closes H-266’s single-state item and H-268’s slide bound, then re-records H-261
+and H-266 with review.
+In parallel it builds the H-267 selector and adapts n11’s kernel as prover, with n11’s
+mask 0 as the method control, and pilots the capture contraction rate on the endpoint’s
+occupancy state. Two closing tools are already built and await review.
+One is a unique-state 24-cell cover with 43,593 orbits.
+The other proves the H-268 slide bounds $a\le21/100$, $z\ge-1/20$ and $b\le3/40$ on the
+earlier design’s square-6 cell, and must be re-run on the unique design.
+The certified slider box’s faces $a\ge0$, $b\ge0$ and $z\le1/16$ still need their own
+argument. Hosted certification of Sessions 166 and 167 passed on PR 307. In Session 168,
+H-266 is accepted on the unique-state design
+([exp-247](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-247-h266-n17-unique-state-cover.md)).
+H-268 is accepted
+([exp-248](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-248-h268-n17-local-half-composition.md)):
+square 6’s cell bounds every slide inside a widened box $B_W'$, over which the local
+theorem passes, so the local half is the capture-target theorem of the
+[composition review](docs/project/reviews/review-2026-10-02-n17-local-half-composition.md).
+H-261 stays unresolved as worded.
+The first two sub-pattern exclusions are certified and admitted
+([exp-249](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-249-h267-n17-first-certified-sub-patterns.md)):
+W7 by the kernel and A by an independent interval branch and bound, leaving 17,690
+certified orbits of 43,593. The
+[residue process review](docs/project/reviews/review-2026-10-02-n17-residue-process.md)
+plans the rest, and the [n17 explainer](docs/project/n17-optimality-explainer.md)
+explains the case from first principles.
+
+Session 168 is still open at this handoff.
+Its later results:
+- the [residue survey](packing/campaign/explorations/X048-session-168-pilots/README.md)
+  finds no surviving state feasible at the cap, and that each needs its own failing
+  sub-pattern of arity 8 to 15;
+- the first capture pilot met its falsifier, and its
+  [review](docs/project/reviews/review-2026-10-02-n17-capture-after-pilot.md) finds that
+  producer-limited;
+- standing independent verifiers now gate the certified census, and
+  [exp-250](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md)
+  admits flag 3 (arity 9) and the residue state N1 on the standing verifier’s full pass,
+  leaving 15,953 certified orbits.
+
+In flight, each tracked by a bead under `think-tmz6`: capture pilot 2 (`think-g2qn`),
+the H-264 per-state pilot (`think-e17c`), the selector’s finish stage and flag re-search
+(`think-gygy`), two cost-reduction reviews aiming at hundreds of CPU-hours
+(`think-pqya`, `think-3jp4`), certifying the remaining flags (`think-j6qy`), and closing
+the session (`think-wcqs`).
+
+#### Previous: Session 166 n17 Route Review
+
+[Session 166](packing/campaign/agent-sessions/session-166-n17-route-after-pr265.md) ran
+a W10 checkpoint on the merged PR 265 record with two Fable extra-high lanes.
+The [route review](docs/project/reviews/review-2026-10-01-n17-route-after-pr265.md)
+holds the assessment, the evidence status and the reading order for the next agent.
+Neither lane found a mathematical error.
+In exploratory checks the stalled H258 stress is valid, and the kernel of its 52
+positive rows is exactly the six slider and rattler directions, so the local theorem
+needs no second-order analysis.
+Its first-order radius estimate is $3\times10^{-4}$. The global half has a census and no
+exclusions; settled-case cuts alone leave about 7.7 million of the 20,155,518 orbits.
+The conditional minimum holds only for sides in $[4.675,4.676]$ and cannot be the
+terminal theorem; the morning report and projection review carry dated scope notes.
+No bound, frontier field or verdict changed.
+
+Its selected entry was `think-c7kv`, the BC-406 coordinator.
+It dispatches three disjoint lanes in parallel: BC-402 repairs the H258 identity proof
+(then BC-407 proves H-261, the local minimum modulo the slider cone); BC-408 measures
+H-262, the survivors under settled-case cuts and conditional charge floors; and BC-409
+identifies the endpoint with the catalogue polynomial (H-265). BC-410 and BC-411, which
+now owns the re-scoped `think-11ma`, wait for BC-408. Session 166 stops with hosted
+certification pending under `think-od9c`.
+
+#### Previous: Session 165 Post-optimality Overnight
+
 [Session 165](packing/campaign/agent-sessions/session-165-post-optimality-overnight.md)
 completed seven independently reviewed n17 rounds: exp-235 through exp-239, exp-240 and
 exp-241. The known packing now has a certified exact chart endpoint and an attained
@@ -1433,11 +1562,9 @@ H258 stopped after three preparation failures without a target stress verdict.
 The [morning report](docs/project/reviews/review-2026-10-01-post-optimality-morning.md)
 records the mathematics, independent-checker boundaries, costs and remaining gaps.
 
-**Selected next entry:** `think-11ma`, preregister a small exact geometric-exclusion
-pilot below the certified endpoint.
-Keep all orientations and closed-cell assignments; measure certified exclusions and
-unresolved cases before attempting a broad census.
-The overnight execution is complete, and no successor is launched by this handoff.
+Session 165 selected `think-11ma`, a small exact geometric-exclusion pilot below the
+certified endpoint. Session 166 re-scoped it to a cap at or above the endpoint, as
+BC-411.
 
 #### Previous n11 Intake and Verification
 
@@ -5382,9 +5509,17 @@ round that names the hypothesis, control roles included.
 | [H-255](packing/campaign/hypotheses/H-255-n17-exact-polynomial-root.md) | confirmed | Exact existence and uniqueness of the contact-chart root in its fixed rational box; endpoint packing feasibility and capture remain separate | 1 | 1s wall |
 | [H-256](packing/campaign/hypotheses/H-256-n17-exact-endpoint-feasibility.md) | confirmed | Exact endpoint packing at the H255 root with fixed interior sliders; all68 wall and136 pair obligations certified; global capture remains open | 1 | 43s wall |
 | [H-257](packing/campaign/hypotheses/H-257-n17-endpoint-contact-features.md) | confirmed | Complete exact-root feature inventory, independently audited:168owner-axis options,60active-wall corners,9tangent offsets | 1 | 42s wall |
-| [H-258](packing/campaign/hypotheses/H-258-n17-common-core-stress.md) | blocked | Fixed common-core stress; instrument stopped after three symbolic preparation failures, before target use | 0 | — |
+| [H-258](packing/campaign/hypotheses/H-258-n17-common-core-stress.md) | confirmed | Fixed common-core stress; first-order stationarity in both corner branches, after a polynomial-ring repair of the stalled instrument | 1 | exp-242 accepted: 52 exact identities; six zero and 52 positive weights |
 | [H-259](packing/campaign/hypotheses/H-259-n17-mixed-capacity-cover.md) | confirmed | Exact mixed-capacity centre cover and finite occupancy census; no geometric exclusion | 1 | exp-240 accepted: 161,100,756 versus 8,597,496,600 |
 | [H-260](packing/campaign/hypotheses/H-260-n17-closed-cell-symmetry.md) | confirmed | Closed-assignment D4 occupancy quotient; no geometric exclusion | 1 | exp-241 accepted: 20,155,518 orbits |
+| [H-261](packing/campaign/hypotheses/H-261-n17-local-minimum-modulo-sliders.md) | unresolved | The n17 endpoint is a strict local minimum modulo its slider directions; certified at r = 1/5000 over a declared slider box, but the claim names the whole physical slider domain | 1 | exp-244 unresolved: worst ratio 0.925818 on the declared box; H-268 owes the slide bound |
+| [H-262](packing/campaign/hypotheses/H-262-n17-conditional-charge-occupancy-census.md) | refuted | Settled-case cuts and per-cell charge floors leave at most 10^4 of the 20,155,518 occupancy orbits; one symmetric linear floor vector leaves at least 30,966 by theorem | 1 | exp-243 rejected: R068 at U excludes nothing; 7,703,312 orbits survive the cuts |
+| [H-263](packing/campaign/hypotheses/H-263-n17-endpoint-adapted-cover.md) | open question | Which closed cover keeps the whole endpoint family inside one occupancy state and leaves the fewest survivors (BC-410) | 0 | — |
+| [H-264](packing/campaign/hypotheses/H-264-n17-geometric-exclusion-cost-per-leaf.md) | open question | The cost of one exact geometric exclusion on a uniform residue sample at a cap at or above the endpoint; re-scopes think-11ma (BC-411) | 0 | — |
+| [H-265](packing/campaign/hypotheses/H-265-n17-catalogue-polynomial-identity.md) | confirmed | The certified chart endpoint is a root of the catalogue’s irreducible degree-18 polynomial | 1 | exp-245 accepted: identical with unit 1; irreducible over Q |
+| [H-266](packing/campaign/hypotheses/H-266-n17-minimal-capacity-one-cover.md) | confirmed | A D4-symmetric capacity-one cover of at most 25 cells holds the endpoint family in one occupancy state; the unique-state 24-cell cover replaces the H259 grid | 2 | exp-247 accepted: 43,593 orbits; unique state, margin 0.002112 |
+| [H-267](packing/campaign/hypotheses/H-267-n17-isolated-sub-pattern-residue.md) | unresolved | Isolated sub-pattern certificates of arity at most seven leave at most 10^4 orbits on the H-266 cover; the selector flags 44 classes and projects 5,084 orbits | 2 | exp-250 unresolved: SW9 (arity 9) and the state N1 admitted on the standing verifier’s full pass; 15,953 certified orbits |
+| [H-268](packing/campaign/hypotheses/H-268-n17-local-theorem-slider-coverage.md) | confirmed | With square 6 in its H-266 cell, the slides of squares 5 and 13 stay inside the box exp-244 certifies; b can go negative, so the local theorem was re-run over the widened box B_W′ | 1 | exp-248 accepted: a ≤ 23/200, z ≥ −49/1000, b ≥ −1.685r; B_W′ worst ratio 0.925931 |
 
 ### Confirmed
 
@@ -5554,9 +5689,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Rollups | count | turns | tool calls | errors | one-off code | wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| claimed by a session | 254 | 63,978 | 35,394 | 773 | 5,088 | 557.08 h |
+| claimed by a session | 276 | 66,468 | 36,803 | 798 | 5,386 | 574.78 h |
 | claimed by none | 65 | 14,196 | 8,149 | 185 | 1,184 | 67.13 h |
-| **measured** | **319** | **78,174** | **43,543** | **958** | **6,272** | **624.21 h** |
+| **measured** | **341** | **80,664** | **44,952** | **983** | **6,570** | **641.91 h** |
 
 | Session | Phases | Rollups | Turns | Tool calls | Errors | Wall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -5612,7 +5747,9 @@ in separate tables: their units differ, and the same work can appear in both.
 | [session-159](packing/campaign/agent-sessions/session-159-n17-guzhou-r052-intake.md) | 2 | 6 | 844 | 484 | 10 | 2.34 h |
 | [session-160](packing/campaign/agent-sessions/session-160-n17-4640020-evand-wand125-intake.md) | 3 | 28 | 5,648 | 3,354 | 161 | 42.62 h |
 | [session-161](packing/campaign/agent-sessions/session-161-wand125-update-and-sept-28-intake.md) | 2 | 10 | 2,617 | 1,468 | 27 | 11.09 h |
-| *shared by 52 sessions* | — | 8 | 25,382 | 13,685 | 285 | 355.07 h |
+| [session-166](packing/campaign/agent-sessions/session-166-n17-route-after-pr265.md) | 2 | 4 | 515 | 342 | 8 | 5.02 h |
+| [session-167](packing/campaign/agent-sessions/session-167-n17-parallel-lanes-after-route-review.md) | 2 | 18 | 1,975 | 1,067 | 17 | 12.68 h |
+| *shared by 54 sessions* | — | 8 | 25,382 | 13,685 | 285 | 355.07 h |
 
 | Codex interval receipt | declaring sessions | model responses | agent time | active union | wall window | live lower bound |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
@@ -5689,9 +5826,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 111 |
+| measured | 113 |
 | unmeasured | 54 |
-| **total** | **165** |
+| **total** | **167** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -5707,9 +5844,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 170 rounds registered in `series-000`.
+There are 179 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 4020.8 wall-minutes.
+They record 2512.1 agent-minutes and 4072.4 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -5921,6 +6058,15 @@ archive beside it.
 | [exp-239](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-239-h257-n17-endpoint-features.md) | 17 | target | H-257 | Exact owner-axis and active-wall feature inventory | Allfrozen counts, identities andstrictsigns pass;175interval records independently matched | accepted |
 | [exp-240](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-240-h259-n17-mixed-capacity-census.md) | 17 | target | H-259 | Mixed-capacity complete centre cover and exact census | 161,100,756 mixed patterns versus 8,597,496,600 baseline; independent audit | accepted |
 | [exp-241](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-241-h260-n17-closed-cell-symmetry.md) | 17 | target | H-260 | Closed-assignment D4 census | 20,155,518 orbits; all eight fixed counts independently agree | accepted |
+| [exp-242](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-242-h258-n17-core-stress.md) | 17 | target | H-258 | Polynomial-ring identity proof and 256-bit outward weight bounds for the fixed common-core stress | All 52 identities exact; six zero and 52 positive weights; independent review and clean replay | accepted |
+| [exp-243](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-243-h262-n17-charge-floor-pilot.md) | 17 | target | H-262 | One-sided charge-floor pilot on the H259 grid with the s(6) and s(10) cuts | R068 at U excludes nothing: 7,703,312 orbits survive; symmetric ceiling 30,966 | rejected |
+| [exp-244](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-244-h261-n17-local-minimum.md) | 17 | target | H-261 | Focused-rectangle ratio test modulo sliders with per-cell affine duals over a declared slider box | All 90 coordinates pass at r = 1/5000, worst 0.925818; the certified box does not cover the claim’s physical slider domain | unresolved |
+| [exp-245](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-245-h265-n17-catalogue-polynomial.md) | 17 | target | H-265 | Exact resultant identification of the certified side with the catalogue polynomial | Identical up to unit 1; irreducible; second elimination route agrees | accepted |
+| [exp-246](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-246-h266-n17-capacity-one-cover.md) | 17 | target | H-266 | Exact 24-cell D4-symmetric capacity-one cover with the depth-width wall lemma | 346,104 states, 43,593 orbits; the family realises two states through an overlapping side cell | unresolved |
+| [exp-247](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-247-h266-n17-unique-state-cover.md) | 17 | target | H-266 | Unique-state 24-cell capacity-one cover with an independent review | 43,593 orbits; family in one unique state, margin 0.002112 | accepted |
+| [exp-248](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-248-h268-n17-local-half-composition.md) | 17 | target | H-268 | Exact slide bounds from square 6’s cover cell, and the local theorem over the box they need | Slides certified inside B_W′; the local theorem passes over B_W′ at r = 1/5000, worst 0.925931 | accepted |
+| [exp-249](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-249-h267-n17-first-certified-sub-patterns.md) | 17 | target | H-267 | Two flagged sub-patterns certified by two independent provers, each re-proved in full by an independent verifier | W7 and A forbidden at U; 17,690 certified orbits, endpoint surviving | unresolved |
+| [exp-250](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md) | 17 | target | H-267 | Flag 3 at arity 9 and the residue state N1, closed by the kernel and admitted on the standing verifier’s full pass, nothing re-run | SW9 and N1 forbidden at U; 15,953 certified orbits, endpoint surviving | unresolved |
 
 ### Cost and provenance
 
@@ -6096,10 +6242,19 @@ archive beside it.
 | exp-239 | 180 seconds; one worker | 41.80 s | — | criterion | `b34801483`; symbolic24.51s, interval andformatting16.09s |
 | exp-240 | 30 seconds; one worker | 0.35s | — | criterion | Full independent census agreement; geometry exclusions remain open |
 | exp-241 | 30 seconds; one worker | 0.14s | — | criterion | IndependentcompleteD4census; no geometricexclusion |
+| exp-242 | 300 seconds; one worker | 30.3 s | — | criterion | `2fbf8d293`; clean replay of run-001, identical outputs |
+| exp-243 | 900 seconds; two workers | 133 s | — | criterion | `1a8a5e4a5`; one-sided pilot, clean replay identical |
+| exp-244 | 600 seconds; one worker | 15.2 s | — | criterion | `e91bd8597`; clean run at 603d5cb3, 93 cells |
+| exp-245 | 60 seconds; one worker | 0.75 s | — | criterion | `603d5cb36`; clean run, receipt byte-identical to the lane’s |
+| exp-246 | 60 seconds; one worker | 0.77 s | — | criterion | `e1f8b14b4`; clean run at 603d5cb3 |
+| exp-247 | 120 seconds; one worker | 1.0 s | — | criterion | `0dabde129`; clean run at 37b5fc2f |
+| exp-248 | 900 seconds per run; one worker | 27.4 s | — | criterion | `9c26793c1`; two clean runs at f8c1246b |
+| exp-249 | 1800 seconds per run; one worker | 2055.6 s | — | criterion | `15df68ab1`; two clean runs at 15df68ab |
+| exp-250 | 7000 seconds per verification; one worker | 836.0 s | — | criterion | `fd2c9602e`; two full verifications, at fd2c9602e and ae4f5fb4 |
 
-### What the 170 rounds jointly establish
+### What the 179 rounds jointly establish
 
-The 170 rounds use 2512.1 agent-minutes and 4020.8 wall-minutes under the campaign’s
+The 179 rounds use 2512.1 agent-minutes and 4072.4 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

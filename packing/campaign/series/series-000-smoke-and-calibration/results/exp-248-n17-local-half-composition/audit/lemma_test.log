@@ -1,0 +1,8 @@
+r=0.3: 200000 samples below the bound, 0 disjoint (must be 0); least overlap depth 3.712e-03; sharp case separation -2.22e-16 (0), just below -9.55e-10 (<0)
+   least D with disjoint interiors over turn corners: 0.953950726655 at turns (0.3, 0.3); sec r + T tan r = 0.953950726655
+r=0.1: 200000 samples below the bound, 0 disjoint (must be 0); least overlap depth 3.833e-03; sharp case separation -2.22e-16 (0), just below -9.95e-10 (<0)
+   least D with disjoint interiors over turn corners: 0.974920516775 at turns (0.1, 0.1); sec r + T tan r = 0.974920516775
+r=0.01: 200000 samples below the bound, 0 disjoint (must be 0); least overlap depth 2.228e-04; sharp case separation -1.11e-16 (0), just below -1.00e-09 (<0)
+   least D with disjoint interiors over turn corners: 0.997049902079 at turns (0.01, 0.01); sec r + T tan r = 0.997049902079
+r=0.0002: 100000 samples below the bound, 0 disjoint (must be 0); least overlap depth 4.437e-05; sharp case separation -2.22e-16 (0), just below -1.00e-09 (<0)
+   least D with disjoint interiors over turn corners: 0.999940019999 at turns (0.0002, 0.0002); sec r + T tan r = 0.999940019999

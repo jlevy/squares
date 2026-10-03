@@ -1,0 +1,1 @@
+ulimit -d 1048576 applied (1 GiB data segment)

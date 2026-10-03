@@ -1,0 +1,26 @@
+side S1 (unique design): d=93/100 w=257/375
+  root c in [0.747224294478, 0.747224294478] theta=41.6495deg genuine: G in [-0.003480180917, -0.003480180917]
+  method A exact max G in [-0.003480180917, -0.003480180917]
+  method B mesh: max G >= -0.003480181, rigorous upper bound -0.003419011
+  => max G < 0: True (capacity one); mesh agrees: True
+corner (unique design): d=79/100 w=79/100
+  root c in [0.536380910549, 0.536380910549] theta=57.5624deg genuine: G in [-0.011526124330, -0.011526124330]
+  method A exact max G in [-0.011526124330, -0.011526124330]
+  method B mesh: max G >= -0.011526124, rigorous upper bound -0.011465649
+  => max G < 0: True (capacity one); mesh agrees: True
+side S0/S2: d=911/1000 w=529/750
+  root c in [0.705659434912, 0.705659434912] theta=45.1172deg genuine: G in [-0.003525306569, -0.003525306569]
+  method A exact max G in [-0.003525306569, -0.003525306569]
+  method B mesh: max G >= -0.003525307, rigorous upper bound -0.003464118
+  => max G < 0: True (capacity one); mesh agrees: True
+control corner 4/5: d=4/5 w=4/5
+  root c in [0.539300374479, 0.539300374479] theta=57.3640deg genuine: G in [0.002282764068, 0.002282764068]
+  method A exact max G in [0.002282764068, 0.002282764068]
+  method B mesh: max G >= 0.002282764, rigorous upper bound 0.002343632
+  => max G < 0: False (NOT proved); mesh agrees: True
+control side 911/1000 x 3/4: d=911/1000 w=3/4
+  root c in [0.665746847657, 0.665746847657] theta=48.2604deg genuine: G in [0.029009911650, 0.029009911650]
+  method A exact max G in [0.029009911650, 0.029009911650]
+  method B mesh: max G >= 0.029009912, rigorous upper bound 0.029071978
+  => max G < 0: False (NOT proved); mesh agrees: True
+ALL DESIGN CELLS PASS, CONTROLS REFUSED: True

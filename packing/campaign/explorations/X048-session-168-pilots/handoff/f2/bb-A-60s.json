@@ -1,0 +1,209 @@
+{
+  "schema": "n17-subpattern-bb-pilot/v1",
+  "status": "pilot second certifier: a certified verdict is an exact Farkas-checked exhaustion of the pose space, replayable by rerunning; not yet a record",
+  "label": "",
+  "design": "ring-3-voronoi-8-tabbed-unique",
+  "cap": "1169/250",
+  "pattern": [
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+  ],
+  "source": {
+    "cells": [
+      "interior-SW",
+      "interior-NW",
+      "interior-W",
+      "interior-S",
+      "interior-N",
+      "interior-SE"
+    ]
+  },
+  "control": false,
+  "parameters": {
+    "theta0": 0.4,
+    "floor": 1e-06,
+    "merge_gap": 0.0,
+    "max_seconds": 60.0,
+    "max_nodes": null,
+    "split_ratio": 0.25,
+    "obbt_rounds": 3
+  },
+  "module_sha256": "f8da95e8dbf6b06b9681b02b3e5b06b2fdfb87d77f63b1f638d3b068d570b656",
+  "verdict": "unresolved-at-budget",
+  "nodes": 1778,
+  "leaves": 896,
+  "open_at_stop": 11,
+  "max_depth": 29,
+  "prune_reasons": {
+    "disc": 423,
+    "lp": 214,
+    "pair": 259
+  },
+  "branches": {
+    "angle": 787,
+    "pair": 95
+  },
+  "farkas_failures": 0,
+  "closed_tree_share": 0.017985026041666678,
+  "closures_by_pair": {
+    "disc": {
+      "interior-S|interior-SE": 380.0,
+      "interior-W|interior-N": 28.0,
+      "interior-W|interior-S": 7.0,
+      "interior-SW|interior-S": 4.0,
+      "interior-NW|interior-W": 3.0,
+      "interior-SW|interior-W": 1.0
+    },
+    "lp": {
+      "interior-W|interior-N": 41.655,
+      "interior-SW|interior-W": 38.303,
+      "interior-SW|interior-S": 30.427,
+      "interior-S|interior-SE": 26.428,
+      "cells": 20.735,
+      "interior-W|interior-S": 17.487,
+      "interior-NW|interior-W": 16.163,
+      "interior-NW|interior-N": 14.224
+    },
+    "pair": {
+      "interior-S|interior-SE": 112.0,
+      "interior-SW|interior-S": 43.0,
+      "interior-SW|interior-W": 38.0,
+      "interior-W|interior-N": 30.0,
+      "interior-NW|interior-N": 14.0,
+      "interior-NW|interior-W": 12.0,
+      "interior-W|interior-S": 10.0
+    }
+  },
+  "wall_seconds": 60.004,
+  "cpu_seconds": 48.971,
+  "stopped_at": null,
+  "smallest_unresolved": {
+    "depth": 24,
+    "angles": [
+      [
+        0.4,
+        0.4981747704246811
+      ],
+      [
+        0.4,
+        0.4981747704246811
+      ],
+      [
+        0.4,
+        0.4981747704246811
+      ],
+      [
+        1.774446785945535,
+        1.9707963267948971
+      ],
+      [
+        0.4981747704246811,
+        0.5963495408493622
+      ],
+      [
+        0.4,
+        0.7926990816987243
+      ]
+    ],
+    "angles_degrees": [
+      [
+        22.918312,
+        28.543312
+      ],
+      [
+        22.918312,
+        28.543312
+      ],
+      [
+        22.918312,
+        28.543312
+      ],
+      [
+        101.668312,
+        112.918312
+      ],
+      [
+        28.543312,
+        34.168312
+      ],
+      [
+        22.918312,
+        45.418312
+      ]
+    ],
+    "max_angle_width": 0.39269908169872425,
+    "centre_boxes": {
+      "interior-SW": [
+        1.4109999999999998,
+        1.4474508997371929,
+        1.4109999999999998,
+        1.4834184430139634
+      ],
+      "interior-NW": [
+        1.4109999999999998,
+        1.6026133034667105,
+        3.1214955381401848,
+        3.265
+      ],
+      "interior-W": [
+        1.9882232363445167,
+        2.079682451824061,
+        2.333615441706407,
+        2.452839043256031
+      ],
+      "interior-S": [
+        2.412238574902338,
+        2.464628392581201,
+        1.43,
+        1.5071810617559558
+      ],
+      "interior-N": [
+        2.6368174433412133,
+        2.6780000000000004,
+        3.1885299184911178,
+        3.2460000000000004
+      ],
+      "interior-SE": [
+        3.2268607127396343,
+        3.265,
+        1.9434089641333252,
+        1.9995960404735023
+      ]
+    },
+    "windows": {
+      "interior-SW|interior-W": [
+        0.39999999999999997,
+        1.1853981633974489
+      ],
+      "interior-NW|interior-W": [
+        5.112388980384688,
+        5.89778714378214
+      ],
+      "interior-W|interior-S": [
+        4.32699081698724,
+        5.308738521234054
+      ]
+    },
+    "lp_depth": -0.006574275015531172,
+    "lp_point": [
+      1.417574275015531,
+      1.417574275015531,
+      1.417574275015531,
+      3.158674723456351,
+      2.051588414483763,
+      2.3585517787011057,
+      2.4414647682699786,
+      1.436574275015531,
+      2.6702227587324328,
+      3.2394257249844682,
+      3.2584257249844684,
+      1.9909492113292564
+    ],
+    "undecided_pairs": 3,
+    "midpoint_pose_violation": 0.13631480325683754
+  }
+}

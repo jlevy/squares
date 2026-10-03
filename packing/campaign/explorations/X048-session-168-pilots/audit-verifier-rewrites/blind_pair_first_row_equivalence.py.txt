@@ -1,0 +1,48 @@
+"""Is the first live partner row's collision set the tightest on the blind pair?
+
+For every row with collision regions at every step: clip the required domain by the
+first live cover's facets (the reviewed hull form) and test the clipped polygon's
+vertices against every later cover's facets. Containment everywhere means a verifier
+that checks only the first live row is equivalent to the full one on this certificate.
+"""
+
+from __future__ import annotations
+
+import sys
+from fractions import Fraction as Q
+
+sys.path.insert(0, "/home/user/squares/packing")
+sys.path.insert(0, "/home/user/squares/packing/tests")
+
+import test_verify_n17_certificates as t  # noqa: E402
+from devtools import verify_n17_kernel_certificate as v  # noqa: E402
+
+seed, node = t.blind_pair_objects()
+rows_checked = 0
+not_contained = 0
+for si in range(len(node["steps"])):
+    step = node["steps"][si]
+    state = t.blind_state(node, si)
+    partners = v.check_partners(state, step, si)
+    for ri, row in enumerate(step["rows"]):
+        if not row["collision_regions"]:
+            continue
+        core = v.hull(t.decode(row["core_vertices"]))
+        prior = state.rows[step["owner"]][ri]
+        lo, hi = Q(row["interval"][0]), Q(row["interval"][1])
+        required = v.hull(v.intersect_convex(list(prior.outer), v.wall_box(lo, hi, Q(3))))
+        for item in row["collision_regions"]:
+            covers = partners[item["partner"]]
+            per_cover = [t.facet_bounds(c, core) for c in covers]
+            first = list(required)
+            for a, b, bound in per_cover[0]:
+                first = v.clip_closed(first, a, b, bound)
+            first = v.hull(first)
+            rows_checked += 1
+            inside_all = all(
+                a * x + b * y <= bound for facets in per_cover[1:] for a, b, bound in facets for x, y in first
+            )
+            if not inside_all:
+                not_contained += 1
+                print("counterexample at step", si, "row", ri, "partner", item["partner"], "live covers", len(covers))
+print({"regions": rows_checked, "first_row_set_not_contained_in_all_others": not_contained})

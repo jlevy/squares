@@ -1,0 +1,31 @@
+{
+ "classes": 27,
+ "differing": [],
+ "does_not_reproduce_sweep": [],
+ "identical": 21,
+ "reached_full": 21,
+ "reached_full_by_status": {
+  "flagged": {
+   "attempts_scratch": 10492,
+   "attempts_skipped": 1391,
+   "classes": 15,
+   "cpu_seconds_resumed": 1084.7,
+   "cpu_seconds_scratch": 1225.3,
+   "saved_share": 0.1147,
+   "seconds_resumed": 1140.7,
+   "seconds_scratch": 1282.0
+  },
+  "placed": {
+   "attempts_scratch": 2876,
+   "attempts_skipped": 558,
+   "classes": 6,
+   "cpu_seconds_resumed": 305.4,
+   "cpu_seconds_scratch": 370.7,
+   "saved_share": 0.1762,
+   "seconds_resumed": 526.1,
+   "seconds_scratch": 624.2
+  }
+ },
+ "reproduces_sweep": 27,
+ "results": "packing/campaign/explorations/X048-session-168-pilots/receipts/residue-universe/resume-check-chunk61.jsonl"
+}

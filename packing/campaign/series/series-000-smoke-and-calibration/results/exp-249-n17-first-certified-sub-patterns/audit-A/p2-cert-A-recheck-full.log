@@ -1,0 +1,4 @@
+loaded 41598 nodes from 84 chunks, hashes ok 9.9 s {'complete': True, 'leaves': 21215, 'nodes': 41598, 'verdict': 'certified-infeasible'}
+tree ok (T1, T2 structure, T3 leaves): {'lp': 4504, 'disc': 10032, 'pair': 6679} leaves 21215
+sample of 84 chunks, 41598 nodes: farkas 4504, bounds 639609, disc 10032, cuts 324934 all re-verified exactly in 475.4 s
+exit 0

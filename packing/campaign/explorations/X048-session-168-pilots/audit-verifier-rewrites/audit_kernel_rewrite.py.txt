@@ -1,0 +1,461 @@
+"""Lane R6's differential audit of the kernel verifier's homogeneous-integer forms.
+
+Run from packing/ with the project interpreter:
+
+    .venv/bin/python3 <this file> [--module PATH] [--trials N] [--seed S]
+
+`--module` names the verifier file to audit (a mutant, say); the default is the
+committed `devtools/verify_n17_kernel_certificate.py`. Four audits, each against a method
+that shares no code with the thing audited:
+
+  facets   `difference_facets` (edge merge) against `planes_of(minkowski_diff(..))` (the
+           reviewed version's hull form), and against a brute-force check that every
+           vertex difference satisfies every facet and every facet is tight, with random
+           points near the hull classified both ways.
+  sweep    `covered_by_sweep` against `covered_by_area` (the reviewed version's form) and
+           against point sampling of the leftover pieces, on random tilings and on
+           adversarial constructions: slivers of width 2^-40 and 2^-60, vertical edges,
+           a lens hidden strictly between two events, fans, point contacts, huge
+           denominators, exact covers, a domain shrunk at one vertex.
+  between  the continued-fraction probe lies strictly inside, on Farey neighbours with
+           huge terms (where only the mediant's denominator or larger can fit).
+  section  `section_covered` against a brute-force closed-interval cover.
+
+Prints one JSON line per audit and a final verdict; exit status 1 on any disagreement.
+"""
+
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import json
+import math
+import random
+import sys
+import time
+from fractions import Fraction as Q
+from pathlib import Path
+from types import ModuleType
+from typing import Any
+
+Point = tuple[Q, Q]
+
+
+def load(path: Path) -> ModuleType:
+    spec = importlib.util.spec_from_file_location("audited_kernel_verifier", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module  # dataclasses resolve string annotations by module
+    spec.loader.exec_module(module)
+    return module
+
+
+# ---------------------------------------------------------------------------
+# facets
+# ---------------------------------------------------------------------------
+
+
+def canonical_plane(a: Q, b: Q, c: Q) -> tuple[int, int, Q]:
+    scale = math.lcm(a.denominator, b.denominator)
+    ai, bi = int(a * scale), int(b * scale)
+    g = math.gcd(ai, bi)
+    return ai // g, bi // g, c * scale / g
+
+
+def random_convex(rng: random.Random, v: ModuleType, kind: str) -> list[Point]:
+    """A strictly convex polygon with at least three vertices, of the named kind."""
+    while True:
+        if kind == "grid":
+            pts = [(Q(rng.randint(-20, 20), 64), Q(rng.randint(-20, 20), 64)) for _ in range(8)]
+        elif kind == "fine":
+            d = 2**30
+            pts = [(Q(rng.randint(-d, d), d), Q(rng.randint(-d, d), d)) for _ in range(6)]
+        elif kind == "oddden":
+            d = 2**20 * 3**5 * 7**3
+            pts = [(Q(rng.randint(-d, d), d), Q(rng.randint(-d, d), d)) for _ in range(5)]
+        elif kind == "thin":
+            # Nearly collinear: a long thin sliver with a tiny bulge.
+            n = rng.randint(3, 6)
+            pts = [(Q(i, n), Q(rng.randint(0, 3), 2**40) * (1 if i % 2 else -1)) for i in range(n + 1)]
+        elif kind == "tiny-edge":
+            base = [(Q(0), Q(0)), (Q(1), Q(0)), (Q(1), Q(1)), (Q(0), Q(1))]
+            e = Q(1, 2**50)
+            pts = [*base, (Q(1) + e, Q(1, 2)), (Q(1, 2), Q(-1) * e + 0)]
+        elif kind == "regular":
+            n = rng.randint(3, 9)
+            pts = [(Q(round(math.cos(2 * math.pi * k / n) * 2**20), 2**20),
+                    Q(round(math.sin(2 * math.pi * k / n) * 2**20), 2**20)) for k in range(n)]
+        else:
+            raise ValueError(kind)
+        h = v.hull(pts)
+        if len(h) >= 3 and v.area2(h) > 0:
+            return h
+
+
+def facet_audit(v: ModuleType, rng: random.Random, trials: int) -> dict[str, Any]:
+    kinds = ["grid", "fine", "oddden", "thin", "tiny-edge", "regular"]
+    square = [(Q(-1, 4), Q(-1, 4)), (Q(1, 4), Q(-1, 4)), (Q(1, 4), Q(1, 4)), (Q(-1, 4), Q(1, 4))]
+    pairs: list[tuple[list[Point], list[Point]]] = [
+        (square, square),  # all directions merge pairwise
+        (square, [(x / 3, y / 3) for x, y in square]),
+        (square, [(-x, -y) for x, y in square]),  # core = -partner
+        (square, v.hull([(Q(0), Q(0)), (Q(1, 2), Q(0)), (Q(0), Q(1, 2))])),
+        # an edge of the core exactly parallel to an edge of the partner, different lengths
+        (v.hull([(Q(0), Q(0)), (Q(2), Q(0)), (Q(1), Q(1))]), v.hull([(Q(0), Q(0)), (Q(1), Q(0)), (Q(0), Q(1))])),
+        # a core that is the partner rotated by a quarter turn
+        (v.hull([(Q(0), Q(0)), (Q(3), Q(1)), (Q(1), Q(2))]), v.hull([(Q(0), Q(0)), (Q(-1), Q(3)), (Q(-2), Q(1))])),
+    ]
+    for _ in range(trials):
+        pairs.append((random_convex(rng, v, rng.choice(kinds)), random_convex(rng, v, rng.choice(kinds))))
+    disagreements: list[str] = []
+    facet_total = 0
+    for index, (partner, core) in enumerate(pairs):
+        difference = v.minkowski_diff(partner, core)
+        reference = {canonical_plane(a, b, c) for a, b, c in v.planes_of(difference)}
+        facets = v.difference_facets(tuple(v.homogeneous(p) for p in partner), tuple(v.homogeneous(p) for p in core))
+        mine = {(nx, ny, Q(hn, hd)) for nx, ny, hn, hd in facets}
+        facet_total += len(facets)
+        if mine != reference or len(facets) != len(reference):
+            disagreements.append(f"pair {index}: facet sets differ ({len(mine)} vs {len(reference)})")
+            continue
+        # Brute force: containment and tightness of every facet over the vertex differences.
+        diffs = [(a[0] - b[0], a[1] - b[1]) for a in partner for b in core]
+        for nx, ny, hn, hd in facets:
+            h = Q(hn, hd)
+            values = [nx * d[0] + ny * d[1] for d in diffs]
+            if max(values) != h:
+                disagreements.append(f"pair {index}: facet ({nx},{ny}) not tight or violated")
+                break
+        if not all(hd > 0 for *_, hd in facets):
+            disagreements.append(f"pair {index}: a facet denominator is not positive")
+        # Random points near the boundary, classified by the facets and by the hull planes.
+        planes = v.planes_of(difference)
+        for _ in range(20):
+            a, b = rng.sample(range(len(difference)), 2) if len(difference) > 1 else (0, 0)
+            t = Q(rng.randint(0, 2**20), 2**20)
+            q = (difference[a][0] + t * (difference[b][0] - difference[a][0]),
+                 difference[a][1] + t * (difference[b][1] - difference[a][1]))
+            q = (q[0] + Q(rng.randint(-2, 2), 2**45), q[1] + Q(rng.randint(-2, 2), 2**45))
+            by_planes = all(pa * q[0] + pb * q[1] <= pc for pa, pb, pc in planes)
+            qx, qy, qz = v.homogeneous(q)
+            by_facets = all((nx * qx + ny * qy) * hd <= hn * qz for nx, ny, hn, hd in facets)
+            if by_planes != by_facets:
+                disagreements.append(f"pair {index}: a point is classified differently")
+                break
+    return {"audit": "facets", "pairs": len(pairs), "facets": facet_total, "disagreements": disagreements}
+
+
+# ---------------------------------------------------------------------------
+# sweep
+# ---------------------------------------------------------------------------
+
+
+def tiling(v: ModuleType, rng: random.Random, domain: list[Point], cuts: int) -> list[list[Point]]:
+    pieces = [domain]
+    for _ in range(cuts):
+        a, b = Q(rng.randint(-5, 5)), Q(rng.randint(-5, 5))
+        if a == 0 and b == 0:
+            continue
+        inside = rng.choice(domain)
+        c = a * inside[0] + b * inside[1] + Q(rng.randint(-3, 3), 128)
+        out: list[list[Point]] = []
+        for piece in pieces:
+            for sign in (1, -1):
+                part = v.clip_closed(piece, sign * a, sign * b, sign * c)
+                if len(part) >= 3 and v.area2(part) > 0:
+                    out.append(v.hull(part))
+        pieces = out
+    return pieces
+
+
+def rect(x0: Q, x1: Q, y0: Q, y1: Q) -> list[Point]:
+    return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+
+
+def shrink_toward(v: ModuleType, polygon: list[Point], centre: Point, factor: Q) -> list[Point]:
+    return v.hull([(centre[0] + factor * (x - centre[0]), centre[1] + factor * (y - centre[1])) for x, y in polygon])
+
+
+def point_in_any(v: ModuleType, regions: list[list[Point]], p: Point) -> bool:
+    return any(len(v.hull(r)) >= 3 and v.inside(r, p) for r in regions)
+
+
+def random_point_in(rng: random.Random, polygon: list[Point]) -> Point:
+    """A random point of a convex polygon: a convex combination of three vertices."""
+    a, b, c = (rng.choice(polygon) for _ in range(3))
+    w1, w2 = Q(rng.randint(0, 2**16), 2**16), Q(rng.randint(0, 2**16), 2**16)
+    if w1 + w2 > 1:
+        w1, w2 = 1 - w1, 1 - w2
+    w3 = 1 - w1 - w2
+    return (w1 * a[0] + w2 * b[0] + w3 * c[0], w1 * a[1] + w2 * b[1] + w3 * c[1])
+
+
+def adversarial_cases(v: ModuleType, rng: random.Random) -> list[tuple[str, list[Point], list[list[Point]], bool | None]]:
+    """(name, domain, regions, expected) with expected None when only agreement is checked."""
+    cases: list[tuple[str, list[Point], list[list[Point]], bool | None]] = []
+    four = Q(4)
+    big = rect(Q(0), four, Q(0), four)
+    for name, eps in (("lens-2^-40", Q(1, 2**40)), ("lens-2^-60", Q(1, 2**60)), ("lens-1/8", Q(1, 8))):
+        # A gap hidden strictly between two events: the left block's vertical edge at
+        # x = a covers the section there; just right of it, R_above's V sits above
+        # R_below's roof by eps at x = a and the two cross at a + 2 eps (slopes 1/4).
+        a, b = Q(1), Q(3)
+        left = rect(Q(0), a, Q(0), four)
+        right = rect(b, four, Q(0), four)
+        below = v.hull([(a, Q(0)), (b, Q(0)), (b, Q(2)), (Q(2), Q(2) + Q(1, 4)), (a, Q(2))])
+        above = v.hull([(a, four), (b, four), (b, Q(2) + Q(1, 2)), (Q(2), Q(2) + Q(1, 4) - eps), (a, Q(2) + Q(1, 2))])
+        # roof at x: 2 + (x - a)/4 on [a, 2]; V at x: 2.5 - (x - a)/4 ... adjust so they meet
+        # at a + 2 eps: V(x) = 2 + eps - (x - a)/4 + ... simpler: build V through (a, 2 + 2 eps)
+        above = v.hull([(a, four), (b, four), (b, Q(2) + 2 * eps), (Q(2), Q(2) + 2 * eps - Q(1, 4)), (a, Q(2) + 2 * eps)])
+        # Now roof(x) = 2 + (x-a)/4 and V(x) = 2 + 2 eps - (x-a)/4 on [a, 2]: gap where V > roof,
+        # i.e. x - a < 4 eps: a sliver over (a, a + 4 eps) invisible at x = a (left block
+        # covers [0, 4]) and at the crossing (the section touches there).
+        cases.append((name, big, [left, right, below, above], False))
+        # The same with the gap closed: V at or below the roof at x = a.
+        closed = v.hull([(a, four), (b, four), (b, Q(2)), (Q(2), Q(2) - Q(1, 4)), (a, Q(2))])
+        cases.append((name + "-closed", big, [left, right, below, closed], True))
+    # Axis-aligned tilings with one tile shrunk horizontally or vertically by 2^-50.
+    tiles = [rect(Q(i), Q(i + 1), Q(j), Q(j + 1)) for i in range(4) for j in range(4)]
+    cases.append(("grid-exact", big, tiles, True))
+    delta = Q(1, 2**50)
+    narrowed = list(tiles)
+    narrowed[5] = rect(Q(1) + delta, Q(2), Q(1), Q(2))
+    cases.append(("grid-vertical-strip-gap", big, narrowed, False))
+    lowered = list(tiles)
+    lowered[5] = rect(Q(1), Q(2), Q(1) + delta, Q(2))
+    cases.append(("grid-horizontal-strip-gap", big, lowered, False))
+    corner = list(tiles)
+    corner[5] = v.hull([(Q(1), Q(1) + delta), (Q(1) + delta, Q(1)), (Q(2), Q(1)), (Q(2), Q(2)), (Q(1), Q(2))])
+    cases.append(("grid-corner-triangle-gap", big, corner, False))
+    # A fan of triangles around an interior point, exact, then one apex pulled back.
+    centre = (Q(2), Q(2))
+    ring = [(Q(0), Q(0)), (four, Q(0)), (four, four), (Q(0), four)]
+    fan = [v.hull([ring[k], ring[(k + 1) % 4], centre]) for k in range(4)]
+    cases.append(("fan-exact", big, fan, True))
+    pulled = list(fan)
+    pulled[1] = v.hull([ring[1], ring[2], (Q(2) + delta, Q(2))])
+    cases.append(("fan-apex-pulled", big, pulled, False))
+    # Point contact: two regions meeting at one point, the rest of the domain covered.
+    dom = rect(Q(0), Q(2), Q(0), Q(2))
+    tri_a = v.hull([(Q(0), Q(0)), (Q(2), Q(0)), (Q(1), Q(1))])
+    tri_b = v.hull([(Q(0), Q(2)), (Q(2), Q(2)), (Q(1), Q(1))])
+    tri_l = v.hull([(Q(0), Q(0)), (Q(0), Q(2)), (Q(1), Q(1))])
+    tri_r = v.hull([(Q(2), Q(0)), (Q(2), Q(2)), (Q(1), Q(1))])
+    cases.append(("bowtie-exact", dom, [tri_a, tri_b, tri_l, tri_r], True))
+    cases.append(("bowtie-missing-side", dom, [tri_a, tri_b, tri_l], False))
+    # The domain itself; the domain shrunk by 2^-60 at one vertex; the domain shifted.
+    cases.append(("self", dom, [dom], True))
+    cases.append(("self-twice", dom, [dom, dom], True))
+    shaved = v.hull([(Q(0), Q(0)), (Q(2), Q(0)), (Q(2), Q(2)), (Q(0), Q(2) - Q(1, 2**60)), (Q(1, 2**60), Q(2))])
+    cases.append(("vertex-shaved-2^-60", dom, [shaved], False))
+    cases.append(("shifted-2^-60", dom, [[(x + Q(1, 2**60), y) for x, y in dom]], False))
+    # Huge denominators everywhere.
+    d = 2**40 * 3**7 * 5**3
+    hd = [(x + Q(rng.randint(1, 9), d), y + Q(rng.randint(1, 9), d)) for x, y in dom]
+    hd = v.hull(hd)
+    hd_tiles = tiling(v, rng, hd, 4)
+    cases.append(("huge-denominators-exact", hd, hd_tiles, True))
+    if len(hd_tiles) > 1:
+        cases.append(("huge-denominators-minus-one", hd, hd_tiles[1:], False))
+    # Degenerate regions mixed in: segments and points, which cover nothing.
+    cases.append(("segments-only", dom, [[(Q(0), Q(0)), (Q(2), Q(2))], [(Q(1), Q(1))]], False))
+    cases.append(("exact-plus-segments", dom, [tri_a, tri_b, tri_l, tri_r, [(Q(0), Q(0)), (Q(2), Q(2))]], True))
+    # A triangle domain covered by three regions meeting at the centroid, one shrunk toward it.
+    tri = v.hull([(Q(0), Q(0)), (Q(3), Q(0)), (Q(1), Q(3))])
+    g = (Q(4, 3), Q(1))
+    parts = [v.hull([tri[k], tri[(k + 1) % 3], g]) for k in range(3)]
+    cases.append(("triangle-fan-exact", tri, parts, True))
+    cases.append(("triangle-fan-shrunk", tri, [parts[0], parts[1], shrink_toward(v, parts[2], g, 1 - Q(1, 2**40))], False))
+    # Only a neighbourhood of the domain's leftmost vertex is uncovered: at the event x = 0
+    # the domain's section is a single point, which `section_covered` deems covered by an
+    # empty span list; the slab probe just right of it must see the gap.
+    wedge = v.hull([(Q(0), Q(1, 2)), (Q(1), Q(0)), (Q(1), Q(1))])
+    for name, d0 in (("vertex-only-gap-2^-40", Q(1, 2**40)), ("vertex-only-gap-2^-70", Q(1, 2**70))):
+        cases.append((name, wedge, [v.hull(v.clip_closed(wedge, Q(-1), Q(0), -d0))], False))
+    cases.append(("vertex-only-gap-right", wedge, [v.hull(v.clip_closed(wedge, Q(1), Q(0), Q(1) - delta))], False))
+    # Overlapping regions far larger than the domain.
+    cases.append(("engulfed", dom, [rect(Q(-5), Q(9), Q(-5), Q(9))], True))
+    cases.append(("engulfed-but-one-row", dom, [rect(Q(-5), Q(9), Q(-5), Q(1)), rect(Q(-5), Q(9), Q(1) + delta, Q(9))], False))
+    return cases
+
+
+def sweep_audit(v: ModuleType, rng: random.Random, trials: int) -> dict[str, Any]:
+    disagreements: list[str] = []
+    verdicts = {True: 0, False: 0}
+    samples = 0
+    cases = adversarial_cases(v, rng)
+    kinds = ["rectangle", "grid", "fine", "oddden", "regular"]
+    for trial in range(trials):
+        kind = kinds[trial % len(kinds)]
+        domain = rect(Q(0), Q(2), Q(0), Q(1)) if kind == "rectangle" else random_convex(rng, v, kind)
+        regions = tiling(v, rng, domain, 1 + rng.randrange(5))
+        mode = trial % 5
+        if mode == 1 and len(regions) > 1:
+            regions.pop(rng.randrange(len(regions)))
+        elif mode == 2:
+            k = rng.randrange(len(regions))
+            regions[k] = v.hull([(x + Q(1, 2**40), y) for x, y in regions[k]])
+        elif mode == 3:
+            k = rng.randrange(len(regions))
+            c = random_point_in(rng, regions[k])
+            regions[k] = shrink_toward(v, regions[k], c, 1 - Q(1, 2**35))
+        elif mode == 4:
+            regions.extend(random_convex(rng, v, "grid") for _ in range(2))
+            regions.append([(Q(0), Q(0)), (Q(1), Q(0))])
+        rng.shuffle(regions)
+        cases.append((f"random-{trial}-{kind}-{mode}", domain, regions, None))
+    for name, domain, regions, expected in cases:
+        by_area, pieces = v.covered_by_area(domain, regions)
+        by_sweep, probe = v.covered_by_sweep(v.hull(domain), regions)
+        verdicts[by_sweep] += 1
+        if by_sweep != by_area:
+            disagreements.append(f"{name}: sweep {by_sweep} vs area {by_area} (probe {probe})")
+            continue
+        if expected is not None and by_sweep != expected:
+            disagreements.append(f"{name}: both methods say {by_sweep}, expected {expected}")
+            continue
+        if (probe is None) != by_sweep:
+            disagreements.append(f"{name}: probe {probe} inconsistent with verdict {by_sweep}")
+        # Third method: sample points. Covered: every sampled domain point is in a region.
+        # Uncovered: the leftover pieces of the area subtraction hold points in no region.
+        if by_sweep:
+            for _ in range(30):
+                p = random_point_in(rng, v.hull(domain))
+                samples += 1
+                if not point_in_any(v, regions, p):
+                    disagreements.append(f"{name}: covered, but {p} is in no region")
+                    break
+        else:
+            left = [domain]
+            for region in regions:
+                if len(v.hull(region)) >= 3:
+                    left = v.subtract_pieces(left, region)
+            found = False
+            for piece in left:
+                if v.area2(piece) == 0:
+                    continue
+                # The centroid of a positive-area piece is interior, so it is in no region.
+                cx = sum((p[0] for p in piece), Q(0)) / len(piece)
+                cy = sum((p[1] for p in piece), Q(0)) / len(piece)
+                samples += 1
+                if not point_in_any(v, regions, (cx, cy)):
+                    found = True
+                    break
+            if not found:
+                disagreements.append(f"{name}: uncovered by both, but no witness point found")
+    return {"audit": "sweep", "cases": len(cases), "covered": verdicts[True], "uncovered": verdicts[False], "samples": samples, "disagreements": disagreements}
+
+
+# ---------------------------------------------------------------------------
+# between and section_covered
+# ---------------------------------------------------------------------------
+
+
+def between_audit(v: ModuleType, rng: random.Random, trials: int) -> dict[str, Any]:
+    disagreements: list[str] = []
+    pairs: list[tuple[tuple[int, int], tuple[int, int]]] = []
+    # Farey neighbours: b c - a d = 1; nothing with a smaller denominator than b + d fits.
+    for _ in range(trials):
+        b = rng.randint(1, 10**30)
+        a = rng.randint(-(10**30), 10**30)
+        # Solve for c, d with b c - a d = 1 via the extended Euclid on (b, a).
+        g, x, y = egcd(b, a)
+        if g != 1:
+            continue
+        # b x + a y = 1 -> c = x, d = -y; make d positive by adding multiples of (a, b).
+        c, d = x, -y
+        if d <= 0:
+            k = (-d) // b + 1
+            c, d = c + k * a, d + k * b
+        pairs.append(((a, b), (c, d)))
+    pairs.extend([((0, 1), (1, 10**40)), ((-1, 10**40), (0, 1)), ((5, 1), (6, 1)), ((10**40, 1), (10**40 + 1, 1)),
+                  ((3, 7), (3, 7 - 1)), ((-7, 2), (-3, 1)), ((1, 3), (2, 3))])
+    for _ in range(trials):
+        a = (rng.randint(-(10**12), 10**12), rng.randint(1, 10**12))
+        b = (rng.randint(-(10**12), 10**12), rng.randint(1, 10**12))
+        if v.ratio_lt(a, b):
+            pairs.append((a, b))
+    for a, b in pairs:
+        n, d = v.between(a, b)
+        if d <= 0 or not (v.ratio_lt(a, (n, d)) and v.ratio_lt((n, d), b)):
+            disagreements.append(f"between({a}, {b}) = {(n, d)} is not strictly inside")
+        if math.gcd(n, d) != 1:
+            disagreements.append(f"between({a}, {b}) = {(n, d)} not in lowest terms")
+        if a[1] * b[0] - a[0] * b[1] == 1 and d < a[1] + b[1]:
+            disagreements.append(f"between({a}, {b}) = {(n, d)}: denominator below the mediant's")
+    return {"audit": "between", "pairs": len(pairs), "disagreements": disagreements}
+
+
+def egcd(a: int, b: int) -> tuple[int, int, int]:
+    if b == 0:
+        return (a, 1, 0) if a >= 0 else (-a, -1, 0)
+    g, x, y = egcd(b, a % b)
+    return g, y, x - (a // b) * y
+
+
+def section_audit(v: ModuleType, rng: random.Random, trials: int) -> dict[str, Any]:
+    disagreements: list[str] = []
+    # A point target with no span: `section_covered` says covered (its merge never runs
+    # and the final test `cursor >= high` holds). The sweep meets a point section only at
+    # the domain's extreme abscissae, where an uncovered vertex implies an uncovered open
+    # set that the neighbouring slab probe reports (the vertex-only-gap sweep cases), so
+    # this is reported as a note and point targets are left out of the comparison.
+    point_target_note = v.section_covered(((0, 1), (0, 1)), [])
+    skipped = 0
+    for trial in range(trials):
+        den = rng.choice([1, 2, 3, 7, 2**40])
+        spans = []
+        for _ in range(rng.randint(0, 6)):
+            lo = Q(rng.randint(-8, 8), den)
+            hi = lo + Q(rng.randint(0, 6), den)
+            spans.append(((lo.numerator, lo.denominator), (hi.numerator, hi.denominator)))
+        lo = Q(rng.randint(-8, 8), den)
+        hi = lo + Q(rng.randint(0, 8), den)
+        target = ((lo.numerator, lo.denominator), (hi.numerator, hi.denominator))
+        if lo == hi:
+            skipped += 1
+            continue
+        # Brute force on closed intervals: every endpoint in the target and every midpoint
+        # between consecutive endpoints must lie in some span.
+        ends = sorted({Q(*s[0]) for s in spans} | {Q(*s[1]) for s in spans} | {lo, hi})
+        probes = [e for e in ends if lo <= e <= hi]
+        probes += [(ends[i] + ends[i + 1]) / 2 for i in range(len(ends) - 1) if lo <= (ends[i] + ends[i + 1]) / 2 <= hi]
+        brute = all(any(Q(*s[0]) <= p <= Q(*s[1]) for s in spans) for p in probes)
+        mine = v.section_covered(target, list(spans))
+        if mine != brute:
+            disagreements.append(f"trial {trial}: section_covered {mine} vs brute {brute}: target {target} spans {spans}")
+    return {
+        "audit": "section",
+        "trials": trials,
+        "point_targets_skipped": skipped,
+        "point_target_with_no_span_is_deemed_covered": point_target_note,
+        "disagreements": disagreements,
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--module", type=Path, default=Path("devtools/verify_n17_kernel_certificate.py"))
+    parser.add_argument("--trials", type=int, default=200)
+    parser.add_argument("--seed", type=int, default=2026)
+    parser.add_argument("--only", default=None, help="facets, sweep, between or section")
+    args = parser.parse_args(argv)
+    v = load(args.module)
+    rng = random.Random(args.seed)
+    audits = {"facets": facet_audit, "sweep": sweep_audit, "between": between_audit, "section": section_audit}
+    failed = 0
+    for name, audit in audits.items():
+        if args.only and name != args.only:
+            continue
+        clock = time.perf_counter()
+        report = audit(v, rng, args.trials)
+        report["seconds"] = round(time.perf_counter() - clock, 2)
+        report["module_sha256"] = v.MODULE_SHA256[:12]
+        failed += len(report["disagreements"])
+        print(json.dumps(report), flush=True)
+    print(json.dumps({"verdict": "AGREE" if failed == 0 else "DISAGREE", "disagreements": failed}))
+    return 0 if failed == 0 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,5 @@
+states 585
+k=2: min span lower bound (consecutive pairs only, grid) = 0.8353 ; available width 3.6760
+k=3: min span lower bound (consecutive pairs only, grid) = 1.7727 ; available width 3.6760
+k=4: min span lower bound (consecutive pairs only, grid) = 2.6432 ; available width 3.6760
+k=5: min span lower bound (consecutive pairs only, grid) = 3.5453 ; available width 3.6760

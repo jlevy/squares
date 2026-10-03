@@ -1,7 +1,10 @@
-"""Unready draft of a deterministic common-core first-order stress for n17.
+"""Deterministic common-core first-order stress certificate for n17 (H-258).
 
-The CLI refuses before reading target inputs while exact proof and controls remain
-incomplete. Its internal functions retain target-free preparation evidence.
+Exact identities are proved with explicit-denominator rational functions over
+QQ[t, b, ...] using polynomial-ring arithmetic: a value is zero exactly when its
+numerator polynomial is zero. Signs over the accepted H-255 root box use a fixed
+2^-256 outward dyadic interval grid. Target-free synthetic controls run, and must
+pass, before any target input is read.
 """
 
 # pyright: reportPrivateUsage=false
@@ -11,14 +14,18 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import subprocess
 import time
+from collections.abc import Mapping
+from dataclasses import dataclass
 from fractions import Fraction as Q
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-import sympy as sp
+from sympy import QQ
+from sympy.polys.rings import ring
 
 from devtools.check_n17_contact_chart import ANCHORS, CONTACTS, SOURCE
 from devtools.check_n17_endpoint_feasibility import (
@@ -42,8 +49,9 @@ from devtools.check_n17_endpoint_features import (
     option_manifest,
     square_class,
 )
-from devtools.check_n17_root_certificate import CertificateError
+from devtools.check_n17_root_certificate import CertificateError, n17_polynomials
 from devtools.check_n17_root_certificate import check as check_root
+from devtools.provenance import provenance
 
 DIMENSION = 52
 FACE_PAIRS = tuple(sorted(PARALLEL_PAIRS))
@@ -58,7 +66,230 @@ FROZEN_FEATURE_REF = (
     "feafdae49:packing/campaign/series/series-000-smoke-and-calibration/"
     "results/exp-239-n17-endpoint-features/run-001/certificate.json"
 )
-INSTRUMENT_READY = False
+INSTRUMENT_READY = True
+AXIS_FACES = frozenset({(1, 2), (1, 3), (5, 7)})
+ZERO_WEIGHT_KEYS = frozenset(
+    {
+        ("wall", 5, "right", 0),
+        ("wall", 5, "right", 1),
+        ("wall", 6, "bottom", 0),
+        ("wall", 6, "bottom", 1),
+        ("pair", 9, 11, 0),
+        ("pair", 9, 11, 1),
+    }
+)
+GRID_BITS = 256
+GRID = 1 << GRID_BITS
+PROOF_GENERATORS = ("t", "b", "S", "mu", "nu", "rho")
+
+
+class ExactField:
+    """Rational functions with explicit factored denominators over QQ[t,b,S,mu,nu,rho].
+
+    Every denominator is a product of registered monic irreducible polynomials, so a
+    value is identically zero exactly when its numerator is the zero polynomial. No
+    expression tree is expanded and no gcd is taken; denominators are cleared by ring
+    multiplication only.
+    """
+
+    def __init__(self) -> None:
+        polynomial_ring, *generators = ring(",".join(PROOF_GENERATORS), QQ)
+        self.ring: Any = polynomial_ring
+        self.generators: dict[str, Any] = dict(zip(PROOF_GENERATORS, generators, strict=True))
+        self.factors: list[Any] = []
+
+    def constant(self, value: int | Q) -> RationalFunction:
+        if type(value) not in (int, Q):
+            raise TypeError("exact constants must be int or Fraction")
+        fraction = Q(value)
+        return RationalFunction(
+            self, self.ring(QQ(fraction.numerator, fraction.denominator)), {}
+        )
+
+    def generator(self, name: str) -> RationalFunction:
+        return RationalFunction(self, self.generators[name], {})
+
+    def register(self, numerator: Any) -> tuple[Any, dict[int, int]]:
+        """Split a nonzero polynomial into a constant and registered monic factors."""
+        coefficient, items = numerator.factor_list()
+        product = self.ring(coefficient)
+        exponents: dict[int, int] = {}
+        for factor, multiplicity in items:
+            product = product * factor**multiplicity
+            leading = factor.LC
+            monic = factor.quo_ground(leading)
+            coefficient = coefficient * leading**multiplicity
+            for index, known in enumerate(self.factors):
+                if known == monic:
+                    exponents[index] = exponents.get(index, 0) + multiplicity
+                    break
+            else:
+                self.factors.append(monic)
+                exponents[len(self.factors) - 1] = multiplicity
+        if product != numerator:
+            raise ValueError("denominator factorization does not reproduce its polynomial")
+        return coefficient, exponents
+
+
+class RationalFunction:
+    """numerator / prod(factor_i ** exponent_i) with registered factors."""
+
+    __slots__ = ("denominator", "field", "numerator")
+
+    def __init__(self, field: ExactField, numerator: Any, denominator: dict[int, int]) -> None:
+        self.field = field
+        self.numerator = numerator
+        self.denominator = {key: value for key, value in denominator.items() if value}
+
+    def _lift(self, value: Any) -> RationalFunction:
+        if isinstance(value, RationalFunction):
+            if value.field is not self.field:
+                raise ValueError("values from different exact fields were mixed")
+            return value
+        return self.field.constant(value)
+
+    @property
+    def is_zero(self) -> bool:
+        return not self.numerator
+
+    def reduced(self) -> RationalFunction:
+        if not self.numerator:
+            return RationalFunction(self.field, self.numerator, {})
+        numerator, denominator = self.numerator, dict(self.denominator)
+        for key, original in self.denominator.items():
+            factor = self.field.factors[key]
+            remaining = original
+            while remaining:
+                quotient, remainder = divmod(numerator, factor)
+                if remainder:
+                    break
+                numerator, remaining = quotient, remaining - 1
+            denominator[key] = remaining
+        return RationalFunction(self.field, numerator, denominator)
+
+    def __add__(self, other: Any) -> RationalFunction:
+        rhs = self._lift(other)
+        if not rhs.numerator:
+            return self
+        if not self.numerator:
+            return rhs
+        keys = self.denominator.keys() | rhs.denominator.keys()
+        common = {
+            key: max(self.denominator.get(key, 0), rhs.denominator.get(key, 0)) for key in keys
+        }
+        left, right = self.numerator, rhs.numerator
+        for key, exponent in common.items():
+            factor = self.field.factors[key]
+            if exponent > self.denominator.get(key, 0):
+                left = left * factor ** (exponent - self.denominator.get(key, 0))
+            if exponent > rhs.denominator.get(key, 0):
+                right = right * factor ** (exponent - rhs.denominator.get(key, 0))
+        return RationalFunction(self.field, left + right, common).reduced()
+
+    def __radd__(self, other: Any) -> RationalFunction:
+        return self + other
+
+    def __neg__(self) -> RationalFunction:
+        return RationalFunction(self.field, -self.numerator, self.denominator)
+
+    def __sub__(self, other: Any) -> RationalFunction:
+        return self + -self._lift(other)
+
+    def __rsub__(self, other: Any) -> RationalFunction:
+        return self._lift(other) + -self
+
+    def __mul__(self, other: Any) -> RationalFunction:
+        rhs = self._lift(other)
+        if not self.numerator or not rhs.numerator:
+            return RationalFunction(self.field, self.field.ring.zero, {})
+        keys = self.denominator.keys() | rhs.denominator.keys()
+        combined = {
+            key: self.denominator.get(key, 0) + rhs.denominator.get(key, 0) for key in keys
+        }
+        return RationalFunction(self.field, self.numerator * rhs.numerator, combined).reduced()
+
+    def __rmul__(self, other: Any) -> RationalFunction:
+        return self * other
+
+    def inverse(self) -> RationalFunction:
+        if not self.numerator:
+            raise ZeroDivisionError("exact division by the zero rational function")
+        coefficient, exponents = self.field.register(self.numerator)
+        numerator = self.field.ring.one.quo_ground(coefficient)
+        for key, exponent in self.denominator.items():
+            numerator = numerator * self.field.factors[key] ** exponent
+        return RationalFunction(self.field, numerator, exponents).reduced()
+
+    def __truediv__(self, other: Any) -> RationalFunction:
+        rhs = self._lift(other)
+        if not self.numerator:
+            return RationalFunction(self.field, self.field.ring.zero, {})
+        return self * rhs.inverse()
+
+    def __rtruediv__(self, other: Any) -> RationalFunction:
+        return self._lift(other) / self
+
+    def derivative(self, name: str) -> RationalFunction:
+        """Exact partial derivative, all other generators held fixed."""
+        variable = self.field.generators[name]
+        result = RationalFunction(self.field, self.numerator.diff(variable), self.denominator)
+        for key, exponent in self.denominator.items():
+            factor = self.field.factors[key]
+            result = result - self * RationalFunction(
+                self.field, factor.diff(variable) * exponent, {key: 1}
+            )
+        return result
+
+
+@dataclass(frozen=True)
+class Dyadic(Box):
+    """Closed interval on the fixed 2^-256 grid; every result is rounded outward."""
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        if (self.lo * GRID).denominator != 1 or (self.hi * GRID).denominator != 1:
+            raise ValueError("interval endpoint is off the fixed 2^-256 grid")
+
+    @classmethod
+    def enclose(cls, lo: Q, hi: Q) -> Dyadic:
+        """Round the lower endpoint down and the upper endpoint up, exactly."""
+        return cls(Q(math.floor(lo * GRID), GRID), Q(math.ceil(hi * GRID), GRID))
+
+    @classmethod
+    def point(cls, value: int | Q) -> Dyadic:
+        if type(value) not in (int, Q):
+            raise ValueError("interval point must be exact integer or Fraction")
+        return cls.enclose(Q(value), Q(value))
+
+    @staticmethod
+    def cast(value: Box | int | Q) -> Dyadic:
+        if isinstance(value, Dyadic):
+            return value
+        if isinstance(value, Box):
+            return Dyadic.enclose(value.lo, value.hi)
+        return Dyadic.point(value)
+
+    def __add__(self, other: Box | int | Q) -> Dyadic:
+        rhs = self.cast(other)
+        return Dyadic.enclose(self.lo + rhs.lo, self.hi + rhs.hi)
+
+    def __neg__(self) -> Dyadic:
+        return Dyadic(-self.hi, -self.lo)
+
+    def __mul__(self, other: Box | int | Q) -> Dyadic:
+        rhs = self.cast(other)
+        values = (self.lo * rhs.lo, self.lo * rhs.hi, self.hi * rhs.lo, self.hi * rhs.hi)
+        return Dyadic.enclose(min(values), max(values))
+
+    def reciprocal(self) -> Dyadic:
+        if self.lo <= 0 <= self.hi:
+            raise ValueError("interval denominator includes zero")
+        return Dyadic.enclose(1 / self.hi, 1 / self.lo)
+
+    def absolute(self) -> Dyadic:
+        if self.lo <= 0 <= self.hi:
+            return Dyadic(Q(0), max(-self.lo, self.hi))
+        return Dyadic(min(abs(self.lo), abs(self.hi)), max(abs(self.lo), abs(self.hi)))
 
 
 def _coordinate(label: int, component: str) -> int:
@@ -68,6 +299,11 @@ def _coordinate(label: int, component: str) -> int:
 def _add(row: list[Any], label: int, component: str, value: Any) -> None:
     index = _coordinate(label, component)
     row[index] = row[index] + value
+
+
+OMEGA_12 = _coordinate(12, "angle")
+OMEGA_16 = _coordinate(16, "angle")
+SIGMA = DIMENSION - 1
 
 
 CORNER_SIGNS: dict[tuple[int, int], tuple[int, int]] = {
@@ -467,6 +703,15 @@ def _block_residuals(
     return residuals
 
 
+def _vanishes(value: Any) -> bool:
+    """Exact zero test: a ring value by its numerator, a literal by equality."""
+    if isinstance(value, RationalFunction):
+        return value.is_zero
+    if type(value) in (int, Q):
+        return value == 0
+    raise TypeError(f"identity check requires an exact ring value, got {type(value)}")
+
+
 def _verify_tied_row_shapes(
     rows: dict[tuple[Any, ...], list[Any]],
     aux: dict[str, Any],
@@ -483,10 +728,10 @@ def _verify_tied_row_shapes(
         expected[_coordinate(label, component)] = 2 if wall in ("left", "bottom") else -2
         expected[-1] = 2 if wall in ("right", "top") else 0
         for column in range(DIMENSION):
-            if sp.cancel(minus[column] + plus[column] - expected[column]) != 0:
+            if not _vanishes(minus[column] + plus[column] - expected[column]):
                 raise ValueError(f"wall row sum changed: {(label, wall, column)}")
             difference = -1 if column == _coordinate(label, "angle") else 0
-            if sp.cancel(minus[column] - plus[column] - difference) != 0:
+            if not _vanishes(minus[column] - plus[column] - difference):
                 raise ValueError(f"wall row difference changed: {(label, wall, column)}")
         checked += 1
     for left, right, axis, _ in CONTACTS:
@@ -502,7 +747,7 @@ def _verify_tied_row_shapes(
                 centres[right - 1][1] - centres[left - 1][1],
             ),
         )
-        k = sp.Rational(1, 2) if (left, right) in {(1, 2), (1, 3), (5, 7)} else (1 - tau) / 2
+        k = Q(1, 2) if (left, right) in AXIS_FACES else (1 - tau) / 2
         expected_sum: list[Any] = [0] * DIMENSION
         expected_diff: list[Any] = [0] * DIMENSION
         for component, value in zip(("x", "y"), normal, strict=True):
@@ -513,9 +758,9 @@ def _verify_tied_row_shapes(
         expected_diff[_coordinate(left, "angle")] = 2 * k
         expected_diff[_coordinate(right, "angle")] = -2 * k
         for column in range(DIMENSION):
-            if sp.cancel(minus[column] + plus[column] - expected_sum[column]) != 0:
+            if not _vanishes(minus[column] + plus[column] - expected_sum[column]):
                 raise ValueError(f"face row sum changed: {(left, right, column)}")
-            if sp.cancel(minus[column] - plus[column] - expected_diff[column]) != 0:
+            if not _vanishes(minus[column] - plus[column] - expected_diff[column]):
                 raise ValueError(f"face row difference changed: {(left, right, column)}")
         checked += 1
     if checked != 23:
@@ -523,98 +768,240 @@ def _verify_tied_row_shapes(
     return checked
 
 
-@lru_cache(maxsize=1)
-def symbolic_residual_proofs() -> dict[str, Any]:
-    """Prove the full coefficient identity as rational functions before root use."""
-    foundation = symbolic_identities()
-    t, b = sp.symbols("t b", real=True)
-    mu, nu, rho = sp.symbols("mu nu rho", real=True)
-    half = sp.Rational(1, 2)
+def _generic_block_identities() -> int:
+    """The two tied-row cancellations as polynomial identities, k cleared explicitly."""
+    _, f, q, k, ell, dw, m, a, omega = ring("f,q,k,ell,dw,m,a,omega", QQ)
+    face = (
+        (f * k + q) * (ell - k * dw) + (f * k - q) * (ell + k * dw) - 2 * k * (f * ell - q * dw)
+    )
+    wall = (
+        (f - 2 * m) * (2 * a - omega) + (f + 2 * m) * (2 * a + omega) - 4 * (f * a + m * omega)
+    )
+    if face or wall:
+        raise ValueError("generic two-row block cancellation failed")
+    return 2
+
+
+def _closing_f2(side: Any, aux: dict[str, Any]) -> Any:
+    return aux["d"] * (side - aux["X"] - Q(3, 2)) - aux["e"] * (aux["Y"] - side + Q(3, 2)) - 1
+
+
+def identity_failures(
+    rows: dict[tuple[Any, ...], list[Any]],
+    weights: dict[tuple[Any, ...], Any],
+    side_coefficient: Any,
+    expected_twelve: Any,
+    expected_sixteen: Any,
+) -> list[int]:
+    """Columns where the full-matrix sum of weight times row misses its prescription."""
+    failures: list[int] = []
+    for column in range(DIMENSION):
+        total = sum((weights[key] * row[column] for key, row in rows.items()), 0)
+        expected = (
+            side_coefficient
+            if column == SIGMA
+            else expected_twelve
+            if column == OMEGA_12
+            else expected_sixteen
+            if column == OMEGA_16
+            else 0
+        )
+        if not _vanishes(total - expected):
+            failures.append(column)
+    return failures
+
+
+def _formal_model(
+    field: ExactField,
+) -> tuple[Any, dict[str, Any], tuple[tuple[Any, Any], ...], dict[tuple[Any, ...], list[Any]]]:
+    half = field.constant(Q(1, 2))
+    t, b = field.generator("t"), field.generator("b")
     side, aux, centres = _layout(t, b, half)
     rows, _, _ = common_rows(t, b, half)
-    tied_row_shapes = _verify_tied_row_shapes(rows, aux, centres)
-    weights, scales, face_moments, wall_moments = deterministic_weights(
-        rows, side, aux, centres, half, formal=(mu, nu, rho), normalize=False
-    )
-    residuals = _block_residuals(
-        rows,
-        aux,
-        centres,
-        scales,
-        face_moments=face_moments,
-        wall_moments=wall_moments,
-    )
-    f, q, k, ell, dw, m, a, omega = sp.symbols("f q k ell dw m a omega")
-    if (
-        sp.cancel(
-            (f + q / k) * (ell - k * dw) / 2
-            + (f - q / k) * (ell + k * dw) / 2
-            - (f * ell - q * dw)
-        )
-        != 0
-        or sp.cancel(
-            (f / 2 - m) * (a - omega / 2) + (f / 2 + m) * (a + omega / 2) - (f * a + m * omega)
-        )
-        != 0
-    ):
-        raise ValueError("generic two-row block cancellation failed")
-    f2 = (
-        aux["d"] * (side - aux["X"] - sp.Rational(3, 2))
-        - aux["e"] * (aux["Y"] - side + sp.Rational(3, 2))
-        - 1
-    )
-    expected_twelve = (
+    return side, aux, centres, rows
+
+
+def _formal_loads(field: ExactField) -> tuple[Any, Any, Any]:
+    return field.generator("mu"), field.generator("nu"), field.generator("rho")
+
+
+def _formal_expectations(
+    loads: tuple[Any, Any, Any], side: Any, aux: dict[str, Any], scales: dict[str, Any]
+) -> tuple[Any, Any]:
+    mu, nu, rho = loads
+    f2 = _closing_f2(side, aux)
+    twelve = (
         mu * scales["F1_theta"]
         + nu * scales["F2_theta"]
         + rho * scales["G3_theta"]
         + aux["gamma"] * rho * f2
     )
-    expected_sixteen = -(
-        nu * scales["F2_beta"] + rho * scales["G3_beta"] + aux["gamma"] * rho * f2
+    sixteen = -(nu * scales["F2_beta"] + rho * scales["G3_beta"] + aux["gamma"] * rho * f2)
+    return twelve, sixteen
+
+
+@dataclass(frozen=True)
+class RingProof:
+    summary: dict[str, Any]
+    denominators: tuple[Any, ...]
+
+
+@lru_cache(maxsize=2)
+def ring_residual_proofs(*, substituted: bool = True) -> RingProof:
+    """Prove every H-258 identity in Q[t, b, mu, nu, rho] with explicit denominators.
+
+    The formal stage keeps mu, nu, rho as ring generators, as the frozen derivation's
+    short proof does. The substituted stage replaces them by the fixed loads and checks
+    the normalized 52-column identity directly. A failed identity raises.
+    """
+    stages: dict[str, float] = {}
+    started = time.monotonic()
+    field = ExactField()
+    side, aux, centres, rows = _formal_model(field)
+    half = field.constant(Q(1, 2))
+    stages["model"] = time.monotonic() - started
+    mark = time.monotonic()
+    tied_row_shapes = _verify_tied_row_shapes(rows, aux, centres)
+    generic = _generic_block_identities()
+    stages["row_shapes"] = time.monotonic() - mark
+    mark = time.monotonic()
+    loads = _formal_loads(field)
+    weights, scales, face_moments, wall_moments = deterministic_weights(
+        rows, side, aux, centres, half, formal=loads, normalize=False
     )
-    for index, residual in enumerate(residuals):
-        expected = (
-            expected_twelve
-            if index == _coordinate(12, "angle")
-            else (expected_sixteen if index == _coordinate(16, "angle") else 0)
+    twelve, sixteen = _formal_expectations(loads, side, aux, scales)
+    block = _block_residuals(
+        rows, aux, centres, scales, face_moments=face_moments, wall_moments=wall_moments
+    )
+    block_failures = [
+        column
+        for column, value in enumerate(block)
+        if not _vanishes(
+            value - (twelve if column == OMEGA_12 else sixteen if column == OMEGA_16 else 0)
         )
-        if sp.cancel(residual - expected) != 0:
-            raise ValueError(f"common-core stationarity identity failed at column {index}")
+    ]
+    formal_failures = identity_failures(rows, weights, scales["K"], twelve, sixteen)
+    formal_zero = [key for key in ZERO_WEIGHT_KEYS if not _vanishes(weights[key])]
+    stages["formal_identities"] = time.monotonic() - mark
+    mark = time.monotonic()
     fixed = load_scales(side, aux)
-    if (
-        sp.cancel(fixed["nu"] * fixed["F2_beta"] + fixed["rho"] * fixed["G3_beta"]) != 0
-        or sp.cancel(
+    load_balance = [
+        _vanishes(fixed["nu"] * fixed["F2_beta"] + fixed["rho"] * fixed["G3_beta"]),
+        _vanishes(
             fixed["mu"] * fixed["F1_theta"]
             + fixed["nu"] * fixed["F2_theta"]
             + fixed["rho"] * fixed["G3_theta"]
-        )
-        != 0
-    ):
-        raise ValueError("fixed load cancellation failed")
-    zero_keys = {
-        ("wall", 5, "right", 0),
-        ("wall", 5, "right", 1),
-        ("wall", 6, "bottom", 0),
-        ("wall", 6, "bottom", 1),
-        ("pair", 9, 11, 0),
-        ("pair", 9, 11, 1),
+        ),
+    ]
+    t, b = field.generator("t"), field.generator("b")
+    pi2 = sum(
+        (
+            coefficient * _power(t, i) * _power(b, j)
+            for (i, j), coefficient in n17_polynomials()[0].items()
+        ),
+        field.constant(0),
+    )
+    f2 = _closing_f2(side, aux)
+    f2_binding = _vanishes(f2 * t * (1 + t) * (1 + t * t) * (1 + b * b) - pi2)
+    stages["load_balance"] = time.monotonic() - mark
+    substituted_failures: list[int] | None = None
+    substituted_zero: list[tuple[Any, ...]] | None = None
+    if substituted:
+        mark = time.monotonic()
+        normalized, fixed_scales, _, _ = deterministic_weights(rows, side, aux, centres, half)
+        exceptional = aux["gamma"] * fixed_scales["rho"] * f2 / fixed_scales["K"]
+        substituted_failures = identity_failures(rows, normalized, 1, exceptional, -exceptional)
+        substituted_zero = [key for key in ZERO_WEIGHT_KEYS if not _vanishes(normalized[key])]
+        stages["substituted_identities"] = time.monotonic() - mark
+    denominators = tuple(field.factors)
+    foreign = [
+        str(factor)
+        for factor in denominators
+        if any(any(monomial[2:]) for monomial in factor.monoms())
+    ]
+    passed = (
+        not block_failures
+        and not formal_failures
+        and not formal_zero
+        and all(load_balance)
+        and f2_binding
+        and not substituted_failures
+        and not substituted_zero
+        and not foreign
+    )
+    summary = {
+        "method": "explicit-denominator rational functions over QQ[t,b,S,mu,nu,rho]; "
+        "identity iff numerator polynomial is zero",
+        "rows": len(rows),
+        "columns": DIMENSION,
+        "tied_row_shapes": tied_row_shapes,
+        "generic_block_identities": generic,
+        "block_residual_failures": block_failures,
+        "formal_full_matrix_failures": formal_failures,
+        "formal_zero_weight_failures": [list(key) for key in formal_zero],
+        "load_balance_identities": load_balance,
+        "f2_to_h255_pi2_binding": f2_binding,
+        "substituted_normalized": substituted,
+        "substituted_full_matrix_failures": substituted_failures,
+        "substituted_zero_weight_failures": None
+        if substituted_zero is None
+        else [list(key) for key in substituted_zero],
+        "zero_residual_identities": DIMENSION - 2,
+        "exceptional_F2_identities": 2,
+        "prescribed_zero_weights": len(ZERO_WEIGHT_KEYS),
+        "denominator_factors": [
+            {"degree_t": factor.degree(0), "degree_b": factor.degree(1), "terms": len(factor)}
+            for factor in denominators
+        ],
+        "denominators_outside_t_b": foreign,
+        "stage_seconds": stages,
+        "seconds": time.monotonic() - started,
+        "passed": passed,
     }
-    for key in zero_keys:
-        if sp.cancel(weights[key]) != 0:
-            raise ValueError(f"prescribed zero-weight identity failed: {key}")
+    if not passed:
+        raise ValueError(f"common-core stationarity identity failed: {summary}")
+    return RingProof(summary, denominators)
+
+
+def _power(value: Any, exponent: int) -> Any:
+    result: Any = 1
+    for _ in range(exponent):
+        result = result * value
+    return result
+
+
+@lru_cache(maxsize=1)
+def symbolic_residual_proofs() -> dict[str, Any]:
+    """Prove the full coefficient identity as rational functions before root use."""
+    foundation_started = time.monotonic()
+    foundation = symbolic_identities()
+    foundation_seconds = time.monotonic() - foundation_started
+    proof = ring_residual_proofs()
     return {
         "foundation": foundation,
+        "foundation_seconds": foundation_seconds,
         "rows": 58,
         "columns": DIMENSION,
         "zero_residual_identities": 50,
         "exceptional_F2_identities": 2,
-        "prescribed_zero_weights": len(zero_keys),
-        "tied_row_shapes": tied_row_shapes,
+        "prescribed_zero_weights": len(ZERO_WEIGHT_KEYS),
+        "tied_row_shapes": proof.summary["tied_row_shapes"],
+        "ring": proof.summary,
     }
 
 
-def interval_sign_audit(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> dict[str, Any]:
-    """Check the fixed stress on the entire accepted exact root enclosure."""
+def _polynomial_interval(polynomial: Any, t: Box, b: Box) -> Box:
+    total: Box = Dyadic.point(0)
+    for monomial, coefficient in polynomial.terms():
+        if any(monomial[2:]):
+            raise ValueError("denominator factor depends on a load or side generator")
+        term: Box = Dyadic.point(Q(int(coefficient.numerator), int(coefficient.denominator)))
+        term = term * _power(t, monomial[0]) * _power(b, monomial[1])
+        total = total + term
+    return total
+
+
+def _root_intervals(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> tuple[Box, Box]:
     if len(midpoint) != 2 or len(radii) != 2:
         raise ValueError("root enclosure must have two dimensions")
     if any(type(value) is not Q for value in (*midpoint, *radii)) or any(
@@ -622,10 +1009,46 @@ def interval_sign_audit(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> dict[str, 
     ):
         raise ValueError("invalid exact root enclosure")
     t, b = (
-        Box(value - radius, value + radius)
+        Dyadic.enclose(value - radius, value + radius)
         for value, radius in zip(midpoint, radii, strict=True)
     )
-    half = Box.point(Q(1, 2))
+    return t, b
+
+
+def denominator_guards(
+    factors: tuple[Any, ...], midpoint: tuple[Q, Q], radii: tuple[Q, Q]
+) -> dict[str, Any]:
+    """Every ring-proof denominator factor keeps one strict sign on the root box."""
+    t, b = _root_intervals(midpoint, radii)
+    signs: list[int] = []
+    for index, factor in enumerate(factors):
+        bound = _polynomial_interval(factor, t, b)
+        if bound.lo <= 0 <= bound.hi:
+            raise ValueError(
+                f"ring-proof denominator factor {index} may vanish on the root box"
+            )
+        signs.append(1 if bound.lo > 0 else -1)
+    return {"factors": len(factors), "signs": signs, "passed": True}
+
+
+def classify_signs(bounds: Mapping[str, Box]) -> tuple[str, list[str]]:
+    """Frozen disposition: certified negative rejects; straddling zero is unresolved."""
+    failures = [key for key, bound in bounds.items() if bound.lo < 0]
+    negative = any(bound.hi < 0 for bound in bounds.values())
+    disposition = (
+        "confirmed_fixed_stress"
+        if not failures
+        else "rejected_fixed_candidate"
+        if negative
+        else "unresolved_interval_sign"
+    )
+    return disposition, failures
+
+
+def interval_sign_audit(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> dict[str, Any]:
+    """Check the fixed stress on the entire accepted root enclosure, 2^-256 outward."""
+    t, b = _root_intervals(midpoint, radii)
+    half = Dyadic.point(Q(1, 2))
     side, aux, centres = _layout(t, b, half)
     rows, _, _ = common_rows(t, b, half)
     weights, scales, moments, _ = deterministic_weights(rows, side, aux, centres, half)
@@ -651,35 +1074,31 @@ def interval_sign_audit(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> dict[str, 
                 centres[right - 1][1] - centres[left - 1][1],
             ),
         )
-        if pair not in {(1, 2), (1, 3), (5, 7)} and tau.lo <= 0:
+        if pair not in AXIS_FACES and tau.lo <= 0:
             raise ValueError(f"positive parallel offset branch failed: {pair}")
         if tau.lo <= -1 or tau.hi >= 1:
             raise ValueError(f"parallel face offset escaped interior: {pair}")
         tau_bounds[pair] = tau
-        k = half if pair in {(1, 2), (1, 3), (5, 7)} else (1 - tau) / 2
+        k = half if pair in AXIS_FACES else (1 - tau) / 2
         force, moment = pair_forces[pair], moments[pair]
         capacities[pair] = (k * force + moment, k * force - moment)
     if len(tau_bounds) != 9:
         raise ValueError("parallel offset coverage incomplete")
-    failures = [f"weight.{key}" for key, bound in weights.items() if bound.lo < 0]
-    failures.extend(
-        f"capacity.{pair}.{sign}"
-        for pair, bounds in capacities.items()
-        for sign, bound in zip(("plus", "minus"), bounds, strict=True)
-        if bound.lo < 0
+    for key in ZERO_WEIGHT_KEYS:
+        if (weights[key].lo, weights[key].hi) != (0, 0):
+            raise ValueError(f"prescribed zero weight is not an exact zero interval: {key}")
+    signed: dict[str, Box] = {f"weight.{key}": bound for key, bound in weights.items()}
+    signed.update(
+        {
+            f"capacity.{pair}.{sign}": bound
+            for pair, bounds in capacities.items()
+            for sign, bound in zip(("plus", "minus"), bounds, strict=True)
+        }
     )
-    negatives = [bound for bound in weights.values() if bound.hi < 0]
-    negatives.extend(
-        bound for bounds in capacities.values() for bound in bounds if bound.hi < 0
-    )
-    disposition = (
-        "confirmed_fixed_stress"
-        if not failures
-        else "rejected_fixed_candidate"
-        if negatives
-        else "unresolved_interval_sign"
-    )
+    disposition, failures = classify_signs(signed)
+    positive = [bound for key, bound in weights.items() if key not in ZERO_WEIGHT_KEYS]
     return {
+        "grid_bits": GRID_BITS,
         "row_order": [list(key) for key in rows],
         "weight_bounds": {str(key): weights[key].as_json() for key in rows},
         "guard_bounds": {key: bound.as_json() for key, bound in guards.items()},
@@ -690,10 +1109,351 @@ def interval_sign_audit(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> dict[str, 
         },
         "weights": len(weights),
         "nonnegative_weights": sum(bound.lo >= 0 for bound in weights.values()),
+        "strictly_positive_weights": sum(bound.lo > 0 for bound in positive),
+        "minimum_positive_weight_lower_bound": float(min(bound.lo for bound in positive)),
+        "minimum_capacity_lower_bound": float(
+            min(bound.lo for bounds in capacities.values() for bound in bounds)
+        ),
         "passed": not failures,
         "disposition": disposition,
         "failures": failures,
     }
+
+
+@dataclass(frozen=True)
+class _Jet:
+    """First-order one-sided jet value + slope*epsilon with exact rational parts."""
+
+    value: Q
+    slope: Q
+
+    def __add__(self, other: _Jet) -> _Jet:
+        return _Jet(self.value + other.value, self.slope + other.slope)
+
+    def __sub__(self, other: _Jet) -> _Jet:
+        return _Jet(self.value - other.value, self.slope - other.slope)
+
+    def __mul__(self, other: _Jet) -> _Jet:
+        return _Jet(
+            self.value * other.value, self.value * other.slope + self.slope * other.value
+        )
+
+    def magnitude(self) -> _Jet:
+        if self.value:
+            return self if self.value > 0 else _Jet(-self.value, -self.slope)
+        return _Jet(Q(0), abs(self.slope))
+
+
+def _jet_max(first: _Jet, second: _Jet) -> _Jet:
+    if first.value != second.value:
+        return first if first.value > second.value else second
+    return _Jet(first.value, max(first.slope, second.slope))
+
+
+def _rotating(vector: tuple[Q, Q], omega: Q) -> tuple[_Jet, _Jet]:
+    return _Jet(vector[0], -omega * vector[1]), _Jet(vector[1], omega * vector[0])
+
+
+def _owner_gap(
+    normal: tuple[Q, Q],
+    owner_omega: Q,
+    displacement: tuple[_Jet, _Jet],
+    other_axes: tuple[tuple[Q, Q], tuple[Q, Q]],
+    other_omega: Q,
+) -> _Jet:
+    """Exact owner-axis gap: rotating owner normal, rotating nonowner support."""
+    n = _rotating(normal, owner_omega)
+    projection = n[0] * displacement[0] + n[1] * displacement[1]
+    support = _Jet(Q(0), Q(0))
+    for axis in other_axes:
+        turned = _rotating(axis, other_omega)
+        support = support + (n[0] * turned[0] + n[1] * turned[1]).magnitude()
+    return projection - _Jet(Q(1, 2), Q(0)) - support * _Jet(Q(1, 2), Q(0))
+
+
+def _velocity(labels: tuple[int, int], values: tuple[tuple[Q, Q, Q], ...]) -> list[Q]:
+    vector = [Q(0)] * DIMENSION
+    for label, (x, y, angle) in zip(labels, values, strict=True):
+        vector[_coordinate(label, "x")] = x
+        vector[_coordinate(label, "y")] = y
+        vector[_coordinate(label, "angle")] = angle
+    return vector
+
+
+def _row_value(row: list[Any], velocity: list[Q]) -> Q:
+    return sum((Q(entry) * value for entry, value in zip(row, velocity, strict=True)), Q(0))
+
+
+VELOCITY_CASES: tuple[tuple[tuple[Q, Q, Q], tuple[Q, Q, Q]], ...] = (
+    ((Q(1, 7), Q(-2, 9), Q(1, 3)), (Q(3, 11), Q(1, 5), Q(5, 4))),
+    ((Q(-1, 7), Q(2, 9), Q(5, 4)), (Q(3, 11), Q(-1, 5), Q(-1, 3))),
+    ((Q(1, 13), Q(1, 17), Q(2, 7)), (Q(-1, 19), Q(1, 23), Q(2, 7))),
+)
+
+
+def _row_derivative_controls() -> dict[str, Any]:
+    """Exact first-order owner gaps against the tool's reduced rows."""
+    half = Q(1, 2)
+    unit = (Q(3, 5), Q(4, 5))
+    results: dict[str, Any] = {}
+    parallel = [((9, 10), "u", unit, offset) for offset in (Q(1, 3), Q(7, 8), Q(1))]
+    parallel.append(((1, 3), "ey", (Q(0), Q(1)), Q(0)))
+    for pair, axis, normal, offset in parallel:
+        tangent = (-normal[1], normal[0])
+        centres: list[Any] = [(Q(0), Q(0))] * 17
+        centres[pair[1] - 1] = (
+            normal[0] + offset * tangent[0],
+            normal[1] + offset * tangent[1],
+        )
+        rows = _pair_rows(pair, axis, {axis: normal}, tuple(centres), half)
+        if len(rows) != 2:
+            raise ValueError("parallel control produced the wrong row count")
+        for index, (first, second) in enumerate(VELOCITY_CASES):
+            velocity = _velocity(pair, (first, second))
+            displacement = (
+                _Jet(centres[pair[1] - 1][0], second[0] - first[0]),
+                _Jet(centres[pair[1] - 1][1], second[1] - first[1]),
+            )
+            owner_i = _owner_gap(normal, first[2], displacement, (normal, tangent), second[2])
+            owner_j = _owner_gap(normal, second[2], displacement, (normal, tangent), first[2])
+            exact = _jet_max(owner_i, owner_j)
+            reduced = min(_row_value(row, velocity) for row in rows)
+            results[f"parallel.{pair}.tau={offset}.case{index}"] = (
+                exact.value == 0 and exact.slope == reduced
+            )
+    smooth = (
+        ((3, 9), (Q(0), Q(1)), {"ey": (Q(0), Q(1)), "u": unit[::-1], "v": (Q(-3, 5), Q(4, 5))}),
+        (
+            (4, 10),
+            (Q(3, 5), Q(-4, 5)),
+            {"w": (Q(3, 5), Q(-4, 5)), "ex": (Q(1), Q(0)), "ey": (Q(0), Q(1))},
+        ),
+    )
+    for pair, normal, aux in smooth:
+        axis = next(axis for left, right, axis, _ in CONTACTS if (left, right) == pair)
+        centres = [(Q(0), Q(0))] * 17
+        centres[pair[1] - 1] = (Q(1, 5), Q(2)) if pair == (3, 9) else (Q(1), Q(-1, 3))
+        rows = _pair_rows(pair, axis, aux, tuple(centres), half)
+        owner = next(
+            row["owner"]
+            for row in option_manifest()
+            if (row["left"], row["right"]) == pair and row["kind"] == "identity"
+        )
+        other = pair[1] if owner == pair[0] else pair[0]
+        other_axes = tuple(aux[name] for name in AXES[square_class(other)])
+        for index, (first, second) in enumerate(VELOCITY_CASES):
+            velocity = _velocity(pair, (first, second))
+            omegas = {pair[0]: first[2], pair[1]: second[2]}
+            displacement = (
+                _Jet(centres[pair[1] - 1][0], second[0] - first[0]),
+                _Jet(centres[pair[1] - 1][1], second[1] - first[1]),
+            )
+            exact = _owner_gap(
+                normal,
+                omegas[owner],
+                displacement,
+                (other_axes[0], other_axes[1]),
+                omegas[other],
+            )
+            results[f"smooth.{pair}.owner{owner}.case{index}"] = exact.slope == _row_value(
+                rows[0], velocity
+            )
+    return {"checks": len(results), "passed": all(results.values()), "results": results}
+
+
+def _closing_functions(aux: dict[str, Any], side: Any, half: Any) -> dict[str, Any]:
+    """H254 closing functions with the side as an independent argument."""
+    c, s, d, e = (aux[name] for name in ("c", "s", "d", "e"))
+    alpha, gamma = c * d - s * e, c * e + s * d
+    x = half + (2 + c * s + 3 * s - s * side) / c
+    y = 3 * half + (2 + 3 * c - c * side) / s
+    aa = d * (x + half) - e * (side - 1) + half
+    bb = (d + e) * (side - 1) - half
+    f1 = c * (side - 3) + s * (side - 2) - 3
+    f2 = d * (side - x - 3 * half) - e * (y - side + 3 * half) - 1
+    f3 = alpha * (aa - half) + gamma * (bb - half) - (c + 2 * s + 2)
+    return {"X": x, "Y": y, "A": aa, "B": bb, "F1": f1, "F2": f2, "G3": f3 + alpha * f2}
+
+
+def _load_derivative_controls() -> dict[str, Any]:
+    """Partial angle derivatives at fixed S, and refusal after substituting S(t)."""
+    field = ExactField()
+    half = field.constant(Q(1, 2))
+    t, b, independent = field.generator("t"), field.generator("b"), field.generator("S")
+    side, aux, _ = _layout(t, b, half)
+    bound = _closing_functions(aux, side, half)
+    binding = {name: _vanishes(bound[name] - aux[name]) for name in ("X", "Y", "A", "B")}
+    binding["F1_vanishes_on_S(t)"] = _vanishes(bound["F1"])
+    binding["F2_matches_layout"] = _vanishes(bound["F2"] - _closing_f2(side, aux))
+    free = _closing_functions(aux, independent, half)
+    scales = load_scales(independent, aux)
+    theta, beta = (1 + t * t) / 2, (1 + b * b) / 2
+    derivatives = {
+        "F1_theta": theta * free["F1"].derivative("t"),
+        "F2_theta": theta * free["F2"].derivative("t"),
+        "F2_beta": beta * free["F2"].derivative("b"),
+        "G3_theta": theta * free["G3"].derivative("t"),
+        "G3_beta": beta * free["G3"].derivative("b"),
+    }
+    partials = {name: _vanishes(value - scales[name]) for name, value in derivatives.items()}
+    substituted = load_scales(side, aux)
+    after = {
+        "F1_theta": theta * bound["F1"].derivative("t"),
+        "F2_theta": theta * bound["F2"].derivative("t"),
+    }
+    refused = {name: not _vanishes(value - substituted[name]) for name, value in after.items()}
+    return {
+        "binding": binding,
+        "fixed_side_partials": partials,
+        "differentiate_after_substitution_refused": refused,
+        "passed": all(binding.values()) and all(partials.values()) and all(refused.values()),
+    }
+
+
+def _mutation_controls() -> dict[str, Any]:
+    """Each frozen adversarial mutation must break the exact formal identity."""
+    field = ExactField()
+    side, aux, centres, rows = _formal_model(field)
+    half = field.constant(Q(1, 2))
+    loads = _formal_loads(field)
+    weights, scales, _, _ = deterministic_weights(
+        rows, side, aux, centres, half, formal=loads, normalize=False
+    )
+    twelve, sixteen = _formal_expectations(loads, side, aux, scales)
+    side_coefficient = scales["K"]
+    baseline = identity_failures(rows, weights, side_coefficient, twelve, sixteen)
+    if baseline:
+        raise ValueError(f"unmutated formal identity failed in columns {baseline}")
+    rho = loads[2]
+
+    def swapped(pair: tuple[int, int]) -> dict[tuple[Any, ...], Any]:
+        altered = dict(weights)
+        minus, plus = ("pair", *pair, 0), ("pair", *pair, 1)
+        altered[minus], altered[plus] = weights[plus], weights[minus]
+        return altered
+
+    def replaced(key: tuple[Any, ...], value: Any) -> dict[tuple[Any, ...], Any]:
+        altered = dict(weights)
+        altered[key] = value
+        return altered
+
+    flipped = {
+        key: [-value if column == OMEGA_16 else value for column, value in enumerate(row)]
+        for key, row in rows.items()
+    }
+    dropped = {key: row for key, row in rows.items() if key != ("wall", 8, "top", 1)}
+    gamma, d, e = aux["gamma"], aux["d"], aux["e"]
+    cases: dict[str, list[int]] = {
+        "tree_edge_moment_sign_12_14": identity_failures(
+            rows, swapped((12, 14)), side_coefficient, twelve, sixteen
+        ),
+        "interchange_face_rows_1_3": identity_failures(
+            rows, swapped((1, 3)), side_coefficient, twelve, sixteen
+        ),
+        "square16_physical_angle_sign": identity_failures(
+            flipped, weights, side_coefficient, twelve, sixteen
+        ),
+        "omit_exceptional_omega12": identity_failures(
+            rows, weights, side_coefficient, 0, sixteen
+        ),
+        "exceptional_residual_sign": identity_failures(
+            rows, weights, side_coefficient, -twelve, -sixteen
+        ),
+        "force_15_16": identity_failures(
+            rows,
+            replaced(("pair", 15, 16, 0), weights["pair", 15, 16, 0] + rho),
+            side_coefficient,
+            twelve,
+            sixteen,
+        ),
+        "normalization_drops_8_wall_term": identity_failures(
+            rows, weights, side_coefficient - gamma * rho * (d + e), twelve, sixteen
+        ),
+        "row_dropped_8_top_plus": identity_failures(
+            dropped, weights, side_coefficient, twelve, sixteen
+        ),
+        "zero_weight_9_11": identity_failures(
+            rows, replaced(("pair", 9, 11, 0), rho), side_coefficient, twelve, sixteen
+        ),
+    }
+    return {
+        "baseline_failures": len(baseline),
+        "mutations": {
+            name: {"refused": bool(columns), "failing_columns": columns}
+            for name, columns in cases.items()
+        },
+        "passed": all(cases.values()),
+    }
+
+
+def _interval_controls() -> dict[str, Any]:
+    """Outward 2^-256 containment, including negatives, division and refusal."""
+    checks: dict[str, bool] = {}
+    third = Dyadic.point(Q(1, 3))
+    checks["inexact_point_strictly_outward"] = third.lo < Q(1, 3) < third.hi
+    checks["dyadic_point_exact"] = Dyadic.point(Q(-3, 8)) == Dyadic(Q(-3, 8), Q(-3, 8))
+    left = Dyadic.enclose(Q(-2, 3), Q(5, 7))
+    right = Dyadic.enclose(Q(3, 11), Q(9, 13))
+    samples = [(Q(-2, 3), Q(3, 11)), (Q(1, 9), Q(9, 13)), (Q(5, 7), Q(1, 2)), (Q(0), Q(2, 5))]
+    for name, operation in (
+        ("add", lambda x, y: x + y),
+        ("sub", lambda x, y: x - y),
+        ("mul", lambda x, y: x * y),
+        ("div", lambda x, y: x / y),
+    ):
+        bound = operation(left, right)
+        checks[f"{name}.on_grid"] = (
+            (bound.lo * GRID).denominator == 1 == (bound.hi * GRID).denominator
+        )
+        checks[f"{name}.contains"] = all(
+            bound.lo <= operation(x, y) <= bound.hi for x, y in samples
+        )
+    negative = -Dyadic.enclose(Q(1, 3), Q(2, 3))
+    checks["negation"] = negative.lo <= Q(-2, 3) and Q(-1, 3) <= negative.hi
+    try:
+        _ = left / Dyadic.enclose(Q(-1, 5), Q(1, 5))
+        checks["zero_straddling_division_refused"] = False
+    except ValueError:
+        checks["zero_straddling_division_refused"] = True
+    try:
+        _ = Dyadic(Q(1, 3), Q(1, 2))
+        checks["off_grid_endpoint_refused"] = False
+    except ValueError:
+        checks["off_grid_endpoint_refused"] = True
+    return {"checks": len(checks), "passed": all(checks.values()), "results": checks}
+
+
+def _disposition_controls() -> dict[str, Any]:
+    positive = Dyadic.enclose(Q(1, 10), Q(1, 5))
+    straddle = Dyadic.enclose(Q(-1, 10), Q(1, 5))
+    negative = Dyadic.enclose(Q(-1, 5), Q(-1, 10))
+    expected = {
+        "confirmed_fixed_stress": {"a": positive, "b": Dyadic.point(0)},
+        "unresolved_interval_sign": {"a": positive, "b": straddle},
+        "rejected_fixed_candidate": {"a": straddle, "b": negative},
+    }
+    results = {name: classify_signs(bounds)[0] == name for name, bounds in expected.items()}
+    return {"checks": len(results), "passed": all(results.values()), "results": results}
+
+
+def synthetic_controls() -> dict[str, Any]:
+    """Target-free controls; any control that misbehaves refuses the instrument."""
+    started = time.monotonic()
+    sections: dict[str, Any] = {}
+    for name, control in (
+        ("interval_arithmetic", _interval_controls),
+        ("sign_disposition", _disposition_controls),
+        ("row_derivatives", _row_derivative_controls),
+        ("load_derivatives", _load_derivative_controls),
+        ("mutations", _mutation_controls),
+    ):
+        mark = time.monotonic()
+        sections[name] = control()
+        sections[name]["seconds"] = time.monotonic() - mark
+    failed = [name for name, section in sections.items() if section["passed"] is not True]
+    if failed:
+        raise ValueError(f"synthetic controls failed: {failed}")
+    return {"sections": sections, "passed": True, "seconds": time.monotonic() - started}
 
 
 def _require_features_accepted(
@@ -723,31 +1483,74 @@ def _root_box(root: dict[str, Any]) -> tuple[tuple[Q, Q], tuple[Q, Q]]:
     return (midpoint[0], midpoint[1]), (radii[0], radii[1])
 
 
+REFUSALS = (
+    CertificateError,
+    ValueError,
+    OSError,
+    KeyError,
+    IndexError,
+    TypeError,
+    ZeroDivisionError,
+    RecursionError,
+    subprocess.TimeoutExpired,
+)
+
+
+def _refuse(error: object) -> int:
+    print(
+        json.dumps(
+            {
+                "schema": "n17-core-stress-certificate/v1",
+                "criterion_passed": False,
+                "error": str(error),
+            },
+            sort_keys=True,
+        )
+    )
+    return 2
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("root_certificate", type=Path)
-    parser.add_argument("endpoint_certificate", type=Path)
-    parser.add_argument("feature_certificate", type=Path)
+    parser.add_argument("root_certificate", type=Path, nargs="?")
+    parser.add_argument("endpoint_certificate", type=Path, nargs="?")
+    parser.add_argument("feature_certificate", type=Path, nargs="?")
     parser.add_argument("--source", type=Path, default=SOURCE)
+    parser.add_argument(
+        "--controls-only",
+        action="store_true",
+        help="run the target-free synthetic controls and read no certificate",
+    )
     args = parser.parse_args(argv)
     if not INSTRUMENT_READY:
+        return _refuse("instrument_unready")
+    started = time.monotonic()
+    instrument = provenance(Path(__file__))
+    try:
+        controls = synthetic_controls()
+    except REFUSALS as error:
+        return _refuse(error)
+    if args.controls_only:
         print(
-            json.dumps(
+            _encode_receipt(
                 {
-                    "schema": "n17-core-stress-certificate/v1",
-                    "criterion_passed": False,
-                    "error": "instrument_unready",
-                },
-                sort_keys=True,
+                    "schema": "n17-core-stress-controls/v1",
+                    "instrument_provenance": instrument,
+                    "controls": controls,
+                    "passed": True,
+                }
             )
         )
-        return 2
-    started = time.monotonic()
+        return 0
+    inputs = (args.root_certificate, args.endpoint_certificate, args.feature_certificate)
+    if any(path is None for path in inputs):
+        return _refuse("root, endpoint and feature certificates are all required")
+    root_path, endpoint_path, feature_path = (Path(str(path)) for path in inputs)
     try:
         source = _read_limited(args.source)
-        root_raw = _read_limited(args.root_certificate)
-        endpoint_raw = _read_limited(args.endpoint_certificate)
-        feature_raw = _read_limited(args.feature_certificate)
+        root_raw = _read_limited(root_path)
+        endpoint_raw = _read_limited(endpoint_path)
+        feature_raw = _read_limited(feature_path)
         _frozen_bytes(FROZEN_ROOT_REF, root_raw)
         _frozen_bytes(FROZEN_ENDPOINT_REF, endpoint_raw)
         _frozen_bytes(FROZEN_FEATURE_REF, feature_raw)
@@ -761,11 +1564,15 @@ def main(argv: list[str] | None = None) -> int:
         symbolic_started = time.monotonic()
         identities = symbolic_residual_proofs()
         symbolic_seconds = time.monotonic() - symbolic_started
+        guard_started = time.monotonic()
+        denominators = denominator_guards(ring_residual_proofs().denominators, midpoint, radii)
+        guard_seconds = time.monotonic() - guard_started
         interval_started = time.monotonic()
         interval = interval_sign_audit(midpoint, radii)
         interval_seconds = time.monotonic() - interval_started
         result = {
             "schema": "n17-core-stress-certificate/v1",
+            "instrument_provenance": instrument,
             "root_git_ref": FROZEN_ROOT_REF,
             "endpoint_git_ref": FROZEN_ENDPOINT_REF,
             "feature_git_ref": FROZEN_FEATURE_REF,
@@ -775,39 +1582,25 @@ def main(argv: list[str] | None = None) -> int:
                 "midpoint": [_fraction_string(value) for value in midpoint],
                 "inclusion_bounds": [_fraction_string(value) for value in radii],
             },
+            "controls": controls,
             "identities": identities,
+            "denominator_guards": denominators,
             "interval": interval,
             "criterion_passed": interval["passed"],
             "timing_seconds": {
                 "total": time.monotonic() - started,
+                "controls": controls["seconds"],
                 "symbolic": symbolic_seconds,
+                "symbolic_foundation": identities["foundation_seconds"],
+                "ring_proof": identities["ring"]["seconds"],
+                "denominator_guards": guard_seconds,
                 "interval": interval_seconds,
             },
         }
         print(_encode_receipt(result))
         return 0 if result["criterion_passed"] else 1
-    except (
-        CertificateError,
-        ValueError,
-        OSError,
-        KeyError,
-        IndexError,
-        TypeError,
-        ZeroDivisionError,
-        RecursionError,
-        subprocess.TimeoutExpired,
-    ) as error:
-        print(
-            json.dumps(
-                {
-                    "schema": "n17-core-stress-certificate/v1",
-                    "criterion_passed": False,
-                    "error": str(error),
-                },
-                sort_keys=True,
-            )
-        )
-        return 2
+    except REFUSALS as error:
+        return _refuse(error)
 
 
 if __name__ == "__main__":

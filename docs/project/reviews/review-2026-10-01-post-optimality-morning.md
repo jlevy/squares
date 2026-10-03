@@ -165,6 +165,18 @@ UTC. No new research starts during finalization.
 [PR261](https://github.com/jlevy/squares/pull/261); no merge or deployment is part of
 this session.
 
+## Scope Note After the Route Review
+
+*Added 2026-10-01 by Session 166, after PR 265 merged.* The conditional-minimum row
+above holds inside the H254 box, $S\in[4.675,4.676]$ with an angle window reaching
+$0.17^\circ$ below the endpoint, not down to the lower bound $4.66044$. It assumes exact
+common orientation of squares 9, 10, 11, 12 and 14, so it cannot be the terminal
+theorem.
+The [route review](review-2026-10-01-n17-route-after-pr265.md) found no error in
+this report’s mathematics.
+It also finds H258’s candidate stress valid in exploratory checks, and replaces the
+`think-11ma` next entry with the BC-406 coordinator.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -117,7 +117,7 @@ RUNTIME = {
 
 @pytest.fixture(autouse=True)
 def _portable_runtime_binding(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(fixed_core_packet, "runtime_binding", lambda _repository: RUNTIME)
+    monkeypatch.setattr(fixed_core_packet, "runtime_binding", lambda: RUNTIME)
 
 
 def _raw(minimum: Fraction):
@@ -1298,22 +1298,50 @@ def test_public_readback_refuses_a_direct_unsupervised_worker_receipt(
         load_result(output, repository=REPOSITORY, expected_revision=REVISION)
 
 
-def test_readback_refuses_a_different_runtime_identity(tmp_path: Path) -> None:
-    output, _result = _execute(tmp_path, RAW_THRESHOLD)
+def test_readback_reads_a_result_recorded_under_another_runtime(tmp_path: Path) -> None:
+    """A later commit, dependency or interpreter never invalidates a retained result.
+
+    The recorded revision, manifest and runtime are the run's history. Readback at this
+    checkout's `HEAD` -- not the recorded revision -- in another environment recomputes
+    none of them and reads the same retained bytes to the same result.
+    """
+
+    def interrupted(_certificate, *, progress, log, **_kwargs):
+        _write_row(log, "0", {"direction": 0, "charge": "7/8", "witness": ["1", "1"]})
+        progress(1, (0,), Fraction(7, 8), 0, (Fraction(1), Fraction(1)))
+        raise PacketDeadlineError("synthetic retained-prefix timeout")
+
+    output, _result = _execute(tmp_path, RAW_THRESHOLD + 1, raw_runner=interrupted)
     saved = cast(dict[str, object], json.loads((output / "result.json").read_text()))
     runtime = cast(dict[str, object], cast(dict[str, object], saved["sources"])["runtime"])
     cast(dict[str, object], runtime["packages"])["numpy"] = "2.5.1"
+    cast(dict[str, object], runtime["python"])["version"] = "3.14.6"
     (output / "result.json").write_text(json.dumps(saved, indent=2) + "\n")
+    assert runtime != RUNTIME
+    head = subprocess.run(
+        ("git", "-C", str(REPOSITORY), "rev-parse", "HEAD"),
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    assert head != REVISION
     with (
-        patch("devtools.fixed_core_packet.source_manifest", return_value=MANIFEST),
-        pytest.raises(PacketError, match="runtime differs"),
+        patch(
+            "devtools.fixed_core_packet.source_manifest",
+            side_effect=AssertionError("readback recomputed the source manifest"),
+        ),
+        patch(
+            "devtools.fixed_core_packet.runtime_binding",
+            side_effect=AssertionError("readback consulted the current runtime"),
+        ),
     ):
-        load_result(
+        readback = load_result(
             output,
             repository=REPOSITORY,
             expected_revision=REVISION,
             require_supervision=False,
         )
+    assert readback == saved
 
 
 def test_load_result_refuses_complete_acceptance_without_all_retained_rows(
@@ -1806,9 +1834,10 @@ def test_git_execution_failure_has_operational_provenance() -> None:
 
 
 @pytest.mark.parametrize("index_flag", ["--assume-unchanged", "--skip-worktree"])
-def test_source_manifest_refuses_implementation_drift_hidden_from_git_status(
+def test_source_manifest_records_an_edit_hidden_from_git_status(
     tmp_path: Path, index_flag: str
 ) -> None:
+    """An uncommitted edit is recorded beside the revision's blob, never refused."""
     helper = "packing/devtools/source_guard.py"
     repository, revision = _repository_with_sources(tmp_path, (helper, b"VALUE = 1\n"))
     subprocess.run(
@@ -1833,13 +1862,24 @@ def test_source_manifest_refuses_implementation_drift_hidden_from_git_status(
             return_value=(SOURCE_PATH, T026_PATH, helper),
         ),
         patch("devtools.fixed_core_packet._validate_loaded_modules"),
-        pytest.raises(PacketError, match="bytes differ from the frozen Git blob"),
     ):
-        source_manifest(repository, revision)
+        manifest = source_manifest(repository, revision)
+    row = next(row for row in manifest if row["path"] == helper)
+    committed = subprocess.run(
+        ("git", "-C", str(repository), "rev-parse", f"{revision}:{helper}"),
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    assert row == {
+        "path": helper,
+        "git_blob": committed,
+        "sha256": hashlib.sha256(b"VALUE = 2\n").hexdigest(),
+    }
 
 
 @pytest.mark.parametrize("relative_result", ["result", "nested/result", "*"])
-def test_source_manifest_uses_a_literal_result_directory_exclusion(
+def test_source_manifest_records_a_dirty_checkout_without_refusing(
     tmp_path: Path, relative_result: str
 ) -> None:
     repository, revision = _repository_with_sources(tmp_path)
@@ -1862,12 +1902,14 @@ def test_source_manifest_uses_a_literal_result_directory_exclusion(
         assert {row["path"] for row in manifest} == {SOURCE_PATH, T026_PATH}
 
         (repository / "unrelated.txt").write_text("dirty\n")
-        with pytest.raises(PacketError, match="checkout must be clean"):
+        assert (
             source_manifest(
                 repository,
                 revision,
                 result_directory=result_directory,
             )
+            == manifest
+        )
 
 
 @pytest.mark.parametrize(
@@ -2006,36 +2048,6 @@ def test_output_guard_refuses_git_outside_its_deadline(
         fixed_core_packet.prepare_output_dir(output, REPOSITORY, deadline=12.0)
     assert git.call_count == len(readings) - 1
     assert not output.exists()
-
-
-def test_scientific_readback_cannot_hide_unrelated_state_with_a_metachar_output(
-    tmp_path: Path,
-) -> None:
-    packet_root = tmp_path / "packet"
-    packet_root.mkdir()
-    output, result = _execute(packet_root, RAW_THRESHOLD)
-    repository, revision = _repository_with_sources(tmp_path / "fixture")
-    result_directory = repository / "*"
-    output.rename(result_directory)
-    sources = cast(dict[str, object], result["sources"])
-    sources["implementation_revision"] = revision
-    (result_directory / "result.json").write_text(json.dumps(result, indent=2) + "\n")
-    (repository / "unrelated.txt").write_text("dirty\n")
-
-    with (
-        patch(
-            "devtools.fixed_core_packet.discover_implementation_paths",
-            return_value=(SOURCE_PATH, T026_PATH),
-        ),
-        patch("devtools.fixed_core_packet._validate_loaded_modules"),
-        pytest.raises(PacketError, match="checkout must be clean"),
-    ):
-        load_result(
-            result_directory,
-            repository=repository,
-            expected_revision=revision,
-            require_supervision=False,
-        )
 
 
 @pytest.mark.parametrize("constant", ["NaN", "Infinity", "-Infinity"])
@@ -2626,53 +2638,39 @@ def test_recursive_import_closure_contains_each_retaining_reader() -> None:
     assert set(PROJECT_RUNTIME_PATHS) <= set(paths)
 
 
-def test_runtime_binding_validates_the_project_environment_and_lock(tmp_path: Path) -> None:
-    packing = tmp_path / "packing"
-    environment = packing / ".venv"
+def test_runtime_binding_records_the_running_environment_without_comparing(
+    tmp_path: Path,
+) -> None:
+    """No `.python-version`, `uv.lock` or project `.venv` is consulted: only observed."""
+    environment = tmp_path / "elsewhere" / ".venv"
     executable = environment / "bin" / "python"
-    numpy_origin = environment / "lib" / "numpy" / "__init__.py"
-    strif_origin = environment / "lib" / "strif" / "__init__.py"
-    for path in (executable, numpy_origin, strif_origin):
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(b"")
-    (packing / ".python-version").write_text("3.14.7\n")
-    (packing / "uv.lock").write_text(
-        'version = 1\n[[package]]\nname = "numpy"\nversion = "2.5.2"\n'
-        '[[package]]\nname = "strif"\nversion = "3.1.0"\n'
-    )
     observation = RuntimeObservation(
         implementation="cpython",
-        version="3.14.7",
-        abi="cpython-314t-test",
-        gil_enabled=False,
-        environment=environment.resolve(),
-        executable=executable.resolve(),
-        resolved_executable=executable.resolve(),
-        build="3.14.7 free-threaded test build",
+        version="3.14.6",
+        abi="cpython-314-test",
+        gil_enabled=True,
+        environment=environment,
+        executable=executable,
+        resolved_executable=executable,
+        build="3.14.6 test build",
         packages=(
-            PackageRuntimeObservation("numpy", "2.5.2", "2.5.2", numpy_origin.resolve()),
-            PackageRuntimeObservation("strif", "3.1.0", "3.1.0", strif_origin.resolve()),
+            PackageRuntimeObservation("numpy", "2.4.0", "2.4.0", environment / "numpy"),
+            PackageRuntimeObservation("strif", "3.0.0", "3.0.0", environment / "strif"),
         ),
     )
-    binding = runtime_binding(tmp_path, observer=lambda: observation)
-    assert binding["packages"] == {"numpy": "2.5.2", "strif": "3.1.0"}
-    assert cast(dict[str, object], binding["python"])["environment"] == str(
-        environment.resolve()
-    )
+    binding = runtime_binding(observer=lambda: observation)
+    assert binding["packages"] == {"numpy": "2.4.0", "strif": "3.0.0"}
+    assert cast(dict[str, object], binding["python"])["environment"] == str(environment)
+    assert binding["attestation_scope"] == RUNTIME_ATTESTATION_SCOPE
 
-    wrong_environment = RuntimeObservation(
-        implementation=observation.implementation,
-        version=observation.version,
-        abi=observation.abi,
-        gil_enabled=observation.gil_enabled,
-        environment=tmp_path,
-        executable=observation.executable,
-        resolved_executable=observation.resolved_executable,
-        build=observation.build,
-        packages=observation.packages,
+    missing = RuntimeObservation(
+        **{
+            **{field: getattr(observation, field) for field in RuntimeObservation.__slots__},
+            "packages": observation.packages[:1],
+        }
     )
-    with pytest.raises(PacketError, match=r"repository packing/\.venv"):
-        runtime_binding(tmp_path, observer=lambda: wrong_environment)
+    with pytest.raises(PacketError, match="runtime package set"):
+        runtime_binding(observer=lambda: missing)
 
 
 @pytest.mark.parametrize(
@@ -2734,31 +2732,6 @@ def test_nested_tampering_and_impossible_complete_state_are_refused(tmp_path: Pa
     sources["manifest"] = [row for row in manifest if row["path"] != "packing/pyproject.toml"]
     with pytest.raises(PacketError, match="incomplete"):
         validate_result_document(saved)
-
-
-def test_executed_source_bytes_must_match_the_prevalidated_manifest(tmp_path: Path) -> None:
-    output = tmp_path / "race"
-    output.mkdir()
-    with pytest.raises(PacketError, match="executed T-026 bytes"):
-        execute_packet(
-            SOURCE,
-            T026_BYTES + b" ",
-            revision=REVISION,
-            manifest=MANIFEST,
-            runtime=RUNTIME,
-            output_dir=output,
-            workers=1,
-            scientific_seconds=10.0,
-            external_seconds=20.0,
-            grace_seconds=2.0,
-            process_deadline=100.0,
-            clock=lambda: 0.0,
-            raw_runner=_raw(RAW_THRESHOLD),
-            exact_runner=_exact,
-            interval_runner=_interval,
-            dilation_runner=_dilation,
-            raw_witness_replay=lambda _certificate, result: (result.minimum, True),
-        )
 
 
 @pytest.mark.parametrize("kind", ["invalid", "partial"])
@@ -3237,60 +3210,6 @@ def test_operational_preflight_failure_remains_partial_and_unresolved(
             expected_revision=REVISION,
             require_supervision=False,
         )
-
-
-def test_uv_lock_read_oserror_stays_operational_through_worker_receipt(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    output = tmp_path / "uv-lock-io"
-    output.mkdir()
-    fixed_core_packet.write_result(
-        output / "result.json",
-        fixed_core_packet.initial_preflight_document(
-            REVISION,
-            workers=1,
-            scientific_seconds=10.0,
-            external_seconds=20.0,
-            grace_seconds=2.0,
-        ),
-    )
-    original_read_text = Path.read_text
-    monkeypatch.setattr(fixed_core_packet, "runtime_binding", runtime_binding)
-
-    def read_text(
-        path: Path,
-        encoding: str | None = None,
-        errors: str | None = None,
-        newline: str | None = None,
-    ) -> str:
-        if path.resolve() == (REPOSITORY / "packing" / "uv.lock").resolve():
-            raise OSError("synthetic uv.lock I/O failure")
-        return original_read_text(path, encoding=encoding, errors=errors, newline=newline)
-
-    with (
-        patch("devtools.fixed_core_packet.source_manifest", return_value=MANIFEST),
-        patch.object(Path, "read_text", read_text),
-        patch("devtools.fixed_core_packet.time.perf_counter", side_effect=[10.0, 11.0]),
-    ):
-        status = run_worker(
-            REPOSITORY,
-            REVISION,
-            output,
-            workers=1,
-            scientific_seconds=10.0,
-            external_seconds=20.0,
-            grace_seconds=2.0,
-        )
-
-    receipt = cast(dict[str, object], json.loads((output / "result.json").read_text()))
-    assert status == 1
-    assert receipt["status"] == "partial"
-    assert receipt["outcome"] == "preflight-failed"
-    assert receipt["scientific_decision"] == "unresolved"
-    assert receipt["error"] == (
-        "operational preflight failure: PacketOperationalError: "
-        "could not read the bound uv.lock: OSError: synthetic uv.lock I/O failure"
-    )
 
 
 def test_worker_republishes_complete_receipt_after_readback_with_end_to_end_clock(

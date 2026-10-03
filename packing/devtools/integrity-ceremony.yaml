@@ -1,0 +1,227 @@
+# Integrity ceremony: digest checks of the repository against itself, counted per file
+# and only ever falling. Read by `devtools.check_integrity_ceremony`, where the two forms
+# and the rule are argued (OR-16). The audit that seeded it is
+# docs/project/reviews/review-2026-10-03-integrity-ceremony-audit.md.
+#
+# Run, from `packing/`:
+#   uv run --frozen --all-extras --group dev python -m devtools.check_integrity_ceremony
+#   ... --inventory   every site, allowlisted files marked
+#   ... --update      rewrite the baseline block once counts have fallen
+
+# What names a digest, matched against identifiers, subscript keys and callees: a `sha`
+# token with any suffix of digits, `digest` and `hexdigest`, `blake2`, `md5`, `checksum`,
+# `hashes`. Data rather than a Python constant so that the guard's own source holds no
+# name it would match. The lookarounds keep `shape`, `shared` and `shard` out.
+mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashes)(?![a-z])'
+
+# Files whose sites cross a boundary OR-16 admits, each with the boundary's kind:
+#   download            bytes acquired from another party, held against the value the
+#                       review pinned
+#   external-checkout   another repository at a revision
+#   generated-artifact  a build product no Git revision names, so a digest is its name
+#                       (cache correctness, not an integrity claim)
+#   legacy-manifest     retained evidence, not extended
+# There is no kind for a file this repository wrote, which is the point. An entry whose
+# file holds no site is refused, so the list cannot outlive the code. The letters cite
+# the audit's inventory.
+allowlist:
+  - path: packing/src/sqpack/fractional/parent_core.py
+    kind: download
+    boundary: Kleddamag's n11 release, read against the digest the review pinned (H1).
+  - path: packing/devtools/audit_kleddamag_n11.py
+    kind: download
+    boundary: Kleddamag's certificate and source manifest against their pinned values (H1).
+  - path: packing/src/sqpack/research/unitsquare_precision.py
+    kind: download
+    boundary: A Kingbird SVG fetched by URL and held against its pinned digest (H2).
+  - path: packing/devtools/audit_wand125_point_and_mixed.py
+    kind: download
+    boundary: wand125's acquired packets, their upstream listings and checker files (H3).
+  - path: packing/devtools/audit_wand125_rectangles.py
+    kind: download
+    boundary: wand125's rectangle certificates and the reviewed upstream checker (H3).
+  - path: packing/devtools/audit_wand125_tools.py
+    kind: download
+    boundary: wand125's published input digests against the regenerated input (H3).
+  - path: packing/devtools/audit_tokoharu_density.py
+    kind: download
+    boundary: Tokoharu's density packet against its file manifest (H4).
+  - path: packing/devtools/audit_guzhou_r068.py
+    kind: download
+    boundary: Guzhou's release certificate against its pin (H5).
+  - path: packing/devtools/audit_evand_mixed_covers.py
+    kind: download
+    boundary: Evan D's run headers against the retained upstream files (H7).
+  - path: packing/cases/n54_source_contract/contract.py
+    kind: download
+    boundary: The retained n54 source and its clean-room copy, BC-141's contract (H8).
+  - path: packing/cases/n54_source_contract/verify.py
+    kind: download
+    boundary: The retained n54 source and its clean-room copy, BC-141's contract (H8).
+  - path: packing/devtools/build_known_best_atlas.py
+    kind: download
+    boundary: Upstream's declared digest of a known-best packing it publishes (H9).
+  - path: packing/devtools/check_general_pose_tree_census.py
+    kind: external-checkout
+    boundary: The general_pose_tree checker, another repository passed by --checker (C3).
+  - path: packing/devtools/checkpoint_manifest.py
+    kind: legacy-manifest
+    boundary: The two retained checkpoint manifests; `pack` writes no new sidecar (F6).
+  - path: packages/workbench/tools/workbench_tools/cadence.py
+    kind: generated-artifact
+    boundary: A video receipt names the built page it was drawn from (G1).
+  - path: packages/workbench/tools/workbench_tools/check_animate_view.py
+    kind: generated-artifact
+    boundary: The built page names the citation file it was built from (G1).
+  - path: packages/workbench/tools/workbench_tools/poster.py
+    kind: generated-artifact
+    boundary: A poster names the captured video it is cut from (G1).
+
+# The baseline: every other file holding sites, by count. First seeded on 2026-10-03 from
+# the tree at f4642c051; `--inventory` prints the current total. Only growth is a finding:
+# a fall passes, and `--update` rewrites everything after this comment whenever convenient.
+# The merge of origin/main at f864a576a brought in four n = 11 tools written on main before
+# OR-16's amendment reached it. Their sites are recorded here as inherited, not new; their
+# removal is its own slice (think-vre9).
+# The third merge of origin/main on 2026-10-03 brought in more tools written on
+# main before OR-16's amendment reached it, many replaying third-party certificates whose
+# pins may be real boundaries. Recorded as inherited; their review is think-vre9.
+# The fourth merge of origin/main on 2026-10-03 (e8aee5177) brought in
+# plan_valid9_replay.py, main's ValidTilt9 replay planner, which pins its record and
+# cover by digest as plan_valid7_replay.py does. Recorded as inherited under think-vre9.
+baseline:
+  packages/workbench/tools/workbench_tools/check_candidate.py: 1
+  packing/benchmarks/bench_n11_fast_cover.py: 3
+  packing/benchmarks/bench_n11_indexed_cover.py: 3
+  packing/benchmarks/bench_n11_spawn_cost.py: 1
+  packing/benchmarks/bench_rectangle_clip_ab.py: 3
+  packing/benchmarks/bench_rectangle_derivative_frontier.py: 1
+  packing/benchmarks/bench_rectangle_rust_transport.py: 2
+  packing/benchmarks/bench_rectangle_rust_verifier_ab.py: 5
+  packing/benchmarks/bench_rectangle_verifier_parity.py: 20
+  packing/benchmarks/profile_author_measure_checkers.py: 14
+  packing/benchmarks/profile_n11_collision.py: 3
+  packing/benchmarks/profile_n11_sequential.py: 12
+  packing/benchmarks/profile_rectangle_verifier_hotspots.py: 11
+  packing/cases/n050_exact/source_semantics.py: 1
+  packing/cases/n050_exact/source_semantics_runner.py: 1
+  packing/cases/n050_exact/verify_source_semantics_result.py: 5
+  packing/cases/n050_producer_refusal/harness.py: 3
+  packing/cases/n050_producer_refusal/run.py: 3
+  packing/cases/n050_producer_refusal/verify.py: 7
+  packing/cases/n11_fractional_certificate/minimal_verify.py: 1
+  packing/cases/n11_threshold_certificate/__main__.py: 1
+  packing/cases/n11_threshold_certificate/verify_claim.py: 1
+  packing/cases/n17_weighted_certificate/extract.py: 1
+  packing/cases/n17_weighted_certificate/run.py: 1
+  packing/cases/n17_weighted_certificate/selftest.py: 1
+  packing/cases/n17_weighted_certificate_child/run.py: 4
+  packing/cases/n17_weighted_certificate_parallel/runner.py: 11
+  packing/cases/n17_weighted_certificate_resume/run.py: 4
+  packing/cases/n17_weighted_certificate_successor/run.py: 12
+  packing/cases/trump11/isolation_radius_replay.py: 1
+  packing/cases/unitsquare_precision/production/run.py: 1
+  packing/cases/unitsquare_precision/production/verify.py: 4
+  packing/cases/unitsquare_precision/refusal/run.py: 3
+  packing/cases/unitsquare_precision/refusal/verify.py: 3
+  packing/devtools/acquire_source.py: 3
+  packing/devtools/admit_threshold_compression.py: 1
+  packing/devtools/audit_kleddamag_n11_native.py: 1
+  packing/devtools/audit_n17_endpoint_features.py: 1
+  packing/devtools/audit_n17_endpoint_receipt.py: 1
+  packing/devtools/audit_s12_rescaled_certificate.py: 3
+  packing/devtools/audit_s12_reweighted.py: 5
+  packing/devtools/audit_valid7_independent.py: 4
+  packing/devtools/audit_wand125_linear.py: 20
+  packing/devtools/calibrate_fixed_core_packet.py: 8
+  packing/devtools/check_green_ds7.py: 1
+  packing/devtools/check_hull_kernel_case2095.py: 12
+  packing/devtools/check_hull_kernel_mask0.py: 8
+  packing/devtools/check_n11_baseline_d4_cuts.py: 17
+  packing/devtools/check_n11_capture_branch_r1.py: 18
+  packing/devtools/check_n11_capture_branch_r1_node.py: 12
+  packing/devtools/check_n11_capture_child_node.py: 27
+  packing/devtools/check_n11_capture_root_bridge.py: 16
+  packing/devtools/check_n11_capture_root_chain.py: 41
+  packing/devtools/check_n11_capture_root_continue.py: 49
+  packing/devtools/check_n11_capture_root_node.py: 17
+  packing/devtools/check_n11_capture_root_pilot.py: 30
+  packing/devtools/check_n11_capture_root_round1.py: 36
+  packing/devtools/check_n11_capture_step0.py: 11
+  packing/devtools/check_n11_capture_transition_pilot.py: 11
+  packing/devtools/check_n11_center_partition.py: 2
+  packing/devtools/check_n11_final_composition.py: 3
+  packing/devtools/check_n11_generic_fresh.py: 9
+  packing/devtools/check_n11_generic_sequential.py: 32
+  packing/devtools/check_n11_optimality_capture_ancestry.py: 16
+  packing/devtools/check_n11_optimality_case_census.py: 15
+  packing/devtools/check_n11_optimality_d4.py: 5
+  packing/devtools/check_n11_optimality_d4_incidence.py: 5
+  packing/devtools/check_n11_optimality_field_mask0.py: 10
+  packing/devtools/check_n11_optimality_field_mask202.py: 7
+  packing/devtools/check_n11_optimality_field_runner.py: 7
+  packing/devtools/check_n11_optimality_local.py: 4
+  packing/devtools/check_n11_optimality_local_dual.py: 7
+  packing/devtools/check_n11_optimality_local_isolation.py: 9
+  packing/devtools/check_n11_optimality_local_two_radius.py: 6
+  packing/devtools/check_n11_optimality_pose_inclusion.py: 9
+  packing/devtools/check_n11_optimality_source_graph.py: 12
+  packing/devtools/check_n17_capacity_one_cover.py: 1
+  packing/devtools/check_n17_contact_chart.py: 1
+  packing/devtools/check_n17_core_stress.py: 1
+  packing/devtools/check_n17_endpoint_features.py: 1
+  packing/devtools/check_n17_local_minimum.py: 2
+  packing/devtools/check_n17_root_certificate.py: 1
+  packing/devtools/check_pr_wall.py: 1
+  packing/devtools/compress_threshold_certificate.py: 3
+  packing/devtools/core_shrink.py: 1
+  packing/devtools/diagnose_n17_bb_losses.py: 2
+  packing/devtools/fixed_core_packet.py: 21
+  packing/devtools/independent_ceiling_reader.py: 2
+  packing/devtools/index_n11_capture_source.py: 6
+  packing/devtools/inventory_n11_completion.py: 6
+  packing/devtools/inventory_n11_exclusions.py: 3
+  packing/devtools/map_prospective_sources.py: 1
+  packing/devtools/n11_composition_joins.py: 13
+  packing/devtools/n11_indexed_exact_cover.py: 3
+  packing/devtools/n11_nonfield_ancestry.py: 2
+  packing/devtools/n11_nonfield_assignment.py: 4
+  packing/devtools/n11_nonfield_center_orchestrator.py: 2
+  packing/devtools/n11_nonfield_center_partition.py: 3
+  packing/devtools/n11_nonfield_d4_admission.py: 4
+  packing/devtools/n11_nonfield_special_assignment.py: 6
+  packing/devtools/n11_optimality_figures.py: 3
+  packing/devtools/n11_optimality_mechanism_figures.py: 9
+  packing/devtools/n11_optimality_overview_figures.py: 7
+  packing/devtools/pilot_n17_subpattern_bb.py: 3
+  packing/devtools/plan_valid7_replay.py: 6
+  packing/devtools/plan_valid9_replay.py: 6
+  packing/devtools/prepare_n11_field_manifest.py: 3
+  packing/devtools/prepare_n11_nonfield_batch.py: 8
+  packing/devtools/prepare_n11_nonfield_manifest.py: 13
+  packing/devtools/presplit_n17_bb.py: 2
+  packing/devtools/prototype_n17_bb_coupled.py: 2
+  packing/devtools/read_fixed_core_calibration_profile.py: 1
+  packing/devtools/render_composite_pdf.py: 2
+  packing/devtools/replay_evand_zmx2.py: 1
+  packing/devtools/replay_n17_rational_upper.py: 1
+  packing/devtools/run_fixed_core_calibration_profiles.py: 9
+  packing/devtools/run_n11_nonfield_batch.py: 1
+  packing/devtools/s12_angle_net_rescale.py: 1
+  packing/devtools/select_n11_field_minimum.py: 4
+  packing/devtools/sqverify_fast_census.py: 2
+  packing/devtools/stage_evand_bentz_lean.py: 1
+  packing/devtools/suite_files.py: 1
+  packing/devtools/summarize_n11_nonfield_costs.py: 4
+  packing/devtools/upper_bound_intervals.py: 1
+  packing/devtools/upper_bound_packets.py: 3
+  packing/devtools/verify_evand_angle_net_native.py: 2
+  packing/devtools/verify_fixed_core_calibration_runset.py: 11
+  packing/devtools/verify_guzhou_r052_native.py: 1
+  packing/devtools/verify_n17_bb_certificate.py: 1
+  packing/devtools/verify_n17_kernel_certificate.py: 2
+  packing/src/sqpack/campaign/runner.py: 2
+  packing/src/sqpack/fractional/threshold_compression.py: 1
+  packing/src/sqpack/hull_kernel/node.py: 1
+  packing/src/sqpack/local_rigidity/controls.py: 2
+  packing/src/sqpack/rust_rectangle_geometry.py: 2

@@ -1,0 +1,85 @@
+"""Independent transfer count for W7: states and D4 orbits containing a D4 image.
+
+Reads only cells.json (dumped from the cover tool: cell order and the D4 permutations)
+and enumerates all C(24, 17) states as bitmasks. Imports nothing from sqpack.
+"""
+
+import itertools
+import json
+import sys
+from math import comb
+
+data = json.load(open(sys.argv[1]))
+order = data["order"]
+perms = data["perms"]
+n = len(order)
+assert n == 24
+W7 = ["corner-SW", "side-N0", "side-W0", "side-W1", "side-W2", "interior-SW", "interior-W"]
+idx = [order.index(c) for c in W7]
+print("W7 indices", idx)
+
+
+def image(mask, perm):
+    out = 0
+    for i in range(n):
+        if mask >> i & 1:
+            out |= 1 << perm[i]
+    return out
+
+
+# Check the permutations form a group of order 8 acting by cell index.
+group = [tuple(perms[a]) for a in ("r0", "r1", "r2", "r3", "f0", "f1", "f2", "f3")]
+assert group[0] == tuple(range(n))
+for p in group:
+    for q in group:
+        comp = tuple(p[q[i]] for i in range(n))
+        assert comp in group, "not closed"
+assert len(set(group)) == 8
+
+pattern = sum(1 << i for i in idx)
+images = sorted({image(pattern, p) for p in group})
+print("distinct D4 images of W7:", len(images))
+for im in images:
+    print("  ", [order[i] for i in range(n) if im >> i & 1])
+
+# Direct enumeration of every 17-subset.
+total = 0
+excluded = 0
+excluded_states = []
+for combo in itertools.combinations(range(n), 17):
+    mask = 0
+    for c in combo:
+        mask |= 1 << c
+    total += 1
+    if any(mask & im == im for im in images):
+        excluded += 1
+        excluded_states.append(mask)
+print("states total", total, "expected", comb(24, 17))
+print("excluded states", excluded)
+
+# Inclusion-exclusion cross-check on the 8 images.
+ie = 0
+for k in range(1, len(images) + 1):
+    for sub in itertools.combinations(images, k):
+        union = 0
+        for im in sub:
+            union |= im
+        size = bin(union).count("1")
+        if size <= 17:
+            ie += (-1) ** (k + 1) * comb(24 - size, 17 - size)
+print("inclusion-exclusion excluded states", ie)
+
+# Orbits among the excluded states: canonical form = min over the group.
+canon = set()
+for mask in excluded_states:
+    canon.add(min(image(mask, p) for p in group))
+print("excluded orbits", len(canon))
+
+# All orbits, for the record (Burnside and direct).
+all_canon = set()
+for combo in itertools.combinations(range(n), 17):
+    mask = 0
+    for c in combo:
+        mask |= 1 << c
+    all_canon.add(min(image(mask, p) for p in group))
+print("all orbits", len(all_canon))

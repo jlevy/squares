@@ -1,0 +1,27 @@
+sum of cell areas      = 13.605668152788
+inclusion-exclusion    = 844561/62500 = 13.512976000000000
+centre box area        = 844561/62500 = 13.512976000000000
+terms by subset size   = {1: 24, 2: 20}
+positive-area pairwise overlaps:
+  side-S0&side-W0              area 0.014641000
+  side-N0&side-W2              area 0.014641000
+  side-E0&side-S2              area 0.014641000
+  side-N2&side-E2              area 0.014641000
+  interior-SW&interior-W       area 0.004220515
+  interior-SW&interior-S       area 0.004220515
+  interior-NW&interior-W       area 0.004220515
+  interior-NW&interior-N       area 0.004220515
+  interior-S&interior-SE       area 0.004220515
+  interior-N&interior-NE       area 0.004220515
+  interior-E&interior-SE       area 0.004220515
+  interior-E&interior-NE       area 0.004220515
+  side-S1&interior-SW          area 0.000045504
+  side-S1&interior-SE          area 0.000045504
+  side-N1&interior-NW          area 0.000045504
+  side-N1&interior-NE          area 0.000045504
+  side-W1&interior-SW          area 0.000045504
+  side-W1&interior-NW          area 0.000045504
+  side-E1&interior-SE          area 0.000045504
+  side-E1&interior-NE          area 0.000045504
+UNION AREA EQUALS BOX AREA (exact coverage proof): True
+random rational points: 200000 checked, 0 uncovered

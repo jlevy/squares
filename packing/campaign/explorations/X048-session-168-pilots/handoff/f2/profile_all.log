@@ -1,0 +1,11 @@
+=== kernel-B16 start 20:52:52
+=== kernel-B16 end 20:54:50 rc=0 wall=118.259991077
+=== bb-A-60s start 20:54:50
+=== bb-A-60s end 20:55:53 rc=0 wall=62.301293181
+=== verify-bb-A-sample start 20:55:53
+=== verify-bb-A-sample end 20:59:13 rc=0 wall=200.369518346
+=== verify-kernel-W7-sample start 20:59:13
+=== verify-kernel-W7-sample end 21:24:42 rc=0 wall=1529.518480094
+=== kernel-W7-round1 start 21:24:42
+=== kernel-W7-round1 end 21:40:03 rc=0 wall=920.476031612
+ALL DONE 21:40:03

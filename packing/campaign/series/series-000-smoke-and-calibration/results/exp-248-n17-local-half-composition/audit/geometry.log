@@ -1,0 +1,25 @@
+exp-237 midpoint == exp-238 midpoint: True
+exp-237 radii == exp-238 radii: True
+exp-237 midpoint inside exp-238 box: True
+radii: [9.85923078412898e-24, 6.525346137774639e-23]
+10^-40 box widths: [1.971846156825796e-23, 1.3050692275549278e-22]
+S* = 4.675530093604551  U = 4.676  sigma = (U-S*)/2 = 2.349531977e-04
+theta = 39.804959 deg, c = 0.768228119, s = 0.640176192
+T = 0.071213230, T/s = 0.111240047, R = 3.175530094
+family square 6: x in [R - T/s, R] = [3.064290, 3.175530] (corner frame)
+square 5 on right wall and bottom wall exactly: True True
+9/11: tau0 = -0.276426766820380  D0 = 1.000000000000000  (D0 == 1: True)
+11/13: tau1 = -0.128051926456503  D1 = 1.023737743195405  (D1 == 1 + T/3: True)
+tau0 == c(s-1): True; tau1 == s - c: True
+stack 9/11 from Cartesian: -0.27642676682037987 1.0
+b* = -0.000336991338441548  b*/r = -1.68495669220774
+z* = 0.0241003249194792
+receipt b* = -0.00033699133862..  ratio -1.68495669..; receipt z* = 0.02410032492
+b* > -1/2500: True  margin: 6.3008662e-5
+z* < 1/16: True  z* < 1/32: True
+9/11 hyp: |T|+|D| sin r < 1: True ; D > -1 + |T| sin r: True ; T <= -sin r: True
+11/13 hyp: |T|+|D| sin r < 1: True ; D > -1 + |T| sin r: True ; T <= -sin r: True
+3/2 - sqrt2 = 0.085786438 ; H(1+r) + r sqrt2 - 1/2 = -1.7237288e-5
+side-S2 from design parameters: ['4021/1500', '1693/500', '1/2', '1411/1000'] [2.6806666666666668, 3.386, 0.5, 1.411]
+receipt cell: ['4021/1500', '1693/500', '1/2', '1411/1000']
+family 6 box in cover frame x: 3.064525000033301 3.1757650468022756 y: [0.5, 0.75] + sigma

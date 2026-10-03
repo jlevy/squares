@@ -31,6 +31,10 @@ SOURCE = (
     / "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
     / "global-certificate.json"
 )
+#: A real trust boundary, kept under OR-16: the certificate is third-party data, retained
+#: from Kleddamag's public `v1.0.2` release (see the packet's `acquisition/` manifest), and
+#: this is the digest of the bytes that were reviewed. A mismatch means the file is not
+#: the reviewed release, whatever else in the repository has changed.
 REVIEWED_SHA256 = "57e9927da5c13f42dd8bcbf8f08c84363635fece626657ee63a810c61cd44458"
 
 

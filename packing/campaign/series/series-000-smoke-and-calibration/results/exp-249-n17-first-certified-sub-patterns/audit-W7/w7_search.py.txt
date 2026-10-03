@@ -1,0 +1,161 @@
+"""Independent float search for a feasible W7 placement.
+
+Seven unit squares, centre i in closed cell i (from cells.json), any orientation, inside
+[0, U]^2, pairwise interior-disjoint. The objective is the worst violation: the largest
+pairwise penetration (separating-axis depth over the four axes of each pair), the
+largest cell excursion (signed distance outside the cell polygon) and the largest
+container excursion. Zero means feasible. Many random restarts with Nelder-Mead on a
+smooth surrogate, then a polish of the true objective. Imports nothing from sqpack and
+nothing from the selector.
+"""
+
+import json
+import sys
+import time
+
+import numpy as np
+from scipy.optimize import minimize
+
+data = json.load(open(sys.argv[1]))
+seed = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+budget_s = float(sys.argv[3]) if len(sys.argv) > 3 else 600.0
+U = 1169 / 250
+names = sys.argv[4].split(",") if len(sys.argv) > 4 else ["corner-SW", "side-N0", "side-W0", "side-W1", "side-W2", "interior-SW", "interior-W"]
+tag = sys.argv[5] if len(sys.argv) > 5 else "w7"
+cells = []
+for name in names:
+    poly = np.array([[float(eval(x)) for x in v] for v in data["cells"][name]])
+    cells.append(poly)
+
+
+def halfplanes(poly):
+    """Outward unit normals and offsets of a CCW polygon: n.x <= c."""
+    rows = []
+    m = len(poly)
+    for k in range(m):
+        a, b = poly[k], poly[(k + 1) % m]
+        n = np.array([b[1] - a[1], a[0] - b[0]])
+        n = n / np.linalg.norm(n)
+        rows.append((n, n @ a))
+    return rows
+
+
+HP = [halfplanes(p) for p in cells]
+K = len(names)
+PAIRS = [(i, j) for i in range(K) for j in range(i + 1, K)]
+
+
+def unpack(z):
+    return z.reshape(K, 3)
+
+
+def axes(theta):
+    c, s = np.cos(theta), np.sin(theta)
+    return np.array([[c, s], [-s, c]])
+
+
+def pair_penetration(ci, ti, cj, tj):
+    """Separating-axis depth: min over 4 axes of overlap; <= 0 means disjoint."""
+    d = cj - ci
+    best = np.inf
+    for ax in (axes(ti), axes(tj)):
+        for n in ax:
+            ri = (abs(np.cos(ti) * n[0] + np.sin(ti) * n[1]) + abs(-np.sin(ti) * n[0] + np.cos(ti) * n[1])) / 2
+            rj = (abs(np.cos(tj) * n[0] + np.sin(tj) * n[1]) + abs(-np.sin(tj) * n[0] + np.cos(tj) * n[1])) / 2
+            overlap = ri + rj - abs(n @ d)
+            best = min(best, overlap)
+    return best
+
+
+def violations(z):
+    P = unpack(z)
+    worst_pair = -np.inf
+    for i, j in PAIRS:
+        worst_pair = max(worst_pair, pair_penetration(P[i, :2], P[i, 2], P[j, :2], P[j, 2]))
+    worst_cell = -np.inf
+    worst_wall = -np.inf
+    for i in range(K):
+        c = P[i, :2]
+        for n, off in HP[i]:
+            worst_cell = max(worst_cell, n @ c - off)
+        h = (abs(np.cos(P[i, 2])) + abs(np.sin(P[i, 2]))) / 2
+        worst_wall = max(worst_wall, h - c[0], h - c[1], c[0] + h - U, c[1] + h - U)
+    return worst_pair, worst_cell, worst_wall
+
+
+def objective(z):
+    a, b, c = violations(z)
+    return max(a, b, c, 0.0)
+
+
+def smooth(z, mu=0.002):
+    """Soft-max over all violations, with a soft-min over axes inside each pair."""
+    P = unpack(z)
+    terms = []
+    for i, j in PAIRS:
+        d = P[j, :2] - P[i, :2]
+        ovs = []
+        for t in (P[i, 2], P[j, 2]):
+            for n in axes(t):
+                ri = (abs(np.cos(P[i, 2]) * n[0] + np.sin(P[i, 2]) * n[1]) + abs(-np.sin(P[i, 2]) * n[0] + np.cos(P[i, 2]) * n[1])) / 2
+                rj = (abs(np.cos(P[j, 2]) * n[0] + np.sin(P[j, 2]) * n[1]) + abs(-np.sin(P[j, 2]) * n[0] + np.cos(P[j, 2]) * n[1])) / 2
+                ovs.append(ri + rj - abs(n @ d))
+        ovs = np.array(ovs)
+        m = ovs.min()
+        terms.append(m - mu * np.log(np.sum(np.exp(-(ovs - m) / mu))))
+    for i in range(K):
+        c = P[i, :2]
+        for n, off in HP[i]:
+            terms.append(n @ c - off)
+        h = (abs(np.cos(P[i, 2])) + abs(np.sin(P[i, 2]))) / 2
+        terms.extend([h - c[0], h - c[1], c[0] + h - U, c[1] + h - U])
+    terms = np.array(terms)
+    m = terms.max()
+    return m + mu * np.log(np.sum(np.exp((terms - m) / mu)))
+
+
+def random_pose(rng):
+    z = np.zeros((K, 3))
+    for i in range(K):
+        poly = cells[i]
+        lo, hi = poly.min(axis=0), poly.max(axis=0)
+        while True:
+            p = rng.uniform(lo, hi)
+            if all(n @ p <= off + 1e-12 for n, off in HP[i]):
+                break
+        z[i, :2] = p
+        z[i, 2] = rng.uniform(0, np.pi / 2)
+    return z.ravel()
+
+
+rng = np.random.default_rng(seed)
+best = (np.inf, None)
+start = time.time()
+attempts = 0
+while time.time() - start < budget_s:
+    z0 = random_pose(rng)
+    for mu in (0.02, 0.005, 0.001):
+        res = minimize(smooth, z0, args=(mu,), method="Nelder-Mead", options={"maxiter": 4000, "xatol": 1e-9, "fatol": 1e-12})
+        z0 = res.x
+    res = minimize(objective, z0, method="Nelder-Mead", options={"maxiter": 6000, "xatol": 1e-10, "fatol": 1e-13})
+    val = objective(res.x)
+    attempts += 1
+    if val < best[0]:
+        best = (val, res.x.copy())
+        a, b, c = violations(res.x)
+        print(f"attempt {attempts} t={time.time()-start:.0f}s best={val:.6e} pair={a:.3e} cell={b:.3e} wall={c:.3e}", flush=True)
+        if val <= 1e-9:
+            print("FEASIBLE PLACEMENT FOUND")
+            break
+
+val, z = best
+P = unpack(z)
+print("attempts", attempts, "best", val)
+for i in range(K):
+    print(f"  {names[i]:12s} x={P[i,0]:.5f} y={P[i,1]:.5f} theta={np.degrees(P[i,2]) % 90:.3f} deg")
+print("pair penetrations:")
+for i, j in PAIRS:
+    pen = pair_penetration(P[i, :2], P[i, 2], P[j, :2], P[j, 2])
+    if pen > -0.05:
+        print(f"  {names[i]} - {names[j]}: {pen:.4e}")
+json.dump({"best": val, "pose": z.tolist(), "names": names, "seed": seed, "attempts": attempts}, open(f"{tag}_search_seed{seed}.json", "w"))

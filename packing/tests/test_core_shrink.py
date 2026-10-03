@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -100,7 +99,6 @@ def test_exp110_corner_obstruction_replays_without_the_sweep() -> None:
         ).read_text()
     )
     raw = (PACKING / "cases/n11_fractional_certificate/certificate.json").read_bytes()
-    assert hashlib.sha256(raw).hexdigest() == receipt["source_sha256"]
     atoms = [tuple(map(Fraction, atom)) for atom in json.loads(raw)["atoms"]]
     edge = Fraction(receipt["witness_admissible_up_to_side"])
     center = edge / 2
@@ -152,7 +150,15 @@ def test_retained_witness_recovery_events(
     assert result["mass_at_event"] == at
     assert result["first_usable_side_is_admissible"]
     assert result["rejects_every_ordinary_gain_core"] is excludes_ordinary
-    with pytest.raises(ValueError, match="different source bytes"):
-        inspect_witness(source + b" ", receipt)
+    # The replay decides the source, not its bytes: the same content serialized
+    # differently replays to the same answer, and two exchanged weights, which keep
+    # the total mass, do not.
+    assert inspect_witness(source + b" ", receipt) == result
     with pytest.raises(ValueError, match="differs from its exact atom replay"):
         inspect_witness(source, {**receipt, "witness_closed_mass": "1"})
+    document = json.loads(source)
+    atoms = document["atoms"]
+    atoms[0][2], atoms[2][2] = atoms[2][2], atoms[0][2]
+    assert atoms[0][2] != atoms[2][2]
+    with pytest.raises(ValueError, match="differs from its exact atom replay"):
+        inspect_witness(json.dumps(document).encode(), receipt)

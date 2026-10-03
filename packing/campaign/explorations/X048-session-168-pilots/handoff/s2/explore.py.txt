@@ -1,0 +1,22 @@
+import time
+import numpy as np
+from scipy.optimize import minimize
+from devtools import select_n17_sub_patterns as sel
+FINISH = {"maxiter": 20000, "ftol": 1e-30, "gtol": 1e-20, "maxcor": 30}
+g = sel.cover_geometry()
+ep = sel.endpoint_pose()
+cells = ep["cells"]
+prob = sel.Problem(g, cells)
+def fin(pose):
+    with sel.single_thread_blas():
+        r = minimize(prob.penalty, prob.pack(pose), jac=True, method="L-BFGS-B", options=FINISH)
+    return prob.pose(np.asarray(r.x)), r.nit
+tiny = sel.Budget(starts=1, hops=0, deep_starts=0, deep_hops=0)
+for seed in range(6):
+    rng = np.random.default_rng(seed)
+    noisy = ep["pose"].copy(); noisy[:, :2] += rng.normal(0, 0.03, (17, 2)); noisy[:, 2] += rng.normal(0, 0.05, 17)
+    t = time.perf_counter()
+    v = sel.search(g, cells, rng, tiny, [(0, noisy)])
+    t1 = time.perf_counter() - t
+    p, nit = fin(v.pose)
+    print(seed, "short", v.feasible, "%.2e" % v.violation, "attempts", v.attempts, "%.2fs" % t1, "finish %.2e" % prob.violation(p), nit, "%.2fs" % (time.perf_counter() - t - t1))

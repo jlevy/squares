@@ -1,0 +1,384 @@
+"""Mutation tests: does the kernel's checker refuse each class of unsound input?
+
+Loads the 8-bin W7 test seed/node, applies one mutation at a time, and replays through
+node.admit_seed + sequential.replay_sequential. Every mutation must be refused
+(RefusalError) or, for the declared-closure mutations, refused at the closure check.
+The unmutated objects must pass.
+"""
+
+import copy
+import gzip
+import json
+import sys
+import time
+from fractions import Fraction as Q
+
+from devtools import check_hull_kernel_mask0 as mask0_tool
+from sqpack.hull_kernel import node as node_mod
+from sqpack.hull_kernel import producer, sequential
+from sqpack.hull_kernel.geometry import Budget, RefusalError
+
+seed_path, node_path = sys.argv[1], sys.argv[2]
+seed0 = json.loads(gzip.decompress(open(seed_path, "rb").read()))
+node0 = json.loads(gzip.decompress(open(node_path, "rb").read()))
+frame = mask0_tool.n17_unique_frame()
+mask = seed0["mask"]
+bins = seed0["bins"]
+
+
+def replay(seed, node):
+    budget = Budget(time.monotonic() + 600, 200_000)
+    s = node_mod.admit_seed(frame, seed, mask=mask, bins=bins, budget=budget, allow_empty_groups=True)
+    return sequential.replay_sequential(frame, node, s, mask=mask, seed_sha256=producer.content_sha256(seed), budget=budget, cover="indexed")
+
+
+def first_row_with(pred, start=0):
+    for si, step in enumerate(node0["steps"]):
+        if si < start:
+            continue
+        for ri, row in enumerate(step["rows"]):
+            if pred(step, row):
+                return si, ri
+    raise RuntimeError("no row")
+
+
+def shift(vertex, dx, dy):
+    return [str(Q(vertex[0]) + dx), str(Q(vertex[1]) + dy)]
+
+
+mutations = {}
+
+
+def m_collision_outward(n):
+    """Push one collision region vertex outward from the region's centroid by 1e-6."""
+    si, ri = first_row_with(lambda s, r: r["collision_regions"])
+    row = n["steps"][si]["rows"][ri]
+    verts = row["collision_regions"][0]["vertices"]
+    cx = sum(Q(v[0]) for v in verts) / len(verts)
+    cy = sum(Q(v[1]) for v in verts) / len(verts)
+    v = verts[0]
+    dx, dy = Q(v[0]) - cx, Q(v[1]) - cy
+    verts[0] = shift(v, dx * Q(1, 10**3), dy * Q(1, 10**3))
+    return f"step {si} row {ri}: collision region vertex pushed outward by 0.1% of its centroid offset"
+
+
+def m_collision_tight(n):
+    """Push a collision region vertex across its tightest collision facet by 1e-7 while it
+    stays inside the row's input domain (so only the universal-collision check can fail)."""
+    from sqpack.hull_kernel.induction import hull
+    for si, step in enumerate(n["steps"]):
+        for ri, row in enumerate(step["rows"]):
+            for item in row["collision_regions"]:
+                core = hull([(Q(x), Q(y)) for x, y in row["core_vertices"]])
+                cover = step["prior_partner_pose_covers"][str(item["partner"])]
+                facets = []
+                for it in cover:
+                    if not it["domain"]:
+                        continue
+                    pc = hull([(Q(x), Q(y)) for x, y in it["core"]])
+                    dom = [(Q(x), Q(y)) for x, y in it["domain"]]
+                    diff = hull([(a[0] - b[0], a[1] - b[1]) for a in pc for b in core])
+                    for k in range(len(diff)):
+                        p, q = diff[k], diff[(k + 1) % len(diff)]
+                        a, b = q[1] - p[1], p[0] - q[0]
+                        facets.append((a, b, a * p[0] + b * p[1] + min(a * y[0] + b * y[1] for y in dom)))
+                domain = hull([(Q(x), Q(y)) for x, y in row["input_domain"]])
+                dplanes = []
+                for k in range(len(domain)):
+                    p, q = domain[k], domain[(k + 1) % len(domain)]
+                    a, b = q[1] - p[1], p[0] - q[0]
+                    dplanes.append((a, b, a * p[0] + b * p[1]))
+                verts = item["vertices"]
+                for vi, v in enumerate(verts):
+                    x, y = Q(v[0]), Q(v[1])
+                    a, b, c = min(facets, key=lambda f: (f[2] - f[0] * x - f[1] * y) / (abs(f[0]) + abs(f[1])))
+                    slack_value = c - a * x - b * y
+                    slack = slack_value / (abs(a) + abs(b))
+                    scale = (slack_value + Q(1, 10**7)) / (a * a + b * b)
+                    nx, ny = x + a * scale, y + b * scale
+                    assert a * nx + b * ny == c + Q(1, 10**7)
+                    if all(pa * nx + pb * ny <= pc for pa, pb, pc in dplanes):
+                        verts[vi] = [str(nx), str(ny)]
+                        return f"step {si} row {ri} partner {item['partner']} vertex {vi}: pushed 1e-7 past its tightest collision facet (slack was {float(slack):.2e}), still inside the domain"
+    raise RuntimeError("no pushable vertex")
+
+
+def m_collision_far(n):
+    """Push a collision region vertex far outside (0.05)."""
+    si, ri = first_row_with(lambda s, r: r["collision_regions"])
+    row = n["steps"][si]["rows"][ri]
+    verts = row["collision_regions"][0]["vertices"]
+    verts[0] = shift(verts[0], Q(-1, 20), Q(0))
+    return f"step {si} row {ri}: collision region vertex moved by -0.05 in x"
+
+
+def m_partner_domain_shrunk(n):
+    """Drop a vertex from a partner cover domain (a smaller cover omits poses)."""
+    for si, step in enumerate(n["steps"]):
+        for key, items in step["prior_partner_pose_covers"].items():
+            for it in items:
+                if len(it["domain"]) >= 4:
+                    it["domain"] = it["domain"][1:]
+                    return f"step {si} partner {key}: cover domain lost a vertex"
+    raise RuntimeError
+
+
+def m_partner_domain_grown(n):
+    """Grow a partner cover domain (a larger domain is still sound but the grammar pins it)."""
+    for si, step in enumerate(n["steps"]):
+        for key, items in step["prior_partner_pose_covers"].items():
+            for it in items:
+                if it["domain"]:
+                    it["domain"].append(shift(it["domain"][0], Q(-1, 100), Q(-1, 100)))
+                    return f"step {si} partner {key}: cover domain grew by a vertex"
+    raise RuntimeError
+
+
+def m_partner_stale(n):
+    """Replace a partner's cover at a later step by the cover it had at an earlier step."""
+    # find partner p with cover at step a and later step b where the rows changed
+    for si in range(len(n["steps"]) - 1, 0, -1):
+        step = n["steps"][si]
+        for key, items in step["prior_partner_pose_covers"].items():
+            for sj in range(si):
+                old = n["steps"][sj]["prior_partner_pose_covers"].get(key)
+                if old is not None and old != items:
+                    step["prior_partner_pose_covers"][key] = copy.deepcopy(old)
+                    return f"step {si} partner {key}: cover replaced by its step-{sj} cover (stale)"
+    raise RuntimeError
+
+
+def m_partner_row_dropped(n):
+    """Declare a live partner row empty (omit its poses from the cover)."""
+    for si, step in enumerate(n["steps"]):
+        for key, items in step["prior_partner_pose_covers"].items():
+            for it in items:
+                if it["domain"]:
+                    it["domain"], it["core"] = [], []
+                    return f"step {si} partner {key}: a live row declared empty"
+    raise RuntimeError
+
+
+def m_partner_core_big(n):
+    """Scale a partner core up by 2% (no longer strictly inside at every angle?)."""
+    for si, step in enumerate(n["steps"]):
+        for key, items in step["prior_partner_pose_covers"].items():
+            for it in items:
+                if it["core"]:
+                    it["core"] = [[str(Q(x) * Q(51, 50)), str(Q(y) * Q(51, 50))] for x, y in it["core"]]
+                    return f"step {si} partner {key}: core scaled by 1.02"
+    raise RuntimeError
+
+
+def m_partner_core_big_small(n):
+    """Scale a partner core up by 1e-6 relative."""
+    for si, step in enumerate(n["steps"]):
+        for key, items in step["prior_partner_pose_covers"].items():
+            for it in items:
+                if it["core"]:
+                    it["core"] = [[str(Q(x) * (1 + Q(1, 10**6))), str(Q(y) * (1 + Q(1, 10**6)))] for x, y in it["core"]]
+                    return f"step {si} partner {key}: core scaled by 1 + 1e-6"
+    raise RuntimeError
+
+
+def m_own_core_big(n):
+    si, ri = first_row_with(lambda s, r: r["core_vertices"])
+    row = n["steps"][si]["rows"][ri]
+    row["core_vertices"] = [[str(Q(x) * Q(51, 50)), str(Q(y) * Q(51, 50))] for x, y in row["core_vertices"]]
+    return f"step {si} row {ri}: own core scaled by 1.02"
+
+
+def m_residual_dropped(n):
+    si, ri = first_row_with(lambda s, r: len(r["residual_polygons"]) >= 2)
+    row = n["steps"][si]["rows"][ri]
+    row["residual_polygons"].pop()
+    return f"step {si} row {ri}: one residual polygon dropped (domain uncovered)"
+
+
+def m_residual_shrunk(n):
+    """Shrink a residual polygon slightly toward its centroid."""
+    si, ri = first_row_with(lambda s, r: r["residual_polygons"] and len(r["residual_polygons"][0]) >= 3)
+    row = n["steps"][si]["rows"][ri]
+    pg = row["residual_polygons"][0]
+    cx = sum(Q(v[0]) for v in pg) / len(pg)
+    cy = sum(Q(v[1]) for v in pg) / len(pg)
+    row["residual_polygons"][0] = [[str(cx + (Q(v[0]) - cx) * Q(999, 1000)), str(cy + (Q(v[1]) - cy) * Q(999, 1000))] for v in pg]
+    return f"step {si} row {ri}: residual polygon shrunk by 0.1%"
+
+
+def m_residual_shrunk_fix_planes(n):
+    """Shrink a residual and recompute the published planes/outer so only coverage fails."""
+    si, ri = first_row_with(lambda s, r: r["residual_polygons"] and len(r["residual_polygons"][0]) >= 3)
+    row = n["steps"][si]["rows"][ri]
+    pg = row["residual_polygons"][0]
+    cx = sum(Q(v[0]) for v in pg) / len(pg)
+    cy = sum(Q(v[1]) for v in pg) / len(pg)
+    newpg = [(cx + (Q(v[0]) - cx) * Q(999, 1000), cy + (Q(v[1]) - cy) * Q(999, 1000)) for v in pg]
+    row["residual_polygons"][0] = [[str(x), str(y)] for x, y in newpg]
+    core = [(Q(x), Q(y)) for x, y in row["core_vertices"]]
+    from sqpack.hull_kernel.induction import common_core_planes, hull
+    allverts = newpg + [(Q(x), Q(y)) for other in row["residual_polygons"][1:] for x, y in other]
+    planes = common_core_planes(hull(core), allverts)
+    row["common_core_halfplanes"] = [{"normal": [str(a), str(b)], "upper": str(c)} for a, b, c in planes]
+    return f"step {si} row {ri}: residual shrunk by 0.1% with planes recomputed (only coverage should fail)"
+
+
+def m_kernel_point_out(n):
+    """Push a kernel point 1e-7 past the tightest published common-core plane of the step,
+    then rebuild the compression receipt with the producer so only the plane check fails."""
+    from sqpack.hull_kernel.induction import hull
+    from sqpack.hull_kernel.producer import compress, _encode_point
+    for si, step in enumerate(n["steps"]):
+        if step["common_owned_kernel"] and step.get("inner_grid_compression", {}).get("mode") == "replace":
+            planes = [(Q(it["normal"][0]), Q(it["normal"][1]), Q(it["upper"])) for row in step["rows"] for it in row["common_core_halfplanes"]]
+            p = step["common_owned_kernel"][0]
+            x, y = Q(p[0]), Q(p[1])
+            a, b, c = min(planes, key=lambda f: (f[2] - f[0] * x - f[1] * y) / (abs(f[0]) + abs(f[1])))
+            scale = (c - a * x - b * y + Q(1, 10**7)) / (a * a + b * b)
+            nx, ny = x + a * scale, y + b * scale
+            step["common_owned_kernel"][0] = [str(nx), str(ny)]
+            prior = hull([(Q(u), Q(v)) for u, v in step["prior_owned_hulls"][str(step["owner"])]])
+            kernel = [(Q(u), Q(v)) for u, v in step["common_owned_kernel"]]
+            original = hull(prior + kernel)
+            newpts, witnesses = compress(original)
+            step["compression_source_hull"] = [[str(u), str(v)] for u, v in original]
+            step["inner_grid_compression"] = {"vertices": [_encode_point(q) for q in newpts], "witnesses": witnesses, "denominator": 2**20, "original_vertices": len(original), "retained_vertices": len(newpts), "mode": "replace"}
+            return f"step {si}: kernel point pushed 1e-7 past its tightest plane, compression rebuilt (only the plane check should fail)"
+    raise RuntimeError
+
+
+def m_compression_outside(n):
+    """A replace-mode retained point outside the source hull with a fake witness."""
+    for si, step in enumerate(n["steps"]):
+        rec = step.get("inner_grid_compression")
+        if rec and rec.get("mode") == "replace":
+            v = rec["vertices"][0]
+            newv = [str(Q(v[0]) + Q(1, 2**20)), v[1]]
+            rec["vertices"][0] = newv
+            rec["witnesses"][0]["point"] = newv
+            return f"step {si}: a retained hull vertex moved by one grid unit (witness no longer matches)"
+    raise RuntimeError
+
+
+def m_compression_extra(n):
+    """Add a retained point to a replace-mode hull with the witness of an existing vertex."""
+    for si, step in enumerate(n["steps"]):
+        rec = step.get("inner_grid_compression")
+        if rec and rec.get("mode") == "replace":
+            v = rec["vertices"][0]
+            newv = [str(Q(v[0]) + Q(1, 2**20)), v[1]]
+            rec["vertices"].append(newv)
+            rec["witnesses"].append({**copy.deepcopy(rec["witnesses"][0]), "point": newv})
+            rec["retained_vertices"] += 1
+            return f"step {si}: an extra retained point one grid unit outside, with a copied witness"
+    raise RuntimeError
+
+
+def m_false_closure(n):
+    si = len(n["steps"]) - 1
+    n["contradiction"] = {"kind": "all_parent_poses_forbidden", "owner": n["steps"][si]["owner"], "step": si}
+    n["closed"] = True
+    n["terminal"] = True
+    return f"declared closure at step {si} although rows are live"
+
+
+def m_false_hull_closure(n):
+    si = len(n["steps"]) - 1
+    n["contradiction"] = {"kind": "owned_hulls_intersect", "owners": [0, 16], "step": si, "point": ["1", "1"]}
+    n["closed"] = True
+    n["terminal"] = True
+    return f"declared owned_hulls_intersect at step {si}"
+
+
+def m_prior_hull_grown(n):
+    for si, step in enumerate(n["steps"]):
+        for key, pg in step["prior_owned_hulls"].items():
+            if pg:
+                pg.append(shift(pg[0], Q(1, 10), Q(1, 10)))
+                return f"step {si}: prior owned hull of {key} grew by a point"
+    raise RuntimeError
+
+
+def m_region_outside_domain(n):
+    si, ri = first_row_with(lambda s, r: r["collision_regions"])
+    row = n["steps"][si]["rows"][ri]
+    row["collision_regions"][0]["vertices"][0] = ["0", "0"]
+    return f"step {si} row {ri}: collision region vertex at the origin (outside the domain)"
+
+
+def m_collision_partner_self(n):
+    si, ri = first_row_with(lambda s, r: r["collision_regions"])
+    step = n["steps"][si]
+    step["rows"][ri]["collision_regions"][0]["partner"] = step["owner"]
+    return f"step {si} row {ri}: collision region names the owner itself"
+
+
+def m_collision_partner_unadmitted(n):
+    si, ri = first_row_with(lambda s, r: r["collision_regions"])
+    step = n["steps"][si]
+    key = str(step["rows"][ri]["collision_regions"][0]["partner"])
+    del step["prior_partner_pose_covers"][key]
+    return f"step {si} row {ri}: the named partner's cover removed"
+
+
+def m_interval_gap(n):
+    si = 0
+    step = n["steps"][si]
+    step["rows"].pop()
+    return f"step {si}: last row removed (angle partition incomplete)"
+
+
+def m_empty_cover(n):
+    for si, step in enumerate(n["steps"]):
+        for key, items in step["prior_partner_pose_covers"].items():
+            for it in items:
+                it["domain"], it["core"] = [], []
+            return f"step {si} partner {key}: every cover row declared empty"
+    raise RuntimeError
+
+
+def m_seed_group_point_unowned(s, n):
+    """Add an unowned point to a seed group (near the cell corner)."""
+    s["groups"]["0"].append(["1", "1"])
+    n["initial"]["groups"]["0"] = s["groups"]["0"]
+    return "seed: point (1, 1) added to corner-SW's group (not owned)"
+
+
+def m_seed_row_domain(s, n):
+    s["cells"]["0"][0]["outer_domain"] = s["cells"]["0"][0]["outer_domain"][1:]
+    return "seed: corner-SW row 0 outer domain lost a vertex"
+
+
+results = []
+print("control: unmutated objects")
+trace = replay(seed0, node0)
+print("  PASS (closure", trace.closure, ")")
+for fn in [m_collision_tight, m_collision_outward, m_collision_far, m_partner_domain_shrunk, m_partner_domain_grown, m_partner_stale,
+           m_partner_row_dropped, m_partner_core_big, m_partner_core_big_small, m_own_core_big, m_residual_dropped,
+           m_residual_shrunk, m_residual_shrunk_fix_planes, m_kernel_point_out, m_compression_outside, m_compression_extra,
+           m_false_closure, m_false_hull_closure, m_prior_hull_grown, m_region_outside_domain, m_collision_partner_self,
+           m_collision_partner_unadmitted, m_interval_gap, m_empty_cover]:
+    n = copy.deepcopy(node0)
+    s = copy.deepcopy(seed0)
+    desc = fn(n)
+    t = time.time()
+    try:
+        replay(s, n)
+        verdict = "ACCEPTED (BAD)"
+    except RefusalError as e:
+        verdict = f"refused: {e}"
+    except Exception as e:  # noqa: BLE001
+        verdict = f"error {type(e).__name__}: {e}"
+    print(f"{fn.__name__:32s} {verdict}   [{desc}] {time.time()-t:.1f}s", flush=True)
+for fn in [m_seed_group_point_unowned, m_seed_row_domain]:
+    n = copy.deepcopy(node0)
+    s = copy.deepcopy(seed0)
+    desc = fn(s, n)
+    try:
+        replay(s, n)
+        verdict = "ACCEPTED (BAD)"
+    except RefusalError as e:
+        verdict = f"refused: {e}"
+    except Exception as e:  # noqa: BLE001
+        verdict = f"error {type(e).__name__}: {e}"
+    print(f"{fn.__name__:32s} {verdict}   [{desc}]", flush=True)

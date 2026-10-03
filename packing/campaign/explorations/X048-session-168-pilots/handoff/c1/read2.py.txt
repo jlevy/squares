@@ -1,0 +1,26 @@
+"""Scratch reader for pilot-2 receipts or partials: per-round and per-owner tables."""
+import json, sys, statistics, collections
+r = json.load(open(sys.argv[1]))
+print({k: r.get(k) for k in ("status", "system", "cap", "outcome", "endpoint_control", "tool_sha256")})
+print("falsifier", json.dumps(r.get("falsifier")))
+ups = collections.defaultdict(list)
+for u in r["updates"]:
+    ups[u["round"]].append(u)
+print("rnd  worst_ext   g_worst  min_g_ext  max_r/e  med_r/e  worst_turn  live  s/upd(prod+chk) partners hull_lost")
+prev = None
+for rd in r["rounds"]:
+    u = ups.get(rd["round"], [])
+    cost = sum(x["producer_wall"] + x["checker_wall"] for x in u) / len(u) if u else 0
+    part = sum(x.get("partners_offered", 0) for x in u) / len(u) if u else 0
+    lost = sum(x.get("hull_area_lost", 0) for x in u)
+    g = rd["worst_position_extent"] / prev["worst_position_extent"] if prev else None
+    print(f'{rd["round"]:>3} {rd["worst_position_extent"]:.4e} {g if g is None else round(g,3)!s:>7} {rd["min_g_extent"] if rd["min_g_extent"] is None else round(rd["min_g_extent"],3)!s:>8} {rd["max_row_to_extent"]:8.3f} {rd["median_row_to_extent"]:8.3f} {rd["worst_turn"]:.3e} {sum(rd["live_rows"].values()):>5} {cost:7.1f} {part:5.1f} {lost:.2e} {"fine" if rd["rows_fine"] else ""}{" flat" if rd["no_extent_drop"] else ""}')
+    prev = rd
+if len(sys.argv) > 2:
+    last = r["rounds"][-1]
+    first = r["rounds"][0]
+    print("per owner: extent first -> last, last ranges, turn range, row/extent")
+    for cell, ext in last["extent"].items():
+        if cell not in last["row_to_extent"]:
+            continue
+        print(f"{cell:12s}", {k: f"{first['extent'][cell].get(k, float('nan')):.2e}->{v:.2e}" for k, v in ext.items()}, {k: [f"{a:.2e}", f"{b:.2e}"] for k, (a, b) in last["range"][cell].items()}, [round(x, 5) for x in last["turn_range"][cell]], round(last["row_to_extent"][cell], 3))

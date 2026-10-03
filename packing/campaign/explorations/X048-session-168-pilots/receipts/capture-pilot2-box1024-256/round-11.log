@@ -1,0 +1,23 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+{"round": 11, "step": 160, "cell": "corner-SW", "rows": 232, "live_rows": 188, "splits": 96, "producer": 40.9, "checker": 23.2, "seconds": 66.7}
+{"round": 11, "step": 161, "cell": "corner-SE", "rows": 238, "live_rows": 193, "splits": 97, "producer": 28.1, "checker": 20.5, "seconds": 115.3}
+{"round": 11, "step": 162, "cell": "corner-NW", "rows": 244, "live_rows": 194, "splits": 98, "producer": 16.7, "checker": 13.1, "seconds": 145.1}
+{"round": 11, "step": 163, "cell": "corner-NE", "rows": 244, "live_rows": 194, "splits": 98, "producer": 16.3, "checker": 13.3, "seconds": 174.7}
+{"round": 11, "step": 164, "cell": "side-S0", "rows": 243, "live_rows": 185, "splits": 97, "producer": 75.1, "checker": 82.1, "seconds": 331.9}
+{"round": 11, "step": 165, "cell": "side-N0", "rows": 392, "live_rows": 247, "splits": 27, "producer": 122.9, "checker": 139.2, "seconds": 594.1}
+{"round": 11, "step": 166, "cell": "side-W0", "rows": 244, "live_rows": 194, "splits": 98, "producer": 44.3, "checker": 45.3, "seconds": 683.7}
+{"round": 11, "step": 167, "cell": "side-E0", "rows": 244, "live_rows": 194, "splits": 98, "producer": 46.4, "checker": 48.0, "seconds": 778.2}
+{"round": 11, "step": 168, "cell": "side-S1", "rows": 436, "live_rows": 238, "splits": 36, "producer": 140.0, "checker": 115.8, "seconds": 1034.0}
+{"round": 11, "step": 169, "cell": "side-N1", "rows": 244, "live_rows": 194, "splits": 98, "producer": 96.7, "checker": 97.8, "seconds": 1228.5}
+{"round": 11, "step": 170, "cell": "side-E1", "rows": 244, "live_rows": 194, "splits": 98, "producer": 73.5, "checker": 71.6, "seconds": 1373.6}
+{"round": 11, "step": 171, "cell": "side-N2", "rows": 446, "live_rows": 245, "splits": 19, "producer": 105.6, "checker": 79.5, "seconds": 1558.7}
+{"round": 11, "step": 172, "cell": "side-W2", "rows": 358, "live_rows": 243, "splits": 16, "producer": 79.9, "checker": 143.7, "seconds": 1782.3}
+{"round": 11, "step": 173, "cell": "interior-W", "rows": 367, "live_rows": 251, "splits": 78, "producer": 230.1, "checker": 169.0, "seconds": 2181.5}
+{"round": 11, "step": 174, "cell": "interior-N", "rows": 371, "live_rows": 251, "splits": 113, "producer": 330.9, "checker": 244.3, "seconds": 2756.7}
+{"round": 11, "step": 175, "cell": "interior-E", "rows": 306, "live_rows": 208, "splits": 106, "producer": 272.1, "checker": 142.5, "seconds": 3171.3}
+{"round": 11, "worst": 0.029352, "extent": "1.9531e-03", "min_g_extent": 0.9709526364359329, "row_to_extent": 0.1004, "volume": "1.3624e-06", "live": 3445, "splits": 1273}
+{"round": 12, "step": 176, "cell": "corner-SW", "rows": 300, "live_rows": 246, "splits": 68, "producer": 200.4, "checker": 105.1, "seconds": 3486.2}
+{"round": 12, "step": 177, "cell": "corner-SE", "rows": 301, "live_rows": 256, "splits": 63, "producer": 136.8, "checker": 117.1, "seconds": 3740.0}
+{"round": 12, "step": 178, "cell": "corner-NW", "rows": 306, "live_rows": 256, "splits": 62, "producer": 49.1, "checker": 26.9, "seconds": 3816.1}
+{"round": 12, "step": 179, "cell": "corner-NE", "rows": 306, "live_rows": 256, "splits": 62, "producer": 43.2, "checker": 32.3, "seconds": 3891.6}
+{"round": 12, "step": 180, "cell": "side-S0", "rows": 314, "live_rows": 247, "splits": 71, "producer": 174.9, "checker": 186.1, "seconds": 4252.7}

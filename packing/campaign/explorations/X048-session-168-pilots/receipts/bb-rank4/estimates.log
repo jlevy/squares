@@ -1,0 +1,13 @@
+{"label": "est-I8-interval", "pattern": ["corner-SE", "side-N0", "side-S2", "interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N"], "verdict": "estimate-only", "estimated_nodes_mean": 8042109.88, "estimated_wall_seconds": 79891.71796281805, "floor_hits": 0}
+I8 interval exit 0
+{"label": "est-I8-taylor", "pattern": ["corner-SE", "side-N0", "side-S2", "interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N"], "verdict": "estimate-only", "estimated_nodes_mean": 9630368.28, "estimated_wall_seconds": 133688.96944411742, "floor_hits": 0}
+I8 taylor exit 0
+{"label": "est-N8-interval", "pattern": ["corner-NW", "corner-NE", "side-N0", "side-N1", "side-N2", "side-W2", "side-E2", "interior-NW"], "verdict": "estimate-only", "estimated_nodes_mean": 471209346.04, "estimated_wall_seconds": 4603553.99890791, "floor_hits": 0}
+N8 interval exit 0
+{"label": "est-N8-taylor", "pattern": ["corner-NW", "corner-NE", "side-N0", "side-N1", "side-N2", "side-W2", "side-E2", "interior-NW"], "verdict": "estimate-only", "estimated_nodes_mean": 1765030285.88, "estimated_wall_seconds": 23907367.46415462, "floor_hits": 0}
+N8 taylor exit 0
+{"label": "est-C9-interval", "pattern": ["side-N1", "side-W1", "side-E1", "side-W2", "interior-SW", "interior-NW", "interior-S", "interior-N", "interior-E"], "verdict": "estimate-only", "estimated_nodes_mean": 8852930939.16, "estimated_wall_seconds": 103823608.14546488, "floor_hits": 0}
+C9 interval exit 0
+{"label": "est-C9-taylor", "pattern": ["side-N1", "side-W1", "side-E1", "side-W2", "interior-SW", "interior-NW", "interior-S", "interior-N", "interior-E"], "verdict": "estimate-only", "estimated_nodes_mean": 20282441056.28, "estimated_wall_seconds": 313015770.5165445, "floor_hits": 0}
+C9 taylor exit 0
+DONE

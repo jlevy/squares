@@ -33,6 +33,7 @@ from devtools.check_n17_endpoint_feasibility import (
     _read_limited,
     _support,
     _support_interval,
+    require_retained_path,
     symbolic_identities,
 )
 from devtools.check_n17_root_certificate import CertificateError
@@ -401,6 +402,12 @@ def interval_inventory(midpoint: tuple[Q, Q], radii: tuple[Q, Q]) -> dict[str, A
 
 
 def _frozen_bytes(ref: str, raw: bytes) -> None:
+    """Compare bytes with a historical Git blob: ceremony this module no longer uses.
+
+    Kept only because `check_n17_core_stress` (slice 2 of the 2026-10-03 integrity
+    audit, another lane's file) still imports it; remove it with that caller. New code
+    names a retained file with `require_retained_path` (OR-16).
+    """
     if not ref:
         raise ValueError("frozen H-256 endpoint receipt Git ref is unset")
     result = subprocess.run(
@@ -443,11 +450,13 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     started = time.monotonic()
     try:
+        # Both prerequisites are named by revision and path. The root's content is
+        # decided by `check_root` and the endpoint receipt's by its acceptance check.
+        require_retained_path(args.root_certificate, FROZEN_ROOT_REF)
+        require_retained_path(args.endpoint_certificate, FROZEN_ENDPOINT_REF)
         source = _read_limited(args.source)
         root_raw = _read_limited(args.root_certificate)
         endpoint_raw = _read_limited(args.endpoint_certificate)
-        _frozen_bytes(FROZEN_ROOT_REF, root_raw)
-        _frozen_bytes(FROZEN_ENDPOINT_REF, endpoint_raw)
         root = json.loads(root_raw, object_pairs_hook=_object_unique)
         endpoint = json.loads(endpoint_raw, object_pairs_hook=_object_unique)
         root_receipt = check_root(root, source)
@@ -487,7 +496,6 @@ def main(argv: list[str] | None = None) -> int:
         IndexError,
         TypeError,
         RecursionError,
-        subprocess.TimeoutExpired,
     ) as error:
         print(
             json.dumps(

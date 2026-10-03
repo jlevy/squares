@@ -1,0 +1,19 @@
+{"round": 0, "step": 0, "owner": "corner-SW", "live_rows": 8, "owned_hull_vertices": 2}
+{"round": 0, "step": 1, "owner": "side-N0", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 0, "step": 2, "owner": "side-W0", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 0, "step": 3, "owner": "side-W1", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 0, "step": 4, "owner": "side-W2", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 0, "step": 5, "owner": "interior-SW", "live_rows": 8, "owned_hull_vertices": 7}
+{"round": 0, "step": 6, "owner": "interior-W", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 1, "step": 7, "owner": "corner-SW", "live_rows": 8, "owned_hull_vertices": 2}
+{"round": 1, "step": 8, "owner": "side-N0", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 1, "step": 9, "owner": "side-W0", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 1, "step": 10, "owner": "side-W1", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 1, "step": 11, "owner": "side-W2", "live_rows": 8, "owned_hull_vertices": 0}
+{"round": 1, "step": 12, "owner": "interior-SW", "live_rows": 8, "owned_hull_vertices": 7}
+{"round": 1, "step": 13, "owner": "interior-W", "live_rows": 8, "owned_hull_vertices": 0}
+{"mask": [0, 5, 6, 10, 14, 16, 18], "bins": 8, "steps": 14, "contradiction": null, "closed": false, "seconds": 4.3, "files": ["node-8120340cba08eb37e9edab89f45d29f70a8f826c6f88679ba1e9121551ff66d6.json.gz", "seed-ada29c627aad3c29b9a252605d1d62377f9aa8f86263ba6f2da7966725a3701b.json.gz"]}
+
+real	0m4.830s
+user	0m4.709s
+sys	0m0.058s

@@ -1,0 +1,542 @@
+{
+ "cover_removes": 889,
+ "cover_share": 0.3926678445229682,
+ "falsified_so_far": true,
+ "falsifier": "the flags' greedy cover removes less than half of the residue",
+ "flagged": 49,
+ "greedy_cover": [
+  {
+   "best_penetration": 0.004189997328822415,
+   "cells": [
+    "corner-SW",
+    "corner-SE",
+    "side-S0",
+    "side-W0",
+    "side-E0",
+    "side-S1",
+    "side-S2",
+    "interior-SW"
+   ],
+   "mask": 70099,
+   "orbits_left": 1725,
+   "removes": 539
+  },
+  {
+   "best_penetration": 0.009286639147797482,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-SE"
+   ],
+   "mask": 4605265,
+   "orbits_left": 1655,
+   "removes": 70
+  },
+  {
+   "best_penetration": 0.012740392013750435,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S"
+   ],
+   "mask": 738417,
+   "orbits_left": 1590,
+   "removes": 65
+  },
+  {
+   "best_penetration": 0.001548267544690507,
+   "cells": [
+    "side-S0",
+    "side-E0",
+    "side-S1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "mask": 3869072,
+   "orbits_left": 1554,
+   "removes": 36
+  },
+  {
+   "best_penetration": 0.0017373854073192696,
+   "cells": [
+    "corner-NW",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "mask": 1918276,
+   "orbits_left": 1522,
+   "removes": 32
+  },
+  {
+   "best_penetration": 0.0046313617112934136,
+   "cells": [
+    "side-E0",
+    "side-S1",
+    "side-E1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "mask": 3873152,
+   "orbits_left": 1497,
+   "removes": 25
+  },
+  {
+   "best_penetration": 0.027242443381515713,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "mask": 935249,
+   "orbits_left": 1480,
+   "removes": 17
+  },
+  {
+   "best_penetration": 0.0005754445490415705,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-N1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "mask": 5965377,
+   "orbits_left": 1463,
+   "removes": 17
+  },
+  {
+   "best_penetration": 0.002279961765798144,
+   "cells": [
+    "corner-SE",
+    "side-E0",
+    "side-W1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "mask": 6161538,
+   "orbits_left": 1449,
+   "removes": 14
+  },
+  {
+   "best_penetration": 0.0038272549325785166,
+   "cells": [
+    "corner-SE",
+    "side-E0",
+    "side-E1",
+    "side-E2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "mask": 3115138,
+   "orbits_left": 1436,
+   "removes": 13
+  },
+  {
+   "best_penetration": 0.0022922887566512173,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "side-N1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "mask": 5980944,
+   "orbits_left": 1426,
+   "removes": 10
+  },
+  {
+   "best_penetration": 0.003817793073435327,
+   "cells": [
+    "corner-SE",
+    "side-N0",
+    "side-W1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "mask": 988194,
+   "orbits_left": 1417,
+   "removes": 9
+  },
+  {
+   "best_penetration": 0.002440560630502242,
+   "cells": [
+    "side-N1",
+    "side-E1",
+    "side-N2",
+    "side-E2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "mask": 6203904,
+   "orbits_left": 1408,
+   "removes": 9
+  },
+  {
+   "best_penetration": 0.005406769357964469,
+   "cells": [
+    "corner-SE",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "mask": 7541010,
+   "orbits_left": 1401,
+   "removes": 7
+  },
+  {
+   "best_penetration": 0.004326041594258312,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "mask": 5964881,
+   "orbits_left": 1396,
+   "removes": 5
+  },
+  {
+   "best_penetration": 0.0038845015006780947,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-N1",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "mask": 1918529,
+   "orbits_left": 1393,
+   "removes": 3
+  },
+  {
+   "best_penetration": 0.010874879290630468,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "mask": 3870016,
+   "orbits_left": 1390,
+   "removes": 3
+  },
+  {
+   "best_penetration": 0.0024357957156366794,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "mask": 7538000,
+   "orbits_left": 1387,
+   "removes": 3
+  },
+  {
+   "best_penetration": 0.0002958335086431507,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "mask": 7803200,
+   "orbits_left": 1384,
+   "removes": 3
+  },
+  {
+   "best_penetration": 0.002296596861034339,
+   "cells": [
+    "corner-SE",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "mask": 4002066,
+   "orbits_left": 1382,
+   "removes": 2
+  },
+  {
+   "best_penetration": 0.0019887475949847966,
+   "cells": [
+    "corner-SE",
+    "side-N0",
+    "side-E0",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "mask": 6160546,
+   "orbits_left": 1380,
+   "removes": 2
+  },
+  {
+   "best_penetration": 0.003597542283849897,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-SE"
+   ],
+   "mask": 4657489,
+   "orbits_left": 1379,
+   "removes": 1
+  },
+  {
+   "best_penetration": 0.00035770203166163306,
+   "cells": [
+    "side-N1",
+    "side-W1",
+    "side-E1",
+    "side-N2",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "mask": 5139968,
+   "orbits_left": 1378,
+   "removes": 1
+  },
+  {
+   "best_penetration": 0.000354872649401039,
+   "cells": [
+    "side-S1",
+    "side-E1",
+    "side-S2",
+    "side-N2",
+    "side-E2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "mask": 5159168,
+   "orbits_left": 1377,
+   "removes": 1
+  },
+  {
+   "best_penetration": 0.0007592356443620885,
+   "cells": [
+    "side-S0",
+    "side-E0",
+    "side-S1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "mask": 5966224,
+   "orbits_left": 1376,
+   "removes": 1
+  },
+  {
+   "best_penetration": 0.004239602932128772,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE",
+    "interior-NE"
+   ],
+   "mask": 14353473,
+   "orbits_left": 1375,
+   "removes": 1
+  }
+ ],
+ "module_sha256": "4d6e0aab6e701932454dcd11f5353ca9d78bb4ae030695db73bc8e7724c110c2",
+ "plan_sha256": "891a65e4e0d1351b79343783f96469e0d00ba6bc6b8ede241d93416060d6005e",
+ "planned": 423756,
+ "queues": [
+  {
+   "coverage_range": [
+    1,
+    1069
+   ],
+   "flagged": 14,
+   "hit_rate": 0.0005396446054812473,
+   "name": "arity 8, three to five missing pairs",
+   "planned": 25943,
+   "screen_unplaced": 17,
+   "search_seconds": 6129.3,
+   "searched": 25943
+  },
+  {
+   "coverage_range": [
+    5,
+    479
+   ],
+   "flagged": 35,
+   "hit_rate": 0.009839752600506044,
+   "name": "arity 9, at most two missing pairs",
+   "planned": 4303,
+   "screen_unplaced": 38,
+   "search_seconds": 6926.4,
+   "searched": 3557
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 10, at most two missing pairs",
+   "planned": 1140,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 8, six or more missing pairs",
+   "planned": 43861,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 9, three to five missing pairs",
+   "planned": 26499,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 10, three to five missing pairs",
+   "planned": 15300,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 9, six or more missing pairs",
+   "planned": 111338,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 10, six or more missing pairs",
+   "planned": 195372,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  }
+ ],
+ "residue_orbits": 2264,
+ "schema": "n17-residue-universe-summary/v1",
+ "searched": 29500,
+ "status": "float search, not a certificate: a flag is a class the selector's search with the finish could not place; the prover must certify it before it excludes anything"
+}

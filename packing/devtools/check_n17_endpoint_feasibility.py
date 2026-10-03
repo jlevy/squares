@@ -11,7 +11,6 @@ import argparse
 import hashlib
 import itertools
 import json
-import subprocess
 import time
 from dataclasses import dataclass
 from fractions import Fraction as Q
@@ -593,16 +592,18 @@ def _object_unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
-def _check_frozen_root_bytes(raw: bytes) -> None:
-    result = subprocess.run(
-        ["git", "show", FROZEN_ROOT_REF],
-        cwd=REPO,
-        capture_output=True,
-        check=False,
-        timeout=10,
-    )
-    if result.returncode != 0 or result.stdout != raw:
-        raise ValueError("root certificate differs from frozen exp-237 Git blob")
+def require_retained_path(path: Path, reference: str) -> None:
+    """Refuse a file other than the retained one a `REVISION:PATH` reference names.
+
+    A retained certificate is identified by the revision it was accepted at and its
+    repository-relative path, and a receipt names it by that reference (OR-16). This
+    checks only that the file read is that file, so the name in the receipt is true.
+    Its content is Git's to keep and the reader's to check: nothing compares its bytes
+    with a historical blob, and a re-serialized certificate is still the certificate.
+    """
+    relative = reference.partition(":")[2]
+    if not relative or path.resolve() != (REPO / relative).resolve():
+        raise ValueError(f"expected the retained {relative or reference}, not {path}")
 
 
 def _encode_receipt(result: dict[str, Any]) -> str:
@@ -619,9 +620,10 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     started = time.monotonic()
     try:
+        # The root is named by revision and path; `check_root` below decides its content.
+        require_retained_path(args.certificate, FROZEN_ROOT_REF)
         source = _read_limited(args.source)
         certificate_raw = _read_limited(args.certificate)
-        _check_frozen_root_bytes(certificate_raw)
         root_document = json.loads(certificate_raw, object_pairs_hook=_object_unique)
         root_started = time.monotonic()
         root_receipt = check_root(root_document, source)
@@ -666,7 +668,6 @@ def main(argv: list[str] | None = None) -> int:
         IndexError,
         TypeError,
         RecursionError,
-        subprocess.TimeoutExpired,
     ) as error:
         print(
             json.dumps(

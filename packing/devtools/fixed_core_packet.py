@@ -28,7 +28,6 @@ import subprocess
 import sys
 import sysconfig
 import time
-import tomllib
 from collections.abc import Callable, Collection, Iterator, Sequence
 from concurrent.futures import FIRST_COMPLETED, Future, ProcessPoolExecutor, wait
 from contextlib import suppress
@@ -440,7 +439,13 @@ def source_manifest(
     *,
     result_directory: Path | None = None,
 ) -> list[dict[str, str]]:
-    """Bind the exact source and recursive implementation closure to one clean revision."""
+    """Record the source and recursive implementation closure the packet runs from.
+
+    Each row names a path, its blob at `revision` and the SHA-256 of the bytes on disk,
+    so an uncommitted edit shows in the record instead of refusing the run. `revision`
+    is the operator's statement of the commit being run and must be the checkout's
+    `HEAD`, because it is what the result records; any commit satisfies that.
+    """
 
     if len(revision) != 40 or any(c not in "0123456789abcdef" for c in revision):
         raise PacketError("expected revision must be 40 lowercase hexadecimal digits")
@@ -448,64 +453,36 @@ def source_manifest(
     paths = discover_implementation_paths(repository)
     _validate_loaded_modules(repository, paths)
     if _git(repository, "rev-parse", "HEAD") != revision:
-        raise PacketError("current Git revision differs from the frozen instrument")
-    revision_paths = set(
-        _git(repository, "ls-tree", "-r", "--name-only", revision).splitlines()
-    )
-    changed = _git(repository, "status", "--porcelain", "--", *paths)
-    if changed:
-        raise PacketError("fixed source or implementation closure is not clean")
-    status_arguments = ["status", "--porcelain", "--untracked-files=all"]
+        raise PacketError("current Git revision differs from the stated revision")
     if result_directory is not None:
         resolved_result = result_directory.resolve()
         if resolved_result.is_relative_to(repository):
-            relative_result = resolved_result.relative_to(repository).as_posix()
-            result_path = PurePosixPath(relative_result)
+            result_path = PurePosixPath(resolved_result.relative_to(repository).as_posix())
+            revision_paths = _git(
+                repository, "ls-tree", "-r", "--name-only", revision
+            ).splitlines()
             if any(
                 PurePosixPath(tracked_path).is_relative_to(result_path)
                 or result_path.is_relative_to(PurePosixPath(tracked_path))
                 for tracked_path in revision_paths
             ):
                 raise PacketError(
-                    "result directory overlaps a path tracked at the frozen revision"
+                    "result directory overlaps a path tracked at the stated revision"
                 )
-            status_arguments.extend(
-                (
-                    "--",
-                    ".",
-                    f":(exclude,top,literal){relative_result}",
-                )
-            )
-    if _git(repository, *status_arguments):
-        raise PacketError("instrument checkout must be clean before the run")
     tracked = set(
         _git(repository, "ls-tree", "-r", "--name-only", revision, "--", *paths).splitlines()
     )
     if tracked != set(paths):
         missing = ", ".join(sorted(set(paths) - tracked))
-        raise PacketError(f"frozen source or implementation closure is incomplete: {missing}")
-    manifest: list[dict[str, str]] = []
-    for relative in paths:
-        blob = _git(repository, "rev-parse", f"{revision}:{relative}")
-        frozen = subprocess.run(
-            ("git", "cat-file", "blob", blob),
-            cwd=repository,
-            check=False,
-            capture_output=True,
-        )
-        if frozen.returncode:
-            detail = frozen.stderr.decode("utf-8", errors="replace").strip()
-            raise PacketOperationalError(
-                f"could not read frozen Git blob for {relative}: {detail}"
-            )
-        data = (repository / relative).read_bytes()
-        # Git status can omit tracked edits marked assume-unchanged or skip-worktree.
-        # Bind the exported digest to the actual revision bytes, independent of flags.
-        if data != frozen.stdout:
-            raise PacketError(f"{relative} bytes differ from the frozen Git blob")
-        manifest.append(
-            {"path": relative, "git_blob": blob, "sha256": hashlib.sha256(data).hexdigest()}
-        )
+        raise PacketError(f"source or implementation closure is not committed: {missing}")
+    manifest = [
+        {
+            "path": relative,
+            "git_blob": _git(repository, "rev-parse", f"{revision}:{relative}"),
+            "sha256": hashlib.sha256((repository / relative).read_bytes()).hexdigest(),
+        }
+        for relative in paths
+    ]
     identities = {row["path"]: (row["git_blob"], row["sha256"]) for row in manifest}
     if identities[SOURCE_PATH] != (SOURCE_BLOB, SOURCE_SHA256):
         raise PacketError("T-025 source identity differs from the admitted artifact")
@@ -552,82 +529,26 @@ def _observe_runtime() -> RuntimeObservation:
     )
 
 
-def runtime_binding(
-    repository: Path, *, observer: RuntimeObserver | None = None
-) -> dict[str, object]:
-    """Validate the project environment and return its closed, read-only identity.
+def runtime_binding(*, observer: RuntimeObserver | None = None) -> dict[str, object]:
+    """Record the running interpreter and imported distributions as the run's history.
 
-    ``observer`` is the narrow test seam. Production callers omit it and must be
-    running in this repository's own ``packing/.venv``.
+    Nothing is compared with ``.python-version``, ``uv.lock`` or where the virtual
+    environment lives: the record describes the run, and an environment change never
+    invalidates it (development.md, Hashes and Repository-Owned Artifacts, 2026-10-03).
+    ``observer`` is the narrow test seam.
     """
 
-    repository = repository.resolve()
     observation = (observer or _observe_runtime)()
-    expected_environment = (repository / "packing" / ".venv").resolve()
-    if observation.environment.resolve() != expected_environment:
-        raise PacketError("fixed-core packet must run in the repository packing/.venv")
-    try:
-        expected_version = (repository / PROJECT_RUNTIME_PATHS[0]).read_text().strip()
-    except OSError as error:
-        raise PacketOperationalError(
-            f"could not read the bound Python version: {type(error).__name__}: {error}"
-        ) from error
     if (
         observation.implementation != "cpython"
-        or observation.version != expected_version
         or not observation.abi
         or type(observation.gil_enabled) is not bool
         or not observation.build
     ):
-        raise PacketError("Python runtime differs from the project interpreter identity")
-    if (
-        not observation.executable.is_absolute()
-        or not observation.executable.is_file()
-        or observation.resolved_executable != observation.executable.resolve()
-        or not observation.resolved_executable.is_file()
-    ):
-        raise PacketError("Python executable identity is missing or inconsistent")
-
-    try:
-        lock_text = (repository / "packing" / "uv.lock").read_text()
-    except OSError as error:
-        raise PacketOperationalError(
-            f"could not read the bound uv.lock: {type(error).__name__}: {error}"
-        ) from error
-    try:
-        lock = tomllib.loads(lock_text)
-    except tomllib.TOMLDecodeError as error:
-        raise PacketError(f"could not read the bound uv.lock: {error}") from error
-    package_rows = lock.get("package")
-    if not isinstance(package_rows, list):
-        raise PacketError("uv.lock has no package rows")
-    locked: dict[str, str] = {}
-    for raw_row in cast(list[object], package_rows):
-        if not isinstance(raw_row, dict):
-            raise PacketError("uv.lock package row is malformed")
-        row = cast(dict[str, object], raw_row)
-        name = row.get("name")
-        if name not in RUNTIME_DISTRIBUTIONS:
-            continue
-        version = row.get("version")
-        if not isinstance(version, str) or name in locked:
-            raise PacketError(f"uv.lock runtime package {name!r} is missing or duplicated")
-        locked[cast(str, name)] = version
-
-    observed = {package.name: package for package in observation.packages}
-    if set(observed) != set(RUNTIME_DISTRIBUTIONS) or set(locked) != set(RUNTIME_DISTRIBUTIONS):
+        raise PacketError("Python runtime identity is malformed")
+    versions = {package.name: package.metadata_version for package in observation.packages}
+    if set(versions) != set(RUNTIME_DISTRIBUTIONS) or not all(versions.values()):
         raise PacketError("runtime package set differs from the fixed import closure")
-    versions: dict[str, str] = {}
-    for name in RUNTIME_DISTRIBUTIONS:
-        package = observed[name]
-        if (
-            package.metadata_version != locked[name]
-            or package.module_version != locked[name]
-            or not package.module_origin.is_relative_to(expected_environment)
-        ):
-            raise PacketError(f"runtime package {name} differs from the bound uv.lock")
-        versions[name] = locked[name]
-
     return {
         "python": {
             "implementation": observation.implementation,
@@ -639,7 +560,7 @@ def runtime_binding(
             "resolved_executable": str(observation.resolved_executable),
             "build": observation.build,
         },
-        "packages": versions,
+        "packages": {name: versions[name] for name in RUNTIME_DISTRIBUTIONS},
         "attestation_scope": RUNTIME_ATTESTATION_SCOPE,
     }
 
@@ -2648,20 +2569,6 @@ def execute_packet(  # noqa: PLR0911
         return document
 
     source_started = clock()
-    manifest_by_path = {row["path"]: row for row in manifest}
-    source_digest = hashlib.sha256(source).hexdigest()
-    t026_digest = hashlib.sha256(t026_source).hexdigest()
-    _require(
-        len(source) == SOURCE_BYTES
-        and source_digest == SOURCE_SHA256
-        and manifest_by_path.get(SOURCE_PATH, {}).get("sha256") == source_digest,
-        "executed T-025 bytes differ from the pinned source manifest",
-    )
-    _require(
-        t026_digest == T026_SHA256
-        and manifest_by_path.get(T026_PATH, {}).get("sha256") == t026_digest,
-        "executed T-026 bytes differ from the pinned source manifest",
-    )
     t026 = load_t026_reference(t026_source)
     packet, source_record = load_packet_source(source)
     source_finished = clock()
@@ -3720,15 +3627,11 @@ def load_result(
     sources = _source_record(document)
     if sources.get("implementation_revision") != expected_revision:
         raise PacketError("result revision differs from the requested readback revision")
-    manifest = source_manifest(
-        repository,
-        expected_revision,
-        result_directory=output_dir,
-    )
-    if sources.get("manifest") != manifest:
-        raise PacketError("result source or implementation manifest differs on readback")
-    if sources.get("runtime") != runtime_binding(repository):
-        raise PacketError("result runtime differs from the readback environment")
+    # The recorded manifest and runtime describe the run and stay in the result as its
+    # history; `validate_result_document` has checked their shape. Neither is a
+    # condition on reading the result back, so a later commit, interpreter, lock or host
+    # reads the same retained bytes (development.md, Hashes and Repository-Owned
+    # Artifacts, 2026-10-03); `manifest_drift` lists what has changed since.
     source = (repository / SOURCE_PATH).read_bytes()
     t026_source = (repository / T026_PATH).read_bytes()
     if (
@@ -4338,7 +4241,7 @@ def run_worker(  # noqa: PLR0911
             revision,
             result_directory=output_dir,
         )
-        runtime = runtime_binding(repository)
+        runtime = runtime_binding()
         source = (repository / SOURCE_PATH).read_bytes()
         t026 = (repository / T026_PATH).read_bytes()
     except PacketError as error:

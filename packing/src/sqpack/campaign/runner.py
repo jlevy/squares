@@ -42,9 +42,10 @@ alone are assertions by the thing under test, which is what D-044 records: a fab
 side, a fabricated zero overlap, or an untested binary all passed. So clause 4 exists,
 and `record` refuses any round whose archived poses have not been rebuilt into corner
 geometry and re-checked for containment and pairwise separation by
-`sqpack.verify` **in a separate process**, against a `sha256` of the exact result lines
-on disk. The engine's `--selftest` is executed and its binary hashed, so
-`subject.selftest_passed` is a fact rather than a literal.
+`sqpack.verify` **in a separate process**, from the result lines on disk, every time
+`record` runs; the receipt names those lines by a `sha256`. The engine's `--selftest` is
+executed and its binary hashed, so `subject.selftest_passed` is a fact rather than a
+literal.
 
 That check is float arithmetic at a declared tolerance. It refutes a forged pose; it
 never upgrades a round to `verified`. See :mod:`sqpack.verify` on why no tolerance can.
@@ -494,6 +495,21 @@ def append_receipt(archive: Path, key: str, body: dict[str, Any]) -> None:
         fh.write(json.dumps({key: body}, sort_keys=True) + "\n")
 
 
+def replace_receipt(archive: Path, key: str, body: dict[str, Any]) -> None:
+    """Make `body` the archive's one `key` receipt, dropping any earlier one, atomically.
+
+    Every other line is kept byte for byte. `scan_archive` has already validated the
+    file, so each non-blank line is JSON.
+    """
+    kept = [
+        line
+        for line in archive.read_text().splitlines()
+        if not line.strip() or set(json.loads(line)) != {key}
+    ]
+    kept.append(json.dumps({key: body}, sort_keys=True))
+    write_atomic(archive, "\n".join(kept) + "\n")
+
+
 def append_execution_metadata(
     archive: Path, *, started: float, commit: str, dirty: bool
 ) -> None:
@@ -622,9 +638,10 @@ def pose_digest(rec: dict[str, Any]) -> str:
 def archive_digest(results: list[dict[str, Any]]) -> str:
     """Content-address the whole archive: every pose digest, in file order.
 
-    This is what binds a verification verdict to an immutable object. Add, remove,
-    reorder or edit a scored line and the digest moves, so a stale certificate cannot
-    be carried over onto different evidence.
+    This names the evidence a verification verdict was decided on, in the receipt and in
+    the round's guard row. Add, remove, reorder or edit a scored line and the name
+    moves. Nothing compares it: `record` re-decides the geometry from the file on every
+    run instead (OR-16).
     """
     joined = "\n".join(pose_digest(rec) for rec in results)
     return hashlib.sha256(joined.encode("utf-8")).hexdigest()
@@ -822,6 +839,10 @@ def run_engine_selftest(recipe: dict[str, Any]) -> dict[str, Any]:
     (D-044), while the hypotheses meanwhile advertised instruments "gated by
     `--selftest`". This runs that gate, and binds the answer to a digest of the exact
     file that ran, so `record` can tell that the binary has not been swapped since.
+
+    The digest is a cache identity, not a repository checksum (OR-16): the engine is a
+    build product with no Git revision, so its digest is the only name the self-test
+    result can be filed under, and a different build is a different entry.
     """
     engine = engine_path(recipe)
     if not engine.exists():
@@ -867,7 +888,11 @@ def run_engine_selftest(recipe: dict[str, Any]) -> dict[str, Any]:
 
 
 def selftest_passed(receipt: dict[str, Any] | None, recipe: dict[str, Any]) -> bool:
-    """True only when the gate ran, passed, and the binary is still the one that ran."""
+    """True only when the gate ran, passed, and the binary is still the one that ran.
+
+    A cache lookup by the build's content identity (see `run_engine_selftest`): the
+    receipt certifies one build, and the binary on disk is the build `record` reports.
+    """
     if not receipt or receipt.get("exit_status") != 0:
         return False
     engine = engine_path(recipe)
@@ -1280,16 +1305,10 @@ def record(eid: str, *, operator: str) -> str:
     verification: dict[str, Any] | None = None
     if archived:
         verification = verify_archive_in_separate_process(archive)
-        stored = receipts[VERIFICATION_METADATA]
-        if stored is None:
-            append_receipt(archive, VERIFICATION_METADATA, verification)
-        elif stored.get("archive_sha256") != verification["archive_sha256"]:
-            raise RefusalError(
-                f"{eid}'s archive changed after it was verified: the retained receipt "
-                f"certifies {str(stored.get('archive_sha256'))[:12]} but the file on disk "
-                f"digests to {verification['archive_sha256'][:12]}. Nothing may be "
-                "recorded from an archive that moved under its own certificate."
-            )
+        # The pass just made is the verdict on the file as it stands. A receipt left by
+        # an earlier, interrupted `record` describes an older pass, so it is replaced
+        # rather than compared: re-deciding the geometry is the check (OR-16).
+        replace_receipt(archive, VERIFICATION_METADATA, verification)
     artifact_execution = artifact_fields_from_execution(execution)
     cells = cells_from(archive, recipe)
     verdict = decide(h, cells)

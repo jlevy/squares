@@ -1,0 +1,2 @@
+1bd5508826f3f957ee28f2093be843c41c37fa9fadf46ea69fcbdb15e02bc181  devtools/select_n17_sub_patterns.py
+2f27574f3782795fe4b11364b7bb6ffcabe4b2573536a9c715c4284c6aa1b56e  devtools/sweep_n17_residue_universe.py

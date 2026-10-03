@@ -1,0 +1,129 @@
+root midpoint (float): 0.3620438933143234 0.3309486747227399
+root radii (float): 9.85923078412898e-24 6.525346137774639e-23
+
+== 1. exact identity, normalized and unnormalized ==
+midpoint: in_box=True unnormalized_nonzero_columns=[] normalized_nonzero_columns=[] F2=1.51804239113e-60 K=1.72647759358
+  loads at midpoint: {'mu': '0.150929052718', 'nu': '0.517331893718', 'rho': '0.042972149174', 'Z': '0.527415499727', 'L': '0.540457953988', 'R': '0.491480313447', 'K': '1.72647759358'}
+  partials: {'F1th': '0.982782975208', 'F2th': '-0.281601515988', 'F2be': '-0.042972149174', 'G3th': '-0.0616459261812', 'G3be': '0.517331893718'}
+  F1, F2, G3 at midpoint: 0 1.51804239113e-60 3.85700582982e-61
+  exact-zero weights: ["('pair', 9, 11, 0)", "('pair', 9, 11, 1)", "('wall', 5, 'right', 0)", "('wall', 5, 'right', 1)", "('wall', 6, 'bottom', 0)", "('wall', 6, 'bottom', 1)"] count 6
+  negative weights: []
+  smallest positive normalized weight: ('pair', 11, 12, 1) = 0.00607896395682
+  baseline angular residuals b_9..b_14: {9: '-0.033376031866', 10: '0.0360654095194', 11: '-0.0103661722538', 12: '0.040282246093', 13: '0.0763295580883', 14: '-0.108935009581'}
+  sum b_i: 6.34121484714e-62  gamma*rho*F2: 6.34121484714e-62
+  five oblique moments q: {'(9, 10)': '0.033376031866', '(10, 12)': '-0.00268937765344', '(11, 12)': '0.0103661722538', '(12, 14)': '-0.0326054514926', '(13, 14)': '-0.0763295580883'}
+  capacities (kf+q, kf-q, tau, k) unnormalized:
+    (9, 10): 0.288245545951, 0.221493482219, tau=0.0568386968703, k=0.471580651565; normalized kf-|q| = 0.128292126722
+    (10, 12): 0.0519147336746, 0.0572934889815, tau=0.27642676682, k=0.36178661659; normalized kf-|q| = 0.0300697407644
+    (11, 12): 0.0306310063604, 0.00989866185281, tau=0.0568386968703, k=0.471580651565; normalized kf-|q| = 0.00573344356719
+    (12, 14): 0.0331956968871, 0.0984065998723, tau=0.128051926457, k=0.435974036772; normalized kf-|q| = 0.0192274125135
+    (13, 14): 0.149609731625, 0.302268847802, tau=0.0805764400657, k=0.459711779967; normalized kf-|q| = 0.0866560517098
+second_box_point: in_box=True unnormalized_nonzero_columns=[] normalized_nonzero_columns=[] F2=-1.09029240417e-23 K=1.72647759358
+unrelated_1_3_1_5: in_box=False unnormalized_nonzero_columns=[] normalized_nonzero_columns=[] F2=0.0871794871795 K=0.622939521907
+unrelated_37_100_33_100: in_box=False unnormalized_nonzero_columns=[] normalized_nonzero_columns=[] F2=-0.0306995677855 K=1.83484342518
+unrelated_2_7_3_11: in_box=False unnormalized_nonzero_columns=[] normalized_nonzero_columns=[] F2=0.338315248693 K=0.540498278445
+
+== 2. degree bound and grid proof of the 52 unnormalized identities ==
+numerator degree bound of the residual columns: deg_t <= 134, deg_b <= 10; atoms registered: 165
+grid of 1485 points exceeds cap 0; skipping the grid proof
+grid points evaluated: 0 of 1485; skipped (zero denominator): 0; all residual columns zero: True; seconds 0.0
+
+== 3. interval audit over the H255 box (private outward 2^-300 grid) ==
+corner-offset branch sign failures: []
+strict-positive guard failures: []
+guards: {'c': '[7.682281e-01, 7.682281e-01]', 's': '[6.401762e-01, 6.401762e-01]', 'd': '[8.025699e-01, 8.025699e-01]', 'e': '[5.965581e-01, 5.965581e-01]', 'alpha': '[2.346544e-01, 2.346544e-01]', 'gamma': '[9.720788e-01, 9.720788e-01]', 'T': '[7.121323e-02, 7.121323e-02]', 'F1th': '[9.827830e-01, 9.827830e-01]', 'mu': '[1.509291e-01, 1.509291e-01]', 'nu': '[5.173319e-01, 5.173319e-01]', 'rho': '[4.297215e-02, 4.297215e-02]', 'Z': '[5.274155e-01, 5.274155e-01]', 'L': '[5.404580e-01, 5.404580e-01]', 'R': '[4.914803e-01, 4.914803e-01]', 'K': '[1.726478e+00, 1.726478e+00]'}
+  c: mine [7.682281e-01, 7.682281e-01] producer [7.682281e-01, 7.682281e-01] overlap=True width mine 2.232e-23 producer 2.232e-23
+  s: mine [6.401762e-01, 6.401762e-01] producer [6.401762e-01, 6.401762e-01] overlap=True width mine 4.295e-23 producer 4.295e-23
+  d: mine [8.025699e-01, 8.025699e-01] producer [8.025699e-01, 8.025699e-01] overlap=True width mine 1.403e-22 producer 1.403e-22
+  e: mine [5.965581e-01, 5.965581e-01] producer [5.965581e-01, 5.965581e-01] overlap=True width mine 2.817e-22 producer 2.817e-22
+  alpha: mine [2.346544e-01, 2.346544e-01] producer [2.346544e-01, 2.346544e-01] overlap=True width mine 3.317e-22 producer 3.317e-22
+  gamma: mine [9.720788e-01, 9.720788e-01] producer [9.720788e-01, 9.720788e-01] overlap=True width mine 3.540e-22 producer 3.540e-22
+  T: mine [7.121323e-02, 7.121323e-02] producer [7.121323e-02, 7.121323e-02] overlap=True width mine 1.784e-22 producer 1.784e-22
+  F1th: mine [9.827830e-01, 9.827830e-01] producer [9.827830e-01, 9.827830e-01] overlap=True width mine 4.235e-22 producer 4.235e-22
+  mu: mine [1.509291e-01, 1.509291e-01] producer [1.509291e-01, 1.509291e-01] overlap=True width mine 1.108e-21 producer 1.108e-21
+  nu: mine [5.173319e-01, 5.173319e-01] producer [5.173319e-01, 5.173319e-01] overlap=True width mine 1.357e-21 producer 1.357e-21
+  rho: mine [4.297215e-02, 4.297215e-02] producer [4.297215e-02, 4.297215e-02] overlap=True width mine 1.114e-21 producer 1.114e-21
+  Z: mine [5.274155e-01, 5.274155e-01] producer [5.274155e-01, 5.274155e-01] overlap=True width mine 1.633e-21 producer 1.633e-21
+  L: mine [5.404580e-01, 5.404580e-01] producer [5.404580e-01, 5.404580e-01] overlap=True width mine 1.528e-21 producer 1.528e-21
+  R: mine [4.914803e-01, 4.914803e-01] producer [4.914803e-01, 4.914803e-01] overlap=True width mine 1.786e-21 producer 1.786e-21
+  K: mine [1.726478e+00, 1.726478e+00] producer [1.726478e+00, 1.726478e+00] overlap=True width mine 7.924e-21 producer 7.924e-21
+weights: 58; exact zeros 6; strictly positive 52; straddling []; negative []; disjoint-from-producer []
+smallest positive lower bound: ('pair', 11, 12, 1) = 0.00607896395682 (producer 0.0060789639568182355)
+per-weight comparison (mine lo/hi, producer lo/hi):
+  ('wall', 1, 'left', 0)       mine [0.1275730421, 0.1275730421]  producer [0.1275730421, 0.1275730421]  mid-exact 0.1275730421
+  ('wall', 1, 'left', 1)       mine [0.09112020825, 0.09112020825]  producer [0.09112020825, 0.09112020825]  mid-exact 0.09112020825
+  ('wall', 1, 'bottom', 0)     mine [0.08166977673, 0.08166977673]  producer [0.08166977673, 0.08166977673]  mid-exact 0.08166977673
+  ('wall', 1, 'bottom', 1)     mine [0.1346655313, 0.1346655313]  producer [0.1346655313, 0.1346655313]  mid-exact 0.1346655313
+  ('wall', 2, 'bottom', 0)     mine [0.09112020825, 0.09112020825]  producer [0.09112020825, 0.09112020825]  mid-exact 0.09112020825
+  ('wall', 2, 'bottom', 1)     mine [0.09112020825, 0.09112020825]  producer [0.09112020825, 0.09112020825]  mid-exact 0.09112020825
+  ('wall', 3, 'left', 0)       mine [0.009560626054, 0.009560626054]  producer [0.009560626054, 0.009560626054]  mid-exact 0.009560626054
+  ('wall', 3, 'left', 1)       mine [0.009560626054, 0.009560626054]  producer [0.009560626054, 0.009560626054]  mid-exact 0.009560626054
+  ('wall', 4, 'left', 0)       mine [0.0279821721, 0.0279821721]  producer [0.0279821721, 0.0279821721]  mid-exact 0.0279821721
+  ('wall', 4, 'left', 1)       mine [0.0279821721, 0.0279821721]  producer [0.0279821721, 0.0279821721]  mid-exact 0.0279821721
+  ('wall', 4, 'top', 0)        mine [0.0391764998, 0.0391764998]  producer [0.0391764998, 0.0391764998]  mid-exact 0.0391764998
+  ('wall', 4, 'top', 1)        mine [0.0279821721, 0.0279821721]  producer [0.0279821721, 0.0279821721]  mid-exact 0.0279821721
+  ('wall', 5, 'right', 0)      mine [0, 0]  producer [0, 0]  mid-exact 0
+  ('wall', 5, 'right', 1)      mine [0, 0]  producer [0, 0]  mid-exact 0
+  ('wall', 5, 'bottom', 0)     mine [0.0391764998, 0.0391764998]  producer [0.0391764998, 0.0391764998]  mid-exact 0.0391764998
+  ('wall', 5, 'bottom', 1)     mine [0.0279821721, 0.0279821721]  producer [0.0279821721, 0.0279821721]  mid-exact 0.0279821721
+  ('wall', 6, 'bottom', 0)     mine [0, 0]  producer [0, 0]  mid-exact 0
+  ('wall', 6, 'bottom', 1)     mine [0, 0]  producer [0, 0]  mid-exact 0
+  ('wall', 7, 'right', 0)      mine [0.0279821721, 0.0279821721]  producer [0.0279821721, 0.0279821721]  mid-exact 0.0279821721
+  ('wall', 7, 'right', 1)      mine [0.0279821721, 0.0279821721]  producer [0.0279821721, 0.0279821721]  mid-exact 0.0279821721
+  ('wall', 8, 'right', 0)      mine [0.007216894944, 0.007216894944]  producer [0.007216894944, 0.007216894944]  mid-exact 0.007216894944
+  ('wall', 8, 'right', 1)      mine [0.007216894944, 0.007216894944]  producer [0.007216894944, 0.007216894944]  mid-exact 0.007216894944
+  ('wall', 8, 'top', 0)        mine [0.007216894944, 0.007216894944]  producer [0.007216894944, 0.007216894944]  mid-exact 0.007216894944
+  ('wall', 8, 'top', 1)        mine [0.0122013726, 0.0122013726]  producer [0.0122013726, 0.0122013726]  mid-exact 0.0122013726
+  ('wall', 9, 'left', 0)       mine [0.2404867569, 0.2404867569]  producer [0.2404867569, 0.2404867569]  mid-exact 0.2404867569
+  ('wall', 15, 'top', 0)       mine [0.1787561796, 0.1787561796]  producer [0.1787561796, 0.1787561796]  mid-exact 0.1787561796
+  ('wall', 15, 'top', 1)       mine [0.2004012774, 0.2004012774]  producer [0.2004012774, 0.2004012774]  mid-exact 0.2004012774
+  ('wall', 17, 'right', 0)     mine [0.2186932504, 0.2186932504]  producer [0.2186932504, 0.2186932504]  mid-exact 0.2186932504
+  ('wall', 17, 'right', 1)     mine [0.2451742191, 0.2451742191]  producer [0.2451742191, 0.2451742191]  mid-exact 0.2451742191
+  ('pair', 1, 2, 0)            mine [0.1275730421, 0.1275730421]  producer [0.1275730421, 0.1275730421]  mid-exact 0.1275730421
+  ('pair', 1, 2, 1)            mine [0.09112020825, 0.09112020825]  producer [0.09112020825, 0.09112020825]  mid-exact 0.09112020825
+  ('pair', 1, 3, 0)            mine [0.08166977673, 0.08166977673]  producer [0.08166977673, 0.08166977673]  mid-exact 0.08166977673
+  ('pair', 1, 3, 1)            mine [0.1346655313, 0.1346655313]  producer [0.1346655313, 0.1346655313]  mid-exact 0.1346655313
+  ('pair', 5, 7, 0)            mine [0.0391764998, 0.0391764998]  producer [0.0391764998, 0.0391764998]  mid-exact 0.0391764998
+  ('pair', 5, 7, 1)            mine [0.0279821721, 0.0279821721]  producer [0.0279821721, 0.0279821721]  mid-exact 0.0279821721
+  ('pair', 3, 9, 0)            mine [0.2004012774, 0.2004012774]  producer [0.2004012774, 0.2004012774]  mid-exact 0.2004012774
+  ('pair', 9, 10, 0)           mine [0.1770172889, 0.1770172889]  producer [0.1770172889, 0.1770172889]  mid-exact 0.1770172889
+  ('pair', 9, 10, 1)           mine [0.1360235267, 0.1360235267]  producer [0.1360235267, 0.1360235267]  mid-exact 0.1360235267
+  ('pair', 4, 10, 0)           mine [0.08742022096, 0.08742022096]  producer [0.08742022096, 0.08742022096]  mid-exact 0.08742022096
+  ('pair', 3, 11, 0)           mine [0.02489007059, 0.02489007059]  producer [0.02489007059, 0.02489007059]  mid-exact 0.02489007059
+  ('pair', 9, 11, 0)           mine [0, 0]  producer [0, 0]  mid-exact 0
+  ('pair', 9, 11, 1)           mine [0, 0]  producer [0, 0]  mid-exact 0
+  ('pair', 11, 12, 0)          mine [0.01881110663, 0.01881110663]  producer [0.01881110663, 0.01881110663]  mid-exact 0.01881110663
+  ('pair', 11, 12, 1)          mine [0.006078963957, 0.006078963957]  producer [0.006078963957, 0.006078963957]  mid-exact 0.006078963957
+  ('pair', 10, 12, 0)          mine [0.04155728734, 0.04155728734]  producer [0.04155728734, 0.04155728734]  mid-exact 0.04155728734
+  ('pair', 10, 12, 1)          mine [0.04586293362, 0.04586293362]  producer [0.04586293362, 0.04586293362]  mid-exact 0.04586293362
+  ('pair', 2, 13, 0)           mine [0.2846722803, 0.2846722803]  producer [0.2846722803, 0.2846722803]  mid-exact 0.2846722803
+  ('pair', 13, 14, 0)          mine [0.09425041459, 0.09425041459]  producer [0.09425041459, 0.09425041459]  mid-exact 0.09425041459
+  ('pair', 13, 14, 1)          mine [0.1904218657, 0.1904218657]  producer [0.1904218657, 0.1904218657]  mid-exact 0.1904218657
+  ('pair', 12, 14, 0)          mine [0.02205109811, 0.02205109811]  producer [0.02205109811, 0.02205109811]  mid-exact 0.02205109811
+  ('pair', 12, 14, 1)          mine [0.06536912286, 0.06536912286]  producer [0.06536912286, 0.06536912286]  mid-exact 0.06536912286
+  ('pair', 10, 15, 0)          mine [0.3130408156, 0.3130408156]  producer [0.3130408156, 0.3130408156]  mid-exact 0.3130408156
+  ('pair', 14, 17, 0)          mine [0.2846722803, 0.2846722803]  producer [0.2846722803, 0.2846722803]  mid-exact 0.2846722803
+  ('pair', 15, 16, 0)          mine [0.2996458776, 0.2996458776]  producer [0.2996458776, 0.2996458776]  mid-exact 0.2996458776
+  ('pair', 16, 8, 0)           mine [0.02419511118, 0.02419511118]  producer [0.02419511118, 0.02419511118]  mid-exact 0.02419511118
+  ('pair', 14, 7, 0)           mine [0.08742022096, 0.08742022096]  producer [0.08742022096, 0.08742022096]  mid-exact 0.08742022096
+  ('pair', 16, 17, 0)          mine [0.3054864434, 0.3054864434]  producer [0.3054864434, 0.3054864434]  mid-exact 0.3054864434
+  ('pair', 12, 16, 0)          mine [0.02489007059, 0.02489007059]  producer [0.02489007059, 0.02489007059]  mid-exact 0.02489007059
+moment capacities kf+q, kf-q (unnormalized), mine vs producer:
+  (1, 2)    mine [2.202520e-01, 2.202520e-01] [1.573170e-01, 1.573170e-01]  producer [2.202520e-01,2.202520e-01] [1.573170e-01,1.573170e-01] overlap=True tau=Fraction(0, 1) k=Fraction(1, 2)
+  (1, 3)    mine [1.410010e-01, 1.410010e-01] [2.324970e-01, 2.324970e-01]  producer [1.410010e-01,1.410010e-01] [2.324970e-01,2.324970e-01] overlap=True tau=Fraction(0, 1) k=Fraction(1, 2)
+  (5, 7)    mine [6.763735e-02, 6.763735e-02] [4.831059e-02, 4.831059e-02]  producer [6.763735e-02,6.763735e-02] [4.831059e-02,4.831059e-02] overlap=True tau=[-2.071667e-22, 2.071667e-22] k=Fraction(1, 2)
+  (9, 10)   mine [2.882455e-01, 2.882455e-01] [2.214935e-01, 2.214935e-01]  producer [2.882455e-01,2.882455e-01] [2.214935e-01,2.214935e-01] overlap=True tau=[5.683870e-02, 5.683870e-02] k=[4.715807e-01, 4.715807e-01]
+  (9, 11)   mine [0.000000e+00, 0.000000e+00] [0.000000e+00, 0.000000e+00]  producer [0.000000e+00,0.000000e+00] [0.000000e+00,0.000000e+00] overlap=True tau=[2.764268e-01, 2.764268e-01] k=[3.617866e-01, 3.617866e-01]
+  (11, 12)  mine [3.063101e-02, 3.063101e-02] [9.898662e-03, 9.898662e-03]  producer [3.063101e-02,3.063101e-02] [9.898662e-03,9.898662e-03] overlap=True tau=[5.683870e-02, 5.683870e-02] k=[4.715807e-01, 4.715807e-01]
+  (10, 12)  mine [5.191473e-02, 5.191473e-02] [5.729349e-02, 5.729349e-02]  producer [5.191473e-02,5.191473e-02] [5.729349e-02,5.729349e-02] overlap=True tau=[2.764268e-01, 2.764268e-01] k=[3.617866e-01, 3.617866e-01]
+  (13, 14)  mine [1.496097e-01, 1.496097e-01] [3.022688e-01, 3.022688e-01]  producer [1.496097e-01,1.496097e-01] [3.022688e-01,3.022688e-01] overlap=True tau=[8.057644e-02, 8.057644e-02] k=[4.597118e-01, 4.597118e-01]
+  (12, 14)  mine [3.319570e-02, 3.319570e-02] [9.840660e-02, 9.840660e-02]  producer [3.319570e-02,3.319570e-02] [9.840660e-02,9.840660e-02] overlap=True tau=[1.280519e-01, 1.280519e-01] k=[4.359740e-01, 4.359740e-01]
+capacity sign failures: []
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/a1-review/recompute_h258.py", line 696, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/a1-review/recompute_h258.py", line 657, in main
+    if (tau.lo, tau.hi) != (0, 0) and not (tau.lo <= 0 <= tau.hi):
+        ^^^^^^
+AttributeError: 'Fraction' object has no attribute 'lo'

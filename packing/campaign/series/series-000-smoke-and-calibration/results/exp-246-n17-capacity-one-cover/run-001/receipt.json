@@ -1,0 +1,1906 @@
+{
+ "capacity": {
+  "cells": [
+   {
+    "argument": "wall-lemma",
+    "cell": "corner-SW",
+    "depth": "39/50",
+    "diameter_lower_bound": "1.103086",
+    "passed": true,
+    "squared_diameter": "1521/1250",
+    "wall": "W",
+    "width": "39/50"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "corner-SE",
+    "depth": "39/50",
+    "diameter_lower_bound": "1.103086",
+    "passed": true,
+    "squared_diameter": "1521/1250",
+    "wall": "E",
+    "width": "39/50"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "corner-NW",
+    "depth": "39/50",
+    "diameter_lower_bound": "1.103086",
+    "passed": true,
+    "squared_diameter": "1521/1250",
+    "wall": "W",
+    "width": "39/50"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "corner-NE",
+    "depth": "39/50",
+    "diameter_lower_bound": "1.103086",
+    "passed": true,
+    "squared_diameter": "1521/1250",
+    "wall": "E",
+    "width": "39/50"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-S0",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "S",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-N0",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "N",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-W0",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "W",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-E0",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "E",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-S1",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "S",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-N1",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "N",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-W1",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "W",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-E1",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "E",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-S2",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "S",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-N2",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "N",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-W2",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "W",
+    "width": "529/750"
+   },
+   {
+    "argument": "wall-lemma",
+    "cell": "side-E2",
+    "depth": "911/1000",
+    "diameter_lower_bound": "1.152135",
+    "passed": true,
+    "squared_diameter": "2389349/1800000",
+    "wall": "E",
+    "width": "529/750"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-SW",
+    "diameter_lower_bound": "0.960074",
+    "passed": true,
+    "squared_diameter": "2502024804841/2714450000000"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-NW",
+    "diameter_lower_bound": "0.960074",
+    "passed": true,
+    "squared_diameter": "2502024804841/2714450000000"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-W",
+    "diameter_lower_bound": "0.988243",
+    "passed": true,
+    "squared_diameter": "7813/8000"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-S",
+    "diameter_lower_bound": "0.988243",
+    "passed": true,
+    "squared_diameter": "7813/8000"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-N",
+    "diameter_lower_bound": "0.988243",
+    "passed": true,
+    "squared_diameter": "7813/8000"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-E",
+    "diameter_lower_bound": "0.988243",
+    "passed": true,
+    "squared_diameter": "7813/8000"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-SE",
+    "diameter_lower_bound": "0.960074",
+    "passed": true,
+    "squared_diameter": "2502024804841/2714450000000"
+   },
+   {
+    "argument": "diameter",
+    "cell": "interior-NE",
+    "diameter_lower_bound": "0.960074",
+    "passed": true,
+    "squared_diameter": "2502024804841/2714450000000"
+   }
+  ],
+  "corner_rule": "a corner cell is a wall cell of its vertical wall (W or E) with depth and width equal to its side; the horizontal wall is not used",
+  "passed": true,
+  "wall_lemma_proofs": [
+   {
+    "P_at_tau_0": "-11/50",
+    "P_at_tau_1": "-22/25",
+    "bernstein_pieces": 2,
+    "depth": "39/50",
+    "max_G_lower_bound": "-0.028000000",
+    "max_G_upper_bound": "-0.008125000",
+    "passed": true,
+    "polynomial_low_degree_first": [
+     "-11/50",
+     "14/25",
+     "-1",
+     "64/25",
+     "-139/50"
+    ],
+    "sturm_negative": true,
+    "sturm_roots_in_0_1": 0,
+    "tau_pieces": [
+     [
+      "0",
+      "1/2"
+     ],
+     [
+      "1/2",
+      "1"
+     ]
+    ],
+    "width": "39/50"
+   },
+   {
+    "P_at_tau_0": "-89/1000",
+    "P_at_tau_1": "-442/375",
+    "bernstein_pieces": 4,
+    "depth": "911/1000",
+    "max_G_lower_bound": "-0.004662601",
+    "max_G_upper_bound": "-0.002577500",
+    "passed": true,
+    "polynomial_low_degree_first": [
+     "-89/1000",
+     "154/375",
+     "-1",
+     "904/375",
+     "-2911/1000"
+    ],
+    "sturm_negative": true,
+    "sturm_roots_in_0_1": 0,
+    "tau_pieces": [
+     [
+      "0",
+      "1/4"
+     ],
+     [
+      "1/4",
+      "3/8"
+     ],
+     [
+      "3/8",
+      "1/2"
+     ],
+     [
+      "1/2",
+      "1"
+     ]
+    ],
+    "width": "529/750"
+   }
+  ]
+ },
+ "cells": [
+  {
+   "kind": "corner",
+   "name": "corner-SW",
+   "vertices": [
+    [
+     "1/2",
+     "1/2"
+    ],
+    [
+     "32/25",
+     "1/2"
+    ],
+    [
+     "32/25",
+     "32/25"
+    ],
+    [
+     "1/2",
+     "32/25"
+    ]
+   ]
+  },
+  {
+   "kind": "corner",
+   "name": "corner-SE",
+   "vertices": [
+    [
+     "849/250",
+     "1/2"
+    ],
+    [
+     "522/125",
+     "1/2"
+    ],
+    [
+     "522/125",
+     "32/25"
+    ],
+    [
+     "849/250",
+     "32/25"
+    ]
+   ]
+  },
+  {
+   "kind": "corner",
+   "name": "corner-NW",
+   "vertices": [
+    [
+     "1/2",
+     "849/250"
+    ],
+    [
+     "32/25",
+     "849/250"
+    ],
+    [
+     "32/25",
+     "522/125"
+    ],
+    [
+     "1/2",
+     "522/125"
+    ]
+   ]
+  },
+  {
+   "kind": "corner",
+   "name": "corner-NE",
+   "vertices": [
+    [
+     "849/250",
+     "849/250"
+    ],
+    [
+     "522/125",
+     "849/250"
+    ],
+    [
+     "522/125",
+     "522/125"
+    ],
+    [
+     "849/250",
+     "522/125"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-S0",
+   "vertices": [
+    [
+     "32/25",
+     "1/2"
+    ],
+    [
+     "1489/750",
+     "1/2"
+    ],
+    [
+     "1489/750",
+     "1411/1000"
+    ],
+    [
+     "32/25",
+     "1411/1000"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-N0",
+   "vertices": [
+    [
+     "32/25",
+     "653/200"
+    ],
+    [
+     "1489/750",
+     "653/200"
+    ],
+    [
+     "1489/750",
+     "522/125"
+    ],
+    [
+     "32/25",
+     "522/125"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-W0",
+   "vertices": [
+    [
+     "1/2",
+     "32/25"
+    ],
+    [
+     "1411/1000",
+     "32/25"
+    ],
+    [
+     "1411/1000",
+     "1489/750"
+    ],
+    [
+     "1/2",
+     "1489/750"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-E0",
+   "vertices": [
+    [
+     "653/200",
+     "32/25"
+    ],
+    [
+     "522/125",
+     "32/25"
+    ],
+    [
+     "522/125",
+     "1489/750"
+    ],
+    [
+     "653/200",
+     "1489/750"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-S1",
+   "vertices": [
+    [
+     "1489/750",
+     "1/2"
+    ],
+    [
+     "1009/375",
+     "1/2"
+    ],
+    [
+     "1009/375",
+     "1411/1000"
+    ],
+    [
+     "1489/750",
+     "1411/1000"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-N1",
+   "vertices": [
+    [
+     "1489/750",
+     "653/200"
+    ],
+    [
+     "1009/375",
+     "653/200"
+    ],
+    [
+     "1009/375",
+     "522/125"
+    ],
+    [
+     "1489/750",
+     "522/125"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-W1",
+   "vertices": [
+    [
+     "1/2",
+     "1489/750"
+    ],
+    [
+     "1411/1000",
+     "1489/750"
+    ],
+    [
+     "1411/1000",
+     "1009/375"
+    ],
+    [
+     "1/2",
+     "1009/375"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-E1",
+   "vertices": [
+    [
+     "653/200",
+     "1489/750"
+    ],
+    [
+     "522/125",
+     "1489/750"
+    ],
+    [
+     "522/125",
+     "1009/375"
+    ],
+    [
+     "653/200",
+     "1009/375"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-S2",
+   "vertices": [
+    [
+     "1009/375",
+     "1/2"
+    ],
+    [
+     "849/250",
+     "1/2"
+    ],
+    [
+     "849/250",
+     "1411/1000"
+    ],
+    [
+     "1009/375",
+     "1411/1000"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-N2",
+   "vertices": [
+    [
+     "1009/375",
+     "653/200"
+    ],
+    [
+     "849/250",
+     "653/200"
+    ],
+    [
+     "849/250",
+     "522/125"
+    ],
+    [
+     "1009/375",
+     "522/125"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-W2",
+   "vertices": [
+    [
+     "1/2",
+     "1009/375"
+    ],
+    [
+     "1411/1000",
+     "1009/375"
+    ],
+    [
+     "1411/1000",
+     "849/250"
+    ],
+    [
+     "1/2",
+     "849/250"
+    ]
+   ]
+  },
+  {
+   "kind": "side",
+   "name": "side-E2",
+   "vertices": [
+    [
+     "653/200",
+     "1009/375"
+    ],
+    [
+     "522/125",
+     "1009/375"
+    ],
+    [
+     "522/125",
+     "849/250"
+    ],
+    [
+     "653/200",
+     "849/250"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-SW",
+   "vertices": [
+    [
+     "1411/1000",
+     "1411/1000"
+    ],
+    [
+     "4869409/2330000",
+     "1411/1000"
+    ],
+    [
+     "1048947/519200",
+     "1048947/519200"
+    ],
+    [
+     "1411/1000",
+     "4869409/2330000"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-NW",
+   "vertices": [
+    [
+     "1411/1000",
+     "6025671/2330000"
+    ],
+    [
+     "1048947/519200",
+     "6894161/2596000"
+    ],
+    [
+     "4869409/2330000",
+     "653/200"
+    ],
+    [
+     "1411/1000",
+     "653/200"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-W",
+   "vertices": [
+    [
+     "1353/1000",
+     "1129/500"
+    ],
+    [
+     "1411/1000",
+     "4869409/2330000"
+    ],
+    [
+     "789/500",
+     "251/125"
+    ],
+    [
+     "1048947/519200",
+     "1048947/519200"
+    ],
+    [
+     "1169/500",
+     "1169/500"
+    ],
+    [
+     "1048947/519200",
+     "6894161/2596000"
+    ],
+    [
+     "789/500",
+     "667/250"
+    ],
+    [
+     "1411/1000",
+     "6025671/2330000"
+    ],
+    [
+     "1353/1000",
+     "1209/500"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-S",
+   "vertices": [
+    [
+     "251/125",
+     "789/500"
+    ],
+    [
+     "4869409/2330000",
+     "1411/1000"
+    ],
+    [
+     "1129/500",
+     "1353/1000"
+    ],
+    [
+     "1209/500",
+     "1353/1000"
+    ],
+    [
+     "6025671/2330000",
+     "1411/1000"
+    ],
+    [
+     "667/250",
+     "789/500"
+    ],
+    [
+     "6894161/2596000",
+     "1048947/519200"
+    ],
+    [
+     "1169/500",
+     "1169/500"
+    ],
+    [
+     "1048947/519200",
+     "1048947/519200"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-N",
+   "vertices": [
+    [
+     "251/125",
+     "1549/500"
+    ],
+    [
+     "1048947/519200",
+     "6894161/2596000"
+    ],
+    [
+     "1169/500",
+     "1169/500"
+    ],
+    [
+     "6894161/2596000",
+     "6894161/2596000"
+    ],
+    [
+     "667/250",
+     "1549/500"
+    ],
+    [
+     "6025671/2330000",
+     "653/200"
+    ],
+    [
+     "1209/500",
+     "3323/1000"
+    ],
+    [
+     "1129/500",
+     "3323/1000"
+    ],
+    [
+     "4869409/2330000",
+     "653/200"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-E",
+   "vertices": [
+    [
+     "1169/500",
+     "1169/500"
+    ],
+    [
+     "6894161/2596000",
+     "1048947/519200"
+    ],
+    [
+     "1549/500",
+     "251/125"
+    ],
+    [
+     "653/200",
+     "4869409/2330000"
+    ],
+    [
+     "3323/1000",
+     "1129/500"
+    ],
+    [
+     "3323/1000",
+     "1209/500"
+    ],
+    [
+     "653/200",
+     "6025671/2330000"
+    ],
+    [
+     "1549/500",
+     "667/250"
+    ],
+    [
+     "6894161/2596000",
+     "6894161/2596000"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-SE",
+   "vertices": [
+    [
+     "6025671/2330000",
+     "1411/1000"
+    ],
+    [
+     "653/200",
+     "1411/1000"
+    ],
+    [
+     "653/200",
+     "4869409/2330000"
+    ],
+    [
+     "6894161/2596000",
+     "1048947/519200"
+    ]
+   ]
+  },
+  {
+   "kind": "interior",
+   "name": "interior-NE",
+   "vertices": [
+    [
+     "6025671/2330000",
+     "653/200"
+    ],
+    [
+     "6894161/2596000",
+     "6894161/2596000"
+    ],
+    [
+     "653/200",
+     "6025671/2330000"
+    ],
+    [
+     "653/200",
+     "653/200"
+    ]
+   ]
+  }
+ ],
+ "census": {
+  "cells": 24,
+  "cycle_profiles": {
+   "f0": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "f1": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "f2": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "f3": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "r0": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "r1": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "r2": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "r3": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  "fixed_counts": {
+   "f0": 660,
+   "f1": 660,
+   "f2": 660,
+   "f3": 660,
+   "r0": 346104,
+   "r1": 0,
+   "r2": 0,
+   "r3": 0
+  },
+  "fixed_sum": 348744,
+  "orbits": 43593,
+  "states": 346104
+ },
+ "controls": {
+  "asymmetric_cell_refused": true,
+  "h259_falsifier": {
+   "capacity_refusals": [
+    {
+     "argument": null,
+     "cell": "h259-centre",
+     "diameter_lower_bound": "1.039729",
+     "passed": false,
+     "squared_diameter": "844561/781250"
+    },
+    {
+     "argument": null,
+     "cell": "falsifier-pair-box",
+     "diameter_lower_bound": "1.010000",
+     "passed": false,
+     "squared_diameter": "10201/10000"
+    }
+   ],
+   "pair_centres": [
+    [
+     "78407/29000",
+     "38951/14500"
+    ],
+    [
+     "57197/29000",
+     "28851/14500"
+    ]
+   ],
+   "pair_contained": true,
+   "pair_gap_along_u": "1/100",
+   "pair_in_h259_cell": true,
+   "passed": true
+  },
+  "hole_without_last_cell": {
+   "refused": true,
+   "witness": [
+    "6894161/2596000",
+    "1581813704491/495236324000"
+   ]
+  },
+  "passed": true,
+  "ring_gap_depth_minus_1/1000": {
+   "refused": true,
+   "witness": [
+    "1411/1000",
+    "2821/2000"
+   ]
+  },
+  "unit_diameter_cell": {
+   "refused": true,
+   "squared_diameter": "1"
+  },
+  "wall_lemma_refusals": {
+   "corner_4/5": {
+    "refused": true,
+    "refuting_tau": "1/2"
+   },
+   "side_depth_3/4": {
+    "refused": true,
+    "refuting_tau": "1/2"
+   }
+  }
+ },
+ "coverage": {
+  "critical_abscissae": 21,
+  "passed": true,
+  "vertical_lines_checked": 41
+ },
+ "criterion": {
+  "capacity": true,
+  "cells": 24,
+  "controls": true,
+  "coverage": true,
+  "d4_invariant": true,
+  "family_one_state_recipe_box": false,
+  "family_one_state_triangle": true,
+  "orbit_threshold": 135196,
+  "orbits": 43593,
+  "passed": true,
+  "root_certificate_passed": true
+ },
+ "d4": {
+  "invariant": true,
+  "permutations": {
+   "f0": [
+    1,
+    0,
+    3,
+    2,
+    12,
+    13,
+    7,
+    6,
+    8,
+    9,
+    11,
+    10,
+    4,
+    5,
+    15,
+    14,
+    22,
+    23,
+    21,
+    19,
+    20,
+    18,
+    16,
+    17
+   ],
+   "f1": [
+    3,
+    1,
+    2,
+    0,
+    15,
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    23,
+    17,
+    20,
+    21,
+    18,
+    19,
+    22,
+    16
+   ],
+   "f2": [
+    2,
+    3,
+    0,
+    1,
+    5,
+    4,
+    14,
+    15,
+    9,
+    8,
+    10,
+    11,
+    13,
+    12,
+    6,
+    7,
+    17,
+    16,
+    18,
+    20,
+    19,
+    21,
+    23,
+    22
+   ],
+   "f3": [
+    0,
+    2,
+    1,
+    3,
+    6,
+    7,
+    4,
+    5,
+    10,
+    11,
+    8,
+    9,
+    14,
+    15,
+    12,
+    13,
+    16,
+    22,
+    19,
+    18,
+    21,
+    20,
+    17,
+    23
+   ],
+   "r0": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+   ],
+   "r1": [
+    1,
+    3,
+    0,
+    2,
+    7,
+    6,
+    12,
+    13,
+    11,
+    10,
+    8,
+    9,
+    15,
+    14,
+    4,
+    5,
+    22,
+    16,
+    19,
+    21,
+    18,
+    20,
+    23,
+    17
+   ],
+   "r2": [
+    3,
+    2,
+    1,
+    0,
+    13,
+    12,
+    15,
+    14,
+    9,
+    8,
+    11,
+    10,
+    5,
+    4,
+    7,
+    6,
+    23,
+    22,
+    21,
+    20,
+    19,
+    18,
+    17,
+    16
+   ],
+   "r3": [
+    2,
+    0,
+    3,
+    1,
+    14,
+    15,
+    5,
+    4,
+    10,
+    11,
+    9,
+    8,
+    6,
+    7,
+    13,
+    12,
+    17,
+    23,
+    20,
+    18,
+    21,
+    19,
+    16,
+    22
+   ]
+  }
+ },
+ "design": {
+  "axis_site": "129/250",
+  "cap": "1169/250",
+  "centre_box": [
+   "1/2",
+   "522/125"
+  ],
+  "centre_site": false,
+  "corner": "39/50",
+  "depth": "911/1000",
+  "diagonal_site": "233/400",
+  "name": "ring-3-voronoi-8-tabbed",
+  "per_wall": 3,
+  "side_width": "529/750",
+  "tabs": [
+   {
+    "points": [
+     [
+      "2/25",
+      "-197/200"
+     ],
+     [
+      "-2/25",
+      "-197/200"
+     ],
+     [
+      "33/100",
+      "-19/25"
+     ],
+     [
+      "-33/100",
+      "-19/25"
+     ]
+    ],
+    "site_offset": [
+     "0",
+     "-129/250"
+    ]
+   }
+  ]
+ },
+ "endpoint": {
+  "family": {
+   "h256-centroid": {
+    "domain": "h256-centroid",
+    "least_margin_lower_bound": "0.013770",
+    "least_margin_square": 9,
+    "one_state": true,
+    "sliders": {
+     "a": [
+      "0"
+     ],
+     "b": [
+      "0"
+     ],
+     "square_6": "H256 centroid",
+     "z": [
+      "0"
+     ]
+    },
+    "squares": [
+     {
+      "cell": "corner-SW",
+      "cells_with_nonnegative_margin": {
+       "corner-SW": "0.779765"
+      },
+      "label": 1,
+      "margin_lower_bound": "0.779765"
+     },
+     {
+      "cell": "side-S0",
+      "cells_with_nonnegative_margin": {
+       "side-S0": "0.220234"
+      },
+      "label": 2,
+      "margin_lower_bound": "0.220234"
+     },
+     {
+      "cell": "side-W0",
+      "cells_with_nonnegative_margin": {
+       "side-W0": "0.220234"
+      },
+      "label": 3,
+      "margin_lower_bound": "0.220234"
+     },
+     {
+      "cell": "corner-NW",
+      "cells_with_nonnegative_margin": {
+       "corner-NW": "0.779765"
+      },
+      "label": 4,
+      "margin_lower_bound": "0.779765"
+     },
+     {
+      "cell": "corner-SE",
+      "cells_with_nonnegative_margin": {
+       "corner-SE": "0.779765"
+      },
+      "label": 5,
+      "margin_lower_bound": "0.779765"
+     },
+     {
+      "cell": "side-S2",
+      "cells_with_nonnegative_margin": {
+       "side-S2": "0.257314"
+      },
+      "label": 6,
+      "margin_lower_bound": "0.257314"
+     },
+     {
+      "cell": "side-E0",
+      "cells_with_nonnegative_margin": {
+       "side-E0": "0.220234"
+      },
+      "label": 7,
+      "margin_lower_bound": "0.220234"
+     },
+     {
+      "cell": "corner-NE",
+      "cells_with_nonnegative_margin": {
+       "corner-NE": "0.779765"
+      },
+      "label": 8,
+      "margin_lower_bound": "0.779765"
+     },
+     {
+      "cell": "side-W2",
+      "cells_with_nonnegative_margin": {
+       "side-W2": "0.013770"
+      },
+      "label": 9,
+      "margin_lower_bound": "0.013770"
+     },
+     {
+      "cell": "side-N0",
+      "cells_with_nonnegative_margin": {
+       "side-N0": "0.123278"
+      },
+      "label": 10,
+      "margin_lower_bound": "0.123278"
+     },
+     {
+      "cell": "interior-W",
+      "cells_with_nonnegative_margin": {
+       "interior-W": "0.085175"
+      },
+      "label": 11,
+      "margin_lower_bound": "0.085175"
+     },
+     {
+      "cell": "interior-N",
+      "cells_with_nonnegative_margin": {
+       "interior-N": "0.272328"
+      },
+      "label": 12,
+      "margin_lower_bound": "0.272328"
+     },
+     {
+      "cell": "interior-S",
+      "cells_with_nonnegative_margin": {
+       "interior-S": "0.055682",
+       "side-S1": "0.002317"
+      },
+      "label": 13,
+      "margin_lower_bound": "0.055682"
+     },
+     {
+      "cell": "interior-E",
+      "cells_with_nonnegative_margin": {
+       "interior-E": "0.100754"
+      },
+      "label": 14,
+      "margin_lower_bound": "0.100754"
+     },
+     {
+      "cell": "side-N1",
+      "cells_with_nonnegative_margin": {
+       "side-N1": "0.343106"
+      },
+      "label": 15,
+      "margin_lower_bound": "0.343106"
+     },
+     {
+      "cell": "side-N2",
+      "cells_with_nonnegative_margin": {
+       "side-N2": "0.107728"
+      },
+      "label": 16,
+      "margin_lower_bound": "0.107728"
+     },
+     {
+      "cell": "side-E1",
+      "cells_with_nonnegative_margin": {
+       "side-E1": "0.076971"
+      },
+      "label": 17,
+      "margin_lower_bound": "0.076971"
+     }
+    ],
+    "state": [
+     "corner-NE",
+     "corner-NW",
+     "corner-SE",
+     "corner-SW",
+     "interior-E",
+     "interior-N",
+     "interior-S",
+     "interior-W",
+     "side-E0",
+     "side-E1",
+     "side-N0",
+     "side-N1",
+     "side-N2",
+     "side-S0",
+     "side-S2",
+     "side-W0",
+     "side-W2"
+    ]
+   },
+   "h256-triangle-box": {
+    "domain": "h256-triangle-box",
+    "least_margin_lower_bound": "0.013770",
+    "least_margin_square": 9,
+    "one_state": true,
+    "sliders": {
+     "a": [
+      "0",
+      "3/25"
+     ],
+     "b": [
+      "0",
+      "3/40"
+     ],
+     "square_6": {
+      "x": "[R - 1/5, R] + shift",
+      "y": [
+       "1/2",
+       "3/4"
+      ]
+     },
+     "z": [
+      "-1/20",
+      "1/40"
+     ]
+    },
+    "squares": [
+     {
+      "cell": "corner-SW",
+      "cells_with_nonnegative_margin": {
+       "corner-SW": "0.779765"
+      },
+      "label": 1,
+      "margin_lower_bound": "0.779765"
+     },
+     {
+      "cell": "side-S0",
+      "cells_with_nonnegative_margin": {
+       "side-S0": "0.220234"
+      },
+      "label": 2,
+      "margin_lower_bound": "0.220234"
+     },
+     {
+      "cell": "side-W0",
+      "cells_with_nonnegative_margin": {
+       "side-W0": "0.220234"
+      },
+      "label": 3,
+      "margin_lower_bound": "0.220234"
+     },
+     {
+      "cell": "corner-NW",
+      "cells_with_nonnegative_margin": {
+       "corner-NW": "0.779765"
+      },
+      "label": 4,
+      "margin_lower_bound": "0.779765"
+     },
+     {
+      "cell": "corner-SE",
+      "cells_with_nonnegative_margin": {
+       "corner-SE": "0.659765"
+      },
+      "label": 5,
+      "margin_lower_bound": "0.659765"
+     },
+     {
+      "cell": "side-S2",
+      "cells_with_nonnegative_margin": {
+       "side-S2": "0.220234"
+      },
+      "label": 6,
+      "margin_lower_bound": "0.220234"
+     },
+     {
+      "cell": "side-E0",
+      "cells_with_nonnegative_margin": {
+       "side-E0": "0.220234"
+      },
+      "label": 7,
+      "margin_lower_bound": "0.220234"
+     },
+     {
+      "cell": "corner-NE",
+      "cells_with_nonnegative_margin": {
+       "corner-NE": "0.779765"
+      },
+      "label": 8,
+      "margin_lower_bound": "0.779765"
+     },
+     {
+      "cell": "side-W2",
+      "cells_with_nonnegative_margin": {
+       "side-W2": "0.013770"
+      },
+      "label": 9,
+      "margin_lower_bound": "0.013770"
+     },
+     {
+      "cell": "side-N0",
+      "cells_with_nonnegative_margin": {
+       "side-N0": "0.123278"
+      },
+      "label": 10,
+      "margin_lower_bound": "0.123278"
+     },
+     {
+      "cell": "interior-W",
+      "cells_with_nonnegative_margin": {
+       "interior-W": "0.046784"
+      },
+      "label": 11,
+      "margin_lower_bound": "0.046784"
+     },
+     {
+      "cell": "interior-N",
+      "cells_with_nonnegative_margin": {
+       "interior-N": "0.272328"
+      },
+      "label": 12,
+      "margin_lower_bound": "0.272328"
+     },
+     {
+      "cell": "interior-S",
+      "cells_with_nonnegative_margin": {
+       "interior-S": "0.017271"
+      },
+      "label": 13,
+      "margin_lower_bound": "0.017271"
+     },
+     {
+      "cell": "interior-E",
+      "cells_with_nonnegative_margin": {
+       "interior-E": "0.100754"
+      },
+      "label": 14,
+      "margin_lower_bound": "0.100754"
+     },
+     {
+      "cell": "side-N1",
+      "cells_with_nonnegative_margin": {
+       "side-N1": "0.343106"
+      },
+      "label": 15,
+      "margin_lower_bound": "0.343106"
+     },
+     {
+      "cell": "side-N2",
+      "cells_with_nonnegative_margin": {
+       "side-N2": "0.107728"
+      },
+      "label": 16,
+      "margin_lower_bound": "0.107728"
+     },
+     {
+      "cell": "side-E1",
+      "cells_with_nonnegative_margin": {
+       "side-E1": "0.076971"
+      },
+      "label": 17,
+      "margin_lower_bound": "0.076971"
+     }
+    ],
+    "state": [
+     "corner-NE",
+     "corner-NW",
+     "corner-SE",
+     "corner-SW",
+     "interior-E",
+     "interior-N",
+     "interior-S",
+     "interior-W",
+     "side-E0",
+     "side-E1",
+     "side-N0",
+     "side-N1",
+     "side-N2",
+     "side-S0",
+     "side-S2",
+     "side-W0",
+     "side-W2"
+    ]
+   },
+   "recipe-B_W": {
+    "domain": "recipe-B_W",
+    "one_state": false,
+    "sliders": {
+     "a": [
+      "0",
+      "1/4"
+     ],
+     "b": [
+      "0",
+      "1/12"
+     ],
+     "square_6": {
+      "x": "[R - 1/5, R] + shift",
+      "y": [
+       "1/2",
+       "3/4"
+      ]
+     },
+     "z": [
+      "-1/8",
+      "1/16"
+     ]
+    },
+    "squares": [
+     {
+      "cells_with_nonnegative_margin": {
+       "corner-SW": "0.779765"
+      },
+      "label": 1
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-S0": "0.220234"
+      },
+      "label": 2
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-W0": "0.220234"
+      },
+      "label": 3
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "corner-NW": "0.779765"
+      },
+      "label": 4
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "corner-SE": "0.529765"
+      },
+      "label": 5
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-S2": "0.220234"
+      },
+      "label": 6
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-E0": "0.220234"
+      },
+      "label": 7
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "corner-NE": "0.779765"
+      },
+      "label": 8
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-W2": "0.013770"
+      },
+      "label": 9
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-N0": "0.123278"
+      },
+      "label": 10
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "interior-W": "0.040236"
+      },
+      "label": 11
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "interior-N": "0.272328"
+      },
+      "label": 12
+     },
+     {
+      "cells_with_nonnegative_margin": {},
+      "label": 13
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "interior-E": "0.100754"
+      },
+      "label": 14
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-N1": "0.343106"
+      },
+      "label": 15
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-N2": "0.107728"
+      },
+      "label": 16
+     },
+     {
+      "cells_with_nonnegative_margin": {
+       "side-E1": "0.076971"
+      },
+      "label": 17
+     }
+    ],
+    "unassignable": [
+     13
+    ]
+   }
+  },
+  "root": {
+   "b_box": [
+    "3309486747227399104297432798215378877783/10000000000000000000000000000000000000000",
+    "3309486747227399104298737867442933805711/10000000000000000000000000000000000000000"
+   ],
+   "certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-238-n17-endpoint-feasibility/run-001/certificate.json",
+   "certificate_sha256": "f052f6ae476c4d4a79a082aecbab981e6d4885934efd36f2bf5acf4a63c73992",
+   "criterion_passed": true,
+   "t_box": [
+    "3620438933143233834536121195091600352379/10000000000000000000000000000000000000000",
+    "1810219466571616917268159189853641465993/5000000000000000000000000000000000000000"
+   ]
+  },
+  "slider_containment": {
+   "T": [
+    "0.071213229",
+    "0.071213230"
+   ],
+   "T_over_s": [
+    "0.111240046",
+    "0.111240047"
+   ],
+   "checks": {
+    "a: T/s <= 3/25": true,
+    "b: T <= 3/40": true,
+    "square 6: T/s <= 1/5": true,
+    "z: 2T/3 <= 1/20": true,
+    "z: T/3 <= 1/40": true
+   },
+   "passed": true
+  }
+ },
+ "module_sha256": "02c3c38eb3f006544d7a37955abbd4ed1e93192d8372a4793ecb9080916c94bc",
+ "schema": "n17-capacity-one-cover/v1",
+ "seam_margin_required": "1/1000",
+ "seconds": 0.139,
+ "state_convention": "existential closed-cell assignments (H260): a state is a 17-subset of cells that receives the 17 centres, each in a closed cell containing it; capacity one makes every such choice injective, overlaps may give a packing several states, and no seam priority is used"
+}

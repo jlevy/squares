@@ -1,0 +1,255 @@
+"""Independent endpoint-family state check: exact distances, not edge-line bounds.
+
+The H256 centres are evaluated by `_layout` (the accepted exp-238 reconstruction, a different
+module from the cover checker) in mpmath interval arithmetic at 60 digits over the exp-238
+root box, then rounded outward to rationals and embedded concentrically in [0, U]^2.
+
+Two families are tested.
+  * `triangle-box`: the checker's declared domain (square 5 by -a e_x, a in [0, 3/25];
+    square 11 by -b v, b in [0, 3/40]; square 13 by +z v, z in [-1/20, 1/40]; square 6
+    anywhere in [R - 1/5, R] x [1/2, 3/4] + shift).
+  * `h256-derived`: what H256 itself defines: lambda_6 in [R - T/s, R] on the bottom wall
+    (y = 1/2), lambda_13 in [H - T, H] (z in [-2T/3, T/3] about the centroid), everything
+    else fixed; a product box containing the H256 triangle.
+
+For each square the family set is the convex hull of its member rectangles (the family is a
+union of segments between members, so it lies in that hull). For every cell: whether the hull
+is inside (every corner satisfies every edge inequality) and the exact least inward edge
+distance; otherwise the exact Euclidean distance between the hull and the cell, as a rational
+squared distance (vertex-to-segment minima both ways; zero if the polygons meet). The state is
+unique when each square's hull is inside exactly one cell by >= 1e-3 and at distance >= 1e-3
+from every other. Because cells are convex and the hull is convex, the state is then the same
+at every point of the family.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import sys
+from fractions import Fraction as Q
+from pathlib import Path
+
+import mpmath
+from mpmath import iv
+
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools.check_n17_endpoint_feasibility import _layout  # noqa: E402
+
+U = Q(1169, 250)
+LO, HI = Q(1, 2), U - Q(1, 2)
+HERE = Path(__file__).resolve().parent
+REPO = Path("/home/user/squares")
+CERT = REPO / ("packing/campaign/series/series-000-smoke-and-calibration/results/"
+               "exp-238-n17-endpoint-feasibility/run-001/certificate.json")
+MARGIN2 = Q(1, 1000) ** 2
+Point = tuple[Q, Q]
+
+
+def raw_to_q(raw) -> Q:
+    sign, man, exp, _ = raw
+    value = Q(man) * (Q(2) ** exp)
+    return -value if sign else value
+
+
+def to_interval(v) -> tuple[Q, Q]:
+    a, b = (raw_to_q(raw) for raw in v._mpi_)
+    assert a <= b
+    return a, b
+
+
+def load_cells() -> list[tuple[str, list[Point]]]:
+    receipt = json.loads((HERE / "receipt-unique.json").read_text())
+    return [(c["name"], [(Q(x), Q(y)) for x, y in c["vertices"]]) for c in receipt["cells"]]
+
+
+def hull(points: list[Point]) -> list[Point]:
+    pts = sorted(set(points))
+    if len(pts) <= 2:
+        return pts
+
+    def cross(o, a, b):
+        return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+
+    lower, upper = [], []
+    for p in pts:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:
+            lower.pop()
+        lower.append(p)
+    for p in reversed(pts):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:
+            upper.pop()
+        upper.append(p)
+    return lower[:-1] + upper[:-1]
+
+
+def edges(poly: list[Point]):
+    n = len(poly)
+    return [(poly[i], poly[(i + 1) % n]) for i in range(n)]
+
+
+def point_segment_d2(p: Point, a: Point, b: Point) -> Q:
+    ab = (b[0] - a[0], b[1] - a[1])
+    ap = (p[0] - a[0], p[1] - a[1])
+    l2 = ab[0] ** 2 + ab[1] ** 2
+    t = (ap[0] * ab[0] + ap[1] * ab[1]) / l2
+    t = min(Q(1), max(Q(0), t))
+    cx, cy = a[0] + t * ab[0] - p[0], a[1] + t * ab[1] - p[1]
+    return cx * cx + cy * cy
+
+
+def inside_margin2(cell: list[Point], poly: list[Point]) -> Q | None:
+    """Exact least squared inward edge distance of a convex poly inside a convex cell, or None."""
+    least: Q | None = None
+    for a, b in edges(cell):
+        ex, ey = b[0] - a[0], b[1] - a[1]
+        l2 = ex * ex + ey * ey
+        # A centre-box boundary edge is a wall, not a seam (H-266: "every seam of its cell").
+        on_box = any(a[k] == b[k] == bound for k in (0, 1) for bound in (LO, HI))
+        for p in poly:
+            signed = ex * (p[1] - a[1]) - ey * (p[0] - a[0])
+            if signed < 0:
+                return None
+            if on_box:
+                continue
+            d2 = signed * signed / l2
+            if least is None or d2 < least:
+                least = d2
+    return least if least is not None else Q(100)
+
+
+def separated(a: list[Point], b: list[Point]) -> bool:
+    """SAT: some edge line of a or b strictly separates the two convex polygons."""
+    for poly, other in ((a, b), (b, a)):
+        for p, q in edges(poly):
+            ex, ey = q[0] - p[0], q[1] - p[1]
+            if all(ex * (r[1] - p[1]) - ey * (r[0] - p[0]) < 0 for r in other):
+                return True
+    return False
+
+
+def distance2(a: list[Point], b: list[Point]) -> Q:
+    if not separated(a, b):
+        return Q(0)
+    best: Q | None = None
+    for poly, other in ((a, b), (b, a)):
+        for p in poly:
+            for s, e in edges(other):
+                d2 = point_segment_d2(p, s, e)
+                if best is None or d2 < best:
+                    best = d2
+    assert best is not None
+    return best
+
+
+def rect(x: tuple[Q, Q], y: tuple[Q, Q]) -> list[Point]:
+    return [(x[0], y[0]), (x[1], y[0]), (x[1], y[1]), (x[0], y[1])]
+
+
+def outward(lo: Q, hi: Q, grid: int = 10**40) -> tuple[Q, Q]:
+    return Q(math.floor(lo * grid), grid), Q(math.ceil(hi * grid), grid)
+
+
+def main() -> int:
+    mpmath.mp.dps = 60
+    cert = json.loads(CERT.read_text())
+    box = cert["geometry"]["box"]
+    mid = [Q(v) for v in box["midpoint"]]
+    rad = [Q(v) for v in box["inclusion_bounds"]]
+    t = iv.mpf([mpmath.mpf(mid[0].numerator) / mid[0].denominator - mpmath.mpf(rad[0].numerator) / rad[0].denominator,
+                mpmath.mpf(mid[0].numerator) / mid[0].denominator + mpmath.mpf(rad[0].numerator) / rad[0].denominator])
+    b = iv.mpf([mpmath.mpf(mid[1].numerator) / mid[1].denominator - mpmath.mpf(rad[1].numerator) / rad[1].denominator,
+                mpmath.mpf(mid[1].numerator) / mid[1].denominator + mpmath.mpf(rad[1].numerator) / rad[1].denominator])
+    # Widen by one ulp at 60 digits so the rational endpoints are enclosed outward.
+    eps = iv.mpf(["-1e-55", "1e-55"])
+    t, b = t + eps, b + eps
+    side, aux, centres = _layout(t, b, iv.mpf(1) / 2)
+    shift = (iv.mpf(1169) / 250 - side) / 2
+    S = to_interval(side)
+    print(f"S in [{float(S[0]):.15f}, {float(S[1]):.15f}], U = {float(U):.6f}")
+    vx, vy = to_interval(aux["v"][0]), to_interval(aux["v"][1])
+    R, T, s_ = to_interval(aux["R"] + shift), to_interval(aux["T"]), to_interval(aux["s"])
+    Hh = to_interval(aux["H"])
+    print(f"T in [{float(T[0]):.9f},{float(T[1]):.9f}]  T/s <= {float(T[1] / s_[0]):.9f}  2T/3 <= {float(2 * T[1] / 3):.9f}  T/3 <= {float(T[1] / 3):.9f}")
+    reach_hi = T[1] / s_[0]
+    reach_lo = T[0] / s_[1]
+    cent = [(to_interval(x + shift), to_interval(y + shift)) for x, y in centres]
+    cells = load_cells()
+
+    def members(label: int, domain: str) -> list[list[Point]]:
+        (xl, xh), (yl, yh) = cent[label - 1]
+        if domain == "triangle-box":
+            if label == 5:
+                return [rect(outward(xl - a, xh - a), outward(yl, yh)) for a in (Q(0), Q(3, 25))]
+            if label == 11:
+                return [rect(outward(xl - max(vx) * bb, xh - min(vx) * bb), outward(yl - max(vy) * bb, yh - min(vy) * bb)) for bb in (Q(0), Q(3, 40))]
+            if label == 13:
+                out = []
+                for z in (Q(-1, 20), Q(1, 40)):
+                    xs = sorted([xl + vx[0] * z, xl + vx[1] * z, xh + vx[0] * z, xh + vx[1] * z])
+                    ys = sorted([yl + vy[0] * z, yl + vy[1] * z, yh + vy[0] * z, yh + vy[1] * z])
+                    out.append(rect(outward(xs[0], xs[-1]), outward(ys[0], ys[-1])))
+                return out
+            if label == 6:
+                sh = to_interval(shift)
+                return [rect(outward(R[0] - Q(1, 5), R[1]), outward(sh[0] + Q(1, 2), sh[1] + Q(3, 4)))]
+            return [rect(outward(xl, xh), outward(yl, yh))]
+        # h256-derived: lambda_6 in [R - T/s, R], y = 1/2; lambda_13 in [H - T, H].
+        if label == 6:
+            sh = to_interval(shift)
+            return [rect(outward(R[0] - reach_hi, R[1]), outward(sh[0] + Q(1, 2), sh[1] + Q(1, 2)))]
+        if label == 13:
+            out = []
+            for z in ((-2 * T[1] / 3, -2 * T[0] / 3), (T[0] / 3, T[1] / 3)):
+                xs = sorted([xl + vx[i] * z[j] for i in (0, 1) for j in (0, 1)] + [xh + vx[i] * z[j] for i in (0, 1) for j in (0, 1)])
+                ys = sorted([yl + vy[i] * z[j] for i in (0, 1) for j in (0, 1)] + [yh + vy[i] * z[j] for i in (0, 1) for j in (0, 1)])
+                out.append(rect(outward(xs[0], xs[-1]), outward(ys[0], ys[-1])))
+            return out
+        return [rect(outward(xl, xh), outward(yl, yh))]
+
+    overall = True
+    for domain in ("triangle-box", "h256-derived"):
+        print(f"\n=== domain {domain} ===")
+        state = {}
+        unique = True
+        least_in, least_out = None, None
+        for label in range(1, 18):
+            fam = hull([p for m in members(label, domain) for p in m])
+            holders, others = [], []
+            for name, cell in cells:
+                m2 = inside_margin2(cell, fam)
+                if m2 is not None:
+                    holders.append((name, m2))
+                else:
+                    others.append((name, distance2(fam, cell)))
+            nearest = min(others, key=lambda t: t[1]) if others else None
+            line = f"sq {label:2d}: inside {[(n, f'{math.sqrt(float(m)):.6f}') for n, m in holders]}"
+            if nearest:
+                line += f"; nearest other {nearest[0]} at {math.sqrt(float(nearest[1])):.6f}"
+            good = len(holders) == 1 and holders[0][1] >= MARGIN2 and (nearest is None or nearest[1] >= MARGIN2)
+            unique = unique and good
+            if holders:
+                state[label] = holders[0][0]
+                if least_in is None or holders[0][1] < least_in[0]:
+                    least_in = (holders[0][1], label, holders[0][0])
+            if nearest and (least_out is None or nearest[1] < least_out[0]):
+                least_out = (nearest[1], label, nearest[0])
+            print(line + ("" if good else "   <-- NOT UNIQUE/CLEAR"))
+        distinct = len(set(state.values())) == 17 == len(state)
+        print(f"state: {sorted(state.values())}")
+        print(f"17 distinct cells: {distinct}")
+        print(f"least inside margin: {math.sqrt(float(least_in[0])):.6f} (square {least_in[1]}, {least_in[2]})")
+        print(f"least outside distance: {math.sqrt(float(least_out[0])):.6f} (square {least_out[1]}, {least_out[2]})")
+        print(f"unique state over {domain} with margin >= 1e-3: {unique and distinct}")
+        overall = overall and unique and distinct
+    # Containment of the H256 ranges in the declared box.
+    print("\nH256 range containment in the declared box:")
+    print(f"  T/s <= 3/25: {reach_hi <= Q(3, 25)}  T/s <= 1/5 (square 6 box): {reach_hi <= Q(1, 5)}  T <= 3/40: {T[1] <= Q(3, 40)}")
+    print(f"  2T/3 <= 1/20: {2 * T[1] / 3 <= Q(1, 20)}  T/3 <= 1/40: {T[1] / 3 <= Q(1, 40)}")
+    print(f"  square 6 H256 x-range width T/s in [{float(reach_lo):.6f}, {float(reach_hi):.6f}]; declared 0.2")
+    print("ALL FAMILY CHECKS PASS:", overall)
+    return 0 if overall else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

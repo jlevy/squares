@@ -1,0 +1,42 @@
+sites 20860 rules 889 budget 17000448944 A_R068 0.9898207036 A_U 0.9865269461 M/17 1000026408.5
+corner             direct 63045956 claimed 63045956 match True
+edge-near-corner   direct 377790059 claimed 377790059 match True
+edge-middle        direct 630372131 claimed 630372131 match True
+interior-corner    direct 747616217 claimed 747616217 match True
+interior-edge      direct 930431172 claimed 930431172 match True
+centre             direct 920859332 claimed 920859332 match True
+corner at A_R068, x=y=0.50006913 (unit of A_R068): 1000026844  >= Gamma 1000026844? True
+corner at A_R068, x=y=0.50000010 (unit of A_R068): 1000026844  >= Gamma 1000026844? True
+corner at A_R068, x=y=0.50001000 (unit of A_R068): 1000026844  >= Gamma 1000026844? True
+corner at A_R068, x=y=0.50100000 (unit of A_R068): 1000026844  >= Gamma 1000026844? True
+corner diagonal profile at A_U, theta=0 (unit frame x=y):
+  x=y=0.500000: 63045956
+  x=y=0.500010: 63045956
+  x=y=0.500100: 63045956
+  x=y=0.500070: 63045956
+  x=y=0.500500: 68068982
+  x=y=0.501000: 68068982
+  x=y=0.502000: 189448782
+  x=y=0.505000: 1000026844
+  x=y=0.510000: 1000026844
+  x=y=0.520000: 1000026844
+  x=y=0.550000: 1000026844
+  x=y=0.600000: 1000026844
+  x=y=0.700000: 1000026844
+  x=y=0.800000: 1000026844
+  x=y=0.900000: 1032927678
+  x=y=1.000000: 1058943128
+  x=y=1.100000: 1051489010
+  x=y=1.200000: 1476041512
+corner pose: sites captured at A_U 62 at A_R068 355 point weight captured 0 0
+endpoint charges [63045956, 684047743, 684047743, 65557469, 65557469, 651049421, 690631648, 68068982, 996686369, 1048901991, 985009792, 1081750832, 1017510285, 1033687689, 920473948, 1022005856, 719110213] sum 11797143406 <= M? True
+corner cell random sample theta=0.0: min 427658812 at unit (0.50007,0.79252); claimed per-angle minimum in pilot JSON for comparison
+corner cell random sample theta=0.5: min 628914232 at unit (1.16698,0.50436); claimed per-angle minimum in pilot JSON for comparison
+corner cell random sample theta=1.0: min 905283443 at unit (1.16590,0.50919); claimed per-angle minimum in pilot JSON for comparison
+corner cell random sample theta=2.0: min 988406722 at unit (1.18023,0.51863); claimed per-angle minimum in pilot JSON for comparison
+corner cell random sample theta=5.0: min 996031554 at unit (1.12611,0.54292); claimed per-angle minimum in pilot JSON for comparison
+corner cell random sample theta=10.0: min 1000026844 at unit (0.75934,0.75715); claimed per-angle minimum in pilot JSON for comparison
+corner cell random sample theta=26.0: min 1000026844 at unit (0.68052,0.69353); claimed per-angle minimum in pilot JSON for comparison
+corner cell random sample theta=45.0: min 999892567 at unit (1.19319,0.70775); claimed per-angle minimum in pilot JSON for comparison
+seconds 75.6318301209999
+exit 0

@@ -1,0 +1,23 @@
+"""Fixed costs: gzip, sha256, json.loads and Fraction parsing of the two certificates."""
+import gzip, hashlib, json, time, sys
+from fractions import Fraction as Q
+from pathlib import Path
+X = Path("/home/user/squares/packing/campaign/explorations/X048-session-168-pilots/certificates")
+def walk(v, out):
+    if isinstance(v, str):
+        out.append(v)
+    elif isinstance(v, list):
+        for x in v: walk(x, out)
+    elif isinstance(v, dict):
+        for x in v.values(): walk(x, out)
+for name, files in (("W7", sorted(X.joinpath("W7").glob("*.json.gz"))), ("A", sorted(X.joinpath("A").glob("*.json.gz")))):
+    t0 = time.perf_counter(); raws = [gzip.decompress(f.read_bytes()) for f in files]; t1 = time.perf_counter()
+    for r in raws: hashlib.sha256(r).hexdigest()
+    t2 = time.perf_counter(); docs = [json.loads(r) for r in raws]; t3 = time.perf_counter()
+    strings = []
+    for d in docs: walk(d, strings)
+    rationals = [s for s in strings if s and (s[0].isdigit() or s[0] == '-') and all(ch.isdigit() or ch in '-/' for ch in s)]
+    t4 = time.perf_counter()
+    for s in rationals: Q(s)
+    t5 = time.perf_counter()
+    print(f"{name}: files={len(files)} bytes={sum(map(len, raws))/1e6:.1f} MB gunzip={t1-t0:.2f}s sha256={t2-t1:.2f}s json={t3-t2:.2f}s rationals={len(rationals)} Fraction-parse={t5-t4:.2f}s")

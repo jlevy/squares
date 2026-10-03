@@ -1,0 +1,166 @@
+{
+ "status": "PASS_PILOT_MEASURED",
+ "system": "n11",
+ "cap": "capture",
+ "outcome": "measured_after_start",
+ "endpoint_control": {
+  "held": true,
+  "checked_after": 100
+ },
+ "scales_first_round": {
+  "0.01": null,
+  "0.001": null,
+  "0.0003": null,
+  "0.0002": null
+ },
+ "falsifier": {
+  "falsified": false,
+  "longest_fine_and_flat_run": 0,
+  "first_round_rows_under_a_tenth": 0,
+  "first_round_rows_under_a_twentieth": null,
+  "contraction_start": {
+   "round": 1,
+   "max_row_to_extent_before": 0.08100216762624143,
+   "median_row_to_extent_before": 0.08069079413707354,
+   "worst_position_extent": 0.7661224591518506
+  },
+  "g_worst_extent_after_start": [
+   0.879462790944869,
+   0.8144693346031264,
+   0.5939834089952588,
+   0.9155056998121983,
+   0.9636513820742275,
+   0.9981397839309278,
+   0.9990620559062712,
+   0.9998944661667792
+  ],
+  "g_after_start_geometric_mean": 0.8843988920204524
+ },
+ "rounds": [
+  {
+   "round": 0,
+   "worst": "7.854e-01",
+   "position": "7.743e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 9.3
+  },
+  {
+   "round": 1,
+   "worst": "7.854e-01",
+   "position": "7.661e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 1201.6
+  },
+  {
+   "round": 2,
+   "worst": "7.854e-01",
+   "position": "6.738e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 1926.3
+  },
+  {
+   "round": 3,
+   "worst": "7.854e-01",
+   "position": "5.393e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 2258.5
+  },
+  {
+   "round": 4,
+   "worst": "7.854e-01",
+   "position": "2.924e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 2544.2
+  },
+  {
+   "round": 5,
+   "worst": "7.854e-01",
+   "position": "2.878e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 2852.3
+  },
+  {
+   "round": 6,
+   "worst": "7.854e-01",
+   "position": "2.867e-01",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 3162.4
+  },
+  {
+   "round": 7,
+   "worst": "7.658e-01",
+   "position": "2.863e-01",
+   "turn": "7.658e-01",
+   "inside": 0,
+   "seconds": 3459.5
+  },
+  {
+   "round": 8,
+   "worst": "7.658e-01",
+   "position": "2.862e-01",
+   "turn": "7.658e-01",
+   "inside": 0,
+   "seconds": 3771.5
+  },
+  {
+   "round": 9,
+   "worst": "7.331e-01",
+   "position": "2.861e-01",
+   "turn": "7.331e-01",
+   "inside": 0,
+   "seconds": 4084.1
+  }
+ ],
+ "g": {
+  "ratios": {
+   "worst": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9750479516070867,
+    1.0,
+    0.9572337925535274
+   ],
+   "worst_position": [
+    0.98942636447149,
+    0.879462790944869,
+    0.8004716792851131,
+    0.5421371573266383,
+    0.9842327259377578,
+    0.9961018566768411,
+    0.9986647914176545,
+    0.9997295616372104,
+    0.9997930410941125
+   ],
+   "worst_turn": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9750479516070867,
+    1.0,
+    0.9572337925535274
+   ]
+  },
+  "g_tail_geometric_mean": 0.9772702210893883,
+  "worst_final": 0.7330504715297221,
+  "rounds_more_to_scale": {
+   "0.01": 186.78731803757788,
+   "0.001": 286.93418700864754,
+   "0.0003": 339.2988561999948,
+   "0.0002": 356.9338444475948
+  }
+ }
+}

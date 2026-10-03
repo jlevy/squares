@@ -1,0 +1,125 @@
+"""Independent maximisation of the depth-width wall bound G(c, s) over the quarter circle.
+
+G(c, s) = c d + s w - 1 - (c/2)(c + s - 1), c = cos(theta), s = sin(theta), theta in [0, pi/2].
+
+Method A (exact): critical points satisfy dG/dtheta = 0, i.e. s (d - c + 1/2) = 1/2 - c^2 + w c
+after using s^2 = 1 - c^2. Squaring gives a quartic in c with rational coefficients; its real
+roots in [0, 1] are isolated exactly by sympy and refined to width 1e-30, G is bounded over each
+isolating box by monotone interval arithmetic in rationals, and spurious roots (right side
+negative) are flagged. Endpoints theta = 0 and pi/2 give G = d - 1 and w - 1.
+
+Method B (rigorous, independent of A): a theta mesh with mpmath interval cos/sin and the
+Lipschitz bound |G'| <= d + w + 3/2, giving max G <= max_k G(theta_k) + L h / 2.
+
+Neither method uses the tau = tan(theta/2) quartic, Bernstein coefficients or Sturm sequences.
+"""
+
+from __future__ import annotations
+
+import math
+import sys
+from fractions import Fraction as Q
+
+import mpmath
+import sympy as sp
+
+
+def sqrt_lower(value: Q, scale: int = 10**30) -> Q:
+    root = math.isqrt(math.floor(value * scale * scale))
+    while root > 0 and Q(root, scale) ** 2 > value:
+        root -= 1
+    return Q(root, scale)
+
+
+def sqrt_upper(value: Q, scale: int = 10**30) -> Q:
+    root = math.isqrt(math.ceil(value * scale * scale))
+    while Q(root, scale) ** 2 < value:
+        root += 1
+    return Q(root, scale)
+
+
+def g_bounds(d: Q, w: Q, cl: Q, ch: Q) -> tuple[Q, Q]:
+    """Rigorous [lo, hi] of G over c in [cl, ch] subset [0, 1], s = sqrt(1 - c^2) >= 0."""
+    sl = sqrt_lower(max(Q(0), 1 - ch * ch))
+    sh = sqrt_upper(1 - cl * cl)
+    # G = c d + s w - 1 - c^2/2 - c s/2 + c/2; each term monotone in c and s separately.
+    hi = ch * d + sh * w - 1 - cl * cl / 2 - cl * sl / 2 + ch / 2
+    lo = cl * d + sl * w - 1 - ch * ch / 2 - ch * sh / 2 + cl / 2
+    return lo, hi
+
+
+def exact_max(d: Q, w: Q) -> tuple[Q, Q, list[str]]:
+    c = sp.symbols("c", real=True)
+    dd, ww = sp.Rational(d.numerator, d.denominator), sp.Rational(w.numerator, w.denominator)
+    left = (1 - c**2) * (dd - c + sp.Rational(1, 2)) ** 2
+    right = (sp.Rational(1, 2) - c**2 + ww * c) ** 2
+    quartic = sp.Poly(sp.expand(left - right), c)
+    notes: list[str] = []
+    candidates: list[tuple[Q, Q, str]] = [(d - 1, d - 1, "theta=0"), (w - 1, w - 1, "theta=pi/2")]
+    for (lo, hi), _mult in quartic.intervals(eps=sp.Rational(1, 10**30)):
+        lo_q, hi_q = Q(int(lo.p), int(lo.q)), Q(int(hi.p), int(hi.q))
+        if hi_q < 0 or lo_q > 1:
+            continue
+        lo_q, hi_q = max(lo_q, Q(0)), min(hi_q, Q(1))
+        # Genuine critical point iff the unsquared right side 1/2 - c^2 + w c >= 0 (s >= 0).
+        rhs_lo = Q(1, 2) - hi_q * hi_q + w * lo_q
+        rhs_hi = Q(1, 2) - lo_q * lo_q + w * hi_q
+        glo, ghi = g_bounds(d, w, lo_q, hi_q)
+        genuine = "genuine" if rhs_lo > 0 else ("spurious" if rhs_hi < 0 else "undecided")
+        theta = math.degrees(math.acos(float((lo_q + hi_q) / 2)))
+        notes.append(f"  root c in [{float(lo_q):.12f}, {float(hi_q):.12f}] theta={theta:.4f}deg "
+                     f"{genuine}: G in [{float(glo):.12f}, {float(ghi):.12f}]")
+        if genuine != "spurious":
+            candidates.append((glo, ghi, f"c~{float(lo_q):.9f}"))
+    best = max(candidates, key=lambda item: item[1])
+    return best[0], best[1], notes
+
+
+def mesh_max(d: Q, w: Q, points: int = 40_000) -> tuple[float, float]:
+    """Rigorous upper bound on max G by an interval mesh plus the Lipschitz constant."""
+    iv = mpmath.iv
+    mpmath.mp.dps = 30
+    lipschitz = float(d + w) + 1.5
+    half_pi = iv.pi / 2
+    h = half_pi / points
+    best_upper = -10.0
+    best_lower = -10.0
+    df, wf = iv.mpf(str(d.numerator)) / d.denominator, iv.mpf(str(w.numerator)) / w.denominator
+    for k in range(points + 1):
+        theta = h * k
+        c, s = iv.cos(theta), iv.sin(theta)
+        g = c * df + s * wf - 1 - c * (c + s - 1) / 2
+        best_upper = max(best_upper, float(g.b))
+        best_lower = max(best_lower, float(g.a))
+    step = float(h.b)
+    return best_lower, best_upper + lipschitz * step / 2
+
+
+def main() -> int:
+    cases = [
+        ("side S1 (unique design)", Q(93, 100), Q(257, 375)),
+        ("corner (unique design)", Q(79, 100), Q(79, 100)),
+        ("side S0/S2", Q(911, 1000), Q(529, 750)),
+        ("control corner 4/5", Q(4, 5), Q(4, 5)),
+        ("control side 911/1000 x 3/4", Q(911, 1000), Q(3, 4)),
+    ]
+    ok = True
+    for name, d, w in cases:
+        lo, hi, notes = exact_max(d, w)
+        mlo, mhi = mesh_max(d, w)
+        print(f"{name}: d={d} w={w}")
+        print("\n".join(notes))
+        print(f"  method A exact max G in [{float(lo):.12f}, {float(hi):.12f}]")
+        print(f"  method B mesh: max G >= {mlo:.9f}, rigorous upper bound {mhi:.9f}")
+        verdict = "capacity one" if hi < 0 else "NOT proved"
+        print(f"  => max G < 0: {hi < 0} ({verdict}); mesh agrees: {mhi < 0 if hi < 0 else mlo >= 0}")
+        if "control" not in name and not (hi < 0 and mhi < 0):
+            ok = False
+        if "control" in name and not (lo >= 0 and mlo >= 0):
+            ok = False
+    print("ALL DESIGN CELLS PASS, CONTROLS REFUSED:", ok)
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

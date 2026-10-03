@@ -1,0 +1,10 @@
+#!/bin/bash
+# Pilot 2, worker A: n17 box 1/1024 at U' (128 rows), its cap-U control, then 256 rows.
+cd /home/user/squares/packing
+echo "start $(date -u +%H:%M:%S)"
+timeout 10800 uv run --frozen --all-extras --group dev python -m devtools.pilot_n17_capture --bins 32 --max-rounds 300 --box 1/1024 --max-live 128 --max-seconds 10500 --rounds-after-start 8 --save-objects /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/objects-box1024-128 --output /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/box1024-128.json > /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/box1024-128.out 2> /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/box1024-128.log
+echo "box1024-128 exit $? $(date -u +%H:%M:%S)"
+timeout 7500 uv run --frozen --all-extras --group dev python -m devtools.pilot_n17_capture --bins 32 --max-rounds 300 --cap exclusion --box 1/1024 --max-live 128 --max-seconds 7200 --rounds-after-start 8 --output /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/control-U-box1024-128.json > /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/control-U-box1024-128.out 2> /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/control-U-box1024-128.log
+echo "control-U-box1024-128 exit $? $(date -u +%H:%M:%S)"
+timeout 10800 uv run --frozen --all-extras --group dev python -m devtools.pilot_n17_capture --bins 32 --max-rounds 300 --box 1/1024 --max-live 256 --max-seconds 10500 --rounds-after-start 8 --output /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/box1024-256.json > /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/box1024-256.out 2> /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/box1024-256.log
+echo "box1024-256 exit $? $(date -u +%H:%M:%S)"

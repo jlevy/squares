@@ -1,0 +1,67 @@
+{
+ "certified": "stalled",
+ "closure": null,
+ "excluded_orbits": 0,
+ "excluded_states": 0,
+ "pattern": "W7",
+ "producer_outcome": "round_cap",
+ "reason": null,
+ "rounds": [
+  {
+   "live_rows": {
+    "corner-SW": 64,
+    "interior-SW": 64,
+    "interior-W": 64,
+    "side-N0": 64,
+    "side-W0": 64,
+    "side-W1": 64,
+    "side-W2": 64
+   },
+   "owned_hull_vertices": {
+    "corner-SW": 12,
+    "interior-SW": 16,
+    "interior-W": 12,
+    "side-N0": 0,
+    "side-W0": 0,
+    "side-W1": 0,
+    "side-W2": 0
+   },
+   "residual_box_extent": {
+    "corner-SW": [
+     "79/100",
+     "79/100"
+    ],
+    "interior-SW": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-W": [
+     "227/250",
+     "45880738638782757383556773/80608859272064000000000000"
+    ],
+    "side-N0": [
+     "529/750",
+     "911/1000"
+    ],
+    "side-W0": [
+     "911/1000",
+     "529/750"
+    ],
+    "side-W1": [
+     "93/100",
+     "257/375"
+    ],
+    "side-W2": [
+     "911/1000",
+     "529/750"
+    ]
+   },
+   "round": 0,
+   "steps": 7
+  }
+ ],
+ "rows_checked": 448,
+ "status": "PASS_CERTIFIED_STALL",
+ "steps_checked": 7,
+ "wall_seconds": 918.9548248639999
+}

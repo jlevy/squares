@@ -2,8 +2,10 @@
 
 This is a receipt audit, not a standalone proof checker. It trusts the previously
 accepted H255 root certificate and the separately reviewed analytic identities.
-It binds that root to its frozen Git blob and source, checks the complete identity
-manifest, and independently recomputes every recorded strict wall and pair bound.
+It reads that root from its retained path, requires the receipt to name it by the
+revision and path it was accepted at (no byte comparison with a Git blob, OR-16),
+checks the root's metadata against the source, checks the complete identity manifest,
+and independently recomputes every recorded strict wall and pair bound.
 No endpoint-producer or root-checker arithmetic is imported or executed.
 
 The tuple arithmetic and reconstruction retain the independent output review's
@@ -17,7 +19,6 @@ import hashlib
 import itertools
 import json
 import re
-import subprocess
 import time
 from dataclasses import dataclass
 from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal, localcontext
@@ -35,6 +36,9 @@ SOURCE = (
     "packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/"
     "kleddamag-17-squares-certified-bound/upper-packing-certificate.json"
 )
+# A real boundary (OR-16): SOURCE is Kleddamag's downloaded certified-bound release, and
+# this is the digest its review pinned, so a retained copy that is not upstream's bytes
+# is refused. It is not a check of a file this repository wrote.
 SOURCE_SHA = "24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7"
 LABELS = [1, 5, 2, 6, 3, 7, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 MAX_BYTES = 10 * 1024 * 1024
@@ -518,12 +522,9 @@ def audit(run: Path, repo: Path = REPO) -> dict[str, Any]:
     root_raw = read_bytes(repo / ROOT_RUN / "certificate.json")
     root = decode(root_raw)
     receipt = decode(read_bytes(repo / ROOT_RUN / "checker.json"))
-    frozen = subprocess.run(
-        ["git", "show", ROOT_REF], cwd=repo, check=True, capture_output=True, timeout=10
-    ).stdout
     require(
-        root_raw == frozen and document["root_certificate_git_ref"] == ROOT_REF,
-        "root differs from frozen Git blob",
+        document["root_certificate_git_ref"] == ROOT_REF,
+        "receipt names another root certificate",
     )
     require(
         document["schema"] == "n17-endpoint-feasibility/v1"
@@ -610,7 +611,6 @@ def main() -> int:
         TypeError,
         IndexError,
         RecursionError,
-        subprocess.SubprocessError,
     ) as error:
         print(json.dumps({"audit_passed": False, "error": str(error)}))
         return 1

@@ -1,0 +1,28 @@
+control: unmutated objects
+  PASS (closure None )
+m_collision_tight                refused: region escapes universal collision set   [step 0 row 0 partner 6 vertex 0: pushed 1e-7 past its tightest collision facet (slack was 5.04e-05), still inside the domain] 0.2s
+m_collision_outward              refused: collision region escapes query domain   [step 0 row 0: collision region vertex pushed outward by 0.1% of its centroid offset] 0.2s
+m_collision_far                  refused: nonconvex region   [step 0 row 0: collision region vertex moved by -0.05 in x] 0.1s
+m_partner_domain_shrunk          refused: partner cover domain differs   [step 0 partner 10: cover domain lost a vertex] 0.1s
+m_partner_domain_grown           refused: partner cover domain differs   [step 0 partner 10: cover domain grew by a vertex] 0.1s
+m_partner_stale                  refused: partner cover row differs from the accepted row   [step 13 partner 0: cover replaced by its step-1 cover (stale)] 7.0s
+m_partner_row_dropped            refused: partner cover domain differs   [step 0 partner 10: a live row declared empty] 0.1s
+m_partner_core_big               refused: core vertex fails complete-angle strict containment   [step 0 partner 10: core scaled by 1.02] 0.1s
+m_partner_core_big_small         refused: core vertex fails complete-angle strict containment   [step 0 partner 10: core scaled by 1 + 1e-6] 0.1s
+m_own_core_big                   refused: core vertex fails complete-angle strict containment   [step 0 row 0: own core scaled by 1.02] 0.1s
+m_residual_dropped               refused: row uncovered at exact x=194238440883066905352593/156287873079833945702400   [step 0 row 0: one residual polygon dropped (domain uncovered)] 0.2s
+m_residual_shrunk                refused: row uncovered at exact x=1/2   [step 0 row 0: residual polygon shrunk by 0.1%] 0.2s
+m_residual_shrunk_fix_planes     refused: row uncovered at exact x=1/2   [step 0 row 0: residual shrunk by 0.1% with planes recomputed (only coverage should fail)] 0.1s
+m_kernel_point_out               refused: promoted point lacks full-row ownership proof   [step 5: kernel point pushed 1e-7 past its tightest plane, compression rebuilt (only the plane check should fail)] 2.1s
+m_compression_outside            refused: compressed point is not a proved convex combination   [step 0: a retained hull vertex moved by one grid unit (witness no longer matches)] 0.2s
+m_compression_extra              refused: compressed point is not a proved convex combination   [step 0: an extra retained point one grid unit outside, with a copied witness] 0.2s
+m_false_closure                  refused: declared closure differs from the derived one   [declared closure at step 13 although rows are live] 7.1s
+m_false_hull_closure             refused: declared closure differs from the derived one   [declared owned_hulls_intersect at step 13] 6.5s
+m_prior_hull_grown               refused: step previous accepted state   [step 0: prior owned hull of 0 grew by a point] 0.1s
+m_region_outside_domain          refused: nonconvex region   [step 0 row 0: collision region vertex at the origin (outside the domain)] 0.1s
+m_collision_partner_self         refused: collision partner not admitted   [step 0 row 0: collision region names the owner itself] 0.2s
+m_collision_partner_unadmitted   refused: collision partner not admitted   [step 0 row 0: the named partner's cover removed] 0.1s
+m_interval_gap                   refused: refinement angular cover incomplete   [step 0: last row removed (angle partition incomplete)] 0.1s
+m_empty_cover                    refused: partner cover domain differs   [step 0 partner 10: every cover row declared empty] 0.1s
+m_seed_group_point_unowned       error IncompleteError: ownership depth ceiling: interval=(0,1/1048576), nodes=21   [seed: point (1, 1) added to corner-SW's group (not owned)]
+m_seed_row_domain                refused: seed legal domain differs   [seed: corner-SW row 0 outer domain lost a vertex]

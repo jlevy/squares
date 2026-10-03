@@ -1,0 +1,15 @@
+W7 indices [0, 5, 6, 10, 14, 16, 18]
+distinct D4 images of W7: 8
+   ['corner-SW', 'side-N0', 'side-W0', 'side-W1', 'side-W2', 'interior-SW', 'interior-W']
+   ['corner-NW', 'side-S0', 'side-W0', 'side-W1', 'side-W2', 'interior-NW', 'interior-W']
+   ['corner-SW', 'side-S0', 'side-E0', 'side-S1', 'side-S2', 'interior-SW', 'interior-S']
+   ['corner-NW', 'side-N0', 'side-N1', 'side-N2', 'side-E2', 'interior-NW', 'interior-N']
+   ['corner-SE', 'side-S0', 'side-W0', 'side-S1', 'side-S2', 'interior-S', 'interior-SE']
+   ['corner-SE', 'side-E0', 'side-E1', 'side-N2', 'side-E2', 'interior-E', 'interior-SE']
+   ['corner-NE', 'side-N0', 'side-N1', 'side-N2', 'side-W2', 'interior-N', 'interior-NE']
+   ['corner-NE', 'side-E0', 'side-E1', 'side-S2', 'side-E2', 'interior-E', 'interior-NE']
+states total 346104 expected 346104
+excluded states 133152
+inclusion-exclusion excluded states 133152
+excluded orbits 16701
+all orbits 43593

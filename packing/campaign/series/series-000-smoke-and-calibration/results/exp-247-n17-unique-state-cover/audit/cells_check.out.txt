@@ -1,0 +1,29 @@
+24 cells
+wall length 262/125 = 2.096000; outer side widths 529/750 = 0.705333
+corner-SW    corner   convex=True in_box=True diam^2=6241/5000 (1.117229) touches=['W', 'S'] (depth,width)=(Fraction(79, 100), Fraction(79, 100)) rectangle=True
+corner-SE    corner   convex=True in_box=True diam^2=6241/5000 (1.117229) touches=['E', 'S'] (depth,width)=(Fraction(79, 100), Fraction(79, 100)) rectangle=True
+corner-NW    corner   convex=True in_box=True diam^2=6241/5000 (1.117229) touches=['W', 'N'] (depth,width)=(Fraction(79, 100), Fraction(79, 100)) rectangle=True
+corner-NE    corner   convex=True in_box=True diam^2=6241/5000 (1.117229) touches=['E', 'N'] (depth,width)=(Fraction(79, 100), Fraction(79, 100)) rectangle=True
+side-S0      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['S'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+side-N0      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['N'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+side-W0      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['W'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+side-E0      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['E'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+side-S1      side     convex=True in_box=True diam^2=3002809/2250000 (1.155241) touches=['S'] (depth,width)=(Fraction(93, 100), Fraction(257, 375)) rectangle=True
+side-N1      side     convex=True in_box=True diam^2=3002809/2250000 (1.155241) touches=['N'] (depth,width)=(Fraction(93, 100), Fraction(257, 375)) rectangle=True
+side-W1      side     convex=True in_box=True diam^2=3002809/2250000 (1.155241) touches=['W'] (depth,width)=(Fraction(93, 100), Fraction(257, 375)) rectangle=True
+side-E1      side     convex=True in_box=True diam^2=3002809/2250000 (1.155241) touches=['E'] (depth,width)=(Fraction(93, 100), Fraction(257, 375)) rectangle=True
+side-S2      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['S'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+side-N2      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['N'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+side-W2      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['W'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+side-E2      side     convex=True in_box=True diam^2=2389349/1800000 (1.152135) touches=['E'] (depth,width)=(Fraction(911, 1000), Fraction(529, 750)) rectangle=True
+interior-SW  interior convex=True in_box=True diam^2=2502024804841/3369608000000 (0.861700) diameter<1: True
+interior-NW  interior convex=True in_box=True diam^2=2502024804841/3369608000000 (0.861700) diameter<1: True
+interior-W   interior convex=True in_box=True diam^2=29377/31250 (0.969569) diameter<1: True
+interior-S   interior convex=True in_box=True diam^2=29377/31250 (0.969569) diameter<1: True
+interior-N   interior convex=True in_box=True diam^2=29377/31250 (0.969569) diameter<1: True
+interior-E   interior convex=True in_box=True diam^2=29377/31250 (0.969569) diameter<1: True
+interior-SE  interior convex=True in_box=True diam^2=2502024804841/3369608000000 (0.861700) diameter<1: True
+interior-NE  interior convex=True in_box=True diam^2=2502024804841/3369608000000 (0.861700) diameter<1: True
+side-S1 x-range [Fraction(2993, 1500), Fraction(4021, 1500)] top y=143/100; interior-S points on that line [(Fraction(999, 500), Fraction(143, 100)), (Fraction(1339, 500), Fraction(143, 100))]
+  tab x minus S1 corner x: left 1/375 right 1/375
+ALL CELL CHECKS PASS: True

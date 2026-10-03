@@ -1,0 +1,52 @@
+{
+ "schema": "n17-certificate-verification/v1",
+ "verifier": "branch-and-bound",
+ "verifier_sha256": "4a93c74c4616cb81a87b5276f2f43d88a06fcae991c1d2732ad1152332710155",
+ "directory": "packing/campaign/explorations/X048-session-168-pilots/certificates/A",
+ "cells_source": {
+  "kind": "cover",
+  "design": "ring-3-voronoi-8-tabbed-unique"
+ },
+ "mode": "full",
+ "sample": null,
+ "certificate": {
+  "manifest_sha256": "340492bddf2674b70e4403e15c13793c224a5dfa4d428a5e1834da546ee6a9dc",
+  "chunks": 84
+ },
+ "pattern": [
+  "interior-SW",
+  "interior-NW",
+  "interior-W",
+  "interior-S",
+  "interior-N",
+  "interior-SE"
+ ],
+ "nodes": 41598,
+ "closed_leaves": 21215,
+ "reasons": {
+  "disc": 10032,
+  "lp": 4504,
+  "pair": 6679
+ },
+ "max_depth": 31,
+ "checked_nodes": 41598,
+ "node_failures": 0,
+ "counts": {
+  "angle_split_ok": 17349,
+  "bound_ok": 639609,
+  "closed_disc_ok": 10032,
+  "closed_lp_ok": 4504,
+  "closed_pair_ok": 6679,
+  "cut_ok": 1652060,
+  "header": 1,
+  "open_ok": 20383,
+  "pair_split_ok": 3034,
+  "trig_bad": 0,
+  "trig_checked": 378,
+  "vacuous_cut": 6
+ },
+ "status": "PASS",
+ "failures": [],
+ "failure_count": 0,
+ "seconds": 1549.843
+}

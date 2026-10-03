@@ -1,0 +1,222 @@
+[
+ {
+  "lane_f": [
+   0,
+   1,
+   4,
+   8,
+   12
+  ],
+  "cells": [
+   "corner-SW",
+   "corner-SE",
+   "side-S0",
+   "side-S1",
+   "side-S2"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 3,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   0,
+   16,
+   18,
+   20,
+   21
+  ],
+  "cells": [
+   "corner-SW",
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-N"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 3,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   4,
+   6,
+   16,
+   17,
+   20
+  ],
+  "cells": [
+   "side-S0",
+   "side-W0",
+   "interior-SW",
+   "interior-W",
+   "interior-S"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 1,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   4,
+   16,
+   17,
+   20,
+   21
+  ],
+  "cells": [
+   "side-S0",
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-S"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 1,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   4,
+   16,
+   17,
+   20,
+   22
+  ],
+  "cells": [
+   "side-S0",
+   "interior-SW",
+   "interior-W",
+   "interior-S",
+   "interior-SE"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 1,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   4,
+   16,
+   18,
+   20,
+   21
+  ],
+  "cells": [
+   "side-S0",
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-N"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 3,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   4,
+   17,
+   19,
+   20,
+   22
+  ],
+  "cells": [
+   "side-S0",
+   "interior-SW",
+   "interior-S",
+   "interior-E",
+   "interior-SE"
+  ],
+  "feasible": true,
+  "violation": 7.100258159198347e-10,
+  "attempts": 2,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   8,
+   16,
+   17,
+   20,
+   21
+  ],
+  "cells": [
+   "side-S1",
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-S"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 1,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   16,
+   17,
+   18,
+   20,
+   21
+  ],
+  "cells": [
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-S",
+   "interior-N"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 3,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   16,
+   17,
+   18,
+   20,
+   22
+  ],
+  "cells": [
+   "interior-SW",
+   "interior-W",
+   "interior-S",
+   "interior-N",
+   "interior-SE"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 2,
+  "found_by": "random"
+ },
+ {
+  "lane_f": [
+   16,
+   17,
+   20,
+   21,
+   22
+  ],
+  "cells": [
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-S",
+   "interior-SE"
+  ],
+  "feasible": true,
+  "violation": 0.0,
+  "attempts": 1,
+  "found_by": "random"
+ }
+]

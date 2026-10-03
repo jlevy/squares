@@ -1,0 +1,40 @@
+{"mutation": "(unmutated)", "verdict": "ACCEPTED", "message": "{\"collision_facet_checks\": 84300, \"collision_regions\": 257, \"cover_checks\": 112, \"partner_rows\": 672, \"rows_full\": 112, \"seed_points\": 4, \"seed_rows\": 56, \"step", "seconds": 2.1}
+{"mutation": "region-vertex-pushed-2^-40", "expected": "escapes the collision set", "verdict": "REFUSED", "message": "step 13 row 7 partner 10: region escapes the collision set", "seconds": 2.5}
+{"mutation": "region-vertex-pushed-2^-80", "expected": "escapes the collision set", "verdict": "REFUSED", "message": "step 13 row 7 partner 10: region escapes the collision set", "seconds": 3.0}
+{"mutation": "region-vertex-pushed-later-row-only-2^-40", "expected": "escapes the collision set", "verdict": "REFUSED", "message": "step 13 row 7 partner 10: region escapes the collision set", "seconds": 2.2}
+{"mutation": "region-outside-required-domain", "expected": "escapes the required domain", "verdict": "REFUSED", "message": "step 13 row 7: collision region escapes the required domain", "seconds": 2.2}
+{"mutation": "region-names-owner", "expected": "collision partner", "verdict": "REFUSED", "message": "step 13 row 7: collision partner 18", "seconds": 2.9}
+{"mutation": "region-names-unadmitted-partner", "expected": "collision partner", "verdict": "REFUSED", "message": "step 13 row 1: collision partner 10", "seconds": 2.8}
+{"mutation": "cover-domain-shrunk", "expected": "domain", "verdict": "REFUSED", "message": "step 13 partner 0 row 0 domain", "seconds": 1.9}
+{"mutation": "cover-domain-grown", "expected": "domain", "verdict": "REFUSED", "message": "step 13 partner 0 row 0 domain", "seconds": 2.1}
+{"mutation": "cover-live-row-declared-empty", "expected": "domain", "verdict": "REFUSED", "message": "step 13 partner 0 row 0 domain", "seconds": 1.6}
+{"mutation": "cover-all-rows-declared-empty", "expected": "domain", "verdict": "REFUSED", "message": "step 13 partner 0 row 0 domain", "seconds": 1.5}
+{"mutation": "cover-core-scaled-1.02", "expected": "core not strict", "verdict": "REFUSED", "message": "step 13 partner 0 core not strict", "seconds": 2.2}
+{"mutation": "cover-core-scaled-1+2^-20", "expected": "core not strict", "verdict": "REFUSED", "message": "step 13 partner 0 core not strict", "seconds": 2.1}
+{"mutation": "cover-memo-same-domain-wider-core", "expected": "core not strict", "verdict": "REFUSED", "message": "step 1 partner 10 core not strict", "seconds": 0.2}
+{"mutation": "cover-memo-same-core-grown-domain", "expected": "domain", "verdict": "REFUSED", "message": "step 1 partner 10 row 0 domain", "seconds": 0.2}
+{"mutation": "cover-stale-after-partner-stepped", "expected": "partner", "verdict": "REFUSED", "message": "step 4: partner 10 reference", "seconds": 1.0}
+{"mutation": "cover-stale-relabelled-after-partner-stepped", "expected": "domain", "verdict": "REFUSED", "message": "step 4 partner 10 row 0 domain", "seconds": 1.1}
+{"mutation": "residual-dropped-planes-recomputed", "expected": "NOT covered", "verdict": "REFUSED", "message": "step 13 row 7: required domain NOT covered (uncovered at x=292/129)", "seconds": 3.2}
+{"mutation": "residual-dropped-planes-kept", "expected": "common-core planes", "verdict": "REFUSED", "message": "step 13 row 7: common-core planes", "seconds": 2.8}
+{"mutation": "residual-shrunk-1-2^-40", "expected": "NOT covered", "verdict": "REFUSED", "message": "step 13 row 7: required domain NOT covered (uncovered at x=21362941/9438352)", "seconds": 1.8}
+{"mutation": "residual-shrunk-1-2^-70", "expected": "NOT covered", "verdict": "REFUSED", "message": "step 13 row 7: required domain NOT covered (uncovered at x=107355294864/47430597781)", "seconds": 2.1}
+{"mutation": "residual-corner-cut-2^-40", "expected": "NOT covered", "verdict": "REFUSED", "message": "step 13 row 7: required domain NOT covered (uncovered at x=19795329/8745766)", "seconds": 3.4}
+{"mutation": "residual-vertical-edge-moved-2^-50", "expected": "NOT covered", "verdict": "REFUSED", "message": "step 13 row 7: required domain NOT covered (uncovered at x=143/100)", "seconds": 2.6}
+{"mutation": "collision-region-shrunk-1-2^-40", "expected": "NOT covered", "verdict": "REFUSED", "message": "step 13 row 7: required domain NOT covered (uncovered at x=14175698329/9913073639)", "seconds": 1.6}
+{"mutation": "hidden-lens-2^-40", "expected": "NOT covered", "verdict": "REFUSED", "message": "step 13 row 7: required domain NOT covered (uncovered at x=253059607/146052101)", "seconds": 1.9}
+{"mutation": "hidden-lens-0-control", "expected": "", "verdict": "REFUSED", "message": "final residual 18", "seconds": 1.8}
+{"mutation": "kernel-point-pushed-2^-40", "expected": "kernel point fails a plane", "verdict": "REFUSED", "message": "step 5: kernel point fails a plane", "seconds": 0.6}
+{"mutation": "retained-vertex-moved-one-grid-unit", "expected": "witness point", "verdict": "REFUSED", "message": "step 0: witness point", "seconds": 0.2}
+{"mutation": "retained-extra-point-copied-witness", "expected": "witness point", "verdict": "REFUSED", "message": "step 0: witness point", "seconds": 0.2}
+{"mutation": "prior-hull-grown", "expected": "prior hull", "verdict": "REFUSED", "message": "step 0: prior hull 0", "seconds": 0.1}
+{"mutation": "row-missing", "expected": "", "verdict": "REFUSED", "message": "final rows 18", "seconds": 1.5}
+{"mutation": "false-closure", "expected": "no closure derived", "verdict": "REFUSED", "message": "no closure derived", "seconds": 1.9}
+{"mutation": "seed-row-vertex-dropped", "expected": "seed row", "verdict": "REFUSED", "message": "seed row 0/0 domain", "seconds": 0.1}
+{"mutation": "seed-unowned-point", "expected": "not owned", "verdict": "REFUSED", "message": "seed point (Fraction(2, 1), Fraction(2, 1)) of 0 not owned", "seconds": 0.1}
+{"mutation": "owner-core-scaled-1+2^-20", "expected": "core not strict", "verdict": "REFUSED", "message": "step 13 row 7: core not strict", "seconds": 1.4}
+{"mutations": 34, "accepted_unsound": []}
+
+real	1m12.192s
+user	0m49.504s
+sys	0m0.278s

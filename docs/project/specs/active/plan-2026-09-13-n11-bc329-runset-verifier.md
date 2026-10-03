@@ -209,7 +209,7 @@ parse to equal JSON objects.
 
 ```json
 {
-  "schema": "fixed-core-calibration-source-closure-check/v1",
+  "schema": "fixed-core-calibration-source-closure-check/v2",
   "status": "accepted",
   "execution_revision": "<40 lowercase hex>",
   "candidate_tree": "<40 lowercase hex>",
@@ -219,7 +219,8 @@ parse to equal JSON objects.
       "git_blob": "<40 lowercase hex>",
       "sha256": "<64 lowercase hex>"
     }
-  ]
+  ],
+  "drift": ["<repository-relative path>"]
 }
 ```
 
@@ -272,14 +273,15 @@ commit. The later check uses the actual commit OID as `TREE_OID`.
    objects at `EXECUTION_REV`, including the fixture and three runtime declarations, and
    require exact path-set equality.
    After all intended evidence files are staged, pass the tree OID from `git write-tree`
-   as `TREE_OID`; reconstruct that tree’s closure and compare the full path set, file
-   modes, and blob OIDs to the receipts and execution tree.
-   Check working source files against the same Git blobs so an unstaged source edit
-   cannot slip into a later stage.
-   Refuse any source-path addition, removal, type change, or byte change.
-   Re-run against the actual evidence commit OID after committing; only that check can
-   name the committed tree.
-   This is R4.
+   as `TREE_OID`; reconstruct that tree’s closure and report every path whose mode or
+   blob differs from the execution tree, or that only one of the two closures holds, as
+   `drift`. Re-run against the actual evidence commit OID after committing; only that
+   check can name the committed tree.
+   This is R4. Amended 2026-10-03 on the owner’s direction
+   ([development.md](../../../../development.md#hashes-and-repository-owned-artifacts)):
+   the run set is a fact about `EXECUTION_REV`, so a later code, fixture, runtime
+   declaration or lockfile change is reported, never refused, and never a reason to run
+   the profiles again. The working-tree comparison is dropped with it.
 
 The new module checks evidence plumbing.
 It does not turn a zero reader exit into acceptance without parsing the proof, does not
@@ -304,7 +306,8 @@ Exercise one accepted three-run join and archive, then mutate one boundary at a 
   summary; and a changed top-level coordinator record;
 - R4: changed nested helper, package initializer, fixture, runtime declaration, or
   lockfile blob; source deletion; and a newly added local module that enters the import
-  closure at the candidate tree.
+  closure at the candidate tree, each accepted and named in `drift`; and a manifest row
+  that does not describe `EXECUTION_REV`, refused.
 
 Run those tests and the normal edit/push/fast validation tiers specified in
 `development.md`. The run sheet should invoke these reviewed subcommands and retain

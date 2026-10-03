@@ -1,0 +1,69 @@
+S* = 4.675530093605, sigma = 2.350e-04, container [0.000235, 4.675765]
+square 5 nominal x: 4.175765046802275  square 6 family box x: 3.064525000033301 3.1757650468022756
+square 13 nominal: (2.3107177374349464, 1.4086824990628644, 0.6947275928182309)
+
+== a_max with square 6 in side-S2 (family poses, no perturbation) ==
+  z=-0.04900  a_max~-1.00000  witness6=None
+  z=-0.04413  a_max~-1.00000  witness6=None
+  z=-0.03925  a_max~-1.00000  witness6=None
+  z=-0.03438  a_max~0.00510  witness6=(3.1706666666666563, 0.51, 0.0, 1)
+  z=-0.02951  a_max~0.01510  witness6=(3.1606666666666565, 0.51, 0.0, 1)
+  z=-0.02463  a_max~0.01510  witness6=(3.1606666666666565, 0.51, 0.0, 1)
+  z=-0.01976  a_max~0.02510  witness6=(3.1506666666666567, 0.51, 0.0, 1)
+  z=-0.01489  a_max~0.03510  witness6=(3.140666666666657, 0.51, 0.0, 1)
+  z=-0.01001  a_max~0.04510  witness6=(3.130666666666657, 0.51, 0.0, 1)
+  z=-0.00514  a_max~0.04510  witness6=(3.130666666666657, 0.51, 0.0, 1)
+  z=-0.00027  a_max~0.05510  witness6=(3.1206666666666574, 0.51, 0.0, 1)
+  z=+0.00461  a_max~0.06510  witness6=(3.1106666666666576, 0.51, 0.0, 1)
+  z=+0.00948  a_max~0.07510  witness6=(3.100666666666658, 0.51, 0.0, 1)
+  z=+0.01435  a_max~0.07510  witness6=(3.100666666666658, 0.51, 0.0, 1)
+  z=+0.01923  a_max~0.08510  witness6=(3.090666666666658, 0.51, 0.0, 1)
+  z=+0.02410  a_max~0.09510  witness6=(3.0806666666666582, 0.51, 0.0, 1)
+coarse best a = 0.09510 at z = +0.02410; 145.7s
+refined a_max ~ 0.11010 at z = +0.02410, square 6 at (3.065666666666653, 0.501, 0.0, 1)
+  certified a <= 23/200 = 0.115; first threshold 21/100; B_W face 1/4
+
+== z_min with square 6 in side-S2 ==
+  a=0.0000  z_min~-0.03671  witness6=(3.1706666666666563, 0.51, 0.0, 1)
+  a=0.0105  z_min~-0.03031  witness6=(3.1606666666666565, 0.51, 0.0, 1)
+  a=0.0209  z_min~-0.02391  witness6=(3.1506666666666567, 0.51, 0.0, 1)
+  a=0.0314  z_min~-0.01750  witness6=(3.140666666666657, 0.51, 0.0, 1)
+  a=0.0418  z_min~-0.01110  witness6=(3.130666666666657, 0.51, 0.0, 1)
+  a=0.0523  z_min~-0.00470  witness6=(3.1206666666666574, 0.51, 0.0, 1)
+  a=0.0627  z_min~+9.00000  witness6=None
+  a=0.0732  z_min~+9.00000  witness6=None
+  a=0.0836  z_min~+9.00000  witness6=None
+  a=0.0941  z_min~+9.00000  witness6=None
+  a=0.1045  z_min~+9.00000  witness6=None
+  a=0.1150  z_min~+9.00000  witness6=None
+refined z_min ~ -0.04682 at a = 0.0000, square 6 at (3.175666666666649, 0.501, 0.0, 1)
+  certified z >= -49/1000 = -0.049; first threshold -1/20; B_W face -1/8
+
+== square 6 anywhere in the container, a in (0.115, 1.25], z = 0 (H-261 question) ==
+  a=0.120: no pose on the grid
+  a=0.150: no pose on the grid
+  a=0.200: no pose on the grid
+  a=0.300: no pose on the grid
+  a=0.500: no pose on the grid
+  a=0.700: no pose on the grid
+  a=0.900: no pose on the grid
+  a=0.950: no pose on the grid
+  a=1.000: no pose on the grid
+  a=1.020: no pose on the grid
+  a=1.050: no pose on the grid
+  a=1.070: no pose on the grid
+  a=1.080: no pose on the grid
+  a=1.100: no pose on the grid
+  a=1.200: no pose on the grid
+  a=1.250: no pose on the grid
+
+== square 6 anywhere, a = 0, z deep negative (13 retreats along -v) ==
+  z=-0.060: no pose on the grid
+  z=-0.100: no pose on the grid
+  z=-0.200: no pose on the grid
+  z=-0.400: no pose on the grid
+  z=-0.600: no pose on the grid
+  z=-0.800: no pose on the grid
+  z=-0.900: no pose on the grid
+  z=-0.950: no pose on the grid
+total 2062.2s

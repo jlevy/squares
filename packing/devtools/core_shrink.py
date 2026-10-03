@@ -69,11 +69,11 @@ def inspect_witness(source: bytes, receipt: dict[str, object]) -> dict[str, obje
     """Recompute a retained witness and find its first mass-recovering event.
 
     This proves an upper bound from one placement, not the global minimum. The
-    source digest and the complete recomputed event spectrum must agree with the
-    receipt before its obstruction is used to bound any unmeasured core side.
+    complete recomputed event spectrum must agree with the receipt before its
+    obstruction is used to bound any unmeasured core side. That replay is the check
+    on the source: its bytes are not compared with the receipt's `source_sha256`,
+    which stays a record of what the run read (OR-16).
     """
-    if hashlib.sha256(source).hexdigest() != receipt["source_sha256"]:
-        raise ValueError("the witness receipt names different source bytes")
     certificate, _ = load_frozen_bytes(source)
     raw_center = receipt["witness_center_uv"]
     if not isinstance(raw_center, list):

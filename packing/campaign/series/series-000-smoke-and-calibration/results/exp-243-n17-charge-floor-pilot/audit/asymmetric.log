@@ -1,0 +1,13 @@
+states 61563363 build s 24.855945143999634
+endpoint state among cut survivors: True
+hull: endpoint orbit size 4; candidate states with endpoint class counts 47520; states inside conv(orbit) 4
+symmetric pilot-best direction: states 276044 orbits 34690
+iter 2: orbits 24653 states 195595
+iter 4: orbits 3614 states 28229
+iter 13: orbits 1639 states 12581
+iter 15: orbits 631 states 4605
+iter 19: orbits 476 states 3407
+iter 20: orbits 20 states 91
+iter 23: orbits 10 states 45
+iter 28: orbits 6 states 28
+iterations 33 best asymmetric orbits 6

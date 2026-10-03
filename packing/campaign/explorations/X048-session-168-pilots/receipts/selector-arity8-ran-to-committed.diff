@@ -1,0 +1,30 @@
+--- select_n17_sub_patterns.py as imported by the arity-8 run (d33762ab)
++++ select_n17_sub_patterns.py as committed (f17a1dbb)
+@@ -123,6 +123,9 @@
+ INTERACTION = math.sqrt(2.0) + 1e-9
+ ENDPOINT_POSE_TOLERANCE = 1e-12
+ TIGHT_HALF_SIDE = 1e-3
++# The bytes this process imported. A receipt written later must not name the file on disk
++# then, which may have been edited while a long run was searching.
++MODULE_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+ CORNER_X = np.array([-0.5, 0.5, 0.5, -0.5])
+ CORNER_Y = np.array([-0.5, -0.5, 0.5, 0.5])
+ 
+@@ -1335,7 +1338,7 @@
+         "flagged": swept["flagged"],
+         "survivors_by_arity": by_arity,
+         "certification_priority": priority,
+-        "module_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
++        "module_sha256": MODULE_SHA256,
+     }
+     if restrict_from is not None:
+         receipt["parameters"]["restrict_to_survivors_from"] = restrict_from
+@@ -1378,7 +1381,7 @@
+         "levels": count_classes(
+             geometry, max_arity=arguments.max_arity, flagged=flagged, window=arguments.window
+         ),
+-        "module_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
++        "module_sha256": MODULE_SHA256,
+         "seconds": round(time.perf_counter() - clock, 3),
+     }
+     text = json.dumps(record, indent=1, sort_keys=True)

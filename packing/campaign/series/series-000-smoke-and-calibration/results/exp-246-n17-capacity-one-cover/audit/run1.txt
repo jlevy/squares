@@ -1,0 +1,56 @@
+w_side = 0.7053333333333334  = 529/750? 0.00e+00
+
+== one-wall max G ==
+  side 0.911 x 529/750         d=0.911000 w=0.705333  max G = -0.0035253 at theta=0.787443 (45.117 deg)
+  corner as one-wall           d=0.780000 w=0.780000  max G = -0.0253242 at theta=1.008199 (57.766 deg)
+  H259 cell                    d=0.735200 w=0.735200  max G = -0.0869956 at theta=1.025138 (58.736 deg)
+  a=3/4                        d=0.750000 w=0.750000  max G = -0.0666495 at theta=1.019346 (58.404 deg)
+  F-review (0.735,0.835)       d=0.735000 w=0.835000  max G = -0.0003936 at theta=1.077965 (61.763 deg)
+  F-review (0.911,0.705)       d=0.911000 w=0.705000  max G = -0.0037614 at theta=0.786971 (45.090 deg)
+  F-review corner 0.798        d=0.798000 w=0.798000  max G = -0.0004799 at theta=1.001876 (57.403 deg)
+
+== admissible width w_max(d) (one-wall, tight) vs sqrt(1-d^2) ==
+  d=0.5000  w_max=0.930805  (theta*=73.39 deg)  sqrt(1-d^2)=0.866025
+  d=0.5500  w_max=0.914894  (theta*=71.29 deg)  sqrt(1-d^2)=0.835165
+  d=0.6000  w_max=0.896861  (theta*=69.03 deg)  sqrt(1-d^2)=0.800000
+  d=0.6500  w_max=0.876471  (theta*=66.57 deg)  sqrt(1-d^2)=0.759934
+  d=0.7000  w_max=0.853409  (theta*=63.87 deg)  sqrt(1-d^2)=0.714143
+  d=0.7350  w_max=0.835447  (theta*=61.77 deg)  sqrt(1-d^2)=0.678067
+  d=0.7352  w_max=0.835339  (theta*=61.76 deg)  sqrt(1-d^2)=0.677850
+  d=0.7500  w_max=0.827234  (theta*=60.82 deg)  sqrt(1-d^2)=0.661438
+  d=0.7800  w_max=0.809774  (theta*=58.76 deg)  sqrt(1-d^2)=0.625780
+  d=0.8000  w_max=0.797288  (theta*=57.27 deg)  sqrt(1-d^2)=0.600000
+  d=0.8500  w_max=0.762495  (theta*=52.94 deg)  sqrt(1-d^2)=0.526783
+  d=0.9000  w_max=0.720790  (theta*=47.14 deg)  sqrt(1-d^2)=0.435890
+  d=0.9110  w_max=0.710292  (theta*=45.51 deg)  sqrt(1-d^2)=0.412406
+  d=0.9500  w_max=0.666638  (theta*=37.45 deg)  sqrt(1-d^2)=0.312250
+  d=0.9700  w_max=0.636897  (theta*=29.89 deg)  sqrt(1-d^2)=0.243105
+  d=0.9900  w_max=0.588352  (theta*=14.91 deg)  sqrt(1-d^2)=0.141067
+  square one-wall threshold a* = 0.798347413
+
+== corner cell (two walls) ==
+  d=0.7800 w=0.7800  max G2=-0.104020 (th=45.00)  max G3=-0.180800 (th=70.16)  circle form=-0.104020
+  d=0.8500 w=0.8500  max G2=-0.005025 (th=45.00)  max G3=-0.088750 (th=62.33)  circle form=-0.005025
+  d=0.8535 w=0.8535  max G2=-0.000076 (th=45.00)  max G3=-0.084019 (th=28.15)  circle form=-0.000076
+  d=0.9110 w=0.7053  max G2=-0.040563 (th=26.55)  max G3=-0.072139 (th=10.15)  circle form=-0.040563
+  square corner threshold (2+sqrt2)/4 = 0.853553391
+
+== exact rational certification (tangent half-angle polynomial, Sturm) ==
+  side                           d=911/1000 w=529/750: roots in [0,1]=0, P(0)=-89/1000, P(1)=-442/375, PASS=True; max G ~ -0.00352530656915221246894683295319 at u=0.415411867395
+  corner one-wall                d=39/50 w=39/50: roots in [0,1]=0, P(0)=-11/50, P(1)=-22/25, PASS=True; max G ~ -0.0253242336313130457907199284024 at u=0.551637133438
+  H259                           d=919/1250 w=919/1250: roots in [0,1]=0, P(0)=-331/1250, P(1)=-662/625, PASS=True; max G ~ -0.0869955942098984707660260858878 at u=0.562736114972
+  a=3/4                          d=3/4 w=3/4: roots in [0,1]=0, P(0)=-1/4, P(1)=-1, PASS=True; max G ~ -0.0666494840830060032224897506825 at u=0.558929192185
+  side w=0.7104 (expect fail)    d=911/1000 w=444/625: roots in [0,1]=2, P(0)=-89/1000, P(1)=-724/625, PASS=False; max G ~ 0.0000773002400440750142263934875768 at u=0.419540436522
+  side w=0.7103                  d=911/1000 w=7103/10000: roots in [0,1]=2, P(0)=-89/1000, P(1)=-2897/2500, PASS=False; max G ~ 0.00000595546441891624224888573216276 at u=0.419460228253
+
+== tightness: explicit extremal pair at theta* (one wall) ==
+  d=0.9110 w=0.70533: max G=-0.003525; explicit pair gap along n=-0.007606; SAT sigma=-0.003529
+  d=0.9110 w=0.71040: max G=+0.000077; explicit pair gap along n=-0.017910; SAT sigma=-0.000006
+  d=0.7800 w=0.78000: max G=-0.025324; explicit pair gap along n=-0.358676; SAT sigma=-0.084581
+
+== counterexample search (DE + Nelder-Mead), bottom-wall side cell frame ==
+  side (0.911, 529/750)              best sigma=+3.445686 (max G=-0.003525); pose=[ 0.72727  3.96952  0.8275   3.99838  0.77912 -0.45465]
+  side (0.911, 0.7104) expect >=0    best sigma=+3.521205 (max G=+0.000077); pose=[ 0.73395  3.97387 -0.66674  4.02286  0.65291  1.17945]
+  side (0.911, 0.72) expect >0       best sigma=+3.526216 (max G=+0.006970); pose=[ 0.68481  3.96825 -0.53358  3.97378  0.69318  0.98417]
+  corner (0.78,0.78) two walls       best sigma=+3.681731 (max G2=-0.104020); pose=[ 0.50222  0.52175 -0.       3.9689   3.9689   0.77998]
+  corner (0.86,0.86) expect >0       best sigma=+3.689568 (max G2=+0.009117); pose=[0.5     0.50891 0.      3.96894 3.96547 0.79718]

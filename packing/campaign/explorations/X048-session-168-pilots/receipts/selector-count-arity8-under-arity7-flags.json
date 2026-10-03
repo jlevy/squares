@@ -1,0 +1,169 @@
+{
+ "design": "ring-3-voronoi-8-tabbed-unique",
+ "flagged_classes": 44,
+ "flags_from": "campaign/explorations/X048-session-168-pilots/receipts/selector-arity7-seed1.json",
+ "flags_from_sha256": "a8f1c50601e0bc3f798501bb038c8746c34df02c15f8543a0da0a6dcc2608e22",
+ "levels": {
+  "1": {
+   "classes": 5,
+   "flags_below": 0,
+   "flags_by_missing_pairs": [],
+   "in_survivors": 5,
+   "in_survivors_by_missing_pairs": [
+    5
+   ],
+   "pruned_as_supersets": 0,
+   "restricted_out": 0,
+   "surviving_states_used": 346104
+  },
+  "2": {
+   "classes": 32,
+   "flags_below": 0,
+   "flags_by_missing_pairs": [],
+   "in_survivors": 32,
+   "in_survivors_by_missing_pairs": [
+    32
+   ],
+   "pruned_as_supersets": 0,
+   "restricted_out": 0,
+   "surviving_states_used": 346104
+  },
+  "3": {
+   "classes": 223,
+   "flags_below": 0,
+   "flags_by_missing_pairs": [],
+   "in_survivors": 223,
+   "in_survivors_by_missing_pairs": [
+    138,
+    85
+   ],
+   "pruned_as_supersets": 0,
+   "restricted_out": 0,
+   "surviving_states_used": 346104
+  },
+  "4": {
+   "classes": 1227,
+   "flags_below": 0,
+   "flags_by_missing_pairs": [],
+   "in_survivors": 1227,
+   "in_survivors_by_missing_pairs": [
+    406,
+    377,
+    335,
+    109
+   ],
+   "pruned_as_supersets": 0,
+   "restricted_out": 0,
+   "surviving_states_used": 346104
+  },
+  "5": {
+   "classes": 5102,
+   "flags_below": 0,
+   "flags_by_missing_pairs": [],
+   "in_survivors": 5102,
+   "in_survivors_by_missing_pairs": [
+    835,
+    1031,
+    1206,
+    1047,
+    632,
+    300,
+    51
+   ],
+   "pruned_as_supersets": 0,
+   "restricted_out": 0,
+   "surviving_states_used": 346104
+  },
+  "6": {
+   "classes": 16580,
+   "flags_below": 0,
+   "flags_by_missing_pairs": [
+    3
+   ],
+   "in_survivors": 16580,
+   "in_survivors_by_missing_pairs": [
+    1238,
+    1938,
+    2757,
+    2990,
+    2897,
+    2164,
+    1440,
+    766,
+    301,
+    82,
+    7
+   ],
+   "pruned_as_supersets": 0,
+   "restricted_out": 0,
+   "surviving_states_used": 346104
+  },
+  "7": {
+   "classes": 43086,
+   "flags_below": 3,
+   "flags_by_missing_pairs": [
+    30,
+    9,
+    2
+   ],
+   "in_survivors": 43052,
+   "in_survivors_by_missing_pairs": [
+    1321,
+    2565,
+    4325,
+    5484,
+    6448,
+    6377,
+    5620,
+    4464,
+    3008,
+    1810,
+    1014,
+    437,
+    140,
+    36,
+    3
+   ],
+   "pruned_as_supersets": 34,
+   "restricted_out": 0,
+   "surviving_states_used": 185424
+  },
+  "8": {
+   "classes": 92065,
+   "flags_below": 44,
+   "flags_by_missing_pairs": [],
+   "in_survivors": 91133,
+   "in_survivors_by_missing_pairs": [
+    843,
+    2259,
+    4688,
+    6874,
+    9400,
+    10986,
+    11599,
+    11516,
+    10047,
+    8104,
+    5870,
+    4064,
+    2517,
+    1356,
+    633,
+    273,
+    88,
+    15,
+    1
+   ],
+   "pruned_as_supersets": 736,
+   "restricted_out": 196,
+   "surviving_states_used": 40016
+  }
+ },
+ "max_arity": 8,
+ "module_sha256": "f17a1dbb2dd3cc886ada49e24c8e3ea05e8cbacf4fc6fecce7248c2e702ea755",
+ "schema": "n17-sub-pattern-class-count/v1",
+ "seconds": 62.391,
+ "state_size": 17,
+ "status": "class counts only; nothing is searched and nothing is certified",
+ "window": null
+}

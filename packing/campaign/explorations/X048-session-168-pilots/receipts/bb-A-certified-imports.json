@@ -1,0 +1,74 @@
+{
+ "devtools": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/__init__.py",
+  "sha256": "9ac88104b563973f3ce95fe9a202473bf04f596082b3d9f92fa3eaef7b52a958"
+ },
+ "devtools.check_n17_capacity_one_cover": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/check_n17_capacity_one_cover.py",
+  "sha256": "163c19c9f4ccc85c3027fad86e0abd422af68c88102d08c3349882a4e9402677"
+ },
+ "devtools.check_n17_contact_chart": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/check_n17_contact_chart.py",
+  "sha256": "523ebf959ee38778e3f3ae2b49e5e1d8fe4d28b0fc61c25e0101c420621d5fc7"
+ },
+ "devtools.check_n17_endpoint_feasibility": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/check_n17_endpoint_feasibility.py",
+  "sha256": "1e2b1e72b94f6119016b6f765ee60ad6dd6e91d2d450deff45b9529b7e5dec01"
+ },
+ "devtools.check_n17_root_certificate": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/check_n17_root_certificate.py",
+  "sha256": "c5f6ff75b5871762d791e245c2bb4718085b98fca3da3689e71456e90ca22494"
+ },
+ "devtools.check_rational_witness_independent": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/check_rational_witness_independent.py",
+  "sha256": "d8699c9146aab71dccaf14bd4c3232dbe7e5cee4d0d5a5baf9d78518d837aab1"
+ },
+ "devtools.import_half_angle_witness": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/import_half_angle_witness.py",
+  "sha256": "267ec3e51f2cd86992bc50d39203e20eca2879c4bbdc00de6964bf6fde90a571"
+ },
+ "devtools.pilot_n17_subpattern_bb": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/pilot_n17_subpattern_bb.py",
+  "sha256": "f8da95e8dbf6b06b9681b02b3e5b06b2fdfb87d77f63b1f638d3b068d570b656"
+ },
+ "devtools.select_n17_sub_patterns": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/devtools/select_n17_sub_patterns.py",
+  "sha256": "f17a1dbb2dd3cc886ada49e24c8e3ea05e8cbacf4fc6fecce7248c2e702ea755"
+ },
+ "sqpack": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/__init__.py",
+  "sha256": "a1945b4bc45e6ece266d3f63cb328a3cd6f280e646d73b63c3cbe606e42fe19e"
+ },
+ "sqpack.field": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/field.py",
+  "sha256": "734a645d9b95bf43018b1d9662cf255fbf3b834b74ae5e1f10dcf2455a0e3de6"
+ },
+ "sqpack.promote": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/promote/__init__.py",
+  "sha256": "2f1884aca553acbfa068d231f5292dc2392f774274e165f4a69a4132d2c887da"
+ },
+ "sqpack.promote.enclose": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/promote/enclose.py",
+  "sha256": "d36d74ded3ecc8a4db3beda66fae4623a8011ab9d8f9e2be5531025295877b56"
+ },
+ "sqpack.promote.interval": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/promote/interval.py",
+  "sha256": "af6daa86086a32212707735954fe20fe094b2dc0032b1b2612e8ef267a984147"
+ },
+ "sqpack.promote.interval_verify": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/promote/interval_verify.py",
+  "sha256": "0fafebee97f5a7977023daf7c9e5367c494c5c42d43da6fd5bd59bee27e6a66c"
+ },
+ "sqpack.verify": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/verify.py",
+  "sha256": "56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337"
+ },
+ "sqpack.witness": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/witness.py",
+  "sha256": "55ff9e9f7dc819ce8151f7260245552a34858d914528fabd1d4ad1e71e192f23"
+ },
+ "sqpack.yamlio": {
+  "file": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2/wt-0bc6a03b/packing/src/sqpack/yamlio.py",
+  "sha256": "34199e6fdbb2ee8ef0a657cd3f9f3bcea9982915feebefaa5b7413e771188e8b"
+ }
+}

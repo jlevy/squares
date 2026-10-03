@@ -1,0 +1,18 @@
+#!/bin/bash
+# Knuth estimates, interval versus Taylor, one process at a time, each under 10 minutes.
+cd /home/user/squares/packing
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+P3=/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2-taylor
+I8=corner-SE,side-N0,side-S2,interior-SW,interior-NW,interior-W,interior-S,interior-N
+N8=corner-NW,corner-NE,side-N0,side-N1,side-N2,side-W2,side-E2,interior-NW
+C9=side-N1,side-W1,side-E1,side-W2,interior-SW,interior-NW,interior-S,interior-N,interior-E
+DIVES=${DIVES:-200}
+for spec in "I8:$I8" "N8:$N8" "C9:$C9"; do
+  name=${spec%%:*}; cells=${spec#*:}
+  for mode in interval taylor; do
+    flag=""; [ $mode = taylor ] && flag="--taylor"
+    timeout 600 .venv/bin/python3 -m devtools.pilot_n17_subpattern_bb --label est-$name-$mode --cells $cells --estimate $DIVES --seed 2 $flag --output $P3/est-$name-$mode.json >> $P3/estimates.log 2>&1
+    echo "$name $mode exit $?" >> $P3/estimates.log
+  done
+done
+echo DONE >> $P3/estimates.log

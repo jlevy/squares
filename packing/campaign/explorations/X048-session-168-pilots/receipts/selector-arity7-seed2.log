@@ -1,0 +1,150 @@
+{"arity": 1, "classes": 5, "pruned_as_supersets": 0, "searched": 5, "feasible": 5, "feasible_by": {"random": 5}, "flagged": 0, "attempts": 5, "seconds": 0.003}
+{"arity": 2, "classes": 32, "pruned_as_supersets": 0, "searched": 32, "feasible": 32, "feasible_by": {"warm": 32}, "flagged": 0, "attempts": 32, "seconds": 0.036}
+{"arity": 3, "classes": 223, "pruned_as_supersets": 0, "searched": 223, "feasible": 223, "feasible_by": {"warm": 223}, "flagged": 0, "attempts": 225, "seconds": 0.46}
+{"arity": 4, "classes": 1227, "pruned_as_supersets": 0, "searched": 1227, "feasible": 1227, "feasible_by": {"warm": 1227}, "flagged": 0, "attempts": 1227, "seconds": 3.387}
+{"arity": 5, "classes": 5102, "pruned_as_supersets": 0, "searched": 5102, "feasible": 5102, "feasible_by": {"warm": 5102}, "flagged": 0, "attempts": 5127, "seconds": 21.15}
+{"arity": 6, "classes": 16580, "pruned_as_supersets": 0, "searched": 16580, "feasible": 16577, "feasible_by": {"deep-random": 1, "random": 1, "warm": 16575}, "flagged": 3, "attempts": 18591, "seconds": 274.433}
+{"arity": 7, "classes": 43086, "pruned_as_supersets": 34, "searched": 43052, "feasible": 43011, "feasible_by": {"deep-hop": 1, "deep-random": 3, "deep-warm": 1, "hop": 11, "random": 10, "warm": 42985}, "flagged": 41, "attempts": 67849, "seconds": 3181.631}
+{
+ "complete": true,
+ "controls_passed": true,
+ "levels": {
+  "1": {
+   "attempts": 5,
+   "classes": 5,
+   "feasible": 5,
+   "feasible_by": {
+    "random": 5
+   },
+   "flagged": 0,
+   "pruned_as_supersets": 0,
+   "searched": 5,
+   "seconds": 0.003
+  },
+  "2": {
+   "attempts": 32,
+   "classes": 32,
+   "feasible": 32,
+   "feasible_by": {
+    "warm": 32
+   },
+   "flagged": 0,
+   "pruned_as_supersets": 0,
+   "searched": 32,
+   "seconds": 0.036
+  },
+  "3": {
+   "attempts": 225,
+   "classes": 223,
+   "feasible": 223,
+   "feasible_by": {
+    "warm": 223
+   },
+   "flagged": 0,
+   "pruned_as_supersets": 0,
+   "searched": 223,
+   "seconds": 0.46
+  },
+  "4": {
+   "attempts": 1227,
+   "classes": 1227,
+   "feasible": 1227,
+   "feasible_by": {
+    "warm": 1227
+   },
+   "flagged": 0,
+   "pruned_as_supersets": 0,
+   "searched": 1227,
+   "seconds": 3.387
+  },
+  "5": {
+   "attempts": 5127,
+   "classes": 5102,
+   "feasible": 5102,
+   "feasible_by": {
+    "warm": 5102
+   },
+   "flagged": 0,
+   "pruned_as_supersets": 0,
+   "searched": 5102,
+   "seconds": 21.15
+  },
+  "6": {
+   "attempts": 18591,
+   "classes": 16580,
+   "feasible": 16577,
+   "feasible_by": {
+    "deep-random": 1,
+    "random": 1,
+    "warm": 16575
+   },
+   "flagged": 3,
+   "pruned_as_supersets": 0,
+   "searched": 16580,
+   "seconds": 274.433
+  },
+  "7": {
+   "attempts": 67849,
+   "classes": 43086,
+   "feasible": 43011,
+   "feasible_by": {
+    "deep-hop": 1,
+    "deep-random": 3,
+    "deep-warm": 1,
+    "hop": 11,
+    "random": 10,
+    "warm": 42985
+   },
+   "flagged": 41,
+   "pruned_as_supersets": 34,
+   "searched": 43052,
+   "seconds": 3181.631
+  }
+ },
+ "seconds": 3498.47,
+ "status": "heuristic selector, not a certificate: a flagged pattern is one the float search could not place; the prover must certify each flagged pattern before any exclusion counts",
+ "survivors_by_arity": {
+  "1": {
+   "endpoint_survives": true,
+   "flagged_classes": 0,
+   "orbits": 43593,
+   "surviving_states": 346104
+  },
+  "2": {
+   "endpoint_survives": true,
+   "flagged_classes": 0,
+   "orbits": 43593,
+   "surviving_states": 346104
+  },
+  "3": {
+   "endpoint_survives": true,
+   "flagged_classes": 0,
+   "orbits": 43593,
+   "surviving_states": 346104
+  },
+  "4": {
+   "endpoint_survives": true,
+   "flagged_classes": 0,
+   "orbits": 43593,
+   "surviving_states": 346104
+  },
+  "5": {
+   "endpoint_survives": true,
+   "flagged_classes": 0,
+   "orbits": 43593,
+   "surviving_states": 346104
+  },
+  "6": {
+   "endpoint_survives": true,
+   "flagged_classes": 3,
+   "orbits": 23354,
+   "surviving_states": 185424
+  },
+  "7": {
+   "endpoint_survives": true,
+   "flagged_classes": 44,
+   "orbits": 5084,
+   "surviving_states": 40016
+  }
+ }
+}

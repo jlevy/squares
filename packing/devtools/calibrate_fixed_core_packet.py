@@ -68,6 +68,7 @@ from devtools.fixed_core_packet import (
     _reconstruct_raw_directions,
     _strict_json,
     _strict_json_bytes,
+    _validate_runtime_record,
     _write_direction,
     replay_raw_witness,
     run_dilation_replay,
@@ -807,7 +808,13 @@ def source_manifest(
     *,
     result_directory: Path | None = None,
 ) -> list[dict[str, str]]:
-    """Bind the calibration source and implementation closure to one clean revision."""
+    """Record the calibration source and implementation closure the run executes.
+
+    Each row names a path, its blob at `revision` and the SHA-256 of the bytes on disk,
+    so an uncommitted edit shows in the receipt instead of refusing the run. `revision`
+    is the operator's statement of the commit being run and must be the checkout's
+    `HEAD`, because it is what the receipt records; any commit satisfies that.
+    """
 
     if len(revision) != 40 or any(c not in "0123456789abcdef" for c in revision):
         raise CalibrationError("expected revision must be 40 lowercase hexadecimal digits")
@@ -817,18 +824,13 @@ def source_manifest(
     paths = discover_implementation_paths(repository)
     _validate_loaded_modules(repository, paths)
     if _git(repository, "rev-parse", "HEAD") != revision:
-        raise CalibrationError("current Git revision differs from the frozen calibration")
-    changed = _git(repository, "status", "--porcelain", "--", *paths)
-    if changed:
-        raise CalibrationError("calibration source or implementation closure is not clean")
-    if _git(repository, "status", "--porcelain", "--untracked-files=all"):
-        raise CalibrationError("calibration checkout must be clean before the run")
+        raise CalibrationError("current Git revision differs from the stated revision")
     tracked = set(
         _git(repository, "ls-tree", "-r", "--name-only", revision, "--", *paths).splitlines()
     )
     if tracked != set(paths):
         missing = ", ".join(sorted(set(paths) - tracked))
-        raise CalibrationError(f"frozen calibration source closure is incomplete: {missing}")
+        raise CalibrationError(f"calibration source closure is not committed: {missing}")
     manifest = [
         {
             "path": relative,
@@ -3061,15 +3063,11 @@ def load_result(
         raise CalibrationError("calibration invocation differs from requested readback")
     if require_supervision and document["status"] == "complete" and expected_invocation is None:
         raise CalibrationError("terminal readback requires an expected invocation identity")
-    manifest = source_manifest(
-        repository,
-        expected_revision,
-        result_directory=output_dir,
-    )
-    if sources.get("manifest") != manifest:
-        raise CalibrationError("calibration source manifest changed on readback")
-    if sources.get("runtime") != runtime_binding(repository):
-        raise CalibrationError("calibration runtime changed on readback")
+    # The recorded manifest and runtime describe the run and stay in the receipt as its
+    # history. Neither is a condition on reading it back, so a later commit,
+    # interpreter, lock or host reads the same retained bytes (development.md, Hashes
+    # and Repository-Owned Artifacts, 2026-10-03). Only the runtime's shape is checked.
+    _validate_runtime_record(sources.get("runtime"))
     fixture_raw = (repository / FIXTURE_PATH).read_bytes()
     fixture, source_record = load_fixture(fixture_raw)
     _validate_retained_artifact_set(output_dir)
@@ -4094,15 +4092,11 @@ def run_worker(
             revision,
             result_directory=output_dir,
         )
-        runtime = runtime_binding(repository)
+        runtime = runtime_binding()
         source_started = time.perf_counter()
         fixture_raw = (repository / FIXTURE_PATH).read_bytes()
         certificate, source_record = load_fixture(fixture_raw)
         source_seconds = time.perf_counter() - source_started
-        if hashlib.sha256(fixture_raw).hexdigest() != next(
-            row["sha256"] for row in manifest if row["path"] == FIXTURE_PATH
-        ):
-            _refuse("executed fixture bytes differ from the source manifest")
         cast(dict[str, object], document["sources"]).update(
             {"manifest": manifest, "runtime": runtime}
         )

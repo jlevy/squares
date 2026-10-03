@@ -1,0 +1,144 @@
+"""Lane V1: the new cover tests against the unfixed routines and one mutant per fix.
+
+Run from the worktree's packing/ with the project interpreter:
+
+    python3 <this file> WORKTREE ORIG_DIR OUT.jsonl
+
+Each mutant is either the unfixed file at f864a576a or the fixed file with one textual
+patch, asserted to apply exactly once, written to a scratch copy and installed by
+`plugin/v1_unfixed_plugin.py`. Against each, the new tests of
+`tests/test_verify_n17_certificates.py` and `tests/test_hull_kernel_primitives.py` run;
+CAUGHT when at least one fails. The control runs the fixed files and must pass.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+TESTS = [
+    "tests/test_verify_n17_certificates.py",
+    "tests/test_hull_kernel_primitives.py",
+]
+SELECT = (
+    "segment_row or one_point_section or merge or degenerate_domain"
+    " or sweep_slice or extreme_vertex or whole_segment"
+)
+VERIFIER = "devtools/verify_n17_kernel_certificate.py"
+SWEEP = "src/sqpack/hull_kernel/sweep.py"
+
+MUTANTS: list[tuple[str, str, str, str, str]] = [
+    # (name, which file, what it weakens, old text, new text); empty old text = the
+    # unfixed file itself.
+    ("control-fixed", "", "nothing", "", ""),
+    ("verifier-unfixed-f864a576a", "verifier", "the whole verifier as admitted", "", ""),
+    (
+        "verifier-singleton-falls-through",
+        "verifier",
+        "a one-point target with no containing span is covered",
+        "        if not ratio_lt(cursor, high):\n            return True\n    return False\n",
+        "        if not ratio_lt(cursor, high):\n            return True\n"
+        "    return not ratio_lt(cursor, high)\n",
+    ),
+    (
+        "verifier-degenerate-by-points",
+        "verifier",
+        "a zero-area row is checked at its points and a segment's midpoint",
+        '        require(degenerate_covered(required, every), f"{where}: degenerate row uncovered")\n',
+        "        points = list(required)\n"
+        "        if len(points) == 2:\n"
+        "            points.append(\n"
+        "                ((points[0][0] + points[1][0]) / 2, (points[0][1] + points[1][1]) / 2)\n"
+        "            )\n"
+        "        for pt in points:\n"
+        "            require(\n"
+        "                any(inside(r, pt) for r in every if len(hull(r)) >= 3)\n"
+        "                or any(pt in r for r in residual),\n"
+        '                f"{where}: degenerate row uncovered",\n'
+        "            )\n",
+    ),
+    (
+        "verifier-no-interval-validation",
+        "verifier",
+        "a malformed target or span is merged",
+        '    require(well_formed(target) and all(map(well_formed, spans)), "malformed coverage interval")\n',
+        "",
+    ),
+    ("sweep-unfixed-f864a576a", "sweep", "the sweep's slice predicate as admitted", "", ""),
+    (
+        "sweep-no-skip",
+        "sweep",
+        "a span wholly below the cursor still moves it",
+        "        if high < cursor:\n            continue\n        if low > cursor:\n",
+        "        if low > cursor:\n",
+    ),
+    (
+        "sweep-inexact-ordinates",
+        "sweep",
+        "a float or NaN ordinate is compared",
+        '    require(all(type(y) in EXACT for y in ordinates), f"inexact coverage endpoint at x={x}")\n',
+        "",
+    ),
+]
+
+
+def mutant_file(source: Path, old: str, new: str, target: Path) -> None:
+    text = source.read_text(encoding="utf-8")
+    assert text.count(old) == 1, f"patch does not apply once to {source}"
+    target.write_text(text.replace(old, new), encoding="utf-8")
+
+
+def main() -> int:
+    worktree, orig, out = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+    packing = worktree / "packing"
+    scratch = HERE / "files"
+    scratch.mkdir(exist_ok=True)
+    unfixed = {
+        "verifier": orig / "verify_n17_kernel_certificate_f864a576a.py",
+        "sweep": orig / "sweep_f864a576a.py",
+    }
+    fixed = {"verifier": packing / VERIFIER, "sweep": packing / SWEEP}
+    with out.open("w", encoding="utf-8") as log:
+        for name, which, weakens, old, new in MUTANTS:
+            env = dict(os.environ)
+            env["PYTHONPATH"] = f"{packing / 'src'}:{packing}:{HERE / 'plugin'}"
+            env.pop("V1_VERIFIER", None)
+            env.pop("V1_SWEEP", None)
+            if which:
+                path = scratch / f"{name}.py"
+                if old:
+                    mutant_file(fixed[which], old, new, path)
+                else:
+                    path.write_bytes(unfixed[which].read_bytes())
+                env["V1_VERIFIER" if which == "verifier" else "V1_SWEEP"] = str(path)
+            clock = time.perf_counter()
+            done = subprocess.run(
+                [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                 "-p", "v1_unfixed_plugin", "-k", SELECT, "-rf", *TESTS],
+                cwd=packing, env=env, capture_output=True, text=True, check=False,
+            )
+            failed = sorted(set(re.findall(r"^FAILED (\S+)", done.stdout, flags=re.MULTILINE)))
+            summary = done.stdout.strip().splitlines()[-1] if done.stdout.strip() else ""
+            record = {
+                "mutant": name,
+                "weakens": weakens,
+                "verdict": ("CAUGHT" if failed else "missed") if which else
+                ("PASS" if done.returncode == 0 else "FAIL"),
+                "failed": [f.split("::", 1)[1] for f in failed],
+                "summary": summary,
+                "seconds": round(time.perf_counter() - clock, 1),
+            }
+            log.write(json.dumps(record) + "\n")
+            log.flush()
+            print(json.dumps({k: record[k] for k in ("mutant", "verdict", "summary")}), flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

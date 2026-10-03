@@ -1,0 +1,77 @@
+{
+ "schema": "n17-bb-loss-diagnosis/v1",
+ "pattern": [
+  "corner-SE",
+  "side-N0",
+  "side-S2",
+  "interior-SW",
+  "interior-NW",
+  "interior-W",
+  "interior-S",
+  "interior-N"
+ ],
+ "settings": {
+  "taylor": false,
+  "spread": 0.25
+ },
+ "module_sha256": "215bb1f6d216695f32d1b3692724ca6359bb20b5571b2cccee92ffe0c382903a",
+ "pilot_sha256": "c626beb97b606cf5eb8de0050a275a0df88e19575b1ac862537e8db2038d2aec",
+ "dives": 10,
+ "seed": 3,
+ "points": 4,
+ "open_nodes": 157,
+ "classes": {
+  "closable-gap": 22,
+  "closable-gap-or-chord": 1,
+  "closable-normals": 93,
+  "open-points": 41
+ },
+ "closable_share": 0.7388535031847133,
+ "normals_share_of_closable": 0.8017241379310345,
+ "centre_closes": 117,
+ "pair_piece_structure": {
+  "both-squares": 3624,
+  "one": 50,
+  "turns": 2
+ },
+ "pair_terms": {
+  "count": 3676,
+  "most_live_turns_per_square": {
+   "1": 134,
+   "2": 202,
+   "3": 242,
+   "4": 3098
+  },
+  "without_cuts": 3396,
+  "cut_slack_at_lp_point": {
+   "q0": 0.0036702325339070807,
+   "q10": 0.027887901189986408,
+   "q50": 0.19620863303426483,
+   "q90": 0.5303215411544622
+  }
+ },
+ "lp_point": {
+  "nodes_with_a_hull_gap_pair": 39,
+  "nodes_with_a_decoupled_square": 0,
+  "spread_median": -7.771561172376096e-16,
+  "spread_p90": 0.0
+ },
+ "by_depth": {
+  "0": {
+   "open-points": 40,
+   "closable-normals": 53,
+   "closable-gap": 3
+  },
+  "10": {
+   "closable-normals": 40,
+   "closable-gap": 18,
+   "closable-gap-or-chord": 1,
+   "open-points": 1
+  },
+  "20": {
+   "closable-gap": 1
+  }
+ },
+ "wall_seconds": 22.69,
+ "cpu_seconds": 15.178
+}

@@ -596,10 +596,9 @@ def _source_repository(repository: Path) -> tuple[str, list[dict[str, object]]]:
     return revision, manifest
 
 
-def test_source_closure_checks_nested_code_runtime_and_added_import(tmp_path: Path) -> None:
-    repository = tmp_path / "source-repository"
-    repository.mkdir()
-    revision, manifest = _source_repository(repository)
+def _retain_profiles(
+    tmp_path: Path, revision: str, manifest: list[dict[str, object]]
+) -> tuple[Path, Path]:
     _, run_root, review_root, summary = _root(tmp_path / "evidence", revision)
     for order in verifier.RUN_ORDERS:
         receipt = {
@@ -621,17 +620,38 @@ def test_source_closure_checks_nested_code_runtime_and_added_import(tmp_path: Pa
     verifier.snapshot_run_root(
         run_root=run_root, review_root=review_root, execution_revision=revision
     )
-    tree = _git(repository, "write-tree")
-    accepted = verifier.verify_source_closure(
-        repository=repository,
-        run_root=run_root,
-        review_root=review_root,
-        execution_revision=revision,
-        candidate_tree=tree,
-    )
+    return run_root, review_root
+
+
+def test_source_closure_reports_code_and_environment_drift_without_refusing(
+    tmp_path: Path,
+) -> None:
+    """The run set is bound to its execution revision; later changes are only reported.
+
+    Code, fixture, `.python-version` and `uv.lock` changes, a removed module and an
+    added import all leave the evidence admissible and are named in `drift`.
+    """
+    repository = tmp_path / "source-repository"
+    repository.mkdir()
+    revision, manifest = _source_repository(repository)
+    run_root, review_root = _retain_profiles(tmp_path, revision, manifest)
+
+    def check(candidate: str) -> dict[str, object]:
+        return verifier.verify_source_closure(
+            repository=repository,
+            run_root=run_root,
+            review_root=review_root,
+            execution_revision=revision,
+            candidate_tree=candidate,
+        )
+
+    accepted = check(_git(repository, "write-tree"))
+    assert accepted["schema"] == verifier.CLOSURE_SCHEMA
+    assert accepted["drift"] == []
     assert [row["path"] for row in cast(list[dict[str, object]], accepted["sources"])] == [
         row["path"] for row in manifest
     ]
+    assert check(revision)["drift"] == []
     for relative in (
         "packing/devtools/helper.py",
         "packing/src/sqpack/__init__.py",
@@ -640,85 +660,57 @@ def test_source_closure_checks_nested_code_runtime_and_added_import(tmp_path: Pa
         "packing/uv.lock",
     ):
         path = repository / relative
-        original = path.read_bytes()
-        path.write_bytes(original + b"# changed\n")
+        path.write_bytes(path.read_bytes() + b"# changed\n")
         _git(repository, "add", relative)
-        candidate = _git(repository, "write-tree")
-        with pytest.raises(verifier.RunSetRefusalError):
-            verifier.verify_source_closure(
-                repository=repository,
-                run_root=run_root,
-                review_root=review_root,
-                execution_revision=revision,
-                candidate_tree=candidate,
-            )
+        result = check(_git(repository, "write-tree"))
+        assert (result["status"], result["drift"]) == ("accepted", [relative])
         _git(repository, "reset", "--hard", "HEAD")
     helper = "packing/devtools/helper.py"
     _git(repository, "rm", helper)
-    with pytest.raises(verifier.RunSetRefusalError, match="closure"):
-        verifier.verify_source_closure(
-            repository=repository,
-            run_root=run_root,
-            review_root=review_root,
-            execution_revision=revision,
-            candidate_tree=_git(repository, "write-tree"),
-        )
+    assert helper in cast(list[str], check(_git(repository, "write-tree"))["drift"])
+    with pytest.raises(verifier.RunSetRefusalError, match="index"):
+        check(revision)
     _git(repository, "reset", "--hard", "HEAD")
-    assert (
+    (repository / helper).write_bytes(b"# unstaged, so not part of the evidence commit\n")
+    assert check(_git(repository, "write-tree"))["drift"] == []
+    _git(repository, "reset", "--hard", "HEAD")
+    producer = repository / "packing/devtools/calibrate_fixed_core_packet.py"
+    producer.write_bytes(b"from . import helper, added\n")
+    (repository / "packing/devtools/added.py").write_bytes(b"VALUE = 3\n")
+    _git(repository, "add", ".")
+    assert check(_git(repository, "write-tree"))["drift"] == [
+        "packing/devtools/added.py",
+        "packing/devtools/calibrate_fixed_core_packet.py",
+    ]
+
+
+def test_source_closure_keeps_recorded_digests_and_checks_the_closure_paths(
+    tmp_path: Path,
+) -> None:
+    """Row blob ids and digests are the runs' record, kept and not compared; the
+    manifests must still name the execution revision's import closure, path for path."""
+    repository = tmp_path / "source-repository"
+    repository.mkdir()
+    revision, manifest = _source_repository(repository)
+    recorded = deepcopy(manifest)
+    recorded[0]["git_blob"] = "0" * 40
+    recorded[0]["sha256"] = "1" * 64
+    run_root, review_root = _retain_profiles(tmp_path / "recorded", revision, recorded)
+    accepted = verifier.verify_source_closure(
+        repository=repository,
+        run_root=run_root,
+        review_root=review_root,
+        execution_revision=revision,
+        candidate_tree=revision,
+    )
+    assert accepted["sources"] == recorded
+    missing = [row for row in manifest if row["path"] != "packing/devtools/helper.py"]
+    run_root, review_root = _retain_profiles(tmp_path / "missing", revision, missing)
+    with pytest.raises(verifier.RunSetRefusalError, match="complete source closure"):
         verifier.verify_source_closure(
             repository=repository,
             run_root=run_root,
             review_root=review_root,
             execution_revision=revision,
             candidate_tree=revision,
-        )["status"]
-        == "accepted"
-    )
-    helper_path = repository / helper
-    original = helper_path.read_bytes()
-    helper_path.write_bytes(original + b"# staged change\n")
-    _git(repository, "add", helper)
-    helper_path.write_bytes(original)
-    assert _git(repository, "write-tree") != tree
-    for stale_candidate in (tree, revision):
-        with pytest.raises(verifier.RunSetRefusalError, match="index"):
-            verifier.verify_source_closure(
-                repository=repository,
-                run_root=run_root,
-                review_root=review_root,
-                execution_revision=revision,
-                candidate_tree=stale_candidate,
-            )
-    _git(repository, "reset", "--hard", "HEAD")
-    helper_path.write_bytes(helper_path.read_bytes() + b"# unstaged\n")
-    with pytest.raises(verifier.RunSetRefusalError, match="source bytes differ"):
-        verifier.verify_source_closure(
-            repository=repository,
-            run_root=run_root,
-            review_root=review_root,
-            execution_revision=revision,
-            candidate_tree=_git(repository, "write-tree"),
-        )
-    _git(repository, "reset", "--hard", "HEAD")
-    helper_path.chmod(0o755)
-    with pytest.raises(verifier.RunSetRefusalError, match="source mode differs"):
-        verifier.verify_source_closure(
-            repository=repository,
-            run_root=run_root,
-            review_root=review_root,
-            execution_revision=revision,
-            candidate_tree=_git(repository, "write-tree"),
-        )
-    helper_path.chmod(0o644)
-    producer = repository / "packing/devtools/calibrate_fixed_core_packet.py"
-    producer.write_bytes(b"from . import helper, added\n")
-    (repository / "packing/devtools/added.py").write_bytes(b"VALUE = 3\n")
-    _git(repository, "add", ".")
-    with pytest.raises(verifier.RunSetRefusalError, match="closure"):
-        verifier.verify_source_closure(
-            repository=repository,
-            run_root=run_root,
-            review_root=review_root,
-            execution_revision=revision,
-            candidate_tree=_git(repository, "write-tree"),
         )

@@ -1,0 +1,38 @@
+[
+ {
+  "mutant": "core-strict-lower-half",
+  "weakens": "the owner's core is proved strict over the row's lower half only",
+  "certs": {
+   "blind": "CAUGHT: owner-core-grown-by-a-point-strict-on-lower-half-only",
+   "wall": "CAUGHT: owner-core-grown-by-a-point-strict-on-lower-half-only"
+  },
+  "seconds": 8.2
+ },
+ {
+  "mutant": "core-strict-upper-half",
+  "weakens": "the owner's core is proved strict over the row's upper half only",
+  "certs": {
+   "blind": "CAUGHT: owner-core-grown-by-a-point-strict-on-upper-half-only, owner-core-strict-on-upper-half-only",
+   "wall": "CAUGHT: owner-core-grown-by-a-point-strict-on-upper-half-only, owner-core-strict-on-upper-half-only"
+  },
+  "seconds": 8.0
+ },
+ {
+  "mutant": "partner-core-strict-lower-half",
+  "weakens": "a partner row's core is proved strict over its lower half only",
+  "certs": {
+   "blind": "CAUGHT: partner-core-grown-by-a-point-strict-on-lower-half-only",
+   "wall": "CAUGHT: partner-core-grown-by-a-point-strict-on-lower-half-only"
+  },
+  "seconds": 6.7
+ },
+ {
+  "mutant": "partner-core-strict-upper-half",
+  "weakens": "a partner row's core is proved strict over its upper half only",
+  "certs": {
+   "blind": "CAUGHT: partner-core-grown-by-a-point-strict-on-upper-half-only, partner-core-strict-on-upper-half-only",
+   "wall": "CAUGHT: partner-core-grown-by-a-point-strict-on-upper-half-only, partner-core-strict-on-upper-half-only"
+  },
+  "seconds": 6.6
+ }
+]

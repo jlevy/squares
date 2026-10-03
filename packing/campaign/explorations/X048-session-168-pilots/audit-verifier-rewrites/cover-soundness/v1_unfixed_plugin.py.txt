@@ -1,0 +1,43 @@
+"""A pytest plugin that puts an unfixed or mutated cover routine in place of the fixed one.
+
+Loaded with `-p v1_unfixed_plugin` from this directory on PYTHONPATH. `V1_VERIFIER`
+names a file installed as `devtools.verify_n17_kernel_certificate` before collection, as
+lane R6's `mutant_plugin` does. `V1_SWEEP` names a copy of `sqpack/hull_kernel/sweep.py`
+whose `vertical_interval` and `covers_vertical` replace those of the imported module, so
+`exact_union_cover` and every importer see them. The repository's files are not touched.
+"""
+
+from __future__ import annotations
+
+import importlib.util
+import os
+import sys
+from types import ModuleType
+
+
+def _load(name: str, path: str) -> ModuleType:
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _install() -> None:
+    verifier = os.environ.get("V1_VERIFIER")
+    if verifier:
+        import devtools  # noqa: F401, PLC0415
+
+        module = _load("devtools.verify_n17_kernel_certificate", verifier)
+        setattr(sys.modules["devtools"], "verify_n17_kernel_certificate", module)
+    sweep = os.environ.get("V1_SWEEP")
+    if sweep:
+        from sqpack.hull_kernel import sweep as fixed  # noqa: PLC0415
+
+        unfixed = _load("v1_unfixed_sweep", sweep)
+        fixed.vertical_interval = unfixed.vertical_interval
+        fixed.covers_vertical = unfixed.covers_vertical
+
+
+_install()

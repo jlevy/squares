@@ -1,0 +1,593 @@
+{
+  "bins": 64,
+  "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-W2",
+    "side-N0",
+    "corner-NW",
+    "interior-W"
+  ],
+  "certified": "stalled",
+  "checker_seconds": 125.9980515719999,
+  "closure": null,
+  "collision_regions": true,
+  "cover_backend": "indexed",
+  "events": 53718,
+  "excluded_orbits": 0,
+  "excluded_states": 0,
+  "final_extents": [
+    {
+      "cell": "corner-SW",
+      "live_half_angle_width": "1",
+      "live_rows": 64,
+      "owned_hull_area2_physical": "5013419211/549755813888",
+      "owned_hull_vertices": 12,
+      "owner": 0,
+      "residual_box_extent": [
+        "79/100",
+        "79/100"
+      ],
+      "residual_box_physical": [
+        [
+          "1/2",
+          "129/100"
+        ],
+        [
+          "1/2",
+          "129/100"
+        ]
+      ],
+      "rows": 64
+    },
+    {
+      "cell": "corner-NW",
+      "live_half_angle_width": "1",
+      "live_rows": 64,
+      "owned_hull_area2_physical": "10026787743/1099511627776",
+      "owned_hull_vertices": 12,
+      "owner": 2,
+      "residual_box_extent": [
+        "79/100",
+        "79/100"
+      ],
+      "residual_box_physical": [
+        [
+          "1/2",
+          "129/100"
+        ],
+        [
+          "1693/500",
+          "522/125"
+        ]
+      ],
+      "rows": 64
+    },
+    {
+      "cell": "side-S0",
+      "live_half_angle_width": "1",
+      "live_rows": 64,
+      "owned_hull_area2_physical": "0",
+      "owned_hull_vertices": 0,
+      "owner": 4,
+      "residual_box_extent": [
+        "529/750",
+        "911/1000"
+      ],
+      "residual_box_physical": [
+        [
+          "129/100",
+          "2993/1500"
+        ],
+        [
+          "1/2",
+          "1411/1000"
+        ]
+      ],
+      "rows": 64
+    },
+    {
+      "cell": "side-N0",
+      "live_half_angle_width": "1",
+      "live_rows": 64,
+      "owned_hull_area2_physical": "0",
+      "owned_hull_vertices": 0,
+      "owner": 5,
+      "residual_box_extent": [
+        "529/750",
+        "911/1000"
+      ],
+      "residual_box_physical": [
+        [
+          "129/100",
+          "2993/1500"
+        ],
+        [
+          "653/200",
+          "522/125"
+        ]
+      ],
+      "rows": 64
+    },
+    {
+      "cell": "side-W0",
+      "live_half_angle_width": "1",
+      "live_rows": 64,
+      "owned_hull_area2_physical": "0",
+      "owned_hull_vertices": 0,
+      "owner": 6,
+      "residual_box_extent": [
+        "911/1000",
+        "529/750"
+      ],
+      "residual_box_physical": [
+        [
+          "1/2",
+          "1411/1000"
+        ],
+        [
+          "129/100",
+          "2993/1500"
+        ]
+      ],
+      "rows": 64
+    },
+    {
+      "cell": "side-W2",
+      "live_half_angle_width": "1",
+      "live_rows": 64,
+      "owned_hull_area2_physical": "0",
+      "owned_hull_vertices": 0,
+      "owner": 14,
+      "residual_box_extent": [
+        "911/1000",
+        "529/750"
+      ],
+      "residual_box_physical": [
+        [
+          "1/2",
+          "1411/1000"
+        ],
+        [
+          "4021/1500",
+          "1693/500"
+        ]
+      ],
+      "rows": 64
+    },
+    {
+      "cell": "interior-W",
+      "live_half_angle_width": "1",
+      "live_rows": 64,
+      "owned_hull_area2_physical": "0",
+      "owned_hull_vertices": 0,
+      "owner": 18,
+      "residual_box_extent": [
+        "227/250",
+        "17/25"
+      ],
+      "residual_box_physical": [
+        [
+          "143/100",
+          "1169/500"
+        ],
+        [
+          "999/500",
+          "1339/500"
+        ]
+      ],
+      "rows": 64
+    }
+  ],
+  "hull_limit": 16,
+  "kernel_sha256": {
+    "__init__.py": "0bbfc013e1066b89c8aad8fb2d28dac15483069e053668db0cdde16710d6687e",
+    "collision.py": "5f8d0231b90ffcb6bbdad42b15f5f4d74e2739c85bd287ae8fa59ffe17429a10",
+    "counting.py": "79e97e9db2cb3e569517e1f40b8e9b8fbff802fe635a42df8de28f389701e97b",
+    "covers.py": "fe760ce9a1682d735ab2f191fc325f3c7f53d5e9f1c8863a41235ad86fa0de87",
+    "frame.py": "3c5107175adb517d8c3e6bbbd1bed95a4e2d19cfae57c0e081f601d4c5ad5c6e",
+    "geometry.py": "12d69959c71b88a4a3f2521fda896116f1467209fcff2ea63627418c3a26a29b",
+    "induction.py": "77262bf5da1dc42e7e76684efecdc93c087c42974ddb50f1780d381bf36987bd",
+    "n11.py": "fd1710f662fcb3903cc8146a7cc81cc051f858001acd3fd4a84230d35ed1ffca",
+    "n17.py": "792eb18b25a3cffb66ce6f41e3651217bc0c983796710d47df46394bdd81d817",
+    "node.py": "34741ae8b35c7a451cb4cdd1cd15a84d0510fdb1f4d19675a836fa971dfb978b",
+    "ownership.py": "8abb7df630bb72eeb1a69773c94ca70d7d9533f6373ef607f8e4294362c708ca",
+    "producer.py": "1c1cb632b037f038b9ab7634436fd3424a7fb32572006f22e6272b7323431752",
+    "sequential.py": "7549e830a709e678d99e3b56ceb1fcf592427486b99975ce45fbfb35b534f820",
+    "sweep.py": "c39c98e6873df0bdd32a830d5993ff4490751b99d3ff02450db2094d5aef8803"
+  },
+  "mask": [
+    0,
+    2,
+    4,
+    5,
+    6,
+    14,
+    18
+  ],
+  "max_rounds": 12,
+  "node_sha256": "42e3b20c22c80792a1dac4998d06aa3b49304bdc6958411f5fe0fd630add0c3c",
+  "pattern": "custom",
+  "probes": 106540,
+  "process_cpu_seconds": 242.06282905799998,
+  "producer_outcome": "stalled",
+  "producer_seconds": 122.60132908999913,
+  "producer_share": 0.6,
+  "rounds": [
+    {
+      "live_rows": {
+        "corner-NW": 64,
+        "corner-SW": 64,
+        "interior-W": 64,
+        "side-N0": 64,
+        "side-S0": 64,
+        "side-W0": 64,
+        "side-W2": 64
+      },
+      "owned_hull_vertices": {
+        "corner-NW": 12,
+        "corner-SW": 12,
+        "interior-W": 0,
+        "side-N0": 0,
+        "side-S0": 0,
+        "side-W0": 0,
+        "side-W2": 0
+      },
+      "residual_box_extent": {
+        "corner-NW": [
+          "79/100",
+          "79/100"
+        ],
+        "corner-SW": [
+          "79/100",
+          "79/100"
+        ],
+        "interior-W": [
+          "227/250",
+          "17/25"
+        ],
+        "side-N0": [
+          "529/750",
+          "911/1000"
+        ],
+        "side-S0": [
+          "529/750",
+          "911/1000"
+        ],
+        "side-W0": [
+          "911/1000",
+          "529/750"
+        ],
+        "side-W2": [
+          "911/1000",
+          "529/750"
+        ]
+      },
+      "round": 0,
+      "steps": 7
+    },
+    {
+      "live_rows": {
+        "corner-NW": 64,
+        "corner-SW": 64,
+        "interior-W": 64,
+        "side-N0": 64,
+        "side-S0": 64,
+        "side-W0": 64,
+        "side-W2": 64
+      },
+      "owned_hull_vertices": {
+        "corner-NW": 12,
+        "corner-SW": 12,
+        "interior-W": 0,
+        "side-N0": 0,
+        "side-S0": 0,
+        "side-W0": 0,
+        "side-W2": 0
+      },
+      "residual_box_extent": {
+        "corner-NW": [
+          "79/100",
+          "79/100"
+        ],
+        "corner-SW": [
+          "79/100",
+          "79/100"
+        ],
+        "interior-W": [
+          "227/250",
+          "17/25"
+        ],
+        "side-N0": [
+          "529/750",
+          "911/1000"
+        ],
+        "side-S0": [
+          "529/750",
+          "911/1000"
+        ],
+        "side-W0": [
+          "911/1000",
+          "529/750"
+        ],
+        "side-W2": [
+          "911/1000",
+          "529/750"
+        ]
+      },
+      "round": 1,
+      "steps": 14
+    }
+  ],
+  "rows_checked": 896,
+  "seed_points": {
+    "corner-NW": 2,
+    "corner-SW": 2,
+    "interior-W": 0,
+    "side-N0": 0,
+    "side-S0": 0,
+    "side-W0": 0,
+    "side-W2": 0
+  },
+  "seed_sha256": "49535ed4a63645d59475ad5dab8c3e44333c5c6fed8159a68387b5fe0989f50a",
+  "status": "PASS_CERTIFIED_STALL",
+  "steps": [
+    {
+      "collision_regions": 128,
+      "events": 7135,
+      "live_rows": 64,
+      "owned_hull_vertices": 12,
+      "owner": 0,
+      "partners": [
+        2,
+        4,
+        5,
+        6,
+        14,
+        18
+      ],
+      "probes": 14206,
+      "rows": 64,
+      "step": 0
+    },
+    {
+      "collision_regions": 128,
+      "events": 4801,
+      "live_rows": 64,
+      "owned_hull_vertices": 12,
+      "owner": 2,
+      "partners": [
+        0,
+        4,
+        5,
+        6,
+        14,
+        18
+      ],
+      "probes": 9538,
+      "rows": 64,
+      "step": 1
+    },
+    {
+      "collision_regions": 128,
+      "events": 2370,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 4,
+      "partners": [
+        0,
+        2,
+        5,
+        6,
+        14,
+        18
+      ],
+      "probes": 4676,
+      "rows": 64,
+      "step": 2
+    },
+    {
+      "collision_regions": 128,
+      "events": 2445,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 5,
+      "partners": [
+        0,
+        2,
+        4,
+        6,
+        14,
+        18
+      ],
+      "probes": 4826,
+      "rows": 64,
+      "step": 3
+    },
+    {
+      "collision_regions": 187,
+      "events": 3971,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 6,
+      "partners": [
+        0,
+        2,
+        4,
+        5,
+        14,
+        18
+      ],
+      "probes": 7878,
+      "rows": 64,
+      "step": 4
+    },
+    {
+      "collision_regions": 192,
+      "events": 4693,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 14,
+      "partners": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        18
+      ],
+      "probes": 9322,
+      "rows": 64,
+      "step": 5
+    },
+    {
+      "collision_regions": 128,
+      "events": 3291,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 18,
+      "partners": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        14
+      ],
+      "probes": 6518,
+      "rows": 64,
+      "step": 6
+    },
+    {
+      "collision_regions": 128,
+      "events": 6120,
+      "live_rows": 64,
+      "owned_hull_vertices": 12,
+      "owner": 0,
+      "partners": [
+        2,
+        4,
+        5,
+        6,
+        14,
+        18
+      ],
+      "probes": 12176,
+      "rows": 64,
+      "step": 7
+    },
+    {
+      "collision_regions": 128,
+      "events": 3816,
+      "live_rows": 64,
+      "owned_hull_vertices": 12,
+      "owner": 2,
+      "partners": [
+        0,
+        4,
+        5,
+        6,
+        14,
+        18
+      ],
+      "probes": 7568,
+      "rows": 64,
+      "step": 8
+    },
+    {
+      "collision_regions": 128,
+      "events": 2003,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 4,
+      "partners": [
+        0,
+        2,
+        5,
+        6,
+        14,
+        18
+      ],
+      "probes": 3942,
+      "rows": 64,
+      "step": 9
+    },
+    {
+      "collision_regions": 127,
+      "events": 2252,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 5,
+      "partners": [
+        0,
+        2,
+        4,
+        6,
+        14,
+        18
+      ],
+      "probes": 4440,
+      "rows": 64,
+      "step": 10
+    },
+    {
+      "collision_regions": 186,
+      "events": 3659,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 6,
+      "partners": [
+        0,
+        2,
+        4,
+        5,
+        14,
+        18
+      ],
+      "probes": 7254,
+      "rows": 64,
+      "step": 11
+    },
+    {
+      "collision_regions": 192,
+      "events": 3871,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 14,
+      "partners": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        18
+      ],
+      "probes": 7678,
+      "rows": 64,
+      "step": 12
+    },
+    {
+      "collision_regions": 128,
+      "events": 3291,
+      "live_rows": 64,
+      "owned_hull_vertices": 0,
+      "owner": 18,
+      "partners": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        14
+      ],
+      "probes": 6518,
+      "rows": 64,
+      "step": 13
+    }
+  ],
+  "steps_checked": 14,
+  "tool_sha256": "9f45b3a919cb7dc790c0bfb1008d0ddc2749fa0776965c61fe9060996024d3b5",
+  "wall_ceiling_seconds": 1800.0,
+  "wall_seconds": 250.73627959899932
+}

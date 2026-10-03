@@ -1,0 +1,101 @@
+"""Independent sympy check of the H-258 closed-form partials and the denominator registry.
+
+Differentiates the H254 closing functions F1, F2, G3 with respect to theta and beta with S
+held as an independent symbol, compares with the core-stress review's closed forms, then
+substitutes S(t). Also factors every polynomial my recomputation inverts, to compare with
+the producer's registered factor descriptors (degree in t, degree in b, term count, sign).
+"""
+import json
+from fractions import Fraction as Q
+from pathlib import Path
+
+import sympy as sp
+
+t, b, S, th, be = sp.symbols("t b S theta beta", real=True)
+c, s, d, e = sp.cos(th), sp.sin(th), sp.cos(be), sp.sin(be)
+alpha, gamma = c * d - s * e, c * e + s * d
+X = sp.Rational(1, 2) + (2 + c * s + 3 * s - s * S) / c
+Y = sp.Rational(3, 2) + (2 + 3 * c - c * S) / s
+A = d * (X + sp.Rational(1, 2)) - e * (S - 1) + sp.Rational(1, 2)
+B = (d + e) * (S - 1) - sp.Rational(1, 2)
+F1 = c * (S - 3) + s * (S - 2) - 3
+F2 = d * (S - X - sp.Rational(3, 2)) - e * (Y - S + sp.Rational(3, 2)) - 1
+F3 = alpha * (A - sp.Rational(1, 2)) + gamma * (B - sp.Rational(1, 2)) - (c + 2 * s + 2)
+G3 = F3 + alpha * F2
+P = S - 2 - s + (s * (S - 3) - 2) / c
+QQ = S - 3 + (c * (S - 3) - 2) / s
+Pth = (S - 3 - 2 * s) / c**2 - c
+Qth = (2 * c - S + 3) / s**2
+closed = {
+    "F1_theta": -s * (S - 3) + c * (S - 2),
+    "F2_theta": d * Pth + e * Qth,
+    "F2_beta": -e * P + d * QQ,
+    "G3_theta": c * (S - 3) - s * (S - 2) + e * alpha * Qth - e * gamma * QQ + gamma - alpha,
+    "G3_beta": gamma - alpha + QQ * (alpha * d - gamma * e),
+}
+actual = {
+    "F1_theta": sp.diff(F1, th), "F2_theta": sp.diff(F2, th), "F2_beta": sp.diff(F2, be),
+    "G3_theta": sp.diff(G3, th), "G3_beta": sp.diff(G3, be),
+}
+print("== closed-form partials at fixed S (sympy, trig form) ==")
+for name in closed:
+    diff = sp.simplify(sp.expand_trig(actual[name] - closed[name]))
+    print(f"  {name}: difference simplifies to {diff}")
+print("  F2 == d*P + e*Q - 1:", sp.simplify(F2 - (d * P + e * QQ - 1)))
+# differentiating after substituting S(t) destroys F1_theta: show F1(S(t)) == 0 identically
+St = (6 + 4 * t) / (1 + 2 * t - t**2)
+sub = {sp.cos(th): (1 - t**2) / (1 + t**2), sp.sin(th): 2 * t / (1 + t**2),
+       sp.cos(be): (1 - b**2) / (1 + b**2), sp.sin(be): 2 * b / (1 + b**2)}
+F1_t = sp.cancel(F1.subs(sub).subs(S, St))
+print("  F1 after substituting S(t):", F1_t, "(identically zero => d/dtheta after substitution would be 0)")
+
+print("\n== denominator registry: factor every polynomial my recomputation inverts ==")
+ct, st = (1 - t**2) / (1 + t**2), 2 * t / (1 + t**2)
+dt_, et = (1 - b**2) / (1 + b**2), 2 * b / (1 + b**2)
+al, ga = ct * dt_ - st * et, ct * et + st * dt_
+F1th_t = sp.cancel(closed["F1_theta"].subs(sub).subs(S, St))
+# loads in t, b
+Pt = sp.cancel(P.subs(sub).subs(S, St)); Qt = sp.cancel(QQ.subs(sub).subs(S, St))
+Ptht = sp.cancel(Pth.subs(sub).subs(S, St)); Qtht = sp.cancel(Qth.subs(sub).subs(S, St))
+F2th_t = sp.cancel(dt_ * Ptht + et * Qtht)
+F2be_t = sp.cancel(-et * Pt + dt_ * Qt)
+G3th_t = sp.cancel(closed["G3_theta"].subs(sub).subs(S, St))
+G3be_t = sp.cancel(closed["G3_beta"].subs(sub).subs(S, St))
+nu, rho = G3be_t, -F2be_t
+mu = sp.cancel(-(nu * F2th_t + rho * G3th_t) / F1th_t)
+Z = sp.cancel(nu + al * rho)
+K = sp.cancel((ct + st) * mu + ga * nu / ct + ga * Z / st + ga * rho * (dt_ + et))
+delta = sp.cancel(ct * (St - 3) - st - ct**2)
+T = sp.cancel(ct * (ct + 4 - St))
+taus = {"9/10 and 11/12 (delta)": delta, "10/12 (c(1-s))": sp.cancel(ct * (1 - st)),
+        "12/14 (c-s)": sp.cancel(ct - st), "13/14 (delta+T/3)": sp.cancel(delta + T / 3)}
+inverted = {"1+t^2": 1 + t**2, "1+b^2": 1 + b**2, "1+2t-t^2": 1 + 2 * t - t**2,
+            "num c = 1-t^2": 1 - t**2, "num s = 2t": 2 * t, "num F1_theta": sp.numer(sp.together(F1th_t)),
+            "num K": sp.numer(sp.together(K))}
+for name, tau in taus.items():
+    inverted[f"num k = (1-tau)/2 for {name}"] = sp.numer(sp.together(sp.cancel((1 - tau) / 2)))
+mid = tuple(Q(v) for v in json.loads(Path("/home/user/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json").read_text())["box"]["midpoint"])
+registry = []
+for name, poly in inverted.items():
+    expr = sp.expand(poly)
+    coeff, factors = sp.factor_list(sp.Poly(expr, t, b))
+    for f, m in factors:
+        pf = sp.Poly(f, t, b)
+        lc = pf.LC()
+        monic = sp.Poly(sp.expand(f / lc), t, b)
+        value = monic.eval({t: sp.Rational(mid[0].numerator, mid[0].denominator), b: sp.Rational(mid[1].numerator, mid[1].denominator)})
+        desc = (monic.degree(t), monic.degree(b), len(monic.terms()), 1 if value > 0 else -1)
+        if desc not in [r[0] for r in registry] or all(sp.expand(r[1].as_expr() - monic.as_expr()) != 0 for r in registry if r[0] == desc):
+            registry.append((desc, monic, name))
+        print(f"  {name}: factor {sp.factor(f)} ^{m}, monic degree_t {desc[0]} degree_b {desc[1]} terms {desc[2]} sign at midpoint {desc[3]}")
+print("\ndistinct monic factors I inverted (degree_t, degree_b, terms, sign):")
+for desc, monic, name in registry:
+    print("  ", desc, "from", name, ":", monic.as_expr() if desc[2] <= 8 else "(large)")
+print("count:", len(registry))
+cert = json.loads(Path("/home/user/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-242-n17-core-stress/run-001/certificate.json").read_text())
+prod = [(f["degree_t"], f["degree_b"], f["terms"], sgn) for f, sgn in zip(cert["identities"]["ring"]["denominator_factors"], cert["denominator_guards"]["signs"])]
+print("producer registry descriptors:", prod)
+mine = sorted(r[0] for r in registry)
+print("mine sorted:               ", mine)
+print("producer sorted:           ", sorted(prod))
+print("descriptor multisets equal:", mine == sorted(prod))

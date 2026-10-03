@@ -1,0 +1,349 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a01d350a113875e85.jsonl
+    sha256: 81fa97131675fa86cd03bcb3b243c580fa6760a9d21b9b6334f117540d84d81b
+    bytes: 760234
+    records: 124
+    session_id: 9ef40ca7-d637-5e9a-8f7f-e71a05712560
+    harness_versions:
+    - 2.1.287
+  span:
+    started_at: '2026-10-02T06:03:54.804Z'
+    ended_at: '2026-10-02T06:32:40.286Z'
+    wall_seconds: 1725.482
+  turns:
+    assistant: 49
+    sidechain: 49
+    by_model:
+      redacted: 48
+      <synthetic>: 1
+    by_thinking_level:
+      xhigh: 48
+      None: 1
+    by_model_and_thinking_level:
+      redacted @ xhigh: 48
+      <synthetic> @ None: 1
+    by_branch:
+      claude/busy-goldberg-rouoli: 49
+    latency:
+      count: 49
+      total_seconds: 752.476
+      median_seconds: 3.131
+      max_seconds: 267.063
+  tokens:
+    cache_creation_input_tokens: 584488
+    cache_read_input_tokens: 5204107
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 584488
+    input_tokens: 96
+    output_tokens: 376
+  tokens_by_thinking_level:
+    None:
+      cache_creation_input_tokens: 0
+      cache_read_input_tokens: 0
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 0
+      output_tokens: 0
+    xhigh:
+      cache_creation_input_tokens: 584488
+      cache_read_input_tokens: 5204107
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 584488
+      input_tokens: 96
+      output_tokens: 376
+  tool_calls:
+    total: 30
+    total_seconds: 182.713
+    share_of_wall: 0.1059
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 10
+      total_seconds: 158.571
+      median_seconds: 5.376
+      max_seconds: 69.24
+    by_tool:
+      Bash:
+        count: 27
+        total_seconds: 181.534
+        median_seconds: 0.794
+        max_seconds: 69.24
+      SubagentHandback:
+        count: 1
+        total_seconds: 1.013
+        median_seconds: 1.013
+        max_seconds: 1.013
+      Write:
+        count: 2
+        total_seconds: 0.166
+        median_seconds: 0.083
+        max_seconds: 0.091
+    by_command:
+      ? print(a,a,float(a),o.passed,o.leaves,o.six_nodes,round(time.monotonic()-t,2), && print(z,z,float(z),o.passed,o.leaves,o.six_nodes,round(time.monotonic()-t,2),
+      : count: 1
+        total_seconds: 69.24
+        median_seconds: 69.24
+        max_seconds: 69.24
+      ? python3 && ruff && ruff && basedpyright && pytest && +%s.%N) && devtools.check_n17_slider_coverage
+        && +%s.%N) && bc) && sha256sum
+      : count: 1
+        total_seconds: 33.778
+        median_seconds: 33.778
+        max_seconds: 33.778
+      ? python3 && None && print(a,a,float(a),o.passed,o.leaves,o.six_nodes,round(time.monotonic()-t,2),
+        && print(b, && 8, && print(whole, && print(no13, && try3.py
+      : count: 1
+        total_seconds: 25.602
+        median_seconds: 25.602
+        max_seconds: 25.602
+      +%s.%N) && devtools.check_n17_slider_coverage && +%s.%N) && bc) && print(json.dumps({k:d[k]:
+        count: 1
+        total_seconds: 15.135
+        median_seconds: 15.135
+        max_seconds: 15.135
+      'diamond && diamond && s && # && # && s && assert && assert && pytest && ruff && ruff && basedpyright':
+        count: 1
+        total_seconds: 7.636
+        median_seconds: 7.636
+        max_seconds: 7.636
+      python3 && a,b && t.write_text(u) && ruff && basedpyright:
+        count: 1
+        total_seconds: 5.789
+        median_seconds: 5.789
+        max_seconds: 5.789
+      print(scene, && print(claim,:
+        count: 1
+        total_seconds: 4.963
+        median_seconds: 4.963
+        max_seconds: 4.963
+      timeout uv run pytest:
+        count: 1
+        total_seconds: 3.398
+        median_seconds: 3.398
+        max_seconds: 3.398
+      sed:
+        count: 4
+        total_seconds: 3.035
+        median_seconds: 0.725
+        max_seconds: 1.118
+      python3 && assert:
+        count: 1
+        total_seconds: 2.616
+        median_seconds: 2.616
+        max_seconds: 2.616
+      grep:
+        count: 3
+        total_seconds: 2.546
+        median_seconds: 0.415
+        max_seconds: 1.761
+      head:
+        count: 2
+        total_seconds: 2.023
+        median_seconds: 1.012
+        max_seconds: 1.476
+      ls:
+        count: 3
+        total_seconds: 1.799
+        median_seconds: 0.539
+        max_seconds: 0.794
+      python3 geo.py:
+        count: 1
+        total_seconds: 1.442
+        median_seconds: 1.442
+        max_seconds: 1.442
+      devtools.check_n17_slider_coverage && print(json.dumps({k:d[k] && sha256sum:
+        count: 1
+        total_seconds: 0.547
+        median_seconds: 0.547
+        max_seconds: 0.547
+      python3:
+        count: 1
+        total_seconds: 0.453
+        median_seconds: 0.453
+        max_seconds: 0.453
+      mkdir:
+        count: 1
+        total_seconds: 0.448
+        median_seconds: 0.448
+        max_seconds: 0.448
+      cat:
+        count: 1
+        total_seconds: 0.44
+        median_seconds: 0.44
+        max_seconds: 0.44
+    by_command_family:
+      other:
+        count: 5
+        total_seconds: 98.416
+        median_seconds: 7.636
+        max_seconds: 69.24
+      toolchain:
+        count: 6
+        total_seconds: 71.636
+        median_seconds: 4.594
+        max_seconds: 33.778
+      inspection:
+        count: 13
+        total_seconds: 9.843
+        median_seconds: 0.547
+        max_seconds: 1.761
+      project:
+        count: 1
+        total_seconds: 0.547
+        median_seconds: 0.547
+        max_seconds: 0.547
+      filesystem:
+        count: 1
+        total_seconds: 0.448
+        median_seconds: 0.448
+        max_seconds: 0.448
+    invoked:
+      cd: 22
+      head: 13
+      date: 7
+      sed: 7
+      tail: 7
+      grep: 6
+      cat: 5
+      python3: 5
+      echo: 5
+      +%s.%N): 4
+      ls: 3
+      timeout uv run pytest: 3
+      assert: 3
+      uv run ruff check: 3
+      uv run basedpyright: 3
+      print(a,a,float(a),o.passed,o.leaves,o.six_nodes,round(time.monotonic()-t,2),: 2
+      diamond: 2
+      s: 2
+      '#': 2
+      uv run ruff format: 2
+      print(json.dumps({k:d[k]: 2
+      sha256sum: 2
+      python3 -m devtools.check_n17_slider_coverage: 2
+      bc): 2
+      wc: 1
+      awk: 1
+      mkdir: 1
+      python3 geo.py: 1
+      print(scene,: 1
+      print(claim,: 1
+      print(z,z,float(z),o.passed,o.leaves,o.six_nodes,round(time.monotonic()-t,2),: 1
+      None: 1
+      print(b,: 1
+      8,: 1
+      print(whole,: 1
+      print(no13,: 1
+      timeout env python3 try3.py: 1
+      a,b: 1
+      t.write_text(u): 1
+      time python3 -m devtools.check_n17_slider_coverage: 1
+    invoked_families:
+      inspection: 43
+      shell: 34
+      other: 33
+      toolchain: 16
+      project: 3
+      filesystem: 1
+    by_shell_shape:
+      python_heredoc:
+        count: 6
+        total_seconds: 108.658
+        median_seconds: 5.376
+        max_seconds: 69.24
+      python_inline:
+        count: 4
+        total_seconds: 49.913
+        median_seconds: 7.841
+        max_seconds: 33.778
+      compound:
+        count: 16
+        total_seconds: 22.523
+        median_seconds: 0.725
+        max_seconds: 7.636
+      pipeline:
+        count: 1
+        total_seconds: 0.44
+        median_seconds: 0.44
+        max_seconds: 0.44
+    by_thinking_level:
+      xhigh:
+        count: 30
+        total_seconds: 182.713
+        median_seconds: 0.762
+        max_seconds: 69.24
+    shell_traits:
+      pipes: 16
+      redirects_output: 4
+      substitutes: 2
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

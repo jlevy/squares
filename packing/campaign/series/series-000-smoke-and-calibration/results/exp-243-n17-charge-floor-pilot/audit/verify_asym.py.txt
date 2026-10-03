@@ -1,0 +1,50 @@
+"""Recount the survivors of the best asymmetric floor vector by explicit canonicalisation."""
+
+import json
+import sys
+
+import numpy as np
+
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/b-review")
+from asymmetric import CELLS, BOUND, INTER, Counter, d4, endpoint_vector  # noqa: E402
+
+res = json.load(open(sys.argv[1]))
+f = np.array(res["asymmetric_search"]["best_f"])
+C = Counter()
+nstar = endpoint_vector()
+states, orbits = C.survivors(f, nstar)
+print("counter says states", states, "orbits", orbits)
+# rebuild the mask and extract the states
+f_imgs = []
+for img in C.images:
+    fg = np.zeros(25)
+    for k, m in enumerate(img):
+        fg[m] = f[k]
+    f_imgs.append(fg)
+T = max(float(fg @ nstar) for fg in f_imgs)
+best = np.full(C.nstates, -np.inf)
+for fg in f_imgs:
+    bs = C.bvec.astype(np.float64) @ fg[C.bcols]
+    is_ = C.ivec.astype(np.float64) @ fg[C.icols]
+    np.maximum(best, bs[C.concat] + is_[C.row_of], out=best)
+mask = best <= T + 1e-9 * max(1.0, abs(T))
+pos = np.flatnonzero(mask)
+vecs = np.zeros((len(pos), 25), dtype=np.int8)
+vecs[:, C.bcols] = C.bvec[C.concat[pos]]
+vecs[:, C.icols] = C.ivec[C.row_of[pos]]
+assert (vecs.sum(axis=1) == 17).all()
+survivors = {tuple(int(x) for x in v) for v in vecs}
+canon = set()
+closed = True
+for v in survivors:
+    imgs = []
+    for img in C.images:
+        w = [0] * 25
+        for k, m in enumerate(img):
+            w[m] = v[k]
+        imgs.append(tuple(w))
+        if tuple(w) not in survivors:
+            closed = False
+    canon.add(min(imgs))
+print("explicit: states", len(survivors), "D4-closed", closed, "orbits by canonical form", len(canon))
+print("threshold T", T, "endpoint images scores", [float(fg @ nstar) for fg in f_imgs])

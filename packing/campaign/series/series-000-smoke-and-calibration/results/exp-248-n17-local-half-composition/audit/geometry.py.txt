@@ -1,0 +1,164 @@
+"""Lane R2: independent n17 endpoint geometry for the H-268 review.
+
+Retypes the H-254/H-256 layout from the accepted record (no import from the tools under
+review), reads the exp-237 and exp-238 root certificates directly, and recomputes the
+frame, the 9/11 and 11/13 stacks, b* and z* with mpmath at 60 digits.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+from fractions import Fraction as Q
+from pathlib import Path
+
+import mpmath as mp
+
+REPO = Path("/home/user/squares")
+RESULTS = REPO / "packing/campaign/series/series-000-smoke-and-calibration/results"
+EXP237 = RESULTS / "exp-237-n17-polynomial-root/run-001/certificate.json"
+EXP238 = RESULTS / "exp-238-n17-endpoint-feasibility/run-001/certificate.json"
+U = Q(1169, 250)
+R = Q(1, 5000)
+HALF = Q(1, 2)
+
+
+def layout(t, b, half=HALF):
+    """The H-254 centres with the H-256 centroid sliders (retyped)."""
+    d_t, d_b = 1 + t * t, 1 + b * b
+    c, s = (1 - t * t) / d_t, 2 * t / d_t
+    d, e = (1 - b * b) / d_b, 2 * b / d_b
+    side = (6 + 4 * t) / (1 + 2 * t - t * t)
+    h = (c + s) / 2
+    x = half + (2 + c * s + 3 * s - s * side) / c
+    y = 3 * half + (2 + 3 * c - c * side) / s
+    aa = d * (x + half) - e * (side - 1) + half
+    bb = (d + e) * (side - 1) - half
+    u10, v10 = 3 * half + c * s + 2 * s, c * (side - 1) - s - half
+    u11, v11 = c + 2 * s + half, 2 * c + (c * c - s * s) / 2 - 1
+    u12, v12 = u11 + 1, v10 - 1
+    u13 = 2 * c + s + half
+    u14, v14 = u13 + 1, v10 - 2
+    r, hh = side - 3 * half, v11 - 1
+    slack = c * (c + 4 - side)
+    lambda6, lambda13 = r - slack / (3 * s), hh - slack / 3
+
+    def rot(uu, vv):
+        return c * uu - s * vv, s * uu + c * vv
+
+    centres = (
+        (half, half),
+        (3 * half, half),
+        (half, 3 * half),
+        (half, side - half),
+        (side - half, half),
+        (lambda6, half),
+        (side - half, 3 * half),
+        (side - half, side - half),
+        (h, 2 + h),
+        rot(u10, v10),
+        rot(u11, v11),
+        rot(u12, v12),
+        rot(u13, lambda13),
+        rot(u14, v14),
+        (x, side - half),
+        (d * aa + e * bb, -e * aa + d * bb),
+        (side - half, y),
+    )
+    aux = {"c": c, "s": s, "d": d, "e": e, "T": slack, "R": r, "side": side,
+           "u": (c, s), "v": (-s, c), "p": (d, -e), "q": (e, d), "lambda6": lambda6,
+           "uv": {9: (c * h + s * (2 + h), -s * h + c * (2 + h)), 11: (u11, v11),
+                  13: (u13, lambda13)}}
+    return side, aux, centres
+
+
+def root_boxes():
+    d237 = json.loads(EXP237.read_text())
+    d238 = json.loads(EXP238.read_text())
+    m237 = tuple(Q(v) for v in d237["box"]["midpoint"])
+    r237 = tuple(Q(v) for v in d237["inclusion_bounds"])
+    m238 = tuple(Q(v) for v in d238["geometry"]["box"]["midpoint"])
+    r238 = tuple(Q(v) for v in d238["geometry"]["box"]["inclusion_bounds"])
+    return (m237, r237), (m238, r238)
+
+
+def main() -> None:
+    (m237, r237), (m238, r238) = root_boxes()
+    print("exp-237 midpoint == exp-238 midpoint:", m237 == m238)
+    print("exp-237 radii == exp-238 radii:", r237 == r238)
+    inside = all(abs(m237[i] - m238[i]) <= r238[i] for i in range(2))
+    print("exp-237 midpoint inside exp-238 box:", inside)
+    print("radii:", [float(v) for v in r238])
+    # exp-238 box rounded outward to 10^-40 (the cover tool's convention) -- my own copy
+    grid = 10**40
+    box = [(Q(math.floor((m - r) * grid), grid), Q(math.ceil((m + r) * grid), grid))
+           for m, r in zip(m238, r238)]
+    print("10^-40 box widths:", [float(hi - lo) for lo, hi in box])
+
+    t, b = m238
+    side, aux, centres = layout(t, b)
+    sigma = (U - side) / 2
+    print(f"S* = {float(side):.15f}  U = {float(U)}  sigma = (U-S*)/2 = {float(sigma):.9e}")
+    c, s = aux["c"], aux["s"]
+    print(f"theta = {math.degrees(math.atan2(s, c)):.6f} deg, c = {float(c):.9f}, s = {float(s):.9f}")
+    print(f"T = {float(aux['T']):.9f}, T/s = {float(aux['T'] / s):.9f}, R = {float(aux['R']):.9f}")
+    print(f"family square 6: x in [R - T/s, R] = [{float(aux['R'] - aux['T'] / s):.6f}, {float(aux['R']):.6f}] (corner frame)")
+    x5, y5 = centres[4]
+    print("square 5 on right wall and bottom wall exactly:", x5 + HALF == side, y5 - HALF == 0)
+    # 9/11 and 11/13 stacks in the (u, v) frame
+    u9, v9 = aux["uv"][9]
+    u11, v11 = aux["uv"][11]
+    u13, v13 = aux["uv"][13]
+    tau0, d0 = u9 - u11, v9 - v11
+    tau1, d1 = u11 - u13, v11 - v13
+    print(f"9/11: tau0 = {float(tau0):.15f}  D0 = {float(d0):.15f}  (D0 == 1: {d0 == 1})")
+    print(f"11/13: tau1 = {float(tau1):.15f}  D1 = {float(d1):.15f}  (D1 == 1 + T/3: {d1 == 1 + aux['T'] / 3})")
+    print(f"tau0 == c(s-1): {tau0 == c * (s - 1)}; tau1 == s - c: {tau1 == s - c}")
+    # cross-check with Cartesian centres
+    cx9, cy9 = centres[8]
+    cx11, cy11 = centres[10]
+    print("stack 9/11 from Cartesian:", float(c * (cx9 - cx11) + s * (cy9 - cy11)), float(-s * (cx9 - cx11) + c * (cy9 - cy11)))
+
+    mp.mp.dps = 60
+    r = mp.mpf(1) / 5000
+    sec, tan = 1 / mp.cos(r), mp.tan(r)
+    ux, uy, vx, vy = (mp.mpf(v.numerator) / v.denominator for v in (c, s, -s, c))
+    tau0m, d0m, tau1m, d1m = (mp.mpf(v.numerator) / v.denominator for v in (tau0, d0, tau1, d1))
+    w1 = abs(tan * ux - vx) + abs(tan * uy - vy)
+    b_star = sec - d0m + tau0m * tan - r * tan - r * w1
+    z_star = d1m + d0m - 2 * sec - (tau0m + tau1m) * tan + r * tan + r * w1
+    print(f"b* = {mp.nstr(b_star, 15)}  b*/r = {mp.nstr(b_star / r, 15)}")
+    print(f"z* = {mp.nstr(z_star, 15)}")
+    print(f"receipt b* = -0.00033699133862..  ratio -1.68495669..; receipt z* = 0.02410032492")
+    print("b* > -1/2500:", b_star > -mp.mpf(1) / 2500, " margin:", mp.nstr(b_star + mp.mpf(1) / 2500, 8))
+    print("z* < 1/16:", z_star < mp.mpf(1) / 16, " z* < 1/32:", z_star < mp.mpf(1) / 32)
+    # lemma hypotheses on the ranges the tool uses
+    b_low = -mp.mpf(1691) / 1024
+    reach_u = r * (abs(ux) + abs(uy))
+    reach_v = r * (abs(vx) + abs(vy))
+    lat_hi = tau0m + reach_u + r
+    lat_abs = abs(tau0m) + reach_u + r
+    d_lo = d0m - reach_v + b_low
+    d_abs = max(abs(d0m - reach_v + b_low), abs(d0m + reach_v + mp.mpf(3) / 40))
+    print("9/11 hyp: |T|+|D| sin r < 1:", lat_abs + d_abs * mp.sin(r) < 1,
+          "; D > -1 + |T| sin r:", d_lo > -1 + lat_abs * mp.sin(r), "; T <= -sin r:", lat_hi <= -mp.sin(r))
+    lat_hi = tau1m + 2 * r
+    lat_abs = abs(tau1m) + 2 * r
+    d_lo = d1m - mp.mpf(3) / 40 - mp.mpf(1) / 32
+    d_abs = max(abs(d_lo), abs(d1m - b_star + mp.mpf(1) / 20))
+    print("11/13 hyp: |T|+|D| sin r < 1:", lat_abs + d_abs * mp.sin(r) < 1,
+          "; D > -1 + |T| sin r:", d_lo > -1 + lat_abs * mp.sin(r), "; T <= -sin r:", lat_hi <= -mp.sin(r))
+    # the shrink lemma constant
+    print("3/2 - sqrt2 =", mp.nstr(mp.mpf(3) / 2 - mp.sqrt(2), 8), "; H(1+r) + r sqrt2 - 1/2 =",
+          mp.nstr((mp.mpf(1) / 2 - 2 * r) * (1 + r) + r * mp.sqrt(2) - mp.mpf(1) / 2, 8))
+    # the cell side-S2 of the unique design from its parameters
+    corner, mid_w, depth = Q(79, 100), Q(257, 375), Q(911, 1000)
+    s1_lo, s1_hi = U / 2 - mid_w / 2, U / 2 + mid_w / 2
+    s2 = (s1_hi, U - HALF - corner, HALF, HALF + depth)
+    print("side-S2 from design parameters:", [str(v) for v in s2], [float(v) for v in s2])
+    print("receipt cell:", ["4021/1500", "1693/500", "1/2", "1411/1000"])
+    print("family 6 box in cover frame x:", float(aux["R"] - aux["T"] / s + sigma), float(aux["R"] + sigma), "y: [0.5, 0.75] + sigma")
+
+
+if __name__ == "__main__":
+    main()

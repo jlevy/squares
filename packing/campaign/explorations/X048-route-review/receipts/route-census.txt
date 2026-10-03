@@ -1,0 +1,35 @@
+N_I=161100756 N_R=36 N_R2=3748 N_F=34892 sum=161244144 orbits=20155518.0
+binom(36,17)=8597496600  2^16*3^9=1289945088
+alt sum = 161100756
+k(interior) : states with interior sum k (boundary 17-k):
+  k= 0             0  (0.000)
+  k= 1             9  (0.000)
+  k= 2           720  (0.000)
+  k= 3         18720  (0.000)
+  k= 4        231840  (0.001)
+  k= 5       1605240  (0.010)
+  k= 6       6787872  (0.042)
+  k= 7      18450432  (0.115)
+  k= 8      33256080  (0.206)
+  k= 9      40398930  (0.251)
+  k=10      33256080  (0.206)
+  k=11      18450432  (0.115)
+  k=12       6787872  (0.042)
+  k=13       1605240  (0.010)
+  k=14        231840  (0.001)
+  k=15         18720  (0.000)
+  k=16           720  (0.000)
+  k=17             9  (0.000)
+sum 161100756
+fraction with interior >= 10 (killed by s(10) cut on the interior 3x3 block): 0.3746
+fraction with interior >= 11: 0.1682
+ring signatures: 65536  interior signatures: 19683
+baseline recount: 161100756
+cuts 3x3<=10 2x2<=None row<=None : survivors 124524255 (0.7730 of raw, ~15565531 orbits)
+cuts 3x3<=9 2x2<=None row<=None : survivors 78974315 (0.4902 of raw, ~9871789 orbits)
+cuts 3x3<=None 2x2<=5 row<=None : survivors 82946599 (0.5149 of raw, ~10368324 orbits)
+cuts 3x3<=9 2x2<=5 row<=None : survivors 61563363 (0.3821 of raw, ~7695420 orbits)
+cuts 3x3<=None 2x2<=None row<=4 : survivors 146311179 (0.9082 of raw, ~18288897 orbits)
+cuts 3x3<=9 2x2<=5 row<=4 : survivors 51624954 (0.3205 of raw, ~6453119 orbits)
+cuts 3x3<=9 2x2<=6 row<=4 : survivors 66594554 (0.4134 of raw, ~8324319 orbits)
+cuts 3x3<=10 2x2<=5 row<=4 : survivors 67149846 (0.4168 of raw, ~8393730 orbits)

@@ -383,20 +383,43 @@ def test_the_selftest_receipt_binds_the_binary_digest(tree: Tree) -> None:
     assert receipt["argv"][-1] == "--selftest"
 
 
-# --- archive digests bind validity to an immutable object (D-044) -----------------
+# --- a stored verification receipt is a record, never a licence (D-044) ----------
 
 
-def test_record_refuses_an_archive_edited_after_it_was_verified(tree: Tree) -> None:
+STALE_VERIFICATION = {"verified": True, "archive_sha256": "0" * 64, "poses_checked": 1}
+
+
+def test_record_replaces_a_stale_verification_receipt_with_its_own_pass(tree: Tree) -> None:
+    """`record` re-decides the geometry every time, so an older receipt is replaced.
+
+    Nothing compares the two digests (OR-16): the separate-process pass is the check,
+    and the archive keeps exactly one receipt, naming the bytes that pass decided.
+    """
     eid = runner.claim("H-900", "fixture", 1.0)
     runner.execute(eid)
     archive = tree.archive(eid)
-    runner.append_receipt(
-        archive,
-        runner.VERIFICATION_METADATA,
-        {"verified": True, "archive_sha256": "0" * 64, "poses_checked": 1},
-    )
+    runner.append_receipt(archive, runner.VERIFICATION_METADATA, STALE_VERIFICATION)
 
-    with pytest.raises(runner.RefusalError, match="changed after it was verified"):
+    runner.record(eid, operator="fixture")
+
+    results, receipts = runner.scan_archive(archive)
+    verification = receipts[runner.VERIFICATION_METADATA]
+    assert verification is not None
+    assert verification["verifier"] == "sqpack.verify.verify_packing"
+    assert verification["archive_sha256"] == runner.archive_digest(results)
+    assert receipts[runner.EXECUTION_METADATA] is not None
+    assert receipts[runner.SELFTEST_METADATA] is not None
+
+
+def test_a_stored_passing_receipt_cannot_carry_a_forged_line(
+    tree: Tree, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("RUNNER_FIXTURE_MODE", "forged-overlap")
+    eid = runner.claim("H-900", "fixture", 1.0)
+    runner.execute(eid)
+    runner.append_receipt(tree.archive(eid), runner.VERIFICATION_METADATA, STALE_VERIFICATION)
+
+    with pytest.raises(runner.GuardError, match="independent pose verification refused"):
         runner.record(eid, operator="fixture")
 
 

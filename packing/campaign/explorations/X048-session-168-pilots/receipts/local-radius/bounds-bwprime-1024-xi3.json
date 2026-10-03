@@ -1,0 +1,59 @@
+{
+ "checker_constants": 0.9505,
+ "constant_over_signed_row_mean": 1.9902,
+ "direction": "xi3:1",
+ "dual_l1": 272.8506,
+ "joint_at_checker_dual": 0.4514,
+ "joint_optimised": 0.4514,
+ "largest_loads": [
+  {
+   "row": "pair:16:17:0",
+   "share": 0.1041
+  },
+  {
+   "row": "pair:15:16:0",
+   "share": 0.1022
+  },
+  {
+   "row": "pair:10:15:0",
+   "share": 0.0779
+  },
+  {
+   "row": "pair:14:17:0",
+   "share": 0.0712
+  },
+  {
+   "row": "pair:3:11:0",
+   "share": 0.0673
+  },
+  {
+   "row": "pair:2:13:0",
+   "share": 0.0649
+  },
+  {
+   "row": "pair:3:9:0",
+   "share": 0.0503
+  },
+  {
+   "row": "pair:11:12:0",
+   "share": 0.0473
+  },
+  {
+   "row": "pair:9:10:0",
+   "share": 0.0431
+  },
+  {
+   "row": "pair:13:14:1",
+   "share": 0.0391
+  }
+ ],
+ "mass_share_on_own_square_rows": 0.1706,
+ "mode": "bounds",
+ "point": [
+  "0",
+  "-1/2500",
+  "-1/8"
+ ],
+ "row_by_row_signed": 0.547,
+ "schema": "n17-local-radius/v1"
+}

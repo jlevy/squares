@@ -1,0 +1,4 @@
+kernel verifier W7 first 3 steps, 6 rows/step, Fraction      23.0 s  (stopped at: final group 0)
+kernel verifier W7 first 3 steps, 6 rows/step, mpq            6.4 s  (stopped at: final group 0)
+kernel checker  W7 first 3 steps, every row, Fraction  seed=  0.3 s replay=    29.9 s  (stopped at: final owned hulls differ from accepted induction)
+kernel checker  W7 first 3 steps, every row, mpq       seed=  0.3 s replay=    10.4 s  (stopped at: final owned hulls differ from accepted induction)

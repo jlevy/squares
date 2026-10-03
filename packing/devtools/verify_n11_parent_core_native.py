@@ -1,17 +1,16 @@
-"""Run the frozen native n11 parent-core checker on an n11 certificate other than Kleddamag's.
+"""Run the native n11 parent-core checker on an n11 certificate other than Kleddamag's.
 
 `devtools.verify_kleddamag_n11_native` already reads the parent side ``A``, every row's
 core side ``B``, the charges, the budget and the minimum charge from the certificate; the
 container side ``191/50`` and ``n = 11`` are fixed by the loader, and every n11
 certificate retained here keeps them. Its one Kleddamag-specific constant is the SHA-256
-pin ``REVIEWED_SHA256``, which binds that tool to Kleddamag's release. That file is a
-frozen proof input of the retained complete run
-(`devtools.audit_kleddamag_n11_native.PROOF_INPUTS`, compared with its Git blob at
-``PROOF_COMMIT``), so it is not edited. This tool clears the pin for one run and calls the
-frozen ``run`` unchanged; the certificate is identified by its repository path and the
-Git revision in the receipt's provenance. The receipt adds ``certificate``, that path, and
-``proof_inputs``, which records whether every frozen input still equals its
-``PROOF_COMMIT`` blob.
+pin ``REVIEWED_SHA256``, which binds that tool to Kleddamag's release. This tool clears
+the pin for one run and calls the same ``run`` unchanged; the certificate is identified by
+its repository path and the Git revision in the receipt's provenance. The receipt adds
+``certificate``, that path, and ``proof_inputs``, which names ``PROOF_COMMIT`` -- the
+revision of the retained complete Kleddamag run -- and, for information only, which of
+that run's inputs have changed since (`proof_input_drift` in
+`devtools.audit_kleddamag_n11_native`; ``null`` when this checkout cannot tell).
 
 A certificate retained as ``X.gz`` is read through `devtools.retained_data`, and one inside
 the Wang and Li archive through `devtools.audit_wang_li_n11.read_bytes`; either is handed
@@ -41,7 +40,7 @@ from strif import atomic_output_file
 
 from devtools import audit_wang_li_n11 as audit
 from devtools import verify_kleddamag_n11_native as frozen
-from devtools.audit_kleddamag_n11_native import PROOF_COMMIT, check_proof_code
+from devtools.audit_kleddamag_n11_native import PROOF_COMMIT, proof_input_drift
 from devtools.retained_data import read_retained_bytes
 from sqpack.fractional.parent_core import (
     ParentCoreCertificate,
@@ -76,15 +75,12 @@ def run_certificate(
     journal_path: Path,
     source_state: tuple[str, bool],
 ) -> dict[str, Any]:
-    """Run the frozen checker without its release pin and add the proof-input manifest."""
-    try:
-        proof_inputs: dict[str, Any] = {
-            "proof_commit": PROOF_COMMIT,
-            "unchanged": True,
-            "blobs": list(check_proof_code()),
-        }
-    except ValueError as error:
-        proof_inputs = {"proof_commit": PROOF_COMMIT, "unchanged": False, "error": str(error)}
+    """Run the checker without its release pin and note its drift since `PROOF_COMMIT`."""
+    drift = proof_input_drift()
+    proof_inputs: dict[str, Any] = {
+        "proof_commit": PROOF_COMMIT,
+        "changed_since": None if drift is None else list(drift),
+    }
     with tempfile.TemporaryDirectory(prefix="n11-native-") as scratch:
         plain = Path(scratch) / "certificate.json"
         plain.write_bytes(

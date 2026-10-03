@@ -1,0 +1,27 @@
+"""Micro-benchmark of the branch-and-bound verifier's arithmetic on A's certificate: the
+Farkas/bound combination_min and the cut check, Fraction vs gmpy2 mpq; plus parse cost."""
+import gzip, json, sys, time, random
+from pathlib import Path
+from fractions import Fraction as Q
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools import verify_n17_bb_certificate as V
+X = Path("/home/user/squares/packing/campaign/explorations/X048-session-168-pilots/certificates/A")
+name = V.manifest_from_readme(X)
+t = time.perf_counter()
+ver = V.Verifier(X, name)
+tree = V.load_tree(ver)
+print(f"load_tree (all {len(ver.manifest['chunks'])} chunks, hash-checked, indexed): {time.perf_counter()-t:.1f} s; nodes={len(tree.index)}")
+# take 300 random closed-lp nodes and their parents, check them with the verifier, timing per node
+rng = random.Random(3)
+lp = [i for i, n in tree.index.items() if n["closed"] == "lp"]
+chosen = set(rng.sample(lp, 150))
+others = [i for i, n in tree.index.items() if n["closed"] is None]
+chosen.update(rng.sample(others, 150))
+for i in list(chosen):
+    p = tree.index[i]["parent"]
+    while p is not None and p not in chosen:
+        chosen.add(p); p = tree.index[p]["parent"]
+t = time.perf_counter()
+checked, failed = V.check_nodes(ver, tree, chosen, progress=False, clock=t)
+dt = time.perf_counter() - t
+print(f"check_nodes on {checked} nodes: {dt:.2f} s = {1e3*dt/checked:.1f} ms/node (full run: 41598 nodes in 1549.8 s = 37.3 ms/node); counts={ver.counts}")

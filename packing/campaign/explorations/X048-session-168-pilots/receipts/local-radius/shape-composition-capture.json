@@ -1,0 +1,113 @@
+{
+ "box": [
+  [
+   "0",
+   "4/25"
+  ],
+  [
+   "-1/128",
+   "11/100"
+  ],
+  [
+   "-13/200",
+   "1/30"
+  ]
+ ],
+ "floor": "1/1024",
+ "largest_point_ratios": [
+  {
+   "coordinate": "omega11",
+   "ratio": 0.9572
+  },
+  {
+   "coordinate": "xi3",
+   "ratio": 0.953
+  },
+  {
+   "coordinate": "u11",
+   "ratio": 0.9515
+  },
+  {
+   "coordinate": "xi8",
+   "ratio": 0.947
+  },
+  {
+   "coordinate": "eta8",
+   "ratio": 0.9384
+  },
+  {
+   "coordinate": "xi12",
+   "ratio": 0.8753
+  },
+  {
+   "coordinate": "omega8",
+   "ratio": 0.7698
+  },
+  {
+   "coordinate": "eta16",
+   "ratio": 0.7438
+  }
+ ],
+ "mode": "shape",
+ "outcome": "settled",
+ "passes_point_test": true,
+ "point_ratio": 0.9572,
+ "position_share": "1/3",
+ "radii_over_floor": {
+  "eta1": "11/32",
+  "eta10": "11/32",
+  "eta12": "11/32",
+  "eta14": "11/32",
+  "eta15": "11/32",
+  "eta16": "11/32",
+  "eta17": "11/32",
+  "eta2": "11/32",
+  "eta3": "11/32",
+  "eta4": "11/32",
+  "eta5": "11/32",
+  "eta7": "11/32",
+  "eta8": "39/64",
+  "eta9": "11/32",
+  "omega1": "1",
+  "omega10": "1",
+  "omega11": "249/64",
+  "omega12": "1",
+  "omega13": "1",
+  "omega14": "1",
+  "omega15": "1",
+  "omega16": "1",
+  "omega17": "1",
+  "omega2": "1",
+  "omega3": "1",
+  "omega4": "1",
+  "omega5": "1",
+  "omega7": "1",
+  "omega8": "1",
+  "omega9": "1",
+  "u11": "97/64",
+  "u13": "11/32",
+  "xi1": "11/32",
+  "xi10": "11/32",
+  "xi12": "11/32",
+  "xi14": "11/32",
+  "xi15": "11/32",
+  "xi16": "11/32",
+  "xi17": "11/32",
+  "xi2": "11/32",
+  "xi3": "39/64",
+  "xi4": "11/32",
+  "xi7": "11/32",
+  "xi8": "13/16",
+  "xi9": "11/32"
+ },
+ "schema": "n17-local-radius/v1",
+ "steps": 7,
+ "theta": 0.95,
+ "widened": {
+  "eta8": "39/64",
+  "omega11": "249/64",
+  "u11": "97/64",
+  "xi3": "39/64",
+  "xi8": "13/16"
+ }
+}

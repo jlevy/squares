@@ -1,0 +1,123 @@
+//! The collision facet check of `integer_universal_collision` on W7's heaviest step, in
+//! Rust with num-bigint, with and without a facet cache. Same inequalities, same count.
+use num_bigint::BigInt;
+use num_integer::Integer;
+use num_traits::{Signed, Zero};
+use serde::Deserialize;
+use std::collections::HashMap;
+use std::time::Instant;
+
+type H = [BigInt; 3];
+
+#[derive(Deserialize)]
+struct Partner { domain: Vec<[String; 3]>, core: Vec<[String; 3]> }
+#[derive(Deserialize)]
+struct Job { core: Vec<[String; 3]>, region: Vec<[String; 3]>, partners: Vec<Partner> }
+#[derive(Deserialize)]
+struct Input { jobs: Vec<Job> }
+
+fn parse(p: &[String; 3]) -> H {
+    [p[0].parse().unwrap(), p[1].parse().unwrap(), p[2].parse().unwrap()]
+}
+
+fn cmp_h(a: &H, b: &H) -> std::cmp::Ordering {
+    let dx = &a[0] * &b[2] - &b[0] * &a[2];
+    if !dx.is_zero() { return dx.cmp(&BigInt::zero()); }
+    let dy = &a[1] * &b[2] - &b[1] * &a[2];
+    dy.cmp(&BigInt::zero())
+}
+
+fn orient(a: &H, b: &H, c: &H) -> BigInt {
+    &a[0] * (&b[1] * &c[2] - &b[2] * &c[1]) - &a[1] * (&b[0] * &c[2] - &b[2] * &c[0]) + &a[2] * (&b[0] * &c[1] - &b[1] * &c[0])
+}
+
+fn hull(mut pts: Vec<H>) -> Vec<H> {
+    pts.sort_by(cmp_h);
+    pts.dedup_by(|a, b| cmp_h(a, b) == std::cmp::Ordering::Equal);
+    if pts.len() <= 1 { return pts; }
+    let mut lower: Vec<H> = Vec::new();
+    for p in &pts {
+        while lower.len() > 1 && orient(&lower[lower.len() - 2], &lower[lower.len() - 1], p) <= BigInt::zero() { lower.pop(); }
+        lower.push(p.clone());
+    }
+    let mut upper: Vec<H> = Vec::new();
+    for p in pts.iter().rev() {
+        while upper.len() > 1 && orient(&upper[upper.len() - 2], &upper[upper.len() - 1], p) <= BigInt::zero() { upper.pop(); }
+        upper.push(p.clone());
+    }
+    lower.pop(); upper.pop();
+    lower.extend(upper);
+    lower
+}
+
+fn facets(partner: &[H], query: &[H]) -> Vec<(BigInt, BigInt, BigInt)> {
+    let mut pts = Vec::with_capacity(partner.len() * query.len());
+    for p in partner { for q in query {
+        pts.push([&p[0] * &q[2] - &q[0] * &p[2], &p[1] * &q[2] - &q[1] * &p[2], &p[2] * &q[2]]);
+    }}
+    let d = hull(pts);
+    let n = d.len();
+    (0..n).map(|i| {
+        let (a, b) = (&d[i], &d[(i + 1) % n]);
+        let nx = &b[1] * &a[2] - &a[1] * &b[2];
+        let ny = &a[0] * &b[2] - &b[0] * &a[2];
+        let up = &a[0] * &b[1] - &a[1] * &b[0];
+        let g = nx.gcd(&ny).gcd(&up);
+        if g.is_zero() || g == BigInt::from(1) { (nx, ny, up) } else { (&nx / &g, &ny / &g, &up / &g) }
+    }).collect()
+}
+
+fn check_pair(fs: &[(BigInt, BigInt, BigInt)], domain: &[H], region: &[H]) -> u64 {
+    let mut checks = 0;
+    for (nx, ny, up) in fs {
+        let mut best: Option<(BigInt, &BigInt)> = None;
+        for c in domain {
+            let v = nx * &c[0] + ny * &c[1];
+            match &best {
+                None => best = Some((v, &c[2])),
+                Some((bv, bz)) => if &v * *bz < bv * &c[2] { best = Some((v, &c[2])); }
+            }
+        }
+        let (v, den) = best.unwrap();
+        let rhs = up * den + v;
+        for r in region {
+            checks += 1;
+            assert!((nx * &r[0] + ny * &r[1]) * den <= &rhs * &r[2]);
+        }
+    }
+    checks
+}
+
+fn main() {
+    let text = std::fs::read_to_string("../bench_collision_int.json").unwrap();
+    let input: Input = serde_json::from_str(&text).unwrap();
+    let jobs: Vec<(Vec<H>, Vec<H>, Vec<(Vec<H>, Vec<H>)>)> = input.jobs.iter().map(|j| (
+        j.core.iter().map(parse).collect(),
+        j.region.iter().map(parse).collect(),
+        j.partners.iter().map(|p| (p.domain.iter().map(parse).collect(), p.core.iter().map(parse).collect())).collect(),
+    )).collect();
+    let pairs: usize = jobs.iter().map(|j| j.2.len()).sum();
+    // Uncached: as the checker does it.
+    let t = Instant::now(); let mut checks = 0u64;
+    for (core, region, partners) in &jobs {
+        for (domain, pcore) in partners {
+            let fs = facets(pcore, core);
+            checks += check_pair(&fs, domain, region);
+        }
+    }
+    let dt = t.elapsed().as_secs_f64();
+    println!("rust BigInt uncached      {dt:8.3} s  {:8.2} us/pair  checks={checks}", 1e6 * dt / pairs as f64);
+    // Cached facets per (core, partner core) by their string keys.
+    let t = Instant::now(); let mut checks = 0u64;
+    let mut cache: HashMap<(String, String), Vec<(BigInt, BigInt, BigInt)>> = HashMap::new();
+    for (ji, (core, region, partners)) in jobs.iter().enumerate() {
+        let ck = format!("{:?}", input.jobs[ji].core);
+        for (pi, (domain, pcore)) in partners.iter().enumerate() {
+            let pk = format!("{:?}", input.jobs[ji].partners[pi].core);
+            let fs = cache.entry((ck.clone(), pk)).or_insert_with(|| facets(pcore, core));
+            checks += check_pair(fs, domain, region);
+        }
+    }
+    let dt = t.elapsed().as_secs_f64();
+    println!("rust BigInt facet cache   {dt:8.3} s  {:8.2} us/pair  checks={checks}  cached={}", 1e6 * dt / pairs as f64, cache.len());
+}

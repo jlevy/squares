@@ -1,0 +1,117 @@
+{
+ "cover_removes": 539,
+ "cover_share": 0.23807420494699646,
+ "falsified_so_far": true,
+ "falsifier": "the flags' greedy cover removes less than half of the residue",
+ "flagged": 1,
+ "greedy_cover": [
+  {
+   "best_penetration": 0.004189997328822415,
+   "cells": [
+    "corner-SW",
+    "corner-SE",
+    "side-S0",
+    "side-W0",
+    "side-E0",
+    "side-S1",
+    "side-S2",
+    "interior-SW"
+   ],
+   "mask": 70099,
+   "orbits_left": 1725,
+   "removes": 539
+  }
+ ],
+ "module_sha256": "4d6e0aab6e701932454dcd11f5353ca9d78bb4ae030695db73bc8e7724c110c2",
+ "plan_sha256": "891a65e4e0d1351b79343783f96469e0d00ba6bc6b8ede241d93416060d6005e",
+ "planned": 423756,
+ "queues": [
+  {
+   "coverage_range": [
+    487,
+    1069
+   ],
+   "flagged": 1,
+   "hit_rate": 0.0003333333333333333,
+   "name": "arity 8, three to five missing pairs",
+   "planned": 25943,
+   "screen_unplaced": 1,
+   "search_seconds": 442.7,
+   "searched": 3000
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 9, at most two missing pairs",
+   "planned": 4303,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 10, at most two missing pairs",
+   "planned": 1140,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 8, six or more missing pairs",
+   "planned": 43861,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 9, three to five missing pairs",
+   "planned": 26499,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 10, three to five missing pairs",
+   "planned": 15300,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 9, six or more missing pairs",
+   "planned": 111338,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  },
+  {
+   "coverage_range": null,
+   "flagged": 0,
+   "hit_rate": null,
+   "name": "arity 10, six or more missing pairs",
+   "planned": 195372,
+   "screen_unplaced": 0,
+   "search_seconds": 0,
+   "searched": 0
+  }
+ ],
+ "residue_orbits": 2264,
+ "schema": "n17-residue-universe-summary/v1",
+ "searched": 3000,
+ "status": "float search, not a certificate: a flag is a class the selector's search with the finish could not place; the prover must certify it before it excludes anything"
+}

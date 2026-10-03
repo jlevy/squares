@@ -1,9 +1,17 @@
-"""Reconcile the retained native n11 receipt, journal, premises and Git provenance.
+"""Reconcile the retained native n11 receipt and journal with the exact source premises.
 
 This is not an interval-coverage replay or another confirmation method. The
 receipt and journal are related outputs of one historical execution; matching
-them cannot authenticate coordinated invented data. Git identity establishes
-which unchanged proof implementation the retained run can be reused with.
+them cannot authenticate coordinated invented data.
+
+The run is a fact about the Git revision that produced it, ``PROOF_COMMIT``, which
+the receipt records. Code, dependency and interpreter changes since then neither
+invalidate it nor oblige anyone to run it again, so nothing here compares the
+working tree with that revision as a condition of passing: `proof_input_drift`
+reports, as information, which of the run's inputs have changed since. Whether
+the current verifier still decides the catalogue as the run did is a test
+question, answered on a single retained row in
+``tests/test_native_parent_core_receipt.py`` rather than by freezing files.
 
 Run from packing with ``python -m devtools.audit_kleddamag_n11_native``. The
 normal quick test lane performs the same reconciliation. ``--output`` retains
@@ -13,9 +21,9 @@ its findings without changing the immutable coverage receipt or row journal.
 from __future__ import annotations
 
 import argparse
-import ast
 import json
 import math
+import os
 import subprocess
 from dataclasses import dataclass
 from math import ceil
@@ -34,10 +42,10 @@ JOURNAL = RECEIPT.with_suffix(".rows.jsonl")
 RECONCILIATION = RECEIPT.with_name("session-153-native-reconciliation.json")
 MAX_DOCUMENT_BYTES = 16 * 1024 * 1024
 
-# The frozen CLI's complete local import closure, including package initializers.
-# certificate.py imports sweep.py for other APIs; native coverage does not call
-# that sweep. Keeping the whole imported file is a conservative reuse boundary.
-# Third-party and interpreter requirements are bound through the locked project.
+#: What the retained run executed at ``PROOF_COMMIT``: the CLI's local import closure,
+#: package initializers included. Used only to report drift since that revision; a
+#: change to any of them fails nothing. The environment it ran under is in the receipt's
+#: provenance and is not tracked here at all.
 PROOF_INPUTS = (
     "packing/devtools/__init__.py",
     "packing/devtools/verify_kleddamag_n11_native.py",
@@ -55,9 +63,6 @@ PROOF_INPUTS = (
     "packing/src/sqpack/fractional/threshold_interval.py",
     "packing/src/sqpack/fractional/parent_core.py",
     "packing/src/sqpack/fractional/parent_core_interval.py",
-    "packing/.python-version",
-    "packing/pyproject.toml",
-    "packing/uv.lock",
 )
 
 
@@ -72,74 +77,58 @@ def _git(repository: Path, *arguments: str) -> bytes:
     ).stdout
 
 
-def check_proof_code(
+def proof_input_drift(
     repository: Path = REPO,
     *,
     revision: str = PROOF_COMMIT,
     paths: tuple[str, ...] = PROOF_INPUTS,
-) -> tuple[dict[str, str], ...]:
-    """Compare current proof inputs to their historical Git blobs, including dirt."""
-    _git(repository, "merge-base", "--is-ancestor", revision, "HEAD")
-    manifest: list[dict[str, str]] = []
-    for relative in paths:
-        frozen = _git(repository, "cat-file", "blob", f"{revision}:{relative}")
-        _require(
-            (repository / relative).read_bytes() == frozen,
-            f"proof input differs from frozen Git blob: {relative}",
+) -> tuple[str, ...] | None:
+    """The proof inputs whose working bytes differ from `revision`, for information only.
+
+    `None` means the answer is unknown here -- no Git, or a clone without that commit --
+    which is no more a failure than drift is. The retained run stays bound to its
+    revision either way.
+    """
+    try:
+        changed = _git(
+            repository,
+            "diff",
+            "--no-ext-diff",
+            "--no-renames",
+            "--name-only",
+            "-z",
+            revision,
+            "--",
+            *paths,
         )
-        blob = _git(repository, "rev-parse", f"{revision}:{relative}").decode().strip()
-        manifest.append({"path": relative, "git_blob": blob})
-    return tuple(manifest)
+    except OSError, subprocess.CalledProcessError:
+        return None
+    return tuple(sorted(os.fsdecode(path) for path in changed.split(b"\0") if path))
 
 
-def check_import_inventory(repository: Path = REPO) -> None:
-    """Refuse an omitted local import or package initializer in the frozen inventory."""
-    paths = set(PROOF_INPUTS)
-    for relative in PROOF_INPUTS:
-        if not relative.endswith(".py"):
-            continue
-        source = _git(repository, "cat-file", "blob", f"{PROOF_COMMIT}:{relative}")
-        for node in ast.walk(ast.parse(source)):
-            names: list[str] = []
-            if isinstance(node, ast.Import):
-                names = [alias.name for alias in node.names]
-            elif isinstance(node, ast.ImportFrom):
-                _require(
-                    node.level == 0, "frozen import inventory needs relative-import review"
-                )
-                if node.module is not None:
-                    names = [node.module]
-            for name in names:
-                package = name.split(".")[0]
-                if package not in ("sqpack", "devtools"):
-                    continue
-                prefix = "packing/src/" if package == "sqpack" else "packing/"
-                module = prefix + name.replace(".", "/")
-                _require(
-                    module + ".py" in paths or module + "/__init__.py" in paths,
-                    f"local import missing from frozen inventory: {name}",
-                )
-                parent = Path(module).parent
-                while parent.as_posix() != prefix.rstrip("/"):
-                    _require(
-                        (parent / "__init__.py").as_posix() in paths,
-                        f"package initializer missing from frozen inventory: {parent}",
-                    )
-                    parent = parent.parent
+def drift_line(drift: tuple[str, ...] | None, revision: str = PROOF_COMMIT) -> str:
+    """One informational line on proof-input drift; never a verdict."""
+    if drift is None:
+        return f"proof-input drift since {revision[:12]}: unknown (no Git history here)"
+    if not drift:
+        return f"proof inputs unchanged since {revision[:12]}"
+    return (
+        f"proof inputs changed since {revision[:12]} (informational; the run stays bound "
+        f"to that revision): {', '.join(drift)}"
+    )
 
 
 @dataclass(frozen=True, slots=True)
 class ReceiptContext:
     expected: dict[str, Any]
-    proof_inputs: tuple[dict[str, str], ...]
-    python_version: str
     counting_gap: str
 
 
 def prepare_context(repository: Path = REPO) -> ReceiptContext:
-    """Recompute exact premises and resource dimensions without any coverage search."""
-    manifest = check_proof_code(repository)
-    check_import_inventory(repository)
+    """Recompute exact premises and resource dimensions without any coverage search.
+
+    Reads only the certificate source: no Git history and no environment file.
+    """
     source = repository / SOURCE.relative_to(REPO)
     certificate = load_kleddamag_parent_core(source, expected_sha256=REVIEWED_SHA256)
     premises = validate_parent_core(certificate)
@@ -172,8 +161,6 @@ def prepare_context(repository: Path = REPO) -> ReceiptContext:
                 "int16_count_bytes": 2048 * len(data.members) * 2,
             },
         },
-        proof_inputs=manifest,
-        python_version=(repository / "packing/.python-version").read_text().strip(),
         counting_gap=str(certificate.n * certificate.minimum_charge - certificate.budget),
     )
 
@@ -247,11 +234,6 @@ def reconcile(
     _require(provenance.get("git_commit") == PROOF_COMMIT, "unexpected proof commit")
     _require(provenance.get("dirty") is False, "proof source was dirty")
     _require(provenance.get("certificate_sha256") == REVIEWED_SHA256, "wrong source identity")
-    python = provenance.get("python")
-    _require(
-        isinstance(python, str) and python.startswith(context.python_version + " "),
-        "proof interpreter disagrees with frozen pin",
-    )
     count = context.expected["catalogue_rows"]
     rows = receipt.get("rows")
     if not isinstance(rows, list) or len(rows) != count:
@@ -299,13 +281,12 @@ def reconcile(
     )
     _require(_same_json(rows, journal[1:]), "journal rows differ from final receipt")
     return {
-        "schema": "NativeParentCoreReceiptReconciliation/v1",
+        "schema": "NativeParentCoreReceiptReconciliation/v2",
         "status": "RECONCILED_RECEIPT_NOT_COVERAGE_REPLAY",
         "coverage_replayed": False,
         "additional_confirmation_method": False,
         "proof_commit": PROOF_COMMIT,
         "certificate_sha256": REVIEWED_SHA256,
-        "proof_inputs": context.proof_inputs,
         "rows_reconciled": count,
         "minimum_recorded_lower_units": least,
         "threshold_units": threshold,
@@ -318,12 +299,13 @@ def reconcile(
                 "matching cannot authenticate coordinated invented data."
             ),
             (
-                "Git identity establishes unchanged proof inputs, not historical execution. "
+                "The run is bound to proof_commit, the revision that produced it; later code, "
+                "dependency or interpreter changes neither invalidate nor re-establish it. "
                 "Coverage evidence remains the original complete run and its reviewed method."
             ),
             (
-                "The pinned runtime describes the original run; this reconciliation may run "
-                "on another supported host and does not reproduce its memory or timing."
+                "The recorded runtime describes the original run; this reconciliation may run "
+                "on another host and environment and does not reproduce its memory or timing."
             ),
         ],
     }
@@ -341,12 +323,10 @@ def main() -> int:
         if args.output is not None:
             with atomic_output_file(args.output, make_parents=True) as temporary:
                 temporary.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
-    except (OSError, ValueError, KeyError, TypeError, subprocess.CalledProcessError) as error:
+    except (OSError, ValueError, KeyError, TypeError) as error:
         parser.exit(1, f"receipt reconciliation refused: {error}\n")
-    print(
-        f"{result['status']}: {result['rows_reconciled']} rows; exact premises and "
-        f"{len(context.proof_inputs)} frozen Git inputs agree"
-    )
+    print(f"{result['status']}: {result['rows_reconciled']} rows; exact premises agree")
+    print(drift_line(proof_input_drift()))
     return 0
 
 

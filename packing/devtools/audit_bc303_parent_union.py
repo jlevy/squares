@@ -1,7 +1,10 @@
 """Independently replay a BC303 literal-parent receipt from raw source atoms.
 
-This audit imports no parent-mass reader. It checks source and execution identities,
-rebuilds all closed memberships, and reports both frozen budget comparisons.
+This audit imports no parent-mass reader. It rebuilds all closed memberships from the
+source atoms, checks every number the receipt reports, and reports both frozen budget
+comparisons. The source is identified by its proposal revision and repository-relative
+path and the run by the receipt's execution revision; the audit records them and
+compares no file with a Git blob (OR-16). The replay is the check.
 """
 
 from __future__ import annotations
@@ -9,19 +12,16 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import subprocess
 from fractions import Fraction
 from math import lcm
 from pathlib import Path
 from typing import cast
 
 SOURCE_REVISION = "39714308ce2081abbd76624387d134fee4be6deb"
-SOURCE_SHA256 = "c30b600d3d35f3851f0595e2c42962bf353721f9e72b0539bd691aec522e876f"
 SOURCE_PATH = (
     "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/"
     "bc-293-measure-free-96-25.json"
 )
-READER_PATH = "packing/devtools/read_bc303_parent_union.py"
 
 type Point = tuple[Fraction, Fraction]
 type Atom = tuple[Point, Fraction]
@@ -39,15 +39,9 @@ def _require(condition: bool, message: str) -> None:  # noqa: FBT001
         raise AuditError(message)
 
 
-def _blob(repository: Path, revision: str, path: str) -> bytes:
-    result = subprocess.run(
-        ("git", "-C", str(repository), "cat-file", "blob", f"{revision}:{path}"),
-        check=False,
-        capture_output=True,
-    )
-    if result.returncode:
-        raise AuditError(f"unavailable Git blob: {revision}:{path}")
-    return result.stdout
+def _git_blob(data: bytes) -> str:
+    """Git's blob id of some bytes, recorded so the source read can be found in history."""
+    return hashlib.sha1(b"blob %d\0" % len(data) + data, usedforsecurity=False).hexdigest()
 
 
 def audit(repository: Path, receipt_path: Path) -> dict[str, object]:
@@ -57,17 +51,9 @@ def audit(repository: Path, receipt_path: Path) -> dict[str, object]:
     receipt = cast(dict[str, object], json.loads(receipt_path.read_bytes()))
     _require(receipt.get("schema") == "bc303-literal-parent-union/v1", "receipt schema")
     _require(receipt.get("source_revision") == SOURCE_REVISION, "source revision")
-    _require(receipt.get("source_sha256") == SOURCE_SHA256, "source digest")
     revision = str(receipt["implementation_revision"])
     _require(len(revision) == 40, "execution revision")
     source = (root / SOURCE_PATH).read_bytes()
-    _require(hashlib.sha256(source).hexdigest() == SOURCE_SHA256, "source bytes")
-    for identity in (SOURCE_REVISION, revision):
-        _require(source == _blob(root, identity, SOURCE_PATH), "source Git blob")
-    _require(
-        (root / READER_PATH).read_bytes() == _blob(root, revision, READER_PATH),
-        "execution reader blob",
-    )
 
     document = cast(dict[str, object], json.loads(source))
     raw_rows = cast(list[list[str]], document["atoms"])
@@ -166,7 +152,8 @@ def audit(repository: Path, receipt_path: Path) -> dict[str, object]:
     return {
         "audit_schema": "bc303-literal-parent-union-independent/v1",
         "source_revision": SOURCE_REVISION,
-        "source_sha256": SOURCE_SHA256,
+        "source_path": SOURCE_PATH,
+        "source_git_blob": _git_blob(source),
         "implementation_revision": revision,
         "source_atom_count": len(atoms),
         "distinct_sites": len(sites),

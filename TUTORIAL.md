@@ -12,10 +12,11 @@ authoritative wherever the two appear to differ.
 Several outside ideas do real work here—linear programming in
 [§2](#2-the-configuration-space), then algebraic number fields, constrained optimality,
 rigidity, certified numerics, and symbolic elimination in
-[§5](#5-algebra-versus-numerics).
-Each is introduced where it is first needed, and [§11](#11-further-reading) says where
+[§5](#5-algebra-versus-numerics), and group actions and branch and bound in
+[§9](#9-how-an-optimality-proof-is-built).
+Each is introduced where it is first needed, and [§12](#12-further-reading) says where
 to learn it properly.
-[§10](#10-a-notation-card) collects every symbol on one page.
+[§11](#11-a-notation-card) collects every symbol on one page.
 
 ## Contents
 
@@ -27,17 +28,18 @@ to learn it properly.
 6. [What Is Built, and What Is Not](#6-what-is-built-and-what-is-not)
 7. [How the Search Is Approached, and Why](#7-how-the-search-is-approached-and-why)
 8. [What Is Known, and What Is Not](#8-what-is-known-and-what-is-not)
-9. [A Vocabulary Card](#9-a-vocabulary-card)
-10. [A Notation Card](#10-a-notation-card)
-11. [Further Reading](#11-further-reading)
-12. [Where to Go Next](#12-where-to-go-next)
+9. [How an Optimality Proof Is Built](#9-how-an-optimality-proof-is-built)
+10. [A Vocabulary Card](#10-a-vocabulary-card)
+11. [A Notation Card](#11-a-notation-card)
+12. [Further Reading](#12-further-reading)
+13. [Where to Go Next](#13-where-to-go-next)
 
 ## 1. The Problem
 
 $s(n)$ is the side of the smallest square that contains $n$ non-overlapping unit
 squares, each free to translate **and rotate**. Here, “smallest” is exact rather than
 approximate: the set of achievable sides is closed, so the infimum is attained and a
-best packing exists ([Martin 2000](#11-further-reading)).
+best packing exists ([Martin 2000](#12-further-reading)).
 
 Two bounds are immediate:
 
@@ -488,7 +490,7 @@ $n$-vector: $\theta = (\theta_1, \ldots, \theta_n)$ is all $n$ angles at once, a
 and $y$ are the $n$ centre coordinates each.
 So “fix the angles” always means fix all $n$ of them.
 Counting scalars, a configuration is $3n + 1$ real numbers—**34 at $n = 11$**.
-[§10](#10-a-notation-card) collects every symbol used in this document.
+[§11](#11-a-notation-card) collects every symbol used in this document.
 
 Read naively, this is a 34-dimensional nonconvex problem with $C(11,2) = 55$ disjunctive
 constraints, and it is not obvious where to push.
@@ -560,7 +562,7 @@ vertex down; [§4](#4-the-corner) turns entirely on what happens when that basis
 And a linear program can be solved *exactly* over rational coefficients, which is why
 the floating-point floor in [§5](#5-algebra-versus-numerics) is a limit of the
 implementation rather than of the mathematics.
-[§11](#11-further-reading) points to a proper treatment.
+[§12](#12-further-reading) points to a proper treatment.
 
 The solver this project actually calls is **HiGHS**, an open-source high-performance
 linear and mixed-integer optimizer, reached through SciPy.
@@ -1366,22 +1368,327 @@ different endpoint under a different toolchain.
 This is why portable mathematical predicates and provenance-bound characterization are
 being separated into different surfaces.
 
+**7. Whether $s(17)$ is Bidwell’s side.** The bracket is
+$4.66044 < s(17) \le 4.675530\ldots$, and a proof by the shape that settled $n = 11$ is
+in progress, with its cover and its local half proved and its global half and capture
+not. [§9](#9-how-an-optimality-proof-is-built) explains the machinery in general, and
+[the `n = 17` explainer](docs/project/n17-optimality-explainer.md) gives the case’s
+numbers, records and status, with no forecast of success.
+
 Items 1 and 2 decide whether the cartography strategy is sound.
 Items 3, 5, and 6 have concrete experimental or engineering paths.
 Item 4 is what remains at $n = 11$ now that T-060 has determined $s(11)$: a shorter
 proof is mathematical work, not an engineering task whose tractability is established.
+Item 7 is the one open case with a proof under way, and the only one whose remaining
+steps are named.
 
-## 9. A Vocabulary Card
+## 9. How an Optimality Proof Is Built
+
+[§1](#how-a-weighted-atomic-lower-bound-proof-works) proved a lower bound by counting,
+and [§6](#6-what-is-built-and-what-is-not) said that
+[T-060](packing/frontier/RESULTS.md) settled $n = 11$ by composing exact local
+isolation, a complete pattern cover with exclusions, a symmetry reduction and a capture
+graph.
+This section explains those pieces in general, as they apply to any $n$ whose best
+known packing is to be proved optimal.
+$n = 11$, where the proof is complete, and $n = 17$, where one is in progress, supply
+the illustrations; the [`n = 17` explainer](docs/project/n17-optimality-explainer.md)
+gives that case’s numbers, records and status, and nothing below is a result about it.
+
+### Three parts
+
+A counting certificate proves $s(n) \ge L$ for a side $L$ strictly below the best known
+side, and cannot reach the known side itself, for the reason the synopsis’s
+[`n = 11` account](SYNOPSIS.md#n--11-end-to-end) gives.
+Proving that a known packing is optimal needs an argument of a different shape, in three
+parts.
+
+- **The local half.** Nothing near the known packing is smaller: every packing whose
+  coordinates lie within an explicit radius of it, in a sense the theorem makes precise,
+  has side at least the known side, with equality only on the known packing or its
+  family.
+- **The global half.** Every packing of side at most the known side falls into one of
+  finitely many **occupancy states**, and every state but the known one is proved
+  impossible.
+- **Capture.** A packing in the known state is close enough to the known packing for the
+  local half to apply.
+
+The first is a theorem about a neighbourhood whose radius is a number such as $1/5000$.
+The second is a finite case analysis over regions of width about $0.7$. The third
+bridges those two scales, and it is the part with the most engineering in it.
+
+### The cap above the optimum
+
+The global half does not work at the known side, which is an algebraic number of some
+degree, but at a **cap**: a rational container side $U$ slightly above it.
+Two facts make a cap the right object.
+Any packing of side $S \le U$ sits centred inside $[0, U]^2$, so a state proved
+impossible at the cap is impossible at every smaller side, the known side included.
+And the known packing must itself be a legal case, with room: its state must survive
+every exclusion, and no translation the cap allows may carry it across the seam between
+two states. The $n = 11$ proof ran everything at a cap about $2 \times 10^{-21}$ above
+Trump’s side; the $n = 17$ work runs its exclusions at $1169/250$, about
+$5 \times 10^{-4}$ above the known side.
+
+A cap that serves exclusion can defeat capture.
+Near a known packing the side rises at some least rate $\kappa$ per unit of displacement
+in the softest direction.
+At a cap $U$, a packing can therefore move about $(U - s^{\ast})/\kappa$ in that
+direction and still have side at most $U$; those are packings of side above the optimum,
+and no sound argument excludes them.
+If that distance exceeds the local half’s radius $r$, the claim “every packing in the
+known state with side at most the cap lies within $r$ of the known packing” is false.
+Capture therefore needs a cap within about $r\kappa$ of the known side, which for
+$n = 17$ means a second cap $U'$, taken from a rational enclosure of the known side,
+with the cover’s cells kept in the frame of the first and only the wall bounds moved
+([specification, section 4.1](docs/project/reviews/review-2026-10-02-n17-kernel-adaptation-spec.md)).
+At $n = 11$ one cap served both purposes, because $2 \times 10^{-21}$ is far below any
+local radius.
+
+### The centre box and capacity-one covers
+
+Why a finite list of states exhausts every packing takes four steps, each of which is an
+exact statement a checker proves.
+
+**Centres lie in a box.** A unit square inside $[0, U]^2$ has its centre at least $1/2$
+from every wall, since its reach along a wall normal is
+$(\lvert\cos\theta\rvert + \lvert\sin\theta\rvert)/2 \ge 1/2$. So every centre lies in
+the **centre box** $[1/2, U - 1/2]^2$.
+
+**Finitely many closed cells cover the box.** A **cover** is a list of closed polygons,
+called **cover cells** here, whose union is the centre box; the proof is an exact sweep,
+or an inclusion–exclusion sum showing the union’s area equals the box’s, since a closed
+cover with no missing area has no missing point.
+The $n = 11$ cover had 16 Voronoi cells; the $n = 17$ cover has 24: four corner squares,
+twelve wall rectangles and eight interior Voronoi cells.
+
+**Each cell holds at most one centre.** This is **capacity one**, and the basic proof is
+a distance argument.
+Every unit square contains the open disc of radius $1/2$ about its centre, so two
+squares with disjoint interiors have centres at least $1$ apart, in every orientation,
+and a closed cell of diameter strictly below $1$ holds at most one centre.
+The strictness matters: two squares both oriented along a chord of length exactly one
+touch edge to edge with the chord’s endpoints as their centres, so a closed cell of
+diameter one can hold two.
+The $n = 11$ cells all had diameter below one.
+A cell against a wall can be wider than that and still have capacity one, because the
+wall stops one square from retreating: the **depth-width wall lemma** bounds the
+separating gap of two contained squares with centres in a cell of depth $d$ from the
+wall and width $w$ along it by $G(c, s) = cd + sw - 1 - \tfrac{c}{2}(c + s - 1)$ for a
+separating normal $(c, s)$ in the quarter circle, and if $\max G < 0$ no such pair
+exists. The lemma is sharp, so the condition is also necessary, and a checker proves the
+sign on closed rational angle intervals
+([lemma review](docs/project/reviews/review-2026-10-02-n17-depth-width-wall-lemma.md)).
+The $n = 17$ wall and corner cells rest on it.
+
+**So every packing names a state.** Assign each centre a closed cell containing it.
+Capacity one makes any such assignment injective, so the $n$ centres name $n$ distinct
+cells: an $n$-subset of the cover, which is an **occupancy state**. A cover of $N$ cells
+has $\binom{N}{n}$ states, and that binomial is the whole census before any exclusion.
+Cells may overlap, in which case a packing with a centre in an overlap names more than
+one state; that is harmless for exclusion, since a certificate about closed cells holds
+under any assignment, and it matters for capture, which must know that the known
+packing, with every motion that keeps its side, lies in exactly one state with a margin.
+
+The cell count drives the census.
+Sixteen cells for eleven squares give $\binom{16}{11} = 4{,}368$ states; the 20-cell
+cover the $n = 11$ proof first tried would have given $167{,}960$, and a grid for
+$n = 17$ with some cells of capacity two counted like a 30-cell cover, over a hundred
+million states. A minimal cover of capacity-one cells is the single largest factor in
+whether the global half is affordable
+([bulk-exclusion design](docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md)).
+
+### Symmetry and orbits
+
+The container has eight symmetries, the dihedral group $D_4$ of
+[§1](#how-a-weighted-atomic-lower-bound-proof-works)’s Condition 1. When a cover is
+invariant under a group of those symmetries, each symmetry permutes its cells, and a
+symmetry carries a packing in one state to a packing in the image state; so a state is
+impossible exactly when all its images are.
+An **orbit** is a state together with its images, and proving one representative proves
+the orbit.
+
+How many orbits there are is not the state count divided by the group’s order, because a
+symmetric state has fewer distinct images than the group has elements.
+**Burnside’s lemma** gives the count as the average, over the group, of the number of
+states each symmetry fixes.
+The $n = 11$ cover was invariant only under the half-turn, and no 11-subset of its 16
+cells is fixed by a half-turn with no fixed cell, since a fixed subset would be a union
+of pairs and so of even size; the lemma gives $(4{,}368 + 0)/2 = 2{,}184$ orbits, and
+$D_4$ entered that proof at the end, through a bridge, rather than in the census.
+The $n = 17$ cover is invariant under all of $D_4$, and some of its states are fixed by
+reflections, so its orbit count exceeds one eighth of its state count; a brute-force
+reduction of every state to its least image is the check on the lemma.
+
+### Sub-pattern exclusion by containment
+
+A **sub-pattern** is a set of $k$ cells.
+It is **forbidden** when $k$ unit squares, each centred in its own cell of the set, at
+any orientations, inside the cap container, cannot have pairwise disjoint interiors.
+The other $n - k$ squares are unconstrained, which is what makes a forbidden sub-pattern
+transfer: every state containing it, or any symmetric image of it, is impossible,
+whatever the other cells do.
+One certificate of arity five to seven can exclude hundreds of states at $n = 11$ and
+tens of thousands at $n = 17$. At $n = 11$, 59 such certificates excluded 1,904 of the
+2,180 cases; the remaining 276 needed a geometric exclusion each, at about 636
+CPU-seconds apiece.
+
+The counting is done by an exact **consumer**: it enumerates every state, removes those
+containing an image of a certified pattern, and takes the union as a set, never by
+subtracting counts, since two patterns’ exclusions overlap.
+The known packing’s state must survive every certificate; one that excludes it is a
+soundness failure of the prover, not a result.
+
+### Selection versus certification
+
+Which sub-patterns to try to certify is a search problem, and a heuristic may propose
+them. A **selector** searches hard for a placement of each candidate pattern, by penalty
+descent from many starts, and **flags** the pattern when every attempt leaves positive
+penetration. A flag certifies nothing.
+It is a failed search, and the number it reports is the best violation found, not a
+margin: at $n = 17$ the reviewers’ own searches found placements violating by less than
+the selector’s figures.
+A **false flag** is a pattern the search failed to place although a placement exists,
+and its cost is what makes a prover necessary rather than a formality: at $n = 17$, two
+flags that a later search placed would together have removed half the census, and an
+exclusion built on them would have been a wrong proof with a plausible count.
+The selector proposes, the prover certifies, and only what the prover certifies enters
+the consumer.
+
+### What makes a certificate admissible
+
+Two kinds of prover have been used here, and they share no code.
+An **ownership induction** keeps, for each **owner** (a cell with one square in it), a
+closed partition of the square’s orientation into **angle rows**, each with a
+**residual**, the closed polygons holding every centre the owner can have at those
+angles, and an **owned hull** of points proved to lie strictly inside the square in
+every surviving pose.
+One step updates one owner against the others: it removes centres that would put another
+owner’s owned point inside the square, removes centres at which the square would overlap
+a partner in every pose the partner can still take (a **collision region**), and proves
+by an exact sweep that what is left is covered by the proposed residuals; points inside
+the square at every surviving pose are promoted into the hull.
+The node **closes** when some owner has no pose left or two owned hulls meet, and a
+**stall** is a sound statement that these rows exclude nothing.
+An **interval branch and bound** instead branches on the $k$ angles and decides the
+centres on each angle box by a linear program; the solver only proposes multipliers, and
+a node closes only when their combination, evaluated with every operation rounded
+outward, stays strictly positive on the whole box, a **Farkas closure**. A run that
+reaches its resolution floor or depth cap is unresolved, never certified.
+At $n = 17$ each prover closed a pattern the other could not.
+
+A closure is not yet a result.
+A **certificate** is a saved object, named by the hash of its canonical bytes, that a
+reader can check without the program that produced it.
+Admitting one asks for four things.
+
+1. **A fresh-process re-check** of the saved objects, with the producer never imported.
+2. **Independent verification** in separately written code that imports nothing from the
+   prover, together with a mutation suite: deliberately unsound variants of the objects,
+   or of the prover, that the checker must refuse.
+   At $n = 17$ the branch and bound’s own witness-path controls caught four of sixteen
+   unsound mutants and the certificate check every one that produced an invalid record,
+   which is why the certificate check, not the controls, is the admission gate.
+3. **Falsifier controls**: patterns that must *not* close, run through the same code at
+   the same settings, such as the known packing’s own sub-patterns and the certified
+   pattern with one cell removed, which the selector places.
+4. **A ledger** that records each certificate as pending or admitted, with the review
+   that admitted it; the census counts only admitted entries, reports pending ones as a
+   separate projection, and refuses to report any count at all if an entry fails a
+   check.
+
+### A local minimum modulo sliders
+
+The local half for an isolated packing, such as Trump’s at $n = 11$, is **local
+isolation**: within an explicit rectangle around the known pose, no other feasible pose
+exists, and the known pose spans the container, so no smaller side fits there.
+A known packing need not be isolated.
+At $n = 17$ one square is free and three slide without changing the side, and the local
+half must then be a **local minimum modulo sliders**: with the free square dropped and
+the slides left free in a declared box, every packing whose remaining coordinates lie
+within a radius $r$ of the family’s lies on the family, which spans the container at
+every slide.
+
+The proof is first-order with a worst-case remainder.
+A **stress** is a set of nonnegative weights on the tight contact and wall rows whose
+weighted sum of gradients is exactly the side’s gradient; it is first-order stationarity
+and nothing more. If the rows with positive weight span every direction except the
+sliders, then for each signed coordinate direction there is a nonnegative combination of
+rows, a **dual**, that pushes a displaced packing back by its displacement.
+Each row’s curvature over the box is bounded by a rational constant.
+The **ratio test** compares them: if a packing in the box were off the family, some
+coordinate would be the most displaced relative to its radius; the dual for that
+direction says the first-order terms push it back by at least its displacement, while
+the curvature constants say the remainders can push it out by at most a multiple of the
+displacement squared; and when that multiple times the radius is below the displacement
+the only solution is zero.
+The same arithmetic, replayed on the $n = 11$ duals, reproduces that proof’s worst ratio
+exactly.
+
+The theorem’s two premises matter more than its arithmetic.
+The radius $r$ the ratio test certifies is the **capture target**: the global half must
+deliver packings within $r$, in the theorem’s frame and angle chart, or the local half
+does not apply. And the slider box is a premise the local theorem cannot supply for
+itself: with the free square dropped, nothing in the theorem bounds how far the sliders
+go, and a claim that quantifies over every physically feasible slide can be false,
+because exchanging two squares can give a valid packing of the same side far outside the
+box. The usable theorem therefore carries the occupancy state as a premise, and a
+separate lemma shows that the free square’s cell bounds the slides
+([composition review](docs/project/reviews/review-2026-10-02-n17-local-half-composition.md)).
+
+### Capture
+
+Capture must show that every packing in the known state, at the capture cap, lies within
+the local radius of the known packing, in the frame the local theorem uses.
+The engine is the ownership induction again, now with every owner contracting, and its
+power lies in the angle rows: inside a narrow row the angle contributes half the row’s
+width rather than its whole range, positions contract to that scale, rows die, and the
+width of an owner’s surviving rows shrinks by a **contraction factor** $g$ per round of
+updates. The number of rounds grows like $\log(1/r)/\log(1/g)$, so the radius is a weak
+cost driver and $g$ and the number of leaves dominate; a factor near one is a stall
+whatever the radius.
+When an owner’s residual becomes bimodal the tree branches on a closed predicate, and
+the far leaves end in contradictions.
+At $n = 11$ the factor averaged about $0.84$, the tree had ten nodes and four leaves,
+and the checker replay cost about two CPU-hours; the discovery cost of the splits and
+orders was never published, and it is the larger unknown
+([capture costing](docs/project/reviews/review-2026-10-02-n17-capture-feasibility.md)).
+Soundness has one more control: after every certified update the known packing’s exact
+pose must still lie in some live row of every owner, and losing it is a failure of the
+prover, not a discovery.
+
+### Why exact arithmetic dominates the cost
+
+Every prover above works in exact rational arithmetic, because its conclusions are
+theorems about every packing and a tolerance would be a hole.
+Every clip and hull multiplies denominators, so the cost of a step grows with the depth
+of the induction; the $n = 11$ root needed an integer homogeneous backend for tens of
+millions of inequalities.
+In the ownership induction the collision regions dominate, since each tests every vertex
+of a region against every facet of a Minkowski difference for every live row of a
+partner; in the branch and bound the cost is the node count, which multiplies as the
+margin of the pattern shrinks.
+Three things keep it tractable: a strict core and a chart that make every test a
+polynomial inequality, as in [§5](#5-algebra-versus-numerics); certificates that are
+independent of each other, so they run in parallel without coordination; and the
+division of labour in which a floating-point producer proposes and an exact checker
+decides, so the search is cheap and only the proof is exact.
+A compiled evaluator for the per-node bounds is the obvious further speed-up, and at
+$n = 17$ it is unbuilt.
+
+## 10. A Vocabulary Card
 
 Every word below is used narrowly here, and each earns a row by being one a general
 reader would otherwise read loosely.
-Symbols are in [§10](#10-a-notation-card), and [`SYNOPSIS.md`](SYNOPSIS.md#terminology)
+Symbols are in [§11](#11-a-notation-card), and [`SYNOPSIS.md`](SYNOPSIS.md#terminology)
 is the authority for everything it defines.
 Several rows below are local to this document: the covering-LP terms introduced above,
 **terminal set**, which the synopsis uses without defining, and **feasibility
 tolerance**, which belongs to the solver rather than to the project.
 The stationary-backbone terms are shared with the current exploration and agenda, but
 they describe a proposed completeness object rather than a built global enumerator.
+The rows from **cap** down belong to the optimality-proof machinery of
+[§9](#9-how-an-optimality-proof-is-built).
 The order is by dependency, so it reads top to bottom.
 
 Three words carry controlled multiple senses—**cell**, **quench** and
@@ -1390,7 +1697,7 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 | Term | Means |
 | --- | --- |
 | **configuration** | A placement of all $n$ squares plus the container: $3n + 1$ coordinates |
-| **cell** | A choice of separating axis and order for every pair. Always the configuration-space object; write *instance cell* for a sweep position and *event cell* for a region of centres, never bare “cell” for either |
+| **cell** | A choice of separating axis and order for every pair. Always the configuration-space object; write *instance cell* for a sweep position, *event cell* for a region of centres and *cover cell* for a region of the centre box, never bare “cell” for any of them |
 | **atom** / **weight** | An exact point in a candidate container, and the nonnegative rational amount of bookkeeping mass assigned to it. An atom has no area and is not a packed square |
 | **atomic measure** / **mass** | The rule assigning a region the sum of the weights of its atoms, boundary atoms included; the mass is what that rule returns |
 | **site** / **pose** | A candidate atom location, and one square at one centre and angle. In the covering LP, sites are columns and poses are rows |
@@ -1433,8 +1740,24 @@ Three words carry controlled multiple senses—**cell**, **quench** and
 | **assurance** | `reported`, `numerically-checked`, or `verified`; method, actual precision, tolerance, and origin stay separate |
 | **atlas** | The deduplicated store of endpoints for an $n$. Code exists; it stores endpoint keys, which are not certified terminal components |
 | **census** | An enumeration of an $n$’s basins run to saturation. Code exists; saturation is unreachable while the counted object is undefined |
+| **cap** | A rational container side slightly above the known side, at which the global half of an optimality proof works. An exclusion at the cap holds at every smaller side; capture needs a cap so close to the known side that every packing it admits in the known state lies within the local radius |
+| **cover cell** / **capacity one** | One closed region of a finite cover of the centre box, and the proved property that it holds at most one centre: by diameter below one for interior cells, by the depth-width wall lemma for wall and corner cells |
+| **occupancy state** / **orbit** | The set of cover cells a packing’s centres name, one each, so an $n$-subset of the cover; and a state together with its images under the container’s symmetries. Proving one representative proves the orbit |
+| **sub-pattern** / **forbidden** | A set of cover cells, and the proved fact that that many squares cannot sit in them with disjoint interiors inside the cap container. A forbidden sub-pattern excludes every state containing it or any image of it |
+| **selector** / **prover** / **consumer** | The heuristic that proposes sub-patterns and certifies nothing; the exact engine that certifies one; and the exact enumeration that removes the states a certified pattern excludes, as a set |
+| **flag** / **false flag** | A sub-pattern the selector failed to place, reported with the best violation found rather than a margin; and such a pattern for which a placement exists. One false flag can remove half the census, which is why only the prover counts |
+| **owner** / **owned hull** | A cover cell with one square in it, in the ownership-induction kernel; and the convex set of points proved to lie strictly inside that square in every pose that survives |
+| **angle row** / **residual** / **collision region** | One closed interval of an owner’s orientation chart; the closed polygons holding every centre the owner can have at those angles; and the centres at which the owner would overlap a partner in every pose the partner can still take |
+| **closure** / **stall** | A node ending with an owner that has no pose, or two owned hulls meeting; and a node that stops changing with poses left, a sound statement that these rows exclude nothing |
+| **Farkas closure** | In the interval branch and bound, a node closed by a nonnegative multiplier combination of its rows that stays strictly positive on the whole box under outward rounding; the solver proposes the multipliers and the arithmetic certifies them |
+| **certificate** / **admission** / **ledger** | A saved object a reader can check without the producer; the review that lets the census use it, after a fresh-process re-check, an independent verification and falsifier controls; and the file that records which certificates are admitted and which pending |
+| **falsifier control** | A pattern that must *not* close, run through the same code at the same settings as a closure, such as the known packing’s own sub-patterns |
+| **slider** / **local minimum modulo sliders** | A coordinate along which the known packing moves without changing its side; and the theorem that nothing within an explicit radius in the other coordinates is smaller, with the sliders left free in a box |
+| **ratio test** | The first-order argument with a worst-case remainder: for every signed coordinate, a certified dual pushes a displaced packing back by its displacement while the curvature constants let the remainders push it out by at most a multiple of its square; a ratio below one forces zero displacement |
+| **capture** / **capture-target theorem** | The step proving that every packing in the known state at the capture cap lies within the local radius of the family; and the composed local theorem it must reach, whose premises are the state and the radius |
+| **contraction factor** | The ratio of an owner’s residual extent after a round of kernel updates to its extent before. The rounds capture needs grow like the logarithm of the radius divided by the logarithm of this factor, so a factor near one is a stall, whatever the radius |
 
-## 10. A Notation Card
+## 11. A Notation Card
 
 Symbols are grouped by topic.
 A subscript $i$ always picks out one square; a bare letter is the whole $n$-vector.
@@ -1488,14 +1811,24 @@ appear inside $o_{ik}$.
 | $\kappa_j$ | nonnegative real | The multiplier on branch constraint $g_j$ in that equation |
 | $\delta$ | real | Slack in a container-inflation ladder |
 | $p$ | real | The exponent in the superdisk family $\lvert x\rvert^{2p} + \lvert y\rvert^{2p} \le 1$; $p = 1$ is a circle and $p \to \infty$ approaches a square |
+| $U$, $U'$ | positive rationals | The exclusion cap, a rational side just above the known one, and the capture cap, closer still |
+| $G(c, s)$ | real-valued function | The depth-width wall lemma’s bound on the separating gap of two squares with centres in a wall cell, for the separating normal $(c, s)$; the cell has capacity one when $\max G < 0$ |
+| $d$, $w$ | positive rationals | In [§9](#9-how-an-optimality-proof-is-built) only: a wall cell’s depth from the wall and width along it |
+| $k$ | integer | In [§9](#9-how-an-optimality-proof-is-built) only: the arity of a sub-pattern, its number of cells |
+| $r$ | positive rational | A local theorem’s radius: how far, in each non-slider coordinate, its conclusion reaches from the known packing |
+| $g$ | positive real | The contraction factor of one round of capture |
 
 Two collisions are worth naming because they come from outside this document.
 Smale’s **α-theory**, in [§5](#5-algebra-versus-numerics), has nothing to do with the
 primitive element $\alpha$. And the neighbouring research reports use $\theta$ for what
 this document calls $a$, and $u_i$ for a per-square half-angle parameter rather than a
 single primitive element.
+Two more come from the optimality records, which this document follows in
+[§9](#9-how-an-optimality-proof-is-built) alone: $g$ there is a contraction factor
+rather than a clearance function $g_j$, and $d$ and $w$ are a wall cell’s depth and
+width rather than an angular error and an atom’s weight.
 
-## 11. Further Reading
+## 12. Further Reading
 
 The concepts this document leans on, and where to learn each properly.
 Nothing here is required to follow the argument; it is what to read when a step feels
@@ -1552,6 +1885,17 @@ Weber’s inherent-structure decomposition, which the quench map is borrowed fro
 Doye, Miller and Wales on the 38-atom Lennard-Jones cluster, the double-funnel precedent
 the rarity premise rests on.
 
+**Group actions and Burnside’s lemma** ([§9](#9-how-an-optimality-proof-is-built)). Any
+introductory text on finite groups or enumerative combinatorics; what is counted here is
+occupancy states up to the container’s symmetries, and the lemma is why the count is not
+the state count divided by the group’s order.
+
+**Branch and bound with certified pruning** ([§9](#9-how-an-optimality-proof-is-built)).
+Neumaier’s survey *Complete search in continuous global optimization and constraint
+satisfaction* for the general method, and Farkas’s lemma in any linear programming text
+for why a nonnegative combination of valid rows that stays positive proves a box empty.
+The interval sources above supply the outward rounding.
+
 **The problem’s own literature.** Every source below is archived locally under
 [`resources/`](packing/resources/README.md) and is greppable, with two exceptions: the
 two record constructions survive through the archived survey and record-table captures
@@ -1597,11 +1941,12 @@ An optional system is used only to rederive one constant.
   scalar, a dedicated Gröbner engine for elimination, and any proof-assistant
   formalisation.
 
-## 12. Where to Go Next
+## 13. Where to Go Next
 
 | If you want | Read |
 | --- | --- |
 | the state of the program, and every result with its status | [`SYNOPSIS.md`](SYNOPSIS.md)—**start here after this page** |
+| the $n = 17$ optimality proof in progress, with its numbers, records and status | [The `n = 17` explainer](docs/project/n17-optimality-explainer.md) |
 | what is in the directory and how to run it | [`README.md`](README.md) |
 | every rule the directory runs on, and which are machine-checked | [`conventions.md`](conventions.md) |
 | the mutable size-by-size experiment priority queue | [Basin confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |

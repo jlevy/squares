@@ -1,0 +1,728 @@
+"""Lane R6's certificate mutations against the kernel verifier under audit.
+
+Run from packing/:
+
+    .venv/bin/python3 <this file> FIXTURE_DIR [--module PATH] [--only NAME] [--old PATH]
+
+FIXTURE_DIR holds one seed-*.json.gz and one node-*.json.gz (see make_fixture). Each
+mutation edits a deep copy of the objects, saves it under a scratch directory with the
+checker tool's saver (so the digests are right and only the mathematics is wrong), and
+runs the verifier's `verify_objects` on it. A mutation is REFUSED when a
+VerificationError names the expected check, REFUSED-ELSEWHERE when the first failure is
+another check, MALFORMED on a non-verification exception, and ACCEPTED when the verifier
+passes it. The unmutated objects are run first and must be accepted (a stall counts).
+
+`--old PATH` also runs the reviewed verifier on each mutant for a verdict comparison.
+"""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import importlib.util
+import json
+import sys
+import tempfile
+import time
+from collections.abc import Callable
+from fractions import Fraction as Q
+from pathlib import Path
+from types import ModuleType
+from typing import Any
+
+from devtools.check_n17_subpattern import canonical_bytes, load_certificate, save_certificate
+
+Point = tuple[Q, Q]
+Mutation = Callable[[dict[str, Any], dict[str, Any], ModuleType], str]
+# A mutation edits (seed, node) in place and returns the substring the refusal must name.
+
+
+def load(path: Path, name: str) -> ModuleType:
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module  # dataclasses resolve string annotations by module
+    spec.loader.exec_module(module)
+    return module
+
+
+def s(q: Q) -> str:
+    return str(q)
+
+
+def pt(p: Point) -> list[str]:
+    return [s(p[0]), s(p[1])]
+
+
+def enc(polygon: list[Point]) -> list[list[str]]:
+    return [pt(p) for p in polygon]
+
+
+def dec(polygon: Any) -> list[Point]:
+    return [(Q(x), Q(y)) for x, y in polygon]
+
+
+# ---------------------------------------------------------------------------
+# Finding things in the node
+# ---------------------------------------------------------------------------
+
+
+def live_rows(node: dict[str, Any]) -> list[tuple[int, int, dict[str, Any]]]:
+    """(step index, row index, row) for rows with residual polygons and collision regions."""
+    out = []
+    for si, step in enumerate(node["steps"]):
+        for ri, row in enumerate(step["rows"]):
+            if row["residual_polygons"] and row["collision_regions"]:
+                out.append((si, ri, row))
+    return out
+
+
+def rows_with_residual(node: dict[str, Any]) -> list[tuple[int, int, dict[str, Any]]]:
+    return [
+        (si, ri, row)
+        for si, step in enumerate(node["steps"])
+        for ri, row in enumerate(step["rows"])
+        if row["residual_polygons"]
+    ]
+
+
+def live_cover_items(step: dict[str, Any]) -> list[tuple[str, int, dict[str, Any]]]:
+    return [
+        (pj, k, item)
+        for pj, items in step["prior_partner_pose_covers"].items()
+        for k, item in enumerate(items)
+        if item["domain"]
+    ]
+
+
+def pick_row(node: dict[str, Any], *, late: bool = True) -> tuple[int, int, dict[str, Any]]:
+    rows = live_rows(node)
+    if not rows:
+        raise RuntimeError("no row with both residual and collision regions")
+    return rows[-1] if late else rows[len(rows) // 2]
+
+
+def replayed_state(
+    seed: dict[str, Any], node: dict[str, Any], v: ModuleType, upto: int
+) -> tuple[Any, dict[str, Any]]:
+    """The verifier's own state just before step `upto`, replayed without full-row checks,
+    so a mutation can compute required domains and partner covers exactly as the verifier
+    will see them. The harness may use the verifier; the verifier never sees the harness."""
+    cells = v.cover_cells()
+    mask = v.check_frame(seed, node, cells)
+    state = v.State([list(p) for p in cells.polygons], cells.cap, seed["bins"], mask)
+    v.check_seed(state, seed, node)
+    for si, step in enumerate(node["steps"]):
+        if si == upto:
+            break
+        new_rows, planes, any_live = v.check_step(state, step, si, node["node_id"], set())
+        v.compress(state, step, si, planes, any_live=any_live)
+        state.rows[step["owner"]] = new_rows
+    return state, cells
+
+
+def required_domain(state: Any, v: ModuleType, step: dict[str, Any], ri: int) -> list[Point]:
+    prior = state.rows[step["owner"]][ri]
+    lo, hi = Q(step["rows"][ri]["interval"][0]), Q(step["rows"][ri]["interval"][1])
+    return v.hull(v.intersect_convex(list(prior.outer), v.wall_box(lo, hi, state.cap)))
+
+
+def recompute_planes(row: dict[str, Any]) -> None:
+    """Rewrite common_core_halfplanes and outer_bounds for the row's current residuals,
+    the way the verifier recomputes them, so a cover mutation reaches the cover check."""
+    core = dec(row["core_vertices"])
+    vertices = [v for polygon in row["residual_polygons"] for v in dec(polygon)]
+    planes = []
+    n = len(core)
+    for k in range(n):
+        p, q = core[k], core[(k + 1) % n]
+        a, b = q[1] - p[1], p[0] - q[0]
+        least = min(a * x + b * y for x, y in vertices)
+        planes.append({"normal": [s(a), s(b)], "upper": s(a * p[0] + b * p[1] + least)})
+    row["common_core_halfplanes"] = planes
+    bounds = []
+    for bound in row["outer_bounds"]:
+        a, b = Q(bound["normal"][0]), Q(bound["normal"][1])
+        upper = max(a * x + b * y for x, y in vertices)
+        bounds.append({"normal": bound["normal"], "upper": s(max(upper, Q(bound["upper"])))})
+    row["outer_bounds"] = bounds
+
+
+# ---------------------------------------------------------------------------
+# The mutations
+# ---------------------------------------------------------------------------
+
+
+def region_pushed(delta: Q) -> Mutation:
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        si, ri, row = pick_row(node)
+        step = node["steps"][si]
+        state, _ = replayed_state(seed, node, v, si)
+        partners = v.check_partners(state, step, si)
+        core = v.hull(dec(row["core_vertices"]))
+        # The tightest (vertex, facet, partner row) by the reviewed hull form, in Fraction.
+        best: tuple[Q, int, int, tuple[Q, Q], Q] | None = None
+        for item_index, item in enumerate(row["collision_regions"]):
+            region = v.hull(dec(item["vertices"]))
+            for cover in partners[item["partner"]]:
+                partner_core = [(Q(x, z), Q(y, z)) for x, y, z in cover.core]
+                domain = [(Q(x, z), Q(y, z)) for x, y, z in cover.domain]
+                difference = v.minkowski_diff(partner_core, core)
+                for a, b, c in v.planes_of(difference):
+                    bound = c + min(a * y[0] + b * y[1] for y in domain)
+                    for vi, (x, y) in enumerate(region):
+                        slack = bound - (a * x + b * y)
+                        if best is None or slack < best[0]:
+                            best = (slack, item_index, vi, (a, b), bound)
+        assert best is not None
+        slack, item_index, vi, (a, b), bound = best
+        item = row["collision_regions"][item_index]
+        region = v.hull(dec(item["vertices"]))
+        x, y = region[vi]
+        norm = a * a + b * b
+        t = (slack + delta) / norm
+        region[vi] = (x + t * a, y + t * b)  # now a x + b y = bound + delta
+        item["vertices"] = enc(region)
+        return "escapes the collision set"
+
+    return mutate
+
+
+def region_pushed_later_row_only(delta: Q) -> Mutation:
+    """A region vertex pushed past a facet of a partner row other than the first live
+    one, while every facet of the first live row still holds: a verifier that checked
+    only the first partner row would accept it."""
+
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        for si, ri, row in reversed(live_rows(node)):
+            step = node["steps"][si]
+            state, _ = replayed_state(seed, node, v, si)
+            partners = v.check_partners(state, step, si)
+            core = v.hull(dec(row["core_vertices"]))
+            required_planes = v.planes_of(required_domain(state, v, step, ri))
+            for item in row["collision_regions"]:
+                covers = partners[item["partner"]]
+                if len(covers) < 2:
+                    continue
+                region = v.hull(dec(item["vertices"]))
+                per_cover = []
+                for cover in covers:
+                    partner_core = [(Q(x, z), Q(y, z)) for x, y, z in cover.core]
+                    domain = [(Q(x, z), Q(y, z)) for x, y, z in cover.domain]
+                    difference = v.minkowski_diff(partner_core, core)
+                    per_cover.append(
+                        [(a, b, c + min(a * y[0] + b * y[1] for y in domain)) for a, b, c in v.planes_of(difference)]
+                    )
+                first = per_cover[0]
+                candidates = sorted(
+                    (bound - (a * x + b * y), k, a, b, vi)
+                    for k, facets in enumerate(per_cover[1:], 1)
+                    for a, b, bound in facets
+                    for vi, (x, y) in enumerate(region)
+                )
+                for slack, _k, a, b, vi in candidates[:200]:
+                    x, y = region[vi]
+                    t = (slack + delta) / (a * a + b * b)
+                    moved = (x + t * a, y + t * b)
+                    if all(fa * moved[0] + fb * moved[1] <= fc for fa, fb, fc in first) and all(
+                        pa * moved[0] + pb * moved[1] <= pc for pa, pb, pc in required_planes
+                    ):
+                        # Added, not moved, so the region still contains the old one and
+                        # the row's cover is untouched: only the collision check can refuse.
+                        item["vertices"] = enc([*region, moved])
+                        return "escapes the collision set"
+        raise RuntimeError("no region vertex can be pushed past a later row's facet alone")
+
+    return mutate
+
+
+def region_outside_domain(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    item = row["collision_regions"][0]
+    region = dec(item["vertices"])
+    region.append((region[0][0] + 1, region[0][1] + 1))
+    item["vertices"] = enc(region)
+    return "escapes the required domain"
+
+
+def region_names_owner(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    row["collision_regions"][0]["partner"] = node["steps"][si]["owner"]
+    return "collision partner"
+
+
+def region_names_unadmitted(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    step = node["steps"][si]
+    partner = row["collision_regions"][0]["partner"]
+    del step["prior_partner_pose_covers"][str(partner)]
+    return "collision partner"
+
+
+def cover_domain_shrunk(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, _, _ = pick_row(node)
+    _, _, item = live_cover_items(node["steps"][si])[0]
+    item["domain"] = item["domain"][:-1]
+    return "domain"
+
+
+def cover_domain_grown(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, _, _ = pick_row(node)
+    _, _, item = live_cover_items(node["steps"][si])[0]
+    item["domain"] = [*item["domain"], [s(Q(item["domain"][0][0]) + 2), item["domain"][0][1]]]
+    return "domain"
+
+
+def cover_live_declared_empty(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, _, _ = pick_row(node)
+    _, _, item = live_cover_items(node["steps"][si])[0]
+    item["domain"], item["core"] = [], []
+    return "domain"
+
+
+def cover_all_declared_empty(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, _, _ = pick_row(node)
+    for _, _, item in live_cover_items(node["steps"][si]):
+        item["domain"], item["core"] = [], []
+    return "domain"
+
+
+def cover_core_scaled(factor: Q) -> Mutation:
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        si, _, _ = pick_row(node)
+        _, _, item = live_cover_items(node["steps"][si])[0]
+        item["core"] = enc([(x * factor, y * factor) for x, y in dec(item["core"])])
+        return "core not strict"
+
+    return mutate
+
+
+def later_use(node: dict[str, Any]) -> tuple[int, int, str, int]:
+    """(earlier step, later step, partner, item index) where the same partner row is
+    published at both steps with the partner not stepping between them; the later
+    publication is where a memo could be reused."""
+    last_pub: dict[tuple[str, int], int] = {}
+    last_step_of: dict[int, int] = {}
+    for si, step in enumerate(node["steps"]):
+        owner = step["owner"]
+        for pj, k, item in live_cover_items(step):
+            key = (pj, k)
+            if key in last_pub and last_step_of.get(int(pj), -1) < last_pub[key]:
+                return last_pub[key], si, pj, k
+            last_pub[key] = si
+        last_step_of[owner] = si
+    raise RuntimeError("no partner row is published twice without the partner stepping")
+
+
+def stale_use(node: dict[str, Any]) -> tuple[int, int, str]:
+    """(earlier step, later step, partner) with the partner stepping in between."""
+    for si, step in enumerate(node["steps"]):
+        for pj in step["prior_partner_pose_covers"]:
+            stepped = False
+            for sj in range(si + 1, len(node["steps"])):
+                later = node["steps"][sj]
+                if int(pj) == later["owner"]:
+                    stepped = True
+                    continue
+                if stepped and pj in later["prior_partner_pose_covers"]:
+                    return si, sj, pj
+    raise RuntimeError("no stale republication possible")
+
+
+def rebind_seed(seed: dict[str, Any], node: dict[str, Any]) -> None:
+    """The node's source digest set to the mutated seed's, so the digest binding passes
+    and the seed's own checks are what refuses."""
+    node["source"]["sha256"] = hashlib.sha256(canonical_bytes(seed)).hexdigest()
+
+
+def cover_memo_core_changed(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    """Same row, same domain republished at a later step, but a wider core: the memo
+    must not be reused."""
+    _, later, pj, k = later_use(node)
+    item = node["steps"][later]["prior_partner_pose_covers"][pj][k]
+    item["core"] = enc([(x * (1 + Q(1, 2**20)), y * (1 + Q(1, 2**20))) for x, y in dec(item["core"])])
+    return "core not strict"
+
+
+def cover_memo_domain_changed(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    """Same row, same core republished later, but a grown domain: the memo must not be reused."""
+    _, later, pj, k = later_use(node)
+    item = node["steps"][later]["prior_partner_pose_covers"][pj][k]
+    item["domain"] = [*item["domain"], [s(Q(item["domain"][0][0]) + 3), item["domain"][0][1]]]
+    return "domain"
+
+
+def cover_stale(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    earlier, later, pj = stale_use(node)
+    node["steps"][later]["prior_partner_pose_covers"][pj] = copy.deepcopy(
+        node["steps"][earlier]["prior_partner_pose_covers"][pj]
+    )
+    return "partner"  # reference, interval or domain: any of the cover checks
+
+
+def cover_stale_relabelled(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    """The stale cover carrying the later rows' references and intervals, so only the
+    domain check (against the partner's new residuals) can refuse it: a memo that
+    survived the partner's step would reuse the old proof here."""
+    earlier, later, pj = stale_use(node)
+    current = node["steps"][later]["prior_partner_pose_covers"][pj]
+    stale = copy.deepcopy(node["steps"][earlier]["prior_partner_pose_covers"][pj])
+    for old_item, new_item in zip(stale, current, strict=True):
+        old_item["reference"] = new_item["reference"]
+        old_item["interval"] = new_item["interval"]
+    node["steps"][later]["prior_partner_pose_covers"][pj] = stale
+    return "domain"
+
+
+def residual_dropped(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    row["residual_polygons"] = row["residual_polygons"][1:]
+    recompute_planes(row)
+    return "NOT covered"
+
+
+def residual_dropped_planes_kept(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    row["residual_polygons"] = row["residual_polygons"][1:]
+    return "common-core planes"
+
+
+def shrink_toward(v: ModuleType, polygon: list[Point], centre: Point, factor: Q) -> list[Point]:
+    return v.hull([(centre[0] + factor * (x - centre[0]), centre[1] + factor * (y - centre[1])) for x, y in polygon])
+
+
+def residual_shrunk(factor: Q) -> Mutation:
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        si, ri, row = pick_row(node)
+        polygon = dec(row["residual_polygons"][0])
+        cx = sum((p[0] for p in polygon), Q(0)) / len(polygon)
+        cy = sum((p[1] for p in polygon), Q(0)) / len(polygon)
+        row["residual_polygons"][0] = enc(shrink_toward(v, polygon, (cx, cy), factor))
+        recompute_planes(row)
+        return "NOT covered"
+
+    return mutate
+
+
+def residual_corner_cut(delta: Q) -> Mutation:
+    """A triangle of side `delta` cut from one vertex of a residual polygon."""
+
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        si, ri, row = pick_row(node)
+        polygon = v.hull(dec(row["residual_polygons"][0]))
+        n = len(polygon)
+        k = 0
+        p, before, after = polygon[k], polygon[(k - 1) % n], polygon[(k + 1) % n]
+        def toward(q: Point) -> Point:
+            dx, dy = q[0] - p[0], q[1] - p[1]
+            length = max(abs(dx), abs(dy))
+            return (p[0] + dx * delta / length, p[1] + dy * delta / length)
+        cut = [toward(before), toward(after)] + [q for q in polygon if q != p]
+        row["residual_polygons"][0] = enc(v.hull(cut))
+        recompute_planes(row)
+        return "NOT covered"
+
+    return mutate
+
+
+def residual_vertical_edge_moved(delta: Q) -> Mutation:
+    """A vertical edge of a residual polygon moved inward by `delta`."""
+
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        for si, ri, row in reversed(rows_with_residual(node)):
+            for index, raw in enumerate(row["residual_polygons"]):
+                polygon = v.hull(dec(raw))
+                xs = sorted({p[0] for p in polygon})
+                left = [p for p in polygon if p[0] == xs[0]]
+                if len(left) == 2 and row["collision_regions"]:
+                    moved = [(p[0] + delta, p[1]) if p[0] == xs[0] else p for p in polygon]
+                    row["residual_polygons"][index] = enc(v.hull(moved))
+                    recompute_planes(row)
+                    return "NOT covered"
+        raise RuntimeError("no residual with a vertical left edge")
+
+    return mutate
+
+
+def collision_region_shrunk(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    item = row["collision_regions"][0]
+    polygon = dec(item["vertices"])
+    cx = sum((p[0] for p in polygon), Q(0)) / len(polygon)
+    cy = sum((p[1] for p in polygon), Q(0)) / len(polygon)
+    item["vertices"] = enc(shrink_toward(v, polygon, (cx, cy), 1 - Q(1, 2**40)))
+    return "NOT covered"
+
+
+def hidden_lens(eps: Q) -> Mutation:
+    """The row's residuals replaced by four pieces of its required domain that cover it
+    except for a sliver hidden strictly between two sweep events (see audit_kernel_rewrite);
+    the collision regions are removed so only the residuals and forbidden regions cover.
+    With eps = 0 the pieces cover exactly and the row must pass its cover check."""
+
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        def clip(poly: list[Point], planes: list[tuple[Q, Q, Q]]) -> list[Point]:
+            for pa, pb, pc in planes:
+                poly = v.clip_closed(poly, pa, pb, pc)
+            return v.hull(poly)
+
+        for si, ri, row in reversed(live_rows(node)):
+            step = node["steps"][si]
+            state, _ = replayed_state(seed, node, v, si)
+            domain = required_domain(state, v, step, ri)
+            if len(domain) < 3 or v.area2(domain) == 0:
+                continue
+            xs = [p[0] for p in domain]
+            ys = [p[1] for p in domain]
+            x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+            a, b = x0 + (x1 - x0) / 3, x0 + 2 * (x1 - x0) / 3
+            xm, ym = (a + b) / 2, (y0 + y1) / 2
+            slope = (y1 - y0) / 8
+            # The lens must sit inside the domain: (a, ym) and (b, ym) strictly interior.
+            planes = v.planes_of(domain)
+            if not all(pa * x + pb * y < pc for x, y in ((a, ym), (b, ym)) for pa, pb, pc in planes):
+                continue
+            left = clip(domain, [(Q(1), Q(0), a)])
+            right = clip(domain, [(Q(-1), Q(0), -b)])
+            middle = clip(domain, [(Q(-1), Q(0), -a), (Q(1), Q(0), b)])
+            below = clip(middle, [(Q(0), Q(1), ym)])
+            # The V through (a, ym + 2 eps), (xm, ym + 2 eps - slope), (b, ym + 2 eps);
+            # `above` keeps y >= V(x). With the roof flat at ym, the gap is where V > ym:
+            # x - a < 2 eps (xm - a) / slope, a sliver invisible at the event x = a (the
+            # left block covers the whole section) and at the crossing (sections touch).
+            m_l = -slope / (xm - a)
+            m_r = slope / (b - xm)
+            above = clip(
+                middle,
+                [
+                    (m_l, Q(-1), -(ym + 2 * eps) + m_l * a),
+                    (m_r, Q(-1), -(ym + 2 * eps - slope) + m_r * xm),
+                ],
+            )
+            pieces = [p for p in (left, right, below, above) if len(p) >= 3 and v.area2(p) > 0]
+            core = v.hull(dec(row["core_vertices"]))
+            forbidden = [
+                v.minkowski_diff(state.groups[oj], core)
+                for oj in state.mask
+                if oj != step["owner"] and state.groups[oj]
+            ]
+            gap = not v.covered_by_area(domain, forbidden + pieces)[0]
+            if gap != (eps > 0):
+                continue  # the forbidden regions hide the lens here, or no lens: next row
+            row["residual_polygons"] = [enc(p) for p in pieces]
+            row["collision_regions"] = []
+            recompute_planes(row)
+            return "NOT covered" if eps > 0 else ""
+        raise RuntimeError("no row admits the lens")
+
+    return mutate
+
+
+def kernel_point_pushed(delta: Q) -> Mutation:
+    def mutate(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+        for si, step in enumerate(node["steps"]):
+            kernel = dec(step["common_owned_kernel"])
+            if not kernel:
+                continue
+            planes = [
+                (Q(p["normal"][0]), Q(p["normal"][1]), Q(p["upper"]))
+                for row in step["rows"]
+                for p in row["common_core_halfplanes"]
+            ]
+            if not planes:
+                continue
+            best = None
+            for k, (x, y) in enumerate(kernel):
+                for a, b, c in planes:
+                    slack = c - (a * x + b * y)
+                    if best is None or slack < best[0]:
+                        best = (slack, k, a, b, c)
+            assert best is not None
+            slack, k, a, b, c = best
+            x, y = kernel[k]
+            t = (slack + delta) / (a * a + b * b)
+            kernel[k] = (x + t * a, y + t * b)
+            step["common_owned_kernel"] = enc(kernel)
+            return "kernel point fails a plane"
+        raise RuntimeError("no step with a kernel")
+
+    return mutate
+
+
+def retained_vertex_moved(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    for step in node["steps"]:
+        record = step.get("inner_grid_compression")
+        if record and record["vertices"]:
+            x, y = Q(record["vertices"][0][0]), Q(record["vertices"][0][1])
+            record["vertices"][0] = pt((x + Q(1, 2**20), y))
+            return "witness point"
+    raise RuntimeError("no compression")
+
+
+def retained_extra_point(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    for step in node["steps"]:
+        record = step.get("inner_grid_compression")
+        if record and record["vertices"]:
+            x, y = Q(record["vertices"][0][0]), Q(record["vertices"][0][1])
+            record["vertices"].append(pt((x + Q(1, 2**20), y + Q(1, 2**20))))
+            record["witnesses"].append(copy.deepcopy(record["witnesses"][0]))
+            return "witness point"
+    raise RuntimeError("no compression")
+
+
+def prior_hull_grown(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    for step in node["steps"]:
+        for key, hull in step["prior_owned_hulls"].items():
+            if hull:
+                x, y = Q(hull[0][0]), Q(hull[0][1])
+                hull.append(pt((x + Q(1, 4), y + Q(1, 4))))
+                return "prior hull"
+    raise RuntimeError("no prior hull")
+
+
+def row_missing(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    node["steps"][si]["rows"].pop()
+    return ""  # any refusal
+
+
+def false_closure(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si = len(node["steps"]) - 1
+    if node["contradiction"] is None:
+        node["contradiction"] = {"kind": "all_parent_poses_forbidden", "owner": node["steps"][si]["owner"], "step": si}
+        node["closed"] = True
+        node["terminal"] = True
+        return "no closure derived"
+    node["contradiction"]["step"] = si - 1
+    return "closure"
+
+
+def seed_row_vertex_dropped(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    for o, rows in seed["cells"].items():
+        for r in rows:
+            if len(r["outer_domain"]) >= 4:
+                r["outer_domain"] = r["outer_domain"][:-1]
+                rebind_seed(seed, node)
+                return "seed row"
+    raise RuntimeError("no seed row with four vertices")
+
+
+def seed_unowned_point(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    for o, points in seed["groups"].items():
+        points.append(["2", "2"])
+        node["initial"]["groups"][o] = copy.deepcopy(points)
+        rebind_seed(seed, node)
+        return "not owned"
+    raise RuntimeError("no groups")
+
+
+def owner_core_scaled(seed: dict[str, Any], node: dict[str, Any], v: ModuleType) -> str:
+    si, ri, row = pick_row(node)
+    row["core_vertices"] = enc([(x * (1 + Q(1, 2**20)), y * (1 + Q(1, 2**20))) for x, y in dec(row["core_vertices"])])
+    return "core not strict"
+
+
+MUTATIONS: dict[str, Mutation] = {
+    "region-vertex-pushed-2^-40": region_pushed(Q(1, 2**40)),
+    "region-vertex-pushed-2^-80": region_pushed(Q(1, 2**80)),
+    "region-vertex-pushed-later-row-only-2^-40": region_pushed_later_row_only(Q(1, 2**40)),
+    "region-outside-required-domain": region_outside_domain,
+    "region-names-owner": region_names_owner,
+    "region-names-unadmitted-partner": region_names_unadmitted,
+    "cover-domain-shrunk": cover_domain_shrunk,
+    "cover-domain-grown": cover_domain_grown,
+    "cover-live-row-declared-empty": cover_live_declared_empty,
+    "cover-all-rows-declared-empty": cover_all_declared_empty,
+    "cover-core-scaled-1.02": cover_core_scaled(Q(102, 100)),
+    "cover-core-scaled-1+2^-20": cover_core_scaled(1 + Q(1, 2**20)),
+    "cover-memo-same-domain-wider-core": cover_memo_core_changed,
+    "cover-memo-same-core-grown-domain": cover_memo_domain_changed,
+    "cover-stale-after-partner-stepped": cover_stale,
+    "cover-stale-relabelled-after-partner-stepped": cover_stale_relabelled,
+    "residual-dropped-planes-recomputed": residual_dropped,
+    "residual-dropped-planes-kept": residual_dropped_planes_kept,
+    "residual-shrunk-1-2^-40": residual_shrunk(1 - Q(1, 2**40)),
+    "residual-shrunk-1-2^-70": residual_shrunk(1 - Q(1, 2**70)),
+    "residual-corner-cut-2^-40": residual_corner_cut(Q(1, 2**40)),
+    "residual-vertical-edge-moved-2^-50": residual_vertical_edge_moved(Q(1, 2**50)),
+    "collision-region-shrunk-1-2^-40": collision_region_shrunk,
+    "hidden-lens-2^-40": hidden_lens(Q(1, 2**40)),
+    "hidden-lens-0-control": hidden_lens(Q(0)),
+    "kernel-point-pushed-2^-40": kernel_point_pushed(Q(1, 2**40)),
+    "retained-vertex-moved-one-grid-unit": retained_vertex_moved,
+    "retained-extra-point-copied-witness": retained_extra_point,
+    "prior-hull-grown": prior_hull_grown,
+    "row-missing": row_missing,
+    "false-closure": false_closure,
+    "seed-row-vertex-dropped": seed_row_vertex_dropped,
+    "seed-unowned-point": seed_unowned_point,
+    "owner-core-scaled-1+2^-20": owner_core_scaled,
+}
+
+
+def run(v: ModuleType, directory: Path) -> tuple[str, str, float]:
+    cells = v.cover_cells()
+    clock = time.perf_counter()
+    try:
+        result = v.verify_objects(directory, cells)
+    except v.VerificationError as failure:
+        return "REFUSED", str(failure), time.perf_counter() - clock
+    except (KeyError, TypeError, ValueError, IndexError, AttributeError, ZeroDivisionError) as failure:
+        return "MALFORMED", repr(failure), time.perf_counter() - clock
+    return "ACCEPTED", json.dumps(result["counts"]), time.perf_counter() - clock
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("fixture", type=Path)
+    parser.add_argument("--module", type=Path, default=Path("devtools/verify_n17_kernel_certificate.py"))
+    parser.add_argument("--old", type=Path, default=None)
+    parser.add_argument("--only", default=None)
+    parser.add_argument("--json", type=Path, default=None)
+    args = parser.parse_args()
+    v = load(args.module, "audited_kernel_verifier")
+    old = load(args.old, "reviewed_kernel_verifier") if args.old else None
+    seed, node, _, _ = load_certificate(args.fixture)
+    rows: list[dict[str, Any]] = []
+    with tempfile.TemporaryDirectory() as scratch:
+        base = Path(scratch) / "unmutated"
+        save_certificate(base, seed, node)
+        verdict, message, seconds = run(v, base)
+        rows.append({"mutation": "(unmutated)", "verdict": verdict, "message": message[:160], "seconds": round(seconds, 1)})
+        print(json.dumps(rows[-1]), flush=True)
+        if verdict != "ACCEPTED":
+            print("the unmutated fixture is not accepted; stopping")
+            return 2
+        for name, mutation in MUTATIONS.items():
+            if args.only and args.only not in name:
+                continue
+            s2, n2 = copy.deepcopy(seed), copy.deepcopy(node)
+            try:
+                expected = mutation(s2, n2, v)
+            except RuntimeError as why:
+                rows.append({"mutation": name, "verdict": "NOT-APPLICABLE", "message": str(why)})
+                print(json.dumps(rows[-1]), flush=True)
+                continue
+            target = Path(scratch) / name
+            save_certificate(target, s2, n2)
+            verdict, message, seconds = run(v, target)
+            if verdict == "REFUSED" and expected and expected not in message:
+                verdict = "REFUSED-ELSEWHERE"
+            row = {"mutation": name, "expected": expected, "verdict": verdict, "message": message[:160], "seconds": round(seconds, 1)}
+            if old is not None:
+                old_verdict, old_message, old_seconds = run(old, target)
+                row["old_verdict"] = old_verdict
+                row["old_message"] = old_message[:120]
+                row["old_seconds"] = round(old_seconds, 1)
+            rows.append(row)
+            print(json.dumps(row), flush=True)
+    if args.json:
+        args.json.write_text(json.dumps(rows, indent=1) + "\n")
+    accepted = [r["mutation"] for r in rows[1:] if r["verdict"] == "ACCEPTED" and "control" not in r["mutation"]]
+    print(json.dumps({"mutations": len(rows) - 1, "accepted_unsound": accepted}))
+    return 1 if accepted else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

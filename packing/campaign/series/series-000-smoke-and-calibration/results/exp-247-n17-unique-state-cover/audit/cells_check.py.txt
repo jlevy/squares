@@ -1,0 +1,96 @@
+"""Independent checks on the cells listed in the receipt: convexity, containment in the centre
+box, exact squared diameters of interior cells, wall extents of ring cells, and the ring
+rectangles rebuilt from the design parameters."""
+
+from __future__ import annotations
+
+import itertools
+import json
+import sys
+from fractions import Fraction as Q
+from pathlib import Path
+
+U = Q(1169, 250)
+LO, HI = Q(1, 2), U - Q(1, 2)
+HERE = Path(__file__).resolve().parent
+
+
+def load_cells(path: Path) -> list[tuple[str, str, list[tuple[Q, Q]]]]:
+    receipt = json.loads(path.read_text())
+    return [
+        (cell["name"], cell["kind"], [(Q(x), Q(y)) for x, y in cell["vertices"]])
+        for cell in receipt["cells"]
+    ]
+
+
+def cross(o: tuple[Q, Q], a: tuple[Q, Q], b: tuple[Q, Q]) -> Q:
+    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+
+
+def strictly_convex_ccw(poly: list[tuple[Q, Q]]) -> bool:
+    n = len(poly)
+    if len(set(poly)) != n or n < 3:
+        return False
+    return all(cross(poly[i], poly[(i + 1) % n], poly[(i + 2) % n]) > 0 for i in range(n))
+
+
+def squared_diameter(poly: list[tuple[Q, Q]]) -> Q:
+    return max((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2 for p, q in itertools.combinations(poly, 2))
+
+
+def main() -> int:
+    cells = load_cells(HERE / "receipt-unique.json")
+    ok = True
+    print(f"{len(cells)} cells")
+    corner, depth, mid_depth, mid_width = Q(79, 100), Q(911, 1000), Q(93, 100), Q(257, 375)
+    wall = HI - LO - 2 * corner
+    rest = (wall - mid_width) / 2
+    print(f"wall length {wall} = {float(wall):.6f}; outer side widths {rest} = {float(rest):.6f}")
+    assert rest == Q(529, 750)
+    for name, kind, poly in cells:
+        convex = strictly_convex_ccw(poly)
+        inside_box = all(LO <= x <= HI and LO <= y <= HI for x, y in poly)
+        d2 = squared_diameter(poly)
+        xs, ys = [x for x, _ in poly], [y for _, y in poly]
+        line = f"{name:12s} {kind:8s} convex={convex} in_box={inside_box} diam^2={d2} ({float(d2) ** 0.5:.6f})"
+        if kind == "interior":
+            passed = d2 < 1
+            line += f" diameter<1: {passed}"
+            ok = ok and passed
+        else:
+            # Extents in the lemma frame against the wall it touches.
+            extents = {
+                "W": (max(xs) - LO, max(ys) - min(ys)),
+                "E": (HI - min(xs), max(ys) - min(ys)),
+                "S": (max(ys) - LO, max(xs) - min(xs)),
+                "N": (HI - min(ys), max(xs) - min(xs)),
+            }
+            touching = [w for w, (dd, _) in extents.items() if dd == (max(xs) - min(xs) if w in "WE" else max(ys) - min(ys))]
+            best = min((extents[w] for w in touching), key=lambda e: e[0])
+            line += f" touches={touching} (depth,width)={best}"
+            is_rect = len(poly) == 4 and all(x in (min(xs), max(xs)) for x in xs) and all(y in (min(ys), max(ys)) for y in ys)
+            line += f" rectangle={is_rect}"
+            ok = ok and is_rect and bool(touching)
+            if kind == "corner":
+                ok = ok and best == (corner, corner)
+            elif name.endswith("1"):
+                ok = ok and best == (mid_depth, mid_width)
+            else:
+                ok = ok and best == (depth, rest)
+        ok = ok and convex and inside_box
+        print(line)
+    # Geometry notes for the review: S1's top corners against interior-S's tab points.
+    by_name = {name: poly for name, _, poly in cells}
+    s1 = by_name["side-S1"]
+    s1x = sorted({x for x, _ in s1})
+    s1top = max(y for _, y in s1)
+    int_s = by_name["interior-S"]
+    tab = sorted(p for p in int_s if p[1] == s1top)
+    print(f"side-S1 x-range {s1x} top y={s1top}; interior-S points on that line {tab}")
+    print(f"  tab x minus S1 corner x: left {tab[0][0] - s1x[0]} right {s1x[1] - tab[-1][0]}")
+    print("ALL CELL CHECKS PASS:", ok)
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

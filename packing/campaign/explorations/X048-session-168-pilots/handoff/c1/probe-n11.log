@@ -1,0 +1,7 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+{"round": 1, "step": 0, "cell": "0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 12.9, "checker": 10.3, "seconds": 26.5}
+{"round": 1, "step": 1, "cell": "1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 21.5, "checker": 14.3, "seconds": 62.3}
+{"round": 1, "step": 2, "cell": "2", "rows": 64, "live_rows": 37, "splits": 32, "producer": 19.8, "checker": 10.1, "seconds": 92.2}
+{"round": 1, "step": 3, "cell": "3", "rows": 64, "live_rows": 14, "splits": 32, "producer": 16.5, "checker": 8.8, "seconds": 117.6}
+{"round": 1, "step": 4, "cell": "4", "rows": 64, "live_rows": 64, "splits": 32, "producer": 48.0, "checker": 36.8, "seconds": 202.5}
+{"round": 1, "step": 5, "cell": "8", "rows": 64, "live_rows": 64, "splits": 32, "producer": 31.7, "checker": 19.0, "seconds": 253.1}

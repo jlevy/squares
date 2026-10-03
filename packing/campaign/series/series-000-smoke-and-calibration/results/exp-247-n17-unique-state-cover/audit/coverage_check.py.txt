@@ -1,0 +1,131 @@
+"""Independent exact coverage proof by inclusion-exclusion on areas.
+
+The cells are closed convex polygons inside the closed centre box B. The union of finitely
+many closed sets is closed, so B minus the union is relatively open in B; if it has area
+zero it is empty. Hence area(union) = area(B) proves the cover exactly. The union area is
+computed by inclusion-exclusion over every subset of cells whose common intersection has
+positive area (subsets with zero-area intersection, and all their supersets, contribute
+nothing); each intersection is an exact Sutherland-Hodgman clip of convex polygons in
+rationals, and areas are exact shoelace sums. This shares nothing with the checker's
+vertical slab sweep.
+
+A second, non-proof sanity pass tests 2 x 10^5 rational points for membership in some cell.
+"""
+
+from __future__ import annotations
+
+import json
+import random
+import sys
+from fractions import Fraction as Q
+from pathlib import Path
+
+U = Q(1169, 250)
+LO, HI = Q(1, 2), U - Q(1, 2)
+HERE = Path(__file__).resolve().parent
+Point = tuple[Q, Q]
+
+
+def load_cells(path: Path) -> list[tuple[str, list[Point]]]:
+    receipt = json.loads(path.read_text())
+    return [(c["name"], [(Q(x), Q(y)) for x, y in c["vertices"]]) for c in receipt["cells"]]
+
+
+def clip_halfplane(poly: list[Point], a: Point, b: Point) -> list[Point]:
+    """Keep the closed left side of the directed line a -> b (cross >= 0)."""
+    out: list[Point] = []
+    n = len(poly)
+    for i in range(n):
+        p, q = poly[i], poly[(i + 1) % n]
+        fp = (b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0])
+        fq = (b[0] - a[0]) * (q[1] - a[1]) - (b[1] - a[1]) * (q[0] - a[0])
+        if fp >= 0:
+            out.append(p)
+        if (fp > 0 > fq) or (fp < 0 < fq):
+            t = fp / (fp - fq)
+            out.append((p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])))
+    return out
+
+
+def intersect(a: list[Point], b: list[Point]) -> list[Point]:
+    result = list(a)
+    n = len(b)
+    for i in range(n):
+        if len(result) < 3:
+            return []
+        result = clip_halfplane(result, b[i], b[(i + 1) % n])
+    return result if len(result) >= 3 else []
+
+
+def area(poly: list[Point]) -> Q:
+    if len(poly) < 3:
+        return Q(0)
+    n = len(poly)
+    return sum((poly[i][0] * poly[(i + 1) % n][1] - poly[(i + 1) % n][0] * poly[i][1]) for i in range(n)) / 2
+
+
+def inside(poly: list[Point], p: Point) -> bool:
+    n = len(poly)
+    return all(
+        (poly[(i + 1) % n][0] - poly[i][0]) * (p[1] - poly[i][1])
+        - (poly[(i + 1) % n][1] - poly[i][1]) * (p[0] - poly[i][0]) >= 0
+        for i in range(n)
+    )
+
+
+def main() -> int:
+    cells = load_cells(HERE / "receipt-unique.json")
+    names = [n for n, _ in cells]
+    polys = [p for _, p in cells]
+    k = len(polys)
+    for name, poly in cells:
+        assert all(LO <= x <= HI and LO <= y <= HI for x, y in poly), name
+        assert area(poly) > 0, name
+    singles = [area(p) for p in polys]
+    total = sum(singles)
+    terms = {1: k}
+    overlaps: list[tuple[str, Q]] = []
+
+    def extend(subset: tuple[int, ...], poly: list[Point]) -> None:
+        nonlocal total
+        for j in range(subset[-1] + 1, k):
+            inter = intersect(poly, polys[j])
+            a = area(inter)
+            if a > 0:
+                new = subset + (j,)
+                sign = -1 if len(new) % 2 == 0 else 1
+                total += sign * a
+                terms[len(new)] = terms.get(len(new), 0) + 1
+                if len(new) == 2:
+                    overlaps.append((f"{names[subset[0]]}&{names[j]}", a))
+                extend(new, inter)
+
+    for i in range(k):
+        extend((i,), polys[i])
+    box_area = (HI - LO) ** 2
+    print(f"sum of cell areas      = {float(sum(singles)):.12f}")
+    print(f"inclusion-exclusion    = {total} = {float(total):.15f}")
+    print(f"centre box area        = {box_area} = {float(box_area):.15f}")
+    print(f"terms by subset size   = {terms}")
+    print("positive-area pairwise overlaps:")
+    for name, a in sorted(overlaps, key=lambda t: -t[1]):
+        print(f"  {name:28s} area {float(a):.9f}")
+    exact = total == box_area
+    print("UNION AREA EQUALS BOX AREA (exact coverage proof):", exact)
+
+    rng = random.Random(266)
+    misses = 0
+    checks = 0
+    for _ in range(200_000):
+        p = (LO + (HI - LO) * Q(rng.randrange(10**6), 10**6), LO + (HI - LO) * Q(rng.randrange(10**6), 10**6))
+        checks += 1
+        if not any(inside(poly, p) for poly in polys):
+            misses += 1
+            if misses <= 5:
+                print("  UNCOVERED sample point", p)
+    print(f"random rational points: {checks} checked, {misses} uncovered")
+    return 0 if exact and misses == 0 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

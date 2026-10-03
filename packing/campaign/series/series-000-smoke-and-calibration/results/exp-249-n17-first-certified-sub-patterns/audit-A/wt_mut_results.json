@@ -1,0 +1,410 @@
+[
+ {
+  "mutant": "none",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "none",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "none",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ },
+ {
+  "mutant": "wall",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "wall",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "wall",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ },
+ {
+  "mutant": "wall_mid",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "wall_mid",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "wall_mid",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ },
+ {
+  "mutant": "chord",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 8 cut 1 of pair 2: v=0.9999999999999991 > min 0.9228937121074249"
+ },
+ {
+  "mutant": "chord",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 27,
+  "verifier": "summary {\"complete\": true, \"leaves\": 14, \"nodes\": 27, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 5 cut 0 of pair 0: v=0.9999999999999992 > min 0.9228937121074249"
+ },
+ {
+  "mutant": "chord",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 622 angle split children mismatch"
+ },
+ {
+  "mutant": "no_chord",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 8 cut 1 of pair 2: v=1.0600034718151703 > min 0.9182214211264973"
+ },
+ {
+  "mutant": "no_chord",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 27,
+  "verifier": "summary {\"complete\": true, \"leaves\": 14, \"nodes\": 27, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 5 cut 0 of pair 0: v=1.0600034718151703 > min 0.9182214211264973"
+ },
+ {
+  "mutant": "no_chord",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1492, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 444 angle split children mismatch"
+ },
+ {
+  "mutant": "sign",
+  "pattern": "lp",
+  "search": "unresolved-at-resolution-floor",
+  "nodes": 67,
+  "verifier": "summary {\"complete\": false, \"leaves\": 0, \"nodes\": 67, \"unresolved-at-resolution-floor\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "sign",
+  "pattern": "obbt",
+  "search": "unresolved-at-resolution-floor",
+  "nodes": 67,
+  "verifier": "summary {\"complete\": false, \"leaves\": 0, \"nodes\": 67, \"unresolved-at-resolution-floor\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "sign",
+  "pattern": "feasible",
+  "search": "unresolved-at-resolution-floor",
+  "nodes": 67,
+  "verifier": "summary {\"complete\": false, \"leaves\": 0, \"nodes\": 67, \"unresolved-at-resolution-floor\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "raw_sign",
+  "pattern": "lp",
+  "search": "unresolved-at-resolution-floor",
+  "nodes": 67,
+  "verifier": "summary {\"complete\": false, \"leaves\": 0, \"nodes\": 67, \"unresolved-at-resolution-floor\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "raw_sign",
+  "pattern": "obbt",
+  "search": "unresolved-at-resolution-floor",
+  "nodes": 67,
+  "verifier": "summary {\"complete\": false, \"leaves\": 0, \"nodes\": 67, \"unresolved-at-resolution-floor\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "raw_sign",
+  "pattern": "feasible",
+  "search": "unresolved-at-resolution-floor",
+  "nodes": 67,
+  "verifier": "summary {\"complete\": false, \"leaves\": 0, \"nodes\": 67, \"unresolved-at-resolution-floor\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "inward",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "inward",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 0: bound on column 0 sign 1: 1.0000000000000004 > 1.0"
+ },
+ {
+  "mutant": "inward",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ },
+ {
+  "mutant": "normal",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 127,
+  "verifier": "summary {\"complete\": true, \"leaves\": 64, \"nodes\": 127, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 7 pair 0: pieces do not cover the normals"
+ },
+ {
+  "mutant": "normal",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 27,
+  "verifier": "summary {\"complete\": true, \"leaves\": 14, \"nodes\": 27, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 4 pair 0: pieces do not cover the normals"
+ },
+ {
+  "mutant": "normal",
+  "pattern": "feasible",
+  "search": "certified-infeasible",
+  "nodes": 61,
+  "verifier": "summary {\"complete\": true, \"leaves\": 31, \"nodes\": 61, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 4 pair 0: pieces do not cover the normals"
+ },
+ {
+  "mutant": "gap",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 7 cut 0 of pair 0: v=1.0000009999999986 > min 0.9999999999999998"
+ },
+ {
+  "mutant": "gap",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 4 cut 0 of pair 0: v=1.0600045485600498 > min 1.0600034646098864"
+ },
+ {
+  "mutant": "gap",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ },
+ {
+  "mutant": "dbox",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 7 cut 1 of pair 2: v=1.0600038066409687 > min 1.0600033277057674"
+ },
+ {
+  "mutant": "dbox",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 4 cut 0 of pair 0: v=1.0600038066409687 > min 1.0600033277057677"
+ },
+ {
+  "mutant": "dbox",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ },
+ {
+  "mutant": "lam",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "lam",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "lam",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ },
+ {
+  "mutant": "period",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 187,
+  "verifier": "summary {\"complete\": true, \"leaves\": 94, \"nodes\": 187, \"certified-infeasible\"}",
+  "first_failure": "FAIL root angle interval [3602879701896397/9007199254740992, 8875673099377011/4503599627370496] narrower than "
+ },
+ {
+  "mutant": "period",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 75,
+  "verifier": "summary {\"complete\": true, \"leaves\": 38, \"nodes\": 75, \"certified-infeasible\"}",
+  "first_failure": "FAIL root angle interval [3602879701896397/9007199254740992, 8875673099377011/4503599627370496] narrower than "
+ },
+ {
+  "mutant": "period",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1491, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL root angle interval [3602879701896397/9007199254740992, 8875673099377011/4503599627370496] narrower than "
+ },
+ {
+  "mutant": "period3",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 127,
+  "verifier": "summary {\"complete\": true, \"leaves\": 64, \"nodes\": 127, \"certified-infeasible\"}",
+  "first_failure": "FAIL root angle interval [3602879701896397/9007199254740992, 2217793500837317/1125899906842624] narrower than "
+ },
+ {
+  "mutant": "period3",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 87,
+  "verifier": "summary {\"complete\": true, \"leaves\": 44, \"nodes\": 87, \"certified-infeasible\"}",
+  "first_failure": "FAIL root angle interval [3602879701896397/9007199254740992, 2217793500837317/1125899906842624] narrower than "
+ },
+ {
+  "mutant": "period3",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1489, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL root angle interval [3602879701896397/9007199254740992, 2217793500837317/1125899906842624] narrower than "
+ },
+ {
+  "mutant": "disc",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 1,
+  "verifier": "summary {\"complete\": true, \"leaves\": 1, \"nodes\": 1, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 0: disc closure with max |d|^2 = 1.962500000000001"
+ },
+ {
+  "mutant": "disc",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 1,
+  "verifier": "summary {\"complete\": true, \"leaves\": 1, \"nodes\": 1, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 0: disc closure with max |d|^2 = 1.962500000000001"
+ },
+ {
+  "mutant": "disc",
+  "pattern": "feasible",
+  "search": "certified-infeasible",
+  "nodes": 1,
+  "verifier": "summary {\"complete\": true, \"leaves\": 1, \"nodes\": 1, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 0: disc closure with max |d|^2 = 1.962500000000001"
+ },
+ {
+  "mutant": "lost_child",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 8,
+  "verifier": "summary {\"complete\": true, \"leaves\": 1, \"nodes\": 8, \"certified-infeasible\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "lost_child",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 5,
+  "verifier": "summary {\"complete\": true, \"leaves\": 1, \"nodes\": 5, \"certified-infeasible\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "lost_child",
+  "pattern": "feasible",
+  "search": "certified-infeasible",
+  "nodes": 8,
+  "verifier": "summary {\"complete\": true, \"leaves\": 1, \"nodes\": 8, \"certified-infeasible\"}",
+  "first_failure": "FAIL T2: node 0 angle split children mismatch"
+ },
+ {
+  "mutant": "diff",
+  "pattern": "lp",
+  "search": "certified-infeasible",
+  "nodes": 203,
+  "verifier": "summary {\"complete\": true, \"leaves\": 102, \"nodes\": 203, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "diff",
+  "pattern": "obbt",
+  "search": "certified-infeasible",
+  "nodes": 95,
+  "verifier": "summary {\"complete\": true, \"leaves\": 48, \"nodes\": 95, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "diff",
+  "pattern": "feasible",
+  "search": "unresolved-at-budget",
+  "nodes": 3000,
+  "verifier": "summary {\"complete\": false, \"leaves\": 1490, \"nodes\": 3000, \"unresolved-at-budget\"}",
+  "first_failure": "FAIL T2: node 626 angle split children mismatch"
+ }
+]

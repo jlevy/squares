@@ -1,0 +1,14 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+{"round": 1, "step": 0, "cell": "corner-SW", "rows": 64, "live_rows": 64, "splits": 32, "producer": 6.9, "checker": 6.4, "seconds": 16.0}
+{"round": 1, "step": 1, "cell": "corner-SE", "rows": 64, "live_rows": 64, "splits": 32, "producer": 9.7, "checker": 10.2, "seconds": 36.0}
+{"round": 1, "step": 2, "cell": "corner-NW", "rows": 64, "live_rows": 64, "splits": 32, "producer": 8.6, "checker": 6.2, "seconds": 50.8}
+{"round": 1, "step": 3, "cell": "corner-NE", "rows": 64, "live_rows": 64, "splits": 32, "producer": 6.9, "checker": 5.7, "seconds": 63.4}
+{"round": 1, "step": 4, "cell": "side-S0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 17.4, "checker": 15.7, "seconds": 96.5}
+{"round": 1, "step": 5, "cell": "side-N0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 21.0, "checker": 18.7, "seconds": 136.2}
+{"round": 1, "step": 6, "cell": "side-W0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 19.1, "checker": 14.6, "seconds": 170.0}
+{"round": 1, "step": 7, "cell": "side-E0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 25.8, "checker": 22.5, "seconds": 218.2}
+{"round": 1, "step": 8, "cell": "side-S1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 21.6, "checker": 25.9, "seconds": 265.7}
+{"round": 1, "step": 9, "cell": "side-N1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 20.5, "checker": 15.7, "seconds": 301.9}
+{"round": 1, "step": 10, "cell": "side-E1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 25.6, "checker": 38.6, "seconds": 366.1}
+{"round": 1, "step": 11, "cell": "side-N2", "rows": 64, "live_rows": 64, "splits": 32, "producer": 26.4, "checker": 18.8, "seconds": 411.3}
+{"round": 1, "step": 12, "cell": "side-W2", "rows": 64, "live_rows": 64, "splits": 32, "producer": 22.5, "checker": 15.5, "seconds": 449.3}

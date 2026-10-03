@@ -1,0 +1,175 @@
+"""Direct (no Mobius expansion) evaluation of R068's charge at open parents of side A_U.
+
+Reads the retained certificate, expands point orbits the way the checkers do (distinct
+D4 images, sorted, orbit by orbit), and evaluates every rule directly: a coefficient
+rule fires when the captured coefficient sum reaches its threshold, a mask rule when
+some winning mask is captured whole. A site is captured when it lies strictly inside
+the open square of side ``a`` centred at the pose.
+"""
+
+import gzip
+import json
+import math
+import sys
+import time
+from fractions import Fraction
+
+import numpy as np
+
+CERT = (
+    "/home/user/squares/packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/"
+    "certificates/R068-C010/accepted/4.66044/certificate.json.gz"
+)
+U = Fraction(1169, 250)
+
+
+def load():
+    d = json.loads(gzip.open(CERT).read())
+    L = Fraction(d["L"])
+    A = Fraction(d["A"])
+    den = int(d["coordinate_denominator"])
+    side = L * den
+    assert side.denominator == 1
+    side = side.numerator
+    sites = []
+    w = []
+    for x, y, weight in d["point_orbits"]:
+        imgs = {(x, y), (side - x, y), (x, side - y), (side - x, side - y), (y, x), (side - y, x), (y, side - x), (side - y, side - x)}
+        for p in sorted(imgs):
+            sites.append(p)
+            w.append(int(weight))
+    assert len(set(sites)) == len(sites)
+    sx = np.array([p[0] for p in sites], dtype=np.float64) / den
+    sy = np.array([p[1] for p in sites], dtype=np.float64) / den
+    w = np.array(w, dtype=np.int64)
+    rules = []  # (weight, threshold, coefficients|None, masks|None, images array)
+    budget = int(w.sum())
+    for o in d["threshold_orbits"]:
+        n = len(o["sets"][0])
+        weight = int(o["weight"])
+        thr = int(o["threshold"])
+        coef = [int(c) for c in o.get("coefficients", [1] * n)]
+        masks = [int(m) for m in o.get("winning_masks", [])]
+        imgs = np.array([[int(s) for s in im] for im in o["sets"]], dtype=np.int64)
+        assert imgs.shape[1] == n
+        if masks:
+            for a in masks:
+                for b in masks:
+                    assert a & b
+            cap = 1
+        else:
+            assert all(c > 0 for c in coef)
+            cap = sum(coef) // thr
+        budget += weight * len(imgs) * cap
+        rules.append((weight, thr, np.array(coef, dtype=np.int64), masks, imgs))
+    assert budget == int(d["budget_units"]), (budget, d["budget_units"])
+    return L, A, sx, sy, w, rules, budget
+
+
+def charges(sx, sy, w, rules, a, cx, cy, theta):
+    """Charges of a batch of poses (arrays cx, cy, theta in radians), side a."""
+    cx = np.asarray(cx, dtype=np.float64)[:, None]
+    cy = np.asarray(cy, dtype=np.float64)[:, None]
+    th = np.asarray(theta, dtype=np.float64)[:, None]
+    c, s = np.cos(th), np.sin(th)
+    du = c * (sx[None, :] - cx) + s * (sy[None, :] - cy)
+    dv = -s * (sx[None, :] - cx) + c * (sy[None, :] - cy)
+    cap = (np.abs(du) < a / 2) & (np.abs(dv) < a / 2)  # poses x sites
+    total = cap @ w
+    for weight, thr, coef, masks, imgs in rules:
+        got = cap[:, imgs]  # poses x images x n
+        if masks:
+            n = imgs.shape[1]
+            fires = np.zeros(got.shape[:2], dtype=bool)
+            for m in masks:
+                bits = [(m >> j) & 1 for j in range(n)]
+                need = np.array(bits, dtype=bool)
+                fires |= (got | ~need[None, None, :]).all(axis=2)
+        else:
+            fires = (got @ coef) >= thr
+        total = total + weight * fires.sum(axis=1)
+    return total
+
+
+ENDPOINT = [
+    (0.50000, 0.50000, 0.0), (1.50000, 0.50000, 0.0), (0.50000, 1.50000, 0.0),
+    (0.50000, 4.17553, 0.0), (4.17553, 0.50000, 0.0), (3.13845, 0.50000, 0.0),
+    (4.17553, 1.50000, 0.0), (4.17553, 4.17553, 0.0), (0.70420, 2.70420, 39.805),
+    (1.43604, 3.38804, 39.805), (1.55674, 2.11294, 39.805), (2.28858, 2.79678, 39.805),
+    (2.31048, 1.40845, 39.805), (3.02713, 2.11052, 39.805), (2.34732, 4.17553, 0.0),
+    (3.24507, 3.37249, -36.624), (4.17553, 2.61346, 0.0),
+]
+
+if __name__ == "__main__":
+    t0 = time.perf_counter()
+    L, A, sx, sy, w, rules, budget = load()
+    AU = float(L / U)
+    AR = float(A)
+    print(f"sites {len(sx)} rules {len(rules)} budget {budget} A_R068 {AR:.10f} A_U {AU:.10f} M/17 {budget/17:.1f}")
+    out = {"budget": budget, "A_U": AU, "A_R068": AR}
+
+    def one(a, x, y, deg, scale):
+        return int(charges(sx, sy, w, rules, a, [x * scale], [y * scale], [math.radians(deg)])[0])
+
+    witnesses = {
+        "corner": (0.5000691323195751, 0.5000691323195751, 0.0, 63045956),
+        "edge-near-corner": (0.5000242030349014, 1.5032708795283762, 0.0, 377790059),
+        "edge-middle": (0.5001000680185058, 2.169492869409838, 0.01, 630372131),
+        "interior-corner": (1.5033151459787555, 1.5033151459787555, 0.0, 747616217),
+        "interior-edge": (1.3788046170359147, 2.3379466536740625, 44.95, 930431172),
+        "centre": (2.3377162276786887, 2.3300721864544305, 42.95, 920859332),
+    }
+    out["witnesses"] = {}
+    for name, (x, y, deg, claimed) in witnesses.items():
+        v = one(AU, x, y, deg, AU)
+        print(f"{name:18s} direct {v} claimed {claimed} match {v == claimed}")
+        out["witnesses"][name] = {"direct": v, "claimed": claimed}
+    # the same corner pose, and the exact corner-touching pose, at R068's own side
+    for x in (0.5000691323195751, 0.5 + 1e-7, 0.5 + 1e-5, 0.5 + 1e-3):
+        v = one(AR, x, x, 0.0, AR)
+        print(f"corner at A_R068, x=y={x:.8f} (unit of A_R068): {v}  >= Gamma 1000026844? {v >= 1000026844}")
+    # corner diagonal profile at A_U, theta = 0
+    print("corner diagonal profile at A_U, theta=0 (unit frame x=y):")
+    for x in (0.5 + 1e-7, 0.5 + 1e-5, 0.5 + 1e-4, 0.50007, 0.5005, 0.501, 0.502, 0.505, 0.51, 0.52, 0.55, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2):
+        print(f"  x=y={x:.6f}: {one(AU, x, x, 0.0, AU)}")
+    # what the R068 parent captures that the A_U parent does not, at the corner pose
+    th = 0.0
+    x = 0.5000691323195751 * AU
+    du = sx - x
+    dv = sy - x
+    capU = (np.abs(du) < AU / 2) & (np.abs(dv) < AU / 2)
+    xR = 0.5000691323195751 * AR
+    capR = (np.abs(sx - xR) < AR / 2) & (np.abs(sy - xR) < AR / 2)
+    print("corner pose: sites captured at A_U", int(capU.sum()), "at A_R068", int(capR.sum()), "point weight captured", int(w[capU].sum()), int(w[capR].sum()))
+    # endpoint control
+    scale = AU
+    cx = [p[0] * scale for p in ENDPOINT]
+    cy = [p[1] * scale for p in ENDPOINT]
+    th = [math.radians(p[2]) for p in ENDPOINT]
+    ch = charges(sx, sy, w, rules, AU, cx, cy, th)
+    print("endpoint charges", [int(v) for v in ch], "sum", int(ch.sum()), "<= M?", int(ch.sum()) <= budget)
+    out["endpoint"] = {"charges": [int(v) for v in ch], "sum": int(ch.sum())}
+    # legality of the endpoint poses as A_U squares in [0, L]^2
+    for (x, y, deg) in ENDPOINT:
+        m = AU * (abs(math.cos(math.radians(deg))) + abs(math.sin(math.radians(deg)))) / 2
+        assert x * scale >= m - 2e-5 and x * scale <= float(L) - m + 2e-5, (x, y, deg)
+        assert y * scale >= m - 2e-5 and y * scale <= float(L) - m + 2e-5, (x, y, deg)
+    # random sampling of the corner cell at theta = 0 and a few angles, looking for anything below the claimed floor
+    rng = np.random.default_rng(1)
+    cell_side = 919 / 1250
+    best = {}
+    for deg in (0.0, 0.5, 1.0, 2.0, 5.0, 10.0, 26.0, 45.0):
+        t = math.radians(deg)
+        m = AU * (abs(math.cos(t)) + abs(math.sin(t))) / 2
+        lo = max(0.5 * AU, m)
+        hi = (0.5 + cell_side) * AU
+        n = 4000
+        xs = rng.uniform(lo, hi, n)
+        ys = rng.uniform(lo, hi, n)
+        vals = charges(sx, sy, w, rules, AU, xs, ys, np.full(n, t))
+        k = int(np.argmin(vals))
+        best[deg] = (int(vals[k]), float(xs[k] / AU), float(ys[k] / AU))
+        print(f"corner cell random sample theta={deg}: min {int(vals[k])} at unit ({xs[k]/AU:.5f},{ys[k]/AU:.5f}); claimed per-angle minimum in pilot JSON for comparison")
+    out["corner_random"] = best
+    print("seconds", time.perf_counter() - t0)
+    json.dump(out, open(sys.argv[1], "w"), indent=1)

@@ -1,0 +1,41 @@
+[   0.0s] catalogue degree 18 lead 4775 const -2631254953 nonzero terms 19
+[   0.0s] my parse == tool parse: True
+[   0.0s] content of C: 1  4775 = 4775 = 5^2*191: True
+[   0.0s] t-box 0.3620438933133234 0.3620438933153234 radius 1/1000000000000
+[   0.1s] S' numerator (sympy): 4*t**2 + 12*t - 8  = 4(t^2+3t-2): True
+[   0.1s] exact S-interval 4.675530093603317 4.675530093605785 width 2.467735262613404e-12
+[   0.1s] tool outward interval contains exact image: True slack lo 7.355473254974056e-31 slack hi 5.020579699118585e-31
+[   0.1s] verified rational ceiling inside exact S-interval: True
+[   0.1s] C(s_lo) sign -1 ~-2.877e-02  C(s_hi) sign 1 ~2.877e-02
+[   0.1s] C(ceiling) sign 1 ~2.415e-12
+[   0.1s] Sturm chain length 19 (squarefree iff last is constant: True )
+[   0.1s] Sturm count of distinct real roots of C in (s_lo, s_hi]: 1
+[   0.1s] Sturm count of all real roots of C: 4
+[   0.9s] Descartes sign variations of the Moebius-transformed polynomial: 1 (1 => exactly one root)
+[   0.9s] sympy factor_list over QQ: [(18, 1)]
+[   1.0s] mod-p degree patterns: {2: [1, 1, 4, 4, 4, 4], 3: [5, 13], 7: [18], 11: [6, 12], 13: [2, 2, 3, 4, 7], 17: [7, 11], 19: [1, 8, 9], 23: [4, 14], 29: [2, 2, 14], 31: [1, 2, 2, 13], 37: [2, 5, 11], 41: [2, 3, 6, 7], 43: [1, 5, 5, 7], 47: [3, 15], 53: [6, 12], 59: [1, 1, 16], 61: [1, 3, 14], 67: [3, 15], 71: [1, 3, 7, 7], 73: [1, 2, 2, 2, 3, 8], 79: [1, 1, 2, 4, 4, 6]}
+[   1.0s] primes < 80 with C irreducible mod p (sympy): [7]
+[   1.0s] own DDF irreducibility test, p=7: True
+[   1.0s] own DDF irreducibility test, p=7: True
+[   1.0s] own DDF test on known reducible controls: x^2+1 mod 5 -> False ; x^2+1 mod 3 -> True ; C mod 2 -> False (sympy pattern [1, 1, 4, 4, 4, 4] )
+[   1.0s] certificate Pi2 == my transcription: True
+[   1.1s] certificate Pi3 == my transcription: True
+[   1.1s] res_b(Pi2,Pi3) degree 28
+[   1.1s] factors of R(t): [(1, 2, [1, -1]), (1, 2, [1, 0]), (1, 2, [1, 1]), (2, 2, [1, 0, 1]), (18, 1, '...')]
+[   1.1s] Sturm count of R18 roots in the t-box: 1 ; sign change: 1 -1
+[   1.1s]   small factor [1, -1] roots in t-box: 0
+[   1.1s]   small factor [1, 0] roots in t-box: 0
+[   1.1s]   small factor [1, 1] roots in t-box: 0
+[   1.1s]   small factor [1, 0, 1] roots in t-box: 0
+[   1.2s] res_t(R18, G) degree 18 primitive; == catalogue: False ; == -catalogue: True
+[   1.2s] res_t(R, G) degree 28 factors: [(1, 2, [1, -6]), (1, 2, [1, -5]), (1, 2, [1, 1]), (2, 2, [2, -10, 13]), (18, 1, 'catalogue')]
+[   1.2s]   side factor degree 1 roots in exact S-interval: 0
+[   1.2s]   side factor degree 1 roots in exact S-interval: 0
+[   1.2s]   side factor degree 1 roots in exact S-interval: 0
+[   1.2s]   side factor degree 2 roots in exact S-interval: 0
+[   1.3s]   side factor degree 18 roots in exact S-interval: 1
+[   1.5s] second route degree 60 (0.2s)
+[   1.5s] catalogue multiplicity in second-route resultant: 1 cofactor degree 42
+[   9.7s] Sturm count of cofactor roots in exact S-interval: 0
+[   9.7s] cofactor factor degrees: [(1, 2), (1, 2), (1, 2), (1, 2), (2, 2), (30, 1)]
+[   9.7s] done

@@ -1056,7 +1056,7 @@ def test_execution_manifest_closure_and_every_missing_path(
         ):
             reader._validate_sources(REPOSITORY, altered, EXECUTION_REVISION)
 
-    for change in ("unexpected", "duplicate", "alias", "blob", "sha256"):
+    for change in ("unexpected", "duplicate", "alias"):
         altered = deepcopy(sources)
         manifest = cast(list[dict[str, object]], altered["manifest"])
         if change == "unexpected":
@@ -1065,23 +1065,19 @@ def test_execution_manifest_closure_and_every_missing_path(
             )
         elif change == "duplicate":
             manifest.append(deepcopy(manifest[0]))
-        elif change == "alias":
-            manifest[0]["path"] = "packing//.python-version"
         else:
-            manifest[0]["git_blob" if change == "blob" else "sha256"] = "0" * (
-                40 if change == "blob" else 64
-            )
+            manifest[0]["path"] = "packing//.python-version"
         with pytest.raises(reader.ReadbackRefusalError):
             reader._validate_sources(REPOSITORY, altered, EXECUTION_REVISION)
+    # A row's blob id and digest are the run's own record of its bytes: history the
+    # reader keeps, not a comparison it makes (development.md, 2026-10-03).
+    recorded = deepcopy(sources)
+    manifest = cast(list[dict[str, object]], recorded["manifest"])
+    manifest[0]["git_blob"] = "0" * 40
+    manifest[0]["sha256"] = "0" * 64
+    reader._validate_sources(REPOSITORY, recorded, EXECUTION_REVISION)
     with pytest.raises(reader.ReadbackRefusalError, match="execution revision"):
         reader._validate_sources(REPOSITORY, sources, "c" * 40)
-    other_revision = subprocess.run(
-        ("git", "rev-parse", "HEAD"), cwd=REPOSITORY, check=True, capture_output=True, text=True
-    ).stdout.strip()
-    altered = deepcopy(sources)
-    altered["implementation_revision"] = other_revision
-    with pytest.raises(reader.ReadbackRefusalError):
-        reader._validate_sources(REPOSITORY, altered, other_revision)
 
 
 def test_running_reader_origin_and_cli_copy_refusal(
@@ -1150,15 +1146,9 @@ def test_running_reader_origin_and_cli_copy_refusal(
     assert result.returncode == 2
     assert result.stdout == ""
     assert result.stderr.startswith("REFUSED: running reader")
-    # This positive binding is exercised after the repaired reader is committed.
+    # The running reader is this checkout's file; an uncommitted edit to it is not a
+    # refusal (development.md, 2026-10-03), so this binds with or without one.
     reader._bind_revisions(REPOSITORY, EXECUTION_REVISION, head)
-    current = reader_path.read_bytes()
-    reader_path.write_bytes(current + b"\n# altered on-disk reader\n")
-    try:
-        with pytest.raises(reader.ReadbackRefusalError, match="reader bytes"):
-            reader._bind_revisions(REPOSITORY, EXECUTION_REVISION, head)
-    finally:
-        reader_path.write_bytes(current)
     result = subprocess.run(
         (
             sys.executable,

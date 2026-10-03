@@ -994,6 +994,30 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_n17_endpoint_features.py": {
             "test_symbolic_zero_options_and_displacement_refusal",  # 28.33s
         },
+        # The fully substituted H-258 ring proof, measured 2026-10-02 (Session 167).
+        "test_n17_core_stress.py": {
+            "test_substituted_normalized_identity_completes_within_wall_bound",  # 7.10s
+        },
+        # The hull kernel's whole mask-0 replay beside the frozen checker's, two workers,
+        # measured 2026-10-02 (Session 168, BC-418); the fast tests keep all 55 ownership
+        # proofs, the transfer and a frozen-checked sample of points and rows.
+        "test_hull_kernel_mask0.py": {
+            "test_the_full_replay_reproduces_the_receipt_and_the_frozen_checker",  # 22.44s
+        },
+        # The hull kernel's case-2095 replay (seed, five steps, 160 rows) beside the frozen
+        # checker's own, two workers, measured 2026-10-02 (Session 168, BC-418); the fast
+        # tests keep a frozen-checked seed owner, row and compression, and the refusals.
+        "test_hull_kernel_case2095.py": {
+            "test_the_full_replay_reproduces_case_2095",  # 52.38s
+        },
+        # The n17 kernel verifier's W7 8-bin fixture rebuilt by the producer and compared
+        # by digest, then replayed undoctored as the control for the partner-row test,
+        # measured 2026-10-03 (Session 168, BC-418) on a quiet four-cpu box. The fast tier
+        # keeps the doctored refusal itself, which reads the committed fixture; the build
+        # had held the quick lane for 13.70s on the hosted runner (run 37087123885).
+        "test_verify_n17_certificates.py": {
+            "test_the_w7_fixture_is_what_the_producer_writes",  # 5.26s
+        },
         # 18s of call time across 3.
         "test_audit_n54_source_formula.py": {
             "test_n54_source_formula_cli_agrees_under_optimization",  # 7.8s

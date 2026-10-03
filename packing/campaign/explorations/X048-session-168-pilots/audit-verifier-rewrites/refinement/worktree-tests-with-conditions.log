@@ -1,0 +1,9 @@
+...............................................                          [100%]
+============================= slowest 6 durations ==============================
+10.39s call     tests/test_verify_n17_certificates.py::test_the_w7_fixture_is_what_the_producer_writes
+4.12s call     tests/test_verify_n17_certificates.py::test_the_kernel_verifier_checks_every_live_partner_row
+1.23s call     tests/test_verify_n17_certificates.py::test_the_bb_verifier_refuses_each_doctored_kind[piece]
+1.20s call     tests/test_verify_n17_certificates.py::test_the_bb_verifier_refuses_each_doctored_kind[split_point]
+1.12s call     tests/test_verify_n17_certificates.py::test_a_verifier_imports_no_producer_checker_or_solver[devtools.verify_n17_bb_certificate]
+1.03s call     tests/test_verify_n17_certificates.py::test_a_verifier_imports_no_producer_checker_or_solver[devtools.verify_n17_kernel_certificate]
+47 passed in 32.67s

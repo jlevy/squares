@@ -1,0 +1,17 @@
+== tightness witnesses (one wall, side-cell frame) ==
+  d=0.9110 w=0.705333: max G=-0.0035253; explicit pair gap along n=-0.0035253; SAT sigma=-0.0035253
+  d=0.9110 w=0.710400: max G=+0.0000773; explicit pair gap along n=+0.0000773; SAT sigma=+0.0000773
+  d=0.7800 w=0.780000: max G=-0.0253242; explicit pair gap along n=-0.0253242; SAT sigma=-0.0253242
+  d=0.7350 w=0.835000: max G=-0.0003936; explicit pair gap along n=-0.0003936; SAT sigma=-0.0003936
+== tightness witness (corner, two walls) ==
+  a=0.78: explicit pair SAT sigma=-0.104020; max G2=-0.104020
+  a=0.85: explicit pair SAT sigma=-0.005025; max G2=-0.005025
+  a=0.86: explicit pair SAT sigma=+0.009117; max G2=+0.009117
+
+== bounded search, bottom-wall side cell ==
+  side (0.911, 529/750)      best sigma=-0.0035253 (max G=-0.0035253); pose=[1.28    0.70711 0.78335 1.98533 1.411   0.78335]
+  side (0.911, 0.7104)       best sigma=+0.0000773 (max G=+0.0000773); pose=[1.28    0.70708 0.77632 1.9904  1.411   0.77632]
+  side (0.911, 0.72)         best sigma=+0.0069698 (max G=+0.0069698); pose=[1.28    0.70694 0.76364 2.      1.411   0.76364]
+
+== bounded search, corner cell (two walls) ==
+  corner 0.78                best sigma=-0.1040202 (max G2=-0.1040202); pose=[1.28   1.28   0.7854 0.5    0.5    1.5708]

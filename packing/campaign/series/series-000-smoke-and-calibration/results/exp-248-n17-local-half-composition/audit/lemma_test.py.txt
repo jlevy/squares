@@ -1,0 +1,82 @@
+"""Lane R2: adversarial numeric test of the separation lemma in check_n17_slider_coverage.
+
+Lemma. Two closed unit squares turned by at most r from a frame (u, v), centre difference
+T u + D v. If |T| + |D| sin r < 1, D > -1 + |T| sin r and T <= -sin r, then they have
+disjoint interiors only if D >= sec r + T tan r.
+
+Test: sample (T, D) in the hypothesis region with D < sec r + T tan r, and turns
+omega_A, omega_B in [-r, r]; every sample must overlap (strict SAT). Then the sharp case:
+both turned by +r and D = sec r + T tan r must be exactly touching (separated by the
++v-type normal, no other). r is taken large (0.3, 0.1, 0.01) so that the test bites, and
+at 1/5000.
+"""
+
+from __future__ import annotations
+
+import math
+import random
+
+
+def support(phi: float, nx: float, ny: float) -> float:
+    c, s = math.cos(phi), math.sin(phi)
+    return (abs(nx * c + ny * s) + abs(-nx * s + ny * c)) / 2
+
+
+def min_separation(dx: float, dy: float, pa: float, pb: float) -> float:
+    """max over the 4 edge normals of |n.d| - h_A(n) - h_B(n); >= 0 iff interiors disjoint."""
+    best = -math.inf
+    for phi in (pa, pb):
+        for nx, ny in ((math.cos(phi), math.sin(phi)), (-math.sin(phi), math.cos(phi))):
+            value = abs(nx * dx + ny * dy) - (support(pa, nx, ny) + support(pb, nx, ny))
+            best = max(best, value)
+    return best
+
+
+def run(r: float, samples: int, seed: int) -> None:
+    rng = random.Random(seed)
+    sec, tan, sin = 1 / math.cos(r), math.tan(r), math.sin(r)
+    violations = 0
+    tested = 0
+    worst = math.inf
+    while tested < samples:
+        T = rng.uniform(-1, -sin)
+        D = rng.uniform(-1 + abs(T) * sin, sec + T * tan)
+        if abs(T) + abs(D) * sin >= 1 or D <= -1 + abs(T) * sin:
+            continue
+        tested += 1
+        pa, pb = rng.uniform(-r, r), rng.uniform(-r, r)
+        # the frame is (u, v) = ((1,0),(0,1)) without loss of generality
+        sep = min_separation(T, D, pa, pb)
+        worst = min(worst, -sep)
+        if sep >= 0:
+            violations += 1
+    # sharp case
+    T = -0.3
+    D = sec + T * tan
+    touching = min_separation(T, D, r, r)
+    pushed = min_separation(T, D - 1e-9, r, r)
+    print(
+        f"r={r}: {tested} samples below the bound, {violations} disjoint (must be 0); "
+        f"least overlap depth {worst:.3e}; sharp case separation {touching:.2e} (0), "
+        f"just below {pushed:.2e} (<0)"
+    )
+    # also: the bound is not sharp for other turn pairs -- min over turns of the threshold
+    thresholds = []
+    for pa in (-r, 0, r):
+        for pb in (-r, 0, r):
+            lo, hi = -1.0, 3.0
+            for _ in range(80):
+                mid = (lo + hi) / 2
+                if min_separation(T, mid, pa, pb) >= 0:
+                    hi = mid
+                else:
+                    lo = mid
+            thresholds.append(((pa, pb), hi))
+    least = min(thresholds, key=lambda item: item[1])
+    print(f"   least D with disjoint interiors over turn corners: {least[1]:.12f} at turns {least[0]}; "
+          f"sec r + T tan r = {D:.12f}")
+
+
+if __name__ == "__main__":
+    for r, n in ((0.3, 200000), (0.1, 200000), (0.01, 200000), (1 / 5000, 100000)):
+        run(r, n, seed=17)

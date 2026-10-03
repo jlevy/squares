@@ -4192,6 +4192,30 @@ def test_the_activity_marker_still_refuses_a_second_gate(tmp_path: Path) -> None
         pass  # pragma: no cover - the context manager refuses to enter
 
 
+@pytest.mark.parametrize(
+    ("cpus", "jobs", "threads"),
+    [(4, 1, ("--threads", "4")), (4, 3, ("--threads", "2")), (4, 4, ())],
+)
+def test_the_type_floor_threads_across_the_cpus_the_selection_leaves(
+    monkeypatch: pytest.MonkeyPatch, cpus: int, jobs: int, threads: tuple[str, ...]
+) -> None:
+    """Alone on the typecheck job it takes the runner; beside other steps it does not."""
+    monkeypatch.setattr(validate.os, "process_cpu_count", lambda: cpus)
+    monkeypatch.setattr(validate, "_required_tool", lambda _context, name: name)
+    captured: list[tuple[str, ...]] = []
+
+    def commands(_context, commands, **_kwargs):
+        captured.extend(commands)
+        return "0 errors, 0 warnings, 0 notes"
+
+    monkeypatch.setattr(validate, "_commands", commands)
+    context = validate.Context(
+        deep=False, strict=False, jobs=jobs, inner_jobs=1, environment={}
+    )
+    validate._type_floor(context)
+    assert captured == [("basedpyright", *threads)]
+
+
 @pytest.mark.parametrize(("cpus", "jobs", "workers"), [(4, 2, "2"), (2, 2, "1"), (4, 4, "1")])
 def test_frontend_browser_workers_fit_outer_topology(
     monkeypatch: pytest.MonkeyPatch, cpus: int, jobs: int, workers: str

@@ -1,0 +1,69 @@
+{
+  "bins": 64,
+  "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-SE"
+  ],
+  "check_seconds": 3712.8877985830004,
+  "checker_modules_sha256": {
+    "sqpack.hull_kernel": "0bbfc013e1066b89c8aad8fb2d28dac15483069e053668db0cdde16710d6687e",
+    "sqpack.hull_kernel.collision": "4693961d4d0100a9733f9f13ac350e99caa40b1a0c918c5d3ea4b1f0500e648b",
+    "sqpack.hull_kernel.counting": "2a96121fd16c53f86323bfeda4b0183c8460337b57545844c080329caf75a4cb",
+    "sqpack.hull_kernel.covers": "cff471ee70f2a5cc60e6338853e794d608331b10a77474a96511c2b68f4a55ea",
+    "sqpack.hull_kernel.frame": "01cd1a2c013f41356cee3d7dac7233b0f9b8b4dadcb91bc3d09ae64c691067f1",
+    "sqpack.hull_kernel.geometry": "f7679249bbde002805a9a41e6ab3562eef2f8e491c2dbb22480e8b29c02f5d52",
+    "sqpack.hull_kernel.induction": "b9f0afd41e47b593c1917ab4b2c57895cbb46f1e45a094430888b3f5ce6be2f8",
+    "sqpack.hull_kernel.n11": "17e09d2c51be43043c108adca6ac6ac6dc337f9696f40db8def420766353109c",
+    "sqpack.hull_kernel.n17": "08ca6744494cc6a337b2685da20437b95b1899f3bc03c12cba790d304b85dbd1",
+    "sqpack.hull_kernel.node": "c036c77826845ccb9ec0bf924983df592b8850447bdfb59495997088fe1a6222",
+    "sqpack.hull_kernel.ownership": "0215ddab9cb89d008dec8c800a7438b9f9a04205fa43e7cb55f3f23059bdfcb9",
+    "sqpack.hull_kernel.rational": "69b4b126924d3cd61734496c5ca01dd10f3142116b204fc6d86793ed4c92fae9",
+    "sqpack.hull_kernel.sequential": "f737daf40fada1b97ac3a18c5f16ede468a714ed431ac0adec506de8322abe59",
+    "sqpack.hull_kernel.sweep": "e8ac439dd8107044a2b2e22c69359c493365219fb9bb1221afe98efac5218c6e"
+  },
+  "closure": null,
+  "collision_regions": 47840,
+  "cover_backend": "indexed",
+  "events": 2706825,
+  "excluded_orbits": 0,
+  "excluded_states": 0,
+  "frame": "n17-ring-3-voronoi-8-tabbed-unique",
+  "mask": [
+    0,
+    4,
+    6,
+    8,
+    10,
+    14,
+    17,
+    18,
+    22
+  ],
+  "node_sha256": "89a19166324d9f9093f49b9ec61b57eea37bd03c7d65ad5e76c0144a18a3f092",
+  "process_cpu_seconds": 3187.101868272,
+  "producer_imported": false,
+  "provenance": {
+    "dirty": false,
+    "files": {
+      "packing/devtools/check_n17_subpattern.py": "9e13720c949c744fdef6f83685c7dd74c3641d23"
+    },
+    "revision": "74b9b686f5a4506ff2f1360328affea15bab1cc6"
+  },
+  "rational_backend": {
+    "library": "gmpy2",
+    "mp": "GMP 6.3.0",
+    "version": "2.3.1"
+  },
+  "rows_checked": 24838,
+  "seed_sha256": "58a364a48b27a7be3e84c18a5a8e6542a40166481d62861378df6eba93fe82c0",
+  "status": "PASS_SAVED_STALL",
+  "steps_checked": 207,
+  "wall_seconds": 3714.266044322001
+}

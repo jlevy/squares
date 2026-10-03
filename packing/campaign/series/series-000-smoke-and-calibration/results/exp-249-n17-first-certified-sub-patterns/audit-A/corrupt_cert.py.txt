@@ -1,0 +1,138 @@
+"""R4: write doctored copies of a certificate so the verifier's sensitivity can be measured.
+
+Each corruption changes one thing in one record, rewrites the chunk and the manifest under
+new hashes, and prints the new manifest name. verify_cert.py --manifest NAME then reads it.
+"""
+
+from __future__ import annotations
+
+import gzip
+import hashlib
+import json
+import sys
+from fractions import Fraction as Q
+from pathlib import Path
+
+
+def read_named(directory: Path, name: str):
+    data = gzip.decompress((directory / f"{name}.json.gz").read_bytes())
+    assert hashlib.sha256(data).hexdigest() == name
+    return json.loads(data)
+
+
+def write_named(directory: Path, document) -> str:
+    data = json.dumps(document, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
+    name = hashlib.sha256(data).hexdigest()
+    (directory / f"{name}.json.gz").write_bytes(gzip.compress(data, mtime=0))
+    return name
+
+
+def rational(q: Q) -> str:
+    return f"{q.numerator}/{q.denominator}"
+
+
+def parse(s: str) -> Q:
+    n, d = s.split("/")
+    return Q(int(n), int(d))
+
+
+def main() -> int:
+    directory = Path(sys.argv[1])
+    kind = sys.argv[2]
+    readme = (directory / "README.txt").read_text()
+    manifest_name = readme.strip().splitlines()[-1].split(":")[-1].strip().removesuffix(".json.gz")
+    manifest = read_named(directory, manifest_name)
+    chunks = [read_named(directory, c)["nodes"] for c in manifest["chunks"]]
+    nodes = [n for chunk in chunks for n in chunk]
+    done = False
+    if kind == "cut_v":  # raise one cut's right side by 1e-9 where a multiplier uses it
+        for n in nodes:
+            for r in n["rounds"]:
+                for ref, _y in r.get("farkas", []):
+                    if ref[0] == "u":
+                        cut = r["cuts"][ref[1]]
+                        cut[3] = rational(parse(cut[3]) + Q(1, 10**9))
+                        done = True
+                        break
+                if done:
+                    break
+            if done:
+                break
+    elif kind == "farkas_y":  # negate one Farkas multiplier
+        for n in nodes:
+            for r in n["rounds"]:
+                if r.get("farkas"):
+                    r["farkas"][0][1] = rational(-parse(r["farkas"][0][1]))
+                    done = True
+                    break
+            if done:
+                break
+    elif kind == "bound":  # claim a bound 1e-9 stronger than its multipliers give
+        for n in nodes:
+            for r in n["rounds"]:
+                if r.get("bounds"):
+                    b = r["bounds"][0]
+                    b[2] = rational(parse(b[2]) + Q(1, 10**9))
+                    done = True
+                    break
+            if done:
+                break
+    elif kind == "box":  # shrink a recorded round box by 1e-9 on one side
+        for n in nodes:
+            if n["rounds"]:
+                box = n["rounds"][0]["boxes"][0]
+                box[0] = rational(parse(box[0]) + Q(1, 10**9))
+                done = True
+                break
+    elif kind == "lost_child":  # drop one leaf
+        for i, n in enumerate(nodes):
+            if n["closed"] is not None and n["parent"] is not None:
+                for chunk in chunks:
+                    if n in chunk:
+                        chunk.remove(n)
+                        done = True
+                        break
+                break
+    elif kind == "piece":  # narrow one recorded piece by 1e-9 at its lower end
+        for n in nodes:
+            for r in n["rounds"]:
+                for p, pieces in r.get("pairs", {}).items():
+                    los = sorted(parse(piece[0]) for piece in pieces)
+                    if len(los) >= 2 and los[0] < los[1]:
+                        piece = min(pieces, key=lambda piece: parse(piece[0]))
+                        lo, hi, m = (parse(v) for v in piece)
+                        if lo + Q(1, 10**9) <= m:
+                            piece[0] = rational(lo + Q(1, 10**9))
+                            done = True
+                            break
+                if done:
+                    break
+            if done:
+                break
+    elif kind == "disc":  # widen a disc-closed node's box so |d| can reach 1
+        for n in nodes:
+            if n["closed"] == "disc":
+                r = n["rounds"][-1]
+                p = r["closed_pair"][0]
+                i, j = manifest["header"]["pairs"][p]
+                box = r["boxes"][j]
+                box[1] = rational(parse(box[1]) + Q(1))
+                done = True
+                break
+    elif kind == "split_point":  # move an angle split point outside the interval
+        for n in nodes:
+            if n.get("split") and "angle" in n["split"]:
+                s, a = n["split"]["angle"]
+                n["split"]["angle"][1] = rational(parse(n["angles"][s][1]) + Q(1, 10**6))
+                done = True
+                break
+    else:
+        raise SystemExit(f"unknown corruption {kind}")
+    assert done, kind
+    manifest["chunks"] = [write_named(directory, {"nodes": chunk}) for chunk in chunks]
+    print(write_named(directory, manifest))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

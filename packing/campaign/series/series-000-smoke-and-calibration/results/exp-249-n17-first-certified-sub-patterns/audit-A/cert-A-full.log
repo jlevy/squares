@@ -1,0 +1,245 @@
+manifest 340492bddf2674b70e4403e15c13793c224a5dfa4d428a5e1834da546ee6a9dc
+summary {"complete": true, "leaves": 21215, "nodes": 41598, "verdict": "certified-infeasible"}
+trig 378 checked, 0 bad
+nodes 41598 chunks 84
+tree: reached 41598 closed leaves 21215 max depth 31 reasons {'pair': 6679, 'disc': 10032, 'lp': 4504} summary.complete True
+checking 41598 nodes fully
+  checked 200 at 19.9 s
+  checked 400 at 27.0 s
+  checked 600 at 34.2 s
+  checked 800 at 42.7 s
+  checked 1000 at 50.7 s
+  checked 1200 at 57.8 s
+  checked 1400 at 64.7 s
+  checked 1600 at 71.3 s
+  checked 1800 at 77.0 s
+  checked 2000 at 84.3 s
+  checked 2200 at 92.3 s
+  checked 2400 at 100.7 s
+  checked 2600 at 108.9 s
+  checked 2800 at 115.9 s
+  checked 3000 at 123.7 s
+  checked 3200 at 129.4 s
+  checked 3400 at 135.0 s
+  checked 3600 at 142.7 s
+  checked 3800 at 151.5 s
+  checked 4000 at 159.0 s
+  checked 4200 at 166.3 s
+  checked 4400 at 172.9 s
+  checked 4600 at 177.6 s
+  checked 4800 at 187.1 s
+  checked 5000 at 192.1 s
+  checked 5200 at 200.0 s
+  checked 5400 at 204.9 s
+  checked 5600 at 212.7 s
+  checked 5800 at 218.3 s
+  checked 6000 at 224.9 s
+  checked 6200 at 232.2 s
+  checked 6400 at 242.9 s
+  checked 6600 at 249.3 s
+  checked 6800 at 253.7 s
+  checked 7000 at 264.0 s
+  checked 7200 at 274.0 s
+  checked 7400 at 283.3 s
+  checked 7600 at 289.0 s
+  checked 7800 at 297.2 s
+  checked 8000 at 307.7 s
+  checked 8200 at 317.9 s
+  checked 8400 at 328.2 s
+  checked 8600 at 333.9 s
+  checked 8800 at 343.1 s
+  checked 9000 at 354.4 s
+  checked 9200 at 363.7 s
+  checked 9400 at 370.1 s
+  checked 9600 at 380.2 s
+  checked 9800 at 386.6 s
+  checked 10000 at 394.6 s
+  checked 10200 at 401.8 s
+  checked 10400 at 408.4 s
+  checked 10600 at 418.5 s
+  checked 10800 at 428.7 s
+  checked 11000 at 434.2 s
+  checked 11200 at 444.3 s
+  checked 11400 at 455.3 s
+  checked 11600 at 466.9 s
+  checked 11800 at 476.7 s
+  checked 12000 at 482.3 s
+  checked 12200 at 492.9 s
+  checked 12400 at 504.8 s
+  checked 12600 at 515.6 s
+  checked 12800 at 525.4 s
+  checked 13000 at 534.1 s
+  checked 13200 at 539.6 s
+  checked 13400 at 552.1 s
+  checked 13600 at 564.0 s
+  checked 13800 at 574.2 s
+  checked 14000 at 581.7 s
+  checked 14200 at 591.9 s
+  checked 14400 at 597.9 s
+  checked 14600 at 607.9 s
+  checked 14800 at 618.8 s
+  checked 15000 at 624.5 s
+  checked 15200 at 632.0 s
+  checked 15400 at 636.7 s
+  checked 15600 at 643.2 s
+  checked 15800 at 652.8 s
+  checked 16000 at 661.3 s
+  checked 16200 at 668.4 s
+  checked 16400 at 678.4 s
+  checked 16600 at 690.5 s
+  checked 16800 at 697.8 s
+  checked 17000 at 706.1 s
+  checked 17200 at 719.9 s
+  checked 17400 at 733.1 s
+  checked 17600 at 747.0 s
+  checked 17800 at 754.8 s
+  checked 18000 at 763.4 s
+  checked 18200 at 773.3 s
+  checked 18400 at 781.7 s
+  checked 18600 at 792.3 s
+  checked 18800 at 801.7 s
+  checked 19000 at 806.2 s
+  checked 19200 at 815.5 s
+  checked 19400 at 824.8 s
+  checked 19600 at 830.8 s
+  checked 19800 at 838.5 s
+  checked 20000 at 844.0 s
+  checked 20200 at 852.0 s
+  checked 20400 at 858.1 s
+  checked 20600 at 869.3 s
+  checked 20800 at 876.0 s
+  checked 21000 at 881.1 s
+  checked 21200 at 887.1 s
+  checked 21400 at 893.3 s
+  checked 21600 at 899.3 s
+  checked 21800 at 904.8 s
+  checked 22000 at 911.4 s
+  checked 22200 at 919.8 s
+  checked 22400 at 928.7 s
+  checked 22600 at 936.6 s
+  checked 22800 at 942.1 s
+  checked 23000 at 948.3 s
+  checked 23200 at 954.8 s
+  checked 23400 at 962.7 s
+  checked 23600 at 967.3 s
+  checked 23800 at 972.5 s
+  checked 24000 at 978.7 s
+  checked 24200 at 985.1 s
+  checked 24400 at 997.4 s
+  checked 24600 at 1003.0 s
+  checked 24800 at 1011.6 s
+  checked 25000 at 1017.6 s
+  checked 25200 at 1029.2 s
+  checked 25400 at 1033.8 s
+  checked 25600 at 1042.5 s
+  checked 25800 at 1046.6 s
+  checked 26000 at 1055.0 s
+  checked 26200 at 1061.3 s
+  checked 26400 at 1067.4 s
+  checked 26600 at 1073.2 s
+  checked 26800 at 1077.1 s
+  checked 27000 at 1082.7 s
+  checked 27200 at 1089.5 s
+  checked 27400 at 1095.5 s
+  checked 27600 at 1103.2 s
+  checked 27800 at 1109.4 s
+  checked 28000 at 1113.4 s
+  checked 28200 at 1118.7 s
+  checked 28400 at 1123.3 s
+  checked 28600 at 1130.4 s
+  checked 28800 at 1136.2 s
+  checked 29000 at 1140.5 s
+  checked 29200 at 1145.0 s
+  checked 29400 at 1149.8 s
+  checked 29600 at 1154.5 s
+  checked 29800 at 1158.7 s
+  checked 30000 at 1163.4 s
+  checked 30200 at 1170.7 s
+  checked 30400 at 1180.4 s
+  checked 30600 at 1185.0 s
+  checked 30800 at 1193.8 s
+  checked 31000 at 1202.3 s
+  checked 31200 at 1207.6 s
+  checked 31400 at 1214.3 s
+  checked 31600 at 1223.8 s
+  checked 31800 at 1229.4 s
+  checked 32000 at 1234.2 s
+  checked 32200 at 1239.0 s
+  checked 32400 at 1243.6 s
+  checked 32600 at 1249.4 s
+  checked 32800 at 1255.1 s
+  checked 33000 at 1260.7 s
+  checked 33200 at 1266.0 s
+  checked 33400 at 1271.8 s
+  checked 33600 at 1278.0 s
+  checked 33800 at 1284.3 s
+  checked 34000 at 1289.8 s
+  checked 34200 at 1295.9 s
+  checked 34400 at 1301.6 s
+  checked 34600 at 1306.5 s
+  checked 34800 at 1311.8 s
+  checked 35000 at 1319.3 s
+  checked 35200 at 1325.6 s
+  checked 35400 at 1332.1 s
+  checked 35600 at 1341.1 s
+  checked 35800 at 1347.2 s
+  checked 36000 at 1352.6 s
+  checked 36200 at 1357.3 s
+  checked 36400 at 1365.0 s
+  checked 36600 at 1371.0 s
+  checked 36800 at 1377.4 s
+  checked 37000 at 1384.1 s
+  checked 37200 at 1390.5 s
+  checked 37400 at 1396.4 s
+  checked 37600 at 1402.4 s
+  checked 37800 at 1408.0 s
+  checked 38000 at 1413.9 s
+  checked 38200 at 1419.1 s
+  checked 38400 at 1425.1 s
+  checked 38600 at 1431.5 s
+  checked 38800 at 1436.5 s
+  checked 39000 at 1443.6 s
+  checked 39200 at 1449.0 s
+  checked 39400 at 1453.4 s
+  checked 39600 at 1459.3 s
+  checked 39800 at 1469.1 s
+  checked 40000 at 1473.4 s
+  checked 40200 at 1481.5 s
+  checked 40400 at 1488.2 s
+  checked 40600 at 1494.5 s
+  checked 40800 at 1505.1 s
+  checked 41000 at 1512.0 s
+  checked 41200 at 1518.9 s
+  checked 41400 at 1525.2 s
+{
+ "manifest": "340492bddf2674b70e4403e15c13793c224a5dfa4d428a5e1834da546ee6a9dc",
+ "nodes": 41598,
+ "closed_leaves": 21215,
+ "reasons": {
+  "pair": 6679,
+  "disc": 10032,
+  "lp": 4504
+ },
+ "max_depth": 31,
+ "checked_nodes": 41598,
+ "deepest_checked": 31,
+ "node_failures": 0,
+ "all_failures": 0,
+ "counts": {
+  "header": 1,
+  "trig_checked": 378,
+  "trig_bad": 0,
+  "angle_split_ok": 17349,
+  "open_ok": 20383,
+  "pair_split_ok": 3034,
+  "cut_ok": 1652060,
+  "bound_ok": 639609,
+  "closed_lp_ok": 4504,
+  "closed_disc_ok": 10032,
+  "closed_pair_ok": 6679,
+  "vacuous_cut": 6
+ },
+ "seconds": 1531.2,
+ "verdict": "ok",
+ "failures": []
+}

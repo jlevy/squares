@@ -1,0 +1,8 @@
+import json, sys
+from devtools import check_n17_capacity_one_cover as cov
+cells = cov.build_cover(cov.UNIQUE_24)
+out = {c.name: [[str(x), str(y)] for x, y in c.vertices] for c in cells}
+perms = cov.d4_permutations(cells)
+json.dump({"U": str(cov.U), "cells": out, "order": [c.name for c in cells], "perms": perms}, open(sys.argv[1], "w"), indent=1)
+for c in cells:
+    print(c.name, [(float(x), float(y)) for x, y in c.vertices])

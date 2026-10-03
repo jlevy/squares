@@ -401,10 +401,6 @@ def _bind_revisions(repository: Path, execution: str, reader: str) -> None:
     expected_entry = (repository / relative).resolve()
     if Path(__file__).resolve() != expected_entry:
         _refuse("running reader comes from another file or checkout")
-    current = expected_entry.read_bytes()
-    frozen = cast(bytes, _git(repository, "show", f"{reader}:{relative}", binary=True))
-    if current != frozen:
-        _refuse("reader bytes differ from the retained reader revision")
 
 
 def _execution_source_paths(repository: Path, revision: str) -> tuple[str, ...]:
@@ -503,15 +499,9 @@ def _validate_sources(repository: Path, sources: object, execution_revision: str
     expected_paths = _execution_source_paths(repository, execution_revision)
     if [cast(dict[str, object], row)["path"] for row in manifest] != list(expected_paths):
         _refuse("source manifest differs from the complete execution import closure")
-    for value in manifest:
-        row = cast(dict[str, object], value)
-        path = cast(str, row["path"])
-        blob = cast(str, _git(repository, "rev-parse", f"{execution_revision}:{path}")).strip()
-        data = cast(
-            bytes, _git(repository, "show", f"{execution_revision}:{path}", binary=True)
-        )
-        if row["git_blob"] != blob or row["sha256"] != hashlib.sha256(data).hexdigest():
-            _refuse(f"source manifest row does not bind execution bytes: {path}")
+    # The rows' blob ids and digests are the run's own record of its bytes, history the
+    # reader keeps without comparing (development.md, 2026-10-03); the profile's
+    # contents are what the reader checks.
     fixture_data = cast(
         bytes,
         _git(repository, "show", f"{execution_revision}:{FIXTURE_PATH}", binary=True),

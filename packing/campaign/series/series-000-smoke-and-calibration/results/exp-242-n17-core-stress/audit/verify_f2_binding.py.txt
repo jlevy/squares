@@ -1,0 +1,16 @@
+"""Independent check: F2(t,b) * t(1+t)(1+t^2)(1+b^2) equals the H255 polynomial Pi_2."""
+import json
+from pathlib import Path
+import sympy as sp
+t, b = sp.symbols("t b")
+c, s = (1 - t**2) / (1 + t**2), 2 * t / (1 + t**2)
+d, e = (1 - b**2) / (1 + b**2), 2 * b / (1 + b**2)
+S = (6 + 4 * t) / (1 + 2 * t - t**2)
+X = sp.Rational(1, 2) + (2 + c * s + 3 * s - s * S) / c
+Y = sp.Rational(3, 2) + (2 + 3 * c - c * S) / s
+F2 = d * (S - X - sp.Rational(3, 2)) - e * (Y - S + sp.Rational(3, 2)) - 1
+root = json.loads(Path("packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json").read_text())
+pi2 = sum(sp.Integer(coeff) * t**i * b**j for i, j, coeff in root["polynomials"][0])
+print("Pi_2 from exp-237 certificate:", sp.expand(pi2))
+print("F2 * t(1+t)(1+t^2)(1+b^2) - Pi_2 cancels to:", sp.cancel(F2 * t * (1 + t) * (1 + t**2) * (1 + b**2) - pi2))
+print("Also check the sign-free form: F2 == Pi_2 / (t(1+t)(1+t^2)(1+b^2)) with multiplier positive for t,b>0")

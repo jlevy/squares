@@ -1,0 +1,785 @@
+{"round": 0, "step": 0, "owner": "corner-SW", "live_rows": 32, "owned_hull_vertices": 5, "seconds": 3.2}
+{"round": 0, "step": 1, "owner": "corner-SE", "live_rows": 32, "owned_hull_vertices": 5, "seconds": 5.9}
+{"round": 0, "step": 2, "owner": "corner-NE", "live_rows": 32, "owned_hull_vertices": 5, "seconds": 8.4}
+{"round": 0, "step": 3, "owner": "side-N0", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 13.2}
+{"round": 0, "step": 4, "owner": "side-W0", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 15.3}
+{"round": 0, "step": 5, "owner": "side-E0", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 20.3}
+{"round": 0, "step": 6, "owner": "side-S1", "live_rows": 32, "owned_hull_vertices": 4, "seconds": 27.5}
+{"round": 0, "step": 7, "owner": "side-N1", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 36.6}
+{"round": 0, "step": 8, "owner": "side-E1", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 43.4}
+{"round": 0, "step": 9, "owner": "side-S2", "live_rows": 32, "owned_hull_vertices": 6, "seconds": 49.4}
+{"round": 0, "step": 10, "owner": "side-N2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 55.6}
+{"round": 0, "step": 11, "owner": "side-W2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 60.0}
+{"round": 0, "step": 12, "owner": "side-E2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 65.7}
+{"round": 0, "step": 13, "owner": "interior-SW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 71.0}
+{"round": 0, "step": 14, "owner": "interior-NW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 78.4}
+{"round": 0, "step": 15, "owner": "interior-N", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 90.8}
+{"round": 0, "step": 16, "owner": "interior-SE", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 100.4}
+{"round": 1, "step": 17, "owner": "corner-SW", "live_rows": 32, "owned_hull_vertices": 5, "seconds": 106.8}
+{"round": 1, "step": 18, "owner": "corner-SE", "live_rows": 32, "owned_hull_vertices": 15, "seconds": 112.9}
+{"round": 1, "step": 19, "owner": "corner-NE", "live_rows": 32, "owned_hull_vertices": 5, "seconds": 120.3}
+{"round": 1, "step": 20, "owner": "side-N0", "live_rows": 32, "owned_hull_vertices": 7, "seconds": 131.6}
+{"round": 1, "step": 21, "owner": "side-W0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 138.4}
+{"round": 1, "step": 22, "owner": "side-E0", "live_rows": 32, "owned_hull_vertices": 13, "seconds": 151.1}
+{"round": 1, "step": 23, "owner": "side-S1", "live_rows": 32, "owned_hull_vertices": 6, "seconds": 163.8}
+{"round": 1, "step": 24, "owner": "side-N1", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 181.5}
+{"round": 1, "step": 25, "owner": "side-E1", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 195.4}
+{"round": 1, "step": 26, "owner": "side-S2", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 204.2}
+{"round": 1, "step": 27, "owner": "side-N2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 217.3}
+{"round": 1, "step": 28, "owner": "side-W2", "live_rows": 32, "owned_hull_vertices": 9, "seconds": 228.5}
+{"round": 1, "step": 29, "owner": "side-E2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 242.0}
+{"round": 1, "step": 30, "owner": "interior-SW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 252.9}
+{"round": 1, "step": 31, "owner": "interior-NW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 265.6}
+{"round": 1, "step": 32, "owner": "interior-N", "live_rows": 32, "owned_hull_vertices": 12, "seconds": 285.4}
+{"round": 1, "step": 33, "owner": "interior-SE", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 307.7}
+{"round": 2, "step": 34, "owner": "corner-SW", "live_rows": 32, "owned_hull_vertices": 7, "seconds": 316.9}
+{"round": 2, "step": 35, "owner": "corner-SE", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 326.0}
+{"round": 2, "step": 36, "owner": "corner-NE", "live_rows": 32, "owned_hull_vertices": 5, "seconds": 336.6}
+{"round": 2, "step": 37, "owner": "side-N0", "live_rows": 32, "owned_hull_vertices": 11, "seconds": 355.0}
+{"round": 2, "step": 38, "owner": "side-W0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 365.0}
+{"round": 2, "step": 39, "owner": "side-E0", "live_rows": 32, "owned_hull_vertices": 13, "seconds": 379.4}
+{"round": 2, "step": 40, "owner": "side-S1", "live_rows": 32, "owned_hull_vertices": 12, "seconds": 393.9}
+{"round": 2, "step": 41, "owner": "side-N1", "live_rows": 32, "owned_hull_vertices": 4, "seconds": 423.4}
+{"round": 2, "step": 42, "owner": "side-E1", "live_rows": 32, "owned_hull_vertices": 7, "seconds": 438.0}
+{"round": 2, "step": 43, "owner": "side-S2", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 449.4}
+{"round": 2, "step": 44, "owner": "side-N2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 466.8}
+{"round": 2, "step": 45, "owner": "side-W2", "live_rows": 32, "owned_hull_vertices": 9, "seconds": 481.8}
+{"round": 2, "step": 46, "owner": "side-E2", "live_rows": 30, "owned_hull_vertices": 0, "seconds": 497.9}
+{"round": 2, "step": 47, "owner": "interior-SW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 511.8}
+{"round": 2, "step": 48, "owner": "interior-NW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 527.1}
+{"round": 2, "step": 49, "owner": "interior-N", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 547.2}
+{"round": 2, "step": 50, "owner": "interior-SE", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 577.8}
+{"round": 3, "step": 51, "owner": "corner-SW", "live_rows": 32, "owned_hull_vertices": 8, "seconds": 589.8}
+{"round": 3, "step": 52, "owner": "corner-SE", "live_rows": 27, "owned_hull_vertices": 16, "seconds": 601.7}
+{"round": 3, "step": 53, "owner": "corner-NE", "live_rows": 32, "owned_hull_vertices": 11, "seconds": 618.9}
+{"round": 3, "step": 54, "owner": "side-N0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 648.6}
+{"round": 3, "step": 55, "owner": "side-W0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 659.4}
+{"round": 3, "step": 56, "owner": "side-E0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 678.2}
+{"round": 3, "step": 57, "owner": "side-S1", "live_rows": 32, "owned_hull_vertices": 15, "seconds": 690.9}
+{"round": 3, "step": 58, "owner": "side-N1", "live_rows": 32, "owned_hull_vertices": 6, "seconds": 720.5}
+{"round": 3, "step": 59, "owner": "side-E1", "live_rows": 32, "owned_hull_vertices": 7, "seconds": 737.3}
+{"round": 3, "step": 60, "owner": "side-S2", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 753.2}
+{"round": 3, "step": 61, "owner": "side-N2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 776.4}
+{"round": 3, "step": 62, "owner": "side-W2", "live_rows": 32, "owned_hull_vertices": 11, "seconds": 793.3}
+{"round": 3, "step": 63, "owner": "side-E2", "live_rows": 29, "owned_hull_vertices": 0, "seconds": 813.0}
+{"round": 3, "step": 64, "owner": "interior-SW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 829.1}
+{"round": 3, "step": 65, "owner": "interior-NW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 849.1}
+{"round": 3, "step": 66, "owner": "interior-N", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 868.4}
+{"round": 3, "step": 67, "owner": "interior-SE", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 903.8}
+{"round": 4, "step": 68, "owner": "corner-SW", "live_rows": 32, "owned_hull_vertices": 8, "seconds": 921.6}
+{"round": 4, "step": 69, "owner": "corner-SE", "live_rows": 24, "owned_hull_vertices": 16, "seconds": 934.5}
+{"round": 4, "step": 70, "owner": "corner-NE", "live_rows": 32, "owned_hull_vertices": 11, "seconds": 949.7}
+{"round": 4, "step": 71, "owner": "side-N0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 975.1}
+{"round": 4, "step": 72, "owner": "side-W0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 985.8}
+{"round": 4, "step": 73, "owner": "side-E0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1002.7}
+{"round": 4, "step": 74, "owner": "side-S1", "live_rows": 32, "owned_hull_vertices": 15, "seconds": 1015.0}
+{"round": 4, "step": 75, "owner": "side-N1", "live_rows": 32, "owned_hull_vertices": 7, "seconds": 1045.5}
+{"round": 4, "step": 76, "owner": "side-E1", "live_rows": 32, "owned_hull_vertices": 9, "seconds": 1060.3}
+{"round": 4, "step": 77, "owner": "side-S2", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1072.6}
+{"round": 4, "step": 78, "owner": "side-N2", "live_rows": 32, "owned_hull_vertices": 0, "seconds": 1093.5}
+{"round": 4, "step": 79, "owner": "side-W2", "live_rows": 32, "owned_hull_vertices": 14, "seconds": 1109.7}
+{"round": 4, "step": 80, "owner": "side-E2", "live_rows": 29, "owned_hull_vertices": 0, "seconds": 1126.6}
+{"round": 4, "step": 81, "owner": "interior-SW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1140.2}
+{"round": 4, "step": 82, "owner": "interior-NW", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1159.8}
+{"round": 4, "step": 83, "owner": "interior-N", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1179.0}
+{"round": 4, "step": 84, "owner": "interior-SE", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1211.0}
+{"round": 5, "step": 85, "owner": "corner-SW", "live_rows": 32, "owned_hull_vertices": 8, "seconds": 1223.7}
+{"round": 5, "step": 86, "owner": "corner-SE", "live_rows": 23, "owned_hull_vertices": 16, "seconds": 1233.3}
+{"round": 5, "step": 87, "owner": "corner-NE", "live_rows": 32, "owned_hull_vertices": 11, "seconds": 1246.8}
+{"round": 5, "step": 88, "owner": "side-N0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1272.2}
+{"round": 5, "step": 89, "owner": "side-W0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1282.9}
+{"round": 5, "step": 90, "owner": "side-E0", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1298.6}
+{"round": 5, "step": 91, "owner": "side-S1", "live_rows": 32, "owned_hull_vertices": 16, "seconds": 1309.4}
+{"round": 5, "step": 92, "owner": "side-N1", "live_rows": 32, "owned_hull_vertices": 7, "seconds": 1339.6}
+{"round": 5, "step": 93, "owner": "side-E1", "live_rows": 32, "owned_hull_vertices": 7, "seconds": 1353.2}
+{
+ "certified": "stalled",
+ "closure": null,
+ "excluded_orbits": 0,
+ "excluded_states": 0,
+ "pattern": "custom",
+ "producer_outcome": "time_cap",
+ "reason": null,
+ "rounds": [
+  {
+   "live_rows": {
+    "corner-NE": 32,
+    "corner-SE": 32,
+    "corner-SW": 32,
+    "interior-N": 32,
+    "interior-NW": 32,
+    "interior-SE": 32,
+    "interior-SW": 32,
+    "side-E0": 32,
+    "side-E1": 32,
+    "side-E2": 32,
+    "side-N0": 32,
+    "side-N1": 32,
+    "side-N2": 32,
+    "side-S1": 32,
+    "side-S2": 32,
+    "side-W0": 32,
+    "side-W2": 32
+   },
+   "owned_hull_vertices": {
+    "corner-NE": 5,
+    "corner-SE": 5,
+    "corner-SW": 5,
+    "interior-N": 0,
+    "interior-NW": 16,
+    "interior-SE": 16,
+    "interior-SW": 16,
+    "side-E0": 0,
+    "side-E1": 0,
+    "side-E2": 0,
+    "side-N0": 0,
+    "side-N1": 0,
+    "side-N2": 0,
+    "side-S1": 4,
+    "side-S2": 6,
+    "side-W0": 0,
+    "side-W2": 0
+   },
+   "residual_box_extent": {
+    "corner-NE": [
+     "79/100",
+     "79/100"
+    ],
+    "corner-SE": [
+     "79/100",
+     "79/100"
+    ],
+    "corner-SW": [
+     "79/100",
+     "79/100"
+    ],
+    "interior-N": [
+     "1363232478006765682953/2358612892467200000000",
+     "227/250"
+    ],
+    "interior-NW": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-SE": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-SW": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "side-E0": [
+     "911/1000",
+     "529/750"
+    ],
+    "side-E1": [
+     "93/100",
+     "257/375"
+    ],
+    "side-E2": [
+     "911/1000",
+     "529/750"
+    ],
+    "side-N0": [
+     "529/750",
+     "911/1000"
+    ],
+    "side-N1": [
+     "257/375",
+     "93/100"
+    ],
+    "side-N2": [
+     "529/750",
+     "911/1000"
+    ],
+    "side-S1": [
+     "257/375",
+     "93/100"
+    ],
+    "side-S2": [
+     "38843571088649165882481417/60326437853593600000000000",
+     "911/1000"
+    ],
+    "side-W0": [
+     "911/1000",
+     "529/750"
+    ],
+    "side-W2": [
+     "911/1000",
+     "529/750"
+    ]
+   },
+   "round": 0,
+   "steps": 17
+  },
+  {
+   "live_rows": {
+    "corner-NE": 32,
+    "corner-SE": 32,
+    "corner-SW": 32,
+    "interior-N": 32,
+    "interior-NW": 32,
+    "interior-SE": 32,
+    "interior-SW": 32,
+    "side-E0": 32,
+    "side-E1": 32,
+    "side-E2": 32,
+    "side-N0": 32,
+    "side-N1": 32,
+    "side-N2": 32,
+    "side-S1": 32,
+    "side-S2": 32,
+    "side-W0": 32,
+    "side-W2": 32
+   },
+   "owned_hull_vertices": {
+    "corner-NE": 5,
+    "corner-SE": 15,
+    "corner-SW": 5,
+    "interior-N": 12,
+    "interior-NW": 16,
+    "interior-SE": 16,
+    "interior-SW": 16,
+    "side-E0": 13,
+    "side-E1": 0,
+    "side-E2": 0,
+    "side-N0": 7,
+    "side-N1": 0,
+    "side-N2": 0,
+    "side-S1": 6,
+    "side-S2": 16,
+    "side-W0": 16,
+    "side-W2": 9
+   },
+   "residual_box_extent": {
+    "corner-NE": [
+     "79/100",
+     "79/100"
+    ],
+    "corner-SE": [
+     "2747704203979960693013686213/5394563170467840000000000000",
+     "79/100"
+    ],
+    "corner-SW": [
+     "79/100",
+     "79/100"
+    ],
+    "interior-N": [
+     "126883490287401763558777/302188401536000000000000",
+     "227/250"
+    ],
+    "interior-NW": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-SE": [
+     "11063210082247669008837251/19086973427204403200000000",
+     "649350542035285803673/1127799557888868352000"
+    ],
+    "interior-SW": [
+     "292564475548787778448012431/484769111130112000000000000",
+     "11916963/19226000"
+    ],
+    "side-E0": [
+     "2097604045249117094529911/2905743276288000000000000",
+     "148033816921782655752308801/284300022746112000000000000"
+    ],
+    "side-E1": [
+     "93/100",
+     "6906649522125399529/14410929338843136000"
+    ],
+    "side-E2": [
+     "911/1000",
+     "529/750"
+    ],
+    "side-N0": [
+     "529/750",
+     "7227526196244270229/9084918566092800000"
+    ],
+    "side-N1": [
+     "692710716388660348281460609/1087358167416192000000000000",
+     "93/100"
+    ],
+    "side-N2": [
+     "529/750",
+     "911/1000"
+    ],
+    "side-S1": [
+     "257/375",
+     "93/100"
+    ],
+    "side-S2": [
+     "68069139351268477288802354633167561687/140354657993740146577612800000000000000",
+     "115142214926071929/179258210601009152"
+    ],
+    "side-W0": [
+     "2948662087602778359664437/4102147194880000000000000",
+     "43212267647505501362399/70863164123136000000000"
+    ],
+    "side-W2": [
+     "1398689399146418589250309/1863902004705188249600000",
+     "529/750"
+    ]
+   },
+   "round": 1,
+   "steps": 34
+  },
+  {
+   "live_rows": {
+    "corner-NE": 32,
+    "corner-SE": 32,
+    "corner-SW": 32,
+    "interior-N": 32,
+    "interior-NW": 32,
+    "interior-SE": 32,
+    "interior-SW": 32,
+    "side-E0": 32,
+    "side-E1": 32,
+    "side-E2": 30,
+    "side-N0": 32,
+    "side-N1": 32,
+    "side-N2": 32,
+    "side-S1": 32,
+    "side-S2": 32,
+    "side-W0": 32,
+    "side-W2": 32
+   },
+   "owned_hull_vertices": {
+    "corner-NE": 5,
+    "corner-SE": 16,
+    "corner-SW": 7,
+    "interior-N": 16,
+    "interior-NW": 16,
+    "interior-SE": 16,
+    "interior-SW": 16,
+    "side-E0": 13,
+    "side-E1": 7,
+    "side-E2": 0,
+    "side-N0": 11,
+    "side-N1": 4,
+    "side-N2": 0,
+    "side-S1": 12,
+    "side-S2": 16,
+    "side-W0": 16,
+    "side-W2": 9
+   },
+   "residual_box_extent": {
+    "corner-NE": [
+     "79/100",
+     "79/100"
+    ],
+    "corner-SE": [
+     "602985063665465429/1599853141295104000",
+     "2888595856266613251097/4168421419008000000000"
+    ],
+    "corner-SW": [
+     "79/100",
+     "3338540563621835527/4542459283046400000"
+    ],
+    "interior-N": [
+     "250949110704560607195679/604376803072000000000000",
+     "227/250"
+    ],
+    "interior-NW": [
+     "28300494032880269484079/47554594304000000000000",
+     "11916963/19226000"
+    ],
+    "interior-SE": [
+     "11063210082247669008837251/19086973427204403200000000",
+     "549112310671/961300000000"
+    ],
+    "interior-SW": [
+     "75471144468392544173335601/125515007670353920000000000",
+     "11916963/19226000"
+    ],
+    "side-E0": [
+     "248566936132122968115067/363217909536000000000000",
+     "34642040144442732326501/67146323263488000000000"
+    ],
+    "side-E1": [
+     "93/100",
+     "4346425033134948599/10803686542934016000"
+    ],
+    "side-E2": [
+     "911/1000",
+     "1120088832856121323813/1879533918720000000000"
+    ],
+    "side-N0": [
+     "529/750",
+     "698205456299416880579723/933013549417178726400000"
+    ],
+    "side-N1": [
+     "20769890779919325767137/35431582061568000000000",
+     "4349873739762930245679/4698912266240000000000"
+    ],
+    "side-N2": [
+     "233647114140252253459598001/365073623324701337600000000",
+     "911/1000"
+    ],
+    "side-S1": [
+     "1271104046355980863/3057487844868096000",
+     "1259905356798379/1414225156112384"
+    ],
+    "side-S2": [
+     "200703832839594233578731042183012114529/513379089359303434626539520000000000000",
+     "2157070470763083161757725121/3377677589770648960000000000"
+    ],
+    "side-W0": [
+     "2948662087602778359664437/4102147194880000000000000",
+     "1464704423948347709532436721/2431773817622400000000000000"
+    ],
+    "side-W2": [
+     "75040931/100000000",
+     "529/750"
+    ]
+   },
+   "round": 2,
+   "steps": 51
+  },
+  {
+   "live_rows": {
+    "corner-NE": 32,
+    "corner-SE": 27,
+    "corner-SW": 32,
+    "interior-N": 32,
+    "interior-NW": 32,
+    "interior-SE": 32,
+    "interior-SW": 32,
+    "side-E0": 32,
+    "side-E1": 32,
+    "side-E2": 29,
+    "side-N0": 32,
+    "side-N1": 32,
+    "side-N2": 32,
+    "side-S1": 32,
+    "side-S2": 32,
+    "side-W0": 32,
+    "side-W2": 32
+   },
+   "owned_hull_vertices": {
+    "corner-NE": 11,
+    "corner-SE": 16,
+    "corner-SW": 8,
+    "interior-N": 16,
+    "interior-NW": 16,
+    "interior-SE": 16,
+    "interior-SW": 16,
+    "side-E0": 16,
+    "side-E1": 7,
+    "side-E2": 0,
+    "side-N0": 16,
+    "side-N1": 6,
+    "side-N2": 0,
+    "side-S1": 15,
+    "side-S2": 16,
+    "side-W0": 16,
+    "side-W2": 11
+   },
+   "residual_box_extent": {
+    "corner-NE": [
+     "79/100",
+     "79/100"
+    ],
+    "corner-SE": [
+     "7275338222489023039684319/22837418999808000000000000",
+     "47736939604463233862399/70863164123136000000000"
+    ],
+    "corner-SW": [
+     "79/100",
+     "6677065312370567929/9084918566092800000"
+    ],
+    "interior-N": [
+     "31368359429217323213913/75547100384000000000000",
+     "227/250"
+    ],
+    "interior-NW": [
+     "7018123071718263171801/11888648576000000000000",
+     "12344799408307099623583/19934744268800000000000"
+    ],
+    "interior-SE": [
+     "11063210082247669008837251/19086973427204403200000000",
+     "549112310671/961300000000"
+    ],
+    "interior-SW": [
+     "75471144468392544173335601/125515007670353920000000000",
+     "11916963/19226000"
+    ],
+    "side-E0": [
+     "21257895435270976808706957119861/34072509465692731520000000000000",
+     "5769232663123026025771/11191053877248000000000"
+    ],
+    "side-E1": [
+     "93/100",
+     "117529559/300000000"
+    ],
+    "side-E2": [
+     "911/1000",
+     "2063654517486744600751/3759067837440000000000"
+    ],
+    "side-N0": [
+     "42020498721968043200450167/60326437853593600000000000",
+     "9354171/12500000"
+    ],
+    "side-N1": [
+     "20769890779919325767137/35431582061568000000000",
+     "7364386893780979654875749/8204294389760000000000000"
+    ],
+    "side-N2": [
+     "52752547787265991776727552922767/83695902126870842112000000000000",
+     "911/1000"
+    ],
+    "side-S1": [
+     "1438561370157883921/3733488318676992000",
+     "579936666920441/658024402780160"
+    ],
+    "side-S2": [
+     "393556488299961236450298663381405088433/1026758178718606869253079040000000000000",
+     "49342535924874662608746249299653/77296968495038902528000000000000"
+    ],
+    "side-W0": [
+     "802949/1250000",
+     "1464704423948347709532436721/2431773817622400000000000000"
+    ],
+    "side-W2": [
+     "441004488433711202963971/613110401920000000000000",
+     "529/750"
+    ]
+   },
+   "round": 3,
+   "steps": 68
+  },
+  {
+   "live_rows": {
+    "corner-NE": 32,
+    "corner-SE": 24,
+    "corner-SW": 32,
+    "interior-N": 32,
+    "interior-NW": 32,
+    "interior-SE": 32,
+    "interior-SW": 32,
+    "side-E0": 32,
+    "side-E1": 32,
+    "side-E2": 29,
+    "side-N0": 32,
+    "side-N1": 32,
+    "side-N2": 32,
+    "side-S1": 32,
+    "side-S2": 32,
+    "side-W0": 32,
+    "side-W2": 32
+   },
+   "owned_hull_vertices": {
+    "corner-NE": 11,
+    "corner-SE": 16,
+    "corner-SW": 8,
+    "interior-N": 16,
+    "interior-NW": 16,
+    "interior-SE": 16,
+    "interior-SW": 16,
+    "side-E0": 16,
+    "side-E1": 9,
+    "side-E2": 0,
+    "side-N0": 16,
+    "side-N1": 7,
+    "side-N2": 0,
+    "side-S1": 15,
+    "side-S2": 16,
+    "side-W0": 16,
+    "side-W2": 14
+   },
+   "residual_box_extent": {
+    "corner-NE": [
+     "79/100",
+     "79/100"
+    ],
+    "corner-SE": [
+     "1809646110744370811190611/5709354749952000000000000",
+     "9802889644078340591252647/18271875227376000000000000"
+    ],
+    "corner-SW": [
+     "79/100",
+     "6677065312370567929/9084918566092800000"
+    ],
+    "interior-N": [
+     "31368359429217323213913/75547100384000000000000",
+     "227/250"
+    ],
+    "interior-NW": [
+     "14035471718697844702977/23777297152000000000000",
+     "12344646225334048842333/19934744268800000000000"
+    ],
+    "interior-SE": [
+     "11063210082247669008837251/19086973427204403200000000",
+     "549112310671/961300000000"
+    ],
+    "interior-SW": [
+     "75471144468392544173335601/125515007670353920000000000",
+     "11916963/19226000"
+    ],
+    "side-E0": [
+     "1152671130616793579546486991955153/1847523636794719213824000000000000",
+     "69229650209412357231127/134292646526976000000000"
+    ],
+    "side-E1": [
+     "93/100",
+     "23097949908734027/60748843450368000"
+    ],
+    "side-E2": [
+     "911/1000",
+     "4114012407365452092127/7518135674880000000000"
+    ],
+    "side-N0": [
+     "62423473945113594512589313/90489656780390400000000000",
+     "18663631/25000000"
+    ],
+    "side-N1": [
+     "20769890779919325767137/35431582061568000000000",
+     "7364386893780979654875749/8204294389760000000000000"
+    ],
+    "side-N2": [
+     "84755515523440335801832436923821/134471066821867725056000000000000",
+     "911/1000"
+    ],
+    "side-S1": [
+     "28898471/75000000",
+     "22033251/25000000"
+    ],
+    "side-S2": [
+     "361162823672118958709795921839504929509/980072686844507158284165120000000000000",
+     "73860741583947830838119012030161/115900825514006539520000000000000"
+    ],
+    "side-W0": [
+     "802949/1250000",
+     "1464704423948347709532436721/2431773817622400000000000000"
+    ],
+    "side-W2": [
+     "441004488433711202963971/613110401920000000000000",
+     "529/750"
+    ]
+   },
+   "round": 4,
+   "steps": 85
+  },
+  {
+   "live_rows": {
+    "corner-NE": 32,
+    "corner-SE": 23,
+    "corner-SW": 32,
+    "interior-N": 32,
+    "interior-NW": 32,
+    "interior-SE": 32,
+    "interior-SW": 32,
+    "side-E0": 32,
+    "side-E1": 32,
+    "side-E2": 29,
+    "side-N0": 32,
+    "side-N1": 32,
+    "side-N2": 32,
+    "side-S1": 32,
+    "side-S2": 32,
+    "side-W0": 32,
+    "side-W2": 32
+   },
+   "owned_hull_vertices": {
+    "corner-NE": 11,
+    "corner-SE": 16,
+    "corner-SW": 8,
+    "interior-N": 16,
+    "interior-NW": 16,
+    "interior-SE": 16,
+    "interior-SW": 16,
+    "side-E0": 16,
+    "side-E1": 7,
+    "side-E2": 0,
+    "side-N0": 16,
+    "side-N1": 7,
+    "side-N2": 0,
+    "side-S1": 16,
+    "side-S2": 16,
+    "side-W0": 16,
+    "side-W2": 14
+   },
+   "residual_box_extent": {
+    "corner-NE": [
+     "79/100",
+     "79/100"
+    ],
+    "corner-SE": [
+     "1206387486293049860455199/3806236499968000000000000",
+     "9802889644078340591252647/18271875227376000000000000"
+    ],
+    "corner-SW": [
+     "79/100",
+     "6677065312370567929/9084918566092800000"
+    ],
+    "interior-N": [
+     "31368359429217323213913/75547100384000000000000",
+     "227/250"
+    ],
+    "interior-NW": [
+     "14035471718697844702977/23777297152000000000000",
+     "12344646225334048842333/19934744268800000000000"
+    ],
+    "interior-SE": [
+     "11063210082247669008837251/19086973427204403200000000",
+     "549112310671/961300000000"
+    ],
+    "interior-SW": [
+     "75471144468392544173335601/125515007670353920000000000",
+     "11916963/19226000"
+    ],
+    "side-E0": [
+     "621966964548378175638758203351237/996900707716803372416000000000000",
+     "69229650209412357231127/134292646526976000000000"
+    ],
+    "side-E1": [
+     "93/100",
+     "118248125138047466897731/312372610534696648704000"
+    ],
+    "side-E2": [
+     "911/1000",
+     "4114012407365452092127/7518135674880000000000"
+    ],
+    "side-N0": [
+     "62423473945113594512589313/90489656780390400000000000",
+     "18663631/25000000"
+    ],
+    "side-N1": [
+     "20769890779919325767137/35431582061568000000000",
+     "7364386893780979654875749/8204294389760000000000000"
+    ],
+    "side-N2": [
+     "84755515523440335801832436923821/134471066821867725056000000000000",
+     "911/1000"
+    ],
+    "side-S1": [
+     "28898471/75000000",
+     "22033251/25000000"
+    ],
+    "side-S2": [
+     "361162823672118958709795921839504929509/980072686844507158284165120000000000000",
+     "73860741583947830838119012030161/115900825514006539520000000000000"
+    ],
+    "side-W0": [
+     "802949/1250000",
+     "1464704423948347709532436721/2431773817622400000000000000"
+    ],
+    "side-W2": [
+     "441004488433711202963971/613110401920000000000000",
+     "529/750"
+    ]
+   },
+   "round": 5,
+   "steps": 94
+  }
+ ],
+ "rows_checked": 3008,
+ "status": "PASS_CERTIFIED_STALL",
+ "steps_checked": 94,
+ "wall_seconds": 2473.292263096999
+}
+
+real	41m13.875s
+user	39m42.380s
+sys	0m1.622s

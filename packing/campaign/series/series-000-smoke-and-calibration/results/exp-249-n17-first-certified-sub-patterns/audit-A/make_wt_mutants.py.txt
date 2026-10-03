@@ -1,0 +1,136 @@
+"""R4: write deliberately unsound variants of the bb pilot as scratch modules.
+
+Each mutant is the committed module with one textual patch that must apply exactly once.
+The repository file is read, never written.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import sys
+from pathlib import Path
+
+SRC = Path(__file__).resolve().parent / "wt_bb.py"
+OUT = Path(__file__).resolve().parent / "wt_mutants"
+
+MUTATIONS: dict[str, list[tuple[str, str]]] = {
+    # (g) wall bound shrunk: the admissible band is narrowed by 1e-6
+    "wall": [("            h = h_lower(*angle)\n", "            h = h_lower(*angle) + 1e-6\n")],
+    # (g) wall bound from the midpoint of the angle interval instead of its endpoints
+    "wall_mid": [
+        (
+            "    return max(0.5, min(h_from(*cos_sin(lo)), h_from(*cos_sin(hi))))\n",
+            "    return max(0.5, h_from(*cos_sin(0.5 * (lo + hi))))\n",
+        )
+    ],
+    # (b) chord error term dropped: the middle half-plane uses g_lo instead of g_lo cos x
+    "chord": [
+        (
+            "    chord = dn(g_lo * dn(1.0 - up(x * x) / 2))\n",
+            "    chord = g_lo\n",
+        )
+    ],
+    # (b) chord half-plane dropped altogether: only the two end normals
+    "no_chord": [
+        (
+            "    return [(lo, g_lo), (hi, g_lo), (m, chord)]\n",
+            "    return [(lo, g_lo), (hi, g_lo)]\n",
+        )
+    ],
+    # (d) multiplier sign flipped on every cut row
+    "sign": [
+        (
+            "        scaled = (y, y)\n        for column, coefficient in zip(row.columns, row.exact, strict=True):\n",
+            "        scaled = (-y, -y) if row.owner >= 0 else (y, y)\n        for column, coefficient in zip(row.columns, row.exact, strict=True):\n",
+        )
+    ],
+    # (d) multipliers used with their raw HiGHS sign, no nonnegativity check
+    "raw_sign": [
+        ("        if weight <= 0.0:\n            continue\n", "        if weight == 0.0:\n            continue\n"),
+        (
+            "        duals = [max(0.0, -float(v)) for v in solution.row_dual]\n",
+            "        duals = [float(v) for v in solution.row_dual]\n",
+        ),
+    ],
+    # (e) Farkas and tightening bound rounded inward
+    "inward": [("    return dn(least - right[1])\n", "    return up(least - right[0])\n")],
+    # (a) one of the four normals of each square dropped
+    "normal": [
+        (
+            "        for k in range(4):\n            shift = HALF_PI_MULTIPLES[k]\n",
+            "        for k in range(3):\n            shift = HALF_PI_MULTIPLES[k]\n",
+        )
+    ],
+    # (a) the gap lower bound overstated by 1e-6
+    "gap": [
+        (
+            "            g_lo = gap_lower(node.angles[i], node.angles[j])\n",
+            "            g_lo = gap_lower(node.angles[i], node.angles[j]) + 1e-6\n",
+        )
+    ],
+    # (c) the pair's d-box shrunk by 1e-6 on every side
+    "dbox": [
+        (
+            "        (dn(second[0] - first[1]), up(second[1] - first[0])),\n        (dn(second[2] - first[3]), up(second[3] - first[2])),\n",
+            "        (second[0] - first[1] + 1e-6, second[1] - first[0] - 1e-6),\n        (second[2] - first[3] + 1e-6, second[3] - first[2] - 1e-6),\n",
+        )
+    ],
+    # (c) a negative Lagrange multiplier admitted in the hull-cut bound
+    "lam": [
+        (
+            "        if not lam >= 0.0 or math.isinf(lam):\n",
+            "        if math.isinf(lam):\n",
+        )
+    ],
+    # (h) the period left open at the seam by 1e-6
+    "period": [
+        (
+            "        top = up(theta0 + HALF_PI[1])\n",
+            "        top = theta0 + HALF_PI[0] - 1e-6\n",
+        )
+    ],
+    # (h) the period left open at the seam by 1e-3
+    "period3": [
+        (
+            "        top = up(theta0 + HALF_PI[1])\n",
+            "        top = theta0 + HALF_PI[0] - 1e-3\n",
+        )
+    ],
+    # the disc closure read off the near side of the box instead of the far side
+    "disc": [("        elif squared[1] < 1.0:\n", "        elif squared[0] < 1.0:\n")],
+    # (i) a lost child: angle bisection keeps only the lower half
+    "lost_child": [
+        (
+            "        for part in ((lo, middle), (middle, hi)):\n",
+            "        for part in ((lo, middle),):\n",
+        )
+    ],
+    # (f) the relative angle formed from float differences rather than the difference formulas
+    "diff": [
+        (
+            "    low_end = h_from(*cos_sin_difference(tj[0], ti[1]))\n    high_end = h_from(*cos_sin_difference(tj[1], ti[0]))\n",
+            "    low_end = h_from(*cos_sin(tj[0] - ti[1]))\n    high_end = h_from(*cos_sin(tj[1] - ti[0]))\n",
+        )
+    ],
+}
+
+
+def main() -> int:
+    source = SRC.read_text(encoding="utf-8")
+    print("source sha256", hashlib.sha256(source.encode()).hexdigest())
+    OUT.mkdir(exist_ok=True)
+    names = sys.argv[1:] or list(MUTATIONS)
+    for name in names:
+        text = source
+        for old, new in MUTATIONS[name]:
+            assert text.count(old) == 1, (name, old)
+            text = text.replace(old, new)
+        (OUT / f"mut_{name}.py").write_text(text, encoding="utf-8")
+        print("wrote", name)
+    # The unmutated copy, for a baseline under the same harness.
+    (OUT / "mut_none.py").write_text(source, encoding="utf-8")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

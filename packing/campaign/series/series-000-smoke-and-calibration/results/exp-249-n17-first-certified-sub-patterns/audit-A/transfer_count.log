@@ -1,0 +1,17 @@
+A indices [16, 17, 18, 19, 20, 22]
+distinct D4 images of A: 8
+   ['interior-SW', 'interior-NW', 'interior-W', 'interior-S', 'interior-N', 'interior-SE']
+   ['interior-SW', 'interior-NW', 'interior-W', 'interior-S', 'interior-E', 'interior-SE']
+   ['interior-SW', 'interior-NW', 'interior-W', 'interior-S', 'interior-N', 'interior-NE']
+   ['interior-SW', 'interior-NW', 'interior-W', 'interior-N', 'interior-E', 'interior-NE']
+   ['interior-SW', 'interior-W', 'interior-S', 'interior-E', 'interior-SE', 'interior-NE']
+   ['interior-NW', 'interior-W', 'interior-N', 'interior-E', 'interior-SE', 'interior-NE']
+   ['interior-SW', 'interior-S', 'interior-N', 'interior-E', 'interior-SE', 'interior-NE']
+   ['interior-NW', 'interior-S', 'interior-N', 'interior-E', 'interior-SE', 'interior-NE']
+states total 346104
+excluded states 110448
+inclusion-exclusion excluded states 110448
+excluded orbits 13897
+all orbits (Burnside) 43593
+endpoint cells ['corner-SW', 'corner-SE', 'corner-NW', 'corner-NE', 'side-S0', 'side-N0', 'side-W0', 'side-E0', 'side-S1', 'side-N1', 'side-E1', 'side-S2', 'side-N2', 'side-W2', 'interior-W', 'interior-N', 'interior-E']
+endpoint state contains an image of A: False

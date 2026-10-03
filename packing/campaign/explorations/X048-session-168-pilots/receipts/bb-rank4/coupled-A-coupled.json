@@ -1,0 +1,28 @@
+{
+ "schema": "n17-bb-coupled-prototype/v1",
+ "pattern": [
+  "interior-SW",
+  "interior-NW",
+  "interior-W",
+  "interior-S",
+  "interior-N",
+  "interior-SE"
+ ],
+ "module_sha256": "89e556fa3c3fa3a9b1086b25acbcc285384effe2eed163d28440469e90295be1",
+ "pilot_sha256": "c626beb97b606cf5eb8de0050a275a0df88e19575b1ac862537e8db2038d2aec",
+ "dives": 10,
+ "seed": 2,
+ "coupled": true,
+ "taylor_rows": false,
+ "estimated_nodes_mean": 22597.4,
+ "estimated_nodes_median": 4095.0,
+ "estimated_nodes_max": 196479.0,
+ "mean_leaf_depth": 10.1,
+ "seconds_per_node": 0.008530777747747945,
+ "coverage": {
+  "pair_terms": 2167,
+  "coupled": 27
+ },
+ "wall_seconds": 0.947,
+ "cpu_seconds": 0.71
+}

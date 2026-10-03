@@ -1,0 +1,130 @@
+"""R4: independent transfer count for pattern A on the 24-cell unique cover.
+
+Uses only the cover tool's cell polygons and its D4 action on points; the permutation
+of cells, the state enumeration and the orbit count are computed here.
+"""
+
+from __future__ import annotations
+
+import itertools
+import sys
+from fractions import Fraction as Q
+
+from devtools import check_n17_capacity_one_cover as cover
+
+A = ("interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N", "interior-SE")
+SIZE = 17
+
+
+def main() -> int:
+    cells = cover.build_cover(cover.UNIQUE_24)
+    names = [c.name for c in cells]
+    n = len(cells)
+    assert n == 24, n
+    # Canonical vertex sets so that images can be matched exactly.
+    canon = {frozenset(c.vertices): k for k, c in enumerate(cells)}
+    assert len(canon) == n
+    perms: dict[str, tuple[int, ...]] = {}
+    for action in cover.D4:
+        perm = []
+        for c in cells:
+            image = frozenset(cover.d4_apply(action, v) for v in c.vertices)
+            perm.append(canon[image])
+        assert sorted(perm) == list(range(n)), action
+        perms[action] = tuple(perm)
+    # Check the group is closed (8 distinct permutations forming a group).
+    group = set(perms.values())
+    assert len(group) == 8
+    for p in group:
+        for q in group:
+            assert tuple(p[q[i]] for i in range(n)) in group
+    a_idx = tuple(names.index(x) for x in A)
+    a_mask = sum(1 << i for i in a_idx)
+    images = set()
+    for p in group:
+        images.add(sum(1 << p[i] for i in a_idx))
+    print("A indices", list(a_idx))
+    print("distinct D4 images of A:", len(images))
+    for m in sorted(images):
+        print("  ", [names[i] for i in range(n) if m >> i & 1])
+    # Direct enumeration of all 17-subsets.
+    total = 0
+    excluded = 0
+    excluded_masks = []
+    for combo in itertools.combinations(range(n), SIZE):
+        total += 1
+        m = sum(1 << i for i in combo)
+        if any(m & im == im for im in images):
+            excluded += 1
+            excluded_masks.append(m)
+    print("states total", total)
+    print("excluded states", excluded)
+    # Inclusion-exclusion over the images as a cross-check.
+    from math import comb
+
+    ie = 0
+    imgs = sorted(images)
+    for r in range(1, len(imgs) + 1):
+        for sub in itertools.combinations(imgs, r):
+            u = 0
+            for s in sub:
+                u |= s
+            k = bin(u).count("1")
+            if k <= SIZE:
+                ie += (-1) ** (r + 1) * comb(n - k, SIZE - k)
+    print("inclusion-exclusion excluded states", ie)
+    # Orbits: canonical form = min over the group of the image mask.
+    def canonical(m: int) -> int:
+        best = None
+        for p in group:
+            im = 0
+            for i in range(n):
+                if m >> i & 1:
+                    im |= 1 << p[i]
+            if best is None or im < best:
+                best = im
+        return best
+
+    excluded_orbits = {canonical(m) for m in excluded_masks}
+    print("excluded orbits", len(excluded_orbits))
+    # All orbits by Burnside: (1/8) sum over g of #fixed 17-subsets.
+    fixed_total = 0
+    for p in group:
+        # cycle decomposition
+        seen = [False] * n
+        cycles = []
+        for i in range(n):
+            if not seen[i]:
+                L = 0
+                j = i
+                while not seen[j]:
+                    seen[j] = True
+                    j = p[j]
+                    L += 1
+                cycles.append(L)
+        # number of unions of cycles with total size 17: coefficient of x^17 in prod (1 + x^L)
+        poly = [0] * (n + 1)
+        poly[0] = 1
+        for L in cycles:
+            new = poly[:]
+            for d in range(n + 1 - L):
+                new[d + L] += poly[d]
+            poly = new
+        fixed_total += poly[SIZE]
+    assert fixed_total % 8 == 0
+    print("all orbits (Burnside)", fixed_total // 8)
+    # Does the endpoint's state contain an image of A?
+    try:
+        from devtools import select_n17_sub_patterns as selector
+
+        ep = selector.endpoint_pose(cover.UNIQUE_24.name)
+        ep_mask = sum(1 << int(c) for c in ep["cells"])
+        print("endpoint cells", [names[int(c)] for c in ep["cells"]])
+        print("endpoint state contains an image of A:", any(ep_mask & im == im for im in images))
+    except Exception as exc:  # noqa: BLE001
+        print("endpoint check failed:", exc)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

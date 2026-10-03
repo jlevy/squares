@@ -1,0 +1,167 @@
+"""Micro-benchmark: the collision facet check on W7's heaviest step (step 3, 256 regions,
+384 live partner rows, 16,384 (region, partner-row) pairs), under several arithmetics.
+Every variant is checked to give the same verdict (all pass) and the same check count."""
+import json, sys, time, math
+from fractions import Fraction as Q
+from functools import cmp_to_key
+sys.path.insert(0, "/home/user/squares/packing/src")
+from sqpack.hull_kernel import collision as C
+from sqpack.hull_kernel.geometry import Budget
+from sqpack.hull_kernel.induction import hull, convex
+from sqpack.hull_kernel.node import points
+from sqpack.hull_kernel.covers import convex_halfplanes
+D = json.load(open("bench_w7.json"))
+step = D["step"]
+budget = Budget(time.monotonic() + 10**6, 10**9)
+partners = {}
+for key, items in step["prior_partner_pose_covers"].items():
+    partners[int(key)] = [(hull(points(it["domain"])), convex(points(it["core"]))) for it in items if it["domain"]]
+jobs = []
+for row in step["rows"]:
+    if not row["collision_regions"]:
+        continue
+    core = convex(points(row["core_vertices"]))
+    domain = convex(points(row["input_domain"]))
+    for item in row["collision_regions"]:
+        region = convex(points(item["vertices"]))
+        jobs.append((core, domain, partners[item["partner"]], region))
+pairs = sum(len(p) for _, _, p, _ in jobs)
+print(f"jobs(regions)={len(jobs)} pairs={pairs}")
+LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else len(jobs)
+jobs = jobs[:LIMIT]
+pairs = sum(len(p) for _, _, p, _ in jobs)
+
+def timed(name, fn):
+    t = time.perf_counter(); checks = 0
+    for core, domain, prow, region in jobs:
+        checks += fn(core, domain, prow, region)
+    dt = time.perf_counter() - t
+    print(f"{name:40s} {dt:8.3f} s  {1e6*dt/pairs:8.1f} us/pair  checks={checks}")
+    return dt
+
+base = timed("checker: integer_universal_collision", lambda c, d, p, r: C.integer_universal_collision(c, d, p, r, budget=budget))
+timed("reference: universal_collision(Fraction)", lambda c, d, p, r: C.universal_collision(c, d, p, r, budget=budget))
+
+# gmpy2 mpq: same Fraction code path with mpq operands
+try:
+    import gmpy2
+    from gmpy2 import mpq, mpz
+    def conv(poly): return [(mpq(x.numerator, x.denominator), mpq(y.numerator, y.denominator)) for x, y in poly]
+    jobs_q = [(conv(c), conv(d), [(conv(a), conv(b)) for a, b in p], conv(r)) for c, d, p, r in jobs]
+    def uc_generic(core, domain, prows, region):
+        # a copy of universal_collision without the query-domain check, type-agnostic
+        checks = 0
+        for dom, pcore in prows:
+            diff = hull([(x - qx, y - qy) for x, y in pcore for qx, qy in core])
+            for a, b in zip(diff, diff[1:] + diff[:1]):
+                nx, ny = b[1] - a[1], a[0] - b[0]
+                upper = nx * a[0] + ny * a[1]
+                bound = upper + min(nx * x + ny * y for x, y in dom)
+                for x, y in region:
+                    checks += 1
+                    assert nx * x + ny * y <= bound
+        return checks
+    t = time.perf_counter(); n = 0
+    for j in jobs: n += uc_generic(*j)
+    print(f"{'Fraction, no query-domain check':40s} {time.perf_counter()-t:8.3f} s  (control for the generic form)")
+    t = time.perf_counter(); n = 0
+    for j in jobs_q: n += uc_generic(*j)
+    dt = time.perf_counter() - t
+    print(f"{'gmpy2 mpq, same code':40s} {dt:8.3f} s  {1e6*dt/pairs:8.1f} us/pair  checks={n}")
+    # homogeneous with mpz
+    def enc(pt):
+        x, y = pt; z = math.lcm(x.denominator, y.denominator)
+        return (mpz(x.numerator * (z // x.denominator)), mpz(y.numerator * (z // y.denominator)), mpz(z))
+    def hom_check(core, domain, prows, region):
+        query = [enc(p) for p in core]; verts = [enc(p) for p in region]; checks = 0
+        for dom, pcore in prows:
+            partner = [enc(p) for p in pcore]; centers = [enc(p) for p in dom]
+            diff = C.homogeneous_hull([(x*qz - qx*z, y*qz - qy*z, z*qz) for x, y, z in partner for qx, qy, qz in query])
+            for a, b in zip(diff, diff[1:] + diff[:1]):
+                nx = b[1]*a[2] - a[1]*b[2]; ny = a[0]*b[2] - b[0]*a[2]; upper = a[0]*b[1] - a[1]*b[0]
+                minimum = None
+                for x, y, z in centers:
+                    v = nx*x + ny*y
+                    if minimum is None or v*minimum[1] < minimum[0]*z: minimum = (v, z)
+                v, den = minimum; rhs = upper*den + v
+                for x, y, z in verts:
+                    checks += 1
+                    assert (nx*x + ny*y)*den <= rhs*z
+        return checks
+    t = time.perf_counter(); n = 0
+    for j in jobs: n += hom_check(*j)
+    dt = time.perf_counter() - t
+    print(f"{'gmpy2 mpz homogeneous':40s} {dt:8.3f} s  {1e6*dt/pairs:8.1f} us/pair  checks={n}")
+except ImportError as e:
+    print("gmpy2 unavailable", e)
+
+try:
+    import flint
+    from flint import fmpq
+    def convf(poly): return [(fmpq(x.numerator, x.denominator), fmpq(y.numerator, y.denominator)) for x, y in poly]
+    jobs_f = [(convf(c), convf(d), [(convf(a), convf(b)) for a, b in p], convf(r)) for c, d, p, r in jobs]
+    t = time.perf_counter(); n = 0
+    for j in jobs_f: n += uc_generic(*j)
+    dt = time.perf_counter() - t
+    print(f"{'python-flint fmpq, same code':40s} {dt:8.3f} s  {1e6*dt/pairs:8.1f} us/pair  checks={n}")
+except ImportError as e:
+    print("flint unavailable", e)
+
+# Facet cache: the Minkowski facets of Q_r - Q_i depend on the two cores only. Cache the
+# integer facet normals and supports per (core, partner core) and the min over D_r per
+# (partner row id, normal). Same inequalities verified, in integers.
+def cached_variant():
+    facet_cache = {}
+    dom_min_cache = {}
+    def enc(pt):
+        x, y = pt; z = math.lcm(x.denominator, y.denominator)
+        return (x.numerator * (z // x.denominator), y.numerator * (z // y.denominator), z)
+    def facets(core_key, core, pcore_key, pcore):
+        k = (core_key, pcore_key)
+        f = facet_cache.get(k)
+        if f is None:
+            query = [enc(p) for p in core]; partner = [enc(p) for p in pcore]
+            diff = C.homogeneous_hull([(x*qz - qx*z, y*qz - qy*z, z*qz) for x, y, z in partner for qx, qy, qz in query])
+            f = []
+            for a, b in zip(diff, diff[1:] + diff[:1]):
+                nx = b[1]*a[2] - a[1]*b[2]; ny = a[0]*b[2] - b[0]*a[2]; upper = a[0]*b[1] - a[1]*b[0]
+                g = math.gcd(nx, ny, upper)
+                f.append((nx//g, ny//g, upper//g))
+            facet_cache[k] = f
+        return f
+    def check(core, domain, prows, region):
+        core_key = tuple(core); verts = [enc(p) for p in region]; checks = 0
+        for dom, pcore in prows:
+            dom_key = id(dom)
+            for nx, ny, upper in facets(core_key, core, tuple(pcore), pcore):
+                mk = (dom_key, nx, ny)
+                m = dom_min_cache.get(mk)
+                if m is None:
+                    minimum = None
+                    for x, y, z in (enc(p) for p in dom):
+                        v = nx*x + ny*y
+                        if minimum is None or v*minimum[1] < minimum[0]*z: minimum = (v, z)
+                    m = dom_min_cache[mk] = minimum
+                v, den = m; rhs = upper*den + v
+                for x, y, z in verts:
+                    checks += 1
+                    assert (nx*x + ny*y)*den <= rhs*z
+        return checks
+    return check, facet_cache, dom_min_cache
+chk, fc, dc = cached_variant()
+t = time.perf_counter(); n = 0
+for j in jobs: n += chk(*j)
+dt = time.perf_counter() - t
+print(f"{'int homogeneous + facet/min cache':40s} {dt:8.3f} s  {1e6*dt/pairs:8.1f} us/pair  checks={n}  facets cached={len(fc)} mins cached={len(dc)}")
+# Dump the integer facet/vertex instances for the Rust benchmark: every (facet, den, rhs, vertex) check
+import itertools
+inst = []
+def enc(pt):
+    x, y = pt; z = math.lcm(x.denominator, y.denominator)
+    return [str(x.numerator * (z // x.denominator)), str(y.numerator * (z // y.denominator)), str(z)]
+out = {"jobs": []}
+for core, domain, prows, region in jobs:
+    out["jobs"].append({"core": [enc(p) for p in core], "region": [enc(p) for p in region],
+                        "partners": [{"domain": [enc(p) for p in d], "core": [enc(p) for p in c]} for d, c in prows]})
+json.dump(out, open("bench_collision_int.json", "w"))
+print("wrote bench_collision_int.json")

@@ -1,0 +1,20 @@
+{
+ "mask": [
+  0,
+  5,
+  6,
+  10,
+  14,
+  16,
+  18
+ ],
+ "bins": 8,
+ "steps": 14,
+ "contradiction": null,
+ "closed": false,
+ "seconds": 4.3,
+ "files": [
+  "node-8120340cba08eb37e9edab89f45d29f70a8f826c6f88679ba1e9121551ff66d6.json.gz",
+  "seed-ada29c627aad3c29b9a252605d1d62377f9aa8f86263ba6f2da7966725a3701b.json.gz"
+ ]
+}

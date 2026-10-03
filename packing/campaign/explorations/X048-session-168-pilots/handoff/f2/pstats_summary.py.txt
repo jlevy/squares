@@ -1,0 +1,8 @@
+import pstats, sys, io
+for path in sys.argv[1:]:
+    print("#" * 100); print("#", path)
+    st = pstats.Stats(path)
+    st.sort_stats("tottime")
+    out = io.StringIO(); st.stream = out; st.print_stats(45); print(out.getvalue())
+    st.sort_stats("cumulative")
+    out = io.StringIO(); st.stream = out; st.print_stats(45); print(out.getvalue())

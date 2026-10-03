@@ -1,0 +1,19 @@
+{"pattern": ["interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N", "interior-SE"], "coupled": false, "estimated_nodes_mean": 22597.4}
+A interval exit 0
+{"pattern": ["interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N", "interior-SE"], "coupled": true, "estimated_nodes_mean": 22597.4}
+A coupled exit 0
+{"pattern": ["interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N", "interior-SE"], "coupled": true, "estimated_nodes_mean": 10763.8}
+A coupled-taylor exit 0
+{"pattern": ["corner-SE", "side-N0", "side-S2", "interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N"], "coupled": false, "estimated_nodes_mean": 2875525.4}
+I8 interval exit 0
+{"pattern": ["corner-SE", "side-N0", "side-S2", "interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N"], "coupled": true, "estimated_nodes_mean": 2875525.4}
+I8 coupled exit 0
+{"pattern": ["corner-SE", "side-N0", "side-S2", "interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N"], "coupled": true, "estimated_nodes_mean": 6209919.0}
+I8 coupled-taylor exit 0
+{"pattern": ["corner-NW", "corner-NE", "side-N0", "side-N1", "side-N2", "side-W2", "side-E2", "interior-NW"], "coupled": false, "estimated_nodes_mean": 13798610.2}
+N8 interval exit 0
+{"pattern": ["corner-NW", "corner-NE", "side-N0", "side-N1", "side-N2", "side-W2", "side-E2", "interior-NW"], "coupled": true, "estimated_nodes_mean": 23246808.6}
+N8 coupled exit 0
+{"pattern": ["corner-NW", "corner-NE", "side-N0", "side-N1", "side-N2", "side-W2", "side-E2", "interior-NW"], "coupled": true, "estimated_nodes_mean": 2732959.0}
+N8 coupled-taylor exit 0
+DONE

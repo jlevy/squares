@@ -1,0 +1,216 @@
+"""Independent recount of the H259/H260 census under the s(6) and s(10) cuts.
+
+States: 25 cells of a 5x5 grid; the 16 boundary cells hold 0 or 1 centre, the 9
+interior cells 0, 1 or 2; the total is 17. Cuts: every 2x2 block holds at most 5 and
+every 3x3 block at most 9. Orbits: D4 acting on the grid, counted by Burnside.
+Two independent state counts: direct enumeration and a row-by-row transfer DP.
+Also: orbit counts per class-count vector, and the antipodal-pair bound for symmetric
+per-cell floor vectors, from this table alone.
+"""
+
+import itertools
+import json
+import sys
+import time
+
+import numpy as np
+
+G = 5
+N = 17
+CELLS = [(i, j) for i in range(G) for j in range(G)]
+IDX = {c: k for k, c in enumerate(CELLS)}
+BOUND = [c for c in CELLS if 0 in c or G - 1 in c]
+INTER = [c for c in CELLS if c not in BOUND]
+assert len(BOUND) == 16 and len(INTER) == 9
+
+
+def cls(c):
+    i, j = sorted(min(k, G - 1 - k) for k in c)
+    return {(0, 0): 0, (0, 1): 1, (0, 2): 2, (1, 1): 3, (1, 2): 4, (2, 2): 5}[(i, j)]
+
+
+def blocks(size):
+    return [
+        [(i + a, j + b) for a in range(size) for b in range(size)]
+        for i in range(G - size + 1)
+        for j in range(G - size + 1)
+    ]
+
+
+def d4():
+    last = G - 1
+    return [
+        lambda i, j: (i, j),
+        lambda i, j: (last - i, j),
+        lambda i, j: (i, last - j),
+        lambda i, j: (last - i, last - j),
+        lambda i, j: (j, i),
+        lambda i, j: (last - j, i),
+        lambda i, j: (j, last - i),
+        lambda i, j: (last - j, last - i),
+    ]
+
+
+def enumerate_census():
+    t0 = time.perf_counter()
+    nb, ni = len(BOUND), len(INTER)
+    bvec = ((np.arange(1 << nb)[:, None] >> np.arange(nb)) & 1).astype(np.int8)
+    ivec = ((np.arange(3**ni)[:, None] // (3 ** np.arange(ni))) % 3).astype(np.int8)
+    bpos = {c: p for p, c in enumerate(BOUND)}
+    ipos = {c: p for p, c in enumerate(INTER)}
+
+    def block_matrix(size):
+        bl = blocks(size)
+        mb = np.zeros((nb, len(bl)), dtype=np.int16)
+        mi = np.zeros((ni, len(bl)), dtype=np.int16)
+        for q, block in enumerate(bl):
+            for c in block:
+                if c in bpos:
+                    mb[bpos[c], q] = 1
+                else:
+                    mi[ipos[c], q] = 1
+        return bvec.astype(np.int16) @ mb, ivec.astype(np.int16) @ mi
+
+    b2, i2 = block_matrix(2)
+    b3, i3 = block_matrix(3)
+    bsum = bvec.sum(axis=1)
+    isum = ivec.sum(axis=1)
+    bclass = np.array([cls(c) for c in BOUND])
+    iclass = np.array([cls(c) for c in INTER])
+    # class-count vectors: boundary classes 0,1,2 ; interior classes 3,4,5
+    bcc = np.stack([bvec[:, bclass == k].sum(axis=1) for k in range(3)], axis=1)
+    icc = np.stack([ivec[:, iclass == k].sum(axis=1) for k in range(3, 6)], axis=1)
+    bkey = bcc[:, 0] + 5 * bcc[:, 1] + 45 * bcc[:, 2]  # corner<=4, near<=8, middle<=4
+    ikey = icc[:, 0] + 9 * icc[:, 1] + 81 * icc[:, 2]  # icorner<=4(8 cap), iedge, centre<=2
+    perms = []
+    for g in d4():
+        pb = [bpos[g(*c)] for c in BOUND]
+        pi = [ipos[g(*c)] for c in INTER]
+        perms.append((pb, pi))
+    bfix = [(bvec == bvec[:, pb]).all(axis=1) for pb, _ in perms]
+    ifix = [(ivec == ivec[:, pi]).all(axis=1) for _, pi in perms]
+    by_sum = {s: np.flatnonzero(bsum == s) for s in range(nb + 1)}
+    states_all = 0
+    states_cut = 0
+    fixed_all = [0] * 8
+    fixed_cut = [0] * 8
+    class_fixed = np.zeros((8, 243, 225), dtype=np.int64)
+    for r in range(len(ivec)):
+        need = N - int(isum[r])
+        if need < 0 or need > nb:
+            continue
+        idx = by_sum[need]
+        ok = ((b2[idx] + i2[r]) <= 5).all(axis=1) & ((b3[idx] + i3[r]) <= 9).all(axis=1)
+        states_all += len(idx)
+        states_cut += int(ok.sum())
+        for g in range(8):
+            if ifix[g][r]:
+                fb = bfix[g][idx]
+                fixed_all[g] += int(fb.sum())
+                sel = ok & fb
+                fixed_cut[g] += int(sel.sum())
+                class_fixed[g, ikey[r]] += np.bincount(bkey[idx][sel], minlength=225)
+    assert sum(fixed_all) % 8 == 0 and sum(fixed_cut) % 8 == 0
+    tot = class_fixed.sum(axis=0)
+    assert (tot % 8 == 0).all()
+    orbits_by_cc = {}
+    for ik in range(243):
+        for bk in range(225):
+            if tot[ik, bk]:
+                cc = (bk % 5, (bk // 5) % 9, bk // 45, ik % 9, (ik // 9) % 9, ik // 81)
+                orbits_by_cc[cc] = int(tot[ik, bk] // 8)
+    return {
+        "seconds": time.perf_counter() - t0,
+        "all": {"states": states_all, "orbits": sum(fixed_all) // 8, "fixed": fixed_all},
+        "cuts": {"states": states_cut, "orbits": sum(fixed_cut) // 8, "fixed": fixed_cut},
+        "orbits_by_class_counts": orbits_by_cc,
+    }
+
+
+def transfer_dp():
+    """Row-by-row DP over the five rows; an independent count of cut-surviving states."""
+    rows = list(itertools.product(range(3), repeat=G))  # occupancy of one row, 243
+    rows = np.array(rows, dtype=np.int16)
+    rsum = rows.sum(axis=1)
+
+    def valid_row(r, boundary_row):
+        v = rows[r]
+        if boundary_row:
+            return bool((v <= 1).all())
+        return v[0] <= 1 and v[G - 1] <= 1
+
+    valid_b = np.array([valid_row(r, True) for r in range(243)])
+    valid_m = np.array([valid_row(r, False) for r in range(243)])
+    # 2x2 compat between consecutive rows a (upper) and b (lower)
+    pair = rows[:, None, :] + rows[None, :, :]  # 243x243x5
+    c2 = ((pair[:, :, :-1] + pair[:, :, 1:]) <= 5).all(axis=2)
+    # 3x3 compat among rows a,b,c
+    trip = pair[:, :, None, :] + rows[None, None, :, :]  # 243x243x243x5
+    c3 = ((trip[:, :, :, :-2] + trip[:, :, :, 1:-1] + trip[:, :, :, 2:]) <= 9).all(axis=3)
+    # DP state: (prev row, cur row, total so far)
+    T = N + 1
+    # rows 0 and 1
+    C = np.zeros((243, 243, T), dtype=np.int64)
+    for a in range(243):
+        if not valid_b[a]:
+            continue
+        for b in range(243):
+            if not valid_m[b] or not c2[a, b]:
+                continue
+            s = int(rsum[a] + rsum[b])
+            if s <= N:
+                C[a, b, s] = 1
+    for row in range(2, G):
+        vnext = valid_b if row == G - 1 else valid_m
+        Cn = np.zeros_like(C)
+        for c in range(243):
+            if not vnext[c]:
+                continue
+            s = int(rsum[c])
+            if s > N:
+                continue
+            # allowed (a,b) with c3[a,b,c] and c2[b,c]
+            mask = c3[:, :, c] & c2[:, c][None, :]
+            contrib = (C * mask[:, :, None]).sum(axis=0)  # over a -> (b, total)
+            Cn[:, c, s:] += contrib[:, : T - s]
+        C = Cn
+    return int(C[:, :, N].sum())
+
+
+def antipodal_bound(table, endpoint):
+    same = table.get(endpoint, 0)
+    bound = same
+    seen = set()
+    pairs = []
+    for n, count in table.items():
+        d = tuple(a - b for a, b in zip(n, endpoint))
+        if not any(d) or d in seen:
+            continue
+        mirror = tuple(a - b for a, b in zip(endpoint, d))
+        if mirror in table:
+            seen.add(d)
+            seen.add(tuple(-x for x in d))
+            bound += min(count, table[mirror])
+            pairs.append((d, count, table[mirror]))
+    return same, bound, len(pairs)
+
+
+if __name__ == "__main__":
+    out = sys.argv[1]
+    res = enumerate_census()
+    print("enumeration", json.dumps({k: v for k, v in res.items() if k != "orbits_by_class_counts"}))
+    endpoint = (4, 4, 3, 2, 4, 0)
+    table = res["orbits_by_class_counts"]
+    same, bound, npairs = antipodal_bound(table, endpoint)
+    print("class-count vectors", len(table), "endpoint orbits", same, "antipodal bound", bound, "pairs", npairs)
+    t0 = time.perf_counter()
+    dp = transfer_dp()
+    print("transfer DP cut states", dp, "seconds", time.perf_counter() - t0)
+    res["transfer_dp_cut_states"] = dp
+    res["class_count_vectors"] = len(table)
+    res["endpoint_orbits"] = same
+    res["antipodal_bound"] = bound
+    res["antipodal_pairs"] = npairs
+    res["orbits_by_class_counts"] = {",".join(map(str, k)): v for k, v in table.items()}
+    with open(out, "w") as f:
+        json.dump(res, f, indent=1)

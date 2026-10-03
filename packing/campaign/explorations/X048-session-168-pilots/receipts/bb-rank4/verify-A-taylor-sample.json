@@ -1,0 +1,64 @@
+{
+ "schema": "n17-certificate-verification/v1",
+ "verifier": "branch-and-bound",
+ "verifier_sha256": "9ca8df6f399c11cdbc695bf7e27d436fdbc1b2e72bbaf63a430bb5752af20cbf",
+ "directory": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2-taylor/cert-A-taylor",
+ "cells_source": {
+  "kind": "cover",
+  "design": "ring-3-voronoi-8-tabbed-unique"
+ },
+ "mode": "sample",
+ "sample": {
+  "nodes": 60,
+  "deepest": 10,
+  "trig": 400,
+  "seed": 1
+ },
+ "certificate": {
+  "manifest_sha256": "b1e16b6675733db5e0d6a9734d4c0f5e2dcecf187c17d6288d8a3ab4897fd131",
+  "chunks": 49
+ },
+ "pattern": [
+  "interior-SW",
+  "interior-NW",
+  "interior-W",
+  "interior-S",
+  "interior-N",
+  "interior-SE"
+ ],
+ "nodes": 24179,
+ "closed_leaves": 12388,
+ "reasons": {
+  "disc": 6707,
+  "lp": 2926,
+  "pair": 2755
+ },
+ "max_depth": 29,
+ "checked_nodes": 1151,
+ "node_failures": 0,
+ "counts": {
+  "angle_split_ok": 748,
+  "bound_ok": 19036,
+  "closed_disc_ok": 51,
+  "closed_lp_ok": 64,
+  "closed_pair_ok": 15,
+  "cut_ok": 37179,
+  "header": 1,
+  "open_ok": 1021,
+  "pair_split_ok": 273,
+  "taylor_cut_ok": 12051,
+  "trig_bad": 0,
+  "trig_checked": 351
+ },
+ "status": "FAIL",
+ "failures": [
+  "T2: node 21233 angle split children mismatch",
+  "T2: node 23782 angle split children mismatch",
+  "T2: node 23783 angle split children mismatch",
+  "T2: node 23809 pair split children mismatch",
+  "T2: node 24175 angle split children mismatch",
+  "summary.complete is false"
+ ],
+ "failure_count": 6,
+ "seconds": 82.691
+}

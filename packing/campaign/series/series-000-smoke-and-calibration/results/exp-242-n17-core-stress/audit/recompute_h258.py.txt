@@ -1,0 +1,702 @@
+"""Independent recomputation of the H-258 common-core stress (review lane a1-review).
+
+Shares nothing with devtools.check_n17_core_stress: the 58 rows are built from the
+first-order review's formulas, the loads/forces/moments from the core-stress review's
+tables, and all arithmetic is Fraction, a private degree-tracking type, or a private
+outward-rounded interval type on a 2^-300 grid (the producer uses 2^-256).
+
+Run from packing/ with the project interpreter:
+  .venv/bin/python3 /path/to/recompute_h258.py > recompute_h258.out.txt
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import sys
+import time
+from fractions import Fraction as Q
+from pathlib import Path
+
+REPO = Path("/home/user/squares")
+RUN = REPO / (
+    "packing/campaign/series/series-000-smoke-and-calibration/results/"
+    "exp-242-n17-core-stress/run-001"
+)
+ROOT_CERT = REPO / (
+    "packing/campaign/series/series-000-smoke-and-calibration/results/"
+    "exp-237-n17-polynomial-root/run-001/certificate.json"
+)
+
+# ---------------------------------------------------------------- frozen tables (re-typed)
+ANCHORS = [
+    (1, "left"), (1, "bottom"), (2, "bottom"), (3, "left"), (4, "left"), (4, "top"),
+    (5, "right"), (5, "bottom"), (6, "bottom"), (7, "right"), (8, "right"), (8, "top"),
+    (9, "left"), (15, "top"), (17, "right"),
+]
+CONTACTS = [
+    (1, 2, "ex"), (1, 3, "ey"), (5, 7, "ey"), (3, 9, "ey"), (9, 10, "u"), (4, 10, "w"),
+    (3, 11, "u"), (9, 11, "w"), (11, 12, "u"), (10, 12, "w"), (2, 13, "u"), (13, 14, "u"),
+    (12, 14, "w"), (10, 15, "u"), (14, 17, "u"), (15, 16, "p"), (16, 8, "q"), (14, 7, "w"),
+    (16, 17, "p"), (12, 16, "u"),
+]
+PARALLEL = {(1, 2), (1, 3), (5, 7), (9, 10), (9, 11), (10, 12), (11, 12), (12, 14), (13, 14)}
+AXIS_FACES = {(1, 2), (1, 3), (5, 7)}
+# first-order review, table "Sorted pair / Axis owner"
+OWNER = {
+    (3, 9): 3, (4, 10): 10, (3, 11): 11, (2, 13): 13, (10, 15): 10, (14, 17): 14,
+    (15, 16): 16, (16, 8): 16, (14, 7): 14, (16, 17): 16, (12, 16): 12,
+}
+# core-stress review: fixed nonowner supporting-corner offsets, as signed halves of the
+# nonowner's own axes
+CORNER = {
+    (3, 9): (("u", 1), ("v", 1)),
+    (4, 10): (("ex", 1), ("ey", -1)),
+    (3, 11): (("ex", 1), ("ey", 1)),
+    (2, 13): (("ex", 1), ("ey", 1)),
+    (10, 15): (("ex", 1), ("ey", 1)),
+    (14, 17): (("ex", 1), ("ey", 1)),
+    (15, 16): (("ex", 1), ("ey", -1)),
+    (16, 8): (("ex", 1), ("ey", 1)),
+    (14, 7): (("ex", 1), ("ey", -1)),
+    (16, 17): (("ex", 1), ("ey", -1)),
+    (12, 16): (("p", 1), ("q", 1)),
+}
+SIG = 51
+ZERO_KEYS = {
+    ("wall", 5, "right", 0), ("wall", 5, "right", 1), ("wall", 6, "bottom", 0),
+    ("wall", 6, "bottom", 1), ("pair", 9, 11, 0), ("pair", 9, 11, 1),
+}
+
+
+def square_axes(label: int) -> tuple[str, str]:
+    if label in {1, 2, 3, 4, 5, 6, 7, 8, 15, 17}:
+        return ("ex", "ey")
+    if 9 <= label <= 14:
+        return ("u", "v")
+    if label == 16:
+        return ("p", "q")
+    raise ValueError(label)
+
+
+def col(label: int, comp: str) -> int:
+    return 3 * (label - 1) + {"x": 0, "y": 1, "w": 2}[comp]
+
+
+# ---------------------------------------------------------------- generic geometry
+def geometry(t, b):
+    """H254 chart quantities and the 17 centres, over any number type."""
+    one_t2, one_b2 = 1 + t * t, 1 + b * b
+    c, s = (1 - t * t) / one_t2, (2 * t) / one_t2
+    d, e = (1 - b * b) / one_b2, (2 * b) / one_b2
+    S = (6 + 4 * t) / (1 + 2 * t - t * t)
+    h = (c + s) / 2
+    alpha, gamma = c * d - s * e, c * e + s * d
+    X = Q(1, 2) + (2 + c * s + 3 * s - s * S) / c
+    Y = Q(3, 2) + (2 + 3 * c - c * S) / s
+    A = d * (X + Q(1, 2)) - e * (S - 1) + Q(1, 2)
+    B = (d + e) * (S - 1) - Q(1, 2)
+    u10, v10 = Q(3, 2) + c * s + 2 * s, c * (S - 1) - s - Q(1, 2)
+    u11, v11 = c + 2 * s + Q(1, 2), 2 * c + (c * c - s * s) / 2 - 1
+    u12, v12 = u11 + 1, v10 - 1
+    u13 = 2 * c + s + Q(1, 2)
+    u14, v14 = u13 + 1, v10 - 2
+    rr, hh = S - Q(3, 2), v11 - 1
+    T = c * (c + 4 - S)
+    lam6, lam13 = rr - T / (3 * s), hh - T / 3
+
+    def rot(uu, vv):
+        return (c * uu - s * vv, s * uu + c * vv)
+
+    centres = {
+        1: (Q(1, 2), Q(1, 2)), 2: (Q(3, 2), Q(1, 2)), 3: (Q(1, 2), Q(3, 2)),
+        4: (Q(1, 2), S - Q(1, 2)), 5: (S - Q(1, 2), Q(1, 2)), 6: (lam6, Q(1, 2)),
+        7: (S - Q(1, 2), Q(3, 2)), 8: (S - Q(1, 2), S - Q(1, 2)), 9: (h, 2 + h),
+        10: rot(u10, v10), 11: rot(u11, v11), 12: rot(u12, v12), 13: rot(u13, lam13),
+        14: rot(u14, v14), 15: (X, S - Q(1, 2)), 16: (d * A + e * B, -e * A + d * B),
+        17: (S - Q(1, 2), Y),
+    }
+    axes = {
+        "u": (c, s), "v": (-s, c), "w": (s, -c), "p": (d, -e), "q": (e, d),
+        "ex": (Q(1), Q(0)), "ey": (Q(0), Q(1)),
+    }
+    F1 = c * (S - 3) + s * (S - 2) - 3
+    F2 = d * (S - X - Q(3, 2)) - e * (Y - S + Q(3, 2)) - 1
+    F3 = alpha * (A - Q(1, 2)) + gamma * (B - Q(1, 2)) - (c + 2 * s + 2)
+    return {
+        "t": t, "b": b, "c": c, "s": s, "d": d, "e": e, "S": S, "alpha": alpha, "gamma": gamma,
+        "T": T, "X": X, "Y": Y, "A": A, "B": B, "centres": centres, "axes": axes,
+        "F1": F1, "F2": F2, "G3": F3 + alpha * F2, "one_t2": one_t2, "one_b2": one_b2,
+    }
+
+
+def dot(a, b):
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def build_rows(g, sign_check=None):
+    """The 58 common rows in the frozen order; entries are the generic number type."""
+    rows = []
+    c, s = g["c"], g["s"]
+    for label, wall in ANCHORS:
+        if label == 9:
+            row = [0] * 52
+            row[col(9, "x")] = 1
+            row[col(9, "w")] = -(c - s) / 2
+            rows.append((("wall", 9, "left", 0), row))
+            continue
+        comp = "x" if wall in ("left", "right") else "y"
+        sign = 1 if wall in ("left", "bottom") else -1
+        for variant, angle_sign in ((0, -1), (1, 1)):
+            row = [0] * 52
+            row[col(label, comp)] = sign
+            if wall in ("right", "top"):
+                row[SIG] = 1
+            row[col(label, "w")] = Q(angle_sign, 2)
+            rows.append((("wall", label, wall, variant), row))
+    for i, j, ax in CONTACTS:
+        n = g["axes"][ax]
+        jn = (-n[1], n[0])
+        ri, rj = g["centres"][i], g["centres"][j]
+        disp = (rj[0] - ri[0], rj[1] - ri[1])
+        base = [0] * 52
+        base[col(j, "x")] = n[0]
+        base[col(j, "y")] = n[1]
+        base[col(i, "x")] = -n[0]
+        base[col(i, "y")] = -n[1]
+        if (i, j) in PARALLEL:
+            tau = dot(jn, disp)
+            k = Q(1, 2) if (i, j) in AXIS_FACES else (1 - tau) / 2
+            minus, plus = list(base), list(base)
+            minus[col(i, "w")] = tau / 2 + k
+            minus[col(j, "w")] = tau / 2 - k
+            plus[col(i, "w")] = tau / 2 - k
+            plus[col(j, "w")] = tau / 2 + k
+            rows.append((("pair", i, j, 0), minus))
+            rows.append((("pair", i, j, 1), plus))
+        else:
+            owner = OWNER[(i, j)]
+            other = j if owner == i else i
+            (a1, s1), (a2, s2) = CORNER[(i, j)]
+            if square_axes(other) != (a1, a2):
+                raise ValueError(f"corner table names a foreign axis for {other}")
+            v1, v2 = g["axes"][a1], g["axes"][a2]
+            if sign_check is not None:
+                sign_check((i, j), dot(n, v1), s1)
+                sign_check((i, j), dot(n, v2), s2)
+            corner = ((s1 * v1[0] + s2 * v2[0]) / 2, (s1 * v1[1] + s2 * v2[1]) / 2)
+            hprime = dot(jn, corner)
+            row = list(base)
+            row[col(owner, "w")] = dot(jn, disp) - hprime
+            row[col(other, "w")] = hprime
+            rows.append((("pair", i, j, 0), row))
+    if len(rows) != 58:
+        raise ValueError(len(rows))
+    return rows
+
+
+def loads(g):
+    c, s, d, e, S = g["c"], g["s"], g["d"], g["e"], g["S"]
+    alpha, gamma = g["alpha"], g["gamma"]
+    P = S - 2 - s + (s * (S - 3) - 2) / c
+    QQ = S - 3 + (c * (S - 3) - 2) / s
+    Pth = (S - 3 - 2 * s) / (c * c) - c
+    Qth = (2 * c - S + 3) / (s * s)
+    F1th = -s * (S - 3) + c * (S - 2)
+    F2th = d * Pth + e * Qth
+    F2be = -e * P + d * QQ
+    G3th = c * (S - 3) - s * (S - 2) + e * alpha * Qth - e * gamma * QQ + gamma - alpha
+    G3be = gamma - alpha + QQ * (alpha * d - gamma * e)
+    nu, rho = G3be, -F2be
+    mu = -(nu * F2th + rho * G3th) / F1th
+    Z = nu + alpha * rho
+    L = nu * d / c
+    R = Z * e / s
+    K = (c + s) * mu + gamma * nu / c + gamma * Z / s + gamma * rho * (d + e)
+    return {
+        "P": P, "Q": QQ, "F1th": F1th, "F2th": F2th, "F2be": F2be, "G3th": G3th, "G3be": G3be,
+        "mu": mu, "nu": nu, "rho": rho, "Z": Z, "L": L, "R": R, "K": K,
+    }
+
+
+def stress(g, rows, ld):
+    """Unnormalized weights per the force/moment tables; returns weights, moments, caps."""
+    c, s, d, e, gamma = g["c"], g["s"], g["d"], g["e"], g["gamma"]
+    mu, nu, rho, Z, L, R = (ld[k] for k in ("mu", "nu", "rho", "Z", "L", "R"))
+    pair_force = {
+        (1, 2): c * R, (1, 3): s * (L + rho), (5, 7): c * mu, (3, 9): s * L, (9, 10): L,
+        (4, 10): mu, (3, 11): rho, (11, 12): rho, (10, 12): mu, (2, 13): R, (13, 14): R,
+        (12, 14): mu, (10, 15): L, (14, 17): R, (15, 16): nu, (16, 8): gamma * rho,
+        (14, 7): mu, (16, 17): Z, (12, 16): rho, (9, 11): Q(0),
+    }
+    wall_force = {
+        (1, "left"): c * R, (1, "bottom"): s * (L + rho), (2, "bottom"): s * R,
+        (3, "left"): c * rho, (4, "left"): s * mu, (4, "top"): c * mu, (5, "bottom"): c * mu,
+        (5, "right"): Q(0), (6, "bottom"): Q(0), (7, "right"): s * mu, (8, "right"): e * gamma * rho,
+        (8, "top"): d * gamma * rho, (9, "left"): c * L, (15, "top"): gamma * nu / c,
+        (17, "right"): gamma * Z / s,
+    }
+    B2 = R * (c - s) / 2
+    B3 = s * L * (Q(1, 2) - s) + rho * (c - s) / 2
+    B7 = mu * (c - s) / 2
+    wall_moment = {
+        (1, "left"): -B2, (1, "bottom"): -B3, (2, "bottom"): Q(0), (3, "left"): Q(0), (4, "left"): Q(0),
+        (4, "top"): -B7, (5, "bottom"): -B7, (5, "right"): Q(0), (6, "bottom"): Q(0),
+        (7, "right"): Q(0), (8, "right"): Q(0), (8, "top"): gamma * rho * (d - e) / 2,
+        (15, "top"): nu * (d * s / c - e) / 2, (17, "right"): Z * (d - e * c / s) / 2,
+    }
+    face_tau_k = {}
+    for i, j, ax in CONTACTS:
+        if (i, j) in PARALLEL:
+            n = g["axes"][ax]
+            jn = (-n[1], n[0])
+            ri, rj = g["centres"][i], g["centres"][j]
+            tau = dot(jn, (rj[0] - ri[0], rj[1] - ri[1]))
+            k = Q(1, 2) if (i, j) in AXIS_FACES else (1 - tau) / 2
+            face_tau_k[(i, j)] = (tau, k)
+
+    def assemble(face_moment):
+        w = {}
+        for (label, wall), f in wall_force.items():
+            if label == 9:
+                w[("wall", 9, "left", 0)] = f
+            else:
+                m = wall_moment[(label, wall)]
+                w[("wall", label, wall, 0)] = f / 2 - m
+                w[("wall", label, wall, 1)] = f / 2 + m
+        for i, j, _ in CONTACTS:
+            f = pair_force[(i, j)]
+            if (i, j) in PARALLEL:
+                _, k = face_tau_k[(i, j)]
+                q = face_moment.get((i, j), Q(0))
+                w[("pair", i, j, 0)] = (f + q / k) / 2
+                w[("pair", i, j, 1)] = (f - q / k) / 2
+            else:
+                w[("pair", i, j, 0)] = f
+        return w
+
+    face_moment = {(1, 2): B2, (1, 3): B3, (5, 7): B7, (9, 11): Q(0)}
+    baseline = assemble(face_moment)
+    bres = {}
+    for label in range(9, 15):
+        total = 0
+        for key, row in rows:
+            entry = row[col(label, "w")]
+            if not _zero_literal(entry):
+                total = total + baseline[key] * entry
+        bres[label] = total
+    face_moment.update({
+        (9, 10): -bres[9], (10, 12): -bres[9] - bres[10], (11, 12): -bres[11],
+        (13, 14): -bres[13], (12, 14): bres[13] + bres[14],
+    })
+    weights = assemble(face_moment)
+    caps = {}
+    for pair, (tau, k) in face_tau_k.items():
+        f, q = pair_force[pair], face_moment[pair]
+        caps[pair] = (k * f + q, k * f - q, tau, k)
+    return weights, face_moment, caps, bres, pair_force, wall_force
+
+
+def _zero_literal(entry) -> bool:
+    return type(entry) is int and entry == 0
+
+
+def residuals(rows, weights):
+    out = []
+    for column in range(52):
+        total = 0
+        for key, row in rows:
+            entry = row[column]
+            if not _zero_literal(entry):
+                total = total + weights[key] * entry
+        out.append(total)
+    return out
+
+
+def full(t, b, sign_check=None):
+    g = geometry(t, b)
+    rows = build_rows(g, sign_check)
+    ld = loads(g)
+    weights, moments, caps, bres, pf, wf = stress(g, rows, ld)
+    res = residuals(rows, weights)
+    expected = [0] * 52
+    expected[SIG] = ld["K"]
+    expected[col(12, "w")] = g["gamma"] * ld["rho"] * g["F2"]
+    expected[col(16, "w")] = -g["gamma"] * ld["rho"] * g["F2"]
+    diff = [res[i] - expected[i] for i in range(52)]
+    return g, rows, ld, weights, moments, caps, bres, diff, pf, wf
+
+
+# ---------------------------------------------------------------- degree-tracking type
+class Deg:
+    """Upper bounds on (deg_t, deg_b) of numerator over a product of named atoms."""
+
+    atoms: list[tuple[int, int]] = []
+
+    def __init__(self, nd, den):
+        self.nd = nd
+        self.den = {k: v for k, v in den.items() if v}
+        self._inv = None
+
+    @staticmethod
+    def lift(x):
+        if isinstance(x, Deg):
+            return x
+        if isinstance(x, (int, Q)):
+            return Deg((0, 0), {})
+        raise TypeError(type(x))
+
+    def __add__(self, o):
+        o = self.lift(o)
+        keys = set(self.den) | set(o.den)
+        common = {k: max(self.den.get(k, 0), o.den.get(k, 0)) for k in keys}
+
+        def lifted(v):
+            dt, db = v.nd
+            for k, ex in common.items():
+                extra = ex - v.den.get(k, 0)
+                dt += extra * Deg.atoms[k][0]
+                db += extra * Deg.atoms[k][1]
+            return dt, db
+
+        a, c = lifted(self), lifted(o)
+        return Deg((max(a[0], c[0]), max(a[1], c[1])), common)
+
+    __radd__ = __add__
+
+    def __neg__(self):
+        return Deg(self.nd, self.den)
+
+    def __sub__(self, o):
+        return self + (-self.lift(o))
+
+    def __rsub__(self, o):
+        return self.lift(o) + (-self)
+
+    def __mul__(self, o):
+        o = self.lift(o)
+        keys = set(self.den) | set(o.den)
+        return Deg(
+            (self.nd[0] + o.nd[0], self.nd[1] + o.nd[1]),
+            {k: self.den.get(k, 0) + o.den.get(k, 0) for k in keys},
+        )
+
+    __rmul__ = __mul__
+
+    def inverse(self):
+        if self._inv is None:
+            Deg.atoms.append(self.nd)
+            idx = len(Deg.atoms) - 1
+            dt = sum(ex * Deg.atoms[k][0] for k, ex in self.den.items())
+            db = sum(ex * Deg.atoms[k][1] for k, ex in self.den.items())
+            self._inv = Deg((dt, db), {idx: 1})
+        return self._inv
+
+    def __truediv__(self, o):
+        return self * self.lift(o).inverse()
+
+    def __rtruediv__(self, o):
+        return self.lift(o) * self.inverse()
+
+
+# ---------------------------------------------------------------- interval type (2^-300)
+GRID_CAP = int(sys.argv[1]) if len(sys.argv) > 1 else 4000
+GBITS = 300
+G = 1 << GBITS
+
+
+class Iv:
+    __slots__ = ("lo", "hi")
+
+    def __init__(self, lo: Q, hi: Q):
+        if lo > hi:
+            raise ValueError("inverted interval")
+        self.lo = Q(math.floor(lo * G), G)
+        self.hi = Q(math.ceil(hi * G), G)
+
+    @staticmethod
+    def lift(x):
+        if isinstance(x, Iv):
+            return x
+        if isinstance(x, (int, Q)):
+            return Iv(Q(x), Q(x))
+        raise TypeError(type(x))
+
+    def __add__(self, o):
+        o = self.lift(o)
+        return Iv(self.lo + o.lo, self.hi + o.hi)
+
+    __radd__ = __add__
+
+    def __neg__(self):
+        return Iv(-self.hi, -self.lo)
+
+    def __sub__(self, o):
+        return self + (-self.lift(o))
+
+    def __rsub__(self, o):
+        return self.lift(o) + (-self)
+
+    def __mul__(self, o):
+        o = self.lift(o)
+        vals = (self.lo * o.lo, self.lo * o.hi, self.hi * o.lo, self.hi * o.hi)
+        return Iv(min(vals), max(vals))
+
+    __rmul__ = __mul__
+
+    def inverse(self):
+        if self.lo <= 0 <= self.hi:
+            raise ZeroDivisionError("interval contains zero")
+        return Iv(1 / self.hi, 1 / self.lo)
+
+    def __truediv__(self, o):
+        return self * self.lift(o).inverse()
+
+    def __rtruediv__(self, o):
+        return self.lift(o) * self.inverse()
+
+    def strict_sign(self):
+        if self.lo > 0:
+            return 1
+        if self.hi < 0:
+            return -1
+        return 0
+
+    def __repr__(self):
+        return f"[{float(self.lo):.6e}, {float(self.hi):.6e}]"
+
+
+# ---------------------------------------------------------------- main
+def fmt(x):
+    return f"{float(x):.12g}"
+
+
+def main() -> int:
+    started = time.monotonic()
+    out = {}
+    cert = json.loads(RUN.joinpath("certificate.json").read_text())
+    root = json.loads(ROOT_CERT.read_text())
+    mid = tuple(Q(v) for v in root["box"]["midpoint"])
+    rad = tuple(Q(v) for v in root["inclusion_bounds"])
+    print("root midpoint (float):", float(mid[0]), float(mid[1]))
+    print("root radii (float):", float(rad[0]), float(rad[1]))
+    assert [str(v) for v in cert["box"]["midpoint"]] == root["box"]["midpoint"]
+
+    # ---- 1. exact identity at the box midpoint and at a second rational box point
+    print("\n== 1. exact identity, normalized and unnormalized ==")
+    points = {
+        "midpoint": mid,
+        "second_box_point": (mid[0] + Q(math.floor(rad[0] / 3 * 10**70), 10**70), mid[1] - Q(math.floor(rad[1] * 2 / 5 * 10**70), 10**70)),
+        "unrelated_1_3_1_5": (Q(1, 3), Q(1, 5)),
+        "unrelated_37_100_33_100": (Q(37, 100), Q(33, 100)),
+        "unrelated_2_7_3_11": (Q(2, 7), Q(3, 11)),
+    }
+    for name, (t, b) in points.items():
+        inside = abs(t - mid[0]) <= rad[0] and abs(b - mid[1]) <= rad[1]
+        g, rows, ld, w, moments, caps, bres, diff, pf, wf = full(t, b)
+        nonzero = [i for i, v in enumerate(diff) if v != 0]
+        normalized = residuals(rows, {k: v / ld["K"] for k, v in w.items()})
+        norm_diff = list(normalized)
+        norm_diff[SIG] -= 1
+        norm_diff[col(12, "w")] -= g["gamma"] * ld["rho"] * g["F2"] / ld["K"]
+        norm_diff[col(16, "w")] += g["gamma"] * ld["rho"] * g["F2"] / ld["K"]
+        nz_norm = [i for i, v in enumerate(norm_diff) if v != 0]
+        print(
+            f"{name}: in_box={inside} unnormalized_nonzero_columns={nonzero} "
+            f"normalized_nonzero_columns={nz_norm} F2={fmt(g['F2'])} K={fmt(ld['K'])}"
+        )
+        out[f"identity.{name}"] = {"in_box": inside, "nonzero": nonzero, "nonzero_norm": nz_norm}
+        axis_taus = {pair: caps[pair][2] for pair in ((1, 2), (1, 3), (5, 7))}
+        print("  axis-face offsets exact (Fraction) and exactly zero:",
+              {str(k): (type(v).__name__, v == 0) for k, v in axis_taus.items()},
+              " x5 == x7 exactly:", g["centres"][5][0] == g["centres"][7][0],
+              " square 5 right-wall gap S-x5-1/2 =", g["S"] - g["centres"][5][0] - Q(1, 2))
+        if name == "midpoint":
+            print("  loads at midpoint:", {k: fmt(ld[k]) for k in ("mu", "nu", "rho", "Z", "L", "R", "K")})
+            print("  partials:", {k: fmt(ld[k]) for k in ("F1th", "F2th", "F2be", "G3th", "G3be")})
+            print("  F1, F2, G3 at midpoint:", fmt(g["F1"]), fmt(g["F2"]), fmt(g["G3"]))
+            zero_keys = [k for k, v in w.items() if v == 0]
+            print("  exact-zero weights:", sorted(map(str, zero_keys)), "count", len(zero_keys))
+            assert set(zero_keys) == ZERO_KEYS
+            normalized_w = {k: v / ld["K"] for k, v in w.items()}
+            neg = [k for k, v in normalized_w.items() if v < 0]
+            print("  negative weights:", neg)
+            positive = {k: v for k, v in normalized_w.items() if v > 0}
+            mn = min(positive.items(), key=lambda kv: kv[1])
+            print(f"  smallest positive normalized weight: {mn[0]} = {fmt(mn[1])}")
+            print("  baseline angular residuals b_9..b_14:", {k: fmt(v) for k, v in bres.items()})
+            print("  sum b_i:", fmt(sum(bres.values())), " gamma*rho*F2:", fmt(g["gamma"] * ld["rho"] * g["F2"]))
+            print("  five oblique moments q:", {str(k): fmt(moments[k]) for k in ((9, 10), (10, 12), (11, 12), (12, 14), (13, 14))})
+            print("  capacities (kf+q, kf-q, tau, k) unnormalized:")
+            for pair in ((9, 10), (10, 12), (11, 12), (12, 14), (13, 14)):
+                cp = caps[pair]
+                print(f"    {pair}: {fmt(cp[0])}, {fmt(cp[1])}, tau={fmt(cp[2])}, k={fmt(cp[3])}; "
+                      f"normalized kf-|q| = {fmt(min(cp[0], cp[1]) / ld['K'])}")
+            out["midpoint_weights"] = {str(k): str(v) for k, v in normalized_w.items()}
+            mid_normalized = normalized_w
+
+    # ---- 2. degree-bound grid proof of the unnormalized polynomial identity
+    print("\n== 2. degree bound and grid proof of the 52 unnormalized identities ==")
+    Deg.atoms = []
+    tD, bD = Deg((1, 0), {}), Deg((0, 1), {})
+    g, rows, ld, w, moments, caps, bres, diff, pf, wf = full(tD, bD)
+    dt = max(v.nd[0] for v in diff if isinstance(v, Deg))
+    db = max(v.nd[1] for v in diff if isinstance(v, Deg))
+    print(f"numerator degree bound of the residual columns: deg_t <= {dt}, deg_b <= {db}; "
+          f"atoms registered: {len(Deg.atoms)}")
+    # choose (dt+1) distinct t and (db+1) distinct b values; skip any that hits a zero denominator
+    t_values, b_values = [], []
+    i = 0
+    while len(t_values) < dt + 1:
+        i += 1
+        t_values.append(Q(i, 2 * (dt + 2) + i))  # distinct rationals in (0, 1/2]
+    j = 0
+    while len(b_values) < db + 1:
+        j += 1
+        b_values.append(Q(j, 3 * (db + 2) + j))
+    grid_started = time.monotonic()
+    grid_ok, evaluated, skipped = True, 0, []
+    if (dt + 1) * (db + 1) > GRID_CAP:
+        print(f'grid of {(dt + 1) * (db + 1)} points exceeds cap {GRID_CAP}; skipping the grid proof')
+        t_values = []
+    for tv in t_values:
+        for bv in b_values:
+            if evaluated == 5:
+                print(f'  first 5 points took {time.monotonic() - grid_started:.2f} s')
+            try:
+                *_, dff, _pf, _wf = full(tv, bv)
+            except ZeroDivisionError:
+                skipped.append((str(tv), str(bv)))
+                continue
+            evaluated += 1
+            if any(v != 0 for v in dff):
+                grid_ok = False
+                print("  NONZERO residual at", tv, bv, [k for k, v in enumerate(dff) if v != 0])
+    print(f"grid points evaluated: {evaluated} of {(dt + 1) * (db + 1)}; skipped (zero denominator): {len(skipped)}; "
+          f"all residual columns zero: {grid_ok}; seconds {time.monotonic() - grid_started:.1f}")
+    if skipped:
+        print("  skipped points:", skipped[:10])
+    out["grid_proof"] = {"deg_t": dt, "deg_b": db, "evaluated": evaluated, "skipped": len(skipped), "passed": grid_ok and not skipped}
+
+    # ---- 3. interval sign audit over the whole H255 box, private 2^-300 arithmetic
+    print("\n== 3. interval audit over the H255 box (private outward 2^-300 grid) ==")
+    tI = Iv(mid[0] - rad[0], mid[0] + rad[0])
+    bI = Iv(mid[1] - rad[1], mid[1] + rad[1])
+    branch_failures = []
+
+    def sign_check(pair, projection, expected):
+        if projection.strict_sign() != expected:
+            branch_failures.append((pair, repr(projection), expected))
+
+    g, rows, ld, w, moments, caps, bres, diff, pf, wf = full(tI, bI, sign_check)
+    print("corner-offset branch sign failures:", branch_failures)
+    guards = {k: g[k] for k in ("c", "s", "d", "e", "alpha", "gamma", "T")}
+    guards.update({k: ld[k] for k in ("F1th", "mu", "nu", "rho", "Z", "L", "R", "K")})
+    guard_fail = [k for k, v in guards.items() if v.strict_sign() != 1]
+    print("strict-positive guard failures:", guard_fail)
+    print("guards:", {k: repr(v) for k, v in guards.items()})
+    # compare guard bounds with the producer's
+    pg = cert["interval"]["guard_bounds"]
+    name_map = {"F1th": "F1_theta"}
+    for k, v in guards.items():
+        plo, phi = (Q(x) for x in pg[name_map.get(k, k)])
+        overlap = max(v.lo, plo) <= min(v.hi, phi)
+        print(f"  {k}: mine {v!r} producer [{float(plo):.6e}, {float(phi):.6e}] overlap={overlap} "
+              f"width mine {float(v.hi - v.lo):.3e} producer {float(phi - plo):.3e}")
+    # weights
+    K = ld["K"]
+    wn = {k: v / K for k, v in w.items()}
+    pw = cert["interval"]["weight_bounds"]
+    neg, straddle, zero_exact, positive_lo = [], [], [], []
+    mismatch = []
+    for key, v in wn.items():
+        plo, phi = (Q(x) for x in pw[str(key)])
+        if max(v.lo, plo) > min(v.hi, phi):
+            mismatch.append(key)
+        if key in ZERO_KEYS:
+            if (v.lo, v.hi) != (0, 0):
+                neg.append(("not exact zero", key))
+            else:
+                zero_exact.append(key)
+            continue
+        sgn = v.strict_sign()
+        if sgn == 1:
+            positive_lo.append((v.lo, key))
+        elif sgn == -1:
+            neg.append(key)
+        else:
+            straddle.append(key)
+    print(f"weights: {len(wn)}; exact zeros {len(zero_exact)}; strictly positive {len(positive_lo)}; "
+          f"straddling {straddle}; negative {neg}; disjoint-from-producer {mismatch}")
+    mn = min(positive_lo)
+    print(f"smallest positive lower bound: {mn[1]} = {float(mn[0]):.12g} "
+          f"(producer {cert['interval']['minimum_positive_weight_lower_bound']})")
+    print("per-weight comparison (mine lo/hi, producer lo/hi):")
+    for key, _ in rows:
+        v = wn[key]
+        plo, phi = (Q(x) for x in pw[str(key)])
+        print(f"  {str(key):28s} mine [{float(v.lo):.10g}, {float(v.hi):.10g}]  producer [{float(plo):.10g}, {float(phi):.10g}]  "
+              f"mid-exact {float(mid_normalized[key]):.10g}")
+    # capacities
+    pc = cert["interval"]["moment_capacities"]
+    print("moment capacities kf+q, kf-q (unnormalized), mine vs producer:")
+    cap_fail = []
+    for pair, (plus, minus, tau, k) in caps.items():
+        pp = pc[str(pair)]
+        pplus = (Q(pp[0][0]), Q(pp[0][1]))
+        pminus = (Q(pp[1][0]), Q(pp[1][1]))
+        ok = max(plus.lo, pplus[0]) <= min(plus.hi, pplus[1]) and max(minus.lo, pminus[0]) <= min(minus.hi, pminus[1])
+        if pair != (9, 11) and (plus.strict_sign() != 1 or minus.strict_sign() != 1):
+            cap_fail.append(pair)
+        if pair == (9, 11) and ((plus.lo, plus.hi) != (0, 0) or (minus.lo, minus.hi) != (0, 0)):
+            cap_fail.append(pair)
+        print(f"  {str(pair):9s} mine {plus!r} {minus!r}  producer [{float(pplus[0]):.6e},{float(pplus[1]):.6e}] "
+              f"[{float(pminus[0]):.6e},{float(pminus[1]):.6e}] overlap={ok} tau={tau!r} k={k!r}")
+    print("capacity sign failures:", cap_fail)
+    # offsets
+    po = cert["interval"]["parallel_offsets"]
+    off_fail = []
+    for pair, (plus, minus, tau, k) in caps.items():
+        plo, phi = (Q(x) for x in po[str(pair)])
+        tau = Iv.lift(tau)
+        if pair in AXIS_FACES:
+            if (tau.lo, tau.hi) != (0, 0) and not (tau.lo <= 0 <= tau.hi):
+                off_fail.append(pair)
+        elif not (0 < tau.lo and tau.hi < 1):
+            off_fail.append(pair)
+        print(f"  tau{pair}: mine {tau!r} producer [{float(plo):.6e},{float(phi):.6e}]")
+    print("offset branch failures:", off_fail)
+    disposition = (
+        "confirmed_fixed_stress" if not neg and not straddle and not cap_fail and not off_fail
+        and not guard_fail and not branch_failures else "NOT confirmed"
+    )
+    print("my disposition:", disposition, "| producer:", cert["interval"]["disposition"])
+    out["interval"] = {
+        "disposition": disposition, "negative": [str(k) for k in neg], "straddle": [str(k) for k in straddle],
+        "mismatch": [str(k) for k in mismatch], "capacity_failures": [str(p) for p in cap_fail],
+        "min_positive_lower_bound": str(mn[0]),
+    }
+
+    # ---- 4. every quantity my computation inverts keeps a strict sign on the box
+    print("\n== 4. denominators my computation inverts, on the box ==")
+    c, s = g["c"], g["s"]
+    inverted = {
+        "1+t^2": g["one_t2"], "1+b^2": g["one_b2"], "1+2t-t^2": 1 + 2 * tI - tI * tI,
+        "c": c, "s": s, "c^2": c * c, "s^2": s * s, "F1_theta": ld["F1th"], "K": K,
+    }
+    for pair, (plus, minus, tau, k) in caps.items():
+        if pair not in AXIS_FACES:
+            inverted[f"k{pair}"] = k
+    den_fail = [k for k, v in inverted.items() if v.strict_sign() == 0]
+    for k, v in inverted.items():
+        print(f"  {k:12s} {v!r} sign {v.strict_sign()}")
+    print("denominators straddling zero:", den_fail)
+    out["denominators"] = {"straddling": den_fail}
+
+    print(f"\nTOTAL seconds: {time.monotonic() - started:.1f}")
+    Path(__file__).with_suffix(".summary.json").write_text(json.dumps(out, indent=1, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

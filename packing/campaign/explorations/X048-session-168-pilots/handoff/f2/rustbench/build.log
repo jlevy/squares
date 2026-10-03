@@ -1,0 +1,46 @@
+    Updating crates.io index
+     Locking 15 packages to latest compatible versions
+      Adding num-bigint v0.4.8 (available: v0.5.1)
+ Downloading crates ...
+  Downloaded itoa v1.0.18
+  Downloaded num-integer v0.1.47
+  Downloaded autocfg v1.5.1
+  Downloaded quote v1.0.47
+  Downloaded unicode-ident v1.0.26
+  Downloaded zmij v1.0.23
+  Downloaded num-traits v0.2.19
+  Downloaded serde_derive v1.0.229
+  Downloaded proc-macro2 v1.0.107
+  Downloaded serde_core v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded serde_json v1.0.151
+  Downloaded memchr v2.8.3
+  Downloaded num-bigint v0.4.8
+  Downloaded syn v3.0.6
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling autocfg v1.5.1
+   Compiling serde_core v1.0.229
+   Compiling num-traits v0.2.19
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling itoa v1.0.18
+   Compiling syn v3.0.6
+   Compiling num-integer v0.1.47
+   Compiling memchr v2.8.3
+   Compiling num-bigint v0.4.8
+   Compiling serde_derive v1.0.229
+   Compiling rustbench v0.1.0 (/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/f2/rustbench)
+warning: unused import: `Signed`
+ --> src/main.rs:5:18
+  |
+5 | use num_traits::{Signed, Zero};
+  |                  ^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rustbench` (bin "rustbench") generated 1 warning (run `cargo fix --bin "rustbench" -p rustbench` to apply 1 suggestion)
+    Finished `release` profile [optimized] target(s) in 52.84s
+build rc=0

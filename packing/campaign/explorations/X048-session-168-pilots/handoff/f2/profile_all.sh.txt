@@ -1,0 +1,16 @@
+#!/bin/bash
+# Sequential profiling runs, one worker. Repository files are never modified.
+set -u
+S=/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/f2
+P=/home/user/squares/packing
+PY=$P/.venv/bin/python3
+X=$P/campaign/explorations/X048-session-168-pilots
+cd $P
+export PYTHONPATH=$P/src:$P
+run() { name=$1; shift; echo "=== $name start $(date +%T)"; t0=$(date +%s.%N); $PY -m cProfile -o $S/$name.prof "$@" > $S/$name.stdout 2> $S/$name.stderr; echo "=== $name end $(date +%T) rc=$? wall=$(echo "$(date +%s.%N) - $t0" | bc)"; }
+run kernel-B16 -m devtools.check_n17_subpattern --pattern B --bins 16 --max-rounds 12 --max-seconds 600 --output $S/kernel-B16.json
+run bb-A-60s -m devtools.pilot_n17_subpattern_bb --cells interior-SW,interior-NW,interior-W,interior-S,interior-N,interior-SE --max-seconds 60 --output $S/bb-A-60s.json
+run verify-bb-A-sample -m devtools.verify_n17_bb_certificate $X/certificates/A --sample 40 --trig-sample 40 --output $S/verify-bb-A-sample.json
+run verify-kernel-W7-sample -m devtools.verify_n17_kernel_certificate $X/certificates/W7 --sample 2 --output $S/verify-kernel-W7-sample.json
+run kernel-W7-round1 -m devtools.check_n17_subpattern --pattern W7 --bins 64 --max-rounds 1 --max-seconds 1500 --output $S/kernel-W7-round1.json
+echo ALL DONE $(date +%T)

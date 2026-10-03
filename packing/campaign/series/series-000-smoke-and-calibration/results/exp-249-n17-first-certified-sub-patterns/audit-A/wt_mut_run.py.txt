@@ -1,0 +1,88 @@
+"""R4: run each recorder-capable mutant on two small patterns, save certificates, and
+re-verify them with verify_cert.py. A mutant whose certificate passes the verifier is
+one the certificate check cannot see (its error was never exercised or never recorded).
+"""
+
+from __future__ import annotations
+
+import importlib.util
+import json
+import shutil
+import subprocess
+import sys
+from fractions import Fraction as Q
+from pathlib import Path
+
+R = Path(__file__).resolve().parent
+PY = "/home/user/squares/packing/.venv/bin/python3"
+
+
+def load(name: str):
+    spec = importlib.util.spec_from_file_location(f"wt_{name}", R / "wt_mutants" / f"mut_{name}.py")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def rectangle(x0, x1, y0, y1):
+    a, b, c, d = Q(x0), Q(x1), Q(y0), Q(y1)
+    return ((a, c), (b, c), (b, d), (a, d))
+
+
+PATTERNS = {
+    "lp": (("2.80", "2.85"), 0),  # every leaf an exact Farkas prune
+    "obbt": (("2.94", "2.99"), 3),  # bound tightening, disc and pair prunes
+    "feasible": (("3.05", "3.10"), 3),  # a placeable row: must never certify
+    "wall": (("2.30", "2.35"), 3),  # the same crowded row moved against the west wall
+}
+LEFT = {"wall": ("0.50", "0.55"), "_middle_wall": ("0.90", "1.90")}
+
+
+def main() -> int:
+    names = [a for a in sys.argv[1:] if not a.startswith("--")]
+    only = [a[2:] for a in sys.argv[1:] if a.startswith("--")]
+    results = []
+    for name in names:
+        bb = load(name)
+        for label, (right, rounds) in PATTERNS.items():
+            if only and label not in only:
+                continue
+            pattern = bb.Pattern(
+                ("left", "middle", "right"),
+                (
+                    rectangle(*(LEFT["wall"] if label == "wall" else ("1.00", "1.05")), "2.00", "2.05"),
+                    rectangle(*(LEFT["_middle_wall"] if label == "wall" else ("1.40", "2.40")), "2.00", "2.05"),
+                    rectangle(*right, "2.00", "2.05"),
+                ),
+                bb.cover.U,
+            )
+            out = R / "wt_certs" / f"{name}-{label}"
+            shutil.rmtree(out, ignore_errors=True)
+            settings = bb.Settings(max_seconds=30, obbt_rounds=rounds, max_nodes=3000)
+            record = bb.search(pattern, settings, certificate=out)
+            proc = subprocess.run(
+                [PY, str(R / "verify_cert.py"), str(out), "--all", "--trig", "all"],
+                capture_output=True,
+                text=True,
+                env={"PYTHONPATH": "/home/user/squares/packing", "OMP_NUM_THREADS": "1"},
+            )
+            lines = proc.stdout.splitlines()
+            first_fail = next((line for line in lines if line.startswith("FAIL")), "")
+            verdict = next((line for line in lines if '"verdict"' in line), "").strip()
+            row = {
+                "mutant": name,
+                "pattern": label,
+                "search": record["verdict"],
+                "nodes": record["nodes"],
+                "verifier": verdict.replace('"verdict": ', "").strip('",'),
+                "first_failure": first_fail[:110],
+            }
+            results.append(row)
+            print(json.dumps(row), flush=True)
+    (R / ("wt_mut_results_" + "_".join(only) + ".json" if only else "wt_mut_results.json")).write_text(json.dumps(results, indent=1) + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

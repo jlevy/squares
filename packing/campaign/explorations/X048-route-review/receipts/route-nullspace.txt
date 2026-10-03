@@ -1,0 +1,8 @@
+13 slide +v  max |A_i h| over positive rows = 0.0e+00 ; zero rows: {}
+6 xi         max |A_i h| over positive rows = 0.0e+00 ; zero rows: {}
+6 eta        max |A_i h| over positive rows = 0.0e+00 ; zero rows: {'W6B-': 1.0, 'W6B+': 1.0}
+6 omega      max |A_i h| over positive rows = 0.0e+00 ; zero rows: {'W6B-': -0.5, 'W6B+': 0.5}
+5 -e_x       max |A_i h| over positive rows = 0.0e+00 ; zero rows: {'W5R-': 1.0, 'W5R+': 1.0}
+11 -v        max |A_i h| over positive rows = 0.0e+00 ; zero rows: {'E9_11-': 1.0, 'E9_11+': 1.0}
+K=1.726478 ; normalized positive weights: min 0.00608 max 0.31304 ratio 51.5
+smallest normalized weights: [(0.00608, 'E11_12+'), (0.00722, 'W8R+'), (0.00722, 'W8R-'), (0.00722, 'W8T-'), (0.00956, 'W3L+'), (0.00956, 'W3L-')]

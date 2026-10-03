@@ -1,19 +1,24 @@
-"""Synthetic geometry and source-boundary controls for the BC303 parent reader."""
+"""Geometry and source-content controls for the BC303 parent reader; its audit replay."""
 
 # ruff: noqa: SLF001
 # pyright: reportPrivateUsage=false
 
 from __future__ import annotations
 
-import hashlib
+import json
+import subprocess
 from fractions import Fraction
 from pathlib import Path
 
 import pytest
 
+from devtools import audit_bc303_parent_union as audit
 from devtools import read_bc303_parent_union as reader
 
 REPO = Path(__file__).resolve().parents[2]
+AGENDA_035 = REPO / (
+    "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-035"
+)
 
 
 def test_closed_union_counts_contact_atoms_once() -> None:
@@ -42,46 +47,57 @@ def test_parent_geometry_refuses_invalid_squares() -> None:
         )
 
 
-def test_source_forgery_and_duplicate_keys_are_refused_before_scan() -> None:
+def test_source_content_is_checked_and_its_layout_is_not() -> None:
     data = (REPO / reader.SOURCE_PATH).read_bytes()
-    assert reader.parse_measure(data)
-    with pytest.raises(reader.ParentUnionError, match="source bytes changed"):
-        reader.parse_measure(data + b"\n")
-    duplicate = b'{"atoms":[],"atoms":[]}'
+    atoms = reader.parse_measure(data)
+    assert len(atoms) == 377
+    # The same measure serialized differently is the same measure (OR-16).
+    assert reader.parse_measure(json.dumps(json.loads(data), indent=2).encode()) == atoms
+    document = json.loads(data)
+    document["total_mass"] = "1"
+    with pytest.raises(reader.ParentUnionError, match="measure constants changed"):
+        reader.parse_measure(json.dumps(document).encode())
+    document = json.loads(data)
+    document["atoms"][0][2] = "1"
+    with pytest.raises(reader.ParentUnionError, match="does not equal source total"):
+        reader.parse_measure(json.dumps(document).encode())
     with pytest.raises(reader.ParentUnionError, match="duplicate JSON key"):
-        reader.parse_measure(duplicate, expected_sha256=hashlib.sha256(duplicate).hexdigest())
+        reader.parse_measure(b'{"atoms":[],"atoms":[]}')
 
 
-def test_revision_and_executing_reader_binding_before_scan(
+def test_the_bound_measure_records_revisions_and_reports_drift_without_refusing(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    head = subprocess.run(
+        ("git", "-C", str(REPO), "rev-parse", "HEAD"),
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     measure = reader.load_bound_measure(REPO)
     assert measure.source_revision == reader.SOURCE_REVISION
-    assert measure.source_sha256 == reader.SOURCE_SHA256
+    assert measure.implementation_revision == head
     assert len(measure.atoms) == 377
 
     original_git = reader._git
 
-    def forged_git(repository: Path, *arguments: str) -> bytes:
-        if arguments == ("cat-file", "blob", f"{reader.SOURCE_REVISION}:{reader.SOURCE_PATH}"):
-            return b"forged source"
+    def edited_reader(repository: Path, *arguments: str) -> bytes:
+        if arguments[0] == "status":
+            return f" M {reader.READER_PATH}\n".encode()
         return original_git(repository, *arguments)
 
-    monkeypatch.setattr(reader, "_git", forged_git)
-    with pytest.raises(reader.ParentUnionError, match="source differs"):
-        reader.load_bound_measure(REPO)
+    monkeypatch.setattr(reader, "_git", edited_reader)
+    drifted = reader.load_bound_measure(REPO)
+    assert drifted.implementation_dirty is True
+    assert drifted.atoms == measure.atoms
 
-    monkeypatch.setattr(reader, "_git", original_git)
 
-    def forged_reader_git(repository: Path, *arguments: str) -> bytes:
-        if arguments == (
-            "cat-file",
-            "blob",
-            f"{measure.implementation_revision}:{reader.READER_PATH}",
-        ):
-            return b"forged reader"
-        return original_git(repository, *arguments)
-
-    monkeypatch.setattr(reader, "_git", forged_reader_git)
-    with pytest.raises(reader.ParentUnionError, match="executing reader differs"):
-        reader.load_bound_measure(REPO)
+def test_the_independent_audit_replays_the_retained_exp159_receipt() -> None:
+    """The arithmetic replay reproduces every retained audit value but the old digest."""
+    retained = json.loads(
+        (AGENDA_035 / "exp-159-bc303-literal-parent-union-audit.json").read_text()
+    )
+    result = audit.audit(REPO, AGENDA_035 / "exp-159-bc303-literal-parent-union.json")
+    del retained["source_sha256"]
+    assert {key: result[key] for key in retained} == retained
+    assert result["source_path"] == audit.SOURCE_PATH

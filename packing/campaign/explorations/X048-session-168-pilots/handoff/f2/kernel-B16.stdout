@@ -1,0 +1,107 @@
+{
+ "certified": "stalled",
+ "closure": null,
+ "excluded_orbits": 0,
+ "excluded_states": 0,
+ "pattern": "B",
+ "producer_outcome": "stalled",
+ "reason": null,
+ "rounds": [
+  {
+   "live_rows": {
+    "interior-NW": 16,
+    "interior-S": 16,
+    "interior-SE": 16,
+    "interior-W": 16,
+    "side-S1": 16,
+    "side-W1": 16
+   },
+   "owned_hull_vertices": {
+    "interior-NW": 9,
+    "interior-S": 0,
+    "interior-SE": 9,
+    "interior-W": 0,
+    "side-S1": 0,
+    "side-W1": 0
+   },
+   "residual_box_extent": {
+    "interior-NW": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-S": [
+     "11699786771271374028703/19797228416000000000000",
+     "227/250"
+    ],
+    "interior-SE": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-W": [
+     "227/250",
+     "23399573348974074229281/39594456832000000000000"
+    ],
+    "side-S1": [
+     "257/375",
+     "93/100"
+    ],
+    "side-W1": [
+     "93/100",
+     "257/375"
+    ]
+   },
+   "round": 0,
+   "steps": 6
+  },
+  {
+   "live_rows": {
+    "interior-NW": 16,
+    "interior-S": 16,
+    "interior-SE": 16,
+    "interior-W": 16,
+    "side-S1": 16,
+    "side-W1": 16
+   },
+   "owned_hull_vertices": {
+    "interior-NW": 9,
+    "interior-S": 0,
+    "interior-SE": 9,
+    "interior-W": 0,
+    "side-S1": 0,
+    "side-W1": 0
+   },
+   "residual_box_extent": {
+    "interior-NW": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-S": [
+     "11699786771271374028703/19797228416000000000000",
+     "227/250"
+    ],
+    "interior-SE": [
+     "11916963/19226000",
+     "11916963/19226000"
+    ],
+    "interior-W": [
+     "227/250",
+     "23399573348974074229281/39594456832000000000000"
+    ],
+    "side-S1": [
+     "257/375",
+     "93/100"
+    ],
+    "side-W1": [
+     "93/100",
+     "257/375"
+    ]
+   },
+   "round": 1,
+   "steps": 12
+  }
+ ],
+ "rows_checked": 192,
+ "status": "PASS_CERTIFIED_STALL",
+ "steps_checked": 12,
+ "wall_seconds": 116.79491360299994
+}

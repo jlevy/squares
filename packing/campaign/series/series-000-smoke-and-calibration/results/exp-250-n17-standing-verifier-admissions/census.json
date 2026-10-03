@@ -1,0 +1,1946 @@
+{
+ "census": {
+  "endpoint_survives": true,
+  "orbits": 43593,
+  "surviving_states": 346104
+ },
+ "certified": {
+  "admitted": 4,
+  "endpoint_survives": true,
+  "orbits": 15953,
+  "surviving_states": 126168
+ },
+ "design": "ring-3-voronoi-8-tabbed-unique",
+ "entries": [
+  {
+   "alone": {
+    "orbits": 16701,
+    "states": 133152
+   },
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-W"
+   ],
+   "certifier": "kernel",
+   "certifier_provenance": {
+    "sha256": "54249e75272f6ee248a93eae1a820732559ae982e29da662df5a1016e6f521c3"
+   },
+   "evidence": "docs/project/reviews/review-2026-10-02-n17-w7-closure.md",
+   "marginal": {
+    "orbits": 9830,
+    "states": 78348
+   },
+   "name": "W7",
+   "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-249-n17-first-certified-sub-patterns/run-001/receipt.json",
+   "receipt_status": "PASS_SAVED_CLOSED",
+   "status": "admitted",
+   "verification": {
+    "certificate": "packing/campaign/explorations/X048-session-168-pilots/certificates/W7",
+    "mode": "full",
+    "receipt": "packing/campaign/explorations/X048-session-168-pilots/certificates/W7/verification.json",
+    "status": "PASS",
+    "verifier": {
+     "path": "packing/devtools/verify_n17_kernel_certificate.py",
+     "review": "docs/project/reviews/review-2026-10-02-n17-w7-closure.md",
+     "revision": "556561586095f1eaf7952e32199f40a4d3360d20"
+    }
+   },
+   "verified": true
+  },
+  {
+   "alone": {
+    "orbits": 13897,
+    "states": 110448
+   },
+   "cells": [
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "certifier": "branch-and-bound",
+   "certifier_provenance": {
+    "sha256": "f8da95e8dbf6b06b9681b02b3e5b06b2fdfb87d77f63b1f638d3b068d570b656"
+   },
+   "evidence": "docs/project/reviews/review-2026-10-02-n17-branch-and-bound-certifier.md",
+   "marginal": {
+    "orbits": 9051,
+    "states": 71784
+   },
+   "name": "A",
+   "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-249-n17-first-certified-sub-patterns/run-002/receipt.json",
+   "receipt_status": "certified-infeasible",
+   "status": "admitted",
+   "verification": {
+    "certificate": "packing/campaign/explorations/X048-session-168-pilots/certificates/A",
+    "mode": "full",
+    "receipt": "packing/campaign/explorations/X048-session-168-pilots/certificates/A/verification.json",
+    "status": "PASS",
+    "verifier": {
+     "path": "packing/devtools/verify_n17_bb_certificate.py",
+     "review": "docs/project/reviews/review-2026-10-02-n17-branch-and-bound-certifier.md",
+     "revision": "556561586095f1eaf7952e32199f40a4d3360d20"
+    }
+   },
+   "verified": true
+  },
+  {
+   "alone": {
+    "orbits": 5499,
+    "states": 43772
+   },
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S"
+   ],
+   "certifier": "kernel",
+   "certifier_provenance": {
+    "sha256": "698e7976f0c8229ea7f69d31cfd5dac80af3587341f219a56d1cb445fe1020d2"
+   },
+   "evidence": "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md",
+   "marginal": {
+    "orbits": 1736,
+    "states": 13804
+   },
+   "name": "SW9",
+   "receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/kernel-split-flag3-a9-bins64.json",
+   "receipt_status": "PASS_CERTIFIED_CLOSED",
+   "status": "admitted",
+   "verification": {
+    "certificate": "packing/campaign/explorations/X048-session-168-pilots/certificates/flag3-a9-pending",
+    "mode": "full",
+    "receipt": "packing/campaign/explorations/X048-session-168-pilots/certificates/flag3-a9-pending/verification.json",
+    "status": "PASS",
+    "verifier": {
+     "path": "packing/devtools/verify_n17_kernel_certificate.py",
+     "review": "docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md",
+     "revision": "fd2c9602eb4e96e1dcdfd2ac8ac8a637a3ab2b44"
+    }
+   },
+   "verified": true
+  },
+  {
+   "alone": {
+    "orbits": 1,
+    "states": 4
+   },
+   "cells": [
+    "corner-SW",
+    "corner-SE",
+    "corner-NW",
+    "side-S0",
+    "side-N0",
+    "side-W0",
+    "side-E0",
+    "side-S1",
+    "side-W1",
+    "side-S2",
+    "side-N2",
+    "side-W2",
+    "side-E2",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "certifier": "kernel",
+   "certifier_provenance": {
+    "sha256": "54249e75272f6ee248a93eae1a820732559ae982e29da662df5a1016e6f521c3"
+   },
+   "evidence": "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md",
+   "marginal": {
+    "orbits": 1,
+    "states": 4
+   },
+   "name": "N1",
+   "receipt": "packing/campaign/explorations/X048-session-168-pilots/handoff/k2/h-N1-2h.json",
+   "receipt_status": "PASS_CERTIFIED_CLOSED",
+   "status": "admitted",
+   "verification": {
+    "certificate": "packing/campaign/explorations/X048-session-168-pilots/certificates/N1-state-pending",
+    "mode": "full",
+    "receipt": "packing/campaign/explorations/X048-session-168-pilots/certificates/N1-state-pending/verification.json",
+    "status": "PASS",
+    "verifier": {
+     "path": "packing/devtools/verify_n17_kernel_certificate.py",
+     "review": "docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md",
+     "revision": "ae4f5fb43671a5ba77e2e4187b77502e54ce6862"
+    }
+   },
+   "verified": true
+  }
+ ],
+ "flagged_uncertified": {
+  "all_certified_projection": {
+   "endpoint_survives": true,
+   "orbits": 2189,
+   "surviving_states": 17108
+  },
+  "classes": [
+   {
+    "arity": 6,
+    "best_penetration": 0.005613440868811326,
+    "cells": [
+     "side-S1",
+     "side-W1",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 3480,
+     "states": 27528
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 6.220999659833915e-05,
+    "cells": [
+     "side-N0",
+     "side-W0",
+     "side-N1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 3301,
+     "states": 26272
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.017174150435186553,
+    "cells": [
+     "side-S0",
+     "side-N0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 3024,
+     "states": 24044
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 6.312971339905715e-05,
+    "cells": [
+     "side-N0",
+     "side-N1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 3018,
+     "states": 24016
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.005004512615532919,
+    "cells": [
+     "corner-SW",
+     "side-N0",
+     "side-W0",
+     "side-W1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2917,
+     "states": 23300
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.017396086933477273,
+    "cells": [
+     "corner-NW",
+     "side-N0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2883,
+     "states": 22968
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.010144955154776536,
+    "cells": [
+     "side-S0",
+     "side-S1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2853,
+     "states": 22740
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.015762651684190887,
+    "cells": [
+     "side-S0",
+     "side-N0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2794,
+     "states": 22212
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0008008086622615096,
+    "cells": [
+     "side-E0",
+     "side-S1",
+     "side-N1",
+     "side-S2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2687,
+     "states": 21384
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.01255076421174206,
+    "cells": [
+     "side-S0",
+     "side-W0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2636,
+     "states": 20952
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 6.172276090554707e-05,
+    "cells": [
+     "side-S0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2548,
+     "states": 20316
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.001941853241773983,
+    "cells": [
+     "side-E0",
+     "side-S1",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2509,
+     "states": 19964
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.002532010096470194,
+    "cells": [
+     "corner-SW",
+     "side-S0",
+     "side-W0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2495,
+     "states": 19804
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.017095708968768664,
+    "cells": [
+     "side-N0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2410,
+     "states": 19196
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0019965800578340964,
+    "cells": [
+     "side-S0",
+     "side-N0",
+     "side-W0",
+     "side-N1",
+     "side-W1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2366,
+     "states": 18820
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.010897084757586106,
+    "cells": [
+     "side-N0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2317,
+     "states": 18480
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.01177946050928802,
+    "cells": [
+     "corner-SW",
+     "side-N0",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2294,
+     "states": 18272
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.007068178472882991,
+    "cells": [
+     "corner-NW",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2288,
+     "states": 18232
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.006044213364339912,
+    "cells": [
+     "side-S1",
+     "side-S2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2246,
+     "states": 17868
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.008340303286234807,
+    "cells": [
+     "corner-SW",
+     "side-S0",
+     "side-S1",
+     "side-S2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2191,
+     "states": 17472
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.006085699357143204,
+    "cells": [
+     "corner-SE",
+     "side-E0",
+     "side-S1",
+     "side-S2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2106,
+     "states": 16764
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.006251231366311116,
+    "cells": [
+     "side-S0",
+     "side-E0",
+     "side-S1",
+     "side-S2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 2020,
+     "states": 16076
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0007562880598952493,
+    "cells": [
+     "side-N0",
+     "side-N1",
+     "side-E1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1959,
+     "states": 15636
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0024141377572435285,
+    "cells": [
+     "side-S0",
+     "side-W0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1962,
+     "states": 15532
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.00018501361195866206,
+    "cells": [
+     "side-N0",
+     "side-W0",
+     "side-N1",
+     "interior-SW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1930,
+     "states": 15280
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0014661467963524855,
+    "cells": [
+     "side-W0",
+     "side-S1",
+     "side-N1",
+     "interior-SW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1866,
+     "states": 14764
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.013890419056767467,
+    "cells": [
+     "side-N1",
+     "side-E1",
+     "interior-SW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1857,
+     "states": 14620
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.022737700079742185,
+    "cells": [
+     "corner-SE",
+     "side-S0",
+     "side-S1",
+     "side-S2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1795,
+     "states": 14316
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 6.220698995273999e-05,
+    "cells": [
+     "side-W0",
+     "side-S1",
+     "side-N1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1806,
+     "states": 14316
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0023375097649219745,
+    "cells": [
+     "side-N0",
+     "side-W0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1780,
+     "states": 14204
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.001525383834020011,
+    "cells": [
+     "side-E1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-N",
+     "interior-E",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1761,
+     "states": 14088
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.004311378308002656,
+    "cells": [
+     "side-N0",
+     "side-W0",
+     "side-S1",
+     "side-W1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1764,
+     "states": 14036
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.018837173408424057,
+    "cells": [
+     "side-S0",
+     "side-W0",
+     "side-E1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1759,
+     "states": 14032
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0017027538331430003,
+    "cells": [
+     "side-N0",
+     "side-W1",
+     "side-E1",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1738,
+     "states": 13844
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.014621374052707359,
+    "cells": [
+     "corner-NW",
+     "side-S1",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1737,
+     "states": 13832
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.004416126479561799,
+    "cells": [
+     "corner-SW",
+     "side-N0",
+     "side-W0",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1736,
+     "states": 13816
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.02228735917471092,
+    "cells": [
+     "corner-NW",
+     "side-S0",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1669,
+     "states": 13316
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0034512441510036185,
+    "cells": [
+     "corner-SW",
+     "corner-NW",
+     "side-S0",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1652,
+     "states": 13104
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.006575405819340685,
+    "cells": [
+     "side-N0",
+     "side-S1",
+     "side-W2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1616,
+     "states": 12840
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0005887122813978962,
+    "cells": [
+     "corner-SW",
+     "side-W0",
+     "side-S1",
+     "side-W1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1575,
+     "states": 12536
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.02380854375097463,
+    "cells": [
+     "corner-NW",
+     "side-N0",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1560,
+     "states": 12448
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.005957361471217837,
+    "cells": [
+     "side-N0",
+     "side-W1",
+     "side-W2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1549,
+     "states": 12308
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.001855099453220932,
+    "cells": [
+     "side-N0",
+     "side-N1",
+     "side-W1",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1528,
+     "states": 12140
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.011973941712907776,
+    "cells": [
+     "corner-SW",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-S",
+     "interior-N"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1516,
+     "states": 12044
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0010758155869468045,
+    "cells": [
+     "side-N0",
+     "side-W0",
+     "side-N1",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1512,
+     "states": 12020
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0030332795885839037,
+    "cells": [
+     "corner-SE",
+     "side-S0",
+     "side-S1",
+     "side-S2",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1499,
+     "states": 11980
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0106661295334185,
+    "cells": [
+     "side-N0",
+     "side-S1",
+     "side-N1",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1498,
+     "states": 11924
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.005339600115441989,
+    "cells": [
+     "side-S1",
+     "side-N1",
+     "side-E1",
+     "interior-SW",
+     "interior-NW",
+     "interior-S",
+     "interior-N",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1497,
+     "states": 11876
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.011393534385069182,
+    "cells": [
+     "side-W0",
+     "side-S1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1398,
+     "states": 11116
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0019330930248481204,
+    "cells": [
+     "side-N0",
+     "side-W0",
+     "side-W1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1377,
+     "states": 11000
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.01307615578479071,
+    "cells": [
+     "corner-SW",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1346,
+     "states": 10680
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.0028078236257781386,
+    "cells": [
+     "side-W0",
+     "side-S2",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1343,
+     "states": 10676
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0017605599830408103,
+    "cells": [
+     "side-N0",
+     "side-N1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1336,
+     "states": 10568
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.005579732018993533,
+    "cells": [
+     "side-W0",
+     "side-E1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1319,
+     "states": 10492
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.002361218772240825,
+    "cells": [
+     "side-S0",
+     "side-W0",
+     "side-E0",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-N",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1310,
+     "states": 10444
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.007891003433773136,
+    "cells": [
+     "corner-NW",
+     "side-N0",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1299,
+     "states": 10280
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0018931054089610377,
+    "cells": [
+     "side-S1",
+     "side-N1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1299,
+     "states": 10280
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0015324602141217891,
+    "cells": [
+     "side-W0",
+     "side-N1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1265,
+     "states": 10008
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.007835863332958715,
+    "cells": [
+     "side-S0",
+     "side-N0",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1239,
+     "states": 9808
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0063083936184540335,
+    "cells": [
+     "side-S0",
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1232,
+     "states": 9752
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.002558355992578365,
+    "cells": [
+     "side-N0",
+     "side-S2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1227,
+     "states": 9720
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0014500965994022064,
+    "cells": [
+     "side-E1",
+     "side-S2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1225,
+     "states": 9696
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.020859408963210146,
+    "cells": [
+     "side-S0",
+     "side-W0",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1213,
+     "states": 9616
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.01360701962436317,
+    "cells": [
+     "side-E0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1212,
+     "states": 9592
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.015372107493292542,
+    "cells": [
+     "side-W0",
+     "side-S1",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1209,
+     "states": 9592
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.010195981975201995,
+    "cells": [
+     "side-S0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1191,
+     "states": 9432
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.009697954238905515,
+    "cells": [
+     "side-N1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-N",
+     "interior-E",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1161,
+     "states": 9288
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0024677659756788817,
+    "cells": [
+     "side-W0",
+     "side-S2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1133,
+     "states": 8988
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.015509828775272183,
+    "cells": [
+     "side-N0",
+     "side-N1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-N",
+     "interior-E",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1104,
+     "states": 8832
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.026712861850537672,
+    "cells": [
+     "corner-SW",
+     "side-S0",
+     "side-S1",
+     "side-S2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1086,
+     "states": 8660
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.023277527208449444,
+    "cells": [
+     "side-S0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1077,
+     "states": 8540
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0007550075536519874,
+    "cells": [
+     "side-W0",
+     "side-W1",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1076,
+     "states": 8516
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0011319787687793514,
+    "cells": [
+     "side-W0",
+     "side-W1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1059,
+     "states": 8400
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.01617006755175665,
+    "cells": [
+     "side-E1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1047,
+     "states": 8296
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.006879535225102651,
+    "cells": [
+     "side-N0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-N",
+     "interior-E",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1036,
+     "states": 8288
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.01622644529759265,
+    "cells": [
+     "side-S1",
+     "side-S2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 1023,
+     "states": 8108
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.00945280984808905,
+    "cells": [
+     "side-W0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-E"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 997,
+     "states": 7908
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0015185230283347728,
+    "cells": [
+     "side-N1",
+     "side-E1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 980,
+     "states": 7672
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.01042593178454676,
+    "cells": [
+     "side-N0",
+     "side-W0",
+     "side-S1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 917,
+     "states": 7276
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.010305300169611398,
+    "cells": [
+     "side-W0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-N",
+     "interior-E",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 867,
+     "states": 6936
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.008081036831832478,
+    "cells": [
+     "side-N0",
+     "side-E0",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 858,
+     "states": 6704
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.002527506526191159,
+    "cells": [
+     "side-W0",
+     "side-S1",
+     "side-N1",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 812,
+     "states": 6384
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.0024827664258784132,
+    "cells": [
+     "side-S2",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 718,
+     "states": 5612
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.018613952082209617,
+    "cells": [
+     "side-W0",
+     "side-W2",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 694,
+     "states": 5400
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 6,
+    "best_penetration": 0.0020046139324435552,
+    "cells": [
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-N",
+     "interior-E",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 688,
+     "states": 5372
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 7,
+    "best_penetration": 0.022609984103238667,
+    "cells": [
+     "side-S0",
+     "side-W0",
+     "interior-SW",
+     "interior-NW",
+     "interior-W",
+     "interior-S",
+     "interior-SE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 591,
+     "states": 4588
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.00010094573711216803,
+    "cells": [
+     "side-W1",
+     "side-E1",
+     "interior-SW",
+     "interior-NW",
+     "interior-S",
+     "interior-N",
+     "interior-SE",
+     "interior-NE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 309,
+     "states": 2424
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   },
+   {
+    "arity": 8,
+    "best_penetration": 0.014256768780408269,
+    "cells": [
+     "side-S1",
+     "side-N1",
+     "interior-SW",
+     "interior-NW",
+     "interior-S",
+     "interior-N",
+     "interior-SE",
+     "interior-NE"
+    ],
+    "in_ledger": null,
+    "projected_gain": {
+     "orbits": 258,
+     "states": 2024
+    },
+    "selector_receipt": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+   }
+  ],
+  "selector_receipts": [
+   "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity7-seed1.json",
+   "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json"
+  ]
+ },
+ "ledger": "packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml",
+ "pending_all_projection": {
+  "endpoint_survives": true,
+  "entries": 0,
+  "orbits": 15953,
+  "surviving_states": 126168
+ },
+ "pending_verified_projection": {
+  "endpoint_survives": true,
+  "entries": 0,
+  "orbits": 15953,
+  "surviving_states": 126168
+ },
+ "provenance": {
+  "dirty": true,
+  "files": {
+   "packing/devtools/census_n17_certified.py": "9324063fc9a26e7b919d7997cb6ce8809b0424c1"
+  },
+  "ledger": {
+   "dirty": true,
+   "files": {
+    "packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml": "9ce592401daf2b3c54e3cb831e8bacf05b9d99ce"
+   },
+   "revision": "ae4f5fb43671a5ba77e2e4187b77502e54ce6862"
+  },
+  "revision": "ae4f5fb43671a5ba77e2e4187b77502e54ce6862"
+ },
+ "schema": "n17-certified-census/v1",
+ "seconds": 2.285,
+ "status": "exact census under admitted sub-pattern certificates; the pending and flagged lines are projections and never enter the certified count"
+}

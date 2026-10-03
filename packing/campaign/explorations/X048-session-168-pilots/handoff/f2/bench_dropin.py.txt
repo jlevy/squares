@@ -1,0 +1,74 @@
+"""Drop-in gmpy2 trial: the same verifier and checker modules with `Q` rebound to mpq
+(and the kernel's `Fraction` names too), run back to back against Fraction on the same
+inputs. Nothing in the repository is modified; the rebinding is in this process only.
+Usage: bench_dropin.py {kernel-verifier|bb-verifier|checker} [extra]"""
+import sys, time, json, importlib, types
+sys.path.insert(0, "/home/user/squares/packing/src"); sys.path.insert(0, "/home/user/squares/packing")
+from pathlib import Path
+from fractions import Fraction
+from gmpy2 import mpq
+X = Path("/home/user/squares/packing/campaign/explorations/X048-session-168-pilots/certificates")
+what = sys.argv[1]
+
+def rebind(module, cls):
+    for name in ("Q", "Fraction"):
+        if hasattr(module, name):
+            setattr(module, name, cls)
+
+if what == "kernel-verifier":
+    from devtools import verify_n17_kernel_certificate as V
+    sample = int(sys.argv[2]) if len(sys.argv) > 2 else 2
+    for cls in (Fraction, mpq):
+        rebind(V, cls)
+        cells = V.cover_cells()  # built after the rebind so its polygons use `cls`
+        t = time.perf_counter()
+        r = V.verify_objects(X / "W7", cells, sample=sample, sample_seed=12345)
+        print(f"kernel verifier W7 sample={sample} {cls.__name__:9s} {time.perf_counter()-t:8.1f} s  closed={r['closed']} counts={r['counts']}", flush=True)
+elif what == "bb-verifier":
+    from devtools import verify_n17_bb_certificate as V
+    import random
+    name = V.manifest_from_readme(X / "A")
+    for cls in (Fraction, mpq):
+        rebind(V, cls)
+        V.parse = (lambda s: Fraction(s)) if cls is Fraction else (lambda s: mpq(s))
+        V._TRIG.clear()
+        V.HP_LO, V.HP_HI = V.pi_enclosure()[0] / 2, V.pi_enclosure()[1] / 2
+        V.TWO_PI = (4 * V.HP_LO, 4 * V.HP_HI)
+        ver = V.Verifier(X / "A", name)
+        tree = V.load_tree(ver)
+        rng = random.Random(3)
+        lp = [i for i, n in tree.index.items() if n["closed"] == "lp"]
+        chosen = set(rng.sample(lp, 150))
+        others = [i for i, n in tree.index.items() if n["closed"] is None]
+        chosen.update(rng.sample(others, 150))
+        for i in list(chosen):
+            p = tree.index[i]["parent"]
+            while p is not None and p not in chosen:
+                chosen.add(p); p = tree.index[p]["parent"]
+        t = time.perf_counter()
+        checked, failed = V.check_nodes(ver, tree, chosen, progress=False, clock=t)
+        dt = time.perf_counter() - t
+        print(f"bb verifier A {cls.__name__:9s} {checked} nodes {dt:8.1f} s = {1e3*dt/checked:.1f} ms/node failed={failed} failures={ver.failures[:2]} counts={ver.counts}", flush=True)
+elif what == "checker":
+    # the kernel checker alone on W7's saved objects, first N steps, Fraction then mpq
+    from sqpack.hull_kernel import geometry, sweep, covers, collision, induction, node, sequential, frame, ownership, counting
+    from devtools import check_hull_kernel_mask0 as mask0_tool
+    from devtools import check_n17_subpattern as T
+    mods = [geometry, sweep, covers, collision, induction, node, sequential, frame, ownership, counting, mask0_tool]
+    nsteps = int(sys.argv[2]) if len(sys.argv) > 2 else 6
+    seed, node_obj, seed_sha, node_sha = T.load_certificate(X / "W7")
+    node_obj = dict(node_obj); node_obj["steps"] = node_obj["steps"][:nsteps]
+    node_obj["contradiction"] = None; node_obj["closed"] = False; node_obj["terminal"] = False
+    for cls in (Fraction, mpq):
+        for m in mods: rebind(m, cls)
+        fr = mask0_tool.n17_unique_frame()
+        budget = geometry.Budget(time.monotonic() + 10**6, 10**9)
+        t = time.perf_counter()
+        st = node.admit_seed(fr, seed, mask=node_obj["mask"], bins=seed["bins"], budget=budget, allow_empty_groups=True)
+        t1 = time.perf_counter()
+        try:
+            tr = sequential.replay_sequential(fr, node_obj, st, mask=node_obj["mask"], seed_sha256=seed_sha, budget=budget, cover="indexed")
+            tail = f"steps={len(tr.steps)} events={sum(s['events'] for s in tr.steps)}"
+        except geometry.RefusalError as e:
+            tail = f"refused at final state as expected for a truncated node: {str(e)[:60]}"
+        print(f"checker W7 first {nsteps} steps {cls.__name__:9s} seed={t1-t:6.1f} s replay={time.perf_counter()-t1:8.1f} s {tail}", flush=True)

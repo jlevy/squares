@@ -1,0 +1,209 @@
+"""What per-cell floor vectors that are NOT D4-symmetric could leave among the cut survivors.
+
+A pattern orbit [n] is excluded by a per-cell floor vector f when some D4 image g n has
+(g n) . f > M; the endpoint orbit forces M >= max_g (g n*) . f. So survivors(f) =
+#{[n] : max_g (g n) . f <= max_g (g n*) . f}. This script (1) computes the lattice-hull
+floor: cut-surviving states inside conv{g n*}, which every family of linear floor tests
+must keep; (2) hill-climbs over f in R^25 from the best symmetric direction, reporting
+exact D4-orbit counts by Burnside for every f it evaluates.
+"""
+
+import itertools
+import json
+import sys
+import time
+
+import numpy as np
+
+G = 5
+N = 17
+CELLS = [(i, j) for i in range(G) for j in range(G)]
+BOUND = [c for c in CELLS if 0 in c or G - 1 in c]
+INTER = [c for c in CELLS if c not in BOUND]
+ENDPOINT_CELLS = [(0, 0), (1, 0), (0, 1), (0, 4), (4, 0), (3, 0), (4, 1), (4, 4), (0, 2), (1, 3), (1, 2), (2, 3), (2, 1), (3, 2), (2, 4), (3, 3), (4, 2)]
+
+
+def cls(c):
+    i, j = sorted(min(k, G - 1 - k) for k in c)
+    return {(0, 0): 0, (0, 1): 1, (0, 2): 2, (1, 1): 3, (1, 2): 4, (2, 2): 5}[(i, j)]
+
+
+def d4():
+    last = G - 1
+    return [
+        lambda i, j: (i, j), lambda i, j: (last - i, j), lambda i, j: (i, last - j),
+        lambda i, j: (last - i, last - j), lambda i, j: (j, i), lambda i, j: (last - j, i),
+        lambda i, j: (j, last - i), lambda i, j: (last - j, last - i),
+    ]
+
+
+def blocks(size):
+    return [[(i + a, j + b) for a in range(size) for b in range(size)] for i in range(G - size + 1) for j in range(G - size + 1)]
+
+
+def build():
+    nb, ni = len(BOUND), len(INTER)
+    bvec = ((np.arange(1 << nb)[:, None] >> np.arange(nb)) & 1).astype(np.int8)
+    ivec = ((np.arange(3**ni)[:, None] // (3 ** np.arange(ni))) % 3).astype(np.int8)
+    bpos = {c: p for p, c in enumerate(BOUND)}
+    ipos = {c: p for p, c in enumerate(INTER)}
+
+    def block_matrix(size):
+        bl = blocks(size)
+        mb = np.zeros((nb, len(bl)), dtype=np.int16)
+        mi = np.zeros((ni, len(bl)), dtype=np.int16)
+        for q, block in enumerate(bl):
+            for c in block:
+                if c in bpos:
+                    mb[bpos[c], q] = 1
+                else:
+                    mi[ipos[c], q] = 1
+        return bvec.astype(np.int16) @ mb, ivec.astype(np.int16) @ mi
+
+    b2, i2 = block_matrix(2)
+    b3, i3 = block_matrix(3)
+    bsum = bvec.sum(axis=1)
+    isum = ivec.sum(axis=1)
+    by_sum = {s: np.flatnonzero(bsum == s) for s in range(nb + 1)}
+    rows = []
+    offs = [0]
+    concat = []
+    for r in range(len(ivec)):
+        need = N - int(isum[r])
+        if need < 0 or need > nb:
+            continue
+        idx = by_sum[need]
+        ok = ((b2[idx] + i2[r]) <= 5).all(axis=1) & ((b3[idx] + i3[r]) <= 9).all(axis=1)
+        sel = idx[ok]
+        if len(sel):
+            rows.append(r)
+            concat.append(sel.astype(np.int32))
+            offs.append(offs[-1] + len(sel))
+    rows = np.array(rows)
+    concat = np.concatenate(concat)
+    offs = np.array(offs)
+    row_of = np.repeat(rows, np.diff(offs)).astype(np.int32)
+    perms = []
+    for g in d4():
+        perms.append(([bpos[g(*c)] for c in BOUND], [ipos[g(*c)] for c in INTER]))
+    fixed_pos = []
+    for g, (pb, pi) in enumerate(perms):
+        if g == 0:
+            continue
+        bf = (bvec == bvec[:, pb]).all(axis=1)
+        inf = (ivec == ivec[:, pi]).all(axis=1)
+        fixed_pos.append(np.flatnonzero(bf[concat] & inf[row_of]))
+    return bvec, ivec, bpos, ipos, concat, row_of, perms, fixed_pos
+
+
+def endpoint_vector():
+    n = np.zeros(len(CELLS), dtype=np.int64)
+    for c in ENDPOINT_CELLS:
+        n[CELLS.index(c)] += 1
+    return n
+
+
+class Counter:
+    def __init__(self):
+        (self.bvec, self.ivec, self.bpos, self.ipos, self.concat, self.row_of, self.perms, self.fixed_pos) = build()
+        self.nstates = len(self.concat)
+        self.bcols = [CELLS.index(c) for c in BOUND]
+        self.icols = [CELLS.index(c) for c in INTER]
+        self.images = []  # cell permutation matrices for g acting on 25-vectors
+        for g in d4():
+            self.images.append([CELLS.index(g(*c)) for c in CELLS])
+
+    def survivors(self, f, nstar):
+        f = np.asarray(f, dtype=np.float64)
+        # (g n) . f = n . (g^-1 f); enumerate all 8 images of f
+        f_imgs = []
+        for img in self.images:
+            fg = np.zeros(len(CELLS))
+            for k, m in enumerate(img):
+                fg[m] = f[k]
+            f_imgs.append(fg)
+        T = max(float(fg @ nstar) for fg in f_imgs)
+        best = np.full(self.nstates, -np.inf)
+        for fg in f_imgs:
+            bs = self.bvec.astype(np.float64) @ fg[self.bcols]
+            is_ = self.ivec.astype(np.float64) @ fg[self.icols]
+            vals = bs[self.concat] + is_[self.row_of]
+            np.maximum(best, vals, out=best)
+        mask = best <= T + 1e-9 * max(1.0, abs(T))
+        states = int(mask.sum())
+        fixed = states + sum(int(mask[p].sum()) for p in self.fixed_pos)
+        assert fixed % 8 == 0
+        return states, fixed // 8
+
+
+def hull_states(counter, nstar):
+    """Cut-surviving states inside conv{g n*}; LP feasibility over the 8 images."""
+    from scipy.optimize import linprog
+
+    imgs = np.array([[nstar[k] for k in img] for img in counter.images], dtype=np.float64)  # 8 x 25 (g^-1 n*)
+    # also include g n* properly: both orderings cover the same orbit
+    orbit = {tuple(int(v) for v in row) for row in imgs}
+    for img in counter.images:
+        v = np.zeros(25, dtype=np.int64)
+        for k, m in enumerate(img):
+            v[m] = nstar[k]
+        orbit.add(tuple(int(x) for x in v))
+    orbit = np.array(sorted(orbit), dtype=np.float64)
+    cls_vec = np.array([cls(c) for c in CELLS])
+    nstar_cc = np.bincount(cls_vec, weights=nstar, minlength=6)
+    # candidates: states with the endpoint class-count vector
+    bcc = np.stack([counter.bvec[:, [cls(c) == k for c in BOUND]].sum(axis=1) for k in range(6)], axis=1)
+    icc = np.stack([counter.ivec[:, [cls(c) == k for c in INTER]].sum(axis=1) for k in range(6)], axis=1)
+    cc = bcc[counter.concat] + icc[counter.row_of]
+    cand = np.flatnonzero((cc == nstar_cc).all(axis=1))
+    inside = []
+    A_eq = np.vstack([orbit.T, np.ones(len(orbit))])
+    for p in cand:
+        n = np.zeros(25)
+        n[counter.bcols] = counter.bvec[counter.concat[p]]
+        n[counter.icols] = counter.ivec[counter.row_of[p]]
+        res = linprog(np.zeros(len(orbit)), A_eq=A_eq, b_eq=np.concatenate([n, [1.0]]), bounds=[(0, 1)] * len(orbit), method="highs")
+        if res.status == 0:
+            inside.append(int(p))
+    return len(cand), len(orbit), inside
+
+
+if __name__ == "__main__":
+    out = sys.argv[1]
+    budget_s = float(sys.argv[2]) if len(sys.argv) > 2 else 600.0
+    t0 = time.perf_counter()
+    C = Counter()
+    nstar = endpoint_vector()
+    print("states", C.nstates, "build s", time.perf_counter() - t0, flush=True)
+    # endpoint state must be a cut survivor
+    nb_idx = int(sum(int(nstar[CELLS.index(c)]) << p for p, c in enumerate(BOUND)))
+    ni_idx = int(sum(int(nstar[CELLS.index(c)]) * 3**p for p, c in enumerate(INTER)))
+    present = bool(((C.concat == nb_idx) & (C.row_of == ni_idx)).any())
+    print("endpoint state among cut survivors:", present, flush=True)
+    ncand, norbit, inside = hull_states(C, nstar)
+    print(f"hull: endpoint orbit size {norbit}; candidate states with endpoint class counts {ncand}; states inside conv(orbit) {len(inside)}", flush=True)
+    results = {"endpoint_present": present, "hull_candidates": ncand, "endpoint_orbit_size": norbit, "hull_states": len(inside)}
+    # symmetric check: per-class floor vector from the pilot's best random direction
+    cls_vec = np.array([cls(c) for c in CELLS])
+    sym_dir = np.array([-1.340858262968849, 0.30369978976615347, 0.09359148694013819, 0.6965617751433204, 0.3741071329026325, 1.6772154466000548])
+    f = sym_dir[cls_vec]
+    s, o = C.survivors(f, nstar)
+    print("symmetric pilot-best direction: states", s, "orbits", o, flush=True)
+    results["symmetric_pilot_best"] = {"states": s, "orbits": o}
+    # hill-climb over asymmetric f
+    rng = np.random.default_rng(7)
+    best_f = f.copy()
+    best_o = o
+    trace = [(0, o)]
+    it = 0
+    while time.perf_counter() - t0 < budget_s:
+        it += 1
+        cand = best_f + rng.standard_normal(25) * (0.5 if it % 3 else 2.0)
+        s, o = C.survivors(cand, nstar)
+        if o < best_o:
+            best_o, best_f = o, cand
+            trace.append((it, o))
+            print(f"iter {it}: orbits {o} states {s}", flush=True)
+    print("iterations", it, "best asymmetric orbits", best_o, flush=True)
+    results["asymmetric_search"] = {"iterations": it, "best_orbits": best_o, "best_f": best_f.tolist(), "trace": trace}
+    json.dump(results, open(out, "w"), indent=1)

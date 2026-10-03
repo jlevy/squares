@@ -1,0 +1,35 @@
+"""Second certifying prime, and the enclosure as decimals, for the H-265 review."""
+import json, re, sys
+from decimal import Decimal, getcontext
+from fractions import Fraction as Q
+from pathlib import Path
+from sympy import Poly, symbols
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c-review")
+REPO = Path("/home/user/squares")
+rec = json.loads((REPO / "packing/campaign/series/series-000-smoke-and-calibration/results/exp-245-n17-catalogue-polynomial/run-001/receipt.json").read_bytes())
+C = rec["catalogue"]["coefficients"]
+s = symbols("s")
+def is_prime(n): return n > 1 and all(n % d for d in range(2, int(n**0.5) + 1))
+irr = []
+for p in (p for p in range(2, 1000) if is_prime(p) and 4775 % p):
+    _, mf = Poly(C, s, modulus=p).factor_list()
+    if sorted(f.degree() for f, m in mf for _ in range(m)) == [18]:
+        irr.append(p)
+print("primes < 1000 (not dividing 4775) with C irreducible mod p:", irr, "count", len(irr), "of", sum(1 for p in range(2,1000) if is_prime(p) and 4775 % p))
+# reuse my DDF test from recheck.py without re-running it: exec only that function
+src = Path("/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c-review/recheck.py").read_text()
+start = src.index("def ddf_irreducible"); end = src.index('say("own DDF irreducibility test, p=7:"')
+ns = {}
+exec(src[start:end], ns)
+for p in irr[:4]:
+    print(f"own DDF test mod {p}:", ns["ddf_irreducible"](C, p))
+getcontext().prec = 45
+lo, hi = (Q(v) for v in rec["root_enclosure"])
+print("enclosure lo", Decimal(lo.numerator) / Decimal(lo.denominator))
+print("enclosure hi", Decimal(hi.numerator) / Decimal(hi.denominator))
+print("enclosure width", float(hi - lo))
+ceil_ = Q(23377650468022754758171074269267527, 5 * 10**33)
+print("ceiling      ", Decimal(ceil_.numerator) / Decimal(ceil_.denominator), " ceiling > enclosure hi:", ceil_ > hi, " ceiling - hi ~", float(ceil_ - hi))
+print("catalogue value 4.67553009360455 vs enclosure: agrees to printed digits:", str(Decimal(lo.numerator)/Decimal(lo.denominator))[:16])
+# rational unit sign: the tool's factor vs the raw resultant sign
+print("receipt unit:", rec["comparison"]["unit"], " vanishing lead:", rec["vanishing_factor"]["coefficients"][0])

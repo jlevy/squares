@@ -1,0 +1,20 @@
+attempt 1 t=22s best=2.828838e-02 pair=2.829e-02 cell=2.800e-02 wall=2.829e-02
+attempt 6 t=129s best=9.222827e-03 pair=9.223e-03 cell=9.223e-03 wall=9.223e-03
+attempts 23 best 0.009222826975760379
+  corner-SW    x=0.63606 y=0.63984 theta=9.378 deg
+  side-N0      x=1.80364 y=4.04328 theta=5.429 deg
+  side-W0      x=0.69731 y=1.85070 theta=66.336 deg
+  side-W1      x=1.39684 y=2.66457 theta=60.367 deg
+  side-W2      x=0.67260 y=3.39522 theta=60.367 deg
+  interior-SW  x=1.70025 y=1.42635 theta=75.690 deg
+  interior-W   x=2.35080 y=2.33776 theta=60.369 deg
+pair penetrations:
+  corner-SW - side-W0: 7.0649e-03
+  corner-SW - interior-SW: -1.9372e-02
+  side-N0 - side-W2: 9.2228e-03
+  side-W0 - side-W1: -4.0158e-03
+  side-W0 - interior-SW: -1.4303e-02
+  side-W1 - side-W2: 9.2228e-03
+  side-W1 - interior-SW: -1.0453e-02
+  side-W1 - interior-W: 9.2228e-03
+  interior-SW - interior-W: 4.8973e-04

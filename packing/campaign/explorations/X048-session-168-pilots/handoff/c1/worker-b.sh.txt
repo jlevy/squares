@@ -1,0 +1,8 @@
+#!/bin/bash
+# Pilot 2, worker B: the n11 case-438 control from its cells, then the n17 cell seed.
+cd /home/user/squares/packing
+echo "start $(date -u +%H:%M:%S)"
+timeout 10800 uv run --frozen --all-extras --group dev python -m devtools.pilot_n17_capture --bins 32 --max-rounds 300 --system n11 --max-live 128 --max-seconds 10500 --rounds-after-start 8 --output /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/n11-128.json > /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/n11-128.out 2> /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/n11-128.log
+echo "n11-128 exit $? $(date -u +%H:%M:%S)"
+timeout 10800 uv run --frozen --all-extras --group dev python -m devtools.pilot_n17_capture --bins 32 --max-rounds 300 --seed-grid 64 --max-live 128 --max-seconds 10500 --rounds-after-start 8 --output /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/cell-128.json > /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/cell-128.out 2> /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/c1/p2/cell-128.log
+echo "cell-128 exit $? $(date -u +%H:%M:%S)"

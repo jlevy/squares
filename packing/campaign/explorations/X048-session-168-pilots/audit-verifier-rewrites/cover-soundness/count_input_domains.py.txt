@@ -1,0 +1,38 @@
+"""Lane V1: zero-area required domains as the producer published them (`input_domain`).
+
+    python3 <this file> CERT_DIR...
+
+For each saved node, every step row's `input_domain` (the producer's required domain,
+the legal box cut from the predecessor's outer domain) is classed as empty, zero-area
+(a point or a segment, which the kernel's checker sends to `closed_degenerate_cover`)
+or positive-area (sent to the indexed sweep). Exact `Fraction` shoelace; prints JSON.
+"""
+
+from __future__ import annotations
+
+import gzip
+import json
+import sys
+from collections import Counter
+from fractions import Fraction
+from pathlib import Path
+
+for directory in map(Path, sys.argv[1:]):
+    (node_path,) = directory.glob("node-*.json.gz")
+    node = json.loads(gzip.decompress(node_path.read_bytes()))
+    counts: Counter[str] = Counter()
+    for step in node["steps"]:
+        for row in step["rows"]:
+            points = [(Fraction(x), Fraction(y)) for x, y in row.get("input_domain", [])]
+            if "input_domain" not in row:
+                counts["no_input_domain"] += 1
+            elif not points:
+                counts["empty"] += 1
+            else:
+                n = len(points)
+                twice = sum(
+                    points[i][0] * points[(i + 1) % n][1] - points[(i + 1) % n][0] * points[i][1]
+                    for i in range(n)
+                )
+                counts["zero_area" if twice == 0 else "positive_area"] += 1
+    print(json.dumps({"certificate": directory.name, **dict(sorted(counts.items()))}))

@@ -1,0 +1,30 @@
+{
+ "agree": 1607,
+ "count_by_old_verdict": {
+  "flagged": 107,
+  "placed": 1501
+ },
+ "of": 1608,
+ "old_flagged_new_placed": [
+  {
+   "arity": 8,
+   "cpu_seconds": 6.073,
+   "found_by": "hop",
+   "mask": 983968,
+   "old": "flagged",
+   "old_seconds": 74.868,
+   "penetration": 6.4376273201105505e-09,
+   "seconds": 6.11,
+   "source": "chunk 51",
+   "status": "placed"
+  }
+ ],
+ "old_placed_new_flagged": [],
+ "results": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/s2/fast/testset-combined-fast.jsonl",
+ "searched": 1608,
+ "seconds_by_old_verdict": {
+  "flagged": 6294.7,
+  "placed": 38.4
+ },
+ "set": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/s2/fast/bench-set.json"
+}

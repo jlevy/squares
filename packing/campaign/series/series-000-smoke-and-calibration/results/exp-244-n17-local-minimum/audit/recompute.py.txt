@@ -1,0 +1,615 @@
+"""Independent recomputation for the H-261 instrument review (lane A2-review).
+
+Shares nothing with devtools.check_n17_local_minimum. Imports only the accepted H-256
+layout (`_layout`) and the frozen H-254 chart (ANCHORS, CONTACTS); the H-258 producer's
+`common_rows` is imported once, only to compare rosters at w = 0.
+"""
+
+from __future__ import annotations
+
+import itertools
+import json
+import math
+import sys
+from fractions import Fraction as Q
+from pathlib import Path
+
+sys.path.insert(0, "/home/user/squares/packing")
+import mpmath  # noqa: E402
+from mpmath import iv  # noqa: E402
+
+from devtools.check_n17_contact_chart import ANCHORS, CONTACTS  # noqa: E402
+from devtools.check_n17_endpoint_feasibility import _layout  # noqa: E402
+
+REPO = Path("/home/user/squares")
+ROOT = (
+    REPO
+    / "packing/campaign/series/series-000-smoke-and-calibration/results"
+    / "exp-237-n17-polynomial-root/run-001/certificate.json"
+)
+LANE = Path(
+    "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/a2b2"
+)
+OUT = Path(__file__).resolve().parent
+HALF = Q(1, 2)
+CLASS = {**{i: "axis" for i in (*range(1, 9), 15, 17)}, **{i: "theta" for i in range(9, 15)}, 16: "beta"}
+AXES = {"axis": ("ex", "ey"), "theta": ("u", "v"), "beta": ("p", "q")}
+AXIS_CLASS = {"ex": "axis", "ey": "axis", "u": "theta", "v": "theta", "w": "theta", "p": "beta", "q": "beta"}
+ZERO_WEIGHT = {
+    ("wall", 5, "right", 0), ("wall", 5, "right", 1),
+    ("wall", 6, "bottom", 0), ("wall", 6, "bottom", 1),
+    ("pair", 9, 11, 0), ("pair", 9, 11, 1),
+}
+DROPPED_PAIRS = {(2, 3), (9, 11)}
+BOX = ((Q(0), Q(1, 4)), (Q(0), Q(1, 12)), (Q(-1, 8), Q(1, 16)))
+RADIUS = Q(1, 5000)
+C2 = Q(7071068, 10**7)  # upper bound on 1/sqrt 2, checked below
+assert 2 * C2 * C2 > 1
+SCALE = 10**15
+
+
+def col(label: int, comp: str) -> int:
+    return 3 * (label - 1) + {"x": 0, "y": 1, "w": 2}[comp]
+
+
+def dot(a, b):
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def rot(a):  # d/d omega of a rotating vector, at omega = 0
+    return (-a[1], a[0])
+
+
+def corners(aux, label, half):
+    a1, a2 = (aux[name] for name in AXES[CLASS[label]])
+    return [
+        ((s1 * a1[0] + s2 * a2[0]) * half, (s1 * a1[1] + s2 * a2[1]) * half)
+        for s1, s2 in ((1, 1), (1, -1), (-1, 1), (-1, -1))
+    ]
+
+
+def support(aux, label, n, half):
+    return max(dot(n, q) for q in corners(aux, label, half))
+
+
+def gap_row(n, sign, owner, other, c_owner, c_other, q, half):
+    """Gradient of g = sign n.(c_other + R q - c_owner) - 1/2 at omega = 0 (51 columns)."""
+    t = rot(n)
+    row = [0] * 51
+    row[col(other, "x")] += sign * n[0]
+    row[col(other, "y")] += sign * n[1]
+    row[col(owner, "x")] -= sign * n[0]
+    row[col(owner, "y")] -= sign * n[1]
+    d = (c_other[0] + q[0] - c_owner[0], c_other[1] + q[1] - c_owner[1])
+    row[col(owner, "w")] += sign * dot(t, d)
+    row[col(other, "w")] += sign * dot(n, rot(q))
+    return row, sign * dot(n, d) - half
+
+
+WALL_NORMAL = {"left": (1, 0), "right": (-1, 0), "bottom": (0, 1), "top": (0, -1)}
+
+
+def wall_rows(aux, side, centres, label, wall, half, pick=None):
+    """Rows of the tight corner gaps of `label` against `wall`; `pick` fixes the corners."""
+    n = WALL_NORMAL[wall]
+    c = centres[label - 1]
+    offset = side if wall in ("right", "top") else 0
+    made = []
+    for index, q in enumerate(corners(aux, label, half)):
+        g = dot(n, (c[0] + q[0], c[1] + q[1])) + offset
+        if pick is None:
+            tight = g == 0
+        else:
+            tight = index in pick
+        if tight:
+            row = [0] * 51
+            row[col(label, "x")] += n[0]
+            row[col(label, "y")] += n[1]
+            row[col(label, "w")] += dot(n, rot(q))
+            made.append((row[col(label, "w")], index, row, g))
+    if pick is None:
+        made.sort(key=lambda item: item[0])
+    else:
+        made = [item for index in pick for item in made if item[1] == index]
+    return made
+
+
+def sign_of(x):
+    return 1 if x > 0 else -1
+
+
+def face_rows(aux, centres, left, right, axis, half, pick=None):
+    """The four elementary corner rows of a parallel face and the two Lemma 2 rows."""
+    n = aux[axis]
+    c_l, c_r = centres[left - 1], centres[right - 1]
+    elementary = {}
+    for owner, other in ((left, right), (right, left)):
+        c_o, c_p = centres[owner - 1], centres[other - 1]
+        sign = sign_of(dot(n, (c_p[0] - c_o[0], c_p[1] - c_o[1]))) if pick is None else pick[owner][0]
+        cs = corners(aux, other, half)
+        if pick is None:
+            values = [sign * dot(n, q) for q in cs]
+            low = min(values)
+            near = [i for i, v in enumerate(values) if v == low]
+            assert len(near) == 2, (left, right, near)
+        else:
+            near = pick[owner][1]
+        rows = []
+        for i in near:
+            row, g = gap_row(n, sign, owner, other, c_o, c_p, cs[i], half)
+            rows.append((i, row, g))
+        elementary[owner] = (sign, near, rows)
+    return elementary
+
+
+def face_pick(elementary):
+    return {owner: (sign, near) for owner, (sign, near, _) in elementary.items()}
+
+
+def lemma2_rows(elementary, left, right):
+    """E- and E+: elementary rows of one owner that are convex combinations of the other's."""
+    found = []
+    for owner, other in ((left, right), (right, left)):
+        _, _, mine = elementary[owner]
+        _, _, theirs = elementary[other]
+        (_, y1, _), (_, y2, _) = theirs
+        for idx, x, _ in mine:
+            pivot = next((k for k in range(51) if y1[k] != y2[k]), None)
+            assert pivot is not None
+            alpha = (x[pivot] - y2[pivot]) / (y1[pivot] - y2[pivot])
+            combo = [alpha * p + (1 - alpha) * q for p, q in zip(y1, y2)]
+            if combo == x and 0 <= alpha <= 1:
+                if x not in [f[0] for f in found]:
+                    found.append((x, owner, alpha, idx))
+    assert len(found) == 2, [(o, a) for _, o, a, _ in found]
+    found.sort(key=lambda item: -item[0][col(left, "w")])  # E- has the larger omega_left
+    return found
+
+
+def nonparallel_row(aux, centres, left, right, axis, half, pick=None):
+    n = aux[axis]
+    owner = left if AXIS_CLASS[axis] == CLASS[left] else right
+    assert AXIS_CLASS[axis] == CLASS[owner] and AXIS_CLASS[axis] != CLASS[left if owner == right else right]
+    other = right if owner == left else left
+    c_o, c_p = centres[owner - 1], centres[other - 1]
+    cs = corners(aux, other, half)
+    if pick is None:
+        sign = sign_of(dot(n, (c_p[0] - c_o[0], c_p[1] - c_o[1])))
+        values = [sign * dot(n, q) for q in cs]
+        low = min(values)
+        near = [i for i, v in enumerate(values) if v == low]
+        assert len(near) == 1, (left, right, near)
+        index = near[0]
+    else:
+        sign, index = pick
+    row, g = gap_row(n, sign, owner, other, c_o, c_p, cs[index], half)
+    return row, g, owner, other, sign, index
+
+
+def moved(centres, v, w):
+    a, b, z = w
+    c = list(centres)
+    c[4] = (c[4][0] - a, c[4][1])
+    c[10] = (c[10][0] - b * v[0], c[10][1] - b * v[1])
+    c[12] = (c[12][0] + z * v[0], c[12][1] + z * v[1])
+    return tuple(c)
+
+
+def build_rows(aux, side, centres, half, picks=None):
+    """All 58 rows in the frozen order, keyed as the instrument keys them, plus gaps."""
+    rows = {}
+    gaps = {}
+    chosen = {}
+    for label, wall in ANCHORS:
+        made = wall_rows(aux, side, centres, label, wall, half, None if picks is None or ("wall", label, wall) not in picks else picks["wall", label, wall])
+        chosen["wall", label, wall] = [item[1] for item in made]
+        for variant, (_, _, row, g) in enumerate(made):
+            rows["wall", label, wall, variant] = row
+            gaps["wall", label, wall, variant] = g
+    for left, right, axis, _ in CONTACTS:
+        parallel = CLASS[left] == CLASS[right]
+        if parallel:
+            if picks is None or ("pair", left, right) not in picks:
+                elementary = face_rows(aux, centres, left, right, axis, half)
+                pair_rows = lemma2_rows(elementary, left, right)
+                chosen["pair", left, right] = (face_pick(elementary), [(o, i) for _, o, _, i in pair_rows])
+                for variant, (row, owner, alpha, idx) in enumerate(pair_rows):
+                    rows["pair", left, right, variant] = row
+            else:
+                pick, pattern = picks["pair", left, right]
+                elementary = face_rows(aux, centres, left, right, axis, half, pick)
+                for variant, (owner, idx) in enumerate(pattern):
+                    rows["pair", left, right, variant] = next(r for i, r, _ in elementary[owner][2] if i == idx)
+            gaps["pair", left, right, 0] = tuple(g for o in elementary.values() for _, _, g in o[2])
+        else:
+            row, g, owner, other, sign, index = nonparallel_row(aux, centres, left, right, axis, half, None if picks is None or ("pair", left, right) not in picks else picks["pair", left, right])
+            chosen["pair", left, right] = (sign, index)
+            rows["pair", left, right, 0] = row
+            gaps["pair", left, right, 0] = g
+    assert len(rows) == 58
+    return rows, gaps, chosen
+
+
+def names_and_lifts(u):
+    names, lifts = [], []
+    for label in range(1, 18):
+        if label == 6:
+            continue
+        if label in (11, 13):
+            names.append(f"u{label}")
+            lifts.append({col(label, "x"): u[0], col(label, "y"): u[1]})
+        elif label != 5:
+            names.append(f"xi{label}")
+            lifts.append({col(label, "x"): 1})
+        if label not in (11, 13):
+            names.append(f"eta{label}")
+            lifts.append({col(label, "y"): 1})
+        names.append(f"omega{label}")
+        lifts.append({col(label, "w"): 1})
+    assert len(names) == 45
+    return names, lifts
+
+
+def project(rows, keys, lifts):
+    return [[sum(row[p] * c for p, c in lift.items()) for lift in lifts] for key in keys for row in (rows[key],)]
+
+
+def sqrt_up(value):
+    scaled = math.ceil(value * SCALE * SCALE)
+    root = math.isqrt(scaled)
+    if root * root < scaled:
+        root += 1
+    upper = Q(root, SCALE)
+    assert upper * upper >= value
+    return upper
+
+
+def to_iv(q: Q, margin):
+    v = mpmath.mpf(q.numerator) / mpmath.mpf(q.denominator)
+    return iv.mpf([v - margin, v + margin])
+
+
+def iv_to_q_upper(x) -> Q:
+    """The exact rational value of an interval's upper endpoint."""
+    return Q(*mpmath.libmp.to_rational(x._mpi_[1]))
+
+
+def iv_to_q_lower(x) -> Q:
+    return Q(*mpmath.libmp.to_rational(x._mpi_[0]))
+
+
+def main() -> None:
+    document = json.loads(ROOT.read_text())
+    t, beta = (Q(x) for x in document["box"]["midpoint"])
+    rt, rb = (Q(x) for x in document["inclusion_bounds"])
+    side, aux, centres = _layout(t, beta, HALF)
+    side, centres = Q(side), tuple((Q(x), Q(y)) for x, y in centres)
+    aux = {k: (Q(v[0]), Q(v[1])) if isinstance(v, tuple) else Q(v) for k, v in aux.items()}
+    u, v = aux["u"], aux["v"]
+    assert u[0] ** 2 + u[1] ** 2 == 1 and dot(u, v) == 0
+    report = {}
+
+    # 1. Rows at w = 0 from my own gap functions; compare with the H-258 producer.
+    # The Lemma 2 pattern (which owner's elementary row each E row is) is decided at the
+    # box centre, where tau_{5,7} = -1/8 is away from the ambiguous tau = 0; it is then
+    # reused everywhere, and the rows at w = 0 are rebuilt with it.
+    centre_w = tuple((lo + hi) / 2 for lo, hi in BOX)
+    rows0_free, _, chosen0 = build_rows(aux, side, centres, HALF)
+    wall_picks = {k: v for k, v in chosen0.items() if k[0] == "wall"}
+    _, _, chosen_c = build_rows(aux, side, moved(centres, v, centre_w), HALF, wall_picks)
+    chosen = {**chosen_c, **wall_picks}
+    rows0, gaps0, _ = build_rows(aux, side, centres, HALF, chosen)
+    report["pattern_rows_at_origin_equal_free_rows"] = rows0 == rows0_free
+    report["lemma2_pattern_5_7"] = str(chosen["pair", 5, 7])
+    keys = [k for k in rows0 if k not in ZERO_WEIGHT]
+    assert len(keys) == 52
+    kinds = {"wall": 0, "face": 0, "cross": 0}
+    for k in keys:
+        if k[0] == "wall":
+            kinds["wall"] += 1
+        elif CLASS[k[1]] == CLASS[k[2]]:
+            kinds["face"] += 1
+        else:
+            kinds["cross"] += 1
+    report["roster_counts"] = kinds
+    nonzero_gaps = {str(k): float(g) if not isinstance(g, tuple) else [float(x) for x in g] for k, g in gaps0.items() if (any(x != 0 for x in g) if isinstance(g, tuple) else g != 0)}
+    report["nonzero_elementary_gaps_at_midpoint"] = nonzero_gaps
+    report["chosen_corners"] = {str(k): str(v) for k, v in chosen.items() if k[0] == "pair" and CLASS[k[1]] != CLASS[k[2]]}
+    from devtools.check_n17_core_stress import common_rows  # the H-258 producer, roster only
+
+    frozen, _, _ = common_rows(t, beta, HALF)
+    mismatch = []
+    for k in rows0:
+        theirs = [Q(x) for x in frozen[k][:51]]
+        if theirs != rows0[k]:
+            mismatch.append(str(k))
+    report["rows_at_origin_equal_h258_producer"] = not mismatch
+    report["row_mismatches"] = mismatch
+
+    names, lifts = names_and_lifts(u)
+    j = names.index("omega11")
+    s = -1  # direction -omega11
+
+    def a_matrix(w, picks=chosen):
+        rows, _, _ = build_rows(aux, side, moved(centres, v, w), HALF, picks)
+        return project(rows, keys, lifts)
+
+    low = (BOX[0][0], BOX[1][0], BOX[2][0])
+    base = a_matrix(low)
+    slopes = []
+    for k in range(3):
+        p = list(low)
+        p[k] = BOX[k][1]
+        high = a_matrix(tuple(p))
+        width = BOX[k][1] - BOX[k][0]
+        slopes.append([[(h - b) / width for h, b in zip(hr, br)] for hr, br in zip(high, base)])
+
+    def affine_at(w):
+        return [[base[i][c] + sum((w[k] - low[k]) * slopes[k][i][c] for k in range(3)) for c in range(45)] for i in range(52)]
+
+    import random
+
+    random.seed(7)
+    affine_ok = True
+    for _ in range(6):
+        w = tuple(lo + (hi - lo) * Q(random.randint(0, 997), 997) for lo, hi in BOX)
+        affine_ok = affine_ok and a_matrix(w) == affine_at(w)
+    # also the tau sign branches at the vertices, from my own face offsets
+    report["affine_at_six_random_points"] = affine_ok
+    support_found = {}
+    for k, name in enumerate("abz"):
+        rows_hit = sorted({str(keys[i]) for i in range(52) if any(slopes[k][i])})
+        cols_hit = sorted({names[c] for i in range(52) for c in range(45) if slopes[k][i][c]})
+        support_found[name] = {"rows": rows_hit, "columns": cols_hit}
+    report["slope_support"] = support_found
+    taus = {}
+    for left, right, axis, _ in CONTACTS:
+        if CLASS[left] == CLASS[right]:
+            n = aux[axis]
+            tg = rot(n)
+            vals = []
+            for vert in itertools.product(*BOX):
+                c = moved(centres, v, vert)
+                vals.append(dot(tg, (c[right - 1][0] - c[left - 1][0], c[right - 1][1] - c[left - 1][1])))
+            taus[f"{left}/{right}"] = (float(min(vals)), float(max(vals)))
+    report["tau_ranges_on_box"] = taus
+
+    # 2. Curvature constants, with the root box via mpmath interval arithmetic.
+    mpmath.mp.prec = 320
+    iv.prec = 320
+    margin = mpmath.mpf(2) ** -280
+    t_iv, b_iv = to_iv(t, margin + mpmath.mpf(rt.numerator) / rt.denominator), to_iv(beta, margin + mpmath.mpf(rb.numerator) / rb.denominator)
+    half_iv = iv.mpf(1) / 2
+    side_iv, aux_iv, centres_iv = _layout(t_iv, b_iv, half_iv)
+    u_iv, v_iv = aux_iv["u"], aux_iv["v"]
+    assert abs(float(u[0]) - float(u_iv[0].mid)) < 1e-12 and abs(float(v[1]) - float(v_iv[1].mid)) < 1e-12
+    vertices = list(itertools.product(*BOX))
+
+    def pos_box(label):
+        if label in (11, 13):
+            return RADIUS * iv_to_q_upper(abs(u_iv[0])), RADIUS * iv_to_q_upper(abs(u_iv[1]))
+        if label == 5:
+            return Q(0), RADIUS
+        return RADIUS, RADIUS
+
+    def pair_K(o, p):
+        (ox, oy), (px, py) = pos_box(o), pos_box(p)
+        rho = sqrt_up((ox + px) ** 2 + (oy + py) ** 2)
+        sq = Q(0)
+        for vert in vertices:
+            c = moved(centres, v, vert)
+            sq = max(sq, (c[p - 1][0] - c[o - 1][0]) ** 2 + (c[p - 1][1] - c[o - 1][1]) ** 2)
+            ci = moved(centres_iv, v_iv, tuple(iv.mpf(x.numerator) / x.denominator for x in vert))
+            dx, dy = ci[p - 1][0] - ci[o - 1][0], ci[p - 1][1] - ci[o - 1][1]
+            sq = max(sq, iv_to_q_upper(dx * dx + dy * dy))
+        D = sqrt_up(sq) + rho
+        w = RADIUS
+        return D * w * w + 2 * rho * w + C2 * (2 * w) ** 2, D, rho
+
+    K = []
+    K_detail = {}
+    for key in keys:
+        if key[0] == "wall":
+            K.append(C2 * RADIUS * RADIUS)
+        else:
+            left, right = key[1], key[2]
+            if CLASS[left] == CLASS[right]:
+                val = max(pair_K(left, right)[0], pair_K(right, left)[0])
+            else:
+                owner = left if AXIS_CLASS[CONTACTS[[c[:2] for c in CONTACTS].index((left, right))][2]] == CLASS[left] else right
+                other = right if owner == left else left
+                val = pair_K(owner, other)[0]
+            K.append(val)
+            K_detail[str(key)] = float(val)
+    report["K_pairs"] = K_detail
+    report["K_wall"] = float(C2 * RADIUS * RADIUS)
+
+    # 3. Root-box deviation per row, my own enclosure: width of each lifted entry.
+    rows_iv, _, _ = build_rows(aux_iv, side_iv, centres_iv, half_iv, chosen)
+    lifts_iv = names_and_lifts(u_iv)[1]
+    mid = a_matrix((Q(0), Q(0), Q(0)))
+    deviation = []
+    contained = True
+    for i, key in enumerate(keys):
+        total = Q(0)
+        row = rows_iv[key]
+        for c, lift in enumerate(lifts_iv):
+            entry = iv.mpf(0)
+            for p, coef in lift.items():
+                entry = entry + row[p] * coef
+            m = mid[i][c]
+            lo_q, hi_q = iv_to_q_lower(entry), iv_to_q_upper(entry)
+            contained = contained and (lo_q <= m <= hi_q)
+            total += max(hi_q - m, m - lo_q)
+        deviation.append(total)
+    report["root_box_midpoint_contained"] = contained
+    report["root_box_largest_row_deviation"] = float(max(deviation))
+
+    # 4. Verify the serialised -omega11 certificates exactly.
+    certs = json.loads((LANE / "local-minimum-ratio-certificates.json").read_text())
+    doc = next(d for d in certs if d["direction"] == "-omega11")
+    R = RADIUS
+    results = []
+    volume = Q(0)
+    for cell in doc["cells"]:
+        lo = tuple(Q(x[0]) for x in cell["cell"])
+        hi = tuple(Q(x[1]) for x in cell["cell"])
+        volume += (hi[0] - lo[0]) * (hi[1] - lo[1]) * (hi[2] - lo[2])
+        centre = tuple((a + b) / 2 for a, b in zip(lo, hi))
+        half = tuple((b - a) / 2 for a, b in zip(lo, hi))
+        lam = [Q(x, 2**44) for x in cell["lambda"]]
+        mu = [[Q(x, 2**44) for x in m] for m in cell["mu"]]
+        Ac = a_matrix(centre)
+
+        def tA(weights, M):
+            return [sum(weights[i] * M[i][c] for i in range(52)) for c in range(45)]
+
+        r0 = tA(lam, Ac)
+        r0[j] += s
+        eps = sum(abs(x) for x in r0)
+        for k in range(3):
+            lin = [x + y for x, y in zip(tA(mu[k], Ac), tA(lam, slopes[k]))]
+            eps += half[k] * sum(abs(x) for x in lin)
+            for m in range(3):
+                eps += half[k] * half[m] * sum(abs(x) for x in tA(mu[k], slopes[m]))
+        vmin, M, root = None, Q(0), Q(0)
+        for signs in itertools.product((-1, 1), repeat=3):
+            vals = [lam[i] + sum(signs[k] * half[k] * mu[k][i] for k in range(3)) for i in range(52)]
+            vmin = min(vals) if vmin is None else min(vmin, min(vals))
+            M = max(M, sum(a * b for a, b in zip(vals, K)))
+            root = max(root, sum(a * b for a, b in zip(vals, deviation)))
+        right_mid = 2 * (R - eps * R)
+        right_root = 2 * (R - (eps + root) * R)
+        results.append(
+            {
+                "cell": cell["cell"],
+                "vertex_min": float(vmin),
+                "nonnegative": vmin >= 0,
+                "epsilon_midpoint": float(eps),
+                "root_term": float(root),
+                "mass": float(M),
+                "ratio_midpoint_only": str(M / right_mid),
+                "ratio_midpoint_only_float": float(M / right_mid),
+                "ratio_with_my_root_term_float": float(M / right_root),
+                "passes": M < right_root,
+            }
+        )
+    box_volume = (BOX[0][1] - BOX[0][0]) * (BOX[1][1] - BOX[1][0]) * (BOX[2][1] - BOX[2][0])
+    report["minus_omega11_cells"] = results
+    report["minus_omega11_cells_fill_box_volume"] = volume == box_volume
+    receipt = json.loads((LANE / "local-minimum-ratio-target.json").read_text())
+    worst = Q(receipt["c8_c9"]["worst"]["worst_ratio"])
+    mine = max(Q(r["ratio_midpoint_only"]) for r in results)
+    report["receipt_worst_ratio_float"] = float(worst)
+    report["my_worst_midpoint_only_ratio_float"] = float(mine)
+    report["receipt_minus_my_midpoint_only"] = float(worst - mine)
+
+    # 5. Independent C6 over the 19 retained pairs: 125 options, Taylor margins.
+    option_rows = []
+    pairs = sorted({tuple(sorted((l, r))) for l, r, _, _ in CONTACTS} | {(2, 3)})
+    count = 0
+    for left, right in pairs:
+        for owner in (left, right):
+            other = right if owner == left else left
+            for axis in AXES[CLASS[owner]]:
+                n = aux[axis]
+                for sign in (1, -1):
+                    c_o, c_p = centres[owner - 1], centres[other - 1]
+                    base_margin = sign * dot(n, (c_p[0] - c_o[0], c_p[1] - c_o[1])) - HALF - support(aux, other, n, HALF)
+                    identity = abs(base_margin) < Q(1, 10**30)
+                    count += 1
+                    if identity or (left, right) in DROPPED_PAIRS:
+                        continue
+                    assert base_margin < 0
+                    cs = corners(aux, other, HALF)
+                    pick = min(range(4), key=lambda i: sign * dot(n, cs[i]))
+                    Kv = pair_K(owner, other)[0]
+                    worst_margin = None
+                    for vert in vertices:
+                        c = moved(centres, v, vert)
+                        row, g = gap_row(n, sign, owner, other, c[owner - 1], c[other - 1], cs[pick], HALF)
+                        lin = sum(abs(sum(row[p] * cf for p, cf in lift.items())) * RADIUS for lift in lifts)
+                        m = g + lin + Kv / 2
+                        worst_margin = m if worst_margin is None else max(worst_margin, m)
+                    option_rows.append((worst_margin, f"{left}/{right} owner {owner} axis {axis} sign {sign}", float(base_margin)))
+    option_rows.sort(key=lambda x: -x[0])
+    report["c6_options_total"] = count
+    report["c6_unavailable_checked"] = len(option_rows)
+    report["c6_all_negative"] = all(m < 0 for m, _, _ in option_rows)
+    report["c6_least_negative"] = [(float(m), lab, bm) for m, lab, bm in option_rows[:6]]
+
+    # 6. Physical slider domain of the 16-square family (float SAT), with and without 6.
+    def polys(w, with6):
+        c = moved(centres, v, w)
+        out = {}
+        for label in range(1, 18):
+            if label == 6 and not with6:
+                continue
+            out[label] = [(float(c[label - 1][0] + q[0]), float(c[label - 1][1] + q[1])) for q in corners(aux, label, HALF)]
+        return out
+
+    def overlap(P, Qp, tol=1e-9):
+        axes = []
+        for poly in (P, Qp):
+            for i in range(4):
+                for k in range(i + 1, 4):
+                    dx, dy = poly[k][0] - poly[i][0], poly[k][1] - poly[i][1]
+                    L = math.hypot(dx, dy)
+                    if abs(L - 1) < 1e-9:
+                        axes.append((-dy, dx))
+        for ax in axes:
+            pa = [ax[0] * x + ax[1] * y for x, y in P]
+            pb = [ax[0] * x + ax[1] * y for x, y in Qp]
+            if min(pa) >= max(pb) - tol or min(pb) >= max(pa) - tol:
+                return False
+        return True
+
+    def violations(w, with6):
+        P = polys(w, with6)
+        S = float(side)
+        bad = []
+        for label, poly in P.items():
+            for x, y in poly:
+                if x < -1e-9 or y < -1e-9 or x > S + 1e-9 or y > S + 1e-9:
+                    bad.append(f"wall:{label}")
+                    break
+        for a1, b1 in itertools.combinations(P, 2):
+            if overlap(P[a1], P[b1]):
+                bad.append(f"{a1}/{b1}")
+        return bad
+
+    def feasible(w, with6):
+        return not violations(w, with6)
+
+    def scan(index, direction, with6, step=Q(1, 2000), limit=Q(3)):
+        w = [Q(0)] * 3
+        last = Q(0)
+        value = Q(0)
+        blockers = []
+        while value <= limit:
+            w[index] = direction * value
+            blockers = violations(tuple(w), with6)
+            if blockers:
+                break
+            last = value
+            value += step
+        return float(direction * last), blockers
+
+    domain = {}
+    for idx, name in enumerate("abz"):
+        for with6 in (False, True):
+            lo_v, lo_b = scan(idx, -1, with6)
+            hi_v, hi_b = scan(idx, 1, with6)
+            domain[f"{name}{'_with6' if with6 else '_no6'}"] = {
+                "min": lo_v, "min_blocked_by": lo_b, "max": hi_v, "max_blocked_by": hi_b}
+    report["physical_slider_domain_single_axis_steps_1/2000"] = domain
+    report["family_feasible_at_origin_no6"] = feasible((Q(0), Q(0), Q(0)), False)
+    report["family_feasible_at_origin_with6"] = feasible((Q(0), Q(0), Q(0)), True)
+    report["box_vertices_feasible_no6"] = {str([str(x) for x in vert]): feasible(vert, False) for vert in vertices}
+    (OUT / "recompute-output.json").write_text(json.dumps(report, indent=1))
+    print(json.dumps({k: v for k, v in report.items() if k not in ("K_pairs", "chosen_corners", "box_vertices_feasible_no6")}, indent=1))
+    print("box vertices feasible (no 6):", report["box_vertices_feasible_no6"])
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,11 @@
+primes < 1000 (not dividing 4775) with C irreducible mod p: [7, 103, 167, 173, 359, 419, 509, 743, 769, 883] count 10 of 166
+own DDF test mod 7: True
+own DDF test mod 103: True
+own DDF test mod 167: True
+own DDF test mod 173: True
+enclosure lo 4.67553009360455095163411127048314664876713284
+enclosure hi 4.67553009360455095163411127048314664876723181
+enclosure width 9.896605444049923e-41
+ceiling       4.6755300936045509516342148538535054  ceiling > enclosure hi: True  ceiling - hi ~ 1.0358337035875123e-22
+catalogue value 4.67553009360455 vs enclosure: agrees to printed digits: 4.67553009360455
+receipt unit: 1  vanishing lead: 4775

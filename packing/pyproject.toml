@@ -7,6 +7,11 @@ description = "Exact verification and LP-in-cell quenching for square packings"
 # published to an index, so the packaging metadata loses nothing by omitting it.
 requires-python = ">=3.14,<3.15"
 dependencies = [
+    # The kernel's rational type (`sqpack.hull_kernel.rational`). Pinned exactly: 2.3.1
+    # (GMP 6.3.0, released 2026-06-24, past the cool-off) is the newest release with
+    # CPython 3.14 wheels for manylinux x86_64 and for macOS x86_64 and arm64, so neither
+    # CI job builds it from source. The verifiers under devtools/ do not use it.
+    "gmpy2==2.3.1",
     "jsonschema>=4.26.0",
     # Pinned exactly, and to a release past the 14-day cool-off rather than to the
     # newest: `tbd guidelines supply-chain-hardening`. 0.52.0 was four days old on the
@@ -274,7 +279,7 @@ max-complexity = 57
 # private because what a failure says is the check's business and nobody else's. Tested
 # directly because the message is the whole deliverable: a browser would exercise the
 # path that passes, never the one the Pages job reads on the day it fails.
-"tests/test_render_explainer_pdf.py" = ["SLF001"]
+"tests/test_render_n11_lower_bounds_explainer_pdf.py" = ["SLF001"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -318,6 +323,9 @@ include = [
     # gate runs from this directory, so they are reached by a parent path. `.claude/skills`
     # is a byte-identical mirror kept by `make skills-sync`, so it is not listed twice.
     "../.agents/skills",
+    # Local type stubs for dependencies that ship none (gmpy2, for the kernel's rationals),
+    # held to the same floor as the code that relies on them.
+    "typings",
 ]
 exclude = [
     "**/__pycache__",

@@ -1,0 +1,95 @@
+[
+ {
+  "mutation": "(unmutated)",
+  "verdict": "ACCEPTED",
+  "message": "{\"collision_facet_checks\": 1500, \"collision_regions\": 21, \"cover_checks\": 21, \"partner_rows\": 16, \"rows_full\": 21, \"seed_points\": 4, \"seed_rows\": 4, \"steps\": 9}",
+  "seconds": 0.2
+ },
+ {
+  "mutation": "partition-starts-above-zero",
+  "expected": "interval gap",
+  "verdict": "REFUSED",
+  "message": "step 8 row 0: interval gap",
+  "seconds": 0.19
+ },
+ {
+  "mutation": "partition-ends-below-one",
+  "expected": "do not reach the end",
+  "verdict": "REFUSED",
+  "message": "step 8: the rows do not reach the end of the interval",
+  "seconds": 0.25
+ },
+ {
+  "mutation": "row-interval-reversed",
+  "expected": "interval",
+  "verdict": "REFUSED",
+  "message": "step 4 row 0: interval gap",
+  "seconds": 0.15
+ },
+ {
+  "mutation": "row-cites-itself",
+  "expected": "not an accepted row",
+  "verdict": "REFUSED",
+  "message": "step 8 row 0: prior reference is not an accepted row",
+  "seconds": 0.21
+ },
+ {
+  "mutation": "child-crosses-parent-upper-end",
+  "expected": "escapes its predecessor",
+  "verdict": "REFUSED",
+  "message": "step 4 row 1: interval escapes its predecessor",
+  "seconds": 0.12
+ },
+ {
+  "mutation": "both-children-claim-the-parent",
+  "expected": "interval overlap",
+  "verdict": "REFUSED",
+  "message": "step 4 row 1: interval overlap",
+  "seconds": 0.12
+ },
+ {
+  "mutation": "partner-cover-missing-last-item",
+  "expected": "cover length",
+  "verdict": "REFUSED",
+  "message": "step 5: partner 0 cover length",
+  "seconds": 0.15
+ },
+ {
+  "mutation": "partner-cover-items-swapped",
+  "expected": "reference",
+  "verdict": "REFUSED",
+  "message": "step 5: partner 0 reference",
+  "seconds": 0.16
+ },
+ {
+  "mutation": "partner-cover-item-interval-widened",
+  "expected": "interval",
+  "verdict": "REFUSED",
+  "message": "step 5: partner 0 interval",
+  "seconds": 0.16
+ },
+ {
+  "mutation": "owner-core-strict-on-lower-half-only",
+  "verdict": "NOT-APPLICABLE",
+  "message": "no refined row whose core strictness binds outside its lower half"
+ },
+ {
+  "mutation": "owner-core-strict-on-upper-half-only",
+  "expected": "core not strict",
+  "verdict": "REFUSED",
+  "message": "step 8 row 1: core not strict",
+  "seconds": 0.21
+ },
+ {
+  "mutation": "partner-core-strict-on-lower-half-only",
+  "verdict": "NOT-APPLICABLE",
+  "message": "no refined partner row whose core strictness binds outside its lower half"
+ },
+ {
+  "mutation": "partner-core-strict-on-upper-half-only",
+  "expected": "core not strict",
+  "verdict": "REFUSED",
+  "message": "step 8 partner 1 core not strict",
+  "seconds": 0.21
+ }
+]

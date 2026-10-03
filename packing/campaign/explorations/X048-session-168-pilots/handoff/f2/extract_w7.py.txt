@@ -1,0 +1,52 @@
+"""Extract benchmark inputs from the W7 certificate: a heavy collision step, its partner
+covers and rows; and statistics on operand sizes. Writes bench_w7.json (not canonical)."""
+import gzip, json, sys, statistics
+from fractions import Fraction as Q
+from pathlib import Path
+X = Path("/home/user/squares/packing/campaign/explorations/X048-session-168-pilots/certificates/W7")
+node = json.loads(gzip.decompress(next(X.glob("node-*.json.gz")).read_bytes()))
+seed = json.loads(gzip.decompress(next(X.glob("seed-*.json.gz")).read_bytes()))
+steps = node["steps"]
+print("steps", len(steps), "closure", node["contradiction"])
+# per-step counts
+best = None
+tot_regions = 0; tot_live_partner_rows = 0; tot_pairs = 0
+rows_live = 0
+num_bits = []; den_bits = []
+def stat(v):
+    q = Q(v); num_bits.append(q.numerator.bit_length()); den_bits.append(q.denominator.bit_length())
+for s in steps:
+    regions = sum(len(r["collision_regions"]) for r in s["rows"])
+    live_partner = sum(1 for items in s["prior_partner_pose_covers"].values() for it in items if it["domain"])
+    tot_regions += regions; tot_live_partner_rows += live_partner
+    # facet-check pairs: for each region, every live row of the named partner
+    per_partner_live = {k: sum(1 for it in items if it["domain"]) for k, items in s["prior_partner_pose_covers"].items()}
+    pairs = sum(per_partner_live[str(c["partner"])] for r in s["rows"] for c in r["collision_regions"])
+    tot_pairs += pairs
+    rows_live += sum(1 for r in s["rows"] if r["residual_polygons"])
+    if best is None or pairs > best[0]:
+        best = (pairs, s["index"], regions, live_partner)
+    for r in s["rows"]:
+        for poly in r["residual_polygons"]:
+            for x, y in poly: stat(x); stat(y)
+print("total regions", tot_regions, "total live partner rows", tot_live_partner_rows, "total (region, partner-row) pairs", tot_pairs, "live rows", rows_live)
+print("heaviest step (pairs, index, regions, live partner rows)", best)
+print("residual vertex numerator bits: mean %.1f max %d p50 %d p90 %d" % (statistics.mean(num_bits), max(num_bits), statistics.median(num_bits), sorted(num_bits)[int(.9*len(num_bits))]))
+print("residual vertex denominator bits: mean %.1f max %d p50 %d p90 %d" % (statistics.mean(den_bits), max(den_bits), statistics.median(den_bits), sorted(den_bits)[int(.9*len(den_bits))]))
+# collision region vertex bits and core bits
+cb = []; kb=[]
+for s in steps:
+    for r in s["rows"]:
+        for c in r["collision_regions"]:
+            for x, y in c["vertices"]:
+                cb.append(max(Q(x).denominator.bit_length(), Q(y).denominator.bit_length()))
+        for x, y in r["core_vertices"]:
+            kb.append(max(Q(x).denominator.bit_length(), Q(y).denominator.bit_length()))
+print("collision region vertex denominator bits: max", max(cb), "p50", statistics.median(cb))
+print("core vertex denominator bits: max", max(kb), "p50", statistics.median(kb))
+# count rationals in node JSON
+raw = gzip.decompress(next(X.glob("node-*.json.gz")).read_bytes())
+print("node bytes", len(raw), "approx rational strings", raw.count(b'/'))
+hs = steps[best[1]]
+json.dump({"step": hs, "prior_rows": {k: v for k, v in hs["prior_partner_pose_covers"].items()}, "frame_cap": node["U"], "mask": node["mask"], "prior_owned_hulls": hs["prior_owned_hulls"], "world": seed["world"]}, open("bench_w7.json", "w"))
+# also a row for the sweep benchmark: the live row of the heaviest step with the most regions

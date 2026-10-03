@@ -1,0 +1,116 @@
+# Sub-patterns certified infeasible on the n17 unique-state cover, and their admission.
+# `devtools/census_n17_certified.py` reads this file. Its certified count uses only the
+# entries marked `admitted`; a `pending` entry is a projection, reported on its own line.
+# Every path is repository-relative. Admitting an entry means setting `status: admitted`
+# and naming the document that admits it in `evidence`: since OR-16's amendment, the
+# experiment record holding the full pass of a reviewed standing verifier. The census
+# checks only that `evidence` exists. It is a pointer for readers, not a check; what
+# admits an entry is its `verification`.
+schema: n17-certified-sub-patterns/v2
+design: ring-3-voronoi-8-tabbed-unique
+# The standing verifiers, written separately from the producers, at the revisions a review
+# admitted. An admitted entry counts only with a full, passing verification by a listed
+# verifier at a listed revision, or at a later one at which its file is unchanged. A
+# listing with `admits` may verify only the entries it names; the 318c28c42 listing says
+# why the earlier kernel listings carry it. A verification is matched to its certificate
+# by the content ids in the objects' file names (seed and node, or the manifest), not by
+# directory, so a certificate directory can be renamed without verifying it again.
+verifiers:
+  # The review verifiers retained at 556561586: lane R3's for the kernel (W7's receipt),
+  # lane R4's for the branch and bound (A's receipt).
+  - path: packing/devtools/verify_n17_kernel_certificate.py
+    revision: 556561586095f1eaf7952e32199f40a4d3360d20
+    review: docs/project/reviews/review-2026-10-02-n17-w7-closure.md
+    admits: [W7]
+  - path: packing/devtools/verify_n17_bb_certificate.py
+    revision: 556561586095f1eaf7952e32199f40a4d3360d20
+    review: docs/project/reviews/review-2026-10-02-n17-branch-and-bound-certifier.md
+  # The kernel verifier on homogeneous integers with memoised partner covers (e0b66f07b),
+  # and the branch-and-bound verifier with the 2,400-bit enclosure retry and the opt-in
+  # Taylor checks (ff5471e89), both admitted by the verifier-rewrites review of 2026-10-03.
+  - path: packing/devtools/verify_n17_kernel_certificate.py
+    revision: e0b66f07b1d5daa04da0edc07dd591d7c17d9c47
+    review: docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md
+    admits: []  # no receipt in this ledger ran at this file
+  - path: packing/devtools/verify_n17_bb_certificate.py
+    revision: ff5471e8902aeab0a9247501e9a3de380619d56a
+    review: docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md
+  # The kernel verifier on adaptive rows (575795e02): a step's rows partition [0, 1] and
+  # each cites an accepted row that contains it. Admitted by the same review's section 5
+  # once its five condition tests were committed (056de341f; section 5.4).
+  - path: packing/devtools/verify_n17_kernel_certificate.py
+    revision: 575795e029151abc52d892126acd05e23795641d
+    review: docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md
+    admits: []  # no receipt in this ledger ran at this file
+  # 25c1cdef6 changed only I/O and recording since 575795e02 (no file-name read-back; provenance
+  # for the module digest). Its mathematical checks are unchanged; the 47 condition tests pass.
+  - path: packing/devtools/verify_n17_kernel_certificate.py
+    revision: 25c1cdef690f4c1d398364a13e3cf96281c01c17
+    review: docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md
+    # SW9's and N1's receipts ran at fd2c9602e and ae4f5fb43, where the file is this one.
+    admits: [SW9, N1]
+  # The kernel verifier with exact point and segment covers (lane V1, after the n11
+  # review's finding C2). Every earlier listed kernel revision accepts an uncovered
+  # zero-area row, and those from e0b66f07b on also an uncovered one-point section. On W7,
+  # SW9 and N1 neither branch ran (review section 6.2), so their receipts stand, and each
+  # earlier kernel listing admits only the entries whose receipts it wrote. A new entry
+  # must be verified at this revision or a later one at which the file is unchanged.
+  - path: packing/devtools/verify_n17_kernel_certificate.py
+    revision: 318c28c42afaa4128c07dcbc785d717adbaf95a9
+    review: docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md
+entries:
+  - name: W7
+    cells: [corner-SW, side-N0, side-W0, side-W1, side-W2, interior-SW, interior-W]
+    certifier: kernel
+    # Admitted in exp-249: the saved objects re-certified by the checker alone in a clean
+    # worktree at 15df68ab, after a full-row independent re-check of all 3,712 rows.
+    receipt: packing/campaign/series/series-000-smoke-and-calibration/results/exp-249-n17-first-certified-sub-patterns/run-001/receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/W7
+    status: admitted
+    evidence: docs/project/reviews/review-2026-10-02-n17-w7-closure.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/W7/verification.json
+      # Written before receipts recorded their verifier: the kernel verifier at 556561586.
+      verifier:
+        path: packing/devtools/verify_n17_kernel_certificate.py
+        revision: 556561586095f1eaf7952e32199f40a4d3360d20
+  - name: A
+    cells: [interior-SW, interior-NW, interior-W, interior-S, interior-N, interior-SE]
+    certifier: branch-and-bound
+    # Admitted in exp-249: certified again in a clean worktree at 15df68ab with a
+    # certificate byte-identical to the one the independent review re-checked in full
+    # (manifest 340492bd). The claim rests on that certificate check, not on the
+    # witness-path controls.
+    receipt: packing/campaign/series/series-000-smoke-and-calibration/results/exp-249-n17-first-certified-sub-patterns/run-002/receipt.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/A
+    status: admitted
+    evidence: docs/project/reviews/review-2026-10-02-n17-branch-and-bound-certifier.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/A/verification.json
+      # Written before receipts recorded their verifier: the branch-and-bound verifier at
+      # 556561586.
+      verifier:
+        path: packing/devtools/verify_n17_bb_certificate.py
+        revision: 556561586095f1eaf7952e32199f40a4d3360d20
+  - name: SW9
+    cells: [corner-SW, side-S0, side-N0, side-W0, side-W1, side-W2, interior-SW, interior-NW, interior-S]
+    certifier: kernel
+    # Flag 3 (arity 9), closed with adaptive rows (155abe8a2) where uniform rows stalled.
+    # Admitted in exp-250 by the standing verifier's full pass at fd2c9602e; nothing re-run.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/receipts/kernel-split-flag3-a9-bins64.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/flag3-a9-pending
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/flag3-a9-pending/verification.json
+  - name: N1
+    cells: [corner-SW, corner-SE, corner-NW, side-S0, side-N0, side-W0, side-E0, side-S1, side-W1, side-S2, side-N2, side-W2, side-E2, interior-W, interior-S, interior-N, interior-E]
+    certifier: kernel
+    # A whole 17-cell residue state from the H-264 sample, closed at 32 bins under a two-hour
+    # ceiling. Admitted in exp-250 by the standing verifier's full pass at ae4f5fb43.
+    receipt: packing/campaign/explorations/X048-session-168-pilots/handoff/k2/h-N1-2h.json
+    certificate: packing/campaign/explorations/X048-session-168-pilots/certificates/N1-state-pending
+    status: admitted
+    evidence: packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md
+    verification:
+      receipt: packing/campaign/explorations/X048-session-168-pilots/certificates/N1-state-pending/verification.json

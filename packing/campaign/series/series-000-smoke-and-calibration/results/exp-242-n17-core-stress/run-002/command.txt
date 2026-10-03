@@ -1,0 +1,7 @@
+Clean replay of run-001 from a detached git worktree at 2fbf8d2933e6a8f51268b87be111a5c03d9f95cf
+(tracked tree clean; the only untracked entry is a .venv symlink to the session's project
+environment). Working directory: packing/ of that worktree; one worker.
+PYTHONDONTWRITEBYTECODE=1; ulimit -f 10240 (10 MiB per output).
+Controls: timeout --signal=TERM --kill-after=5s 300s .venv/bin/python3 -m devtools.check_n17_core_stress --controls-only > controls.json
+Target:   timeout --signal=TERM --kill-after=5s 300s .venv/bin/python3 -m devtools.check_n17_core_stress campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json campaign/series/series-000-smoke-and-calibration/results/exp-238-n17-endpoint-feasibility/run-001/certificate.json campaign/series/series-000-smoke-and-calibration/results/exp-239-n17-endpoint-features/run-001/certificate.json > certificate.json
+Wall times from bash TIMEFORMAT='%R real %U user %S sys' in controls-timing.log and timing.log.

@@ -1,0 +1,154 @@
+"""Lane R6's mutants of the adaptive-rows verifier: lane P2's thirteen and seven more.
+
+Run from the worktree's packing/ (cwd) with the main venv's python:
+
+    PYTHONPATH=<wt>/packing/src:<wt>/packing:<plugin dir> python3 <this file> [--only A,B]
+
+Each mutant is one textual patch of the worktree's verifier (64474e45), asserted to apply
+exactly once, written to a scratch copy. Against each: the committed kernel tests of the
+worktree's `tests/test_verify_n17_certificates.py` (P2's selection, with the mutant bound
+under the committed module's name by `mutant_plugin`), and R6's doctored refined
+certificates (`mutate_refined.py.txt`) on K2's blind and wall closures. CAUGHT when a test
+fails, or a doctored certificate is accepted, or the sound certificate is refused.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PACKING = Path.cwd()
+VERIFIER = PACKING / "devtools" / "verify_n17_kernel_certificate.py"
+SCRATCH = Path(os.environ.get("R6_SCRATCH", "/tmp/r6-refinement-mutants"))
+P2 = Path("/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2-refine")
+CERTS = {"blind": P2 / "k2-refined" / "blind", "wall": P2 / "k2-refined" / "wall"}
+TESTS = (
+    "kernel or refine or own_legal_box or narrower_box or own_rows or facets or sweep"
+    " or between or republished or facet_cache or forbidden_region or row_minimum"
+)
+
+P2_MUTANTS: list[tuple[str, str, str, str]] = [
+    ("partition-overlap-accepted", "a row may start before the previous one ends", "        require(lo == cursor, ", "        require(lo <= cursor, "),
+    ("partition-gap-accepted", "a row may start after the previous one ends", "        require(lo == cursor, ", "        require(lo >= cursor, "),
+    ("partition-end-unchecked", "the rows need not reach 1", "    require(cursor == 1, ", "    require(True, "),
+    ("containment-skipped", "a row need not lie inside its predecessor", "            prior.interval[0] <= lo and hi <= prior.interval[1],", "            True,"),
+    ("containment-lower-end-only", "only the predecessor's lower end is checked", "            prior.interval[0] <= lo and hi <= prior.interval[1],", "            prior.interval[0] <= lo,"),
+    ("predecessor-positional-fallback", "an unknown reference falls back to the accepted row at the same index", '        prior = by_reference.get(reference_key(row["prior_reference"]))', '        prior = by_reference.get(reference_key(row["prior_reference"])) or accepted[min(ri, len(accepted) - 1)]'),
+    ("predecessor-by-containment", "the reference is ignored and the containing accepted row taken", '        prior = by_reference.get(reference_key(row["prior_reference"]))', "        prior = next((r for r in accepted if r.interval[0] <= lo and hi <= r.interval[1]), None)"),
+    ("box-of-the-predecessor", "the required domain is cut by the predecessor's legal box", "            intersect_convex(list(prior.outer), wall_box(lo, hi, state.cap))", "            intersect_convex(list(prior.outer), wall_box(*prior.interval, state.cap))"),
+    ("box-not-cut", "the required domain is the predecessor's outer domain, uncut", "            intersect_convex(list(prior.outer), wall_box(lo, hi, state.cap))", "            list(prior.outer)"),
+    ("box-of-the-upper-half", "the required domain is cut by the box of the row's upper half", "            intersect_convex(list(prior.outer), wall_box(lo, hi, state.cap))", "            intersect_convex(list(prior.outer), wall_box((lo + hi) / 2, hi, state.cap))"),
+    ("full-mode-seed-grid", "full mode checks only the first `bins` rows of a step", "            set(range(count))\n", "            set(range(bins))\n"),
+    ("sample-seed-grid", "a sample is drawn from the first `bins` rows of a step", "            else set(rng.sample(range(count), min(sample, count)))", "            else set(rng.sample(range(bins), min(sample, bins)))"),
+    ("duplicate-accepted-unchecked", "accepted references need not be unique", '    require(len(by_reference) == len(accepted), f"step {si}: duplicate accepted reference")', "    pass"),
+    ("empty-row-allowed", "a row may be empty (lo == hi)", "        require(lo < hi <= 1, ", "        require(lo <= hi <= 1, "),
+]
+
+R6_MUTANTS: list[tuple[str, str, str, str]] = [
+    (
+        "partition-start-unchecked",
+        "the first row need not start at 0",
+        "    cursor = Q(0)\n    found: list[Row] = []",
+        '    cursor = Q(rows[0]["interval"][0])\n    found: list[Row] = []',
+    ),
+    (
+        "containment-upper-end-only",
+        "only the predecessor's upper end is checked",
+        "            prior.interval[0] <= lo and hi <= prior.interval[1],",
+        "            hi <= prior.interval[1],",
+    ),
+    (
+        "core-strict-lower-half",
+        "the owner's core is proved strict over the row's lower half only",
+        '        require(core_strict(core, lo, hi), f"{where}: core not strict")',
+        '        require(core_strict(core, lo, (lo + hi) / 2), f"{where}: core not strict")',
+    ),
+    (
+        "core-strict-upper-half",
+        "the owner's core is proved strict over the row's upper half only",
+        '        require(core_strict(core, lo, hi), f"{where}: core not strict")',
+        '        require(core_strict(core, (lo + hi) / 2, hi), f"{where}: core not strict")',
+    ),
+    (
+        "partner-core-strict-lower-half",
+        "a partner row's core is proved strict over its lower half only",
+        '    require(core_strict(core, *row.interval), f"step {si} partner {pj} core not strict")',
+        '    require(core_strict(core, row.interval[0], (row.interval[0] + row.interval[1]) / 2), f"step {si} partner {pj} core not strict")',
+    ),
+    (
+        "partner-core-strict-upper-half",
+        "a partner row's core is proved strict over its upper half only",
+        '    require(core_strict(core, *row.interval), f"step {si} partner {pj} core not strict")',
+        '    require(core_strict(core, (row.interval[0] + row.interval[1]) / 2, row.interval[1]), f"step {si} partner {pj} core not strict")',
+    ),
+    (
+        "core-strict-predecessor-interval",
+        "the owner's core is proved strict over the predecessor's wider interval (stricter, never weaker)",
+        '        require(core_strict(core, lo, hi), f"{where}: core not strict")',
+        '        require(core_strict(core, *prior.interval), f"{where}: core not strict")',
+    ),
+]
+
+
+def run(command: list[str], env: dict[str, str], timeout: int = 600) -> tuple[int, str]:
+    completed = subprocess.run(command, cwd=PACKING, capture_output=True, text=True, check=False, timeout=timeout, env={**os.environ, **env})
+    return completed.returncode, completed.stdout + completed.stderr
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--only", default=None)
+    parser.add_argument("--skip-tests", action="store_true")
+    parser.add_argument("--skip-certs", action="store_true")
+    parser.add_argument("--json", type=Path, default=HERE / "refinement-mutants-r6.json")
+    args = parser.parse_args()
+    SCRATCH.mkdir(parents=True, exist_ok=True)
+    source = VERIFIER.read_text(encoding="utf-8")
+    results = []
+    for name, weakens, old, new in [("control-unmutated", "nothing", "    require(cursor == 1, ", "    require(cursor == 1, "), *P2_MUTANTS, *R6_MUTANTS]:
+        if args.only and not any(part in name for part in args.only.split(",")):
+            continue
+        assert source.count(old) == 1, (name, source.count(old))
+        mutant = SCRATCH / f"{name}.py"
+        mutant.write_text(source.replace(old, new), encoding="utf-8")
+        clock = time.perf_counter()
+        record: dict[str, object] = {"mutant": name, "weakens": weakens}
+        if not args.skip_tests:
+            code, out = run(
+                [sys.executable, "-m", "pytest", "tests/test_verify_n17_certificates.py", "-q", "-p", "no:cacheprovider", "-p", "mutant_plugin", "-m", "not slow", "-k", TESTS, "-rf", "--no-header"],
+                env={"R6_MUTANT": str(mutant)},
+            )
+            record["tests"] = "CAUGHT" if code != 0 else "missed"
+            record["tests_failed"] = [line.split("::", 1)[1].split(" - ")[0] for line in out.splitlines() if line.startswith("FAILED")]
+            record["tests_summary"] = next((line.strip() for line in out.splitlines() if " passed" in line or " failed" in line), "")[:100]
+        if not args.skip_certs:
+            verdicts = {}
+            for label, directory in CERTS.items():
+                code, out = run(
+                    [sys.executable, str(HERE / "mutate_refined.py.txt"), str(directory), str(directory / "cells.json"), "--module", str(mutant)],
+                    env={},
+                )
+                lines = [json.loads(line) for line in out.splitlines() if line.startswith("{")]
+                unmutated = next((line for line in lines if line.get("mutation") == "(unmutated)"), {})
+                if unmutated.get("verdict") != "ACCEPTED":
+                    verdicts[label] = f"CAUGHT (refuses the sound certificate: {unmutated.get('message', '')[:80]})"
+                else:
+                    summary = lines[-1] if lines and "accepted_unsound" in lines[-1] else {}
+                    accepted = summary.get("accepted_unsound", [])
+                    verdicts[label] = "CAUGHT: " + ", ".join(accepted) if accepted else "missed"
+            record["certs"] = verdicts
+        record["seconds"] = round(time.perf_counter() - clock, 1)
+        results.append(record)
+        print(json.dumps(record), flush=True)
+    args.json.write_text(json.dumps(results, indent=1) + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,63 @@
+"""Produce a small W7 kernel node (8 bins) as the fixture for the certificate mutations.
+
+Run from packing/: .venv/bin/python3 <this file> OUTDIR [--bins 8] [--rounds 6]
+
+Writes seed-<sha>.json.gz and node-<sha>.json.gz with the checker tool's own saver, and a
+fixture.json naming them. The producer is lane K2's; the verifier under audit never sees
+this script.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+
+from devtools import check_hull_kernel_mask0 as mask0_tool
+from devtools.check_n17_subpattern import save_certificate
+from sqpack.hull_kernel import Budget, producer
+
+W7 = ["corner-SW", "side-N0", "side-W0", "side-W1", "side-W2", "interior-SW", "interior-W"]
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("outdir", type=Path)
+    parser.add_argument("--bins", type=int, default=8)
+    parser.add_argument("--rounds", type=int, default=6)
+    parser.add_argument("--seconds", type=float, default=900.0)
+    args = parser.parse_args()
+    frame = mask0_tool.n17_unique_frame()
+    mask = sorted(frame.cell_names.index(cell) for cell in W7)
+    started = time.monotonic()
+    budget = Budget(started + args.seconds, 5_000_000)
+    production = producer.produce(
+        frame,
+        mask,
+        bins=args.bins,
+        max_rounds=args.rounds,
+        budget=budget,
+        node_id="n17-W7-audit-fixture",
+        stop_at=started + args.seconds,
+        progress=lambda event: print(json.dumps(event), file=sys.stderr, flush=True),
+    )
+    save_certificate(args.outdir, production.seed, production.node)
+    node = production.node
+    summary = {
+        "mask": mask,
+        "bins": args.bins,
+        "steps": len(node["steps"]),
+        "contradiction": node["contradiction"],
+        "closed": node["closed"],
+        "seconds": round(time.monotonic() - started, 1),
+        "files": sorted(p.name for p in args.outdir.glob("*.json.gz")),
+    }
+    (args.outdir / "fixture.json").write_text(json.dumps(summary, indent=1) + "\n")
+    print(json.dumps(summary))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

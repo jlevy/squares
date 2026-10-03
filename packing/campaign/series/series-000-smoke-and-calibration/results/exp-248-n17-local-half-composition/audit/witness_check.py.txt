@@ -1,0 +1,111 @@
+"""Lane R2: verify the slide witnesses as full 17-square packings, and the H-261 reach.
+
+Touching is allowed (interiors overlap iff every edge normal has |n.d| < h1 + h2 - 1e-12).
+(1) The a_max and z_min witnesses from scan.py, as complete packings in the S* container
+    (embedding A: lower-left corner at (sigma, sigma) in the cover frame).
+(2) The swapped configuration: square 5 in square 6's family box and square 6 at the
+    bottom-right corner, a in [1, 1 + T/s]; the largest a before 5 meets 13 at z = 0.
+(3) With touching allowed and a finer grid, whether square 6 fits anywhere in the
+    container for a in (0.115, 1) at z = 0, and for z << -0.049 at a = 0.
+"""
+
+from __future__ import annotations
+
+import math
+import sys
+import time
+
+import numpy as np
+
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/r2")
+from scan import CELL, HI, LO, SIGMA, aux, overlap_mask, pose, side  # noqa: E402
+
+EPS = 1e-12
+
+
+def squares(a: float, z: float, six: tuple[float, float, float]) -> list[tuple[float, float, float]]:
+    return [six if label == 6 else pose(label, a, z) for label in range(1, 18)]
+
+
+def pair_overlap(p, q) -> bool:
+    (ax, ay, pa), (bx, by, pb) = p, q
+    dx, dy = bx - ax, by - ay
+    for phi in (pa, pb):
+        for nx, ny in ((math.cos(phi), math.sin(phi)), (-math.sin(phi), math.cos(phi))):
+            h1 = (abs(nx * math.cos(pa) + ny * math.sin(pa)) + abs(-nx * math.sin(pa) + ny * math.cos(pa))) / 2
+            h2 = (abs(nx * math.cos(pb) + ny * math.sin(pb)) + abs(-nx * math.sin(pb) + ny * math.cos(pb))) / 2
+            if abs(nx * dx + ny * dy) >= h1 + h2 - EPS:
+                return False
+    return True
+
+
+def packing_report(name: str, conf) -> None:
+    bad = [(i + 1, j + 1) for i in range(17) for j in range(i + 1, 17) if pair_overlap(conf[i], conf[j])]
+    outside = []
+    for i, (x, y, phi) in enumerate(conf):
+        reach = (abs(math.cos(phi)) + abs(math.sin(phi))) / 2
+        if x - reach < LO - EPS or x + reach > HI + EPS or y - reach < LO - EPS or y + reach > HI + EPS:
+            outside.append(i + 1)
+    width = max(x + (abs(math.cos(p)) + abs(math.sin(p))) / 2 for x, _, p in conf) - min(x - (abs(math.cos(p)) + abs(math.sin(p))) / 2 for x, _, p in conf)
+    height = max(y + (abs(math.cos(p)) + abs(math.sin(p))) / 2 for _, y, p in conf) - min(y - (abs(math.cos(p)) + abs(math.sin(p))) / 2 for _, y, p in conf)
+    print(f"{name}: overlapping pairs {bad}; outside container {outside}; bounding side {max(width, height):.12f} (S* = {float(side):.12f})")
+
+
+def fits_anywhere(a: float, z: float, step: float, astep: float):
+    x0, x1, y0, y1 = LO + 0.5, HI - 0.5, LO + 0.5, HI - 0.5
+    xs = np.arange(x0, x1 + 1e-12, step)
+    ys = np.arange(y0, y1 + 1e-12, step)
+    phis = np.deg2rad(np.arange(0.0, 90.0, astep))
+    X, Y, P = (m.ravel() for m in np.meshgrid(xs, ys, phis, indexing="ij"))
+    reach = (np.abs(np.cos(P)) + np.abs(np.sin(P))) / 2
+    ok = (X - reach >= LO - EPS) & (X + reach <= HI + EPS) & (Y - reach >= LO - EPS) & (Y + reach <= HI + EPS)
+    for label in range(1, 18):
+        if label == 6:
+            continue
+        ox, oy, ophi = pose(label, a, z)
+        ok &= ~overlap_mask(X, Y, P, ox, oy, ophi, tol=EPS)
+    idx = np.flatnonzero(ok)
+    if idx.size == 0:
+        return None
+    i = idx[0]
+    return float(X[i]), float(Y[i]), float(np.rad2deg(P[i])), int(idx.size)
+
+
+def main() -> None:
+    t0 = time.time()
+    x5 = pose(5)[0]
+    print(f"sigma = {SIGMA:.6e}; x5* = {x5:.9f}; T/s = {float(aux['T'] / aux['s']):.9f}")
+    # (1) witnesses from scan.py
+    packing_report("a_max witness (a=0.1101, z=0.0241, 6 at (3.065667, 0.501, 0))",
+                   squares(0.1101, 0.0241, (3.065667, 0.501, 0.0)))
+    packing_report("z_min witness (a=0, z=-0.04682, 6 at (3.175667, 0.501, 0))",
+                   squares(0.0, -0.04682, (3.175667, 0.501, 0.0)))
+    # exact touching versions: 6 on the bottom wall, against 5 on the right
+    for a, z in ((0.110, 0.0241), (0.1105, 0.0241), (0.111, 0.0241), (0.1112, 0.0241)):
+        six = (x5 - a - 1.0, LO + 0.5, 0.0)
+        packing_report(f"6 touching 5 and the wall, a={a}, z={z}", squares(a, z, six))
+    for z in (-0.046, -0.0468, -0.047, -0.048, -0.049):
+        six = (x5 - 1.0, LO + 0.5, 0.0)
+        packing_report(f"6 touching 5 and the wall, a=0, z={z}", squares(0.0, z, six))
+    # (2) swapped configuration: 6 at the corner, 5 in 6's family box
+    corner = (x5, LO + 0.5, 0.0)
+    for a in (1.0, 1.03, 1.05, 1.07, 1.074, 1.08, 1.1112):
+        packing_report(f"swapped: a={a}, z=0, 6 at the SE corner", squares(a, 0.0, corner))
+    lo, hi = 1.0, 1.2
+    for _ in range(50):
+        mid = (lo + hi) / 2
+        if pair_overlap(pose(5, mid, 0.0), pose(13, 0.0, 0.0)):
+            hi = mid
+        else:
+            lo = mid
+    print(f"largest a before 5 meets 13 at z = 0 (6 absent or at the corner): {lo:.6f}")
+    # (3) square 6 anywhere, touching allowed
+    print("\n== square 6 anywhere in the container, touching allowed, grid 0.01 / 2 deg ==")
+    for a, z in ((0.13, 0.0), (0.2, 0.0), (0.5, 0.0), (0.9, 0.0), (0.99, 0.0), (1.0, 0.0), (1.03, 0.0),
+                 (0.0, -0.06), (0.0, -0.3), (0.0, -0.9)):
+        w = fits_anywhere(a, z, 0.01, 2.0)
+        print(f"  a={a:.3f} z={z:+.3f}: {'fits at ' + str(w) if w else 'no pose on the grid'}  [{time.time()-t0:.0f}s]")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,229 @@
+{
+  "schema": "n17-subpattern-bb-pilot/v1",
+  "status": "pilot second certifier: a certified verdict is an exact Farkas-checked exhaustion of the pose space, replayable by rerunning; not yet a record",
+  "label": "target-a7-0-W7-30min",
+  "design": "ring-3-voronoi-8-tabbed-unique",
+  "cap": "1169/250",
+  "pattern": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-W"
+  ],
+  "source": {
+    "receipt": "campaign/explorations/X048-session-168-pilots/receipts/selector-arity7-seed1.json",
+    "index": 0
+  },
+  "control": false,
+  "parameters": {
+    "theta0": 0.4,
+    "floor": 1e-06,
+    "merge_gap": 0.0,
+    "max_seconds": 1800.0,
+    "max_nodes": null,
+    "split_ratio": 0.25,
+    "obbt_rounds": 3
+  },
+  "module_sha256": "7b77c4fd851c5be80e33c45cde847618fa91dd6d8db581aeed6e91a96569df8a",
+  "verdict": "unresolved-at-budget",
+  "nodes": 139117,
+  "leaves": 69863,
+  "open_at_stop": 27,
+  "max_depth": 41,
+  "prune_reasons": {
+    "cell": 5673,
+    "disc": 5059,
+    "lp": 26847,
+    "pair": 32284
+  },
+  "branches": {
+    "angle": 65853,
+    "pair": 3401
+  },
+  "farkas_failures": 0,
+  "closed_tree_share": 0.003926774693860274,
+  "closures_by_pair": {
+    "cell": {},
+    "disc": {
+      "side-W1|interior-W": 2615.0,
+      "side-W0|interior-SW": 1260.0,
+      "interior-SW|interior-W": 672.0,
+      "side-W1|side-W2": 251.0,
+      "corner-SW|side-W0": 105.0,
+      "side-W0|side-W1": 91.0,
+      "side-N0|interior-W": 29.0,
+      "side-N0|side-W2": 18.0
+    },
+    "lp": {
+      "side-W0|side-W1": 8064.005,
+      "corner-SW|side-W0": 7548.587,
+      "side-W1|interior-W": 3263.136,
+      "cells": 2672.775,
+      "interior-SW|interior-W": 1677.85,
+      "side-W1|side-W2": 1507.338,
+      "side-W0|interior-SW": 767.384,
+      "corner-SW|interior-SW": 600.361
+    },
+    "pair": {
+      "side-W1|interior-W": 12311.0,
+      "side-W0|side-W1": 5989.0,
+      "corner-SW|side-W0": 4586.0,
+      "interior-SW|interior-W": 2450.0,
+      "side-W1|side-W2": 1962.0,
+      "side-W0|interior-SW": 1631.0,
+      "corner-SW|interior-SW": 1358.0,
+      "side-N0|side-W1": 836.0
+    }
+  },
+  "wall_seconds": 1800.039,
+  "cpu_seconds": 1550.183,
+  "stopped_at": null,
+  "smallest_unresolved": {
+    "depth": 27,
+    "angles": [
+      [
+        0.4,
+        0.5963495408493622
+      ],
+      [
+        0.4,
+        0.5963495408493622
+      ],
+      [
+        0.5963495408493622,
+        0.7926990816987243
+      ],
+      [
+        0.7926990816987243,
+        0.9890486225480865
+      ],
+      [
+        0.9890486225480865,
+        1.1853981633974486
+      ],
+      [
+        0.8908738521234054,
+        0.9890486225480865
+      ],
+      [
+        0.9890486225480865,
+        1.1853981633974486
+      ]
+    ],
+    "angles_degrees": [
+      [
+        22.918312,
+        34.168312
+      ],
+      [
+        22.918312,
+        34.168312
+      ],
+      [
+        34.168312,
+        45.418312
+      ],
+      [
+        45.418312,
+        56.668312
+      ],
+      [
+        56.668312,
+        67.918312
+      ],
+      [
+        51.043312,
+        56.668312
+      ],
+      [
+        56.668312,
+        67.918312
+      ]
+    ],
+    "max_angle_width": 0.19634954084936218,
+    "centre_boxes": {
+      "corner-SW": [
+        0.6552396681557675,
+        0.6664852302531844,
+        0.6552396681557675,
+        0.6663222116817132
+      ],
+      "side-N0": [
+        1.7838186443767785,
+        1.9953333333333334,
+        3.7091553507280186,
+        4.020760331844234
+      ],
+      "side-W0": [
+        0.9207994262541063,
+        0.9595098310305872,
+        1.7593808628749041,
+        1.797530111629742
+      ],
+      "side-W1": [
+        1.3785611411481336,
+        1.3978574789230338,
+        2.6730627130392888,
+        2.6806666666666668
+      ],
+      "side-W2": [
+        0.6512884747458617,
+        0.6933746905631853,
+        3.336187639975686,
+        3.386
+      ],
+      "interior-SW": [
+        1.9192492838106447,
+        1.983049275013564,
+        1.4109999999999998,
+        1.4284352011794113
+      ],
+      "interior-W": [
+        2.324272650733694,
+        2.338,
+        2.328476250278704,
+        2.351727349266306
+      ]
+    },
+    "windows": {
+      "corner-SW|side-W0": [
+        0.39999999999999997,
+        1.1853981633974489
+      ],
+      "side-N0|side-W1": [
+        3.541592653589792,
+        3.737942194439156
+      ],
+      "side-W0|side-W1": [
+        0.39999999999999997,
+        1.1853981633974489
+      ],
+      "side-W0|interior-SW": [
+        5.112388980384688,
+        5.89778714378214
+      ]
+    },
+    "lp_depth": -0.0014037941323596565,
+    "lp_point": [
+      0.6552396681557675,
+      0.6552396681557675,
+      1.7997890712307945,
+      4.020760331844234,
+      0.9443826700015193,
+      1.7762596644465523,
+      1.393787800176173,
+      2.679262872534307,
+      0.6512884747458617,
+      3.345728601466682,
+      1.9594248552735205,
+      1.4124037941323595,
+      2.3360147352992375,
+      2.338
+    ],
+    "undecided_pairs": 2,
+    "midpoint_pose_violation": 0.14829716133101123
+  }
+}

@@ -1,0 +1,17 @@
+{
+ "schema": "n17-certificate-verification/v1",
+ "verifier": "kernel",
+ "verifier_sha256": "5c550f7c1e4cd1f71039bd8daa4475e91330e3845ca25e50789abadb1e2455c3",
+ "directory": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2-refine/k2-refined/blind",
+ "cells_source": {
+  "kind": "file",
+  "path": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/p2-refine/k2-refined/blind/cells.json",
+  "sha256": "7860fa9520f600d8e415bb160543a53e2c38a702c1f8110cbbe3f857c0e5fe81"
+ },
+ "mode": "full",
+ "sample_rows_per_step": null,
+ "sample_seed": null,
+ "status": "FAIL",
+ "failure": "step 4 row 0: interval",
+ "seconds": 0.079
+}

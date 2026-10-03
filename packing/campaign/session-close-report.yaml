@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 165
+count: 167
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 111
+  sessions_measured: 113
   sessions_unmeasured: 54
   attributed:
-    rollups: 254
-    turns: 63978
-    tool_calls: 35394
-    tool_errors: 773
-    one_off_code: 5088
-    wall_hours: 557.08
+    rollups: 276
+    turns: 66468
+    tool_calls: 36803
+    tool_errors: 798
+    one_off_code: 5386
+    wall_hours: 574.78
   unattributed:
     rollups: 65
     turns: 14196
@@ -28,12 +28,12 @@ totals:
     one_off_code: 1184
     wall_hours: 67.13
   measured:
-    rollups: 319
-    turns: 78174
-    tool_calls: 43543
-    tool_errors: 958
-    one_off_code: 6272
-    wall_hours: 624.21
+    rollups: 341
+    turns: 80664
+    tool_calls: 44952
+    tool_errors: 983
+    one_off_code: 6570
+    wall_hours: 641.91
 codex_receipts:
   attributed: 68
   unattributed: 2
@@ -2857,3 +2857,51 @@ sessions:
     active_union_hours: 3.96
     wall_hours: 3.96
     snapshot_incomplete: true
+- id: session-166
+  title: "n17 Route Review and Replanning After PR 265"
+  status: stopped
+  primary_bead: think-9fc1
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/edb82f84-25c7-536c-8add-a1ccc53a1d43.yaml
+  - packing/campaign/resource-usage/agent-a5685e7aa49454a92.yaml
+  - packing/campaign/resource-usage/agent-a5cbb4e16e9eab857.yaml
+  - packing/campaign/resource-usage/agent-aeeb8f584753fe65e.yaml
+  turns: 515
+  tool_calls: 342
+  tool_errors: 8
+  one_off_code: 24
+  wall_hours: 5.02
+  codex_receipts: []
+- id: session-167
+  title: "n17 Parallel Lanes After the Route Review"
+  status: stopped
+  primary_bead: think-c7kv
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/9ef40ca7-d637-5e9a-8f7f-e71a05712560.yaml
+  - packing/campaign/resource-usage/agent-a01d350a113875e85.yaml
+  - packing/campaign/resource-usage/agent-a093f7bf1b5a57a85.yaml
+  - packing/campaign/resource-usage/agent-a3ca8f2c2edfd4340.yaml
+  - packing/campaign/resource-usage/agent-a58c621f9018195e4.yaml
+  - packing/campaign/resource-usage/agent-a625ac54c60aed8cd.yaml
+  - packing/campaign/resource-usage/agent-a66f38937bdef6c02.yaml
+  - packing/campaign/resource-usage/agent-a67f0edde8ed86505.yaml
+  - packing/campaign/resource-usage/agent-a6a437c44c3304b19.yaml
+  - packing/campaign/resource-usage/agent-a70b6f243c76b7028.yaml
+  - packing/campaign/resource-usage/agent-a7e5b6dec097dce25.yaml
+  - packing/campaign/resource-usage/agent-a8a8b79e0239bca0f.yaml
+  - packing/campaign/resource-usage/agent-a99354ec00e40e457.yaml
+  - packing/campaign/resource-usage/agent-a9d15edf10039fa0e.yaml
+  - packing/campaign/resource-usage/agent-abc5e690e5d7d3041.yaml
+  - packing/campaign/resource-usage/agent-abeb1a31ad979cecd.yaml
+  - packing/campaign/resource-usage/agent-ae8abe09a3292e894.yaml
+  - packing/campaign/resource-usage/agent-af4a13e9dbcb00142.yaml
+  turns: 1975
+  tool_calls: 1067
+  tool_errors: 17
+  one_off_code: 274
+  wall_hours: 12.68
+  codex_receipts: []

@@ -1,0 +1,56 @@
+{
+  "bins": 64,
+  "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-W"
+  ],
+  "check_seconds": 1522.127709638,
+  "checker_modules_sha256": {
+    "sqpack.hull_kernel": "0bbfc013e1066b89c8aad8fb2d28dac15483069e053668db0cdde16710d6687e",
+    "sqpack.hull_kernel.collision": "5f8d0231b90ffcb6bbdad42b15f5f4d74e2739c85bd287ae8fa59ffe17429a10",
+    "sqpack.hull_kernel.counting": "79e97e9db2cb3e569517e1f40b8e9b8fbff802fe635a42df8de28f389701e97b",
+    "sqpack.hull_kernel.covers": "fe760ce9a1682d735ab2f191fc325f3c7f53d5e9f1c8863a41235ad86fa0de87",
+    "sqpack.hull_kernel.frame": "3c5107175adb517d8c3e6bbbd1bed95a4e2d19cfae57c0e081f601d4c5ad5c6e",
+    "sqpack.hull_kernel.geometry": "12d69959c71b88a4a3f2521fda896116f1467209fcff2ea63627418c3a26a29b",
+    "sqpack.hull_kernel.induction": "77262bf5da1dc42e7e76684efecdc93c087c42974ddb50f1780d381bf36987bd",
+    "sqpack.hull_kernel.n11": "fd1710f662fcb3903cc8146a7cc81cc051f858001acd3fd4a84230d35ed1ffca",
+    "sqpack.hull_kernel.n17": "792eb18b25a3cffb66ce6f41e3651217bc0c983796710d47df46394bdd81d817",
+    "sqpack.hull_kernel.node": "34741ae8b35c7a451cb4cdd1cd15a84d0510fdb1f4d19675a836fa971dfb978b",
+    "sqpack.hull_kernel.ownership": "8abb7df630bb72eeb1a69773c94ca70d7d9533f6373ef607f8e4294362c708ca",
+    "sqpack.hull_kernel.sequential": "7549e830a709e678d99e3b56ceb1fcf592427486b99975ce45fbfb35b534f820",
+    "sqpack.hull_kernel.sweep": "c39c98e6873df0bdd32a830d5993ff4490751b99d3ff02450db2094d5aef8803"
+  },
+  "closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 5,
+    "step": 57
+  },
+  "collision_regions": 7752,
+  "events": 314780,
+  "excluded_orbits": 16701,
+  "excluded_states": 133152,
+  "frame": "n17-ring-3-voronoi-8-tabbed-unique",
+  "mask": [
+    0,
+    5,
+    6,
+    10,
+    14,
+    16,
+    18
+  ],
+  "node_sha256": "2d516d00ab3bd989ab1d90e531c626589d819ab3753bff6ed83221590b4523ca",
+  "process_cpu_seconds": 1484.0112414750001,
+  "producer_imported": false,
+  "rows_checked": 3712,
+  "seed_sha256": "8949a798f00bb376d9520fda8eb71146973905c75977173bede6aa81e0500782",
+  "status": "PASS_SAVED_CLOSED",
+  "steps_checked": 58,
+  "tool_sha256": "54249e75272f6ee248a93eae1a820732559ae982e29da662df5a1016e6f521c3",
+  "wall_seconds": 1523.7681310419975
+}

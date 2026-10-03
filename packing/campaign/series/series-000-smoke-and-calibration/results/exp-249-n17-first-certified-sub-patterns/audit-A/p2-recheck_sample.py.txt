@@ -1,0 +1,70 @@
+"""Exact re-check of a saved certificate: the whole tree, and closures in sampled chunks."""
+import sys, time
+from fractions import Fraction as Q
+from pathlib import Path
+from devtools import pilot_n17_subpattern_bb as bb
+from tests.test_pilot_n17_subpattern_bb import _check_cuts, _dual
+
+directory, sample = Path(sys.argv[1]), int(sys.argv[2])
+manifest_name = next(line.split(": ")[1].removesuffix(".json.gz") for line in (directory / "README.txt").read_text().splitlines() if line.startswith("This certificate's manifest"))
+t = time.perf_counter()
+manifest = bb.read_named(directory, manifest_name)
+trig = bb.read_named(directory, manifest["trig"])["trig"]
+header = manifest["header"]
+nodes = []
+for name in manifest["chunks"]:
+    nodes.extend(bb.read_named(directory, name)["nodes"])
+print("loaded", len(nodes), "nodes from", len(manifest["chunks"]), "chunks, hashes ok", round(time.perf_counter() - t, 1), "s", manifest["summary"])
+children = {}
+for node in nodes:
+    if node["parent"] is not None:
+        children.setdefault(node["parent"], []).append(node)
+roots = [n for n in nodes if n["parent"] is None]
+assert len(roots) == 1 and roots[0]["angles"] == header["root_angles"] and not roots[0]["windows"]
+closed = {}
+for node in nodes:
+    kids = children.get(node["id"], [])
+    if node["closed"] is not None:
+        assert not kids
+        closed[node["closed"]] = closed.get(node["closed"], 0) + 1
+        continue
+    if "angle" in node["split"]:
+        square, at = node["split"]["angle"]
+        lo, hi = node["angles"][square]
+        assert Q(lo) <= Q(at) <= Q(hi)
+        assert sorted(k["angles"][square] for k in kids) == sorted([[lo, at], [at, hi]])
+        for k in kids:
+            assert [a for s, a in enumerate(k["angles"]) if s != square] == [a for s, a in enumerate(node["angles"]) if s != square]
+            assert k["windows"] == node["windows"]
+    else:
+        pair, windows = node["split"]["pair"]
+        assert sorted([w[1], w[2]] for k in kids for w in k["windows"] if w[0] == pair) == sorted(windows)
+        for k in kids:
+            assert k["angles"] == node["angles"]
+print("tree ok (T1, T2 structure, T3 leaves):", closed, "leaves", sum(closed.values()))
+step = max(1, len(manifest["chunks"]) // sample)
+chosen = manifest["chunks"][::step][:sample]
+sub = []
+for name in chosen:
+    sub.extend(bb.read_named(directory, name)["nodes"])
+t = time.perf_counter()
+farkas = bounds = disc = 0
+for node in sub:
+    for record in node["rounds"]:
+        boxes = [[Q(v) for v in box] for box in record["boxes"]]
+        for column, sign, value, weights in record.get("bounds", []):
+            assert Q(value) <= _dual(header, record, weights, boxes, (column, sign))
+            boxes[column // 2][2 * (column % 2) + (0 if sign > 0 else 1)] = Q(value) * sign
+            bounds += 1
+        if "farkas" in record:
+            assert _dual(header, record, record["farkas"], boxes) > 0
+            farkas += 1
+        if record.get("closed_pair", [None, None])[1] == "disc":
+            i, j = header["pairs"][record["closed_pair"][0]]
+            b = [[Q(v) for v in box] for box in record["boxes"]]
+            dx = max(abs(b[j][0] - b[i][1]), abs(b[j][1] - b[i][0]))
+            dy = max(abs(b[j][2] - b[i][3]), abs(b[j][3] - b[i][2]))
+            assert dx * dx + dy * dy < 1
+            disc += 1
+cuts = _check_cuts({"manifest": manifest, "trig": trig, "nodes": sub})
+print(f"sample of {len(chosen)} chunks, {len(sub)} nodes: farkas {farkas}, bounds {bounds}, disc {disc}, cuts {cuts} all re-verified exactly in {time.perf_counter() - t:.1f} s")

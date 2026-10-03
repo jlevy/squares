@@ -1,0 +1,97 @@
+"""Tightness witnesses and bounded counterexample search (fixes to wall_lemma.py part E/F)."""
+from __future__ import annotations
+
+import math
+import sys
+
+import numpy as np
+from scipy.optimize import differential_evolution, minimize
+
+from wall_lemma import G, G2, U, h, maxf, sat_sigma, square_poly
+
+W_SIDE = (919 / 250 - 2 * 0.78) / 3
+
+
+def explicit_one_wall(d, w, th, x0=1.28):
+    """Bottom-wall frame (depth = y, tangent = x). Lemma normal (c along depth, s along
+    tangent) is n_xy = (s, c); 'aligned with n' means edge direction at angle -th."""
+    c, s = math.cos(th), math.sin(th)
+    t = c + s
+    pi_ = square_poly(-th, x0, t / 2)             # on the wall, tangential start of cell
+    pj_ = square_poly(-th, x0 + w, 0.5 + d)       # far corner of the cell
+    n = np.array([s, c])
+    gap = min(n @ v for v in pj_) - max(n @ v for v in pi_)
+    return gap, sat_sigma(pi_, pj_), pi_, pj_
+
+
+def explicit_corner(a):
+    pi_ = square_poly(0.0, 0.5, 0.5)                        # axis-aligned in the corner
+    pj_ = square_poly(math.pi / 4, 0.5 + a, 0.5 + a)        # diagonal at the far corner
+    return sat_sigma(pi_, pj_)
+
+
+def make_obj(cell_i, cell_j):
+    lo = np.array([cell_i[0][0], cell_i[1][0], 0.0, cell_j[0][0], cell_j[1][0], 0.0])
+    hi = np.array([cell_i[0][1], cell_i[1][1], math.pi / 2, cell_j[0][1], cell_j[1][1], math.pi / 2])
+
+    def obj(v):
+        v = np.clip(v, lo, hi)
+        xi, yi, ti, xj, yj, tj = v
+        pen = 0.0
+        for x, y, t in ((xi, yi, ti), (xj, yj, tj)):
+            hh = h(t)
+            pen += max(0, hh - x) + max(0, x + hh - U) + max(0, hh - y) + max(0, y + hh - U)
+        return -(sat_sigma(square_poly(ti, xi, yi), square_poly(tj, xj, yj)) - 50 * pen)
+
+    return obj, lo, hi
+
+
+def search(cell_i, cell_j, seeds=8, maxiter=500, extra_starts=()):
+    obj, lo, hi = make_obj(cell_i, cell_j)
+    bounds = list(zip(lo, hi))
+    best = None
+    starts = []
+    for seed in range(seeds):
+        r = differential_evolution(obj, bounds, seed=seed, maxiter=maxiter, tol=1e-13, popsize=30, polish=False)
+        starts.append(r.x)
+    starts.extend(extra_starts)
+    for x in starts:
+        r2 = minimize(obj, x, method="Nelder-Mead",
+                      options={"xatol": 1e-13, "fatol": 1e-15, "maxiter": 40000, "adaptive": True})
+        xx = np.clip(r2.x, lo, hi)
+        val = obj(xx)
+        if best is None or val < best[0]:
+            best = (val, xx)
+    return -best[0], best[1]
+
+
+if __name__ == "__main__":
+    print("== tightness witnesses (one wall, side-cell frame) ==")
+    for d, w in [(0.911, W_SIDE), (0.911, 0.7104), (0.78, 0.78), (0.735, 0.835)]:
+        m, th = maxf(G, d, w)
+        gap, sig, _, _ = explicit_one_wall(d, w, th)
+        print(f"  d={d:.4f} w={w:.6f}: max G={m:+.7f}; explicit pair gap along n={gap:+.7f}; SAT sigma={sig:+.7f}")
+    print("== tightness witness (corner, two walls) ==")
+    for a in (0.78, 0.85, 0.86):
+        print(f"  a={a}: explicit pair SAT sigma={explicit_corner(a):+.6f}; max G2={maxf(G2, a, a)[0]:+.6f}")
+
+    which = sys.argv[1] if len(sys.argv) > 1 else "all"
+    x0 = 1.28
+    if which in ("all", "side"):
+        print("\n== bounded search, bottom-wall side cell ==")
+        for d, w, tag in [(0.911, W_SIDE, "side (0.911, 529/750)"), (0.911, 0.7104, "side (0.911, 0.7104)"),
+                          (0.911, 0.72, "side (0.911, 0.72)")]:
+            m, th = maxf(G, d, w)
+            c, s = math.cos(th), math.sin(th)
+            t = c + s
+            seedpose = np.array([x0, t / 2, (math.pi / 2 - th) % (math.pi / 2), x0 + w, 0.5 + d, (math.pi / 2 - th) % (math.pi / 2)])
+            cell = ((x0, x0 + w), (0.5, 0.5 + d))
+            sig, v = search(cell, cell, seeds=6, maxiter=500, extra_starts=[seedpose])
+            print(f"  {tag:26s} best sigma={sig:+.7f} (max G={m:+.7f}); pose={np.round(v, 5)}")
+    if which in ("all", "corner"):
+        print("\n== bounded search, corner cell (two walls) ==")
+        for a, tag in [(0.78, "corner 0.78"), (0.86, "corner 0.86")]:
+            cell = ((0.5, 0.5 + a), (0.5, 0.5 + a))
+            seedpose = np.array([0.5, 0.5, 0.0, 0.5 + a, 0.5 + a, math.pi / 4])
+            sig, v = search(cell, cell, seeds=6, maxiter=500, extra_starts=[seedpose])
+            print(f"  {tag:26s} best sigma={sig:+.7f} (max G2={maxf(G2, a, a)[0]:+.7f}); pose={np.round(v, 5)}")

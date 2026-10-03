@@ -1,0 +1,56 @@
+S in [4.675530093604550, 4.675530093604553], U = 4.676000
+T in [0.071213230,0.071213230]  T/s <= 0.111240047  2T/3 <= 0.047475486  T/3 <= 0.023737743
+
+=== domain triangle-box ===
+sq  1: inside [('corner-SW', '0.789765')]; nearest other side-S0 at 0.789765
+sq  2: inside [('side-S0', '0.210235')]; nearest other corner-SW at 0.210235
+sq  3: inside [('side-W0', '0.210235')]; nearest other corner-SW at 0.210235
+sq  4: inside [('corner-NW', '0.789765')]; nearest other side-W2 at 0.789765
+sq  5: inside [('corner-SE', '0.669765')]; nearest other side-S2 at 0.669765
+sq  6: inside [('side-S2', '0.210235')]; nearest other corner-SE at 0.210235
+sq  7: inside [('side-E0', '0.210235')]; nearest other corner-SE at 0.210235
+sq  8: inside [('corner-NE', '0.789765')]; nearest other side-N2 at 0.789765
+sq  9: inside [('side-W2', '0.023770')]; nearest other side-W1 at 0.023770
+sq 10: inside [('side-N0', '0.123278')]; nearest other side-W2 at 0.025381
+sq 11: inside [('interior-W', '0.050903')]; nearest other interior-SW at 0.045697
+sq 12: inside [('interior-N', '0.273646')]; nearest other interior-NW at 0.260630
+sq 13: inside [('side-S1', '0.002112')]; nearest other interior-S at 0.002112
+sq 14: inside [('interior-E', '0.104421')]; nearest other interior-SE at 0.097945
+sq 15: inside [('side-N1', '0.333107')]; nearest other side-N2 at 0.333107
+sq 16: inside [('side-N2', '0.107729')]; nearest other side-E2 at 0.019691
+sq 17: inside [('side-E1', '0.066972')]; nearest other side-E2 at 0.066972
+state: ['corner-NE', 'corner-NW', 'corner-SE', 'corner-SW', 'interior-E', 'interior-N', 'interior-W', 'side-E0', 'side-E1', 'side-N0', 'side-N1', 'side-N2', 'side-S0', 'side-S1', 'side-S2', 'side-W0', 'side-W2']
+17 distinct cells: True
+least inside margin: 0.002112 (square 13, side-S1)
+least outside distance: 0.002112 (square 13, interior-S)
+unique state over triangle-box with margin >= 1e-3: True
+
+=== domain h256-derived ===
+sq  1: inside [('corner-SW', '0.789765')]; nearest other side-S0 at 0.789765
+sq  2: inside [('side-S0', '0.210235')]; nearest other corner-SW at 0.210235
+sq  3: inside [('side-W0', '0.210235')]; nearest other corner-SW at 0.210235
+sq  4: inside [('corner-NW', '0.789765')]; nearest other side-W2 at 0.789765
+sq  5: inside [('corner-SE', '0.789765')]; nearest other side-S2 at 0.789765
+sq  6: inside [('side-S2', '0.210235')]; nearest other corner-SE at 0.210235
+sq  7: inside [('side-E0', '0.210235')]; nearest other corner-SE at 0.210235
+sq  8: inside [('corner-NE', '0.789765')]; nearest other side-N2 at 0.789765
+sq  9: inside [('side-W2', '0.023770')]; nearest other side-W1 at 0.023770
+sq 10: inside [('side-N0', '0.123278')]; nearest other side-W2 at 0.025381
+sq 11: inside [('interior-W', '0.110292')]; nearest other interior-SW at 0.106316
+sq 12: inside [('interior-N', '0.273646')]; nearest other interior-NW at 0.260630
+sq 13: inside [('side-S1', '0.003081')]; nearest other interior-S at 0.003081
+sq 14: inside [('interior-E', '0.104421')]; nearest other interior-SE at 0.097945
+sq 15: inside [('side-N1', '0.333107')]; nearest other side-N2 at 0.333107
+sq 16: inside [('side-N2', '0.107729')]; nearest other side-E2 at 0.019691
+sq 17: inside [('side-E1', '0.066972')]; nearest other side-E2 at 0.066972
+state: ['corner-NE', 'corner-NW', 'corner-SE', 'corner-SW', 'interior-E', 'interior-N', 'interior-W', 'side-E0', 'side-E1', 'side-N0', 'side-N1', 'side-N2', 'side-S0', 'side-S1', 'side-S2', 'side-W0', 'side-W2']
+17 distinct cells: True
+least inside margin: 0.003081 (square 13, side-S1)
+least outside distance: 0.003081 (square 13, interior-S)
+unique state over h256-derived with margin >= 1e-3: True
+
+H256 range containment in the declared box:
+  T/s <= 3/25: True  T/s <= 1/5 (square 6 box): True  T <= 3/40: True
+  2T/3 <= 1/20: True  T/3 <= 1/40: True
+  square 6 H256 x-range width T/s in [0.111240, 0.111240]; declared 0.2
+ALL FAMILY CHECKS PASS: True

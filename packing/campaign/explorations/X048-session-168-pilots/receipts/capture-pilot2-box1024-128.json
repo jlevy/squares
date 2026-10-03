@@ -1,0 +1,508 @@
+{
+ "certified_updates": 208,
+ "claim": "a measurement on a sub-case (cells cut to the guard polygons widened by 1/1024) at the capture cap; no capture, guard or exclusion is claimed",
+ "command": "uv run --frozen --all-extras --group dev python -m devtools.pilot_n17_capture --bins 32 --max-rounds 300 --box 1/1024 --max-live 128 --max-seconds 10800 --rounds-after-start 6 --checkpoints DIR --output FILE  (rounds 1-9; rounds 10-13 with --resume DIR/checkpoint-round-009.json.gz)",
+ "endpoint_control": {
+  "checked_after_updates": 209,
+  "held": true
+ },
+ "final_round_per_owner": {
+  "corner-NE": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0019856112979474982,
+    0.0020141594753230996
+   ],
+   "two_sided_extent": {
+    "x": 0.0009765624526529848,
+    "y": 0.0009765624526529848
+   },
+   "widest_row_to_extent": 0.06249994887772622
+  },
+  "corner-NW": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0019856112979474982,
+    0.0020141594753230996
+   ],
+   "two_sided_extent": {
+    "x": 0.0009765624303014198,
+    "y": 0.0009765624526529848
+   },
+   "widest_row_to_extent": 0.06249994887772622
+  },
+  "corner-SE": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0019856112979474982,
+    0.001953124379118639
+   ],
+   "two_sided_extent": {
+    "y": 0.0009765624303014198
+   },
+   "widest_row_to_extent": 0.06249994669935652
+  },
+  "corner-SW": {
+   "live_rows": 125,
+   "turn_range_rad": [
+    -0.001786872877997503,
+    0.001953124379118639
+   ],
+   "two_sided_extent": {
+    "x": 0.0009765624303014198,
+    "y": 0.0009765624303014198
+   },
+   "widest_row_to_extent": 0.031302975983369834
+  },
+  "interior-E": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0007531049023588032,
+    0.004881703406216742
+   ],
+   "two_sided_extent": {
+    "x": 0.001953125,
+    "y": 0.001953125
+   },
+   "widest_row_to_extent": 0.027623140766593224
+  },
+  "interior-N": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0010499929406067032,
+    0.0066048856285741975
+   ],
+   "two_sided_extent": {
+    "x": 0.0018764365422718754,
+    "y": 0.001953125
+   },
+   "widest_row_to_extent": 0.05515376186872345
+  },
+  "interior-W": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.005426029817087841,
+    0.004019705727432488
+   ],
+   "two_sided_extent": {
+    "u": 0.0019531250529694244
+   },
+   "widest_row_to_extent": 0.05527704099915714
+  },
+  "side-E0": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0019856112979474982,
+    0.0020141594753230996
+   ],
+   "two_sided_extent": {
+    "x": 0.0009765624526529848,
+    "y": 0.0011290408716722045
+   },
+   "widest_row_to_extent": 0.05405925055336602
+  },
+  "side-E1": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0019856112979474982,
+    0.0020141594753230996
+   ],
+   "two_sided_extent": {
+    "x": 0.0009765624526529848,
+    "y": 0.001953125
+   },
+   "widest_row_to_extent": 0.03124997292375986
+  },
+  "side-N0": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.001697859246799105,
+    0.014882491487171357
+   ],
+   "two_sided_extent": {
+    "x": 0.001953125,
+    "y": 0.001953125
+   },
+   "widest_row_to_extent": 0.11013592723662669
+  },
+  "side-N1": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0019856112979474982,
+    0.0020141594753230996
+   ],
+   "two_sided_extent": {
+    "x": 0.0018634243408093276,
+    "y": 0.0009765624526529848
+   },
+   "widest_row_to_extent": 0.03275426966903821
+  },
+  "side-N2": {
+   "live_rows": 126,
+   "turn_range_rad": [
+    -0.02826522465901382,
+    0.0015553359402750155
+   ],
+   "two_sided_extent": {
+    "x": 0.001953125,
+    "y": 0.001953125
+   },
+   "widest_row_to_extent": 0.20040994320834216
+  },
+  "side-S0": {
+   "live_rows": 124,
+   "turn_range_rad": [
+    -0.001786872877997503,
+    0.0019836419276827214
+   ],
+   "two_sided_extent": {
+    "x": 0.001102796989061794,
+    "y": 0.0009765624303014198
+   },
+   "widest_row_to_extent": 0.027720644433554938
+  },
+  "side-S1": {
+   "live_rows": 122,
+   "turn_range_rad": [
+    -0.0034802729934351184,
+    0.007035511641111047
+   ],
+   "two_sided_extent": {
+    "u": 0.001953125035501305
+   },
+   "widest_row_to_extent": 0.05527272655942783
+  },
+  "side-W0": {
+   "live_rows": 128,
+   "turn_range_rad": [
+    -0.0019856112979474982,
+    0.0020141594753230996
+   ],
+   "two_sided_extent": {
+    "x": 0.0009765624303014198,
+    "y": 0.001102796989061794
+   },
+   "widest_row_to_extent": 0.055345729061741615
+  },
+  "side-W2": {
+   "live_rows": 127,
+   "turn_range_rad": [
+    -0.005371962641361083,
+    0.01574105407381199
+   ],
+   "two_sided_extent": {
+    "x": 0.0013306666860213312,
+    "y": 0.0016492930090348246
+   },
+   "widest_row_to_extent": 0.130825704567754
+  }
+ },
+ "kernel_sha256": {
+  "__init__.py": "0bbfc013e1066b89c8aad8fb2d28dac15483069e053668db0cdde16710d6687e",
+  "collision.py": "5f8d0231b90ffcb6bbdad42b15f5f4d74e2739c85bd287ae8fa59ffe17429a10",
+  "counting.py": "79e97e9db2cb3e569517e1f40b8e9b8fbff802fe635a42df8de28f389701e97b",
+  "covers.py": "fe760ce9a1682d735ab2f191fc325f3c7f53d5e9f1c8863a41235ad86fa0de87",
+  "frame.py": "3c5107175adb517d8c3e6bbbd1bed95a4e2d19cfae57c0e081f601d4c5ad5c6e",
+  "geometry.py": "12d69959c71b88a4a3f2521fda896116f1467209fcff2ea63627418c3a26a29b",
+  "induction.py": "77262bf5da1dc42e7e76684efecdc93c087c42974ddb50f1780d381bf36987bd",
+  "n11.py": "fd1710f662fcb3903cc8146a7cc81cc051f858001acd3fd4a84230d35ed1ffca",
+  "n17.py": "792eb18b25a3cffb66ce6f41e3651217bc0c983796710d47df46394bdd81d817",
+  "node.py": "34741ae8b35c7a451cb4cdd1cd15a84d0510fdb1f4d19675a836fa971dfb978b",
+  "ownership.py": "8abb7df630bb72eeb1a69773c94ca70d7d9533f6373ef607f8e4294362c708ca",
+  "producer.py": "93522fe8232a9148291510693856fde164b02bfdc846e7dbb2d1eaab61fe8dd1",
+  "sequential.py": "7549e830a709e678d99e3b56ceb1fcf592427486b99975ce45fbfb35b534f820",
+  "sweep.py": "c39c98e6873df0bdd32a830d5993ff4490751b99d3ff02450db2094d5aef8803"
+ },
+ "resume_check": "rounds 1-9 of the resumed process's restored rounds equal the original's, and its round 10 reproduces the original run's round 10 (worst turn 0.03044, live 1728, least owner g 0.96333)",
+ "review_falsifier": {
+  "contraction_start": null,
+  "decidable": false,
+  "falsified": false,
+  "reason": "every owner's widest live row never fell under 1/20 of its two-sided position extent: the maximum ratio stays at 0.200 (side-N2, square 16, angle range about 0.03 rad over 128 rows), so neither the falsifier nor its alternative applies",
+  "rows_needed_for_one_twentieth_at_side_N2": 300
+ },
+ "rounds": [
+  {
+   "checker_cpu_per_update": null,
+   "cpu_seconds_per_update": null,
+   "g_geometric_mean_axis": null,
+   "g_geometric_mean_tilted": null,
+   "g_min_owner": null,
+   "g_worst_extent": null,
+   "live_rows": 272,
+   "live_rows_per_owner_after_update": null,
+   "producer_cpu_per_update": null,
+   "round": 0,
+   "updates": 0,
+   "widest_row_to_extent_max": 63.97918343146988,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 31.989589432594716,
+   "worst_turn_rad": 0.7853981633974483,
+   "worst_two_sided_extent": 0.0019531250945263156
+  },
+  {
+   "checker_cpu_per_update": 3.2,
+   "cpu_seconds_per_update": 7.5,
+   "g_geometric_mean_axis": 0.9462,
+   "g_geometric_mean_tilted": 1.0,
+   "g_min_owner": 0.6246905329403489,
+   "g_worst_extent": 1.0,
+   "live_rows": 97,
+   "live_rows_per_owner_after_update": 4.1,
+   "producer_cpu_per_update": 4.3,
+   "round": 1,
+   "updates": 16,
+   "widest_row_to_extent_max": 31.997398498433956,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 15.998698107368275,
+   "worst_turn_rad": 0.42247103786889384,
+   "worst_two_sided_extent": 0.0019531250945263156
+  },
+  {
+   "checker_cpu_per_update": 1.0,
+   "cpu_seconds_per_update": 2.2,
+   "g_geometric_mean_axis": 0.991,
+   "g_geometric_mean_tilted": 1.0,
+   "g_min_owner": 0.9257444825813785,
+   "g_worst_extent": 1.0,
+   "live_rows": 93,
+   "live_rows_per_owner_after_update": 3.8,
+   "producer_cpu_per_update": 1.2,
+   "round": 2,
+   "updates": 16,
+   "widest_row_to_extent_max": 15.999675633005463,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 7.999837245543538,
+   "worst_turn_rad": 0.10676978666191239,
+   "worst_two_sided_extent": 0.0019531250945263156
+  },
+  {
+   "checker_cpu_per_update": 1.0,
+   "cpu_seconds_per_update": 2.2,
+   "g_geometric_mean_axis": 0.9976,
+   "g_geometric_mean_tilted": 1.0,
+   "g_min_owner": 0.9797359973902182,
+   "g_worst_extent": 1.0,
+   "live_rows": 105,
+   "live_rows_per_owner_after_update": 4.6,
+   "producer_cpu_per_update": 1.2,
+   "round": 3,
+   "updates": 16,
+   "widest_row_to_extent_max": 7.999959881236264,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 3.999979655134179,
+   "worst_turn_rad": 0.07421925307343558,
+   "worst_two_sided_extent": 0.0019531250945263156
+  },
+  {
+   "checker_cpu_per_update": 1.5,
+   "cpu_seconds_per_update": 3.4,
+   "g_geometric_mean_axis": 0.9876,
+   "g_geometric_mean_tilted": 1.0,
+   "g_min_owner": 0.8134659771012593,
+   "g_worst_extent": 1.0,
+   "live_rows": 137,
+   "live_rows_per_owner_after_update": 6.6,
+   "producer_cpu_per_update": 1.9,
+   "round": 4,
+   "updates": 16,
+   "widest_row_to_extent_max": 3.9999951992336626,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 1.9999974568743104,
+   "worst_turn_rad": 0.05491755014077149,
+   "worst_two_sided_extent": 0.0019531250945263156
+  },
+  {
+   "checker_cpu_per_update": 2.5,
+   "cpu_seconds_per_update": 5.8,
+   "g_geometric_mean_axis": 0.9901,
+   "g_geometric_mean_tilted": 0.9918,
+   "g_min_owner": 0.8459504665681846,
+   "g_worst_extent": 0.999999999820214,
+   "live_rows": 191,
+   "live_rows_per_owner_after_update": 9.9,
+   "producer_cpu_per_update": 3.3,
+   "round": 5,
+   "updates": 16,
+   "widest_row_to_extent_max": 1.9999995069601435,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 0.9999996821087431,
+   "worst_turn_rad": 0.04373806934221003,
+   "worst_two_sided_extent": 0.001953125094175171
+  },
+  {
+   "checker_cpu_per_update": 4.4,
+   "cpu_seconds_per_update": 10.3,
+   "g_geometric_mean_axis": 0.9943,
+   "g_geometric_mean_tilted": 0.994,
+   "g_min_owner": 0.9084200268590864,
+   "g_worst_extent": 0.9999999998991118,
+   "live_rows": 297,
+   "live_rows_per_owner_after_update": 16.6,
+   "producer_cpu_per_update": 5.9,
+   "round": 6,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.9999999918984973,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 0.49999996026357585,
+   "worst_turn_rad": 0.039759714691616654,
+   "worst_two_sided_extent": 0.001953125093978124
+  },
+  {
+   "checker_cpu_per_update": 8.7,
+   "cpu_seconds_per_update": 20.8,
+   "g_geometric_mean_axis": 0.9977,
+   "g_geometric_mean_tilted": 0.9936,
+   "g_min_owner": 0.9259136983771721,
+   "g_worst_extent": 0.9999999905866086,
+   "live_rows": 488,
+   "live_rows_per_owner_after_update": 28.5,
+   "producer_cpu_per_update": 12.0,
+   "round": 7,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.5000000257515679,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 0.24999999503294645,
+   "worst_turn_rad": 0.036979359002366596,
+   "worst_two_sided_extent": 0.001953125075592593
+  },
+  {
+   "checker_cpu_per_update": 15.7,
+   "cpu_seconds_per_update": 38.4,
+   "g_geometric_mean_axis": 0.9989,
+   "g_geometric_mean_tilted": 0.9914,
+   "g_min_owner": 0.9387388937229844,
+   "g_worst_extent": 0.9999999928638588,
+   "live_rows": 784,
+   "live_rows_per_owner_after_update": 47.0,
+   "producer_cpu_per_update": 22.7,
+   "round": 8,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.2500000166010743,
+   "widest_row_to_extent_max_owner": "corner-SE",
+   "widest_row_to_extent_median": 0.2023946046580818,
+   "worst_turn_rad": 0.035788911554812675,
+   "worst_two_sided_extent": 0.0019531250616548167
+  },
+  {
+   "checker_cpu_per_update": 24.6,
+   "cpu_seconds_per_update": 62.8,
+   "g_geometric_mean_axis": 0.9992,
+   "g_geometric_mean_tilted": 0.9922,
+   "g_min_owner": 0.946056033797898,
+   "g_worst_extent": 0.9999999955530793,
+   "live_rows": 1164,
+   "live_rows_per_owner_after_update": 70.8,
+   "producer_cpu_per_update": 38.1,
+   "round": 9,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.20200635207544337,
+   "widest_row_to_extent_max_owner": "side-N2",
+   "widest_row_to_extent_median": 0.11069148378357536,
+   "worst_turn_rad": 0.03222165332741067,
+   "worst_two_sided_extent": 0.0019531250529694244
+  },
+  {
+   "checker_cpu_per_update": 41.0,
+   "cpu_seconds_per_update": 114.8,
+   "g_geometric_mean_axis": 0.9989,
+   "g_geometric_mean_tilted": 0.9918,
+   "g_min_owner": 0.9633291368055924,
+   "g_worst_extent": 1.0,
+   "live_rows": 1728,
+   "live_rows_per_owner_after_update": 106.0,
+   "producer_cpu_per_update": 73.8,
+   "round": 10,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.20115062606123502,
+   "widest_row_to_extent_max_owner": "side-N2",
+   "widest_row_to_extent_median": 0.0553457769983376,
+   "worst_turn_rad": 0.030440323109531597,
+   "worst_two_sided_extent": 0.0019531250529694244
+  },
+  {
+   "checker_cpu_per_update": 54.1,
+   "cpu_seconds_per_update": 154.2,
+   "g_geometric_mean_axis": 0.9989,
+   "g_geometric_mean_tilted": 0.9977,
+   "g_min_owner": 0.9809719505499256,
+   "g_worst_extent": 1.0000000000000107,
+   "live_rows": 2045,
+   "live_rows_per_owner_after_update": 125.8,
+   "producer_cpu_per_update": 100.1,
+   "round": 11,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.20079996019910595,
+   "widest_row_to_extent_max_owner": "side-N2",
+   "widest_row_to_extent_median": 0.05534572586597148,
+   "worst_turn_rad": 0.02945135787964004,
+   "worst_two_sided_extent": 0.0019531250529694452
+  },
+  {
+   "checker_cpu_per_update": 53.9,
+   "cpu_seconds_per_update": 153.5,
+   "g_geometric_mean_axis": 0.9991,
+   "g_geometric_mean_tilted": 0.9983,
+   "g_min_owner": 0.9854393289099085,
+   "g_worst_extent": 0.9999999999999893,
+   "live_rows": 2058,
+   "live_rows_per_owner_after_update": 126.6,
+   "producer_cpu_per_update": 99.6,
+   "round": 12,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.20056599823345778,
+   "widest_row_to_extent_max_owner": "side-N2",
+   "widest_row_to_extent_median": 0.05528351240414408,
+   "worst_turn_rad": 0.028660526621236748,
+   "worst_two_sided_extent": 0.0019531250529694244
+  },
+  {
+   "checker_cpu_per_update": 54.8,
+   "cpu_seconds_per_update": 156.7,
+   "g_geometric_mean_axis": 1.0,
+   "g_geometric_mean_tilted": 1.0,
+   "g_min_owner": 0.99999199349251,
+   "g_worst_extent": 1.0,
+   "live_rows": 2064,
+   "live_rows_per_owner_after_update": 127.0,
+   "producer_cpu_per_update": 101.8,
+   "round": 13,
+   "updates": 16,
+   "widest_row_to_extent_max": 0.20040994320834216,
+   "widest_row_to_extent_max_owner": "side-N2",
+   "widest_row_to_extent_median": 0.05527704099915714,
+   "worst_turn_rad": 0.02826522465901382,
+   "worst_two_sided_extent": 0.0019531250529694244
+  }
+ ],
+ "schema": "n17-capture-pilot2-receipt/v1",
+ "segments": [
+  {
+   "partial_sha256": "4db1354a0298616e6b90b6839a299b3217ff09e239e115dd0625b2687c917853",
+   "rounds": "1-9",
+   "started": "2026-10-02T22:51Z"
+  },
+  {
+   "checkpoint_sha256": "11475a58185e5f5f7ee7b4a6db134477fe126a9d035730b39013094f5a9a7aa6",
+   "partial_sha256": "9ac187c509aab25db7a61bb9e8f1eb35428b201bddc70244ba0441649908d3d5",
+   "resumed_from": "checkpoint-round-009.json.gz",
+   "rounds": "10-13",
+   "started": "2026-10-03T00:40Z"
+  }
+ ],
+ "settings": {
+  "bins": 32,
+  "box": "1/1024",
+  "cap": "capture (U' = 935106018721/200000000000)",
+  "collision": true,
+  "core": "octagon",
+  "cover": "indexed",
+  "hull_limit": 48,
+  "max_live": 128,
+  "min_width": "2^-22",
+  "system": "n17"
+ },
+ "status": "MEASURED_STALLED_AT_ROW_CAP",
+ "tool": "packing/devtools/pilot_n17_capture.py",
+ "tool_sha256": "85e8d2abd555ae79d2b39a1a62dd69f982d2a6f38e6895e7b9aaad42aba8ddfc"
+}

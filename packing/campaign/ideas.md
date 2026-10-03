@@ -846,6 +846,30 @@ these rows as BC-393 to BC-395 and retargeted BC-387.
 | 265 | Exact replay of the reported upper-bound packings for n = 68..307 (franciscouzo, griffcass, JoostdeWinter n211) | done 2026-09-29: T-056 and T-057 at V4/C3 | — | All 49 of Couzo’s packings and de Winter’s n211 promote at centre dilation 1 and pass the independent checker; the verified lane carries them, with conflicts at n = 206, 259, 305 where the certificate sits 2–3 units of the 15th decimal above the printed side. Casson’s 39 are larger at every shared n, so retained and superseded, not replayed. `devtools.upper_bound_packets`, the three packets under `resources/web/`, issue #227. |
 | 266 | A zero-margin additive spatial cover at the n12 endpoint | restricted by a reported exact dual; replay pending | — | Updated 2026-10-01: Daniel publishes a side-4 fractional packing of mass 24537607710/1999999999 > 12. If its closed-depth bound is reproduced, it rules out any nonnegative additive spatial cover of total mass below 12 that assigns mass at least one to every admissible closed unit square; point, segment and area covers are all included. The earlier measured LP plateau alone did not prove this. Guarded replay is think-q5tt; conditional and clique resources remain separate routes in [X-048](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review). |
 
+## After PR 265 — the October 1 Checkpoint
+
+The
+[route review](../../docs/project/reviews/review-2026-10-01-n17-route-after-pr265.md)
+kept two Fable extra-high assessments of what PR 265 leaves for an n17 optimality proof,
+with exploratory receipts under
+[`explorations/X048-route-review/`](explorations/X048-route-review/README.md).
+[Agenda 042](agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md) selected
+these rows as BC-406 to BC-411.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 267 | The n17 endpoint is a strict local minimum modulo its six slider directions, at an explicit radius | registered | [H-261](hypotheses/H-261-n17-local-minimum-modulo-sliders.md) | Exploratory: the 52 positive H-258 rows have a kernel spanned exactly by the slider and rattler motions, so first order suffices; the first-order radius estimate is 3e-4, about 50 times smaller than n11’s, and becomes the capture target. |
+| 268 | Settled-case cuts plus conditional charge floors leave at most 1e4 occupancy orbits | registered | [H-262](hypotheses/H-262-n17-conditional-charge-occupancy-census.md) | s(6) and s(10) cuts alone leave about 7.7 million of 20.2 million orbits; at 1–2 CPU-hours per geometric leaf, the hybrid route is affordable only if counting removes more than 99.9%. |
+| 269 | A closed cover that keeps the whole endpoint family in one occupancy state | open question | [H-263](hypotheses/H-263-n17-endpoint-adapted-cover.md) | Square 9’s centre is 0.0012 from an H259 seam; candidate covers are compared by survivors, not raw counts. |
+| 270 | The cost of one exact geometric exclusion, on a uniform residue sample at a cap at or above the endpoint | open question | [H-264](hypotheses/H-264-n17-geometric-exclusion-cost-per-leaf.md) | Re-scopes `think-11ma`: a cap below the endpoint leaves sides up to the endpoint uncovered, and hand-picked leaves do not extrapolate. |
+| 271 | The certified chart endpoint is a root of the catalogue’s degree-18 polynomial | registered | [H-265](hypotheses/H-265-n17-catalogue-polynomial-identity.md) | One exact resultant closes a recorded frontier blocker; off the proof’s critical path. |
+| 272 | Capture of the endpoint’s occupancy states into the H-261 neighbourhood | shaped | — | Starts from the n11 case-438 pipeline once the radius and cover exist; must handle a 6-dimensional minimizer family. |
+| 273 | The conditional minimum over all common orientations and sides in [4.66, 4.676] | shaped | — | A grid shows the same derivative signs on the wider side range and the least side over common orientations at the root; worth proving only if capture needs a wider angle target. |
+| 274 | A reusable stress-to-local-minimum instrument for endpoints with translational sliders | shaped | — | The H-261 tool, generalised for n18, n19, n26 and n29 under OR-1. |
+| 275 | A D4-symmetric capacity-one n17 cover of at most 25 cells holding the endpoint family in one state | registered | [H-266](hypotheses/H-266-n17-minimal-capacity-one-cover.md) | The H259 grid counts like a 30-cell cover; n11 used 16 cells for 11 squares. An exploratory 24-cell design has 43,593 orbits, 177 times below the cut H259 count. |
+| 276 | Isolated sub-pattern exclusion leaves at most 10^4 orbits on the minimal cover | registered | [H-267](hypotheses/H-267-n17-isolated-sub-pattern-residue.md) | n11’s field certificates excluded 1,904 of 2,180 cases by containment; an exploratory arity-five proxy leaves 11,939 orbits on the 24-cell design. |
+| 277 | Square 6’s cover cell bounds the slides of squares 5 and 13 inside the box the local theorem certifies | registered | [H-268](hypotheses/H-268-n17-local-theorem-slider-coverage.md) | exp-244 certifies H-261 on a declared slider box; with square 6 dropped the physical slides exceed it, so capture must supply the bound. |
+
 ## Dead ends
 
 Killed without spending a round, with the reason.

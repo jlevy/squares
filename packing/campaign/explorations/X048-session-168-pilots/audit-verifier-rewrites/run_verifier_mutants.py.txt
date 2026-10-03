@@ -1,0 +1,233 @@
+"""Lane R6's mutants of the kernel verifier's new code, and what catches each.
+
+Run from packing/:
+
+    .venv/bin/python3 <this file> [--only NAME] [--skip-certs]
+
+Each mutant is one textual patch of the committed verifier, asserted to apply exactly
+once, written to a scratch copy. Against each mutant run: the differential harness
+(`audit_kernel_rewrite`), the committed kernel tests in `tests/test_verify_n17_certificates.py`
+(through `mutant_plugin`, which binds the mutant under the committed module's name), and
+the certificate mutations (`mutate_cert`) on the 8-bin W7 fixture. A verifier mutant is
+CAUGHT by a check when that check fails on it. Prints one JSON line per mutant and writes
+`verifier-mutants.json`.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PACKING = HERE.parents[3]
+COMMITTED = PACKING / "devtools" / "verify_n17_kernel_certificate.py"
+SCRATCH = Path(os.environ.get("R6_SCRATCH", "/tmp/r6-verifier-mutants"))
+PYTHON = str(PACKING / ".venv" / "bin" / "python3")
+KERNEL_TESTS = "kernel or facets or sweep or between or republished or facet_cache"
+
+# (name, what it weakens, old text, new text)
+MUTANTS: list[tuple[str, str, str, str]] = [
+    (
+        "facets-drop-core-directions",
+        "the edge merge forgets the core's edge normals: a facet subset",
+        "    for nx, ny in [*directions(partner), *negated]:",
+        "    for nx, ny in [*directions(partner)]:",
+    ),
+    (
+        "facets-core-max-not-min",
+        "the core's support taken as a max: every facet bound too large",
+        "        low_n, low_d = support(core, nx, ny, largest=False)",
+        "        low_n, low_d = support(core, nx, ny, largest=True)",
+    ),
+    (
+        "facets-support-off-by-one-vertex",
+        "the partner's support skips its first vertex",
+        "    for x, y, z in polygon:\n        value = nx * x + ny * y",
+        "    for x, y, z in polygon[1:] if largest else polygon:\n        value = nx * x + ny * y",
+    ),
+    (
+        "collision-bound-sign",
+        "the row minimum subtracted instead of added",
+        "            bound_n, bound_d = hn * md + mn * hd, hd * md",
+        "            bound_n, bound_d = hn * md - mn * hd, hd * md",
+    ),
+    (
+        "collision-first-partner-row-only",
+        "only the first live partner row is checked",
+        "        for cover in partners[pj]:\n            facets = state.difference(cover.core, core_h)",
+        "        for cover in partners[pj][:1]:\n            facets = state.difference(cover.core, core_h)",
+    ),
+    (
+        "sweep-no-mid-slab-probes",
+        "probes only at events, none inside the open slabs",
+        "        probes.extend((between(a, b), b))",
+        "        probes.extend((b,))",
+    ),
+    (
+        "sweep-no-crossing-events",
+        "edge crossings are not events",
+        "            if det == 0:\n                continue",
+        "            if det == 0 or True:\n                continue",
+    ),
+    (
+        "sweep-ended-edges-stay-live",
+        "an edge whose x range has ended keeps contributing its ordinate",
+        "        while ended < len(ends) and ratio_lt(edges[ends[ended]].hi, probe):",
+        "        while ended < len(ends) and False and ratio_lt(edges[ends[ended]].hi, probe):",
+    ),
+    (
+        "sweep-edges-live-early",
+        "an edge is live before its x range starts",
+        "        while started < len(starts) and not ratio_lt(probe, edges[starts[started]].lo):",
+        "        while started < len(starts):",
+    ),
+    (
+        "sweep-verticals-ignored",
+        "vertical edges contribute no section",
+        "        for polygon, low, high in verticals.get(probe, ()):\n            sections[polygon] = _widen(sections.get(polygon), low, high)",
+        "        for polygon, low, high in ():\n            sections[polygon] = _widen(sections.get(polygon), low, high)",
+    ),
+    (
+        "section-gap-ignored",
+        "a gap before a span's lower end does not refuse",
+        "        if ratio_lt(cursor, span_low):\n            return False",
+        "        if ratio_lt(cursor, span_low):\n            pass",
+    ),
+    (
+        "section-end-ignored",
+        "the merge may stop short of the target's upper end",
+        "    return not ratio_lt(cursor, high)",
+        "    return True",
+    ),
+    (
+        "section-open-merge",
+        "spans that only touch are merged as if they overlapped by a point less",
+        "        if ratio_lt(cursor, span_high):\n            cursor = span_high",
+        "        if ratio_lt(cursor, span_high):\n            cursor = (span_high[0] + span_high[1], span_high[1])",
+    ),
+    (
+        "between-returns-endpoint",
+        "the slab probe is the slab's left event",
+        "    an, ad = a\n    bn, bd = b\n    whole = an // ad",
+        "    return a\n    an, ad = a\n    bn, bd = b\n    whole = an // ad",
+    ),
+    (
+        "cache-facets-key-partner-only",
+        "the facet memo ignores the owner's core",
+        "        found = self.facets.get((partner, core))\n        if found is None:\n            found = self.facets[(partner, core)] = difference_facets(partner, core)",
+        "        found = self.facets.get((partner, ()))\n        if found is None:\n            found = self.facets[(partner, ())] = difference_facets(partner, core)",
+    ),
+    (
+        "cache-forbidden-key-hull-only",
+        "the forbidden-region memo ignores the core",
+        "        key = (tuple(group), tuple(core))",
+        "        key = (tuple(group), ())",
+    ),
+    (
+        "cache-cover-ignores-core",
+        "a republished cover is reused whenever its domain matches",
+        "                or cover.domain_given != item[\"domain\"]\n                or cover.core_given != item[\"core\"]",
+        "                or cover.domain_given != item[\"domain\"]",
+    ),
+    (
+        "cache-cover-ignores-domain",
+        "a republished cover is reused whenever its core matches",
+        "                or cover.domain_given != item[\"domain\"]\n                or cover.core_given != item[\"core\"]",
+        "                or cover.core_given != item[\"core\"]",
+    ),
+    (
+        "cache-cover-survives-restep",
+        "a partner's new rows inherit the old rows' admitted covers",
+        "        new_rows.append(Row((lo, hi), row[\"reference\"], outer, residual))",
+        "        new_rows.append(Row((lo, hi), row[\"reference\"], outer, residual, prior.cover))",
+    ),
+    (
+        "cache-minimum-key-nx-only",
+        "the row-minimum memo keys on the normal's x component alone",
+        "        found = self.minima.get((nx, ny))\n        if found is None:\n            found = self.minima[(nx, ny)] = support(self.domain, nx, ny, largest=False)",
+        "        found = self.minima.get((nx, 0))\n        if found is None:\n            found = self.minima[(nx, 0)] = support(self.domain, nx, ny, largest=False)",
+    ),
+    (
+        "homogeneous-wrong-scale",
+        "a point's homogeneous form scales x by the wrong factor",
+        "    return x.numerator * (z // x.denominator), y.numerator * (z // y.denominator), z",
+        "    return x.numerator * (z // y.denominator), y.numerator * (z // y.denominator), z",
+    ),
+]
+
+
+def run(command: list[str], env: dict[str, str] | None = None, timeout: int = 1200) -> tuple[int, str]:
+    completed = subprocess.run(
+        command, cwd=PACKING, capture_output=True, text=True, check=False, timeout=timeout,
+        env={**os.environ, **(env or {})},
+    )
+    return completed.returncode, completed.stdout + completed.stderr
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--only", default=None)
+    parser.add_argument("--skip-certs", action="store_true")
+    parser.add_argument("--skip-tests", action="store_true")
+    parser.add_argument("--skip-harness", action="store_true")
+    parser.add_argument(
+        "--whole-file", action="store_true", help="run every test of the file, not the -k subset"
+    )
+    args = parser.parse_args()
+    select = [] if args.whole_file else ["-k", KERNEL_TESTS]
+    SCRATCH.mkdir(parents=True, exist_ok=True)
+    plugin_dir = SCRATCH / "plugin"
+    plugin_dir.mkdir(exist_ok=True)
+    shutil.copy(HERE / "mutant_plugin.py.txt", plugin_dir / "mutant_plugin.py")
+    source = COMMITTED.read_text()
+    results = []
+    for name, weakens, old, new in MUTANTS:
+        if args.only and not any(part in name for part in args.only.split(",")):
+            continue
+        assert source.count(old) == 1, (name, source.count(old))
+        mutant = SCRATCH / f"{name}.py"
+        mutant.write_text(source.replace(old, new))
+        clock = time.perf_counter()
+        record = {"mutant": name, "weakens": weakens}
+        if not args.skip_harness:
+            code, out = run([PYTHON, str(HERE / "audit_kernel_rewrite.py.txt"), "--module", str(mutant), "--trials", "120", "--seed", "2026"])
+            record["harness"] = "CAUGHT" if code != 0 else "missed"
+            record["harness_note"] = next((line for line in out.splitlines() if '"disagreements": [' in line and '"disagreements": []' not in line), "")[:200]
+        if not args.skip_tests:
+            code, out = run(
+                [PYTHON, "-m", "pytest", "tests/test_verify_n17_certificates.py", *select, "-p", "mutant_plugin", "-p", "no:cacheprovider", "-q", "--no-header"],
+                env={"R6_MUTANT": str(mutant), "PYTHONPATH": f"{plugin_dir}:{PACKING}"},
+            )
+            record["tests"] = "CAUGHT" if code != 0 else "missed"
+            record["tests_failed"] = [line.split("::", 1)[1].split(" - ")[0] for line in out.splitlines() if line.startswith("FAILED")]
+            record["tests_summary"] = next((line.strip() for line in out.splitlines() if " passed" in line or " failed" in line), "")[:120]
+        if not args.skip_certs:
+            code, out = run(
+                [PYTHON, str(HERE / "mutate_cert.py.txt"), str(HERE / "fixture-w7-bins8"), "--module", str(mutant)],
+                env={"PYTHONPATH": str(PACKING)},
+            )
+            lines = [json.loads(line) for line in out.splitlines() if line.startswith("{")]
+            summary = lines[-1] if lines and "accepted_unsound" in lines[-1] else {}
+            unmutated = next((line for line in lines if line.get("mutation") == "(unmutated)"), {})
+            if unmutated.get("verdict") != "ACCEPTED":
+                record["certs"] = "CAUGHT (refuses the sound fixture)"
+                record["certs_note"] = unmutated.get("message", "")[:160]
+            else:
+                accepted = summary.get("accepted_unsound", [])
+                record["certs"] = "CAUGHT" if accepted else "missed"
+                record["certs_note"] = ", ".join(accepted)[:200]
+        record["seconds"] = round(time.perf_counter() - clock, 1)
+        results.append(record)
+        print(json.dumps(record), flush=True)
+    (HERE / "verifier-mutants.json").write_text(json.dumps(results, indent=1) + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,8 +1,13 @@
 """Verify retained, target-free three-profile calibration run-set evidence.
 
 The source-distinct reader owns scientific checks. This module binds its three
-accepted proofs to the coordinator, preserves the run root, and checks the Git
-source closure before evidence is committed.
+accepted proofs to the coordinator, preserves the run root, and checks that every
+receipt's source manifest names the execution revision's import closure.
+
+The run set is a fact about that revision. What has changed in its source closure
+since -- code, `pyproject.toml`, `uv.lock` or `.python-version` -- is reported as
+`drift` for whoever commits the evidence, and is never a reason to refuse it or to
+run the profiles again (development.md, Hashes and Repository-Owned Artifacts).
 """
 
 from __future__ import annotations
@@ -28,7 +33,7 @@ from typing import Never, cast
 INVENTORY_SCHEMA = "fixed-core-calibration-run-root-inventory/v1"
 COMMAND_SCHEMA = "fixed-core-calibration-source-distinct-command/v1"
 ADMISSION_SCHEMA = "fixed-core-calibration-run-set-reader-admission/v1"
-CLOSURE_SCHEMA = "fixed-core-calibration-source-closure-check/v1"
+CLOSURE_SCHEMA = "fixed-core-calibration-source-closure-check/v2"
 SUMMARY_SCHEMA = "fixed-core-calibration-three-profile-summary/v1"
 READER_SCHEMA = "fixed-core-calibration-source-distinct-readback/v1"
 RUN_ORDERS = (1, 2, 3)
@@ -1042,7 +1047,14 @@ def verify_source_closure(
     execution_revision: str,
     candidate_tree: str,
 ) -> dict[str, object]:
-    """Compare every receipt source with execution, candidate, and working bytes."""
+    """Check the three receipts name one source closure; report candidate drift.
+
+    The manifests must agree with each other and name exactly the execution
+    revision's import closure. Their blob ids and digests are the runs' own record and
+    are kept, not compared. Paths whose mode or blob differ between that revision's
+    closure and `candidate_tree`'s, or that only one closure holds, are returned as
+    `drift`: information for the evidence commit, never a refusal.
+    """
     repository = _canonical_dir(repository, "repository")
     run_root, review_root = _roots(run_root, review_root)
     revision = _revision(execution_revision, "execution revision")
@@ -1059,6 +1071,8 @@ def verify_source_closure(
         _git(repository, "rev-parse", "--verify", f"{candidate_tree}^{{tree}}").strip().decode()
     )
     _revision(candidate_oid, "candidate tree object")
+    # These name the tree the evidence is committed as; they check the arguments, not
+    # what changed since execution, which `drift` reports below.
     candidate_kind = _git(repository, "cat-file", "-t", candidate_tree).strip()
     if candidate_kind == b"commit":
         if _git(repository, "rev-parse", "HEAD").strip().decode() != candidate_tree:
@@ -1072,8 +1086,6 @@ def verify_source_closure(
     candidate_entries = _tree(repository, candidate_oid)
     execution_paths = _closure(repository, execution_entries)
     candidate_paths = _closure(repository, candidate_entries)
-    if execution_paths != candidate_paths:
-        _refuse("candidate source import closure adds or removes paths")
     _, _, summary_runs = _summary(run_root, revision)
     manifests: list[list[dict[str, object]]] = []
     for order in RUN_ORDERS:
@@ -1107,31 +1119,19 @@ def verify_source_closure(
         manifests.append(manifest)
     if manifests[0] != manifests[1] or manifests[0] != manifests[2]:
         _refuse("three profile source manifests disagree")
-    for row in manifests[0]:
-        path = cast(str, row["path"])
-        execution_mode, execution_blob = execution_entries[path]
-        candidate_mode, candidate_blob = candidate_entries[path]
-        if (
-            execution_mode not in ("100644", "100755")
-            or (candidate_mode, candidate_blob) != (execution_mode, execution_blob)
-            or row["git_blob"] != execution_blob
-        ):
-            _refuse(f"source mode or blob differs: {path}")
-        data = _git(repository, "cat-file", "blob", execution_blob)
-        working = repository / path
-        if working != working.resolve(strict=True):
-            _refuse(f"working source traverses a link: {path}")
-        mode = working.lstat().st_mode
-        if bool(mode & 0o111) != (execution_mode == "100755"):
-            _refuse(f"working source mode differs: {path}")
-        if row["sha256"] != _sha(data) or _regular_bytes(working, "working source") != data:
-            _refuse(f"source bytes differ: {path}")
+    drift = sorted(
+        path
+        for path in {*execution_paths, *candidate_paths}
+        if execution_entries.get(path) != candidate_entries.get(path)
+        or (path in execution_paths) != (path in candidate_paths)
+    )
     return {
         "schema": CLOSURE_SCHEMA,
         "status": "accepted",
         "execution_revision": revision,
         "candidate_tree": candidate_oid,
         "sources": manifests[0],
+        "drift": drift,
     }
 
 

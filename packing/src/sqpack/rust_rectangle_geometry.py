@@ -90,11 +90,15 @@ class RustRectangleGeometry:
         self._buffer = bytearray()
         self._process: subprocess.Popen[bytes] | None = None
         self._snapshot: tempfile.TemporaryDirectory[str] | None = None
-        self._binary = binary.resolve(strict=True)
-        with self._binary.open("rb") as source_file:
+        with binary.resolve(strict=True).open("rb") as source_file:
             source = source_file.read(MAX_BINARY_BYTES + 1)
         if not source or len(source) > MAX_BINARY_BYTES:
             raise RustGeometryError("Rust binary is empty or exceeds the byte limit")
+        # The bytes read here are the bytes that run: they are written once into a
+        # private snapshot and the child is started from it, so a rebuild of `binary`
+        # mid-run cannot reach this verification. The binary is a build product with no
+        # Git revision, so this digest is its name in the report (a cache identity,
+        # OR-16), recorded and never compared.
         self.binary_sha256 = hashlib.sha256(source).hexdigest()
         opening = _encode(
             {
@@ -118,8 +122,6 @@ class RustRectangleGeometry:
             executable = Path(self._snapshot.name) / "sqverify-exact"
             executable.write_bytes(source)
             executable.chmod(0o700)
-            if hashlib.sha256(executable.read_bytes()).hexdigest() != self.binary_sha256:
-                _fail("Rust binary snapshot changed during copy")
             self._process = subprocess.Popen(
                 [str(executable), "--serve"],
                 stdin=subprocess.PIPE,
@@ -315,10 +317,6 @@ class RustRectangleGeometry:
                 ) from wait_error
             if process.returncode != 0:
                 raise RustGeometryError("Rust process exited unsuccessfully")
-            with self._binary.open("rb") as source_file:
-                source = source_file.read(MAX_BINARY_BYTES + 1)
-            if hashlib.sha256(source).hexdigest() != self.binary_sha256:
-                raise RustGeometryError("Rust binary source changed during verification")
             self._check_deadline()
         finally:
             self._stop(force=True)

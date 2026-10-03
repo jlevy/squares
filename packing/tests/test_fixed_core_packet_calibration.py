@@ -30,6 +30,7 @@ from devtools.dilation_corollary import (
     build_limit_record,
 )
 from devtools.fixed_core_packet import (
+    RUNTIME_ATTESTATION_SCOPE,
     PacketError,
     RawMinimum,
     WorkerTaskObservation,
@@ -779,6 +780,67 @@ def test_receipt_parser_refuses_duplicate_keys(tmp_path: Path) -> None:
             output,
             repository=REPOSITORY,
             expected_revision=REVISION,
+        )
+
+
+def test_readback_takes_the_recorded_runtime_as_history(tmp_path: Path) -> None:
+    """A dependency or interpreter change never invalidates a retained receipt.
+
+    The readback never consults the current runtime, so a receipt whose recorded
+    runtime differs from today's reads back unchanged; a malformed runtime record is
+    still refused.
+    """
+    output = tmp_path / "another-runtime"
+    output.mkdir()
+    document = _seed(output)
+    manifest = [
+        {
+            "path": calibration.FIXTURE_PATH,
+            "git_blob": "b" * 40,
+            "sha256": calibration.FIXTURE_SHA256,
+        }
+    ]
+    recorded: dict[str, object] = {
+        "python": {
+            "implementation": "cpython",
+            "version": "3.14.6",
+            "abi": "cpython-314-recorded",
+            "gil_enabled": True,
+            "environment": "/elsewhere/packing/.venv",
+            "executable": "/elsewhere/packing/.venv/bin/python",
+            "resolved_executable": "/elsewhere/python3.14",
+            "build": "3.14.6 recorded build",
+        },
+        "packages": {"numpy": "2.4.0", "strif": "3.0.0"},
+        "attestation_scope": RUNTIME_ATTESTATION_SCOPE,
+    }
+    sources = cast(dict[str, object], document["sources"])
+    sources.update(manifest=manifest, runtime=recorded)
+    calibration.write_result(output, document)
+    not_consulted = AssertionError("readback consulted the current runtime")
+    with (
+        patch.object(calibration, "source_manifest", return_value=manifest),
+        patch.object(calibration, "runtime_binding", side_effect=not_consulted),
+    ):
+        readback = calibration.load_result(
+            output,
+            repository=REPOSITORY,
+            expected_revision=REVISION,
+            require_supervision=False,
+        )
+    assert cast(dict[str, object], readback["sources"])["runtime"] == recorded
+
+    sources["runtime"] = {**recorded, "packages": {"numpy": "2.4.0"}}
+    calibration.write_result(output, document)
+    with (
+        patch.object(calibration, "source_manifest", return_value=manifest),
+        pytest.raises(PacketError, match="runtime package identities are malformed"),
+    ):
+        calibration.load_result(
+            output,
+            repository=REPOSITORY,
+            expected_revision=REVISION,
+            require_supervision=False,
         )
 
 

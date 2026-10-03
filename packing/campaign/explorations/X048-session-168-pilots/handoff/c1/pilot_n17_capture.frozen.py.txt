@@ -1,0 +1,1820 @@
+"""Slice 3's capture pilot: the n17 endpoint's own occupancy state at a cap near `S*`.
+
+The question is the capture-feasibility review's: does n11's ownership induction
+contract the endpoint's occupancy state toward the H256 family, and how fast? Per round
+(one update of every contracting owner) this tool measures what the kernel adaptation
+spec's section 4.5 asks for, and it stops at a wall ceiling, at a round cap, at the
+guard, or at a stall. It claims no capture: no guard is part of the checker's grammar,
+and a node without closure excludes nothing.
+
+The seed. The seventeen cells of the endpoint's state on the unique-state cover
+`ring-3-voronoi-8-tabbed-unique`, read in the composition review's frame A: the cells in
+the cover frame `[0, U]^2`, `U = 1169/250`, and the family embedded with its lower-left
+corner at `(sigma, sigma)`, `sigma = (U - S*)/2`, which is how `cover.endpoint` places
+it. The capture cap `U'` is the exp-238 root box's enclosure of
+`S* = (6 + 4t)/(1 + 2t - t^2)` rounded up to the `10^-12` grid, so
+`0 < U' - S* <= 10^-12`. The frame keeps the cells and sets `capture_cap = U'`, so every
+wall clip is the centred box `[(U - U')/2 + h, (U + U')/2 - h]`, which holds every
+packing of side at most `S*` placed with its corner at `(sigma, sigma)`.
+`--cap exclusion` runs the same seed at `U` itself: the control that must not contract
+below the first-order blob of feasible packings above `S*` (spec section 4.1).
+
+Owners. Every cell of the state owns one square; square 6 (`side-S2`) is coarse: its
+seed rows stay as they are, it is never updated, and it still serves as a collision
+partner and its owned hull still forbids. The sliders are not premises: H-268's bounds
+hold only for packings already within `r` of the family, so using them as root
+halfplanes would be circular, and the sequential grammar refuses constraints anyway.
+They are measured instead, in the guard's own coordinates.
+
+The rounds. `sqpack.hull_kernel.producer` builds the seed and every row
+(`produce_row`, with collision regions from other owners' complete pose covers and owned
+hulls capped in replace mode, as `producer.produce` does). The one thing capture needs
+that the producer lacks is angle refinement: before an owner's update, every live row is
+bisected in the half-angle chart while the owner stays within `max_live` live rows (the
+widest first when it would not), and no row narrower than `min_width`. Every child
+cites its parent row, which is the refinement the sequential grammar already admits
+(`sequential.complete_refinement`). The rest are producer choices, none new to the
+grammar:
+
+* `--core octagon` (the default since the second pilot) makes each row's core the
+  intersection of its two end-angle squares, scaled by `1 - (hi - lo)^2/2` into every
+  square between and passed through `strict_core`; its loss is second order in the row
+  width where the envelope square's (`--core envelope`, the first pilot's) is first;
+* `--hull-limit` caps owned hulls (48 by default, 16 in the first pilot, 0 for none),
+  and each step records the area the cap dropped;
+* `--seed-grid N` adds to the producer's seed points the proved hull vertices of a `1/N`
+  grid search for owned points (`admit_seed` re-proves every one);
+* a step offers a partner's cover only when its pose set comes within `3B/2` of the
+  owner's domain in both coordinates, and names only the covers its collision regions
+  use, since the checker re-proves every core of every cover it is given.
+
+Certification. Each step is certified before the next is produced, by the sequential
+checker's own functions in `replay_sequential`'s order (`complete_refinement`,
+`admit_partner_covers`, `check_row` with the indexed cover, the kernel planes,
+compression and `derived_closure`); the producer's next step starts from the checker's
+accepted state, and the two states must agree exactly. With `--replay-share F` the whole
+node is then replayed by `sequential.replay_sequential` from the seed admitted by
+`node.admit_seed`, which is the certificate.
+
+The endpoint control. After every certified update, the endpoint's exact pose (centre
+and chart value as exp-238 root-box intervals; an axis square at `t = 0` or `t = 1`) must
+lie in some live row of every owner: its chart interval inside the row's and every
+corner of its centre box in one residual polygon. A loss is a soundness failure and
+stops the run.
+
+The sub-case. The cell seed stalls at the cell scale, so `--box RHO` measures `g` below
+it: every owner but square 6 has its cell cut to its guard polygon of section 4.2 widened
+by `RHO` (a box, long in the slide for squares 5, 11 and 13). That is a sub-case of the
+state, what position splits would hand the engine, and nothing it measures is a capture
+of the state.
+
+The n11 control. `--system n11` runs the same producer on n11's case-438 state from its
+sixteen-cell cover's cells, at n11's cap, with the trump11 optimum as the endpoint (the
+pose-inclusion receipt's roles, the construction's centres carried into the source frame
+by the inverse of its quarter-turn map). Every owner contracts and nothing slides. The
+capture after-pilot review uses it to calibrate its pairwise model against the real
+kernel: n11's record contracted at about `g = 0.84`, the model at `0.50`.
+
+The measurements are floating-point summaries of exact objects, in unit coordinates: per
+owner, the residual union's low and high sides relative to the endpoint in the target
+coordinates of section 4.2 (`x, y` or, for squares 11 and 13, `u* . dc` and the slide
+`v* . dc`; for square 5, `y` and the slide `a = x* - x`), their largest magnitude, the
+two-sided extent, the live rows' signed and largest turn deviations in radians, and the
+widest live row in radians over the owner's largest two-sided position extent. The
+contraction factor `g` is the ratio to the previous round, on the two-sided extent and on
+each side separately. The after-pilot review's falsifier is read every round: three
+rounds in a row with every contracting owner's widest live row under a twentieth of its
+position extent and no two-sided position extent down by a tenth means the architecture
+is wrong; otherwise the run records the round positions start contracting, the ratio at
+which they did, and `g` after it.
+"""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import itertools
+import json
+import math
+import sys
+import time
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass, field, replace
+from fractions import Fraction as Q
+from pathlib import Path
+from typing import Any
+
+from cases.trump11 import packing as trump11
+from devtools import check_hull_kernel_mask0 as mask0_tool
+from devtools import check_n11_optimality_pose_inclusion as pose_tool
+from devtools import check_n17_capacity_one_cover as cover
+from devtools import check_n17_slider_coverage as slider_tool
+from devtools.check_n17_endpoint_feasibility import THETA_LABELS, Box
+from sqpack.hull_kernel import n11, node, producer, sequential
+from sqpack.hull_kernel.covers import convex_halfplanes
+from sqpack.hull_kernel.frame import Frame, make_frame
+from sqpack.hull_kernel.geometry import (
+    Budget,
+    IncompleteError,
+    Point,
+    Polygon,
+    RefusalError,
+    area2,
+    intersect,
+    require,
+    trig,
+)
+from sqpack.hull_kernel.induction import encode, hull, same, strict_core
+from sqpack.hull_kernel.ownership import ownership
+
+TOOL_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+KERNEL_DIR = Path(producer.__file__).resolve().parent
+KERNEL_SHA256 = {
+    path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+    for path in sorted(KERNEL_DIR.glob("*.py"))
+}
+SCHEMA = "n17-capture-pilot/v1"
+RADIUS = Q(1, 5000)
+CAP_GRID = 10**12
+MAX_EVENTS = 200_000
+SCALES = (1e-2, 1e-3, 3e-4, 2e-4)
+BLOB_FLOOR = 1e-2
+SIX = 6
+# Slider coordinates and their guard ranges (spec section 4.2, with B_W' from the
+# composition review for b): label -> (slide name, low, high).
+SLIDES = {
+    5: ("a", Q(0), Q(1, 4)),
+    11: ("b", Q(-1, 2500), Q(1, 12)),
+    13: ("z", Q(-1, 8), Q(1, 16)),
+}
+QUARTER = math.pi / 2
+BOX_GRID = 2**30
+REPO = Path(__file__).resolve().parents[2]
+N11_MASK_INDEX = 438
+N11_COVER_SHA = "df7938d9ba27095a38fabe45f8b26b259a2cc896c2ae4aac6bae874f417adc4e"
+N11_POSE_RECEIPT = (
+    REPO / "packing/resources/web/n11-optimality-2026-09-29/receipts/pose-inclusion/result.json"
+)
+# The review's falsifier: rows under a twentieth of the extent, no extent down by a tenth.
+FINE_ROWS = 1 / 20
+MODEL_THRESHOLD = 1 / 10
+EXTENT_DROP = 0.9
+FALSIFIER_ROUNDS = 3
+
+
+@dataclass(frozen=True)
+class Target:
+    """One square of the endpoint: its owner cell, exact pose enclosure and turn."""
+
+    label: int
+    owner: int
+    cell: str
+    centre: tuple[Box, Box]
+    charts: tuple[tuple[Q, Q], ...]
+    turn: float
+
+    @property
+    def approx(self) -> tuple[float, float]:
+        return float((self.centre[0].lo + self.centre[0].hi) / 2), float(
+            (self.centre[1].lo + self.centre[1].hi) / 2
+        )
+
+
+@dataclass(frozen=True)
+class Endpoint:
+    """The endpoint's state, its side and the capture cap, with centres in field units.
+
+    For n17 these come from the exp-238 root box, the scale is one, squares 5, 11 and 13
+    slide and square 6 is coarse; for the n11 control (`load_n11_endpoint`) the scale is
+    n11's `B`, nothing slides and every owner contracts.
+    """
+
+    targets: tuple[Target, ...]
+    side: Box
+    capture_cap: Q
+    u: tuple[float, float]
+    v: tuple[float, float]
+    provenance: dict[str, Any]
+    system: str = "n17"
+    scale: Q = Q(1)
+    slides: Mapping[int, tuple[str, Q, Q]] = field(default_factory=lambda: dict(SLIDES))
+    coarse: int | None = SIX
+
+    def by_owner(self) -> dict[int, Target]:
+        return {target.owner: target for target in self.targets}
+
+
+def chart_turn(t: float) -> float:
+    """The turn `2 atan t`, in `[0, pi/2]`."""
+    return 2 * math.atan(t)
+
+
+def load_endpoint(frame: Frame) -> Endpoint:
+    """The endpoint's cells, poses and `U'`, each label's cell checked against the frame."""
+    t_box, b_box, provenance = cover.load_root_box(cover.CERTIFICATE)
+    require(provenance["criterion_passed"], "the exp-238 root certificate did not pass")
+    point = cover.endpoint(t_box, b_box)
+    side = Box.point(cover.U) - point.shift * 2
+    direct = (Box.point(6) + t_box * 4) / (Box.point(1) + t_box * 2 - t_box * t_box)
+    require(direct.lo <= side.hi and side.lo <= direct.hi, "S* differs from the layout's side")
+    upper = max(side.hi, direct.hi)
+    capture_cap = Q(math.ceil(upper * CAP_GRID), CAP_GRID)
+    require(0 < capture_cap - side.hi <= Q(1, CAP_GRID), "U' is not within 10^-12 of S*")
+    state = slider_tool.endpoint_state(cover.UNIQUE_24.name)
+    require(sorted(state) == list(range(1, 18)), "the endpoint state does not label 17 squares")
+    t16 = (
+        (1 - b_box.hi) / (1 + b_box.hi),
+        (1 - b_box.lo) / (1 + b_box.lo),
+    )
+    targets: list[Target] = []
+    for label in range(1, 18):
+        name = state[label].name
+        require(name in frame.cell_names, f"cell {name} is not in the frame")
+        owner = frame.cell_names.index(name)
+        require(
+            list(frame.cells[owner]) == list(state[label].vertices),
+            f"cell {name} differs from the cover tool's",
+        )
+        if label in THETA_LABELS:
+            charts: tuple[tuple[Q, Q], ...] = ((t_box.lo, t_box.hi),)
+        elif label == 16:
+            charts = (t16,)
+        else:
+            charts = ((Q(0), Q(0)), (Q(1), Q(1)))
+        turn = chart_turn(float((charts[0][0] + charts[0][1]) / 2)) % QUARTER
+        x, y = point.centres[label - 1]
+        targets.append(Target(label, owner, name, (x, y), charts, turn))
+    require(len({target.owner for target in targets}) == 17, "two squares share an owner cell")
+    c, s = float(point.aux["c"].lo), float(point.aux["s"].lo)
+    vx, vy = (float((box.lo + box.hi) / 2) for box in point.v)
+    require(abs(c * vx + s * vy) < 1e-12, "u* and v* are not orthogonal")
+    return Endpoint(
+        targets=tuple(targets),
+        side=side,
+        capture_cap=capture_cap,
+        u=(c, s),
+        v=(vx, vy),
+        provenance={
+            **provenance,
+            "s_star": [str(side.lo), str(side.hi)],
+            "s_star_decimal": f"{float(side.lo):.15f}",
+            "sigma": f"{float(point.shift.lo):.15e}",
+            "capture_cap": str(capture_cap),
+            "capture_cap_minus_s_star": [
+                f"{float(capture_cap - side.hi):.6e}",
+                f"{float(capture_cap - side.lo):.6e}",
+            ],
+        },
+    )
+
+
+def n11_frame() -> Frame:
+    """n11's frame from its pinned cover, admitted by the frozen mask-0 checker."""
+    _, _, cover_object = mask0_tool.load_sources()
+    return n11.frame_from_cover(cover_object, provenance=f"n11 cover {N11_COVER_SHA}")
+
+
+def load_n11_endpoint(frame: Frame) -> Endpoint:
+    """n11's optimum in case 438's frame: the contraction control's endpoint.
+
+    The labels' cells are the accepted pose-inclusion receipt's roles; the centres are the
+    trump11 construction's, enclosed over its root interval, carried into the source frame
+    by the inverse of the receipt's map `(x_f, y_f) -> (y_f/B - U/2, U/2 - x_f/B)`, which is
+    a quarter turn and so keeps every chart value: labels 0 to 5 at `t = 0` (or 1), labels
+    6 to 10 at the root `u`.
+    """
+    require(list(frame.representatives[N11_MASK_INDEX]) == pose_tool.MASK, "case 438's mask")
+    receipt = json.loads(N11_POSE_RECEIPT.read_bytes())
+    require(receipt.get("status") == "PASS_POSE_INCLUSION", "the pose-inclusion receipt")
+    roles = {entry["label"]: entry["owner"] for entry in receipt["owners"]}
+    require(sorted(roles) == list(range(11)), "the receipt's roles are not eleven labels")
+    require(sorted(roles.values()) == pose_tool.MASK, "the roles are not case 438's cells")
+    root_lo, root_hi, _ = pose_tool.root_interval()
+    squares, side, _ = trump11.build()
+    side_lo, side_hi = pose_tool.field_interval(side, root_lo, root_hi)
+    require(0 < side_lo <= side_hi < frame.cap, "the construction does not fit the cap")
+    scale, cap = frame.scale, frame.cap
+    targets: list[Target] = []
+    for label in range(11):
+        cx, cy = (
+            pose_tool.field_interval(
+                (squares[label][0][k] + squares[label][2][k]) / 2 - side / 2, root_lo, root_hi
+            )
+            for k in (0, 1)
+        )
+        centre = (
+            Box(scale * (cap / 2 - cy[1]), scale * (cap / 2 - cy[0])),
+            Box(scale * (cap / 2 + cx[0]), scale * (cap / 2 + cx[1])),
+        )
+        charts: tuple[tuple[Q, Q], ...] = (
+            ((Q(0), Q(0)), (Q(1), Q(1))) if label < 6 else ((root_lo, root_hi),)
+        )
+        turn = 0.0 if label < 6 else chart_turn(float((root_lo + root_hi) / 2))
+        owner = roles[label]
+        targets.append(Target(label, owner, frame.cell_names[owner], centre, charts, turn))
+    return Endpoint(
+        targets=tuple(targets),
+        side=Box(side_lo, side_hi),
+        capture_cap=cap,
+        u=(1.0, 0.0),
+        v=(0.0, 1.0),
+        provenance={
+            "pose_inclusion_receipt": str(N11_POSE_RECEIPT.relative_to(REPO)),
+            "pose_inclusion_sha256": hashlib.sha256(N11_POSE_RECEIPT.read_bytes()).hexdigest(),
+            "mask_index": N11_MASK_INDEX,
+            "root_interval_width": f"{float(root_hi - root_lo):.3e}",
+            "cap_minus_side": f"{float(cap - side_hi):.3e}",
+        },
+        system="n11",
+        scale=scale,
+        slides={},
+        coarse=None,
+    )
+
+
+def octagon_core(frame: Frame, lo: Q, hi: Q) -> Polygon:
+    """The row's two end-angle squares intersected, shrunk into every square between.
+
+    A point inside the squares at turns `a` and `b` lies within `h / cos((b - a)/2)` of
+    the centre along every face normal at a turn between, so the octagon scaled by
+    `cos((b - a)/2) >= 1 - (hi - lo)^2/2` (the turn moves at most twice as fast as `t`)
+    is inside every square of the row; the core slack makes it strict, and
+    `strict_core` decides. The loss is second order in the row width, where the
+    envelope square's is first order.
+    """
+    half = frame.scale / 2
+    c0, s0 = trig(lo)
+    c1, s1 = trig(hi)
+    region: Polygon = [
+        (c0 * u - s0 * v, s0 * u + c0 * v)
+        for u, v in ((half, half), (-half, half), (-half, -half), (half, -half))
+    ]
+    region = intersect(
+        region,
+        [(c1, s1, half), (-c1, -s1, half), (-s1, c1, half), (s1, -c1, half)],
+    )
+    width = hi - lo
+    factor = 1 - width * width / 2 - frame.core_slack / frame.scale
+    for _ in range(16):
+        core = hull([(factor * x, factor * y) for x, y in region])
+        try:
+            strict_core(frame, core, lo, hi)
+        except RefusalError:
+            factor *= 1 - max(width * width, Q(1, 2**20))
+            continue
+        return core
+    raise RefusalError("no octagon core is strictly inside the row")
+
+
+def fill_core(frame: Frame, lo: Q, hi: Q, cores: dict[tuple[Q, Q], Polygon], kind: str) -> None:
+    """Cache the row's core where `producer.cached_core` will find it."""
+    if (lo, hi) not in cores:
+        cores[(lo, hi)] = (
+            octagon_core(frame, lo, hi)
+            if kind == "octagon"
+            else producer.envelope_core(frame, lo, hi)
+        )
+
+
+def capture_frame(capture_cap: Q | None) -> Frame:
+    """The unique-state frame, with the capture cap's centred walls when one is given."""
+    base = mask0_tool.n17_unique_frame()
+    if capture_cap is None:
+        return base
+    return make_frame(
+        name=f"{base.name}-capture",
+        cap=base.cap,
+        length=base.length,
+        cells=base.cells,
+        cell_names=base.cell_names,
+        occupancy=base.occupancy,
+        action_names=[action.name for action in base.actions],
+        core_slack=base.core_slack,
+        provenance=base.provenance,
+        capture_cap=capture_cap,
+    )
+
+
+def neighbourhood(target: Target, rho: Q, u: tuple[Q, Q]) -> Polygon:
+    """The guard polygon of section 4.2 widened by `rho`: a box, or for squares 5, 11 and
+    13 a box or parallelogram long in the slide; square 6 gets none (its whole cell)."""
+    cx = Q(round((target.centre[0].lo + target.centre[0].hi) / 2 * BOX_GRID), BOX_GRID)
+    cy = Q(round((target.centre[1].lo + target.centre[1].hi) / 2 * BOX_GRID), BOX_GRID)
+    if target.label in (11, 13):
+        _, low, high = SLIDES[target.label]
+        if target.label == 11:  # b = -v.dc, so v.dc runs over [-high, -low]
+            low, high = -high, -low
+        vx, vy = -u[1], u[0]
+        return hull(
+            [
+                (cx + a * u[0] + b * vx, cy + a * u[1] + b * vy)
+                for a in (-rho, rho)
+                for b in (low - rho, high + rho)
+            ]
+        )
+    left = cx - SLIDES[5][2] - rho if target.label == 5 else cx - rho
+    return hull([(x, y) for x in (left, cx + rho) for y in (cy - rho, cy + rho)])
+
+
+def box_frame(base: Frame, endpoint: Endpoint, rho: Q) -> tuple[Frame, Endpoint]:
+    """A sub-case of the state: each owner's cell cut to its widened guard polygon.
+
+    What position splits would hand the engine: every packing of the state whose squares
+    other than 6 lie in these polygons, at any turn. It is a sub-case, not the state, so
+    nothing it measures is a capture of the state; it measures `g` below the cell scale.
+    The frame has the identity as its only symmetry, and the owners are renumbered in
+    cell order.
+    """
+    t_q = Q(round(Q(endpoint.provenance["t_box"][0]) * BOX_GRID), BOX_GRID)
+    u = ((1 - t_q * t_q) / (1 + t_q * t_q), 2 * t_q / (1 + t_q * t_q))
+    ordered = sorted(endpoint.targets, key=lambda item: item.owner)
+    cells: list[Polygon] = []
+    for target in ordered:
+        cell = base.cell(target.owner)
+        if target.label != SIX:
+            cell = hull(intersect(cell, convex_halfplanes(neighbourhood(target, rho, u))))
+        require(len(cell) >= 3, f"square {target.label}: its cut cell is empty")
+        cells.append(cell)
+    frame = make_frame(
+        name=f"{base.name}-box-{rho}",
+        cap=base.cap,
+        length=base.length,
+        cells=cells,
+        cell_names=[target.cell for target in ordered],
+        occupancy=len(ordered),
+        action_names=("r0",),
+        core_slack=base.core_slack,
+        provenance=f"{base.provenance}; cells cut to the guard polygons widened by {rho}",
+        capture_cap=base.capture_cap,
+    )
+    targets = tuple(replace(target, owner=index) for index, target in enumerate(ordered))
+    return frame, replace(endpoint, targets=targets)
+
+
+# ---------------------------------------------------------------------------
+# The endpoint control (exact)
+# ---------------------------------------------------------------------------
+
+
+def in_convex(polygon: Polygon, point: Point) -> bool:
+    """Closed membership in a convex polygon given in hull normal form (or a segment or
+    a point)."""
+    region = hull(polygon)
+    if not region:
+        return False
+    if len(region) == 1:
+        return region[0] == point
+    if len(region) == 2:
+        (ax, ay), (bx, by) = region
+        cross = (bx - ax) * (point[1] - ay) - (by - ay) * (point[0] - ax)
+        dot = (point[0] - ax) * (bx - ax) + (point[1] - ay) * (by - ay)
+        return cross == 0 and 0 <= dot <= (bx - ax) ** 2 + (by - ay) ** 2
+    return all(
+        (b[0] - a[0]) * (point[1] - a[1]) - (b[1] - a[1]) * (point[0] - a[0]) >= 0
+        for a, b in zip(region, region[1:] + region[:1], strict=True)
+    )
+
+
+def endpoint_holds(target: Target, rows: Sequence[Mapping[str, Any]]) -> dict[str, Any] | None:
+    """The first live row holding the endpoint's exact pose, or None."""
+    corners = [
+        (x, y)
+        for x in (target.centre[0].lo, target.centre[0].hi)
+        for y in (target.centre[1].lo, target.centre[1].hi)
+    ]
+    for index, row in enumerate(rows):
+        if not row["residual_polygons"]:
+            continue
+        lo, hi = (Q(value) for value in row["interval"])
+        if not any(lo <= low and high <= hi for low, high in target.charts):
+            continue
+        for piece, polygon in enumerate(row["residual_polygons"]):
+            vertices = node.points(polygon)
+            if all(in_convex(vertices, corner) for corner in corners):
+                return {"row": index, "interval": [str(lo), str(hi)], "piece": piece}
+    return None
+
+
+# ---------------------------------------------------------------------------
+# Measurements (floating-point summaries of exact objects)
+# ---------------------------------------------------------------------------
+
+
+def turn_deviation(t: float, turn: float) -> float:
+    """The distance from `2 atan t` to the endpoint's turn, modulo a quarter turn."""
+    delta = (chart_turn(t) - turn) % QUARTER
+    return min(delta, QUARTER - delta)
+
+
+def row_turn_deviation(lo: float, hi: float, turn: float) -> float:
+    """The largest turn deviation over a chart row (the farthest turn if it is inside)."""
+    far = (turn + QUARTER / 2) % QUARTER
+    if chart_turn(lo) <= far <= chart_turn(hi):
+        return QUARTER / 2
+    return max(turn_deviation(lo, turn), turn_deviation(hi, turn))
+
+
+def coordinates(
+    label: int, offset: tuple[float, float], endpoint: Endpoint
+) -> dict[str, float]:
+    """The target coordinates of a centre offset from the endpoint's (spec section 4.2)."""
+    dx, dy = offset
+    if endpoint.system != "n17":
+        return {"x": dx, "y": dy}
+    if label == 5:
+        return {"y": dy, "a": -dx}
+    if label in (11, 13):
+        along = endpoint.u[0] * dx + endpoint.u[1] * dy
+        slide = endpoint.v[0] * dx + endpoint.v[1] * dy
+        return {"u": along, "b": -slide} if label == 11 else {"u": along, "z": slide}
+    return {"x": dx, "y": dy}
+
+
+def measure_owner(
+    target: Target, rows: Sequence[Mapping[str, Any]], group: Polygon, endpoint: Endpoint
+) -> dict[str, Any]:
+    """Live rows, live width, the residual's deviations and the owned hull, per owner."""
+    live = [row for row in rows if row["residual_polygons"]]
+    cx, cy = target.approx
+    unit = float(endpoint.scale)
+    low: dict[str, float] = {}
+    high: dict[str, float] = {}
+    turn = 0.0
+    turn_low = turn_high = 0.0
+    widest = 0.0
+    widest_turn = 0.0
+    width = 0.0
+    volume = 0.0
+    slide = endpoint.slides.get(target.label)
+    at_endpoint = 0.0
+    for row in live:
+        lo, hi = (float(Q(value)) for value in row["interval"])
+        holds = any(
+            Q(row["interval"][0]) <= low_t and high_t <= Q(row["interval"][1])
+            for low_t, high_t in target.charts
+        )
+        width += hi - lo
+        widest = max(widest, hi - lo)
+        widest_turn = max(widest_turn, chart_turn(hi) - chart_turn(lo))
+        volume += (hi - lo) * sum(
+            float(area2(node.points(polygon))) / 2 / unit**2
+            for polygon in row["residual_polygons"]
+        )
+        turn = max(turn, row_turn_deviation(lo, hi, target.turn))
+        for end in (lo, hi):
+            signed = signed_turn(end, target.turn)
+            turn_low, turn_high = min(turn_low, signed), max(turn_high, signed)
+        for polygon in row["residual_polygons"]:
+            for x, y in polygon:
+                for key, value in coordinates(
+                    target.label,
+                    ((float(Q(x)) - cx) / unit, (float(Q(y)) - cy) / unit),
+                    endpoint,
+                ).items():
+                    low[key] = min(low.get(key, value), value)
+                    high[key] = max(high.get(key, value), value)
+                    if holds and (slide is None or key != slide[0]):
+                        at_endpoint = max(at_endpoint, abs(value))
+    deviation = {key: max(abs(low[key]), abs(high[key])) for key in low}
+    position = [value for key, value in deviation.items() if slide is None or key != slide[0]]
+    extent = {key: high[key] - low[key] for key in low if slide is None or key != slide[0]}
+    position_extent = max(extent.values(), default=math.inf)
+    inside = bool(live) and turn <= float(RADIUS)
+    inside = inside and all(value <= float(RADIUS) for value in position)
+    if slide is not None and slide[0] in low:
+        inside = (
+            inside and float(slide[1]) <= low[slide[0]] and high[slide[0]] <= float(slide[2])
+        )
+    return {
+        "label": target.label,
+        "cell": target.cell,
+        "rows": len(rows),
+        "live_rows": len(live),
+        "live_width": width,
+        "widest_live_row": widest,
+        "widest_live_row_turn": widest_turn,
+        "turn_range": [turn_low, turn_high],
+        "extent": extent,
+        "position_extent": position_extent,
+        "row_to_extent": widest_turn / position_extent if position_extent > 0 else math.inf,
+        "residual_volume": volume,
+        "deviation": deviation,
+        "range": {key: [low[key], high[key]] for key in low},
+        "turn_deviation": turn,
+        "position_deviation": max(position, default=math.inf),
+        "endpoint_row_position_deviation": at_endpoint,
+        "inside_guard": inside,
+        "owned_hull_vertices": len(group),
+        "owned_hull_area": float(sum_area(group)),
+    }
+
+
+def signed_turn(t: float, turn: float) -> float:
+    """`2 atan t` minus the endpoint's turn, reduced into `(-pi/4, pi/4]`."""
+    delta = (chart_turn(t) - turn) % QUARTER
+    return delta if delta <= QUARTER / 2 else delta - QUARTER
+
+
+def sum_area(group: Polygon) -> Q:
+    if len(group) < 3:
+        return Q(0)
+    return (
+        abs(
+            sum(
+                (
+                    p[0] * q[1] - p[1] * q[0]
+                    for p, q in zip(group, group[1:] + group[:1], strict=True)
+                ),
+                Q(),
+            )
+        )
+        / 2
+    )
+
+
+def round_summary(
+    index: int,
+    owners: Mapping[int, dict[str, Any]],
+    previous: Mapping[int, dict[str, Any]] | None,
+    contracting: Sequence[int],
+) -> dict[str, Any]:
+    """Per-owner extents and g, and the worst half-extent per coordinate class."""
+    ratios: dict[str, dict[str, float | None]] = {}
+    for owner in contracting:
+        current = owners[owner]
+        before = previous[owner] if previous is not None else None
+        entry: dict[str, float | None] = {}
+        for key, value in [*current["deviation"].items(), ("turn", current["turn_deviation"])]:
+            if before is None:
+                entry[key] = None
+                continue
+            old = before["turn_deviation"] if key == "turn" else before["deviation"].get(key)
+            entry[key] = value / old if old else None
+        ratios[current["cell"]] = entry
+    two_sided: dict[str, dict[str, float | None]] = {}
+    sides: dict[str, dict[str, list[float | None]]] = {}
+    for owner in contracting:
+        current = owners[owner]
+        before = previous[owner] if previous is not None else None
+        two_sided[current["cell"]] = {
+            key: (
+                value / before["extent"][key] if before and before["extent"].get(key) else None
+            )
+            for key, value in current["extent"].items()
+        }
+        sides[current["cell"]] = {
+            key: [
+                (
+                    abs(current["range"][key][side]) / abs(before["range"][key][side])
+                    if before and before["range"][key][side]
+                    else None
+                )
+                for side in (0, 1)
+            ]
+            for key in current["range"]
+        }
+    ratios_now = [owners[owner]["row_to_extent"] for owner in contracting]
+    falls = [value for row in two_sided.values() for value in row.values() if value is not None]
+    worst_extent = max(owners[owner]["position_extent"] for owner in contracting)
+    position = max(owners[owner]["position_deviation"] for owner in contracting)
+    turn = max(owners[owner]["turn_deviation"] for owner in contracting)
+    return {
+        "round": index,
+        "worst_position_extent": worst_extent,
+        "g_extent": two_sided,
+        "g_sides": sides,
+        "min_g_extent": min(falls, default=None),
+        "row_to_extent": {owners[o]["cell"]: owners[o]["row_to_extent"] for o in contracting},
+        "max_row_to_extent": max(ratios_now),
+        "median_row_to_extent": sorted(ratios_now)[len(ratios_now) // 2],
+        "rows_fine": all(value < FINE_ROWS for value in ratios_now),
+        "rows_past_model_threshold": all(value < MODEL_THRESHOLD for value in ratios_now),
+        "no_extent_drop": previous is not None and all(value >= EXTENT_DROP for value in falls),
+        "extent": {owners[o]["cell"]: owners[o]["extent"] for o in owners},
+        "turn_range": {owners[o]["cell"]: owners[o]["turn_range"] for o in owners},
+        "worst_position": position,
+        "worst_endpoint_row_position": max(
+            owners[owner]["endpoint_row_position_deviation"] for owner in contracting
+        ),
+        "endpoint_row_position": {
+            owners[o]["cell"]: owners[o]["endpoint_row_position_deviation"] for o in owners
+        },
+        "worst_turn": turn,
+        "worst": max(position, turn),
+        "owners_inside_guard": sum(1 for owner in contracting if owners[owner]["inside_guard"]),
+        "live_rows": {owners[o]["cell"]: owners[o]["live_rows"] for o in owners},
+        "live_width": {owners[o]["cell"]: owners[o]["live_width"] for o in owners},
+        "residual_volume": {owners[o]["cell"]: owners[o]["residual_volume"] for o in owners},
+        "total_volume": sum(owners[owner]["residual_volume"] for owner in contracting),
+        "widest_live_row": {owners[o]["cell"]: owners[o]["widest_live_row"] for o in owners},
+        "deviation": {
+            owners[o]["cell"]: {**owners[o]["deviation"], "turn": owners[o]["turn_deviation"]}
+            for o in owners
+        },
+        "range": {owners[o]["cell"]: owners[o]["range"] for o in owners},
+        "g": ratios,
+        "owned_hull_vertices": {
+            owners[o]["cell"]: owners[o]["owned_hull_vertices"] for o in owners
+        },
+        "owned_hull_area": {owners[o]["cell"]: owners[o]["owned_hull_area"] for o in owners},
+    }
+
+
+# ---------------------------------------------------------------------------
+# The producer step with refinement, and its certification
+# ---------------------------------------------------------------------------
+
+
+def refine(
+    rows: Sequence[Mapping[str, Any]], *, max_live: int, min_width: Q
+) -> tuple[list[tuple[Q, Q, Mapping[str, Any]]], int]:
+    """Bisect the widest live rows while the owner has fewer than `max_live` live rows.
+
+    Each split adds one live row, so at most `max_live - live` rows split; a dead row and
+    a row at `min_width` never split. Children keep their parent as predecessor.
+    """
+    live = [index for index, row in enumerate(rows) if row["residual_polygons"]]
+
+    def width(index: int) -> Q:
+        lo, hi = (Q(value) for value in rows[index]["interval"])
+        return hi - lo
+
+    candidates = sorted(
+        (index for index in live if width(index) / 2 >= min_width),
+        key=lambda index: (-width(index), index),
+    )
+    chosen = set(candidates[: max(0, max_live - len(live))])
+    out: list[tuple[Q, Q, Mapping[str, Any]]] = []
+    for index, row in enumerate(rows):
+        lo, hi = (Q(value) for value in row["interval"])
+        if index in chosen:
+            mid = (lo + hi) / 2
+            out.extend(((lo, mid, row), (mid, hi, row)))
+        else:
+            out.append((lo, hi, row))
+    return out, len(chosen)
+
+
+def float_clip(
+    polygon: list[tuple[float, float]], a: float, b: float, c: float
+) -> list[tuple[float, float]]:
+    """`a x + b y <= c` clipped in floating point; a filter, never a proof."""
+    out: list[tuple[float, float]] = []
+    for p, q in itertools.pairwise([*polygon, *polygon[:1]]):
+        dp, dq = a * p[0] + b * p[1] - c, a * q[0] + b * q[1] - c
+        if dp <= 0:
+            out.append(p)
+        if dp * dq < 0:
+            z = dp / (dp - dq)
+            out.append((p[0] + z * (q[0] - p[0]), p[1] + z * (q[1] - p[1])))
+    return out
+
+
+def float_owned(cell: Polygon, point: tuple[float, float], frame: Frame, samples: int) -> bool:
+    """Whether a point looks owned: strictly inside the square at sampled turns for every
+    legal centre (the cell's vertices clipped to the centred wall box). A filter only;
+    `ownership` proves each kept point exactly."""
+    low_cap = float((frame.cap - frame.inner_cap) / 2)
+    high_cap = float(frame.cap) - low_cap
+    for k in range(samples + 1):
+        theta = QUARTER * k / samples
+        c, s = math.cos(theta), math.sin(theta)
+        h = (c + s) / 2
+        region = [(float(x), float(y)) for x, y in cell]
+        for a, b, bound in (
+            (1.0, 0.0, high_cap - h),
+            (-1.0, 0.0, -(low_cap + h)),
+            (0.0, 1.0, high_cap - h),
+            (0.0, -1.0, -(low_cap + h)),
+        ):
+            region = float_clip(region, a, b, bound)
+        for x, y in region:
+            dx, dy = point[0] - x, point[1] - y
+            if abs(c * dx + s * dy) >= 0.49 or abs(-s * dx + c * dy) >= 0.49:
+                return False
+    return True
+
+
+def grid_seed_points(
+    frame: Frame, owner: int, *, spacing: int, budget: Budget, limit: int = 16
+) -> list[Point]:
+    """Hull vertices of the owned grid points of spacing `1/spacing`, each proved owned.
+
+    The owned set of a cell is convex (an intersection of open squares), so its hull's
+    vertices carry it; candidates are filtered in floating point and the hull's vertices
+    are then proved by `ownership`, a failing vertex dropped and the hull re-formed.
+    """
+    cell = frame.cell(owner)
+    xs = [x for x, _ in cell]
+    ys = [y for _, y in cell]
+    candidates: list[Point] = []
+    x = Q(math.floor(min(xs) * spacing), spacing)
+    while x <= max(xs):
+        y = Q(math.floor(min(ys) * spacing), spacing)
+        while y <= max(ys):
+            if float_owned(cell, (float(x), float(y)), frame, 64):
+                candidates.append((x * frame.scale, y * frame.scale))
+            y += Q(1, spacing)
+        x += Q(1, spacing)
+    proved: set[Point] = set()
+    while candidates:
+        region = hull(candidates)
+        keep = [region[index] for index in producer.bounded_vertices(region, limit)]
+        failed = False
+        for point in keep:
+            if point in proved:
+                continue
+            try:
+                ownership(frame, owner, point, budget=Budget(budget.deadline, 4000))
+            except IncompleteError, RefusalError:
+                candidates.remove(point)
+                failed = True
+                break
+            proved.add(point)
+        if not failed:
+            return keep
+    return []
+
+
+def build_seed(
+    frame: Frame, mask: Sequence[int], *, bins: int, seed_grid: int, budget: Budget
+) -> dict[str, Any]:
+    """`producer.build_seed`, with grid-searched owned points added to its own."""
+    seed = producer.build_seed(frame, mask, bins=bins, budget=budget)
+    if seed_grid > 0:
+        for owner in mask:
+            found = grid_seed_points(frame, owner, spacing=seed_grid, budget=budget)
+            given = node.points(seed["groups"][str(owner)])
+            merged = hull(given + found)
+            seed["groups"][str(owner)] = [[str(x), str(y)] for x, y in merged]
+    return seed
+
+
+def produce_step(
+    frame: Frame,
+    *,
+    node_id: str,
+    step_index: int,
+    owner: int,
+    mask: Sequence[int],
+    groups: dict[int, Polygon],
+    rows: dict[int, list[dict[str, Any]]],
+    cores: dict[tuple[Q, Q], Polygon],
+    max_live: int,
+    min_width: Q,
+    hull_limit: int | None,
+    core_kind: str = "octagon",
+) -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
+    """One complete step for `owner`, as `producer.produce` builds it, with refinement.
+
+    Every row's core is the `core_kind` core, cached where `produce_row` and
+    `partner_cover` read it. Partner covers are offered only for owners whose pose set
+    comes within `3B/2` of this owner's domain in both coordinates, since two squares
+    of side `B` whose centres differ by `sqrt(2) B` or more in a coordinate cannot
+    overlap; of those, only the covers some collision region names are kept in the
+    step, since the checker re-proves every core it admits.
+    """
+    reach = 3 * frame.scale / 2
+    mine = bounding_box(rows[owner], "outer_domain")
+    covers: dict[str, list[dict[str, Any]]] = {}
+    partners: dict[int, list[producer.PartnerRow]] = {}
+    for other in mask:
+        if other == owner:
+            continue
+        theirs = bounding_box(rows[other], "residual_polygons")
+        if mine is None or theirs is None or separated(mine, theirs, reach):
+            continue
+        for row in rows[other]:
+            if row["residual_polygons"]:
+                lo, hi = (Q(value) for value in row["interval"])
+                fill_core(frame, lo, hi, cores, core_kind)
+        given, live = producer.partner_cover(frame, rows[other], cores)
+        if live:
+            covers[str(other)], partners[other] = given, live
+    children, splits = refine(rows[owner], max_live=max_live, min_width=min_width)
+    for lo, hi, parent in children:
+        if parent["outer_domain"]:
+            fill_core(frame, lo, hi, cores, core_kind)
+    produced = []
+    for index, (lo, hi, parent) in enumerate(children):
+        view = {**parent, "interval": [str(lo), str(hi)]}
+        produced.append(
+            producer.produce_row(
+                frame,
+                node_id=node_id,
+                step_index=step_index,
+                row_index=index,
+                owner=owner,
+                predecessor=view,
+                groups=groups,
+                partners=partners,
+                cores=cores,
+            )
+        )
+    planes = [plane for _, _, row_planes in produced for plane in row_planes]
+    kernel = producer.kernel_points(frame, planes)
+    named = {item["partner"] for row, _, _ in produced for item in row["collision_regions"]}
+    offered = sum(len(live) for live in partners.values())
+    offered_partners = len(partners)
+    covers = {key: value for key, value in covers.items() if int(key) in named}
+    partners = {key: value for key, value in partners.items() if key in named}
+    step: dict[str, Any] = {
+        "index": step_index,
+        "owner": owner,
+        "allowed_half_angle": ["0", "1"],
+        "prior_partner_pose_covers": covers,
+        "prior_owned_hulls": {str(other): encode(groups[other]) for other in mask},
+        "rows": [row for row, _, _ in produced],
+        "complete": True,
+        "common_owned_kernel": [[str(x), str(y)] for x, y in kernel],
+    }
+    hull_lost = 0.0
+    if any(accepted["residual_polygons"] for _, accepted, _ in produced) and (
+        groups[owner] or kernel
+    ):
+        original = hull(groups[owner] + kernel)
+        new_points, witnesses = producer.compress(original)
+        receipt: dict[str, Any] = {
+            "vertices": [[str(x), str(y)] for x, y in new_points],
+            "witnesses": witnesses,
+            "denominator": producer.GRID,
+            "original_vertices": len(original),
+            "retained_vertices": len(new_points),
+        }
+        if hull_limit is not None and new_points == original:
+            keep = producer.bounded_vertices(original, hull_limit)
+            new_points = [original[index] for index in keep]
+            lost = area2(original) - area2(hull(new_points))
+            hull_lost = float(lost / 2 / frame.scale**2)
+            receipt.update(
+                vertices=[[str(x), str(y)] for x, y in new_points],
+                witnesses=[witnesses[index] for index in keep],
+                retained_vertices=len(new_points),
+                mode="replace",
+            )
+        step["compression_source_hull"] = encode(original)
+        step["inner_grid_compression"] = receipt
+    stats = {
+        "rows": len(children),
+        "splits": splits,
+        "partner_rows_offered": offered,
+        "partner_rows": sum(len(live) for live in partners.values()),
+        "collision_regions": sum(len(row["collision_regions"]) for row, _, _ in produced),
+        "promoted_points": len(kernel),
+        "hull_area_lost": hull_lost,
+        "partners_offered": offered_partners,
+    }
+    return step, stats, [accepted for _, accepted, _ in produced]
+
+
+def bounding_box(rows: Sequence[Mapping[str, Any]], key: str) -> tuple[Q, Q, Q, Q] | None:
+    """The box of every vertex of the rows' outer domains or residual polygons."""
+    points_: list[tuple[Q, Q]] = []
+    for row in rows:
+        polygons = [row[key]] if key == "outer_domain" else row[key]
+        for polygon in polygons:
+            points_.extend((Q(x), Q(y)) for x, y in polygon)
+    if not points_:
+        return None
+    xs = [x for x, _ in points_]
+    ys = [y for _, y in points_]
+    return min(xs), max(xs), min(ys), max(ys)
+
+
+def separated(first: tuple[Q, Q, Q, Q], second: tuple[Q, Q, Q, Q], reach: Q) -> bool:
+    """Whether the boxes are at least `reach` apart along some axis."""
+    return (
+        second[0] - first[1] >= reach
+        or first[0] - second[1] >= reach
+        or second[2] - first[3] >= reach
+        or first[2] - second[3] >= reach
+    )
+
+
+def agree(
+    predicted: Sequence[Mapping[str, Any]], accepted: Sequence[Mapping[str, Any]]
+) -> bool:
+    """The producer's rows are the checker's accepted rows, interval and residual."""
+    return len(predicted) == len(accepted) and all(
+        [Q(value) for value in mine["interval"]] == [Q(value) for value in theirs["interval"]]
+        and len(mine["residual_polygons"]) == len(theirs["residual_polygons"])
+        and all(
+            same(node.points(left), node.points(right))
+            for left, right in zip(
+                mine["residual_polygons"], theirs["residual_polygons"], strict=True
+            )
+        )
+        for mine, theirs in zip(predicted, accepted, strict=True)
+    )
+
+
+def certify_step(
+    frame: Frame,
+    step: Mapping[str, Any],
+    groups: dict[int, Polygon],
+    rows: dict[int, list[dict[str, Any]]],
+    *,
+    node_id: str,
+    mask: Sequence[int],
+    budget: Budget,
+) -> dict[str, Any]:
+    """The body of `sequential.replay_sequential`'s loop on one step, in its order.
+
+    Updates `groups` and `rows` to the checker's accepted state and returns the step's
+    checker counts and derived closure.
+    """
+    owner = step["owner"]
+    require(
+        step["allowed_half_angle"] == ["0", "1"] and step["complete"] is True,
+        "unsupported angle or incomplete step",
+    )
+    require(
+        set(step["prior_owned_hulls"]) == set(map(str, mask))
+        and all(same(node.points(step["prior_owned_hulls"][str(i)]), groups[i]) for i in mask),
+        "step previous accepted state",
+    )
+    predecessors = sequential.complete_refinement(
+        step["rows"], rows[owner], max_rows=budget.max_nodes
+    )
+    partners = sequential.admit_partner_covers(frame, step, rows, mask=mask)
+    source = {"node_id": node_id}
+    results = [
+        sequential.check_row(
+            frame,
+            source,
+            step,
+            row_index,
+            prior=groups,
+            predecessor=predecessor,
+            budget=budget,
+            cover="indexed",
+            partners=partners,
+        )
+        for row_index, predecessor in enumerate(predecessors)
+    ]
+    all_vertices = [point for result in results for point in result[1]]
+    all_planes = [plane for result in results for plane in result[2]]
+    kernel = node.points(step["common_owned_kernel"])
+    for point in kernel:
+        require(
+            all(0 <= coordinate <= frame.length for coordinate in point)
+            and all(nx * point[0] + ny * point[1] <= upper for nx, ny, upper in all_planes),
+            "promoted point lacks full-row ownership proof",
+        )
+    if all_vertices and (groups[owner] or kernel):
+        groups[owner] = (
+            hull(node.compression_points(step, groups[owner], kernel))
+            if step["inner_grid_compression"].get("mode") == "replace"
+            else node.compressed(step, groups[owner], kernel)
+        )
+    else:
+        require("inner_grid_compression" not in step, "nothing to promote, yet compression")
+    rows[owner] = [result[3] for result in results]
+    return {
+        "checked_rows": len(results),
+        "events": sum(result[0]["events"] for result in results),
+        "probes": sum(result[0]["probes"] for result in results),
+        "collision_checks": sum(result[0].get("collision_checks", 0) for result in results),
+        "admitted_partner_rows": sum(len(live) for live in partners.values()),
+        "closure": sequential.derived_closure(owner, step["index"], groups, rows),
+    }
+
+
+# ---------------------------------------------------------------------------
+# The run
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class Pilot:
+    seed: dict[str, Any]
+    node: dict[str, Any]
+    rounds: list[dict[str, Any]] = field(default_factory=list)
+    updates: list[dict[str, Any]] = field(default_factory=list)
+    outcome: str = "round_cap"
+    endpoint_lost: dict[str, Any] | None = None
+    closure: dict[str, Any] | None = None
+    refusal: dict[str, Any] | None = None
+
+
+def order(frame: Frame, mask: Sequence[int], coarse: int | None) -> list[int]:
+    """Contracting owners: corners, then side cells, then interior cells, in cell order
+    (n11's numbered cells keep cell order)."""
+    rank = {"corner": 0, "side": 1, "interior": 2}
+    return sorted(
+        (owner for owner in mask if owner != coarse),
+        key=lambda owner: (rank.get(frame.cell_names[owner].split("-")[0], 0), owner),
+    )
+
+
+def run_pilot(
+    frame: Frame,
+    endpoint: Endpoint,
+    *,
+    bins: int,
+    max_rounds: int,
+    max_live: int,
+    min_width: Q,
+    hull_limit: int | None,
+    max_seconds: float,
+    seed_grid: int = 0,
+    max_steps: int | None = None,
+    core_kind: str = "octagon",
+    rounds_after_start: int | None = None,
+    node_id: str = "n17-capture-pilot",
+    progress: bool = True,
+    partial: Path | None = None,
+) -> Pilot:
+    """Seed, then rounds of certified owner updates with the endpoint control after each.
+
+    Besides the wall ceiling, the round cap, the guard and a stall, a run stops when the
+    review's falsifier is met (three rounds in a row with every owner's widest live row
+    under a twentieth of its position extent and no two-sided extent down by a tenth), or
+    `rounds_after_start` rounds after positions start contracting (the worst owner's
+    two-sided position extent down by a tenth in one round).
+    """
+    started = time.monotonic()
+    budget = Budget(started + max_seconds, MAX_EVENTS)
+    targets = endpoint.by_owner()
+    mask = sorted(targets)
+    coarse = next(
+        (target.owner for target in endpoint.targets if target.label == endpoint.coarse), None
+    )
+    contracting = order(frame, mask, coarse)
+    seed = build_seed(frame, mask, bins=bins, seed_grid=seed_grid, budget=budget)
+    admitted = node.admit_seed(
+        frame, seed, mask=mask, bins=bins, budget=budget, allow_empty_groups=True
+    )
+    groups = dict(admitted.groups)
+    rows: dict[int, list[dict[str, Any]]] = {
+        owner: list(admitted.rows[owner]) for owner in mask
+    }
+    initial = {
+        "groups": {str(owner): encode(groups[owner]) for owner in mask},
+        "cell_references": {
+            str(owner): [row["reference"] for row in rows[owner]] for owner in mask
+        },
+    }
+    pilot = Pilot(seed, {})
+    cores: dict[tuple[Q, Q], Polygon] = {}
+    steps: list[dict[str, Any]] = []
+
+    def control(after: str) -> bool:
+        for owner in mask:
+            if endpoint_holds(targets[owner], rows[owner]) is None:
+                pilot.endpoint_lost = {
+                    "after": after,
+                    "owner": owner,
+                    "cell": frame.cell_names[owner],
+                    "label": targets[owner].label,
+                }
+                return False
+        return True
+
+    def snapshot() -> dict[int, dict[str, Any]]:
+        return {
+            owner: measure_owner(targets[owner], rows[owner], groups[owner], endpoint)
+            for owner in mask
+        }
+
+    if not control("seed"):
+        pilot.outcome = "endpoint_lost"
+    measured = snapshot()
+    pilot.rounds.append(
+        {
+            **round_summary(0, measured, None, contracting),
+            "steps": 0,
+            "seconds": time.monotonic() - started,
+        }
+    )
+    previous = measured
+    stalled = 0
+    fine_rounds = 0
+    for round_index in range(1, max_rounds + 1):
+        if pilot.outcome == "endpoint_lost":
+            break
+        round_splits = 0
+        for owner in contracting:
+            if time.monotonic() >= budget.deadline:
+                pilot.outcome = "time_cap"
+                break
+            if max_steps is not None and len(steps) >= max_steps:
+                pilot.outcome = "step_cap"
+                break
+            step_index = len(steps)
+            wall, cpu = time.monotonic(), time.process_time()
+            step, stats, predicted = produce_step(
+                frame,
+                node_id=node_id,
+                step_index=step_index,
+                owner=owner,
+                mask=mask,
+                groups=groups,
+                rows=rows,
+                cores=cores,
+                max_live=max_live,
+                min_width=min_width,
+                hull_limit=hull_limit,
+                core_kind=core_kind,
+            )
+            produced_wall, produced_cpu = time.monotonic(), time.process_time()
+            try:
+                checked = certify_step(
+                    frame, step, groups, rows, node_id=node_id, mask=mask, budget=budget
+                )
+            except IncompleteError:
+                pilot.outcome = "time_cap"
+                break
+            except RefusalError as error:
+                pilot.outcome = "step_refused"
+                pilot.refusal = {"step": step_index, "reason": str(error)}
+                break
+            if not agree(predicted, rows[owner]):
+                pilot.outcome = "step_refused"
+                pilot.refusal = {"step": step_index, "reason": "producer and checker differ"}
+                break
+            steps.append(step)
+            round_splits += stats["splits"]
+            update = {
+                "round": round_index,
+                "step": step_index,
+                "cell": frame.cell_names[owner],
+                "label": targets[owner].label,
+                **stats,
+                **{key: value for key, value in checked.items() if key != "closure"},
+                "live_rows": sum(1 for row in rows[owner] if row["residual_polygons"]),
+                "owned_hull_vertices": len(groups[owner]),
+                "producer_wall": produced_wall - wall,
+                "producer_cpu": produced_cpu - cpu,
+                "checker_wall": time.monotonic() - produced_wall,
+                "checker_cpu": time.process_time() - produced_cpu,
+            }
+            pilot.updates.append(update)
+            if progress:
+                print(
+                    json.dumps(
+                        {
+                            key: update[key]
+                            for key in ("round", "step", "cell", "rows", "live_rows", "splits")
+                        }
+                        | {
+                            "producer": round(update["producer_wall"], 1),
+                            "checker": round(update["checker_wall"], 1),
+                            "seconds": round(time.monotonic() - started, 1),
+                        }
+                    ),
+                    file=sys.stderr,
+                    flush=True,
+                )
+            if not control(f"step {step_index}"):
+                pilot.outcome = "endpoint_lost"
+                break
+            if checked["closure"] is not None:
+                pilot.closure = checked["closure"]
+                pilot.outcome = "closed"
+                break
+        measured = snapshot()
+        summary = round_summary(round_index, measured, previous, contracting)
+        complete = pilot.outcome not in (
+            "time_cap",
+            "step_cap",
+            "step_refused",
+            "endpoint_lost",
+            "closed",
+        )
+        pilot.rounds.append(
+            {
+                **summary,
+                "steps": len(steps),
+                "complete": complete,
+                "splits": round_splits,
+                "seconds": time.monotonic() - started,
+            }
+        )
+        if partial is not None:
+            write_partial(partial, pilot)
+        if not complete:
+            break
+        if summary["owners_inside_guard"] == len(contracting):
+            pilot.outcome = "guard"
+            break
+        if progress:
+            print(
+                json.dumps(
+                    {
+                        "round": round_index,
+                        "worst": round(summary["worst"], 6),
+                        "extent": f"{summary['worst_position_extent']:.4e}",
+                        "min_g_extent": summary["min_g_extent"],
+                        "row_to_extent": round(summary["max_row_to_extent"], 4),
+                        "volume": f"{summary['total_volume']:.4e}",
+                        "live": sum(summary["live_rows"].values()),
+                        "splits": round_splits,
+                    }
+                ),
+                file=sys.stderr,
+                flush=True,
+            )
+        fine_rounds = (
+            fine_rounds + 1 if summary["rows_fine"] and summary["no_extent_drop"] else 0
+        )
+        if fine_rounds >= FALSIFIER_ROUNDS:
+            pilot.outcome = "falsified"
+            break
+        start = contraction_start(pilot.rounds)
+        if (
+            rounds_after_start is not None
+            and start is not None
+            and round_index - start["round"] >= rounds_after_start
+        ):
+            pilot.outcome = "measured_after_start"
+            break
+        improved = any(
+            measured[owner]["position_extent"] < previous[owner]["position_extent"]
+            or measured[owner]["residual_volume"] < previous[owner]["residual_volume"]
+            or measured[owner]["turn_deviation"] < previous[owner]["turn_deviation"]
+            or measured[owner]["live_width"] < previous[owner]["live_width"]
+            or any(
+                value < previous[owner]["deviation"].get(key, math.inf)
+                for key, value in measured[owner]["deviation"].items()
+            )
+            for owner in contracting
+        )
+        stalled = 0 if improved else stalled + 1
+        previous = measured
+        if stalled >= (1 if round_splits == 0 else 2):
+            pilot.outcome = "stalled"
+            break
+    source = {"sha256": producer.content_sha256(seed)}
+    pilot.node = {
+        "schema": "exact_generic_owned_hull_v1",
+        "node_id": node_id,
+        "parent": None,
+        "constraints": [],
+        "guard_source": None,
+        "mask_index": None,
+        "mask": list(mask),
+        "U": str(frame.cap),
+        "B": str(frame.scale),
+        "source": source,
+        "initial": initial,
+        "steps": steps,
+        "final_state": {
+            "mask_index": None,
+            "mask": list(mask),
+            "U": str(frame.cap),
+            "B": str(frame.scale),
+            "constraints": [],
+            "guard": {},
+            "guard_source": None,
+            "source": source,
+            "world": seed["world"],
+            "groups": {str(owner): encode(groups[owner]) for owner in mask},
+            "cells": {str(owner): rows[owner] for owner in mask},
+        },
+        "contradiction": pilot.closure,
+        "closed": pilot.closure is not None,
+        "terminal": pilot.closure is not None,
+        "mask_exclusion_proved": False,
+        "global_optimality_proved": False,
+    }
+    return pilot
+
+
+def replay(frame: Frame, pilot: Pilot, *, max_seconds: float) -> dict[str, Any]:
+    """The certificate: `admit_seed` and `replay_sequential` on the whole node."""
+    started = time.monotonic()
+    mask = pilot.node["mask"]
+    budget = Budget(started + max_seconds, MAX_EVENTS)
+    seed = node.admit_seed(
+        frame,
+        pilot.seed,
+        mask=mask,
+        bins=pilot.seed["bins"],
+        budget=budget,
+        allow_empty_groups=True,
+    )
+    trace = sequential.replay_sequential(
+        frame,
+        pilot.node,
+        seed,
+        mask=mask,
+        seed_sha256=producer.content_sha256(pilot.seed),
+        budget=budget,
+        cover="indexed",
+    )
+    final = pilot.node["final_state"]
+    agrees = all(
+        same(node.points(final["groups"][str(owner)]), trace.groups[owner]) for owner in mask
+    )
+    return {
+        "status": "PASS_REPLAYED",
+        "steps": len(trace.steps),
+        "rows": sum(step["rows"] for step in trace.steps),
+        "events": sum(step["events"] for step in trace.steps),
+        "closure": trace.closure,
+        "final_state_agrees": agrees,
+        "seconds": time.monotonic() - started,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Reading the rounds
+# ---------------------------------------------------------------------------
+
+
+def write_partial(path: Path, pilot: Pilot) -> None:
+    """The rounds and updates so far, rewritten after every round, so that a killed run
+    keeps what it measured."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    record = {
+        "schema": f"{SCHEMA}/partial",
+        "tool_sha256": TOOL_SHA256,
+        "kernel_sha256": KERNEL_SHA256,
+        "endpoint_control": (
+            {"held": True, "checked_after": len(pilot.updates) + 1}
+            if pilot.endpoint_lost is None
+            else {"held": False, **pilot.endpoint_lost}
+        ),
+        "falsifier": falsifier_reading(pilot.rounds),
+        "rounds": pilot.rounds,
+        "updates": pilot.updates,
+    }
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(
+        json.dumps(record, sort_keys=True, default=str) + "\n", encoding="utf-8"
+    )
+    temporary.replace(path)
+
+
+def contraction_start(rounds: Sequence[Mapping[str, Any]]) -> dict[str, Any] | None:
+    """The first complete round in which the worst owner's two-sided position extent fell
+    by a tenth, with the widest-row-to-extent ratios of the round before it."""
+    complete = [entry for entry in rounds if entry.get("complete", True)]
+    for before, entry in itertools.pairwise(complete):
+        if entry["worst_position_extent"] <= EXTENT_DROP * before["worst_position_extent"]:
+            return {
+                "round": entry["round"],
+                "max_row_to_extent_before": before["max_row_to_extent"],
+                "median_row_to_extent_before": before["median_row_to_extent"],
+                "worst_position_extent": entry["worst_position_extent"],
+            }
+    return None
+
+
+def falsifier_reading(rounds: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """The review's falsifier and its alternative, read from the complete rounds."""
+    complete = [entry for entry in rounds if entry.get("complete", True)]
+    run = best = 0
+    for entry in complete:
+        run = run + 1 if entry["rows_fine"] and entry["no_extent_drop"] else 0
+        best = max(best, run)
+    start = contraction_start(rounds)
+    after = [
+        entry for entry in complete if start is not None and entry["round"] >= start["round"]
+    ]
+    extents = [entry["worst_position_extent"] for entry in after]
+    ratios = [current / before for before, current in itertools.pairwise(extents)]
+    return {
+        "falsified": best >= FALSIFIER_ROUNDS,
+        "longest_fine_and_flat_run": best,
+        "first_round_rows_under_a_tenth": next(
+            (entry["round"] for entry in complete if entry["rows_past_model_threshold"]), None
+        ),
+        "first_round_rows_under_a_twentieth": next(
+            (entry["round"] for entry in complete if entry["rows_fine"]), None
+        ),
+        "contraction_start": start,
+        "g_worst_extent_after_start": ratios,
+        "g_after_start_geometric_mean": (
+            math.exp(sum(math.log(value) for value in ratios) / len(ratios)) if ratios else None
+        ),
+    }
+
+
+def first_rounds(rounds: Sequence[Mapping[str, Any]]) -> dict[str, int | None]:
+    """The first round whose worst half-extent is below each scale."""
+    return {
+        f"{scale:g}": next((entry["round"] for entry in rounds if entry["worst"] < scale), None)
+        for scale in SCALES
+    }
+
+
+def contraction(rounds: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Round-over-round ratios of the worst half-extent, per class, and their tail."""
+    complete = [entry for entry in rounds if entry.get("complete", True)]
+    series: dict[str, list[float | None]] = {}
+    for key in ("worst", "worst_position", "worst_turn"):
+        values = [entry[key] for entry in complete]
+        series[key] = [
+            (current / before if before else None)
+            for before, current in itertools.pairwise(values)
+        ]
+    tail = [value for value in series["worst"][-3:] if value is not None]
+    g_tail = math.exp(sum(math.log(value) for value in tail) / len(tail)) if tail else None
+    worst = complete[-1]["worst"] if complete else math.inf
+    projected: dict[str, float | None] = {}
+    for scale in SCALES:
+        if worst < scale:
+            projected[f"{scale:g}"] = 0.0
+        elif g_tail is not None and g_tail < 1:
+            projected[f"{scale:g}"] = math.log(worst / scale) / math.log(1 / g_tail)
+        else:
+            projected[f"{scale:g}"] = None
+    return {
+        "ratios": series,
+        "g_tail_geometric_mean": g_tail,
+        "worst_final": worst,
+        "rounds_more_to_scale": projected,
+    }
+
+
+def owner_g_table(rounds: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, float | None]]:
+    """Each owner's geometric-mean ratio per coordinate over the complete rounds."""
+    complete = [entry for entry in rounds if entry.get("complete", True)][1:]
+    table: dict[str, dict[str, float | None]] = {}
+    for entry in complete:
+        for cell, ratios in entry["g"].items():
+            for key, value in ratios.items():
+                table.setdefault(cell, {}).setdefault(key, None)
+                if value is not None and value > 0:
+                    logs = table[cell]
+                    logs[key] = (logs[key] or 0.0) + math.log(value)
+    count = max(len(complete), 1)
+    return {
+        cell: {
+            key: (math.exp(value / count) if value is not None else None)
+            for key, value in row.items()
+        }
+        for cell, row in table.items()
+    }
+
+
+def verdict(
+    cap: str,
+    *,
+    endpoint_lost: bool,
+    replayed: Mapping[str, Any] | None,
+    worst_final: float,
+    refused: bool = False,
+    floor: float = BLOB_FLOOR,
+) -> str:
+    """The run's status: a lost endpoint is a soundness failure; the exclusion-cap control
+    passes only if the worst half-extent stays at or above the blob floor (half the box
+    radius when that is smaller, since the blob then fills the box)."""
+    if endpoint_lost:
+        return "REFUSED_ENDPOINT_LOST"
+    if refused:
+        return "REFUSED_STEP"
+    if replayed is not None and replayed["status"] != "PASS_REPLAYED":
+        return "INCOMPLETE_REPLAY"
+    if cap == "exclusion":
+        held = worst_final >= floor
+        return "PASS_CONTROL_BLOB_HELD" if held else "REFUSED_CONTROL_CONTRACTED"
+    return "PASS_PILOT_MEASURED"
+
+
+def run(
+    *,
+    cap: str,
+    bins: int,
+    max_rounds: int,
+    max_live: int,
+    min_width: Q,
+    hull_limit: int | None,
+    max_seconds: float,
+    replay_share: float,
+    save_objects: Path | None,
+    seed_grid: int = 0,
+    box: Q | None = None,
+    system: str = "n17",
+    core_kind: str = "octagon",
+    rounds_after_start: int | None = None,
+    partial: Path | None = None,
+) -> dict[str, Any]:
+    started, cpu = time.monotonic(), time.process_time()
+    if system == "n11":
+        require(
+            box is None and cap == "capture", "the n11 control runs at n11's cap, from cells"
+        )
+        frame = n11_frame()
+        endpoint = load_n11_endpoint(frame)
+    else:
+        base = capture_frame(None)
+        endpoint = load_endpoint(base)
+        frame = capture_frame(endpoint.capture_cap if cap == "capture" else None)
+        if box is not None:
+            frame, endpoint = box_frame(frame, endpoint, box)
+    pilot_seconds = max_seconds * (1 - replay_share)
+    pilot = run_pilot(
+        frame,
+        endpoint,
+        bins=bins,
+        max_rounds=max_rounds,
+        max_live=max_live,
+        min_width=min_width,
+        hull_limit=hull_limit,
+        max_seconds=pilot_seconds,
+        seed_grid=seed_grid,
+        core_kind=core_kind,
+        rounds_after_start=rounds_after_start,
+        node_id=f"{system}-capture-pilot",
+        partial=partial,
+    )
+    replayed: dict[str, Any] | None = None
+    if replay_share > 0 and pilot.endpoint_lost is None:
+        remaining = max_seconds - (time.monotonic() - started)
+        try:
+            replayed = replay(frame, pilot, max_seconds=max(remaining, 1.0))
+        except IncompleteError as error:
+            replayed = {"status": "INCOMPLETE", "reason": str(error)}
+    if save_objects is not None:
+        save_objects.mkdir(parents=True, exist_ok=True)
+        for kind, value in (("seed", pilot.seed), ("node", pilot.node)):
+            raw = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+            name = f"{kind}-{hashlib.sha256(raw).hexdigest()}.json.gz"
+            (save_objects / name).write_bytes(gzip.compress(raw, mtime=0))
+    targets = endpoint.by_owner()
+    coarse = next(
+        (target.owner for target in endpoint.targets if target.label == endpoint.coarse), None
+    )
+    contracting = order(frame, sorted(targets), coarse)
+    reading = contraction(pilot.rounds)
+    reached = first_rounds(pilot.rounds)
+    status = verdict(
+        cap,
+        endpoint_lost=pilot.endpoint_lost is not None,
+        replayed=replayed,
+        worst_final=reading["worst_final"],
+        refused=pilot.refusal is not None,
+        floor=BLOB_FLOOR if box is None else min(BLOB_FLOOR, float(box) / 2),
+    )
+    result: dict[str, Any] = {
+        "schema": SCHEMA,
+        "status": status,
+        "claim": (
+            "a measurement: the certified rounds' residual extents around the endpoint; "
+            "no capture, guard or exclusion is claimed"
+            + ("" if box is None else "; the cells are cut to a sub-case around the endpoint")
+        ),
+        "cap": cap,
+        "system": system,
+        "falsifier": falsifier_reading(pilot.rounds),
+        "frame": frame.name,
+        "U": str(frame.cap),
+        "inner_cap": str(frame.inner_cap),
+        "endpoint": endpoint.provenance,
+        "owners": [
+            {
+                "label": target.label,
+                "cell": target.cell,
+                "owner": target.owner,
+                "turn": target.turn,
+                "coarse": target.owner == coarse,
+                "order": contracting.index(target.owner)
+                if target.owner in contracting
+                else None,
+            }
+            for target in endpoint.targets
+        ],
+        "settings": {
+            "bins": bins,
+            "max_rounds": max_rounds,
+            "max_live": max_live,
+            "min_width": str(min_width),
+            "hull_limit": hull_limit,
+            "collision": True,
+            "cover": "indexed",
+            "max_seconds": max_seconds,
+            "replay_share": replay_share,
+            "seed_grid": seed_grid,
+            "core": core_kind,
+            "rounds_after_start": rounds_after_start,
+            "box": None if box is None else str(box),
+            "radius": str(RADIUS),
+        },
+        "outcome": pilot.outcome,
+        "closure": pilot.closure,
+        "refusal": pilot.refusal,
+        "endpoint_control": (
+            {"held": True, "checked_after": len(pilot.updates) + 1}
+            if pilot.endpoint_lost is None
+            else {"held": False, **pilot.endpoint_lost}
+        ),
+        "seed_points": {
+            frame.cell_names[owner]: len(pilot.seed["groups"][str(owner)])
+            for owner in sorted(targets)
+        },
+        "rounds": pilot.rounds,
+        "updates": pilot.updates,
+        "scales_first_round": reached,
+        "contraction": reading,
+        "owner_g": owner_g_table(pilot.rounds),
+        "splits": {
+            "branch_predicates": 0,
+            "row_bisections": sum(update["splits"] for update in pilot.updates),
+            "row_bisections_before_1e-3": sum(
+                update["splits"]
+                for update in pilot.updates
+                if reached["0.001"] is None or update["round"] < reached["0.001"]
+            ),
+        },
+        "replay": replayed,
+        "node_sha256": producer.content_sha256(pilot.node),
+        "seed_sha256": producer.content_sha256(pilot.seed),
+        "tool_sha256": TOOL_SHA256,
+        "kernel_sha256": KERNEL_SHA256,
+        "wall_seconds": time.monotonic() - started,
+        "process_cpu_seconds": time.process_time() - cpu,
+    }
+    return result
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--system", choices=("n17", "n11"), default="n17")
+    parser.add_argument("--cap", choices=("capture", "exclusion"), default="capture")
+    parser.add_argument("--bins", type=int, default=32)
+    parser.add_argument("--max-rounds", type=int, default=12)
+    parser.add_argument("--max-live", type=int, default=128, help="live rows per owner")
+    parser.add_argument("--min-width-log2", type=int, default=22, help="rows >= 2^-N wide")
+    parser.add_argument("--hull-limit", type=int, default=48, help="0 keeps every vertex")
+    parser.add_argument("--core", choices=("octagon", "envelope"), default="octagon")
+    parser.add_argument(
+        "--rounds-after-start",
+        type=int,
+        help="stop this many rounds after positions start contracting",
+    )
+    parser.add_argument("--max-seconds", type=float, default=540.0)
+    parser.add_argument(
+        "--replay-share",
+        type=float,
+        default=0.0,
+        help="the share of the ceiling kept for replay_sequential on the whole node",
+    )
+    parser.add_argument(
+        "--seed-grid", type=int, default=0, help="also seed owned points on a 1/N grid"
+    )
+    parser.add_argument(
+        "--box", type=Q, help="cut the cells to the guard polygons widened by this radius"
+    )
+    parser.add_argument("--save-objects", type=Path)
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args(argv)
+    if not math.isfinite(args.max_seconds) or args.max_seconds <= 0:
+        parser.error("the wall ceiling must be positive and finite")
+    if args.bins <= 0 or args.max_rounds <= 0 or args.max_live <= 0:
+        parser.error("bins, rounds and live rows must be positive")
+    if not 0 <= args.replay_share < 1:
+        parser.error("the replay share must lie in [0, 1)")
+    result = run(
+        cap=args.cap,
+        bins=args.bins,
+        max_rounds=args.max_rounds,
+        max_live=args.max_live,
+        min_width=Q(1, 2**args.min_width_log2),
+        hull_limit=args.hull_limit or None,
+        max_seconds=args.max_seconds,
+        replay_share=args.replay_share,
+        save_objects=args.save_objects,
+        seed_grid=args.seed_grid,
+        box=args.box,
+        system=args.system,
+        core_kind=args.core,
+        rounds_after_start=args.rounds_after_start,
+        partial=None if args.output is None else args.output.with_suffix(".partial.json"),
+    )
+    encoded = json.dumps(result, indent=1, sort_keys=True, default=str) + "\n"
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(encoded, encoding="utf-8")
+    table = [
+        {
+            "round": entry["round"],
+            "worst": f"{entry['worst']:.3e}",
+            "position": f"{entry['worst_position']:.3e}",
+            "turn": f"{entry['worst_turn']:.3e}",
+            "inside": entry["owners_inside_guard"],
+            "seconds": round(entry["seconds"], 1),
+        }
+        for entry in result["rounds"]
+    ]
+    summary = {
+        key: result[key]
+        for key in (
+            "status",
+            "system",
+            "cap",
+            "outcome",
+            "endpoint_control",
+            "scales_first_round",
+            "falsifier",
+        )
+    }
+    print(json.dumps({**summary, "rounds": table, "g": result["contraction"]}, indent=1))
+    return 0 if str(result["status"]).startswith("PASS") else 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,8934 @@
+{
+ "cells": [
+  "corner-SW",
+  "corner-SE",
+  "corner-NW",
+  "corner-NE",
+  "side-S0",
+  "side-N0",
+  "side-W0",
+  "side-E0",
+  "side-S1",
+  "side-N1",
+  "side-W1",
+  "side-E1",
+  "side-S2",
+  "side-N2",
+  "side-W2",
+  "side-E2",
+  "interior-SW",
+  "interior-NW",
+  "interior-W",
+  "interior-S",
+  "interior-N",
+  "interior-E",
+  "interior-SE",
+  "interior-NE"
+ ],
+ "design": "ring-3-voronoi-8-tabbed-unique",
+ "flagged": [
+  {
+   "arity": 6,
+   "attempts": 555,
+   "best_penetration": 0.005613414302674369,
+   "cells": [
+    "side-S1",
+    "side-W1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    8,
+    10,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 6,
+   "attempts": 555,
+   "best_penetration": 0.014827620073726733,
+   "cells": [
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 6,
+   "attempts": 555,
+   "best_penetration": 0.001996270085042662,
+   "cells": [
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "indices": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.011136079247246689,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-W"
+   ],
+   "indices": [
+    0,
+    5,
+    6,
+    10,
+    14,
+    16,
+    18
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.004999479772897497,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "indices": [
+    0,
+    5,
+    6,
+    10,
+    16,
+    17,
+    18
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024178214940032694,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "indices": [
+    0,
+    4,
+    6,
+    14,
+    16,
+    17,
+    18
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01307615578479071,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "indices": [
+    0,
+    6,
+    10,
+    14,
+    16,
+    17,
+    18
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.006305753607423026,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "indices": [
+    4,
+    6,
+    10,
+    14,
+    16,
+    17,
+    18
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.017174150435186553,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    4,
+    5,
+    8,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01255076421174206,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    4,
+    6,
+    8,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 6.09648250555761e-05,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    5,
+    6,
+    9,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01732407590200402,
+   "cells": [
+    "corner-NW",
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    2,
+    5,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01639844953809022,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    4,
+    5,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024141377572435285,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    4,
+    6,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.010144955154776536,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    4,
+    8,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 6.269570100558841e-05,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    5,
+    9,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.017095708968768664,
+   "cells": [
+    "side-N0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    5,
+    10,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.02050843477342157,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "indices": [
+    4,
+    6,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.008984160277538678,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "indices": [
+    4,
+    8,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0011275753188640936,
+   "cells": [
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "indices": [
+    6,
+    10,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.018459087570402932,
+   "cells": [
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "indices": [
+    6,
+    14,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0007591502969451769,
+   "cells": [
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-E"
+   ],
+   "indices": [
+    6,
+    10,
+    14,
+    16,
+    17,
+    18,
+    21
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.011053149932217288,
+   "cells": [
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    5,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.013890419056767467,
+   "cells": [
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "indices": [
+    9,
+    11,
+    16,
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01632708538865013,
+   "cells": [
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "indices": [
+    11,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.00795391550963287,
+   "cells": [
+    "corner-NW",
+    "side-N0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    2,
+    5,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.007743526477856255,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    4,
+    5,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.022805334545968003,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    4,
+    6,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 554,
+   "best_penetration": 0.008109213138310922,
+   "cells": [
+    "side-N0",
+    "side-E0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    7,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.023288213014481363,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    4,
+    8,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.01359207768632631,
+   "cells": [
+    "side-E0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    7,
+    8,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 554,
+   "best_penetration": 0.0015215142459479303,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    9,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0015215139727347005,
+   "cells": [
+    "side-W0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    6,
+    9,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0018762217106917944,
+   "cells": [
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    8,
+    9,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0014865261937415664,
+   "cells": [
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    9,
+    11,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.0025283414656196435,
+   "cells": [
+    "side-N0",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024806134614281383,
+   "cells": [
+    "side-W0",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    6,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01622644529759265,
+   "cells": [
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    8,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0015120972958402312,
+   "cells": [
+    "side-E1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    11,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024336204550772234,
+   "cells": [
+    "side-S2",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    12,
+    14,
+    16,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 6.0945255095701256e-05,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    4,
+    8,
+    16,
+    17,
+    18,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0019385362821248142,
+   "cells": [
+    "side-E0",
+    "side-S1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    7,
+    8,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.005441594720325238,
+   "cells": [
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    8,
+    12,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0015069809144017121,
+   "cells": [
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "indices": [
+    11,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0034512441510036185,
+   "cells": [
+    "corner-SW",
+    "corner-NW",
+    "side-S0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW"
+   ],
+   "indices": [
+    0,
+    2,
+    4,
+    6,
+    10,
+    14,
+    16,
+    17
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0020179385890251034,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "indices": [
+    4,
+    5,
+    6,
+    9,
+    10,
+    16,
+    17,
+    18
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.021952022963149354,
+   "cells": [
+    "corner-NW",
+    "side-S0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S"
+   ],
+   "indices": [
+    2,
+    4,
+    6,
+    10,
+    14,
+    16,
+    17,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01177946050928802,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    0,
+    5,
+    6,
+    10,
+    14,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.02364393988491076,
+   "cells": [
+    "corner-NW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    2,
+    5,
+    6,
+    10,
+    14,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0005805353042042105,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    0,
+    6,
+    8,
+    10,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0045544905787697765,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    5,
+    6,
+    8,
+    10,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0266801605764293,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.026659674406008027,
+   "cells": [
+    "corner-SE",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    1,
+    4,
+    8,
+    12,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 6.17574503571916e-05,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-N1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    6,
+    8,
+    9,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.014621374052707359,
+   "cells": [
+    "corner-NW",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    2,
+    8,
+    10,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.015111707047354983,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "indices": [
+    6,
+    8,
+    10,
+    14,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.011921492710241344,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N"
+   ],
+   "indices": [
+    0,
+    6,
+    10,
+    14,
+    16,
+    17,
+    19,
+    20
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.010675471720079988,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "indices": [
+    5,
+    6,
+    8,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 554,
+   "best_penetration": 0.0005012695446748872,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "indices": [
+    6,
+    8,
+    9,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.007068178472882991,
+   "cells": [
+    "corner-NW",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    2,
+    6,
+    10,
+    14,
+    16,
+    17,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0023375097649219745,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    5,
+    6,
+    8,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0012036218005966326,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    5,
+    6,
+    10,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01879879991747535,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    4,
+    6,
+    11,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 555,
+   "best_penetration": 0.0007518353299729164,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    5,
+    9,
+    11,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.011393564493826891,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    6,
+    8,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.005603276922722333,
+   "cells": [
+    "side-W0",
+    "side-E1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    6,
+    11,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.002834073364814338,
+   "cells": [
+    "side-W0",
+    "side-S2",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "indices": [
+    6,
+    12,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.005295645558827555,
+   "cells": [
+    "side-S1",
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "indices": [
+    8,
+    9,
+    11,
+    16,
+    17,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0001853803843537838,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "indices": [
+    5,
+    6,
+    9,
+    16,
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.001481829918991373,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "indices": [
+    6,
+    8,
+    9,
+    16,
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.009638644871955981,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "indices": [
+    6,
+    8,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.008233240141777176,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    0,
+    4,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0030019737401711932,
+   "cells": [
+    "corner-SE",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    1,
+    4,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0060011691815540225,
+   "cells": [
+    "corner-SE",
+    "side-E0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    1,
+    7,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.006242985315783933,
+   "cells": [
+    "side-S0",
+    "side-E0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    4,
+    7,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0007932554721673535,
+   "cells": [
+    "side-E0",
+    "side-S1",
+    "side-N1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "indices": [
+    7,
+    8,
+    9,
+    12,
+    17,
+    18,
+    19,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0023642768480071075,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-E0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    4,
+    6,
+    7,
+    16,
+    17,
+    18,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.004765651401434257,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    0,
+    5,
+    6,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0010792752766566327,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    6,
+    9,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01056020056973217,
+   "cells": [
+    "side-N0",
+    "side-S1",
+    "side-N1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    8,
+    9,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.001652574861242817,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "side-W1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    9,
+    10,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0016699892432850971,
+   "cells": [
+    "side-N0",
+    "side-W1",
+    "side-E1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    10,
+    11,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.006294398856472427,
+   "cells": [
+    "side-N0",
+    "side-S1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    8,
+    14,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0059377568647196455,
+   "cells": [
+    "side-N0",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    10,
+    14,
+    17,
+    18,
+    19,
+    20,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01599888283168749,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    9,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.006879535225102651,
+   "cells": [
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "indices": [
+    5,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.010514391852887828,
+   "cells": [
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "indices": [
+    6,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.008952213542563037,
+   "cells": [
+    "side-N1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "indices": [
+    9,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ]
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.014256768780408269,
+   "cells": [
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE",
+    "interior-NE"
+   ],
+   "indices": [
+    8,
+    9,
+    16,
+    17,
+    19,
+    20,
+    22,
+    23
+   ]
+  }
+ ],
+ "module_sha256": "a1183d57877aecfb7298deaa21b94dddfe8df7b877b7f80314f771b136a2e5d9",
+ "parameters": {
+  "deep_hops": 256,
+  "deep_starts": 256,
+  "finish": {
+   "ftol": 1e-30,
+   "gtol": 1e-20,
+   "maxcor": 30,
+   "maxiter": 20000
+  },
+  "hops": 24,
+  "margin": 1e-06,
+  "seed": 1,
+  "starts": 12,
+  "sub_patterns": "every connected k - 1 subset, searched without the deep stage"
+ },
+ "placed": 1,
+ "projections": {
+  "arity<=6": {
+   "earlier": {
+    "endpoint_survives": true,
+    "flagged_classes": 3,
+    "orbits": 23354,
+    "surviving_states": 185424
+   },
+   "still_flagged": {
+    "endpoint_survives": true,
+    "flagged_classes": 3,
+    "orbits": 23354,
+    "surviving_states": 185424
+   }
+  },
+  "arity<=7": {
+   "earlier": {
+    "endpoint_survives": true,
+    "flagged_classes": 44,
+    "orbits": 5084,
+    "surviving_states": 40016
+   },
+   "still_flagged": {
+    "endpoint_survives": true,
+    "flagged_classes": 44,
+    "orbits": 5084,
+    "surviving_states": 40016
+   }
+  },
+  "arity<=8": {
+   "earlier": {
+    "endpoint_survives": true,
+    "flagged_classes": 90,
+    "orbits": 2256,
+    "surviving_states": 17636
+   },
+   "still_flagged": {
+    "endpoint_survives": true,
+    "flagged_classes": 89,
+    "orbits": 2264,
+    "surviving_states": 17696
+   }
+  }
+ },
+ "rechecked": [
+  {
+   "arity": 6,
+   "attempts": 555,
+   "best_penetration": 0.005613414302674369,
+   "cells": [
+    "side-S1",
+    "side-W1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.005449347634312041,
+    "container": 0.0024915887786669533,
+    "pair": 0.005613414302674369
+   },
+   "earlier_best_penetration": 0.005613440868811326,
+   "found_by": "none",
+   "indices": [
+    8,
+    10,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     2.0824491127473745,
+     0.7439440314566704,
+     0.6238233375177525
+    ],
+    [
+     0.6851715271102019,
+     2.6847198650128883,
+     -1.0204489926828586
+    ],
+    [
+     1.974657094030766,
+     3.2559872596222146,
+     1.2539535248637248
+    ],
+    [
+     1.4615669979214208,
+     1.9937399972672456,
+     2.1199287491820167
+    ],
+    [
+     2.540804336677398,
+     2.1390901163840526,
+     0.5474088143186742
+    ],
+    [
+     3.265338509405131,
+     1.4104450446891614,
+     -1.023076461852377
+    ]
+   ],
+   "seconds": 29.603,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 6,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 6,
+   "attempts": 555,
+   "best_penetration": 0.014827620073726733,
+   "cells": [
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.014827620073726733,
+    "container": 0.0,
+    "pair": 0.013752838599433659
+   },
+   "earlier_best_penetration": 0.014890237012744834,
+   "found_by": "none",
+   "indices": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.403041973323176,
+     1.7261775192204842,
+     0.8670821877758449
+    ],
+    [
+     1.4054662882049307,
+     3.2696666967171115,
+     0.8735245340816863
+    ],
+    [
+     2.0465951108097897,
+     2.4847442372585937,
+     0.8682757021285139
+    ],
+    [
+     2.4430713328078597,
+     1.4151723799262732,
+     -0.7101759021420065
+    ],
+    [
+     2.6842326186577883,
+     3.248178846426551,
+     0.8738009319199237
+    ],
+    [
+     3.271712398695915,
+     2.0050767511035037,
+     0.8555994211450902
+    ]
+   ],
+   "seconds": 82.59,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 11,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 6,
+   "attempts": 555,
+   "best_penetration": 0.001996270085042662,
+   "cells": [
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0017520089879803358,
+    "container": 0.0,
+    "pair": 0.001996270085042662
+   },
+   "earlier_best_penetration": 0.0020046139324435552,
+   "found_by": "none",
+   "indices": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+   ],
+   "pose": [
+    [
+     1.4096296181238426,
+     3.2660871727352916,
+     -1.9081374012687509
+    ],
+    [
+     1.4282595324110172,
+     2.2003129002399073,
+     2.803416719262994
+    ],
+    [
+     2.231455068258241,
+     1.4756538967486794,
+     -0.33796570309403
+    ],
+    [
+     2.441906175984962,
+     3.1928731905742076,
+     1.2328876709271264
+    ],
+    [
+     3.2477520089879803,
+     2.47557979558583,
+     -1.9088188690165262
+    ],
+    [
+     3.2663419292444917,
+     1.409901155561306,
+     1.233480167722297
+    ]
+   ],
+   "seconds": 138.999,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 6,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.011136079247246689,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-W"
+   ],
+   "components": {
+    "cell": 0.008893504944456065,
+    "container": 0.008615497933721517,
+    "pair": 0.011136079247246689
+   },
+   "earlier_best_penetration": 0.011066745953437263,
+   "found_by": "none",
+   "indices": [
+    0,
+    5,
+    6,
+    10,
+    14,
+    16,
+    18
+   ],
+   "pose": [
+    [
+     0.9664560285231458,
+     0.524665829560402,
+     1.5201311119081666
+    ],
+    [
+     1.9567580771821047,
+     4.053864351323486,
+     1.8603568381899134
+    ],
+    [
+     0.6323203968777672,
+     1.6229288255791878,
+     0.3215113770441333
+    ],
+    [
+     1.3793941412798045,
+     2.6107716577871543,
+     1.113151840540731
+    ],
+    [
+     0.6606946094812169,
+     3.3903898380358277,
+     2.6846322207757227
+    ],
+    [
+     1.9377721917208546,
+     1.4142181602916302,
+     1.1212431767683062
+    ],
+    [
+     2.346538203799394,
+     2.333960888489912,
+     1.1164304808200882
+    ]
+   ],
+   "seconds": 195.594,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 7,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.004999479772897497,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "components": {
+    "cell": 0.0033685523932671657,
+    "container": 0.002368186758535451,
+    "pair": 0.004999479772897497
+   },
+   "earlier_best_penetration": 0.005004512615532919,
+   "found_by": "none",
+   "indices": [
+    0,
+    5,
+    6,
+    10,
+    16,
+    17,
+    18
+   ],
+   "pose": [
+    [
+     0.568208537019892,
+     0.5000263349954475,
+     1.5707615783570854
+    ],
+    [
+     1.2900308076698157,
+     4.176243436732229,
+     1.5750549074603566
+    ],
+    [
+     0.49989122033428546,
+     1.5000396192952914,
+     -2.1637130134300535e-05
+    ],
+    [
+     0.49998721739538865,
+     2.5020292762172276,
+     1.5748809935491674
+    ],
+    [
+     1.702560344051418,
+     1.4107592100167907,
+     -0.8915861812072444
+    ],
+    [
+     1.4933179606646434,
+     3.1801780049165527,
+     1.578724316112745
+    ],
+    [
+     2.285199698783997,
+     2.2804358463038743,
+     0.6790967061266793
+    ]
+   ],
+   "seconds": 253.733,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 17,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024178214940032694,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "components": {
+    "cell": 0.0016017222690010158,
+    "container": 0.0008057429987813336,
+    "pair": 0.0024178214940032694
+   },
+   "earlier_best_penetration": 0.002532010096470194,
+   "found_by": "none",
+   "indices": [
+    0,
+    4,
+    6,
+    14,
+    16,
+    17,
+    18
+   ],
+   "pose": [
+    [
+     0.49993447166525323,
+     0.4999304653621436,
+     0.00012314067431221014
+    ],
+    [
+     1.9953352734796903,
+     0.49957096311825333,
+     3.1423463499242885
+    ],
+    [
+     0.4997471886713024,
+     1.499722082670388,
+     1.5710191683808006
+    ],
+    [
+     0.7050344423366642,
+     2.7046540017446463,
+     0.8585830489017579
+    ],
+    [
+     1.4989902167270768,
+     1.4975367117929543,
+     1.5717828758547203
+    ],
+    [
+     1.5853614569703247,
+     3.265362834609842,
+     2.429464074600504
+    ],
+    [
+     2.239657953235768,
+     2.438607224120209,
+     -0.6374442903123545
+    ]
+   ],
+   "seconds": 315.296,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 21,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01307615578479071,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "components": {
+    "cell": 0.01307615578479071,
+    "container": 0.011495413015534695,
+    "pair": 0.011017209812354878
+   },
+   "earlier_best_penetration": 0.01307615578479071,
+   "found_by": "none",
+   "indices": [
+    0,
+    6,
+    10,
+    14,
+    16,
+    17,
+    18
+   ],
+   "pose": [
+    [
+     1.2800648065786486,
+     0.6764507834914981,
+     1.0187238018225093
+    ],
+    [
+     0.6807115045788386,
+     1.596498335305497,
+     1.0196151699411347
+    ],
+    [
+     1.2437673032627776,
+     2.4198801368428406,
+     1.0218646136909237
+    ],
+    [
+     0.6762202725252676,
+     3.392588306425422,
+     -0.5463648137818815
+    ],
+    [
+     1.9752609432973318,
+     1.4109003171397505,
+     1.0199859471969064
+    ],
+    [
+     1.764323265098133,
+     3.269384550306018,
+     -0.5488114550099709
+    ],
+    [
+     2.35587026560376,
+     2.338622211250795,
+     -0.5486524661789998
+    ]
+   ],
+   "seconds": 367.59,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 11,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.006305753607423026,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "components": {
+    "cell": 0.004224280015705961,
+    "container": 0.0017936754092737761,
+    "pair": 0.006305753607423026
+   },
+   "earlier_best_penetration": 0.0063083936184540335,
+   "found_by": "none",
+   "indices": [
+    4,
+    6,
+    10,
+    14,
+    16,
+    17,
+    18
+   ],
+   "pose": [
+    [
+     1.9950111050249122,
+     0.4988812690209614,
+     0.0013508016036112656
+    ],
+    [
+     0.4994708244734386,
+     1.3088216149477434,
+     1.5713821763522031
+    ],
+    [
+     0.4999948997574831,
+     2.3811270851039734,
+     -0.0021509527419175094
+    ],
+    [
+     0.5003716478448692,
+     3.386041549380402,
+     1.5692861040667563
+    ],
+    [
+     1.4976970331435009,
+     1.4940853225732753,
+     3.1427278138221606
+    ],
+    [
+     1.7014409787946851,
+     3.26529022534415,
+     0.9056548383454841
+    ],
+    [
+     2.2881328689682787,
+     2.3938411651211946,
+     -0.6650268555336697
+    ]
+   ],
+   "seconds": 416.454,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 18,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.017174150435186553,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.017159249061871495,
+    "container": 0.00861019915052097,
+    "pair": 0.017174150435186553
+   },
+   "earlier_best_penetration": 0.017174150435186553,
+   "found_by": "none",
+   "indices": [
+    4,
+    5,
+    8,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.2898199561015775,
+     0.5051818254942072,
+     1.5602335177376434
+    ],
+    [
+     2.003617941387694,
+     3.977643194746568,
+     0.8052818619723526
+    ],
+    [
+     2.2896280095184296,
+     0.49786484951829857,
+     1.5601978552105291
+    ],
+    [
+     1.4096150887315644,
+     1.6920573660619163,
+     1.068493025189574
+    ],
+    [
+     1.3938407509381285,
+     3.193274925696344,
+     0.8022388393025333
+    ],
+    [
+     2.136686628657565,
+     2.540536875171713,
+     2.3662575138089785
+    ],
+    [
+     2.678239762140348,
+     1.6836428322794987,
+     0.791837683907985
+    ]
+   ],
+   "seconds": 464.735,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 14,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01255076421174206,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.009760183468726424,
+    "container": 0.005862742640433016,
+    "pair": 0.01255076421174206
+   },
+   "earlier_best_penetration": 0.01255076421174206,
+   "found_by": "none",
+   "indices": [
+    4,
+    6,
+    8,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.6624093024373738,
+     0.5044100516031195,
+     1.582006397741641
+    ],
+    [
+     0.4969634787126685,
+     1.2899090495021255,
+     -1.5651277876062613
+    ],
+    [
+     2.667990086955607,
+     0.49938864306537495,
+     3.4554244263899243e-06
+    ],
+    [
+     1.485524327078901,
+     1.5012264438461882,
+     0.01341234997388486
+    ],
+    [
+     1.4092469814194457,
+     3.2665875686385584,
+     2.385487833083166
+    ],
+    [
+     2.116146018113564,
+     2.562086142315686,
+     0.8146028044996594
+    ],
+    [
+     2.677430005280329,
+     1.7034685912516931,
+     2.3847462548705547
+    ]
+   ],
+   "seconds": 521.192,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 11,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 6.09648250555761e-05,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 6.09648250555761e-05,
+    "container": 2.8106729465182667e-05,
+    "pair": 5.9790139617321714e-05
+   },
+   "earlier_best_penetration": 6.220999659833915e-05,
+   "found_by": "none",
+   "indices": [
+    5,
+    6,
+    9,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.2901044140034412,
+     3.9684436160366574,
+     2.2553596589782914
+    ],
+    [
+     0.5117455758762508,
+     1.2950290063050216,
+     1.5614406938326437
+    ],
+    [
+     2.680697983268252,
+     3.9701313250829195,
+     0.7268885741710726
+    ],
+    [
+     1.8594808888904664,
+     1.4109421157850512,
+     -0.8439726212333215
+    ],
+    [
+     1.999117974513719,
+     3.2318125662785375,
+     0.7268856866525075
+    ],
+    [
+     1.4299390351749444,
+     2.3671027227715977,
+     0.7268524697153614
+    ],
+    [
+     2.6556770478135734,
+     2.0203807837197516,
+     0.7268202289919634
+    ]
+   ],
+   "seconds": 586.568,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 45,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01732407590200402,
+   "cells": [
+    "corner-NW",
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.017062508130223142,
+    "container": 0.002933652400913367,
+    "pair": 0.01732407590200402
+   },
+   "earlier_best_penetration": 0.017396086933477273,
+   "found_by": "none",
+   "indices": [
+    2,
+    5,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.4977612079761459,
+     4.177094278719633,
+     0.0006790855586928486
+    ],
+    [
+     1.4913221719184953,
+     4.17839848138528,
+     0.0007489250629111925
+    ],
+    [
+     0.7015289248004326,
+     2.978175074580427,
+     0.6988903363606384
+    ],
+    [
+     1.8988008062161947,
+     1.394173582764667,
+     0.69913637705413
+    ],
+    [
+     2.025433056733088,
+     3.080730557831569,
+     0.6901030995252351
+    ],
+    [
+     1.4129374918697768,
+     2.275159856108339,
+     0.698951271774183
+    ],
+    [
+     2.6607556964602486,
+     2.0249327586023207,
+     2.274085736283715
+    ]
+   ],
+   "seconds": 637.294,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 21,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01639844953809022,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.013918326187191798,
+    "container": 0.012763225197550021,
+    "pair": 0.01639844953809022
+   },
+   "earlier_best_penetration": 0.015762651684190887,
+   "found_by": "none",
+   "indices": [
+    4,
+    5,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.2899990130877868,
+     0.6684792593832277,
+     1.9409831038239047
+    ],
+    [
+     1.2847847443267226,
+     4.029222239550159,
+     0.41651826544102144
+    ],
+    [
+     0.500180768099783,
+     2.9024306058784526,
+     1.5713326079943617
+    ],
+    [
+     1.4093982580686397,
+     1.9691582483802412,
+     3.559166944589226
+    ],
+    [
+     1.9908893750984966,
+     3.2653222719039348,
+     0.42054966701371904
+    ],
+    [
+     2.337389094136368,
+     2.3402626066752825,
+     1.9880758801228613
+    ],
+    [
+     2.6849258260346662,
+     1.4160816738128081,
+     1.987665106702324
+    ]
+   ],
+   "seconds": 687.653,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 18,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024141377572435285,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.0017052156514076877,
+    "container": 0.0009534652263294974,
+    "pair": 0.0024141377572435285
+   },
+   "earlier_best_penetration": 0.0024141377572435285,
+   "found_by": "none",
+   "indices": [
+    4,
+    6,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.833755955541635,
+     0.49982277487479676,
+     0.0013159077732834451
+    ],
+    [
+     0.49966989471858686,
+     1.3008280070467666,
+     0.0012474983393555147
+    ],
+    [
+     0.704143450369089,
+     2.680377117104004,
+     0.8740138833766955
+    ],
+    [
+     1.4978313258264346,
+     1.498006670746325,
+     1.5727877549254496
+    ],
+    [
+     1.5625620207426083,
+     3.2654879613176426,
+     0.8740665074464622
+    ],
+    [
+     2.203969377893777,
+     2.474442161207215,
+     0.8742577292607274
+    ],
+    [
+     2.678578912580192,
+     1.429719558380563,
+     2.08681868122659
+    ]
+   ],
+   "seconds": 744.872,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 23,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.010144955154776536,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.009492089059570219,
+    "container": 0.004480862714317135,
+    "pair": 0.010144955154776536
+   },
+   "earlier_best_penetration": 0.010144955154776536,
+   "found_by": "none",
+   "indices": [
+    4,
+    8,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.30965379098251,
+     0.5003322968358805,
+     1.5734832258482079
+    ],
+    [
+     2.6579732580311433,
+     0.4977130528744941,
+     0.0017133072277539805
+    ],
+    [
+     0.6898667100552125,
+     2.6774532011145378,
+     2.165937957959399
+    ],
+    [
+     1.4093205538445925,
+     1.49950258238773,
+     0.004102452262788121
+    ],
+    [
+     1.4864729324912425,
+     3.2744920890595703,
+     0.5955716351830712
+    ],
+    [
+     2.152246755200326,
+     2.5265116565850443,
+     0.59430006068872
+    ],
+    [
+     2.67298213072727,
+     1.6810253465108367,
+     0.5901096781393704
+    ]
+   ],
+   "seconds": 791.702,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 8,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 6.269570100558841e-05,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 6.1405581354812e-05,
+    "container": 3.066575054955223e-05,
+    "pair": 6.269570100558841e-05
+   },
+   "earlier_best_penetration": 6.312971339905715e-05,
+   "found_by": "none",
+   "indices": [
+    5,
+    9,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.2900011488445042,
+     3.972727623905492,
+     0.6811980262354101
+    ],
+    [
+     2.680700926219328,
+     3.9701318183109837,
+     0.7269385555114772
+    ],
+    [
+     0.7027824351800205,
+     3.0991572140626866,
+     -0.8960608807507459
+    ],
+    [
+     1.8594646259884666,
+     1.4109448795226593,
+     0.7268610966246589
+    ],
+    [
+     1.9992786939141396,
+     3.2316462307152385,
+     0.7269347206580038
+    ],
+    [
+     1.4299385944186451,
+     2.367138698959607,
+     -0.8438988419896374
+    ],
+    [
+     2.65568722267955,
+     2.0203617117966104,
+     2.2976517003016848
+    ]
+   ],
+   "seconds": 852.841,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 52,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.017095708968768664,
+   "cells": [
+    "side-N0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.013858639141548501,
+    "container": 0.014318386700272079,
+    "pair": 0.017095708968768664
+   },
+   "earlier_best_penetration": 0.017095708968768664,
+   "found_by": "none",
+   "indices": [
+    5,
+    10,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.2871612098289846,
+     4.020230533640685,
+     0.46038752609896527
+    ],
+    [
+     0.4992982168511187,
+     1.993563637843489,
+     1.5702221161312517
+    ],
+    [
+     0.4988476832545536,
+     2.9918142151573264,
+     1.5717703004366788
+    ],
+    [
+     1.4960885491409264,
+     1.409976687149695,
+     1.569978242697327
+    ],
+    [
+     1.9812728386391858,
+     3.265264453450334,
+     0.46020572905573537
+    ],
+    [
+     2.3374761178559416,
+     2.342123941103806,
+     0.45437182742601273
+    ],
+    [
+     2.6851406694528532,
+     1.4161413608584514,
+     0.4515387125533898
+    ]
+   ],
+   "seconds": 918.62,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 27,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.02050843477342157,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "components": {
+    "cell": 0.011851614240555364,
+    "container": 0.010057565077320862,
+    "pair": 0.02050843477342157
+   },
+   "earlier_best_penetration": 0.020859408963210146,
+   "found_by": "none",
+   "indices": [
+    4,
+    6,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "pose": [
+    [
+     1.2897299202651982,
+     0.4980234162736676,
+     1.5545008749784028
+    ],
+    [
+     0.5031179636653004,
+     1.9955647412643476,
+     -0.023973275981710035
+    ],
+    [
+     1.4781109007504618,
+     1.4814671401982842,
+     1.5386262097352852
+    ],
+    [
+     1.4107182603037087,
+     3.2650834564745534,
+     1.0630595660582065
+    ],
+    [
+     2.1065453228470763,
+     2.4507272701169804,
+     1.065971584918559
+    ],
+    [
+     2.6804952257618853,
+     1.4296984296835564,
+     2.328558819455012
+    ],
+    [
+     2.6850330807103506,
+     3.2578516142405554,
+     -0.5079219110111561
+    ]
+   ],
+   "seconds": 986.903,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 53,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.008984160277538678,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "components": {
+    "cell": 0.008424612978768842,
+    "container": 0.005192791271813102,
+    "pair": 0.008984160277538678
+   },
+   "earlier_best_penetration": 0.010195981975201995,
+   "found_by": "none",
+   "indices": [
+    4,
+    8,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "pose": [
+    [
+     1.2878271263652505,
+     0.5010278578414172,
+     1.5648282723465836
+    ],
+    [
+     2.286456922236209,
+     0.49806440856289885,
+     -0.006535804494869639
+    ],
+    [
+     1.408186411998984,
+     1.7123095279582994,
+     2.4619980320578216
+    ],
+    [
+     1.4029353496303492,
+     3.2703429189438804,
+     0.8870509917912355
+    ],
+    [
+     2.040973182972572,
+     2.482793818839586,
+     0.887020738622752
+    ],
+    [
+     2.676503661674956,
+     1.692617287399846,
+     0.8886555831986751
+    ],
+    [
+     2.6816224389279624,
+     3.2468161395822133,
+     -0.6798994330930628
+    ]
+   ],
+   "seconds": 1058.218,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 48,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0011275753188640936,
+   "cells": [
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "components": {
+    "cell": 0.0007238832821578889,
+    "container": 0.0003408331243610063,
+    "pair": 0.0011275753188640936
+   },
+   "earlier_best_penetration": 0.0011319787687793514,
+   "found_by": "none",
+   "indices": [
+    6,
+    10,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "pose": [
+    [
+     0.49976321658739115,
+     1.290989010368097,
+     1.5705882057126974
+    ],
+    [
+     0.6965309667341715,
+     2.4887492772647684,
+     0.9834927115657129
+    ],
+    [
+     1.499125715602438,
+     1.4103569893396803,
+     -0.0007856191791158793
+    ],
+    [
+     1.4108337429623017,
+     3.2651018229616104,
+     4.202239069045955
+    ],
+    [
+     2.0905138599759847,
+     2.43048332270045,
+     1.0617716368219885
+    ],
+    [
+     2.6783924623201587,
+     1.429951181052486,
+     1.0639944280373244
+    ],
+    [
+     2.6783952033582876,
+     3.246723883282158,
+     1.0616001860836606
+    ]
+   ],
+   "seconds": 1142.897,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 16,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.018459087570402932,
+   "cells": [
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "components": {
+    "cell": 0.014688887796119765,
+    "container": 0.01089775192577902,
+    "pair": 0.018459087570402932
+   },
+   "earlier_best_penetration": 0.018613952082209617,
+   "found_by": "none",
+   "indices": [
+    6,
+    14,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "pose": [
+    [
+     0.4961281165421401,
+     1.545494348948431,
+     1.5673078919000845
+    ],
+    [
+     0.6142806605342825,
+     2.677298451635903,
+     3.440835605785016
+    ],
+    [
+     1.4835114201086692,
+     1.4023622597676504,
+     -0.00826769950626344
+    ],
+    [
+     1.4636319471417945,
+     3.2708210692522433,
+     0.30667199211716084
+    ],
+    [
+     2.2048670836383932,
+     2.357304788722145,
+     0.8052572019071133
+    ],
+    [
+     2.685860421018864,
+     1.425272150020832,
+     -0.7687231936552279
+    ],
+    [
+     2.693124296213501,
+     3.2572411793880733,
+     0.8058627097188353
+    ]
+   ],
+   "seconds": 1228.25,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 19,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0007591502969451769,
+   "cells": [
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.0004883349096909129,
+    "container": 0.00026443526733721523,
+    "pair": 0.0007591502969451769
+   },
+   "earlier_best_penetration": 0.0007550075536519874,
+   "found_by": "none",
+   "indices": [
+    6,
+    10,
+    14,
+    16,
+    17,
+    18,
+    21
+   ],
+   "pose": [
+    [
+     0.4998425553014263,
+     1.289997583906485,
+     1.571010330832921
+    ],
+    [
+     0.768635987157388,
+     2.309544392052888,
+     -0.07224660216973218
+    ],
+    [
+     0.545221747625906,
+     3.383227500184379,
+     3.2366720890661633
+    ],
+    [
+     1.6994441609249658,
+     1.4106419774747114,
+     -2.494000928360007
+    ],
+    [
+     1.7465426513294564,
+     3.2649983380363823,
+     2.0205195245064402
+    ],
+    [
+     2.2721499553450353,
+     2.3101077094462914,
+     -0.9234554262167216
+    ],
+    [
+     3.246488334909691,
+     2.678375314632931,
+     0.6470037104582392
+    ]
+   ],
+   "seconds": 1343.726,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 10,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.011053149932217288,
+   "cells": [
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.010866789843380298,
+    "container": 0.0027798091596644703,
+    "pair": 0.011053149932217288
+   },
+   "earlier_best_penetration": 0.010897084757586106,
+   "found_by": "none",
+   "indices": [
+    5,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     1.2928776077151336,
+     3.975503132512107,
+     0.681268602176721
+    ],
+    [
+     0.7009240076435468,
+     3.1205158534285125,
+     2.250704123125504
+    ],
+    [
+     1.7346027547135552,
+     1.4005471082518914,
+     0.6724964484516367
+    ],
+    [
+     2.004861010740167,
+     3.268221747966999,
+     0.6820632300647328
+    ],
+    [
+     1.4191332101566196,
+     2.4168831027011173,
+     2.248546829491495
+    ],
+    [
+     2.663011303575834,
+     1.8297119403268658,
+     5.389241038601342
+    ],
+    [
+     3.2511463011328607,
+     2.682260402036101,
+     -0.8901914088142966
+    ]
+   ],
+   "seconds": 1445.22,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 22,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.013890419056767467,
+   "cells": [
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.013333451574304434,
+    "container": 0.006809650327541661,
+    "pair": 0.013890419056767467
+   },
+   "earlier_best_penetration": 0.013890419056767467,
+   "found_by": "none",
+   "indices": [
+    9,
+    11,
+    16,
+    18,
+    19,
+    20,
+    21
+   ],
+   "pose": [
+    [
+     2.6882614844863055,
+     3.976735367920707,
+     0.7313513454138134
+    ],
+    [
+     3.971927867001925,
+     1.993186346211692,
+     0.7296316649015538
+    ],
+    [
+     1.742506894678015,
+     1.3989883200264899,
+     0.7161940495781072
+    ],
+    [
+     1.4166665484256955,
+     2.4285408299003026,
+     0.7210801849235589
+    ],
+    [
+     2.6535016537166247,
+     1.8639053241295342,
+     0.7221632113162259
+    ],
+    [
+     2.057117294226712,
+     3.198032620256586,
+     0.7295665288596058
+    ],
+    [
+     3.25032198961568,
+     2.6856044411993083,
+     0.7282712957284201
+    ]
+   ],
+   "seconds": 1544.889,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 8,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01632708538865013,
+   "cells": [
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.016196095379394038,
+    "container": 0.008249862744570624,
+    "pair": 0.01632708538865013
+   },
+   "earlier_best_penetration": 0.01617006755175665,
+   "found_by": "none",
+   "indices": [
+    11,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+   ],
+   "pose": [
+    [
+     3.978091077818554,
+     1.9862728360999873,
+     0.7336107355504803
+    ],
+    [
+     1.4055935737014165,
+     1.4064467472084474,
+     -0.8736648891621545
+    ],
+    [
+     1.4015273380992395,
+     2.944879773188221,
+     -0.866985386467992
+    ],
+    [
+     2.0481115230041826,
+     2.1901544430188684,
+     -2.4396193334548175
+    ],
+    [
+     2.68484892837243,
+     1.427191337665195,
+     0.6966947635200104
+    ],
+    [
+     2.442397160269225,
+     3.262196095379394,
+     0.723621554802175
+    ],
+    [
+     3.246030607926663,
+     2.6560903404380745,
+     0.7323826767831352
+    ]
+   ],
+   "seconds": 1662.381,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 16,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.00795391550963287,
+   "cells": [
+    "corner-NW",
+    "side-N0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.00795391550963287,
+    "container": 0.003937551450534205,
+    "pair": 0.00765940373879892
+   },
+   "earlier_best_penetration": 0.007891003433773136,
+   "found_by": "none",
+   "indices": [
+    2,
+    5,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     0.5803438964003708,
+     4.147411449741951,
+     -0.011819957005308628
+    ],
+    [
+     2.0004142341921343,
+     3.9760059711099394,
+     2.2613917817599276
+    ],
+    [
+     1.4106757142392077,
+     1.8583624884432013,
+     0.6839689268687383
+    ],
+    [
+     1.4030460844903672,
+     3.1393594642951994,
+     0.6884101735016072
+    ],
+    [
+     2.1854066535124392,
+     2.491284825431592,
+     0.6858064575561517
+    ],
+    [
+     2.453466663576774,
+     1.4231107990778757,
+     0.6847100510598182
+    ],
+    [
+     3.2683847181785737,
+     1.9993060920325612,
+     0.6850759875752028
+    ]
+   ],
+   "seconds": 1777.252,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 63,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.007743526477856255,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.007743526477856255,
+    "container": 0.003922326471856863,
+    "pair": 0.007657688910593485
+   },
+   "earlier_best_penetration": 0.007835863332958715,
+   "found_by": "none",
+   "indices": [
+    4,
+    5,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     1.4640046852635547,
+     0.5459040616756484,
+     0.04612792586922933
+    ],
+    [
+     2.000116266114198,
+     3.975513065761112,
+     0.6980219875702562
+    ],
+    [
+     1.4104705993874844,
+     1.8495092604643353,
+     0.6946560664345944
+    ],
+    [
+     1.4032564735221438,
+     3.14113903047862,
+     -0.8751292519644668
+    ],
+    [
+     2.1830969468168053,
+     2.4931117726208667,
+     0.6933934662865523
+    ],
+    [
+     2.454445261498437,
+     1.422614844531803,
+     0.6937809767233177
+    ],
+    [
+     3.2684850667513046,
+     2.000059984813251,
+     0.692702703510355
+    ]
+   ],
+   "seconds": 1903.044,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 51,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.022805334545968003,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.02181718707367475,
+    "container": 0.018672338546556255,
+    "pair": 0.022805334545968003
+   },
+   "earlier_best_penetration": 0.022609984103238667,
+   "found_by": "none",
+   "indices": [
+    4,
+    6,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     1.6433781635892082,
+     0.4991625792935327,
+     1.5716582117061524
+    ],
+    [
+     0.6776920780403295,
+     1.2793346516910808,
+     2.1816630005392663
+    ],
+    [
+     1.4109072010127237,
+     1.9375393007757038,
+     2.1841522548033456
+    ],
+    [
+     1.411015114861902,
+     3.264905677461542,
+     0.6523956782023611
+    ],
+    [
+     2.2228113039587023,
+     2.4840428578937197,
+     2.1824527768348534
+    ],
+    [
+     2.4513766353980553,
+     1.426785475026353,
+     -0.9595235814014947
+    ],
+    [
+     3.26827318423284,
+     1.9978600245528018,
+     0.6121102317558136
+    ]
+   ],
+   "seconds": 2022.165,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 28,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 554,
+   "best_penetration": 0.008109213138310922,
+   "cells": [
+    "side-N0",
+    "side-E0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.008109213138310922,
+    "container": 0.004017433607102827,
+    "pair": 0.007686201666921688
+   },
+   "earlier_best_penetration": 0.008081036831832478,
+   "found_by": "none",
+   "indices": [
+    5,
+    7,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     2.0002262853417823,
+     3.9763238739745326,
+     0.6871035798240587
+    ],
+    [
+     3.973671577589304,
+     1.288749011030405,
+     2.2529422730128625
+    ],
+    [
+     1.41066640341806,
+     1.859655859692992,
+     -2.45949753627186
+    ],
+    [
+     1.402890786861689,
+     3.1378927052504055,
+     0.6845089477766049
+    ],
+    [
+     2.186533523008873,
+     2.4900028835985837,
+     0.6824081820250939
+    ],
+    [
+     2.45388204389629,
+     1.4230093837460343,
+     0.6821108549710716
+    ],
+    [
+     3.2670797278672983,
+     2.0010099931677003,
+     -0.88883755756083
+    ]
+   ],
+   "seconds": 2133.695,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 90,
+   "sub_pattern_witnesses": 5
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.023288213014481363,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.021911528733495444,
+    "container": 0.01753882416003205,
+    "pair": 0.023288213014481363
+   },
+   "earlier_best_penetration": 0.023277527208449444,
+   "found_by": "none",
+   "indices": [
+    4,
+    8,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     1.2780464612190732,
+     0.676480576626162,
+     0.9780934020914017
+    ],
+    [
+     2.680360374409248,
+     0.6908915698308734,
+     1.0006487198249174
+    ],
+    [
+     1.9387926569677074,
+     1.4107015818678614,
+     2.5451099051044417
+    ],
+    [
+     1.9837526357544282,
+     3.2673187892849147,
+     0.9763211370687768
+    ],
+    [
+     1.4264044333878905,
+     2.4394099234151434,
+     2.548232864277398
+    ],
+    [
+     2.4833202499273703,
+     2.2236673311798674,
+     0.9764309683040205
+    ],
+    [
+     3.2647793647742582,
+     1.5305013783590906,
+     1.040245861459411
+    ]
+   ],
+   "seconds": 2235.29,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 10,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.01359207768632631,
+   "cells": [
+    "side-E0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.01359207768632631,
+    "container": 0.006943675290625229,
+    "pair": 0.01121685737122391
+   },
+   "earlier_best_penetration": 0.01360701962436317,
+   "found_by": "none",
+   "indices": [
+    7,
+    8,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     3.975827908807771,
+     2.0022679315885283,
+     2.3558648329869034
+    ],
+    [
+     2.4703401796853313,
+     0.7001607805140398,
+     0.7879627641064928
+    ],
+    [
+     1.7738001396514,
+     1.410983977495932,
+     2.358749331138794
+    ],
+    [
+     2.003441995463545,
+     3.2714098198569315,
+     0.7942908381818494
+    ],
+    [
+     1.4164079223136736,
+     2.459739785805663,
+     -0.7794523904679703
+    ],
+    [
+     2.517888253632525,
+     2.158043660997117,
+     0.7912561959200468
+    ],
+    [
+     3.173680469942434,
+     1.404103741130586,
+     0.7879410388857617
+    ]
+   ],
+   "seconds": 2329.585,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 49,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 554,
+   "best_penetration": 0.0015215142459479303,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0015215142459479303,
+    "container": 0.000761403573800834,
+    "pair": 0.0013269987844864994
+   },
+   "earlier_best_penetration": 0.0017605599830408103,
+   "found_by": "none",
+   "indices": [
+    5,
+    9,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     1.2900016181881584,
+     3.9685515271479725,
+     0.8171366062595633
+    ],
+    [
+     2.6814210832366365,
+     3.9696621498917617,
+     -2.3515802691629752
+    ],
+    [
+     1.8545451933758401,
+     1.4097522363368606,
+     -0.7817833248396748
+    ],
+    [
+     1.9987499159638924,
+     3.239837927825355,
+     3.931533417181345
+    ],
+    [
+     1.428478485754052,
+     2.398610582167181,
+     3.930998489127338
+    ],
+    [
+     2.5587919105131265,
+     2.1184602164012944,
+     -0.781468792943279
+    ],
+    [
+     3.265140819296283,
+     1.4108602827420171,
+     -0.7814707017823401
+    ]
+   ],
+   "seconds": 2426.438,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 81,
+   "sub_pattern_witnesses": 5
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0015215139727347005,
+   "cells": [
+    "side-W0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0015215139727347005,
+    "container": 0.0007614036376080158,
+    "pair": 0.001326999245977012
+   },
+   "earlier_best_penetration": 0.0015324602141217891,
+   "found_by": "none",
+   "indices": [
+    6,
+    9,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     0.5554406520315149,
+     1.3589211736472002,
+     0.01695530988227508
+    ],
+    [
+     2.6814210833858843,
+     3.9696621499606253,
+     0.7900123859766512
+    ],
+    [
+     1.8545451929095444,
+     1.409752236037664,
+     0.7890130002201836
+    ],
+    [
+     1.9987499161708042,
+     3.2398379275034372,
+     2.3607370909783474
+    ],
+    [
+     1.4284784860272652,
+     2.3986105818620844,
+     0.7894058351017067
+    ],
+    [
+     2.558791910418888,
+     2.1184602156902628,
+     0.7893275333756792
+    ],
+    [
+     3.265140818945927,
+     1.4108602825007173,
+     0.7893256242686604
+    ]
+   ],
+   "seconds": 2519.154,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 28,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0018762217106917944,
+   "cells": [
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0018762217106917944,
+    "container": 0.0009388712574733837,
+    "pair": 0.0016083306679174347
+   },
+   "earlier_best_penetration": 0.0018931054089610377,
+   "found_by": "none",
+   "indices": [
+    8,
+    9,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     2.564987113818587,
+     0.7067006370742371,
+     2.366040216463239
+    ],
+    [
+     2.6815853746044636,
+     3.9698738548933528,
+     -0.7745294045217895
+    ],
+    [
+     1.8543021275263725,
+     1.4098550568559631,
+     0.7951309190097898
+    ],
+    [
+     1.9986848868123994,
+     3.240836075273222,
+     2.3669770404873343
+    ],
+    [
+     1.4281237782893081,
+     2.4018359994305127,
+     0.79556589863229
+    ],
+    [
+     2.5543149420092437,
+     2.1228409087274502,
+     2.3662534503758144
+    ],
+    [
+     3.265379307306386,
+     1.4200871485266364,
+     2.366145528044186
+    ]
+   ],
+   "seconds": 2605.947,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 12,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0014865261937415664,
+   "cells": [
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0014865261937415664,
+    "container": 0.0008172183472381356,
+    "pair": 0.0013112872733581638
+   },
+   "earlier_best_penetration": 0.0015185230283347728,
+   "found_by": "none",
+   "indices": [
+    9,
+    11,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     2.6814722682783074,
+     3.96972197523992,
+     0.7911108427173476
+    ],
+    [
+     3.948867668256647,
+     2.622176092204297,
+     0.6064188614761006
+    ],
+    [
+     1.8546221275832127,
+     1.409684705823187,
+     2.361264297824066
+    ],
+    [
+     1.9735621926335956,
+     3.264948809739786,
+     -0.7796240317705149
+    ],
+    [
+     1.4285134738062584,
+     2.399151778928459,
+     0.790726518919876
+    ],
+    [
+     2.558080348465041,
+     2.119195492990193,
+     0.7908090223589561
+    ],
+    [
+     3.2651062351706526,
+     1.4108902257656453,
+     0.7925835375839801
+    ]
+   ],
+   "seconds": 2687.232,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 16,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 0.0025283414656196435,
+   "cells": [
+    "side-N0",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0025283414656196435,
+    "container": 0.0008126709381000019,
+    "pair": 0.0017060273275564253
+   },
+   "earlier_best_penetration": 0.002558355992578365,
+   "found_by": "none",
+   "indices": [
+    5,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     1.2890443505465077,
+     3.972011295219193,
+     -0.704625533720367
+    ],
+    [
+     2.68028780876279,
+     0.7043114643768356,
+     2.4377290191429424
+    ],
+    [
+     1.860829081685926,
+     1.4092559604534738,
+     0.8656788540006355
+    ],
+    [
+     1.9991142081139925,
+     3.2653041356674692,
+     0.8661819689555701
+    ],
+    [
+     1.4274716585343803,
+     2.4409080394947424,
+     0.8660672004213744
+    ],
+    [
+     2.5081701703672334,
+     2.169713716691964,
+     0.8664130308772452
+    ],
+    [
+     3.265904136577842,
+     1.5181485459595367,
+     -0.7040605535611564
+    ]
+   ],
+   "seconds": 2783.165,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 68,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024806134614281383,
+   "cells": [
+    "side-W0",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0024806134614281383,
+    "container": 0.000340706887035358,
+    "pair": 0.0018458678563488817
+   },
+   "earlier_best_penetration": 0.0024677659756788817,
+   "found_by": "none",
+   "indices": [
+    6,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     0.5526362521296206,
+     1.2934811007962117,
+     0.10769398035713622
+    ],
+    [
+     2.6803809871536,
+     0.7042789236897599,
+     -0.7015002965242226
+    ],
+    [
+     1.8613678489452805,
+     1.4091052965748716,
+     4.009132009551355
+    ],
+    [
+     1.9980812676321633,
+     3.2661686202822144,
+     -2.273484907727993
+    ],
+    [
+     1.4275193865385718,
+     2.4410470945788565,
+     0.867782749922545
+    ],
+    [
+     2.5078395332056633,
+     2.1701987255821393,
+     0.8683422194044175
+    ],
+    [
+     3.2657752298841594,
+     1.518235647956017,
+     -0.701654674213744
+    ]
+   ],
+   "seconds": 2877.673,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 44,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.01622644529759265,
+   "cells": [
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.01622644529759265,
+    "container": 0.0006643065879898824,
+    "pair": 0.012173129813594419
+   },
+   "earlier_best_penetration": 0.01622644529759265,
+   "found_by": "none",
+   "indices": [
+    8,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     2.303913057300455,
+     0.6580820775234176,
+     1.4353587518025874
+    ],
+    [
+     3.3625329262661214,
+     0.5027200428503216,
+     1.5640045114126289
+    ],
+    [
+     1.4054605612978535,
+     1.3948320469222517,
+     -0.3205833303634679
+    ],
+    [
+     2.0014224106815957,
+     3.2812264452975928,
+     1.2544285910890933
+    ],
+    [
+     1.4280071081706587,
+     2.4290507531642245,
+     -0.3184335015431326
+    ],
+    [
+     2.375901686029316,
+     2.1163720052109345,
+     1.25242259692661
+    ],
+    [
+     3.2668528711055074,
+     1.6314626820776186,
+     1.252528803067208
+    ]
+   ],
+   "seconds": 2972.604,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 31,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0015120972958402312,
+   "cells": [
+    "side-E1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0015120972958402312,
+    "container": 0.0007816423443198772,
+    "pair": 0.001390733685425194
+   },
+   "earlier_best_penetration": 0.0014500965994022064,
+   "found_by": "none",
+   "indices": [
+    11,
+    12,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     3.9696878402793834,
+     2.6814429676394087,
+     0.7793392351156239
+    ],
+    [
+     3.378983081316572,
+     0.6269992966299613,
+     1.3307474810715203
+    ],
+    [
+     1.4096642849837029,
+     1.8545543878485027,
+     -0.7906829786957247
+    ],
+    [
+     1.4109268765324419,
+     3.2651611491854404,
+     0.7774180044621898
+    ],
+    [
+     2.119306851274563,
+     2.5578750520908105,
+     0.7798022154960184
+    ],
+    [
+     2.399260338121003,
+     1.4284879027041597,
+     0.7797923933469992
+    ],
+    [
+     3.249177031759664,
+     1.989446536125772,
+     0.7792616829326883
+    ]
+   ],
+   "seconds": 3061.451,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 36,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0024336204550772234,
+   "cells": [
+    "side-S2",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0024336204550772234,
+    "container": 0.0003803643062024742,
+    "pair": 0.0017921192418337561
+   },
+   "earlier_best_penetration": 0.0024827664258784132,
+   "found_by": "none",
+   "indices": [
+    12,
+    14,
+    16,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     3.355159945867671,
+     0.5187232089356434,
+     1.566189519955628
+    ],
+    [
+     0.704259700228854,
+     2.6803501186509755,
+     0.7018458532880272
+    ],
+    [
+     1.4090660901429481,
+     1.8613640053383749,
+     0.7034343261222709
+    ],
+    [
+     1.5181691882051032,
+     3.265792771154822,
+     0.7019820941356675
+    ],
+    [
+     2.1700733106104377,
+     2.5079296326187857,
+     2.2734860441609532
+    ],
+    [
+     2.4409614805879993,
+     1.4275663795449227,
+     0.7032563777936427
+    ],
+    [
+     3.266178192292341,
+     1.9980533610122473,
+     2.273856782871694
+    ]
+   ],
+   "seconds": 3155.617,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 40,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 555,
+   "best_penetration": 6.0945255095701256e-05,
+   "cells": [
+    "side-S0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 6.0945255095701256e-05,
+    "container": 3.140092699283059e-05,
+    "pair": 6.0440312842691135e-05
+   },
+   "earlier_best_penetration": 6.172276090554707e-05,
+   "found_by": "none",
+   "indices": [
+    4,
+    8,
+    16,
+    17,
+    18,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.2906428892208746,
+     0.7230089889761266,
+     -0.71211130568803
+    ],
+    [
+     2.6806969587133174,
+     0.7058857960341205,
+     0.8434119214289307
+    ],
+    [
+     1.998081030818705,
+     1.442965113898514,
+     2.4142183852747428
+    ],
+    [
+     1.8594228890488032,
+     3.2650587760675855,
+     0.843486624196737
+    ],
+    [
+     1.4299390547449042,
+     2.3086429170593594,
+     0.8434562763061852
+    ],
+    [
+     2.6556900166199147,
+     2.6556426861206313,
+     -0.7273104708167467
+    ],
+    [
+     3.2614461674273856,
+     1.6878474453064438,
+     0.7049937501884322
+    ]
+   ],
+   "seconds": 3261.154,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 46,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0019385362821248142,
+   "cells": [
+    "side-E0",
+    "side-S1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0014915042124885591,
+    "container": 0.0004858583924898241,
+    "pair": 0.0019385362821248142
+   },
+   "earlier_best_penetration": 0.001941853241773983,
+   "found_by": "none",
+   "indices": [
+    7,
+    8,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     4.0340327190576675,
+     1.9955132930695045,
+     0.35444009741697435
+    ],
+    [
+     2.0111652762663357,
+     0.5274724299500434,
+     1.5651612370492891
+    ],
+    [
+     1.4104620734702469,
+     3.039893823606528,
+     3.493761082380087
+    ],
+    [
+     1.4782219425249397,
+     1.9996275070634693,
+     1.922940652463588
+    ],
+    [
+     2.46753616255152,
+     2.2085532314767686,
+     0.35368892407125624
+    ],
+    [
+     2.3990417935367137,
+     3.2474618576827354,
+     1.9232462203068694
+    ],
+    [
+     3.1852462326089204,
+     1.4095084957875115,
+     0.3547503882068792
+    ]
+   ],
+   "seconds": 3372.186,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 17,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.005441594720325238,
+   "cells": [
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.005441594720325238,
+    "container": 0.001889966583700886,
+    "pair": 0.005373924098153182
+   },
+   "earlier_best_penetration": 0.006044213364339912,
+   "found_by": "none",
+   "indices": [
+    8,
+    12,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.9946791624027587,
+     1.0578963728288169,
+     -0.33272266791808913
+    ],
+    [
+     2.9055330176547045,
+     0.6338538676103334,
+     1.2385366130818085
+    ],
+    [
+     1.7221569584940049,
+     3.266914757212584,
+     -0.33405175671125364
+    ],
+    [
+     1.4245584052796747,
+     2.3136022623851757,
+     1.2367262622626742
+    ],
+    [
+     2.364762042298349,
+     1.9883897954051808,
+     -0.33426282212972463
+    ],
+    [
+     2.667156326594158,
+     2.9417556138560292,
+     -0.3341504272195669
+    ],
+    [
+     3.2704398972929467,
+     1.5638704955106546,
+     1.2369295165362808
+    ]
+   ],
+   "seconds": 3473.272,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 14,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 7,
+   "attempts": 556,
+   "best_penetration": 0.0015069809144017121,
+   "cells": [
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0014904100160921807,
+    "container": 0.0007465135406383716,
+    "pair": 0.0015069809144017121
+   },
+   "earlier_best_penetration": 0.001525383834020011,
+   "found_by": "none",
+   "indices": [
+    11,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ],
+   "pose": [
+    [
+     3.969649637929781,
+     1.994594672751606,
+     0.79069129709895
+    ],
+    [
+     1.410861927221638,
+     1.4108608630461024,
+     0.7892367455201388
+    ],
+    [
+     1.4097789467252617,
+     2.8215356249281722,
+     -0.7818660661794253
+    ],
+    [
+     2.1184497408222516,
+     2.1172245160823557,
+     0.7892385897283254
+    ],
+    [
+     2.398731200828698,
+     3.247490410016092,
+     -0.7814820357752508
+    ],
+    [
+     3.108355303338453,
+     2.5444013615625214,
+     -0.7805682240340571
+    ],
+    [
+     2.831974062986854,
+     1.4110089473962595,
+     -0.7737483970808218
+    ]
+   ],
+   "seconds": 3564.38,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 9,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0034512441510036185,
+   "cells": [
+    "corner-SW",
+    "corner-NW",
+    "side-S0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW"
+   ],
+   "components": {
+    "cell": 0.0032901954963899804,
+    "container": 0.0034512441510036185,
+    "pair": 0.003446539059217546
+   },
+   "earlier_best_penetration": 0.0034512441510036185,
+   "found_by": "none",
+   "indices": [
+    0,
+    2,
+    4,
+    6,
+    10,
+    14,
+    16,
+    17
+   ],
+   "pose": [
+    [
+     0.4996278299201974,
+     0.5134038686617027,
+     1.5706950890066531
+    ],
+    [
+     1.2912874453400112,
+     3.9764460598172473,
+     0.9144594318224374
+    ],
+    [
+     1.4985078069742483,
+     0.49951459067412385,
+     1.5705265178695145
+    ],
+    [
+     0.5018300378643842,
+     1.5355453821185157,
+     -0.003669209339659218
+    ],
+    [
+     1.3553258018339152,
+     2.393880759856945,
+     0.912926463447475
+    ],
+    [
+     0.6978373673405535,
+     3.173953744407122,
+     0.913768276853773
+    ],
+    [
+     2.01369963471579,
+     1.6148375595551925,
+     0.9144233596062438
+    ],
+    [
+     2.0017414365147617,
+     3.192336315067341,
+     2.5343504137117314
+    ]
+   ],
+   "seconds": 3655.27,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 21,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0020179385890251034,
+   "cells": [
+    "side-S0",
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W"
+   ],
+   "components": {
+    "cell": 0.001439940985846988,
+    "container": 0.0020179385890251034,
+    "pair": 0.0017131400706151823
+   },
+   "earlier_best_penetration": 0.0019965800578340964,
+   "found_by": "none",
+   "indices": [
+    4,
+    5,
+    6,
+    9,
+    10,
+    16,
+    17,
+    18
+   ],
+   "pose": [
+    [
+     1.9941179361218166,
+     0.500116398139788,
+     0.002355754902810117
+    ],
+    [
+     1.9058164490901859,
+     4.00034633271441,
+     1.0749484475250275
+    ],
+    [
+     0.5000831808954389,
+     1.2892893695593632,
+     0.0001406377668413146
+    ],
+    [
+     2.6821066076525137,
+     3.3354299043439894,
+     -0.4970824887926298
+    ],
+    [
+     0.4999028497368617,
+     2.28886051129846,
+     -0.0007849862356984709
+    ],
+    [
+     1.5059051251420859,
+     1.4974267597191793,
+     1.574567910326467
+    ],
+    [
+     1.418576260670168,
+     3.128585645853771,
+     1.0743551038917603
+    ],
+    [
+     2.228666632407707,
+     2.4444948857511783,
+     2.6434062419833753
+    ]
+   ],
+   "seconds": 3724.097,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 17,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.021952022963149354,
+   "cells": [
+    "corner-NW",
+    "side-S0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.021952022963149354,
+    "container": 0.017677577733754446,
+    "pair": 0.02184380659710372
+   },
+   "earlier_best_penetration": 0.02228735917471092,
+   "found_by": "none",
+   "indices": [
+    2,
+    4,
+    6,
+    10,
+    14,
+    16,
+    17,
+    19
+   ],
+   "pose": [
+    [
+     1.286042529979105,
+     3.9806739559433,
+     4.0812018054247545
+    ],
+    [
+     1.2792091574577267,
+     0.6810699121532725,
+     0.9393149553405945
+    ],
+    [
+     0.4993812267821721,
+     1.640924518196901,
+     1.5701270037613824
+    ],
+    [
+     1.406117596557437,
+     2.460653434105634,
+     0.9380279219905022
+    ],
+    [
+     0.6940292591043584,
+     3.1779897471866976,
+     -0.6298887439184665
+    ],
+    [
+     1.9411767137542832,
+     1.4099487952890601,
+     4.078724837984955
+    ],
+    [
+     1.9988150153981383,
+     3.264722234087138,
+     0.9382500949838092
+    ],
+    [
+     2.476296224042401,
+     2.2307486245536103,
+     2.508246058805341
+    ]
+   ],
+   "seconds": 3775.457,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 16,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01177946050928802,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.010736818800785475,
+    "container": 0.0052719391070334964,
+    "pair": 0.01177946050928802
+   },
+   "earlier_best_penetration": 0.01177946050928802,
+   "found_by": "none",
+   "indices": [
+    0,
+    5,
+    6,
+    10,
+    14,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.4988013667203989,
+     0.49784275268573114,
+     1.569381758889956
+    ],
+    [
+     1.282930695582969,
+     4.001781473700694,
+     1.0657988408880654
+    ],
+    [
+     1.4135277002006945,
+     1.3252458381845587,
+     1.0620439278817821
+    ],
+    [
+     0.677231938819478,
+     2.0541737489549075,
+     1.0649609497024508
+    ],
+    [
+     0.6792943746791276,
+     3.194187681956594,
+     2.6367880692618915
+    ],
+    [
+     2.0078366530705254,
+     3.265485616691513,
+     1.0667368513180078
+    ],
+    [
+     1.9402373249657976,
+     2.1694705015231546,
+     1.0670538954471889
+    ],
+    [
+     2.676435860366027,
+     1.4301234309630448,
+     -0.5015779049201536
+    ]
+   ],
+   "seconds": 3824.075,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 15,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.02364393988491076,
+   "cells": [
+    "corner-NW",
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.014036508024169114,
+    "container": 0.007762358459521224,
+    "pair": 0.02364393988491076
+   },
+   "earlier_best_penetration": 0.02380854375097463,
+   "found_by": "none",
+   "indices": [
+    2,
+    5,
+    6,
+    10,
+    14,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.4994655316764055,
+     4.177144249961418,
+     1.5699180127953667
+    ],
+    [
+     1.9947599579736295,
+     4.180492338388246,
+     -0.0065616145427311685
+    ],
+    [
+     1.4138693281157735,
+     1.2861006013895357,
+     1.1112652291727187
+    ],
+    [
+     0.6649919279698856,
+     2.014412053061172,
+     -0.45680269994639133
+    ],
+    [
+     0.4983052321106298,
+     3.1804491169757094,
+     -0.001759136678644318
+    ],
+    [
+     1.492697042296331,
+     3.2001794296980344,
+     1.5650084756691178
+    ],
+    [
+     2.3355739176578485,
+     2.3403910188643366,
+     0.4807861708622159
+    ],
+    [
+     2.688758868023344,
+     1.4159634919758308,
+     0.47364657911614466
+    ]
+   ],
+   "seconds": 3879.843,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 12,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0005805353042042105,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.0005166028851806281,
+    "container": 0.00019920908187281983,
+    "pair": 0.0005805353042042105
+   },
+   "earlier_best_penetration": 0.0005887122813978962,
+   "found_by": "none",
+   "indices": [
+    0,
+    6,
+    8,
+    10,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.5000365298629342,
+     0.49992188407669813,
+     -7.311997420552623e-05
+    ],
+    [
+     0.49982291818981245,
+     1.4997751742351035,
+     1.570752071272236
+    ],
+    [
+     1.9952582307326314,
+     0.49987924238375225,
+     -1.532283628774029e-05
+    ],
+    [
+     0.499946354221781,
+     2.4996283977940768,
+     1.5707909760652423
+    ],
+    [
+     1.4992916593473957,
+     1.499638930646692,
+     1.570653494960108
+    ],
+    [
+     1.4586414950121742,
+     3.2653260253879552,
+     -0.7050185138219092
+    ],
+    [
+     2.1460750017550785,
+     2.530427155871379,
+     0.8660020820943471
+    ],
+    [
+     2.677006418641486,
+     1.4699615858333461,
+     1.0721577575259222
+    ]
+   ],
+   "seconds": 3933.233,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 15,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0045544905787697765,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.0045544905787697765,
+    "container": 0.0012056606261910408,
+    "pair": 0.004422365265337458
+   },
+   "earlier_best_penetration": 0.004311378308002656,
+   "found_by": "none",
+   "indices": [
+    5,
+    6,
+    8,
+    10,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     1.996011953264926,
+     3.974479873608831,
+     -0.6698868471283782
+    ],
+    [
+     0.49924037967269824,
+     1.329208817079487,
+     1.5699038478193041
+    ],
+    [
+     1.9946406761833484,
+     0.4996227001376996,
+     -0.00043754944423217207
+    ],
+    [
+     0.5008277786437064,
+     2.33261916862682,
+     -0.0029260951186410723
+    ],
+    [
+     1.4972844405255157,
+     1.503801220819728,
+     1.5675509343644798
+    ],
+    [
+     1.4091426869450314,
+     3.1650297833890066,
+     -0.6701867910929766
+    ],
+    [
+     2.1649632014491047,
+     2.511052112100628,
+     0.9003078143652687
+    ],
+    [
+     2.681038113662105,
+     1.4702017016926592,
+     1.0134349735900448
+    ]
+   ],
+   "seconds": 3986.769,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 47,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0266801605764293,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.021329802277654686,
+    "container": 0.01885018556945972,
+    "pair": 0.0266801605764293
+   },
+   "earlier_best_penetration": 0.026712861850537672,
+   "found_by": "none",
+   "indices": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.5011870718202146,
+     0.5076937510136069,
+     1.5643548398173488
+    ],
+    [
+     1.4990077797856427,
+     0.4982100618015299,
+     1.5611132410049073
+    ],
+    [
+     2.499325014327912,
+     0.48984630788718797,
+     1.5532484798034123
+    ],
+    [
+     3.397762255348938,
+     1.4227297309175035,
+     1.472632909717494
+    ],
+    [
+     1.4002565757823122,
+     1.504138368745401,
+     1.532191381918867
+    ],
+    [
+     1.3970384082284615,
+     3.2761975020329746,
+     0.9023248436592709
+    ],
+    [
+     2.2454140440801504,
+     2.460750851583646,
+     1.5258531094513965
+    ],
+    [
+     2.3895355882152667,
+     1.4750864865618902,
+     1.533549975538463
+    ]
+   ],
+   "seconds": 4039.916,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 25,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.026659674406008027,
+   "cells": [
+    "corner-SE",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.026301294991540658,
+    "container": 0.008885214739271063,
+    "pair": 0.026659674406008027
+   },
+   "earlier_best_penetration": 0.022737700079742185,
+   "found_by": "none",
+   "indices": [
+    1,
+    4,
+    8,
+    12,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     4.18478331834082,
+     0.5004853010751914,
+     1.5705925132265972
+    ],
+    [
+     1.2636987050084594,
+     0.4997879924076158,
+     1.5691617381502303
+    ],
+    [
+     2.2373921164456814,
+     0.49928638232887185,
+     1.569411256370809
+    ],
+    [
+     3.2111090370050683,
+     0.5002417941822466,
+     1.5701631286966815
+    ],
+    [
+     1.4096849064205337,
+     1.6342863300726078,
+     -0.33846221756719824
+    ],
+    [
+     1.4088647896859456,
+     3.2670864781800124,
+     0.8052853184301013
+    ],
+    [
+     2.115330812028247,
+     2.563285755454376,
+     2.3762858708458037
+    ],
+    [
+     2.6698940557972413,
+     1.7016881147602403,
+     0.8044261766246686
+    ]
+   ],
+   "seconds": 4090.035,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 24,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 6.17574503571916e-05,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-N1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 6.17574503571916e-05,
+    "container": 3.111720365556181e-05,
+    "pair": 5.832358117097147e-05
+   },
+   "earlier_best_penetration": 6.220698995273999e-05,
+   "found_by": "none",
+   "indices": [
+    6,
+    8,
+    9,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.5519582022826611,
+     1.322475486611955,
+     0.10423190003776062
+    ],
+    [
+     2.6806675730937344,
+     0.6839149273348379,
+     0.5286058665736975
+    ],
+    [
+     2.680699576075897,
+     3.9701430785258265,
+     0.726677510750221
+    ],
+    [
+     0.5181133132100311,
+     3.3789892692310772,
+     1.5610235692333958
+    ],
+    [
+     1.8594919368734204,
+     1.4109398202994607,
+     0.726620550453756
+    ],
+    [
+     1.998730434513137,
+     3.232232360090484,
+     0.7266774731155425
+    ],
+    [
+     1.4299382425496427,
+     2.36700461197353,
+     0.7266542391221217
+    ],
+    [
+     2.6556795042327166,
+     2.020371680706823,
+     0.7266107653942272
+    ]
+   ],
+   "seconds": 4166.165,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 26,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.014621374052707359,
+   "cells": [
+    "corner-NW",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.014145320471936174,
+    "container": 0.004452457635233553,
+    "pair": 0.014621374052707359
+   },
+   "earlier_best_penetration": 0.014621374052707359,
+   "found_by": "none",
+   "indices": [
+    2,
+    8,
+    10,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.5577704836302739,
+     4.127215079249698,
+     1.5789232882066486
+    ],
+    [
+     1.9884756679726021,
+     0.4965349139135193,
+     4.714365678436423
+    ],
+    [
+     0.49760654899617757,
+     2.0070933521919945,
+     -1.5729943135460591
+    ],
+    [
+     0.4984417097677247,
+     3.012586668376307,
+     1.5732313277713037
+    ],
+    [
+     1.4876786768639683,
+     1.4904450371516211,
+     1.5705502215239349
+    ],
+    [
+     1.6951239894681678,
+     3.2701283364801186,
+     0.7101130235264367
+    ],
+    [
+     2.249022928168676,
+     2.436509467070664,
+     -0.8575906845913276
+    ],
+    [
+     2.689333220535294,
+     1.5046611721317225,
+     0.716904230112742
+    ]
+   ],
+   "seconds": 4222.097,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 32,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.015111707047354983,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S"
+   ],
+   "components": {
+    "cell": 0.015111707047354983,
+    "container": 0.0054454535204280785,
+    "pair": 0.014241287840391692
+   },
+   "earlier_best_penetration": 0.015372107493292542,
+   "found_by": "none",
+   "indices": [
+    6,
+    8,
+    10,
+    14,
+    16,
+    17,
+    18,
+    19
+   ],
+   "pose": [
+    [
+     0.49803128438858946,
+     1.3187136152735621,
+     0.002164995803993722
+    ],
+    [
+     1.9886589718945198,
+     0.49638069026000337,
+     0.0036589898211967713
+    ],
+    [
+     0.4993136700182935,
+     2.364075982688927,
+     -0.005462396112130471
+    ],
+    [
+     0.49861110283921284,
+     3.384951483122135,
+     1.5702284871990315
+    ],
+    [
+     1.4915376718909479,
+     1.4881271148189867,
+     1.5746907335529143
+    ],
+    [
+     1.6966706117135797,
+     3.2698332646078483,
+     0.6927009129352442
+    ],
+    [
+     2.250124008002807,
+     2.4376843038368508,
+     0.6959690887599798
+    ],
+    [
+     2.6900487861663755,
+     1.5113148820752165,
+     0.6991295678848144
+    ]
+   ],
+   "seconds": 4276.993,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 28,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.011921492710241344,
+   "cells": [
+    "corner-SW",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N"
+   ],
+   "components": {
+    "cell": 0.010543046968889858,
+    "container": 0.002365538625698216,
+    "pair": 0.011921492710241344
+   },
+   "earlier_best_penetration": 0.011973941712907776,
+   "found_by": "none",
+   "indices": [
+    0,
+    6,
+    10,
+    14,
+    16,
+    17,
+    19,
+    20
+   ],
+   "pose": [
+    [
+     0.5307150618271413,
+     0.4989349222015188,
+     1.5717601047580274
+    ],
+    [
+     0.49836276785162226,
+     1.4956812496724203,
+     1.5722540026750513
+    ],
+    [
+     1.2501821392750476,
+     2.4637571348038114,
+     0.6913990882722052
+    ],
+    [
+     0.4986464128621958,
+     3.3912633056502233,
+     1.5720795086018504
+    ],
+    [
+     1.6350966080551759,
+     1.4028915862609344,
+     1.9144962411174644
+    ],
+    [
+     1.8664104894376836,
+     3.27554304696889,
+     -0.8741888575757146
+    ],
+    [
+     2.6822143644121805,
+     1.4296373262056787,
+     0.33795363304051484
+    ],
+    [
+     2.6296890146561682,
+     2.6207784474018085,
+     0.6963376568493597
+    ]
+   ],
+   "seconds": 4324.453,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 17,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.010675471720079988,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "components": {
+    "cell": 0.010502249623871807,
+    "container": 0.006680259432468749,
+    "pair": 0.010675471720079988
+   },
+   "earlier_best_penetration": 0.01042593178454676,
+   "found_by": "none",
+   "indices": [
+    5,
+    6,
+    8,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "pose": [
+    [
+     1.9998496113531976,
+     3.9752942255197867,
+     -0.750524640186204
+    ],
+    [
+     0.7002451677373559,
+     2.001461859084146,
+     -0.7627493544272957
+    ],
+    [
+     2.211265278082404,
+     0.7043505952991468,
+     0.8062769190507972
+    ],
+    [
+     1.4968481269029978,
+     1.4008449254493505,
+     0.8049537555990183
+    ],
+    [
+     1.4004977503761282,
+     3.1766893992114946,
+     0.8171644572241346
+    ],
+    [
+     1.970158996354802,
+     2.33333268771062,
+     -0.7583908526084387
+    ],
+    [
+     2.679898443499085,
+     1.6383707188114414,
+     0.8049229505908747
+    ],
+    [
+     2.675546270460093,
+     3.1209421381984432,
+     0.9387247750242151
+    ]
+   ],
+   "seconds": 4381.114,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 71,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 554,
+   "best_penetration": 0.0005012695446748872,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N"
+   ],
+   "components": {
+    "cell": 0.0005012695446748872,
+    "container": 0.0003340749180986702,
+    "pair": 0.0004985697145039047
+   },
+   "earlier_best_penetration": 0.002527506526191159,
+   "found_by": "none",
+   "indices": [
+    6,
+    8,
+    9,
+    16,
+    17,
+    18,
+    19,
+    20
+   ],
+   "pose": [
+    [
+     0.7068425558149887,
+     1.9955892513466507,
+     0.7895730346841288
+    ],
+    [
+     2.2445863752680375,
+     0.7067668751685516,
+     -0.7813370226975426
+    ],
+    [
+     2.1214724221462458,
+     3.9688970434248354,
+     0.7887689840697616
+    ],
+    [
+     1.5347684380087199,
+     1.4108180258879002,
+     -0.7813483315621456
+    ],
+    [
+     1.4107571517698267,
+     3.265241196509613,
+     2.3596068596785553
+    ],
+    [
+     1.9591041101927034,
+     2.3987648386661773,
+     0.7889669117219681
+    ],
+    [
+     2.6685055380870577,
+     1.6944458932270188,
+     2.3600758717761883
+    ],
+    [
+     2.6726068367787525,
+     3.104714776038078,
+     2.359593716980949
+    ]
+   ],
+   "seconds": 4453.121,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 144,
+   "sub_pattern_witnesses": 5
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.007068178472882991,
+   "cells": [
+    "corner-NW",
+    "side-W0",
+    "side-W1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.005600707687263062,
+    "container": 0.007068178472882991,
+    "pair": 0.007038408265809926
+   },
+   "earlier_best_penetration": 0.007068178472882991,
+   "found_by": "none",
+   "indices": [
+    2,
+    6,
+    10,
+    14,
+    16,
+    17,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     1.2945411896379997,
+     3.978210648374723,
+     2.2280048561802688
+    ],
+    [
+     0.5085276655810067,
+     1.2929582300231246,
+     -0.007257341954077553
+    ],
+    [
+     1.374890934104112,
+     2.3964031454447277,
+     0.6505602193241868
+    ],
+    [
+     0.6940100403075756,
+     3.1290481343020478,
+     2.225520721928801
+    ],
+    [
+     1.7153089296882456,
+     1.405399292312737,
+     2.2190664716581874
+    ],
+    [
+     1.9976929929787441,
+     3.2532005048098482,
+     -0.9206876974704876
+    ],
+    [
+     2.663987047764632,
+     1.8037306009398355,
+     2.2213494943623493
+    ],
+    [
+     3.248644545019068,
+     2.68012338304028,
+     0.6526909268892966
+    ]
+   ],
+   "seconds": 4510.362,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 15,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0023375097649219745,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.0023262930813379157,
+    "container": 0.001506406836776164,
+    "pair": 0.0023375097649219745
+   },
+   "earlier_best_penetration": 0.0023375097649219745,
+   "found_by": "none",
+   "indices": [
+    5,
+    6,
+    8,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     1.9957740133448643,
+     3.980402778506822,
+     -0.6098841222666962
+    ],
+    [
+     0.5200227405590887,
+     1.9953985513363672,
+     4.668346746287482
+    ],
+    [
+     1.994858097690024,
+     0.49960860380246325,
+     -0.00047518601830875723
+    ],
+    [
+     1.499685187617777,
+     1.5294207314642065,
+     -0.0630594697385811
+    ],
+    [
+     1.4095163585117811,
+     3.171123581158333,
+     -0.6100165216583118
+    ],
+    [
+     2.166338423263937,
+     2.5105616933200774,
+     0.9608643358415082
+    ],
+    [
+     2.678610613411769,
+     1.4754321449518808,
+     2.5604131788884983
+    ],
+    [
+     3.246258869945025,
+     2.306439277733436,
+     2.5734767485388526
+    ]
+   ],
+   "seconds": 4566.216,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 21,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0012036218005966326,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-W1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.0012036218005966326,
+    "container": 0.00039409141183943674,
+    "pair": 0.00118958264705471
+   },
+   "earlier_best_penetration": 0.0019330930248481204,
+   "found_by": "none",
+   "indices": [
+    5,
+    6,
+    10,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     1.995660328216615,
+     3.9744572159583185,
+     0.9063963247356689
+    ],
+    [
+     0.4998871984188971,
+     1.3251362917904426,
+     -0.00012571337621487035
+    ],
+    [
+     0.5028440969880261,
+     2.340480401490764,
+     1.5644827271172457
+    ],
+    [
+     1.499577125203822,
+     1.410922432944725,
+     1.5706058966020329
+    ],
+    [
+     1.4099813382362076,
+     3.163470494709999,
+     0.9061165277156258
+    ],
+    [
+     2.122688686820585,
+     2.453199544348424,
+     0.9060890372881202
+    ],
+    [
+     2.679213587580378,
+     1.4297590963577655,
+     1.0587192537375887
+    ],
+    [
+     3.2465598658718817,
+     2.268913906687383,
+     1.0764040003462625
+    ]
+   ],
+   "seconds": 4628.201,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 51,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01879879991747535,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.018287664193056052,
+    "container": 0.014324164723897304,
+    "pair": 0.01879879991747535
+   },
+   "earlier_best_penetration": 0.018837173408424057,
+   "found_by": "none",
+   "indices": [
+    4,
+    6,
+    11,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     1.9144199729794893,
+     0.6891531017922427,
+     0.5257222936521779
+    ],
+    [
+     0.6634651086464294,
+     1.2821244997524754,
+     0.4964312686336293
+    ],
+    [
+     4.002281499238445,
+     1.984150357704339,
+     -1.0633916240206314
+    ],
+    [
+     1.410859313987476,
+     1.9644782436668264,
+     -1.0705808002813098
+    ],
+    [
+     1.4109980702334484,
+     3.2650173344013846,
+     -0.38830645251288043
+    ],
+    [
+     2.3111785650568653,
+     2.3674277725827446,
+     0.49827056979905654
+    ],
+    [
+     2.678278018441374,
+     1.4294709641657268,
+     -1.0727334032202498
+    ],
+    [
+     3.253613278407828,
+     2.6965885076154588,
+     0.5044170505152688
+    ]
+   ],
+   "seconds": 4682.761,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 30,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 555,
+   "best_penetration": 0.0007518353299729164,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.0005852349211106223,
+    "container": 0.00019155903756651327,
+    "pair": 0.0007518353299729164
+   },
+   "earlier_best_penetration": 0.0007562880598952493,
+   "found_by": "none",
+   "indices": [
+    5,
+    9,
+    11,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     1.5410566738314397,
+     4.17616905983984,
+     1.5707513273869549
+    ],
+    [
+     2.679059311267617,
+     4.002806486154718,
+     -0.24913878477914642
+    ],
+    [
+     3.973611521007846,
+     1.9952820357331922,
+     0.6701299864016815
+    ],
+    [
+     1.4109956792652345,
+     1.4110061981018465,
+     0.008533086481864642
+    ],
+    [
+     1.410635140318988,
+     2.9762825769855294,
+     -0.9207461243394892
+    ],
+    [
+     2.216688374857143,
+     2.333751106010414,
+     0.6499411685110029
+    ],
+    [
+     2.6783704987818,
+     1.4294147650788893,
+     0.6497788384972352
+    ],
+    [
+     3.224214631321577,
+     2.6772784639031335,
+     -0.9006479593639353
+    ]
+   ],
+   "seconds": 4752.658,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 98,
+   "sub_pattern_witnesses": 6
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.011393564493826891,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.00880119424761494,
+    "container": 0.0039551527657140095,
+    "pair": 0.011393564493826891
+   },
+   "earlier_best_penetration": 0.011393534385069182,
+   "found_by": "none",
+   "indices": [
+    6,
+    8,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     0.4980046047509581,
+     1.289959745519944,
+     1.5741577120354013
+    ],
+    [
+     2.6806844463377217,
+     0.4982884222017619,
+     0.001730617169922525
+    ],
+    [
+     0.6845509635940856,
+     2.6782045748822827,
+     -1.01527402822398
+    ],
+    [
+     1.6745320532805195,
+     1.4073598625257502,
+     0.5487303949094283
+    ],
+    [
+     1.4862279653570292,
+     3.273801194247615,
+     -1.0134804165677416
+    ],
+    [
+     2.15756702985731,
+     2.5227972397191936,
+     0.5557551200927964
+    ],
+    [
+     2.6763915206234428,
+     1.6774925297395864,
+     0.5492963975721142
+    ],
+    [
+     3.2459974032097585,
+     2.6779842227016855,
+     0.5664065034248978
+    ]
+   ],
+   "seconds": 4812.235,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 65,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.005603276922722333,
+   "cells": [
+    "side-W0",
+    "side-E1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.005110450991703486,
+    "container": 0.0038031310878130498,
+    "pair": 0.005603276922722333
+   },
+   "earlier_best_penetration": 0.005579732018993533,
+   "found_by": "none",
+   "indices": [
+    6,
+    11,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     0.6582934931096638,
+     1.9972118874735119,
+     4.285713501140945
+    ],
+    [
+     3.9888581065259614,
+     1.9920933658562576,
+     2.1308947145252177
+    ],
+    [
+     0.49934811240849303,
+     3.328026653502908,
+     1.5713606815439374
+    ],
+    [
+     1.4826514282563408,
+     1.4058895490082965,
+     1.1415786814763333
+    ],
+    [
+     1.655174533221507,
+     3.269893271847293,
+     -1.1552230693326797
+    ],
+    [
+     2.1725683428464064,
+     2.410992601537125,
+     -2.7255605672020633
+    ],
+    [
+     2.68231503460534,
+     1.4265488234624066,
+     1.7274352443338263
+    ],
+    [
+     3.214533457525449,
+     2.6819123173518387,
+     0.5588002085809487
+    ]
+   ],
+   "seconds": 4873.469,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 56,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.002834073364814338,
+   "cells": [
+    "side-W0",
+    "side-S2",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.0023426184575954245,
+    "container": 0.0012525000279533516,
+    "pair": 0.002834073364814338
+   },
+   "earlier_best_penetration": 0.0028078236257781386,
+   "found_by": "none",
+   "indices": [
+    6,
+    12,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21
+   ],
+   "pose": [
+    [
+     0.4994054854546946,
+     1.9956906012550863,
+     4.711072142007283
+    ],
+    [
+     3.386181236697386,
+     0.49984301811627546,
+     0.0009729001753509652
+    ],
+    [
+     0.4998357963782337,
+     2.996191491350061,
+     1.571049604132532
+    ],
+    [
+     1.4916588118337621,
+     1.4086573815424046,
+     1.283169259131362
+    ],
+    [
+     1.5816561388316182,
+     3.266967952906062,
+     0.2716015900026187
+    ],
+    [
+     2.2579987475844607,
+     2.4193155633956005,
+     -1.3002003179612232
+    ],
+    [
+     2.6781955727710596,
+     1.465842962372756,
+     1.7727648990907965
+    ],
+    [
+     3.2460544033103877,
+     2.67582436619591,
+     1.8111386571095087
+    ]
+   ],
+   "seconds": 4928.331,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 45,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.005295645558827555,
+   "cells": [
+    "side-S1",
+    "side-N1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.005295645558827555,
+    "container": 0.002821788870679187,
+    "pair": 0.005221070427089303
+   },
+   "earlier_best_penetration": 0.005339600115441989,
+   "found_by": "none",
+   "indices": [
+    8,
+    9,
+    11,
+    16,
+    17,
+    19,
+    20,
+    21
+   ],
+   "pose": [
+    [
+     1.9950807379265874,
+     0.49992754896592173,
+     1.565282421645238
+    ],
+    [
+     2.679442171075137,
+     4.087874785191624,
+     -0.03558393482975637
+    ],
+    [
+     3.989140504051598,
+     1.9915332045653773,
+     0.5604498100470788
+    ],
+    [
+     1.4129248622929949,
+     1.6693938755534383,
+     0.8563336860641673
+    ],
+    [
+     1.4088073947704924,
+     3.2684496550484403,
+     2.1314940767624013
+    ],
+    [
+     2.6783329134628793,
+     1.4767792439353102,
+     1.4674812715298995
+    ],
+    [
+     2.1281043115693574,
+     2.5440738307095527,
+     2.129548868542681
+    ],
+    [
+     3.2176617789961393,
+     2.6822282390788446,
+     2.130558495546272
+    ]
+   ],
+   "seconds": 4977.273,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 18,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0001853803843537838,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.00010456471958120162,
+    "container": 7.633928938216572e-05,
+    "pair": 0.0001853803843537838
+   },
+   "earlier_best_penetration": 0.00018501361195866206,
+   "found_by": "none",
+   "indices": [
+    5,
+    6,
+    9,
+    16,
+    18,
+    19,
+    20,
+    21
+   ],
+   "pose": [
+    [
+     1.3039871714530031,
+     3.9782848905005452,
+     1.0021073454472045
+    ],
+    [
+     0.4999604804886268,
+     1.605754005343454,
+     -7.364226767628008e-05
+    ],
+    [
+     2.6806666673415016,
+     4.1760201260605205,
+     -5.737130348136791e-06
+    ],
+    [
+     1.4998133195016212,
+     1.4109836492217627,
+     1.5706213761968975
+    ],
+    [
+     1.4299195630182526,
+     2.5006436893419335,
+     1.7714186649110035
+    ],
+    [
+     2.678096361489187,
+     1.4299524034158966,
+     1.070817035261438
+    ],
+    [
+     2.404343099226438,
+     3.1760836750205463,
+     1.5708124832770876
+    ],
+    [
+     3.246104564719581,
+     2.2590818509500328,
+     1.0707327402111053
+    ]
+   ],
+   "seconds": 5031.764,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 23,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.001481829918991373,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.0010244832053540875,
+    "container": 0.0005362463941835927,
+    "pair": 0.001481829918991373
+   },
+   "earlier_best_penetration": 0.0014661467963524855,
+   "found_by": "none",
+   "indices": [
+    6,
+    8,
+    9,
+    16,
+    18,
+    19,
+    20,
+    21
+   ],
+   "pose": [
+    [
+     0.49969329149908676,
+     1.3309741315407473,
+     1.5708268172816788
+    ],
+    [
+     1.9950707256884426,
+     0.49979084607058316,
+     -0.0001613730441500691
+    ],
+    [
+     1.9952273621380907,
+     4.088066746141275,
+     1.7685006906415037
+    ],
+    [
+     1.4987522383809178,
+     1.499711390389432,
+     -0.00017925521474096957
+    ],
+    [
+     1.4293190799244497,
+     2.589205583843526,
+     0.19841072594234407
+    ],
+    [
+     2.6774463241676614,
+     1.469565355175706,
+     -0.5087289956763318
+    ],
+    [
+     2.3383288747529116,
+     3.1375551023045536,
+     0.19825302853989182
+    ],
+    [
+     3.247024483205354,
+     2.296422540047978,
+     1.0609229825571758
+    ]
+   ],
+   "seconds": 5086.581,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 22,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.009638644871955981,
+   "cells": [
+    "side-W0",
+    "side-S1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+   ],
+   "components": {
+    "cell": 0.009583260428060125,
+    "container": 0.00800903173052947,
+    "pair": 0.009638644871955981
+   },
+   "earlier_best_penetration": 0.00945280984808905,
+   "found_by": "none",
+   "indices": [
+    6,
+    8,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+   ],
+   "pose": [
+    [
+     0.6695928643294965,
+     1.9986629910254026,
+     1.0838804510194382
+    ],
+    [
+     2.213872999703973,
+     0.6687539660313337,
+     1.07941539571998
+    ],
+    [
+     1.4831065977033273,
+     1.4139181858731737,
+     -0.49030040238693284
+    ],
+    [
+     1.4044849780831796,
+     3.2693317310840704,
+     0.9460322229597486
+    ],
+    [
+     1.981489277003786,
+     2.369957994400091,
+     2.515850520770681
+    ],
+    [
+     2.6832953336119227,
+     1.543617883340991,
+     1.0744338277192498
+    ],
+    [
+     2.5897143797819395,
+     3.233782713191378,
+     1.0427221449195543
+    ],
+    [
+     3.2493383423030573,
+     2.38614129641152,
+     -0.5270562749442623
+    ]
+   ],
+   "seconds": 5145.332,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 100,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.008233240141777176,
+   "cells": [
+    "corner-SW",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.006491795933409872,
+    "container": 0.0024130702357591516,
+    "pair": 0.008233240141777176
+   },
+   "earlier_best_penetration": 0.008340303286234807,
+   "found_by": "none",
+   "indices": [
+    0,
+    4,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     0.49929324369825273,
+     0.49836281769749374,
+     1.5692433444272809
+    ],
+    [
+     1.293981598418678,
+     1.4071718106873685,
+     2.7410697443305305
+    ],
+    [
+     2.237340314784021,
+     0.5719711146679298,
+     3.0678091262564435
+    ],
+    [
+     3.2504979292780343,
+     0.5212847229694181,
+     1.524971426614212
+    ],
+    [
+     1.9994644592531072,
+     3.27149179593341,
+     2.7438297527912114
+    ],
+    [
+     1.4274057170165089,
+     2.432528372176528,
+     2.742592975992952
+    ],
+    [
+     2.346360931100843,
+     2.0448690725464944,
+     2.7432193327879104
+    ],
+    [
+     3.267196083352601,
+     1.6615075150642338,
+     1.1733275433130343
+    ]
+   ],
+   "seconds": 5197.218,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 13,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0030019737401711932,
+   "cells": [
+    "corner-SE",
+    "side-S0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0028511067663208323,
+    "container": 0.00045531846986612834,
+    "pair": 0.0030019737401711932
+   },
+   "earlier_best_penetration": 0.0030332795885839037,
+   "found_by": "none",
+   "indices": [
+    1,
+    4,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     4.1762779643918595,
+     0.5009716409276349,
+     -0.00035477109472046236
+    ],
+    [
+     1.2889454611737805,
+     1.3158185475297168,
+     1.0057463092442323
+    ],
+    [
+     2.1782272268164395,
+     0.4998819985121268,
+     1.5703937340319152
+    ],
+    [
+     3.1772030637348303,
+     0.5000512940933917,
+     1.5700792493561682
+    ],
+    [
+     1.9977494622097407,
+     3.266476688511729,
+     1.1711413593268731
+    ],
+    [
+     1.4273786087392082,
+     2.4235406095947356,
+     1.171309552395283
+    ],
+    [
+     2.3098737907027607,
+     1.9486681846819542,
+     1.1718937154114222
+    ],
+    [
+     3.267851106766321,
+     1.6542419489850084,
+     1.1722034544330984
+    ]
+   ],
+   "seconds": 5252.1,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 14,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0060011691815540225,
+   "cells": [
+    "corner-SE",
+    "side-E0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.005360766939776829,
+    "container": 0.0016491918083048063,
+    "pair": 0.0060011691815540225
+   },
+   "earlier_best_penetration": 0.006085699357143204,
+   "found_by": "none",
+   "indices": [
+    1,
+    7,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     4.175295972230413,
+     0.995337467247344,
+     0.0014261705665082175
+    ],
+    [
+     4.176937175462555,
+     1.995341359716266,
+     1.5722213753502394
+    ],
+    [
+     2.176021036524572,
+     0.49920636224869347,
+     -1.5693227649190373
+    ],
+    [
+     3.176013321818145,
+     0.5004161764837712,
+     0.0014721490284918056
+    ],
+    [
+     1.999496509497808,
+     3.2675170853418734,
+     0.8125068244097977
+    ],
+    [
+     1.424639233060223,
+     2.43972760259374,
+     0.81138003448809
+    ],
+    [
+     2.1854623779921676,
+     1.4968575820748304,
+     0.004483532414531105
+    ],
+    [
+     3.179723781392297,
+     2.002678567038487,
+     1.5751315140380295
+    ]
+   ],
+   "seconds": 5312.157,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 48,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.006242985315783933,
+   "cells": [
+    "side-S0",
+    "side-E0",
+    "side-S1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.00560098371570783,
+    "container": 0.0015056875877412779,
+    "pair": 0.006242985315783933
+   },
+   "earlier_best_penetration": 0.006251231366311116,
+   "found_by": "none",
+   "indices": [
+    4,
+    7,
+    8,
+    12,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     1.2900099645670238,
+     0.499693350305065,
+     1.5692724975180985
+    ],
+    [
+     4.176988363838397,
+     1.995246494665881,
+     1.5718315102808458
+    ],
+    [
+     2.3687967159514582,
+     0.49951873699130894,
+     1.571728147582066
+    ],
+    [
+     3.3818538528553743,
+     0.729029799150539,
+     1.585986894920191
+    ],
+    [
+     1.999612971792026,
+     3.2676482783353142,
+     0.8136854963690514
+    ],
+    [
+     1.424399016284292,
+     2.4406977799328677,
+     0.8126366093711034
+    ],
+    [
+     2.1850041654313235,
+     1.4977387190067941,
+     0.002257574885143196
+    ],
+    [
+     3.1799425424543917,
+     2.002601948439866,
+     0.0031225401257560462
+    ]
+   ],
+   "seconds": 5370.777,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 53,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0007932554721673535,
+   "cells": [
+    "side-E0",
+    "side-S1",
+    "side-N1",
+    "side-S2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0006425575433355313,
+    "container": 0.00037271804518068663,
+    "pair": 0.0007932554721673535
+   },
+   "earlier_best_penetration": 0.0008008086622615096,
+   "found_by": "none",
+   "indices": [
+    7,
+    8,
+    9,
+    12,
+    17,
+    18,
+    19,
+    22
+   ],
+   "pose": [
+    [
+     3.9703292806130817,
+     1.2897189191024552,
+     2.297190047899644
+    ],
+    [
+     1.9961079661849221,
+     0.49982640958493435,
+     1.5706645572614029
+    ],
+    [
+     2.681053472608354,
+     3.9703754412146064,
+     0.7293716230292784
+    ],
+    [
+     2.9974731302708104,
+     0.5019397844595155,
+     1.5684174860801905
+    ],
+    [
+     1.9759126435566656,
+     3.2594830585136996,
+     0.7293988897515755
+    ],
+    [
+     1.4293574424566644,
+     2.3711042654788956,
+     -0.841814911178269
+    ],
+    [
+     2.184958894791241,
+     1.704920723425722,
+     0.7271368138215918
+    ],
+    [
+     3.26224752238689,
+     1.9977987848475125,
+     0.7263070763906583
+    ]
+   ],
+   "seconds": 5432.976,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 55,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0023642768480071075,
+   "cells": [
+    "side-S0",
+    "side-W0",
+    "side-E0",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.001538643590127009,
+    "container": 0.0015871491339956023,
+    "pair": 0.0023642768480071075
+   },
+   "earlier_best_penetration": 0.002361218772240825,
+   "found_by": "none",
+   "indices": [
+    4,
+    6,
+    7,
+    16,
+    17,
+    18,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.2893381359546567,
+     0.7039986615708619,
+     2.437363984147964
+    ],
+    [
+     0.7152629230320783,
+     1.6066038683432948,
+     0.8761720517054767
+    ],
+    [
+     4.175007463182871,
+     1.9953417806120364,
+     -1.565623553059962
+    ],
+    [
+     1.9775557934030155,
+     1.4301466748132408,
+     0.8665039288961368
+    ],
+    [
+     1.8645375912581008,
+     3.266346077887281,
+     0.8677414197255173
+    ],
+    [
+     1.428461356409873,
+     2.3263622252368066,
+     -0.7038216371048872
+    ],
+    [
+     2.6557408676525105,
+     2.654591773297763,
+     2.438670822226686
+    ],
+    [
+     3.180483334331838,
+     1.4110322101119754,
+     1.577268183495353
+    ]
+   ],
+   "seconds": 5493.45,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 87,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.004765651401434257,
+   "cells": [
+    "corner-SW",
+    "side-N0",
+    "side-W0",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.003982772461474049,
+    "container": 0.0037208984522351107,
+    "pair": 0.004765651401434257
+   },
+   "earlier_best_penetration": 0.004416126479561799,
+   "found_by": "none",
+   "indices": [
+    0,
+    5,
+    6,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.2903494769354007,
+     0.63496393750354,
+     0.3333569785761797
+    ],
+    [
+     1.2899974947237878,
+     4.175353788840082,
+     -0.0006166115207449385
+    ],
+    [
+     0.6325196230536031,
+     1.463918863879405,
+     0.3338668411080185
+    ],
+    [
+     1.4108187479617158,
+     3.0880268753259226,
+     0.1927164869491886
+    ],
+    [
+     1.500528111772884,
+     2.000687234024796,
+     1.9073360774589838
+    ],
+    [
+     2.4891708888045625,
+     2.1924616020263,
+     0.3388344919048709
+    ],
+    [
+     2.448081752555498,
+     3.246539213104094,
+     0.29529704692181774
+    ],
+    [
+     3.265768580201237,
+     1.4088632757738384,
+     -1.2154847704250633
+    ]
+   ],
+   "seconds": 5554.313,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 17,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0010792752766566327,
+   "cells": [
+    "side-N0",
+    "side-W0",
+    "side-N1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.00037970353610994323,
+    "container": 0.00045338468182087865,
+    "pair": 0.0010792752766566327
+   },
+   "earlier_best_penetration": 0.0010758155869468045,
+   "found_by": "none",
+   "indices": [
+    5,
+    6,
+    9,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.2900146217553092,
+     4.1762273806190295,
+     1.5712484371377606
+    ],
+    [
+     0.6805883336247387,
+     1.2899214249374047,
+     0.511366563147928
+    ],
+    [
+     2.672571137945804,
+     4.155234538717494,
+     1.5496676598708519
+    ],
+    [
+     1.4109997632726892,
+     3.1770174959571205,
+     0.0011873173817174964
+    ],
+    [
+     1.4299550523957054,
+     1.9976183262657012,
+     0.5113914767860162
+    ],
+    [
+     2.4407815795471293,
+     1.4296512332376399,
+     0.6494614555274246
+    ],
+    [
+     2.5377570771685947,
+     3.0758186641210856,
+     1.5767102331172032
+    ],
+    [
+     3.265159454922051,
+     1.9972267223818199,
+     0.6494393839121985
+    ]
+   ],
+   "seconds": 5610.697,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 17,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01056020056973217,
+   "cells": [
+    "side-N0",
+    "side-S1",
+    "side-N1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.010254178042329531,
+    "container": 0.0011883609712226573,
+    "pair": 0.01056020056973217
+   },
+   "earlier_best_penetration": 0.0106661295334185,
+   "found_by": "none",
+   "indices": [
+    5,
+    8,
+    9,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.4017399037344374,
+     4.1771519843585185,
+     7.275587218134871e-05
+    ],
+    [
+     1.995419509087304,
+     0.5249305037706492,
+     1.5352904310342053
+    ],
+    [
+     2.680205637756483,
+     4.03224815820365,
+     0.34933801483412075
+    ],
+    [
+     1.7310119831738993,
+     3.0553492985589923,
+     1.2666232755182507
+    ],
+    [
+     1.4197458219576704,
+     2.1083794307808836,
+     1.2620219922731857
+    ],
+    [
+     2.299347337407069,
+     1.6089267247265768,
+     1.261713468708619
+    ],
+    [
+     2.6573120588814,
+     2.6705129956386675,
+     2.838106340130188
+    ],
+    [
+     3.274423573570298,
+     1.4075529286882438,
+     1.2634456897684752
+    ]
+   ],
+   "seconds": 5676.23,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 10,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.001652574861242817,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "side-W1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0013490882548170546,
+    "container": 0.0008846513751716856,
+    "pair": 0.001652574861242817
+   },
+   "earlier_best_penetration": 0.001855099453220932,
+   "found_by": "none",
+   "indices": [
+    5,
+    9,
+    10,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.6644540361706466,
+     4.176212343560003,
+     -0.0013455212499128137
+    ],
+    [
+     2.6751167569360508,
+     4.1745769067788805,
+     0.0010021799479243147
+    ],
+    [
+     0.49974182206101325,
+     2.681073582797046,
+     -5.541757808637003e-05
+    ],
+    [
+     1.6183891963397492,
+     3.177226095710956,
+     -0.0026077222136350504
+    ],
+    [
+     1.469184669173199,
+     1.9986510201780412,
+     2.62931988960582
+    ],
+    [
+     2.393208231857163,
+     1.4286509117451829,
+     2.4367399461897237
+    ],
+    [
+     2.6584747919301974,
+     3.170288157289976,
+     1.574390938489679
+    ],
+    [
+     3.2656591132028407,
+     1.9977012569518615,
+     2.4357232172562573
+    ]
+   ],
+   "seconds": 5738.241,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 48,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.0016699892432850971,
+   "cells": [
+    "side-N0",
+    "side-W1",
+    "side-E1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0013652133270707356,
+    "container": 0.0008821940641574599,
+    "pair": 0.0016699892432850971
+   },
+   "earlier_best_penetration": 0.0017027538331430003,
+   "found_by": "none",
+   "indices": [
+    5,
+    10,
+    11,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.9954632253977733,
+     4.17613723422669,
+     -1.5722873586100323
+    ],
+    [
+     0.4996936457817897,
+     2.6812859999387637,
+     1.5704717540428816
+    ],
+    [
+     3.971035885511431,
+     2.6815160374054923,
+     -0.7225135110148743
+    ],
+    [
+     1.5668044754958688,
+     3.164388074648746,
+     -0.13299873383528782
+    ],
+    [
+     1.4768642299025911,
+     1.998646637049417,
+     -2.159285817714774
+    ],
+    [
+     2.3712570236119688,
+     1.4286347866729292,
+     0.8491103818085001
+    ],
+    [
+     2.56716932356268,
+     3.0421799553557363,
+     -0.11735530953745581
+    ],
+    [
+     3.263488072969582,
+     1.973679322858561,
+     3.9898814078990403
+    ]
+   ],
+   "seconds": 5803.301,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 56,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.006294398856472427,
+   "cells": [
+    "side-N0",
+    "side-S1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.0035232167715073537,
+    "container": 0.0003708825174899011,
+    "pair": 0.006294398856472427
+   },
+   "earlier_best_penetration": 0.006575405819340685,
+   "found_by": "none",
+   "indices": [
+    5,
+    8,
+    14,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.2899971593364403,
+     4.176002838206364,
+     1.5708382166301917
+    ],
+    [
+     2.124866040326517,
+     0.6900373387306536,
+     -0.5202578691280381
+    ],
+    [
+     0.4999918161131684,
+     2.953154458629697,
+     0.0007256606166571577
+    ],
+    [
+     1.5346278524747803,
+     3.1459694735582366,
+     0.10633491083215346
+    ],
+    [
+     1.4277297608516941,
+     1.9976247012814161,
+     1.6804619016266473
+    ],
+    [
+     2.4054582919447074,
+     2.2340091850163906,
+     0.10902098099122946
+    ],
+    [
+     2.5288769177887747,
+     3.2495232167715074,
+     3.2484555841993776
+    ],
+    [
+     3.267641220016552,
+     1.407739232129128,
+     -0.8899880864800497
+    ]
+   ],
+   "seconds": 5863.642,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 9,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.0059377568647196455,
+   "cells": [
+    "side-N0",
+    "side-W1",
+    "side-W2",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.005304221749659055,
+    "container": 0.0021544137331996893,
+    "pair": 0.0059377568647196455
+   },
+   "earlier_best_penetration": 0.005957361471217837,
+   "found_by": "none",
+   "indices": [
+    5,
+    10,
+    14,
+    17,
+    18,
+    19,
+    20,
+    22
+   ],
+   "pose": [
+    [
+     1.9953478342843247,
+     4.1766265448433115,
+     4.709328554728542
+    ],
+    [
+     0.49910994723030566,
+     2.3860182956216747,
+     -0.001518022529936746
+    ],
+    [
+     0.5012401849053942,
+     3.386008106860181,
+     -0.0015180584121482243
+    ],
+    [
+     1.5018749584560882,
+     3.181968331204884,
+     -0.004644651626906365
+    ],
+    [
+     1.4958364001161575,
+     2.1847658144747806,
+     3.138091846087788
+    ],
+    [
+     2.4395378819738527,
+     1.4246957782503409,
+     0.7595668513237762
+    ],
+    [
+     2.667490359958709,
+     3.10172528503053,
+     1.7339049728611302
+    ],
+    [
+     3.2674904749709266,
+     1.9994721280214414,
+     2.329245724212295
+    ]
+   ],
+   "seconds": 5931.421,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 81,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.01599888283168749,
+   "cells": [
+    "side-N0",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.01599888283168749,
+    "container": 0.006497201205896808,
+    "pair": 0.0154310275868208
+   },
+   "earlier_best_penetration": 0.015509828775272183,
+   "found_by": "none",
+   "indices": [
+    5,
+    9,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ],
+   "pose": [
+    [
+     1.6776518643854264,
+     4.177106840675836,
+     -1.5816360089074506
+    ],
+    [
+     2.680769284214125,
+     4.1792126389189885,
+     1.5662369506558762
+    ],
+    [
+     1.4065485209858382,
+     1.4042098924594597,
+     0.9895790251655318
+    ],
+    [
+     1.3990884463462618,
+     3.0042189118429397,
+     0.9950486333531612
+    ],
+    [
+     2.0392303652963006,
+     2.175375112552811,
+     0.9914749944276148
+    ],
+    [
+     2.5843098133193627,
+     3.0041584148900125,
+     0.9952666563756752
+    ],
+    [
+     3.2619988828316875,
+     2.230220174405618,
+     0.9928691646007096
+    ],
+    [
+     2.719712473479082,
+     1.4004817439617827,
+     -0.5801867080771064
+    ]
+   ],
+   "seconds": 5985.18,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 34,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.006879535225102651,
+   "cells": [
+    "side-N0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.005747115849303874,
+    "container": 0.004500060632731451,
+    "pair": 0.006879535225102651
+   },
+   "earlier_best_penetration": 0.006879535225102651,
+   "found_by": "none",
+   "indices": [
+    5,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ],
+   "pose": [
+    [
+     1.2895354216974668,
+     4.164879598067355,
+     0.0307423366782444
+    ],
+    [
+     0.5407396985732009,
+     2.680203515343082,
+     -1.4756503533145389
+    ],
+    [
+     1.4099513650026416,
+     1.410239050153789,
+     0.5224239993103236
+    ],
+    [
+     1.493898051443745,
+     3.1527150780290047,
+     0.10022341390357503
+    ],
+    [
+     2.17136225912767,
+     2.1781155245142974,
+     0.6726722392909441
+    ],
+    [
+     2.6783794887064114,
+     3.2490221971368114,
+     2.247587644361094
+    ],
+    [
+     3.2512833936868217,
+     2.430607185377907,
+     -0.8932214703612935
+    ],
+    [
+     2.798953475758195,
+     1.4052528841506962,
+     -2.4648607720414555
+    ]
+   ],
+   "seconds": 6038.585,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 38,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.010514391852887828,
+   "cells": [
+    "side-W0",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.010487871281748884,
+    "container": 0.00538949729115612,
+    "pair": 0.010514391852887828
+   },
+   "earlier_best_penetration": 0.010305300169611398,
+   "found_by": "none",
+   "indices": [
+    6,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ],
+   "pose": [
+    [
+     0.696003148314661,
+     2.0017836913169083,
+     0.6581824777901856
+    ],
+    [
+     0.4978709020181992,
+     3.368714418780694,
+     1.5721704461056079
+    ],
+    [
+     1.5388564532038764,
+     1.4005121287182511,
+     -0.9160999702413039
+    ],
+    [
+     1.491839228722776,
+     3.2441436810152844,
+     0.00540751002961715
+    ],
+    [
+     2.172036042743353,
+     2.2135302968812964,
+     -0.9198864842531883
+    ],
+    [
+     2.681325620813398,
+     3.2493908987946307,
+     2.214452680472776
+    ],
+    [
+     3.25427248779883,
+     2.435155001604604,
+     0.6473236691727161
+    ],
+    [
+     2.7788549865587346,
+     1.4130498226458692,
+     0.6455252049256114
+    ]
+   ],
+   "seconds": 6094.396,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 73,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 556,
+   "best_penetration": 0.008952213542563037,
+   "cells": [
+    "side-N1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-N",
+    "interior-E",
+    "interior-SE"
+   ],
+   "components": {
+    "cell": 0.00773945471259796,
+    "container": 0.00350731016363387,
+    "pair": 0.008952213542563037
+   },
+   "earlier_best_penetration": 0.009697954238905515,
+   "found_by": "none",
+   "indices": [
+    9,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22
+   ],
+   "pose": [
+    [
+     1.9923311901150622,
+     4.178579495114124,
+     1.5702840046556337
+    ],
+    [
+     0.4969968258221466,
+     3.066386329672048,
+     0.0010087809621283624
+    ],
+    [
+     1.4098974053239492,
+     1.410499551882847,
+     0.5909413397705191
+    ],
+    [
+     1.4879481275164668,
+     3.183692435997961,
+     0.00106441495761536
+    ],
+    [
+     2.135777412150765,
+     2.170668056284825,
+     0.6806791287094939
+    ],
+    [
+     2.682282449051803,
+     3.1993132345288684,
+     0.6770631818306377
+    ],
+    [
+     3.25336289509276,
+     2.3809600805146185,
+     -0.8880033397909668
+    ],
+    [
+     2.7686607582265457,
+     1.403260545287402,
+     0.6840425168493861
+    ]
+   ],
+   "seconds": 6152.133,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 84,
+   "sub_pattern_witnesses": 7
+  },
+  {
+   "arity": 8,
+   "attempts": 557,
+   "best_penetration": 0.014256768780408269,
+   "cells": [
+    "side-S1",
+    "side-N1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE",
+    "interior-NE"
+   ],
+   "components": {
+    "cell": 0.01338219113880701,
+    "container": 0.0,
+    "pair": 0.014256768780408269
+   },
+   "earlier_best_penetration": 0.014256768780408269,
+   "found_by": "none",
+   "indices": [
+    8,
+    9,
+    16,
+    17,
+    19,
+    20,
+    22,
+    23
+   ],
+   "pose": [
+    [
+     2.0003057635094987,
+     0.5060975605304011,
+     0.0034125840960304047
+    ],
+    [
+     2.6625561255426877,
+     4.168601565654544,
+     1.5840270884645846
+    ],
+    [
+     1.3978996185293684,
+     2.000471485165669,
+     1.2664929498007633
+    ],
+    [
+     1.3976197422114558,
+     3.2692023614393118,
+     -0.3046939945784855
+    ],
+    [
+     2.34411344014233,
+     1.7226068199374778,
+     1.2659850834373196
+    ],
+    [
+     2.3415299784114247,
+     2.984015913525534,
+     1.2659003356266645
+    ],
+    [
+     3.278382191138807,
+     1.4067808603467675,
+     -0.30531364389120746
+    ],
+    [
+     3.2781001676098205,
+     2.675515763666188,
+     1.2656198108762504
+    ]
+   ],
+   "seconds": 6205.803,
+   "status": "still-flagged",
+   "sub_pattern_attempts": 20,
+   "sub_pattern_witnesses": 8
+  },
+  {
+   "arity": 8,
+   "attempts": 2,
+   "best_penetration": 0.0,
+   "cells": [
+    "side-W1",
+    "side-E1",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-SE",
+    "interior-NE"
+   ],
+   "components": {
+    "cell": 0.0,
+    "container": 0.0,
+    "pair": 0.0
+   },
+   "earlier_best_penetration": 0.00010094573711216803,
+   "found_by": "warm",
+   "indices": [
+    10,
+    11,
+    16,
+    17,
+    19,
+    20,
+    22,
+    23
+   ],
+   "pose": [
+    [
+     0.6959127108430224,
+     2.0131616354651243,
+     0.9635995682459542
+    ],
+    [
+     3.973699914314035,
+     1.995956402552467,
+     0.9028638285896968
+    ],
+    [
+     1.4960430534046978,
+     1.4110831358956273,
+     0.962380030039507
+    ],
+    [
+     1.4125819536885438,
+     2.760900235919321,
+     0.89894594656176
+    ],
+    [
+     2.2317775720919175,
+     2.1174027913333116,
+     0.9625212125892681
+    ],
+    [
+     2.4121335060581077,
+     3.245999872927292,
+     0.9025950580575489
+    ],
+    [
+     3.0049102936041385,
+     1.4110356768064924,
+     0.9331856861907571
+    ],
+    [
+     3.25835498207583,
+     2.703844445105277,
+     -0.6680515389670589
+    ]
+   ],
+   "seconds": 6207.757,
+   "status": "placed",
+   "sub_pattern_attempts": 28,
+   "sub_pattern_witnesses": 8
+  }
+ ],
+ "schema": "n17-sub-pattern-recheck/v1",
+ "seconds": 6208.622,
+ "sources": [
+  {
+   "path": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity6-seed1.json",
+   "sha256": "d45430b3e658d0b5060e6167b6c72f3e50d33a21c14693be8d177c8808dddfe5"
+  },
+  {
+   "path": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity7-seed1.json",
+   "sha256": "a8f1c50601e0bc3f798501bb038c8746c34df02c15f8543a0da0a6dcc2608e22"
+  },
+  {
+   "path": "packing/campaign/explorations/X048-session-168-pilots/receipts/selector-arity8-seed1-restricted.json",
+   "sha256": "f6493e086c1fed6d5f74b7b9b56c42f54eeac2ee7b3721e9778e501c3f73b538"
+  }
+ ],
+ "status": "heuristic selector, not a certificate: a flagged pattern is one the float search could not place; the prover must certify each flagged pattern before any exclusion counts",
+ "still_flagged": 89
+}

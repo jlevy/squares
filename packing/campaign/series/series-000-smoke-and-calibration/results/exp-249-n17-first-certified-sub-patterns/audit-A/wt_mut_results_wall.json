@@ -1,0 +1,50 @@
+[
+ {
+  "mutant": "none",
+  "pattern": "wall",
+  "search": "certified-infeasible",
+  "nodes": 11,
+  "verifier": "summary {\"complete\": true, \"leaves\": 6, \"nodes\": 11, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "wall",
+  "pattern": "wall",
+  "search": "certified-infeasible",
+  "nodes": 11,
+  "verifier": "summary {\"complete\": true, \"leaves\": 6, \"nodes\": 11, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 0: round 0 box of square 0 too small"
+ },
+ {
+  "mutant": "wall_mid",
+  "pattern": "wall",
+  "search": "certified-infeasible",
+  "nodes": 7,
+  "verifier": "summary {\"complete\": true, \"leaves\": 4, \"nodes\": 7, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 6: closed 'cell' but every contracted box is nonempty"
+ },
+ {
+  "mutant": "lam",
+  "pattern": "wall",
+  "search": "certified-infeasible",
+  "nodes": 11,
+  "verifier": "summary {\"complete\": true, \"leaves\": 6, \"nodes\": 11, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "diff",
+  "pattern": "wall",
+  "search": "certified-infeasible",
+  "nodes": 11,
+  "verifier": "summary {\"complete\": true, \"leaves\": 6, \"nodes\": 11, \"certified-infeasible\"}",
+  "first_failure": ""
+ },
+ {
+  "mutant": "gap",
+  "pattern": "wall",
+  "search": "certified-infeasible",
+  "nodes": 11,
+  "verifier": "summary {\"complete\": true, \"leaves\": 6, \"nodes\": 11, \"certified-infeasible\"}",
+  "first_failure": "FAIL node 4 cut 0 of pair 0: v=0.9886462260759232 > min 0.9886452317408095"
+ }
+]

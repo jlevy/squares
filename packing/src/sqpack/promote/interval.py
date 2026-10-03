@@ -118,12 +118,16 @@ def decimal_string(value: Any, digits: int, *, upward: bool) -> str:
 
     An `mpf` is dyadic, so :func:`mpmath.libmp.to_rational` converts it with no loss
     and the directed rounding happens once, in `decimal`, where it is exact.
+
+    The two parts go through `int` because mpmath computes on gmpy2's `mpz` whenever
+    gmpy2 is importable (the kernel's rational library puts it on every install), and
+    `Decimal` accepts `int` only.
     """
     numerator, denominator = to_rational(mp.mpf(value)._mpf_)
     with localcontext() as context:
         context.prec = max(1, digits)
         context.rounding = ROUND_CEILING if upward else ROUND_FLOOR
-        return str(Decimal(numerator) / Decimal(denominator))
+        return str(Decimal(int(numerator)) / Decimal(int(denominator)))
 
 
 def total(values: Sequence[Interval]) -> Interval:

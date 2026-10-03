@@ -41,6 +41,7 @@ migrated:
 - docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md
 - docs/project/handoff-2026-09-21-n17-external-intake.md
 - docs/project/handoff-2026-09-22-low-n-review-and-the-2880-rung.md
+- docs/project/n17-optimality-explainer.md
 - docs/project/postmortems/postmortem-2026-08-23-soundness-class.md
 - docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md
 - docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md
@@ -214,6 +215,7 @@ migrated:
 - docs/project/reviews/review-2026-10-01-n17-first-order-branches.md
 - docs/project/reviews/review-2026-10-01-n17-mixed-capacity-cover.md
 - docs/project/reviews/review-2026-10-01-n17-projection-branches.md
+- docs/project/reviews/review-2026-10-01-n17-route-after-pr265.md
 - docs/project/reviews/review-2026-10-01-post-optimality-morning.md
 - docs/project/reviews/review-2026-10-01-post-optimality-w3-opening.md
 - docs/project/reviews/review-2026-10-01-result-import-process.md

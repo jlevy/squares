@@ -1,10 +1,4 @@
 # pyright: reportPrivateUsage=false
-# ruff: noqa: SLF001 -- `_difference` and its neighbours report where two renders of the
-# explainer stopped agreeing, and they are private because what a failure says is the
-# check's business and nobody else's; they are tested directly because the message is
-# the whole deliverable. `packing/pyproject.toml` exempts this file under its old name,
-# `tests/test_render_explainer_pdf.py`, and cannot be edited to follow the rename: it is
-# a frozen proof input of the n = 11 native audit (`audit_kleddamag_n11_native`).
 """The PDF publication comparison, failure evidence, and required-image wait.
 
 The check itself needs a browser, a rendered page and about nine seconds a render, and

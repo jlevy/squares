@@ -1,0 +1,8 @@
+# The extended tests/test_verify_n17_certificates.py (27 tests, whole file) against the five mutants the committed suite missed, and against the unmutated verifier.
+# unmutated verifier 5c550f7c1e4c:
+27 passed in 18.90s
+{"mutant": "collision-first-partner-row-only", "weakens": "only the first live partner row is checked", "tests": "CAUGHT", "tests_failed": ["test_the_kernel_verifier_checks_every_live_partner_row"], "tests_summary": "1 failed, 26 passed in 19.40s", "seconds": 19.9}
+{"mutant": "sweep-no-mid-slab-probes", "weakens": "probes only at events, none inside the open slabs", "tests": "CAUGHT", "tests_failed": ["test_the_sweep_sees_a_gap_hidden_between_events"], "tests_summary": "1 failed, 26 passed in 19.90s", "seconds": 20.5}
+{"mutant": "sweep-no-crossing-events", "weakens": "edge crossings are not events", "tests": "CAUGHT", "tests_failed": ["test_the_sweep_sees_a_gap_hidden_between_events"], "tests_summary": "1 failed, 26 passed in 20.60s", "seconds": 21.5}
+{"mutant": "cache-forbidden-key-hull-only", "weakens": "the forbidden-region memo ignores the core", "tests": "CAUGHT", "tests_failed": ["test_the_kernel_verifier_checks_every_live_partner_row", "test_the_forbidden_region_cache_keys_on_the_exact_core"], "tests_summary": "2 failed, 25 passed in 17.47s", "seconds": 18.3}
+{"mutant": "cache-minimum-key-nx-only", "weakens": "the row-minimum memo keys on the normal's x component alone", "tests": "CAUGHT", "tests_failed": ["test_the_row_minimum_memo_keys_on_the_whole_direction"], "tests_summary": "1 failed, 26 passed in 21.98s", "seconds": 22.7}

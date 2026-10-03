@@ -1,0 +1,18 @@
+{
+ "criterion": {
+  "capacity": true,
+  "cells": 24,
+  "controls": true,
+  "coverage": true,
+  "d4_invariant": true,
+  "family_one_state_recipe_box": false,
+  "family_one_state_triangle": true,
+  "orbit_threshold": 135196,
+  "orbits": 43593,
+  "passed": true,
+  "root_certificate_passed": true
+ },
+ "module_sha256": "02c3c38eb3f006544d7a37955abbd4ed1e93192d8372a4793ecb9080916c94bc",
+ "schema": "n17-capacity-one-cover/v1",
+ "seconds": 0.139
+}

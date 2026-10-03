@@ -448,6 +448,24 @@ The separate
 [H-248 weighted-family test](../../../packing/campaign/hypotheses/H-248-n17-clique-weighted-family-at-4-675.md)
 concerns a global lower-bound architecture; it does not discharge local branch capture.
 
+## Scope Note After the Route Review
+
+*Added 2026-10-01 by Session 166.* The
+[route review](review-2026-10-01-n17-route-after-pr265.md) re-derived this theorem and
+found no error. Three scope facts stated above in passing are worth reading together:
+
+- The box covers $S\in[4.675,4.676]$ only.
+  Premise-satisfying packings with $S\in(4.66044,4.675)$ are outside it, although a grid
+  shows the same derivative signs on $[4.66,4.676]$.
+- The angle box reaches only $0.17^\circ$ below $\theta^{\ast}$, and its monotonicity
+  proof does not extend unchanged to $t\in[0.33,0.40]$, $b\in[0.30,0.37]$.
+- The premise $W_{17}\ge se+\gamma$ holds at every orientation of square 17. The premise
+  $W_{15}\ge cd+\gamma$ fails when square 15 is co-oriented with square 16, which is a
+  separate branch.
+
+The theorem therefore remains a conditional sanity bound.
+The terminal theorem is now H-261, a local minimum modulo the slider cone.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -1,0 +1,23 @@
+{
+ "times": [
+  {
+   "step": 0,
+   "owner": "corner-SW",
+   "seconds": 17.97
+  },
+  {
+   "step": 1,
+   "owner": "side-N0",
+   "seconds": 27.55
+  },
+  {
+   "step": 2,
+   "owner": "side-W0",
+   "seconds": 66.41
+  }
+ ],
+ "rows": 192,
+ "rows_sha256": "89110bd3bc238a60b533fcc2ed7ff6e22b1824a7e0486504561b5793f6c16ca3",
+ "collision_regions": 421,
+ "module": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/k2/wt-214601ac/packing/src/sqpack/hull_kernel/producer.py"
+}

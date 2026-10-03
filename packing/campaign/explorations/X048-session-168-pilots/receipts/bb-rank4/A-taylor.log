@@ -1,0 +1,22 @@
+{"seconds": 10.0, "nodes": 550, "leaves": 270, "open": 17, "max_depth": 29, "closed_share": 0.004261285066604621, "reasons": {"lp": 79, "disc": 106, "pair": 85}, "smallest_width": 0.39269908169872425}
+{"seconds": 40.0, "nodes": 1997, "leaves": 1009, "open": 14, "max_depth": 29, "closed_share": 0.020416259765625066, "reasons": {"lp": 285, "disc": 476, "pair": 248}, "smallest_width": 0.39269908169872425}
+{"seconds": 70.0, "nodes": 3478, "leaves": 1775, "open": 10, "max_depth": 29, "closed_share": 0.08004760742187514, "reasons": {"lp": 486, "disc": 944, "pair": 345}, "smallest_width": 0.39269908169872425}
+{"seconds": 100.0, "nodes": 5097, "leaves": 2601, "open": 14, "max_depth": 29, "closed_share": 0.12954711914062542, "reasons": {"lp": 734, "disc": 1379, "pair": 488}, "smallest_width": 0.39269908169872425}
+{"seconds": 130.0, "nodes": 6276, "leaves": 3213, "open": 10, "max_depth": 29, "closed_share": 0.1583251953125003, "reasons": {"lp": 887, "disc": 1756, "pair": 570}, "smallest_width": 0.39269908169872425}
+{"seconds": 160.0, "nodes": 7387, "leaves": 3784, "open": 14, "max_depth": 29, "closed_share": 0.19654083251953125, "reasons": {"lp": 1037, "disc": 2130, "pair": 617}, "smallest_width": 0.39269908169872425}
+{"seconds": 190.0, "nodes": 8380, "leaves": 4298, "open": 16, "max_depth": 29, "closed_share": 0.25459480285644526, "reasons": {"lp": 1158, "disc": 2459, "pair": 681}, "smallest_width": 0.39269908169872425}
+{"seconds": 220.0, "nodes": 9334, "leaves": 4792, "open": 15, "max_depth": 29, "closed_share": 0.2707242965698242, "reasons": {"lp": 1231, "disc": 2798, "pair": 763}, "smallest_width": 0.39269908169872425}
+{"seconds": 250.0, "nodes": 10387, "leaves": 5334, "open": 10, "max_depth": 29, "closed_share": 0.29992675781250033, "reasons": {"lp": 1330, "disc": 3157, "pair": 847}, "smallest_width": 0.39269908169872425}
+{"seconds": 280.0, "nodes": 11361, "leaves": 5839, "open": 9, "max_depth": 29, "closed_share": 0.36407470703125044, "reasons": {"lp": 1424, "disc": 3486, "pair": 929}, "smallest_width": 0.39269908169872425}
+{"seconds": 310.0, "nodes": 12382, "leaves": 6364, "open": 12, "max_depth": 29, "closed_share": 0.39573717117309604, "reasons": {"lp": 1487, "disc": 3858, "pair": 1019}, "smallest_width": 0.39269908169872425}
+{"seconds": 340.0, "nodes": 13498, "leaves": 6934, "open": 11, "max_depth": 29, "closed_share": 0.4266090393066414, "reasons": {"lp": 1567, "disc": 4254, "pair": 1113}, "smallest_width": 0.39269908169872425}
+{"seconds": 370.0, "nodes": 14918, "leaves": 7660, "open": 10, "max_depth": 29, "closed_share": 0.5094909667968758, "reasons": {"lp": 1696, "disc": 4667, "pair": 1297}, "smallest_width": 0.39269908169872425}
+{"seconds": 400.0, "nodes": 16302, "leaves": 8367, "open": 8, "max_depth": 29, "closed_share": 0.6036987304687516, "reasons": {"lp": 1868, "disc": 5071, "pair": 1428}, "smallest_width": 0.39269908169872425}
+{"seconds": 430.0, "nodes": 17535, "leaves": 8996, "open": 9, "max_depth": 29, "closed_share": 0.6599121093750019, "reasons": {"lp": 2005, "disc": 5335, "pair": 1656}, "smallest_width": 0.39269908169872425}
+{"seconds": 460.0, "nodes": 18870, "leaves": 9679, "open": 12, "max_depth": 29, "closed_share": 0.7362181345621761, "reasons": {"lp": 2199, "disc": 5568, "pair": 1912}, "smallest_width": 0.39269908169872425}
+{"seconds": 490.0, "nodes": 20000, "leaves": 10262, "open": 8, "max_depth": 29, "closed_share": 0.8144531250000028, "reasons": {"lp": 2340, "disc": 5862, "pair": 2060}, "smallest_width": 0.39269908169872425}
+{"seconds": 520.0, "nodes": 21066, "leaves": 10812, "open": 8, "max_depth": 29, "closed_share": 0.8674587673611113, "reasons": {"lp": 2481, "disc": 6129, "pair": 2202}, "smallest_width": 0.39269908169872425}
+{"seconds": 550.0, "nodes": 22476, "leaves": 11521, "open": 10, "max_depth": 29, "closed_share": 0.8798828124999986, "reasons": {"lp": 2687, "disc": 6332, "pair": 2502}, "smallest_width": 0.39269908169872425}
+{"seconds": 580.0, "nodes": 23813, "leaves": 12200, "open": 9, "max_depth": 29, "closed_share": 0.9101562499999987, "reasons": {"lp": 2880, "disc": 6607, "pair": 2713}, "smallest_width": 0.39269908169872425}
+{"label": "A-taylor", "pattern": ["interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N", "interior-SE"], "verdict": "unresolved-at-budget", "nodes": 24179, "leaves": 12388, "max_depth": 29, "wall_seconds": 590.002}
+exit 0

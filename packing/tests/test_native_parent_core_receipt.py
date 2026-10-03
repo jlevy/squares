@@ -2,13 +2,22 @@
 
 These checks do not replay interval coverage. In particular, agreement between a
 receipt and its journal cannot authenticate coordinated invented observations.
+
+The run is bound to the revision that produced it. Nothing here depends on the
+working tree matching that revision: the reconciliation context is prepared from a
+directory holding only the certificate, with no Git history and no environment file,
+and drift since the run is reported, never refused. That the current verifier still
+decides as the run did is tested on one retained row, not by freezing files.
 """
 
 from __future__ import annotations
 
 import copy
 import json
+import shutil
 import subprocess
+from dataclasses import asdict
+from math import ceil
 from pathlib import Path
 from typing import Any
 
@@ -16,18 +25,48 @@ import pytest
 
 from devtools.audit_kleddamag_n11_native import (
     PROOF_COMMIT,
+    PROOF_INPUTS,
     RECONCILIATION,
     ReceiptContext,
-    check_proof_code,
+    drift_line,
     prepare_context,
+    proof_input_drift,
     read_documents,
     reconcile,
 )
+from devtools.verify_kleddamag_n11_native import REPO, REVIEWED_SHA256, SOURCE
+from sqpack.fractional.parent_core import load_kleddamag_parent_core
+from sqpack.fractional.parent_core_interval import parent_core_search
+from sqpack.fractional.threshold_interval import ThresholdAtomData
+
+#: What the reconciliation says about the receipt. The v1 document retained on
+#: 2026-09-22 also lists the proof inputs' Git blobs and a limitation saying Git
+#: identity froze them; those stay there as history and are not recomputed.
+RECONCILED_FIELDS = (
+    "status",
+    "coverage_replayed",
+    "additional_confirmation_method",
+    "proof_commit",
+    "certificate_sha256",
+    "rows_reconciled",
+    "minimum_recorded_lower_units",
+    "threshold_units",
+    "total_recorded_boxes",
+    "counting_gap",
+    "exact_premises",
+)
+
+#: The cheapest row of the retained run: under a second, where the run took 6,197 s.
+DETERMINISM_ROW = 4795
 
 
 @pytest.fixture(scope="module")
-def context() -> ReceiptContext:
-    return prepare_context()
+def context(tmp_path_factory: pytest.TempPathFactory) -> ReceiptContext:
+    bare = tmp_path_factory.mktemp("certificate-only")
+    target = bare / SOURCE.relative_to(REPO)
+    target.parent.mkdir(parents=True)
+    shutil.copyfile(SOURCE, target)
+    return prepare_context(bare)
 
 
 @pytest.fixture(scope="module")
@@ -38,7 +77,7 @@ def documents() -> tuple[dict[str, Any], list[dict[str, Any]]]:
 def test_complete_retained_run_reconciles_in_normal_ci(
     context: ReceiptContext, documents: tuple[dict[str, Any], list[dict[str, Any]]]
 ) -> None:
-    result = reconcile(*documents, context)
+    result = json.loads(json.dumps(reconcile(*documents, context)))
     assert result["status"] == "RECONCILED_RECEIPT_NOT_COVERAGE_REPLAY"
     assert result["proof_commit"] == PROOF_COMMIT
     assert result["rows_reconciled"] == 12028
@@ -47,7 +86,46 @@ def test_complete_retained_run_reconciles_in_normal_ci(
     assert result["counting_gap"] == "13483/125000000"
     assert result["coverage_replayed"] is False
     assert result["additional_confirmation_method"] is False
-    assert json.loads(json.dumps(result)) == json.loads(RECONCILIATION.read_text())
+    assert set(result) == {"schema", "limitations", *RECONCILED_FIELDS}
+    retained = json.loads(RECONCILIATION.read_text())
+    assert {field: result[field] for field in RECONCILED_FIELDS} == {
+        field: retained[field] for field in RECONCILED_FIELDS
+    }
+
+
+def test_current_verifier_decides_a_retained_row_as_the_run_did(
+    documents: tuple[dict[str, Any], list[dict[str, Any]]],
+) -> None:
+    """The retained run is never executed again; one of its rows is, by today's code.
+
+    Agreement on the row's whole outcome -- bounds, box count and witness -- is what says
+    the verifier still decides as it did at `PROOF_COMMIT`, whatever has changed in the
+    code, the dependencies or the interpreter since. If an intended change to the search
+    moves this row, pin the new outcome here as a literal and say why; the retained run
+    stays bound to its revision and is not re-run.
+    """
+    receipt, _journal = documents
+    certificate = load_kleddamag_parent_core(SOURCE, expected_sha256=REVIEWED_SHA256)
+    data = ThresholdAtomData.of(certificate, batch_size=receipt["batch"]["boxes"])
+    threshold = ceil(certificate.minimum_charge * data.scale)
+    assert threshold == receipt["threshold_units"]
+    outcome = parent_core_search(certificate, data, DETERMINISM_ROW).search(prune_at=threshold)
+    retained = {
+        key: value
+        for key, value in receipt["rows"][DETERMINISM_ROW].items()
+        if key not in ("index", "seconds")
+    }
+    assert json.loads(json.dumps(asdict(outcome))) == retained
+
+
+def test_recorded_runtime_is_history_not_a_condition(
+    context: ReceiptContext, documents: tuple[dict[str, Any], list[dict[str, Any]]]
+) -> None:
+    receipt, journal = copy.deepcopy(documents)
+    for provenance in (receipt["provenance"], journal[0]["provenance"]):
+        provenance["python"] = "3.15.0 (another interpreter)"
+        provenance["platform"] = "another host"
+    assert reconcile(receipt, journal, context)["rows_reconciled"] == 12028
 
 
 @pytest.mark.parametrize(
@@ -59,7 +137,6 @@ def test_complete_retained_run_reconciles_in_normal_ci(
         (("provenance", "git_commit"), "0" * 40, "unexpected proof commit"),
         (("provenance", "dirty"), True, "source was dirty"),
         (("provenance", "certificate_sha256"), "0" * 64, "wrong source identity"),
-        (("provenance", "python"), "", "interpreter disagrees"),
         (("minimum_charge",), "1", "minimum_charge disagrees"),
         (("parent_side",), "1", "parent_side disagrees"),
         (("budget",), "11", "budget disagrees"),
@@ -145,16 +222,10 @@ def _git(repository: Path, *arguments: str) -> str:
     ).stdout.strip()
 
 
-def test_git_reuse_boundary_binds_transitive_code_and_lock_not_unrelated_docs(
-    tmp_path: Path,
-) -> None:
-    _git(tmp_path, "init", "--quiet")
-    paths = ("dependency.py", "uv.lock")
-    (tmp_path / paths[0]).write_text("EXACT = True\n")
-    (tmp_path / paths[1]).write_text("version = 1\n")
-    _git(tmp_path, "add", ".")
+def _commit(repository: Path, message: str) -> str:
+    _git(repository, "add", ".")
     _git(
-        tmp_path,
+        repository,
         "-c",
         "core.hooksPath=/dev/null",
         "-c",
@@ -164,20 +235,40 @@ def test_git_reuse_boundary_binds_transitive_code_and_lock_not_unrelated_docs(
         "commit",
         "--quiet",
         "-m",
-        "Frozen proof fixture",
+        message,
     )
-    revision = _git(tmp_path, "rev-parse", "HEAD")
-    manifest = check_proof_code(tmp_path, revision=revision, paths=paths)
-    assert {entry["path"] for entry in manifest} == set(paths)
+    return _git(repository, "rev-parse", "HEAD")
+
+
+def test_proof_input_drift_is_reported_and_never_refused(tmp_path: Path) -> None:
+    """A run at an older proof commit is read at a later HEAD with its drift listed."""
+    _git(tmp_path, "init", "--quiet")
+    paths = ("verifier.py", "kernel.py")
+    (tmp_path / "verifier.py").write_text("EXACT = True\n")
+    (tmp_path / "kernel.py").write_text("STEP = 1\n")
+    (tmp_path / "uv.lock").write_text("version = 1\n")
+    proof = _commit(tmp_path, "Proof commit")
+    assert proof_input_drift(tmp_path, revision=proof, paths=paths) == ()
+    (tmp_path / "uv.lock").write_text("version = 1\n# a new pinned dependency\n")
     (tmp_path / "notes.md").write_text("A documentation-only continuation.\n")
-    assert check_proof_code(tmp_path, revision=revision, paths=paths) == manifest
-    for relative in paths:
-        target = tmp_path / relative
-        frozen = target.read_text()
-        target.write_text(frozen + "# changed\n")
-        with pytest.raises(ValueError, match="proof input differs from frozen Git blob"):
-            check_proof_code(tmp_path, revision=revision, paths=paths)
-        target.write_text(frozen)
+    _commit(tmp_path, "A dependency and a note")
+    assert proof_input_drift(tmp_path, revision=proof, paths=paths) == ()
+    (tmp_path / "kernel.py").write_text("STEP = 1  # faster, same answers\n")
+    _commit(tmp_path, "A kernel change")
+    (tmp_path / "verifier.py").write_text("EXACT = True  # uncommitted\n")
+    drift = proof_input_drift(tmp_path, revision=proof, paths=paths)
+    assert drift == ("kernel.py", "verifier.py")
+    assert "informational" in drift_line(drift, proof)
+    assert proof_input_drift(tmp_path, revision="0" * 40, paths=paths) is None
+    assert "unknown" in drift_line(None, proof)
+
+
+def test_environment_declarations_are_not_proof_inputs() -> None:
+    assert not {
+        "packing/pyproject.toml",
+        "packing/uv.lock",
+        "packing/.python-version",
+    } & set(PROOF_INPUTS)
 
 
 def test_reader_accepts_original_json_semantics(tmp_path: Path) -> None:

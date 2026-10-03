@@ -1,0 +1,96 @@
+"""Independent D4 invariance check and orbit count of 17-subsets of the 24 cells.
+
+Cells are compared as vertex sets under the eight symmetries about (U/2, U/2). The
+Burnside count uses the cycle type of each induced permutation (fixed 17-subsets are unions
+of whole cycles, counted by a product generating function), and is cross-checked by brute
+force: every one of the C(24,17) subsets is reduced to its lexicographically least image
+and the distinct results are counted.
+"""
+
+from __future__ import annotations
+
+import itertools
+import json
+import sys
+from fractions import Fraction as Q
+from math import comb
+from pathlib import Path
+
+U = Q(1169, 250)
+C = U / 2
+HERE = Path(__file__).resolve().parent
+
+
+def symmetries():
+    def rot(k, p):
+        x, y = p[0] - C, p[1] - C
+        for _ in range(k):
+            x, y = -y, x
+        return (x + C, y + C)
+
+    def flip(p):
+        return (2 * C - p[0], p[1])
+
+    out = {}
+    for k in range(4):
+        out[f"r{k}"] = lambda p, k=k: rot(k, p)
+        out[f"f{k}"] = lambda p, k=k: rot(k, flip(p))
+    return out
+
+
+def main() -> int:
+    receipt = json.loads((HERE / "receipt-unique.json").read_text())
+    cells = [(c["name"], frozenset((Q(x), Q(y)) for x, y in c["vertices"])) for c in receipt["cells"]]
+    index = {verts: i for i, (_, verts) in enumerate(cells)}
+    assert len(index) == len(cells)
+    perms = {}
+    for name, sym in symmetries().items():
+        images = []
+        for _, verts in cells:
+            image = frozenset(sym(p) for p in verts)
+            if image not in index:
+                print(f"NOT D4-INVARIANT: {name} maps a cell outside the cover")
+                return 1
+            images.append(index[image])
+        perms[name] = images
+    # Sanity: group closure (composition of permutations stays in the set).
+    pset = {tuple(p) for p in perms.values()}
+    for p, q in itertools.product(perms.values(), repeat=2):
+        assert tuple(p[q[i]] for i in range(len(p))) in pset
+    n, size = len(cells), 17
+    fixed = {}
+    for name, perm in perms.items():
+        seen, cycles = set(), []
+        for s in range(n):
+            if s in seen:
+                continue
+            length, cur = 0, s
+            while cur not in seen:
+                seen.add(cur)
+                cur = perm[cur]
+                length += 1
+            cycles.append(length)
+        poly = [1] + [0] * size
+        for length in cycles:
+            for deg in range(size, length - 1, -1):
+                poly[deg] += poly[deg - length]
+        fixed[name] = poly[size]
+        print(f"{name}: cycle type {sorted(cycles)} fixed 17-subsets {poly[size]}")
+    total = sum(fixed.values())
+    assert total % 8 == 0
+    orbits = total // 8
+    print(f"states C(24,17) = {comb(n, size)}; Burnside sum {total}; orbits {orbits}")
+    # Brute force.
+    plist = list(perms.values())
+    canon = set()
+    for subset in itertools.combinations(range(n), size):
+        best = min(tuple(sorted(p[i] for i in subset)) for p in plist)
+        canon.add(best)
+    print(f"brute-force distinct orbits: {len(canon)}")
+    ok = orbits == len(canon) == 43593 and comb(n, size) == 346104
+    print("ORBIT COUNT 43,593 CONFIRMED:", ok)
+    return 0 if ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

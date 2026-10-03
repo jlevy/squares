@@ -1,0 +1,30 @@
+{
+ "module": "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/v1/orig/verify_n17_kernel_certificate_f864a576a.py",
+ "provenance": {
+  "revision": "f864a576a455524576cef07deeed69bce90508ed",
+  "dirty": true,
+  "files": {
+   "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/v1/orig/verify_n17_kernel_certificate_f864a576a.py": "ea1c71044f8323221433155798e9b4c1216e3c7c"
+  }
+ },
+ "directory": "packing/campaign/explorations/X048-session-168-pilots/certificates/N1-state-pending",
+ "status": "PASS",
+ "failure": null,
+ "verifier_counts": {
+  "collision_facet_checks": 16709184,
+  "collision_regions": 8470,
+  "cover_checks": 2611,
+  "partner_rows": 41162,
+  "rows_full": 2611,
+  "seed_points": 6,
+  "seed_rows": 544,
+  "steps": 82
+ },
+ "path_counts": {
+  "cover_checks": 2611,
+  "section_calls": 834715,
+  "singleton_targets": 564
+ },
+ "zero_area_where": [],
+ "seconds": 389.8
+}

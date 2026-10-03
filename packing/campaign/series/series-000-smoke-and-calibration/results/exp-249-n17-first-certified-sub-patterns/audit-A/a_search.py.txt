@@ -1,0 +1,110 @@
+"""R4: an independent float search for pattern A (six interior cells) at U = 1169/250.
+
+Pose variables: (x, y, theta) per square. Violation of a pose = max over
+  pair penetration  g - max_n n . d   (g = 1/2 + h(theta_j - theta_i), eight normals)
+  cell excursion    (a x + b y - c) / |(a, b)|
+  wall excursion    h(theta) - x, x + h(theta) - U, same in y.
+A pose with violation <= 0 places the pattern. Random restarts, a smooth surrogate
+(log-sum-exp) tightened in stages, then a Nelder-Mead polish of the true max.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import sys
+import time
+
+import numpy as np
+from scipy.optimize import minimize
+
+from devtools import check_n17_capacity_one_cover as cover
+
+A = ("interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N", "interior-SE")
+U = float(cover.U)
+
+
+def rows_of(polygon):
+    hull = cover.convex_hull(list(polygon))
+    rows = []
+    for k, s in enumerate(hull):
+        e = hull[(k + 1) % len(hull)]
+        a, b = float(e[1] - s[1]), float(s[0] - e[0])
+        c = a * float(s[0]) + b * float(s[1])
+        n = math.hypot(a, b)
+        rows.append((a / n, b / n, c / n))
+    return rows
+
+
+def violations(z, cells):
+    k = len(cells)
+    out = []
+    P = z.reshape(k, 3)
+    for i in range(k):
+        x, y, t = P[i]
+        h = (abs(math.cos(t)) + abs(math.sin(t))) / 2
+        out += [h - x, x + h - U, h - y, y + h - U]
+        out += [a * x + b * y - c for a, b, c in cells[i]]
+    for i in range(k):
+        for j in range(i + 1, k):
+            dx, dy = P[j, 0] - P[i, 0], P[j, 1] - P[i, 1]
+            al = P[j, 2] - P[i, 2]
+            g = 0.5 + (abs(math.cos(al)) + abs(math.sin(al))) / 2
+            reach = max(
+                math.cos(t + q * math.pi / 2) * dx + math.sin(t + q * math.pi / 2) * dy
+                for t in (P[i, 2], P[j, 2])
+                for q in range(4)
+            )
+            out.append(g - reach)
+    return np.array(out)
+
+
+def main():
+    seed = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+    restarts = int(sys.argv[2]) if len(sys.argv) > 2 else 60
+    rng = np.random.default_rng(seed)
+    cover_cells = {c.name: c for c in cover.build_cover(cover.UNIQUE_24)}
+    cells = [rows_of(cover_cells[n].vertices) for n in A]
+    boxes = []
+    for n in A:
+        vs = cover_cells[n].vertices
+        boxes.append((min(float(v[0]) for v in vs), max(float(v[0]) for v in vs),
+                      min(float(v[1]) for v in vs), max(float(v[1]) for v in vs)))
+    best = (math.inf, None)
+    started = time.time()
+    hist = []
+    for r in range(restarts):
+        z0 = []
+        for b in boxes:
+            z0 += [rng.uniform(b[0], b[1]), rng.uniform(b[2], b[3]), rng.uniform(0, math.pi / 2)]
+        z = np.array(z0)
+        # Lattice-like start half the time: common angle.
+        if r % 2 == 1:
+            z[2::3] = rng.uniform(0, math.pi / 2)
+        for beta in (20.0, 80.0, 300.0, 1200.0):
+            def f(zz, beta=beta):
+                v = violations(zz, cells)
+                m = v.max()
+                return m + math.log(np.exp(beta * (v - m)).sum()) / beta
+            res = minimize(f, z, method="L-BFGS-B", options={"maxiter": 400})
+            z = res.x
+        res = minimize(lambda zz: violations(zz, cells).max(), z, method="Nelder-Mead",
+                       options={"maxiter": 4000, "xatol": 1e-10, "fatol": 1e-12})
+        z = res.x
+        val = violations(z, cells).max()
+        hist.append(val)
+        if val < best[0]:
+            best = (val, z.copy())
+    val, z = best
+    P = z.reshape(len(A), 3)
+    print(json.dumps({
+        "seed": seed, "restarts": restarts, "seconds": round(time.time() - started, 1),
+        "best_violation": val,
+        "quantiles": [float(np.quantile(hist, q)) for q in (0, 0.1, 0.5, 0.9)],
+        "pose": [[n, float(P[i, 0]), float(P[i, 1]), float(P[i, 2]), math.degrees(P[i, 2])]
+                 for i, n in enumerate(A)],
+    }, indent=1))
+
+
+if __name__ == "__main__":
+    main()

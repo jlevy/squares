@@ -1,0 +1,183 @@
+{
+  "schema": "n17-subpattern-bb-pilot/v1",
+  "status": "pilot second certifier: a certified verdict is an exact Farkas-checked exhaustion of the pose space, replayable by rerunning; not yet a record",
+  "label": "target-a6-1-B",
+  "design": "ring-3-voronoi-8-tabbed-unique",
+  "cap": "1169/250",
+  "pattern": [
+    "side-S1",
+    "side-W1",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-SE"
+  ],
+  "source": {
+    "receipt": "campaign/explorations/X048-session-168-pilots/receipts/selector-arity6-seed1.json",
+    "index": 1
+  },
+  "control": false,
+  "parameters": {
+    "theta0": 0.4,
+    "floor": 1e-06,
+    "merge_gap": 0.0,
+    "max_seconds": 600.0,
+    "max_nodes": null,
+    "split_ratio": 0.25,
+    "obbt_rounds": 3
+  },
+  "module_sha256": "afe96ca8b2e7b9f4b997438928695b2566eca8e18edc23d0c3cd93f597a5cf90",
+  "verdict": "unresolved-at-budget",
+  "nodes": 145746,
+  "leaves": 72862,
+  "open_at_stop": 26,
+  "max_depth": 42,
+  "prune_reasons": {
+    "cell": 1883,
+    "disc": 30,
+    "lp": 9437,
+    "pair": 61512
+  },
+  "branches": {
+    "angle": 72816,
+    "pair": 68
+  },
+  "farkas_failures": 0,
+  "closed_tree_share": 0.00025950139388441893,
+  "wall_seconds": 600.002,
+  "cpu_seconds": 587.307,
+  "stopped_at": null,
+  "smallest_unresolved": {
+    "depth": 40,
+    "angles": [
+      [
+        0.4,
+        0.41227184630308517
+      ],
+      [
+        0.4736310778185109,
+        0.4981747704246811
+      ],
+      [
+        0.4,
+        0.41227184630308517
+      ],
+      [
+        0.4981747704246811,
+        0.5472621556370216
+      ],
+      [
+        0.5472621556370216,
+        0.5718058482431919
+      ],
+      [
+        0.5963495408493622,
+        0.6945243112740432
+      ]
+    ],
+    "angles_degrees": [
+      [
+        22.918312,
+        23.621437
+      ],
+      [
+        27.137062,
+        28.543312
+      ],
+      [
+        22.918312,
+        23.621437
+      ],
+      [
+        28.543312,
+        31.355812
+      ],
+      [
+        31.355812,
+        32.762062
+      ],
+      [
+        34.168312,
+        39.793312
+      ]
+    ],
+    "max_angle_width": 0.09817477042468103,
+    "centre_boxes": {
+      "side-S1": [
+        1.9953333333333332,
+        2.2313874144715538,
+        0.6552396681557675,
+        1.0220570918789453
+      ],
+      "side-W1": [
+        0.6730192977204871,
+        0.6741380662567286,
+        2.6799849511877802,
+        2.6806666666666668
+      ],
+      "interior-NW": [
+        1.9255642038556624,
+        2.005683796679847,
+        3.133515117575685,
+        3.265
+      ],
+      "interior-W": [
+        1.4774097903774848,
+        1.4786025507122518,
+        1.999792096294636,
+        2.0003491950210694
+      ],
+      "interior-S": [
+        2.5436887129996806,
+        2.546357815314161,
+        2.1289443833711705,
+        2.1323112870003196
+      ],
+      "interior-SE": [
+        3.2591265810802215,
+        3.265,
+        1.4109999999999998,
+        1.415892386728199
+      ]
+    },
+    "windows": {
+      "side-S1|interior-S": [
+        0.39999999999999997,
+        1.1853981633974489
+      ],
+      "side-W1|interior-W": [
+        5.112388980384688,
+        5.89778714378214
+      ],
+      "interior-NW|interior-W": [
+        3.541592653589792,
+        4.3269908169872435
+      ],
+      "interior-W|interior-S": [
+        0.39999999999999997,
+        1.1853981633974489
+      ],
+      "interior-S|interior-SE": [
+        5.3087385212340505,
+        5.5050880620834155
+      ]
+    },
+    "lp_depth": -0.00013163808556203408,
+    "lp_point": [
+      1.9954649714188955,
+      0.6552396681557675,
+      0.6730192977204871,
+      2.680535028581105,
+      1.926626179743551,
+      3.264868361914438,
+      1.4781403053579165,
+      1.9999514419542377,
+      2.5460311450988256,
+      2.129782690535248,
+      3.264868361914438,
+      1.4111316380855619
+    ],
+    "undecided_pairs": 5,
+    "midpoint_pose_violation": 0.03467399978533159
+  }
+}

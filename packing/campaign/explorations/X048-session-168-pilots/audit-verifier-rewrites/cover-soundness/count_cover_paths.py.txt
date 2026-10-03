@@ -1,0 +1,147 @@
+"""Lane V1: how often the kernel verifier meets the two cover defects on a real certificate.
+
+Run from a worktree's packing/ with the project interpreter:
+
+    PYTHONPATH=<wt>/packing/src:<wt>/packing python3 <this file> MODULE CERT_DIR OUT.json [CELLS]
+
+`CELLS`, when given, is a JSON cells file read with `file_cells` (its digest computed
+here), for the forged closures of the tests; otherwise the n17 cover's cells are used.
+
+`MODULE` is a copy of `devtools/verify_n17_kernel_certificate.py` (the unfixed one at
+`25c1cdef6`, or the fixed one); it is loaded under its own name, and two of its functions
+are wrapped, delegating to the originals, so the verdict is the module's own:
+
+- `section_covered`: every call; the singleton targets (`low == high`); and those with no
+  span containing the point, where the unfixed routine falls through to `True`.
+- `check_cover`: every call; the rows whose required domain has zero area, which take the
+  point-and-midpoint branch. Each such row is also decided by the kernel's exact
+  parameter-interval cover (`sqpack.hull_kernel.covers.closed_degenerate_cover`) and,
+  when the module has it, by the fixed verifier's `degenerate_covered`; the rows are
+  written to `OUT.rows.json.gz` so they can be decided again later.
+
+Nothing here is committed code; it is retained as the measurement's record.
+"""
+
+from __future__ import annotations
+
+import gzip
+import hashlib
+import importlib.util
+import json
+import sys
+import time
+from collections import Counter
+from pathlib import Path
+from typing import Any
+
+from gmpy2 import mpq
+
+from sqpack.hull_kernel import covers as kernel_covers
+from sqpack.hull_kernel.geometry import Budget, RefusalError
+
+
+def load(path: Path) -> Any:
+    spec = importlib.util.spec_from_file_location("verifier_under_count", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["verifier_under_count"] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def main() -> int:
+    module_path, cert_dir, out = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+    v = load(module_path)
+    counts: Counter[str] = Counter()
+    rows: list[dict[str, Any]] = []
+    original_section = v.section_covered
+    original_cover = v.check_cover
+
+    def section_covered(target: Any, spans: list[Any]) -> bool:
+        counts["section_calls"] += 1
+        low, high = target
+        verdict = original_section(target, spans)
+        if not v.ratio_lt(low, high):
+            counts["singleton_targets"] += 1
+            containing = any(
+                not v.ratio_lt(low, s_low) and not v.ratio_lt(s_high, low)
+                for s_low, s_high in spans
+            )
+            if not containing:
+                counts["singleton_without_containing_span"] += 1
+                counts[f"singleton_without_containing_span_verdict_{verdict}"] += 1
+                if not spans:
+                    counts["singleton_with_no_spans_at_all"] += 1
+        return verdict
+
+    def as_mpq(polygon: list[Any]) -> list[tuple[Any, Any]]:
+        return [(mpq(x.numerator, x.denominator), mpq(y.numerator, y.denominator)) for x, y in polygon]
+
+    def check_cover(state: Any, owner: int, **kw: Any) -> None:
+        counts["cover_checks"] += 1
+        required = kw["required"]
+        if v.area2(required) == 0:
+            counts["zero_area_rows"] += 1
+            collisions, residual = kw["regions"]
+            forbidden = [
+                state.forbidden_region(state.groups[oj], kw["core"])
+                for oj in state.mask
+                if oj != owner and state.groups[oj]
+            ]
+            every = forbidden + collisions + residual
+            shape = len(v.hull(list(required)))
+            counts[f"zero_area_rows_hull_{shape}_vertices"] += 1
+            try:
+                kernel_covers.closed_degenerate_cover(
+                    as_mpq(list(required)),
+                    [as_mpq(r) for r in every],
+                    budget=Budget(time.monotonic() + 600, 10**9),
+                )
+                kernel = True
+            except RefusalError:
+                kernel = False
+            counts[f"zero_area_kernel_exact_{kernel}"] += 1
+            fixed = None
+            if hasattr(v, "degenerate_covered"):
+                fixed = v.degenerate_covered(list(required), every)
+                counts[f"zero_area_fixed_exact_{fixed}"] += 1
+            rows.append(
+                {
+                    "where": kw["where"],
+                    "required": [[str(x), str(y)] for x, y in required],
+                    "regions": [[[str(x), str(y)] for x, y in r] for r in every],
+                    "residual": len(residual),
+                    "kernel_exact": kernel,
+                    "fixed_exact": fixed,
+                }
+            )
+        return original_cover(state, owner, **kw)
+
+    v.section_covered = section_covered
+    v.check_cover = check_cover
+    clock = time.perf_counter()
+    if len(sys.argv) > 4:
+        raw = Path(sys.argv[4]).read_bytes()
+        cells = v.file_cells(Path(sys.argv[4]), hashlib.sha256(raw).hexdigest())
+    else:
+        cells = v.cover_cells()
+    receipt = v.verify(cert_dir, cells)
+    record = {
+        "module": str(module_path),
+        "provenance": receipt.get("provenance"),
+        "directory": receipt.get("directory"),
+        "status": receipt["status"],
+        "failure": receipt["failure"],
+        "verifier_counts": receipt.get("counts"),
+        "path_counts": dict(sorted(counts.items())),
+        "zero_area_where": [r["where"] for r in rows],
+        "seconds": round(time.perf_counter() - clock, 1),
+    }
+    out.write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8")
+    Path(str(out) + ".rows.json.gz").write_bytes(gzip.compress(json.dumps(rows).encode()))
+    print(json.dumps({k: record[k] for k in ("status", "failure", "path_counts", "seconds")}))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,201 @@
+"""Lane G-proof: depth-width wall lemma checks (exploratory, scratchpad only).
+
+G(theta; d, w) = c d + s w - 1 - (c/2)(c + s - 1), c = cos, s = sin, theta in [0, pi/2].
+One-wall cell [1/2, 1/2+d] x [y0, y0+w] has capacity one iff max G < 0 (tight).
+Corner cell (two walls): G2 = c d + s w - (c+s+1)/2 (first quadrant), G3 (fourth).
+"""
+from __future__ import annotations
+
+import math
+from fractions import Fraction as Fr
+
+import numpy as np
+import sympy as sp
+from scipy.optimize import differential_evolution, minimize, minimize_scalar
+
+U = 1169 / 250
+
+
+def G(th, d, w):
+    c, s = np.cos(th), np.sin(th)
+    return c * d + s * w - 1 - (c / 2) * (c + s - 1)
+
+
+def G2(th, d, w):
+    c, s = np.cos(th), np.sin(th)
+    return c * d + s * w - (c + s + 1) / 2
+
+
+def G3(th, d, w):
+    c, s = np.cos(th), np.sin(th)
+    t = c + s
+    return c * d + s * w - 1 - t * (t - 1) / 2
+
+
+def maxf(f, d, w):
+    th = np.linspace(0, math.pi / 2, 200001)
+    v = f(th, d, w)
+    k = int(np.argmax(v))
+    lo, hi = max(0.0, th[max(k - 2, 0)]), min(math.pi / 2, th[min(k + 2, len(th) - 1)])
+    r = minimize_scalar(lambda x: -f(x, d, w), bounds=(lo, hi), method="bounded",
+                        options={"xatol": 1e-14})
+    return float(-r.fun), float(r.x)
+
+
+def wmax(d):
+    """sup admissible width for depth d: min over theta in (0, pi/2] of N/s."""
+    def R(th):
+        c, s = math.cos(th), math.sin(th)
+        return (1 - c * d + c * (c + s - 1) / 2) / s
+    th = np.linspace(1e-3, math.pi / 2, 200001)
+    c, s = np.cos(th), np.sin(th)
+    v = (1 - c * d + c * (c + s - 1) / 2) / s
+    k = int(np.argmin(v))
+    r = minimize_scalar(R, bounds=(max(1e-6, th[max(k - 2, 0)]), min(math.pi / 2, th[min(k + 2, len(th) - 1)])),
+                        method="bounded", options={"xatol": 1e-14})
+    return float(r.fun), float(r.x)
+
+
+def exact_poly(d: Fr, w: Fr):
+    """P(u) = (1+u^2)^2 G(theta(u)), u = tan(theta/2) in [0,1]; exact rational."""
+    u = sp.symbols("u")
+    c = (1 - u**2)
+    s = 2 * u
+    q = 1 + u**2  # c/q, s/q are cos, sin
+    P = sp.Rational(d) * c * q + sp.Rational(w) * s * q - q**2 - sp.Rational(1, 2) * (c**2 + c * s - c * q)
+    return sp.Poly(sp.expand(P), u, domain="QQ"), u
+
+
+def exact_check(d: Fr, w: Fr):
+    P, u = exact_poly(d, w)
+    nroots = P.count_roots(0, 1)
+    p0, p1 = P.eval(0), P.eval(1)
+    ok = nroots == 0 and p0 < 0 and p1 < 0
+    # high-precision max via critical points of P/(1+u^2)^2 on [0,1]
+    g = sp.Lambda(u, P.as_expr() / (1 + u**2) ** 2)
+    dg = sp.diff(P.as_expr() / (1 + u**2) ** 2, u)
+    num = sp.Poly(sp.numer(sp.together(dg)), u, domain="QQ")
+    cands = [sp.Integer(0), sp.Integer(1)] + [r for r in sp.real_roots(num) if 0 <= r <= 1]
+    vals = [(sp.N(g(r), 30), r) for r in cands]
+    best = max(vals, key=lambda t: t[0])
+    return ok, nroots, p0, p1, best
+
+
+def square_poly(th, cx, cy):
+    c, s = math.cos(th), math.sin(th)
+    a, b = np.array([c, s]) / 2, np.array([-s, c]) / 2
+    return [np.array([cx, cy]) + sa * a + sb * b for sa, sb in ((1, 1), (-1, 1), (-1, -1), (1, -1))]
+
+
+def sat_sigma(p, q):
+    """max over the 8 signed edge normals of the projection gap (>= 0 iff interior-disjoint)."""
+    best = -1e9
+    for poly in (p, q):
+        for k in range(4):
+            e = poly[(k + 1) % 4] - poly[k]
+            n = np.array([-e[1], e[0]]) / np.linalg.norm(e)
+            for sgn in (1, -1):
+                m = sgn * n
+                gap = min(m @ v for v in q) - max(m @ v for v in p)
+                best = max(best, gap)
+    return best
+
+
+def h(th):
+    return (abs(math.cos(th)) + abs(math.sin(th))) / 2
+
+
+def search(cell_i, cell_j, walls, seeds=12, maxiter=600):
+    """Maximise SAT sigma over two squares with centres in cell_i, cell_j (boxes),
+    contained in [0,U]^2 (penalised). walls: unused (containment is the full box)."""
+    bounds = [cell_i[0], cell_i[1], (0, math.pi / 2), cell_j[0], cell_j[1], (0, math.pi / 2)]
+
+    def obj(v):
+        xi, yi, ti, xj, yj, tj = v
+        pen = 0.0
+        for x, y, t in ((xi, yi, ti), (xj, yj, tj)):
+            hh = h(t)
+            pen += max(0, hh - x) + max(0, x + hh - U) + max(0, hh - y) + max(0, y + hh - U)
+        p = square_poly(ti, xi, yi)
+        q = square_poly(tj, xj, yj)
+        return -(sat_sigma(p, q) - 50 * pen)
+
+    best = None
+    for seed in range(seeds):
+        r = differential_evolution(obj, bounds, seed=seed, maxiter=maxiter, tol=1e-12, polish=False)
+        r2 = minimize(obj, r.x, method="Nelder-Mead", options={"xatol": 1e-12, "fatol": 1e-14, "maxiter": 20000})
+        cand = min(r, r2, key=lambda z: z.fun)
+        if best is None or cand.fun < best.fun:
+            best = cand
+    return -best.fun, best.x
+
+
+if __name__ == "__main__":
+    a259 = 919 / 1250
+    w_side = (919 / 250 - 2 * 0.78) / 3
+    print(f"w_side = {w_side!r}  = 529/750? {abs(w_side - 529/750):.2e}")
+    print("\n== one-wall max G ==")
+    for d, w, tag in [(0.911, w_side, "side 0.911 x 529/750"), (0.78, 0.78, "corner as one-wall"),
+                      (a259, a259, "H259 cell"), (0.75, 0.75, "a=3/4"), (0.735, 0.835, "F-review (0.735,0.835)"),
+                      (0.911, 0.705, "F-review (0.911,0.705)"), (0.798, 0.798, "F-review corner 0.798")]:
+        m, th = maxf(G, d, w)
+        print(f"  {tag:28s} d={d:.6f} w={w:.6f}  max G = {m:+.7f} at theta={th:.6f} ({math.degrees(th):.3f} deg)")
+
+    print("\n== admissible width w_max(d) (one-wall, tight) vs sqrt(1-d^2) ==")
+    for d in [0.5, 0.55, 0.6, 0.65, 0.7, 0.735, a259, 0.75, 0.78, 0.8, 0.85, 0.9, 0.911, 0.95, 0.97, 0.99]:
+        wm, th = wmax(d)
+        print(f"  d={d:.4f}  w_max={wm:.6f}  (theta*={math.degrees(th):.2f} deg)  sqrt(1-d^2)={math.sqrt(max(0,1-d*d)):.6f}")
+    # square cell threshold
+    lo, hi = 0.7, 0.9
+    for _ in range(80):
+        mid = (lo + hi) / 2
+        if maxf(G, mid, mid)[0] < 0:
+            lo = mid
+        else:
+            hi = mid
+    print(f"  square one-wall threshold a* = {lo:.9f}")
+
+    print("\n== corner cell (two walls) ==")
+    for d, w in [(0.78, 0.78), (0.85, 0.85), (0.8535, 0.8535), (0.911, w_side)]:
+        m2, t2 = maxf(G2, d, w)
+        m3, t3 = maxf(G3, d, w)
+        circ = math.hypot(d - 0.5, w - 0.5) - 0.5
+        print(f"  d={d:.4f} w={w:.4f}  max G2={m2:+.6f} (th={math.degrees(t2):.2f})  max G3={m3:+.6f} (th={math.degrees(t3):.2f})  circle form={circ:+.6f}")
+    print(f"  square corner threshold (2+sqrt2)/4 = {(2 + math.sqrt(2)) / 4:.9f}")
+
+    print("\n== exact rational certification (tangent half-angle polynomial, Sturm) ==")
+    for d, w, tag in [(Fr(911, 1000), Fr(529, 750), "side"), (Fr(78, 100), Fr(78, 100), "corner one-wall"),
+                      (Fr(919, 1250), Fr(919, 1250), "H259"), (Fr(3, 4), Fr(3, 4), "a=3/4"),
+                      (Fr(911, 1000), Fr(7104, 10000), "side w=0.7104 (expect fail)"),
+                      (Fr(911, 1000), Fr(7103, 10000), "side w=0.7103")]:
+        ok, nr, p0, p1, best = exact_check(d, w)
+        print(f"  {tag:30s} d={d} w={w}: roots in [0,1]={nr}, P(0)={p0}, P(1)={p1}, PASS={ok}; max G ~ {best[0]} at u={sp.N(best[1], 12)}")
+
+    print("\n== tightness: explicit extremal pair at theta* (one wall) ==")
+    for d, w in [(0.911, w_side), (0.911, 0.7104), (0.78, 0.78)]:
+        m, th = maxf(G, d, w)
+        c, s = math.cos(th), math.sin(th)
+        t = c + s
+        # bottom-wall frame: depth along y. square i on the wall at tangential x0, j at far corner.
+        x0 = 1.28
+        pi_ = square_poly(th, x0, t / 2)
+        pj_ = square_poly(th, x0 + w, 0.5 + d)
+        n = np.array([s, -c])  # rotate roles: normal (c along depth=y, s along tangent=x)
+        # gap along n' = (s, c) in (x,y) frame since depth is y and tangent is x
+        npr = np.array([s, c])
+        gap = min(npr @ v for v in pj_) - max(npr @ v for v in pi_)
+        print(f"  d={d:.4f} w={w:.5f}: max G={m:+.6f}; explicit pair gap along n={gap:+.6f}; SAT sigma={sat_sigma(pi_, pj_):+.6f}")
+
+    print("\n== counterexample search (DE + Nelder-Mead), bottom-wall side cell frame ==")
+    x0 = 1.28
+    for d, w, tag in [(0.911, w_side, "side (0.911, 529/750)"), (0.911, 0.7104, "side (0.911, 0.7104) expect >=0"),
+                      (0.911, 0.72, "side (0.911, 0.72) expect >0")]:
+        cell = ((x0, x0 + w), (0.5, 0.5 + d))
+        sig, v = search(cell, cell, None, seeds=6, maxiter=400)
+        m, th = maxf(G, d, w)
+        print(f"  {tag:34s} best sigma={sig:+.6f} (max G={m:+.6f}); pose={np.round(v, 5)}")
+    for a, tag in [(0.78, "corner (0.78,0.78) two walls"), (0.86, "corner (0.86,0.86) expect >0")]:
+        cell = ((0.5, 0.5 + a), (0.5, 0.5 + a))
+        sig, v = search(cell, cell, None, seeds=6, maxiter=400)
+        m2, _ = maxf(G2, a, a)
+        print(f"  {tag:34s} best sigma={sig:+.6f} (max G2={m2:+.6f}); pose={np.round(v, 5)}")

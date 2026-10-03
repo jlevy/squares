@@ -1,0 +1,229 @@
+sites 20860 atoms 49208 budget 17000448944 A_R068 0.989820704 A_U 0.986526946
+corner             floor<= 63045956 at theta=0.000 (93 angles, 4 s)
+edge-near-corner   floor<= 377790059 at theta=0.000 (165 angles, 26 s)
+edge-middle        floor<= 630372131 at theta=0.010 (165 angles, 28 s)
+interior-corner    floor<= 747616217 at theta=0.000 (93 angles, 29 s)
+interior-edge      floor<= 930431172 at theta=44.950 (184 angles, 65 s)
+centre             floor<= 920859332 at theta=42.950 (121 angles, 42 s)
+{
+ "schema": "pilot-n17-charge-floors/v1",
+ "charge": {
+  "source": "R068 certificate 116511/25000, sites, rules and weights unchanged",
+  "container_L": "4613/1000",
+  "cap_U": "1169/250",
+  "parent_side_A_U": 0.9865269461077845,
+  "parent_side_A_R068": 0.9898207036245504,
+  "parent_shrink_relative": 0.003327630453378916,
+  "budget_M": 17000448944,
+  "budget_over_17": 1000026408.4705882,
+  "gamma_r068": 1000026844,
+  "seventeen_gamma_minus_M_r068": 7404,
+  "sites": 20860,
+  "atoms": 49208,
+  "definition": "open A_U-parent capture of R068's sites; pose charge = sum of signed Mobius atoms whose sites all lie strictly inside the parent"
+ },
+ "floors_by_class": {
+  "corner": 63045956,
+  "edge-near-corner": 377790059,
+  "edge-middle": 630372131,
+  "interior-corner": 747616217,
+  "interior-edge": 930431172,
+  "centre": 920859332
+ },
+ "floor_minus_budget_over_17": {
+  "corner": -936980452.4705882,
+  "edge-near-corner": -622236349.4705882,
+  "edge-middle": -369654277.4705882,
+  "interior-corner": -252410191.47058824,
+  "interior-edge": -69595236.47058824,
+  "centre": -79167076.47058824
+ },
+ "gamma_u_upper_estimate": 63045956,
+ "seventeen_gamma_u_minus_M": -15928667692,
+ "endpoint_control": {
+  "pose_charges": [
+   63045956,
+   684047743,
+   684047743,
+   65557469,
+   65557469,
+   651049421,
+   690631648,
+   68068982,
+   996686369,
+   1048901991,
+   985009792,
+   1081750832,
+   1017510285,
+   1033687689,
+   920473948,
+   1022005856,
+   719110213
+  ],
+  "pose_classes": [
+   "corner",
+   "edge-near-corner",
+   "edge-near-corner",
+   "corner",
+   "corner",
+   "edge-near-corner",
+   "edge-near-corner",
+   "corner",
+   "edge-middle",
+   "interior-corner",
+   "interior-edge",
+   "interior-edge",
+   "interior-edge",
+   "interior-edge",
+   "edge-middle",
+   "interior-corner",
+   "edge-middle"
+  ],
+  "charge_sum": 11797143406,
+  "charge_sum_minus_budget": -5203305538,
+  "floor_sum": 8871417575,
+  "floor_sum_minus_budget": -8129031369,
+  "survives_floor_test": true,
+  "poses_below_their_class_floor": [],
+  "class_counts": {
+   "corner": 4,
+   "edge-near-corner": 4,
+   "edge-middle": 3,
+   "interior-corner": 2,
+   "interior-edge": 4,
+   "centre": 0
+  }
+ },
+ "counts": {
+  "seconds": 33.92421624000008,
+  "all": {
+   "states": 161100756,
+   "orbits": 20155518,
+   "fixed_by_symmetry": [
+    161100756,
+    34892,
+    34892,
+    3748,
+    34892,
+    36,
+    36,
+    34892
+   ]
+  },
+  "cuts": {
+   "states": 61563363,
+   "orbits": 7703312,
+   "fixed_by_symmetry": [
+    61563363,
+    16055,
+    16055,
+    2419,
+    14275,
+    27,
+    27,
+    14275
+   ]
+  },
+  "floors": {
+   "states": 161100756,
+   "orbits": 20155518,
+   "fixed_by_symmetry": [
+    161100756,
+    34892,
+    34892,
+    3748,
+    34892,
+    36,
+    36,
+    34892
+   ]
+  },
+  "both": {
+   "states": 61563363,
+   "orbits": 7703312,
+   "fixed_by_symmetry": [
+    61563363,
+    16055,
+    16055,
+    2419,
+    14275,
+    27,
+    27,
+    14275
+   ]
+  }
+ },
+ "class_floor_ceiling": {
+  "endpoint_class_counts": [
+   4,
+   4,
+   3,
+   2,
+   4,
+   0
+  ],
+  "class_count_vectors": 2375,
+  "orbits_with_endpoint_class_counts": 5970,
+  "antipodal_pair_lower_bound": 30966,
+  "random_search_best_survivors": 34690,
+  "random_search_best_direction": [
+   -1.340858262968849,
+   0.30369978976615347,
+   0.09359148694013819,
+   0.6965617751433204,
+   0.3741071329026325,
+   1.6772154466000548
+  ]
+ },
+ "orientation_split": {
+  "by_class": {
+   "corner": {
+    "max_per_angle_minimum": 1000026844,
+    "at_theta_degrees": 26.0,
+    "excess_over_budget_over_17": 435.52941176470586,
+    "share_of_angles_at_or_above_budget_over_17": 0.021739130434782608,
+    "angles": 46
+   },
+   "edge-near-corner": {
+    "max_per_angle_minimum": 997457356,
+    "at_theta_degrees": 80.0,
+    "excess_over_budget_over_17": -2569052.470588235,
+    "share_of_angles_at_or_above_budget_over_17": 0.0,
+    "angles": 90
+   },
+   "edge-middle": {
+    "max_per_angle_minimum": 977653841,
+    "at_theta_degrees": 27.0,
+    "excess_over_budget_over_17": -22372567.470588237,
+    "share_of_angles_at_or_above_budget_over_17": 0.0,
+    "angles": 90
+   },
+   "interior-corner": {
+    "max_per_angle_minimum": 999578237,
+    "at_theta_degrees": 23.0,
+    "excess_over_budget_over_17": -448171.4705882353,
+    "share_of_angles_at_or_above_budget_over_17": 0.0,
+    "angles": 46
+   },
+   "interior-edge": {
+    "max_per_angle_minimum": 1006208921,
+    "at_theta_degrees": 6.0,
+    "excess_over_budget_over_17": 6182512.529411765,
+    "share_of_angles_at_or_above_budget_over_17": 0.08888888888888889,
+    "angles": 90
+   },
+   "centre": {
+    "max_per_angle_minimum": 1039685905,
+    "at_theta_degrees": 1.0,
+    "excess_over_budget_over_17": 39659496.52941176,
+    "share_of_angles_at_or_above_budget_over_17": 0.45652173913043476,
+    "angles": 46
+   }
+  },
+  "max_boundary_excess": 435.52941176470586,
+  "max_interior_excess": 39659496.52941176,
+  "pattern_excess_bound": 356938953.0,
+  "any_pattern_excludable_at_sampled_angles": true
+ },
+ "seconds": 133.07610163899972
+}

@@ -1,0 +1,32 @@
+unperturbed 11/13 contact at z = T/3 = 0.023737743
+z-feasible with 5, 11, 13 at a = 0, 6 absent? True False
+
+== sup a, square 6 axis-parallel on the wall touching 5 ==
+  z=+0.023738: sup a = 0.111240
+  z=+0.020000: sup a = 0.105401
+  z=+0.010000: sup a = 0.089781
+  z=+0.000000: sup a = 0.074160
+  z=-0.010000: sup a = 0.058539
+  z=-0.020000: sup a = 0.042919
+  z=-0.030000: sup a = 0.027298
+  z=-0.040000: sup a = 0.011677
+  z=-0.045000: sup a = 0.003867
+  z=-0.047000: sup a = 0.000743
+best on-wall: a = 0.111240 at z = +0.023738
+  tilted search at a = 0.1117, z = +0.023738: None
+  tilted search at a = 0.1122, z = +0.023738: None
+  tilted search at a = 0.1132, z = +0.023738: None
+  tilted search at a = 0.1162, z = +0.023738: None
+
+== inf z, square 6 axis-parallel on the wall touching 5 ==
+  a=0.000: inf z = -0.047475
+  a=0.005: inf z = -0.044275
+  a=0.010: inf z = -0.041074
+  a=0.020: inf z = -0.034672
+  a=0.050: inf z = -0.015467
+  a=0.100: inf z = +0.000000
+best on-wall: z = -0.047475 at a = 0.000
+  tilted search at a = 0.000, z = -0.047975: None
+  tilted search at a = 0.000, z = -0.048475: None
+  tilted search at a = 0.000, z = -0.049475: None
+68.1s

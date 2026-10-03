@@ -1,0 +1,88 @@
+"""Lane R2: sup a and inf z over the unperturbed family with square 6 in side-S2.
+
+scan.py let z reach 0.0241 where the unperturbed 11/13 pair already overlaps (its
+contact is at z = T/3 = 0.023738; z* = 0.0241003 adds the perturbation terms). Here the
+physical z range of the family is respected: for each z in [inf z, T/3], the largest a
+with a feasible pose of square 6 (full 17-square check, touching allowed), first with 6
+axis-parallel on the bottom wall touching square 5, then a local grid over tilted poses.
+"""
+
+from __future__ import annotations
+
+import sys
+import time
+
+import numpy as np
+
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/r2")
+from scan import CELL, LO, aux, fits, pose  # noqa: E402
+from witness_check import pair_overlap, squares  # noqa: E402
+
+T_OVER_3 = float(aux["T"]) / 3
+X5 = pose(5)[0]
+
+
+def feasible(a: float, z: float, six) -> bool:
+    conf = squares(a, z, six)
+    return not any(pair_overlap(conf[i], conf[j]) for i in range(17) for j in range(i + 1, 17))
+
+
+def sup_a_on_wall(z: float) -> float:
+    lo, hi = 0.0, 0.3
+    for _ in range(40):
+        mid = (lo + hi) / 2
+        if feasible(mid, z, (X5 - mid - 1.0, LO + 0.5, 0.0)):
+            lo = mid
+        else:
+            hi = mid
+    return lo
+
+
+def inf_z_on_wall(a: float) -> float:
+    lo, hi = -0.3, 0.0
+    for _ in range(40):
+        mid = (lo + hi) / 2
+        if feasible(a, mid, (X5 - a - 1.0, LO + 0.5, 0.0)):
+            hi = mid
+        else:
+            lo = mid
+    return hi
+
+
+def main() -> None:
+    t0 = time.time()
+    print(f"unperturbed 11/13 contact at z = T/3 = {T_OVER_3:.9f}")
+    print("z-feasible with 5, 11, 13 at a = 0, 6 absent?", not pair_overlap(pose(11), pose(13, 0.0, T_OVER_3)),
+          not pair_overlap(pose(11), pose(13, 0.0, T_OVER_3 + 1e-6)))
+    print("\n== sup a, square 6 axis-parallel on the wall touching 5 ==")
+    best = (-1.0, None)
+    for z in (T_OVER_3, 0.02, 0.01, 0.0, -0.01, -0.02, -0.03, -0.04, -0.045, -0.047):
+        a = sup_a_on_wall(z)
+        best = max(best, (a, z))
+        print(f"  z={z:+.6f}: sup a = {a:.6f}")
+    print(f"best on-wall: a = {best[0]:.6f} at z = {best[1]:+.6f}")
+    # tilted poses near the best, within the cell: fine grid in a window around 6's on-wall pose
+    z = best[1]
+    for a in (best[0] + 0.0005, best[0] + 0.001, best[0] + 0.002, best[0] + 0.005):
+        x6 = X5 - a - 1.0
+        window = (max(CELL[0], x6 - 0.05), min(CELL[1], x6 + 0.08), 0.5 + LO, min(CELL[3], 0.5 + LO + 0.12))
+        w = fits(a, z, window, 0.001, 0.25, tol=-1e-12)
+        print(f"  tilted search at a = {a:.4f}, z = {z:+.6f}: {w}")
+    print("\n== inf z, square 6 axis-parallel on the wall touching 5 ==")
+    best = (1.0, None)
+    for a in (0.0, 0.005, 0.01, 0.02, 0.05, 0.1):
+        zmin = inf_z_on_wall(a)
+        best = min(best, (zmin, a))
+        print(f"  a={a:.3f}: inf z = {zmin:+.6f}")
+    print(f"best on-wall: z = {best[0]:+.6f} at a = {best[1]:.3f}")
+    a = best[1]
+    for z in (best[0] - 0.0005, best[0] - 0.001, best[0] - 0.002):
+        x6 = X5 - a - 1.0
+        window = (max(CELL[0], x6 - 0.08), min(CELL[1], x6 + 0.02), 0.5 + LO, min(CELL[3], 0.5 + LO + 0.12))
+        w = fits(a, z, window, 0.001, 0.25, tol=-1e-12)
+        print(f"  tilted search at a = {a:.3f}, z = {z:+.6f}: {w}")
+    print(f"{time.time()-t0:.1f}s")
+
+
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,8 @@
 
 No producer or cycle dynamic program is imported. Geometry and the reviewed D4
 action on closed existential cell assignments remain mathematical premises.
-The CLI binds the identity count to the accepted H259 receipt bytes.
+The CLI takes the identity count from the H259 receipt only after auditing that
+receipt's whole census by closed binomial sums and checking it counts this grid.
 """
 
 from __future__ import annotations
@@ -14,11 +15,11 @@ from pathlib import Path
 from typing import cast
 
 from devtools.audit_cell_occupancies import MAX_BYTES, coefficient, decode, plain_integer
+from devtools.audit_cell_occupancies import audit_payload as audit_census
 
 SCHEMA = "grid-symmetry-audit/v1"
 SOURCE_SCHEMA = "grid-symmetry-count/v1"
 COUNTED_OBJECTS = "D4 orbits of integer occupancies of indexed cells; square identities ignored"
-IDENTITY_SHA = "ee71cc9f1a6a94f1b1ce965e7fe095b525a71caa28203f2d15420fd7ec400a37"
 CAPACITIES = [1 if i in (0, 4) or j in (0, 4) else 2 for i in range(5) for j in range(5)]
 NAMES = ["r0", "r1", "r2", "r3", "f0", "f1", "f2", "f3"]
 
@@ -151,13 +152,26 @@ def read_bounded(path: Path) -> bytes:
     return raw
 
 
+def identity_count_of(identity: object, *, target: int = 17) -> int:
+    """Audit the H259 census by its content and return its raw identity count.
+
+    The census is recomputed whole by closed binomial sums, and it must count this
+    grid: the same target, and the same capacities as a multiset (H259 lists them
+    grouped, this audit row-major). Its bytes are not compared with a pinned digest
+    (OR-16); a census that passes these checks is the H259 count whatever its layout.
+    """
+    census = audit_census(identity)
+    if census["target"] != target:
+        raise ValueError("identity census counts a different target")
+    if sorted(cast(list[int], census["capacities"])) != sorted(CAPACITIES):
+        raise ValueError("identity census counts a different grid")
+    return cast(int, census["target_assignments"])
+
+
 def audit(receipt_path: Path, identity_path: Path) -> dict[str, object]:
     raw = read_bounded(receipt_path)
     identity_raw = read_bounded(identity_path)
-    if hashlib.sha256(identity_raw).hexdigest() != IDENTITY_SHA:
-        raise ValueError("identity receipt differs from accepted H259 bytes")
-    identity = cast(dict[str, object], decode(identity_raw))
-    identity_count = plain_integer(identity["target_assignments"], "identity count", 3**25)
+    identity_count = identity_count_of(decode(identity_raw))
     result = audit_payload(decode(raw), identity_count)
     if result["strict_reduction"] is not True:
         raise ValueError("orbit count does not strictly improve the raw identity count")
@@ -165,7 +179,7 @@ def audit(receipt_path: Path, identity_path: Path) -> dict[str, object]:
         {
             "receipt_bytes": len(raw),
             "receipt_sha256": hashlib.sha256(raw).hexdigest(),
-            "identity_receipt_sha256": IDENTITY_SHA,
+            "identity_receipt_sha256": hashlib.sha256(identity_raw).hexdigest(),
         }
     )
     return result

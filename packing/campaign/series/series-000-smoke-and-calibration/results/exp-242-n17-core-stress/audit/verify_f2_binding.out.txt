@@ -1,0 +1,3 @@
+Pi_2 from exp-237 certificate: -b**2*t**4 - b**2*t**3 + b**2*t**2 - 3*b**2*t + b*t**5 - b*t**4 - b*t + b - t**4 - t**3 - 3*t**2 + t
+F2 * t(1+t)(1+t^2)(1+b^2) - Pi_2 cancels to: 0
+Also check the sign-free form: F2 == Pi_2 / (t(1+t)(1+t^2)(1+b^2)) with multiplier positive for t,b>0

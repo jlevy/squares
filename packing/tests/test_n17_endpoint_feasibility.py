@@ -6,9 +6,9 @@
 from __future__ import annotations
 
 import copy
+import json
 from fractions import Fraction as Q
 from pathlib import Path
-from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -158,31 +158,32 @@ def test_coverage_rejects_missing_duplicate_kind_and_bool_label() -> None:
 def test_duplicate_json_and_tampered_root_refusal_without_target_io(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
+    """A tampered root at the retained path is refused by the root checker, not a blob."""
     with pytest.raises(ValueError, match="duplicate JSON key"):
         endpoint._object_unique([("box", 1), ("box", 2)])
-    certificate = tmp_path / "fake-certificate.json"
-    source = tmp_path / "fake-source.json"
+    relative = endpoint.FROZEN_ROOT_REF.partition(":")[2]
+    certificate = tmp_path / relative
+    certificate.parent.mkdir(parents=True)
     certificate.write_text('{"schema":"tampered"}')
+    source = tmp_path / "fake-source.json"
     source.write_bytes(b"{}")
-
-    def reject_frozen(raw: bytes) -> None:
-        assert raw == b'{"schema":"tampered"}'
-        raise ValueError("root certificate differs from frozen exp-237 Git blob")
-
-    monkeypatch.setattr(endpoint, "_check_frozen_root_bytes", reject_frozen)
+    monkeypatch.setattr(endpoint, "REPO", tmp_path)
     assert endpoint.main([str(certificate), "--source", str(source)]) == 2
-    assert '"criterion_passed": false' in capsys.readouterr().out
+    out = json.loads(capsys.readouterr().out)
+    assert out["criterion_passed"] is False
+    assert "retained" not in out["error"]
 
 
-def test_frozen_git_blob_binding_without_target_io(monkeypatch: pytest.MonkeyPatch) -> None:
-    def git_show(*args: object, **kwargs: object) -> SimpleNamespace:
-        del args, kwargs
-        return SimpleNamespace(returncode=0, stdout=b"synthetic-root")
-
-    monkeypatch.setattr(endpoint.subprocess, "run", git_show)
-    endpoint._check_frozen_root_bytes(b"synthetic-root")
-    with pytest.raises(ValueError, match="differs from frozen"):
-        endpoint._check_frozen_root_bytes(b"altered-root")
+def test_the_root_is_named_by_its_retained_path(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    relative = endpoint.FROZEN_ROOT_REF.partition(":")[2]
+    endpoint.require_retained_path(endpoint.REPO / relative, endpoint.FROZEN_ROOT_REF)
+    copy_elsewhere = tmp_path / "certificate.json"
+    with pytest.raises(ValueError, match="expected the retained"):
+        endpoint.require_retained_path(copy_elsewhere, endpoint.FROZEN_ROOT_REF)
+    assert endpoint.main([str(copy_elsewhere)]) == 2
+    assert "expected the retained" in json.loads(capsys.readouterr().out)["error"]
 
 
 def test_large_exact_fraction_serializes_under_receipt_cap(

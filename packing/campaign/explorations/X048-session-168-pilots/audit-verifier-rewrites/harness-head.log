@@ -1,0 +1,5 @@
+{"audit": "facets", "pairs": 206, "facets": 2014, "disagreements": [], "seconds": 0.64, "module_sha256": "5c550f7c1e4c"}
+{"audit": "sweep", "cases": 229, "covered": 93, "uncovered": 136, "samples": 2926, "disagreements": [], "seconds": 2.75, "module_sha256": "5c550f7c1e4c"}
+{"audit": "between", "pairs": 223, "disagreements": [], "seconds": 0.01, "module_sha256": "5c550f7c1e4c"}
+{"audit": "section", "trials": 200, "point_targets_skipped": 22, "point_target_with_no_span_is_deemed_covered": true, "disagreements": [], "seconds": 0.01, "module_sha256": "5c550f7c1e4c"}
+{"verdict": "AGREE", "disagreements": 0}

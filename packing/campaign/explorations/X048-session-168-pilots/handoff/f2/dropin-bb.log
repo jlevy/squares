@@ -1,0 +1,2 @@
+bb verifier A Fraction  2424 nodes    255.3 s = 105.3 ms/node failed=0 failures=[] counts={'angle_split_ok': 1704, 'open_ok': 2274, 'pair_split_ok': 570, 'cut_ok': 109186, 'bound_ok': 46117, 'closed_lp_ok': 150}
+bb verifier A mpq       2424 nodes     54.4 s = 22.5 ms/node failed=0 failures=[] counts={'angle_split_ok': 1704, 'open_ok': 2274, 'pair_split_ok': 570, 'cut_ok': 109186, 'bound_ok': 46117, 'closed_lp_ok': 150}

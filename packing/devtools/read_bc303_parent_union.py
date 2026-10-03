@@ -1,13 +1,15 @@
 """Exact mass of a literal closed-parent union in the frozen BC303 measure.
 
-The source binding and arithmetic are independent of the T1 core reader.  A caller
-must commit this reader before scanning the disclosed parent: the executing file,
-checkout HEAD, proposal revision, and frozen measure bytes are all checked.
+The source checks and arithmetic are independent of the T1 core reader. The measure is
+identified by its proposal revision and repository-relative path, and the reader by
+the checkout HEAD it runs from; both are recorded, with whether either file differs
+from HEAD, and neither is compared with a Git blob (OR-16). What the reader checks is
+the measure's content: its constants, its 377 distinct in-container atoms, their total
+mass and their weight scale.
 """
 
 from __future__ import annotations
 
-import hashlib
 import json
 import subprocess
 from dataclasses import dataclass
@@ -21,7 +23,6 @@ SOURCE_PATH = (
     "packing/campaign/series/series-000-smoke-and-calibration/results/agenda-030/"
     "bc-293-measure-free-96-25.json"
 )
-SOURCE_SHA256 = "c30b600d3d35f3851f0595e2c42962bf353721f9e72b0539bd691aec522e876f"
 READER_PATH = "packing/devtools/read_bc303_parent_union.py"
 OUTER_SIDE = Fraction(96, 25)
 CORE_SIDE = Fraction(9977, 10000)
@@ -36,15 +37,17 @@ type Atom = tuple[Point, Fraction]
 
 
 class ParentUnionError(ValueError):
-    """A source, geometry, or execution binding failed."""
+    """A source, geometry, or checkout check failed."""
 
 
 @dataclass(frozen=True, slots=True)
 class BoundMeasure:
+    """The parsed measure and the revisions that name it; the drift flag is recorded."""
+
     atoms: tuple[Atom, ...]
-    source_sha256: str
     source_revision: str
     implementation_revision: str
+    implementation_dirty: bool
 
 
 def _unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
@@ -69,11 +72,9 @@ def _fraction(value: object) -> Fraction:
         raise ParentUnionError("invalid rational") from error
 
 
-def parse_measure(data: bytes, *, expected_sha256: str = SOURCE_SHA256) -> tuple[Atom, ...]:
-    """Authenticate and parse all source rows without measuring any parent."""
+def parse_measure(data: bytes) -> tuple[Atom, ...]:
+    """Check and parse all source rows by content, without measuring any parent."""
 
-    if hashlib.sha256(data).hexdigest() != expected_sha256:
-        raise ParentUnionError("frozen measure source bytes changed")
     try:
         document = json.loads(
             data, object_pairs_hook=_unique_object, parse_constant=_reject_constant
@@ -143,7 +144,11 @@ def _git(repository: Path, *arguments: str) -> bytes:
 
 
 def load_bound_measure(repository: Path) -> BoundMeasure:
-    """Bind the frozen source and executing reader to this checkout's HEAD."""
+    """Read the measure in this checkout and record the revisions that identify it.
+
+    `implementation_dirty` says whether the source or this reader differs from HEAD.
+    It is information beside the result, never a refusal.
+    """
 
     root = repository.resolve()
     if Path(_git(root, "rev-parse", "--show-toplevel").decode().strip()).resolve() != root:
@@ -159,15 +164,9 @@ def load_bound_measure(repository: Path) -> BoundMeasure:
         or Path(__file__).resolve() != reader_path
     ):
         raise ParentUnionError("executing reader path differs from checkout")
-    data = source_path.read_bytes()
-    if data != _git(
-        root, "cat-file", "blob", f"{SOURCE_REVISION}:{SOURCE_PATH}"
-    ) or data != _git(root, "cat-file", "blob", f"{head}:{SOURCE_PATH}"):
-        raise ParentUnionError("source differs from proposal revision or checkout HEAD")
-    if reader_path.read_bytes() != _git(root, "cat-file", "blob", f"{head}:{READER_PATH}"):
-        raise ParentUnionError("executing reader differs from implementation revision")
-    atoms = parse_measure(data)
-    return BoundMeasure(atoms, SOURCE_SHA256, SOURCE_REVISION, head)
+    atoms = parse_measure(source_path.read_bytes())
+    dirty = bool(_git(root, "status", "--porcelain", "--", SOURCE_PATH, READER_PATH).strip())
+    return BoundMeasure(atoms, SOURCE_REVISION, head, dirty)
 
 
 def parent_union_mass(atoms: tuple[Atom, ...], parents: tuple[Parent, ...]) -> Fraction:
@@ -196,7 +195,7 @@ def parent_union_mass(atoms: tuple[Atom, ...], parents: tuple[Parent, ...]) -> F
 
 
 def literal_q0_mass(repository: Path) -> tuple[int, BoundMeasure]:
-    """Return the exact integer W*mu(Q0), with source and reader identities."""
+    """Return the exact integer W*mu(Q0), with the source and reader revisions."""
 
     measure = load_bound_measure(repository)
     scaled = WEIGHT_SCALE * parent_union_mass(measure.atoms, (Q0,))

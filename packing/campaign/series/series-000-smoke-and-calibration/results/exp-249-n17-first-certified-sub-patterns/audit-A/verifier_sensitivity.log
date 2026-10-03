@@ -1,0 +1,11 @@
+cert-test-lp cut_v -> "verdict": "FAILED" FAIL node 7 cut 0 of pair 0: v=1.0000000009999999 > min 1.0000000000000007
+cert-test-lp farkas_y -> "verdict": "FAILED" FAIL node 7: negative multiplier
+cert-test-lp box -> "verdict": "FAILED" FAIL node 0: round 0 box of square 0 too small
+cert-test-lp lost_child -> "verdict": "FAILED" FAIL T2: node 6 angle split children mismatch
+cert-test-lp piece -> "verdict": "ok" 
+cert-test-lp split_point -> "verdict": "FAILED" FAIL T2: node 0 angle split point outside the interval
+cert-test bound -> "verdict": "FAILED" FAIL node 4: bound on column 2 sign 1: 2.0588731868176366 > 2.058873185817639
+cert-test disc -> "verdict": "FAILED" FAIL node 4: disc closure with max |d|^2 = 3.7317507724541255
+cert-test piece -> "verdict": "ok" 
+cert-test-lp piece -> "verdict": "FAILED" FAIL node 8 pair 2: pieces do not cover the normals
+cert-test piece -> "verdict": "FAILED" FAIL node 5 pair 0: pieces do not cover the normals

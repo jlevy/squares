@@ -1,0 +1,1 @@
+{"label": "", "pattern": ["interior-SW", "interior-NW", "interior-W", "interior-S", "interior-N", "interior-SE"], "verdict": "unresolved-at-budget", "nodes": 1778, "leaves": 896, "max_depth": 29, "wall_seconds": 60.004}

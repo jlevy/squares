@@ -251,6 +251,30 @@ wheels = [
 ]
 
 [[package]]
+name = "gmpy2"
+version = "2.3.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/03/47/5c59682cd4d94291382f447dbe1f6229c8b8a144aa85d32d38ecaf8cfb73/gmpy2-2.3.1.tar.gz", hash = "sha256:313f35e9fe6b9ddf72759b14dac25166fe5757c970403e4bbf87a70ab2be07df", size = 301480, upload-time = "2026-06-24T01:22:25.311Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/32/69/086ce067fb08c938549431468ab8d6602040e6acafefe80ed314a38bcd79/gmpy2-2.3.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:93fabff8f2aeea38555fe298cdeab6dde87082d2a189dc919117cbaa99d67a13", size = 863614, upload-time = "2026-06-24T01:21:15.554Z" },
+    { url = "https://files.pythonhosted.org/packages/25/d7/d2076a1c374c987e7fbeb633dc7649dd42a017ce215b0f8696899261300b/gmpy2-2.3.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:f4b7d3f828567b3a42b518f0a1694d8acf947996660c48428e97b0d7b11db709", size = 715401, upload-time = "2026-06-24T01:21:16.823Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/00/5de86258fe6e395f1d10040956a7eab376a4f5d906130c3adb69297b6d43/gmpy2-2.3.1-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:29e3ca03037a7674007eda851b87564c7de0fef07402513e99f6919fbd200a6e", size = 1669752, upload-time = "2026-06-24T01:21:18.582Z" },
+    { url = "https://files.pythonhosted.org/packages/76/6c/06c868cb552637a796e4a583c025c63c10efd1c1192a5101bd97312a5756/gmpy2-2.3.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8749196c8bcd51612d989f5e509ea77d5c97c40b57eda9a863938facbe2b9eab", size = 1771047, upload-time = "2026-06-24T01:21:20.185Z" },
+    { url = "https://files.pythonhosted.org/packages/3a/a1/70c78e233d200cba7d334df242be173ce2d580814e17d73ef4038c2e78e0/gmpy2-2.3.1-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:9d76d62233e09ccfe2c492df3368ef19e7b7a62d3172a8f78c96d37f8f646b91", size = 1688897, upload-time = "2026-06-24T01:21:21.765Z" },
+    { url = "https://files.pythonhosted.org/packages/5e/b9/2abbd468edaf56092c685a587a72628fc233c179b3f415012cc78849cfe7/gmpy2-2.3.1-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:2f986ef8612ef47f3f8dc308d957d49082400bc986e40e288a00556ef9f0c06c", size = 1724989, upload-time = "2026-06-24T01:21:23.349Z" },
+    { url = "https://files.pythonhosted.org/packages/b3/9e/c8266086242421b065308c29faef73f62af8c5ee67a3d713399c35571bf4/gmpy2-2.3.1-cp314-cp314-win_amd64.whl", hash = "sha256:dcf0c32b50f859736ef4c4ba0b36132899e175cce666958e96b93cb43cd241df", size = 1267361, upload-time = "2026-06-24T01:21:24.774Z" },
+    { url = "https://files.pythonhosted.org/packages/8f/b1/08e2447d2970766ecc3f453472aabf2ea3365edd7df0b62eb876a83592a6/gmpy2-2.3.1-cp314-cp314-win_arm64.whl", hash = "sha256:ed0c6ca01e879451df5120b15e24f0d4430652d1e8b867b86b62f8ee7b4e3ebd", size = 882294, upload-time = "2026-06-24T01:21:26.288Z" },
+    { url = "https://files.pythonhosted.org/packages/68/cb/c921c4e593fb729aafbcd6cb8a2bcfb862866ccd7a4adce8fc207916940b/gmpy2-2.3.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:23a702ef9b84a4c072ae8fea9a713779efd3562cc7c62f7ef2a4e4f7f5648d24", size = 878199, upload-time = "2026-06-24T01:21:27.696Z" },
+    { url = "https://files.pythonhosted.org/packages/ca/0b/19c8ca31dadae65eb733b2c054ef2e45cb4aa3f35a3259cb6d8d86a93578/gmpy2-2.3.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:4199127acf096281bac79f78c492211a71b1290a7b32d2e0de271b1c98bb3dea", size = 729417, upload-time = "2026-06-24T01:21:29.338Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/c4/6d653248177243c0b09b5922142854020e27879533671ca9f3821b481cf5/gmpy2-2.3.1-cp314-cp314t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5c843c21ef78e96f3519fcd925bd3ff444c4cd3d3911b4282c53870298afb8c2", size = 1592770, upload-time = "2026-06-24T01:21:30.932Z" },
+    { url = "https://files.pythonhosted.org/packages/5e/5c/d18460f4e0d644215cfd38648f3d7cde02b952f3daf6b8f1419d4af77d9e/gmpy2-2.3.1-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a5f8c80813d370584ba00dbeb917262d4ec2192dcacb2c0774cf3f33a94c5565", size = 1688895, upload-time = "2026-06-24T01:21:32.687Z" },
+    { url = "https://files.pythonhosted.org/packages/5e/57/e15d6524226e272d3357142d37f90ce456fcee95e60e090b7a692b82d48f/gmpy2-2.3.1-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:2627879f06b156f3421a5775bfc8ea9323388181ab6b8f2447f8dbcc151f5c33", size = 1606979, upload-time = "2026-06-24T01:21:34.27Z" },
+    { url = "https://files.pythonhosted.org/packages/ad/a1/47be4bcbda465858fe5453bb97fb882ddea9474942f5fbd473d0bbcb0a9a/gmpy2-2.3.1-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:6935a76caed64ab4f55c4177d4a20b559fe5fcae08db5313f7cd7ee62e0ab2be", size = 1648165, upload-time = "2026-06-24T01:21:35.827Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/15/2325c19fb2043be68a8a4a8d66d392bf739c6fff78b1157d081d21cbad7a/gmpy2-2.3.1-cp314-cp314t-win_amd64.whl", hash = "sha256:db6a7f0951f6024764f493192cb53410890412d8d47fa7028983f2cbec1eb4dc", size = 1297962, upload-time = "2026-06-24T01:21:37.824Z" },
+    { url = "https://files.pythonhosted.org/packages/ef/e4/69f8f0161a5c39140be56ed9cc204be8c1d4a599d32bded241b5062bd51b/gmpy2-2.3.1-cp314-cp314t-win_arm64.whl", hash = "sha256:b3859613f34e608eab7108665552c8b1b4aa88fbfd4bc0b8c98e79fa8d83e561", size = 886292, upload-time = "2026-06-24T01:21:39.35Z" },
+]
+
+[[package]]
 name = "greenlet"
 version = "3.5.5"
 source = { registry = "https://pypi.org/simple" }
@@ -884,6 +908,7 @@ name = "sqpack"
 version = "0.2.0"
 source = { editable = "." }
 dependencies = [
+    { name = "gmpy2" },
     { name = "jsonschema" },
     { name = "jsonschema-rs" },
     { name = "mpmath" },
@@ -919,6 +944,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "gmpy2", specifier = "==2.3.1" },
     { name = "jsonschema", specifier = ">=4.26.0" },
     { name = "jsonschema-rs", specifier = "==0.49.9" },
     { name = "mpmath", specifier = ">=1.3.0" },

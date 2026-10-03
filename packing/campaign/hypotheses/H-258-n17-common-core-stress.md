@@ -28,7 +28,7 @@ hypothesis:
   instrument: devtools.check_n17_core_stress; deterministic symbolic stress construction, exact rational-function
     residual reduction and fixed256bit outward dyadic interval sign audit using exact Fraction operations.
     No numerical optimizer or fitted parameters.
-  instrument_ready: false
+  instrument_ready: true
   regime: Unchanged H255 inclusion box and accepted H256centroid/H257feature inventory; fixed analytic
     force and torque allocation, no rootrefinement or alternate allocation.
   instance:
@@ -178,6 +178,23 @@ The producer has three passing fast synthetic controls; full identity completion
 derivative and mutation controls, outward dyadic arithmetic, and independent receipt
 binding remain unfinished.
 A future attempt requires a new readiness review and a separately admitted run.
+
+## Repaired Instrument and Accepted Run
+
+*Added 2026-10-02 by Session 167.* The Session 166 route review traced the stop to
+`sympy.cancel` expression swell, not to the mathematics.
+Lane A1 of BC-406 rebuilt the identity proof at `2fbf8d29`. Each value is now a
+numerator polynomial over registered monic irreducible denominator factors, and the
+outward audit gains a strict-sign guard on every factor.
+The identities checked and the criterion above are unchanged.
+The controls the stop section lists as unfinished are now complete: derivative and
+mutation controls, outward dyadic arithmetic and receipt binding.
+The
+[independent output review](../series/series-000-smoke-and-calibration/results/exp-242-n17-core-stress/output-review.md)
+is the readiness and output review this section asked for.
+[exp-242](../series/series-000-smoke-and-calibration/experiments/exp-242-h258-n17-core-stress.md)
+records the accepted outcome, together with a clean replay from the committed
+instrument.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

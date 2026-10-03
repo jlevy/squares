@@ -1,0 +1,54 @@
+{
+  "schema": "n17-subpattern-bb-pilot/v1",
+  "status": "pilot second certifier: a certified verdict is an exact Farkas-checked exhaustion of the pose space, replayable by rerunning; not yet a record",
+  "label": "est-C9-taylor",
+  "design": "ring-3-voronoi-8-tabbed-unique",
+  "cap": "1169/250",
+  "pattern": [
+    "side-N1",
+    "side-W1",
+    "side-E1",
+    "side-W2",
+    "interior-SW",
+    "interior-NW",
+    "interior-S",
+    "interior-N",
+    "interior-E"
+  ],
+  "source": {
+    "cells": [
+      "side-N1",
+      "side-W1",
+      "side-E1",
+      "side-W2",
+      "interior-SW",
+      "interior-NW",
+      "interior-S",
+      "interior-N",
+      "interior-E"
+    ]
+  },
+  "control": false,
+  "parameters": {
+    "theta0": 0.4,
+    "floor": 1e-06,
+    "merge_gap": 0.0,
+    "max_seconds": 600.0,
+    "max_nodes": null,
+    "split_ratio": 0.25,
+    "obbt_rounds": 3,
+    "taylor": true
+  },
+  "module_sha256": "c626beb97b606cf5eb8de0050a275a0df88e19575b1ac862537e8db2038d2aec",
+  "verdict": "estimate-only",
+  "dives": 200,
+  "seed": 2,
+  "floor_hits": 0,
+  "estimated_nodes_mean": 20282441056.28,
+  "estimated_nodes_median": 2095103.0,
+  "estimated_nodes_max": 3696192601599.0,
+  "mean_leaf_depth": 19.03,
+  "seconds_per_node": 0.01543284507264111,
+  "estimated_wall_seconds": 313015770.5165445,
+  "seconds": 61.824
+}

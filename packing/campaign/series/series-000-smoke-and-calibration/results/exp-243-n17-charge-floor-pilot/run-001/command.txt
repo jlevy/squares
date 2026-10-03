@@ -1,0 +1,8 @@
+Clean replay from a detached git worktree at 1a8a5e4a5e61721831ff6e35d3b3aecdc5831726 (tracked
+tree clean; the only untracked entry is a .venv symlink to the session's project environment).
+Working directory: packing/ of that worktree; two workers, shared with other session lanes.
+PYTHONDONTWRITEBYTECODE=1; ulimit -f 20480.
+timeout --signal=TERM --kill-after=5s 900s .venv/bin/python3 -m devtools.pilot_n17_charge_floors --output pilot.json --workers 2 > pilot.log
+Wall time from bash TIMEFORMAT='%R real %U user %S sys' in timing.log. Output identical to lane B's
+pre-commit run (packing/campaign/explorations/X048-session-167-pilots/receipts/charge-floors-pilot.json)
+apart from timing fields.

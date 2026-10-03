@@ -1,0 +1,131 @@
+"""Lane R6's check of the branch-and-bound verifier's 2,400-bit enclosure retry.
+
+Run from packing/ with PYTHONPATH=. :
+
+    .venv/bin/python3 <this file> OLD_VERIFIER_PATH
+
+Makes the committed tests' crowded-row certificate (interval mode, schema v1), then
+rewrites one entry of its enclosure table four ways and runs both verifiers on each:
+
+  as-written     the pilot's own 120-bit-derived float enclosure (control: both PASS)
+  narrow-true    this module's own 400-bit enclosure, narrower than the verifiers' 160-bit
+                 one but containing the true value: the reviewed verifier must refuse it
+                 (its 160-bit enclosure does not fit inside), the new one may accept it
+                 only through the retry
+  narrow-false   the 400-bit enclosure shifted by 2^-300, which excludes the true value:
+                 both must refuse
+  wide-false     the as-written enclosure shifted so the true value falls outside: both
+                 must refuse
+
+Only the trig table changes; the manifest is re-hashed so the digests bind.
+"""
+
+from __future__ import annotations
+
+import gzip
+import hashlib
+import importlib.util
+import json
+import shutil
+import sys
+import tempfile
+from fractions import Fraction as Q
+from pathlib import Path
+from types import ModuleType
+
+from devtools import pilot_n17_subpattern_bb as bb
+from devtools import verify_n17_bb_certificate as new_verifier
+
+
+def load(path: Path, name: str) -> ModuleType:
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def rectangle(x0: str, x1: str) -> tuple[tuple[Q, Q], ...]:
+    a, b, c, d = Q(x0), Q(x1), Q("2.00"), Q("2.05")
+    return ((a, c), (b, c), (b, d), (a, d))
+
+
+ROW = ("left", "middle", "right")
+ROW_CELLS = (rectangle("1.00", "1.05"), rectangle("1.40", "2.40"), rectangle("2.80", "2.85"))
+
+
+def read_named(directory: Path, name: str):
+    return json.loads(gzip.decompress((directory / f"{name}.json.gz").read_bytes()))
+
+
+def write_named(directory: Path, document) -> str:
+    data = json.dumps(document, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    name = hashlib.sha256(data.encode()).hexdigest()
+    (directory / f"{name}.json.gz").write_bytes(gzip.compress(data.encode(), mtime=0))
+    return name
+
+
+def rational(q: Q) -> str:
+    return f"{q.numerator}/{q.denominator}"
+
+
+def cells_file(directory: Path, verifier: ModuleType):
+    path = directory / "cells.json"
+    document = {
+        "U": str(bb.cover.U),
+        "order": list(ROW),
+        "cells": {name: [[str(x), str(y)] for x, y in polygon] for name, polygon in zip(ROW, ROW_CELLS, strict=True)},
+    }
+    path.write_text(json.dumps(document), encoding="utf-8")
+    return verifier.file_cells(path, hashlib.sha256(path.read_bytes()).hexdigest())
+
+
+def variant(source: Path, target: Path, kind: str) -> str:
+    shutil.copytree(source, target)
+    manifest_name = new_verifier.manifest_from_readme(target)
+    manifest = read_named(target, manifest_name)
+    table = read_named(target, manifest["trig"])
+    key = sorted(table["trig"])[len(table["trig"]) // 2]
+    t = Q(key)
+    c_lo, c_hi, s_lo, s_hi, nx, ny = (Q(v) for v in table["trig"][key])
+    if kind == "narrow-true":
+        c_lo, c_hi, s_lo, s_hi = new_verifier.cos_sin_bits(t, 400)
+    elif kind == "narrow-false":
+        c_lo, c_hi, s_lo, s_hi = new_verifier.cos_sin_bits(t, 400)
+        shift = Q(1, 2**300)
+        c_lo, c_hi, s_lo, s_hi = c_lo + shift, c_hi + shift, s_lo + shift, s_hi + shift
+    elif kind == "wide-false":
+        width = c_hi - c_lo
+        c_lo, c_hi = c_lo + 2 * width + Q(1, 2**100), c_hi + 2 * width + Q(1, 2**100)
+    elif kind != "as-written":
+        raise ValueError(kind)
+    nx, ny = (c_lo + c_hi) / 2, (s_lo + s_hi) / 2
+    table["trig"][key] = [rational(v) for v in (c_lo, c_hi, s_lo, s_hi, nx, ny)]
+    manifest["trig"] = write_named(target, table)
+    return write_named(target, manifest)
+
+
+def main() -> int:
+    old_verifier = load(Path(sys.argv[1]), "reviewed_bb_verifier")
+    with tempfile.TemporaryDirectory() as scratch:
+        root = Path(scratch)
+        source = root / "source"
+        pattern = bb.Pattern(ROW, ROW_CELLS, bb.cover.U)
+        result = bb.search(pattern, bb.Settings(obbt_rounds=0), certificate=source)
+        print(json.dumps({"produced": result["verdict"], "nodes": result.get("nodes")}), flush=True)
+        for kind in ("as-written", "narrow-true", "narrow-false", "wide-false"):
+            target = root / kind
+            manifest = variant(source, target, kind)
+            row = {"variant": kind}
+            for label, verifier in (("old", old_verifier), ("new", new_verifier)):
+                receipt = verifier.verify_certificate(target, cells_file(root, verifier), manifest=manifest)
+                row[label] = receipt["status"]
+                row[f"{label}_failures"] = receipt.get("failures", [])[:1]
+                row[f"{label}_trig"] = {k: receipt.get("counts", {}).get(k) for k in ("trig_checked", "trig_bad")}
+            print(json.dumps(row), flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

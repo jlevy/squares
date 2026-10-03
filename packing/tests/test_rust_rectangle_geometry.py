@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import sys
 import time
 from fractions import Fraction
@@ -21,6 +22,7 @@ ANALYTIC = PACKING / "resources/web/wand125-tools-2026-09-29/native-analytic-con
 
 
 def _fake_server(tmp_path: Path, mode: str) -> Path:
+    binary = tmp_path / f"fake-{mode}"
     source = f"""#!{sys.executable}
 import hashlib
 import json
@@ -34,6 +36,9 @@ count = len(json.loads(opening)["rectangles"])
 ready = {{"version": 1, "status": "ready", "table_sha256": digest, "rectangle_count": count}}
 sys.stdout.write(json.dumps(ready) + "\\n")
 sys.stdout.flush()
+if mode == "rebuild":
+    with open({str(binary)!r}, "a", encoding="utf-8") as rebuilt:
+        rebuilt.write("# rebuilt while the verifier ran\\n")
 for line in sys.stdin.buffer:
     query = json.loads(line)
     if mode == "partial":
@@ -57,7 +62,6 @@ if mode == "extra_output":
 if mode == "shutdown_hang":
     time.sleep(5)
 """
-    binary = tmp_path / f"fake-{mode}"
     binary.write_text(source, encoding="utf-8")
     binary.chmod(0o700)
     return binary
@@ -111,6 +115,27 @@ def test_shutdown_timeout_cannot_promote_completed_angles(tmp_path: Path) -> Non
     assert len(report.angles) == 1
     assert report.angles[0].status == "VERIFIED"
     assert report.angles[0].nodes > 0
+
+
+def test_a_rebuild_during_verification_keeps_the_bytes_that_ran(tmp_path: Path) -> None:
+    """The child runs from a private snapshot, so the source path may change mid-run.
+
+    Nothing re-hashes the snapshot or the source (OR-16): the report names the bytes
+    that were read once and run, and a rebuild of the source cannot reach them.
+    """
+    binary = _fake_server(tmp_path, "rebuild")
+    ran = hashlib.sha256(binary.read_bytes()).hexdigest()
+    report = verify_candidate(
+        _candidate(),
+        angle_indices=(0,),
+        max_seconds=2,
+        backend="rust",
+        rust_binary=binary,
+    )
+    assert binary.read_text(encoding="utf-8").endswith("# rebuilt while the verifier ran\n")
+    assert report.status == "PARTIAL"
+    assert not report.backend_timeout
+    assert report.rust_binary_sha256 == ran
 
 
 def test_unsupported_mixed_bound_is_refused_before_child_start(tmp_path: Path) -> None:

@@ -1,0 +1,247 @@
+[
+ {
+  "cells": [
+   "side-N0",
+   "side-N1",
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-S"
+  ],
+  "sweep_best": 0.0007615903658881873,
+  "runs": [
+   {
+    "seed": 2,
+    "feasible": true,
+    "best": 0.0,
+    "attempts": 127,
+    "components": {
+     "pair": 0.0,
+     "container": 0.0,
+     "cell": 0.0
+    },
+    "seconds": 14.3
+   },
+   {
+    "seed": 3,
+    "feasible": true,
+    "best": 0.0,
+    "attempts": 96,
+    "components": {
+     "pair": 0.0,
+     "container": 0.0,
+     "cell": 0.0
+    },
+    "seconds": 10.7
+   },
+   {
+    "seed": 4,
+    "feasible": true,
+    "best": 0.0,
+    "attempts": 77,
+    "components": {
+     "pair": 0.0,
+     "container": 0.0,
+     "cell": 0.0
+    },
+    "seconds": 7.9
+   }
+  ]
+ },
+ {
+  "cells": [
+   "side-S1",
+   "side-W1",
+   "interior-NW",
+   "interior-W",
+   "interior-S",
+   "interior-SE"
+  ],
+  "sweep_best": 0.005613450865273095,
+  "runs": [
+   {
+    "seed": 2,
+    "feasible": false,
+    "best": 0.005613438803614312,
+    "attempts": 600,
+    "components": {
+     "pair": 0.005613438803614312,
+     "container": 0.002491580543348526,
+     "cell": 0.005449368159161638
+    },
+    "seconds": 43.7
+   },
+   {
+    "seed": 3,
+    "feasible": false,
+    "best": 0.005613441056720125,
+    "attempts": 600,
+    "components": {
+     "pair": 0.005613441056720125,
+     "container": 0.002491569464138421,
+     "cell": 0.005449356677753814
+    },
+    "seconds": 42.6
+   },
+   {
+    "seed": 4,
+    "feasible": false,
+    "best": 0.005613439480768867,
+    "attempts": 600,
+    "components": {
+     "pair": 0.005613439480768867,
+     "container": 0.002491549074639998,
+     "cell": 0.005449368564569346
+    },
+    "seconds": 48.0
+   }
+  ]
+ },
+ {
+  "cells": [
+   "side-S2",
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-S",
+   "interior-SE"
+  ],
+  "sweep_best": 0.0025623365398490527,
+  "runs": [
+   {
+    "seed": 2,
+    "feasible": true,
+    "best": 0.0,
+    "attempts": 3,
+    "components": {
+     "pair": 0.0,
+     "container": 0.0,
+     "cell": 0.0
+    },
+    "seconds": 0.2
+   },
+   {
+    "seed": 3,
+    "feasible": true,
+    "best": 0.0,
+    "attempts": 3,
+    "components": {
+     "pair": 0.0,
+     "container": 0.0,
+     "cell": 0.0
+    },
+    "seconds": 0.3
+   },
+   {
+    "seed": 4,
+    "feasible": true,
+    "best": 5.355529353323618e-10,
+    "attempts": 4,
+    "components": {
+     "pair": 0.0,
+     "container": 0.0,
+     "cell": 5.355529353323618e-10
+    },
+    "seconds": 0.4
+   }
+  ]
+ },
+ {
+  "cells": [
+   "interior-SW",
+   "interior-NW",
+   "interior-W",
+   "interior-S",
+   "interior-N",
+   "interior-SE"
+  ],
+  "sweep_best": 0.014890243206520548,
+  "runs": [
+   {
+    "seed": 2,
+    "feasible": false,
+    "best": 0.014890229193133653,
+    "attempts": 600,
+    "components": {
+     "pair": 0.014057655128054458,
+     "container": 0.0,
+     "cell": 0.014890229193133653
+    },
+    "seconds": 68.0
+   },
+   {
+    "seed": 3,
+    "feasible": false,
+    "best": 0.01488961544614753,
+    "attempts": 600,
+    "components": {
+     "pair": 0.014058876130421005,
+     "container": 0.0,
+     "cell": 0.01488961544614753
+    },
+    "seconds": 66.9
+   },
+   {
+    "seed": 4,
+    "feasible": false,
+    "best": 0.014886191467963661,
+    "attempts": 600,
+    "components": {
+     "pair": 0.014075214448231121,
+     "container": 0.0,
+     "cell": 0.014886191467963661
+    },
+    "seconds": 62.3
+   }
+  ]
+ },
+ {
+  "cells": [
+   "interior-NW",
+   "interior-W",
+   "interior-S",
+   "interior-N",
+   "interior-E",
+   "interior-SE"
+  ],
+  "sweep_best": 0.002023184135859002,
+  "runs": [
+   {
+    "seed": 2,
+    "feasible": false,
+    "best": 0.001979846344044023,
+    "attempts": 600,
+    "components": {
+     "pair": 0.001979846344044023,
+     "container": 0.0,
+     "cell": 0.0017407119305776764
+    },
+    "seconds": 77.0
+   },
+   {
+    "seed": 3,
+    "feasible": false,
+    "best": 0.0020037777406570756,
+    "attempts": 600,
+    "components": {
+     "pair": 0.0020037777406570756,
+     "container": 0.0,
+     "cell": 0.001779282921496872
+    },
+    "seconds": 74.9
+   },
+   {
+    "seed": 4,
+    "feasible": false,
+    "best": 0.0019685532306944475,
+    "attempts": 600,
+    "components": {
+     "pair": 0.0019685532306944475,
+     "container": 0.0,
+     "cell": 0.0017447490430082535
+    },
+    "seconds": 74.0
+   }
+  ]
+ }
+]

@@ -1,0 +1,31 @@
+{
+ "manifest": "340492bddf2674b70e4403e15c13793c224a5dfa4d428a5e1834da546ee6a9dc",
+ "nodes": 41598,
+ "closed_leaves": 21215,
+ "reasons": {
+  "pair": 6679,
+  "disc": 10032,
+  "lp": 4504
+ },
+ "max_depth": 31,
+ "checked_nodes": 3553,
+ "deepest_checked": 31,
+ "node_failures": 0,
+ "all_failures": 0,
+ "counts": {
+  "header": 1,
+  "trig_checked": 378,
+  "trig_bad": 0,
+  "angle_split_ok": 2374,
+  "open_ok": 3104,
+  "pair_split_ok": 730,
+  "cut_ok": 165531,
+  "bound_ok": 67623,
+  "closed_lp_ok": 205,
+  "closed_pair_ok": 118,
+  "closed_disc_ok": 126
+ },
+ "seconds": 235.9,
+ "verdict": "ok",
+ "failures": []
+}

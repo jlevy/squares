@@ -1,0 +1,14 @@
+route/census rc=0 wall=1067.767501961s
+route/derivs rc=0 wall=1.548796519s
+route/endpoint rc=0 wall=.029233282s
+route/globalscan rc=0 wall=8.841853524s
+route/nullspace rc=0 wall=.037884357s
+route/rowdp rc=0 wall=.880067436s
+route/stress rc=0 wall=.031939777s
+route/wallrow rc=0 wall=2.074818726s
+endpoint/n17_endpoint rc=0 wall=.093857419s
+endpoint/n17_firstorder rc=0 wall=.126542174s
+endpoint/n17_more rc=0 wall=4.565245956s
+endpoint/n17_radius rc=0 wall=4.256958132s
+endpoint/n17_radius2 rc=0 wall=33.219389280s
+endpoint/n17_stress rc=0 wall=.177447840s

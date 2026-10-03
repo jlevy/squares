@@ -1,0 +1,3 @@
+enumeration {"seconds": 19.680992809000145, "all": {"states": 161100756, "orbits": 20155518, "fixed": [161100756, 34892, 34892, 3748, 34892, 36, 36, 34892]}, "cuts": {"states": 61563363, "orbits": 7703312, "fixed": [61563363, 16055, 16055, 2419, 14275, 27, 27, 14275]}}
+class-count vectors 2375 endpoint orbits 5970 antipodal bound 30966 pairs 49
+transfer DP cut states 61563363 seconds 2.859929251000267

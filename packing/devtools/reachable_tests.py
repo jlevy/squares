@@ -42,6 +42,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import gc
 import os
 import re
 import subprocess
@@ -132,6 +133,27 @@ def _module_name(path: Path) -> str | None:
     return None
 
 
+def _is_test_file(path: Path) -> bool:
+    return path.parent in TEST_ROOTS and path.name.startswith("test_")
+
+
+def _walker_markers_in(source: str, tree: ast.Module) -> bool:
+    """`_walker_evidence` on a source already parsed into `tree`, which is not modified."""
+    try:
+        if "importlib" in source:
+            # The transformer edits the tree it visits, so it gets a parse of its own.
+            tree = _WithoutBenignMetadataVersion().visit(ast.parse(source))
+        unparsed = ast.unparse(tree)
+    except SyntaxError, RecursionError, ValueError:
+        return True
+    return any(marker in unparsed for marker in WALKER_MARKERS)
+
+
+_WALKER_FROM_IMPORT_SCAN: dict[Path, bool] = {}
+"""Walker evidence for test files, taken by `_imports_of` from the tree it parsed, so a
+test file is parsed once per process. `_walker_evidence` reads it first."""
+
+
 @cache
 def _imports_of(path: Path) -> set[str] | None:
     """Top-level dotted names this file imports, or None when it cannot be parsed.
@@ -148,9 +170,12 @@ def _imports_of(path: Path) -> set[str] | None:
     future caller that wants to mutate one has to copy it first.
     """
     try:
-        tree = ast.parse(path.read_text(encoding="utf-8"))
+        source = path.read_text(encoding="utf-8")
+        tree = ast.parse(source)
     except OSError, SyntaxError, UnicodeDecodeError:
         return None
+    if _is_test_file(path):
+        _WALKER_FROM_IMPORT_SCAN[path] = _walker_markers_in(source, tree)
     found: set[str] = set()
     pending: list[ast.AST] = [tree]
     while pending:
@@ -215,15 +240,14 @@ def _walker_evidence(path: Path) -> bool:
     It also handles indirect execution without guessing its dataflow. If parsing or
     unparsing fails, select the test rather than risk dropping a repository walker.
     """
+    if path in _WALKER_FROM_IMPORT_SCAN:
+        return _WALKER_FROM_IMPORT_SCAN[path]
     try:
         source = path.read_text(encoding="utf-8")
         tree = ast.parse(source)
-        if "importlib" in source:
-            tree = _WithoutBenignMetadataVersion().visit(tree)
-        source = ast.unparse(tree)
     except OSError, SyntaxError, UnicodeDecodeError, RecursionError, ValueError:
         return True
-    return any(marker in source for marker in WALKER_MARKERS)
+    return _walker_markers_in(source, tree)
 
 
 def select_tests(changed: list[str]) -> TestSelection:
@@ -242,11 +266,19 @@ def select_tests(changed: list[str]) -> TestSelection:
 
     modules = _mapped_files()
     imports: dict[str, set[str]] = {}
-    for name, file in modules.items():
-        found = _imports_of(file)
-        if found is None:
-            return TestSelection(everything=True, reason=f"{file.name} did not parse")
-        imports[name] = found
+    # The scan allocates millions of short-lived AST nodes and frees them itself; the
+    # cyclic collector's passes over them cost about a sixth of the scan and free nothing.
+    collecting = gc.isenabled()
+    gc.disable()
+    try:
+        for name, file in modules.items():
+            found = _imports_of(file)
+            if found is None:
+                return TestSelection(everything=True, reason=f"{file.name} did not parse")
+            imports[name] = found
+    finally:
+        if collecting:
+            gc.enable()
 
     changed_modules: set[str] = set()
     changed_basenames: set[str] = set()

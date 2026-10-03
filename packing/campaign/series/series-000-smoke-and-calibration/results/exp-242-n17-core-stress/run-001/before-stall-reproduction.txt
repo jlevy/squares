@@ -1,0 +1,8 @@
+Before-state: the Session 165 draft at HEAD 16d7975546fb2ac518ca069d0b44e1304190d362 (git blob of devtools/check_n17_core_stress.py: b3ef45894edb074d02f56f462c459282fca50a4a).
+sha256 of that source: ca06857710c666b28f67a54e6b42ec5aa3bc894230e1c044dfaed9df8bad73cc
+Command (from packing/): timeout 90 .venv/bin/python3 -c 'from devtools.check_n17_core_stress import symbolic_residual_proofs; print(symbolic_residual_proofs())'
+Observed:
+exit=124 wall=90.018205956
+Inherited H256 foundation alone (devtools.check_n17_endpoint_feasibility.symbolic_identities, unchanged), timeout 120:
+{'wall_identities': 15, 'pair_identities': 21, 'normalizations': 3, 'slider_identity': True}
+exit=0 wall=21.247222868

@@ -1,0 +1,48 @@
+"""Drop-in gmpy2 trial on truncated W7 objects (first N steps), Fraction then mpq, one
+process, back to back: the kernel verifier (sample rows per step) and the kernel checker
+(every row, indexed cover). Nothing in the repository is modified."""
+import sys, time, json, gzip, hashlib, tempfile
+sys.path.insert(0, "/home/user/squares/packing/src"); sys.path.insert(0, "/home/user/squares/packing")
+from pathlib import Path
+from fractions import Fraction
+from gmpy2 import mpq
+X = Path("/home/user/squares/packing/campaign/explorations/X048-session-168-pilots/certificates/W7")
+NSTEPS = int(sys.argv[1]); SAMPLE = int(sys.argv[2])
+def canonical(v): return json.dumps(v, sort_keys=True, separators=(",", ":")).encode()
+seed_raw = gzip.decompress(next(X.glob("seed-*.json.gz")).read_bytes())
+node = json.loads(gzip.decompress(next(X.glob("node-*.json.gz")).read_bytes()))
+node["steps"] = node["steps"][:NSTEPS]; node["contradiction"] = None; node["closed"] = False; node["terminal"] = False
+tmp = Path(tempfile.mkdtemp(dir="/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/f2"))
+(tmp / f"seed-{hashlib.sha256(seed_raw).hexdigest()}.json.gz").write_bytes(gzip.compress(seed_raw))
+node_raw = canonical(node)
+(tmp / f"node-{hashlib.sha256(node_raw).hexdigest()}.json.gz").write_bytes(gzip.compress(node_raw))
+def rebind(module, cls):
+    for name in ("Q", "Fraction"):
+        if hasattr(module, name): setattr(module, name, cls)
+from devtools import verify_n17_kernel_certificate as V
+for cls in (Fraction, mpq):
+    rebind(V, cls)
+    cells = V.cover_cells()
+    t = time.perf_counter()
+    try:
+        V.verify_objects(tmp, cells, sample=SAMPLE, sample_seed=12345); tail = "completed"
+    except V.VerificationError as e:
+        tail = f"stopped at: {str(e)[:50]}"
+    print(f"kernel verifier W7 first {NSTEPS} steps, {SAMPLE} rows/step, {cls.__name__:9s} {time.perf_counter()-t:8.1f} s  ({tail})", flush=True)
+from sqpack.hull_kernel import geometry, sweep, covers, collision, induction, node as nodemod, sequential, frame, ownership, counting
+from devtools import check_hull_kernel_mask0 as mask0_tool
+mods = [geometry, sweep, covers, collision, induction, nodemod, sequential, frame, ownership, counting, mask0_tool]
+seed = json.loads(seed_raw)
+for cls in (Fraction, mpq):
+    for m in mods: rebind(m, cls)
+    fr = mask0_tool.n17_unique_frame()
+    budget = geometry.Budget(time.monotonic() + 10**6, 10**9)
+    t = time.perf_counter()
+    st = nodemod.admit_seed(fr, seed, mask=node["mask"], bins=seed["bins"], budget=budget, allow_empty_groups=True)
+    t1 = time.perf_counter()
+    try:
+        tr = sequential.replay_sequential(fr, node, st, mask=node["mask"], seed_sha256=hashlib.sha256(seed_raw).hexdigest(), budget=budget, cover="indexed")
+        tail = f"steps={len(tr.steps)}"
+    except geometry.RefusalError as e:
+        tail = f"stopped at: {str(e)[:50]}"
+    print(f"kernel checker  W7 first {NSTEPS} steps, every row, {cls.__name__:9s} seed={t1-t:5.1f} s replay={time.perf_counter()-t1:8.1f} s  ({tail})", flush=True)

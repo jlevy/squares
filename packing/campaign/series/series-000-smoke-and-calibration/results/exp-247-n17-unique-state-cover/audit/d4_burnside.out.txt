@@ -1,0 +1,11 @@
+r0: cycle type [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] fixed 17-subsets 346104
+f0: cycle type [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] fixed 17-subsets 660
+r1: cycle type [4, 4, 4, 4, 4, 4] fixed 17-subsets 0
+f1: cycle type [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] fixed 17-subsets 660
+r2: cycle type [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] fixed 17-subsets 0
+f2: cycle type [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] fixed 17-subsets 660
+r3: cycle type [4, 4, 4, 4, 4, 4] fixed 17-subsets 0
+f3: cycle type [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] fixed 17-subsets 660
+states C(24,17) = 346104; Burnside sum 348744; orbits 43593
+brute-force distinct orbits: 43593
+ORBIT COUNT 43,593 CONFIRMED: True

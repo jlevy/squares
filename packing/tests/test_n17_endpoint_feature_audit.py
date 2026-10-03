@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import json
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -213,12 +214,16 @@ def test_face_overlap_excludes_both_corner_limits(
         audit.audit_inventory(packet, layout)
 
 
-def test_frozen_input_refusal_without_target_reads(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(exact, "read_bytes", lambda _path: b"{}")
-
-    def refuse(_repo: Path, _ref: str, _raw: bytes) -> None:
-        raise exact.AuditError("synthetic frozen input mutation")
-
-    monkeypatch.setattr(audit, "frozen_bytes", refuse)
-    with pytest.raises(exact.AuditError, match="frozen input mutation"):
+def test_a_packet_naming_other_prerequisites_is_refused_without_target_reads(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Prerequisites are named by revision and path; no bytes are compared with a blob."""
+    packet = {
+        "schema": "n17-endpoint-feature-certificate/v1",
+        "criterion_passed": True,
+        "root_git_ref": exact.ROOT_REF,
+        "endpoint_git_ref": "elsewhere:certificate.json",
+    }
+    monkeypatch.setattr(exact, "read_bytes", lambda _path: json.dumps(packet).encode())
+    with pytest.raises(exact.AuditError, match="wrong prerequisite references"):
         audit.audit(Path("synthetic-feature.json"), Path("synthetic-repository"))

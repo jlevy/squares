@@ -1,0 +1,326 @@
+"""Independent recheck of H-265 for the review lane. Imports nothing from devtools."""
+
+from __future__ import annotations
+
+import json
+import re
+import time
+from fractions import Fraction as Q
+from pathlib import Path
+
+from sympy import Poly, Rational, expand, symbols
+from sympy import resultant as sym_resultant
+
+REPO = Path("/home/user/squares")
+CAT = REPO / "packing/frontier/n-017.md"
+RUN = REPO / (
+    "packing/campaign/series/series-000-smoke-and-calibration/results/"
+    "exp-237-n17-polynomial-root/run-001"
+)
+RECEIPT = REPO / (
+    "packing/campaign/series/series-000-smoke-and-calibration/results/"
+    "exp-245-n17-catalogue-polynomial/run-001/receipt.json"
+)
+T0 = time.time()
+
+
+def say(*a: object) -> None:
+    print(f"[{time.time() - T0:6.1f}s]", *a, flush=True)
+
+
+# ---- 1. own parse of the catalogue polynomial -----------------------------------------
+text = CAT.read_text(encoding="utf-8")
+match = re.search(r"minimal_polynomial:\s*(\S+)", text)
+assert match is not None
+expr = match.group(1)
+assert expr.endswith("=0"), expr
+terms = re.findall(r"[+-]?[^+-]+", expr[:-2])
+found: dict[int, int] = {}
+for term in terms:
+    m = re.fullmatch(r"([+-]?)(\d*)(s(?:\^\{?(\d+)\}?)?)?", term)
+    assert m is not None, term
+    sign, digits, var, pw = m.groups()
+    power = (int(pw) if pw else 1) if var else 0
+    coeff = int(digits or "1") * (-1 if sign == "-" else 1)
+    assert power not in found
+    found[power] = coeff
+deg = max(found)
+C = [found.get(k, 0) for k in range(deg, -1, -1)]  # highest first
+say("catalogue degree", deg, "lead", C[0], "const", C[-1], "nonzero terms", len(found))
+receipt = json.loads(RECEIPT.read_bytes())
+say("my parse == tool parse:", C == receipt["catalogue"]["coefficients"])
+from math import gcd
+from functools import reduce
+
+say("content of C:", reduce(gcd, C), " 4775 =", 4775, "= 5^2*191:", 25 * 191 == 4775)
+
+# ---- 2. the H-255 t-box and exact S-interval ------------------------------------------
+cert = json.loads((RUN / "certificate.json").read_bytes())
+assert cert["schema"] == "n17-root-certificate/v1" and cert["criterion_passed"] is True
+mid, rad = Q(cert["box"]["midpoint"][0]), Q(cert["box"]["radius"])
+t_lo, t_hi = mid - rad, mid + rad
+say("t-box", float(t_lo), float(t_hi), "radius", rad)
+
+
+def K(t: Q) -> Q:
+    return 1 + 2 * t - t * t
+
+
+def S(t: Q) -> Q:
+    return (6 + 4 * t) / K(t)
+
+
+# monotonicity: K concave, so K>0 at both ends => K>0 on the box; the S' numerator
+# 4(t^2+3t-2) is convex, so <0 at both ends => <0 on the box => S strictly decreasing.
+t_sym = symbols("t")
+dS = (expand((6 + 4 * t_sym).diff(t_sym) * K(t_sym) - (6 + 4 * t_sym) * K(t_sym).diff(t_sym)))
+say("S' numerator (sympy):", dS, " = 4(t^2+3t-2):", expand(dS - 4 * (t_sym**2 + 3 * t_sym - 2)) == 0)
+for t in (t_lo, t_hi):
+    assert K(t) > 0 and (t * t + 3 * t - 2) < 0
+s_lo, s_hi = S(t_hi), S(t_lo)  # exact, decreasing map
+assert s_lo < s_hi
+say("exact S-interval", f"{float(s_lo):.15f}", f"{float(s_hi):.15f}", "width", float(s_hi - s_lo))
+tool_lo, tool_hi = (Q(v) for v in receipt["side_interval"]["outward"])
+say("tool outward interval contains exact image:", tool_lo <= s_lo and s_hi <= tool_hi,
+    "slack lo", float(s_lo - tool_lo), "slack hi", float(tool_hi - s_hi))
+ceiling = Q(23377650468022754758171074269267527, 5 * 10**33)
+say("verified rational ceiling inside exact S-interval:", s_lo <= ceiling <= s_hi)
+
+
+# ---- 3. exact evaluation and sign change -----------------------------------------------
+def horner(coeffs: list[int] | list[Q], x: Q) -> Q:
+    acc = Q(0)
+    for c in coeffs:
+        acc = acc * x + c
+    return acc
+
+
+def sgn(v: Q) -> int:
+    return (v > 0) - (v < 0)
+
+
+v_lo, v_hi = horner(C, s_lo), horner(C, s_hi)
+say("C(s_lo) sign", sgn(v_lo), f"~{float(v_lo):.3e}", " C(s_hi) sign", sgn(v_hi), f"~{float(v_hi):.3e}")
+say("C(ceiling) sign", sgn(horner(C, ceiling)), f"~{float(horner(C, ceiling)):.3e}")
+assert v_lo * v_hi < 0
+
+
+# ---- 4. root count: own Sturm sequence, and Descartes on a Moebius transform ----------
+def poly_rem(a: list[Q], b: list[Q]) -> list[Q]:
+    a = list(a)
+    while len(a) >= len(b) and any(a):
+        if a[0] == 0:
+            a.pop(0)
+            continue
+        q = a[0] / b[0]
+        for i in range(len(b)):
+            a[i] -= q * b[i]
+        a.pop(0)
+    while a and a[0] == 0:
+        a.pop(0)
+    return a
+
+
+def derivative(a: list[Q]) -> list[Q]:
+    n = len(a) - 1
+    return [c * (n - i) for i, c in enumerate(a[:-1])]
+
+
+def sturm_chain(a: list[Q]) -> list[list[Q]]:
+    chain = [a, derivative(a)]
+    while True:
+        r = poly_rem(chain[-2], chain[-1])
+        if not r:
+            return chain
+        chain.append([-c for c in r])
+
+
+def variations(chain: list[list[Q]], x: Q) -> int:
+    signs = [sgn(horner(p, x)) for p in chain]
+    signs = [s for s in signs if s]
+    return sum(1 for i in range(1, len(signs)) if signs[i] != signs[i - 1])
+
+
+CQ = [Q(c) for c in C]
+chain = sturm_chain(CQ)
+say("Sturm chain length", len(chain), "(squarefree iff last is constant:", len(chain[-1]) == 1, ")")
+n_roots = variations(chain, s_lo) - variations(chain, s_hi)
+say("Sturm count of distinct real roots of C in (s_lo, s_hi]:", n_roots)
+say("Sturm count of all real roots of C:", variations(chain, Q(-10**12)) - variations(chain, Q(10**12)))
+
+# Descartes: x in (0, inf) <-> S = (s_lo + s_hi x)/(1 + x) in (s_lo, s_hi)
+x = symbols("x")
+a_r, b_r = Rational(s_lo.numerator, s_lo.denominator), Rational(s_hi.numerator, s_hi.denominator)
+moebius = expand(sum(Rational(c) * (a_r + b_r * x) ** (deg - i) * (1 + x) ** i for i, c in enumerate(C)))
+mcoeffs = Poly(moebius, x).all_coeffs()
+msigns = [sgn(Q(int(c.p), int(c.q))) for c in mcoeffs if c != 0]
+descartes = sum(1 for i in range(1, len(msigns)) if msigns[i] != msigns[i - 1])
+say("Descartes sign variations of the Moebius-transformed polynomial:", descartes, "(1 => exactly one root)")
+
+# ---- 5. irreducibility over Q and modulo primes -----------------------------------------
+s = symbols("s")
+CP = Poly(C, s, domain="QQ")
+content, fl = CP.factor_list()
+say("sympy factor_list over QQ:", [(f.degree(), m) for f, m in fl])
+
+
+def is_prime(n: int) -> bool:
+    return n > 1 and all(n % d for d in range(2, int(n**0.5) + 1))
+
+
+patterns = {}
+for p in [p for p in range(2, 80) if is_prime(p) and 4775 % p]:
+    _, mf = Poly(C, s, modulus=p).factor_list()
+    pat = sorted(f.degree() for f, m in mf for _ in range(m))
+    patterns[p] = pat
+say("mod-p degree patterns:", patterns)
+irreducible_primes = [p for p, pat in patterns.items() if pat == [18]]
+say("primes < 80 with C irreducible mod p (sympy):", irreducible_primes)
+
+
+# own distinct-degree test: f squarefree of degree n is irreducible mod p iff
+# gcd(f, x^(p^i) - x) = 1 for every 1 <= i <= n//2.
+def ddf_irreducible(coeffs: list[int], p: int) -> bool:
+    n = len(coeffs) - 1
+    inv = pow(coeffs[0], -1, p)
+    f = [(c * inv) % p for c in reversed(coeffs)]  # lowest first, monic
+
+    def rem(a: list[int]) -> list[int]:
+        a = [v % p for v in a]
+        while len(a) > n:
+            if a[-1] == 0:
+                a.pop()
+                continue
+            lead = a[-1]
+            for i in range(n + 1):
+                a[len(a) - 1 - n + i] = (a[len(a) - 1 - n + i] - lead * f[i]) % p
+            a.pop()
+        while a and a[-1] == 0:
+            a.pop()
+        return a
+
+    def mul(a: list[int], b: list[int]) -> list[int]:
+        out = [0] * (len(a) + len(b) - 1) if a and b else []
+        for i, u in enumerate(a):
+            for j, v in enumerate(b):
+                out[i + j] = (out[i + j] + u * v) % p
+        return rem(out)
+
+    def powm(a: list[int], e: int) -> list[int]:
+        r, base = [1], rem(a)
+        while e:
+            if e & 1:
+                r = mul(r, base)
+            base = mul(base, base)
+            e >>= 1
+        return r
+
+    def gcd_(a: list[int], b: list[int]) -> list[int]:
+        a, b = [v % p for v in a], [v % p for v in b]
+        while b and any(b):
+            while b and b[-1] == 0:
+                b.pop()
+            if not b:
+                break
+            # a mod b
+            a = [v % p for v in a]
+            while a and a[-1] == 0:
+                a.pop()
+            while len(a) >= len(b):
+                lead = a[-1] * pow(b[-1], -1, p) % p
+                sh = len(a) - len(b)
+                for i, v in enumerate(b):
+                    a[sh + i] = (a[sh + i] - lead * v) % p
+                while a and a[-1] == 0:
+                    a.pop()
+            a, b = b, a
+        while a and a[-1] == 0:
+            a.pop()
+        return a
+
+    # squarefree check: gcd(f, f') = 1
+    fprime = [(i * c) % p for i, c in enumerate(f)][1:]
+    if len(gcd_(f, fprime)) != 1:
+        return False
+    xp = [0, 1]
+    for i in range(1, n // 2 + 1):
+        xp = powm(xp, p)
+        h = list(xp) + [0, 0]
+        h[1] = (h[1] - 1) % p
+        if len(gcd_(f, h)) != 1:
+            return False
+    return True
+
+
+say("own DDF irreducibility test, p=7:", ddf_irreducible(C, 7))
+for p in irreducible_primes[:3]:
+    say(f"own DDF irreducibility test, p={p}:", ddf_irreducible(C, p))
+say("own DDF test on known reducible controls: x^2+1 mod 5 ->", ddf_irreducible([1, 0, 1], 5),
+    "; x^2+1 mod 3 ->", ddf_irreducible([1, 0, 1], 3),
+    "; C mod 2 ->", ddf_irreducible(C, 2), "(sympy pattern", patterns[2], ")")
+
+# ---- 6. independent resultant chain from my own transcription of the W3 formulas -----
+t, b, Sv = symbols("t b S")
+D, E = 1 + t**2, 1 + b**2
+L, Kt = (1 + t) * D, 1 + 2 * t - t**2
+N_alpha = (1 - t**2) * (1 - b**2) - 4 * t * b
+Pi2 = 2 * t * (1 - t) * (1 - b**2) + (1 - t) ** 2 * L * b - t * L * E
+Pi3 = (1 - t**2) * D * E**2 - (1 + t) * D * E * (b * (1 - t**2) + t * (1 - b**2)) - (1 - t) * (1 - b**2) * N_alpha
+cert_polys = [
+    Poly({(int(i), int(j)): int(c) for i, j, c in rows}, t, b, domain="ZZ") for rows in cert["polynomials"]
+]
+say("certificate Pi2 == my transcription:", cert_polys[0] == Poly(Pi2, t, b, domain="ZZ"))
+say("certificate Pi3 == my transcription:", cert_polys[1] == Poly(Pi3, t, b, domain="ZZ"))
+
+R = Poly(sym_resultant(Pi2, Pi3, b), t, domain="ZZ")
+say("res_b(Pi2,Pi3) degree", R.degree())
+_, Rf = R.factor_list()
+Rf = sorted(Rf, key=lambda fm: fm[0].degree())
+say("factors of R(t):", [(f.degree(), m, f.all_coeffs() if f.degree() <= 2 else "...") for f, m in Rf])
+R18 = [f for f, m in Rf if f.degree() == 18]
+assert len(R18) == 1
+R18 = R18[0]
+R18Q = [Q(int(c)) for c in R18.all_coeffs()]
+ch_t = sturm_chain(R18Q)
+say("Sturm count of R18 roots in the t-box:", variations(ch_t, t_lo) - variations(ch_t, t_hi),
+    "; sign change:", sgn(horner(R18Q, t_lo)), sgn(horner(R18Q, t_hi)))
+for f, m in Rf:
+    if f.degree() < 18:
+        fq = [Q(int(c)) for c in f.all_coeffs()]
+        say("  small factor", f.all_coeffs(), "roots in t-box:", variations(sturm_chain(fq), t_lo) - variations(sturm_chain(fq), t_hi))
+
+G = Sv * Kt - (6 + 4 * t)
+side18 = Poly(sym_resultant(R18.as_expr(), G, t), Sv, domain="ZZ")
+side18 = side18.primitive()[1]
+sc = [int(c) for c in side18.all_coeffs()]
+say("res_t(R18, G) degree", side18.degree(), "primitive;", "== catalogue:", sc == C, "; == -catalogue:", sc == [-c for c in C])
+
+# whole side polynomial, as the tool does it
+side_all = Poly(sym_resultant(R.as_expr(), G, t), Sv, domain="ZZ")
+_, sf = side_all.factor_list()
+say("res_t(R, G) degree", side_all.degree(), "factors:",
+    [(f.degree(), m, f.all_coeffs() if f.degree() <= 2 else ("catalogue" if [int(c) for c in f.all_coeffs()] == C else "other18")) for f, m in sorted(sf, key=lambda fm: fm[0].degree())])
+for f, m in sf:
+    fq = [Q(int(c)) for c in f.all_coeffs()]
+    cnt = variations(sturm_chain(fq), s_lo) - variations(sturm_chain(fq), s_hi)
+    say("  side factor degree", f.degree(), "roots in exact S-interval:", cnt)
+
+# ---- 7. second elimination order, cofactor checked by Sturm (not Taylor) --------------
+t1 = time.time()
+first = sym_resultant(Pi2, G, t)
+second = sym_resultant(Pi3, G, t)
+total = Poly(sym_resultant(first, second, b), Sv, domain="QQ")
+say("second route degree", total.degree(), f"({time.time() - t1:.1f}s)")
+target = Poly(C, Sv, domain="QQ")
+cof, k = total, 0
+while True:
+    qq, rr = cof.div(target)
+    if not rr.is_zero:
+        break
+    cof, k = qq, k + 1
+say("catalogue multiplicity in second-route resultant:", k, "cofactor degree", cof.degree())
+cofq = [Q(int(c.p), int(c.q)) for c in cof.all_coeffs()]
+say("Sturm count of cofactor roots in exact S-interval:", variations(sturm_chain(cofq), s_lo) - variations(sturm_chain(cofq), s_hi))
+_, cf = cof.factor_list()
+say("cofactor factor degrees:", sorted((f.degree(), m) for f, m in cf))
+say("done")

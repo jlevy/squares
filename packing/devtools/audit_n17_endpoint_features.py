@@ -13,7 +13,6 @@ import argparse
 import hashlib
 import itertools
 import json
-import subprocess
 import time
 from pathlib import Path
 from typing import Any, cast
@@ -251,21 +250,14 @@ def audit_inventory(inventory: dict[str, Any], layout: exact.Layout) -> dict[str
     }
 
 
-def frozen_bytes(repo: Path, ref: str, raw: bytes) -> None:
-    retained = subprocess.run(
-        ["git", "show", ref], cwd=repo, capture_output=True, check=True, timeout=10
-    ).stdout
-    exact.require(retained == raw, "prerequisite differs from frozen Git blob")
-
-
 def audit(path: Path, repo: Path = exact.REPO) -> dict[str, Any]:
     started = time.monotonic()
     raw = exact.read_bytes(path)
     packet = exact.decode(raw)
     root_raw = exact.read_bytes(repo / exact.ROOT_RUN / "certificate.json")
     endpoint_raw = exact.read_bytes(repo / exact.ENDPOINT_RUN / "certificate.json")
-    frozen_bytes(repo, exact.ROOT_REF, root_raw)
-    frozen_bytes(repo, ENDPOINT_REF, endpoint_raw)
+    # The prerequisites are read from their retained paths and the packet must name
+    # them by revision and path (below); their bytes are not compared with Git blobs.
     root, endpoint = exact.decode(root_raw), exact.decode(endpoint_raw)
     root_receipt = exact.decode(exact.read_bytes(repo / exact.ROOT_RUN / "checker.json"))
     exact.require(
@@ -296,6 +288,8 @@ def audit(path: Path, repo: Path = exact.REPO) -> dict[str, Any]:
         "fixed root enclosure differs",
     )
     source = exact.read_bytes(repo / exact.SOURCE)
+    # The one digest here that crosses a boundary: Kleddamag's downloaded release
+    # against the value its review pinned (see `exact.SOURCE_SHA`).
     exact.require(
         hashlib.sha256(source).hexdigest()
         == packet["source_sha256"]
@@ -349,7 +343,6 @@ def main() -> int:
         TypeError,
         IndexError,
         RecursionError,
-        subprocess.SubprocessError,
     ) as error:
         print(json.dumps({"audit_passed": False, "error": str(error)}))
         return 1

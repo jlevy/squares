@@ -405,7 +405,7 @@ export TREE_OID="$(git -C "$REPOSITORY" write-tree)"
   > "$AUDIT_ROOT/source-closure-staged.stdout.json" \
   2> "$AUDIT_ROOT/source-closure-staged.stderr.log"
 jq -e --arg revision "$EXECUTION_REV" --arg tree "$TREE_OID" \
-  '.schema == "fixed-core-calibration-source-closure-check/v1" and
+  '.schema == "fixed-core-calibration-source-closure-check/v2" and
    .status == "accepted" and .execution_revision == $revision and
    .candidate_tree == $tree' \
   "$AUDIT_ROOT/source-closure-staged.stdout.json" > /dev/null
@@ -438,7 +438,7 @@ test "$(git -C "$REPOSITORY" rev-parse "$EVIDENCE_COMMIT^{tree}")" = "$TREE_OID"
   > "$AUDIT_ROOT/source-closure-committed.stdout.json" \
   2> "$AUDIT_ROOT/source-closure-committed.stderr.log"
 jq -e --arg revision "$EXECUTION_REV" --arg tree "$TREE_OID" \
-  '.schema == "fixed-core-calibration-source-closure-check/v1" and
+  '.schema == "fixed-core-calibration-source-closure-check/v2" and
    .status == "accepted" and .execution_revision == $revision and
    .candidate_tree == $tree' \
   "$AUDIT_ROOT/source-closure-committed.stdout.json" > /dev/null

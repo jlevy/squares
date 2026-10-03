@@ -1,0 +1,12 @@
+{"mutant": "cache-facets-key-partner-only", "weakens": "the facet memo ignores the owner's core", "harness": "missed", "harness_note": "", "tests": "CAUGHT", "tests_note": "tests/test_verify_n17_certificates.py:354: AssertionError", "certs": "CAUGHT (refuses the sound fixture)", "certs_note": "step 0 row 1 partner 6: region escapes the collision set", "seconds": 6.5}
+{"mutant": "cache-forbidden-key-hull-only", "weakens": "the forbidden-region memo ignores the core", "harness": "missed", "harness_note": "", "tests": "missed", "tests_note": "", "certs": "CAUGHT (refuses the sound fixture)", "certs_note": "step 0 row 7: required domain NOT covered (uncovered at x=2980/2471)", "seconds": 6.5}
+{"mutant": "cache-cover-ignores-core", "weakens": "a republished cover is reused whenever its domain matches", "harness": "missed", "harness_note": "", "tests": "CAUGHT", "tests_note": "        with pytest.raises(kernel_verifier.VerificationError, match=\"domain\"):", "certs": "CAUGHT", "certs_note": "cover-core-scaled-1.02, cover-core-scaled-1+2^-20, cover-memo-same-domain-wider-core", "seconds": 67.3}
+{"mutant": "cache-cover-ignores-domain", "weakens": "a republished cover is reused whenever its core matches", "harness": "missed", "harness_note": "", "tests": "CAUGHT", "tests_note": ">       with pytest.raises(kernel_verifier.VerificationError, match=\"domain\"):", "certs": "CAUGHT", "certs_note": "cover-domain-shrunk, cover-domain-grown, cover-memo-same-core-grown-domain", "seconds": 67.8}
+Traceback (most recent call last):
+  File "/home/user/squares/packing/campaign/explorations/X048-session-168-pilots/audit-verifier-rewrites/run_verifier_mutants.py.txt", line 226, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/user/squares/packing/campaign/explorations/X048-session-168-pilots/audit-verifier-rewrites/run_verifier_mutants.py.txt", line 188, in main
+    assert source.count(old) == 1, (name, source.count(old))
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('cache-cover-survives-restep', 0)

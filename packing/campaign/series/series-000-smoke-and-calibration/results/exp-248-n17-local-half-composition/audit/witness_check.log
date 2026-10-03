@@ -1,0 +1,32 @@
+sigma = 2.349532e-04; x5* = 4.175765047; T/s = 0.111240047
+a_max witness (a=0.1101, z=0.0241, 6 at (3.065667, 0.501, 0)): overlapping pairs [(5, 6), (11, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+z_min witness (a=0, z=-0.04682, 6 at (3.175667, 0.501, 0)): overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0.11, z=0.0241: overlapping pairs [(11, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0.1105, z=0.0241: overlapping pairs [(11, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0.111, z=0.0241: overlapping pairs [(11, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0.1112, z=0.0241: overlapping pairs [(11, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0, z=-0.046: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0, z=-0.0468: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0, z=-0.047: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0, z=-0.048: overlapping pairs [(6, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+6 touching 5 and the wall, a=0, z=-0.049: overlapping pairs [(6, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+swapped: a=1.0, z=0, 6 at the SE corner: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+swapped: a=1.03, z=0, 6 at the SE corner: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+swapped: a=1.05, z=0, 6 at the SE corner: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+swapped: a=1.07, z=0, 6 at the SE corner: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+swapped: a=1.074, z=0, 6 at the SE corner: overlapping pairs []; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+swapped: a=1.08, z=0, 6 at the SE corner: overlapping pairs [(5, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+swapped: a=1.1112, z=0, 6 at the SE corner: overlapping pairs [(5, 13)]; outside container []; bounding side 4.675530093605 (S* = 4.675530093605)
+largest a before 5 meets 13 at z = 0 (6 absent or at the corner): 1.074160
+
+== square 6 anywhere in the container, touching allowed, grid 0.01 / 2 deg ==
+  a=0.130 z=+0.000: no pose on the grid  [38s]
+  a=0.200 z=+0.000: no pose on the grid  [75s]
+  a=0.500 z=+0.000: no pose on the grid  [110s]
+  a=0.900 z=+0.000: no pose on the grid  [146s]
+  a=0.990 z=+0.000: no pose on the grid  [183s]
+  a=1.000 z=+0.000: no pose on the grid  [219s]
+  a=1.030 z=+0.000: fits at (4.150234953197727, 0.5002349531977245, 0.0, 3)  [256s]
+  a=0.000 z=-0.060: no pose on the grid  [294s]
+  a=0.000 z=-0.300: no pose on the grid  [330s]
+  a=0.000 z=-0.900: no pose on the grid  [367s]

@@ -1,0 +1,473 @@
+"""Independent spot-check of the W7 closure certificate (seed + node), in exact rationals.
+
+Imports nothing from sqpack or devtools. Reads cells.json (the cover tool's cells, dumped
+separately) and the two gzipped objects. What it checks, from scratch:
+
+* digests of both files, the seed's world against the cells, the seed rows (cell cut by
+  the row's legal box), the seed points' ownership (own exact method);
+* the owned-hull chain through every step: prior hulls equal the state, kernel points
+  satisfy every live row's common-core planes (recomputed from the row's core and
+  residual vertices, both as published), compression witnesses are exact convex
+  combinations, replace mode;
+* every partner pose cover: domain equals the hull of the partner's current residual
+  vertices, core strictly inside the partner's square over the row (own quadratic test);
+* for the rows selected (all rows of the closure step plus a sample of others): the
+  required domain, the strict core, every collision region against every live partner
+  row and every facet of the exact Minkowski difference (own hull), and coverage of the
+  required domain by forbidden + collision + residual regions by an exact area
+  argument (closed clipping subtraction; leftover area must be exactly zero);
+* the closure: the named owner's rows all have empty residuals after its step.
+
+Usage: verify_cert.py cells.json seed.json.gz node.json.gz [sample_rows_per_step]
+"""
+
+import gzip
+import hashlib
+import json
+import random
+import sys
+import time
+from fractions import Fraction as Q
+
+U = Q(1169, 250)
+BINS = None
+
+
+def P(v):
+    return (Q(v[0]), Q(v[1]))
+
+
+def poly(v):
+    return [P(p) for p in v]
+
+
+# ---------------------------------------------------------------- geometry (own)
+
+
+def cross(o, a, b):
+    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+
+
+def hull(pts):
+    pts = sorted(set(pts))
+    if len(pts) <= 2:
+        return pts
+    lo, up = [], []
+    for p in pts:
+        while len(lo) >= 2 and cross(lo[-2], lo[-1], p) <= 0:
+            lo.pop()
+        lo.append(p)
+    for p in reversed(pts):
+        while len(up) >= 2 and cross(up[-2], up[-1], p) <= 0:
+            up.pop()
+        up.append(p)
+    return lo[:-1] + up[:-1]
+
+
+def area2(pg):
+    if len(pg) < 3:
+        return Q(0)
+    return abs(sum(pg[i][0] * pg[(i + 1) % len(pg)][1] - pg[(i + 1) % len(pg)][0] * pg[i][1] for i in range(len(pg))))
+
+
+def clip_closed(pg, a, b, c):
+    """pg cut to the closed halfplane a x + b y <= c (Sutherland-Hodgman, exact)."""
+    if not pg:
+        return []
+    out = []
+    n = len(pg)
+    for i in range(n):
+        p, q = pg[i], pg[(i + 1) % n]
+        fp, fq = a * p[0] + b * p[1] - c, a * q[0] + b * q[1] - c
+        if fp <= 0:
+            out.append(p)
+        if (fp < 0 < fq) or (fq < 0 < fp):
+            t = fp / (fp - fq)
+            out.append((p[0] + t * (q[0] - p[0]), p[1] + t * (q[1] - p[1])))
+    # dedupe consecutive
+    res = []
+    for p in out:
+        if not res or res[-1] != p:
+            res.append(p)
+    if len(res) > 1 and res[0] == res[-1]:
+        res.pop()
+    return res
+
+
+def planes_of(pg):
+    """Outward halfplanes (a, b, c) with a x + b y <= c of a CCW convex polygon (>=3)."""
+    h = hull(pg)
+    assert len(h) >= 3, "planes of a degenerate polygon"
+    out = []
+    for i in range(len(h)):
+        p, q = h[i], h[(i + 1) % len(h)]
+        a, b = q[1] - p[1], p[0] - q[0]
+        out.append((a, b, a * p[0] + b * p[1]))
+    return out
+
+
+def inside(pg, pt):
+    return all(a * pt[0] + b * pt[1] <= c for a, b, c in planes_of(pg))
+
+
+def same_set(p1, p2):
+    return hull(p1) == hull(p2)
+
+
+def trig(t):
+    return (1 - t * t) / (1 + t * t), 2 * t / (1 + t * t)
+
+
+def wall_box(lo, hi):
+    """Closed legal centre box for the half-angle row [lo, hi]."""
+    w = min(sum(trig(t)) for t in (lo, hi))
+    # cos+sin is concave in theta on [0, pi/2], monotone chart: min at an endpoint.
+    h = w / 2
+    return [(h, h), (U - h, h), (U - h, U - h), (h, U - h)]
+
+
+def intersect_convex(pg, other):
+    for a, b, c in planes_of(other):
+        pg = clip_closed(pg, a, b, c)
+        if not pg:
+            break
+    return pg
+
+
+def quad_min_positive(a0, a1, a2, lo, hi):
+    """a0 + a1 t + a2 t^2 > 0 on [lo, hi]: by endpoints and interior vertex."""
+    vals = [a0 + a1 * lo + a2 * lo * lo, a0 + a1 * hi + a2 * hi * hi]
+    if a2 > 0:
+        tv = -a1 / (2 * a2)
+        if lo < tv < hi:
+            vals.append(a0 + a1 * tv + a2 * tv * tv)
+    return min(vals) > 0
+
+
+def core_strict(core, lo, hi):
+    """Every vertex (x, y) of core (relative to centre) has both body coordinates of
+    absolute value < 1/2 for every t in [lo, hi]: body1 = c x + s y, body2 = -s x + c y
+    with c, s the half-angle trig; multiply by (1 + t^2) > 0."""
+    for x, y in core:
+        for sg in (1, -1):
+            # (1+t^2)/2 - sg((1-t^2)x + 2ty) > 0 : (1/2 - sg x) + (-2 sg y) t + (1/2 + sg x) t^2
+            if not quad_min_positive(Q(1, 2) - sg * x, -2 * sg * y, Q(1, 2) + sg * x, lo, hi):
+                return False
+            # (1+t^2)/2 - sg(-2tx + (1-t^2)y) > 0 : (1/2 - sg y) + (2 sg x) t + (1/2 + sg y) t^2
+            if not quad_min_positive(Q(1, 2) - sg * y, 2 * sg * x, Q(1, 2) + sg * y, lo, hi):
+                return False
+    return True
+
+
+def minkowski_diff(A, B):
+    """hull(A - B) for convex A, B."""
+    return hull([(a[0] - b[0], a[1] - b[1]) for a in A for b in B])
+
+
+def ownership_own(cell, point, depth=0, lo=Q(0), hi=Q(1), maxdepth=18):
+    """Point strictly inside the square for every centre in cell cut by the legal box and
+    every t in [lo, hi]: bisection on t with the interval product bound."""
+    box = wall_box(lo, hi)
+    legal = intersect_convex(list(cell), box)
+    if not legal:
+        return True
+    clo, slo = trig(lo)
+    chi, shi = trig(hi)
+    cmin, cmax = min(clo, chi), max(clo, chi)
+    smin, smax = min(slo, shi), max(slo, shi)
+    ok = True
+    for vx, vy in legal:
+        dx, dy = point[0] - vx, point[1] - vy
+        for a, d in ((dx, dy), (dy, -dx)):
+            vals = [a * cc + d * ss for cc in (cmin, cmax) for ss in (smin, smax)]
+            if max(abs(v) for v in vals) >= Q(1, 2):
+                ok = False
+                break
+        if not ok:
+            break
+    if ok:
+        return True
+    if depth >= maxdepth:
+        return False
+    mid = (lo + hi) / 2
+    return ownership_own(cell, point, depth + 1, lo, mid, maxdepth) and ownership_own(cell, point, depth + 1, mid, hi, maxdepth)
+
+
+def subtract_pieces(pieces, region):
+    """Closed convex pieces tiling (up to boundaries) the union of pieces minus region."""
+    pl = planes_of(region)
+    out = []
+    for piece in pieces:
+        rest = piece
+        for a, b, c in pl:
+            outside = clip_closed(rest, -a, -b, -c)
+            if outside and area2(outside) > 0:
+                out.append(outside)
+            rest = clip_closed(rest, a, b, c)
+            if not rest or area2(rest) == 0:
+                break
+    return out
+
+
+def covered_by_area(domain, regions):
+    """Exact: domain (positive area) is covered by the closed convex regions iff the
+    leftover area is zero (the uncovered set is relatively open, so nonempty => positive
+    area)."""
+    pieces = [domain]
+    for r in regions:
+        if len(hull(r)) < 3:
+            continue  # a point/segment region covers no area
+        pieces = subtract_pieces(pieces, r)
+        if not pieces:
+            return True, 0
+    left = sum((area2(p) for p in pieces), Q(0))
+    return left == 0, len(pieces)
+
+
+# ---------------------------------------------------------------- load
+
+cells_data = json.load(open(sys.argv[1]))
+order = cells_data["order"]
+CELLS = [poly(cells_data["cells"][name]) for name in order]
+seed_path, node_path = sys.argv[2], sys.argv[3]
+SAMPLE = int(sys.argv[4]) if len(sys.argv) > 4 else 2
+rng = random.Random(12345)
+
+
+def load(path, kind):
+    raw = gzip.decompress(open(path, "rb").read())
+    digest = hashlib.sha256(raw).hexdigest()
+    assert path.endswith(f"{kind}-{digest}.json.gz"), f"{kind} digest mismatch: {digest}"
+    obj = json.loads(raw)
+    canonical = json.dumps(obj, sort_keys=True, separators=(",", ":")).encode()
+    assert hashlib.sha256(canonical).hexdigest() == digest, "non-canonical JSON"
+    return obj, digest
+
+
+seed, seed_sha = load(seed_path, "seed")
+node, node_sha = load(node_path, "node")
+print("seed", seed_sha[:12], "node", node_sha[:12])
+assert node["source"]["sha256"] == seed_sha
+assert seed["schema"] == "generic_wall_seed_v1" and node["schema"] == "exact_generic_owned_hull_v1"
+assert Q(seed["U"]) == U and Q(seed["B"]) == 1 and Q(node["U"]) == U and Q(node["B"]) == 1
+BINS = seed["bins"]; print("bins", BINS)
+mask = seed["mask"]
+assert node["mask"] == mask and mask == [0, 5, 6, 10, 14, 16, 18]
+assert node["parent"] is None and node["constraints"] == [] and node["guard_source"] is None
+assert len(seed["world"]) == 24
+for k in range(24):
+    assert same_set(poly(seed["world"][k]), CELLS[k]), f"world cell {k} differs"
+print("frame: world == cover cells, mask ==", mask, [order[i] for i in mask])
+
+# ---------------------------------------------------------------- seed
+t0 = time.time()
+groups = {}
+rows = {}
+for o in mask:
+    pts = poly(seed["groups"][str(o)])
+    for pt in pts:
+        assert ownership_own(CELLS[o], pt), f"seed point {pt} of owner {o} not owned (own check)"
+    groups[o] = hull(pts)
+    srows = seed["cells"][str(o)]
+    assert len(srows) == BINS
+    acc = []
+    for i, r in enumerate(srows):
+        lo, hi = Q(r["interval"][0]), Q(r["interval"][1])
+        assert (lo, hi) == (Q(i, BINS), Q(i + 1, BINS))
+        dom = intersect_convex(list(CELLS[o]), wall_box(lo, hi))
+        assert same_set(poly(r["outer_domain"]), dom), f"seed row {o}/{i} domain"
+        res = [poly(x) for x in r["residual_polygons"]]
+        assert (res == [] and dom == []) or (len(res) == 1 and same_set(res[0], dom))
+        assert r["reference"] == {"kind": "wall_seed", "owner": o, "row": i}
+        acc.append({"interval": (lo, hi), "reference": r["reference"], "outer": hull(dom), "residual": [hull(x) for x in res]})
+    rows[o] = acc
+    print(f"seed owner {o:2d} {order[o]:12s}: {len(pts)} owned points verified, {len(srows)} rows verified")
+assert same_set(poly(node["initial"]["groups"][str(o)]), groups[o]) if mask else True
+for o in mask:
+    assert same_set(poly(node["initial"]["groups"][str(o)]), groups[o])
+    assert node["initial"]["cell_references"][str(o)] == [r["reference"] for r in rows[o]]
+print(f"seed verified in {time.time()-t0:.1f}s")
+
+# ---------------------------------------------------------------- steps
+steps = node["steps"]
+STALL = node["contradiction"] is None
+closure_step = -1 if STALL else node["contradiction"]["step"]
+closure_owner = None if STALL else node["contradiction"]["owner"]
+print("declared closure", node["contradiction"], "steps", len(steps))
+stats = {"rows_full": 0, "collision_regions": 0, "collision_facet_checks": 0, "cover_checks": 0, "partner_rows": 0}
+t0 = time.time()
+for si, step in enumerate(steps):
+    assert step["index"] == si and step["owner"] in mask and step["complete"] is True
+    assert step["allowed_half_angle"] == ["0", "1"]
+    owner = step["owner"]
+    for o in mask:
+        assert same_set(poly(step["prior_owned_hulls"][str(o)]), groups[o]), f"step {si} prior hull {o}"
+    # partner covers
+    partners = {}
+    for key, items in step["prior_partner_pose_covers"].items():
+        pj = int(key)
+        assert pj in mask and pj != owner
+        acc = rows[pj]
+        assert len(items) == len(acc)
+        live = []
+        for it, r in zip(items, acc):
+            assert it["reference"] == r["reference"]
+            assert (Q(it["interval"][0]), Q(it["interval"][1])) == r["interval"]
+            verts = [v for pg in r["residual"] for v in pg]
+            if not verts:
+                assert it["domain"] == [] and it["core"] == []
+                continue
+            dom = hull(verts)
+            assert same_set(poly(it["domain"]), dom), f"step {si} partner {pj} row {r['reference']['row']} domain"
+            core = hull(poly(it["core"]))
+            assert len(core) >= 3 and area2(core) > 0
+            assert core_strict(core, *r["interval"]), f"step {si} partner {pj} core not strict"
+            live.append((dom, core, r["interval"]))
+        assert live, "empty partner cover"
+        partners[pj] = live
+        stats["partner_rows"] += len(live)
+    # rows
+    full = set(range(BINS)) if si == closure_step else set(rng.sample(range(BINS), SAMPLE))
+    new_rows = []
+    all_planes = []
+    any_live = False
+    for ri, row in enumerate(step["rows"]):
+        pred = rows[owner][ri]
+        lo, hi = Q(row["interval"][0]), Q(row["interval"][1])
+        assert (lo, hi) == pred["interval"] == (Q(ri, BINS), Q(ri + 1, BINS))
+        assert row["prior_reference"] == pred["reference"]
+        assert row["reference"] == {"kind": "phase3", "node": node["node_id"], "step": si, "row": ri}
+        assert row.get("self_hull_cuts", []) == []
+        required = intersect_convex(list(pred["outer"]), wall_box(lo, hi)) if pred["outer"] else []
+        residual = [hull(poly(x)) for x in row["residual_polygons"]]
+        verts = [v for pg in residual for v in pg]
+        if not required:
+            assert residual == [] and row["collision_regions"] == [] and row["common_core_halfplanes"] == [] and row["outer_bounds"] == [] and row["outer_domain"] == []
+            new_rows.append({"interval": (lo, hi), "reference": row["reference"], "outer": [], "residual": []})
+            continue
+        core = hull(poly(row["core_vertices"]))
+        assert len(core) >= 3 and area2(core) > 0
+        assert core_strict(core, lo, hi), f"step {si} row {ri} core not strict"
+        # common-core planes from the published core and residual vertices
+        planes = []
+        if verts:
+            h = core
+            for k in range(len(h)):
+                p, q = h[k], h[(k + 1) % len(h)]
+                a, b = q[1] - p[1], p[0] - q[0]
+                planes.append((a, b, a * p[0] + b * p[1] + min(a * v[0] + b * v[1] for v in verts)))
+        pub = [(Q(it["normal"][0]), Q(it["normal"][1]), Q(it["upper"])) for it in row["common_core_halfplanes"]]
+        assert set(pub) == set(planes), f"step {si} row {ri} planes"
+        all_planes.extend(planes)
+        # outer bounds and outer domain
+        bounds = [(Q(it["normal"][0]), Q(it["normal"][1]), Q(it["upper"])) for it in row["outer_bounds"]]
+        if verts:
+            any_live = True
+            assert len(bounds) == 8
+            for a, b, c in bounds:
+                assert all(a * v[0] + b * v[1] <= c for v in verts)
+            outer = list(CELLS[owner])
+            for a, b, c in bounds:
+                outer = clip_closed(outer, a, b, c)
+            outer = hull(outer)
+            assert same_set(poly(row["outer_domain"]), outer), f"step {si} row {ri} outer"
+        else:
+            assert bounds == [] and row["outer_domain"] == []
+            outer = []
+        if ri in full:
+            stats["rows_full"] += 1
+            # collision regions
+            colls = []
+            for item in row["collision_regions"]:
+                pj = item["partner"]
+                assert pj in partners
+                region = hull(poly(item["vertices"]))
+                assert len(region) >= 3 and area2(region) > 0
+                assert all(inside(required, v) for v in region), "collision region escapes required domain"
+                for dom, pcore, _ in partners[pj]:
+                    diff = minkowski_diff(pcore, core)  # Q_r - Q_i
+                    assert len(diff) >= 3
+                    for a, b, c in planes_of(diff):
+                        bound = c + min(a * y[0] + b * y[1] for y in dom)
+                        for v in region:
+                            stats["collision_facet_checks"] += 1
+                            assert a * v[0] + b * v[1] <= bound, f"step {si} row {ri} partner {pj}: region escapes collision set"
+                colls.append(region)
+                stats["collision_regions"] += 1
+            forbidden = []
+            for oj in mask:
+                if oj != owner and groups[oj]:
+                    forbidden.append(minkowski_diff(groups[oj], core))
+            if area2(required) > 0:
+                ok, left = covered_by_area(required, forbidden + colls + residual)
+                assert ok, f"step {si} row {ri}: required domain NOT covered (leftover pieces {left})"
+                stats["cover_checks"] += 1
+            else:
+                # degenerate required domain: every vertex and midpoint must be in some region
+                pts = list(required)
+                if len(pts) == 2:
+                    pts.append(((pts[0][0] + pts[1][0]) / 2, (pts[0][1] + pts[1][1]) / 2))
+                for pt in pts:
+                    assert any(inside(r, pt) for r in forbidden + colls + residual if len(hull(r)) >= 3) or any(pt in r for r in residual), "degenerate row uncovered"
+                stats["cover_checks"] += 1
+        new_rows.append({"interval": (lo, hi), "reference": row["reference"], "outer": outer, "residual": residual})
+    # kernel and compression
+    kernel = poly(step["common_owned_kernel"])
+    for pt in kernel:
+        assert 0 <= pt[0] <= U and 0 <= pt[1] <= U
+        assert all(a * pt[0] + b * pt[1] <= c for a, b, c in all_planes), f"step {si} kernel point fails planes"
+    if any_live and (groups[owner] or kernel):
+        original = hull(groups[owner] + kernel)
+        assert same_set(poly(step["compression_source_hull"]), original)
+        rec = step["inner_grid_compression"]
+        newpts = poly(rec["vertices"])
+        assert len(newpts) == len(rec["witnesses"]) > 0
+        for pt, w in zip(newpts, rec["witnesses"]):
+            idx, wts = w["indices"], [Q(x) for x in w["weights"]]
+            assert 1 <= len(idx) <= 3 and all(0 <= k < len(original) for k in idx) and all(x >= 0 for x in wts) and sum(wts) == 1
+            comb = (sum(x * original[k][0] for k, x in zip(idx, wts)), sum(x * original[k][1] for k, x in zip(idx, wts)))
+            assert comb == pt == P(w["point"])
+            assert (pt[0] * 2**20).denominator == 1 and (pt[1] * 2**20).denominator == 1
+        if rec.get("mode") == "replace":
+            groups[owner] = hull(newpts)
+        else:
+            groups[owner] = hull(groups[owner] + newpts)
+        assert len(groups[owner]) <= 16
+    else:
+        assert "inner_grid_compression" not in step
+    rows[owner] = new_rows
+    live_rows = sum(1 for r in new_rows if r["residual"])
+    # derived closure
+    derived = None
+    if live_rows == 0:
+        derived = {"kind": "all_parent_poses_forbidden", "owner": owner, "step": si}
+    else:
+        for oj in sorted(mask):
+            if oj != owner and groups[oj] and groups[owner]:
+                common = intersect_convex(list(groups[owner]), groups[oj]) if len(groups[oj]) >= 3 else []
+                if common:
+                    derived = {"kind": "owned_hulls_intersect", "owners": sorted((owner, oj)), "step": si}
+                    break
+    print(f"step {si:2d} owner {owner:2d} {order[owner]:12s} live {live_rows:2d} hull {len(groups[owner]):2d} partners {sorted(partners)} full-checked rows {len(full)} closure {derived is not None} t={time.time()-t0:.0f}s", flush=True)
+    if derived is not None:
+        assert si == closure_step and derived["kind"] == node["contradiction"]["kind"] and derived.get("owner") == closure_owner
+        assert si == len(steps) - 1, "steps after closure"
+        break
+else:
+    assert STALL, "no closure derived"
+    print("node is a declared stall; no closure derived (consistent)")
+
+# final state
+final = node["final_state"]
+for o in mask:
+    assert same_set(poly(final["groups"][str(o)]), groups[o])
+    assert len(final["cells"][str(o)]) == len(rows[o])
+    for fr, r in zip(final["cells"][str(o)], rows[o]):
+        assert fr["reference"] == r["reference"]
+        assert same_set(poly(fr["outer_domain"]), r["outer"]) if r["outer"] else fr["outer_domain"] == []
+        assert len(fr["residual_polygons"]) == len(r["residual"]) and all(same_set(poly(a), b) for a, b in zip(fr["residual_polygons"], r["residual"]))
+assert node["closed"] is (not STALL) and node["terminal"] is (not STALL)
+assert node["mask_exclusion_proved"] is False and node["global_optimality_proved"] is False
+print("final state verified; closure verified:", node["contradiction"])
+print("stats", stats, f"total {time.time()-t0:.0f}s")
+print("VERDICT: certificate spot-check PASSED")

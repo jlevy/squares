@@ -1,0 +1,1 @@
+Clean run from a detached worktree at 37b5fc2ffb15ecda20b77e4a8a375eff9c212397 (tracked tree clean; only a .venv symlink untracked). Working directory packing/. Command: .venv/bin/python3 -m devtools.check_n17_capacity_one_cover --design ring-3-voronoi-8-tabbed-unique --output receipt.json

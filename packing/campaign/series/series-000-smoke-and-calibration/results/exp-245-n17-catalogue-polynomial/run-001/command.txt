@@ -1,0 +1,1 @@
+Clean run from a detached worktree at 603d5cb36ed3c9195513956cd5b5c20e5f2cddda (tracked tree clean; only a .venv symlink untracked). Working directory packing/. Command: .venv/bin/python3 -m devtools.check_n17_catalogue_polynomial --output /home/user/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-245-n17-catalogue-polynomial/run-001/receipt.json

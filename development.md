@@ -1597,6 +1597,34 @@ The nearby code or documentation must name that boundary and the failure the com
 detects. Compact content identities used for deduplication, append-only event ids, or
 cache correctness are not integrity claims and must name that separate function.
 
+Four shapes are ceremony here and are refused in review: a tool that hashes its own
+source or its kernel’s and refuses a checkpoint or receipt whose digest differs; a
+ledger or registry that lists verifiers, receipts or receipts-of-receipts by SHA-256; an
+audit that compares a working file to its historical Git blob and fails on difference;
+and a frozen copy of code kept so that bytes can be compared.
+The shape that replaces all four is a provenance record: the blob id of the bytes the
+process imported (`git hash-object`, or `hashlib.sha1(b"blob %d\0" + data)` as
+`check_n17_local_minimum` does), the revision, and whether the tree was dirty; it is
+recorded and never compared.
+Determinism is a fixture test: produce a small instance and compare its bytes with the
+committed fixture (`test_verify_n17_certificates`’s W7 at bins 8 is the model).
+Content addressing may name files and deduplicate; a name is not a check, and a loader
+does not refuse a file for not hashing to its name.
+The
+[integrity-ceremony audit](docs/project/reviews/review-2026-10-03-integrity-ceremony-audit.md)
+inventories every instance with its verdict and the slices that remove them.
+`devtools.check_integrity_ceremony` counts the two detectable forms, a module hashing
+its own or a sibling’s source and an `==` or `!=` on a digest, in every tracked Python
+file that is not a test and is outside the allowlist in
+`devtools/integrity-ceremony.yaml`, where each listed file names its boundary by kind (a
+download, an external checkout, a generated artifact, a legacy manifest).
+Every other file may not rise above its per-file baseline.
+A fall is never a finding, so removing ceremony costs no bookkeeping; `--update`
+tightens the baseline when convenient.
+Tests are not scanned: a test asserting that a receipt names the digest of what ran
+refuses nothing at run time.
+The step `integrity ceremony never grows` runs it in the edit tier.
+
 Pytest collection is explicit in `pyproject.toml`; `tests/conftest.py` fails if the
 configured test directory disappears.
 Domain programs are named by what they check, not with `_test.py`, so pytest cannot

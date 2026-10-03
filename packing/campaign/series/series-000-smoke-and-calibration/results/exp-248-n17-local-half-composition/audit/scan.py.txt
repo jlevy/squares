@@ -1,0 +1,175 @@
+"""Lane R2: float witnesses for the H-268 slide bounds, independent of the tool.
+
+With the sixteen squares other than 6 at their exact-root family poses (no perturbation)
+and square 6 anywhere in the closed cell side-S2 at any turn, find by grid search plus
+bisection the largest a (square 5 slid left) and the smallest z (square 13 slid along
+-v) for which square 6 still fits. Also: where square 6 can be anywhere in the container,
+for a in (0.115, 1.2] -- the H-261 "physical slider domain" question -- and the swapped
+configuration (5 in 6's hole, 6 at the corner).
+"""
+
+from __future__ import annotations
+
+import math
+import sys
+import time
+
+import numpy as np
+
+sys.path.insert(0, "/tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/r2")
+from geometry import U, HALF, layout, root_boxes  # noqa: E402
+
+(m237, _), (m238, r238) = root_boxes()
+side, aux, centres = layout(m238[0], m238[1])
+SIGMA = float((U - side) / 2)
+LO, HI = SIGMA, float(U) - SIGMA  # the S* container in the cover frame (embedding A)
+C, S = float(aux["c"]), float(aux["s"])
+THETA = math.atan2(S, C)
+BETA = math.atan2(-float(aux["e"]), float(aux["d"]))
+VX, VY = -S, C
+CELL = (4021 / 1500, 1693 / 500, 0.5, 1.411)  # side-S2 (unique design), cover frame
+
+
+def pose(label: int, a: float = 0.0, z: float = 0.0) -> tuple[float, float, float]:
+    x, y = (float(v) + SIGMA for v in centres[label - 1])
+    if label == 5:
+        return x - a, y, 0.0
+    if label == 13:
+        return x + z * VX, y + z * VY, THETA
+    if 9 <= label <= 14:
+        return x, y, THETA
+    if label == 16:
+        return x, y, BETA
+    return x, y, 0.0
+
+
+def overlap_mask(cx, cy, phi, ox, oy, ophi, tol=0.0):
+    """True where the square (cx, cy, phi) arrays overlap the single obstacle square."""
+    dx, dy = ox - cx, oy - cy
+    inside = np.ones_like(cx, dtype=bool)
+    for ang, is_self in ((phi, True), (ophi, False)):
+        c, s = np.cos(ang), np.sin(ang)
+        for nx, ny in ((c, s), (-s, c)):
+            proj = np.abs(nx * dx + ny * dy)
+            # supports
+            ca, sa = np.cos(phi), np.sin(phi)
+            h1 = (np.abs(nx * ca + ny * sa) + np.abs(-nx * sa + ny * ca)) / 2
+            cb, sb = math.cos(ophi), math.sin(ophi)
+            h2 = (np.abs(nx * cb + ny * sb) + np.abs(-nx * sb + ny * cb)) / 2
+            inside &= proj < h1 + h2 - tol
+    return inside
+
+
+def fits(a: float, z: float, region, step: float, astep_deg: float, tol: float = 1e-9):
+    """Return a feasible pose of square 6 in `region` (x0, x1, y0, y1) if the grid has one."""
+    x0, x1, y0, y1 = region
+    xs = np.arange(x0, x1 + 1e-12, step)
+    ys = np.arange(y0, y1 + 1e-12, step)
+    phis = np.deg2rad(np.arange(0.0, 90.0, astep_deg))
+    X, Y, P = np.meshgrid(xs, ys, phis, indexing="ij")
+    X, Y, P = X.ravel(), Y.ravel(), P.ravel()
+    reach = (np.abs(np.cos(P)) + np.abs(np.sin(P))) / 2
+    ok = (X - reach >= LO - tol) & (X + reach <= HI + tol) & (Y - reach >= LO - tol) & (Y + reach <= HI + tol)
+    for label in range(1, 18):
+        if label == 6:
+            continue
+        ox, oy, ophi = pose(label, a, z)
+        # skip far obstacles (box distance from the obstacle centre to the region)
+        dxr = max(x0 - ox, ox - x1, 0.0)
+        dyr = max(y0 - oy, oy - y1, 0.0)
+        if dxr * dxr + dyr * dyr > 2.1**2:
+            continue
+        ok &= ~overlap_mask(X, Y, P, ox, oy, ophi, tol=-tol)
+        if not ok.any():
+            return None
+    idx = np.flatnonzero(ok)
+    i = idx[0]
+    return float(X[i]), float(Y[i]), float(np.rad2deg(P[i])), int(idx.size)
+
+
+def bisect_a(z: float, lo: float, hi: float, region, step, astep) -> tuple[float, tuple | None]:
+    best = None
+    if fits(lo, z, region, step, astep) is None:
+        return -1.0, None
+    for _ in range(18):
+        mid = (lo + hi) / 2
+        w = fits(mid, z, region, step, astep)
+        if w is None:
+            hi = mid
+        else:
+            lo, best = mid, w
+    return lo, best
+
+
+def bisect_z(a: float, lo: float, hi: float, region, step, astep) -> tuple[float, tuple | None]:
+    # feasible at hi, infeasible at lo; find the least feasible z
+    best = None
+    if fits(a, hi, region, step, astep) is None:
+        return 9.0, None
+    for _ in range(18):
+        mid = (lo + hi) / 2
+        w = fits(a, mid, region, step, astep)
+        if w is None:
+            lo = mid
+        else:
+            hi, best = mid, w
+    return hi, best
+
+
+def main() -> None:
+    print(f"S* = {float(side):.12f}, sigma = {SIGMA:.3e}, container [{LO:.6f}, {HI:.6f}]")
+    print("square 5 nominal x:", pose(5)[0], " square 6 family box x:", float(aux['R'] - aux['T'] / aux['s']) + SIGMA, float(aux['R']) + SIGMA)
+    print("square 13 nominal:", pose(13))
+    t0 = time.time()
+    # a_max over z in the certified z range, coarse then fine
+    print("\n== a_max with square 6 in side-S2 (family poses, no perturbation) ==")
+    coarse = (0.01, 2.0)
+    results = []
+    for z in np.linspace(-0.049, 0.0241, 16):
+        a_lo, w = bisect_a(float(z), 0.0, 0.3, CELL, *coarse)
+        results.append((a_lo, float(z), w))
+        print(f"  z={z:+.5f}  a_max~{a_lo:.5f}  witness6={w}")
+    best = max(results, key=lambda r: r[0])
+    print(f"coarse best a = {best[0]:.5f} at z = {best[1]:+.5f}; {time.time()-t0:.1f}s")
+    # refine: finer z around the best, finer 6-grid in a window around the witness
+    zb, (wx, wy, wphi, _) = best[1], best[2]
+    window = (max(CELL[0], wx - 0.06), min(CELL[1], wx + 0.06), max(CELL[2], wy - 0.06), min(CELL[3], wy + 0.06))
+    fine = []
+    for z in np.linspace(zb - 0.006, min(zb + 0.006, 0.0241), 9):
+        a_lo, w = bisect_a(float(z), 0.0, 0.3, window, 0.001, 0.25)
+        fine.append((a_lo, float(z), w))
+    best_f = max(fine, key=lambda r: r[0])
+    print(f"refined a_max ~ {best_f[0]:.5f} at z = {best_f[1]:+.5f}, square 6 at {best_f[2]}")
+    print(f"  certified a <= 23/200 = 0.115; first threshold 21/100; B_W face 1/4")
+
+    print("\n== z_min with square 6 in side-S2 ==")
+    results = []
+    for a in np.linspace(0.0, 0.115, 12):
+        z_hi, w = bisect_z(float(a), -0.3, 0.0, CELL, *coarse)
+        results.append((z_hi, float(a), w))
+        print(f"  a={a:.4f}  z_min~{z_hi:+.5f}  witness6={w}")
+    best = min(results, key=lambda r: r[0])
+    ab, (wx, wy, wphi, _) = best[1], best[2]
+    window = (max(CELL[0], wx - 0.06), min(CELL[1], wx + 0.06), max(CELL[2], wy - 0.06), min(CELL[3], wy + 0.06))
+    fine = []
+    for a in np.linspace(max(0, ab - 0.01), ab + 0.01, 9):
+        z_hi, w = bisect_z(float(a), -0.3, 0.0, window, 0.001, 0.25)
+        fine.append((z_hi, float(a), w))
+    best_f = min(fine, key=lambda r: r[0])
+    print(f"refined z_min ~ {best_f[0]:+.5f} at a = {best_f[1]:.4f}, square 6 at {best_f[2]}")
+    print(f"  certified z >= -49/1000 = -0.049; first threshold -1/20; B_W face -1/8")
+
+    print("\n== square 6 anywhere in the container, a in (0.115, 1.25], z = 0 (H-261 question) ==")
+    whole = (LO + 0.5, HI - 0.5, LO + 0.5, HI - 0.5)
+    for a in [0.12, 0.15, 0.2, 0.3, 0.5, 0.7, 0.9, 0.95, 1.0, 1.02, 1.05, 1.07, 1.08, 1.1, 1.2, 1.25]:
+        w = fits(a, 0.0, whole, 0.02, 3.0)
+        print(f"  a={a:.3f}: {'fits at ' + str(w) if w else 'no pose on the grid'}")
+    print("\n== square 6 anywhere, a = 0, z deep negative (13 retreats along -v) ==")
+    for z in [-0.06, -0.1, -0.2, -0.4, -0.6, -0.8, -0.9, -0.95]:
+        w = fits(0.0, z, whole, 0.02, 3.0)
+        print(f"  z={z:+.3f}: {'fits at ' + str(w) if w else 'no pose on the grid'}")
+    print(f"total {time.time()-t0:.1f}s")
+
+
+if __name__ == "__main__":
+    main()

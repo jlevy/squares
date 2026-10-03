@@ -1,0 +1,101 @@
+diff --git a/packing/tests/test_verify_n17_certificates.py b/packing/tests/test_verify_n17_certificates.py
+index 9c6f4832a..e6fe9b5e2 100644
+--- a/packing/tests/test_verify_n17_certificates.py
++++ b/packing/tests/test_verify_n17_certificates.py
+@@ -510,6 +510,68 @@ def unchecked_beyond_the_seed_grid(node: dict[str, Any]) -> None:
+     rows[-1]["collision_regions"] = []
+ 
+ 
++def start_above_zero(node: dict[str, Any]) -> None:
++    """The closing step's first row starts at 2^-20: the half-angles below it are no row's."""
++    node["steps"][-1]["rows"][0]["interval"][0] = str(Q(1, 2**20))
++
++
++def point_strict_on_one_half(lo: Q, hi: Q, which: str) -> Point:
++    """A point strictly inside the unit square at every half-angle of one half of
++    `[lo, hi]` but not at every half-angle of the whole row, by a search over directions
++    and radii near the square's boundary (the search of lane R6's
++    `audit-verifier-rewrites/refinement/mutate_refined.py.txt`)."""
++    mid = (lo + hi) / 2
++    half = (lo, mid) if which == "lower" else (mid, hi)
++    for k in range(720):
++        phi = math.pi * k / 360
++        direction = (
++            Q(round(math.cos(phi) * 2**16), 2**16),
++            Q(round(math.sin(phi) * 2**16), 2**16),
++        )
++        for step in range(160):
++            r = Q(45, 100) + Q(step, 512)
++            p = (r * direction[0], r * direction[1])
++            if kernel_verifier.core_strict([p], *half) and not kernel_verifier.core_strict(
++                [p], lo, hi
++            ):
++                return p
++    raise AssertionError(f"no point is strict over the {which} half of [{lo}, {hi}] alone")
++
++
++def grow_core_by_a_half_strict_point(which: str) -> Callable[[dict[str, Any]], None]:
++    """The closing step's first row's core grown by a point strict over one half of the
++    row only, with its common-core planes recomputed: the core still contains the old
++    one, so every other obligation of the row holds and only strictness over the whole
++    row can refuse it. A verifier proving the core over that half alone accepts it."""
++
++    def edit(node: dict[str, Any]) -> None:
++        row = node["steps"][-1]["rows"][0]
++        lo, hi = Q(row["interval"][0]), Q(row["interval"][1])
++        core = kernel_verifier.hull(decode(row["core_vertices"]))
++        grown = kernel_verifier.hull([*core, point_strict_on_one_half(lo, hi, which)])
++        row["core_vertices"] = encode(grown)
++        vertices = [v for polygon in row["residual_polygons"] for v in decode(polygon)]
++        row["common_core_halfplanes"] = common_core_planes(grown, vertices) if vertices else []
++
++    return edit
++
++
++def grow_partner_core_by_a_half_strict_point(which: str) -> Callable[[dict[str, Any]], None]:
++    """A refined partner row's published core in the closing step grown likewise."""
++
++    def edit(node: dict[str, Any]) -> None:
++        covers = node["steps"][-1]["prior_partner_pose_covers"]
++        items = next(items for items in covers.values() if len(items) > 2)
++        item = next(item for item in items if item["core"])
++        lo, hi = Q(item["interval"][0]), Q(item["interval"][1])
++        core = kernel_verifier.hull(decode(item["core"]))
++        item["core"] = encode(
++            kernel_verifier.hull([*core, point_strict_on_one_half(lo, hi, which)])
++        )
++
++    return edit
++
++
+ @pytest.mark.parametrize(
+     ("edit", "message"),
+     [
+@@ -522,6 +584,27 @@ def unchecked_beyond_the_seed_grid(node: dict[str, Any]) -> None:
+         (cite_the_grandparent, "not an accepted row"),
+         (cite_the_partner, "not an accepted row"),
+         (unchecked_beyond_the_seed_grid, "NOT covered"),
++        (start_above_zero, "interval gap"),
++        pytest.param(
++            grow_core_by_a_half_strict_point("lower"),
++            "core not strict",
++            id="grow_core_lower_half-core not strict",
++        ),
++        pytest.param(
++            grow_core_by_a_half_strict_point("upper"),
++            "core not strict",
++            id="grow_core_upper_half-core not strict",
++        ),
++        pytest.param(
++            grow_partner_core_by_a_half_strict_point("lower"),
++            "core not strict",
++            id="grow_partner_core_lower_half-core not strict",
++        ),
++        pytest.param(
++            grow_partner_core_by_a_half_strict_point("upper"),
++            "core not strict",
++            id="grow_partner_core_upper_half-core not strict",
++        ),
+     ],
+ )
+ def test_the_kernel_verifier_refuses_a_doctored_refinement(

@@ -1,0 +1,150 @@
+"""Resume `survey-arity8-seed1` on its missing states with the frozen tool bytes, then merge.
+
+The run was stopped by the session's background time limit after 15 of 45 states. This
+driver imports the same module (its digest is checked), rebuilds the draw, the plan and
+the reduction set exactly as `main()` built them for that command line, checks them
+against the 15 recorded states, surveys only the other 30, and writes a merged receipt
+whose distributions and found classes are computed by the module's own functions.
+Every state's result depends only on the seed and its mask, not on order or worker.
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+
+from devtools import select_n17_sub_patterns as selector
+from devtools import survey_n17_residue as survey
+
+FROZEN = "824c53359728a7a99795c3c69a28b75ee6ef283ca8a70c446c74d09c67e0982f"
+LANE = Path(__file__).resolve().parent
+FIRST = LANE / "survey-arity8-seed1.json"
+SECOND = LANE / "survey-arity8-seed1-resume.json"
+MERGED = LANE / "survey-arity8-seed1-merged.json"
+
+# The original command line.
+SAMPLE, SEED, WORKERS = 44, 1, 2
+FULL, FULL_ROUNDS = "8,16,16,40", 10
+SCREEN, SCREEN_ROUNDS, ESCALATE, CONFIRM = "4,8,8,16", 1, 1, 1
+REDUCE_FRACTION, MAX_STEPS = 0.5, 40
+
+
+def main() -> int:
+    if survey.MODULE_SHA256 != FROZEN:
+        raise SystemExit(f"tool bytes changed: {survey.MODULE_SHA256}")
+    first = json.loads(FIRST.read_text(encoding="utf-8"))
+    design = selector.DEFAULT_DESIGN
+    geometry = selector.cover_geometry(design)
+    size = selector.TARGET
+    endpoint = selector.endpoint_pose(design)
+    endpoint_rep, _, _ = survey.endpoint_check(geometry, endpoint)
+    paths = survey.FLAG_SETS["arity8"]
+    flags = sorted(
+        {m for p in paths for m in selector.receipt_flags(survey.REPO / p, geometry, design)}
+    )
+    pop = survey.population(geometry, flags, size, selector.mask_of(endpoint["cells"]))
+    strata = {k: v for k, v in pop.strata.items() if k != survey.ENDPOINT_STRATUM}
+    _, drawn = survey.draw_sample(strata, SAMPLE, SEED, weighted=True)
+    drawn = [(survey.ENDPOINT_STRATUM, endpoint_rep), *drawn]
+    margin = survey.MARGIN
+    full = survey.Effort(survey.budget_of(FULL, margin), FULL_ROUNDS, True, False)
+    plan = survey.Plan(
+        geometry=geometry,
+        knowledge=survey.load_knowledge(
+            geometry, design, survey.KNOWLEDGE_RECEIPTS, survey.REPO, size
+        ),
+        seed=SEED,
+        full=full,
+        reduce=survey.Efforts(
+            screen=survey.Effort(survey.budget_of(SCREEN, margin), SCREEN_ROUNDS, True),
+            escalate=survey.Effort(full.budget, ESCALATE, True),
+        ),
+        confirm=survey.Effort(full.budget, CONFIRM, True),
+        max_steps=MAX_STEPS,
+    )
+    chooser = np.random.default_rng(np.random.SeedSequence([SEED, 0x7ED]))
+    reduce = {
+        mask
+        for key, mask in drawn
+        if key == survey.ENDPOINT_STRATUM or chooser.random() < REDUCE_FRACTION
+    }
+    header = {
+        key: first[key]
+        for key in (
+            "schema",
+            "status",
+            "design",
+            "cap",
+            "cells",
+            "module_sha256",
+            "selector_sha256",
+            "parameters",
+            "population",
+        )
+    }
+    if header["parameters"]["full"] != plan.full.record():
+        raise SystemExit("the rebuilt full-state effort differs from the receipt's")
+    position = {mask: index for index, (_, mask) in enumerate(drawn)}
+    stratum = dict((mask, key) for key, mask in drawn)
+    for record in first["states"]:
+        mask = record["mask"]
+        if stratum.get(mask) != record["stratum"] or position[mask] != record["index"]:
+            raise SystemExit(f"state {mask} does not match the rebuilt draw")
+        if record["reduce_selected"] != (mask in reduce):
+            raise SystemExit(f"state {mask}: reduction selection differs")
+    done = {record["mask"] for record in first["states"]}
+    remaining = [(key, mask) for key, mask in drawn if mask not in done]
+    print(json.dumps({"done": len(done), "remaining": len(remaining)}), flush=True)
+    clock = time.perf_counter()
+    second = survey.run_survey(
+        plan,
+        pop,
+        remaining,
+        workers=WORKERS,
+        timeout=float(sys.argv[1]) if len(sys.argv) > 1 else None,
+        header=header,
+        output=SECOND,
+        size=size,
+        reduce=reduce,
+        seed=SEED,
+    )
+    records = [*first["states"], *second["states"]]
+    for record in records:
+        record["index"] = position[record["mask"]]
+    records.sort(key=lambda record: record["index"])
+    sizes = {key: len(masks) for key, masks in pop.strata.items()}
+    merged = {
+        **header,
+        "complete": len(records) == len(drawn),
+        "states_done": len(records),
+        "states_drawn": len(drawn),
+        "resumed": {
+            "reason": "the first run was stopped by the session's background time limit "
+            "after 15 states; the other states ran in a second process with the same "
+            "tool bytes, seed and parameters",
+            "first": FIRST.name,
+            "second": SECOND.name,
+            "first_seconds": first["seconds"],
+            "second_seconds": round(time.perf_counter() - clock, 3),
+        },
+        "placed_states": [
+            {k: r[k] for k in ("mask", "cells", "stratum", "distance")} | {"full": r["full"]}
+            for r in records
+            if r["full"]["placed"] and r["stratum"] != survey.ENDPOINT_STRATUM
+        ],
+        "controls": [r for r in records if r["stratum"] == survey.ENDPOINT_STRATUM],
+        "distributions": survey.distributions(records, sizes, len(pop.representatives)),
+        "found_classes": survey.found_classes(plan, records, pop.alive, pop.flags, size),
+        "states": records,
+    }
+    survey.write(MERGED, merged)
+    print(json.dumps({"merged": len(records), "complete": merged["complete"]}), flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

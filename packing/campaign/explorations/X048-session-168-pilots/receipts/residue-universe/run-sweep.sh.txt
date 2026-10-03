@@ -1,0 +1,5 @@
+#!/bin/bash
+# Resumable: rerun this script after a restart; chunks already written are skipped.
+cd /home/user/squares
+export PYTHONPATH=/home/user/squares/packing OMP_NUM_THREADS=1
+exec timeout 172800 packing/.venv/bin/python3 -m devtools.sweep_n17_residue_universe sweep --flags /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/s2/universe/flags-recheck-90-seed1.json --directory /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/s2/universe --chunk 500 >> /tmp/claude-0/-home-user-squares/9ef40ca7-d637-5e9a-8f7f-e71a05712560/scratchpad/lanes/s2/universe/sweep.log 2>&1

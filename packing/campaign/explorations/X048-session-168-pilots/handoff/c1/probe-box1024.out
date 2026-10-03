@@ -1,0 +1,116 @@
+{
+ "status": "PASS_PILOT_MEASURED",
+ "system": "n17",
+ "cap": "capture",
+ "outcome": "time_cap",
+ "endpoint_control": {
+  "held": true,
+  "checked_after": 81
+ },
+ "scales_first_round": {
+  "0.01": null,
+  "0.001": null,
+  "0.0003": null,
+  "0.0002": null
+ },
+ "falsifier": {
+  "falsified": false,
+  "longest_fine_and_flat_run": 0,
+  "first_round_rows_under_a_tenth": null,
+  "first_round_rows_under_a_twentieth": null,
+  "contraction_start": null,
+  "g_worst_extent_after_start": [],
+  "g_after_start_geometric_mean": null
+ },
+ "rounds": [
+  {
+   "round": 0,
+   "worst": "7.854e-01",
+   "position": "9.766e-04",
+   "turn": "7.854e-01",
+   "inside": 0,
+   "seconds": 0.3
+  },
+  {
+   "round": 1,
+   "worst": "4.225e-01",
+   "position": "9.766e-04",
+   "turn": "4.225e-01",
+   "inside": 0,
+   "seconds": 100.9
+  },
+  {
+   "round": 2,
+   "worst": "1.068e-01",
+   "position": "9.766e-04",
+   "turn": "1.068e-01",
+   "inside": 0,
+   "seconds": 131.3
+  },
+  {
+   "round": 3,
+   "worst": "7.422e-02",
+   "position": "9.766e-04",
+   "turn": "7.422e-02",
+   "inside": 0,
+   "seconds": 164.1
+  },
+  {
+   "round": 4,
+   "worst": "5.492e-02",
+   "position": "9.766e-04",
+   "turn": "5.492e-02",
+   "inside": 0,
+   "seconds": 213.8
+  },
+  {
+   "round": 5,
+   "worst": "4.374e-02",
+   "position": "9.766e-04",
+   "turn": "4.374e-02",
+   "inside": 0,
+   "seconds": 299.4
+  },
+  {
+   "round": 6,
+   "worst": "4.374e-02",
+   "position": "9.766e-04",
+   "turn": "4.374e-02",
+   "inside": 0,
+   "seconds": 301.1
+  }
+ ],
+ "g": {
+  "ratios": {
+   "worst": [
+    0.5379068319199821,
+    0.2527268785110104,
+    0.6951334773052567,
+    0.739936712734549,
+    0.7964315456551717
+   ],
+   "worst_position": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "worst_turn": [
+    0.5379068319199821,
+    0.2527268785110104,
+    0.6951334773052567,
+    0.739936712734549,
+    0.7964315456551717
+   ]
+  },
+  "g_tail_geometric_mean": 0.742683447309177,
+  "worst_final": 0.04373806934221003,
+  "rounds_more_to_scale": {
+   "0.01": 4.960357456395537,
+   "0.001": 12.700519870229943,
+   "0.0003": 16.74768628144171,
+   "0.0002": 18.110661226189265
+  }
+ }
+}

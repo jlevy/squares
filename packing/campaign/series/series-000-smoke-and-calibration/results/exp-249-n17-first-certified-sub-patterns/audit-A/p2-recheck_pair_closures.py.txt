@@ -1,0 +1,29 @@
+"""Exact re-check of every "pair" closure (README C1) in a saved certificate."""
+import sys, time
+from fractions import Fraction as Q
+from pathlib import Path
+from devtools import pilot_n17_subpattern_bb as bb
+from tests.test_pilot_n17_subpattern_bb import _gap_lower, _possible_planes
+
+directory = Path(sys.argv[1])
+name = next(l.split(": ")[1].removesuffix(".json.gz") for l in (directory / "README.txt").read_text().splitlines() if l.startswith("This certificate's manifest"))
+manifest = bb.read_named(directory, name)
+header = manifest["header"]
+trig = {k: [Q(v) for v in vals] for k, vals in bb.read_named(directory, manifest["trig"])["trig"].items()}
+half = Q(header["half_pi_multiples"]["1"][0])
+t, count = time.perf_counter(), 0
+for chunk in manifest["chunks"]:
+    for node in bb.read_named(directory, chunk)["nodes"]:
+        angles = [[Q(lo), Q(hi)] for lo, hi in node["angles"]]
+        for record in node["rounds"]:
+            closed = record.get("closed_pair")
+            if not closed or closed[1] != "pair":
+                continue
+            i, j = header["pairs"][closed[0]]
+            b = [[Q(v) for v in box] for box in record["boxes"]]
+            dx = (b[j][0] - b[i][1], b[j][1] - b[i][0])
+            dy = (b[j][2] - b[i][3], b[j][3] - b[i][2])
+            g = _gap_lower(angles[i], angles[j], trig, header)
+            assert not _possible_planes(record["pairs"][str(closed[0])], g, dx, dy, trig=trig, half_pi_lower=half), node["id"]
+            count += 1
+print(f"pair closures re-verified exactly: {count} in {time.perf_counter() - t:.1f} s")

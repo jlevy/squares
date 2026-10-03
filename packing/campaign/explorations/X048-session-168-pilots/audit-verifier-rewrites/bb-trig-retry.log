@@ -1,0 +1,5 @@
+{"produced": "certified-infeasible", "nodes": 203}
+{"variant": "as-written", "old": "PASS", "old_failures": [], "old_trig": {"trig_checked": 116, "trig_bad": 0}, "new": "PASS", "new_failures": [], "new_trig": {"trig_checked": 116, "trig_bad": 0}}
+{"variant": "narrow-true", "old": "FAIL", "old_failures": ["trig enclosure at 2.167145867644258 is not an enclosure"], "old_trig": {"trig_checked": 116, "trig_bad": 1}, "new": "PASS", "new_failures": [], "new_trig": {"trig_checked": 116, "trig_bad": 0}}
+{"variant": "narrow-false", "old": "FAIL", "old_failures": ["trig enclosure at 2.167145867644258 is not an enclosure"], "old_trig": {"trig_checked": 116, "trig_bad": 1}, "new": "FAIL", "new_failures": ["trig enclosure at 2.167145867644258 is not an enclosure"], "new_trig": {"trig_checked": 116, "trig_bad": 1}}
+{"variant": "wide-false", "old": "FAIL", "old_failures": ["trig enclosure at 2.167145867644258 is not an enclosure"], "old_trig": {"trig_checked": 116, "trig_bad": 1}, "new": "FAIL", "new_failures": ["trig enclosure at 2.167145867644258 is not an enclosure"], "new_trig": {"trig_checked": 116, "trig_bad": 1}}

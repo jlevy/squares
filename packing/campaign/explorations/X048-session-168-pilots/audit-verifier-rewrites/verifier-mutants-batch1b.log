@@ -1,0 +1,1 @@
+{"mutant": "collision-first-partner-row-only", "weakens": "only the first live partner row is checked", "harness": "missed", "harness_note": "", "tests": "missed", "tests_note": "", "certs": "missed", "certs_note": "", "seconds": 66.6}

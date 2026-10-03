@@ -1,0 +1,73 @@
+seed 8949a798f00b node 2d516d00ab3b
+bins 64
+frame: world == cover cells, mask == [0, 5, 6, 10, 14, 16, 18] ['corner-SW', 'side-N0', 'side-W0', 'side-W1', 'side-W2', 'interior-SW', 'interior-W']
+seed owner  0 corner-SW   : 2 owned points verified, 64 rows verified
+seed owner  5 side-N0     : 0 owned points verified, 64 rows verified
+seed owner  6 side-W0     : 0 owned points verified, 64 rows verified
+seed owner 10 side-W1     : 0 owned points verified, 64 rows verified
+seed owner 14 side-W2     : 0 owned points verified, 64 rows verified
+seed owner 16 interior-SW : 2 owned points verified, 64 rows verified
+seed owner 18 interior-W  : 0 owned points verified, 64 rows verified
+seed verified in 0.7s
+declared closure {'kind': 'all_parent_poses_forbidden', 'owner': 5, 'step': 57} steps 58
+step  0 owner  0 corner-SW    live 64 hull 12 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=41s
+step  1 owner  5 side-N0      live 64 hull  0 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=50s
+step  2 owner  6 side-W0      live 64 hull  0 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=114s
+step  3 owner 10 side-W1      live 64 hull  0 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=185s
+step  4 owner 14 side-W2      live 64 hull  0 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=471s
+step  5 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=503s
+step  6 owner 18 interior-W   live 64 hull 12 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=608s
+step  7 owner  0 corner-SW    live 64 hull 10 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=756s
+step  8 owner  5 side-N0      live 64 hull  0 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=805s
+step  9 owner  6 side-W0      live 64 hull 16 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=861s
+step 10 owner 10 side-W1      live 64 hull 12 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=909s
+step 11 owner 14 side-W2      live 60 hull 16 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=937s
+step 12 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=976s
+step 13 owner 18 interior-W   live 64 hull 16 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=1118s
+step 14 owner  0 corner-SW    live 64 hull 16 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=1520s
+step 15 owner  5 side-N0      live 64 hull  0 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=1621s
+step 16 owner  6 side-W0      live 64 hull 16 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=1865s
+step 17 owner 10 side-W1      live 64 hull 14 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=1957s
+step 18 owner 14 side-W2      live 48 hull 16 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=1983s
+step 19 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=2065s
+step 20 owner 18 interior-W   live 64 hull 16 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=2214s
+step 21 owner  0 corner-SW    live 64 hull 16 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=2538s
+step 22 owner  5 side-N0      live 64 hull  0 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=2577s
+step 23 owner  6 side-W0      live 64 hull 16 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=2737s
+step 24 owner 10 side-W1      live 64 hull 15 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=2782s
+step 25 owner 14 side-W2      live 27 hull 16 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=2796s
+step 26 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=2869s
+step 27 owner 18 interior-W   live 64 hull 16 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=3053s
+step 28 owner  0 corner-SW    live 64 hull 16 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=3223s
+step 29 owner  5 side-N0      live 64 hull 16 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=3256s
+step 30 owner  6 side-W0      live 44 hull 16 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=3291s
+step 31 owner 10 side-W1      live 47 hull 14 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=3332s
+step 32 owner 14 side-W2      live 20 hull 16 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=3340s
+step 33 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=3395s
+step 34 owner 18 interior-W   live 64 hull 16 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=3580s
+step 35 owner  0 corner-SW    live 61 hull 16 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=3608s
+step 36 owner  5 side-N0      live 64 hull 16 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=3640s
+step 37 owner  6 side-W0      live 44 hull 16 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=3661s
+step 38 owner 10 side-W1      live 31 hull 12 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=3676s
+step 39 owner 14 side-W2      live 12 hull 16 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=3680s
+step 40 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=3735s
+step 41 owner 18 interior-W   live 64 hull 16 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=3929s
+step 42 owner  0 corner-SW    live 59 hull 16 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=3946s
+step 43 owner  5 side-N0      live 64 hull 16 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=3974s
+step 44 owner  6 side-W0      live 35 hull 16 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=3989s
+step 45 owner 10 side-W1      live 31 hull 12 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=3999s
+step 46 owner 14 side-W2      live 12 hull 16 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=4003s
+step 47 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=4042s
+step 48 owner 18 interior-W   live 64 hull 16 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=4242s
+step 49 owner  0 corner-SW    live 41 hull 16 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=4251s
+step 50 owner  5 side-N0      live 64 hull 16 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=4281s
+step 51 owner  6 side-W0      live 29 hull 16 partners [0, 5, 10, 14, 16, 18] full-checked rows 64 closure False t=4290s
+step 52 owner 10 side-W1      live 20 hull 16 partners [0, 5, 6, 14, 16, 18] full-checked rows 64 closure False t=4299s
+step 53 owner 14 side-W2      live 12 hull 16 partners [0, 5, 6, 10, 16, 18] full-checked rows 64 closure False t=4303s
+step 54 owner 16 interior-SW  live 64 hull 16 partners [0, 5, 6, 10, 14, 18] full-checked rows 64 closure False t=4357s
+step 55 owner 18 interior-W   live 64 hull 16 partners [0, 5, 6, 10, 14, 16] full-checked rows 64 closure False t=4479s
+step 56 owner  0 corner-SW    live 40 hull 16 partners [5, 6, 10, 14, 16, 18] full-checked rows 64 closure False t=4484s
+step 57 owner  5 side-N0      live  0 hull 16 partners [0, 6, 10, 14, 16, 18] full-checked rows 64 closure True t=4495s
+final state verified; closure verified: {'kind': 'all_parent_poses_forbidden', 'owner': 5, 'step': 57}
+stats {'rows_full': 3324, 'collision_regions': 7752, 'collision_facet_checks': 30952184, 'cover_checks': 3324, 'partner_rows': 19282} total 4497s
+VERDICT: certificate spot-check PASSED

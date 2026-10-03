@@ -1,0 +1,820 @@
+"""R4: an independent exact-rational verifier of a bb-pilot certificate (schema v1).
+
+Imports nothing from the pilot module and nothing from HiGHS. The cover tool is used only
+to confirm the header's cells are the design's cells. Everything else is recomputed here:
+pi by Machin's formula, sin and cos by Taylor series with Lagrange remainders in integer
+fixed point, the wall bound, the gap bound, the normal-angle pieces' coverage, the three
+half-planes of an option (the chord lemma) or its one relaxed half-plane, the hull cuts'
+right sides by exact 2-D clipping, the Farkas combinations and the bound tightenings.
+
+Checks (names from the certificate README): T1-T3 tree, B1-B2 boxes, P1-P4 pairs,
+C1-C5 closures and rows. A node is verified fully: every round's cuts referenced by a
+multiplier (C2), every bound (C4), the Farkas closure (C3), the pair closure (C1), the
+tightened boxes (B2) and its inherited boxes (B1 against its parent's final).
+
+Usage: verify_cert.py DIR [--sample N] [--seed S] [--deepest K] [--all] [--trig N|all]
+"""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import json
+import math
+import random
+import sys
+import time
+from fractions import Fraction as Q
+from pathlib import Path
+
+sys.path.insert(0, "/home/user/squares/packing")
+from devtools import check_n17_capacity_one_cover as cover  # noqa: E402
+
+# ---------------------------------------------------------------------------
+# Exact constants and enclosures
+# ---------------------------------------------------------------------------
+
+
+def parse(s: str) -> Q:
+    n, d = s.split("/")
+    return Q(int(n), int(d))
+
+
+def arctan_inv(n: int, terms: int) -> tuple[Q, Q]:
+    """Enclosure of arctan(1/n): alternating series with decreasing terms."""
+    total = Q(0)
+    sign = 1
+    last = Q(0)
+    for k in range(terms):
+        term = Q(1, (2 * k + 1) * n ** (2 * k + 1))
+        total += sign * term
+        last = term
+        sign = -sign
+    # After an even number of terms the partial sum is below, the next term above.
+    if terms % 2 == 0:
+        return total, total + last
+    return total - last, total
+
+
+def pi_enclosure() -> tuple[Q, Q]:
+    a_lo, a_hi = arctan_inv(5, 40)
+    b_lo, b_hi = arctan_inv(239, 20)
+    return 16 * a_lo - 4 * b_hi, 16 * a_hi - 4 * b_lo
+
+
+PI_LO, PI_HI = pi_enclosure()
+assert PI_HI - PI_LO < Q(1, 10**40)
+assert Q("3.14159265358979323846") < PI_LO < PI_HI < Q("3.14159265358979323847")
+HP_LO, HP_HI = PI_LO / 2, PI_HI / 2
+TWO_PI = (2 * PI_LO, 2 * PI_HI)
+
+
+def half_pi_multiple(k: int) -> tuple[Q, Q]:
+    if k == 0:
+        return Q(0), Q(0)
+    if k > 0:
+        return k * HP_LO, k * HP_HI
+    return k * HP_HI, k * HP_LO
+
+
+KBITS = 160
+SCALE = 1 << KBITS
+_TRIG: dict[Q, tuple[Q, Q, Q, Q]] = {}
+
+
+def cos_sin(t: Q) -> tuple[Q, Q, Q, Q]:
+    """Enclosures [cos_lo, cos_hi, sin_lo, sin_hi] of cos t, sin t, width about 2^-158."""
+    cached = _TRIG.get(t)
+    if cached is not None:
+        return cached
+    num, den = t.numerator, t.denominator
+    # Terms t^n / n! scaled by 2^KBITS, as integer intervals [floor, ceil].
+    c_lo = c_hi = s_lo = s_hi = 0
+    power_num, power_den = 1, 1  # t^n = power_num / power_den
+    fact = 1
+    n = 0
+    tail = 1 << (KBITS + 8)  # placeholder, set once the remainder is small
+    while True:
+        value_num = power_num * SCALE
+        value_den = power_den * fact
+        lo, hi = value_num // value_den, -((-value_num) // value_den)
+        if n % 2 == 0:
+            if (n // 2) % 2 == 0:
+                c_lo += lo
+                c_hi += hi
+            else:
+                c_lo -= hi
+                c_hi -= lo
+        elif ((n - 1) // 2) % 2 == 0:
+            s_lo += lo
+            s_hi += hi
+        else:
+            s_lo -= hi
+            s_hi -= lo
+        n += 1
+        power_num *= num
+        power_den *= den
+        fact *= n
+        # Lagrange remainder of the next term: |t|^n / n!, an upper bound.
+        tail = -((-abs(power_num) * SCALE) // (power_den * fact)) + 1
+        if tail <= 2 and n > 2:
+            break
+    # The remainder for cos (next even term) and sin (next odd term) are both at most tail
+    # of the current n, since terms decrease once |t| < n.
+    result = (
+        Q(c_lo - tail, SCALE),
+        Q(c_hi + tail, SCALE),
+        Q(s_lo - tail, SCALE),
+        Q(s_hi + tail, SCALE),
+    )
+    _TRIG[t] = result
+    return result
+
+
+def least_abs(lo: Q, hi: Q) -> Q:
+    if lo >= 0:
+        return lo
+    if hi <= 0:
+        return -hi
+    return Q(0)
+
+
+def most_abs(lo: Q, hi: Q) -> Q:
+    return max(-lo, hi)
+
+
+def h_at(t: Q) -> Q:
+    """A lower bound of h(t) = (|cos t| + |sin t|)/2."""
+    c_lo, c_hi, s_lo, s_hi = cos_sin(t)
+    return (least_abs(c_lo, c_hi) + least_abs(s_lo, s_hi)) / 2
+
+
+def meets_multiple(lo: Q, hi: Q) -> bool:
+    """Whether [lo, hi] may contain a multiple of pi/2 (conservative, tight enclosure)."""
+    if hi - lo >= HP_LO:
+        return True
+    k_min = math.floor(float(lo) / (math.pi / 2)) - 2
+    k_max = math.ceil(float(hi) / (math.pi / 2)) + 2
+    for k in range(k_min, k_max + 1):
+        m_lo, m_hi = half_pi_multiple(k)
+        if lo <= m_hi and hi >= m_lo:
+            return True
+    return False
+
+
+def h_lower(lo: Q, hi: Q) -> Q:
+    if meets_multiple(lo, hi):
+        return Q(1, 2)
+    return max(Q(1, 2), min(h_at(lo), h_at(hi)))
+
+
+def gap_lower(ai: Q, bi: Q, aj: Q, bj: Q) -> Q:
+    if aj <= bi and ai <= bj:
+        return Q(1)
+    lo, hi = aj - bi, bj - ai
+    if meets_multiple(lo, hi):
+        return Q(1)
+    return max(Q(1), Q(1, 2) + min(h_at(lo), h_at(hi)))
+
+
+def sqrt_upper(value: Q) -> Q:
+    """An upper bound of sqrt(value) for value >= 0."""
+    if value <= 0:
+        return Q(0)
+    scale = 10**30
+    n = math.isqrt(int(value * scale * scale)) + 1
+    return Q(n, scale)
+
+
+# ---------------------------------------------------------------------------
+# Geometry in exact rationals
+# ---------------------------------------------------------------------------
+
+Point = tuple[Q, Q]
+Box = tuple[Q, Q, Q, Q]
+
+
+def clip_polygon(polygon: list[Point], a: Q, b: Q, c: Q) -> list[Point]:
+    """Keep the closed half-plane a x + b y <= c."""
+    result: list[Point] = []
+    for index, start in enumerate(polygon):
+        end = polygon[(index + 1) % len(polygon)]
+        f_start = a * start[0] + b * start[1] - c
+        f_end = a * end[0] + b * end[1] - c
+        if f_start <= 0:
+            result.append(start)
+        if f_start * f_end < 0:
+            t = f_start / (f_start - f_end)
+            result.append((start[0] + t * (end[0] - start[0]), start[1] + t * (end[1] - start[1])))
+    return result
+
+
+def clip_cell_to_box(cell: list[Point], box: Box) -> Box | None:
+    xl, xh, yl, yh = box
+    if xl > xh or yl > yh:
+        return None
+    current = list(cell)
+    for a, b, c in ((Q(-1), Q(0), -xl), (Q(1), Q(0), xh), (Q(0), Q(-1), -yl), (Q(0), Q(1), yh)):
+        current = clip_polygon(current, a, b, c)
+        if not current:
+            return None
+    xs = [p[0] for p in current]
+    ys = [p[1] for p in current]
+    return (max(xl, min(xs)), min(xh, max(xs)), max(yl, min(ys)), min(yh, max(ys)))
+
+
+def box_contains(outer: Box, inner: Box) -> bool:
+    return outer[0] <= inner[0] and inner[1] <= outer[1] and outer[2] <= inner[2] and inner[3] <= outer[3]
+
+
+def contract(cell: list[Point], box: Box, angle: tuple[Q, Q], cap: Q) -> Box | None:
+    h = h_lower(*angle)
+    walled = (max(box[0], h), min(box[1], cap - h), max(box[2], h), min(box[3], cap - h))
+    return clip_cell_to_box(cell, walled)
+
+
+def box_max_linear(nx: Q, ny: Q, dx: tuple[Q, Q], dy: tuple[Q, Q]) -> Q:
+    return (nx * dx[1] if nx >= 0 else nx * dx[0]) + (ny * dy[1] if ny >= 0 else ny * dy[0])
+
+
+def box_min_linear(nx: Q, ny: Q, dx: tuple[Q, Q], dy: tuple[Q, Q]) -> Q:
+    return (nx * dx[0] if nx >= 0 else nx * dx[1]) + (ny * dy[0] if ny >= 0 else ny * dy[1])
+
+
+def interval_mul(a: tuple[Q, Q], b: tuple[Q, Q]) -> tuple[Q, Q]:
+    products = (a[0] * b[0], a[0] * b[1], a[1] * b[0], a[1] * b[1])
+    return min(products), max(products)
+
+
+def enclosed_max(c: tuple[Q, Q], s: tuple[Q, Q], dx: tuple[Q, Q], dy: tuple[Q, Q]) -> Q:
+    """max over the box and over normals (cos, sin) in the enclosure of n . d."""
+    px = interval_mul(c, dx)
+    py = interval_mul(s, dy)
+    return px[1] + py[1]
+
+
+def plane_box_min(u: Point, plane: tuple[Q, Q, Q], dx: tuple[Q, Q], dy: tuple[Q, Q]) -> Q | None:
+    """Exact min of u . d over the box meet {n . d >= r}; None when empty."""
+    nx, ny, r = plane
+    polygon = [(dx[0], dy[0]), (dx[1], dy[0]), (dx[1], dy[1]), (dx[0], dy[1])]
+    clipped = clip_polygon(polygon, -nx, -ny, -r)
+    if not clipped:
+        return None
+    return min(u[0] * p[0] + u[1] * p[1] for p in clipped)
+
+
+# ---------------------------------------------------------------------------
+# Certificate reading
+# ---------------------------------------------------------------------------
+
+
+def read_named(directory: Path, name: str):
+    data = gzip.decompress((directory / f"{name}.json.gz").read_bytes())
+    if hashlib.sha256(data).hexdigest() != name:
+        raise ValueError(f"{name}: bytes do not hash to the name")
+    return json.loads(data)
+
+
+class Failure(Exception):
+    pass
+
+
+class Verifier:
+    def __init__(self, directory: Path, manifest_name: str) -> None:
+        self.directory = directory
+        self.manifest = read_named(directory, manifest_name)
+        header = self.manifest["header"]
+        self.cap = parse(header["cap"])
+        self.cells = [[(parse(x), parse(y)) for x, y in cell] for cell in header["cells"]]
+        self.k = len(self.cells)
+        self.pairs = [tuple(p) for p in header["pairs"]]
+        self.root_angles = [(parse(lo), parse(hi)) for lo, hi in header["root_angles"]]
+        self.root_boxes = [tuple(parse(v) for v in box) for box in header["root_boxes"]]
+        self.rows_of_cell: list[list[tuple[Q, Q, Q]]] = []
+        for cell in self.cells:
+            rows = []
+            for e, (x0, y0) in enumerate(cell):
+                x1, y1 = cell[(e + 1) % len(cell)]
+                a, b = y1 - y0, x0 - x1
+                rows.append((a, b, a * x0 + b * y0))
+            self.rows_of_cell.append(rows)
+        self.failures: list[str] = []
+        self.counts: dict[str, int] = {}
+
+    def tick(self, what: str) -> None:
+        self.counts[what] = self.counts.get(what, 0) + 1
+
+    def fail(self, what: str) -> None:
+        self.failures.append(what)
+        print("FAIL", what, flush=True)
+
+    # -- header ---------------------------------------------------------------------
+
+    def check_header(self) -> None:
+        header = self.manifest["header"]
+        assert self.cap == cover.U, self.cap
+        design_cells = {c.name: c for c in cover.build_cover(cover.UNIQUE_24)}
+        for name, cell in zip(header["pattern"], self.cells, strict=True):
+            if name not in design_cells:
+                print("note: synthetic cell", name)
+            else:
+                expected = cover.convex_hull(list(design_cells[name].vertices))
+                if set(expected) != set(cell):
+                    self.fail(f"header cell {name} differs from the design")
+            # counterclockwise and convex
+            n = len(cell)
+            for e in range(n):
+                o, a, b = cell[e], cell[(e + 1) % n], cell[(e + 2) % n]
+                if (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]) <= 0:
+                    self.fail(f"header cell {name} is not strictly counterclockwise")
+        expected_pairs = [(i, j) for i in range(self.k) for j in range(i + 1, self.k)]
+        if self.pairs != expected_pairs:
+            self.fail("header pairs are not all pairs")
+        for lo, hi in self.root_angles:
+            if not hi - lo > HP_HI:
+                self.fail(f"root angle interval [{lo}, {hi}] narrower than pi/2")
+        for cell, box in zip(self.cells, self.root_boxes, strict=True):
+            xs = [p[0] for p in cell]
+            ys = [p[1] for p in cell]
+            if not box_contains(box, (min(xs), max(xs), min(ys), max(ys))):
+                self.fail("root box misses its cell")
+        for key, (lo, hi) in header["half_pi_multiples"].items():
+            k = int(key)
+            m_lo, m_hi = half_pi_multiple(k)
+            if not (parse(lo) <= m_lo and m_hi <= parse(hi)):
+                self.fail(f"half_pi_multiples[{k}] does not enclose k pi/2")
+        self.tick("header")
+
+    def check_trig(self, trig: dict[str, list[str]], limit: int | None, seed: int) -> None:
+        keys = list(trig)
+        if limit is not None and limit < len(keys):
+            keys = random.Random(seed).sample(keys, limit)
+        bad = 0
+        for key in keys:
+            t = parse(key)
+            c_lo, c_hi, s_lo, s_hi, nx, ny = (parse(v) for v in trig[key])
+            my = cos_sin(t)
+            ok = c_lo <= my[0] and my[1] <= c_hi and s_lo <= my[2] and my[3] <= s_hi
+            ok = ok and c_lo <= nx <= c_hi and s_lo <= ny <= s_hi
+            if not ok:
+                bad += 1
+                if bad <= 5:
+                    self.fail(f"trig enclosure at {float(t)} is not an enclosure")
+        self.counts["trig_checked"] = len(keys)
+        self.counts["trig_bad"] = bad
+
+    # -- pairs ----------------------------------------------------------------------
+
+    def planes_of_piece(
+        self, lo: Q, hi: Q, m: Q, g_lo: Q, dx: tuple[Q, Q], dy: tuple[Q, Q]
+    ) -> list[tuple[Q, Q, Q]]:
+        """The possible half-planes (nx, ny, r), nbar . d >= r, of one piece."""
+        if not lo <= m <= hi:
+            raise Failure(f"piece point {m} outside [{lo}, {hi}]")
+        E = most_abs(*dx) + most_abs(*dy)
+        planes: list[tuple[Q, Q, Q]] = []
+        if hi - lo < HP_LO:
+            x = max(m - lo, hi - m)
+            chord = g_lo * (1 - x * x / 2)
+            for angle, base in ((lo, g_lo), (hi, g_lo), (m, chord)):
+                c_lo, c_hi, s_lo, s_hi = cos_sin(angle)
+                if enclosed_max((c_lo, c_hi), (s_lo, s_hi), dx, dy) < base:
+                    continue
+                nx, ny = (c_lo + c_hi) / 2, (s_lo + s_hi) / 2
+                eps = max(c_hi - c_lo, s_hi - s_lo)
+                r = base - eps * E
+                if box_max_linear(nx, ny, dx, dy) < r:
+                    continue
+                planes.append((nx, ny, r))
+        else:
+            c_lo, c_hi, s_lo, s_hi = cos_sin(m)
+            tau = max(m - lo, hi - m) / 2
+            perp = interval_mul((-s_hi, -s_lo), dx)
+            perp2 = interval_mul((c_lo, c_hi), dy)
+            S = most_abs(perp[0] + perp2[0], perp[1] + perp2[1])
+            D = sqrt_upper(most_abs(*dx) ** 2 + most_abs(*dy) ** 2)
+            nx, ny = (c_lo + c_hi) / 2, (s_lo + s_hi) / 2
+            eps = max(c_hi - c_lo, s_hi - s_lo)
+            r = g_lo - 2 * tau * (S + tau * D) - eps * E
+            if box_max_linear(nx, ny, dx, dy) >= r:
+                planes.append((nx, ny, r))
+        return planes
+
+    def check_pieces_cover(
+        self, pieces: list[tuple[Q, Q, Q]], angles_i: tuple[Q, Q], angles_j: tuple[Q, Q], window
+    ) -> bool:
+        """P2: the eight normal sets, within the window modulo 2 pi, lie in the pieces."""
+        merged: list[tuple[Q, Q]] = []
+        for lo, hi, _ in sorted(pieces):
+            if merged and lo <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(merged[-1][1], hi))
+            else:
+                merged.append((lo, hi))
+
+        def covered(lo: Q, hi: Q) -> bool:
+            return any(a <= lo and hi <= b for a, b in merged)
+
+        for a, b in (angles_i, angles_j):
+            for k in range(4):
+                m_lo, m_hi = half_pi_multiple(k)
+                s = (a + m_lo, b + m_hi)
+                if window is None:
+                    if not covered(*s):
+                        return False
+                    continue
+                for turns in (-1, 0, 1):
+                    if turns == 1:
+                        shifted = (s[0] + TWO_PI[0], s[1] + TWO_PI[1])
+                    elif turns == -1:
+                        shifted = (s[0] - TWO_PI[1], s[1] - TWO_PI[0])
+                    else:
+                        shifted = s
+                    lo, hi = max(shifted[0], window[0]), min(shifted[1], window[1])
+                    if lo <= hi and not covered(lo, hi):
+                        return False
+        return True
+
+    def pair_planes(self, node, round_record, pair: int, boxes: list[Box]):
+        """All possible planes of a pair in a round, after checking P2; and the d-box."""
+        i, j = self.pairs[pair]
+        dx = (boxes[j][0] - boxes[i][1], boxes[j][1] - boxes[i][0])
+        dy = (boxes[j][2] - boxes[i][3], boxes[j][3] - boxes[i][2])
+        pieces = [tuple(parse(v) for v in piece) for piece in round_record["pairs"][str(pair)]]
+        window = node["window_map"].get(pair)
+        if not self.check_pieces_cover(pieces, node["angles_q"][i], node["angles_q"][j], window):
+            raise Failure(f"node {node['id']} pair {pair}: pieces do not cover the normals")
+        ai, bi = node["angles_q"][i]
+        aj, bj = node["angles_q"][j]
+        g_lo = gap_lower(ai, bi, aj, bj)
+        per_piece = [self.planes_of_piece(lo, hi, m, g_lo, dx, dy) for lo, hi, m in pieces]
+        return per_piece, pieces, dx, dy
+
+    # -- rows -----------------------------------------------------------------------
+
+    def row_of(self, ref, cuts, node, round_record, boxes, plane_cache):
+        """(columns, coefficients, rhs) of a referenced row, a cut checked by C2."""
+        if ref[0] == "c":
+            s, e = ref[1], ref[2]
+            a, b, c = self.rows_of_cell[s][e]
+            return ((2 * s, 2 * s + 1), (a, b), c)
+        t = ref[1]
+        p, ux, uy, v = cuts[t]
+        i, j = self.pairs[p]
+        if p not in plane_cache:
+            plane_cache[p] = self.pair_planes(node, round_record, p, boxes)
+        per_piece, _, dx, dy = plane_cache[p]
+        least = None
+        for planes in per_piece:
+            for plane in planes:
+                value = plane_box_min((ux, uy), plane, dx, dy)
+                if value is not None and (least is None or value < least):
+                    least = value
+        if least is None:
+            # No plane possible: the pair is infeasible, any cut is valid (vacuous).
+            self.tick("vacuous_cut")
+        elif v > least:
+            raise Failure(f"node {node['id']} cut {t} of pair {p}: v={float(v)} > min {float(least)}")
+        self.tick("cut_ok")
+        return ((2 * i, 2 * i + 1, 2 * j, 2 * j + 1), (ux, uy, -ux, -uy), -v)
+
+    def combination_min(self, multipliers, cost, boxes, cuts, node, round_record, plane_cache) -> Q:
+        """min over the box of (cost + sum y a_row) . z - sum y b_row, exact."""
+        combined = [Q(0)] * (2 * self.k)
+        if cost is not None:
+            combined[cost[0]] += cost[1]
+        right = Q(0)
+        for ref, y_text in multipliers:
+            y = parse(y_text)
+            if y < 0:
+                raise Failure(f"node {node['id']}: negative multiplier")
+            columns, coefficients, rhs = self.row_of(ref, cuts, node, round_record, boxes, plane_cache)
+            for column, coefficient in zip(columns, coefficients, strict=True):
+                combined[column] += y * coefficient
+            right += y * rhs
+        least = Q(0)
+        for column, coefficient in enumerate(combined):
+            box = boxes[column // 2]
+            lo, hi = (box[0], box[1]) if column % 2 == 0 else (box[2], box[3])
+            least += coefficient * (lo if coefficient >= 0 else hi)
+        return least - right
+
+    # -- one node -------------------------------------------------------------------
+
+    def check_node(self, node, parent) -> None:
+        """Every round of one node, given its parent's record (None at the root)."""
+        if parent is None:
+            inherited = list(self.root_boxes)
+            if node["angles_q"] != self.root_angles or node["windows"]:
+                raise Failure("T1: the root's angles or windows are wrong")
+        else:
+            inherited = parent["final_q"]
+        rounds = node["rounds"]
+        if not rounds:
+            if node["closed"] != "cell":
+                raise Failure(f"node {node['id']}: no rounds but closed {node['closed']}")
+            for s in range(self.k):
+                if contract(self.cells[s], inherited[s], node["angles_q"][s], self.cap) is None:
+                    self.tick("closed_cell_ok")
+                    return
+            raise Failure(f"node {node['id']}: closed 'cell' but every contracted box is nonempty")
+        previous_next = None
+        for r, record in enumerate(rounds):
+            boxes = [tuple(parse(v) for v in box) for box in record["boxes"]]
+            # B1 / B2: the recorded box contains the one derived here.
+            if r == 0:
+                for s in range(self.k):
+                    mine = contract(self.cells[s], inherited[s], node["angles_q"][s], self.cap)
+                    if mine is None:
+                        raise Failure(f"node {node['id']}: round 0 box of square {s} should be empty")
+                    if not box_contains(boxes[s], mine):
+                        raise Failure(f"node {node['id']}: round 0 box of square {s} too small")
+            else:
+                for s in range(self.k):
+                    if not box_contains(boxes[s], previous_next[s]):
+                        raise Failure(f"node {node['id']}: round {r} box of square {s} too small")
+            cuts = [(c[0], parse(c[1]), parse(c[2]), parse(c[3])) for c in record.get("cuts", [])]
+            plane_cache: dict = {}
+            if "closed_pair" in record:
+                p, kind = record["closed_pair"]
+                i, j = self.pairs[p]
+                dx = (boxes[j][0] - boxes[i][1], boxes[j][1] - boxes[i][0])
+                dy = (boxes[j][2] - boxes[i][3], boxes[j][3] - boxes[i][2])
+                if kind == "disc":
+                    far = most_abs(*dx) ** 2 + most_abs(*dy) ** 2
+                    if not far < 1:
+                        raise Failure(f"node {node['id']}: disc closure with max |d|^2 = {float(far)}")
+                    self.tick("closed_disc_ok")
+                elif kind == "pair":
+                    per_piece, _, _, _ = self.pair_planes(node, record, p, boxes)
+                    if any(planes for planes in per_piece):
+                        raise Failure(f"node {node['id']}: pair closure but a plane is possible")
+                    self.tick("closed_pair_ok")
+                else:
+                    raise Failure(f"node {node['id']}: unknown pair closure {kind}")
+                if r != len(rounds) - 1 or node["closed"] != kind:
+                    raise Failure(f"node {node['id']}: pair closure not final")
+                return
+            if "farkas" in record:
+                value = self.combination_min(record["farkas"], None, boxes, cuts, node, record, plane_cache)
+                if not value > 0:
+                    raise Failure(f"node {node['id']}: Farkas combination min {float(value)} <= 0")
+                self.tick("closed_lp_ok")
+                if r != len(rounds) - 1 or node["closed"] != "lp":
+                    raise Failure(f"node {node['id']}: lp closure not final")
+                return
+            # C4: bounds in order.
+            current = [list(box) for box in boxes]
+            for col, sign, value_text, multipliers in record.get("bounds", []):
+                value = parse(value_text)
+                frozen = [tuple(b) for b in current]
+                bound = self.combination_min(multipliers, (col, Q(sign)), frozen, cuts, node, record, plane_cache)
+                if value > bound:
+                    raise Failure(f"node {node['id']}: bound on column {col} sign {sign}: {float(value)} > {float(bound)}")
+                s, axis = divmod(col, 2)
+                slot = 2 * axis + (0 if sign > 0 else 1)
+                current[s][slot] = value if sign > 0 else -value
+                self.tick("bound_ok")
+            if record.get("emptied") == "bounds":
+                if not any(b[0] > b[1] or b[2] > b[3] for b in current):
+                    raise Failure(f"node {node['id']}: emptied by bounds but no bound crossed")
+                if node["closed"] != "obbt":
+                    raise Failure(f"node {node['id']}: emptied but not closed obbt")
+                self.tick("closed_obbt_ok")
+                return
+            tightened = []
+            for s in range(self.k):
+                clipped = clip_cell_to_box(self.cells[s], tuple(current[s]))
+                if clipped is None:
+                    if record.get("emptied") != "cell" or node["closed"] != "obbt":
+                        raise Failure(f"node {node['id']}: box misses its cell but not closed obbt/cell")
+                    self.tick("closed_obbt_ok")
+                    return
+                tightened.append(clipped)
+            if record.get("emptied") == "cell":
+                raise Failure(f"node {node['id']}: emptied cell but every box meets its cell")
+            if "next" in record:
+                nxt = [tuple(parse(v) for v in box) for box in record["next"]]
+                for s in range(self.k):
+                    if not box_contains(nxt[s], tightened[s]):
+                        raise Failure(f"node {node['id']}: round {r} next box of square {s} too small")
+                previous_next = nxt
+            else:
+                previous_next = boxes
+        if node["closed"] is not None:
+            raise Failure(f"node {node['id']}: closed {node['closed']} without a closing record")
+        # Open node: final boxes contain the last derived boxes.
+        final = node["final_q"]
+        for s in range(self.k):
+            if not box_contains(final[s], previous_next[s]):
+                raise Failure(f"node {node['id']}: final box of square {s} too small")
+        # P4 for pair splits.
+        split = node["split"]
+        if "pair" in split:
+            p, windows = split["pair"]
+            record = rounds[-1]
+            boxes = [tuple(parse(v) for v in box) for box in record["boxes"]]
+            per_piece, pieces, _, _ = self.pair_planes(node, record, p, boxes)
+            wins = [(parse(lo), parse(hi)) for lo, hi in windows]
+            for planes, (lo, hi, _) in zip(per_piece, pieces, strict=True):
+                if not planes:
+                    continue
+                if not any(a <= lo and hi <= b for a, b in wins):
+                    raise Failure(f"node {node['id']}: pair split leaves piece [{lo},{hi}] uncovered")
+            self.tick("pair_split_ok")
+        else:
+            self.tick("angle_split_ok")
+        self.tick("open_ok")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("directory", type=Path)
+    parser.add_argument("--manifest", default=None)
+    parser.add_argument("--sample", type=int, default=100)
+    parser.add_argument("--deepest", type=int, default=20)
+    parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--trig", default="2000", help="count or 'all'")
+    parser.add_argument("--report", type=Path, default=None)
+    args = parser.parse_args()
+    directory = args.directory
+    manifest_name = args.manifest
+    if manifest_name is None:
+        readme = (directory / "README.txt").read_text(encoding="utf-8")
+        manifest_name = readme.strip().splitlines()[-1].split(":")[-1].strip().removesuffix(".json.gz")
+    started = time.time()
+    v = Verifier(directory, manifest_name)
+    print("manifest", manifest_name)
+    print("summary", json.dumps(v.manifest["summary"]))
+    v.check_header()
+    trig = read_named(directory, v.manifest["trig"])["trig"]
+    v.check_trig(trig, None if args.trig == "all" else int(args.trig), args.seed)
+    print("trig", v.counts.get("trig_checked"), "checked,", v.counts.get("trig_bad"), "bad", flush=True)
+
+    # Pass 1: the tree. Keep a compact index of every node.
+    index: dict[int, dict] = {}
+    chunk_of: dict[int, int] = {}
+    children: dict[int, list[int]] = {}
+    total = 0
+    for c, chunk in enumerate(v.manifest["chunks"]):
+        for node in read_named(directory, chunk)["nodes"]:
+            ident = node["id"]
+            if ident in index:
+                v.fail(f"duplicate node id {ident}")
+            entry = {
+                "id": ident,
+                "parent": node["parent"],
+                "angles": node["angles"],
+                "windows": node["windows"],
+                "closed": node["closed"],
+                "split": node.get("split"),
+                "final": node.get("final"),
+            }
+            index[ident] = entry
+            chunk_of[ident] = c
+            children.setdefault(node["parent"], []).append(ident)
+            total += 1
+    print("nodes", total, "chunks", len(v.manifest["chunks"]), flush=True)
+    # T1-T3
+    roots = children.get(None, [])
+    if len(roots) != 1:
+        v.fail(f"T1: {len(roots)} roots")
+    depth: dict[int, int] = {}
+    leaves_closed = 0
+    reasons: dict[str, int] = {}
+    stack = [(roots[0], 0)] if roots else []
+    reached = 0
+    while stack:
+        ident, d = stack.pop()
+        depth[ident] = d
+        reached += 1
+        node = index[ident]
+        kids = children.get(ident, [])
+        if node["closed"] is not None:
+            leaves_closed += 1
+            reasons[node["closed"]] = reasons.get(node["closed"], 0) + 1
+            if kids:
+                v.fail(f"T3: closed node {ident} has children")
+            continue
+        split = node["split"]
+        if split is None or node["final"] is None:
+            v.fail(f"T3: open node {ident} has no split or final")
+            continue
+        if "angle" in split:
+            s, a_text = split["angle"]
+            a = parse(a_text)
+            lo, hi = parse(node["angles"][s][0]), parse(node["angles"][s][1])
+            if not lo <= a <= hi:
+                v.fail(f"T2: node {ident} angle split point outside the interval")
+            expected = []
+            for part in ((node["angles"][s][0], a_text), (a_text, node["angles"][s][1])):
+                angles = list(node["angles"])
+                angles[s] = list(part)
+                expected.append((json.dumps(angles), json.dumps(node["windows"])))
+            got = sorted((json.dumps(index[c]["angles"]), json.dumps(index[c]["windows"])) for c in kids)
+            if got != sorted(expected):
+                v.fail(f"T2: node {ident} angle split children mismatch")
+        else:
+            p, windows = split["pair"]
+            expected = []
+            for lo, hi in windows:
+                wins = [w for w in node["windows"] if w[0] != p] + [[p, lo, hi]]
+                expected.append((json.dumps(node["angles"]), json.dumps(sorted(wins))))
+            got = sorted((json.dumps(index[c]["angles"]), json.dumps(sorted(index[c]["windows"]))) for c in kids)
+            if got != sorted(expected):
+                v.fail(f"T2: node {ident} pair split children mismatch")
+        for c in kids:
+            stack.append((c, d + 1))
+    if reached != total:
+        v.fail(f"T3: {total - reached} nodes unreachable from the root")
+    complete = v.manifest["summary"].get("complete")
+    print("tree: reached", reached, "closed leaves", leaves_closed, "max depth", max(depth.values()) if depth else None, "reasons", reasons, "summary.complete", complete, flush=True)
+    if not complete:
+        v.fail("summary.complete is false")
+
+    # Pass 2: node checks. Pick the sample: the deepest closed nodes, random closed nodes
+    # of each reason, and every ancestor of each.
+    closed_ids = [i for i, n in index.items() if n["closed"] is not None]
+    rng = random.Random(args.seed)
+    chosen: set[int] = set()
+    if args.all:
+        chosen = set(index)
+    else:
+        by_depth = sorted(closed_ids, key=lambda i: -depth[i])
+        chosen.update(by_depth[: args.deepest])
+        lp_ids = [i for i in closed_ids if index[i]["closed"] == "lp"]
+        chosen.update(rng.sample(lp_ids, min(args.sample, len(lp_ids))))
+        other_ids = [i for i in closed_ids if index[i]["closed"] != "lp"]
+        chosen.update(rng.sample(other_ids, min(args.sample, len(other_ids))))
+        # all ancestors
+        for i in list(chosen):
+            p = index[i]["parent"]
+            while p is not None and p not in chosen:
+                chosen.add(p)
+                p = index[p]["parent"]
+    print("checking", len(chosen), "nodes fully", flush=True)
+    # Load the needed chunks lazily, one at a time, in id order.
+    needed_by_chunk: dict[int, list[int]] = {}
+    for i in chosen:
+        needed_by_chunk.setdefault(chunk_of[i], []).append(i)
+    full: dict[int, dict] = {}
+
+    def prepared(node: dict) -> dict:
+        node["angles_q"] = [(parse(lo), parse(hi)) for lo, hi in node["angles"]]
+        node["window_map"] = {w[0]: (parse(w[1]), parse(w[2])) for w in node["windows"]}
+        if node.get("final") is not None:
+            node["final_q"] = [tuple(parse(x) for x in box) for box in node["final"]]
+        return node
+
+    # Parents must be available when a child is checked: parents have smaller ids and so
+    # earlier or equal chunks; keep a parent cache of checked nodes.
+    checked = 0
+    failed = 0
+    for c in sorted(needed_by_chunk):
+        wanted = set(needed_by_chunk[c])
+        for node in read_named(directory, v.manifest["chunks"][c])["nodes"]:
+            if node["id"] in wanted:
+                full[node["id"]] = prepared(node)
+        for ident in sorted(needed_by_chunk[c]):
+            node = full[ident]
+            parent = full.get(node["parent"]) if node["parent"] is not None else None
+            if node["parent"] is not None and parent is None:
+                v.fail(f"node {ident}: parent {node['parent']} not loaded")
+                continue
+            try:
+                v.check_node(node, parent)
+            except Failure as exc:
+                failed += 1
+                v.fail(str(exc))
+            checked += 1
+            if checked % 200 == 0:
+                print("  checked", checked, "at", round(time.time() - started, 1), "s", flush=True)
+        # Drop records no longer needed as parents (keep only open ones).
+        for ident in list(full):
+            if full[ident]["closed"] is not None:
+                del full[ident]
+    deepest_checked = max((depth[i] for i in chosen), default=None)
+    result = {
+        "manifest": manifest_name,
+        "nodes": total,
+        "closed_leaves": leaves_closed,
+        "reasons": reasons,
+        "max_depth": max(depth.values()) if depth else None,
+        "checked_nodes": checked,
+        "deepest_checked": deepest_checked,
+        "node_failures": failed,
+        "all_failures": len(v.failures),
+        "counts": v.counts,
+        "seconds": round(time.time() - started, 1),
+        "verdict": "ok" if not v.failures else "FAILED",
+        "failures": v.failures[:50],
+    }
+    print(json.dumps(result, indent=1))
+    if args.report:
+        args.report.write_text(json.dumps(result, indent=1) + "\n")
+    return 0 if not v.failures else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

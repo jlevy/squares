@@ -1,0 +1,23 @@
+{
+ "times": [
+  {
+   "step": 0,
+   "owner": "corner-SW",
+   "seconds": 7.37
+  },
+  {
+   "step": 1,
+   "owner": "side-N0",
+   "seconds": 10.35
+  },
+  {
+   "step": 2,
+   "owner": "side-W0",
+   "seconds": 24.84
+  }
+ ],
+ "rows": 192,
+ "rows_sha256": "92c74d0524ddc15ff4c8d42e268bda5fd4cb20cc781cc0a5d0c6344573f4167a",
+ "collision_regions": 421,
+ "module": "/home/user/squares/packing/src/sqpack/hull_kernel/producer.py"
+}

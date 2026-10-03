@@ -1936,6 +1936,22 @@ def _browser_code_in_files(context: Context) -> str:
     )
 
 
+def _integrity_ceremony(context: Context) -> str:
+    """Digest checks of the repository against itself only ever leave (OR-16).
+
+    A module hashing its own source, or an `==` on a digest, is counted in every tracked
+    Python file outside the allowlist of named boundaries in
+    `devtools/integrity-ceremony.yaml`, and each file's count is held to a baseline that
+    only falls. The audit of 2026-10-03 found the pattern re-added on four dates after
+    OR-16 was written, each time charging a re-run of retained work, so it has a count
+    and the count has a gate. Cheap, and in the edit tier: a digest check of our own
+    files is refused at the keyboard, not in review.
+    """
+    output = _module(context, "devtools.check_integrity_ceremony")
+    _require_text(output, "none above the baseline")
+    return output
+
+
 def _workbench_frontend(context: Context) -> str:
     """Check the probe files, then build once and exercise the page in Chromium.
 
@@ -1977,8 +1993,20 @@ def _workbench_frontend(context: Context) -> str:
 
 
 def _type_floor(context: Context) -> str:
+    """BasedPyright over the project, threaded across the cpus the selection leaves free.
+
+    It is one process outer `--jobs` cannot divide, so the pull request runs it alone at
+    `--jobs 1`, and single-threaded it left three of the runner's four cpus idle. Its hosted
+    wall read 64 to 112 s on PR 307 as the n17 kernel grew, and 111.93 s in run
+    37012208677 failed the tier's 111 s ceiling with zero findings. `--threads` divides
+    the check inside the step, sized by the behavioural lane's rule (`_pytest_workers`,
+    `cpus - jobs + 1`), so beside other steps it stays at one thread and total
+    concurrency stays near the cpu count.
+    """
     basedpyright = _required_tool(context, "basedpyright")
-    output = _commands(context, ((basedpyright,),))
+    threads = _pytest_workers(context.jobs)
+    command = (basedpyright, "--threads", str(threads)) if threads > 1 else (basedpyright,)
+    output = _commands(context, (command,))
     _require_text(output, "0 errors, 0 warnings, 0 notes")
     return output
 
@@ -3851,6 +3879,15 @@ STEPS: tuple[Step, ...] = (
             "packing/uv.lock",
         ),
     ),
+    # 3.8s of cpu locally over 1,334 Python files: a byte prescan skips the files that
+    # mention no digest and the rest parse in threads. Not `broad`, so `--edit` runs it,
+    # which is where a digest check of our own files should be refused (OR-16).
+    Step(
+        "integrity ceremony never grows",
+        _integrity_ceremony,
+        fast=True,
+        touches=("*.py", "packing/devtools/integrity-ceremony.yaml", *_TOOLCHAIN),
+    ),
     # Hosted frontend pair: Chromium 59.09s, biome 91.69s. `--jobs 2` without the hint
     # starts biome and liveness, and Chromium is the late tail of that job.
     Step(
@@ -5247,6 +5284,9 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         "browser floor (biome, eslint, tsc, node:test)",
         "browser floor liveness tests",
         "browser code lives in files (embedded JavaScript, probes)",
+        # The same shape as the embedded-JavaScript guard: a static scan of the tracked
+        # Python and one tracked register, with no clock, network or history consulted.
+        "integrity ceremony never grows",
         "workbench browser behavior in Chromium",
         # The same shape as the workbench step: the tracked pages, rendered and measured
         # in the pinned browser, with no clock, network or history consulted.

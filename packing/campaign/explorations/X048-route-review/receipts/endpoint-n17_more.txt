@@ -1,0 +1,35 @@
+generic-point identity checks (closing gaps nonzero there):
+  (t,b)=(1/3,1/5): build asserted (cross gap nonzero), retrying with assertion disabled
+  (t,b)=(1/3,1/5): identity holds = True, F2 = +0.08718
+  (t,b)=(37/100,33/100): identity holds = True, F2 = -0.0307
+  (t,b)=(2/7,3/11): identity holds = True, F2 = +0.3383
+
+coordinate duals: a such that sg*h_j <= a*sigma on the first-order cone (None = infeasible)
+  +eta5    : a = None
+  +xi9     : a = None
+  +eta16   : a = None
+  -om11    : a = 175.84832884246197
+  -om16    : a = 74.17278144344579
+  -om8     : a = 69.28187314400809
+  -xi8     : a = 68.28187314405291
+  +om11    : a = 54.93064652639251
+  +xi3     : a = 52.297830413477314
+  +om8     : a = 51.49789999424309
+  -eta8    : a = 50.49789999424795
+  +om10    : a = 47.64329755291144
+  +om12    : a = 47.643297552911314
+  +om9     : a = 47.64329755291117
+  ... smallest: [('xi4', -1, 0.0), ('eta5', -1, 0.0), ('eta7', -1, 0.0)]
+infeasible duals (coordinate unbounded on cone): [('eta5', 1), ('xi9', 1), ('eta16', 1)]
+max a = 175.848  => first-order conical slope kappa_inf = 1/max a = 0.00569 (side per unit non-slider coordinate)
+
+least-negative of the 135 unavailable owner options (gap, pair, owner, axis, sign):
+   (-0.055799846575197216, 14, 17, 17, 0, 1)
+   (-0.055799846575197216, 7, 14, 7, 0, -1)
+   (-0.07070877624452966, 12, 16, 16, 1, 1)
+   (-0.14746499248663839, 3, 11, 3, 0, 1)
+   (-0.26815866165929275, 4, 10, 4, 0, 1)
+   (-0.2691076173804284, 16, 17, 17, 0, 1)
+   (-0.2691076173804284, 8, 16, 8, 0, -1)
+   (-0.27642676682037987, 3, 9, 9, 0, 1)
+smallest strict pair separations (best axis): [(0.023737743195405208, 6, 13), (0.023737743195405208, 11, 13), (0.03708001558965819, 5, 6), (0.03708001558965819, 6, 7), (0.039469103927807316, 14, 16), (0.056838696870287315, 10, 11), (0.08057644006569252, 12, 13), (0.11346013251256405, 7, 17)]
