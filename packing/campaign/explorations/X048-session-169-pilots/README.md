@@ -86,8 +86,13 @@ Serialization took 0.414 s before and 0.379 s after; pipeline process peaks were
 192,638,976 and 161,914,880 bytes.
 
 [The comparison receipt](receipts/comparison.json) and before/after receipts retain the
-measurements. One canonical copy of each identical certificate pair is saved under
-`objects-A/` and `objects-W7/`; the duplicate candidate is not published.
+measurements. The small W7 control is saved under `objects-W7/`. The 2.7 MB compressed A
+node is retained in the operator local `runs/w5-A-baseline-objects/` and
+`control/p01/retained-large-objects-A/`, outside Git: publishing it exceeded the
+repository mutation-snapshot size guard.
+The first replay command below regenerates its canonical bytes; receipts retain existing
+certificate identifiers and the direct comparison outcome.
+Duplicate candidate objects are not published.
 Peak memory is the actual Python process high-water mark through producer completion,
 including imports and frame construction.
 The observer scans the memo and has lower overhead after eviction; the wall difference
@@ -107,7 +112,7 @@ Replay from `packing/` with the pinned environment:
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.profile_n17_partner_memo NEW_OUTPUT
 uv run --frozen --all-extras --group dev python -m devtools.profile_n17_partner_memo PROFILE_OUTPUT --profile
-uv run --frozen --all-extras --group dev python -m devtools.check_n17_subpattern --check-saved campaign/explorations/X048-session-169-pilots/objects-A --max-seconds 120
+uv run --frozen --all-extras --group dev python -m devtools.check_n17_subpattern --check-saved NEW_OUTPUT --max-seconds 120
 ```
 
 Baseline production used unchanged `234a07f4` producer code; candidate measurements used

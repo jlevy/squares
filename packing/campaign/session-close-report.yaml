@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 167
+count: 168
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 113
-  sessions_unmeasured: 54
+  sessions_unmeasured: 55
   attributed:
     rollups: 276
     turns: 66468
@@ -2904,4 +2904,14 @@ sessions:
   tool_errors: 17
   one_off_code: 274
   wall_hours: 12.68
+  codex_receipts: []
+- id: session-169
+  title: "Bounded n17 producer memo retention investigation"
+  status: in_progress
+  primary_bead: think-wn6x
+  phases: 3
+  measured: false
+  unmeasured_reason: >-
+    declares no resource measurement
+  rollups: []
   codex_receipts: []
