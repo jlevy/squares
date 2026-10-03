@@ -13,7 +13,7 @@ session:
   deadline_at: '2026-10-03T21:46:09.780424+00:00'
   branch: guzhou/n17-p01-partner-memo
   primary_bead: think-wn6x
-  status: in_progress
+  status: stopped
   goal: Measure obsolete producer memo retention and adopt only a byte-equivalent, materially
     better bounded change.
   workflow_phases:
@@ -72,12 +72,11 @@ session:
     clock_role: finalization
     objective: Reconcile M1 overlap, observe required CI, repair only own deterministic failures,
       finalize evidence and handoff.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: The bounded primary result is decided; avoid further low-information compute.
-      The four-hour ceiling is shortened prospectively to this30-minute finalization reserve
-      because the primary deliverable is decided. The four-hour ceiling is shortened prospectively
-      to this30-minute finalization reserve because the primary deliverable is decided.
+      The four-hour ceiling is shortened prospectively to this 30-minute finalization reserve
+      because the primary deliverable is decided.
     budget_minutes: 30
     started_at: '2026-10-03T21:16:09.780424+00:00'
     deadline_at: '2026-10-03T21:46:09.780424+00:00'
@@ -85,10 +84,14 @@ session:
     validation_command: uv run --frozen --all-extras --group dev packing-ledger check
     kill_condition: Ownership overlap, invalid equivalence, resource guard, or deadline.
     fallback: Retain the measured limitation without a scientific or speedup claim.
-    outcome: null
+    outcome: Removed duplicate implementation after live M1 drift; fixed own document-map/generated-view
+      omissions and snapshot-size failure without changing guards; all required jobs passed
+      at4e91f6939.
     evidence: *id001
-    stop_reason: null
-    next_action: Push only our layer and observe terminal required checks.
+    stop_reason: Bounded deliverable achieved; final metadata receives a separate current-head
+      CI observation.
+    next_action: Review Draft PR325 under think-wn6x; upstream think-tmz6 remains the research
+      coordinator. No merge or new compute is authorized by this closeout.
   budget:
     wall_minutes: 74.47967373333333
     max_cycles: 8
@@ -104,7 +107,9 @@ session:
   progress:
     metric: Frozen equivalence-safe W5 decisions with retained representative evidence
     before: No measured memo-lifetime comparison.
-    after: null
+    after: One retained21.0% producer-peak comparison with exact-byte equivalence; M1 owns implementation,
+      our layer adds independent evidence/instrument/regression;83 current-parent targeted tests
+      and hosted fast prerequisites pass.
   delegations:
   - task: w3_direct
     operator: Codex GPT-6.1 Sol high
@@ -114,8 +119,7 @@ session:
       benign success and timeout-descendant cleanup.
     evidence:
     - packing/campaign/explorations/X048-session-169-pilots/README.md
-    files:
-    - packing/campaign/explorations/X048-session-169-pilots/README.md
+    files: []
     checks:
     - Read-only source and retained-receipt review.
     uncertainty: No target experiment performed by this delegate.
@@ -140,11 +144,10 @@ session:
     recording: retrospective
     outcome: Proposed obsolete accepted-row PartnerMemo retirement, subject to profile and exact-byte
       equivalence.
-    evidence:
+    evidence: &id002
     - packing/campaign/explorations/X048-session-169-pilots/README.md
-    files:
-    - packing/campaign/explorations/X048-session-169-pilots/README.md
-    checks:
+    files: &id003 []
+    checks: &id004
     - Read-only source and retained-receipt review.
     uncertainty: No target experiment performed by this delegate.
     elapsed_seconds: null
@@ -158,9 +161,9 @@ session:
     validation_command: Coordinator source/evidence check.
     kill_condition: Outside declared scope or deadline.
     fallback: Return uncertainty.
-    write_scope:
+    write_scope: &id005
     - Read-only upstream; w3_direct separately authorized local supervisor outside repository.
-    excluded_commands:
+    excluded_commands: &id006
     - No Git/bead/remote write; no target computation.
   - task: w3_creative
     operator: Codex GPT-6.1 Sol xhigh
@@ -170,8 +173,7 @@ session:
       claim or code change.
     evidence:
     - packing/campaign/explorations/X048-session-169-pilots/README.md
-    files:
-    - packing/campaign/explorations/X048-session-169-pilots/README.md
+    files: []
     checks:
     - Read-only source and retained-receipt review.
     uncertainty: No target experiment performed by this delegate.
@@ -190,8 +192,34 @@ session:
     - Read-only upstream; w3_direct separately authorized local supervisor outside repository.
     excluded_commands:
     - No Git/bead/remote write; no target computation.
+  - task: Narrow cache-lifetime soundness review
+    operator: Codex GPT-6.1 Sol xhigh
+    status: completed
+    recording: retrospective
+    outcome: No correctness/id-reuse/adaptive-predecessor defect found; observer overhead and
+      process-high-water measurement caveats recorded.
+    evidence: *id002
+    files: *id003
+    checks: *id004
+    uncertainty: Static review only; experiments independently run by the primary executor.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: No further delegate work.
+    phase: 2
+    budget_minutes: 20
+    started_at: null
+    deadline_at: null
+    expected_output: Bounded W3 recommendation.
+    validation_command: Coordinator source/evidence check.
+    kill_condition: Outside declared scope or deadline.
+    fallback: Return uncertainty.
+    write_scope: *id005
+    excluded_commands: *id006
   outputs:
   - packing/campaign/explorations/X048-session-169-pilots/README.md
+  - packing/campaign/resource-usage/codex-session-169.yaml
+  - packing/devtools/profile_n17_partner_memo.py
+  - packing/tests/test_hull_kernel_caches.py
   checks:
   - Clean-base packing-ledger check passed at 234a07f4.
   - 'full gate: fast at 234a07f4: failed (bounded subprocess runner explicitly refuses Windows)'
@@ -199,9 +227,21 @@ session:
     repeat is retained separately.
   - A and W7 canonical seed/node bytes, rounds and counts match; saved A checker passes without
     producer import.
-  stop_reason: null
-  next_action: Finish PR325 CI and measured session closure; no additional scientific run is
-    opened.
+  - 'full gate: fast at 4e91f69392086c48161a61be1c040526fe8b1230: passed (hosted partitioned
+    fast gate; packing-required SUCCESS)'
+  - Hosted pages-required and merges-into-main passed at4e91f6939. Final metadata push is checked
+    separately before handoff.
+  - After parent drift,83 targeted tests passed in18.45s; focused snapshot-size control passed
+    after large A objects were retained outside Git.
+  stop_reason: Scoped W5 result achieved and hosted fast CI passed. This evidence-only layer
+    closes its own administration without replacing the live PR307 coordinator handoff or taking
+    another research lane.
+  next_action: Review Draft PR325 under think-wn6x; upstream think-tmz6 remains the research
+    coordinator. No merge or new compute is authorized by this closeout.
+  ended_at: '2026-10-03T21:31:17.791691+00:00'
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-session-169.yaml
+  handoff_role: administrative_closeout
 ---
 # Bounded producer memory investigation
 
