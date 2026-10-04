@@ -2,14 +2,14 @@
 
 # Defect log
 
-513 defects recorded across the packing toolchain.
+516 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
 ## The short version
 
-- **104 soundness defects** — the system asserting something false about the mathematics. 80 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **119 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358, D-400 repeats D-398, D-422 repeats D-371, D-424 repeats D-144, D-427 repeats D-413, D-451 repeats D-442, D-452 repeats D-442, D-454 repeats D-442, D-458 repeats D-443, D-470 repeats D-458, D-471 repeats D-459, D-488 repeats D-432, D-502 repeats D-488, D-509 repeats D-490.
+- **107 soundness defects** — the system asserting something false about the mathematics. 83 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **122 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358, D-400 repeats D-398, D-422 repeats D-371, D-424 repeats D-144, D-427 repeats D-413, D-451 repeats D-442, D-452 repeats D-442, D-454 repeats D-442, D-458 repeats D-443, D-470 repeats D-458, D-471 repeats D-459, D-488 repeats D-432, D-502 repeats D-488, D-509 repeats D-490.
 - **72 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 302 | a human or agent reading the work against a checklist |
+| `review` | 303 | a human or agent reading the work against a checklist |
 | `anomaly` | 16 | a result that made no sense, chased down |
-| `inspection` | 63 | reading the code or the design with intent |
+| `inspection` | 65 | reading the code or the design with intent |
 | `drift_check` | 17 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 82 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 82 of 513, and none of the 104 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 82 of 516, and none of the 107 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,15 +34,15 @@ The line worth reading twice: **the automated gate caught 82 of 513, and none of
 | engine | 11 |
 | quench | 23 |
 | verifier | 14 |
-| record | 159 |
+| record | 160 |
 | tooling | 192 |
-| docs | 114 |
+| docs | 116 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 104 |
+| soundness | 107 |
 | validity | 127 |
 | bookkeeping | 193 |
 | robustness | 70 |
@@ -174,6 +174,9 @@ This is the actionable list.
 | D-505 | Bentz 2016 transcription moved the finishing line of Theorems 9 and 11 | docs |
 | D-506 | Bentz 2016 transcription inverted Lemma 7's bound and rewrote its lemma reference | docs |
 | D-508 | Rung-0 records counted the reader's branch nodes as leaf certificates | record |
+| D-514 | The Erdős–Graham transcription stated Theorem (1) as a two-sided bound the paper does not prove | docs |
+| D-515 | The McClenagan transcription swapped Montgomery's exponent, and the record then faulted McClenagan for it | docs |
+| D-516 | The register held Nagamochi 2005's Theorem 2 as verified and rested 287 case floors on it, though its Lemma 1 is false | record |
 
 ## Still open
 
@@ -769,6 +772,9 @@ This is the actionable list.
 | [D-511](docs/project/reviews/review-2026-10-01-post-optimality-w3-opening.md) | 2026-10-01 | tooling | robustness |  | `review` | medium | fixed | Half-angle witness export declared a schema absent beside its output |
 | [D-512](packing/devtools/repo_links.py) | 2026-10-01 | tooling | bookkeeping | conservative | `drift_check` | medium | fixed | The deployed site dropped every record link into the archive and the campaign |
 | [D-513](packing/tests/site_browser.py) | 2026-10-02 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The site's table-layout tests skipped on every pull request, and read hinted text on Linux |
+| [D-514](packing/campaign/explorations/X-049-families-shading-and-the-large-n-limit.md) | 2026-10-02 | docs | soundness | flattering | `inspection` | medium | fixed | The Erdős–Graham transcription stated Theorem (1) as a two-sided bound the paper does not prove |
+| [D-515](packing/resources/papers/mcclenagan-2026-optimally-packing-large-square.md) | 2026-10-02 | docs | soundness | flattering | `inspection` | medium | fixed | The McClenagan transcription swapped Montgomery's exponent, and the record then faulted McClenagan for it |
+| [D-516](docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md) | 2026-10-02 | record | soundness | flattering | `review` | high | fixed | The register held Nagamochi 2005's Theorem 2 as verified and rested 287 case floors on it, though its Lemma 1 is false |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

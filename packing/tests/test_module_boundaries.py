@@ -322,6 +322,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         "exhaustive-2",
         "exhaustive-3",
         "screen",
+        "regularized-views",
         "macos-portability",
     ):
         raw_steps = _mapping(jobs[job_name])["steps"]
@@ -560,6 +561,12 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         "/packing/resources/web/franciscouzo-square-packing-2026-09-27/",
         "/packing/resources/web/de-winter-square-packing-211-2026-09-16/",
         "/packing/resources/papers/kingbird-square-29-provenance.svg",
+        # X-049's two censuses compare against JSON retained beside the exploration, and
+        # the campaign history is otherwise outside the slice; without this directory the
+        # family census reports its output missing, as it did on jlevy/squares#305.
+        "/packing/campaign/explorations/",
+        "!/packing/campaign/explorations/*",
+        "/packing/campaign/explorations/X049-families-data/",
         "/packages/workbench/",
         "/vendor/kpress/",
     } <= sparse
@@ -591,6 +598,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
             "known-best n=1..324 atlas rebuild",
             "finer-net dilation-limit record, 720 steps",
             "exact rational grid replay",
+            "regularized atlas views re-derive exactly",
             "negative controls",
             "finer-net dilation-limit record, 1440 steps",
             "threshold dilation-limit record, 720 steps",

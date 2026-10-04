@@ -1,0 +1,725 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a2f9102eba6720d45.jsonl
+    sha256: d13020e7e7b5c249ffe415c23ed7e98f242f36e42f8f3e08c257b0c65f9ddbef
+    bytes: 5491266
+    records: 1737
+    session_id: 6179239e-fec5-52e8-aabb-a0e229f3f822
+    harness_versions:
+    - 2.1.287
+  span:
+    started_at: '2026-10-02T17:19:14.625Z'
+    ended_at: '2026-10-02T20:11:31.641Z'
+    wall_seconds: 10337.016
+  turns:
+    assistant: 758
+    sidechain: 758
+    by_model:
+      model-withheld-a: 757
+      <synthetic>: 1
+    by_thinking_level:
+      xhigh: 757
+      None: 1
+    by_model_and_thinking_level:
+      model-withheld-a @ xhigh: 757
+      <synthetic> @ None: 1
+    by_branch:
+      claude/ecstatic-archimedes-62hj6a: 758
+    latency:
+      count: 711
+      total_seconds: 3115.742
+      median_seconds: 2.134
+      max_seconds: 48.075
+  tokens:
+    cache_creation_input_tokens: 2950623
+    cache_read_input_tokens: 317495497
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 2950623
+    input_tokens: 1522
+    output_tokens: 12457
+    thinking_tokens: 4187
+  tokens_by_thinking_level:
+    None:
+      cache_creation_input_tokens: 0
+      cache_read_input_tokens: 0
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 0
+      input_tokens: 0
+      output_tokens: 0
+    xhigh:
+      cache_creation_input_tokens: 2950623
+      cache_read_input_tokens: 317495497
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 2950623
+      input_tokens: 1522
+      output_tokens: 12457
+      thinking_tokens: 4187
+  tool_calls:
+    total: 433
+    total_seconds: 1426.524
+    share_of_wall: 0.138
+    errors: 2
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 89
+      total_seconds: 303.426
+      median_seconds: 1.052
+      max_seconds: 43.422
+    by_tool:
+      Bash:
+        count: 408
+        total_seconds: 1423.608
+        median_seconds: 0.623
+        max_seconds: 148.342
+      Edit:
+        count: 11
+        total_seconds: 1.278
+        median_seconds: 0.11
+        max_seconds: 0.225
+      SubagentHandback:
+        count: 2
+        total_seconds: 0.765
+        median_seconds: 0.383
+        max_seconds: 0.396
+      Read:
+        count: 10
+        total_seconds: 0.51
+        median_seconds: 0.035
+        max_seconds: 0.131
+      SendMessage:
+        count: 1
+        total_seconds: 0.354
+        median_seconds: 0.354
+        max_seconds: 0.354
+      ToolSearch:
+        count: 1
+        total_seconds: 0.009
+        median_seconds: 0.009
+        max_seconds: 0.009
+    by_command:
+      checks.sh:
+        count: 5
+        total_seconds: 263.446
+        median_seconds: 35.084
+        max_seconds: 125.107
+      timeout uv run python -m pytest:
+        count: 5
+        total_seconds: 179.564
+        median_seconds: 10.557
+        max_seconds: 148.342
+      uv run python -m pytest:
+        count: 3
+        total_seconds: 100.723
+        median_seconds: 7.478
+        max_seconds: 90.114
+      ruff && ruff && basedpyright:
+        count: 3
+        total_seconds: 76.016
+        median_seconds: 7.392
+        max_seconds: 61.618
+      grep:
+        count: 56
+        total_seconds: 71.909
+        median_seconds: 0.512
+        max_seconds: 28.975
+      sed:
+        count: 97
+        total_seconds: 50.328
+        median_seconds: 0.476
+        max_seconds: 1.146
+      python3 && python3 && EOF:
+        count: 1
+        total_seconds: 43.422
+        median_seconds: 43.422
+        max_seconds: 43.422
+      pytest && passed:
+        count: 1
+        total_seconds: 37.507
+        median_seconds: 37.507
+        max_seconds: 37.507
+      mkdir && run && checks.sh:
+        count: 1
+        total_seconds: 35.955
+        median_seconds: 35.955
+        max_seconds: 35.955
+      pytest && ^E && passed:
+        count: 1
+        total_seconds: 35.629
+        median_seconds: 35.629
+        max_seconds: 35.629
+      checks.sh && git:
+        count: 1
+        total_seconds: 34.629
+        median_seconds: 34.629
+        max_seconds: 34.629
+      ? checks.sh && git && SYNOPSIS && defects && research && bibliography && bound-citations
+        && t007 && generate_frontier && check_nagamochi && check_basic && test_(generate &&
+        nagamochi && recent
+      : count: 1
+        total_seconds: 30.064
+        median_seconds: 30.064
+        max_seconds: 30.064
+      uv run python:
+        count: 18
+        total_seconds: 23.242
+        median_seconds: 0.965
+        max_seconds: 4.994
+      pytest && devtools.check_certificate_citations && devtools.validate_schemas:
+        count: 1
+        total_seconds: 21.119
+        median_seconds: 21.119
+        max_seconds: 21.119
+      cat:
+        count: 9
+        total_seconds: 19.289
+        median_seconds: 0.631
+        max_seconds: 5.689
+      python && t && p.write_text(t.replace(old, && print(ok):
+        count: 1
+        total_seconds: 15.877
+        median_seconds: 15.877
+        max_seconds: 15.877
+      python && t && a && p.write_text(t.replace(old, && print(ok):
+        count: 1
+        total_seconds: 15.702
+        median_seconds: 15.702
+        max_seconds: 15.702
+      head:
+        count: 28
+        total_seconds: 15.192
+        median_seconds: 0.479
+        max_seconds: 1.224
+      python && python && python && t && count:
+        count: 1
+        total_seconds: 14.844
+        median_seconds: 14.844
+        max_seconds: 14.844
+      print(c.most_common(6)):
+        count: 1
+        total_seconds: 13.135
+        median_seconds: 13.135
+        max_seconds: 13.135
+      cp && $c && make:
+        count: 1
+        total_seconds: 10.628
+        median_seconds: 10.628
+        max_seconds: 10.628
+      uv run python -m devtools.generate_frontier_case:
+        count: 4
+        total_seconds: 10.161
+        median_seconds: 1.571
+        max_seconds: 5.59
+      ? "an\n     && python3 && python3 && python3 && EOF"
+      : count: 1
+        total_seconds: 9.813
+        median_seconds: 9.813
+        max_seconds: 9.813
+      python && python && python3 && $c:
+        count: 1
+        total_seconds: 9.0
+        median_seconds: 9.0
+        max_seconds: 9.0
+      git status:
+        count: 2
+        total_seconds: 8.439
+        median_seconds: 4.22
+        max_seconds: 6.25
+      uv run python -m devtools.validate_schemas:
+        count: 1
+        total_seconds: 8.055
+        median_seconds: 8.055
+        max_seconds: 8.055
+      regen_adopted.py && devtools.generate_frontier_case:
+        count: 1
+        total_seconds: 7.461
+        median_seconds: 7.461
+        max_seconds: 7.461
+      apply_drifted.py && devtools.generate_frontier_case:
+        count: 1
+        total_seconds: 7.004
+        median_seconds: 7.004
+        max_seconds: 7.004
+      git && devtools.build_composite_figure_data && git && devtools.render_composite_pdf && pytest:
+        count: 1
+        total_seconds: 6.251
+        median_seconds: 6.251
+        max_seconds: 6.251
+      python && t && print(ok) && ruff && basedpyright && devtools.check_nagamochi_bounds:
+        count: 1
+        total_seconds: 6.138
+        median_seconds: 6.138
+        max_seconds: 6.138
+      python && t && p.write_text(t.replace(old, && ruff && devtools.audit_t007_consumers:
+        count: 1
+        total_seconds: 5.766
+        median_seconds: 5.766
+        max_seconds: 5.766
+      python && t && t && t && print(ok) && passed:
+        count: 1
+        total_seconds: 5.732
+        median_seconds: 5.732
+        max_seconds: 5.732
+      cd:
+        count: 3
+        total_seconds: 5.669
+        median_seconds: 0.603
+        max_seconds: 4.579
+      devtools.check_math_markup && packing-validate:
+        count: 1
+        total_seconds: 5.411
+        median_seconds: 5.411
+        max_seconds: 5.411
+      time uv run python -m devtools.generate_frontier_case:
+        count: 1
+        total_seconds: 5.317
+        median_seconds: 5.317
+        max_seconds: 5.317
+      uv run python regen_101_324.py:
+        count: 1
+        total_seconds: 5.218
+        median_seconds: 5.218
+        max_seconds: 5.218
+      ? "s.write_text(t.replace(old, && Frontier && 68 && 68 && \nassert row in s\nsynopsis.write_text(s.replace(row,\
+        \  && Frontier && 69 && 69 && $c"
+      : count: 1
+        total_seconds: 5.158
+        median_seconds: 5.158
+        max_seconds: 5.158
+      devtools.generate_frontier_case && +++ && @@:
+        count: 1
+        total_seconds: 5.156
+        median_seconds: 5.156
+        max_seconds: 5.156
+      python && that && p.write_text(t.replace(old, && print(ok):
+        count: 1
+        total_seconds: 5.127
+        median_seconds: 5.127
+        max_seconds: 5.127
+      pytest && pytest && passed:
+        count: 1
+        total_seconds: 5.023
+        median_seconds: 5.023
+        max_seconds: 5.023
+    by_command_family:
+      toolchain:
+        count: 78
+        total_seconds: 656.199
+        median_seconds: 1.59
+        max_seconds: 148.342
+      other:
+        count: 56
+        total_seconds: 437.61
+        median_seconds: 1.018
+        max_seconds: 125.107
+      inspection:
+        count: 214
+        total_seconds: 173.042
+        median_seconds: 0.486
+        max_seconds: 28.975
+      filesystem:
+        count: 14
+        total_seconds: 61.179
+        median_seconds: 1.035
+        max_seconds: 35.955
+      project:
+        count: 22
+        total_seconds: 59.623
+        median_seconds: 1.77
+        max_seconds: 8.055
+      vcs:
+        count: 21
+        total_seconds: 30.286
+        median_seconds: 0.68
+        max_seconds: 6.251
+      shell:
+        count: 3
+        total_seconds: 5.669
+        median_seconds: 0.603
+        max_seconds: 4.579
+    invoked:
+      cd: 335
+      grep: 280
+      head: 227
+      sed: 176
+      tail: 75
+      uv run python: 58
+      echo: 39
+      git diff: 32
+      cat: 31
+      t: 31
+      cut: 28
+      ls: 22
+      print(ok): 17
+      wc: 15
+      python3: 15
+      git status: 12
+      uv run python -m devtools.generate_frontier_case: 12
+      timeout uv run python -m pytest: 11
+      the: 10
+      p.write_text(t.replace(old,: 10
+      date: 9
+      tr: 8
+      see: 8
+      mkdir: 7
+      checks.sh: 7
+      tar: 7
+      cp: 7
+      ^: 6
+      uv run python -m pytest: 6
+      catalogue: 6
+      grid: 6
+      uv run ruff check: 6
+      git log: 5
+      sys.path.insert(0,.): 5
+      rm: 5
+      existing: 5
+      awk: 5
+      git checkout: 5
+      '68': 5
+      uv run ruff format: 5
+      diff: 4
+      uv run python -m devtools.gap_ranking: 4
+      carried: 4
+      Frontier: 4
+      passed: 4
+      Nagamochi’s: 4
+      nagamochi: 3
+      it: 3
+      every: 3
+      uv run python apply_drifted.py: 3
+      sort: 3
+      3$: 3
+      uv run python -m devtools.audit_t007_consumers: 3
+      chelokot: 3
+      python3 report1.py: 3
+      1$: 3
+      uv run python -m devtools.check_synopsis: 3
+      timeout uv run basedpyright: 3
+      uv run python k2m2_records.py: 3
+      uv run python -m $c: 3
+      s: 3
+      git show: 2
+      'null': 2
+      check_nagamochi_lemma1_counterexample.py: 2
+      this: 2
+      xargs: 2
+      uv run python regen_adopted.py: 2
+      None: 2
+      uv run python hand100.py: 2
+      uv run python -m devtools.check_case_prose: 2
+      '78': 2
+      '61': 2
+      '17': 2
+      '0.0151': 2
+      Bidwell: 2
+      '12': 2
+      '0.0314': 2
+      4$,: 2
+      '27': 2
+      uv run python -m devtools.check_nagamochi_bounds: 2
+      '`s(m²': 2
+      '`s(23)': 2
+      uv run python -m devtools.validate_schemas: 2
+      soundness: 2
+      asserted: 2
+      '65': 2
+      bibliography: 2
+      defects: 2
+      SYNOPSIS: 2
+      research: 2
+      bound-citations: 2
+      '69': 2
+      t007: 2
+      (cat: 2
+      w: 2
+      EOF: 2
+      find: 2
+      T-007: 2
+      bwithheld-word-3b: 2
+      bwithheld-word-4b: 2
+      bwithheld-word-5b: 2
+      timeout make format-check: 2
+      uvx flowmark: 2
+      tbd show: 1
+      time uv run python -m devtools.audit_t007_consumers: 1
+      p: 1
+      'state:': 1
+      'assurance:': 1
+      'method:': 1
+      uv run packing-validate null: 1
+      'kind:': 1
+      retract: 1
+      frontier_case: 1
+      run: 1
+      time checks.sh: 1
+      '{t[:150]}': 1
+      print(d.keys()): 1
+      or: 1
+      print(type(c)): 1
+      isinstance(c,list): 1
+      time uv run python -m devtools.generate_frontier_case: 1
+      +++: 1
+      '@@': 1
+      '{t[:170]}': 1
+      n,case: 1
+      rel: 1
+      uv run python -m devtools.check_nagamochi_lemma1_counterexample: 1
+      exact: 1
+      external_review: 1
+      with: 1
+      perfect: 1
+      replayed: 1
+      T-068),: 1
+      chelokot,: 1
+      uv run python -m devtools.check_results: 1
+      ? "Karakuşs, which\n    # carries the verified one since 2026-10-02, follows it.\n \
+        \   for lower_evidence in verified_lower[\"evidence\"]:\n        if lower_evidence\
+        \ not in rollup:\n            rollup.append(lower_evidence)\n"
+      : 1
+      uv run python regen_101_324.py: 1
+      written: 1
+      everything: 1
+      carry: 1
+      set: 1
+      '{len(hits)}': 1
+      Error: 1
+      a: 1
+      uniq: 1
+      '`T-068`),': 1
+      '`k': 1
+      '26': 1
+      '97': 1
+      '0.0557': 1
+      '0.0627': 1
+      '0.0718': 1
+      '31': 1
+      '0.0800': 1
+      5$,: 1
+      '19': 1
+      '0.0856': 1
+      Wainwright: 1
+      '0.1071': 1
+      Göbel: 1
+      text: 1
+      ? "Nagamochis Lemma 1, on\n      which that proof rests, is false (T-068), and Karakuşs"
+      : 1
+      '`insert_after(text,': 1
+      2): 1
+      1): 1
+      python3 report23.py: 1
+      uv run python -m devtools.$m: 1
+      count: 1
+      uv run python -m devtools.check_certificate_citations: 1
+      '106': 1
+      ', ': 1
+      '107': 1
+      assert: 1
+      print(c.most_common(6)): 1
+      uv run python -m devtools.check_math_markup: 1
+      timeout uv run packing-validate: 1
+      (generate_frontier_case: 1
+      check_nagamochi_bounds: 1
+      check_basic_bounds): 1
+      test_(generate_frontier_case: 1
+      nagamochi_bounds: 1
+      recent_results: 1
+      bound_citations: 1
+      t007_consumer_audit): 1
+      defects.md: 1
+      uv run python k2m2_generator.py: 1
+      bodies: 1
+      verified_lower_bound:n: 1
+      boundary: 1
+      C0: 1
+      git squares: 1
+      s.write_text(t.replace(old,: 1
+      ? '
+
+        assert row in s
+
+        synopsis.write_text(s.replace(row, '
+      : 1
+      generate_frontier: 1
+      check_nagamochi: 1
+      check_basic: 1
+      test_(generate: 1
+      recent: 1
+      nothing: 1
+      n41: 1
+      end: 1
+      ? ",\n  "
+      : 1
+      uv run python -m devtools.check_standing: 1
+      T-068: 1
+      d.write_text(x.replace(a,: 1
+      new: 1
+      verified: 1
+      n: 1
+      strongest: 1
+      k2m2_custom_fail.py).read()): 1
+      uv run python -m devtools.build_composite_figure_data: 1
+      uv run python -m devtools.render_composite_pdf: 1
+      uv run python -m devtools.build_bound_citations: 1
+      that: 1
+      ^E: 1
+      printf: 1
+      math: 1
+      f.write_text(w.replace(old,: 1
+      ^.: 1
+      read: 1
+      cmp: 1
+      comm: 1
+      ? "an\n    "
+      : 1
+      neither: 1
+      '8': 1
+      bound: 1
+      result: 1
+      composite: 1
+      research_table: 1
+      synopsis: 1
+      standing: 1
+      case_prose: 1
+      certificate: 1
+      defect: 1
+      evidence: 1
+      schema: 1
+      rung: 1
+      case_page: 1
+      repo_links: 1
+      replay_chelokot: 1
+      basic: 1
+      karakus: 1
+      lemma1: 1
+      inventory: 1
+      status: 1
+      readme: 1
+      documentation: 1
+      uv run basedpyright: 1
+      RECEIPT_FACTS: 1
+      git stash: 1
+      uv run python -m devtools.render_results_headline: 1
+      uv run python -m devtools.replay_chelokot_lean: 1
+      T-0(07: 1
+      '44': 1
+      '66': 1
+      '67': 1
+    invoked_families:
+      inspection: 841
+      other: 402
+      shell: 385
+      toolchain: 110
+      vcs: 58
+      project: 43
+      filesystem: 26
+    by_shell_shape:
+      compound:
+        count: 288
+        total_seconds: 839.246
+        median_seconds: 0.533
+        max_seconds: 148.342
+      python_heredoc:
+        count: 84
+        total_seconds: 300.357
+        median_seconds: 1.249
+        max_seconds: 43.422
+      pipeline:
+        count: 18
+        total_seconds: 238.736
+        median_seconds: 0.882
+        max_seconds: 125.107
+      simple:
+        count: 6
+        total_seconds: 38.479
+        median_seconds: 0.591
+        max_seconds: 35.609
+      heredoc:
+        count: 7
+        total_seconds: 3.721
+        median_seconds: 0.508
+        max_seconds: 0.73
+      python_inline:
+        count: 5
+        total_seconds: 3.069
+        median_seconds: 0.603
+        max_seconds: 0.792
+    by_thinking_level:
+      xhigh:
+        count: 433
+        total_seconds: 1426.524
+        median_seconds: 0.584
+        max_seconds: 148.342
+    shell_traits:
+      pipes: 291
+      redirects_output: 62
+      substitutes: 8
+  session_events:
+    compact_boundaries: 1
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

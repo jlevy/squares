@@ -15,6 +15,11 @@ target `n = 20` acquired, as a real result, the very value it was poisoning with
 control passed without biting for the second time in its life (`D-444`). What a test can
 hold without going stale is the relation: a case cites the theorem only where its value
 is the theorem's, and no case a retained certificate reaches still cites it.
+
+Since 2026-10-02 no verified lower bound cites the record at all: Nagamochi's Lemma 1 was
+found false (`T-085`), the record became `reported`, and its values moved to the reported
+lane, where the same relation is held. The verified floors it carried are Karakuş's
+(`E-karakus-strip-lower`) or the area bound, and the checker re-derives Karakuş's too.
 """
 
 from __future__ import annotations
@@ -35,11 +40,15 @@ from sqpack.known_best import KNOWN_BEST_CORPUS
 CASES_DIR = Path(__file__).parents[1] / "cases"
 
 
-def citing() -> dict[int, dict]:
+#: The verified floor that replaced the record's on 2026-10-02.
+KARAKUS = nagamochi.KARAKUS
+
+
+def citing(record: str = RECORD, lane: str = "verified_lower_bound") -> dict[int, dict]:
     return {
         n: case
         for n, case in cases().items()
-        if RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
+        if record in ((case.get(lane) or {}).get("evidence") or [])
     }
 
 
@@ -72,7 +81,11 @@ def test_it_covers_the_cases_it_claims_to() -> None:
     evening of 2026-09-04; each time it moved, the literal here outlived the
     record it described (`D-444`). What holds is the relation.
     """
-    covered = citing()
+    # No verified lower bound has cited the record since 2026-10-02 (T-085); its values
+    # sit in the reported lane, which is held to the same relation.
+    assert not citing()
+    covered = citing(lane="reported_lower_bound")
+    assert covered
     assert min(covered) >= 4
     assert max(covered) <= KNOWN_BEST_CORPUS.last_n
     reached = reached_by_retained_certificates()
@@ -82,7 +95,7 @@ def test_it_covers_the_cases_it_claims_to() -> None:
     # Everything still citing the theorem carries the theorem's own value; `main`
     # re-derives each one, and this is the same statement from the other side.
     for n, case in covered.items():
-        value = Decimal(str(case["verified_lower_bound"]["value"]))
+        value = Decimal(str(case["reported_lower_bound"]["value"]))
         exponent = value.as_tuple().exponent
         places = max(0, -exponent) if isinstance(exponent, int) else 0
         assert abs(value - theorem_two(n)[0]) <= Decimal(10) ** -places, n
@@ -112,11 +125,15 @@ def test_the_general_cases_give_the_root_form(n: int) -> None:
 
 def test_no_recorded_lower_bound_exceeds_its_upper() -> None:
     """The inversion would be a soundness defect, not a bookkeeping one."""
-    for n, case in citing().items():
-        lower = Decimal(str(case["verified_lower_bound"]["value"]))
-        upper = (case.get("reported_upper_bound") or {}).get("value")
-        if upper is not None:
-            assert lower <= Decimal(str(upper)), n
+    for record, lane in (
+        (RECORD, "reported_lower_bound"),
+        (KARAKUS, "verified_lower_bound"),
+    ):
+        for n, case in citing(record, lane).items():
+            lower = Decimal(str(case[lane]["value"]))
+            upper = (case.get("reported_upper_bound") or {}).get("value")
+            if upper is not None:
+                assert lower <= Decimal(str(upper)), n
 
 
 def test_a_wrong_value_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -133,10 +150,12 @@ def test_a_wrong_value_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
         # The target is the largest citing case with at least 0.3 of room under its
         # reported upper bound, so the poison neither reads as an inversion nor
         # lands inside the checker's one-unit-in-the-last-place tolerance.
+        # Since 2026-10-02 the verified floor the record carried is Karakuş's, so that is
+        # what is poisoned.
         target = max(
             n
             for n, case in found.items()
-            if RECORD in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
+            if KARAKUS in ((case.get("verified_lower_bound") or {}).get("evidence") or [])
             and (case.get("reported_upper_bound") or {}).get("value") is not None
             and Decimal(str(case["reported_upper_bound"]["value"]))
             - Decimal(str(case["verified_lower_bound"]["value"]))

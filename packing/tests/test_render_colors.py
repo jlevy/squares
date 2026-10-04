@@ -33,10 +33,13 @@ from sqpack.witness import load_witness
 #: SVG files carrying indexed square fills, and those fills, per corpus (think-93on). One
 #: more fill since the #227 intake: `n = 68` became Couzo's packing, so the contact-overlay
 #: stratum "first retained UnitSquare rendering-derived geometry" moved to `n = 69`.
+#: n=1..324 gained 51 files and 10,616 fills on 2026-10-02: the regularized layer's
+#: drawings (think-bgkz), drawn by the house renderer under the same contract. The two
+#: smaller corpora are not re-measured.
 GOLDEN_INDEXED: dict[str, tuple[int, int]] = {
     "n=1..100": (211, 32017),
     "n=1..200": (311, 47067),
-    "n=1..324": (334, 58002),
+    "n=1..324": (385, 68618),
 }
 #: The largest number of distinct angle classes any one frame carries, and the case that
 #: carries it, per corpus. Per frame rather than corpus-wide because the colorizer

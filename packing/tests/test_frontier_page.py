@@ -30,7 +30,10 @@ from tests import site_renders
 #: 2026-10-02 (think-k8xp), which left the page 4,070,117 bytes with the status chips'
 #: fills of the same day. Each row's own popover went on 2026-10-03, when a row came to
 #: open its case's record in the one case popover (think-necq): 3,442,575 bytes, and
-#: 3,498,657 with the case badges of the same day (think-7cbx).
+#: 3,498,657 with the case badges of the same day (think-7cbx). With the 265 lower
+#: bounds that correct Nagamochi 2005 carrying their tag and `data-corrects` (the owner,
+#: 2026-10-02), and the star's tooltip said once by its column's heading, it measured
+#: 3,523,448 bytes on 2026-10-03.
 PAGE_CEILING_BYTES = 4 * 1024 * 1024
 
 #: The columns as a reader meets them: the drawing under no heading, the case, the star,
@@ -191,7 +194,82 @@ def test_the_columns_run_drawing_case_star_and_then_what_is_known(parsed: Rows) 
         assert number["class"] == "num site-col-n", n
         assert number["tags"] == "a", n
         assert number["words"] == n
-        assert star["words"] == ("★" if attributes["data-recent"] == "true" else ""), n
+        # The star, and after it the tag of a bound that corrects a published result.
+        shown = "★" if attributes["data-recent"] == "true" else ""
+        if "data-corrects" in attributes:
+            shown += "corrects Nagamochi 2005"
+        assert star["words"] == shown, n
+
+
+def test_a_correcting_bound_keeps_its_star_and_names_what_it_corrects(
+    rows, parsed: Rows
+) -> None:
+    """A verified lower bound that corrects a published result is still recent, so its
+    row keeps the star, and the same cell says which work it corrects, in one short span
+    with no link; the row names the register's record of that work in `data-corrects`
+    (the owner, 2026-10-02). Which bounds those are is the citation record's to say."""
+    corrected = frontier.corrected_lower_bounds()
+    # 265 since n = 37 and 61 moved onto Bašić and Slivková's bound (T-087) on 2026-10-03;
+    # 225 since the merge of the same day, when replayed certificates and covers recorded
+    # in parallel took 40 of the corrected floors, none of them correcting anything; 220
+    # since the second merge that day, when T-080's replayed certificate took n = 101 to 105;
+    # 219 since the third, when T-076's replayed linear certificate took n = 82.
+    assert len(corrected) == 219
+    seen = 0
+    for attributes, cells in rows:
+        n = int(attributes["data-n"] or 0)
+        star = cells[column("Recent")]
+        if n not in corrected:
+            assert "data-corrects" not in attributes, n
+            assert (star["tags"] or "") in ("", "span"), n
+            continue
+        seen += 1
+        assert attributes["data-corrects"] == corrected[n]["result"] == "T-007", n
+        assert attributes["data-recent"] == "true", n
+        assert star["data-value"] == "1", n
+        assert star["tags"] == "span span", n
+        assert star["words"] == f"★corrects {corrected[n]['credit']}", n
+    assert seen == len(corrected)
+    # n = 38 was the example until the merge of 2026-10-03 put wand125's replayed
+    # certificate (T-074) above its corrected floor, and n = 82 until the third merge that
+    # day put T-076's replayed linear certificate above its own; n = 106, the least open
+    # case on Karakuş's floor, still stands on it.
+    case = next(case for case in tables.load_cases() if case["n"] == 106)
+    row = frontier.case_row(case, recent=True, corrects=corrected[106])
+    assert (
+        '<td data-value="1"><span class="site-star">★</span>'
+        '<span class="site-corrects">corrects Nagamochi 2005</span></td>'
+    ) in row
+    assert ' data-recent="true" data-corrects="T-007" ' in row
+    plain = frontier.case_row(case, recent=True)
+    assert '<td data-value="1"><span class="site-star">★</span></td>' in plain
+    assert "data-corrects" not in plain
+    # The star's tooltip is said once, by its column's heading, not on every star.
+    (recent,) = [cell for cell in parsed.head if (cell["words"] or "").strip() == "Recent"]
+    assert recent["title"] == frontier.HEADER_TITLES["Recent"]
+    assert all("title" not in cell for cell in parsed.head if cell is not recent)
+
+
+def test_the_page_says_once_what_the_tag_means_and_links_the_corrected_result(
+    page: str,
+) -> None:
+    """The rows repeat the tag without a link; the Recent results paragraph says what it
+    means once, with the count from the citation record, the register's record of the
+    corrected work linked to its row, and the register's words for what failed."""
+    sentence = frontier.corrections_prose()
+    assert sentence == (
+        "Beside 219 of the stars, *corrects Nagamochi 2005* says the bound stands in for "
+        "a published result found unsound, the register\u2019s "
+        "[T-007](all-results.html#t-007): "
+        "Lemma 1, on which Theorem 2\u2019s proof rests, is false."
+    )
+    prose = page[: page.index('id="frontier-table"')]
+    assert (
+        "Beside 219 of the stars, <em>corrects Nagamochi 2005</em> says the bound stands in"
+    ) in prose
+    assert '<a href="all-results.html#t-007">T-007</a>' in prose
+    table = page[page.index("<tbody>") : page.index("</tbody>")]
+    assert "all-results.html#t-007" not in table
 
 
 def test_the_gap_is_exact_where_both_bounds_are(rows, cases) -> None:

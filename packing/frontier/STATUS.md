@@ -11,28 +11,28 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`1`](n-001.md) | `1` | `1` | `1.0` | `1` | proved | replayed here | — | 2026-08-24 |
 | [`2`](n-002.md) | `2` | `2` | `2.0` | `2` | proved | replayed here | — | 2026-08-25 |
 | [`3`](n-003.md) | `2` | `2` | `2.0` | `2` | proved | replayed here | — | 2026-08-25 |
-| [`4`](n-004.md) | `2` | `2` | `2.0` | `2` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`4`](n-004.md) | `2` | `2` | `2.0` | `2` | proved | replayed here | — | 2026-08-24 |
 | [`5`](n-005.md) | `2 + (1/2)√2` | `2 + (1/2)√2` | `2.707106781187` | `2 + (1/2)√2` | proved | replayed here, external proof | — | 2026-08-25 |
 | [`6`](n-006.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`7`](n-007.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`7`](n-007.md) | `3` | `3` | `3.0` | `3` | proved | replayed here | — | 2026-09-07 |
 | [`8`](n-008.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`9`](n-009.md) | `3` | `3` | `3.0` | `3` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`9`](n-009.md) | `3` | `3` | `3.0` | `3` | proved | replayed here | — | 2026-08-24 |
 | [`10`](n-010.md) | `3 + (1/2)√2` | `3 + (1/2)√2` | `3.707106781187` | `3 + (1/2)√2` | proved | replayed here, external proof | — | 2026-09-07 |
 | [`11`](n-011.md) | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | proved | replayed here, audited here | — | 2026-09-30 |
 | [`12`](n-012.md) | `4` | `4` | `31360/7901` | `15680000/3949423` | open | replayed here, audited here | formal lower differs from report | 2026-10-02 |
 | [`13`](n-013.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | replayed here | — | 2026-09-07 |
 | [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`16`](n-016.md) | `4` | `4` | `4.0` | `4` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`16`](n-016.md) | `4` | `4` | `4.0` | `4` | proved | replayed here | — | 2026-08-24 |
 | [`17`](n-017.md) | `4.67553009360455` | `23377650468022754758171074269267527/5000000000000000000000000000000000` | `116511/25000` | `116511/25000` | open | audited here, replayed here | — | 2026-10-01 |
 | [`18`](n-018.md) | `(7/2) + (1/2)√7` | `(7/2) + (1/2)√7` | `939/200` | `939/200` | open | replayed here | — | 2026-10-01 |
 | [`19`](n-019.md) | `3 + (4/3)√2` | `3 + (4/3)√2` | `1927/400` | `1927/400` | open | replayed here | — | 2026-10-01 |
 | [`20`](n-020.md) | `5` | `5` | `49/10` | `1959/400` | open | replayed here | formal lower differs from report | 2026-10-02 |
 | [`21`](n-021.md) | `5` | `5` | `5` | `5` | proved | replayed here | — | 2026-09-28 |
 | [`22`](n-022.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`23`](n-023.md) | `5` | `5` | `5` | `5` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`23`](n-023.md) | `5` | `5` | `5` | `5` | proved | replayed here | — | 2026-08-24 |
 | [`24`](n-024.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`25`](n-025.md) | `5` | `5` | `5.0` | `5` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`25`](n-025.md) | `5` | `5` | `5.0` | `5` | proved | replayed here | — | 2026-08-24 |
 | [`26`](n-026.md) | `(7/2) + (3/2)√2` | `(7/2) + (3/2)√2` | `2213/400` | `2213/400` | open | replayed here | — | 2026-10-01 |
 | [`27`](n-027.md) | `5 + (1/2)√2` | `5 + (1/2)√2` | `1127/200` | `1127/200` | open | replayed here | — | 2026-10-01 |
 | [`28`](n-028.md) | `5.82444461667405` | `6` | `2289/400` | `2289/400` | open | replayed here | formal upper trails report | 2026-10-01 |
@@ -41,9 +41,9 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`31`](n-031.md) | `6` | `6` | `2381/400` | `2381/400` | open | replayed here | — | 2026-10-01 |
 | [`32`](n-032.md) | `6` | `6` | `6` | `6` | proved | replayed here | — | 2026-09-27 |
 | [`33`](n-033.md) | `6` | `6` | `6.0` | `6` | proved | replayed here, external proof | — | 2026-08-25 |
-| [`34`](n-034.md) | `6` | `6` | `6` | `6` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`34`](n-034.md) | `6` | `6` | `6` | `6` | proved | replayed here | — | 2026-08-24 |
 | [`35`](n-035.md) | `6` | `6` | `6.0` | `6` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`36`](n-036.md) | `6` | `6` | `6.0` | `6` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`36`](n-036.md) | `6` | `6` | `6.0` | `6` | proved | replayed here | — | 2026-08-24 |
 | [`37`](n-037.md) | `6.59861960924436` | `7` | `161/25` | `161/25` | open | replayed here | formal upper trails report | 2026-10-02 |
 | [`38`](n-038.md) | `6 + (1/2)√2` | `6 + (1/2)√2` | `1309/200` | `1309/200` | open | replayed here | — | 2026-10-01 |
 | [`39`](n-039.md) | `6.81072208306864` | `7` | `1327/200` | `1327/200` | open | replayed here | formal upper trails report | 2026-10-01 |
@@ -54,9 +54,9 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`44`](n-044.md) | `7` | `7` | `2777/400` | `2777/400` | open | replayed here | — | 2026-10-01 |
 | [`45`](n-045.md) | `7` | `7` | `7` | `7` | proved | replayed here | — | 2026-09-28 |
 | [`46`](n-046.md) | `7` | `7` | `7.0` | `7` | proved | replayed here, external proof, audited here | — | 2026-08-25 |
-| [`47`](n-047.md) | `7` | `7` | `7` | `7` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`47`](n-047.md) | `7` | `7` | `7` | `7` | proved | replayed here | — | 2026-08-24 |
 | [`48`](n-048.md) | `7` | `7` | `7` | `7` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`49`](n-049.md) | `7` | `7` | `7.0` | `7` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`49`](n-049.md) | `7` | `7` | `7.0` | `7` | proved | replayed here | — | 2026-08-24 |
 | [`50`](n-050.md) | `7 + (4/7)` | `8` | `37/5` | `37/5` | open | replayed here | formal upper trails report | 2026-10-02 |
 | [`51`](n-051.md) | `7.70079923541701` | `8` | `373/50` | `37/5` | open | replayed here | formal upper trails report; formal lower differs from report | 2026-10-03 |
 | [`52`](n-052.md) | `7 + (1/2)√2` | `7 + (1/2)√2` | `151/20` | `1507/200` | open | replayed here | formal lower differs from report | 2026-10-03 |
@@ -69,9 +69,9 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`59`](n-059.md) | `8` | `8` | `8` | `8` | proved | replayed here | — | 2026-10-02 |
 | [`60`](n-060.md) | `8` | `8` | `8` | `8` | proved | replayed here | — | 2026-10-02 |
 | [`61`](n-061.md) | `8` | `8` | `8` | `8` | proved | replayed here | — | 2026-10-02 |
-| [`62`](n-062.md) | `8` | `8` | `8` | `8` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`62`](n-062.md) | `8` | `8` | `8` | `8` | proved | replayed here | — | 2026-08-24 |
 | [`63`](n-063.md) | `8` | `8` | `8` | `8` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`64`](n-064.md) | `8` | `8` | `8.0` | `8` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`64`](n-064.md) | `8` | `8` | `8.0` | `8` | proved | replayed here | — | 2026-08-24 |
 | [`65`](n-065.md) | `5 + (5/2)√2` | `5 + (5/2)√2` | `167/20` | `167/20` | open | replayed here | — | 2026-10-02 |
 | [`66`](n-066.md) | `3 + 4 √2` | `3 + 4 √2` | `421/50` | `421/50` | open | replayed here | — | 2026-10-02 |
 | [`67`](n-067.md) | `8 + (1/2)√2` | `8 + (1/2)√2` | `1691/200` | `1691/200` | open | replayed here | — | 2026-10-01 |
@@ -86,9 +86,9 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`76`](n-076.md) | `9` | `9` | `224/25` | `447/50` | open | replayed here | formal lower differs from report | 2026-10-03 |
 | [`77`](n-077.md) | `9` | `9` | `9` | `9` | proved | replayed here | — | 2026-10-02 |
 | [`78`](n-078.md) | `9` | `9` | `9` | `9` | proved | replayed here | — | 2026-10-02 |
-| [`79`](n-079.md) | `9` | `9` | `9` | `9` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`79`](n-079.md) | `9` | `9` | `9` | `9` | proved | replayed here | — | 2026-08-24 |
 | [`80`](n-080.md) | `9` | `9` | `9` | `9` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`81`](n-081.md) | `9` | `9` | `9.0` | `9` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`81`](n-081.md) | `9` | `9` | `9.0` | `9` | proved | replayed here | — | 2026-08-24 |
 | [`82`](n-082.md) | `6 + (5/2)√2` | `6 + (5/2)√2` | `233/25` | `233/25` | open | replayed here | — | 2026-10-02 |
 | [`83`](n-083.md) | `9.63482562092335` | `10` | `937/100` | `937/100` | open | replayed here | formal upper trails report; catalogue ahead, intake pending | 2026-10-02 |
 | [`84`](n-084.md) | `9 + (1/2)√2` | `9 + (1/2)√2` | `47/5` | `47/5` | open | replayed here | — | 2026-10-02 |
@@ -105,233 +105,233 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`95`](n-095.md) | `10` | `10` | `249/25` | `49259/5000` | open | replayed here | formal lower differs from report | 2026-10-03 |
 | [`96`](n-096.md) | `10` | `10` | `10` | `249/25` | open | replayed here | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`97`](n-097.md) | `10` | `10` | `10` | `10` | proved | replayed here | — | 2026-10-03 |
-| [`98`](n-098.md) | `10` | `10` | `10` | `10` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`98`](n-098.md) | `10` | `10` | `10` | `10` | proved | replayed here | — | 2026-08-24 |
 | [`99`](n-099.md) | `10` | `10` | `10` | `10` | proved | replayed here, external proof | — | 2026-08-24 |
-| [`100`](n-100.md) | `10` | `10` | `10.0` | `10` | proved | replayed here, external proof | — | 2026-08-24 |
+| [`100`](n-100.md) | `10` | `10` | `10.0` | `10` | proved | replayed here | — | 2026-08-24 |
 | [`101`](n-101.md) | `7 + (5/2)√2` | `11` | `257/25` | `257/25` | open | replayed here | formal upper trails report | 2026-10-02 |
 | [`102`](n-102.md) | `10.607174680178947` | `10607174680178947/1000000000000000` | `257/25` | `257/25` | open | replayed here | — | 2026-10-02 |
 | [`103`](n-103.md) | `10.703516755580015` | `668969797223751/62500000000000` | `257/25` | `257/25` | open | replayed here | — | 2026-10-02 |
 | [`104`](n-104.md) | `10 + (1/2)√2` | `11` | `257/25` | `257/25` | open | replayed here | formal upper trails report | 2026-10-02 |
 | [`105`](n-105.md) | `10.806077865540567` | `1350759733192571/125000000000000` | `257/25` | `257/25` | open | replayed here | — | 2026-10-02 |
-| [`106`](n-106.md) | `10.822908044141968` | `10822908044141969/1000000000000000` | `10.32737905309` | `1 + √87` | open | replayed here, external proof | — | 2026-09-29 |
-| [`107`](n-107.md) | `10 - (1/2)√2 + sqrt(1 + √2)` | `11` | `10.38083151965` | `1 + √88` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`108`](n-108.md) | `10.92591939016138` | `11` | `10.43398113206` | `1 + √89` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`109`](n-109.md) | `6 + (7/2)√2` | `11` | `10.48683298051` | `1 + √90` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`110`](n-110.md) | `10.996783396634358` | `10996783396634359/1000000000000000` | `10.53939201417` | `1 + √91` | open | replayed here, external proof | — | 2026-09-29 |
-| [`111`](n-111.md) | `11` | `11` | `10.59166304663` | `1 + √92` | open | replayed here, external proof | — | 2026-09-07 |
-| [`112`](n-112.md) | `11` | `11` | `10.64365076099` | `1 + √93` | open | replayed here, external proof | — | 2026-09-07 |
-| [`113`](n-113.md) | `11` | `11` | `10.69535971483` | `1 + √94` | open | replayed here, external proof | — | 2026-09-07 |
-| [`114`](n-114.md) | `11` | `11` | `10.74679434481` | `1 + √95` | open | replayed here, external proof | — | 2026-09-07 |
-| [`115`](n-115.md) | `11` | `11` | `10.79795897113` | `1 + √96` | open | replayed here, external proof | — | 2026-09-07 |
-| [`116`](n-116.md) | `11` | `11` | `10.8488578018` | `1 + √97` | open | replayed here, external proof | — | 2026-09-07 |
-| [`117`](n-117.md) | `11` | `11` | `11` | `1 + √98` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`106`](n-106.md) | `10.822908044141968` | `10822908044141969/1000000000000000` | `10.32737905309` | `1/2 + sqrt(106 - floor(√106) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`107`](n-107.md) | `10 - (1/2)√2 + sqrt(1 + √2)` | `11` | `10.38083151965` | `1/2 + sqrt(107 - floor(√107) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`108`](n-108.md) | `10.92591939016138` | `11` | `10.43398113206` | `1/2 + sqrt(108 - floor(√108) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`109`](n-109.md) | `6 + (7/2)√2` | `11` | `10.48683298051` | `1/2 + sqrt(109 - floor(√109) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`110`](n-110.md) | `10.996783396634358` | `10996783396634359/1000000000000000` | `10.53939201417` | `1/2 + sqrt(110 - floor(√110) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`111`](n-111.md) | `11` | `11` | `10.59166304663` | `1/2 + sqrt(111 - floor(√111) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`112`](n-112.md) | `11` | `11` | `10.64365076099` | `1/2 + sqrt(112 - floor(√112) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`113`](n-113.md) | `11` | `11` | `10.69535971483` | `1/2 + sqrt(113 - floor(√113) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`114`](n-114.md) | `11` | `11` | `10.74679434481` | `1/2 + sqrt(114 - floor(√114) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`115`](n-115.md) | `11` | `11` | `10.79795897113` | `1/2 + sqrt(115 - floor(√115) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`116`](n-116.md) | `11` | `11` | `10.8488578018` | `1/2 + sqrt(116 - floor(√116) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`117`](n-117.md) | `11` | `11` | `11` | `1/2 + sqrt(117 - floor(√117) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`118`](n-118.md) | `11` | `11` | `11` | `11` | proved | replayed here | — | 2026-10-03 |
-| [`119`](n-119.md) | `11` | `11` | `11` | `11` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`119`](n-119.md) | `11` | `11` | `11` | `11` | proved | replayed here | — | 2026-09-07 |
 | [`120`](n-120.md) | `11` | `11` | `11` | `11` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`121`](n-121.md) | `11` | `11` | `11.0` | `11` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`122`](n-122.md) | `8 + (5/2)√2` | `12` | `5*√22/61 + 2*√2 + 489/61` | `1 + √101` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`123`](n-123.md) | `11.601384658385687` | `11601384658385687/1000000000000000` | `5*√22/61 + 2*√2 + 489/61` | `1 + √102` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
-| [`124`](n-124.md) | `6 + 4 √2` | `12` | `5*√22/61 + 2*√2 + 489/61` | `1 + √103` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`125`](n-125.md) | `11 + (1/2)√2` | `12` | `5*√22/61 + 2*√2 + 489/61` | `1 + √104` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`126`](n-126.md) | `11.77473513240654` | `12` | `11.24695076596` | `1 + √105` | open | replayed here, external proof | formal upper trails report | 2026-09-30 |
-| [`127`](n-127.md) | `(21/2) + (1/2)√7` | `12` | `11.29563014099` | `1 + √106` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`128`](n-128.md) | `11.82509196821368` | `12` | `11.34408043279` | `1 + √107` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`129`](n-129.md) | `11.88130621809000` | `12` | `11.39230484541` | `1 + √108` | open | replayed here, external proof | formal upper trails report | 2026-09-30 |
-| [`130`](n-130.md) | `11.911187706548755` | `2977796926637189/250000000000000` | `11.44030650891` | `1 + √109` | open | replayed here, external proof | — | 2026-09-29 |
-| [`131`](n-131.md) | `11.954916830219048` | `11954916830219049/1000000000000000` | `11.4880884817` | `1 + √110` | open | replayed here, external proof | — | 2026-09-29 |
-| [`132`](n-132.md) | `11.991327887694469` | `11991327887694469/1000000000000000` | `11.53565375285` | `1 + √111` | open | replayed here, external proof | — | 2026-09-29 |
-| [`133`](n-133.md) | `12` | `12` | `11.58300524426` | `1 + √112` | open | replayed here, external proof | — | 2026-09-07 |
-| [`134`](n-134.md) | `12` | `12` | `11.63014581273` | `1 + √113` | open | replayed here, external proof | — | 2026-09-07 |
-| [`135`](n-135.md) | `12` | `12` | `11.67707825203` | `1 + √114` | open | replayed here, external proof | — | 2026-09-07 |
-| [`136`](n-136.md) | `12` | `12` | `11.72380529476` | `1 + √115` | open | replayed here, external proof | — | 2026-09-07 |
-| [`137`](n-137.md) | `12` | `12` | `11.77032961427` | `1 + √116` | open | replayed here, external proof | — | 2026-09-07 |
-| [`138`](n-138.md) | `12` | `12` | `11.81665382639` | `1 + √117` | open | replayed here, external proof | — | 2026-09-07 |
-| [`139`](n-139.md) | `12` | `12` | `11.8627804912` | `1 + √118` | open | replayed here, external proof | — | 2026-09-07 |
-| [`140`](n-140.md) | `12` | `12` | `12` | `1 + √119` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`121`](n-121.md) | `11` | `11` | `11.0` | `11` | proved | replayed here | — | 2026-09-07 |
+| [`122`](n-122.md) | `8 + (5/2)√2` | `12` | `5*√22/61 + 2*√2 + 489/61` | `1/2 + sqrt(122 - floor(√122) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`123`](n-123.md) | `11.601384658385687` | `11601384658385687/1000000000000000` | `5*√22/61 + 2*√2 + 489/61` | `1/2 + sqrt(123 - floor(√123) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
+| [`124`](n-124.md) | `6 + 4 √2` | `12` | `5*√22/61 + 2*√2 + 489/61` | `1/2 + sqrt(124 - floor(√124) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`125`](n-125.md) | `11 + (1/2)√2` | `12` | `5*√22/61 + 2*√2 + 489/61` | `1/2 + sqrt(125 - floor(√125) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`126`](n-126.md) | `11.77473513240654` | `12` | `11.24695076596` | `1/2 + sqrt(126 - floor(√126) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-30 |
+| [`127`](n-127.md) | `(21/2) + (1/2)√7` | `12` | `11.29563014099` | `1/2 + sqrt(127 - floor(√127) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`128`](n-128.md) | `11.82509196821368` | `12` | `11.34408043279` | `1/2 + sqrt(128 - floor(√128) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`129`](n-129.md) | `11.88130621809000` | `12` | `11.39230484541` | `1/2 + sqrt(129 - floor(√129) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-30 |
+| [`130`](n-130.md) | `11.911187706548755` | `2977796926637189/250000000000000` | `11.44030650891` | `1/2 + sqrt(130 - floor(√130) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`131`](n-131.md) | `11.954916830219048` | `11954916830219049/1000000000000000` | `11.4880884817` | `1/2 + sqrt(131 - floor(√131) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`132`](n-132.md) | `11.991327887694469` | `11991327887694469/1000000000000000` | `11.53565375285` | `1/2 + sqrt(132 - floor(√132) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`133`](n-133.md) | `12` | `12` | `11.58300524426` | `1/2 + sqrt(133 - floor(√133) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`134`](n-134.md) | `12` | `12` | `11.63014581273` | `1/2 + sqrt(134 - floor(√134) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`135`](n-135.md) | `12` | `12` | `11.67707825203` | `1/2 + sqrt(135 - floor(√135) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`136`](n-136.md) | `12` | `12` | `11.72380529476` | `1/2 + sqrt(136 - floor(√136) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`137`](n-137.md) | `12` | `12` | `11.77032961427` | `1/2 + sqrt(137 - floor(√137) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`138`](n-138.md) | `12` | `12` | `11.81665382639` | `1/2 + sqrt(138 - floor(√138) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`139`](n-139.md) | `12` | `12` | `11.8627804912` | `1/2 + sqrt(139 - floor(√139) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`140`](n-140.md) | `12` | `12` | `12` | `1/2 + sqrt(140 - floor(√140) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`141`](n-141.md) | `12` | `12` | `12` | `12` | proved | replayed here | — | 2026-10-03 |
-| [`142`](n-142.md) | `12` | `12` | `12` | `12` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`142`](n-142.md) | `12` | `12` | `12` | `12` | proved | replayed here | — | 2026-09-07 |
 | [`143`](n-143.md) | `12` | `12` | `12` | `12` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`144`](n-144.md) | `12` | `12` | `12.0` | `12` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`145`](n-145.md) | `9 + (5/2)√2` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1 + √122` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`146`](n-146.md) | `12.60090777851301` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1 + √123` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`147`](n-147.md) | `7 + 4 √2` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1 + √124` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`148`](n-148.md) | `7 + 4 √2` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1 + √125` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`149`](n-149.md) | `12 + (1/2)√2` | `13` | `12.22497216032` | `1 + √126` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`150`](n-150.md) | `5 + (11/2)√2` | `13` | `12.26942766958` | `1 + √127` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`151`](n-151.md) | `(23/2) + (1/2)√7` | `13` | `12.31370849898` | `1 + √128` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`152`](n-152.md) | `12.830718800982252` | `12830718800982253/1000000000000000` | `12.3578166916` | `1 + √129` | open | replayed here, external proof | — | 2026-09-29 |
-| [`153`](n-153.md) | `12.88166675700900` | `13` | `12.40175425099` | `1 + √130` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`154`](n-154.md) | `12.931663721169976` | `1616457965146247/125000000000000` | `12.44552314226` | `1 + √131` | open | replayed here, external proof | — | 2026-09-29 |
-| [`155`](n-155.md) | `12.955619592137850` | `12955619592137851/1000000000000000` | `12.48912529308` | `1 + √132` | open | replayed here, external proof | — | 2026-09-29 |
-| [`156`](n-156.md) | `12.982082698520427` | `3245520674630107/250000000000000` | `12.53256259467` | `1 + √133` | open | replayed here, external proof | — | 2026-09-29 |
-| [`157`](n-157.md) | `13` | `13` | `12.57583690279` | `1 + √134` | open | replayed here, external proof | — | 2026-09-07 |
-| [`158`](n-158.md) | `13` | `13` | `12.61895003862` | `1 + √135` | open | replayed here, external proof | — | 2026-09-07 |
-| [`159`](n-159.md) | `13` | `13` | `12.66190378969` | `1 + √136` | open | replayed here, external proof | — | 2026-09-07 |
-| [`160`](n-160.md) | `13` | `13` | `12.70469991072` | `1 + √137` | open | replayed here, external proof | — | 2026-09-07 |
-| [`161`](n-161.md) | `13` | `13` | `12.74734012447` | `1 + √138` | open | replayed here, external proof | — | 2026-09-07 |
-| [`162`](n-162.md) | `13` | `13` | `12.78982612255` | `1 + √139` | open | replayed here, external proof | — | 2026-09-07 |
-| [`163`](n-163.md) | `13` | `13` | `12.8321595662` | `1 + √140` | open | replayed here, external proof | — | 2026-09-07 |
-| [`164`](n-164.md) | `13` | `13` | `12.87434208704` | `1 + √141` | open | replayed here, external proof | — | 2026-09-07 |
-| [`165`](n-165.md) | `13` | `13` | `13` | `1 + √142` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`144`](n-144.md) | `12` | `12` | `12.0` | `12` | proved | replayed here | — | 2026-09-07 |
+| [`145`](n-145.md) | `9 + (5/2)√2` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1/2 + sqrt(145 - floor(√145) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`146`](n-146.md) | `12.60090777851301` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1/2 + sqrt(146 - floor(√146) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`147`](n-147.md) | `7 + 4 √2` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1/2 + sqrt(147 - floor(√147) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`148`](n-148.md) | `7 + 4 √2` | `13` | `22*√6/145 + 2*√2 + 1307/145` | `1/2 + sqrt(148 - floor(√148) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`149`](n-149.md) | `12 + (1/2)√2` | `13` | `12.22497216032` | `1/2 + sqrt(149 - floor(√149) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`150`](n-150.md) | `5 + (11/2)√2` | `13` | `12.26942766958` | `1/2 + sqrt(150 - floor(√150) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`151`](n-151.md) | `(23/2) + (1/2)√7` | `13` | `12.31370849898` | `1/2 + sqrt(151 - floor(√151) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`152`](n-152.md) | `12.830718800982252` | `12830718800982253/1000000000000000` | `12.3578166916` | `1/2 + sqrt(152 - floor(√152) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`153`](n-153.md) | `12.88166675700900` | `13` | `12.40175425099` | `1/2 + sqrt(153 - floor(√153) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`154`](n-154.md) | `12.931663721169976` | `1616457965146247/125000000000000` | `12.44552314226` | `1/2 + sqrt(154 - floor(√154) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`155`](n-155.md) | `12.955619592137850` | `12955619592137851/1000000000000000` | `12.48912529308` | `1/2 + sqrt(155 - floor(√155) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`156`](n-156.md) | `12.982082698520427` | `3245520674630107/250000000000000` | `12.53256259467` | `1/2 + sqrt(156 - floor(√156) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`157`](n-157.md) | `13` | `13` | `12.57583690279` | `1/2 + sqrt(157 - floor(√157) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`158`](n-158.md) | `13` | `13` | `12.61895003862` | `1/2 + sqrt(158 - floor(√158) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`159`](n-159.md) | `13` | `13` | `12.66190378969` | `1/2 + sqrt(159 - floor(√159) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`160`](n-160.md) | `13` | `13` | `12.70469991072` | `1/2 + sqrt(160 - floor(√160) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`161`](n-161.md) | `13` | `13` | `12.74734012447` | `1/2 + sqrt(161 - floor(√161) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`162`](n-162.md) | `13` | `13` | `12.78982612255` | `1/2 + sqrt(162 - floor(√162) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`163`](n-163.md) | `13` | `13` | `12.8321595662` | `1/2 + sqrt(163 - floor(√163) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`164`](n-164.md) | `13` | `13` | `12.87434208704` | `1/2 + sqrt(164 - floor(√164) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`165`](n-165.md) | `13` | `13` | `13` | `1/2 + sqrt(165 - floor(√165) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`166`](n-166.md) | `13` | `13` | `13` | `13` | proved | replayed here | — | 2026-10-03 |
-| [`167`](n-167.md) | `13` | `13` | `13` | `13` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`167`](n-167.md) | `13` | `13` | `13` | `13` | proved | replayed here | — | 2026-09-07 |
 | [`168`](n-168.md) | `13` | `13` | `13` | `13` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`169`](n-169.md) | `13` | `13` | `13.0` | `13` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`170`](n-170.md) | `10 + (5/2)√2` | `14` | `6*√26/85 + 2*√2 + 851/85` | `1 + √145` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`171`](n-171.md) | `13 + (4/7)` | `14` | `6*√26/85 + 2*√2 + 851/85` | `1 + √146` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`172`](n-172.md) | `13.618988956935731` | `13618988956935731/1000000000000000` | `6*√26/85 + 2*√2 + 851/85` | `1 + √147` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
-| [`173`](n-173.md) | `8 + 4 √2` | `14` | `6*√26/85 + 2*√2 + 851/85` | `1 + √148` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`174`](n-174.md) | `13 + (1/2)√2` | `14` | `13.20655561573` | `1 + √149` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`175`](n-175.md) | `6 + (11/2)√2` | `14` | `13.24744871392` | `1 + √150` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`176`](n-176.md) | `(25/2) + (1/2)√7` | `14` | `13.28820572744` | `1 + √151` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`177`](n-177.md) | `13.822979734183507` | `3455744933545877/250000000000000` | `13.32882800594` | `1 + √152` | open | replayed here, external proof | — | 2026-09-29 |
-| [`178`](n-178.md) | `13 - (1/2)√2 + sqrt(1 + √2)` | `14` | `13.36931687685` | `1 + √153` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`179`](n-179.md) | `13.89534106997649` | `14` | `13.40967364599` | `1 + √154` | open | replayed here, external proof | formal upper trails report | 2026-09-30 |
-| [`180`](n-180.md) | `13.927888140501693` | `6963944070250847/500000000000000` | `13.44989959799` | `1 + √155` | open | replayed here, external proof | — | 2026-09-29 |
-| [`181`](n-181.md) | `13.953748821957927` | `1744218602744741/125000000000000` | `13.4899959968` | `1 + √156` | open | replayed here, external proof | — | 2026-09-29 |
-| [`182`](n-182.md) | `13.974090713124822` | `6987045356562411/500000000000000` | `13.52996408614` | `1 + √157` | open | replayed here, external proof | — | 2026-09-29 |
-| [`183`](n-183.md) | `14` | `14` | `13.56980508998` | `1 + √158` | open | replayed here, external proof | — | 2026-09-07 |
-| [`184`](n-184.md) | `14` | `14` | `13.60952021292` | `1 + √159` | open | replayed here, external proof | — | 2026-09-07 |
-| [`185`](n-185.md) | `14` | `14` | `13.64911064067` | `1 + √160` | open | replayed here, external proof | — | 2026-09-07 |
-| [`186`](n-186.md) | `14` | `14` | `13.68857754045` | `1 + √161` | open | replayed here, external proof | — | 2026-09-07 |
-| [`187`](n-187.md) | `14` | `14` | `13.72792206136` | `1 + √162` | open | replayed here, external proof | — | 2026-09-07 |
-| [`188`](n-188.md) | `14` | `14` | `13.7671453348` | `1 + √163` | open | replayed here, external proof | — | 2026-09-07 |
-| [`189`](n-189.md) | `14` | `14` | `13.80624847487` | `1 + √164` | open | replayed here, external proof | — | 2026-09-07 |
-| [`190`](n-190.md) | `14` | `14` | `13.84523257867` | `1 + √165` | open | replayed here, external proof | — | 2026-09-07 |
-| [`191`](n-191.md) | `14` | `14` | `13.88409872673` | `1 + √166` | open | replayed here, external proof | — | 2026-09-07 |
-| [`192`](n-192.md) | `14` | `14` | `14` | `1 + √167` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`169`](n-169.md) | `13` | `13` | `13.0` | `13` | proved | replayed here | — | 2026-09-07 |
+| [`170`](n-170.md) | `10 + (5/2)√2` | `14` | `6*√26/85 + 2*√2 + 851/85` | `1/2 + sqrt(170 - floor(√170) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`171`](n-171.md) | `13 + (4/7)` | `14` | `6*√26/85 + 2*√2 + 851/85` | `1/2 + sqrt(171 - floor(√171) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`172`](n-172.md) | `13.618988956935731` | `13618988956935731/1000000000000000` | `6*√26/85 + 2*√2 + 851/85` | `1/2 + sqrt(172 - floor(√172) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
+| [`173`](n-173.md) | `8 + 4 √2` | `14` | `6*√26/85 + 2*√2 + 851/85` | `1/2 + sqrt(173 - floor(√173) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`174`](n-174.md) | `13 + (1/2)√2` | `14` | `13.20655561573` | `1/2 + sqrt(174 - floor(√174) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`175`](n-175.md) | `6 + (11/2)√2` | `14` | `13.24744871392` | `1/2 + sqrt(175 - floor(√175) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`176`](n-176.md) | `(25/2) + (1/2)√7` | `14` | `13.28820572744` | `1/2 + sqrt(176 - floor(√176) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`177`](n-177.md) | `13.822979734183507` | `3455744933545877/250000000000000` | `13.32882800594` | `1/2 + sqrt(177 - floor(√177) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`178`](n-178.md) | `13 - (1/2)√2 + sqrt(1 + √2)` | `14` | `13.36931687685` | `1/2 + sqrt(178 - floor(√178) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`179`](n-179.md) | `13.89534106997649` | `14` | `13.40967364599` | `1/2 + sqrt(179 - floor(√179) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-30 |
+| [`180`](n-180.md) | `13.927888140501693` | `6963944070250847/500000000000000` | `13.44989959799` | `1/2 + sqrt(180 - floor(√180) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`181`](n-181.md) | `13.953748821957927` | `1744218602744741/125000000000000` | `13.4899959968` | `1/2 + sqrt(181 - floor(√181) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`182`](n-182.md) | `13.974090713124822` | `6987045356562411/500000000000000` | `13.52996408614` | `1/2 + sqrt(182 - floor(√182) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`183`](n-183.md) | `14` | `14` | `13.56980508998` | `1/2 + sqrt(183 - floor(√183) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`184`](n-184.md) | `14` | `14` | `13.60952021292` | `1/2 + sqrt(184 - floor(√184) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`185`](n-185.md) | `14` | `14` | `13.64911064067` | `1/2 + sqrt(185 - floor(√185) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`186`](n-186.md) | `14` | `14` | `13.68857754045` | `1/2 + sqrt(186 - floor(√186) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`187`](n-187.md) | `14` | `14` | `13.72792206136` | `1/2 + sqrt(187 - floor(√187) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`188`](n-188.md) | `14` | `14` | `13.7671453348` | `1/2 + sqrt(188 - floor(√188) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`189`](n-189.md) | `14` | `14` | `13.80624847487` | `1/2 + sqrt(189 - floor(√189) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`190`](n-190.md) | `14` | `14` | `13.84523257867` | `1/2 + sqrt(190 - floor(√190) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`191`](n-191.md) | `14` | `14` | `13.88409872673` | `1/2 + sqrt(191 - floor(√191) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`192`](n-192.md) | `14` | `14` | `14` | `1/2 + sqrt(192 - floor(√192) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`193`](n-193.md) | `14` | `14` | `14` | `14` | proved | replayed here | — | 2026-10-03 |
-| [`194`](n-194.md) | `14` | `14` | `14` | `14` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`194`](n-194.md) | `14` | `14` | `14` | `14` | proved | replayed here | — | 2026-09-07 |
 | [`195`](n-195.md) | `14` | `14` | `14` | `14` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`196`](n-196.md) | `14` | `14` | `14.0` | `14` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`197`](n-197.md) | `11 + (5/2)√2` | `15` | `26*√7/197 + 2*√2 + 2169/197` | `1 + √170` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`198`](n-198.md) | `14 + (4/7)` | `15` | `26*√7/197 + 2*√2 + 2169/197` | `1 + √171` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`199`](n-199.md) | `14.618988956907218` | `14618988956907219/1000000000000000` | `26*√7/197 + 2*√2 + 2169/197` | `1 + √172` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
-| [`200`](n-200.md) | `9 + 4 √2` | `15` | `26*√7/197 + 2*√2 + 2169/197` | `1 + √173` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`201`](n-201.md) | `14 + (1/2)√2` | `15` | `14.19090595827` | `1 + √174` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`202`](n-202.md) | `2 + 9 √2` | `15` | `14.22875655532` | `1 + √175` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`203`](n-203.md) | `7 + (11/2)√2` | `15` | `14.26649916142` | `1 + √176` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`204`](n-204.md) | `(27/2) + (1/2)√7` | `15` | `14.30413469565` | `1 + √177` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`205`](n-205.md) | `14.82445114612408` | `15` | `14.34166406413` | `1 + √178` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`206`](n-206.md) | `14.860158663395859` | `14860158663395861/1000000000000000` | `14.37908816026` | `1 + √179` | open | replayed here, external proof | formal upper trails report; 1 conflict | 2026-09-29 |
-| [`207`](n-207.md) | `14.893954634242480` | `186174432928031/12500000000000` | `14.416407865` | `1 + √180` | open | replayed here, external proof | — | 2026-09-29 |
-| [`208`](n-208.md) | `14.937018796984567` | `1867127349623071/125000000000000` | `14.45362404707` | `1 + √181` | open | replayed here, external proof | — | 2026-09-29 |
-| [`209`](n-209.md) | `14.955041639430016` | `14955041639430017/1000000000000000` | `14.49073756323` | `1 + √182` | open | replayed here, external proof | — | 2026-09-29 |
-| [`210`](n-210.md) | `14.973001116591412` | `14973001116591413/1000000000000000` | `14.52774925847` | `1 + √183` | open | replayed here, external proof | — | 2026-09-29 |
-| [`211`](n-211.md) | `14.99796070496771500150` | `29995921409935430003/2000000000000000000` | `14.56465996625` | `1 + √184` | open | replayed here, external proof | — | 2026-09-29 |
-| [`212`](n-212.md) | `15` | `15` | `14.60147050874` | `1 + √185` | open | replayed here, external proof | — | 2026-09-07 |
-| [`213`](n-213.md) | `15` | `15` | `14.63818169699` | `1 + √186` | open | replayed here, external proof | — | 2026-09-07 |
-| [`214`](n-214.md) | `15` | `15` | `14.67479433118` | `1 + √187` | open | replayed here, external proof | — | 2026-09-07 |
-| [`215`](n-215.md) | `15` | `15` | `14.7113092008` | `1 + √188` | open | replayed here, external proof | — | 2026-09-07 |
-| [`216`](n-216.md) | `15` | `15` | `14.74772708487` | `1 + √189` | open | replayed here, external proof | — | 2026-09-07 |
-| [`217`](n-217.md) | `15` | `15` | `14.78404875209` | `1 + √190` | open | replayed here, external proof | — | 2026-09-07 |
-| [`218`](n-218.md) | `15` | `15` | `14.82027496109` | `1 + √191` | open | replayed here, external proof | — | 2026-09-07 |
-| [`219`](n-219.md) | `15` | `15` | `14.85640646055` | `1 + √192` | open | replayed here, external proof | — | 2026-09-07 |
-| [`220`](n-220.md) | `15` | `15` | `14.89244398945` | `1 + √193` | open | replayed here, external proof | — | 2026-09-07 |
-| [`221`](n-221.md) | `15` | `15` | `15` | `1 + √194` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`196`](n-196.md) | `14` | `14` | `14.0` | `14` | proved | replayed here | — | 2026-09-07 |
+| [`197`](n-197.md) | `11 + (5/2)√2` | `15` | `26*√7/197 + 2*√2 + 2169/197` | `1/2 + sqrt(197 - floor(√197) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`198`](n-198.md) | `14 + (4/7)` | `15` | `26*√7/197 + 2*√2 + 2169/197` | `1/2 + sqrt(198 - floor(√198) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`199`](n-199.md) | `14.618988956907218` | `14618988956907219/1000000000000000` | `26*√7/197 + 2*√2 + 2169/197` | `1/2 + sqrt(199 - floor(√199) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
+| [`200`](n-200.md) | `9 + 4 √2` | `15` | `26*√7/197 + 2*√2 + 2169/197` | `1/2 + sqrt(200 - floor(√200) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`201`](n-201.md) | `14 + (1/2)√2` | `15` | `14.19090595827` | `1/2 + sqrt(201 - floor(√201) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`202`](n-202.md) | `2 + 9 √2` | `15` | `14.22875655532` | `1/2 + sqrt(202 - floor(√202) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`203`](n-203.md) | `7 + (11/2)√2` | `15` | `14.26649916142` | `1/2 + sqrt(203 - floor(√203) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`204`](n-204.md) | `(27/2) + (1/2)√7` | `15` | `14.30413469565` | `1/2 + sqrt(204 - floor(√204) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`205`](n-205.md) | `14.82445114612408` | `15` | `14.34166406413` | `1/2 + sqrt(205 - floor(√205) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`206`](n-206.md) | `14.860158663395859` | `14860158663395861/1000000000000000` | `14.37908816026` | `1/2 + sqrt(206 - floor(√206) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report; 1 conflict | 2026-09-29 |
+| [`207`](n-207.md) | `14.893954634242480` | `186174432928031/12500000000000` | `14.416407865` | `1/2 + sqrt(207 - floor(√207) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`208`](n-208.md) | `14.937018796984567` | `1867127349623071/125000000000000` | `14.45362404707` | `1/2 + sqrt(208 - floor(√208) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`209`](n-209.md) | `14.955041639430016` | `14955041639430017/1000000000000000` | `14.49073756323` | `1/2 + sqrt(209 - floor(√209) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`210`](n-210.md) | `14.973001116591412` | `14973001116591413/1000000000000000` | `14.52774925847` | `1/2 + sqrt(210 - floor(√210) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`211`](n-211.md) | `14.99796070496771500150` | `29995921409935430003/2000000000000000000` | `14.56465996625` | `1/2 + sqrt(211 - floor(√211) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`212`](n-212.md) | `15` | `15` | `14.60147050874` | `1/2 + sqrt(212 - floor(√212) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`213`](n-213.md) | `15` | `15` | `14.63818169699` | `1/2 + sqrt(213 - floor(√213) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`214`](n-214.md) | `15` | `15` | `14.67479433118` | `1/2 + sqrt(214 - floor(√214) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`215`](n-215.md) | `15` | `15` | `14.7113092008` | `1/2 + sqrt(215 - floor(√215) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`216`](n-216.md) | `15` | `15` | `14.74772708487` | `1/2 + sqrt(216 - floor(√216) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`217`](n-217.md) | `15` | `15` | `14.78404875209` | `1/2 + sqrt(217 - floor(√217) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`218`](n-218.md) | `15` | `15` | `14.82027496109` | `1/2 + sqrt(218 - floor(√218) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`219`](n-219.md) | `15` | `15` | `14.85640646055` | `1/2 + sqrt(219 - floor(√219) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`220`](n-220.md) | `15` | `15` | `14.89244398945` | `1/2 + sqrt(220 - floor(√220) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`221`](n-221.md) | `15` | `15` | `15` | `1/2 + sqrt(221 - floor(√221) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`222`](n-222.md) | `15` | `15` | `15` | `15` | proved | replayed here | — | 2026-10-03 |
-| [`223`](n-223.md) | `15` | `15` | `15` | `15` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`223`](n-223.md) | `15` | `15` | `15` | `15` | proved | replayed here | — | 2026-09-07 |
 | [`224`](n-224.md) | `15` | `15` | `15` | `15` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`225`](n-225.md) | `15` | `15` | `15.0` | `15` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`226`](n-226.md) | `12 + (5/2)√2` | `16` | `7*√30/113 + 2*√2 + 1357/113` | `1 + √197` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`227`](n-227.md) | `(17/2) + 5 √2` | `16` | `7*√30/113 + 2*√2 + 1357/113` | `1 + √198` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`228`](n-228.md) | `15.604638007678682` | `15604638007678683/1000000000000000` | `7*√30/113 + 2*√2 + 1357/113` | `1 + √199` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
-| [`229`](n-229.md) | `10 + 4 √2` | `16` | `7*√30/113 + 2*√2 + 1357/113` | `1 + √200` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`230`](n-230.md) | `15 + (28/41)` | `16` | `15.17744687876` | `1 + √201` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`231`](n-231.md) | `15 + (1/2)√2` | `16` | `15.21267040355` | `1 + √202` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`232`](n-232.md) | `8 + (11/2)√2` | `16` | `15.24780684878` | `1 + √203` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`233`](n-233.md) | `8 + (11/2)√2` | `16` | `15.28285685709` | `1 + √204` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`234`](n-234.md) | `(29/2) + (1/2)√7` | `16` | `15.31782106328` | `1 + √205` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`235`](n-235.md) | `15.82660563342856` | `16` | `15.35270009441` | `1 + √206` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`236`](n-236.md) | `15.872219025616040` | `15872219025616041/1000000000000000` | `15.38749456994` | `1 + √207` | open | replayed here, external proof | — | 2026-09-29 |
-| [`237`](n-237.md) | `15.911191683008479` | `15911191683008479/1000000000000000` | `15.42220510186` | `1 + √208` | open | replayed here, external proof | — | 2026-09-29 |
-| [`238`](n-238.md) | `15.931725503598480` | `15931725503598481/1000000000000000` | `15.4568322948` | `1 + √209` | open | replayed here, external proof | — | 2026-09-29 |
-| [`239`](n-239.md) | `15.953819333484685` | `3190763866696937/200000000000000` | `15.49137674619` | `1 + √210` | open | replayed here, external proof | — | 2026-09-29 |
-| [`240`](n-240.md) | `15.969685337536875` | `25551496540059/1600000000000` | `15.52583904633` | `1 + √211` | open | replayed here, external proof | — | 2026-09-29 |
-| [`241`](n-241.md) | `15.988132439537539` | `799406621976877/50000000000000` | `15.56021977856` | `1 + √212` | open | replayed here, external proof | — | 2026-09-29 |
-| [`242`](n-242.md) | `16` | `16` | `15.59451951933` | `1 + √213` | open | replayed here, external proof | — | 2026-09-07 |
-| [`243`](n-243.md) | `16` | `16` | `15.62873883833` | `1 + √214` | open | replayed here, external proof | — | 2026-09-07 |
-| [`244`](n-244.md) | `16` | `16` | `15.66287829862` | `1 + √215` | open | replayed here, external proof | — | 2026-09-07 |
-| [`245`](n-245.md) | `16` | `16` | `15.6969384567` | `1 + √216` | open | replayed here, external proof | — | 2026-09-07 |
-| [`246`](n-246.md) | `16` | `16` | `15.73091986266` | `1 + √217` | open | replayed here, external proof | — | 2026-09-07 |
-| [`247`](n-247.md) | `16` | `16` | `15.76482306023` | `1 + √218` | open | replayed here, external proof | — | 2026-09-07 |
-| [`248`](n-248.md) | `16` | `16` | `15.79864858695` | `1 + √219` | open | replayed here, external proof | — | 2026-09-07 |
-| [`249`](n-249.md) | `16` | `16` | `15.83239697419` | `1 + √220` | open | replayed here, external proof | — | 2026-09-07 |
-| [`250`](n-250.md) | `16` | `16` | `15.86606874732` | `1 + √221` | open | replayed here, external proof | — | 2026-09-07 |
-| [`251`](n-251.md) | `16` | `16` | `15.89966442575` | `1 + √222` | open | replayed here, external proof | — | 2026-09-07 |
-| [`252`](n-252.md) | `16` | `16` | `16` | `1 + √223` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`225`](n-225.md) | `15` | `15` | `15.0` | `15` | proved | replayed here | — | 2026-09-07 |
+| [`226`](n-226.md) | `12 + (5/2)√2` | `16` | `7*√30/113 + 2*√2 + 1357/113` | `1/2 + sqrt(226 - floor(√226) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`227`](n-227.md) | `(17/2) + 5 √2` | `16` | `7*√30/113 + 2*√2 + 1357/113` | `1/2 + sqrt(227 - floor(√227) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`228`](n-228.md) | `15.604638007678682` | `15604638007678683/1000000000000000` | `7*√30/113 + 2*√2 + 1357/113` | `1/2 + sqrt(228 - floor(√228) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
+| [`229`](n-229.md) | `10 + 4 √2` | `16` | `7*√30/113 + 2*√2 + 1357/113` | `1/2 + sqrt(229 - floor(√229) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`230`](n-230.md) | `15 + (28/41)` | `16` | `15.17744687876` | `1/2 + sqrt(230 - floor(√230) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`231`](n-231.md) | `15 + (1/2)√2` | `16` | `15.21267040355` | `1/2 + sqrt(231 - floor(√231) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`232`](n-232.md) | `8 + (11/2)√2` | `16` | `15.24780684878` | `1/2 + sqrt(232 - floor(√232) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`233`](n-233.md) | `8 + (11/2)√2` | `16` | `15.28285685709` | `1/2 + sqrt(233 - floor(√233) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`234`](n-234.md) | `(29/2) + (1/2)√7` | `16` | `15.31782106328` | `1/2 + sqrt(234 - floor(√234) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`235`](n-235.md) | `15.82660563342856` | `16` | `15.35270009441` | `1/2 + sqrt(235 - floor(√235) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`236`](n-236.md) | `15.872219025616040` | `15872219025616041/1000000000000000` | `15.38749456994` | `1/2 + sqrt(236 - floor(√236) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`237`](n-237.md) | `15.911191683008479` | `15911191683008479/1000000000000000` | `15.42220510186` | `1/2 + sqrt(237 - floor(√237) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`238`](n-238.md) | `15.931725503598480` | `15931725503598481/1000000000000000` | `15.4568322948` | `1/2 + sqrt(238 - floor(√238) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`239`](n-239.md) | `15.953819333484685` | `3190763866696937/200000000000000` | `15.49137674619` | `1/2 + sqrt(239 - floor(√239) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`240`](n-240.md) | `15.969685337536875` | `25551496540059/1600000000000` | `15.52583904633` | `1/2 + sqrt(240 - floor(√240) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`241`](n-241.md) | `15.988132439537539` | `799406621976877/50000000000000` | `15.56021977856` | `1/2 + sqrt(241 - floor(√241) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`242`](n-242.md) | `16` | `16` | `15.59451951933` | `1/2 + sqrt(242 - floor(√242) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`243`](n-243.md) | `16` | `16` | `15.62873883833` | `1/2 + sqrt(243 - floor(√243) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`244`](n-244.md) | `16` | `16` | `15.66287829862` | `1/2 + sqrt(244 - floor(√244) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`245`](n-245.md) | `16` | `16` | `15.6969384567` | `1/2 + sqrt(245 - floor(√245) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`246`](n-246.md) | `16` | `16` | `15.73091986266` | `1/2 + sqrt(246 - floor(√246) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`247`](n-247.md) | `16` | `16` | `15.76482306023` | `1/2 + sqrt(247 - floor(√247) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`248`](n-248.md) | `16` | `16` | `15.79864858695` | `1/2 + sqrt(248 - floor(√248) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`249`](n-249.md) | `16` | `16` | `15.83239697419` | `1/2 + sqrt(249 - floor(√249) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`250`](n-250.md) | `16` | `16` | `15.86606874732` | `1/2 + sqrt(250 - floor(√250) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`251`](n-251.md) | `16` | `16` | `15.89966442575` | `1/2 + sqrt(251 - floor(√251) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`252`](n-252.md) | `16` | `16` | `16` | `1/2 + sqrt(252 - floor(√252) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`253`](n-253.md) | `16` | `16` | `16` | `16` | proved | replayed here | — | 2026-10-03 |
-| [`254`](n-254.md) | `16` | `16` | `16` | `16` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`254`](n-254.md) | `16` | `16` | `16` | `16` | proved | replayed here | — | 2026-09-07 |
 | [`255`](n-255.md) | `16` | `16` | `16` | `16` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`256`](n-256.md) | `16` | `16` | `16.0` | `16` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`257`](n-257.md) | `13 + (5/2)√2` | `17` | `574*√2/257 + 3343/257` | `1 + √226` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`258`](n-258.md) | `(19/2) + 5 √2` | `17` | `574*√2/257 + 3343/257` | `1 + √227` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`259`](n-259.md) | `16.602568490497649` | `4150642122624413/250000000000000` | `574*√2/257 + 3343/257` | `1 + √228` | open | replayed here, external proof | formal upper trails report; formal lower differs from report; 1 conflict | 2026-10-02 |
-| [`260`](n-260.md) | `11 + 4 √2` | `17` | `574*√2/257 + 3343/257` | `1 + √229` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`261`](n-261.md) | `16 + (28/41)` | `17` | `574*√2/257 + 3343/257` | `1 + √230` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`262`](n-262.md) | `16 + (1/2)√2` | `17` | `16.19868415357` | `1 + √231` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`263`](n-263.md) | `16.742280159187313` | `8371140079593657/500000000000000` | `16.23154621173` | `1 + √232` | open | replayed here, external proof | — | 2026-09-29 |
-| [`264`](n-264.md) | `9 + (11/2)√2` | `17` | `16.26433752247` | `1 + √233` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`265`](n-265.md) | `9 + (11/2)√2` | `17` | `16.29705854078` | `1 + √234` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`266`](n-266.md) | `16.82306208283780` | `17` | `16.32970971676` | `1 + √235` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`267`](n-267.md) | `16 - (1/2)√2 + sqrt(1 + √2)` | `17` | `16.36229149574` | `1 + √236` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`268`](n-268.md) | `16.878814821018413` | `16878814821018413/1000000000000000` | `16.39480431834` | `1 + √237` | open | replayed here, external proof | — | 2026-09-29 |
-| [`269`](n-269.md) | `16.905967058598858` | `16905967058598859/1000000000000000` | `16.42724862054` | `1 + √238` | open | replayed here, external proof | — | 2026-09-29 |
-| [`270`](n-270.md) | `16.937810329390629` | `16937810329390629/1000000000000000` | `16.45962483374` | `1 + √239` | open | replayed here, external proof | — | 2026-09-29 |
-| [`271`](n-271.md) | `16.950820792633813` | `16950820792633813/1000000000000000` | `16.49193338483` | `1 + √240` | open | replayed here, external proof | — | 2026-09-29 |
-| [`272`](n-272.md) | `16.968279785326896` | `16968279785326897/1000000000000000` | `16.52417469626` | `1 + √241` | open | replayed here, external proof | — | 2026-09-29 |
-| [`273`](n-273.md) | `16.983925962660670` | `1698392596266067/100000000000000` | `16.5563491861` | `1 + √242` | open | replayed here, external proof | — | 2026-09-29 |
-| [`274`](n-274.md) | `17` | `17` | `16.58845726812` | `1 + √243` | open | replayed here, external proof | — | 2026-09-07 |
-| [`275`](n-275.md) | `17` | `17` | `16.62049935181` | `1 + √244` | open | replayed here, external proof | — | 2026-09-07 |
-| [`276`](n-276.md) | `17` | `17` | `16.6524758425` | `1 + √245` | open | replayed here, external proof | — | 2026-09-07 |
-| [`277`](n-277.md) | `17` | `17` | `16.68438714136` | `1 + √246` | open | replayed here, external proof | — | 2026-09-07 |
-| [`278`](n-278.md) | `17` | `17` | `16.7162336455` | `1 + √247` | open | replayed here, external proof | — | 2026-09-07 |
-| [`279`](n-279.md) | `17` | `17` | `16.74801574802` | `1 + √248` | open | replayed here, external proof | — | 2026-09-07 |
-| [`280`](n-280.md) | `17` | `17` | `16.77973383806` | `1 + √249` | open | replayed here, external proof | — | 2026-09-07 |
-| [`281`](n-281.md) | `17` | `17` | `16.81138830084` | `1 + √250` | open | replayed here, external proof | — | 2026-09-07 |
-| [`282`](n-282.md) | `17` | `17` | `16.84297951775` | `1 + √251` | open | replayed here, external proof | — | 2026-09-07 |
-| [`283`](n-283.md) | `17` | `17` | `16.87450786639` | `1 + √252` | open | replayed here, external proof | — | 2026-09-07 |
-| [`284`](n-284.md) | `17` | `17` | `16.90597372059` | `1 + √253` | open | replayed here, external proof | — | 2026-09-07 |
-| [`285`](n-285.md) | `17` | `17` | `17` | `1 + √254` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`256`](n-256.md) | `16` | `16` | `16.0` | `16` | proved | replayed here | — | 2026-09-07 |
+| [`257`](n-257.md) | `13 + (5/2)√2` | `17` | `574*√2/257 + 3343/257` | `1/2 + sqrt(257 - floor(√257) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`258`](n-258.md) | `(19/2) + 5 √2` | `17` | `574*√2/257 + 3343/257` | `1/2 + sqrt(258 - floor(√258) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`259`](n-259.md) | `16.602568490497649` | `4150642122624413/250000000000000` | `574*√2/257 + 3343/257` | `1/2 + sqrt(259 - floor(√259) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report; 1 conflict | 2026-10-02 |
+| [`260`](n-260.md) | `11 + 4 √2` | `17` | `574*√2/257 + 3343/257` | `1/2 + sqrt(260 - floor(√260) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`261`](n-261.md) | `16 + (28/41)` | `17` | `574*√2/257 + 3343/257` | `1/2 + sqrt(261 - floor(√261) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`262`](n-262.md) | `16 + (1/2)√2` | `17` | `16.19868415357` | `1/2 + sqrt(262 - floor(√262) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`263`](n-263.md) | `16.742280159187313` | `8371140079593657/500000000000000` | `16.23154621173` | `1/2 + sqrt(263 - floor(√263) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`264`](n-264.md) | `9 + (11/2)√2` | `17` | `16.26433752247` | `1/2 + sqrt(264 - floor(√264) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`265`](n-265.md) | `9 + (11/2)√2` | `17` | `16.29705854078` | `1/2 + sqrt(265 - floor(√265) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`266`](n-266.md) | `16.82306208283780` | `17` | `16.32970971676` | `1/2 + sqrt(266 - floor(√266) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`267`](n-267.md) | `16 - (1/2)√2 + sqrt(1 + √2)` | `17` | `16.36229149574` | `1/2 + sqrt(267 - floor(√267) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`268`](n-268.md) | `16.878814821018413` | `16878814821018413/1000000000000000` | `16.39480431834` | `1/2 + sqrt(268 - floor(√268) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`269`](n-269.md) | `16.905967058598858` | `16905967058598859/1000000000000000` | `16.42724862054` | `1/2 + sqrt(269 - floor(√269) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`270`](n-270.md) | `16.937810329390629` | `16937810329390629/1000000000000000` | `16.45962483374` | `1/2 + sqrt(270 - floor(√270) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`271`](n-271.md) | `16.950820792633813` | `16950820792633813/1000000000000000` | `16.49193338483` | `1/2 + sqrt(271 - floor(√271) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`272`](n-272.md) | `16.968279785326896` | `16968279785326897/1000000000000000` | `16.52417469626` | `1/2 + sqrt(272 - floor(√272) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`273`](n-273.md) | `16.983925962660670` | `1698392596266067/100000000000000` | `16.5563491861` | `1/2 + sqrt(273 - floor(√273) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`274`](n-274.md) | `17` | `17` | `16.58845726812` | `1/2 + sqrt(274 - floor(√274) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`275`](n-275.md) | `17` | `17` | `16.62049935181` | `1/2 + sqrt(275 - floor(√275) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`276`](n-276.md) | `17` | `17` | `16.6524758425` | `1/2 + sqrt(276 - floor(√276) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`277`](n-277.md) | `17` | `17` | `16.68438714136` | `1/2 + sqrt(277 - floor(√277) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`278`](n-278.md) | `17` | `17` | `16.7162336455` | `1/2 + sqrt(278 - floor(√278) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`279`](n-279.md) | `17` | `17` | `16.74801574802` | `1/2 + sqrt(279 - floor(√279) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`280`](n-280.md) | `17` | `17` | `16.77973383806` | `1/2 + sqrt(280 - floor(√280) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`281`](n-281.md) | `17` | `17` | `16.81138830084` | `1/2 + sqrt(281 - floor(√281) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`282`](n-282.md) | `17` | `17` | `16.84297951775` | `1/2 + sqrt(282 - floor(√282) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`283`](n-283.md) | `17` | `17` | `16.87450786639` | `1/2 + sqrt(283 - floor(√283) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`284`](n-284.md) | `17` | `17` | `16.90597372059` | `1/2 + sqrt(284 - floor(√284) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`285`](n-285.md) | `17` | `17` | `17` | `1/2 + sqrt(285 - floor(√285) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`286`](n-286.md) | `17` | `17` | `17` | `17` | proved | replayed here | — | 2026-10-03 |
-| [`287`](n-287.md) | `17` | `17` | `17` | `17` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`287`](n-287.md) | `17` | `17` | `17` | `17` | proved | replayed here | — | 2026-09-07 |
 | [`288`](n-288.md) | `17` | `17` | `17` | `17` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`289`](n-289.md) | `17` | `17` | `17.0` | `17` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`290`](n-290.md) | `14 + (5/2)√2` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1 + √257` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`291`](n-291.md) | `14 + (5/2)√2` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1 + √258` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`292`](n-292.md) | `17.597249391199519` | `17597249391199519/1000000000000000` | `8*√34/145 + 2*√2 + 2031/145` | `1 + √259` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
-| [`293`](n-293.md) | `17 + (26/41)` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1 + √260` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`294`](n-294.md) | `12 + 4 √2` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1 + √261` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
-| [`295`](n-295.md) | `17 + (1/2)√2` | `18` | `17.18641405624` | `1 + √262` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`296`](n-296.md) | `17 + (1/2)√2` | `18` | `17.21727474023` | `1 + √263` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`297`](n-297.md) | `17.740417287548325` | `709616691501933/40000000000000` | `17.24807680927` | `1 + √264` | open | replayed here, external proof | — | 2026-09-29 |
-| [`298`](n-298.md) | `10 + (11/2)√2` | `18` | `17.2788205961` | `1 + √265` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`299`](n-299.md) | `(33/2) + (1/2)√7` | `18` | `17.3095064303` | `1 + √266` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`300`](n-300.md) | `17.82412338847854` | `18` | `17.34013463837` | `1 + √267` | open | replayed here, external proof | formal upper trails report | 2026-09-07 |
-| [`301`](n-301.md) | `17.846667192848074` | `713866687713923/40000000000000` | `17.37070554374` | `1 + √268` | open | replayed here, external proof | — | 2026-09-29 |
-| [`302`](n-302.md) | `17.885993892536710` | `17885993892536711/1000000000000000` | `17.40121946686` | `1 + √269` | open | replayed here, external proof | — | 2026-09-29 |
-| [`303`](n-303.md) | `17.924349265547932` | `4481087316386983/250000000000000` | `17.43167672515` | `1 + √270` | open | replayed here, external proof | — | 2026-09-29 |
-| [`304`](n-304.md) | `17.934650018395903` | `70057226634359/3906250000000` | `17.46207763315` | `1 + √271` | open | replayed here, external proof | — | 2026-09-29 |
-| [`305`](n-305.md) | `17.952959459023539` | `17952959459023541/1000000000000000` | `17.49242250247` | `1 + √272` | open | replayed here, external proof | formal upper trails report; 1 conflict | 2026-09-29 |
-| [`306`](n-306.md) | `17.963449907261179` | `17963449907261179/1000000000000000` | `17.52271164186` | `1 + √273` | open | replayed here, external proof | — | 2026-09-29 |
-| [`307`](n-307.md) | `17.981030548643712` | `140476801161279/7812500000000` | `17.55294535725` | `1 + √274` | open | replayed here, external proof | — | 2026-09-29 |
-| [`308`](n-308.md) | `18` | `18` | `17.58312395178` | `1 + √275` | open | replayed here, external proof | — | 2026-09-07 |
-| [`309`](n-309.md) | `18` | `18` | `17.61324772584` | `1 + √276` | open | replayed here, external proof | — | 2026-09-07 |
-| [`310`](n-310.md) | `18` | `18` | `17.64331697709` | `1 + √277` | open | replayed here, external proof | — | 2026-09-07 |
-| [`311`](n-311.md) | `18` | `18` | `17.67333200053` | `1 + √278` | open | replayed here, external proof | — | 2026-09-07 |
-| [`312`](n-312.md) | `18` | `18` | `17.70329308849` | `1 + √279` | open | replayed here, external proof | — | 2026-09-07 |
-| [`313`](n-313.md) | `18` | `18` | `17.73320053068` | `1 + √280` | open | replayed here, external proof | — | 2026-09-07 |
-| [`314`](n-314.md) | `18` | `18` | `17.76305461424` | `1 + √281` | open | replayed here, external proof | — | 2026-09-07 |
-| [`315`](n-315.md) | `18` | `18` | `17.79285562375` | `1 + √282` | open | replayed here, external proof | — | 2026-09-07 |
-| [`316`](n-316.md) | `18` | `18` | `17.82260384126` | `1 + √283` | open | replayed here, external proof | — | 2026-09-07 |
-| [`317`](n-317.md) | `18` | `18` | `17.85229954635` | `1 + √284` | open | replayed here, external proof | — | 2026-09-07 |
-| [`318`](n-318.md) | `18` | `18` | `17.88194301613` | `1 + √285` | open | replayed here, external proof | — | 2026-09-07 |
-| [`319`](n-319.md) | `18` | `18` | `17.91153452529` | `1 + √286` | open | replayed here, external proof | — | 2026-09-07 |
-| [`320`](n-320.md) | `18` | `18` | `18` | `1 + √287` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
+| [`289`](n-289.md) | `17` | `17` | `17.0` | `17` | proved | replayed here | — | 2026-09-07 |
+| [`290`](n-290.md) | `14 + (5/2)√2` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1/2 + sqrt(290 - floor(√290) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`291`](n-291.md) | `14 + (5/2)√2` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1/2 + sqrt(291 - floor(√291) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`292`](n-292.md) | `17.597249391199519` | `17597249391199519/1000000000000000` | `8*√34/145 + 2*√2 + 2031/145` | `1/2 + sqrt(292 - floor(√292) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-10-02 |
+| [`293`](n-293.md) | `17 + (26/41)` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1/2 + sqrt(293 - floor(√293) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`294`](n-294.md) | `12 + 4 √2` | `18` | `8*√34/145 + 2*√2 + 2031/145` | `1/2 + sqrt(294 - floor(√294) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-10-02 |
+| [`295`](n-295.md) | `17 + (1/2)√2` | `18` | `17.18641405624` | `1/2 + sqrt(295 - floor(√295) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`296`](n-296.md) | `17 + (1/2)√2` | `18` | `17.21727474023` | `1/2 + sqrt(296 - floor(√296) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`297`](n-297.md) | `17.740417287548325` | `709616691501933/40000000000000` | `17.24807680927` | `1/2 + sqrt(297 - floor(√297) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`298`](n-298.md) | `10 + (11/2)√2` | `18` | `17.2788205961` | `1/2 + sqrt(298 - floor(√298) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`299`](n-299.md) | `(33/2) + (1/2)√7` | `18` | `17.3095064303` | `1/2 + sqrt(299 - floor(√299) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`300`](n-300.md) | `17.82412338847854` | `18` | `17.34013463837` | `1/2 + sqrt(300 - floor(√300) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report | 2026-09-07 |
+| [`301`](n-301.md) | `17.846667192848074` | `713866687713923/40000000000000` | `17.37070554374` | `1/2 + sqrt(301 - floor(√301) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`302`](n-302.md) | `17.885993892536710` | `17885993892536711/1000000000000000` | `17.40121946686` | `1/2 + sqrt(302 - floor(√302) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`303`](n-303.md) | `17.924349265547932` | `4481087316386983/250000000000000` | `17.43167672515` | `1/2 + sqrt(303 - floor(√303) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`304`](n-304.md) | `17.934650018395903` | `70057226634359/3906250000000` | `17.46207763315` | `1/2 + sqrt(304 - floor(√304) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`305`](n-305.md) | `17.952959459023539` | `17952959459023541/1000000000000000` | `17.49242250247` | `1/2 + sqrt(305 - floor(√305) + 1/4)` | open | replayed here, external proof | formal upper trails report; formal lower differs from report; 1 conflict | 2026-09-29 |
+| [`306`](n-306.md) | `17.963449907261179` | `17963449907261179/1000000000000000` | `17.52271164186` | `1/2 + sqrt(306 - floor(√306) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`307`](n-307.md) | `17.981030548643712` | `140476801161279/7812500000000` | `17.55294535725` | `1/2 + sqrt(307 - floor(√307) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-29 |
+| [`308`](n-308.md) | `18` | `18` | `17.58312395178` | `1/2 + sqrt(308 - floor(√308) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`309`](n-309.md) | `18` | `18` | `17.61324772584` | `1/2 + sqrt(309 - floor(√309) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`310`](n-310.md) | `18` | `18` | `17.64331697709` | `1/2 + sqrt(310 - floor(√310) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`311`](n-311.md) | `18` | `18` | `17.67333200053` | `1/2 + sqrt(311 - floor(√311) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`312`](n-312.md) | `18` | `18` | `17.70329308849` | `1/2 + sqrt(312 - floor(√312) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`313`](n-313.md) | `18` | `18` | `17.73320053068` | `1/2 + sqrt(313 - floor(√313) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`314`](n-314.md) | `18` | `18` | `17.76305461424` | `1/2 + sqrt(314 - floor(√314) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`315`](n-315.md) | `18` | `18` | `17.79285562375` | `1/2 + sqrt(315 - floor(√315) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`316`](n-316.md) | `18` | `18` | `17.82260384126` | `1/2 + sqrt(316 - floor(√316) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`317`](n-317.md) | `18` | `18` | `17.85229954635` | `1/2 + sqrt(317 - floor(√317) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`318`](n-318.md) | `18` | `18` | `17.88194301613` | `1/2 + sqrt(318 - floor(√318) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`319`](n-319.md) | `18` | `18` | `17.91153452529` | `1/2 + sqrt(319 - floor(√319) + 1/4)` | open | replayed here, external proof | formal lower differs from report | 2026-09-07 |
+| [`320`](n-320.md) | `18` | `18` | `18` | `1/2 + sqrt(320 - floor(√320) + 1/4)` | open | replayed here, external proof | formal lower differs from report; proof audit pending | 2026-10-03 |
 | [`321`](n-321.md) | `18` | `18` | `18` | `18` | proved | replayed here | — | 2026-10-03 |
-| [`322`](n-322.md) | `18` | `18` | `18` | `18` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`322`](n-322.md) | `18` | `18` | `18` | `18` | proved | replayed here | — | 2026-09-07 |
 | [`323`](n-323.md) | `18` | `18` | `18` | `18` | proved | replayed here, external proof | — | 2026-09-07 |
-| [`324`](n-324.md) | `18` | `18` | `18.0` | `18` | proved | replayed here, external proof | — | 2026-09-07 |
+| [`324`](n-324.md) | `18` | `18` | `18.0` | `18` | proved | replayed here | — | 2026-09-07 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

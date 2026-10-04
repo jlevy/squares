@@ -1,0 +1,628 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-a72b23ec598f03d8c.jsonl
+    sha256: d8a66ad7ed3780f2f7e6ede850d60f58c11bcfa0e358226a40db63c7b31ab4d6
+    bytes: 3542257
+    records: 869
+    session_id: 6179239e-fec5-52e8-aabb-a0e229f3f822
+    harness_versions:
+    - 2.1.287
+  span:
+    started_at: '2026-10-02T17:19:14.643Z'
+    ended_at: '2026-10-02T18:02:53.981Z'
+    wall_seconds: 2619.338
+  turns:
+    assistant: 356
+    sidechain: 356
+    by_model:
+      model-withheld-a: 356
+    by_thinking_level:
+      xhigh: 356
+    by_model_and_thinking_level:
+      model-withheld-a @ xhigh: 356
+    by_branch:
+      claude/ecstatic-archimedes-62hj6a: 356
+    latency:
+      count: 303
+      total_seconds: 990.914
+      median_seconds: 1.187
+      max_seconds: 76.62
+  tokens:
+    cache_creation_input_tokens: 773432
+    cache_read_input_tokens: 103008543
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 773432
+    input_tokens: 712
+    output_tokens: 4577
+    thinking_tokens: 21
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 773432
+      cache_read_input_tokens: 103008543
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 773432
+      input_tokens: 712
+      output_tokens: 4577
+      thinking_tokens: 21
+  tool_calls:
+    total: 207
+    total_seconds: 1116.443
+    share_of_wall: 0.4262
+    errors: 1
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 30
+      total_seconds: 263.32
+      median_seconds: 1.356
+      max_seconds: 118.71
+    by_tool:
+      Bash:
+        count: 181
+        total_seconds: 1109.304
+        median_seconds: 0.515
+        max_seconds: 183.633
+      Grep:
+        count: 1
+        total_seconds: 4.484
+        median_seconds: 4.484
+        max_seconds: 4.484
+      Edit:
+        count: 14
+        total_seconds: 1.232
+        median_seconds: 0.085
+        max_seconds: 0.147
+      Read:
+        count: 6
+        total_seconds: 0.789
+        median_seconds: 0.025
+        max_seconds: 0.672
+      SubagentHandback:
+        count: 1
+        total_seconds: 0.452
+        median_seconds: 0.452
+        max_seconds: 0.452
+      Write:
+        count: 4
+        total_seconds: 0.182
+        median_seconds: 0.038
+        max_seconds: 0.074
+    by_command:
+      time env timeout python3 -m pytest:
+        count: 2
+        total_seconds: 215.348
+        median_seconds: 107.674
+        max_seconds: 183.633
+      python3 && and:
+        count: 1
+        total_seconds: 118.71
+        median_seconds: 118.71
+        max_seconds: 118.71
+      time timeout uv run packing-validate:
+        count: 1
+        total_seconds: 116.863
+        median_seconds: 116.863
+        max_seconds: 116.863
+      time uv run python -m pytest:
+        count: 1
+        total_seconds: 71.087
+        median_seconds: 71.087
+        max_seconds: 71.087
+      pytest && git:
+        count: 1
+        total_seconds: 46.699
+        median_seconds: 46.699
+        max_seconds: 46.699
+      python3 && pytest:
+        count: 1
+        total_seconds: 45.595
+        median_seconds: 45.595
+        max_seconds: 45.595
+      git && git && git && git && du && ls:
+        count: 1
+        total_seconds: 45.268
+        median_seconds: 45.268
+        max_seconds: 45.268
+      env timeout python3 -m pytest:
+        count: 1
+        total_seconds: 32.775
+        median_seconds: 32.775
+        max_seconds: 32.775
+      git log:
+        count: 1
+        total_seconds: 31.968
+        median_seconds: 31.968
+        max_seconds: 31.968
+      time env timeout python3 -m devtools.measure_atlas_views:
+        count: 1
+        total_seconds: 26.504
+        median_seconds: 26.504
+        max_seconds: 26.504
+      ? ")]\n    assert place.index(layers?.apply() && ) < place.index(.after(cells) && ,\
+        \ placed\n    assert grid.index(layers?.apply() && ) < grid.index(.after(cells) &&\
+        \ , layer)\n    assert \"history.replaceState(history.state\" in layer\n && packing-validate\
+        \ && pytest"
+      : count: 1
+        total_seconds: 23.832
+        median_seconds: 23.832
+        max_seconds: 23.832
+      git && packing-validate:
+        count: 1
+        total_seconds: 22.712
+        median_seconds: 22.712
+        max_seconds: 22.712
+      timeout uv run python -m pytest:
+        count: 2
+        total_seconds: 20.913
+        median_seconds: 10.457
+        max_seconds: 20.504
+      git && rmdir && ln && pytest:
+        count: 1
+        total_seconds: 20.267
+        median_seconds: 20.267
+        max_seconds: 20.267
+      python3:
+        count: 2
+        total_seconds: 19.686
+        median_seconds: 9.843
+        max_seconds: 19.171
+      timeout uv run packing-validate:
+        count: 1
+        total_seconds: 18.726
+        median_seconds: 18.726
+        max_seconds: 18.726
+      packing-validate && fault:
+        count: 1
+        total_seconds: 18.355
+        median_seconds: 18.355
+        max_seconds: 18.355
+      sed:
+        count: 37
+        total_seconds: 16.495
+        median_seconds: 0.439
+        max_seconds: 0.564
+      grep:
+        count: 21
+        total_seconds: 14.032
+        median_seconds: 0.486
+        max_seconds: 1.545
+      basedpyright && ruff && ruff:
+        count: 1
+        total_seconds: 12.572
+        median_seconds: 12.572
+        max_seconds: 12.572
+      time npm run:
+        count: 1
+        total_seconds: 11.27
+        median_seconds: 11.27
+        max_seconds: 11.27
+      head:
+        count: 21
+        total_seconds: 9.947
+        median_seconds: 0.454
+        max_seconds: 0.93
+      time uv run basedpyright:
+        count: 1
+        total_seconds: 9.618
+        median_seconds: 9.618
+        max_seconds: 9.618
+      git && devtools.render_regularized_atlas && devtools.regularize_axis_components:
+        count: 1
+        total_seconds: 8.69
+        median_seconds: 8.69
+        max_seconds: 8.69
+      tsc && tsc:
+        count: 1
+        total_seconds: 8.56
+        median_seconds: 8.56
+        max_seconds: 8.56
+      devtools.render_regularized_atlas && ls && du:
+        count: 1
+        total_seconds: 8.406
+        median_seconds: 8.406
+        max_seconds: 8.406
+      node && biome && tsc:
+        count: 1
+        total_seconds: 7.417
+        median_seconds: 7.417
+        max_seconds: 7.417
+      test_render_regularized_atlas.py && ruff && basedpyright:
+        count: 1
+        total_seconds: 6.634
+        median_seconds: 6.634
+        max_seconds: 6.634
+      'devtools.render_regularized_atlas && nproc && reg:':
+        count: 1
+        total_seconds: 6.379
+        median_seconds: 6.379
+        max_seconds: 6.379
+      python3 && cmp && diff:
+        count: 1
+        total_seconds: 6.015
+        median_seconds: 6.015
+        max_seconds: 6.015
+      git && git && ls && ls:
+        count: 1
+        total_seconds: 5.914
+        median_seconds: 5.914
+        max_seconds: 5.914
+      rmdir && ln && python3:
+        count: 1
+        total_seconds: 5.862
+        median_seconds: 5.862
+        max_seconds: 5.862
+      cp && cp && python3:
+        count: 1
+        total_seconds: 5.546
+        median_seconds: 5.546
+        max_seconds: 5.546
+      mkdir && python:
+        count: 1
+        total_seconds: 4.65
+        median_seconds: 4.65
+        max_seconds: 4.65
+      ls:
+        count: 10
+        total_seconds: 4.219
+        median_seconds: 0.42
+        max_seconds: 0.51
+      pytest && error && assert:
+        count: 1
+        total_seconds: 4.191
+        median_seconds: 4.191
+        max_seconds: 4.191
+      timeout env python3:
+        count: 1
+        total_seconds: 3.895
+        median_seconds: 3.895
+        max_seconds: 3.895
+      p>) && print(pg.evaluate(navigator.userAgent)):
+        count: 1
+        total_seconds: 3.769
+        median_seconds: 3.769
+        max_seconds: 3.769
+      tbd show:
+        count: 1
+        total_seconds: 3.669
+        median_seconds: 3.669
+        max_seconds: 3.669
+      ruff && pytest:
+        count: 1
+        total_seconds: 2.996
+        median_seconds: 2.996
+        max_seconds: 2.996
+    by_command_family:
+      toolchain:
+        count: 26
+        total_seconds: 638.766
+        median_seconds: 6.716
+        max_seconds: 183.633
+      project:
+        count: 7
+        total_seconds: 196.523
+        median_seconds: 18.355
+        max_seconds: 116.863
+      vcs:
+        count: 17
+        total_seconds: 142.239
+        median_seconds: 0.723
+        max_seconds: 45.268
+      other:
+        count: 21
+        total_seconds: 59.232
+        median_seconds: 0.822
+        max_seconds: 23.832
+      inspection:
+        count: 104
+        total_seconds: 53.854
+        median_seconds: 0.449
+        max_seconds: 2.177
+      filesystem:
+        count: 5
+        total_seconds: 17.883
+        median_seconds: 4.65
+        max_seconds: 5.862
+      shell:
+        count: 1
+        total_seconds: 0.807
+        median_seconds: 0.807
+        max_seconds: 0.807
+    invoked:
+      grep: 106
+      head: 97
+      cd: 97
+      sed: 62
+      tail: 38
+      ls: 28
+      const: 23
+      cat: 22
+      wc: 15
+      echo: 11
+      git diff: 11
+      uv run ruff check: 9
+      ', ': 7
+      the: 7
+      git status: 6
+      ? ')
+
+
+        rep('
+      : 6
+      python3: 5
+      .site-atlas-grid: 5
+      git worktree: 5
+      env timeout python3 -m pytest: 5
+      node: 4
+      and: 4
+      '*': 4
+      a: 4
+      biome: 4
+      uv run ruff format: 4
+      cp: 4
+      zcat: 3
+      cut: 3
+      sort: 3
+      uniq: 3
+      du: 3
+      time uv run python -m devtools.render_regularized_atlas: 3
+      null}: 3
+      'margin:': 3
+      'display:': 3
+      tsc: 3
+      diff: 3
+      'null': 3
+      timeout uv run packing-validate: 3
+      git log: 2
+      git squares: 2
+      mkdir: 2
+      timeout uv run python -m pytest: 2
+      uv run python -m devtools.regularize_axis_components: 2
+      '**': 2
+      tabs.hidden: 2
+      //: 2
+      layers?.apply(): 2
+      rest.childElementCount: 2
+      figure.replaceChildren(...(drawing: 2
+      .site-atlas-n: 2
+      'position:': 2
+      'height:': 2
+      'width:': 2
+      'view:': 2
+      'n:': 2
+      ? " in placed\n    assert margin:"
+      : 2
+      ? " in placed\n    assert display:"
+      : 2
+      ? " in _rule(\n        css,\n        .site-atlas-grid"
+      : 2
+      ? ")]\n    assert place.index(layers?.apply()"
+      : 2
+      ) < place.index(.after(cells): 2
+      time uv run python -m pytest: 2
+      uv run basedpyright: 2
+      timeout env python3: 2
+      rmdir: 2
+      ln: 2
+      env python3: 2
+      'open:': 2
+      AtlasViewSeen: 2
+      'per_line:': 2
+      'tiles:': 2
+      'moving:': 2
+      time env timeout python3 -m pytest: 2
+      uv run python -m pytest: 2
+      time timeout uv run packing-validate: 2
+      tbd show: 1
+      print(d.keys()): 1
+      git grep: 1
+      which: 1
+      time python3 time_render.py: 1
+      file: 1
+      p>): 1
+      print(pg.evaluate(navigator.userAgent)): 1
+      nproc: 1
+      'reg:': 1
+      regularized: 1
+      'searchFor(search:': 1
+      'stepTo(key:': 1
+      declare: 1
+      'cells:': 1
+      'tabs:': 1
+      'template:': 1
+      interface: 1
+      tabs.after(cells): 1
+      layerTemplate: 1
+      (controls: 1
+      (layers: 1
+      layerTabs: 1
+      found: 1
+      layerNote.hidden: 1
+      'flex-wrap:': 1
+      'gap:': 1
+      'justify-content:': 1
+      'margin-block-end:': 1
+      'block-size:': 1
+      'border-radius:': 1
+      'inline-size:': 1
+      'margin-inline-end:': 1
+      'vertical-align:': 1
+      'margin-inline:': 1
+      'inset-inline-start:': 1
+      'translate:': 1
+      ? ')
+
+
+        rep(.site-atlas-pop-figure'
+      : 1
+      ', .site-atlas-pop-figure': 1
+      'font-size:': 1
+      'margin-block:': 1
+      time uv run python: 1
+      gzip: 1
+      time tsc: 1
+      '}),': 1
+      time npm run: 1
+      None: 1
+      python3 measure_atlas_views.py: 1
+      time uv run basedpyright: 1
+      ' in _rule(css, .site-atlas-grid': 1
+      ? ",\n        flex-wrap:"
+      : 1
+      ? ",\n        justify-content:"
+      : 1
+      ? ",\n        margin-block-end:"
+      : 1
+      uv run python: 1
+      place: 1
+      so: 1
+      ? " in grid\n\n\ndef test_the_regularized_badge_is_a_dot_that_leaves_the_number_centred()\
+        \ -> None:\n    \"\"\"The badge is one dot in the accent, sized in the text it stands\
+        \ with. On a tile it\n    is out of the flow past the numbers"
+      : 1
+      ? ",\n        block-size:"
+      : 1
+      ? ",\n        inline-size:"
+      : 1
+      ? ",\n        border-radius:"
+      : 1
+      fit-content: 1
+      ', margin-inline:': 1
+      ', position:': 1
+      ', inset-inline-start:': 1
+      python3 test_render_regularized_atlas.py: 1
+      cmp: 1
+      'on': 1
+      The: 1
+      An: 1
+      seen.push({: 1
+      'layer:': 1
+      'regularized:': 1
+      time env timeout python3 -m devtools.measure_atlas_views: 1
+      error: 1
+      assert: 1
+      git stash: 1
+      fault: 1
+      ? ", placed\n    assert grid.index(layers?.apply()"
+      : 1
+      ) < grid.index(.after(cells): 1
+      ? ", layer)\n    assert \"history.replaceState(history.state\" in layer\n"
+      : 1
+      timeout uvx flowmark: 1
+    invoked_families:
+      inspection: 381
+      other: 199
+      shell: 109
+      toolchain: 47
+      vcs: 28
+      project: 11
+      filesystem: 10
+    by_shell_shape:
+      compound:
+        count: 102
+        total_seconds: 817.031
+        median_seconds: 0.515
+        max_seconds: 183.633
+      python_heredoc:
+        count: 21
+        total_seconds: 230.31
+        median_seconds: 0.807
+        max_seconds: 118.71
+      python_inline:
+        count: 9
+        total_seconds: 33.01
+        median_seconds: 3.895
+        max_seconds: 6.015
+      pipeline:
+        count: 28
+        total_seconds: 19.193
+        median_seconds: 0.475
+        max_seconds: 3.669
+      simple:
+        count: 19
+        total_seconds: 8.0
+        median_seconds: 0.419
+        max_seconds: 0.554
+      heredoc:
+        count: 2
+        total_seconds: 1.76
+        median_seconds: 0.88
+        max_seconds: 1.355
+    by_thinking_level:
+      xhigh:
+        count: 207
+        total_seconds: 1116.443
+        median_seconds: 0.483
+        max_seconds: 183.633
+    shell_traits:
+      pipes: 129
+      redirects_output: 29
+      substitutes: 3
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

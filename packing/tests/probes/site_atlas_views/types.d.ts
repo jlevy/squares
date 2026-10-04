@@ -3,8 +3,10 @@
 /** What `watch` records when the atlas's box of tiles is first put in the page. */
 interface AtlasViewSeen {
   view: string | null;
+  layer: string | null;
   per_line: string;
   tiles: number;
+  regularized: number;
   moving: number;
 }
 

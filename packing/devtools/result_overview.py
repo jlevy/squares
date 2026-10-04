@@ -401,6 +401,13 @@ def film_facts_html(fact: dict[str, Any]) -> str:
         line = fact["cite"][which]
         if line is None:
             continue
+        # A lower bound standing in for a published result found unsound names that
+        # work, `corrects Nagamochi 2005`, between its reference and its note.
+        corrects = (
+            f' <span class="site-corrects">{_esc(line["corrects"])}</span>'
+            if line.get("corrects")
+            else ""
+        )
         note = (
             f' <span class="site-atlas-pop-note">{_esc(line["note"])}</span>'
             if line["note"]
@@ -408,7 +415,7 @@ def film_facts_html(fact: dict[str, Any]) -> str:
         )
         cites.append(
             f'<p class="site-atlas-pop-cite"><span class="site-atlas-pop-which is-{which}">'
-            f"{which}</span>{_esc(line['text'])}{note}</p>"
+            f"{which}</span>{_esc(line['text'])}{corrects}{note}</p>"
         )
     citation = (
         '<p class="site-atlas-pop-head">Citation <span class="site-atlas-pop-record">record '

@@ -86,3 +86,16 @@ interface SiteAtlasViewApi {
 }
 
 declare var SiteAtlasView: SiteAtlasViewApi;
+
+/** The atlas's two drawings of a case (`atlas-layer.js`): the record's own, and the
+ * regularized derived view, which only some cases have. */
+type AtlasLayer = "house" | "regularized";
+
+/** The pure functions of `atlas-layer.js`, which the Node tests run with no document. */
+interface SiteAtlasLayerApi {
+  layerOf(search: string): AtlasLayer;
+  searchFor(search: string, layer: AtlasLayer): string;
+  stepTo(key: string, from: number, count: number): number;
+}
+
+declare var SiteAtlasLayer: SiteAtlasLayerApi;

@@ -18,3 +18,21 @@ interface SiteAtlasViews {
 interface SiteAtlasViewApi {
   mount(parts: SiteAtlasParts): SiteAtlasViews;
 }
+
+/** One atlas block's drawing parts: the block, the box of tiles, the tablist of drawings
+ * and the template of regularized tiles. */
+interface SiteAtlasLayerParts {
+  block: HTMLElement;
+  cells: HTMLElement;
+  tabs: HTMLElement;
+  template: HTMLTemplateElement;
+}
+
+/** A mounted block's one act: make every placed tile the drawing the block is in. */
+interface SiteAtlasLayers {
+  apply(): void;
+}
+
+interface SiteAtlasLayerApi {
+  mount(parts: SiteAtlasLayerParts): SiteAtlasLayers;
+}

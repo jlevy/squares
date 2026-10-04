@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-02-wand125-s61-point-cover.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md, role: review, authority: record, lifecycle: retained}

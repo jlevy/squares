@@ -10,7 +10,7 @@
 ---
 
 > ⚠️ **Contains reconstructed passages.**
-> This transcription contains **2** annotated passage(s) where the PDF extraction was
+> This transcription contains **4** annotated passage(s) where the PDF extraction was
 > damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
 > file for `GARBLED` and `NOTE` to find them.
 > **Any formula near an annotation must be checked against `mcclenagan-2026-optimally-packing-large-square.raw.md`**, which is the
@@ -26,7 +26,7 @@ However, if one packs the squares at slight angles, the wasted space can be decr
 
 $$W(x) > 10^{-100}\sqrt{x - \lfloor x \rfloor}.$$
 
-On the other end, Montgomery improved the upper bound to $W(x) = O(x^{(3+\sqrt{2})/7})$, according to personal communication (see, for example, [1]). In 2009, Fan Chung and Ronald Graham improved it further to $W(x) = O(x^{(3+\sqrt{2})/7}\sqrt{\log x})$. Now, recently in 2020, Chung and Graham claimed that this could be improved to $W(x) = O(x^{3/5})$ (see [1]). Unfortunately, this result has an error in it, which brings the best known bound back to $W(x) = O(x^{(3-\sqrt{3})/2}\sqrt{\log x})$ <!-- GARBLED: the exponent $(3-\sqrt{3})/2$ is reconstructed from fragments "√", "3", "3−", "2" in the raw extraction and may be incorrect -->. In this paper, we show that the bound claimed by Chung and Graham in [1] is, in fact, correct, using a new algorithm:
+On the other end, Montgomery improved the upper bound to $W(x) = O(x^{(3-\sqrt{3})/2})$, according to personal communication (see, for example, [1]).<!-- NOTE: Corrected 2026-10-02 against the archived PDF. This transcription printed Montgomery's bound as $O(x^{(3+\sqrt{2})/7})$, unflagged. The raw extraction lost all three exponents in this paragraph and left their fragments displaced together below the abstract -- "3+", "7", "√", "2" twice and "√", "3", "3−", "2" once -- so the order had to be read off the page, and the transcription assigned them wrongly. Rendered PDF page 1 prints Montgomery's exponent as $\frac{3-\sqrt{3}}{2}$, which agrees with Roth and Vaughan, with Göbel 1979 and with DS7's 2023 corrigendum. McClenagan does not attribute $(3+\sqrt{2})/7$ to Montgomery; that misattribution was this transcription's. --> In 2009, Fan Chung and Ronald Graham improved it further to $W(x) = O(x^{(3+\sqrt{2})/7}\log x)$. Now, recently in 2020, Chung and Graham claimed that this could be improved to $W(x) = O(x^{3/5})$ (see [1]). Unfortunately, this result has an error in it, which brings the best known bound back to $W(x) = O(x^{(3+\sqrt{2})/7}\log x)$ <!-- GARBLED: the exponent $(3-\sqrt{3})/2$ is reconstructed from fragments "√", "3", "3−", "2" in the raw extraction and may be incorrect --><!-- NOTE: Corrected 2026-10-02 against the archived PDF, superseding the reconstruction flagged above, which was wrong. Rendered PDF page 1 prints this bound as $O(x^{\frac{3+\sqrt{2}}{7}}\log x)$, the 2009 Chung–Graham bound restored, and prints the 2009 bound in the previous sentence the same way. This transcription printed both with $\sqrt{\log x}$; the page has no radical over $\log x$ in either place, and the raw extraction's three radicals are all inside the exponents. -->. In this paper, we show that the bound claimed by Chung and Graham in [1] is, in fact, correct, using a new algorithm:
 
 > *[Figure 2: We begin by packing $S(x)$ trivially except for two rectangles of width $h$. -- not extractable from PDF]*
 

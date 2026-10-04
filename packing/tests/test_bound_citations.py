@@ -242,6 +242,8 @@ def test_a_published_bound_and_its_replay_cite_the_one_source_and_name_the_repla
         "value": "2.25",
         # The synthetic source is from 2001, so the bound is not a recent result.
         "recent": False,
+        # No result behind it says it corrects a published one.
+        "corrects": None,
     }
 
 
@@ -589,6 +591,114 @@ def test_the_width_a_line_is_checked_against_counts_its_note() -> None:
         citations.lower_citation(7, _synthetic_case(["E-paper", "E-replay"]), wide)
 
 
+#: A published work a synthetic bound corrects, and the register's record of it.
+FLAWED = {"source_key": "[Flawed 1990]", "result": "T-899", "what": "its lemma is false"}
+
+
+def _correcting_register(*correcting: tuple[str, dict[str, str]]) -> citations.Register:
+    """The synthetic register with a flawed 1990 paper in its bibliography, and with each
+    named result saying it corrects the given work."""
+    register = _synthetic_register()
+    named = dict(correcting)
+    results = [
+        {**result, "corrects": named[result["id"]]} if result["id"] in named else result
+        for result in register.results
+    ]
+    sources = {
+        **register.sources,
+        "[Flawed 1990]": citations.Source("[Flawed 1990]", ("Flawed",), 1990, "J. X"),
+    }
+    return citations.Register(register.evidence, results, sources, register.names)
+
+
+def test_a_bound_whose_results_correct_a_published_work_names_that_work() -> None:
+    """The tag is read from the results the line lists, never from its source key: the
+    replay T-901 says it corrects the flawed paper, so the line carries that work's key,
+    its short citation as the bibliography prints it, and the register's record of it."""
+    register = _correcting_register(("T-901", FLAWED))
+    line = citations.lower_citation(7, _synthetic_case(["E-paper", "E-replay"]), register)
+    assert line is not None
+    assert line["corrects"] == {
+        "source_key": "[Flawed 1990]",
+        "credit": "Flawed 1990",
+        "result": "T-899",
+    }
+    assert citations.corrects_tag(line["corrects"]) == "corrects Flawed 1990"
+    # Set between the reference and the note, and the recency is untouched by it.
+    assert citations.drawn(line) == (
+        "Author 2001, J. Test 1 corrects Flawed 1990 (confirmed T-901)"
+    )
+    assert line["recent"] is False
+    # An upper line carries neither field: both are the lower bound's alone.
+    upper = citations.upper_citation(
+        7, _synthetic_case(["E-paper"], certificate=True), register
+    )
+    assert upper is not None
+    assert "corrects" not in upper
+    assert "recent" not in upper
+
+
+def test_a_project_bound_that_corrects_a_published_work_says_so_too() -> None:
+    register = _correcting_register(("T-900", FLAWED))
+    line = citations.lower_citation(7, _synthetic_case(["E-ours"]), register)
+    assert line is not None
+    assert line["basis"] == "project"
+    assert line["recent"] is True
+    assert line["corrects"] == {
+        "source_key": "[Flawed 1990]",
+        "credit": "Flawed 1990",
+        "result": "T-899",
+    }
+
+
+def test_a_result_that_corrects_nothing_leaves_the_tag_off() -> None:
+    """Only the results the line lists are asked: T-903 corrects the paper at n = 8, which
+    is not this n, so the n = 7 line carries no tag."""
+    register = _correcting_register(("T-903", FLAWED))
+    line = citations.lower_citation(7, _synthetic_case(["E-paper", "E-replay"]), register)
+    assert line is not None
+    assert line["corrects"] is None
+    assert citations.corrects_tag(None) is None
+
+
+def test_two_results_naming_different_corrected_works_fail_rather_than_choosing() -> None:
+    other = {"source_key": "[Other 2002]", "result": "T-898", "what": "also false"}
+    register = _correcting_register(("T-901", FLAWED), ("T-902", other))
+    with pytest.raises(ValueError, match="correct 2 published works"):
+        citations.lower_citation(7, _synthetic_case(["E-paper", "E-replay"]), register)
+    # Two results naming the same work are one tag.
+    register = _correcting_register(("T-901", FLAWED), ("T-902", FLAWED))
+    line = citations.lower_citation(7, _synthetic_case(["E-paper", "E-replay"]), register)
+    assert line is not None
+    assert line["corrects"]["result"] == "T-899"
+
+
+def test_a_corrected_work_missing_from_the_bibliography_fails() -> None:
+    register = _correcting_register(("T-901", {**FLAWED, "source_key": "[Nowhere 1980]"}))
+    with pytest.raises(ValueError, match=r"\[Nowhere 1980\] is not in bibliography.yaml"):
+        citations.lower_citation(7, _synthetic_case(["E-paper", "E-replay"]), register)
+
+
+def test_the_width_a_line_is_checked_against_counts_its_correction() -> None:
+    """The tag shares the stage's line with the reference and the note, so the reference
+    gives way to it as it does to the note: here the venue falls to its short form."""
+    register = _correcting_register(("T-901", FLAWED))
+    sources = {
+        **register.sources,
+        "[Paper 2001]": citations.Source(
+            "[Paper 2001]", ("Author",), 2001, "V" * 30, short_venue="Short"
+        ),
+    }
+    wide = citations.Register(register.evidence, register.results, sources, register.names)
+    line = citations.lower_citation(7, _synthetic_case(["E-paper", "E-replay"]), wide)
+    assert line is not None
+    assert line["text"] == "Author 2001, Short"
+    assert len(citations.drawn(line)) <= citations.TEXT_LIMIT
+    plain = citations.lower_citation(7, _synthetic_case(["E-paper"]), wide)
+    assert plain is not None
+    assert plain["text"] == f"Author 2001, {'V' * 30}"
+
+
 # ------------------------------------------------------------ over the recorded register
 
 #: Lines the recorded register gives, chosen from cases whose sources are settled. Each is
@@ -605,7 +715,16 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # The grid ceiling is derived whoever the catalogue credits (think-dlof).
     6: (None, ("Kearney & Shiu 2002, Electron. J. Combin. 9, #R14", "external", "verified")),
     # What the register verified, not the earlier reported proof (the owner, 2026-09-22).
-    7: (None, ("Nagamochi 2005, Electron. J. Combin. 12, #R37", "external", "verified")),
+    # chelokot's Lean theorem s(n^2 - 2) = n, replayed here (T-086), since 2026-10-02,
+    # which stands in for Nagamochi's Theorem 2, so the line says it corrects that paper.
+    7: (
+        None,
+        (
+            "chelokot 2026, GitHub corrects Nagamochi 2005 (confirmed T-086)",
+            "external",
+            "verified",
+        ),
+    ),
     10: (
         ("Göbel 1979, Squares in Squares", "external", "verified"),
         ("Stromquist 2003, Electron. J. Combin. 10, #R8", "external", "verified"),
@@ -647,7 +766,8 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     ),
     # The catalogue credits nobody, so the line cites the catalogue by its compilers. The
     # lower line was Nagamochi's until 3 October 2026, when the replayed linear
-    # certificate of 2 October was recorded (T-080).
+    # certificate of 2 October was recorded (T-080); on PR 305's line it was Karakuş's from
+    # 2 October (T-083) until the two lines merged.
     101: (
         ("Friedman & Ellsworth, Squares in Squares (reported)", "external", "reported"),
         (
@@ -660,17 +780,17 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # Couzo's certified packing took the case; the synthetic test above keeps that shape.
     132: (
         ("Couzo 2026, GitHub (confirmed T-056)", "external", "verified"),
-        ("Nagamochi 2005, Electron. J. Combin. 12, #R37", "external", "verified"),
+        ("Karakus 2026, arXiv:2609.37410 corrects Nagamochi 2005", "external", "verified"),
     ),
     # A certified ceiling that trails its report by two units of the printed place is
     # still cited as reported, with the register entry that confirms the packing.
     206: (
         ("Couzo 2026, GitHub (reported; confirmed T-056)", "external", "reported"),
-        ("Nagamochi 2005, Electron. J. Combin. 12, #R37", "external", "verified"),
+        ("Karakus 2026, arXiv:2609.37410 corrects Nagamochi 2005", "external", "verified"),
     ),
     211: (
         ("de Winter 2026, GitHub (confirmed T-057)", "external", "verified"),
-        ("Nagamochi 2005, Electron. J. Combin. 12, #R37", "external", "verified"),
+        ("Karakus 2026, arXiv:2609.37410 corrects Nagamochi 2005", "external", "verified"),
     ),
 }
 
@@ -747,11 +867,11 @@ RECORDED_LINKS: dict[tuple[int, str], tuple[list[str], list[str]]] = {
     # Two results cite Bentz 2010 at n = 13 -- one of them says a lemma is false as
     # printed -- and neither replays the bound, so neither confirms it.
     (13, "lower"): (["T-005", "T-006"], []),
-    # The register records Nagamochi's theorem below 100 without replaying it.
-    (7, "lower"): (["T-007"], []),
-    # Above 100 it records Nagamochi's theorem nowhere, so the line links no result; n = 101
-    # stood here until its linear certificate's replay was recorded (T-080).
-    (106, "lower"): ([], []),
+    # chelokot's Lean proof, replayed here with its axiom receipt, since 2026-10-02.
+    (7, "lower"): (["T-086"], ["T-086"]),
+    # Karakuş's general bound, read here and not replayed, since 2026-10-02; n = 101 stood
+    # here until its linear certificate's replay was recorded (T-080) on 3 October.
+    (106, "lower"): (["T-083"], []),
     (101, "lower"): (["T-080"], ["T-080"]),
     # This project's own bound, established rather than confirmed, was T-030's until
     # 2026-10-02 (`test_a_novel_first_party_bound_cites_this_project_and_its_result` keeps
@@ -887,6 +1007,28 @@ def test_the_recent_lower_bounds_are_exactly_the_starred_cases() -> None:
     assert starred  # an empty set would pass vacuously
 
 
+def test_the_figure_counts_exactly_the_corrections_the_lines_name() -> None:
+    """The composite figure's `correction` is the citation record's `corrects`, and its
+    totals count them beside the starred cases, never more of them than are starred."""
+    composite = _composite()
+    flagged = {n for n, figure in composite.items() if figure["lower"]["correction"]}
+    tagged = {
+        entry["n"]
+        for entry in _record()["entries"]
+        if entry["lower"] is not None and entry["lower"]["corrects"]
+    }
+    assert flagged == tagged
+    assert flagged
+    assert all(composite[n]["lower"]["recent_result"] for n in flagged)
+    figure = json.loads(COMPOSITE.read_text(encoding="utf-8"))["figure"]
+    assert figure["totals"]["lower_bound_correction"] == len(flagged)
+    for drawn in figure["composites"]:
+        first, last = drawn["range"]["first_n"], drawn["range"]["last_n"]
+        totals = drawn["totals"]
+        assert totals["lower_bound_correction"] == sum(first <= n <= last for n in flagged)
+        assert totals["lower_bound_correction"] <= totals["lower_bound_recent_result"]
+
+
 def test_the_project_lower_bounds_are_exactly_those_first_proved_here() -> None:
     proved = {n for n, figure in _composite().items() if figure["lower"]["first_proved_here"]}
     project = {
@@ -923,7 +1065,70 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     assert lines[18]["recent"]
     assert lines[18]["text"] == "wand125 after Tokoharu, Levy et al. 2026, GitHub"
     assert all(line["recent"] for line in lines.values() if line and line["basis"] == "project")
-    assert not lines[4]["recent"]  # Nagamochi 2005
+    assert not lines[6]["recent"]  # Kearney and Shiu 2002
+
+
+def test_a_lower_bound_corrects_what_the_results_it_lists_say_they_correct() -> None:
+    """Each line's `corrects` is the one work its results name in their own `corrects`,
+    with the credit the bibliography prints for that work, or null where none names one."""
+    register = _register()
+    by_id = {str(result["id"]): result for result in register.results}
+    for entry in _record()["entries"]:
+        line = entry["lower"]
+        if line is None:
+            continue
+        named = [
+            by_id[rid]["corrects"] for rid in line["results"] if by_id[rid].get("corrects")
+        ]
+        if not named:
+            assert line["corrects"] is None, entry["n"]
+            continue
+        keys = {(item["source_key"], item["result"]) for item in named}
+        assert len(keys) == 1, entry["n"]
+        ((key, result),) = keys
+        source = register.sources[key]
+        assert line["corrects"] == {
+            "source_key": key,
+            "credit": citations.short_cite(source.credited, source.year),
+            "result": result,
+        }, entry["n"]
+
+
+def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
+    """Karakuş's floor and chelokot's s(k^2 - 2) = k stand in for Nagamochi's Theorem 2,
+    whose Lemma 1 is false (the owner, 2026-10-02): every bound they carry is still a
+    recent result, starred, and is tagged with the paper it corrects, which the register
+    records as T-007, now V0. No other bound is tagged."""
+    lines = {entry["n"]: entry["lower"] for entry in _record()["entries"] if entry["lower"]}
+    corrected = {n: line for n, line in lines.items() if line["corrects"]}
+    # 267 on 2026-10-02; 265 since 3 October, when n = 37 and 61 moved onto Bašić and
+    # Slivková's 2018 piercing bound (T-087), which corrects nothing; 225 since the merge
+    # of the same day, when replayed certificates and covers recorded in parallel
+    # (T-048, T-062, T-064, T-066, T-067, T-069 to T-072, T-074 and T-075) took 40 of the
+    # corrected floors, none of them correcting anything; 220 since the second merge that
+    # day, when wand125's replayed linear certificate (T-080) took n = 101 to 105; 219
+    # since the third, when its replayed n = 82 linear certificate (T-076) took n = 82.
+    assert len(corrected) == 219
+    assert 37 not in corrected
+    assert 61 not in corrected
+    assert all(line["recent"] for line in corrected.values())
+    assert {line["source_key"] for line in corrected.values()} == {
+        "[Karakuş 2026]",
+        "[chelokot Nagamochi counterexample 2026]",
+    }
+    assert {
+        (line["corrects"]["credit"], line["corrects"]["result"], line["corrects"]["source_key"])
+        for line in corrected.values()
+    } == {("Nagamochi 2005", "T-007", "[Nagamochi 2005]")}
+    # Recent bounds that correct nothing keep the star and no tag.
+    for n in (11, 12, 17, 18, 21):
+        assert lines[n]["recent"], n
+        assert lines[n]["corrects"] is None, n
+    corrected_result = next(r for r in _register().results if r["id"] == "T-007")
+    assert corrected_result["verification"] == "V0"
+    assert citations.corrected_lower_bounds() == {
+        n: line["corrects"] for n, line in corrected.items()
+    }
 
 
 def test_a_source_from_the_recent_year_must_say_its_date() -> None:
@@ -1081,3 +1286,16 @@ def test_every_source_key_the_register_uses_is_defined_once_spelled() -> None:
         elif key not in _defined_keys():
             undefined[key] = sorted(where)
     assert undefined == {}
+
+
+def test_the_stage_spelling_folds_only_what_the_faces_cannot_draw() -> None:
+    # Karakuş's cedilla is outside the stage's latin faces; Latin-1 accents, dashes and
+    # quotation marks are not folded.
+    assert citations.stage_spelling("Karakuş 2026, arXiv:2609.37410") == (
+        "Karakus 2026, arXiv:2609.37410"
+    )
+    dash = "\N{EN DASH}"
+    assert citations.stage_spelling(f"Erdős and Göbel {dash} “1979”") == (
+        f"Erdos and Göbel {dash} “1979”"
+    )
+    assert citations.stage_spelling("Kearney, Shiu 2002") == "Kearney, Shiu 2002"

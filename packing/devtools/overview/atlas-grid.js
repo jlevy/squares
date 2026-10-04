@@ -14,12 +14,21 @@
 // The tabs over the tiles choose between two views of the one set, the grid and the
 // triangle, which `atlas-view.js` lays out and moves between (`SiteAtlasView.mount`).
 // They ship `hidden` and show once the tiles are placed.
+//
+// Beside them, where some case has a regularized view, a second pair chooses the drawing,
+// House or Regularized (`SiteAtlasLayer.mount`, `atlas-layer.js`): a case with a
+// regularized view has a second tile in a third template, which stands in for its house
+// tile wherever the grid places one. Either tile opens the same case record, whose
+// drawing is the house one: the regularized layer is the atlas's view, not the record's.
 (() => {
   const grid = document.querySelector("[data-atlas-grid]");
   const template = grid?.querySelector("template[data-atlas-first]");
   const restTemplate = grid?.querySelector("template[data-atlas-rest]");
   const toggle = grid?.querySelector("[data-atlas-toggle]");
   const tabs = grid?.querySelector("[data-atlas-views]");
+  const controls = grid?.querySelector("[data-atlas-controls]");
+  const layerTabs = grid?.querySelector("[data-atlas-layers]");
+  const layerTemplate = grid?.querySelector("template[data-atlas-regularized]");
   if (
     !(grid instanceof HTMLElement) ||
     !(template instanceof HTMLTemplateElement) ||
@@ -38,13 +47,23 @@
   rest.hidden = true;
 
   // The view the address names is set here, before any tile is placed, so the page
-  // never shows one view and then the other.
+  // never shows one view and then the other; and so is the drawing.
   const views = SiteAtlasView.mount({ block: grid, cells, tabs });
+  const layers =
+    layerTabs instanceof HTMLElement && layerTemplate instanceof HTMLTemplateElement
+      ? SiteAtlasLayer.mount({ block: grid, cells, tabs: layerTabs, template: layerTemplate })
+      : null;
 
+  // The tiles go after the row of tabs, and each placed tile is the drawing the block is
+  // in before the box is put in the page.
   const place = () => {
     cells.append(template.content.cloneNode(true), rest);
-    tabs.after(cells);
+    layers?.apply();
+    (controls instanceof HTMLElement ? controls : tabs).after(cells);
     tabs.hidden = false;
+    if (layers !== null && layerTabs instanceof HTMLElement) {
+      layerTabs.hidden = false;
+    }
     if (toggle.parentElement) {
       toggle.parentElement.hidden = false;
     }
@@ -84,6 +103,7 @@
   const expandGrid = (open, settle) => {
     if (open && rest.childElementCount === 0) {
       rest.append(restTemplate.content.cloneNode(true));
+      layers?.apply();
     }
     views.change(() => {
       rest.hidden = !open;

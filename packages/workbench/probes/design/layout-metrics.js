@@ -207,6 +207,7 @@
         slot: line.classList.contains("cite-lower") ? "lower" : "upper",
         bound: line.querySelector(".cite-bound")?.textContent ?? null,
         text: line.querySelector(".cite-text")?.textContent ?? null,
+        corrects: line.querySelector(".cite-corrects")?.textContent ?? null,
         note: line.querySelector(".cite-note")?.textContent ?? null,
         color: line.querySelector(".cite-bound")
           ? getComputedStyle(/** @type {Element} */ (line.querySelector(".cite-bound"))).color

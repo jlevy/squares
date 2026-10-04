@@ -2036,6 +2036,7 @@ def atlas_film_facts() -> list[dict[str, object]]:
     """
     import json  # noqa: PLC0415
 
+    from devtools.build_bound_citations import corrects_tag  # noqa: PLC0415
     from devtools.overview_data import CITATIONS, COMPOSITE  # noqa: PLC0415
 
     figure = json.loads(COMPOSITE.read_text(encoding="utf-8"))["figure"]["entries"]
@@ -2064,10 +2065,17 @@ def atlas_film_facts() -> list[dict[str, object]]:
         if entry["exactness"]["state"] not in ("closed-form", "minimal-polynomial"):
             open_items.append("exact value")
         record = cited[n]
+        # A lower bound standing in for a published result found unsound names that work,
+        # `corrects Nagamochi 2005`, between its reference and its note (the owner,
+        # 2026-10-02); it names outside work, never a correction to this register.
         citations = {
             bound: None
             if record.get(bound) is None
-            else {"text": record[bound]["text"], "note": record[bound]["note"]}
+            else {
+                "text": record[bound]["text"],
+                "corrects": corrects_tag(record[bound].get("corrects")),
+                "note": record[bound]["note"],
+            }
             for bound in ("lower", "upper")
         }
         facts.append(
@@ -2112,6 +2120,106 @@ ATLAS_VIEWS: tuple[tuple[str, str], ...] = (("grid", "Grid"), ("triangle", "Tria
 
 #: The id the script gives the box of tiles, which each view tab controls.
 ATLAS_PANEL = "atlas-cells"
+
+#: The atlas's two drawings of a case, in tab order: the key the block's
+#: `data-atlas-layer` and the address's `?layer=` take, and the tab's label. The house
+#: drawing is the record's own rendering; the regularized one is the derived view
+#: `atlas/known-best/regularized/` keeps for some cases (X-049, Exact Regularization),
+#: and its key is the word the layer's index says every drawing of it must carry. The
+#: first is the default and the one the page is rendered in; `overview/atlas-layer.js`
+#: swaps the other in, and a case with no regularized view keeps its house tile.
+ATLAS_LAYERS: tuple[tuple[str, str], ...] = (("house", "House"), ("regularized", "Regularized"))
+
+
+def atlas_layer_mark() -> str:
+    """The regularized layer's badge: one dot in the accent, drawn by site.css and hidden
+    from assistive technology, whose names say "regularized" in words. A regularized
+    tile carries it after its number, and the Regularized tab carries it before its word,
+    so the tab is the key to the tiles."""
+    return '<span class="site-atlas-layer-mark" aria-hidden="true"></span>'
+
+
+def atlas_regularized() -> tuple[int, ...]:
+    """The cases with a regularized drawing, read from the layer's index: each record it
+    lists as regularized, whose view `devtools.render_regularized_atlas` has drawn.
+
+    The set is the index's, so a view the layer gains joins the atlas at the next
+    render. A drawing the index does not ask for, or one it asks for that is not there,
+    is a stale render, and the page is refused rather than drawn from it.
+    """
+    import json  # noqa: PLC0415
+
+    from devtools import render_frontier_page as frontier  # noqa: PLC0415
+
+    index = json.loads(frontier.REGULARIZED_INDEX.read_text(encoding="utf-8"))
+    label = ATLAS_LAYERS[1][0]
+    if index.get("label") != label:
+        raise SystemExit(f"the regularized index labels its drawings {index.get('label')!r}")
+    listed = tuple(sorted(e["n"] for e in index["entries"] if e["status"] == "regularized"))
+    drawn = tuple(
+        sorted(
+            int(path.stem.removeprefix("n-"))
+            for path in frontier.REGULARIZED_RENDERINGS.glob("n-*.svg")
+        )
+    )
+    if drawn != listed:
+        missing = sorted(set(listed) - set(drawn))
+        extra = sorted(set(drawn) - set(listed))
+        raise SystemExit(
+            f"the regularized drawings are stale (missing {missing}, unexpected {extra}); "
+            "run python -m devtools.render_regularized_atlas --update"
+        )
+    return listed
+
+
+def atlas_layer_tabs() -> str:
+    """The tabs that choose the atlas's drawing, House or Regularized: the same strip as
+    the view tabs (`atlas_view_tabs`), beside them over the tiles, a tablist of two
+    buttons that swap a case's tile for its other drawing in place. House is selected
+    and is the only tab in the page's tab order; the Regularized tab carries the badge
+    its tiles carry (`atlas_layer_mark`). It ships `hidden`, as the view tabs do."""
+    default = ATLAS_LAYERS[0][0]
+    tabs = "".join(
+        f'<button type="button" role="tab" id="atlas-layer-{key}" data-atlas-layer-tab="{key}" '
+        f'aria-selected="{"true" if key == default else "false"}" '
+        f'aria-controls="{ATLAS_PANEL}"{"" if key == default else ' tabindex="-1"'}>'
+        f"{'' if key == default else atlas_layer_mark()}{_esc(label)}</button>"
+        for key, label in ATLAS_LAYERS
+    )
+    return (
+        '<div class="site-tabs site-atlas-layers" role="tablist" aria-label="Atlas drawings" '
+        f"data-atlas-layers hidden>{tabs}</div>"
+    )
+
+
+def _atlas_cell(n: int, status: str, *, regularized: bool = False) -> str:
+    """One case's tile: its drawing, a link to its case record, and its number under it.
+
+    A regularized tile is the same tile drawn from the regularized rendering, marked
+    `data-atlas-layer="regularized"`, named as the regularized view, and badged after its
+    number. It reduces its drawing by `packing_svg`, as a house tile does, so the two
+    differ only where the view moved a square or changed a square's shade.
+    """
+    from devtools import render_frontier_page as frontier  # noqa: PLC0415
+    from devtools.render_case_pages import case_url  # noqa: PLC0415
+
+    square = " data-atlas-square" if math.isqrt(n) ** 2 == n else ""
+    if regularized:
+        layer = f' data-atlas-layer="{ATLAS_LAYERS[1][0]}"'
+        name = f"n = {n}, {ATLAS_LAYERS[1][0]} view, {_esc(status)}"
+        drawing = frontier.packing_svg(
+            n, units=ATLAS_UNITS, root=frontier.REGULARIZED_RENDERINGS
+        )
+        badge = atlas_layer_mark()
+    else:
+        layer, name, badge = "", f"n = {n}, {_esc(status)}", ""
+        drawing = frontier.packing_svg(n, units=ATLAS_UNITS)
+    return (
+        f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
+        f'data-atlas-n="{n}"{square}{layer} '
+        f'data-status="{_esc(status)}" aria-label="{name}">'
+        f'{drawing}<span class="site-atlas-n">{n}{badge}</span></a>'
+    )
 
 
 def atlas_view_tabs() -> str:
@@ -2163,31 +2271,42 @@ def atlas_grid() -> str:
     ships `hidden`, since without the script it would do nothing. The atlas popover,
     filled by the script from a JSON of the film's facts, stood after the block until
     2026-10-03; the case popover took its place.
+
+    The block is rendered with the house drawings (`data-atlas-layer`), under tabs beside
+    the view tabs that switch it to the regularized ones (`atlas_layer_tabs`). The cases
+    with a regularized view (`atlas_regularized`) have a second tile each, in a third
+    `<template>`, which `overview/atlas-layer.js` swaps for the house tile in place; every
+    other case keeps its house tile in both. Where no case has a view, the block has no
+    third template and no layer tabs. The two strips stand in one row over the tiles
+    (`.site-atlas-controls`), which the script places the tiles after.
     """
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
-    from devtools.render_case_pages import case_popover, case_url  # noqa: PLC0415
+    from devtools.render_case_pages import case_popover  # noqa: PLC0415
 
     cases = frontier.frontier_cases()
-    cells = []
-    for case in cases:
-        n = case["n"]
-        status = case["status"]
-        square = " data-atlas-square" if math.isqrt(n) ** 2 == n else ""
-        cells.append(
-            f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
-            f'data-atlas-n="{n}"{square} '
-            f'data-status="{_esc(status)}" aria-label="n = {n}, {_esc(status)}">'
-            f"{frontier.packing_svg(n, units=ATLAS_UNITS)}"
-            f'<span class="site-atlas-n">{n}</span></a>'
-        )
+    status = {case["n"]: case["status"] for case in cases}
+    cells = [_atlas_cell(case["n"], case["status"]) for case in cases]
+    regularized = atlas_regularized()
+    if not set(regularized) <= set(status):
+        untracked = sorted(set(regularized) - set(status))
+        raise SystemExit(f"regularized views of untracked cases: {untracked}")
+    layer_cells = "".join(_atlas_cell(n, status[n], regularized=True) for n in regularized)
+    layers = (
+        (atlas_layer_tabs(), f"<template data-atlas-regularized>{layer_cells}</template>")
+        if regularized
+        else ("", "")
+    )
     more, less = "Show More", "Show Less"
     name_more = f"Show more: all {len(cases)} cases"
     name_less = f"Show less: the first {ATLAS_FIRST}"
     return (
         f'<div class="site-wide site-atlas-grid" data-atlas-view="{ATLAS_VIEWS[0][0]}" '
-        f"data-atlas-grid>{atlas_view_tabs()}"
+        f'data-atlas-layer="{ATLAS_LAYERS[0][0]}" data-atlas-grid>'
+        '<div class="site-atlas-controls" data-atlas-controls>'
+        f"{atlas_view_tabs()}{layers[0]}</div>"
         f"<template data-atlas-first>{''.join(cells[:ATLAS_FIRST])}</template>"
         f"<template data-atlas-rest>{''.join(cells[ATLAS_FIRST:])}</template>"
+        f"{layers[1]}"
         # The triangle's one-line key ("Each row ends at a perfect square…") stood here
         # and the line under the expander ("Every case from n = 1 to 324 is also in the
         # frontier survey, and each has a case record.") after it, until 2026-10-02 (the

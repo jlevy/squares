@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-01'
+last_reviewed: '2026-10-02'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -74,6 +74,16 @@ sources:
     authors: [Bentz]
     year: 2016
     venue: arXiv:1606.03746
+  - key: '[Basic-Slivkova 2018]'
+    authors: [Bašić, Slivková]
+    year: 2018
+    venue: Discrete Appl. Math. 247
+    lineage: independent
+    note: >-
+      "On optimal piercing of a square", Discrete Applied Mathematics 247 (2018). Its
+      Theorem 7 bounds the number of unit squares a square of side x holds by a lattice
+      piercing set; Theorem 10 applies it at n = 61. Archived as
+      resources/papers/basic-slivkova-2018-optimal-piercing-square.pdf.
   - key: '[Trump 2023]'
     authors: [Trump]
     year: 2023
@@ -97,6 +107,12 @@ sources:
     authors: [Göbel]
     year: 1979
     venue: Math. Centre Tracts 106
+  - key: '[Karakuş 2026]'
+    authors: [Karakuş]
+    year: 2026
+    venue: arXiv:2609.37410
+    dated: '2026-09-29'
+    lineage: independent
   - key: '[Kearney–Shiu 2002]'
     authors: [Kearney, Shiu]
     year: 2002
@@ -788,6 +804,21 @@ sources:
       is 2026-09-24 in UTC, the date given here; CITATION.cff gives 2026-09-23. Every
       packing is superseded here by [franciscouzo square-packing 2026-09-27]; no field
       holds it (web/casson-square-packing-2026-09-23/README.md).
+  - key: '[chelokot Nagamochi counterexample 2026]'
+    authors: [chelokot]
+    year: 2026
+    venue: GitHub
+    dated: '2026-09-04'
+    credit: chelokot
+    lineage: independent
+    note: >-
+      chelokot/square-packing-archive, docs/nagamochi-score-counterexample.md, first added
+      2026-09-04 (UTC) and unchanged to the retained head: a square of side 10001/10000 in
+      the 4 x 4 container scoring 25009470849041/25584000000000 < 1 under Nagamochi 2005's
+      Section 3 weights, against that paper's Lemma 1. The author is the handle the
+      repository's README and NOTICE name; its ATTRIBUTION.md credits AI-produced research
+      and Lean formalizations to an AI system, and the repository does not cite this
+      project (web/chelokot-nagamochi-counterexample-2026-10-02/README.md).
 # The surname each credited name is cited under, for the names `found_by` and
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being

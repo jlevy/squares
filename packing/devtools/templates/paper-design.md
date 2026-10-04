@@ -1185,6 +1185,26 @@ it.
   420ms; the hundred miss no frame, and all 324 miss ten of 39 at 120Hz, the longest
   18ms.
 
+- **Atlas drawings.** Beside the view tabs, in one row over the tiles that wraps under
+  them on a phone, a second strip of the same tabs chooses the drawing
+  (`atlas_layer_tabs`): **House**, the default, the record’s own rendering, and
+  **Regularized**, the derived view that `atlas/known-best/regularized/` keeps for some
+  cases (X-049), with each square’s shade from the same house rule on the regularized
+  pose. `devtools.render_regularized_atlas` draws those views from the layer’s index, so
+  a view the layer gains joins the atlas at the next render; its `--check` holds the
+  drawings to the index.
+  A case with a view has a second tile in a third `<template>`, and choosing Regularized
+  swaps it in for the house tile in place, with the tile’s place in the triangle and the
+  keyboard focus carried over, so nothing moves and the two can be compared by flicking
+  between the tabs (`overview/atlas-layer.js`); every other case keeps its house tile.
+  A regularized tile carries the layer’s badge, a dot in the accent hung past its number
+  so the number stays centred, and the Regularized tab carries the same dot as its key.
+  Either tile opens the same case record, whose drawing is the house one: the
+  regularized layer is the atlas’s view, not the record’s. The drawing is in the address
+  as `?layer=regularized` (house has none), read before any tile is placed.
+  `tests/test_site_atlas_views.py` reads the swap in Chromium, and
+  `devtools.measure_atlas_views` measures each layout in both drawings.
+
 - **Action under a table or grid.** Where one control follows a table or a grid, it is
   the site’s one action button, `.site-action`, in a centred `.site-action-row`: the
   look of a popover’s action (**Popovers**, the accent fill with the page’s background

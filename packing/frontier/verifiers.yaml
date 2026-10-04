@@ -281,6 +281,27 @@ verifiers:
       - {revision: 6aa82ba457e9eaeaaa3af0833600f27f91a2fce3, note: "the s(13) build here, Lean 4.33.1 with Mathlib's official cache"}
       - {revision: 08e8a5faa54c0a7b0bb1cb0134c77d3565ce40c5, note: "the k^2 - 3 reduction as retained, not built here"}
 
+  - id: V-chelokot-lean
+    program: The source's Lean development (formal/), built by lake at its pinned toolchain
+    author: chelokot
+    provenance: external
+    language: [Lean 4]
+    methods: [proof-assistant-checked]
+    role: decides
+    summary: >-
+      Kernel-checks Records.NearSquare.squareMinusTwo_isMinimumSide, s(n^2 - 2) = n for
+      every n >= 2, by compensating each low-scoring square under Nagamochi's measure from
+      other squares of the packing, without his Lemma 1.
+    source:
+      - packing/resources/web/chelokot-nagamochi-counterexample-2026-10-02/README.md
+      - packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/receipt.json
+    versions:
+      - {revision: 753079eb37d8d16225a5dc1f56e493a3c3b243f4, note: "the build here, with Mathlib's official cache"}
+    note: >-
+      The development is pinned by digest in the packet README and not retained; the
+      replay clones it at the pinned commit, and the receipt records the build and the
+      axioms.
+
   - id: V-kleddamag-n11-verify
     program: verify.py, its Python checker and its JavaScript BigInt secondary checker
     author: Kleddamag
@@ -558,6 +579,24 @@ verifiers:
     source: [packing/devtools/check_rational_witness_independent.py]
     independence_record: packing/devtools/check_rational_witness_independent.py
     note: Its module statement says it shares no geometry or verification code with sqpack.witness or sqpack.verify.
+
+  - id: V-check-nagamochi-lemma1-counterexample
+    program: devtools.check_nagamochi_lemma1_counterexample
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Scores Karakuş's squares K_t and chelokot's square against Nagamochi 2005's measure
+      in Fraction arithmetic from their printed coordinates, deciding that each scores
+      below one under either boundary convention.
+    source: [packing/devtools/check_nagamochi_lemma1_counterexample.py]
+    independence_record: docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md
+    note: >-
+      The review's table of sources records what its authors read; the tool recomputes
+      both counterexamples from their printed coordinates, and chelokot's Python checker
+      was not run.
 
   - id: V-upper-bound-promotion
     program: devtools.upper_bound_packets, the robust rational promotion and its exact separating-axis test
@@ -987,6 +1026,20 @@ verifiers:
     role: premises
     summary: The audit, replay driver and controls for wand125's linear certificates.
     source: [packing/devtools/audit_wand125_linear.py]
+
+  - id: V-replay-chelokot-lean
+    program: devtools.replay_chelokot_lean
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Clones chelokot's archive at the pinned commit, checks the toolchain, manifest,
+      statement text and every .lean file for sorry, custom axioms and native_decide,
+      builds it, reruns its axiom assertions and policy test, and checks the retained
+      receipt offline.
+    source: [packing/devtools/replay_chelokot_lean.py]
 
   - id: V-replay-evand-zmx2
     program: devtools.replay_evand_zmx2

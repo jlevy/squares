@@ -218,6 +218,7 @@ migrated:
 - docs/project/reviews/review-2026-10-01-post-optimality-w3-opening.md
 - docs/project/reviews/review-2026-10-01-result-import-process.md
 - docs/project/reviews/review-2026-10-01-site-documentation-records.md
+- docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md
 - docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
@@ -516,6 +517,7 @@ migrated:
 - packing/campaign/agent-sessions/session-163-native-bounds-and-census.md
 - packing/campaign/agent-sessions/session-164-upstream-merge-and-certification.md
 - packing/campaign/agent-sessions/session-165-post-optimality-overnight.md
+- packing/campaign/agent-sessions/session-168-known-best-families-and-shading.md
 - packing/campaign/documentation-pass.md
 - packing/campaign/explorations/X-001-standing-review-and-search-philosophy.md
 - packing/campaign/explorations/X-002-creative-frontier-and-basin-maps.md
@@ -563,6 +565,7 @@ migrated:
 - packing/campaign/explorations/X-046-n11-settlement-program.md
 - packing/campaign/explorations/X-047-low-n-angles-after-the-parent-core-advance.md
 - packing/campaign/explorations/X-048-n17-optimality-after-n11.md
+- packing/campaign/explorations/X-049-families-shading-and-the-large-n-limit.md
 - packing/campaign/hypotheses/H-001-angle-class-reduction.md
 - packing/campaign/hypotheses/H-002-lp-in-cell-polish.md
 - packing/campaign/hypotheses/H-003-basin-frequency-and-contacts.md
@@ -758,6 +761,9 @@ migrated:
 - packing/campaign/hypotheses/H-258-n17-common-core-stress.md
 - packing/campaign/hypotheses/H-259-n17-mixed-capacity-cover.md
 - packing/campaign/hypotheses/H-260-n17-closed-cell-symmetry.md
+- packing/campaign/hypotheses/H-269-periodic-certificates-k2-minus-4-and-5.md
+- packing/campaign/hypotheses/H-270-k2-plus-1-crossover-kearney-shiu-strip.md
+- packing/campaign/hypotheses/H-272-symmetric-kingbird-records-reoptimized.md
 - packing/campaign/ideas.md
 - packing/campaign/remediation-pass.md
 - packing/campaign/research-loop-logbook/README.md

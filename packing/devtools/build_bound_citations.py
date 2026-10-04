@@ -67,6 +67,18 @@ the build, so a recent bound cannot go unstarred because its key happens not to 
 year, as n = 17's does not. The `recent` field is the lower citation's alone; the stage
 stars no upper bound.
 
+**A lower bound that corrects a published result says which** (the owner, 2026-10-02): it
+is still new, and starred as any recent bound is, and it also carries `corrects`, the
+published work it stands in for, so every surface can say "corrects Nagamochi 2005" beside
+the star. It is read from the `corrects` field of the results that carry the bound, the
+line's own `results`, never from a source key or a year: `check_results.corrects_problems`
+holds that field to a bibliography source and to the register's record of that publication,
+now V0. Two results behind one bound that name different corrected works fail the build
+rather than one being chosen. This is not a correction to this project's own record, which
+is a defect entry in `defects.yaml`; the tag names someone else's published work. The stage
+sets it on the lower line, `corrects Nagamochi 2005` between the reference and the note, so
+it counts toward the line's width like the note does.
+
 A line must fit in `TEXT_LIMIT` characters, the width the stage sets it in, the reference
 and its note together. Where it does not, the source's `short_venue` is used if the
 bibliography gives one, and then its `short_credit`: the credit's authors and the first of
@@ -88,6 +100,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import unicodedata
 from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
@@ -152,6 +165,9 @@ AFTER = " after "
 
 #: What ends a shortened credit: the links it leaves out, as a citation says of authors.
 ET_AL = "et al."
+
+#: The word a correcting bound's tag starts with: `corrects Nagamochi 2005`.
+CORRECTS = "corrects"
 
 
 @dataclass(frozen=True, slots=True)
@@ -346,8 +362,13 @@ def join_authors(surnames: Sequence[str]) -> str:
 
 def cite(authors: str | None, year: int | None, venue: str) -> str:
     """`Authors Year, venue`, leaving out whichever of the first two is missing."""
-    head = " ".join(part for part in (authors, None if year is None else str(year)) if part)
+    head = short_cite(authors, year)
     return f"{head}, {venue}" if head else venue
+
+
+def short_cite(authors: str | None, year: int | None) -> str:
+    """`Authors Year`, a citation's head without its venue: `Nagamochi 2005`."""
+    return " ".join(part for part in (authors, None if year is None else str(year)) if part)
 
 
 def note(assurance: str, confirmed_by: Sequence[str]) -> str | None:
@@ -391,8 +412,31 @@ def compose(
     """
     who = [authors] if short_authors is None else [authors, short_authors]
     where = [source.venue] if source.short_venue is None else [source.venue, source.short_venue]
-    forms = [cite(name, year, venue) for name in who for venue in where]
+    forms = [stage_spelling(cite(name, year, venue)) for name in who for venue in where]
     return next((text for text in forms if len(text) <= room), forms[-1])
+
+
+def stage_spelling(text: str) -> str:
+    """`text` as the stage's embedded latin faces can set it: a letter outside Latin-1
+    that decomposes to a Latin-1 letter and accents is set as that letter alone.
+
+    The faces draw Latin-1 and little beyond it (`build_candidate.LATIN_RANGE` in the
+    workbench), so Karakuş's `ş` would fall back to whatever system face a browser has.
+    The fold is the stage's alone: the bibliography, the case records and every page keep
+    the whole spelling, as they keep the whole credit where the stage shortens it.
+    Characters with no Latin-1 base, such as dashes and quotation marks, are left for the
+    faces' own ranges to cover or the workbench's check to refuse.
+    """
+    folded = []
+    for character in text:
+        if ord(character) <= 0xFF:
+            folded.append(character)
+            continue
+        decomposed = unicodedata.normalize("NFKD", character)
+        base = "".join(part for part in decomposed if not unicodedata.combining(part))
+        latin = bool(base) and all(ord(part) <= 0xFF for part in base)
+        folded.append(base if latin else character)
+    return "".join(folded)
 
 
 def credit(
@@ -481,9 +525,47 @@ def own_evidence(ids: Iterable[str], register: Register) -> list[str]:
     ]
 
 
+def corrects_tag(corrects: Mapping[str, Any] | None) -> str | None:
+    """The tag a correcting bound carries, `corrects Nagamochi 2005`, or None."""
+    return None if corrects is None else f"{CORRECTS} {corrects['credit']}"
+
+
 def drawn(citation: Mapping[str, Any]) -> str:
-    """The line as the stage sets it: the reference, then its note where there is one."""
-    return " ".join(part for part in (citation["text"], citation["note"]) if part)
+    """The line as the stage sets it: the reference, the published work a lower bound
+    corrects where it corrects one, then its note where there is one."""
+    parts = (citation["text"], corrects_tag(citation.get("corrects")), citation["note"])
+    return " ".join(part for part in parts if part)
+
+
+def correction(n: int, results: Sequence[str], register: Register) -> dict[str, str] | None:
+    """The published work a lower bound corrects, from the results that carry it, or None.
+
+    Each result's `corrects` names the corrected work's bibliography key and the register's
+    record of it; the line repeats both, with the work's short citation as the bibliography
+    prints it (`Nagamochi 2005`), which is what a page writes after "corrects". Two results
+    naming different works fail the build: the tag names one publication, and choosing
+    between two would be the record's call, not this tool's.
+    """
+    by_id = {str(result["id"]): result for result in register.results}
+    named = {
+        (str(corrects["source_key"]), str(corrects["result"]))
+        for result_id in results
+        if (corrects := by_id[result_id].get("corrects"))
+    }
+    if not named:
+        return None
+    if len(named) > 1:
+        raise ValueError(
+            f"n={n} lower: results {list(results)} correct {len(named)} published works, "
+            f"{sorted(named)}, not one"
+        )
+    ((key, result),) = named
+    source = _source(key, register, f"n={n} lower corrects")
+    return {
+        "source_key": key,
+        "credit": short_cite(source.credited, source.year),
+        "result": result,
+    }
 
 
 def _checked(n: int, label: str, citation: dict[str, Any]) -> dict[str, Any]:
@@ -495,11 +577,31 @@ def _checked(n: int, label: str, citation: dict[str, Any]) -> dict[str, Any]:
     return citation
 
 
-def _project(
-    n: int, label: str, novel: Sequence[str], *, value: str, assurance: str, register: Register
+def _lower_fields(
+    n: int, results: Sequence[str], register: Register, *, recent: bool | None
 ) -> dict[str, Any]:
+    """What a lower line carries that an upper one does not: whether it is recent, and the
+    published work it corrects. Nothing where `recent` is None, which is an upper line."""
+    if recent is None:
+        return {}
+    return {"corrects": correction(n, results, register), "recent": recent}
+
+
+def _project(
+    n: int,
+    label: str,
+    novel: Sequence[str],
+    *,
+    value: str,
+    assurance: str,
+    register: Register,
+    recent: bool | None = None,
+) -> dict[str, Any]:
+    """This project's line. `recent` is given for a lower line alone, which then also
+    carries what it corrects (`_lower_fields`)."""
     result = project_result(n, novel, register.results)
     year = int(str(result["significance"]["scored"])[:4])
+    results = results_carrying(n, novel, register.results)
     return _checked(
         n,
         label,
@@ -510,9 +612,10 @@ def _project(
             "assurance": assurance,
             "source_key": None,
             "result": str(result["id"]),
-            "results": results_carrying(n, novel, register.results),
+            "results": results,
             "confirmed_by": [],
             "value": value,
+            **_lower_fields(n, results, register, recent=recent),
         },
     )
 
@@ -536,19 +639,25 @@ def _external(
     assurance: str,
     register: Register,
     short_credit: str | None = None,
+    recent: bool | None = None,
 ) -> dict[str, Any]:
     """An external source's line, and what this project has recorded about the bound.
 
     `short_credit` is the shortening of `credited`'s names the line may fall back to, which
-    only a line that credits the source's own `credit` has.
+    only a line that credits the source's own `credit` has. `recent` is given for a lower
+    line alone, which then also carries what it corrects, and the reference gives way to
+    that tag as it does to the note.
     """
     performed = [
         item for item in own if register.evidence[item].get("performed_by") == FIRST_PARTY
     ]
     confirmed_by = results_carrying(n, performed, register.results)
+    results = results_carrying(n, own, register.results)
+    lower = _lower_fields(n, results, register, recent=recent)
     authors, year = credited
     said = note(assurance, confirmed_by)
-    room = TEXT_LIMIT - len(said or "") - bool(said)
+    asides = [part for part in (corrects_tag(lower.get("corrects")), said) if part]
+    room = TEXT_LIMIT - sum(len(part) + 1 for part in asides)
     return _checked(
         n,
         label,
@@ -559,9 +668,10 @@ def _external(
             "assurance": assurance,
             "source_key": source.key,
             "result": None,
-            "results": results_carrying(n, own, register.results),
+            "results": results,
             "confirmed_by": confirmed_by,
             "value": value,
+            **lower,
         },
     )
 
@@ -618,12 +728,17 @@ def lower_citation(
         return None
     value = str(bound["value"])
     if origin.source is None:
-        own_line = _project(
-            n, "lower", origin.novel, value=value, assurance="verified", register=register
+        return _project(
+            n,
+            "lower",
+            origin.novel,
+            value=value,
+            assurance="verified",
+            register=register,
+            recent=origin.recent,
         )
-        return {**own_line, "recent": origin.recent}
     source = origin.source
-    external = _external(
+    return _external(
         n,
         "lower",
         source=source,
@@ -633,8 +748,8 @@ def lower_citation(
         assurance="verified",
         register=register,
         short_credit=source.short_credit,
+        recent=origin.recent,
     )
-    return {**external, "recent": origin.recent}
 
 
 def upper_citation(
@@ -698,18 +813,34 @@ def build_record() -> dict[str, Any]:
     }
 
 
+def lower_citations() -> dict[int, dict[str, Any] | None]:
+    """Every case's lower line, built afresh from the register: what the record will say."""
+    register = load_register()
+    return {n: lower_citation(n, load_case(n), register) for n in CORPUS.numbers}
+
+
 def recent_lower_bounds() -> frozenset[int]:
     """The cases whose lower bound is a recent result: what the stage and the atlas star.
 
     `build_composite_figure_data` reads its star from here rather than deciding it again,
     so the two records cannot disagree about which bounds are new.
     """
-    register = load_register()
     return frozenset(
-        n
-        for n in CORPUS.numbers
-        if (citation := lower_citation(n, load_case(n), register)) and citation["recent"]
+        n for n, citation in lower_citations().items() if citation and citation["recent"]
     )
+
+
+def corrected_lower_bounds() -> dict[int, dict[str, str]]:
+    """The cases whose lower bound corrects a published result, with the work it corrects.
+
+    `build_composite_figure_data` counts these beside the starred cases, from here, so the
+    figure's count and the lines' tags are one decision.
+    """
+    return {
+        n: citation["corrects"]
+        for n, citation in lower_citations().items()
+        if citation and citation["corrects"]
+    }
 
 
 def load_record() -> dict[str, Any]:
@@ -878,6 +1009,17 @@ def review() -> None:
         print(f"lower cites {key} ({len(numbers)}){shown}")
     recent = [entry["n"] for entry in entries if entry["lower"] and entry["lower"]["recent"]]
     print(f"lower recent, since {RECENT_SINCE.isoformat()} ({len(recent)}): n = {recent}")
+    corrected: dict[tuple[str, str], list[int]] = {}
+    for entry in entries:
+        if entry["lower"] and (corrects := entry["lower"]["corrects"]):
+            key = (corrects["source_key"], corrects["result"])
+            corrected.setdefault(key, []).append(entry["n"])
+    for (key, result), numbers in sorted(corrected.items()):
+        unstarred = [n for n in numbers if n not in recent]
+        print(
+            f"lower corrects {key} ({result}) ({len(numbers)}), of them not recent "
+            f"{unstarred}: n = {numbers[0]}..{numbers[-1]}"
+        )
     print()
     for kind, by_n in linked_results(entries).items():
         grouped: dict[tuple[str, ...], list[int]] = {}

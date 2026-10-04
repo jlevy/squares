@@ -172,11 +172,17 @@ def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
 ) -> None:
     """Both entry points name each case's record file and open it in the one case
     popover: the atlas grid's cells and the frontier table's `n` are links marked
-    `data-case`, and a frontier row names its record for the popover to open."""
+    `data-case`, and a frontier row names its record for the popover to open. A case's
+    regularized tile, its second drawing, links the same record as its house tile."""
     grid = overview_sections.atlas_grid()
-    cells = re.findall(r'href="cases/(\d+)\.html" data-case="(\d+)" data-atlas-n="(\d+)"', grid)
+    house, regularized = grid.split("<template data-atlas-regularized>", 1)
+    link = r'href="cases/(\d+)\.html" data-case="(\d+)" data-atlas-n="(\d+)"'
+    cells = re.findall(link, house)
     assert [int(n) for n, _, _ in cells] == numbers
     assert all(a == b == c for a, b, c in cells)
+    second = re.findall(link, regularized)
+    assert [int(n) for n, _, _ in second] == list(overview_sections.atlas_regularized())
+    assert all(a == b == c for a, b, c in second)
     assert grid.count(render_case_pages.case_popover()) == 1
     links = re.findall(
         r'<a aria-label="n = \d+: open its case record" href="cases/(\d+)\.html" '

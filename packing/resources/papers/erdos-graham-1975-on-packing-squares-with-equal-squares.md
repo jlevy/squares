@@ -10,7 +10,7 @@
 ---
 
 > ⚠️ **Contains reconstructed passages.**
-> This transcription contains **17** annotated passage(s) where the PDF extraction was
+> This transcription contains **20** annotated passage(s) where the PDF extraction was
 > damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
 > file for `GARBLED` and `NOTE` to find them.
 > **Any formula near an annotation must be checked against `erdos-graham-1975-on-packing-squares-with-equal-squares.raw.md`**, which is the
@@ -52,16 +52,18 @@ Instead of maximizing the circumference sum of packings of a unit square by arbi
 
 For each positive real $\alpha$, define
 
-$$w(\alpha) = \alpha^2 - \sup_P |P|$$
+$$W(\alpha) = \alpha^2 - \sup_P |P|$$
 
 where $P$ ranges over all packings of unit squares into a given square $S(\alpha)$ of side $\alpha$ and $|P|$ denotes the number of unit squares in $P$.
 
 **Theorem.**
 
-$$w(\alpha) = \Theta(\alpha^{7/11}) \tag{1}$$
+$$W(\alpha) = O(\alpha^{7/11}) \tag{1}$$
 <!-- NOTE: The theorem statement (equation 1) was not extracted by pdfminer; it is reconstructed here as the well-known result of this paper. The raw extraction shows only "Theorem." followed by "(1)" with no formula between them. -->
+<!-- NOTE: Corrected 2026-10-02 against the archived PDF, superseding the reconstruction recorded above. This transcription printed (1) as $w(\alpha) = \Theta(\alpha^{7/11})$, a two-sided bound, which the paper does not state and could not have proved: rendered PDF page 4 (printed page 2) prints (1) as $W(\alpha) = O(\alpha^{7/11})$, an upper bound with the round $O$ of an ordinary capital, unlike the footed symbol the proof uses for its two-sided notation, and printed page 6 says "It is rather annoying that we do not at present have any nontrivial lower estimate for $W(a)$" and that $W(\alpha) = O(1)$ cannot be ruled out. The reconstruction is also false as mathematics: $W(\alpha) = 0$ at every integer $\alpha$, and the exponent $3/5$ since proved (Bui 2025, McClenagan 2026, both archived) is below $7/11$, so no lower bound of order $\alpha^{7/11}$ holds even at non-integer sides. The paper prints the waste function as capital $W$ in this definition, in (1) and on printed page 6; the transcription's lowercase $w$ is restored to $W$ in all three places. -->
 
-*Proof:* We sketch a construction which will prove (1). As usual, the notation $f(x) = \Theta(g(x))$ will denote the existence of two positive constants $c$ and $c'$ such that $cg(x) < f(x) < c'g(x)$ for all sufficiently large $x$.
+*Proof:* We sketch a construction which will prove (1). As usual, the notation $f(x) = \Omega(g(x))$ will denote the existence of two positive constants $c$ and $c'$ such that $cg(x) < f(x) < c'g(x)$ for all sufficiently large $x$.
+<!-- NOTE: Corrected 2026-10-02 against the archived PDF. The paper's symbol for this two-sided notation is a capital Omega, printed so in this sentence on page 4 and at every use on pages 5-8 (printed pages 3-6); this transcription had modernised it to $\Theta$ throughout the proof and once, for the area of each border triangle, to $O$. The printed $\Omega$ is restored at every occurrence the transcription carries. Read it as the paper defines it -- bounded above and below by constant multiples, which is today's $\Theta$ -- and not as the one-sided lower bound $\Omega$ means in later usage: the proof's $\Omega$ statements describe this construction, whose waste they bound on both sides, and so give the upper bound (1) on $W(\alpha)$ and nothing below it. Passages still marked GARBLED in this proof are left as they were, although the rendered pages make most of them legible. -->
 
 We begin by packing $S(\alpha)$ with $N^2$ unit squares which form a subsquare $S(N)$ in the lower left-hand corner of $S(\alpha)$ as shown in Fig. 1, where $N =$<!-- GARBLED: unable to reconstruct --> and $\alpha$ is large.
 
@@ -69,14 +71,14 @@ We begin by packing $S(\alpha)$ with $N^2$ unit squares which form a subsquare $
 
 The remaining uncovered area can be decomposed into two rectangles, each having width $\beta = \alpha - N$ and lengths $\geq N$.
 
-Next, we pack a rectangle $R(\beta, \gamma)$ of sides $\beta$ and $\gamma$ with $\gamma = \Theta(\alpha)$, $\beta = \Theta(\alpha^{8/11})$ as follows.
+Next, we pack a rectangle $R(\beta, \gamma)$ of sides $\beta$ and $\gamma$ with $\gamma = \Omega(\alpha)$, $\beta = \Omega(\alpha^{8/11})$ as follows.
 
-Let $n = [\beta]$. Place adjacent parallel rectangles $R(1, n+1)$, each formed from $n + 1$ unit squares, tilted at the appropriate angle $\theta$ so that all $R(1, n+1)$'s touch both the top and bottom edges of $R(\beta, \gamma)$. Furthermore, place these so that $D = \Theta(\alpha^{2/11})$ (see Fig. 2). Note that $D' = \Theta(\alpha^{4/11})$.
+Let $n = [\beta]$. Place adjacent parallel rectangles $R(1, n+1)$, each formed from $n + 1$ unit squares, tilted at the appropriate angle $\theta$ so that all $R(1, n+1)$'s touch both the top and bottom edges of $R(\beta, \gamma)$. Furthermore, place these so that $D = \Omega(\alpha^{2/11})$ (see Fig. 2). Note that $D' = \Omega(\alpha^{4/11})$.
 <!-- NOTE: Throughout the proof, asymptotic expressions of the form Theta(alpha^{n/11}) were partially garbled in extraction. The exponents n/11 have been reconstructed where the pattern was identifiable. Variable names (beta, gamma, theta, eta) were garbled to various ASCII characters and have been reconstructed from context. -->
 
 > *[Figure 2 -- not extractable from PDF]*
 
-An easy calculation shows that $\theta = \Theta(\alpha^{-4/11})$ and so, each of the small shaded right triangles on the border of $R$ has area $O(\alpha^{-4/11})$.<!-- GARBLED: unable to reconstruct --> The total area of the triangles is therefore <!-- GARBLED: unable to reconstruct -->.
+An easy calculation shows that $\theta = \Omega(\alpha^{-4/11})$ and so, each of the small shaded right triangles on the border of $R$ has area $\Omega(\alpha^{-4/11})$.<!-- GARBLED: unable to reconstruct --> The total area of the triangles is therefore <!-- GARBLED: unable to reconstruct -->.
 
 There are, in addition, two right trapezoids $T$ with base $\beta$ and vertical sides $D$ and $D'$ which have not been covered up to this point. We next describe how to pack $T$.
 
@@ -84,23 +86,24 @@ Let $m = [\alpha^{4/11}]$. Starting from the right-hand side of $T$, partition $
 
 > *[Figure 3 -- not extractable from PDF]*
 
-Thus, $r = \Theta(\alpha^{4/11})$ and $X'$ has area <!-- GARBLED: unable to reconstruct -->. If the vertical sides of $T_k$ are $\eta_k$ and $\eta_{k+1}$, let $h_k = [\eta_k - \alpha^{2/11}]$.<!-- GARBLED: the formula for h_k was partially garbled; reconstructed from identifiable pattern -->
+Thus, $r = \Omega(\alpha^{4/11})$ and $X'$ has area <!-- GARBLED: unable to reconstruct -->. If the vertical sides of $T_k$ are $\eta_k$ and $\eta_{k+1}$, let $h_k = [\eta_k - \alpha^{2/11}]$.<!-- GARBLED: the formula for h_k was partially garbled; reconstructed from identifiable pattern -->
 
 Pack the bottom subrectangle $R(m, h_k)$ of $T_k$ with $m h_k$ unit squares in the natural way (as shown in Fig. 4) and let $T'_k$ denote the remaining uncovered subtrapezoid of $T_k$.
 
 > *[Figure 4 -- not extractable from PDF]*
 
-Now, for $s_k = [\eta_k] - h_k$, pack $T'_k$ with rectangles $R(1, s_k + 1)$ as shown in Fig. 4. Here, each $R(1, s_k + 1)$ touches both the top and bottom edges of $T'_k$ as well as the adjacent $R(1, s_k + 1)$'s. As before, the uncovered border right triangles on $T'_k$ have total area <!-- GARBLED: unable to reconstruct -->. The total area of the triangular regions between adjacent $R(1, s_k + 1)$'s is also <!-- GARBLED: unable to reconstruct --> since the sum of the angles at the top vertices is $\Theta(\alpha^{-1/11})$. Finally, the uncovered triangle $X'$ has area <!-- GARBLED: unable to reconstruct -->.
+Now, for $s_k = [\eta_k] - h_k$, pack $T'_k$ with rectangles $R(1, s_k + 1)$ as shown in Fig. 4. Here, each $R(1, s_k + 1)$ touches both the top and bottom edges of $T'_k$ as well as the adjacent $R(1, s_k + 1)$'s. As before, the uncovered border right triangles on $T'_k$ have total area <!-- GARBLED: unable to reconstruct -->. The total area of the triangular regions between adjacent $R(1, s_k + 1)$'s is also <!-- GARBLED: unable to reconstruct --> since the sum of the angles at the top vertices is $\Omega(\alpha^{-1/11})$. Finally, the uncovered triangle $X'$ has area <!-- GARBLED: unable to reconstruct -->.
 
-Since $r = \Theta(\alpha^{4/11})$<!-- GARBLED: bound on total uncovered area in T was garbled --> then the total uncovered area in $T$ is <!-- GARBLED: unable to reconstruct -->.
+Since $r = \Omega(\alpha^{4/11})$<!-- GARBLED: bound on total uncovered area in T was garbled --> then the total uncovered area in $T$ is <!-- GARBLED: unable to reconstruct -->.
 
-Hence the total uncovered area of $S(\alpha)$ is just $\Theta(\alpha^{7/11})$ and the theorem is proved. $\square$
+Hence the total uncovered area of $S(\alpha)$ is just $\Omega(\alpha^{7/11})$ and the theorem is proved. $\square$
+<!-- NOTE: Corrected 2026-10-02 against the archived PDF. This transcription printed this sentence with $\Theta(\alpha^{7/11})$, which beside the reconstructed $w(\alpha) = \Theta(\alpha^{7/11})$ read as a two-sided bound on the waste function. Rendered PDF page 8 (printed page 6) prints the paper's own $\Omega(\alpha^{7/11})$, defined at the start of the proof as two-sided. The sentence is about the uncovered area of this one packing of $S(\alpha)$, which is of exact order $\alpha^{7/11}$; since $W(\alpha)$ is at most that area, the sentence proves the upper bound (1) and gives no lower bound on $W(\alpha)$, which the next paragraph says the authors do not have. -->
 
 The previously mentioned assertion that
 
 $$f(k^2 + ck^{7/11}) > 4k$$
 
-follows immediately. It is rather annoying that we do not at present have any nontrivial lower estimate for $w(\alpha)$. Indeed we cannot even rule out the possibility that $w(\alpha) = O(1)$. Perhaps the correct bound is $O(\alpha^{1/2})$.
+follows immediately. It is rather annoying that we do not at present have any nontrivial lower estimate for $W(\alpha)$. Indeed we cannot even rule out the possibility that $W(\alpha) = O(1)$. Perhaps the correct bound is $O(\alpha^{1/2})$.
 
 In the same spirit the following questions can be asked. Let $\mathcal{C}$ be a closed convex curve of circumference 1. Inscribe $k$ non-overlapping curves in $\mathcal{C}$ which are all similar to $\mathcal{C}$. Denote by $f(\mathcal{C}, k)$ the maximum of the sum of the circumferences of these curves. If $\mathcal{C}$ is a parallelogram or a triangle then clearly $f(\mathcal{C}, j^2) = j$.<!-- GARBLED: the raw extraction rendered this as "f(C, j^2) = 1" but the value must be j by the scaling argument in the next sentence --> All that is needed is that $\mathcal{C}$ can be covered with $j^2$ copies of $\mathcal{C}$. We do not know for which figures other cases of exact coverings are possible for other values of $k$ although for every $k$, there are $\mathcal{C}$'s which have an exact covering into $k$ parts, e.g., a rectangle. The following questions can be posed: For which $\mathcal{C}$ is the growth of $f(\mathcal{C}, k)$ the slowest? Could this $\mathcal{C}$ be a circle? Which $\mathcal{C}$ permit exact coverings? Which $\mathcal{C}$ permit exact coverings with congruent curves similar to $\mathcal{C}$? For such $\mathcal{C}$, let $1 < n_1 < n_2 < \ldots$ be the integers for which such an exact covering is possible. What can be said about these sequences? For example, can $n_k = o(k^2)$?
 

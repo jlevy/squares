@@ -83,6 +83,12 @@ export type CitationBound = "lower" | "upper";
  */
 export interface CorpusCitation {
   text: string;
+  /**
+   * `corrects Nagamochi 2005` where a lower bound stands in for a published result found
+   * unsound, naming that work; null otherwise. It names someone else's publication, never a
+   * correction to this project's own record, which its defect log carries.
+   */
+  corrects: string | null;
   /** `(reported)`, `(confirmed T-009)`, `(reported; confirmed T-009)`, or null for nothing. */
   note: string | null;
   basis: "external" | "project";
@@ -356,12 +362,20 @@ function citation(value: unknown): CorpusCitation {
   if (text.length > CITATION_TEXT_MAX) {
     throw new RangeError(`citation text must be at most ${CITATION_TEXT_MAX} characters`);
   }
+  // Absent and null both mean the bound corrects no published work.
+  const corrects = row.corrects === undefined ? null : nullable(row.corrects, string);
+  if (corrects !== null && !/^corrects \S(.*\S)?$/.test(corrects)) {
+    throw new RangeError("a citation's correction must read `corrects` and the work it corrects");
+  }
   const note = nullable(row.note, string);
   if (note !== null && !/^\([^()\n\r\t]+\)$/.test(note)) {
     throw new RangeError("a citation note must be one parenthesis of text");
   }
-  if (note !== null && text.length + 1 + note.length > CITATION_TEXT_MAX) {
-    throw new RangeError(`a citation and its note must be at most ${CITATION_TEXT_MAX} characters`);
+  const line = [text, corrects, note].filter((part) => part !== null).join(" ");
+  if (line.length > CITATION_TEXT_MAX) {
+    throw new RangeError(
+      `a citation and its asides must be at most ${CITATION_TEXT_MAX} characters`,
+    );
   }
   const basis = row.basis;
   const assurance = row.assurance;
@@ -371,7 +385,7 @@ function citation(value: unknown): CorpusCitation {
   if (assurance !== "verified" && assurance !== "reported") {
     throw new RangeError("citation assurance must be verified or reported");
   }
-  return { text, note, basis, assurance };
+  return { text, corrects, note, basis, assurance };
 }
 function citations(value: unknown): CorpusCitations {
   const row = object(value, "citations");

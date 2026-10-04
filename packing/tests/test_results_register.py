@@ -1014,3 +1014,39 @@ def test_the_registration_backfill_dates_an_entry_after_its_kind() -> None:
     live = check_results.RESULTS.read_text(encoding="utf-8")
     ids = re.findall(r"^  - id: (T-\d{3})$", live, re.MULTILINE)
     assert backfill_result_registration.insert_dates(live, dict.fromkeys(ids, "x")) == live
+
+
+def test_corrects_names_a_published_result_that_no_longer_stands() -> None:
+    sources = {"[Nagamochi 2005]": {"authors": ["Nagamochi"]}}
+    corrected = {
+        "id": "T-007",
+        "verification": "V0",
+        "attribution": {"source_keys": ["[Nagamochi 2005]"]},
+    }
+    record = {
+        "id": "T-083",
+        "corrects": {"source_key": "[Nagamochi 2005]", "result": "T-007", "what": "Lemma 1"},
+    }
+    assert check_results.corrects_problems(record, sources, {"T-007": corrected}) == []
+    assert check_results.corrects_problems({"id": "T-001"}, sources, {}) == []
+
+    unknown = {**record, "corrects": {**record["corrects"], "source_key": "[Nobody 2000]"}}
+    assert any(
+        "bibliography.yaml lacks" in problem
+        for problem in check_results.corrects_problems(unknown, sources, {"T-007": corrected})
+    )
+    missing = {**record, "corrects": {**record["corrects"], "result": "T-999"}}
+    assert any(
+        "not a registered result" in problem
+        for problem in check_results.corrects_problems(missing, sources, {"T-007": corrected})
+    )
+    standing = {**corrected, "verification": "V3"}
+    assert any(
+        "still stands at V3" in problem
+        for problem in check_results.corrects_problems(record, sources, {"T-007": standing})
+    )
+    other = {**corrected, "attribution": {"source_keys": ["[Someone 1999]"]}}
+    assert any(
+        "credits" in problem
+        for problem in check_results.corrects_problems(record, sources, {"T-007": other})
+    )

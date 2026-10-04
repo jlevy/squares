@@ -1,0 +1,204 @@
+{
+  "schema": "chelokot-lean-replay/1",
+  "bead": "think-ym34",
+  "recorded_utc": "2026-10-02T19:56:55Z",
+  "status": "passed",
+  "failed_step": null,
+  "archive": {
+    "url": "https://github.com/chelokot/square-packing-archive",
+    "commit": "753079eb37d8d16225a5dc1f56e493a3c3b243f4",
+    "committed": "2026-09-06T00:42:12+03:00",
+    "blobs": {
+      "formal/SquarePackingArchive/NagamochiPackingTheorem.lean": "da209bad1b6739f52f4b74c1af9b2ca6e788c6d1",
+      "formal/SquarePackingArchive/Geometry.lean": "4398066bab5a90c9b65b403509b65941e89b5b3d"
+    }
+  },
+  "toolchain": {
+    "lean_toolchain": "leanprover/lean4:v4.33.0",
+    "mathlib_rev": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "tool_versions": [
+      "elan 4.2.4 (227caca13 2026-08-25)",
+      "Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0)",
+      "Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)"
+    ]
+  },
+  "host": {
+    "platform": "Linux-6.18.44-fc-v51-x86_64-with-glibc2.39",
+    "cpus": 4
+  },
+  "fresh_archive_build": false,
+  "rebuilt_modules": [
+    "SquarePackingArchive.NagamochiPackingTheorem",
+    "SquarePackingArchive.Audit",
+    "SquarePackingArchive.ManifestEvidence",
+    "SquarePackingArchive"
+  ],
+  "steps": [
+    {
+      "name": "clone",
+      "commands": [],
+      "returncode": 0,
+      "seconds": 0.0
+    },
+    {
+      "name": "checkout",
+      "commands": [
+        "git checkout --detach 753079eb37d8d16225a5dc1f56e493a3c3b243f4",
+        "git rev-parse HEAD",
+        "git status --porcelain --untracked-files=no"
+      ],
+      "returncode": 0,
+      "seconds": 0.0
+    },
+    {
+      "name": "pins",
+      "commands": [
+        "internal: pins and source scan"
+      ],
+      "returncode": 0,
+      "seconds": 0.5
+    },
+    {
+      "name": "toolchain",
+      "commands": [
+        "elan --version",
+        "lake --version",
+        "lean --version"
+      ],
+      "returncode": 0,
+      "seconds": 0.1
+    },
+    {
+      "name": "cache",
+      "commands": [
+        "lake exe cache get"
+      ],
+      "returncode": 0,
+      "seconds": 5.6
+    },
+    {
+      "name": "build",
+      "commands": [
+        "lake build"
+      ],
+      "returncode": 0,
+      "seconds": 13.7
+    },
+    {
+      "name": "manifest-evidence",
+      "commands": [
+        "lake env lean SquarePackingArchive/ManifestEvidence.lean"
+      ],
+      "returncode": 0,
+      "seconds": 4.7
+    },
+    {
+      "name": "policy-test",
+      "commands": [
+        "/home/user/squares/packing/.venv/bin/python -S -m unittest discover -v -s ../scripts -p test_lean_axiom_policy.py"
+      ],
+      "returncode": 0,
+      "seconds": 20.2
+    },
+    {
+      "name": "axioms",
+      "commands": [
+        "lake env lean /home/user/lean-replay/ReplayAxioms.lean"
+      ],
+      "returncode": 0,
+      "seconds": 3.6
+    },
+    {
+      "name": "definitions",
+      "commands": [
+        "lake env lean /home/user/lean-replay/ReplayDefinitions.lean"
+      ],
+      "returncode": 0,
+      "seconds": 3.7
+    }
+  ],
+  "wall_seconds": 52.1,
+  "theorem": {
+    "name": "SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide",
+    "statement_source": "theorem Records.NearSquare.squareMinusTwo_isMinimumSide\n    {size : ℕ} (size_lower : 2 ≤ size) :\n    IsMinimumSide (size * size - 2) size",
+    "statement_elaborated": "SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide {size : ℕ} (size_lower : 2 ≤ size) : SquarePackingArchive.IsMinimumSide (size * size - 2) ↑size"
+  },
+  "axioms": {
+    "raw": "SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide {size : ℕ} (size_lower : 2 ≤ size) :\n  SquarePackingArchive.IsMinimumSide (size * size - 2) ↑size\n'SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'SquarePackingArchive.Records.NearSquare.s2_eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]\n'SquarePackingArchive.Records.Square7.s7_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]\n'SquarePackingArchive.Records.NearSquare.s14_eq_four' depends on axioms: [propext, Classical.choice, Quot.sound]\n'SquarePackingArchive.Records.NearSquare.s62_eq_eight' depends on axioms: [propext, Classical.choice, Quot.sound]\n'SquarePackingArchive.Records.NearSquare.s79_eq_nine' depends on axioms: [propext, Classical.choice, Quot.sound]\n'SquarePackingArchive.Records.NearSquare.s98_eq_ten' depends on axioms: [propext, Classical.choice, Quot.sound]\n'replay_s23_eq_five' depends on axioms: [propext, Classical.choice, Quot.sound]\n'replay_s34_eq_six' depends on axioms: [propext, Classical.choice, Quot.sound]\n'replay_s47_eq_seven' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "reported": {
+      "SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquarePackingArchive.Records.NearSquare.s2_eq_two": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquarePackingArchive.Records.Square7.s7_eq_three": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquarePackingArchive.Records.NearSquare.s14_eq_four": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquarePackingArchive.Records.NearSquare.s62_eq_eight": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquarePackingArchive.Records.NearSquare.s79_eq_nine": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquarePackingArchive.Records.NearSquare.s98_eq_ten": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "replay_s23_eq_five": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "replay_s34_eq_six": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "replay_s47_eq_seven": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  },
+  "archive_assertions": {
+    "module": "SquarePackingArchive.ManifestEvidence",
+    "assert_standard_axioms_count": 79
+  },
+  "policy_test": {
+    "tests_run": 5
+  },
+  "source_scan": {
+    "lean_files": 277,
+    "sorry": 0,
+    "axiom_declarations": 0,
+    "native_decide": 0
+  },
+  "notes": [
+    "The archive's modules were first built from source over the Mathlib cache by an uninterrupted lake build that started at 17:22:39Z on 2026-10-02; the container was paused at about 18:16Z with 2920 of 2944 jobs done, about 53 minutes. A first run of this tool finished the last 24 jobs in 271 seconds and passed. This run, on top of that tree, removed the build products of NagamochiPackingTheorem (the module that proves the final theorem), Audit (the archive's own print axioms), ManifestEvidence (its 79 assertions) and the root module, so the build step below elaborates and kernel-checks all four again; the other 273 modules come from the first build's oleans, and the receipt's build seconds cover only what was rebuilt here."
+  ],
+  "statement_reading": "Read from Geometry.lean at the pinned commit. A PlacedSquare is a centre and a Frame (cosine, sine, cosine^2 + sine^2 = 1), so rotation is arbitrary; Contains is the closed unit square (|x'| <= 1/2, |y'| <= 1/2 in local coordinates); Container.Contains side is the closed square [0, side]^2; Packing n side is n placed squares indexed by Fin n, each Fits (every point of the closed unit square lies in the closed container) and any two distinct indices InteriorDisjoint (no common point of the open unit squares), so boundary contact is allowed; IsMinimumSide n s is HasPacking n s and s <= every side that has a packing. That is the register's s(N): the side of the smallest square holding N non-overlapping unit squares, rotations allowed. Differences that do not change the value: reals are Mathlib's, the container is axis-aligned at the origin (every square container is congruent to it), a Frame has no reflection (a square is symmetric under it), and the theorem's count `size * size - 2` is natural-number subtraction, exact for size >= 2. The theorem covers the closed-square container only, as the register's s(N) does. This is a reading of the definitions by the author of this receipt, not a human formalization review.",
+  "build_log": {
+    "path": "build.log",
+    "sha256": "1b5a818bbfdfd3fc78a07055f2154e07d7f2504e3e515fa1a5a66403c2b0b4a4",
+    "bytes": 67213,
+    "lines": 945
+  }
+}

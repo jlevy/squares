@@ -128,6 +128,11 @@ def check_case_basic_bounds(case: Mapping[str, object]) -> list[str]:
 
     if lower is not None and "E-basic-area-lower" in _strings(lower.get("evidence")):
         expected = "1" if n == 1 else f"sqrt({n})"
+        # At a perfect square the area bound is the integer itself, written as the integer
+        # so that it meets the grid's exact form and the case can be proved. The perfect
+        # squares moved here from Nagamochi's closed form on 2026-10-02 (T-085).
+        if math.isqrt(n) ** 2 == n:
+            expected = str(math.isqrt(n))
         if lower.get("exact_form") != expected:
             errors.append(
                 f"n={n}: area lower bound must have exact form {expected}, "

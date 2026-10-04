@@ -167,6 +167,12 @@ PRUNE = frozenset(
         ROOT / "atlas/known-best/known-best-1-324.pdf",
         ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/rendering",
+        # The regularized layer's 51 drawings (think-bgkz, 2026-10-02), 11 MB of generated
+        # SVG that `regularized atlas drawings match their index` re-renders and compares,
+        # joined on the same grounds when they took the snapshot to 204,959,999 bytes
+        # against the 201,326,592 cap. No control names them; the layer's index and views
+        # beside them are small and stay.
+        ROOT / "atlas/known-best/regularized/rendering",
         # The pre-migration transition statistics are frozen historical output;
         # v2-transitions/NOTES.md records that the live builder now generates its
         # own statistics elsewhere. No registered control reads this old JSON,
@@ -607,7 +613,14 @@ ROOT_DOCUMENTS = (
 # operating headroom at 192 MiB while think-t1lk owns dependency-aware selection.
 # This changes no copied bytes or time limit. At three portable workers the storage
 # ceiling is 576 MiB; the current measured payload remains about 160.05 MiB per tree.
-SNAPSHOT_MAX_BYTES = 192 * 1024 * 1024
+# 2026-10-03, the merge of main (#292, #311) into PR 305: 204,106,772 bytes, 2,780,180
+# over 192 MiB, though each side alone was under it -- main's retained certificate
+# packets and receipts and PR 305's regularized atlas layer and X-049 censuses, each
+# needed by its own checks. The note above says not to answer that with another archive
+# hunt, so the same reasoning restores roughly 29 MiB of headroom at 224 MiB, with
+# think-t1lk still owning dependency-aware selection. At three portable workers the
+# storage ceiling is 672 MiB; nothing copied changes.
+SNAPSHOT_MAX_BYTES = 224 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

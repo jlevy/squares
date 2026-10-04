@@ -31,7 +31,7 @@ from sympy.parsing.sympy_parser import (
     standard_transformations,
 )
 
-from devtools.build_bound_citations import recent_lower_bounds
+from devtools.build_bound_citations import corrected_lower_bounds, recent_lower_bounds
 from sqpack.known_best import (
     KNOWN_BEST_COMPOSITES,
     KNOWN_BEST_CORPUS,
@@ -121,6 +121,18 @@ def _recent_lower_bounds() -> frozenset[int]:
     from each source's date, and both records read that one decision.
     """
     return recent_lower_bounds()
+
+
+@cache
+def _corrected_lower_bounds() -> frozenset[int]:
+    """The cases whose lower bound corrects a published result (the owner, 2026-10-02).
+
+    Each is still a recent result and starred; this is the separate fact that it stands in
+    for a published bound found unsound, which the citation record names on its line.
+    Counted, not drawn: the figure marks a correcting bound with the same star as any
+    other recent result.
+    """
+    return frozenset(corrected_lower_bounds())
 
 
 def _six(text: str) -> str:
@@ -296,6 +308,9 @@ def _entry(n: int) -> dict:
             # The star: a recent result, whoever proved it. Read from the citation record's
             # own test, so the stage's line and the figure's star cannot disagree.
             "recent_result": n in _recent_lower_bounds(),
+            # Whether it corrects a published result, read from the citation record's
+            # `corrects`, which also names the work.
+            "correction": n in _corrected_lower_bounds(),
             "evidence": sorted(str(item) for item in verified["evidence"]),
             "provenance": "frontier",
         },
@@ -364,6 +379,9 @@ def _totals(entries: list[dict]) -> dict:
             1 for e in entries if e["lower"]["first_proved_here"]
         ),
         "lower_bound_recent_result": sum(1 for e in entries if e["lower"]["recent_result"]),
+        # Of those, the ones that correct a published result: a second fact about a
+        # recent bound, not a second star.
+        "lower_bound_correction": sum(1 for e in entries if e["lower"]["correction"]),
         # Counted separately rather than folded in, which is the whole of D-385:
         # a source's word and our own argument are two facts, not one.
         "rigidity_catalogue_annotated": sum(

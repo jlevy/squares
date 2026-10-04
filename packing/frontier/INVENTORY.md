@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **247** evidence records. **149** are formal; **143** of those were established here.
-- **89** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **251** evidence records. **152** are formal; **145** of those were established here.
+- **91** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **40** claim to be first established here. **13** make no novelty statement at all - not assessed, which is not the same as not novel.
 
 A formal claim on an unread external proof is still formal: the proof proves its
@@ -116,7 +116,11 @@ results, it is a statement about what this repository has itself examined.
 | `E-unitsquare-release1-report` | 1 | upper-bound | reported | - | - | - | previously-published | producer’s code | *none held* |
 | `E-basic-grid-upper` | 254 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | `V-check-basic-bounds` |
 | `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | `V-check-basic-bounds` |
-| `E-nagamochi-lower` | 236 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | - |
+| `E-nagamochi-lower` | 175 | lower-bound | reported | - | elsewhere | defect-found | previously-published | no code | - |
+| `E-karakus-strip-lower` | 203 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | - |
+| `E-nagamochi-lemma1-counterexample` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-check-nagamochi-lemma1-counterexample` |
+| `E-chelokot-square-minus-two-lean` | 16 | exact-value | verified | its theorem, against a named kernel | here | - | previously-published | producer’s code | `V-chelokot-lean`, `V-replay-chelokot-lean` |
+| `E-basic-slivkova-piercing-lower` | 0 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | - |
 | `E-migrated-lower-report` | 6 | lower-bound | reported | - | - | - | *not assessed* | unknown | - |
 | `E-side2-center-lower` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | producer’s code | `V-optimal-moduli` |
 | `E-n005-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-verify` |
@@ -272,10 +276,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 94, verified 149
-- **method**: exact-algebraic 89, interval-certified 49, numerical-multiprecision 4, proof-assistant-checked 2, proof-audited 3, published-proof 6, reported 94
-- **novelty**: apparently-novel 40, common-knowledge 4, not assessed 13, previously-published 190
-- **relationship to the producer's code**: generator 5, independent-implementation 45, not-applicable 17, same-implementation 167, shared-components 7, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 95, verified 152
+- **method**: exact-algebraic 90, interval-certified 49, numerical-multiprecision 4, proof-assistant-checked 3, proof-audited 3, published-proof 7, reported 95
+- **novelty**: apparently-novel 40, common-knowledge 4, not assessed 13, previously-published 194
+- **relationship to the producer's code**: generator 5, independent-implementation 46, not-applicable 19, same-implementation 168, shared-components 7, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -331,12 +335,12 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | evidence | cases | whose work | read here |
 | --- | ---: | --- | --- |
 | `E-basic-grid-upper` | 254 | here | - |
-| `E-nagamochi-lower` | 236 | elsewhere | informally-verified |
+| `E-karakus-strip-lower` | 203 | elsewhere | informally-verified |
 | `E-franciscouzo-2026-09-27-exact-replay` | 49 | here | - |
 | `E-franciscouzo-2026-09-27-interval-replay` | 49 | here | - |
 | `E-wand125-rectangle-2026-10-01-source-replay` | 29 | here | - |
 
-The most-cited argument this repository did not produce is `E-nagamochi-lower`, carrying 236 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
+The most-cited argument this repository did not produce is `E-karakus-strip-lower`, carrying 203 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 
 `[Stromquist 2003]` is why that matters rather than being a formality: its `n = 11` argument needed a source-distinct repair, which `E-n011-repaired-lower` supplies.
 

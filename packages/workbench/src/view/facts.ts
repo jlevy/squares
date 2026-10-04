@@ -72,6 +72,8 @@ export const RECORD = "record";
 export interface CitationLine {
   bound: CitationBound;
   text: string;
+  /** `corrects Nagamochi 2005`: the published work a lower bound corrects, or null. */
+  corrects: string | null;
   /** The record's own parenthesis, or null where this project has nothing to add. */
   note: string | null;
 }
@@ -97,7 +99,9 @@ export function planCitations(cited: CorpusBoundCitations | undefined): Citation
   }
   const line = (bound: CitationBound): CitationLine | null => {
     const source = cited[bound];
-    return source === null ? null : { bound, text: source.text, note: source.note };
+    return source === null
+      ? null
+      : { bound, text: source.text, corrects: source.corrects ?? null, note: source.note };
   };
   return { record: cited.record, lines: [line("lower"), line("upper")] };
 }
@@ -238,6 +242,9 @@ export function createFactsView(document: Document, DATA: Corpus) {
       if (line !== null) {
         slot.appendChild(text("span", `cite-bound is-${line.bound}`, line.bound));
         slot.appendChild(text("span", "cite-text", line.text));
+        if (line.corrects !== null) {
+          slot.appendChild(text("span", "cite-corrects", line.corrects));
+        }
         if (line.note !== null) {
           slot.appendChild(text("span", "cite-note", line.note));
         }

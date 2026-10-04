@@ -18,14 +18,14 @@ from __future__ import annotations
 
 import html
 import re
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Iterable, Mapping
 from decimal import Decimal
 from functools import cache
 from pathlib import Path
 from typing import Any, cast
 
 from devtools import render_research_tables as tables
-from devtools.build_bound_citations import RECENT_SINCE
+from devtools.build_bound_citations import RECENT_SINCE, corrects_tag
 from devtools.build_bound_citations import RECORD as BOUND_CITATIONS
 from devtools.render_recent_results import RecentCounts, recent_counts, recent_rows
 from devtools.repo_links import repo_url
@@ -36,6 +36,11 @@ PACKING = Path(__file__).resolve().parents[1]
 TEMPLATES = PACKING / "devtools" / "templates"
 FRONTIER_ARTICLE = TEMPLATES / "frontier-article.md"
 RENDERINGS = PACKING / "atlas" / "known-best" / "rendering"
+#: The regularized views' index and their drawings, by the house renderer at the house
+#: settings (`devtools.render_regularized_atlas`), which the homepage's atlas offers as
+#: its second layer and reduces to tiles with `packing_svg(root=)`.
+REGULARIZED_INDEX = PACKING / "atlas" / "known-best" / "regularized" / "index.json"
+REGULARIZED_RENDERINGS = REGULARIZED_INDEX.parent / "rendering"
 TABLE_SCRIPT = PACKING / "devtools" / "overview" / "table.js"
 #: The two repository documents the page's prose links: the literature archive's README
 #: and the evidence inventory.
@@ -286,8 +291,15 @@ def evidence_lines() -> dict[str, int]:
 def evidence_links(refs: Iterable[str]) -> str:
     """Each evidence id once, as code linking to its entry in `evidence.yaml`, with commas
     between. A name and the comma after it are one `.site-name` box, so a line breaks
-    between names and never on a hyphen inside one (`site.css`, Words stay whole)."""
-    base = repo_url(tables.FRONTIER / "evidence.yaml")
+    between names and never on a hyphen inside one (`site.css`, Words stay whole).
+
+    The link is scheme-relative (`//github.com/...`): the same entry, opened in the same
+    tab. The frontier page carries one of these per evidence id per row, about 1,600 in
+    all, and the absolute form, which kpress decorates with `target` and `rel`, cost 47
+    bytes more each; that difference is what took the page over its 4 MiB ceiling on
+    2026-10-02, when Karakuş's bound joined the verified lane of 254 rows.
+    """
+    base = repo_url(tables.FRONTIER / "evidence.yaml").removeprefix("https:")
     lines = evidence_lines()
     links = []
     for ref in dict.fromkeys(refs):
@@ -319,9 +331,14 @@ def packing_svg(
     ink: str = "currentColor",
     paper: str = "none",
     frame_px: int | None = None,
+    root: Path = RENDERINGS,
 ) -> str:
     """Case `n`'s atlas drawing as a bare `<svg>`: the frame and each square's outline at
     whole units of a `units`-wide frame, drawn in `ink` on `paper`.
+
+    The drawing is read from `root`: the house renderings, or another set the house
+    renderer drew, as the regularized views are (`REGULARIZED_RENDERINGS`), so one code
+    reduces both and a tile of either is the same kind of picture.
 
     A table cell needs 100 units; a drawing shown large needs more, or the rounding shows
     as uneven gaps. A drawing used outside the page, where `currentColor` means nothing,
@@ -330,7 +347,7 @@ def packing_svg(
     so the container reads as a square at icon size and lands on the pixel grid, and
     its squares' outlines half a pixel, so each square stays distinct.
     """
-    source = (RENDERINGS / f"n-{n:03d}.svg").read_text(encoding="utf-8")
+    source = (root / f"n-{n:03d}.svg").read_text(encoding="utf-8")
     frame = re.search(
         r'<rect data-feature="container-outline" x="([\d.]+)" y="([\d.]+)" '
         r'width="([\d.]+)" height="([\d.]+)"',
@@ -411,12 +428,65 @@ def frontier_cases() -> list[dict[str, Any]]:
     return cases
 
 
-def recent_lower_bounds() -> dict[int, bool]:
-    """Whether each case's verified lower bound is recent, as the atlas figure stars it."""
+def lower_citations() -> dict[int, dict[str, Any] | None]:
+    """Each case's verified lower bound's citation, as the committed record states it."""
     import json  # noqa: PLC0415
 
     entries = json.loads(BOUND_CITATIONS.read_text(encoding="utf-8"))["citations"]["entries"]
-    return {entry["n"]: bool(entry["lower"] and entry["lower"]["recent"]) for entry in entries}
+    return {entry["n"]: entry["lower"] for entry in entries}
+
+
+def recent_lower_bounds() -> dict[int, bool]:
+    """Whether each case's verified lower bound is recent, as the atlas figure stars it."""
+    return {n: bool(lower and lower["recent"]) for n, lower in lower_citations().items()}
+
+
+def corrected_lower_bounds() -> dict[int, dict[str, str]]:
+    """The published work each case's verified lower bound corrects, where it corrects
+    one: its bibliography key, its short citation and the register's record of it."""
+    return {
+        n: lower["corrects"]
+        for n, lower in lower_citations().items()
+        if lower and lower["corrects"]
+    }
+
+
+def corrections_prose() -> str:
+    """The sentence that says once what the tag beside a star means, linking the result it
+    names, for the Recent results paragraph (`{{CORRECTIONS}}`): the rows repeat the tag
+    without a link, and the page states the reason the corrected work failed once, in the
+    register's own words (`corrects.what` in `frontier/results.yaml`)."""
+    from collections import Counter  # noqa: PLC0415
+
+    from devtools.overview_sections import result_url  # noqa: PLC0415
+    from sqpack.yamlio import safe_load  # noqa: PLC0415
+
+    corrected = Counter(
+        (corrects["credit"], corrects["result"])
+        for corrects in corrected_lower_bounds().values()
+    )
+    register = safe_load((PACKING / "frontier" / "results.yaml").read_text(encoding="utf-8"))
+    # The register's words, set as the page's prose sets an apostrophe.
+    what = {
+        str(record["corrects"]["result"]): " ".join(
+            str(record["corrects"]["what"]).replace("'", "\u2019").split()
+        )
+        for record in register["results"]
+        if record.get("corrects")
+    }
+    return " ".join(
+        f"Beside {count} of the stars, *corrects {credit}* says the bound stands in for a "
+        f"published result found unsound, the register\u2019s [{result}]"
+        f"({result_url(result)}): {what[result]}."
+        for (credit, result), count in sorted(corrected.items())
+    )
+
+
+def corrects_html(corrects: Mapping[str, str]) -> str:
+    """The tag a correcting lower bound carries beside its star, `corrects Nagamochi
+    2005`: one short span, with no link, since the table repeats it in most of its rows
+    and the page's introduction links the corrected result once."""
+    return f'<span class="site-corrects">{html.escape(corrects_tag(corrects) or "")}</span>'
 
 
 def _cell(content: str, *, value: str | None = None, classes: str = "") -> str:
@@ -450,7 +520,12 @@ def _verified_cell(verified: dict[str, Any], reported: dict[str, Any]) -> str:
     )
 
 
-def case_row(case: dict[str, Any], *, recent: bool) -> str:
+def case_row(
+    case: dict[str, Any],
+    *,
+    recent: bool,
+    corrects: Mapping[str, str] | None = None,
+) -> str:
     """One table row, every cell from the record. The whole row opens the case's record
     in the page's one case popover (`overview/case-popover.js`), which shows it as the
     case's own page does, the visual summary and then the record's further data; its
@@ -458,7 +533,11 @@ def case_row(case: dict[str, Any], *, recent: bool) -> str:
     minimal popover each row opened until 2026-10-03, with the construction, the lower
     bound's kind and the verification notes, went then (think-necq): the record carries
     all of it. The cells are in `HEADERS`' order: the drawing, `n`, the star, and then
-    what is known."""
+    what is known.
+
+    A verified lower bound that corrects a published result keeps its star and carries
+    the tag beside it in the same cell (`corrects_html`), and the row names the corrected
+    result in `data-corrects`, the register's id for it (the owner, 2026-10-02)."""
     from devtools.overview_sections import case_status_chip  # noqa: PLC0415
     from devtools.render_case_pages import case_link, case_url  # noqa: PLC0415
     from devtools.result_overview import case_badges  # noqa: PLC0415
@@ -471,7 +550,12 @@ def case_row(case: dict[str, Any], *, recent: bool) -> str:
     if case["reported_status"] != status:
         shown_status += f" (reported {html.escape(case['reported_status'])})"
     gap_html, gap_value = gap(case)
-    star = '<span class="site-star" title="Recent lower bound">★</span>' if recent else ""
+    # The star carries no tooltip of its own: its column's heading names it, once
+    # (`HEADER_TITLES`), where the phrase on each of 297 stars was 8 KB of a page held
+    # under a byte ceiling, the room the correction tags beside them now take.
+    star = '<span class="site-star">★</span>' if recent else ""
+    if corrects:
+        star += corrects_html(corrects)
     cells = [
         _cell(thumbnail_svg(n), classes="site-thumb"),
         _cell(
@@ -497,7 +581,8 @@ def case_row(case: dict[str, Any], *, recent: bool) -> str:
     attributes = (
         f'id="n-{n}" data-n="{n}" data-status="{html.escape(status)}" '
         f'data-open="{flag[status == "open"]}" data-recent="{flag[recent]}" '
-        f'data-case-row="{n}" data-case-href="{case_url(n)}" '
+        + (f'data-corrects="{html.escape(corrects["result"])}" ' if corrects else "")
+        + f'data-case-row="{n}" data-case-href="{case_url(n)}" '
         f'aria-label="n = {n}, {html.escape(status)}: open its case record"'
     )
     return f"<tr {attributes}>{''.join(cells)}</tr>"
@@ -522,12 +607,21 @@ HEADERS: tuple[tuple[str, str, str], ...] = (
 )
 
 
+#: What a heading's tooltip says where its one word does not: the star's column, whose
+#: rows carry the star and, beside it, what a correcting bound corrects.
+HEADER_TITLES = {
+    "Recent": "A recent lower bound, and the published result it corrects where it does",
+}
+
+
 def _heading(label: str, kind: str, classes: str) -> str:
     """A column's header cell. One with no words is named for a screen reader."""
     sort = f' data-sort="{kind}"' if kind else ""
     named = f' class="{classes}"' if classes else ""
     if not label:
         named += f' aria-label="{THUMB_LABEL}"'
+    if label in HEADER_TITLES:
+        named += f' title="{html.escape(HEADER_TITLES[label])}"'
     return f'<th scope="col"{sort}{named}>{html.escape(label)}</th>'
 
 
@@ -554,8 +648,12 @@ def table_html(cases: list[dict[str, Any]]) -> str:
     from devtools.render_case_pages import case_popover  # noqa: PLC0415
 
     recent = recent_lower_bounds()
+    corrected = corrected_lower_bounds()
     head = "".join(_heading(*column) for column in HEADERS)
-    rows = "\n".join(case_row(case, recent=recent.get(case["n"], False)) for case in cases)
+    rows = "\n".join(
+        case_row(case, recent=recent.get(case["n"], False), corrects=corrected.get(case["n"]))
+        for case in cases
+    )
     return (
         f"{_tools(len(cases), max(case['n'] for case in cases))}\n"
         '<div class="site-table-wrap site-wide site-frontier" id="frontier-table">\n'
@@ -580,6 +678,7 @@ def frontier_markdown(fill: Callable[..., str]) -> str:
         "OPEN": str(sum(case["status"] == "open" for case in cases)),
         "RECENT_SINCE": since_prose(),
         "SURVEY_COUNTS": survey_counts(recent_counts(recent_rows())),
+        "CORRECTIONS": corrections_prose(),
         "ARCHIVE_URL": repo_url(ARCHIVE_README),
         "INVENTORY_URL": repo_url(EVIDENCE_INVENTORY),
         "TABLE": table_html(cases),

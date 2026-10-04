@@ -59,6 +59,8 @@ name: Certificate page
       - packing/atlas/known-best/composite-figure.json
       - packing/atlas/known-best/bound-citations.json
       - packing/atlas/known-best/rendering/**
+      - packing/atlas/known-best/regularized/index.json
+      - packing/atlas/known-best/regularized/rendering/**
       - packing/witnesses/known-best/**
       - packing/devtools/templates/n11-lower-bounds-explainer-shell.html
       - packing/devtools/templates/paper-publication.css

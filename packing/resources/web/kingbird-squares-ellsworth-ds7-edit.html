@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/copy-tex.min.js" integrity="sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMathInElement(document.body, {
+                // customized options
+                // • auto-render specific keys, e.g.:
+                delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                ],
+                macros: {
+                    "\\Nn": "{#1\\small{\\ldots}}",
+                },
+                // • rendering keys, e.g.:
+                throwOnError : false
+            });
+            for (const toggle of document.getElementsByClassName('toggle')) {
+                toggle.addEventListener('click', toggleEquation);
+                toggle.addEventListener('dblclick', function(event) {
+                    event.preventDefault();
+                    toggleEquation();
+                });
+            }
+        });
+        function toggleEquation() {
+            const frame1 = this.getElementsByClassName('frame1')[0];
+            const frames = this.getElementsByClassName('frames');
+
+            let j = -1;
+            for (let i=0; i<frames.length; i++) {
+                if (frames[i].classList.contains('toggled')) {
+                    j = i; break;
+                }
+            }
+            if (j < 0) {
+                frame1   .classList.toggle('toggled');
+                frames[0].classList.toggle('toggled');
+            } else {
+                frames[j].classList.toggle('toggled');
+                if (j+1 == frames.length) {
+                    frame1.classList.toggle('toggled');
+                } else {
+                    frames[j+1].classList.toggle('toggled');
+                }
+            }
+        }
+    </script>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<style>
+.svg-table {
+    background-color: #CCFFFF;
+    border-spacing: 0.667em; /* previously acheived with this inline property: cellpadding="10" */
+    /* mimic the legacy HTML 3D border effect that was previously acheived with this inline property: border="1" */
+    border: 1px outset black;
+    outline: 1px inset black;
+    outline-offset: -4px; /* put a 2px gap between the outside border and inside outline, such that our background-color will fill the gap */
+}
+.svg-table2 {
+    width: 100%;
+    max-width: 700px;
+}
+.svg-table2 tr { text-align: center; }
+.svg-table2 td { width: 50%;         }
+.svg-table2 td:not(:last-child)  { padding-right: 1.0em; }
+.svg-table2 td:not(:first-child) { padding-left : 1.0em; }
+
+.svg-table1 {
+    width: 100%;
+    max-width: 350px;
+}
+.svg-table1 td { text-align: center; }
+
+embed {
+    pointer-events: none;
+}
+.katex {
+    font-size: 1em;
+}
+</style>
+                                           
+<p align="right">
+<font size="-1">
+<a href="http://www.combinatorics.org/" style="text-decoration:none">
+<font size="-1">T</font>HE <font size="-1">E</font>LECTRONIC
+<font size="-1">J</font>OURNAL OF <font size="-1">C</font>OMBINATORICS</a>
+(2009), DS#7.
+</font><br><br><br>
+
+</p><center><font size="+4" color="660000">Packing Unit Squares in
+Squares:<br> A Survey and New Results</font></center><p>
+
+</p><center><font size="+2">
+<a href="https://erich-friedman.github.io/" style="text-decoration:none">Erich Friedman</a><br>
+<a href="http://www.stetson.edu/" style="text-decoration:none">Stetson University, DeLand, FL
+32723</a><br>
+<font size="-3"><br></font>
+<font size="+1">edited by <a href="https://github.com/Davidebyzero" style="text-decoration:none">David Ellsworth</a> (see <a href="https://erich-friedman.github.io/papers/squares/squares.html" style="text-decoration:none">original</a>)</font><br>  </font></center><p>
+
+<font size="3">
+
+
+
+<br><br><font size="+3" color="660000">Abstract</font></font></p><p><font size="3">
+
+
+
+Let $s(n)$ be the side of the smallest square into which we can pack $n$ unit squares.  
+We present a history of this problem, and give the best known upper and lower bounds 
+for $s(n)$ for $n≤100$, including the best known packings. 
+We also give relatively simple proofs for the values of $s(n)$ when $n = 2$,
+$3$, $5$, $8$, $15$, $24$, and $35$, and more complicated proofs for $n=7$ and $14$.  We also prove many
+other lower bounds for various $s(n)$. </font></p><p><font size="3">
+
+<br><br><font size="+3" color="660000">Table of Contents</font></font></p><p><font size="3">
+
+<a href="#introduction" style="text-decoration: none; font-size:150%">1. Introduction</a></font></p><p><font size="3">
+<a href="#previousresults" style="text-decoration: none; font-size:150%">2. Previous Results</a></font></p><p><font size="3">
+<a href="#newpackings" style="text-decoration: none; font-size:150%">3. New Packings</a></font></p><p><font size="3">
+<a href="#technicallemmas" style="text-decoration: none; font-size:150%">4. Technical Lemmas</a></font></p><p><font size="3">
+<a href="#lowerbounds" style="text-decoration: none; font-size:150%">5. Lower Bounds</a></font></p><p><font size="3">
+<a href="#appendix" style="text-decoration: none; font-size:150%">Appendix</a></font></p><p><font size="3">
+<a href="#references" style="text-decoration: none; font-size:150%">References</a></font></p><p><font size="3">
+
+
+<br><br><a name="introduction"><font size="+3" color="660000">1&ensp;&thinsp;Introduction</font></a></font></p><p><font size="3"><a name="introduction">
+
+
+The problem of packing equal circles in a square has been around for some 40 years and has seen
+much recent progress </a><a href="#references" style="text-decoration: none">[2]</a>.  The problem
+of packing equal squares in a square is only recently becoming well known.  Results were less plentiful, as
+the computer-aided methods available for circles did not generalize for squares, until recently when an
+effective algorithm was found <a href="#references" style="text-decoration: none">[20]</a>.   We 
+give a few packings which improve upon those in the literature, illustrate a technique for
+obtaining lower bounds, and exhibit the best known packings for less than one hundred squares.</font></p><p><font size="3">
+
+Let $s(n)$ be the side of the smallest square into which we can pack n unit squares.  It is
+clear that $\sqrt n ≤ s(n) ≤ \lceil\sqrt n\,\rceil$, the first
+inequality coming from area considerations, and the second coming from the facts that $s(n)$ is
+non-decreasing and $s(n^2)=n$.  It is not hard to show that $s(2)=s(3)=2$.  It is a little
+harder to show that $s(5)=2+{1\over 2}\sqrt 2$ <a href="#references" style="text-decoration: none">[7]</a>.</font></p><p><font size="3">
+
+The number of claims far outweighs the number of published results in this area.
+Göbel says that Schrijver claims that Bajmóoczy proved $s(7)=s(8)=3$ <a href="#references" style="text-decoration: none">[7]</a>.
+Walter Stromquist claimed to have proved $s(6)=3$ and $s(10)=3+{1\over 2}\sqrt 2$, and claimed to know how to prove $s(14)=s(15)=4$ and $s(24)=5$ <a href="#references" style="text-decoration: none">[13]</a>.
+Trevor Green sent me a proof for $s(6)=3$.  None of these proofs were published.
+Said El Moumni evidently proved $s(7)=s(8)=3$ and $s(15)=4$ <a href="#references" style="text-decoration: none">[12]</a> but no one was aware of this until recently.
+Finally, in 2002, Kearney and Shiu published a proof of $s(6)=3$ <a href="#references" style="text-decoration: none">[9]</a>. </font></p><p><font size="3">
+
+In 2003, Stromquist proved $s(10)=3+{1\over 2}\sqrt 2$ <a href="#references" style="text-decoration: none">[18]</a>.
+In 2005, Nagamochi proved that $s(n^2-2)=s(n^2-1)=n$ <a href="#references" style="text-decoration: none">[19]</a>.
+  
+Also in 2005, Thierry Gensane and Philippe Ryckelynck published an 
+inflation algorithm for finding good packings and found the first 
+computer packing that might be optimal. <a href="#references" style="text-decoration: none">[20]</a>.  There are many other good packings 
+thought to be optimal, but as of yet no proofs.
+Here we prove the values of $s(n)$ for square $n$ and $n=2$, $3$, $5$, $7$, $8$, $14$, $15$, $24$, and $35$.</font></p><p><font size="3">
+
+Previous results can be found in <a href="#previousresults" style="text-decoration: none">Section 2</a>.
+Reccent packings appear in <a href="#newpackings" style="text-decoration: none">Section 3</a>.  In <a href="#technicallemmas" style="text-decoration: none">Section 4</a> we prove some technical lemmas that we use in
+<a href="#lowerbounds" style="text-decoration:
+none">Section 5</a> to prove the values of $s(n)$ mentioned above.  Lists of the best
+known upper and lower bounds for $s(n)$ are given in the <a href="#appendix" style="text-decoration: none">Appendix</a>.  Many of the results given are
+taken from unpublished letters and manuscripts, and private communications.</font></p><p><font size="3">
+
+
+
+<br><br><a name="previousresults"><font size="+3" color="660000">2&ensp;&thinsp;Previous Results</font></a></font></p><p><font size="3"><a name="previousresults">
+
+
+Göbel was the first to publish on the subject </a><a href="#references" style="text-decoration:
+none">[7]</a>.  Generalizing his findings, $a^2+a+3+\lfloor (a-1)\sqrt 2\rfloor$ squares can be packed in a square of side
+$a+1+{1\over 2}\sqrt 2$ by placing a diagonal strip of squares at a $45°$ angle. 
+This gives the best known packings for all values of $a$ except for $a=3$ (see Figure 1).</font></p><p><font size="3">
+
+<a name="figure1"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-5.svg"><div><embed src="square-5.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-10.svg"><div><embed src="square-10.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(5)=2+{1\over 2}\sqrt 2$</td>
+<td>$s(10)=3+{1\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-27.svg"><div><embed src="square-27.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-38.svg"><div><embed src="square-38.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(27)≤5+{1\over 2}\sqrt 2$</td>
+<td>$s(38)≤6+{1\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-52.svg"><div><embed src="square-52.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-67.svg"><div><embed src="square-67.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(52)≤7+{1\over 2}\sqrt 2$</td>
+<td>$s(67)≤8+{1\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<center><table width="50%">
+<tbody><tr><td><a href="square-84.svg"><div><embed src="square-84.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(84)≤9+{1\over 2}\sqrt 2$</td></tr></tbody></table></center><p>
+
+</p><center>Figure 1.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure1">
+
+By unrotating some rotated squares in the corner, we get some alternate 
+packings for $n=10$, $67$, and $84$. (see Figure 2).
+David Cantrell noticed in 2005<a href="#references" style="text-decoration: none"><sup>[17]</sup></a> that alternative 
+packings exist for $n=27$, $38$, $52$, $67$<a href="#references" style="text-decoration: none"><sup>[22]</sup></a>, and $84$ using a minimum number of 
+rotated squares (see Figure 2). For $n=52$, this alternative packing is rigid.</a></font></p><p><font size="3">
+
+
+<a name="figure2"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-10b.svg"><div><embed src="square-10b.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-67b.svg"><div><embed src="square-67b.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(10)=3+{1\over 2}\sqrt 2$</td>
+<td>$s(67)≤8+{1\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-84b.svg"><div><embed src="square-84b.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-84c.svg"><div><embed src="square-84c.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(84)≤9+{1\over 2}\sqrt 2$</td>
+<td>$s(84)≤9+{1\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-27b.svg"><div><embed src="square-27b.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-38b.svg"><div><embed src="square-38b.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(27)≤5+{1\over 2}\sqrt 2$</td>
+<td>$s(38)≤6+{1\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-52b.svg"><div><embed src="square-52b.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-67c.svg"><div><embed src="square-67c.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(52)≤7+{1\over 2}\sqrt 2$</td>
+<td>$s(67)≤8+{1\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<center><table width="50%">
+<tbody><tr><td><a href="square-84d.svg"><div><embed src="square-84d.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(84)≤9+{1\over 2}\sqrt 2$</td></tr></tbody></table></center><p>
+
+<center>Figure 2.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure2">
+
+
+It is clear that $n+2\lfloor s(n)\rfloor+1$ squares can be packed in a square of side $s(n)+1$ by packing n squares inside
+a square of side $s(n)$ and putting the other squares in an "L" around it.  The first four packings in
+Figure 2 are of this form.  Packings not containing an "L" of squares we will call
+<i>primitive</i> packings.  From now on, we will only illustrate primitive packings.</a></font></p><p><font size="3"><a name="figure2">
+
+Another generalization from Göbel's findings is that if integers $a$ and $b$ satisfy
+
+$$a-1 &lt; {b\over{\sqrt 2}} &lt; a+1$$
+
+then $2a^2+2a+b^2$ squares can be packed inside a square of side $a+1+b/\sqrt 2$.  This is accomplished by
+placing a $b × b$ square of squares at a $45°$ angle in the center. This gives the best
+known packings for $28$, $40$, $65$, and $89$ squares (see Figure 3).  Adding an "L" around the packing of $65$
+squares gives the best known packing of $82$ squares.  The packing for $n=40$ is rigid.
+David Ellsworth noticed in 2023 that an alternative packing exists for $n=28$ that is rigid (see Figure 3).
+</a></font></p><p><font size="3"><a name="figure2">
+
+
+</a><a name="figure3"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-28.svg"><div><embed src="square-28.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-40.svg"><div><embed src="square-40.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(28)≤3+2\sqrt 2$</td>
+<td>$s(40)≤4+2\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-65.svg"><div><embed src="square-65.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-89.svg"><div><embed src="square-89.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(65)≤5+{5\over 2}\sqrt 2$</td>
+<td>$s(89)≤5+{7\over 2}\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<center><table width="50%">
+<tbody><tr><td><a href="square-28b.svg"><div><embed src="square-28b.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(28)≤3+2\sqrt 2$</td></tr></tbody></table></center><p>
+
+<center>Figure 3.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure3">
+
+
+Charles Cottingham, who improved some of Göbel's packings for $n≤49$, was
+the first to use diagonal strips of width $2$ </a><a href="#references" style="text-decoration:
+none">[6]</a>.  Soon after he produced a packing of $19$ squares with a diagonal strip of width $2$, Robert
+Wainwright improved Cottingham's packing slightly (see Figure 4) <a href="#references" style="text-decoration: none">[4]</a>.  In 2002, David Cantrell found some alternative packings 
+for $19$ squares <a href="#references" style="text-decoration: none">[14]</a>.</font></p><p><font size="3">
+
+
+<a name="figure4"></a></font></p>
+<center><table class="svg-table svg-table1"><tbody><tr><td>
+<center><table width="100%">
+<tbody><tr><td><a href="square-19.svg"><div><embed src="square-19.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(19)≤3+{4\over 3}\sqrt 2$</td></tr></tbody></table></center><p>
+<center>Figure 4.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure4">
+
+In 1980, Evert Stenlund improved many of Cottingham's packings, and provided packings for $n≤100$ 
+</a><a href="#references" style="text-decoration: none">[6]</a>.  His packing of $66$
+squares uses a diagonal strip of width 3 (see Figure 5).  In this packing, the diagonal squares
+touch only the squares in the upper right and lower left corners.  Adding an "L" to this packing
+gives the best known packing of $83$ squares.</font></p><p><font size="3">
+
+
+<a name="figure5"></a></font></p>
+<center><table class="svg-table svg-table1"><tbody><tr><td>
+<center><table width="100%">
+<tbody><tr><td><a href="square-66.svg"><div><embed src="square-66.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(66)≤3+4\sqrt 2$</td></tr></tbody></table></center><p>
+<center>Figure 5.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure5">
+
+
+
+The best known packings for many values of n are more complicated.  Many seem to require
+packing with squares at angles other than 0° and 45°.  In 1979, Walter
+Trump improved Göbel's packing of $11$ squares (see Figure 6).  Many people have
+independently discovered this packing.  The original discovery has been incorrectly attributed
+to Gustafson and Thule </a><a href="#references" style="text-decoration: none">[11]</a>.  The middle
+squares are tilted about 40.1819372903297°, and there is a small gap between these squares.  This packing is also rigid.</font></p><p><font size="3">
+
+
+<a name="figure6"></a></font></p>
+<center><table class="svg-table svg-table1"><tbody><tr><td>
+<center><table width="100%">
+<tbody><tr><td><a href="square-11.svg"><div><embed src="square-11.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(11)≤\Nn{3.87708359002281}$</td></tr></tbody></table></center><p>
+<center>Figure 6.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure6">
+
+
+In 1980, Hämäläinen improved on Göbel's packing of $18$ squares
+(see Figure 7) </a><a href="#references" style="text-decoration: none">[6]</a>.  In 1981, Mats
+Gustafsson found an alternative optimal packing of $18$ squares (see Figure 7).   The middle squares
+in these packings are tilted by an angle of $\sin^{-1}((\sqrt 7-1)/4)≈24.295°$.  In 2002, David Cantrell
+found another alternative packing (see Figure 7) <a href="#references" style="text-decoration: none">[14]</a> that is useful in building the best known 
+packing for $n=68$ (see <a href="#figure11" style="text-decoration:none">Figure 11</a>).  In 2004, the computer 
+program of Gensane and Ryckelynck found yet another alternative packing (see Figure 7) <a href="#references" style="text-decoration: none">[20]</a>. </font></p><p><font size="3">
+
+
+<a name="figure7"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-18.svg" ><div><embed src="square-18.svg"  type="image/svg+xml"/></div></a></td>
+<td><a href="square-18b.svg"><div><embed src="square-18b.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(18)≤(7+\sqrt 7)/2$</td>
+<td>$s(18)≤(7+\sqrt 7)/2$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-18c.svg"><div><embed src="square-18c.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-18d.svg"><div><embed src="square-18d.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(18)≤(7+\sqrt 7)/2$</td>
+<td>$s(18)≤(7+\sqrt 7)/2$</td>
+</tr></tbody></table><br>
+
+<center>Figure 7.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure7">
+
+
+
+In </a><a href="#references" style="text-decoration: none">[3]</a>, Erdös and Graham define
+$W(s)=s^2-\max\{n:s(n)≤s\}$. Thus $W(s)$ is the wasted area in the optimal
+packing of unit squares into an $s × s$ square.  They show (by constructing explicit packings)
+that $W(s)=\mathcal{O}(s^{7/11})$.   In <a href="#references" style="text-decoration:
+none">[10]</a>, it is mentioned that Montgomery has improved this result to $W(s)=\mathcal{O}(s^{(3-\sqrt 3)/2+ε})$
+for every $ε\gt 0$.</font></p><p><font size="3">
+
+In <a href="#references" style="text-decoration: none">[10]</a>, Roth and Vaughan establish a
+non-trivial lower bound for $W(s)$. They show that if $s(s-\lfloor s\rfloor)\gt{1\over 6}$, then $W(s)≥
+10^{-100}\sqrt{s \cdot \lvert s-\lfloor s+{1\over 2}\rfloor \rvert}$.  This implies that $W(s)$ is not
+$\mathcal{O}(s^α)$ when $α\lt {1\over 2}$.</font></p><p><font size="3">
+
+It was conjectured that $s(n^2-n)=n$ whenever $n$ is small.  The smallest known
+counterexample of this conjecture, due to Lars Cleemann, is $s(17^2-17)\lt 17$.  That is, $272$
+squares can be packed into a square of side $17$ in such a way that the the square can be squeezed
+together slightly (see Figure 8).  Three squares are tilted by an angle of 45°, and
+the other tilted squares are tilted by an angle of $\theta\gt\tan^{-1}({8\over 15})≈28.072°$.
+This was elaborated upon by David Ellsworth in 2023, finding that the optimal angle is $\theta=\Nn{28.5505842512145}°$, with $s=4\cos\theta+\sin\theta+13$.</font></p><p><font size="3">
+
+
+</font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+<center><table width="100%">
+<tbody><tr><td><a href="square-272-smaller-than-17.svg"><div><embed src="square-272-smaller-than-17.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(272)≤\Nn{16.9915164682460}$</td></tr></tbody></table></center><p>
+<center>Figure 8.</center></td></tr></tbody></table></center><p><font size="3">
+
+
+
+<br><br><a name="newpackings"><font size="+3" color="660000">3&ensp;&thinsp;New Packings</font></a></font></p><p><font size="3"><a name="newpackings">
+
+
+We can generalize the packings in </a><a href="#figure3" style="text-decoration:none">Figure 3</a>
+by placing the central square a little off center. We can pack $2a^2+2a+b^2$
+squares in a rectangle with sides
+
+\[\displaystyle a + \frac{1}{2} + \frac{b}{\sqrt 2} \quad\text{and}\quad a + \frac{3}{2} + \frac{b}{\sqrt 2}\text{.}\]
+
+Adding a column of squares to the side of this, we get a packing of
+$2a^2+4a+b^2+1$ squares in a square of side $a+{3\over 2}+b/\sqrt 2$. 
+This gives the best known packings for $26$ and $85$ squares (see Figure 9).</font></p><p><font size="3">
+
+
+<a name="figure9"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-26.svg"><div><embed src="square-26.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-85.svg"><div><embed src="square-85.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(26)≤{1\over 2}(7+3\sqrt 2)$</td>
+<td>$s(85)≤{11\over 2}+3\sqrt 2$</td>
+</tr></tbody></table><br>
+
+<center>Figure 9.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure9">
+
+Note that a diagonal strip of width 2 or 3 must be off center in order to be optimal. Otherwise
+one could place at least as many squares by not rotating them.</a></font></p><p><font size="3"><a name="figure10a">
+
+Stenlund also modified a diagonal strip of width $4$ to pack $87$ squares (see Figure 10).
+In 2002, David Cantrell changed the angles slightly to give a minutely better packing (see Figure 10) 
+</a><a href="#references" style="text-decoration: none">[14]</a>.  There is a thin
+space between two of the diagonal strips.  Compare this with the packing of $19$ squares in <a href="#figure4" style="text-decoration:none">Figure 4</a>.<p>
+
+
+<a name="figure10"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-87_r1.svg"><div><embed src="square-87_r1.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-87.svg"><div><embed src="square-87.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(87)≤{14\over 3}+{11\over 3}\sqrt 2=\Nn{9.85211639536801}$</td>
+<td>$s(87)≤\Nn{9.85197533993158}$</td>
+</tr></tbody></table><br>
+
+<center>Figure 10.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure10b">
+
+
+In 2002, David Cantrell found packings of $53$ and $68$ squares that are slightly better than Göbel's (see Figure 11).
+</a><a href="#references" style="text-decoration: none">[14]</a></font></p><p><font size="3">
+
+
+<a name="figure11"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-53.svg"><div><embed src="square-53.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-68.svg"><div><embed src="square-68.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(53)≤\Nn{7.82303789616673}$</td>
+<td>$s(68)≤{15\over 2}+{1\over 2}\sqrt 7$</td>
+</tr></tbody></table><br>
+<center>Figure 11.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure11">
+
+In 1980, Pertti Hämäläinen improved Göbel's packing of $17$
+squares using a different arrangement of squares at a 45° angle.  But in 1998, John
+Bidwell, an undergraduate student at the University of Hawaii, improved this packing (see Figure
+12) </a><a href="#references" style="text-decoration: none">[1]</a>.  It is the smallest example where the best known packing contains squares at three different angles.</font></p><p><font size="3">
+
+Also in 1998, I improved the best known packing of $29$ squares using a modified diagonal strip of
+width 2.  A few months later, Bidwell improved my packing slightly <a href="#references" style="text-decoration: none">[1]</a>.  In 2005, David Cantrell used a completely different idea
+to find a better packing <a href="#references" style="text-decoration: none">[17]</a>.  But in 2004, the computer program of 
+Thierry Gensane and Philippe Ryckelynck found what now stands as the best known packing for $29$ squares (see Figure 12) <a href="#references" style="text-decoration: none">[20]</a>.  This packing contains squares at no less than 6 different angles.</font></p><p><font size="3">
+
+
+<a name="figure12"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-17.svg"><div><embed src="square-17.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-29.svg"><div><embed src="square-29.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(17)≤\Nn{4.67553009360455}$</td>
+<td>$s(29)≤\Nn{5.93434180499654}$</td>
+</tr></tbody></table><br>
+<center>Figure 12.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure12">
+
+
+In 1997, I generalized Cottingham's packing of $41$ squares to give packings of $70$ and $88$ squares using strips
+of width 2.  In 2002, David Cantrell modified these packings to give the best known packings 
+(see Figure 13). <a href="#references" style="text-decoration: none">[14]</a></font></p><p><font size="3">
+
+
+<a name="figure13"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-70_r2.svg"><div><embed src="square-70_r2.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-88.svg"   ><div><embed src="square-88.svg"    type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(70)≤\Nn{8.91209113581151}$</td>
+<td>$s(88)≤\Nn{9.90177651254408}$</td>
+</tr></tbody></table><br>
+<center>Figure 13.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure13">
+
+
+In 1997, I modified a diagonal strip of $2$ squares to get a packing of $54$
+squares based on Wainwright's packing of $19$ squares in
+<a href="#figure4" STYLE="text-decoration:none">Figure 4</a>.  In 2002, David Cantrell used his
+alternative packings of $19$ squares to improve the packing for $54$ squares <a
+href="#references" STYLE="text-decoration: none">[14]</a>.  He further improved this packing in 2005 (see Figure 14) <a
+href="#references" STYLE="text-decoration: none">[17]</a>.<p>
+
+In 1997, I modified a diagonal strip of $4$ squares to get a packing of $69$ squares.  In 2002, David Cantrell improved this to produce the best known packing of $69$ squares (see Figure 14) <a
+href="#references" STYLE="text-decoration: none">[14]</a>.  Maurizio Morandi noticed some 5 years later that adding an "L" to this packing improved Cantrell's packing of $69$ squares, but then he further improved the packing (see Figure 14) <a
+href="#references" STYLE="text-decoration: none">[21]</a>.<p>
+
+
+<a name="figure14"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-54_r3.svg"><div><embed src="square-54_r3.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-69_r5.svg"   ><div><embed src="square-69_r5.svg"    type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(54)≤\Nn{7.84878975975240}$</td>
+<td>$s(69)≤\Nn{8.82868705685148}$</td>
+</tr></tbody></table><br>
+<center>Figure 14.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure14">
+
+
+In 2002, David Cantrell used a completely new idea to find the best known packing of $39$ squares
+(see Figure 15). </a><a href="#references" style="text-decoration: none">[14]</a></font></p><p><font size="3">
+
+We can generalize the packings in <a href="#figure7" style="text-decoration:none">Figure 7</a>
+to provide the best known packings of $86$ squares (see Figure 15).  The angle of the
+tilted squares is the same as in that Figure.</font></p><p><font size="3">
+
+
+
+<a name="figure15"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-39.svg"><div><embed src="square-39.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-86.svg"><div><embed src="square-86.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(39)≤\Nn{6.81880916998841}$</td>
+<td>$s(86)≤(17+\sqrt 7)/2$</td>
+</tr></tbody></table><br>
+<center>Figure 15.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure15">
+
+In 1997, I improved the packing for $37$ squares using a modified diagonal
+strip of width 3.  In 2002, David Cantrell improved this slightly (see Figure 16). </a><a href="#references" style="text-decoration: none">[14]</a> The slanted squares are tilted at
+angles of $\Nn{42.0866074742059}°$ and $45°$.  Adding an "L" to this
+packing of $37$ squares gives the best known packing of $50$ squares.</font></p><p><font size="3">
+
+In 1979, Charles Cottingham found a packing of $41$ squares that was only improved in 2005 by David Cantrell (see Figure 16). <a href="#references" style="text-decoration: none">[17]</a></font></p><p><font size="3">
+
+In 2002, David Cantrell found the first packing of $55$ squares in a square of side less than
+$8$ <a href="#references" style="text-decoration: none">[14]</a>.  He then improved this packing in 2005. (see Figure 16). <a href="#references" style="text-decoration: none">[17]</a></font></p><p><font size="3">
+
+Also in 2005, David Cantrell found the first packing of $71$ squares in a square of side less than $9$. (see Figure 16). <a href="#references" style="text-decoration: none">[17]</a></font></p><p><font size="3">
+
+In 2009, Károly Hajba found the first known packing of $51$ squares in a square of side less than $7+{1\over 2}\sqrt 2$. (see Figure 16). <a href="#references" style="text-decoration: none">[16]</a></font></p><p><font size="3">
+
+
+<a name="figure16"></a></font></p>
+<center><table class="svg-table svg-table2"><tbody><tr><td>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-37.svg"   ><div><embed src="square-37.svg"    type="image/svg+xml"/></div></a></td>
+<td><a href="square-41_r2.svg"><div><embed src="square-41_r2.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(37)≤\Nn{6.59861960924436}$</td>
+<td>$s(41)≤\Nn{6.94725045864072}$</td>
+</tr></tbody></table><br>
+
+<table width="100%"><tbody><tr>
+<td><a href="square-55_r1.svg"><div><embed src="square-55_r1.svg" type="image/svg+xml"/></div></a></td>
+<td><a href="square-71_r1.svg"><div><embed src="square-71_r1.svg" type="image/svg+xml"/></div></a></td>
+</tr><tr>
+<td>$s(55)≤\Nn{7.98701198965972}$</td>
+<td>$s(71)≤\Nn{8.96326750850139}$</td>
+</tr></tbody></table><br>
+
+<center><table width="50%">
+<tbody><tr><td><a href="square-51.svg"><div><embed src="square-51.svg" type="image/svg+xml"/></div></a></td></tr>
+<tr><td>$s(51)≤\Nn{7.70435372947124}$</td></tr></tbody></table><p>
+
+<center>Figure 16.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure16">
+
+
+Finally, we make the following conjecture:</a></font></p><p><font size="3"><a name="figure16">
+ 
+<b>Conjecture 1.</b> If $s(n^2-k)=n$, then $s((n+1)^2-k)=n+1$.</a></font></p><p><font size="3"><a name="figure16">
+
+That is, if omitting $k$ squares from an $n × n$ square does not admit a smaller packing,
+then the same will be true for omitting k squares from any larger perfect square packing.  
+This is true of all the best known packings.</a></font></p><p><font size="3"><a name="figure16">
+
+
+
+
+
+<br><br></a><a name="technicallemmas"><font size="+3" color="660000">4&ensp;&thinsp;Technical Lemmas</font></a></font></p><p><font size="3"><a name="technicallemmas">
+
+
+<b>Lemma 1.</b> Any unit square inside the first quadrant whose center is in
+$[0,1]^2$ contains the point $(1,1)$.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+Proof: It suffices to show that a unit square in the first quadrant that touches the
+x-axis and y-axis contains the point $(1,1)$. If the square is at an angle $θ$,
+it contains the points $(\sin θ, 0)$ and $(0, \cos θ)$ (see Figure
+17).  The two other corners of the square, $(\cos θ, \cos θ+\sin θ)$ and $(\cos θ+\sin θ, \sin θ)$, lie on the line $y - \sin θ = -\cot θ (x - \sin θ - \cos θ)$.  In
+particular, when $x=1$,</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><font size="3"><a name="technicallemmas">$$y = {{\sin^2 θ - \cos θ (1 - \sin θ - \cos θ)}\over\sin θ} = {{(1 - \sin θ) (1 - \cos θ) + \sin θ}\over\sin θ} ≥ 1\text{.} \enspace \blacksquare$$ </a></font><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/sq1.gif"><br><br> 
+Figure 17.</td></tr></tbody></table></center><p><font size="3"><a name="technicallemmas">
+
+
+
+<b>Lemma 2.</b> Let $0&lt;x≤1$, $0&lt;y≤1$, and $x+2y&lt;2\sqrt 2$.  
+Then any unit square inside the first quadrant whose center is contained in
+$[1,1+x]x[0,y]$ contains either the point $(1,y)$ or the point $(1+x,y)$.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+Proof: It suffices to show that a unit square $u$ whose center is contained in
+$[1,1+x]x[0,y]$ that contains the points $(1,y)$ and $(1+x,y)$ on its boundary contains
+a point on the x-axis.  This is true if $(1,y)$ and $(1+x,y)$ lie on the same side of $u$. 
+If $u$ is at an angle $θ$, then the lowest corner of the square is</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><font size="3"><a name="technicallemmas">$$\bigl(1 + x + \left(1 - x \sin θ\right) \sin θ - \cos θ ,  y - \left(1 - x \sin θ\right) \cos θ - \sin θ\bigr)$$</a></font><p><font size="3"><a name="technicallemmas">
+
+(see Figure 18).  This point lies outside the first quadrant when $f(θ) = \cos θ + \sin θ - x \sinθ \cos θ &gt; y$.   Since</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><font size="3"><a name="technicallemmas">$$f'(θ) = (\cos θ - \sin θ)\bigl[1 - x (\cos θ + \sin θ)\bigr]\text{,}$$</a></font></center><p><font size="3"><a name="technicallemmas">
+
+the critical points of $f(θ)$ are </a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><font size="3"><a name="technicallemmas">$$(\cos θ,\sin θ)=\left({1\over\sqrt 2},{1\over\sqrt 2}\right) \quad \text{and} \quad (\cos θ,\sin θ) = \left({1 ± \sqrt{2x^2-1}\over 2x} , {1 \pm \sqrt{2x^2-1} \over 2x}\right)$$.</a></font><p><font size="3"><a name="technicallemmas">
+
+Checking these 3 values and the endpoints, the global minimum of $f(θ)$ occurs
+at $θ=45°$.  Therefore, when $y&lt;\sqrt 2-{x\over 2}$,
+$u$ contains some point of the x-axis. $\blacksquare$</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/sq2.gif"><br><br> 
+Figure 18.</td></tr></tbody></table></center><p><font size="3"><a name="technicallemmas">
+
+
+<b>Lemma 3.</b> If the center of a unit square $u$ is contained in $\triangle ABC$,
+and each side of the triangle has length no more than 1, then $u$ contains $A$, $B$, or $C$.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+Proof: The diagonals of $u$ divide the plane into 4 regions, labeled clockwise
+as $R_1$, $R_2$, $R_3$, and $R_4$ (see Figure 19). These regions
+are closed, and intersect only on the diagonals. The points $A$, $B$, and $C$ cannot all be on one
+side of either one of these diagonals, for then $\triangle ABC$ would not contain
+the center of $u$. Thus either both $R_1$ and $R_3$ contain vertices of the
+triangle, or both $R_2$ and $R_4$ do.  In either case, two vertices of $\triangle ABC$ are closest to two opposite sides of $u$.  Since the distance between these
+vertices is no more than 1, $u$ must contain at least one of these points. $\blacksquare$</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/sq3.gif"><br><br> 
+Figure 19.</td></tr></tbody></table></center><p><font size="3"><a name="technicallemmas">
+
+
+
+<b>Lemma 4.</b> If the center of a unit square $u$ is contained in the rectangle
+$R=[0,1]×[0,.4]$, then $u$ contains a vertex of $R$. </a></font></p><p><font size="3"><a name="technicallemmas">
+
+Proof: Let $A=(0,0)$, $B=(0,.4)$, $C=(1,0)$, and $D=(1,.4)$.  It suffices to show
+that any $u$ that contains $A$ and $B$ on its boundary and whose center is in $R$
+contains either $C$ or $D$ (see Figure 20).  This is clearly the case if $A$ and $B$ lie on the
+same side of $u$.  When $θ=45°$, $u$ contains both $C$ and $D$.  It
+is easy to see that when $θ&lt;45°$, $u$ contains $D$, and when
+$θ&gt;45°$, $u$ contains $C$. $\blacksquare$</a></font></p><p><font size="3"><a name="technicallemmas">
+
+
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/sq4.gif"><br><br> 
+Figure 20.</td></tr></tbody></table></center><p><font size="3"><a name="technicallemmas">
+
+
+<b>Lemma 5.</b>  If a unit square has its center below
+the line $y=1$,  and is entirely above the x-axis, then the length of the
+intersection of the line $y=1$ with the square is at least $2\sqrt 2-2$.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+Proof: Let $L$ be the line $y=1$.  Since the center of the square is below $L$, $2$ or
+fewer corners of the square are above $L$. If $2$ corners are above $L$, then $L$
+intersects $2$ opposite sides of the square, and therefore the intersection has
+length at least $1$. If none of the corners are above
+$L$, $2$ corners sit on the x-axis, and the length of the intersection is exactly $1$.
+We therefore assume $1$ corner is above $L$.  In this case, the intersection is made
+smaller by moving the square downwards until one of the corners is touching the
+x-axis.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+If the square makes an angle $θ$ with the x-axis, the vertical line segment
+in Figure 21 has length $(\sin θ + \cos θ - 1)$, so the length
+of the intersection with $L$ is</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><font size="3"><a name="technicallemmas">$$D = (\sin θ + \cos θ - 1) (\tan θ + \cot θ) = {{\sin θ + \cos θ - 1} \over {\sin θ \cos θ}}\text{.}$$</a></font><p><font size="3"><a name="technicallemmas">
+
+This is minimized when $dD/dθ = \bigl((\sin θ - \cos θ) (1 - \cos θ) (1 - \sin θ)\bigr)/(\cos^2 θ \sin^2 θ) = 0$, 
+which occurs at $θ=45°$.  Thus $D≥2\sqrt 2-2$.  $\blacksquare$</a></font></p><p><font size="3"><a name="technicallemmas">
+
+
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/sq5.gif"><br><br> 
+Figure 21.</td></tr></tbody></table></center><p><font size="3"><a name="technicallemmas">
+
+
+<b>Lemma 6.</b>  If a unit square has its center in the region
+$[0,1]^2$, does not contain either of the points $(0,1)$ and $(1,1)$, and is
+entirely above the x-axis, then the square covers some point $(0,y)$ for ${1\over 2}≤y≤1$ and some point $(1,y)$ for ${1\over 2}≤y≤1$.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+Proof: Lowering the square until it touches the x-axis lowers any points
+of intersection with the y-axis.  Moving the square right until it touches 
+the point $(1,1)$ makes any intersection with the y-axis smaller.  We will show that
+any such square touching the x-axis and the point $(1,1)$ covers some point 
+$(0,y)$ for ${1\over 2}≤y≤1$.  The rest of the lemma follows from symmetry.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+If $x$ is the distance in Figure 22, then $\sin θ + x \cos θ = 1$, or $x = (1 - \sin θ) / \cos θ$.  This means the x-intercept
+of the square is</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><font size="3"><a name="technicallemmas">$$1 + x \sin θ - \cos θ = 1 + \tan θ (1 - \sin θ) - \cos θ\text{.}$$</a></font><p><font size="3"><a name="technicallemmas"> 
+
+Therefore the left corner of
+the square is $(1 + \tan θ (1 - \sin θ) - \cos θ - \sin θ , \cos θ)$.  This means the
+largest y-intercept of the square is</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><font size="3"><a name="technicallemmas">$$D = \cos θ - \tan θ \bigl(1 + \tan θ (1 - \sin θ) - \cos θ - \sin θ\bigr) = {{\cos^3 θ + \sin θ (1 - \cos θ) (1 - \sin θ)} \over {\cos^2 θ}}\text{.}$$</a></font><p><font size="3"><a name="technicallemmas">
+
+Since $dD/dθ = (1 - \cos θ - \sin θ) (1 - \sin θ) / \cos^3 θ &lt; 0$,
+the minimum value of $D$ is the limit of $D$ as $θ$ approaches
+$90°$, which is $1\over 2$ by L' Hôpital's Rule. $\blacksquare$</a></font></p><p><font size="3"><a name="technicallemmas">
+
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/sq6.gif"><br><br> 
+Figure 22.</td></tr></tbody></table></center><p><font size="3"><a name="technicallemmas">
+
+
+<b>Lemma 7.</b>  If a unit square has its center in the region $[0,1]^2$, does not
+contain either of the points $(0,1)$ or $(1,1)$, and is entirely above the x-axis, then the square
+covers either the point $(0,\sqrt 2-1/2)$ or the point $(1,\sqrt 2-1/2)$.</a></font></p><p><font size="3"><a name="technicallemmas">
+
+Proof: Lemma 2 shows that the center of the square cannot have y-coordinate less
+than or equal to $\sqrt 2-{1\over 2}$ without covering one of these points.  Lemma 4
+shows that the center of the square cannot have y-coordinate more than $\sqrt 2-{1\over 2}$ without covering one of these points. $\blacksquare$</a></font></p><p><font size="3"><a name="technicallemmas">
+
+
+
+<br><br></a><a name="lowerbounds"><font size="+3" color="660000">5&ensp;&thinsp;Lower Bounds</font></a></font></p><p><font size="3"><a name="lowerbounds">
+
+To show that $s(n)≥k$, we will modify a method used by Walter Stromquist </a><a href="#references" style="text-decoration: none">[13]</a>.  We will find a set $P$ of $(n-1)$ points
+in a square $S$ of side $k$ so that any unit square in $S$ contains an element of $P$ (possibly on its
+boundary).  Shrinking these by a factor of $(1-ε/k)$ gives a set $P'$ of $(n-1)$
+points in a square $S'$ of side $(k-ε)$ so that any unit square in $S'$ contains
+an element in $P'$ in its interior.  Therefore no more than $(n-1)$ non-overlapping squares can be
+packed into a square of side $(k-ε)$, and $s(n)&gt;k-ε$. 
+Since this is true for all $ε&gt;0$, we must have $s(n)≥k$.</font></p><p><font size="3">
+
+We call $P$ a set of <i>unavoidable</i> points in $S$.  We now prove lower bounds on $s(n)$ by
+showing that certain sets of points are unavoidable.</font></p><p><font size="3">
+
+
+<b>Theorem 1.</b> $s(2)=s(3)=2$.</font></p><p><font size="3">
+
+Proof:  Consider a unit square $u$ in $[0,2]^2$.  Since the center of $u$ is
+either in $[0,1]^2$ or $[0,1]×[1,2]$ or $[1,2]×[0,1]$ or $[1,2]^2$, Lemma 1
+shows that $u$ contains the point $(1,1)$.  That is, the set $P=\{ (1,1) \}$ is
+unavoidable in $[0,2]^2$ (see Figure 23). $\blacksquare$ </font></p><p><font size="3">
+
+
+<a name="figure23">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L2.gif"><br><br>
+$s(2)≥2$<br><br> 
+Figure 23.</td></tr></tbody></table></center><p><font size="3"><a name="figure23">
+
+
+<b>Theorem 2.</b>  $s(5)=2+{1\over 2}\sqrt 2$.</a></font></p><p><font size="3"><a name="figure23">
+
+Proof: The set $P=\{ (1,1), (1,1+{1\over 2}\sqrt 2),  (1+{1\over 2}\sqrt 2,1),
+(1+{1\over 2}\sqrt 2,1+{1\over 2}\sqrt 2) \}$ is unavoidable in
+$[0,2+{1\over 2}\sqrt 2]^2$.  This follows from Lemma 1 if the center of the
+square is in a corner, from Lemma 2 if it is near a sides, and from Lemma 3 if it is in a
+triangle (see Figure 24). $\blacksquare$</a></font></p><p><font size="3"><a name="figure23">
+
+</a><a name="figure24">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L5.gif"><br><br> 
+$s(5)≥2+{1\over 2}\sqrt 2$<br><br> 
+Figure 24.</td></tr></tbody></table></center><p><font size="3"><a name="figure24">
+
+
+<b>Theorem 3.</b> $s(8)=3$.</a></font></p><p><font size="3"><a name="figure24">
+
+Proof: The set $P=\{ (.9,1), (1.5,1), (2.1,1),
+(1.5,1.5), (.9,2), (1.5,2), (2.1,2) \}$ is unavoidable in
+$[0,3]^2$ by Lemmas 1, 2, and 3 (see Figure 25). $\blacksquare$</a></font></p><p><font size="3"><a name="figure24">
+
+</a><a name="figure25">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L8.gif"><br><br> 
+$s(8)≥3$<br><br> 
+Figure 25.</td></tr></tbody></table></center><p><font size="3"><a name="figure25">
+
+<b>Theorem 4.</b>  $s(15)=4$.</a></font></p><p><font size="3"><a name="figure25">
+
+Proof: The set </a></font></p><p><font size="3"><a name="figure25">
+</a></font></p><font size="3"><a name="figure25">$$\begin{aligned} P= \{ & (1,1), (1.6,1), (2.4,1), (3,1), (1,1.8), (2,1.8), (3,1.8), \\
+& (1,2.2), (2,2.2), (3,2.2), (1,3), (1.6,3), (2.4,3), (3,3) \}\end{aligned}$$ </a></font><p><font size="3"><a name="figure25"> is unavoidable in $[0,4]^2$ by
+Lemmas 1, 2, 3, and 4 (see Figure 26). $\blacksquare$</a></font></p><p><font size="3"><a name="figure25">
+
+</a><a name="figure26">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L15.gif"><br><br> 
+$s(15)≥4$<br><br> 
+Figure 26.</td></tr></tbody></table></center><p><font size="3"><a name="figure26">
+
+<b>Theorem 5.</b>  $s(24)=5$.</a></font></p><p><font size="3"><a name="figure26">
+
+Proof: The set </a></font></p><p><font size="3"><a name="figure26">
+</a></font></p><font size="3"><a name="figure26">$$\begin{aligned} P=\{ & (1,1), (1.7,1), (2.5,1), (3.3,1), (4,1), (1,1.7), (2,1.7), (3,1.7), \\
+& (4,1.7), (1,2.5), (1.5,2.5), (2.5,2.5), (3.5,2.5), (4,2.5), (1,3.3), \\
+& (2,3.3), (3,3.3), (4,3.3), (1,4), (1.7,4), (2.5,4), (3.3,4), (4,4) \}\end{aligned}$$</a></font><p><font size="3"><a name="figure26">
+is unavoidable in $[0,5]^2$ by Lemmas 1, 2, and 3 (see Figure 27). $\blacksquare$</a></font></p><p><font size="3"><a name="figure26">
+
+
+</a><a name="figure27">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L24.gif"><br><br> 
+$s(24)≥5$<br><br> 
+Figure 27.</td></tr></tbody></table></center><p><font size="3"><a name="figure27">
+
+
+<b>Theorem 6.</b> $s(35)=6$.</a></font></p><p><font size="3"><a name="figure27">
+
+Proof:  The set </a></font></p><p><font size="3"><a name="figure27">
+</a></font></p><font size="3"><a name="figure27">$$\begin{aligned} P= \{ & (1,.9), (2,.9), (3,.9), (4,.9), (5,.9), (1,1.725), (1.5,1.725), (2.5,1.725),  (3.5,1.725), \\
+& (4.5,1.725), (5,1.725), (1,2.55), (2,2.55), (3,2.55), (4,2.55), (5,2.55),  (1,3.375), \\
+& (1.5,3.375), (2.5,3.375), (3.5,3.375), (4.5,3.375), (5,3.375), (1,4.2), (2,4.2), \\
+& (3,4.2), (4,4.2), (5,4.2), (1,5), (1.6,5), (2.4,5), (3,5), (3.6,5), (4.4,5), (5,5) \}\end{aligned}$$
+</a></font><p><font size="3"><a name="figure27"> is unavoidable in $[0,5]^2$ by Lemmas 1, 2, and 3 (see Figure 28). $\blacksquare$</a></font></p><p><font size="3"><a name="figure27">
+
+
+</a><a name="figure28">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L35.gif"><br><br> 
+$s(35)≥6$<br><br> 
+Figure 28.</td></tr></tbody></table></center><p><font size="3"><a name="figure28">
+
+The proofs that $s(7)=3$ and $s(14)=4$ are a little harder.  We find sets of points which are
+<i>almost unavoidable</i>, which force squares into certain positions.  We use Lemmas 5, 6, and 7
+to show that certain regions are covered, and find sets of unavoidable
+points for the rest of the square.</a></font></p><p><font size="3"><a name="figure28">
+
+<b>Theorem 7.</b>  $s(7)=3$.</a></font></p><p><font size="3"><a name="figure28">
+
+Proof: If $7$ unit squares are packed in a square of side $3-ε$, at most $5$
+squares cover the $5$ points in the almost unavoidable set shown in Figure 29.  Therefore at
+least two squares have their centers in the regions containing question marks.</a></font></p><p><font size="3"><a name="figure28">
+
+</a><a name="figure29">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L7a.gif"><br><br> 
+Figure 29.</td></tr></tbody></table></center><p><font size="3"><a name="figure29">
+
+There are $2$ possible placements of these $2$ squares up to rotation and reflection.
+Figure 30 shows these possibilities.  The shaded trapezoids show points that must be covered by
+squares in those regions because of Lemmas 5, 6, and 7.  Actually, we have drawn the trapezoids
+with a $y$ value of $1\over 2$ in Lemma 6 because this is the worst case in what follows.   Each diagram
+shows a set of 3 additional unavoidable points. $\blacksquare$</a></font></p><p><font size="3"><a name="figure29">
+
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF"><tbody><tr><td>
+<table><tbody><tr align="center"><td><img src="squares_files/L7b.gif"></td>
+<td width="50"></td>
+<td><img src="squares_files/L7c.gif"></td></tr></tbody></table><br>
+<center>Figure 30.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure29">
+
+<b>Theorem 8.</b>  $s(14)=4$.</a></font></p><p><font size="3"><a name="figure29">
+
+Proof: If $14$ unit squares are packed in a square of side $4-ε$, at most $12$
+squares cover the $12$ points in the almost unavoidable set shown in Figure 31.  Therefore at
+least two squares have their centers in the regions containing question marks.</a></font></p><p><font size="3"><a name="figure29">
+
+
+</a><a name="figure31">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF">
+<tbody><tr><td align="center"><img src="squares_files/L14a.gif"><br><br> 
+Figure 31.</td></tr></tbody></table></center><p><font size="3"><a name="figure31">
+
+There are $5$ possible placements of these $2$ squares up to rotation and reflection.
+Figure 32 shows the $5$ possibilities.</a></font></p><p><font size="3"><a name="figure31">
+
+
+</a><a name="figure32">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF"><tbody><tr><td>
+<table><tbody><tr align="center"><td><img src="squares_files/L14b.gif"></td>
+<td width="50"></td>
+<td><img src="squares_files/L14c.gif"></td></tr></tbody></table><br>
+
+<table><tbody><tr align="center"><td><img src="squares_files/L14d.gif"></td>
+<td width="50"></td>
+<td><img src="squares_files/L14e.gif"></td></tr></tbody></table><br>
+
+<center><table>
+<tbody><tr><td align="center"><img src="squares_files/L14f.gif"></td></tr></tbody></table></center><p>
+</p><center>Figure 32.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure32">
+
+
+Each diagram also shows a set of $11$ additional unavoidable (or almost
+unavoidable) points.  Some of these cases have additional cases, and these are shown in Figure
+33.</a></font></p><p><font size="3"><a name="figure32">
+
+
+</a><a name="figure33">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF"><tbody><tr><td>
+<table><tbody><tr align="center"><td><img src="squares_files/L14g.gif"></td>
+<td width="50"></td>
+<td><img src="squares_files/L14h.gif"></td></tr></tbody></table><br>
+
+<center><table>
+<tbody><tr><td align="center"><img src="squares_files/L14i.gif"></td></tr></tbody></table></center><p>
+</p><center>Figure 33.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure33">
+
+The other lower bounds known are probably not sharp.  For example, Trevor Green has shown </a><a href="#references" style="text-decoration: none">[8]</a>:</font></p><p><font size="3">
+
+<b>Theorem 9.</b> $s(n^2+1) ≥ 2\sqrt 2 - 1 + {{n-1}\over{n^2+1}} \bigl(n(n-1) + \sqrt{2n}\bigr)$.</font></p><p><font size="3">
+
+<b>Theorem 10.</b> $s(n^2+\lfloor{n/2}\rfloor+1) ≥ 2\sqrt 2 + {2\over 5}(n-2)\sqrt 5$.</font></p><p><font size="3">
+
+And Walter Stromquist has shown <a href="#references" style="text-decoration: none">[18]</a>:</font></p><p><font size="3">
+
+<b>Theorem 11.</b> $s(11) ≥ 2 + {4\over 5}\sqrt 5$.</font></p><p><font size="3">
+
+Unavoidable sets illustrating some of the lower bounds on s(n) are shown in Figure 34.</font></p><p><font size="3">
+
+
+<a name="figure34">
+</a></font></p><center><table cellpadding="10" border="1" bgcolor="CCFFFF"><tbody><tr><td>
+<table><tbody><tr align="center"><td><img src="squares_files/L17.gif"><br><br>
+$s(17)≥{1\over 17}(40\sqrt 2+19)$</td>
+<td width="50"></td>
+<td><img src="squares_files/L19.gif"><br><br>
+$s(19)≥6\sqrt 2-4$</td></tr></tbody></table><br>
+
+<center>Figure 34.</center></td></tr></tbody></table></center><p><font size="3"><a name="figure34">
+
+
+
+
+
+<br><br></a><a name="appendix"><font size="+3" color="660000">Appendix</font></a></font></p><p><font size="3"><a name="appendix">
+
+
+Table 1 contains the best known upper bounds on $s(n)$ for $n≤100$.  
+For each primitive packing, the Figure and the Author are given.</a></font></p><p><font size="3"><a name="appendix">
+
+
+</a></font></p><center><table border="1" bgcolor="FFEEFF">
+<tbody><tr bgcolor="BBBBBB" align="center"><td>n</td><td>s(n)</td><td>Optimal?</td><td>Figure</td><td>Author</td></tr>
+
+<tr align="center"><td>1</td><td align="right">$1$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>2-4</td><td align="right">$2$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>5</td><td align="right">$2+{1\over 2}\sqrt 2≈2.7072$</td><td><img src="squares_files/check.gif"></td><td><a href="#figure1" style="text-decoration:
+none">Figure 1</a></td><td>Göbel</td></tr>
+
+<tr align="center"><td>6-9</td><td align="right">$3$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>10</td><td align="right">$3+{1\over 2}\sqrt 2≈3.7072$</td><td><img src="squares_files/check.gif"></td><td><a href="#figure1" style="text-decoration:
+none">Figure 1</a></td><td>Göbel</td></tr>
+
+<tr align="center"><td>11</td><td align="right">$≈3.8771$</td><td>&nbsp;</td><td> <a href="#figure6" style="text-decoration: none">Figure 6</a></td><td>Trump</td></tr>
+
+<tr align="center"><td>12-13</td><td align="right">$4$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>14-16</td><td align="right">$4$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>17</td><td align="right">$≈4.6756$</td><td>&nbsp;</td><td><a href="#figure12" style="text-decoration:
+none">Figure 12</a></td><td>Bidwell</td></tr>
+
+<tr align="center"><td>18</td><td align="right">${7\over 2}+{1\over 2}\sqrt 7≈4.8229$</td><td>&nbsp;</td><td><a href="#figure7" style="text-decoration:
+none">Figure 7</a></td><td>Hämäläinen</td></tr> 
+
+<tr align="center"><td>19</td><td align="right">$3+{4\over 3}\sqrt 2≈4.8857$</td><td>&nbsp;</td><td><a href="#figure4" style="text-decoration:
+none">Figure 4</a></td><td>Wainwright</td></tr> 
+
+<tr align="center"><td>20-22</td><td align="right">$5$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>23-25</td><td align="right">$5$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>26</td><td align="right">${7\over 2}+{3\over 2}\sqrt 2≈5.6214$</td><td>&nbsp;</td><td><a href="#figure9" style="text-decoration:
+none">Figure 9</a></td><td>Friedman</td></tr> 
+
+<tr align="center"><td>27</td><td align="right">$5+{1\over 2}\sqrt 2≈5.7072$</td><td>&nbsp;</td><td><a href="#figure1" style="text-decoration:
+none">Figure 1</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>28</td><td align="right">$3+2\sqrt 2≈5.8285$</td><td>&nbsp;</td><td><a href="#figure3" style="text-decoration:
+none">Figure 3</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>29</td><td align="right">$≈5.9344$</td><td>&nbsp;
+</td><td><a href="#figure12" style="text-decoration:
+none">Figure 12</a></td><td>Gensane/Ryckelynck</td></tr> 
+
+<tr align="center"><td>30-33</td><td align="right">$6$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>34-36</td><td align="right">$6$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>37</td><td align="right">$≈6.5987$</td><td>&nbsp;</td><td> <a href="#figure16" style="text-decoration:
+none">Figure 16</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>38</td><td align="right">$6+{1\over 2}\sqrt 2≈6.7072$</td><td>&nbsp;</td><td><a href="#figure1" style="text-decoration:
+none">Figure 1</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>39</td><td align="right">$≈6.8189$</td><td>&nbsp;</td><td><a href="#figure15" style="text-decoration:
+none">Figure 15</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>40</td><td align="right">$4+2\sqrt 2≈6.8285$</td><td>&nbsp;</td><td><a href="#figure3" style="text-decoration:
+none">Figure 3</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>41</td><td align="right">$≈6.9473$</td><td>&nbsp;</td><td><a href="#figure16" style="text-decoration:
+none">Figure 16</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>42-46</td><td align="right">$7$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>47-49</td><td align="right">$7$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>50</td><td align="right">$≈7.5987$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>51</td><td align="right">$≈7.7044$</td><td>&nbsp;</td><td><a href="#figure16" style="text-decoration:
+none">Figure 16</a></td><td>Hajba</td></tr> 
+
+<tr align="center"><td>52</td><td align="right">$7+{1\over 2}\sqrt 2≈7.7072$</td><td>&nbsp;</td><td><a href="#figure1" style="text-decoration:
+none">Figure 1</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>53</td><td align="right">$≈7.8231$</td><td>&nbsp;</td><td><a href="#figure11" style="text-decoration:
+none">Figure 11</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>54</td><td align="right">$≈7.8488$</td><td>&nbsp;</td><td><a href="#figure14" style="text-decoration:
+none">Figure 14</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>55</td><td align="right">$≈7.9871$</td><td>&nbsp;</td><td><a href="#figure16" style="text-decoration:
+none">Figure 16</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>56-61</td><td align="right">$8$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>62-64</td><td align="right">$8$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>65</td><td align="right">$5+{5\over 2}\sqrt 2≈8.5356$</td><td>&nbsp;</td><td><a href="#figure3" style="text-decoration:
+none">Figure 3</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>66</td><td align="right">$3+4\sqrt 2≈8.6569$</td><td>&nbsp;</td><td><a href="#figure5" style="text-decoration:
+none">Figure 5</a></td><td>Stenlund</td></tr> 
+
+<tr align="center"><td>67</td><td align="right">$8+{1\over 2}\sqrt 2≈8.7072$</td><td>&nbsp;</td><td><a href="#figure1" style="text-decoration:
+none">Figure 1</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>68</td><td align="right">${15\over 2}+{1\over 2}\sqrt 7≈8.8229$</td><td>&nbsp;</td><td><a href="#figure11" style="text-decoration:
+none">Figure 11</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>69</td><td align="right">$≈8.8287$</td><td>&nbsp;</td><td><a href="#figure14" style="text-decoration:
+none">Figure 14</a></td><td>Morandi</td></tr> 
+
+<tr align="center"><td>70</td><td align="right">$≈8.9121$</td><td>&nbsp;</td><td><a href="#figure13" style="text-decoration: none">Figure 13</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>71</td><td align="right">$≈8.9633$</td><td>&nbsp;</td><td><a href="#figure16" style="text-decoration: none">Figure 16</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>72-78</td><td align="right">$9$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>79-81</td><td align="right">$9$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>82</td><td align="right">$6+{5\over 2}\sqrt 2≈9.5356$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr> 
+
+<tr align="center"><td>83</td><td align="right">$4+4\sqrt 2≈9.6569$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>84</td><td align="right">$9+{1\over 2}\sqrt 2≈9.7072$</td><td>&nbsp;</td><td><a href="#figure1" style="text-decoration:
+none">Figure 1</a></td><td>Göbel</td></tr> 
+
+<tr align="center"><td>85</td><td align="right">${11\over 2}+3\sqrt 2≈9.7427$</td><td>&nbsp;</td><td><a href="#figure9" style="text-decoration:
+none">Figure 9</a></td><td>Friedman</td></tr> 
+
+<tr align="center"><td>86</td><td align="right">$1{7\over 2}+{1\over 2}\sqrt 7≈9.8229$</td><td>&nbsp;</td><td><a href="#figure15" style="text-decoration:
+none">Figure 15</a></td><td>Friedman</td></tr> 
+
+<tr align="center"><td>87</td><td align="right">$≈9.8520$</td><td>&nbsp;</td><td><a href="#figure10" style="text-decoration:
+none">Figure 10b</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>88</td><td align="right">$≈9.9018$</td><td>&nbsp;</td><td><a href="#figure13" style="text-decoration:
+none">Figure 13</a></td><td>Cantrell</td></tr> 
+
+<tr align="center"><td>89</td><td align="right">$5+{7\over 2}\sqrt 2≈9.9498$</td><td>&nbsp;</td><td><a href="#figure3" style="text-decoration:
+none">Figure 3</a></td><td>Stenlund</td></tr> 
+
+<tr align="center"><td>90-97</td><td align="right">$10$</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+<tr align="center"><td>98-100</td><td align="right">$10$</td><td><img src="squares_files/check.gif"></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+
+</tbody></table></center><p><font size="3"><a name="appendix"> </a></font></p><center><font size="3"><a name="appendix">Table 1. Best known upper bounds for s(n)</a></font></center><font size="3"><a name="appendix"><br>
+
+
+
+
+Table 2 contains the best known non-trivial lower bounds on s(n) for $n≤85$,
+along with the Author.<p>
+
+</p><center><table border="1" bgcolor="FFEEFF">
+<tbody><tr bgcolor="BBBBBB" align="center"><td>n</td><td>s(n)</td><td>Figure</td><td>Author</td></tr>
+
+<tr align="center"><td>2-3</td><td align="right">$2$</td><td><a href="#figure23" style="text-decoration: none">Figure 23</a></td><td>Göbel</td></tr>
+
+<tr align="center"><td>5</td><td align="right">$2+{1\over 2}\sqrt 2≈2.7071$</td><td><a href="#figure24" style="text-decoration: none">Figure 24</a></td><td>Göbel</td></tr>
+
+<tr align="center"><td>6</td><td align="right">$3$</td><td>&nbsp;</td><td>Kearney/Shiu</td></tr>
+
+<tr align="center"><td>7</td><td align="right">$3$</td><td><a href="#figure29" style="text-decoration: none">Figure 29</a></td><td>Friedman</td></tr>
+
+<tr align="center"><td>8</td><td align="right">$3$</td><td><a href="#figure25" style="text-decoration: none">Figure 25</a></td><td>Friedman</td></tr>
+
+<tr align="center"><td>10</td><td align="right">$3+{1\over 2}\sqrt 2≈3.7071$</td><td></td><td>Stromquist</td></tr> 
+
+<tr align="center"><td>11-12</td><td align="right">$2+{4\over 5}\sqrt 5≈3.7888$</td><td></td><td>Stromquist</td></tr> 
+
+<tr align="center"><td>13</td><td align="right">$3.8437$</td><td>&nbsp;</td><td>Friedman</td></tr> 
+
+<tr align="center"><td>14</td><td align="right">$4$</td><td><a href="#figure31" style="text-decoration: none">Figure 31</a></td><td>Friedman</td></tr>
+
+<tr align="center"><td>15</td><td align="right">$4$</td><td><a href="#figure26" style="text-decoration: none">Figure 26</a></td><td>Friedman</td></tr>
+
+<tr align="center"><td>17-18</td><td align="right">${1\over 17}(40\sqrt 2+19)≈4.4452$</td><td><a href="#figure34" style="text-decoration:
+none">Figure 34</a></td><td>Green</td></tr>
+
+<tr align="center"><td>19-20</td><td align="right">$6\sqrt 2-4≈4.4852$</td><td><a href="#figure34" style="text-decoration:
+none">Figure 34</a></td><td>Friedman</td></tr>
+
+<tr align="center"><td>21</td><td align="right">$4.7438$</td><td>&nbsp;</td><td>Friedman</td></tr>
+
+<tr align="center"><td>22</td><td align="right">$2\sqrt 2+2≈4.8284$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>23</td><td align="right">$5$</td><td></td><td>Nagamochi</td></tr>
+
+<tr align="center"><td>24</td><td align="right">$5$</td><td><a href="#figure27" style="text-decoration: none">Figure 27</a></td><td>Friedman</td></tr>
+
+<tr align="center"><td>26-27</td><td align="right">$2\sqrt 2+{1\over 13}(27+2\sqrt 10)≈5.3918$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>28-30</td><td align="right">$2\sqrt 2+{6\over 5}\sqrt 5≈5.5117$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>31</td><td align="right">$5.6415$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>34</td><td align="right">$6$</td><td></td><td>Nagamochi</td></tr>
+
+<tr align="center"><td>35</td><td align="right">$6$</td><td><a href="#figure28" style="text-decoration: none">Figure 28</a></td><td>Friedman</td></tr>
+
+<tr align="center"><td>37-39</td><td align="right">$2\sqrt 2+{1\over 37}(113+10\sqrt 3)≈6.3506$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>40-41</td><td align="right">$2\sqrt 2+{8\over 5}\sqrt 5≈6.4061$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>47-48</td><td align="right">$7$</td><td></td><td>Nagamochi</td></tr>
+
+<tr align="center"><td>50-53</td><td align="right">$2\sqrt 2+{1\over 25}(101+3\sqrt 14)≈7.3174$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>62-63</td><td align="right">$8$</td><td></td><td>Nagamochi</td></tr>
+
+<tr align="center"><td>65-68</td><td align="right">$2\sqrt 2+{71\over 13}≈8.2899$</td><td>&nbsp;</td><td>Green</td></tr>
+
+<tr align="center"><td>79-80</td><td align="right">$9$</td><td></td><td>Nagamochi</td></tr>
+
+<tr align="center"><td>82-85</td><td align="right">$2\sqrt 2+{1\over 41}(288+12\sqrt 3)≈9.2667$</td><td>&nbsp;</td><td>Green</td></tr>
+
+</tbody></table></center><p>
+</p><center>Table 2. Best known lower bounds for s(n)</center></a><p><a name="appendix">
+
+
+<br><br></a><a name="references"><font size="+3" color="660000">References</font></a></p><p><a name="references">
+
+
+[1] J. Bidwell, 1998, private communication.</a></p><p><a name="references">
+
+[2] H. T. Croft, K. J. Falconer, and R. K. Guy, <i>Unsolved Problems in Geometry</i>,
+Springer Verlag, Berlin (1991) 108-110.</a></p><p><a name="references">
+
+[3] P. Erdös and R. L. Graham, On Packing Squares with Equal Squares, <i>J.
+Combin. Theory Ser. A</i> <b>19</b> (1975) 119-123.</a></p><p><a name="references">
+
+[4] M. Gardner, "Mathematical Games", <i>Scientific American</i> (Oct 1979, Nov 1979, Mar 1980,
+Nov 1980).</a></p><p><a name="references"> 
+
+[5] M. Gardner, <i>Fractal Music, Hypercards and More . . .</i>, 
+W. H. Freeman and Company, New York,  289-306.</a></p><p><a name="references">
+
+[6] M. Gardner, 1998, private communication with E. Friedman.</a></p><p><a name="references">
+
+[7] F. Göbel, Geometrical Packing and Covering Problems, in <i>Packing and
+Covering in Combinatorics</i>, A. Schrijver (ed.), <i>Math Centrum Tracts</i> <b>106</b> (1979)
+179-199.</a></p><p><a name="references">
+
+[8] T. Green, 2000, private communication with E. Friedman.</a></p><p><a name="references">
+
+[9] M. Kearney and P. Shiu, Efficient Packing of Unit Squares in a Square, <i>Elect.
+J. Comb.</i> <b>9</b> #R14 (2002).</a></p><p><a name="references">
+
+[10] K. F. Roth and R. C. Vaughan, Inefficiency in Packing Squares with Unit Squares,
+<i>J. Combin. Theory Ser. A</i> <b>24</b> (1978) 170-186.</a></p><p><a name="references">
+
+[11] "Problem Ronden", Ronden (Apr 1980, Sep 1980, Dec 1980)</a></p><p><a name="references">
+
+[12] S. El Moumni, Optimal Packings of Unit Squares in a Square,
+<i>Studia Sci. Math. Hungar.</i> <b>35</b> (1999), no. 3-4, 281-290.</a></p><p><a name="references">
+
+[13] W. Stromquist, "Packing Unit Squares Inside Squares III", unpublished manuscript, 1984.</a></p><p><a name="references">
+
+[14] D. W. Cantrell, 2002, private communication with E. Friedman.</a></p><p><a name="references">
+
+[15] E. Friedman, "Erich's Packing Center", </a><a href="https://erich-friedman.github.io/packing/index.html">https://erich-friedman.github.io/packing/index.html</a>.</p><p>
+
+[16] K. Hajba, 2009, private communication with E. Friedman.</p><p>
+
+[17] D. W. Cantrell, 2005, private communication with E. Friedman.</p><p>
+
+[18] W. Stromquist, Packing 10 or 11 Unit Squares in a Square, <i>Elect.
+J. Comb.</i> <b>10</b> #R8 (2003).</p><p>
+
+[19] H. Nagamochi, Packing Unit Squares in a Rectangle, <i>Elect.
+J. Comb.</i> <b>12</b> #R37 (2005).</p><p>
+
+[20] T. Gensane and P. Ryckelynck, Improved Dense Packings of Congruent Squares in a Square,
+<i>Discrete Comput. Geom.</i> <b>34</b> (2005) 97-109.</p><p>
+
+[21] M. Morandi, 2010, private communication with E. Friedman.</p><p>
+
+[22] D. W. Cantrell, 2023, private communication with D. Ellsworth.</p><p>
+
+
+
+
+</p></font></body></html>

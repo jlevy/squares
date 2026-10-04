@@ -463,32 +463,42 @@ lower-bound side has underused methods.
 
 Counts below are computed from the artifacts, not asserted.
 
-Of the 247 open cases, **187** have Nagamochi’s formula as their verified lower bound.
-Two others use certificates already integrated into the register: at $n = 12$ this
-project’s re-weighting of Evan Daniel’s points ($15680000/3949423$), and at $n = 17$ the
-current external certificate bound ($116511/25000$). Complete interval and exact replays
-of external certificates hold the other 58: wand125’s mixed rectangle-measure
-certificates at $n = 37$, 50, 65, 66, 76, 83 to 85, 87, 90 to 92 and 96, and by
-monotonicity at $n = 51$ from $n = 50$, at $n = 86$ from $n = 85$, at $n = 88$ from
-$n = 87$ and at $n = 93$ from $n = 92$, and its rectangle-density certificates, directly
-or by monotonicity, at $n = 18$ to 20, 26 to 31, 38 to 44, 52 to 58, 67 to 75, 89, 94
-and 95, and its linear certificates at $n = 82$ and 101, and by monotonicity at 102 to
-105\. On 2026-10-02 those replays superseded this repository’s first-party bounds at
-$n = 18$, 19 and 20 ($4679/1000$, $24/5$ and $97/20$), Tokoharu’s at $n = 26$, 29 and
-30, wand125’s point certificates at $n = 39$ to 41, 52, 53, 55, 56 and 68 to 72, and
-Nagamochi’s formula at 33 counts; on 2026-10-03 its afternoon mixed certificates
-superseded Nagamochi’s formula at three more, $n = 83$, 91 and 96, its linear
-certificate for $n = 101$, replayed on 2 October and recorded on 3 October, at five,
-$n = 101$ to 105, and its linear $n = 82$ certificate at one more.
-$n = 32$ left the open cases on 2026-09-27, when a replayed external closed cover proved
-$s(32) = 6$, and $n = 21$ and $n = 45$ on 2026-09-29, when replayed external mixed
-covers proved $s(21) = 5$ and $s(45) = 7$; $n = 59$, 60 and 61 left them on 2026-10-02,
-when replayed mixed covers proved $s(59) = s(60) = s(61) = 8$, and $n = 77$ and 78 later
-that day, when the replayed $s(77)$ cover proved $s(77) = s(78) = 9$; and nine more,
-$n = 97$, 118, 141, 166, 193, 222, 253, 286 and 321, left them on 2026-10-03, when the
-replayed `Valid7` and the built Lean reduction proved $s(k^2 - 3) = k$ for every
-$k \ge 6$ (T-064). Within the original $n \le 100$ corpus, the corresponding Nagamochi
-count is 4. The count is checked against the case records by
+Of the 247 open cases, **0** have Nagamochi’s formula as their verified lower bound, and
+**187** have Karakuş’s weaker general bound in its place (T-083). Until 2 October 2026
+those 187 rested on Nagamochi’s formula; that day his Lemma 1 was found false
+([review](../../docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md),
+T-085), so his formula became a reported bound and each verified floor it held fell to
+the strongest registered bound below it: Karakuş’s general bound, wand125’s registered
+point bounds carried by monotonicity at $n = 54, 57, 73$ (T-044), which the formula had
+masked, and Bašić and Slivková’s piercing bound at $n = 37, 61$ (T-087), registered on 3
+October 2026. Replayed certificates recorded in parallel and merged on 3 October 2026
+have since raised all five of those, and 46 more of the Karakuş floors, above them; they
+are counted below. Two others use certificates already integrated into the register: at
+$n = 12$ this project’s re-weighting of Evan Daniel’s points ($15680000/3949423$), and
+at $n = 17$ the current external certificate bound ($116511/25000$). Complete interval
+and exact replays of external certificates hold the other 58: wand125’s mixed
+rectangle-measure certificates at $n = 37$, 50, 65, 66, 76, 83 to 85, 87, 90 to 92 and
+96, and by monotonicity at $n = 51$ from $n = 50$, at $n = 86$ from $n = 85$, at
+$n = 88$ from $n = 87$ and at $n = 93$ from $n = 92$, and its rectangle-density
+certificates, directly or by monotonicity, at $n = 18$ to 20, 26 to 31, 38 to 44, 52 to
+58, 67 to 75, 89, 94 and 95, and its linear certificates at $n = 82$ and 101, and by
+monotonicity at 102 to 105. On 2026-10-02 those replays superseded this repository’s
+first-party bounds at $n = 18$, 19 and 20 ($4679/1000$, $24/5$ and $97/20$), Tokoharu’s
+at $n = 26$, 29 and 30, wand125’s point certificates at $n = 39$ to 41, 52, 53, 55, 56
+and 68 to 72, and Nagamochi’s formula, or the floor that replaced it, at 33 counts; on
+2026-10-03 its afternoon mixed certificates did so at three more, $n = 83$, 91 and 96,
+its linear certificate for $n = 101$, replayed on 2 October and recorded on 3 October,
+at five, $n = 101$ to 105, and its linear $n = 82$ certificate, replayed on 3 October,
+at one more, where the floor it raised was Karakuş’s. $n = 32$ left the open cases on
+2026-09-27, when a replayed external closed cover proved $s(32) = 6$, and $n = 21$ and
+$n = 45$ on 2026-09-29, when replayed external mixed covers proved $s(21) = 5$ and
+$s(45) = 7$; $n = 59$, 60 and 61 left them on 2026-10-02, when replayed mixed covers
+proved $s(59) = s(60) = s(61) = 8$, and $n = 77$ and 78 later that day, when the
+replayed $s(77)$ cover proved $s(77) = s(78) = 9$; and nine more, $n = 97$, 118, 141,
+166, 193, 222, 253, 286 and 321, left them on 2026-10-03, when the replayed `Valid7` and
+the built Lean reduction proved $s(k^2 - 3) = k$ for every $k \ge 6$ (T-064). Within the
+original $n \le 100$ corpus, the corresponding Nagamochi count is 0, and 38 until 2
+October 2026. The count is checked against the case records by
 `devtools.check_nagamochi_bounds` (`D-430`), because earlier hand-maintained counts
 outlived their case promotions.
 
@@ -533,6 +543,14 @@ here for every $m \ge 6$ (T-064): his exact checker of the finite premise `Valid
 replayed in full and his Lean reduction from it was built.
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved exactly for every
 $m \ge 3$**.
+
+**Corrected 2 October 2026.** The gaps this section quoted against Nagamochi’s closed
+form for the last unproved members of $s(m^2 - 3) = m$, $0.0557$ at $n = 97$ (above),
+$0.0627$ at $n = 78$ and $0.0718$ at $n = 61$, were measured from a floor whose
+published proof rests on his Lemma 1, which Karakuş showed false (T-085); against
+Karakuş’s verified floor they were $0.1059$, $0.1185$ and $0.1345$. All three cases are
+proved now, so `devtools.gap_ranking`, which ranks the cases still open, leaves them
+out.
 
 Among the cases with a *non-trivial* record, $n = 19$ follows $n = 17$ at $0.0681$, then
 $n = 27$ at $0.0721$, $n = 26$ at $0.0888$ and $n = 28$ at $0.1019$. First-party

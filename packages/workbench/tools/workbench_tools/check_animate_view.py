@@ -546,12 +546,19 @@ def citation_file(session: Session) -> tuple[dict[str, Any] | None, str | None]:
     return {str(entry["n"]): entry for entry in entries}, hashlib.sha256(raw).hexdigest()
 
 
-def cited_lines(entry: dict[str, Any] | None) -> dict[str, tuple[str, str | None]]:
-    """What the file says an n's section draws: per bound, its reference and its note."""
+def cited_lines(entry: dict[str, Any] | None) -> dict[str, tuple[str, str | None, str | None]]:
+    """What the file says an n's section draws: per bound, its reference, the published work
+    it corrects where it corrects one, and its note."""
     if entry is None:
         return {}
     return {
-        bound: (cited["text"], cited["note"])
+        bound: (
+            cited["text"],
+            None
+            if cited.get("corrects") is None
+            else f"corrects {cited['corrects']['credit']}",
+            cited["note"],
+        )
         for bound in ("lower", "upper")
         if (cited := entry.get(bound)) is not None
     }
@@ -582,13 +589,17 @@ def citations_drawn(session: Session) -> str:
     on = session.look("facts/citation-sweep", on=True)
     column = on["column"]
     wrong: list[str] = []
-    drawn_lines = noted = 0
+    drawn_lines = noted = corrected = 0
     for row in on["drawn"]:
         n = row["n"]
         want = cited_lines(None if entries is None else entries.get(str(n)))
-        got = {line["slot"]: (line["text"], line["note"]) for line in row["lines"]}
+        got = {
+            line["slot"]: (line["text"], line["corrects"], line["note"])
+            for line in row["lines"]
+        }
         drawn_lines += len(got)
-        noted += sum(1 for _, aside in got.values() if aside)
+        noted += sum(1 for _, _, aside in got.values() if aside)
+        corrected += sum(1 for _, tag, _ in got.values() if tag)
         if got != want:
             wrong.append(f"n = {n} draws {got}, and the file has {want}")
         if row["built"] != 3:
@@ -619,8 +630,9 @@ def citations_drawn(session: Session) -> str:
     session.require(drawn_lines > 0, "the citation file cites nothing the page drew")
     return (
         f"the citations are drawn at exactly the file's {drawn_lines} lines over "
-        f"{len(on['drawn'])} n, {noted} of them carrying this project's aside, inside the "
-        f"column, and nowhere with the setting off"
+        f"{len(on['drawn'])} n, {noted} of them carrying this project's aside and "
+        f"{corrected} naming the published work they correct, inside the column, and "
+        f"nowhere with the setting off"
     )
 
 

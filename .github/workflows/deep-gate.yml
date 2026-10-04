@@ -1,6 +1,6 @@
 name: Deferred checkpoint
 
-# The eleven steps the pull-request surface defers, run against a pull request *before* it
+# The twelve steps the pull-request surface defers, run against a pull request *before* it
 # merges rather than after it. Not on every build, and that is the point: the selection
 # here is 1943.05s in one step.
 #
@@ -658,6 +658,70 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+  regularized-views:
+    # The regularized atlas layer re-derived whole (think-bgkz): every record of
+    # `atlas/known-best/regularized/` regularized again from its witness, both exact
+    # verifications re-run, and the index and every view required byte-identical. The
+    # pull request runs its 0.1s digest check in the records tier instead.
+    #
+    # Its own runner for the screen's reason: it is one process pool sized by
+    # `PACK_JOBS`. Measured on 2026-10-02 on a four-cpu host also running other work,
+    # it summed 810.6s of record time and took 406.32s at two workers and 223.35s at
+    # four; at `--inner-jobs 2` beside the atlas rebuild it would have taken the
+    # `deferred-atlas-grid` job (475s on run 36636552951) to about its whole 900s
+    # ceiling. The exhaustive shards set this gate's wall, so this runner adds none.
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || contains(github.event.pull_request.labels.*.name, 'deep-gate')
+    needs: resolve-tree
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the immutable tree
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.resolve-tree.outputs.sha }}
+          # No historical-content review in this selection; the vendored submodule is
+          # still required to resolve the environment.
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Bind the receipt to the immutable tree
+        env:
+          VALIDATED_SHA: ${{ needs.resolve-tree.outputs.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$VALIDATED_SHA"
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          printf '%s\n' "$VALIDATED_SHA" > "$PACKING_VALIDATION_ARTIFACT_DIR/tree-sha.txt"
+
+      - name: Re-derive the regularized atlas views
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "regularized atlas views re-derive exactly"
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   deep-gate-required:
     # One context for the whole deep surface, exactly as `packing-required` is one
     # context for the whole pull-request surface -- and for the same recorded reason.
@@ -700,6 +764,7 @@ jobs:
       - exhaustive-2
       - exhaustive-3
       - screen
+      - regularized-views
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -718,6 +783,7 @@ jobs:
           EXHAUSTIVE_2_RESULT: ${{ needs.exhaustive-2.result }}
           EXHAUSTIVE_3_RESULT: ${{ needs.exhaustive-3.result }}
           SCREEN_RESULT: ${{ needs.screen.result }}
+          REGULARIZED_VIEWS_RESULT: ${{ needs.regularized-views.result }}
         run: |
           test "$RESOLVE_RESULT" = "success"
           test "$THRESHOLD_1440_RESULT" = "success"
@@ -729,6 +795,7 @@ jobs:
           test "$EXHAUSTIVE_2_RESULT" = "success"
           test "$EXHAUSTIVE_3_RESULT" = "success"
           test "$SCREEN_RESULT" = "success"
+          test "$REGULARIZED_VIEWS_RESULT" = "success"
 
       # **The walls, read against the ceilings that declare them** (`OR-17`: a price
       # nothing reads is not a budget). `ci_gates` in `devtools/gate-budgets.yaml` carries

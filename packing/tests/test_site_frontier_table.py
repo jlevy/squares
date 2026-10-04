@@ -30,6 +30,7 @@ from typing import Any
 import pytest
 
 from devtools.preview_site import settle_math
+from devtools.render_frontier_page import recent_lower_bounds
 from sqpack.probes import probe
 from tests import site_browser, site_renders
 from tests.test_frontier_page import COLUMNS, column
@@ -236,7 +237,10 @@ def test_the_table_still_sorts_filters_and_opens(page: Any, laid: dict[int, Any]
     assert shown.first.get_attribute("data-recent") == "false"
     recent.click()
     assert recent.get_attribute("aria-sort") == "descending"
-    assert shown.first.get_attribute("id") == "n-11"
+    # Which floors are recent is the citation record's to say, not this test's: since
+    # 2026-10-02 the open floors rest on Karakus 2026 and s(k^2-2) on a 2026 Lean proof.
+    starred = sorted(n for n, is_recent in recent_lower_bounds().items() if is_recent)
+    assert shown.first.get_attribute("id") == f"n-{starred[0]}"
     number = page.locator("#frontier-table thead th.site-col-n")
     number.click()
     number.click()
@@ -253,11 +257,15 @@ def test_the_table_still_sorts_filters_and_opens(page: Any, laid: dict[int, Any]
     # proved nine k^2 - 3 cases, made 69; T-075's replays the same day took n = 83, 91 and
     # 96 off Nagamochi's bound and made 72; T-080's replayed linear certificate took
     # n = 101 to 105 off it and made 77; T-076's replayed linear certificate took n = 82
-    # off it and made 78, the cases `recent_lower_bounds` names.
+    # off it and made 78, the cases `recent_lower_bounds` names. Since the correction of
+    # 2 October 2026 was merged with those on 3 October, the corrected floors (Karakus
+    # 2026, the Lean s(k^2-2) proof) are recent as well, so the count is read from the
+    # citation record rather than pinned here.
     page.get_by_label("recent only").check()
-    assert page.locator(".site-table-tools .site-count").inner_text() == "78 of 324 cases"
-    assert shown.count() == 78
-    assert shown.first.get_attribute("id") == "n-11"
+    count = page.locator(".site-table-tools .site-count").inner_text()
+    assert count == f"{len(starred)} of 324 cases"
+    assert shown.count() == len(starred)
+    assert shown.first.get_attribute("id") == f"n-{starred[0]}"
     page.get_by_label("recent only").uncheck()
     assert shown.count() == 324
 

@@ -562,6 +562,43 @@ def builds_on_problems(
     return problems
 
 
+def corrects_problems(
+    record: dict,
+    sources: Mapping[str, Mapping[str, Any]],
+    records: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
+    """What is wrong with a result's `corrects`: the published work it stands in for.
+
+    The field names outside work, so a page can say which publication a bound corrects.
+    Its source is in the bibliography, its result is the register's record of that same
+    publication, and that record is not itself sound any more: a result standing in for a
+    published one that still holds would be a stronger bound, not a correction.
+    """
+    corrects = record.get("corrects")
+    if not corrects:
+        return []
+    rid = record["id"]
+    key, target = corrects["source_key"], corrects["result"]
+    problems: list[str] = []
+    if key not in sources:
+        problems.append(f"{rid}: corrects names {key}, which bibliography.yaml lacks")
+    corrected = records.get(target)
+    if corrected is None:
+        return [*problems, f"{rid}: corrects names {target}, which is not a registered result"]
+    if target == rid:
+        problems.append(f"{rid}: a result does not correct itself")
+    keys = set((corrected.get("attribution") or {}).get("source_keys") or [])
+    if keys and key not in keys:
+        problems.append(
+            f"{rid}: corrects {target} as {key}, but {target} credits {sorted(keys)}"
+        )
+    if corrected.get("verification") != "V0":
+        problems.append(
+            f"{rid}: corrects {target}, which still stands at {corrected.get('verification')}"
+        )
+    return problems
+
+
 def recent_evidence(entry: Mapping[str, Any], sources: Mapping[str, Mapping[str, Any]]) -> bool:
     """Whether an evidence entry carries a result the register must hold: this project's
     own new result, or another's from a source dated on or after `RECENT_SINCE`."""
@@ -887,6 +924,7 @@ def main() -> int:
     if actual_ids != expected_ids:
         problems.append(f"register ids are not contiguous T-001..: {actual_ids}")
     scopes = {record["id"]: scope_values(record["scope"]) for record in results}
+    by_id = {record["id"]: record for record in results}
 
     standings: dict[str, Standing] = {}
     for record in results:
@@ -913,6 +951,7 @@ def main() -> int:
 
         problems.extend(attribution_problems(record, sources))
         problems.extend(builds_on_problems(record, sources, cited))
+        problems.extend(corrects_problems(record, sources, by_id))
         problems.extend(registered_problems(record, str(register["last_reviewed"])))
         problems.extend(headline_problems(record))
         problems.extend(kind_problems(record, cited, scopes))

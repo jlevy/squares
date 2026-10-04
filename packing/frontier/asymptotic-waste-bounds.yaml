@@ -27,6 +27,11 @@ upper_bounds:
     note: >
       The origin of the insight that tilted unit squares beat axis-aligned ones --
       the same phenomenon that makes s(11) interesting, appearing asymptotically.
+      An upper bound only: Theorem (1) prints W(alpha) = O(alpha^{7/11}) (PDF page 4,
+      printed page 2), and printed page 6 says the authors have no nontrivial lower
+      estimate for W. The archive's cleaned transcription read it as a two-sided
+      Theta(alpha^{7/11}) until 2026-10-02 (D-514). Göbel 1979, printed page 179,
+      quotes it as W(z) = O(z^{7/11}).
   - bound: O(x^{(3-sqrt(3))/2 + eps})
     exponent: 0.63397
     authors: [Hugh Montgomery]
@@ -38,6 +43,12 @@ upper_bounds:
       record it as (3 - sqrt(3))/2 + eps = 0.633974... + eps; this matches DS7's
       2023 corrigendum and contradicts McClenagan 2026, which attributes
       (3+sqrt(2))/7 to Montgomery -- that is Chung and Graham's 2009 exponent.
+      CORRECTED 2026-10-02: McClenagan 2026 does not contradict it. Its PDF, page 1,
+      prints Montgomery's bound as O(x^{(3-sqrt(3))/2}). The attribution of
+      (3+sqrt(2))/7 to Montgomery was read from this archive's cleaned transcription
+      of that page, which swapped the paragraph's exponents until 2026-10-02 (D-515);
+      the exponent above stands. Göbel 1979, printed page 180, also reports
+      Montgomery's result as lowering 7/11 to (3-sqrt(3))/2, citing Roth and Vaughan.
   - bound: O(x^{(3+sqrt(2))/7} log x)
     exponent: 0.63060
     authors: [Fan Chung, Ronald Graham]
@@ -45,6 +56,11 @@ upper_bounds:
     source_key: "[Chung–Graham 2009]"
     local: null
     retrieved: false
+    note: >
+      Not read in the primary. The form is as Wang-Dong-Li 2016 and McClenagan 2026
+      (PDF page 1) print it, with the factor log x. The square root over log x that
+      this archive's cleaned McClenagan transcription carried until 2026-10-02
+      (D-515) is not in its PDF.
   - bound: O(x^{5/8})
     exponent: 0.62500
     authors: [Shuang Wang, Tian Dong, Jiamin Li]
@@ -54,6 +70,12 @@ upper_bounds:
     note: >
       Improves the covering-waste problem by the same exponent, from
       x^2 + O(x^{(3+sqrt(2))/7} log x) to x^2 + O(x^{5/8}).
+      The constant is explicit: Theorem 1 states, for a square of side x,
+      W(x) <= (16 sqrt(2) + 38) x^{5/8}, about 60.63 x^{5/8} (PDF page 5, line 50,
+      and again at the end of the proof of part (i)). No threshold x_0 is printed,
+      although the construction's dimensions are fixed only up to asymptotic
+      equivalence (m ~ x^{3/4}), so the inequality is not stated for any particular
+      range of x.
   - bound: O(x^{3/5})
     exponent: 0.60000
     authors: [Fan Chung, Ronald Graham]
@@ -78,6 +100,12 @@ upper_bounds:
     year: 2026
     source_key: "[McClenagan 2026]"
     local: papers/mcclenagan-2026-optimally-packing-large-square
+    note: >
+      Its history (PDF page 1) omits Wang-Dong-Li 2016 and Bui 2025: it says the
+      error in Chung and Graham 2020 "brings the best known bound back to
+      W(x) = O(x^{(3+sqrt(2))/7} log x)", when O(x^{5/8}) had stood since 2016. It
+      cites only Chung-Graham 2020, Erdős-Graham and Roth-Vaughan. Checked on the
+      rendered page 2026-10-02.
 
 lower_bounds:
   - bound: w(a) >> (||a|| * a)^{1/2}
@@ -105,6 +133,13 @@ lower_bounds:
       fractional part (they are different quantities, and renderings that conflate
       them go wrong); and the 10^{-100} constant reported by both Friedman DS7 and
       McClenagan 2026 appears nowhere in the paper.
+      PROVENANCE 2026-10-02: the earliest printed source of the 10^{-100} found is
+      Göbel 1979 (Math. Centre Tracts 106), printed page 179, which quotes the bound
+      as W(z) >= c(||z|| z)^{1/2} "where c = 10^{-100}" -- an equals sign on the
+      rendered page -- and opens page 180 "Since c is small, the result can be
+      considered as an asymptotic one." Göbel cites Roth and Vaughan for the bound
+      and gives no source for the value. DS7 and McClenagan 2026 (PDF page 1) print
+      it as an explicit factor, McClenagan as W(x) > 10^{-100} sqrt(x - floor(x)).
 
 related_results:
   - result: >
@@ -115,6 +150,18 @@ related_results:
     year: 2025
     source_key: "[Good-Squares 2025]"
     local: papers/square-packing-good-squares-2504.09489
+  - result: >
+      With delta_n = s(n^2 + 1) - n, the area bound gives delta_n > 1/(3n), and
+      Theorem 2 proves delta_n < 3/(2n)^{1/3} + 3/(2n)^{2/3} for every n >= 1 by a
+      simplified Erdős-Graham construction whose waste is O(n^{2/3}); Erdős and
+      Graham's construction gives delta_n << n^{-4/11} as n -> infinity. Also
+      delta_8 < 0.536, delta_42 < 0.507 and delta_43 < 1/2, with only delta_1 = 1
+      and delta_2 = 1/sqrt(2) determined. Checked on the rendered PDF page 2,
+      2026-10-02.
+    authors: [Michael J. Kearney, Peter Shiu]
+    year: 2002
+    source_key: "[Kearney–Shiu 2002]"
+    local: papers/kearney-shiu-2002-efficient-packing-unit-squares
   - result: >
       Open conjecture from the founding paper: with f(a) the maximal total
       circumference of a non-overlapping squares packed in a unit square,

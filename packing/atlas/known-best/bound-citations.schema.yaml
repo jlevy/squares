@@ -12,7 +12,8 @@ description: >-
   the evidence schema says no citation is owed. What the schema cannot state -- that
   each value equals composite-figure.json's for the same n and bound, that the recent
   lower bounds are exactly the starred cases and the project ones exactly those
-  first_proved_here, that every source key is defined in
+  first_proved_here, that a lower bound's corrects is what the results it lists say
+  they correct, that every source key is defined in
   resources/README.md, and that each listed result carries one of the bound's own
   evidence entries, with confirmed_by a subset of results in id order -- is checked by
   tests/test_bound_citations.py.
@@ -45,7 +46,7 @@ $defs:
           - {type: 'null'}
           - allOf:
               - {$ref: '#/$defs/citation'}
-              - required: [recent]
+              - required: [recent, corrects]
                 properties:
                   assurance: {const: verified}
   citation:
@@ -90,6 +91,24 @@ $defs:
       # recent where its source's bibliography `dated` is on or after RECENT_SINCE in
       # devtools.build_bound_citations. It says when, not whose: the line says whose.
       recent: {type: boolean}
+      # A lower bound's only: the published work it corrects, or null. Read from the
+      # `corrects` field of the results in `results` (frontier/results.yaml): the
+      # corrected work's bibliography key, its short citation as the bibliography prints
+      # it, which a page writes as "corrects Nagamochi 2005", and the register's record of
+      # that publication. A correcting bound is still recent and starred; this says which
+      # publication it stands in for. Not a correction to this project's own record,
+      # which is a defect entry in defects.yaml. The stage sets the tag between the
+      # reference and the note, so it counts toward the line's width.
+      corrects:
+        oneOf:
+          - {type: 'null'}
+          - type: object
+            additionalProperties: false
+            required: [source_key, credit, result]
+            properties:
+              source_key: {type: string, pattern: '^\[.+\]$'}
+              credit: {type: string, minLength: 1}
+              result: {type: string, pattern: '^T-[0-9]{3}$'}
     # This project's result cites its result id and no external key, and has nothing to
     # confirm; an external source cites its key and no result.
     allOf:

@@ -65,9 +65,15 @@ strategies:
   family: unavoidable_points
   mechanism: Assign nonnegative scores to points, segments, and area so every unit square consumes more than one unit
   status: used
-  note: Yes — Nagamochi 2005, including `s(m²−1) = s(m²−2) = m`
+  note: >-
+    Yes — Nagamochi 2005, including `s(m²−1) = s(m²−2) = m`. Corrected 2 October 2026:
+    his Lemma 1 is false, so that proof is incomplete; Karakuş 2026 proves `s(m²−1) = m`
+    again by a strip measure, and chelokot’s Lean compensation proof, replayed here, proves
+    `s(m²−2) = m`
   refs:
   - Nagamochi 2005
+  - Karakuş 2026
+  - chelokot 2026
 - id: 9
   name: Restricted-orientation analysis
   family: unavoidable_points

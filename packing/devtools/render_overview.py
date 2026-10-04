@@ -83,6 +83,8 @@ MATH_SCRIPT = BROWSER / "math.js"
 POPOVER_SCRIPT = BROWSER / "popover.js"
 ROW_POPOVER_SCRIPT = BROWSER / "row-popover.js"
 ATLAS_VIEW_SCRIPT = BROWSER / "atlas-view.js"
+#: The atlas's two drawings, House and Regularized, and the swap between them.
+ATLAS_LAYER_SCRIPT = BROWSER / "atlas-layer.js"
 ATLAS_GRID_SCRIPT = BROWSER / "atlas-grid.js"
 EMBED_SCRIPT = BROWSER / "embed.js"
 CASE_POPOVER_SCRIPT = BROWSER / "case-popover.js"
@@ -295,6 +297,10 @@ RENDER_INPUTS: tuple[Path, ...] = (
     # The card every page's head names is drawn beside the pages, in the page's colours.
     PACKING / "devtools" / "social_card.py",
     PACKING / "devtools" / "rung_scale.py",
+    # The atlas's regularized layer: which cases have a view, and their drawings
+    # (`overview_sections.atlas_regularized`, `render_frontier_page.packing_svg`).
+    PACKING / "atlas" / "known-best" / "regularized" / "index.json",
+    PACKING / "atlas" / "known-best" / "regularized" / "rendering",
     REPO / repo_links.TUTORIAL,
     REPO / repo_links.README,
     REPO / repo_links.SYNOPSIS,
@@ -912,6 +918,7 @@ def overview_page() -> Page:
             POPOVER_SCRIPT,
             ROW_POPOVER_SCRIPT,
             ATLAS_VIEW_SCRIPT,
+            ATLAS_LAYER_SCRIPT,
             ATLAS_GRID_SCRIPT,
             CASE_POPOVER_SCRIPT,
         ),

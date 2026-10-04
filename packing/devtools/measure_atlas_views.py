@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""Measure the homepage's atlas in its two views, and the move between them.
+"""Measure the homepage's atlas in its two views and two drawings, and the move between
+the views.
 
 The atlas is one set of tiles, a drawing of the best packing known for each case, that
-the reader sets as a grid or as a triangle (`templates/paper-design.md`, Atlas views).
+the reader sets as a grid or as a triangle (`templates/paper-design.md`, Atlas views),
+and draws as the house renders each record or, for the cases that have one, as its
+regularized view, badged (`overview/atlas-layer.js`).
 The triangle's row k holds the 2k - 1 cases a square of side k is known to hold and ends
 at k squared on the right edge; a row too long for the page wraps in reading order, every
 line but its last full from the left and the last holding what is left over, set from the
@@ -15,7 +18,10 @@ right. This opens a built overview in Chromium and reports what the browser made
   run past the window, set a tile outside the block or over another, break the order of
   the cases, leave a perfect square off the right edge, cut a row into lines other than
   `row_lines` gives, or start a line of a wrapped row, but its last, anywhere but the
-  left edge.
+  left edge. Each layout is read in both drawings (`LAYERS`), and a drawing has its own
+  faults (`layer_problems`): a tile in the wrong drawing for the layer the block is in,
+  and a regularized tile whose badge is missing, runs over its number or leaves its
+  tile, or whose number is not centred.
   `--markdown` prints one line a layout.
 - `move` times each change of layout (`CHANGES`: to the triangle and back, with a hundred
   cases and with all, and the expander's change in the triangle), `--runs` times each:
@@ -32,7 +38,8 @@ right. This opens a built overview in Chromium and reports what the browser made
   work the compositor otherwise does alone; `--unwatched` asks for no frame, and the
   counters then show what a reader's browser does.
 - `shots` writes pictures to `--out`: the atlas block in each view at each width, in the
-  light theme and the dark, with a hundred cases and with all; the two actions under a
+  light theme and the dark, with a hundred cases and with all, in each drawing (the
+  regularized pictures end `-regularized`); the two actions under a
   table and under the grid, "See all results" and the expander collapsed and expanded,
   at each width in both themes; and the window at five points of the move from the grid
   to the triangle (0, 25, 50, 75 and 100 percent).
@@ -77,6 +84,8 @@ QUIET = probe(PROBES, "measure_atlas_views/quiet")
 
 MODES = ("layout", "move", "shots")
 VIEWS = ("grid", "triangle")
+#: The atlas's two drawings, the default first: the key `?layer=` takes.
+LAYERS = ("house", "regularized")
 WIDTHS = (1280, 1024, 768, 390)
 SCHEMES = ("light", "dark")
 #: The points of a move a picture is taken at, as shares of its duration.
@@ -107,6 +116,13 @@ def tab(view: str) -> str:
     if view not in VIEWS:
         raise ValueError(f"the atlas has no view {view!r}")
     return f'[data-atlas-tab="{view}"]'
+
+
+def layer_tab(layer: str) -> str:
+    """The selector of a drawing's tab."""
+    if layer not in LAYERS:
+        raise ValueError(f"the atlas has no drawing {layer!r}")
+    return f'[data-atlas-layer-tab="{layer}"]'
 
 
 #: The presses `move` makes on one page, in order: what the change is called, how many
@@ -195,6 +211,7 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
     reading = [tile["n"] for line in lines for tile in line]
     if reading != sorted(reading):
         problems.append("the cases are out of order")
+    problems.extend(layer_problems(report))
     if report["view"] != "triangle":
         return problems
     per = report["per_line"]
@@ -231,6 +248,46 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
     return problems
 
 
+def layer_problems(report: dict[str, Any]) -> list[str]:
+    """What is wrong with the drawings a settled layout shows. In the house layer every
+    tile is the house drawing; in the regularized layer a case with a regularized view
+    (`report["regularized"]`, the page's third template) shows it and every other case
+    keeps its house drawing. A regularized tile carries its badge, inside its tile and
+    past its number's end, and its number is centred in the tile as a house tile's is;
+    a house tile carries no badge. A report from a page with no drawing layer has none
+    of these to check."""
+    layer = report.get("layer")
+    if layer is None:
+        return []
+    problems: list[str] = []
+    viewed = set(report.get("regularized", []))
+    for tile in report["tiles"]:
+        n, drawn = tile["n"], tile.get("layer", "house")
+        wanted = "regularized" if layer == "regularized" and n in viewed else "house"
+        if drawn != wanted:
+            problems.append(f"n = {n} is drawn {drawn} in the {layer} layer")
+        mark, number = tile.get("mark"), tile.get("number_box")
+        if drawn != "regularized":
+            if mark is not None:
+                problems.append(f"n = {n} carries the badge in its house drawing")
+            continue
+        if mark is None or number is None or mark["width"] <= 0 or mark["height"] <= 0:
+            problems.append(f"n = {n} has no badge")
+            continue
+        if mark["left"] < number["right"] - EDGE:
+            problems.append(f"n = {n}'s badge runs over its number")
+        if (
+            mark["right"] > tile["right"] + EDGE
+            or mark["top"] < tile["top"] - EDGE
+            or mark["bottom"] > tile["bottom"] + EDGE
+        ):
+            problems.append(f"n = {n}'s badge stands outside its tile")
+        centre = (number["left"] + number["right"]) / 2
+        if abs(centre - (tile["left"] + tile["right"]) / 2) > 2 * EDGE:
+            problems.append(f"n = {n}'s number is off its tile's centre")
+    return problems
+
+
 def summary(report: dict[str, Any]) -> dict[str, Any]:
     """One layout in a line: its sizes, its lines and the rows that wrap."""
     tiles: list[dict[str, Any]] = report["tiles"]
@@ -243,7 +300,9 @@ def summary(report: dict[str, Any]) -> dict[str, Any]:
     drawings = sorted({round(tile["drawing"]["width"], 1) for tile in tiles if tile["drawing"]})
     return {
         "view": report["view"],
+        "layer": report.get("layer"),
         "shown": len(tiles),
+        "regularized": sum(tile.get("layer") == "regularized" for tile in tiles),
         "block": report["cells"]["width"],
         "per_line": report["per_line"] if report["view"] == "triangle" else len(lines[0]),
         "tile": widths[0] if len(widths) == 1 else f"{widths[0]}-{widths[-1]}",
@@ -265,11 +324,18 @@ def settle(page: Any) -> None:
     page.wait_for_function(SETTLED)
 
 
-def query_for(view: str) -> str:
-    """The query string that asks for `view`: none for the grid, the default."""
+def query_for(view: str, layer: str = "house") -> str:
+    """The query string that asks for `view` and `layer`: nothing for the grid and the
+    house drawing, the defaults."""
     if view not in VIEWS:
         raise ValueError(f"the atlas has no view {view!r}")
-    return "?atlas=triangle" if view == "triangle" else ""
+    if layer not in LAYERS:
+        raise ValueError(f"the atlas has no drawing {layer!r}")
+    params = [
+        *(["atlas=triangle"] if view == "triangle" else []),
+        *(["layer=regularized"] if layer == "regularized" else []),
+    ]
+    return f"?{'&'.join(params)}" if params else ""
 
 
 def open_atlas(
@@ -278,14 +344,15 @@ def open_atlas(
     *,
     width: int,
     view: str = "grid",
+    layer: str = "house",
     query: str | None = None,
     scheme: str = "light",
     height: int = 900,
     reduced_motion: str | None = None,
     init_script: str | None = None,
 ) -> Any:
-    """A page showing the atlas in `view`, asked for in the address, with its tiles
-    placed and the block in the window. `query` is the whole of what follows the page's
+    """A page showing the atlas in `view` and `layer`, asked for in the address, with its
+    tiles placed and the block in the window. `query` is the whole of what follows the page's
     name instead, a query string and any fragment, for an address that says more, and
     `init_script` a script the page runs before any of its own."""
     page = browser.new_page(
@@ -295,7 +362,7 @@ def open_atlas(
     )
     if init_script is not None:
         page.add_init_script(init_script)
-    page.goto(address + (query_for(view) if query is None else query), wait_until="load")
+    page.goto(address + (query_for(view, layer) if query is None else query), wait_until="load")
     page.locator(BLOCK).scroll_into_view_if_needed()
     settle(page)
     return page
@@ -322,8 +389,10 @@ def layout(page: Any) -> dict[str, Any]:
     return report
 
 
-def measure_layout(address: str, widths: Sequence[int]) -> list[dict[str, Any]]:
-    """Each view at each width, with a hundred cases and with all."""
+def measure_layout(
+    address: str, widths: Sequence[int], layers: Sequence[str] = LAYERS
+) -> list[dict[str, Any]]:
+    """Each view at each width in each drawing, with a hundred cases and with all."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     rows: list[dict[str, Any]] = []
@@ -331,11 +400,12 @@ def measure_layout(address: str, widths: Sequence[int]) -> list[dict[str, Any]]:
         browser = launch(driver)
         for width in widths:
             for view in VIEWS:
-                page = open_atlas(browser, address, width=width, view=view)
-                rows.append({"width": width, **summary(layout(page))})
-                expand(page)
-                rows.append({"width": width, **summary(layout(page))})
-                page.close()
+                for layer in layers:
+                    page = open_atlas(browser, address, width=width, view=view, layer=layer)
+                    rows.append({"width": width, **summary(layout(page))})
+                    expand(page)
+                    rows.append({"width": width, **summary(layout(page))})
+                    page.close()
         browser.close()
     return rows
 
@@ -433,9 +503,9 @@ ACTIONS = (("see-all", ".site-more"), ("expander", ".site-atlas-toggle-row"))
 
 def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
     """The atlas block in each view at each width, light and dark, with a hundred cases
-    and with all; the two actions (`ACTIONS`) at each width in both themes, the expander
-    collapsed and expanded; then the window at each of `FRACTIONS` of the move to the
-    triangle."""
+    and with all, in each drawing; the two actions (`ACTIONS`) at each width in both
+    themes, the expander collapsed and expanded; then the window at each of `FRACTIONS`
+    of the move to the triangle."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     out.mkdir(parents=True, exist_ok=True)
@@ -445,6 +515,17 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
         for scheme in SCHEMES:
             for width in widths:
                 for view in VIEWS:
+                    for layer in LAYERS[1:]:
+                        page = open_atlas(
+                            browser, address, width=width, view=view, layer=layer, scheme=scheme
+                        )
+                        for shown in (100, 324):
+                            if shown == 324:
+                                expand(page)
+                            target = out / f"atlas-{view}-{shown}-{width}-{scheme}-{layer}.png"
+                            page.locator(BLOCK).screenshot(path=str(target))
+                            written.append(target)
+                        page.close()
                     page = open_atlas(browser, address, width=width, view=view, scheme=scheme)
                     for shown in (100, 324):
                         if shown == 324:
@@ -554,7 +635,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(markdown_table(report) if args.markdown else json.dumps(report, indent=2))
     failed = [row for row in report if row.get("problems")]
     for row in failed:
-        where = f"{row['width']}, {row['view']}, {row['shown']}"
+        where = f"{row['width']}, {row['view']}, {row.get('layer')}, {row['shown']}"
         print(f"problem at {where}: {row['problems']}", file=sys.stderr)
     return 1 if failed else 0
 

@@ -36,11 +36,19 @@ hand-written records to show that the rules are the ones the corpus already foll
   the release's own `offered_side` under `E-unitsquare-release1-report`.
 - `verified_upper_bound` is `ceil(sqrt(n))` under `E-basic-grid-upper`: a ceiling this
   repository can certify, never a reading of `s(n)`.
-- the independently verified lower bound is Nagamochi's closed form under
-  `E-nagamochi-lower`. The reported lower field takes the stronger of that identity and
-  the source candidates in `audit_ds7_lower_bounds`; Green's missing proofs remain
-  source-reported only. A perfect square reports the area bound under
-  `E-basic-area-lower`, which is what the hand-written perfect squares do.
+- the independently verified lower bound is Karakuş's general bound,
+  `1/2 + sqrt(n - floor(sqrt(n)) + 1/4)`, under `E-karakus-strip-lower`; it is exactly
+  `k` at `n = k^2 - 1`. A perfect square's is the area bound under `E-basic-area-lower`,
+  and a `k^2 - 2` case's is `k` under `E-chelokot-square-minus-two-lean`, chelokot's Lean
+  theorem `s(n^2 - 2) = n`, replayed here with its axiom receipt (`T-086`).
+  The reported lower field takes the stronger of Nagamochi's closed form, under
+  `E-nagamochi-lower`, and the source candidates in `audit_ds7_lower_bounds`; Green's
+  missing proofs remain source-reported only. A perfect square reports the area bound
+  under `E-basic-area-lower`, which is what the hand-written perfect squares do.
+  Corrected 2026-10-02: until then Nagamochi's closed form was the verified lower bound
+  here too. Its published proof rests on Nagamochi's Lemma 1, which Karakuş 2026 showed
+  false, so it is now a reported bound (`T-007`, `T-085`,
+  `docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md`).
 - `status` is `proved` only where the verified lower bound meets the reported upper
   bound exactly. In `101..324` that is the 24 cases `k^2`, `k^2 - 1` and `k^2 - 2` for
   `k = 11..18`, and nothing else.
@@ -296,9 +304,31 @@ UNITSQUARE_EVIDENCE = "E-unitsquare-release1-report"
 GRID_UPPER_EVIDENCE = "E-basic-grid-upper"
 AREA_LOWER_EVIDENCE = "E-basic-area-lower"
 NAGAMOCHI_EVIDENCE = "E-nagamochi-lower"
+KARAKUS_EVIDENCE = "E-karakus-strip-lower"
+#: The exact recomputation of the counterexample to Nagamochi's Lemma 1 (`T-085`): why a
+#: record's verified floor is Karakuş's rather than Nagamochi's. Scoped from `n = 10`, the
+#: first case whose container the counterexample family reaches.
+LEMMA1_EVIDENCE = "E-nagamochi-lemma1-counterexample"
+LEMMA1_FROM = 10
+#: chelokot's Lean proof that `s(n^2 - 2) = n` for every `n >= 2`, replayed here with its
+#: axiom receipt (`T-086`): the verified lower bound of the `k^2 - 2` family since 2026-10-02.
+LEAN_EVIDENCE = "E-chelokot-square-minus-two-lean"
+LEAN_NOTE = "Lean theorem: s(n^2 - 2) = n for every integer n >= 2."
+#: The least nonsquare `n` Karakuş's Corollary 6.2 covers.
+KARAKUS_FROM = 8
 
 NAGAMOCHI_NOTE = (
     "General closed form: s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1)."
+)
+KARAKUS_NOTE = "General bound: s(N) >= 1/2 + sqrt(N - floor(sqrt(N)) + 1/4)."
+#: Where the correction of 2026-10-02 is argued, from a case record's own directory.
+NAGAMOCHI_REVIEW = "../../docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md"
+#: The register's own part in the correction, kept apart from the published proof's: the
+#: review corrects Nagamochi 2005, and this register's having held that proof as verified
+#: is a defect in its own record, logged under its own process as D-516.
+OWN_RECORD_CORRECTION = (
+    "This register had recorded that proof as verified, its own error, logged as defect "
+    "[D-516](../../defects.md)."
 )
 UPPER_GAP_BLOCKER = "No formal certificate currently supports the tighter reported upper bound."
 
@@ -339,6 +369,20 @@ NAGAMOCHI_RESOURCE: dict[str, Any] = {
     "url": "https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37",
     "retrieved": True,
 }
+KARAKUS_RESOURCE: dict[str, Any] = {
+    "key": "[Karakuş 2026]",
+    "role": "lower-bound-proof",
+    "local": "papers/karakus-2026-counterexample-nagamochi-scoring-lemma",
+    "url": "https://arxiv.org/abs/2609.37410",
+    "retrieved": True,
+}
+CHELOKOT_RESOURCE: dict[str, Any] = {
+    "key": "[chelokot Nagamochi counterexample 2026]",
+    "role": "formal-certificate",
+    "local": "web/chelokot-nagamochi-counterexample-2026-10-02",
+    "url": "https://github.com/chelokot/square-packing-archive",
+    "retrieved": True,
+}
 FRIEDMAN_RESOURCE: dict[str, Any] = {
     "key": "[Friedman DS7]",
     "role": "survey",
@@ -364,6 +408,7 @@ COMMON_DOC_FOOTER = (
 )
 
 NAGAMOCHI_DISPLAY = "s(N) ≥ min{ ⌈√N⌉,  √(N − 2⌊√N⌋ + 1) + 1 }"
+KARAKUS_DISPLAY = "s(N) ≥ ½ + √(N − ⌊√N⌋ + ¼)"
 
 #: The closing sentence of "The lower bound", in the two forms the corpus uses. The
 #: hand-authored cases link to the generated summary so promotions cannot stale a count
@@ -1222,6 +1267,63 @@ def nagamochi_value(n: int, significant: int) -> str:
     return _strip_trailing_zeros(format(Context(prec=significant).plus(value), "f"))
 
 
+def is_square_minus_one(n: int) -> bool:
+    """Whether `n = k^2 - 1` for some `k >= 2`, where Karakuş's bound is exactly `k`."""
+    side = grid_ceiling(n)
+    return n > 1 and side * side - n == 1
+
+
+def is_square_minus_two(n: int) -> bool:
+    """Whether `n = k^2 - 2` for some `k >= 2`, the family Karakuş's bound does not reach."""
+    side = grid_ceiling(n)
+    return n > 1 and side * side - n == 2
+
+
+def karakus_exact_form(n: int) -> str:
+    """The exact identity of Karakuş's bound (his Corollary 6.2, eq. (6.1)) for nonsquare
+    `n >= 8`, which is the integer `k` itself at `n = k^2 - 1`."""
+    if is_square_minus_one(n):
+        return str(grid_ceiling(n))
+    return f"1/2 + sqrt({n} - floor(sqrt({n})) + 1/4)"
+
+
+def karakus_value(n: int, significant: int) -> str:
+    """Karakuş's bound for `n` to `significant` figures, rounded down: it is a floor."""
+    if is_square_minus_one(n):
+        return str(grid_ceiling(n))
+    with localcontext() as context:
+        context.prec = BOUND_PRECISION
+        root = math.isqrt(n)
+        value = Decimal("0.5") + (Decimal(n - root) + Decimal("0.25")).sqrt()
+    floor = Context(prec=significant, rounding=ROUND_FLOOR)
+    return _strip_trailing_zeros(format(floor.plus(value), "f"))
+
+
+def verified_lower_bound(n: int) -> dict[str, Any]:
+    """The verified lower lane a draft writes for `n`.
+
+    The area bound at a perfect square, and Karakuş's bound everywhere else. Until
+    2026-10-02 it was Nagamochi's closed form throughout, whose published proof rests on a
+    false lemma (`T-085`); see this module's docstring.
+    """
+    if is_perfect_square(n):
+        side = str(grid_ceiling(n))
+        return {"value": side, "exact_form": side, "evidence": [AREA_LOWER_EVIDENCE]}
+    if is_square_minus_two(n):
+        side = str(grid_ceiling(n))
+        return {"value": side, "exact_form": side, "evidence": [LEAN_EVIDENCE]}
+    if n < KARAKUS_FROM:
+        raise GenerationError(
+            f"n={n}: Karakuş's bound holds for nonsquare n >= {KARAKUS_FROM}, and the "
+            "smaller cases are hand-authored on their own classical proofs"
+        )
+    return {
+        "value": karakus_value(n, VERIFIED_SIGNIFICANT),
+        "exact_form": karakus_exact_form(n),
+        "evidence": [KARAKUS_EVIDENCE],
+    }
+
+
 def _quantized(value: Decimal, places: int, rounding: str) -> Decimal:
     with localcontext() as context:
         context.prec = BOUND_PRECISION
@@ -1357,11 +1459,7 @@ def build_payload(
         "exact_form": str(side),
         "evidence": [GRID_UPPER_EVIDENCE],
     }
-    verified_lower = {
-        "value": nagamochi_value(n, VERIFIED_SIGNIFICANT),
-        "exact_form": nagamochi_exact_form(n),
-        "evidence": [NAGAMOCHI_EVIDENCE],
-    }
+    verified_lower = verified_lower_bound(n)
     reported_lower = _reported_lower(n, side)
 
     reported_value = str(reported_upper["value"])
@@ -1394,6 +1492,13 @@ def build_payload(
         if reported_lower["kind"] == "perfect-square"
         else [*upper_evidence, NAGAMOCHI_EVIDENCE, GRID_UPPER_EVIDENCE]
     )
+    # Nagamochi's record stays in the roll-up as the reported floor; Karakuş's, which
+    # carries the verified one since 2026-10-02, follows it.
+    for lower_evidence in verified_lower["evidence"]:
+        if lower_evidence not in rollup:
+            rollup.append(lower_evidence)
+    if KARAKUS_EVIDENCE in verified_lower["evidence"] and n >= LEMMA1_FROM:
+        rollup.append(LEMMA1_EVIDENCE)
     blockers: list[dict[str, Any]] = []
     for lower_evidence in reported_lower["evidence"]:
         if lower_evidence not in rollup:
@@ -1422,6 +1527,10 @@ def build_payload(
     resources = [KINGBIRD_RESOURCE, FRIEDMAN_RESOURCE]
     if reported_lower["kind"] != "perfect-square":
         resources = [KINGBIRD_RESOURCE, NAGAMOCHI_RESOURCE, FRIEDMAN_RESOURCE]
+    if KARAKUS_EVIDENCE in verified_lower["evidence"]:
+        resources = [*resources, KARAKUS_RESOURCE]
+    if LEAN_EVIDENCE in verified_lower["evidence"]:
+        resources = [*resources, CHELOKOT_RESOURCE]
     if source.is_unitsquare:
         resources = [KINGBIRD_RESOURCE, UNITSQUARE_RESOURCE, *resources[1:]]
     elif _credits_arslanov(facts):
@@ -1846,6 +1955,64 @@ def nagamochi_lower_section(n: int, payload: Mapping[str, Any]) -> list[str]:
     return lines
 
 
+def karakus_lower_section(n: int, payload: Mapping[str, Any]) -> list[str]:
+    """Describe Karakuş's verified bound, and the dated correction that put it there.
+
+    The correction keeps what the record said before 2026-10-02 -- Nagamochi's closed form
+    as the verified bound -- and says what stands now, in the paragraph that names
+    Karakuş, so that `audit_t007_consumers` reads the closed form as qualified.
+    """
+    lines = nagamochi_lower_section(n, payload)
+    same = "gives the same value" if is_square_minus_one(n) else "is stronger"
+    lines[0:5] = [
+        (
+            "The strongest lower bound independently verified in this record is "
+            "Karakuş’s general bound, which applies to every nonsquare `N ≥ 8`:"
+        ),
+        "",
+        "```",
+        KARAKUS_DISPLAY,
+        "```",
+        "",
+        (
+            "**Correction, 2 October 2026.** Until that date the verified lower bound here "
+            "was Nagamochi’s general closed form, "
+            "`s(N) ≥ min(⌈√N⌉, √(N − 2⌊√N⌋ + 1) + 1)`, which "
+            f"{same} at this `n` and is now recorded as a reported bound. Its published "
+            "proof rests on Nagamochi’s Lemma 1, which Karakuş showed false; nothing is "
+            "disproved, and no packing beating it is known "
+            f"([review of 2 October 2026]({NAGAMOCHI_REVIEW})). {OWN_RECORD_CORRECTION}"
+        ),
+    ]
+    return lines
+
+
+def lean_lower_section(n: int, payload: Mapping[str, Any]) -> list[str]:
+    """Describe chelokot's replayed Lean theorem, and the dated correction that put it there."""
+    lines = nagamochi_lower_section(n, payload)
+    lines[0:5] = [
+        (
+            "The strongest lower bound independently verified in this record is "
+            "chelokot’s Lean theorem, replayed here with its axiom receipt, which applies "
+            "to every `n ≥ 2`:"
+        ),
+        "",
+        "```",
+        "s(n² − 2) = n",
+        "```",
+        "",
+        (
+            "**Correction, 2 October 2026.** Until that date the verified lower bound here "
+            "was Nagamochi’s general closed form, "
+            "`s(N) ≥ min(⌈√N⌉, √(N − 2⌊√N⌋ + 1) + 1)`, which gives the same value at this "
+            "`n` and is now recorded as a reported bound. Its published proof rests on "
+            "Nagamochi’s Lemma 1, which Karakuş showed false, and chelokot’s proof does not "
+            f"use it ([review of 2 October 2026]({NAGAMOCHI_REVIEW})). {OWN_RECORD_CORRECTION}"
+        ),
+    ]
+    return lines
+
+
 def _ceiling_section(n: int, payload: Mapping[str, Any]) -> list[str]:
     verified = str(payload["verified_upper_bound"]["value"])
     reported = str(payload["reported_upper_bound"]["value"])
@@ -1892,6 +2059,8 @@ def render_body(
     reported_value = str(payload["reported_upper_bound"]["value"])
     verified_lower_value = str(payload["verified_lower_bound"]["value"])
     first_party = payload["reported_upper_bound"]["source_key"] != KINGBIRD_SOURCE_KEY
+    karakus = KARAKUS_EVIDENCE in payload["verified_lower_bound"]["evidence"]
+    lean = LEAN_EVIDENCE in payload["verified_lower_bound"]["evidence"]
     lines: list[str] = []
 
     if payload["status"] == "proved":
@@ -1899,6 +2068,21 @@ def render_body(
         lines.append("")
         if is_perfect_square(n):
             lines.append(f"`s({n}) = {side}`. Established by triviality (a perfect square).")
+        elif lean:
+            lines.append(
+                f"`s({n}) = {side}`. Established by chelokot’s Lean proof (2026), replayed "
+                "here with its axiom receipt, of the family `s(k² − 2) = k` that "
+                "Nagamochi’s general theorem (2005) stated first; Nagamochi’s Lemma 1, on "
+                "which his proof rests, is false."
+            )
+            lines.append(LEAN_NOTE)
+        elif karakus:
+            lines.append(
+                f"`s({n}) = {side}`. Established by Karakuş’s rectangle bound, Hakan "
+                "Karakuş (2026), which proves again the family `s(k² − 1) = k` that "
+                "Nagamochi’s general theorem (2005) stated first."
+            )
+            lines.append(f"General bound: {KARAKUS_NOTE.split(': ', 1)[1]}")
         else:
             lines.append(
                 f"`s({n}) = {side}`. Established by Nagamochi’s general theorem, "
@@ -1918,12 +2102,17 @@ def render_body(
             if first_party
             else display_upper(reported_value)
         )
+        theorem, note = (
+            ("Karakuş’s general theorem", KARAKUS_NOTE)
+            if karakus
+            else ("Nagamochi’s general theorem", NAGAMOCHI_NOTE)
+        )
         lines.append(
             f"Open. The best known {known} gives `s({n}) ≤ "
             f"{shown}`, and the strongest lower bound independently verified here is "
-            f"`{display_lower(verified_lower_value)}` from Nagamochi’s general theorem, "
+            f"`{display_lower(verified_lower_value)}` from {theorem}, "
             f"leaving a gap of `{display_gap(reported_value, verified_lower_value)}`. "
-            f"General closed form: {NAGAMOCHI_NOTE.split(': ', 1)[1]}"
+            f"{note}"
         )
         lines.append("")
         if Decimal(str(payload["verified_upper_bound"]["value"])) > Decimal(reported_value):
@@ -1942,6 +2131,10 @@ def render_body(
             f"`{n}` is a perfect square, so the `{side}×{side}` grid is optimal and the "
             "area bound `√n` is already tight."
         )
+    elif karakus:
+        lines.extend(karakus_lower_section(n, payload))
+    elif lean:
+        lines.extend(lean_lower_section(n, payload))
     else:
         lines.extend(nagamochi_lower_section(n, payload))
     lines.append("")
@@ -2065,6 +2258,17 @@ def apply_lower_bound_promotion(
         payload["reported_lower_bound"] = dict(promotion.reported_lower_bound)
     if promotion.verified_lower_bound is not None:
         payload["verified_lower_bound"] = dict(promotion.verified_lower_bound)
+    # The draft cites Karakuş's bound for its own verified lane; a promoted lane that does
+    # not cite it leaves nothing in the record resting on it. Dropped before the additions
+    # go in, since their positions are the reviewed record's, which never carried it.
+    lanes = (payload["verified_lower_bound"], payload["reported_lower_bound"])
+    if not any(KARAKUS_EVIDENCE in lane["evidence"] for lane in lanes):
+        payload["evidence"] = [
+            ref for ref in payload["evidence"] if ref not in {KARAKUS_EVIDENCE, LEMMA1_EVIDENCE}
+        ]
+        payload["resources"] = [
+            resource for resource in payload["resources"] if resource != KARAKUS_RESOURCE
+        ]
     payload["evidence"] = _insert_additions(payload["evidence"], promotion.evidence_additions)
     payload["resources"] = _insert_additions(payload["resources"], promotion.resource_additions)
 

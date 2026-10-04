@@ -80,7 +80,7 @@ be reconciled before selecting its unfinished tasks.
 | [X-048 exact limiting configurations](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review) | shaped | Derive exact contact-family constraints before sampling endpoint covers |
 | [X-048 continuum clique resources](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review) | shaped | Test uniform charge across grazing contacts, using the existing evand construction |
 | [X-048 higher-order obstructions](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review) | raw | Resolve zero-margin local plateaus beyond first-order constraints |
-| [X-048 periodic deficit-four family](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review) | parked | Require exact deficit D > 1 before selecting the costly width-three coverage campaign |
+| [X-048 periodic deficit-four family](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review) | registered as [H-269](hypotheses/H-269-periodic-certificates-k2-minus-4-and-5.md) | Require exact deficit D > 1 before selecting the costly width-three coverage campaign |
 
 The historical starting bracket for the program below was
 `3.875 < s(11) <= 3.877083590022814177...`. The strict lower end is Kleddamag’s verified
@@ -845,6 +845,23 @@ these rows as BC-393 to BC-395 and retargeted BC-387.
 | 264 | Daniel’s zero-margin closed cover transferred upward in k: s(45) = 7, then n60, n77, n96 | registered | [H-252](hypotheses/H-252-n45-zero-margin-closed-cover-at-7.md) | s(32) = 6 by a cover of mass 31.71 checked at margin zero; the same construction fell short at k = 5 (4.995) and k = 4 (3.968616, cover LP pinned at 12.000). About 4 CPU-h per cover at k = 7. Blocked on the intake review. |
 | 265 | Exact replay of the reported upper-bound packings for n = 68..307 (franciscouzo, griffcass, JoostdeWinter n211) | done 2026-09-29: T-056 and T-057 at V4/C3 | — | All 49 of Couzo’s packings and de Winter’s n211 promote at centre dilation 1 and pass the independent checker; the verified lane carries them, with conflicts at n = 206, 259, 305 where the certificate sits 2–3 units of the 15th decimal above the printed side. Casson’s 39 are larger at every shared n, so retained and superseded, not replayed. `devtools.upper_bound_packets`, the three packets under `resources/web/`, issue #227. |
 | 266 | A zero-margin additive spatial cover at the n12 endpoint | restricted by a reported exact dual; replay pending | — | Updated 2026-10-01: Daniel publishes a side-4 fractional packing of mass 24537607710/1999999999 > 12. If its closed-depth bound is reproduced, it rules out any nonnegative additive spatial cover of total mass below 12 that assigns mass at least one to every admissible closed unit square; point, segment and area covers are all included. The earlier measured LP plateau alone did not prove this. Guarded replay is think-q5tt; conditional and clique resources remain separate routes in [X-048](explorations/X-048-n17-optimality-after-n11.md#new-leads-from-the-october-evand-review). |
+
+## Families, Shading and the Large-n Limit — X-049
+
+[X-049](explorations/X-049-families-shading-and-the-large-n-limit.md) answered four
+owner questions after the atlas triangle view: the families visible by $n-k^2$ were
+studied one construction at a time and never classified; light green squares are
+geometry, not arithmetic; an exact regularized view darkens the slack ones; and every
+atlas family is transient as $n$ grows.
+These rows are its candidates for the codifier, none registered.
+
+| # | Idea | Status | H | Crux |
+| --- | --- | --- | --- | --- |
+| 267 | Periodic certificates for $s(k^2-4)=k$ and $s(k^2-5)=k$ at all large $k$ | registered | [H-269](hypotheses/H-269-periodic-certificates-k2-minus-4-and-5.md) | Daniel’s width-two family proves $d=3$ (T-064, reported); the width-three program’s go/no-go is an exact corner deficit $D>1$, and $d=5$ needs $D>5/4$ at width four or more. Absorbs the X-048 deficit-four lead. |
+| 268 | The $k^2+1$ crossover lies between $k=18$ and 42 | registered | [H-270](hypotheses/H-270-k2-plus-1-crossover-kearney-shiu-strip.md) | The plateau $5/\sqrt2-3$ is the atlas upper bound at every $k\ge 8$; Kearney–Shiu tuned their strip only at 43. An exact scan of $k=18..41$ names the smallest $k$ it reaches and scopes H-035. |
+| 269 | $\beta=2/5$: $\delta_k\asymp k^{-2/5}$ | parked, subsumed by H-037 | — | No finite criterion decides an exponent; it is H-037’s $k^2+1$ face, and Bui’s Question 1 is in the 2025 wasted-area paper. The $\delta_k$ translation goes into H-037’s notes under think-hzv3. |
+| 270 | Symmetric atlas families are partly source artifacts | registered | [H-272](hypotheses/H-272-symmetric-kingbird-records-reoptimized.md) | 68 of 97 Kingbird-derived records are symmetric, 0 of 50 optimizer packets; a seeded symmetry-free quench, with the 44 pre-Couzo witnesses as the control, confirms if at least one in ten moves by more than $10^{-9}$. |
+| 271 | A regularized-view layer for the atlas | shaped, think-bgkz | — | The prototype cuts the six named cases’ light green squares from 545 to 242 with exact verification and no change of side; it needs a neighbour non-regression rule first. |
 
 ## Dead ends
 

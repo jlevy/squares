@@ -417,7 +417,8 @@ def test_every_external_proof_in_the_register_declares_its_review() -> None:
         if record.get("method") in {"published-proof", "proof-audited"}
         and record.get("origin") in {"external", "independently-external"}
     ]
-    assert len(external) == 6, "the count moved; check the new record declares its review"
+    # 7 since 2026-10-03: Bašić and Slivková's piercing bound (T-087) declares its read.
+    assert len(external) == 7, "the count moved; check the new record declares its review"
     for record in external:
         assert record["external_review"]["state"] in {
             "not-reviewed",

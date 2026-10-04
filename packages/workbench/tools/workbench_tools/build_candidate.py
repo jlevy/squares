@@ -1252,7 +1252,11 @@ def _citation(value: Any, n: int, bound: str) -> dict[str, str | None] | None:
     note = value.get("note")
     if note is not None and not (isinstance(note, str) and CITATION_NOTE.fullmatch(note)):
         raise ValueError(f"{where}: the note {note!r} is not one parenthesis of text")
-    line = " ".join(part for part in (text, note) if part)
+    # A lower bound that stands in for a published result found unsound names that work
+    # between its reference and its note, `corrects Nagamochi 2005` (the owner,
+    # 2026-10-02); it shares the one line, so it is measured with them.
+    corrects = _corrects_tag(value.get("corrects"), where, bound)
+    line = " ".join(part for part in (text, corrects, note) if part)
     if len(line) > CITATION_TEXT_MAX:
         raise ValueError(
             f"{where}: {line!r} is {len(line)} characters, over the {CITATION_TEXT_MAX} the "
@@ -1271,7 +1275,27 @@ def _citation(value: Any, n: int, bound: str) -> dict[str, str | None] | None:
         raise TypeError(f"{where}: source_key {key!r} is not a string")
     if not isinstance(value.get("value"), str):
         raise TypeError(f"{where}: the value it cites is not a string: {value.get('value')!r}")
-    return {"text": text, "note": note, "basis": basis, "assurance": assurance}
+    return {
+        "text": text,
+        "corrects": corrects,
+        "note": note,
+        "basis": basis,
+        "assurance": assurance,
+    }
+
+
+def _corrects_tag(value: Any, where: str, bound: str) -> str | None:
+    """`corrects Nagamochi 2005` for a citation naming the published work it corrects."""
+    if value is None:
+        return None
+    if bound != "lower":
+        raise ValueError(f"{where}: only a lower bound corrects a published result")
+    if not isinstance(value, dict) or not isinstance(value.get("credit"), str):
+        raise TypeError(f"{where}: corrects is an object with a credit, not {value!r}")
+    result = value.get("result")
+    if not (isinstance(result, str) and RESULT_ID.fullmatch(result)):
+        raise ValueError(f"{where}: corrects names result {result!r}, not a T-NNN identifier")
+    return f"corrects {value['credit']}"
 
 
 def load_citations(

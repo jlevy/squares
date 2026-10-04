@@ -90,17 +90,17 @@ test("the plan keeps each bound on its own line and carries the record's own not
   assert.deepEqual(planCitations(cited(verified, reported)), {
     record: "n-017",
     lines: [
-      { bound: "lower", text: verified.text, note: null },
-      { bound: "upper", text: reported.text, note: "(reported)" },
+      { bound: "lower", text: verified.text, corrects: null, note: null },
+      { bound: "upper", text: reported.text, corrects: null, note: "(reported)" },
     ],
   });
   // A lone upper bound stays on the second line, so it does not move up between two n.
   assert.deepEqual(planCitations(cited(null, verified))?.lines, [
     null,
-    { bound: "upper", text: verified.text, note: null },
+    { bound: "upper", text: verified.text, corrects: null, note: null },
   ]);
   assert.deepEqual(planCitations(cited(verified, null))?.lines, [
-    { bound: "lower", text: verified.text, note: null },
+    { bound: "lower", text: verified.text, corrects: null, note: null },
     null,
   ]);
   // A reported lower bound carries the note too: it follows the register, not the bound.
@@ -108,5 +108,12 @@ test("the plan keeps each bound on its own line and carries the record's own not
   // The words are the record's. The plan passes them through and spells none of them.
   const both = { ...verified, note: "(reported; confirmed T-009)", assurance: "reported" };
   assert.equal(planCitations(cited(null, both))?.lines[1]?.note, "(reported; confirmed T-009)");
+  // A lower bound standing in for a published result found unsound names that work on its
+  // line, between the reference and the note.
+  const correcting = { ...verified, corrects: "corrects Nagamochi 2005" };
+  assert.equal(
+    planCitations(cited(correcting, null))?.lines[0]?.corrects,
+    "corrects Nagamochi 2005",
+  );
   assert.equal(RECORD, "record");
 });

@@ -1,0 +1,945 @@
+=== step: clone ===
+reusing the existing clone at /home/user/lean-replay/square-packing-archive
+=== end: clone returncode=0 seconds=0.0 ===
+
+=== step: checkout ===
+$ git checkout --detach 753079eb37d8d16225a5dc1f56e493a3c3b243f4
+$ git rev-parse HEAD
+$ git status --porcelain --untracked-files=no
+HEAD is now at 753079e 📐 Formalize twenty-one exact quadratic packings
+
+753079eb37d8d16225a5dc1f56e493a3c3b243f4
+=== end: checkout returncode=0 seconds=0.0 ===
+
+=== step: pins ===
+$ internal: pins and source scan
+{
+  "blobs": {
+    "formal/SquarePackingArchive/NagamochiPackingTheorem.lean": "da209bad1b6739f52f4b74c1af9b2ca6e788c6d1",
+    "formal/SquarePackingArchive/Geometry.lean": "4398066bab5a90c9b65b403509b65941e89b5b3d"
+  },
+  "source_scan": {
+    "lean_files": 277,
+    "sorry": 0,
+    "axiom_declarations": 0,
+    "native_decide": 0,
+    "manifest_assertions": 79
+  },
+  "mathlib_rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+}
+=== end: pins returncode=0 seconds=0.5 ===
+
+=== step: toolchain ===
+$ elan --version
+$ lake --version
+$ lean --version
+elan 4.2.4 (227caca13 2026-08-25)
+
+Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0)
+
+Lean (version 4.33.0, x86_64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+=== end: toolchain returncode=0 seconds=0.1 ===
+
+=== step: cache ===
+$ lake exe cache get
+Current branch: HEAD
+Using cache from origin: (some leanprover-community/mathlib4)
+No files to download
+Already decompressed 8690 file(s)
+=== end: cache returncode=0 seconds=5.6 ===
+
+=== step: build ===
+$ lake build
+removed 8 build products of SquarePackingArchive.NagamochiPackingTheorem, to elaborate it again
+removed 8 build products of SquarePackingArchive.Audit, to elaborate it again
+removed 8 build products of SquarePackingArchive.ManifestEvidence, to elaborate it again
+removed 8 build products of SquarePackingArchive, to elaborate it again
+✔ [2940/2944] Built SquarePackingArchive.NagamochiPackingTheorem (3.6s)
+ℹ [2941/2944] Built SquarePackingArchive.Audit (3.7s)
+info: SquarePackingArchive/Audit.lean:67:0: 'SquarePackingArchive.Records.Basic.s1_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:68:0: 'SquarePackingArchive.Records.GridBounds.grid_hasPacking' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:69:0: 'SquarePackingArchive.Records.Square6.s6_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:70:0: 'SquarePackingArchive.Records.Square6.s6_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:71:0: 'SquarePackingArchive.Records.Square10.s10_le_goebel' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:72:0: 'SquarePackingArchive.Records.Square10.s10_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:73:0: 'SquarePackingArchive.Records.Square10.s10_eq_goebel' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:74:0: 'SquarePackingArchive.Stromquist.TenPoints.stepTwo_unavoidable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:75:0: 'SquarePackingArchive.Stromquist.TenPoints.stepThree_unavoidable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:76:0: 'SquarePackingArchive.Stromquist.TenPoints.stepFour_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:77:0: 'SquarePackingArchive.Stromquist.TenPoints.ring_unavoidable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:78:0: 'SquarePackingArchive.Records.Square33.s33_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:79:0: 'SquarePackingArchive.Records.Square33.s33_eq_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:80:0: 'SquarePackingArchive.Records.Square22.s22_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:81:0: 'SquarePackingArchive.Records.Square22.s22_eq_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:82:0: 'SquarePackingArchive.Packing.exists_closed_disjoint_family_in_larger_container' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:83:0: 'SquarePackingArchive.Records.Square6.center_free_closed_family_has_two_matchings' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:84:0: 'SquarePackingArchive.Records.Square6.SingletonPair.allowed' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:85:0: 'SquarePackingArchive.Records.Square6.corner_pair_forces_corner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:86:0: 'SquarePackingArchive.Records.Square6.three_contacts_left_intercept' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:87:0: 'SquarePackingArchive.PlacedSquare.contains_triangleVertex_of_cross_nonnegative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:88:0: 'SquarePackingArchive.Stromquist.lemma4_first' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:89:0: 'SquarePackingArchive.Stromquist.lemma4_second' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:90:0: 'SquarePackingArchive.Stromquist.lemma4_bentz_first' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:91:0: 'SquarePackingArchive.Stromquist.lemma4_bentz_second' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:92:0: 'SquarePackingArchive.Stromquist.lemma4_bentz_third' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:93:0: 'SquarePackingArchive.Stromquist.lemma5' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:94:0: 'SquarePackingArchive.Stromquist.TenPoints.unavoidable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:95:0: 'SquarePackingArchive.Stromquist.TenPoints.exists_namedFamily_of_packing_below' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:96:0: 'SquarePackingArchive.Records.Square13.initialPoints_unavoidable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:97:0: 'SquarePackingArchive.Records.Square13.packing_has_two_corner_restricted_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:98:0: 'SquarePackingArchive.BentzThirteen.verifiedCovers' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:99:0: 'SquarePackingArchive.Records.Square13.s13_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:100:0: 'SquarePackingArchive.Records.Square13.s13_eq_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:101:0: 'SquarePackingArchive.BentzThirteen.printedR2LeftPoints_not_unavoidable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:102:0: 'SquarePackingArchive.BentzThirteen.printedR3Points_not_unavoidable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:103:0: 'SquarePackingArchive.Bentz.middle_exception_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:104:0: 'SquarePackingArchive.Bentz.bottom_exception_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:105:0: 'SquarePackingArchive.Bentz.vertical_unit_chord_of_center_le_eleven_tenths' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:106:0: 'SquarePackingArchive.Bentz.count_lt_cutoff_of_unit_chords_below' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:107:0: 'SquarePackingArchive.Bentz.count_lt_remaining_of_unit_chords_above' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:108:0: 'SquarePackingArchive.PlacedSquare.AxisAligned.contains_interiorGridPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:109:0: 'SquarePackingArchive.Packing.covered_square_count_le_point_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:110:0: 'SquarePackingArchive.Packing.gridAvoidingSquares_card_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:111:0: 'SquarePackingArchive.Packing.gridAvoidingSquares_subset_tiltedSquares' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:112:0: 'SquarePackingArchive.Packing.tiltedSquares_card_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:113:0: 'SquarePackingArchive.Packing.sixtyTwo_requires_thirteen_tilted' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:114:0: 'SquarePackingArchive.Packing.squareMinusTwo_requires_many_tilted' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:115:0: 'SquarePackingArchive.Nagamochi.bottom_centerline_anchor' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:116:0: 'SquarePackingArchive.Nagamochi.bottom_active_of_edge_strip' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:117:0: 'SquarePackingArchive.Nagamochi.bottom_line_clipped_of_edge_strip_and_missing_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:118:0: 'SquarePackingArchive.Nagamochi.upperCap_le_innerArea_add_nonbottomCuts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:119:0: 'SquarePackingArchive.PlacedSquare.dilatedPoint_mem_closure' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:120:0: 'SquarePackingArchive.Nagamochi.horizontalLowerCap_volume_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:121:0: 'SquarePackingArchive.Nagamochi.horizontalUpperCap_volume_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:122:0: 'SquarePackingArchive.Nagamochi.horizontalUpperCap_section_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:123:0: 'SquarePackingArchive.Nagamochi.upperCap_area_add_half_section_gt_half_of_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:124:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_bottom_adjacent_without_corners_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:125:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_bottom_adjacent_without_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:126:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_bottom_strip_without_corners_nonnegative_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:127:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_bottom_strip_without_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:128:0: 'SquarePackingArchive.Nagamochi.cap_score_gt_half_add_fifth_height' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:129:0: 'SquarePackingArchive.Nagamochi.upperCap_vertical_projection_inside' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:130:0: 'SquarePackingArchive.Nagamochi.upperCap_le_innerArea_add_narrow_strip_loss' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:131:0: 'SquarePackingArchive.Nagamochi.area_add_half_bottom_line_gt_half_of_bottom_strip_missing_horizontal_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:132:0: 'SquarePackingArchive.Nagamochi.continuous_score_gt_half_of_bottom_strip_missing_horizontal_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:133:0: 'SquarePackingArchive.Nagamochi.score_gt_nineteen_twentieths_of_bottom_strip_with_corner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:134:0: 'SquarePackingArchive.Nagamochi.resourceMeasure_preimage_swap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:135:0: 'SquarePackingArchive.Nagamochi.resourceMeasure_preimage_reflectY' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:136:0: 'SquarePackingArchive.Nagamochi.resourceMeasure_preimage_reflectX' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:137:0: 'SquarePackingArchive.NagamochiAugmentedResource.measure_univ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:138:0: 'SquarePackingArchive.NagamochiAugmentedResource.score_gt_one_of_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:139:0: 'SquarePackingArchive.Packing.squareCount_lt_squareMinusOne_of_side_lt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:140:0: 'SquarePackingArchive.Records.NearSquare.squareMinusOne_isMinimumSide' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:141:0: 'SquarePackingArchive.Packing.squareMinusTwo_augmentedScore_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:142:0: 'SquarePackingArchive.Packing.squareMinusTwo_augmentedScore_lt_seven_fifths' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:143:0: 'SquarePackingArchive.Packing.squareMinusTwo_not_two_bottom_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:144:0: 'SquarePackingArchive.Packing.exists_squareMinusTwo_markedPoint_ownership' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:145:0: 'SquarePackingArchive.Nagamochi.no_finite_disjoint_convex_neighbor_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:146:0: 'SquarePackingArchive.Nagamochi.upperCap_angle_bound_of_fits' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:147:0: 'SquarePackingArchive.Nagamochi.no_crossing_exit_deficit_lt_half_cap_surplus' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:148:0: 'SquarePackingArchive.Nagamochi.terminal_continuous_budget_of_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:149:0: 'SquarePackingArchive.Nagamochi.bottom_bad_square_crosses_next_boundary_band_positive_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:150:0: 'SquarePackingArchive.Nagamochi.chain_step_of_upper_facet_and_high_rightmost_vertex' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:151:0: 'SquarePackingArchive.Nagamochi.common_upper_facet_of_two_missing_above_anchor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:152:0: 'SquarePackingArchive.Nagamochi.endpoint_two_height_continuous_budget_of_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:153:0: 'SquarePackingArchive.Nagamochi.edge_point_sides_equal_of_same_square' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:154:0: 'SquarePackingArchive.Nagamochi.bottom_bad_square_starts_weighted_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:155:0: 'SquarePackingArchive.Nagamochi.finite_bottom_owner_chain_reaches_terminal_or_shared_owner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:156:0: 'SquarePackingArchive.Nagamochi.endpoint_two_height_score_budget_of_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:157:0: 'SquarePackingArchive.Nagamochi.corner_terminal_score_repays_incoming_height' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:158:0: 'SquarePackingArchive.Nagamochi.not_adjacent_marked_points_of_missing_corner_segment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:159:0: 'SquarePackingArchive.Nagamochi.bad_square_has_exactly_one_corner_and_no_edge_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:160:0: 'SquarePackingArchive.Packing.badSquares_card_le_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:161:0: 'SquarePackingArchive.finiteFamily_card_lt_resourceMass_of_balanced_transfers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:162:0: 'SquarePackingArchive.Packing.squareMinusTwo_impossible_of_scaled_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:163:0: 'SquarePackingArchive.Packing.squareMinusTwo_side_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:164:0: 'SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:165:0: 'SquarePackingArchive.Records.Square7.s7_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:166:0: 'SquarePackingArchive.Records.Square7.s7_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:167:0: 'SquarePackingArchive.Records.NearSquare.s14_eq_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:168:0: 'SquarePackingArchive.Records.NearSquare.s62_eq_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:169:0: 'SquarePackingArchive.Records.NearSquare.s79_eq_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:170:0: 'SquarePackingArchive.Records.NearSquare.s98_eq_ten' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:171:0: 'SquarePackingArchive.Records.NearSquare.s63_eq_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:172:0: 'SquarePackingArchive.Records.NearSquare.s80_eq_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:173:0: 'SquarePackingArchive.Records.NearSquare.s99_eq_ten' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:174:0: 'SquarePackingArchive.Nagamochi.bottom_grid_chord_at_least_side' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:175:0: 'SquarePackingArchive.Nagamochi.originalLayout_scalar_mass_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:176:0: 'SquarePackingArchive.Nagamochi.originalLayout_scalar_constraints_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:177:0: 'SquarePackingArchive.Nagamochi.uniformDiagonal_scalar_constraints_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:178:0: 'SquarePackingArchive.Nagamochi.originalLayout_variableArea_scalar_constraints_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:179:0: 'SquarePackingArchive.Nagamochi.bottom_bad_square_misses_horizontal_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:180:0: 'SquarePackingArchive.Nagamochi.bottom_bad_square_location' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:181:0: 'SquarePackingArchive.Nagamochi.bottom_bad_square_has_exactly_one_corner_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:182:0: 'SquarePackingArchive.Nagamochi.score_gt_nineteen_twentieths_of_bottom_strip' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:183:0: 'SquarePackingArchive.Nagamochi.score_gt_three_halves_of_two_bottom_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:184:0: 'SquarePackingArchive.Nagamochi.augmentedScore_gt_three_halves_of_two_bottom_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:185:0: 'SquarePackingArchive.Records.SquareNumbers.squareNumber_isMinimumSide' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:186:0: 'SquarePackingArchive.Records.SquareNumbers.s4_eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:187:0: 'SquarePackingArchive.Records.SquareNumbers.s9_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:188:0: 'SquarePackingArchive.Records.SquareNumbers.s16_eq_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:189:0: 'SquarePackingArchive.Records.SquareNumbers.s25_eq_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:190:0: 'SquarePackingArchive.Records.SquareNumbers.s36_eq_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:191:0: 'SquarePackingArchive.Records.SquareNumbers.s49_eq_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:192:0: 'SquarePackingArchive.Records.SquareNumbers.s64_eq_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:193:0: 'SquarePackingArchive.Records.SquareNumbers.s81_eq_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:194:0: 'SquarePackingArchive.Records.NearSquare.s2_eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:195:0: 'SquarePackingArchive.Records.NearSquare.s3_eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:196:0: 'SquarePackingArchive.Records.Square5.s5_le_goebel' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:197:0: 'SquarePackingArchive.Records.Square5.unavoidable_points' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:198:0: 'SquarePackingArchive.Records.Square5.s5_ge_goebel' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:199:0: 'SquarePackingArchive.Records.Square5.s5_eq_goebel' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:200:0: 'SquarePackingArchive.Records.Square8.contains_bottomLeftCorner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:201:0: 'SquarePackingArchive.Records.Square8.contains_bottomRightPair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:202:0: 'SquarePackingArchive.Records.Square8.contains_leftPair' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:203:0: 'SquarePackingArchive.PlacedSquare.contains_triangleVertex' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:204:0: 'SquarePackingArchive.PlacedSquare.contains_shortRectangleVertex' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:205:0: 'SquarePackingArchive.PlacedSquare.contains_translatedShortRectangleVertex' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:206:0: 'SquarePackingArchive.Records.Square8.points_unavoidable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:207:0: 'SquarePackingArchive.Records.Square8.s8_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:208:0: 'SquarePackingArchive.Records.Square8.s8_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:209:0: 'SquarePackingArchive.Records.Square15.contains_bottomBand' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:210:0: 'SquarePackingArchive.Records.Square15.contains_middleBand' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:211:0: 'SquarePackingArchive.Records.Square15.contains_topBand' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:212:0: 'SquarePackingArchive.Records.Square15.points_unavoidable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:213:0: 'SquarePackingArchive.Records.Square15.s15_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:214:0: 'SquarePackingArchive.Records.Square15.s15_eq_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:215:0: 'SquarePackingArchive.Records.Square24.points_unavoidable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:216:0: 'SquarePackingArchive.Records.Square24.s24_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:217:0: 'SquarePackingArchive.Records.Square24.s24_eq_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:218:0: 'SquarePackingArchive.StaggeredLattice.lowerBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:219:0: 'SquarePackingArchive.Records.Square23.s23_eq_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:220:0: 'SquarePackingArchive.Records.Square34.s34_eq_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:221:0: 'SquarePackingArchive.Records.Square34.s35_eq_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:222:0: 'SquarePackingArchive.PlacedSquare.scaleCenter_strictFits' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:223:0: 'SquarePackingArchive.lowerBound_succ_of_strict_unavoidable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:224:0: 'SquarePackingArchive.Records.Square46.s46_eq_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:225:0: 'SquarePackingArchive.Records.Square46.s47_eq_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:226:0: 'SquarePackingArchive.Records.Square46.s48_eq_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:227:0: 'SquarePackingArchive.Records.Square11TrumpRationalized.s11_le_3_88' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:228:0: 'SquarePackingArchive.Records.Square68.s68_le_8_80339' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:229:0: 'SquarePackingArchive.Records.Square69.s69_le_8_8272' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:230:0: 'SquarePackingArchive.HasPacking.enlarge' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:231:0: 'SquarePackingArchive.Records.HistoricalUpperBounds.s12_le_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:232:0: 'SquarePackingArchive.Records.HistoricalUpperBounds.s11_le_goebel_1979' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:233:0: 'SquarePackingArchive.Records.HistoricalUpperBounds.s11_le_hamalainen_1980' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:234:0: 'SquarePackingArchive.Records.HistoricalUpperBounds.s68_le_schadt_2025' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:235:0: 'SquarePackingArchive.Records.HistoricalUpperBounds.s68_le_schadt_ellsworth_2025' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:236:0: 'SquarePackingArchive.Records.HistoricalUpperBounds.s69_le_morandi_cantrell_2023' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:237:0: 'SquarePackingArchive.PlacedSquare.rotateQuarter_contains_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:238:0: 'SquarePackingArchive.PlacedSquare.firstQuadrant_contains_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:239:0: 'SquarePackingArchive.Packing.side_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:240:0: 'SquarePackingArchive.Unavoidable.interior_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:241:0: 'SquarePackingArchive.Packing.squareCount_le_of_interiorUnavoidable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:242:0: 'SquarePackingArchive.lowerBound_succ_of_interiorUnavoidable_below' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:243:0: 'SquarePackingArchive.lowerBound_succ_of_unavoidable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:244:0: 'SquarePackingArchive.PlacedSquare.contains_unitCorner' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:245:0: 'SquarePackingArchive.PlacedSquare.contains_cornerPoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:246:0: 'SquarePackingArchive.PlacedSquare.contains_bottomPair' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:247:0: 'SquarePackingArchive.PlacedSquare.contains_bottomPairWith' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:248:0: 'SquarePackingArchive.PlacedSquare.contains_bottomBoundaryPair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:249:0: 'SquarePackingArchive.Frame.height_add_product_le_sum_of_height_le_sqrt_two_sub_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:250:0: 'SquarePackingArchive.PlacedSquare.contains_bottomUnitPair' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:251:0: 'SquarePackingArchive.moving_unavoidable_preserves_assignment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:252:0: 'SquarePackingArchive.Packing.squareCount_lt_resourceMass' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:253:0: 'SquarePackingArchive.finiteFamily_card_lt_resourceMass' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:254:0: 'SquarePackingArchive.NagamochiResource.measure_univ' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:255:0: 'SquarePackingArchive.horizontalSegmentMeasure_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:256:0: 'SquarePackingArchive.NagamochiResource.boundaryLines_subset_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:257:0: 'SquarePackingArchive.NagamochiResource.innerArea_add_boundaryLines_le_measure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:258:0: 'SquarePackingArchive.NagamochiResource.cornerPoints_lower_bound_of_two_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:259:0: 'SquarePackingArchive.NagamochiResource.edgePoints_lower_bound_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:260:0: 'SquarePackingArchive.NagamochiResource.EdgePoint.cornerPoints_ne' does not depend on any axioms
+info: SquarePackingArchive/Audit.lean:261:0: 'SquarePackingArchive.volume_rightTriangleProductRegion' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:262:0: 'SquarePackingArchive.volume_rightTriangleRegion' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:263:0: 'SquarePackingArchive.volume_translatedRightTriangleRegion' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:264:0: 'SquarePackingArchive.volume_openTranslatedRightTriangleRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:265:0: 'SquarePackingArchive.openTranslatedRightTriangleRegion_subset_of_vertices_mem_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:266:0: 'SquarePackingArchive.volume_openOrientedTranslatedRightTriangleRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:267:0: 'SquarePackingArchive.openOrientedTranslatedRightTriangleRegion_subset_of_vertices_mem_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:268:0: 'SquarePackingArchive.closure_unitSquareInterior' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:269:0: 'SquarePackingArchive.PlacedSquare.closure_interiorRegion' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:270:0: 'SquarePackingArchive.PlacedSquare.mem_dilatedInteriorRegion_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:271:0: 'SquarePackingArchive.PlacedSquare.horizontalPoint_mem_swap_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:272:0: 'SquarePackingArchive.PlacedSquare.convex_dilatedInteriorRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:273:0: 'SquarePackingArchive.PlacedSquare.dilatedCenterX_halfExtent_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:274:0: 'SquarePackingArchive.PlacedSquare.dilatedCenterY_halfExtent_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:275:0: 'SquarePackingArchive.PlacedSquare.unitCornerPoint_mem_dilatedInteriorRegion_of_center_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:276:0: 'SquarePackingArchive.PlacedSquare.case5CornerPoints_mem_dilatedInteriorRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:277:0: 'SquarePackingArchive.PlacedSquare.firstQuadrant_dilatedInteriorRegion_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:278:0: 'SquarePackingArchive.PlacedSquare.case5TopRightPoints_mem_dilatedInteriorRegion_any_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:279:0: 'SquarePackingArchive.PlacedSquare.horizontalCenterPoint_mem_dilatedInteriorRegion_any_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:280:0: 'SquarePackingArchive.PlacedSquare.topHorizontalCenterPoint_mem_dilatedInteriorRegion_any_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:281:0: 'SquarePackingArchive.PlacedSquare.rightVerticalCenterPoint_mem_dilatedInteriorRegion_any_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:282:0: 'SquarePackingArchive.PlacedSquare.horizontalChord_inside_dilatedInteriorRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:283:0: 'SquarePackingArchive.PlacedSquare.horizontalAdjacentChord_inside_dilatedInteriorRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:284:0: 'SquarePackingArchive.PlacedSquare.horizontalOtherAdjacentChord_inside_dilatedInteriorRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:285:0: 'SquarePackingArchive.PlacedSquare.horizontalOtherAdjacentChord_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:286:0: 'SquarePackingArchive.PlacedSquare.horizontalCosineChord_length_at_least_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:287:0: 'SquarePackingArchive.PlacedSquare.horizontalSineChord_length_at_least_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:288:0: 'SquarePackingArchive.PlacedSquare.verticalSineChord_length_at_least_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:289:0: 'SquarePackingArchive.PlacedSquare.verticalCosineChord_length_at_least_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:290:0: 'SquarePackingArchive.Nagamochi.adjacentCut_triangleArea_lt_half_chord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:291:0: 'SquarePackingArchive.Nagamochi.centeredAdjacentChordLength_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:292:0: 'SquarePackingArchive.Nagamochi.Frame.exists_tangentHalfAngle_of_sine_le_cosine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:293:0: 'SquarePackingArchive.Nagamochi.horizontalAdjacentChord_length_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:294:0: 'SquarePackingArchive.Nagamochi.horizontalAdjacentChord_length_gt_one_any_positive_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:295:0: 'SquarePackingArchive.Nagamochi.cornerAdjacentChordLength_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:296:0: 'SquarePackingArchive.Nagamochi.horizontalOtherAdjacentChord_length_gt_one_of_bottom_contained' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:297:0: 'SquarePackingArchive.Nagamochi.horizontalOtherAdjacentChord_length_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:298:0: 'SquarePackingArchive.Nagamochi.horizontalOtherAdjacentChord_length_gt_one_any_positive_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:299:0: 'SquarePackingArchive.Nagamochi.cornerCut_area_add_half_chord_gt_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:300:0: 'SquarePackingArchive.Nagamochi.pinnedCut_score_gt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:301:0: 'SquarePackingArchive.Nagamochi.innerArea_lower_bound_of_translatedRightTriangle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:302:0: 'SquarePackingArchive.Nagamochi.innerArea_lower_bound_of_openTranslatedRightTriangle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:303:0: 'SquarePackingArchive.Nagamochi.innerArea_lower_bound_of_openOrientedTranslatedRightTriangle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:304:0: 'SquarePackingArchive.Nagamochi.pinnedCutTriangleRegion_subset_interiorRegion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:305:0: 'SquarePackingArchive.Nagamochi.pinnedCut_innerArea_lower_bound_of_triangle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:306:0: 'SquarePackingArchive.Nagamochi.PinnedCutTriangleWitness.innerArea_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:307:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_real_grouped_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:308:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_pinned_cut_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:309:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_pinned_cut_triangle_and_boundary_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:310:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_pinned_cut_witness_and_boundary_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:311:0: 'SquarePackingArchive.Nagamochi.canonicalPinned_score_gt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:312:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case6_corner_cut_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:313:0: 'SquarePackingArchive.Nagamochi.boundaryChord_of_pointAt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:314:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_long_and_short_boundary_chords_and_corner_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:315:0: 'SquarePackingArchive.Nagamochi.exists_nat_in_open_interval_of_length_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:316:0: 'SquarePackingArchive.Nagamochi.openGridChord_endpoint_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:317:0: 'SquarePackingArchive.Nagamochi.longGridChordWitness_of_open_chord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:318:0: 'SquarePackingArchive.Nagamochi.bottomLongGridChordWitness_of_centered_horizontalAdjacent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:319:0: 'SquarePackingArchive.Nagamochi.bottomLongGridChordWitness_of_bottom_touching_horizontalOtherAdjacent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:320:0: 'SquarePackingArchive.Nagamochi.bottomLongGridChordWitness_of_horizontalOpposite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:321:0: 'SquarePackingArchive.Nagamochi.bottomLongGridChordWitness_of_axis_aligned' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:322:0: 'SquarePackingArchive.Nagamochi.bottomLongGridChordWitness_of_center_in_bottom_strip' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:323:0: 'SquarePackingArchive.Nagamochi.topLongGridChordWitness_of_center_in_top_strip' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:324:0: 'SquarePackingArchive.Nagamochi.leftLongGridChordWitness_of_center_in_left_strip' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:325:0: 'SquarePackingArchive.Nagamochi.rightLongGridChordWitness_of_center_in_right_strip' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:326:0: 'SquarePackingArchive.Nagamochi.gridPointWitness_of_open_grid_chord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:327:0: 'SquarePackingArchive.Nagamochi.bottomGridPointWitness_of_center_in_bottom_strip_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:328:0: 'SquarePackingArchive.Nagamochi.gridPointWitness_of_center_in_edge_strip_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:329:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_edge_strip_long_chord_and_connections' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:330:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_edge_strip_long_chord_without_grid_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:331:0: 'SquarePackingArchive.Nagamochi.corner_mem_of_gridPointWitness_of_no_edge_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:332:0: 'SquarePackingArchive.Nagamochi.edge_mem_of_gridPointWitness_of_no_corner_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:333:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_dilatedInteriorRegion_subset_innerArea' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:334:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_compensated_inner_area' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:335:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case5_resource_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:336:0: 'SquarePackingArchive.Nagamochi.innerArea_positive_of_unitCornerPoint_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:337:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case5_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:338:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case5_any_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:339:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case5' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:340:0: 'SquarePackingArchive.Nagamochi.innerArea_positive_of_bottom_edge_strip_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:341:0: 'SquarePackingArchive.Nagamochi.innerArea_positive_of_top_edge_strip_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:342:0: 'SquarePackingArchive.Nagamochi.innerArea_positive_of_left_edge_strip_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:343:0: 'SquarePackingArchive.Nagamochi.innerArea_positive_of_right_edge_strip_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:344:0: 'SquarePackingArchive.Nagamochi.innerArea_positive_of_edge_strip_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:345:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_resource_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:346:0: 'SquarePackingArchive.Nagamochi.case7ResourceWitness_of_two_boundary_corner_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:347:0: 'SquarePackingArchive.Nagamochi.case7ResourceWitness_of_first_boundary_corner_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:348:0: 'SquarePackingArchive.Nagamochi.case7ResourceWitness_of_second_boundary_corner_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:349:0: 'SquarePackingArchive.Nagamochi.case7ResourceWitness_of_long_chord_and_grid_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:350:0: 'SquarePackingArchive.Nagamochi.case7ResourceWitness_of_long_chord_and_boundary_connection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:351:0: 'SquarePackingArchive.Nagamochi.firstBoundaryCornerConnection_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:352:0: 'SquarePackingArchive.Nagamochi.secondBoundaryCornerConnection_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:353:0: 'SquarePackingArchive.Nagamochi.case7EdgeStripOutcome_of_long_chord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:354:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_opposite_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:355:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_bottom_opposite_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:356:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_first_boundary_corner_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:357:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_second_boundary_corner_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:358:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_bottom_corner_and_edge_point' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:359:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_two_boundary_corner_points_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:360:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case7_both_bottom_corner_points_geometry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:361:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_two_boundaryLine_chords' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:362:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_half_area_and_boundary_chord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:363:0: 'SquarePackingArchive.Nagamochi.boundaryChord_of_opposite' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:364:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_two_opposite_boundary_chords' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:365:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case3_resource_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:366:0: 'SquarePackingArchive.PlacedSquare.centralReflection_mem_dilatedInteriorRegion_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:367:0: 'SquarePackingArchive.PlacedSquare.half_volume_le_volume_innerHalfSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:368:0: 'SquarePackingArchive.Nagamochi.half_innerArea_of_single_inner_boundary_crossing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:369:0: 'SquarePackingArchive.Nagamochi.inward_bounds_of_center_inside_and_no_crossing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:370:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case3_single_crossed_line' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:371:0: 'SquarePackingArchive.Nagamochi.exists_horizontal_chord_of_center_offset_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:372:0: 'SquarePackingArchive.Nagamochi.exists_horizontal_chord_of_axis_aligned' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:373:0: 'SquarePackingArchive.Nagamochi.firstQuadrant_frame_difference' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:374:0: 'SquarePackingArchive.Nagamochi.exists_horizontal_chord_of_center_offset_le_any_frame' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:375:0: 'SquarePackingArchive.Nagamochi.exists_boundary_line_chord_of_center_offset_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:376:0: 'SquarePackingArchive.Nagamochi.boundaryChord_of_line_chord_and_other_sides_inside' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:377:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_case3_single_crossed_line_offset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:378:0: 'SquarePackingArchive.Nagamochi.horizontalLowerCap_compensated' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:379:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_single_bottom_crossing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:380:0: 'SquarePackingArchive.Nagamochi.boundaryCut_compensated_of_adjacent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:381:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_adjacent_boundary_cuts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:382:0: 'SquarePackingArchive.Nagamochi.innerHalfArea_add_otherBoundaryCuts_covers_square' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:383:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_long_chord_and_adjacent_boundary_cuts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:384:0: 'SquarePackingArchive.Nagamochi.exists_active_boundary_of_outside' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:385:0: 'SquarePackingArchive.Nagamochi.boundaryLine_clipped_of_active_and_missing_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:386:0: 'SquarePackingArchive.Nagamochi.center_inner_missing_corners_does_not_imply_full_line_clipping' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:387:0: 'SquarePackingArchive.Nagamochi.horizontal_cut_classification' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:388:0: 'SquarePackingArchive.Nagamochi.inner_boundary_cut_classification' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:389:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_center_inner_cut_budgets' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:390:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_center_inner_without_corners' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:391:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_center_inner' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:392:0: 'SquarePackingArchive.Nagamochi.deformationCounterexample_mem_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:393:0: 'SquarePackingArchive.Nagamochi.deformationCounterexample_inside_container' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:394:0: 'SquarePackingArchive.Nagamochi.deformationCounterexample_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:395:0: 'SquarePackingArchive.Nagamochi.deformationCounterexample_closed_dilation_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:396:0: 'SquarePackingArchive.Nagamochi.deformationCounterexample_score_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:397:0: 'SquarePackingArchive.Nagamochi.not_scoresDilatedSquares_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:398:0: 'SquarePackingArchive.Nagamochi.score_gt_one_of_bottom_top_horizontalOpposite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: SquarePackingArchive/Audit.lean:399:0: 'SquarePackingArchive.Packing.squareCount_lt_nagamochiMass' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: SquarePackingArchive/Audit.lean:400:0: 'SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide_of_nagamochiScores' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+✔ [2942/2944] Built SquarePackingArchive.ManifestEvidence (4.9s)
+✔ [2943/2944] Built SquarePackingArchive (2.6s)
+Build completed successfully (2944 jobs).
+=== end: build returncode=0 seconds=13.7 ===
+
+=== step: manifest-evidence ===
+$ lake env lean SquarePackingArchive/ManifestEvidence.lean
+
+=== end: manifest-evidence returncode=0 seconds=4.7 ===
+
+=== step: policy-test ===
+$ /home/user/squares/packing/.venv/bin/python -S -m unittest discover -v -s ../scripts -p test_lean_axiom_policy.py
+test_custom_axiom_is_rejected_through_transitive_dependencies (test_lean_axiom_policy.LeanAxiomPolicyTests.test_custom_axiom_is_rejected_through_transitive_dependencies) ... ok
+test_missing_declaration_is_not_silently_accepted (test_lean_axiom_policy.LeanAxiomPolicyTests.test_missing_declaration_is_not_silently_accepted) ... ok
+test_native_evaluation_dependency_is_rejected (test_lean_axiom_policy.LeanAxiomPolicyTests.test_native_evaluation_dependency_is_rejected) ... ok
+test_sorry_dependency_is_rejected (test_lean_axiom_policy.LeanAxiomPolicyTests.test_sorry_dependency_is_rejected) ... ok
+test_standard_axioms_are_accepted (test_lean_axiom_policy.LeanAxiomPolicyTests.test_standard_axioms_are_accepted) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 20.111s
+
+OK
+=== end: policy-test returncode=0 seconds=20.2 ===
+
+=== step: axioms ===
+$ lake env lean /home/user/lean-replay/ReplayAxioms.lean
+SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide {size : ℕ} (size_lower : 2 ≤ size) :
+  SquarePackingArchive.IsMinimumSide (size * size - 2) ↑size
+'SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'SquarePackingArchive.Records.NearSquare.s2_eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SquarePackingArchive.Records.Square7.s7_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SquarePackingArchive.Records.NearSquare.s14_eq_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SquarePackingArchive.Records.NearSquare.s62_eq_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SquarePackingArchive.Records.NearSquare.s79_eq_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SquarePackingArchive.Records.NearSquare.s98_eq_ten' depends on axioms: [propext, Classical.choice, Quot.sound]
+'replay_s23_eq_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'replay_s34_eq_six' depends on axioms: [propext, Classical.choice, Quot.sound]
+'replay_s47_eq_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== end: axioms returncode=0 seconds=3.6 ===
+
+=== step: definitions ===
+$ lake env lean /home/user/lean-replay/ReplayDefinitions.lean
+def SquarePackingArchive.IsMinimumSide : ℕ → ℝ → Prop :=
+fun squareCount side =>
+  SquarePackingArchive.HasPacking squareCount side ∧ SquarePackingArchive.IsLowerBound squareCount side
+def SquarePackingArchive.IsLowerBound : ℕ → ℝ → Prop :=
+fun squareCount side =>
+  ∀ (candidateSide : ℝ), SquarePackingArchive.HasPacking squareCount candidateSide → side ≤ candidateSide
+def SquarePackingArchive.HasPacking : ℕ → ℝ → Prop :=
+fun squareCount side => Nonempty (SquarePackingArchive.Packing squareCount side)
+structure SquarePackingArchive.Packing (squareCount : ℕ) (side : ℝ) : Type
+number of parameters: 2
+fields:
+  SquarePackingArchive.Packing.squares : Fin squareCount → SquarePackingArchive.PlacedSquare
+  SquarePackingArchive.Packing.side_nonnegative : 0 ≤ side
+  SquarePackingArchive.Packing.fits : ∀ (index : Fin squareCount), (self.squares index).Fits side
+  SquarePackingArchive.Packing.disjoint : ∀ (left right : Fin squareCount),
+      left ≠ right → (self.squares left).InteriorDisjoint (self.squares right)
+constructor:
+  SquarePackingArchive.Packing.mk {squareCount : ℕ} {side : ℝ}
+    (squares : Fin squareCount → SquarePackingArchive.PlacedSquare) (side_nonnegative : 0 ≤ side)
+    (fits : ∀ (index : Fin squareCount), (squares index).Fits side)
+    (disjoint : ∀ (left right : Fin squareCount), left ≠ right → (squares left).InteriorDisjoint (squares right)) :
+    SquarePackingArchive.Packing squareCount side
+structure SquarePackingArchive.PlacedSquare : Type
+number of parameters: 0
+fields:
+  SquarePackingArchive.PlacedSquare.center : SquarePackingArchive.Point
+  SquarePackingArchive.PlacedSquare.frame : SquarePackingArchive.Frame
+constructor:
+  SquarePackingArchive.PlacedSquare.mk (center : SquarePackingArchive.Point) (frame : SquarePackingArchive.Frame) :
+    SquarePackingArchive.PlacedSquare
+structure SquarePackingArchive.Frame : Type
+number of parameters: 0
+fields:
+  SquarePackingArchive.Frame.cosine : ℝ
+  SquarePackingArchive.Frame.sine : ℝ
+  SquarePackingArchive.Frame.unit : self.cosine ^ 2 + self.sine ^ 2 = 1
+constructor:
+  SquarePackingArchive.Frame.mk (cosine sine : ℝ) (unit : cosine ^ 2 + sine ^ 2 = 1) : SquarePackingArchive.Frame
+def SquarePackingArchive.PlacedSquare.point : SquarePackingArchive.PlacedSquare → ℝ → ℝ → SquarePackingArchive.Point :=
+fun square localX localY =>
+  have offset := square.frame.place localX localY;
+  { x := square.center.x + offset.x, y := square.center.y + offset.y }
+def SquarePackingArchive.PlacedSquare.Contains : SquarePackingArchive.PlacedSquare →
+  SquarePackingArchive.Point → Prop :=
+fun square point => ∃ localX localY, |localX| ≤ 1 / 2 ∧ |localY| ≤ 1 / 2 ∧ point = square.point localX localY
+def SquarePackingArchive.PlacedSquare.InteriorContains : SquarePackingArchive.PlacedSquare →
+  SquarePackingArchive.Point → Prop :=
+fun square point => ∃ localX localY, |localX| < 1 / 2 ∧ |localY| < 1 / 2 ∧ point = square.point localX localY
+def SquarePackingArchive.Container.Contains : ℝ → SquarePackingArchive.Point → Prop :=
+fun side point => 0 ≤ point.x ∧ point.x ≤ side ∧ 0 ≤ point.y ∧ point.y ≤ side
+def SquarePackingArchive.PlacedSquare.Fits : SquarePackingArchive.PlacedSquare → ℝ → Prop :=
+fun square side =>
+  ∀ ⦃point : SquarePackingArchive.Point⦄, square.Contains point → SquarePackingArchive.Container.Contains side point
+def SquarePackingArchive.PlacedSquare.InteriorDisjoint : SquarePackingArchive.PlacedSquare →
+  SquarePackingArchive.PlacedSquare → Prop :=
+fun left right => ∀ (point : SquarePackingArchive.Point), ¬(left.InteriorContains point ∧ right.InteriorContains point)
+=== end: definitions returncode=0 seconds=3.7 ===

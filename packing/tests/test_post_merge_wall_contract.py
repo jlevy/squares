@@ -29,6 +29,7 @@ RESULT_ENVIRONMENTS = {
     "exhaustive-2": "EXHAUSTIVE_2_RESULT",
     "exhaustive-3": "EXHAUSTIVE_3_RESULT",
     "screen": "SCREEN_RESULT",
+    "regularized-views": "REGULARIZED_VIEWS_RESULT",
 }
 WORKERS = set(RESULT_ENVIRONMENTS)
 

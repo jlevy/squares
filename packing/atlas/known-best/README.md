@@ -76,6 +76,63 @@ uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atl
 [The playbook](FIGURE-PLAYBOOK.md#the-two-composites) has the measurements and what each
 one bought.
 
+## The regularized views
+
+[`regularized/`](regularized/index.json) holds exact derived views of 51 records,
+written by `python -m devtools.regularize_axis_components --update-atlas`, checked by
+digest with `--check-atlas` and re-derived with `--verify-atlas`. A view straightens
+near-axis squares and slides axis-aligned ones into exact contact at the certified side,
+verified twice over the rationals; it never replaces a witness, changes a side or
+promotes a tier, and is drawn only with a “regularized” label.
+Exploration
+[X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
+explains why and what it changes.
+
+`--check-atlas` runs in the records tier on every pull request.
+`--verify-atlas` is the deferred step `regularized atlas views re-derive exactly`, on a
+`regularized-views` runner of its own in both the deep gate and the post-merge
+checkpoint
+([development.md](../../../development.md#the-deep-gate-the-deferred-surface-before-the-merge)).
+
+**The 89 refused Kingbird-derived records stay refused.** Their 36-digit poses overlap
+by a rounding sliver at centre dilation 1, the only factor the layer uses.
+`promote_rational` would try wider ones: it scales every centre about the container’s
+centre by $1 + 10^{-p}$, $p = 31, 29, \ldots, 3$, and keeps the first exact packing
+within $10^{-9}$ of the printed side.
+The tool’s `--smallest-dilation` flag runs that ladder.
+On 2026-10-02 it was run over all 89, and the census’s `--witness` mode shaded each
+source and view:
+
+| Smallest verifying dilation | Records | Views below the register’s verified bound | Light green, house rule | Light green, stage rule |
+| --- | ---: | ---: | --- | --- |
+| $1 + 10^{-31}$ | 53 | 49 | 1,355 → 1,353 | 1,355 → 1,353 |
+| $1 + 10^{-29}$ | 33 | 23 | 731 → 731 | 731 → 731 |
+| $1 + 10^{-27}$ | 3 | 3 | 93 → 93 | 93 → 93 |
+| All | 89 | 75 | 2,179 → 2,177 | 2,179 → 2,177 |
+
+Every view passed both exact verifiers, and none made a square lighter or needed a hold.
+The views still fail the claim boundary, for two reasons:
+
+- **Most would promote a tier.** For 73 of the 89 the register’s verified upper bound is
+  the grid ceiling, because the Kingbird catalogue is reported evidence that has never
+  been replayed. An exactly verified view there is a rational packing 0.05 to 0.46 below
+  that bound. A drawing would then carry a certificate the register does not.
+  At $n = 17$ and $n = 29$ the view lies $10^{-22}$ and $5 \times 10^{-20}$ below the
+  certified endpoint the register holds, which is the same promotion at smaller scale.
+- **The rest would change the side.** For the other 14 the register already verifies the
+  reported bound, but a dilated view’s container is $2.9 \times 10^{-31}$ to
+  $8.8 \times 10^{-29}$ larger than the printed side and lies above the verified bound,
+  and every centre has moved.
+  That is not the author’s packing at the certified side.
+
+What it would buy is two squares.
+The views’ remaining light faces are structural: 3,873 face a tilted neighbour, 132 face
+a hole, and 129 face an offset row, with no slack.
+Only one square at $n = 85$ and one at $n = 227$ compact, by 0.37 and 0.29. Every other
+move snaps shut a gap the dilation itself opened.
+The flag stays in the tool as the instrument that measured this.
+A view framed by it is a scratch artifact and never part of the layer.
+
 ## What the drawings are drawn from
 
 The pipeline has four separate layers:

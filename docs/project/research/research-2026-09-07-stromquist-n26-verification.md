@@ -172,6 +172,11 @@ The case records now preserve this stronger *reported* lower bound and its sourc
 They retain Nagamochi’s theorem in the *verified* lower-bound fields.
 The prior sentence that nothing specific had ever been proved was unsupported and has
 been removed. This source-record omission is [D-481](../../../defects.md).
+**Corrected 2 October 2026:** no verified field rests on that theorem now.
+Its published proof depends on Nagamochi’s Lemma 1, which is false (Karakuş 2026;
+chelokot 2026), so its values are reported bounds, and the verified floors it carried
+now rest on the area bound, on Karakuş’s bounds or on other proofs
+([review](../reviews/review-2026-10-02-nagamochi-lemma1-karakus.md)).
 
 ## Directions Pursued and Remaining Dependencies
 

@@ -1,0 +1,11 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+n=102: axis-aligned 73, light 49 -> 26 (dark gained 23, lost 0); moves 197 accepted (143 snaps, 54 compactions), 6 refused, largest 1.625e-01, passes 6; structural {'hole': 2, 'offset': 5, 'tilted-neighbour': 34, 'untouched-neighbour': 3}; exact passed (side - reported = -1.058e-15)
+n=103: axis-aligned 65, light 48 -> 31 (dark gained 17, lost 0); moves 155 accepted (122 snaps, 33 compactions), 19 refused, largest 1.919e-01, passes 5; structural {'hole': 2, 'offset': 6, 'tilted-neighbour': 30, 'untouched-neighbour': 7}; exact passed (side - reported = 1.510e-16)
+n=106: axis-aligned 83, light 21 -> 21 (dark gained 0, lost 0); moves 214 accepted (194 snaps, 20 compactions), 4 refused, largest 5.509e-03, passes 4; structural {'offset': 2, 'tilted-neighbour': 39, 'wall-slack': 1}; exact passed (side - reported = 3.466e-16)
+n=206: axis-aligned 172, light 69 -> 59 (dark gained 10, lost 2); moves 398 accepted (329 snaps, 69 compactions), 113 refused, largest 3.654e-01, passes 7; structural {'offset': 11, 'tilted-neighbour': 24, 'untouched-neighbour': 21}; exact passed (side - reported = 1.124e-15)
+n=268: axis-aligned 213, light 86 -> 68 (dark gained 18, lost 0); moves 672 accepted (588 snaps, 84 compactions), 41 refused, largest 3.617e-01, passes 8; structural {'offset': 29, 'tilted-neighbour': 46, 'untouched-neighbour': 10}; exact passed (side - reported = -1.612e-15)
+n=269: axis-aligned 227, light 44 -> 33 (dark gained 11, lost 0); moves 779 accepted (721 snaps, 58 compactions), 0 refused, largest 1.475e-02, passes 7; structural {'tilted-neighbour': 58, 'untouched-neighbour': 2}; exact passed (side - reported = 4.120e-16)
+
+real	1m38.972s
+user	1m37.413s
+sys	0m0.109s

@@ -1,0 +1,13 @@
+Square Packing Archive
+Copyright 2026 Square Packing Archive contributors
+
+This project builds on decades of work by the square-packing community. The
+historical catalog is initially derived from Erich Friedman's “Packing Unit
+Squares in Squares” survey and public tracker, and from David Ellsworth's
+high-precision SVG reconstruction and continuing record tracker. Every claim
+keeps its own provenance and credits the discoverers, optimizers, and proof
+authors represented by its source material.
+
+No third-party paper, website, or SVG is relicensed by this repository. The
+archive stores bibliographic facts, independently normalized data, and original
+renderings. See ATTRIBUTION.md for source-specific acknowledgements.

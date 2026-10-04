@@ -170,12 +170,14 @@ def test_the_deep_gate_runs_exactly_what_the_pull_request_surface_defers() -> No
         "exhaustive-2",
         "exhaustive-3",
         "screen",
+        "regularized-views",
     }
     assert selections["deferred-slow-lane"] == {"slow behavioral tests"}
     exhaustive_jobs = {f"exhaustive-{index}" for index in range(1, 4)}
     for job in exhaustive_jobs:
         assert selections[job] == {"exhaustive exact behavioral tests"}
     assert selections["screen"] == {"single-square translation escape screen"}
+    assert selections["regularized-views"] == {"regularized atlas views re-derive exactly"}
     ownership: dict[str, set[str]] = {}
     for job, selected in selections.items():
         for step in selected:

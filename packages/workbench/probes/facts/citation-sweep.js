@@ -40,6 +40,7 @@
             slot: line.classList.contains("cite-lower") ? "lower" : "upper",
             bound: line.querySelector(".cite-bound")?.textContent ?? null,
             text: line.querySelector(".cite-text")?.textContent ?? null,
+            corrects: line.querySelector(".cite-corrects")?.textContent ?? null,
             note: line.querySelector(".cite-note")?.textContent ?? null,
             left: x(box.left),
             right: x(box.right),

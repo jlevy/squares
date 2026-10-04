@@ -2002,6 +2002,21 @@ ci_gates:
       it is a process pool sized by `PACK_JOBS` and two workers were not enough. 1240s is
       1.36x of the record and well under `SCREEN_BUDGET_SECONDS` (1800s).
 
+  - id: regularized-views
+    measured_seconds: 310.0
+    measured_on: '2026-10-03'
+    measured_where: >-
+      The first hosted dispatch, run 37101062051 (the `deep-gate` label on PR 305 at
+      cbd0e02b1), job 111140659648: 310 s of job wall, 279.98 s of it the step itself.
+    spread: 1.00
+    ceiling_seconds: 450.0
+    argument: >-
+      The regularized atlas layer re-derived whole, one pooled step alone at
+      `--inner-jobs 4`. One hosted reading, so its spread is 1.00 until a second. The 450s ceiling derived
+      from the 2026-10-02 local readings (223.35s at four workers, 406.32s at two, 810.6s
+      of summed record time) is 1.45x the hosted job wall, inside the hosted pool's
+      observed slow class, and stays until further dispatches give a geometric mean.
+
 - id: post-merge
   file: .github/workflows/packing-validation.yml
   aggregate: post-merge-required
@@ -2136,3 +2151,14 @@ ci_gates:
     argument: >-
       Derived reporting estimate from the identically shaped deep-gate screen worker.
       That proxy is not an observation of this workflow's post-merge worker.
+  - id: regularized-views
+    measured_seconds: null
+    measured_on: null
+    measured_where: null
+    spread: null
+    pending_measurement: think-0atx
+    ceiling_seconds: 450.0
+    argument: >-
+      Derived reporting estimate from the identically shaped deep-gate
+      `regularized-views` worker, itself derived from local readings. That proxy is not
+      an observation of this workflow's post-merge worker.

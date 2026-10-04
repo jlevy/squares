@@ -7000,6 +7000,13 @@ const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
       .reverse();
     note.appendChild(row(angles, "Colors indicate distinct tilt angles"));
     note.appendChild(row(shades, "Shade indicates number of full-side contacts"));
+    // What the shade row cannot say by itself (X-049): a contact is counted in the retained
+    // pose, and an optimizer can leave a grid square a little off the row it plainly belongs to,
+    // so a light square is not always one with fewer neighbors. No swatches: it qualifies the row
+    // above rather than keying a new thing in the picture.
+    note.appendChild(
+      row([], "A lighter grid square can be loose in the source packing, not short of neighbors"),
+    );
   }
 
   layout();

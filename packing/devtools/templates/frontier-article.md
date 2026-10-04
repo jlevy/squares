@@ -34,6 +34,7 @@ work.
 **Recent results.** A star marks a recent verified lower bound, one proved since
 {{RECENT_SINCE}}, when this project’s work began.
 {{SURVEY_COUNTS}}
+{{CORRECTIONS}}
 
 **Seventeen squares.** Before this project’s work began, seven authors had published
 lower bounds for seventeen squares, some also for eighteen, all independently:

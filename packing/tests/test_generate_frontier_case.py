@@ -719,6 +719,7 @@ def test_a_unitsquare_case_takes_its_bound_and_its_blocker_from_the_release() ->
             UNITSQUARE_SOURCE_KEY,
             "[Nagamochi 2005]",
             "[Friedman DS7]",
+            "[Karakuş 2026]",
         ], n
         assert payload["evidence"][0] == UNITSQUARE_EVIDENCE, n
 
@@ -1165,12 +1166,13 @@ def test_the_summary_counts_the_methods_and_names_what_is_left_unknown() -> None
     assert "103" in unresolved
 
 
-def test_reported_green_bound_preserves_the_verified_nagamochi_precision() -> None:
+def test_reported_green_bound_preserves_the_verified_theorem_precision() -> None:
     """The source lane can improve without changing the certified theorem's digits.
 
     Read from the generator's own draft, before the reviewed promotion is applied: since
     2026-09-28 the committed record's reported lane carries wand125's 37/5, a promotion
-    the generator preserves rather than derives.
+    the generator preserves rather than derives. The certified theorem is Karakuş's general
+    bound since 2026-10-02; it was Nagamochi's closed form, `7.0827625303`, until then.
     """
     committed = _committed(50)[0]["packing"]
     arguments = {
@@ -1184,9 +1186,10 @@ def test_reported_green_bound_preserves_the_verified_nagamochi_precision() -> No
     assert payload["reported_lower_bound"]["evidence"] == [
         "E-green-ds7-theorem9-reported-lower"
     ]
-    assert payload["verified_lower_bound"]["value"] == "7.0827625303"
+    assert payload["verified_lower_bound"]["value"] == "7.07647321898"
     assert (
-        payload["verified_lower_bound"]["exact_form"] == "sqrt(50 - 2*floor(sqrt(50)) + 1) + 1"
+        payload["verified_lower_bound"]["exact_form"]
+        == "1/2 + sqrt(50 - floor(sqrt(50)) + 1/4)"
     )
 
 

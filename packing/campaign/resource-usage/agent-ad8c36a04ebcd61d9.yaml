@@ -1,0 +1,551 @@
+softschema:
+  contract: packing.squares:ClaudeEfficiencyRollup/v1
+  schema: ../schemas/claude-efficiency-rollup.schema.yaml
+  envelope: rollup
+  status: enforced
+rollup:
+  source:
+    harness: claude-code
+    filename: agent-ad8c36a04ebcd61d9.jsonl
+    sha256: f3e6e65a9d797271f56fe13b7c288f0f3501637611b6092e67d889b51bb58092
+    bytes: 2164905
+    records: 585
+    session_id: 6179239e-fec5-52e8-aabb-a0e229f3f822
+    harness_versions:
+    - 2.1.287
+  span:
+    started_at: '2026-10-02T06:38:22.165Z'
+    ended_at: '2026-10-02T07:09:51.928Z'
+    wall_seconds: 1889.763
+  turns:
+    assistant: 296
+    sidechain: 296
+    by_model:
+      model-withheld-a: 296
+    by_thinking_level:
+      xhigh: 296
+    by_model_and_thinking_level:
+      model-withheld-a @ xhigh: 296
+    by_branch:
+      claude/ecstatic-archimedes-62hj6a: 296
+    latency:
+      count: 294
+      total_seconds: 1536.831
+      median_seconds: 1.625
+      max_seconds: 141.635
+  tokens:
+    cache_creation_input_tokens: 1013296
+    cache_read_input_tokens: 78181170
+    ephemeral_1h_input_tokens: 0
+    ephemeral_5m_input_tokens: 1013296
+    input_tokens: 592
+    output_tokens: 5295
+    thinking_tokens: 1933
+  tokens_by_thinking_level:
+    xhigh:
+      cache_creation_input_tokens: 1013296
+      cache_read_input_tokens: 78181170
+      ephemeral_1h_input_tokens: 0
+      ephemeral_5m_input_tokens: 1013296
+      input_tokens: 592
+      output_tokens: 5295
+      thinking_tokens: 1933
+  tool_calls:
+    total: 130
+    total_seconds: 213.396
+    share_of_wall: 0.1129
+    errors: 0
+    denied: 0
+    unpaired_results: 0
+    outstanding_at_snapshot: 0
+    one_off_code:
+      count: 44
+      total_seconds: 117.633
+      median_seconds: 1.638
+      max_seconds: 11.328
+    by_tool:
+      Bash:
+        count: 116
+        total_seconds: 210.204
+        median_seconds: 0.669
+        max_seconds: 20.693
+      Grep:
+        count: 1
+        total_seconds: 1.782
+        median_seconds: 1.782
+        max_seconds: 1.782
+      SubagentHandback:
+        count: 2
+        total_seconds: 1.035
+        median_seconds: 0.517
+        max_seconds: 0.587
+      Read:
+        count: 6
+        total_seconds: 0.159
+        median_seconds: 0.02
+        max_seconds: 0.053
+      Write:
+        count: 3
+        total_seconds: 0.145
+        median_seconds: 0.036
+        max_seconds: 0.084
+      Edit:
+        count: 2
+        total_seconds: 0.071
+        median_seconds: 0.036
+        max_seconds: 0.044
+    by_command:
+      pytest && devtools.check_no_embedded_js:
+        count: 1
+        total_seconds: 20.693
+        median_seconds: 20.693
+        max_seconds: 20.693
+      uv run python:
+        count: 13
+        total_seconds: 15.664
+        median_seconds: 1.017
+        max_seconds: 2.361
+      python && ruff && basedpyright && devtools.audit_t007_consumers && pytest && python:
+        count: 2
+        total_seconds: 14.819
+        median_seconds: 7.41
+        max_seconds: 7.694
+      grep:
+        count: 14
+        total_seconds: 12.204
+        median_seconds: 0.625
+        max_seconds: 2.129
+      'python && s(34): && a && ruff && basedpyright && devtools.audit_t007_consumers && ls && devtools.audit_t007_consumers':
+        count: 1
+        total_seconds: 11.328
+        median_seconds: 11.328
+        max_seconds: 11.328
+      sed:
+        count: 17
+        total_seconds: 9.276
+        median_seconds: 0.496
+        max_seconds: 0.877
+      devtools.audit_t007_consumers && (uv && pytest && ruff && ruff && basedpyright && git:
+        count: 1
+        total_seconds: 7.571
+        median_seconds: 7.571
+        max_seconds: 7.571
+      python && ruff && ruff && basedpyright && devtools.audit_t007_consumers && (uv && git:
+        count: 1
+        total_seconds: 7.438
+        median_seconds: 7.438
+        max_seconds: 7.438
+      ? devtools.audit_t007_consumers && pytest && (uv && devtools.audit_t007_consumers &&
+        ls && e && print(json.dumps(f[SYNOPSIS.md],
+      : count: 1
+        total_seconds: 7.353
+        median_seconds: 7.353
+        max_seconds: 7.353
+      python && it && the && ruff && basedpyright:
+        count: 1
+        total_seconds: 6.482
+        median_seconds: 6.482
+        max_seconds: 6.482
+      find:
+        count: 1
+        total_seconds: 6.4
+        median_seconds: 6.4
+        max_seconds: 6.4
+      python && ruff && basedpyright && devtools.audit_t007_consumers && pytest:
+        count: 1
+        total_seconds: 6.372
+        median_seconds: 6.372
+        max_seconds: 6.372
+      python && ruff && ruff && basedpyright && devtools.audit_t007_consumers:
+        count: 1
+        total_seconds: 6.113
+        median_seconds: 6.113
+        max_seconds: 6.113
+      python && ruff && basedpyright && pytest:
+        count: 1
+        total_seconds: 4.695
+        median_seconds: 4.695
+        max_seconds: 4.695
+      pytest && ruff && ruff && basedpyright:
+        count: 1
+        total_seconds: 4.68
+        median_seconds: 4.68
+        max_seconds: 4.68
+      head:
+        count: 9
+        total_seconds: 4.251
+        median_seconds: 0.438
+        max_seconds: 0.736
+      ? "python && 92 && 10 && Nagamochi && 0.34 && ,\n            ,\n            The && 92\
+        \ && 10 && Nagamochi && 0.34 && ruff && basedpyright"
+      : count: 1
+        total_seconds: 4.224
+        median_seconds: 4.224
+        max_seconds: 4.224
+      devtools.audit_t007_consumers && python:
+        count: 1
+        total_seconds: 3.848
+        median_seconds: 3.848
+        max_seconds: 3.848
+      ^ && ^:
+        count: 1
+        total_seconds: 3.628
+        median_seconds: 3.628
+        max_seconds: 3.628
+      ruff && ruff && basedpyright:
+        count: 1
+        total_seconds: 3.578
+        median_seconds: 3.578
+        max_seconds: 3.578
+      devtools.audit_t007_consumers && python && ls:
+        count: 1
+        total_seconds: 3.375
+        median_seconds: 3.375
+        max_seconds: 3.375
+      pdftotext && pdftotext:
+        count: 1
+        total_seconds: 3.34
+        median_seconds: 3.34
+        max_seconds: 3.34
+      python && the && ruff && basedpyright:
+        count: 1
+        total_seconds: 3.321
+        median_seconds: 3.321
+        max_seconds: 3.321
+      python && ) if line.lstrip().startswith( && devtools.audit_t007_consumers:
+        count: 1
+        total_seconds: 3.267
+        median_seconds: 3.267
+        max_seconds: 3.267
+      devtools.audit_t007_consumers && pytest:
+        count: 1
+        total_seconds: 3.059
+        median_seconds: 3.059
+        max_seconds: 3.059
+      'relies, a.ranges(f[relies_lines]) or -, ':
+        count: 1
+        total_seconds: 3.039
+        median_seconds: 3.039
+        max_seconds: 3.039
+      ls && ls:
+        count: 4
+        total_seconds: 2.469
+        median_seconds: 0.615
+        max_seconds: 0.777
+      python && git:
+        count: 1
+        total_seconds: 2.046
+        median_seconds: 2.046
+        max_seconds: 2.046
+      'python && nothing && construction && proved && neither && it && print({x:':
+        count: 1
+        total_seconds: 1.955
+        median_seconds: 1.955
+        max_seconds: 1.955
+      ? "python && ⌊ && \\\\lfloor) && ⌊ && \\\\lfloor) && counterexample && incomplete &&\
+        \ published && proof && does && not && unestablished && disputed && scoring && assertion)\
+        \ && lemma && ) if NAMES.search(cell)]\n        if line.lstrip().startswith( && )\
+        \ if line.lstrip().startswith("
+      : count: 1
+        total_seconds: 1.684
+        median_seconds: 1.684
+        max_seconds: 1.684
+      ls:
+        count: 3
+        total_seconds: 1.681
+        median_seconds: 0.533
+        max_seconds: 0.618
+      wc:
+        count: 1
+        total_seconds: 1.618
+        median_seconds: 1.618
+        max_seconds: 1.618
+      pdftotext:
+        count: 2
+        total_seconds: 1.539
+        median_seconds: 0.77
+        max_seconds: 0.788
+      pdfinfo:
+        count: 1
+        total_seconds: 1.515
+        median_seconds: 1.515
+        max_seconds: 1.515
+      time uv run python -m devtools.audit_t007_consumers:
+        count: 1
+        total_seconds: 1.498
+        median_seconds: 1.498
+        max_seconds: 1.498
+      cat:
+        count: 3
+        total_seconds: 1.309
+        median_seconds: 0.435
+        max_seconds: 0.507
+      mkdir && curl && curl && file:
+        count: 1
+        total_seconds: 1.226
+        median_seconds: 1.226
+        max_seconds: 1.226
+      uv run pytest:
+        count: 1
+        total_seconds: 0.932
+        median_seconds: 0.932
+        max_seconds: 0.932
+      python && a:
+        count: 1
+        total_seconds: 0.925
+        median_seconds: 0.925
+        max_seconds: 0.925
+      ? "python && es && en && ing) && establish\\w* && theorem && identit(?:y && ies) &&\
+        \ famil(?:y && ies)\n    r && verified && exact && floor\\w* && closed[ && formula\
+        \ && governed && default && counterexample && incomplete && published && proof &&\
+        \ does && not && unestablished && disputed && paragraph && `relies` && ) if NAMES.search(cell)]\n\
+        \        if line.lstrip().startswith( && None: && it"
+      : count: 1
+        total_seconds: 0.865
+        median_seconds: 0.865
+        max_seconds: 0.865
+    by_command_family:
+      toolchain:
+        count: 34
+        total_seconds: 121.787
+        median_seconds: 1.998
+        max_seconds: 20.693
+      inspection:
+        count: 54
+        total_seconds: 40.16
+        median_seconds: 0.528
+        max_seconds: 6.4
+      project:
+        count: 6
+        total_seconds: 26.704
+        median_seconds: 3.611
+        max_seconds: 7.571
+      other:
+        count: 14
+        total_seconds: 17.287
+        median_seconds: 0.654
+        max_seconds: 3.628
+      vcs:
+        count: 6
+        total_seconds: 2.653
+        median_seconds: 0.406
+        max_seconds: 0.628
+      filesystem:
+        count: 1
+        total_seconds: 1.226
+        median_seconds: 1.226
+        max_seconds: 1.226
+      shell:
+        count: 1
+        total_seconds: 0.387
+        median_seconds: 0.387
+        max_seconds: 0.387
+    invoked:
+      grep: 147
+      cd: 104
+      head: 68
+      sed: 47
+      uv run python: 34
+      tail: 29
+      ls: 20
+      cut: 19
+      echo: 17
+      uv run ruff check: 14
+      uv run basedpyright: 13
+      uv run python -m devtools.audit_t007_consumers: 11
+      uv run pytest: 10
+      wc: 7
+      cat: 6
+      git ls-files: 6
+      pdftotext: 5
+      ²: 5
+      −: 5
+      sort: 5
+      awk: 5
+      uv run ruff format: 5
+      ^{2})[[:space:]]*(-: 4
+      ⌊: 4
+      time uv run python -m devtools.audit_t007_consumers: 4
+      '[kmn](^2': 3
+      ^: 3
+      \\lfloor): 3
+      it: 3
+      a: 3
+      git status: 3
+      time (uv: 3
+      '92': 3
+      '10': 3
+      Nagamochi: 3
+      '0.34': 3
+      find: 2
+      curl: 2
+      uniq: 2
+      counterexample: 2
+      incomplete: 2
+      published: 2
+      proof: 2
+      does: 2
+      not: 2
+      unestablished: 2
+      disputed: 2
+      ? ") if NAMES.search(cell)]\n        if line.lstrip().startswith("
+      : 2
+      ) if line.lstrip().startswith(: 2
+      the: 2
+      'vub, case[verified_upper_bound][value], case[verified_upper_bound][evidence], ': 1
+      mkdir: 1
+      file: 1
+      which: 1
+      pdfinfo: 1
+      www: 1
+      '[kmnN](^2': 1
+      –)[[:space:]]*[12]b: 1
+      2s**?s*(floor: 1
+      ^{2}): 1
+      –): 1
+      min(ceil: 1
+      git squares: 1
+      sha256sum: 1
+      uv run python audit_t007_consumers.py: 1
+      es: 1
+      en: 1
+      ing): 1
+      establish\w*: 1
+      theorem: 1
+      identit(?:y: 1
+      ies): 1
+      famil(?:y: 1
+      ? "ies)\n    r"
+      : 1
+      verified: 1
+      exact: 1
+      floor\w*: 1
+      closed[: 1
+      formula: 1
+      governed: 1
+      default: 1
+      paragraph: 1
+      '`relies`': 1
+      'None:': 1
+      scoring: 1
+      assertion): 1
+      lemma: 1
+      tr: 1
+      's(34):': 1
+      timeout uv run python -m devtools.check_no_embedded_js: 1
+      nothing: 1
+      construction: 1
+      proved: 1
+      neither: 1
+      'print({x:': 1
+      'relies, a.ranges(f[relies_lines]) or -, ': 1
+      ? ",\n            ,\n            The"
+      : 1
+      e: 1
+      print(json.dumps(f[SYNOPSIS.md],: 1
+    invoked_families:
+      inspection: 339
+      other: 138
+      shell: 122
+      toolchain: 78
+      project: 16
+      vcs: 10
+      filesystem: 1
+    by_shell_shape:
+      compound:
+        count: 66
+        total_seconds: 88.36
+        median_seconds: 0.539
+        max_seconds: 20.693
+      python_heredoc:
+        count: 20
+        total_seconds: 78.133
+        median_seconds: 3.294
+        max_seconds: 11.328
+      python_inline:
+        count: 24
+        total_seconds: 39.5
+        median_seconds: 1.223
+        max_seconds: 7.353
+      pipeline:
+        count: 5
+        total_seconds: 3.823
+        median_seconds: 0.425
+        max_seconds: 2.129
+      simple:
+        count: 1
+        total_seconds: 0.388
+        median_seconds: 0.388
+        max_seconds: 0.388
+    by_thinking_level:
+      xhigh:
+        count: 130
+        total_seconds: 213.396
+        median_seconds: 0.609
+        max_seconds: 20.693
+    shell_traits:
+      pipes: 103
+      redirects_output: 16
+      substitutes: 2
+  session_events:
+    compact_boundaries: 0
+    stop_hook_summaries: 0
+    queue_operations: {}
+  semantics:
+    wall_seconds: First to last timestamped record. It is elapsed session time and includes
+      every interval in which nothing was running, so it is an upper bound on work and never
+      a measure of it.
+    tool_call_seconds: From the assistant record issuing a tool_use to the user record carrying
+      its tool_result. It therefore includes harness scheduling and any permission wait, not
+      only the tool's own execution.
+    model_seconds: UNAVAILABLE for this harness. Claude Code's transcript records no timed
+      model-stream items and no first-token latency, so model time cannot be separated from
+      the interval before a turn's record is written. It is absent rather than zero, and a
+      consumer that sums it with a harness that does report it must carry the gap forward.
+    turns.latency: 'From a turn''s parent record to the turn itself. It is the closest thing
+      here to model time and is NOT model time: it also carries queueing, the user''s own
+      thinking time before a reply, and any wait for a permission prompt. Read the median,
+      not the maximum.'
+    share_of_wall: tool_call_seconds over wall_seconds. Concurrent calls are summed independently,
+      so on a session that backgrounds work this can exceed one and is a load figure, not
+      an occupancy figure.
+    tokens: 'As the harness reported them per turn, summed. Cache creation and cache read
+      are distinct from input tokens and are not double-counted here, but no cost is derived:
+      pricing is not this record''s and a stored price goes stale silently.'
+    tokens_by_thinking_level: The same counters split by the effort the harness recorded for
+      each turn. This is what makes OR-2's 'matched to the task' claim answerable rather than
+      asserted.
+    by_shell_shape: Structural classification of shell commands in a fixed priority order,
+      so a Python heredoc that also pipes counts as a Python heredoc. `python_heredoc` and
+      `python_inline` are the shapes OR-1 calls one-off code; a session with many of them
+      was writing scripts where it should have been building a tool.
+    by_command: 'The tool a shell command actually runs. Every chain is split into components,
+      shell bookkeeping and text munging are dropped, and what is left names the command:
+      one component and it takes the full invoked form, so `uv run packing-validate` keeps
+      its runner and `grep -rn x . | head -5` is `grep`; several and the name is the chain
+      of bare tools, so `make format && git add -A && git push` is `make && git && git`. Peeling
+      matters more than it sounds: keyed on the leading word instead, `cd` led 524 of 882
+      commands here. Past 256 distinct names the tail folds into `(other)`, which is a long
+      tail of odd commands or a resolver bug rather than anything to act on.'
+    invoked: 'Every tool reached for, counted across all segments of every command, not just
+      the one a call''s time was attributed to. Counts and never elapsed: most commands here
+      run several tools and the transcript times the call rather than the pipeline, so how
+      often a CLI was used is knowable and its share of the clock is not. This is the table
+      that answers which instruments a session actually uses; `by_command` answers where its
+      measured time went.'
+    by_command_family: Our own instruments against everything else. `project` is this repository's
+      CLIs and modules, `toolchain` the language tooling, `inspection` the reading and searching
+      a session does to orient itself. Time in `packing-validate` and time in `grep` are both
+      real and are not the same kind of cost.
+    errors: tool_result blocks the harness marked is_error. A failed call still spends its
+      elapsed time, and the count is here so a rising failure rate is visible rather than
+      hidden inside the total.
+    unpaired_results: tool_result blocks whose tool_use was not seen, which is normal for
+      a log that begins mid-session after a compaction. A large count means the elapsed figures
+      cover less than the session does.
+    session_events.queue_operations: Messages queued and withdrawn while a turn was running.
+      An enqueue is an interjection, which is a signal about the session's pacing rather than
+      about any tool.
+    excluded: 'Every prose body: assistant text, thinking text, user messages, tool stdout
+      and stderr, file contents, and diffs. This record is not a transcript and cannot be
+      read as one.'

@@ -384,7 +384,8 @@ OCTOBER_1_REGISTRATION = Registration(
     # s(78) = 9, and wand125's mixed certificates at n37, n66 and n90 (n65 and n92 have no
     # rectangle certificate). `plans` leaves their reported fields alone because the
     # record holds more, and a replayed rectangle certificate still raises their
-    # verified lane, which sits at Nagamochi's bound until one of those claims is replayed.
+    # verified lane, which sat at Nagamochi's bound until one of those claims was replayed
+    # (at Karakus's weaker bound since 2026-10-02, when Nagamochi's Lemma 1 proved false).
     superseded_priors={
         21: "evand/square-packing s(21) = 5 supersedes 399/80",
         32: "evand/square-packing s(32) = 6 supersedes 119/20 and the n31 transfer 2381/400",

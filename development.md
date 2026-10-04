@@ -146,7 +146,7 @@ The
 owns the current work on cost, naming, and checkpoint placement.
 
 Use **PR fast surface** for `--fast`, **full checkpoint** for the default command, and
-**deferred checkpoint** for the eleven steps outside PR fast coverage.
+**deferred checkpoint** for the twelve steps outside PR fast coverage.
 The advisory `Deferred checkpoint` workflow runs those steps.
 **Golden rebuild** means `--deep`, which also regenerates expensive golden producers;
 **strict checkpoint** means `--strict`, which includes that rebuild and refuses skipped
@@ -165,25 +165,25 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 39 of 92 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 54 of 92 | 240 s | 59.4 s |
+| `--records` | contributor, before touching a registry; also every pull request | 43 of 98 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 58 of 98 | 240 s | 59.4 s |
 | `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 80 of 92 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 57 of 92 | 140 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 92 | 150 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 92 | 111 s | 76.5 s, the centre of eighteen hosted readings, with the band 56.67–92.27 s that its two runner regimes span |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 92 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 92 | 131 s | 114.58 s, the geometric mean of twelve hosted readings on 2026-10-01 of the three-shard partition after the day’s growth, band 83.91–128.65 s (1.53x); two more walls that day, 131.58 and 132.67 s, were over the ceiling with every test green and are named, not averaged; the 85.03 s two-reading record stays in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 92 | 154 s | 114.38 s, the geometric mean of eleven hosted readings on 2026-10-01 of the same partition, band 79.30–139.35 s (1.76x); the 104.65 s single reading stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 92 | 154 s | 132.05 s, the geometric mean of eleven hosted readings on 2026-10-01 after the day’s files landed in it, band 90.34–147.16 s (1.63x); the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 92 | 131 s | pending its first hosted cohort under `think-t7k5`; the record’s cohort predicts about 84 s for its 278.9 test-second share |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 4 of 92 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 1 of 92 | 90 s | pending its first hosted cohort under `think-th8p`; its one step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 92 of 92 | 3600 s | integration plus nine deferred workers; new whole-wall measurement pending |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 85 of 98 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 61 of 98 | 140 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 98 | 150 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 98 | 111 s | 76.5 s, the centre of eighteen hosted readings, with the band 56.67–92.27 s that its two runner regimes span |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 98 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 98 | 131 s | 114.58 s, the geometric mean of twelve hosted readings on 2026-10-01 of the three-shard partition after the day’s growth, band 83.91–128.65 s (1.53x); two more walls that day, 131.58 and 132.67 s, were over the ceiling with every test green and are named, not averaged; the 85.03 s two-reading record stays in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 98 | 154 s | 114.38 s, the geometric mean of eleven hosted readings on 2026-10-01 of the same partition, band 79.30–139.35 s (1.76x); the 104.65 s single reading stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 98 | 154 s | 132.05 s, the geometric mean of eleven hosted readings on 2026-10-01 after the day’s files landed in it, band 90.34–147.16 s (1.63x); the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 98 | 131 s | pending its first hosted cohort under `think-t7k5`; the record’s cohort predicts about 84 s for its 278.9 test-second share |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 98 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 1 of 98 | 90 s | pending its first hosted cohort under `think-th8p`; its one step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 98 of 98 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 89-step registry.
-Dated costs retain their measured source and resource shape; they are not fresh
-measurements of the new scheduling.
+Step counts describe the current 98-step registry, read from `packing-validate --list`
+on 2026-10-03. Dated costs retain their measured source and resource shape; they are not
+fresh measurements of the new scheduling.
 
 `--geometry`’s recorded cost is the geometric mean of seven readings at the reference
 shape. The earlier four-reading baseline remains in the register’s history.
@@ -459,14 +459,15 @@ mode `D-466` records.
 The deferred checkpoint runs slow behavioural tests, exhaustive exact tests, negative
 controls, the n=40 rigidity replay, the whole known-best atlas rebuild, the whole
 single-square translation escape screen, and the whole exact rational grid replay.
-T-024 and T-026 add four exact dilation-limit replays at 720 and 1440 steps.
-These are the eleven steps outside the [PR fast surface](#validation-tiers).
+T-024 and T-026 add four exact dilation-limit replays at 720 and 1440 steps, and
+`think-bgkz` adds the exact re-derivation of the regularized atlas views.
+These are the twelve steps outside the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
 
-The deferred workflow resolves one immutable checkout and distributes the work over nine
-jobs: a slow-test job, a screen job, three exhaustive-test shards, and four groups of
-whole deferred checks.
+The deferred workflow resolves one immutable checkout and distributes the work over ten
+jobs: a slow-test job, a screen job, a regularized-views job, three exhaustive-test
+shards, and four groups of whole deferred checks.
 Exhaustive shards partition test files using retained costs; new files receive a
 deterministic assignment.
 Every shard keeps the same exhaustive marker and complete test bodies.
@@ -476,7 +477,7 @@ Timing artifacts have distinct job names and record the checked-out commit.
 For a dispatched PR, that resolved merge commit can differ from the workflow dispatch
 ref; the checkout receipt identifies the source actually validated.
 Main, daily and manually dispatched packing validation use the same deferred groups.
-Their separate `post-merge-required` aggregate requires the integration job and all nine
+Their separate `post-merge-required` aggregate requires the integration job and all ten
 deferred workers to succeed; the seven-job PR aggregate remains separate.
 
 The last three joined on 2026-09-07 because the corpus tripled, not because the gate
@@ -502,6 +503,52 @@ every step no pull-request job runs.
 So the pull-request surface and the deep gate together are the whole gate, and another
 deferral argued into `test_the_pull_request_surface_defers_only_what_was_measured` fails
 until it is added here too.
+
+Each job runs whole steps one at a time, under the wall ceiling `ci_gates` in
+[`gate-budgets.yaml`](packing/devtools/gate-budgets.yaml) declares for it.
+The four groups and the two pooled solo jobs divide the whole steps this way:
+
+| Deferred job | Steps | Shape |
+| --- | --- | --- |
+| `deferred-threshold-1440` | threshold dilation-limit record, 1440 steps | `--jobs 1 --inner-jobs 2` |
+| `deferred-atlas-grid` | known-best n=1..324 atlas rebuild; finer-net dilation-limit record, 720 steps; exact rational grid replay | `--jobs 1 --inner-jobs 2` |
+| `deferred-controls-finer` | negative controls; finer-net dilation-limit record, 1440 steps | `--jobs 1 --inner-jobs 2` |
+| `deferred-threshold-720-rigidity` | threshold dilation-limit record, 720 steps; n=40 rigidity bracket still reproduces | `--jobs 1 --inner-jobs 2` |
+| `screen` | single-square translation escape screen | `--jobs 1 --inner-jobs 4` |
+| `regularized-views` | regularized atlas views re-derive exactly | `--jobs 1 --inner-jobs 4` |
+
+`regularized atlas views re-derive exactly` joined the deferred surface on 2026-10-02
+(`think-bgkz`). It runs `devtools.regularize_axis_components --verify-atlas`, which
+regularizes every record of the
+[derived layer](packing/atlas/known-best/README.md#the-regularized-views) again from its
+witness, re-runs both exact verifications, and requires the index and every retained
+view to come out byte-identical.
+Its stand-in on every pull request is the records-tier step `regularized atlas views
+match their index`, which compares the same index with the manifest, the witnesses and
+the views by digest in about a tenth of a second.
+The tool’s pool follows `PACK_JOBS`.
+
+It was measured on 2026-10-02 on a four-cpu host that other sessions were also using, so
+read these as upper bounds:
+
+| Workers | Wall | Summed record time | Host load average |
+| ---: | ---: | ---: | --- |
+| 1 | 814.40 s, 796.84 s of user cpu | 812.8 s | 1 to 5 |
+| 2 | 406.32 s | 810.6 s | 4 to 6 |
+| 2, as the gate step at `--jobs 1 --inner-jobs 2` | 531.42 s | — | 6 to 10 |
+| 4 | 223.35 s | 882.1 s | 1 to 6 |
+
+The work is about 800 cpu-seconds, so the layer’s earlier figure of about five minutes
+was a pooled wall rather than its serial cost.
+At `--inner-jobs 2` beside the atlas rebuild it would have taken `deferred-atlas-grid`,
+475 s on run 36636552951, to about 900 s, its whole ceiling.
+So it runs alone at four workers, as the screen does, and its 450 s ceiling is derived
+from the four-worker reading until the first dispatch measures it.
+The extra runner adds no wall: the longest exhaustive shard, at 957 s, set that run’s
+1133 s wall. More workers do not bring it to the pull-request surface either: at the
+`sweeps` job’s `--inner-jobs 2` it is about 400 s, twice that job’s 200 s ceiling, and a
+tenth pull-request runner at four workers would cost about four minutes of wall with
+setup.
 
 The [dated measurement above](#the-tiers) is about 27 minutes.
 Both jobs need profiling: improving only the exhaustive job can leave the integration
@@ -781,16 +828,16 @@ lanes and gave xdist to the quick half only, leaving the half selected for costi
 most as the one place in the gate that ran a test suite serially.
 Avoid assuming that either flag alone caps total host concurrency.
 
-The screen and exhaustive shard jobs use `--jobs 1 --inner-jobs 4` on the hosted
-four-CPU runners. The slow lane also has its own job, using `--jobs 1 --inner-jobs 2`:
-xdist supplies four test workers, while tests that create their own pools retain two
-inner workers. Each hosted deferred-check group runs one whole step at a time on its own
-runner with `--jobs 1 --inner-jobs 2`, preserving PR #120’s response to the concurrent
-corpus-pool timeout in
-[run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739). The
-workflow tests derive selections through the CLI and require complete, disjoint coverage
-in both workflows. They also require full Git history wherever the slow retained-theorem
-review runs.
+The screen, regularized-views and exhaustive shard jobs use `--jobs 1 --inner-jobs 4` on
+the hosted four-CPU runners.
+The slow lane also has its own job, using `--jobs 1 --inner-jobs 2`: xdist supplies four
+test workers, while tests that create their own pools retain two inner workers.
+Each hosted deferred-check group runs one whole step at a time on its own runner with
+`--jobs 1 --inner-jobs 2`, preserving PR #120’s response to the concurrent corpus-pool
+timeout in [run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739).
+The workflow tests derive selections through the CLI and require complete, disjoint
+coverage in both workflows.
+They also require full Git history wherever the slow retained-theorem review runs.
 
 The efficiency review records the
 [allocation and measurement contract](docs/project/reviews/review-2026-09-29-validation-parallelism.md).

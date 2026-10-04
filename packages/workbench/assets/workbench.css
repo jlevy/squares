@@ -907,6 +907,14 @@ body.drawing #packing-svg #squares {
   color: var(--scene-heading);
   font-weight: var(--stage-weight-label);
 }
+/* The published work a lower bound corrects, `corrects Nagamochi 2005`, between the reference
+   and the note, in the note's quieter grey: like the note it is said about the bound rather than
+   part of its source, and the star's scarlet stays the `new result` badge's alone (the owner,
+   2026-10-02). */
+.cite-corrects {
+  color: var(--scene-heading);
+  font-weight: var(--stage-weight-label);
+}
 #facts.shows-citations .head-open {
   top: 746px;
 }

@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **75** programs: **30** external and **45** first-party; **62** decide claims and **13** check premises.
-- **226** of **247** evidence entries name the programs that verified them: 165 reproduced with the producer’s code, 45 independently re-implemented, 9 no relation: a proof, a derivation or a report, 7 re-implemented, sharing the producer’s components.
+- **78** programs: **31** external and **47** first-party; **64** decide claims and **14** check premises.
+- **228** of **251** evidence entries name the programs that verified them: 166 reproduced with the producer’s code, 46 independently re-implemented, 9 no relation: a proof, a derivation or a report, 7 re-implemented, sharing the producer’s components.
 
 ## Programs
 
@@ -47,6 +47,7 @@ second implementation agrees.
 | [`V-evand-zmcheck`](#v-evand-zmcheck) | zmcheck (verify2/src/main.rs) | Evan Daniel | external | decides | 3 | 2 |
 | [`V-evand-qx2-zm-py`](#v-evand-qx2-zm-py) | qx2_zm.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-lean`](#v-evand-lean) | The source's Lean development (lean/) | Evan Daniel | external | decides | 7 | 5 |
+| [`V-chelokot-lean`](#v-chelokot-lean) | The source's Lean development (formal/) | chelokot | external | decides | 1 | 1 |
 | [`V-kleddamag-n11-verify`](#v-kleddamag-n11-verify) | verify.py | Kleddamag | external | decides | 4 | 2 |
 | [`V-kleddamag-n17-verify`](#v-kleddamag-n17-verify) | verify.py | Kleddamag | external | decides | 9 | 5 |
 | [`V-wang-li-n11-verify`](#v-wang-li-n11-verify) | verify.py of the Zenodo release | Wang and Li | external | decides | 2 | 1 |
@@ -62,10 +63,11 @@ second implementation agrees.
 | [`V-squarepacker-indep-check-cpp`](#v-squarepacker-indep-check-cpp) | indep_check.cpp | squarepacker | external | decides | 2 | 1 |
 | [`V-schadt-n29-check-py`](#v-schadt-n29-check-py) | check.py | Schadt | external | decides | 1 | 0 |
 | [`V-anabologyco-n17-checker`](#v-anabologyco-n17-checker) | scripts/check_certificate.py and its event pipeline | anabologyco-maker | external | decides | 1 | 0 |
-| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 12 |
+| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 14 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 12 | 2 |
 | [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 4 | 3 |
+| [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-upper-bound-intervals`](#v-upper-bound-intervals) | devtools.upper_bound_intervals | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-sqpack-cover`](#v-sqpack-cover) | sqpack.cover | Squares Project (Levy) | first-party | decides | 4 | 8 |
@@ -101,6 +103,7 @@ second implementation agrees.
 | [`V-audit-wand125-rectangles`](#v-audit-wand125-rectangles) | devtools.audit_wand125_rectangles | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
+| [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 5 | 5 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 9 | 8 |
 | [`V-audit-s12-reweighted`](#v-audit-s12-reweighted) | devtools.audit_s12_reweighted | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -459,6 +462,20 @@ Kernel-checks a value of s(n) from a checker-cover hypothesis: for s(13) = 4 the
 | `E-k2m4-evand-family-report` | the source’s own run | producer’s code | T-081 |
 | `E-k2m4-evand-lean-report` | the source’s own run | producer’s code | T-081 |
 
+### `V-chelokot-lean`
+
+**The source's Lean development (formal/), built by lake at its pinned toolchain** · chelokot · external · decides · Lean 4 · proof-assistant-checked
+
+Kernel-checks Records.NearSquare.squareMinusTwo_isMinimumSide, s(n^2 - 2) = n for every n >= 2, by compensating each low-scoring square under Nagamochi's measure from other squares of the packing, without his Lemma 1.
+
+- Source: [`packing/resources/web/chelokot-nagamochi-counterexample-2026-10-02/README.md`](../../packing/resources/web/chelokot-nagamochi-counterexample-2026-10-02/README.md), [`packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/receipt.json`](../../packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/receipt.json)
+- Versions run: revision `753079eb37d8` (the build here, with Mathlib's official cache)
+- Note: The development is pinned by digest in the packet README and not retained; the replay clones it at the pinned commit, and the receipt records the build and the axioms.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-chelokot-square-minus-two-lean` | replayed here | producer’s code | T-086 |
+
 ### `V-kleddamag-n11-verify`
 
 **verify.py, its Python checker and its JavaScript BigInt secondary checker** · Kleddamag · external · decides · Python, JavaScript · exact-algebraic
@@ -684,7 +701,7 @@ Derives and checks the elementary bounds exactly: the grid upper bound, the area
 
 | evidence | run | code | results |
 | --- | --- | --- | --- |
-| `E-basic-grid-upper` | replayed here | independent | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081 |
+| `E-basic-grid-upper` | replayed here | independent | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086 |
 | `E-basic-area-lower` | replayed here | independent | - |
 | `E-n012-monotonicity-lower` | replayed here | independent | - |
 
@@ -743,6 +760,21 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-n029-schadt-rational-upper` | replayed here | independent | - |
 | `E-franciscouzo-2026-09-27-exact-replay` | replayed here | independent | T-056 |
 | `E-n211-de-winter-exact-replay` | replayed here | independent | T-057 |
+
+### `V-check-nagamochi-lemma1-counterexample`
+
+**devtools.check_nagamochi_lemma1_counterexample** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Scores Karakuş's squares K_t and chelokot's square against Nagamochi 2005's measure in Fraction arithmetic from their printed coordinates, deciding that each scores below one under either boundary convention.
+
+- Source: [`packing/devtools/check_nagamochi_lemma1_counterexample.py`](../../packing/devtools/check_nagamochi_lemma1_counterexample.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md`](../../docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md)
+- Note: The review's table of sources records what its authors read; the tool recomputes both counterexamples from their printed coordinates, and chelokot's Python checker was not run.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-nagamochi-lemma1-counterexample` | replayed here | independent | T-085 |
 
 ### `V-upper-bound-promotion`
 
@@ -1276,6 +1308,19 @@ The audit, replay driver and controls for wand125's linear certificates.
 | `E-n083-wand125-linear-935-source-replay` | replayed here | producer’s code | T-073 |
 | `E-n101-wand125-linear-1028-source-replay` | replayed here | producer’s code | T-080 |
 | `E-n082-wand125-linear-932-source-replay` | replayed here | producer’s code | T-076 |
+
+### `V-replay-chelokot-lean`
+
+**devtools.replay_chelokot_lean** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Clones chelokot's archive at the pinned commit, checks the toolchain, manifest, statement text and every .lean file for sorry, custom axioms and native_decide, builds it, reruns its axiom assertions and policy test, and checks the retained receipt offline.
+
+- Source: [`packing/devtools/replay_chelokot_lean.py`](../../packing/devtools/replay_chelokot_lean.py)
+- Versions run: this repository's commits, which Git holds
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-chelokot-square-minus-two-lean` | replayed here | producer’s code | T-086 |
 
 ### `V-replay-evand-zmx2`
 

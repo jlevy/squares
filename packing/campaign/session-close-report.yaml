@@ -7,19 +7,19 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 165
+count: 167
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 111
+  sessions_measured: 113
   sessions_unmeasured: 54
   attributed:
-    rollups: 254
-    turns: 63978
-    tool_calls: 35394
-    tool_errors: 773
-    one_off_code: 5088
-    wall_hours: 557.08
+    rollups: 275
+    turns: 73865
+    tool_calls: 40690
+    tool_errors: 860
+    one_off_code: 5798
+    wall_hours: 629.1
   unattributed:
     rollups: 65
     turns: 14196
@@ -28,12 +28,12 @@ totals:
     one_off_code: 1184
     wall_hours: 67.13
   measured:
-    rollups: 319
-    turns: 78174
-    tool_calls: 43543
-    tool_errors: 958
-    one_off_code: 6272
-    wall_hours: 624.21
+    rollups: 340
+    turns: 88061
+    tool_calls: 48839
+    tool_errors: 1045
+    one_off_code: 6982
+    wall_hours: 696.23
 codex_receipts:
   attributed: 68
   unattributed: 2
@@ -2857,3 +2857,51 @@ sessions:
     active_union_hours: 3.96
     wall_hours: 3.96
     snapshot_incomplete: true
+- id: session-168
+  title: "Families of Known-Best Packings, Contact Shading, and the Large-n Limit"
+  status: completed
+  primary_bead: think-los0
+  phases: 9
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/6179239e-fec5-52e8-aabb-a0e229f3f822.yaml
+  - packing/campaign/resource-usage/agent-a30ab1dd97b959c63.yaml
+  - packing/campaign/resource-usage/agent-a4a764a6285487659.yaml
+  - packing/campaign/resource-usage/agent-a665a16af102749a0.yaml
+  - packing/campaign/resource-usage/agent-a68c888b24723b197.yaml
+  - packing/campaign/resource-usage/agent-a86fe91008fdb802b.yaml
+  - packing/campaign/resource-usage/agent-a92ea862bac5a1405.yaml
+  - packing/campaign/resource-usage/agent-a9f4406a56646937f.yaml
+  - packing/campaign/resource-usage/agent-abfdcf4d3642c3fe2.yaml
+  - packing/campaign/resource-usage/agent-ad8c36a04ebcd61d9.yaml
+  - packing/campaign/resource-usage/agent-ae1c5c75727ba7c4d.yaml
+  - packing/campaign/resource-usage/agent-ab5f6ac0531baee62.yaml
+  - packing/campaign/resource-usage/agent-a2f9102eba6720d45.yaml
+  - packing/campaign/resource-usage/agent-a5e0eae4c2694a29b.yaml
+  - packing/campaign/resource-usage/agent-a72b23ec598f03d8c.yaml
+  - packing/campaign/resource-usage/agent-a0ce03a4c2b6775a7.yaml
+  turns: 7138
+  tool_calls: 3669
+  tool_errors: 31
+  one_off_code: 603
+  wall_hours: 57.11
+  codex_receipts: []
+- id: session-169
+  title: "One Record per Line for Retained Results, and PR 305's Size"
+  status: completed
+  primary_bead: think-gmef
+  phases: 2
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/6179239e-fec5-52e8-aabb-a0e229f3f822.yaml
+  - packing/campaign/resource-usage/agent-a81546b14c5c59939.yaml
+  - packing/campaign/resource-usage/agent-aba3214859bd23392.yaml
+  - packing/campaign/resource-usage/agent-ada2bfff83f1f0f01.yaml
+  - packing/campaign/resource-usage/agent-a37fe65b8b0bc2bdc.yaml
+  - packing/campaign/resource-usage/agent-a6277011de7e52649.yaml
+  turns: 5909
+  tool_calls: 3067
+  tool_errors: 67
+  one_off_code: 343
+  wall_hours: 58.29
+  codex_receipts: []

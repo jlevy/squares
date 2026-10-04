@@ -416,6 +416,7 @@ jobs:
           --skip "known-best n=1..324 atlas rebuild"
           --skip "finer-net dilation-limit record, 720 steps"
           --skip "exact rational grid replay"
+          --skip "regularized atlas views re-derive exactly"
           --skip "negative controls"
           --skip "finer-net dilation-limit record, 1440 steps"
           --skip "threshold dilation-limit record, 720 steps"
@@ -1268,6 +1269,9 @@ jobs:
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
+            /packing/campaign/explorations/
+            !/packing/campaign/explorations/*
+            /packing/campaign/explorations/X049-families-data/
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -1546,6 +1550,60 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+  regularized-views:
+    # The regularized atlas layer re-derived whole, on its own runner for the reason the
+    # deep gate's identical `regularized-views` job gives: one process pool sized by
+    # `PACK_JOBS`, which beside the atlas rebuild at `--inner-jobs 2` would have taken
+    # `deferred-atlas-grid` to about its whole ceiling.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        # Shallow is enough: no provenance step is in this selection. kpress is vendored
+        # at vendor/kpress, so the environment does not resolve without the submodule.
+        with:
+          ref: ${{ github.sha }}
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Bind the receipt to the immutable tree
+        env:
+          VALIDATED_SHA: ${{ github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$VALIDATED_SHA"
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          printf '%s\n' "$VALIDATED_SHA" > "$PACKING_VALIDATION_ARTIFACT_DIR/tree-sha.txt"
+
+      - name: Re-derive the regularized atlas views
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "regularized atlas views re-derive exactly"
+          --jobs 1 --inner-jobs 4
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
   post-merge-required:
     # Separate complete-checkpoint verdict. Pull requests retain exactly ten fast jobs.
     if: "!cancelled() && github.event_name != 'pull_request'"
@@ -1560,6 +1618,7 @@ jobs:
       - exhaustive-2
       - exhaustive-3
       - screen
+      - regularized-views
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -1577,6 +1636,7 @@ jobs:
           EXHAUSTIVE_2_RESULT: ${{ needs.exhaustive-2.result }}
           EXHAUSTIVE_3_RESULT: ${{ needs.exhaustive-3.result }}
           SCREEN_RESULT: ${{ needs.screen.result }}
+          REGULARIZED_VIEWS_RESULT: ${{ needs.regularized-views.result }}
         run: |
           test "$VALIDATE_RESULT" = "success"
           test "$THRESHOLD_1440_RESULT" = "success"
@@ -1588,8 +1648,9 @@ jobs:
           test "$EXHAUSTIVE_2_RESULT" = "success"
           test "$EXHAUSTIVE_3_RESULT" = "success"
           test "$SCREEN_RESULT" = "success"
+          test "$REGULARIZED_VIEWS_RESULT" = "success"
 
-      # Report the ten prerequisite walls and their critical path after the verdict has
+      # Report the eleven prerequisite walls and their critical path after the verdict has
       # already been decided. Every reporting step continues on error: an API or setup
       # failure is not allowed to turn a successful complete checkpoint red, while the
       # register remains reporting-only under think-0atx until this topology is measured.

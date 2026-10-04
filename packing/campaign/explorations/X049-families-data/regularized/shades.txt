@@ -1,0 +1,12 @@
+witnesses/known-best/n-102.yaml: house 69 light of 69 green; stage 49 light of 73 green
+witnesses/known-best/n-103.yaml: house 56 light of 61 green; stage 48 light of 65 green
+witnesses/known-best/n-106.yaml: house 41 light of 83 green; stage 21 light of 83 green
+witnesses/known-best/n-206.yaml: house 104 light of 136 green; stage 69 light of 172 green
+witnesses/known-best/n-268.yaml: house 156 light of 198 green; stage 86 light of 213 green
+witnesses/known-best/n-269.yaml: house 119 light of 224 green; stage 44 light of 227 green
+campaign/explorations/X049-families-data/regularized/n-102-regularized.yaml.gz: house 24 light of 70 green; stage 26 light of 73 green
+campaign/explorations/X049-families-data/regularized/n-103-regularized.yaml.gz: house 29 light of 61 green; stage 31 light of 65 green
+campaign/explorations/X049-families-data/regularized/n-106-regularized.yaml.gz: house 21 light of 83 green; stage 21 light of 83 green
+campaign/explorations/X049-families-data/regularized/n-206-regularized.yaml.gz: house 60 light of 138 green; stage 59 light of 172 green
+campaign/explorations/X049-families-data/regularized/n-268-regularized.yaml.gz: house 75 light of 198 green; stage 68 light of 213 green
+campaign/explorations/X049-families-data/regularized/n-269-regularized.yaml.gz: house 33 light of 225 green; stage 33 light of 227 green

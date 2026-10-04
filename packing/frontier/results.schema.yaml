@@ -305,6 +305,23 @@ $defs:
             minItems: 1
             uniqueItems: true
             items: {type: string, pattern: '^\[.+\]$'}
+      corrects:
+        type: object
+        additionalProperties: false
+        required: [source_key, result, what]
+        description: >-
+          The published work this result corrects, where it stands in for a published
+          result found unsound: `source_key` resolves in `resources/bibliography.yaml` to
+          the work corrected, `result` is the register's record of that published result,
+          and `what` says in a few words what in it failed. It names the outside work, so
+          a page can say "corrects Nagamochi 2005" beside the bound. It is not where a
+          correction to this register is recorded: that is a defect entry in
+          `defects.yaml` under this project's own process, which the dated corrections in
+          the case records cite.
+        properties:
+          source_key: {type: string, pattern: '^\[.+\]$'}
+          result: {type: string, pattern: '^T-\d{3}$'}
+          what: {type: string, minLength: 1, maxLength: 80}
       produced_by:
         type: object
         additionalProperties: false

@@ -651,6 +651,12 @@ $s(33) = 6$ (arXiv 2016; proof dated Oct 2018 by the catalogue) strengthen the m
 replacing fixed point sets with “continuously varying families of such sets.”
 Nagamochi’s $s(n^2 - 1) = s(n^2 - 2) = n$ for all $n \ge 2$ is a counting argument about
 how many unit squares fit in an $a \times b$ rectangle.
+**Corrected 2 October 2026:** Nagamochi’s proof of this rests on his Lemma 1, which is
+false for every container with $a > 3$ and $b > 2$ (Karakuş 2026; chelokot 2026), so the
+family is unproved by that paper.
+Karakuş proves $s(n^2 - 1) = n$ again by a strip measure; $s(n^2 - 2) = n$ rests on
+chelokot’s Lean proof alone, and the register records where each stands (T-007, T-084,
+T-085, T-086; [review](../reviews/review-2026-10-02-nagamochi-lemma1-karakus.md)).
 
 The lemmas themselves are single-variable calculus — minimise $D(\theta)$,
 differentiate, find the critical angle — done by hand.
@@ -793,7 +799,9 @@ $s(n)$ is proved for
 - all perfect squares $n = k^2$;
 - $n = k^2 - 1$ and $n = k^2 - 2$ for every $k \ge 2$ (Nagamochi 2005) — an *infinite*
   family, which subsumes 2, 3, 7, 8, 14, 15, 23, 24, 34, 35, 47, 48, 62, 63, …, 322,
-  323;
+  323; (**Corrected 2 October 2026:** Nagamochi’s proof is incomplete, its Lemma 1 being
+  false; $k^2 - 1$ is proved again by Karakuş 2026, and $k^2 - 2$ rests on chelokot’s
+  Lean proof alone; see T-084 and T-086.)
 - $n = k^2 - 3$ for $k = 3, 4, 5, 6, 7$ only: 6 (Kearney–Shiu 2002), 13 and 46 (Bentz
   2010), 22 and 33 (Bentz, arXiv 2016);
 - $n = 5$ (Göbel 1979) and $n = 10$ (Stromquist 2003).
@@ -921,6 +929,9 @@ effort:
   ($n = 2, 3, 5, 6, 7, 8, 10, 13, 14, 15, 24, 34, 35, 46, 47, 48$ plus perfect squares)
   omits 22, 23, and 33 and truncates Nagamochi’s infinite $k^2 - 1$, $k^2 - 2$ family.
   Worth correcting upstream.
+  (**Corrected 2 October 2026:** that family’s published proof is incomplete,
+  Nagamochi’s Lemma 1 being false (Karakuş 2026), so the correction upstream should say
+  so.)
 
 ## Methodology
 

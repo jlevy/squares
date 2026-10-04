@@ -1608,6 +1608,23 @@ body {
 .site-frontier .site-col-recent {
   width: 0;
 }
+/* A recent lower bound that corrects a published result says which beside its star,
+   `corrects Nagamochi 2005`, in the support grey (the owner, 2026-10-02). In the
+   frontier table it stands under the star, a step below the cell's type and breaking
+   between its words and never inside a name, so the star's column keeps the width it
+   had: at the cell's own size "Nagamochi" alone widened it past the table's track. */
+.site-corrects {
+  color: var(--site-support-color);
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+  font-weight: var(--site-font-weight-sans-light);
+}
+.site-frontier .site-corrects {
+  display: block;
+  font-size: 0.85em;
+  line-height: 1.25;
+  word-break: normal;
+}
 /* A credit wraps between its words and never inside a name: KPress lets a table's cell
    break anywhere, which set "Queuingtheorydotcom" on two lines in a column a few pixels
    narrower than the name. The column is now at least as wide as the longest name. */
@@ -1852,14 +1869,24 @@ body {
     --site-atlas-move-duration: 0ms;
   }
 }
-/* The view tabs: the section tabs' strip (site-nav.css), centred over the tiles and set
-   on the bar's line, so it is as tall here as under the bar. Hidden until the script
-   has tiles to rearrange. */
-.site-atlas-grid .site-atlas-views {
-  line-height: var(--site-nav-line);
-  margin: 0 auto var(--site-atlas-toggle-space);
+/* The view tabs and the drawing tabs: two of the section tabs' strip (site-nav.css), on
+   the bar's line, so each is as tall here as under the bar. One row centred over the
+   tiles; on a narrow block the drawing tabs wrap under. Each is hidden until the script
+   has tiles to arrange. */
+.site-atlas-grid .site-atlas-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.6rem;
+  justify-content: center;
+  margin-block-end: var(--site-atlas-toggle-space);
 }
-.site-atlas-grid .site-atlas-views[hidden] {
+.site-atlas-grid .site-atlas-views,
+.site-atlas-grid .site-atlas-layers {
+  line-height: var(--site-nav-line);
+  margin: 0;
+}
+.site-atlas-grid .site-atlas-views[hidden],
+.site-atlas-grid .site-atlas-layers[hidden] {
   display: none;
 }
 /* The two custom properties are the triangle's (below); they are declared here, in the
@@ -1986,6 +2013,31 @@ body {
 }
 .site-atlas-grid .site-atlas-toggle-row[hidden] {
   display: none;
+}
+/* The regularized drawing's badge (overview_sections.atlas_layer_mark): a dot in the
+   accent, sized in its text. The Regularized tab carries it before its word, so the tab
+   is the key; a regularized tile hangs it past its number, out of the flow, so the
+   number stays centred as on every other tile. */
+.site-atlas-layer-mark {
+  background: var(--kpress-doc-accent);
+  block-size: 0.5em;
+  border-radius: 50%;
+  display: inline-block;
+  inline-size: 0.5em;
+  margin-inline-end: 0.45em;
+  vertical-align: 0.08em;
+}
+.site-atlas-cell[data-atlas-layer="regularized"] .site-atlas-n {
+  inline-size: fit-content;
+  margin-inline: auto;
+  position: relative;
+}
+.site-atlas-n > .site-atlas-layer-mark {
+  inset-block-start: 50%;
+  inset-inline-start: calc(100% + 0.3em);
+  margin: 0;
+  position: absolute;
+  translate: 0 -50%;
 }
 
 /* The film's panel for a case, which opens every case record as its visual summary
@@ -2290,7 +2342,7 @@ body {
   font-weight: var(--site-font-weight-sans-medium);
   margin-inline-end: 0.4rem;
 }
-.site-case-title .site-chip {
+.site-case-title :is(.site-chip, .site-corrects) {
   vertical-align: middle;
 }
 .kpress .site-case-interval {
