@@ -37,7 +37,6 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import json
 import math
 import sys
 from collections.abc import Callable, Sequence
@@ -48,6 +47,7 @@ from pathlib import Path
 import numpy as np
 
 from devtools.decide_certificate import load
+from sqpack import retained_json
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.model import Atom, Direction
 from sqpack.fractional.sweep import MassGrid, centre_domain, scaled_mass_grid, weight_scale
@@ -545,7 +545,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             complete=complete,
         )
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(payload, indent=1) + "\n")
+        args.output.write_text(retained_json.dumps(payload))
 
     def landed(reading: DirectionCensus) -> None:
         readings.append(reading)

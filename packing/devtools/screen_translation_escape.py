@@ -84,6 +84,7 @@ import mpmath as mp
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from sqpack import retained_json
 from sqpack.known_best import (
     KNOWN_BEST_CORPUS,
     SCREEN_SAMPLE_STRIDE,
@@ -169,7 +170,7 @@ CLAIM_BOUNDARIES = (
 
 
 def _json_text(value: object) -> str:
-    return json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    return retained_json.dumps(value, sort_keys=True, ensure_ascii=False)
 
 
 def _decimal(value: Scalar) -> str:

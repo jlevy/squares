@@ -36,6 +36,7 @@ from strif import atomic_write_text
 
 from devtools.freeze_cutting_primal import ROW_DENOMINATOR
 from devtools.run_fractional_colgen import certificate_json
+from sqpack import retained_json
 from sqpack.fractional.certificate import Certificate
 from sqpack.fractional.colgen import (
     DEFAULT_SCALE,
@@ -63,7 +64,7 @@ def _json_safe(value: Any) -> Any:
 
 
 def _publish(path: Path, record: dict[str, Any]) -> None:
-    atomic_write_text(path, json.dumps(_json_safe(record), indent=2, allow_nan=False) + "\n")
+    atomic_write_text(path, retained_json.dumps(_json_safe(record), allow_nan=False))
 
 
 @contextmanager

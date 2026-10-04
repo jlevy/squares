@@ -1649,6 +1649,48 @@ configured test directory disappears.
 Domain programs are named by what they check, not with `_test.py`, so pytest cannot
 silently collect or omit them by accident.
 
+## Retained JSON Is One Record per Line
+
+**Write a JSON result the repository keeps with `sqpack.retained_json.dumps`, not with
+`json.dumps(..., indent=N)`.** A value whose line fits in 1,000 characters, indentation,
+key and comma included, is written compactly on that line.
+One that does not fit opens: an object one key per line, a list one element per line,
+each child laid out by the same rule, and a long list of scalars filled as many to a
+line as fit. A result is then about as many lines as it has records.
+Written a scalar per line, `atlas/known-best/chunk-components.json` was 365,916 lines.
+
+Pass the arguments the old call passed.
+`sort_keys` and `ensure_ascii` decide the bytes, and a `--check` that compares a fresh
+build with the retained file compares those too.
+
+The layout is a function of the parsed value and gives it back exactly, so changing a
+file’s layout never means re-running what produced it.
+`python -m devtools.check_retained_json --fix PATH` re-lays a file in place and refuses
+unless the value is unchanged, compared as canonical compact JSON, which tells an
+integer from an equal float and from `true` where `==` does not.
+A file under `DATA_PATHS` moves `DATA_REVISION` like any data commit, so re-lay those in
+one commit and re-pin once.
+
+Some files keep the bytes they have:
+
+- anything under `packing/resources/`, because archived source is never edited.
+  A large third-party file there is stored as deterministic gzip by
+  `devtools.retained_data` instead, which keeps its bytes and gives up the readable diff
+  an archive does not need;
+- a file whose bytes a record, test, verifier or archive names by SHA-256 or Git blob,
+  which includes the certificates under `packing/cases/*_certificate/`; and
+- frozen historical output, and a file whose layout waits on an owner’s decision.
+
+`packing/devtools/retained-json.yaml` lists each with its reason and what binds it.
+Hand-written `*.schema.json` files and the JSON Biome formats are not retained results.
+
+`devtools.check_retained_json` holds the rule in `--edit`, in `--records` and on every
+pull request as the `retained JSON is one record per line` step, in about a second and a
+half. Every tracked JSON file over 5,000 lines must equal its own re-layout unless the
+list names it, and an entry that no longer exempts anything fails the step, so the list
+only shrinks. `--inventory` prints every file over the threshold, its lines now and laid
+out, and its status.
+
 ## Durable State and Compatibility
 
 Repository-owned callers are migrated together.
@@ -1664,7 +1706,10 @@ Never reinterpret historical records in place.
 
 Write generated views and complete artifacts through `strif.atomic_output_file` so a
 crash cannot expose a partial replacement.
-Validate before promotion.
+Lay out a retained JSON result with `sqpack.retained_json`
+([Retained JSON Is One Record per Line](#retained-json-is-one-record-per-line)); a large
+archived file is kept as deterministic gzip by `devtools.retained_data`, which preserves
+its bytes. Validate before promotion.
 Append-only campaign journals are the deliberate exception: each line is independently
 validated, and a partial archive is retained as recovery evidence rather than presented
 as a complete result.

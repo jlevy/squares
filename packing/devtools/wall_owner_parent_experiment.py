@@ -52,6 +52,7 @@ from devtools.wall_owner_parent_inputs import (
     load_parent_adapter_inputs,
 )
 from devtools.wall_owner_selected_cover import SELECTED_TUPLE
+from sqpack import retained_json
 
 PACKING = Path(__file__).resolve().parents[1]
 RUNNING_REPOSITORY = PACKING.parent.resolve()
@@ -86,6 +87,7 @@ IMPLEMENTATION_PATHS = (
     "packing/src/sqpack/fractional/generate.py",
     "packing/src/sqpack/fractional/model.py",
     "packing/src/sqpack/fractional/sweep.py",
+    "packing/src/sqpack/retained_json.py",
     "packing/src/sqpack/verify.py",
     "packing/src/sqpack/workers.py",
 )
@@ -1617,7 +1619,7 @@ def write_result_document(path: Path, document: dict[str, object]) -> None:
     """Validate and atomically publish one complete result or partial checkpoint."""
 
     validate_result_document(document)
-    rendered = json.dumps(document, indent=2, sort_keys=True) + "\n"
+    rendered = retained_json.dumps(document, sort_keys=True)
     atomic_write_text(path, rendered, make_parents=True)
 
 

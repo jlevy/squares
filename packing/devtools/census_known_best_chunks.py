@@ -20,6 +20,7 @@ from typing import Any
 
 from strif import atomic_output_file
 
+from sqpack import retained_json
 from sqpack.chunks import (
     EXACT_ADJACENCY_TOLERANCE,
     NEAR_ADJACENCY_TOLERANCE,
@@ -402,7 +403,7 @@ def expected_partition_document(workers: int | None = None) -> dict:
 
 
 def _text(document: dict) -> str:
-    return json.dumps(document, indent=2, sort_keys=True) + "\n"
+    return retained_json.dumps(document, sort_keys=True)
 
 
 def update(workers: int | None = None) -> None:

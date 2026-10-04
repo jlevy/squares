@@ -118,6 +118,7 @@ from numpy.typing import NDArray
 from scipy import sparse
 from scipy.optimize import Bounds, LinearConstraint, linprog, milp
 
+from sqpack import retained_json
 from sqpack.fractional.ceiling import (
     CeilingCertificate,
     CeilingVerdict,
@@ -2144,7 +2145,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.out is not None:
         record = report.record()
         record["source"] = str(args.family)
-        args.out.write_text(json.dumps(record, indent=1))
+        args.out.write_text(retained_json.dumps(record))
     if report.refused:
         return 2
     return 0

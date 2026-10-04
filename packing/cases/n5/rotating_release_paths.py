@@ -16,6 +16,7 @@ from strif import atomic_output_file
 
 from cases.n5 import equal_side_face as face
 from cases.n5 import fixed_angle_polytope, tangent_cones, tangent_inventory
+from sqpack import retained_json
 from sqpack.field import FieldElement, NumberField
 from sqpack.verify import exact_sign, verify_packing
 
@@ -1300,9 +1301,7 @@ def build_result() -> dict[str, object]:
 
 def write_json_atomic(path: Path, value: dict[str, object]) -> None:
     with atomic_output_file(path, make_parents=True) as temporary:
-        temporary.write_text(
-            json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-        )
+        temporary.write_text(retained_json.dumps(value, sort_keys=True), encoding="utf-8")
 
 
 def require_same(retained: object, regenerated: dict[str, object]) -> None:

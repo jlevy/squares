@@ -36,6 +36,7 @@ import sympy as sp
 import yaml
 
 from cases.trump11.packing import S_MIN_POLY
+from sqpack import retained_json
 from sqpack.field import NumberField
 from sqpack.yamlio import load_yaml
 
@@ -947,7 +948,7 @@ def main(argv: Sequence[str] | None = None) -> None:
             "the corrected record bytes are already committed. Explicit revision "
             "arguments, when present, identify the record inputs instead."
         )
-        args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+        args.output.write_text(retained_json.dumps(result, sort_keys=True))
     print(
         json.dumps(
             {

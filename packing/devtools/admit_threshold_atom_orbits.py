@@ -23,6 +23,7 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+from sqpack import retained_json
 from sqpack.fractional.ceiling import CeilingCertificate
 from sqpack.fractional.threshold import ThresholdAtom
 
@@ -268,7 +269,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         )
         return 2
-    print(json.dumps(receipt, indent=2, sort_keys=True))
+    print(retained_json.dumps(receipt, sort_keys=True), end="")
     return 0 if receipt["atom_admission"]["admitted"] else 1
 
 

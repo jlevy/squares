@@ -50,6 +50,7 @@ from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import upper_bound_packets as packets
 from devtools.build_bound_citations import RECENT_SINCE
 from devtools.build_composite_figure_data import load_record as load_figure_record
+from sqpack import retained_json
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     KINGBIRD_ATTRIBUTION,
@@ -679,6 +680,12 @@ def _encoding_metadata(composite: CompositeSpec) -> dict[str, str]:
 
 def _json_text(value: object) -> str:
     return json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+
+
+def _manifest_text(manifest: object) -> str:
+    """The atlas manifest in the retained layout. The source index keeps `_json_text`: it
+    lives under `resources/web/`, where an archive's bytes are not re-laid."""
+    return retained_json.dumps(manifest, sort_keys=True, ensure_ascii=False)
 
 
 def _plural(count: int) -> str:
@@ -2290,7 +2297,7 @@ def _expected_outputs(workers: int) -> tuple[dict[Path, str], dict]:
         [_manifest_entry(item) for item in built],
         [_composite_record(canvas) for canvas in COMPOSITES],
     )
-    outputs[MANIFEST] = _json_text(manifest)
+    outputs[MANIFEST] = _manifest_text(manifest)
     return outputs, manifest
 
 
@@ -2546,7 +2553,7 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
         return [f"manifest entries are not exactly {CORPUS.label}"], None
     problems: list[str] = []
     rebuilt = _manifest_document(entries, [_composite_record(canvas) for canvas in COMPOSITES])
-    if _json_text(rebuilt) != retained:
+    if _manifest_text(rebuilt) != retained:
         problems.append(
             f"stale {_relative(MANIFEST)}: everything but its entries is re-derived here"
         )

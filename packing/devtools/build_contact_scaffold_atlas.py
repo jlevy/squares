@@ -13,6 +13,7 @@ from typing import Any
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from sqpack import retained_json
 from sqpack.contact_assembly import (
     Axis,
     ContactEdge,
@@ -50,7 +51,7 @@ VERTEX_OFFSETS = ((0, -46), (44, -14), (27, 37), (-27, 37), (-44, -14))
 
 
 def _json_text(value: object) -> str:
-    return json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    return retained_json.dumps(value, sort_keys=True, ensure_ascii=False)
 
 
 def _topology(scaffold: ContactScaffold) -> tuple[tuple[int, int], ...]:

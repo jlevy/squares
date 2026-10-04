@@ -32,6 +32,7 @@ from sympy.parsing.sympy_parser import (
 )
 
 from devtools.build_bound_citations import corrected_lower_bounds, recent_lower_bounds
+from sqpack import retained_json
 from sqpack.known_best import (
     KNOWN_BEST_COMPOSITES,
     KNOWN_BEST_CORPUS,
@@ -426,7 +427,7 @@ def load_record() -> dict:
 
 
 def _text(record: dict) -> str:
-    return json.dumps(record, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    return retained_json.dumps(record, sort_keys=True, ensure_ascii=False)
 
 
 def update() -> None:

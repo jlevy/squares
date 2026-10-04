@@ -48,6 +48,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from sqpack import retained_json
+
 #: `packing/`, where the rows and the committed summaries live.
 ROOT = Path(__file__).resolve().parents[4] / "packing"
 ROWS = ROOT / "campaign/results/annealing"
@@ -127,7 +129,7 @@ def summarize(directory: Path) -> dict[str, dict[str, dict[str, Any]]]:
 
 def render(summary: Mapping[str, Any]) -> str:
     """The committed file's exact serialisation."""
-    return json.dumps(summary, indent=1, sort_keys=True) + "\n"
+    return retained_json.dumps(summary, sort_keys=True)
 
 
 @dataclass(frozen=True)

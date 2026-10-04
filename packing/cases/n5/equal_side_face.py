@@ -24,6 +24,7 @@ from typing import cast
 from strif import atomic_output_file
 
 from cases.n5.face_model import build_equal_side_face, centres_at
+from sqpack import retained_json
 from sqpack.field import FieldElement, NumberField
 from sqpack.verify import exact_sign, verify_packing
 
@@ -540,9 +541,7 @@ def build_result() -> dict[str, object]:
 
 def write_json_atomic(path: Path, value: dict[str, object]) -> None:
     with atomic_output_file(path, make_parents=True) as temporary:
-        temporary.write_text(
-            json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-        )
+        temporary.write_text(retained_json.dumps(value, sort_keys=True), encoding="utf-8")
 
 
 def parse_args() -> argparse.Namespace:

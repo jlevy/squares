@@ -3453,6 +3453,15 @@ def _class_record_claims(context: Context) -> str:
     return _module(context, "devtools.check_class_record_claims")
 
 
+def _retained_json_layout(context: Context) -> str:
+    # About 1.5s: a line count of every tracked JSON larger than the threshold, then a
+    # parse and re-layout of the few over it that no exemption names. Records tier for the
+    # reason the class-record sweep above is: it checks retained bytes against the writer
+    # that owns them, so a tool that goes back to `indent=2` fails here on its first
+    # commit and not after a hundred thousand lines have landed (think-k131).
+    return _module(context, "devtools.check_retained_json")
+
+
 def _rung_figures(context: Context) -> str:
     # Sub-second: it sums a few dozen certificate atoms in exact Fraction arithmetic and
     # regex-scans results.yaml, evidence.yaml, and defects.yaml. Records tier because it
@@ -4359,6 +4368,21 @@ STEPS: tuple[Step, ...] = (
             # is this module's answer and not the check's own.
             "packing/devtools/repo_scope.py",
             "packing/src/sqpack/fractional/corner_clip.py",
+        ),
+    ),
+    Step(
+        "retained JSON is one record per line",
+        _retained_json_layout,
+        fast=True,
+        records=True,
+        touches=(
+            # Any tracked JSON can cross the threshold, and `biome.json` says which are
+            # Biome's rather than a retained result's.
+            "*.json",
+            "packing/devtools/check_retained_json.py",
+            "packing/devtools/retained-json.yaml",
+            "packing/devtools/repo_scope.py",
+            "packing/src/sqpack/retained_json.py",
         ),
     ),
     Step(
@@ -5456,6 +5480,9 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # A pure function of the tracked JSON: it reads the retained records and nothing
         # else, so a pull-request run over this exact tree has already decided it.
         "class records do not claim the unconditional bound",
+        # The same shape: the tracked JSON, its own policy and `biome.json`, and the
+        # writer it re-lays them with. No clock, no network, no history.
+        "retained JSON is one record per line",
         # The same shape: it reads the tracked Markdown under `packing/resources/` and
         # compares three numbers found in those bytes. No clock, no network, no history.
         "archive annotation census agrees with the archive",

@@ -87,7 +87,6 @@ Records: `H-227` (and `H-226` for the shared machinery); defects `D-505`, `D-507
 
 from __future__ import annotations
 
-import json
 from collections import Counter
 from dataclasses import dataclass
 from itertools import combinations
@@ -95,6 +94,8 @@ from pathlib import Path
 from typing import Any, cast
 
 from mpmath import mp, mpf, sqrt
+
+from sqpack import retained_json
 
 # 50 digits: set once, for the whole model. Every margin below is of order 1e-2.
 mp.dps = 50
@@ -984,7 +985,7 @@ def main(out_path: str | None = None) -> int:
     if out_path:
         out = Path(out_path)
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(json.dumps(inventory, indent=1, default=str) + "\n", encoding="utf-8")
+        out.write_text(retained_json.dumps(inventory, default=str), encoding="utf-8")
         print(f"  inventory written to {out}")
     return 0
 

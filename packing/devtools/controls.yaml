@@ -1476,3 +1476,14 @@ controls:
   replace: ['"check_published_site/api-ready"', '"check_published_site/api-readied"']
   run: python3 -m devtools.check_probes
   expect: "check_published_site/api-readied.js: named by a Python file beside packing/devtools/probes"
+
+# --- retained JSON is one record per line (think-k131) ---
+#
+# `tests/test_retained_json_layout.py` plants each failure in a tree of its own. This one
+# corrupts a real retained result instead: one space added after a key, which leaves the
+# value and the line count as they were and the bytes no longer the writer's.
+- name: retained JSON - a hand-edited line in a laid-out result
+  file: campaign/series/series-000-smoke-and-calibration/results/t007-consumer-audit.json
+  replace: ['  "claim_status": "inventory-no-verdict",', '  "claim_status":  "inventory-no-verdict",']
+  run: python3 -m devtools.check_retained_json campaign/series/series-000-smoke-and-calibration/results/t007-consumer-audit.json
+  expect: "t007-consumer-audit.json: not in the retained layout"

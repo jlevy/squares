@@ -620,7 +620,13 @@ ROOT_DOCUMENTS = (
 # hunt, so the same reasoning restores roughly 29 MiB of headroom at 224 MiB, with
 # think-t1lk still owning dependency-aware selection. At three portable workers the
 # storage ceiling is 672 MiB; nothing copied changes.
-SNAPSHOT_MAX_BYTES = 224 * 1024 * 1024
+# 2026-10-03, later the same day, the stacked re-layout (think-k131) on PR 305's second
+# merge of main (#320, #322): 187,283,918 bytes, 14,042,674 under 192 MiB. Writing the
+# retained results one record per line through `sqpack.retained_json` took about
+# 17 MB out of this surface -- the chunk census, the escape screen, exp-042 and the
+# other files the snapshot copies -- without pruning anything, so the cap returns to
+# 192 MiB rather than keeping a raise the bytes no longer need.
+SNAPSHOT_MAX_BYTES = 192 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

@@ -110,6 +110,7 @@ from typing import Any
 
 from strif import atomic_output_file
 
+from sqpack import retained_json
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import safe_load
@@ -849,7 +850,7 @@ def load_record() -> dict[str, Any]:
 
 
 def _text(record: Mapping[str, Any]) -> str:
-    return json.dumps(record, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    return retained_json.dumps(record, sort_keys=True, ensure_ascii=False)
 
 
 def update() -> None:

@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import TextIO
 
 from devtools.run_fractional_colgen import SEED_MAPS, seed_points_from
+from sqpack import retained_json
 from sqpack.fractional.ceiling import verify_ceiling
 from sqpack.fractional.colgen import Rows, site_set_from_points
 from sqpack.fractional.cutting import (
@@ -209,9 +210,7 @@ def main(argv: list[str] | None = None) -> int:
             },
         }
         args.freeze.parent.mkdir(parents=True, exist_ok=True)
-        args.freeze.write_text(
-            json.dumps(family_record(log.best_family, provenance), indent=1) + "\n"
-        )
+        args.freeze.write_text(retained_json.dumps(family_record(log.best_family, provenance)))
         frozen = str(args.freeze)
     driver_wall_seconds = time.perf_counter() - driver_wall_started
     driver_cpu_seconds = time.process_time() - driver_cpu_started
@@ -256,7 +255,7 @@ def main(argv: list[str] | None = None) -> int:
     print(iteration_table(log.iterations))
     if args.json is not None:
         args.json.parent.mkdir(parents=True, exist_ok=True)
-        args.json.write_text(json.dumps(summary, indent=1) + "\n")
+        args.json.write_text(retained_json.dumps(summary))
     return 0
 
 
