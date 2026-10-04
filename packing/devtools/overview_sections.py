@@ -45,7 +45,7 @@ from devtools.render_overview import (
     SITE_PAGES,
     paper_path,
 )
-from devtools.render_recent_results import SUPERSEDED, superseded
+from devtools.render_recent_results import SUPERSEDED, listed, superseded
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES
 from sqpack.yamlio import safe_load
@@ -75,23 +75,26 @@ def standing_key(standing: str) -> str:
 
 
 def is_superseded(result: Result) -> bool:
-    """Whether a result is no longer the best: it is a bound, and no case bound rests on
-    it now (`render_recent_results.superseded`). The standing is derived from the case
-    records, and `devtools.check_standing` holds it to the numbers. A result that still
-    holds a bound, a second proof of a value another result holds, and a result that is
-    no bound are all current. A row says so as `data-current`, which the bar's "Hide
-    superseded" reads (`result_filters`), and draws the `superseded` chip
-    (`status_marks`)."""
+    """Whether a result is no longer the best (`render_recent_results.superseded`): it
+    is a bound, and no case bound rests on it now, which is derived from the case
+    records and held to the numbers by `devtools.check_standing`; or it is a result of
+    another kind whose register entry declares a later result that implies the whole of
+    it (`superseded_by`). A result that still holds a bound, a second proof of a value
+    another result holds, a result that is no bound, and one superseded only in part
+    are all current. A row says so as `data-current`, which the bar's "Hide superseded"
+    reads (`result_filters`), and draws the `superseded` chip (`supersession_marks`)."""
     return superseded(result.record, result.standing)
 
 
-def standing_chip(standing: str) -> str:
-    """A result's standing as a chip, the plain gray one. A table draws one, `superseded`
-    (`status_marks`); it is the kind's and the status's own chip and differs from them
-    only in its word."""
+def standing_chip(standing: str, words: str | None = None) -> str:
+    """A result's standing as a chip, the plain gray one, lettered with the standing or
+    with `words`. A table draws one word, `superseded`, for both its marks: the
+    `superseded in part` mark's chip says `superseded` and keeps its own standing in
+    `data-standing` (`supersession_marks`). It is the kind's and the status's own chip
+    and differs from them only in its word."""
     return (
         f'<span class="site-chip" data-standing="{_esc(standing_key(standing))}">'
-        f"{_esc(standing)}</span>"
+        f"{_esc(standing if words is None else words)}</span>"
     )
 
 
@@ -866,7 +869,7 @@ def result_head() -> str:
         'what the result is">Rungs</th>'
         '<th data-sort="text" class="site-col-status" title="How far the work on it here '
         "has gone: recorded, reviewed, confirmed or incomplete; then who has the next "
-        'move, and superseded where it is">Status</th>'
+        'move, and superseded, wholly or in part, and by what, where it is">Status</th>'
         '<th class="site-col-details">Details</th>'
         '<th data-sort="text" class="site-col-id">ID</th>'
         "</tr></thead>"
@@ -1252,12 +1255,37 @@ def rung_chips(result: Result) -> str:
     return " ".join(_rung(rung) for rung in result_rungs(result))
 
 
+def supersession_marks(result: Result) -> str:
+    """Whether a result is superseded, and by what, as its status line ends: `superseded`
+    where it is (`is_superseded`), then `superseded in part` where a later result implies
+    some of it, each followed by the results that supersede it as links to their rows
+    (`Result.supersessions`): the results a superseded bound's cases rest on now, or
+    those a result of another kind declares imply it. Each mark and its results are one
+    element, and an id never breaks at its hyphen (`site.css`).
+
+    The chip is the one word `superseded` for both marks, and `in part` leads the quiet
+    text after it, so the line reads as the register's words do (`Supersession.words`):
+    a chip never wraps, the status column is as wide as its widest chip, and the four
+    words as one chip, 150 pixels, set the column 52 pixels wider than `superseded` does,
+    which the n column paid for (`think-kmi4`). The partial mark's chip keeps its own
+    standing, `data-standing="superseded-in-part"`, and its row stays current."""
+    marks = []
+    for mark in result.supersessions:
+        links = [f'<a href="{_esc(result_url(other))}">{_esc(other)}</a>' for other in mark.by]
+        extent = _esc(mark.mark.removeprefix(SUPERSEDED).strip())
+        after = " ".join(filter(None, (extent, f"by {listed(links)}" if links else "")))
+        quiet = f' <span class="site-cell-quiet">{after}</span>' if after else ""
+        chip = standing_chip(mark.mark, SUPERSEDED)
+        marks.append(f'<span class="site-superseded">{chip}{quiet}</span>')
+    return " ".join(marks)
+
+
 def status_marks(result: Result) -> str:
     """A result's status line: its status chip, always; who has the next move, where
-    the register records it (`activity_chip`); and `superseded`, where it is a bound
-    that no case bound rests on now (`is_superseded`)."""
-    mark = standing_chip(SUPERSEDED) if is_superseded(result) else ""
-    return " ".join(filter(None, (status_chip(result.status), activity_chip(result), mark)))
+    the register records it (`activity_chip`); and whether it is superseded, with the
+    results that supersede it (`supersession_marks`)."""
+    marks = (status_chip(result.status), activity_chip(result), supersession_marks(result))
+    return " ".join(filter(None, marks))
 
 
 def kind_and_status(result: Result) -> str:
@@ -1275,8 +1303,9 @@ def status_chips(result: Result) -> str:
 
 def recent_table(overview: Overview, defaults: FilterDefaults = RECENT_DEFAULTS) -> str:
     """The overview's Recent Results: the results page's table (`table_of_results`), its
-    bar starting at the recent defaults. The line under it, "See all results", is the
-    one link from this table to the other."""
+    bar starting at the recent defaults. The line under it, "See all results", links to
+    the other table, as a status line's superseding results do, each to its row there
+    (`supersession_marks`)."""
     return table_of_results(overview, defaults, here=False)
 
 

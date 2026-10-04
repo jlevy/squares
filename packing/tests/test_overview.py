@@ -2406,25 +2406,37 @@ def test_every_result_shows_its_status_and_its_place_on_the_frontier(
     (`render_recent_results.superseded`), and that is all a row shows of a standing.
     That a bound is only reported is the status `recorded` and no chip of its own; a
     second proof of a held value says so by its kind; and a result that is no bound is
-    never marked superseded, whatever its evidence makes its standing. Every chip is
-    the one plain chip (think-ai94)."""
+    marked only where its entry declares a later result that implies it
+    (`superseded_by`), whatever its evidence makes its standing. Each mark names the
+    results that supersede it, as links to their rows (think-6zg1), and a mark of a
+    result superseded in part is the same `superseded` chip, its standing kept as
+    `superseded-in-part`, with `in part` after it (think-kmi4). Every chip is the one
+    plain chip (think-ai94)."""
     held = render_recent_results.HOLDS
     recent = _recent_table(page)
     status = re.compile(r'<span class="site-chip" data-status="([^"]*)"[^>]*>([^<]+)</span>')
-    standing = re.compile(r'<span class="site-chip" data-standing="[^"]*"[^>]*>([^<]+)</span>')
+    standing = re.compile(r'<span class="site-chip" data-standing="([^"]*)">([^<]+)</span>')
     evidence = records.register.evidence
     for result in overview.results:
         expected = render_recent_results.standing(result.record, records)
         assert result.standing == expected, result.id
         assert result.status == result_status.status(result.record, evidence), result.id
-        marks = render_recent_results.position_marks(result.record, expected)
-        assert overview_sections.is_superseded(result) is bool(marks), result.id
+        found = render_recent_results.supersessions(result.record, expected, records)
+        assert result.supersessions == tuple(found), result.id
+        marks = [mark.mark for mark in found]
+        assert overview_sections.is_superseded(result) is (
+            render_recent_results.SUPERSEDED in marks
+        ), result.id
         for row in (_row(results, result.id), _recent_row(recent, result.id)):
             tag = row.split(">", 1)[0]
             assert f'data-status="{result.status}"' in tag, result.id
             assert "data-standing=" not in tag, result.id
             assert status.findall(row) == [(result.status, result.status)], result.id
-            assert standing.findall(row) == marks, result.id
+            # Each mark's chip says `superseded` and carries its own standing.
+            assert standing.findall(row) == [
+                (overview_sections.standing_key(mark), render_recent_results.SUPERSEDED)
+                for mark in marks
+            ], result.id
             line = row.split('<span class="site-standing">', 1)[1]
             assert line.startswith(overview_sections.status_chip(result.status)), result.id
             # The status line is a column of its own since 2026-10-02 (think-ybt5),
@@ -2443,11 +2455,22 @@ def test_every_result_shows_its_status_and_its_place_on_the_frontier(
     assert {result.status for result in overview.results} <= set(result_status.STATUSES)
     assert any(result.standing == held for result in overview.results)
     # A method's limit cites the bound it measures and derives `superseded`; it is no
-    # bound, so nothing supersedes it and its row is not marked.
+    # bound, and declares no later result that implies it, so its row is not marked.
     by_id = {result.id: result for result in overview.results}
     assert by_id["T-003"].standing == render_recent_results.SUPERSEDED
     assert not overview_sections.is_superseded(by_id["T-003"])
     assert overview_sections.is_superseded(by_id["T-037"])
+    # A superseded bound names the result its case's bound rests on now, as a link to
+    # that result's row; a result of another kind that a later one implies in part
+    # names it the same way, and stays current (think-6zg1, think-7df0).
+    t060 = f'by <a href="{overview_sections.result_url("T-060")}">T-060</a>'
+    assert t060 in _row(results, "T-037")
+    assert not overview_sections.is_superseded(by_id["T-036"])
+    in_part = render_recent_results.SUPERSEDED_IN_PART
+    assert by_id["T-036"].supersessions == (
+        render_recent_results.Supersession(in_part, ("T-060",)),
+    )
+    assert t060 in _row(results, "T-036")
     for second in ("T-054", "T-055"):
         assert by_id[second].record["kind"] == "simplification"
         assert "second certificate" not in _row(results, second), second
@@ -2532,8 +2555,12 @@ def test_every_result_shows_its_kind(
         if result.standing == render_recent_results.NO_STANDING:
             assert kind not in check_results.BOUND_KINDS, result.id
         if kind not in check_results.BOUND_KINDS:
-            assert not overview_sections.is_superseded(result), result.id
-            assert ">superseded<" not in marks, result.id
+            # Superseded only where the entry declares a later result that implies the
+            # whole of it (`superseded_by`, think-nlo0).
+            declared = result.record.get("superseded_by") or []
+            whole = any(item["extent"] == "whole" for item in declared)
+            assert overview_sections.is_superseded(result) is whole, result.id
+            assert ('data-standing="superseded">' in marks) is whole, result.id
     assert ">not a bound<" not in results + recent
     assert 'data-standing="not-a-bound"' not in results + recent
     # The popover's head and a chain's step show the kind beside the rungs, then the
@@ -2544,8 +2571,21 @@ def test_every_result_shows_its_kind(
         f"{overview_sections.status_marks(t036)}"
     )
     assert overview_sections.kind_and_status(t036) == (
-        f"{overview_sections.kind_chip(t036)} {overview_sections.status_chip('confirmed')}"
+        f"{overview_sections.kind_chip(t036)} {overview_sections.status_chip('confirmed')} "
+        f"{overview_sections.supersession_marks(t036)}"
     )
+    # Its partial mark's chip says `superseded`, as the whole mark's does, and keeps its
+    # own standing; `in part` leads the quiet text after it, so the line reads as the
+    # register's does, and the status column is no wider than `superseded` (think-kmi4).
+    t060 = f'<a href="{overview_sections.result_url("T-060")}">T-060</a>'
+    marks = overview_sections.supersession_marks(t036)
+    assert marks == (
+        '<span class="site-superseded"><span class="site-chip" '
+        'data-standing="superseded-in-part">superseded</span> '
+        f'<span class="site-cell-quiet">in part by {t060}</span></span>'
+    )
+    (in_part,) = t036.supersessions
+    assert html.unescape(re.sub(r"<[^>]+>", "", marks)) == in_part.words()
     from devtools import result_overview  # noqa: PLC0415
 
     assert ">restricted optimality</span>" in result_overview.result_popover_html(
@@ -2576,8 +2616,9 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     page: str, overview: overview_data.Overview
 ) -> None:
     """The section is one `.site-table` of the recent results, one row each, with the
-    columns every table of results has; no row links across to the results page, no card
-    or list is left in it, and its only popovers are its rows' own. What a row's popover
+    columns every table of results has; a row links across to the results page only
+    where its status names the results that supersede it, no card or list is left in
+    it, and its only popovers are its rows' own. What a row's popover
     holds is the popover's own business, so the section is read without them."""
     section = page.split('id="recent-results"', 1)[1].split("<h2", 1)[0]
     recent = _recent_table(page)
@@ -2603,8 +2644,12 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     for result in newest:
         row = _recent_row(recent, result.id)
         # The row is the result's own here too, so nothing in it leads to its row on
-        # the results page: the summary is plain, as it is there.
-        assert "all-results.html" not in row, result.id
+        # the results page: the summary is plain, as it is there. A superseded result
+        # links the rows of the results that supersede it, and only those.
+        assert overview_sections.result_url(result.id) not in row, result.id
+        linked = re.findall(r'href="all-results\.html#(t-\d+)"', row)
+        named = {other.lower() for mark in result.supersessions for other in mark.by}
+        assert set(linked) == named, result.id
         # The id, in its own cell, is the row's native trigger, which opens its popover
         # unscripted; the result's cell holds the result and no id.
         assert (
@@ -2744,8 +2789,9 @@ def test_the_html_measures_an_age_from_the_register_and_never_from_the_clock(
         assert shows(bound, hiding, day) == current, standing
         assert shows(result("2026-09-29", 5, standing), recent, day) == current, standing
         assert shows(bound, every, day), standing
-    # A result that is no bound is never superseded, whatever standing its evidence
-    # gives it: no later bound supersedes the limit of a method.
+    # A result that is no bound is not superseded by its standing, whatever its
+    # evidence gives it: no later bound supersedes the limit of a method. Only a
+    # declared later result does (`superseded_by`).
     for kind in sorted(set(check_results.KINDS) - check_results.BOUND_KINDS):
         other = result("1979", 2, "superseded", kind)
         assert not overview_sections.is_superseded(other), kind
@@ -2764,9 +2810,13 @@ def test_a_credit_splits_at_what_it_builds_on_and_a_standing_into_its_chips() ->
         'Levy <span class="site-cell-quiet">after Burns, Massaccesi</span>'
     )
     assert overview_sections.credit_cell("A & B") == "A &amp; B"
-    # Of a standing a table draws one chip, `superseded`, the plain one.
+    # Of a standing a table draws one chip, `superseded`, the plain one; the partial
+    # mark's says the same word and keeps its own standing (think-kmi4).
     assert overview_sections.standing_chip("superseded") == (
         '<span class="site-chip" data-standing="superseded">superseded</span>'
+    )
+    assert overview_sections.standing_chip("superseded in part", "superseded") == (
+        '<span class="site-chip" data-standing="superseded-in-part">superseded</span>'
     )
     assert not hasattr(overview_sections, "standing_chips")
 
@@ -3665,13 +3715,16 @@ def test_both_tables_of_results_have_the_same_columns(
         assert f'<tr id="{result.id.lower()}" ' in here
         assert f'<tr data-result="{result.id.lower()}" ' in there
         # The row is the same markup on both pages, as written and as each page serves
-        # it, apart from what names the page; and no row links to the other table.
+        # it, apart from what names the page; and no row links to its own row in the
+        # other table. A superseded result's row links the rows of the results that
+        # supersede it, which are on the results page wherever the row is.
         assert anywhere(here) != here
         assert anywhere(here) == anywhere(there), result.id
         served_here = _row(results, result.id)
         served_there = _recent_row(_recent_table(page), result.id)
         assert anywhere(served_here) == anywhere(served_there), result.id
-        assert "all-results.html" not in there + served_there, result.id
+        own = overview_sections.result_url(result.id)
+        assert own not in there + served_there, result.id
         # The popover a row opens is the same panel too.
         target = f"pop-result-{result.id.lower()}"
         assert _row_popover(recent, target) == _row_popover(table, target), result.id
@@ -5313,10 +5366,11 @@ def test_hide_superseded_starts_checked_on_the_overview_and_clear_on_the_results
 ) -> None:
     """Hide superseded is one checkbox of the shared bar, checked in the overview's HTML
     and clear in the results page's, from each table's `FilterDefaults`. What it hides is
-    the register's own standing: a row's `data-current` is `false` exactly where its
-    standing is `superseded`, and `true` for every other, a current best, a second
-    certificate and a result that claims no bound, which has no standing, alike. So on
-    the overview no row shown
+    the superseded mark: a row's `data-current` is `false` exactly where a bound's
+    standing is `superseded` or a result of another kind declares a later result that
+    implies the whole of it (`superseded_by`, think-rl2b), and `true` for every other, a
+    current best, a second certificate and a result that claims no bound and declares
+    none, alike. So on the overview no row shown
     is superseded and the count is of the rest, and on the results page the same rows
     carry the flag but none is hidden. No result a star marks is superseded, so the
     default never hides a new result."""
@@ -5334,10 +5388,14 @@ def test_hide_superseded_starts_checked_on_the_overview_and_clear_on_the_results
     kept = set()
     for result in overview.results:
         superseded = overview_sections.is_superseded(result)
-        assert superseded == (
-            result.standing == render_recent_results.SUPERSEDED
-            and result.record["kind"] in check_results.BOUND_KINDS
-        ), result.id
+        if result.record["kind"] in check_results.BOUND_KINDS:
+            assert superseded == (result.standing == render_recent_results.SUPERSEDED), (
+                result.id
+            )
+        else:
+            declared = result.record.get("superseded_by") or []
+            whole = any(item["extent"] == "whole" for item in declared)
+            assert superseded == whole, result.id
         flag = f'data-current="{"false" if superseded else "true"}"'
         ours = _recent_row(recent, result.id).split(">", 1)[0] + ">"
         theirs = _row(results, result.id).split(">", 1)[0] + ">"
@@ -5353,10 +5411,11 @@ def test_hide_superseded_starts_checked_on_the_overview_and_clear_on_the_results
         if result.id in overview.starred:
             assert not superseded, result.id
     # Every standing stays, and so does a result with none: nothing but a superseded
-    # bound is hidden for it. The one result that derives `superseded` and stays is the
-    # limit of a method, which is no bound. No result has stood as a reported second
-    # certificate since 2026-10-02, when T-055's replay was recorded; when one does again,
-    # this pin fails and the standing returns to the set.
+    # bound, or a result of another kind declared superseded as a whole, is hidden for
+    # it. The one result that derives `superseded` and stays is the limit of a method,
+    # which is no bound. No result has stood as a reported second certificate since
+    # 2026-10-02, when T-055's replay was recorded; when one does again, this pin fails
+    # and the standing returns to the set.
     assert kept == {
         *render_recent_results.STANDINGS,
         render_recent_results.NO_STANDING,

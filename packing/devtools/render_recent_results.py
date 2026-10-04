@@ -10,6 +10,8 @@ counts and standings from the functions here, as `frontier/RESULTS.md`
   lower bound is a recent result, with both lanes, and **`recent_counts`**, the four
   counts the site's survey section quotes.
 - **`standing`**: whether a register entry holds a case bound now, and if not, why not.
+- **`supersessions`**: whether an entry is superseded, wholly or in part, and by which
+  entries, as `RESULTS.md` and the site's tables name them.
 - **`relation`** and `LINEAGES`: the relation of a result by others to this project,
   read from the bibliography's typed lineage.
 
@@ -26,9 +28,15 @@ the exact value of a proved case (it cites that case's verified upper bound besi
 lower bound of its own) and *superseded* where it is any other bound.
 
 **Standing is about bounds, so an entry whose evidence claims none has no standing**
-(`NO_STANDING`): nothing supersedes a rigidity or a case exclusion. The views show such
-an entry's `kind` (epistemics.md, Result Kinds) and no standing, and
+(`NO_STANDING`): no later bound supersedes a rigidity or a case exclusion. The views show
+such an entry's `kind` (epistemics.md, Result Kinds) and no standing, and
 `devtools.check_results` holds it to a kind that is no bound.
+
+**What supersedes an entry is named** (`supersessions`). A superseded bound is
+superseded by the entries its cases' bounds rest on now (`superseding`), derived like
+its standing. An entry of another kind is superseded only where a later result implies
+it, which nothing derives, so its register entry declares it (`superseded_by`): the
+whole of it, marked `superseded`, or a part, marked `superseded in part`.
 
 **Recent is decided where the record already decides it; nothing here defines it.** A
 verified lower bound is recent where the stage and the atlas star it,
@@ -102,6 +110,13 @@ SECOND_CERTIFICATE = "second certificate"
 #: as a replayed one would say it had been checked here.
 SECOND_CERTIFICATE_REPORTED = "second certificate, reported"
 SUPERSEDED = "superseded"
+#: The mark of a result of a kind that is no bound, part of which a later result implies,
+#: where its entry declares it (`superseded_by`, extent `part`); it is drawn after
+#: `SUPERSEDED`'s place and does not hide the result.
+SUPERSEDED_IN_PART = "superseded in part"
+#: How much of a result a later one implies, as `superseded_by` declares it.
+WHOLE = "whole"
+PART = "part"
 STANDINGS = (
     HOLDS,
     HOLDS_REPORTED,
@@ -197,10 +212,15 @@ class Held(NamedTuple):
     """Entries a verified bound, lower or upper, rests on."""
     reported: frozenset[str]
     """Entries a reported bound, lower or upper, rests on."""
-    upper: frozenset[str]
+    upper_evidence: frozenset[str]
     """The verified upper bound's evidence, the grid's included: an exact value's top."""
     proved: bool
     """Whether the case is proved, so its verified bounds meet at an exact value."""
+    lower_holders: frozenset[str]
+    """Entries a lower bound, verified or reported, rests on: what a lower bound that
+    holds none of them was superseded by."""
+    upper_holders: frozenset[str]
+    """Entries an upper bound, verified or reported, rests on."""
 
 
 def _rational(text: object) -> Fraction | None:
@@ -439,15 +459,17 @@ def held(n: int, records: Records) -> Held:
     """Which entries case `n`'s four bounds rest on."""
     case = records.cases[n]
     upper = case.get("verified_upper_bound")
-    verified = _lower_holders(n, case["verified_lower_bound"], records, "lower")
-    verified |= _upper_holders(n, upper, records)
-    reported = _lower_holders(n, case["reported_lower_bound"], records, "reported lower")
-    reported |= _upper_holders(n, case.get("reported_upper_bound"), records)
+    lower = _lower_holders(n, case["verified_lower_bound"], records, "lower")
+    reported_lower = _lower_holders(n, case["reported_lower_bound"], records, "reported lower")
+    verified_upper = _upper_holders(n, upper, records)
+    reported_upper = _upper_holders(n, case.get("reported_upper_bound"), records)
     return Held(
-        verified=frozenset(verified),
-        reported=frozenset(reported),
-        upper=frozenset(str(item) for item in (upper or {}).get("evidence") or []),
+        verified=frozenset(lower | verified_upper),
+        reported=frozenset(reported_lower | reported_upper),
+        upper_evidence=frozenset(str(item) for item in (upper or {}).get("evidence") or []),
         proved=case["status"] == "proved",
+        lower_holders=frozenset(lower | reported_lower),
+        upper_holders=frozenset(verified_upper | reported_upper),
     )
 
 
@@ -464,32 +486,108 @@ def standing(record: Mapping[str, Any], records: Records) -> str:
     claims = {records.register.evidence[item].get("claim") for item in cited}
     if not claims & BOUND_CLAIMS:
         return NO_STANDING
-    if "lower-bound" in claims and any(case.proved and cited & case.upper for case in cases):
+    if "lower-bound" in claims and any(
+        case.proved and cited & case.upper_evidence for case in cases
+    ):
         if str(record["confirmation"]) in REPLAYED_RUNGS:
             return SECOND_CERTIFICATE
         return SECOND_CERTIFICATE_REPORTED
     return SUPERSEDED
 
 
+def _declared(record: Mapping[str, Any], extent: str) -> tuple[str, ...]:
+    """The results an entry's `superseded_by` names with this `extent`, in id order."""
+    named = {
+        str(item["result"])
+        for item in record.get("superseded_by") or []
+        if item["extent"] == extent
+    }
+    return tuple(sorted(named))
+
+
 def superseded(record: Mapping[str, Any], held: str) -> bool:
-    """Whether a table of results marks an entry superseded, given its standing `held`:
-    it is a bound, a result whose `kind` is one of `BOUND_KINDS`, and no case bound rests
-    on it now.
+    """Whether a table of results marks an entry superseded, given its standing `held`.
 
-    Of a standing, this is all a table draws beside a result's kind and status. That a
-    bound is only reported is the result's status (`devtools.result_status`: recorded).
-    A second proof of a value another result holds says so by its kind, simplification.
-    And a result that is no bound has no place on the frontier to lose, though it may
-    cite the evidence of the bound it is about and so derive a standing: `T-003`, the
-    limit of a method, cites the bound it measures and derives `superseded`, and no
-    later bound supersedes a method's limit."""
-    return held == SUPERSEDED and str(record.get("kind")) in BOUND_KINDS
+    A bound, a result whose `kind` is one of `BOUND_KINDS`, is superseded where no case
+    bound rests on it now, which is derived from the case records and never stored.
+    That a bound is only reported is the result's status (`devtools.result_status`:
+    recorded), and a second proof of a value another result holds says so by its kind,
+    simplification.
+
+    A result of any other kind has no place on the frontier to lose, though it may cite
+    the evidence of the bound it is about and so derive a standing: `T-003`, the limit
+    of a method, cites the bound it measures and derives `superseded`, and no later
+    bound supersedes a method's limit. Such a result is superseded only where its
+    register entry declares a later result that implies the whole of it
+    (`superseded_by`, extent `whole`), which `devtools.check_results` holds to the
+    register."""
+    if str(record.get("kind")) in BOUND_KINDS:
+        return held == SUPERSEDED
+    return bool(_declared(record, WHOLE))
 
 
-def position_marks(record: Mapping[str, Any], held: str) -> list[str]:
-    """An entry's place on the frontier as the marks a table draws after its status:
-    `superseded` (`superseded`), or nothing."""
-    return [SUPERSEDED] if superseded(record, held) else []
+def superseding(record: Mapping[str, Any], records: Records) -> tuple[str, ...]:
+    """The results a superseded bound was superseded by, in id order: the bounds, entries
+    of a kind in `BOUND_KINDS`, that the bounds of its own cases rest on now, verified or
+    reported, read as `held` reads them. An upper bound's are the upper bounds' holders;
+    a lower bound's and an exact value's are the lower bounds' holders, since a
+    construction never supersedes a proof. An audit or a correction that cites a bound's
+    evidence carries it and supersedes nothing. Empty where no register entry carries
+    those bounds."""
+    upper = str(record["kind"]) == "upper-bound"
+    found: set[str] = set()
+    for n in _scope(record):
+        if n in records.cases:
+            case = held(n, records)
+            found |= case.upper_holders if upper else case.lower_holders
+    found.discard(str(record["id"]))
+    return tuple(
+        sorted(entry for entry in found if records.results[entry]["kind"] in BOUND_KINDS)
+    )
+
+
+class Supersession(NamedTuple):
+    """One mark of supersession a view draws after a result's status, and the results
+    that supersede it, in id order."""
+
+    mark: str
+    """`SUPERSEDED`, or `SUPERSEDED_IN_PART` where a later result implies only part."""
+    by: tuple[str, ...]
+
+    def words(self) -> str:
+        """The mark as text, as `RESULTS.md` prints it: `superseded by T-030 and T-046`."""
+        return f"{self.mark} by {listed(self.by)}" if self.by else self.mark
+
+
+def listed(ids: Sequence[str]) -> str:
+    """Result ids as prose lists them: `T-030`, `T-030 and T-046`, `T-020, T-030 and
+    T-046`."""
+    return " and ".join(filter(None, (", ".join(ids[:-1]), ids[-1]))) if ids else ""
+
+
+def supersessions(
+    record: Mapping[str, Any], stands: str, records: Records
+) -> list[Supersession]:
+    """Every mark of supersession an entry carries, given its standing `stands`, whole
+    before in part: `superseded` (`superseded`) by the results its cases' bounds rest on
+    now for a bound (`superseding`), or by those its entry declares for a result of
+    another kind; and `superseded in part` by those its entry declares, which only a
+    result of another kind can (`superseded_by`, extent `part`)."""
+    bound = str(record.get("kind")) in BOUND_KINDS
+    marks: list[Supersession] = []
+    if superseded(record, stands):
+        by = superseding(record, records) if bound else _declared(record, WHOLE)
+        marks.append(Supersession(SUPERSEDED, by))
+    part = () if bound else _declared(record, PART)
+    if part:
+        marks.append(Supersession(SUPERSEDED_IN_PART, part))
+    return marks
+
+
+def position_marks(record: Mapping[str, Any], held: str, records: Records) -> list[str]:
+    """An entry's place on the frontier as the marks a table draws after its status,
+    each with the results that supersede it (`supersessions`), or nothing."""
+    return [mark.words() for mark in supersessions(record, held, records)]
 
 
 def is_recent_by_others(record: Mapping[str, Any]) -> bool:

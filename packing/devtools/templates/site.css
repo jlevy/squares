@@ -1213,13 +1213,19 @@ body {
 }
 /* A result's status has a column of its own, after the rungs (`think-ybt5`; it sat
    under the kind until 2026-10-02): the status chip, then who has the next move where
-   the register records it, then `superseded` where the result is. The chips wrap
+   the register records it, then `superseded` or `superseded in part` where the result
+   is, each with the results that supersede it (`supersession_marks`). The chips wrap
    between themselves, one under another where the cell is too narrow, a kind's gap
    apart, and never inside one: the column is as wide as its widest chip. */
 .site-table .site-standing {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
+}
+/* The results that supersede one are named by their ids, and an id never breaks at its
+   hyphen: `T-` at the end of one line and `020` on the next reads as two things. */
+:is(.site-superseded, .site-result-superseded) a {
+  white-space: nowrap;
 }
 
 .kpress .site-table {

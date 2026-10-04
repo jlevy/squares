@@ -39,10 +39,12 @@ from devtools.register_prose import LINK, paragraphs
 from devtools.render_recent_results import (
     RecentCounts,
     Row,
+    Supersession,
     load_records,
     recent_counts,
     recent_rows,
     standing,
+    supersessions,
 )
 from devtools.render_research_tables import load_cases
 from devtools.repo_links import path_kind, repo_url
@@ -260,6 +262,10 @@ class Result:
     status: str = ""
     """How far this project's workflow has taken the result: recorded, reviewed,
     confirmed or incomplete (`result_status.status`), the word `RESULTS.md` prints."""
+    supersessions: tuple[Supersession, ...] = ()
+    """Whether the result is superseded, wholly or in part, and by which results
+    (`render_recent_results.supersessions`): what a table's status line names after
+    its status, as `RESULTS.md` names it."""
 
     @property
     def activity(self) -> str:
@@ -451,8 +457,9 @@ def load() -> Overview:
                 credit=credit_line(r, sources).replace(r"\|", "|"),
                 ours=not r.get("attribution"),
                 records=_records(r, evidence),
-                standing=standing(r, records),
+                standing=(stands := standing(r, records)),
                 status=result_status.status(r, evidence),
+                supersessions=tuple(supersessions(r, stands, records)),
             )
             for r in members
         ]

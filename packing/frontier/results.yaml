@@ -1718,6 +1718,19 @@ results:
       patch-and-dot instance within the retained source comparison; no new priority
       search was performed. The subsequent independent exp145 replay passed in
       Session115 with its own process cost and preserved the original claim and grades.
+
+      2026-10-03: superseded_by declared in the audit of the register's results that are
+      not bounds (think-rl2b). Completing the owner case split at this side can no longer
+      move a bound, so the continuation in next_rung is method history.
+    superseded_by:
+      - result: T-060
+        extent: part
+        what: >-
+          The conclusion, that the four-owner branch holds no packing of eleven squares at
+          side 96/25, which T-060 gives for every packing of eleven squares, since 96/25 is
+          below T. The count is not implied: that beside four squares holding the four
+          patches at most five further squares fit, nine in all, is a statement about ten
+          squares, on which T-060 says nothing.
   - id: T-024
     kind: lower-bound
     registered: '2026-09-09'
@@ -2524,6 +2537,19 @@ results:
       and a retained human oversight record (epistemics.md, No Blind Trust); none is
       retained for this result, so it stands at V3/C3: machine-checked, review record
       pending. The oversight record restores the rung.
+
+      2026-10-03: superseded_by declared in the audit of the register's results that are
+      not bounds (think-rl2b). The extent is whole because the certificate's charge on the
+      clipped domain is a fact about its measure, not about packings; it stays as method
+      evidence for the corner-clipped point language.
+    superseded_by:
+      - result: T-060
+        extent: whole
+        what: >-
+          The exclusion, that every packing of eleven unit squares in [0, 96/25]^2 has a
+          square meeting an open corner triangle, so that the octagon class holds none at
+          side 96/25. T-060 gives every packing of eleven squares a side of at least T,
+          which is above 96/25, so there is no such packing.
   - id: T-032
     kind: lower-bound
     registered: '2026-09-21'
@@ -3139,6 +3165,20 @@ results:
       consume, and with C4 a second adversarial AI review by a distinct reviewer and a human
       oversight record. Retaining the per-face dual witnesses and recomputing the gap cap
       from distinct source are the closure review's two bounded residual tasks.
+    notes: >-
+      2026-10-03: T-060, which confirms that s(11) is Trump's exact side U (its T), implies
+      this result's first clause and not its equality clause (superseded_by), so this
+      result remains the register's one statement that a packing of eleven squares is
+      unique, for the six-plus-five family near Trump's tilt.
+    superseded_by:
+      - result: T-060
+        extent: part
+        what: >-
+          The first clause, that every packing in the family has side at least U, which
+          T-060 gives for every packing of eleven squares. The equality clause, that a
+          packing in the family attains U only as a quarter-turn image of Trump's pose with
+          the squares relabelled within the two classes, is not implied, since T-060 makes
+          no claim of uniqueness.
 
   - id: T-037
     kind: lower-bound

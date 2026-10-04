@@ -966,11 +966,22 @@ it.
   move (`data-activity`): `in analysis` for a replay or review under way here,
   `waiting on source` for a request with another party; its title says what is in hand
   and since when. Last is `superseded` (`data-standing`), on a bound that no case bound
-  rests on now. A result that still stands draws no chip for that: `current best` is the
-  default, so it is left unsaid.
-  That a bound is only reported is no chip of its own: it is the status `recorded`. A
-  second proof of a value another result holds says so by its kind, `simplification`,
-  and a result that bounds nothing by its kind too.
+  rests on now, followed in quiet type by the results that supersede it, each a link to
+  its row: “by T-060”, the results its cases’ bounds rest on now
+  (`overview_sections.supersession_marks`). A result of a kind that is no bound draws it
+  only where its entry declares a later result that implies it (`superseded_by`), and
+  `superseded in part` where that result implies some of it, as `T-060` does `T-036`’s
+  bound and not its equality case.
+  That mark’s chip says `superseded` too, and `in part` leads the quiet text after it,
+  so the line reads “superseded in part by T-060”, the register’s words; the chip keeps
+  its own standing, `data-standing="superseded-in-part"`, and the row stays current.
+  The four words as one chip were 150 pixels, the widest chip of the status line, and
+  set the column 52 pixels wider than `superseded` does (`think-kmi4`). An id never
+  breaks at its hyphen.
+  A result that still stands draws no chip for that: `current best` is the default, so
+  it is left unsaid. That a bound is only reported is no chip of its own: it is the
+  status `recorded`. A second proof of a value another result holds says so by its kind,
+  `simplification`, and a result that bounds nothing by its kind too.
   Each of these chips adds no style of its own, so every one is the same plain gray
   chip, one font size, line height and height, and they differ only in their words.
   The Rungs column is as wide as its widest chip, so in a table each chip of the status
@@ -1467,9 +1478,11 @@ it.
   starts, which sets the rows that begin `hidden` and the count, and in a row’s key: on
   the results page a row is the result’s own address (`id="t-018"`), and on the overview
   it names the result as `data-result`. Every other byte of a row and of its popover is
-  the same, so each shows the result’s records in its details, each opens its popover
-  from the id, and no row of one links to the other.
-  The line under the overview’s table, “See all results”, is the one link between them.
+  the same, so each shows the result’s records in its details and each opens its popover
+  from the id. The line under the overview’s table, “See all results”, links the overview
+  to the results page, and so does a status line that names the results superseding its
+  own: each named result links to its row on the results page
+  (`overview_sections.result_url`), in place there and across from the overview.
   Both sort on any column whose header carries the sort pair.
   The widths follow from each column’s floor and from what the n column asks for.
   The id, the rungs, the status, the details and the date are as narrow as what they
@@ -1692,13 +1705,18 @@ Max age is a number of days, and empty is no limit. There is no date range.
 
 - **Hide superseded.** One checkbox, straight after Status, hides exactly the superseded
   results: the bounds no case bound rests on now, because a later or a stronger result
-  holds the case (`overview_sections.is_superseded`). Every other result stays: one that
-  still holds a bound, verified or reported, and a result of a kind that is no bound,
-  such as a rigidity, a simplification or the limit of a method, which no better bound
-  supersedes. A result that holds one case of several is not superseded.
-  The word is derived from the case records (`render_recent_results.standing`), so the
-  checkbox and the `superseded` chip cannot disagree, and `devtools.check_standing`
-  holds it to the bounds each entry states.
+  holds the case (`overview_sections.is_superseded`), and the results of other kinds
+  whose entries declare a later result that implies the whole of them.
+  Every other result stays: one that still holds a bound, verified or reported, a result
+  of a kind that is no bound, such as a rigidity, a simplification or the limit of a
+  method, which no better bound supersedes, and one superseded only in part.
+  A result that holds one case of several is not superseded.
+  For a bound the word is derived from the case records
+  (`render_recent_results.standing`), so the checkbox and the `superseded` chip cannot
+  disagree, and `devtools.check_standing` holds it to the bounds each entry states.
+  A result superseded in part draws the same `superseded` chip with “in part” after it,
+  and the checkbox keeps its row: the chip’s `data-standing`, `superseded-in-part`,
+  tells the two marks apart.
   A row carries the answer as `data-current`, `false` where it is superseded.
   Superseded is the result’s place on the frontier and no status, so the checkbox and
   Status ask different questions and compose as every pair of controls does: a confirmed
@@ -2047,8 +2065,10 @@ names.
   the overview lands. The body opens with the S, V and C rung chips, the kind chip and
   the status line, as the tables show them; then the date and what it dates, in the
   tables’ order (`date_cell`), the credit and the cases, in the support colour; the
-  claim at the note size; and a closed disclosure with the significance, composition,
-  next rung and novelty.
+  claim at the note size; where the entry declares a later result that implies it
+  (`superseded_by`), a paragraph under the claim that opens “Superseded in part by
+  T-060.”, the later result linked, and says what it implies and what still stands; and
+  a closed disclosure with the significance, composition, next rung and novelty.
 - **The case.** A result about one case, or up to four, shows each case’s visual summary
   as the case’s record opens with it (**Visual summary**, above), smaller and with no
   caption under the drawing: the packing drawn at the atlas’s scale

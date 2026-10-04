@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import html
 import re
+from dataclasses import replace
 
 import pytest
 
@@ -18,7 +19,7 @@ from devtools import (
     result_overview,
 )
 from devtools.render_case_pages import BROAD_RESULT
-from devtools.render_recent_results import HOLDS, SUPERSEDED
+from devtools.render_recent_results import HOLDS, NO_STANDING, SUPERSEDED
 from devtools.repo_links import DEFAULT_BRANCH, REPO, REPO_URL
 from sqpack.yamlio import safe_load
 from tests import site_renders
@@ -112,6 +113,26 @@ def test_the_head_states_the_result_as_the_site_does(
     assert html.escape(result.credit) in head
     assert "Significance" in head
     assert f'data-novelty="{result.novelty}"' in head
+
+
+def test_the_head_says_what_a_declared_later_result_implies(bodies: dict[str, str]) -> None:
+    """A result whose entry declares a later result that implies it (`superseded_by`)
+    says so under its claim, with the later result linked and what it implies: T-060
+    implies T-036's bound clause and not its equality clause (think-7df0). A superseded
+    bound says nothing there; its chip names its successors."""
+    head = bodies["T-036"].split("</header>", 1)[0]
+    later = (
+        '<p class="site-result-claim site-result-superseded"><strong>Superseded in part by '
+        f'<a href="{overview_sections.result_url("T-060")}">T-060</a>.</strong> The first '
+        "clause"
+    )
+    assert later in head
+    assert "is not implied, since T-060 makes no claim of uniqueness." in head
+    assert head.index(later) > head.index('<p class="site-result-claim">')
+    assert head.index(later) < head.index('<details class="site-result-more">')
+    assert "site-result-superseded" not in bodies["T-037"]
+    successor = f'by <a href="{overview_sections.result_url("T-060")}">T-060</a>'
+    assert successor in bodies["T-037"].split("</header>", 1)[0]
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER])
@@ -233,7 +254,16 @@ def test_the_chain_is_every_result_on_the_case_oldest_first(
         assert f'<p class="site-result-step-head">{dated} <a href=' in step
         assert not re.search(r'class="site-date-kind">\w+</span> [\d-]+', step)
         assert overview_data.tex_bounds(other.summary) in step
-        assert overview_sections.kind_and_status(other) in step
+        # Where the result stands here as it does as a whole, its marks name only the
+        # results that supersede it on these cases (`result_overview.supersessions_on`).
+        shared = sorted(cases & set(result_overview.scope(other)))
+        here = result_overview.standing_on(other, shared)
+        shown = (
+            replace(other, supersessions=result_overview.supersessions_on(other, shared))
+            if here == other.standing
+            else other
+        )
+        assert overview_sections.kind_and_status(shown) in step
         assert f"packing/frontier/results.yaml?plain=1#L{lines[other.id]}" in step
         assert html.escape(other.credit) in step
         for key in (other.record.get("attribution") or {}).get("source_keys") or []:
@@ -277,8 +307,43 @@ def test_a_chain_step_says_both_standings_of_a_result_that_holds_elsewhere(
     assert not overview_sections.is_superseded(wide)
     assert ">current best<" not in step
     assert ">superseded<" not in step
-    assert "on this case, superseded" in step
+    assert "on this case, superseded by <a href=" in step
     assert steps["t-045"] == overview_sections.standing_key(SUPERSEDED)
+
+
+def test_a_result_superseded_in_part_stays_current_in_its_chain(
+    bodies: dict[str, str],
+) -> None:
+    """T-036, which T-060 supersedes only in part, is current in n = 11's chain, and its
+    step says it is superseded in part, by T-060, linked (think-7df0)."""
+    steps = dict(STEP.findall(bodies[SETTLED]))
+    t060 = f'<a href="{overview_sections.result_url("T-060")}">T-060</a>'
+    assert steps["t-036"] != overview_sections.standing_key(SUPERSEDED)
+    t036 = bodies[SETTLED].split('data-step="t-036"', 1)[1].split("</li>", 1)[0]
+    in_part = 'data-standing="superseded-in-part">superseded</span>'
+    assert f'{in_part} <span class="site-cell-quiet">in part by {t060}' in t036
+
+
+def test_a_result_that_is_no_bound_is_not_set_back_in_its_chain(
+    overview: overview_data.Overview, bodies: dict[str, str]
+) -> None:
+    """T-003, the limit of a method, derives `superseded` from the bound it cites, and no
+    later bound supersedes a method's limit: its row is current, and its step in n = 17's
+    chain is not set back as a superseded step is (`think-rf21`)."""
+    limit = _result(overview, "T-003")
+    assert limit.standing == SUPERSEDED
+    assert not overview_sections.is_superseded(limit)
+    steps = dict(STEP.findall(bodies["T-043"]))
+    assert steps["t-003"] == overview_sections.standing_key(NO_STANDING)
+    assert steps["t-019"] == overview_sections.standing_key(SUPERSEDED)
+
+
+def test_a_chain_names_only_the_successors_on_its_own_cases(bodies: dict[str, str]) -> None:
+    """T-019 is about n = 17 to 19 and superseded on each; on n = 17's chain its step
+    names only the result that holds that case, T-043 (think-6zg1)."""
+    step = bodies["T-043"].split('data-step="t-019"', 1)[1].split("</li>", 1)[0]
+    chips = step.split('<p class="site-result-step-chips">', 1)[1].split("</p>", 1)[0]
+    assert re.findall(r'href="all-results\.html#(t-\d+)"', chips) == ["t-043"]
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER, BROAD])

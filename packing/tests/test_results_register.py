@@ -944,6 +944,169 @@ def test_a_simplification_names_a_result_on_a_case_it_shares() -> None:
     assert check_results.kind_problems(silent, cited, {"T-999": {45}}) == unnamed
 
 
+def _superseded_by(*later: tuple[str, str], kind: str = "case-exclusion") -> dict:
+    """A result of `kind` on n = 11, established 2026-09-24, declaring `later` results."""
+    return {
+        "id": "T-036",
+        "kind": kind,
+        "established": "2026-09-24",
+        "superseded_by": [
+            {"result": other, "extent": extent, "what": "The bound."} for other, extent in later
+        ],
+    }
+
+
+def test_a_declared_supersession_names_a_later_result_on_a_shared_case() -> None:
+    """A result whose kind is no bound declares the later results that imply it
+    (`superseded_by`); each is registered, dated no earlier, on a case it shares, and
+    named once (think-nlo0). The dates are the results' own, when their sources
+    published them or this project established them, not when they were registered."""
+    problems = check_results.superseded_by_problems
+    dated = {"T-036": "2026-09-24", "T-035": "2026-09-24", "T-060": "2026-09-29"}
+    dated |= {"T-020": "2026-09-05", "T-011": "1979", "T-062": "2026"}
+    scopes = {"T-036": {11}, "T-035": {11}, "T-060": {11}, "T-020": {19}, "T-011": {11}}
+    scopes |= {"T-062": {11}}
+    assert problems(_superseded_by(("T-062", "part")), dated, scopes) == []
+    assert problems(_superseded_by(("T-011", "part")), dated, scopes) == [
+        "T-036: superseded_by names T-011, dated 1979, before this result's 2026-09-24"
+    ]
+    assert problems({"id": "T-036", "kind": "case-exclusion"}, dated, scopes) == []
+    assert problems(_superseded_by(("T-060", "part")), dated, scopes) == []
+    assert problems(_superseded_by(("T-035", "whole")), dated, scopes) == []
+    assert problems(_superseded_by(("T-036", "whole")), dated, scopes) == [
+        "T-036: superseded_by names the result itself"
+    ]
+    assert problems(_superseded_by(("T-060", "part"), ("T-060", "whole")), dated, scopes) == [
+        "T-036: superseded_by names T-060 twice"
+    ]
+    assert problems(_superseded_by(("T-099", "part")), dated, scopes) == [
+        "T-036: superseded_by names T-099, which is not registered"
+    ]
+    assert problems(_superseded_by(("T-020", "part")), dated, scopes) == [
+        "T-036: superseded_by names T-020, dated 2026-09-05, before this result's 2026-09-24",
+        "T-036: superseded_by names T-020, which shares no case with it",
+    ]
+
+
+def test_a_result_a_case_bound_rests_on_is_never_superseded_whole() -> None:
+    """A result a case bound still rests on stays in the tables, so no declaration hides
+    it as superseded whole, though one may supersede it in part (`think-rf21`): T-004, an
+    audit at n = 46, carried that case's lower bound when this was found."""
+    dated = {"T-036": "2026-09-24", "T-060": "2026-09-29"}
+    scopes = {"T-036": {11}, "T-060": {11}}
+    holding = frozenset({"T-036"})
+    problems = check_results.superseded_by_problems
+    assert problems(_superseded_by(("T-060", "whole")), dated, scopes, holding) == [
+        (
+            "T-036: superseded_by names T-060 as superseding all of it, but a case bound "
+            "still rests on it"
+        )
+    ]
+    assert problems(_superseded_by(("T-060", "part")), dated, scopes, holding) == []
+    assert problems(_superseded_by(("T-060", "whole")), dated, scopes) == []
+    # The register's own holders: every case bound rests on a registered result, and none
+    # of the results declared superseded whole is among them.
+    holders = check_results.holding_results()
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))["results"]
+    assert holders <= {record["id"] for record in register}
+    whole = {
+        record["id"]
+        for record in register
+        for item in record.get("superseded_by") or []
+        if item["extent"] == "whole"
+    }
+    assert whole == {"T-031"}
+    assert not whole & holders
+
+
+def test_declared_supersessions_never_lead_back() -> None:
+    """Two results of one day could each declare the other supersedes them, and both rows
+    would be hidden; a cycle is named once, from its first result (`think-rf21`)."""
+
+    def declaring(rid: str, *later: str) -> dict:
+        items = [{"result": other, "extent": "whole", "what": "All."} for other in later]
+        return {"id": rid, "superseded_by": items}
+
+    cycles = check_results.superseded_by_cycles
+    assert cycles([declaring("T-035", "T-036"), declaring("T-036", "T-035")]) == [
+        "T-035: superseded_by leads back to it, T-035 to T-036 to T-035"
+    ]
+    three = [
+        declaring("T-001", "T-002"),
+        declaring("T-002", "T-003"),
+        declaring("T-003", "T-001"),
+    ]
+    assert cycles(three) == [
+        "T-001: superseded_by leads back to it, T-001 to T-002 to T-003 to T-001"
+    ]
+    assert cycles([declaring("T-035", "T-036"), declaring("T-036")]) == []
+    assert cycles([declaring("T-036", "T-036")]) == []
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))["results"]
+    assert cycles(register) == []
+
+
+def test_a_bound_never_declares_what_supersedes_it() -> None:
+    """A bound's supersession is derived from the case records, so a declaration on one
+    is refused: two accounts of it could disagree."""
+    dated = {"T-036": "2026-09-24", "T-060": "2026-09-29"}
+    scopes = {"T-036": {11}, "T-060": {11}}
+    for kind in check_results.BOUND_KINDS:
+        later = _superseded_by(("T-060", "whole"), kind=kind)
+        assert check_results.superseded_by_problems(later, dated, scopes) == [
+            (
+                "T-036: declares superseded_by, but its kind is "
+                f"{check_results.kind_label(kind)}, whose supersession is derived from the "
+                "case records and never declared"
+            )
+        ], kind
+
+
+def test_a_declared_supersession_on_a_bound_fails_the_register_gate(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    later = [{"result": "T-060", "extent": "whole", "what": "s(11) = T."}]
+    monkeypatch.setattr(
+        check_results, "RESULTS", _changed_result(tmp_path, "T-037", superseded_by=later)
+    )
+    assert check_results.main() == 1
+    assert "T-037: declares superseded_by, but its kind is lower bound, whose" in (
+        capsys.readouterr().out
+    )
+
+
+def test_t036_is_superseded_in_part_by_t060() -> None:
+    """T-060's `s(11) = T` implies T-036's bound clause for every packing; its equality
+    clause is not implied, since T-060 makes no claim of uniqueness (think-7df0)."""
+    record, _, _ = _live_record("T-036")
+    assert record["superseded_by"] == [
+        {"result": "T-060", "extent": "part", "what": record["superseded_by"][0]["what"]}
+    ]
+    what = " ".join(record["superseded_by"][0]["what"].split())
+    assert what.startswith("The first clause")
+    assert "equality clause" in what
+    assert "is not implied" in what
+
+
+def test_the_96_25_case_exclusions_are_superseded_by_t060() -> None:
+    """T-060 leaves no packing of eleven squares at side 96/25, below T. That implies the
+    whole of T-031's exclusion of the octagon class, and T-023's exclusion of its
+    four-owner branch but not its count that at most five further squares fit beside
+    the owners, which is about ten squares (think-rl2b)."""
+    expected = {"T-031": "whole", "T-023": "part"}
+    for entry, extent in expected.items():
+        record, _, _ = _live_record(entry)
+        assert record["kind"] == "case-exclusion", entry
+        assert [(item["result"], item["extent"]) for item in record["superseded_by"]] == [
+            ("T-060", extent)
+        ], entry
+        assert "96/25" in record["claim"], entry
+    record, _, _ = _live_record("T-023")
+    what = " ".join(record["superseded_by"][0]["what"].split())
+    assert what.startswith("The conclusion")
+    assert "at most five further squares" in what
+    assert "is not implied" in what
+
+
 def test_results_md_labels_every_result_by_its_kind() -> None:
     register = safe_load(render_results.RESULTS.read_text(encoding="utf-8"))
     committed = render_results.OUTPUT.read_text(encoding="utf-8")
@@ -954,11 +1117,18 @@ def test_results_md_labels_every_result_by_its_kind() -> None:
         cells = row.split(" | ")
         assert cells[2] == check_results.kind_label(record["kind"]), record["id"]
         # The status column, the cell after S in both tables: the derived status first,
-        # and `superseded` only on a result whose kind is a bound.
+        # then each mark of supersession with what supersedes it, `superseded in part`
+        # only on a result whose kind is no bound, which declares it (think-nlo0).
         status = cells[8 if record.get("attribution") else 7]
         assert status.split(", ")[0] in result_status.STATUSES, record["id"]
-        if "superseded" in status.split(", "):
-            assert record["kind"] in check_results.BOUND_KINDS, record["id"]
+        if "superseded in part by " in status:
+            assert record["kind"] not in check_results.BOUND_KINDS, record["id"]
+            assert record["superseded_by"], record["id"]
+        elif "superseded by " in status and record["kind"] not in check_results.BOUND_KINDS:
+            assert any(item["extent"] == "whole" for item in record["superseded_by"])
+    t037 = next(line for line in committed.splitlines() if line.startswith("| T-037 |"))
+    assert t037.split(" | ")[8].startswith("confirmed, ")
+    assert t037.split(" | ")[8].endswith(", superseded by T-060")
 
 
 def test_results_by_others_awaiting_a_replay_lead_their_group() -> None:
