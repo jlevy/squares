@@ -6,6 +6,8 @@ use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 
 type Outcome = (String, f64, Vec<f64>, Vec<f64>, bool);
+type BoundEvent = (usize, f64, f64, Vec<f64>);
+type TightenOutcome = (Option<Vec<Box4>>, Vec<BoundEvent>, Option<String>);
 
 #[pyclass]
 /// One warm-started LP and bound-tightening session.
@@ -123,12 +125,22 @@ impl LpSession {
     }
     /// Tighten every coordinate bound while retaining the relaxation's basis.
     fn tighten(&mut self) -> PyResult<Option<Vec<Box4>>> {
+        Ok(self.tighten_impl(false)?.0)
+    }
+    /// Return accepted bounds in pilot order, followed by any empty-bounds reason.
+    fn tighten_recorded(&mut self) -> PyResult<TightenOutcome> {
+        self.tighten_impl(true)
+    }
+}
+impl LpSession {
+    fn tighten_impl(&mut self, record: bool) -> PyResult<TightenOutcome> {
         if !self.stepped || self.tightened {
             return Err(PyValueError::new_err(
                 "tighten requires one preceding lp_step and may be called once",
             ));
         }
         self.tightened = true;
+        let mut events = Vec::new();
         let k = self.boxes.len();
         let n = 2 * k + 1;
         let mut bounds: Vec<[f64; 4]> = self.boxes.iter().map(|b| [b.0, b.1, b.2, b.3]).collect();
@@ -164,16 +176,21 @@ impl LpSession {
                     || (sign < 0.0 && -bound < bounds[square][slot]);
                 if improved {
                     bounds[square][slot] = if sign > 0.0 { bound } else { -bound };
+                    if record {
+                        events.push((column, sign, bound, duals));
+                    }
                 }
                 let (lo, hi) = (bounds[square][2 * axis], bounds[square][2 * axis + 1]);
                 if lo > hi {
-                    return Ok(None);
+                    return Ok((None, events, Some("bounds".to_owned())));
                 }
                 self.lp.set_col_bounds(column, lo, hi)?;
             }
         }
-        Ok(Some(
-            bounds.iter().map(|b| (b[0], b[1], b[2], b[3])).collect(),
+        Ok((
+            Some(bounds.iter().map(|b| (b[0], b[1], b[2], b[3])).collect()),
+            events,
+            None,
         ))
     }
 }

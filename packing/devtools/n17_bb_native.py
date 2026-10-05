@@ -1,9 +1,8 @@
 """Run the unchanged n=17 branch-and-bound pilot with its native kernel.
 
 The native path replaces pair construction, interval dual bounds, the tiny LP step,
-and bound tightening.  Certificate recording and Taylor mode retain the pilot's Python
-implementations because their richer records and extra columns are outside the native
-kernel's contract.
+and bound tightening, returning proof events to the pilot's Python certificate recorder.
+Taylor mode retains the pilot's Python implementations for its extra columns.
 """
 
 from __future__ import annotations
@@ -48,6 +47,14 @@ class _NativeLpSession(Protocol):
     ) -> tuple[str, float, list[float], list[float], bool]: ...
 
     def tighten(self) -> list[pilot.Box] | None: ...
+
+    def tighten_recorded(
+        self,
+    ) -> tuple[
+        list[pilot.Box] | None,
+        list[tuple[int, float, float, list[float]]],
+        str | None,
+    ]: ...
 
 
 _CoreFactory = Callable[
@@ -150,9 +157,7 @@ def install(native_dir: str | Path) -> ModuleType:
     )
 
     def use_python(solver: pilot.Solver) -> bool:
-        return (
-            solver.recorder is not None or solver.settings.taylor or solver.taylor is not None
-        )
+        return solver.settings.taylor or solver.taylor is not None
 
     def pair_term(
         self: pilot.Solver,
@@ -160,7 +165,7 @@ def install(native_dir: str | Path) -> ModuleType:
         boxes: tuple[pilot.Box, ...],
         index: int,
     ) -> pilot.PairTerm:
-        if self.recorder is not None or self.settings.taylor:
+        if use_python(self):
             return original_pair_term(self, node, boxes, index)
         if self.settings.merge_gap != 0.0:
             raise ValueError("the native kernel requires --merge-gap 0")
@@ -223,6 +228,8 @@ def install(native_dir: str | Path) -> ModuleType:
             return
         if closed:
             evaluation.pruned = "lp"
+            if self.recorder is not None:
+                self.recorder.farkas(rows, duals)
             total = sum(duals) or 1.0
             for row, weight in zip(rows, duals, strict=True):
                 if weight > 0.0:
@@ -238,13 +245,22 @@ def install(native_dir: str | Path) -> ModuleType:
         if use_python(self):
             return original_tighten(self, evaluation, rows)
         session = sessions[self]
-        bounds = session.tighten()
+        if self.recorder is None:
+            bounds = session.tighten()
+        else:
+            bounds, events, empty_reason = session.tighten_recorded()
+            for column, sign, bound, duals in events:
+                self.recorder.bound(column, sign, bound, rows, duals)
+            if empty_reason is not None:
+                self.recorder.emptied(empty_reason)
         if bounds is None:
             return None
         boxes: list[pilot.Box] = []
         for index, bound in enumerate(bounds):
             clipped = pilot.clip_to_box(self.pattern.polygons[index], bound)
             if clipped is None:
+                if self.recorder is not None:
+                    self.recorder.emptied("cell")
                 return None
             boxes.append(clipped)
         return tuple(boxes)
