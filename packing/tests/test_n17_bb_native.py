@@ -562,7 +562,7 @@ def evidence(tmp_path_factory: pytest.TempPathFactory) -> Iterator[_Evidence]:
                 "--cells",
                 A_CELLS,
                 "--label",
-                "certificate-fallback",
+                "certificate-native",
                 "--max-seconds",
                 "60",
                 "--max-nodes",
@@ -674,13 +674,13 @@ def test_f7_control_is_not_certified(evidence: _Evidence) -> None:
     assert "soundness_failure" not in evidence.f7_summary
 
 
-def test_certificate_and_taylor_modes_use_the_python_fallbacks(
+def test_certificate_is_native_and_taylor_uses_python_fallbacks(
     evidence: _Evidence,
 ) -> None:
     nodes = cast(list[object], evidence.certificate["nodes"])
     assert nodes
     parameters = cast(dict[str, object], evidence.taylor_summary["parameters"])
     assert parameters["taylor"] is True
-    for mode in ("certificate", "taylor"):
-        for method in ("pair_term", "solve_lp", "tighten"):
-            assert evidence.fallback_calls[(mode, method)] > 0
+    for method in ("pair_term", "solve_lp", "tighten"):
+        assert evidence.fallback_calls[("certificate", method)] == 0
+        assert evidence.fallback_calls[("taylor", method)] > 0
