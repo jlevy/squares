@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
+import sys
 from collections.abc import Iterator, Sequence
 from contextlib import ExitStack, contextmanager
 from fractions import Fraction
@@ -16,7 +18,6 @@ import gmpy2
 
 from devtools import n17_bb_native as wiring
 from devtools import pilot_n17_subpattern_bb as pilot
-from devtools import verify_n17_bb_certificate as verifier
 
 A_CELLS = "interior-SW,interior-NW,interior-W,interior-S,interior-N,interior-SE"
 
@@ -112,51 +113,100 @@ def compare_certificates(expected: Path, observed: Path) -> tuple[int, int]:
     return len(names), total
 
 
+def verify_certificates(directory: Path) -> int:
+    """Run unchanged full verifiers concurrently, each in a fresh interpreter."""
+    directory = directory.resolve()
+    processes: list[subprocess.Popen[bytes]] = []
+    with ExitStack() as logs:
+        try:
+            for name in ("python", "native"):
+                log = logs.enter_context((directory / f"{name}-verification.log").open("wb"))
+                processes.append(
+                    subprocess.Popen(
+                        [
+                            sys.executable,
+                            "-u",
+                            "-m",
+                            "devtools.verify_n17_bb_certificate",
+                            str(directory / name),
+                            "--output",
+                            str(directory / f"{name}-verification.json"),
+                            "--progress",
+                        ],
+                        cwd=Path(__file__).resolve().parents[1],
+                        stdout=log,
+                        stderr=subprocess.STDOUT,
+                    )
+                )
+            statuses = [process.wait() for process in processes]
+        finally:
+            for process in processes:
+                if process.poll() is None:
+                    process.terminate()
+            for process in processes:
+                try:
+                    _ = process.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    _ = process.wait()
+    return int(any(status != 0 for status in statuses))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    _ = parser.add_argument("--native-dir", type=Path, required=True)
+    _ = parser.add_argument("--native-dir", type=Path)
     _ = parser.add_argument("--output-dir", type=Path, required=True)
+    _ = parser.add_argument(
+        "--verify-only",
+        action="store_true",
+        help="compare existing completed certificates and run both full verifiers",
+    )
     arguments = parser.parse_args(argv)
     directory = cast(Path, arguments.output_dir)
-    directory.mkdir(parents=True, exist_ok=True)
-    native_dir = cast(Path, arguments.native_dir)
-    # Import without installing the native pair/dual/tighten implementations.
-    native = wiring._load_native(native_dir)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-    for name in ("python", "native"):
-        target = directory / name
-        if target.exists():
-            parser.error(f"refusing existing certificate directory: {target}")
-    settings = pilot.Settings(max_seconds=3600.0, max_nodes=None)
-    with python_tinylp(native):
-        pattern = pilot.cover_pattern(A_CELLS.split(","))
-        reference = pilot.search(
-            pattern, settings, certificate=directory / "python", progress=True
+    if not arguments.verify_only:
+        if arguments.native_dir is None:
+            parser.error("--native-dir is required unless --verify-only")
+        directory.mkdir(parents=True, exist_ok=True)
+        native_dir = cast(Path, arguments.native_dir)
+        # Import without installing the native pair/dual/tighten implementations.
+        native = wiring._load_native(native_dir)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        for name in ("python", "native"):
+            target = directory / name
+            if target.exists():
+                parser.error(f"refusing existing certificate directory: {target}")
+        settings = pilot.Settings(max_seconds=3600.0, max_nodes=None)
+        with python_tinylp(native):
+            pattern = pilot.cover_pattern(A_CELLS.split(","))
+            reference = pilot.search(
+                pattern, settings, certificate=directory / "python", progress=True
+            )
+        (directory / "python-search.json").write_text(json.dumps(reference, indent=2) + "\n")
+        _ = wiring.install(native_dir)
+        actual = pilot.search(
+            pattern, settings, certificate=directory / "native", progress=True
         )
-    (directory / "python-search.json").write_text(json.dumps(reference, indent=2) + "\n")
-    _ = wiring.install(native_dir)
-    actual = pilot.search(pattern, settings, certificate=directory / "native", progress=True)
-    (directory / "native-search.json").write_text(json.dumps(actual, indent=2) + "\n")
-    if (
-        reference["verdict"] != "certified-infeasible"
-        or actual["verdict"] != "certified-infeasible"
-    ):
-        raise RuntimeError("A did not close completely")
+        (directory / "native-search.json").write_text(json.dumps(actual, indent=2) + "\n")
+    summaries: list[dict[str, object]] = []
+    for name in ("python", "native"):
+        summary = cast(
+            dict[str, object],
+            json.loads((directory / f"{name}-search.json").read_text(encoding="utf-8")),
+        )
+        if summary["verdict"] != "certified-infeasible":
+            raise RuntimeError(f"{name} A search did not close completely")
+        summaries.append(summary)
+    if summaries[0]["certificate_manifest"] != summaries[1]["certificate_manifest"]:
+        raise RuntimeError("search receipts name different certificate manifests")
     files, size = compare_certificates(directory / "python", directory / "native")
     comparison = {
         "equal": True,
         "files": files,
         "bytes_per_certificate": size,
-        "manifest_sha256": actual["certificate_manifest"],
+        "manifest_sha256": summaries[0]["certificate_manifest"],
     }
     (directory / "comparison.json").write_text(json.dumps(comparison, indent=2) + "\n")
     print(json.dumps(comparison), flush=True)
-    for name in ("python", "native"):
-        status = verifier.main(
-            [str(directory / name), "--output", str(directory / f"{name}-verification.json")]
-        )
-        if status:
-            return status
-    return 0
+    return verify_certificates(directory)
 
 
 if __name__ == "__main__":
