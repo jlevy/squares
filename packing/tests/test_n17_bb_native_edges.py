@@ -39,7 +39,7 @@ def _boxes(count: int) -> list[tuple[float, float, float, float]]:
     return [(0.0, 1.0, -0.0, 1.0)] * count
 
 
-@pytest.mark.parametrize("count", [1, 7])
+@pytest.mark.parametrize("count", [1, 7, 15])
 def test_empty_rows_admit_supported_box_limits(native: ModuleType, count: int) -> None:
     session = native.LpSession([], [], [], [], [], [], _boxes(count))
     status, value, point, duals, closed = session.lp_step(1.0e-9)
@@ -54,19 +54,19 @@ def test_empty_rows_admit_supported_box_limits(native: ModuleType, count: int) -
 @pytest.mark.parametrize(
     ("arguments", "message"),
     [
-        (([], [], [], [], [], [], []), "expected 1..7 boxes"),
-        (([], [], [], [], [], [], _boxes(8)), "expected 1..7 boxes"),
+        (([], [], [], [], [], [], []), "expected 1..15 boxes"),
+        (([], [], [], [], [], [], _boxes(16)), "expected 1..15 boxes"),
         (
             (
-                [[]] * 65,
-                [[]] * 65,
-                [0.0] * 65,
-                [1.0] * 65,
-                [[]] * 65,
-                [(0.0, 0.0)] * 65,
+                [[]] * 513,
+                [[]] * 513,
+                [0.0] * 513,
+                [1.0] * 513,
+                [[]] * 513,
+                [(0.0, 0.0)] * 513,
                 _boxes(1),
             ),
-            "<=64 rows",
+            "<=512 rows",
         ),
         (
             ([[2]], [[1.0]], [0.0], [1.0], [[(1.0, 1.0)]], [(0.0, 0.0)], _boxes(1)),

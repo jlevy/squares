@@ -1,6 +1,6 @@
 //! Stateful S4 LP/OBBT port. The session retains exactly the tableau produced by
 //! `solve_lp`; reloading between it and `tighten` would change warm-start arithmetic.
-use crate::tinylp::TinyLP;
+use crate::tinylp::{MAX_COLUMNS, MAX_ROWS, TinyLP};
 use crate::{Box4, Iv, dual_bound_impl, max};
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
@@ -41,8 +41,8 @@ impl LpSession {
         let m = columns.len();
         let n = 2 * boxes.len() + 1;
         if boxes.is_empty()
-            || n > 16
-            || m > 64
+            || n > MAX_COLUMNS
+            || m > MAX_ROWS
             || [
                 values.len(),
                 rhs.len(),
@@ -54,7 +54,7 @@ impl LpSession {
             .any(|&l| l != m)
         {
             return Err(PyValueError::new_err(
-                "expected 1..7 boxes, <=64 rows and matching row dimensions",
+                "expected 1..15 boxes, <=512 rows and matching row dimensions",
             ));
         }
         let mut a = vec![vec![0.0; n]; m];

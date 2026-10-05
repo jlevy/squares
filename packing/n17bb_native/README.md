@@ -5,7 +5,7 @@ branch-and-bound search.
 It ports the pilot’s `pair_term`, `dual_bound`, LP step, and tightening loop to Rust
 while preserving their Python interface.
 The dense simplex implementation retains its basis between the LP step and bound
-tightening. Sessions admit one to seven boxes and at most 64 rows; pair evaluation
+tightening. Sessions admit one to fifteen boxes and at most 512 rows; pair evaluation
 requires `merge_gap=0`.
 
 The extension uses Python 3.14’s stable ABI. Build and copy it to an importable name

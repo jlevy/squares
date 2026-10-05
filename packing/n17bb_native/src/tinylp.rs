@@ -8,6 +8,10 @@ const FEAS: f64 = 1e-9;
 const OPT: f64 = 1e-10;
 const PIV: f64 = 1e-11;
 const CAP: usize = 10000;
+/// Largest number of LP columns (two centre coordinates per square, plus the depth).
+pub(crate) const MAX_COLUMNS: usize = 31;
+/// Largest number of LP rows.
+pub(crate) const MAX_ROWS: usize = 512;
 
 #[derive(Clone)]
 struct Tableau {
@@ -42,7 +46,7 @@ impl Tableau {
         let w = self.w;
         let p = self.d[r * w + s];
         let inv = 1. / p;
-        let mut normalized = [0.; 36]; // At most 2*n split variables plus artificial/RHS.
+        let mut normalized = [0.; 2 * MAX_COLUMNS + 6]; // At most 2*n split variables plus artificial/RHS.
         let pivot_row = &mut normalized[..w];
         for (v, &old) in pivot_row.iter_mut().zip(&self.d[r * w..(r + 1) * w]) {
             *v = old * inv;
@@ -317,8 +321,7 @@ impl TinyLP {
                 return false;
             }
         }
-        let mut gradient = [0.; 16];
-        gradient[..x.len()].copy_from_slice(&self.c);
+        let mut gradient = self.c.clone();
         for (i, _) in y.iter().enumerate() {
             if y[i] != 0. {
                 for (g, &a) in gradient.iter_mut().zip(&self.a[i]) {
@@ -373,16 +376,16 @@ impl TinyLP {
         let hi = upper;
         let c = cost;
         if a.iter().any(|row| row.len() != n)
-            || m > 64
+            || m > MAX_ROWS
             || n == 0
-            || n > 16
+            || n > MAX_COLUMNS
             || b.len() != m
             || lo.len() != n
             || hi.len() != n
             || c.len() != n
         {
             return Err(PyValueError::new_err(
-                "expected m <= 64, 1 <= n <= 16 and matching dimensions",
+                "expected m <= 512, 1 <= n <= 31 and matching dimensions",
             ));
         }
         if a.iter()
