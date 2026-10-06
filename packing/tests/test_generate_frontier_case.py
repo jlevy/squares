@@ -115,6 +115,7 @@ from devtools.generate_frontier_case import (
     write_record,
 )
 from sqpack.assurance import check_case_semantics
+from sqpack.exact_values import CATALOGUE as CATALOGUE_SOURCE
 from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -266,12 +267,15 @@ def _injected_facts(n: int) -> CatalogueFacts:
     comparison tests the generator's assembly rather than the parser's reading.
     """
     reported = _committed(n)[0]["packing"]["reported_upper_bound"]
+    # The catalogue prints a degree and polynomial only where the record says it did; a
+    # derived pair is the generator's own to compute from the closed form.
+    printed = reported.get("algebraic_source") == CATALOGUE_SOURCE
     return CatalogueFacts(
         n=n,
         side_decimal=str(reported["value"]),
         exact_form=reported["exact_form"],
-        algebraic_degree=reported["algebraic_degree"],
-        minimal_polynomial=reported["minimal_polynomial"],
+        algebraic_degree=reported["algebraic_degree"] if printed else None,
+        minimal_polynomial=reported["minimal_polynomial"] if printed else None,
         found_by=tuple(reported["found_by"]),
         found_year=reported["found_year"],
         catalogue_rigid=reported["catalogue_rigid"],

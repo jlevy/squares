@@ -61,6 +61,7 @@ from devtools.generate_frontier_case import (
 from devtools.migrate_math import markdown_math
 from devtools.state_ai_assistance import state
 from sqpack.assurance import bounds_agree_at_declared_precision
+from sqpack.exact_values import algebraic_fields
 from sqpack.kingbird_catalogue import INTAKE_CATALOGUE_HTML
 from sqpack.yamlio import safe_load
 
@@ -262,8 +263,7 @@ def reported_upper(plan: Plan, current: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "value": plan.side,
         "exact_form": None,
-        "algebraic_degree": None,
-        "minimal_polynomial": None,
+        **algebraic_fields(None, None, None),
         "analytically_optimized": None,
         # The catalogue never described this packing, so it states nothing about its
         # rigidity. At all 50 counts it states nothing about its own packing either, which

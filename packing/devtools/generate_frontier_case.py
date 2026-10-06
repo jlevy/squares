@@ -268,6 +268,7 @@ from devtools.audit_ds7_lower_bounds import (
     reported_payload,
 )
 from devtools.migrate_math import markdown_math
+from sqpack.exact_values import CATALOGUE, algebraic_fields
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1607,8 +1608,7 @@ def _grid_reported_upper(
     return {
         "value": str(float(side)),
         "exact_form": str(side),
-        "algebraic_degree": None,
-        "minimal_polynomial": None,
+        **algebraic_fields(str(side), None, None),
         "analytically_optimized": None,
         "catalogue_rigid": "not-stated",
         "construction_method": "trivial-grid",
@@ -1675,8 +1675,7 @@ def _unitsquare_reported_upper(
     return {
         "value": record.offered_side,
         "exact_form": None,
-        "algebraic_degree": None,
-        "minimal_polynomial": None,
+        **algebraic_fields(None, None, None),
         "analytically_optimized": False,
         "catalogue_rigid": "not-stated",
         "construction_method": "unknown",
@@ -1732,8 +1731,7 @@ def _catalogue_reported_upper(
     return {
         "value": facts.side_decimal,
         "exact_form": facts.exact_form,
-        "algebraic_degree": facts.algebraic_degree,
-        "minimal_polynomial": facts.minimal_polynomial,
+        **algebraic_fields(facts.exact_form, facts.algebraic_degree, facts.minimal_polynomial),
         "analytically_optimized": facts.analytically_optimized,
         "catalogue_rigid": facts.catalogue_rigid,
         "construction_method": facts.construction_method,
@@ -1934,7 +1932,9 @@ def _packing_section(
     if owner is None:
         subject = CONSTRUCTION_SUBJECTS[reported["construction_method"]]
         lines.append(f"The recorded construction method is {subject}.")
-    if reported["algebraic_degree"] is not None:
+    # Only a degree the source states is written into the prose; a derived one is the
+    # register's (`frontier/exact-values.json`) and the exact-side-values paper's to show.
+    if reported["algebraic_degree"] is not None and reported["algebraic_source"] == CATALOGUE:
         lines.append(
             f"Its side length is algebraic of degree **{reported['algebraic_degree']}** "
             f"over `ℚ`."

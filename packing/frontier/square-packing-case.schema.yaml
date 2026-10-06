@@ -192,6 +192,12 @@ $defs:
       The strongest upper bound the named source set literally claims, transcribed and
       not endorsed. This is the best known side length; verified_upper_bound is the
       weaker thing this repository can certify.
+    if:
+      required: [algebraic_degree]
+      properties: {algebraic_degree: {type: integer}}
+    then:
+      required: [algebraic_source]
+      properties: {algebraic_source: {type: string}}
     required:
       - value
       - exact_form
@@ -204,6 +210,15 @@ $defs:
       exact_form: {type: [string, 'null']}
       algebraic_degree: {type: [integer, 'null'], minimum: 1}
       minimal_polynomial: {type: [string, 'null']}
+      algebraic_source:
+        enum: [catalogue, derived-from-exact-form, contact-system, null]
+        description: >-
+          Where algebraic_degree and minimal_polynomial came from. `catalogue`: the
+          source prints them. `derived-from-exact-form`: computed here from the
+          source's closed form. `contact-system`: computed here from an exact contact
+          system, with the evidence cited. Required whenever algebraic_degree is set,
+          so a transcribed fact and a computed one are never stored alike
+          (think-18mu, think-kj6n). `sqpack.exact_values` owns the vocabulary.
       analytically_optimized: {type: [boolean, 'null']}
       catalogue_rigid:
         enum: [rigid, semi-rigid, not-stated]

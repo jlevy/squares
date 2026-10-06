@@ -57,6 +57,7 @@ from devtools import evand_exact_certificates as certificates
 from devtools.migrate_math import markdown_math
 from devtools.retained_data import read_retained_text
 from sqpack.assurance import bounds_agree_at_declared_precision
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -222,8 +223,7 @@ def front_matter(n: int, front: str) -> str:
         **current,
         "value": value,
         "exact_form": None,
-        "algebraic_degree": None,
-        "minimal_polynomial": None,
+        **algebraic_fields(None, None, None),
         # A catalogue's word, which this source does not use; the body says what it reports.
         "analytically_optimized": None,
         "catalogue_rigid": "not-stated",
