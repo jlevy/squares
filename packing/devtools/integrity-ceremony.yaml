@@ -248,6 +248,9 @@ allowlist:
   - path: packing/devtools/capture_web_source.py
     kind: download
     boundary: Zenodo deposits and deployed web pages against the MD5 and digests the record or a retained manifest states.
+  - path: packing/devtools/extract_kingbird_svg_exact.py
+    kind: download
+    boundary: A Kingbird catalogue SVG, fetched into memory and never retained, against the SHA-256 the reading of 2026-10-05 pinned (think-nymu).
   - path: packing/devtools/audit_wand125_point_and_mixed.py
     kind: download
     boundary: wand125's acquired packets, their upstream listings and checker files (H3).
