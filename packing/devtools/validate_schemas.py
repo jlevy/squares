@@ -51,6 +51,8 @@ SESSION_CLOSE_REPORT = RESOURCE_USAGE.parent / "session-close-report.yaml"
 INTAKE_WATCH = RESOURCE_USAGE.parent / "intake-watch.yaml"
 DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
+#: The exact side values register, a generated view of the frontier records' exact facts.
+EXACT_VALUES = FRONTIER / "exact-values.json"
 BOUND_CITATIONS = FRONTIER.parent / "atlas" / "known-best" / "bound-citations.json"
 #: The citation fields behind `BOUND_CITATIONS`, kept beside the archive index they mirror.
 BIBLIOGRAPHY = FRONTIER.parent / "resources" / "bibliography.yaml"
@@ -309,6 +311,7 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     datasets.append(DOCUMENT_MAP)
     datasets.append(KNOWN_BEST_MANIFEST)
     datasets.append(COMPOSITE_FIGURE)
+    datasets.append(EXACT_VALUES)
     datasets.append(BOUND_CITATIONS)
     datasets.append(BIBLIOGRAPHY)
     datasets.append(TRANSLATION_ESCAPE_SCREEN)
