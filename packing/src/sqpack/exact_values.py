@@ -22,6 +22,7 @@ SymPy is an optional dependency and is imported where it is used.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 
 CATALOGUE = "catalogue"
 DERIVED_FROM_EXACT_FORM = "derived-from-exact-form"
@@ -81,6 +82,13 @@ def _exponent(power: int) -> str:
 
 def derive_from_exact_form(exact_form: str) -> AlgebraicFacts:
     """The minimal polynomial over the rationals of the number a closed form denotes."""
+    try:
+        rational = Fraction(exact_form)
+    except ValueError:
+        pass
+    else:
+        return AlgebraicFacts((rational.denominator, -rational.numerator))
+
     import sympy as sp  # noqa: PLC0415 - optional dependency, imported where it is used
     from sympy.parsing.sympy_parser import (  # noqa: PLC0415
         implicit_multiplication_application,
@@ -116,9 +124,19 @@ def algebraic_fields(
     """The record's `algebraic_degree`, `minimal_polynomial` and `algebraic_source`.
 
     A degree the source prints is kept as transcribed, with its polynomial where it gives
-    one. Otherwise a closed form fixes both, and they are derived from it. Neither leaves
+    one. A rational closed form supplies an omitted degree-one polynomial; otherwise a
+    closed form fixes both, and they are derived from it. Neither leaves
     all three null: no exact fact is on hand.
     """
+    if degree == 1 and polynomial is None and exact_form is not None:
+        facts = derive_from_exact_form(exact_form)
+        if facts.degree != degree:
+            raise ValueError(f"degree {degree} disagrees with exact form {exact_form!r}")
+        return {
+            "algebraic_degree": facts.degree,
+            "minimal_polynomial": facts.text,
+            "algebraic_source": DERIVED_FROM_EXACT_FORM,
+        }
     if degree is not None:
         return {
             "algebraic_degree": degree,

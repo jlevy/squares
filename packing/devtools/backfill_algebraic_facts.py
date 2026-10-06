@@ -30,7 +30,7 @@ from pathlib import Path
 import yaml
 from strif import atomic_output_file
 
-from sqpack.exact_values import CONTACT_SYSTEM, algebraic_fields
+from sqpack.exact_values import CATALOGUE, CONTACT_SYSTEM, algebraic_fields
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -58,10 +58,14 @@ def backfilled(text: str, n: int) -> str:
     reported = safe_load(front)["packing"]["reported_upper_bound"]
     if reported.get("algebraic_source") == CONTACT_SYSTEM:
         return text
+    # A degree is the catalogue's to keep only where the record says the catalogue printed
+    # it, or where no source is recorded yet (a record from before the field existed). A
+    # derived pair is recomputed from the closed form, so a second run changes nothing.
+    printed = reported.get("algebraic_source") in {CATALOGUE, None}
     fields = algebraic_fields(
         reported.get("exact_form"),
-        reported.get("algebraic_degree"),
-        reported.get("minimal_polynomial"),
+        reported.get("algebraic_degree") if printed else None,
+        reported.get("minimal_polynomial") if printed else None,
     )
     lines = front.split("\n")
     try:
@@ -113,7 +117,7 @@ def run(*, check: bool) -> int:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
     parser.add_argument(
         "--check", action="store_true", help="report records that would change; write none"
     )

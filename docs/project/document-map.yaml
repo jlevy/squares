@@ -252,6 +252,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-10-01-result-import-first-application.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-03-measure-verifier-milestone-c.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-05-n17-overnight.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-29-github-pages-overview.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md, role: review, authority: record, lifecycle: retained}

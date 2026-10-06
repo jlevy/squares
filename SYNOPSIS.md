@@ -835,6 +835,7 @@ case or experiment separately.
 | [Plan: The First Application of the Result Import Process](docs/project/specs/active/plan-2026-10-01-result-import-first-application.md) | implementation plan | current | transient | — |
 | [Measure Verifier Milestone C: The Continuous-Angle Family](docs/project/specs/active/plan-2026-10-03-measure-verifier-milestone-c.md) | implementation plan | current | transient | — |
 | [Plan: n = 17 Overnight, 5 October 2026](docs/project/specs/active/plan-2026-10-05-n17-overnight.md) | implementation plan | current | transient | — |
+| [Feature: Exact Side Values Register, Paper and Backfill](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) | implementation plan | current | transient | — |
 | [Feature: A Top-Level Overview Page for the Published Site](docs/project/specs/active/plan-2026-09-29-github-pages-overview.md) | implementation plan | current | transient | — |
 | [BC329 Calibration Reader: Source-Distinct Review](docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md) | dated review record | record | retained | — |
 | [BC329 Reader Repair: Exact-Commit Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md) | dated review record | record | retained | — |

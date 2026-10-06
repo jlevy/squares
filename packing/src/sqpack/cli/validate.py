@@ -3362,6 +3362,22 @@ def _generated_tables(context: Context) -> str:
     )
 
 
+def _exact_values(context: Context) -> str:
+    """The exact side values register, rebuilt from the frontier records byte for byte.
+
+    The rebuild is the check: every minimal polynomial is certified irreducible over Q
+    again, its root isolated again in exact rational arithmetic, and the record's decimal
+    and the closed form's derivation compared again, so a record edit that breaks any of
+    them fails here rather than in the paper rendered from the register. Measured whole on
+    2026-10-06 at 4.3s wall for `--check` on a four-cpu box, the two modular certificates
+    at degree 144 and 158 most of the arithmetic, so there is no cheaper mode for the pull
+    request to run instead.
+    """
+    output = _module(context, "devtools.build_exact_values", "--check")
+    _require_text(output, "exact values register check passed")
+    return output
+
+
 def _strategy_catalogues(_context: Context) -> str:
     lines: list[str] = []
     for kind, field_name, expected in (("search", "outcome", 28), ("proof", "status", 30)):
@@ -4999,6 +5015,22 @@ STEPS: tuple[Step, ...] = (
             "docs/*",
         ),
     ),
+    # 4.3s: every polynomial re-certified, which is why it rebuilds rather than compares.
+    Step(
+        "exact side values register",
+        _exact_values,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/build_exact_values.py",
+            # The records, the register and its schema all live here.
+            "packing/frontier/*",
+            # The catalogue it reads printed polynomials from, and the KKT batch.
+            "packing/resources/web/kingbird-squares-in-squares.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+        ),
+    ),
     Step(
         "strategy catalogues",
         _strategy_catalogues,
@@ -5923,6 +5955,9 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # The same shape: it reads the tracked Markdown under `packing/resources/` and
         # compares three numbers found in those bytes. No clock, no network, no history.
         "archive annotation census agrees with the archive",
+        # The same shape: the tracked frontier records, catalogue transcription and KKT
+        # batch, rebuilt in exact arithmetic. No clock, no network, no history.
+        "exact side values register",
         "derivation (needs sympy)",
         "search engine (sqsearch)",
         "lint floor (rust)",
