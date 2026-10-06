@@ -25,14 +25,10 @@ from pathlib import Path
 
 import sympy as sp
 from strif import atomic_output_file
-from sympy.parsing.sympy_parser import (
-    implicit_multiplication_application,
-    parse_expr,
-    standard_transformations,
-)
 
 from devtools.build_bound_citations import corrected_lower_bounds, recent_lower_bounds
 from sqpack import retained_json
+from sqpack.exact_values import CATALOGUE, DERIVED_FROM_EXACT_FORM
 from sqpack.known_best import (
     KNOWN_BEST_COMPOSITES,
     KNOWN_BEST_CORPUS,
@@ -75,20 +71,10 @@ PROVENANCE_VOCABULARY = {
     ),
 }
 
-_TRANSFORMS = (*standard_transformations, implicit_multiplication_application)
-_SIDE = sp.Symbol("s")
-
 
 def _packing(n: int) -> dict:
     text = (FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
     return safe_load(text.split("---", 2)[1])["packing"]
-
-
-def _degree_from_form(exact_form: str) -> tuple[int, str]:
-    """Degree of the algebraic number this radical denotes, and its polynomial."""
-    value = parse_expr(exact_form, transformations=_TRANSFORMS)
-    polynomial = sp.minimal_polynomial(value, _SIDE)
-    return int(sp.degree(polynomial)), str(sp.expand(polynomial)) + " = 0"
 
 
 @cache
@@ -258,21 +244,26 @@ def _entry(n: int) -> dict:
     exact_form = reported.get("exact_form")
     minimal_polynomial = reported.get("minimal_polynomial")
     recorded_degree = reported.get("algebraic_degree")
+    source = reported.get("algebraic_source")
 
-    if recorded_degree:
+    # The record holds every degree and polynomial it can, and says where each came
+    # from (`algebraic_source`, think-kj6n). The figure reads them rather than
+    # computing its own, so it cannot know more than the record (think-26at); that the
+    # derived ones still follow from the closed form is `build_exact_values`'s check.
+    degree = int(recorded_degree) if recorded_degree else None
+    degree_provenance = (
+        "absent"
+        if degree is None
+        else "derived"
+        if source == DERIVED_FROM_EXACT_FORM
+        else "frontier"
+    )
+    if exact_form:
+        state = "closed-form"
+    elif recorded_degree or minimal_polynomial:
         state = "minimal-polynomial"
-        degree, degree_provenance = int(recorded_degree), "frontier"
-    elif exact_form:
-        # The catalogue prints either a radical or a degree, never both, so a
-        # radical case carries no degree upstream even though the radical fixes
-        # it completely. Computing it is the whole point of recording it here.
-        degree, derived_polynomial = _degree_from_form(str(exact_form))
-        minimal_polynomial = minimal_polynomial or derived_polynomial
-        state, degree_provenance = "closed-form", "derived"
-    elif minimal_polynomial:
-        state, degree, degree_provenance = "minimal-polynomial", None, "absent"
     else:
-        state, degree, degree_provenance = "numeric-only", None, "absent"
+        state = "numeric-only"
 
     rigidity = _rigidity(n, packing)
 
@@ -332,7 +323,7 @@ def _entry(n: int) -> dict:
             "minimal_polynomial": (str(minimal_polynomial) if minimal_polynomial else None),
             "degree": degree,
             "degree_provenance": degree_provenance,
-            "degree_recorded_upstream": bool(recorded_degree),
+            "degree_recorded_upstream": source == CATALOGUE,
         },
         "rigidity": rigidity,
         "badges": badges,
@@ -461,8 +452,9 @@ def review() -> None:
     for label, value in figure["totals"].items():
         print(f"  {label:26s} {value:3d}")
     print()
-    print(f"  degree derived here but NOT stored upstream: {len(derived)}")
-    print(f"    n = {derived}")
+    # The figure reads every degree from the record, so a derived degree is one the
+    # record stores as `derived-from-exact-form`, never one only the figure knows.
+    print(f"  degree derived from a closed form, stored in the record: {len(derived)}")
     print(f"  no exact value on record: {len(unknown)}")
     print(f"    n = {unknown}")
     print(f"  rigidity from catalogue annotation: n = {catalogue_only}")
