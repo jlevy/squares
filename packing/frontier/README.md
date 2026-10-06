@@ -143,6 +143,21 @@ The ones that carry the most weight:
   with an assurance level, a stated scope, and replayable evidence; `null` there means
   not assessed. The tutorial defines the related distinctions among
   [contacts, stationarity, rigidity, and rattlers](../../TUTORIAL.md#contact-graphs-stationary-branches-and-rattlers).
+- `reported_upper_bound.exact_form`, `algebraic_degree` and `minimal_polynomial` are
+  what is known exactly about the side of the best known packing, and `algebraic_source`
+  says where the degree and polynomial came from.
+  `catalogue` means the source prints them, `derived-from-exact-form` means this
+  repository computed them from the source’s closed form, and `contact-system` means
+  they were computed from an exact contact system, with that evidence cited.
+  The catalogue prints either a closed form or a degree with its polynomial, never both,
+  so every closed form here carries a derived pair.
+  All four are null where nothing exact is known.
+  [`exact-values.json`](exact-values.json) collects them for every case and checks each
+  polynomial: irreducibility, a unique root in a rational interval, and agreement with
+  the record and with Evan Daniel’s independent KKT values.
+  The
+  [exact side values paper](https://jlevy.github.io/squares/papers/exact-side-values.html)
+  presents that register.
 - `evidence` points into [`evidence.yaml`](evidence.yaml), where assurance, method,
   performer, independence, origin, actual precision, tolerance, certificate, replay,
   proof scope, and limitations remain separate fields.
