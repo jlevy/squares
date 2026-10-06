@@ -186,6 +186,27 @@ These lanes are parallel and disjoint:
   $\mathbb{Q}(\sqrt 2)$ and $\mathbb{Q}(\sqrt 7)$, so a verified upper bound can equal
   the exact form instead of trailing it (the T-101 gap).
 
+## Beads
+
+Epic `think-fh50`, under `think-wfz1`.
+
+| Bead | Work | Blocked by |
+| --- | --- | --- |
+| `think-k9fg` | Schema `algebraic_source`, generator and intakes | — |
+| `think-kj6n` | Backfill of derived degrees and polynomials | `think-k9fg` |
+| `think-26at` | Composite figure reads the record | `think-kj6n` |
+| `think-pxnx` | Register builder and its checks | `think-k9fg`, `think-kj6n` |
+| `think-py2q` | Register gate step at its measured tier | `think-pxnx` |
+| `think-vtc1` | Paper renderer and template | `think-pxnx` |
+| `think-mepe` | Paper site registration | `think-vtc1` |
+| `think-t7a9` | Import runbook, documentation pass, frontier README | `think-pxnx`, `think-vtc1` |
+| `think-9ok9` | Phase 1 close: validation and pull request | all of Phase 1 |
+| `think-eu89` | High-precision identification sweep | `think-pxnx` |
+| `think-nymu` | Kingbird SVG retention (55, 71, 83); feeds `think-xy91`, `think-krbs` | — |
+| `think-qgt4` | Generic contact-system driver; feeds `think-3lro` | `think-pxnx` |
+| `think-ifc9` | Recompute small-degree catalogue polynomials | `think-qgt4` |
+| `think-blbm` | Exact algebraic witnesses for the radical families | `think-pxnx` |
+
 ## Testing Strategy
 
 - Unit tests for the polynomial checks, each with a positive case and a refused negative
