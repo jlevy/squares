@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 18 | think-ipel | Execute the registered H297/exp288 fixed-angle feasible-center trial under120s combined, then interpret the exact finite disposition and W3 route-selection memo. Complete the isolated predecessor ordinary checkpoint and additive later-source floors without conflating source coverage. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 19 | think-ipel | Complete finalization Phase19 by16:38:33Z; Phase20 then records official cost and actual gate/certification status, final documentation/push/public handoff by17:08:33Z. Next math tasks think-hkqz/think-svkl remain planned; certification debt think-7hy3 remains open, with no more Session184 mathematical targets. |
 
 ### Workflow summary
 
@@ -212,7 +212,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `efficiency-loop` | 11 | 1 | 44 | 1 |
 | `research-loop` | 37 | 4 | 143 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
-| `documentation-pass` | 1 | 0 | 29 | 3 |
+| `documentation-pass` | 1 | 0 | 30 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
 | `review-planning-oversight` | 10 | 3 | 55 | 6 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
@@ -912,20 +912,20 @@ Status: **active**. Turn PR 230's W3 review and the two explorations it led to, 
 
 ### [agenda-043](agendas/agenda-043-n17-ten-hour-continuation.md) — n17 Ten-Hour Continuation
 
-Status: **active**. Execute the selected ten-hour continuation in Session184: prioritize proof interfaces, controlled widened-LP reconnaissance and the actual admitted residue, with reviewed capture controls and independent custody recovery. One Astra owns mathematics, GPT-6.1 Sol owns engineering and coordination.
+Status: **active**. Dispose the bounded Session184 continuation through scoped accepted, negative, incomplete and unopened outcomes; preserve the open n17 proof/custody/certification obligations and hand off complete partner-pose coupling plus measured exact-replay optimization. Finalization remains active until17:08:33Z.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-430 | research | 17 | in_progress | 0 | think-ipel | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-431 | research | 17 | in_progress | 1 | think-53qh | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-432 | measurement_validation | 17 | in_progress | 1 | think-dn5h | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-433 | research | 17 | in_progress | 1 | think-efe9 | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-434 | tool_validation | 17 | in_progress | 1 | think-juy9 | docs/project/reviews/review-2026-10-07-n17-hull-pull.md |
-| BC-435 | tool_validation | 17 | blocked | 1 | think-365a | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-436 | measurement_validation | 17 | blocked | 1 | think-yg80 | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-437 | research | 17 | tentative | 1 | think-j6qy | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-438 | tool_validation | 17 | blocked | 1 | think-jhgi | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
-| BC-439 | measurement_validation | 17 | ready | 1 | think-ypk2 | docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md |
+| BC-430 | research | 17 | in_progress | 0 | think-ipel | docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md |
+| BC-431 | research | 17 | complete | 1 | think-53qh | docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md |
+| BC-432 | measurement_validation | 17 | complete | 1 | think-dn5h | packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md |
+| BC-433 | research | 17 | complete | 1 | think-efe9 | docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md |
+| BC-434 | tool_validation | 17 | complete | 1 | think-juy9 | docs/project/reviews/review-2026-10-07-n17-hull-pull.md |
+| BC-435 | tool_validation | 17 | complete | 1 | think-365a | packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md |
+| BC-436 | measurement_validation | 17 | blocked | 1 | think-yg80 | docs/project/reviews/review-2026-10-07-n17-session-184-progress.md |
+| BC-437 | research | 17 | complete | 1 | think-j6qy | packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md |
+| BC-438 | tool_validation | 17 | blocked | 1 | think-jhgi | docs/project/reviews/review-2026-10-07-n17-session-184-progress.md |
+| BC-439 | measurement_validation | 17 | in_progress | 1 | think-ypk2 | docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md |
 
 ## Series
 

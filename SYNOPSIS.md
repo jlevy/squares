@@ -308,7 +308,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Record | Count | Current state |
 | --- | --- | --- |
 | Agendas | 40 | 20 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
+| Commitments | 428 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 231 | 62 confirmed; 36 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
