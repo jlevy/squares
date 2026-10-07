@@ -255,7 +255,8 @@ session:
     budget_minutes: 30
     started_at: '2026-10-07T18:48:27.361776Z'
     deadline_at: '2026-10-07T19:17:58Z'
-    expected_output: Reusable bounded phase launcher controls and registered coupling result audit.
+    expected_output: Reusable bounded phase launcher controls and registered coupling result audit.;
+      source-onlyfull-squareSAT and input-onlyparentstructural audit before a distinctresource amendment.
     validation_command: Focused pytest and static floors; fresh target waits source review.
     kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody
       alarm.
@@ -265,6 +266,10 @@ session:
     - packing/tests/test_check_n17_partner_pose_coupling.py
     - packing/devtools/run_registered_phases.py
     - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
     excluded_commands:
     - git commit
     - git push
@@ -307,6 +312,8 @@ session:
   outputs:
   - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
   - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+  - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling
   checks:
   - Launch source8de2ecd5b574fc2ff0174f552c00effaab6fcaf7 and PR404 retained; upstream main refreshed
     without source merge.
@@ -321,6 +328,17 @@ session:
     Anchor updatedto7hy3; relevant mutation awaits source-selector repair.'
   - H298/exp289 regional coupling and H299/exp290 matched full replay diagnostic preregistered before
     actual target execution.
+  - Independent root integration:97 coupling/profile/runner/anchor controls PASS7.11s with retained
+    rawJUnit.
+  - 'Exp289: construction stopped incomplete3.176s at frozen64-piece row ceiling; supervision3.507s
+    normalexitrc1/cleanup, freshunstarted. Source provenancecleanfor target modules, unrelatedsource-onlySATwork
+    in overalldirtyworkspace. Mathematicalpredicateunrun.'
+  - 'Push-tier run64dac347f1ab4c3a8fcdc92da51aeba2 completed61steps/55pass/6fail in561.37s while
+    source/records were changing. Failures: agenda/map/terminalguardrecord integration, untrackedSAT
+    evaluate-name falsepositive, runtime-artifact boundary declarations and reachabletest consequences.
+    Raw artifacts retained in attic/evidence/session-185-push-cd82; no cleancheckpointclaimed.'
+  - Both source ratchet scans nowpass after preserving real runtime artifact boundaries and renaming
+    the SAT mathematical evaluator; no gate or checksum baseline weakened.
   stop_reason: null
   next_action: Freeze reviewed coupling and profile instruments; preregister each criterion, descriptor,
     controls and budget before target execution. Keep inherited certificationthink-7hy3 beside proof

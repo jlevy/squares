@@ -30,6 +30,8 @@ experiment:
     control: Author47 target-free controls PASS5.53s; independent Sol47 PASS5.18s; author Ruff/BasedPyright
       zero; sole Astra mathematical source review CLEAR. Final facet-counter wording change has
       no arithmetic or criterion delta. No scientific target evaluated before this registration.
+      Actual source provenance is clean for all target modules at cd82d75f4; overall workspace contains
+      unrelated source-only fallback work and the repaired control anchor.
     candidate: Accepted original exp282 parent descriptor, exp280 full centered PASS_STALL, and
       exp288 specific one-square witness/descriptor/fresh replay. Full32/64 closed partitions cover
       [0,1]; complete partner-pose minimum-support constraints intersect all rows within each partner,
@@ -47,9 +49,19 @@ experiment:
       five10MiB JSON roles,512MiB compressed/2GiB decoded native node,64MiB output. Preserve resource
       stops and cleanup; canonical original node is streamed twice during intake.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling
-  results: []
+    commit: cd82d75f4
+    dirty: true
+  results:
+  - shape: determination
+    role: guard
+    question: Did construction reach its mathematical predicate within the frozen input resource
+      limits?
+    outcome: no_progress
+    checked_by: The source-control cap stopped canonical-parent row intake at64 residual pieces
+      before coupling evaluation. Partial construction receipt retained; freshunstarted. This guard
+      outcome is not a mathematical criterion miss.
   verdict:
-    decision: in-progress
+    decision: abandoned
     primary_criterion: 'Construction and a fresh process both reconstruct closed_region_exclusion
       with criterion_met=true: every one of 1056 parent rows and 992 foreign rows is accounted,
       all17 endpoint calibration and family-disjointness pass, exact mathematical payloads agree,
@@ -59,11 +71,26 @@ experiment:
       monotonic obstruction; it is not four executed misses. Refused/incomplete results are not
       mathematical negatives. Conditional accepted-parent scope only; no whole guard/census/capture/global
       optimality claim.'
-    reason: Prospectively registered after target-free controls and source review; target unrun.
+    reason: 'Construction resource stop before the coupling predicate: per-row residual piece ceiling64
+      exceeded after3.176s; fresh unstarted. Sampled supervisor completednormalrc1 in3.507s with
+      cleanup. No mathematical negative.'
     needs_review: false
-  lease:
-    expires: '2026-10-07T19:17:58Z'
-    host: macOS arm64
+    budget_spent: Construction3.176s/supervisor3.507s; fresh0s unstarted; declared120+120/240 limits
+      not reached.
+    best_reached: Matched accepted small witness and canonical parent intake; fixedpoint coupling
+      and region ladder unrun.
+    reopen_when: A bounded input-only structural audit informs a separately preregistered resource
+      amendment, with all aggregate arithmetic/geometry/work/wall ceilings preserved or explicitly
+      reviewed.
+    resume_from: packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling
+  effort:
+    stopped_by: guard
+    timebox: One worker, construction120s + fresh120s under combined240s owned-group TERM240/KILL250;
+      sampled4096MiB PER live process, not aggregate or allocation-time hardcap. All input, rational,
+      polygon, support and sweep ceilings frozen in research-2026-10-07-n17-complete-partner-coupling.md;
+      five10MiB JSON roles,512MiB compressed/2GiB decoded native node,64MiB output. Preserve resource
+      stops and cleanup; canonical original node is streamed twice during intake.
+    wall_seconds: 3.507
 ---
 # Complete Partner-Pose Coupling
 

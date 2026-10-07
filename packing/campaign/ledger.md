@@ -1179,7 +1179,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | H-295 | refuted | proof | Exact pooled foreign-owned forbidden regions cover the complete accept |  | 1 |  | 21s wall |
 | H-296 | refuted | proof | A deterministic exact one-square witness survives every pooled owned-p |  | 1 |  | 1s wall |
 | H-297 | confirmed | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  | 1s wall |
-| H-298 | running | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 1 |  |  |
+| H-298 | abandoned | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 1 |  | 4s wall |
 | H-299 | running | proof | Boundary-level replay instrumentation preserves the full accepted cent |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
@@ -1242,7 +1242,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | --- | --- | --- | --- | --- | --- |
 | exp-227 | series-000 | 11 | Claude Session 156, Fable extra-high lane | H-237 | The route cannot exceed the BC-199 modulus by a proved lemma, and the exact computation confirms that on every face, so re-running under the per-row remainder model adds nothing. The binding constant is that model, not the growth minimum, which is 4.5 times kappa. Along the binding direction 36 of 42 rows do not recover at second order (exp-227 curvature record), so only a second-order exact isolation theorem, a named change of instrument, should reopen the radius. |
 
-### abandoned (4)
+### abandoned (5)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1250,6 +1250,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-070 | series-000 | 11 | Codex /root/fractional_t2_manager at max reasoning, BC-232, think-gmdy | H-064 | The one authorized leg improved the exact lower endpoint but expired before reaching eleven; the bracket is still open and the frozen four-CPU-hour routing rule forbids a continuation decision from this 105-minute partial budget alone. |
 | exp-162 | series-000 | 20 | Cursor session-140 | H-218 | The Session-140 research wall expired with no RETAINABLE freeze on the H-218 sweep. Closest masses were leftover n=20 971/200 at 19.910044 unconverged and leftover n=12 3969/1000 at 12.091168 after crossing 12. T-028 at n=18 does not confirm H-218. The unfinished float LPs remain unresolved; their objectives do not refute their site sets. |
 | exp-231 | series-000 | 11 | Claude Session 156, Opus extra-high lane and coordinator | H-236 | The declared caps ran out with 58 of 256 subtrees open and no counterexample candidate, so H-236 is neither confirmed nor refuted; the remaining subtrees are a bounded computation for the unchanged frozen instrument. |
+| exp-289 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Construction resource stop before the coupling predicate: per-row residual piece ceiling64 exceeded after3.176s; fresh unstarted. Sampled supervisor completednormalrc1 in3.507s with cleanup. No mathematical negative. |
 
 ### unresolved (59)
 
@@ -1442,11 +1443,10 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (2)
+### in-progress (1)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-289 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Prospectively registered after target-free controls and source review; target unrun. |
 | exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Prospectively registered diagnostic; no target replay or gain measured. |
 
 ## Resumable — stopped on the clock, not on an answer
@@ -1494,6 +1494,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-231 | H-236 | 397.1m wall | timebox | The top tree and 198 closed subtree files in attic/rung0 of  | Run the 58 wall-cap subtrees with the unchanged Amendment 1  |
 | exp-257 | H-275 | 555.2m wall | timebox | Draw 31 of packing/campaign/explorations/X048-session-182-ov |  |
 | exp-284 | H-293 | 10.3m wall | timebox | Preserve the exp-284 production, incomplete verification and |  |
+| exp-289 | H-298 | 4s wall | guard | packing/campaign/series/series-000-smoke-and-calibration/res | A bounded input-only structural audit informs a separately p |
 
 ## Effort
 

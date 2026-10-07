@@ -25,6 +25,18 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/report_n17_parent_geometry.py
+    kind: generated-artifact
+    boundary: Generated native parent and accepted witness receipt bytes remain fixed throughout structural intake characterization; source identity is recorded by Git, without source checksum acceptance.
+  - path: packing/devtools/check_n17_partner_pose_coupling.py
+    kind: generated-artifact
+    boundary: Runtime accepted native parent objects and generated finite witness/replay receipts remain byte-bound across full-row coupling reconstruction; source identity is recorded by Git and never decides acceptance.
+  - path: packing/devtools/check_n17_full_square_partner_coupling.py
+    kind: generated-artifact
+    boundary: Generated accepted parent and witness input bytes remain unchanged through fresh full-square reconstruction; no source or commit checksum pins verification.
+  - path: packing/devtools/profile_n17_exact_replay.py
+    kind: generated-artifact
+    boundary: Generated native replay input bytes and mathematical receipt identities determine whether instrumented and uninstrumented runtime results match; these are data equivalence checks, not source integrity pins.
   - path: packing/devtools/probe_n17_pooled_feasible_center.py
     kind: generated-artifact
     boundary: Frozen runtime accepted union and witness descriptor/receipt bytes bind the finite premise across fresh construction; no source or Git identity determines acceptance.
