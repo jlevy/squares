@@ -121,6 +121,9 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-280-centered-endpoint-hull-capacity",
         "exp-281-conditional-owned-hull-gate",
         "exp-282-conditional-owned-hull-scoped-input",
+        "exp-283-parent-guard-owned-hull",
+        # Registered native-custody replication; no mutation control consumes its output.
+        "exp-284-parent-guard-native-custody",
     )
 )
 
@@ -270,6 +273,12 @@ PRUNE = frozenset(
         # corpus test, which no registered mutation command runs in a worker.
         # The linked original instrument is rescued by exact target copyback.
         ROOT / "benchmarks/validation-efficiency/runs",
+        # Historical operational checkpoint archives are not mutation-control inputs.
+        # Existing inline/register copyback retains the six referenced log/manifest/
+        # archive consumers, including both exact checkpoint-manifest fixtures. The
+        # originals remain in the primary tree. Measured worker saving: 422,654 bytes;
+        # the 192MiB cap is unchanged.
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
         ROOT / "benchmarks/math-startup/fixtures",
         # Three more benchmark receipt roots join them on 2026-10-06 (PR #382), whole, so
         # the next dated census run is pruned without an edit here. The two census

@@ -43,6 +43,7 @@ hypothesis:
     RSS.
   prereqs:
   - H-290
+  - H-291
   - H-292
   replication: false
   registered: '2026-10-07'

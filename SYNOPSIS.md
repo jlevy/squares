@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 226 | 61 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 211 | 81 accepted; 38 rejected; 59 unresolved; 12 baseline; 16 blocked; 4 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 227 | 61 confirmed; 33 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 213 | 81 accepted; 38 rejected; 59 unresolved; 12 baseline; 17 blocked; 4 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5808,6 +5808,7 @@ round that names the hypothesis, control roles included.
 | [H-290](packing/campaign/hypotheses/H-290-n17-numeric-checkpoint-capture-readiness.md) | confirmed | Numeric-frame saved16step custody and49 exact root-relative bounds | 1 | Registered600s parent including300s clean child; no exclusion |
 | [H-291](packing/campaign/hypotheses/H-291-n17-centered-endpoint-standing-control.md) | confirmed | Exact centered numeric-cap standing endpoint control | 3 | Full independent16step PASS_STALL control; no admission |
 | [H-292](packing/campaign/hypotheses/H-292-n17-conditional-owned-hull-gate.md) | confirmed | Exact finite shared-owned-hull gain within accepted parent | 2 | Fixedthreeguards/cleanreconstruction; no propagation or admission |
+| [H-293](packing/campaign/hypotheses/H-293-n17-parent-guard-owned-hull-continuation.md) | blocked | One-round parent-aware closed-guard exclusion | 2 | Original283 operational refusal;284 native-custody replication registered, mathematical outcome pending |
 
 ### Confirmed
 
@@ -6117,7 +6118,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-154.yaml` | session-154 | 358 | 3.03 h | 2.95 h | 3.63 h | yes |
 | `codex-task-tree-session-155-creative.yaml` | session-155 | 188 | 1.52 h | 1.49 h | 1.72 h | no |
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
-| `codex-task-tree-session184-through-121500.yaml` | session-184 | 3,620 | 20.64 h | 5.11 h | 5.11 h | yes |
+| `codex-task-tree-session184-through-20261007T141342Z.yaml` | session-184 | 4,891 | 28.9 h | 7.09 h | 7.09 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6126,6 +6127,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
 | `codex-task-tree-session184-through-100444.yaml` | unattributed | 2,176 | 11.95 h | 2.94 h | 2.94 h | yes |
+| `codex-task-tree-session184-through-121500.yaml` | unattributed | 3,620 | 20.64 h | 5.11 h | 5.11 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -6147,9 +6149,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 211 rounds registered in `series-000`.
+There are 213 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5768.4 wall-minutes.
+They record 2512.1 agent-minutes and 5768.5 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6402,6 +6404,8 @@ archive beside it.
 | [exp-280](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-280-h291-centered-endpoint-hull-capacity.md) | 17 | target | H-291 | Supported48 centered standing endpoint control | Acceptedfull16step PASS_STALL/25.1Mfacets; endpointpremise inherited, noadmission | accepted |
 | [exp-281](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-281-h292-conditional-owned-hull-gate.md) | 17 | target | H-292 | Finiteowned-hull gain and freshreconstruction | Incomplete1.11s at rational input ceiling; no gains | blocked |
 | [exp-282](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-282-h292-conditional-owned-hull-scoped-input.md) | 17 | target | H-292 | Scoped accepted-premise finiteownership replication | Fresh exactconditionalgain+endpoint PASS8.39s; no exclusion | accepted |
+| [exp-283](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-283-h293-parent-guard-owned-hull-continuation.md) | 17 | target | H-293 | Parent-aware conditional round from accepted finite gain | Refused8.44s before initialization at centered parent premise-schema join | blocked |
+| [exp-284](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md) | 17 | target | H-293 | Exact native-path/role custody replication; same one-round recipe | Registered; target unrun at registration | in-progress |
 
 ### Cost and provenance
 
@@ -6618,10 +6622,12 @@ archive beside it.
 | exp-280 | Parent600s/child300s;4GiBsampled | 106.49s | — | criterion | clean `90d6e4c94`; full16step PASS_STALL, noadmission |
 | exp-281 | Construction60s/fresh60s inside120s;4GiBsampled | 1.11s incomplete | — | Input rational ceiling | No gain evaluation, propagation or mathematical verdict |
 | exp-282 | Construction60s/fresh60s inside120s;4GiBsampled | 8.39s | — | Conditionalgain accepted | 3closedpieces/96planes/5newpoints; no propagation or exclusion |
+| exp-283 | Production600s/fresh300s inside900s;4GiB sampled | 8.44s | — | error | Clean c785d7156; premise-schema refusal before scientific initialization |
+| exp-284 | Production600s/fresh300s inside900s;4GiB sampled | — | — | Registered | Scientific settings unchanged; operational role-identity repair only |
 
-### What the 211 rounds jointly establish
+### What the 213 rounds jointly establish
 
-The 211 rounds use 2512.1 agent-minutes and 5768.4 wall-minutes under the campaign’s
+The 213 rounds use 2512.1 agent-minutes and 5768.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

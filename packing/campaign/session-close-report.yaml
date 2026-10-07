@@ -36,8 +36,8 @@ totals:
     wall_hours: 713.93
 codex_receipts:
   attributed: 80
-  unattributed: 3
-  measured: 83
+  unattributed: 4
+  measured: 84
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -3197,19 +3197,19 @@ sessions:
   title: "n17 Proof Contracts and Instruments"
   status: in_progress
   primary_bead: think-ipel
-  phases: 13
+  phases: 15
   measured: true
   rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session184-through-121500.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T141342Z.yaml
   turns: null
   tool_calls: null
   tool_errors: null
   one_off_code: null
   wall_hours: null
   codex_receipts:
-  - path: packing/campaign/resource-usage/codex-task-tree-session184-through-121500.yaml
-    model_responses: 3620
-    agent_hours: 20.64
-    active_union_hours: 5.11
-    wall_hours: 5.11
+  - path: packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T141342Z.yaml
+    model_responses: 4891
+    agent_hours: 28.9
+    active_union_hours: 7.09
+    wall_hours: 7.09
     snapshot_incomplete: true

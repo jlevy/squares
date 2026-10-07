@@ -24,10 +24,10 @@ guard; it supplies no ordinary mask/census admission or global proof.
 Complete16 nonclosed updates miss this one-round criterion; partial/resource stops
 remain incomplete.
 
-<!-- This document follows common-doc-guidelines.md.
-See github.com/jlevy/practical-prose and review guidelines before editing.
--->
-
 Original exp-283 remains a preserved operational refusal before initialization.
 This replication changes only the exact compressed-path to seed/node role custody join;
 scientific parameters, conditional criterion and resource ceilings remain unchanged.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -2258,6 +2258,187 @@ whether tighter angular arithmetic or position conditioning is worth a separatel
 registered implementation. Both implications above are sole-agent hand derivations,
 without independent mathematical review or target measurements.
 
+### Selected successor after a complete nonclosed conditional round
+
+If the registered H-293 recipe completes all sixteen updates and its fresh full
+checker accepts a nonclosed result, the selected different approach is a finite
+four-case centre partition. It is prospective: no conditional child geometry,
+partition signs or gains have been evaluated for this successor. Exp-283's
+parent-custody schema refusal occurred before any child or update and therefore
+does not trigger it. That operational refusal is not a mathematical negative.
+
+The angle interval is already narrow. The remaining common-owned construction
+quantifies over broad centre domains. Partitioning the two diagonal centre
+coordinates addresses that quantifier directly. The experiment attempts an exact
+contradiction in every case, without another producer round or a new numerical
+separation LP.
+
+**Accepted parent and scope.** Let $D$ be the original centered $C(V)$ occupied-cell
+domain with the inherited closed guard $\tau_1\in I$. Require a fresh, full
+`PASS_CONDITIONAL_STALL` receipt for exactly sixteen complete updates, together with
+the immutable conditional child, its canonical and compressed identities, its
+initial-state identity, and the original parent, finite-point and centered-container
+premise references. A refused, partial or closed child is not this experiment's
+input. The accepted final row cover and owned hulls describe every physical packing
+in $D$; the experiment does not assert that every represented tuple is physical.
+
+The intake must stream the complete child through canonical EOF and bind its exact
+header, ancestry, guard, world, owner keys, final row counts and predecessor
+references to that accepted receipt. Use the same exact role-to-path normalization
+for compressed identities as the corrected conditional intake. Parent geometry is
+an explicitly accepted premise, not geometry replayed by this finite instrument.
+The fresh finite checker imports neither the producer, kernel nor algebraic-root
+machinery. It independently repeats intake and every finite construction below.
+
+Arithmetic uses the owner-0 residual polygons in rows meeting $I$, their closed
+intervals, and all seventeen accepted owned hulls. Unused row geometry and large
+root or endpoint scalars remain structurally checked, identity-bound parent data.
+Do not repeat the unrelated-scalar parsing failure from exp-281. The original frame
+has $B=1$, outer cap $U$, inner cap $V$ and offset $o=(U-V)/2$; its analytic label 1
+is owner 0. Neither coordinates nor stored artifacts are relabelled.
+
+**Necessary centre domains.** For every owner-0 row, intersect its closed interval
+with $I$. Keep each nonempty intersection $J=[l,h]$, including the two singleton
+seams. Define
+
+$$
+m_J=\frac12\min\{c(l)+s(l),c(h)+s(h)\},\qquad
+W_J=[o+m_J,U-o-m_J]^2.
+$$
+
+Intersect each original residual polygon separately with $W_J$. Preserve singleton
+and segment intersections. Do not convexify distinct residual pieces before this
+clipping: clipping their convex hull could introduce centres between disconnected
+pieces. If no piece survives in any relevant row, the necessary centre cover for
+$D$ is empty, which already proves the closed-angle exclusion.
+
+Otherwise evaluate $d=x+y$ and $e=y-x$ at all surviving vertices in all relevant
+rows. Their exact global extrema define
+
+$$
+\alpha=\frac{d_{\min}+d_{\max}}2,\qquad
+\beta=\frac{e_{\min}+e_{\max}}2.
+$$
+
+This is a frozen midrange rule, not a parameter chosen after a sign test. A zero
+range is valid and creates duplicate closed cases; it causes no division by the
+range and removes no case obligation. The four raw cases, in lexicographic order
+with $-1$ before $+1$, are
+
+$$
+D_{\sigma,\tau}
+=D\cap\{\sigma(x_1+y_1-\alpha)\ge0,
+         \ \tau(y_1-x_1-\beta)\ge0\},
+\qquad \sigma,\tau\in\{-1,1\}.
+$$
+
+Their union is $D$. A pose on a cut belongs to both relevant cases, and a pose on
+both cuts belongs to all four. Each case halves the global width of both projected
+centre coordinates, though this alone does not guarantee a useful owned hull.
+
+In the clipping convention $a x+b y\le c$, the additional rows are
+$(-\sigma,-\sigma)\mathbin{\cdot}x\le-\sigma\alpha$ and
+$(\tau,-\tau)\mathbin{\cdot}x\le-\tau\beta$.
+Apply them to each surviving residual piece before taking any hull. Within a fixed
+row, the convex hull of the surviving pieces may then be used for ownership tests:
+those tests are affine in the centre, so this last convexification changes no
+extremal inequality. An empty case is proved only when every relevant row piece is
+empty. It is not inferred from an empty common-owned polygon.
+
+**Finite ownership and contradiction.** First run the same construction without
+the two centre cuts as a matched unsplit control. For it and each nonempty case,
+construct $K\subseteq[0,U]^2$ using the H-292 ownership rows, with the unchanged
+$\epsilon=2^{-20}$. For every relevant row, every surviving centre vertex $x$,
+every corner $(c,s)$ of $[c(h),c(l)]\times[s(l),s(h)]$, and each
+$\eta\in\{-1,1\}$, require
+
+$$
+\begin{aligned}
+\eta c p_x+\eta s p_y
+&\le 1/2-\epsilon+\eta(c x_x+s x_y),\\
+-\eta s p_x+\eta c p_y
+&\le 1/2-\epsilon+\eta(-s x_x+c x_y).
+\end{aligned}
+$$
+
+These two signed pairs test both square axes. The rectangular coefficient enclosure
+contains the whole closed angular arc; the positive margin makes every admitted
+point strictly interior to square 1 for every physical packing of that case.
+
+Let $H_0$ be the accepted parent's owner-0 hull and put
+$H=\operatorname{conv}(H_0\cup K)$. Use **all** vertices of $K$ for this finite
+proof object. There is no eight-point proposal selection and no 48-point producer
+hull ceiling here. The old $H_0$ points are owned by the accepted parent; they need
+not satisfy the new sufficient rows defining $K$ over its centre over-cover.
+
+For every other owner $j$, in increasing owner order, test the exact closed
+intersection $H\cap H_j$. Any shared point, including a point or segment of
+intersection, proves the case impossible: it would lie strictly inside both
+physical squares. Empty hulls contribute no intersection. Retain the first such
+owner and a canonical common point, with exact hull-membership evidence. A small
+witness may express that point as a convex combination of at most three vertices
+from $H_0\cup K$ and at most three vertices of $H_j$, with nonnegative rational
+weights summing to one. The fresh checker may instead reconstruct both hulls and
+their exact closed intersection.
+
+This is a rational linear feasibility problem for a common owned point. Its
+feasibility certificate proves a contradiction for the packing case. Failure to
+find such a point, even if certified for the entire constructed polygon, proves
+only that this direct ownership recipe did not close the case. It does not prove
+that a packing exists. No floating-point LP status is accepted as either outcome.
+
+**Frozen decision rule.** The unsplit control has priority: an empty necessary
+centre cover or a shared owned point closes all of $D$ directly. Otherwise process
+all four raw cases. Primary success requires an exact empty-centre or shared-point
+contradiction for **every** case, followed by fresh reconstruction of the complete
+cover and its four conclusions. There is no gain threshold substituting for this
+exclusion. A complete run with any unresolved case misses the recipe's criterion;
+retain any proved subcases as partial coverage. In particular, three closed cases
+do not cover the fourth. A resource stop is incomplete, without a four-case verdict.
+The result concerns the inherited centered parent and $I$ only; it supplies no
+whole-mask, old-$U$-census or global-optimality admission.
+
+Freeze one worker, 60 seconds for construction and 60 for fresh reconstruction,
+120 seconds combined, with a sampled 4 GiB memory ceiling. Each phase includes its
+own complete child extraction. Limit descriptors and accepted receipts to 10 MiB,
+the conditional child to 64 MiB compressed and 512 MiB decoded, its extracted final
+state and finite output to 64 MiB each. Admit at most 16,384 arithmetic input
+vertices across the relevant residual pieces and all owned hulls; each used or
+computed rational numerator and denominator has at most 4,096 bits. Limit each
+intermediate centre polygon and intersection hull to 256 vertices, and each
+intermediate or final $K$ to 128. These are resource limits, not geometric claims;
+exceeding one is incomplete. Keep all four raw case identities even if their
+geometry coincides.
+
+Target-free controls must cover all clipping signs, a centre on one or both cuts,
+zero projected ranges, empty overall and individual cases, both chart-boundary
+singletons, disconnected pieces clipped before convexification, both square axes
+and all coefficient corners, strict versus boundary-only ownership, and point or
+segment hull intersections. A four-case positive fixture, a three-of-four refusal,
+an unsplit-priority fixture and a complete unresolved fixture check the decision
+rule. Custody controls change each parent identity, guard, owner role and structural
+join independently; byte, time, rational and polygon caps stop without a scientific
+verdict. A fresh producer-free process must reconstruct a synthetic full receipt.
+
+The actual endpoint lies outside $I$, so retaining it in these four conditional
+cases is not an applicable control. Its earlier full-root retention and the H-292
+$Z$ calibration remain inherited premise references, not tests rerun here. Add a
+target-free feasible-pose negative control instead: an owner-0 square with rational
+half-angle $53/128$ and centre $(1,1)$, a disjoint axis-aligned square with centre
+$(3,3)$, and owned hulls strictly inside those respective squares. Other synthetic
+owners may have empty owned hulls; this tests the finite two-square implication,
+not existence of a new seventeen-square packing. The centre case containing the
+known pose must remain nonempty, its owned construction must contain a checked
+strict-interior point, and it must not acquire a shared-owned-point contradiction.
+The zero-range version places that centre in all four cases and checks that none
+is silently dropped. A separate pure chart-zero fixture checks the same signs at an
+endpoint without reading actual algebraic-root data.
+
+This contract is the sole Astra agent's prospective mathematical derivation. It
+does not assert that the actual conditional round is nonclosed, that any partition
+case is empty, or that the proposed resource ceilings will suffice. Registration
+and source review must precede the first target construction.
+
 ## A Future Label-Bijection Extension
 
 The current consumer requires all seventeen transported owners to equal the endpoint's

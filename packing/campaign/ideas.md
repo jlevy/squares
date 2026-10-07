@@ -999,6 +999,14 @@ walls; known-endpoint STALL is required, with no exclusion or census admission.
 owned-point gains for three fixed guards within the accepted H290 parent, with fresh
 reconstruction and no propagation or admission.
 
+[H-293](hypotheses/H-293-n17-parent-guard-owned-hull-continuation.md) registers one
+explicit parent-aware conditional round on the closed owner0 guard.
+The accepted finite points augment only that conditional parent; complete fresh replay
+is required for an initial owned-hull, ordinary post-step or full closed-guard-cover
+contradiction. A complete nonclosed round misses this recipe and leaves conditional
+feasibility unresolved.
+No full-mask exclusion, ordinary census admission or global proof is implied.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

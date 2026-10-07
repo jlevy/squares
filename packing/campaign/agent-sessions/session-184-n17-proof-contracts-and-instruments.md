@@ -427,7 +427,7 @@ session:
     objective: Complete the exact finite shared-owned-hull gate after a scoped admitted-premise
       input repair; Astra selects substantive guarded continuation or exact-arc ownership
       fallback from its mathematical disposition.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Centered full independent endpoint control accepted; original finitegate
       stopped operationally before any gain. Target-first repair retains fullparent custody
@@ -442,11 +442,85 @@ session:
       completed and partial artifacts at the slice deadline without retuning criteria.
     fallback: Continue widened-slider and global-capture derivations while preserving the
       exact checker failure and selecting a ready dependency.
+    outcome: Scoped-input exp282 fresh finite reconstruction accepted8.39s; endpoint control
+      passes, allfour closed-Icardinal gains exceed1/1024, allangle gainsnegative. Target3closedpieces/96planes/5newpoints;
+      old20+new5fit48withoutloss. Astra selects H293 oneguardedparent-aware round with independentfreshchecker;
+      original281incomplete preserved. Secondrequiredpush gate completed416.76s:58/61steps
+      pass, normal6465pass/20skip/2fail; specificfloor/view/figure repairs passfocusedchecks,
+      requiredheavy prepared for separate asynchronous launch beside sourcework. No exclusion/admission
+      fromfinitegain.
+    evidence: &id029
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-282-h292-conditional-owned-hull-scoped-input.md
+    stop_reason: Boundary disposition recorded at 2026-10-07T13:33:05Z (34s after planned
+      boundary)
+    next_action: Build/review new explicit conditionalproducer/checker; registerH293/exp283
+      only aftersourcecontrols and mathematicalclear. Mathematicalclosure criterion; complete
+      nonclosed one-roundrecipe is rejected, physicalfeasibilityunresolved.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-430
+    objective: Build and independently validate the parent-aware closed-I conditional proof
+      producer/checker, then freeze H293/exp283 for one bounded mathematical exclusion trial.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: Astra accepted actual finiteconditionalgain; explicit parent ancestry/guard
+      and strictownership invariant now support a substantive guardedcontradiction trial.
+    budget_minutes: 30
+    started_at: '2026-10-07T13:33:05Z'
+    deadline_at: '2026-10-07T14:03:05Z'
+    expected_output: Newconditionalproducer+independentchecker source/controls and Astramathematicalreview;
+      registered600sproduction+300sfreshtrial ifready; requiredheavy validation beside research.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Refuse affected interpretation on failed controls or exact joins. Preserve
+      completed and partial artifacts at the slice deadline without retuning criteria.
+    fallback: Continue widened-slider and global-capture derivations while preserving the
+      exact checker failure and selecting a ready dependency.
+    outcome: Conditional producer34 and checker39 synthetic controls passed, with independent
+      cross reviews and sole-Astra mathematical source review clear. Exact sorted child/EOF
+      roundtrip, all-finite initial closure, ordinary post-step and closed-guard boundary
+      terminal controls pass. H293/exp283 registered at14:07:42Z; actual target remains unrun
+      at registration. No conditional exclusion or admission yet.
+    evidence: &id033
+    - packing/campaign/hypotheses/H-293-n17-parent-guard-owned-hull-continuation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-283-h293-parent-guard-owned-hull-continuation.md
+    stop_reason: Planned boundary14:03:05Z; actual source-ready registration/handoff14:07:42Z,277s
+      late while final independent deadline control and preregistration were completed.
+    next_action: Launch the registered one-round mathematical exclusion trial from frozen
+      source; separately consume complete fresh replay before interpreting closure.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-430
+    objective: Run and independently interpret the registered closed-I parent-aware conditional
+      exclusion trial; mathematical outcome is the primary lane, with independent proof review
+      and bounded validation in parallel.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Source and synthetic control handoff ready; accepted finite gain supports
+      the registered conditional contradiction trial.
+    budget_minutes: 30
+    started_at: '2026-10-07T14:07:42Z'
+    deadline_at: '2026-10-07T14:37:42Z'
+    expected_output: One registered600s production+300s fresh conditional replay disposition;
+      exact closure versus complete nonclosed/incomplete/refused states, no global or ordinary
+      census promotion.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Refuse affected interpretation on failed controls or exact joins. Preserve
+      completed and partial artifacts at the slice deadline without retuning criteria.
+    fallback: Continue widened-slider and global-capture derivations while preserving the
+      exact checker failure and selecting a ready dependency.
     outcome: null
-    evidence: []
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-283-h293-parent-guard-owned-hull-continuation.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md
     stop_reason: null
-    next_action: Sol implements bounded owner0-only arithmetic while Astra retains all17 premise
-      scope; launch fixed finitegate after independent source review and freeze.
+    next_action: Originalexp283 refused before initialization after8.44s at the centered compressed-identity
+      representation join; preserve it. Separately registeredexp284 repairs exact native-path
+      to seed/node role mapping with unchanged scientific parameters; root launches frozen
+      trial and complete fresh replay.
   primary_bead: think-ipel
   status: in_progress
   budget:
@@ -468,11 +542,10 @@ session:
     before: 'Main ef79288a4: R071 strict lower bound 4.66044275; exact feasible endpoint;36784
       states/4685 orbits under58 admitted entries. Outer capture and full proof composition
       remain open.'
-    after: 60admissions leave36768states/4683orbits, endpoint retained. Conditional continuous
-      cones/floor checks and n11/full17numeric-cap first-round readiness accepted. Actual49capturebounds
-      retainzero but fail all local/wide capture predicates; centered full independent16-step
-      STALL accepted. Frozen finiteownership281 incomplete before gains; globalcapture/annulus/proofcomposition
-      remain open.
+    after: 60admissions leave36768states/4683orbits, endpointretained. Numericcap/H29049bounds/centeredfullindependentSTALLED
+      readiness accepted; allterminalcapturepredicates remainfalse. Exp282 exactfiniteconditionalowned-hull
+      gain accepted with5newpoints onclosedI; no propagation/exclusion yet. Conditionalcones/floor
+      and n11readiness retained; globalcapture/annulus/optimalityproof remainopen.
   delegations:
   - task: Astra mathematical contracts
     operator: GPT-6 Astra xhigh
@@ -1417,13 +1490,15 @@ session:
     - sharedadmissionledgermutation
   - task: Astra finite ownership review and position-cover alternative
     operator: GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: &id029
+    outcome: Astra scopedsource and actual282 mathematicalCLEAR; definitiveconditionalinvariant/initialclosure/endpoint/prune
+      packet delivered.
+    evidence: *id029
+    files: &id030
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
-    checks: []
+    checks:
+    - Exp282 generation/fresh exactfinite reconstruction both pass; no propagation or globalproof.
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1438,21 +1513,23 @@ session:
     validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
     kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
     fallback: Preserve missingdependency, rotate toreadyproof-support work.
-    write_scope: *id029
+    write_scope: *id030
     excluded_commands:
     - blockingCIwatch
     - unregisteredscientifictarget
     - sharedadmissionledgermutation
   - task: Sol finite conditional-owned-hull instrument and exact custody
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: &id030
+    outcome: Sol scopedsource48controls1.30s and282prereg delivered; original281 preserved,
+      newproducer engineering slice underway.
+    evidence: *id029
+    files: &id031
     - packing/devtools/probe_n17_conditional_owned_hull.py
     - packing/tests/test_probe_n17_conditional_owned_hull.py
-    checks: []
+    checks:
+    - Exp282 generation/fresh exactfinite reconstruction both pass; no propagation or globalproof.
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1467,25 +1544,27 @@ session:
     validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
     kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
     fallback: Preserve missingdependency, rotate toreadyproof-support work.
-    write_scope: *id030
+    write_scope: *id031
     excluded_commands:
     - blockingCIwatch
     - unregisteredscientifictarget
     - sharedadmissionledgermutation
   - task: Sol independent proof-support review and asynchronous checkpoint gate
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
-    files: &id031
+    outcome: Sol independent48controls1.21s+282metadataCLEAR; siteglyph fullvisualcontract45.64s
+      andRuff floorPASS; sharedsnapshotbaselinePASS, originalscopeheavy prepared additively.
+    evidence: *id029
+    files: &id032
     - packing/devtools/verify_n17_kernel_certificate.py
     - packing/tests/test_verify_n17_centered_cap.py
     - packing/devtools/census_n17_certified.py
     - packing/tests/test_census_n17_certified.py
     - packing/tests/test_reachable_tests.py
     - packing/tests/test_verify_n17_certificates.py
-    checks: []
+    checks:
+    - Exp282 generation/fresh exactfinite reconstruction both pass; no propagation or globalproof.
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1499,7 +1578,187 @@ session:
     validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
     kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
     fallback: Preserve missingdependency, rotate toreadyproof-support work.
-    write_scope: *id031
+    write_scope: *id032
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Astra guardedparentproof strategy and mathematicalreview
+    operator: GPT-6 Astra xhigh
+    status: completed
+    recording: contemporaneous
+    outcome: Source/control and independent review handoff complete; H293/exp283 preregistration
+      imported, target unrun at handoff.
+    evidence: *id033
+    files: &id034
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks:
+    - Producer34 controls; checker39 controls; independent producer34 and checker38+newdeadline1
+      controls passed; mathematical source review clear.
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Reviewbothmodules and interpret actualtrial only after frozencontrols/prereg.
+    phase: 14
+    budget_minutes: 30
+    started_at: '2026-10-07T13:33:05Z'
+    deadline_at: '2026-10-07T14:03:05Z'
+    expected_output: Exactconditionalinvariant and source/control review; fullclosedIcontradiction
+      versus nonclosedrecipe distinction.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id034
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol parent-aware conditionalproducer and engineeringcontrols
+    operator: GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Source/control and independent review handoff complete; H293/exp283 preregistration
+      imported, target unrun at handoff.
+    evidence: *id033
+    files: &id035
+    - packing/devtools/produce_n17_conditional_owned_hull.py
+    - packing/tests/test_produce_n17_conditional_owned_hull.py
+    checks:
+    - Producer34 controls; checker39 controls; independent producer34 and checker38+newdeadline1
+      controls passed; mathematical source review clear.
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: "Finishproducer alignedcheckerAPI, originalfullrows intact, old20+new5\u2264\
+      48, other15then0last."
+    phase: 14
+    budget_minutes: 30
+    started_at: '2026-10-07T13:33:05Z'
+    deadline_at: '2026-10-07T14:03:05Z'
+    expected_output: Minimalexplicitguardedproducer/25controls and newtrialprereg packet;
+      no actualtarget.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id035
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol independentconditionalchecker and asynchronousvalidation
+    operator: GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Source/control and independent review handoff complete; H293/exp283 preregistration
+      imported, target unrun at handoff.
+    evidence: *id033
+    files: &id036
+    - packing/devtools/verify_n17_conditional_owned_hull.py
+    - packing/tests/test_verify_n17_conditional_owned_hull.py
+    checks:
+    - Producer34 controls; checker39 controls; independent producer34 and checker38+newdeadline1
+      controls passed; mathematical source review clear.
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Finishnewchecker exactinitial/eachstep/finalcontext proof; verifyoriginalscopeheavy
+      concurrently.
+    phase: 14
+    budget_minutes: 30
+    started_at: '2026-10-07T13:33:05Z'
+    deadline_at: '2026-10-07T14:03:05Z'
+    expected_output: Independentproducer/kernel/root-free fullchecker/controls; originalscopeheavy
+      and repairedfloorcoverage receipts.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id036
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Astra conditional trial interpretation and next mathematical proof interface
+    operator: GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id037
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Interpret the actual conditional trial only after fresh replay; derive the
+      next proof interface from its measured disposition.
+    phase: 15
+    budget_minutes: 30
+    started_at: '2026-10-07T14:07:42Z'
+    deadline_at: '2026-10-07T14:37:42Z'
+    expected_output: Mathematically scoped closure or one-round criterion-miss interpretation
+      and selected next proof packet.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id037
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol conditional trial custody and receipt audit
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id038
+    - packing/devtools/produce_n17_conditional_owned_hull.py
+    - packing/tests/test_produce_n17_conditional_owned_hull.py
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep source frozen; audit registered production/fresh metadata on root authorization
+      and preserve original evidence and conditional scope.
+    phase: 15
+    budget_minutes: 30
+    started_at: '2026-10-07T14:07:42Z'
+    deadline_at: '2026-10-07T14:37:42Z'
+    expected_output: Exact object/context/closure/fresh receipt audit and current tracker/PR
+      factual draft.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id038
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol independent conditional replay and asynchronous validation
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id039
+    - packing/devtools/verify_n17_conditional_owned_hull.py
+    - packing/tests/test_verify_n17_conditional_owned_hull.py
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep independent checker frozen; audit complete exact replay after authorization
+      and run bounded relevant validation beside research.
+    phase: 15
+    budget_minutes: 30
+    started_at: '2026-10-07T14:07:42Z'
+    deadline_at: '2026-10-07T14:37:42Z'
+    expected_output: Independent replay/status/EOF/resource assessment and bounded asynchronous
+      validation disposition.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id039
     excluded_commands:
     - blockingCIwatch
     - unregisteredscientifictarget
@@ -1577,11 +1836,10 @@ session:
   - Exp273 accepted conservativeinventory10.49s andexp275 acceptedexactcapjoin1.21s atclean3575c02,
     no newbound/censuschange.
   stop_reason: null
-  next_action: Complete scoped finiteownership gate and follow its mathematical disposition;
-    retain asynchronous gate source scope, publish only checked evidence and continue substantive
-    proof work to16:08:33Z.
+  next_action: Complete reviewed guardedparentproducer+independentchecker; freezeH293/exp283
+    boundedclosed-I exclusion trial, keepCI beside mathematics and preserve everyverdict.
   resource_rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session184-through-121500.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T141342Z.yaml
 ---
 # n17 Proof Contracts and Instruments
 

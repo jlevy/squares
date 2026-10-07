@@ -919,6 +919,8 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                 "exp-280-centered-endpoint-hull-capacity",
                 "exp-281-conditional-owned-hull-gate",
                 "exp-282-conditional-owned-hull-scoped-input",
+                "exp-283-parent-guard-owned-hull",
+                "exp-284-parent-guard-native-custody",
             )
         } <= roots
     for control in specification["controls"]:
@@ -955,6 +957,27 @@ def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> N
     # pruning is solely a worker-copy rule, not deletion or a test exclusion.
     assert (root / "receipts.jsonl").is_file()
     assert any(root.glob("*.junit.xml"))
+
+
+def test_checkpoint_archive_prune_preserves_all_declared_consumer_copyback() -> None:
+    root = ROOT / "benchmarks/validation-efficiency/checkpoints"
+    assert root in PRUNE
+    copied = [
+        path.name for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)
+    ]
+    assert copied == sorted(
+        [
+            "2026-09-06-integrated-fast.log",
+            "2026-09-06-integrated-fast.manifest.json",
+            "2026-09-06-integrated-fast.tar.gz",
+            "2026-09-06-pre-main-integration.manifest.json",
+            "2026-09-06-pre-main-integration.tar.gz",
+            "VE-004-full-ed595fb6.tar.gz",
+        ]
+    )
+    # Unused operational histories stay recoverable in the primary evidence tree.
+    assert (root / "VE-004-control-1.tar.gz").is_file()
+    assert (root / "VE-004-candidate-1.tar.gz").is_file()
 
 
 def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
