@@ -3,9 +3,9 @@ type: is
 id: is-01m4ajhqrm8gmpaevnn91pxemz
 title: Independently review mathematics of eleven SQUISH rational upper bounds
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 6
+version: 7
 assignee: squish-math-review
 delegate: codex@17e132e9b179
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:59:22.516Z
-updated_at: 2026-10-07T07:45:48.920Z
+updated_at: 2026-10-07T07:45:50.777Z
 started_at: 2026-10-07T06:59:51.562Z
 closed_at: 2026-10-07T07:16:54.427Z
 close_reason: null
