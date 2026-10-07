@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 214 | 47 confirmed; 33 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 193 | 65 accepted; 38 rejected; 59 unresolved; 12 baseline; 12 blocked; 4 abandoned; 2 in progress; 1 exhausted |
+| Hypotheses | 214 | 49 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 193 | 67 accepted; 38 rejected; 59 unresolved; 12 baseline; 12 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -1559,7 +1559,27 @@ The
 [ten-hour launch plan](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md)
 selects BC-430 / `think-ipel` under BC-418, with Astra for mathematical strategy and
 GPT-6.1 Sol for engineering, review and tracking.
-The overnight run is planned.
+[Session 184](packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
+is active, from 07:08:33Z to 17:08:33Z on 7 October; research stops at16:08:33Z. Four
+slots are occupied: one Astra mathematical lane, two Sol6.1 engineering/review lanes,
+and the coordinator.
+CI runs beside the research.
+
+The current census remains36,784states/4,685orbits under58admissions, with the endpoint
+preserved. exp-259 confirmed its complete partition.
+exp-260 completed56numerical evaluations but remains inconclusive.
+exp-261 accepted conditional feature forcing; exp-264 accepted the conditional apex
+after a serialization-only repair, preserving blocked exp-262. exp-263 accepted one
+closed all-owner angular patch.
+These results discharge declared local components, not global capture or complete
+annulus coverage. The
+[proof-interface packet](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md)
+states their premises and the widened-slider gap.
+The next slice prepares a current-source full17 endpoint control and an actual
+admitted-tail test while Astra develops a structural contact-chain cone.
+n11 first-round readiness is a separate known-case control.
+
+Session183 remains the most recent completed session:
 
 [Session 183](packing/campaign/agent-sessions/session-183-n17-draw-31.md) ran the one
 state of BC-428’s draw that exp-257 never reached, draw 31, under BC-429 and exp-258,
@@ -5771,8 +5791,8 @@ round that names the hypothesis, control roles included.
 | [H-276](packing/campaign/hypotheses/H-276-n17-admitted-residue-partition.md) | confirmed | Exact complete current-ledger residue partition | 1 | exp-259 accepted:36784states/4685orbits/58admissions/endpoint survives; no new exclusion |
 | [H-277](packing/campaign/hypotheses/H-277-n17-widened-lp-mixed-angle-reconnaissance.md) | unresolved | Frozen mixed-angle numerical challenge of the conditional widened LP | 1 | exp-260 inconclusive: all56 evaluations ran,43 targets have finite positive margins and5 are wholly numerically infeasible; no exact bound |
 | [H-278](packing/campaign/hypotheses/H-278-n17-widened-omitted-feature-forcing.md) | confirmed | Exact finite omitted-feature bounds over the widened tube | 1 | exp-261 accepted:1152exact bounds and fresh replay pass; allowance -71/21000; uniform hand bridge has separate scope |
-| [H-279](packing/campaign/hypotheses/H-279-n17-widened-apex-position-duals.md) | blocked | Exact residual and radius checks for the conditional apex bridge | 2 | exp-262 arithmetic passes but replay refuses; exp-264 preregisters serialization-only replication |
-| [H-280](packing/campaign/hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | running | One exact all-branch annulus patch on a frozen ladder | 1 | exp-263 registered; target waits for accepted repaired apex |
+| [H-279](packing/campaign/hypotheses/H-279-n17-widened-apex-position-duals.md) | confirmed | Exact residual and radius checks for the conditional apex bridge | 2 | exp-264 accepted production/fresh replay5.67s; original exp-262 replay refusal preserved; conditional physical-packing bridge |
+| [H-280](packing/campaign/hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | confirmed | One exact all-branch annulus patch on a frozen ladder | 1 | exp-263 first2^-20 closed box accepted6.29s, all256 owners; one patch only |
 
 ### Confirmed
 
@@ -6093,8 +6113,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 126 |
-| unmeasured | 56 |
-| **total** | **182** |
+| unmeasured | 57 |
+| **total** | **183** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -6112,7 +6132,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 There are 193 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5730.1 wall-minutes.
+They record 2512.1 agent-minutes and 5730.3 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6345,8 +6365,8 @@ archive beside it.
 | [exp-260](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-260-h277-widened-lp-reconnaissance.md) | 17 | target | H-277 | 48frozen mixed-angle targets and8matched controls | Complete execution; five all-infeasible targets prevent the finite-minimum criterion | unresolved |
 | [exp-261](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-261-h278-widened-feature-forcing.md) | 17 | target | H-278 | Complete1152 exact interval bounds and fresh replay | All finite checks and fresh replay pass; analytic bridge separately hand-reviewed | accepted |
 | [exp-262](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-262-h279-widened-apex.md) | 17 | target | H-279 | Complete58 signed-position duals and exact apex radii | Arithmetic passes; fresh replay refuses serialized large integers | blocked |
-| [exp-263](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-263-h280-one-annulus-patch.md) | 17 | target | H-280 | Frozen five-box ladder and one retained dual, all256 choices | Registered before target; apex prerequisite pending | in-progress |
-| [exp-264](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-264-h279-apex-replay-repair.md) | 17 | target | H-279 | Unchanged apex contract, repaired exact receipt encoding | Registered before retry; original failure preserved | in-progress |
+| [exp-263](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-263-h280-one-annulus-patch.md) | 17 | target | H-280 | Frozen five-box ladder and one retained dual, all256 choices | First frozen2^-20 box passes exact production and fresh replay; eta approximately0.000131323483, all256 choices | accepted |
+| [exp-264](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-264-h279-apex-replay-repair.md) | 17 | target | H-279 | Unchanged apex contract, repaired exact receipt encoding | Unchanged criterion passes production and fresh replay5.67s; original failure preserved | accepted |
 
 ### Cost and provenance
 
@@ -6543,12 +6563,12 @@ archive beside it.
 | exp-260 | 540seconds including controls; oneworker | 8.389s | — | criterion | clean `8f7b60276`; numerical inconclusive |
 | exp-261 | 180seconds combined generation/replay | Timed extra replay 0.58s; production/first replay uninstrumented | — | criterion | clean `bd391f851`; finite check and replay pass |
 | exp-262 | 180seconds combined generation/replay | 3.87s | — | criterion | clean `513adb1bf`; replay refusal retained |
-| exp-263 | 180seconds combined production/replay | Pending | — | Running | Source and fixed ladder frozen before target |
-| exp-264 | 180seconds combined generation/replay | Pending | — | Running | Source and unchanged criterion frozen before retry |
+| exp-263 | 180seconds combined production/replay | 6.29 s | — | criterion | `76e2830b4` |
+| exp-264 | 180seconds combined generation/replay | 5.67 s | — | criterion | `76e2830b4` |
 
 ### What the 193 rounds jointly establish
 
-The 193 rounds use 2512.1 agent-minutes and 5730.1 wall-minutes under the campaign’s
+The 193 rounds use 2512.1 agent-minutes and 5730.3 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

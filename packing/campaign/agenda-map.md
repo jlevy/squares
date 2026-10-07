@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **22** in_progress, **26** ready, **22** tentative, **74** blocked, **65** stopped, **219** complete.
+- **23** in_progress, **26** ready, **22** tentative, **73** blocked, **65** stopped, **219** complete.
 
-- **30 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`, `BC-396`, `BC-434`, `BC-436`, `BC-438`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **29 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`, `BC-396`, `BC-436`, `BC-438`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -88,6 +88,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-043 | `BC-431` | in_progress | 1 | insight | research | Specify the complete proof-composition interfaces | `think-53qh` |
 | agenda-043 | `BC-432` | in_progress | 1 | correctness | measurement_validation | Build current admitted-residue stratification | `think-dn5h` |
 | agenda-043 | `BC-433` | in_progress | 1 | insight | research | Freeze capture contracts and widened-LP reconnaissance | `think-efe9` |
+| agenda-043 | `BC-434` | in_progress | 1 | correctness | tool_validation | Review externally owned compression repair | `think-juy9` |
 | agenda-043 | `BC-437` | tentative | 1 | efficiency | research | Select and certify a bounded actual-residue queue | `think-j6qy` |
 | agenda-043 | `BC-439` | ready | 1 | efficiency | measurement_validation | Close efficiency evidence and integration handoff | `think-ypk2` |
 
@@ -167,7 +168,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-040 | `BC-365` | 3 | — | no | An unshrunk exact-orientation verifier generalised from cases/green17/interval_audit.py and an unshrunk column… |
 | agenda-042 | `BC-384` | 1 | `BC-388`, `BC-389` | no | — |
 | agenda-042 | `BC-396` | 1 | — | no | The intake lane's accepting review of evand/square-packing's s(32) certificate at 167d842, which is also the reading of… |
-| agenda-043 | `BC-434` | 1 | — | no | External owner must provide a fixed repair ref and review receipt. |
 | agenda-043 | `BC-435` | 1 | `BC-434` | no | — |
 | agenda-043 | `BC-436` | 1 | — | no | Held source nodes are absent on this Mac and the required owner ruling is outstanding. |
 | agenda-043 | `BC-438` | 1 | — | no | All 200 manifest objects are absent locally; release has zero assets at review. |
@@ -233,7 +233,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-040 | active |  | 1 |  | 2 | 1 | 3 | 7 |
 | agenda-041 | active | 4 |  |  |  |  | 2 | 6 |
 | agenda-042 | active | 5 | 9 |  | 2 | 4 | 36 | 56 |
-| agenda-043 | active | 4 | 1 | 1 | 4 |  |  | 10 |
+| agenda-043 | active | 5 | 1 | 1 | 3 |  |  | 10 |
 
 ## By program
 
@@ -528,7 +528,7 @@ Open frontier: `BC-306`.
 | agenda-043 | `BC-431` | in_progress | Specify the complete proof-composition interfaces |
 | agenda-043 | `BC-432` | in_progress | Build current admitted-residue stratification |
 | agenda-043 | `BC-433` | in_progress | Freeze capture contracts and widened-LP reconnaissance |
-| agenda-043 | `BC-434` | blocked | Review externally owned compression repair |
+| agenda-043 | `BC-434` | in_progress | Review externally owned compression repair |
 | agenda-043 | `BC-435` | blocked | Measure the known-case capture control |
 | agenda-043 | `BC-436` | blocked | Prepare held-certificate control disposition |
 | agenda-043 | `BC-437` | tentative | Select and certify a bounded actual-residue queue |

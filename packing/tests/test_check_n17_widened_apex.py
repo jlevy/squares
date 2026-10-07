@@ -163,7 +163,7 @@ def test_invalid_witness_or_large_residual_refused(mutation: str) -> None:
     else:
         rows[29][0] = apex.core.Dyadic.point(-3)
     with pytest.raises(exact.AuditError):
-        apex.evaluate(rows, documents)
+        apex.evaluate(rows=rows, documents=documents)
 
 
 def test_angle_and_side_columns_do_not_enter_position_projection() -> None:

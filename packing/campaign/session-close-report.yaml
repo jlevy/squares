@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 182
+count: 183
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 126
-  sessions_unmeasured: 56
+  sessions_unmeasured: 57
   attributed:
     rollups: 297
     turns: 76355
@@ -3191,5 +3191,15 @@ sessions:
   measured: false
   unmeasured_reason: >-
     native harness data unavailable; Measured, not committed: the harness and sub-agent logs exist, but every rollup this repository's contract writes is keyed by model identifier, which this session's agent may not commit. The owner can add the rollups with close_session --update. The logs, on the run container under /root/.claude/projects/-home-user-squares/: the harness log 6b1ed85f-ba08-5540-8095-4fd66881916f.jsonl, which also spans work before this session, and the run operator's sub-agent log agent-a3c879fa91b776b5e.jsonl under its subagents/ folder, started at 2026-10-06T15:52Z.
+  rollups: []
+  codex_receipts: []
+- id: session-184
+  title: "n17 Proof Contracts and Instruments"
+  status: in_progress
+  primary_bead: think-ipel
+  phases: 5
+  measured: false
+  unmeasured_reason: >-
+    declares no resource measurement
   rollups: []
   codex_receipts: []

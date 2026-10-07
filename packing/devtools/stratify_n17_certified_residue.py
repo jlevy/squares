@@ -28,6 +28,7 @@ from devtools import select_n17_sub_patterns as selector
 from devtools import survey_n17_residue as survey
 from devtools.check_n17_capacity_one_cover import U
 from devtools.provenance import provenance, repository_path
+from sqpack import retained_json
 
 SCHEMA = "n17-certified-residue-stratification/v1"
 PROVENANCE = provenance(Path(__file__))
@@ -279,7 +280,7 @@ def main(argv: list[str] | None = None) -> int:
     except (census.RefusedError, OSError, ValueError) as error:
         print(json.dumps({"refused": str(error)}))
         return 2
-    text = json.dumps(record, indent=1, sort_keys=True) + "\n"
+    text = retained_json.dumps(record, sort_keys=True)
     if args.output is not None:
         atomic_write_text(args.output, text)
     print(text, end="")

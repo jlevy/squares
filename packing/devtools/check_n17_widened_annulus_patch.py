@@ -25,6 +25,7 @@ from devtools import probe_n17_widened_lp as probe
 from devtools.check_n17_core_stress import Dyadic
 from devtools.check_n17_endpoint_feasibility import Box
 from devtools.provenance import provenance
+from sqpack import retained_json
 
 SCHEMA = "n17-widened-annulus-patch/v1"
 LABELS = tuple(label for label in range(1, 18) if label != 6)
@@ -503,7 +504,7 @@ def main(argv: list[str] | None = None) -> int:
         packet = {"schema": SCHEMA, "verification_passed": False, "error": str(error)}
         result = packet
     if args.output is not None:
-        args.output.write_text(json.dumps(packet, indent=2) + "\n")
+        args.output.write_text(retained_json.dumps(packet))
     print(json.dumps(result))
     return 0 if result.get("verification_passed") is True else 1
 

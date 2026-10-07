@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `insight-iteration` (insight) | 4 | think-ipel | Freeze apex source and registration, execute bounded exact production/replay; parallel patch implementation and mathematical global-join review. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-ipel | Launch only independently reviewed and preregistered controls; continue Astra derivation beside mechanical integration. |
 
 ### Workflow summary
 
@@ -211,7 +211,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 41 | 1 |
 | `research-loop` | 37 | 4 | 133 | 9 |
-| `pipeline-improvement` | 42 | 2 | 215 | 7 |
+| `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
 | `review-planning-oversight` | 10 | 3 | 55 | 6 |
@@ -1149,8 +1149,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-276 | confirmed | proof | The retained current-ledger stratifier partitions all surviving states |  | 1 |  | 2s wall |
 | H-277 | unresolved | proof | At the accepted rational-root midpoint, the conditional 19-pair bounde |  | 1 |  | 8s wall |
 | H-278 | confirmed | proof | Across the accepted exp237 root inclusion interval and all eight verti |  | 1 |  | 1s wall |
-| H-279 | blocked | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 2 |  | 4s wall |
-| H-280 | running | proof | The deterministic retained dual seed at exp260 outer negative omega16  |  | 1 |  |  |
+| H-279 | confirmed | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 2 |  | 10s wall |
+| H-280 | confirmed | proof | The deterministic retained dual seed at exp260 outer negative omega16  |  | 1 |  | 6s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1299,7 +1299,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-160 | series-000 | 11 | Codex BC303 H-162 retained-receipt analyst | H-162 | The September 14 strategy reset paused this route with no exp-158 target receipt; no H-162 comparison or scientific verdict exists. |
 | exp-262 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Apex arithmetic passed, but the receipt encodes retained integer weights beyond the reader guard; fresh replay refuses. Repair the serialization and preregister a successor before retry. |
 
-### accepted (65)
+### accepted (67)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1368,6 +1368,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-258 | series-000 | 17 | Claude Session 183, the run operator, on one worker; on a closure it verifies the certificate and admits it in the session checkout | H-275 | Accepted on its criterion: draw 31 closed in 577 s of wall and 547 s of process CPU, well inside the 7,000 s ceiling, the standing kernel verifier re-proved it in full in 266 s, and s183-bc429-u31 is admitted with the endpoint surviving, taking the certified census from 36,792 states in 4,686 orbits to 36,784 in 4,685. H-275 is an open question with no falsifier, and this round is one draw: it answers the question for draw 31 only, and the stratum c4/i>=5/d>=8 now has two closed draws (u21 and u31), which describe those draws, not a closure rate. With it, every one of BC-428's 31 frozen draws has a verdict. Counting it with exp-257's, 26 of the 29 counted draws closed (90%); the other three are unchanged (u6 and u12 at producer fixed points, u15 INCOMPLETE at the ceiling), and the distance-2 pair stays apart (u8 closed, u1 INCOMPLETE). Counted closures cost 547 to 4,522 s of process CPU (median 1,112.5 s) and their verifications 257 to 1,899 s (median 482.5 s); draw 31 is the cheapest closure of the draw. exp-257's verdict is not reopened. |
 | exp-259 | series-000 | 17 | GPT-6.1 Sol coordinator, Session184 | H-276 | The complete current-ledger roster agrees with the standing census and preserves the endpoint; this admits no new exclusion. |
 | exp-261 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-278 | All1152 exact finite bounds pass and fresh reconstruction agrees; the uniform analytic bridge remains the separately scoped Astra hand derivation. |
+| exp-263 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract,Session184. | H-280 | After accepted H279 replay, the first frozen ladder box passes exact production and fresh reconstruction without another solve or parameter change. |
+| exp-264 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | The serialization-only successor passes exact production and fresh CLI replay under the original H279 criterion; original exp262 remains blocked and preserved. |
 
 ### baseline (12)
 
@@ -1385,13 +1387,6 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
-
-### in-progress (2)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-263 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract,Session184. | H-280 | Registered before target; execution waits for accepted H279 production and fresh replay in exp264. |
-| exp-264 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Same H279 weights, geometry, domain, radius formulas and acceptance criterion; only selected-cell numerator serialization repaired after exp262 fresh replay refusal. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1440,7 +1435,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-193 rounds, 2512.1 agent-minutes, 5730.1 wall-minutes.
+193 rounds, 2512.1 agent-minutes, 5730.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

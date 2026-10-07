@@ -24,6 +24,7 @@ from devtools import check_n17_widened_features as forcing
 from devtools.check_n17_endpoint_feasibility import _layout
 from devtools.check_n17_local_minimum import _named_lift
 from devtools.provenance import provenance
+from sqpack import retained_json
 
 SCHEMA = "n17-widened-apex-certificate/v1"
 RUN = exact.REPO / exact.RESULTS / "exp-248-n17-local-half-composition/run-002"
@@ -333,7 +334,7 @@ def main(argv: list[str] | None = None) -> int:
         packet = {"schema": SCHEMA, "verification_passed": False, "error": str(error)}
         result = packet
     if args.output is not None:
-        args.output.write_text(json.dumps(packet, indent=2) + "\n")
+        args.output.write_text(retained_json.dumps(packet))
     print(json.dumps(result))
     return 0 if result.get("verification_passed") is True else 1
 

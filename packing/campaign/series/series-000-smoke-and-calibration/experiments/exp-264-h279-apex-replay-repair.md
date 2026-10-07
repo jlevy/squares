@@ -21,6 +21,7 @@ experiment:
     method: exact-algebraic
     host_system: macOS arm64, project Python3.14.7, one process; external scratch.
     selftest_passed: true
+    engine_commit: 76e2830b4
   instance:
     axis: n
     point: 17
@@ -42,16 +43,27 @@ experiment:
     budget: Combined180-second generation/replay ceiling, supervised with timeout; preserve failures;
       no new solve or parameter expansion.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-264-widened-apex-replay-repair
-  results: []
+    commit: 76e2830b4
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Complete exact identities and premise joins; all weights nonnegative,epsilon<1,C>0,
+      positive frozen-formula radii and fresh replay agreement.
+    outcome: criterion_met
+    checked_by: Exact generator and fresh CLI replay both pass complete58directions/52rows/29columns/nonnegativeweights/root-feature-localjoins;
+      exact epsilon<1,C>0 and unchanged positive radius formulas agree.
   verdict:
-    decision: in-progress
-    primary_criterion: Complete exact identities and premise joins; all weights nonnegative,epsilon<1,C>0, positive
-      frozen-formula radii and fresh replay agreement.
-    reason: Same H279 weights, geometry, domain, radius formulas and acceptance criterion; only selected-cell
-      numerator serialization repaired after exp262 fresh replay refusal.
-  lease:
-    expires: '2026-10-07T08:35:00Z'
-    host: macOS arm64
+    decision: accepted
+    primary_criterion: Complete exact identities and premise joins; all weights nonnegative,epsilon<1,C>0,
+      positive frozen-formula radii and fresh replay agreement.
+    reason: The serialization-only successor passes exact production and fresh CLI replay under the
+      original H279 criterion; original exp262 remains blocked and preserved.
+    needs_review: false
+  effort:
+    timebox: 180 seconds combined production and fresh replay
+    wall_seconds: 5.67
+    stopped_by: criterion
 ---
 # exp-264: Apex Receipt Repair Replication
 
@@ -67,6 +79,17 @@ The generic decoder keeps its 10 MiB and 12-character bare-integer guards.
 Production and a fresh CLI replay must both pass the original H-279 criterion.
 No changed radius, weight optimization, new LP solve or retrospective acceptance of
 exp-262 is permitted.
+
+## Outcome
+
+The exact production and fresh CLI replay both passed at clean source `76e2830b4`. The
+command took 5.67 seconds.
+The retained rational values give `epsilon` approximately9.45555e-13, `C`
+approximately838.935, `alpha0` approximately1.192e-7 and `q0` approximately5.960e-8. The
+exact values, identities and replay are in the receipts; these decimals are orientation
+only. The finite checks support the separately reviewed conditional physical-packing
+bridge, with no annulus or capture claim.
+The original exp-262 failed replay remains unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -15,8 +15,10 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
-import yaml
 from strif import atomic_write_text
+
+from sqpack import retained_json
+from sqpack.yamlio import load_yaml
 
 LABELS = tuple(label for label in range(1, 18) if label != 6)
 TOLERANCE = 1e-8
@@ -447,12 +449,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     text = args.registration.read_text()
-    registration = yaml.safe_load(text.split("---", 2)[1])
+    registration = load_yaml(text.split("---", 2)[1])
     result = interpret(
         registration, json.loads(args.points.read_text()), json.loads(args.run.read_text())
     )
     atomic_write_text(
-        args.output, json.dumps(result, indent=2, allow_nan=False) + "\n", make_parents=True
+        args.output, retained_json.dumps(result, allow_nan=False), make_parents=True
     )
     print(json.dumps({"status": result["status"], "output": str(args.output)}))
     return 1 if result["status"] == "refused" else 0

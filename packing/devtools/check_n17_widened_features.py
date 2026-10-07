@@ -20,6 +20,7 @@ from devtools import check_n17_core_stress as core
 from devtools import check_n17_root_certificate as root
 from devtools.check_n17_core_stress import Dyadic
 from devtools.provenance import provenance
+from sqpack import retained_json
 
 SCHEMA = "n17-widened-feature-certificate/v1"
 CONVENTION = "owner-other displacement; sign flips when owner is right endpoint"
@@ -346,11 +347,11 @@ def main(argv: list[str] | None = None) -> int:
     except (ValueError, OSError, KeyError, TypeError) as error:
         packet = {"schema": SCHEMA, "verification_passed": False, "error": str(error)}
         if args.output is not None:
-            args.output.write_text(json.dumps(packet, indent=2) + "\n")
+            args.output.write_text(retained_json.dumps(packet))
         print(json.dumps(packet))
         return 1
     if args.output is not None:
-        args.output.write_text(json.dumps(packet, indent=2) + "\n")
+        args.output.write_text(retained_json.dumps(packet))
     print(json.dumps(result))
     return 0
 

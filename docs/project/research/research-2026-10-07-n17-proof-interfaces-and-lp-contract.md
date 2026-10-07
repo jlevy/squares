@@ -924,6 +924,165 @@ Reproducing a leaf descriptor is not verification that every original cell-state
 reaches it. The consumer’s contribution is the exact conversion and conditional theorem
 join; outer capture remains a separate certificate obligation.
 
+## A Homogeneous Cone from the Soft-Direction Dual
+
+The sixteen nonzero rows of exp-260’s finite dual for the negative turn of square 16
+suggest a telescoping identity.
+The following is a new hand derivation and a proposed finite-check contract, not a
+recorded verification of its sign or mass bounds.
+It covers a cone of mixed angles if those checks succeed.
+It does not supply a cover of all directions.
+
+Write $(c,s)=u^*$ and $(d,-e)=p^*$, with $c,s,d,e>0$. Let $x=x_{15}^*$ and $y=y_{17}^*$
+be the endpoint coordinates appearing in the contact chart, and set
+
+$$
+A=S^*-x-3/2,\qquad B=S^*-y-3/2,\qquad K=-eA+dB.
+$$
+
+The accepted exact contact identity F2 is $dA+eB=1$. This exact identity is essential
+below.
+An interval enclosing a small nonzero residual cannot replace it: a constant error
+would dominate a bound proportional to an arbitrarily small turn.
+
+### Two contact chains
+
+First fix every angle other than square 16’s at its nominal value.
+The walls and contacts $1/2$, $2/13$, $13/14$, $14/17$ give
+
+$$
+c x_{17}+s y_{17}\ge 2+\tfrac52c+\tfrac32s.
+$$
+
+Using $x_{17}\le S^*-1/2$ yields $y_{17}\ge y$. Independently, the left wall of 9 and
+the chain $1/3$, $3/9$, $9/10$, $10/15$ give
+
+$$
+c x_{15}+s y_{15}\ge2+cs+\tfrac12c+\tfrac52s.
+$$
+
+Using $y_{15}\le S^*-1/2$ yields $x_{15}\ge x$. These inequalities follow from the
+selected finite rows and require no slider or position-tube restrictions.
+Each binary owner choice in these chains has the same nominal normal when both owner
+angles are zero.
+
+Let $q_{16}=-r$, where $0<r\le1/200$, and put $\alpha=2\arctan r$. Square 16’s axis is
+$(d_r,-e_r)$, where
+
+$$
+d_r=\frac{d(1-r^2)-2er}{1+r^2},\qquad
+e_r=\frac{e(1-r^2)+2dr}{1+r^2}.
+$$
+
+If $d_r,e_r>0$, the two owner-16 rows $15/16$ and $16/17$ imply
+
+$$
+d_r(x_{17}-x_{15})-e_r(y_{17}-y_{15})\ge1+d_r+e_r.
+$$
+
+The preceding chain bounds and the top/right walls therefore require $d_r A+e_r B\ge1$.
+But F2 gives the exact identity
+
+$$
+d_r A+e_r B-1
+=\cos\alpha+K\sin\alpha-1
+=\frac{2r(K-r)}{1+r^2}.
+$$
+
+Thus $K<0$ would exclude this entire punctured axis in the selected-feature subsystem,
+uniformly over all centre positions.
+Feature forcing is still needed to infer the selected rows from a physical packing.
+
+### Explicit nonnegative weights
+
+The argument is a positive combination of the following sixteen finite gaps
+$g_i=A_i r-b_i$. Every omitted row receives weight zero.
+A pair’s alternative retained owners use the same weight.
+
+| Row | Weight |
+| --- | --- |
+| Left wall of 1 | $e_r c/s$ |
+| Bottom wall of 1 | $d_r s/c$ |
+| Bottom wall of 2 | $e_r$ |
+| Left wall of 9 | $d_r$ |
+| Top wall of 15 | $e_r+d_r s/c$ |
+| Right wall of 17 | $d_r+e_r c/s$ |
+| Pair $1/2$ | $e_r c/s$ |
+| Pair $1/3$ | $d_r s/c$ |
+| Pair $2/13$ | $e_r/s$ |
+| Pair $3/9$ | $d_r s/c$ |
+| Pair $9/10$ | $d_r/c$ |
+| Pair $10/15$ | $d_r/c$ |
+| Pair $13/14$ | $e_r/s$ |
+| Pair $14/17$ | $e_r/s$ |
+| Pairs $15/16$ and $16/17$ | $1$ each |
+
+At the baseline angles, the centre coefficients cancel exactly and
+$\sum_i\lambda_i g_i=d_r A+e_r B-1$. Dividing these weights by $(c+s)(d_r/c+e_r/s)$
+normalizes the side coefficient to one, explaining their relation to the retained LP
+dual. The proof uses the exact weights above, not a numerical equality with that dual.
+
+### Thickening the axis to a cone
+
+Now retain the wider position and slider premises and allow
+
+$$
+q_{16}=-r,\quad 0<r\le1/200,\quad
+|q_j|\le\varepsilon r\quad(j\ne16),\qquad \varepsilon=1/2048.
+$$
+
+Relative to the baseline at the same $r$, the other angle changes are at most
+$2\varepsilon r$. Each of the six weighted wall gaps increases by at most
+$\varepsilon r$. For the eight weighted pairs not involving 16, either allowed owner
+choice gives a gap increase at most
+
+$$
+2(D+2\sqrt2\rho_p+1)\varepsilon r
+<\frac{24}{5}\varepsilon r.
+$$
+
+This uses the verified nominal pair-distance bound and the same support Lipschitz
+argument as the apex proof.
+In the two pairs owned by 16, the owner normal is unchanged from the baseline; only the
+other square turns. Each gap therefore increases by at most $\varepsilon r$.
+
+Define the total wall weight and the eight-pair weight by
+
+$$
+W=2(c+s)(d_r/c+e_r/s),\qquad
+P=e_r c/s+2d_r s/c+3e_r/s+2d_r/c,
+$$
+
+and set $M=W+(24/5)P+2$. The proposed exact finite checks are
+
+$$
+K\le-1/50,\qquad M\le50
+$$
+
+over the complete accepted root enclosure and $r\in[0,1/200]$, together with strict
+positivity of $c,s,d_r,e_r$ and the exact chain identities.
+If they pass, every allowed branch in this cone satisfies
+
+$$
+\sum_i\lambda_i g_i
+\le-\left(\frac{1600}{40001}-\frac{25}{1024}\right)r
+=-\frac{638375}{40961024}\,r<0.
+$$
+
+Feasibility would make every selected gap nonnegative, so this is a contradiction.
+The estimate covers all 256 owner combinations and all positive radial scales in the
+cone. The apex $r=0$ is retained; the accepted zero-angle or apex argument treats it.
+No claim excludes the endpoint itself.
+
+A retained checker should reconstruct the sixteen weights, verify their centre and side
+coefficient identities, join F2 to its accepted exact-root proof, and enclose $K,M$ and
+the positive denominators by outward rational arithmetic.
+Freeze the constants and complete root/radial domains before checking them.
+Failure of a sign, mass or premise check leaves this proposed cone uncertified; it is
+not evidence of a packing in the cone.
+Passing would add one continuous cone to the coverage record, while the remaining
+angular directions and outer capture stay open.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

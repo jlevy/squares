@@ -29,6 +29,7 @@ from devtools.check_n17_endpoint_feasibility import (
 )
 from devtools.check_n17_endpoint_features import option_manifest
 from devtools.provenance import provenance, repository_path
+from sqpack import retained_json
 
 type Point = tuple[float, float]
 type Basis = tuple[Point, Point]
@@ -813,10 +814,9 @@ def main(argv: list[str] | None = None) -> int:
     if not all(controls.values()):
         atomic_write_text(
             args.output,
-            json.dumps(
-                {"schema": SCHEMA, "status": "control_failure", "controls": controls}, indent=2
-            )
-            + "\n",
+            retained_json.dumps(
+                {"schema": SCHEMA, "status": "control_failure", "controls": controls}
+            ),
             make_parents=True,
         )
         return 1
@@ -917,7 +917,7 @@ def main(argv: list[str] | None = None) -> int:
             result["total_elapsed_seconds"] = time.monotonic() - run_start
             atomic_write_text(
                 args.output,
-                json.dumps(result, indent=2, allow_nan=False) + "\n",
+                retained_json.dumps(result, allow_nan=False),
                 make_parents=True,
             )
         result["point_aliases"] = aliases
@@ -931,7 +931,7 @@ def main(argv: list[str] | None = None) -> int:
         result["unstarted_point_count"] = len(result["unstarted_point_ids"])
     result["total_elapsed_seconds"] = time.monotonic() - run_start
     atomic_write_text(
-        args.output, json.dumps(result, indent=2, allow_nan=False) + "\n", make_parents=True
+        args.output, retained_json.dumps(result, allow_nan=False), make_parents=True
     )
     print(json.dumps({"status": result["status"], "output": str(args.output)}))
     return 0 if result["status"] in {"controls_passed", "complete_numerical"} else 1
