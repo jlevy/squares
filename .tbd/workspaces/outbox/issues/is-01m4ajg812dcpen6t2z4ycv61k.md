@@ -3,9 +3,9 @@ type: is
 id: is-01m4ajg812dcpen6t2z4ycv61k
 title: Register SQUISH issue 401 reported upper bounds and provenance
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 7
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,17 +14,26 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:58:33.634Z
-updated_at: 2026-10-07T07:45:48.134Z
+updated_at: 2026-10-07T11:57:37.129Z
 started_at: 2026-10-07T06:59:18.994Z
+closed_at: 2026-10-07T10:17:11.659Z
+close_reason: Local reported registration and integration delivery complete; parent owns blocked publication and final checkpoint.
+resolution: null
+duplicate_of: null
 ---
 ## Notes
 
-Reported registration prepared as T-113 original ten-count release and T-114 n153
-supplement, both UTC publication 2026-10-07. Schemas, results, coverage, requests and
-retained-data checks pass.
-Standard result/inventory/frontier/headline/case-verifier generators run; atlas
-publication belongs parallel lane.
-All eleven previous verified ceilings preserved, new report exact rational fractions
-retained, mathematical gap blockers carry source evidence.
-No confirmation cited yet; parent will stage reported commit before next record layer.
-Packet no upstream bytes, derived facts only.
+Completed the local reported-registration deliverable at
+463203adf56ecb347f9abc83ee1295158efe7c32. All eleven submissions, source provenance,
+credit, exact rational source sides, original quotations, requests and derived facts are
+retained. T-113/T-114 remain provisional V0/C0 in this layer.
+The separate confirmation branch adds V3/C3 evidence.
+Atlas and source-adoption integration are complete; no upstream unlicensed assets were
+committed.
+
+The reported broad gate’s sole stale long-quotient roster test was corrected without
+production source changes.
+The incremental push gate passed 61 selected steps and 3,348 tests.
+Actual branch push and PR creation were denied; publication is owned by parent
+think-mc4u and author-reply think-crhh.
+Closing this local delivery bead does not claim remote publication or completed import.
