@@ -1773,7 +1773,9 @@ def _exhaustive_exact_tests(context: Context) -> str:
 
 
 def _soundness_perimeter(context: Context) -> str:
-    output = _module(context, "devtools.check_soundness_perimeter")
+    output = _module(
+        context, "devtools.check_soundness_perimeter", "--binary", str(_engine_path(context))
+    )
     if "skipping engine cells" in output:
         raise StepSkippedError(
             "soundness perimeter did not exercise sqsearch cells",

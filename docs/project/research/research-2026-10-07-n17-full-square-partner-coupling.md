@@ -819,6 +819,73 @@ hulls, missing-row and premise tampering, resource refusals and fresh-process pa
 The collision composition is a sole-Astra hand argument with finite computational
 verification planned, not independent mathematical review or formal proof.
 
+### Actual Collective Restriction and Prospective Regional Lift
+
+Exp-296 meets its frozen primary criterion; its
+[mechanical summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/mechanical-summary.json)
+records independent fresh reconstruction with an identical finite payload.
+All 992 foreign closed rows are accounted for.
+Owner 18, which is label 11, loses rows 19–23 and 33–52: twenty-five complete rows.
+Its surviving half-angle-parameter domain is
+
+$$
+[0,19/64]\ \cup\ [3/8,33/64]\ \cup\ [53/64,1],
+$$
+
+with exact lost parameter length $25/64$. This is not a measurement of physical angle in
+radians or a uniform-angle fraction.
+Surviving adjacent rows retain the shared endpoints.
+Every other owner’s interval union is unchanged, and no complete owner cover becomes
+empty. The result proves a necessary-domain restriction under the fixed owner-0 pose; it
+proves neither that point guard impossible nor a regional, parent or census exclusion.
+The original seventeen-square endpoint-retention and family-disjointness premises remain
+inherited and unchanged.
+Construction took 13.699 seconds, fresh reconstruction 14.177 seconds and the supervised
+pair 28.142 seconds.
+There were 38 full sweeps and 954 exact outside-vertex shortcuts.
+
+The next narrow proof block should attempt an explicit regional lift of these same
+twenty-five row exclusions before unrestricted contact-atlas enumeration.
+There is a useful existence argument, but it supplies no numerical radius.
+For each excluded row, take the set of full physical packings satisfying the original
+bounded parent and numerical container, with that square’s angle in the original closed
+row chart interval and its centre in the original residual-piece union.
+This physical set uses the original row conditions, not the point-conditioned hull.
+Containment, closed row membership and square nonoverlap are closed conditions; the
+centre and angle domains are compact.
+The set and its projection onto owner 0’s centre/angle coordinates are therefore
+compact. At the fixed pose $p^\ast$, necessary conditioning places every such physical
+realization inside the checked point-conditioned domain.
+The accepted row exclusion therefore says $p^\ast$ is outside the original physical
+set’s projection. Its distance from a nonempty compact projection is strictly positive;
+an empty projection imposes no radius restriction.
+Taking the minimum over the finite twenty-five rows gives some positive neighborhood in
+which all their physical realizations remain impossible.
+This hand argument concerns row exclusions, not exclusion of every remaining packing.
+
+A finite consumer must supply the missing quantitative join.
+For a prospectively declared $G_h$, reconstruct all 992 conditional foreign domains and
+their common owned sets from the original accepted parent, then verify coverage of the
+same twenty-five owner-18 rows using those regional sets.
+The point-conditioned domains and owned sets cannot simply be transported.
+Their strict body-interior margins alone do not bound how the conditional domains change
+with the owner-0 pose; an alternative analytic consumer would need explicit
+domain-sensitivity and support-error bounds as well as the ownership margins.
+Retain the original full-root seventeen-square endpoint control and independently check
+that the declared regional guard is disjoint from the endpoint family.
+
+A reasonable next allocation is a 1–2 hour source/review block followed by one
+registered fixed-radius construction and fresh verification, reusing the existing
+regional context builder.
+The previously declared $h=1/512$ is a concrete candidate, not a guaranteed radius.
+Primary success would require a declared positive-width region and all twenty-five
+specific row exclusions, with complete regional conditioning and fresh agreement.
+A complete miss rejects that fixed-radius recipe; it does not contradict the compactness
+argument. Do not choose a smaller radius from observed coverage margins without a new
+prospective contract.
+No regional calculation, new ownership recovery or further propagation was performed in
+exp-296.
+
 ## Prospective Global Contact Normalization
 
 This hand lemma gives a precise existence statement for X-048’s structural-normal-form

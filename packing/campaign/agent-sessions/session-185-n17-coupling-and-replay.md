@@ -226,7 +226,7 @@ session:
     bead: think-hkqz
     objective: Finish one preregistered collective-row coverage discriminator; retain global contact-normalization
       lemma while Sol restores latest CI and consolidates issues.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Exact closed two-child miss and all-issue review select a genuinely new collective
       angle-row discriminator.
@@ -241,14 +241,46 @@ session:
       custody alarm stops its lane.
     fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
       mathematical discriminator.
+    outcome: 'Exp296 accepted fresh exact necessary-domain restriction: owner18(label11) loses25/64 half-angle
+      parameter length under fixedowner0 tau53/128,25wholeclosedrows/all992;noownerempty/global/censuschange.13.699+14.177s/28.142snormalownedcleanup.
+      Globalnormalization/rank35/17parameter/contactlowerbound and qualitative compactness lift retainedsoleAstra
+      hand derivations. Oldfull0adfe completed95PASS5FAIL1SKIP3402.14s; no currentfullPASS. Actual phase
+      switch 2026-10-07T21:49:15.789989+00:00'
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Protected final30minutes now; last mathematical target completed well before21:47:58
+      research cutoff.
+    next_action: Preserve exact positive/negative outcomes and next quantitative regional lift; consolidatefinalsource,CI,costs,issuesandhandoff.
+  - workflow: review-planning-oversight
+    focus: process
+    recording: contemporaneous
+    clock_role: finalization
+    commitment: BC-440
+    bead: think-tvxs
+    objective: Consolidate all scientific receipts and hand derivations, current issue dispositions, native
+      measured costs and latest CI; close the four-hour scope with certification debt explicit.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: User-authorized protected finalization reserve after completed final mathematical target.
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: Current PR404, source and exact receipts, honest certification/CI scope, measured
+      native cost, dispositions and concrete next handoff.
+    validation_command: Required records tier and relevant focused checks; latest required hosted CI asynchronously.
+      No new mathematical target or broad repeated full checkpoint.
+    kill_condition: No further scientific target; never relabel scoped checks or oldfullreceipt as newheadfullPASS.
+    fallback: Stop with think-7hy3 certification pending and preserve exact unresolved proof/CI obligations.
     outcome: null
     evidence:
     - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: null
-    next_action: Complete bounded source controls and reviews, freeze prospective H304/296 then run at
-      most60+60s construction/fresh; retain negatives or resource stops.
+    next_action: Freeze terminalbatch and final records; resolve concrete CI defects only, publish final
+      proof/issue/costhand off.
   primary_bead: think-tvxs
   status: in_progress
   budget:
@@ -269,7 +301,9 @@ session:
       complete proof obligations retained
     before: 60 admissions;36768 states/4683 D4 orbits; endpoint retained; unchanged side bounds. Specific
       exp288 one-square relaxation witness accepted; global capture and certification7hy3 open.
-    after: null
+    after: Positive conditional25/64 half-angle-domain restriction forowner18 underfixedowner0; completedcomplete-methodmisses291/292/293/295
+      andacceptedNONE/PHASES/STAGESdiagnostics; unchanged60admissions/36768states/4683D4orbits/bounds.
+      Globalcapture/explicitregionalradius/fullcurrent-sourcecertification remainopen.
   delegations:
   - task: Astra complete coupling strategy
     operator: /root/astra_strategy; GPT-6 Astra xhigh
@@ -972,16 +1006,22 @@ session:
     - native release upload
   - task: Astra complete coupling strategy
     operator: /root/astra_strategy; GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Collective result unrun; actual latest greenCI pending.
+    outcome: Phase7 declared deliverables completed; fresh296 positive and source/metadata scoped reviews
+      CLEAR at 2026-10-07T21:49:15.789989+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/mechanical-summary.json
+    files:
+    - packing/devtools/check_n17_collective_row_coverage.py
+    - packing/tests/test_check_n17_collective_row_coverage.py
+    checks:
+    - Author23PASS1.87s/peer23PASS1.90s/staticszero; soleAstra actualscopeCLEAR; exact payloadfresh and5inputjoins
+      verified.
+    uncertainty: Globalcapture/current-sourcefullcertification and quantitative regionalradiusremainopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Continue phase7 declared disjoint lane.
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
     phase: 7
     budget_minutes: 21
     started_at: '2026-10-07T21:27:07.727040+00:00'
@@ -1002,16 +1042,22 @@ session:
     - native release upload
   - task: Sol complete coupling implementation
     operator: /root/n17_github_tracker; GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Collective result unrun; actual latest greenCI pending.
+    outcome: Phase7 declared deliverables completed; fresh296 positive and source/metadata scoped reviews
+      CLEAR at 2026-10-07T21:49:15.789989+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/mechanical-summary.json
+    files:
+    - packing/devtools/check_n17_collective_row_coverage.py
+    - packing/tests/test_check_n17_collective_row_coverage.py
+    checks:
+    - Author23PASS1.87s/peer23PASS1.90s/staticszero; soleAstra actualscopeCLEAR; exact payloadfresh and5inputjoins
+      verified.
+    uncertainty: Globalcapture/current-sourcefullcertification and quantitative regionalradiusremainopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Continue phase7 declared disjoint lane.
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
     phase: 7
     budget_minutes: 21
     started_at: '2026-10-07T21:27:07.727040+00:00'
@@ -1046,16 +1092,22 @@ session:
     - native release upload
   - task: Sol exact replay profile and independent mechanics
     operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Collective result unrun; actual latest greenCI pending.
+    outcome: Phase7 declared deliverables completed; fresh296 positive and source/metadata scoped reviews
+      CLEAR at 2026-10-07T21:49:15.789989+00:00
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/mechanical-summary.json
+    files:
+    - packing/devtools/check_n17_collective_row_coverage.py
+    - packing/tests/test_check_n17_collective_row_coverage.py
+    checks:
+    - Author23PASS1.87s/peer23PASS1.90s/staticszero; soleAstra actualscopeCLEAR; exact payloadfresh and5inputjoins
+      verified.
+    uncertainty: Globalcapture/current-sourcefullcertification and quantitative regionalradiusremainopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Continue phase7 declared disjoint lane.
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
     phase: 7
     budget_minutes: 21
     started_at: '2026-10-07T21:27:07.727040+00:00'
@@ -1084,11 +1136,114 @@ session:
     - tbd sync
     - unregistered scientific target
     - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: LatestterminalbatchCI/nativecoststillpending; no mathematical targetaftercutoff.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
+    phase: 8
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: Final mathematicalscope and priority review of296/regional-lift/normalization handoff;
+      no new target.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: LatestterminalbatchCI/nativecoststillpending; no mathematical targetaftercutoff.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
+    phase: 8
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: Final mechanical consistency/common-documentation review of complete Session185 progress
+      summary and terminal records.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - docs/project/reviews/review-2026-10-07-n17-session-185-progress.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: LatestterminalbatchCI/nativecoststillpending; no mathematical targetaftercutoff.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase8 final scope review withoutnewmathematicaltarget.
+    phase: 8
+    budget_minutes: 30
+    started_at: '2026-10-07T21:49:15.789989+00:00'
+    deadline_at: '2026-10-07T22:17:58Z'
+    expected_output: LatestrequiredCI triage, complete oldfullcheckpoint scope and mechanical handoff.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope:
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - packing/devtools/suite-file-costs.json
+    - packing/tests/test_census_n17_certified.py
+    - packing/tests/test_site_glyphs.py
+    - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
+    - README.md
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
   outputs:
   - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
   - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
   - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
   - packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children
+  - packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage
+  - docs/project/reviews/review-2026-10-07-n17-session-185-progress.md
+  - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
+  - packing/campaign/agent-sessions/session-185-frozen-full-checkpoint.json
   checks:
   - Launch source8de2ecd5b574fc2ff0174f552c00effaab6fcaf7 and PR404 retained; upstream main refreshed
     without source merge.
@@ -1139,9 +1294,19 @@ session:
     checkpoint posted6047179993.
   - Mergedceb71 hosted90.63s validate failed only expiredphase6/three delegation deadlines; A/C passed.
     Currentphase7 transition and21minute slice budget repaired before nextfreeze; no production gate relaxation.
+  - Exp296 accepted exact positive25/64 HALF-ANGLE-PARAMETER loss underfixedowner0 tau53/128; all992rows
+    andfreshfullpayloadmatch,5premisebytesjoin, original17endpointcontrols;28.142461snormalrc0cleanup351830016Bsampleperliveprocess.
+  - Current65db hostedvalidate/merges/A/C/D/type/measure/pages/macPASS at21:46:08;Bstillpending. No fullnewsourcePASS.
+  - 'full gate: full at 0adfe2c5ee5ac349408dcebed411b91c6d62d068: failed (95PASS5FAIL1SKIP,3402.14s; exhausted/slow
+    behavioral lanespassed, no newhead certification)'
+  - Actual296outputpushedprivateworker selection213140038B overunchanged192MiB; exact296nonconsumerrootprune
+    preservesdeclaredinputcopyback,post201042713B/headroom283879B. EightfocusedselectorcontrolsPASS1.01/staticszero;
+    primaryreceiptsuntouched.
+  - Records tier21.90s failedonlySYNOPSISoldaggregate; exacttargetedSYNOPSISandledgerchecksPASS after5791.8correction
+    before65db scientificfreeze.
   stop_reason: null
-  next_action: Complete bounded source controls and reviews, freeze prospective H304/296 then run at most60+60s
-    construction/fresh; retain negatives or resource stops.
+  next_action: Freeze terminalbatch and final records; resolve concrete CI defects only, publish final
+    proof/issue/costhand off.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session185-checkpoint.yaml
 ---

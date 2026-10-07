@@ -4535,6 +4535,7 @@ def test_sqsearch_build_and_runtime_use_the_same_target(
     assert validate._build_engine(context, [step]) == f"built {expected}"
     assert step.action(context) == "SELFTEST PASSED"
     assert validate._differential(context) == ""
+    assert validate._soundness_perimeter(context) == ""
     assert calls == [
         (("cargo", "build", "--locked", "--release", "--quiet"), crate, environment),
         ((str(expected), "--selftest"), project, environment),
@@ -4544,6 +4545,17 @@ def test_sqsearch_build_and_runtime_use_the_same_target(
                 "-m",
                 "devtools.check_search_differential",
                 "20000",
+                "--binary",
+                str(expected),
+            ),
+            project,
+            environment,
+        ),
+        (
+            (
+                sys.executable,
+                "-m",
+                "devtools.check_soundness_perimeter",
                 "--binary",
                 str(expected),
             ),

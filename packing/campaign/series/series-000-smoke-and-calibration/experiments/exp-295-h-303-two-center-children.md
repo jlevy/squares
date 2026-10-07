@@ -89,8 +89,9 @@ cleanup completed. Launch metadata retains its corrected repository-root source-
 query; the scientific source and criterion did not change.
 No global or census claim follows.
 
-Construction and independent fresh reconstruction return criterion_met=true after both
-point children and both h=1/512 regional children close.
+The frozen success criterion required both point children and both h=1/512 regional
+children to close, with matching independent fresh reconstruction.
+The actual construction and fresh reconstruction both return criterion_met=false.
 The selector minimizes the worst child aggregate bounding-box squared diagonal among the
 ten empty-owned-set foreign owners and two coordinate midpoint cuts, with owner then x/y
 tie breaks. Both closed halves retain equality, all rows and angular seams.

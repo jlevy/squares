@@ -959,6 +959,7 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                 "exp-291-complete-partner-coupling-amended",
                 "exp-292-full-square-partner-coupling",
                 "exp-293-guard-conditioned-ownership",
+                "exp-296-collective-row-coverage",
             )
         } <= roots
     for control in specification["controls"]:
@@ -989,7 +990,11 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
 
 @pytest.mark.parametrize(
     "name",
-    ["exp-292-full-square-partner-coupling", "exp-293-guard-conditioned-ownership"],
+    [
+        "exp-292-full-square-partner-coupling",
+        "exp-293-guard-conditioned-ownership",
+        "exp-296-collective-row-coverage",
+    ],
 )
 def test_session185_selected_output_prune_is_exact_and_keeps_declared_inputs(
     name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch

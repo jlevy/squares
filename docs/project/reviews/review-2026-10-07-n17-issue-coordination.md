@@ -31,6 +31,24 @@ No duplicate closure is justified by this inventory.
 Sharing a proof goal, or one pattern occurring within another, does not establish
 identical remaining obligations.
 
+The subsequent #358 metadata intake fetched both compressed manifests from
+[b2-classes-20261005](https://github.com/wand125/n17-certificates/releases/tag/b2-classes-20261005)
+and matched their published compressed hashes and canonical manifest identities.
+The release contains 552 objects totaling 399,775,835 compressed bytes.
+C1 and C2 have exact named-cell D4 masks 5177392 and 5177424; neither equals a currently
+admitted class. Smaller-pattern subsumption and marginal census coverage remain
+uncomputed. Complete tree replay and the shifted closed angle-chart join remain
+unperformed, and retained full receipts were requested in
+[the intake update](https://github.com/jlevy/squares/issues/358#issuecomment-6047235741).
+No new admission follows from this metadata comparison.
+
+The
+[#413 package request](https://github.com/jlevy/squares/issues/413#issuecomment-6047161738)
+starts with its four reported full-verified rows.
+The
+[#405 progress checkpoint](https://github.com/jlevy/squares/issues/405#issuecomment-6047179993)
+consolidates the scoped exact results and unchanged global census.
+
 ## Pull Request Integration
 
 [PR #410](https://github.com/jlevy/squares/pull/410) adds an independent Rust **kernel**

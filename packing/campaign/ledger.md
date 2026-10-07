@@ -1185,14 +1185,13 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | H-301 | refuted | proof | One-round guard-conditioned ownership certifies the declared nonzero c |  | 1 |  | 2.5m wall |
 | H-302 | confirmed | proof | Low-frequency stage observers preserve the accepted full exact replay  |  | 1 |  | 1.8m wall |
 | H-303 | refuted | proof | A deterministic two-child closed centre split certifies the declared n |  | 1 |  | 24s wall |
-| H-304 | needs review | proof | One simultaneous collective union pass strictly reduces a foreign owne |  | 1 |  |  |
+| H-304 | confirmed | proof | One simultaneous collective union pass strictly reduces a foreign owne |  | 1 |  | 28s wall |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
-| exp-296 | H-304 | in-progress | Prospective bounded preparation; actual target unrun. |
 
 ## Rounds
 
@@ -1349,7 +1348,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (84)
+### accepted (85)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1437,6 +1436,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-288 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-297 | Completed1.12039s supervision; construction0.19380s/fresh0.20042s, rc0/normalcleanup. First row26piece0 candidate at tau53/128 satisfies exact centered container, all conditional owner0 strict and all16 foreign open-avoidance predicates. Left-wall touch retained. Fresh verification true; clean56370233 source/seven matching blobs and six frozen byte joins. Specific point relaxation admits one square; no17packing, capture, exclusion, census or global result. Sole-Astra actual semantic acceptance recorded after target. |
 | exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Unchanged-regime attempt2 completes both full exact replays with matched mathematical/inputbyte identities and all16boundary observations. Firstattempt12.202s guard_unavailable remainspreserved. Diagnostic only; no speedup or new geometricadmission. |
 | exp-294 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-302 | Fresh full STAGES replay matches accepted NONE mathematical/input identities and all16 PHASES step boundaries. Coverage is the largest measured stage:57.292715s exclusive wall; collisions10.218034s. Diagnostic only; no speedup, exp284 explanation or geometric admission. |
+| exp-296 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-304 | Complete fresh-matched conditional necessary-domain restriction: owner18 loses25/64 closed-angle union length; all992 rows accounted, all other owners unchanged. No whole-owner empty, point contradiction, regional or census result. |
 
 ### baseline (12)
 
@@ -1454,12 +1454,6 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-296 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-304 | Prospective bounded preparation; actual target unrun. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1510,7 +1504,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Effort
 
-225 rounds, 2512.1 agent-minutes, 5791.8 wall-minutes.
+225 rounds, 2512.1 agent-minutes, 5792.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

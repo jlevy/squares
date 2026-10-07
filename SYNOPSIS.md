@@ -313,8 +313,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 431 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 23 in progress |
 | Sessions | 184 | 105 completed; 78 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 238 | 64 confirmed; 40 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted; 1 needs review |
-| Experiments | 225 | 84 accepted; 45 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 238 | 65 confirmed; 40 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 225 | 85 accepted; 45 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 114 | 114 registered, 84 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -575,6 +575,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n17 Session 185 Coupling and Replay Progress](docs/project/reviews/review-2026-10-07-n17-session-185-progress.md) | dated review record | record | retained | — |
 | [Collective Closed-Row Coverage](packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/README.md) | typed session record | record | retained | — |
 | [Two Closed Centre Children](packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md) | typed session record | record | retained | — |
 | [n17 Issue Coordination and Certificate Intake](docs/project/reviews/review-2026-10-07-n17-issue-coordination.md) | dated review record | record | retained | — |
@@ -5857,7 +5858,7 @@ round that names the hypothesis, control roles included.
 | [H-301](packing/campaign/hypotheses/H-301-n17-paired-guard-conditioned-ownership.md) | refuted | Paired point and nonzero regional guard-conditioned ownership | 1 | Complete fresh-matched point miss; regional context skipped by monotonic inclusion |
 | [H-302](packing/campaign/hypotheses/H-302-n17-stages-replay-observations.md) | confirmed | Full exact replay with nested stage attribution | 1 | Accepted full same-object mathematical replay and nested stage observations; no speed gain |
 | [H-303](packing/campaign/hypotheses/H-303-n17-two-center-children.md) | refuted | Deterministic two closed centre children on the accepted exp293 point context | 1 | Complete fresh-matched point miss; both selected children open, regional skipped |
-| [H-304](packing/campaign/hypotheses/H-304-n17-collective-row-coverage.md) | needs review | One simultaneous collective closed-row restriction | 1 | Registered exact angle-union loss criterion; target unrun |
+| [H-304](packing/campaign/hypotheses/H-304-n17-collective-row-coverage.md) | confirmed | One simultaneous collective closed-row restriction | 1 | Accepted fresh exact25/64 half-angle-parameter loss owner18; no point contradiction |
 
 ### Confirmed
 
@@ -6202,7 +6203,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 There are 225 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5791.8 wall-minutes.
+They record 2512.1 agent-minutes and 5792.3 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6468,7 +6469,7 @@ archive beside it.
 | [exp-293](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-293-h-301-guard-conditioned-ownership.md) | 17 | target | H-301 | Point-first paired guard-conditioned ownership | Fresh complete point miss; all992foreign rows survive, regional unstarted | rejected |
 | [exp-294](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-294-h-302-stages-exact-replay.md) | 17 | target | H-302 | Matched full exact replay with STAGES observations | Full mathematical baseline match and16stage boundaries | accepted |
 | [exp-295](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-295-h-303-two-center-children.md) | 17 | target | H-303 | Deterministic two closed centre children | Complete fresh-matched miss23.77s; both children open, regional unstarted | rejected |
-| [exp-296](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-296-h-304-collective-row-coverage.md) | 17 | target | H-304 | Simultaneous original-owned-set collective row coverage | Prospective exact angle-union restriction; target unrun | in-progress |
+| [exp-296](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-296-h-304-collective-row-coverage.md) | 17 | target | H-304 | Simultaneous original-owned-set collective row coverage | Fresh-matched exact25/64 half-angle-parameter union loss for owner18; all992 accounted | accepted |
 
 ### Cost and provenance
 
@@ -6698,11 +6699,11 @@ archive beside it.
 | exp-293 | Construction180s/fresh180s inside360s;4GiB per process sampled | 151.778s | — | criterion | Fresh complete point miss; regional skipped |
 | exp-294 | STAGES180s cooperative;TERM190/KILL200;4GiB per process sampled | 108.621s | — | criterion | Full same-object diagnostic replay; no speed gain |
 | exp-295 | Construction180s/fresh180s inside360s;4GiB per process sampled | 23.770s | — | criterion | Source d68a; both point children remain open; regional skipped |
-| exp-296 | Construction60s/fresh60s inside120s;4GiB per process sampled | — | — | — | Target unrun; no execution cost recorded |
+| exp-296 | Construction60s/fresh60s inside120s;4GiB per process sampled | 28.142s | — | criterion | `65dbccbc`; conditional necessary-domain restriction only |
 
 ### What the 225 rounds jointly establish
 
-The 225 rounds use 2512.1 agent-minutes and 5791.8 wall-minutes under the campaign’s
+The 225 rounds use 2512.1 agent-minutes and 5792.3 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

@@ -1,5 +1,5 @@
 ---
-title: exp-296 — Collective Closed-Row Coverage
+title: "exp-296 \u2014 Collective Closed-Row Coverage"
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -49,9 +49,17 @@ experiment:
       allocation2097152 unchanged). Trusted sweep internal homogeneous arithmetic has no separate bit/event
       cap; deadline before/after plus outer guard.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage
-  results: []
+    commit: 65dbccbcaf07b8913ca49f9e2a899bbf5a9ebf54
+    dirty: true
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the complete simultaneous pass strictly reduce a foreign closed-angle union?
+    outcome: criterion_met
+    checked_by: Fresh exact mathematical payload agreement; independent Sol metadata/byte-custody audit
+      CLEAR; sole Astra actual semantic acceptance CLEAR.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: A complete simultaneous pass over all992 inherited foreign closed rows strictly
       decreases the exact length of the surviving closed angle-interval union for at least one owner,
       and a separate fresh process reconstructs the entire mathematical payload identically. Each row
@@ -61,14 +69,33 @@ experiment:
       whole owner cover becoming empty is secondary point contradiction. No ownership recovery, sequential
       feedback, second pass, regional branch, whole-parent exclusion, census admission or packing claim
       is licensed. Resource/refusal stops are not completed negative results.
-    reason: Prospective bounded preparation; actual target unrun.
-    needs_review: true
-  lease:
-    expires: '2026-10-07T21:47:58Z'
+    reason: 'Complete fresh-matched conditional necessary-domain restriction: owner18 loses25/64 closed-angle
+      union length; all992 rows accounted, all other owners unchanged. No whole-owner empty, point contradiction,
+      regional or census result.'
+    needs_review: false
+  effort:
+    stopped_by: criterion
+    wall_seconds: 28.14246100001037
+    timebox: Construction60s plus fresh60s; outer TERM120/KILL130; sampled4096MiB per live process.
 ---
 # Collective Closed-Row Coverage
 
-The target is unrun at registration.
+The frozen recipe completed with fresh exact agreement in 28.142461 seconds.
+Owner18 (label11) loses exactly25/64 of half-angle-parameter union length: its surviving
+closed intervals are [0,19/64], [3/8,33/64] and [53/64,1]. The 25 covered rows are19–23
+and33–52. All992 foreign rows are accounted; every other owner is unchanged.
+No owner cover becomes empty.
+Astra accepted this scoped necessary-domain restriction after independent metadata and
+byte-custody review.
+This supplies no point contradiction, regional exclusion, global capture or census
+admission, and licenses no automatic iteration.
+
+Construction took13.698664 seconds and fresh verification14.177407 seconds.
+The maximum sampled per-process current RSS was351830016 bytes; normal exit and owned
+cleanup completed. The scientific source is65dbccbcaf07b8913ca49f9e2a899bbf5a9ebf54; the
+overall checkout had documentation changes, while relevant scientific files were clean.
+Original-parent proof and all17 endpoint/family-disjoint controls remain inherited
+premises. No parent or root proof was rerun.
 
 A complete simultaneous pass over all992 inherited foreign closed rows strictly
 decreases the exact length of the surviving closed angle-interval union for at least one

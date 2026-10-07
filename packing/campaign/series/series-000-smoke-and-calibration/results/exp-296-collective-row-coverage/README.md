@@ -1,31 +1,28 @@
 # Collective Closed-Row Coverage
 
-[exp-296](../../experiments/exp-296-h-304-collective-row-coverage.md) is prospectively
-registered; actual target unrun.
+The frozen recipe completed with fresh exact agreement in 28.142461 seconds.
+The restriction holds under the fixed owner0 pose at tau=53/128. Owner18 (label11) loses
+exactly25/64 of half-angle-parameter union length: its surviving closed intervals are
+[0,19/64], [3/8,33/64] and [53/64,1]. The 25 covered rows are19–23 and33–52. All992
+foreign rows are accounted; every other owner is unchanged.
+No owner cover becomes empty.
+Astra accepted this scoped necessary-domain restriction after independent metadata and
+byte-custody review.
+This supplies no point contradiction, regional exclusion, global capture or census
+admission, and licenses no automatic iteration.
 
-A complete simultaneous pass over all992 inherited foreign closed rows strictly
-decreases the exact length of the surviving closed angle-interval union for at least one
-owner, and a separate fresh process reconstructs the entire mathematical payload
-identically.
-Each row uses only the ORIGINAL accepted exp293 owned sets, excludes its own
-owner, and removes its full domain only after exact closed-union coverage.
-An outside vertex is a negative shortcut; covered vertices alone never prove coverage.
-Every row, reference and seam is retained in accounting.
-A whole owner cover becoming empty is secondary point contradiction.
-No ownership recovery, sequential feedback, second pass, regional branch, whole-parent
-exclusion, census admission or packing claim is licensed.
-Resource/refusal stops are not completed negative results.
+Construction took13.698664 seconds and fresh verification14.177407 seconds.
+The maximum sampled per-process current RSS was351830016 bytes; normal exit and owned
+cleanup completed. The scientific source is65dbccbcaf07b8913ca49f9e2a899bbf5a9ebf54; the
+overall checkout had documentation changes, while relevant scientific files were clean.
+Original-parent proof and all17 endpoint/family-disjoint controls remain inherited
+premises. No parent or root proof was rerun.
 
-One worker;60s construction plus60s fresh inside120s, outerTERM120/KILL130;
-sampled4096MiB current RSS per live owned process.
-Descriptor10MiB, each accepted finite receipt64MiB, output64MiB. Inherited
-geometry1048576 vertices/domain1024/K2048, normalized4096-bit geometry.
-StrictD32; F hull4096; cached raw Minkowski vertex products1048576 over cache misses;
-point-in-union conservative facet products16M; per-row sweep edges8192 including target
-and all forbidden boundaries; cumulative prospective sweep pairs8M charged before calls.
-This version does not clip F to P (clipped vertex counter0; allocation2097152
-unchanged). Trusted sweep internal homogeneous arithmetic has no separate bit/event cap;
-deadline before/after plus outer guard.
+The [experiment](../../experiments/exp-296-h-304-collective-row-coverage.md) preserves
+the frozen criterion, declared limits and reviewed scope.
+`certificate.json` and `replay.json` retain the complete finite payloads;
+`phase-execution.json`, `supervision.json` and `launch.json` retain measured process and
+source custody.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -136,6 +136,9 @@ SESSION184_RESULT_ROOTS = frozenset(
         # native target outputs. Declared inline/frontier inputs still copy back.
         "exp-292-full-square-partner-coupling",
         "exp-293-guard-conditioned-ownership",
+        # Registered collective-coverage output, not an input to mutation controls.
+        # Its full primary receipts stay intact; inline/frontier dependencies copy back.
+        "exp-296-collective-row-coverage",
     )
 )
 

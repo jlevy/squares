@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-185-progress.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-n17-issue-coordination.md, role: review, authority: record, lifecycle: retained}
