@@ -16,6 +16,7 @@ import pytest
 from test_probe_n17_conditional_owned_hull import fixture as parent_fixture
 from test_probe_n17_pooled_feasible_center import synthetic as feasible_fixture
 
+from devtools import check_n17_full_square_partner_coupling as sat
 from devtools import check_n17_partner_pose_coupling as tool
 
 Q = tool.Q
@@ -39,6 +40,38 @@ def rows(owner: int = 1, count: int = 64) -> list[dict[str, Any]]:
         }
         for i in range(count)
     ]
+
+
+@pytest.mark.parametrize("engine", [tool, sat], ids=["strict_core", "full_square"])
+def test_amended_closed_row_piece_boundary_preserves_every_piece(engine: Any) -> None:
+    assert tool.ROW_PIECE_LIMIT == 1024
+    row = rows()[0]
+    row["residual_polygons"] = [[["1", "1"]] for _ in range(1024)]
+    counter = [0]
+    admitted = engine.row_domain(row, counter, deadline())
+    assert len(admitted["pieces"]) == 1024
+    assert counter == [1024]
+    assert admitted["domain"] == [(Q(1), Q(1))]
+    row["residual_polygons"].append([["1", "1"]])
+    counter = [0]
+    with pytest.raises(tool.IncompleteError, match=r"per-row .*piece ceiling"):
+        engine.row_domain(row, counter, deadline())
+    assert counter == [0]
+
+
+@pytest.mark.parametrize("engine", [tool, sat], ids=["strict_core", "full_square"])
+def test_amended_cumulative_vertex_boundary_refuses_the_next_piece(engine: Any) -> None:
+    assert tool.INPUT_VERTICES == 1048576
+    row = rows()[0]
+    row["residual_polygons"] = [[["1", "1"], ["2", "1"], ["1", "2"]]]
+    counter = [tool.INPUT_VERTICES - 3]
+    admitted = engine.row_domain(row, counter, deadline())
+    assert counter == [tool.INPUT_VERTICES]
+    assert len(admitted["domain"]) == 3
+    row["residual_polygons"] = [[["1", "1"]]]
+    with pytest.raises(tool.IncompleteError, match="used input vertex ceiling"):
+        engine.row_domain(row, counter, deadline())
+    assert counter == [tool.INPUT_VERTICES + 1]
 
 
 @pytest.mark.parametrize("interval", [(Q(0), Q(1)), (Q(0), Q(1, 64)), (Q(1), Q(1))])

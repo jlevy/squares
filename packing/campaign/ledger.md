@@ -198,7 +198,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
-| [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 2 | think-tvxs | Freeze reviewed coupling and profile instruments; preregister each criterion, descriptor, controls and budget before target execution. Keep inherited certificationthink-7hy3 beside proof progress. |
+| [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 3 | think-tvxs | Freeze reviewed coupling and profile instruments; preregister each criterion, descriptor, controls and budget before target execution. Keep inherited certificationthink-7hy3 beside proof progress. |
 
 ### Workflow summary
 
@@ -211,7 +211,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 30 | 1 | 93 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 44 | 1 |
-| `research-loop` | 37 | 4 | 144 | 9 |
+| `research-loop` | 37 | 4 | 145 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -942,7 +942,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 219 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 220 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1179,7 +1179,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | H-295 | refuted | proof | Exact pooled foreign-owned forbidden regions cover the complete accept |  | 1 |  | 21s wall |
 | H-296 | refuted | proof | A deterministic exact one-square witness survives every pooled owned-p |  | 1 |  | 1s wall |
 | H-297 | confirmed | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  | 1s wall |
-| H-298 | abandoned | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 1 |  | 4s wall |
+| H-298 | abandoned | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 2 |  | 4s wall |
 | H-299 | running | proof | Boundary-level replay instrumentation preserves the full accepted cent |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
@@ -1443,11 +1443,12 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (1)
+### in-progress (2)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Prospectively registered diagnostic; no target replay or gain measured. |
+| exp-291 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Prospectively registered resource-amended replication; mathematical target unrun. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1498,7 +1499,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Effort
 
-219 rounds, 2512.1 agent-minutes, 5779.6 wall-minutes.
+220 rounds, 2512.1 agent-minutes, 5779.6 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

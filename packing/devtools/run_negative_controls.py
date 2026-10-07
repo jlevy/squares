@@ -128,6 +128,10 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-286-pooled-forbidden-cover",
         "exp-287-pooled-relaxation-witness",
         "exp-288-pooled-feasible-center",
+        # Registered Session185 diagnostics; synthetic controls consume no target outputs.
+        "exp-289-complete-partner-coupling",
+        "exp-290-matched-exact-replay",
+        "exp-291-complete-partner-coupling-amended",
     )
 )
 

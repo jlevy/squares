@@ -944,6 +944,9 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                 "exp-286-pooled-forbidden-cover",
                 "exp-287-pooled-relaxation-witness",
                 "exp-288-pooled-feasible-center",
+                "exp-289-complete-partner-coupling",
+                "exp-290-matched-exact-replay",
+                "exp-291-complete-partner-coupling-amended",
             )
         } <= roots
     for control in specification["controls"]:

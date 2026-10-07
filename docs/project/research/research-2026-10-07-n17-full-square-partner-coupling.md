@@ -116,6 +116,13 @@ the row domain only used a necessary wall box.
 This is evidence about the represented relaxation, not a physical two-square pose or a
 seventeen-square packing.
 
+The frozen secondary diagnostic checks the retained nonpositive witness against the
+exact numeric wall box at its own minimizing angle.
+It records the four signed wall margins and their joint nonnegativity without changing
+$M_j$, the selected partner or the primary verdict.
+A wall failure identifies one source of centre-angle over-cover.
+A wall pass still proves no joint packing.
+
 ## A Positive Margin Gives a Closed Region
 
 Suppose a complete partner has $M=M_j>0$. Since $0\le t\le1$, all its normalized
@@ -201,10 +208,11 @@ endpoint-family disjointness.
 Fresh verification remains producer-free and inherits the accepted parent rather than
 replaying its geometry.
 
-A positive result following a common-core miss would identify core erosion as a
-sufficient cause for that discrepancy.
-A second complete miss would direct the next derivation toward centre-angle correlation
-or conditional multi-owner constraints.
+A positive result following a complete common-core **fixed-point** miss on the same
+domains would identify the core approximation as a sufficient cause for that
+discrepancy. A regional-only miss does not establish that diagnosis.
+A second complete fixed-point miss would direct the next derivation toward centre-angle
+correlation or conditional multi-owner constraints.
 Neither outcome establishes dominance over the existing standing checker, which already
 uses partner pose covers.
 
@@ -244,6 +252,13 @@ relative to all four centre-box corners with the exact closed-arc strict-ownersh
 Convexity in the centre and the candidate point extends the check to the whole polygon
 and box. The matched fixed square contains $Q_0$ strictly, but that control alone says
 nothing about seventeen-square feasibility.
+
+There is an input-independent positive-area control.
+Put $r=(1/2-2^{-20})/2-h=520191/2097152>0$. The box $x_*+[-r,r]^2$ satisfies every
+construction plane, since coefficient absolute values are at most 1 and
+$2(r+h)=1/2-2^{-20}$. The accepted contained square gives $x_{*,i}\in[1/2,U-1/2]$, so
+this small box lies in $[0,U]^2$. An empty computed $Q_0$ is therefore a calibration
+refusal, not a conditional contradiction.
 
 For every foreign owner $j$ and every original row $k$, retain its strict zero-centred
 core $D_{jk}$. Define the forbidden centre polygon
@@ -312,6 +327,61 @@ A source-only review must freeze the subtraction-growth, vertex-pair, rational-b
 wall ceilings before any target.
 If those ceilings are reached, the result is incomplete.
 The one-round derivation is finite but its actual cost and effectiveness are unmeasured.
+
+A complete miss also supplies a monotonic stopping rule for this same construction.
+Let $G_1=B_1\times J_1\subseteq G_2=B_2\times J_2$ as full product guards, with the same
+parent, strict margin and foreign row cores.
+The coefficient rectangles and centre domains enlarge with the guard, so
+$Q_0(G_2)\subseteq Q_0(G_1)$. Thus each forbidden difference shrinks.
+The declared closed outside-facet union is exactly $P\setminus\operatorname{int}F$, so
+every retained conditional centre domain enlarges.
+Its convex hull enlarges as well.
+The recovered common owned sets consequently satisfy $K_j(G_2)\subseteq K_j(G_1)$,
+including owner 0. If $G_1$ leaves every owner nonempty and every owned-set pair
+disjoint, $G_2$ cannot create an empty owner or a shared owned point.
+Do not spend another target widening that same one-round recipe after a complete miss.
+This argument requires inclusion of the full construction product guards, not merely
+inclusion of their physically feasible subsets.
+It does not apply to resource stops, sharper ownership constructions, further coupled
+rounds or another proof method.
+This is a prospective hand lemma with the same assurance limits as the other geometric
+compositions in this document.
+
+The coordinator approved the following source-only resource contract before any guarded
+target.
+Use the same five byte-bound input roles and the amended original input limits of
+1,024 pieces per row and 1,048,576 construction vertices.
+Use one worker, 180 seconds for construction and 180 for fresh reconstruction, with a
+360-second combined ceiling, owned-group cleanup and a sampled 4 GiB RSS guard per live
+process. The normalized geometry limit stays 4,096 bits; endpoint inputs and arithmetic
+retain their separate 16,384/32,768-bit limits.
+
+| Guarded construction resource | Ceiling |
+| --- | --- |
+| Conditional pieces per row; global retained pieces | 8,192; 131,072 |
+| Cumulative generated conditional clip-output vertices | 2,097,152 |
+| Aggregate conditional row domain | 1,024 vertices |
+| $Q_0$ and each strict row core | 32 vertices |
+| Forbidden difference | 64 facets; 131,072 total raw vertex-pair products |
+| Recovered $K_j$; pair-intersection output | 2,048; 4,096 vertices |
+| Outside-fast-path support products | 16,000,000 |
+| Recovery support products | 16,000,000, counted separately |
+| Fresh strict-ownership verification | 2,000,000 vertex pairs; 8,000,000 quadratic minima |
+| Output | 64 MiB |
+
+A recovered $K_j$ has at most $64\cdot16+4=1028$ construction halfplanes; two recovered
+polygons therefore have at most 2,056 intersection vertices.
+These combinatorial bounds motivated the representation ceilings without inspecting a
+target. They do not bound the total arithmetic work below its separate ceilings.
+
+An exact fast path may retain $P$ once if one forbidden facet has
+$\min_{y\in P}n\cdot y\ge b$: that outside-facet disjunct already equals $P$. Exact
+duplicate output polygons may share storage if every original piece and facet retains
+its alias. Neither shortcut may lose a disjunct or remove the forbidden boundary from
+this declared closed-complement construction.
+An empty recovered $K_j$ may stop its later clipping by monotonicity, with an explicit
+empty-prefix reason and complete accounting of the conditional row cover.
+It never licenses an empty-owner verdict.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

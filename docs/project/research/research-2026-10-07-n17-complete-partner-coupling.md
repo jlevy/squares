@@ -20,7 +20,8 @@ The new implications below are the sole Astra agent’s hand derivations.
 They have not received an independent mathematical review or an end-to-end machine
 proof. Source controls and fresh finite reconstruction will check the declared
 arithmetic; they do not upgrade that assurance automatically.
-No target result is asserted here.
+The initial contract is preserved below; the dated resource outcome and amendment are
+recorded at the end.
 
 ## Accepted Inputs and Coordinates
 
@@ -273,7 +274,7 @@ The fresh process reconstructs all used finite geometry and compares the scienti
 payload. It imports no producer or kernel and inherits the same accepted parent and root
 premises.
 
-| Resource | Frozen ceiling |
+| Resource | Initial exp289 ceiling |
 | --- | --- |
 | Each JSON input; seed | 10 MiB each |
 | Native node | 512 MiB compressed; 2 GiB decoded; complete canonical EOF |
@@ -282,9 +283,9 @@ premises.
 | Endpoint-control rationals | 16,384-bit inputs; 32,768-bit intermediates; retain source references and control witnesses rather than copied large scalars |
 | Residual pieces per row | 64 |
 | Input polygon; clipped polygon | 256; 384 vertices |
-| Total parsed geometric vertices | 262,144 |
+| Construction geometry vertices, including repeated owner-0 passes | 262,144 |
 | Aggregate partner domain; core | 1,024; 32 vertices |
-| Facets per row/context; total generated facets | 64; 500,000 |
+| Facets per row/context; total checked facet instances | 64; 500,000 |
 | Partner collision polygon | 256 vertices |
 | Owner-0 target pieces per context | 1,024 |
 | Support vertex products | 16,000,000, with cache accounting explicit |
@@ -307,6 +308,54 @@ giant endpoint scalars within their declared budget, geometry exceeding its own 
 canonical EOF, changed-byte refusal and fresh producer-free reconstruction.
 Registration and source review precede all actual coupling signs, regions and target
 predicates.
+
+## October 7 Resource Outcome and Amendment
+
+Exp289 stopped before the coupling predicate with `status=incomplete` and
+`coupling per-row residual piece ceiling`. Construction took 3.175524 seconds; fresh
+verification was unstarted.
+No fixed-point or regional result was computed, and every exclusion, capture and census
+flag remained false.
+The original
+[certificate](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/certificate.json)
+and
+[phase record](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/phase-execution.json)
+retain this operational outcome.
+It is not a mathematical miss.
+
+The subsequent input-only structural audit completed in 6.252654 seconds.
+Its retained report is
+`packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/structural-intake.json`.
+It counted all 1,056 rows, including the 992 foreign rows: 91,825 residual pieces,
+348,140 raw vertices, no empty pieces, at most 570 pieces in one row, eight vertices in
+one piece and 135 bits in a coordinate.
+It evaluated no new coupling predicate.
+The accepted exp288 pose reconstruction in its intake was explicitly an
+inherited-premise check.
+
+The coordinator selected **1,024 pieces per row** and **1,048,576 cumulative
+construction vertices** for exp291, a separately registered resource-amended replication
+of H298. All domains, arithmetic thresholds, proof criteria and other resource ceilings
+remain unchanged, including the 120-second construction and 120-second fresh-check
+allocations. SAT inherits these representation limits only under its own later
+registration.
+
+The structural counts also cover the repeated work in the frozen recipe.
+Owner-0 rows 25, 26 and 27 respectively have 22, 13 and 37 vertices, and 7, 4 and 11
+pieces. The worst case across fixed-point calibration and all four ladder levels parses
+
+$$
+348140+5\cdot13+22+37=348264
+$$
+
+construction vertices.
+The full-square SAT construction needs $348140+13=348153$. The largest regional interval
+visits 22 pieces, including its closed singleton seams, below the unchanged 1,024-piece
+target ceiling. These are structural sums, not geometric signs or runtime forecasts.
+The inherited custody extractor has separate work and is not included in the
+construction counter.
+Aggregate hull size, collision-region size and arithmetic work remain guarded at
+runtime; the input audit does not prove those caps fit.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
