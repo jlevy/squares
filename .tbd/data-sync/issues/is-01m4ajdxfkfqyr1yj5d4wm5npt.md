@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eighteen SQUISH upper-bound packings (#401)
 kind: task
 status: in_progress
 priority: 1
-version: 32
+version: 34
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -28,10 +28,11 @@ child_order_hints:
   - is-01m4bxds6b5vj3t7wgpny3xnfb
   - is-01m4bxdst7crd9aypqhf05q7ky
   - is-01m4bz6f82s3g9ahbypsr5qcbk
+  - is-01m4c2qs4p0gqa1dcfanxr4sm0
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T20:02:07.504Z
+updated_at: 2026-10-07T21:01:32.182Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: standard W1 result import, bounded engineering, complete exact rational replay and independent Astra math/correctness review, standard PR review and hosted CI, then authorized formal-stack merge and publication checks. Expanded issue401 scope18counts: original11 in PR415/416 plus12 new or improved geometries in later release (five replacements, seven new); n153 provenance-only byte identity. Native tbd sync now works via supplied gh authentication and confirmed tbd-sync publication; remove tracked fallback outboxes only after verified preservation. User authorizes merge once clean/reviewed, and requires proper results list and main case graphics. Keep parent/author reply open until expanded import settles.
@@ -206,3 +207,5 @@ overlap/containment controls both rejected in7.684s. New final import review,
 record integration and gates remain active; these scratch receipts are not yet
 mapped confirmation assurance. Earlier reviews cover only original eleven.
 Keep issue401 open until expanded18-count import and accurate post-main reply.
+
+Original eleven are merged: formal stack417 PR415/416, main4850d4146e008e3b10d96039b7d763e5d6ced773. Documentation418 also merged; current mainbe8172aa3d4dec86b62b38c0779a8c83332e5251 includes owner412. Independent deployment agent and hosted verifier BOTH pass1230/1230 at matching deployment6920572454; canonical T113/T114 and all11 drawings/credits/safeceil/source prints/V3C3 pass. Main reply published https://github.com/jlevy/squares/issues/401#issuecomment-6046723077. All four associated PRs415416418421 cross-reference401. Parent remains open for twelve later geometries: draft421 at remote076, targeted source repair accepted, required affected gate underway; new confirmation mapping separate. Recovery and exact current evidence under postmerge-tracking/deployment.
