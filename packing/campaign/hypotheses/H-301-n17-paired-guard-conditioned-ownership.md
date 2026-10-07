@@ -1,5 +1,5 @@
 ---
-title: "H-301 \u2014 Paired Point and Regional Joint Ownership"
+title: H-301 — Paired Point and Regional Joint Ownership
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -48,7 +48,10 @@ hypothesis:
   replication: false
   notes: Author48syntheticcontrolsPASS7.84s,independentSol48PASS8.82s,Ruff/format/types0; soleAstra finalpairedsource/monotonicmathCLEAR.
     No guardtarget signs read. Selectedaftercompletefreshcommon-core andfull-squareSATmisses; originalknown17endpoint
-    negativecontrol precedesconditionalguard.
+    negativecontrol precedesconditionalguard. Actual exp293 completed a fresh-matched point-context criterion
+    miss in151.778 seconds. All992 foreign rows survive; no shared owned-point closure. The regional context
+    remains unstarted by the registered monotonic rule. Sole Astra accepted the actual scope; no global,
+    census, capture or packing consequence.
   registered: '2026-10-07'
 ---
 # Paired Point and Regional Joint Ownership
@@ -86,6 +89,13 @@ Author48syntheticcontrolsPASS7.84s,independentSol48PASS8.82s,Ruff/format/types0;
 soleAstra finalpairedsource/monotonicmathCLEAR. No guardtarget signs read.
 Selectedaftercompletefreshcommon-core andfull-squareSATmisses; originalknown17endpoint
 negativecontrol precedesconditionalguard.
+
+## Actual disposition
+
+Exp293 completed the point-context recipe and fresh verification, with no closure.
+The registered monotonic implication skips the nonzero regional context.
+This refutes this frozen one-round recipe at the accepted witness, without claiming a
+feasible packing or excluding another strategy.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

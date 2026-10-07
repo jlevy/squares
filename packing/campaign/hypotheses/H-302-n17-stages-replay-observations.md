@@ -1,5 +1,5 @@
 ---
-title: "H-302 \u2014 Exact Replay Stage Attribution"
+title: H-302 — Exact Replay Stage Attribution
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -37,9 +37,11 @@ hypothesis:
   - H-291
   - H-299
   replication: false
-  notes: Author33targetfreecontrolsPASS1.10s,independentSol33PASS1.14s,Ruff/format/types0; controlledtoyfreshprocesssemanticparity
+  notes: 'Author33targetfreecontrolsPASS1.10s,independentSol33PASS1.14s,Ruff/format/types0; controlledtoyfreshprocesssemanticparity
     andrestoration/failurecontrols. Standing/primitives sourceunchanged. AcceptedfullNONEbaseline fromexp290attempt2,
-    nothistoricaldifferentcellspath. NoactualSTAGES target read.
+    nothistoricaldifferentcellspath. No actual STAGES target was read before registration. Exp294 accepted:
+    full same-object payload/input equality and all16 observed boundaries, zero failed calls; coverage57.292715s,
+    collisions10.218034s exclusive wall. Diagnostic only; no speedup or new geometric admission.'
   registered: '2026-10-07'
 ---
 # Exact Replay Stage Attribution
@@ -66,7 +68,12 @@ Author33targetfreecontrolsPASS1.10s,independentSol33PASS1.14s,Ruff/format/types0
 controlledtoyfreshprocesssemanticparity andrestoration/failurecontrols.
 Standing/primitives sourceunchanged.
 AcceptedfullNONEbaseline fromexp290attempt2, nothistoricaldifferentcellspath.
-NoactualSTAGES target read.
+No actual STAGES target was read before registration.
+
+Measured exp294 completes the registered diagnostic criterion.
+Full replay payload and input bytes match NONE, and all 16 owner/count boundaries match
+PHASES. Coverage is the largest measured stage; see the
+[completed result](../series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -31,7 +31,7 @@ session:
     deadline_at: '2026-10-07T18:47:58Z'
     expected_output: Astra coupling contract, bounded target-free source controls and profile design;
       complete continuation record.
-    validation_command: Focused new coupling/profile synthetic controls and packing-ledger check.
+    validation_command: Focused new coupling/profile synthetic controls and packing-ledger check
     kill_condition: No scientific target before preregistration and clean-source review; soundness or
       custody alarm stops its lane.
     fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected

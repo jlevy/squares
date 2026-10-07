@@ -595,6 +595,136 @@ Neither this option nor the 24-branch cover is selected or measured here.
 Their next use requires a bounded resource contract, controls and preregistration
 informed by the actual paired-guard outcome.
 
+## Accepted Paired-Guard Result: exp293
+
+The
+[retained outcome](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/mechanical-summary.json)
+records a completed `criterion_missed`, with matching fresh reconstruction.
+All 1,056 original rows and 992 foreign conditional rows were checked.
+Every foreign conditional row remains nonempty.
+The original seventeen endpoint enclosures are retained, and the tested guard is
+disjoint from that endpoint family.
+
+The recovered owned sets have the following vertex counts:
+
+| Owners | Vertices |
+| --- | --- |
+| 0 | 4 |
+| 1, 2 | 21 each |
+| 3 | 13 |
+| 4 | 29 |
+| 6 | 60 |
+| 20 | 34 |
+| 5, 7, 8, 9, 11, 12, 13, 14, 18, 21 | 0 each |
+
+No pair of these owned sets intersects.
+Construction took 75.141 seconds and fresh reconstruction 76.260 seconds; the outer run
+took 151.778 seconds and completed normally.
+The regional context was unstarted under the point-miss stopping rule.
+The nesting lemma therefore blocks larger centered guards for this same one-round
+owned-set construction; it does not report a separately measured regional miss.
+No packing, global capture or census exclusion follows.
+
+## Selected Two-Child Centre Test
+
+The next discriminator tests whether one empty owned intersection results from merging
+two spatial alternatives.
+It uses exp293’s accepted point-conditioned row hulls and owned sets as explicit
+premises. It does not use exp284’s unaccepted child.
+The rule below is frozen before evaluating the selector or either child on the actual
+geometry.
+
+For each of the ten foreign owners with empty accepted owned set, form the bounding box
+of the union of its nonempty conditional row hulls.
+For each coordinate axis, split at the exact midpoint of that bounding-box interval.
+Intersect every closed row hull with each of the two closed halfplanes.
+Equality belongs to both children, and angular intervals and their seams are preserved.
+Compute each child’s aggregate bounding box and its squared diagonal; give an empty
+child score zero. Select the pair minimizing the larger child score, with ties resolved
+by owner number and then $x$ before $y$. This selector uses geometry alone, without
+testing closure. Keep the selected owner, axis and cut value fixed in both phases below.
+
+Every physical packing in the parent guard belongs to at least one child.
+If all rows of the selected owner are empty in a child, that child is excluded.
+Otherwise reconstruct its common owned set with the preceding sixteen corner
+inequalities, the same $2^{-20}$ strict margin, and fresh exact closed-arc checks
+against every surviving child-row vertex.
+All other owners retain the checked owned sets of that guard context.
+A nonempty exact intersection between the child’s owned set and any other owner’s owned
+set excludes the child.
+Points, segments and touching owned hulls count because their points are strictly inside
+the physical squares.
+Choose the least other owner supplying such an intersection.
+An empty recovered owned set gives no exclusion.
+Both children must close.
+
+The selector has a simple geometric motivation: if a child confines the centre to a
+rectangle with side lengths $w,h$ and $w^2+h^2<1$, its midpoint is strictly inside every
+represented unit square, regardless of angle.
+Every such square contains its open radius-$1/2$ inscribed disk, and the greatest
+distance from that midpoint to a centre in the rectangle is $\sqrt{w^2+h^2}/2<1/2$. This
+exact squared test is a diagnostic; it does not replace the instrument’s declared
+strict-margin ownership check.
+
+### Point First, Then the Same Split on a Region
+
+First reconstruct both point children from the accepted exp293 hulls.
+If either child remains open, record a complete miss and skip the regional phase.
+For the fixed split, the earlier nesting argument still applies: larger guards enlarge
+each halfplane-restricted centre domain and shrink every recovered owned set.
+The same child proof cannot become successful merely by enlarging the guard.
+This stopping rule does not license changing the selected owner or cut for the region.
+
+If both point children close, the point exclusion is a secondary result.
+Freshly reconstruct the original parent domains, endpoint control and conditional
+context at half-width $1/512$, then apply the identical selected split.
+Do not transport the point-conditioned domains to positive width.
+The unchanged pre-split regional context must remain nonclosed by the accepted exp293
+point-miss nesting lemma; an unexpected closure there is a calibration refusal.
+The primary success requires both regional children to close.
+A completed regional miss retains only the point result.
+A resource stop remains incomplete, with any unfinished candidates distinguished from a
+freshly verified result.
+
+### Premises, Controls and Bounds
+
+The new descriptor binds three path-and-byte roles: the small exp293 descriptor, its
+accepted certificate and its fresh receipt.
+Require matching semantic payloads, fresh verification, the completed point miss, the
+full row roster, endpoint controls and canonical parent identities.
+The exp293 descriptor retains the preceding five-role input chain.
+Each new phase may read accepted exp293 geometry as a premise; it must not claim to
+replay that geometry or the original parent.
+The fresh checker independently repeats the selector and all new child arithmetic.
+Any regional phase additionally reconstructs its own conditional geometry from the
+original parent through the existing bounded helpers.
+
+Use one worker, 180 seconds for construction and 180 for fresh reconstruction, with the
+existing 360-second outer termination and 370-second kill limits.
+The memory guard samples current RSS with a 4 GiB ceiling per live owned process.
+The descriptor is limited to 10 MiB; each accepted exp293 receipt and the combined new
+output are limited to 64 MiB. Original geometry and endpoint input limits remain
+unchanged.
+
+For the new selector and children, count at most 2,097,152 generated clip vertices
+cumulatively, 1,024 vertices per child row domain, 2,048 per recovered owned set and
+4,096 per intersection.
+Bound recovery support products by sixteen million, strict vertex pairs by two million
+and their quadratic checks by eight million, and intersection vertex pairs by two
+million.
+The original conditional reconstruction retains its separately named frozen work
+counters.
+Geometry remains limited to 4,096-bit rational inputs and results; these bounds
+do not claim to cap unreduced internal integer products.
+
+Controls must cover closed split seams and singleton rows, an empty child, one closed
+child without overall success, both children closing, deterministic selector ties,
+strict ownership and touching owned hulls, the fixed-cut nesting rule, inherited premise
+tampering, known-endpoint retention in the original parent, incomplete-output scope and
+independent two-process reconstruction.
+The new branch composition and nesting argument remain sole-Astra hand derivations, with
+no independent mathematical review or end-to-end formal proof claimed.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

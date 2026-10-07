@@ -1182,8 +1182,8 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | H-298 | refuted | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 2 |  | 1.8m wall |
 | H-299 | confirmed | proof | Boundary-level replay instrumentation preserves the full accepted cent |  | 1 |  | 3.9m wall |
 | H-300 | refuted | proof | Complete full-square SAT minima certify a nonzero closed region around |  | 1 |  | 1.8m wall |
-| H-301 | running | proof | One-round guard-conditioned ownership certifies the declared nonzero c |  | 1 |  |  |
-| H-302 | running | proof | Low-frequency stage observers preserve the accepted full exact replay  |  | 1 |  |  |
+| H-301 | refuted | proof | One-round guard-conditioned ownership certifies the declared nonzero c |  | 1 |  | 2.5m wall |
+| H-302 | confirmed | proof | Low-frequency stage observers preserve the accepted full exact replay  |  | 1 |  | 1.8m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1193,7 +1193,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Rounds
 
-### rejected (43)
+### rejected (44)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1240,6 +1240,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-287 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-296 | Completed deterministic recipe missed only exact numeric container containment; all conditional owner0 strict tests and all16 foreign open-avoidance checks passed. Fixedrow26piece0/tau53/128; no alternate candidate. Fresh reconstruction passed, clean969588d source, all6blob identities equal and all3 accepted286 input byte identities match. Supervision1.10817s rc0/normalcleanup; phases0.15160s+0.14876s. No17packing, exclusion, capture, census or global result. |
 | exp-291 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Complete fixedpoint coupling miss: all16partners fail to exclude the accepted witness. Freshpayloadmatches/verificationPASS; regionalPRIMARYmissed and allfourladderwidths unstarted by frozenmonotonicstop, not fourexecutedmisses. |
 | exp-292 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-300 | All16exactpartner minima are nonpositive, with no positivepartner or regional lift. Fifteen retainednegativewitnesses passexactnumericwalls; owner4alone fails bottomwall at49/64 by-75040/10713553. Common-coreerosion is not thesoleexplanation. No simultaneouspacking established. |
+| exp-293 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-301 | The complete h=0 point context has no empty foreign owner or shared strictly owned point. All992 foreign rows remain nonempty. The h=1/512 regional context is unstarted under the preregistered monotonic inclusion rule. This is a completed recipe miss, not a packing witness or global impossibility result. |
 
 ### exhausted (1)
 
@@ -1344,7 +1345,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (83)
+### accepted (84)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1431,6 +1432,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-282 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-292 | Actual frozen scoped-input replication completed8.38847s supervised wall, rc0/cleanupcomplete. Generation and fresh reconstruction agree on conditional_gain_candidate with canonicalcertificate/H290/native/context joins. Endpoint control nonempty and strictly inside; all four target cardinal gains exceed1/1024, all four all-angle gains negative. Three closedpieces25/26/27 include singleton seams,96exactplanes and5selectedtargetpoints. Accepted finite conditionalownership gain only: no producer, propagation, exclusion, admission or globalproof. |
 | exp-288 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-297 | Completed1.12039s supervision; construction0.19380s/fresh0.20042s, rc0/normalcleanup. First row26piece0 candidate at tau53/128 satisfies exact centered container, all conditional owner0 strict and all16 foreign open-avoidance predicates. Left-wall touch retained. Fresh verification true; clean56370233 source/seven matching blobs and six frozen byte joins. Specific point relaxation admits one square; no17packing, capture, exclusion, census or global result. Sole-Astra actual semantic acceptance recorded after target. |
 | exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Unchanged-regime attempt2 completes both full exact replays with matched mathematical/inputbyte identities and all16boundary observations. Firstattempt12.202s guard_unavailable remainspreserved. Diagnostic only; no speedup or new geometricadmission. |
+| exp-294 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-302 | Fresh full STAGES replay matches accepted NONE mathematical/input identities and all16 PHASES step boundaries. Coverage is the largest measured stage:57.292715s exclusive wall; collisions10.218034s. Diagnostic only; no speedup, exp284 explanation or geometric admission. |
 
 ### baseline (12)
 
@@ -1448,13 +1450,6 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
-
-### in-progress (2)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-293 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-301 | Prospectively registeredafterreview/sourcecontrols; scientifictargetunrun. |
-| exp-294 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-302 | Prospectively registeredafterreview/sourcecontrols; scientifictargetunrun. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1505,7 +1500,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Effort
 
-223 rounds, 2512.1 agent-minutes, 5787.1 wall-minutes.
+223 rounds, 2512.1 agent-minutes, 5791.4 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

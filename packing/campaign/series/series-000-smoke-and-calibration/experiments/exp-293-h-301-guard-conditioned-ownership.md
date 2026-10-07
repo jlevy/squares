@@ -1,5 +1,5 @@
 ---
-title: "exp-293 \u2014 Paired Point and Regional Joint Ownership"
+title: exp-293 — Paired Point and Regional Joint Ownership
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -43,9 +43,18 @@ experiment:
       supportproducts,131072rawMinkowskivertexproducts,2Mstrictvertexpairs/8Mquadraticchecks. Core32/domain1024/commonK2048/intersection4096vertices,
       forbidden64facets;64MiBoutput and inheritedsourcebit/native/inputcaps unchanged.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership
-  results: []
+    commit: 0f7b96c7a7457c19445de7366d4c77224f7d917f
+    dirty: true
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the paired guard-conditioned ownership recipe certify the declared nonzero region?
+    outcome: criterion_missed
+    checked_by: Construction and fresh mathematical payloads agree exactly; replay verification_passed=true.
+      All1056 original and992 foreign rows and all17 original endpoint controls pass. Sole Astra accepts
+      the actual completed method miss; independent Sol metadata/custody/work/resource review is clear.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Construction and fresh reconstruction both return closed_guard_exclusion with criterion_met=true
       for h1/512 after a completed h0point closure. One original1056/992row reconstruction and all17endpoint/calibration
       precede both contexts. Every original piece is accounted by exact closed outside-facet union or
@@ -57,11 +66,20 @@ experiment:
       storage131072pieces PERcontext/max2/64MiBoutput. Regional/custody/serialization resourcestops retain
       pointcandidate only, not acceptedregionalproof. Conditional originalparent scope; no global/census/capture/wholeI
       claim.
-    reason: Prospectively registeredafterreview/sourcecontrols; scientifictargetunrun.
+    reason: The complete h=0 point context has no empty foreign owner or shared strictly owned point.
+      All992 foreign rows remain nonempty. The h=1/512 regional context is unstarted under the preregistered
+      monotonic inclusion rule. This is a completed recipe miss, not a packing witness or global impossibility
+      result.
     needs_review: false
-  lease:
-    expires: '2026-10-07T20:47:58Z'
-    host: macOS arm64
+  effort:
+    stopped_by: criterion
+    timebox: One worker; construction180s+fresh180s,combined360s TERM360/KILL370,4096MiB sampled currentRSS
+      PERliveprocess. Original1024pieces/row/1048576vertices; conditional8192pieces/row/131072pieces PERcontext(max2).
+      Across BOTHcontexts cumulatively:2097152conditionalclipoutputvertices (restrictedowner0wall+B+foreignoutside;
+      unconditionalpreflight/Q0/K intermediates excluded/separatelybounded), outside-fastpath16M +recovery16M
+      supportproducts,131072rawMinkowskivertexproducts,2Mstrictvertexpairs/8Mquadraticchecks. Core32/domain1024/commonK2048/intersection4096vertices,
+      forbidden64facets;64MiBoutput and inheritedsourcebit/native/inputcaps unchanged.
+    wall_seconds: 151.777813458
 ---
 # Paired Point and Regional Joint Ownership
 
@@ -95,6 +113,22 @@ excluded/separatelybounded), outside-fastpath16M +recovery16M
 supportproducts,131072rawMinkowskivertexproducts,2Mstrictvertexpairs/8Mquadraticchecks.
 Core32/domain1024/commonK2048/intersection4096vertices, forbidden64facets;64MiBoutput
 and inheritedsourcebit/native/inputcaps unchanged.
+
+## Completed outcome
+
+Construction took 75.141 seconds and fresh verification took 76.260 seconds.
+Their mathematical payloads agree exactly, and fresh verification passed.
+The supervisor completed normally in 151.778 seconds with owned-group cleanup.
+The relevant scientific sources were clean at
+`0f7b96c7a7457c19445de7366d4c77224f7d917f`; unrelated working-tree edits were retained
+in the launch record.
+
+The point context missed: all 992 foreign rows retain conditional pieces, and no
+recovered owned sets intersect.
+The regional context was unstarted under the registered monotonic implication.
+Astra accepted this actual mathematical disposition; the mechanical review checked
+existing receipt fields and byte identities without rerunning geometry.
+See the [result summary](../results/exp-293-guard-conditioned-ownership/README.md).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
