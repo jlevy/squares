@@ -1014,6 +1014,12 @@ All unconditional pooled owners must remain disjoint as an endpoint calibration 
 adding the five conditional owner0 points.
 No incomplete exp284 child geometry is used; a complete fresh finite proof is required.
 
+[H-295](hypotheses/H-295-n17-pooled-forbidden-cover.md) tests exact union coverage by
+pooled foreign-owned forbidden regions on every closed residual piece meeting the owner0
+guard. Matched ordinary-final foreign hulls share the same centres and strict cores.
+A complete uncovered piece misses this finite recipe; it is not a packing witness.
+The accepted original parent supplies custody; no incomplete exp284 geometry is used.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

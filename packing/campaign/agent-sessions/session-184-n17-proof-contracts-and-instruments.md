@@ -2088,8 +2088,9 @@ session:
   - Exp273 accepted conservativeinventory10.49s andexp275 acceptedexactcapjoin1.21s atclean3575c02,
     no newbound/censuschange.
   stop_reason: null
-  next_action: Complete reviewed guardedparentproducer+independentchecker; freezeH293/exp283
-    boundedclosed-I exclusion trial, keepCI beside mathematics and preserve everyverdict.
+  next_action: Execute registered H295/exp286 pooled forbidden-cover trial with fresh finite
+    reconstruction; prepare reviewed proof-support successors, keep frozen validation beside
+    mathematics and preserve every verdict.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T141342Z.yaml
 ---
