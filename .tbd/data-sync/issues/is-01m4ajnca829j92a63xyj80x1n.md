@@ -3,9 +3,9 @@ type: is
 id: is-01m4ajnca829j92a63xyj80x1n
 title: "Answer Nate Chaoweeraprasit: SQUISH registration request (#401)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T07:01:21.864Z
-updated_at: 2026-10-07T21:01:32.030Z
+updated_at: 2026-10-07T23:22:23.876Z
 started_at: 2026-10-07T07:01:52.488Z
+closed_at: 2026-10-07T23:22:23.876Z
+close_reason: "All eighteen issue401 cases published and independently verified: reviewed formal stacks417/424 merged; source/geometry and safeceil/credit/history validated at main2af, matching deployment6922702889 and both independent/hosted strictTLS1234/1234 checks, live149/149 and layouts38/38 plusvisualPASS. Actual accuratefinal author reply6048513671 posted22:54:51UTC; issue401 manuallyclosed22:54:52. Final onefileledgermetadata PR426 independentlyreviewed zero findings, actual15hostedPASS39documentedSKIP, merged23:21:51 into main84881f214086bf5b8ce83a714c4fda6d7be7b2d1. Separate nine-case422 remains open underthink-sfpz with draftPR427 and canonicalconfirmation pending; no loss/prematureclosure."
+resolution: null
+duplicate_of: null
 ---
 Own acknowledgement, PR progress updates, and final post-merge replies for issue #401. User explicitly authorized issue comments and gh PR filing. Both acknowledgement and progress gh issue comment attempts failed GraphQL Resource not accessible by integration (addComment); no reply posted. Final stage-7 reply may quote registered IDs only after merge, with main links; issue closure requires all author requests settled. GH_TOKEN is present and proxied gh authentication and reads work, but direct api.github.com HTTPS connections are refused inside and outside the filesystem sandbox, and mediated writes are denied. Publication needs a reachable direct GitHub channel or a write-enabled platform channel; do not infer owner token validity from the mediated channel.
 
