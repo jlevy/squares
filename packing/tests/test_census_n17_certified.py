@@ -624,6 +624,12 @@ def test_the_manifest_is_refused_unless_it_meets_the_hosted_data_contract(
     assert hosted_files(tmp_path, {}).objects == {}
 
 
+@pytest.fixture(scope="module")
+def committed_census_without_flags() -> dict[str, Any]:
+    """The bare current committed census reused by the projection control."""
+    return census(REPO / DEFAULT_LEDGER, selector_receipts=())
+
+
 def test_the_committed_ledger_counts_its_four_admitted_entries_without_the_dumps(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -688,7 +694,9 @@ def test_the_census_projects_the_recheck_flags_by_default(tmp_path: Path) -> Non
     assert record["certified"]["endpoint_survives"]
 
 
-def test_the_committed_ledger_projects_the_recheck_flags_it_has_not_admitted() -> None:
+def test_the_committed_ledger_projects_the_recheck_flags_it_has_not_admitted(
+    committed_census_without_flags: dict[str, Any],
+) -> None:
     """At the committed ledger, the projected flags are the recheck's 89 less those the
     ledger admits, the flags leave the certified line as the census gives it without
     them, and the endpoint survives. While every admitted class beyond exp-250's four is
@@ -696,7 +704,7 @@ def test_the_committed_ledger_projects_the_recheck_flags_it_has_not_admitted() -
     K's s182-k1 admitted (exp-251) that is 86 flags over 102,124 certified states in
     12,929 orbits."""
     record = census(REPO / DEFAULT_LEDGER)
-    bare = census(REPO / DEFAULT_LEDGER, selector_receipts=())
+    bare = committed_census_without_flags
     assert record["certified"] == bare["certified"]
     assert record["certified"]["endpoint_survives"]
     cover = cover_context()

@@ -1,5 +1,5 @@
 ---
-title: "Session185 \u2014 n17 complete coupling and replay"
+title: Session185 — n17 complete coupling and replay
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -155,7 +155,7 @@ session:
     bead: think-hkqz
     objective: 'Efficiency block(OR12): evaluate pairedjointownership andsame-objectexactstageattribution
       whileAstra chooses proofprogress fromactualconditionaldomains, avoiding unchangedmethodrepetition.'
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Fresh complete coupling miss, with stronger mathematically reviewed source ready.
     budget_minutes: 30
@@ -169,14 +169,52 @@ session:
       custody alarm stops its lane.
     fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
       mathematical discriminator.
+    outcome: Paired guard ownership completed and freshly matched a point-context method miss; all992
+      foreign rows survive, seven owners have nonempty pairwise-disjoint owned sets. STAGES matched all
+      mathematical payloads and attributes57.293s to coverage versus10.218s to collisions. Reviewed external
+      Cargo runtime repair9+9controls committed. Full101-step checkpoint launched on frozen0adfe at20:39:32Z
+      with external scratch and INT3600/KILL+10 ceiling. Actual CI shows a literal command-period error
+      and contaminated in-process synthetic fixture, both narrowly fixed; current-base five conflicts
+      resolved with upstream research preserved. Native partial cost checkpoint captured.
+    evidence:
+    - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
+    stop_reason: Measured bottleneck and complete joint-method negative select a two-closed-child proof
+      discriminator and concurrent CI/upstream integration.
+    next_action: Register and validate deterministic two-child instrument; refresh current merge-ref CI;
+      coordinate all n17 issues.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-441
+    bead: think-hkqz
+    objective: Freeze, review and execute the preregistered two-closed-centre-child discriminator while
+      Sol repairs real CI failures and reviews all n17 issues.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Fresh joint miss and explicit user instructions select closed centre branching, green
+      CI and upstream issue integration.
+    budget_minutes: 30
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Complete fresh closed region proof or retained method/resource miss; integrated current
+      base, verified CI repairs and linked issue inventory.
+    validation_command: Focused new synthetic controls and source reviews, then separately registered
+      guarded construction/fresh replay; actual hosted merge-ref CI asynchronously.
+    kill_condition: No scientific target before preregistration and clean-source review; soundness or
+      custody alarm stops its lane.
+    fallback: Preserve exact unresolved obligation and redirect the next slice to a separately selected
+      mathematical discriminator.
     outcome: null
     evidence:
     - docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
     - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json
     stop_reason: null
-    next_action: LaunchfrozenH301/exp293 andH302/exp294; keepallfourlanesactive; prepareselectedfullcheckpointby20:45Z
-      withprotectionof21:47:58Zfinalization.
+    next_action: Finish source-only two-child controls and preregistration before scientific target; publish
+      current merge-base and issue coordination.
   primary_bead: think-tvxs
   status: in_progress
   budget:
@@ -664,22 +702,137 @@ session:
     - native release upload
   - task: Astra complete coupling strategy
     operator: /root/astra_strategy; GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: null
-    files: null
-    checks: null
-    uncertainty: Pairedguard/STAGESactualtarget results pending; no newglobaladmission.
+    outcome: Phase5 source and actual-result reviews completed; same actor continues in the next phase.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/mechanical-summary.json
+    files: &id004
+    - docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md
+    - docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
+    checks:
+    - Fresh paired mathematical payload agreement and exact STAGES replay agreement; detailed scoped controls
+      retained.
+    uncertainty: Global capture and optimality remain open.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Completeproof-relevantphase5 lane andcapturealloutcomes.
+    next_action: Continue phase6 mathematical or mechanical lane.
     phase: 5
     budget_minutes: 30
     started_at: '2026-10-07T20:22:38.403436+00:00'
     deadline_at: '2026-10-07T20:47:58Z'
     expected_output: Dated resourceamendment mathematical clearance, actualcoupling/SAT semantics, guard-conditionedjointdomain
       contract.
+    validation_command: Source/implication mathematical read, not independent mathematical confirmation.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id004
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol complete coupling implementation
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase5 source and actual-result reviews completed; same actor continues in the next phase.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/mechanical-summary.json
+    files: &id005
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/devtools/run_registered_phases.py
+    - packing/tests/test_run_registered_phases.py
+    - packing/devtools/check_n17_full_square_partner_coupling.py
+    - packing/tests/test_check_n17_full_square_partner_coupling.py
+    - packing/devtools/report_n17_parent_geometry.py
+    - packing/tests/test_report_n17_parent_geometry.py
+    - packing/devtools/check_n17_guard_conditioned_ownership.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
+    checks:
+    - Fresh paired mathematical payload agreement and exact STAGES replay agreement; detailed scoped controls
+      retained.
+    uncertainty: Global capture and optimality remain open.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase6 mathematical or mechanical lane.
+    phase: 5
+    budget_minutes: 30
+    started_at: '2026-10-07T20:22:38.403436+00:00'
+    deadline_at: '2026-10-07T20:47:58Z'
+    expected_output: Source-onlyguard-conditionedownership instrumentandmeaningfulsyntheticcontrols; no
+      actualtarget.
+    validation_command: Focused pytest and static floors; fresh target waits source review.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id005
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Sol exact replay profile and independent mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: completed
+    recording: contemporaneous
+    outcome: Phase5 source and actual-result reviews completed; same actor continues in the next phase.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/mechanical-summary.json
+    files: &id006
+    - packing/devtools/profile_n17_exact_replay.py
+    - packing/tests/test_profile_n17_exact_replay.py
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - packing/devtools/check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_partner_pose_coupling.py
+    checks:
+    - Fresh paired mathematical payload agreement and exact STAGES replay agreement; detailed scoped controls
+      retained.
+    uncertainty: Global capture and optimality remain open.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Continue phase6 mathematical or mechanical lane.
+    phase: 5
+    budget_minutes: 30
+    started_at: '2026-10-07T20:22:38.403436+00:00'
+    deadline_at: '2026-10-07T20:47:58Z'
+    expected_output: Audited1024piece/1Mvertex source amendment and focusedtests; exactprofileauditandmechanicalreviewofnewjointinstrument.
+    validation_command: Target-free profile controls; actual profile waits registration.
+    kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
+    fallback: Preserve incomplete packet and take a narrower named dependency.
+    write_scope: *id006
+    excluded_commands:
+    - git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Astra complete coupling strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: null
+    files: null
+    checks: null
+    uncertainty: New two-child target remains unrun; actual latest-head green CI not yet established.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete phase6 deliverable alongside other active lanes.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Exact two-child source/math clearance, interpretation and upstream certificate admission
+      requirements.
     validation_command: Source/implication mathematical read, not independent mathematical confirmation.
     kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
     fallback: Preserve incomplete packet and take a narrower named dependency.
@@ -700,16 +853,15 @@ session:
     evidence: null
     files: null
     checks: null
-    uncertainty: Pairedguard/STAGESactualtarget results pending; no newglobaladmission.
+    uncertainty: New two-child target remains unrun; actual latest-head green CI not yet established.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Completeproof-relevantphase5 lane andcapturealloutcomes.
-    phase: 5
+    next_action: Complete phase6 deliverable alongside other active lanes.
+    phase: 6
     budget_minutes: 30
-    started_at: '2026-10-07T20:22:38.403436+00:00'
-    deadline_at: '2026-10-07T20:47:58Z'
-    expected_output: Source-onlyguard-conditionedownership instrumentandmeaningfulsyntheticcontrols; no
-      actualtarget.
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Source-only two-child instrument, meaningful controls and terminal registry views.
     validation_command: Focused pytest and static floors; fresh target waits source review.
     kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
     fallback: Preserve incomplete packet and take a narrower named dependency.
@@ -726,6 +878,8 @@ session:
     - packing/tests/test_check_n17_guard_conditioned_ownership.py
     - SYNOPSIS.md
     - packing/campaign/ledger.md
+    - packing/devtools/check_n17_two_center_children.py
+    - packing/tests/test_check_n17_two_center_children.py
     excluded_commands:
     - git commit
     - git push
@@ -740,15 +894,15 @@ session:
     evidence: null
     files: null
     checks: null
-    uncertainty: Pairedguard/STAGESactualtarget results pending; no newglobaladmission.
+    uncertainty: New two-child target remains unrun; actual latest-head green CI not yet established.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Completeproof-relevantphase5 lane andcapturealloutcomes.
-    phase: 5
+    next_action: Complete phase6 deliverable alongside other active lanes.
+    phase: 6
     budget_minutes: 30
-    started_at: '2026-10-07T20:22:38.403436+00:00'
-    deadline_at: '2026-10-07T20:47:58Z'
-    expected_output: Audited1024piece/1Mvertex source amendment and focusedtests; exactprofileauditandmechanicalreviewofnewjointinstrument.
+    started_at: '2026-10-07T20:50:27.909979+00:00'
+    deadline_at: '2026-10-07T21:17:58Z'
+    expected_output: Narrow real CI fixes, all-n17 issue inventory and current-base engineering review.
     validation_command: Target-free profile controls; actual profile waits registration.
     kill_condition: No unregistered target or unaccepted exp284 input; stop on soundness/custody alarm.
     fallback: Preserve incomplete packet and take a narrower named dependency.
@@ -759,6 +913,11 @@ session:
     - packing/tests/test_negative_controls.py
     - packing/devtools/check_n17_partner_pose_coupling.py
     - packing/tests/test_check_n17_partner_pose_coupling.py
+    - packing/tests/test_check_n17_guard_conditioned_ownership.py
+    - packing/devtools/suite-file-costs.json
+    - packing/tests/test_census_n17_certified.py
+    - packing/tests/test_site_glyphs.py
+    - docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
     excluded_commands:
     - git commit
     - git push
@@ -805,9 +964,21 @@ session:
     verifiedmethodmisses selectjointconditioning notmorecaps.'
   - 'Hosteddb5400run37679703738: threecoherencedebts only (untrackedallowlistedguardfile,closereportdrift,ideasH300missing);
     solefailingassertions inA/C correspond. NobroadPASSclaimed.'
+  - Pairedguard exp293 complete verified method miss151.778s; nonempty owned sets0/1/2/3/4/6/20 are pairwise
+    disjoint, regional skipped by the frozen monotonic criterion.
+  - STAGES exp294 accepted same-math diagnostic108.621s; coverage57.293s versus collisions10.218s selects
+    collective geometry and coverage as useful levers.
+  - Full101-step checkpoint frozen0adfe2c5e launched20:39:32Z in attached recovery worktree; browser dependencies
+    bound, task-specific external Cargo/cache/temp, process-count scheduling4/jobs3/inner2; directINT3600+10
+    cleanup ceiling, no aggregateRSS assertion.
+  - All31 GitHub issues inventoried:7 n17 mentions; issue413 reports17 verified/10 computed, with only
+    four upstreamFULL rows. Their artifacts and finite premises are still required before local admission.
   stop_reason: null
-  next_action: Freezecombinedreviewedpairedguard/STAGESsources+coherenceviews; launchpreregisteredtargets;
-    selectnextmathstepfromactualoutcomes; fullcheckpointby20:45beforeprotectedfinalization.
+  next_action: Complete H303 two-child preregistration and clean source freeze; execute within frozen
+    budgets; repair current merge-ref CI and consolidate n17 issue coordination without duplicate producer
+    work.
+  resource_rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session185-checkpoint.yaml
 ---
 # n17 Complete Coupling and Exact Replay
 

@@ -258,6 +258,7 @@
     "packing/tests/test_known_best_contact_overlays.py": 0.668,
     "packing/tests/test_known_best_families.py": 0.465,
     "packing/tests/test_known_best_n011_rational_control.py": 0.609,
+    "packing/tests/test_known_best_squish.py": 7.606,
     "packing/tests/test_lint_floor_contract.py": 0.108,
     "packing/tests/test_log_rollup.py": 0.011,
     "packing/tests/test_math_loading.py": 0.384,
@@ -539,6 +540,10 @@
     "packing/tests/test_site_text_tokens.py": 0.454,
     "packing/tests/test_site_wide_blocks.py": 0.401,
     "packing/tests/test_source_coverage.py": 1.952,
+    "packing/tests/test_source_supersession.py": 0.004,
+    "packing/tests/test_squish_receipt_binding.py": 0.212,
+    "packing/tests/test_squish_upper_bound_packets.py": 1.323,
+    "packing/tests/test_squish_upper_bound_receipts.py": 1.287,
     "packing/tests/test_sqverify_fast_census.py": 10.615,
     "packing/tests/test_stage_evand_bentz4_lean.py": 2.95,
     "packing/tests/test_stage_evand_bentz_lean.py": 0.743,
@@ -559,6 +564,7 @@
     "packing/tests/test_threshold_separation.py": 0.027,
     "packing/tests/test_tokoharu_density_audit.py": 0.244,
     "packing/tests/test_translation_escape_screen.py": 5.959,
+    "packing/tests/test_translation_escape_update.py": 0.369,
     "packing/tests/test_transport_ceiling_family.py": 0.015,
     "packing/tests/test_trump11_symmetry.py": 0.04,
     "packing/tests/test_trump_isolation_radius.py": 6.927,
@@ -621,5 +627,39 @@
     154.0,
     154.0,
     131.0
+  ],
+  "local_admissions": [
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_known_best_squish.py",
+        "packing/tests/test_source_supersession.py",
+        "packing/tests/test_squish_receipt_binding.py",
+        "packing/tests/test_squish_upper_bound_packets.py",
+        "packing/tests/test_translation_escape_update.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/squish-401-reported-2026-10-07.json",
+          "provenance": {},
+          "tests": 54
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_squish_upper_bound_receipts.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/squish-401-confirmation-2026-10-07.json",
+          "provenance": {},
+          "tests": 16
+        }
+      ]
+    }
   ]
 }

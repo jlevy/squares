@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_two_center_children.py
+    kind: generated-artifact
+    boundary: Runtime byte-bound accepted guard descriptor, finite point-context certificate and fresh receipt bind inherited geometric premises; the new checker reconstructs every selected child and rejoins original generated parent custody, rather than checking Git source integrity.
   - path: packing/devtools/check_n17_guard_conditioned_ownership.py
     kind: generated-artifact
     boundary: Runtime-generated accepted parent/witness and native input identities are rejoined after fresh guarded reconstruction; these generated finite artifacts are not identified by Git source revisions.

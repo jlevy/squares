@@ -328,6 +328,16 @@ def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() ->
     assert output_roots <= PRUNE
     assert CORNER_DUAL_SALVAGE_RECEIPT in PRUNE
     assert RETAINED_RECEIPT_ROOTS <= PRUNE
+    assert controls.REGULARIZED_WITNESSES <= PRUNE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert all(
+        (ROOT / control["file"]).resolve() not in controls.REGULARIZED_WITNESSES
+        for control in specification["controls"]
+    )
+    assert all(
+        "atlas/known-best/regularized/n-" not in control["run"]
+        for control in specification["controls"]
+    )
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 

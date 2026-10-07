@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 verifiers:
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
@@ -1467,3 +1467,24 @@ verifiers:
       each finding is present at the first commit and gone at the fix. Decides nothing
       about Valid7.
     source: [packing/devtools/probe_valid7_fixes.py]
+
+  - id: V-squish-upper-bound-packets
+    program: devtools.squish_upper_bound_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the bounded complete SQUISH source roster, converts rational half-angle facts to exact
+      rational-corner witnesses without changing the side, drives both exact deciders, and checks source/fact/witness/receipt
+      bindings, full pair counts, upward display ceilings and the two geometric controls.
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    note: Written from the published rational certificate format and the geometry. No SQUISH producer
+      executable is retained or run. The native exact_verify and independent rational-corner checker decide
+      feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party
+      routes share the converted witness, YAML and Python rational arithmetic, not geometry code.

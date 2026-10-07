@@ -639,6 +639,13 @@ PRUNE = frozenset(
         ROOT / "witnesses/franciscouzo-2026-10-03",
     }
 )
+# Generated exact witnesses of the regularized drawing layer, independently
+# replayed by its atlas validation steps and never read by a mutation control.
+# Keep the index/view metadata and original source witnesses in every worker.
+REGULARIZED_WITNESSES = frozenset(
+    (ROOT / "atlas/known-best/regularized").glob("n-*-regularized.yaml*")
+)
+PRUNE |= REGULARIZED_WITNESSES
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated

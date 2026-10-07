@@ -1,0 +1,9 @@
+{
+  "schema": "n17-two-center-children-context/v1",
+  "guard_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/descriptor.json",
+  "guard_descriptor_sha256": "a36021738e3f04149d3f625205d3d05eb5f7785303ae1e927def8a553b6176d8",
+  "guard_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/certificate.json",
+  "guard_certificate_sha256": "5b4caf437741d851d936eeb9d738520be2ff9f238d428ee52429d937f9dd4fc6",
+  "guard_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/replay.json",
+  "guard_replay_sha256": "fe84a37c5defac7a882e5763fab97fe429d794879be913c6fbaba23f4b5ad0b7"
+}

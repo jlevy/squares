@@ -1061,6 +1061,10 @@ andtheunchangednonzeroregionPRIMARY.
 [H-302](hypotheses/H-302-n17-stages-replay-observations.md) attributesexactreplaystages
 whilematchingacceptedinputbytes/mathreceipt, withnospeedupclaim.
 
+[H-303](hypotheses/H-303-n17-two-center-children.md) tests a deterministic complete
+two-child centre cover using accepted exp293 owned-set premises and a separately rebuilt
+regional context.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

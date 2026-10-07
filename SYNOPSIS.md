@@ -257,6 +257,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-109](packing/frontier/RESULTS.md) | 30 | `V3` | `C3` | `S3` | `previously-published` | A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it declares and published on 6 October 2026, proves s(30) >= 11767/2000 = 5.8835. |
 | [T-110](packing/frontier/RESULTS.md) | 39 | `V3` | `C3` | `S3` | `previously-published` | A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it declares and published on 6 October 2026, proves s(39) >= 133/20 = 6.65. |
 | [T-111](packing/frontier/RESULTS.md) | 41 | `V3` | `C3` | `S3` | `previously-published` | A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it declares and published on 6 October 2026, proves s(41) >= 271/40 = 6.775. |
+| [T-113](packing/frontier/RESULTS.md) | 108, 126, 129, 130, 154, 155, 180, 209, 238, 303 | `V3` | `C3` | `S3` | `previously-published` | Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129, 130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401 on 7 October 2026. |
+| [T-114](packing/frontier/RESULTS.md) | 153 | `V3` | `C3` | `S3` | `previously-published` | Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <= 7250614903299225/562949953421312, about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874 below the earlier reported upper bound here. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -311,9 +313,9 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 431 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 23 in progress |
 | Sessions | 184 | 105 completed; 78 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 236 | 64 confirmed; 39 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 223 | 84 accepted; 44 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 112 | 112 registered, 82 by others |
+| Hypotheses | 237 | 64 confirmed; 39 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted; 1 needs review |
+| Experiments | 224 | 84 accepted; 44 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
+| Frontier results | 114 | 114 registered, 84 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -573,6 +575,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Two Closed Centre Children](packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md) | typed session record | record | retained | — |
+| [n17 Issue Coordination and Certificate Intake](docs/project/reviews/review-2026-10-07-n17-issue-coordination.md) | dated review record | record | retained | — |
 | [Exact Replay Stage Attribution](packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md) | typed session record | record | retained | — |
 | [Paired Point and Regional Joint Ownership](packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/README.md) | typed session record | record | retained | — |
 | [Complete Full-Square SAT Miss](packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/README.md) | typed session record | record | retained | — |
@@ -595,6 +599,8 @@ case or experiment separately.
 | [Session 184: n11 First-Round Readiness Objects](packing/campaign/retained/session-184-n11-readiness/README.md) | typed session record | record | retained | — |
 | [n17 Proof Interfaces and Finite-Angle LP Contract](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md) | research synthesis | record | retained | — |
 | [n17 Ten-Hour Overnight Session](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | current | transient | — |
+| [Mathematics Review: Eleven SQUISH Upper-Bound Packings](docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md) | dated review record | record | retained | — |
+| [Correctness and Security Review: SQUISH #401 Import](docs/project/reviews/review-2026-10-06-squish-import-correctness.md) | dated review record | record | retained | — |
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
@@ -608,6 +614,7 @@ case or experiment separately.
 | [Eleven-Square Optimality Proof: The Delta for the Original Contributor](docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md) | dated review record | record | retained | — |
 | [Unified adversarial review of the tentative optimality proof for eleven squares](docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md) | dated review record | record | retained | — |
 | [Changes in v0.1.4 of the Eleven-Square Optimality Review, for Its W2 Exposition Review](docs/project/reviews/review-2026-10-04-n11-optimality-paper-v0.1.4-changes.md) | dated review record | record | retained | — |
+| [Review of the Eleven-Square Optimality Paper, v0.1.6](docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md) | dated review record | record | retained | — |
 | [Statement Audit: the Lean Formalization of Eleven-Square Optimality](docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md) | dated review record | record | retained | — |
 | [Adversarial Review: the Import of the Lean Formalization of Eleven-Square Optimality](docs/project/reviews/review-2026-10-06-n11-lean-formalization-adversarial.md) | dated review record | record | retained | — |
 | [wand125 Certificates of 3 and 4 October: Review of 28 Mixed Rectangle-Measure Bounds From `n = 42` to `n = 95`](docs/project/reviews/review-2026-10-05-wand125-october-4-certificates.md) | dated review record | record | retained | — |
@@ -5847,6 +5854,7 @@ round that names the hypothesis, control roles included.
 | [H-300](packing/campaign/hypotheses/H-300-n17-full-square-partner-region.md) | refuted | Full-square SAT nonzero region around exp288 witness | 1 | exp292completefreshSATmiss/34128minima;15/16negativewitnesses passextactwalls |
 | [H-301](packing/campaign/hypotheses/H-301-n17-paired-guard-conditioned-ownership.md) | refuted | Paired point and nonzero regional guard-conditioned ownership | 1 | Complete fresh-matched point miss; regional context skipped by monotonic inclusion |
 | [H-302](packing/campaign/hypotheses/H-302-n17-stages-replay-observations.md) | confirmed | Full exact replay with nested stage attribution | 1 | Accepted full same-object mathematical replay and nested stage observations; no speed gain |
+| [H-303](packing/campaign/hypotheses/H-303-n17-two-center-children.md) | needs review | Deterministic two closed centre children on the accepted exp293 point context | 1 | Registered point-first and fixed-cut regional construction; target unrun |
 
 ### Confirmed
 
@@ -6157,6 +6165,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-155-creative.yaml` | session-155 | 188 | 1.52 h | 1.49 h | 1.72 h | no |
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
 | `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
+| `codex-task-tree-session185-checkpoint.yaml` | session-185 | 1,321 | 9.23 h | 2.44 h | 2.45 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6170,8 +6179,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 127 |
-| unmeasured | 57 |
+| measured | 128 |
+| unmeasured | 56 |
 | **total** | **184** |
 
 <!-- END GENERATED: session-close-report -->
@@ -6188,7 +6197,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 223 rounds registered in `series-000`.
+There are 224 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5791.4 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6455,6 +6464,7 @@ archive beside it.
 | [exp-292](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-292-h300-full-square-partner-coupling.md) | 17 | target | H-300 | Complete full-square SAT minima | No positivepartner;freshmatchPASS | rejected |
 | [exp-293](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-293-h-301-guard-conditioned-ownership.md) | 17 | target | H-301 | Point-first paired guard-conditioned ownership | Fresh complete point miss; all992foreign rows survive, regional unstarted | rejected |
 | [exp-294](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-294-h-302-stages-exact-replay.md) | 17 | target | H-302 | Matched full exact replay with STAGES observations | Full mathematical baseline match and16stage boundaries | accepted |
+| [exp-295](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-295-h-303-two-center-children.md) | 17 | target | H-303 | Deterministic two closed centre children | Preparation registered; target unrun | in-progress |
 
 ### Cost and provenance
 
@@ -6683,10 +6693,11 @@ archive beside it.
 | exp-292 | Construction120s/fresh120s inside240s;4GiB perprocess sampled | 106.65s | — | criterion | FullsquareSAT/minimizerwallsecondary; no changedinput/domain |
 | exp-293 | Construction180s/fresh180s inside360s;4GiB per process sampled | 151.778s | — | criterion | Fresh complete point miss; regional skipped |
 | exp-294 | STAGES180s cooperative;TERM190/KILL200;4GiB per process sampled | 108.621s | — | criterion | Full same-object diagnostic replay; no speed gain |
+| exp-295 | Construction180s/fresh180s inside360s;4GiB per process sampled | — | — | — | Target unrun; no execution cost recorded |
 
-### What the 223 rounds jointly establish
+### What the 224 rounds jointly establish
 
-The 223 rounds use 2512.1 agent-minutes and 5791.4 wall-minutes under the campaign’s
+The 224 rounds use 2512.1 agent-minutes and 5791.4 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

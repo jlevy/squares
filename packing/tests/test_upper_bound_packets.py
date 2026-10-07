@@ -12,6 +12,7 @@ from devtools import apply_exact_optima as exact_optima
 from devtools import apply_upper_bound_packets as apply
 from devtools import upper_bound_packets as packets
 from devtools.check_case_prose import Reading
+from devtools.source_supersession import superseded_counts
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
@@ -115,6 +116,26 @@ def test_the_records_are_what_the_apply_tool_writes() -> None:
     assert apply.main(["--check"]) == 0
 
 
+def _historical_body(plan: apply.Plan) -> str:
+    """Audit this frozen packet's attributed prose independently of later selections."""
+    earlier = apply.earlier_reports()[plan.n]
+    return apply.packing_section(
+        plan,
+        "## The packing\n\nThe retained earlier construction.",
+        earlier["kingbird"],
+        earlier.get("unitsquare"),
+    )
+
+
+def _later_counts() -> set[int]:
+    coverage = safe_load(apply.COVERAGE.read_text())
+    return superseded_counts(
+        coverage,
+        {exact_optima.COVERAGE_ID}
+        | {registration.coverage_id for registration in apply.REGISTRATIONS},
+    )
+
+
 def test_a_case_trails_its_report_exactly_where_the_certificate_does() -> None:
     """Where a packet's certificate trails its printed side the record says so, except at
     the counts whose packing Evan Daniel solved exactly (T-098), which every trailing
@@ -128,6 +149,12 @@ def test_a_case_trails_its_report_exactly_where_the_certificate_does() -> None:
             .read_text(encoding="utf-8")
             .split("---\n")[1]
         )["packing"]
+        if plan.n in _later_counts():
+            # The newer report is separately reviewed; retain this packet's receipts
+            # and evidence without pretending its geometry is still the best known.
+            assert plan.registration.report in case["evidence"], plan.n
+            assert plan.registration.replay in case["evidence"], plan.n
+            continue
         agrees = bounds_agree_at_declared_precision(
             case["reported_upper_bound"], case["verified_upper_bound"]
         )
@@ -152,7 +179,7 @@ def test_shared_counts_state_both_sources_dates_and_values() -> None:
     for plan in apply.plans():
         if plan.casson is None:
             continue
-        body = (apply.FRONTIER / f"n-{plan.n:03d}.md").read_text(encoding="utf-8")
+        body = _historical_body(plan)
         # The sides are math; read back, each is the code span it was written as.
         flat = " ".join(Reading.of(body).text.split())
         assert f"`{plan.casson['side']}`" in flat, plan.n
@@ -216,7 +243,7 @@ def test_couzos_ai_statement_is_quoted_for_the_counts_it_names() -> None:
     for plan in apply.plans():
         if plan.registration.source.layout != "couzo":
             continue
-        body = (apply.FRONTIER / f"n-{plan.n:03d}.md").read_text(encoding="utf-8")
+        body = _historical_body(plan)
         flat = " ".join(body.split())
         quoted = "found the 102 and 103 packings \u201cwith the help of Claude\u201d"
         assert quoted in flat, plan.n
@@ -254,15 +281,16 @@ def test_a_later_registration_takes_a_count_and_keeps_the_earlier_packing() -> N
         assert earlier.registration.result == "T-056"
         assert plan.registration.result == "T-092"
         text = (apply.FRONTIER / f"n-{plan.n:03d}.md").read_text(encoding="utf-8")
-        _, front, body = text.split("---\n", 2)
+        _, front, _body = text.split("---\n", 2)
         case = safe_load(front)["packing"]
         # All seven are among Evan Daniel's exact optima (T-098), so both lanes hold
         # that side; the October packing stays the one the body describes.
-        assert case["reported_upper_bound"]["value"] == exact_optima.side_text(plan.n)
-        assert case["verified_upper_bound"]["value"] == exact_optima.side_text(plan.n)
+        if plan.n not in _later_counts():
+            assert case["reported_upper_bound"]["value"] == exact_optima.side_text(plan.n)
+            assert case["verified_upper_bound"]["value"] == exact_optima.side_text(plan.n)
         assert plan.registration.replay in case["evidence"], plan.n
         assert earlier.registration.replay in case["evidence"], plan.n
-        flat = " ".join(Reading.of(body).text.split())
+        flat = " ".join(Reading.of(_historical_body(plan)).text.split())
         assert f"It replaces his packing of side `{earlier.side}`" in flat, plan.n
         assert flat.count("earlier packing for this count") == 1, plan.n
         assert f"certified `s({plan.n}) ≤ {earlier.verified}` from it" in flat, plan.n

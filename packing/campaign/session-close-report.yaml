@@ -11,8 +11,8 @@ count: 184
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 127
-  sessions_unmeasured: 57
+  sessions_measured: 128
+  sessions_unmeasured: 56
   attributed:
     rollups: 297
     turns: 76355
@@ -35,9 +35,9 @@ totals:
     one_off_code: 7280
     wall_hours: 713.93
 codex_receipts:
-  attributed: 80
+  attributed: 81
   unattributed: 5
-  measured: 85
+  measured: 86
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -3217,9 +3217,19 @@ sessions:
   title: "n17 Complete Coupling and Exact Replay"
   status: in_progress
   primary_bead: think-tvxs
-  phases: 5
-  measured: false
-  unmeasured_reason: >-
-    declares no resource measurement
-  rollups: []
-  codex_receipts: []
+  phases: 6
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session185-checkpoint.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session185-checkpoint.yaml
+    model_responses: 1321
+    agent_hours: 9.23
+    active_union_hours: 2.44
+    wall_hours: 2.45
+    snapshot_incomplete: true

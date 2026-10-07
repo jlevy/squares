@@ -203,7 +203,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "ce733914a34ccdd6dd2985fa0feeda0db9b17167"
+DATA_REVISION = "cbc03234e54878041c33d6b9372eb26a324ab9ee"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -358,6 +358,17 @@ EXPLAINER_REVISED = "October 5, 2026"
 #: (think-2cqu).
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.7",
+        first_published="October 7, 2026",
+        result_scope=(
+            "The exposition review corrects the shorter symmetry proof's intermediate "
+            "counts and states both propagation rules, distinguishes cases from masks "
+            "and contact from a zero projection gap, limits the contact deformation "
+            "to its root neighborhood, puts figure symbols after their definitions, "
+            "and clarifies shared geometric code and the reported Lean formalization."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.6",
         first_published="October 6, 2026",
         result_scope=(
@@ -452,7 +463,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 6, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 7, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and

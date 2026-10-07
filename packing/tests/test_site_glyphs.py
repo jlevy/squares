@@ -57,7 +57,7 @@ EXPLAINER, PAPER = "n11-lower-bounds-explainer.html", "n11-optimality-review.htm
 THRESHOLD = "n11-threshold-bound-review.html"
 #: Every paper of the site, in reading order, as written here.
 PAPERS = (EXPLAINER, THRESHOLD, PAPER)
-#: Both retained review templates explicitly caption figures 1 through 12.
+#: Both retained review templates draw 12 captioned figures.
 REVIEW_FIGURES = {PAPER: 12, THRESHOLD: 12}
 #: The site's own pages measured here: a long report, whose headings, tables and block
 #: quotes hold formulas, and the homepage, whose cards, chips and tables do.
@@ -749,7 +749,7 @@ def test_every_paper_sets_every_figure_one_way(figures: list[dict[str, Any]]) ->
     ]
     assert problems == []
     # The check has something to hold: at a desktop width no figure of the paper scrolls,
-    # so each of its eleven drawings is held to the centre.
+    # so each of its twelve drawings is held to the centre.
     desktop = [row for row in figures if (row["page"], row["width"]) == (PAPER, 1280)]
     assert not [row["figure"] for row in desktop if row["scrolls"] or row["beside"]]
     assert all(abs(row["offset"]) <= measure.FIGURE_CENTRE_TOLERANCE for row in desktop)

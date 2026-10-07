@@ -2703,6 +2703,57 @@ def test_whole_escape_screen_uses_its_budget_unless_the_operator_sets_a_cap(
     assert context.timeout_seconds == timeout_seconds
 
 
+def test_screen_findings_match_the_current_retained_square_motions() -> None:
+    document = json.loads(
+        (validate.PROJECT_ROOT / "atlas/known-best/translation-escape-screen.json").read_text()
+    )["screen"]
+    cases = document["cases"]
+    assert [case["n"] for case in cases] == list(range(1, 325))
+    assert document["excluded"] == []
+    separating = [
+        sum(square["witness_kind"] == "strict-separating" for square in case["movable_squares"])
+        for case in cases
+    ]
+    moving = [len(case["movable_squares"]) for case in cases]
+    assert separating == [case["separating_square_count"] for case in cases]
+    assert moving == [case["movable_square_count"] for case in cases]
+    assert validate.SCREEN_FINDINGS[validate.KNOWN_BEST_CORPUS.label] == (
+        sum(count > 0 for count in separating),
+        sum(separating),
+        sum(count > 0 for count in moving),
+        sum(moving),
+    )
+
+
+@pytest.mark.parametrize("sample", [False, True])
+@pytest.mark.parametrize("stale", [False, True])
+def test_screen_output_guards_accept_current_and_refuse_previous_pose_findings(
+    monkeypatch: pytest.MonkeyPatch, *, sample: bool, stale: bool
+) -> None:
+    findings = validate._screen_findings()
+    if stale:
+        findings = (
+            "324 records screened, 120 with a square that separates (1867 squares), "
+            "302 with a square that translates at all (4511 squares), excluded: none"
+        )
+    output = (
+        "translation escape screen sample check passed: 12 of 324 records replayed "
+        f"(every 27th from n=1); retained screen: {findings}"
+        if sample
+        else f"translation escape screen check passed: {findings}"
+    )
+    monkeypatch.setattr(validate, "_module", lambda *_args: output)
+    action = (
+        validate._translation_escape_sample if sample else validate._translation_escape_screen
+    )
+    context = _budget_context(timeout_seconds=900.0, explicit=False)
+    if stale:
+        with pytest.raises(validate.StepFailureError, match="output omitted required text"):
+            action(context)
+    else:
+        assert action(context) == output
+
+
 @pytest.mark.parametrize(
     ("summary", "expected_scope", "expected_budget"),
     [("everything", "whole", validate.FAST_SUITE_BUDGET_SECONDS), ("narrow 7", "subset", None)],

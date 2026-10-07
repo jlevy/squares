@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from types import ModuleType
 from typing import Any
 
 import pytest
@@ -514,16 +515,63 @@ def test_cli_second_context_stop_retains_candidate_without_primary_claim(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     doc = descriptor(tmp_path, monkeypatch)
-    monkeypatch.setattr(tool, "GENERATED_VERTEX_LIMIT", 14)
     path, output = tmp_path / "paired.json", tmp_path / "partial.json"
     path.write_text(json.dumps(doc))
-    assert (
-        tool.main(["--descriptor", str(path), "--output", str(output), "--max-seconds", "30"])
-        == 1
+    # Other suite tests may import a forbidden producer; the independent CLI must
+    # start clean, while the caller's imported modules remain untouched.
+    monkeypatch.setitem(
+        sys.modules, "devtools.pilot_n17_capture", ModuleType("devtools.pilot_n17_capture")
     )
+    code = (
+        "from pathlib import Path; import sys; "
+        "from devtools import check_n17_guard_conditioned_ownership as t; "
+        "t.finite.REPO=Path(sys.argv[1]); t.GENERATED_VERTEX_LIMIT=14; "
+        "raise SystemExit(t.main(sys.argv[2:]))"
+    )
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            code,
+            str(tmp_path),
+            "--descriptor",
+            str(path),
+            "--output",
+            str(output),
+            "--max-seconds",
+            "30",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=40,
+        check=False,
+    )
+    assert completed.returncode == 1, completed.stderr + completed.stdout
     result = json.loads(output.read_bytes())
-    assert result["status"] == "incomplete"
+    assert result["status"] == "incomplete", result.get("error")
     assert result["point_guard_exclusion_candidate"]
     assert not result["criterion_met"]
     assert not result["declared_guard_exclusion_proved"]
+    assert all(result[key] is False for key in tool.scope())
+
+
+def test_cli_contaminated_process_refuses_before_geometry(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path, output = tmp_path / "descriptor.json", tmp_path / "refused.json"
+    path.write_text(json.dumps({"schema": tool.DESCRIPTOR_SCHEMA}))
+    monkeypatch.setitem(
+        sys.modules, "devtools.pilot_n17_capture", ModuleType("devtools.pilot_n17_capture")
+    )
+
+    def forbidden_intake(*_: Any, **__: Any) -> None:
+        pytest.fail("contaminated CLI reached geometry intake")
+
+    monkeypatch.setattr(tool.parent, "intake", forbidden_intake)
+    assert tool.main(["--descriptor", str(path), "--output", str(output)]) == 1
+    result = json.loads(output.read_bytes())
+    assert result["status"] == "refused"
+    assert result["error"] == "producer/kernel/root import in guard-owned checker"
+    assert not result["criterion_met"]
+    assert not result["verification_passed"]
     assert all(result[key] is False for key in tool.scope())

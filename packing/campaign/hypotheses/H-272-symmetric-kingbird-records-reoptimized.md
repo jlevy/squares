@@ -98,6 +98,11 @@ hypothesis:
 X-049’s census found that symmetry follows the source, not the family: 68 of the 97
 Kingbird-derived records are symmetric at $10^{-6}$, and none of the 50
 optimizer-derived packets.
+
+The 68 targets and the dated premises above remain the 2026-10-02 baseline, recoverable
+from the family census at commit `69ddc7d988ba689cf887bdd0cb7fd64fdcf8c103`. The linked
+census file is a live generated view; later atlas refreshes do not change this
+hypothesis’s target population or thresholds.
 Two readings fit. Optimizers stop short of symmetric optima, which the packets’ 2,400
 slack squares make plausible, or the catalogue’s drawings impose a symmetry the optimum
 does not have.

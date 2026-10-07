@@ -2127,7 +2127,8 @@ def test_every_website_card_opens_a_place_the_record_cites(
     David Ellsworth's catalogue, the record's `[Kingbird]`, is there and leads the
     section, ahead of Friedman's original page and Evan Daniel's atlas, and its card
     counts exactly the results the register files under the catalogue's venue. No
-    website is on GitHub, and every address `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES`
+    GitHub website is an issue or discussion rather than a repository, and every address
+    `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES`
     name is listed."""
     texts = [
         path.read_text(encoding="utf-8")
@@ -2139,7 +2140,9 @@ def test_every_website_card_opens_a_place_the_record_cites(
     for url, name, author, note in sites:
         whole = re.compile(re.escape(url) + r"""(?=[\s)\]>"'`|]|$)""", re.MULTILINE)
         assert any(whole.search(text) for text in texts), url
-        assert urlsplit(url).hostname != "github.com", url
+        parsed = urlsplit(url)
+        if parsed.hostname == "github.com":
+            assert re.fullmatch(r"/[^/]+/[^/]+/(?:issues|discussions)/[0-9]+", parsed.path), url
         assert all((name, author, note)), url
     assert [urlsplit(url).hostname for url, _, _, _ in overview_sections.CATALOGUE_SITES] == [
         "kingbird.myphotos.cc",
