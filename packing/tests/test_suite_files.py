@@ -7,7 +7,9 @@ import os
 import random
 import subprocess
 import sys
+from copy import deepcopy
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -737,3 +739,327 @@ def test_the_cli_refuses_more_than_one_public_fast_part(
 ) -> None:
     assert validate.main([*arguments, "--list"]) == 2
     assert message in capsys.readouterr().err
+
+
+_LOCAL_FILES = ["packing/tests/test_local_a.py", "packing/tests/test_local_b.py"]
+
+
+def _local_report() -> dict[str, Any]:
+    report = suite_files.report_document(
+        {_LOCAL_FILES[0]: (2, 4.0), _LOCAL_FILES[1]: (1, 0.125)},
+        shard=None,
+        environment={"PACKING_VALIDATED_SHA": "local-tree-provenance"},
+        exit_status=0,
+    )
+    report["module_scope"] = {
+        "requested_files": list(_LOCAL_FILES),
+        "keyword": "",
+        "markexpr": "",
+        "collection_patterns": {
+            "python_files": ["test_*.py"],
+            "python_classes": ["Test"],
+            "python_functions": ["test"],
+        },
+        "collection_overrides": [],
+        "collection_controls": {
+            "ignore": [],
+            "ignore_glob": [],
+            "deselect": [],
+            "confcutdir": None,
+            "noconftest": False,
+            "pyargs": False,
+            "keepduplicates": False,
+            "lf": False,
+            "stepwise": False,
+            "stepwise_skip": False,
+            "setuponly": False,
+            "setupplan": False,
+            "collectonly": False,
+        },
+        "deselected_tests": 0,
+        "collected_tests": {_LOCAL_FILES[0]: 2, _LOCAL_FILES[1]: 1},
+    }
+    return report
+
+
+def _historical_cost_record() -> dict[str, Any]:
+    return {
+        "schema": suite_files.COSTS_SCHEMA,
+        "shards": 4,
+        "target_ceiling_seconds": [131, 154, 154, 131],
+        "recorded_from": ["shard 1/4: historical hosted cohort"],
+        "files": {"packing/tests/test_historical.py": 19.125},
+        "other_historical_metadata": {"preserved": True},
+    }
+
+
+def test_local_admission_preserves_historical_costs_and_names_only_local_additions() -> None:
+    existing = _historical_cost_record()
+    untouched = deepcopy(existing)
+    first, second = _local_report(), _local_report()
+    second["files"][0]["seconds"] = 16.0
+    second["seconds"] = 16.125
+    document = suite_files.admit_local(
+        existing,
+        [first, second],
+        files=_LOCAL_FILES,
+        report_sources=[
+            "packing/devtools/local-report-1.json",
+            "packing/devtools/local-report-2.json",
+        ],
+    )
+    assert existing == untouched
+    assert document["files"] == {
+        **existing["files"],
+        _LOCAL_FILES[0]: 8.0,
+        _LOCAL_FILES[1]: 0.125,
+    }
+    for name in (
+        "recorded_from",
+        "shards",
+        "target_ceiling_seconds",
+        "other_historical_metadata",
+    ):
+        assert document[name] == existing[name]
+    admission = document["local_admissions"][0]
+    assert admission["method"] == "successful-unsharded-unfiltered-whole-module-local-reports"
+    assert admission["files"] == _LOCAL_FILES
+    assert admission["reports"][0]["provenance"] == first["provenance"]
+    assert admission["reports"][0]["tests"] == 3
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("exit_status", 1, "not successful"),
+        ("exit_status", False, "integer pytest exit_status"),
+        ("schema", "legacy", "not a.*report"),
+        ("shard", "1/2", "unsharded"),
+        ("provenance", {"GITHUB_RUN_ID": "hosted"}, "hosted provenance"),
+        ("tests", 2, "rows total"),
+        ("seconds", 99.0, "rows total"),
+        ("module_scope", None, "collection metadata"),
+    ],
+)
+def test_local_admission_refuses_nonlocal_failed_or_malformed_reports(
+    field: str, value: Any, message: str
+) -> None:
+    report = _local_report()
+    report[field] = value
+    existing = _historical_cost_record()
+    untouched = deepcopy(existing)
+    with pytest.raises(SuiteFilesError, match=message):
+        suite_files.admit_local(
+            existing, [report], files=_LOCAL_FILES, report_sources=["report.json"]
+        )
+    assert existing == untouched
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("keyword", "one", "keyword or marker"),
+        ("markexpr", "not slow", "keyword or marker"),
+        ("deselected_tests", 1, "deselected"),
+        ("deselected_tests", False, "deselected"),
+        (
+            "collected_tests",
+            {_LOCAL_FILES[0]: 3, _LOCAL_FILES[1]: 1},
+            "whole-module collection",
+        ),
+        (
+            "collected_tests",
+            {_LOCAL_FILES[0]: True, _LOCAL_FILES[1]: 1},
+            "whole-module collection",
+        ),
+        (
+            "requested_files",
+            [_LOCAL_FILES[0] + "::test_one", _LOCAL_FILES[1]],
+            "whole behavioural",
+        ),
+        ("requested_files", [_LOCAL_FILES[0]], "module roster"),
+        ("collection_patterns", None, "nonstandard collection"),
+        ("collection_overrides", ["python_functions=test_one"], "nonstandard collection"),
+        ("collection_controls", {"ignore": ["test_hidden.py"]}, "nonstandard collection"),
+    ],
+)
+def test_local_admission_refuses_partial_module_measurements(
+    field: str, value: Any, message: str
+) -> None:
+    report = _local_report()
+    report["module_scope"][field] = value
+    with pytest.raises(SuiteFilesError, match=message):
+        suite_files.admit_local(
+            _historical_cost_record(),
+            [report],
+            files=_LOCAL_FILES,
+            report_sources=["report.json"],
+        )
+
+
+def test_local_admission_requires_exact_new_module_roster() -> None:
+    existing = _historical_cost_record()
+    for names, message in [
+        ([], "non-empty"),
+        ([_LOCAL_FILES[0]], "exactly"),
+        ([_LOCAL_FILES[0], _LOCAL_FILES[0]], "repeats module"),
+        (["packing/tests/test_historical.py"], "cannot replace"),
+        (["packing/tests/../test_escape.py"], "whole behavioural"),
+        (["packing/tests/test_local_a.py/../../test_escape.py"], "whole behavioural"),
+        (["other/test_outside.py"], "whole behavioural"),
+    ]:
+        with pytest.raises(SuiteFilesError, match=message):
+            suite_files.admit_local(
+                existing, [_local_report()], files=names, report_sources=["report.json"]
+            )
+    incomplete = _local_report()
+    del incomplete["shard"]
+    with pytest.raises(SuiteFilesError, match="unsharded"):
+        suite_files.admit_local(
+            existing, [incomplete], files=_LOCAL_FILES, report_sources=["report.json"]
+        )
+
+
+def test_local_admission_command_updates_only_after_complete_validation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(suite_files, "REPO", tmp_path)
+    monkeypatch.setattr(suite_files, "DEFAULT_ROOTS", (tmp_path / "packing/tests",))
+    module_paths = [tmp_path / name for name in _LOCAL_FILES]
+    for path in module_paths:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("def test_one(): pass\n", encoding="utf-8")
+    report_path, costs_path = tmp_path / "report.json", tmp_path / "costs.json"
+    report_path.write_text(json.dumps(_local_report()), encoding="utf-8")
+    existing = _historical_cost_record()
+    costs_path.write_text(json.dumps(existing), encoding="utf-8")
+    arguments = [
+        "admit-local",
+        str(report_path),
+        "--costs",
+        str(costs_path),
+        "--files",
+        *(str(path) for path in module_paths),
+    ]
+    assert suite_files.main(arguments) == 0
+    admitted = costs_path.read_bytes()
+    document = json.loads(admitted)
+    assert document["recorded_from"] == existing["recorded_from"]
+    assert document["files"]["packing/tests/test_historical.py"] == 19.125
+    assert document["local_admissions"][0]["reports"][0]["report"] == "report.json"
+    assert suite_files.main(arguments) == 2
+    assert "cannot replace recorded" in capsys.readouterr().err
+    assert costs_path.read_bytes() == admitted
+
+
+def test_cost_plugin_records_actual_whole_module_scope_and_filtering(tmp_path: Path) -> None:
+    module = tmp_path / "test_scope.py"
+    module.write_text(_PROBE_FILES["test_alpha.py"], encoding="utf-8")
+    whole_path, filtered_path, node_path = [
+        tmp_path / f"{name}.json" for name in ("whole", "filtered", "node")
+    ]
+    runs = [
+        _probe(tmp_path, f"--test-file-costs={whole_path}", test_root=module),
+        _probe(tmp_path, f"--test-file-costs={filtered_path}", "-k", "one", test_root=module),
+        _probe(
+            tmp_path,
+            f"--test-file-costs={node_path}",
+            test_root=Path(str(module) + "::test_one"),
+        ),
+    ]
+    for run in runs:
+        status, output = _finish(run)
+        assert status == 0, output
+    name = suite_files.repository_path(module)
+    whole = suite_files.read_report(whole_path)["module_scope"]
+    assert whole["requested_files"] == [name]
+    assert whole["collected_tests"] == {name: 2}
+    assert whole["deselected_tests"] == 0
+    assert whole["keyword"] == ""
+    filtered = suite_files.read_report(filtered_path)["module_scope"]
+    assert filtered["collected_tests"] == {name: 1}
+    assert filtered["deselected_tests"] == 1
+    assert filtered["keyword"] == "one"
+    node = suite_files.read_report(node_path)["module_scope"]
+    assert node["requested_files"] == [name + "::test_one"]
+
+
+def test_local_admission_refuses_a_real_collection_override_that_hides_a_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = tmp_path / "packing/tests/test_probe.py"
+    module.parent.mkdir(parents=True)
+    module.write_text(
+        "def test_one():\n    pass\n\ndef test_two():\n    assert False\n", encoding="utf-8"
+    )
+    report_path = tmp_path / "filtered-collection.json"
+    run = _probe(
+        tmp_path,
+        f"--test-file-costs={report_path}",
+        "-o",
+        "python_files=test_*.py",
+        "-o",
+        "python_functions=test_one",
+        test_root=module,
+    )
+    status, output = _finish(run)
+    assert status == 0, output
+    report = suite_files.read_report(report_path)
+    assert report["tests"] == 1
+    assert report["module_scope"]["deselected_tests"] == 0
+    assert report["module_scope"]["collection_patterns"]["python_functions"] == ["test_one"]
+    monkeypatch.setattr(suite_files, "DEFAULT_ROOTS", (module.parent,))
+    with pytest.raises(SuiteFilesError, match="nonstandard collection"):
+        suite_files.admit_local(
+            _historical_cost_record(),
+            [report],
+            files=[suite_files.repository_path(module)],
+            report_sources=["filtered-collection.json"],
+        )
+
+
+@pytest.mark.parametrize(
+    ("option", "control"),
+    [
+        ("--setup-only", "setuponly"),
+        ("--setup-plan", "setupplan"),
+        ("--collect-only", "collectonly"),
+    ],
+)
+def test_local_admission_refuses_real_nonexecution_modes(
+    option: str, control: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = tmp_path / "test_unexecuted.py"
+    module.write_text(
+        "def test_one():\n    pass\n\ndef test_two():\n    assert False\n", encoding="utf-8"
+    )
+    report_path = tmp_path / "unexecuted.json"
+    run = _probe(
+        tmp_path,
+        "-c",
+        str(PROJECT_ROOT / "pyproject.toml"),
+        option,
+        f"--test-file-costs={report_path}",
+        test_root=module,
+    )
+    status, output = _finish(run)
+    assert status == 0, output
+    report = suite_files.read_report(report_path)
+    assert report["module_scope"]["collection_controls"][control] is True
+    assert (
+        report["module_scope"]["collection_patterns"]
+        == _local_report()["module_scope"]["collection_patterns"]
+    )
+    if control == "setuponly":
+        assert report["tests"] == 2
+        assert report["module_scope"]["collected_tests"] == {
+            suite_files.repository_path(module): 2
+        }
+    monkeypatch.setattr(suite_files, "DEFAULT_ROOTS", (module.parent,))
+    with pytest.raises(SuiteFilesError, match=r"nonstandard collection|non-empty files"):
+        suite_files.admit_local(
+            _historical_cost_record(),
+            [report],
+            files=[suite_files.repository_path(module)],
+            report_sources=["unexecuted.json"],
+        )
