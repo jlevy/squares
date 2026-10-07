@@ -5,30 +5,34 @@
 **Author:** Codex (Sol engineering; Astra network and source review), for the squares
 project
 
-**Status:** Research complete for documented workflows and this session’s measured
-channels. Publication remains blocked; a repaired connection or normal coding-task
-publication has not been tested here.
+**Status:** Publication access repaired and verified by actual pushes and draft PRs.
+CI and review remain pending; no merge is recorded.
 
 **Tracking:** `think-wzdn`, under `think-mc4u`
 
 ## Overview
 
-Codex Cloud normally supports opening pull requests after a coding task.
-This session is an environment-setup conversation that also completed an eleven-packing
-import. Its GitHub reads succeed, but actual Git pushes, GraphQL PR creation, and REST
-branch and PR creation are denied.
-Authenticated direct connections fail before an HTTP response.
-The practical question is how to publish this completed work through a supported channel
-without losing its branches or repeating its scientific checks.
+The owner explicitly chose **All repositories** for the existing Codex GitHub
+installation. Fresh reads then showed the target repository as accessible, and the agent
+pushed both prepared branches and opened the draft stack:
 
-The current connection’s accessible repository list excludes `jlevy/squares`, giving a
-concrete repository-selection or effective-access mismatch to investigate first.
-Check the existing Codex installation’s selection and add the target alongside existing
-repositories if missing; if already included, refresh the connection rather than
-repeating selection changes.
-Actual publication must verify the repair.
-A normal coding task remains a documented workflow, not a verified fix.
-Independently checked Git bundles preserve the completed work.
+- [PR #415](https://github.com/jlevy/squares/pull/415): registration,
+  `codex/import-squish-401` against `main`
+- [PR #416](https://github.com/jlevy/squares/pull/416): confirmation,
+  `codex/confirm-squish-401` against the registration branch
+
+These writes verified the repair through the mediated GitHub route in this session.
+The authenticated elevated direct probe still failed with TCP connection refused just
+before the access change.
+The successful writes do not establish direct egress or which raw credential the
+intermediary forwarded.
+
+The restored environment passes all five repository bootstrap checks.
+Both original source heads remain unchanged, and independent standalone recovery
+verified their histories and trees.
+No new task or mathematical replay was needed to publish them.
+The pre-repair failures below explain the access diagnosis and remain historical
+evidence, rather than the current publication status.
 
 ## Questions to Answer
 
@@ -45,8 +49,9 @@ this repository’s scoped GitHub CLI setup recipe, and actual publication respo
 workflows and the ChatGPT GitHub app.
 It does not change credentials, network policy, TLS verification, repository remotes,
 source geometry, or validation budgets.
-It does not claim that a new task, a different token-delivery setting, or a reconnection
-has already repaired publication.
+The observed repair was the owner’s repository-access change, followed by successful
+publication in this session.
+Other credential-delivery experiments were not needed.
 
 ## Findings
 
@@ -94,7 +99,7 @@ The [GitHub integration guide][github-review] describes code review on an existi
 and `@codex`-triggered legacy cloud chats.
 A fix can be pushed “when it has permission to do so.”
 This is useful after publication; it is not evidence that a read-only connection can
-bootstrap the currently unpublished branches.
+bootstrap unpublished branches.
 
 ### Destination Policy and Credential Delivery Are Separate
 
@@ -140,20 +145,20 @@ probe failed with TCP connection refused in both ordinary and elevated execution
 A further bounded read with all HTTP, HTTPS, and ALL proxy variables unset also failed.
 None reached GitHub HTTP authentication, so none diagnoses an invalid token.
 
-### Current Publication Responses Refuse Writes
+### Pre-Repair Publication Responses Refused Writes
 
-These are actual write requests, not dry runs.
+Before the repair, the agent made these actual write requests.
 `gh` is pinned at version 2.97.0. Mediated reads identify `jlevy`, report repository
 `viewerPermission: ADMIN`, and see remote `main` at the validated public base.
-Neither feature branch nor a PR is published.
+At that point, neither feature branch nor a PR was published.
 Tool discovery in this setup session exposed no GitHub write MCP.
 
 | Channel | Actual result | What it establishes |
 | --- | --- | --- |
-| Git push of both final feature branches | Exit 128, HTTP 403, permission denied | Existing Git channel refuses these branch writes |
-| GraphQL `createPullRequest` | Exit 1, “Resource not accessible by integration” | Existing GraphQL PR channel refuses creation |
-| REST `POST /repos/jlevy/squares/git/refs` | HTTP 403, same integration message; genuine GitHub request ID | The alternate branch-reference route also refuses the request |
-| REST `POST /repos/jlevy/squares/pulls` | HTTP 403, same integration message; genuine GitHub request ID | The alternate draft-PR route also refuses the request |
+| Git push of both final feature branches | Exit 128, HTTP 403, permission denied | Git channel refused these branch writes before repair |
+| GraphQL `createPullRequest` | Exit 1, “Resource not accessible by integration” | GraphQL PR channel refused creation before repair |
+| REST `POST /repos/jlevy/squares/git/refs` | HTTP 403, same integration message; genuine GitHub request ID | Alternate branch-reference route refused the request before repair |
+| REST `POST /repos/jlevy/squares/pulls` | HTTP 403, same integration message; genuine GitHub request ID | Alternate draft-PR route refused the request before repair |
 | Authenticated direct API in ordinary and elevated execution | TCP connection refused | No supported direct route was demonstrated; authentication was not evaluated by GitHub |
 
 The branch REST response lists accepted required permissions `contents=write` or
@@ -162,14 +167,14 @@ documents these in [permissions required for GitHub Apps][github-permissions]. T
 headers describe endpoint requirements, not permissions actually granted to the
 presented credential.
 They do not prove that the owner’s configured token is invalid or missing a particular
-permission. An integration restriction, credential routing, or platform-side
-authorization still needs diagnosis by the connection owner or support.
-The current evidence is sufficient to stop repeating unchanged requests.
+permission. At that stage, an integration restriction, credential routing, or
+platform-side authorization remained possible explanations.
+Those failures justified changing effective access before repeating the requests.
 
-### The Target Is Absent from the Accessible Installation Intersection
+### Pre-Repair Reads Excluded the Target
 
 The `jlevy` installation of `chatgpt-codex-connector` declares contents, pull-request
-and workflow write permissions and uses selected repositories.
+and workflow write permissions and initially used selected repositories.
 Two separately verified authenticated reads returned `total_count: 1` with no target
 match by `jlevy/squares` or repository ID. GitHub describes this as the
 [repositories accessible to the authenticated user for an installation][installation-access].
@@ -182,16 +187,17 @@ attempted to add only the target, using explicit current API version `2026-03-10
 returned HTTP 403, “Resource not accessible by integration,” with endpoint-required
 permission `installation_repositories=write`. That header describes a requirement, not
 an actual grant. Readback still excluded the target.
-No other repository was removed or added, and no all-repositories grant was requested.
+The agent-side attempt changed no repository selection.
+The owner later explicitly chose All repositories in GitHub’s settings, as recorded
+below.
 
 After the owner opened the exact installation-settings page and requested another try, a
 fresh proactive-authentication push still returned HTTP 403. A current-version, no-cache
 read also excluded the target.
 This does not establish that the owner failed to save, or that the actual installation
 inventory omits the repo: an effective credential or connection view can differ.
-If the GUI already includes the target, refresh the Codex GitHub connection or ask
-support to diagnose that discrepancy rather than removing and re-adding repositories in
-a loop.
+This retry preceded the owner’s All repositories change and the verified publication
+below.
 
 The explicit environment-token test used the official GitHub CLI helper and
 [Git 2.52 proactive Basic authentication][git-auth]; a marker verified credential GET
@@ -199,41 +205,48 @@ invocation without recording credential output.
 This client-level route also returned HTTP 403. Token forwarding beyond the intermediary
 and raw token validity remain unknown.
 
+### Observed Access Repair and Publication
+
+After the owner chose All repositories, a fresh `GET /user/installations` reported
+installation `100851868` with `repository_selection: all`, updated at
+`2026-10-07T19:03:48Z`. A paginated, no-cache read of that installation’s accessible
+repositories returned `total_count: 157`, including `jlevy/squares`, repository
+`1299872453`, with `push` and `admin` true.
+
+The agent then used the official GitHub CLI credential helper with proactive Git Basic
+authentication. The registration push at `6d0546b4c8949d9775d1a99865ec4e7277251cc7`
+succeeded, and `gh` created draft PR #415 against `main`. The confirmation push at
+`8f3c5484b9bade9cdf5c8fe332f2d5e6c2e016ac` succeeded, and `gh` created draft PR #416
+against the registration branch.
+Both PRs are linked in formal stack #417. Separate remote membership queries confirm
+that stack for each PR, with the exact preserved heads and the expected branch bases.
+The owner’s access change and the subsequent actual writes establish that the mediated
+publication route works for this repository now.
+They do not establish the intermediary’s credential-forwarding details.
+
 ## Options Considered
 
-| Option | Support and present evidence | Next action |
+| Option | Support and observed result | Disposition |
 | --- | --- | --- |
-| Normal Codex coding-task publication | Official workflow; not a verified repair of the current access mismatch | Repair or refresh repository access first; recover prepared refs explicitly if a new task is needed |
-| Targeted installation or connection repair | Target absent from the accessible intersection; single-target API repair denied | Check GUI inclusion, add alongside existing selection only if missing, otherwise refresh connection; verify actual publication |
-| Distinct network-secret delivery | HTTPS placeholder substitution is documented; precedence over injected GitHub auth is unknown | If chosen, have the owner securely bind their credential to a distinct network-secret key, preserve the direct `GH_TOKEN` binding, and test actual results; copying or extracting a saved vault value is not assumed |
-| Existing mediated `gh`, Git, GraphQL, or REST | All tested write routes refused the request | Preserve logs and provide request IDs to support; do not repeat unchanged probes |
-| Scoped direct `NO_PROXY` | Repository recipe, conditional on direct egress | Unavailable here after ordinary and elevated TCP refusals |
-
-No token extraction, hidden relay, alternate-host tunnel, remote rewrite, TLS bypass, or
-unsupported proxy interception is needed or recommended.
+| Installation repository-access repair | Owner chose All repositories; fresh accessible-target read and actual pushes and PR creation succeeded | Completed; preserve the owner’s chosen selection |
+| Existing mediated Git and `gh` | Both prepared branches and draft PRs published after repair | Use for this stack’s publication and review |
+| Normal Codex coding-task publication | Official documented workflow | Available for future coding work; task switching was unnecessary for this repair |
+| Distinct network-secret delivery | Documented substitution; precedence over injected authentication remains unknown | Experiment not needed |
+| Scoped direct `NO_PROXY` | Ordinary and elevated probes failed before GitHub HTTP authentication | No working direct route demonstrated |
 
 ## Recommendations
 
-First check the existing Codex installation’s repository selection in GitHub: **Settings
-\> Applications > Installed GitHub Apps**, then configure the connector installed on
-`jlevy`. Add `jlevy/squares` alongside the existing selection if missing and save; do
-not replace existing repositories or switch to all repositories for this one repair.
-The exact settings URL is in the external handoff.
-Have the agent verify accessible target membership and an actual push after a meaningful
-access change.
+Continue review and CI on PR #415 and PR #416 using the repaired connection.
+Keep the registration and confirmation stages linked as a formal stack, and obtain merge
+consent separately.
+The owner’s All repositories selection is the current choice; another
+selection change is unnecessary for this completed repair.
 
-If the GUI already lists `jlevy/squares` or allows all repositories, refresh the Codex
-GitHub connection and verify its effective repository access.
-The agent-side selection PUT was denied.
-Give support the discrepancy between the GUI, accessible-intersection read and actual
-denied request if refresh does not repair it.
-Do not infer an invalid owner token or ask the owner to paste it into chat.
-
-Normal coding-task publication remains the documented product flow after access is
-repaired. If a new task is needed, explicitly recover the bundle and prepared
-descriptions; merely starting a task does not prove the access mismatch is fixed.
-The agent can perform recovery and publication without requiring the user to run
-terminal commands.
+For a future access failure, compare the target’s effective installation access with an
+actual bounded publication request.
+Read permission or declared app write permission alone did not settle this session’s
+diagnosis. Avoid inferring token invalidity from a connection refusal or an
+integration-denied response.
 
 ### Recover the Completed Work Explicitly
 
@@ -277,25 +290,22 @@ complete source baseline.
 Latest full tracker history is retained in
 `squares-401-native-tracker-installation-access.bundle`; prior bundles remain intact.
 
-After recovery, create the registration PR against `main` and the confirmation layer
-against the registration branch, preserving the two reviewable stages.
-Follow this repository’s formal stack-link procedure if both are created.
-Attach actual URLs, wait for all CI, and obtain merge consent separately.
-No mathematical replay is needed merely to move the same verified source bytes to a
-supported publisher.
+Recovery is complete, with both original heads preserved and both draft PRs published in
+verified formal stack #417. Attach review evidence, wait for CI, and obtain merge
+consent separately. No mathematical replay is needed merely to move the same verified
+source bytes to a supported publisher.
 
 ## Next Steps
 
-- [x] Preserve both source histories, complete native tracker history, descriptions, and
-  actual publication logs; verify independent standalone source restoration.
-- [x] Distinguish documented workflows from tested channels and untested repairs.
-- [ ] Check target inclusion in the existing installation GUI; add alongside existing
-  repositories if missing, otherwise refresh the Codex connection.
-  Verify accessible target membership and one actual push after meaningful change.
-- [ ] If writes remain denied, repair the Codex connection or obtain platform support
-  using the request IDs; retain `think-mc4u` and `think-crhh` as blocked.
-- [ ] Verify actual branch publication and PR URLs, wait for CI, and request merge
-  consent before publishing the main-based author reply.
+- [x] Preserve source and tracker histories and descriptions; verify independent
+  standalone source restoration and unchanged original branch heads.
+- [x] Restore the environment and pass all five repository bootstrap checks.
+- [x] Verify the owner’s All repositories selection and fresh accessible target
+  membership.
+- [x] Push both original branches and create draft PR #415 and draft PR #416.
+- [x] Link both PRs as formal stack #417 and verify both remote memberships and bases.
+- [ ] Finish review attachments and wait for hosted CI.
+- [ ] Obtain merge consent before merging or publishing the main-based author reply.
 
 ## Methodology
 
