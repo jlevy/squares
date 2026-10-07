@@ -978,6 +978,14 @@ session:
     use retained artifacts/internal ceilings.
   - H286/exp272 registered after61targetfreecontrols and completeindependentmechanicaldeadlinefix;
     actualleafunrun.
+  - H286/exp272 adapterreadiness accepted11.23s clean0c11fe165; all17 endpoint witnesses/49zero-containing
+    intervals retained, geometryunresolved andalllocal/wide enclosuresfailinclusion.
+  - Reviewed retainedPOSIXsupervisor5controls author2.61s/independent2.39s; sampledcurrentRSS
+    andownedgroup TERM/KILL, repairedcadence beforeanytarget.
+  - Pushcheck0c11 liveworkingtree456.39s failed lint/type/integrity/docfloor and reachable300s
+    timeout/eightpytestfailures; retainedphaseartifacts identify known-best corpus
+    poolheavy test and mixed8xdist/PACK_JOBS2 topology. Source/test/layout/docrepairs
+    active, nofullPASS.
   stop_reason: null
   next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous
     validation beside research.

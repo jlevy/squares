@@ -110,7 +110,10 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-269-positive-continuous-cone",
         "exp-270-coarse-slider-floor",
         "exp-271-tail-a-standing-admission",
-        "exp-272-endpoint-prefix-capture",
+        "exp-272-saved-prefix-capture-adapter",
+        "exp-273-tail-a-dependency-inventory",
+        "exp-274-current-tail-b-replication",
+        "exp-275-capture-cap-root-join",
     )
 )
 

@@ -52,21 +52,38 @@ experiment:
       update, retry, threshold/domain tuning or unregistered evaluation. Preserve
       failure/incomplete stdout/stderr and execution evidence.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-272-saved-prefix-capture-adapter
-  results: []
+    commit: 0c11fe165e08c12d7f81d977ae1c2dd6b271abc0
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Fresh bounded saved-prefix replay passes with exact seed/node/root/frame/17-label
+      custody, original capture_cap=None wall equivalence, complete one-step stall,
+      all17 full-root endpoint boxes retained and every derived coordinate/slider/q
+      interval containing zero. Detailed exact finite bounds are retained. Geometric
+      status unresolved is valid; no terminal success, exclusion, admission or census
+      change is required or claimed.
+    outcome: criterion_met
+    checked_by: Fresh producer-free fullsaved PASS_SAVED_STALL/oneupdate; exact originalsource/seed/node/root/frame/capNone
+      joins,17fullrootendpoint witnesses,49coordinate/angle/slider/v9 intervals allcontainzero.
+      IndependentAstra receipt assessment clear; no optionalterminal inputs.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Fresh bounded saved-prefix replay passes with exact seed/node/root/frame/17-label
       custody, original capture_cap=None wall equivalence, complete one-step stall,
       all17 full-root endpoint boxes retained and every derived coordinate/slider/q
       interval containing zero. Detailed exact finite bounds are retained. Geometric
       status unresolved is valid; no terminal success, exclusion, admission or census
       change is required or claimed.
-    reason: Registered before actualleaf bounds after sole-Astra mathematical review
-      and independentSol61targetfreecontrols including remainingparenttime/no-child-after-expiry
-      fixes. Exactsource/descriptor frozen by registration commit.
-  lease:
-    expires: '2026-10-07T10:56:25Z'
-    host: macOS arm64
+    reason: Adapterreadiness passes11.23s; all29position and16halfangle enclosures
+      fail bothlocal/wide inclusion; a,b,z andthin-v9/coarse9-11 premises also fail
+      enclosureinclusion. These are incompletebounds, not physical violations. Globalcapture/terminalproof
+      remainsopen.
+    needs_review: false
+  effort:
+    timebox: Parent180s includesfreshchild<=60s; TERM180/KILL190
+    wall_seconds: 11.23
+    stopped_by: criterion
 ---
 # exp-272: Saved-Prefix Capture Readiness
 
@@ -99,6 +116,17 @@ The enclosing supervisor sends TERM at 180 and KILL at 190. A resource stop is
 incomplete; invalid custody, truncated or oversized inputs, unsupported node premises,
 missing endpoint pieces or a refused replay are refused.
 No failed control is packing evidence or global coverage.
+
+## Observed Outcome
+
+At clean source `0c11fe165`, the command and fresh replay completed in 11.23 seconds.
+All 17 full-root endpoint witnesses survive, and all 49 retained intervals contain zero.
+The geometric status is `unresolved`: all 29 position and all 16 half-angle enclosures
+fail both local and wide domain inclusion.
+The slider and coarse-floor premises also remain unestablished.
+These enclosure failures show the current capture gap; they do not show that any
+physical packing violates those domains.
+No terminal, exclusion, admission or census change follows.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

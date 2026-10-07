@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 220 | 54 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 201 | 73 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 222 | 55 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
+| Experiments | 204 | 74 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 3 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -573,6 +573,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Session 184: n11 First-Round Readiness Objects](packing/campaign/retained/session-184-n11-readiness/README.md) | typed session record | record | retained | — |
 | [n17 Proof Interfaces and Finite-Angle LP Contract](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md) | research synthesis | record | retained | — |
 | [n17 Ten-Hour Overnight Session](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | current | transient | — |
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
@@ -4923,22 +4924,22 @@ name.
 
 | Hypothesis | Ledger status | What it would establish | Blocker, and the next step the record names |
 | --- | --- | --- | --- |
-| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle, the first optimality statement with an equality case for a family containing Trump’s packing | Confirmed by [exp-232](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-232-h236-rung-zero-closed.md); after the Fable max review, registered as `T-035` (the reduction, `V4/C5`) and `T-036` (the composed theorem, `V3/C0` until the BC-241 checker’s replay passes again) |
-| [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | Whether a full verified angle search is a bounded program, by measuring $c$ and $V(\varepsilon)$ | Registered to run on the `H-236` cell-tree driver once admitted (prerequisite `think-nbij`), at an estimated hour |
-| [H-112](packing/campaign/hypotheses/H-112-six-axis-five-common-angle-optimum.md) | blocked | Rung 1: any improvement on Trump has a different multiplicity or more orientation classes | Priced out by exp-231 with the present relaxation; needs a per-node bound that closes rung 0’s box in far fewer nodes |
-| [H-113](packing/campaign/hypotheses/H-113-at-most-two-angle-optimum.md) | blocked | Rung 3: Stromquist’s Theorem 3 with $\lbrace 0^{\circ}, 45^{\circ}\rbrace$ replaced by every pair of orientations | Depends on rungs 0–2 |
-| [H-155](packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold cover on one owner class: the corner two-band count the PR 230 review calls the cheapest sound next form | Not instrument-ready; needs the adaptive parent-core producer; posed at $96/25$ |
-| [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Every minimizer captured or excluded by a complete typed cover | The BC-245 to BC-247 contract, endpoint and completeness controls are not ready; price one nontrivial complete branch |
-| [H-117](packing/campaign/hypotheses/H-117-forced-angle-complexity.md) | open question | At most $k < 11$ orientation classes in some minimizer | No complete structural argument; X-046 finds no provable reduction |
-| [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Reduces the angle dimension to one | X-046 judges it the conjecture restated; owner disposition pending |
-| [H-120](packing/campaign/hypotheses/H-120-rank-nine-release-exclusion.md) | open question | A closed exclusion of part of Trump’s rank-nine released-segment family | Instrument-ready, but posed between $381/100$ and $96/25$, below the bracket; needs a fresh domain in $[31/8, U]$ |
-| [H-232](packing/campaign/hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | blocked | Closes the all-deep corner class at $96/25$ with the ring-centre 2-of-3 atom | Below the bound; blocked on the non-convex box cut, the refund and the 2-of-3 reader |
-| [H-163](packing/campaign/hypotheses/H-163-route-s-threshold-compression.md) | unresolved | A much simpler certificate for $3.82$ (Route S) | Encode-only timed out; needs the live `--check` and `--search` |
-| [H-217](packing/campaign/hypotheses/H-217-route-f1-majority-floor-at-153-40.md) | blocked | Weighted-majority and floor atoms beat ordinary thresholds at $153/40$ (Route F1) | Below the bound; the `think-g3j7` reader has not landed |
-| [H-160](packing/campaign/hypotheses/H-160-bc303-t2-charge-filters.md), [H-162](packing/campaign/hypotheses/H-162-bc303-floor-normalized-t2-filter.md) | blocked | Corner-pair owner inequalities at $96/25$ (BC303) | Paused by the owner’s hold |
+| [H-236](packing/campaign/hypotheses/H-236-n11-fixed-angle-global-optimality-at-trump.md) | confirmed | Trump is globally optimal at its own angle, the first optimality statement with an equality case for a family containing Trump’s packing | 2 |
+| [H-239](packing/campaign/hypotheses/H-239-n11-rotational-core-relaxation-constant.md) | open question | Whether a full verified angle search is a bounded program, by measuring $c$ and $V(\varepsilon)$ | 0 |
+| [H-112](packing/campaign/hypotheses/H-112-six-axis-five-common-angle-optimum.md) | blocked | Rung 1: any improvement on Trump has a different multiplicity or more orientation classes | 0 |
+| [H-113](packing/campaign/hypotheses/H-113-at-most-two-angle-optimum.md) | blocked | Rung 3: Stromquist’s Theorem 3 with $\lbrace 0^{\circ}, 45^{\circ}\rbrace$ replaced by every pair of orientations | 0 |
+| [H-155](packing/campaign/hypotheses/H-155-conditional-threshold-cover-on-an-owner-class.md) | blocked | A conditional threshold cover on one owner class: the corner two-band count the PR 230 review calls the cheapest sound next form | 0 |
+| [H-103](packing/campaign/hypotheses/H-103-complete-typed-global-capture.md) | open question | Every minimizer captured or excluded by a complete typed cover | 0 |
+| [H-117](packing/campaign/hypotheses/H-117-forced-angle-complexity.md) | open question | At most $k < 11$ orientation classes in some minimizer | 0 |
+| [H-121](packing/campaign/hypotheses/H-121-axis-plus-one-minimizer.md) | blocked | Reduces the angle dimension to one | 0 |
+| [H-120](packing/campaign/hypotheses/H-120-rank-nine-release-exclusion.md) | open question | A closed exclusion of part of Trump’s rank-nine released-segment family | 0 |
+| [H-232](packing/campaign/hypotheses/H-232-n11-all-deep-class-ring-centre-atom.md) | blocked | Closes the all-deep corner class at $96/25$ with the ring-centre 2-of-3 atom | 0 |
+| [H-163](packing/campaign/hypotheses/H-163-route-s-threshold-compression.md) | unresolved | A much simpler certificate for $3.82$ (Route S) | 1 |
+| [H-217](packing/campaign/hypotheses/H-217-route-f1-majority-floor-at-153-40.md) | blocked | Weighted-majority and floor atoms beat ordinary thresholds at $153/40$ (Route F1) | 0 |
+| [H-160](packing/campaign/hypotheses/H-160-bc303-t2-charge-filters.md), [H-162](packing/campaign/hypotheses/H-162-bc303-floor-normalized-t2-filter.md) | blocked | Corner-pair owner inequalities at $96/25$ (BC303) | 1 |
 | `H-153`, `H-093`, `H-095`, `H-124`, `H-128`, `H-146`, `H-158` | `H-153` open; `H-095` blocked; the rest unresolved | Point-language and $96/25$ structural questions | All posed below $3.875$, so useful only as controls or method evidence |
-| [H-231](packing/campaign/hypotheses/H-231-theta-on-pose-cells.md) | open question | An SDP (Lovász theta) occupancy bound on pose cells | No instrument: the dual matrix is dense and the cell count exceeds its own kill line; the route stays retired |
-| [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | A capture ball larger than $\rho$ from the growth cone | Capped by lemma; the successor is idea 246 |
+| [H-231](packing/campaign/hypotheses/H-231-theta-on-pose-cells.md) | open question | An SDP (Lovász theta) occupancy bound on pose cells | 0 |
+| [H-237](packing/campaign/hypotheses/H-237-n11-trump-angular-capture-radius.md) | exhausted | A capture ball larger than $\rho$ from the growth cone | 1 |
 
 **Idea-board rows not yet registered**, from X-043, X-045, X-046 and exp-227, with the
 older $n = 11$ rows they touch:
@@ -5579,11 +5580,11 @@ round that names the hypothesis, control roles included.
 
 | Id | Status | Claim, in short | Rounds | Effort |
 | --- | --- | --- | --- | --- |
-| [H-019](packing/campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | Trump’s tested shared-tilt slice has a corner at the published optimum | 1 | 10m agent |
-| [H-002](packing/campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 5 | 195m agent, 5.1m wall |
-| [H-016](packing/campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m wall |
-| [H-018](packing/campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m wall |
-| [H-020](packing/campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at $n = 17$, the nearest oblique record | 1 | 6.6m wall |
+| [H-019](packing/campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | confirmed | Trump’s tested shared-tilt slice has a corner at the published optimum | 1 | 10m agent |
+| [H-002](packing/campaign/hypotheses/H-002-lp-in-cell-polish.md) | refuted | LP-in-cell polish refines *any* annealer output to the analytic value | 5 | 195m agent, 5.1m wall |
+| [H-016](packing/campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | refuted | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m wall |
+| [H-018](packing/campaign/hypotheses/H-018-basin-entry.md) | refuted | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m wall |
+| [H-020](packing/campaign/hypotheses/H-020-oblique-record-finding-n17.md) | refuted | The annealer reaches the standing best at $n = 17$, the nearest oblique record | 1 | 6.6m wall |
 | [H-001](packing/campaign/hypotheses/H-001-angle-class-reduction.md) | blocked | An angle-class proposer beats free-coordinate annealing | 0 | — |
 | [H-003](packing/campaign/hypotheses/H-003-basin-frequency-and-contacts.md) | blocked | Contact count predicts component attraction frequency on held-out data | 0 | — |
 | [H-004](packing/campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | blocked | Neighbor-transfer seeds improve paired $n=11$ search | 0 | — |
@@ -5592,7 +5593,7 @@ round that names the hypothesis, control roles included.
 | [H-007](packing/campaign/hypotheses/H-007-saturation-curves.md) | blocked | Coverage models predict held-out component discovery | 0 | — |
 | [H-008](packing/campaign/hypotheses/H-008-false-basin-rate.md) | blocked | The stronger-verifier rejection rate is measurable across $n$ | 0 | — |
 | [H-009](packing/campaign/hypotheses/H-009-symmetry-dedup-ratio.md) | blocked | Symmetry quotienting materially changes endpoint counts | 0 | — |
-| [H-010](packing/campaign/hypotheses/H-010-stromquist-triple.md) | **refuted** | Stromquist’s five-node Theorem 2 mechanism reproduces | 1 | 180m agent, 0.55s wall |
+| [H-010](packing/campaign/hypotheses/H-010-stromquist-triple.md) | refuted | Stromquist’s five-node Theorem 2 mechanism reproduces | 1 | 180m agent, 0.55s wall |
 | [H-011](packing/campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](packing/campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
 | [H-013](packing/campaign/hypotheses/H-013-delta-continuation.md) | blocked | Delta-continuation improves target-component arrival | 0 | — |
@@ -5604,7 +5605,7 @@ round that names the hypothesis, control roles included.
 | [H-023](packing/campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed $n=5$ endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 12 | 243m agent, 2.5m wall |
 | [H-024](packing/campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through $n=30$ use at most three angle classes; the retained $n=29$ SVG has no formal witness | 1 | 12m agent, 0.158s wall |
 | [H-025](packing/campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within $10^{-4}$ side loss | 0 | — |
-| [H-026](packing/campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
+| [H-026](packing/campaign/hypotheses/H-026-trump-first-order-rigidity.md) | confirmed | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
 | [H-027](packing/campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported $n=11,17$ record cells have positive class-angle directional cones | 0 | — |
 | [H-028](packing/campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | blocked | Each published point is the sole refined local minimum on its declared reference-cell angle sheet, with a boundary margin | 0 | — |
 | [H-029](packing/campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
@@ -5619,8 +5620,8 @@ round that names the hypothesis, control roles included.
 | [H-038](packing/campaign/hypotheses/H-038-record-number-fields.md) | open question | Which exact fields and elimination mechanisms occur in verified records? | 0 | — |
 | [H-039](packing/campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for $s(12)$ be improved and ultimately closed at four? | 0 | — |
 | [H-040](packing/campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new validated cells per LP solve | 0 | — |
-| [H-041](packing/campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
-| [H-042](packing/campaign/hypotheses/H-042-n29-numerical-angle-classes.md) | **refuted** | The retained $n=29$ SVG serialization has at most three numerical angle classes under the declared 160-digit regime | 1 | 15m agent, 0.165s wall |
+| [H-041](packing/campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | confirmed | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
+| [H-042](packing/campaign/hypotheses/H-042-n29-numerical-angle-classes.md) | refuted | The retained $n=29$ SVG serialization has at most three numerical angle classes under the declared 160-digit regime | 1 | 15m agent, 0.165s wall |
 | [H-043](packing/campaign/hypotheses/H-043-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
 | [H-044](packing/campaign/hypotheses/H-044-chunk-expressibility-of-records.md) | unresolved | Standing records are already chunk-structured: at most six one-angle bar/L/rectangle groups plus at most two free squares | 1 | 25m agent, 1.1s wall |
 | [H-045](packing/campaign/hypotheses/H-045-chunk-grammar-rediscovery.md) | blocked | A grammar frozen on the proved cells ranks the standing best first at $n = 11$ | 0 | — |
@@ -5644,7 +5645,7 @@ round that names the hypothesis, control roles included.
 | [H-063](packing/campaign/hypotheses/H-063-n11-class-certificate.md) | refuted | A two-cell $\lbrace 0^{\circ}, 45^{\circ}\rbrace$ class certificate refutes the composition $(11, 0)$ at or above Trump’s $3.877084$, and every near-axis class inside $\theta_0$ closes the compositions with at most one tilted square; blocked on the two-threshold program `BC-198` builds | 1 | 27.8m wall |
 | [H-064](packing/campaign/hypotheses/H-064-n11-fractional-packing-floor.md) | abandoned | An exact-depth fractional packing at $77/20$ with total weight at least eleven puts $\tau^{\ast}(3.85)$ at or above eleven, so the $n = 11$ certificate ladder’s top lies below $3.85$; registered for `BC-200` | 2 | 96m agent, 175.3m wall |
 | [H-065](packing/campaign/hypotheses/H-065-n11-near-tight-cell-census.md) | confirmed | The near-tight cells (mass at most $1 + 1/20$) on the retained $381/100$ certificate are fewer than one fifth of the reachable cells — measured at $0.040754$ by `BC-201`, a fifth of the registered threshold. The clause the claim attached to that number does not follow: the cover is a search, not a check | 1 | 16.1m wall |
-| [H-070](packing/campaign/hypotheses/H-070-n11-inset-seed-release.md) | **refuted** | At side $191/50$, the best eligible inset-screen seed improves exact rational mass after unrestricted release versus an equal-stop unseeded control | 1 | 8.2m wall |
+| [H-070](packing/campaign/hypotheses/H-070-n11-inset-seed-release.md) | refuted | At side $191/50$, the best eligible inset-screen seed improves exact rational mass after unrestricted release versus an equal-stop unseeded control | 1 | 8.2m wall |
 | [H-090](packing/campaign/hypotheses/H-090-n11-fixed-atom-core-shrink.md) | refuted | The fixed T-018 atoms retain enough covered mass after shrinking the core to $99769/100000$ to certify side $3.8100381$; an exact corner witness rejects this side and every core side below $1849127/1853400$, leaving a narrower shrink interval open | 1 | 30s wall |
 | [H-091](packing/campaign/hypotheses/H-091-n11-narrow-core-shrink.md) | refuted | Core side $997696/1000000$ retains minimum mass above $M/11$; its measured minimum $96377/100000$ instead supplies an interior witness excluding every fixed-weight core shrink that could beat T-022 using ordinary containment | 1 | 31s wall |
 | [H-093](packing/campaign/hypotheses/H-093-n11-scalar-61-16-certificate.md) | unresolved | The retained scalar core and net admit an exact mass-below-eleven certificate at side $61/16$ | 1 | 59.3m wall |
@@ -5794,11 +5795,13 @@ round that names the hypothesis, control roles included.
 | [H-279](packing/campaign/hypotheses/H-279-n17-widened-apex-position-duals.md) | confirmed | Exact residual and radius checks for the conditional apex bridge | 2 | exp-264 accepted production/fresh replay5.67s; original exp-262 replay refusal preserved; conditional physical-packing bridge |
 | [H-280](packing/campaign/hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | confirmed | One exact all-branch annulus patch on a frozen ladder | 1 | exp-263 first2^-20 closed box accepted6.29s, all256 owners; one patch only |
 | [H-281](packing/campaign/hypotheses/H-281-n11-first-round-producer-readiness.md) | confirmed | Complete n11 first-round readiness and independent fresh replay; original startup failure retained | 2 | 551.28s combined shell; eleven owners, endpoint12checks; no15-round/n17 verdict |
-| [H-282](packing/campaign/hypotheses/H-282-n17-current-source-tail-a.md) | confirmed | Current-source endpoint prefix and one actual-tail closure with full standing admission | 2 | exp266339.78s; exp271180.51s; eightstates/oneorbit removed,59admissions/36776states/4684orbits |
+| [H-282](packing/campaign/hypotheses/H-282-n17-current-source-tail-a.md) | confirmed | Current-source endpoint prefix and one actual-tail closure with full standing admission | 3 | exp266339.78s; exp271180.51s; eightstates/oneorbit removed,59admissions/36776states/4684orbits |
 | [H-283](packing/campaign/hypotheses/H-283-n17-continuous-soft-direction-cone.md) | confirmed | Exact continuous negative16 cone times six free angle coordinates | 1 | 6.60s combined exact generation/fresh replay; conditional cone, analytic implication sole-Astra |
 | [H-284](packing/campaign/hypotheses/H-284-n17-positive-continuous-cone.md) | confirmed | Positive16 continuous cone via seventeen-row cubic chain | 1 | 92.16s exact generation/fresh replay; conditional domain, endpoint retained |
 | [H-285](packing/campaign/hypotheses/H-285-n17-coarse-slider-floor.md) | confirmed | Noncircular coarse square9/11 slider-floor guard | 1 | 1.08s exact generation/fresh replay; actual leaf premises open |
-| [H-286](packing/campaign/hypotheses/H-286-n17-saved-prefix-capture-adapter.md) | running | Exact bounds from the actual one-update saved endpoint prefix | 1 | exp272 registered; parent180s with freshchild60s inside; geometricunresolved valid, zeroadmission |
+| [H-286](packing/campaign/hypotheses/H-286-n17-saved-prefix-capture-adapter.md) | confirmed | Exact bounds from the actual one-update saved endpoint prefix | 1 | exp272 readiness accepted11.23s; full17endpoint/49zero-containing bounds retained; geometricunresolved, zeroadmission |
+| [H-287](packing/campaign/hypotheses/H-287-n17-controlled-tail-replication.md) | running | Unchanged-recipe replication on actual residual orbit3096315 | 1 | Registered; renewed120+60prefix required after sourcebyte drift; fullstanding beforeadmission |
+| [H-288](packing/campaign/hypotheses/H-288-n17-capture-cap-root-join.md) | running | Frozen rational cap joins full accepted root and outward side enclosure | 1 | Registered root/caponly; no producer or oldobjectrelabel |
 
 ### Confirmed
 
@@ -6137,9 +6140,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 201 rounds registered in `series-000`.
+There are 204 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5749.8 wall-minutes.
+They record 2512.1 agent-minutes and 5750.0 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6381,7 +6384,10 @@ archive beside it.
 | [exp-269](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-269-h284-positive-continuous-cone.md) | 17 | target | H-284 | Positive16 continuous cone, seventeen-row cubic chain | Exact finite root/cubic/sign/weight/H/M checks and fresh replay pass92.16s | accepted |
 | [exp-270](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-270-h285-coarse-slider-floor.md) | 17 | target | H-285 | Independent coarse-domain root guard and six SAT exclusions | Finite rootguard/all8SAT cases/exactstrictfloor and fresh replay pass1.08s | accepted |
 | [exp-271](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md) | 17 | target | H-282 | Full standing verification of retained TailA closure | Full standingPASS27steps/1728rows/34452224facetchecks; canonical/source/census joins pass180.51s | accepted |
-| [exp-272](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-272-h286-saved-prefix-capture-leaf.md) | 17 | target | H-286 | Saved endpoint prefix intake and exact capture bounds | Registered before actualleaf bounds; no terminal success required | in-progress |
+| [exp-272](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-272-h286-saved-prefix-capture-leaf.md) | 17 | target | H-286 | Saved endpoint prefix intake and exact capture bounds | Readiness accepted11.23s; actualbounds fail local/wide inclusion, no terminal advance | accepted |
+| [exp-273](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-273-h282-tail-a-dependency-inventory.md) | 17 | target | H-282 | Two-channel acceptedTailA dependency inventory | Registered44controls/freshprocessparity; proposalonly, zeroadmission | in-progress |
+| [exp-274](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-274-h287-current-tail-replication.md) | 17 | target | H-287 | Controlled unchangedrecipe replication3096315 | Registered; renewedfull17prefix prerequisite | in-progress |
+| [exp-275](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-275-h288-capture-cap-root-join.md) | 17 | target | H-288 | Exact frozen numericcap fullroot join | Registered180sgen+fresh; root/caponly | in-progress |
 
 ### Cost and provenance
 
@@ -6587,11 +6593,14 @@ archive beside it.
 | exp-269 | 180s combined generation/fresh replay | 92.16s | — | criterion | clean `11573546d`; conditional positive cone |
 | exp-270 | 180s combined generation/fresh replay | 1.08s | — | criterion | clean `549c79b65`; conditional independent coarse-domain floor |
 | exp-271 | 900s full standing verifier;4096MiB sampled RSS | 180.51s | — | criterion | clean `11573546d`; standing fullPASS before ordinaryadmission |
-| exp-272 | Parent180s including freshchild60s;TERM180/KILL190 | Pending | — | Running | Reviewed savedprefixadapter source/descriptor frozen before target |
+| exp-272 | Parent180s including freshchild60s;TERM180/KILL190 | 11.23s | — | Accepted | Actualprefix readiness,49bounds retained; geometricunresolved, zeroadmission |
+| exp-273 | One180s combinedinventory+fresh/190KILL;4GiBsampled | Pending | — | Running | Two-channel conservativeDAG/proposal, no rewrite or admission |
+| exp-274 | Prefix120+60;producer1200/fresh900/standing900 ifclosed | Pending | — | Running | Deliberate oneorbit unchangedrecipe, fullstanding beforeadmission |
+| exp-275 | Combined180s generation+fresh/190KILL | Pending | — | Running | Exact root/capjoin, no capture or relabel |
 
-### What the 201 rounds jointly establish
+### What the 204 rounds jointly establish
 
-The 201 rounds use 2512.1 agent-minutes and 5749.8 wall-minutes under the campaign’s
+The 204 rounds use 2512.1 agent-minutes and 5750.0 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

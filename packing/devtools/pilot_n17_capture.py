@@ -225,7 +225,10 @@ def load_endpoint(frame: Frame) -> Endpoint:
     require(direct.lo <= side.hi and side.lo <= direct.hi, "S* differs from the layout's side")
     upper = max(side.hi, direct.hi)
     capture_cap = Q(math.ceil(upper * CAP_GRID), CAP_GRID)
-    require(0 < capture_cap - side.hi <= Q(1, CAP_GRID), "U' is not within 10^-12 of S*")
+    require(
+        capture_cap - side.hi > 0 and capture_cap - side.lo <= Q(1, CAP_GRID),
+        "U' is not within 10^-12 of S*",
+    )
     state = slider_tool.endpoint_state(cover.UNIQUE_24.name)
     require(sorted(state) == list(range(1, 18)), "the endpoint state does not label 17 squares")
     t16 = (

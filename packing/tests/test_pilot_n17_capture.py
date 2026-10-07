@@ -6,8 +6,10 @@ import gzip
 import json
 import math
 import time
+from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from types import SimpleNamespace
+from typing import Any, cast
 
 import pytest
 
@@ -20,6 +22,27 @@ from sqpack.hull_kernel.induction import strict_core
 from sqpack.hull_kernel.rational import Q
 
 EXCLUSION_CAP = Q(1169, 250)
+
+
+def test_endpoint_cap_upper_excess_uses_side_lower_bound(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    t, beta = pilot.Box.point(Fraction(2, 5)), pilot.Box.point(Fraction(1, 4))
+    exact_side = Fraction(190, 41)
+    side = pilot.Box(exact_side - Fraction(2, 10**12), exact_side)
+    point = SimpleNamespace(shift=(pilot.Box.point(pilot.cover.U) - side) * Fraction(1, 2))
+    monkeypatch.setattr(
+        pilot.cover,
+        "load_root_box",
+        lambda _path: (t, beta, {"criterion_passed": True}),
+    )
+    monkeypatch.setattr(pilot.cover, "endpoint", lambda *_args: point)
+    candidate = Fraction(math.ceil(exact_side * pilot.CAP_GRID), pilot.CAP_GRID)
+    assert 0 < candidate - side.hi <= Fraction(1, pilot.CAP_GRID)
+    assert candidate - side.lo > Fraction(1, pilot.CAP_GRID)
+    with pytest.raises(RefusalError, match="within 10"):
+        # The guard must fail before any frame/owner or actual root data is used.
+        pilot.load_endpoint(cast(Frame, None))
 
 
 def test_memory_guard_uses_current_bytes_and_reports_peak_separately(

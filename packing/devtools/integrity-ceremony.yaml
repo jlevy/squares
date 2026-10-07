@@ -25,6 +25,15 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_capture_leaf.py
+    kind: generated-artifact
+    boundary: Canonical runtime seed/node identities join the descriptor, producer receipt and fresh independent full saved replay; these generated objects are hosted data, not repository-integrity checks.
+  - path: packing/devtools/check_n17_endpoint_prefix.py
+    kind: generated-artifact
+    boundary: Runtime producer seed and streamed prefix-node identities bind endpoint-preservation observations to independently admitted complete saved evidence and a fresh replay process.
+  - path: packing/devtools/audit_n17_certificate_dependencies.py
+    kind: generated-artifact
+    boundary: Runtime-generated canonical seed/node objects and their full-standing verification receipt bind streamed saved evidence and independently generated dependency inventories; raw objects and fresh inventories have no Git revision names.
   - path: packing/devtools/probe_n17_raw_row_support.py
     kind: generated-artifact
     boundary: Cold saved-check receipts and witness packets identify generated seed/node objects and their derived raw atoms; these runtime artifacts are not named by Git revisions.

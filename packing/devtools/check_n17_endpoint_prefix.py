@@ -403,8 +403,7 @@ def run(
         if len(monitor):
             require(
                 monitor.seed is not None
-                and saved.content_sha256(production.seed)
-                == saved.content_sha256(monitor.seed),
+                and saved.content_sha256(production.seed) == saved.content_sha256(monitor.seed),
                 "observed producer seed differs from admitted prefix seed",
             )
             node.admit_final_state(

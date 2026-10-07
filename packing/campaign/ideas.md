@@ -970,6 +970,17 @@ the actual retained endpoint prefix and exact root-relative leaf bounds.
 Geometric unresolved is a valid readiness result; no exclusion or global capture is
 claimed.
 
+[H-287](hypotheses/H-287-n17-controlled-tail-replication.md) repeats the unchanged
+recipe on the next deliberately selected current tail orbit, with renewed endpoint
+readiness when source bytes change.
+Closure needs complete fresh saved replay and full standing verification before any
+admission.
+
+[H-288](hypotheses/H-288-n17-capture-cap-root-join.md) checks the fixed numeric cap
+against the full accepted root and the unchanged outward consumer side enclosure.
+Its upper excess uses the lower endpoint of each side interval; no old saved object is
+relabelled with the tighter cap.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -1463,7 +1463,7 @@ uses `PASS_SAVED_STALL`. The original consumer accepts plain JSON with a differe
 receipt shape. Bridging these formats must preserve the exact pose-cover and frame
 contracts; changing a receipt's status string is not that bridge.
 
-The proposed H-286/exp-272 adapter keeps the first workload narrow: the endpoint's
+The H-286/exp-272 adapter keeps the first workload narrow: the endpoint's
 seventeen named owners, one complete accepted update, identity D4 action, and
 $U=L=1169/250$, $B=1$. The descriptor binds the seed and node content identities,
 label-to-owner bijection, cells, frame, accepted root and expected step count. The
@@ -1500,13 +1500,94 @@ The readiness criterion is complete replay custody, exact bounds covering all li
 pieces, retention of all seventeen exact endpoint pose enclosures, and inclusion of the
 endpoint's zero displacement, slider and relative-angle coordinates. Geometric status
 may remain unresolved. It is not a requirement that a first-update prefix already lies
-inside a local, apex or exclusion region. Proposed ceilings are 60 seconds for fresh
-replay and 60 seconds for bounded loading and geometry; the experiment registration
-must freeze the final resource allowance before evaluating the actual input.
+inside a local, apex or exclusion region. The registration used a 180-second parent
+ceiling with a fresh child limited to 60 seconds inside that clock.
 
 The original centred $C(S^*)$ premise remains inherited. The prefix does not establish
 it. This first adapter admits no capture tree, exclusion, global coverage or census
 change. It records which actual bounds prevent the conditional terminal join.
+
+### The first actual leaf result
+
+The [exp-272 receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-272-saved-prefix-capture-adapter/receipt.json)
+passed readiness in 11.23 seconds. Its fresh producer-free replay returned
+`PASS_SAVED_STALL` for the same one-step seed/node pair. All seventeen complete root-pose
+enclosures were retained, square 6 met its closed S2 premise, and all 49 derived
+intervals contained zero: 29 position coordinates, 16 half angles, three sliders and
+the supplemental $v_9$ projection. The consumer checked 1,088 seed wall rows and retained
+1,024 live angle pieces. Only square 1's endpoint witness used an updated row; the other
+sixteen still used seed rows.
+
+The resulting bounds are far outside the terminal domains. None of the 29 position
+enclosures lies inside either the local or wide coordinate interval, and none of the
+16 half-angle enclosures lies inside either corresponding angle interval. The largest
+position magnitude is approximately $0.92976505$; the largest half-angle magnitude is
+$0.421875$. The following decimals summarize exact rational bounds in the receipt;
+they are not inputs to any proof check.
+
+| Quantity | Retained interval, approximately | Missing sufficient premise |
+| --- | --- | --- |
+| Effective $a$ | $[0,0.78976505]$ | Upper face $a\le1/4$. The lower face uses the original-container premise. |
+| Raw $b$ | $[-0.51520218,0.36795567]$ | Both $B_W'$ faces and the coarser interval $[-1/2,1/12]$. |
+| Raw $z$ | $[-0.93490794,0.21827829]$ | Both $B_W'$ faces. |
+| Direct $v_9$ | $[-0.47058586,0.65447155]$ | The coarse-slider lemma's interval $[-1/5000,1/5000]$. |
+| $q_9$ and $q_{11}$ | $[-0.41925316,0.41004508]$ | The coarse-slider lemma's one-sided interval $[-1/200,1/5000]$. |
+| $q_{16}$ | $[-0.40927285,0.42145778]$ | The common wide angle bound and either cone's sign/domain premises. |
+
+The coarse-slider lemma's three position bounds on $\xi_9,\eta_9,u_{11}$ also fail.
+Thus its accepted root guard does not authorize clipping this leaf's $b$ interval.
+No optional feature, apex or patch certificates were requested in this first control;
+the common wide-domain premise already fails. `unresolved` is the correct geometric
+result. A failed enclosure inclusion does not show that a physical packing violates the
+desired bound, and one owner update supplies no contraction-rate or fixed-point verdict.
+
+## Prospective Full-Root Join for the Capture Cap
+
+The first adapter used the larger $C(U)$ walls. A successor at a near-optimal numeric
+cap needs a separate exact join; the `None`-to-numeric-$U$ equivalence above cannot be
+reused for a smaller cap. The proposed H-288/exp-275 fixes the historically retained
+$U'=935106018721/200000000000$, recorded in the
+[R9 review](../reviews/review-2026-10-05-n17-capture-r9.md), and freshly checks it against
+the full accepted root enclosure. No new cap arithmetic result is asserted here.
+
+The exact chart formula is
+
+$$
+F(t)=\frac{6+4t}{1+2t-t^2},\qquad
+F'(t)=\frac{4(t^2+3t-2)}{(1+2t-t^2)^2}.
+$$
+
+For the accepted $t\in[t_-,t_+]$, verify $0<t_-\le t_+<1$, positivity of the
+denominator, and $t_+^2+3t_+-2<0$. The derivative is then negative throughout the
+interval, giving the exact enclosure $S_-=F(t_+)$, $S_+=F(t_-)$. Bind this formula
+symbolically to the endpoint layout's side and retain the same accepted root identity.
+The independent cap conditions are
+
+$$
+S_-\le S_+<U'\le U,\qquad
+0<U'-S_+\le U'-S_-\le10^{-12}.
+$$
+
+Apply the same upper-excess condition to the consumer's outward side enclosure.
+Interval overlap alone does not establish the common-root formula or the full-domain
+excess. The historical `pilot_n17_capture.load_endpoint` check bounded
+$U'-\mathrm{side.hi}$ above by $10^{-12}$; the claimed uniform upper excess requires
+$U'-\mathrm{side.lo}\le10^{-12}$ instead. This identifies an insufficient check, not
+evidence that the retained numerical cap is wrong. The fixed candidate must be refused
+or left uncertified if its exact inequalities fail; it must not be silently replaced.
+
+For this numeric cap, the physical centre walls are
+
+$$
+[(U-U')/2+h,\;(U+U')/2-h],
+$$
+
+and field coordinates multiply both endpoints by $B$. Keep the original cells, $U,L,B$,
+D4 centre $U/2$ and induced permutations. A saved numeric-cap seed and node must be
+freshly admitted against these walls; old $U$-wall objects cannot be relabelled.
+The fresh verifier must retain the explicit checked numeric frame, since the frame name
+alone does not distinguish its capture cap. The original $C(S^*)$ premise and exact
+root shift $\sigma=(U-S^*)/2$ remain unchanged.
 
 ## A Future Label-Bijection Extension
 
