@@ -90,7 +90,18 @@ uv run --frozen --all-extras --group dev python -m devtools.squish_second_update
 ```
 
 Its `record` command updates the nine verified lanes only after full admission.
-`restore-witnesses` reconstructs the canonical proofs from admitted facts. Add
+Drafting clears separately owned rigidity assessments. After recording, restore
+the native assessments from the retained current-pose screen and refresh their
+dependent inventory:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.assess_frontier_rigidity --update
+uv run --frozen --all-extras --group dev python -m devtools.render_evidence_inventory --update
+```
+
+This reads retained numerical motion evidence; it does not repeat the screen or
+establish exact rigidity or an optimum. `restore-witnesses` reconstructs the
+canonical proofs from admitted facts. Add
 `--replay` to `check-certification` to repeat both decisions for all three jobs per
 case; `--n N` selects a case without weakening complete retained-roster admission.
 
