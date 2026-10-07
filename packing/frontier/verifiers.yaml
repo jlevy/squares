@@ -1488,3 +1488,26 @@ verifiers:
       executable is retained or run. The native exact_verify and independent rational-corner checker decide
       feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party
       routes share the converted witness, YAML and Python rational arithmetic, not geometry code.
+
+  - id: V-squish-followup-packets
+    program: devtools.squish_followup_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_followup_packets.py
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the pinned update source and complete reviewed replay, binds revision-specific
+      fact/witness/receipt inputs, full pair and control coverage, typed replay provenance and upward
+      display ceilings; explicitly reruns both deciding routes only with --replay.
+    independence_record: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    note: The wrapper shares strict admission and rational half-angle conversion with the original
+      packet while keeping a distinct revision namespace. No SQUISH producer executable is run. The
+      native exact_verify and independently written rational-corner checker decide geometry; both
+      share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata
+      checks are premises, not additional geometric deciders.

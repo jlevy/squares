@@ -11905,6 +11905,8 @@ results:
     - packing/resources/web/squish-401-2026-10-07/README.md
     - packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz
     - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
     - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
     - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
     - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
@@ -11917,7 +11919,8 @@ results:
       project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
       with the open replay and two human expert reviews. No local or global optimality claim is made by
       these upper-bound certificates.
-    notes: Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+    notes: |
+      Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
       on the same day after complete exact-rational dual replay and two accepting project AI reviews,
       with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
       oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
@@ -11925,6 +11928,12 @@ results:
       retain that source rational. Across the eleven packings this corrects four source prints upward,
       tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
       original source print separately from the verified display.
+
+      The original supplement comment
+      is no longer available; the identical certificate remains accessible at
+      https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json.
+      The retained update comparison binds its exact side and rational triples to the original;
+      this source restoration adds no result or assurance rung.
     reviews:
     - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
       kind: adversarial
@@ -11965,3 +11974,127 @@ results:
       witness, checks the full roster and upward decimal display, and replays both geometric controls.
       This is an independently re-implemented confirmation, sharing no verification code with the producer;
       the two first-party routes share the converted corners, YAML and Python rational arithmetic.
+
+  - id: T-115
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: '`s(n) ≤ S_n` at twelve counts, from the SQUISH update’s new and smaller rational packings'
+    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes feasible rational packing upper
+      bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are
+      additional and five tighten the original release. Complete exact rational dual replay accepts
+      all twelve unchanged source sides; both full-size geometric controls are rejected. n153 is identical
+      to its earlier certificate and remains on its original evidence. Optimality and rigidity are
+      not established.
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Twelve confirmed case-bound improvements, adding seven counts and tightening five
+        submitted bounds; no exact optimum or general theorem is established.
+      scored: '2026-10-07'
+      by: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH update 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-update-2026-10-07-report
+    - E-squish-update-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-401-update-2026-10-07/README.md
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/update-claims.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
+    - packing/devtools/squish_followup_packets.py
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-123.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-126.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-129.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-154.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-155.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-208.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-237.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-238.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-239.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-258.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-263.json.gz
+    - packing/witnesses/squish-401-update-2026/n-123-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-126-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-129-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-154-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-155-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-179-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-208-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-237-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-238-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-239-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-258-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-263-rational.yaml.gz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/certification.json.xz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/negative-controls.json.xz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/replay-summary.json
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/reviewed-semantic-binding.json.xz
+    - docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+    - docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    next_rung: V4/C4 require a retained human oversight record for the claim, certificates, assumptions,
+      deciding implementations and accepted AI reviews. Rung 5 requires reviewed proof-assistant formalization.
+      No independently audited human oversight is retained.
+    notes: Confirmation reuses the completed thirteen-case positive replay (108.598 seconds), attributing
+      104.001 seconds to these twelve geometries and excluding unchanged n153. All twelve source rational
+      sides are preserved; source finite prints remain quotations and current bound lanes use their
+      least upward sixteen-place decimal ceilings. Seed credit remains author-reported; Nate Chaoweeraprasit
+      disclosed human-directed Claude Opus 5.5 assistance. Original T-113/T-114 facts, receipts, witnesses
+      and reviews remain historical evidence for their own geometries. No producer checker, optimality
+      or human oversight conclusion follows.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, separately prompted mathematics review lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Pinned source rational half-angle conversion, unchanged exact sides, complete unit-square/wall/all-pair
+        decisions, thirteen-case replay with twelve-case confirmation scope, full controls and decimal
+        ceilings.
+      verdict: accepted
+      covers:
+      - T-115
+    - path: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, separately prompted mathematical and semantic binding review lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: All twelve update source/fact/witness/full receipt inputs, exact corner derivation, both
+        full-size control inputs and verdicts, shared-decider premises and source attribution.
+      verdict: accepted
+      covers:
+      - T-115
+    controls:
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/negative-controls.json.xz
+    - packing/tests/test_squish_update_certification.py
+    - packing/tests/test_generate_frontier_case.py
+    composition: Exact rational half-angle facts are converted without rounding or dilation. Both
+      independently implemented deciding routes inspect every pair and wall. The completed reviewer
+      replay is reused and its full twelve scoped inputs and verdicts retained, with two rejected
+      complete 123-square controls. Fast checks bind current source facts, revision-specific witness
+      metadata, complete semantic input, typed coverage and safe decimal ceilings. Explicit --replay
+      repeats both decisions. Two accepted scoped AI reviews address shared conversion and semantic
+      premises.

@@ -73,6 +73,56 @@ def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, se
     return tree, copied_targets
 
 
+def test_historical_validation_prunes_preserve_replay_inputs(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Telemetry can leave a worker; linked evidence and ordinary fixtures cannot."""
+    tree, copied_targets = control_snapshot
+    roots = (
+        ROOT / "benchmarks/validation-efficiency/runs",
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
+        ROOT / "campaign/agent-sessions/session-152-validation",
+    )
+    assert set(roots) <= PRUNE
+    rescued = (
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.log",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.manifest.json",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.manifest.json",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/VE-004-full-ed595fb6.tar.gz",
+        "benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-reference.pdf",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-replay.pdf",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-report.txt",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711.md",
+    )
+    for relative in rescued:
+        source = ROOT / relative
+        assert source.relative_to(controls.REPO) in copied_targets, relative
+        assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
+    # The normal legacy-manifest fixture test still has both its code and the two
+    # manifest/archive pairs it reads. The schema checker and current witness remain
+    # on the source surface too; the telemetry exclusion cannot hide their controls.
+    for relative in (
+        "devtools/checkpoint_manifest.py",
+        "tests/test_checkpoint_manifest.py",
+        "devtools/validate_schemas.py",
+        "witnesses/known-best/n-123.yaml",
+    ):
+        assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
+    # One unconsumed generated artifact from each root must actually leave the
+    # finished worker. Merely listing the roots while copying everything back would
+    # preserve the cap breach and satisfy only the structural assertion above.
+    for relative in (
+        "benchmarks/validation-efficiency/runs/e865612fe81c4d96a7b3713b28191045.stdout.log",
+        "benchmarks/validation-efficiency/checkpoints/VE-004-control-1.tar.gz",
+        "campaign/agent-sessions/session-152-validation/validation-timings-exhaustive-1.zip",
+    ):
+        assert (ROOT / relative).is_file(), relative
+        assert not (tree / HERE / relative).exists(), relative
+
+
 def test_oversized_snapshot_is_refused_before_cloning(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -890,6 +940,8 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     honest -- an index built by adding whatever happens to be on disk would also answer,
     and would put a reader's `attic/` scratch in it (PR 207).
     """
+    from devtools import squish_followup_packets as packet  # noqa: PLC0415
+
     tree, _copied = control_snapshot
     listed = tracked_files(tree, ".")
     assert listed is not None, "the worker snapshot has no index to ask"
@@ -902,8 +954,22 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
         check=True,
         capture_output=True,
     ).stdout.split(b"\0")
-    repository = {name.decode() for name in names if name and (tree / name.decode()).is_file()}
+    linked_root = tree / "packing/witnesses/squish-401-update-2026"
+    assert linked_root.is_symlink()
+    linked_proofs = {
+        packet.certificate_path(n).relative_to(controls.REPO).as_posix()
+        for n in packet.RESULT_NUMBERS
+    }
+    for relative in linked_proofs:
+        assert (tree / relative).is_file()
+        assert (tree / relative).resolve() == (controls.REPO / relative).resolve()
+    repository = {
+        name.decode()
+        for name in names
+        if name and (tree / name.decode()).is_file() and name.decode() not in linked_proofs
+    }
     assert tracked == repository
+    assert not tracked & linked_proofs
 
     # The linked-back environment and cargo target are the real checkout's, not this
     # snapshot's content, which is why the index is built before they are symlinked in.
@@ -1141,3 +1207,66 @@ def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
     assert f"mirrors all {rule_count} rules" in baseline.stdout
     assert controls.run_one(control, tmp_path) == (True, "")
     assert source.read_text() == original
+
+
+def test_squish_complete_replay_survives_worker_custody_and_private_controls(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Linked proofs remain readable while mutations use copied admission records."""
+    from devtools import squish_followup_packets as packet  # noqa: PLC0415
+
+    tree, copied = control_snapshot
+    work = tree / HERE
+    root = work / "witnesses/squish-401-update-2026"
+    assert root.is_symlink()
+    for n in packet.RESULT_NUMBERS:
+        source = packet.certificate_path(n)
+        relative = source.relative_to(ROOT).as_posix()
+        assert (work / relative).read_bytes() == source.read_bytes()
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(relative, tree=tree, work=work)
+    for name in (
+        "certification.json.xz",
+        "negative-controls.json.xz",
+        "replay-summary.json",
+        "reviewed-semantic-binding.json.xz",
+    ):
+        source = packet.PACKET / "receipts" / name
+        relative = source.relative_to(controls.REPO)
+        assert relative in copied
+        assert not (tree / relative).is_symlink()
+        assert (tree / relative).read_bytes() == source.read_bytes()
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [c for c in specification["controls"] if c["name"].startswith("SQUISH update -")]
+    assert len(selected) == 2
+    env = controls.control_environment(tree, tree / "squish-baseline-pycache")
+    baseline = subprocess.run(
+        [sys.executable, "-m", "devtools.squish_followup_packets", "check-certification"],
+        cwd=work,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=30,
+    )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    for control in selected:
+        target = resolve_control_target(control["file"], tree=tree, work=work)
+        before = target.read_bytes()
+        source = ROOT / control["file"]
+        source_before = source.read_bytes()
+        passed, detail = controls.run_one(control, tree)
+        assert passed, detail
+        assert target.read_bytes() == before
+        assert source.read_bytes() == source_before
+    for name in ("fast-cpu4-bdc28e89", "fast-native-bdc28e89"):
+        source = ROOT / f"campaign/agent-sessions/session-105-validation/{name}.json"
+        assert source in PRUNE
+        assert source.relative_to(controls.REPO) not in copied
+        assert not (tree / source.relative_to(controls.REPO)).exists()
+        identity = source.with_name(f"{name}-source.json")
+        assert (
+            tree / identity.relative_to(controls.REPO)
+        ).read_bytes() == identity.read_bytes()
+    session = ROOT / "campaign/agent-sessions/session-105-stromquist-n26-verification.md"
+    assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()

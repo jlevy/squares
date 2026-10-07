@@ -2702,13 +2702,15 @@ def test_whole_escape_screen_uses_its_budget_unless_the_operator_sets_a_cap(
     assert context.timeout_seconds == timeout_seconds
 
 
-def test_screen_findings_match_the_current_retained_square_motions() -> None:
+@pytest.mark.parametrize("last_n", [100, 200, 324])
+def test_screen_findings_match_the_current_retained_square_motions(last_n: int) -> None:
     document = json.loads(
         (validate.PROJECT_ROOT / "atlas/known-best/translation-escape-screen.json").read_text()
     )["screen"]
     cases = document["cases"]
     assert [case["n"] for case in cases] == list(range(1, 325))
     assert document["excluded"] == []
+    cases = [case for case in cases if case["n"] <= last_n]
     separating = [
         sum(square["witness_kind"] == "strict-separating" for square in case["movable_squares"])
         for case in cases
@@ -2716,7 +2718,7 @@ def test_screen_findings_match_the_current_retained_square_motions() -> None:
     moving = [len(case["movable_squares"]) for case in cases]
     assert separating == [case["separating_square_count"] for case in cases]
     assert moving == [case["movable_square_count"] for case in cases]
-    assert validate.SCREEN_FINDINGS[validate.KNOWN_BEST_CORPUS.label] == (
+    assert validate.SCREEN_FINDINGS[f"n=1..{last_n}"] == (
         sum(count > 0 for count in separating),
         sum(separating),
         sum(count > 0 for count in moving),
@@ -3804,6 +3806,8 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         "campaign record",
         # An advisory wall's tracking bead is read from the bead store, not the tree.
         "tier ceilings are declared and not slack",
+        # New custody checks repeat until their tree reuse is explicitly classified.
+        "SQUISH update certification binds complete reviewed inputs",
     }
 
     # Fail closed: a new fast step is repeated until explicitly classified.

@@ -62,7 +62,9 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
 
+from devtools import squish_followup_packets as update
 from devtools import validate_schemas
 from devtools.apply_upper_bound_packets import PREVIOUS_HEADING, earlier_reports, normalized
 from devtools.check_basic_bounds import check_case_basic_bounds
@@ -1091,7 +1093,9 @@ def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: P
     availability = load_availability()
     catalogue = load_drafting_catalogue([179], availability)
     committed = (FRONTIER / "n-179.md").read_text(encoding="utf-8")
-    stale = committed.replace("value: '13.89534106997649'", "value: '13.89540982243640'", 1)
+    report = safe_load(committed.split("---\n", 2)[1])["packing"]["reported_upper_bound"]
+    stale = committed.replace(f"value: '{report['value']}'", "value: '99.0'", 1)
+    assert stale != committed
     record_path(tmp_path, 179).write_text(stale, encoding="utf-8")
     args = argparse.Namespace(
         out=tmp_path, review_date="2026-09-30", retrieved_date="2026-09-30", force=False
@@ -1458,3 +1462,121 @@ def test_a_pictured_integer_side_case_is_recorded_as_the_trivial_grid() -> None:
         assert upper["analytically_optimized"] is None
         assert upper["evidence"] == ["E-kingbird-upper-register"]
         assert payload["status"] == "proved"
+
+
+@pytest.mark.parametrize("n", [n for n in update.NUMBERS if n != 153])
+def test_selected_update_repairs_both_lanes_without_rewriting_history(n: int) -> None:
+    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    expected_verified = case["verified_upper_bound"].copy()
+    case["reported_upper_bound"].update(value="99.0", exact_form="99/1")
+    case["verified_upper_bound"].update(value="98.0", exact_form="98/1")
+    case["verified_lower_bound"]["value"] = "1.0"
+    body, count = re.subn(
+        rf"\$s\({n}\) \\le [0-9.]+\$,\s+with exact side\s+\$[0-9]+(?:/[0-9]+)?\$",
+        lambda _match: f"$s({n}) \\le 99.0$, with exact side $99/1$",
+        body,
+    )
+    assert count == 1
+    body, count = re.subn(r"source print\s+\$[0-9.]+\$", "source print $99.0$", body)
+    assert count == 1
+    if n in update.REPLACEMENTS:
+        body, count = re.subn(
+            r"S_n = \\frac\{[0-9]+\}\{[0-9]+\}",
+            lambda _match: r"S_n = \frac{999}{1}",
+            body,
+        )
+        assert count == 1
+    stale = (
+        "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    )
+    assert stale != existing
+    availability = load_availability()
+    catalogue = load_drafting_catalogue([n], availability)
+    refreshed = redraft(
+        n,
+        stale,
+        availability=availability,
+        catalogue=catalogue,
+        review_date="2026-10-07",
+        retrieved_date="2026-10-07",
+    )
+    payload = safe_load(refreshed.split("---\n", 2)[1])["packing"]
+    assert payload["verified_upper_bound"] == expected_verified
+    assert payload["reported_upper_bound"]["source_key"] == update.SOURCE_KEY
+    assert payload["reported_upper_bound"]["evidence"] == ["E-squish-update-2026-10-07-report"]
+    assert payload["rigidity"] is None
+    assert re.sub(r"\s+", " ", with_rigidity_of(existing, refreshed)) == re.sub(
+        r"\s+", " ", existing
+    )
+
+
+@pytest.mark.parametrize("declaration", ["with exact side", "source print", "S_n = "])
+def test_selected_update_refuses_missing_geometry_declarations(declaration: str) -> None:
+    n = 126
+    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    assert existing.count(declaration) == 1
+    stale = existing.replace(declaration, "Missing declaration ", 1)
+    availability = load_availability()
+    with pytest.raises(GenerationError, match=r"exactly one .*side/display declaration"):
+        redraft(
+            n,
+            stale,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        )
+
+
+@pytest.mark.parametrize("mutation", ["missing", "duplicate"])
+def test_confirmed_update_refuses_missing_or_duplicate_assurance(mutation: str) -> None:
+    n = 126
+    existing = record_path(FRONTIER, n).read_text()
+    declaration = re.search(
+        r"This update is\s+confirmed at V3/C3.*?been established\.",
+        existing,
+        re.DOTALL,
+    )
+    assert declaration is not None
+    assurance = declaration.group()
+    replacement = "Missing assurance." if mutation == "missing" else assurance + assurance
+    stale = existing.replace(assurance, replacement, 1)
+    availability = load_availability()
+    with pytest.raises(GenerationError, match="assurance declaration"):
+        redraft(
+            n,
+            stale,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        )
+
+
+@pytest.mark.parametrize("n", [126, 179])
+def test_update_refresh_refuses_unmapped_confirmation_evidence(n: int) -> None:
+    existing = record_path(FRONTIER, n).read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    case["verified_upper_bound"] = {
+        "value": case["reported_upper_bound"]["value"],
+        "exact_form": case["reported_upper_bound"]["exact_form"],
+        "evidence": ["E-squish-update-unmapped-exact-replay"],
+    }
+    confirmed = (
+        "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    )
+    availability = load_availability()
+    with pytest.raises(GenerationError, match="unmapped confirmed SQUISH update evidence"):
+        redraft(
+            n,
+            confirmed,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        )

@@ -289,12 +289,20 @@
     open(step.href, step);
   });
 
+  popover.addEventListener("beforetoggle", (event) => {
+    if (!(event instanceof ToggleEvent) || event.newState !== "closed") {
+      return;
+    }
+    // The native close hides the record before the queued toggle event runs. Clear
+    // its row's expanded state synchronously, while the visibility changes with it.
+    expanded?.setAttribute("aria-expanded", "false");
+    expanded = null;
+  });
+
   popover.addEventListener("toggle", (event) => {
     if (!(event instanceof ToggleEvent) || event.newState !== "closed" || origin === null) {
       return;
     }
-    expanded?.setAttribute("aria-expanded", "false");
-    expanded = null;
     // Back to what opened the popover, unless the reader has already moved on to
     // something else, such as another row whose press closed it.
     const focus = document.activeElement;

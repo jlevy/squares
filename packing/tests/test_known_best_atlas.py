@@ -41,7 +41,8 @@ from sqpack.witness import load_witness
 from sqpack.workers import worker_count
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 27, "n=1..324": 59}
+#: The 7 October SQUISH update moved n = 179 and 258 onto packet-derived facts.
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 27, "n=1..324": 57}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -64,8 +65,8 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     },
     "n=1..324": {
         "exact-grid": 176,
-        "kingbird-derived-facts": 94,
-        "packet-derived-facts": 54,
+        "kingbird-derived-facts": 92,
+        "packet-derived-facts": 56,
     },
 }
 

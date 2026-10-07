@@ -1336,6 +1336,20 @@ sources:
       review and steering. The repository has no LICENSE, so only derived packing facts and source metadata
       are retained. The n153 rational certificate attachment in issue #401 comment 6031977107, published
       2026-10-07T05:59:18Z; its digest is in the packet manifest.'
+
+  - key: '[SQUISH update 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Couzo and Ellsworth
+    lineage: independent
+    note: Nate Chaoweeraprasit, using SQUISH, reports thirteen new or smaller certificates at revision
+      5e32bbd7028b6e3b869979278079cd37ed6770aa. The author names Francisco Couzo seeds at ten counts
+      and SQUISH seeds at three; per-count seed attribution is retained. David Ellsworth’s numerical checking tool is credited in the update. Human-directed Claude Opus
+      5.5 assistance is disclosed. No LICENSE is published; only attributed derived geometric facts
+      and brief claim quotations are retained. n153 is identical to the earlier attached certificate.
 # The surname each credited name is cited under, for the names `found_by` and
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being

@@ -433,7 +433,9 @@ def repository_file_problem(path: str) -> str | None:
     try:
         target.relative_to(REPO.resolve())
     except ValueError:
-        return "resolves outside the repository"
+        from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
+
+        return linked_certificate_problem(path, repository=REPO)
     if not target.is_file():
         return "does not name a file"
     return None

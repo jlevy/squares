@@ -6,6 +6,18 @@
 #
 # Run: uv run --frozen --group dev python -m devtools.run_negative_controls
 controls:
+- name: SQUISH update - a different source revision cannot inherit the reviewed replay
+  file: resources/web/squish-401-update-2026-10-07/acquisition/sources.json
+  replace: ['"source_commit": "5e32bbd7028b6e3b869979278079cd37ed6770aa"', '"source_commit": "unreviewed-revision"']
+  run: uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets check-certification
+  expect: update source provenance mismatch
+
+- name: SQUISH update - an unsafe published decimal cannot inherit the exact bound
+  file: resources/web/squish-401-update-2026-10-07/acquisition/update-claims.json
+  replace: ['"offered_side": "11.6009077785163406"', '"offered_side": "11.6009077785163405"']
+  run: uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets check-certification
+  expect: update claims mismatch
+
 
 - name: test harness - missing configured test directory
   file: pyproject.toml

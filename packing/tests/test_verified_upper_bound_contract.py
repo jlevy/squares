@@ -33,6 +33,7 @@ import pytest
 import yaml
 
 from devtools import apply_exact_ceilings
+from devtools import squish_followup_packets as squish_update
 from devtools import squish_upper_bound_packets as squish
 from devtools.check_case_prose import Reading
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -486,6 +487,16 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
         if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish.source_key(n)
         and not any(
             e.startswith("E-squish-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    # Earlier SQUISH replay evidence certifies the earlier geometry, not this update.
+    pending |= {
+        n
+        for n in squish_update.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish_update.SOURCE_KEY
+        and not any(
+            e.startswith("E-squish-update-")
             for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
         )
     }
