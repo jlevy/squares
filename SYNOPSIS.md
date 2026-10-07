@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 215 | 49 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 194 | 67 accepted; 38 rejected; 59 unresolved; 12 baseline; 12 blocked; 4 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 215 | 49 confirmed; 33 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 195 | 67 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5793,7 +5793,7 @@ round that names the hypothesis, control roles included.
 | [H-278](packing/campaign/hypotheses/H-278-n17-widened-omitted-feature-forcing.md) | confirmed | Exact finite omitted-feature bounds over the widened tube | 1 | exp-261 accepted:1152exact bounds and fresh replay pass; allowance -71/21000; uniform hand bridge has separate scope |
 | [H-279](packing/campaign/hypotheses/H-279-n17-widened-apex-position-duals.md) | confirmed | Exact residual and radius checks for the conditional apex bridge | 2 | exp-264 accepted production/fresh replay5.67s; original exp-262 replay refusal preserved; conditional physical-packing bridge |
 | [H-280](packing/campaign/hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | confirmed | One exact all-branch annulus patch on a frozen ladder | 1 | exp-263 first2^-20 closed box accepted6.29s, all256 owners; one patch only |
-| [H-281](packing/campaign/hypotheses/H-281-n11-first-round-producer-readiness.md) | running | Repaired-producer n11 first complete round and fresh zero-production resume replay | 1 | exp-265 registered;900s production/300s fresh replay,4096MiB; no first-round contraction threshold |
+| [H-281](packing/campaign/hypotheses/H-281-n11-first-round-producer-readiness.md) | blocked | Repaired-producer n11 first complete round and fresh zero-production resume replay | 2 | exp-265 startup parser refusal preserved; exp-268 same-claim corrected invocation registered;900s production/300s fresh replay,4096MiB; no first-round contraction threshold |
 
 ### Confirmed
 
@@ -6131,7 +6131,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 194 rounds registered in `series-000`.
+There are 195 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5730.3 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6368,7 +6368,8 @@ archive beside it.
 | [exp-262](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-262-h279-widened-apex.md) | 17 | target | H-279 | Complete58 signed-position duals and exact apex radii | Arithmetic passes; fresh replay refuses serialized large integers | blocked |
 | [exp-263](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-263-h280-one-annulus-patch.md) | 17 | target | H-280 | Frozen five-box ladder and one retained dual, all256 choices | First frozen2^-20 box passes exact production and fresh replay; eta approximately0.000131323483, all256 choices | accepted |
 | [exp-264](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-264-h279-apex-replay-repair.md) | 17 | target | H-279 | Unchanged apex contract, repaired exact receipt encoding | Unchanged criterion passes production and fresh replay5.67s; original failure preserved | accepted |
-| [exp-265](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-265-h281-n11-first-round-control.md) | 11 | positive_control | H-281 | Pinned case438,one complete11-owner round,exact endpoint and fresh zero-production resume replay | Registered before target | in-progress |
+| [exp-265](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-265-h281-n11-first-round-control.md) | 11 | positive_control | H-281 | Pinned case438,one complete11-owner round,exact endpoint and fresh zero-production resume replay | Unsupported --partial startup flag refused before scientific inputs;0.73s logs preserved | blocked |
+| [exp-268](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md) | 11 | positive_control | H-281 | Same first-round contract with corrected CLI invocation | Registered before scientific work; original exp-265 preserved | in-progress |
 
 ### Cost and provenance
 
@@ -6567,11 +6568,12 @@ archive beside it.
 | exp-262 | 180seconds combined generation/replay | 3.87s | — | criterion | clean `513adb1bf`; replay refusal retained |
 | exp-263 | 180seconds combined production/replay | 6.29 s | — | criterion | `76e2830b4` |
 | exp-264 | 180seconds combined generation/replay | 5.67 s | — | criterion | `76e2830b4` |
-| exp-265 | 900s production;300s fresh replay;4096MiB | Pending | — | Running | Reviewed source frozen before target |
+| exp-265 | 900s production;300s fresh replay;4096MiB | 0.73 s | — | error | `0fac86f9f` |
+| exp-268 | 900s production;300s fresh replay;4096MiB | Pending | — | Running | Unchanged scientific settings frozen before corrected launch |
 
-### What the 194 rounds jointly establish
+### What the 195 rounds jointly establish
 
-The 194 rounds use 2512.1 agent-minutes and 5730.3 wall-minutes under the campaign’s
+The 195 rounds use 2512.1 agent-minutes and 5730.3 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

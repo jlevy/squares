@@ -1,14 +1,14 @@
 ---
-title: exp-265 — n11 first certified round and independent resume replay
+title: exp-268 — same-claim n11 first round after CLI startup repair
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
 experiment:
-  id: exp-265
+  id: exp-268
   series: series-000
-  title: Repaired producer on pinned n11 case 438 with one complete round and fresh replay
+  title: Same-claim n11 first-round control after startup invocation repair
   date: '2026-10-07'
   hypotheses:
   - H-281
@@ -39,46 +39,37 @@ experiment:
     command: From packing/ with required external scratch variables, production uses /Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3
       -m devtools.pilot_n17_capture --system n11 --cap capture --bins 32 --max-rounds 1 --max-live 64
       --min-width-log2 22 --hull-limit 48 --core octagon --seed-grid 0 --max-seconds 900 --replay-share
-      0 --max-memory-mib 4096 --checkpoints campaign/series/series-000-smoke-and-calibration/results/exp-265-n11-first-round-control/checkpoints
-      --save-objects campaign/series/series-000-smoke-and-calibration/results/exp-265-n11-first-round-control/production-objects
-      --output campaign/series/series-000-smoke-and-calibration/results/exp-265-n11-first-round-control/production.json.
+      0 --max-memory-mib 4096 --checkpoints campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/checkpoints
+      --save-objects campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/production-objects
+      --output campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/production.json.
       Fresh process uses the same scientific parameters, --max-seconds 300 --replay-share 0.5 --resume
-      campaign/series/series-000-smoke-and-calibration/results/exp-265-n11-first-round-control/checkpoints/checkpoint-round-001.json.gz,
+      campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/checkpoints/checkpoint-round-001.json.gz,
       separate replay-objects and fresh-replay.json destinations. Both phases use GNU gtimeout -k10s with
-      their respective900s/300s wall ceilings; production additionally writes --partial in the result
-      directory. Unique checkpoints and objects are retained there.
+      their respective900s/300s wall ceilings; the CLI derives its partial file from --output. Unique
+      checkpoints and objects are retained there.
     budget: 900-second production ceiling followed by 300-second fresh replay ceiling; current-RSS4096
       MiB per process, checked cooperatively at phase boundaries. Freeze actual argv, RUN_DIR and owned-process
       timeout/cleanup before launch. Partial updates and complete checkpoints survive interruption; do
       not treat a memory-stop checkpoint as resumable. No continuation or target retuning.
-    record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-265-n11-first-round-control
-  results:
-  - shape: determination
-    role: outcome
-    question: First complete eleven-owner round, endpoint retained after seed/every update, producer/checker
-      agreement; fresh saved-seed admission and eleven-step replay, final_state_agrees=true, same seed/node
-      and round/update records, no new production.
-    outcome: invalid
-    checked_by: CLI parser exited2 before scientific inputs or production; unrecognized --partial flag.
+    record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control
+  lease:
+    expires: '2026-10-07T09:25:00Z'
+    host: macOS arm64
+  results: []
   verdict:
-    decision: blocked
+    decision: in-progress
     primary_criterion: First complete eleven-owner round, endpoint retained after seed/every update, producer/checker
       agreement; fresh saved-seed admission and eleven-step replay, final_state_agrees=true, same seed/node
       and round/update records, no new production.
-    reason: 'Technical startup refusal: coordinator appended unsupported --partial; CLI exited2 at argument
-      parsing before sources,seed,endpoint checks or production. Original logs preserved; exp268 separately
-      preregisters the corrected same-claim invocation.'
-    needs_review: false
-  effort:
-    timebox: 900seconds production and300seconds fresh replay
-    wall_seconds: 0.73
-    stopped_by: error
+    reason: Registered before scientific work; unchanged H281 settings and900/300second budgets. Correct
+      the unsupported startup flag only; exp265 remains blocked with original logs.
 ---
-# exp-265: n11 First-Round Readiness and Cost
+# exp-268: n11 First-Round Readiness and Cost
 
 This registration precedes the target.
-Session 184 phase 5 is 08:42:46–09:12:46 UTC. Production and fresh replay are
-sequential, each with its own wall/RSS limits.
+Session 184 phase 5 is 08:42:46–09:12:46 UTC; a running fixed-budget control continues
+across the slice boundary.
+Production and fresh replay are sequential, each with its own wall/RSS limits.
 Production has `--replay-share 0`; the separately budgeted fresh replay is the
 acceptance replay. No source/input/parameter change or round-2 production is allowed
 between them.
@@ -144,14 +135,9 @@ The known exact packing must remain present throughout; neither this control nor
 successful fresh replay establishes n17 capture, a new exclusion or the 15-round R9
 contraction criterion.
 
-## Startup Refusal
-
-The launch exited at CLI parsing before any scientific input was loaded.
-The coordinator added unsupported `--partial`; the public CLI already derives its
-partial path from `--output`. The original stderr/stdout are retained.
-This attempt is blocked, not a contraction or endpoint result.
-exp-268 is the separately registered successor with the same scientific settings and
-budgets.
+The original exp-265 refused its unsupported startup argument before loading scientific
+inputs. This successor changes the invocation only; the underlying instrument,
+hypothesis, exact inputs and complete-round/fresh-replay criterion are unchanged.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
