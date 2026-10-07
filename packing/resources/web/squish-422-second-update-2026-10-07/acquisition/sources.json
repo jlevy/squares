@@ -1,0 +1,174 @@
+{
+  "cases": [
+    {
+      "exact_side": "2776969563275584455838168348247/281000083350790412930283208704",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-088.json.gz",
+      "n": 88,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 10
+      },
+      "reported_seed": "Kingbird's s(41), grafted into n88's record",
+      "safe_ceiling_16": "9.8824510304821347",
+      "side": "9.8824510304821356",
+      "source_bytes": 12145,
+      "source_file": "n088.cert.json",
+      "source_sha256": "84bd5ce83eda8147734491f7dfb12891f71b83d1afe0bd22b248c2b0db3a6624",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n088/n088.cert.json"
+    },
+    {
+      "exact_side": "6141750256175099/562949953421312",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz",
+      "n": 108,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 3
+      },
+      "reported_seed": "SQUISH's own s(110), two squares removed, then nearby search",
+      "safe_ceiling_16": "10.9099400734448775",
+      "side": "10.9099400734448775",
+      "source_bytes": 14012,
+      "source_file": "n108.cert.json",
+      "source_sha256": "9fe8a1e69c53cd0d10156f07e431dcc964ea22584ddce4ec0ec0124b8cedd5a9",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n108/n108.cert.json"
+    },
+    {
+      "exact_side": "7815882024694857/562949953421312",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-179.json.gz",
+      "n": 179,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 3
+      },
+      "reported_seed": "Francisco Couzo's s(180), one square removed, then nearby search",
+      "safe_ceiling_16": "13.8837954905121866",
+      "side": "13.8837954905121865",
+      "source_bytes": 23560,
+      "source_file": "n179.cert.json",
+      "source_sha256": "a019651e811dca7b2423c58f97cb977a822b980631797820ef0962f352f380c3",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n179/n179.cert.json"
+    },
+    {
+      "exact_side": "489683896443017/35184372088832",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-180.json.gz",
+      "n": 180,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 3
+      },
+      "reported_seed": "SQUISH's own s(182), two squares removed, then nearby search",
+      "safe_ceiling_16": "13.9176534174514757",
+      "side": "13.9176534174514757",
+      "source_bytes": 20360,
+      "source_file": "n180.cert.json",
+      "source_sha256": "4a182ac6aa4d96f26e6aff68400bc74b5c89a25c7abeb9f35a4b47b64a0d5219",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n180/n180.cert.json"
+    },
+    {
+      "exact_side": "8228961574259683/562949953421312",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-199.json.gz",
+      "n": 199,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 10
+      },
+      "reported_seed": "Kingbird's s(37), grafted into n199's record",
+      "safe_ceiling_16": "14.6175721735980400",
+      "side": "14.6175721735980400",
+      "source_bytes": 22627,
+      "source_file": "n199.cert.json",
+      "source_sha256": "e50cf3c3b4bb618766d1979ff845d5d1396267dd6ed4ba8be600e6da2116fd77",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n199/n199.cert.json"
+    },
+    {
+      "exact_side": "4061010297448552475010401636185/272770849620938037601496989696",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-207.json.gz",
+      "n": 207,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 10
+      },
+      "reported_seed": "SQUISH's own s(88), grafted into n207's record",
+      "safe_ceiling_16": "14.8879922583077482",
+      "side": "14.8879922583077473",
+      "source_bytes": 31920,
+      "source_file": "n207.cert.json",
+      "source_sha256": "f1ea9c5eacdf45f8ed15b665618e066a1218632a367d7636e1fac411b3b94c1d",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n207/n207.cert.json"
+    },
+    {
+      "exact_side": "8932777743453263/562949953421312",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-236.json.gz",
+      "n": 236,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 10
+      },
+      "reported_seed": "SQUISH's own s(88), grafted into n236's record",
+      "safe_ceiling_16": "15.8678008394255397",
+      "side": "15.8678008394255396",
+      "source_bytes": 30314,
+      "source_file": "n236.cert.json",
+      "source_sha256": "402033174ffb3f0338ec15414d49e89ed3781682cc4e49b89a3e7c735e9ac4fe",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n236/n236.cert.json"
+    },
+    {
+      "exact_side": "9424018478849569/562949953421312",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-263.json.gz",
+      "n": 263,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 3,
+        "squeezed": true
+      },
+      "reported_seed": "Francisco Couzo's s(297), carved down to n263's record, then nearby search and squeeze",
+      "safe_ceiling_16": "16.7404196795387766",
+      "side": "16.7404196795387747",
+      "source_bytes": 36028,
+      "source_file": "n263.cert.json",
+      "source_sha256": "8e32094d935b7445f98c889305ed8fd018f06c59f7d4bf8f7f0957a70a992e7c",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n263/n263.cert.json"
+    },
+    {
+      "exact_side": "2516570125647313/140737488355328",
+      "facts": "packing/resources/web/squish-422-second-update-2026-10-07/facts/n-302.json.gz",
+      "n": 302,
+      "raw_asset_retained": false,
+      "reported_metadata": {
+        "phase": 10
+      },
+      "reported_seed": "SQUISH's own s(88), grafted into n302's record",
+      "safe_ceiling_16": "17.8813062180958085",
+      "side": "17.8813062180958084",
+      "source_bytes": 32032,
+      "source_file": "n302.cert.json",
+      "source_sha256": "4c3c07657c9bb441cbb4d1b7ab3b982832a8cebbd680b1e9a3d734655fb8014e",
+      "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n302/n302.cert.json"
+    }
+  ],
+  "feasibility_checked": false,
+  "format": "external-source-acquisition-v1",
+  "producer_checker_replayed": false,
+  "raw_asset_retained": false,
+  "retrieved": "2026-10-07",
+  "source_commit": "e63e4e52b1728b6671b2f263c5e02a4aa79a39d3",
+  "source_issue": "https://github.com/jlevy/squares/issues/422",
+  "source_key": "[SQUISH second update 2026-10-07]",
+  "sources": [
+    {
+      "source_commit": "e63e4e52b1728b6671b2f263c5e02a4aa79a39d3",
+      "source_url": "https://github.com/itsnaka/squish-certs",
+      "subtree_scope": [
+        "squish-submission-2026-10-07b/n088/n088.cert.json",
+        "squish-submission-2026-10-07b/n108/n108.cert.json",
+        "squish-submission-2026-10-07b/n179/n179.cert.json",
+        "squish-submission-2026-10-07b/n180/n180.cert.json",
+        "squish-submission-2026-10-07b/n199/n199.cert.json",
+        "squish-submission-2026-10-07b/n207/n207.cert.json",
+        "squish-submission-2026-10-07b/n236/n236.cert.json",
+        "squish-submission-2026-10-07b/n263/n263.cert.json",
+        "squish-submission-2026-10-07b/n302/n302.cert.json"
+      ]
+    }
+  ]
+}

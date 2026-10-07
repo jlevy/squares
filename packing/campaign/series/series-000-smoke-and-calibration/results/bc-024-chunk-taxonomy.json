@@ -2,8 +2,8 @@
   "residue": {
     "by_source": {
       "exact-grid": 44,
-      "kingbird-derived-facts": 67,
-      "packet-derived-facts": 1
+      "kingbird-derived-facts": 65,
+      "packet-derived-facts": 3
     },
     "components": 112,
     "detail": [
@@ -787,7 +787,7 @@
         "is_the_whole_record": false,
         "n": 88,
         "size": 28,
-        "source": "kingbird-derived-facts",
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
@@ -795,9 +795,9 @@
         "is_the_whole_record": false,
         "n": 88,
         "size": 36,
-        "source": "kingbird-derived-facts",
+        "source": "packet-derived-facts",
         "tilted": false,
-        "walls_touched": 2
+        "walls_touched": 4
       },
       {
         "is_the_whole_record": false,
@@ -963,8 +963,8 @@
     "tilted": 0,
     "walls_touched": {
       "1": 1,
-      "2": 67,
-      "4": 44
+      "2": 66,
+      "4": 45
     },
     "whole_record": 44
   },
@@ -1079,27 +1079,27 @@
       "tilted_components": 0
     },
     "kingbird-derived-facts": {
-      "components": 401,
-      "records": 35,
+      "components": 380,
+      "records": 34,
       "shapes": {
         "L": 31,
-        "bar": 90,
-        "other-polyomino": 67,
+        "bar": 85,
+        "other-polyomino": 65,
         "rectangle": 12,
-        "singleton": 201
+        "singleton": 187
       },
-      "tilted_components": 247
+      "tilted_components": 230
     },
     "packet-derived-facts": {
-      "components": 45,
-      "records": 1,
+      "components": 66,
+      "records": 2,
       "shapes": {
         "L": 1,
-        "bar": 9,
-        "other-polyomino": 1,
-        "singleton": 34
+        "bar": 14,
+        "other-polyomino": 3,
+        "singleton": 48
       },
-      "tilted_components": 25
+      "tilted_components": 42
     }
   },
   "subject": {
@@ -1154,15 +1154,15 @@
       "4": 1
     },
     "bar": {
-      "0": 86,
+      "0": 85,
       "1": 5,
-      "2": 8,
+      "2": 9,
       "3": 1
     },
     "other-polyomino": {
       "1": 1,
-      "2": 67,
-      "4": 44
+      "2": 66,
+      "4": 45
     },
     "rectangle": {
       "0": 11,
@@ -1171,9 +1171,9 @@
       "4": 9
     },
     "singleton": {
-      "0": 159,
-      "1": 37,
-      "2": 39,
+      "0": 157,
+      "1": 41,
+      "2": 37,
       "4": 1
     }
   }

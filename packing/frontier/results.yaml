@@ -12098,3 +12098,76 @@ results:
       metadata, complete semantic input, typed coverage and safe decimal ceilings. Explicit --replay
       repeats both decisions. Two accepted scoped AI reviews address shared conversion and semantic
       premises.
+
+  - id: T-116
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: '`s(n) ≤ S_n` at nine counts, from the second SQUISH update’s new rational packings'
+    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports smaller rational packing upper
+      bounds at n =88,108,179,180,199,207,236,263,302. Five counts are additional to his earlier
+      submission and four replace earlier SQUISH reports. Original and first-update certificates
+      remain retained. This layer records source claims at V0/C0; no project feasibility promotion,
+      optimality or rigidity follows.
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: 'Scored as a reported claim: nine case-bound improvements, five additional counts
+        and four tighter submitted bounds; no exact optimum or general theorem.'
+      scored: '2026-10-07'
+      by: think-sfpz reported import lane (repository; draft)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH second update 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-second-update-2026-10-07-report
+    artifacts:
+    - packing/resources/web/squish-422-second-update-2026-10-07/README.md
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/update-claims.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/devtools/squish_second_update_packets.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-088.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-180.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-199.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-207.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-236.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-263.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-302.json.gz
+    - packing/frontier/n-088.md
+    - packing/frontier/n-108.md
+    - packing/frontier/n-179.md
+    - packing/frontier/n-180.md
+    - packing/frontier/n-199.md
+    - packing/frontier/n-207.md
+    - packing/frontier/n-236.md
+    - packing/frontier/n-263.md
+    - packing/frontier/n-302.md
+    next_rung: Complete local dual exact replay for all nine unchanged rational geometries, both
+      complete-roster geometric controls per case, and two fresh separately prompted scoped mathematical
+      and semantic-binding reviews mapped to this nine-case revision. Retain full value-specific
+      witness/input/verdict metadata before promoting verified lanes.
+    notes: Five source prints (179,207,236,263,302) fall below their exact sides; finite source
+      prints and safe upward decimal displays are separate. All nine previous verified values,
+      exact forms and evidence remain unchanged. Author-reported Kingbird, Couzo and SQUISH seed
+      lineage and human-directed Claude Opus5.5 assistance are retained. Reported registration
+      does not admit externally completed replay receipts or reviews; these belong in a separate
+      confirmation layer.
+    composition: Bounded duplicate-key/type/literal/roster admission retains normalized rational
+      half-angle facts. Exact drawing checks belong to the visualization layer and do not confirm
+      the imported result. Earlier project certificates confirm only their earlier values.

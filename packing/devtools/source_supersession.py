@@ -258,6 +258,7 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     """
     from devtools import render_case_verifiers  # noqa: PLC0415
     from devtools import squish_followup_packets as update  # noqa: PLC0415
+    from devtools import squish_second_update_packets as second  # noqa: PLC0415
     from devtools import squish_upper_bound_packets as squish  # noqa: PLC0415
 
     coverage = safe_load(COVERAGE.read_text())
@@ -265,6 +266,13 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     if selected is None:
         return generated
     source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
+    if source["source_key"] == second.SOURCE_KEY:
+        case = safe_load(existing.split("---\n", 2)[1])["packing"]
+        return (
+            second.adopt_report(n, existing, generated)
+            if case["reported_upper_bound"]["source_key"] == second.SOURCE_KEY
+            else generated
+        )
     if source["source_key"] == update.SOURCE_KEY:
         return _adopt_selected_update(n, existing, generated)
     if n not in squish.NUMBERS or source["source_key"] != squish.source_key(n):

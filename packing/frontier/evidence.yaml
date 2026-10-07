@@ -28127,3 +28127,35 @@ evidence:
         update geometries, full decided inputs and full-size controls. The original eleven-case reviews
         retain their original scope.
     source_reviewed: '2026-10-07'
+
+  - id: E-squish-second-update-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH second update 2026-10-07]'
+    certificate: packing/resources/web/squish-422-second-update-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Nine source claims are retained as attributed normalized rational facts only.
+      Current reported layer V0/C0 admits no feasibility replay or scoped review; producer code,
+      success logs, raw prose and raw drawings remain outside Git. No optimality, rigidity or
+      human oversight established. Five source decimal prints lie below their exact sides and
+      remain quotations; current displays use safe upward ceilings. Nate Chaoweeraprasit reports
+      Kingbird (David Ellsworth), Francisco Couzo and SQUISH seeds and human-directed Claude Opus5.5
+      assistance. Earlier verified lanes remain unchanged.
+    source_reviewed: '2026-10-07'

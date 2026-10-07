@@ -49,6 +49,7 @@ from strif import atomic_output_file
 from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import evand_exact_certificates as evand_certificates
 from devtools import squish_followup_packets as squish_followup
+from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_packets
 from devtools import upper_bound_packets as packets
 from devtools.build_bound_citations import RECENT_SINCE
@@ -783,13 +784,14 @@ def _source_plan(
             upstream_digest,
         )
     pictured = pictured_source_key(case)
-    if pictured == squish_followup.SOURCE_KEY:
-        path = squish_followup.fact_path(case.n)
-        if case.n not in squish_followup.NUMBERS or case.n == 153 or not path.is_file():
-            raise ValueError(f"n={case.n}: {pictured} retains no new packing for this case")
-        return SourcePlan(
-            PACKET_KIND, path, squish_followup.source_url(case.n), case.n, (case.n,)
-        )
+    for update in (squish_second, squish_followup):
+        if pictured == update.SOURCE_KEY:
+            if case.n not in update.NUMBERS or (update is squish_followup and case.n == 153):
+                raise ValueError(f"n={case.n}: {pictured} retains no new packing for this case")
+            path = update.fact_path(case.n)
+            if not path.is_file():
+                raise ValueError(f"n={case.n}: {pictured} retains no facts for this case")
+            return SourcePlan(PACKET_KIND, path, update.source_url(case.n), case.n, (case.n,))
     if pictured in SQUISH_SOURCE_KEYS:
         path = squish_packets.fact_path(case.n)
         if (
@@ -941,16 +943,16 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
             )
             continue
         if plan.kind == PACKET_KIND:
-            if plan.path == squish_followup.fact_path(n):
+            layer = _squish_layer(n, plan.path)
+            if layer is not None:
                 author = squish_packets.AUTHOR
-                revision = squish_followup.REVISION
+                revision = (
+                    "issuecomment-6031977107"
+                    if layer is squish_packets and n == 153
+                    else layer.REVISION
+                )
                 attribution = f"{author}, {plan.url} at {revision}"
-                retrieved = squish_followup.RETRIEVED
-            elif plan.path == squish_packets.fact_path(n):
-                author = squish_packets.AUTHOR
-                revision = squish_packets.REVISION if n != 153 else "issuecomment-6031977107"
-                attribution = f"{author}, {plan.url} at {revision}"
-                retrieved = squish_packets.RETRIEVED
+                retrieved = layer.RETRIEVED
             else:
                 packet = next(
                     item for item in packets.CERTIFIED if plan.path.is_relative_to(item.facts)
@@ -1033,6 +1035,14 @@ def _retained_revision(retained: Mapping[str, Any], field: str = "revision") -> 
     return str(recorded) if recorded else None
 
 
+def _squish_layer(n: int, path: Path) -> Any | None:
+    """Choose an immutable revision by its canonical fact path and exact roster."""
+    for layer in (squish_second, squish_followup, squish_packets):
+        if n in layer.NUMBERS and path == layer.fact_path(n):
+            return layer
+    return None
+
+
 def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
     frontier_path = _relative(case.path)
     if plan.kind == "exact-grid":
@@ -1055,10 +1065,7 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
                 revision_sha256=_retained_revision(retained, "revision_sha256"),
             )
         if plan.kind == PACKET_KIND:
-            if plan.path in {
-                squish_packets.fact_path(case.n),
-                squish_followup.fact_path(case.n),
-            }:
+            if _squish_layer(case.n, plan.path) is not None:
                 return _squish_derived_witness(case, plan)
             retained = load_witness(plan.path, fallback_schema=WITNESS_SCHEMA)
             _assert_side_matches(case, str(retained["side"]))
@@ -1091,13 +1098,14 @@ def _squish_derived_witness(case: FrontierCase, plan: SourcePlan) -> dict:
     feasibility. This check establishes the drawing's geometry, while confirmation of
     the imported result remains the frontier record's separate evidence lane.
     """
-    is_update = plan.path == squish_followup.fact_path(case.n)
-    if is_update:
-        fact = squish_followup.read_fact(case.n)
+    layer = _squish_layer(case.n, plan.path)
+    if layer is None:
+        raise ValueError("source plan names no retained SQUISH revision")
+    fact = layer.read_fact(case.n)
+    if layer is not squish_packets:
         if case.side != squish_followup.display(fact["side"]):
             raise ValueError("source display disagrees with the prescribed update ceiling")
     else:
-        fact = squish_packets.read_fact(case.n)
         normalized_side = squish_packets.verified_value(
             Fraction(fact["side"]), fact["printed_side"]
         )
@@ -1127,13 +1135,11 @@ def _squish_derived_witness(case: FrontierCase, plan: SourcePlan) -> dict:
         "key": pictured_source_key(case),
         "path": _relative(plan.path),
         "url": plan.url,
-        "retrieved": squish_followup.RETRIEVED if is_update else squish_packets.RETRIEVED,
+        "retrieved": layer.RETRIEVED,
         "revision": (
-            squish_followup.REVISION
-            if is_update
-            else squish_packets.REVISION
-            if case.n != 153
-            else "issuecomment-6031977107"
+            "issuecomment-6031977107"
+            if layer is squish_packets and case.n == 153
+            else layer.REVISION
         ),
     }
     witness["certificate"] = {
@@ -2264,7 +2270,7 @@ def _manifest_entry(built: BuiltCase) -> dict:
         derivation = (
             "exact rational half-angle conversion of retained source facts, checked "
             "with exact predicates"
-            if plan.path in {squish_packets.fact_path(n), squish_followup.fact_path(n)}
+            if _squish_layer(n, plan.path) is not None
             else "deterministic reuse of a source packet's retained Witness/v2 facts"
         )
     elif n == plan.source_n:
@@ -2523,6 +2529,62 @@ def update(workers: int = 1) -> None:
     )
     for note in composite_findings().notes:
         print(note)
+
+
+def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
+    """Refresh selected geometry, refusing any change in the retained remainder.
+
+    Source selection and displayed side must agree with the old manifest outside the
+    requested scope. Each selected witness is rebuilt through the ordinary strict
+    producer; all other manifest entries and geometry files are preserved.
+    """
+    selected = set(numbers)
+    if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
+        raise ValueError("selected atlas refresh requires unique corpus counts")
+    build_composite_figure_data.update()
+    _figure_entries.cache_clear()
+    clear_build_caches()
+    retained: list[dict] = json.loads(MANIFEST.read_text())["atlas"]["entries"]
+    if [row["n"] for row in retained] != list(CORPUS.numbers):
+        raise ValueError("selected atlas refresh requires a complete retained corpus")
+    plans = source_plans()
+    for row in retained:
+        n = row["n"]
+        if n in selected:
+            continue
+        plan = plans[n]
+        expected_path = SOURCE_MANIFEST if plan.kind == "kingbird-derived-facts" else plan.path
+        if (
+            row["reported_side"] != _frontier_case(n).side
+            or row["source"]["kind"] != plan.kind
+            or row["source"]["path"]
+            != expected_path.relative_to(REPOSITORY_ROOT / "packing").as_posix()
+            or row["source"].get("url", "") != plan.url
+        ):
+            raise ValueError(f"unselected n={n} changed; use the complete atlas producer")
+    built = built_cases(numbers, workers)
+    replacement: dict[int, dict] = {item.frontier.n: _manifest_entry(item) for item in built}
+    entries = [replacement.get(row["n"], row) for row in retained]
+    manifest = _manifest_document(entries, [_composite_record(canvas) for canvas in COMPOSITES])
+    outputs = {
+        MANIFEST: _manifest_text(manifest),
+        SOURCE_MANIFEST: _json_text(_source_index(plans)),
+    }
+    for item in built:
+        n = item.frontier.n
+        outputs[WITNESS_ROOT / f"n-{n:03d}.yaml"] = item.witness_text
+        outputs[RENDER_ROOT / f"n-{n:03d}.svg"] = item.rendering_text
+        outputs[item.frontier.path] = _frontier_with_witness(
+            item.frontier, str(item.witness["id"])
+        )
+    for path, text in outputs.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with atomic_output_file(path) as temporary:
+            temporary.write_text(text, encoding="utf-8")
+    print(
+        f"Selected atlas refreshed: {len(selected)} geometries; "
+        f"{CORPUS.count - len(selected)} entries preserved"
+    )
 
 
 def _git_result(*arguments: str) -> subprocess.CompletedProcess[str]:

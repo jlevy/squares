@@ -65,6 +65,7 @@ import pytest
 import yaml
 
 from devtools import squish_followup_packets as update
+from devtools import squish_second_update_packets as second
 from devtools import validate_schemas
 from devtools.apply_upper_bound_packets import PREVIOUS_HEADING, earlier_reports, normalized
 from devtools.check_basic_bounds import check_case_basic_bounds
@@ -825,7 +826,8 @@ def test_the_improvement_rule_reproduces_the_hand_transcription() -> None:
     """Measured over every catalogue-sourced pictured record below the register.
 
     The rule reads a sentence-initial, dated "Improved by <names> in <month> <year>", or
-    "Improved and optimized by", and nothing else. It reproduces 44 of the 47 records. One
+    "Improved and optimized by", and nothing else. It reproduces 43 of the 46 records;
+    n = 88 now has a later selected source. One
     miss is `n = 29`, where the hand pass read an "Optimized by" sentence as an
     improvement and five sibling records read the same sentence as nothing; the other two
     are `n = 69` and `83`, whose records were transcribed on 2026-10-05 from drafts, which
@@ -846,7 +848,7 @@ def test_the_improvement_rule_reproduces_the_hand_transcription() -> None:
         if list(facts.improved_by) != list(reported["improved_by"]):
             disagreed[n] = (list(reported["improved_by"]), list(facts.improved_by))
     print(f"compared {compared} record(s); the rule disagrees at {sorted(disagreed)}")
-    assert compared == 47
+    assert compared == 46
     assert set(disagreed) == {29, 69, 83}
     for n in (69, 83):
         assert disagreed[n][0] == [*disagreed[n][1], *catalogue[n].uncredited_optimizers], n
@@ -1108,7 +1110,10 @@ def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: P
     # reflows, so the refresh is compared as `check_records` compares an adopted count:
     # whitespace collapsed.
     assert normalized(refreshed) == normalized(committed)
-    assert "  rigidity:\n    property: " in refreshed
+    assert (
+        safe_load(refreshed.split("---\n", 2)[1])["packing"]["rigidity"]
+        == (safe_load(committed.split("---\n", 2)[1])["packing"]["rigidity"])
+    )
     drafted = redraft(
         179,
         committed,
@@ -1168,7 +1173,7 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
 
     from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
 
-    n = 108
+    n = 130
     existing = record_path(FRONTIER, n).read_text()
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
@@ -1228,7 +1233,7 @@ def test_selected_squish_publication_admits_integer_rational_sides(
 ) -> None:
     from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
 
-    n = 108
+    n = 130
     existing = record_path(FRONTIER, n).read_text()
     availability = load_availability()
     historical = adopt_upper_bound_packet(
@@ -1464,7 +1469,9 @@ def test_a_pictured_integer_side_case_is_recorded_as_the_trivial_grid() -> None:
         assert payload["status"] == "proved"
 
 
-@pytest.mark.parametrize("n", [n for n in update.NUMBERS if n != 153])
+@pytest.mark.parametrize(
+    "n", [n for n in update.NUMBERS if n != 153 and n not in second.NUMBERS]
+)
 def test_selected_update_repairs_both_lanes_without_rewriting_history(n: int) -> None:
     existing = (FRONTIER / f"n-{n:03d}.md").read_text()
     _, front, body = existing.split("---\n", 2)
@@ -1580,3 +1587,61 @@ def test_update_refresh_refuses_unmapped_confirmation_evidence(n: int) -> None:
             review_date="2026-10-07",
             retrieved_date="2026-10-07",
         )
+
+
+@pytest.mark.parametrize("n", second.NUMBERS)
+def test_second_update_rebuilds_current_and_historical_geometry_from_their_own_packets(
+    n: int,
+) -> None:
+    """Each selected pose and its earlier certificate survive real historical drafting."""
+    committed = record_path(FRONTIER, n).read_text()
+    _, front, body = committed.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    verified = case["verified_upper_bound"].copy()
+    case["reported_upper_bound"].update(value="99.0", exact_form="99/1")
+    case["verified_upper_bound"].update(value="98.0", exact_form="98/1")
+    case["verified_lower_bound"]["value"] = "1.0"
+    body, count = re.subn(
+        rf"\$s\({n}\) \\le [0-9.]+\$,\s+with exact side\s+\$[0-9]+(?:/[0-9]+)?\$",
+        lambda _: f"$s({n}) \\le 99.0$, with exact side $99/1$",
+        body,
+    )
+    assert count == (2 if n in (179, 263) else 1)
+    body, count = re.subn(r"source print\s+\$[0-9.]+\$", "source print $99.0$", body)
+    assert count == (2 if n in (179, 263) else 1)
+    if n in (108, 180):
+        body, count = re.subn(
+            r"S_n = \\frac\{[0-9]+\}\{[0-9]+\}", lambda _: r"S_n = \frac{999}{1}", body
+        )
+        assert count == 1
+        body, count = re.subn(
+            r"The source[\u2019']s original finite decimal display is\s+\$[0-9.]+\$",
+            "The source's original finite decimal display is $99.0$",
+            body,
+        )
+        assert count == 1
+        body, count = re.subn(
+            r"The verified display is\s+\$[0-9.]+\$", "The verified display is $99.0$", body
+        )
+        assert count == 1
+    stale = (
+        "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    )
+    availability = load_availability()
+    if n == 88:
+        availability[n] = _availability(n, CATALOGUE)
+    refreshed = redraft(
+        n,
+        stale,
+        availability=availability,
+        catalogue=load_drafting_catalogue([n], availability),
+        review_date="2026-10-07",
+        retrieved_date="2026-10-07",
+    )
+    rebuilt = safe_load(refreshed.split("---\n", 2)[1])["packing"]
+    assert rebuilt["verified_upper_bound"] == verified
+    assert rebuilt["reported_upper_bound"]["source_key"] == second.SOURCE_KEY
+    assert rebuilt["reported_upper_bound"]["evidence"] == [second.EVIDENCE_ID]
+    assert rebuilt["rigidity"] is None
+    assert normalized(with_rigidity_of(committed, refreshed)) == normalized(committed)

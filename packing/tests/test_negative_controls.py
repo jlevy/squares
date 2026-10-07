@@ -123,6 +123,41 @@ def test_historical_validation_prunes_preserve_replay_inputs(
         assert not (tree / HERE / relative).exists(), relative
 
 
+def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Exclude only unconsumed telemetry; the finished indexed worker retains inputs."""
+    tree, copied_targets = control_snapshot
+    logs = (
+        "session-164-push-initial.log",
+        "session-153-integrated-push.log",
+        "session-163-push-recovery.log",
+        "session-163-push-refinement.log",
+        "session-163-push-final.log",
+    )
+    for name in logs:
+        source = ROOT / "campaign/agent-sessions" / name
+        assert source in PRUNE
+        assert source.is_file()
+        assert source.relative_to(controls.REPO) not in copied_targets
+        assert not (tree / HERE / "campaign/agent-sessions" / name).exists()
+    for relative in (
+        "campaign/agent-sessions/session-164-efficiency-push.log",
+        "campaign/agent-sessions/session-164-push-final.log",
+        "campaign/agent-sessions/session-153-native-full.json",
+        "campaign/agent-sessions/session-153-native-full.rows.jsonl",
+        "frontier/results.yaml",
+        "frontier/evidence.yaml",
+        "witnesses/known-best/n-263.yaml",
+        "devtools/check_results.py",
+        "devtools/squish_second_update_packets.py",
+    ):
+        source = ROOT / relative
+        assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
+        assert tree / HERE / relative in (tracked_files(tree, "packing") or []), relative
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
 def test_oversized_snapshot_is_refused_before_cloning(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:

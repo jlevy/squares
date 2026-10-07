@@ -1967,3 +1967,67 @@ issues:
       browser tests. The lower gate and upper confirmation integration repairs remain pending.
       The separate 422 queue acknowledgement is https://github.com/jlevy/squares/issues/422#issuecomment-6047406306.
       A final accurate author reply remains due after this confirmation layer is merged and deployed.
+  - number: 422
+    title: '9 new packings below record for n = 88–302 (s(n) bounds 1.4e-3 to 1.2e-2 below the reported
+      side) + updated summary on all 26-10-07 upper bound changes: registration request'
+    author: itsnaka
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Nate Chaoweeraprasit reports nine smaller SQUISH packings at the pinned e63e4e52b1728b6671b2f263c5e02a4aa79a39d3
+      second-update revision. Five counts are additional to the earlier eighteen-count publication and
+      four replace earlier selected reports. The earlier original and first-update geometries, certificates
+      and credit remain historical provenance; this import preserves their verified ceilings and registers
+      only V0/C0 reports. The body also links ten previously imported first-update packings. The author
+      identifies AI assistance under his direction and review, and seed packing credit to Ellsworth/Kingbird
+      and Couzo.
+    read_through: '2026-10-07T21:41:08Z'
+    results:
+    - key: nine-updated-packings
+      claim: Reported improvements at n = 88, 108, 179, 180, 199, 207, 236, 263 and 302 from second update
+        e63e4e52b1728b6671b2f263c5e02a4aa79a39d3; exact rational triples and safe upward decimal displays,
+        with source checker claims awaiting separate local evidence admission.
+      source: body
+      register:
+      - T-116
+      evidence:
+      - E-squish-second-update-2026-10-07-report
+      bead: think-sfpz
+    - key: ten-first-update-packings
+      claim: The body repeats first-update improvements at n = 123, 126, 129, 154, 155, 208, 237, 238,
+        239 and 258 from pinned 5e32bbd7028b6e3b869979278079cd37ed6770aa.
+      source: body
+      register:
+      - T-115
+      evidence:
+      - E-squish-update-2026-10-07-report
+      - E-squish-update-2026-10-07-exact-replay
+    asks:
+    - what: Import, independently replay and publish all nine second-update packings with accurate assurance
+        and preserved prior source history.
+      state: queued
+      bead: think-sfpz
+    beads:
+    - think-sfpz
+    - think-yquo
+    - think-kqd3
+    - think-qc6y
+    answer_bead: think-qc6y
+    replies:
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
+      date: '2026-10-07'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: nine-updated-packings
+      outdated:
+      - The acknowledgement described first-update PRs 421/423 as draft work; formal stack 424 has since
+        merged both.
+    close_when: All nine second-update packings have complete independent replay and appropriately mapped
+      fresh scoped reviews, have merged and deployed, and an accurate final author reply identifies the
+      published assurance. The reported import alone does not close this request.
+    notes: The acknowledgement was created at 21:41:08 UTC and edited at 22:28:26 UTC on 7 October 2026.
+      The immutable second-update revision defines this nine-case import. The nineteen-row source body
+      combines these nine with ten first-update claims already mapped to T-115; no late issue 425 or future
+      upstream master revision is admitted here.

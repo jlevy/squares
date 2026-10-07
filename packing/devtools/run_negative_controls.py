@@ -105,6 +105,15 @@ PRUNE = frozenset(
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # Historical push telemetry has no registered worker consumer. Keep the logs
+        # in Git; linked/result dependencies are still rescued dynamically below.
+        # The exact five-file audit saves 395,235 bytes without pruning scientific
+        # receipts, native journals, facts, witnesses or review-linked push logs.
+        ROOT / "campaign/agent-sessions/session-164-push-initial.log",
+        ROOT / "campaign/agent-sessions/session-153-integrated-push.log",
+        ROOT / "campaign/agent-sessions/session-163-push-recovery.log",
+        ROOT / "campaign/agent-sessions/session-163-push-refinement.log",
+        ROOT / "campaign/agent-sessions/session-163-push-final.log",
         # Large, generator-owned rendering outputs are replayed by their dedicated
         # validation steps and are never mutation targets. Copying hundreds of witnesses
         # and renderings into every private worker would exceed the portable snapshot cap.
