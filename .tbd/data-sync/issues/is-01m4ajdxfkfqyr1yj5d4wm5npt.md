@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eleven SQUISH upper-bound packings (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -26,7 +26,7 @@ child_order_hints:
 hold: blocked
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T12:39:32.086Z
+updated_at: 2026-10-07T15:51:55.539Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: W1 result import stages 1–3, followed by W7 bounded engineering and W2 full exact-rational replay/mapped independent math review, then publication and authorized issue reply. Scope: issue #401 ten pinned repository certificates at 07fe6dde1e5b67405a3076719b90e58e2882b677 plus n153 in comment 6031977107 (eleven counts total). Two separable PRs; no main push or merge without explicit merge consent. Source no-license retention: derived geometry facts and attributed metadata only. Engineering GPT-6.1 Sol, records GPT-6.1 Sol, math/soundness Astra. Native tbd sync known divergent/permission blocked; preserve all work in outbox and working branch.
@@ -152,3 +152,11 @@ owns feature pushes, separate PRs, final metadata commits and source identities.
 Merge requires session consent. After both layers merge, answer with main links
 and final registered IDs; issue #401 stays open until all author requests settle.
 Prepared PRs, author comment and publication handoff are under /workspace/.
+
+## Fresh authorized PR-shortcut publication retry, 2026-10-07
+
+The user explicitly requested PR creation using the shortcut. Re-read create-or-update-pr-simple, setup-github-cli and stacked-prs; policy grants authorize editing/stacking but merging still requires session confirmation. Both final OR-9 descriptions have four-sentence Cost blocks and pass the repository description checker. The scoped direct api.github.com probe failed TCP connection (exit 7); the existing mediated channel authenticates as jlevy and reads the repository (ADMIN). Remote main remains ef79288a498b5469e6b944f7b150d83aeeab5f94; neither feature branch nor PR exists remotely.
+
+Actual pushes of reported 6d0546b4c8949d9775d1a99865ec4e7277251cc7 and confirmed 8f3c5484b9bade9cdf5c8fe332f2d5e6c2e016ac each exited 128 with HTTP 403 Permission denied. Actual registration PR creation exited 1: GraphQL Resource not accessible by integration (createPullRequest). Confirmation creation cannot proceed against the absent reported remote base. No PR, hosted CI, formal stack, merge or author reply was created; no authorization or TLS settings were replaced. Publication and the accurate author reply remain blocked, not complete.
+
+Durable actual-outcome receipt and logs: /workspace/squares-401-publication-retry-20261007/publication-retry-receipt.json. Existing validated scientific source, source branch heads, prior closing archive and source bundle remain unchanged; no full source gate is repeated. Newly saved tracker variants are preserved in the external retry snapshot and a separate standalone native tracker bundle; the earlier bundle stays recoverable.
