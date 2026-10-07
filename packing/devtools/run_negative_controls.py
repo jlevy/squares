@@ -120,6 +120,7 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-279-centered-endpoint-diagnostics",
         "exp-280-centered-endpoint-hull-capacity",
         "exp-281-conditional-owned-hull-gate",
+        "exp-282-conditional-owned-hull-scoped-input",
     )
 )
 

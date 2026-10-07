@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 12 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 13 | think-ipel | Complete scoped finiteownership gate and follow its mathematical disposition; retain asynchronous gate source scope, publish only checked evidence and continue substantive proof work to16:08:33Z. |
 
 ### Workflow summary
 
@@ -210,7 +210,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 43 | 1 |
-| `research-loop` | 37 | 4 | 138 | 9 |
+| `research-loop` | 37 | 4 | 139 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 210 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 211 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1162,7 +1162,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-289 | confirmed | proof | The repaired producer completes the first16 contracting-owner round fr |  | 1 |  | 4.2m wall |
 | H-290 | confirmed | proof | The new H289 numeric-cap full17 checkpoint can be consumed with exact  |  | 1 |  | 2.7m wall |
 | H-291 | confirmed | proof | The accepted numeric-cap full17 endpoint checkpoint passes a fresh ind |  | 3 |  | 1.9m wall |
-| H-292 | blocked | proof | A finite exact conditional ownership recipe from the accepted H290 par |  | 1 |  | 1s wall |
+| H-292 | confirmed | proof | A finite exact conditional ownership recipe from the accepted H290 par |  | 2 |  | 10s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1315,7 +1315,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-279 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Actual distinct diagnostic replication refused after4.22587s supervised wall, rc1/cleanupcomplete. Retained child receipt gives step0 owned hull too large: independent standing limit16 conflicts with accepted H289 producer hull_limit48. No complete standing acceptance or mathematical conclusion; repair the computational capacity with unchanged exact ownership checks and register a new control. |
 | exp-281 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-292 | Actual frozen construction stopped incomplete after 1.11243s supervised wall, rc1/cleanup complete: conditional gate rational string ceiling. No gain polygons or fresh reconstruction were computed; no mathematical verdict. Preserve original 4096bit/input contract and inspect the admitted input-size interface before any separately registered correction. |
 
-### accepted (80)
+### accepted (81)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1399,6 +1399,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-276 | series-000 | 17 | Sol coordinator registers/freezes exact source/input/argv/supervision and interprets Session184 readiness evidence. | H-289 | Registered input joins pass. New numeric-cap full17 seed completes16distinct non-6 updates; all17 endpoint poses retained at seed/every update (17productionchecks). Fresh maxround1 resume PASS_REPLAYED/16steps/1024rows/143498events/finalstate agrees; canonical seed/node and update/round records unchanged, no new production. Its fresh endpoint call covers all17 once; top checked_after17 is inherited production evidence. Producer175.86083s/fresh66.47918s. No closure, terminal, contraction or census claim; Sol independent metadata and source controls clear. |
 | exp-277 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-290 | Accepted fresh root/cap/H289 INPUT and phase/object joins; parent and clean producer-free child replay the same original full17 Frame,544 seed rows and16 distinct non-6 updates through EOF. All17 full-root endpoint poses retained and all49 exact intervals contain zero. Readiness passes; all four geometric predicates remain false, with no exclusion/census/capture-tree/global admission. Astra mathematical read and independent Sol metadata review clear. |
 | exp-280 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Full independent centered PASS_STALL:544 seedrows,1024 updaterows,16steps and25134984 collisionfacets; hull48 and exact U/V/offset/B/T/full24world/object/H290all17endpoint joins match. Fresh parent cap/root pass; child rootjoinfalse/parenttrue. Astra mathematical and Sol metadata acceptance clear. Supervisor106.493889s rc0/cleanupcomplete, standing104.68s; no exclusion/admission/globalclaim. |
+| exp-282 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-292 | Actual frozen scoped-input replication completed8.38847s supervised wall, rc0/cleanupcomplete. Generation and fresh reconstruction agree on conditional_gain_candidate with canonicalcertificate/H290/native/context joins. Endpoint control nonempty and strictly inside; all four target cardinal gains exceed1/1024, all four all-angle gains negative. Three closedpieces25/26/27 include singleton seams,96exactplanes and5selectedtargetpoints. Accepted finite conditionalownership gain only: no producer, propagation, exclusion, admission or globalproof. |
 
 ### baseline (12)
 
@@ -1464,7 +1465,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-210 rounds, 2512.1 agent-minutes, 5768.3 wall-minutes.
+211 rounds, 2512.1 agent-minutes, 5768.4 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

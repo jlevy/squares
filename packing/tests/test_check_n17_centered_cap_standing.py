@@ -484,7 +484,8 @@ def test_failed_fresh_child_retains_bounded_evidence_after_temp_cleanup(
 
 @pytest.mark.parametrize("limit", [16, True])
 def test_frozen_computational_hull_limit_refuses_changed_descriptor(
-    limit: int, tmp_path: Path,
+    limit: int,
+    tmp_path: Path,
 ) -> None:
     document, _path = fixture(tmp_path)
     document["owned_hull_limit"] = limit

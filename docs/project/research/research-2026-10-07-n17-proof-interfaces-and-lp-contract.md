@@ -1881,6 +1881,49 @@ The present consumer accepts no such tree. This coverage argument is a hand deri
 by the sole Astra agent; it has not received independent mathematical review or a
 machine-checked coverage proof.
 
+## Centered Replay and Finite-Gate Intake
+
+H-291/exp-280 completed the independent centered-container readiness control. Its
+[receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-280-centered-endpoint-hull-capacity/receipt.json)
+binds the original H-290 seed and node to the unchanged 24-cell world, $B=1$,
+$U=1169/250$, and $V=T=935106018721/200000000000$. The exact offset is
+$93981279/400000000000=(U-V)/2$. Parent and child contexts, original canonical and
+compressed identities, accepted root and cap inputs, and the inherited H-290
+full-seventeen endpoint premise agree.
+
+The producer-free standing child reports full `PASS_STALL`: sixteen updates,
+1,024 updated rows, 544 seed rows and 25,134,984 collision-facet checks, with the
+explicit 48-vertex computational hull limit. The child took 104.68 seconds; total
+supervised time was 106.494 seconds with cleanup confirmed. Its rational-container
+proof keeps the root join in the parent context checker. No new leaf bounds or
+endpoint evaluation are claimed. All exclusion, admission and global-proof flags
+remain false. The earlier exp-278 and exp-279 operational refusals remain in the
+record; neither indicated loss of the endpoint.
+
+The first H-292/exp-281 finite-gate invocation stopped after 1.1124 seconds with
+[`incomplete`](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-281-conditional-owned-hull-gate/certificate.json),
+before evaluating gain. It encountered an accepted label-16 endpoint ordinate whose
+rational string exceeded the declared parser ceiling and 4,096-bit arithmetic limit.
+That coordinate is not an operand of the label-1 ownership construction. The accepted
+parent's identity and endpoint validity were not refuted.
+
+The prescribed repair changes the computational input scope in a separately
+registered replication. Full canonical EOF, compressed and canonical object
+identities, accepted-receipt bytes, world, owner roster, step order and endpoint
+witness joins remain required. Other owners' geometry and unused endpoint/root
+coordinates are explicit opaque premises from that accepted parent. New numerical
+geometry concerns only owner 0's residual vertices, owned group and closed row
+intervals, label 1's endpoint box and chart, the fixed container constants, and the
+derived finite construction. Those operands retain the 4,096-bit limit; no coordinate
+is rounded and no gain threshold changes.
+
+The repaired report must reference unused parent geometry through the accepted
+receipt identity instead of copying and reparsing it as new arithmetic. Any oversized
+operand actually used by the construction still makes the result incomplete. This is
+a computational and custody-scope repair, not a gain result or merely a serialization
+change. The exact-arc alternative below remains prospective until this gate has a
+mathematical disposition.
+
 ## A Conditional Owned-Hull Gate
 
 The next proposed stronger implication conditions the corner-SW square, analytic
@@ -2017,6 +2060,14 @@ their existing order and owner 0 last; square 6 remains coarse. This lets the ot
 owners use the new points before owner-0 compression. It does not enlarge the
 64-live-row or 48-point hull policies.
 
+The prospective parent-aware checker binds the accepted H-290 final state and the
+same-object full centered replay from exp-280, the finite gate and its fresh check,
+the fixed root/container context, and one explicit closed guard. Every unchanged
+initial row and group must equal its parent record; owner 0's selected hull is the
+sole declared exception. Each child step retains its predecessor references, and
+the final state retains the same ancestry and guard. Generic final-state checks
+that assume empty ancestry cannot substitute for those joins.
+
 Adding eight points to a 48-vertex hull need not preserve the latter limit. The
 initializer must check the augmented hull's size, or use a separately declared exact
 inner selection. For example, retaining the old hull's eight fixed-direction support
@@ -2043,6 +2094,17 @@ some polygons shrink. The parent-plus-guard receipt needs an explicit conditiona
 schema; it must never enter an unconditional exclusion ledger or claim that the
 remaining angles are covered. Full conditional replay costs and limits must be
 registered separately after the finite gate and centered-control measurements.
+
+The target guard $I$ excludes the endpoint's chart-zero and chart-one representations.
+Consequently, an $I$-conditional child must not be required to retain that
+outside-guard endpoint after its updates. The separate $Z$ finite control calibrates
+the ownership construction. An all-angle parent refresh, by contrast, must retain
+the full-root endpoint after each complete update and in its fresh final-state check.
+For that unguarded route, a prospective progress boundary is a loss of at least
+$1/64$ in the exact union length of one owner's live chart intervals. Emptying one
+row need not exclude its shared boundary angles, which adjacent closed rows may
+still represent. Neither smaller polygon extents nor a finer partition counts as
+orientation removal under this criterion.
 
 Before that gate supplies evidence, do not spend on blanket row doubling, further
 cones, a full annulus tiling, broad LP sweeps or long unchanged iteration. If the

@@ -1,5 +1,5 @@
 ---
-title: Session 184 — n17 proof contracts and instruments
+title: "Session 184 \u2014 n17 proof contracts and instruments"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -393,7 +393,7 @@ session:
     objective: Obtain complete independent centered endpoint control and exact finite shared-owned-hull
       gain measurements from the accepted H290 parent; Astra selects the next conditional
       propagation or small closed position-cover implication from measured outcomes.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Efficiency boundary consolidated actual capture deficits, compatibility
       repairs and selected next exact cross-owner implication.
@@ -407,11 +407,46 @@ session:
       completed and partial artifacts at the slice deadline without retuning criteria.
     fallback: Continue widened-slider and global-capture derivations while preserving the
       exact checker failure and selecting a ready dependency.
+    outcome: Exp280 independent centered full STALL accepted106.49s with all544seed/1024updatedrows/16steps.
+      Exp281 frozen finite gain attempt incomplete1.11s at admitted label16 endpoint rational
+      size, no gain verdict; original contract/outcome preserved. Astra approved a separately
+      registered scoped computational-input repair retaining full acceptedparent custody and4096bit
+      actually-used arithmetic. Second required push gate began12:59:48Z asynchronously at
+      fe4791217; later source drift gets separate focused review.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-280-h291-centered-endpoint-hull-capacity.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-281-h292-conditional-owned-hull-gate.md
+    stop_reason: Boundary disposition recorded at 2026-10-07T13:02:31Z
+    next_action: Build/review/freeze/register scopedinput exp282 without altering original281;
+      gain disposition selects conditional continuation or exactarc fallback.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-430
+    objective: Complete the exact finite shared-owned-hull gate after a scoped admitted-premise
+      input repair; Astra selects substantive guarded continuation or exact-arc ownership
+      fallback from its mathematical disposition.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Centered full independent endpoint control accepted; original finitegate
+      stopped operationally before any gain. Target-first repair retains fullparent custody
+      without enlarging new geometry arithmetic.
+    budget_minutes: 30
+    started_at: '2026-10-07T13:02:31Z'
+    deadline_at: '2026-10-07T13:32:31Z'
+    expected_output: Reviewed scoped H292 source and separately registered exp282 gain disposition;
+      concrete next mathematical source packet; required checkpoint validation in parallel.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Refuse affected interpretation on failed controls or exact joins. Preserve
+      completed and partial artifacts at the slice deadline without retuning criteria.
+    fallback: Continue widened-slider and global-capture derivations while preserving the
+      exact checker failure and selecting a ready dependency.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Run fullstanding280 immediately; retain cheap281 stop/gain/unconditional-improvement
-      verdict before any guarded producer continuation.
+    next_action: Sol implements bounded owner0-only arithmetic while Astra retains all17 premise
+      scope; launch fixed finitegate after independent source review and freeze.
   primary_bead: think-ipel
   status: in_progress
   budget:
@@ -433,9 +468,11 @@ session:
     before: 'Main ef79288a4: R071 strict lower bound 4.66044275; exact feasible endpoint;36784
       states/4685 orbits under58 admitted entries. Outer capture and full proof composition
       remain open.'
-    after: 59admissions leave36776states/4684orbits with endpoint retained. Both conditionalcontinuouscones,
-      coarsefloor finitecheck and n11first-roundreadiness accepted; actual globalcapture/annulus/proofcomposition
-      remainopen.
+    after: 60admissions leave36768states/4683orbits, endpoint retained. Conditional continuous
+      cones/floor checks and n11/full17numeric-cap first-round readiness accepted. Actual49capturebounds
+      retainzero but fail all local/wide capture predicates; centered full independent16-step
+      STALL accepted. Frozen finiteownership281 incomplete before gains; globalcapture/annulus/proofcomposition
+      remain open.
   delegations:
   - task: Astra mathematical contracts
     operator: GPT-6 Astra xhigh
@@ -1284,13 +1321,17 @@ session:
     - sharedadmissionledgermutation
   - task: Astra finite ownership review and position-cover alternative
     operator: GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Astra full centered STALL and frozen gate source/prereg clear; diagnosed scoped
+      accepted-parent input repair and retained exactarc fallback distinction.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-280-h291-centered-endpoint-hull-capacity.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-281-h292-conditional-owned-hull-gate.md
     files: &id026
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
-    checks: []
+    checks:
+    - Reviewed focused controls and source; no full session gate claimed.
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1310,14 +1351,18 @@ session:
     - sharedadmissionledgermutation
   - task: Sol finite conditional-owned-hull instrument and exact custody
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Sol centered endpoint/finitegate source and controls delivered; actual281 operational
+      size localization complete, no gains evaluated.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-280-h291-centered-endpoint-hull-capacity.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-281-h292-conditional-owned-hull-gate.md
     files: &id027
     - packing/devtools/probe_n17_conditional_owned_hull.py
     - packing/tests/test_probe_n17_conditional_owned_hull.py
-    checks: []
+    checks:
+    - Reviewed focused controls and source; no full session gate claimed.
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1337,10 +1382,13 @@ session:
     - sharedadmissionledgermutation
   - task: Sol independent proof-support review and asynchronous checkpoint gate
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Sol centered capacity/harness/census/fixtures repairs delivered; second required
+      push gate launched beside research with full required coverage and explicit drift scope.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-280-h291-centered-endpoint-hull-capacity.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-281-h292-conditional-owned-hull-gate.md
     files: &id028
     - packing/devtools/verify_n17_kernel_certificate.py
     - packing/tests/test_verify_n17_centered_cap.py
@@ -1348,7 +1396,8 @@ session:
     - packing/tests/test_census_n17_certified.py
     - packing/tests/test_reachable_tests.py
     - packing/tests/test_verify_n17_certificates.py
-    checks: []
+    checks:
+    - Reviewed focused controls and source; no full session gate claimed.
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -1362,6 +1411,95 @@ session:
     kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
     fallback: Preserve missingdependency, rotate toreadyproof-support work.
     write_scope: *id028
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Astra finite ownership review and position-cover alternative
+    operator: GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id029
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review scopedinput implementation, exactfinite gain meaning and substantive
+      next implication.
+    phase: 13
+    budget_minutes: 30
+    started_at: '2026-10-07T13:02:31Z'
+    deadline_at: '2026-10-07T13:32:31Z'
+    expected_output: Astra mathematical source review and gain interpretation; next guarded/exactarc
+      contract only after disposition.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id029
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol finite conditional-owned-hull instrument and exact custody
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id030
+    - packing/devtools/probe_n17_conditional_owned_hull.py
+    - packing/tests/test_probe_n17_conditional_owned_hull.py
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement scopedinput repair within15min; preserve281, register distinct282
+      unchanged gain/geometry thresholds.
+    phase: 13
+    budget_minutes: 30
+    started_at: '2026-10-07T13:02:31Z'
+    deadline_at: '2026-10-07T13:32:31Z'
+    expected_output: Sol scopedinput H292 source/tests and exp282 preregistration; no target
+      before freeze/reviews.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id030
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol independent proof-support review and asynchronous checkpoint gate
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id031
+    - packing/devtools/verify_n17_kernel_certificate.py
+    - packing/tests/test_verify_n17_centered_cap.py
+    - packing/devtools/census_n17_certified.py
+    - packing/tests/test_census_n17_certified.py
+    - packing/tests/test_reachable_tests.py
+    - packing/tests/test_verify_n17_certificates.py
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review scopedinput independently and keep broad validation beside proof work.
+    phase: 13
+    budget_minutes: 30
+    started_at: '2026-10-07T13:02:31Z'
+    deadline_at: '2026-10-07T13:32:31Z'
+    expected_output: Sol independent scopedinput source/control review; required async pushgate
+      disposition and publication readiness.
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id031
     excluded_commands:
     - blockingCIwatch
     - unregisteredscientifictarget
@@ -1439,8 +1577,9 @@ session:
   - Exp273 accepted conservativeinventory10.49s andexp275 acceptedexactcapjoin1.21s atclean3575c02,
     no newbound/censuschange.
   stop_reason: null
-  next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous validation
-    beside research.
+  next_action: Complete scoped finiteownership gate and follow its mathematical disposition;
+    retain asynchronous gate source scope, publish only checked evidence and continue substantive
+    proof work to16:08:33Z.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session184-through-121500.yaml
 ---

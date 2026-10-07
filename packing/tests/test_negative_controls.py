@@ -918,6 +918,7 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                 "exp-279-centered-endpoint-diagnostics",
                 "exp-280-centered-endpoint-hull-capacity",
                 "exp-281-conditional-owned-hull-gate",
+                "exp-282-conditional-owned-hull-scoped-input",
             )
         } <= roots
     for control in specification["controls"]:

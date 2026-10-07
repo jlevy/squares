@@ -51,9 +51,22 @@ experiment:
     budget: Combined120s construction60/fresh60, TERM120/KILL130, sampled4096MiB RSS. No retry,
       propagation or threshold tuning.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input
-  results: []
+    commit: 3fb9b8e6f09a69410fe97e13080b6f06df2f46c1
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the frozen conditional ownership gate meet its exact finite gain and endpoint
+      controls under fresh reconstruction?
+    outcome: criterion_met
+    checked_by: 'Actual frozen scoped-input replication completed8.38847s supervised wall,
+      rc0/cleanupcomplete. Generation and fresh reconstruction agree on conditional_gain_candidate
+      with canonicalcertificate/H290/native/context joins. Endpoint control nonempty and strictly
+      inside; all four target cardinal gains exceed1/1024, all four all-angle gains negative.
+      Three closedpieces25/26/27 include singleton seams,96exactplanes and5selectedtargetpoints.
+      Accepted finite conditionalownership gain only: no producer, propagation, exclusion,
+      admission or globalproof.'
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: 'Canonical EOF and compressed/content/receipt identity match acceptedH290
       full17/16step/root/frame/all49zero/all17 endpoint premise; independently reconstruct
       all three exact guard polygons and deterministic selected points in a clean producer/kernel/root-free
@@ -63,13 +76,18 @@ experiment:
       or area>=2^-20 for empty baseline. No gain is a valid negative frozen-recipe result;
       empty endpoint control is inconclusive, identity/endpoint failure refused, resource
       stop incomplete. No exclusion/admission/global proof or propagation.'
-    reason: Separate preregistered computational/custody-scope replication. Original exp-281
-      is preserved as incomplete after its rational-string resource ceiling, before any gain
-      computation. No target retry or finite geometry evaluation occurred while preparing
-      this record.
-  lease:
-    expires: '2026-10-07T13:36:33Z'
-    host: macOS arm64
+    reason: 'Actual frozen scoped-input replication completed8.38847s supervised wall, rc0/cleanupcomplete.
+      Generation and fresh reconstruction agree on conditional_gain_candidate with canonicalcertificate/H290/native/context
+      joins. Endpoint control nonempty and strictly inside; all four target cardinal gains
+      exceed1/1024, all four all-angle gains negative. Three closedpieces25/26/27 include
+      singleton seams,96exactplanes and5selectedtargetpoints. Accepted finite conditionalownership
+      gain only: no producer, propagation, exclusion, admission or globalproof.'
+    needs_review: false
+  effort:
+    timebox: Combined120s construction60/fresh60, TERM120/KILL130, sampled4096MiB RSS. No
+      retry, propagation or threshold tuning.
+    wall_seconds: 8.39
+    stopped_by: criterion
 ---
 # Scoped-Input Conditional-Owned-Hull Replication
 
@@ -130,6 +148,15 @@ The parent-domain conditional ownership implication is sole-Astra reviewed hand
 mathematics; fresh exact finite reconstruction does not claim independent derivation.
 A positive gate permits only a separately registered future continuation.
 It proves no conditional exclusion, census admission, global capture or optimality.
+
+Actual construction and fresh exact reconstruction completed in8.39s. The endpoint
+control passes and all four conditional cardinal gains exceed1/1024. The target uses all
+three closed row pieces25/26/27,96exactplanes and5selectedpoints; both singleton seams
+remain included. All-angle selection gives no gain.
+The existing20-point owner0 hull plus5newpoints fits the48-vertex policy without
+dropping any prior information.
+A separately reviewed and registered parent-aware conditional continuation is the next
+experiment; no propagation or exclusion is claimed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
