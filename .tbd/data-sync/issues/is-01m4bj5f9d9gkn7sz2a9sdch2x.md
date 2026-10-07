@@ -3,9 +3,9 @@ type: is
 id: is-01m4bj5f9d9gkn7sz2a9sdch2x
 title: "n17: test complete partner-pose coupling against the accepted point-relaxation witness"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 6
 spec_path: docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-07T16:11:55.052Z
-updated_at: 2026-10-07T18:33:18.430Z
+updated_at: 2026-10-07T22:07:43.513Z
 started_at: 2026-10-07T16:40:33.125Z
+closed_at: 2026-10-07T22:07:43.513Z
+close_reason: Bounded Session185 deliverables and agenda dispositions captured on PR404; global proof, regional lift98mg, optimizationui2y, normalizationnvkf and certification7hy3 remain open.
+resolution: null
+duplicate_of: null
 ---
 Prepare one bounded complete partner-pose discriminator from the accepted original
 H290/H289 parent, same-object exp280 centered full STALL, fresh exp282 finite
@@ -50,3 +54,7 @@ Freeze sources, control, resources and criterion before a future target.
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
+
+## Notes
+
+2026-10-07 finalization. Bounded completecoupling work delivered291/292/293/295 fresh verified method-specific misses, initial289guardrefusal, and ACCEPTED296 fixedowner0tau53/128 necessary-domain restriction:owner18(label11)25/64half-angleparameter/25rows lost,all992inheritedrowsaccounted,otherownersunchanged/noemptyowner. Fullpoint/regional/globalcapturefalse,census/boundsunchanged. Nextquantitative same25-rowregionallift tracked98mg, independentglobalnormalformreviewnvkf; fullcertificate7hy3 open.

@@ -5,12 +5,26 @@ title: "Compiled exact kernel checker in Rust (lane X1): row cover sweep and col
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-10-02-n17-cost-reduction-performance.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-03T01:19:45.250Z
-updated_at: 2026-10-03T01:19:45.250Z
+updated_at: 2026-10-07T21:56:03.416Z
 ---
 Owner directive 2026-10-03: pursue primitive tool speedups aggressively and upgrade tooling. Rank 5 of the performance review (estimated 5-10x on the checker's integer parts). Standalone crate and harness in a separate worktree; bar is identical verdicts and counts on W7 and N1 row by row plus refusal of corrupted certificates. Integration as check_n17_subpattern --cover rust after F2's gmpy2 port. Started 2026-10-03 01:15 UTC.
+
+## Notes
+
+Session185 measured handoff (2026-10-07): accepted exp294 STAGES reconstructs the same full mathematical/input payload as the NONE/PHASES control. Exclusive coverage57.293s/108.237s (52.93%) versus collision10.218s (9.44%) identifies coverage as the first engineering target. Facet cache has zero evictions. The logical25.1M facet count did not identify dominant wall cost.
+
+With other measured categories fixed, removing collisions entirely gives about1.10x total, while hypothetical2x coverage gives about1.36x total. These are conditional additive-profile bounds, not measured gains or exp284 timeout explanations. Optimize exact coverage on the SAME accepted object with complete counters, closed seams, holes, degenerate domains and fresh full receipt equality. Select resources/criterion prospectively; no benchmark or exp284 replay starts automatically.
+
+PR410 is an independent kernel verifier, but its reviewed head has no centered-cap mode and retains16-vertex compression versus our48-hull context. Start with ordinary-U TailA/B full receipt parity before claiming centered applicability. Our direct scientific progress is exp296's25/64 half-angle restriction under fixedowner0; mechanical optimization must remain beside quantitative regional lifting under think-98mg.
+
+Evidence: packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md; docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md; PR404. Global proof, capture and full current-source certification remain open.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
