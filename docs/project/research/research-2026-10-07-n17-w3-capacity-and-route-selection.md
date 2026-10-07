@@ -114,6 +114,17 @@ coverage of the owner-0 domain.
 The order of these quantifiers matters: a union over partner rows would discard
 alternatives instead of covering them.
 
+The accepted parent retains a known feasible endpoint, and a future guard may contain
+endpoint-family poses.
+Before claiming an excluded closed region, check its disjointness from the certified
+feasible endpoint family in the declared frame and labels, with an explicit
+endpoint-retention control.
+A region containing that family instead needs a valid terminal-capture implication;
+removing the exp-288 witness alone never excludes its whole guard or parent.
+The proposed comparison concerns the specific retained-point relaxation.
+Partner-pose constraints already occur in full standing verification, so this proposal
+claims neither their absence there nor dominance over that checker.
+
 The independent standing checker already verifies this type of implication in
 `admit_cover`, `check_partners` and `check_collisions`. A finite probe can reuse those
 exact primitives.

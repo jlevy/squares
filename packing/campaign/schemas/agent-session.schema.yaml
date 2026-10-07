@@ -160,8 +160,8 @@ properties:
         clock_role:
           enum: [work, finalization]
           description: >-
-            Required by the checker in a clocked session; finalization is the final
-            reserve phase.
+            Required by the checker in a clocked session; finalization phases form a
+            contiguous finalization tail within the protected reserve.
         objective: {type: string, minLength: 1}
         commitment:
           type: string

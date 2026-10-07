@@ -596,7 +596,7 @@ session:
     expected_output: Reviewed exact source/controls, separateH297/exp288 preregistration, fresh finite
       reconstruction and scoped relaxation-witness or criterion-miss disposition.
     validation_command: Focused source controls, independent reviews and preregistration; isolated
-      ordinary98 checkpoint runs beside mathematics on predecessor969588d.
+      ordinary101 checkpoint runs beside mathematics on predecessor969588d.
     kill_condition: No target without frozen criterion/source/controls; research stops16:08:33Z. Preserve
       incomplete/refused evidence and no global/census promotion.
     fallback: Retain proved interfaces and exact negative recipes for closeout; no unregistered alternative
@@ -621,7 +621,7 @@ session:
     commitment: BC-430
     objective: Freeze final research results, reconcile affected validation floors and agenda dispositions,
       and prepare exact certification and mathematical handoffs.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: Final research cutoff reached; accepted288 diagnoses the point-only representation
       and W3 selects the next coupling/profile plan.
@@ -630,8 +630,44 @@ session:
     deadline_at: '2026-10-07T16:38:33Z'
     expected_output: Stable terminal science records/agenda dispositions, scoped affected-floor reconciliation
       and next coupling/profile/certification beads.
-    validation_command: Stable ledger/SYNOPSIS/document checks and required scoped reconciliation
-      alongside already-running isolated ordinary checkpoint; no new mathematical target.
+    validation_command: Stable ledger/SYNOPSIS/document checks and required scoped reconciliation alongside
+      already-running isolated ordinary checkpoint; no new mathematical target.
+    kill_condition: Do not claim full current-source validation until actual evidence; preserve missing
+      custody and all failed/incomplete scientific attempts.
+    fallback: Publish the honest verified subset and actionable next handoff with unresolved validation/custody
+      explicit.
+    outcome: Research records and next-block handoffs frozen; affected37 mutation controls passed112.61s
+      on clean262d4a447. Isolated predecessor969 full101-step checkpoint completed90PASS/8FAIL/3SKIP,3493.53s;
+      current800 push61-step selection completed59PASS/2FAIL,357.24s. Both failed; original evidence
+      and current-source certification debt remain explicit. Root repairs the shared W3 README map/count
+      defect separately; no broad repeat or mathematical target.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-288-h297-pooled-feasible-center.md
+    - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
+    stop_reason: Planned boundary16:38:33Z; observed16:38:40Z,7s late while terminal gate dispositions
+      were handed off.
+    next_action: 'Phase20 finalization through fixed17:08:33Z: retain official final cost, actual gate
+      summary and scoped repairs, then stop with certification_pending think-7hy3 unless actual full
+      current-source PASS exists.'
+  - workflow: documentation-pass
+    focus: correctness
+    recording: contemporaneous
+    clock_role: finalization
+    commitment: BC-430
+    objective: Retain official final cost and actual validation dispositions, finish checked docs/public
+      handoff and leave explicit certification debt if fullcurrentPASS is absent.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: Observed boundary16:38:40Z follows planned16:38:33Z;7s delay records terminal validation
+      dispositions. Global17:08:33Z close remains fixed.
+    budget_minutes: 30
+    started_at: '2026-10-07T16:38:40Z'
+    deadline_at: '2026-10-07T17:08:33Z'
+    expected_output: Official resource receipt/declared rollup, final checkpoint summary with precise
+      predecessor/additive scope, terminal agenda/session disposition, reviewed issue405/PR404 updates
+      and open certification/mathematical handoff beads.
+    validation_command: Stable ledger/SYNOPSIS/document checks and required scoped reconciliation alongside
+      already-running isolated ordinary checkpoint; no new mathematical target.
     kill_condition: Do not claim full current-source validation until actual evidence; preserve missing
       custody and all failed/incomplete scientific attempts.
     fallback: Publish the honest verified subset and actionable next handoff with unresolved validation/custody
@@ -641,8 +677,8 @@ session:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-288-h297-pooled-feasible-center.md
     - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
     stop_reason: null
-    next_action: At16:38:33Z begin the second30-minute finalization slice for official cost, actual
-      gate disposition, final docs/push and public handoff; global close remains17:08:33Z.
+    next_action: Close17:08:33Z with stopped+certification_pending think-7hy3 unless actual fullcurrentPASS
+      exists; keep coordinator/program open while certification children remain.
   primary_bead: think-ipel
   status: in_progress
   budget:

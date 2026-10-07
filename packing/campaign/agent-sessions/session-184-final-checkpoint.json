@@ -1,0 +1,271 @@
+{
+  "schema": "session-184-final-checkpoint/v1",
+  "as_of": "2026-10-07T16:52:40.727319+00:00",
+  "status": "finalization-in-progress",
+  "session": "session-184",
+  "branch": "codex/n17-state-review",
+  "full_current_source_pass": false,
+  "certification_owner": "think-7hy3",
+  "mathematical_state": {
+    "n17_optimality": "open",
+    "ordinary_admissions": 60,
+    "remaining_states": 36768,
+    "remaining_d4_orbits": 4683,
+    "endpoint_retained": true,
+    "new_excluded_states": 16,
+    "new_excluded_orbits": 2,
+    "exp288": "accepted specific one-square retained-point-relaxation witness; no packing/capture/exclusion/census claim"
+  },
+  "full_predecessor_checkpoint": {
+    "source_revision": "969588d095ff816a9f261e2072839c74fa4f7ce8",
+    "run_id": "d8aef4585f894c40a2a9966b9d8c0d30",
+    "selected_steps": 101,
+    "counts": {
+      "passed": 90,
+      "failed": 8,
+      "skipped": 3
+    },
+    "complete_selection": true,
+    "verdict": "failed",
+    "wall_seconds": 3493.527649458032,
+    "normal_exit": true,
+    "returncode": 1,
+    "owned_group_cleanup": true,
+    "jobs": 3,
+    "inner_jobs": 2,
+    "source_environment_note": "PACKING_PROJECT_ROOT explicitly pointed at the frozen checkout",
+    "nonpassing_steps": [
+      {
+        "name": "known-best family and contact-shade censuses",
+        "status": "failed",
+        "seconds": 16.735920541977976
+      },
+      {
+        "name": "search engine (sqsearch)",
+        "status": "skipped",
+        "seconds": 0.0001977919600903988
+      },
+      {
+        "name": "browser floor (biome, eslint, tsc, node:test)",
+        "status": "failed",
+        "seconds": 4.4604038339457475
+      },
+      {
+        "name": "fast behavioral tests, shard A",
+        "status": "failed",
+        "seconds": 118.6219162910129
+      },
+      {
+        "name": "fast behavioral tests, shard B",
+        "status": "failed",
+        "seconds": 153.15113737503998
+      },
+      {
+        "name": "fast behavioral tests, shard C",
+        "status": "failed",
+        "seconds": 171.48741616599727
+      },
+      {
+        "name": "browser floor liveness tests",
+        "status": "failed",
+        "seconds": 43.80752274999395
+      },
+      {
+        "name": "negative controls",
+        "status": "failed",
+        "seconds": 429.4004816249944
+      },
+      {
+        "name": "soundness perimeter",
+        "status": "skipped",
+        "seconds": 48.246701916039456
+      },
+      {
+        "name": "fast behavioral tests, shard D",
+        "status": "failed",
+        "seconds": 239.9940122080152
+      },
+      {
+        "name": "differential: search energy vs validity oracle",
+        "status": "skipped",
+        "seconds": 0.00026095903012901545
+      }
+    ]
+  },
+  "later_push_checkpoint": {
+    "source_revision": "800bba6388a1611ad8466aa6d93ebd3f0978b66a",
+    "run_id": "c3f8d8d981ec4325800705f9186f5eda",
+    "selected_steps": 61,
+    "counts": {
+      "passed": 59,
+      "failed": 2
+    },
+    "complete_selection": true,
+    "verdict": "failed",
+    "wall_seconds": 357.2426050839713,
+    "normal_exit": true,
+    "returncode": 1,
+    "owned_group_cleanup": true,
+    "jobs": 2,
+    "inner_jobs": 2,
+    "source_environment_note": "PACKING_PROJECT_ROOT unset; source identified at launch; later W3 change is documentation only",
+    "nonpassing_steps": [
+      {
+        "name": "README agrees with the directory",
+        "status": "failed",
+        "seconds": 3.1076854999992065
+      },
+      {
+        "name": "reachable behavioral tests",
+        "status": "failed",
+        "seconds": 221.49638966703787
+      }
+    ],
+    "comparison_base": "262d4a4479939d341d7881ccad0e381f505b7f49",
+    "reachable_files": 91,
+    "normal_phase": {
+      "passed": 3617,
+      "failed": 1,
+      "skipped": 19,
+      "wall_seconds_pytest": 215.53,
+      "failed_test": "tests/test_negative_controls.py::test_a_control_command_is_green_unmutated_in_a_worker[python3 -m devtools.check_readme]"
+    },
+    "pool_phase": "unrun after normal-phase failure",
+    "startup_refusal": {
+      "unsupported_argument": "--artifact-dir",
+      "checks_run": 0,
+      "wall_seconds": 2.109528416011017
+    }
+  },
+  "additive_checks": [
+    {
+      "scope": "Exactly the 37 original full-checkpoint failed mutation controls; original definitions unchanged",
+      "source_revision": "262d4a4479939d341d7881ccad0e381f505b7f49",
+      "passed": 37,
+      "failed": 0,
+      "wall_seconds": 112.61440262495307,
+      "environment_correction": "PACKING_PROJECT_ROOT unset; isolated worker project discovery restored",
+      "does_not_relabel_original_full_gate": true
+    },
+    {
+      "scope": "H297 source controls and static floors",
+      "source_revision": "5637023303824a5723edf217747eb0f05ad63243",
+      "controls_passed": 22,
+      "pytest_wall_seconds": 0.72,
+      "ruff_findings": 0,
+      "type_findings": 0
+    },
+    {
+      "scope": "Primary-checkout browser floor and liveness, not frozen missing-dependency environment",
+      "floor_passed": true,
+      "floor_wall_seconds": 31.38,
+      "liveness_passed": 56,
+      "liveness_wall_seconds": 15.32
+    },
+    {
+      "scope": "Measured ownership cohort and exact slow-marker declaration plus fast positive-cone controls",
+      "source_base": "5637023303824a5723edf217747eb0f05ad63243",
+      "controls_passed": 64,
+      "pytest_wall_seconds": 6.0,
+      "slow_deselected": 1,
+      "cohort_run": 37613399745,
+      "measured_files": 607,
+      "current_files": 644,
+      "unknown_files": 37,
+      "all_unknown_share_checks_passed": true,
+      "full_real_symbolic_rebuild_passed_at_predecessor": true,
+      "full_real_symbolic_rebuild_junit_seconds": 92.681
+    },
+    {
+      "scope": "Two reproduced historical toy byte mismatches, complete exact independent verification",
+      "source_revision": "800bba6388a1611ad8466aa6d93ebd3f0978b66a",
+      "pytest_pin_failures": 2,
+      "exact_full_verifications": [
+        {
+          "right": "2.80",
+          "nodes_checked": 27,
+          "closed_leaves": 14,
+          "trig_enclosures": 116,
+          "seconds": 0.094
+        },
+        {
+          "right": "2.94",
+          "nodes_checked": 95,
+          "closed_leaves": 48,
+          "trig_enclosures": 167,
+          "seconds": 0.225
+        }
+      ],
+      "literal_pins_changed": false,
+      "origin_of_byte_drift": "unproved",
+      "open_owner": "think-8xdr"
+    },
+    {
+      "scope": "README report-index/count correction and only its original failed worker baseline",
+      "source_base": "800bba6388a1611ad8466aa6d93ebd3f0978b66a",
+      "documentation_delta": "README indexes 25 research reports including the W3 memo; later W3 endpoint safeguards retained",
+      "direct_check_passed": true,
+      "direct_seconds": 3.40076,
+      "worker_baseline_passed": 1,
+      "worker_pytest_seconds": 18.01,
+      "worker_supervised_seconds": 18.64082,
+      "broad_gate_repeated": false
+    },
+    {
+      "scope": "Contiguous protected finalization tail; affected session, phase, delegation and clock controls",
+      "source_base": "800bba6388a1611ad8466aa6d93ebd3f0978b66a",
+      "passed": 21,
+      "failed": 0,
+      "deselected": 34,
+      "pytest_wall_seconds": 1.18,
+      "ruff_findings": 0,
+      "type_findings": 0,
+      "independent_new_boundary_controls_passed": 2,
+      "independent_pytest_wall_seconds": 0.24,
+      "reserve_deadline_budget_rules_unchanged": true
+    }
+  ],
+  "remaining_obligations": [
+    "Full qualifying checkpoint on the actual final source, including later changes",
+    "Three sqsearch omissions: binary/engine cells/differential geometry",
+    "Historical toy byte regression provenance remains open despite valid new exact certificates",
+    "Existing nested slow-empty collection timeout and contended call-wall findings remain distinct from soundness",
+    "Atlas contact-shade rendering/census drift remains unresolved",
+    "Current native objects remain local; publication and clean-fetch recovery pending",
+    "Exp284 scientific replay remains incomplete and its child unaccepted",
+    "Global geometric cover-to-capture-to-local-family composition remains open"
+  ],
+  "local_unique_evidence_archives": [
+    "attic/evidence/session-184-final-full-969588d09",
+    "attic/evidence/session-184-final-push-800bba638",
+    "attic/evidence/session-184-affected37-reconciliation",
+    "attic/evidence/session-184-hosted-suite-cohort-37613399745",
+    "attic/evidence/session-184-taylor-toy-certificate-replay-800bba638",
+    "attic/evidence/session-184-readme-additive-800bba638",
+    "attic/evidence/session-184-finalization-tail-800bba638"
+  ],
+  "archive_portability": "Ignored local archives are preserved outside disposable scratch; this summary is Git tracked, raw archives are not claimed remotely published",
+  "rss_assurance": "Sampled current RSS per live process in owned group, not aggregate or hard allocation cap; validator command subprocesses use separate groups and are additionally accounted by their command completion records",
+  "next_mathematical_work": {
+    "owner": "think-hkqz",
+    "task": "Complete partner-pose coupling with exact closed-region exclusion or capture, endpoint retention and matched retained-point control",
+    "initial_allowance_hours": [
+      1,
+      2
+    ]
+  },
+  "parallel_engineering_work": {
+    "owner": "think-svkl",
+    "task": "Matched accepted-object replay profile; optimize only a measured hotspot with exact equivalence",
+    "initial_allowance_hours": [
+      1,
+      2
+    ],
+    "deeper_block_hours": [
+      2,
+      4
+    ],
+    "proposed_gain_target": 2,
+    "gain_is_forecast": false
+  }
+}

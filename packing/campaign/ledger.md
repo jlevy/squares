@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 19 | think-ipel | Complete finalization Phase19 by16:38:33Z; Phase20 then records official cost and actual gate/certification status, final documentation/push/public handoff by17:08:33Z. Next math tasks think-hkqz/think-svkl remain planned; certification debt think-7hy3 remains open, with no more Session184 mathematical targets. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete finalization Phase19 by16:38:33Z; Phase20 then records official cost and actual gate/certification status, final documentation/push/public handoff by17:08:33Z. Next math tasks think-hkqz/think-svkl remain planned; certification debt think-7hy3 remains open, with no more Session184 mathematical targets. |
 
 ### Workflow summary
 
@@ -212,7 +212,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `efficiency-loop` | 11 | 1 | 44 | 1 |
 | `research-loop` | 37 | 4 | 143 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
-| `documentation-pass` | 1 | 0 | 30 | 3 |
+| `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
 | `review-planning-oversight` | 10 | 3 | 55 | 6 |
 | `general-improvement` | 1 | 0 | 7 | 1 |

@@ -160,6 +160,52 @@ skips. Finite receipts are exact computational checks; their geometric compositi
 coverage implications have sole-Astra hand review, without independent mathematical
 review or a machine-checked end-to-end proof.
 
+## Final Verification and Handoff
+
+The
+[final checkpoint record](../../../packing/campaign/agent-sessions/session-184-final-checkpoint.json)
+preserves the source identities, complete selections, counts and remaining obligations.
+The ordinary full checkpoint at `969588d09` completed all 101 selected steps in 3,493.53
+seconds: 90 passed, eight failed and three skipped.
+The exact proof, Rust, slow symbolic rebuild and exhaustive lanes passed.
+The full checkpoint nevertheless failed, and the three missing `sqsearch` steps remain
+unverified.
+
+The later push checkpoint at `800bba638` completed all 61 selected steps in 357.24
+seconds: 59 passed and two failed.
+Both failures arose from the missing W3 entry and report count in README. Its reachable
+normal phase recorded 3,617 passes, 19 skips and one failed README worker baseline; the
+complementary pool phase did not run after that failure.
+The README correction subsequently passed the direct check and the exact failed worker
+baseline. These additive results do not relabel either complete checkpoint as passed.
+
+Further scoped checks reconciled all 37 original failed mutation controls after
+restoring isolated project discovery, verified the primary browser floor and 56 liveness
+controls, and retained a genuine green hosted cohort for test ownership.
+The expensive exact positive-cone rebuild passed in the full checkpoint; its measured
+slow declaration keeps that cost explicit rather than weakening the check.
+Two historical byte pins still fail even though both newly produced toy certificates
+pass complete independent exact verification.
+Their byte-drift provenance remains open under `think-8xdr`. Atlas rendering drift,
+existing timing findings and the missing engine checks also remain distinct obligations.
+
+The finalization contract now permits successive reserved slices while rejecting any
+resumption of research after the first such slice.
+All 21 affected clock, phase and session controls passed in 1.18 seconds, with zero Ruff
+or type findings; the two new boundary controls also passed independent review.
+The session stops with certification pending under `think-7hy3`. No full pass on the
+actual final source or end-to-end optimality proof is claimed.
+
+The
+[strategic W3 assessment](../research/research-2026-10-07-n17-w3-capacity-and-route-selection.md)
+selects complete partner-pose coupling as the next mathematical discriminator
+(`think-hkqz`), with a matched exact-replay profile in parallel (`think-svkl`). Each
+first decision receives a one-to-two-hour allowance.
+A deeper two-to-four-hour optimization block requires a measured hotspot and exact
+equivalence; a twofold speedup is a proposed acceptance target, not a forecast.
+Certificate-family lifting and a necessary structural normal form are the next
+alternatives if coupling loses the correlations needed for complete coverage.
+
 Progress belongs in comments on the
 [n17 tracker](https://github.com/jlevy/squares/issues/405); the main issue body
 describes the goal and durable background.
