@@ -862,6 +862,67 @@ def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
     assert controls.linked_pruned_targets() == [needed]
 
 
+@pytest.mark.parametrize("selection", ["session184", "baseline"])
+def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, selection: str
+) -> None:
+    roots = (
+        controls.SESSION184_RESULT_ROOTS
+        if selection == "session184"
+        else frozenset(
+            {
+                *(
+                    ROOT / "campaign/explorations" / name
+                    for name in (
+                        "X048-session-169-pilots",
+                        "X048-session-170-compatibility",
+                        "X048-session-171-raw-row-support",
+                        "X048-session-172-capacity-support",
+                        "X048-session-174-core-refinement",
+                        "X048-session-175-enhanced-support",
+                        "X048-session-176-owner-priority",
+                        "X048-session-177-cached-collision",
+                        "X048-session-178-full-core-ablation",
+                        "X048-session-179-selective-halving",
+                    )
+                ),
+                *(
+                    controls.SESSION184_RESULTS / name
+                    for name in (
+                        "exp-242-n17-core-stress",
+                        "exp-244-n17-local-minimum",
+                        "exp-248-n17-local-half-composition",
+                    )
+                ),
+            }
+        )
+    )
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert roots <= PRUNE
+    for control in specification["controls"]:
+        target = (ROOT / control["file"]).resolve()
+        assert not controls.in_pruned_roots(target, roots)
+        assert all(root.name not in control["run"] for root in roots)
+
+    packing = tmp_path / "packing"
+    output = packing / "results/exp-268"
+    output.mkdir(parents=True)
+    needed = output / "required.json"
+    needed.write_text('{"retained":true}\n')
+    (output / "unreferenced-checkpoint.json").write_text("0" * 100_000)
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text("[required](packing/results/exp-268/required.json)\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [needed]
+    assert controls.snapshot_source_bytes() == document.stat().st_size + needed.stat().st_size
+
+
 def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:

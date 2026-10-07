@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 217 | 49 confirmed; 33 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
-| Experiments | 197 | 67 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 3 in progress; 1 exhausted |
+| Hypotheses | 218 | 51 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
+| Experiments | 199 | 69 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 3 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5793,9 +5793,10 @@ round that names the hypothesis, control roles included.
 | [H-278](packing/campaign/hypotheses/H-278-n17-widened-omitted-feature-forcing.md) | confirmed | Exact finite omitted-feature bounds over the widened tube | 1 | exp-261 accepted:1152exact bounds and fresh replay pass; allowance -71/21000; uniform hand bridge has separate scope |
 | [H-279](packing/campaign/hypotheses/H-279-n17-widened-apex-position-duals.md) | confirmed | Exact residual and radius checks for the conditional apex bridge | 2 | exp-264 accepted production/fresh replay5.67s; original exp-262 replay refusal preserved; conditional physical-packing bridge |
 | [H-280](packing/campaign/hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | confirmed | One exact all-branch annulus patch on a frozen ladder | 1 | exp-263 first2^-20 closed box accepted6.29s, all256 owners; one patch only |
-| [H-281](packing/campaign/hypotheses/H-281-n11-first-round-producer-readiness.md) | blocked | Repaired-producer n11 first complete round and fresh zero-production resume replay | 2 | exp-265 startup parser refusal preserved; exp-268 same-claim corrected invocation registered;900s production/300s fresh replay,4096MiB; no first-round contraction threshold |
-| [H-282](packing/campaign/hypotheses/H-282-n17-current-source-tail-a.md) | running | Current-source full17 feasible prefix before one actual admitted-tail orbit | 1 | exp-266 registered; prefix120s/replay60s then conditional SW9envelope1200s/fullverify900s |
-| [H-283](packing/campaign/hypotheses/H-283-n17-continuous-soft-direction-cone.md) | running | Continuous negative16 cone with nine constrained and six free angles | 1 | exp-267 registered; exact root cancellation, K<=-1/50, M<=50 and fresh replay; no angular cover claim |
+| [H-281](packing/campaign/hypotheses/H-281-n11-first-round-producer-readiness.md) | confirmed | Complete n11 first-round readiness and independent fresh replay; original startup failure retained | 2 | 551.28s combined shell; eleven owners, endpoint12checks; no15-round/n17 verdict |
+| [H-282](packing/campaign/hypotheses/H-282-n17-current-source-tail-a.md) | running | Current-source full17 feasible prefix before one actual admitted-tail orbit | 2 | exp-266 registered; prefix120s/replay60s then conditional SW9envelope1200s/fullverify900s |
+| [H-283](packing/campaign/hypotheses/H-283-n17-continuous-soft-direction-cone.md) | confirmed | Exact continuous negative16 cone times six free angle coordinates | 1 | 6.60s combined exact generation/fresh replay; conditional cone, analytic implication sole-Astra |
+| [H-284](packing/campaign/hypotheses/H-284-n17-positive-continuous-cone.md) | running | Exact independently derived positive16 cone with cubic numerator | 1 | exp-269 registered; full root/cubic joins, H<=-1/2 and M+<=50; combined180s |
 
 ### Confirmed
 
@@ -6133,9 +6134,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 197 rounds registered in `series-000`.
+There are 199 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5730.3 wall-minutes.
+They record 2512.1 agent-minutes and 5739.6 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6372,8 +6373,10 @@ archive beside it.
 | [exp-264](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-264-h279-apex-replay-repair.md) | 17 | target | H-279 | Unchanged apex contract, repaired exact receipt encoding | Unchanged criterion passes production and fresh replay5.67s; original failure preserved | accepted |
 | [exp-265](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-265-h281-n11-first-round-control.md) | 11 | positive_control | H-281 | Pinned case438,one complete11-owner round,exact endpoint and fresh zero-production resume replay | Unsupported --partial startup flag refused before scientific inputs;0.73s logs preserved | blocked |
 | [exp-266](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-266-h282-current-tail-a.md) | 17 | target | H-282 | Full17 endpoint prefix before deliberate actual-tailA orbit | Registered before control/target | in-progress |
-| [exp-267](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-267-h283-continuous-soft-direction-cone.md) | 17 | target | H-283 | Exact continuous negative16 cone times six free angular coordinates | Registered before target | in-progress |
-| [exp-268](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md) | 11 | positive_control | H-281 | Same first-round contract with corrected CLI invocation | Registered before scientific work; original exp-265 preserved | in-progress |
+| [exp-267](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-267-h283-continuous-soft-direction-cone.md) | 17 | target | H-283 | Exact continuous negative16 cone times six free angular coordinates | Exact generator and fresh replay pass6.60s; conditional punctured cone, endpoint retained | accepted |
+| [exp-268](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md) | 11 | positive_control | H-281 | Same first-round contract with corrected CLI invocation | First11-owner round plus fresh11-step/174662event replay passes;551.28s; no new production | accepted |
+| [exp-269](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-269-h284-positive-continuous-cone.md) | 17 | target | H-284 | Positive16 continuous cone, seventeen-row cubic chain | Registered before exact target; independent source reviews clear | in-progress |
+| [exp-271](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md) | 17 | target | H-282 | Full standing verification of retained TailA closure | Registered before standing target; no producer retry/admission yet | in-progress |
 
 ### Cost and provenance
 
@@ -6574,12 +6577,14 @@ archive beside it.
 | exp-264 | 180seconds combined generation/replay | 5.67 s | — | criterion | `76e2830b4` |
 | exp-265 | 900s production;300s fresh replay;4096MiB | 0.73 s | — | error | `0fac86f9f` |
 | exp-266 | 120s prefix;60s replay;1200s tail;900s fullverify | Pending | — | Running | Reviewed current source frozen before control |
-| exp-267 | 180s combined production/fresh replay | Pending | — | Running | Reviewed symbolic/interval source frozen before target |
-| exp-268 | 900s production;300s fresh replay;4096MiB | Pending | — | Running | Unchanged scientific settings frozen before corrected launch |
+| exp-267 | 180s combined production/fresh replay | 6.60s | — | criterion | clean `65fc5dcbd`; conditional exact cone |
+| exp-268 | 900s production;300s fresh replay;4096MiB | 551.28s combined shell | — | criterion | clean `7f5bacffd`;422.24s production/129.04s fresh replay |
+| exp-269 | 180s combined generation/fresh replay | Pending | — | Running | Reviewed source frozen before target |
+| exp-271 | 900s full standing verifier;4096MiB sampled RSS | Pending | — | Running | Exact exp266 objects frozen; no producer work |
 
-### What the 197 rounds jointly establish
+### What the 199 rounds jointly establish
 
-The 197 rounds use 2512.1 agent-minutes and 5730.3 wall-minutes under the campaign’s
+The 199 rounds use 2512.1 agent-minutes and 5739.6 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

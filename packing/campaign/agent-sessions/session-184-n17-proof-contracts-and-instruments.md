@@ -1,5 +1,5 @@
 ---
-title: Session 184 — n17 proof contracts and instruments
+title: "Session 184 \u2014 n17 proof contracts and instruments"
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
@@ -717,8 +717,14 @@ session:
     replay/custody refusal refused.
   - Negativecone18 target-freecontrols independentreview clear; defensive-copy tampergap repaired before
     anytarget.
-  - N11 exp268 complete11-ownerproduction422.24s, endpoint12checks held; freshresume replay finished,
-    independentacceptancepending.
+  - N11 exp268 complete11-ownerproduction422.24s, endpoint12checks held; fresh zero-production replay
+    accepted129.04s; combined551.28s.
+  - 'H283/exp267 accepted at clean65fc: exact generation/fresh replay6.60s; conditional continuous cone
+    only, separately scoped Astra analytic implication.'
+  - H284/exp269 registered after24controls author41.60s/independent41.94s and mathematics/mechanics clear;
+    combined180s target not yet launched.
+  - H282 endpoint prefix PASS_ENDPOINT_PREFIX10.87s; TailA producer+selfcheck PASS_CERTIFIED_CLOSED223.20s/27updates.
+    Fresh full verifier running; no ledger admission or count change.
   stop_reason: null
   next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research.
 ---

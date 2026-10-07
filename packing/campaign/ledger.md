@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 197 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 199 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1151,9 +1151,10 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-278 | confirmed | proof | Across the accepted exp237 root inclusion interval and all eight verti |  | 1 |  | 1s wall |
 | H-279 | confirmed | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 2 |  | 10s wall |
 | H-280 | confirmed | proof | The deterministic retained dual seed at exp260 outer negative omega16  |  | 1 |  | 6s wall |
-| H-281 | blocked | proof | The repaired producer completes one certified eleven-owner round on th |  | 2 |  | 1s wall |
-| H-282 | running | proof | At cap1169/250 the repaired current producer preserves every exact-roo |  | 1 |  |  |
-| H-283 | running | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  |  |
+| H-281 | confirmed | proof | The repaired producer completes one certified eleven-owner round on th |  | 2 |  | 9.2m wall |
+| H-282 | running | proof | At cap1169/250 the repaired current producer preserves every exact-roo |  | 2 |  |  |
+| H-283 | confirmed | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  | 7s wall |
+| H-284 | running | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1303,7 +1304,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-262 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Apex arithmetic passed, but the receipt encodes retained integer weights beyond the reader guard; fresh replay refuses. Repair the serialization and preregister a successor before retry. |
 | exp-265 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Technical startup refusal: coordinator appended unsupported --partial; CLI exited2 at argument parsing before sources,seed,endpoint checks or production. Original logs preserved; exp268 separately preregisters the corrected same-claim invocation. |
 
-### accepted (67)
+### accepted (69)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1374,6 +1375,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-261 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-278 | All1152 exact finite bounds pass and fresh reconstruction agrees; the uniform analytic bridge remains the separately scoped Astra hand derivation. |
 | exp-263 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract,Session184. | H-280 | After accepted H279 replay, the first frozen ladder box passes exact production and fresh reconstruction without another solve or parameter change. |
 | exp-264 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | The serialization-only successor passes exact production and fresh CLI replay under the original H279 criterion; original exp262 remains blocked and preserved. |
+| exp-267 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract in Session 184. | H-283 | One conditional negative-angle cone times six free angle coordinates is certified; endpoint retained. Uniform perturbation implication remains sole-Astra hand proof; no complete annulus or global admission. |
+| exp-268 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Accepted first-round producer readiness and cost only. Independent Sol custody/determination review clear. Original exp265 parser failure remains preserved; no15-round discriminator or n17 capture conclusion. |
 
 ### baseline (12)
 
@@ -1397,8 +1400,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-266 | series-000 | 17 | Sol coordinator executes Astra-prescribed contract; root owns monitor, registration, results, independent admission and count changes. | H-282 | Registered before scientific work; reviewed source and named input custody are frozen by registration commit. Full17 prefix must pass before TailA. No measurement yet. |
-| exp-267 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract in Session 184. | H-283 | Registered before target; mathematical and independent mechanical reviews clear; source frozen by registration commit. |
-| exp-268 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Registered before scientific work; unchanged H281 settings and900/300second budgets. Correct the unsupported startup flag only; exp265 remains blocked with original logs. |
+| exp-269 | series-000 | 17 | Sol coordinator executes the sole-Astra mathematical contract in Session184; root owns registration and results. | H-284 | Registered before target evaluation after sole-Astra mathematical source review and independent Sol mechanical review; exact source frozen by this registration commit. |
+| exp-271 | series-000 | 17 | Sol coordinator executes sole-Astra900-second admission contract; root alone mutates ledger/counts. | H-282 | Registered before standing target; exp266 source65fc producer/selfcheck and freshfullreplay pass, independent custody clears. No ledger count changes yet. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1447,7 +1450,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-197 rounds, 2512.1 agent-minutes, 5730.3 wall-minutes.
+199 rounds, 2512.1 agent-minutes, 5739.6 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

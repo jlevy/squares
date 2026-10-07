@@ -928,10 +928,12 @@ join; outer capture remains a separate certificate obligation.
 
 The sixteen nonzero rows of exp-260’s finite dual for the negative turn of square 16
 suggest a telescoping identity.
-The following is a new hand derivation and a proposed finite-check contract, not a
-recorded verification of its sign or mass bounds.
-It covers a cone of mixed angles if those checks succeed.
-It does not supply a cover of all directions.
+H-283's exp-267 subsequently accepted the exact finite checks in both its
+[certificate](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-267-continuous-soft-direction-cone/certificate.json)
+and [fresh replay](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-267-continuous-soft-direction-cone/replay.json).
+The analytic perturbation argument below remains a sole-Astra hand derivation, without
+independent mathematical review or formal verification. Its declared domain is one
+cone times six free angle coordinates, not a cover of all directions.
 
 Write $(c,s)=u^*$ and $(d,-e)=p^*$, with $c,s,d,e>0$. Let $x=x_{15}^*$ and $y=y_{17}^*$
 be the endpoint coordinates appearing in the contact chart, and set
@@ -1251,6 +1253,136 @@ These constants and the full domains need their own registration before target
 evaluation. Failed bounds would leave the cone uncertified.
 Its apex and all remaining directions remain subject to the existing terminal and
 coverage obligations.
+
+## A Noncircular Lower Slider Bound for Capture Leaves
+
+The wider position tube alone did not establish the lower $b$ face of $B_W'$.
+The following new hand derivation supplies a sufficient capture-leaf predicate using
+one additional position projection and one-sided angle bounds. Its proposed root guard
+has not been evaluated. It uses physical non-overlap of squares 9 and 11 before invoking
+the widened feature certificate; it does not assume membership in $B_W'$.
+
+Let $u=(c,s)$ and $v=(-s,c)$ be the nominal root axes. The endpoint layout satisfies the
+symbolic identity
+
+$$
+x_9^*-x_{11}^*=\tau_0u+v,\qquad \tau_0=c(s-1).
+$$
+
+Write $e_9=x_9-x_9^*$ and
+$x_{11}-x_{11}^*=\eta_{11}u-bv$, where $b$ and $\eta_{11}$ are the usual exact root
+projections. Consider the following sufficient premises:
+
+| Quantity | Required bound |
+| --- | --- |
+| Root guard | $-1/3\le\tau_0\le-1/8$ |
+| Existing wide position bounds | $|(e_9)_x|,|(e_9)_y|\le1/100$ and $|\eta_{11}|\le1/100$ |
+| Additional direct projection | $|v\cdot e_9|\le1/5000$ |
+| Coarse slider bound | $-1/2\le b\le1/12$ |
+| One-sided half-angle bounds | $-1/200\le q_9,q_{11}\le1/5000$ |
+| Physical premise | Squares 9 and 11 have disjoint interiors. |
+
+All other position and angle coordinates may retain their wider bounds. The two angle
+intervals need not be symmetric about zero. The additional position bound should be
+computed directly on each residual polygon in the root $v$ direction; forming an
+axis-aligned bounding box first can discard the thin direction that makes it useful.
+
+### Independent forcing for the 9/11 pair
+
+For $\Delta=x_9-x_{11}$, put $U=u\cdot\Delta$ and $V=v\cdot\Delta$. Then
+
+$$
+U=\tau_0+u\cdot e_9-\eta_{11},\qquad
+V=1+b+v\cdot e_9.
+$$
+
+Using $\sqrt2<99/70$, the premises give
+
+$$
+-9/25<U<0,\qquad
+V_{\min}:=1/2-1/5000\le V\le13/12+1/5000=:V_{\max}.
+$$
+
+For example, $1/3+99/7000+1/100<9/25$, while
+$-1/8+99/7000+1/100<0$. These inequalities do not use the desired lower face of $B_W'$.
+
+Let $Q_0=1/200$,
+$C_0=(1-Q_0^2)/(1+Q_0^2)$ and $S_0=2Q_0/(1+Q_0^2)$. Either square's actual axis is
+obtained by a turn $\delta_i=2\arctan q_i$, so $\cos\delta_i\ge C_0>0$ and
+$|\sin\delta_i|\le S_0$. The four signed $u$-axis separation possibilities have
+projection at most
+
+$$
+9/25+S_0V_{\max}<1.
+$$
+
+The two negative $v$-axis possibilities have projection at most
+
+$$
+S_0(9/25)-C_0V_{\min}<1.
+$$
+
+The sum of the two unit-square supports along any owner axis is at least one.
+Those six directions therefore cannot separate the pair. The separating-axis criterion
+for disjoint square interiors leaves at least one of the two positive $v$ directions:
+
+$$
+\cos\delta_i\,V-\sin\delta_i\,U\ge1
+\quad\text{for some }i\in\{9,11\}.
+$$
+
+This forcing argument has its own coarse domain. Reusing H-278 here would be circular,
+because H-278 assumes the very slider box whose lower face is being established.
+
+### The lower face and its exact margin
+
+Dividing the preceding inequality by its positive cosine gives
+
+$$
+b\ge\sec\delta_i-1+\tan\delta_i\,U-v\cdot e_9.
+$$
+
+If $\delta_i\le0$, then $\tan\delta_i\,U\ge0$ because $U<0$. If $\delta_i\ge0$,
+the one-sided upper half-angle bound gives
+
+$$
+\tan\delta_i\le\frac{2/5000}{1-1/5000^2}
+=\frac{10000}{24999999}.
+$$
+
+In both cases, using $\sec\delta_i-1\ge0$ yields
+
+$$
+b\ge-\frac1{5000}-\frac{3600}{24999999}
+=-\frac1{2500}+\frac{6999999}{124999995000}
+>-\frac1{2500}.
+$$
+
+The positive margin is exact. A retained checker would bind the displacement identity to
+the endpoint chart, verify the proposed root guard over the complete accepted root
+enclosure, and recompute the rational direction-exclusion and lower-face inequalities.
+No target root-guard evaluation has been performed for this proposed contract.
+
+### Consumer scope
+
+For a freshly replayed capture leaf, retain the raw $b$ interval and all direct projection
+and chart bounds. If every premise above holds, the target-packing intersection may use
+an effective $b$ lower endpoint equal to the maximum of the raw lower endpoint and the
+proved geometric floor. Its upper endpoint remains the raw one. The remaining slider
+faces still need their own direct bounds or accepted implications; in particular this
+argument does not clip $z$ or establish the upper $a$ face.
+
+This implication applies to physical packings, using the previously dropped 9/11
+non-overlap condition. It is not a consequence of the nineteen-pair LP relaxation alone.
+It can therefore support a conditional capture-leaf-to-terminal join without silently
+strengthening an LP result. Missing premises or failed direct bounds leave the leaf
+unresolved. An empty effective interval would require an explicitly supported geometric
+exclusion route rather than an implicit new admission.
+
+The predicate gives a concrete geometric target for capture: a thin $v$ projection of
+square 9, coarse confinement of $b$, and controlled positive turns of 9 and 11. Whether
+an actual leaf meets it is a separate registered evaluation. It does not establish that
+the producer will reach that domain or that a complete capture tree is covered.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

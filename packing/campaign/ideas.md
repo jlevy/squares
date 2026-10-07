@@ -957,6 +957,10 @@ orbit after a newly checked full17 endpoint prefix.
 negative16 cone with six free angular coordinates, exact root cancellation and fresh
 replay. Neither claim is a complete capture or angular-cover theorem.
 
+[H-284](hypotheses/H-284-n17-positive-continuous-cone.md) registers the independently
+derived positive16 cone, with exact F2/F3 joins and cubic radial numerator.
+Its first target remains unrun at registration.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

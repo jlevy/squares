@@ -1,5 +1,5 @@
 ---
-title: exp-268 — same-claim n11 first round after CLI startup repair
+title: "exp-268 \u2014 same-claim n11 first round after CLI startup repair"
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -52,17 +52,31 @@ experiment:
       timeout/cleanup before launch. Partial updates and complete checkpoints survive interruption; do
       not treat a memory-stop checkpoint as resumable. No continuation or target retuning.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control
-  lease:
-    expires: '2026-10-07T09:25:00Z'
-    host: macOS arm64
-  results: []
+    commit: 7f5bacffdb63f6600d5e94967d97100c4ce30460
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: First complete eleven-owner round, endpoint retained after seed/every update, producer/checker
+      agreement; fresh saved-seed admission and eleven-step replay, final_state_agrees=true, same seed/node
+      and round/update records, no new production.
+    outcome: criterion_met
+    checked_by: Complete11-owner first round, endpoint retained after seed/all11updates; fresh saved-seed/all-step
+      replay agrees, PASS_REPLAYED11steps/704rows/174662events, final_state_agrees=true, identical node/seed/round/update
+      records and zero new production.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: First complete eleven-owner round, endpoint retained after seed/every update, producer/checker
       agreement; fresh saved-seed admission and eleven-step replay, final_state_agrees=true, same seed/node
       and round/update records, no new production.
-    reason: Registered before scientific work; unchanged H281 settings and900/300second budgets. Correct
-      the unsupported startup flag only; exp265 remains blocked with original logs.
+    reason: Accepted first-round producer readiness and cost only. Independent Sol custody/determination
+      review clear. Original exp265 parser failure remains preserved; no15-round discriminator or n17
+      capture conclusion.
+    needs_review: false
+  effort:
+    timebox: 900-second production;300-second fresh replay;4096MiB sampled current RSS
+    wall_seconds: 551.28
+    stopped_by: criterion
 ---
 # exp-268: n11 First-Round Readiness and Cost
 
@@ -138,6 +152,27 @@ contraction criterion.
 The original exp-265 refused its unsupported startup argument before loading scientific
 inputs. This successor changes the invocation only; the underlying instrument,
 hypothesis, exact inputs and complete-round/fresh-replay criterion are unchanged.
+
+## Outcome
+
+At clean source `7f5bacffdb63f6600d5e94967d97100c4ce30460`, production completed the
+eleven-owner first round in 422.24 seconds shell time.
+The exact endpoint survived the seed and all eleven updates.
+Fresh replay took 129.04 seconds shell time, replaying eleven steps, 704 rows and
+174,662 events with `final_state_agrees: true` and zero new production.
+Combined shell cost was 551.28 seconds; tool wall times were 421.361634 and 128.216242
+seconds.
+
+The extent statistic is $E_0=0.9464841581682921$, $E_1=0.7661224591518506$ and
+$E_1/E_0=0.8094403403798209$. The separate `worst_position` half-extent ratio is not
+this statistic. Sampled current RSS maxima were 557,694,976 bytes in production and
+890,912,768 in replay, below the 4096 MiB limit.
+These are sampled observations, not an instantaneous allocation guarantee.
+
+The node identity is `7034ab8f816f7c851878a06d9b8bfd3996ecf1b31b7f06df0bde59eaedb39a09`;
+the seed identity is `b07e4f328e87ff5a00b1125cb29b70b7d18742e575abcc00c3120672b06ac56c`.
+Retained receipts and checkpoint objects reproduce this readiness result.
+It supplies neither the fifteen-round contraction verdict nor an n=17 capture theorem.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

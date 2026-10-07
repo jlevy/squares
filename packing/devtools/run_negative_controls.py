@@ -93,6 +93,22 @@ ROOT = Path(__file__).resolve().parent.parent
 # corresponding subdirectory.
 REPO = ROOT.parent
 HERE = ROOT.relative_to(REPO)
+SESSION184_RESULTS = ROOT / "campaign/series/series-000-smoke-and-calibration/results"
+SESSION184_RESULT_ROOTS = frozenset(
+    SESSION184_RESULTS / name
+    for name in (
+        "exp-259-current-admitted-residue",
+        "exp-260-widened-lp-reconnaissance",
+        "exp-261-widened-feature-forcing",
+        "exp-262-widened-apex",
+        "exp-263-one-annulus-patch",
+        "exp-264-widened-apex-replay-repair",
+        "exp-265-n11-first-round-control",
+        "exp-266-current-tail-a",
+        "exp-267-continuous-soft-direction-cone",
+        "exp-268-n11-first-round-control",
+    )
+)
 
 # Controls need the packing source, not the literature archive, the rest of the
 # repository, or build products. `resources/README.md` is copied separately because the
@@ -314,11 +330,57 @@ PRUNE = frozenset(
         # whole; linked Markdown still returns through `linked_pruned_targets`.
         ROOT / "campaign/explorations/X048-session-167-pilots",
         ROOT / "campaign/explorations/X048-session-168-pilots",
+        # Restore PR 360's reviewed Session 169--179 output selection (93a6839ca).
+        # These research folders are not mutation targets or registered commands;
+        # inline-linked documents and frontier dependencies still return unchanged.
+        # The current selector saves about 2.12 MB after dependency copy-back.
+        *(
+            ROOT / "campaign/explorations" / name
+            for name in (
+                "X048-session-169-pilots",
+                "X048-session-170-compatibility",
+                "X048-session-171-raw-row-support",
+                "X048-session-172-capacity-support",
+                "X048-session-174-core-refinement",
+                "X048-session-175-enhanced-support",
+                "X048-session-176-owner-priority",
+                "X048-session-177-cached-collision",
+                "X048-session-178-full-core-ablation",
+                "X048-session-179-selective-halving",
+            )
+        ),
+        # These earlier exact n17 outputs are consumed by their scientific checkers,
+        # not by the commands or targets in controls.yaml. Retain every primary object
+        # in the repository; omit only unreferenced output from private workers.
+        # Existing inline/frontier copy-back retains declared dependencies and saves
+        # about 1.10 MB net across these three roots. Together with the Session 184
+        # selection below, the measured payload is 200,734,132 bytes, 592,460 below
+        # the unchanged 192 MiB cap. Seven focused selector/mutation-harness controls
+        # pass; this measurement does not claim a full runtime trace or all controls.
+        SESSION184_RESULTS / "exp-242-n17-core-stress",
+        SESSION184_RESULTS / "exp-244-n17-local-minimum",
+        SESSION184_RESULTS / "exp-248-n17-local-half-composition",
         # Session 182's receipts (6.76 MB of kernel, census and ledger JSON) took the
         # snapshot to 202,054,385 bytes against the cap on 2026-10-06. Same reason as the
         # two above: research outputs no control names, read only by the census over a
         # ledger that is itself pruned; linked Markdown and directories still return.
         ROOT / "campaign/explorations/X048-session-182-overnight",
+        # Session 184's new result roots are not mutation-control targets or command
+        # inputs. The whole-suite control deliberately refuses missing testpaths before
+        # collection; the retained-JSON control checks only t007-consumer-audit.json,
+        # whose explicit-path mode skips exemption staleness. Thus exp-262's frozen
+        # failed-encoding object remains unchanged in Git without being needed in that
+        # worker. No fresh proof or producer target runs inside a mutation worker.
+        #
+        # On 2026-10-07 the live source snapshot reached 299,613,601 bytes; exp-268's
+        # saved objects and checkpoint alone contribute most of its 71,955,873 bytes.
+        # Omit these output roots, including known in-flight destinations, while keeping
+        # every inline-linked or frontier-registered dependency through the existing
+        # copy-back. The exp-259 complete roster returns. This removes fresh numerical
+        # and exact objects from private workers, not from the repository, and leaves
+        # the 192 MiB ceiling unchanged; the baseline selection restores measured
+        # headroom for think-t1lk.
+        *SESSION184_RESULT_ROOTS,
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-024",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-026",

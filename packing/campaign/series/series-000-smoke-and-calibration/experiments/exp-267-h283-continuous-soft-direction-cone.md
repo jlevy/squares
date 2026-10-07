@@ -1,5 +1,5 @@
 ---
-title: exp-267 — exact continuous soft-direction cone generation and fresh replay
+title: "exp-267 \u2014 exact continuous soft-direction cone generation and fresh replay"
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -45,17 +45,30 @@ experiment:
       timeout. Freeze exact argv/source/result directory before launch. No solve, angle sample, threshold/domain
       retuning or retry under this registration; preserve all failure and interrupted receipts.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-267-continuous-soft-direction-cone
-  results: []
+    commit: 65fc5dcbd7a025a50bc31ac7fb64ce65fe4aed37
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: cone_certified=true, exact homogeneous/root/owner identities and all interval signs/weights/K<=-1/50/M<=50
+      pass; gamma 638375/40961024>0; fresh H278 and same R, B_W', radius and complete 256 choices; independent
+      fresh CLI replay agrees.
+    outcome: criterion_met
+    checked_by: 'Exact cone generation and fresh CLI replay agree: all symbolic/root/owner joins, nonnegative
+      weights, K<=-1/50, M<=50 and gamma638375/40961024>0.'
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: cone_certified=true, exact homogeneous/root/owner identities and all interval signs/weights/K<=-1/50/M<=50
       pass; gamma 638375/40961024>0; fresh H278 and same R, B_W', radius and complete 256 choices; independent
       fresh CLI replay agrees.
-    reason: Registered before target; mathematical and independent mechanical reviews clear; source frozen
-      by registration commit.
-  lease:
-    expires: '2026-10-07T09:25:00Z'
-    host: macOS arm64
+    reason: One conditional negative-angle cone times six free angle coordinates is certified; endpoint
+      retained. Uniform perturbation implication remains sole-Astra hand proof; no complete annulus or
+      global admission.
+    needs_review: false
+  effort:
+    timebox: Combined180-second generation and fresh replay
+    wall_seconds: 6.6
+    stopped_by: criterion
 ---
 # exp-267: Continuous Cone Readiness Check
 
@@ -84,6 +97,16 @@ H-279 is a separate apex/coverage join, not an input prerequisite.
 Failed finite bounds are inconclusive; mismatched premises or tampered identities are
 refused; an unfinished production or fresh replay is incomplete.
 Structural verification alone cannot accept an uncertified cone.
+
+## Outcome
+
+Generation and fresh CLI replay passed at clean source
+`65fc5dcbd7a025a50bc31ac7fb64ce65fe4aed37`, in 6.60 seconds combined shell time.
+Both reconstruct the same exact identities and full declared domains.
+The finite checks certify the conditional punctured cone, with positive allowance
+$638375/40961024$. The endpoint remains retained.
+The uniform perturbation implication is separately scoped to Astra’s hand proof;
+remaining directions and global capture are open.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
