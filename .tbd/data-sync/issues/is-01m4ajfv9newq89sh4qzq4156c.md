@@ -5,7 +5,7 @@ title: "W7: strict SQUISH #401 import and exact dual-checker receipts"
 kind: task
 status: closed
 priority: 1
-version: 10
+version: 11
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:58:20.597Z
-updated_at: 2026-10-07T19:08:23.758Z
+updated_at: 2026-10-07T19:28:56.626Z
 started_at: 2026-10-07T06:58:30.243Z
 closed_at: 2026-10-07T10:17:57.693Z
 close_reason: Local engineering complete at reported 463203adf and confirmed 9ce8ac8ea; validated source, reader, cost and recovery/rebase deliverables. Parent retains pending full checkpoint and HTTP403-blocked publication.

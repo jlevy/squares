@@ -5,7 +5,7 @@ title: Replace SQUISH receipt hashes with exact semantic input binding
 kind: task
 status: closed
 priority: 1
-version: 6
+version: 7
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T07:44:51.635Z
-updated_at: 2026-10-07T19:08:23.785Z
+updated_at: 2026-10-07T19:28:56.642Z
 started_at: 2026-10-07T07:45:48.472Z
 closed_at: 2026-10-07T09:28:53.074Z
 close_reason: Exact semantic input binding, all eleven dual replays and both rejected controls completed; both Astra reviews accepted. Publication remains in parent.
