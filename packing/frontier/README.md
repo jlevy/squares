@@ -124,21 +124,15 @@ The ones that carry the most weight:
 - `verified_upper_bound` and `verified_lower_bound` contain only formally supported
   bounds. They are a ceiling and a floor, not the value of $s(n)$. The certified ceiling
   may be a weaker rational construction or the exact grid when the tighter public pose
-  is only numerical: for 56 of the 324 cases it is *larger* than the best-known side
-  recorded two fields above it by more than that side’s printed precision allows, by at
-  most $10^{-14}$, and each of those cases says so in its own body and carries a
-  `mathematics` blocker.
-  At 55 of them the catalogue gives the side as a closed form, which Evan Daniel’s
-  rational certificate of the packing bounds from above without reaching it (T-101); at
-  $n = 29$ the ceiling is an interval-certified bound written in full.
-  In 43 more it sits above the printed side by no more than one unit of its last place,
-  which `bounds_agree_at_declared_precision` reads as the same bound: 2 of them are
-  Couzo’s packings certified here (T-056), at $n = 105$ and $130$, whose exact sides
-  round up past the fifteen decimals the source prints, and 22 are the catalogue’s
-  packings certified by Evan Daniel and rounded up at its fourteen (T-101). At 48 counts
-  both lanes hold one exact side, the exact optimum of the reported packing (T-098). An
-  `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known exactly
-  only when `status` is `proved`.
+  is only numerical. A gap exceeding the reported side’s declared precision carries a
+  `mathematics` blocker in the case record; the generated [status table](STATUS.md)
+  lists those gaps. A rational certificate can lie just above the source’s printed side,
+  as Evan Daniel’s catalogue certificates do (T-101), or reach one exact side in both
+  lanes, as his refinements of the earlier packings do (T-098).
+  `bounds_agree_at_declared_precision` accepts a ceiling within one unit of the printed
+  side’s last place as the same displayed bound.
+  An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
+  exactly only when `status` is `proved`.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
   bounds match exactly.
   There are currently 77 proved and 247 open formal cases.
@@ -192,6 +186,17 @@ accounted for exactly once, as selected, superseded or beyond the horizon.
 The selected source register has no remaining beyond-horizon claims.
 The check is local and deterministic; refreshing a public source is a dated W1 research
 survey, not a network operation hidden inside ordinary validation.
+
+SQUISH’s ten-packing release and its later $n = 153$ supplement, published on 7 October
+2026, carry the upper bounds at eleven counts (T-113 and T-114). Nate Chaoweeraprasit
+credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+assistance. The certificates are retained as derived facts and were replayed here by two
+independently re-implemented exact-rational checks, with two accepted project AI
+reviews. Both bound lanes display each exact rational side rounded upward at sixteen
+decimals; both `exact_form` fields retain that original certified rational side.
+The source’s finite displays remain attributed metadata in the packet: four were one
+unit too low, five eight or nine units too high, and two agree with the safe display.
+Neither release claims optimality.
 
 The catalogue was last captured on 2026-09-30. The capture of 2026-08-22 is kept beside
 it byte for byte, because the UnitSquare and certified-packet intakes read it and their

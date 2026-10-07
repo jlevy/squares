@@ -89,20 +89,21 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: of them than it moved the 28-digit records they replaced.
 GOLDEN_UNSTABLE = {
     "n=1..100": [68],
-    "n=1..200": [68, 102, 105, 106, 110, 123, 130, 132, 155, 172, 177, 179, 199],
+    "n=1..200": [68, 102, 105, 106, 108, 110, 123, 129, 130, 132, 172, 177, 180, 199],
     "n=1..324": [
         68,
         102,
         105,
         106,
+        108,
         110,
         123,
-        126,
+        129,
         130,
         132,
-        155,
         172,
         177,
+        180,
         199,
         206,
         207,
@@ -212,6 +213,13 @@ def test_small_records_rescreen_to_the_retained_result() -> None:
     for n in (5, 10, 11, 27):
         screened = screen_translation_escape._screen_entry(entries[n])  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
         assert screened == (True, cases[n])
+
+
+def test_squish_n108_retains_its_replayed_tolerance_instability() -> None:
+    entry = next(row for row in manifest_entries() if row["n"] == 108)
+    screened = screen_translation_escape._screen_entry(entry)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert screened == (True, _cases()[108])
+    assert screened[1]["stable_across_tolerances"] is False
 
 
 def test_every_retained_result_names_the_record_the_manifest_holds() -> None:

@@ -132,11 +132,12 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: catalogue's September 2026 packings (T-088, T-089), when n = 69 was screened for the first
 #: time, and again that day after Couzo's 3 October packings at n = 208, 209, 228, 263, 272,
 #: 303 and 306 (T-092), which their import left unscreened; the two smaller corpora are not
-#: re-measured.
+#: re-measured. The complete 324-record replay on 2026-10-07 after SQUISH's eleven
+#: imported poses (T-113, T-114) took 364.07s and established the current tripwire.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (26, 87, 85, 518),
     "n=1..200": (65, 606, 181, 1883),
-    "n=1..324": (120, 1867, 302, 4511),
+    "n=1..324": (119, 1725, 302, 4489),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -2427,10 +2428,8 @@ def _frontier_rigidity(context: Context) -> str:
 def _translation_escape_screen(context: Context) -> str:
     """The single-square translation screen, rebuilt from the witnesses every run.
 
-    The counts are pinned here because they are the finding: 25 records hold a square
-    that can be pushed clear of everything it touches, and the two records whose witness
-    geometry is too coarse to read contacts from are excluded rather than reported on.
-    A miss is not rigidity, so nothing here may be restated as one.
+    The current corpus findings and exclusion list are pinned below and must agree
+    with the replay. A miss is not rigidity, so nothing here may be restated as one.
     """
     output = _module(context, "devtools.screen_translation_escape", "--check")
     _require_text(output, f"translation escape screen check passed: {_screen_findings()}")
@@ -2441,9 +2440,9 @@ def _screen_findings() -> str:
     """The screen's corpus findings, as the tool prints them.
 
     The screened count is a corpus fact and scales: the whole of KNOWN_BEST_CORPUS less
-    the records the shape-residual limit throws out. The four findings after it are not
-    counts of anything and stay pinned as tripwires -- think-93on re-argues them, and the
-    exclusion list with them, when the corpus grows. Shared by the whole screen and its
+    the records the shape-residual limit throws out. The four pose measurements after
+    it stay pinned as tripwires -- think-93on re-argues them, and the exclusion list
+    with them, when the corpus grows or its poses change. Shared by the whole screen and its
     sampled stand-in, because the findings are read out of the retained document either
     way and a second copy of this string is a second thing to forget to update.
     """

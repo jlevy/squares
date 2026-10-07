@@ -48,6 +48,7 @@ from strif import atomic_output_file
 
 from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import evand_exact_certificates as evand_certificates
+from devtools import squish_upper_bound_packets as squish_packets
 from devtools import upper_bound_packets as packets
 from devtools.build_bound_citations import RECENT_SINCE
 from devtools.build_composite_figure_data import load_record as load_figure_record
@@ -116,6 +117,7 @@ from sqpack.render.svg import (
 )
 from sqpack.witness import (
     check_witness_semantics,
+    exact_verify,
     load_witness,
     materialize_witness,
     witness_document,
@@ -155,6 +157,7 @@ UNITSQUARE_SOURCE_KEY = "[UnitSquare 2026]"
 #: facts, as onto a UnitSquare rendering, by having its bound sourced there.
 PACKET_SOURCES = {source.key: source for source in packets.CERTIFIED}
 PACKET_KIND = "packet-derived-facts"
+SQUISH_SOURCE_KEYS = frozenset(squish_packets.source_key(n) for n in squish_packets.NUMBERS)
 #: The report that solved 48 known-best packings to their exact optima (T-098). It moves
 #: a case's side by at most 5e-11 and keeps its packing, so the atlas pictures the
 #: packing from the source that held the count before, which the packet's comparison
@@ -778,7 +781,19 @@ def _source_plan(
             (case.n,),
             upstream_digest,
         )
-    packet = PACKET_SOURCES.get(pictured_source_key(case))
+    pictured = pictured_source_key(case)
+    if pictured in SQUISH_SOURCE_KEYS:
+        path = squish_packets.fact_path(case.n)
+        if (
+            case.n not in squish_packets.NUMBERS
+            or pictured != squish_packets.source_key(case.n)
+            or not path.is_file()
+        ):
+            raise ValueError(f"n={case.n}: {pictured} retains no facts for this case")
+        return SourcePlan(
+            PACKET_KIND, path, squish_packets.source_url(case.n), case.n, (case.n,)
+        )
+    packet = PACKET_SOURCES.get(pictured)
     if packet is not None:
         # As for the release: a record naming a packet that holds no facts for its `n`
         # is a refusal, never a fall-through to the catalogue.
@@ -918,12 +933,20 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
             )
             continue
         if plan.kind == PACKET_KIND:
-            packet = next(
-                item for item in packets.CERTIFIED if plan.path.is_relative_to(item.facts)
-            )
+            if plan.path == squish_packets.fact_path(n):
+                author = squish_packets.AUTHOR
+                revision = squish_packets.REVISION if n != 153 else "issuecomment-6031977107"
+                attribution = f"{author}, {plan.url} at {revision}"
+                retrieved = squish_packets.RETRIEVED
+            else:
+                packet = next(
+                    item for item in packets.CERTIFIED if plan.path.is_relative_to(item.facts)
+                )
+                attribution = f"{packet.author}, {packet.url} at {packet.revision}"
+                retrieved = packet.retrieved
             sources.append(
                 {
-                    "attribution": f"{packet.author}, {packet.url} at {packet.revision}",
+                    "attribution": attribution,
                     "kind": plan.kind,
                     "license_status": "no-licence-published",
                     "listed_n": list(plan.listed_n),
@@ -931,7 +954,7 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
                     "path": _relative(plan.path),
                     "raw_asset_retained": False,
                     "retention_policy": KINGBIRD_RETENTION_POLICY,
-                    "retrieved": packet.retrieved,
+                    "retrieved": retrieved,
                     "source_n": plan.source_n,
                     "url": plan.url,
                 }
@@ -1019,6 +1042,8 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
                 revision_sha256=_retained_revision(retained, "revision_sha256"),
             )
         if plan.kind == PACKET_KIND:
+            if plan.path == squish_packets.fact_path(case.n):
+                return _squish_derived_witness(case, plan)
             retained = load_witness(plan.path, fallback_schema=WITNESS_SCHEMA)
             _assert_side_matches(case, str(retained["side"]))
             pictured = pictured_source_key(case)
@@ -1041,6 +1066,53 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
         )
     except (ValueError, TypeError) as error:
         raise ValueError(f"n={case.n} from {_relative(plan.path)}: {error}") from error
+
+
+def _squish_derived_witness(case: FrontierCase, plan: SourcePlan) -> dict:
+    """Check exact half-angle facts before the atlas asserts coordinate feasibility.
+
+    The source's finite decimal is a display value; the exact side and corners decide
+    feasibility. This check establishes the drawing's geometry, while confirmation of
+    the imported result remains the frontier record's separate evidence lane.
+    """
+    fact = squish_packets.read_fact(case.n)
+    normalized_side = squish_packets.verified_value(
+        Fraction(fact["side"]), fact["printed_side"]
+    )
+    if Fraction(case.side) not in {Fraction(fact["printed_side"]), Fraction(normalized_side)}:
+        raise ValueError("source display disagrees with the reported frontier side")
+    if fact["n"] != case.n or len(fact["squares"]) != case.n:
+        raise ValueError("derived facts do not contain the requested square count")
+    witness = squish_packets.to_witness(fact)
+    witness["id"] = f"W-known-best-n{case.n:03d}"
+    result, report = exact_verify(witness)
+    if not report.valid or not result["verification_passed"]:
+        detail = report.failures[0] if report.failures else "unknown failure"
+        raise ValueError(f"exact feasibility check failed: {detail}")
+    witness["claim"]["limitations"] = (
+        "Exact rational corners derived from retained SQUISH center/half-angle facts, "
+        "checked with exact predicates at the source's exact rational side. The SVG "
+        "rounds only for visualization. Verifies this upper-bound construction, not "
+        "optimality or confirmation of the imported result in the frontier register. "
+        "The source publishes no licence, so only derived geometry and attributed "
+        "metadata are retained; this conservative retention policy is not a legal "
+        "conclusion."
+    )
+    witness["source"] = {
+        "key": pictured_source_key(case),
+        "path": _relative(plan.path),
+        "url": plan.url,
+        "retrieved": squish_packets.RETRIEVED,
+        "revision": squish_packets.REVISION if case.n != 153 else "issuecomment-6031977107",
+    }
+    witness["certificate"] = {
+        "kind": "exact-rational-sat",
+        "replay": (
+            f"uv run --frozen packing-witness verify witnesses/known-best/n-{case.n:03d}.yaml"
+        ),
+        "result": result,
+    }
+    return witness
 
 
 def _projection_text(value: object, digits: int = 70) -> str:
@@ -2158,7 +2230,12 @@ def _manifest_entry(built: BuiltCase) -> dict:
     elif plan.kind == "kingbird-derived-facts":
         derivation = "deterministic reuse of retained Witness/v2 numerical center/angle facts"
     elif plan.kind == PACKET_KIND:
-        derivation = "deterministic reuse of a source packet's retained Witness/v2 facts"
+        derivation = (
+            "exact rational half-angle conversion of retained source facts, checked "
+            "with exact predicates"
+            if plan.path == squish_packets.fact_path(n)
+            else "deterministic reuse of a source packet's retained Witness/v2 facts"
+        )
     elif n == plan.source_n:
         derivation = "direct normalization of complete source geometry"
     else:

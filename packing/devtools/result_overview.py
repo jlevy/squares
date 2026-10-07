@@ -1045,13 +1045,13 @@ class LinkAudit(NamedTuple):
 
     results: int
     github: int
-    """Links into this repository, every one of which must name `main`."""
+    """Links into the repository's file tree, every one of which must name `main`."""
     github_paths: int
     """The distinct repository paths those links open."""
     site: int
     """Links to pages of this site, each checked as the body was rendered."""
     external: int
-    """Links off the site and the repository: a source's own home."""
+    """Source citations off the site, including first-party issue/discussion reports."""
     off_main: list[str]
     missing: list[str]
     """Repository paths the tree at `HEAD` does not hold, as `kind/path`."""
@@ -1085,7 +1085,7 @@ def link_audit(overview: Overview, bodies: Mapping[str, str] | None = None) -> L
         body = (bodies or {}).get(result.id) or result_popover_html(result, overview)
         sizes[result.id] = len(body.encode("utf-8"))
         for href in _HREF.findall(body):
-            if href.startswith(on_main):
+            if href.startswith(on_main) and not repo_links.is_report_link(href):
                 github += 1
                 if not branch.match(href):
                     off_main.append(f"{result.id}: {href}")

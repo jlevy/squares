@@ -50,25 +50,6 @@ from sqpack.yamlio import safe_load
 #: many entries lie beyond it, where the stale n=179 form sits) are facts about the page
 #: and do not move when the case corpus grows; the reconciliation below follows the corpus.
 CASE_MAXIMUM = 100
-#: What the reconciliation reached at each corpus: (cases matched to a pictured block,
-#: printed facts checked). Pinned so a parser that quietly stopped matching still fails.
-GOLDEN_RECONCILED: dict[str, tuple[int, int]] = {
-    # Lowered on 2026-09-29: Couzo's packings (T-056) took 44 catalogue-sourced cases, 15 of
-    # them at n <= 200, off the catalogue, and de Winter's (T-057) took n = 211's grid.
-    # Lowered by one on 2026-09-30, when the page was captured again: n = 126's new entry
-    # prints no degree lock or polynomial (-2) and n = 179's prints a lock and a polynomial
-    # where it printed a closed form (+1). n = 69, 83 and 87 were reconciled against the
-    # capture of 2026-08-22 while pending intake; on 2026-10-05 their records took the
-    # current capture (T-088, T-089): n = 69 leaves the UnitSquare release for a catalogue
-    # block (+1 case), and the three new blocks print one more fact between them than the
-    # facts the three records were held to before (+1). Lowered by one case on
-    # 2026-10-06, when Evan Daniel's exact optimum of de Winter's packing (T-098) took
-    # n = 126 off the catalogue; its entry printed no fact, so the facts stand.
-    "n=1..100": (61, 207),
-    "n=1..200": (99, 393),
-    "n=1..324": (139, 615),
-}
-
 #: A block whose printed form uses LaTeX this parser does not read. It must raise rather
 #: than record "no closed form", which is exactly how the `n = 54` miss looked.
 UNCONVERTIBLE_BLOCK = r"""preamble
@@ -415,7 +396,29 @@ def test_frontier_transcription_diverges_nowhere_below_the_case_maximum() -> Non
     assert errors == []
     # A parser that quietly stopped matching would agree with every record, so the
     # reconciliation's own reach is asserted alongside its verdict.
-    assert (compared, facts) == GOLDEN_RECONCILED[KNOWN_BEST_CORPUS.label]
+    # Reach follows the declared current source, rather than requiring a superseded
+    # catalogue packing to remain selected forever. The frozen page/parser tests
+    # above still require all 174 source blocks and their original printed facts.
+    selected = {
+        n
+        for n, case in cases.items()
+        if case["reported_upper_bound"]["source_key"] == _kingbird_source_key()
+    }
+    catalogue = _record_catalogue()
+    assert compared == len(selected & catalogue.keys())
+    expected_facts = len(cases) + len(selected - catalogue.keys())
+    expected_facts += sum(
+        sum(
+            value is not None
+            for value in (
+                catalogue[n].exact_form,
+                catalogue[n].algebraic_degree,
+                catalogue[n].minimal_polynomial,
+            )
+        )
+        for n in selected & catalogue.keys()
+    )
+    assert facts == expected_facts
 
 
 @pytest.mark.parametrize(

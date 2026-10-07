@@ -1117,6 +1117,137 @@ def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: P
     assert normalized(with_rigidity_of(committed, drafted)) == normalized(committed)
 
 
+@pytest.mark.parametrize("n", [108, 126, 130, 153, 155])
+def test_selected_squish_report_refreshes_geometry_and_lower_lanes_without_losing_review(
+    n: int, tmp_path: Path
+) -> None:
+    availability = load_availability()
+    catalogue = load_drafting_catalogue([n], availability)
+    committed = record_path(FRONTIER, n).read_text()
+    payload = safe_load(committed.split("---\n", 2)[1])["packing"]
+    args = argparse.Namespace(
+        out=tmp_path, review_date="2026-10-07", retrieved_date="2026-10-07", force=False
+    )
+    path = record_path(tmp_path, n)
+    path.write_text(committed)
+    assert check_records([n], args, availability, catalogue) == 0
+    drafted = redraft(
+        n,
+        committed,
+        availability=availability,
+        catalogue=catalogue,
+        review_date="2026-10-07",
+        retrieved_date="2026-10-07",
+    )
+    assert "  rigidity: null\n" in drafted
+    assert normalized(with_rigidity_of(committed, drafted)) == normalized(committed)
+    # A stale display and fraction must not become a self-fulfilling draft. The body
+    # declaration and the ordinary verified lower lane are independently regenerated.
+    report = payload["reported_upper_bound"]
+    stale = committed.replace(f"value: '{report['value']}'", "value: '99.0'", 1)
+    stale = stale.replace(f"exact_form: {report['exact_form']}", "exact_form: 99/1", 1)
+    stale = stale.replace("S_n = \\frac{", "S_n = \\frac{999", 1)
+    lower = payload["verified_lower_bound"]["value"]
+    stale = stale.replace(f"value: '{lower}'", "value: '1.0'", 1)
+    path.write_text(stale)
+    assert check_records([n], args, availability, catalogue) == 1
+    assert refresh_records([n], args, availability, catalogue) == 0
+    assert normalized(path.read_text()) == normalized(committed)
+    assert check_records([n], args, availability, catalogue) == 0
+
+
+def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
+    """The confirmation phase has a ceiling and a separate original source quotation."""
+    from fractions import Fraction  # noqa: PLC0415
+
+    from yaml import safe_dump  # noqa: PLC0415
+
+    from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
+
+    n = 108
+    existing = record_path(FRONTIER, n).read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    case["verified_upper_bound"]["evidence"] = ["E-squish-ten-packings-2026-10-07-exact-replay"]
+    case["reported_upper_bound"]["value"] = "99.0"
+    case["verified_upper_bound"]["value"] = "99.0"
+    label = "The source" + chr(0x2019) + "s original finite decimal display is"
+    body, source_displays = re.subn(
+        rf"(?:Its decimal display is|{re.escape(label)})\s+\$[0-9.]+\$",
+        lambda _match: f"{label} $99.0$",
+        body,
+    )
+    assert source_displays == 1
+    # Both reported and already confirmed records are valid starting states. Replace
+    # their display declarations rather than appending a second confirmation clause.
+    body = re.sub(r"The verified display is\s+\$[0-9.]+\$", "", body)
+    body = body.replace(
+        "## Earlier Packing", "The verified display is $99.0$.\n\n## Earlier Packing"
+    )
+    edited = "---\n" + safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    availability = load_availability()
+    historical = adopt_upper_bound_packet(
+        n,
+        generate_record(
+            n,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        ),
+    )
+    refreshed = source_supersession.adopt_selected_report(n, edited, historical)
+    fact = squish_upper_bound_packets.read_fact(n)
+    assert f"{label} ${fact['printed_side']}$" in refreshed
+    value = squish_upper_bound_packets.verified_value(
+        Fraction(fact["side"]), fact["printed_side"]
+    )
+    assert f"The verified display is ${value}$" in refreshed
+    assert "## The verified upper bound is a ceiling" not in refreshed
+    assert "  rigidity: null\n" in refreshed
+    with pytest.raises(ValueError, match="exactly one verified-display"):
+        source_supersession.adopt_selected_report(
+            n, edited.replace("The verified display is", "Stale display is"), historical
+        )
+    with pytest.raises(ValueError, match="exactly one generated lower-bound"):
+        source_supersession.adopt_selected_report(
+            n, edited.replace("## The lower bound", "## Deleted lower bound"), historical
+        )
+    # Coverage selecting a later source does not authorize assigning that source's
+    # facts to an earlier draft's evidence, resources or body before intake.
+    assert source_supersession.adopt_selected_report(n, historical, historical) == historical
+
+
+def test_selected_squish_publication_admits_integer_rational_sides(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
+
+    n = 108
+    existing = record_path(FRONTIER, n).read_text()
+    availability = load_availability()
+    historical = adopt_upper_bound_packet(
+        n,
+        generate_record(
+            n,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        ),
+    )
+    fact = squish_upper_bound_packets.read_fact(n)
+    fact.update(side="11", printed_side="11.0000000000000000")
+    monkeypatch.setattr(squish_upper_bound_packets, "read_fact", lambda _n: fact)
+    adapted = source_supersession.adopt_selected_report(n, existing, historical)
+    assert r"S_n = \frac{11}{1}" in adapted
+    assert (
+        safe_load(adapted.split("---\n", 2)[1])["packing"]["reported_upper_bound"]["exact_form"]
+        == "11"
+    )
+
+
 def test_an_optimizer_the_line_credits_nowhere_else_is_credited_and_dated() -> None:
     """`n = 179`'s side is Tej Stead's June 2026 optimization; `n = 129`'s optimizer is
     its finder, already credited, so only the dated sentence is added there."""
