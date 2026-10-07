@@ -1941,7 +1941,7 @@
           {"active_blockers":{"container_normals":0,"square_indices":[85,112]},"direction":{"x":"-0.915925799996808413423","y":"0.401347640955078385494"},"slide_distance":"0.00473355648071956005654","square_index":124,"witness_kind":"strict-separating","witness_square_id":125}
         ],
         "n": 126,
-        "reported_side": "11.7735852916961079",
+        "reported_side": "11.7735852916961071",
         "separating_square_count": 10,
         "square_count": 126,
         "stable_across_tolerances": true
@@ -2035,13 +2035,13 @@
         ],
         "movable_squares_by_tolerance": {"1e-10":[9,11,13,18,28,37,41,42,43,44,45,53,55,61,63,64,65,66,67,69,74,75,77,81,83,86,89,91,94,95,96,99,101,104,105,106,107,109,112,123,125,127],"1e-12":[9,11,13,18,28,37,41,42,43,44,45,53,55,61,63,64,65,66,67,69,74,75,77,81,83,86,89,91,94,95,96,99,101,104,105,106,107,109,112,123,125,127],"1e-6":[9,11,13,18,28,37,41,42,43,44,45,53,55,61,63,64,65,66,67,69,74,75,77,81,83,86,91,94,95,96,99,101,104,105,106,107,109,112,123,125,127],"1e-8":[9,11,13,18,28,37,41,42,43,44,45,53,55,61,63,64,65,66,67,69,74,75,77,81,83,86,91,94,95,96,99,101,104,105,106,107,109,112,123,125,127]},
         "n": 129,
-        "reported_side": "11.8808935876459927",
+        "reported_side": "11.8808935876459918",
         "separating_square_count": 7,
         "separating_squares_by_tolerance": {"1e-10":[75,94,96,104,106,107,127],"1e-12":[75,94,96,104,106,107,127],"1e-6":[75,94,96,104,106,107,127],"1e-8":[75,94,96,104,106,107,127]},
         "square_count": 129,
         "stable_across_tolerances": false
       },
-      {"min_container_slack":"0.0","min_pair_separation":"9.87022132190849314287e-14","movable_square_count":2,"movable_squares":[{"active_blockers":{"container_normals":1,"square_indices":[29,30,39]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"0.00424304777336637073404","square_index":19,"witness_kind":"contact-preserving","witness_square_id":20},{"active_blockers":{"container_normals":0,"square_indices":[76,123,126]},"direction":{"x":"-0.721124301994010612394","y":"0.69280570225255145623"},"slide_distance":"0.00365404289697697168906","square_index":87,"witness_kind":"contact-preserving","witness_square_id":88}],"movable_squares_by_tolerance":{"1e-10":[19,30,87],"1e-12":[19,30,87],"1e-6":[19,87],"1e-8":[19,87]},"n":130,"reported_side":"11.9044830325168771","separating_square_count":0,"separating_squares_by_tolerance":{"1e-10":[],"1e-12":[],"1e-6":[],"1e-8":[]},"square_count":130,"stable_across_tolerances":false},
+      {"min_container_slack":"0.0","min_pair_separation":"9.87022132190849314287e-14","movable_square_count":2,"movable_squares":[{"active_blockers":{"container_normals":1,"square_indices":[29,30,39]},"direction":{"x":"1.0","y":"0.0"},"slide_distance":"0.00424304777336637073404","square_index":19,"witness_kind":"contact-preserving","witness_square_id":20},{"active_blockers":{"container_normals":0,"square_indices":[76,123,126]},"direction":{"x":"-0.721124301994010612394","y":"0.69280570225255145623"},"slide_distance":"0.00365404289697697168906","square_index":87,"witness_kind":"contact-preserving","witness_square_id":88}],"movable_squares_by_tolerance":{"1e-10":[19,30,87],"1e-12":[19,30,87],"1e-6":[19,87],"1e-8":[19,87]},"n":130,"reported_side":"11.9044830325168772","separating_square_count":0,"separating_squares_by_tolerance":{"1e-10":[],"1e-12":[],"1e-6":[],"1e-8":[]},"square_count":130,"stable_across_tolerances":false},
       {
         "min_container_slack": "-5.1349776792702613402e-16",
         "min_pair_separation": "1.99653395880647171887e-13",
@@ -2545,7 +2545,7 @@
           {"active_blockers":{"container_normals":0,"square_indices":[151,153]},"direction":{"x":"0.920111220433002808607","y":"-0.391657174111862930945"},"slide_distance":"0.0776237313274073772966","square_index":150,"witness_kind":"contact-preserving","witness_square_id":151}
         ],
         "n": 154,
-        "reported_side": "12.9282936576777576",
+        "reported_side": "12.9282936576777577",
         "separating_square_count": 3,
         "square_count": 154,
         "stable_across_tolerances": true
@@ -2566,7 +2566,7 @@
           {"active_blockers":{"container_normals":0,"square_indices":[147,148,150]},"direction":{"x":"0.906412519242591546206","y":"-0.422393590103233704329"},"slide_distance":"0.0367083537417357376391","square_index":149,"witness_kind":"strict-separating","witness_square_id":150}
         ],
         "n": 155,
-        "reported_side": "12.9536770693532741",
+        "reported_side": "12.9536770693532733",
         "separating_square_count": 3,
         "square_count": 155,
         "stable_across_tolerances": true
@@ -3156,7 +3156,7 @@
         ],
         "movable_squares_by_tolerance": {"1e-10":[77,78,88,118,166],"1e-12":[77,78,88,118,166],"1e-6":[77,78,88,166],"1e-8":[77,78,88,118,166]},
         "n": 180,
-        "reported_side": "13.9236350042524233",
+        "reported_side": "13.9236350042524224",
         "separating_square_count": 0,
         "separating_squares_by_tolerance": {"1e-10":[],"1e-12":[],"1e-6":[],"1e-8":[]},
         "square_count": 180,
@@ -4114,7 +4114,7 @@
         ],
         "movable_squares_by_tolerance": {"1e-10":[2,11,14,15,18,19,20,103,111,113,140,143,146,204,208],"1e-12":[2,11,14,15,18,19,20,103,111,113,140,143,146,204,208],"1e-6":[2,11,14,15,19,20,31,103,111,113,143,204,208],"1e-8":[2,11,14,15,18,19,20,103,111,113,140,143,146,204,208]},
         "n": 209,
-        "reported_side": "14.9496179522017929",
+        "reported_side": "14.9496179522017921",
         "separating_square_count": 3,
         "separating_squares_by_tolerance": {"1e-10":[20,146,204],"1e-12":[20,146,204],"1e-6":[20,204],"1e-8":[20,146,204]},
         "square_count": 209,
@@ -4962,7 +4962,7 @@
         ],
         "movable_squares_by_tolerance": {"1e-10":[1,3,9,12,13,14,15,16,18,22,28,46,54,56,57,69,71,75,76,77,78,80,87,97,100,106,110,116,119,128,134,135,139,145,159,169,184,186,207,209,211,215,222,229,234],"1e-12":[1,3,9,12,13,14,15,16,18,22,28,46,54,56,57,69,71,75,76,77,78,80,87,97,100,106,110,116,119,128,134,135,139,145,159,169,184,186,207,209,211,215,222,229,234],"1e-6":[1,3,9,12,13,14,15,16,18,22,28,46,54,56,57,69,71,75,76,77,78,80,87,97,100,106,110,116,119,128,134,139,145,159,169,184,186,207,209,211,215,222,229,234],"1e-8":[1,3,9,12,13,14,15,16,18,22,28,46,54,56,57,69,71,75,76,77,78,80,87,97,100,106,110,116,119,128,134,135,139,145,159,169,184,186,207,209,211,215,222,229,234]},
         "n": 238,
-        "reported_side": "15.9294090272583144",
+        "reported_side": "15.9294090272583145",
         "separating_square_count": 8,
         "separating_squares_by_tolerance": {"1e-10":[12,16,56,71,106,207,209,222],"1e-12":[12,16,56,71,106,207,209,222],"1e-6":[12,16,56,71,106,207,209,222],"1e-8":[12,16,56,71,106,207,209,222]},
         "square_count": 238,
@@ -7219,7 +7219,7 @@
           "1e-8": [0,61,69,70,71,72,73,74,75,76,77,78,79,80,81,92,93,94,95,105,106,107,115,117,119,121,127,128,129,130,131,132,139,140,141,142,143,148,151,152,153,165,171,173,175,176,180,184,185,186,187,190,191,193,194,195,211,212,214,216,217,218,229,235,239,240,241,243,244,246,254,279,286,294,298]
         },
         "n": 303,
-        "reported_side": "17.9203123729203497",
+        "reported_side": "17.9203123729203498",
         "separating_square_count": 5,
         "separating_squares_by_tolerance": {"1e-10":[235,240,246,254,279],"1e-12":[235,240,246,254,279],"1e-6":[235,240,254,279],"1e-8":[235,240,246,254,279]},
         "square_count": 303,

@@ -188,11 +188,14 @@ The check is local and deterministic; refreshing a public source is a dated W1 r
 survey, not a network operation hidden inside ordinary validation.
 
 SQUISH’s ten-packing release and its later $n = 153$ supplement, published on 7 October
-2026, now carry the reported upper bounds at eleven counts (T-113 and T-114). Nate
-Chaoweeraprasit credits David Ellsworth’s records and tools and states human-directed
-Claude Opus 5.5 assistance.
-Their rational certificates are retained as derived facts; complete exact replay and
-mathematical review are queued, and the verified lane retains the earlier packings.
+2026, carry the upper bounds at eleven counts (T-113 and T-114). Nate Chaoweeraprasit
+credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+assistance. The certificates are retained as derived facts and were replayed here by two
+independently re-implemented exact-rational checks, with two accepted project AI
+reviews. Both bound lanes display each exact rational side rounded upward at sixteen
+decimals; both `exact_form` fields retain that original certified rational side.
+The source’s finite displays remain attributed metadata in the packet: four were one
+unit too low, five eight or nine units too high, and two agree with the safe display.
 Neither release claims optimality.
 
 The catalogue was last captured on 2026-09-30. The capture of 2026-08-22 is kept beside

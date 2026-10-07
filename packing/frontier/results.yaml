@@ -11734,13 +11734,16 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: "`s(n) ≤ S_n` at ten counts, n = 108 to 303, from new SQUISH rational packings"
-    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(n) <= S_n for n = 108, 126, 129, 130,
-      154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401 on 7 October
-      2026. Each S_n is the exact rational side in the retained packing facts, from about 0.0004126 to
-      0.0067047 below the earlier reported upper bound here. Each certificate supplies rational centres
+    claim: 'Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129,
+      130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401 on
+      7 October 2026. Each S_n is the exact rational side in the retained packing facts, from about 0.0004126
+      to 0.0067047 below the earlier reported upper bound here. Each certificate supplies rational centres
       and rational half-angle parameters for closed unit squares in the rational container. The claim
       establishes only upper bounds, with no optimality or rigidity conclusion. The author credits David
-      Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
+      Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance. This repository
+      confirmed the upper bounds by independently re-implemented exact-rational checks: sqpack.witness.exact_verify
+      and devtools.check_rational_witness_independent accept every pair and container wall of each certificate,
+      with both geometric controls rejected.'
     scope:
       n_values:
       - 108
@@ -11753,15 +11756,16 @@ results:
       - 209
       - 238
       - 303
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: New packings reduce the recorded upper bounds at ten counts by about 0.0004 to 0.0067,
         substantive case-bound improvements. They settle no exact optimum and introduce no proved general
         packing theorem.
       scored: '2026-10-07'
-      by: registration lane (draft; independent mathematical review pending)
+      by: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md (GPT-6 Astra high reasoning;
+        S3 confirmed against T-056, T-092 and T-098)
     novelty: previously-published
     attribution:
       source_keys:
@@ -11769,6 +11773,7 @@ results:
       published: '2026-10-07'
     evidence:
     - E-squish-ten-packings-2026-10-07-report
+    - E-squish-ten-packings-2026-10-07-exact-replay
     artifacts:
     - packing/resources/web/squish-401-2026-10-07/README.md
     - packing/resources/web/squish-401-2026-10-07/facts/n-108.json.gz
@@ -11783,41 +11788,100 @@ results:
     - packing/resources/web/squish-401-2026-10-07/facts/n-303.json.gz
     - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
     - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
-    next_rung: A complete exact-rational replay must decide every square pair and container wall from
-      the retained rational centres and half-angle parameters, with rejected invalid controls, followed
-      by an independent mathematical review. The source’s checker outputs are reported claims only; the
-      verification implementation and its relation to the generator will be recorded with the replay.
-    notes: >-
-      Registered as reported from the source claim only. The source reports exact checks,
-      but its checker code is not retained and no complete replay or mathematical review
-      is cited in this registration, so the declaration carries V0/C0.
-    activity:
-      state: in-analysis
-      what: Exact-rational replay and independent mathematical review under think-mc4u.
-      since: '2026-10-07'
-      link: https://github.com/jlevy/squares/issues/401
+    - packing/witnesses/squish-401-2026/n-108-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-126-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-129-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-130-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-154-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-155-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-180-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-209-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-238-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-303-rational.yaml.gz
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/devtools/squish_upper_bound_packets.py
+    - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+    next_rung: V4 and C4 need a retained human oversight record for the claim, certificate, assumptions,
+      two deciding implementations, controls and accepted adversarial AI reviews. The two separately prompted
+      project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
+      with the open replay and two human expert reviews. No local or global optimality claim is made by
+      these upper-bound certificates.
+    notes: Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+      on the same day after complete exact-rational dual replay and two accepting project AI reviews,
+      with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
+      oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
+      display the exact source rational side rounded upward at sixteen decimals; their exact_form fields
+      retain that source rational. Across the eleven packings this corrects four source prints upward,
+      tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
+      original source print separately from the verified display.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, high reasoning, separately prompted W2 mathematics lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Exact rational half-angle conversion, complete roster, unit-square/container/all-pair SAT
+        soundness, source/decider independence, two negative controls and decimal ceilings for T-113 and
+        T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    - path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, max reasoning, separately prompted senior correctness and security review
+        lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Import implementation, strict input admission, retained source attribution, source/fact/witness/receipt
+        binding, checker verdict and negative-control consistency, and publication boundaries for T-113
+        and T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    controls:
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/tests/test_squish_upper_bound_packets.py
+    - packing/tests/test_squish_upper_bound_receipts.py
+    - packing/tests/test_import_half_angle_witness.py
+    composition: Each source rational triple is converted without rounding to exact unit-square corners,
+      at the source’s unchanged rational side. Both native exact_verify and the independently written
+      rational-corner checker decide every pair and wall; the source-to-witness conversion and complete
+      scope are accepted by the retained mathematical review. The wrapper binds the receipt to the decided
+      witness, checks the full roster and upward decimal display, and replays both geometric controls.
+      This is an independently re-implemented confirmation, sharing no verification code with the producer;
+      the two first-party routes share the converted corners, YAML and Python rational arithmetic.
+
   - id: T-114
     kind: upper-bound
     registered: '2026-10-07'
     headline: "`s(153) ≤ 7250614903299225/562949953421312`, from a SQUISH rational packing"
-    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(153) <= 7250614903299225/562949953421312,
+    claim: 'Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <= 7250614903299225/562949953421312,
       about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874
       below the earlier reported upper bound here. Each certificate supplies rational centres and rational
       half-angle parameters for closed unit squares in the rational container. The claim establishes only
       upper bounds, with no optimality or rigidity conclusion. The author credits David Ellsworth’s records
-      and tools and states human-directed Claude Opus 5.5 assistance.
+      and tools and states human-directed Claude Opus 5.5 assistance. This repository confirmed the upper
+      bounds by independently re-implemented exact-rational checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent
+      accept every pair and container wall of each certificate, with both geometric controls rejected.'
     scope:
       n_values:
       - 153
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: New packings reduce the recorded upper bounds at n = 153 by about 0.00199, substantive
         case-bound improvements. They settle no exact optimum and introduce no proved general packing
         theorem.
       scored: '2026-10-07'
-      by: registration lane (draft; independent mathematical review pending)
+      by: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md (GPT-6 Astra high reasoning;
+        S3 confirmed against T-056, T-092 and T-098)
     novelty: previously-published
     attribution:
       source_keys:
@@ -11825,21 +11889,68 @@ results:
       published: '2026-10-07'
     evidence:
     - E-squish-n153-2026-10-07-report
+    - E-squish-n153-2026-10-07-exact-replay
     artifacts:
     - packing/resources/web/squish-401-2026-10-07/README.md
     - packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz
     - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
     - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
-    next_rung: A complete exact-rational replay must decide every square pair and container wall from
-      the retained rational centres and half-angle parameters, with rejected invalid controls, followed
-      by an independent mathematical review. The source’s checker outputs are reported claims only; the
-      verification implementation and its relation to the generator will be recorded with the replay.
-    notes: >-
-      Registered as reported from the source claim only. The source reports exact checks,
-      but its checker code is not retained and no complete replay or mathematical review
-      is cited in this registration, so the declaration carries V0/C0.
-    activity:
-      state: in-analysis
-      what: Exact-rational replay and independent mathematical review under think-mc4u.
-      since: '2026-10-07'
-      link: https://github.com/jlevy/squares/issues/401
+    - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/devtools/squish_upper_bound_packets.py
+    - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+    next_rung: V4 and C4 need a retained human oversight record for the claim, certificate, assumptions,
+      two deciding implementations, controls and accepted adversarial AI reviews. The two separately prompted
+      project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
+      with the open replay and two human expert reviews. No local or global optimality claim is made by
+      these upper-bound certificates.
+    notes: Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+      on the same day after complete exact-rational dual replay and two accepting project AI reviews,
+      with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
+      oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
+      display the exact source rational side rounded upward at sixteen decimals; their exact_form fields
+      retain that source rational. Across the eleven packings this corrects four source prints upward,
+      tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
+      original source print separately from the verified display.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, high reasoning, separately prompted W2 mathematics lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Exact rational half-angle conversion, complete roster, unit-square/container/all-pair SAT
+        soundness, source/decider independence, two negative controls and decimal ceilings for T-113 and
+        T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    - path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, max reasoning, separately prompted senior correctness and security review
+        lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Import implementation, strict input admission, retained source attribution, source/fact/witness/receipt
+        binding, checker verdict and negative-control consistency, and publication boundaries for T-113
+        and T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    controls:
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/tests/test_squish_upper_bound_packets.py
+    - packing/tests/test_squish_upper_bound_receipts.py
+    - packing/tests/test_import_half_angle_witness.py
+    composition: Each source rational triple is converted without rounding to exact unit-square corners,
+      at the source’s unchanged rational side. Both native exact_verify and the independently written
+      rational-corner checker decide every pair and wall; the source-to-witness conversion and complete
+      scope are accepted by the retained mathematical review. The wrapper binds the receipt to the decided
+      witness, checks the full roster and upward decimal display, and replays both geometric controls.
+      This is an independently re-implemented confirmation, sharing no verification code with the producer;
+      the two first-party routes share the converted corners, YAML and Python rational arithmetic.

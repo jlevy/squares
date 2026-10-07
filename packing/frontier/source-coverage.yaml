@@ -1706,12 +1706,20 @@ sources:
     - frontier/n-209.md
     - frontier/n-238.md
     - frontier/n-303.md
-    claims_record: resources/web/squish-401-2026-10-07/acquisition/release-claims.json
+    claims_record: resources/web/squish-401-2026-10-07/acquisition/release-normalized-claims.json
     evidence:
     - E-squish-ten-packings-2026-10-07-report
-    notes: Reported rational packing bounds retained as derived facts only. The source credits Nate Chaoweeraprasit
-      after David Ellsworth and states human-directed Claude Opus 5.5 assistance. Full exact replay and
-      independent mathematical review are queued under think-mc4u; no verified field is promoted on registration.
+    - E-squish-ten-packings-2026-10-07-exact-replay
+    notes: Exact rational source packings retained as derived facts only. Complete lossless witness conversion
+      and all-pair/wall replay by two first-party exact-rational deciders, with both geometric controls
+      rejected, are recorded in the packet receipts and accepted by two separately prompted project AI
+      reviews. The verified cases now use the source rational side rounded upward at sixteen decimals;
+      selected_overrides use the same safe display of the source’s exact rational claim. Original source
+      finite displays remain in acquisition, original claims and replay receipts. Nate Chaoweeraprasit
+      credits David Ellsworth’s
+      records and tools and states human-directed Claude Opus 5.5 assistance. No producer checker replay,
+      optimality or rigidity claim is made.
+
   - id: squish-n153-2026-10-07
     title: SQUISH exact-rational n153 upper-bound packing
     role: first-party-release
@@ -1727,12 +1735,19 @@ sources:
     replay_disposition: case-specific
     represented_by:
     - frontier/n-153.md
-    claims_record: resources/web/squish-401-2026-10-07/acquisition/supplement-claims.json
+    claims_record: resources/web/squish-401-2026-10-07/acquisition/supplement-normalized-claims.json
     evidence:
     - E-squish-n153-2026-10-07-report
-    notes: Reported rational packing bounds retained as derived facts only. The source credits Nate Chaoweeraprasit
-      after David Ellsworth and states human-directed Claude Opus 5.5 assistance. Full exact replay and
-      independent mathematical review are queued under think-mc4u; no verified field is promoted on registration.
+    - E-squish-n153-2026-10-07-exact-replay
+    notes: Exact rational source packings retained as derived facts only. Complete lossless witness conversion
+      and all-pair/wall replay by two first-party exact-rational deciders, with both geometric controls
+      rejected, are recorded in the packet receipts and accepted by two separately prompted project AI
+      reviews. The verified cases now use the source rational side rounded upward at sixteen decimals;
+      selected_overrides use the same safe display of the source’s exact rational claim. Original source
+      finite displays remain in acquisition, original claims and replay receipts. Nate Chaoweeraprasit
+      credits David Ellsworth’s
+      records and tools and states human-directed Claude Opus 5.5 assistance. No producer checker replay,
+      optimality or rigidity claim is made.
 
 selected_overrides:
   - n: 68
@@ -1996,68 +2011,68 @@ selected_overrides:
     source_id: squish-ten-packings-2026-10-07
     value: '10.9206589394033085'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 126
     source_id: squish-ten-packings-2026-10-07
-    value: '11.7735852916961079'
+    value: '11.7735852916961071'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 129
     source_id: squish-ten-packings-2026-10-07
-    value: '11.8808935876459927'
+    value: '11.8808935876459918'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 130
     source_id: squish-ten-packings-2026-10-07
-    value: '11.9044830325168771'
+    value: '11.9044830325168772'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 153
     source_id: squish-n153-2026-10-07
     value: '12.8796793733329640'
     evidence: E-squish-n153-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 154
     source_id: squish-ten-packings-2026-10-07
-    value: '12.9282936576777576'
+    value: '12.9282936576777577'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 155
     source_id: squish-ten-packings-2026-10-07
-    value: '12.9536770693532741'
+    value: '12.9536770693532733'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 180
     source_id: squish-ten-packings-2026-10-07
-    value: '13.9236350042524233'
+    value: '13.9236350042524224'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 209
     source_id: squish-ten-packings-2026-10-07
-    value: '14.9496179522017929'
+    value: '14.9496179522017921'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 238
     source_id: squish-ten-packings-2026-10-07
-    value: '15.9294090272583144'
+    value: '15.9294090272583145'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
   - n: 303
     source_id: squish-ten-packings-2026-10-07
-    value: '17.9203123729203497'
+    value: '17.9203123729203498'
     evidence: E-squish-ten-packings-2026-10-07-report
-    reason: Smaller SQUISH reported exact-rational packing; complete replay and independent review are
-      queued under think-mc4u.
+    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
+      sixteen decimals.
 
 superseded_reports:
   - n: 28

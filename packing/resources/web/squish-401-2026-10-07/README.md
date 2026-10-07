@@ -66,17 +66,86 @@ The exact rational side is the claim.
 The source’s `s_decimal` is a finite display, below the rational side at n = 130, 154,
 238 and 303; a verified decimal bound must round the fraction upward.
 
-The source reports its own exact `Fraction` checks and David Ellsworth’s numerical
-checks with epsilon `1e-40`. Registration records those reports at V0/C0. Complete
-replay, invalid controls and an independent mathematical review are queued under
-`think-mc4u`, and the verified case bounds retain their earlier packings until that work
-is recorded.
+## Independently Re-implemented Exact Checks
 
-From `packing/`, the reusable
-[`devtools.squish_upper_bound_packets`](../../../devtools/squish_upper_bound_packets.py)
-acquires the source facts and checks the packet.
-The confirmation change will retain its exact replay receipts and rational witnesses
-separately from this reported registration.
+This repository confirmed T-113 and T-114 by independently re-implemented exact-rational
+checks, at V3/C3. The native `sqpack.witness.exact_verify` and
+[`devtools.check_rational_witness_independent`](../../../devtools/check_rational_witness_independent.py)
+accept every original packing after complete unit-square, pair and container-wall tests.
+Each route decides all 177,440 pairs over the eleven packings.
+The conversion uses the source’s exact rational side and introduces no dilation or
+rounding.
+
+The two deciding routes implement the same separating-axis theorem separately.
+They share the converted rational corners, YAML infrastructure and Python
+integer/`Fraction` arithmetic.
+They share no SQUISH verification code.
+The source’s own exact checker and Ellsworth numerical checks remain reports; neither
+producer checker was reproduced here.
+
+The
+[mathematical review](../../../../docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md)
+re-derives the half-angle conversion, unit-square shapes and complete geometric
+decisions. The separately prompted
+[correctness review](../../../../docs/project/reviews/review-2026-10-06-squish-import-correctness.md)
+accepts the strict input, source/fact/witness/receipt bindings and invalid controls.
+Both are accepted project AI reviews.
+Their reproduced roster and receipt defects were fixed and regression-tested.
+No human oversight record is retained.
+
+The [`certification receipt`](receipts/certification.json) records all eleven complete
+dual decisions and the rational witness paths under
+[`packing/witnesses/squish-401-2026/`](../../../witnesses/squish-401-2026/). The
+[`negative-control receipt`](receipts/negative-controls.json) records two mutations of
+the 108-square certificate: duplicate one square to force interior overlap, and move one
+square outside the container.
+Both checkers refuse both controls after examining all 5,778 pairs.
+The [receipt regression tests](../../../tests/test_squish_upper_bound_receipts.py)
+reject forged successes, incomplete rosters, inconsistent diagnostics and broken
+provenance bindings.
+
+The verified decimal ceiling is the exact certificate side rounded upward at sixteen
+decimals; the case’s `exact_form` remains the original certified rational side.
+The receipt’s `exact_form` and `certified_side` retain that same source rational.
+Both bound lanes use this safe decimal display of the source’s exact rational claim. The original source finite display is retained here, in acquisition and original
+claims metadata, and in the replay receipt.
+At five counts the upward ceiling is smaller than the source display, which was farther
+above the exact fraction; at four it is one unit above a display that lay below the
+fraction.
+
+| n | Source display | Verified ceiling | Pairs per checker |
+| --- | --- | --- | --- |
+| 108 | $10.9206589394033085$ | $10.9206589394033085$ | 5778 |
+| 126 | $11.7735852916961079$ | $11.7735852916961071$ | 7875 |
+| 129 | $11.8808935876459927$ | $11.8808935876459918$ | 8256 |
+| 130 | $11.9044830325168771$ | $11.9044830325168772$ | 8385 |
+| 153 | $12.8796793733329640$ | $12.8796793733329640$ | 11628 |
+| 154 | $12.9282936576777576$ | $12.9282936576777577$ | 11781 |
+| 155 | $12.9536770693532741$ | $12.9536770693532733$ | 11935 |
+| 180 | $13.9236350042524233$ | $13.9236350042524224$ | 16110 |
+| 209 | $14.9496179522017929$ | $14.9496179522017921$ | 21736 |
+| 238 | $15.9294090272583144$ | $15.9294090272583145$ | 28203 |
+| 303 | $17.9203123729203497$ | $17.9203123729203498$ | 45753 |
+
+From `packing/`, reproduce all geometric decisions and both controls with:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.squish_upper_bound_packets check --replay
+```
+
+`check` without `--replay` holds the retained receipts to their decided inputs,
+provenance, rosters and diagnostics; it does not replace geometric replay.
+Each receipt records the complete semantic deciding input: count, rational container
+side, unit-square side and the rational corner/id roster.
+The fast check compares that input to the current witness while ignoring nongeometric
+metadata. External source byte digests remain the acquisition trust boundary.
+Git owns the retained implementation and publication history.
+The normalized [release claims](acquisition/release-normalized-claims.json) and
+[supplement claims](acquisition/supplement-normalized-claims.json) expose those safe
+displays to the coverage checker while linking the original finite displays and exact
+fractions. The normalization raises four source displays by one final-place unit,
+tightens five overly high displays by eight or nine units, and leaves two unchanged.
+No certificate establishes local or global optimality or rigidity.
 
 ## Derived Fact Files
 

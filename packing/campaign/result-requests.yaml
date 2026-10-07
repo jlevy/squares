@@ -1878,10 +1878,11 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: Nate Chaoweeraprasit (itsnaka), using SQUISH, requests registration of ten new rational packing
-      upper bounds and supplements them with n = 153. The source reports exact rational and Ellsworth
-      numerical checks, claims no optimality, credits David Ellsworth’s records and tools, and states
-      human-directed Claude Opus 5.5 assistance.
+    summary: Nate Chaoweeraprasit (itsnaka), using SQUISH, requested registration of ten rational packing
+      upper bounds and supplemented them with n = 153. Complete exact-rational checks by independently
+      re-implemented first-party programs and two accepted AI reviews are recorded for both results. The
+      source credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance;
+      no optimality is claimed.
     read_through: '2026-10-07T05:59:18Z'
     results:
     - key: ten-new-packings
@@ -1897,6 +1898,7 @@ issues:
       - T-113
       evidence:
       - E-squish-ten-packings-2026-10-07-report
+      - E-squish-ten-packings-2026-10-07-exact-replay
       bead: think-mc4u
     - key: n153-supplement
       claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(153) <= 7250614903299225/562949953421312,
@@ -1910,10 +1912,12 @@ issues:
       - T-114
       evidence:
       - E-squish-n153-2026-10-07-report
+      - E-squish-n153-2026-10-07-exact-replay
       bead: think-mc4u
     beads:
     - think-mc4u
     - think-jai1
+    - think-8gzc
     answer_bead: think-crhh
     replies: []
     close_when: Both rational packing results have complete replay and mathematical review recorded, and
