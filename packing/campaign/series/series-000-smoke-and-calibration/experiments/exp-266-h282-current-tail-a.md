@@ -1,5 +1,5 @@
 ---
-title: exp-266 — full17 endpoint prefix followed by actual-tail A
+title: "exp-266 \u2014 full17 endpoint prefix followed by actual-tail A"
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -28,9 +28,9 @@ experiment:
     point: 17
     role: target
   method:
-    control: Thirty-five target-free controls and independent Sol replay/custody/status review pass;
-      independent run3.64s, Ruff/typezero, Astra mathematics clear. Full17 current-source scientific endpoint
-      prefix has not run and must pass before TailA.
+    control: Thirty-five target-free controls and independent Sol replay/custody/status review pass; independent
+      run3.64s, Ruff/typezero, Astra mathematics clear. Full17 current-source scientific endpoint prefix
+      has not run and must pass before TailA.
     candidate: Conditional single TailA SW9 envelope production, saved objects streamed, producer+selfcheck
       followed by a fresh full saved-node verifier.
     runs_per_condition: 1
@@ -58,19 +58,36 @@ experiment:
       lifetimepeak; sampled monitoring is not an instantaneous allocation guard. Preserve all logs/partials/complete
       objects. No retries, source/parameter changes or additional orbits.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-266-current-tail-a
-  lease:
-    expires: '2026-10-07T10:00:00Z'
-    host: macOS arm64
-  results: []
+    commit: 65fc5dcbd7a025a50bc31ac7fb64ce65fe4aed37
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Full17 current-source endpoint prefix passes within120s plus separately budgeted60s fresh
+      full replay BEFORE actual-tailA; any exclusion additionally requires complete fresh PASS_SAVED_CLOSED
+      of the exact saved TailA node, matching seed/node/namedstate/source inputs, followed by separate
+      ordinary ledger/census admission. PASS_SAVED_STALL remains unresolved; incomplete/refused yields
+      zero exclusions.
+    outcome: criterion_met
+    checked_by: Current-source17endpointprefix PASS then producer/selfcheck PASS_CERTIFIED_CLOSED27updates;
+      fresh producer-free PASS_SAVED_CLOSED27steps/1728rows/230157events matches seed/node/frame/namedstate.
+      Separately registered fullstandingexp271 and ordinaryledger/census admit exactly8states/1orbit;
+      endpoint survives.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Full17 current-source endpoint prefix passes within120s plus separately budgeted60s
       fresh full replay BEFORE actual-tailA; any exclusion additionally requires complete fresh PASS_SAVED_CLOSED
       of the exact saved TailA node, matching seed/node/namedstate/source inputs, followed by separate
       ordinary ledger/census admission. PASS_SAVED_STALL remains unresolved; incomplete/refused yields
       zero exclusions.
-    reason: Registered before scientific work; reviewed source and named input custody are frozen by registration
-      commit. Full17 prefix must pass before TailA. No measurement yet.
+    reason: Declaredprefix and fullsavedclosure criterion met. Separateexp271 fullstandingverification
+      and ordinaryadmission succeed; freshcensus59admissions/36776states/4684orbits, endpointheld. Deliberateoneorbit,
+      no stratumrate or generalcapture claim.
+    needs_review: false
+  effort:
+    timebox: Prefix120s+fresh60s;TailAproducer/selfcheck1200s+fresh900s;standingexp271 separately accounted
+    wall_seconds: 339.78
+    stopped_by: criterion
 ---
 # Full17 endpoint prefix followed by actual-tail a
 
@@ -89,6 +106,23 @@ A full fresh verified closure can support ordinary admission of exactly one orbi
 stalled or incomplete node supports no exclusion.
 The existing58 admissions and endpoint survival are retained.
 This deliberate case supplies no stratum success rate.
+
+## Outcome
+
+The current-source full17 endpoint prefix passed in 10.87 seconds shell time.
+Tail A then closed after 27 updates, with producer/self-check cost 223.20 seconds.
+A fresh producer-free verifier replayed all 27 updates, 1,728 rows and 230,157 events in
+105.71 seconds. The exact node/seed and named-cell state agree at clean source
+`65fc5dcbd7a025a50bc31ac7fb64ce65fe4aed37`. Combined exp-266 shell cost is 339.78
+seconds.
+
+The separately accounted
+[exp-271 full standing verifier](exp-271-h282-tail-a-standing-admission.md) passed
+before ordinary ledger admission.
+Fresh census and partition confirm 59 admissions, 36,776 states and 4,684 orbits, with
+the exact endpoint retained: one orbit of eight states removed.
+This deliberate case supplies no success-rate estimate.
+Sampled current RSS observations are not an instantaneous memory guarantee.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -961,6 +961,10 @@ replay. Neither claim is a complete capture or angular-cover theorem.
 derived positive16 cone, with exact F2/F3 joins and cubic radial numerator.
 Its first target remains unrun at registration.
 
+[H-285](hypotheses/H-285-n17-coarse-slider-floor.md) tests the root guard for the
+noncircular square9/11 coarse-slider lemma; any actual leaf must independently establish
+its thin projection and angular bounds.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

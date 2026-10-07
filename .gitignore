@@ -50,3 +50,9 @@ packing/atlas/known-best/video/spikes/**/frames/
 # `python -m devtools.hosted_data fetch --manifest` with that manifest puts them here.
 # The README files and verification receipts in the same directories are tracked.
 /packing/campaign/explorations/X048-session-168-pilots/certificates/*/*.json.gz
+
+# Session184 native proof/control objects, retained as manifest-checked release assets.
+/packing/campaign/retained/session-184-n11-readiness/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-266-current-tail-a/tail-a-objects/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/checkpoints/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-268-n11-first-round-control/*-objects/*.json.gz

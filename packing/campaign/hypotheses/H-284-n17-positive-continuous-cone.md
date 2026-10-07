@@ -52,7 +52,8 @@ hypothesis:
     cone, no full annulus/capture/global residue admission/side bound. Failed finite bounds inconclusive,
     malformed/premise mismatch refused, interruption incomplete. Hand implication assurance: Astra hand
     derivation; not independently mathematically reviewed or machine-checked. Never substitute a small
-    constant residual for the exact zero-root identities.'
+    constant residual for the exact zero-root identities. Accepted exp269 generation and fresh replay92.16s
+    at clean11573546; finitecriterionmet with positive exactmargin, oneconditionalcone only.'
 ---
 # H-284: Positive Square-16 Cone
 

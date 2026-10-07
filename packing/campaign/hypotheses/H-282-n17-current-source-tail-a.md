@@ -1,5 +1,5 @@
 ---
-title: H-282 — current-source endpoint readiness and one actual admitted-tail orbit
+title: "H-282 \u2014 current-source endpoint readiness and one actual admitted-tail orbit"
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -42,11 +42,13 @@ hypothesis:
   - H-276
   replication: false
   registered: '2026-10-07'
-  notes: Registered before any scientific run. Deliberate one-orbit diagnostic, not a rate sample or stratum
-    estimate. Maintain all58existing admissions, endpoint survival,36784states/4685orbits pending ordinary
-    independent new admission. Latest census must be joined unchanged before launch; source/ledger drift
-    blocks. No capture-tree/local-terminal/global-optimality admission. Monitor samples do not impose
-    an allocation-time hardRSS bound.
+  notes: 'Registered before any scientific run. Deliberate one-orbit diagnostic, not a rate sample or
+    stratum estimate. Maintain all58existing admissions, endpoint survival,36784states/4685orbits pending
+    ordinary independent new admission. Latest census must be joined unchanged before launch; source/ledger
+    drift blocks. No capture-tree/local-terminal/global-optimality admission. Monitor samples do not impose
+    an allocation-time hardRSS bound. Accepted exp266/exp271: current-sourceprefix/fullsavedclosure then
+    separately registered fullstandingverification/ordinaryadmission, exactly8states/1orbit removed. Current59admissions/36776states/4684orbits
+    and endpointheld; no stratumrate.'
 ---
 # Current-source endpoint readiness and one actual admitted-tail orbit
 

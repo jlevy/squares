@@ -182,7 +182,7 @@ session:
     commitment: BC-432
     objective: Run exact continuous-cone generation/replay and current-source endpoint prefix; conditionally
       execute one actual unresolved orbit while mathematical global-bridge derivations continue.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: One small patch passes but is not an annulus cover; exact contact-chain cones and actual
       global-tail tests offer independent substantive next steps.
@@ -196,14 +196,49 @@ session:
       and partial artifacts at the slice deadline without retuning criteria.
     fallback: Continue widened-slider and global-capture derivations while preserving the exact checker
       failure and selecting a ready dependency.
+    outcome: H283/exp267 exact continuousnegativecone accepted6.60s; H281/exp268 complete11-ownerround
+      and freshzero-productionreplay accepted551.28s. H282 full17endpointprefix passes10.87s; TailA producer/selfcheck
+      closes223.20s and fresh27-step saved replay passes105.71s. Ordinaryadmission awaits separatelyregisteredexp271
+      fullstandingverifier. Observed checkpoint09:43:33Z is8s after phase6 deadline.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-266-h282-current-tail-a.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-267-h283-continuous-soft-direction-cone.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md
+    stop_reason: Scientific cone/readiness determinations and actual-tail fullsavedreplay completed; standingadmission
+      remains active across checkpoint.
+    next_action: Run fullstandingadmission with fixed900s ceiling; finalize reviewedcoarsefloor/actualcapture
+      bridge and asynchronouspushcheck.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-433
+    objective: Keep exact mathematical targets and Astra global-bridge work active while consolidating
+      hosted proof custody, snapshot headroom and bounded local push checks.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: Selected efficiency block after six prior slices; native certificates require durable
+      storage and the next proof interfaces are reviewed.
+    budget_minutes: 30
+    started_at: '2026-10-07T09:43:33Z'
+    deadline_at: '2026-10-07T10:13:33Z'
+    expected_output: Fullstandingadmission disposition, positivecone outcome, registeredcoarsefloor target,
+      reviewedactualprefix capture adapter, durable hosted manifests and honest boundedpushcheck.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --push
+    kill_condition: Refuse affected interpretation on failed controls or exact joins. Preserve completed
+      and partial artifacts at the slice deadline without retuning criteria.
+    fallback: Continue widened-slider and global-capture derivations while preserving the exact checker
+      failure and selecting a ready dependency.
     outcome: null
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-266-h282-current-tail-a.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-267-h283-continuous-soft-direction-cone.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-269-h284-positive-continuous-cone.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md
     stop_reason: null
-    next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside
-      research.
+    next_action: Close heldverification and custody joins while mathematical lanes continue; never wait
+      for hostedCI.
   primary_bead: think-ipel
   status: in_progress
   budget:
@@ -725,6 +760,8 @@ session:
     combined180s target not yet launched.
   - H282 endpoint prefix PASS_ENDPOINT_PREFIX10.87s; TailA producer+selfcheck PASS_CERTIFIED_CLOSED223.20s/27updates.
     Fresh full verifier running; no ledger admission or count change.
+  - H284/exp269 exactgeneration/freshCLI accepted92.16s clean11573546,17rows/fullF2-F3-cubic joins; oneconditionalpositivecone
+    only.
   stop_reason: null
   next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research.
 ---

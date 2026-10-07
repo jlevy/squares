@@ -107,6 +107,10 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-266-current-tail-a",
         "exp-267-continuous-soft-direction-cone",
         "exp-268-n11-first-round-control",
+        "exp-269-positive-continuous-cone",
+        "exp-270-coarse-slider-floor",
+        "exp-271-tail-a-standing-admission",
+        "exp-272-endpoint-prefix-capture",
     )
 )
 
@@ -381,6 +385,11 @@ PRUNE = frozenset(
         # the 192 MiB ceiling unchanged; the baseline selection restores measured
         # headroom for think-t1lk.
         *SESSION184_RESULT_ROOTS,
+        # The n11 readiness objects moved to this canonical retained home after the
+        # result-root prune. Its three objects total 48,571,561 bytes and no dependency
+        # currently returns from it. Omit only this exact root from private snapshots;
+        # primary objects, manifest indexes and declared-dependency copy-back stay intact.
+        ROOT / "campaign/retained/session-184-n11-readiness",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-024",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-026",

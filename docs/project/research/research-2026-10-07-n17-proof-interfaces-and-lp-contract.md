@@ -902,7 +902,7 @@ closure from any one leaf.
 
 | Predicate | Required bounds and theorem join | Meaning |
 | --- | --- | --- |
-| Local terminal | All 29 position bounds are at most $1/5000$ and all 16 half-angle bounds at most $1/10000$; original $C(S^*)$ containment and square 6’s cell premise hold. | Since $ |
+| Local terminal | All 29 position bounds are at most $1/5000$ and all 16 half-angle bounds at most $1/10000$; original $C(S^*)$ containment and square 6’s cell premise hold. | The exact angle is at most twice the half-angle magnitude, so all 45 coordinates meet the accepted radius and the local composition applies. |
 | Wide domain only | Position bounds are at most $1/100$, half-angle bounds at most $1/200$, and every face of $B_W'$ has an independent justification. | The wider-domain premise has been checked; no terminal theorem follows from these bounds alone. |
 | Apex terminal | The wide-domain predicate holds, an accepted apex receipt is joined, and every half-angle bound is at most its $q_0$. | Invoke the conditional apex argument and the accepted local theorem. |
 | Patch exclusion | The wide-domain predicate holds, an accepted exact patch receipt is joined, and the entire leaf angle product lies in that receipt’s closed box. | The fixed-container branch subsystem is infeasible throughout the leaf’s target-packing intersection. |
@@ -1097,11 +1097,14 @@ angular directions and outer capture stay open.
 ## A Separate Positive-Turn Cone Contract
 
 The retained exp-260 point `target:outer:coordinate:16:1` has a different dual support.
-Its seventeen positive rows suggest the following further hand derivation.
-No sign, mass or radial bound in this section has been evaluated on the accepted root.
-This is a proposed next certificate, separate from the preceding cone’s registered
-criterion. D4 transport of the negative-turn cone does not establish this positive-turn
-claim in the same labelled endpoint frame.
+Its seventeen positive rows led to the following further hand derivation.
+H-284's exp-269 accepted the exact finite checks in its
+[certificate](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-269-positive-continuous-cone/certificate.json)
+and [fresh replay](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-269-positive-continuous-cone/replay.json).
+The analytic implication remains a sole-Astra hand derivation, without independent
+mathematical review or formal verification.
+This certificate is separate from the negative-turn cone: D4 transport does not establish
+the positive-turn claim in the same labelled endpoint frame.
 
 Put $q_{16}=r$, with $0<r\le1/200$, and define
 
@@ -1188,8 +1191,7 @@ $$
 Its numerator has an exact factor $r$, leaving a polynomial of degree at most three.
 A checker must cancel that factor symbolically and interval-evaluate the resulting
 polynomial on the closed interval $[0,1/200]$. It must not divide an interval by $r$ at
-zero. A candidate finite criterion is $H\le-1/2$ throughout that domain; this threshold
-remains unmeasured.
+zero. The registered and accepted finite criterion is $H\le-1/2$ throughout that domain.
 
 An explicit coefficient form avoids division by $r$. Put $T=S^*-1$, $Z=Y+1/2$ and
 
@@ -1219,10 +1221,10 @@ $$
 A symbolic check should bind this list to the preceding definition of $H$ before outward
 interval evaluation of its coefficients and radial powers.
 
-### Candidate mixed-angle domain
+### Checked mixed-angle domain
 
-The weighted rows involve labels $\{1,2,3,8,11,12,13,14,16,17\}$. A candidate cone
-therefore constrains the nine non-16 labels in that set by $|q_j|\le r/128$, while
+The weighted rows involve labels $\{1,2,3,8,11,12,13,14,16,17\}$. The cone
+constrains the nine non-16 labels in that set by $|q_j|\le r/128$, while
 $\{4,5,7,9,10,15\}$ retain the full outer half-angle interval.
 The wider position, slider and feature-forcing premises remain explicit.
 
@@ -1235,24 +1237,24 @@ $$
 be the sum of the seven pair weights not involving 16. Those pair gaps each change by at
 most $(24/5)(r/128)$. For $12/16$, only the owner turns relative to the baseline; its
 gap changes by at most $(19/5)(r/128)$, using $2(D+2\sqrt2\rho_p)+1<19/5$. The owner-16
-rows $8/16$ and $16/17$ each change by at most $r/128$. Thus a candidate mass bound is
+rows $8/16$ and $16/17$ each change by at most $r/128$. The accepted finite mass bound is
 
 $$
 M_+=W+(24/5)P+19/5+\gamma_r+\alpha_r\le50.
 $$
 
-If the sign checks, exact root joins, $H\le-1/2$ and this mass bound all pass, then
+The accepted sign checks, exact root joins, $H\le-1/2$ and this mass bound give
 
 $$
 \sum_i\lambda_i g_i
-\le-\left[\frac{1}{2(1+1/40000)^2}-\frac{50}{128}\right]r<0.
+\le-\left[\frac{1}{2(1+1/40000)^2}-\frac{50}{128}\right]r
+=-\frac{11197999975}{102405120064}\,r<0.
 $$
 
-That would exclude this second punctured cone times six free angle coordinates.
-These constants and the full domains need their own registration before target
-evaluation. Failed bounds would leave the cone uncertified.
-Its apex and all remaining directions remain subject to the existing terminal and
-coverage obligations.
+With the stated hand implication, this excludes the second punctured cone times six
+free angle coordinates. Its apex and all remaining directions remain subject to the
+existing terminal and coverage obligations. In particular, the two cones do not cover
+the hyperplane $q_{16}=0$ outside the apex region, or arbitrary mixed-angle directions.
 
 ## A Noncircular Lower Slider Bound for Capture Leaves
 
@@ -1383,6 +1385,86 @@ The predicate gives a concrete geometric target for capture: a thin $v$ projecti
 square 9, coarse confinement of $b$, and controlled positive turns of 9 and 11. Whether
 an actual leaf meets it is a separate registered evaluation. It does not establish that
 the producer will reach that domain or that a complete capture tree is covered.
+
+## First Saved-Prefix Capture Adapter Contract
+
+The accepted endpoint prefix from exp-266 supplies a concrete first input for the
+capture consumer. Its saved seed and node are gzip objects, and its independent replay
+uses `PASS_SAVED_STALL`. The original consumer accepts plain JSON with a different
+receipt shape. Bridging these formats must preserve the exact pose-cover and frame
+contracts; changing a receipt's status string is not that bridge.
+
+The proposed H-286/exp-272 adapter keeps the first workload narrow: the endpoint's
+seventeen named owners, one complete accepted update, identity D4 action, and
+$U=L=1169/250$, $B=1$. The descriptor binds the seed and node content identities,
+label-to-owner bijection, cells, frame, accepted root and expected step count. The
+original `capture_cap=None` remains in custody. Its normalized inner cap is $U$ because
+
+$$
+\operatorname{offset}=(U-U)/2=0,\qquad
+\operatorname{field\_centre\_bounds}(h)=(Bh,B(U-h)).
+$$
+
+This is the same affine formula as a frame with numeric capture cap $U$, for every
+half-extent $h$. Binding its coefficients and comparing all seed-row wall planes
+establish the concrete normalization. The cells, scale and D4 action do not change.
+A nonunit-$B$ synthetic control checks the general equality, although this first saved
+workload uses $B=1$.
+
+The adapter must read bounded gzip inputs and consume the saved node completely through
+its streamed end before using its final rows. Proposed representation ceilings are
+10 MiB decoded for the seed and 64 MiB decoded for the streamed node. Content identities
+come from canonical decoded content, not filenames or gzip bytes. A fresh subprocess
+must perform the full saved verification without importing the producer and return
+`PASS_SAVED_STALL`, no closure, the same seed/node/frame/cell/state identities, and one
+checked step. Changed objects, incomplete streams, unsupported guards or ancestry, and
+incomplete verification are refused or incomplete. A parent process may use existing
+geometry helpers; that does not weaken the separate clean-process verification rule.
+
+From those verified final rows, compute every existing root-frame coordinate and chart
+bound, and additionally compute $v\cdot(x_9-x_9^*)$ directly on each original polygon
+vertex across the full root enclosure. This supplemental projection does not become a
+thirtieth coordinate in the existing position norm. It does not clip $b$ or apply the
+proposed coarse-slider lemma without an explicit accepted-certificate and premise join.
+
+The readiness criterion is complete replay custody, exact bounds covering all live row
+pieces, retention of all seventeen exact endpoint pose enclosures, and inclusion of the
+endpoint's zero displacement, slider and relative-angle coordinates. Geometric status
+may remain unresolved. It is not a requirement that a first-update prefix already lies
+inside a local, apex or exclusion region. Proposed ceilings are 60 seconds for fresh
+replay and 60 seconds for bounded loading and geometry; the experiment registration
+must freeze the final resource allowance before evaluating the actual input.
+
+The original centred $C(S^*)$ premise remains inherited. The prefix does not establish
+it. This first adapter admits no capture tree, exclusion, global coverage or census
+change. It records which actual bounds prevent the conditional terminal join.
+
+## A Future Label-Bijection Extension
+
+The current consumer requires all seventeen transported owners to equal the endpoint's
+label-to-cell assignment. That is a conservative adapter restriction. The geometric
+recipe arguments label otherwise identical unit squares by their coordinates and
+roles; they do not require every core square to occupy its endpoint cell.
+
+Let a freshly replayed leaf have seventeen occupied owners, and fix one bijection
+$\sigma$ from the analytic labels to those owners. Apply one declared D4 action to the
+entire leaf, and label each represented packing's square in owner $\sigma(i)$ by $i$.
+This preserves containment and every physical non-overlap relation. If exact bounds
+computed over all row pieces establish the relevant root-coordinate, angle and slider
+premises for these labels, the same geometric implication applies. The local composition
+route still requires the transported square-6 region to lie in the declared closed S2
+cell. The direct sixteen-square arguments retain their own stated premises.
+
+This observation does not prove that a suitable bijection exists for any particular
+leaf. A future consumer may accept one supplied bijection after checking it and all
+uniform bounds. It must not choose different labels for sampled poses and then treat
+the samples as a cover of the leaf. A search over candidate bijections may produce a
+witness, but failure to find one leaves the leaf unresolved. Any partition into several
+labelling cases needs its own complete closed-coverage certificate.
+
+This is a proposed future contract, not an expansion of H-286's first endpoint-labelled
+adapter. It identifies a route by which other cell states could reach the existing
+geometric proof without changing that proof's position or angle thresholds.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

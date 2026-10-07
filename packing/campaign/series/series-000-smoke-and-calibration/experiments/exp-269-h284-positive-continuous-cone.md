@@ -52,9 +52,24 @@ experiment:
       and logs. No LP solve, angle sample, threshold/domain/source retuning or retry. No scientific target
       has run.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-269-positive-continuous-cone
-  results: []
+    commit: 11573546dd7efa9f7eedbd16ea8b3f8a96edcf86
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: cone_certified=true; exact17 finite gap weights and all32 centre cancellations, side coefficient
+      and G(r) identity; F2=Pi2/[t(1+t)(1+t^2)(1+beta^2)] and F3=2Pi3/[(1+t)(1+t^2)^2(1+beta^2)^2] joined
+      to fresh Pi2=Pi3=0 root verification; G(0)=F3+alpha0F2=0; cubic identity (1+r^2)^2[G(r)-G(0)]=rH(r),
+      no interval division by r; strict c,s,d_r,e_r,alpha_r,gamma_r and both normalization denominators,
+      all17 multipliers nonnegative; H<=-1/2,M+<=50 throughout full accepted R x[0,1/200]; exact positive
+      margin11197999975/102405120064; complete H278/domain/27options/19pairs/256branches and fresh independent
+      CLI replay agree.
+    outcome: criterion_met
+    checked_by: 'Exact generator and fresh CLI agree: fullF2/F3/cubic root identities,17nonnegativeweights/strictsigns,
+      H<=-1/2,M+<=50, positive exactgamma11197999975/102405120064, fullR/radialdomain and both-owner joins;
+      endpoint retained.'
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: cone_certified=true; exact17 finite gap weights and all32 centre cancellations,
       side coefficient and G(r) identity; F2=Pi2/[t(1+t)(1+t^2)(1+beta^2)] and F3=2Pi3/[(1+t)(1+t^2)^2(1+beta^2)^2]
       joined to fresh Pi2=Pi3=0 root verification; G(0)=F3+alpha0F2=0; cubic identity (1+r^2)^2[G(r)-G(0)]=rH(r),
@@ -62,11 +77,13 @@ experiment:
       all17 multipliers nonnegative; H<=-1/2,M+<=50 throughout full accepted R x[0,1/200]; exact positive
       margin11197999975/102405120064; complete H278/domain/27options/19pairs/256branches and fresh independent
       CLI replay agree.
-    reason: Registered before target evaluation after sole-Astra mathematical source review and independent
-      Sol mechanical review; exact source frozen by this registration commit.
-  lease:
-    expires: '2026-10-07T10:00:00Z'
-    host: macOS arm64
+    reason: Both frozen exact invocations pass the originalcriterion. One positive16 conditionalcone times6freeangles;
+      analyticimplication sole-Astra handreview, nofullannulus/globalcapture.
+    needs_review: false
+  effort:
+    timebox: 180seconds combined exact generation and fresh replay
+    wall_seconds: 92.16
+    stopped_by: criterion
 ---
 # exp-269: Positive Continuous Cone
 
@@ -82,6 +99,18 @@ The 24 target-free controls took 41.60 seconds in the author run and 41.94 secon
 independently. This cold symbolic-control cost is not a target forecast.
 Astra cleared the mathematical source, and an independent Sol cleared the mechanics.
 The analytic perturbation implication remains sole-Astra hand-reviewed.
+
+## Outcome
+
+Generation and fresh CLI replay passed at clean source
+`11573546dd7efa9f7eedbd16ea8b3f8a96edcf86` in 92.16 seconds combined shell time (84.44
+user, 0.71 system). Both certify the seventeen-row chain, exact F2/F3 and cubic joins,
+all frozen signs and nonnegative weights, $H\le-1/2$ and $M_+\le50$. The exact positive
+margin is $11197999975/102405120064$.
+
+This is one conditional positive-angle cone times six free angle coordinates.
+Its perturbation implication remains separately scoped to Astra’s hand proof.
+The endpoint, remaining directions and global capture remain open.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

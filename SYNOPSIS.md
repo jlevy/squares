@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 218 | 51 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
-| Experiments | 199 | 69 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 3 in progress; 1 exhausted |
+| Hypotheses | 219 | 53 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 200 | 72 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5794,9 +5794,10 @@ round that names the hypothesis, control roles included.
 | [H-279](packing/campaign/hypotheses/H-279-n17-widened-apex-position-duals.md) | confirmed | Exact residual and radius checks for the conditional apex bridge | 2 | exp-264 accepted production/fresh replay5.67s; original exp-262 replay refusal preserved; conditional physical-packing bridge |
 | [H-280](packing/campaign/hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | confirmed | One exact all-branch annulus patch on a frozen ladder | 1 | exp-263 first2^-20 closed box accepted6.29s, all256 owners; one patch only |
 | [H-281](packing/campaign/hypotheses/H-281-n11-first-round-producer-readiness.md) | confirmed | Complete n11 first-round readiness and independent fresh replay; original startup failure retained | 2 | 551.28s combined shell; eleven owners, endpoint12checks; no15-round/n17 verdict |
-| [H-282](packing/campaign/hypotheses/H-282-n17-current-source-tail-a.md) | running | Current-source full17 feasible prefix before one actual admitted-tail orbit | 2 | exp-266 registered; prefix120s/replay60s then conditional SW9envelope1200s/fullverify900s |
+| [H-282](packing/campaign/hypotheses/H-282-n17-current-source-tail-a.md) | confirmed | Current-source endpoint prefix and one actual-tail closure with full standing admission | 2 | exp266339.78s; exp271180.51s; eightstates/oneorbit removed,59admissions/36776states/4684orbits |
 | [H-283](packing/campaign/hypotheses/H-283-n17-continuous-soft-direction-cone.md) | confirmed | Exact continuous negative16 cone times six free angle coordinates | 1 | 6.60s combined exact generation/fresh replay; conditional cone, analytic implication sole-Astra |
-| [H-284](packing/campaign/hypotheses/H-284-n17-positive-continuous-cone.md) | running | Exact independently derived positive16 cone with cubic numerator | 1 | exp-269 registered; full root/cubic joins, H<=-1/2 and M+<=50; combined180s |
+| [H-284](packing/campaign/hypotheses/H-284-n17-positive-continuous-cone.md) | confirmed | Positive16 continuous cone via seventeen-row cubic chain | 1 | 92.16s exact generation/fresh replay; conditional domain, endpoint retained |
+| [H-285](packing/campaign/hypotheses/H-285-n17-coarse-slider-floor.md) | running | Noncircular coarse square9/11 slider-floor root guard | 1 | exp-270 registered; conditional physical non-overlap, thin v9 and one-sided q9/q11 premises |
 
 ### Confirmed
 
@@ -6134,9 +6135,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 199 rounds registered in `series-000`.
+There are 200 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5739.6 wall-minutes.
+They record 2512.1 agent-minutes and 5749.8 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6372,11 +6373,12 @@ archive beside it.
 | [exp-263](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-263-h280-one-annulus-patch.md) | 17 | target | H-280 | Frozen five-box ladder and one retained dual, all256 choices | First frozen2^-20 box passes exact production and fresh replay; eta approximately0.000131323483, all256 choices | accepted |
 | [exp-264](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-264-h279-apex-replay-repair.md) | 17 | target | H-279 | Unchanged apex contract, repaired exact receipt encoding | Unchanged criterion passes production and fresh replay5.67s; original failure preserved | accepted |
 | [exp-265](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-265-h281-n11-first-round-control.md) | 11 | positive_control | H-281 | Pinned case438,one complete11-owner round,exact endpoint and fresh zero-production resume replay | Unsupported --partial startup flag refused before scientific inputs;0.73s logs preserved | blocked |
-| [exp-266](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-266-h282-current-tail-a.md) | 17 | target | H-282 | Full17 endpoint prefix before deliberate actual-tailA orbit | Registered before control/target | in-progress |
+| [exp-266](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-266-h282-current-tail-a.md) | 17 | target | H-282 | Full17 endpoint prefix before deliberate actual-tailA orbit | Endpointprefix/fresh27-step closure pass; standingexp271 and census admit8states/1orbit | accepted |
 | [exp-267](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-267-h283-continuous-soft-direction-cone.md) | 17 | target | H-283 | Exact continuous negative16 cone times six free angular coordinates | Exact generator and fresh replay pass6.60s; conditional punctured cone, endpoint retained | accepted |
 | [exp-268](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md) | 11 | positive_control | H-281 | Same first-round contract with corrected CLI invocation | First11-owner round plus fresh11-step/174662event replay passes;551.28s; no new production | accepted |
-| [exp-269](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-269-h284-positive-continuous-cone.md) | 17 | target | H-284 | Positive16 continuous cone, seventeen-row cubic chain | Registered before exact target; independent source reviews clear | in-progress |
-| [exp-271](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md) | 17 | target | H-282 | Full standing verification of retained TailA closure | Registered before standing target; no producer retry/admission yet | in-progress |
+| [exp-269](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-269-h284-positive-continuous-cone.md) | 17 | target | H-284 | Positive16 continuous cone, seventeen-row cubic chain | Exact finite root/cubic/sign/weight/H/M checks and fresh replay pass92.16s | accepted |
+| [exp-270](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-270-h285-coarse-slider-floor.md) | 17 | target | H-285 | Independent coarse-domain root guard and six SAT exclusions | Registered before target after mathematics/mechanics reviews | in-progress |
+| [exp-271](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md) | 17 | target | H-282 | Full standing verification of retained TailA closure | Full standingPASS27steps/1728rows/34452224facetchecks; canonical/source/census joins pass180.51s | accepted |
 
 ### Cost and provenance
 
@@ -6576,15 +6578,16 @@ archive beside it.
 | exp-263 | 180seconds combined production/replay | 6.29 s | — | criterion | `76e2830b4` |
 | exp-264 | 180seconds combined generation/replay | 5.67 s | — | criterion | `76e2830b4` |
 | exp-265 | 900s production;300s fresh replay;4096MiB | 0.73 s | — | error | `0fac86f9f` |
-| exp-266 | 120s prefix;60s replay;1200s tail;900s fullverify | Pending | — | Running | Reviewed current source frozen before control |
+| exp-266 | 120s prefix;60s replay;1200s tail;900s fullverify | 339.78s combined shell | — | criterion | clean `65fc5dcbd`;10.87s prefix/223.20s producer+selfcheck/105.71s fresh |
 | exp-267 | 180s combined production/fresh replay | 6.60s | — | criterion | clean `65fc5dcbd`; conditional exact cone |
 | exp-268 | 900s production;300s fresh replay;4096MiB | 551.28s combined shell | — | criterion | clean `7f5bacffd`;422.24s production/129.04s fresh replay |
-| exp-269 | 180s combined generation/fresh replay | Pending | — | Running | Reviewed source frozen before target |
-| exp-271 | 900s full standing verifier;4096MiB sampled RSS | Pending | — | Running | Exact exp266 objects frozen; no producer work |
+| exp-269 | 180s combined generation/fresh replay | 92.16s | — | criterion | clean `11573546d`; conditional positive cone |
+| exp-270 | 180s combined generation/fresh replay | Pending | — | Running | Frozen reviewed coarse-domain/root-only instrument |
+| exp-271 | 900s full standing verifier;4096MiB sampled RSS | 180.51s | — | criterion | clean `11573546d`; standing fullPASS before ordinaryadmission |
 
-### What the 199 rounds jointly establish
+### What the 200 rounds jointly establish
 
-The 199 rounds use 2512.1 agent-minutes and 5739.6 wall-minutes under the campaign’s
+The 200 rounds use 2512.1 agent-minutes and 5749.8 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

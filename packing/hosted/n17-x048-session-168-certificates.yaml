@@ -1020,3 +1020,11 @@ objects:
   size: 22494
   sha256: 416512507190e2be953882afcdf492e4d9fab5c55021c64f30e885dd5223c520
   description: kernel certificate of s183-bc429-u31 (session 183, BC-429, BC-428's draw 31, H-275)
+- path: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/node-ec6ac70d574eea5deddb12eddb76019a6bc4bccd06273235713da845ab0a1381.json.gz
+  asset: node-ec6ac70d574eea5deddb12eddb76019a6bc4bccd06273235713da845ab0a1381.json.gz
+  size: 14898202
+  sha256: 3543306444647541bda375b68ebd87c5afa7d0c6c63e78013b42037f9837e8f9
+- path: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/seed-6faea90c24b780eb86d46d6a001d39a8a6d945163950802800a8be3d67c65739.json.gz
+  asset: seed-6faea90c24b780eb86d46d6a001d39a8a6d945163950802800a8be3d67c65739.json.gz
+  size: 22023
+  sha256: 700c95007450a246c3441c74a10af0f4020f3dd332c8ac3f7271a9ecac63db84

@@ -43,18 +43,32 @@ experiment:
       ceiling, not runtime forecast. Preserve all receipts/logs; no producer retry, parameter/source retuning
       or admission on missing/partial/sample receipt.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-271-tail-a-standing-admission
-  results: []
+    commit: 11573546dd7efa9f7eedbd16ea8b3f8a96edcf86
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: schema n17-certificate-verification/v1, verifier kernel, statusPASS, modefull, matching
+      seed/node/frame/namedcells/canonicalselector/cap and closureowner11/step26; all27steps/1728rows
+      full checked; reviewedkernel-streamed listing and ordinaryledger/census joins. Independent verifier
+      eventcount equality is not required.
+    outcome: criterion_met
+    checked_by: Fullstanding schema/verifier/modePASS,27steps/1728fullrows, exactseed/node/source/canonical3096311/namedcells/covercap
+      and closureowner11step26 match; independent Sol custodyreview clear.34452224collisionfacetchecks
+      independently reconstructed.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: schema n17-certificate-verification/v1, verifier kernel, statusPASS, modefull,
       matching seed/node/frame/namedcells/canonicalselector/cap and closureowner11/step26; all27steps/1728rows
       full checked; reviewedkernel-streamed listing and ordinaryledger/census joins. Independent verifier
       eventcount equality is not required.
-    reason: Registered before standing target; exp266 source65fc producer/selfcheck and freshfullreplay
-      pass, independent custody clears. No ledger count changes yet.
-  lease:
-    expires: '2026-10-07T10:10:00Z'
-    host: macOS arm64
+    reason: Separately registered fullstanding replay passes on unchanged exp266 certificate. Ordinarymanifest/ledger/census
+      admission is the separate next join; no smaller-arity projection or success-rate claim.
+    needs_review: false
+  effort:
+    timebox: 900s fullstandingverification;TERM900/KILL910;4096MiB sampled RSS
+    wall_seconds: 180.51
+    stopped_by: criterion
 ---
 # exp-271: Tail A Standing Admission
 
@@ -68,6 +82,20 @@ The scientific criterion and finite 900-second ceiling are frozen before launch.
 Acceptance permits the separate ordinary admission of this single orbit only after all
 source, certificate, canonical named-state and census joins.
 Missing, sample-mode, incomplete or refused verification leaves the orbit pending.
+
+## Outcome
+
+The full standing verifier passed at clean source
+`11573546dd7efa9f7eedbd16ea8b3f8a96edcf86` in 180.51 seconds shell time (verifier
+180.078 seconds). It checked all 27 steps and 1,728 rows, including 34,452,224
+collision-facet checks.
+The exact seed/node, named-cell state and owner11/step26 closure agree with exp-266’s
+fresh saved replay.
+Independent Sol review clears receipt and canonical selector custody.
+Different checker event counts are not pooled or required to match.
+
+This result supports ordinary admission of the single full17-cell orbit after manifest
+and census checks. It supplies no smaller-arity subpattern or success-rate estimate.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
