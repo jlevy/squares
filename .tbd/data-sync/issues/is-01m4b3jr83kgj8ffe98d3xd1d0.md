@@ -5,7 +5,7 @@ title: Profile and bound the n17 committed-ledger regression test
 kind: task
 status: closed
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T11:57:01.570Z
-updated_at: 2026-10-07T12:04:20.154Z
+updated_at: 2026-10-07T19:08:23.796Z
 started_at: 2026-10-07T11:57:11.899Z
 closed_at: 2026-10-07T12:04:20.153Z
 close_reason: Completed in test-only commit 99b20f6f37f8e6fadf0027fd96460aa692bf7762 after independent Astra acceptance. Quiet module32pass:27.452 to21.037 wall; flagged call12.04 to6.52sec; all65assertion ASTs identical. Quick plugin guard2pass. Production, geometry, caps and budgets unchanged. Full shard A verification remains tracked under parent/engineering child.

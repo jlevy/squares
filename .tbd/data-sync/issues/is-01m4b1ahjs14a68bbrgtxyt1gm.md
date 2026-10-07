@@ -5,7 +5,7 @@ title: Refresh family and contact-shade censuses after SQUISH import
 kind: task
 status: closed
 priority: 1
-version: 7
+version: 8
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T11:17:35.448Z
-updated_at: 2026-10-07T12:36:25.295Z
+updated_at: 2026-10-07T19:08:23.794Z
 started_at: 2026-10-07T11:20:49.153Z
 closed_at: 2026-10-07T12:36:25.295Z
 close_reason: |

@@ -5,7 +5,7 @@ title: Admit measured local import test-module costs without replacing hosted co
 kind: task
 status: closed
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T09:02:20.004Z
-updated_at: 2026-10-07T09:29:58.436Z
+updated_at: 2026-10-07T19:08:23.791Z
 started_at: 2026-10-07T09:02:28.063Z
 closed_at: 2026-10-07T09:29:58.436Z
 close_reason: Reusable strict local admission and real five-then-one measured costs delivered, senior accepted; historical data preserved and full66suite-file tests plus unchanged-threshold realtree checks pass.

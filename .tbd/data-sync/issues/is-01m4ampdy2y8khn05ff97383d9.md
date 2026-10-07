@@ -5,7 +5,7 @@ title: Confirm SQUISH issue 401 exact upper-bound records
 kind: task
 status: closed
 priority: 1
-version: 6
+version: 7
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T07:36:53.442Z
-updated_at: 2026-10-07T08:35:50.283Z
+updated_at: 2026-10-07T19:08:23.783Z
 started_at: 2026-10-07T07:37:03.822Z
 closed_at: 2026-10-07T08:35:50.278Z
 close_reason: Confirmation owning records,11case regeneration, scoped reader prose and generated-view audit complete; focused checks and final paragraph-length followup passed. Parent retains publication and broad gate work.

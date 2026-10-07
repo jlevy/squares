@@ -5,7 +5,7 @@ title: Register SQUISH issue 401 reported upper bounds and provenance
 kind: task
 status: closed
 priority: 1
-version: 6
+version: 7
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:58:33.634Z
-updated_at: 2026-10-07T10:17:11.659Z
+updated_at: 2026-10-07T19:08:23.761Z
 started_at: 2026-10-07T06:59:18.994Z
 closed_at: 2026-10-07T10:17:11.659Z
 close_reason: Local reported registration and integration delivery complete; parent owns blocked publication and final checkpoint.
