@@ -401,7 +401,7 @@ def test_gain_decision_order_and_endpoint_controls(
             ["0", str(control.U)],
         ]
     elif kind == "endpoint_failure":
-        custody["endpoint_roster"][0]["centre"] = [["10", "10"], ["10", "10"]]
+        custody["label1_geometry"]["centre"] = [["10", "10"], ["10", "10"]]
     else:
         final["cells"]["0"][1]["residual_polygons"] = [[["3", "1"]]]
     monkeypatch.setattr(control, "extract", lambda *_: (final, custody))
@@ -483,7 +483,7 @@ def test_endpoint_centre_missing_axis_or_reversed_interval_refuses(
     receipt["custody"]["input_control"]["endpoint_roster"][0]["centre"] = centre
     path.write_text(json.dumps(receipt))
     document["h290_receipt_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
-    with pytest.raises(ValueError, match="two-axis ordered"):
+    with pytest.raises(ValueError, match=r"two-axis.*(ordered|shape)"):
         control.generate(document, deadline=time.monotonic() + 10)
 
 
@@ -502,3 +502,123 @@ def test_noncanonical_rational_grammar_refuses_before_fraction_allocation(
     )
     with pytest.raises(ValueError, match="grammar required"):
         control.rational(value)
+
+
+def rebind_synthetic_parent(
+    document: dict[str, Any],
+    tmp_path: Path,
+    receipt: dict[str, Any],
+    node: dict[str, Any] | None = None,
+) -> None:
+    """Simulate a newly admitted fixture, without asserting geometric acceptance."""
+    if node is not None:
+        path = tmp_path / "objects/node-synthetic.json.gz"
+        path.write_bytes(gzip.compress(control.canonical(node), mtime=0))
+        document["node_sha256"] = control.identity(node)
+        document["compressed_sha256"][str(path.relative_to(tmp_path))] = hashlib.sha256(
+            path.read_bytes()
+        ).hexdigest()
+        receipt["custody"]["parent_replay"]["node_sha256"] = document["node_sha256"]
+        receipt["custody"]["parent_replay"]["compressed_object_sha256"] = document[
+            "compressed_sha256"
+        ]
+        receipt["custody"]["fresh_replay"]["receipt"]["node_sha256"] = document["node_sha256"]
+    path = tmp_path / "h290.json"
+    path.write_text(json.dumps(receipt))
+    document["h290_receipt_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+@pytest.mark.parametrize("used", ["unused", "label1", "owner0"])
+def test_large_opaque_parent_coordinates_vs_used_arithmetic_ceiling(
+    used: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    document, _path = fixture(tmp_path)
+    monkeypatch.setattr(control, "REPO", tmp_path)
+    giant = "9" * 1381 + "/" + "8" * 1380
+    receipt = json.loads((tmp_path / "h290.json").read_text())
+    node = json.loads(
+        gzip.decompress((tmp_path / "objects/node-synthetic.json.gz").read_bytes())
+    )
+    pose = 0 if used == "label1" else 15
+    receipt["custody"]["input_control"]["endpoint_roster"][pose]["centre"][1] = [giant, giant]
+    owner = "0" if used == "owner0" else "1"
+    node["final_state"]["cells"][owner][0]["residual_polygons"] = [[[giant, "1"]]]
+    node["final_state"]["groups"][owner] = [[giant, "1"]]
+    rebind_synthetic_parent(document, tmp_path, receipt, node)
+    if used != "unused":
+        with pytest.raises(control.IncompleteError, match="rational string ceiling"):
+            control.generate(document, deadline=time.monotonic() + 10)
+    else:
+        original = control.rational
+
+        def guard(value: Any) -> Q:
+            assert value != giant, "opaque parent rational entered arithmetic"
+            return original(value)
+
+        monkeypatch.setattr(control, "rational", guard)
+        certificate = control.generate(document, deadline=time.monotonic() + 10)
+        assert certificate["status"] == "unconditional_refresh_candidate"
+        assert giant not in control.retained_json.dumps(certificate)
+        assert len(certificate["custody"]["endpoint_retention"]["owners"]) == 17
+        reference = certificate["custody"]["accepted_parent_premises"][
+            "other_owner_final_geometry"
+        ]
+        assert reference["node_sha256"] == document["node_sha256"]
+        assert reference["saved_node"] == "objects/node-synthetic.json.gz"
+        assert control.check(document, certificate, deadline=time.monotonic() + 10)[
+            "finite_reconstruction_verified"
+        ]
+
+
+@pytest.mark.parametrize(
+    "change", ["witness_roster", "steps", "owner_keys", "row_count", "row_reference"]
+)
+def test_opaque_geometry_still_requires_full_structural_custody(
+    change: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    document, _path = fixture(tmp_path)
+    monkeypatch.setattr(control, "REPO", tmp_path)
+    receipt = json.loads((tmp_path / "h290.json").read_text())
+    node = json.loads(
+        gzip.decompress((tmp_path / "objects/node-synthetic.json.gz").read_bytes())
+    )
+    if change == "witness_roster":
+        receipt["custody"]["endpoint_retention"]["owners"].pop()
+    elif change == "steps":
+        receipt["custody"]["parent_replay"]["steps_checked"] = 15
+    elif change == "owner_keys":
+        node["final_state"]["cells"].pop("1")
+    elif change == "row_count":
+        node["final_state"]["cells"]["1"].pop()
+    else:
+        node["final_state"]["cells"]["1"][0]["reference"] = "untyped"
+    rebind_synthetic_parent(document, tmp_path, receipt, node)
+    with pytest.raises(ValueError, match=r"differ|premise"):
+        control.generate(document, deadline=time.monotonic() + 10)
+
+
+@pytest.mark.parametrize("where", ["unused_centre", "unused_polygon"])
+def test_opaque_parent_scalar_grammar_refuses_exponent_without_arithmetic(
+    where: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    document, _path = fixture(tmp_path)
+    monkeypatch.setattr(control, "REPO", tmp_path)
+    receipt = json.loads((tmp_path / "h290.json").read_text())
+    node = json.loads(
+        gzip.decompress((tmp_path / "objects/node-synthetic.json.gz").read_bytes())
+    )
+    if where == "unused_centre":
+        receipt["custody"]["input_control"]["endpoint_roster"][15]["centre"][1][0] = (
+            "1e999999999"
+        )
+    else:
+        node["final_state"]["cells"]["1"][0]["residual_polygons"] = [[["1e999999999", "1"]]]
+    rebind_synthetic_parent(document, tmp_path, receipt, node)
+    with pytest.raises(ValueError, match="grammar required"):
+        control.generate(document, deadline=time.monotonic() + 10)

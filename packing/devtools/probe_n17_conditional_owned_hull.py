@@ -73,13 +73,27 @@ def rational(value: Any) -> Q:
     require(type(value) is str, "exact rational string required")
     if len(value) > 2600:
         raise IncompleteError("conditional gate rational string ceiling")
+    rational_grammar(value)
+    result = checked(Q(value))
+    require(str(result) == value, "noncanonical exact rational")
+    return result
+
+
+def rational_grammar(value: Any) -> None:
+    """Check opaque premise syntax without integer/Fraction allocation or a bit cap."""
+    require(type(value) is str, "exact rational string required")
     require(
         re.fullmatch(r"-?(?:0|[1-9]\d*)(?:/[1-9]\d*)?", value) is not None,
         "canonical integer/fraction grammar required",
     )
-    result = checked(Q(value))
-    require(str(result) == value, "noncanonical exact rational")
-    return result
+
+
+def opaque_polygon(value: Any) -> None:
+    require(type(value) is list, "opaque polygon list required")
+    for p in value:
+        require(type(p) is list and len(p) == 2, "opaque polygon point shape")
+        rational_grammar(p[0])
+        rational_grammar(p[1])
 
 
 def rational_tree(value: Any) -> None:
@@ -463,12 +477,20 @@ def accepted_receipt(document: dict[str, Any]) -> tuple[bytes, dict[str, Any]]:
         require(
             type(centre) is list
             and len(centre) == 2
-            and all(
-                type(box) is list and len(box) == 2 and rational(box[0]) <= rational(box[1])
-                for box in centre
-            ),
-            "full two-axis ordered endpoint centre required",
+            and all(type(box) is list and len(box) == 2 for box in centre),
+            "full two-axis endpoint centre shape required",
         )
+        for box in cast(list[list[str]], centre):
+            for endpoint in box:
+                rational_grammar(endpoint)
+        if pose["label"] == 1:
+            require(
+                all(
+                    rational(box[0]) <= rational(box[1])
+                    for box in cast(list[list[str]], centre)
+                ),
+                "used two-axis ordered endpoint centre required",
+            )
     return raw, receipt
 
 
@@ -530,7 +552,36 @@ def extract(document: dict[str, Any], deadline: float) -> tuple[dict[str, Any], 
     coarse = document["label_to_owner"]["6"]
     for owner in mask:
         rows = final["cells"][str(owner)]
-        require(len(rows) == (32 if owner == coarse else 64), "frozen final row count differs")
+        require(
+            type(rows) is list
+            and len(rows) == (32 if owner == coarse else 64)
+            and type(final["groups"][str(owner)]) is list,
+            "frozen final row count/group shape differs",
+        )
+        require(
+            all(
+                type(row) is dict
+                and type(row["reference"]) is dict
+                and type(row["interval"]) is list
+                and len(row["interval"]) == 2
+                and type(row["outer_domain"]) is list
+                and type(row["residual_polygons"]) is list
+                for row in rows
+            ),
+            "accepted final row/reference shape differs",
+        )
+        for row in cast(list[dict[str, Any]], rows):
+            for endpoint in row["interval"]:
+                rational_grammar(endpoint)
+            opaque_polygon(row["outer_domain"])
+            for poly in row["residual_polygons"]:
+                opaque_polygon(poly)
+        opaque_polygon(final["groups"][str(owner)])
+        # H290 already admitted every owner's final geometry. Only owner0 is an
+        # arithmetic input to this gate; other geometry stays canonical-ID bound.
+        if owner != 0:
+            continue
+        rows = cast(list[dict[str, Any]], rows)
         previous = Q(0)
         for row in rows:
             lo, hi = map(rational, row["interval"])
@@ -539,7 +590,6 @@ def extract(document: dict[str, Any], deadline: float) -> tuple[dict[str, Any], 
                 "closed row partition/reference differs",
             )
             previous = hi
-            polygon(row["outer_domain"])
             for poly in row["residual_polygons"]:
                 polygon(poly)
         require(previous == 1, "closed rows do not cover chart")
@@ -561,9 +611,42 @@ def extract(document: dict[str, Any], deadline: float) -> tuple[dict[str, Any], 
         "compressed_sha256": frozen,
         "steps": len(owners),
         "endpoint_retention": receipt["custody"]["endpoint_retention"],
-        "endpoint_roster": receipt["custody"]["input_control"]["endpoint_roster"],
-        "root": receipt["root"],
-        "frame": frame,
+        "label1_geometry": receipt["custody"]["input_control"]["endpoint_roster"][0],
+        "accepted_parent_premises": {
+            name: {
+                "receipt": document["h290_receipt"],
+                "json_path": path,
+                "content_sha256": identity(value),
+            }
+            for name, path, value in (
+                ("root", "$.root", receipt["root"]),
+                ("frame", "$.custody.parent_replay.frame", frame),
+                ("all49_zero_bounds", "$.intervals", receipt["intervals"]),
+                (
+                    "full17_endpoint_geometry",
+                    "$.custody.input_control.endpoint_roster",
+                    receipt["custody"]["input_control"]["endpoint_roster"],
+                ),
+            )
+        }
+        | {
+            "other_owner_final_geometry": {
+                "saved_node": str(node_path.relative_to(REPO)),
+                "node_sha256": node.sha256,
+                "json_path": "$.final_state",
+                "subset": "cells/groups excluding owner0",
+                "content_sha256": identity(
+                    {
+                        "cells": {k: v for k, v in final["cells"].items() if k != "0"},
+                        "groups": {k: v for k, v in final["groups"].items() if k != "0"},
+                    }
+                ),
+            }
+        },
+        "arithmetic_scope": "owner0 residual vertices/group/closed intervals and label1 centre",
+        "opaque_premise_scope": (
+            "accepted H290 facts; byte/content custody, no new geometry replay"
+        ),
         "root_checked_now": False,
         "parent_geometry_replayed": False,
     }
@@ -578,7 +661,7 @@ def generate(document: dict[str, Any], *, deadline: float) -> dict[str, Any]:
     baseline = polygon(final["groups"]["0"])
     unconditional = gain(selected["all"], baseline)
     guarded = gain(selected["target"], hull(baseline + selected["all"]))
-    pose = next(p for p in custody["endpoint_roster"] if p["label"] == 1)
+    pose = custody["label1_geometry"]
     require(
         pose["owner"] == 0 and ["0", "0"] in pose["charts"],
         "endpoint chart0/owner0 premise differs",
@@ -645,7 +728,8 @@ def generate(document: dict[str, Any], *, deadline: float) -> dict[str, Any]:
             "is reviewed hand mathematics"
         ),
     }
-    rational_tree(report)
+    rational_tree({k: v for k, v in report.items() if k != "custody"})
+    rational_tree(pose)
     return report
 
 
