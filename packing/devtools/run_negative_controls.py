@@ -132,6 +132,10 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-289-complete-partner-coupling",
         "exp-290-matched-exact-replay",
         "exp-291-complete-partner-coupling-amended",
+        # Exact selected output destinations only; source/synthetic controls use no
+        # native target outputs. Declared inline/frontier inputs still copy back.
+        "exp-292-full-square-partner-coupling",
+        "exp-293-guard-conditioned-ownership",
     )
 )
 

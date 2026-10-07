@@ -45,9 +45,18 @@ experiment:
       endpoint inputs16384bits/arithmetic32768bits; five10MiB JSON roles; native seed10MiB/node512MiBcompressed+2GiBdecoded/final64MiB;
       output64MiB. Other inherited caps unchanged.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling
-  results: []
+    commit: 1cd139568
+    dirty: true
+  results:
+  - shape: determination
+    role: outcome
+    question: Does complete full-square SAT on the same accepted parent certify a nonzero region?
+    outcome: criterion_missed
+    checked_by: Complete construction/fresh reconstruction match,verificationPASS; all1056/992rows and17endpointcontrols,34128exactquadraticminima.
+      SoleAstra actual mathematical scope CLEAR; independentSol mathematicalpayload/custody/work/RSS/cleanup
+      mechanicalreviewCLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Construction and a fresh process both reconstruct closed_region_exclusion with
       criterion_met=true. All1056 original rows/992 foreign rows and all17 endpoint controls are accounted;
       all16 partner minima are reconstructed over every centre-domain vertex, all eight signed axes and
@@ -57,12 +66,18 @@ experiment:
       must agree. All M_j<=0 is a completed recipe miss; limits are incomplete and custody/endpoint failures
       refused. Negative-minimizer exact numeric-wall margins are secondary only. Conditional accepted-parent
       scope; no seventeen-square packing, whole-guard exclusion, census/capture/global optimality claim.
-    reason: Preregistered after fresh complete exp291 fixedpointmiss and soleAstra selection; SATscientific
-      target remains unrun.
+    reason: All16exactpartner minima are nonpositive, with no positivepartner or regional lift. Fifteen
+      retainednegativewitnesses passexactnumericwalls; owner4alone fails bottomwall at49/64 by-75040/10713553.
+      Common-coreerosion is not thesoleexplanation. No simultaneouspacking established.
     needs_review: false
-  lease:
-    expires: '2026-10-07T20:17:58Z'
-    host: macOS arm64
+  effort:
+    stopped_by: criterion
+    timebox: One worker; construction120s + fresh120s, combined240s owned-group TERM240/KILL250; sampled4096MiB
+      current RSS PER live process, no aggregate/allocation-time hardcap. Amended1024 original pieces/row
+      and1048576 parsed vertices; 8000000 exact quadratic minimizations. Normalized geometry4096bits;
+      endpoint inputs16384bits/arithmetic32768bits; five10MiB JSON roles; native seed10MiB/node512MiBcompressed+2GiBdecoded/final64MiB;
+      output64MiB. Other inherited caps unchanged.
+    wall_seconds: 106.653
 ---
 # Full-Square SAT Partner Coupling
 

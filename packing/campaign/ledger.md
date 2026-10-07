@@ -1181,7 +1181,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | H-297 | confirmed | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  | 1s wall |
 | H-298 | refuted | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 2 |  | 1.8m wall |
 | H-299 | confirmed | proof | Boundary-level replay instrumentation preserves the full accepted cent |  | 1 |  | 3.9m wall |
-| H-300 | running | proof | Complete full-square SAT minima certify a nonzero closed region around |  | 1 |  |  |
+| H-300 | refuted | proof | Complete full-square SAT minima certify a nonzero closed region around |  | 1 |  | 1.8m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1191,7 +1191,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Rounds
 
-### rejected (42)
+### rejected (43)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1237,6 +1237,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-286 | series-000 | 17 | Sol coordinator registers/freezes/launches/disposes in Session184. | H-295 | Completed finite recipe missed: all18 closed pieces remain uncovered in both matched ordinary-final and pooled tests (row25=6,row26=4,row27=8). Fresh complete reconstruction passed; all exclusion/admission/dominance flags false. Clean5c195 source;543raw poolpoints/926usedvertices, same accepted original-parent custody, no284geometry. Supervision20.73212s rc0/normalcleanup; construction9.84499s and fresh10.04225s. |
 | exp-287 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-296 | Completed deterministic recipe missed only exact numeric container containment; all conditional owner0 strict tests and all16 foreign open-avoidance checks passed. Fixedrow26piece0/tau53/128; no alternate candidate. Fresh reconstruction passed, clean969588d source, all6blob identities equal and all3 accepted286 input byte identities match. Supervision1.10817s rc0/normalcleanup; phases0.15160s+0.14876s. No17packing, exclusion, capture, census or global result. |
 | exp-291 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Complete fixedpoint coupling miss: all16partners fail to exclude the accepted witness. Freshpayloadmatches/verificationPASS; regionalPRIMARYmissed and allfourladderwidths unstarted by frozenmonotonicstop, not fourexecutedmisses. |
+| exp-292 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-300 | All16exactpartner minima are nonpositive, with no positivepartner or regional lift. Fifteen retainednegativewitnesses passexactnumericwalls; owner4alone fails bottomwall at49/64 by-75040/10713553. Common-coreerosion is not thesoleexplanation. No simultaneouspacking established. |
 
 ### exhausted (1)
 
@@ -1446,12 +1447,6 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-292 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-300 | Preregistered after fresh complete exp291 fixedpointmiss and soleAstra selection; SATscientific target remains unrun. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1501,7 +1496,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Effort
 
-221 rounds, 2512.1 agent-minutes, 5785.3 wall-minutes.
+221 rounds, 2512.1 agent-minutes, 5787.1 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

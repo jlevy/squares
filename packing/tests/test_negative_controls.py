@@ -947,6 +947,8 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                 "exp-289-complete-partner-coupling",
                 "exp-290-matched-exact-replay",
                 "exp-291-complete-partner-coupling-amended",
+                "exp-292-full-square-partner-coupling",
+                "exp-293-guard-conditioned-ownership",
             )
         } <= roots
     for control in specification["controls"]:
@@ -973,6 +975,41 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
     monkeypatch.setattr(controls, "result_pruned_targets", list)
     assert controls.snapshot_pruned_targets() == [needed]
     assert controls.snapshot_source_bytes() == document.stat().st_size + needed.stat().st_size
+
+
+@pytest.mark.parametrize(
+    "name",
+    ["exp-292-full-square-partner-coupling", "exp-293-guard-conditioned-ownership"],
+)
+def test_session185_selected_output_prune_is_exact_and_keeps_declared_inputs(
+    name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An exact output prune keeps sibling evidence and linked proof inputs."""
+    assert controls.SESSION184_RESULTS / name in PRUNE
+    packing = tmp_path / "packing"
+    output = packing / "results" / name
+    output.mkdir(parents=True)
+    needed = output / "required.json"
+    needed.write_text('{"proof_input":true}\n')
+    (output / "unneeded.log").write_text("unused" * 100)
+    sibling = output.with_name(name + "-other")
+    sibling.mkdir()
+    sibling_evidence = sibling / "unique.json"
+    sibling_evidence.write_text('{"unique":true}\n')
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[required](packing/results/{name}/required.json)\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [needed]
+    assert not controls.in_pruned_roots(sibling_evidence, frozenset({output}))
+    assert controls.snapshot_source_bytes() == (
+        document.stat().st_size + needed.stat().st_size + sibling_evidence.stat().st_size
+    )
 
 
 def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> None:

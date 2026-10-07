@@ -392,6 +392,117 @@ An empty recovered $K_j$ may stop its later clipping by monotonicity, with an ex
 empty-prefix reason and complete accounting of the conditional row cover.
 It never licenses an empty-owner verdict.
 
+## Exp292: Complete Full-Square Miss
+
+Construction and fresh reconstruction both returned `criterion_missed` on the complete
+original parent. They checked all 1,056 rows, including 992 foreign rows, with 34,128
+exact quadratic minima and all seventeen endpoint controls.
+Every partner minimum is negative; no partner or regional lift was selected.
+The retained certificate and replay are under
+`packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/`.
+The
+[phase record](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/phase-execution.json)
+records 52.263675 seconds for construction and 53.990876 seconds for fresh checking.
+The supervisor recorded 106.652810 seconds overall, normal exit and successful cleanup.
+
+Fifteen of the sixteen retained negative witnesses pass the exact numeric walls at their
+minimizing angles. Owner 4 is the exception: its row-49 witness at $t=49/64$ has
+bottom-wall margin $-75040/10713553$. This secondary failure identifies one centre-angle
+over-cover witness; it does not establish that repairing it would make that partner’s
+complete minimum positive.
+
+For the fifteen wall-valid witnesses, merely subdividing the old angular rows and
+recomputing their necessary wall boxes cannot remove the obstruction.
+A vertex of the finite row hull belongs to an original clipped piece.
+Its angle belongs to at least one closed child row, and exact containment at that angle
+implies containment in the child’s necessary wall box.
+The same signed separating-axis witness therefore survives.
+This stopping argument assumes the original residual pieces and constraints are kept;
+stronger cross-owner constraints can change the domains.
+
+The outcome rules out common-core erosion as the sole explanation for failure of the
+universal single-partner test on these domains.
+The independent escape poses need not coexist.
+The next selected mathematical question is guard-conditioned multi-owner ownership, with
+the original parent and endpoint premises retained.
+
+## Point-First Guard Discriminator
+
+The monotonic guard argument also permits the degenerate product guard
+$G_0=\{x_*\}\times\{a\}$. It gives
+
+$$
+Q_0(G_h)\subseteq Q_0(G_0),\qquad
+P'_{jk}(G_0)\subseteq P'_{jk}(G_h),\qquad
+K_j(G_h)\subseteq K_j(G_0)
+$$
+
+for every centred positive-width guard $G_h$ in the same construction.
+Consequently, a complete point-guard miss rules out both conditional closure mechanisms
+for all those larger guards.
+Point closure alone proves only a point exclusion; the primary regional criterion still
+requires the declared $h=1/512$ context.
+
+The prospective paired implementation reconstructs the original rows and endpoint
+controls once, evaluates $h=0$, and starts $h=1/512$ only after point closure.
+Fresh reconstruction follows the same deterministic branch.
+The proposed allocation remains 180 seconds per invocation and 360 seconds combined.
+Support, generated-clip, Minkowski and strict-verification work counters are cumulative
+across both contexts.
+The 131,072 retained-piece ceiling is per context; row and polygon ceilings are per
+object, and the combined output remains limited to 64 MiB. A resource stop in either
+context is incomplete.
+A complete point miss records the regional context as unstarted with the monotonic
+reason. These are prospective semantics requiring source review and registration before
+use.
+
+## Prospective Full-Square Collision Envelopes
+
+A further conditional-pruning alternative can retain the full squares without computing
+a global minimum for each candidate centre.
+On a closed subarc $[l,r]$, write a signed SAT polynomial as $Q(y,t)$, affine in the
+partner centre $y$. For a proposed owner half-width $h$, define
+
+$$
+P(y,t)=Q(y,t)-2(1+t^2)Lh.
+$$
+
+The preceding regional bound shows that $P(y,t)>0$ for all eight signed axes implies
+interior collision throughout that owner guard.
+Put $d=r-l$. The three quadratic Bernstein coefficients on this subarc are
+
+$$
+b_0(y)=P(y,l),\qquad
+b_1(y)=P(y,l)+\frac d2\,\partial_tP(y,l),\qquad
+b_2(y)=P(y,r).
+$$
+
+Indeed, for $0\le u\le1$,
+
+$$
+P(y,l+du)=b_0(y)(1-u)^2+2b_1(y)u(1-u)+b_2(y)u^2.
+$$
+
+Each coefficient is affine in $y$. Requiring every coefficient to be at least a
+predeclared rational $\kappa>0$ therefore gives exact linear centre constraints and
+ensures a strict collision on the whole closed arc.
+At $l=r$ the formula remains valid without division.
+Retain both subarcs when a row crosses $a$ and require every signed axis on both.
+
+Intersecting these constraints with $[0,U]^2$ yields a convex forbidden-centre set.
+An original residual piece whose every vertex satisfies all constraints can be removed
+whole, including a degenerate piece.
+This first variant introduces no subtraction pieces.
+A stronger variant could combine this set with the existing forbidden core difference,
+but would need a separate growth and coverage contract.
+No containment or performance dominance over that existing construction is asserted.
+
+This is an unselected hand derivation.
+The margin, resource ceilings, controls and acceptance rule must be frozen before
+evaluating actual coefficients or removals.
+Its immediate purpose would be to test whether full-square collision implications
+strengthen conditional pruning; it supplies no present exclusion or global proof.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
