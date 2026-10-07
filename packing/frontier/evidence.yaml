@@ -28039,3 +28039,38 @@ evidence:
         The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
         or human oversight is established.
     source_reviewed: '2026-10-07'
+
+  - id: E-squish-update-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH update 2026-10-07]'
+    certificate: packing/resources/web/squish-401-update-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'The author reports thirteen rational certificates: twelve new or tighter bounds and
+      an exact duplicate of the earlier n153 attachment. Claims are retained as attributed derived facts
+      only; no producer checker is executed, and no new project feasibility assurance, optimality or
+      rigidity is claimed. Francisco Couzo is credited for ten update seeds and SQUISH for the other
+      three, as recorded per case in acquisition/sources.json. Human-directed Claude Opus 5.5 assistance
+      is disclosed. Finite source prints are kept separate from exact rational sides and safe upward
+      decimal displays.'
+    source_reviewed: '2026-10-07'

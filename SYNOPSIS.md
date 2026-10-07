@@ -264,6 +264,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
 | [T-087](packing/frontier/RESULTS.md) | 37, 61 | `V3` | `C1` | `S3` | `previously-published` | Bašić and Slivková 2018, Theorem 7 with Proposition 8: no more than B(x) unit squares fit in a square of side x, where B(x) counts the points of an equilateral-lattice piercing set, floor(x)(m + 2) plus floor((m + 2)/2) when frac(x) >= 1/2, with m = floor((2/sqrt 3)(x + 1 - 2 sqrt 2)). |
 | [T-046](packing/frontier/RESULTS.md) | 18, 19, 20, 26, 27, 28, 29, 30, 31, 37, 38, 39, 40, 41, 42, 43, 44, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 86, 88, 89, 90, 91, 94, 95 | `V0` | `C0` | `S3` | `previously-published` | wand125/square-packing-bounds reports one standing rectangle-density certificate for each of 48 counts from n = 18 to n = 95, added or raised between 26 and 28 September 2026. |
+| [T-115](packing/frontier/RESULTS.md) | 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263 | `V0` | `C0` | `S3` | `previously-published` | Nate Chaoweeraprasit (itsnaka), using SQUISH, reports rational packing upper bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V3` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
 | [T-005](packing/frontier/RESULTS.md) | 13 | `V3` | `C3` | `S2` | `apparently-novel` | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
 | [T-011](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | Trump’s 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
@@ -315,7 +316,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 209 | 45 confirmed; 33 refuted; 63 blocked; 19 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 187 | 63 accepted; 38 rejected; 58 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 114 | 114 registered, 84 by others |
+| Frontier results | 115 | 115 registered, 85 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 

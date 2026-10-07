@@ -1871,28 +1871,27 @@ issues:
       keeps it closed.
 
   - number: 401
-    title: 'Ten new packings below the register at n = 108–303 (s(n) bounds 4.1e-4 to 6.7e-3 below reported
-      s): registration request'
+    title: '18 new packings below record for n = 108–303: registration request (updated 2026-10-07)'
     author: itsnaka
     opened: '2026-10-07'
     state: open
     kind: result-report
     triage: done
-    summary: Nate Chaoweeraprasit (itsnaka), using SQUISH, requested registration of ten rational packing
-      upper bounds and supplemented them with n = 153. Complete exact-rational checks by independently
-      re-implemented first-party programs and two accepted AI reviews are recorded for both results. The
-      source credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance;
-      no optimality is claimed.
-    read_through: '2026-10-07T05:59:18Z'
+    summary: The original ten packings and n153 supplement retain complete replay and accepted reviews.
+      The updated request adds seven counts and improves five original counts; those twelve new claims
+      are registered as reported only under think-oxvk. The new n153 source is identical to the retained
+      attachment. Per-case Couzo/SQUISH seed credit is recorded, and no optimality is claimed.
+    read_through: '2026-10-07T17:32:04Z'
     results:
     - key: ten-new-packings
       claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(n) <= S_n for n = 108, 126, 129,
         130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401
         on 7 October 2026. Each S_n is the exact rational side in the retained packing facts, from about
         0.0004126 to 0.0067047 below the earlier reported upper bound here. Each certificate supplies
-        rational centres and rational half-angle parameters for closed unit squares in the rational container.
-        The claim establishes only upper bounds, with no optimality or rigidity conclusion. The author
-        credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
+        rational centres and rational half-angle parameters for closed unit squares in the rational
+        container. The claim establishes only upper bounds, with no optimality or rigidity conclusion.
+        The author credits David Ellsworth’s records and tools and states human-directed Claude Opus
+        5.5 assistance.
       source: body
       register:
       - T-113
@@ -1903,10 +1902,10 @@ issues:
     - key: n153-supplement
       claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(153) <= 7250614903299225/562949953421312,
         about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874
-        below the earlier reported upper bound here. Each certificate supplies rational centres and rational
-        half-angle parameters for closed unit squares in the rational container. The claim establishes
-        only upper bounds, with no optimality or rigidity conclusion. The author credits David Ellsworth’s
-        records and tools and states human-directed Claude Opus 5.5 assistance.
+        below the earlier reported upper bound here. Each certificate supplies rational centres and
+        rational half-angle parameters for closed unit squares in the rational container. The claim
+        establishes only upper bounds, with no optimality or rigidity conclusion. The author credits
+        David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
       source: https://github.com/jlevy/squares/issues/401#issuecomment-6031977107
       register:
       - T-114
@@ -1914,12 +1913,27 @@ issues:
       - E-squish-n153-2026-10-07-report
       - E-squish-n153-2026-10-07-exact-replay
       bead: think-mc4u
+    - key: update-twelve-new-bounds
+      claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports rational packing upper bounds for
+        n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are new to the
+        submission and five have smaller certificates than the original release. Exact rational sides
+        and complete rational half-angle rosters are retained in the revision-specific acquisition packet.
+        The n153 certificate is identical to the earlier retained attachment and is an evidence/provenance
+        update only. These are source-reported feasible upper bounds, with no optimality or rigidity
+        claim.
+      source: https://github.com/jlevy/squares/issues/401#issuecomment-6043191866
+      register:
+      - T-115
+      evidence:
+      - E-squish-update-2026-10-07-report
+      bead: think-oxvk
     beads:
     - think-mc4u
     - think-jai1
     - think-8gzc
+    - think-oxvk
     answer_bead: think-crhh
     replies: []
-    close_when: Both rational packing results have complete replay and mathematical review recorded, and
-      a final reply states the registered entries and their derived verification and confirmation on main.
-      Until then the issue stays open.
+    close_when: All eighteen current counts, including the twelve updated claims, have complete replay
+      and appropriate new scoped review recorded, and an accurate author reply states the entries and
+      assurance that actually landed on main. Publication and the reply remain pending.

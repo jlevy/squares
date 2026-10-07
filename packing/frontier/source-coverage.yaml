@@ -1749,217 +1749,233 @@ sources:
       records and tools and states human-directed Claude Opus 5.5 assistance. No producer checker replay,
       optimality or rigidity claim is made.
 
+  - id: squish-update-2026-10-07
+    title: 'SQUISH update: seven additional and five tighter rational packings'
+    role: source-repository
+    url: https://github.com/itsnaka/squish-certs/tree/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07
+    local: resources/web/squish-401-update-2026-10-07/
+    source_key: '[SQUISH update 2026-10-07]'
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    reviewed: '2026-10-07'
+    source_date: '2026-10-07'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/n-123.md
+    - frontier/n-126.md
+    - frontier/n-129.md
+    - frontier/n-154.md
+    - frontier/n-155.md
+    - frontier/n-179.md
+    - frontier/n-208.md
+    - frontier/n-237.md
+    - frontier/n-238.md
+    - frontier/n-239.md
+    - frontier/n-258.md
+    - frontier/n-263.md
+    claims_record: resources/web/squish-401-update-2026-10-07/acquisition/update-claims.json
+    evidence:
+    - E-squish-update-2026-10-07-report
+    notes: Reported only; twelve exact sides normalized to safe upward displays. The thirteenth certificate,
+      n153, is exactly identical to the earlier attachment; its full geometry comparison is retained
+      without a new result. All prior packets, receipts and reviews remain unchanged. Per-case source
+      seed credit is retained in the new packet.
+
+
 selected_overrides:
   - n: 68
     source_id: evand-square-packing-2026-10-05
     value: '8.798795237218283902664668919394'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 102
     source_id: evand-square-packing-2026-10-05
     value: '10.607174680176051125448595024891'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 103
     source_id: evand-square-packing-2026-10-05
     value: '10.703516755572542008729416503972'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 105
     source_id: franciscouzo-square-packing-2026
     value: '10.806077865540567'
     evidence: E-franciscouzo-2026-09-27-report
-    reason: Newer reported upper bound, certified here (T-056), below the UnitSquare release and
-      the Kingbird baseline.
+    reason: Newer reported upper bound, certified here (T-056), below the UnitSquare release and the
+      Kingbird baseline.
   - n: 106
     source_id: evand-square-packing-2026-10-05
     value: '10.822908044132847555194436943331'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 110
     source_id: evand-square-packing-2026-10-05
     value: '10.996783396631591639612746267957'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
-  - n: 123
-    source_id: evand-square-packing-2026-10-05
-    value: '11.601384658375975564388544443024'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 131
     source_id: evand-square-packing-2026-10-05
     value: '11.954916830216124410139679227683'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 132
     source_id: evand-square-packing-2026-10-05
     value: '11.991327887691501411687842131585'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 152
     source_id: evand-square-packing-2026-10-05
     value: '12.830718800976609954993823643412'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 156
     source_id: evand-square-packing-2026-10-05
     value: '12.982082698516893102076828502036'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 172
     source_id: evand-square-packing-2026-10-05
     value: '13.61898895689939842899969151892'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 177
     source_id: evand-square-packing-2026-10-05
     value: '13.822979734169448600231882896281'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 181
     source_id: evand-square-packing-2026-10-05
     value: '13.953748821954402498045544433567'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 182
     source_id: evand-square-packing-2026-10-05
     value: '13.974090713121439007150130032772'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 199
     source_id: evand-square-packing-2026-10-05
     value: '14.61898895689939842900969151892'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 206
     source_id: evand-square-packing-2026-10-05
     value: '14.860158663391903236840250629824'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 207
     source_id: evand-square-packing-2026-10-05
     value: '14.893954634237227388391298332204'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
-  - n: 208
-    source_id: evand-square-packing-2026-10-05
-    value: '14.926534459699423246906428356506'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-092).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 210
     source_id: evand-square-packing-2026-10-05
     value: '14.973001116587625741983018050468'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 211
     source_id: evand-square-packing-2026-10-05
     value: '14.997960704967361565181004478378'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Joost de Winter's
-      printed side (T-057).
+    reason: The exact optimum of the same packing, certified here (T-098), below Joost de Winter's printed
+      side (T-057).
   - n: 228
     source_id: evand-square-packing-2026-10-05
     value: '15.604602454546056967137037190451'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-092).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-092).
   - n: 236
     source_id: evand-square-packing-2026-10-05
     value: '15.87221902560728287835395301986'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
-  - n: 237
-    source_id: evand-square-packing-2026-10-05
-    value: '15.911191683001783031028912780176'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
-  - n: 239
-    source_id: evand-square-packing-2026-10-05
-    value: '15.953819333480779915463620238818'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 240
     source_id: evand-square-packing-2026-10-05
     value: '15.969685337530780336056074320582'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 241
     source_id: evand-square-packing-2026-10-05
     value: '15.988132439524990848590591447359'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 259
     source_id: evand-square-packing-2026-10-05
     value: '16.602568490493364515381155942934'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
-  - n: 263
-    source_id: evand-square-packing-2026-10-05
-    value: '16.742270262025057683757892778345'
-    evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-092).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 268
     source_id: evand-square-packing-2026-10-05
     value: '16.878814821006764724747121053018'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 269
     source_id: evand-square-packing-2026-10-05
     value: '16.905967058583840911467960094275'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 270
     source_id: evand-square-packing-2026-10-05
     value: '16.937810329340954110200218669924'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 271
     source_id: evand-square-packing-2026-10-05
     value: '16.950820792624958786450490084388'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 272
     source_id: evand-square-packing-2026-10-05
     value: '16.968165867852158332894136646166'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-092).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-092).
   - n: 273
     source_id: evand-square-packing-2026-10-05
     value: '16.983925962650404316108837346991'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 292
     source_id: franciscouzo-square-packing-2026
     value: '17.597249391199519'
@@ -1969,59 +1985,47 @@ selected_overrides:
     source_id: evand-square-packing-2026-10-05
     value: '17.74041728754380185115320576776'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 301
     source_id: evand-square-packing-2026-10-05
     value: '17.846667192843489783121781262887'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 302
     source_id: evand-square-packing-2026-10-05
     value: '17.885993892530410666666041882586'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 304
     source_id: evand-square-packing-2026-10-05
     value: '17.934650018390681724105084929881'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 305
     source_id: evand-square-packing-2026-10-05
     value: '17.952959459015527962875662582531'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 306
     source_id: evand-square-packing-2026-10-05
     value: '17.963438139764002853611723469441'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-092).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-092).
   - n: 307
     source_id: evand-square-packing-2026-10-05
     value: '17.981030548633310696277454165157'
     evidence: E-evand-exact-optima-2026-10-05-report
-    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's
-      printed side (T-056).
+    reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
+      side (T-056).
   - n: 108
     source_id: squish-ten-packings-2026-10-07
     value: '10.9206589394033085'
-    evidence: E-squish-ten-packings-2026-10-07-report
-    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
-      sixteen decimals.
-  - n: 126
-    source_id: squish-ten-packings-2026-10-07
-    value: '11.7735852916961071'
-    evidence: E-squish-ten-packings-2026-10-07-report
-    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
-      sixteen decimals.
-  - n: 129
-    source_id: squish-ten-packings-2026-10-07
-    value: '11.8808935876459918'
     evidence: E-squish-ten-packings-2026-10-07-report
     reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
       sixteen decimals.
@@ -2037,18 +2041,6 @@ selected_overrides:
     evidence: E-squish-n153-2026-10-07-report
     reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
       sixteen decimals.
-  - n: 154
-    source_id: squish-ten-packings-2026-10-07
-    value: '12.9282936576777577'
-    evidence: E-squish-ten-packings-2026-10-07-report
-    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
-      sixteen decimals.
-  - n: 155
-    source_id: squish-ten-packings-2026-10-07
-    value: '12.9536770693532733'
-    evidence: E-squish-ten-packings-2026-10-07-report
-    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
-      sixteen decimals.
   - n: 180
     source_id: squish-ten-packings-2026-10-07
     value: '13.9236350042524224'
@@ -2061,20 +2053,147 @@ selected_overrides:
     evidence: E-squish-ten-packings-2026-10-07-report
     reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
       sixteen decimals.
-  - n: 238
-    source_id: squish-ten-packings-2026-10-07
-    value: '15.9294090272583145'
-    evidence: E-squish-ten-packings-2026-10-07-report
-    reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
-      sixteen decimals.
   - n: 303
     source_id: squish-ten-packings-2026-10-07
     value: '17.9203123729203498'
     evidence: E-squish-ten-packings-2026-10-07-report
     reason: SQUISH exact rational packing independently re-verified; display rounded safely upward at
       sixteen decimals.
+  - n: 123
+    source_id: squish-update-2026-10-07
+    value: '11.6009077785163406'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 126
+    source_id: squish-update-2026-10-07
+    value: '11.7733036066072403'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 129
+    source_id: squish-update-2026-10-07
+    value: '11.8793752067111287'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 154
+    source_id: squish-update-2026-10-07
+    value: '12.9265622458535390'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 155
+    source_id: squish-update-2026-10-07
+    value: '12.9525032026045129'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 179
+    source_id: squish-update-2026-10-07
+    value: '13.8913125657406980'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 208
+    source_id: squish-update-2026-10-07
+    value: '14.9245187720328190'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 237
+    source_id: squish-update-2026-10-07
+    value: '15.9036762351906287'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 238
+    source_id: squish-update-2026-10-07
+    value: '15.9261468570124710'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 239
+    source_id: squish-update-2026-10-07
+    value: '15.9493131697291908'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 258
+    source_id: squish-update-2026-10-07
+    value: '16.5634480021391540'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
+  - n: 263
+    source_id: squish-update-2026-10-07
+    value: '16.7404464800428692'
+    evidence: E-squish-update-2026-10-07-report
+    reason: Reported newer exact rational source claim; safe upward decimal display, prior verified
+      geometry preserved.
 
 superseded_reports:
+  - n: 123
+    source_id: evand-square-packing-2026-10-05
+    value: '11.601384658375975564388544443024'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 208
+    source_id: evand-square-packing-2026-10-05
+    value: '14.926534459699423246906428356506'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 237
+    source_id: evand-square-packing-2026-10-05
+    value: '15.911191683001783031028912780176'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 239
+    source_id: evand-square-packing-2026-10-05
+    value: '15.953819333480779915463620238818'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 263
+    source_id: evand-square-packing-2026-10-05
+    value: '16.742270262025057683757892778345'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 126
+    source_id: squish-ten-packings-2026-10-07
+    value: '11.7735852916961071'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 129
+    source_id: squish-ten-packings-2026-10-07
+    value: '11.8808935876459918'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 154
+    source_id: squish-ten-packings-2026-10-07
+    value: '12.9282936576777577'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 155
+    source_id: squish-ten-packings-2026-10-07
+    value: '12.9536770693532733'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+  - n: 238
+    source_id: squish-ten-packings-2026-10-07
+    value: '15.9294090272583145'
+    reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
+      verification remain retained.
+    superseded_by: squish-update-2026-10-07
+
   - n: 28
     source_id: evand-square-packing-2026-10-05
     value: '5.824444616674059297016873205016'
@@ -2302,14 +2421,14 @@ superseded_reports:
   - n: 123
     source_id: casson-square-packing-2026
     value: '11.60138465962087828'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of
       that packing (T-098).
   - n: 123
     source_id: franciscouzo-square-packing-2026
     value: '11.601384658385687'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
       here (T-098).
   - n: 124
@@ -2343,7 +2462,7 @@ superseded_reports:
   - n: 129
     source_id: evand-square-packing-2026-10-05
     value: '11.881306218090003063332517008724'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 131
     source_id: casson-square-packing-2026
@@ -2447,22 +2566,22 @@ superseded_reports:
   - n: 154
     source_id: casson-square-packing-2026
     value: '12.93166403111078111'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 154
     source_id: franciscouzo-square-packing-2026
     value: '12.931663721169976'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 155
     source_id: casson-square-packing-2026
     value: '12.95820609164224457'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 155
     source_id: franciscouzo-square-packing-2026
     value: '12.955619592137850'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 156
     source_id: casson-square-packing-2026
@@ -2541,7 +2660,7 @@ superseded_reports:
   - n: 179
     source_id: evand-square-packing-2026-10-05
     value: '13.895341069976490731724097384352'
-    superseded_by: kingbird-current
+    superseded_by: squish-update-2026-10-07
     reason: Certifies the catalogue's packing at a side 7.3e-16 above the one it prints, which
       stays the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed
       precision (T-101).
@@ -2665,21 +2784,21 @@ superseded_reports:
   - n: 208
     source_id: casson-square-packing-2026
     value: '14.93761283595916289'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of
       that packing (T-098).
   - n: 208
     source_id: franciscouzo-square-packing-2026
     value: '14.937018796984567'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side
       (T-092); since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
       (T-098).
   - n: 208
     source_id: franciscouzo-square-packing-2026-10-03
     value: '14.926534459703511'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
       here (T-098).
   - n: 209
@@ -2815,37 +2934,37 @@ superseded_reports:
   - n: 237
     source_id: casson-square-packing-2026
     value: '15.91292783720833270'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of
       that packing (T-098).
   - n: 237
     source_id: franciscouzo-square-packing-2026
     value: '15.911191683008479'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
       here (T-098).
   - n: 238
     source_id: casson-square-packing-2026
     value: '15.93958571370620980'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 238
     source_id: franciscouzo-square-packing-2026
     value: '15.931725503598480'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 239
     source_id: casson-square-packing-2026
     value: '15.95623903092502971'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Larger than Francisco Couzo's side at this count; the case record states both sources'
       dates and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of
       that packing (T-098).
   - n: 239
     source_id: franciscouzo-square-packing-2026
     value: '15.953819333484685'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
       here (T-098).
   - n: 240
@@ -2884,7 +3003,7 @@ superseded_reports:
   - n: 258
     source_id: evand-square-packing-2026-10-05
     value: '16.571067811865475244174154299168'
-    superseded_by: kingbird-current
+    superseded_by: squish-update-2026-10-07
     reason: Certifies the catalogue's packing at a side 5.2e-15 above the one it prints, which
       stays the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed
       precision (T-101).
@@ -2925,14 +3044,14 @@ superseded_reports:
   - n: 263
     source_id: franciscouzo-square-packing-2026
     value: '16.742280159187313'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side
       (T-092); since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
       (T-098).
   - n: 263
     source_id: franciscouzo-square-packing-2026-10-03
     value: '16.742270262031791'
-    superseded_by: evand-square-packing-2026-10-05
+    superseded_by: squish-update-2026-10-07
     reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified
       here (T-098).
   - n: 264
@@ -3226,7 +3345,7 @@ superseded_reports:
   - n: 126
     source_id: evand-square-packing-2026-10-05
     value: '11.774735132387832842560264587322'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 130
     source_id: franciscouzo-square-packing-2026
@@ -3236,12 +3355,12 @@ superseded_reports:
   - n: 154
     source_id: evand-square-packing-2026-10-05
     value: '12.931663721166847019324363825319'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 155
     source_id: evand-square-packing-2026-10-05
     value: '12.95561959213445243801096476729'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 180
     source_id: evand-square-packing-2026-10-05
@@ -3256,7 +3375,7 @@ superseded_reports:
   - n: 238
     source_id: evand-square-packing-2026-10-05
     value: '15.931725503591328233767187231141'
-    superseded_by: squish-ten-packings-2026-10-07
+    superseded_by: squish-update-2026-10-07
     reason: The SQUISH reported new packing is smaller than this retained earlier claim.
   - n: 303
     source_id: evand-square-packing-2026-10-05

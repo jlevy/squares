@@ -11965,3 +11965,69 @@ results:
       witness, checks the full roster and upward decimal display, and replays both geometric controls.
       This is an independently re-implemented confirmation, sharing no verification code with the producer;
       the two first-party routes share the converted corners, YAML and Python rational arithmetic.
+
+  - id: T-115
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: '`s(n) ≤ S_n` at twelve counts, from the SQUISH update’s new and smaller rational packings'
+    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports rational packing upper bounds for n
+      = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are new to the submission
+      and five have smaller certificates than the original release. Exact rational sides and complete
+      rational half-angle rosters are retained in the revision-specific acquisition packet.
+      The n153 certificate is identical to the earlier retained attachment and is an evidence/provenance
+      update only. These are source-reported feasible upper bounds, with no optimality or rigidity claim.
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: Twelve reported case-bound improvements, adding seven counts and tightening five previously
+        submitted bounds; no exact optimum or general theorem is established.
+      scored: '2026-10-07'
+      by: repository import triage; pending new mathematical review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH update 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-update-2026-10-07-report
+    artifacts:
+    - packing/resources/web/squish-401-update-2026-10-07/README.md
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
+    - packing/devtools/squish_followup_packets.py
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-123.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-126.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-129.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-154.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-155.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-208.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-237.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-238.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-239.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-258.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-263.json.gz
+    next_rung: Complete both exact deciding replays over every wall and pair, reject geometric controls,
+      bind receipts to these revision-specific facts, and retain new separately prompted adversarial
+      reviews before promotion. Continue under think-oxvk.
+    notes: Declared V0/C0 from the source claim only. Earlier T-113 and T-114 retain their exact receipts
+      and accepted reviews; those reviews do not cover the twelve update geometries. Reported case values
+      are upward decimal ceilings of claimed exact rational sides. Prior verified bounds, finder credit
+      and atlas geometry remain retained.

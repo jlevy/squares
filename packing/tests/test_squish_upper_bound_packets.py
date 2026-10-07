@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import copy
+import gzip
 import json
 from fractions import Fraction
 from pathlib import Path
 
 import pytest
 
+from devtools import squish_followup_packets as update
 from devtools import squish_upper_bound_packets as packet
 
 
@@ -133,3 +135,38 @@ def test_negative_controls_match_their_json_receipt(
     monkeypatch.setattr(packet, "read_fact", lambda _n: fact)
     receipt = packet.negative_controls()
     assert json.loads(json.dumps(receipt)) == receipt
+
+
+def test_update_side_display_is_a_ceiling() -> None:
+    for literal in (
+        "1/3",
+        "100000000000000001/100000000000000000",
+        "3",
+        "7250614903299225/562949953421312",
+    ):
+        rendered = Fraction(update.display(literal))
+        exact = Fraction(literal)
+        assert exact <= rendered < exact + Fraction(1, 10**16)
+
+
+def test_update_packet_geometry_and_prior_evidence_are_distinct() -> None:
+    update.check()
+    prior = packet.read_fact(153)
+    current = update.read_fact(153)
+    assert current == prior
+    assert update.fact_path(153) != packet.fact_path(153)
+    for n in update.REPLACEMENTS:
+        assert Fraction(update.read_fact(n)["side"]) < Fraction(packet.read_fact(n)["side"])
+
+
+def test_update_retained_noncanonical_facts_are_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fact = update.read_fact(123)
+    fact["squares"][0]["x"] = "2/2"
+    target = tmp_path / "facts/n-123.json.gz"
+    target.parent.mkdir()
+    target.write_bytes(gzip.compress(update.json_bytes(fact), mtime=0))
+    monkeypatch.setattr(update, "PACKET", tmp_path)
+    with pytest.raises(packet.PacketError, match="not normalized"):
+        update.read_fact(123)
