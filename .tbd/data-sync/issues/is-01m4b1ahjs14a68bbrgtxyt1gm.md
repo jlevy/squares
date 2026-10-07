@@ -3,9 +3,9 @@ type: is
 id: is-01m4b1ahjs14a68bbrgtxyt1gm
 title: Refresh family and contact-shade censuses after SQUISH import
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 7
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,8 +14,13 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T11:17:35.448Z
-updated_at: 2026-10-07T11:43:35.331Z
+updated_at: 2026-10-07T12:36:25.295Z
 started_at: 2026-10-07T11:20:49.153Z
+closed_at: 2026-10-07T12:36:25.295Z
+close_reason: |
+  Completed the reviewed census/provenance and pinned screen-contract repairs on both local source layers; focused checks, required whole shard A and both incremental gates passed. Original failed full-run evidence is preserved. Parent owns publication and author reply.
+resolution: null
+duplicate_of: null
 ---
 The full confirmation checkpoint at 9ce8ac8ea found a stale generated family census
 after the eleven imported poses replaced the previous known-best witnesses. The
@@ -98,3 +103,58 @@ No proof review document needs alteration. All generated-view checks passed;
 adoption and affected final-source checks await the original checkpoint finish.
 The first notes sync was write-denied (41 native commits unpushed), with all
 13 locally owned issues saved to the 61-issue outbox. Keep this task open.
+
+Local follow-up completed and integrated after the original full checkpoint ended.
+That original run at 9ce8ac8ea FAILED in 7197.68 seconds: stale family census;
+stale pinned output summaries on the full and sampled translation screens; and
+fast shard A's n17 test call at 14.66 seconds against the unchanged 12-second cap.
+The complete screen command itself validated all retained current motions in
+364.07 seconds, producing 119 separating records / 1725 squares and 302 moving
+records / 4489 squares. Earlier monitoring read successful command-exit receipts
+before the final step output/timing guards; the final failed-run evidence is
+preserved and is not represented as green.
+
+Census/provenance source commit a1a67f0dc regenerated all 324 cases and summaries
+and pins the historical Oct2 X-049/H-272 baseline without rewriting statistics or
+targets. Screen commit 41b26cc30 updates only the current 324-record finding
+tripwire and outdated comments; historical 100/200 snapshots, exclusions,
+thresholds, deciding geometry and budgets remain intact. Tests independently
+count the retained square motions and refuse stale outputs in both guards.
+Astra accepted both changes. Separate n17 child think-detb supplied the accepted
+test-only shared fixture commit 99b20f6f, preserving all 65 assertion ASTs.
+
+Final reported source: 99b20f6f37f8e6fadf0027fd96460aa692bf7762.
+Final confirmed source: 524a9b5a300f8ffccedec03d6bb631d5e6b16953.
+Reviewed confirmation side literals are preserved. Both branches differ from
+previous gate heads only in seven reviewed census/provenance/validator/test
+paths; all other tracked facts, poses, cases, receipts, reviews, source and data
+are unchanged. release.py bytes and DATA_REVISION are unchanged and check green.
+Confirmation outbox was backed up and restored byte-identically with named
+path-only stashes retained; no old scientific records were restored.
+
+Final serialized, elevated validation (jobs 1, inner jobs 4, four available CPUs):
+- Reported incremental push since 463203adf: 61 of 101 steps passed, 3916 tests
+  passed, 19 skipped, four warnings, 594.99 seconds total (305.21 pytest).
+- Confirmation incremental push since 9ce8ac8ea: 61 of 101 steps passed, 3916
+  tests passed, 19 skipped, four warnings, 587.64 seconds (296.96 pytest).
+- Required whole confirmation shard A: 2830 tests passed, 90.19 seconds total
+  (89.64 pytest); n17 repaired node JUnit duration 6.437 seconds. The first
+  sandbox attempt's known /proc RSS instrumentation failure is retained; the
+  elevated rerun uses the original required route, with no source/cap change.
+- Direct repaired census + sampled-screen step guards: both layers passed 2 of
+  101 steps, 35.68 seconds reported and 34.84 confirmed. Both full 324-record
+  censuses and all retained screen metadata rebuilt; 12 sampled motions replayed.
+- Earlier focused family/shade modules passed 42 tests on each layer, and screen
+  guard/budget controls passed eight tests. Existing module cost weights passed
+  check; no new module admission or historical weight replacement was required.
+
+Evidence: /workspace/squares-401-census-candidates/final-followup-validation.json,
+final-integration-audit.json, candidate-audit.json, generation/check receipts;
+/workspace/squares-401-{reported,confirmation}-final-incremental.log and artifacts;
+/workspace/squares-401-confirmation-final-shard-a-elevated.log and artifacts;
+/workspace/squares-401-{reported,confirmation}-final-census-sample.log and artifacts.
+Original full checkpoint and first sandbox failure remain separately preserved.
+No full gate rerun or full-green claim; no unchanged exhaustive/proof replay,
+budget increase, slow-marker addition or schema exception. Publication and the
+post-merge author reply remain with parent think-mc4u, blocked by external writes.
+This local generated-view and output-contract follow-up is complete.
