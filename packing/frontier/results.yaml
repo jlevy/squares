@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 results:
   - id: T-001
     kind: lower-bound
@@ -11729,3 +11729,117 @@ results:
       the retained PROOF.md section 8 rather than an unretained upstream note (U-4); and
       the paper's stale sentence (U-3) is rewritten in its follow-up revision. U-8 fell
       away with U-2.
+
+  - id: T-113
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: s(n) ≤ S_n at ten counts, n = 108 to 303, from new SQUISH rational packings
+    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(n) <= S_n for n = 108, 126, 129, 130,
+      154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401 on 7 October
+      2026. Each S_n is the exact rational side in the retained packing facts, from about 0.0004126 to
+      0.0067047 below the earlier reported upper bound here. Each certificate supplies rational centres
+      and rational half-angle parameters for closed unit squares in the rational container. The claim
+      establishes only upper bounds, with no optimality or rigidity conclusion. The author credits David
+      Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: New packings reduce the recorded upper bounds at ten counts by about 0.0004 to 0.0067,
+        substantive case-bound improvements. They settle no exact optimum and introduce no proved general
+        packing theorem.
+      scored: '2026-10-07'
+      by: registration lane (draft; independent mathematical review pending)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH ten packings 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-ten-packings-2026-10-07-report
+    artifacts:
+    - packing/resources/web/squish-401-2026-10-07/README.md
+    - packing/resources/web/squish-401-2026-10-07/facts/n-108.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-126.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-129.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-130.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-154.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-155.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-180.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-209.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-238.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-303.json.gz
+    - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+    next_rung: A complete exact-rational replay must decide every square pair and container wall from
+      the retained rational centres and half-angle parameters, with rejected invalid controls, followed
+      by an independent mathematical review. The source’s checker outputs are reported claims only; the
+      verification implementation and its relation to the generator will be recorded with the replay.
+    notes: >-
+      Registered as reported from the source claim only. The source reports exact checks,
+      but its checker code is not retained and no complete replay or mathematical review
+      is cited in this registration, so the declaration carries V0/C0.
+    activity:
+      state: in-analysis
+      what: Exact-rational replay and independent mathematical review under think-mc4u.
+      since: '2026-10-07'
+      link: https://github.com/jlevy/squares/issues/401
+  - id: T-114
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: s(153) ≤ 7250614903299225/562949953421312, from a SQUISH rational packing
+    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(153) <= 7250614903299225/562949953421312,
+      about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874
+      below the earlier reported upper bound here. Each certificate supplies rational centres and rational
+      half-angle parameters for closed unit squares in the rational container. The claim establishes only
+      upper bounds, with no optimality or rigidity conclusion. The author credits David Ellsworth’s records
+      and tools and states human-directed Claude Opus 5.5 assistance.
+    scope:
+      n_values:
+      - 153
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: New packings reduce the recorded upper bounds at n = 153 by about 0.00199, substantive
+        case-bound improvements. They settle no exact optimum and introduce no proved general packing
+        theorem.
+      scored: '2026-10-07'
+      by: registration lane (draft; independent mathematical review pending)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH n153 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-n153-2026-10-07-report
+    artifacts:
+    - packing/resources/web/squish-401-2026-10-07/README.md
+    - packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+    next_rung: A complete exact-rational replay must decide every square pair and container wall from
+      the retained rational centres and half-angle parameters, with rejected invalid controls, followed
+      by an independent mathematical review. The source’s checker outputs are reported claims only; the
+      verification implementation and its relation to the generator will be recorded with the replay.
+    notes: >-
+      Registered as reported from the source claim only. The source reports exact checks,
+      but its checker code is not retained and no complete replay or mathematical review
+      is cited in this registration, so the declaration carries V0/C0.
+    activity:
+      state: in-analysis
+      what: Exact-rational replay and independent mathematical review under think-mc4u.
+      since: '2026-10-07'
+      link: https://github.com/jlevy/squares/issues/401

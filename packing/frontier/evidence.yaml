@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -27831,3 +27831,61 @@ evidence:
       run among them (receipts/n41-L6775/cpp-sample/ in the packet, 642 CPU seconds),
       and was not run in full: samples that decide those nodes only.
     source_reviewed: '2026-10-06'
+
+  - id: E-squish-ten-packings-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH ten packings 2026-10-07]'
+    certificate: packing/resources/web/squish-401-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'Nate Chaoweeraprasit reports exact rational centres and t = tan(theta/2), with cos(theta)
+      = (1-t^2)/(1+t^2) and sin(theta) = 2t/(1+t^2), for pairwise interior-disjoint closed unit squares
+      contained in a square of rational side S. The source reports SQUISH exact Fraction checks and David
+      Ellsworth numerical checks at epsilon 1e-40; none is replay evidence here. The exact rational side
+      is authoritative; s_decimal is a finite display and at n = 130, 154, 238 and 303 lies below it.
+      Only upper bounds are claimed: numerical polishing supplies no optimality, local-optimality or rigidity
+      proof. Source assets publish no license; only derived facts and provenance metadata are retained.
+      The source states human-directed Claude Opus 5.5 assistance.'
+    source_reviewed: '2026-10-07'
+  - id: E-squish-n153-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 153
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH n153 2026-10-07]'
+    certificate: packing/resources/web/squish-401-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'Nate Chaoweeraprasit reports exact rational centres and t = tan(theta/2), with cos(theta)
+      = (1-t^2)/(1+t^2) and sin(theta) = 2t/(1+t^2), for pairwise interior-disjoint closed unit squares
+      contained in a square of rational side S. The source reports SQUISH exact Fraction checks and David
+      Ellsworth numerical checks at epsilon 1e-40; none is replay evidence here. The exact rational side
+      is authoritative; s_decimal is a finite display and at n = 130, 154, 238 and 303 lies below it.
+      Only upper bounds are claimed: numerical polishing supplies no optimality, local-optimality or rigidity
+      proof. Source assets publish no license; only derived facts and provenance metadata are retained.
+      The source states human-directed Claude Opus 5.5 assistance.'
+    source_reviewed: '2026-10-07'
