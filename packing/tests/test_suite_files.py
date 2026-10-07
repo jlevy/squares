@@ -604,7 +604,14 @@ def _probe(
         stderr=subprocess.STDOUT,
         text=True,
         cwd=PROJECT_ROOT,
-        env={**os.environ, "PYTHONPATH": str(PROJECT_ROOT)},
+        # These are local synthetic reports even when the outer test runs on GitHub.
+        # Hosted provenance would refuse admission before the boundary under test.
+        env={
+            **{
+                key: value for key, value in os.environ.items() if not key.startswith("GITHUB_")
+            },
+            "PYTHONPATH": str(PROJECT_ROOT),
+        },
     )
 
 
@@ -987,6 +994,7 @@ def test_cost_plugin_records_actual_whole_module_scope_and_filtering(tmp_path: P
 def test_local_admission_refuses_a_real_collection_override_that_hides_a_failure(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    monkeypatch.setenv("GITHUB_RUN_ID", "hosted-outer-test")
     module = tmp_path / "packing/tests/test_probe.py"
     module.parent.mkdir(parents=True)
     module.write_text(
@@ -1029,6 +1037,7 @@ def test_local_admission_refuses_a_real_collection_override_that_hides_a_failure
 def test_local_admission_refuses_real_nonexecution_modes(
     option: str, control: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    monkeypatch.setenv("GITHUB_RUN_ID", "hosted-outer-test")
     module = tmp_path / "test_unexecuted.py"
     module.write_text(
         "def test_one():\n    pass\n\ndef test_two():\n    assert False\n", encoding="utf-8"
