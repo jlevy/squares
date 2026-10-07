@@ -31,6 +31,7 @@ SOURCE_KEY = "[SQUISH update 2026-10-07]"
 SOURCE_ROOT = (
     f"https://github.com/itsnaka/squish-certs/blob/{REVISION}/squish-submission-2026-10-07"
 )
+RETRIEVED = "2026-10-07"
 DISPLAY_PLACES = 16
 # Author-reported seed attribution, from issue 401's pinned update comment.
 SEEDS = {
@@ -74,6 +75,13 @@ def display(side: str) -> str:
 def fact_path(n: int) -> Path:
     """Locate the revision-specific normalized geometry."""
     return PACKET / "facts" / f"n-{n:03d}.json.gz"
+
+
+def source_url(n: int) -> str:
+    """Name the pinned update certificate, never a historical attachment."""
+    if n not in NUMBERS:
+        raise original.PacketError("count absent from SQUISH update")
+    return f"{SOURCE_ROOT}/n{n}/n{n}.cert.json"
 
 
 def read_fact(n: int) -> dict[str, Any]:
