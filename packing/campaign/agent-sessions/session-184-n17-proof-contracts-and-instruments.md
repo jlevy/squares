@@ -534,7 +534,7 @@ session:
     commitment: BC-430
     objective: Repair the two scoped push-gate failures and reconcile retained incomplete
       evidence while the four-case finite proof instrument and mathematical review proceed.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Phase11 was efficiency; phases12–15 were four research blocks. The
       next block restores the declared efficiency cadence without stopping the proof lane.
@@ -548,12 +548,46 @@ session:
       scientific thresholds or target resources.
     fallback: Continue independent finite-source and mathematical review beside the
       scoped validation work; no broad gate repeat.
-    outcome: null
+    outcome: Original59/61 push retained; stable SYNOPSIS now passes and the unchanged30s
+      nested pytest regression passes10.80s. Latest normal failure prevented its pool lane;
+      earlier additive pool coverage stays historical. Outer owned PGID6087 is empty, but
+      separate command group IDs were not retained and no speculative cleanup was made.
+      Finite source author37/independent35plus3 controls clear; actual exp285 completed
+      fresh criterion-miss20.74s, allfour cases unresolved, no exclusion.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md
+    stop_reason: Planned boundary15:07:42Z; observed close15:08:33Z,51s late while
+      the actual finite outcome and scientific next-source scope were reconciled.
+    next_action: Review H295 pooled forbidden-union source, preregister only after
+      both source reviews, and retain exact completed negative285 separately.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-430
+    objective: Complete the exact pooled foreign-owned forbidden-cover instrument and
+      source reviews, then register and interpret its bounded finite union trial.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Exp285 completed its finite recipe without a contradiction; selected
+      next mathematical interface uses pooled foreign forbidden-region union coverage.
+    budget_minutes: 30
+    started_at: '2026-10-07T15:07:42Z'
+    deadline_at: '2026-10-07T15:37:42Z'
+    expected_output: Reviewed finite union source and controls, preregistered60+60/120s
+      trial and fresh complete coverage versus criterion-miss/resource/refusal disposition.
+    validation_command: Focused source controls, independent mechanical and Astra mathematical
+      reviews, then preregistration before actual target.
+    kill_condition: Preserve incomplete evidence; never promote uncovered relaxation regions
+      to packing witnesses or unaccepted exp284 geometry to premises.
+    fallback: Continue proof interpretation and bounded independent checkpoint validation
+      beside the mathematical source lane; no unchanged long conditional replay.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md
     stop_reason: null
-    next_action: Review the two-channel finite instrument before separately registering
-      H294/exp285 from accepted original-parent initialization and checked kernels.
+    next_action: Review new pooled forbidden-cover source and controls before H295/exp286
+      import; original accepted parent pools only, no inheritedQ0+K dominance claim.
   primary_bead: think-ipel
   status: in_progress
   budget:
@@ -1804,10 +1838,13 @@ session:
     - sharedadmissionledgermutation
   - task: Astra pooled-parent finite four-case proof review
     operator: GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Frozen finite source and controls clear; exp285 completed fresh criterion-miss
+      with allfour cases unresolved and no exclusion. Selected successor is pooled foreign
+      forbidden-cover union under the same accepted original-parent premises.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md
     files:
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     checks: []
@@ -1831,10 +1868,13 @@ session:
     - sharedadmissionledgermutation
   - task: Sol original-parent pooled finite instrument
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Frozen finite source and controls clear; exp285 completed fresh criterion-miss
+      with allfour cases unresolved and no exclusion. Selected successor is pooled foreign
+      forbidden-cover union under the same accepted original-parent premises.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md
     files:
     - packing/devtools/probe_n17_conditional_center_cases.py
     - packing/tests/test_probe_n17_conditional_center_cases.py
@@ -1860,10 +1900,13 @@ session:
     - sharedadmissionledgermutation
   - task: Sol finite-source review and scoped validation reconciliation
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Frozen finite source and controls clear; exp285 completed fresh criterion-miss
+      with allfour cases unresolved and no exclusion. Selected successor is pooled foreign
+      forbidden-cover union under the same accepted original-parent premises.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md
     files:
     - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
     - SYNOPSIS.md
@@ -1880,6 +1923,91 @@ session:
     validation_command: Focused source controls and independent review only; no broad repeat.
     kill_condition: Preserve resource stops and refuse failed custody or proof joins.
     fallback: Rotate to ready proof support while other lanes continue.
+    write_scope:
+    - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
+    - SYNOPSIS.md
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Astra pooled forbidden-union mathematical source review
+    operator: GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks: []
+    uncertainty: A completed uncovered region is a relaxation gap, not a feasible packing.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete source reviews and preregistration before any actual union evaluation.
+    phase: 17
+    budget_minutes: 30
+    started_at: '2026-10-07T15:07:42Z'
+    deadline_at: '2026-10-07T15:37:42Z'
+    expected_output: Mathematical source review and scoped finite outcome interpretation.
+    validation_command: Focused target-free controls and independent source review.
+    kill_condition: Preserve honest resource stops and refuse failed custody or strict-core joins.
+    fallback: Rotate to ready proof support beside the other mathematical lanes.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol pooled forbidden-union source and controls
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/devtools/probe_n17_pooled_forbidden_cover.py
+    - packing/tests/test_probe_n17_pooled_forbidden_cover.py
+    checks: []
+    uncertainty: A completed uncovered region is a relaxation gap, not a feasible packing.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete source reviews and preregistration before any actual union evaluation.
+    phase: 17
+    budget_minutes: 30
+    started_at: '2026-10-07T15:07:42Z'
+    deadline_at: '2026-10-07T15:37:42Z'
+    expected_output: Retained source, exact strict-core/union controls and resource/status readiness.
+    validation_command: Focused target-free controls and independent source review.
+    kill_condition: Preserve honest resource stops and refuse failed custody or strict-core joins.
+    fallback: Rotate to ready proof support beside the other mathematical lanes.
+    write_scope:
+    - packing/devtools/probe_n17_pooled_forbidden_cover.py
+    - packing/tests/test_probe_n17_pooled_forbidden_cover.py
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol independent forbidden-union review and preregistration
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
+    - SYNOPSIS.md
+    checks: []
+    uncertainty: A completed uncovered region is a relaxation gap, not a feasible packing.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete source reviews and preregistration before any actual union evaluation.
+    phase: 17
+    budget_minutes: 30
+    started_at: '2026-10-07T15:07:42Z'
+    deadline_at: '2026-10-07T15:37:42Z'
+    expected_output: Independent mechanical source/control review and fully frozen preregistration.
+    validation_command: Focused target-free controls and independent source review.
+    kill_condition: Preserve honest resource stops and refuse failed custody or strict-core joins.
+    fallback: Rotate to ready proof support beside the other mathematical lanes.
     write_scope:
     - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
     - SYNOPSIS.md

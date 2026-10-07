@@ -309,14 +309,36 @@ Astra found that every active owner still represents the full orientation interv
 This diagnoses the represented relaxation; it supplies no packing counterexample or
 claim about the physical feasible subset.
 
-The next selected mathematical lane tests an exact shared obstacle under one angular
-condition.
-Its construction and independent finite replay have a cheap support-gain gate;
-propagation is considered only after that gate passes.
-This replaces an automatic long continuation with unchanged settings.
-The independent centered-cap interface first needs its known-endpoint STALL control: the
-first attempt refused operationally in4.32s and awaits diagnostic repair and separate
-registration.
+The centered-cap interface subsequently passed its full standing STALL control in
+[exp280](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-280-h291-centered-endpoint-hull-capacity.md).
+It retained the known endpoint and established no exclusion.
+The cheap conditional support test
+[exp282](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-282-h292-conditional-owned-hull-scoped-input.md)
+then constructed five additional strictly owned points for owner0 under the closed
+angular guard `[13/32,27/64]`, with fresh finite verification.
+All four support gains exceeded the preregistered `1/1024` threshold; the unguarded test
+failed it. These are conditional ownership facts, not global capture.
+
+The guarded continuation produced16 updates in
+[exp284](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md),
+but its fresh300-second replay stopped incomplete.
+Its geometry remains unaccepted and is excluded from subsequent proof inputs.
+The separately registered finite four-case test
+[exp285](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md)
+used only accepted original-parent kernels and the five verified points.
+Its construction and fresh reconstruction completed in20.74 seconds, but neither the
+unsplit test nor any of the four closed centre cases found a common collision point.
+This is a completed negative result for that finite recipe, not a physical packing
+counterexample.
+
+The next selected route asks whether the union of several strict collision regions
+covers every necessary centre piece under the same angular guard.
+Astra owns the implication and source review; Sol implements and independently checks
+the finite instrument before a separately registered target run.
+The selected construction and replay ceilings are60 seconds each,120 seconds combined,
+with a4GiB process-group memory ceiling.
+If that recipe misses, the next discriminator is a checked single-square relaxation
+witness, rather than another automatic long producer round.
 
 [Session184](../../../../packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
 owns the current30-minute slices, fixed target budgets and disjoint agent deliverables.

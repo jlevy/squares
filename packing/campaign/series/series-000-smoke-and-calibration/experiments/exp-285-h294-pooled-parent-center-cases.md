@@ -25,8 +25,10 @@ experiment:
     point: 17
     role: target
   method:
-    control: 'Frozen retained source: author final37 target-free controls passed0.78s; independent35 passed0.73s and final3 refusal/custody controls passed separately; static checks zero and sole-Astra mathematical review clear. No actual
-      original-parent intake or finite case evaluated before registration.'
+    control: 'Frozen retained source: author final37 target-free controls passed0.78s; independent35
+      passed0.73s and final3 refusal/custody controls passed separately; static checks zero
+      and sole-Astra mathematical review clear. No actual original-parent intake or finite
+      case evaluated before registration.'
     candidate: 'Fresh conditional initialization from accepted H290/exp280/exp282 only, using
       the original exp283 context descriptor. Proof pool is accepted_original_parent_kernels:
       original H289 initial groups plus all16 checked common_owned_kernel lists, canonical
@@ -51,23 +53,46 @@ experiment:
       input vertices,4096bits per rational numerator/denominator. Pool hull128, centre/H hull256,
       K128, intersection384 vertices. No retry or threshold/limit retuning.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases
-  results: []
+    commit: 4c76e0003e46fcc780a215d94029c8e46741219f
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Does pooled original-parent unsplit or complete four-case finite coverage prove
+      the closed-guard exclusion?
+    outcome: criterion_missed
+    checked_by: Clean4c76e0003 source; certificate/replay criterion_missed, verification_passed=true,
+      identical finite core, all proof flagsfalse. Independent metadata audit and sole-Astra
+      outcome interpretation remain separately scoped; no geometry rerun.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Fresh exact finite reconstruction proves an unsplit conditional owned-hull/empty-centre
       contradiction, or a checked contradiction in ALL four CLOSED midrange cases (--,-+,+-,++),
       including cut and guard boundary seams. A completed unresolved case is criterion-missed
       with only scoped partial coverage. Resource stops are incomplete; malformed/custody/calibration/proof
       failures are refused. No packing witness, unconditional exclusion, global result or
       census admission.
-    reason: Registered at2026-10-07T14:51:33Z before scientific intake;20min preparation lease,
-      separate120s combined trial.
+    reason: 'Completed finite recipe missed its primary criterion: matched unpooled and pooled
+      unsplit checks and all four closed cases remain unresolved. Fresh complete reconstruction
+      passed and its report core matches generation; no conditional/unconditional exclusion,
+      census admission or global result. Supervision20.74094s rc0/normalcleanup; construction9.95174s
+      and fresh9.85035s. Original-parent pool calibration passed (543raw points,926used vertices),
+      no exp284 geometry.'
     needs_review: false
-  lease:
-    expires: '2026-10-07T15:11:33Z'
-    host: macOS arm64
+  effort:
+    timebox: One worker;60s construction+60s fresh finite reconstruction inside120s combined/TERM120/KILL130,
+      sampled4096MiB RSS. Descriptor/receipts10MiB; original seed10MiB compressed/decoded,
+      node512MiB compressed/2GiB decoded; final/output64MiB. Raw pools512points/owner8192total,16384used
+      input vertices,4096bits per rational numerator/denominator. Pool hull128, centre/H hull256,
+      K128, intersection384 vertices. No retry or threshold/limit retuning.
+    wall_seconds: 20.74
+    stopped_by: criterion
 ---
 # Original-Parent Four-Case Finite Proof
+
+Completed as a criterion-miss under the registered finite recipe.
+Fresh reconstruction passed; neither the unsplit check nor any of the four cases
+supplies an exclusion.
 
 Registered before target intake from reviewed source and target-free controls.
 The selected initialization and original-parent pool use no incomplete exp284 child.

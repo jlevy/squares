@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/probe_n17_pooled_forbidden_cover.py
+    kind: generated-artifact
+    boundary: Runtime accepted-parent object and descriptor bytes remain unchanged across finite reconstruction; no Git source identity determines acceptance.
   - path: packing/devtools/probe_n17_conditional_center_cases.py
     kind: generated-artifact
     boundary: Accepted runtime parent/pool objects and finite premise receipts are held by content and byte identities through fresh reconstruction; no Git source identities decide proof acceptance.

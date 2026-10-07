@@ -2541,6 +2541,155 @@ does not assert that the actual conditional round is nonclosed, that any partiti
 case is empty, or that the proposed resource ceilings will suffice. Registration
 and source review must precede the first target construction.
 
+### The Completed Four-Case Test
+
+[H-294/exp-285](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md)
+completed construction and fresh finite reconstruction in 20.74094 seconds. Both
+receipts report `criterion_missed`; the fresh receipt has
+`verification_passed: true`. The matched unpooled and pooled direct intersections
+are absent. The unsplit construction and all four closed centre cases remain
+unresolved. Each case has a nonempty seven-vertex $K$ and $H$, so the failed step is
+the shared-owned-point contradiction, rather than construction of owned points.
+Every case retains rows 25, 26 and 27, including their singleton guard boundaries.
+No subcase exclusion, whole-$I$ exclusion or packing witness follows.
+
+The accepted pool controls establish final-hull containment and disjointness of
+the unconditional parent pools. Their 543 raw points produce nonempty convex pools
+only for owners 0, 1, 2, 3 and 20, with 20, 20, 20, 15 and 37 vertices respectively.
+The other twelve owners have empty pools. Thus a subsequent foreign-pool cover for
+owner 0 has four nonempty obstacles. This is a limitation of the retained ownership
+facts, not an assertion that those four obstacles cannot exclude the guard.
+The incomplete exp-284 child contributes no geometry or proof points.
+
+### A Pooled Forbidden-Region Cover
+
+The next finite test uses the same accepted initialization and original-parent
+pool, with the same $I$, numeric container, margin and closed necessary centre
+pieces. It allows the colliding point and foreign owner to vary with the centre.
+This changes the proof question from finding one common point for a whole centre
+case to covering that case by independently justified collision regions. It does
+not automatically dominate the preceding $\operatorname{conv}(Q_0\cup K)$ test:
+ownership inherited in $Q_0$ can depend on constraints absent from the centre
+over-cover.
+
+For each closed angular intersection $J=[l,h]$, form a centred polygon $C_J$ by
+clipping $[-1,1]^2$ with the following inequalities for every corner $(c,s)$ of
+$[c(h),c(l)]\times[s(l),s(h)]$ and every $\eta\in\{-1,1\}$:
+
+$$
+\eta(cz_x+sz_y)\le1/2-\epsilon,
+\qquad
+\eta(-sz_x+cz_y)\le1/2-\epsilon,
+\qquad \epsilon=2^{-20}.
+$$
+
+Both square axes and all coefficient corners are required. Since the coefficient
+rectangle contains the whole closed arc, $C_J$ lies strictly inside the unit square
+centred at zero at every angle in $J$. Check its vertices against the defining
+rows and independently against the standalone checker's exact quadratic
+`core_strict` test. Retain the origin and positive-area checks. The starting box is
+centred at zero; using $[0,U]^2$ here would construct a different core.
+
+For each nonempty foreign pool $Q_j$, $j\ne0$, define
+
+$$
+F_{j,J}=Q_j-C_J
+=\operatorname{conv}\{q-z:q\in\operatorname{vert}(Q_j),
+                         z\in\operatorname{vert}(C_J)\}.
+$$
+
+If a centre $x$ belongs to $F_{j,J}$, write $x=q-z$ with $q\in Q_j$ and $z\in C_J$.
+Then $q=x+z$ lies strictly inside both physical squares: inside owner 0 by the core
+property, and inside owner $j$ by accepted pooled ownership. Such a centre is
+impossible. This establishes the sign $Q_j-C_J$ and the implication for every
+point of the closed Minkowski region, including its boundary. Owner 0's five
+conditional points are never used as a foreign owner's obstacle.
+
+For each original residual polygon, retain its separate intersection with the
+same necessary wall box $W_J$. Call the result $P$. An empty $P$ needs no further
+proof. Otherwise require
+
+$$
+P\subseteq\bigcup_{j\ne0}F_{j,J}.
+$$
+
+Each forbidden region may first be clipped exactly to $P$. Use the standalone
+exact vertical sweep for a positive-area $P$ and `degenerate_covered` for a point
+or segment. Closed touching regions may cover a seam; a positive gap, however
+small, remains uncovered. Keep every original piece and all three closed row
+intersections, including the two singleton angular boundaries. Convexifying
+disconnected pieces before the necessary wall clipping is not permitted.
+
+Primary success requires coverage of every such $P$, followed by fresh finite
+reconstruction from the same accepted original objects and premise identities.
+A complete uncovered piece gives `criterion_missed`; its uncovered section is a
+gap in this relaxation, not a feasible packing. Resource exhaustion is incomplete,
+and a custody or calibration failure is refused. No outcome admits an old-$U$
+census exclusion or proves global optimality.
+
+Run the same coverage calculation first with the ordinary final foreign hulls,
+using identical centre pieces and cores. Those hulls are contained in the pools.
+Ordinary coverage followed by failed pooled coverage therefore refuses the
+monotonicity control. Pooled coverage alone supports a claim that compression had
+discarded useful represented ownership information. If both miss, neither that
+claim nor a packing-existence conclusion is justified.
+
+This instrument inherits the original-parent custody and input limits above.
+Freeze one worker, 60 seconds for construction and 60 for fresh reconstruction,
+120 seconds combined, with a sampled 4 GiB memory ceiling. The new geometric
+ceilings are 32 core vertices, 256 Minkowski-hull vertices, 384 vertices per clipped
+forbidden region, 256 vertices per centre piece, 256 nonempty centre pieces in
+total, and 65,536 generated vertex differences per row. Before each sweep allow at
+most 2,048 polygon edges and 2,100,000 prospective edge-pair comparisons. Check the
+deadline before and after the existing exact sweep and retain outer supervision;
+that primitive has no internal deadline check.
+
+The 4,096-bit ceiling applies to normalized rational geometric inputs, computed
+coordinates and retained probes. It does not claim that the standalone sweep's
+unreduced homogeneous integer products have that same bit bound. Those products
+remain exact under the finite workload, wall and memory ceilings. No truncation,
+floating coverage decision or silent omission is allowed when a limit is reached.
+
+Target-free controls must check the Minkowski sign, both square axes, all
+coefficient corners and strict core inclusion; disconnected pieces, closed seams,
+point and segment coverage, touching regions and narrow gaps; and a union that
+covers the domain although no single foreign region does. A segment whose ends
+and midpoint are covered but whose interior has a gap must be rejected. Preserve
+the known feasible two-square negative control, matched pool monotonicity, missing
+row-piece refusal, custody and resource controls, and a fresh producer-, kernel-
+and root-free reconstruction. The accepted parent remains an explicit premise;
+finite reconstruction is not a new replay of its geometry.
+
+### A Prospective Discriminator After an Uncovered Piece
+
+If the pooled cover completes with an uncovered piece, a useful next question is
+whether its ownership facts admit even one square-0 pose in that gap. A separately
+registered finite test could choose a deterministic uncovered centre and a fixed
+rational angle in $I$, then check numeric containment, strict inclusion of all
+conditional $Q_0$ points, and absence of foreign pooled points from the square's
+interior. A successful witness would show that those owned-point facts alone do
+not exclude that pose. It would provide no positions or orientations for the
+other sixteen squares and would not be a packing counterexample. No such witness
+has been chosen or evaluated here.
+
+Necessary centre slabs from owned points offer another possible refinement. For
+a rational direction $n$ and a certified upper bound $H_J(n)$ on the unit square's
+support over $J$, every physical centre satisfies
+
+$$
+h_{Q_0}(n)-H_J(n)\le n\mathbin{\cdot}x
+\le H_J(n)-h_{Q_0}(-n).
+$$
+
+Earlier pooled ownership facts might tighten an outer envelope through these
+rows. The five H-292 points alone cannot tighten the same centre over-cover over
+which their ownership was proved uniformly. This refinement has no measured gain
+and is outside the selected forbidden-cover recipe.
+
+These new implications are the sole Astra agent's hand derivations, with the
+independent mathematical review and machine-proof limitations stated at the start
+of this document. Registration and source review precede their target use.
+
 ## A Future Label-Bijection Extension
 
 The current consumer requires all seventeen transported owners to equal the endpoint's

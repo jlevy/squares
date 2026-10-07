@@ -125,6 +125,7 @@ SESSION184_RESULT_ROOTS = frozenset(
         # Registered native-custody replication; no mutation control consumes its output.
         "exp-284-parent-guard-native-custody",
         "exp-285-pooled-parent-center-cases",
+        "exp-286-pooled-forbidden-cover",
     )
 )
 

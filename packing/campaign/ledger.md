@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `efficiency-loop` (efficiency) | 16 | think-ipel | Complete reviewed guardedparentproducer+independentchecker; freezeH293/exp283 boundedclosed-I exclusion trial, keepCI beside mathematics and preserve everyverdict. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 17 | think-ipel | Complete reviewed guardedparentproducer+independentchecker; freezeH293/exp283 boundedclosed-I exclusion trial, keepCI beside mathematics and preserve everyverdict. |
 
 ### Workflow summary
 
@@ -210,7 +210,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 44 | 1 |
-| `research-loop` | 37 | 4 | 141 | 9 |
+| `research-loop` | 37 | 4 | 142 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 214 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 215 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1164,7 +1164,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-291 | confirmed | proof | The accepted numeric-cap full17 endpoint checkpoint passes a fresh ind |  | 3 |  | 1.9m wall |
 | H-292 | confirmed | proof | A finite exact conditional ownership recipe from the accepted H290 par |  | 2 |  | 10s wall |
 | H-293 | blocked | proof | The fixed parent-aware owned-hull initialization and one no-refinement |  | 2 |  | 10.5m wall |
-| H-294 | running | proof | The original accepted-parent kernel pool and four closed centre cases  |  | 1 |  |  |
+| H-294 | refuted | proof | The original accepted-parent kernel pool and four closed centre cases  |  | 1 |  | 21s wall |
+| H-295 | running | proof | Exact pooled foreign-owned forbidden regions cover the complete accept |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1174,7 +1175,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Rounds
 
-### rejected (38)
+### rejected (39)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1216,6 +1217,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-217 | series-000 | 32 | Claude session-144 (Fable lane, Opus port, Fable review) | H-227 | With the m=6 vertical budget 2(sqrt 2 - 1/2) + 1.6 + 3 sqrt 3 / 2 - 6 = 0.0265, any frozen row above a six-point row kills that row's shift and end-point move, so every structure whose red spare lies outside red row 1 or blue spare outside blue row 6 leaves at most five charges on every wall line and no shorter slide recovers a sixth; s(32) = 6 itself is untouched. |
 | exp-233 | series-000 | 12 | Claude Session 157 coordinator | H-241 | The row loop converged with covering value 11.980175 < 12, so no depth-one family reaching 12 exists on this support and the additive route at n12 is not shown dead above 3.9609; the converged value is a float LP, not a certificate, so it suggests rather than establishes a point certificate at 3.9609. |
 | exp-243 | series-000 | 17 | Claude Session 167; lane B built the pilot, the coordinator replayed it from a clean worktree | H-262 | The registered claim (at most 10^4 survivors) is false for every D4-symmetric per-cell floor vector by the ceiling theorem; R068's dictionary at U leaves 7,703,312, rejecting that engine outright. The exact six-sweep instrument is unnecessary. Asymmetric and nonlinear floors remain open and belong to a new hypothesis. |
+| exp-285 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-294 | Completed finite recipe missed its primary criterion: matched unpooled and pooled unsplit checks and all four closed cases remain unresolved. Fresh complete reconstruction passed and its report core matches generation; no conditional/unconditional exclusion, census admission or global result. Supervision20.74094s rc0/normalcleanup; construction9.95174s and fresh9.85035s. Original-parent pool calibration passed (543raw points,926used vertices), no exp284 geometry. |
 
 ### exhausted (1)
 
@@ -1426,7 +1428,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-285 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-294 | Registered at2026-10-07T14:51:33Z before scientific intake;20min preparation lease, separate120s combined trial. |
+| exp-286 | series-000 | 17 | Sol coordinator registers/freezes/launches/disposes in Session184. | H-295 | Registered at 2026-10-07T15:13:46Z before target intake;20min preparation lease, separate120s trial. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1476,7 +1478,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-214 rounds, 2512.1 agent-minutes, 5778.9 wall-minutes.
+215 rounds, 2512.1 agent-minutes, 5779.2 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 
