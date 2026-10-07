@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 431 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 23 in progress |
 | Sessions | 184 | 105 completed; 78 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 234 | 63 confirmed; 38 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 221 | 83 accepted; 43 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 236 | 63 confirmed; 38 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
+| Experiments | 223 | 83 accepted; 43 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 2 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -573,6 +573,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Exact Replay Stage Attribution](packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md) | typed session record | record | retained | — |
+| [Paired Point and Regional Joint Ownership](packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/README.md) | typed session record | record | retained | — |
 | [Complete Full-Square SAT Miss](packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/README.md) | typed session record | record | retained | — |
 | [Complete Partner-Pose Coupling Miss](packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/README.md) | typed session record | record | retained | — |
 | [Complete Partner-Pose Coupling Resource Stop](packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/README.md) | typed session record | record | retained | — |
@@ -5843,6 +5845,8 @@ round that names the hypothesis, control roles included.
 | [H-298](packing/campaign/hypotheses/H-298-n17-complete-partner-pose-region.md) | refuted | Complete partner-pose nonzero closed region around exp288 | 2 | exp289 guardstop preserved; exp291 completefreshfixedpointmiss, fourladderlevels unstarted |
 | [H-299](packing/campaign/hypotheses/H-299-n17-matched-exact-replay-observations.md) | confirmed | Matched full exact replay with boundary-level observations | 1 | exp290retry COMPLETE/matchedfullreplays+16stepobservations; no gain/admission |
 | [H-300](packing/campaign/hypotheses/H-300-n17-full-square-partner-region.md) | refuted | Full-square SAT nonzero region around exp288 witness | 1 | exp292completefreshSATmiss/34128minima;15/16negativewitnesses passextactwalls |
+| [H-301](packing/campaign/hypotheses/H-301-n17-paired-guard-conditioned-ownership.md) | running | Paired point and nonzero regional guard-conditioned ownership | 1 | Registered; target unrun; point closure is secondary, regional closure is primary |
+| [H-302](packing/campaign/hypotheses/H-302-n17-stages-replay-observations.md) | running | Full exact replay with nested stage attribution | 1 | Registered; target unrun; observations must preserve the accepted mathematical result |
 
 ### Confirmed
 
@@ -6184,7 +6188,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 221 rounds registered in `series-000`.
+There are 223 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5787.1 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6449,6 +6453,8 @@ archive beside it.
 | [exp-290](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-290-h299-matched-exact-replay.md) | 17 | target | H-299 | Matched NONE/PHASES full exact replay | MatchedfullNONE/PHASESreplays+16steps | accepted |
 | [exp-291](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-291-h298-complete-partner-coupling-amended.md) | 17 | target | H-298 | Exact complete coupling; audited input limits | All16partners leavefixedpoint; freshmatchPASS | rejected |
 | [exp-292](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-292-h300-full-square-partner-coupling.md) | 17 | target | H-300 | Complete full-square SAT minima | No positivepartner;freshmatchPASS | rejected |
+| [exp-293](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-293-h-301-guard-conditioned-ownership.md) | 17 | target | H-301 | Point-first paired guard-conditioned ownership | Prospectively registered; target unrun | in-progress |
+| [exp-294](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-294-h-302-stages-exact-replay.md) | 17 | target | H-302 | Matched full exact replay with STAGES observations | Prospectively registered; target unrun | in-progress |
 
 ### Cost and provenance
 
@@ -6675,10 +6681,12 @@ archive beside it.
 | exp-290 | NONE180s/PHASES180s inside370s;4GiB perprocess sampled | 234.14s | — | criterion | Diagnostic equivalence; no optimization gain |
 | exp-291 | Construction120s/fresh120s inside240s;4GiB perprocess sampled | 106.93s | — | criterion | Input-only representation amendment; same regional PRIMARY |
 | exp-292 | Construction120s/fresh120s inside240s;4GiB perprocess sampled | 106.65s | — | criterion | FullsquareSAT/minimizerwallsecondary; no changedinput/domain |
+| exp-293 | Construction180s/fresh180s inside360s;4GiB per process sampled | — | — | — | Registered; target unrun |
+| exp-294 | STAGES180s cooperative;TERM190/KILL200;4GiB per process sampled | — | — | — | Registered; target unrun |
 
-### What the 221 rounds jointly establish
+### What the 223 rounds jointly establish
 
-The 221 rounds use 2512.1 agent-minutes and 5787.1 wall-minutes under the campaign’s
+The 223 rounds use 2512.1 agent-minutes and 5787.1 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

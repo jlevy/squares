@@ -21,6 +21,7 @@ from collections import defaultdict
 from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from fractions import Fraction as Q
+from functools import wraps
 from pathlib import Path
 from typing import Any, cast
 
@@ -182,6 +183,138 @@ class Recorder:
             standing.check_step, standing.bound_memos = check, bound
 
 
+class StageRecorder:
+    """Boundary-only nested clocks; no arithmetic primitives or global tracing."""
+
+    def __init__(self, deadline: float) -> None:
+        self.deadline = deadline
+        self.step: int | None = None
+        self.stack: list[dict[str, float]] = []
+        self.records: dict[tuple[int | None, str], dict[str, Any]] = {}
+
+    def measure(self, name: str, invoke: Callable[[], Any]) -> Any:
+        tick(self.deadline)
+        key = (self.step, name)
+        if key not in self.records:
+            if len(self.records) >= 4096:
+                raise IncompleteError("stage observation record ceiling")
+            self.records[key] = {
+                "step": self.step,
+                "stage": name,
+                "calls": 0,
+                "failed_calls": 0,
+                "inclusive_wall_seconds": 0.0,
+                "exclusive_wall_seconds": 0.0,
+                "inclusive_cpu_seconds": 0.0,
+                "exclusive_cpu_seconds": 0.0,
+            }
+        frame = {
+            "wall": time.perf_counter(),
+            "cpu": time.process_time(),
+            "child_wall": 0.0,
+            "child_cpu": 0.0,
+        }
+        self.stack.append(frame)
+        failed = True
+        try:
+            result = invoke()
+            failed = False
+        finally:
+            wall, cpu = time.perf_counter() - frame["wall"], time.process_time() - frame["cpu"]
+            self.stack.pop()
+            record = self.records[key]
+            record["calls"] += 1
+            record["failed_calls"] += int(failed)
+            record["inclusive_wall_seconds"] += wall
+            record["inclusive_cpu_seconds"] += cpu
+            record["exclusive_wall_seconds"] += max(0.0, wall - frame["child_wall"])
+            record["exclusive_cpu_seconds"] += max(0.0, cpu - frame["child_cpu"])
+            if self.stack:
+                self.stack[-1]["child_wall"] += wall
+                self.stack[-1]["child_cpu"] += cpu
+        tick(self.deadline)
+        return result
+
+    @contextmanager
+    def installed(self) -> Iterator[None]:
+        patches: list[tuple[Any, str, Any]] = []
+
+        def install(
+            owner: Any, name: str, stage: str, *, step_argument: int | None = None
+        ) -> None:
+            original = getattr(owner, name)
+
+            @wraps(original)
+            def observed(*args: Any, **kwargs: Any) -> Any:
+                before = self.step
+                if step_argument is not None:
+                    self.step = (
+                        args[step_argument] if len(args) > step_argument else kwargs["si"]
+                    )
+                try:
+                    return self.measure(stage, lambda: original(*args, **kwargs))
+                finally:
+                    self.step = before
+
+            patches.append((owner, name, original))
+            setattr(owner, name, observed)
+
+        try:
+            for name in ("check_seed", "check_final", "check_centered_final", "load_object"):
+                install(standing, name, name)
+            for name in ("check_step", "check_partners", "compress", "derive_closure"):
+                install(standing, name, name, step_argument=2)
+            for name in ("check_collisions", "check_cover"):
+                install(standing, name, name)
+            install(standing.NodeStream, "__init__", "node_header_decode")
+            original_steps = standing.NodeStream.steps
+            observer = self
+
+            def steps(self: standing.NodeStream) -> Iterator[dict[str, Any]]:
+                iterator = original_steps(self)
+                sentinel = object()
+                while True:
+                    # Each generator resumption includes decode + canonical digest;
+                    # the terminal EOF/final-header resumption is also counted.
+                    found = observer.measure(
+                        "node_step_decode_or_eof", lambda: next(iterator, sentinel)
+                    )
+                    if found is sentinel:
+                        return
+                    yield found
+
+            patches.append((standing.NodeStream, "steps", original_steps))
+            standing.NodeStream.steps = steps
+            yield
+        finally:
+            for owner, name, original in reversed(patches):
+                setattr(owner, name, original)
+
+    def report(self, replay_wall: float, replay_cpu: float) -> dict[str, Any]:
+        records = sorted(
+            self.records.values(),
+            key=lambda r: (-1 if r["step"] is None else r["step"], r["stage"]),
+        )
+        wall = sum(r["exclusive_wall_seconds"] for r in records)
+        cpu = sum(r["exclusive_cpu_seconds"] for r in records)
+        return {
+            "records": records,
+            "unattributed_replay_wall_seconds": max(0.0, replay_wall - wall),
+            "unattributed_replay_cpu_seconds": max(0.0, replay_cpu - cpu),
+            "semantics": (
+                "inclusive clocks overlap; exclusive clocks subtract directly nested observed "
+                "calls; residual includes unobserved work and observer overhead"
+            ),
+            "decode_semantics": (
+                "generator resumption includes JSON decode and canonical digest, "
+                "plus terminal EOF/final-header work; not pure parsing"
+            ),
+            "per_vertex_hooks": False,
+            "global_trace": False,
+            "cache_lookup_hits_observed": False,
+        }
+
+
 def phase(code: Any) -> str:  # noqa: PLR0911 - explicit diagnostic category inventory
     name, filename = code.co_name, code.co_filename
     if "fractions.py" in filename:
@@ -280,11 +413,12 @@ def profile_call(
     instrumentation: str,
     deadline: float,
 ) -> dict[str, Any]:
-    if instrumentation not in {"none", "phases", "callgraph"}:
+    if instrumentation not in {"none", "phases", "stages", "callgraph"}:
         raise ValueError("unknown instrumentation")
     if sys.getprofile() is not None:
         raise ValueError("an existing profiler is active")
     observer = Recorder(deadline)
+    stages = StageRecorder(deadline)
     profiler = cProfile.Profile(builtins=False)
     before = memory_sample()
     start, cpu = time.perf_counter(), time.process_time()
@@ -297,7 +431,11 @@ def profile_call(
             result = invoke()
         else:
             with observer.installed():
-                result = invoke()
+                if instrumentation == "stages":
+                    with stages.installed():
+                        result = invoke()
+                else:
+                    result = invoke()
         tick(deadline)
     except IncompleteError as exc:
         incomplete = str(exc)
@@ -336,6 +474,9 @@ def profile_call(
         "steps": observer.steps,
         "memo_evictions": observer.evictions,
         "callgraph": graph,
+        "stage_attribution": stages.report(elapsed, cpu_elapsed)
+        if instrumentation == "stages"
+        else None,
         "profile_overhead_is_not_gain": True,
         "scientific_admission_proved": False,
         "resource_assurance": (
@@ -354,7 +495,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cells-sha256")
     parser.add_argument("--centered-inner-cap", type=cap_rational)
     parser.add_argument(
-        "--instrumentation", choices=("none", "phases", "callgraph"), default="callgraph"
+        "--instrumentation",
+        choices=("none", "phases", "stages", "callgraph"),
+        default="callgraph",
     )
     parser.add_argument("--max-seconds", type=float, default=300)
     parser.add_argument(

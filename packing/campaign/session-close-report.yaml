@@ -3217,7 +3217,7 @@ sessions:
   title: "n17 Complete Coupling and Exact Replay"
   status: in_progress
   primary_bead: think-tvxs
-  phases: 2
+  phases: 5
   measured: false
   unmeasured_reason: >-
     declares no resource measurement

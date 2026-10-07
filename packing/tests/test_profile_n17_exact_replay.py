@@ -72,7 +72,7 @@ def test_callgraph_counts_admitted_partner_cover_reuse() -> None:
     }
 
 
-@pytest.mark.parametrize("instrumentation", ["none", "phases", "callgraph"])
+@pytest.mark.parametrize("instrumentation", ["none", "phases", "stages", "callgraph"])
 def test_complete_standing_replay_retains_exact_receipt(
     tmp_path: Path, instrumentation: str
 ) -> None:
@@ -240,12 +240,13 @@ def cli_inputs(tmp_path: Path) -> list[str]:
     ]
 
 
-def test_two_fresh_cli_processes_match_full_replay(tmp_path: Path) -> None:
+@pytest.mark.parametrize("diagnostic", ["callgraph", "stages"])
+def test_two_fresh_cli_processes_match_full_replay(tmp_path: Path, diagnostic: str) -> None:
     args = cli_inputs(tmp_path)
     baseline, candidate = tmp_path / "baseline.json", tmp_path / "candidate.json"
     for mode, path, extra in (
         ("none", baseline, []),
-        ("callgraph", candidate, ["--compare", str(baseline)]),
+        (diagnostic, candidate, ["--compare", str(baseline)]),
     ):
         done = subprocess.run(
             [
@@ -270,6 +271,85 @@ def test_two_fresh_cli_processes_match_full_replay(tmp_path: Path) -> None:
     assert report["verification_result"]["mode"] == "full"
     assert report["verification_result"]["counts"]["steps"] == 1
     assert report["post_replay_input_recheck_complete"]
+    if diagnostic == "stages":
+        records = report["stage_attribution"]["records"]
+        assert any(r["stage"] == "node_step_decode_or_eof" for r in records)
+        assert any(r["stage"] == "compress" and r["step"] == 0 for r in records)
+
+
+def test_stage_nested_wall_and_cpu_partition_does_not_double_count(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    now = [0.0]
+    monkeypatch.setattr(profile.time, "perf_counter", lambda: now[0])
+    monkeypatch.setattr(profile.time, "process_time", lambda: now[0] / 2)
+    recorder = profile.StageRecorder(time.monotonic() + 30)
+
+    def inner() -> int:
+        now[0] += 2
+        return 7
+
+    def outer() -> int:
+        now[0] += 1
+        result = recorder.measure("inner", inner)
+        now[0] += 3
+        return result
+
+    assert recorder.measure("outer", outer) == 7
+    records = {r["stage"]: r for r in recorder.report(8, 4)["records"]}
+    assert records["outer"]["inclusive_wall_seconds"] == 6
+    assert records["outer"]["exclusive_wall_seconds"] == 4
+    assert records["inner"]["exclusive_wall_seconds"] == 2
+    assert records["outer"]["exclusive_cpu_seconds"] == 2
+    report = recorder.report(8, 4)
+    assert report["unattributed_replay_wall_seconds"] == 2
+    assert report["unattributed_replay_cpu_seconds"] == 1
+
+
+@pytest.mark.parametrize("failure", ["runtime", "deadline"])
+def test_stage_hooks_restore_all_functions_after_failed_work(failure: str) -> None:
+    names = (
+        "check_seed",
+        "check_final",
+        "check_centered_final",
+        "load_object",
+        "check_step",
+        "check_partners",
+        "compress",
+        "derive_closure",
+        "check_collisions",
+        "check_cover",
+    )
+    originals = {name: getattr(standing, name) for name in names}
+    stream_originals = standing.NodeStream.__init__, standing.NodeStream.steps
+    recorder = profile.StageRecorder(time.monotonic() + 30)
+    expected = RuntimeError if failure == "runtime" else profile.IncompleteError
+
+    def broken() -> None:
+        if failure == "deadline":
+            recorder.deadline = time.monotonic() - 1
+            raise profile.IncompleteError("injected deadline")
+        raise RuntimeError("injected failure")
+
+    with pytest.raises(expected, match="injected"), recorder.installed():
+        recorder.measure("failing_work", broken)
+    assert {name: getattr(standing, name) for name in names} == originals
+    assert (standing.NodeStream.__init__, standing.NodeStream.steps) == stream_originals
+    assert recorder.stack == []
+    assert recorder.records[(None, "failing_work")]["failed_calls"] == 1
+
+
+def test_stage_expiry_retains_partial_attribution_without_acceptance() -> None:
+    def expired() -> dict[str, Any]:
+        raise profile.IncompleteError("synthetic incomplete")
+
+    report = profile.profile_call(
+        expired, instrumentation="stages", deadline=time.monotonic() + 30
+    )
+    assert report["status"] == "INCOMPLETE"
+    assert report["verification_result"] is None
+    assert report["stage_attribution"] is not None
+    assert report["mathematical_result_sha256"] is None
 
 
 def test_tampered_baseline_is_not_matched(tmp_path: Path) -> None:

@@ -1050,6 +1050,17 @@ The diagnostic retains step costs, memo evictions and memory observations;
 equal results establish instrumentation equivalence, not an optimization gain or a new
 geometric admission.
 
+[H-300](hypotheses/H-300-n17-full-square-partner-region.md) testsfull-squareSAT
+ontheacceptedparent; exp292completedfreshmethodmiss,
+with15/16wall-validindependentescapealternatives.
+
+[H-301](hypotheses/H-301-n17-paired-guard-conditioned-ownership.md)
+testsjointguardconditioning witha point-firstmonotonicstop
+andtheunchangednonzeroregionPRIMARY.
+
+[H-302](hypotheses/H-302-n17-stages-replay-observations.md) attributesexactreplaystages
+whilematchingacceptedinputbytes/mathreceipt, withnospeedupclaim.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
