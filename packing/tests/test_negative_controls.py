@@ -890,6 +890,7 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                     controls.SESSION184_RESULTS / name
                     for name in (
                         "exp-242-n17-core-stress",
+                        "exp-243-n17-charge-floor-pilot",
                         "exp-244-n17-local-minimum",
                         "exp-248-n17-local-half-composition",
                     )
@@ -924,6 +925,7 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                 "exp-285-pooled-parent-center-cases",
                 "exp-286-pooled-forbidden-cover",
                 "exp-287-pooled-relaxation-witness",
+                "exp-288-pooled-feasible-center",
             )
         } <= roots
     for control in specification["controls"]:

@@ -127,6 +127,7 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-285-pooled-parent-center-cases",
         "exp-286-pooled-forbidden-cover",
         "exp-287-pooled-relaxation-witness",
+        "exp-288-pooled-feasible-center",
     )
 )
 
@@ -379,6 +380,11 @@ PRUNE = frozenset(
                 "X048-session-179-selective-halving",
             )
         ),
+        # Historical charge-floor output is not a mutation target or command input.
+        # Preserve its 171,885 bytes in the primary tree; existing exact dependency
+        # copy-back remains authoritative if a reader later names it. This restores
+        # snapshot headroom after the final Session184 source, without raising192MiB.
+        SESSION184_RESULTS / "exp-243-n17-charge-floor-pilot",
         # These earlier exact n17 outputs are consumed by their scientific checkers,
         # not by the commands or targets in controls.yaml. Retain every primary object
         # in the repository; omit only unreferenced output from private workers.

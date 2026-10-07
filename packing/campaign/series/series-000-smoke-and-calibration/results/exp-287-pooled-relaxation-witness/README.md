@@ -13,6 +13,15 @@ supervisor samples and enforces4096MiB per live process in one owned process gro
 Group cleanup and wall limits are retained; no aggregate RSS enforcement or
 instantaneous peak claim.
 
+Actual trial completed as a criterion-miss in1.10817s supervision (rc0, normal cleanup).
+The fixedrow26piece0 square failed only numeric container containment; all owner0 strict
+and all16 foreign avoidance checks passed.
+Fresh finite reconstruction passed and its core equals generation.
+No alternate candidate or packing/exclusion claim.
+
+Two sampled-RSS readings observed only the parent, maximum1,343,488B. Scientific
+children completed between samples; their RSS maxima remain unavailable.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

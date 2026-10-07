@@ -12,7 +12,7 @@ preserves the launch assessment; the
 records execution and costs.
 The mathematical analysis and selected proof interfaces belong to
 [Astra’s research report](../research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md).
-This is an interim checkpoint through exp286; subsequent results require an explicit
+This is an interim checkpoint through exp287; subsequent results require an explicit
 update.
 
 ## Current Theorem State
@@ -90,14 +90,22 @@ slice or census admission.
 
 ## Selected Next Mathematical Discriminator
 
-The selected prospective discriminator is a verified single-square relaxation witness.
-It fixes the rational angle parameter `53/128`, takes the first pooled-uncovered piece
-on the interior row, and selects one centre deterministically from the exact sweep.
-Acceptance requires exact container containment, every conditional owner0 hull vertex
-strictly inside the square, and no foreign owned hull meeting its open interior.
-Boundary-only contact is permitted.
-A fresh reconstruction must check those predicates with the same fixed choice.
-Failure does not authorize another angle or centre in the same experiment.
+The fixed single-square discriminator
+[exp287](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md)
+completed construction and fresh verification in1.11 seconds.
+At the fixed rational angle parameter `53/128`, its first deterministic centre passed
+every conditional owner0 strict-ownership test and all16 foreign open-interior avoidance
+tests, but failed numeric-container containment.
+This is a completed recipe miss; it establishes no valid one-square relaxation witness.
+No alternate centre or angle was evaluated.
+
+The next separately registered recipe will impose exact fixed-angle container walls and
+all conditional owner0 body-axis strips before selecting the first centre outside the
+closed foreign collision regions.
+Its fixed `2^-20` ownership margin and exclusion of boundary-only foreign contact make
+the search conservative: a completed miss would not prove that no admissible pose
+exists. A selected candidate must still pass every original exp287 pose predicate in a
+fresh reconstruction.
 
 Such a witness would diagnose missing cross-owner constraints; it would not be a
 17-square packing. If it passes, the next different information source is the partners’

@@ -1028,6 +1028,13 @@ pooled open-square obstacle.
 It is only an owned-point relaxation witness, with no17-square packing or exclusion
 claim.
 
+[H-297](hypotheses/H-297-n17-pooled-feasible-center.md) tests exact fixed-angle centers
+after applying numeric walls and strict conditional owned-point strips.
+The first uncovered retained piece supplies one candidate, with no alternate after
+calibration failure.
+A witness is one-square relaxation consistency; a miss proves no exclusion or
+fixed-angle infeasibility.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

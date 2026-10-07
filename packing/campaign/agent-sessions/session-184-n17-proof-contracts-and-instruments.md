@@ -567,7 +567,7 @@ session:
     commitment: BC-430
     objective: Complete the exact pooled foreign-owned forbidden-cover instrument and
       source reviews, then register and interpret its bounded finite union trial.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Exp285 completed its finite recipe without a contradiction; selected
       next mathematical interface uses pooled foreign forbidden-region union coverage.
@@ -582,12 +582,44 @@ session:
       to packing witnesses or unaccepted exp284 geometry to premises.
     fallback: Continue proof interpretation and bounded independent checkpoint validation
       beside the mathematical source lane; no unchanged long conditional replay.
-    outcome: null
+    outcome: H295/286 complete fresh finite criterion-miss20.73s on all18pieces. H296/287
+      complete1.11s containment-only criterion-miss; owner0 strict and all16foreign avoidance
+      passed. Source controls and independent reviews clear; no exclusion/admission.
+      CI repairedfast23controls pass1.19s; real symbolic rebuild remains in deep checkpoint.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md
-    stop_reason: null
+    stop_reason: Planned boundary15:37:42Z; observedclose2026-10-07T15:41:37Z, 235s late
+      while terminal metadata and mathematical interpretation were recorded.
     next_action: Review new pooled forbidden-cover source and controls before H295/exp286
       import; original accepted parent pools only, no inheritedQ0+K dominance claim.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-430
+    objective: Complete H297 fixed-angle feasible-center source and controls, then preregister
+      and interpret its bounded finite witness trial before the final research cutoff.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Exp287 missed numeric containment only; a separate fixed-angle recipe
+      clips necessary exact walls before selecting a candidate, with no alternate287pose.
+    budget_minutes: 31
+    started_at: '2026-10-07T15:37:42Z'
+    deadline_at: '2026-10-07T16:08:33Z'
+    expected_output: Reviewed exact source/controls, separateH297/exp288 preregistration,
+      fresh finite reconstruction and scoped relaxation-witness or criterion-miss disposition.
+    validation_command: Focused source controls, independent reviews and preregistration;
+      isolated ordinary98 checkpoint runs beside mathematics on predecessor969588d.
+    kill_condition: No target without frozen criterion/source/controls; research stops16:08:33Z.
+      Preserve incomplete/refused evidence and no global/census promotion.
+    fallback: Retain proved interfaces and exact negative recipes for closeout; no unregistered
+      alternative candidate or incomplete284geometry.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md
+    stop_reason: null
+    next_action: Review fixed-center source and controls before separate288 registration;
+      retain current accepted original-parent premises and sampledRSS per live process.
   primary_bead: think-ipel
   status: in_progress
   budget:
@@ -1935,10 +1967,13 @@ session:
     - sharedadmissionledgermutation
   - task: Astra pooled forbidden-union mathematical source review
     operator: GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Union and fixedfirst-gap witness source reviews complete; actual286/287
+      finite criterion-misses retained, no exclusion/admission.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md
     files:
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     checks: []
@@ -1962,10 +1997,13 @@ session:
     - sharedadmissionledgermutation
   - task: Sol pooled forbidden-union source and controls
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Union and fixedfirst-gap witness source reviews complete; actual286/287
+      finite criterion-misses retained, no exclusion/admission.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md
     files:
     - packing/devtools/probe_n17_pooled_forbidden_cover.py
     - packing/tests/test_probe_n17_pooled_forbidden_cover.py
@@ -1991,10 +2029,13 @@ session:
     - sharedadmissionledgermutation
   - task: Sol independent forbidden-union review and preregistration
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Union and fixedfirst-gap witness source reviews complete; actual286/287
+      finite criterion-misses retained, no exclusion/admission.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md
     files:
     - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
     - SYNOPSIS.md
@@ -2007,6 +2048,91 @@ session:
     budget_minutes: 30
     started_at: '2026-10-07T15:07:42Z'
     deadline_at: '2026-10-07T15:37:42Z'
+    expected_output: Independent mechanical source/control review and fully frozen preregistration.
+    validation_command: Focused target-free controls and independent source review.
+    kill_condition: Preserve honest resource stops and refuse failed custody or strict-core joins.
+    fallback: Rotate to ready proof support beside the other mathematical lanes.
+    write_scope:
+    - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
+    - SYNOPSIS.md
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Astra fixed-angle feasible-center mathematical source review
+    operator: GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks: []
+    uncertainty: A completed uncovered region is a relaxation gap, not a feasible packing.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete source reviews and preregistration before any actual feasible-center evaluation.
+    phase: 18
+    budget_minutes: 31
+    started_at: '2026-10-07T15:37:42Z'
+    deadline_at: '2026-10-07T16:08:33Z'
+    expected_output: Mathematical source review and scoped finite outcome interpretation.
+    validation_command: Focused target-free controls and independent source review.
+    kill_condition: Preserve honest resource stops and refuse failed custody or strict-core joins.
+    fallback: Rotate to ready proof support beside the other mathematical lanes.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol fixed-angle feasible-center source and controls
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/devtools/probe_n17_pooled_feasible_center.py
+    - packing/tests/test_probe_n17_pooled_feasible_center.py
+    checks: []
+    uncertainty: A completed uncovered region is a relaxation gap, not a feasible packing.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete source reviews and preregistration before any actual feasible-center evaluation.
+    phase: 18
+    budget_minutes: 31
+    started_at: '2026-10-07T15:37:42Z'
+    deadline_at: '2026-10-07T16:08:33Z'
+    expected_output: Retained source, exact fixed-wall/strict-owned controls and resource/status readiness.
+    validation_command: Focused target-free controls and independent source review.
+    kill_condition: Preserve honest resource stops and refuse failed custody or strict-core joins.
+    fallback: Rotate to ready proof support beside the other mathematical lanes.
+    write_scope:
+    - packing/devtools/probe_n17_pooled_feasible_center.py
+    - packing/tests/test_probe_n17_pooled_feasible_center.py
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol independent feasible-center review and preregistration
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
+    - SYNOPSIS.md
+    checks: []
+    uncertainty: A completed uncovered region is a relaxation gap, not a feasible packing.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete source reviews and preregistration before any actual feasible-center evaluation.
+    phase: 18
+    budget_minutes: 31
+    started_at: '2026-10-07T15:37:42Z'
+    deadline_at: '2026-10-07T16:08:33Z'
     expected_output: Independent mechanical source/control review and fully frozen preregistration.
     validation_command: Focused target-free controls and independent source review.
     kill_condition: Preserve honest resource stops and refuse failed custody or strict-core joins.
@@ -2091,9 +2217,9 @@ session:
   - Exp273 accepted conservativeinventory10.49s andexp275 acceptedexactcapjoin1.21s atclean3575c02,
     no newbound/censuschange.
   stop_reason: null
-  next_action: Retain completed H295/exp286 finite criterion-miss; finish H296/exp287
-    one-square relaxation-witness source controls and preregistration before target intake.
-    Keep frozen deep validation beside mathematics and preserve every verdict.
+  next_action: Execute the registered H297/exp288 fixed-angle feasible-center trial under120s combined,
+    then interpret the exact finite disposition and W3 route-selection memo. Complete the isolated predecessor
+    ordinary checkpoint and additive later-source floors without conflating source coverage.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T141342Z.yaml
 ---

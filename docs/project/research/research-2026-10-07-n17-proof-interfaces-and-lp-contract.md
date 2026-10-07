@@ -2732,6 +2732,75 @@ region limits; the square has four vertices and its intersection with a pool has
 at most 132. The existing sweep edge and comparison limits still apply. Unrelated
 accepted metadata remains identity-bound without being reinterpreted numerically.
 
+H-296/exp-287 completed construction and fresh reconstruction in 1.108166916
+seconds. Both report `criterion_missed`, with fresh `verification_passed: true` and
+normal cleanup. The fixed candidate on row 26, piece 0, passes every conditional
+owner-0 strict-interior test and every foreign open-interior avoidance test. Only
+numeric-container containment fails. Consequently it is not an accepted
+relaxation witness. This outcome identifies a weakness in the candidate selection;
+it does not justify treating the pooled ownership constraints as sufficient.
+
+### Exact Fixed-Angle Centre Construction
+
+The separately selected H-297/exp-288 contract keeps $\tau=53/128$ and constructs
+admissible centre domains before choosing a point. It uses all exp-286 row-26
+pieces in retained order, the same original-parent pools, and the complete
+exp-287 result as selection history. Neither the exp-287 candidate nor its outcome
+is changed.
+
+Set $h=(c(\tau)+s(\tau))/2$ and $\mu=2^{-20}$. For each retained piece $P$, clip it
+first to $[o+h,U-o-h]^2$, the exact centre box for this angle. Then for every vertex
+$q$ of conditional $Q_0$, both $n=u,v$, and both $\eta\in\{-1,1\}$, impose
+
+$$
+\eta n\mathbin{\cdot}x
+\le1/2-\mu+\eta n\mathbin{\cdot}q.
+$$
+
+Call the resulting closed polygon $T$. Every centre in $T$ gives exact numeric
+containment and places the whole $Q_0$ strictly inside square 0. Points and segments
+remain valid domains. Empty $T$ means this sufficient construction supplies no
+candidate in that piece; it does not exclude its angular interval. The fixed
+positive margin can discard poses whose strict owned-point margin is smaller.
+
+Let $S_\tau$ be the exact closed unit square centred at zero, with vertices
+$(\eta u+\zeta v)/2$. This is the full square, rather than the common inner core.
+For each foreign owner form
+
+$$
+F_j=Q_j-S_\tau.
+$$
+
+A centre outside all these closed regions makes $x+S_\tau$ disjoint from every
+foreign pool, hence also avoids every foreign point in its open interior. Search
+the nonempty $T$ polygons in retained piece order. If exact closed-union coverage
+holds, proceed to the next piece. At the first uncovered piece, use the preceding
+deterministic sweep/gap construction, including its degenerate-domain rule, and
+stop at its first candidate. Independently replay all exp-287 pose predicates.
+Their failure would contradict the new construction's guarantees and is a
+calibration refusal; it does not authorize another candidate.
+
+A freshly verified candidate is an `owned_point_relaxation_witness` for one square
+at this fixed angle. If every $T$ is empty or covered, the result is
+`criterion_missed` for this recipe. Closed foreign obstacles deliberately exclude
+boundary-only contacts that exp-287's open-interior test permits. Together with
+the positive ownership margin, that conservatism prevents a complete miss from
+being interpreted as infeasibility of the full fixed-angle ownership relaxation.
+There is still no seventeen-square packing, angular exclusion or census admission.
+
+Bind the accepted exp-286 and exp-287 descriptors and complete fresh receipts by
+byte identity. Fresh verification reconstructs every $T$, foreign region, coverage
+decision and selected pose; it does not reread the original bulk proof or claim a
+new parent replay. Freeze one worker, 60 seconds each for construction and fresh
+verification, 120 seconds combined, a sampled 4 GiB RSS guard per live process and
+owned-group cleanup. Each accepted input is at most 10 MiB, output at most 64 MiB,
+and normalized geometric rationals at most 4,096 bits. Pools have at most 128
+vertices, centre polygons 256, foreign Minkowski regions 132, and the search has
+at most 256 row-26 pieces. Limit all foreign vertex-difference proposals to 8,192
+in total. Keep the existing 2,048-edge and 2,100,000-comparison sweep ceilings and
+the deadline checks around the trusted exact primitive. Registration and source
+review must precede this new target.
+
 Necessary centre slabs from owned points offer another possible refinement. For
 a rational direction $n$ and a certified upper bound $H_J(n)$ on the unit square's
 support over $J$, every physical centre satisfies

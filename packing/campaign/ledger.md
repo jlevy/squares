@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 17 | think-ipel | Retain completed H295/exp286 finite criterion-miss; finish H296/exp287 one-square relaxation-witness source controls and preregistration before target intake. Keep frozen deep validation beside mathematics and preserve every verdict. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 18 | think-ipel | Execute the registered H297/exp288 fixed-angle feasible-center trial under120s combined, then interpret the exact finite disposition and W3 route-selection memo. Complete the isolated predecessor ordinary checkpoint and additive later-source floors without conflating source coverage. |
 
 ### Workflow summary
 
@@ -210,7 +210,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 44 | 1 |
-| `research-loop` | 37 | 4 | 142 | 9 |
+| `research-loop` | 37 | 4 | 143 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 216 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 217 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1166,17 +1166,19 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-293 | blocked | proof | The fixed parent-aware owned-hull initialization and one no-refinement |  | 2 |  | 10.5m wall |
 | H-294 | refuted | proof | The original accepted-parent kernel pool and four closed centre cases  |  | 1 |  | 21s wall |
 | H-295 | refuted | proof | Exact pooled foreign-owned forbidden regions cover the complete accept |  | 1 |  | 21s wall |
-| H-296 | running | proof | A deterministic exact one-square witness survives every pooled owned-p |  | 1 |  |  |
+| H-296 | refuted | proof | A deterministic exact one-square witness survives every pooled owned-p |  | 1 |  | 1s wall |
+| H-297 | needs review | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
+| exp-288 | H-297 | in-progress | Registered at2026-10-07T15:49:00Z before any target intake; fixed construction/fresh phases under120s supervisor. |
 
 ## Rounds
 
-### rejected (40)
+### rejected (41)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1220,6 +1222,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-243 | series-000 | 17 | Claude Session 167; lane B built the pilot, the coordinator replayed it from a clean worktree | H-262 | The registered claim (at most 10^4 survivors) is false for every D4-symmetric per-cell floor vector by the ceiling theorem; R068's dictionary at U leaves 7,703,312, rejecting that engine outright. The exact six-sweep instrument is unnecessary. Asymmetric and nonlinear floors remain open and belong to a new hypothesis. |
 | exp-285 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-294 | Completed finite recipe missed its primary criterion: matched unpooled and pooled unsplit checks and all four closed cases remain unresolved. Fresh complete reconstruction passed and its report core matches generation; no conditional/unconditional exclusion, census admission or global result. Supervision20.74094s rc0/normalcleanup; construction9.95174s and fresh9.85035s. Original-parent pool calibration passed (543raw points,926used vertices), no exp284 geometry. |
 | exp-286 | series-000 | 17 | Sol coordinator registers/freezes/launches/disposes in Session184. | H-295 | Completed finite recipe missed: all18 closed pieces remain uncovered in both matched ordinary-final and pooled tests (row25=6,row26=4,row27=8). Fresh complete reconstruction passed; all exclusion/admission/dominance flags false. Clean5c195 source;543raw poolpoints/926usedvertices, same accepted original-parent custody, no284geometry. Supervision20.73212s rc0/normalcleanup; construction9.84499s and fresh10.04225s. |
+| exp-287 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-296 | Completed deterministic recipe missed only exact numeric container containment; all conditional owner0 strict tests and all16 foreign open-avoidance checks passed. Fixedrow26piece0/tau53/128; no alternate candidate. Fresh reconstruction passed, clean969588d source, all6blob identities equal and all3 accepted286 input byte identities match. Supervision1.10817s rc0/normalcleanup; phases0.15160s+0.14876s. No17packing, exclusion, capture, census or global result. |
 
 ### exhausted (1)
 
@@ -1430,7 +1433,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-287 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-296 | Registered at2026-10-07T15:31:42Z before witness geometry intake;20min preparation lease, separate120s combined trial. |
+| exp-288 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-297 | Registered at2026-10-07T15:49:00Z before any target intake; fixed construction/fresh phases under120s supervisor. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1477,10 +1480,11 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-231 | H-236 | 397.1m wall | timebox | The top tree and 198 closed subtree files in attic/rung0 of  | Run the 58 wall-cap subtrees with the unchanged Amendment 1  |
 | exp-257 | H-275 | 555.2m wall | timebox | Draw 31 of packing/campaign/explorations/X048-session-182-ov |  |
 | exp-284 | H-293 | 10.3m wall | timebox | Preserve the exp-284 production, incomplete verification and |  |
+| exp-288 | H-297 |  | dependency |  |  |
 
 ## Effort
 
-216 rounds, 2512.1 agent-minutes, 5779.5 wall-minutes.
+217 rounds, 2512.1 agent-minutes, 5779.6 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 
