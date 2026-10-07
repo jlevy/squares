@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 231 | 61 confirmed; 36 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted; 1 needs review |
-| Experiments | 217 | 81 accepted; 41 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 231 | 62 confirmed; 36 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 217 | 82 accepted; 41 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -573,6 +573,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n17 W3 Capacity and Route Selection](docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md) | research synthesis | record | retained | — |
 | [Fixed-Angle Feasible-Center Relaxation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/README.md) | research synthesis | record | retained | — |
 | [One-Square Pooled Relaxation Witness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/README.md) | research synthesis | record | retained | — |
 | [Pooled Forbidden Cover](packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/README.md) | research synthesis | record | retained | — |
@@ -5819,7 +5820,7 @@ round that names the hypothesis, control roles included.
 | [H-294](packing/campaign/hypotheses/H-294-n17-pooled-parent-center-cases.md) | refuted | Pooled original-parent unsplit/four-case conditional exclusion | 1 | Completed20.74s finite criterion-miss; unsplit/allfour unresolved, no284geometry |
 | [H-295](packing/campaign/hypotheses/H-295-n17-pooled-forbidden-cover.md) | refuted | Pooled foreign-owned forbidden union on every closed guard piece | 1 | Completed20.73s finite criterion-miss; all18pieces uncovered, no exclusion |
 | [H-296](packing/campaign/hypotheses/H-296-n17-pooled-relaxation-witness.md) | refuted | One deterministic exact pooled owned-point relaxation witness | 1 | Completed1.11s containment-only criterion-miss; ownstrict/foreignavoid pass |
-| [H-297](packing/campaign/hypotheses/H-297-n17-pooled-feasible-center.md) | needs review | Wall-first fixed-angle center under pooled owned facts | 1 | Registered120s construction/fresh recipe; no target verdict |
+| [H-297](packing/campaign/hypotheses/H-297-n17-pooled-feasible-center.md) | confirmed | Wall-first fixed-angle center under pooled owned facts | 1 | Accepted1.12s exact one-square point-relaxation witness; no packing/exclusion |
 
 ### Confirmed
 
@@ -6420,7 +6421,7 @@ archive beside it.
 | [exp-285](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md) | 17 | target | H-294 | Original-parent pooled finite unsplit/four-case proof | Fresh finite reconstructionPASS; unsplit/allfour unresolved20.74s, no exclusion | rejected |
 | [exp-286](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md) | 17 | target | H-295 | Pooled foreign-owned exact forbidden union | Fresh reconstructionPASS; all18pieces uncovered20.73s, no exclusion | rejected |
 | [exp-287](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md) | 17 | target | H-296 | One exact square on first pooled-uncovered guard piece | Fresh reconstructionPASS; fixedcandidate missesnumericcontainer only | rejected |
-| [exp-288](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-288-h297-pooled-feasible-center.md) | 17 | target | H-297 | Wall-first fixed-angle feasible center | Registered120s recipe; exact fresh pose reconstruction required | in-progress |
+| [exp-288](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-288-h297-pooled-feasible-center.md) | 17 | target | H-297 | Wall-first fixed-angle feasible center | Fresh exact posePASS; centered/ownstrict/foreignavoid allpass | accepted |
 
 ### Cost and provenance
 
@@ -6642,7 +6643,7 @@ archive beside it.
 | exp-285 | Construction60s/fresh60s inside120s;4GiB sampled | 20.74s | — | criterion | Completed finite criterion-miss; unsplit/allfour unresolved, no284geometry |
 | exp-286 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | 20.73s | — | criterion | Completed finite criterion-miss; all18pieces uncovered, no284geometry |
 | exp-287 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | 1.11s | — | criterion | Fixedfirstcandidate containment miss; ownstrict/foreignavoid pass |
-| exp-288 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | — | — | — | Registered wall-first finite recipe |
+| exp-288 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | 1.12s | — | criterion | Accepted wall-first one-square relaxation |
 
 ### What the 217 rounds jointly establish
 

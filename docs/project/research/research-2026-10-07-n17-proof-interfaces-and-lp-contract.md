@@ -2819,6 +2819,46 @@ These new implications are the sole Astra agent's hand derivations, with the
 independent mathematical review and machine-proof limitations stated at the start
 of this document. Registration and source review precede their target use.
 
+### Actual Exp-288: A Feasible Owned-Point Relaxation Pose
+
+The registered construction and fresh reconstruction both accepted
+`owned_point_relaxation_witness` at $\tau=53/128$ in row 26, piece 0. The
+[certificate](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/certificate.json)
+and [fresh receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/replay.json)
+retain the exact centre
+
+$$
+x=\left(\frac{5430403782687847}{7677200000000000},
+\frac{66243855429262412554911630273}{66485768927696869600000000000}\right).
+$$
+
+Exact containment in the centered numeric container, every strict conditional
+owner-0 ownership test and every foreign open-interior avoidance test pass. All
+sixteen foreign pool intersections with the closed square are empty. One square
+vertex has $x$-coordinate exactly $o=93981279/400000000000$, so this witness touches
+the container's left wall; subsequent closed-domain arguments must retain that
+boundary. The selected feasible centre polygon is a nondegenerate triangle.
+
+Construction took 0.1938 seconds and fresh reconstruction 0.2004 seconds; the
+supervised run completed normally in 1.1204 seconds with cleanup. The fresh
+receipt reports `verification_passed=true`. It inherits the accepted parent and
+root premises through the frozen six input identities, and does not claim to
+replay the original bulk geometry or recheck the root.
+
+This is constructive evidence that the specific retained-point relaxation leaves
+a pose feasible. It is stronger evidence about that relaxation than another
+failed exclusion search. It neither places the other sixteen squares nor
+excludes the closed guard, proves capture, admits a census entry or changes the
+global side bound. All such scope flags remain false. It also does not prove that
+every possible additional owned-point certificate would fail.
+
+The next selected mathematical direction is complete partner-pose coupling,
+using this exact pose as a fixed control and requiring a checked nonzero closed
+region or complete guard result for useful coverage. No new target follows
+automatically. The geometric interpretation retains the sole-Astra hand-proof
+assurance stated above; exact finite reconstruction is not an independent
+mathematical review of the global composition.
+
 ## A Future Label-Bijection Extension
 
 The current consumer requires all seventeen transported owners to equal the endpoint's

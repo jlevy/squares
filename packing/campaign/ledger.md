@@ -1167,14 +1167,13 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-294 | refuted | proof | The original accepted-parent kernel pool and four closed centre cases  |  | 1 |  | 21s wall |
 | H-295 | refuted | proof | Exact pooled foreign-owned forbidden regions cover the complete accept |  | 1 |  | 21s wall |
 | H-296 | refuted | proof | A deterministic exact one-square witness survives every pooled owned-p |  | 1 |  | 1s wall |
-| H-297 | needs review | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  |  |
+| H-297 | confirmed | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  | 1s wall |
 
 ## Needs review — held for a human, not decided
 
 | id | hypotheses | decision | why it was not decided |
 | --- | --- | --- | --- |
 | exp-050 | H-054 | unresolved | The authorized source-semantics measurement stops at ordered E1 reason 3, attribution-unbound, with zero cells. This leaves H-054 unresolved and instrument_ready false; the terminal decision awaits BC-120/BC-121 review. |
-| exp-288 | H-297 | in-progress | Registered at2026-10-07T15:49:00Z before any target intake; fixed construction/fresh phases under120s supervisor. |
 
 ## Rounds
 
@@ -1326,7 +1325,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (81)
+### accepted (82)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1411,6 +1410,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-277 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-290 | Accepted fresh root/cap/H289 INPUT and phase/object joins; parent and clean producer-free child replay the same original full17 Frame,544 seed rows and16 distinct non-6 updates through EOF. All17 full-root endpoint poses retained and all49 exact intervals contain zero. Readiness passes; all four geometric predicates remain false, with no exclusion/census/capture-tree/global admission. Astra mathematical read and independent Sol metadata review clear. |
 | exp-280 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Full independent centered PASS_STALL:544 seedrows,1024 updaterows,16steps and25134984 collisionfacets; hull48 and exact U/V/offset/B/T/full24world/object/H290all17endpoint joins match. Fresh parent cap/root pass; child rootjoinfalse/parenttrue. Astra mathematical and Sol metadata acceptance clear. Supervisor106.493889s rc0/cleanupcomplete, standing104.68s; no exclusion/admission/globalclaim. |
 | exp-282 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-292 | Actual frozen scoped-input replication completed8.38847s supervised wall, rc0/cleanupcomplete. Generation and fresh reconstruction agree on conditional_gain_candidate with canonicalcertificate/H290/native/context joins. Endpoint control nonempty and strictly inside; all four target cardinal gains exceed1/1024, all four all-angle gains negative. Three closedpieces25/26/27 include singleton seams,96exactplanes and5selectedtargetpoints. Accepted finite conditionalownership gain only: no producer, propagation, exclusion, admission or globalproof. |
+| exp-288 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-297 | Completed1.12039s supervision; construction0.19380s/fresh0.20042s, rc0/normalcleanup. First row26piece0 candidate at tau53/128 satisfies exact centered container, all conditional owner0 strict and all16 foreign open-avoidance predicates. Left-wall touch retained. Fresh verification true; clean56370233 source/seven matching blobs and six frozen byte joins. Specific point relaxation admits one square; no17packing, capture, exclusion, census or global result. Sole-Astra actual semantic acceptance recorded after target. |
 
 ### baseline (12)
 
@@ -1428,12 +1428,6 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-288 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-297 | Registered at2026-10-07T15:49:00Z before any target intake; fixed construction/fresh phases under120s supervisor. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1480,7 +1474,6 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-231 | H-236 | 397.1m wall | timebox | The top tree and 198 closed subtree files in attic/rung0 of  | Run the 58 wall-cap subtrees with the unchanged Amendment 1  |
 | exp-257 | H-275 | 555.2m wall | timebox | Draw 31 of packing/campaign/explorations/X048-session-182-ov |  |
 | exp-284 | H-293 | 10.3m wall | timebox | Preserve the exp-284 production, incomplete verification and |  |
-| exp-288 | H-297 |  | dependency |  |  |
 
 ## Effort
 

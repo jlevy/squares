@@ -26,8 +26,11 @@ experiment:
     role: target
   method:
     operator: Sol coordinator registers/freezes/supervises/disposes in Session184.
-    control: Author22 target-free controls passed1.37s; independent22 passed0.99s; Ruff/BasedPyright
+    control: 'Author22 target-free controls passed1.37s; independent22 passed0.99s; Ruff/BasedPyright
       zero; sole-Astra mathematical source review clear. Actual288 geometry unrun before registration.
+      Actual: fresh complete reconstruction passed; independent metadata audit joins all six input
+      byte identities, same core and seven source blobs. Sole-Astra actual semantic acceptance confirms
+      one-square point-relaxation scope; only parent RSS8,847,360B sampled, scientific child RSS unavailable.'
     candidate: Fixed tau53/128, same accepted original-parent pools/H290/exp280/H292-282 and guardI,
       no284geometry. ALL286row26pieces in retainedorder; T=P clipped FIRST to exacttau numeric walls
       with h=(c+s)/2 and conditional Q0 signed body strips using mu=2^-20. Foreign F_j=Q_j-EXACT closed
@@ -46,9 +49,18 @@ experiment:
       comparisons before trusted exactsweep, deadlinebefore/after plus supervisor. No unreduced homogeneous
       integer-product cap or allocation-time/instantaneous-peak claim.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center
-  results: []
+    commit: 5637023303824a5723edf217747eb0f05ad63243
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the first wall-first fixed-angle center satisfy every retained owned-point relaxation
+      condition?
+    outcome: criterion_met
+    checked_by: Fresh complete reconstruction verification_passed=true with identical core; independent
+      metadata/source/custody audit and sole-Astra actual semantic acceptance. No geometry rerun.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: After accepted complete exp286 union miss and exp287 containment-only miss
       with fresh verification, reconstruct every row26 residual piece in retained order. Clip exact
       fixed-angle numeric walls and all conditional owner0 signed strips first. Continue empty/closed-covered
@@ -57,18 +69,21 @@ experiment:
       no alternate. All pieces empty/covered is only criterion-missed, not exclusion, because closed
       obstacles and the strict fixed margin are conservative. No17packing, capture, census, unconditional/global
       claim.
-    reason: Registered at2026-10-07T15:49:00Z before any target intake; fixed construction/fresh phases
-      under120s supervisor.
-    needs_review: true
+    reason: Completed1.12039s supervision; construction0.19380s/fresh0.20042s, rc0/normalcleanup.
+      First row26piece0 candidate at tau53/128 satisfies exact centered container, all conditional
+      owner0 strict and all16 foreign open-avoidance predicates. Left-wall touch retained. Fresh verification
+      true; clean56370233 source/seven matching blobs and six frozen byte joins. Specific point relaxation
+      admits one square; no17packing, capture, exclusion, census or global result. Sole-Astra actual
+      semantic acceptance recorded after target.
+    needs_review: false
   effort:
-    stopped_by: dependency
+    stopped_by: criterion
     timebox: One worker60s construction+60s fresh inside120s combined, TERM120/KILL130; sampled4096MiB
       PER live process with ownedgroup wall/cleanup. Each acceptedinput10MiB/output64MiB; normalizedgeometry4096bits;
       pool128,T256,exactF132,<=256row26pieces,totalforeign Minkowski vertex pairs8192; existing2048edges/2100000prospective
       comparisons before trusted exactsweep, deadlinebefore/after plus supervisor. No unreduced homogeneous
       integer-product cap or allocation-time/instantaneous-peak claim.
-  lease:
-    expires: '2026-10-07T16:09:00Z'
+    wall_seconds: 1.12
 ---
 # Fixed-Angle Feasible-Center Relaxation
 

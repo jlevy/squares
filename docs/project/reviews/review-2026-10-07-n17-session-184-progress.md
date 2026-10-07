@@ -12,8 +12,10 @@ preserves the launch assessment; the
 records execution and costs.
 The mathematical analysis and selected proof interfaces belong to
 [Astra’s research report](../research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md).
-This is an interim checkpoint through exp287; subsequent results require an explicit
-update.
+The final selected mathematical result is exp288. The
+[capacity and route-selection review](../research/research-2026-10-07-n17-w3-capacity-and-route-selection.md)
+uses these results to prioritize the next block; final engineering evidence is recorded
+separately below.
 
 ## Current Theorem State
 
@@ -27,10 +29,10 @@ The fixed lower-bound charge has only `2.5e-8` of additional runway, so another
 refinement of that unchanged charge cannot bridge the remaining gap.
 
 The composed proof still needs a complete closed-cell cover, exclusions outside the
-endpoint family, global capture into a proved local target, and the local family
-theorem.
-The existing local result assumes a specified frame and45 non-slider coordinates
-within `1/5000`; it does not supply global capture.
+endpoint family, global capture into a proved local target, and a valid application of
+the local family theorem under checked premises.
+The existing local result assumes a specified frame and45 non-slider coordinates within
+`1/5000`; it does not supply global capture.
 Optimality and uniqueness remain distinct goals.
 
 The current ordinary U-cap exclusion ledger has60 admitted entries, leaving36,768 states
@@ -88,7 +90,7 @@ The common strict cores passed their exact checks.
 This is a complete miss for the frozen union-cover recipe, with no excluded angular
 slice or census admission.
 
-## Selected Next Mathematical Discriminator
+## Reduced-Model Witness and Next Mathematical Step
 
 The fixed single-square discriminator
 [exp287](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md)
@@ -99,20 +101,29 @@ tests, but failed numeric-container containment.
 This is a completed recipe miss; it establishes no valid one-square relaxation witness.
 No alternate centre or angle was evaluated.
 
-The next separately registered recipe will impose exact fixed-angle container walls and
-all conditional owner0 body-axis strips before selecting the first centre outside the
-closed foreign collision regions.
-Its fixed `2^-20` ownership margin and exclusion of boundary-only foreign contact make
-the search conservative: a completed miss would not prove that no admissible pose
-exists. A selected candidate must still pass every original exp287 pose predicate in a
-fresh reconstruction.
+The separately registered
+[exp288](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-288-h297-pooled-feasible-center.md)
+imposed exact fixed-angle container walls and all conditional owner0 body-axis strips
+before selecting the first centre outside the closed foreign collision regions.
+Construction and fresh reconstruction completed in0.194 and0.200 seconds; bounded
+supervision completed in1.120 seconds with cleanup.
+Its first candidate on row26/piece0 passed every original pose predicate: container
+containment, conditional strict ownership and avoidance of all16 foreign owned hulls.
+The square touches the container’s left wall, so retaining closed boundaries matters.
 
-Such a witness would diagnose missing cross-owner constraints; it would not be a
-17-square packing. If it passes, the next different information source is the partners’
-complete centre and angle covers, rather than more point pooling.
-That prospective proof must preserve every closed partner row and piece.
+This constructive witness establishes that the specific retained-point relaxation admits
+this pose.
+It supplies no17-square packing, global counterexample, capture, angular-slice
+exclusion or census admission.
+The fixed `2^-20` ownership margin and closed foreign obstacles remain conservative
+restrictions; no exhaustive fixed-angle search is claimed.
+
+The selected next source of information is the partners’ complete centre and angle
+covers. A stronger coupled-cover implication must preserve every closed partner row and
+piece and prove exclusion or capture of a declared closed region.
 The tested finite recipes supply no proved dominance over one another, and no exp284
-geometry is used. Construction and replay each have a60-second ceiling,120 seconds
+geometry is used.
+Exp288 construction and replay each have a60-second ceiling,120 seconds
 combined. The actual supervisor samples a4GiB RSS limit per live process and cleans up
 the owned process group; it supplies no allocation-time hard cap or aggregate-group
 enforcement. Exp286’s retained launch and manifest incorrectly named aggregate

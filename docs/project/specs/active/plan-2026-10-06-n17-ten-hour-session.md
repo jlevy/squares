@@ -291,7 +291,7 @@ claim a completed certified handover.
 No automation, external worker dispatch or overnight launch is created by this plan
 alone.
 
-## Mid-Session Evidence and Selected Next Work
+## Session Evidence and Selected Follow-Up
 
 At the five-hour checkpoint, the original U-cap census has60 admitted entries and36,768
 states /4,683 D4 orbits remaining, with the endpoint retained.
@@ -336,12 +336,13 @@ The separately registered
 tested the union of strict collision regions under the same angular guard.
 Construction and fresh finite verification completed in20.73 seconds; all18 necessary
 pieces remained uncovered in both matched controls.
-The selected next discriminator is a fixed single-square relaxation witness checking
-container containment, conditional ownership and avoidance of every foreign owned hull.
-It can diagnose missing constraints without asserting a17-square packing.
-Astra owns the implication and source review; Sol implements and independently checks
-the finite instrument before a separately registered target run.
-The construction and replay ceilings are60 seconds each,120 seconds combined.
+The fixed single-square trial exp287 passed ownership and foreign avoidance but failed
+container containment.
+The separately registered exp288 imposed walls before selecting the centre and then
+passed all original pose predicates in fresh reconstruction.
+It completed in1.120 seconds under the fixed60+60-second construction/replay ceilings.
+This is an accepted witness for the particular retained-point relaxation, not a17-square
+packing, capture, exclusion or census admission.
 The actual supervisor samples a4GiB RSS ceiling per live process and cleans up the owned
 group; exp286’s aggregate-memory declaration was a metadata error preserved in its
 outcome record.
@@ -350,8 +351,30 @@ outcome record.
 owns the current30-minute slices, fixed target budgets and disjoint agent deliverables.
 One Astra remains on mathematical strategy and review; two Sol workers handle source,
 custody and focused checks, beside the Sol coordinator.
-A bounded push gate runs in parallel.
+A full ordinary checkpoint runs on predecessor969588d09 in an isolated checkout, beside
+additive checks for later source.
+Its launch incorrectly retained a project-root override, affecting37 mutation controls;
+preserve that failure and rerun only those controls with project discovery restored.
+Do not relabel the full checkpoint as passed.
 The research cutoff and protected finalization hour remain unchanged.
+
+The final
+[W3 route selection](../../research/research-2026-10-07-n17-w3-capacity-and-route-selection.md)
+prioritizes a1–2-hour block using complete partner centre-and-angle covers, with exact
+replay profiling in parallel.
+The mathematical criterion is a checked closed exclusion or capture region beyond the
+point-only control. The engineering criterion is a measured hotspot and exact-equivalent
+replay; a twofold end-to-end gain is an acceptance target, not a prediction.
+A2–4-hour deeper optimization block is justified by the unaccepted exp284 replay,
+conditional on that profile.
+
+Certificate-family lifting and a necessary structural normal-form lemma are fallback
+mathematical slices.
+Extend work to1–2 days only if checked coverage grows, a reusable uniform implication
+replaces cases, or certificate cost materially falls.
+There is no defensible proof-completion estimate yet.
+More unchanged propagation or isolated local patches without a global capture domain do
+not meet the renewal criterion.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
