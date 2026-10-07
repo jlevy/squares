@@ -9,6 +9,9 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/README.md, role: research-report, authority: record, lifecycle: retained}

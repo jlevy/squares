@@ -862,7 +862,9 @@ def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
     assert controls.linked_pruned_targets() == [needed]
 
 
-@pytest.mark.parametrize("selection", ["session184", "baseline", "retained", "operational"])
+@pytest.mark.parametrize(
+    "selection", ["session184", "baseline", "retained", "operational", "historical_census"]
+)
 def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, selection: str
 ) -> None:
@@ -908,7 +910,23 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
             )
         )
     elif selection == "operational":
-        roots = frozenset({ROOT / "benchmarks/validation-efficiency/runs"})
+        roots = frozenset(
+            {
+                ROOT / "benchmarks/validation-efficiency/runs",
+                ROOT / "campaign/agent-sessions/session-152-validation",
+            }
+        )
+    elif selection == "historical_census":
+        roots = frozenset(
+            controls.SESSION184_RESULTS / name / "census.json"
+            for name in (
+                "exp-253-n17-stalls-under-adaptive-rows",
+                "exp-254-n17-second-tranche-flags",
+                "exp-256-n17-third-tranche-flags",
+                "exp-257-n17-unsampled-strata",
+                "exp-258-n17-draw-31",
+            )
+        )
     specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
     assert roots <= PRUNE
     if selection == "session184":
@@ -983,6 +1001,23 @@ def test_checkpoint_archive_prune_preserves_all_declared_consumer_copyback() -> 
     # Unused operational histories stay recoverable in the primary evidence tree.
     assert (root / "VE-004-control-1.tar.gz").is_file()
     assert (root / "VE-004-candidate-1.tar.gz").is_file()
+
+
+def test_session_152_operational_prune_preserves_linked_pdf_evidence() -> None:
+    root = ROOT / "campaign/agent-sessions/session-152-validation"
+    assert root in PRUNE
+    copied = {
+        path.name for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)
+    }
+    assert copied == {
+        "pdf-d490-run-35784981711-reference.pdf",
+        "pdf-d490-run-35784981711-replay.pdf",
+        "pdf-d490-run-35784981711-report.txt",
+        "pdf-d490-run-35784981711.md",
+    }
+    unused = root / "push-c26afc5-initial-artifacts.tar.gz"
+    assert unused.is_file()
+    assert unused.name not in copied
 
 
 def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(

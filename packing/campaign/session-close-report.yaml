@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 183
+count: 184
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 127
-  sessions_unmeasured: 56
+  sessions_unmeasured: 57
   attributed:
     rollups: 297
     turns: 76355
@@ -3213,3 +3213,13 @@ sessions:
     active_union_hours: 9.81
     wall_hours: 9.81
     snapshot_incomplete: true
+- id: session-185
+  title: "n17 Complete Coupling and Exact Replay"
+  status: in_progress
+  primary_bead: think-tvxs
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no resource measurement
+  rollups: []
+  codex_receipts: []

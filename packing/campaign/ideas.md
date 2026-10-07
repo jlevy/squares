@@ -1035,6 +1035,21 @@ calibration failure.
 A witness is one-square relaxation consistency; a miss proves no exclusion or
 fixed-angle infeasibility.
 
+[H-298](hypotheses/H-298-n17-complete-partner-pose-region.md) tests complete
+partner-pose constraints on all 992 foreign rows of the accepted parent.
+The primary criterion requires a freshly verified nonzero closed neighbourhood around
+the exp288 relaxation witness.
+Fixed-point removal alone is secondary evidence; a completed fixed-point miss skips the
+frozen regional ladder by the stated monotonic obstruction.
+The accepted parent remains a conditional premise.
+
+[H-299](hypotheses/H-299-n17-matched-exact-replay-observations.md) tests whether
+boundary-level profiling preserves two fresh full exact replay results on the accepted
+exp280 object.
+The diagnostic retains step costs, memo evictions and memory observations;
+equal results establish instrumentation equivalence, not an optimization gain or a new
+geometric admission.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

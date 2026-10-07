@@ -198,6 +198,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
+| [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 2 | think-tvxs | Freeze reviewed coupling and profile instruments; preregister each criterion, descriptor, controls and budget before target execution. Keep inherited certificationthink-7hy3 beside proof progress. |
 
 ### Workflow summary
 
@@ -207,10 +208,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 4 | 2 | 16 | 2 |
 | `factual-review` | 11 | 1 | 67 | 3 |
-| `insight-iteration` | 29 | 1 | 92 | 4 |
+| `insight-iteration` | 30 | 1 | 93 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 44 | 1 |
-| `research-loop` | 37 | 4 | 143 | 9 |
+| `research-loop` | 37 | 4 | 144 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -927,11 +928,21 @@ Status: **active**. Dispose the bounded Session184 continuation through scoped a
 | BC-438 | tool_validation | 17 | blocked | 1 | think-jhgi | docs/project/reviews/review-2026-10-07-n17-session-184-progress.md |
 | BC-439 | measurement_validation | 17 | in_progress | 1 | think-ypk2 | docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md |
 
+### [agenda-044](agendas/agenda-044-n17-coupling-and-replay.md) — n17 Complete Coupling and Replay Continuation
+
+Status: **active**. Execute the separately authorized four-hour extension through complete partner coupling, measured replay cost and a current public handoff; certification remains explicit beside mathematical work.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-440 | research | 17 | in_progress | 1 | think-tvxs | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
+| BC-441 | research | 17 | in_progress | 1 | think-hkqz | docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md |
+| BC-442 | measurement_validation | 17 | in_progress | 1 | think-svkl | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
+
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 217 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 219 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1168,6 +1179,8 @@ Status: **active**. Dispose the bounded Session184 continuation through scoped a
 | H-295 | refuted | proof | Exact pooled foreign-owned forbidden regions cover the complete accept |  | 1 |  | 21s wall |
 | H-296 | refuted | proof | A deterministic exact one-square witness survives every pooled owned-p |  | 1 |  | 1s wall |
 | H-297 | confirmed | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  | 1s wall |
+| H-298 | running | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 1 |  |  |
+| H-299 | running | proof | Boundary-level replay instrumentation preserves the full accepted cent |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1429,6 +1442,13 @@ Status: **active**. Dispose the bounded Session184 continuation through scoped a
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
+### in-progress (2)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-289 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Prospectively registered after target-free controls and source review; target unrun. |
+| exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Prospectively registered diagnostic; no target replay or gain measured. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1477,7 +1497,7 @@ Status: **active**. Dispose the bounded Session184 continuation through scoped a
 
 ## Effort
 
-217 rounds, 2512.1 agent-minutes, 5779.6 wall-minutes.
+219 rounds, 2512.1 agent-minutes, 5779.6 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

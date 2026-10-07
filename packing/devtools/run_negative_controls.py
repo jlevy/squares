@@ -331,6 +331,26 @@ PRUNE = frozenset(
         # precedence if a checked document later links either file.
         ROOT / "campaign/agent-sessions/session-106-validation" / "fast-3deb90fc.tar.gz",
         ROOT / "campaign/agent-sessions/session-152-validation" / "full-initial-diagnostic.log",
+        # The remaining Session 152 validation byproducts have no registered
+        # mutation consumer. Preserve its inline-linked PDF incident document,
+        # both PDFs and diagnostic through the authoritative dependency copy-back;
+        # the exact root saves 474,961 bytes without removing primary evidence.
+        ROOT / "campaign/agent-sessions/session-152-validation",
+        # Five historical census outputs are generated observations, not inputs to
+        # any control command or code/test reader. Their records and original JSON
+        # remain intact; future inline/frontier uses still win via copy-back.
+        # Omitting only these exact files saves 720,643 bytes. Do not prune the
+        # sibling receipts, source, or current admitted-ledger census.
+        *(
+            SESSION184_RESULTS / name / "census.json"
+            for name in (
+                "exp-253-n17-stalls-under-adaptive-rows",
+                "exp-254-n17-second-tranche-flags",
+                "exp-256-n17-third-tranche-flags",
+                "exp-257-n17-unsampled-strata",
+                "exp-258-n17-draw-31",
+            )
+        ),
         # The n=21 orbit inventory and Session 105 full-gate JSON are older generated
         # byproducts, named only in historical prose/output fields. Neither is a
         # registered result dependency, inline link, control target, or control input.

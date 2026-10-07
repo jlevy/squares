@@ -307,12 +307,12 @@ hypothesis status and summarizes experiment verdicts, and the
 
 | Record | Count | Current state |
 | --- | --- | --- |
-| Agendas | 40 | 20 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 428 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
-| Sessions | 183 | 105 completed; 78 stopped; all terminal |
+| Agendas | 41 | 21 active; 14 completed; 5 paused; 1 superseded |
+| Commitments | 431 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 23 in progress |
+| Sessions | 184 | 105 completed; 78 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 231 | 62 confirmed; 36 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 217 | 82 accepted; 41 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 233 | 62 confirmed; 36 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
+| Experiments | 219 | 82 accepted; 41 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 2 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -573,6 +573,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Full-Square Partner Coupling for the n17 Witness](docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md) | research synthesis | record | retained | — |
+| [Complete Partner-Pose Coupling for the n17 Parent](docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md) | research synthesis | record | retained | — |
+| [n17 Four-Hour Coupling and Replay Continuation](docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md) | implementation plan | current | transient | — |
 | [n17 W3 Capacity and Route Selection](docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md) | research synthesis | record | retained | — |
 | [Fixed-Angle Feasible-Center Relaxation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/README.md) | research synthesis | record | retained | — |
 | [One-Square Pooled Relaxation Witness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/README.md) | research synthesis | record | retained | — |
@@ -5824,6 +5827,8 @@ round that names the hypothesis, control roles included.
 | [H-295](packing/campaign/hypotheses/H-295-n17-pooled-forbidden-cover.md) | refuted | Pooled foreign-owned forbidden union on every closed guard piece | 1 | Completed20.73s finite criterion-miss; all18pieces uncovered, no exclusion |
 | [H-296](packing/campaign/hypotheses/H-296-n17-pooled-relaxation-witness.md) | refuted | One deterministic exact pooled owned-point relaxation witness | 1 | Completed1.11s containment-only criterion-miss; ownstrict/foreignavoid pass |
 | [H-297](packing/campaign/hypotheses/H-297-n17-pooled-feasible-center.md) | confirmed | Wall-first fixed-angle center under pooled owned facts | 1 | Accepted1.12s exact one-square point-relaxation witness; no packing/exclusion |
+| [H-298](packing/campaign/hypotheses/H-298-n17-complete-partner-pose-region.md) | running | Complete partner-pose nonzero closed region around exp288 | 1 | exp289 preregistered; target unrun |
+| [H-299](packing/campaign/hypotheses/H-299-n17-matched-exact-replay-observations.md) | running | Matched full exact replay with boundary-level observations | 1 | exp290 diagnostic preregistered; target unrun |
 
 ### Confirmed
 
@@ -6148,8 +6153,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 127 |
-| unmeasured | 56 |
-| **total** | **183** |
+| unmeasured | 57 |
+| **total** | **184** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -6165,7 +6170,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 217 rounds registered in `series-000`.
+There are 219 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5779.6 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6426,6 +6431,8 @@ archive beside it.
 | [exp-286](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md) | 17 | target | H-295 | Pooled foreign-owned exact forbidden union | Fresh reconstructionPASS; all18pieces uncovered20.73s, no exclusion | rejected |
 | [exp-287](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md) | 17 | target | H-296 | One exact square on first pooled-uncovered guard piece | Fresh reconstructionPASS; fixedcandidate missesnumericcontainer only | rejected |
 | [exp-288](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-288-h297-pooled-feasible-center.md) | 17 | target | H-297 | Wall-first fixed-angle feasible center | Fresh exact posePASS; centered/ownstrict/foreignavoid allpass | accepted |
+| [exp-289](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-289-h298-complete-partner-coupling.md) | 17 | target | H-298 | Exact complete partner-pose coupling | Unrun | in-progress |
+| [exp-290](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-290-h299-matched-exact-replay.md) | 17 | target | H-299 | Matched NONE/PHASES full exact replay | Unrun | in-progress |
 
 ### Cost and provenance
 
@@ -6648,10 +6655,12 @@ archive beside it.
 | exp-286 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | 20.73s | — | criterion | Completed finite criterion-miss; all18pieces uncovered, no284geometry |
 | exp-287 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | 1.11s | — | criterion | Fixedfirstcandidate containment miss; ownstrict/foreignavoid pass |
 | exp-288 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | 1.12s | — | criterion | Accepted wall-first one-square relaxation |
+| exp-289 | Construction120s/fresh120s inside240s;4GiB perprocess sampled | Unrun | — | In progress | Frozen source and prospective criterion; no verdict |
+| exp-290 | NONE180s/PHASES180s inside370s;4GiB perprocess sampled | Unrun | — | In progress | Diagnostic equivalence; no optimization gain |
 
-### What the 217 rounds jointly establish
+### What the 219 rounds jointly establish
 
-The 217 rounds use 2512.1 agent-minutes and 5779.6 wall-minutes under the campaign’s
+The 219 rounds use 2512.1 agent-minutes and 5779.6 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
