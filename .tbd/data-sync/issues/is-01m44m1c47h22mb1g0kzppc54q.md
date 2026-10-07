@@ -5,16 +5,17 @@ title: "Enforce OR-18: ceiling on added blob size and a scan for Git-history rea
 kind: task
 status: open
 priority: 2
-version: 6
+version: 7
 delegate: null
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m4aj1fjtr7gaa8x3p76rr12r
+  - is-01m4apz6vbvyw0c2yc30hr7gwe
 hold: null
 hold_until: null
 created_at: 2026-10-04T23:29:56.870Z
-updated_at: 2026-10-07T06:50:29.849Z
+updated_at: 2026-10-07T08:16:38.251Z
 started_at: 2026-10-05T07:21:15.313Z
 ---
 OR-18 (jlevy/squares#345) states the rule but nothing fails a PR that breaks it. Add (1) a branch check that refuses added blobs over a few MB unless listed with a reason, and (2) a scan of packing/devtools and packing/src for git show/rev-parse REV:path reads and Git blob-id or commit gates on results. Existing frozen evidence is exempt per OR-16.
