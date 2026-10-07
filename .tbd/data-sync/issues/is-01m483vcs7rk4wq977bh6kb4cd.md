@@ -5,8 +5,8 @@ title: Run exp-257's unrun draw u31 (mask 6015871, c4/i>=5/d>=8) under SW9's rec
 kind: task
 status: closed
 priority: 2
-version: 5
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 6
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-06T08:04:01.446Z
-updated_at: 2026-10-06T17:34:04.407Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-06T15:54:50.014Z
 closed_at: 2026-10-06T17:34:04.406Z
 close_reason: "u31 closed and admitted (s183-bc429-u31, exp-258 accepted); merged in jlevy/squares#385 (stack #386) on 2026-10-06. All 31 BC-428 draws have a verdict."

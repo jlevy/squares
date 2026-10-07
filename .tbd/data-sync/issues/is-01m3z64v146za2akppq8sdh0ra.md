@@ -5,13 +5,13 @@ title: "Cost reduction to hundreds of CPU-hours: pruning and route redesign revi
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 4
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-02T20:50:58.212Z
-updated_at: 2026-10-02T22:46:28.608Z
+updated_at: 2026-10-07T06:23:10.673Z
 closed_at: 2026-10-02T22:46:28.608Z
 close_reason: Review committed in 83783ab29; ranked plan dispatched to K2 (rank 1) and S2 (rank 2)
 resolution: null

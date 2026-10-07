@@ -5,13 +5,13 @@ title: Re-certify Sessions 166 and 167 on PR 307's successor branch (claude/n17-
 kind: task
 status: closed
 priority: 1
-version: 2
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 3
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-04T23:42:22.203Z
-updated_at: 2026-10-05T01:34:22.283Z
+updated_at: 2026-10-07T06:23:10.673Z
 closed_at: 2026-10-05T01:34:22.283Z
 close_reason: Sessions 166 and 167 re-certified by the hosted fast gate at c0941ba4e (Packing validation run 37247106436, attempt 3, PR 347); records updated in 7c8f2327c, pushed at 4c246fd3b.
 resolution: null

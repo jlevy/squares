@@ -3,20 +3,24 @@ type: is
 id: is-01m41rfa66bgbxk34gpery3ebb
 title: "N17 Session169: profile and bound obsolete producer PartnerMemo generations"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 10
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 13
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 assignee: Guzhou0806
-delegate: null
+delegate: guzhou-codex-graph-gate
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
-hold: paused
+hold: null
 hold_until: null
 created_at: 2026-10-03T20:49:44.645Z
-updated_at: 2026-10-05T07:24:34.028Z
+updated_at: 2026-10-07T06:28:17.038Z
 started_at: 2026-10-03T20:50:09.807Z
+closed_at: 2026-10-07T06:28:17.037Z
+close_reason: "2026-10-07: rebuilt successor PR354 merged2026-10-06T01:12Z. The explicit until-merge tracking condition is fulfilled; prior scoped instrumentation/ReviewA delivery is preserved. No active executor, background work or follow-up reserved. This closes only completed administrative tracking; it does not claim global proof completion or reopen historical research."
+resolution: null
+duplicate_of: null
 ---
 Own only Session 169's bounded W3/W10 decision and W5 PartnerMemo lifecycle profile on PR 307 head 234a07f4e22edb3b8e4074356236e4137b1ec19d, branch guzhou/n17-p01-partner-memo. Operator Guzhou0806-Codex-T0; one primary executor after the user's token-budget addendum.
 

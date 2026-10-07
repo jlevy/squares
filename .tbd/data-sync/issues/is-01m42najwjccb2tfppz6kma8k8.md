@@ -5,8 +5,8 @@ title: N17 one bounded raw-row capacity completion attempt
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 4
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 assignee: guzhou0806-codex-t0
 delegate: codex@guzhou
 labels: []
@@ -15,7 +15,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-04T05:13:58.417Z
-updated_at: 2026-10-04T05:53:26.117Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-04T05:16:02.623Z
 closed_at: 2026-10-04T05:53:26.116Z
 close_reason: |

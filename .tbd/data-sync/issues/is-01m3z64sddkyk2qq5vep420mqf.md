@@ -5,8 +5,8 @@ title: Selector finish stage, re-search the 90 flags, then F1 rank-2 residue swe
 kind: task
 status: closed
 priority: 1
-version: 9
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 10
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-02T20:50:56.556Z
-updated_at: 2026-10-05T10:04:21.819Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-03T22:35:32.305Z
 closed_at: 2026-10-05T10:04:21.819Z
 close_reason: H1 landed on the session branch at 6bfd419ec/0fab37ef4 (census reads the recheck receipt; tests pin 87 flags/2,197 orbits at exp-250 and 86 flags after s182-k1)

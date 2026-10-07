@@ -1,17 +1,17 @@
 ---
 type: is
 id: is-01m47rwn7agbx8eyb6rv3pfmpt
-title: Add Session 182's resource rollups (owner; they carry model identifiers)
+title: Add Sessions 182 and 183 resource rollups from retained host logs
 kind: task
 status: open
 priority: 2
-version: 2
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 4
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-06T04:52:28.522Z
-updated_at: 2026-10-06T16:27:38.810Z
+updated_at: 2026-10-07T06:23:10.673Z
 ---
 Session 182 (session-182-n17-overnight-lanes) closes stopped with
 resource_usage_unmeasured reason rollup_withheld_model_identifiers: its harness and

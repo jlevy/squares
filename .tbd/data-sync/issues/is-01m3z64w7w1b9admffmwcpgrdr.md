@@ -5,8 +5,8 @@ title: "Cost reduction to hundreds of CPU-hours: performance engineering review 
 kind: task
 status: closed
 priority: 1
-version: 9
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 10
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-02T20:50:59.452Z
-updated_at: 2026-10-05T05:35:40.288Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-03T22:35:21.360Z
 closed_at: 2026-10-05T05:35:40.288Z
 close_reason: "Review written (30a6c9753, docs/project/reviews/review-2026-10-02-n17-cost-reduction-performance.md, in #347); the gmpy2 port (c401c81d6) and the memory fix (7f1db8a42) are integrated; the compiled backend continues as think-ui2y."

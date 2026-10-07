@@ -5,8 +5,8 @@ title: "n17 admission rule: five frictions found admitting SW9 and N1 (exp-250)"
 kind: task
 status: open
 priority: 2
-version: 6
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 7
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels:
   - n17
@@ -15,7 +15,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-03T16:33:08.953Z
-updated_at: 2026-10-05T05:37:24.517Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-03T22:34:45.908Z
 ---
 Lane A3, admitting SW9 (flag 3) and N1 in exp-250 (53fe57147), found five frictions in census_n17_certified's admission rule.

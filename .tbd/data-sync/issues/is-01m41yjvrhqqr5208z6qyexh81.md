@@ -5,14 +5,14 @@ title: Review the streamed kernel verifier (601bbf110) and list it in the n17 le
 kind: task
 status: closed
 priority: 1
-version: 2
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 3
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels:
   - n17
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-03T22:36:32.401Z
-updated_at: 2026-10-04T00:46:06.641Z
+updated_at: 2026-10-07T06:23:10.673Z
 closed_at: 2026-10-04T00:46:06.640Z
 close_reason: "Admitted by lane R8's independent review (docs/project/reviews/review-2026-10-04-n17-streamed-verifier.md) and listed in certified-sub-patterns.yaml at 601bbf110 (8707537b2). W7, SW9 and N1 re-verify at it in full, peaks 199-283 MB. Follow-ups in the review's notes: crash paths that leave no receipt (already true at 318c28c42), and planning memory for a 119 MB step."
 resolution: null

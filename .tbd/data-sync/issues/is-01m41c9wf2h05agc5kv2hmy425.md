@@ -5,8 +5,8 @@ title: "Integrity ceremony: remove the digest pins in four n = 11 tools inherite
 kind: task
 status: open
 priority: 3
-version: 4
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 5
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels:
   - integrity
@@ -15,7 +15,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-03T17:17:03.841Z
-updated_at: 2026-10-03T22:35:53.005Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-03T22:35:45.146Z
 ---
 The merge of origin/main at f864a576a brought in four n = 11 tools written on main before OR-16's amendment reached it. Each hashes its own source or pins digests of retained objects:

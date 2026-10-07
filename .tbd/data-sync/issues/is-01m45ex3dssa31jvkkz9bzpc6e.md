@@ -5,8 +5,8 @@ title: "Address PR #347 Review B (round 1)"
 kind: chore
 status: in_progress
 priority: 1
-version: 9
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 10
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -22,7 +22,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-05T07:19:28.440Z
-updated_at: 2026-10-05T07:20:35.007Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-05T07:19:34.087Z
 ---
 Review B (senior, round 1) on jlevy/squares#347, pinned to head 9d2f05582: https://github.com/jlevy/squares/pull/347#pullrequestreview-5411026138

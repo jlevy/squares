@@ -5,8 +5,8 @@ title: N17 raw-piece row-support witnesses without full graph expansion
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/reviews/review-2026-10-02-n17-bulk-exclusion-design.md
+version: 4
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 assignee: Guzhou0806
 delegate: guzhou0806-codex-t0
 labels: []
@@ -15,7 +15,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-04T03:54:50.186Z
-updated_at: 2026-10-04T05:00:18.232Z
+updated_at: 2026-10-07T06:23:10.673Z
 started_at: 2026-10-04T03:55:17.450Z
 closed_at: 2026-10-04T05:00:18.231Z
 close_reason: |
