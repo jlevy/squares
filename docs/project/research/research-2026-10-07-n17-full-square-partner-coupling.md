@@ -725,6 +725,375 @@ independent two-process reconstruction.
 The new branch composition and nesting argument remain sole-Astra hand derivations, with
 no independent mathematical review or end-to-end formal proof claimed.
 
+## Actual Two-Child Result and Selected Collective Row Test
+
+The completed exp-295 construction and fresh reconstruction agree on a miss of the
+frozen two-child criterion; see its
+[mechanical summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/mechanical-summary.json).
+The deterministic selector chose owner 18, the $x$ coordinate and cut $471/250$. Both
+closed children retain all 64 rows, with no empty row.
+Their recovered strictly owned hulls have 56 and 105 vertices, respectively, but neither
+intersects another owner’s inherited hull.
+The worst squared centre-box diagonal is $167129/250000<1$. This explains why both
+children recover nonempty ownership; it supplies no contradiction.
+The fixed-split nesting argument correctly leaves the regional branch unstarted.
+Construction took 11.804 seconds, fresh reconstruction 11.635 seconds and the supervised
+pair 23.770 seconds.
+This is a completed finite-recipe miss, not a feasible seventeen-square packing.
+
+The selected next discriminator is one **simultaneous whole-row collective coverage
+pass** on the accepted exp-293 point context.
+It uses all seven nonempty inherited owned hulls, including owner 0, rather than
+choosing another centre split.
+Exp-295 supplies the route-selection prerequisite; neither of its child geometries is an
+input to this pass. The experiment remains prospective until separately registered,
+frozen and executed.
+
+For every foreign owner $j$ and closed chart row $k$, let $P_{jk}$ be the accepted
+conditional centre hull, and freshly construct the same strict zero-centred square core
+$D_{jk}$ over its complete angle interval, with margin $2^{-20}$. For every other owner
+$i$ with nonempty inherited $K_i$, form
+
+$$
+F_{ijk}=K_i-D_{jk}.
+$$
+
+If $y\in F_{ijk}$, some point of $K_i$ lies in $y+D_{jk}$. Both sets lie strictly inside
+their physical squares, so this is a collision even when $y$ lies on the boundary of the
+closed Minkowski difference.
+The proof also applies to point or segment owned hulls; the constructor must preserve
+these cases. Therefore
+
+$$
+P_{jk}\subseteq\bigcup_{i\ne j}F_{ijk}
+$$
+
+certifies that the entire closed row has no physical realization under the point guard.
+Union is over different owners.
+Every row uses the original accepted owned hulls: no result from an earlier row is fed
+back during this pass.
+
+First inspect the vertices of $P_{jk}$ in lexicographic order.
+A vertex outside every closed $F_{ijk}$ is an exact witness that this sufficient
+coverage test fails, so it can skip the full union calculation.
+If every vertex is covered, a full exact union-coverage check is still required: covered
+vertices do not rule out holes.
+Use the retained sweep for positive-area domains and the exact degenerate routine for
+segments and points.
+Clipping each forbidden region to the target domain preserves the coverage question.
+All 992 foreign rows, closed seams and typed references remain accounted for.
+An uncovered row retains its entire previous hull; this pass introduces no fragments.
+
+The primary criterion is a strict decrease, for at least one owner, in the exact length
+of the union of its surviving closed angle intervals.
+Record both interval unions and their rational length difference.
+Shared endpoints remain in whichever surviving adjacent rows contain them.
+Emptying one owner’s complete row cover is a secondary point-guard contradiction.
+This deliberately narrower test supplies a conditional necessary-domain restriction; it
+does not claim a nonzero regional exclusion, capture, a census admission or global
+optimality. No lost angular length is a completed miss of this recipe.
+Fresh independent reconstruction must agree on the entire new finite payload before any
+deletion is accepted.
+
+The frozen planning ceiling is 60 seconds for construction and 60 seconds for fresh
+reconstruction, with outer termination at 120 seconds and forced cleanup at 130 seconds.
+Use one worker and the existing sampled 4 GiB current-RSS limit per live process.
+Inherited geometry admits at most 1,048,576 vertices, 1,024 vertices per row hull and
+2,048 per owned hull, with 4,096-bit rational geometry.
+Fresh row cores admit 32 vertices; forbidden and clipped hulls admit 4,096 each.
+Cache exact interval/owned-hull pairs and charge at most 1,048,576 raw Minkowski vertex
+products across cache misses, 2,097,152 generated clipped vertices and 16,000,000
+point/facet products.
+Before a full sweep, require at most 8,192 boundary edges in that row and charge its
+prospective $E(E-1)/2$ edge pairs against a cumulative 8,000,000 ceiling.
+The output limit is 64 MiB. These controls do not bound unreduced internal homogeneous
+integer products separately; the cooperative deadline and owned-process supervisor
+remain necessary.
+No new ownership recovery, sequential feedback, second pass or regional
+branch belongs to this first test.
+
+Required controls include coverage by a union when no single region suffices, a hole
+despite covered target vertices, exact point/segment/touch cases, the outside-vertex
+shortcut, self-owner exclusion, closed-seam union lengths, immutable inherited owned
+hulls, missing-row and premise tampering, resource refusals and fresh-process parity.
+The collision composition is a sole-Astra hand argument with finite computational
+verification planned, not independent mathematical review or formal proof.
+
+## Prospective Global Contact Normalization
+
+This hand lemma gives a precise existence statement for X-048’s structural-normal-form
+route. It is a sole-Astra derivation, without independent mathematical review or an
+end-to-end formal proof.
+No contact-system enumeration or performance improvement has been established.
+
+Suppose seventeen independently rotated unit squares have disjoint interiors in a
+container of side $L_0\le S^\ast<V$. Fix those orientations and the square labels, but
+allow every centre and the side to vary.
+There exists a packing with the same orientations and side $\ell\le L_0$ such that:
+
+1. Its 34 centre coordinates and side satisfy at least 35 linearly independent active
+   wall-containment or physical pair-contact equations.
+2. Every connected component of its physical contact graph touches at least one
+   horizontal and one vertical wall of its actual container.
+3. Some component touches an opposite-wall pair and a wall in the other direction.
+   A $D_4$ transformation can place that component against the left, right and bottom
+   walls.
+
+The conclusion concerns an existing normalized representative.
+It does not assert these properties of every feasible packing.
+In particular, a hypothetical packing below $S^\ast$ would have such a representative
+also below $S^\ast$.
+
+### Compact Union and Lexicographic Choice
+
+For a fixed unit-square orientation, let $h_i(n)$ denote its support function about its
+centre. Wall containment consists of the linear inequalities
+
+$$
+h_i(e_x)\le x_i\le L-h_i(e_x),\qquad
+h_i(e_y)\le y_i\le L-h_i(e_y).
+$$
+
+For each of the 136 pairs, nonoverlap is the union of its eight signed owner-axis
+separation inequalities
+
+$$
+n\mathbin{\cdot}(c_j-c_i)\ge h_i(n)+h_j(n).
+$$
+
+The square separating-axis theorem makes the finite union over all such choices exactly
+the fixed-orientation packing set.
+Equality is retained, so boundary contacts are allowed.
+Intersect it with $1\le L\le V$. The resulting set is nonempty and compact: it is a
+finite union of closed polyhedra, and containment bounds all centre coordinates.
+
+First minimize $L$ over this entire union, obtaining $\ell$. Then successively minimize
+all 34 centre coordinates in a fixed labelled order on the remaining compact minimum
+sets. This produces a unique lexicographic point $p$ for the chosen orientations and
+order. Since $\ell\le L_0<V$, the upper artificial side bound is inactive.
+Area gives $\ell^2\ge17$, so the lower bound $L\ge1$ is inactive as well.
+
+### Choose the Branch After the Global Minimum
+
+At $p$, choose a strictly separating signed square axis for each pair whose closed
+squares are disjoint.
+Such an axis exists by the separating-axis theorem.
+For each touching pair, choose a zero-gap separating axis.
+Nonoverlap supplies a nonnegative gap, and their common point prevents a strictly
+positive gap on any separating axis.
+
+These choices define one polytope $P$ containing $p$ and contained in the full feasible
+union. The point $p$ remains its unique lexicographic optimum.
+It is a vertex: if it were the midpoint of two distinct points of $P$, minimization of
+$L$ would force both endpoints to have side $\ell$; successive coordinate minimizations
+would then force every centre coordinate to agree, a contradiction.
+
+At a vertex in 35 variables, the active row normals span all 35 dimensions.
+Otherwise a nonzero vector annihilating every active row would permit sufficiently small
+movements in both directions, preserving the finitely many strict inactive inequalities
+and contradicting the vertex property.
+The artificial side bounds are inactive.
+Every active pair row now belongs to a physically touching pair, because all
+closed-disjoint pairs were assigned strict rows.
+Every active wall row is a physical wall contact.
+This proves the first conclusion.
+The count is of independent scalar equations, not necessarily 35 distinct pair contacts.
+
+Choosing an arbitrary feasible SAT branch before minimizing would prove only a vertex
+with independent support equations.
+Some of those equations could align projections of physically disjoint squares.
+The global lexicographic choice followed by the strict-axis selection is what permits
+the stronger physical-contact conclusion.
+
+### Wall Components
+
+Join two squares in the physical contact graph when their closed bodies intersect.
+Consider a connected component with no horizontal-wall contact.
+Translating all its centres vertically, with $L$ fixed, annihilates every active row:
+internal pair differences are unchanged, no active pair joins another component, and any
+active wall row of this component has a horizontal normal.
+This contradicts the full active-row rank.
+The analogous horizontal translation rules out a component with no vertical-wall
+contact. Every component therefore touches a wall in each coordinate direction.
+
+Suppose no component touches opposite walls.
+Each then touches exactly one vertical and one horizontal wall.
+Set $dL=1$; translate a component horizontally by zero if it touches the left wall and
+by one if it touches the right wall.
+Translate it vertically by zero if it touches the bottom wall and by one if it touches
+the top wall. Internal contact differences and every active wall equation are preserved.
+This again gives a nonzero vector annihilating all active rows, a contradiction.
+Hence some component spans opposite walls, and the preceding argument supplies its third
+wall. Rotation and reflection give the stated $D_4$ normalization.
+
+The normalized representative also has at least fourteen distinct contacting square
+pairs. No square can touch opposite walls: its coordinate width is at most $\sqrt2$,
+whereas $L\ge\sqrt{17}$. For a square touching the left and bottom walls, its centre is
+$(h,h)$, where $1/2\le h\le\sqrt2/2$. The point $(1/2,1/2)$ has squared distance
+$2(h-1/2)^2<1/4$ from that centre and therefore lies strictly in the square’s
+radius-$1/2$ inscribed disk.
+Two squares cannot both touch these two walls without overlapping interiors.
+The same argument applies at each corner.
+At most four squares consequently touch two walls; each remaining square touches at most
+one. There are at most $17+4=21$ active wall rows.
+The rank-35 system therefore needs at least fourteen active pair rows.
+Because its SAT branch selects only one row per unordered pair, these represent fourteen
+distinct physical contacts.
+This lower bound concerns the normalized representative, not every feasible packing.
+
+### What a Future Consumer Must Still Prove
+
+Apply this normalization globally **before** assigning the representative to cover
+cells. Preserving a chosen cell, centre halfplane or fixed witness guard during the
+minimization could supply artificial active rows and invalidate the physical-contact
+count. The normalized representative may occupy a different state.
+This lemma consequently does not certify that an original state is infeasible.
+
+The wall equations concern the actual side $L$. If the representative is centered inside
+the larger fixed cap $V$ or the outer $U$ frame, retain that variable-side centering
+relation. Contact with the actual container must not be replaced by contact with the
+cap’s walls.
+
+A future finite proof must cover every allowed contact system, its independent angle
+domains, degeneracies and closed boundary cases, and join the resulting representatives
+to its global cover or terminal theorem.
+No such enumeration is supplied here.
+Do not assume the full touching graph is planar: corner contacts can add both diagonals
+at four-square junctions, and larger square grids have nonplanar touching graphs.
+A planar-subgraph reduction would require a separate proof.
+The lemma provides no uniqueness theorem, present state exclusion, angular restriction
+or estimate of the cost of completing n17 optimality.
+
+### Prospective Seventeen-Parameter Algebraic Charts
+
+The rank statement has an exact algebraic consequence.
+Independently rotate each square’s choice of body axes by a multiple of a quarter turn,
+so its unchanged physical orientation has a half-angle parameter $t_i\in[0,1]$. Write
+
+$$
+d_i=1+t_i^2,\qquad C_i=1-t_i^2,\qquad S_i=2t_i,
+\qquad u_i=(C_i,S_i)/d_i.
+$$
+
+Cover this parameter cube by the finitely many closed ordering chambers
+$t_{\pi(1)}\le\cdots\le t_{\pi(17)}$. On each chamber the sign of
+$\sin(\theta_j-\theta_i)$ is fixed; ties belong to both adjacent chambers and cause no
+gap. Since both angles lie in $[0,\pi/2]$, their difference has nonnegative cosine.
+Thus the support threshold for a signed axis of either square is
+
+$$
+H_{ij}=\frac{1+\cos(\theta_j-\theta_i)
+                  +|\sin(\theta_j-\theta_i)|}{2},
+$$
+
+with every absolute value resolved by the chamber’s order.
+Multiplication by the strictly positive $2d_i d_j$ makes a pair-contact equation a
+polynomial linear equation in the centres.
+Multiplication by $2d_i$ does the same for a wall equation, since the wall support is
+$(C_i+S_i)/(2d_i)$. The resulting row coefficients and right-hand sides have total
+degree at most four in the angle parameters.
+
+For a normalized representative, choose 35 independent active rows supplied by the
+lemma. With $z=(x_1,y_1,\ldots,x_{17},y_{17},L)$, these give
+
+$$
+A(t)z=b(t),\qquad \Delta(t)=\det A(t)\ne0.
+$$
+
+Cramer’s rule expresses every centre coordinate and the side as a rational function
+$z_m=N_m(t)/\Delta(t)$ of the seventeen angle parameters.
+Splitting into $\Delta>0$ and $\Delta<0$ permits every remaining containment or signed
+SAT inequality to be checked by polynomial inequalities after clearing positive
+denominators. Retain the complete pairwise SAT disjunctions, all chamber boundaries and
+the target side inequality; active equations alone do not certify a packing.
+
+There are finitely many choices of ordered chamber, signed contact/wall rows and nonzero
+minor. Every hypothetical packing below $S^\ast$ has a normalized representative in at
+least one of these charts.
+Conversely, a chart solution satisfying all original containment and nonoverlap
+conditions is a packing.
+Consequently a global emptiness proof for this finite union would suffice for the
+strict-smaller-side problem.
+Rank-deficient choices of 35 rows may be discarded, but a zero determinant for one
+choice does not discard a physical configuration: another nonzero minor must cover its
+normalized representative.
+
+This reduces 52 continuous centre, angle and side variables to seventeen angle
+parameters per chart.
+It does not bound the number or difficulty of the discrete charts.
+No determinant, contact system or angle chamber has been enumerated or tested here; no
+completeness implementation, branch reduction or speedup follows from the dimension
+count alone. The derivation remains a prospective sole-Astra hand result under the
+assurance stated above.
+
+### Practical Next Block for the Normalization Route
+
+The follow-up is tracked as `think-nvkf`. First allocate 30–60 minutes to independent
+mathematical review of the existence proof: global lexicographic choice before branch
+selection, strict separating axes for closed-disjoint bodies, inactive artificial side
+bounds, and the actual-container wall equations are the critical interfaces.
+Small exact examples can test a future row generator; they cannot establish this
+existence theorem.
+
+The discrete completeness obstacle is substantial.
+A complete atlas must cover signed contact choices, wall incidences, angle-order
+chambers, a nonzero minor for every normalized representative, and all remaining
+nonoverlap disjunctions.
+The fourteen-contact lower bound does not identify those contacts, and a determinant
+vanishing in one chart requires alternate charts.
+Unrestricted contact-graph or minor enumeration has no justified completion estimate.
+
+A smaller consumer can test whether the normalization has useful force on the current
+cell cover before investing in that enumeration.
+For each named assignment, construct an overestimate of its possible contact graph from
+the closed cell bounding boxes.
+A contacting pair’s centre distance lies in $[1,\sqrt2]$: the radius-$1/2$ inscribed
+disks have disjoint interiors, and a shared boundary point lies within distance
+$\sqrt2/2$ of each centre.
+Hence an edge can be absent whenever the boxes cannot realize a squared distance in
+$[1,2]$.
+
+Wall tags must retain the actual-side centering relation.
+For an accepted lower bound $L_{\min}$ and $L\le V$, a left-wall centre in the outer $U$
+frame lies in the interval
+
+$$
+\left[\frac{U-V}{2}+\frac12,
+      \frac{U-L_{\min}}2+\frac57\right],
+$$
+
+because the square support is at most $\sqrt2/2<5/7$. Reflect this interval for
+right-wall tags and use the same construction vertically.
+Intersect these closed intervals with the cell boxes to obtain conservative possible
+wall incidences.
+
+Every component of the possible-contact graph must have at least one horizontal and one
+vertical wall tag; some component must have an opposite-wall pair and a third wall.
+There must be at least fourteen possible edges.
+If $E$ counts possible edges and $W$ possible wall incidences, also require
+$E+\min(21,W)\ge35$. These are necessary graph and row-count conditions, not a proof of
+realizable contacts or full matrix rank.
+
+After the proof review, allocate a separate 1–2 hour implementation block to this narrow
+checker, with exact synthetic normalized-packing controls and a prospective measurement
+ceiling of 120 seconds on a declared complete candidate roster.
+The current 4,683-orbit roster is a possible workload only after its closed assignment,
+label and variable-side frame joins are explicit.
+Record how many normalized-representative candidates each necessary condition rejects.
+If all survive, stop this coarse graph filter and identify a stronger condition before
+funding enumeration.
+Any rejection concerns normalized representatives; it does not enter the ordinary
+$U$-exclusion ledger.
+A known packing that has not itself been normalized is not automatically a valid
+positive control for every normal-form condition.
+
+These durations are proposed work allocations, not forecasts of acceptance or optimality
+completion. Obtaining and independently checking the four reported upstream
+full-certificate packages remains ahead of unrestricted atlas enumeration in the
+immediate global-proof queue.
+The normalization route earns a larger block only through an independently reviewed
+theorem interface and a measured reduction or an explicit new completeness argument.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

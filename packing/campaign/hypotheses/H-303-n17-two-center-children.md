@@ -49,9 +49,16 @@ hypothesis:
   notes: Author29 target-free controls PASS1.35s, independentSol29 PASS2.75s; Ruff,format,types zero.
     Sole Astra source and hand-composition review CLEAR. Neither actual selector values nor child target
     geometry evaluated before registration.
+    Actual exp295 completed a fresh-matched criterion miss in23.77048s; both selected owner18 children remain open. Astra accepted the scoped negative disposition.
   registered: '2026-10-07'
 ---
 # Two Closed Centre Children
+
+Exp295 refutes this frozen recipe: both selected closed children remain open after
+complete fresh reconstruction.
+Their nonempty owned sets contain56 and105 vertices.
+The regional phase was correctly skipped by fixed-cut nesting.
+This is no packing counterexample, exclusion or census admission.
 
 A deterministic two-child closed centre split certifies the declared nonzero guard
 around the accepted owner0 witness.

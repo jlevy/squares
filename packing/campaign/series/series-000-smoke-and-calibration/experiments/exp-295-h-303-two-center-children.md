@@ -44,11 +44,16 @@ experiment:
       vertices;4096-bit geometry. Original conditional reconstruction keeps its separate frozen counters
       and native/input ceilings. No producer or altered standing primitive.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children
-  results: []
-  lease:
-    expires: '2026-10-07T22:17:58Z'
+    commit: d68a3fd24a2dc86580c02f5fba922228a88782c1
+    dirty: true
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the fixed two-child construction certify the declared nonzero guard?
+    outcome: criterion_missed
+    checked_by: Fresh exact payload agreement; independent Sol metadata and byte-custody audit; Astra actual semantic review CLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Construction and independent fresh reconstruction return criterion_met=true after
       both point children and both h=1/512 regional children close. The selector minimizes the worst child
       aggregate bounding-box squared diagonal among the ten empty-owned-set foreign owners and two coordinate
@@ -60,10 +65,29 @@ experiment:
       result. Full new mathematical payloads agree fresh, all original endpoint and custody controls hold,
       and no limit/refusal is accepted as a negative result. No global capture, census admission, whole-I
       exclusion or packing claim follows.
-    reason: Prospectively frozen selector and primary; target unrun.
-    needs_review: true
+    reason: Complete fresh-matched point miss; both selected children remain open, so the regional phase is skipped by fixed-cut nesting.
+    needs_review: false
+  effort:
+    stopped_by: criterion
+    wall_seconds: 23.770477665995713
+    timebox: Construction180s plus fresh180s; outer TERM360/KILL370; sampled4096MiB per live process.
 ---
 # Two Closed Centre Children
+
+The registered recipe completed with a fresh-matched criterion miss in 23.77048 seconds.
+The selector chose owner18, x, cut471/250. Both closed children retain all64 rows; their
+recovered owned sets have56 and105 vertices, with no shared-owned-point closure.
+Both squared-diagonal diagnostics are below1, which supports ownership possibility, not
+a packing contradiction.
+The regional context remains unstarted by the fixed-cut nesting rule.
+Astra accepted this scoped negative disposition after independent metadata and
+byte-custody review.
+
+Construction took11.80427 seconds and fresh verification11.63498 seconds.
+The maximum sampled per-process current RSS was311001088 bytes; normal exit and owned
+cleanup completed. Launch metadata retains its corrected repository-root source-status
+query; the scientific source and criterion did not change.
+No global or census claim follows.
 
 Construction and independent fresh reconstruction return criterion_met=true after both
 point children and both h=1/512 regional children close.

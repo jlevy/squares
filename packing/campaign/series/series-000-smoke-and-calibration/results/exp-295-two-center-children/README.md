@@ -1,11 +1,26 @@
 # Two Closed Centre Children
 
-[exp-295](../../experiments/exp-295-h-303-two-center-children.md) prospectively
-registers the fixed selector and paired construction.
-The target is unrun at this freeze.
+[exp-295](../../experiments/exp-295-h-303-two-center-children.md) completed with a
+fresh-matched criterion miss in23.77048 seconds.
+The fixed selector chose owner18, x, cut471/250. Both closed children retain64 rows and
+recover owned sets with56 and 105 vertices; neither closes.
+Regional reconstruction was correctly skipped.
+Astra accepted the actual scoped negative disposition; no packing, regional exclusion or
+census admission follows.
 
-Construction and independent fresh reconstruction return criterion_met=true after both
-point children and both h=1/512 regional children close.
+The untouched certificate and replay agree exactly after invocation/provenance fields
+are removed. [mechanical-summary.json](mechanical-summary.json) retains all three input
+byte joins, inherited1056/foreign992 row accounting and all17 endpoint controls.
+New work was10519 generated clip vertices,29302 intersection vertex pairs,9216 recovery
+support products,47936 strict vertex pairs and191744 quadratic checks.
+Construction11.80427s/fresh11.63498s; sampled per-process RSS maximum311001088 bytes.
+Normal exit and owned cleanup completed.
+Launch metadata explicitly retains the corrected source-path query; no scientific rerun
+or source change occurred.
+
+The frozen success criterion required both point children and both h=1/512 regional
+children to close. The actual construction and fresh reconstruction both return
+criterion_met=false.
 The selector minimizes the worst child aggregate bounding-box squared diagonal among the
 ten empty-owned-set foreign owners and two coordinate midpoint cuts, with owner then x/y
 tie breaks. Both closed halves retain equality, all rows and angular seams.

@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_collective_row_coverage.py
+    kind: generated-artifact
+    boundary: Accepted generated exp293 finite point geometry and exp295 route-selection receipts are byte-bound runtime premises; the new checker independently reconstructs the complete collective row payload, without source checksum acceptance.
   - path: packing/devtools/check_n17_two_center_children.py
     kind: generated-artifact
     boundary: Runtime byte-bound accepted guard descriptor, finite point-context certificate and fresh receipt bind inherited geometric premises; the new checker reconstructs every selected child and rejoins original generated parent custody, rather than checking Git source integrity.

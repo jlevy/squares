@@ -3217,7 +3217,7 @@ sessions:
   title: "n17 Complete Coupling and Exact Replay"
   status: in_progress
   primary_bead: think-tvxs
-  phases: 6
+  phases: 7
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session185-checkpoint.yaml

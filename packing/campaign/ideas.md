@@ -1065,6 +1065,12 @@ whilematchingacceptedinputbytes/mathreceipt, withnospeedupclaim.
 two-child centre cover using accepted exp293 owned-set premises and a separately rebuilt
 regional context.
 
+[H-304](hypotheses/H-304-n17-collective-row-coverage.md) tests one simultaneous
+collective-coverage pass over all 992 foreign rows using the original accepted exp293
+owned sets. Its primary criterion is positive exact loss of a closed angle union; exp295
+selects the route but contributes no child geometry.
+No regional or global exclusion follows from this narrower criterion.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
