@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eleven SQUISH upper-bound packings (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -17,10 +17,12 @@ child_order_hints:
   - is-01m4ajn876cvr8me273q9v76y4
   - is-01m4ajnca829j92a63xyj80x1n
   - is-01m4ajza0v5kmszfe5j6mwtzf8
+  - is-01m4ampdy2y8khn05ff97383d9
+  - is-01m4an50xkpgh4scw7zqh9vwsz
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T07:31:54.817Z
+updated_at: 2026-10-07T07:44:51.635Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: W1 result import stages 1–3, followed by W7 bounded engineering and W2

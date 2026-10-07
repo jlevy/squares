@@ -78,25 +78,32 @@ acquires the source facts and checks the packet.
 The confirmation change will retain its exact replay receipts and rational witnesses
 separately from this reported registration.
 
-## Compressed Files
+## Derived Fact Files
 
-Derived packing facts are stored as deterministic gzip.
-The table identifies the decompressed facts, which are repository-generated receipts
-rather than upstream files.
+The packet stores derived rational geometry as deterministic gzip.
+The bounded source reader and semantic-input checks validate these files; Git records
+their retained versions. Original upstream byte digests remain in the acquisition
+manifest.
 
-| Stored path | Origin | Git blob of decompressed bytes | SHA-256 of decompressed bytes |
-| --- | --- | --- | --- |
-| `facts/n-108.json.gz` | receipt | `82a3d82b7b70e4e5bb54bd9a4b4a3ebd1fb4ee7f` | `57315c199e13f91e9027d2964cfe5e8fd2fd73e9b6e44a084f9b9fd44300cc02` |
-| `facts/n-126.json.gz` | receipt | `f9c86b60cd6e6cb3d41df8943d7b9c8cc4f34c7d` | `dc219ae63ad31bba1f188900922bd24dc12c8c968311246964c143a2fa5d4c6e` |
-| `facts/n-129.json.gz` | receipt | `ca35fb3899028c740cf29e6eed0e6307861d5ba5` | `07e279e2647be9f20f3c21d76e18dccb3627082d3446fb937a9ff6a03c18d9aa` |
-| `facts/n-130.json.gz` | receipt | `6aac09473b0bdda45e4fbb787511a4f5835ea4ab` | `43d736676d32e47ca274d7d188f26a30ca32597961661dc9a70a65360ba39445` |
-| `facts/n-153.json.gz` | receipt | `d271754f8f269ca5e2cb5576b36dbb338cfd757f` | `49d37a427984e9e7301cd81a539fdf7bbf39dcee4dfce56f55894f1da9f5da76` |
-| `facts/n-154.json.gz` | receipt | `1cc802b87b1282a9c2324fd0f4f924751028eee8` | `8778a48f85a0d4997ce0be71e74a23a62b4463dce5a08e8cdc426479efa6d307` |
-| `facts/n-155.json.gz` | receipt | `0f6ee13baaa11ccf37c6ab7cca85537797b1604a` | `7c90f44187ed98c01aacd4ade8cf3bf8c0fad0a7eb1bb8f44aaa19c0ea6b0980` |
-| `facts/n-180.json.gz` | receipt | `443fdf1e1f621b5b4ab53e0ec86ec6c5be8308dd` | `96726b4f726017add9055d7fd898b6116768681d281945db1b13802bde9ff299` |
-| `facts/n-209.json.gz` | receipt | `c5929ecb486fb75da50cf4c2646d824edc8f6cd2` | `695a78e65c4d53888664f6d22ce893a535873ceba2e59eeddd6b43ed26a15ffd` |
-| `facts/n-238.json.gz` | receipt | `dd5e376668adbad2c6c9b4dc1929566befa6dd5d` | `99c3b0567857f537c415d660d3846e3f029be7f755c3e7308f66e132acb093b0` |
-| `facts/n-303.json.gz` | receipt | `dec26911d9ddd5138d5ed70523472a89714232e2` | `6b7e9c55bd9b0fa524e2a9da6d263d7adcd9c773ff2264f0b7f1097f2c172b96` |
+| Stored path | Squares |
+| --- | --- |
+| `facts/n-108.json.gz` | 108 |
+| `facts/n-126.json.gz` | 126 |
+| `facts/n-129.json.gz` | 129 |
+| `facts/n-130.json.gz` | 130 |
+| `facts/n-153.json.gz` | 153 |
+| `facts/n-154.json.gz` | 154 |
+| `facts/n-155.json.gz` | 155 |
+| `facts/n-180.json.gz` | 180 |
+| `facts/n-209.json.gz` | 209 |
+| `facts/n-238.json.gz` | 238 |
+| `facts/n-303.json.gz` | 303 |
+
+From `packing/`, regenerate complete verification receipts with
+`uv run --frozen --all-extras --group dev python -m devtools.squish_upper_bound_packets certify --workers 2`,
+then replay them with the same command prefix and `check --replay`.
+These commands compare exact deciding geometry; descriptive metadata is outside that
+comparison.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

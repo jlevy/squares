@@ -85,7 +85,7 @@ def test_squish_atlas_refuses_changed_bound_or_infeasible_exact_geometry(
     plan = atlas._source_plan(case, {}, {})  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     altered = copy.deepcopy(fact)
     if mutation == "display":
-        altered["printed_side"] = "11.1000000000000001"
+        case = _case(108, "11.1000000000000001", squish.source_key(108))
     elif mutation == "overlap":
         altered["squares"][1] = altered["squares"][0].copy()
     else:
@@ -94,3 +94,18 @@ def test_squish_atlas_refuses_changed_bound_or_infeasible_exact_geometry(
     message = "source display" if mutation == "display" else "exact feasibility"
     with pytest.raises(ValueError, match=message):
         atlas._build_witness(case, plan)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+
+@pytest.mark.parametrize("n", [126, 130])
+def test_squish_atlas_accepts_prescribed_ceiling_but_refuses_arbitrary_bounds(n: int) -> None:
+    fact = squish.read_fact(n)
+    side = squish.verified_value(Fraction(fact["side"]), fact["printed_side"])
+    assert Fraction(side) != Fraction(fact["printed_side"])
+    case = _case(n, side, squish.source_key(n))
+    plan = atlas._source_plan(case, {}, {})  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    witness = atlas._build_witness(case, plan)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert witness["side"] == fact["side"]
+    assert witness["certificate"]["result"]["verification_passed"]
+    wrong = str(Fraction(side) + Fraction(1, 10**20))
+    with pytest.raises(ValueError, match="source display"):
+        atlas._build_witness(_case(n, wrong, squish.source_key(n)), plan)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001

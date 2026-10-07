@@ -5,7 +5,7 @@ title: Register SQUISH issue 401 reported upper bounds and provenance
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:58:33.634Z
-updated_at: 2026-10-07T07:08:38.711Z
+updated_at: 2026-10-07T07:45:48.134Z
 started_at: 2026-10-07T06:59:18.994Z
 ---
 ## Notes

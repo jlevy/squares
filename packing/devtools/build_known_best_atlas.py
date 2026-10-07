@@ -1076,7 +1076,10 @@ def _squish_derived_witness(case: FrontierCase, plan: SourcePlan) -> dict:
     the imported result remains the frontier record's separate evidence lane.
     """
     fact = squish_packets.read_fact(case.n)
-    if Fraction(case.side) != Fraction(fact["printed_side"]):
+    normalized_side = squish_packets.verified_value(
+        Fraction(fact["side"]), fact["printed_side"]
+    )
+    if Fraction(case.side) not in {Fraction(fact["printed_side"]), Fraction(normalized_side)}:
         raise ValueError("source display disagrees with the reported frontier side")
     if fact["n"] != case.n or len(fact["squares"]) != case.n:
         raise ValueError("derived facts do not contain the requested square count")

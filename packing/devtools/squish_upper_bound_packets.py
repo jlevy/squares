@@ -37,6 +37,11 @@ WITNESSES = REPO / "packing/witnesses/squish-401-2026"
 SCHEMA = REPO / "packing/witnesses/witness.schema.yaml"
 NUMBERS = (108, 126, 129, 130, 153, 154, 155, 180, 209, 238, 303)
 MAX_SOURCE_BYTES = 1_000_000
+# The eleven exact input rosters occupy 1.58 MB as JSON; controls are separate.
+# Source admission keeps its smaller ceiling, while receipts and corner YAML stay bounded.
+MAX_RECEIPT_BYTES = 4_000_000
+MAX_CHECKER_LITERAL_CHARS = 1024
+CERTIFICATION_FORMAT = "squish-exact-certification-v2"
 MAX_N = 324
 REVISION = "07fe6dde1e5b67405a3076719b90e58e2882b677"
 RETRIEVED = "2026-10-07"
@@ -127,9 +132,10 @@ def _json(value: object) -> bytes:
 
 
 def read_json(path: Path) -> Any:
+    ceiling = MAX_RECEIPT_BYTES if path.name == "certification.json" else MAX_SOURCE_BYTES
     with path.open("rb") as stream:
-        data = stream.read(MAX_SOURCE_BYTES + 1)
-    if len(data) > MAX_SOURCE_BYTES:
+        data = stream.read(ceiling + 1)
+    if len(data) > ceiling:
         raise PacketError("retained JSON exceeds byte ceiling")
     return json.loads(data, object_pairs_hook=unique_json_object)
 
@@ -164,7 +170,6 @@ def acquire(release: Path, supplement: Path, *, release_url: str, supplement_url
                 "source_sha256": hashlib.sha256(raw).hexdigest(),
                 "source_bytes": len(raw),
                 "facts": fact_path(n).relative_to(REPO).as_posix(),
-                "facts_sha256": hashlib.sha256(derived).hexdigest(),
                 "raw_asset_retained": False,
             }
         )
@@ -269,6 +274,7 @@ def to_witness(fact: dict[str, Any]) -> dict[str, Any]:
 
 def decide(witness: dict[str, Any]) -> dict[str, Any]:
     """Independently decide the serialized artifact with both complete exact routes."""
+    witness = {**witness, **checker_input(witness)}
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / "certificate.yaml"
         path.write_text(witness_document(witness, schema="../witness.schema.yaml"))
@@ -301,6 +307,85 @@ def decide(witness: dict[str, Any]) -> dict[str, Any]:
     return json.loads(_json(result))
 
 
+def _checker_fraction(value: Any) -> str:
+    if (
+        type(value) is not str
+        or len(value) > MAX_CHECKER_LITERAL_CHARS
+        or re.fullmatch(r"-?[0-9]+(?:/[0-9]+)?", value) is None
+    ):
+        raise PacketError("checker input needs bounded exact rational strings")
+    try:
+        return str(Fraction(value))
+    except ZeroDivisionError as error:
+        raise PacketError("checker input rational denominator must be nonzero") from error
+
+
+def checker_input(witness: dict[str, Any], *, receipt: bool = False) -> dict[str, Any]:
+    """The complete exact decision input, independent of witness prose and provenance.
+
+    Compare these bounded values directly. Repository-owned facts and certificates are
+    ordinary Git data; a file checksum must not decide whether an old verdict applies.
+    The native verifier's method dispatch is enforced before extracting its geometry.
+    """
+    if type(witness) is not dict or (
+        not receipt and witness.get("claim", {}).get("method") != "exact-algebraic"
+    ):
+        raise PacketError("checker input requires exact-algebraic dispatch")
+    coordinates = {
+        "origin": "lower-left",
+        "axes": "x-right-y-up",
+        "angle_unit": "not-applicable",
+    }
+    n = witness.get("n")
+    if (
+        type(n) is not int
+        or not 1 <= n <= MAX_N
+        or witness.get("representation") != "corners"
+        or witness.get("scalar") != {"kind": "rational"}
+        or witness.get("coordinates") != coordinates
+    ):
+        raise PacketError("checker input requires a bounded rational corner frame")
+    side = _checker_fraction(witness.get("side"))
+    unit = _checker_fraction(witness.get("square_size"))
+    if Fraction(side) <= 0 or unit != "1":
+        raise PacketError("checker input requires a positive side and unit squares")
+    roster = witness.get("squares")
+    if type(roster) is not list or len(roster) != n:
+        raise PacketError("checker input requires the complete square roster")
+    squares = []
+    ids = set()
+    for square in roster:
+        if type(square) is not dict:
+            raise PacketError("checker input square must be an object")
+        identifier = square.get("id")
+        if (
+            type(identifier) not in (int, str)
+            or (type(identifier) is int and not 1 <= identifier <= MAX_N)
+            or (type(identifier) is str and not 1 <= len(identifier) <= 256)
+            or identifier in ids
+        ):
+            raise PacketError("checker input square IDs must be bounded and unique")
+        ids.add(identifier)
+        corners = square.get("corners")
+        if type(corners) is not list or len(corners) != 4:
+            raise PacketError("checker input square must have four ordered corners")
+        points = []
+        for point in corners:
+            if type(point) is not list or len(point) != 2:
+                raise PacketError("checker input corner must have two coordinates")
+            points.append([_checker_fraction(value) for value in point])
+        squares.append({"id": identifier, "corners": points})
+    return {
+        "n": n,
+        "side": side,
+        "square_size": unit,
+        "representation": "corners",
+        "scalar": {"kind": "rational"},
+        "coordinates": coordinates,
+        "squares": squares,
+    }
+
+
 def verified_value(side: Fraction, printed: str) -> str:
     """A decimal ceiling derived with integer arithmetic, never nearest rounding."""
     digits = len(printed.split(".")[1])
@@ -328,27 +413,31 @@ def certify_one(n: int) -> dict[str, Any]:
         "printed_side": fact["printed_side"],
         "certified_side": fact["side"],
         "verified_value": value,
-        "exact_form": str(Fraction(value)),
+        "exact_form": fact["side"],
         "side_inflation": "0",
         "certificate": certificate_path(n).relative_to(REPO).as_posix(),
-        "certificate_sha256": hashlib.sha256(text).hexdigest(),
+        "checker_input": checker_input(witness),
         **verdict,
     }
 
 
-def negative_controls() -> dict[str, Any]:
+def control_witnesses() -> list[tuple[str, dict[str, Any]]]:
     witness = to_witness(read_fact(NUMBERS[0]))
     overlap = copy.deepcopy(witness)
     overlap["squares"][1]["corners"] = copy.deepcopy(overlap["squares"][0]["corners"])
     outside = copy.deepcopy(witness)
     for point in outside["squares"][0]["corners"]:
         point[0] = str(Fraction(point[0]) - 2 * Fraction(outside["side"]))
+    return [
+        ("duplicate-square-overlap", overlap),
+        ("square-translated-outside-container", outside),
+    ]
+
+
+def negative_controls() -> dict[str, Any]:
     rows = [
-        {"control": name, **decide(control)}
-        for name, control in (
-            ("duplicate-square-overlap", overlap),
-            ("square-translated-outside-container", outside),
-        )
+        {"control": name, "checker_input": checker_input(control), **decide(control)}
+        for name, control in control_witnesses()
     ]
     if any(
         row[checker]["verification_passed"]
@@ -367,12 +456,18 @@ def certify(numbers: list[int], workers: int) -> None:
     with ProcessPoolExecutor(max_workers=workers) as pool:
         rows = list(pool.map(certify_one, sorted(numbers, reverse=True)))
     path = PACKET / "receipts/certification.json"
-    previous = read_json(path)["cases"] if path.exists() else []
+    previous_receipt = read_json(path) if path.exists() else {}
+    if previous_receipt and previous_receipt.get("format") != CERTIFICATION_FORMAT:
+        if set(numbers) != set(NUMBERS):
+            raise PacketError("old receipts require complete semantic recertification")
+        previous_receipt = {}
+    previous = previous_receipt.get("cases", [])
     merged = {row["n"]: row for row in previous + rows}
     _write(
         path,
         _json(
             {
+                "format": CERTIFICATION_FORMAT,
                 "producer_checker_replayed": False,
                 "checkers": [
                     "devtools.check_rational_witness_independent",
@@ -384,10 +479,46 @@ def certify(numbers: list[int], workers: int) -> None:
     )
     if NUMBERS[0] in merged:
         _write(PACKET / "receipts/negative-controls.json", _json(negative_controls()))
+    if set(merged) == set(NUMBERS):
+        for label, value in normalized_claims([merged[n] for n in sorted(merged)]).items():
+            _write(PACKET / f"acquisition/{label}-normalized-claims.json", _json(value))
+
+
+def normalized_claims(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Source-coverage offers at safe display ceilings, preserving source exact sides."""
+    return {
+        label: {
+            "basis": (
+                "Safe decimal displays of the source exact rational bounds, rounded "
+                "upward at the source display precision by the complete replay receipt. "
+                "Original source finite displays remain in the acquisition and original "
+                "claims records."
+            ),
+            "certificate_receipt": (PACKET / "receipts/certification.json")
+            .relative_to(REPO)
+            .as_posix(),
+            "original_claims_record": (PACKET / f"acquisition/{label}-claims.json")
+            .relative_to(REPO)
+            .as_posix(),
+            "results": [
+                {
+                    "n": row["n"],
+                    "offered_side": row["verified_value"],
+                    "exact_side": row["certified_side"],
+                    "source_display": row["printed_side"],
+                }
+                for row in rows
+                if (row["n"] == 153) == (label == "supplement")
+            ],
+        }
+        for label in ("release", "supplement")
+    }
 
 
 def check(numbers: list[int], *, replay: bool) -> None:
     receipt = read_json(PACKET / "receipts/certification.json")
+    if receipt.get("format") != CERTIFICATION_FORMAT:
+        raise PacketError("old receipt format requires semantic recertification")
     if receipt["producer_checker_replayed"] is not False or receipt["checkers"] != [
         "devtools.check_rational_witness_independent",
         "sqpack.witness.exact_verify",
@@ -423,21 +554,26 @@ def check(numbers: list[int], *, replay: bool) -> None:
     for n in numbers:
         fact = read_fact(n)
         witness = to_witness(fact)
-        expected = witness_document(witness, schema="../witness.schema.yaml").encode()
+        expected = checker_input(witness)
+        if certificate_path(n).stat().st_size > MAX_RECEIPT_BYTES:
+            raise PacketError("compressed certificate exceeds byte ceiling")
         with gzip.open(certificate_path(n), "rb") as stream:
-            actual = stream.read(len(expected) + 1)
+            actual = stream.read(MAX_RECEIPT_BYTES + 1)
+        if len(actual) > MAX_RECEIPT_BYTES:
+            raise PacketError("certificate exceeds byte ceiling")
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "certificate.yaml"
+            path.write_bytes(actual)
+            certificate = load_witness(path, fallback_schema=SCHEMA)
         if (
-            expected != actual
+            expected != checker_input(dict(certificate))
             or acquired[n]["exact_side"] != fact["side"]
             or acquired[n]["side"] != fact["printed_side"]
         ):
             raise PacketError(f"n={n} certificate/facts acquisition mismatch")
         row = rows[n]
-        if (
-            row["certificate_sha256"] != hashlib.sha256(actual).hexdigest()
-            or acquired[n]["facts_sha256"] != hashlib.sha256(_json(fact)).hexdigest()
-        ):
-            raise PacketError(f"n={n} checker-input digest mismatch")
+        if expected != checker_input(row["checker_input"], receipt=True):
+            raise PacketError(f"n={n} checker-input semantic mismatch")
         if (
             row["certificate"] != certificate_path(n).relative_to(REPO).as_posix()
             or row["printed_side"] != fact["printed_side"]
@@ -448,7 +584,7 @@ def check(numbers: list[int], *, replay: bool) -> None:
         if (row["certified_side"], row["verified_value"], row["exact_form"]) != (
             fact["side"],
             value,
-            str(Fraction(value)),
+            fact["side"],
         ):
             raise PacketError(f"n={n} receipt bound mismatch")
         for name in ("independent", "exact_verify"):
@@ -460,7 +596,7 @@ def check(numbers: list[int], *, replay: bool) -> None:
                 or Fraction(row[name]["minimum_containment_clearance"]) < 0
             ):
                 raise PacketError(f"n={n} missing full checker coverage")
-        if replay and decide(witness) != {
+        if replay and decide(dict(certificate)) != {
             name: row[name] for name in ("independent", "exact_verify")
         }:
             raise PacketError(f"n={n} exact replay mismatch")
@@ -476,7 +612,12 @@ def check(numbers: list[int], *, replay: bool) -> None:
         for name in ("independent", "exact_verify")
     ):
         raise PacketError("invalid negative-control receipt")
+    expected_controls = dict(control_witnesses())
     for row in controls["controls"]:
+        if checker_input(row["checker_input"], receipt=True) != checker_input(
+            expected_controls[row["control"]]
+        ):
+            raise PacketError("negative-control checker-input semantic mismatch")
         for name in ("independent", "exact_verify"):
             result = row[name]
             if (
@@ -500,6 +641,9 @@ def check(numbers: list[int], *, replay: bool) -> None:
             raise PacketError("container control lacks exact negative clearance")
     if replay and controls != negative_controls():
         raise PacketError("negative-control replay mismatch")
+    for label, expected_claims in normalized_claims(receipt["cases"]).items():
+        if read_json(PACKET / f"acquisition/{label}-normalized-claims.json") != expected_claims:
+            raise PacketError(f"{label} normalized claims mismatch")
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -5,7 +5,7 @@ title: "Answer Nate Chaoweeraprasit: SQUISH registration request (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T07:01:21.864Z
-updated_at: 2026-10-07T07:01:54.074Z
+updated_at: 2026-10-07T07:45:48.142Z
 started_at: 2026-10-07T07:01:52.488Z
 ---
 Own acknowledgement, PR progress updates, and final post-merge imported/confirmed

@@ -662,6 +662,10 @@ def apply_case(n: int, text: str) -> str:
     """One case record with its verified upper lane on the certificate; others unchanged."""
     if n not in certificates.CEILINGS:
         return text
+    from devtools.source_supersession import preserve_selected_case  # noqa: PLC0415
+
+    if preserve_selected_case(n, text, {COVERAGE_ID}):
+        return text
     _, front, body = text.split("---\n", 2)
     return f"---\n{front_matter(n, front)}---\n{body_text(n, body)}"
 
@@ -681,13 +685,18 @@ def coverage_text(text: str) -> str:
     from devtools.apply_exact_optima import coverage_entries  # noqa: PLC0415
 
     coverage = safe_load(text)
-    counts = set(certificates.CEILINGS)
+    from devtools.source_supersession import (  # noqa: PLC0415
+        preserve_other_coverage,
+        superseded_counts,
+    )
+
+    counts = set(certificates.CEILINGS) - superseded_counts(coverage, {COVERAGE_ID})
     superseded = [
         entry
         for entry in coverage.get("superseded_reports") or []
         if not (entry["n"] in counts and entry["source_id"] == COVERAGE_ID)
     ]
-    for n in certificates.CEILINGS:
+    for n in sorted(counts):
         row = committed()[n]
         above = _scientific(row["certified_above_printed_side_by"])
         superseded.append(
@@ -705,13 +714,14 @@ def coverage_text(text: str) -> str:
             }
         )
     superseded.sort(key=lambda entry: (entry["n"], entry["source_id"]))
-    return re.sub(
+    rendered = re.sub(
         r"^superseded_reports:.*\n(?:(?:  |    ).*\n)*",
         lambda _match: coverage_entries("superseded_reports", superseded),
         text,
         count=1,
         flags=re.MULTILINE,
     )
+    return preserve_other_coverage(text, rendered, counts)
 
 
 # --------------------------------------------------------------------------------------

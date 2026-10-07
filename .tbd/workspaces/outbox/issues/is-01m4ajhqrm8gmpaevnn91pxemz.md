@@ -3,9 +3,9 @@ type: is
 id: is-01m4ajhqrm8gmpaevnn91pxemz
 title: Independently review mathematics of eleven SQUISH rational upper bounds
 kind: task
-status: closed
+status: in_progress
 priority: 1
-version: 5
+version: 8
 assignee: squish-math-review
 delegate: codex@17e132e9b179
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:59:22.516Z
-updated_at: 2026-10-07T07:16:54.427Z
+updated_at: 2026-10-07T08:00:21.250Z
 started_at: 2026-10-07T06:59:51.562Z
 closed_at: 2026-10-07T07:16:54.427Z
 close_reason: null
@@ -29,13 +29,13 @@ No optimality or author-checker reproduction claim.
 
 ## Notes
 
-FINAL ACCEPTED 2026-10-07. Stable review
-docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md covers
-T-113/T-114; no open mathematical defect.
-Source1885 triples exact match.
-Complete177440 pairs per route.
-Reviewer independently reran all positive geometry; MR-2 control tuple/list mismatch
-fixed and focused replay passed; engineering final full replay76.122s. Reviewer32 final
-packet/receipt tests passed.
-MR-1 duplicate receipt roster fixed.
-S3 confirmed. Parent owns mapping, record adoption, commits and publication.
+Reopened for confirmation adoption and semantic receipt v2 audit.
+All11 case lanes checked: exact_form=S source rational, value=least safeceil16(S),
+S<=V<S+1e-16; original source decimals retained separately.
+MR-3 atlas normalization mismatch reproduced at126/130 and fixed, both regression cases
+pass. Inspected complete semantic checker input binding including coordinate
+frame/unit/dispatch/full roster and both controls; repository-owned digests removed.
+Read final all11+controls replay log75.594s; personally42 final packet/receipt/semantic
+tests passed3.39s in confirmation checkout and2 atlas normalization tests passed.
+Updated confirmation review; waiting requested final rebased atlas/citation/rigidity
+integration snapshot before stable signoff/close.

@@ -796,8 +796,16 @@ def _entries(name: str, entries: Sequence[Mapping[str, Any]]) -> str:
 def coverage_text(
     text: str, selected: list[Plan], earliest: Mapping[int, Mapping[str, str]]
 ) -> str:
+    original = text
     coverage = safe_load(text)
     ours = {registration.coverage_id for registration in REGISTRATIONS}
+    from devtools.source_supersession import (  # noqa: PLC0415
+        preserve_other_coverage,
+        superseded_counts,
+    )
+
+    later = superseded_counts(coverage, ours)
+    selected = [plan for plan in selected if plan.n not in later]
     by_n = {plan.n: plan for plan in selected}
     overrides = [
         entry
@@ -866,8 +874,10 @@ def coverage_text(
     pattern = re.compile(r"^superseded_reports:.*\n(?:(?:  |    ).*\n)*", re.MULTILINE)
     block = _entries("superseded_reports", superseded)
     if pattern.search(text):
-        return pattern.sub(lambda _match: block, text, count=1)
-    return text.replace("beyond_horizon_claims:", block + "beyond_horizon_claims:", 1)
+        rendered = pattern.sub(lambda _match: block, text, count=1)
+    else:
+        rendered = text.replace("beyond_horizon_claims:", block + "beyond_horizon_claims:", 1)
+    return preserve_other_coverage(original, rendered, set(by_n))
 
 
 # --------------------------------------------------------------------------------------
@@ -919,6 +929,10 @@ def apply_case(plan: Plan, text: str, earlier: Mapping[str, str]) -> str:
     ``devtools.generate_frontier_case`` applies it to its own draft of a certified count,
     since the record is that draft with this intake applied.
     """
+    from devtools.source_supersession import preserve_selected_case  # noqa: PLC0415
+
+    if preserve_selected_case(plan.n, text, {plan.registration.coverage_id}):
+        return text
     if plan.previous is not None:
         text = apply_case(plan.previous, text, earlier)
     _, front, body = text.split("---\n", 2)
