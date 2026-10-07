@@ -5,15 +5,19 @@ title: Review n17 companion Rust verifier mathematics for PR410 intake
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 6
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 parent_id: is-01m4bxdtbvasjn91jwhz448s7b
+child_order_hints:
+  - is-01m4c2efnztmx3eapp9a9sjmzc
+  - is-01m4c2eg2yz9ss394xahzvyxkw
+  - is-01m4c2egfv3z74jzvvgycx3wfj
 hold: null
 hold_until: null
 created_at: 2026-10-07T20:26:14.123Z
-updated_at: 2026-10-07T20:41:38.217Z
+updated_at: 2026-10-07T20:56:28.411Z
 started_at: 2026-10-07T20:26:15.947Z
 ---
 Parallel Astra deep technical static review of incoming PR410 proof/verifier scopes and producer independence. No fork code execution or assurance promotion; identify exact blockers and bounded import next steps while original SQUISH merges.
