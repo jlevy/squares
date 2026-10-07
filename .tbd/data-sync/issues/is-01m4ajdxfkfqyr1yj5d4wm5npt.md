@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eleven SQUISH upper-bound packings (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 23
+version: 24
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -27,7 +27,7 @@ child_order_hints:
 hold: blocked
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T18:06:54.972Z
+updated_at: 2026-10-07T18:16:10.313Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: W1 result import stages 1–3, followed by W7 bounded engineering and W2 full exact-rational replay/mapped independent math review, then publication and authorized issue reply. Scope: issue #401 ten pinned repository certificates at 07fe6dde1e5b67405a3076719b90e58e2882b677 plus n153 in comment 6031977107 (eleven counts total). Two separable PRs; no main push or merge without explicit merge consent. Source no-license retention: derived geometry facts and attributed metadata only. Engineering GPT-6.1 Sol, records GPT-6.1 Sol, math/soundness Astra. Native tbd sync known divergent/permission blocked; preserve all work in outbox and working branch.
@@ -163,3 +163,5 @@ Actual pushes of reported 6d0546b4c8949d9775d1a99865ec4e7277251cc7 and confirmed
 Durable actual-outcome receipt and logs: /workspace/squares-401-publication-retry-20261007/publication-retry-receipt.json. Existing validated scientific source, source branch heads, prior closing archive and source bundle remain unchanged; no full source gate is repeated. Newly saved tracker variants are preserved in the external retry snapshot and a separate standalone native tracker bundle; the earlier bundle stays recoverable.
 
 Original task branch publication test (2026-10-07): remote refs/heads/work was absent. One authorized safe actual non-forced push of completed confirmation 8f3c5484b9bade9cdf5c8fe332f2d5e6c2e016ac to refs/heads/work exited128 HTTP403 Permission denied. Remote readback still shows no work branch. No force, main write, local reset, credentials/remotes/TLS change or guessed branch names used. Repository guidance did not declare another allowed task ref. All original source refs remain unchanged and clean. Actual logs /workspace/squares-401-work-publication-{lsremote,push,verify}.log; standalone updated native bundle /workspace/squares-401-native-tracker-work-retry.bundle; raw working/native variants retained /workspace/squares-401-work-branch-retry. Publication remains blocked, no PR or CI.
+
+GitHub-plugin publication retry (2026-10-07): user explicitly invoked @GitHub and requested PR publication. Tool discovery still exposes no callable GitHub write plugin/tool_search, so existing authorized gh fallback was checked once for changed access. gh2.97 masked auth reports jlevy; all three branch PR reads return none; remote main remains publicEF and all feature refs are absent. One actual non-forced push of reported6d0546b4c8949d9775d1a99865ec4e7277251cc7 to codex/import-squish-401 again exited128 HTTP403 Permission denied. Remote readback confirms the branch is still absent. No further branch guesses, direct probes, repeated PR writes, auth/remote/TLS changes or broad tests were attempted. No PR or CI created, and all source refs remain unchanged. Evidence and fresh raw tracker/outbox snapshots: /workspace/squares-401-github-plugin-retry; standalone latest native bundle /workspace/squares-401-native-tracker-github-plugin-retry.bundle. Existing backups retained; parent publication stays in_progress/hold blocked.
