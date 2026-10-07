@@ -3806,6 +3806,8 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         "campaign record",
         # An advisory wall's tracking bead is read from the bead store, not the tree.
         "tier ceilings are declared and not slack",
+        # New custody checks repeat until their tree reuse is explicitly classified.
+        "SQUISH update certification binds complete reviewed inputs",
     }
 
     # Fail closed: a new fast step is repeated until explicitly classified.

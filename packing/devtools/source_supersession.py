@@ -166,7 +166,9 @@ def _adopt_selected_update(n: int, existing: str, generated: str) -> str:
                 ),
             ),
         ):
-            occurrences = " ".join(text.split()).count(replacement)
+            # Standard prose formatting uses a typographic apostrophe. Recognize
+            # that same declaration after formatting without relaxing its count.
+            occurrences = " ".join(text.split()).replace("\u2019", "'").count(replacement)
             if occurrences > 1:
                 raise ValueError("confirmed update needs exactly one assurance declaration")
             if occurrences == 0:

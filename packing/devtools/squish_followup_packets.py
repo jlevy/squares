@@ -702,6 +702,28 @@ def restore_witnesses() -> None:
         save_certificate(path, data)
 
 
+def linked_certificate_problem(path: str, *, repository: Path) -> str | None:
+    """Admit only the worker's twelve complete, read-only linked reviewed proofs.
+
+    The worker keeps the complete private source facts and replay receipts. Its
+    generated proof directory links back to the source checkout to stay within
+    the snapshot ceiling. Reading such an artifact requires the same complete
+    semantic admission as the certification CLI; existence alone is insufficient.
+    Mutation targets and producer outputs retain their separate containment guards.
+    """
+    if repository.resolve() != REPO.resolve() or not WITNESSES.is_symlink():
+        return "resolves outside the repository"
+    declared = {certificate_path(n).relative_to(REPO).as_posix(): n for n in RESULT_NUMBERS}
+    n = declared.get(path)
+    if n is None or certificate_path(n).is_symlink():
+        return "resolves outside the repository"
+    try:
+        check_certification([n])
+    except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
+        return f"linked reviewed proof custody mismatch: {error}"
+    return None
+
+
 def confirmed_bound(n: int) -> dict[str, Any]:
     row = check_certification([n])[n]
     return {

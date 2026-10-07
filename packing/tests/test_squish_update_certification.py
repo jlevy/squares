@@ -34,6 +34,109 @@ def save_receipt(path: Path, value: object) -> None:
     path.write_bytes(lzma.compress(packet.json_bytes(value)))
 
 
+def link_private_proofs() -> Path:
+    """Link only private proof copies outside the private consumer repository."""
+    source = packet.REPO.with_name(packet.REPO.name + "-linked-proofs")
+    shutil.move(packet.WITNESSES, source)
+    packet.WITNESSES.symlink_to(source, target_is_directory=True)
+    return source
+
+
+@pytest.mark.usefixtures("private_packet")
+def test_linked_proof_read_admission_is_exact_and_keeps_other_escapes_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import check_results  # noqa: PLC0415
+
+    source = link_private_proofs()
+    monkeypatch.setattr(check_results, "REPO", packet.REPO)
+    before = {path.name: path.read_bytes() for path in source.iterdir()}
+    for n in packet.RESULT_NUMBERS:
+        relative = packet.certificate_path(n).relative_to(packet.REPO).as_posix()
+        assert check_results.repository_file_problem(relative) is None
+        assert packet.linked_certificate_problem(relative, repository=source) == (
+            "resolves outside the repository"
+        )
+    unrelated = packet.REPO / "unrelated.yaml.gz"
+    unrelated.symlink_to(source / "n-123-rational.yaml.gz")
+    assert check_results.repository_file_problem("unrelated.yaml.gz") == (
+        "resolves outside the repository"
+    )
+    assert (
+        check_results.repository_file_problem(
+            "packing/witnesses/squish-401-update-2026/n-153-rational.yaml.gz"
+        )
+        == "resolves outside the repository"
+    )
+    assert check_results.repository_file_problem("../unrelated.yaml.gz") == (
+        "must be a normalized repository-relative path"
+    )
+    assert {path.name: path.read_bytes() for path in source.iterdir()} == before
+
+
+@pytest.mark.parametrize("mutation", ["receipt", "proof"])
+def test_linked_proof_read_admission_refuses_complete_custody_corruption(
+    private_packet: Path, monkeypatch: pytest.MonkeyPatch, mutation: str
+) -> None:
+    from devtools import check_results  # noqa: PLC0415
+
+    source = link_private_proofs()
+    monkeypatch.setattr(check_results, "REPO", packet.REPO)
+    if mutation == "receipt":
+        path = private_packet / "receipts/certification.json.xz"
+        receipt = packet.read_xz_receipt(path)
+        receipt["cases"][0]["checker_input"]["squares"][0]["corners"][0][0] = "99"
+        save_receipt(path, receipt)
+    else:
+        (source / "n-123-rational.yaml.gz").unlink()
+    relative = packet.certificate_path(123).relative_to(packet.REPO).as_posix()
+    problem = check_results.repository_file_problem(relative)
+    assert problem is not None
+    assert problem.startswith("linked reviewed proof custody mismatch:")
+
+
+@pytest.mark.usefixtures("private_packet")
+def test_individual_external_proof_symlinks_do_not_gain_read_admission(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import check_results  # noqa: PLC0415
+
+    monkeypatch.setattr(check_results, "REPO", packet.REPO)
+    path = packet.certificate_path(123)
+    source = packet.REPO.with_name(packet.REPO.name + "-external-proof.yaml.gz")
+    source.write_bytes(path.read_bytes())
+    path.unlink()
+    path.symlink_to(source)
+    assert not packet.WITNESSES.is_symlink()
+    assert check_results.repository_file_problem(path.relative_to(packet.REPO).as_posix()) == (
+        "resolves outside the repository"
+    )
+
+
+@pytest.mark.usefixtures("private_packet")
+def test_linked_directory_does_not_admit_a_valid_external_leaf_symlink(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import check_results  # noqa: PLC0415
+
+    source = link_private_proofs()
+    monkeypatch.setattr(check_results, "REPO", packet.REPO)
+    leaf = source / "n-123-rational.yaml.gz"
+    external = source.with_name(source.name + "-leaf.yaml.gz")
+    external.write_bytes(leaf.read_bytes())
+    leaf.unlink()
+    leaf.symlink_to(external)
+    assert packet.certificate_path(123).is_symlink()
+    # The geometry itself remains valid; the additional link is still inadmissible.
+    packet.check_certification([123])
+    assert (
+        check_results.repository_file_problem(
+            packet.certificate_path(123).relative_to(packet.REPO).as_posix()
+        )
+        == "resolves outside the repository"
+    )
+
+
 def test_all_complete_proofs_and_reused_timing_are_bound(private_packet: Path) -> None:
     rows = packet.check_certification()
     assert tuple(rows) == packet.RESULT_NUMBERS

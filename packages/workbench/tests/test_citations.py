@@ -289,10 +289,17 @@ def test_the_current_handover_does_not_label_an_earlier_ceiling_as_confirmation(
 ) -> None:
     document = json.loads(CITATIONS.read_text(encoding="utf-8"))
     entry = next(row for row in document["citations"]["entries"] if row["n"] == n)
-    assert entry["upper"]["assurance"] == "reported"
-    assert earlier_result in entry["upper"]["results"]
-    assert entry["upper"]["confirmed_by"] == []
-    assert cited_lines(entry)["upper"][2] == "(reported)"
+    assert earlier_result not in entry["upper"]["confirmed_by"]
+    if n == 123:
+        assert entry["upper"]["results"] == ["T-115"]
+        assert entry["upper"]["assurance"] == "verified"
+        assert entry["upper"]["confirmed_by"] == ["T-115"]
+        assert cited_lines(entry)["upper"][2] == "(confirmed T-115)"
+    else:
+        assert earlier_result in entry["upper"]["results"]
+        assert entry["upper"]["assurance"] == "reported"
+        assert entry["upper"]["confirmed_by"] == []
+        assert cited_lines(entry)["upper"][2] == "(reported)"
 
 
 def test_a_lower_bound_names_the_published_work_it_corrects(tmp_path: Path) -> None:

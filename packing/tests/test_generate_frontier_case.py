@@ -1531,6 +1531,31 @@ def test_selected_update_refuses_missing_geometry_declarations(declaration: str)
         )
 
 
+@pytest.mark.parametrize("mutation", ["missing", "duplicate"])
+def test_confirmed_update_refuses_missing_or_duplicate_assurance(mutation: str) -> None:
+    n = 126
+    existing = record_path(FRONTIER, n).read_text()
+    declaration = re.search(
+        r"This update is\s+confirmed at V3/C3.*?been established\.",
+        existing,
+        re.DOTALL,
+    )
+    assert declaration is not None
+    assurance = declaration.group()
+    replacement = "Missing assurance." if mutation == "missing" else assurance + assurance
+    stale = existing.replace(assurance, replacement, 1)
+    availability = load_availability()
+    with pytest.raises(GenerationError, match="assurance declaration"):
+        redraft(
+            n,
+            stale,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        )
+
+
 @pytest.mark.parametrize("n", [126, 179])
 def test_update_refresh_refuses_unmapped_confirmation_evidence(n: int) -> None:
     existing = record_path(FRONTIER, n).read_text()

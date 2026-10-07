@@ -1961,6 +1961,9 @@ issues:
     notes: The author moved the next nine certificates to issue 422 in https://github.com/jlevy/squares/issues/401#issuecomment-6047131959
       (created 7 October 2026 at 21:23:34 UTC). That later source revision is outside this eighteen-count
       first-update request and T-115. The progress reply https://github.com/jlevy/squares/issues/401#issuecomment-6046723077,
-      edited at 21:44:05 UTC, records the eleven original bounds published on main and the reported
-      draft 421 with a citation-label repair pending. The separate 422 queue acknowledgement is https://github.com/jlevy/squares/issues/422#issuecomment-6047406306.
+      edited at 22:04:36 UTC, records the eleven original bounds published on main and formal
+      stack 424 with reported draft 421 and confirmation draft 423. The older-certificate
+      citation repair passed hosted CI; a subsequent browser repair passed all twenty affected
+      browser tests. The lower gate and upper confirmation integration repairs remain pending.
+      The separate 422 queue acknowledgement is https://github.com/jlevy/squares/issues/422#issuecomment-6047406306.
       A final accurate author reply remains due after this confirmation layer is merged and deployed.

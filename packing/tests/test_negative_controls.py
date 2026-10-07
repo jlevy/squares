@@ -940,6 +940,8 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     honest -- an index built by adding whatever happens to be on disk would also answer,
     and would put a reader's `attic/` scratch in it (PR 207).
     """
+    from devtools import squish_followup_packets as packet  # noqa: PLC0415
+
     tree, _copied = control_snapshot
     listed = tracked_files(tree, ".")
     assert listed is not None, "the worker snapshot has no index to ask"
@@ -952,8 +954,22 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
         check=True,
         capture_output=True,
     ).stdout.split(b"\0")
-    repository = {name.decode() for name in names if name and (tree / name.decode()).is_file()}
+    linked_root = tree / "packing/witnesses/squish-401-update-2026"
+    assert linked_root.is_symlink()
+    linked_proofs = {
+        packet.certificate_path(n).relative_to(controls.REPO).as_posix()
+        for n in packet.RESULT_NUMBERS
+    }
+    for relative in linked_proofs:
+        assert (tree / relative).is_file()
+        assert (tree / relative).resolve() == (controls.REPO / relative).resolve()
+    repository = {
+        name.decode()
+        for name in names
+        if name and (tree / name.decode()).is_file() and name.decode() not in linked_proofs
+    }
     assert tracked == repository
+    assert not tracked & linked_proofs
 
     # The linked-back environment and cargo target are the real checkout's, not this
     # snapshot's content, which is why the index is built before they are symlinked in.
