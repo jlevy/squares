@@ -3541,6 +3541,12 @@ def _results_register(context: Context) -> str:
     return f"{first}\n{second}"
 
 
+def _squish_update_certification(context: Context) -> str:
+    # Bounded offline input/provenance admission. Full dual geometric replay is an
+    # explicit --replay operation, with the original completed run retained separately.
+    return _module(context, "devtools.squish_followup_packets", "check-certification")
+
+
 def _results_headline(context: Context) -> str:
     # Sub-second: one register, one document, one rubric. Records tier because it checks
     # presentation of the record -- that every registered result reaches the section a
@@ -5246,6 +5252,20 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/evidence.yaml",
             "packing/frontier/n-*.md",
             "packing/resources/bibliography.yaml",
+        ),
+    ),
+    Step(
+        "SQUISH update certification binds complete reviewed inputs",
+        _squish_update_certification,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/resources/web/squish-401-update-2026-10-07/**",
+            "packing/witnesses/squish-401-update-2026/**",
         ),
     ),
     Step(

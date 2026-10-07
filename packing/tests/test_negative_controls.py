@@ -1191,3 +1191,66 @@ def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
     assert f"mirrors all {rule_count} rules" in baseline.stdout
     assert controls.run_one(control, tmp_path) == (True, "")
     assert source.read_text() == original
+
+
+def test_squish_complete_replay_survives_worker_custody_and_private_controls(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Linked proofs remain readable while mutations use copied admission records."""
+    from devtools import squish_followup_packets as packet  # noqa: PLC0415
+
+    tree, copied = control_snapshot
+    work = tree / HERE
+    root = work / "witnesses/squish-401-update-2026"
+    assert root.is_symlink()
+    for n in packet.RESULT_NUMBERS:
+        source = packet.certificate_path(n)
+        relative = source.relative_to(ROOT).as_posix()
+        assert (work / relative).read_bytes() == source.read_bytes()
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(relative, tree=tree, work=work)
+    for name in (
+        "certification.json.xz",
+        "negative-controls.json.xz",
+        "replay-summary.json",
+        "reviewed-semantic-binding.json.xz",
+    ):
+        source = packet.PACKET / "receipts" / name
+        relative = source.relative_to(controls.REPO)
+        assert relative in copied
+        assert not (tree / relative).is_symlink()
+        assert (tree / relative).read_bytes() == source.read_bytes()
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [c for c in specification["controls"] if c["name"].startswith("SQUISH update -")]
+    assert len(selected) == 2
+    env = controls.control_environment(tree, tree / "squish-baseline-pycache")
+    baseline = subprocess.run(
+        [sys.executable, "-m", "devtools.squish_followup_packets", "check-certification"],
+        cwd=work,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=30,
+    )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    for control in selected:
+        target = resolve_control_target(control["file"], tree=tree, work=work)
+        before = target.read_bytes()
+        source = ROOT / control["file"]
+        source_before = source.read_bytes()
+        passed, detail = controls.run_one(control, tree)
+        assert passed, detail
+        assert target.read_bytes() == before
+        assert source.read_bytes() == source_before
+    for name in ("fast-cpu4-bdc28e89", "fast-native-bdc28e89"):
+        source = ROOT / f"campaign/agent-sessions/session-105-validation/{name}.json"
+        assert source in PRUNE
+        assert source.relative_to(controls.REPO) not in copied
+        assert not (tree / source.relative_to(controls.REPO)).exists()
+        identity = source.with_name(f"{name}-source.json")
+        assert (
+            tree / identity.relative_to(controls.REPO)
+        ).read_bytes() == identity.read_bytes()
+    session = ROOT / "campaign/agent-sessions/session-105-stromquist-n26-verification.md"
+    assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()

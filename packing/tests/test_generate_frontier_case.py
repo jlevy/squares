@@ -1532,7 +1532,7 @@ def test_selected_update_refuses_missing_geometry_declarations(declaration: str)
 
 
 @pytest.mark.parametrize("n", [126, 179])
-def test_reported_update_refresh_cannot_demote_a_confirmed_update(n: int) -> None:
+def test_update_refresh_refuses_unmapped_confirmation_evidence(n: int) -> None:
     existing = record_path(FRONTIER, n).read_text()
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
@@ -1540,13 +1540,13 @@ def test_reported_update_refresh_cannot_demote_a_confirmed_update(n: int) -> Non
     case["verified_upper_bound"] = {
         "value": case["reported_upper_bound"]["value"],
         "exact_form": case["reported_upper_bound"]["exact_form"],
-        "evidence": ["E-squish-update-2026-10-07-exact-replay"],
+        "evidence": ["E-squish-update-unmapped-exact-replay"],
     }
     confirmed = (
         "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
     )
     availability = load_availability()
-    with pytest.raises(GenerationError, match="requires its own confirmation adapter"):
+    with pytest.raises(GenerationError, match="unmapped confirmed SQUISH update evidence"):
         redraft(
             n,
             confirmed,

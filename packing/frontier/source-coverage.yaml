@@ -1794,11 +1794,12 @@ sources:
     claims_record: resources/web/squish-401-update-2026-10-07/acquisition/update-claims.json
     evidence:
     - E-squish-update-2026-10-07-report
-    notes: Reported only; twelve exact sides normalized to safe upward displays. The thirteenth certificate,
-      n153, is exactly identical to the earlier attachment; its full geometry comparison is retained
-      without a new result. All prior packets, receipts and reviews remain unchanged. Per-case source
-      seed credit is retained in the new packet.
-
+    - E-squish-update-2026-10-07-exact-replay
+    notes: Twelve exact rational sides are confirmed by the retained complete dual replay and two
+      scoped AI reviews; safe upward displays and original source prints remain distinct. The thirteenth
+      certificate n153 is exactly identical to its earlier attachment and adds no result or assurance.
+      All original packets, receipts and reviews retain their scope; per-case source seed credit is
+      retained.
 
 selected_overrides:
   - n: 68

@@ -198,6 +198,9 @@ PRUNE = frozenset(
         ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/known-best-1-324.svg",
         ROOT / "atlas/known-best/rendering",
+        # Full generated update certificates remain readable through LINK_BACK.
+        # Receipt/code mutations copy the inputs into their private temporary tree.
+        ROOT / "witnesses/squish-401-update-2026",
         # The regularized layer's 51 drawings (think-bgkz, 2026-10-02), 11 MB of generated
         # SVG that `regularized atlas drawings match their index` re-renders and compares,
         # joined on the same grounds when they took the snapshot to 204,959,999 bytes
@@ -310,6 +313,13 @@ PRUNE = frozenset(
         / "campaign/series/series-000-smoke-and-calibration/results/agenda-040"
         / "one-spare-inventory-n21-orbits.json.gz",
         ROOT / "campaign/agent-sessions/session-105-validation/full-48a4544f.json",
+        # Two older fast-gate telemetry receipts have no command reader, control,
+        # inline link or registered result dependency. Keep their source-identity
+        # records and the ordinary session document; copy-back takes precedence if
+        # either receipt becomes linked or registered. These exact two files save
+        # 117,584 bytes without omitting any SQUISH proof input or changing the cap.
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-cpu4-bdc28e89.json",
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-native-bdc28e89.json",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private
@@ -565,6 +575,7 @@ LINK_BACK = (
     Path("sqverify_exact/target"),
     Path("sqverify_fast/target"),
     Path("n17bb_native/target"),
+    "witnesses/squish-401-update-2026",
 )
 # Individual files rescued from `PRUNE` because a check that runs inside a worker reads
 # that exact path. `clone_tree` copies precisely this tuple and `snapshot_source_bytes`
@@ -933,6 +944,7 @@ LINKED_PRUNE_ROOTS = (
         not in {
             ROOT / ".gate-running",
             ROOT / ".venv",
+            ROOT / "witnesses/squish-401-update-2026",
             ROOT / "sqsearch/target",
             ROOT / "sqverify_exact/target",
             ROOT / "sqverify_fast/target",

@@ -28074,3 +28074,56 @@ evidence:
       is disclosed. Finite source prints are kept separate from exact rational sides and safe upward
       decimal displays.'
     source_reviewed: '2026-10-07'
+
+  - id: E-squish-update-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH update 2026-10-07]'
+    certificate: packing/witnesses/squish-401-update-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets
+      check-certification --replay. The retained complete reviewer replay is reused; retention did
+      not rerun either decider. Both routes accepted the twelve exact rational packings and rejected
+      both full-size controls.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-followup-packets
+    independence_record: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    limitations: The twelve geometries contain 2309 squares and 237025 unordered pairs per deciding
+      route. Scoped positive wall time was 104.001 seconds, taken from the completed thirteen-case
+      108.598-second run; the duplicate n153 is excluded. Each 123-square control tested all 7503
+      pairs per route, with 7.684 seconds total measured control time. The first-party routes share
+      exact converted corners, YAML and Python rational arithmetic, but no geometry code. Two separately
+      prompted AI reviews cover the conversion and full semantic source/input/control binding. The
+      producer checker was not executed. Sides are unchanged exact rationals, with least upward sixteen-place
+      decimal displays and separate original source prints. Feasible upper bounds establish neither
+      optimality nor rigidity, proof-assistant verification or independently audited human oversight.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra mathematics and separately prompted semantic binding AI review lanes
+      note: The accepted scoped reviews docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+        and docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md cover these twelve
+        update geometries, full decided inputs and full-size controls. The original eleven-case reviews
+        retain their original scope.
+    source_reviewed: '2026-10-07'

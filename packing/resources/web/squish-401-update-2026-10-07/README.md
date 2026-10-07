@@ -1,10 +1,11 @@
-# SQUISH update: rational upper-bound claims
+# SQUISH Update: Confirmed Rational Upper Bounds
 
 Nate Chaoweeraprasit (itsnaka), using SQUISH, reports thirteen certificates in
 [the updated request](https://github.com/jlevy/squares/issues/401#issuecomment-6043191866). Twelve give new or tighter reported bounds;
 n153 has exactly the same side and complete ordered rational geometry as the earlier
 attachment. The original ten-packing packet, its n153 supplement, receipts and accepted
-reviews remain intact. This packet adds no feasibility assurance beyond reported V0/C0.
+reviews remain intact. Complete dual exact replay and two separately prompted scoped AI
+reviews confirm the twelve changed geometries at V3/C3. n153 keeps its original evidence.
 
 ## Source and Retention
 
@@ -21,12 +22,12 @@ seeds and SQUISH for three, as listed below. Earlier finder credit remains in th
 case histories and packets; seed credit does not imply that a seed author found this
 new pose. Numerical polishing supplies no optimality or rigidity proof.
 
-## Reported Sides and Seeds
+## Bound Displays and Seeds
 
-The table uses upward decimal ceilings of the exact claimed rational sides. Original
+The table uses upward decimal ceilings of the exact certified rational sides. Original
 finite source prints and exact forms remain separate in the derived facts and manifest.
 
-| n | Safe reported side | Author-reported seed |
+| n | Safe bound display | Author-reported seed |
 | --- | --- | --- |
 | 123 | 11.6009077785163406 | Francisco Couzo's s(102), grafted into n's Kingbird record |
 | 126 | 11.7733036066072403 | Francisco Couzo's s(105), grafted into n's Kingbird record |
@@ -69,11 +70,60 @@ uv run --frozen python -m devtools.squish_followup_packets check
 `PATH` is the pinned source's `squish-submission-2026-10-07` directory. Acquisition uses
 the original bounded rational parser and retains all thirteen complete rosters. The
 checks establish source identity and normalized-record consistency; neither runs the
-producer checker nor establishes feasible geometry. Complete deciding replay and new
-scoped review are the next entry under think-oxvk. The current atlas draws the twelve
-update geometries and checks exact feasibility at the drawing boundary; that check does
-not promote the imported result. Earlier certified bounds, source packets, receipts and
-reviews remain unchanged while these tighter claims await retained confirmation.
+producer checker nor establishes feasible geometry.
+
+## Complete Replay and Recovery
+
+The completed reviewer run accepted thirteen certificates in 108.598 seconds. This
+packet reuses its complete decided inputs and verdicts for twelve changed geometries:
+2,309 squares, 237,025 unordered pairs per checker and 104.001 seconds of positive replay.
+The excluded n153 replay accounts for 4.596 seconds and adds no assurance. Two full-size
+123-square controls duplicate a square or translate one outside the container. Both
+deciding routes rejected both controls after all 7,503 pairs, in 7.684 seconds total.
+Retention did not execute a new deciding replay or the upstream producer checker.
+
+[The complete receipt](receipts/certification.json.xz),
+[complete controls](receipts/negative-controls.json.xz) and
+[timing attribution](receipts/replay-summary.json) retain those measured decisions.
+[The mathematical review](../../../../docs/project/reviews/review-2026-10-07-squish-update-mathematics.md)
+and [semantic binding review](../../../../docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md)
+cover these exact inputs, conversion premises, controls and ceilings.
+The accepted [semantic comparison](receipts/reviewed-semantic-binding.json.xz) is retained.
+
+From `packing/`, the supported offline commands are:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets check-certification
+uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets restore-witnesses
+uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets check-certification --replay
+```
+
+The first command admits the current acquisition, exact facts, revision-specific witness
+IDs/source paths/replay instructions, complete semantic inputs, typed deciding coverage,
+control refusals and safe ceilings. It requires all retained artifacts; missing data
+fails. The second deterministically recovers all twelve proof files from admitted facts
+and complete receipts without a scratch directory, network access or geometric rerun.
+The third explicitly repeats both exact deciding routes on every wall and pair and both
+controls; it is the slower reproduction command.
+
+Initial retention uses `retain-reviewed-replay --review-root PATH --source RAW_PATH`.
+`PATH` contains the completed reviewer run's acquisition, per-count receipts, controls
+and summary; `RAW_PATH` contains the thirteen pinned `nNNN.cert.json` source files.
+The command admits all thirteen raw sources and full reviewed inputs before writing
+the twelve new proofs. It does not replace the original packet or claim fresh execution.
+
+XZ admission allows one stream, at most 4,000,000 compressed or decoded bytes and at most
+32 MiB of decompressor memory. Truncation, trailing or concatenated payloads and duplicate
+JSON keys fail. Mutation workers copy the full receipts and facts and read the retained
+proofs through a link. Their target resolver and every producer publication reject
+writes through that link outside the private checkout; mutations use private copies.
+The 192 MiB source-copy cap remains unchanged. These storage checks confer no assurance.
+
+Both first-party deciders share exact corner input and Python rational arithmetic; their
+geometry implementations are separate. The scoped reviews address the shared conversion
+and input binding. The certificates establish feasible upper bounds. Optimality, rigidity
+and independently audited human oversight remain unestablished. Source prints and stated
+seed lineage remain separately attributed, with the original packets and reviews retained.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
