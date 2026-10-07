@@ -122,6 +122,27 @@ def selected_weights(document: dict[str, Any]) -> tuple[dict[str, Any], tuple[Q,
     return selected, weights
 
 
+def retained_cell(cell: dict[str, Any]) -> dict[str, Any]:
+    """Retain exact dual numerators as canonical strings under the JSON input bounds.
+
+    The source duals use integer numerators at the fixed dual scale. Certificate
+    decoding intentionally permits only small bare JSON integers, so these witness
+    numerators use the same bounded rational-string representation as other exact data.
+    Replay regenerates these strings from the original integer witness.
+    """
+
+    def numerator(value: int) -> str:
+        text = str(value)
+        exact.require(exact.rational(text) == value, "dual numerator encoding differs")
+        return text
+
+    return {
+        "cell": cell["cell"],
+        "lambda": [numerator(value) for value in cell["lambda"]],
+        "mu": [[numerator(value) for value in values] for values in cell["mu"]],
+    }
+
+
 def evaluate(
     rows: list[list[core.Dyadic]],
     documents: list[dict[str, Any]],
@@ -164,7 +185,7 @@ def evaluate(
         entries.append(
             {
                 "direction": direction,
-                "selected_cell": cell,
+                "selected_cell": retained_cell(cell),
                 "weights_at_origin": [str(weight) for weight in weights],
                 "residual_intervals": [[str(value.lo), str(value.hi)] for value in residuals],
                 "epsilon": str(epsilon),

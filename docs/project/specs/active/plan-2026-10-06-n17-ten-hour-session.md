@@ -110,10 +110,13 @@ On a four-CPU host keep at most two heavy processes; on the Mac’s reported ten
 shape, extra cores do not accelerate a sequential kernel step automatically.
 Do not launch if projected scratch headroom after outputs is below 8 GiB; pause a lane
 before available memory falls below 3 GiB. Checkpoints count against disk limits.
-The current retained memory helper raises on Darwin for current RSS; lifetime peak RSS
-is not a substitute.
-Validate a Mac current-memory adapter or PID monitor before claiming this guard is
-enforced, and record its sampling interval and stop behavior.
+The native macOS current-RSS adapter and optional pilot guard are integrated with
+independent controls.
+Lifetime peak RSS remains a reporting metric.
+The guard samples at explicit seed/producer/checker/replay boundaries; a heavy call may
+overshoot before the next sample.
+It is a cooperative guard, not a hard PID monitor.
+The known-case target must register its memory cap and preserve incomplete checkpoints.
 
 ## Lane Contracts
 

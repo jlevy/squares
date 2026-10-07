@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 191 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 193 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1149,7 +1149,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-276 | confirmed | proof | The retained current-ledger stratifier partitions all surviving states |  | 1 |  | 2s wall |
 | H-277 | unresolved | proof | At the accepted rational-root midpoint, the conditional 19-pair bounde |  | 1 |  | 8s wall |
 | H-278 | confirmed | proof | Across the accepted exp237 root inclusion interval and all eight verti |  | 1 |  | 1s wall |
-| H-279 | running | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 1 |  |  |
+| H-279 | blocked | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 2 |  | 4s wall |
+| H-280 | running | proof | The deterministic retained dual seed at exp260 outer negative omega16  |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1281,7 +1282,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-255 | series-000 | 17 | Claude Session 182; the run operator's lane E queue ran the ten shards on a second clean run worktree in the slot left after the kernel lanes | H-273 | All 95 distance-2 orbits were searched and none placed, while every shard's control placed. Under the frozen criterion that is no placement in 95 searches, not a proof of infeasibility, so H-273 stays unresolved. The 0.00027 near miss on mask 3963647 is the orbit a later exact or longer search would take first. |
 | exp-260 | series-000 | 17 | GPT-6.1 Sol coordinator executes Astra's frozen mathematical contract, Session184. | H-277 | Forty-three targets have positive finite numerical minima; five all-infeasible targets lack exact Farkas witnesses. The frozen positive criterion is unavailable. Slider omission exposes a negative relaxed margin, so slider coverage remains essential. |
 
-### blocked (11)
+### blocked (12)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1296,6 +1297,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-134 | series-000 | 11 | GPT-6 Astra, max; coordinator of session-112 | H-135 | No target was invoked. The owner prioritized BC-309 before this launch, and the unused lease expired at 02:40Z. The scientific protocol is retained unchanged; execution needs a fresh forward allocation. This is an administrative unrun disposition, not negative evidence about H-135. |
 | exp-158 | series-000 | 11 | Codex BC303 T2 charge-sweep agent | H-160 | The September 14 strategy reset paused this route before the target charge ran; no target receipt or scientific verdict exists. |
 | exp-160 | series-000 | 11 | Codex BC303 H-162 retained-receipt analyst | H-162 | The September 14 strategy reset paused this route with no exp-158 target receipt; no H-162 comparison or scientific verdict exists. |
+| exp-262 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Apex arithmetic passed, but the receipt encodes retained integer weights beyond the reader guard; fresh replay refuses. Repair the serialization and preregister a successor before retry. |
 
 ### accepted (65)
 
@@ -1384,11 +1386,12 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (1)
+### in-progress (2)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-262 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Registered before target evaluation; the physical-packing bridge is a separately scoped hand argument. |
+| exp-263 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract,Session184. | H-280 | Registered before target; execution waits for accepted H279 production and fresh replay in exp264. |
+| exp-264 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Same H279 weights, geometry, domain, radius formulas and acceptance criterion; only selected-cell numerator serialization repaired after exp262 fresh replay refusal. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1437,7 +1440,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-191 rounds, 2512.1 agent-minutes, 5730.0 wall-minutes.
+193 rounds, 2512.1 agent-minutes, 5730.1 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

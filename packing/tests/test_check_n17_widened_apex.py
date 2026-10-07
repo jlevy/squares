@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import json
 from fractions import Fraction as Q
 from pathlib import Path
 from typing import Any
@@ -62,6 +63,45 @@ def test_exact_synthetic_complete_duals_and_radius(packet: dict[str, Any]) -> No
     assert alpha == min(Q(1, 5000), 1 / (10000 * mass))
     assert Q(packet["q0"]) == alpha / 2
     assert Q(packet["position_bound_at_alpha0"]) <= Q(1, 10000)
+
+
+def test_large_dual_numerators_roundtrip_real_shape(monkeypatch: pytest.MonkeyPatch) -> None:
+    rows, documents = synthetic_inputs()
+    large = 2**180 + 17
+    for document in documents:
+        # Row 51 is zero, so large exact positive weights preserve the residual
+        # control while exercising realistic 58 x (52 + 3 x 52) witness storage.
+        cell = document["cells"][0]
+        cell["lambda"][51] = large
+        cell["mu"][0][51] = large
+    monkeypatch.setattr(
+        apex, "load_target", lambda _path: ({"synthetic": True}, rows, documents)
+    )
+    generated = apex.generate(Path("synthetic"))
+    encoded = json.dumps(generated).encode()
+    decoded = exact.decode(encoded)
+    assert apex.check(decoded, Path("synthetic"))["verification_passed"]
+    assert len(decoded["signed_directions"]) == 58
+    for entry in decoded["signed_directions"]:
+        cell = entry["selected_cell"]
+        assert len(cell["lambda"]) == 52
+        assert len(cell["mu"]) == 3
+        assert all(len(values) == 52 for values in cell["mu"])
+        assert cell["lambda"][51] == cell["mu"][0][51] == str(large)
+        assert exact.rational(cell["lambda"][51]) == large
+    # Changing one unit must fail even though it is below floating precision.
+    decoded["signed_directions"][0]["selected_cell"]["mu"][0][51] = str(large + 1)
+    with pytest.raises(exact.AuditError, match="differs from exact replay"):
+        apex.check(decoded, Path("synthetic"))
+
+
+def test_dual_encoding_preserves_bounded_decoder(packet: dict[str, Any]) -> None:
+    damaged = copy.deepcopy(packet)
+    damaged["signed_directions"][0]["selected_cell"]["lambda"][0] = 2**44
+    with pytest.raises(exact.AuditError, match="oversized bare JSON integer"):
+        exact.decode(json.dumps(damaged).encode())
+    with pytest.raises(exact.AuditError, match="invalid rational string"):
+        apex.retained_cell({"cell": [], "lambda": [True], "mu": []})
 
 
 @pytest.mark.parametrize(

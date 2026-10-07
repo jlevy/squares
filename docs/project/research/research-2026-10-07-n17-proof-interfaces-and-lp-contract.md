@@ -40,7 +40,7 @@ The following obligations state how those parts can be used in one proof.
 | Global exclusions | Each admitted exclusion rules out its declared cell subpattern at a declared cap $V\ge S^*$, with matching frame, cells and full closed-branch coverage. | Full certificate verification and admission ledger; a subpattern exclusion removes every containing assignment mask and its valid symmetry images. | Close or capture every remaining orbit. The current 36,784 states / 4,685 orbits under 58 entries are a residue, not a cover of terminal neighbourhoods. Held closures require their ruling. |
 | Cap monotonicity | The normalized packing stays inside $C(S^*)\subseteq C(V)$ whenever a certificate uses $V\ge S^*$. | Exact inequalities for the certificate cap and the certified root enclosure. | Tightening a cap below $S^*$ is invalid; changing from centred to origin-anchored walls without transporting cells changes the claim. |
 | Capture cap | Use a rational $U'$ proved to satisfy $S^*\le U'\le U$; the current design requests $0<U'-S^*\le10^{-12}$. Capture runs in $C(U')$ with the original cells. | Root certificate and outward side evaluation; retained producer configuration and verifier. | Prove the cap inequalities and input identities. A small cap excess does not itself bound a coordinate error. |
-| Outer capture | Every packing in an unresolved cell state at the admitted cap reaches a declared terminal region, or is excluded. Every split retains a closed cover of its parent. | A complete capture/exclusion certificate from the actual cells. | Open. Success from a small pose box, contraction of a pilot box, or a widened terminal theorem alone does not cover the outer cells. |
+| Outer capture | Every target packing represented by an unresolved cell state reaches a declared terminal region, or is excluded. Every split retains a closed cover of its parent. | A complete capture/exclusion certificate from the actual cells; terminal leaves may also use the original containment in $C(S^*)$. | Open. Success from a small pose box, contraction of a pilot box, or a widened terminal theorem alone does not cover the outer cells. |
 | Coordinate frame and root | Capture returns bounds on the exact-root family in the same cover frame, with H254 angle lifts modulo $\pi/2$. | Layout identities, exp-237/238 root enclosures, and the explicit allowance below. | Certify all frame, centre, basis and angle conversion errors. Charge them to the delivered enclosure before comparison with the terminal radius. |
 | Square 6 | In the endpoint assignment, the square labelled 6 has its centre in the complete closed `side-S2` cell, at any orientation. | exp-247 assignment and exp-248 slider coverage; `check_n17_slider_coverage.SIX_CELL`. | Keep the cell premise through symmetry and capture. No closeness premise on square 6 is licensed. Dropping it from the local/LP subsystem is a relaxation, not permission to drop it from slide coverage. |
 | Slider domain | Once the 45 coordinates meet $r=1/5000$ and square 6 meets its cell premise, exp-248 places $(a,b,z)$ in $B_W'$ below. | The accepted slider composition and the local ratio receipt on $B_W'$. | A widened neighbourhood needs new slider coverage, or explicit capture bounds on the sliders. The old implication cannot be used at a larger radius. |
@@ -761,6 +761,168 @@ result on the fixed position and slider domain.
 Outer capture must still map each remaining closed-cell packing into that domain, with
 exact frame and root allowances, or exclude it.
 A successful terminal certificate does not remove any global residue state by itself.
+
+## Widened Slider Bounds and Capture Leaves
+
+The new terminal contracts use $B_W'$ as an explicit premise.
+The existing
+[slider-coverage checker](../../../packing/devtools/check_n17_slider_coverage.py) proves
+this premise at the original radius $1/5000$; increasing the position and angle radii to
+$1/100$ changes its inequalities.
+Two faces illustrate what can and cannot be reused directly.
+
+The lower face $a\ge0$ is independent of the radius.
+In the fixed container, $x_5=S^*-1/2-a$ and the square’s horizontal reach is
+$h(\delta_5)\ge1/2$. Therefore containment gives
+
+$$
+a\ge h(\delta_5)-1/2\ge0.
+$$
+
+For the lower face of $b$, separate the position and angle bounds.
+Write $|\delta_{9}|,|\delta_{11}|\le\alpha$, $|\xi_9|\le\rho_{9x}$,
+$|\eta_9|\le\rho_{9y}$ and $|u^*\cdot(r_{11}-x_{11}^*)|\le\rho_{11}$. In the notation of
+`b_floor`, $D_0=1$ and $\tau_0=c(s-1)<0$, where $(c,s)=u^*$. Once the separating-axis
+lemma’s three hypotheses have been checked over a previously justified coarse slider
+domain, it gives
+
+$$
+\begin{aligned}
+b\ge {}&\sec\alpha-D_0+\tau_0\tan\alpha-\rho_{11}\tan\alpha\\
+&-\rho_{9x}|\tan\alpha\,u_x^*-v_x^*|
+-\rho_{9y}|\tan\alpha\,u_y^*-v_y^*|.
+\end{aligned}
+$$
+
+For a rational half-angle bound $0\le\bar q<1$, take $\alpha=2\arctan\bar q$. Then
+$\sin\alpha=2\bar q/(1+\bar q^2)$, $\tan\alpha=2\bar q/(1-\bar q^2)$ and
+$\sec\alpha=(1+\bar q^2)/(1-\bar q^2)$ are rational; the root-dependent terms can be
+enclosed over $R$.
+
+This sufficient estimate cannot supply $b\ge-1/2500$ for the uniform wider position
+bounds.
+Indeed, with $\rho_{9x}=\rho_{9y}=1/100$ and $\bar q=1/200$, orthonormality gives
+$\|\tan\alpha\,u^*-v^*\|_1\ge\sec\alpha$. The displayed lower-bound expression is
+therefore at most
+
+$$
+\frac{99}{100}\frac{40001}{39999}-1
+=-\frac{39801}{3999900}<-\frac1{2500}.
+$$
+
+This is a limitation of that estimate, not a packing counterexample.
+A successful widened join must obtain the missing slider faces by direct capture bounds,
+a new slider certificate, or additional bounds on selected position and angle
+coordinates. For example, narrower bounds on squares 9 and 11 can be inserted into the
+displayed formula while other coordinates retain their wider bounds.
+The direction-exclusion hypotheses and any coarse upper bound on $b$ must be proved
+before applying it.
+Using the desired slider conclusion to justify those hypotheses would
+be circular.
+
+### A conditional terminal leaf
+
+Let $\mathcal P$ be the original counterexample domain: labelled packings in $C(S^*)$
+with the chosen closed-cell assignment and the retained square-6 premise.
+A producer may use the larger rational container $C(U')$, whose feasible set contains
+$\mathcal P$. For each retained closed leaf $L$, require either a verified exclusion of
+$L$, or a verified implication
+
+$$
+\mathcal P\cap L\ \subseteq\ \mathcal T,
+$$
+
+where $\mathcal T$ is the exact terminal theorem’s complete domain.
+This allows the terminal implication to use the original $C(S^*)$ containment as well as
+the producer’s leaf bounds.
+In particular $a\ge0$ follows for the target packing, although it need not hold for
+every extra configuration allowed by $C(U')$. The consumer must record this conditional
+premise explicitly.
+
+The retained leaf evidence must identify its original cell state, transported labels and
+D4 action, root and angle frame, square-6 cell, all 29 position functionals, all 16
+angle bounds, and the six slider-face inequalities or their separate geometric
+implications. A scalar extent statistic does not supply these items.
+Every root/frame allowance must be charged before the final closed-bound comparison.
+The tree must cover the original cells through all closed splits; an open frontier
+remains unresolved even if every completed leaf has a valid terminal implication.
+
+For states other than the endpoint representative, a terminal invocation also needs an
+explicit relabelling and the square-6 premise it uses.
+The endpoint’s unique occupancy result concerns its declared family domain; it does not
+assign nearby arbitrary packings to that state.
+Excluding other residue states and capturing the endpoint state remain separate
+obligations unless a certificate supplies the full geometric and assignment join.
+
+### Half-angle transport without rounded inverse trigonometry
+
+After applying the declared D4 symmetry, choose a quarter-turn-equivalent oriented unit
+axis $e_i$ for each retained square.
+With its exact-root nominal axis $u_i^*$, set
+
+$$
+c_i=u_i^*\cdot e_i,\qquad s_i=\det(u_i^*,e_i),\qquad
+q_i=\frac{s_i}{1+c_i}.
+$$
+
+Certify $1+c_i>0$ on the leaf.
+This is the half-angle parameter of the principal relative turn, so enclosing $c_i,s_i$
+and the quotient gives an exact interface to the terminal $q$ bounds without a rounded
+`atan` calculation. The leaf must retain its quarter-turn choice or cover all applicable
+choices through closed branches.
+A source angle-chart identifier alone does not identify the H-254 lift.
+
+For a reflection $g$, taking $e_i=g(u_i)$ requires the positively oriented second axis
+$J e_i=-g(v_i)$, where $J$ is counterclockwise rotation by $\pi/2$. Keeping the
+reflected ordered basis unchanged would reverse the angle convention.
+Changing this second-axis sign leaves the square itself unchanged and makes the
+half-angle formulas consistent with the terminal rows.
+
+### A bounded leaf-consumer contract
+
+A leaf consumer can check the preceding interfaces before an expensive capture campaign
+exists.
+Its input is a closed leaf domain tied to a separately verified producer receipt,
+with exact centre polygons, complete orientation-chart unions, cover cells, a label
+bijection and a fixed D4 transformation.
+Convert producer field coordinates to physical unit-square coordinates using the
+declared scale before applying the cover-frame symmetry and root-dependent translation.
+All position and slider thresholds use these physical units.
+
+For each position or slider functional, bound every centre-polygon vertex over the
+entire root enclosure.
+For each orientation-chart piece, retain its quarter-turn choice and certify the whole
+relative half-angle interval.
+If a chart is split, its retained closed subpieces must cover it.
+Missing pieces cannot be replaced by sampling or by a favourable endpoint.
+Square 6 keeps its complete angle domain.
+
+The consumer distinguishes the following predicates; it does not infer a global state
+closure from any one leaf.
+
+| Predicate | Required bounds and theorem join | Meaning |
+| --- | --- | --- |
+| Local terminal | All 29 position bounds are at most $1/5000$ and all 16 half-angle bounds at most $1/10000$; original $C(S^*)$ containment and square 6’s cell premise hold. | Since $ |
+| Wide domain only | Position bounds are at most $1/100$, half-angle bounds at most $1/200$, and every face of $B_W'$ has an independent justification. | The wider-domain premise has been checked; no terminal theorem follows from these bounds alone. |
+| Apex terminal | The wide-domain predicate holds, an accepted apex receipt is joined, and every half-angle bound is at most its $q_0$. | Invoke the conditional apex argument and the accepted local theorem. |
+| Patch exclusion | The wide-domain predicate holds, an accepted exact patch receipt is joined, and the entire leaf angle product lies in that receipt’s closed box. | The fixed-container branch subsystem is infeasible throughout the leaf’s target-packing intersection. |
+
+Direct slider projection bounds can establish all six faces of $B_W'$. Alternatively the
+lower $a$ face can use the original-container lemma above.
+The other faces require their own bounds or accepted geometric certificates; a widened
+position radius does not invoke the old slide-coverage result.
+The local-terminal route uses square 6’s cell to obtain slide coverage.
+The apex and patch proofs, once the slider box is supplied independently, concern the
+sixteen retained squares.
+A first consumer may conservatively retain the square-6 cell premise for every terminal
+route without enlarging any existing claim.
+
+Valid bounds outside the accepted terminal or exclusion domains remain unresolved.
+An open input or split frontier is incomplete.
+A missing root, frame, label, producer-coverage or theorem-premise binding is refused.
+Reproducing a leaf descriptor is not verification that every original cell-state packing
+reaches it. The consumer’s contribution is the exact conversion and conditional theorem
+join; outer capture remains a separate certificate obligation.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

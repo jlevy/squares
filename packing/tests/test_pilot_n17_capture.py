@@ -588,3 +588,81 @@ def test_a_checkpoint_resumes_after_a_comment_only_kernel_change(
         pilot.run_pilot(
             boxed, renumbered, max_rounds=2, resume=saved, **{**settings, "bins": 8}
         )
+
+
+def test_cli_round_one_resume_produces_no_updates_and_replays_saved_seed(
+    endpoint: pilot.Endpoint, frame: Frame, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    boxed, renumbered = pilot.box_frame(frame, endpoint, Q(1, 64))
+    first = pilot.run_pilot(
+        boxed,
+        renumbered,
+        bins=2,
+        max_rounds=1,
+        max_live=4,
+        min_width=Q(1, 64),
+        hull_limit=16,
+        max_seconds=120,
+        progress=False,
+        checkpoints=tmp_path,
+        node_id="n17-capture-pilot",
+    )
+    saved = tmp_path / "checkpoint-round-001.json.gz"
+    assert saved.exists()
+    assert first.rounds[-1]["round"] == 1
+    assert first.rounds[-1]["complete"] is True
+    assert first.endpoint_lost is None
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> Any:
+        pytest.fail("round-one replay must not produce an owner update or a new seed")
+
+    original_admit = pilot.node.admit_seed
+    admitted_seed_ids: list[str] = []
+
+    def admit_saved_seed(*args: Any, **kwargs: Any) -> Any:
+        admitted_seed_ids.append(pilot.producer.content_sha256(args[1]))
+        return original_admit(*args, **kwargs)
+
+    monkeypatch.setattr(pilot, "capture_frame", lambda _cap: boxed)
+    monkeypatch.setattr(pilot, "load_endpoint", lambda _frame: renumbered)
+    monkeypatch.setattr(pilot, "produce_step", forbidden)
+    monkeypatch.setattr(pilot, "build_seed", forbidden)
+    monkeypatch.setattr(pilot.node, "admit_seed", admit_saved_seed)
+    output = tmp_path / "fresh-replay.json"
+    assert (
+        pilot.main(
+            [
+                "--max-rounds",
+                "1",
+                "--resume",
+                str(saved),
+                "--bins",
+                "2",
+                "--max-live",
+                "4",
+                "--min-width-log2",
+                "6",
+                "--hull-limit",
+                "16",
+                "--max-seconds",
+                "120",
+                "--replay-share",
+                "0.5",
+                "--output",
+                str(output),
+            ]
+        )
+        == 0
+    )
+    result = json.loads(output.read_text())
+    assert admitted_seed_ids == [pilot.producer.content_sha256(first.seed)]
+    assert result["resumed"]["round"] == 1
+    assert result["resumed"]["changed_since"] == []
+    assert result["updates"] == first.updates
+    assert result["rounds"] == first.rounds
+    assert result["seed_sha256"] == pilot.producer.content_sha256(first.seed)
+    assert result["node_sha256"] == pilot.producer.content_sha256(first.node)
+    assert result["endpoint_control"]["held"] is True
+    assert result["replay"]["status"] == "PASS_REPLAYED"
+    assert result["replay"]["steps"] == len(first.node["steps"])
+    assert result["replay"]["final_state_agrees"] is True

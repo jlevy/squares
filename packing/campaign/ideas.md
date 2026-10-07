@@ -893,6 +893,7 @@ these rows as BC-406 to BC-411.
 | 287 | Challenge the conditional widened n17 LP with frozen mixed-angle directions | registered | [H-277](hypotheses/H-277-n17-widened-lp-mixed-angle-reconnaissance.md) | Astra specifies complete branch execution, numerical-only margins and matched relaxed controls before more expensive capture work. |
 | 288 | Force the selected n17 feature roster uniformly inside the widened tube | registered | [H-278](hypotheses/H-278-n17-widened-omitted-feature-forcing.md) | Exact fixed-corner and distance bounds support Astra’s separately scoped convexity and Lipschitz argument; capture and slider coverage remain open. |
 | 289 | Bound the n17 apex from retained signed-position duals | registered | [H-279](hypotheses/H-279-n17-widened-apex-position-duals.md) | Exact residual and Lipschitz-mass checks supply a conditional inner cube, with the physical-packing implication hand-reviewed separately. |
+| 290 | Certify one widened n17 angle patch for all owner branches | registered | [H-280](hypotheses/H-280-n17-one-all-branch-annulus-patch.md) | A frozen retained dual, all-owner hulls and exact bounded-residual margins test certificate readiness without new LP solves or a claim of complete annulus coverage. |
 
 ## Dead ends
 

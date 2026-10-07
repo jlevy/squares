@@ -1,0 +1,5 @@
+{
+  "schema": "n17-widened-apex-certificate/v1",
+  "verification_passed": false,
+  "error": "oversized bare JSON integer"
+}
