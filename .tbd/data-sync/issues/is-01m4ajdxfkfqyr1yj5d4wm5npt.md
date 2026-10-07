@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eighteen SQUISH upper-bound packings (#401)
 kind: task
 status: in_progress
 priority: 1
-version: 31
+version: 32
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -31,10 +31,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T19:59:39.265Z
+updated_at: 2026-10-07T20:02:07.504Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
-Workflow entry: W1 result import stages 1–3, followed by W7 bounded engineering and W2 full exact-rational replay/mapped independent math review, then publication and authorized issue reply. Scope: issue #401 ten pinned repository certificates at 07fe6dde1e5b67405a3076719b90e58e2882b677 plus n153 in comment 6031977107 (eleven counts total). Two separable PRs; no main push or merge without explicit merge consent. Source no-license retention: derived geometry facts and attributed metadata only. Engineering GPT-6.1 Sol, records GPT-6.1 Sol, math/soundness Astra. Native tbd sync known divergent/permission blocked; preserve all work in outbox and working branch.
+Workflow entry: standard W1 result import, bounded engineering, complete exact rational replay and independent Astra math/correctness review, standard PR review and hosted CI, then authorized formal-stack merge and publication checks. Expanded issue401 scope18counts: original11 in PR415/416 plus12 new or improved geometries in later release (five replacements, seven new); n153 provenance-only byte identity. Native tbd sync now works via supplied gh authentication and confirmed tbd-sync publication; remove tracked fallback outboxes only after verified preservation. User authorizes merge once clean/reviewed, and requires proper results list and main case graphics. Keep parent/author reply open until expanded import settles.
 
 ## Notes
 
