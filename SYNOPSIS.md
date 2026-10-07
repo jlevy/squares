@@ -309,7 +309,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | --- | --- |
 | Agendas | 40 | 20 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 428 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
-| Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
+| Sessions | 183 | 105 completed; 78 stopped; all terminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 231 | 62 confirmed; 36 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 217 | 82 accepted; 41 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 0 in progress; 1 exhausted |
@@ -1561,9 +1561,9 @@ controller, not permission to blur contracts.
 The
 [6 October W3 consolidation](docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md)
 reconciles the exploration with the results below.
-BC-418 (`think-tmz6`) remains the next coordinator: proof interfaces and portable
-replay, a capture discriminator with cheap alternate-terminal-theorem reconnaissance,
-and the current exclusion tail are parallel planning priorities.
+BC-418 (`think-tmz6`) remains the n17 program owner.
+The immediate certification handoff is recorded below; subsequent mathematical work
+follows the reviewed W3 memo.
 It preserves every frozen experimental criterion and the held-control decision; no new
 target run or mathematical verdict belongs to that consolidation.
 The
@@ -1571,9 +1571,12 @@ The
 selects BC-430 / `think-ipel` under BC-418, with Astra for mathematical strategy and
 GPT-6.1 Sol for engineering, review and tracking.
 [Session 184](packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
-is active, from 07:08:33Z to 17:08:33Z on 7 October; research stops at16:08:33Z. Four
-slots are occupied: one Astra mathematical lane, two Sol6.1 engineering/review lanes,
-and the coordinator.
+stopped at16:59:25Z on7October after research ended16:08:33Z. Current-source
+certification remains pending; the planned deadline was17:08:33Z. Its official partial
+cost receipt ends16:57:26Z with three live sessions, so later publication is outside
+that cutoff. The
+[final checkpoint summary](packing/campaign/agent-sessions/session-184-final-checkpoint.json)
+preserves failed predecessor/push runs and scoped reconciliations.
 CI runs beside the research.
 
 The current census remains36,784states/4,685orbits under58admissions, with the endpoint
@@ -1667,15 +1670,15 @@ run.
 
 No bound, frontier field or open status changed.
 
-**Selected next entry:** `think-tmz6`, the BC-418 coordinator, continuing.
-Its first decisions are the owner’s: whether BC-423’s endpoint7 control re-check
-(PASS_SAVED_STALL, cells and node matching) releases k2 and BC-426’s two closures;
-recalibrating the branch-and-bound queue; and publishing the certificate objects
-(`think-jhgi`, which needs uploads.github.com).
-The research step after that is BC-423’s recipe (48 rounds, 2,304 rows, octagon core) on
-the kept cap-stall nodes of BC-425 and BC-427, once its control is ruled on, followed by
-lane D’s aimed splits (C2). The capture route (lane R9) waits on the hull-vertex
-compression-pull repair (`think-juy9`).
+**Selected next entry:** `think-7hy3`, the owed full current-source checkpoint
+certification.
+Preserve the failed101-step predecessor and61-step push runs, their skips,
+the separately passing repairs and all source scopes; no full current-source PASS is
+claimed. The coordinator and n17 program remain open while this debt remains.
+The reviewed W3 mathematical handoffs stay planned: complete partner-pose coupling
+against exp288 and measured same-object exact-replay profiling, with endpoint-family
+retention and no automatic target.
+Incomplete exp284 geometry remains unusable.
 
 Session 168 ran BC-418’s lanes.
 Its record is not yet written and will take session-181 (`think-wcqs`). Hosted
@@ -6130,7 +6133,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-154.yaml` | session-154 | 358 | 3.03 h | 2.95 h | 3.63 h | yes |
 | `codex-task-tree-session-155-creative.yaml` | session-155 | 188 | 1.52 h | 1.49 h | 1.72 h | no |
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
-| `codex-task-tree-session184-through-20261007T141342Z.yaml` | session-184 | 4,891 | 28.9 h | 7.09 h | 7.09 h | yes |
+| `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6140,6 +6143,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
 | `codex-task-tree-session184-through-100444.yaml` | unattributed | 2,176 | 11.95 h | 2.94 h | 2.94 h | yes |
 | `codex-task-tree-session184-through-121500.yaml` | unattributed | 3,620 | 20.64 h | 5.11 h | 5.11 h | yes |
+| `codex-task-tree-session184-through-20261007T141342Z.yaml` | unattributed | 4,891 | 28.9 h | 7.09 h | 7.09 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

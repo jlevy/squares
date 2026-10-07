@@ -1,7 +1,7 @@
 {
   "schema": "session-184-final-checkpoint/v1",
-  "as_of": "2026-10-07T16:52:40.727319+00:00",
-  "status": "finalization-in-progress",
+  "as_of": "2026-10-07T17:05:30.608637+00:00",
+  "status": "stopped-certification-pending",
   "session": "session-184",
   "branch": "codex/n17-state-review",
   "full_current_source_pass": false,
@@ -174,7 +174,10 @@
       "unknown_files": 37,
       "all_unknown_share_checks_passed": true,
       "full_real_symbolic_rebuild_passed_at_predecessor": true,
-      "full_real_symbolic_rebuild_junit_seconds": 92.681
+      "full_real_symbolic_rebuild_junit_seconds": 92.681,
+      "raw_log_or_junit_available": false,
+      "evidence_status": "Reviewer observation retained; no original raw64 log or JUnit located; not represented as reconstructed JUnit",
+      "observation_path": "attic/evidence/session-184-hosted-suite-cohort-37613399745/cohort-controls-reviewer-observation.json"
     },
     {
       "scope": "Two reproduced historical toy byte mismatches, complete exact independent verification",
@@ -223,6 +226,29 @@
       "independent_new_boundary_controls_passed": 2,
       "independent_pytest_wall_seconds": 0.24,
       "reserve_deadline_budget_rules_unchanged": true
+    },
+    {
+      "scope": "Campaign ledger, README and stable SYNOPSIS consistency after the reviewed finalization-tail repair",
+      "source_revision": "f8ec2975937881c3e449e265735b4b24342305c4",
+      "commands": [
+        "packing-ledger check",
+        "python -m devtools.check_readme",
+        "python -m devtools.check_synopsis"
+      ],
+      "all_returncodes": 0,
+      "observation": "ledger: 231 hypotheses,217 rounds,183 sessions; README and SYNOPSIS agree",
+      "broad_gate_repeated": false
+    },
+    {
+      "scope": "Terminal stopped-session metadata, latest cost association, generated closeout views and current handoff alignment",
+      "source_base": "f8ec2975937881c3e449e265735b4b24342305c4",
+      "delta": "Final documentation, session/checkpoint/cost and generated views",
+      "ledger": "pass",
+      "rollups": "pass",
+      "synopsis_and_handoff": "pass",
+      "session_gate": "UNCERTIFIED; certification owner think-7hy3",
+      "diff_check": "clean",
+      "full_current_source_pass": false
     }
   ],
   "remaining_obligations": [
@@ -267,5 +293,51 @@
     ],
     "proposed_gain_target": 2,
     "gain_is_forecast": false
+  },
+  "source_snapshot_bytes": {
+    "source_revision": "f8ec2975937881c3e449e265735b4b24342305c4",
+    "bytes": 201268546,
+    "cap_bytes": 201326592,
+    "headroom_bytes": 58046,
+    "cap_changed": false,
+    "receipt": "attic/evidence/session-184-finalization-tail-800bba638/snapshot-bytes.json",
+    "later_finalization_observation": {
+      "observed_at": "2026-10-07T17:01:31Z",
+      "source_base": "f8ec2975937881c3e449e265735b4b24342305c4",
+      "delta": "stopped session, checkpoint, generated views and cost165726; receipt captures changed source",
+      "bytes": 201282986,
+      "headroom_bytes": 43606,
+      "receipt": "attic/evidence/session-184-finalization-tail-800bba638/snapshot-bytes-final-1701.json",
+      "subsequent_change_note": "small checkpoint annotations added after this observation; no cap increase"
+    }
+  },
+  "tracker_sync": {
+    "limited_repair_bead": "think-08zy",
+    "closure": "locally closed after f8ec2975937881c3e449e265735b4b24342305c4",
+    "remote_publication": "pending: remote tbd-sync conflicts after bounded retries",
+    "local_commit_preserved": true,
+    "outbox_paths": [
+      ".tbd/workspaces/outbox/issues/is-01m4bm1g3g457wb8rtnxbqm720.md",
+      ".tbd/workspaces/outbox/mappings/ids.yml"
+    ],
+    "safe_recovery": "Compare current remote issue state, then tbd import --workspace outbox --merge and normal sync; retain evidence until confirmed. No reset or clearing shortcut used."
+  },
+  "official_resource_usage": {
+    "receipt": "packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T165726Z.yaml",
+    "start_cutoff_at": "2026-10-07T07:08:33Z",
+    "end_cutoff_at": "2026-10-07T16:57:26Z",
+    "snapshot_incomplete": true,
+    "live_session_count": 3,
+    "agent_active_seconds": 141124.084,
+    "elapsed_envelope_seconds": 35333.0,
+    "overlapping_partial_receipts_summed": false,
+    "scope": "Privacy-safe task-tree interval delta, lower bound for live work; subsequent final publication is outside this cutoff"
+  },
+  "ended_at": "2026-10-07T16:59:25Z",
+  "next_action": "Take the certification handoff think-7hy3 on a qualifying frozen source while separately registering the planned mathematical coupling discriminator think-hkqz and matched replay profile think-svkl; keep CI beside proof work. No more Session184 mathematical targets.",
+  "hourly_reminder": {
+    "automation_id": "hourly-n17-mathematical-progress-checkpoint",
+    "status": "PAUSED",
+    "reason": "Session184 stopped; reminder was scoped to this ten-hour block"
   }
 }

@@ -348,15 +348,18 @@ group; exp286’s aggregate-memory declaration was a metadata error preserved in
 outcome record.
 
 [Session184](../../../../packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
-owns the current30-minute slices, fixed target budgets and disjoint agent deliverables.
-One Astra remains on mathematical strategy and review; two Sol workers handle source,
-custody and focused checks, beside the Sol coordinator.
-A full ordinary checkpoint runs on predecessor969588d09 in an isolated checkout, beside
-additive checks for later source.
-Its launch incorrectly retained a project-root override, affecting37 mutation controls;
-preserve that failure and rerun only those controls with project discovery restored.
-Do not relabel the full checkpoint as passed.
-The research cutoff and protected finalization hour remain unchanged.
+records the actual30-minute slices, fixed target budgets and disjoint agent
+deliverables.
+It stopped at16:59:25Z with certification pending under `think-7hy3`, after
+one Astra mathematical lane and two Sol workers operated beside the Sol coordinator.
+The predecessor969588d09 full checkpoint completed101 steps with90 passes, eight
+failures and three skips; the later800bba638 push completed61 steps with59 passes and
+two failures. The affected37 mutation controls passed after restoring project discovery,
+and the README failures passed their exact scoped corrections.
+The
+[final checkpoint record](../../../../packing/campaign/agent-sessions/session-184-final-checkpoint.json)
+preserves these scopes and remaining obligations; no full current-source pass is
+claimed.
 
 The final
 [W3 route selection](../../research/research-2026-10-07-n17-w3-capacity-and-route-selection.md)

@@ -11,6 +11,7 @@ session:
   date: '2026-10-07'
   started_at: '2026-10-07T07:08:33Z'
   deadline_at: '2026-10-07T17:08:33Z'
+  ended_at: '2026-10-07T16:59:25Z'
   branch: codex/n17-state-review
   goal: Make mathematically significant progress toward n17 optimality through complete proof interfaces,
     a controlled retained widened-LP instrument, and the actual admitted-residue queue; preserve all
@@ -656,7 +657,7 @@ session:
     commitment: BC-430
     objective: Retain official final cost and actual validation dispositions, finish checked docs/public
       handoff and leave explicit certification debt if fullcurrentPASS is absent.
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: Observed boundary16:38:40Z follows planned16:38:33Z;7s delay records terminal validation
       dispositions. Global17:08:33Z close remains fixed.
@@ -672,15 +673,23 @@ session:
       custody and all failed/incomplete scientific attempts.
     fallback: Publish the honest verified subset and actionable next handoff with unresolved validation/custody
       explicit.
-    outcome: null
+    outcome: Actual predecessor full101 checkpoint retained90PASS/8FAIL/3SKIP; later push61 retained59PASS/2FAIL.
+      Scoped affected37, README/browser/cohort/finalization-tail evidence is distinguished from a full
+      current-source pass. Reviewed final cost association replaces its overlapping predecessor; exact
+      source/validation/custody limits and open certification/mathematical handoffs are retained.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-288-h297-pooled-feasible-center.md
     - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
-    stop_reason: null
-    next_action: Close17:08:33Z with stopped+certification_pending think-7hy3 unless actual fullcurrentPASS
-      exists; keep coordinator/program open while certification children remain.
+    - packing/campaign/agent-sessions/session-184-final-checkpoint.json
+    - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T165726Z.yaml
+    stop_reason: Observed terminal time 2026-10-07T16:59:25Z; reviewed finalization handoff delivered
+      before fixed17:08:33Z. Current-source certification remains owed under think-7hy3; no mathematical
+      work resumes.
+    next_action: Finish the exact-source public handoff and preserve open certification debt; no additional
+      mathematical target.
   primary_bead: think-ipel
-  status: in_progress
+  status: stopped
+  certification_pending: think-7hy3
   budget:
     wall_minutes: 600
     slice_minutes: 30
@@ -2254,13 +2263,24 @@ session:
     Source/test/layout/docrepairs active, nofullPASS.
   - Exp273 accepted conservativeinventory10.49s andexp275 acceptedexactcapjoin1.21s atclean3575c02,
     no newbound/censuschange.
-  stop_reason: null
-  next_action: Complete finalization Phase19 by16:38:33Z; Phase20 then records official cost and actual
-    gate/certification status, final documentation/push/public handoff by17:08:33Z. Next math tasks
-    think-hkqz/think-svkl remain planned; certification debt think-7hy3 remains open, with no more
-    Session184 mathematical targets.
+  - 'full gate: full at 969588d095ff816a9f261e2072839c74fa4f7ce8: failed (predecessor101-step checkpoint;
+    retained90PASS8FAIL3SKIP)'
+  - Current800bba638 push selection61steps completed59PASS/2FAIL357.24s; original receipts preserved.
+    README repair passes direct/1worker controls separately; no broad rerun. Required current-source
+    certification remains pending under think-7hy3.
+  - Finalization-tail bounded21controls pass1.18s; independent2new acceptance/refusal controls pass0.24s.
+    Later ledger/README/SYNOPSIS checks pass atf8ec; no full gate PASS.
+  stop_reason: Research ended16:08:33Z; accepted288 and reviewed W3 handoff are retained. Final records,
+    measured cost and scoped validation reconciliation are delivered, but both actual checkpoint selections
+    failed and a full current-source qualifying pass remains owed under think-7hy3. No later mathematical
+    target or incomplete284geometry is admitted.
+  next_action: Complete owed current-source certification under think-7hy3 without relabeling failed
+    predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical
+    coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically.
+    Native publication/clean recovery and global proof composition remain open; agenda043 stays active
+    under certification debt.
   resource_rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T141342Z.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T165726Z.yaml
 ---
 # n17 Proof Contracts and Instruments
 

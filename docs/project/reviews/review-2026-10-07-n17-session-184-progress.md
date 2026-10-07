@@ -197,6 +197,15 @@ The session stops with certification pending under `think-7hy3`. No full pass on
 actual final source or end-to-end optimality proof is claimed.
 
 The
+[official cost receipt](../../../packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T165726Z.yaml)
+covers 07:08:33–16:57:26Z: 9.81 hours of elapsed envelope and 39.20 overlapping
+agent-hours.
+Three live sessions make it a lower bound; subsequent publication is outside
+this cutoff. Earlier overlapping partial receipts are retained but not summed.
+The limited finalization-repair bead is closed locally; a conflicting remote tracker
+sync remains pending, with its closure preserved in the local outbox.
+
+The
 [strategic W3 assessment](../research/research-2026-10-07-n17-w3-capacity-and-route-selection.md)
 selects complete partner-pose coupling as the next mathematical discriminator
 (`think-hkqz`), with a matched exact-replay profile in parallel (`think-svkl`). Each
