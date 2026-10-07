@@ -1305,3 +1305,80 @@ def test_squish_complete_replay_survives_worker_custody_and_private_controls(
         ).read_bytes() == identity.read_bytes()
     session = ROOT / "campaign/agent-sessions/session-105-stromquist-n26-verification.md"
     assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def test_second_squish_complete_replay_survives_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Exercise the production copy, real index, native readers and both live mutants."""
+    from devtools import squish_second_update_confirmation as packet  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+
+    tree, _copied = control_snapshot
+    work = tree / HERE
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    assert (tree / packet.WITNESSES.relative_to(controls.REPO)).is_symlink()
+    listed = tracked_files(tree, ".")
+    assert listed is not None, "the actual worker has no private index"
+    tracked = {path.relative_to(tree) for path in listed}
+    private_n263 = house.house_path(263).relative_to(controls.REPO)
+    assert private_n263 in tracked
+    assert not (tree / private_n263).is_symlink()
+    for n in house.LINK_NUMBERS:
+        relative = house.house_path(n).relative_to(controls.REPO)
+        assert (tree / relative).is_symlink()
+        assert relative not in tracked
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(relative.relative_to(HERE).as_posix(), tree=tree, work=work)
+    for source in packet.private_input_paths():
+        target = tree / source.relative_to(controls.REPO)
+        assert not target.is_symlink()
+        assert target.read_bytes() == source.read_bytes()
+    baseline_program = """
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import squish_second_update_confirmation as packet
+from devtools import squish_second_update_house_links as house
+def forbidden(*args, **kwargs):
+    raise AssertionError('native admission must not execute a geometric decider')
+packet.decide = packet.original.decide = forbidden
+packet.original.exact_verify = packet.original.independent.check = forbidden
+assert tuple(packet.check_certification()) == packet.NUMBERS
+assert tuple(house.check_houses()) == packet.NUMBERS
+for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
+    relative = path.relative_to(packet.REPO).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+for producer in (atlas.update, lambda: atlas.update_selected([88])):
+    try:
+        producer()
+    except packet.original.PacketError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked output')
+print('all 27 complete inputs admitted; nine house reads and both output guards passed')
+"""
+    environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
+    baseline = subprocess.run(
+        [sys.executable, "-c", baseline_program],
+        cwd=work,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=60,
+    )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [
+        control
+        for control in specification["controls"]
+        if control["name"].startswith("SQUISH second update -")
+    ]
+    assert len(selected) == 2
+    for control in selected:
+        source = ROOT / control["file"]
+        original = source.read_bytes()
+        passed, detail = controls.run_one(control, tree)
+        assert passed, detail
+        assert source.read_bytes() == original

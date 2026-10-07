@@ -258,6 +258,7 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     """
     from devtools import render_case_verifiers  # noqa: PLC0415
     from devtools import squish_followup_packets as update  # noqa: PLC0415
+    from devtools import squish_second_update_confirmation as confirmation  # noqa: PLC0415
     from devtools import squish_second_update_packets as second  # noqa: PLC0415
     from devtools import squish_upper_bound_packets as squish  # noqa: PLC0415
 
@@ -268,8 +269,13 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
     if source["source_key"] == second.SOURCE_KEY:
         case = safe_load(existing.split("---\n", 2)[1])["packing"]
+        adopter = (
+            confirmation.adopt_verified
+            if confirmation.EXACT_EVIDENCE in case["verified_upper_bound"]["evidence"]
+            else second.adopt_report
+        )
         return (
-            second.adopt_report(n, existing, generated)
+            adopter(n, existing, generated)
             if case["reported_upper_bound"]["source_key"] == second.SOURCE_KEY
             else generated
         )

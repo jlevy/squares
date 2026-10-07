@@ -49,6 +49,7 @@ from strif import atomic_output_file
 from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import evand_exact_certificates as evand_certificates
 from devtools import squish_followup_packets as squish_followup
+from devtools import squish_second_update_house_links as squish_house
 from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_packets
 from devtools import upper_bound_packets as packets
@@ -2487,6 +2488,9 @@ def retained_cases(numbers: Sequence[int]) -> list[BuiltCase]:
     from these are byte for byte what the whole rebuild draws, which
     `test_known_best_composite_contains_every_case_and_square` holds.
     """
+    scoped = [n for n in numbers if n in squish_second.NUMBERS]
+    if scoped:
+        squish_house.check_houses(scoped)
     plans = source_plans()
     cases = []
     for n in numbers:
@@ -2510,6 +2514,7 @@ def update(workers: int = 1) -> None:
     version bump or on demand, and until then say which data they show; a data change
     that rewrote them was eight binaries and several megabytes a commit.
     """
+    squish_house.guard_house_outputs(list(CORPUS.numbers))
     # The figure record decides every claim a drawing states, so refresh it first and
     # drop the memo, or the comparison below would read a stale one.
     build_composite_figure_data.update()
@@ -2538,6 +2543,7 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     requested scope. Each selected witness is rebuilt through the ordinary strict
     producer; all other manifest entries and geometry files are preserved.
     """
+    squish_house.guard_house_outputs(list(numbers))
     selected = set(numbers)
     if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
         raise ValueError("selected atlas refresh requires unique corpus counts")
@@ -2753,6 +2759,7 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
     must not run: a missing manifest should be reported as a missing manifest rather than
     as whatever the next reader of it raises.
     """
+    squish_house.check_houses()
     if not MANIFEST.is_file():
         return [f"missing {_relative(MANIFEST)}"], None
     retained = MANIFEST.read_text(encoding="utf-8")

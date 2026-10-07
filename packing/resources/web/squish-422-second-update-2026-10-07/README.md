@@ -1,12 +1,13 @@
-# SQUISH Second Update: Nine Reported Rational Upper Bounds
+# SQUISH Second Update: Nine Confirmed Rational Upper Bounds
 
 Nate Chaoweeraprasit (itsnaka), using SQUISH,
 [reports nine new or smaller packings](https://github.com/jlevy/squares/issues/422).
 The source is pinned to
 [`e63e4e52b1728b6671b2f263c5e02a4aa79a39d3`](https://github.com/itsnaka/squish-certs/tree/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b),
-published and retrieved on 7 October 2026. This reported layer registers T-116 at
-V0/C0. Complete earlier verified bounds remain in their own case lanes; no earlier
-certificate confirms the smaller geometry merely because it has the same count.
+published and retrieved on 7 October 2026. T-116 is confirmed at V3/C3: two local
+exact routes accepted all nine unchanged rational packings, and two distinct scoped
+AI reviews accepted their complete scientific replay evidence. Earlier certificates
+remain evidence for their own source geometries.
 
 Five counts are additional to the author's previous submissions: 88, 199, 207, 236
 and 302. Four replace earlier SQUISH reports: 108 and 180 replace original-release
@@ -20,8 +21,8 @@ provenance for its original certificate.
 
 No root licence file is published in the retained source tree. Raw JSON, producer
 code, prose, drawings, numerical checker logs and screenshots remain outside Git.
-This packet contains only attributed normalized rational geometry, brief claim facts
-and acquisition metadata. The source SHA-256 and byte count apply at this external
+This packet retains attributed normalized rational geometry, brief claim facts,
+acquisition metadata and the project’s exact replay evidence. The source SHA-256 and byte count apply at this external
 acquisition boundary; local applicability follows complete exact semantic values.
 
 The author credits Kingbird's catalogue, maintained by David Ellsworth, for the
@@ -33,8 +34,9 @@ history. Seed credit does not mean that a seed author found this new pose.
 The author discloses Claude Opus 5.5 coding and research assistance under his own
 direction, management, review and steering, including solver, verification and filed
 issue preparation. He credits David Ellsworth's numerical checker. His reports of
-checker success, nearby search and squeeze are retained as source claims, with no
-project feasibility, optimality, rigidity or human oversight conclusion.
+checker success, nearby search and squeeze remain source claims. The separate local
+exact replay establishes feasibility; it does not establish optimality, rigidity or
+independently audited human oversight.
 
 ## Exact Sides and Displays
 
@@ -76,17 +78,57 @@ decision:
 uv run --frozen --all-extras --group dev python -m devtools.squish_second_update_packets check
 ```
 
-Its `record` command reconstructs the selected reported lanes while keeping the
-historical verified lanes. Its `atlas --jobs 2` command rebuilds only these nine
-house witnesses and drawings, preserves the other 315 entries, and refreshes the
-complete source and figure metadata. It refuses an unselected case's changed side
-or source plan. An exact drawing check establishes the visualization geometry;
-result confirmation requires separately retained complete replay and scoped review.
+The reported-only packet's `record` command rebuilds its reported lanes and refuses
+to promote a new confirmation. Its atlas producer reconstructs the nine exact house
+witnesses and drawings. Atlas geometry and result assurance have separate evidence.
 
-No externally completed feasibility receipt or review is admitted by this reported
-packet. A separate confirmation layer must bind all nine unchanged source sides,
-complete witnesses, full checker inputs, both complete-roster geometric controls
-per case, actual dual verdicts and two freshly prompted scoped reviews before
-promoting verified lanes.
+The confirmation adapter checks the complete retained run without executing either
+geometry decider:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.squish_second_update_confirmation check-certification
+```
+
+Its `record` command updates the nine verified lanes only after full admission.
+`restore-witnesses` reconstructs the canonical proofs from admitted facts. Add
+`--replay` to `check-certification` to repeat both decisions for all three jobs per
+case; `--n N` selects a case without weakening complete retained-roster admission.
+
+The [certification index](receipts/certification.json.xz) maps nine canonical
+`W-squish-422-nNNN` proofs to nine bounded complete case records. Each
+`receipts/n-NNN.json.xz` retains its actual positive and both complete-roster control
+receipts, all deciding inputs and full witness metadata. Historical execution paths
+remain historical custody values. Canonical repository-relative proof IDs, fact
+paths and replay instructions are a separately retained metadata transformation,
+validated by equality of every ordered corner and complete scientific input.
+
+The [replay protocol](receipts/replay-protocol.json) retains the original custody,
+preparation manifest, execution summary, actual module and schema identities,
+27 child exit statuses and outer exit status zero. The retained adapter and selected
+schema are under `protocol/`. All nine positives passed both routes; all eighteen
+controls were rejected by both. The positives contain 1,762 squares and 190,303 pairs
+per route. All jobs account for 570,909 pairs per route, 1,141,818 across both routes.
+The recorded per-job dual-route decision wall times sum to 222.246477794 seconds.
+That sum is not the parallel batch elapsed time, which was not recorded.
+
+The [mathematics review](../../../../docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md)
+independently reconstructs the source rotation matrices and every complete corner.
+The separately prompted [semantic-binding review](../../../../docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md)
+checks all actual receipts, runtime identities and control outcomes. Their complete
+reviewed inputs and structured decisions are retained in `reviews/` and the case
+records. These accepted scientific reviews do not approve a later integration PR.
+
+The two independently implemented SAT routes share the SAT theorem, Python
+`Fraction`, YAML loading and serialized source-to-corner conversion. The separate
+rotation-matrix review addresses that shared conversion. Exact sides remain
+unchanged with zero dilation; source prints and safe ceilings stay separate.
+
+The private negative-control snapshot copies every scientific input and review.
+Nine canonical proof paths and eight specifically admitted generated house witness
+leaves may be read through links only after complete semantic custody checks.
+n263 remains private and indexed; registered mutations and existing document/result
+consumers rescue private copies of any selected house leaf. All writers reject linked
+outputs before creating figures or files. This keeps the existing 192 MiB private
+snapshot ceiling without dropping source proofs, scientific evidence or controls.
 
 <!-- This document follows common-doc-guidelines.md. -->

@@ -1600,7 +1600,10 @@ def test_second_update_rebuilds_current_and_historical_geometry_from_their_own_p
     case = document["packing"]
     verified = case["verified_upper_bound"].copy()
     case["reported_upper_bound"].update(value="99.0", exact_form="99/1")
-    case["verified_upper_bound"].update(value="98.0", exact_form="98/1")
+    if "E-squish-second-update-2026-10-07-exact-replay" not in verified["evidence"]:
+        # The reported owner reconstructs earlier lanes. Confirmed lanes must first
+        # match their complete admitted evidence; a forged value is refused separately.
+        case["verified_upper_bound"].update(value="98.0", exact_form="98/1")
     case["verified_lower_bound"]["value"] = "1.0"
     body, count = re.subn(
         rf"\$s\({n}\) \\le [0-9.]+\$,\s+with exact side\s+\$[0-9]+(?:/[0-9]+)?\$",
