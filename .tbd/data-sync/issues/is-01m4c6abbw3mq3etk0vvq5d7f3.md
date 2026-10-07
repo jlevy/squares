@@ -3,9 +3,9 @@ type: is
 id: is-01m4c6abbw3mq3etk0vvq5d7f3
 title: Repair first SQUISH update confirmation CI without weakening custody
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T22:04:06.396Z
-updated_at: 2026-10-07T22:21:28.717Z
+updated_at: 2026-10-07T22:44:26.942Z
 started_at: 2026-10-07T22:04:08.526Z
+closed_at: 2026-10-07T22:44:26.942Z
+close_reason: Fixed, reviewed at final exact heads and merged via formal stack424 into main2af487e7cfe85d84b2a67fa984e2d36a77548d97. Current hostedchecks30success26 documentedskip each. Upper actual209-file push62steps879.49s exit0,6317pass30skip1xfail plus324casecompositepass. Original34hostedfailures allpass; no cap or assertion weakened. Actual deployment is a separate ongoing publication bead.
+resolution: null
+duplicate_of: null
 ---
 PR423 initial27344 hosted Packing run37692672166 failed34tests acrossA3/B18/C12/D1. Actualtrace/report /workspace/squares-pr423-ci-triage: assurance declaration typography idempotence; reported-only fixtures consuming nowconfirmed livecases; strict linked-proof consumer/snapshot accounting and faststep classification. Sol sourceowner repairing upperlayer; strongAstra independent technical/security consulted on exact12 readonlyproof admission. Preserve strict otherexternalpath refusals, full proofs/receipts, matching/unknown-declaration controls, snapshotcap201326592; no testdisable/proofstripping/capraise. Publishrepair exacthead+required207selector/CI+strongfollowup beforemerge.
 

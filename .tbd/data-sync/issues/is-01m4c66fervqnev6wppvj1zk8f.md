@@ -3,9 +3,9 @@ type: is
 id: is-01m4c66fervqnev6wppvj1zk8f
 title: Fix popover close accessibility state exposed by SQUISH import browser gate
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4bvqnk2d26b8ydnvt3h07n1
 hold: null
 hold_until: null
 created_at: 2026-10-07T22:01:59.512Z
-updated_at: 2026-10-07T22:21:28.171Z
+updated_at: 2026-10-07T22:44:26.956Z
 started_at: 2026-10-07T22:02:29.317Z
+closed_at: 2026-10-07T22:44:26.956Z
+close_reason: Fixed, reviewed at final exact heads and merged via formal stack424 into main2af487e7cfe85d84b2a67fa984e2d36a77548d97. Current hostedchecks30success26 documentedskip each. Upper actual209-file push62steps879.49s exit0,6317pass30skip1xfail plus324casecompositepass. Original34hostedfailures allpass; no cap or assertion weakened. Actual deployment is a separate ongoing publication bead.
+resolution: null
+duplicate_of: null
 ---
 PR421 final affected gate exposed reproducible Escape closure race: hidden case popover retains aria-expanded=true until asynchronous toggle. Unchanged complete browser replay1failed19passed; math fixtures passed. Sol engineering repair moves accessibility cleanup to synchronous noncancelable closing beforetoggle, leaves focus restoration on toggle, strict tests unchanged. Strong Astra scoped review accepted. Source b4c59000c3ba8ec4bc19fb89a4cc8b175ed6ef7d; complete repaired two-module replay20passed77.99s; required88-selector push since2a27 underway. Track actual source repair/review/CI/publication, keep prior broad failure receipt.
 
