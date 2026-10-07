@@ -309,9 +309,9 @@ hypothesis status and summarizes experiment verdicts, and the
 
 | Record | Count | Current state |
 | --- | --- | --- |
-| Agendas | 41 | 21 active; 14 completed; 5 paused; 1 superseded |
-| Commitments | 431 | 225 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 23 in progress |
-| Sessions | 184 | 105 completed; 78 stopped; 1 nonterminal |
+| Agendas | 41 | 20 active; 15 completed; 5 paused; 1 superseded |
+| Commitments | 431 | 228 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
+| Sessions | 184 | 105 completed; 79 stopped; all terminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 238 | 65 confirmed; 40 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 225 | 85 accepted; 45 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
@@ -6169,7 +6169,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-155-creative.yaml` | session-155 | 188 | 1.52 h | 1.49 h | 1.72 h | no |
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
 | `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
-| `codex-task-tree-session185-checkpoint.yaml` | session-185 | 1,321 | 9.23 h | 2.44 h | 2.45 h | yes |
+| `codex-task-tree-session185-final-checkpoint.yaml` | session-185 | 2,405 | 14.34 h | 3.78 h | 3.78 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6180,6 +6180,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session184-through-100444.yaml` | unattributed | 2,176 | 11.95 h | 2.94 h | 2.94 h | yes |
 | `codex-task-tree-session184-through-121500.yaml` | unattributed | 3,620 | 20.64 h | 5.11 h | 5.11 h | yes |
 | `codex-task-tree-session184-through-20261007T141342Z.yaml` | unattributed | 4,891 | 28.9 h | 7.09 h | 7.09 h | yes |
+| `codex-task-tree-session185-checkpoint.yaml` | unattributed | 1,321 | 9.23 h | 2.44 h | 2.45 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

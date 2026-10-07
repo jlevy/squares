@@ -198,7 +198,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
-| [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 7 | think-tvxs | Complete bounded source controls and reviews, freeze prospective H304/296 then run at most60+60s construction/fresh; retain negatives or resource stops. |
+| [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
 
 ### Workflow summary
 
@@ -215,7 +215,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
-| `review-planning-oversight` | 10 | 3 | 55 | 6 |
+| `review-planning-oversight` | 10 | 3 | 56 | 6 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
@@ -930,13 +930,13 @@ Status: **active**. Dispose the bounded Session184 continuation through scoped a
 
 ### [agenda-044](agendas/agenda-044-n17-coupling-and-replay.md) — n17 Complete Coupling and Replay Continuation
 
-Status: **active**. Execute the separately authorized four-hour extension through complete partner coupling, measured replay cost and a current public handoff; certification remains explicit beside mathematical work.
+Status: **completed**. Execute the separately authorized four-hour extension through complete partner coupling, measured replay cost and a current public handoff; certification remains explicit beside mathematical work.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-440 | research | 17 | in_progress | 1 | think-tvxs | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
-| BC-441 | research | 17 | in_progress | 1 | think-hkqz | docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md |
-| BC-442 | measurement_validation | 17 | in_progress | 1 | think-svkl | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
+| BC-440 | research | 17 | complete | 1 | think-tvxs | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
+| BC-441 | research | 17 | complete | 1 | think-hkqz | docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md |
+| BC-442 | measurement_validation | 17 | complete | 1 | think-svkl | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
 
 ## Series
 

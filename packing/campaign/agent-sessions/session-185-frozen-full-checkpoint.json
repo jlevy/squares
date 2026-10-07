@@ -78,7 +78,7 @@
     "tests/test_pilot_n17_subpattern_bb.py::test_interval_certificates_are_unchanged_by_the_taylor_option[2.80-3]",
     "tests/test_pilot_n17_subpattern_bb.py::test_interval_certificates_are_unchanged_by_the_taylor_option[2.94-3]"
   ],
-  "new_source_ci_assessment": "No observed scientific-certificate acceptance failure. Current clean hosted shards A and C passed after separate fixes; latest hosted validate fails pending session metadata only. Full new-head PASS is not established.",
+  "new_source_ci_assessment": "Frozen0adfe full checkpoint remains95PASS/5FAIL/1SKIP. Later65dbccbcaf07b8913ca49f9e2a899bbf5a9ebf54 required hosted checks all passed by21:46:27Z. This does not establish full current-source certification. Terminal local push-tier hit240s ceiling without a verdict; latest pushed-head CI is tracked separately.",
   "passed_steps": 95,
   "root_reported_completed_at": "2026-10-07T21:38:59Z",
   "root_reported_exit_code": 1,

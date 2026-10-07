@@ -1,7 +1,7 @@
 ---
 title: n17 Session 185 Coupling and Replay Progress
 date: 2026-10-07
-status: in-progress-review
+status: reviewed
 ---
 # n17 Session 185 Coupling and Replay Progress
 
@@ -91,6 +91,11 @@ not establish a full pass on current source.
 The Taylor certificate-byte discrepancies remain unexplained.
 The soundness perimeter skipped engine cells because it did not find the expected engine
 path.
+
+Required hosted CI passed on source65db; the final scientific/engineering batch8ae1 has
+its own asynchronous checks.
+The terminal local push tier stopped incomplete at its240-second ceiling without step
+verdicts. Neither is a full current-source pass.
 
 The [Session184 checkpoint](review-2026-10-07-n17-session-184-progress.md) remains a
 separate historical result: 90 passes, eight failures and three skips across 101 steps.

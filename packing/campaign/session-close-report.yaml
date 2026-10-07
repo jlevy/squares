@@ -36,8 +36,8 @@ totals:
     wall_hours: 713.93
 codex_receipts:
   attributed: 81
-  unattributed: 5
-  measured: 86
+  unattributed: 6
+  measured: 87
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -3215,21 +3215,21 @@ sessions:
     snapshot_incomplete: true
 - id: session-185
   title: "n17 Complete Coupling and Exact Replay"
-  status: in_progress
+  status: stopped
   primary_bead: think-tvxs
   phases: 8
   measured: true
   rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session185-checkpoint.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session185-final-checkpoint.yaml
   turns: null
   tool_calls: null
   tool_errors: null
   one_off_code: null
   wall_hours: null
   codex_receipts:
-  - path: packing/campaign/resource-usage/codex-task-tree-session185-checkpoint.yaml
-    model_responses: 1321
-    agent_hours: 9.23
-    active_union_hours: 2.44
-    wall_hours: 2.45
+  - path: packing/campaign/resource-usage/codex-task-tree-session185-final-checkpoint.yaml
+    model_responses: 2405
+    agent_hours: 14.34
+    active_union_hours: 3.78
+    wall_hours: 3.78
     snapshot_incomplete: true
