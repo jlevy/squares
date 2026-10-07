@@ -5,17 +5,19 @@ title: "Import issue422 second SQUISH update: five new counts and four replaceme
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 9
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 child_order_hints:
   - is-01m4c7nb28pynv1t853axa5gv0
+  - is-01m4c9ppw9pc5v15m1rejaam8t
+  - is-01m4c9pr2kyc3e7ppz4v9ae72y
 hold: null
 hold_until: null
 created_at: 2026-10-07T21:27:58.586Z
-updated_at: 2026-10-07T22:48:25.062Z
+updated_at: 2026-10-07T23:03:18.355Z
 started_at: 2026-10-07T21:37:07.551Z
 ---
 Pin e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b. New88/199/207/236/302; tighter108/179/180/263, all exact side comparisons strict. Separate nine-certificate layer after frozen PR421 twelve-case5e32 batch; preserve earlier geometries/receipts/credits. Current parser refuses new263 boolean squeezed; explicit bounded metadata decision plus meaningful controls required. Its source print below exact side mustremain quotation and use safe ceiling16.7404196795387766. No feasibility replay/adoption yet; source/README/allnine JSON pinned in squares-new-report-intake.
