@@ -5,7 +5,7 @@ title: Refresh family and contact-shade censuses after SQUISH import
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T11:17:35.448Z
-updated_at: 2026-10-07T11:42:50.508Z
+updated_at: 2026-10-07T11:43:35.331Z
 started_at: 2026-10-07T11:20:49.153Z
 ---
 The full confirmation checkpoint at 9ce8ac8ea found a stale generated family census
@@ -87,3 +87,14 @@ Oct2 census69ddc7d988ba689cf887bdd0cb7fd64fdcf8c103 reproduces97 Kingbird-derive
  green/7725 light/5272 structural/2419 slack/34 band match dated prose. The note
 pins history only, never geometry acceptance. Candidate semantic review and
 original full-run completion/adoption remain pending. Follow-up stays open.
+
+Astra's independent candidate review is accepted. The reviewer checked all 324
+rows, the 23 family dependency deltas, exactly 11 changed contact rows per rule,
+fixed detector thresholds and descriptive claim status, zero rendering-replica
+mismatches, nine literal cross-phase side strings, and byte-identical contact
+shade outputs. All 648 witness/SVG inputs per candidate, source facts, receipts,
+case bounds and the eleven exact semantic geometry matches remain unchanged.
+No proof review document needs alteration. All generated-view checks passed;
+adoption and affected final-source checks await the original checkpoint finish.
+The first notes sync was write-denied (41 native commits unpushed), with all
+13 locally owned issues saved to the 61-issue outbox. Keep this task open.
