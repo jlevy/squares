@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 15 | think-ipel | Complete reviewed guardedparentproducer+independentchecker; freezeH293/exp283 boundedclosed-I exclusion trial, keepCI beside mathematics and preserve everyverdict. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `efficiency-loop` (efficiency) | 16 | think-ipel | Complete reviewed guardedparentproducer+independentchecker; freezeH293/exp283 boundedclosed-I exclusion trial, keepCI beside mathematics and preserve everyverdict. |
 
 ### Workflow summary
 
@@ -209,7 +209,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 11 | 1 | 67 | 3 |
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 11 | 1 | 43 | 1 |
+| `efficiency-loop` | 11 | 1 | 44 | 1 |
 | `research-loop` | 37 | 4 | 141 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 213 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 214 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1164,6 +1164,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-291 | confirmed | proof | The accepted numeric-cap full17 endpoint checkpoint passes a fresh ind |  | 3 |  | 1.9m wall |
 | H-292 | confirmed | proof | A finite exact conditional ownership recipe from the accepted H290 par |  | 2 |  | 10s wall |
 | H-293 | blocked | proof | The fixed parent-aware owned-hull initialization and one no-refinement |  | 2 |  | 10.5m wall |
+| H-294 | running | proof | The original accepted-parent kernel pool and four closed centre cases  |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1421,6 +1422,12 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-285 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-294 | Registered at2026-10-07T14:51:33Z before scientific intake;20min preparation lease, separate120s combined trial. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1469,7 +1476,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-213 rounds, 2512.1 agent-minutes, 5778.9 wall-minutes.
+214 rounds, 2512.1 agent-minutes, 5778.9 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

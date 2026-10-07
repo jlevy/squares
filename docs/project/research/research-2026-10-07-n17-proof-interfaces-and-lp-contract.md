@@ -2074,13 +2074,19 @@ most 128 vertices, and every admitted or computed rational numerator and denomin
 has at most 4,096 bits. A resource stop is incomplete, with no gain verdict. Preserve
 a sampled 4 GiB memory ceiling and original-object identity across reads.
 
-### What a later conditional continuation would prove
+### The conditional continuation contract and its incomplete trial
 
-The positive exp-282 gate selects preparation of H-293/exp-283, one separately
-registered conditional continuation. Its scientific target has not run. Freshly
-establish the accepted parent, the closed guard, and the extra
+The positive exp-282 gate selected H-293, a separately registered conditional
+continuation. Exp-283 refused the parent custody join before creating a child.
+After the exact role-to-path schema repair, exp-284 produced sixteen complete
+updates with no declared closure; its fresh independent replay reached the wall
+ceiling. No conditional child or exclusion has been accepted. This incomplete
+verification supplies no mathematical negative and no child geometry to the next
+finite experiment.
+
+The frozen contract first establishes the accepted parent, the closed guard, and the extra
 owned-point implication before producing any child step. Keep all original rows
-initially. A proposed first round updates the other fifteen contracting owners in
+initially. The selected first round updates the other fifteen contracting owners in
 their existing order and owner 0 last; square 6 remains coarse. This lets the other
 owners use the new points before owner-0 compression. It does not enlarge the
 64-live-row or 48-point hull policies.

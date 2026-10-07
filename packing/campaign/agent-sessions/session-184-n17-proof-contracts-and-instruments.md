@@ -497,7 +497,7 @@ session:
     objective: Run and independently interpret the registered closed-I parent-aware conditional
       exclusion trial; mathematical outcome is the primary lane, with independent proof review
       and bounded validation in parallel.
-    status: complete
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Source and synthetic control handoff ready; accepted finite gain supports
       the registered conditional contradiction trial.
@@ -1712,18 +1712,20 @@ session:
     - sharedadmissionledgermutation
   - task: Astra conditional trial interpretation and next mathematical proof interface
     operator: GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Exp284 fresh replay reached its source300s deadline after a complete16-update
+      candidate; no accepted child or criterion-miss. Next finite source freezes only
+      accepted original-parent initialization and checked kernels, never partial284geometry.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md
     files: &id037
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     checks: []
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Interpret the actual conditional trial only after fresh replay; derive the
-      next proof interface from its measured disposition.
+    next_action: Review the separately selected original-parent finite four-case source.
     phase: 15
     budget_minutes: 30
     started_at: '2026-10-07T14:07:42Z'
@@ -1740,10 +1742,13 @@ session:
     - sharedadmissionledgermutation
   - task: Sol conditional trial custody and receipt audit
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Exp284 fresh replay reached its source300s deadline after a complete16-update
+      candidate; no accepted child or criterion-miss. Next finite source freezes only
+      accepted original-parent initialization and checked kernels, never partial284geometry.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md
     files: &id038
     - packing/devtools/produce_n17_conditional_owned_hull.py
     - packing/tests/test_produce_n17_conditional_owned_hull.py
@@ -1751,8 +1756,7 @@ session:
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Keep source frozen; audit registered production/fresh metadata on root authorization
-      and preserve original evidence and conditional scope.
+    next_action: Preserve original evidence and preregister only reviewed next finite source.
     phase: 15
     budget_minutes: 30
     started_at: '2026-10-07T14:07:42Z'
@@ -1769,10 +1773,13 @@ session:
     - sharedadmissionledgermutation
   - task: Sol independent conditional replay and asynchronous validation
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Exp284 fresh replay reached its source300s deadline after a complete16-update
+      candidate; no accepted child or criterion-miss. Next finite source freezes only
+      accepted original-parent initialization and checked kernels, never partial284geometry.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md
     files: &id039
     - packing/devtools/verify_n17_conditional_owned_hull.py
     - packing/tests/test_verify_n17_conditional_owned_hull.py
@@ -1780,8 +1787,7 @@ session:
     uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Keep independent checker frozen; audit complete exact replay after authorization
-      and run bounded relevant validation beside research.
+    next_action: Build the disjoint finite instrument and review its exact source controls.
     phase: 15
     budget_minutes: 30
     started_at: '2026-10-07T14:07:42Z'
@@ -1792,6 +1798,91 @@ session:
     kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
     fallback: Preserve missingdependency, rotate toreadyproof-support work.
     write_scope: *id039
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Astra pooled-parent finite four-case proof review
+    operator: GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks: []
+    uncertainty: No accepted conditional child from exp284; no new exclusion before fresh proof.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review the exact pooled-parent implications and classify only freshly checked outcomes.
+    phase: 16
+    budget_minutes: 30
+    started_at: '2026-10-07T14:37:42Z'
+    deadline_at: '2026-10-07T15:07:42Z'
+    expected_output: Sole-Astra mathematical source review and exact selected proof interface.
+    validation_command: Focused source controls and independent review only; no broad repeat.
+    kill_condition: Preserve resource stops and refuse failed custody or proof joins.
+    fallback: Rotate to ready proof support while other lanes continue.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol original-parent pooled finite instrument
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/devtools/probe_n17_conditional_center_cases.py
+    - packing/tests/test_probe_n17_conditional_center_cases.py
+    checks: []
+    uncertainty: No accepted conditional child from exp284; no new exclusion before fresh proof.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Freeze source and controls before root registers any scientific case evaluation.
+    phase: 16
+    budget_minutes: 30
+    started_at: '2026-10-07T14:37:42Z'
+    deadline_at: '2026-10-07T15:07:42Z'
+    expected_output: Retained finite instrument, target-free controls and independent readiness review.
+    validation_command: Focused source controls and independent review only; no broad repeat.
+    kill_condition: Preserve resource stops and refuse failed custody or proof joins.
+    fallback: Rotate to ready proof support while other lanes continue.
+    write_scope:
+    - packing/devtools/probe_n17_conditional_center_cases.py
+    - packing/tests/test_probe_n17_conditional_center_cases.py
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol finite-source review and scoped validation reconciliation
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
+    - SYNOPSIS.md
+    checks: []
+    uncertainty: No accepted conditional child from exp284; no new exclusion before fresh proof.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Complete focused checks and prepare H294 preregistration after both source reviews.
+    phase: 16
+    budget_minutes: 30
+    started_at: '2026-10-07T14:37:42Z'
+    deadline_at: '2026-10-07T15:07:42Z'
+    expected_output: Independent finite mechanical review, stable views and unchanged-timeout focused control.
+    validation_command: Focused source controls and independent review only; no broad repeat.
+    kill_condition: Preserve resource stops and refuse failed custody or proof joins.
+    fallback: Rotate to ready proof support while other lanes continue.
+    write_scope:
+    - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
+    - SYNOPSIS.md
     excluded_commands:
     - blockingCIwatch
     - unregisteredscientifictarget

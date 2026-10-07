@@ -1007,6 +1007,13 @@ contradiction. A complete nonclosed round misses this recipe and leaves conditio
 feasibility unresolved.
 No full-mask exclusion, ordinary census admission or global proof is implied.
 
+[H-294](hypotheses/H-294-n17-pooled-parent-center-cases.md) tests an exact unsplit or
+four-case conditional contradiction from freshly reconstructed accepted initialization
+and original-parent kernel pools.
+All unconditional pooled owners must remain disjoint as an endpoint calibration before
+adding the five conditional owner0 points.
+No incomplete exp284 child geometry is used; a complete fresh finite proof is required.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
