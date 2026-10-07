@@ -1924,6 +1924,30 @@ a computational and custody-scope repair, not a gain result or merely a serializ
 change. The exact-arc alternative below remains prospective until this gate has a
 mathematical disposition.
 
+That disposition arrived in exp-282. Its
+[certificate](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/certificate.json)
+and [fresh reconstruction](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/replay.json)
+both report `conditional_gain_candidate`, with matching certificate identity and a
+nonempty, strictly valid endpoint control. All four all-angle support differences
+are negative. All four target differences exceed the exact $1/1024$ threshold;
+their approximate values, in E, N, W, S order, are $0.1200241$, $0.1200241$,
+$0.2381591$, and $0.2390397$. These decimals summarize the retained rational
+comparisons and are not acceptance inputs.
+
+The target construction includes row 26 and the singleton boundary pieces from
+rows 25 and 27, all with nonempty clipped centre polygons. Its 96 finite halfplanes
+give a five-vertex polygon, and all five vertices are selected. The all-angle and
+endpoint selections each have four points. Construction and fresh reconstruction
+completed in 8.38847 supervised seconds with cleanup confirmed. The original
+exp-281 remains incomplete before gain evaluation.
+
+This result supplies five points owned by square 1 under the closed guard $I$.
+It supplies no conditional contradiction or unconditional exclusion. The accepted
+parent and its sixteen other endpoint coordinates remain explicit premises, not
+newly replayed geometry. All propagation, exclusion, admission and global-proof
+flags remain false. The result selects the guarded continuation below; it does not
+justify spending on the exact-arc fallback now.
+
 ## A Conditional Owned-Hull Gate
 
 The next proposed stronger implication conditions the corner-SW square, analytic
@@ -2052,13 +2076,19 @@ a sampled 4 GiB memory ceiling and original-object identity across reads.
 
 ### What a later conditional continuation would prove
 
-A positive gate permits consideration of one separately registered conditional
-continuation. Freshly establish the accepted parent, the closed guard, and the extra
+The positive exp-282 gate selects preparation of H-293/exp-283, one separately
+registered conditional continuation. Its scientific target has not run. Freshly
+establish the accepted parent, the closed guard, and the extra
 owned-point implication before producing any child step. Keep all original rows
 initially. A proposed first round updates the other fifteen contracting owners in
 their existing order and owner 0 last; square 6 remains coarse. This lets the other
 owners use the new points before owner-0 compression. It does not enlarge the
 64-live-row or 48-point hull policies.
+
+For this actual input, the old hull has twenty vertices and the target contributes
+five points. Their augmented hull therefore has at most twenty-five vertices.
+Retain them all; no inner-selection fallback or loss of old points is needed in this
+trial. Production disables refinement explicitly and must report zero splits.
 
 The prospective parent-aware checker binds the accepted H-290 final state and the
 same-object full centered replay from exp-280, the finite gate and its fresh check,
@@ -2090,10 +2120,42 @@ so the augmented state cannot be presented as a new generic wall seed.
 The useful acceptance boundary is a completely checked contradiction for every
 parent configuration satisfying $\tau_1\in I$. Such a result removes a whole closed
 chart interval of width $1/64$. A valid nonclosed result remains unresolved even if
-some polygons shrink. The parent-plus-guard receipt needs an explicit conditional
+some polygons shrink. A complete nonclosed sixteen-owner round misses H-293's
+frozen one-round exclusion criterion; it leaves physical feasibility under $I$
+unresolved. A resource stop is incomplete. The parent-plus-guard receipt needs an explicit conditional
 schema; it must never enter an unconditional exclusion ledger or claim that the
 remaining angles are covered. Full conditional replay costs and limits must be
 registered separately after the finite gate and centered-control measurements.
+
+The chosen initial test scans all unordered owner pairs in lexicographic order for
+an exact nonempty intersection of their closed owned hulls. The first such pair is
+an initial conditional contradiction at step $-1$, before any update. A shared point
+or segment is enough: every owned-hull point lies strictly inside its physical
+square, so a common point would lie in both square interiors. Empty hulls do not
+intersect. The fresh checker must reconstruct the actual intersection, including
+point and segment degeneracies; bounding-box overlap is insufficient. No initial
+intersection has been evaluated during preparation.
+
+Absent an initial contradiction, stop at the first independently checkable post-step
+contradiction, or after the one complete sixteen-owner round. Freeze 600 seconds for
+production and 300 for independent full checking, including their input and finite
+ownership joins, with a sampled 4 GiB memory ceiling. The fresh receipt must bind
+the actual closure kind, owner pair and step. Source controls and mathematical review
+precede registration and launch; a producer's declaration alone cannot meet the
+criterion.
+
+The final owner-0 update also has a guard-specific terminal test. Reconstruct every
+row whose closed interval meets $I$, using
+$\max(l,13/32)\le\min(h,27/64)$. In the unchanged partition these are rows 25, 26
+and 27, with intersections respectively the left endpoint, all of $I$, and the right
+endpoint. If all three residuals are empty, the parent-plus-guard cover has no pose
+for square 1, even when rows outside $I$ remain live. This is a checked conditional
+contradiction, not a contraction diagnostic. Row 26 alone is insufficient for this
+union-cover test. Record the actual row roster, closed intersections, owner and step
+under a distinct `guarded_owner_cover_empty` discriminator; the fresh checker
+reconstructs them after the final complete update. Ordinary post-step contradictions
+take priority. This additional terminal was selected before any conditional child
+row was evaluated.
 
 The target guard $I$ excludes the endpoint's chart-zero and chart-one representations.
 Consequently, an $I$-conditional child must not be required to retain that
@@ -2105,6 +2167,27 @@ $1/64$ in the exact union length of one owner's live chart intervals. Emptying o
 row need not exclude its shared boundary angles, which adjacent closed rows may
 still represent. Neither smaller polygon extents nor a finer partition counts as
 orientation removal under this criterion.
+
+An apparent full closure of the all-angle known-endpoint parent would be a refused
+control, not an alternative success. The closed-$I$ trial has no such requirement
+because the known endpoint lies outside its guard.
+
+If a future checked conditional contradiction excludes $I$, it can strengthen the
+original unguarded parent through a separate pruning certificate. Start from the
+original parent's groups and rows and transfer only the proved impossibility of
+$\tau_1\in I$. The full row partition may remain, with row 26 marked empty and
+shared boundary angles retained as harmless over-cover in adjacent rows. Do not
+transfer child-only grown hulls or contracted other-owner rows: those depended on
+$I$ and need not hold outside it. Such a pruning interface requires its own checked
+parent/guard-closure join; the finite gain alone supplies none of it.
+
+This pruning would remain a statement about the centered $C(V)$ parent. Its live
+angle union would lose the open interval $(13/32,27/64)$, of exact length $1/64$,
+even though the closed neighboring rows still represent the two boundary angles.
+The conditional impossibility itself includes those boundaries. Containment gives
+the same implication for $C(S_*)$ because $S_*<V$; it does not extend the
+impossibility to every packing in the larger $C(U)$ container or change that
+container's existing census.
 
 Before that gate supplies evidence, do not spend on blanket row doubling, further
 cones, a full annulus tiling, broad LP sweeps or long unchanged iteration. If the

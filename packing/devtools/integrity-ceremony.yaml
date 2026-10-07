@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/verify_n17_conditional_owned_hull.py
+    kind: generated-artifact
+    boundary: Canonical runtime parent and conditional child objects, compressed original bytes and accepted centered/H290/finite proof receipts bind exact ancestry to fresh full conditional replay; these generated proof identities do not pin source or commits.
   - path: packing/devtools/probe_n17_conditional_owned_hull.py
     kind: generated-artifact
     boundary: Canonical runtime seed/node identities, compressed saved-object bytes and the accepted H290 receipt bind complete streamed domains to fresh finite hull reconstruction; these generated proof artifacts are not source or commit integrity pins.

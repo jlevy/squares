@@ -67,3 +67,6 @@ packing/atlas/known-best/video/spikes/**/frames/
 /packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/production-objects/*.json.gz
 /packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/replay-objects/*.json.gz
 /packing/campaign/retained/session-184-n17-numeric-cap-readiness/*.json.gz
+
+# H293 conditional proof child: native object, preserved outside Git; custody below.
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull/conditional-node.json.gz
