@@ -91,6 +91,7 @@ def fixture(tmp_path: Path) -> tuple[dict[str, Any], Path]:
         "node_sha256": saved["node_sha256"],
         "compressed_sha256": digests,
         "expected_status": "PASS_STALL",
+        "owned_hull_limit": 48,
         "root": value["root"],
         "root_path": "root.json",
         "cap_certificate": "cap.json",
@@ -225,6 +226,7 @@ def stub_child(document: dict[str, Any]) -> dict[str, Any]:
             "closed": False,
             "closure": None,
             "centered_exclusion_proved": False,
+            "owned_hull_limit": 48,
         }
     }
 
@@ -239,6 +241,7 @@ def stub_child(document: dict[str, Any]) -> dict[str, Any]:
         "expired",
         "wrong_container",
         "missing_step",
+        "wrong_hull_limit",
     ],
 )
 def test_parent_stall_only_semantics_and_child_lease(
@@ -275,6 +278,8 @@ def test_parent_stall_only_semantics_and_child_lease(
         result["receipt"]["container"]["offset"] = "0"
     elif outcome == "missing_step":
         result["receipt"]["counts"]["steps"] = 15
+    elif outcome == "wrong_hull_limit":
+        result["receipt"]["owned_hull_limit"] = 16
 
     def child(_path: Path, seconds: float) -> dict[str, Any]:
         leases.append(seconds)
@@ -475,3 +480,13 @@ def test_failed_fresh_child_retains_bounded_evidence_after_temp_cleanup(
     elif kind != "timeout":
         assert "receipt_error" in evidence
     assert not child_paths[0].exists()
+
+
+@pytest.mark.parametrize("limit", [16, True])
+def test_frozen_computational_hull_limit_refuses_changed_descriptor(
+    limit: int, tmp_path: Path,
+) -> None:
+    document, _path = fixture(tmp_path)
+    document["owned_hull_limit"] = limit
+    with pytest.raises(ValueError, match="hull limit differs"):
+        control.validate_descriptor(document)

@@ -245,6 +245,8 @@ def test_complete_full17_stall_has_separate_schema_and_default_parity(tmp_path: 
     assert centered["root_cap_join_checked"] is False
     assert centered["centered_exclusion_proved"] is False
     assert centered["existing_U_census_admission"] is False
+    assert centered["owned_hull_limit"] == 48
+    assert "owned_hull_limit" not in default
 
 
 def test_numeric_wall_closure_cannot_be_reused_at_outer_cap(tmp_path: Path) -> None:
@@ -398,6 +400,55 @@ def test_two_actual_owned_hulls_require_the_exact_declared_pair(tmp_path: Path) 
     refused = verifier.verify(tmp_path, cells, container=context)
     assert refused["status"] == "FAIL"
     assert "centered closure identities" in refused["failure"]
+
+
+@pytest.mark.parametrize(
+    ("centered", "count", "accepted"),
+    [
+        (False, 16, True),
+        (False, 17, False),
+        (True, 17, True),
+        (True, 48, True),
+        (True, 49, False),
+    ],
+)
+def test_centered_compression_has_a_separate_bounded_hull_capacity(
+    *, centered: bool, count: int, accepted: bool
+) -> None:
+    # Every point is a distinct convex vertex on an exact grid parabola. The
+    # compressor must check and retain every one, rather than truncate to its cap.
+    points = verifier.hull(
+        [(Q(2**18 + i, 2**20), Q(2**18 + i * i, 2**20)) for i in range(count)]
+    )
+    assert len(points) == count
+    encoded = [[str(x), str(y)] for x, y in points]
+    context = verifier.CenteredContainer(Q(4), Q(3)) if centered else None
+    state = verifier.State([], Q(4), 1, list(range(17)), container=context)
+    state.groups = {owner: [] for owner in state.mask}
+    assert state.hull_limit == (48 if centered else 16)
+    step = {
+        "owner": 0,
+        "common_owned_kernel": encoded,
+        "compression_source_hull": encoded,
+        "inner_grid_compression": {
+            "mode": "replace",
+            "vertices": encoded,
+            "witnesses": [
+                {"indices": [i], "weights": ["1"], "point": pt} for i, pt in enumerate(encoded)
+            ],
+        },
+    }
+    planes = [(Q(1), Q(0), Q(1)), (Q(0), Q(1), Q(1))]
+    if accepted:
+        verifier.compress(state, step, 0, planes, any_live=True)
+        assert state.groups[0] == points
+        # Larger capacity does not waive any kernel point's plane check.
+        upper = max(x for x, _y in points) - Q(1, 2**21)
+        with pytest.raises(verifier.VerificationError, match="kernel point fails a plane"):
+            verifier.compress(state, step, 0, [(Q(1), Q(0), upper)], any_live=True)
+    else:
+        with pytest.raises(verifier.VerificationError, match="owned hull too large"):
+            verifier.compress(state, step, 0, planes, any_live=True)
 
 
 def test_updated_rows_use_inner_walls_even_for_a_loose_prior_outer(tmp_path: Path) -> None:

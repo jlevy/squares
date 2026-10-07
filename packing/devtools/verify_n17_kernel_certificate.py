@@ -82,6 +82,7 @@ CENTERED_SCHEMA = "n17-centered-cap-certificate-verification/v1"
 KIND = "kernel"
 PROVENANCE = provenance(Path(__file__))
 HULL_LIMIT = 16
+CENTERED_HULL_LIMIT = 48
 GRID = 2**20
 
 Point = tuple[Q, Q]
@@ -961,6 +962,10 @@ class State:
     facets: dict[CorePair, list[Facet]] = field(default_factory=dict[CorePair, list[Facet]])
     forbidden: dict[HullPair, list[Point]] = field(default_factory=dict[HullPair, list[Point]])
     container: CenteredContainer | None = None
+    hull_limit: int = field(init=False)
+
+    def __post_init__(self) -> None:
+        self.hull_limit = HULL_LIMIT if self.container is None else CENTERED_HULL_LIMIT
 
     def tick(self, key: str, amount: int = 1) -> None:
         self.stats[key] = self.stats.get(key, 0) + amount
@@ -1332,7 +1337,7 @@ def compress(
         state.groups[owner] = hull(points)
     else:
         state.groups[owner] = hull(state.groups[owner] + points)
-    require(len(state.groups[owner]) <= HULL_LIMIT, f"step {si}: owned hull too large")
+    require(len(state.groups[owner]) <= state.hull_limit, f"step {si}: owned hull too large")
 
 
 def derive_closure(state: State, owner: int, si: int) -> dict[str, Any] | None:
@@ -1578,6 +1583,7 @@ def verify(
             existing_U_census_admission=False,
             global_optimality_proved=False,
             centered_exclusion_proved=False,
+            owned_hull_limit=CENTERED_HULL_LIMIT,
         )
     try:
         result = verify_objects(

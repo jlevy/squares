@@ -166,6 +166,10 @@ def validate_descriptor(document: dict[str, Any]) -> None:
         "complete17 mask differs",
     )
     require(document["expected_status"] == "PASS_STALL", "first control requires stall")
+    require(
+        type(document["owned_hull_limit"]) is int and document["owned_hull_limit"] == 48,
+        "frozen centered computational hull limit differs",
+    )
 
 
 def gzip_size(path: Path, limit: int, deadline: float) -> int:
@@ -278,7 +282,8 @@ def relative_replay(document: dict[str, Any], *, deadline: float) -> dict[str, A
     )
     require(
         result["container"] == {k: v for k, v in context_record().items() if k != "target_T"}
-        and result["root_cap_join_checked"] is False,
+        and result["root_cap_join_checked"] is False
+        and result["owned_hull_limit"] == document["owned_hull_limit"],
         "standing result rational container identity differs",
     )
     require(
@@ -479,6 +484,7 @@ def consume(path: Path, *, deadline: float, child_seconds: float) -> dict[str, A
         and result["container"]
         == {k: v for k, v in context_record().items() if k != "target_T"}
         and result["root_cap_join_checked"] is False
+        and result["owned_hull_limit"] == document["owned_hull_limit"]
         and result["counts"]["steps"] == 16
         and result["compressed_sha256"] == document["compressed_sha256"],
         "fresh context/world/content/complete mask differs",
