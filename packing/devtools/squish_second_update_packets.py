@@ -196,6 +196,7 @@ def retain_prior_lanes() -> None:
 def report_section(n: int, fact: dict[str, Any], verified: dict[str, Any]) -> str:
     """Generate the current report and explicitly separate its older verified ceiling."""
     value = followup.display(fact["side"])
+    seed = SEEDS[n].replace("'", chr(0x2019))
     with localcontext() as context:
         context.prec = 40
         gap = Decimal(verified["value"]) - Decimal(value)
@@ -205,7 +206,7 @@ def report_section(n: int, fact: dict[str, Any], verified: dict[str, Any]) -> st
         f"$s({n}) \\le {value}$, with exact side ${fact['side']}$.\n"
         "This second update is a reported V0/C0 claim pending complete replay and new\n"
         "scoped review. Optimality and rigidity are not established. The author reports\n"
-        f"the seed as {SEEDS[n]}.\n"
+        f"the seed as {seed}.\n"
         "The [revision-specific packet]"
         "(../resources/web/squish-422-second-update-2026-10-07/README.md)\n"
         f"retains the source print ${fact['printed_side']}$ separately from its safe\n"
