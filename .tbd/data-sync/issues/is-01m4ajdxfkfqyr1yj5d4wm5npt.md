@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eleven SQUISH upper-bound packings (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 25
+version: 26
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -27,7 +27,7 @@ child_order_hints:
 hold: blocked
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T18:27:23.475Z
+updated_at: 2026-10-07T18:46:16.607Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: W1 result import stages 1–3, followed by W7 bounded engineering and W2 full exact-rational replay/mapped independent math review, then publication and authorized issue reply. Scope: issue #401 ten pinned repository certificates at 07fe6dde1e5b67405a3076719b90e58e2882b677 plus n153 in comment 6031977107 (eleven counts total). Two separable PRs; no main push or merge without explicit merge consent. Source no-license retention: derived geometry facts and attributed metadata only. Engineering GPT-6.1 Sol, records GPT-6.1 Sol, math/soundness Astra. Native tbd sync known divergent/permission blocked; preserve all work in outbox and working branch.
@@ -173,3 +173,5 @@ The user explicitly authorized publication using their environment GH_TOKEN. A p
 Equivalent process-local recipe: `GIT_TERMINAL_PROMPT=0 GH_PROMPT_DISABLED=1 git -c credential.helper= -c 'credential.helper=!gh auth git-credential' -c http.proactiveAuth=basic -c http.emptyAuth=false push origin 6d0546b4c8949d9775d1a99865ec4e7277251cc7:refs/heads/codex/import-squish-401`. The actual wrapper records only invocation; credential output remains in Git's private pipe. No secret was put in argv, files or logs; no persistent auth, remote, proxy or TLS setting changed. Astra reviewed receipt/wrapper/marker/response and accepted the client-level interpretation. Exact intermediary token forwarding and raw token validity remain unobserved; no invalid-token conclusion is justified.
 
 Actual evidence and closing snapshots: /workspace/squares-401-explicit-token-push/explicit-token-push-receipt.json. New standalone latest full native tracker bundle: /workspace/squares-401-native-tracker-explicit-token.bundle. Source heads6d/8f/85 remain unchanged and clean; prior backups retained. No PR, hosted CI, merge or author reply was created. Publication stays in_progress/hold blocked; no unchanged repeat requests or scientific tests are needed.
+
+Installation-access follow-up completed locally: current accessible-user intersection excludes targetjlevy/squares in separatelyverifiedreads; app write declarations do not prove effective target inclusion. Documented single-target repair with API2026-03-10 returned403 installation_repositories=write requirement, not grant; owner-requested proactive-helper retry also403 with GETinvocationverified. No claimownerfailedsave, rawtokeninvalid orcompleteinstallationinventory. Astra accepted exact updatedsource. Research DOCONLY commit c356737ac97ef82fa3b382bdca994d16b99f1076 leads targetedGUIcheck/addalongsideexistingselectionifmissing or connectionrefreshifalreadyincluded; normaltaskflow remains documented notverifiedrepair. Flowmark/21Markdownlinks/OR9bodypassed. Access-fix incrementalbundle squares-401-cloud-publication-research-access-fix.bundle requires ONLY publicEF and was independentlyfetchedFF into restoredstandalonebaseline; entiretree/docbytes/connectivitymatch. Newfullnativehistory squares-401-native-tracker-installation-access.bundle; preservedpriorbundles andsourceimport6d/confirm8f. Actualpublication remainsblocked, no newwritesuntil meaningfulaccesschange. Evidence /workspace/squares-401-installation-access-repair.
