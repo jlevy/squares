@@ -76,9 +76,6 @@ experiment:
       contract and inspect the admitted input-size interface before any separately registered
       correction.'
     needs_review: false
-  lease:
-    expires: '2026-10-07T13:06:10Z'
-    host: macOS arm64
   effort:
     timebox: Combined120s construction60/fresh60, TERM120/KILL130, sampled4096MiB RSS. No
       retry, propagation or threshold tuning.
