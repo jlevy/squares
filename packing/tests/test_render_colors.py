@@ -36,11 +36,12 @@ from sqpack.witness import load_witness
 #: puts side by side. Measured from the retained renderings, which record a class per
 #: square; it is the number the poster's palette question was decided against, when it
 #: was 106 at `n = 273`. Since the #227 intake Couzo's packing is the frame at 273, with
-#: 30 classes, and the largest is his `n = 301`, with 52.
+#: 30 classes. The 7 October SQUISH update now carries 81 classes at n = 263,
+#: above the 52 at Couzo's n = 301.
 GOLDEN_MAX_ANGLE_CLASSES: dict[str, tuple[int, int]] = {
     "n=1..100": (14, 69),
     "n=1..200": (67, 182),
-    "n=1..324": (52, 301),
+    "n=1..324": (81, 263),
 }
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
@@ -441,17 +442,17 @@ def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
 
 
 def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries() -> None:
-    """The corpus asks for 52 angle classes in one frame; the palette answers with 20.
+    """The corpus asks for 81 angle classes in one frame; the palette answers with 20.
 
     The playbook's extension step read "widen the palette", and the measurement says the
     opposite: widening it is what would break it. The renderer colors per frame, so the
     number that matters is the largest class count in any single frame, not the corpus's
-    distinct angles -- 52, in `n = 301`, against 14 when the corpus stopped at 100. It was
-    106, in the catalogue's `n = 273`, until the #227 intake replaced that frame.
-    Feeding that count to `square_fill_palette` would space 52 bases around one wheel
-    and leave the closest pair 0.43 degrees apart in OkLCh, which is not a palette. The
+    distinct angles -- 81, in the updated `n = 263`, against 14 when the corpus stopped
+    at 100. It was 106, in the catalogue's `n = 273`, until the #227 intake replaced
+    that frame, and then 52 at Couzo's `n = 301`. Feeding the largest class count to
+    `square_fill_palette` would crowd its bases around one wheel. The
     colorizer instead keeps the 20 checked bases and wraps class registrations onto the
-    18 unpinned slots, so the separation the figures rely on is the same one at 52
+    18 unpinned slots, so the separation the figures rely on is the same one at 81
     classes as at 14, and repeated hues in a dense frame are an honest statement that a
     frame carries more angles than any palette can distinguish.
 

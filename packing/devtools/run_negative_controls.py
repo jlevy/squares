@@ -250,6 +250,22 @@ PRUNE = frozenset(
         # register lists return through `snapshot_pruned_targets`, 3,299,132 bytes; the
         # attack folder, which a review links, comes back empty. The trace is at
         # `SNAPSHOT_MAX_BYTES`.
+        # The 7 October follow-up crossed the unchanged 192 MiB snapshot cap.
+        # These three historical validation-output roots hold timing archives,
+        # command journals and publication diagnostics, not source or control targets.
+        # General checker file traces and a finished-worker baseline/mutation replay
+        # found no consumer of their unrescued files. All linked inputs still return:
+        # four baselines pass; the schema baseline's existing missing-resource refusals
+        # are byte-identical with and without these three pruned roots.
+        # both legacy checkpoint manifests and their archives, the integrated log,
+        # the native checkpoint, the instrumentation source, and the PDF comparison
+        # pair with its report and postmortem. No ordinary replay fixture is removed.
+        # At the reviewed tree this omits 1,423,523 bytes after copy-back, leaving
+        # 200,942,507 bytes against 201,326,592; future linked or registered files are
+        # rescued by the same snapshot_pruned_targets contract.
+        ROOT / "benchmarks/validation-efficiency/runs",
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
+        ROOT / "campaign/agent-sessions/session-152-validation",
         ROOT / "benchmarks/gate-cost-at-324/runs",
         ROOT / "benchmarks/measure-verifier/census",
         ROOT / "benchmarks/measure-verifier/census-mixed",

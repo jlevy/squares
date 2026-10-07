@@ -40,6 +40,147 @@ def preserve_selected_case(n: int, text: str, source_ids: Collection[str]) -> bo
     return case["reported_upper_bound"]["source_key"] == source["source_key"]
 
 
+def _adopt_selected_update(n: int, existing: str, generated: str) -> str:
+    """Rebuild the selected update while retaining the earlier certified lane."""
+    from devtools import render_case_verifiers  # noqa: PLC0415
+    from devtools import squish_followup_packets as update  # noqa: PLC0415
+    from devtools import squish_upper_bound_packets as original  # noqa: PLC0415
+
+    if n not in update.NUMBERS or n == 153:
+        raise ValueError("selected SQUISH update count is outside its result roster")
+    _, front, body = existing.split("---\n", 2)
+    _, draft_front, draft_body = generated.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    if case["reported_upper_bound"]["source_key"] != update.SOURCE_KEY:
+        return generated
+    if any(
+        evidence.startswith("E-squish-update-")
+        for evidence in case["verified_upper_bound"]["evidence"]
+    ):
+        raise ValueError("confirmed SQUISH update requires its own confirmation adapter")
+    draft = safe_load(draft_front)["packing"]
+    fact = update.read_fact(n)
+    report = case["reported_upper_bound"]
+    report.update(
+        value=update.display(fact["side"]),
+        exact_form=fact["side"],
+        algebraic_degree=1,
+        minimal_polynomial=None,
+        analytically_optimized=None,
+        catalogue_rigid="not-stated",
+        construction_method="unknown",
+        tilt_angles_deg=None,
+        found_by=[original.AUTHOR],
+        found_year=2026,
+        improved_by=[],
+        catalogue_pictured=False,
+        source_key=update.SOURCE_KEY,
+        source_date=update.RETRIEVED,
+        retrieved_date=update.RETRIEVED,
+    )
+    for field in ("reported_lower_bound", "verified_lower_bound", "reported_status", "status"):
+        case[field] = draft[field]
+    if n in update.REPLACEMENTS:
+        prior = original.read_fact(n)
+        prior_value = original.verified_value(Fraction(prior["side"]), prior["printed_side"])
+        case["verified_upper_bound"] = {
+            "value": prior_value,
+            "exact_form": prior["side"],
+            "evidence": ["E-squish-ten-packings-2026-10-07-exact-replay"],
+        }
+        # These declarations belong to the earlier certified pose, never the update.
+        side = Fraction(prior["side"])
+        source_label = "The source" + chr(0x2019) + "s original finite decimal display is"
+        declarations = (
+            (
+                r"S_n = \\frac\{[0-9]+\}\{[0-9]+\}",
+                f"S_n = \\frac{{{side.numerator}}}{{{side.denominator}}}",
+            ),
+            (
+                re.escape(source_label) + r"\s+\$[0-9.]+\$",
+                f"{source_label} ${prior['printed_side']}$",
+            ),
+            (
+                r"The verified display is\s+\$[0-9.]+\$",
+                f"The verified display is ${prior_value}$",
+            ),
+        )
+        for pattern, replacement in declarations:
+            body, count = re.subn(pattern, lambda _match, value=replacement: value, body)
+            if count != 1:
+                raise ValueError(
+                    "selected update needs exactly one earlier side/display declaration"
+                )
+    else:
+        case["verified_upper_bound"] = draft["verified_upper_bound"]
+    case["source_reviewed"] = update.RETRIEVED
+    case["rigidity"] = None
+    lower = re.search(
+        r"\n## The lower bound\n.*?(?=\n<!-- BEGIN verification code)", draft_body, re.DOTALL
+    )
+    if lower is None:
+        raise ValueError("historical draft has no independently generated lower-bound section")
+    body, count = re.subn(
+        r"\n## The lower bound\n.*?(?=\n<!-- BEGIN verification code)",
+        lambda _match: lower.group(),
+        body,
+        flags=re.DOTALL,
+    )
+    if count != 1:
+        raise ValueError("selected update needs exactly one generated lower-bound section")
+    section = re.search(r"\n## The SQUISH Update\n.*?(?=\n## |\Z)", body, re.DOTALL)
+    if section is None:
+        raise ValueError("selected update needs its report section")
+    text = section.group()
+    declarations = (
+        (
+            rf"\$s\({n}\) \\le [0-9.]+\$,\s+with exact side\s+\$[0-9]+(?:/[0-9]+)?\$",
+            f"$s({n}) \\le {report['value']}$, with exact side ${fact['side']}$",
+        ),
+        (r"source print\s+\$[0-9.]+\$", f"source print ${fact['printed_side']}$"),
+    )
+    for pattern, replacement in declarations:
+        text, count = re.subn(pattern, lambda _match, value=replacement: value, text)
+        if count != 1:
+            raise ValueError(
+                "selected update needs exactly one current side/display declaration"
+            )
+    body = body[: section.start()] + text + body[section.end() :]
+    heading = "## The verified upper bound is a ceiling"
+    # An earlier catalogue audit is reviewed history, not this update's disclosure.
+    history = re.search(rf"\n{heading}\n.*?(?=\n## )", body, re.DOTALL)
+    if history is not None and "earlier catalogue print" in history.group():
+        body = (
+            body[: history.start()]
+            + history.group().replace(heading, "## Earlier catalogue ceiling", 1)
+            + body[history.end() :]
+        )
+    verified = case["verified_upper_bound"]["value"]
+    with localcontext() as context:
+        context.prec = 28
+        gap = Decimal(verified) - Decimal(report["value"])
+    ceiling = ""
+    if gap > 0:
+        ceiling = (
+            f"\n{heading}\n\nThe verified ceiling is $s({n}) \\le {verified}$, "
+            "while the reported packing has\n"
+            f"side ${report['value']}$, smaller by ${gap}$. "
+            "The `verified_upper_bound` certifies a\n"
+            f"ceiling, not the value of $s({n})$; `reported_upper_bound` records the stronger\n"
+            "source claim, whose independent exact replay remains pending in this record.\n"
+        )
+    body = re.sub(rf"\n{heading}\n.*?(?=\n## )", lambda _match: "", body, flags=re.DOTALL)
+    body = body.replace("\n## The lower bound", ceiling + "\n## The lower bound", 1)
+    rendered = (
+        "---\n"
+        + yaml.safe_dump(document, sort_keys=False, allow_unicode=True, width=98)
+        + "---\n"
+        + body
+    )
+    return render_case_verifiers.refresh(rendered)
+
+
 def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     """Apply SQUISH's selected report to a genuine historical draft.
 
@@ -49,16 +190,17 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     afterwards by its existing owner. This is publication adaptation, not certification.
     """
     from devtools import render_case_verifiers  # noqa: PLC0415
+    from devtools import squish_followup_packets as update  # noqa: PLC0415
     from devtools import squish_upper_bound_packets as squish  # noqa: PLC0415
 
-    if n not in squish.NUMBERS:
-        return generated
     coverage = safe_load(COVERAGE.read_text())
     selected = next((row for row in coverage["selected_overrides"] if row["n"] == n), None)
     if selected is None:
         return generated
     source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
-    if source["source_key"] != squish.source_key(n):
+    if source["source_key"] == update.SOURCE_KEY:
+        return _adopt_selected_update(n, existing, generated)
+    if n not in squish.NUMBERS or source["source_key"] != squish.source_key(n):
         return generated
     _, old_front, body = existing.split("---\n", 2)
     _, draft_front, draft_body = generated.split("---\n", 2)

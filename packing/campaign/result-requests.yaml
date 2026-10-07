@@ -1881,6 +1881,9 @@ issues:
       The updated request adds seven counts and improves five original counts; those twelve new claims
       are registered as reported only under think-oxvk. The new n153 source is identical to the retained
       attachment. Per-case Couzo/SQUISH seed credit is recorded, and no optimality is claimed.
+      The live update and author summary are https://github.com/jlevy/squares/issues/401#issuecomment-6043191866
+      and https://github.com/jlevy/squares/issues/401#issuecomment-6043263840; the deleted original
+      n153 supplement remains attributed through T-114 and its identical pinned source certificate.
     read_through: '2026-10-07T17:32:04Z'
     results:
     - key: ten-new-packings
@@ -1933,7 +1936,25 @@ issues:
     - think-8gzc
     - think-oxvk
     answer_bead: think-crhh
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/401#issuecomment-6046723077
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: ten-new-packings
+        id: T-113
+        verification: V3
+        confirmation: C3
+      - result: n153-supplement
+        id: T-114
+        verification: V3
+        confirmation: C3
+      - result: update-twelve-new-bounds
+        verification: V0
+        confirmation: C0
     close_when: All eighteen current counts, including the twelve updated claims, have complete replay
       and appropriate new scoped review recorded, and an accurate author reply states the entries and
-      assurance that actually landed on main. Publication and the reply remain pending.
+      assurance that actually landed on main. The 7 October progress reply reports the original
+      eleven confirmed on main and the twelve updates reported in draft PR 421; the expanded request
+      remains open pending the later publication and final author reply.

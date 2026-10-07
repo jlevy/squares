@@ -73,6 +73,56 @@ def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, se
     return tree, copied_targets
 
 
+def test_historical_validation_prunes_preserve_replay_inputs(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Telemetry can leave a worker; linked evidence and ordinary fixtures cannot."""
+    tree, copied_targets = control_snapshot
+    roots = (
+        ROOT / "benchmarks/validation-efficiency/runs",
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
+        ROOT / "campaign/agent-sessions/session-152-validation",
+    )
+    assert set(roots) <= PRUNE
+    rescued = (
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.log",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.manifest.json",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.manifest.json",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/VE-004-full-ed595fb6.tar.gz",
+        "benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-reference.pdf",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-replay.pdf",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-report.txt",
+        "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711.md",
+    )
+    for relative in rescued:
+        source = ROOT / relative
+        assert source.relative_to(controls.REPO) in copied_targets, relative
+        assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
+    # The normal legacy-manifest fixture test still has both its code and the two
+    # manifest/archive pairs it reads. The schema checker and current witness remain
+    # on the source surface too; the telemetry exclusion cannot hide their controls.
+    for relative in (
+        "devtools/checkpoint_manifest.py",
+        "tests/test_checkpoint_manifest.py",
+        "devtools/validate_schemas.py",
+        "witnesses/known-best/n-123.yaml",
+    ):
+        assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
+    # One unconsumed generated artifact from each root must actually leave the
+    # finished worker. Merely listing the roots while copying everything back would
+    # preserve the cap breach and satisfy only the structural assertion above.
+    for relative in (
+        "benchmarks/validation-efficiency/runs/e865612fe81c4d96a7b3713b28191045.stdout.log",
+        "benchmarks/validation-efficiency/checkpoints/VE-004-control-1.tar.gz",
+        "campaign/agent-sessions/session-152-validation/validation-timings-exhaustive-1.zip",
+    ):
+        assert (ROOT / relative).is_file(), relative
+        assert not (tree / HERE / relative).exists(), relative
+
+
 def test_oversized_snapshot_is_refused_before_cloning(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:

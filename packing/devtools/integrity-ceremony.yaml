@@ -82,6 +82,9 @@ allowlist:
   - path: packing/cases/n54_source_contract/verify.py
     kind: download
     boundary: The retained n54 source and its clean-room copy, BC-141's contract (H8).
+  - path: packing/devtools/squish_followup_packets.py
+    kind: external-checkout
+    boundary: SQUISH's pinned 7 October update source bytes, admitted from an external checkout and compared with their acquisition digests when --source is supplied; derived internal facts are compared structurally.
   - path: packing/devtools/build_known_best_atlas.py
     kind: download
     boundary: Upstream's declared digest of a known-best packing it publishes (H9).

@@ -11905,6 +11905,8 @@ results:
     - packing/resources/web/squish-401-2026-10-07/README.md
     - packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz
     - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
     - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
     - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
     - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
@@ -11917,7 +11919,8 @@ results:
       project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
       with the open replay and two human expert reviews. No local or global optimality claim is made by
       these upper-bound certificates.
-    notes: Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+    notes: |
+      Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
       on the same day after complete exact-rational dual replay and two accepting project AI reviews,
       with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
       oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
@@ -11925,6 +11928,12 @@ results:
       retain that source rational. Across the eleven packings this corrects four source prints upward,
       tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
       original source print separately from the verified display.
+
+      The original supplement comment
+      is no longer available; the identical certificate remains accessible at
+      https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json.
+      The retained update comparison binds its exact side and rational triples to the original;
+      this source restoration adds no result or assurance rung.
     reviews:
     - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
       kind: adversarial

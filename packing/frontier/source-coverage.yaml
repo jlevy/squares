@@ -1749,6 +1749,11 @@ sources:
       records and tools and states human-directed Claude Opus 5.5 assistance. No producer checker replay,
       optimality or rigidity claim is made.
 
+      The original supplement comment is no longer available. The identical n153 certificate
+      remains accessible at https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json;
+      resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json binds its exact
+      side and rational triples to the retained original. This is provenance only, not a new result.
+
   - id: squish-update-2026-10-07
     title: 'SQUISH update: seven additional and five tighter rational packings'
     role: source-repository
