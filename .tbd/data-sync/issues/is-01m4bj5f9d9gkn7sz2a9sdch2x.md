@@ -3,9 +3,9 @@ type: is
 id: is-01m4bj5f9d9gkn7sz2a9sdch2x
 title: "n17: test complete partner-pose coupling against the accepted point-relaxation witness"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-07T16:11:55.052Z
-updated_at: 2026-10-07T16:41:15.250Z
+updated_at: 2026-10-07T18:33:18.430Z
 started_at: 2026-10-07T16:40:33.125Z
 ---
 Prepare one bounded complete partner-pose discriminator from the accepted original

@@ -3,15 +3,19 @@ type: is
 id: is-01m4bj5fr30j3ppf8tfnaqb20v
 title: "n17: profile full exact replay before selecting bounded verifier optimization"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
+delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
+hold: null
+hold_until: null
 created_at: 2026-10-07T16:11:55.523Z
-updated_at: 2026-10-07T16:11:55.523Z
+updated_at: 2026-10-07T18:33:18.443Z
+started_at: 2026-10-07T18:33:18.443Z
 ---
 Prepare a bounded retained exact-replay profile on a frozen accepted control, separating decoding, accepted-parent intake, facet construction, support minima, exact intersections and coverage sweeps. Preserve the same object identities and complete row/facet/final-state/closure verification. Exp284 fresh300s timeout is measured motivation, not an accepted conditional child or evidence of closure.
 
