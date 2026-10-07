@@ -121,6 +121,20 @@ It must preserve all closed rows, residual pieces, typed references and
 strict-core checks. A row may be skipped only with accepted emptiness or a fresh proof
 that every piece has empty necessary-wall intersection.
 
+**Prospective hand lemma: one strict core suffices.** For the fixed-angle witness, the
+owner-0 set $C$ may be its full closed unit square if each partner core $D_k$ lies
+strictly inside its partner.
+If a point belongs to both the closed owner-0 square and the partner’s interior, an open
+ball around that point lies in the partner.
+Because a closed square is the closure of its interior, that ball meets the owner-0
+interior. The two physical interiors therefore overlap, including when the common point
+lies on the owner-0 boundary.
+For an angle interval, a checked common closed subset of every owner-0 square gives the
+same implication. This could avoid unnecessary erosion of the owner-0 core.
+It is a proposed sole-Astra hand argument, without independent mathematical review or a
+new source implementation, target or receipt.
+Existing stricter-core certificates retain their original scope.
+
 This is a plausible source of stronger information, not a prediction of success.
 Even pairwise pose covers can lose correlations among several squares.
 If they do, the next mathematical choice is a small complete closed partition coupling
