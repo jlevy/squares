@@ -5,16 +5,16 @@ title: "Answer Nate Chaoweeraprasit: SQUISH registration request (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 10
 delegate: codex@17e132e9b179
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-10-07T07:01:21.864Z
-updated_at: 2026-10-07T19:08:23.769Z
+updated_at: 2026-10-07T21:01:32.030Z
 started_at: 2026-10-07T07:01:52.488Z
 ---
 Own acknowledgement, PR progress updates, and final post-merge replies for issue #401. User explicitly authorized issue comments and gh PR filing. Both acknowledgement and progress gh issue comment attempts failed GraphQL Resource not accessible by integration (addComment); no reply posted. Final stage-7 reply may quote registered IDs only after merge, with main links; issue closure requires all author requests settled. GH_TOKEN is present and proxied gh authentication and reads work, but direct api.github.com HTTPS connections are refused inside and outside the filesystem sandbox, and mediated writes are denied. Publication needs a reachable direct GitHub channel or a write-enabled platform channel; do not infer owner token validity from the mediated channel.
@@ -101,3 +101,5 @@ Actual pushes of reported 6d0546b4c8949d9775d1a99865ec4e7277251cc7 and confirmed
 Durable actual-outcome receipt and logs: /workspace/squares-401-publication-retry-20261007/publication-retry-receipt.json. Existing validated scientific source, source branch heads, prior closing archive and source bundle remain unchanged; no full source gate is repeated. Newly saved tracker variants are preserved in the external retry snapshot and a separate standalone native tracker bundle; the earlier bundle stays recoverable.
 
 Author-reply disposition is unchanged: hold blocked until PR publication, review/merge consent and accurate main-based attribution; this retry posts no issue/comment.
+
+Main-based partial author reply published https://github.com/jlevy/squares/issues/401#issuecomment-6046723077 on7October20:58UTC and updated after independent1230/1230 livePASS. It links finalT113/T114 V3C3, all11 original cases and draft421; keeps expanded18-count request open. Current sourceowner maps this reply in later request ledger without pretending new12 confirmed. Hold awaiting original merge is cleared; final expanded request reply remains pending new12 adoption/publication.

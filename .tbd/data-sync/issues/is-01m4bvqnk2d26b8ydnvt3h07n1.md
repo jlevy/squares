@@ -5,15 +5,19 @@ title: "Import issue 401 October 7 follow-up: thirteen certificates and revised 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 9
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
+child_order_hints:
+  - is-01m4c4s1fc2bpspjsjkqmcfz0c
+  - is-01m4c4x8d0nc0gdmp7qxd32dgz
+  - is-01m4c66fervqnev6wppvj1zk8f
 hold: null
 hold_until: null
 created_at: 2026-10-07T18:59:08.514Z
-updated_at: 2026-10-07T19:08:26.115Z
+updated_at: 2026-10-07T22:03:38.611Z
 started_at: 2026-10-07T18:59:12.163Z
 ---
 W1 result-import stages 1–3 then W2 exact rational replay and mapped Astra reviews. All current issue comments 6043191866 (edited2026-10-07T18:33:04Z) and6043263840 captured. Pin itsnaka/squish-certs5e32bbd7028b6e3b869979278079cd37ed6770aa under squish-submission-2026-10-07. Seven new counts123,179,208,237,239,258,263; five improved126,129,154,155,238; compare n153 to prior attachment exactly. Preserve existing11 witnesses and credits, add revised lineage from author, no-license source stays outside Git except attributed derived facts. Additional reported layer based on codex/confirm-squish-401 followed by independently verified confirmation. GPT-6.1 Sol engineering and Astra deep math. Root owns publication/bead writes. Actual restored push denied403; gh PR attempt pending. Final author reply/main claims only after merge; no merge consent.
@@ -46,3 +50,9 @@ overlap/containment controls both rejected in7.684s. New final import review,
 record integration and gates remain active; these scratch receipts are not yet
 mapped confirmation assurance. Earlier reviews cover only original eleven.
 Keep issue401 open until expanded18-count import and accurate post-main reply.
+
+New reported source saved remotely076e6cf93684697065adb2762092d6b1652e95fe and draftPR421 created/attached. Durable broad behavioral result17failed13070passed30skip1xfail1227.55s preserved (parent interrupted/no finalgate receipt). Parallel GPT6.1Sol contracts/snapshot and Astra generator/math reviews fixed actual dropped update selections/allfive weakened prior verified ceilings, stale corpus contracts and missing disclosures/citation data.218 generator/source/display tests pass25.92s;80 contracts/reaping pass39.02s withtini;22 snapshot/legacy tests pass5.69s. Mutation snapshot retains192MiB cap and11rescued dependencies; current200950127bytes. Independent semantic bindingsall13 andtwo controls match reused complete replay; newconfirmation scope12,2309squares237025pairs/checker; notyet adopted. Current sourceownerrepair_followup_import freezes repaired source for requiredpushsince076, then commitsdata/pin separately, preservescurrentmain merge and purges verified2-record412outbox. Authorreply6046723077 now mapped, n153 live duplicate source retained. Existingfailed broadgate is not erased by scoped successes.
+
+Final reported checkpoint e64676d58206fa1e40bb9ce62ba6ef70e420e96a is pushed on GitHub branch codex/import-squish-401-followup and attached PR421. DATA_REVISION ea583e9e4dc789d4e519f64a6f86282399ecd6fa. Hosted final:30successful26inapplicable skips. Required --push --since ea583e9e passed61/101steps793.21s; reachable615.44s under900s cap, normal5472pass30skip1xfail431.76s plus heavy1pass175.36s/PACK_JOBS4. Full historical failed broad run remains preserved; no fullgate success claimed. Source/main/outbox preservation verified and alltracked outbox empty. Newseparateconfirmation think-gsno owner followup_failed_contracts on codex/confirm-squish-401-followup basede646. Standard finalsenior/security/performance reviews pending. The author moves later9toGitHub422, queued think-sfpz; original401 keeps18countscope. User authorizes taskmerge oncecleanandreviewed.
+
+2026-10-07 continuation: Formal follow-up stack424 published and verified remote/local: PR421 reported12 at b4c59000c3ba8ec4bc19fb89a4cc8b175ed6ef7d -> draftPR423 confirmation12 at27344ae28d08cf58f33703bd5b617ff965b88653. Original415/416/418 merged/deployed1230PASS. LowerA1 value-scoped67citations fixed2a27 with266focusedPASS, hosted30success26skip, five formalreviews plusA1disposition accepted. Broader final citation pushEXIT1:5687PASS1fail2mathfixtureerrors; isolatedwholemodules reproducedpopoverrace and mathpassed. MinimalJS-only repair20PASS77.99s, independentAstraaccepted, unchangedDATA_REVISIONb5fb; current88-selector requiredpush running. New browserownerthink-9ky0. Upper27344 initialhostedCI34failures underengineeringrepair; no merge claim. Bothissues401/422 remainopen and no autoclose refs.
