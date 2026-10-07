@@ -524,6 +524,7 @@
     "packing/tests/test_source_supersession.py": 0.004,
     "packing/tests/test_squish_receipt_binding.py": 0.212,
     "packing/tests/test_squish_upper_bound_packets.py": 1.323,
+    "packing/tests/test_squish_upper_bound_receipts.py": 1.287,
     "packing/tests/test_stage_evand_bentz4_lean.py": 2.952,
     "packing/tests/test_stage_evand_bentz_lean.py": 0.954,
     "packing/tests/test_state_ai_assistance.py": 0.383,
@@ -621,6 +622,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/squish-401-reported-2026-10-07.json",
           "provenance": {},
           "tests": 54
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_squish_upper_bound_receipts.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/squish-401-confirmation-2026-10-07.json",
+          "provenance": {},
+          "tests": 16
         }
       ]
     }
