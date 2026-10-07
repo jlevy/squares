@@ -5,7 +5,7 @@ title: Permit protected finalization reserve to use contiguous bounded phases
 kind: bug
 status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4bj7tj2ydjh2v673ga1mw8j
 hold: null
 hold_until: null
 created_at: 2026-10-07T16:44:41.967Z
-updated_at: 2026-10-07T16:53:54.930Z
+updated_at: 2026-10-07T18:33:25.488Z
 started_at: 2026-10-07T16:44:50.712Z
 closed_at: 2026-10-07T16:53:54.929Z
 close_reason: "Limited repair committed f8ec2975937881c3e449e265735b4b24342305c4 after root review: contiguous finalization suffix accepted, later work refused, reserve/deadline/budget/final-only-active rules preserved. 21 focused session tests PASS 1.18s, independent two new controls PASS .24s, Ruff/format/types zero. Real JUnit and source/diff/static observation retained at attic/evidence/session-184-finalization-tail-800bba638/. This closes only the three-file repair; certification think-7hy3 and full current-source PASS obligation remain open."
