@@ -115,6 +115,7 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-274-current-tail-b-replication",
         "exp-275-capture-cap-root-join",
         "exp-276-n17-numeric-cap-first-round",
+        "exp-277-numeric-checkpoint-capture",
     )
 )
 
@@ -260,6 +261,10 @@ PRUNE = frozenset(
         # Keep the records, schemas and probe sources. Inline-linked or registered
         # dependencies below these roots still return through snapshot_pruned_targets.
         ROOT / "benchmarks/math-startup/runs",
+        # Historical timing receipts/JUnit remain inputs to the primary report
+        # corpus test, which no registered mutation command runs in a worker.
+        # The linked original instrument is rescued by exact target copyback.
+        ROOT / "benchmarks/validation-efficiency/runs",
         ROOT / "benchmarks/math-startup/fixtures",
         # Three more benchmark receipt roots join them on 2026-10-06 (PR #382), whole, so
         # the next dated census run is pruned without an edit here. The two census
@@ -394,6 +399,13 @@ PRUNE = frozenset(
         # currently returns from it. Omit only this exact root from private snapshots;
         # primary objects, manifest indexes and declared-dependency copy-back stay intact.
         ROOT / "campaign/retained/session-184-n11-readiness",
+        # Hosted dependency DAGs are not mutation inputs. Inline README and
+        # manifest links still use the existing exact target copyback contract.
+        ROOT / "campaign/retained/session-184-tail-a-dependencies",
+        # Numeric-cap readiness objects are checked only by registered scientific
+        # intake, not synthetic mutation workers. Preserve primary hosted evidence
+        # and the existing README/manifest-linked exact dependency copyback.
+        ROOT / "campaign/retained/session-184-n17-numeric-cap-readiness",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-024",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-025",
         ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-026",

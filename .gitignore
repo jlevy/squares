@@ -61,3 +61,9 @@ packing/atlas/known-best/video/spikes/**/frames/
 /packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/inventory.json
 /packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/fresh-inventory.json
 /packing/campaign/retained/session-184-tail-a-dependencies/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/tail-b-objects/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/endpoint-prefix-objects/.accepted-prefix-steps.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/checkpoints/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/production-objects/*.json.gz
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/replay-objects/*.json.gz
+/packing/campaign/retained/session-184-n17-numeric-cap-readiness/*.json.gz

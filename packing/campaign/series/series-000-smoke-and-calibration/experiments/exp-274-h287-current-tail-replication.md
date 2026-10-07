@@ -1,5 +1,5 @@
 ---
-title: "exp-274 \u2014 controlled current-tail replication"
+title: exp-274 — controlled current-tail replication
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -54,9 +54,27 @@ experiment:
       prefix120+60 inside TERM190/KILL200. Root-owned Python4096MiB currentRSS sampled,
       not instantaneous allocation guard. No runtime/rate forecast.'
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication
-  results: []
+    commit: 3575c02a761d9ae439add4b19707575e3cfdbcf7
+  results:
+  - shape: determination
+    role: outcome
+    question: Reuse accepted exp266 full17 endpoint prefix only after exact unchanged
+      semantic source-closure, root/frame/cells/cap/runtime and recipe custody joins;
+      otherwise require fresh120s prefix+60s full replay beforeB. One unchanged SW9
+      envelope run of named mask3096315 supports an exclusion only after producer+selfcheck
+      and fresh complete PASS_SAVED_CLOSED with generic actual B seed/node/closure/step/count
+      joins, then separate FULL standing PASS and ordinary ledger/census admission.
+      PASS_SAVED_STALL is valid unresolved evidence; incomplete/refused/mismatch admits
+      no exclusion.
+    outcome: criterion_met
+    checked_by: Renewed full17 prefix passes; producer+selfcheck and new-process producer-free
+      full saved replay agree on actual B seed/node, closure(owner11,step26),27steps/1728rows.
+      Separate full standing PASS checks34,004,964collision facets/5791regions, no
+      sampling. Ordinary admission and independent census/partition join60entries/36768states/4683orbits,
+      endpoint survives; exactly8states/1orbit excluded. Both native objects retained16,840,952bytes;
+      publication pending. No stratum-rate, capture or global-proof claim.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Reuse accepted exp266 full17 endpoint prefix only after exact
       unchanged semantic source-closure, root/frame/cells/cap/runtime and recipe custody
       joins; otherwise require fresh120s prefix+60s full replay beforeB. One unchanged
@@ -65,15 +83,19 @@ experiment:
       joins, then separate FULL standing PASS and ordinary ledger/census admission.
       PASS_SAVED_STALL is valid unresolved evidence; incomplete/refused/mismatch admits
       no exclusion.
-    reason: Registered before B targets; unchanged scientificrecipe and selectionmath
-      reviewed. Prefixsourcebytes changed onlyline-layout afterdraft, so samefixedbudget
-      renewedprefix is requiredbeforeB, with reviewedretained4096MiB sampled-group
-      supervision.
-  lease:
-    expires: '2026-10-07T11:44:20Z'
-    host: macOS arm64
+    reason: Renewed full17 prefix passes; producer+selfcheck and new-process producer-free
+      full saved replay agree on actual B seed/node, closure(owner11,step26),27steps/1728rows.
+      Separate full standing PASS checks34,004,964collision facets/5791regions, no
+      sampling. Ordinary admission and independent census/partition join60entries/36768states/4683orbits,
+      endpoint survives; exactly8states/1orbit excluded. Both native objects retained16,840,952bytes;
+      publication pending. No stratum-rate, capture or global-proof claim.
+    needs_review: false
+  effort:
+    timebox: Frozen prefix190s,producer1200s,fresh900s,standing900s; sampled4096MiB/ownedcleanup10s
+    wall_seconds: 554.12
+    stopped_by: criterion
 ---
-# exp-274 — controlled current-tail replication
+# exp-274: Controlled Current-Tail Replication
 
 Repeat the unchanged producer recipe on selector3096315, converted through the exact
 named cells to the kernel Frame.
@@ -83,6 +105,15 @@ and exact inputs are rejoined.
 Fresh saved replay and full standing verification use the actual B closure, step and
 counts. Neither stage inherits A’s values.
 Retain incomplete or refused evidence without retuning or admitting an exclusion.
+
+The renewed prefix, producer/selfcheck, fresh saved replay and standing check used
+554.12 seconds summed across their retained supervision receipts.
+Standing verification itself used155.258s; these figures describe the selected case,
+with no population rate forecast.
+The current census retains60admissions,36,768states and4,683orbits. Native seed/node
+copies preserve their bytes; the canonical verification receipt changes only its
+directory metadata, with the original receipt and relocation custody retained.
+Hosted publication and clean-fetch recovery remain separate pending work.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

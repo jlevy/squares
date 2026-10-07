@@ -38,9 +38,9 @@ The following obligations state how those parts can be used in one proof.
 | Container normalization | A putative packing in side $s\le S^*$ is translated into $C(s)\subset C(S^*)\subset C(U)$. Preserve this placement thereafter. | The centred-container lemma below; inclusion is exact for ordered side lengths. | Independent review of this hand join; consumers must use the same walls and cell coordinates. |
 | Closed-cell assignment | Every centre is in the closed cover. Choose one containing cell per square. Capacity one makes the chosen cells distinct, giving a 17-cell mask. Boundary membership may allow several masks. | exp-247 and `check_n17_capacity_one_cover`; the census must retain all geometrically allowed assignment masks. | A deterministic choice is safe only with a proof that its transported assignments remain represented. Discarding seam cases because they are non-generic is invalid. |
 | D4 and labels | Apply a symmetry about $m$ to the packing, its chosen cell assignment and its angle axes together. Transfer the mask to its representative. In the endpoint mask, label each assigned square by the corresponding family cell. | Exact cover cell permutations and admitted consumer semantics; $gC(V)=C(V)$ for every $g\in D_4$. The exp-259 endpoint orbit has size 8, so its mask stabilizer is trivial. | Retain the symmetry/label witness, including its action on reflected angle axes. |
-| Global exclusions | Each admitted exclusion rules out its declared cell subpattern at a declared cap $V\ge S^*$, with matching frame, cells and full closed-branch coverage. | Full certificate verification and admission ledger; a subpattern exclusion removes every containing assignment mask and its valid symmetry images. | Close or capture every remaining orbit. After Tail A's ordinary admission, exp-271 retains 36,776 states / 4,684 orbits under 59 entries, with the endpoint surviving. These are unresolved assignments, not a cover of terminal neighbourhoods. Held closures require their ruling. |
+| Global exclusions | Each admitted exclusion rules out its declared cell subpattern at a declared cap $V\ge S^*$, with matching frame, cells and full closed-branch coverage. | Full certificate verification and admission ledger; a subpattern exclusion removes every containing assignment mask and its valid symmetry images. | Close or capture every remaining orbit. After Tail B's ordinary admission, the exp-274 [admission summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/admission-summary.json) joins the independent census and partition: 36,768 states / 4,683 orbits under 60 entries, with the endpoint surviving. These are unresolved assignments, not a cover of terminal neighbourhoods. Held closures require their ruling. |
 | Cap monotonicity | The normalized packing stays inside $C(S^*)\subseteq C(V)$ whenever a certificate uses $V\ge S^*$. | Exact inequalities for the certificate cap and the certified root enclosure. | Tightening a cap below $S^*$ is invalid; changing from centred to origin-anchored walls without transporting cells changes the claim. |
-| Capture cap | Use a rational $U'$ proved to satisfy $S^*\le U'\le U$; the current design requests $0<U'-S^*\le10^{-12}$. Capture runs in $C(U')$ with the original cells. | Root certificate and outward side evaluation; retained producer configuration and verifier. | Prove the cap inequalities and input identities. A small cap excess does not itself bound a coordinate error. |
+| Capture cap | Use a rational $U'$ proved to satisfy $S^*\le U'\le U$; the current design requests $0<U'-S^*\le10^{-12}$. Capture runs in $C(U')$ with the original cells. | H-288/exp-275 and its fresh replay establish the fixed cap inequalities over the full accepted root and retained consumer enclosure. | Bind each actual producer input and saved seed to that numeric frame, then derive its coordinate bounds. A small cap excess does not itself bound a coordinate error. |
 | Outer capture | Every target packing represented by an unresolved cell state reaches a declared terminal region, or is excluded. Every split retains a closed cover of its parent. | A complete capture/exclusion certificate from the actual cells; terminal leaves may also use the original containment in $C(S^*)$. | Open. Success from a small pose box, contraction of a pilot box, or a widened terminal theorem alone does not cover the outer cells. |
 | Coordinate frame and root | Capture returns bounds on the exact-root family in the same cover frame, with H254 angle lifts modulo $\pi/2$. | Layout identities, exp-237/238 root enclosures, and the explicit allowance below. | Certify all frame, centre, basis and angle conversion errors. Charge them to the delivered enclosure before comparison with the terminal radius. |
 | Square 6 | In the endpoint assignment, the square labelled 6 has its centre in the complete closed `side-S2` cell, at any orientation. | exp-247 assignment and exp-248 slider coverage; `check_n17_slider_coverage.SIX_CELL`. | Keep the cell premise through symmetry and capture. No closeness premise on square 6 is licensed. Dropping it from the local/LP subsystem is a relaxation, not permission to drop it from slide coverage. |
@@ -48,6 +48,10 @@ The following obligations state how those parts can be used in one proof.
 | Terminal radius | All 45 exact non-slider coordinates satisfy their componentwise closed bound $\le1/5000$. | exp-244/248 local theorem, with its reviewed hand lemmas and recorded ratio test. | Capture must establish every component, not only three widest owners or a scalar extent statistic. Use the correct 29 position functionals and 16 angles. |
 | Terminal conclusion | Inside $C(S^*)$, the local theorem forces the sixteen retained squares onto $F(w)$; that family spans $S^*$ in both coordinates. | C10 and the fixed-container theorem in the [recipe](../reviews/review-2026-10-02-n17-local-theorem-recipe.md). | Combine the conclusion with the original containment in $C(s)$. This proves $s\ge S^*$ only after the exclusion/capture coverage obligations are discharged. |
 | Evidence custody | The admitted ledger identifies complete retained objects, their checker, parameters and interpretation. | Hosted manifest, transfer integrity, full replay receipts and recorded admission. | Recover absent objects; representative replays do not replace required full verification. Missing custody blocks reproducibility even when the abstract implication is clear. |
+
+Tail A and Tail B are two admitted full seventeen-owner closures under the same
+producer recipe. Each removed eight states in one orbit. Their outcomes establish
+neither a closure rate for the selected stratum nor capture of its remaining states.
 
 ### The centred-container lemma
 
@@ -1393,12 +1397,62 @@ square 9, coarse confinement of $b$, and controlled positive turns of 9 and 11. 
 an actual leaf meets it is a separate registered evaluation. It does not establish that
 the producer will reach that domain or that a complete capture tree is covered.
 
+### A prospective direct-separation premise
+
+The preceding argument needs the three individual position bounds and the numeric
+$\tau_0$ guard only to establish the interval for $U=u\cdot(x_9-x_{11})$.
+A future consumer could instead certify directly that
+
+$$
+-9/25\le U\le0.
+$$
+
+Retain the complete root unit-axis and nominal displacement identities, the bounds
+$|v\cdot e_9|\le1/5000$ and $-1/2\le b\le1/12$, the same one-sided intervals for
+$q_9,q_{11}$, and physical non-overlap of the pair. Then
+$V=1+b+v\cdot e_9$ has the same positive closed interval. The six forbidden-axis
+upper bounds still hold at the closed endpoints $U=-9/25$ and $U=0$, since they use
+only $|U|\le9/25$. For a surviving positive $v$ axis, the same rearrangement gives
+
+$$
+b\ge\sec\delta_i-1+\tan\delta_i\,U-v\cdot e_9.
+$$
+
+When $\delta_i\le0$, the product $\tan\delta_i\,U$ is nonnegative even at $U=0$.
+For positive $\delta_i$, the same tangent upper bound and $U\ge-9/25$ apply.
+Consequently the exact lower floor and strict headroom are unchanged. This proves a
+weaker sufficient premise for the same geometric conclusion; it does not modify the
+domain accepted by H-285's existing checker.
+
+The direct bound can be computed in time linear in the number of live polygon
+vertices. Let $G$ be the leaf's declared D4 matrix, $B$ its field scale, and let $p$
+denote an original field-coordinate vertex. Over the full accepted root enclosure,
+form the interval covector
+
+$$
+w=G^{\mathsf T}u/B.
+$$
+
+Enclose $w\cdot p$ over every original live polygon vertex of owner 9, and separately
+over every such vertex of owner 11. Subtract these two complete scalar hull intervals.
+This encloses $U$: both the D4 centre and the root-dependent translation cancel in
+$x_9-x_{11}$. It requires neither a vertex-pair enumeration nor an axis-aligned
+rectangle before projection. Shared-root dependence may still widen the result;
+soundness does not imply that this bound will be sharper on a particular leaf.
+
+This would be a supplemental projection, not a thirtieth position coordinate. Keep
+the raw $b$ interval and require a separately registered consumer predicate before
+using an effective lower floor. H-290 retains its stated 49 quantities and does not
+compute or apply this proposed predicate. No actual direct-$U$ bound has been
+evaluated. The reformulation and projection rule are sole-Astra hand derivations,
+without independent mathematical review or a new machine-checked implication.
+
 ## Conservative Dependencies of an Accepted Closure
 
 Tail A's ordinary admission makes its retained certificate a possible source of a
 smaller reusable obstruction. A dependency inventory can identify a candidate owner set;
 it cannot establish that a projected certificate passes the smaller-arity checker.
-The proposed exp-273 under H-282 therefore reads the already accepted full standing
+Exp-273 under H-282 reads the already accepted full standing
 receipt and its exact seed/node objects without producing or rewriting a certificate.
 
 The standing verifier's [row-cover rule](../../../packing/devtools/verify_n17_kernel_certificate.py)
@@ -1455,8 +1509,11 @@ unsupported grammar or identity failure leaves the inventory incomplete or refus
 it does not establish that a smaller core is impossible. No inventory outcome directly
 changes the exclusion census.
 
-The [exp-273 inventory](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/inventory.json)
-and its fresh independent inventory both completed in 10.49 seconds combined. They
+The [exp-273 summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/summary.json)
+records the inventory and its fresh independent reproduction, both completed in
+10.49 seconds combined. The complete DAGs remain available through the
+[retained-object manifest](../../../packing/campaign/retained/session-184-tail-a-dependencies/README.md).
+The two inventories
 agree on 3,338 facts, 101,931 edges and the deterministic inventory identity. Both the
 geometric and validation owner sets contain all seventeen owners, so
 `strict_subset_proposal=false`. This establishes no reduction under the declared
@@ -1608,9 +1665,39 @@ $[4.49048365785146,4.49048365992313]\times10^{-13}$. These decimals summarize th
 exact receipt. The result certifies the cap/root join only; endpoint-cell containment,
 capture, object relabelling, exclusion and global coverage remain unproved by it.
 
+### A future smaller-cap exclusion interface
+
+The same centred containment permits a future exclusion certificate at $U'$ to rule
+out a cell state for a putative packing of side at most $S^*$. It must use the original
+$U$-frame cells and the offset walls above. The current
+[standing verifier](../../../packing/devtools/verify_n17_kernel_certificate.py)
+constructs walls from one cap as $[h,U-h]$. Substituting $U'$ for that cap would change
+the origin of the inner container relative to the cells. A future extension therefore
+needs both outer and inner caps, independent centred-wall checks, exact cap/root
+custody and its own controls. H-290's numeric-frame replay supplies no standing
+admission for such an exclusion.
+
+The census must also declare the cap at which a state is ruled out. If its target is
+$T$, an exclusion proved in $C(V)$ transfers whenever $T\le V$. Existing $U$-cap
+exclusions transfer to $T=U'$; a new $U'$-cap exclusion does not prove impossibility in
+the larger $C(U)$. A future optimality census could instead state its exact $S^*$
+target and retain the proof that every certificate cap is at least $S^*$. Its cell
+cover may remain the original $U$ cover in either case. These are prospective
+admission obligations; the current sixty-entry census and its interpretation remain
+unchanged. Whether smaller-cap work closes any remaining state is unmeasured.
+
+An optimality cover must distinguish exclusions from terminals. An exclusion in
+$C(V)$ denies the declared assignment there and transfers to every $C(T)$ with
+$T\le V$. A local terminal under the inherited $C(S^*)$ premise instead proves
+that a represented packing has containing side $s\ge S^*$. The endpoint assignment
+is feasible at $S^*$, so such a terminal is not an excluded census state. A final
+argument for optimality would combine the exclusions with terminal implications
+for every remaining assignment, obtaining a contradiction under $s<S^*$. Neither
+type of certificate can substitute for the other's coverage obligation.
+
 ## Numeric-Cap Checkpoint and Consumer Contracts
 
-The proposed H-289/exp-276 preparation run starts from the actual seventeen endpoint
+The registered H-289/exp-276 preparation run starts from the actual seventeen endpoint
 cells at the H-288 certified numeric cap. It uses no position box and resumes no old
 checkpoint. One complete round updates each of the sixteen contracting owners once;
 square 6 retains its complete seed cover. The production control checks all seventeen
@@ -1619,6 +1706,16 @@ resumes the complete round-001 checkpoint with the same one-round limit, admits 
 seed, and replays all sixteen steps without producing a new step. Its endpoint check
 is a final-state check; it does not independently repeat the production phase's
 seventeen endpoint checkpoints.
+
+The [exp-276 record](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-276-h289-numeric-cap-first-round.md)
+now retains one complete round: sixteen updates and seventeen production endpoint
+checks in 175.86083 seconds. Its separate fresh replay passed all sixteen saved
+steps, 1,024 rows and 143,498 checker events in 66.47918 seconds. The saved seed and
+node identities, update lists and round records agree between phases, and replay
+reports final-state agreement. The inherited `checked_after: 17` field in the fresh
+receipt is production history; the independent fresh endpoint check is one check
+of all seventeen final poses. This is checkpoint readiness, with no terminal or
+capture conclusion from the pilot's floating extent summaries.
 
 The pilot and cap checker use different outward root enclosures. The pilot reads the
 accepted endpoint receipt's midpoint and inclusion radii, rounded outward to
@@ -1651,6 +1748,15 @@ and replay every saved step to the complete stream end under this explicit numer
 frame. Require `PASS_SAVED_STALL`, no closure, sixteen steps, the same named owners and
 canonical seed/node identities. The frame name alone cannot distinguish the inner cap.
 The existing `None`-wall prefix receipt supplies no numeric-cap replay premise.
+
+The fresh child's proof may be conditional on its supplied exact frame. In that
+design, the parent freshly establishes that this same frame equals the accepted
+root/cap/cell context, and compares the child's complete frame identity before using
+its result. The child must record its actual inner cap, scale, cells, names, actions
+and other frame conventions; it must not claim to have independently checked the
+root or cap if that check belongs to the parent. The synthetic seventeen-cell replay
+fixture tests this composition and the sixteen-step custody path. It is not evidence
+that its synthetic poses form a physical seventeen-square packing.
 
 The parent consumer obtains final rows by exact replay and applies the retained
 root-coordinate and complete closed-chart calculations. It must retain all 49 bounds:

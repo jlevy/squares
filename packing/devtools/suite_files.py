@@ -19,7 +19,7 @@ file lands in exactly one shard by construction:
   record without them balances raw cost. The packing reads only the record, so it moves
   when someone re-records and never because a file elsewhere was added or removed;
 * a file the record does not name -- a new test, or a renamed one -- takes
-  `crc32(path) mod N`, except for the three explicit four-shard unknown owners below.
+  `crc32(path) mod N`, except for the five explicit four-shard unknown owners below.
   These owners balance unknown file counts, carry no cost weight, and are superseded
   when a complete hosted cohort records the file. Every file remains in one shard.
 
@@ -98,10 +98,15 @@ UNRECORDED_SHARE_WARNING: Final = 0.10
 # assigned 17/151 (11.3%) to shard 4. These three scheduling-only owners give
 # unknown counts 13/13/13/14 without inventing weights or changing the 10% guard.
 # Only the four-shard topology uses them; recorded cohort weights take precedence.
+# The two centered-standing controls explicitly keep their current hash owners.
+# At 56/637 unknown files, the real tree has 14 unknown files in each shard; these
+# controls retain unknown cost status until a complete hosted cohort records them.
 UNKNOWN_FOUR_SHARD_OWNERS: Final = {
     "packing/tests/test_check_n17_capture_cap.py": 3,
     "packing/tests/test_check_n17_capture_leaf.py": 1,
     "packing/tests/test_check_n17_widened_positive_cone.py": 3,
+    "packing/tests/test_check_n17_centered_cap_standing.py": 1,
+    "packing/tests/test_verify_n17_centered_cap.py": 3,
 }
 #: What a test file is called where no pytest configuration says otherwise.
 _PYTHON_FILES: Final = ("test_*.py",)

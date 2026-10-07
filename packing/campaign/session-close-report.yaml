@@ -3197,7 +3197,7 @@ sessions:
   title: "n17 Proof Contracts and Instruments"
   status: in_progress
   primary_bead: think-ipel
-  phases: 9
+  phases: 11
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session184-through-100444.yaml

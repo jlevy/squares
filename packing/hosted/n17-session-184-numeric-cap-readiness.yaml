@@ -1,0 +1,22 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+repository: jlevy/squares
+tag: data/n17-session-184-numeric-cap-readiness-v1
+objects:
+- path: packing/campaign/retained/session-184-n17-numeric-cap-readiness/checkpoint-round-001.json.gz
+  asset: checkpoint-round-001.json.gz
+  size: 12539212
+  sha256: 7a1f6095243830daa49e15e898f1ef37850859d938deb9f50af498717bf0cfe4
+- path: packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz
+  asset: node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz
+  size: 11332067
+  sha256: f2a11e787dc62ae2652734d01c4fbe90fcfc3e85d66aa52b74fd8ff52a02e2f2
+- path: packing/campaign/retained/session-184-n17-numeric-cap-readiness/seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz
+  asset: seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz
+  size: 12527
+  sha256: d10a38b312375a21e7aec2ef77726eaa9ae3ea9d8381de9d3e979921877005f4
+description: 'Three unique native objects for Session184 H289: full17numeric-cap original
+  seed,16-step node and complete round001 checkpoint. Production and fresh zero-production
+  resume replay agree; readiness does not establish capture or exclusion.'

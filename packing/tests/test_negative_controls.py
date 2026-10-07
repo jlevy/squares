@@ -862,7 +862,7 @@ def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
     assert controls.linked_pruned_targets() == [needed]
 
 
-@pytest.mark.parametrize("selection", ["session184", "baseline"])
+@pytest.mark.parametrize("selection", ["session184", "baseline", "retained", "operational"])
 def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, selection: str
 ) -> None:
@@ -897,12 +897,25 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
             }
         )
     )
+    if selection == "retained":
+        roots = frozenset(
+            ROOT / "campaign/retained" / name
+            for name in (
+                "session-184-n11-readiness",
+                "session-184-tail-a-dependencies",
+                "session-184-n17-numeric-cap-readiness",
+            )
+        )
+    elif selection == "operational":
+        roots = frozenset({ROOT / "benchmarks/validation-efficiency/runs"})
     specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
     assert roots <= PRUNE
     for control in specification["controls"]:
         target = (ROOT / control["file"]).resolve()
         assert not controls.in_pruned_roots(target, roots)
         assert all(root.name not in control["run"] for root in roots)
+        if selection == "operational":
+            assert "validation_report" not in control["run"]
 
     packing = tmp_path / "packing"
     output = packing / "results/exp-268"
@@ -921,6 +934,16 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
     monkeypatch.setattr(controls, "result_pruned_targets", list)
     assert controls.snapshot_pruned_targets() == [needed]
     assert controls.snapshot_source_bytes() == document.stat().st_size + needed.stat().st_size
+
+
+def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> None:
+    root = ROOT / "benchmarks/validation-efficiency/runs"
+    copied = [path for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)]
+    assert copied == [root / "instrument-v1.py.txt"]
+    # Primary CI's report-corpus test still reads the original receipts and JUnit;
+    # pruning is solely a worker-copy rule, not deletion or a test exclusion.
+    assert (root / "receipts.jsonl").is_file()
+    assert any(root.glob("*.junit.xml"))
 
 
 def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(

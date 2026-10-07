@@ -986,6 +986,15 @@ new numeric-cap full17 seed and16-owner round, then fresh zero-production replay
 The distinct input control first binds the accepted root, pilot geometry and numeric
 frame. First-round readiness does not establish capture, contraction or an exclusion.
 
+[H-290](hypotheses/H-290-n17-numeric-checkpoint-capture-readiness.md) tests independent
+numeric-frame saved replay and49 exact root-relative bounds from H289. A valid
+unresolved geometric result establishes consumer readiness; it does not establish
+capture or an exclusion.
+
+[H-291](hypotheses/H-291-n17-centered-endpoint-standing-control.md) tests fresh
+independent standing replay of the accepted numeric endpoint under exact centered V
+walls; known-endpoint STALL is required, with no exclusion or census admission.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

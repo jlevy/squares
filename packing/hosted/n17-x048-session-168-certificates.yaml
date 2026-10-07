@@ -1028,3 +1028,11 @@ objects:
   asset: seed-6faea90c24b780eb86d46d6a001d39a8a6d945163950802800a8be3d67c65739.json.gz
   size: 22023
   sha256: 700c95007450a246c3441c74a10af0f4020f3dd332c8ac3f7271a9ecac63db84
+- path: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315/node-2098d790374d452c3b3c35684beea54b72215640d52fd0e12f06f8134b6d83b6.json.gz
+  asset: node-2098d790374d452c3b3c35684beea54b72215640d52fd0e12f06f8134b6d83b6.json.gz
+  size: 16818984
+  sha256: cdaf14a0e2311265104592cd4db8914cbc2c985294e04666c7ab78c44a35b203
+- path: packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315/seed-b9d072687d39cc3cc6d3670be61eec2755587139235dd93c72ece0ba66ce59f2.json.gz
+  asset: seed-b9d072687d39cc3cc6d3670be61eec2755587139235dd93c72ece0ba66ce59f2.json.gz
+  size: 21968
+  sha256: 5bd5cb7b3a1aec1556aaf4d7014f9e69516db38c8bb0b7bdeb8fbba545c98808
