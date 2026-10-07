@@ -1,0 +1,428 @@
+{
+  "batch_exit_code": 0,
+  "geometry_binding": "Complete ordered checker-input equality; canonical metadata is a distinct object.",
+  "historical_execution_summary": {
+    "all_job_pairs_per_checker": 570909,
+    "assurance": "Exact feasible upper bounds only; no optimality claim.",
+    "feasibility_checked": true,
+    "independent_reviewed_inputs": "/workspace/squares-422-math-review/complete-reviewed-inputs.json.gz",
+    "jobs": [
+      {
+        "dual_route_decision_wall_seconds": 1.532619084995531,
+        "n": 88,
+        "name": "positive",
+        "pairs_per_checker": 3828
+      },
+      {
+        "dual_route_decision_wall_seconds": 1.594661664996238,
+        "n": 88,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 3828
+      },
+      {
+        "dual_route_decision_wall_seconds": 1.5529618530053995,
+        "n": 88,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 3828
+      },
+      {
+        "dual_route_decision_wall_seconds": 2.709738600999117,
+        "n": 108,
+        "name": "positive",
+        "pairs_per_checker": 5778
+      },
+      {
+        "dual_route_decision_wall_seconds": 2.6716543809961877,
+        "n": 108,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 5778
+      },
+      {
+        "dual_route_decision_wall_seconds": 2.783054302999517,
+        "n": 108,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 5778
+      },
+      {
+        "dual_route_decision_wall_seconds": 5.709115133999148,
+        "n": 179,
+        "name": "positive",
+        "pairs_per_checker": 15931
+      },
+      {
+        "dual_route_decision_wall_seconds": 5.8521317549966625,
+        "n": 179,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 15931
+      },
+      {
+        "dual_route_decision_wall_seconds": 5.653139585003373,
+        "n": 179,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 15931
+      },
+      {
+        "dual_route_decision_wall_seconds": 5.912885436002398,
+        "n": 180,
+        "name": "positive",
+        "pairs_per_checker": 16110
+      },
+      {
+        "dual_route_decision_wall_seconds": 5.896081368002342,
+        "n": 180,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 16110
+      },
+      {
+        "dual_route_decision_wall_seconds": 5.890690539003117,
+        "n": 180,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 16110
+      },
+      {
+        "dual_route_decision_wall_seconds": 7.135111925999809,
+        "n": 199,
+        "name": "positive",
+        "pairs_per_checker": 19701
+      },
+      {
+        "dual_route_decision_wall_seconds": 7.61967160399945,
+        "n": 199,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 19701
+      },
+      {
+        "dual_route_decision_wall_seconds": 8.276673391002987,
+        "n": 199,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 19701
+      },
+      {
+        "dual_route_decision_wall_seconds": 9.056339116003073,
+        "n": 207,
+        "name": "positive",
+        "pairs_per_checker": 21321
+      },
+      {
+        "dual_route_decision_wall_seconds": 8.365363905999402,
+        "n": 207,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 21321
+      },
+      {
+        "dual_route_decision_wall_seconds": 8.417075206998561,
+        "n": 207,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 21321
+      },
+      {
+        "dual_route_decision_wall_seconds": 10.73866091099626,
+        "n": 236,
+        "name": "positive",
+        "pairs_per_checker": 27730
+      },
+      {
+        "dual_route_decision_wall_seconds": 10.629138907999732,
+        "n": 236,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 27730
+      },
+      {
+        "dual_route_decision_wall_seconds": 10.677346994998516,
+        "n": 236,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 27730
+      },
+      {
+        "dual_route_decision_wall_seconds": 15.642432202999771,
+        "n": 263,
+        "name": "positive",
+        "pairs_per_checker": 34453
+      },
+      {
+        "dual_route_decision_wall_seconds": 15.004455956004676,
+        "n": 263,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 34453
+      },
+      {
+        "dual_route_decision_wall_seconds": 14.474803236997104,
+        "n": 263,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 34453
+      },
+      {
+        "dual_route_decision_wall_seconds": 16.125363157996617,
+        "n": 302,
+        "name": "positive",
+        "pairs_per_checker": 45451
+      },
+      {
+        "dual_route_decision_wall_seconds": 16.26529426900379,
+        "n": 302,
+        "name": "duplicate-square-overlap",
+        "pairs_per_checker": 45451
+      },
+      {
+        "dual_route_decision_wall_seconds": 16.060013302005245,
+        "n": 302,
+        "name": "square-translated-outside-container",
+        "pairs_per_checker": 45451
+      }
+    ],
+    "observed_checker_runtime": {
+      "adapter_module": "/workspace/squares-422-exact-replay-preparation/runtime/devtools/squish_upper_bound_packets.py",
+      "exact_verify_module": "/workspace/squares-confirmation/packing/src/sqpack/witness.py",
+      "executable": "/workspace/squares/packing/.venv/bin/python3",
+      "independent_module": "/workspace/squares-confirmation/packing/devtools/check_rational_witness_independent.py",
+      "python": "3.14.7 (main, Sep 24 2026, 17:58:18) [Clang 22.1.3 ]",
+      "routes": [
+        "devtools.check_rational_witness_independent",
+        "sqpack.witness.exact_verify"
+      ],
+      "schema_retained": "runtime/witness.schema.yaml",
+      "schema_selected": "/workspace/squares-422-exact-replay-preparation/base/witness.schema.yaml"
+    },
+    "positive_pairs_per_checker": 190303,
+    "source_producer_executed": false,
+    "source_revision": "e63e4e52b1728b6671b2f263c5e02a4aa79a39d3",
+    "sum_dual_route_decision_wall_seconds": 222.24647779400402,
+    "timing_scope": "Sum of per-job dual-route decision wall times; excludes admission/import and does not measure parallel batch elapsed time."
+  },
+  "historical_runtime": {
+    "adapter_module": "/workspace/squares-422-exact-replay-preparation/runtime/devtools/squish_upper_bound_packets.py",
+    "exact_verify_module": "/workspace/squares-confirmation/packing/src/sqpack/witness.py",
+    "executable": "/workspace/squares/packing/.venv/bin/python3",
+    "independent_module": "/workspace/squares-confirmation/packing/devtools/check_rational_witness_independent.py",
+    "python": "3.14.7 (main, Sep 24 2026, 17:58:18) [Clang 22.1.3 ]",
+    "routes": [
+      "devtools.check_rational_witness_independent",
+      "sqpack.witness.exact_verify"
+    ],
+    "schema_retained": "runtime/witness.schema.yaml",
+    "schema_selected": "/workspace/squares-422-exact-replay-preparation/base/witness.schema.yaml"
+  },
+  "producer_checker_replayed": false,
+  "replay_origin": "reused-complete-reviewed-422-replay",
+  "source_commit": "e63e4e52b1728b6671b2f263c5e02a4aa79a39d3",
+  "source_custody": {
+    "attribution": {
+      "github_author": "itsnaka",
+      "report_author": "Nate Chaoweeraprasit",
+      "seed_basis": "Author's Lineage list in retained issue 422 body; author-reported, not independently established.",
+      "seed_source_capture": "/workspace/squares-pr-link-audit/issue-422.json"
+    },
+    "canonical_source_tree": {
+      "metadata": "/workspace/squares-new-report-intake/pins/itsnaka--squish-certs--HEAD.tree.json",
+      "sha": "e63e4e52b1728b6671b2f263c5e02a4aa79a39d3"
+    },
+    "cases": [
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "2776969563275584455838168348247/281000083350790412930283208704",
+        "facts": "facts/n-088.json.gz",
+        "n": 88,
+        "reported_metadata": {
+          "phase": 10
+        },
+        "reported_seed": "Kingbird's s(41), grafted into n88's record",
+        "safe_ceiling_16": "9.8824510304821347",
+        "source_bytes": 12145,
+        "source_git_blob_sha": "3c73026225e3f3775e6b0fb7f759c6f30f7e03dd",
+        "source_print": "9.8824510304821356",
+        "source_sha256": "84bd5ce83eda8147734491f7dfb12891f71b83d1afe0bd22b248c2b0db3a6624",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n088/n088.cert.json",
+        "sourceprint_below_exact": false,
+        "witness_id_reserved": "W-squish-422-n088"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "6141750256175099/562949953421312",
+        "facts": "facts/n-108.json.gz",
+        "n": 108,
+        "reported_metadata": {
+          "phase": 3
+        },
+        "reported_seed": "SQUISH's own s(110), two squares removed, then nearby search",
+        "safe_ceiling_16": "10.9099400734448775",
+        "source_bytes": 14012,
+        "source_git_blob_sha": "e51cd5bb94f6903aaeb63b903430bec250ac6f7c",
+        "source_print": "10.9099400734448775",
+        "source_sha256": "9fe8a1e69c53cd0d10156f07e431dcc964ea22584ddce4ec0ec0124b8cedd5a9",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n108/n108.cert.json",
+        "sourceprint_below_exact": false,
+        "witness_id_reserved": "W-squish-422-n108"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "7815882024694857/562949953421312",
+        "facts": "facts/n-179.json.gz",
+        "n": 179,
+        "reported_metadata": {
+          "phase": 3
+        },
+        "reported_seed": "Francisco Couzo's s(180), one square removed, then nearby search",
+        "safe_ceiling_16": "13.8837954905121866",
+        "source_bytes": 23560,
+        "source_git_blob_sha": "a401b424eb064ed2c6e4ce4f706b72c98c5c8626",
+        "source_print": "13.8837954905121865",
+        "source_sha256": "a019651e811dca7b2423c58f97cb977a822b980631797820ef0962f352f380c3",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n179/n179.cert.json",
+        "sourceprint_below_exact": true,
+        "witness_id_reserved": "W-squish-422-n179"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "489683896443017/35184372088832",
+        "facts": "facts/n-180.json.gz",
+        "n": 180,
+        "reported_metadata": {
+          "phase": 3
+        },
+        "reported_seed": "SQUISH's own s(182), two squares removed, then nearby search",
+        "safe_ceiling_16": "13.9176534174514757",
+        "source_bytes": 20360,
+        "source_git_blob_sha": "7c6720b6c0636badbeb9ff549431ebaa75164cbb",
+        "source_print": "13.9176534174514757",
+        "source_sha256": "4a182ac6aa4d96f26e6aff68400bc74b5c89a25c7abeb9f35a4b47b64a0d5219",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n180/n180.cert.json",
+        "sourceprint_below_exact": false,
+        "witness_id_reserved": "W-squish-422-n180"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "8228961574259683/562949953421312",
+        "facts": "facts/n-199.json.gz",
+        "n": 199,
+        "reported_metadata": {
+          "phase": 10
+        },
+        "reported_seed": "Kingbird's s(37), grafted into n199's record",
+        "safe_ceiling_16": "14.6175721735980400",
+        "source_bytes": 22627,
+        "source_git_blob_sha": "a4bca57d8aae27897566c57b8073c0d850471430",
+        "source_print": "14.6175721735980400",
+        "source_sha256": "e50cf3c3b4bb618766d1979ff845d5d1396267dd6ed4ba8be600e6da2116fd77",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n199/n199.cert.json",
+        "sourceprint_below_exact": false,
+        "witness_id_reserved": "W-squish-422-n199"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "4061010297448552475010401636185/272770849620938037601496989696",
+        "facts": "facts/n-207.json.gz",
+        "n": 207,
+        "reported_metadata": {
+          "phase": 10
+        },
+        "reported_seed": "SQUISH's own s(88), grafted into n207's record",
+        "safe_ceiling_16": "14.8879922583077482",
+        "source_bytes": 31920,
+        "source_git_blob_sha": "df1ffe4dc6bc393acc3a4d0afebe2b8b964f16f5",
+        "source_print": "14.8879922583077473",
+        "source_sha256": "f1ea9c5eacdf45f8ed15b665618e066a1218632a367d7636e1fac411b3b94c1d",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n207/n207.cert.json",
+        "sourceprint_below_exact": true,
+        "witness_id_reserved": "W-squish-422-n207"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "8932777743453263/562949953421312",
+        "facts": "facts/n-236.json.gz",
+        "n": 236,
+        "reported_metadata": {
+          "phase": 10
+        },
+        "reported_seed": "SQUISH's own s(88), grafted into n236's record",
+        "safe_ceiling_16": "15.8678008394255397",
+        "source_bytes": 30314,
+        "source_git_blob_sha": "ee203137d079424269514aeb69ec2d470c937f50",
+        "source_print": "15.8678008394255396",
+        "source_sha256": "402033174ffb3f0338ec15414d49e89ed3781682cc4e49b89a3e7c735e9ac4fe",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n236/n236.cert.json",
+        "sourceprint_below_exact": true,
+        "witness_id_reserved": "W-squish-422-n236"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "9424018478849569/562949953421312",
+        "facts": "facts/n-263.json.gz",
+        "n": 263,
+        "reported_metadata": {
+          "phase": 3,
+          "squeezed": true
+        },
+        "reported_seed": "Francisco Couzo's s(297), carved down to n263's record, then nearby search and squeeze",
+        "safe_ceiling_16": "16.7404196795387766",
+        "source_bytes": 36028,
+        "source_git_blob_sha": "5271f132ea24ab046efac55db7d13c12eaec4957",
+        "source_print": "16.7404196795387747",
+        "source_sha256": "8e32094d935b7445f98c889305ed8fd018f06c59f7d4bf8f7f0957a70a992e7c",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n263/n263.cert.json",
+        "sourceprint_below_exact": true,
+        "witness_id_reserved": "W-squish-422-n263"
+      },
+      {
+        "assurance": "reported only; no feasibility replay performed",
+        "exact_side": "2516570125647313/140737488355328",
+        "facts": "facts/n-302.json.gz",
+        "n": 302,
+        "reported_metadata": {
+          "phase": 10
+        },
+        "reported_seed": "SQUISH's own s(88), grafted into n302's record",
+        "safe_ceiling_16": "17.8813062180958085",
+        "source_bytes": 32032,
+        "source_git_blob_sha": "2d9823dbe584fe9477c75c0a06deb6e30cfcd7aa",
+        "source_print": "17.8813062180958084",
+        "source_sha256": "4c3c07657c9bb441cbb4d1b7ab3b982832a8cebbd680b1e9a3d734655fb8014e",
+        "source_url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n302/n302.cert.json",
+        "sourceprint_below_exact": true,
+        "witness_id_reserved": "W-squish-422-n302"
+      }
+    ],
+    "evidence_id_proposed": "E-squish-second-update-2026-10-07-report",
+    "intended_packet": "packing/resources/web/squish-422-second-update-2026-10-07",
+    "new_counts": [
+      88,
+      199,
+      207,
+      236,
+      302
+    ],
+    "not_run": [
+      "Producer execution",
+      "Upstream checker",
+      "Local feasibility decider",
+      "Rational replay",
+      "Heavy geometry build",
+      "Network fetch",
+      "Git/GitHub/tbd mutation"
+    ],
+    "owner_bead": "think-sfpz",
+    "pending": [
+      "Full repository integration tests and required CI gates after application",
+      "Compare current frontier and preserve earlier value-specific verified evidence",
+      "House graphics generation and review",
+      "Explicitly governed independent exact replay if later authorized",
+      "Registration/result/assurance/source coverage changes by source owner"
+    ],
+    "raw_source_policy": "Existing bounded raw custody remains outside Git; future packet contains only derived facts and acquisition metadata.",
+    "replacement_counts": [
+      108,
+      179,
+      180,
+      263
+    ],
+    "repository": "https://github.com/itsnaka/squish-certs",
+    "retained_raw_source": "/workspace/squares-new-report-intake/sources/itsnaka--squish-certs/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3",
+    "separation": "Original eleven at 07fe and first twelve-result update at 5e32 remain unchanged; no NUMBERS/REVISION/earlier evidence rewritten.",
+    "source_commit": "e63e4e52b1728b6671b2f263c5e02a4aa79a39d3",
+    "source_issue": "https://github.com/jlevy/squares/issues/422",
+    "source_key_proposed": "[SQUISH second update 2026-10-07]",
+    "source_license_observation": "No root license file in retained untruncated source tree; no raw source/prose copied into the proposed packet.",
+    "status": "PASS_NINE_BOUNDED_SOURCE_ROSTER_AND_CUSTODY",
+    "trusted_parser_base": "2a27b973958c118e528f2c40e1ec2abafee99e6d"
+  },
+  "source_custody_anchor": "/workspace/squares-422-import-preparation/source-pin.json"
+}
