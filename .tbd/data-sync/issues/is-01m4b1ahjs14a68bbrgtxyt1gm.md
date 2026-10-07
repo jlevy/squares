@@ -5,7 +5,7 @@ title: Refresh family and contact-shade censuses after SQUISH import
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T11:17:35.448Z
-updated_at: 2026-10-07T11:21:26.767Z
+updated_at: 2026-10-07T11:42:50.508Z
 started_at: 2026-10-07T11:20:49.153Z
 ---
 The full confirmation checkpoint at 9ce8ac8ea found a stale generated family census
@@ -60,3 +60,30 @@ reported/confirmed outputs, verify certified fact/witness/receipt/pose invarianc
 obtain Astra review, adopt only generated views/provenance note, and run affected
 checks plus the meaningful incremental gate. Parent owns publication blocked by
 HTTP403. Keep this follow-up open until outputs are integrated and checked.
+
+Resource update: parent permitted copied-context generation after all timing-
+sensitive shards passed and the remaining record tail used one CPU of four.
+Existing generator imports and OUTPUT paths were asserted inside the copied
+roots, Python3.14.7; sequential processes used PACK_JOBS/PYTHON_CPU_COUNT and
+BLAS/OMP limits of1. No original source/HEAD changed.
+
+Both full324 generators and all deterministic --check replays passed. Generation
+wall seconds: reported family8.471/shade7.340; confirmed family8.572/shade6.728.
+Check wall seconds: reported family10.417/shade7.821; confirmed family8.498/
+shade6.710. Receipts and frozen diffs are in
+/workspace/squares-401-census-candidates, generation-receipts.json,
+check-receipts.json and candidate-audit.json. Metadata/thresholds are unchanged;
+781 nonoutput files per copied context are byte-identical to originals. Family
+changes23 entries including predecessor and downstream L-child diagnostics;
+shade changes exactly the11 imported rows per rule. All324 rows retained; zero
+house mismatches,52650 squares agree. Across reported/confirmed outputs only9
+literal family entry.side strings differ; contact-shade bytes are identical.
+Source-freeze-audit.json verifies complete original tracked source/facts/poses/
+receipts/reviews unchanged against463203adf and9ce8ac8ea, excluding outboxes.
+
+Astra accepted the proposed historical provenance note outside checkouts:
+Oct2 census69ddc7d988ba689cf887bdd0cb7fd64fdcf8c103 reproduces97 Kingbird-derived,
+68 nontrivial tight-symmetry and50 packet-derived entries; shade totals45468
+ green/7725 light/5272 structural/2419 slack/34 band match dated prose. The note
+pins history only, never geometry acceptance. Candidate semantic review and
+original full-run completion/adoption remain pending. Follow-up stays open.
