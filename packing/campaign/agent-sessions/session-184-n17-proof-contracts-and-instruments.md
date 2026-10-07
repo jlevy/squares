@@ -150,7 +150,7 @@ session:
     commitment: BC-433
     objective: Freeze current-source full17 endpoint readiness control and n11 first-round readiness;
       Astra derives a structural angular cone while Sol prepares retained instruments.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: One small patch passes but is not an annulus cover; exact contact-chain cones and actual
       global-tail tests offer independent substantive next steps.
@@ -164,14 +164,46 @@ session:
       and partial artifacts at the slice deadline without retuning criteria.
     fallback: Continue widened-slider and global-capture derivations while preserving the exact checker
       failure and selecting a ready dependency.
-    outcome: null
+    outcome: Negativecone18controls and prefix35controls independently clear; H282/exp266 andH283/exp267
+      registered before targets. N11 exp265 parserstartup refusal preserved0.73s; same-claim exp268 completes11-owner
+      production422.24s and fresh300s replay finished, independent determination pending. Four agent slots
+      continue; observed disposition09:13:25Z is39s after the declared phase5 deadline.
     evidence:
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-263-h280-one-annulus-patch.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-264-h279-apex-replay-repair.md
+    stop_reason: Reviewed preregistered packets ready; actual mathematical targets take the next slice.
+    next_action: Execute registerednegativecone and endpointprefix; launchactualTailA onlyonacceptedprefix.
+      Independentlyreadn11freshreplay.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-432
+    objective: Run exact continuous-cone generation/replay and current-source endpoint prefix; conditionally
+      execute one actual unresolved orbit while mathematical global-bridge derivations continue.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: One small patch passes but is not an annulus cover; exact contact-chain cones and actual
+      global-tail tests offer independent substantive next steps.
+    budget_minutes: 30
+    started_at: '2026-10-07T09:13:25Z'
+    deadline_at: '2026-10-07T09:43:25Z'
+    expected_output: Accepted or refused exact cone; valid or incomplete full17 endpoint prefix; conditional
+      actual-tail producer evidence and n11 first-round independent disposition.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Refuse affected interpretation on failed controls or exact joins. Preserve completed
+      and partial artifacts at the slice deadline without retuning criteria.
+    fallback: Continue widened-slider and global-capture derivations while preserving the exact checker
+      failure and selecting a ready dependency.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-266-h282-current-tail-a.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-267-h283-continuous-soft-direction-cone.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md
     stop_reason: null
-    next_action: Launch only independently reviewed and preregistered controls; continue Astra derivation
-      beside mechanical integration.
+    next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside
+      research.
   primary_bead: think-ipel
   status: in_progress
   budget:
@@ -475,10 +507,11 @@ session:
     - shared scientific record mutation
   - task: Astra contact-chain cone contract
     operator: GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Boundedpacket delivered; workerreused immediately forphase6.
+    evidence:
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     files: &id007
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     checks: []
@@ -503,10 +536,12 @@ session:
     - shared scientific record mutation
   - task: Sol current-source endpoint prefix
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Boundedpacket delivered; workerreused immediately forphase6.
+    evidence:
+    - packing/devtools/check_n17_endpoint_prefix.py
+    - packing/tests/test_check_n17_endpoint_prefix.py
     files: &id008
     - packing/devtools/check_n17_endpoint_prefix.py
     - packing/tests/test_check_n17_endpoint_prefix.py
@@ -532,10 +567,12 @@ session:
     - shared scientific record mutation
   - task: Sol independent review and n11 registration packet
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Boundedpacket delivered; workerreused immediately forphase6.
+    evidence:
+    - packing/devtools/check_n17_capture_leaf.py
+    - packing/tests/test_check_n17_capture_leaf.py
     files: &id009
     - packing/devtools/check_n17_capture_leaf.py
     - packing/tests/test_check_n17_capture_leaf.py
@@ -555,6 +592,89 @@ session:
     kill_condition: Soundness failure or no checkable artifact at the slice boundary.
     fallback: Preserve the precise missing dependency and rotate to independent proof-support work.
     write_scope: *id009
+    excluded_commands:
+    - blocking CI watch
+    - unregistered target sample
+    - shared scientific record mutation
+  - task: Astra positivecone and globalbridge
+    operator: GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id010
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks: []
+    uncertainty: No new exact-bound or capture verdict; target criteria remain frozen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Sendpositiveconeimplementerpacket; deriveglobalcapture/sliderbridge andinterpretcontrolled
+      results.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-10-07T09:13:25Z'
+    deadline_at: '2026-10-07T09:43:25Z'
+    expected_output: Sendpositiveconeimplementerpacket; deriveglobalcapture/sliderbridge andinterpretcontrolled
+      results.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: Soundness failure or no checkable artifact at the slice boundary.
+    fallback: Preserve the precise missing dependency and rotate to independent proof-support work.
+    write_scope: *id010
+    excluded_commands:
+    - blocking CI watch
+    - unregistered target sample
+    - shared scientific record mutation
+  - task: Sol positivecone instrument
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id011
+    - packing/devtools/check_n17_widened_positive_cone.py
+    - packing/tests/test_check_n17_widened_positive_cone.py
+    checks: []
+    uncertainty: No new exact-bound or capture verdict; target criteria remain frozen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: ImplementAstras exact17row/cubiccontract withtarget-freecontrols; no signsbeforeprereg.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-10-07T09:13:25Z'
+    deadline_at: '2026-10-07T09:43:25Z'
+    expected_output: ImplementAstras exact17row/cubiccontract withtarget-freecontrols; no signsbeforeprereg.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: Soundness failure or no checkable artifact at the slice boundary.
+    fallback: Preserve the precise missing dependency and rotate to independent proof-support work.
+    write_scope: *id011
+    excluded_commands:
+    - blocking CI watch
+    - unregistered target sample
+    - shared scientific record mutation
+  - task: Sol n11 independentread and boundedCIdependencyreview
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id012
+    - packing/devtools/run_negative_controls.py
+    checks: []
+    uncertainty: No new exact-bound or capture verdict; target criteria remain frozen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Independentlyreadn11freshreceipts andtracesnapshotinputs inatmostfive minutes; do notraise
+      ceiling.
+    phase: 6
+    budget_minutes: 30
+    started_at: '2026-10-07T09:13:25Z'
+    deadline_at: '2026-10-07T09:43:25Z'
+    expected_output: Independentlyreadn11freshreceipts andtracesnapshotinputs inatmostfive minutes; do
+      notraise ceiling.
+    validation_command: uv run --frozen --all-extras --group dev packing-validate --records
+    kill_condition: Soundness failure or no checkable artifact at the slice boundary.
+    fallback: Preserve the precise missing dependency and rotate to independent proof-support work.
+    write_scope: *id012
     excluded_commands:
     - blocking CI watch
     - unregistered target sample
@@ -593,9 +713,14 @@ session:
   - Records checkpoint48.08s failed only unavailable Ruff on process PATH and retained original exp262
     layout. Project Ruff exists in externalvenv; PATH repaired. Originalfailedcertificate given explicitfrozen-output
     exemption; no fullpassinggate claimed.
+  - Prefix35 target-freecontrols independentreview clear; normalno-update interruption incomplete, exact
+    replay/custody refusal refused.
+  - Negativecone18 target-freecontrols independentreview clear; defensive-copy tampergap repaired before
+    anytarget.
+  - N11 exp268 complete11-ownerproduction422.24s, endpoint12checks held; freshresume replay finished,
+    independentacceptancepending.
   stop_reason: null
-  next_action: Launch only independently reviewed and preregistered controls; continue Astra derivation
-    beside mechanical integration.
+  next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research.
 ---
 # n17 Proof Contracts and Instruments
 

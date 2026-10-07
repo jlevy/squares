@@ -951,6 +951,12 @@ The current known-case readiness control is
 repaired-producer n11 round, preserving the exact endpoint, followed by fresh replay.
 It supplies measured cost and custody without a first-round contraction threshold.
 
+[H-282](hypotheses/H-282-n17-current-source-tail-a.md) selects one actual admitted-tail
+orbit after a newly checked full17 endpoint prefix.
+[H-283](hypotheses/H-283-n17-continuous-soft-direction-cone.md) tests a continuous
+negative16 cone with six free angular coordinates, exact root cancellation and fresh
+replay. Neither claim is a complete capture or angular-cover theorem.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

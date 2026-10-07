@@ -3197,7 +3197,7 @@ sessions:
   title: "n17 Proof Contracts and Instruments"
   status: in_progress
   primary_bead: think-ipel
-  phases: 5
+  phases: 6
   measured: false
   unmeasured_reason: >-
     declares no resource measurement

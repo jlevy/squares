@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `pipeline-improvement` (correctness) | 5 | think-ipel | Launch only independently reviewed and preregistered controls; continue Astra derivation beside mechanical integration. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 6 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
 
 ### Workflow summary
 
@@ -210,7 +210,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 41 | 1 |
-| `research-loop` | 37 | 4 | 133 | 9 |
+| `research-loop` | 37 | 4 | 134 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 195 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 197 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1152,6 +1152,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-279 | confirmed | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 2 |  | 10s wall |
 | H-280 | confirmed | proof | The deterministic retained dual seed at exp260 outer negative omega16  |  | 1 |  | 6s wall |
 | H-281 | blocked | proof | The repaired producer completes one certified eleven-owner round on th |  | 2 |  | 1s wall |
+| H-282 | running | proof | At cap1169/250 the repaired current producer preserves every exact-roo |  | 1 |  |  |
+| H-283 | running | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1390,10 +1392,12 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (1)
+### in-progress (3)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
+| exp-266 | series-000 | 17 | Sol coordinator executes Astra-prescribed contract; root owns monitor, registration, results, independent admission and count changes. | H-282 | Registered before scientific work; reviewed source and named input custody are frozen by registration commit. Full17 prefix must pass before TailA. No measurement yet. |
+| exp-267 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract in Session 184. | H-283 | Registered before target; mathematical and independent mechanical reviews clear; source frozen by registration commit. |
 | exp-268 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Registered before scientific work; unchanged H281 settings and900/300second budgets. Correct the unsupported startup flag only; exp265 remains blocked with original logs. |
 
 ## Resumable — stopped on the clock, not on an answer
@@ -1443,7 +1447,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-195 rounds, 2512.1 agent-minutes, 5730.3 wall-minutes.
+197 rounds, 2512.1 agent-minutes, 5730.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

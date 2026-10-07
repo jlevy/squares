@@ -1092,6 +1092,166 @@ not evidence of a packing in the cone.
 Passing would add one continuous cone to the coverage record, while the remaining
 angular directions and outer capture stay open.
 
+## A Separate Positive-Turn Cone Contract
+
+The retained exp-260 point `target:outer:coordinate:16:1` has a different dual support.
+Its seventeen positive rows suggest the following further hand derivation.
+No sign, mass or radial bound in this section has been evaluated on the accepted root.
+This is a proposed next certificate, separate from the preceding cone’s registered
+criterion. D4 transport of the negative-turn cone does not establish this positive-turn
+claim in the same labelled endpoint frame.
+
+Put $q_{16}=r$, with $0<r\le1/200$, and define
+
+$$
+d_r=\frac{d(1-r^2)+2er}{1+r^2},\qquad
+e_r=\frac{e(1-r^2)-2dr}{1+r^2},\qquad
+\alpha_r=cd_r-se_r,\qquad \gamma_r=ce_r+sd_r.
+$$
+
+All four quantities must be strictly positive on the checked root and radial domains.
+Write $Y=y_{17}^*$ and set
+
+$$
+C_r=d_r(S^*-1)-e_r(Y+1/2)-1/2,\qquad
+B_r=(d_r+e_r)(S^*-1)-1/2.
+$$
+
+At the baseline where every other angle is nominal, the right contact chain from the
+preceding section gives $y_{17}\ge Y$. The two upper walls of square 8, the right wall
+of 17, and the contacts $8/16$ and $16/17$ therefore give
+
+$$
+(e_r,d_r)\cdot x_{16}\le B_r,\qquad
+(d_r,-e_r)\cdot x_{16}\le C_r.
+$$
+
+The bottom wall of 1, the left wall of 3, and contacts $1/3$, $3/11$, $11/12$ and
+$12/16$ give
+
+$$
+u^*\cdot x_{16}\ge c+2s+2+(\alpha_r+\gamma_r)/2.
+$$
+
+Since $u^*=\alpha_r(d_r,-e_r)+\gamma_r(e_r,d_r)$, feasibility requires
+
+$$
+G(r):=\alpha_r(C_r-1/2)+\gamma_r(B_r-1/2)-(c+2s+2)\ge0.
+$$
+
+### Seventeen weights and the exact root join
+
+The positive combination has the following weights.
+All other rows have weight zero; alternative retained owners receive the same pair
+weight.
+
+| Row | Weight |
+| --- | --- |
+| Left wall of 1 | $ce_r\alpha_r/s$ |
+| Bottom wall of 1 | $s$ |
+| Bottom wall of 2 | $e_r\alpha_r$ |
+| Left wall of 3 | $c$ |
+| Right wall of 8 | $e_r\gamma_r$ |
+| Top wall of 8 | $d_r\gamma_r$ |
+| Right wall of 17 | $\alpha_r\gamma_r/s$ |
+| Pair $1/2$ | $ce_r\alpha_r/s$ |
+| Pair $1/3$ | $s$ |
+| Pair $2/13$ | $e_r\alpha_r/s$ |
+| Pairs $3/11$, $11/12$ and $12/16$ | $1$ each |
+| Pair $8/16$ | $\gamma_r$ |
+| Pairs $13/14$ and $14/17$ | $e_r\alpha_r/s$ each |
+| Pair $16/17$ | $\alpha_r$ |
+
+The centre coefficients cancel, the side coefficient is $\gamma_r(d_r+e_r+\alpha_r/s)$,
+and the fixed-container weighted gap is $G(r)$. These are symbolic identities to check
+against reconstructed finite support rows.
+In particular, the $12/16$ row is owned by square 12; it is not an owner-16 row.
+
+At zero turn, $C_0=A_{\rm chart}+F2$, where $A_{\rm chart}$ is the coordinate named `A`
+in the endpoint layout, and $B_0=B_{\rm chart}$. Consequently
+
+$$
+G(0)=F3+\alpha_0 F2=0
+$$
+
+at the accepted exact root.
+Both polynomial normalizations must be joined to that root: F2 to Pi2 and F3 to Pi3.
+Interval residual smallness again cannot replace exact zero.
+Symbolically form the polynomial
+
+$$
+H(r)=\frac{(1+r^2)^2\,[G(r)-G(0)]}{r}.
+$$
+
+Its numerator has an exact factor $r$, leaving a polynomial of degree at most three.
+A checker must cancel that factor symbolically and interval-evaluate the resulting
+polynomial on the closed interval $[0,1/200]$. It must not divide an interval by $r$ at
+zero. A candidate finite criterion is $H\le-1/2$ throughout that domain; this threshold
+remains unmeasured.
+
+An explicit coefficient form avoids division by $r$. Put $T=S^*-1$, $Z=Y+1/2$ and
+
+$$
+A_2=(c+s)T,\quad B_2=c(T-Z),\quad C_2=sZ+cT,
+$$
+
+$$
+Q_0=A_2d^2+B_2de+C_2e^2,\quad
+Q_{90}=A_2e^2-B_2de+C_2d^2,\quad
+Q_\times=2de(A_2-C_2)+B_2(e^2-d^2),
+$$
+
+$$
+L_0=(c+s)d+(c-s)e,\qquad L_\times=(c+s)e-(c-s)d.
+$$
+
+Then the coefficient list, from constant to cubic, is
+
+$$
+\bigl(2(Q_\times-L_\times),\;
+4(Q_{90}-Q_0)+2L_0,\;
+-2(Q_\times+L_\times),\;
+2L_0\bigr).
+$$
+
+A symbolic check should bind this list to the preceding definition of $H$ before outward
+interval evaluation of its coefficients and radial powers.
+
+### Candidate mixed-angle domain
+
+The weighted rows involve labels $\{1,2,3,8,11,12,13,14,16,17\}$. A candidate cone
+therefore constrains the nine non-16 labels in that set by $|q_j|\le r/128$, while
+$\{4,5,7,9,10,15\}$ retain the full outer half-angle interval.
+The wider position, slider and feature-forcing premises remain explicit.
+
+Let $W$ be the sum of the seven wall weights and let
+
+$$
+P=ce_r\alpha_r/s+s+3e_r\alpha_r/s+2
+$$
+
+be the sum of the seven pair weights not involving 16. Those pair gaps each change by at
+most $(24/5)(r/128)$. For $12/16$, only the owner turns relative to the baseline; its
+gap changes by at most $(19/5)(r/128)$, using $2(D+2\sqrt2\rho_p)+1<19/5$. The owner-16
+rows $8/16$ and $16/17$ each change by at most $r/128$. Thus a candidate mass bound is
+
+$$
+M_+=W+(24/5)P+19/5+\gamma_r+\alpha_r\le50.
+$$
+
+If the sign checks, exact root joins, $H\le-1/2$ and this mass bound all pass, then
+
+$$
+\sum_i\lambda_i g_i
+\le-\left[\frac{1}{2(1+1/40000)^2}-\frac{50}{128}\right]r<0.
+$$
+
+That would exclude this second punctured cone times six free angle coordinates.
+These constants and the full domains need their own registration before target
+evaluation. Failed bounds would leave the cone uncertified.
+Its apex and all remaining directions remain subject to the existing terminal and
+coverage obligations.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
