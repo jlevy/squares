@@ -995,6 +995,10 @@ capture or an exclusion.
 independent standing replay of the accepted numeric endpoint under exact centered V
 walls; known-endpoint STALL is required, with no exclusion or census admission.
 
+[H-292](hypotheses/H-292-n17-conditional-owned-hull-gate.md) tests finite exact
+owned-point gains for three fixed guards within the accepted H290 parent, with fresh
+reconstruction and no propagation or admission.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

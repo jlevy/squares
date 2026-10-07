@@ -1,5 +1,5 @@
 ---
-title: exp-281 — conditional-owned-hull cheap gate
+title: "exp-281 \u2014 conditional-owned-hull cheap gate"
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -48,9 +48,19 @@ experiment:
     budget: Combined120s construction60/fresh60, TERM120/KILL130, sampled4096MiB RSS. No retry,
       propagation or threshold tuning.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-281-conditional-owned-hull-gate
-  results: []
+    commit: d691c99f563275b8e8b0175c3b0edba92230bf4d
+  results:
+  - shape: determination
+    role: guard
+    question: Did the frozen finite gain gate complete within all declared input/output ceilings?
+    outcome: invalid
+    checked_by: 'Actual frozen construction stopped incomplete after 1.11243s supervised wall,
+      rc1/cleanup complete: conditional gate rational string ceiling. No gain polygons or
+      fresh reconstruction were computed; no mathematical verdict. Preserve original 4096bit/input
+      contract and inspect the admitted input-size interface before any separately registered
+      correction.'
   verdict:
-    decision: in-progress
+    decision: blocked
     primary_criterion: 'Canonical EOF and compressed/content/receipt identity match acceptedH290
       full17/16step/root/frame/all49zero/all17 endpoint premise; independently reconstruct
       all three exact guard polygons and deterministic selected points in a clean producer/kernel/root-free
@@ -60,12 +70,20 @@ experiment:
       or area>=2^-20 for empty baseline. No gain is a valid negative frozen-recipe result;
       empty endpoint control is inconclusive, identity/endpoint failure refused, resource
       stop incomplete. No exclusion/admission/global proof or propagation.'
-    reason: Registered before actual finite gain construction/intake. Frozen38/38 controls
-      and Astra/independentSol reviews clear; descriptor bound to accepted H290 metadata only.
-      No target values evaluated.
+    reason: 'Actual frozen construction stopped incomplete after 1.11243s supervised wall,
+      rc1/cleanup complete: conditional gate rational string ceiling. No gain polygons or
+      fresh reconstruction were computed; no mathematical verdict. Preserve original 4096bit/input
+      contract and inspect the admitted input-size interface before any separately registered
+      correction.'
+    needs_review: false
   lease:
     expires: '2026-10-07T13:06:10Z'
     host: macOS arm64
+  effort:
+    timebox: Combined120s construction60/fresh60, TERM120/KILL130, sampled4096MiB RSS. No
+      retry, propagation or threshold tuning.
+    wall_seconds: 1.11
+    stopped_by: error
 ---
 # Conditional-Owned-Hull Cheap Gate
 
@@ -106,6 +124,11 @@ The parent-domain conditional ownership implication is sole-Astra reviewed hand
 mathematics; fresh exact finite reconstruction does not claim independent derivation.
 A positive gate permits only a separately registered future continuation.
 It proves no conditional exclusion, census admission, global capture or optimality.
+
+The first frozen attempt stopped incomplete at its rational-string ceiling in 1.11s. No
+gain was evaluated and no mathematical conclusion follows.
+The original contract and failure are retained; any input-interface correction needs a
+new source review and registered attempt.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

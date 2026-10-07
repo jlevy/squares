@@ -910,6 +910,16 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
         roots = frozenset({ROOT / "benchmarks/validation-efficiency/runs"})
     specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
     assert roots <= PRUNE
+    if selection == "session184":
+        assert {
+            controls.SESSION184_RESULTS / name
+            for name in (
+                "exp-278-centered-endpoint-standing",
+                "exp-279-centered-endpoint-diagnostics",
+                "exp-280-centered-endpoint-hull-capacity",
+                "exp-281-conditional-owned-hull-gate",
+            )
+        } <= roots
     for control in specification["controls"]:
         target = (ROOT / control["file"]).resolve()
         assert not controls.in_pruned_roots(target, roots)

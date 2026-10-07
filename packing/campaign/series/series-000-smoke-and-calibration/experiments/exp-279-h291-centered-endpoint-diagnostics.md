@@ -51,23 +51,35 @@ experiment:
       No event ceiling is implemented in independent standing; no kernel200000-event claim.
       No retry or scientific tuning.
     record: campaign/series/series-000-smoke-and-calibration/results/exp-279-centered-endpoint-diagnostics
-  results: []
+    commit: 06c814112
+  results:
+  - shape: determination
+    role: guard
+    question: Did unchanged centered endpoint replay complete after diagnostic retention repair?
+    outcome: invalid
+    checked_by: 'Actual distinct diagnostic replication refused after4.22587s supervised wall,
+      rc1/cleanupcomplete. Retained child receipt gives step0 owned hull too large: independent
+      standing limit16 conflicts with accepted H289 producer hull_limit48. No complete standing
+      acceptance or mathematical conclusion; repair the computational capacity with unchanged
+      exact ownership checks and register a new control.'
   verdict:
-    decision: in-progress
+    decision: blocked
     primary_criterion: Fresh parent accepted H288 root/cap/original24-cell D4 context and
       exact acceptedH290 full17 endpoint-retention receipt; fresh independent producer/kernel/root-free
       standing child checks all original numeric-cap seed rows, all16 steps/facets/finalstate
       and canonical EOF with exact U/V/offset/B, unchanged named mask/world and original compressed/content
       IDs. It returns full PASS_STALL with no closure/exclusion. A closure is a failed known-endpoint
       control; no oldU ledger or newtarget admission.
-    reason: Registered distinct source-diagnostic replication after exp278 operationalrefusal.
-      All mathematical inputs, criterion, numericcontext and budgets unchanged. Repair retains
-      bounded failed-child receipt/exitcode/tails across temp cleanup; no actual new target
-      evaluated.
+    reason: 'Actual distinct diagnostic replication refused after4.22587s supervised wall,
+      rc1/cleanupcomplete. Retained child receipt gives step0 owned hull too large: independent
+      standing limit16 conflicts with accepted H289 producer hull_limit48. No complete standing
+      acceptance or mathematical conclusion; repair the computational capacity with unchanged
+      exact ownership checks and register a new control.'
     needs_review: false
-  lease:
-    expires: '2026-10-07T12:42:50Z'
-    host: macOS arm64
+  effort:
+    timebox: Parent600s including child<=300s; TERM600/KILL610 and4GiBsampled
+    wall_seconds: 4.23
+    stopped_by: error
 ---
 # exp-279: Centered Endpoint Replay with Retained Diagnostics
 
@@ -89,6 +101,13 @@ Unexpected closure remains a failed endpoint control.
 The preregistered descriptor and exact supervisor arrays are retained with this round
 before first intake; the actual launch records clean relevant source blobs.
 No event ceiling is implemented in the independent standing verifier.
+
+The original new diagnostic attempt refused in4.23s. Its retained child identifies
+`step 0: owned hull too large`: the standalone verifier’s inherited16-point
+computational cap did not support H289’s fixed48-point producer recipe.
+This establishes an interface mismatch, not a packing or endpoint failure.
+The next source repair must retain every exact ownership plane and compression witness,
+preserve the legacy U mode and use a separately registered control.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

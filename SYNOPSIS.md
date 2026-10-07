@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 225 | 59 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 207 | 79 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 226 | 60 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 210 | 80 accepted; 38 rejected; 59 unresolved; 12 baseline; 15 blocked; 4 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5806,7 +5806,8 @@ round that names the hypothesis, control roles included.
 | [H-288](packing/campaign/hypotheses/H-288-n17-capture-cap-root-join.md) | confirmed | Frozen rational cap joins full accepted root and outward side enclosure | 1 | exp275 accepted1.21s; exact all-root cap gap≤1e-12; no capture or relabel |
 | [H-289](packing/campaign/hypotheses/H-289-n17-numeric-cap-first-round-readiness.md) | confirmed | New full17 numeric-cap seed, one16-owner round and fresh zero-production replay | 1 | exp276 accepted249.36s summed supervision;16updates/17productionchecks/fresh16step; no capture |
 | [H-290](packing/campaign/hypotheses/H-290-n17-numeric-checkpoint-capture-readiness.md) | confirmed | Numeric-frame saved16step custody and49 exact root-relative bounds | 1 | Registered600s parent including300s clean child; no exclusion |
-| [H-291](packing/campaign/hypotheses/H-291-n17-centered-endpoint-standing-control.md) | running | Exact centered numeric-cap standing endpoint control | 1 | Full independent16step PASS_STALL control; no admission |
+| [H-291](packing/campaign/hypotheses/H-291-n17-centered-endpoint-standing-control.md) | confirmed | Exact centered numeric-cap standing endpoint control | 3 | Full independent16step PASS_STALL control; no admission |
+| [H-292](packing/campaign/hypotheses/H-292-n17-conditional-owned-hull-gate.md) | blocked | Exact finite shared-owned-hull gain within accepted parent | 1 | Fixedthreeguards/cleanreconstruction; no propagation or admission |
 
 ### Confirmed
 
@@ -6116,7 +6117,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-154.yaml` | session-154 | 358 | 3.03 h | 2.95 h | 3.63 h | yes |
 | `codex-task-tree-session-155-creative.yaml` | session-155 | 188 | 1.52 h | 1.49 h | 1.72 h | no |
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
-| `codex-task-tree-session184-through-100444.yaml` | session-184 | 2,176 | 11.95 h | 2.94 h | 2.94 h | yes |
+| `codex-task-tree-session184-through-121500.yaml` | session-184 | 3,620 | 20.64 h | 5.11 h | 5.11 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6124,6 +6125,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `session-165-codex-task-tree.yaml` | session-165 | 2,730 | 13.15 h | 3.96 h | 3.96 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
+| `codex-task-tree-session184-through-100444.yaml` | unattributed | 2,176 | 11.95 h | 2.94 h | 2.94 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -6145,9 +6147,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 207 rounds registered in `series-000`.
+There are 210 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5766.3 wall-minutes.
+They record 2512.1 agent-minutes and 5768.2 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6395,7 +6397,10 @@ archive beside it.
 | [exp-275](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-275-h288-capture-cap-root-join.md) | 17 | target | H-288 | Exact frozen numericcap fullroot join | Accepted1.21s; fullroot/capjoin and fresh exactreplay, no capture | accepted |
 | [exp-276](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-276-h289-numeric-cap-first-round.md) | 17 | target | H-289 | New numeric-cap full17 cell seed and first16-owner round | Input/full16update round/fresh16step replay pass; readiness only, no terminal | accepted |
 | [exp-277](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-277-h290-numeric-checkpoint-capture.md) | 17 | target | H-290 | Numeric-cap saved16step capture consumer | Accepted49bounds/17endpoint retention; all geometry predicates false | accepted |
-| [exp-278](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-278-h291-centered-endpoint-standing.md) | 17 | target | H-291 | Centered numeric-cap standing endpoint control | Registered full16step independent replay; endpoint STALL required | in-progress |
+| [exp-278](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-278-h291-centered-endpoint-standing.md) | 17 | target | H-291 | Centered numeric-cap standing endpoint control | Firstcontrol earlychildrefusal; no complete standing or mathematical verdict | blocked |
+| [exp-279](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-279-h291-centered-endpoint-diagnostics.md) | 17 | target | H-291 | Retained child diagnostics | Refused inherited16 vs original48 computationalcapacity; no mathverdict | blocked |
+| [exp-280](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-280-h291-centered-endpoint-hull-capacity.md) | 17 | target | H-291 | Supported48 centered standing endpoint control | Acceptedfull16step PASS_STALL/25.1Mfacets; endpointpremise inherited, noadmission | accepted |
+| [exp-281](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-281-h292-conditional-owned-hull-gate.md) | 17 | target | H-292 | Finiteowned-hull gain and freshreconstruction | Incomplete1.11s at rational input ceiling; no gains | blocked |
 
 ### Cost and provenance
 
@@ -6606,11 +6611,15 @@ archive beside it.
 | exp-274 | Prefix120+60;producer1200/fresh900/standing900 | 554.12s summed supervision | — | criterion | clean `3575c02a7`; unchangedrecipe oneorbit fullstandingadmission |
 | exp-275 | Combined180s generation+fresh/190KILL | 1.21s | — | criterion | clean `3575c02a7`; fixed numericcap, no capture or relabel |
 | exp-276 | Input60s/production900s/fresh300s;4GiBsampled | 249.36s summed supervision | — | criterion | clean `5694a21f7`;175.86083s production/66.47918s fresh; readiness only |
-| exp-277 | Parent600s includingclean child300s;4GiBsampled | Pending | — | Running | NumericFrame/49bounds readiness, no census |
+| exp-277 | Parent600s includingclean child300s;4GiBsampled | 164.51s | — | criterion | clean `491782972`;49bounds/17endpoint readiness, geometricunresolved |
+| exp-278 | Parent600s includingchild300s;4GiBsampled | 4.32s | — | error | clean `836e919e0`; early childrefusal, detailedcause lost; no mathematicalverdict |
+| exp-279 | Parent600s/child300s;4GiBsampled | 4.23s | — | error | clean `06c814112`; retained step0 hull16 vs48refusal |
+| exp-280 | Parent600s/child300s;4GiBsampled | 106.49s | — | criterion | clean `90d6e4c94`; full16step PASS_STALL, noadmission |
+| exp-281 | Construction60s/fresh60s inside120s;4GiBsampled | 1.11s incomplete | — | Input rational ceiling | No gain evaluation, propagation or mathematical verdict |
 
-### What the 207 rounds jointly establish
+### What the 210 rounds jointly establish
 
-The 207 rounds use 2512.1 agent-minutes and 5766.3 wall-minutes under the campaign’s
+The 210 rounds use 2512.1 agent-minutes and 5768.2 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

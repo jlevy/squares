@@ -51,22 +51,36 @@ experiment:
       No event ceiling is implemented in independent standing; no kernel200000-event claim.
       No retry or scientific tuning.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-278-centered-endpoint-standing
-  results: []
+    commit: 836e919e00274316b605f9be459c4b0c6b8c6e57
+  results:
+  - shape: determination
+    role: guard
+    question: Did the first actual centered standing interface complete its full known-endpoint
+      control?
+    outcome: invalid
+    checked_by: Actual source836e919e0 known-endpoint control refused after4.32483s supervised
+      wall, returncode1/cleanupcomplete. Parent reports fresh standing child refused and retained
+      no detailed child cause before private-directory cleanup. This is an operational interface
+      failure, with no completed standing or mathematical verdict; preserve original and repair
+      bounded diagnostics/source before a separately registered rerun.
   verdict:
-    decision: in-progress
+    decision: blocked
     primary_criterion: Fresh parent accepted H288 root/cap/original24-cell D4 context and
       exact acceptedH290 full17 endpoint-retention receipt; fresh independent producer/kernel/root-free
       standing child checks all original numeric-cap seed rows, all16 steps/facets/finalstate
       and canonical EOF with exact U/V/offset/B, unchanged named mask/world and original compressed/content
       IDs. It returns full PASS_STALL with no closure/exclusion. A closure is a failed known-endpoint
       control; no oldU ledger or newtarget admission.
-    reason: 'Registered before first centered standing target intake. Accepted H290 joins
-      and source-only wall semantics audit clear: H289 numeric seed already uses exact centered
-      V walls while preserving outerU cells/header. Root freezes reviewed sources and expanded
-      arguments before the actual child.'
-  lease:
-    expires: '2026-10-07T12:26:59Z'
-    host: macOS arm64
+    reason: Actual source836e919e0 known-endpoint control refused after4.32483s supervised
+      wall, returncode1/cleanupcomplete. Parent reports fresh standing child refused and retained
+      no detailed child cause before private-directory cleanup. This is an operational interface
+      failure, with no completed standing or mathematical verdict; preserve original and repair
+      bounded diagnostics/source before a separately registered rerun.
+    needs_review: false
+  effort:
+    timebox: Parent600s including child<=300s; TERM600/KILL610 and4GiB sampled per process
+    wall_seconds: 4.32
+    stopped_by: error
 ---
 # exp-278: Centered Known-Endpoint Standing Control
 
@@ -100,6 +114,15 @@ Old U certificates may later transfer by container inclusion while retaining the
 original U context; they are not relabelled or replayed as V-wall seeds here.
 Numeric V closures would require a separate target-context admission workflow, never the
 current U ledger.
+
+The first actual control at source `836e919e00274316b605f9be459c4b0c6b8c6e57` refused
+after4.32s supervised wall time.
+The parent retained only `fresh standing child refused`; its child receipt was temporary
+and the specific failure was lost.
+No full standing acceptance or mathematical conclusion follows.
+The original launch, receipt, logs and supervision remain intact.
+Repair child-failure retention and the identified source boundary, then register a
+distinct unchanged-criterion rerun.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

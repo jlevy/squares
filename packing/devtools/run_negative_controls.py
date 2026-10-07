@@ -116,6 +116,10 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-275-capture-cap-root-join",
         "exp-276-n17-numeric-cap-first-round",
         "exp-277-numeric-checkpoint-capture",
+        "exp-278-centered-endpoint-standing",
+        "exp-279-centered-endpoint-diagnostics",
+        "exp-280-centered-endpoint-hull-capacity",
+        "exp-281-conditional-owned-hull-gate",
     )
 )
 

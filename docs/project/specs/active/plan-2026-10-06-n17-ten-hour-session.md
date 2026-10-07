@@ -291,6 +291,40 @@ claim a completed certified handover.
 No automation, external worker dispatch or overnight launch is created by this plan
 alone.
 
+## Mid-Session Evidence and Selected Next Work
+
+At the five-hour checkpoint, the original U-cap census has60 admitted entries and36,768
+states /4,683 D4 orbits remaining, with the endpoint retained.
+Two new ordinary full standing admissions account for the change from the58-entry launch
+baseline. The conditional cone, cap and coarse-slider results remain scoped to their
+checked premises; none supplies global capture or an improved unconditional lower bound.
+
+The new numeric-cap full17 first round completed all16 contracting-owner updates and
+fresh zero-production replay.
+Its separate
+[H290 intake](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-277-h290-numeric-checkpoint-capture.md)
+accepted49 exact intervals and all17 endpoint poses, while every geometric terminal
+predicate remained false.
+Astra found that every active owner still represents the full orientation interval.
+This diagnoses the represented relaxation; it supplies no packing counterexample or
+claim about the physical feasible subset.
+
+The next selected mathematical lane tests an exact shared obstacle under one angular
+condition.
+Its construction and independent finite replay have a cheap support-gain gate;
+propagation is considered only after that gate passes.
+This replaces an automatic long continuation with unchanged settings.
+The independent centered-cap interface first needs its known-endpoint STALL control: the
+first attempt refused operationally in4.32s and awaits diagnostic repair and separate
+registration.
+
+[Session184](../../../../packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
+owns the current30-minute slices, fixed target budgets and disjoint agent deliverables.
+One Astra remains on mathematical strategy and review; two Sol workers handle source,
+custody and focused checks, beside the Sol coordinator.
+A bounded push gate runs in parallel.
+The research cutoff and protected finalization hour remain unchanged.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -53,22 +53,40 @@ experiment:
       No event ceiling is implemented in independent standing; no kernel200000-event claim.
       No retry or scientific tuning.
     record: campaign/series/series-000-smoke-and-calibration/results/exp-280-centered-endpoint-hull-capacity
-  results: []
+    commit: 90d6e4c944602d8c6af5d0938275fddb0d5baf96
+  results:
+  - shape: determination
+    role: outcome
+    question: Fresh parent accepted H288 root/cap/original24-cell D4 context and exact acceptedH290
+      full17 endpoint-retention receipt; fresh independent producer/kernel/root-free standing
+      child checks all original numeric-cap seed rows, all16 steps/facets/finalstate and canonical
+      EOF with exact U/V/offset/B, unchanged named mask/world and original compressed/content
+      IDs. It returns full PASS_STALL with no closure/exclusion. A closure is a failed known-endpoint
+      control; no oldU ledger or newtarget admission.
+    outcome: criterion_met
+    checked_by: Full independent centered PASS_STALL:544 seedrows,1024 updaterows,16steps
+      and25134984 collisionfacets; hull48 and exact U/V/offset/B/T/full24world/object/H290all17endpoint
+      joins match. Fresh parent cap/root pass; child rootjoinfalse/parenttrue. Astra mathematical
+      and Sol metadata acceptance clear. Supervisor106.493889s rc0/cleanupcomplete, standing104.68s;
+      no exclusion/admission/globalclaim.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Fresh parent accepted H288 root/cap/original24-cell D4 context and
       exact acceptedH290 full17 endpoint-retention receipt; fresh independent producer/kernel/root-free
       standing child checks all original numeric-cap seed rows, all16 steps/facets/finalstate
       and canonical EOF with exact U/V/offset/B, unchanged named mask/world and original compressed/content
       IDs. It returns full PASS_STALL with no closure/exclusion. A closure is a failed known-endpoint
       control; no oldU ledger or newtarget admission.
-    reason: Distinct preregistration after exp279 identified computational cap16 vs originalrecipe48.
-      Exact context, originalobjects, fixed mathematicalcriterion and all point/witness checks
-      unchanged. Newcenteredcapacity48 and parentdescriptor/receiptjoin reviewed before actualrun.
+    reason: Full independent centered PASS_STALL:544 seedrows,1024 updaterows,16steps and25134984
+      collisionfacets; hull48 and exact U/V/offset/B/T/full24world/object/H290all17endpoint
+      joins match. Fresh parent cap/root pass; child rootjoinfalse/parenttrue. Astra mathematical
+      and Sol metadata acceptance clear. Supervisor106.493889s rc0/cleanupcomplete, standing104.68s;
+      no exclusion/admission/globalclaim.
     needs_review: false
-  lease:
-    expires: '2026-10-07T12:50:31Z'
-    host: macOS arm64
+  effort:
+    timebox: Parent600s including child<=300s; TERM600/KILL610 and4GiB sampled per process
+    wall_seconds: 106.49
+    stopped_by: criterion
 ---
 # exp-280: Supported Centered Endpoint Hull Capacity
 
@@ -91,6 +109,19 @@ No independent standing event cap is implemented.
 Parent600s includes child<=300s, with frozen byte ceilings, external4GiB
 sampledRSS/TERM600/KILL610. No retry or later producer round is part of this
 registration.
+
+The supported-capacity control passed at clean source
+`90d6e4c944602d8c6af5d0938275fddb0d5baf96`:544 seed rows,1,024 updated rows,16 steps
+and25,134,984 collision facets were independently checked without sampling.
+The child returns PASS_STALL with no closure; its104.68s is included in the106.49s
+supervised parent wall time.
+The parent freshly joins the exact cap/root and inherits the accepted H290 full-root
+endpoint premise. No new endpoint leaf evaluation, exclusion, census admission or global
+proof follows.
+
+The retained receipt, launch and supervision record the original object identities and
+exact context. Both earlier refusals remain intact.
+Astra and Sol reviewed this outcome without repeating the mathematical target.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `efficiency-loop` (process) | 11 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 12 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
 
 ### Workflow summary
 
@@ -210,7 +210,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 43 | 1 |
-| `research-loop` | 37 | 4 | 137 | 9 |
+| `research-loop` | 37 | 4 | 138 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 207 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 210 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1161,7 +1161,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-288 | confirmed | proof | The frozen numeric cap bounds the endpoint side over the complete acce |  | 1 |  | 1s wall |
 | H-289 | confirmed | proof | The repaired producer completes the first16 contracting-owner round fr |  | 1 |  | 4.2m wall |
 | H-290 | confirmed | proof | The new H289 numeric-cap full17 checkpoint can be consumed with exact  |  | 1 |  | 2.7m wall |
-| H-291 | running | proof | The accepted numeric-cap full17 endpoint checkpoint passes a fresh ind |  | 1 |  |  |
+| H-291 | confirmed | proof | The accepted numeric-cap full17 endpoint checkpoint passes a fresh ind |  | 3 |  | 1.9m wall |
+| H-292 | blocked | proof | A finite exact conditional ownership recipe from the accepted H290 par |  | 1 |  | 1s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1293,7 +1294,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-255 | series-000 | 17 | Claude Session 182; the run operator's lane E queue ran the ten shards on a second clean run worktree in the slot left after the kernel lanes | H-273 | All 95 distance-2 orbits were searched and none placed, while every shard's control placed. Under the frozen criterion that is no placement in 95 searches, not a proof of infeasibility, so H-273 stays unresolved. The 0.00027 near miss on mask 3963647 is the orbit a later exact or longer search would take first. |
 | exp-260 | series-000 | 17 | GPT-6.1 Sol coordinator executes Astra's frozen mathematical contract, Session184. | H-277 | Forty-three targets have positive finite numerical minima; five all-infeasible targets lack exact Farkas witnesses. The frozen positive criterion is unavailable. Slider omission exposes a negative relaxed margin, so slider coverage remains essential. |
 
-### blocked (13)
+### blocked (16)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1310,8 +1311,11 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-160 | series-000 | 11 | Codex BC303 H-162 retained-receipt analyst | H-162 | The September 14 strategy reset paused this route with no exp-158 target receipt; no H-162 comparison or scientific verdict exists. |
 | exp-262 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Apex arithmetic passed, but the receipt encodes retained integer weights beyond the reader guard; fresh replay refuses. Repair the serialization and preregister a successor before retry. |
 | exp-265 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Technical startup refusal: coordinator appended unsupported --partial; CLI exited2 at argument parsing before sources,seed,endpoint checks or production. Original logs preserved; exp268 separately preregisters the corrected same-claim invocation. |
+| exp-278 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Actual source836e919e0 known-endpoint control refused after4.32483s supervised wall, returncode1/cleanupcomplete. Parent reports fresh standing child refused and retained no detailed child cause before private-directory cleanup. This is an operational interface failure, with no completed standing or mathematical verdict; preserve original and repair bounded diagnostics/source before a separately registered rerun. |
+| exp-279 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Actual distinct diagnostic replication refused after4.22587s supervised wall, rc1/cleanupcomplete. Retained child receipt gives step0 owned hull too large: independent standing limit16 conflicts with accepted H289 producer hull_limit48. No complete standing acceptance or mathematical conclusion; repair the computational capacity with unchanged exact ownership checks and register a new control. |
+| exp-281 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-292 | Actual frozen construction stopped incomplete after 1.11243s supervised wall, rc1/cleanup complete: conditional gate rational string ceiling. No gain polygons or fresh reconstruction were computed; no mathematical verdict. Preserve original 4096bit/input contract and inspect the admitted input-size interface before any separately registered correction. |
 
-### accepted (79)
+### accepted (80)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1394,6 +1398,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-275 | series-000 | 17 | Sol coordinator registers/freezes/supervises exact generation and fresh standalone checker; Session184. | H-288 | Generation/freshchecker sciencepayloads agree; fullrootmonotone+consumer sidejoins andallstrictgapguards pass, cap_certified/verification_passed true. Maximumconsumerexcess about4.49048365992313e-13 displayonly; exactrationalcomparisons retained. No producer/capture/global/oldobjectrelabel. |
 | exp-276 | series-000 | 17 | Sol coordinator registers/freezes exact source/input/argv/supervision and interprets Session184 readiness evidence. | H-289 | Registered input joins pass. New numeric-cap full17 seed completes16distinct non-6 updates; all17 endpoint poses retained at seed/every update (17productionchecks). Fresh maxround1 resume PASS_REPLAYED/16steps/1024rows/143498events/finalstate agrees; canonical seed/node and update/round records unchanged, no new production. Its fresh endpoint call covers all17 once; top checked_after17 is inherited production evidence. Producer175.86083s/fresh66.47918s. No closure, terminal, contraction or census claim; Sol independent metadata and source controls clear. |
 | exp-277 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-290 | Accepted fresh root/cap/H289 INPUT and phase/object joins; parent and clean producer-free child replay the same original full17 Frame,544 seed rows and16 distinct non-6 updates through EOF. All17 full-root endpoint poses retained and all49 exact intervals contain zero. Readiness passes; all four geometric predicates remain false, with no exclusion/census/capture-tree/global admission. Astra mathematical read and independent Sol metadata review clear. |
+| exp-280 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Full independent centered PASS_STALL:544 seedrows,1024 updaterows,16steps and25134984 collisionfacets; hull48 and exact U/V/offset/B/T/full24world/object/H290all17endpoint joins match. Fresh parent cap/root pass; child rootjoinfalse/parenttrue. Astra mathematical and Sol metadata acceptance clear. Supervisor106.493889s rc0/cleanupcomplete, standing104.68s; no exclusion/admission/globalclaim. |
 
 ### baseline (12)
 
@@ -1411,12 +1416,6 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-278 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Registered before first centered standing target intake. Accepted H290 joins and source-only wall semantics audit clear: H289 numeric seed already uses exact centered V walls while preserving outerU cells/header. Root freezes reviewed sources and expanded arguments before the actual child. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1465,7 +1464,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-207 rounds, 2512.1 agent-minutes, 5766.3 wall-minutes.
+210 rounds, 2512.1 agent-minutes, 5768.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

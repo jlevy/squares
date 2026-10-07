@@ -37,6 +37,7 @@ from devtools.census_n17_certified import (
     main,
 )
 from devtools.select_n17_sub_patterns import SCHEMA as SELECTOR_SCHEMA
+from sqpack import retained_json
 from sqpack.hosted_data import CONTRACT, HostedDataMissingError, fetch_command
 from sqpack.yamlio import load_yaml
 
@@ -575,9 +576,13 @@ def test_the_cli_names_the_fetch_command_when_objects_are_absent(
     flags = {"schema": SELECTOR_SCHEMA, "design": DESIGN, "flagged": []}
     receipt = write_json(tmp_path, "f.json", flags)
     command = ["--root", str(tmp_path), "--selector-receipt", receipt]
-    assert main([*command, "--ledger", "ledger.yaml"]) == 0
+    output = tmp_path / "saved-census.json"
+    assert main([*command, "--ledger", "ledger.yaml", "--output", str(output)]) == 0
     captured = capsys.readouterr()
     assert json.loads(captured.out)["certified"]["admitted"] == 1
+    saved = output.read_text(encoding="utf-8")
+    assert saved == captured.out == retained_json.dumps(json.loads(saved), sort_keys=True)
+    assert not saved.endswith("\n\n")
     assert fetch_command(tmp_path / MANIFEST) in captured.err
     assert main([*command, "--ledger", "missing.yaml"]) == 2
     assert "does not exist" in json.loads(capsys.readouterr().out)["refused"]

@@ -1726,7 +1726,7 @@ inclusion intervals, and require the pilot's computed cap to equal the fixed cer
 $U'$. The corrected upper-excess check also applies to the pilot's own side enclosure.
 Matching certificate names or overlapping side intervals alone is insufficient.
 
-The proposed H-290/exp-277 consumer takes that complete checkpoint's saved seed and
+The H-290/exp-277 consumer takes that complete checkpoint's saved seed and
 node. Its descriptor binds the H-288 cap/root certificate, both H-289 phase receipts,
 the exact label-to-owner assignment, actual sixteen-step order, cells, scale, D4 action
 and canonical object identities. It accepts only the stated full seventeen-owner,
@@ -1779,6 +1779,72 @@ checkpoint's measured readiness. A ceiling, incomplete stream or incomplete repl
 leaves the consumer incomplete. A root, frame, identity, pose-retention or exact-check
 disagreement refuses it. Neither outcome is evidence against optimality.
 
+### The actual numeric checkpoint remains broad
+
+The [exp-277 summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/summary.json)
+records accepted readiness in 163.293 seconds inside 164.506 seconds of supervision.
+Its fresh producer-free replay took 63.157 seconds. All 49 intervals contain zero,
+all seventeen full-root endpoint poses survive, and square 6 satisfies S2. All four
+terminal predicates are false.
+
+Every one of the 29 position enclosures fails both the local $1/5000$ and widened
+$1/100$ bounds. Every one of the sixteen half-angle enclosures fails both the local
+$1/10000$ and widened $1/200$ bounds. The largest position magnitude is approximately
+$0.929765046802$; the largest half-angle magnitude is exactly $27/64$. The effective
+$a$ interval reaches approximately $0.789765046802$, exceeding $1/4$;
+$b\in[-0.515202180574,0.367955673984]$ and
+$z\in[-0.934727446175,0.218278290614]$ both exceed their direct domains. These
+displayed decimals summarize the exact stored intervals. The direct $v_9$ enclosure,
+approximately $[-0.470585863452,0.505033753350]$, also fails the coarse-floor premise.
+The coarse floor therefore cannot be applied to clip $b$.
+
+Each active label has exactly 64 live chart rows, with intervals
+$[k/64,(k+1)/64]$ for $k=0,\ldots,63$. Hence each owner's represented orientation
+projection remains the entire closed chart $[0,1]$. All 1,024 angle pieces are live;
+narrow individual rows have not removed any orientation from this relaxation.
+These facts concern the retained row products, not the simultaneous feasible packing
+set. Comparing them with the earlier one-update, larger-cap exp-272 does not isolate
+the effect of changing the cap or the number of updates.
+
+### A necessary angular span bound
+
+A live row $[l,h]\subseteq[0,1]$ represents the product of its retained centre
+polygons with that full chart interval. Its physical orientation span is
+
+$$
+2\arctan\frac{h-l}{1+lh}.
+$$
+
+If this entire product lies inside a relative half-angle bound $|q|\le Q$, where
+$Q\in\{1/10000,1/200\}$, its connected orientation interval must fit within one
+quarter-turn lift of the allowed arc. Different lifts are separated by a nonempty
+gap. The allowed arc has width $4\arctan Q$, so a necessary condition is
+
+$$
+\frac{h-l}{1+lh}\le\frac{2Q}{1-Q^2}.
+$$
+
+For the actual uniform rows, the left side is
+$64/(4096+k(k+1))$. Its minimum is $1/127$, which exceeds the local threshold
+$20000/99999999$. All 1,024 live rows therefore fail this necessary local span test.
+For the widened threshold $400/39999$, precisely $k=0,\ldots,47$ fail: 48 rows per
+active owner, or 768 rows in total. Passing the necessary span test on the other
+rows does not establish a widened angle bound. A direct example is label 1's first
+row, whose recorded $q$ interval is $[0,1/64]$.
+
+These are exact hand deductions from the accepted row roster. They have not received
+independent mathematical review or a machine-checked span certificate. They establish
+noncontainment of the row-product relaxation in the terminal region. The physical
+feasible subset could be much smaller: an additional checked use of containment or
+non-overlap could remove the offending pose pairs without refining the rows. The
+deductions prove neither a packing counterexample nor the cause of a producer stall.
+
+The same distinction applies to positions. If two retained vertices in one live row
+have a required coordinate difference greater than $2\rho$, that row product cannot
+fit in a radius-$\rho$ coordinate tube. The common root and container translation
+cancel in this difference. Cartesian differences are rational; rotated covectors
+require an accepted-root bound. No position-span target has been evaluated here.
+
 ## Why the Signed Cones Do Not Cover an Endpoint Product Domain
 
 An endpoint-preserving leaf's coordinate enclosures contain zero. In particular, its
@@ -1814,6 +1880,238 @@ coverage, guard propagation and leaf custody would need a new checked interface.
 The present consumer accepts no such tree. This coverage argument is a hand derivation
 by the sole Astra agent; it has not received independent mathematical review or a
 machine-checked coverage proof.
+
+## A Conditional Owned-Hull Gate
+
+The next proposed stronger implication conditions the corner-SW square, analytic
+label 1 and owner 0, on one closed angular slice
+
+$$
+I=[13/32,27/64].
+$$
+
+This is the accepted checkpoint's row 26, near a physical angle of $45$ degrees.
+Points proved to lie strictly inside that square for every remaining pose in $I$
+become obstacles for all other squares under the same condition. A later complete
+conditional contradiction could therefore remove the entire slice. A narrower row
+by itself supplies no such contradiction. H-292/exp-281 is reserved for the finite
+gate below; production is a separate prospective step requiring registration.
+
+### The accepted parent premise
+
+Use the accepted H-290 receipt and its exact canonical seed and node identities.
+Its sequential replay invokes `admit_final_state`, which compares every final group,
+row reference, interval, outer domain and residual polygon with the checked
+induction. It also binds the final world, mask, scale, source and unguarded context.
+Thus the saved final state under that same canonical node identity is a valid input
+domain for a new finite implication.
+
+Construction and fresh checking must independently stream the saved node through
+canonical EOF, verify the seed identity and source reference, and bind the accepted
+receipt bytes and full numeric context. They may extract the final state without
+replaying the parent's geometry. State this assurance explicitly:
+`parent_geometry_replayed=false`. The finite checker must import neither the producer
+nor the hull kernel. The accepted parent is a proof premise, not a newly verified
+parent in this experiment.
+
+### A finite strict-ownership polygon
+
+Use three closed angle domains: the target $I$, the all-angle control $A=[0,1]$, and
+the endpoint control $Z=[0,1/64]$. Fix $\epsilon=2^{-20}$ and write
+$c(t)=(1-t^2)/(1+t^2)$, $s(t)=2t/(1+t^2)$. For each accepted owner-0
+row $J$ intersecting the chosen domain, write the closed intersection as $[l,h]$.
+Include singleton intersections at boundaries. Begin with the convex hull of all
+that row's retained residual vertices. Clip it by the exact necessary centred-wall
+box for the restricted interval:
+
+$$
+[o+h_{\min},U-o-h_{\min}]^2,\qquad
+o=(U-U')/2,\qquad
+h_{\min}=\tfrac12\min\{c(l)+s(l),c(h)+s(h)\}.
+$$
+
+Call the resulting polygon $P$. This additional intersection follows from the
+existing containment premise. It removes centre alternatives from boundary rows
+that were legal only at angles outside the guard. Apply this intersection to the
+all-angle control too: the accepted coverage statement permits over-cover and does
+not by itself require every published residual vertex to satisfy the row's walls.
+Any gain from this unconditional tightening belongs to the all-angle control.
+Empty clipped polygons impose no constraint.
+
+For each vertex $x=(x_x,x_y)$ of $P$, every corner $(c,s)$ of
+$[c(h),c(l)]\times[s(l),s(h)]$, and each $\eta\in\{-1,1\}$, impose
+
+$$
+\begin{aligned}
+\eta c p_x+\eta s p_y
+&\le 1/2-\epsilon+\eta(c x_x+s x_y),\\
+-\eta s p_x+\eta c p_y
+&\le 1/2-\epsilon+\eta(c x_y-s x_x).
+\end{aligned}
+$$
+
+Intersect these rational closed halfplanes with $[0,U]^2$ to obtain $K_D$, for
+$D\in\{A,I,Z\}$. A singleton chart intersection uses its exact sine and cosine.
+The interval rectangle contains every axis vector on the chart intersection;
+affinity in the centre and in each trigonometric coefficient makes the finite
+corner checks sufficient. Hence every point of $K_D$ lies strictly inside square 1
+for every represented parent pose satisfying that guard. Taking the convex hull of
+old owned points and any points of $K_D$ preserves this conditional ownership.
+No contact choice or pair-separation feature is assumed.
+
+For each nonempty polygon, select a maximizing vertex in the fixed directions
+E, NE, N, NW, W, SW, S, SE, with lexicographically smallest $(x,y)$ breaking ties.
+Deduplicate in that order, retaining at most eight points. Let $S_D$ be their convex
+hull and let $H_0$ be the parent's owner-0 owned hull.
+
+For a nonempty baseline $H$, a selected hull $K$ has a declared gain when
+
+$$
+\max_{n\in\{(1,0),(0,1),(-1,0),(0,-1)\}}
+\bigl(h_K(n)-h_H(n)\bigr)\ge1/1024.
+$$
+
+If the baseline is empty, require $\operatorname{area}(K)\ge2^{-20}$ instead.
+An empty candidate has no gain. Compare $S_A$ with $H_0$ to detect unconditional
+owned-hull information lost by the current extraction. Compare $S_I$ with
+$\operatorname{conv}(H_0\cup S_A)$ to identify information added by conditioning.
+These are declared prioritization thresholds, not necessary conditions for a useful
+geometric implication.
+
+The endpoint control requires nonempty $S_Z$. Every selected point must be strictly
+inside the full-root endpoint square-1 centre box, using chart zero and exact
+coordinate inequalities. The accepted H-290 input roster supplies this endpoint
+box; its equivalent chart-one representation is not a second pose to discard.
+An empty endpoint-control hull is inconclusive, and a failed strict containment
+check refuses the gate.
+
+After that control passes, an unconditional gain takes priority and yields an
+`unconditional_refresh_candidate`; it does not launch guarded production. Otherwise,
+a guard-specific gain yields a `conditional_gain_candidate`. If neither reaches the
+declared threshold, record `no_gain_under_frozen_recipe`. Fresh checking reconstructs
+all three polygons and all support comparisons. Verifying only proposed points would
+not establish the control comparison or a no-gain result.
+
+Here “unconditional” means across the accepted parent domain, without an additional
+angle guard. Those owned points still depend on the parent's contracted row cover.
+They cannot be inserted into a fresh wall seed as though the implication held for
+every placement in the original cells. Any continuation retains the accepted parent
+certificate and the finite owned-point join.
+
+Construction and independent finite replay each have a proposed 60-second ceiling,
+including their own bounded extraction, for 120 seconds combined. The accepted
+receipt and seed are limited to 10 MiB; the node to 512 MiB compressed and 2 GiB
+decoded; the extracted final state to 64 MiB. Require complete canonical EOF without
+loading the entire node as one JSON object. Each intermediate or final $K_D$ has at
+most 128 vertices, and every admitted or computed rational numerator and denominator
+has at most 4,096 bits. A resource stop is incomplete, with no gain verdict. Preserve
+a sampled 4 GiB memory ceiling and original-object identity across reads.
+
+### What a later conditional continuation would prove
+
+A positive gate permits consideration of one separately registered conditional
+continuation. Freshly establish the accepted parent, the closed guard, and the extra
+owned-point implication before producing any child step. Keep all original rows
+initially. A proposed first round updates the other fifteen contracting owners in
+their existing order and owner 0 last; square 6 remains coarse. This lets the other
+owners use the new points before owner-0 compression. It does not enlarge the
+64-live-row or 48-point hull policies.
+
+Adding eight points to a 48-vertex hull need not preserve the latter limit. The
+initializer must check the augmented hull's size, or use a separately declared exact
+inner selection. For example, retaining the old hull's eight fixed-direction support
+vertices and all eight new points gives at most sixteen points, each already proved
+owned. Dropping other old vertices weakens the recorded obstacles but does not
+invalidate the accepted parent row cover. Record that loss explicitly. The new
+rational points also carry no grid-membership promise; any later grid compression
+must establish its usual exact convex-combination witnesses.
+
+The inductive invariant concerns every physical parent packing satisfying the guard:
+each square's pose remains in its retained row cover, and each retained owned point
+lies strictly inside that square. The accepted parent and the finite ownership lemma
+establish this invariant after augmenting owner 0's hull. Existing exact step cover
+and ownership implications preserve it. Rows covering angles outside $I$ are harmless
+over-cover; a first continuation can retain their complete $[0,1]$ partitions rather
+than introduce a new angular partition algorithm. Its conditional initialization must
+still be checked explicitly. Current generic-root admission rejects ancestry and guards,
+so the augmented state cannot be presented as a new generic wall seed.
+
+The useful acceptance boundary is a completely checked contradiction for every
+parent configuration satisfying $\tau_1\in I$. Such a result removes a whole closed
+chart interval of width $1/64$. A valid nonclosed result remains unresolved even if
+some polygons shrink. The parent-plus-guard receipt needs an explicit conditional
+schema; it must never enter an unconditional exclusion ledger or claim that the
+remaining angles are covered. Full conditional replay costs and limits must be
+registered separately after the finite gate and centered-control measurements.
+
+Before that gate supplies evidence, do not spend on blanket row doubling, further
+cones, a full annulus tiling, broad LP sweeps or long unchanged iteration. If the
+all-angle control already yields a substantial gain, prefer the unconditional
+extraction correction because its implication applies across the entire parent
+domain. If all three kernels are empty or too small, this particular construction
+has not supplied the proposed improvement; it has not refuted conditional branching
+or optimality. The hand implications in this section remain the sole Astra agent's
+derivations, pending independent mathematical review and the stated finite checks.
+
+### Two bounded alternatives after a no-gain result
+
+The rectangle used above is a sufficient enclosure of an angular arc. Its corners
+need not be unit vectors, so it can reject a point that every actual square contains.
+Consequently, an empty $K_I$ would not prove that the exact common-owned set is empty.
+A later finite checker can remove this particular conservatism for supplied rational
+points without trigonometric approximation or a numerical optimization verdict.
+
+For a proposed point $p$, a vertex $x$ of the same clipped centre polygon, and
+$\Delta=p-x$, put $a=1/2-\epsilon$. For each $\eta\in\{-1,1\}$ the two exact
+ownership inequalities, after multiplication by the positive denominator $1+t^2$,
+are
+
+$$
+\begin{aligned}
+(-\eta\Delta_x-a)t^2+2\eta\Delta_y t+(\eta\Delta_x-a)&\le0,\\
+(-\eta\Delta_y-a)t^2-2\eta\Delta_x t+(\eta\Delta_y-a)&\le0.
+\end{aligned}
+$$
+
+For a rational quadratic $f(t)=At^2+Bt+C$ on the closed rational interval $[l,h]$,
+check both endpoints. If $A<0$ and $t_*=-B/(2A)$ lies inside that interval, check
+$f(t_*)$ too. These finitely many exact rational comparisons are equivalent to
+$f\le0$ throughout the interval. Affinity in $x$ then extends the result from all
+centre vertices to their convex hull. The fixed positive $\epsilon$ supplies strict
+interior ownership for the actual unit axes.
+
+One possible proposal source is an outer polygon obtained from the true rational
+axes at the endpoints and midpoint of each row intersection. Its proposed vertices
+would still need every quadratic check above. A failed proposed point proves nothing
+about other points, and failure of a bounded proposal search is not an emptiness
+certificate. No such proposal or exact-arc target has been evaluated; this is a
+prospective successor only if the registered rectangle gate does not supply useful
+information.
+
+A different source of weakness is taking a common-owned intersection over a broad
+centre domain. It can be addressed by a complete position case cover while keeping
+the same angular guard. Freeze two rational cuts $\alpha,\beta$ before a future
+target, and define four closed cases
+
+$$
+D_{\sigma,\tau}=\{x:\sigma(x_x-\alpha)\ge0,\;
+\tau(x_y-\beta)\ge0\},\qquad (\sigma,\tau)\in\{-1,1\}^2.
+$$
+
+Their union is the whole centre plane. In each row use
+$P\cap D_{\sigma,\tau}$ in the owned-point proof. Every physical parent pose with
+angle in $I$ belongs to at least one of these four cases, including poses on a cut.
+Thus complete checked contradictions for all four cases would exclude the original
+closed angle slice. A contradiction or a useful owned hull in only one case says
+nothing about the unresolved cases. Shared boundaries must occur in every relevant
+child; they cannot be discarded by assigning a numerical sample to one side.
+
+This alternative requires a checked parent-plus-angle-plus-position guard interface
+and four complete child obligations. It changes neither H-292's frozen experiment
+nor the current unconditional ledger. The first gate's measured result should decide
+whether tighter angular arithmetic or position conditioning is worth a separately
+registered implementation. Both implications above are sole-agent hand derivations,
+without independent mathematical review or target measurements.
 
 ## A Future Label-Bijection Extension
 

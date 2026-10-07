@@ -466,15 +466,15 @@ def test_explicit_unknown_owners_keep_unknown_costs_and_recorded_weights_take_pr
 ):
     names = tuple(suite_files.UNKNOWN_FOUR_SHARD_OWNERS)
     unknown = RecordedCosts(shards=4, seconds={})
-    assert [suite_files.shard_of(name, unknown) for name in names] == [3, 1, 3, 1, 3]
+    assert [suite_files.shard_of(name, unknown) for name in names] == [3, 1, 3, 1, 3, 2]
     assert suite_files.shard_totals(unknown) == [0, 0, 0, 0]
-    assert sum(row[1] for row in suite_files.unrecorded_by_shard(unknown, names)) == 5
-    assert sum(row[0] for row in suite_files.unrecorded_by_shard(unknown, names)) == 5
+    assert sum(row[1] for row in suite_files.unrecorded_by_shard(unknown, names)) == 6
+    assert sum(row[0] for row in suite_files.unrecorded_by_shard(unknown, names)) == 6
     # A hosted cost, once recorded, owns the assignment instead of the unknown overlay.
     recorded = RecordedCosts(shards=4, seconds={names[0]: 1.0})
     assert suite_files.shard_of(names[0], recorded) == suite_files.pack(recorded)[names[0]]
     assert suite_files.shard_of(names[0], recorded) == 1
-    assert sum(row[1] for row in suite_files.unrecorded_by_shard(recorded, names)) == 4
+    assert sum(row[1] for row in suite_files.unrecorded_by_shard(recorded, names)) == 5
     # Other shard topologies retain their existing hash assignment and all coverage.
     for count in (2, 3, 5):
         for name in names:
