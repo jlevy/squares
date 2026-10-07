@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import copy
+import gzip
 import json
+import subprocess
+import time
 from dataclasses import replace
 from fractions import Fraction as Q
 from pathlib import Path
@@ -421,3 +424,331 @@ def test_validated_loader_binds_sources_and_requires_fresh_replay(
         with pytest.raises(ValueError, match=r"custody|fresh replay"):
             consumer.load_leaf(document, deadline=1, max_nodes=10)
         assert calls == ([] if mutation == "receipt" else ["seed", "node"])
+
+
+@pytest.mark.parametrize("scale", [Q(1), Q(3, 2)])
+def test_none_and_numeric_u_have_identical_affine_and_seed_walls(scale: Q) -> None:
+    frame = fixture(scale=scale).frame
+    seed = {"cells": {"0": [{"interval": ["0", "1/3"]}, {"interval": ["1/3", "1"]}]}}
+    checked = consumer.wall_normalization(frame, seed)
+    assert checked["original_capture_cap"] is None
+    assert checked["normalized_inner_cap"] == "10"
+    assert checked["seed_wall_rows_checked"] == 2
+    assert checked["affine_formula"] == "offset=0; field bounds=(B*h, B*(U-h))"
+    with pytest.raises(exact.AuditError, match="original cap None"):
+        consumer.wall_normalization(replace(frame, capture_cap=KernelQ(9)), seed)
+
+
+def test_direct_v9_keeps_thin_polygon_correlation() -> None:
+    leaf = fixture()
+    rows = cast(dict[int, list[dict[str, Any]]], copy.deepcopy(dict(leaf.rows)))
+    # Along u=(4/5,3/5), v=(-3/5,4/5) the direct projection is exactly zero.
+    centre = [Q(value) for value in rows[8][0]["residual_polygons"][0][0]]
+    rows[8][0]["residual_polygons"] = [
+        [
+            [str(centre[0] + sign * Q(2, 25)), str(centre[1] + sign * Q(3, 50))]
+            for sign in (-1, 1)
+        ]
+    ]
+    axes = dict(leaf.layout.axes)
+    axes["u"] = exact.point(Q(4, 5)), exact.point(Q(3, 5))
+    axes["v"] = exact.point(Q(-3, 5)), exact.point(Q(4, 5))
+    report = consumer.bounds(replace(leaf, rows=rows, layout=replace(leaf.layout, axes=axes)))
+    assert report["intervals"]["v9"] == ["0", "0"]
+    loose = exact.dot(
+        axes["v"],
+        (
+            exact.read_interval(report["intervals"]["xi9"]),
+            exact.read_interval(report["intervals"]["eta9"]),
+        ),
+    )
+    assert loose == (Q(-12, 125), Q(12, 125))
+    assert "v9" not in consumer.apex.position_names()
+
+
+@pytest.mark.parametrize("failure", ["truncated", "oversize", "deadline"])
+def test_saved_gzip_input_is_bounded_and_resource_status_is_explicit(
+    tmp_path: Path,
+    failure: str,
+) -> None:
+    path = tmp_path / "input.json.gz"
+    raw = gzip.compress(b"0123456789")
+    path.write_bytes(raw[:-6] if failure == "truncated" else raw)
+    if failure == "deadline":
+        with pytest.raises(consumer.IncompleteError, match="wall ceiling"):
+            consumer.bounded_gzip(path, 10, deadline=0)
+    elif failure == "oversize":
+        with pytest.raises(exact.AuditError, match="decoded byte ceiling"):
+            consumer.bounded_gzip(path, 9, deadline=time.monotonic() + 10)
+    else:
+        with pytest.raises(EOFError):
+            consumer.bounded_gzip(path, 10, deadline=time.monotonic() + 10)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "accepted",
+        "seed_id",
+        "node_id",
+        "guard",
+        "sampled",
+        "incomplete",
+        "closed",
+        "frame",
+        "mask",
+        "step_count",
+        "stale_receipt",
+        "changed_file",
+        "trailing_data",
+        "root",
+        "remaining_time",
+        "expired_before_launch",
+    ],
+)
+def test_saved_prefix_binds_eof_fresh_receipt_and_frozen_objects(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    mutation: str,
+) -> None:
+    frame = fixture().frame
+    seed = {"bins": 2, "cells": {"0": [{"interval": ["0", "1"]}]}}
+    packet = {
+        "parent": None,
+        "guard_source": None,
+        "constraints": [],
+        "steps": [{"index": 0, "owner": 0, "complete": True}],
+        "terminal": False,
+    }
+    if mutation == "guard":
+        packet["guard_source"] = "unsupported"
+    seed_id = consumer.producer.content_sha256(seed)
+    node_id = consumer.producer.content_sha256(packet)
+    directory = tmp_path / "objects"
+    directory.mkdir()
+    seed_path, node_path = (
+        directory / "seed-any-name.json.gz",
+        directory / "node-any-name.json.gz",
+    )
+    seed_path.write_bytes(gzip.compress(json.dumps(seed).encode()))
+    raw = json.dumps(packet, sort_keys=True).encode()
+    node_path.write_bytes(gzip.compress(raw + (b"{}" if mutation == "trailing_data" else b"")))
+    source = {
+        "status": "PASS_ENDPOINT_PREFIX",
+        "control_passed": True,
+        "inputs": {"root": {"synthetic": True}},
+        "seed_sha256": seed_id,
+        "node_sha256": node_id,
+        "complete_owner_updates": 1,
+        "closure": None,
+    }
+    source_path = tmp_path / "producer.json"
+    source_path.write_text(json.dumps(source))
+    monkeypatch.setattr(
+        consumer,
+        "retained_path",
+        lambda value: directory if value == "objects" else source_path,
+    )
+    monkeypatch.setattr(
+        consumer.node, "admit_seed", lambda *_args, **_kwargs: consumer.node.Seed({}, {})
+    )
+
+    def replay(_frame: Frame, value: dict[str, Any], _seed: Any, **kwargs: Any) -> Any:
+        steps = list(value["steps"])
+        if mutation in {"remaining_time", "expired_before_launch"}:
+            deadline = kwargs["budget"].deadline
+            remaining = 0.25 if mutation == "remaining_time" else 0
+            monkeypatch.setattr(consumer.time, "monotonic", lambda: deadline - remaining)
+        return consumer.sequential.SequentialTrace(rows=cast(Any, fixture().rows), steps=steps)
+
+    monkeypatch.setattr(consumer.sequential, "replay_sequential", replay)
+    fresh = {
+        "status": "PASS_SAVED_STALL",
+        "closure": None,
+        "producer_imported": False,
+        "steps_checked": 1,
+        "seed_sha256": seed_id,
+        "node_sha256": node_id,
+        "frame": frame.name,
+        "mask": list(range(17)),
+        "cells": list(frame.cell_names),
+        "bins": 2,
+        "cover_backend": "indexed",
+    }
+    if mutation in {"sampled", "incomplete", "closed"}:
+        fresh["status"] = {
+            "sampled": "PASS_SAMPLE",
+            "incomplete": "INCOMPLETE",
+            "closed": "PASS_SAVED_CLOSED",
+        }[mutation]
+    elif mutation == "frame":
+        fresh["frame"] = "different"
+    elif mutation == "mask":
+        fresh["mask"] = [0]
+    elif mutation == "step_count":
+        fresh["steps_checked"] = 2
+    elif mutation == "stale_receipt":
+        fresh["node_sha256"] = "stale"
+
+    def fresh_replay(_directory: Path, _seconds: float) -> dict[str, Any]:
+        if mutation == "expired_before_launch":
+            pytest.fail("expired parent must not launch fresh replay")
+        if mutation == "remaining_time":
+            assert _seconds == 0.25
+        if mutation == "changed_file":
+            node_path.write_bytes(gzip.compress(raw, mtime=42))
+        return {"command": ["synthetic-clean-interpreter"], "exit_code": 0, "receipt": fresh}
+
+    monkeypatch.setattr(consumer, "fresh_saved_replay", fresh_replay)
+    document = {
+        "action": "r0",
+        "expected_steps": 1,
+        "root": {"synthetic": True},
+        "state": list(range(17)),
+        "saved_objects": "objects",
+        "producer_receipt": "producer",
+        "seed_sha256": "wrong" if mutation == "seed_id" else seed_id,
+        "node_sha256": "wrong" if mutation == "node_id" else node_id,
+    }
+    if mutation == "root":
+        document["root"] = {"synthetic": False}
+    if mutation in {"accepted", "remaining_time"}:
+        rows, custody = consumer.load_saved_prefix(
+            document, frame, deadline=time.monotonic() + 10, max_nodes=100, replay_seconds=1
+        )
+        assert set(rows) == set(range(17))
+        assert custody["node_sha256"] == node_id
+        assert custody["fresh_full_replay"]["receipt"]["producer_imported"] is False
+    elif mutation == "expired_before_launch":
+        with pytest.raises(consumer.IncompleteError, match="parent leaf ceiling"):
+            consumer.load_saved_prefix(
+                document, frame, deadline=time.monotonic() + 10, max_nodes=100, replay_seconds=1
+            )
+    else:
+        with pytest.raises(ValueError, match=r"saved|fresh|data follows"):
+            consumer.load_saved_prefix(
+                document, frame, deadline=time.monotonic() + 10, max_nodes=100, replay_seconds=1
+            )
+
+
+@pytest.mark.parametrize("timeout", [False, True])
+def test_fresh_replay_uses_clean_interpreter_and_no_producer_updates(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    timeout: bool,  # noqa: FBT001
+) -> None:
+    def execute(command: list[str], **kwargs: Any) -> subprocess.CompletedProcess[bytes]:
+        assert command[:3] == [consumer.sys.executable, "-m", "devtools.check_n17_subpattern"]
+        assert "--check-saved" in command
+        assert "--cover" in command
+        assert kwargs["timeout"] == 1
+        if timeout:
+            raise subprocess.TimeoutExpired(command, 1)
+        kwargs["stdout"].write(b'{"status":"PASS_SAVED_STALL"}')
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(consumer.subprocess, "run", execute)
+    if timeout:
+        with pytest.raises(consumer.IncompleteError, match="fresh saved replay wall"):
+            consumer.fresh_saved_replay(tmp_path, 1)
+    else:
+        assert (
+            consumer.fresh_saved_replay(tmp_path, 1)["receipt"]["status"] == "PASS_SAVED_STALL"
+        )
+
+
+@pytest.mark.parametrize("mutation", ["accepted", "label", "pose", "root"])
+def test_saved_endpoint_join_uses_all17_boxes_not_midpoints(
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    leaf = fixture()
+    rows = cast(dict[int, list[dict[str, Any]]], copy.deepcopy(dict(leaf.rows)))
+    poses = []
+    for label, owner in leaf.roles.items():
+        x, y = map(Q, rows[owner][0]["residual_polygons"][0][0])
+        epsilon = Q(1, 10000)
+        rows[owner][0]["residual_polygons"] = [
+            [
+                [str(xx), str(yy)]
+                for xx, yy in (
+                    (x - epsilon, y - epsilon),
+                    (x + epsilon, y - epsilon),
+                    (x + epsilon, y + epsilon),
+                    (x - epsilon, y + epsilon),
+                )
+            ]
+        ]
+        poses.append(
+            consumer.prefix.EndpointPose(
+                label,
+                owner,
+                (
+                    consumer.Box(x - epsilon, x + epsilon),
+                    consumer.Box(y - epsilon, y + epsilon),
+                ),
+                ((KernelQ(0), KernelQ(0)),),
+            )
+        )
+    if mutation == "pose":
+        midpoint = (poses[-1].centre[0].lo + poses[-1].centre[0].hi) / 2
+        poses[-1] = replace(
+            poses[-1],
+            centre=(
+                consumer.Box(midpoint - Q(1, 100), midpoint + Q(1, 100)),
+                poses[-1].centre[1],
+            ),
+        )
+    roles = dict(leaf.roles)
+    if mutation == "label":
+        roles[1], roles[2] = roles[2], roles[1]
+    monkeypatch.setattr(
+        consumer.prefix,
+        "load_endpoint",
+        lambda: (
+            leaf.frame,
+            tuple(poses),
+            {"root": {"synthetic": True}},
+        ),
+    )
+    root = {"synthetic": mutation != "root"}
+    if mutation == "accepted":
+        checked = consumer.saved_endpoint_retention(
+            leaf.frame, roles, leaf.expected_roles, root, rows
+        )
+        assert checked["held"] is True
+        assert len(checked["owners"]) == 17
+    else:
+        with pytest.raises(ValueError, match="endpoint"):
+            consumer.saved_endpoint_retention(
+                leaf.frame, roles, leaf.expected_roles, root, rows
+            )
+
+
+@pytest.mark.parametrize("contains_zero", [False, True])
+def test_saved_cli_retains_readiness_and_zero_interval_join_without_global_claim(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    contains_zero: bool,  # noqa: FBT001
+) -> None:
+    leaf = fixture()
+    custody = {**leaf.custody, "saved_objects": "synthetic/objects"}
+    if not contains_zero:
+        centres = dict(leaf.layout.centres)
+        centres[1] = exact.add(centres[1][0], exact.point(Q(1, 100))), centres[1][1]
+        leaf = replace(leaf, layout=replace(leaf.layout, centres=centres))
+    leaf = replace(leaf, custody=custody)
+    monkeypatch.setattr(consumer, "load_leaf", lambda _document, **_kwargs: leaf)
+    descriptor, output = tmp_path / "leaf.json", tmp_path / "receipt.json"
+    descriptor.write_text("{}")
+    assert consumer.main(["--leaf", str(descriptor), "--output", str(output)]) == (
+        0 if contains_zero else 1
+    )
+    report = exact.decode(output.read_bytes())
+    assert report["global_admission_proved"] is False
+    assert report["capture_tree_proved"] is False
+    if contains_zero:
+        assert report["intervals"]["v9"] == ["0", "0"]
+        assert report["status"] == "local_terminal"
+    else:
+        assert report["status"] == "refused"

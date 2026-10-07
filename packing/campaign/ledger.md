@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `efficiency-loop` (efficiency) | 7 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 8 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
 
 ### Workflow summary
 
@@ -210,7 +210,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 42 | 1 |
-| `research-loop` | 37 | 4 | 134 | 9 |
+| `research-loop` | 37 | 4 | 135 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 200 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 201 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1155,7 +1155,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-282 | confirmed | proof | At cap1169/250 the repaired current producer preserves every exact-roo |  | 2 |  | 8.7m wall |
 | H-283 | confirmed | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  | 7s wall |
 | H-284 | confirmed | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  | 1.5m wall |
-| H-285 | running | proof | A freshly checked accepted-root guard and independent coarse-domain ra |  | 1 |  |  |
+| H-285 | confirmed | proof | A freshly checked accepted-root guard and independent coarse-domain ra |  | 1 |  | 1s wall |
+| H-286 | running | proof | The current saved full17 endpoint prefix can be consumed with bounded  |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1305,7 +1306,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-262 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Apex arithmetic passed, but the receipt encodes retained integer weights beyond the reader guard; fresh replay refuses. Repair the serialization and preregister a successor before retry. |
 | exp-265 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Technical startup refusal: coordinator appended unsupported --partial; CLI exited2 at argument parsing before sources,seed,endpoint checks or production. Original logs preserved; exp268 separately preregisters the corrected same-claim invocation. |
 
-### accepted (72)
+### accepted (73)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1380,6 +1381,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-267 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract in Session 184. | H-283 | One conditional negative-angle cone times six free angle coordinates is certified; endpoint retained. Uniform perturbation implication remains sole-Astra hand proof; no complete annulus or global admission. |
 | exp-268 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Accepted first-round producer readiness and cost only. Independent Sol custody/determination review clear. Original exp265 parser failure remains preserved; no15-round discriminator or n17 capture conclusion. |
 | exp-269 | series-000 | 17 | Sol coordinator executes the sole-Astra mathematical contract in Session184; root owns registration and results. | H-284 | Both frozen exact invocations pass the originalcriterion. One positive16 conditionalcone times6freeangles; analyticimplication sole-Astra handreview, nofullannulus/globalcapture. |
+| exp-270 | series-000 | 17 | Sol coordinator executes the sole-Astra mathematical contract in Session184; root owns registration and results. | H-285 | Frozen finitecriteria and freshCLI replay pass on independent coarse domain. Physical9/11 non-overlap and actualleaf thinv9/angular/coarseposition premises remain required; analyticimplication sole-Astrahandreview; zero globaladmission. |
 | exp-271 | series-000 | 17 | Sol coordinator executes sole-Astra900-second admission contract; root alone mutates ledger/counts. | H-282 | Separately registered fullstanding replay passes on unchanged exp266 certificate. Ordinarymanifest/ledger/census admission is the separate next join; no smaller-arity projection or success-rate claim. |
 
 ### baseline (12)
@@ -1403,7 +1405,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-270 | series-000 | 17 | Sol coordinator executes the sole-Astra mathematical contract in Session184; root owns registration and results. | H-285 | Registered before real rootguard evaluation after sole-Astra mathematical source review and independent Sol mechanical review26controls1.65s; source frozen by registration commit. |
+| exp-272 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-286 | Registered before actualleaf bounds after sole-Astra mathematical review and independentSol61targetfreecontrols including remainingparenttime/no-child-after-expiry fixes. Exactsource/descriptor frozen by registration commit. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1452,7 +1454,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-200 rounds, 2512.1 agent-minutes, 5749.8 wall-minutes.
+201 rounds, 2512.1 agent-minutes, 5749.8 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

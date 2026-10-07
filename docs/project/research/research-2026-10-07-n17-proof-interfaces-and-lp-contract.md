@@ -13,8 +13,9 @@ establish a widened terminal theorem.
 
 This is the mathematical contract for BC-431 and BC-433 under the
 [ten-hour plan](../specs/active/plan-2026-10-06-n17-ten-hour-session.md), derived from
-source at `f3a13e3a2`. The coordinator owns hypothesis and experiment registration.
-No new target measurement or verdict is recorded here.
+the initial source at `f3a13e3a2` and extended by the derivations and linked receipts
+below. The coordinator owns hypothesis and experiment registration.
+Outcome summaries refer to those registered experiments and preserve their stated scope.
 The centred-container join and the finite-geometry arguments below are hand derivations
 by the session’s sole Astra agent; they have not received independent mathematical
 review or been machine-checked.
@@ -37,7 +38,7 @@ The following obligations state how those parts can be used in one proof.
 | Container normalization | A putative packing in side $s\le S^*$ is translated into $C(s)\subset C(S^*)\subset C(U)$. Preserve this placement thereafter. | The centred-container lemma below; inclusion is exact for ordered side lengths. | Independent review of this hand join; consumers must use the same walls and cell coordinates. |
 | Closed-cell assignment | Every centre is in the closed cover. Choose one containing cell per square. Capacity one makes the chosen cells distinct, giving a 17-cell mask. Boundary membership may allow several masks. | exp-247 and `check_n17_capacity_one_cover`; the census must retain all geometrically allowed assignment masks. | A deterministic choice is safe only with a proof that its transported assignments remain represented. Discarding seam cases because they are non-generic is invalid. |
 | D4 and labels | Apply a symmetry about $m$ to the packing, its chosen cell assignment and its angle axes together. Transfer the mask to its representative. In the endpoint mask, label each assigned square by the corresponding family cell. | Exact cover cell permutations and admitted consumer semantics; $gC(V)=C(V)$ for every $g\in D_4$. The exp-259 endpoint orbit has size 8, so its mask stabilizer is trivial. | Retain the symmetry/label witness, including its action on reflected angle axes. |
-| Global exclusions | Each admitted exclusion rules out its declared cell subpattern at a declared cap $V\ge S^*$, with matching frame, cells and full closed-branch coverage. | Full certificate verification and admission ledger; a subpattern exclusion removes every containing assignment mask and its valid symmetry images. | Close or capture every remaining orbit. The current 36,784 states / 4,685 orbits under 58 entries are a residue, not a cover of terminal neighbourhoods. Held closures require their ruling. |
+| Global exclusions | Each admitted exclusion rules out its declared cell subpattern at a declared cap $V\ge S^*$, with matching frame, cells and full closed-branch coverage. | Full certificate verification and admission ledger; a subpattern exclusion removes every containing assignment mask and its valid symmetry images. | Close or capture every remaining orbit. After Tail A's ordinary admission, exp-271 retains 36,776 states / 4,684 orbits under 59 entries, with the endpoint surviving. These are unresolved assignments, not a cover of terminal neighbourhoods. Held closures require their ruling. |
 | Cap monotonicity | The normalized packing stays inside $C(S^*)\subseteq C(V)$ whenever a certificate uses $V\ge S^*$. | Exact inequalities for the certificate cap and the certified root enclosure. | Tightening a cap below $S^*$ is invalid; changing from centred to origin-anchored walls without transporting cells changes the claim. |
 | Capture cap | Use a rational $U'$ proved to satisfy $S^*\le U'\le U$; the current design requests $0<U'-S^*\le10^{-12}$. Capture runs in $C(U')$ with the original cells. | Root certificate and outward side evaluation; retained producer configuration and verifier. | Prove the cap inequalities and input identities. A small cap excess does not itself bound a coordinate error. |
 | Outer capture | Every target packing represented by an unresolved cell state reaches a declared terminal region, or is excluded. Every split retains a closed cover of its parent. | A complete capture/exclusion certificate from the actual cells; terminal leaves may also use the original containment in $C(S^*)$. | Open. Success from a small pose box, contraction of a pilot box, or a widened terminal theorem alone does not cover the outer cells. |
@@ -1260,9 +1261,15 @@ the hyperplane $q_{16}=0$ outside the apex region, or arbitrary mixed-angle dire
 
 The wider position tube alone did not establish the lower $b$ face of $B_W'$.
 The following new hand derivation supplies a sufficient capture-leaf predicate using
-one additional position projection and one-sided angle bounds. Its proposed root guard
-has not been evaluated. It uses physical non-overlap of squares 9 and 11 before invoking
-the widened feature certificate; it does not assume membership in $B_W'$.
+one additional position projection and one-sided angle bounds.
+H-285's exp-270 accepted the finite root guard and rational inequalities in its
+[certificate](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-270-coarse-slider-floor/certificate.json)
+and [fresh replay](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-270-coarse-slider-floor/replay.json),
+with a combined measured wall cost of 1.08 seconds.
+The geometric implication remains a sole-Astra hand derivation, without independent
+mathematical review or formal verification; no actual leaf's premises have been checked.
+It uses physical non-overlap of squares 9 and 11 before invoking the widened feature
+certificate and does not assume membership in $B_W'$.
 
 Let $u=(c,s)$ and $v=(-s,c)$ be the nominal root axes. The endpoint layout satisfies the
 symbolic identity
@@ -1360,10 +1367,10 @@ b\ge-\frac1{5000}-\frac{3600}{24999999}
 >-\frac1{2500}.
 $$
 
-The positive margin is exact. A retained checker would bind the displacement identity to
-the endpoint chart, verify the proposed root guard over the complete accepted root
-enclosure, and recompute the rational direction-exclusion and lower-face inequalities.
-No target root-guard evaluation has been performed for this proposed contract.
+The positive margin is exact. The retained checker binds the displacement identity to
+the endpoint chart, verifies the root guard over the complete accepted root enclosure,
+and recomputes all eight direction cases, the six exclusions, the two survivors and the
+lower-face inequalities. Its accepted strict headroom is $2333333/41666665000$.
 
 ### Consumer scope
 
@@ -1385,6 +1392,68 @@ The predicate gives a concrete geometric target for capture: a thin $v$ projecti
 square 9, coarse confinement of $b$, and controlled positive turns of 9 and 11. Whether
 an actual leaf meets it is a separate registered evaluation. It does not establish that
 the producer will reach that domain or that a complete capture tree is covered.
+
+## Conservative Dependencies of an Accepted Closure
+
+Tail A's ordinary admission makes its retained certificate a possible source of a
+smaller reusable obstruction. A dependency inventory can identify a candidate owner set;
+it cannot establish that a projected certificate passes the smaller-arity checker.
+The proposed exp-273 under H-282 therefore reads the already accepted full standing
+receipt and its exact seed/node objects without producing or rewriting a certificate.
+
+The standing verifier's [row-cover rule](../../../packing/devtools/verify_n17_kernel_certificate.py)
+uses every nonempty foreign owned hull implicitly, as well as explicitly recorded
+collision regions. An owner absent from the collision-partner list may still be
+essential. Conversely, the producer supplies complete pose covers for every other live
+owner, including partners never used in a collision region. The inventory retains two
+dependency channels so these supplied witnesses do not force an all-owner result by
+construction.
+
+| Fact | Geometric dependencies | Additional validation dependencies |
+| --- | --- | --- |
+| Seed row or owned hull | Its owner's presence and the fixed cell, wall and frame premises. | The complete accepted seed and content identity. |
+| Updated row | Its owner, accepted predecessor, every nonempty foreign prior owned hull, and every current row of each collision-cited partner. | Every current row of every supplied partner cover, including unused covers. |
+| Updated owned hull | Its old owned hull and all new row facts that justify the common-kernel planes, including compression in replacement mode. | The corresponding accepted compression and state metadata. |
+| Empty-pose closure | Every final row of the declared owner. | The full standing closure and final-state custody. |
+| Owned-hull intersection | Both named final hull facts, after joining the named pair to the exact intersection predicate. | The standing closure metadata. Unsupported or unjoined pair identity is refused. |
+
+An updated row does not use its owner's old hull: the supported row grammar forbids
+self-hull cuts and the implicit forbidden-region rule excludes that owner. The old
+hull remains necessary for compression, even in replacement mode, because replacement
+points can be convex combinations of old-hull vertices. Empty foreign hulls contribute
+no forbidden-region edge. These rules deliberately keep geometrically redundant
+nonempty foreign hulls; pruning such edges would need a separate exact coverage test.
+
+Each complete partner pose cover may be represented by one DAG fact depending on all
+of that partner's current rows. This factors repeated edges without weakening the
+universal partner-pose quantifier. References, closed row partitions and chronological
+state updates must be joined exactly; missing, future, foreign or duplicate references
+are refused. The streamed node must reach its canonical content identity at EOF.
+
+A complete all-owner geometric closure set is a valid no-reduction result. A strict
+subset is only a projection proposal. A later attempt must reconstruct the typed seed
+and node, state keysets, skipped-step indices, row references, initial and final states,
+compression and closure references, and content identities. The world-cell enumeration
+and physical frame stay fixed. Deleting tuples from an existing certificate is not a
+projection proof. Only a separately registered full standing replay on the smaller
+owner set can support ordinary subpattern admission and its symmetry/containment count.
+
+The prospective workload is one primary inventory and one fresh deterministic
+reproduction, each with a 90-second ceiling and a combined 180-second scientific and
+termination ceiling, followed by at most 10 seconds of termination cleanup. Proposed
+representation ceilings are 10 MiB compressed and decoded for the seed, 512 MiB
+compressed and 2 GiB decoded for the streamed node, 25,000 facts, 500,000 total channel
+edges and 64 MiB decoded report output. The node's decoded ceiling is separate from its
+compressed ceiling. A sampled 4 GiB current-RSS guard is not an allocation-time limit.
+Bulky DAG output belongs outside Git under the normal retained-object manifest.
+
+These are prospective scheduling ceilings, not measured costs. Both runs must agree on
+their complete deterministic inventory and proposal, with the same accepted full
+standing receipt, seed/node identities, named cells, frame and closure. No expensive
+standing replay is repeated merely to inventory its already accepted result. A ceiling,
+unsupported grammar or identity failure leaves the inventory incomplete or refused;
+it does not establish that a smaller core is impossible. No inventory outcome directly
+changes the exclusion census.
 
 ## First Saved-Prefix Capture Adapter Contract
 

@@ -1,5 +1,5 @@
 ---
-title: "exp-270 \u2014 coarse slider root guard and fresh replay"
+title: exp-270 — coarse slider root guard and fresh replay
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -44,20 +44,37 @@ experiment:
       includes10s cleanup. No retries, solves, capture targets or tuning; preserve logs/refusal/incomplete
       evidence.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-270-coarse-slider-floor
-  results: []
+    commit: 549c79b6530c1f15e321da9e7a20a3f507e7357b
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Both generated and fresh replay receipts require verification_passed=true AND floor_certified=true
+      AND root_guard_passed=true. Full accepted root inclusion R gives -1/3<=tau0=c(s-1)<=-1/8; exact
+      x9*-x11*=tau0*u+v, unit/half-angle/projection/rearrangement identities; fixed independent closed
+      coarse domain; exactly8 SAT options against x9-x11,6 strict universal-support exclusions and2 +v
+      survivors; positive cosine; exact floor -14333333/41666665000 and strict headroom2333333/41666665000
+      above -1/2500. No H278/BWprime premise or actual leaf/global admission.
+    outcome: criterion_met
+    checked_by: Generation and freshCLI replay verify complete rootguard,8SATalternatives/6strictomissions/2survivors,
+      all exact identities, floor-14333333/41666665000 and positiveheadroom2333333/41666665000. No circular
+      H278/BWprime prerequisite.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Both generated and fresh replay receipts require verification_passed=true AND floor_certified=true
       AND root_guard_passed=true. Full accepted root inclusion R gives -1/3<=tau0=c(s-1)<=-1/8; exact
       x9*-x11*=tau0*u+v, unit/half-angle/projection/rearrangement identities; fixed independent closed
       coarse domain; exactly8 SAT options against x9-x11,6 strict universal-support exclusions and2 +v
       survivors; positive cosine; exact floor -14333333/41666665000 and strict headroom2333333/41666665000
       above -1/2500. No H278/BWprime premise or actual leaf/global admission.
-    reason: Registered before real rootguard evaluation after sole-Astra mathematical source review and
-      independent Sol mechanical review26controls1.65s; source frozen by registration commit.
-  lease:
-    expires: '2026-10-07T10:15:00Z'
-    host: macOS arm64
+    reason: Frozen finitecriteria and freshCLI replay pass on independent coarse domain. Physical9/11
+      non-overlap and actualleaf thinv9/angular/coarseposition premises remain required; analyticimplication
+      sole-Astrahandreview; zero globaladmission.
+    needs_review: false
+  effort:
+    timebox: 180s combined generation and freshreplay;TERM180/KILL190
+    wall_seconds: 1.08
+    stopped_by: criterion
 ---
 # exp-270: Coarse Slider Floor
 
@@ -74,6 +91,20 @@ exact positive floor headroom.
 Honest root-bound failure is inconclusive; custody or frozen-criterion mismatch is
 refused; interruption is incomplete.
 A pass is a conditional geometric lemma, with no leaf or global admission.
+
+## Outcome
+
+Generation and a fresh CLI replay passed at clean source
+`549c79b6530c1f15e321da9e7a20a3f507e7357b` in 1.08 seconds combined shell time.
+The full accepted root guard, eight SAT alternatives, six strict omissions and two
+surviving positive-v directions pass.
+The exact floor is $-14333333/41666665000$ with strict headroom $2333333/41666665000$
+above $-1/2500$.
+
+This is a conditional physical square9/11 lemma on the independent coarse domain.
+Its geometric implication remains Astra’s hand proof; actual leaves must establish every
+thin projection, angle and position premise separately.
+No H-278, widened-box floor, LP-relaxation consequence or global admission is assumed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

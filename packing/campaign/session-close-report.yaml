@@ -11,8 +11,8 @@ count: 183
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 126
-  sessions_unmeasured: 57
+  sessions_measured: 127
+  sessions_unmeasured: 56
   attributed:
     rollups: 297
     turns: 76355
@@ -35,9 +35,9 @@ totals:
     one_off_code: 7280
     wall_hours: 713.93
 codex_receipts:
-  attributed: 79
+  attributed: 80
   unattributed: 2
-  measured: 81
+  measured: 82
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -3197,9 +3197,19 @@ sessions:
   title: "n17 Proof Contracts and Instruments"
   status: in_progress
   primary_bead: think-ipel
-  phases: 6
-  measured: false
-  unmeasured_reason: >-
-    declares no resource measurement
-  rollups: []
-  codex_receipts: []
+  phases: 8
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session184-through-100444.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session184-through-100444.yaml
+    model_responses: 2176
+    agent_hours: 11.95
+    active_union_hours: 2.94
+    wall_hours: 2.94
+    snapshot_incomplete: true

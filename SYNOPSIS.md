@@ -305,14 +305,14 @@ hypothesis status and summarizes experiment verdicts, and the
 
 <!-- BEGIN CURRENT-RESEARCH-STATUS -->
 
-| Record | Count | State at the cutoff |
-| --- | ---: | --- |
+| Record | Total | State |
+| --- | --- | --- |
 | Agendas | 40 | 20 active; 14 completed; 5 paused; 1 superseded |
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 219 | 53 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 200 | 72 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 220 | 54 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 201 | 73 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5797,7 +5797,8 @@ round that names the hypothesis, control roles included.
 | [H-282](packing/campaign/hypotheses/H-282-n17-current-source-tail-a.md) | confirmed | Current-source endpoint prefix and one actual-tail closure with full standing admission | 2 | exp266339.78s; exp271180.51s; eightstates/oneorbit removed,59admissions/36776states/4684orbits |
 | [H-283](packing/campaign/hypotheses/H-283-n17-continuous-soft-direction-cone.md) | confirmed | Exact continuous negative16 cone times six free angle coordinates | 1 | 6.60s combined exact generation/fresh replay; conditional cone, analytic implication sole-Astra |
 | [H-284](packing/campaign/hypotheses/H-284-n17-positive-continuous-cone.md) | confirmed | Positive16 continuous cone via seventeen-row cubic chain | 1 | 92.16s exact generation/fresh replay; conditional domain, endpoint retained |
-| [H-285](packing/campaign/hypotheses/H-285-n17-coarse-slider-floor.md) | running | Noncircular coarse square9/11 slider-floor root guard | 1 | exp-270 registered; conditional physical non-overlap, thin v9 and one-sided q9/q11 premises |
+| [H-285](packing/campaign/hypotheses/H-285-n17-coarse-slider-floor.md) | confirmed | Noncircular coarse square9/11 slider-floor guard | 1 | 1.08s exact generation/fresh replay; actual leaf premises open |
+| [H-286](packing/campaign/hypotheses/H-286-n17-saved-prefix-capture-adapter.md) | running | Exact bounds from the actual one-update saved endpoint prefix | 1 | exp272 registered; parent180s with freshchild60s inside; geometricunresolved valid, zeroadmission |
 
 ### Confirmed
 
@@ -6107,6 +6108,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-154.yaml` | session-154 | 358 | 3.03 h | 2.95 h | 3.63 h | yes |
 | `codex-task-tree-session-155-creative.yaml` | session-155 | 188 | 1.52 h | 1.49 h | 1.72 h | no |
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
+| `codex-task-tree-session184-through-100444.yaml` | session-184 | 2,176 | 11.95 h | 2.94 h | 2.94 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6117,8 +6119,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 126 |
-| unmeasured | 57 |
+| measured | 127 |
+| unmeasured | 56 |
 | **total** | **183** |
 
 <!-- END GENERATED: session-close-report -->
@@ -6135,7 +6137,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 200 rounds registered in `series-000`.
+There are 201 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5749.8 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6377,8 +6379,9 @@ archive beside it.
 | [exp-267](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-267-h283-continuous-soft-direction-cone.md) | 17 | target | H-283 | Exact continuous negative16 cone times six free angular coordinates | Exact generator and fresh replay pass6.60s; conditional punctured cone, endpoint retained | accepted |
 | [exp-268](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md) | 11 | positive_control | H-281 | Same first-round contract with corrected CLI invocation | First11-owner round plus fresh11-step/174662event replay passes;551.28s; no new production | accepted |
 | [exp-269](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-269-h284-positive-continuous-cone.md) | 17 | target | H-284 | Positive16 continuous cone, seventeen-row cubic chain | Exact finite root/cubic/sign/weight/H/M checks and fresh replay pass92.16s | accepted |
-| [exp-270](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-270-h285-coarse-slider-floor.md) | 17 | target | H-285 | Independent coarse-domain root guard and six SAT exclusions | Registered before target after mathematics/mechanics reviews | in-progress |
+| [exp-270](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-270-h285-coarse-slider-floor.md) | 17 | target | H-285 | Independent coarse-domain root guard and six SAT exclusions | Finite rootguard/all8SAT cases/exactstrictfloor and fresh replay pass1.08s | accepted |
 | [exp-271](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md) | 17 | target | H-282 | Full standing verification of retained TailA closure | Full standingPASS27steps/1728rows/34452224facetchecks; canonical/source/census joins pass180.51s | accepted |
+| [exp-272](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-272-h286-saved-prefix-capture-leaf.md) | 17 | target | H-286 | Saved endpoint prefix intake and exact capture bounds | Registered before actualleaf bounds; no terminal success required | in-progress |
 
 ### Cost and provenance
 
@@ -6582,12 +6585,13 @@ archive beside it.
 | exp-267 | 180s combined production/fresh replay | 6.60s | — | criterion | clean `65fc5dcbd`; conditional exact cone |
 | exp-268 | 900s production;300s fresh replay;4096MiB | 551.28s combined shell | — | criterion | clean `7f5bacffd`;422.24s production/129.04s fresh replay |
 | exp-269 | 180s combined generation/fresh replay | 92.16s | — | criterion | clean `11573546d`; conditional positive cone |
-| exp-270 | 180s combined generation/fresh replay | Pending | — | Running | Frozen reviewed coarse-domain/root-only instrument |
+| exp-270 | 180s combined generation/fresh replay | 1.08s | — | criterion | clean `549c79b65`; conditional independent coarse-domain floor |
 | exp-271 | 900s full standing verifier;4096MiB sampled RSS | 180.51s | — | criterion | clean `11573546d`; standing fullPASS before ordinaryadmission |
+| exp-272 | Parent180s including freshchild60s;TERM180/KILL190 | Pending | — | Running | Reviewed savedprefixadapter source/descriptor frozen before target |
 
-### What the 200 rounds jointly establish
+### What the 201 rounds jointly establish
 
-The 200 rounds use 2512.1 agent-minutes and 5749.8 wall-minutes under the campaign’s
+The 201 rounds use 2512.1 agent-minutes and 5749.8 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

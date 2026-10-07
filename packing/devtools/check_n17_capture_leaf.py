@@ -9,17 +9,24 @@ Imports read no scientific inputs. All domains and orientation pieces are closed
 from __future__ import annotations
 
 import argparse
+import gzip
+import hashlib
 import json
 import math
+import subprocess
+import sys
+import tempfile
 import time
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from fractions import Fraction as Q
 from pathlib import Path
 from typing import Any, cast
 
 from devtools import audit_n17_endpoint_receipt as exact
 from devtools import check_n17_capacity_one_cover as cover
+from devtools import check_n17_endpoint_prefix as prefix
+from devtools import check_n17_subpattern as saved
 from devtools import check_n17_widened_annulus_patch as patch
 from devtools import check_n17_widened_apex as apex
 from devtools import check_n17_widened_features as forcing
@@ -36,6 +43,7 @@ from sqpack.hull_kernel.frame import (
     make_frame,
 )
 from sqpack.hull_kernel.geometry import Budget, IncompleteError
+from sqpack.hull_kernel.induction import wall_lines
 from sqpack.hull_kernel.rational import Q as KernelQ
 
 SCHEMA = "n17-capture-leaf-domain/v1"
@@ -44,6 +52,8 @@ ACTIVE = tuple(label for label in LABELS if label != 6)
 LOCAL_POSITION, LOCAL_Q = Q(1, 5000), Q(1, 10000)
 SCOPE = "conditional leaf geometry only; no capture tree, global admission or census change"
 COMPOSITION = "docs/project/reviews/review-2026-10-02-n17-local-half-composition.md"
+SEED_DECODED_LIMIT = 10 * 1024 * 1024
+NODE_DECODED_LIMIT = 64 * 1024 * 1024
 
 
 class OpenCoverage(exact.AuditError):
@@ -120,7 +130,7 @@ def physical_point(frame: Frame, raw: Sequence[str], action: str) -> exact.Vecto
     )
 
 
-def bounds(leaf: Leaf) -> dict[str, Any]:
+def bounds(leaf: Leaf, *, deadline: float | None = None) -> dict[str, Any]:
     exact.require(leaf.action in D4_ACTIONS, "invalid D4 action")
     exact.require(set(leaf.roles) == set(LABELS), "missing or extra label")
     exact.require(
@@ -169,6 +179,8 @@ def bounds(leaf: Leaf) -> dict[str, Any]:
             for polygon in item["residual_polygons"]:
                 exact.require(bool(polygon), "empty live polygon")
                 for vertex in polygon:
+                    if deadline is not None and time.monotonic() >= deadline:
+                        raise IncompleteError("leaf geometry wall ceiling")
                     physical = physical_point(leaf.frame, vertex, leaf.action)
                     if label == 6:
                         # Closed convex-cell membership, including its boundary.
@@ -193,6 +205,10 @@ def bounds(leaf: Leaf) -> dict[str, Any]:
                         coordinates = {f"xi{label}": delta[0], f"eta{label}": delta[1]}
                     for name, value in coordinates.items():
                         values.setdefault(name, []).append(value)
+                    if label == 9:
+                        values.setdefault("v9", []).append(
+                            exact.dot(leaf.layout.axes["v"], delta)
+                        )
             if label != 6:
                 axis_name = "u" if 9 <= label <= 14 else "p" if label == 16 else "ex"
                 candidates = [
@@ -238,7 +254,7 @@ def bounds(leaf: Leaf) -> dict[str, Any]:
     }
     names = apex.position_names()
     exact.require(
-        set(intervals) == {*names, "a", "b", "z", *(f"q{i}" for i in ACTIVE)},
+        set(intervals) == {*names, "a", "b", "z", "v9", *(f"q{i}" for i in ACTIVE)},
         "coordinate inventory differs",
     )
     return {
@@ -322,7 +338,222 @@ def retained_path(value: Any) -> Path:
     return path
 
 
-def load_leaf(document: dict[str, Any], *, deadline: float, max_nodes: int) -> Leaf:
+def bounded_gzip(path: Path, limit: int, *, deadline: float, retain: bool = False) -> bytes:
+    """Read at most limit decoded bytes; never expand an unbounded gzip object."""
+    total, pieces = 0, []
+    with gzip.open(path, "rb") as stream:
+        while True:
+            if time.monotonic() >= deadline:
+                raise IncompleteError("saved-object loading wall ceiling")
+            piece = stream.read(min(saved.STREAM_CHUNK, limit - total + 1))
+            if not piece:
+                break
+            total += len(piece)
+            exact.require(total <= limit, "saved gzip decoded byte ceiling")
+            if retain:
+                pieces.append(piece)
+    return b"".join(pieces)
+
+
+def file_digest(path: Path) -> str:
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def wall_normalization(
+    frame: Frame,
+    seed: dict[str, Any],
+    *,
+    deadline: float | None = None,
+) -> dict[str, Any]:
+    """Check the affine wall coefficients and every declared seed-row wall."""
+    exact.require(frame.capture_cap is None, "saved prefix must retain original cap None")
+    normalized = replace(frame, capture_cap=frame.cap)
+    # field_centre_bounds is affine in h; agreement at 0 and 1 binds both coefficients.
+    exact.require(
+        all(
+            frame.field_centre_bounds(h) == normalized.field_centre_bounds(h)
+            for h in (KernelQ(0), KernelQ(1))
+        )
+        and frame.cells == normalized.cells
+        and frame.scale == normalized.scale
+        and frame.actions == normalized.actions,
+        "normalized field wall coefficients differ",
+    )
+    checked = 0
+    for rows in seed["cells"].values():
+        for row in rows:
+            if deadline is not None and time.monotonic() >= deadline:
+                raise IncompleteError("seed wall normalization ceiling")
+            lo, hi = (KernelQ(value) for value in row["interval"])
+            exact.require(
+                wall_lines(frame, lo, hi) == wall_lines(normalized, lo, hi),
+                "normalized seed row walls differ",
+            )
+            checked += 1
+    return {
+        "original_capture_cap": None,
+        "normalized_inner_cap": str(frame.cap),
+        "affine_field_coefficients_equal": True,
+        "affine_formula": "offset=0; field bounds=(B*h, B*(U-h))",
+        "seed_wall_rows_checked": checked,
+    }
+
+
+def fresh_saved_replay(directory: Path, seconds: float) -> dict[str, Any]:
+    exact.require(math.isfinite(seconds) and seconds > 0, "invalid fresh replay ceiling")
+    command = [
+        sys.executable,
+        "-m",
+        "devtools.check_n17_subpattern",
+        "--check-saved",
+        str(directory),
+        "--cover",
+        "indexed",
+        "--max-seconds",
+        str(seconds),
+    ]
+    with tempfile.TemporaryDirectory(prefix="capture-leaf-replay-") as scratch:
+        output, errors = Path(scratch) / "stdout.json", Path(scratch) / "stderr.log"
+        try:
+            with output.open("wb") as stdout, errors.open("wb") as stderr:
+                execution = subprocess.run(
+                    command,
+                    cwd=exact.REPO / "packing",
+                    stdout=stdout,
+                    stderr=stderr,
+                    timeout=seconds,
+                    check=False,
+                )
+        except subprocess.TimeoutExpired as error:
+            raise IncompleteError("fresh saved replay wall ceiling") from error
+        result = exact.decode(exact.read_bytes(output))
+        if result.get("status") == "INCOMPLETE":
+            raise IncompleteError("fresh saved replay incomplete")
+        exact.require(execution.returncode == 0, "fresh saved replay refused")
+    return {"command": command, "exit_code": execution.returncode, "receipt": result}
+
+
+def load_saved_prefix(
+    document: dict[str, Any],
+    frame: Frame,
+    *,
+    deadline: float,
+    max_nodes: int,
+    replay_seconds: float,
+) -> tuple[Mapping[int, Sequence[Mapping[str, Any]]], dict[str, Any]]:
+    exact.require(
+        frame.scale == 1
+        and document["action"] == "r0"
+        and type(document["expected_steps"]) is int
+        and document["expected_steps"] == 1,
+        "unsupported first saved-prefix frame, action or step count",
+    )
+    directory = retained_path(document["saved_objects"])
+    seed_path, node_path = saved.saved_files(directory)
+    exact.require(
+        seed_path.resolve().parent == directory.resolve()
+        and node_path.resolve().parent == directory.resolve()
+        and seed_path.stat().st_size <= SEED_DECODED_LIMIT
+        and node_path.stat().st_size <= NODE_DECODED_LIMIT,
+        "saved object reference or compressed byte ceiling differs",
+    )
+    frozen_bytes = {str(path): file_digest(path) for path in (seed_path, node_path)}
+    seed_packet = exact.decode(
+        bounded_gzip(
+            seed_path,
+            SEED_DECODED_LIMIT,
+            deadline=deadline,
+            retain=True,
+        )
+    )
+    bounded_gzip(node_path, NODE_DECODED_LIMIT, deadline=deadline)
+    seed_id = producer.content_sha256(seed_packet)
+    exact.require(seed_id == document["seed_sha256"], "saved seed identity differs")
+    normalization = wall_normalization(frame, seed_packet, deadline=deadline)
+    packet, steps = saved.stream_node(node_path)
+    exact.require(
+        packet.get("parent") is None
+        and packet.get("guard_source") is None
+        and packet.get("constraints") == [],
+        "saved prefix has unsupported guard or ancestry",
+    )
+    budget = Budget(deadline, max_nodes)
+    seed = node.admit_seed(
+        frame,
+        seed_packet,
+        mask=document["state"],
+        bins=seed_packet["bins"],
+        budget=budget,
+        allow_empty_groups=True,
+    )
+    trace = sequential.replay_sequential(
+        frame,
+        packet,
+        seed,
+        mask=document["state"],
+        seed_sha256=seed_id,
+        budget=budget,
+        cover="indexed",
+    )
+    exact.require(
+        steps.content_sha256 == document["node_sha256"]
+        and len(trace.steps) == 1
+        and trace.closure is None,
+        "saved prefix identity, complete EOF or stall step count differs",
+    )
+    source = exact.decode(exact.read_bytes(retained_path(document["producer_receipt"])))
+    exact.require(
+        source["status"] == "PASS_ENDPOINT_PREFIX"
+        and source["control_passed"] is True
+        and source["seed_sha256"] == seed_id
+        and source["node_sha256"] == steps.content_sha256
+        and source["complete_owner_updates"] == 1
+        and source["closure"] is None
+        and exact.exact_structure(source["inputs"]["root"], document["root"]),
+        "saved prefix producer receipt custody differs",
+    )
+    remaining = deadline - time.monotonic()
+    if remaining <= 0:
+        raise IncompleteError("parent leaf ceiling before fresh replay")
+    replay = fresh_saved_replay(directory, min(replay_seconds, remaining))
+    checked = replay["receipt"]
+    exact.require(
+        checked["status"] == "PASS_SAVED_STALL"
+        and checked["closure"] is None
+        and checked["producer_imported"] is False
+        and checked["steps_checked"] == 1
+        and checked["seed_sha256"] == seed_id
+        and checked["node_sha256"] == steps.content_sha256
+        and checked["frame"] == frame.name
+        and checked["mask"] == document["state"]
+        and checked["cells"] == [frame.cell_names[i] for i in document["state"]]
+        and checked["bins"] == seed_packet["bins"]
+        and checked["cover_backend"] == "indexed",
+        "fresh saved prefix receipt/source identity differs",
+    )
+    exact.require(
+        frozen_bytes == {str(path): file_digest(path) for path in (seed_path, node_path)},
+        "saved objects changed across bounded loading and fresh replay",
+    )
+    return trace.rows, {
+        "saved_objects": document["saved_objects"],
+        "seed_sha256": seed_id,
+        "node_sha256": steps.content_sha256,
+        "fresh_full_replay": replay,
+        "wall_normalization": normalization,
+        "seed_decoded_limit": SEED_DECODED_LIMIT,
+        "node_decoded_limit": NODE_DECODED_LIMIT,
+    }
+
+
+def load_leaf(
+    document: dict[str, Any],
+    *,
+    deadline: float,
+    max_nodes: int,
+    fresh_replay_seconds: float = 60,
+) -> Leaf:
     exact.require(document["schema"] == SCHEMA, "wrong leaf schema")
     exact.require(
         document["state_encoding"] == "sorted-cell-indices/v1", "unsupported mask encoding"
@@ -335,7 +566,8 @@ def load_leaf(document: dict[str, Any], *, deadline: float, max_nodes: int) -> L
     )
     root_inputs, layout, _ = forcing.load_root()
     cap, length, scale = (exact.rational(document[name]) for name in ("U", "L", "B"))
-    inner = exact.rational(document["capture_cap"])
+    original_inner = document["capture_cap"]
+    inner = cap if original_inner is None else exact.rational(original_inner)
     exact.require(
         cap == cover.U
         and length > 0
@@ -351,7 +583,7 @@ def load_leaf(document: dict[str, Any], *, deadline: float, max_nodes: int) -> L
         cell_names=[cell.name for cell in cells],
         occupancy=17,
         action_names=D4_ACTIONS,
-        capture_cap=inner,
+        capture_cap=None if original_inner is None else inner,
     )
     state: list[Any] = document["state"]
     exact.require(
@@ -370,37 +602,53 @@ def load_leaf(document: dict[str, Any], *, deadline: float, max_nodes: int) -> L
         set(roles) == set(LABELS) and len(document["label_to_owner"]) == 17,
         "label identities differ",
     )
-    seed_path, node_path, receipt_path = (
-        retained_path(document[name]) for name in ("seed", "node", "producer_receipt")
-    )
-    seed_packet, node_packet, receipt = (
-        exact.decode(exact.read_bytes(path)) for path in (seed_path, node_path, receipt_path)
-    )
-    exact.require(
-        receipt["replay"]["status"] == "PASS_REPLAYED"
-        and receipt["replay"]["final_state_agrees"] is True
-        and receipt["node_sha256"] == producer.content_sha256(node_packet)
-        and receipt["seed_sha256"] == producer.content_sha256(seed_packet),
-        "producer receipt/source custody differs",
-    )
-    budget = Budget(deadline, max_nodes)
-    seed = node.admit_seed(
-        frame,
-        seed_packet,
-        mask=state,
-        bins=seed_packet["bins"],
-        budget=budget,
-        allow_empty_groups=True,
-    )
-    trace = sequential.replay_sequential(
-        frame,
-        node_packet,
-        seed,
-        mask=state,
-        seed_sha256=producer.content_sha256(seed_packet),
-        budget=budget,
-        cover="indexed",
-    )
+    saved_custody: dict[str, Any] = {}
+    if "saved_objects" in document:
+        exact.require(
+            exact.exact_structure(document["root"], root_inputs),
+            "saved descriptor accepted root differs",
+        )
+        rows, saved_custody = load_saved_prefix(
+            document,
+            frame,
+            deadline=deadline,
+            max_nodes=max_nodes,
+            replay_seconds=fresh_replay_seconds,
+        )
+    else:
+        seed_path, node_path, receipt_path = (
+            retained_path(document[name]) for name in ("seed", "node", "producer_receipt")
+        )
+        seed_packet, node_packet, receipt = (
+            exact.decode(exact.read_bytes(path))
+            for path in (seed_path, node_path, receipt_path)
+        )
+        exact.require(
+            receipt["replay"]["status"] == "PASS_REPLAYED"
+            and receipt["replay"]["final_state_agrees"] is True
+            and receipt["node_sha256"] == producer.content_sha256(node_packet)
+            and receipt["seed_sha256"] == producer.content_sha256(seed_packet),
+            "producer receipt/source custody differs",
+        )
+        budget = Budget(deadline, max_nodes)
+        seed = node.admit_seed(
+            frame,
+            seed_packet,
+            mask=state,
+            bins=seed_packet["bins"],
+            budget=budget,
+            allow_empty_groups=True,
+        )
+        trace = sequential.replay_sequential(
+            frame,
+            node_packet,
+            seed,
+            mask=state,
+            seed_sha256=producer.content_sha256(seed_packet),
+            budget=budget,
+            cover="indexed",
+        )
+        rows = trace.rows
     r = root_inputs["root_inclusion_box_used"]
     endpoint = cover.endpoint(*(Box(*exact.read_interval(value)) for value in r))
     assignment = cover.family_state(cells, endpoint, cover.ENDPOINT)
@@ -408,15 +656,24 @@ def load_leaf(document: dict[str, Any], *, deadline: float, max_nodes: int) -> L
     by_name = {cell.name: i for i, cell in enumerate(cells)}
     expected = {item["label"]: by_name[item["cell"]] for item in assignment["squares"]}
     exact.require(cells[expected[6]].name == "side-S2", "square6 cell premise differs")
+    if saved_custody:
+        saved_custody["endpoint_retention"] = saved_endpoint_retention(
+            frame,
+            roles,
+            expected,
+            root_inputs,
+            rows,
+        )
     exact.require(
         document["original_container_premise"] == "centred-C(S*)"
         and document["composition_premise"] == COMPOSITION,
         "missing conditional theorem premise custody",
     )
+
     return Leaf(
         frame,
         layout,
-        trace.rows,
+        rows,
         roles,
         expected,
         document["action"],
@@ -424,8 +681,8 @@ def load_leaf(document: dict[str, Any], *, deadline: float, max_nodes: int) -> L
             "fresh_replay": True,
             "original_container_premise": document["original_container_premise"],
             "root": root_inputs,
-            "seed": document["seed"],
-            "node": document["node"],
+            "seed": document.get("seed"),
+            "node": document.get("node"),
             "producer_receipt": document["producer_receipt"],
             "composition_premise": COMPOSITION,
             "root_layout_x5_identity": "x5*=S*-1/2",
@@ -444,8 +701,30 @@ def load_leaf(document: dict[str, Any], *, deadline: float, max_nodes: int) -> L
             },
             "unit_transform": "raw/B; D4 about U/2; subtract exact-root sigma",
             "orientation_convention": "transformed axis; second axis is positive J(axis)",
+            **saved_custody,
         },
     )
+
+
+def saved_endpoint_retention(
+    frame: Frame,
+    roles: Mapping[int, int],
+    expected: Mapping[int, int],
+    root_inputs: dict[str, Any],
+    rows: Mapping[int, Sequence[Mapping[str, Any]]],
+) -> dict[str, Any]:
+    endpoint_frame, poses, endpoint_inputs = prefix.load_endpoint()
+    exact.require(
+        frame.cap == endpoint_frame.cap
+        and frame.length == endpoint_frame.length
+        and frame.cells == endpoint_frame.cells
+        and roles == expected
+        and exact.exact_structure(root_inputs, endpoint_inputs["root"]),
+        "saved prefix endpoint frame/root/label assignment differs",
+    )
+    checked = prefix.endpoint_check(poses, rows)
+    exact.require(checked["held"] is True, "full-root endpoint not retained")
+    return checked
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -456,17 +735,24 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--patch", type=Path)
     parser.add_argument("--max-seconds", type=float, default=30)
     parser.add_argument("--max-nodes", type=int, default=200000)
+    parser.add_argument("--fresh-replay-seconds", type=float, default=60)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
         exact.require(
-            math.isfinite(args.max_seconds) and args.max_seconds > 0 and args.max_nodes > 0,
+            math.isfinite(args.max_seconds)
+            and args.max_seconds > 0
+            and args.max_nodes > 0
+            and math.isfinite(args.fresh_replay_seconds)
+            and args.fresh_replay_seconds > 0,
             "invalid replay budget",
         )
+        deadline = time.monotonic() + args.max_seconds
         leaf = load_leaf(
             exact.decode(exact.read_bytes(args.leaf)),
-            deadline=time.monotonic() + args.max_seconds,
+            deadline=deadline,
             max_nodes=args.max_nodes,
+            fresh_replay_seconds=args.fresh_replay_seconds,
         )
         q0, angle_box = None, None
         terminal_inputs: dict[str, Any] = {"features": None, "apex": None, "patch": None}
@@ -500,12 +786,22 @@ def main(argv: list[str] | None = None) -> int:
                 "angle_box": [forcing.encode(value) for value in angle_box],
                 "checked": checked,
             }
+        bounded = bounds(leaf, deadline=deadline)
+        if leaf.custody.get("saved_objects") is not None:
+            exact.require(
+                bounded["status"] == "bounded"
+                and all(
+                    lo <= 0 <= hi
+                    for lo, hi in map(exact.read_interval, bounded["intervals"].values())
+                ),
+                "saved endpoint coordinate intervals do not contain zero",
+            )
         report = {
             "schema": SCHEMA,
             "verification_passed": True,
             "custody": dict(leaf.custody),
             "terminal_inputs": terminal_inputs,
-            **predicates(bounds(leaf), apex_q0=q0, patch_box=angle_box),
+            **predicates(bounded, apex_q0=q0, patch_box=angle_box),
         }
     except (OpenCoverage, IncompleteError) as error:
         report = {
@@ -515,7 +811,7 @@ def main(argv: list[str] | None = None) -> int:
             "error": str(error),
             "scope": SCOPE,
         }
-    except (ValueError, OSError, KeyError, TypeError, IndexError) as error:
+    except (ValueError, OSError, EOFError, KeyError, TypeError, IndexError) as error:
         report = {
             "schema": SCHEMA,
             "status": "refused",
@@ -533,6 +829,8 @@ def main(argv: list[str] | None = None) -> int:
         Path(node.__file__),
         Path(sequential.__file__),
         Path(producer.__file__),
+        Path(saved.__file__),
+        Path(prefix.__file__),
         Path(forcing.root.__file__),
         Path(forcing.core.__file__),
         Path(apex.endpoint.__file__),

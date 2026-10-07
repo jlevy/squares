@@ -965,6 +965,11 @@ Its first target remains unrun at registration.
 noncircular square9/11 coarse-slider lemma; any actual leaf must independently establish
 its thin projection and angular bounds.
 
+[H-286](hypotheses/H-286-n17-saved-prefix-capture-adapter.md) tests bounded intake of
+the actual retained endpoint prefix and exact root-relative leaf bounds.
+Geometric unresolved is a valid readiness result; no exclusion or global capture is
+claimed.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

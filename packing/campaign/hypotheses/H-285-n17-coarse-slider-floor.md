@@ -1,5 +1,5 @@
 ---
-title: "H-285 \u2014 noncircular coarse slider floor"
+title: H-285 — noncircular coarse slider floor
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -40,11 +40,11 @@ hypothesis:
   - H-255
   replication: false
   registered: '2026-10-07'
-  notes: UNREGISTERED EXTERNAL DRAFT ONLY. Root freezes before real root guard evaluation. Root loader
-    reused only for fresh accepted-root admission. Failed guard inconclusive, malformed/premise mismatch
-    refused, interruption incomplete. No H278/BWprime circular premise, LP-relaxation consequence, leaf
-    or global admission. Later adapter must independently check all direct coarse premises before intersecting
-    raw b. Astra hand derivation; not independently mathematically reviewed or machine-checked
+  notes: Registered before target and accepted exp270 after generation/fresh replay1.08s at clean549c79
+    source. Root loader reused only for fresh accepted-root admission. Failed guard inconclusive, malformed/premise
+    mismatch refused, interruption incomplete. No H278/BWprime circular premise, LP-relaxation consequence,
+    leaf or global admission. Later adapter must independently check all direct coarse premises before
+    intersecting raw b. Astra hand derivation; not independently mathematically reviewed or machine-checked
 ---
 # H-285: Coarse Slider Floor
 
