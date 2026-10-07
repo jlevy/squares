@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m4ajdxfkfqyr1yj5d4wm5npt
-title: "Import Nate Chaoweeraprasit: eleven SQUISH upper-bound packings (#401)"
+title: "Import Nate Chaoweeraprasit: eighteen SQUISH upper-bound packings (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 27
+version: 28
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -25,10 +25,10 @@ child_order_hints:
   - is-01m4b3jr83kgj8ffe98d3xd1d0
   - is-01m4bhq88wk0gp09sns1q2hpfn
   - is-01m4bvqnk2d26b8ydnvt3h07n1
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T18:59:08.514Z
+updated_at: 2026-10-07T19:08:25.796Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: W1 result import stages 1–3, followed by W7 bounded engineering and W2 full exact-rational replay/mapped independent math review, then publication and authorized issue reply. Scope: issue #401 ten pinned repository certificates at 07fe6dde1e5b67405a3076719b90e58e2882b677 plus n153 in comment 6031977107 (eleven counts total). Two separable PRs; no main push or merge without explicit merge consent. Source no-license retention: derived geometry facts and attributed metadata only. Engineering GPT-6.1 Sol, records GPT-6.1 Sol, math/soundness Astra. Native tbd sync known divergent/permission blocked; preserve all work in outbox and working branch.
@@ -176,3 +176,30 @@ Equivalent process-local recipe: `GIT_TERMINAL_PROMPT=0 GH_PROMPT_DISABLED=1 git
 Actual evidence and closing snapshots: /workspace/squares-401-explicit-token-push/explicit-token-push-receipt.json. New standalone latest full native tracker bundle: /workspace/squares-401-native-tracker-explicit-token.bundle. Source heads6d/8f/85 remain unchanged and clean; prior backups retained. No PR, hosted CI, merge or author reply was created. Publication stays in_progress/hold blocked; no unchanged repeat requests or scientific tests are needed.
 
 Installation-access follow-up completed locally: current accessible-user intersection excludes targetjlevy/squares in separatelyverifiedreads; app write declarations do not prove effective target inclusion. Documented single-target repair with API2026-03-10 returned403 installation_repositories=write requirement, not grant; owner-requested proactive-helper retry also403 with GETinvocationverified. No claimownerfailedsave, rawtokeninvalid orcompleteinstallationinventory. Astra accepted exact updatedsource. Research DOCONLY commit c356737ac97ef82fa3b382bdca994d16b99f1076 leads targetedGUIcheck/addalongsideexistingselectionifmissing or connectionrefreshifalreadyincluded; normaltaskflow remains documented notverifiedrepair. Flowmark/21Markdownlinks/OR9bodypassed. Access-fix incrementalbundle squares-401-cloud-publication-research-access-fix.bundle requires ONLY publicEF and was independentlyfetchedFF into restoredstandalonebaseline; entiretree/docbytes/connectivitymatch. Newfullnativehistory squares-401-native-tracker-installation-access.bundle; preservedpriorbundles andsourceimport6d/confirm8f. Actualpublication remainsblocked, no newwritesuntil meaningfulaccesschange. Evidence /workspace/squares-401-installation-access-repair.
+
+## Restored publication succeeded after connector access change, 2026-10-07
+
+The owner confirmed All repositories for installation100851868. Fresh API read
+reports repository_selection all, updated19:03:48Z; all paginated accessible
+repositories include targetjlevy/squares1299872453 (total157). Actual non-forced
+official proactive-gh-helper pushes saved exact import6d0546b4c8949d9775d1a99865ec4e7277251cc7
+and confirmation8f3c5484b9bade9cdf5c8fe332f2d5e6c2e016ac on GitHub.
+Draft PR415 targets main, draft PR416 targets codex/import-squish-401; gh stack link
+created formal stack417 and both remote membership queries confirm the same stack.
+Both exact head OIDs and chained bases verified, no source history rewrites.
+Hosted checks are running, not yet a passing CI claim; no merge authorized/performed.
+Progress reply posted at https://github.com/jlevy/squares/issues/401#issuecomment-6044898026.
+Direct elevated authenticated gh still failed TCP before this change; successful
+publication used the supported mediated route, not a proven direct bypass.
+
+All current issue comments captured:6043191866 edited18:33:04Z and6043263840
+created17:32:04Z. New revision pinned5e32bbd7028b6e3b869979278079cd37ed6770aa has
+seven new counts123,179,208,237,239,258,263 and five improved126,129,154,155,238.
+n153 is byte-identical to old attachment, provenance only. Follow-up owned by
+think-oxvk on codex/import-squish-401-followup above exact originalconfirmation.
+GPT-6.1 Sol prepares reported T-115; independent Astra complete dual check passes
+all13,2462 squares248653 pairs per checker in108.598s; full123-square invalid
+overlap/containment controls both rejected in7.684s. New final import review,
+record integration and gates remain active; these scratch receipts are not yet
+mapped confirmation assurance. Earlier reviews cover only original eleven.
+Keep issue401 open until expanded18-count import and accurate post-main reply.
