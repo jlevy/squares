@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 229 | 61 confirmed; 34 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 215 | 81 accepted; 39 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 230 | 61 confirmed; 35 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 216 | 81 accepted; 40 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -573,6 +573,11 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [One-Square Pooled Relaxation Witness](packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/README.md) | research synthesis | record | retained | — |
+| [Pooled Forbidden Cover](packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/README.md) | research synthesis | record | retained | — |
+| [Original-Parent Pooled Four-Case Finite Proof](packing/campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/README.md) | research synthesis | record | retained | — |
+| [H293 Conditional-Owned-Hull Trial Custody](packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/README.md) | research synthesis | record | retained | — |
+| [H293 Conditional-Owned-Hull Trial Custody](packing/campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull/README.md) | research synthesis | record | retained | — |
 | [n17 Session 184 Progress and Remaining Proof Obligations](docs/project/reviews/review-2026-10-07-n17-session-184-progress.md) | dated review record | record | retained | — |
 | [Numeric-Cap First-Round Readiness](packing/campaign/retained/session-184-n17-numeric-cap-readiness/README.md) | typed session record | record | retained | — |
 | [Session 184: TailA Dependency Reports](packing/campaign/retained/session-184-tail-a-dependencies/README.md) | typed session record | record | retained | — |
@@ -5811,7 +5816,8 @@ round that names the hypothesis, control roles included.
 | [H-292](packing/campaign/hypotheses/H-292-n17-conditional-owned-hull-gate.md) | confirmed | Exact finite shared-owned-hull gain within accepted parent | 2 | Fixedthreeguards/cleanreconstruction; no propagation or admission |
 | [H-293](packing/campaign/hypotheses/H-293-n17-parent-guard-owned-hull-continuation.md) | blocked | One-round parent-aware closed-guard exclusion | 2 | Original283 refusal;284 fresh resource stop; no accepted conditional child |
 | [H-294](packing/campaign/hypotheses/H-294-n17-pooled-parent-center-cases.md) | refuted | Pooled original-parent unsplit/four-case conditional exclusion | 1 | Completed20.74s finite criterion-miss; unsplit/allfour unresolved, no284geometry |
-| [H-295](packing/campaign/hypotheses/H-295-n17-pooled-forbidden-cover.md) | running | Pooled foreign-owned forbidden union on every closed guard piece | 1 | Registered60+60/120s finite reconstruction; no284geometry or global claim |
+| [H-295](packing/campaign/hypotheses/H-295-n17-pooled-forbidden-cover.md) | refuted | Pooled foreign-owned forbidden union on every closed guard piece | 1 | Completed20.73s finite criterion-miss; all18pieces uncovered, no exclusion |
+| [H-296](packing/campaign/hypotheses/H-296-n17-pooled-relaxation-witness.md) | running | One deterministic exact pooled owned-point relaxation witness | 1 | Registered60+60/120s; accepted286miss premise, no17packing or exclusion |
 
 ### Confirmed
 
@@ -6152,9 +6158,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 215 rounds registered in `series-000`.
+There are 216 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5779.2 wall-minutes.
+They record 2512.1 agent-minutes and 5779.5 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6410,7 +6416,8 @@ archive beside it.
 | [exp-283](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-283-h293-parent-guard-owned-hull-continuation.md) | 17 | target | H-293 | Parent-aware conditional round from accepted finite gain | Refused8.44s before initialization at centered parent premise-schema join | blocked |
 | [exp-284](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md) | 17 | target | H-293 | Exact native-path/role custody replication; same one-round recipe | Fresh replay resource stop after complete16 candidate; no accepted child or mathematical verdict | blocked |
 | [exp-285](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-285-h294-pooled-parent-center-cases.md) | 17 | target | H-294 | Original-parent pooled finite unsplit/four-case proof | Fresh finite reconstructionPASS; unsplit/allfour unresolved20.74s, no exclusion | rejected |
-| [exp-286](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md) | 17 | target | H-295 | Pooled foreign-owned exact forbidden union | Registered before intake; every closed piece/fresh reconstruction required | in-progress |
+| [exp-286](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md) | 17 | target | H-295 | Pooled foreign-owned exact forbidden union | Fresh reconstructionPASS; all18pieces uncovered20.73s, no exclusion | rejected |
+| [exp-287](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-287-h296-pooled-relaxation-witness.md) | 17 | target | H-296 | One exact square on first pooled-uncovered guard piece | Registeredbefore witness intake; three small acceptedunion inputs only | in-progress |
 
 ### Cost and provenance
 
@@ -6630,11 +6637,12 @@ archive beside it.
 | exp-283 | Production600s/fresh300s inside900s;4GiB sampled | 8.44s | — | error | Clean c785d7156; premise-schema refusal before scientific initialization |
 | exp-284 | Production600s/fresh300s inside900s;4GiB sampled | 619.36s | — | timebox | Complete16 candidate; fresh300s source deadline, no accepted conditional child |
 | exp-285 | Construction60s/fresh60s inside120s;4GiB sampled | 20.74s | — | criterion | Completed finite criterion-miss; unsplit/allfour unresolved, no284geometry |
-| exp-286 | Construction60s/fresh60s inside120s;4GiB sampled | — | — | — | Registered pooled foreign-owned forbidden union; no284geometry |
+| exp-286 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | 20.73s | — | criterion | Completed finite criterion-miss; all18pieces uncovered, no284geometry |
+| exp-287 | Construction60s/fresh60s inside120s;4GiB sampled perprocess | — | — | — | Registeredone-square relaxation witness; no17packing or exclusion |
 
-### What the 215 rounds jointly establish
+### What the 216 rounds jointly establish
 
-The 215 rounds use 2512.1 agent-minutes and 5779.2 wall-minutes under the campaign’s
+The 216 rounds use 2512.1 agent-minutes and 5779.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

@@ -15,6 +15,13 @@ from devtools import check_n17_widened_positive_cone as cone
 from sqpack import retained_json
 
 
+def symbolic_reference() -> dict[str, Any]:
+    # Retained symbolic subobject of accepted exp269, rebuilt by the slow control.
+    return exact.decode(
+        exact.read_bytes(Path(__file__).parent / "fixtures" / "n17-positive-cone-symbolic.json")
+    )
+
+
 def layout() -> exact.Layout:
     axes = {
         "ex": (exact.point(1), exact.point(0)),
@@ -32,11 +39,15 @@ def layout() -> exact.Layout:
 @pytest.fixture
 def packet(monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
     monkeypatch.setattr(cone, "load_inputs", lambda _path: ({"synthetic": True}, layout()))
+    # Finite schema/mutation controls do not repeat the measured symbolic rebuild.
+    monkeypatch.setattr(cone, "_symbolic_packet", lambda: copy.deepcopy(symbolic_reference()))
     return cone.generate(Path("synthetic-features.json"))
 
 
+@pytest.mark.slow
 def test_exact_symbolic_root_joins_cubic_and_weighted_incidence() -> None:
     symbolic = cone.symbolic_packet()
+    assert symbolic == symbolic_reference()
     assert symbolic["identities"]["centre_coefficients"] == ["0"] * 32
     assert len(symbolic["weighted_rows"]) == 17
     assert symbolic["retained_pairs"] == 19

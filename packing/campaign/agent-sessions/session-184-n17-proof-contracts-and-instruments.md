@@ -1910,7 +1910,10 @@ session:
     files:
     - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
     - SYNOPSIS.md
-    checks: []
+    checks:
+    - Latestf536 CI37639254949 retained actual record defect and symbolic82.51s fast-surface failure.
+    - Currentphase15 status completed, explicitREADME283 through286 map repair; stableviews checked.
+    - Unchanged30s nested pytest regression passed10.80s; no broad rerun or wallthreshold raise.
     uncertainty: No accepted conditional child from exp284; no new exclusion before fresh proof.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -2088,9 +2091,9 @@ session:
   - Exp273 accepted conservativeinventory10.49s andexp275 acceptedexactcapjoin1.21s atclean3575c02,
     no newbound/censuschange.
   stop_reason: null
-  next_action: Execute registered H295/exp286 pooled forbidden-cover trial with fresh finite
-    reconstruction; prepare reviewed proof-support successors, keep frozen validation beside
-    mathematics and preserve every verdict.
+  next_action: Retain completed H295/exp286 finite criterion-miss; finish H296/exp287
+    one-square relaxation-witness source controls and preregistration before target intake.
+    Keep frozen deep validation beside mathematics and preserve every verdict.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T141342Z.yaml
 ---

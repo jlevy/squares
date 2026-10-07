@@ -1020,6 +1020,14 @@ guard. Matched ordinary-final foreign hulls share the same centres and strict co
 A complete uncovered piece misses this finite recipe; it is not a packing witness.
 The accepted original parent supplies custody; no incomplete exp284 geometry is used.
 
+[H-296](hypotheses/H-296-n17-pooled-relaxation-witness.md) tests one deterministic exact
+square on the first pooled-uncovered closed-guard piece, using the accepted exp286
+finite criterion-miss as premise.
+The candidate must retain all conditional owner0 owned points and avoid every foreign
+pooled open-square obstacle.
+It is only an owned-point relaxation witness, with no17-square packing or exclusion
+claim.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/probe_n17_pooled_relaxation_witness.py
+    kind: generated-artifact
+    boundary: Frozen runtime union receipts and descriptor bytes plus their canonical parent/pool identities cross the accepted finite-premise boundary; no Git source identity determines witness acceptance.
   - path: packing/devtools/probe_n17_pooled_forbidden_cover.py
     kind: generated-artifact
     boundary: Runtime accepted-parent object and descriptor bytes remain unchanged across finite reconstruction; no Git source identity determines acceptance.

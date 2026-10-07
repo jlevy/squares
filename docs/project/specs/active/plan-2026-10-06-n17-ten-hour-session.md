@@ -331,14 +331,20 @@ unsplit test nor any of the four closed centre cases found a common collision po
 This is a completed negative result for that finite recipe, not a physical packing
 counterexample.
 
-The next selected route asks whether the union of several strict collision regions
-covers every necessary centre piece under the same angular guard.
+The separately registered
+[exp286](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md)
+tested the union of strict collision regions under the same angular guard.
+Construction and fresh finite verification completed in20.73 seconds; all18 necessary
+pieces remained uncovered in both matched controls.
+The selected next discriminator is a fixed single-square relaxation witness checking
+container containment, conditional ownership and avoidance of every foreign owned hull.
+It can diagnose missing constraints without asserting a17-square packing.
 Astra owns the implication and source review; Sol implements and independently checks
 the finite instrument before a separately registered target run.
-The selected construction and replay ceilings are60 seconds each,120 seconds combined,
-with a4GiB process-group memory ceiling.
-If that recipe misses, the next discriminator is a checked single-square relaxation
-witness, rather than another automatic long producer round.
+The construction and replay ceilings are60 seconds each,120 seconds combined.
+The actual supervisor samples a4GiB RSS ceiling per live process and cleans up the owned
+group; exp286’s aggregate-memory declaration was a metadata error preserved in its
+outcome record.
 
 [Session184](../../../../packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md)
 owns the current30-minute slices, fixed target budgets and disjoint agent deliverables.

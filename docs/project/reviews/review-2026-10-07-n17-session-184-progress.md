@@ -12,7 +12,7 @@ preserves the launch assessment; the
 records execution and costs.
 The mathematical analysis and selected proof interfaces belong to
 [Astra’s research report](../research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md).
-This is an interim checkpoint through exp285; subsequent results require an explicit
+This is an interim checkpoint through exp286; subsequent results require an explicit
 update.
 
 ## Current Theorem State
@@ -78,25 +78,38 @@ This is a completed negative result for the frozen shared-point recipe.
 The accepted receipt has543 raw pooled points but nonempty pools for only owners0,1,2,3
 and20; therefore only four foreign point pools are available to the next recipe.
 
+The separately registered
+[exp286](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-286-h295-pooled-forbidden-cover.md)
+completed construction and fresh finite verification in20.73 seconds.
+Both the ordinary-final-hull and pooled-point controls left all18 necessary pieces
+uncovered: six on the first singleton seam, four on the interior row, and eight on the
+last singleton seam.
+The common strict cores passed their exact checks.
+This is a complete miss for the frozen union-cover recipe, with no excluded angular
+slice or census admission.
+
 ## Selected Next Mathematical Discriminator
 
-The next finite route checks whether a union of strict collision regions covers every
-necessary centre piece under the same closed angular guard.
-For each closed row slice, a common strict square core and a foreign owned-point hull
-define a forbidden centre region by a Minkowski difference.
-Different points and partners may exclude different centres.
-Complete coverage must include original pieces, row seams and degenerate domains.
-Astra reviews that implication; the finite instrument must independently reconstruct the
-exact region union before any exclusion claim.
+The selected prospective discriminator is a verified single-square relaxation witness.
+It fixes the rational angle parameter `53/128`, takes the first pooled-uncovered piece
+on the interior row, and selects one centre deterministically from the exact sweep.
+Acceptance requires exact container containment, every conditional owner0 hull vertex
+strictly inside the square, and no foreign owned hull meeting its open interior.
+Boundary-only contact is permitted.
+A fresh reconstruction must check those predicates with the same fixed choice.
+Failure does not authorize another angle or centre in the same experiment.
 
-This route has no proved dominance over the inherited-owned-hull shared-point method.
-It uses no exp284 geometry.
-Its selected construction and replay ceilings are60 seconds each,120 seconds combined,
-with a4GiB process-group memory ceiling.
-If it misses, the proposed next discriminator is a verified single-square relaxation
-witness satisfying the owned-point facts at a fixed pose.
 Such a witness would diagnose missing cross-owner constraints; it would not be a
-17-square packing.
+17-square packing. If it passes, the next different information source is the partners’
+complete centre and angle covers, rather than more point pooling.
+That prospective proof must preserve every closed partner row and piece.
+The tested finite recipes supply no proved dominance over one another, and no exp284
+geometry is used. Construction and replay each have a60-second ceiling,120 seconds
+combined. The actual supervisor samples a4GiB RSS limit per live process and cleans up
+the owned process group; it supplies no allocation-time hard cap or aggregate-group
+enforcement. Exp286’s retained launch and manifest incorrectly named aggregate
+enforcement. Its outcome record preserves that metadata deviation and the actual sampled
+scope.
 
 ## Earlier Proofs, Verification and Publication
 

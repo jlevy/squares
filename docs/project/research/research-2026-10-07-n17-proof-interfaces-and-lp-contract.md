@@ -2484,7 +2484,9 @@ The result concerns the inherited centered parent and $I$ only; it supplies no
 whole-mask, old-$U$-census or global-optimality admission.
 
 Freeze one worker, 60 seconds for construction and 60 for fresh reconstruction,
-120 seconds combined, with a sampled 4 GiB memory ceiling. Each phase includes its
+120 seconds combined, with a sampled 4 GiB RSS guard per live process and cleanup
+of the owned process group. This is not an aggregate or allocation-time memory
+limit. Each phase includes its
 own complete child extraction. Limit descriptors and accepted receipts to 10 MiB,
 the conditional child to 64 MiB compressed and 512 MiB decoded, its extracted final
 state and finite output to 64 MiB each. Admit at most 16,384 arithmetic input
@@ -2636,7 +2638,8 @@ claim nor a packing-existence conclusion is justified.
 
 This instrument inherits the original-parent custody and input limits above.
 Freeze one worker, 60 seconds for construction and 60 for fresh reconstruction,
-120 seconds combined, with a sampled 4 GiB memory ceiling. The new geometric
+120 seconds combined, with a sampled 4 GiB RSS guard per live process and cleanup
+of the owned process group. The new geometric
 ceilings are 32 core vertices, 256 Minkowski-hull vertices, 384 vertices per clipped
 forbidden region, 256 vertices per centre piece, 256 nonempty centre pieces in
 total, and 65,536 generated vertex differences per row. Before each sweep allow at
@@ -2660,17 +2663,74 @@ row-piece refusal, custody and resource controls, and a fresh producer-, kernel-
 and root-free reconstruction. The accepted parent remains an explicit premise;
 finite reconstruction is not a new replay of its geometry.
 
+The registered H-295/exp-286 construction and fresh reconstruction completed in
+20.732115917 seconds with normal cleanup. Both report `criterion_missed`, and the
+fresh receipt has `verification_passed: true`. All eighteen nonempty necessary
+pieces remain uncovered under both the ordinary and pooled controls: six pieces
+at row 25's left singleton, four on row 26's full $I$, and eight at row 27's right
+singleton. The independently checked cores have four, eight and four vertices
+respectively. This is a completed miss of the finite cover criterion. It proves
+neither a conditional exclusion nor that a represented centre is a feasible
+packing. No compression-only closure was found.
+The original launch metadata called the RSS scope aggregate, but the actual
+supervisor tests each live process separately. The raw record is preserved with
+that resource-description deviation; every sampled process stayed below the
+declared guard. This sampled per-process check is not an aggregate or hard
+allocation-time limit, and no scientific criterion or target run changed.
+
 ### A Prospective Discriminator After an Uncovered Piece
 
-If the pooled cover completes with an uncovered piece, a useful next question is
-whether its ownership facts admit even one square-0 pose in that gap. A separately
-registered finite test could choose a deterministic uncovered centre and a fixed
-rational angle in $I$, then check numeric containment, strict inclusion of all
-conditional $Q_0$ points, and absence of foreign pooled points from the square's
-interior. A successful witness would show that those owned-point facts alone do
-not exclude that pose. It would provide no positions or orientations for the
-other sixteen squares and would not be a packing counterexample. No such witness
-has been chosen or evaluated here.
+The next source contract fixes $\tau=53/128$, strictly inside $I$, and selects only
+row 26, whose retained interval must equal $I$. Choose its first pooled-uncovered
+piece in retained order. For a positive-area piece, independently reconstruct the
+exact sweep's first uncovered abscissa and require equality with exp-286's stored
+probe. At that abscissa, choose the midpoint of the first positive uncovered
+vertical gap in increasing ordinate, or the uncovered point when the target
+section is a singleton. Closed touching intervals leave no gap. For a degenerate
+piece, parameterize its lexicographically ordered endpoints by $t\in[0,1]$ and
+apply the same rule to the first uncovered parameter interval. This is a declared
+dimension case, not a choice made after a failed pose test.
+
+If row 26 has no uncovered piece, the recipe is inapplicable. Otherwise use only
+the selected centre $x$: there is no second centre or angle after a failed test.
+Require $x$ to lie in its retained piece and outside all retained forbidden regions.
+Form the exact unit square with vertices
+$x+(\eta u+\zeta v)/2$, where $\eta,\zeta\in\{-1,1\}$,
+$u=(c(\tau),s(\tau))$ and $v=(-s(\tau),c(\tau))$.
+All four vertices must lie in $C(V)$. Every vertex of the conditional
+$Q_0=\operatorname{conv}(Q_0^{\rm parent}\cup S_5)$ must satisfy both strict body-axis
+bounds $|u\cdot(q-x)|<1/2$ and $|v\cdot(q-x)|<1/2$.
+
+For each foreign pool, compute its intersection $K_j$ with the closed square.
+If this intersection is nonempty, take the mean of all its vertices with equal
+positive weights. The intersection meets the square's open interior exactly when
+that mean satisfies all four strict square inequalities. To prove the forward
+direction, an interior point makes each boundary inequality strict somewhere on
+$K_j$, hence at some vertex; averaging all vertices then makes every inequality
+strict. The reverse direction uses the mean itself. This argument also handles
+point and segment intersections. Boundary-only contacts are allowed, whereas a
+segment joining opposite boundary points has an interior mean and fails avoidance.
+
+Success requires containment, strict ownership of every $Q_0$ vertex, and absence
+of every foreign pool from the square's open interior. It establishes one square
+consistent with these owned-point constraints and its retained necessary centre
+piece. It provides no positions or orientations for the other sixteen squares and
+is not a packing counterexample. A failed pose condition is only this deterministic
+witness recipe's miss; it does not prove that the ownership representation suffices.
+No selected centre or pose condition has been evaluated before its registration.
+
+The accepted complete exp-286 finite reconstruction and original-parent custody
+are explicit premises, bound by descriptor and receipt byte identities. Fresh
+verification reconstructs the selection and every pose test from those retained
+polygons; it does not replay parent geometry or the entire union proof. Freeze
+60 seconds each for construction and fresh verification, 120 seconds combined,
+one worker, a sampled 4 GiB RSS guard per live process, and owned-group cleanup.
+The guard is not an aggregate or allocation-time limit. Each accepted input is at most
+10 MiB, output at most 64 MiB, and normalized geometric rationals at most 4,096
+bits. Retain the 128-vertex pool, 256-vertex centre piece and 384-vertex clipped
+region limits; the square has four vertices and its intersection with a pool has
+at most 132. The existing sweep edge and comparison limits still apply. Unrelated
+accepted metadata remains identity-bound without being reinterpreted numerically.
 
 Necessary centre slabs from owned points offer another possible refinement. For
 a rational direction $n$ and a certified upper bound $H_J(n)$ on the unit square's

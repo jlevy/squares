@@ -923,6 +923,7 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
                 "exp-284-parent-guard-native-custody",
                 "exp-285-pooled-parent-center-cases",
                 "exp-286-pooled-forbidden-cover",
+                "exp-287-pooled-relaxation-witness",
             )
         } <= roots
     for control in specification["controls"]:

@@ -126,6 +126,7 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-284-parent-guard-native-custody",
         "exp-285-pooled-parent-center-cases",
         "exp-286-pooled-forbidden-cover",
+        "exp-287-pooled-relaxation-witness",
     )
 )
 
