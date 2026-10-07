@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_capture_checkpoint.py
+    kind: generated-artifact
+    boundary: Runtime-generated canonical numeric-Frame seed/node identities and compressed-byte custody join the descriptor to production and fresh replay receipts; these generated objects are not source or commit integrity pins.
   - path: packing/devtools/check_n17_capture_leaf.py
     kind: generated-artifact
     boundary: Canonical runtime seed/node identities join the descriptor, producer receipt and fresh independent full saved replay; these generated objects are hosted data, not repository-integrity checks.
