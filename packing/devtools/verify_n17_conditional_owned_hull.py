@@ -14,7 +14,7 @@ import math
 import sys
 import time
 from fractions import Fraction as Q
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, cast
 
 from devtools import probe_n17_conditional_owned_hull as finite
@@ -233,7 +233,7 @@ def prepare(document: dict[str, Any], *, deadline: float) -> dict[str, Any]:
         and result["container"] == context
         and result["certificate"]
         == {"seed_sha256": gate["seed_sha256"], "node_sha256": gate["node_sha256"]}
-        and result["compressed_sha256"] == gate["compressed_sha256"]
+        and result["compressed_sha256"] == parent_compressed_roles(gate)
         and result["mask"] == final["mask"]
         and result["counts"]["steps"] == 16
         and result["closed"] is False
@@ -258,6 +258,26 @@ def prepare(document: dict[str, Any], *, deadline: float) -> dict[str, Any]:
         frozen=frozen,
         deadline=deadline,
     )
+
+
+def parent_compressed_roles(gate: dict[str, Any]) -> dict[str, str]:
+    """Join exact canonical native paths to the standing receipt's two role keys."""
+    directory = gate["saved_objects"]
+    require(
+        type(directory) is str
+        and not PurePosixPath(directory).is_absolute()
+        and ".." not in PurePosixPath(directory).parts,
+        "invalid canonical parent directory",
+    )
+    paths = {
+        kind: str(PurePosixPath(directory) / f"{kind}-{gate[kind + '_sha256']}.json.gz")
+        for kind in ("seed", "node")
+    }
+    require(
+        set(gate["compressed_sha256"]) == set(paths.values()),
+        "canonical parent compressed path roster differs",
+    )
+    return {kind: gate["compressed_sha256"][path] for kind, path in paths.items()}
 
 
 def initialize(

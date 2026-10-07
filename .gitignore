@@ -70,3 +70,5 @@ packing/atlas/known-best/video/spikes/**/frames/
 
 # H293 conditional proof child: native object, preserved outside Git; custody below.
 /packing/campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull/conditional-node.json.gz
+
+/packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/conditional-node.json.gz

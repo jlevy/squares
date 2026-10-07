@@ -1,14 +1,14 @@
 ---
-title: "exp-283 \u2014 one-round parent-guard owned-hull continuation"
+title: "exp-284 \u2014 parent-aware continuation receipt-role repair"
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
 experiment:
-  id: exp-283
+  id: exp-284
   series: series-000
-  title: One-round conditional-owned-hull continuation from accepted H290 and exp282
+  title: Operational receipt-role replication of the fixed parent-aware conditional round
   date: '2026-10-07'
   hypotheses:
   - H-293
@@ -27,12 +27,12 @@ experiment:
     point: 17
     role: target
   method:
-    control: Producer34 target-free controls passed1.33s; independent checker38 passed3.27s
-      plus the new deadline control passed0.16s; author final39 passed1.49s. Ruff/BasedPyright/format
-      zero for producer, checker static checks zero. Sole-Astra mathematical source review
-      clear. Exact child-shaped sorted JSON/ChildStream canonical EOF roundtrip, off-grid
-      witnessed compression, all-finite touch/cross/noncross, guard boundary-live/empty, partial-prefix
-      and resource/refusal controls. No actual conditional child or intersection evaluated.
+    control: Frozen producer34 controls pass; repaired checker46 target-free controls pass1.68s/Ruffzero.
+      Independent eight new/affected native-role roster/digest and exact old20+new5 controls
+      pass0.18s; previous complete source reviews remain scoped. Accepted native path-keyed
+      compressed identities now join exact standing seed/node roles, with no unordered-set
+      or missing/extra-key acceptance. Scientific geometry, criteria and budgets unchanged;
+      no actual child input or intersection evaluated.
     candidate: Accepted H290 full17 numeric-cap final domain and accepted exp280 same-object
       full centered PASS_STALL; U=L=1169/250, V=935106018721/200000000000, B=1, original24
       closed cells and D4. Label1/owner0 CLOSED half-angle guard [13/32,27/64]. Accepted exp282
@@ -47,30 +47,17 @@ experiment:
     operator: Sol coordinator owns registration/source freeze, supervised launch and disposition
       in Session184.
     entry_point: packing/devtools/produce_n17_conditional_owned_hull.py
-    command: Exact exp283-argv.json production and fresh_verification arrays. Fresh phase
-      derives only child_object from the frozen production receipt; scientific descriptor
-      unchanged.
+    command: Exact new execution-manifest.json production/fresh arrays under the same600+300/900s
+      combined supervisor. Fresh descriptor copies only the producer child_object; all scientific
+      fields unchanged.
     budget: 600s production+300s fresh inside combined900s/TERM900/KILL910 and sampled4096MiB
       RSS. Parent seed10MiB compressed/decoded; parent node512MiB compressed/2GiB decoded;
       child64MiB compressed/512MiB decoded; final/report64MiB. No retry, threshold tuning
       or propagation beyond one registered round.
-    record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull
-    commit: c785d7156963371c75a0ba40df14f1ff91059ce7
-    dirty: false
-  results:
-  - shape: determination
-    role: outcome
-    question: Does the frozen parent-aware one-round continuation produce a freshly checked
-      conditional contradiction?
-    outcome: invalid
-    checked_by: Original registered trial refused after8.43568754s supervised wall, rc1 and
-      normal cleanup. Frozen producer reports centered same-object full stall premise differs
-      before conditional initialization, initial intersection, updates, child creation or
-      fresh replay. No mathematical criterion was evaluated. Preserve original receipts and
-      repair the operational accepted-receipt schema join before a separately registered replication;
-      all scientific parameters and budgets remain frozen.
+    record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody
+  results: []
   verdict:
-    decision: blocked
+    decision: in-progress
     primary_criterion: Fresh independent PASS_CONDITIONAL_CLOSED with exact initial lexicographic
       all-finite-hull intersection at step -1, a checked ordinary post-step closure, or final
       owner0 step15 guarded_owner_cover_empty covering every CLOSED row meeting [13/32,27/64],
@@ -79,27 +66,27 @@ experiment:
       unresolved. Partial/resource stops are incomplete; malformed, altered premises or failed
       proof replay are refused. No physical counterexample, global proof, mask exclusion or
       census admission.
-    reason: Original registered trial refused after8.43568754s supervised wall, rc1 and normal
-      cleanup. Frozen producer reports centered same-object full stall premise differs before
-      conditional initialization, initial intersection, updates, child creation or fresh replay.
-      No mathematical criterion was evaluated. Preserve original receipts and repair the operational
-      accepted-receipt schema join before a separately registered replication; all scientific
-      parameters and budgets remain frozen.
+    reason: Separately preregistered operational accepted-receipt custody replication after
+      source and focused independent controls. Originalexp283 stays blocked/refused before
+      initialization. No target has run for this replication.
     needs_review: false
-  effort:
-    timebox: 600s production+300s fresh inside combined900s/TERM900/KILL910 and sampled4096MiB
-      RSS. Parent seed10MiB compressed/decoded; parent node512MiB compressed/2GiB decoded;
-      child64MiB compressed/512MiB decoded; final/report64MiB. No retry, threshold tuning
-      or propagation beyond one registered round.
-    wall_seconds: 8.44
-    stopped_by: error
+  lease:
+    expires: '2026-10-07T14:37:15Z'
+    host: macOS arm64
 ---
-# Parent-Guard Owned-Hull Continuation
+# Parent-Aware Continuation Receipt-Role Repair
 
-The original target refused before initialization after8.43568754s. The operational
-premise-schema failure is retained; no intersection, update, child or fresh replay was
-performed. A separately registered replication is required after the source/control
-repair.
+Original exp-283 refused after8.43568754s at the accepted centered parent receipt join,
+before initial intersection, owner updates, child creation or fresh replay.
+Preserve that target and its bytes unchanged.
+This separate replication repairs only the operational compressed-identity role mapping
+between the native standalone receipt and the accepted descriptor; it retains every
+source-object identity check.
+
+The H293 mathematical guard, all20+5 owned vertices, initial/post-step/guard-empty
+criterion, one16-owner round, no refinement and all resource ceilings remain unchanged.
+The repaired source and production-shaped controls passed independent engineering
+review; mathematical geometry and the reviewed conditional implication are unchanged.
 
 This experiment uses accepted H290 and the same-object centered exp280 PASS_STALL as
 explicit parent premises, together with accepted exp282’s fresh exact finite

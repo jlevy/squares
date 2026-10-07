@@ -314,7 +314,11 @@ def loader(
         },
         "seed_sha256": "seed",
         "node_sha256": "node",
-        "compressed_sha256": {},
+        "saved_objects": "synthetic-parent",
+        "compressed_sha256": {
+            "synthetic-parent/seed-seed.json.gz": "seed-bytes",
+            "synthetic-parent/node-node.json.gz": "node-bytes",
+        },
         "h290_receipt_sha256": "h290",
     }
     centered = {
@@ -336,7 +340,7 @@ def loader(
                     control.finite.U, control.finite.V
                 ).record(),
                 "certificate": {"seed_sha256": "seed", "node_sha256": "node"},
-                "compressed_sha256": {},
+                "compressed_sha256": {"seed": "seed-bytes", "node": "node-bytes"},
                 "mask": final["mask"],
                 "counts": {"steps": 16},
                 "closed": False,
@@ -402,7 +406,17 @@ def test_preparation_exact_old20_new5_custody_and_no_alias(
 
 
 @pytest.mark.parametrize(
-    "mutation", ["parentid", "sampled", "hull", "finite", "calibration", "oldcount"]
+    "mutation",
+    [
+        "parentid",
+        "sampled",
+        "hull",
+        "finite",
+        "calibration",
+        "oldcount",
+        "compresseddigest",
+        "compressedroles",
+    ],
 )
 def test_preparation_premise_mutations_refused(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mutation: str
@@ -429,6 +443,10 @@ def test_preparation_premise_mutations_refused(
         value["endpoint_control"]["nonempty"] = False
     elif mutation == "oldcount":
         final["groups"]["0"].pop()
+    elif mutation == "compresseddigest":
+        value["fresh_standing"]["receipt"]["compressed_sha256"]["seed"] = "foreign-bytes"
+    elif mutation == "compressedroles":
+        value["fresh_standing"]["receipt"]["compressed_sha256"]["extra"] = "seed-bytes"
     path.write_text(json.dumps(value))
     if field == "centered_parent_receipt":
         document["centered_parent_receipt_sha256"] = control.hashlib.sha256(
@@ -518,3 +536,29 @@ def test_expired_after_initial_scan_never_reports_closed(
     monkeypatch.setattr(control, "initial_closure", expired)
     with pytest.raises(control.IncompleteError, match="wall ceiling"):
         control.replay(prepared, stream, deadline=deadline)
+
+
+@pytest.mark.parametrize("change", [None, "missing", "extra", "foreign_name", "wrong_digest"])
+def test_native_compressed_paths_join_exact_role_roster(change: str | None) -> None:
+    gate: dict[str, Any] = {
+        "saved_objects": "packing/retained/parent",
+        "seed_sha256": "a" * 64,
+        "node_sha256": "b" * 64,
+    }
+    seed = gate["saved_objects"] + "/seed-" + gate["seed_sha256"] + ".json.gz"
+    node = gate["saved_objects"] + "/node-" + gate["node_sha256"] + ".json.gz"
+    gate["compressed_sha256"] = {seed: "c" * 64, node: "d" * 64}
+    expected = {"seed": "c" * 64, "node": "d" * 64}
+    if change == "missing":
+        del gate["compressed_sha256"][node]
+    elif change == "extra":
+        gate["compressed_sha256"]["foreign"] = "c" * 64
+    elif change == "foreign_name":
+        gate["compressed_sha256"][node + ".extra"] = gate["compressed_sha256"].pop(node)
+    elif change == "wrong_digest":
+        gate["compressed_sha256"][seed] = "e" * 64
+    if change in {"missing", "extra", "foreign_name"}:
+        with pytest.raises(ValueError, match="path roster"):
+            control.parent_compressed_roles(gate)
+    else:
+        assert (control.parent_compressed_roles(gate) == expected) is (change is None)
