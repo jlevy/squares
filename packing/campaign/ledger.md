@@ -1163,7 +1163,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-290 | confirmed | proof | The new H289 numeric-cap full17 checkpoint can be consumed with exact  |  | 1 |  | 2.7m wall |
 | H-291 | confirmed | proof | The accepted numeric-cap full17 endpoint checkpoint passes a fresh ind |  | 3 |  | 1.9m wall |
 | H-292 | confirmed | proof | A finite exact conditional ownership recipe from the accepted H290 par |  | 2 |  | 10s wall |
-| H-293 | blocked | proof | The fixed parent-aware owned-hull initialization and one no-refinement |  | 2 |  | 8s wall |
+| H-293 | blocked | proof | The fixed parent-aware owned-hull initialization and one no-refinement |  | 2 |  | 10.5m wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1295,7 +1295,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-255 | series-000 | 17 | Claude Session 182; the run operator's lane E queue ran the ten shards on a second clean run worktree in the slot left after the kernel lanes | H-273 | All 95 distance-2 orbits were searched and none placed, while every shard's control placed. Under the frozen criterion that is no placement in 95 searches, not a proof of infeasibility, so H-273 stays unresolved. The 0.00027 near miss on mask 3963647 is the orbit a later exact or longer search would take first. |
 | exp-260 | series-000 | 17 | GPT-6.1 Sol coordinator executes Astra's frozen mathematical contract, Session184. | H-277 | Forty-three targets have positive finite numerical minima; five all-infeasible targets lack exact Farkas witnesses. The frozen positive criterion is unavailable. Slider omission exposes a negative relaxed margin, so slider coverage remains essential. |
 
-### blocked (17)
+### blocked (18)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1316,6 +1316,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-279 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Actual distinct diagnostic replication refused after4.22587s supervised wall, rc1/cleanupcomplete. Retained child receipt gives step0 owned hull too large: independent standing limit16 conflicts with accepted H289 producer hull_limit48. No complete standing acceptance or mathematical conclusion; repair the computational capacity with unchanged exact ownership checks and register a new control. |
 | exp-281 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-292 | Actual frozen construction stopped incomplete after 1.11243s supervised wall, rc1/cleanup complete: conditional gate rational string ceiling. No gain polygons or fresh reconstruction were computed; no mathematical verdict. Preserve original 4096bit/input contract and inspect the admitted input-size interface before any separately registered correction. |
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
+| exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
 ### accepted (81)
 
@@ -1420,12 +1421,6 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Separately preregistered operational accepted-receipt custody replication after source and focused independent controls. Originalexp283 stays blocked/refused before initialization. No target has run for this replication. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1470,10 +1465,11 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-230 | H-241 | 150.0m wall | timebox | The leg-3 warm state, retained as results/agenda-042/exp-230 |  |
 | exp-231 | H-236 | 397.1m wall | timebox | The top tree and 198 closed subtree files in attic/rung0 of  | Run the 58 wall-cap subtrees with the unchanged Amendment 1  |
 | exp-257 | H-275 | 555.2m wall | timebox | Draw 31 of packing/campaign/explorations/X048-session-182-ov |  |
+| exp-284 | H-293 | 10.3m wall | timebox | Preserve the exp-284 production, incomplete verification and |  |
 
 ## Effort
 
-213 rounds, 2512.1 agent-minutes, 5768.5 wall-minutes.
+213 rounds, 2512.1 agent-minutes, 5778.9 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

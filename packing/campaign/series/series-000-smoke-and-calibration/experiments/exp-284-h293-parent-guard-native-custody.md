@@ -55,9 +55,22 @@ experiment:
       child64MiB compressed/512MiB decoded; final/report64MiB. No retry, threshold tuning
       or propagation beyond one registered round.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody
-  results: []
+    commit: ccb096d0bfc2d302ac07b412129830e8193694a8
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Does the one-round conditional candidate have a complete fresh exact acceptance?
+    outcome: invalid
+    checked_by: Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal
+      cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s
+      subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh
+      full conditional replay hit its300s source deadline (conditional gate wall ceiling);
+      fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss,
+      exclusion or admission. Preserve native child and all receipts; do not retry the unchanged
+      long replay or use its unaccepted geometry as a finite-case premise.
   verdict:
-    decision: in-progress
+    decision: blocked
     primary_criterion: Fresh independent PASS_CONDITIONAL_CLOSED with exact initial lexicographic
       all-finite-hull intersection at step -1, a checked ordinary post-step closure, or final
       owner0 step15 guarded_owner_cover_empty covering every CLOSED row meeting [13/32,27/64],
@@ -66,15 +79,36 @@ experiment:
       unresolved. Partial/resource stops are incomplete; malformed, altered premises or failed
       proof replay are refused. No physical counterexample, global proof, mask exclusion or
       census admission.
-    reason: Separately preregistered operational accepted-receipt custody replication after
-      source and focused independent controls. Originalexp283 stays blocked/refused before
-      initialization. No target has run for this replication.
+    reason: Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal
+      cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s
+      subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh
+      full conditional replay hit its300s source deadline (conditional gate wall ceiling);
+      fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss,
+      exclusion or admission. Preserve native child and all receipts; do not retry the unchanged
+      long replay or use its unaccepted geometry as a finite-case premise.
     needs_review: false
-  lease:
-    expires: '2026-10-07T14:37:15Z'
-    host: macOS arm64
+    resume_from: Preserve the exp-284 production, incomplete verification and native child
+      as partial evidence. The next separately registered H294 finite trial reconstructs
+      accepted H290/exp-280/exp-282 conditional initialization and original-parent kernels;
+      it uses no exp-284 geometry and does not retry this unchanged long replay.
+  effort:
+    timebox: 600s production+300s fresh inside combined900s/TERM900/KILL910 and sampled4096MiB
+      RSS. Parent seed10MiB compressed/decoded; parent node512MiB compressed/2GiB decoded;
+      child64MiB compressed/512MiB decoded; final/report64MiB. No retry, threshold tuning
+      or propagation beyond one registered round.
+    wall_seconds: 619.36
+    stopped_by: timebox
 ---
-# Parent-Aware Continuation Receipt-Role Repair
+# Parent-Aware Continuation Native Custody Replication
+
+Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup.
+Production returned a complete16-update nonclosed candidate with zero splits:310.09119s
+subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full
+conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh
+subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss,
+exclusion or admission.
+Preserve native child and all receipts; do not retry the unchanged long replay or use
+its unaccepted geometry as a finite-case premise.
 
 Original exp-283 refused after8.43568754s at the accepted centered parent receipt join,
 before initial intersection, owner updates, child creation or fresh replay.

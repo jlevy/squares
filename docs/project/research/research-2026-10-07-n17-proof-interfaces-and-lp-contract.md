@@ -2258,14 +2258,16 @@ whether tighter angular arithmetic or position conditioning is worth a separatel
 registered implementation. Both implications above are sole-agent hand derivations,
 without independent mathematical review or target measurements.
 
-### Selected successor after a complete nonclosed conditional round
+### Selected successor: four closed centre cases
 
 If the registered H-293 recipe completes all sixteen updates and its fresh full
 checker accepts a nonclosed result, the selected different approach is a finite
 four-case centre partition. It is prospective: no conditional child geometry,
 partition signs or gains have been evaluated for this successor. Exp-283's
 parent-custody schema refusal occurred before any child or update and therefore
-does not trigger it. That operational refusal is not a mathematical negative.
+is not a mathematical negative. The finite proof also has a separately declared
+initial-state fallback if no complete conditional child is accepted. These input
+routes are distinct; registration selects one before the finite target runs.
 
 The angle interval is already narrow. The remaining common-owned construction
 quantifies over broad centre domains. Partitioning the two diagonal centre
@@ -2274,21 +2276,41 @@ contradiction in every case, without another producer round or a new numerical
 separation LP.
 
 **Accepted parent and scope.** Let $D$ be the original centered $C(V)$ occupied-cell
-domain with the inherited closed guard $\tau_1\in I$. Require a fresh, full
+domain with the inherited closed guard $\tau_1\in I$. The preferred
+`accepted_complete_conditional_child` base requires a fresh, full
 `PASS_CONDITIONAL_STALL` receipt for exactly sixteen complete updates, together with
 the immutable conditional child, its canonical and compressed identities, its
 initial-state identity, and the original parent, finite-point and centered-container
-premise references. A refused, partial or closed child is not this experiment's
-input. The accepted final row cover and owned hulls describe every physical packing
+premise references. A refused, partial or closed child cannot supply this base.
+The accepted final row cover and owned hulls describe every physical packing
 in $D$; the experiment does not assert that every represented tuple is physical.
 
-The intake must stream the complete child through canonical EOF and bind its exact
+The fallback `accepted_conditional_initialization` base instead freshly reconstructs
+the same conditional initialization from H-290, its same-object full centered replay
+in exp-280, and the freshly checked exp-282 finite certificate. It takes the original
+parent rows and other owned hulls, and augments owner 0 by all twenty old points and
+the five checked new points. Their hull has at most twenty-five vertices. The
+parent-cover and finite-ownership implications already establish the invariant for
+$D$; no conditional child is required. This route inherits no point, row or update
+from an incomplete or refused trial. It records fresh initialization reconstruction
+and accepted original-parent geometry explicitly, without claiming a child replay.
+The four-case geometry, decision rule and arithmetic limits below are the same for
+both bases. Exp-284's producer completed sixteen updates, but its fresh conditional
+replay reached the wall ceiling. That child has not been accepted and supplies no
+geometry or owned points to this successor. The proposed H-294/exp-285 target
+therefore selects the initial fallback. The complete-child route remains a distinct
+future option, not an implicit source of facts for this run.
+
+For the complete-child base, intake must stream the complete child through canonical EOF and bind its exact
 header, ancestry, guard, world, owner keys, final row counts and predecessor
 references to that accepted receipt. Use the same exact role-to-path normalization
 for compressed identities as the corrected conditional intake. Parent geometry is
 an explicitly accepted premise, not geometry replayed by this finite instrument.
 The fresh finite checker imports neither the producer, kernel nor algebraic-root
 machinery. It independently repeats intake and every finite construction below.
+For the initial base it independently repeats the original-parent intake and finite
+point reconstruction instead. Each descriptor and receipt must identify the actual
+base kind and its different premise identities.
 
 Arithmetic uses the owner-0 residual polygons in rows meeting $I$, their closed
 intervals, and all seventeen accepted owned hulls. Unused row geometry and large
@@ -2296,6 +2318,62 @@ root or endpoint scalars remain structurally checked, identity-bound parent data
 Do not repeat the unrelated-scalar parsing failure from exp-281. The original frame
 has $B=1$, outer cap $U$, inner cap $V$ and offset $o=(U-V)/2$; its analytic label 1
 is owner 0. Neither coordinates nor stored artifacts are relabelled.
+
+**Retain proved parent points.** The selected initial-base recipe also reconstructs
+proof-only owned hulls from the original native H-290/H-289 parent, whose same-object
+full centered replay passed in exp-280. While streaming that accepted node, collect
+each owner's `initial.groups` points and every accepted step's
+`common_owned_kernel` points, assigned by `step.owner`. Use no point from exp-284.
+The source order is initial point index, then increasing step index and kernel-point
+index. Bind all sixteen steps, their owners and complete status to the accepted
+parent receipt; retain the canonical object and JSON-path origins of these points.
+
+For each owner $j$, form the exact pool
+
+$$
+Q_j=\operatorname{conv}\left(
+ H_j^{\mathrm{initial}}\cup\bigcup_{r:\,\operatorname{owner}(r)=j}K_r
+\right),
+$$
+
+where $K_r$ here denotes the recorded accepted `common_owned_kernel` point list,
+not a newly computed finite polygon. Every such point was checked against all its
+strict-core ownership planes. It remains strictly inside square $j$ for every
+physical packing of the original, unconditional $C(V)$ parent. Replacing a stored
+hull by grid-compressed convex combinations can forget a point computationally;
+it cannot invalidate the already proved ownership fact. Convexity therefore makes
+every point of $Q_j$ strictly owned throughout that parent domain.
+
+Freshly check that each vertex of the parent's final compressed hull $H_j$ lies in
+$Q_j$. Do not add final vertices to the source pool before this test: containment
+is the control that the extraction retained all facts needed by the accepted
+compression chain. Check every unordered pair of these **unconditional** parent
+pools for disjointness. A nonempty intersection would contradict the accepted
+endpoint in $C(V)$ and is a refused calibration inconsistency, not a new global
+exclusion. This control would not apply to pools extracted from a future child
+whose ownership already depends on $I$.
+
+Now augment only $Q_0$ by the five freshly checked exp-282 points. Those additional
+points are owned under $I$, so a shared point after this augmentation is a valid
+conditional contradiction. Compare the ordinary final parent hulls with the five
+points added to owner 0 against these augmented pools. A direct unpooled
+intersection has priority. A pooled intersection absent from that matched unpooled
+test demonstrates recoverable information lost from the represented compressed
+hulls. In either case the exact common point proves the whole $I$ slice impossible;
+no centre cases are needed. Do not attribute later combined improvements to
+compression alone without their own matched comparison.
+
+If neither direct test closes the slice, use the augmented pools in place of the
+parent hulls in the unsplit and four-case constructions below. This reuses accepted
+proof facts; it launches no producer update and imposes no 48-vertex producer cap.
+Deduplicate exact coordinates while retaining their first source origin. Require
+at most 512 raw pool points per owner before deduplication and 8,192 in total,
+within the overall 16,384 arithmetic-input-vertex limit. Each pooled convex hull
+has at most 128 vertices, both before and after owner 0's five-point augmentation.
+The finite case hull may have at most 256 vertices, and
+its closed intersection with a foreign pool may have at most 384. The latter
+replaces the earlier 256-vertex intersection ceiling; the centre-polygon and
+128-vertex finite-kernel limits do not change. All rational bit limits still apply.
 
 **Necessary centre domains.** For every owner-0 row, intersect its closed interval
 with $I$. Keep each nonempty intersection $J=[l,h]$, including the two singleton
@@ -2387,7 +2465,8 @@ find such a point, even if certified for the entire constructed polygon, proves
 only that this direct ownership recipe did not close the case. It does not prove
 that a packing exists. No floating-point LP status is accepted as either outcome.
 
-**Frozen decision rule.** The unsplit control has priority: an empty necessary
+**Frozen decision rule.** Apply the parent-pool calibration and direct matched
+unpooled/pooled intersection tests first. Then the unsplit control has priority: an empty necessary
 centre cover or a shared owned point closes all of $D$ directly. Otherwise process
 all four raw cases. Primary success requires an exact empty-centre or shared-point
 contradiction for **every** case, followed by fresh reconstruction of the complete
@@ -2405,10 +2484,14 @@ the conditional child to 64 MiB compressed and 512 MiB decoded, its extracted fi
 state and finite output to 64 MiB each. Admit at most 16,384 arithmetic input
 vertices across the relevant residual pieces and all owned hulls; each used or
 computed rational numerator and denominator has at most 4,096 bits. Limit each
-intermediate centre polygon and intersection hull to 256 vertices, and each
+intermediate centre polygon and constructed owned hull to 256 vertices, each
+closed owned-hull intersection to 384 vertices, and each
 intermediate or final $K$ to 128. These are resource limits, not geometric claims;
 exceeding one is incomplete. Keep all four raw case identities even if their
 geometry coincides.
+The initial fallback retains its original-parent input limits instead: seed 10 MiB,
+node 512 MiB compressed and 2 GiB decoded, and extracted final state 64 MiB. These
+different input limits do not enlarge any finite arithmetic or output limit.
 
 Target-free controls must cover all clipping signs, a centre on one or both cuts,
 zero projected ranges, empty overall and individual cases, both chart-boundary
@@ -2419,6 +2502,11 @@ an unsplit-priority fixture and a complete unresolved fixture check the decision
 rule. Custody controls change each parent identity, guard, owner role and structural
 join independently; byte, time, rational and polygon caps stop without a scientific
 verdict. A fresh producer-free process must reconstruct a synthetic full receipt.
+Pool controls must include a compression witness that drops an older proved point,
+exact final-hull containment in the recovered pool, a pooled-only conditional
+intersection absent from the matched final-hull test, duplicate source points,
+changed kernel-owner or point-origin references, and an unexpected unconditional
+parent-pool intersection that refuses the calibration.
 
 The actual endpoint lies outside $I$, so retaining it in these four conditional
 cases is not an applicable control. Its earlier full-root retention and the H-292
@@ -2433,6 +2521,14 @@ strict-interior point, and it must not acquire a shared-owned-point contradictio
 The zero-range version places that centre in all four cases and checks that none
 is silently dropped. A separate pure chart-zero fixture checks the same signs at an
 endpoint without reading actual algebraic-root data.
+
+For the initial fallback, all five previously selected points must satisfy the new
+ownership inequalities of every nonempty case. Its clipped centre domains are
+subsets of the original H-292 domains, with the same angular intersections and
+margin, so this is a matched inclusion control. Do not impose that sufficient-row
+test on points merely inherited from a complete child: an outer-envelope update
+can over-cover older residuals even though their previously proved ownership
+remains valid for every physical packing in $D$.
 
 This contract is the sole Astra agent's prospective mathematical derivation. It
 does not assert that the actual conditional round is nonclosed, that any partition

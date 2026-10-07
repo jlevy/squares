@@ -312,7 +312,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 227 | 61 confirmed; 33 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 213 | 81 accepted; 38 rejected; 59 unresolved; 12 baseline; 17 blocked; 4 abandoned; 1 in progress; 1 exhausted |
+| Experiments | 213 | 81 accepted; 38 rejected; 59 unresolved; 12 baseline; 18 blocked; 4 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5808,7 +5808,7 @@ round that names the hypothesis, control roles included.
 | [H-290](packing/campaign/hypotheses/H-290-n17-numeric-checkpoint-capture-readiness.md) | confirmed | Numeric-frame saved16step custody and49 exact root-relative bounds | 1 | Registered600s parent including300s clean child; no exclusion |
 | [H-291](packing/campaign/hypotheses/H-291-n17-centered-endpoint-standing-control.md) | confirmed | Exact centered numeric-cap standing endpoint control | 3 | Full independent16step PASS_STALL control; no admission |
 | [H-292](packing/campaign/hypotheses/H-292-n17-conditional-owned-hull-gate.md) | confirmed | Exact finite shared-owned-hull gain within accepted parent | 2 | Fixedthreeguards/cleanreconstruction; no propagation or admission |
-| [H-293](packing/campaign/hypotheses/H-293-n17-parent-guard-owned-hull-continuation.md) | blocked | One-round parent-aware closed-guard exclusion | 2 | Original283 operational refusal;284 native-custody replication registered, mathematical outcome pending |
+| [H-293](packing/campaign/hypotheses/H-293-n17-parent-guard-owned-hull-continuation.md) | blocked | One-round parent-aware closed-guard exclusion | 2 | Original283 refusal;284 fresh resource stop; no accepted conditional child |
 
 ### Confirmed
 
@@ -6151,7 +6151,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 There are 213 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5768.5 wall-minutes.
+They record 2512.1 agent-minutes and 5778.9 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6405,7 +6405,7 @@ archive beside it.
 | [exp-281](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-281-h292-conditional-owned-hull-gate.md) | 17 | target | H-292 | Finiteowned-hull gain and freshreconstruction | Incomplete1.11s at rational input ceiling; no gains | blocked |
 | [exp-282](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-282-h292-conditional-owned-hull-scoped-input.md) | 17 | target | H-292 | Scoped accepted-premise finiteownership replication | Fresh exactconditionalgain+endpoint PASS8.39s; no exclusion | accepted |
 | [exp-283](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-283-h293-parent-guard-owned-hull-continuation.md) | 17 | target | H-293 | Parent-aware conditional round from accepted finite gain | Refused8.44s before initialization at centered parent premise-schema join | blocked |
-| [exp-284](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md) | 17 | target | H-293 | Exact native-path/role custody replication; same one-round recipe | Registered; target unrun at registration | in-progress |
+| [exp-284](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md) | 17 | target | H-293 | Exact native-path/role custody replication; same one-round recipe | Fresh replay resource stop after complete16 candidate; no accepted child or mathematical verdict | blocked |
 
 ### Cost and provenance
 
@@ -6623,11 +6623,11 @@ archive beside it.
 | exp-281 | Construction60s/fresh60s inside120s;4GiBsampled | 1.11s incomplete | — | Input rational ceiling | No gain evaluation, propagation or mathematical verdict |
 | exp-282 | Construction60s/fresh60s inside120s;4GiBsampled | 8.39s | — | Conditionalgain accepted | 3closedpieces/96planes/5newpoints; no propagation or exclusion |
 | exp-283 | Production600s/fresh300s inside900s;4GiB sampled | 8.44s | — | error | Clean c785d7156; premise-schema refusal before scientific initialization |
-| exp-284 | Production600s/fresh300s inside900s;4GiB sampled | — | — | Registered | Scientific settings unchanged; operational role-identity repair only |
+| exp-284 | Production600s/fresh300s inside900s;4GiB sampled | 619.36s | — | timebox | Complete16 candidate; fresh300s source deadline, no accepted conditional child |
 
 ### What the 213 rounds jointly establish
 
-The 213 rounds use 2512.1 agent-minutes and 5768.5 wall-minutes under the campaign’s
+The 213 rounds use 2512.1 agent-minutes and 5778.9 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

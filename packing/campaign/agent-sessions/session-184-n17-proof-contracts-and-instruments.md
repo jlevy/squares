@@ -497,7 +497,7 @@ session:
     objective: Run and independently interpret the registered closed-I parent-aware conditional
       exclusion trial; mathematical outcome is the primary lane, with independent proof review
       and bounded validation in parallel.
-    status: in_progress
+    status: complete
     entered_by: evidence_checkpoint
     switch_reason: Source and synthetic control handoff ready; accepted finite gain supports
       the registered conditional contradiction trial.
@@ -512,15 +512,48 @@ session:
       completed and partial artifacts at the slice deadline without retuning criteria.
     fallback: Continue widened-slider and global-capture derivations while preserving the
       exact checker failure and selecting a ready dependency.
-    outcome: null
+    outcome: Original exp283 refused at native custody before production. Separate exp284
+      produced16 nonclosed updates with zero splits but fresh300s replay reached its
+      source deadline; no accepted child, criterion-miss or exclusion. Original evidence
+      is retained. H294 source selects accepted original-parent initialization and kernels,
+      excluding all exp284 geometry.
     evidence:
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-283-h293-parent-guard-owned-hull-continuation.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md
+    stop_reason: Planned boundary14:37:42Z; observed close14:39:01Z,79s late while
+      incomplete target custody and stable outcome views were reconciled.
+    next_action: Exp284 produced a complete16 nonclosed candidate, but fresh300s replay stopped
+      incomplete; no accepted child or mathematical criterion-miss. Preserve all native evidence.
+      Selected prospective H294 base is freshly reconstructed accepted H290/exp280/exp282
+      conditional initialization only; never partial284 geometry. Build source controls before
+      registering exp285.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-430
+    objective: Repair the two scoped push-gate failures and reconcile retained incomplete
+      evidence while the four-case finite proof instrument and mathematical review proceed.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Phase11 was efficiency; phases12–15 were four research blocks. The
+      next block restores the declared efficiency cadence without stopping the proof lane.
+    budget_minutes: 30
+    started_at: '2026-10-07T14:37:42Z'
+    deadline_at: '2026-10-07T15:07:42Z'
+    expected_output: Stable outcome views, unchanged-timeout focused pytest control,
+      known owned-process custody and reviewed finite-source readiness.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Preserve failures and partial evidence; do not widen the test timeout,
+      scientific thresholds or target resources.
+    fallback: Continue independent finite-source and mathematical review beside the
+      scoped validation work; no broad gate repeat.
+    outcome: null
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-284-h293-parent-guard-native-custody.md
     stop_reason: null
-    next_action: Originalexp283 refused before initialization after8.44s at the centered compressed-identity
-      representation join; preserve it. Separately registeredexp284 repairs exact native-path
-      to seed/node role mapping with unchanged scientific parameters; root launches frozen
-      trial and complete fresh replay.
+    next_action: Review the two-channel finite instrument before separately registering
+      H294/exp285 from accepted original-parent initialization and checked kernels.
   primary_bead: think-ipel
   status: in_progress
   budget:
