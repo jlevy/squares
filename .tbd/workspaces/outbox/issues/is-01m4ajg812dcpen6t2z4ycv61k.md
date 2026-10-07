@@ -21,6 +21,7 @@ close_reason: Local reported registration and integration delivery complete; par
 resolution: null
 duplicate_of: null
 ---
+
 ## Notes
 
 Completed the local reported-registration deliverable at

@@ -21,6 +21,7 @@ close_reason: |
 resolution: null
 duplicate_of: null
 ---
+
 ## Notes
 
 Senior correctness and security review completed and accepted.

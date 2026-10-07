@@ -20,6 +20,7 @@ close_reason: Local engineering complete at reported 463203adf and confirmed 9ce
 resolution: null
 duplicate_of: null
 ---
+
 ## Notes
 
 Local engineering implementation and verification complete; leave in_progress pending
