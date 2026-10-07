@@ -423,3 +423,55 @@ def test_invalid_cli_budget_never_reads_input(
         == 1
     )
     assert json.loads(output.read_text())["status"] == "refused"
+
+
+@pytest.mark.parametrize(
+    "kind", ["refused", "missing", "malformed", "incomplete", "timeout", "oversize"]
+)
+def test_failed_fresh_child_retains_bounded_evidence_after_temp_cleanup(
+    kind: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    child_paths: list[Path] = []
+
+    def run(command: list[str], **_kwargs: Any) -> Any:
+        output = Path(command[command.index("--output") + 1])
+        child_paths.append(output)
+        if kind == "timeout":
+            raise subprocess.TimeoutExpired(command, 1, output=b"partial", stderr=b"wall")
+        if kind == "oversize":
+            output.write_bytes(b"x" * 5)
+        elif kind == "malformed":
+            output.write_text("{")
+        elif kind != "missing":
+            output.write_text(
+                json.dumps({"status": kind, "error": "specific row-domain mismatch"})
+            )
+        return subprocess.CompletedProcess(command, 2, b"o" * 20000, b"specific child error")
+
+    monkeypatch.setattr(control.subprocess, "run", run)
+    if kind == "oversize":
+        monkeypatch.setattr(control, "JSON_LIMIT", 4)
+    monkeypatch.setattr(
+        control,
+        "consume",
+        lambda *_a, **_k: control.fresh_replay(tmp_path / "unused", 1),
+    )
+    output = tmp_path / "parent.json"
+    assert control.main(["--descriptor", "unused", "--output", str(output)]) == 1
+    report = json.loads(output.read_text())
+    assert report["status"] == (
+        "incomplete" if kind in {"incomplete", "timeout", "oversize"} else "refused"
+    )
+    assert report["readiness_passed"] is False
+    assert report["new_target_admission_proved"] is False
+    evidence = report["failed_child"]
+    assert evidence["exit_code"] == (None if kind == "timeout" else 2)
+    assert len(evidence["stdout_tail"]) <= 8192
+    assert evidence["stderr_tail"] == ("wall" if kind == "timeout" else "specific child error")
+    if kind in {"refused", "incomplete"}:
+        assert evidence["receipt"]["error"] == "specific row-domain mismatch"
+    elif kind != "timeout":
+        assert "receipt_error" in evidence
+    assert not child_paths[0].exists()

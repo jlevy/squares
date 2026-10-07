@@ -46,6 +46,22 @@ class IncompleteError(Exception):
     """A resource ceiling was reached without a complete verdict."""
 
 
+class ChildRefusalError(ValueError):
+    """Retain a bounded failed child receipt and process diagnostics."""
+
+    def __init__(self, diagnostics: dict[str, Any]) -> None:
+        super().__init__("fresh standing child refused")
+        self.diagnostics = diagnostics
+
+
+class ChildIncompleteError(IncompleteError):
+    """Retain bounded diagnostics without promoting an unfinished replay."""
+
+    def __init__(self, message: str, diagnostics: dict[str, Any]) -> None:
+        super().__init__(message)
+        self.diagnostics = diagnostics
+
+
 def require(condition: bool, message: str) -> None:  # noqa: FBT001
     if not condition:
         raise ValueError(message)
@@ -396,15 +412,51 @@ def fresh_replay(path: Path, seconds: float) -> dict[str, Any]:
                 command, cwd=REPO / "packing", timeout=seconds, capture_output=True, check=False
             )
         except subprocess.TimeoutExpired as error:
-            raise IncompleteError("fresh standing child wall ceiling") from error
-        _raw, receipt = read_json(output)
-        if receipt.get("status") == "incomplete":
-            raise IncompleteError("fresh standing child incomplete")
-        require(
-            execution.returncode == 0 and receipt["independent_modules"] is True,
-            "fresh standing child refused",
+            diagnostics = child_diagnostics(command, None, error.stdout, error.stderr, output)
+            raise ChildIncompleteError(
+                "fresh standing child wall ceiling", diagnostics
+            ) from error
+        diagnostics = child_diagnostics(
+            command, execution.returncode, execution.stdout, execution.stderr, output
         )
+        if diagnostics.get("receipt_byte_ceiling"):
+            raise ChildIncompleteError("fresh standing child receipt byte ceiling", diagnostics)
+        receipt = diagnostics.get("receipt")
+        if type(receipt) is not dict:
+            raise ChildRefusalError(diagnostics)
+        if receipt.get("status") == "incomplete":
+            raise ChildIncompleteError("fresh standing child incomplete", diagnostics)
+        failed_child(execution.returncode, receipt, diagnostics)
     return {"argv": command, "exit_code": execution.returncode, "receipt": receipt}
+
+
+def child_diagnostics(
+    command: list[str],
+    code: int | None,
+    stdout: bytes | None,
+    stderr: bytes | None,
+    output: Path,
+) -> dict[str, Any]:
+    diagnostics: dict[str, Any] = {
+        "argv": command,
+        "exit_code": code,
+        "stdout_tail": (stdout or b"")[-8192:].decode(errors="replace"),
+        "stderr_tail": (stderr or b"")[-8192:].decode(errors="replace"),
+        "scope": "failed child evidence only; no replay or exclusion accepted",
+    }
+    try:
+        _raw, diagnostics["receipt"] = read_json(output)
+    except IncompleteError as error:
+        diagnostics["receipt_byte_ceiling"] = True
+        diagnostics["receipt_error"] = str(error)
+    except (ValueError, OSError, TypeError) as error:
+        diagnostics["receipt_error"] = str(error)
+    return diagnostics
+
+
+def failed_child(code: int, receipt: dict[str, Any], diagnostics: dict[str, Any]) -> None:
+    if code != 0 or receipt.get("independent_modules") is not True:
+        raise ChildRefusalError(diagnostics)
 
 
 def consume(path: Path, *, deadline: float, child_seconds: float) -> dict[str, Any]:
@@ -510,6 +562,8 @@ def main(argv: list[str] | None = None) -> int:
             "readiness_passed": False,
             "verification_passed": False,
         }
+        if isinstance(error, ChildIncompleteError):
+            report["failed_child"] = error.diagnostics
     except (ValueError, OSError, EOFError, KeyError, TypeError, IndexError) as error:
         report = {
             "schema": SCHEMA,
@@ -518,6 +572,8 @@ def main(argv: list[str] | None = None) -> int:
             "readiness_passed": False,
             "verification_passed": False,
         }
+        if isinstance(error, ChildRefusalError):
+            report["failed_child"] = error.diagnostics
     for flag in (
         "existing_U_census_admission",
         "new_target_admission_proved",
