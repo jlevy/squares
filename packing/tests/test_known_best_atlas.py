@@ -174,7 +174,6 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         85,
         86,
         87,
-        88,
         89,
     }
     # The hand-audited hundred stay a literal; above it the count of derived records is

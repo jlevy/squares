@@ -2043,7 +2043,7 @@ issues:
       only V0/C0 reports. The body also links ten previously imported first-update packings. The author
       identifies AI assistance under his direction and review, and seed packing credit to Ellsworth/Kingbird
       and Couzo.
-    read_through: '2026-10-07T21:41:08Z'
+    read_through: '2026-10-07T23:24:18Z'
     results:
     - key: nine-updated-packings
       claim: Reported improvements at n = 88, 108, 179, 180, 199, 207, 236, 263 and 302 from second update
@@ -2085,6 +2085,16 @@ issues:
       outdated:
       - The acknowledgement described first-update PRs 421/423 as draft work; formal stack 424 has since
         merged both.
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6048876876
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: nine-updated-packings
+        verification: V0
+        confirmation: C0
+      corrects:
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
     close_when: All nine second-update packings have complete independent replay and appropriately mapped
       fresh scoped reviews, have merged and deployed, and an accurate final author reply identifies the
       published assurance. The reported import alone does not close this request.

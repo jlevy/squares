@@ -215,7 +215,7 @@ def report_section(n: int, fact: dict[str, Any], verified: dict[str, Any]) -> st
         "## The verified upper bound is a ceiling\n\n"
         f"The verified ceiling is $s({n}) \\le {verified['value']}$, while the reported\n"
         f"packing has side ${value}$, smaller by ${gap}$. The `verified_upper_bound`\n"
-        "certifies a ceiling, not the value of $s(n)$; `reported_upper_bound` records\n"
+        f"certifies a ceiling, not the value of $s({n})$; `reported_upper_bound` records\n"
         "the stronger source claim, whose independent exact replay remains pending.\n\n"
         f"{REPORT_END}\n\n"
     )

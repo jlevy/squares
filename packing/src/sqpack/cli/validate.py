@@ -137,9 +137,9 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: re-screened serially in 107.952s; unselected records remain unchanged. All three
 #: corpus tripwires below are the sums over the current retained square motions.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (27, 88, 86, 535),
-    "n=1..200": (65, 557, 182, 1931),
-    "n=1..324": (120, 1874, 302, 4686),
+    "n=1..100": (27, 102, 86, 570),
+    "n=1..200": (66, 558, 182, 2038),
+    "n=1..324": (121, 1578, 302, 4689),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

@@ -34,6 +34,7 @@ import yaml
 
 from devtools import apply_exact_ceilings
 from devtools import squish_followup_packets as squish_update
+from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish
 from devtools.check_case_prose import Reading
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -89,6 +90,15 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/squish_second_update_packets.py": (
+        "preserves the previous independently certified ceiling while adopting a stronger "
+        "second-update source report; the historical ceiling is never promoted to the "
+        "new geometry or read as s(n)"
+    ),
+    "packing/tests/test_squish_upper_bound_packets.py": (
+        "checks that source-packet admission preserves the independently certified "
+        "ceiling and cannot grant verification or optimality to a reported packing"
+    ),
     "packing/devtools/source_supersession.py": (
         "rebuilds an explicitly selected source report from exact facts while retaining "
         "the historical independently certified ceiling until the reviewed SQUISH lane "
@@ -497,6 +507,15 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
         if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish_update.SOURCE_KEY
         and not any(
             e.startswith("E-squish-update-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    pending |= {
+        n
+        for n in squish_second.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish_second.SOURCE_KEY
+        and not any(
+            e.startswith("E-squish-second-update-")
             for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
         )
     }
