@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/README.md, role: session-record, authority: record, lifecycle: retained}

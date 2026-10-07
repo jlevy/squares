@@ -48,25 +48,38 @@ experiment:
       (NONE checks after unchangedverify); only the enclosing370s ownedgroup wall forcibly interrupts.
       No hardperphasecutoffclaimed.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay
-    commit: f796ad232
+    commit: 0ca9a58ff
     dirty: true
-  results: []
+  results:
+  - shape: determination
+    role: outcome
+    question: Do fresh NONE/PHASES full replays retain identical mathematical results and inputbytes with16step
+      observations?
+    outcome: criterion_met
+    checked_by: Both COMPLETE fullPASS_STALL; recomputed mathematicalresultdigests and3inputbyteSHA equal,
+      postcustodyrechecksPASS,16full64rowsteps and matched_uninstrumented_baseline true. IndependentSol
+      mechanicalauditCLEAR.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Both fresh same-object runs complete full exact centered replay with identical
       mathematical result identities and identical seed/node/cells byte digests. The PHASES receipt matches
       the NONE baseline and retains all16 step boundaries, memo-eviction observations and bounded RSS
       samples. Instrumentation never changes verification arithmetic, coverage or acceptance. This establishes
       a diagnostic control and observations, not speedup or a new geometric admission. Resource stops,
       changed inputs or semantic differences refuse equivalence.
-    reason: 'Initial supervised attempt stopped after12.202s: process sampling ps command timed out at1s,
-      guard_unavailable, owned cleanupcomplete. NONE receipt absent and PHASES unstarted; no semantic/profile
-      verdict. All initial partial files retained. Any unchanged-regime retry must be documented prospectively
-      in a separate attempt directory.'
+    reason: Unchanged-regime attempt2 completes both full exact replays with matched mathematical/inputbyte
+      identities and all16boundary observations. Firstattempt12.202s guard_unavailable remainspreserved.
+      Diagnostic only; no speedup or new geometricadmission.
     needs_review: false
-  lease:
-    expires: '2026-10-07T19:47:58Z'
-    host: macOS arm64
+  effort:
+    stopped_by: criterion
+    timebox: NONE180s + PHASES180s scientific budgets; combined360s inside owned-group TERM370/KILL380
+      allowing10s setup/serialization. One worker, sampled4096MiB PER live process with owned cleanup.
+      Instrumentation overhead is measured and cannot establish gain. Input/output ceilings and cooperative
+      checks in the frozen profiler; partial diagnostics retained. The180s instrument limits are cooperative
+      (NONE checks after unchangedverify); only the enclosing370s ownedgroup wall forcibly interrupts.
+      No hardperphasecutoffclaimed.
+    wall_seconds: 234.14
 ---
 # Matched Exact Replay Diagnostic
 

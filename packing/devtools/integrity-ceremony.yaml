@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_guard_conditioned_ownership.py
+    kind: generated-artifact
+    boundary: Runtime-generated accepted parent/witness and native input identities are rejoined after fresh guarded reconstruction; these generated finite artifacts are not identified by Git source revisions.
   - path: packing/devtools/report_n17_parent_geometry.py
     kind: generated-artifact
     boundary: Generated native parent and accepted witness receipt bytes remain fixed throughout structural intake characterization; source identity is recorded by Git, without source checksum acceptance.

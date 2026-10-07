@@ -198,7 +198,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
-| [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 3 | think-tvxs | Freeze reviewed coupling and profile instruments; preregister each criterion, descriptor, controls and budget before target execution. Keep inherited certificationthink-7hy3 beside proof progress. |
+| [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 4 | think-tvxs | Astra selects stronger discriminator; root preregisters/freezes source beforetarget, publishescompletecouplingmiss and replayattempt2, and protects21:47:58Zfinalization. |
 
 ### Workflow summary
 
@@ -211,7 +211,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 30 | 1 | 93 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 44 | 1 |
-| `research-loop` | 37 | 4 | 145 | 9 |
+| `research-loop` | 37 | 4 | 146 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -942,7 +942,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 220 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 221 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1179,8 +1179,9 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | H-295 | refuted | proof | Exact pooled foreign-owned forbidden regions cover the complete accept |  | 1 |  | 21s wall |
 | H-296 | refuted | proof | A deterministic exact one-square witness survives every pooled owned-p |  | 1 |  | 1s wall |
 | H-297 | confirmed | proof | The fixed-angle wall-and-owned-point center domain admits a determinis |  | 1 |  | 1s wall |
-| H-298 | abandoned | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 2 |  | 4s wall |
-| H-299 | running | proof | Boundary-level replay instrumentation preserves the full accepted cent |  | 1 |  |  |
+| H-298 | refuted | proof | Complete partner-pose coupling excludes a nonzero closed position-angl |  | 2 |  | 1.8m wall |
+| H-299 | confirmed | proof | Boundary-level replay instrumentation preserves the full accepted cent |  | 1 |  | 3.9m wall |
+| H-300 | running | proof | Complete full-square SAT minima certify a nonzero closed region around |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1190,7 +1191,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Rounds
 
-### rejected (41)
+### rejected (42)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1235,6 +1236,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-285 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-294 | Completed finite recipe missed its primary criterion: matched unpooled and pooled unsplit checks and all four closed cases remain unresolved. Fresh complete reconstruction passed and its report core matches generation; no conditional/unconditional exclusion, census admission or global result. Supervision20.74094s rc0/normalcleanup; construction9.95174s and fresh9.85035s. Original-parent pool calibration passed (543raw points,926used vertices), no exp284 geometry. |
 | exp-286 | series-000 | 17 | Sol coordinator registers/freezes/launches/disposes in Session184. | H-295 | Completed finite recipe missed: all18 closed pieces remain uncovered in both matched ordinary-final and pooled tests (row25=6,row26=4,row27=8). Fresh complete reconstruction passed; all exclusion/admission/dominance flags false. Clean5c195 source;543raw poolpoints/926usedvertices, same accepted original-parent custody, no284geometry. Supervision20.73212s rc0/normalcleanup; construction9.84499s and fresh10.04225s. |
 | exp-287 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-296 | Completed deterministic recipe missed only exact numeric container containment; all conditional owner0 strict tests and all16 foreign open-avoidance checks passed. Fixedrow26piece0/tau53/128; no alternate candidate. Fresh reconstruction passed, clean969588d source, all6blob identities equal and all3 accepted286 input byte identities match. Supervision1.10817s rc0/normalcleanup; phases0.15160s+0.14876s. No17packing, exclusion, capture, census or global result. |
+| exp-291 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Complete fixedpoint coupling miss: all16partners fail to exclude the accepted witness. Freshpayloadmatches/verificationPASS; regionalPRIMARYmissed and allfourladderwidths unstarted by frozenmonotonicstop, not fourexecutedmisses. |
 
 ### exhausted (1)
 
@@ -1339,7 +1341,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (82)
+### accepted (83)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1425,6 +1427,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-280 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-291 | Full independent centered PASS_STALL:544 seedrows,1024 updaterows,16steps and25134984 collisionfacets; hull48 and exact U/V/offset/B/T/full24world/object/H290all17endpoint joins match. Fresh parent cap/root pass; child rootjoinfalse/parenttrue. Astra mathematical and Sol metadata acceptance clear. Supervisor106.493889s rc0/cleanupcomplete, standing104.68s; no exclusion/admission/globalclaim. |
 | exp-282 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-292 | Actual frozen scoped-input replication completed8.38847s supervised wall, rc0/cleanupcomplete. Generation and fresh reconstruction agree on conditional_gain_candidate with canonicalcertificate/H290/native/context joins. Endpoint control nonempty and strictly inside; all four target cardinal gains exceed1/1024, all four all-angle gains negative. Three closedpieces25/26/27 include singleton seams,96exactplanes and5selectedtargetpoints. Accepted finite conditionalownership gain only: no producer, propagation, exclusion, admission or globalproof. |
 | exp-288 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session184. | H-297 | Completed1.12039s supervision; construction0.19380s/fresh0.20042s, rc0/normalcleanup. First row26piece0 candidate at tau53/128 satisfies exact centered container, all conditional owner0 strict and all16 foreign open-avoidance predicates. Left-wall touch retained. Fresh verification true; clean56370233 source/seven matching blobs and six frozen byte joins. Specific point relaxation admits one square; no17packing, capture, exclusion, census or global result. Sole-Astra actual semantic acceptance recorded after target. |
+| exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Unchanged-regime attempt2 completes both full exact replays with matched mathematical/inputbyte identities and all16boundary observations. Firstattempt12.202s guard_unavailable remainspreserved. Diagnostic only; no speedup or new geometricadmission. |
 
 ### baseline (12)
 
@@ -1443,12 +1446,11 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (2)
+### in-progress (1)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Prospectively registered diagnostic; no target replay or gain measured. |
-| exp-291 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Prospectively registered resource-amended replication; mathematical target unrun. |
+| exp-292 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-300 | Preregistered after fresh complete exp291 fixedpointmiss and soleAstra selection; SATscientific target remains unrun. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1499,7 +1501,7 @@ Status: **active**. Execute the separately authorized four-hour extension throug
 
 ## Effort
 
-220 rounds, 2512.1 agent-minutes, 5779.6 wall-minutes.
+221 rounds, 2512.1 agent-minutes, 5785.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

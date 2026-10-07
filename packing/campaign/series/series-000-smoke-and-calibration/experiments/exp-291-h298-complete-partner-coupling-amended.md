@@ -50,9 +50,18 @@ experiment:
       canonical original node is streamed twice during intake. Dated preregistered input-only amendment:1024
       pieces/row and1048576 parsed vertices; all other frozen limits unchanged.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended
-  results: []
+    commit: 0ca9a58ff
+    dirty: true
+  results:
+  - shape: determination
+    role: outcome
+    question: Does complete partner-pose common-core coupling exclude a nonzero frozen closed region?
+    outcome: criterion_missed
+    checked_by: Construction and freshproducer-free reconstruction at frozen0ca9a58ff agree on exact mathematical
+      payload; all1056/992rows and17endpoint/familycontrols PASS. Engineer mechanicalauditCLEAR; soleAstra
+      actual mathematical outcome/scope review CLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: 'Construction and a fresh process both reconstruct closed_region_exclusion with
       criterion_met=true: every one of 1056 parent rows and 992 foreign rows is accounted, all17 endpoint
       calibration and family-disjointness pass, exact mathematical payloads agree, and at least one frozen
@@ -61,11 +70,18 @@ experiment:
       miss skips the region ladder by the declared monotonic obstruction; it is not four executed misses.
       Refused/incomplete results are not mathematical negatives. Conditional accepted-parent scope only;
       no whole guard/census/capture/global optimality claim.'
-    reason: Prospectively registered resource-amended replication; mathematical target unrun.
+    reason: 'Complete fixedpoint coupling miss: all16partners fail to exclude the accepted witness. Freshpayloadmatches/verificationPASS;
+      regionalPRIMARYmissed and allfourladderwidths unstarted by frozenmonotonicstop, not fourexecutedmisses.'
     needs_review: false
-  lease:
-    expires: '2026-10-07T20:17:58Z'
-    host: macOS arm64
+  effort:
+    stopped_by: criterion
+    timebox: One worker, construction120s + fresh120s under combined240s owned-group TERM240/KILL250;
+      sampled4096MiB PER live process, not aggregate or allocation-time hardcap. All input, rational,
+      polygon, support and sweep ceilings frozen in research-2026-10-07-n17-complete-partner-coupling.md;
+      five10MiB JSON roles,512MiB compressed/2GiB decoded native node,64MiB output. Preserve resource
+      stops and cleanup; canonical original node is streamed twice during intake. Dated preregistered
+      input-only amendment:1024 pieces/row and1048576 parsed vertices; all other frozen limits unchanged.
+    wall_seconds: 106.929
 ---
 # Complete Partner-Pose Resource Amendment
 

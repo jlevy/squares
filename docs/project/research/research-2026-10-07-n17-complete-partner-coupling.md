@@ -357,6 +357,35 @@ construction counter.
 Aggregate hull size, collision-region size and arithmetic work remain guarded at
 runtime; the input audit does not prove those caps fit.
 
+## Exp291: Complete Fixed-Point Miss
+
+The resource-amended run completed with `criterion_missed`, and a fresh process
+reconstructed the same exact result.
+The
+[retained summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/summary.json)
+records all 1,056 original rows, 992 foreign rows and 348,153 parsed construction
+vertices. All seventeen endpoint controls and the family-angle disjointness control
+passed.
+Each of the sixteen partners has an exact failed fixed-point facet; none excludes
+the accepted exp288 pose through this common-core construction.
+
+The four regional ladder levels were unstarted, as the fixed-point containment argument
+already prevents their acceptance under this recipe.
+This is one completed fixed-point miss with a proved reason to skip the ladder, not four
+measured regional misses.
+Construction took 51.699171 seconds and fresh reconstruction 54.946135 seconds; the
+supervisor recorded 106.929355 seconds overall and successful cleanup.
+The work counters report 1,152 generated facets, 11,904 checked facet instances and
+48,516 minimum-support vertex products.
+
+This result leaves the physical packing question unresolved.
+It establishes failure of the declared common-core implication on these complete product
+domains, not feasibility of the parent or impossibility of a stronger coupling.
+The next selected discriminator is the separately registered full-square SAT test on the
+same domains. A positive result there would identify the common-core approximation as a
+sufficient cause of the discrepancy; a second complete miss would instead justify
+testing centre-angle correlation or guard-conditioned multi-owner constraints.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

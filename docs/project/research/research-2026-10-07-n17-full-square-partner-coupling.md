@@ -369,6 +369,15 @@ retain their separate 16,384/32,768-bit limits.
 | Fresh strict-ownership verification | 2,000,000 vertex pairs; 8,000,000 quadratic minima |
 | Output | 64 MiB |
 
+The generated conditional clip-output counter includes owner-0 restricted-angle
+necessary-wall clips, the subsequent owner-0 centre-box clips and foreign
+outside-subtraction clips.
+It excludes unconditional original-row wall preflight and the halfplane intermediates
+used to construct $Q_0$ and recover $K_j$; those retain their separately declared input,
+polygon, support-work and external wall ceilings.
+This distinction fixes the pretarget resource scope and does not change any geometric
+predicate.
+
 A recovered $K_j$ has at most $64\cdot16+4=1028$ construction halfplanes; two recovered
 polygons therefore have at most 2,056 intersection vertices.
 These combinatorial bounds motivated the representation ceilings without inspecting a
