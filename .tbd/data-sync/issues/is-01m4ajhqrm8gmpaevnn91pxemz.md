@@ -3,9 +3,9 @@ type: is
 id: is-01m4ajhqrm8gmpaevnn91pxemz
 title: Independently review mathematics of eleven SQUISH rational upper bounds
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 10
 assignee: squish-math-review
 delegate: codex@17e132e9b179
 labels: []
@@ -14,10 +14,10 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:59:22.516Z
-updated_at: 2026-10-07T08:00:21.250Z
+updated_at: 2026-10-07T08:33:47.213Z
 started_at: 2026-10-07T06:59:51.562Z
-closed_at: 2026-10-07T07:16:54.427Z
-close_reason: null
+closed_at: 2026-10-07T08:33:47.212Z
+close_reason: Final independent mathematics and post-rebase adoption review accepted; all eleven exact bounds, semantic receipts, atlas/citations and scoped numerical-motion prose audited. Review document frozen.
 resolution: null
 duplicate_of: null
 ---
@@ -25,4 +25,4 @@ W2 adversarial math/soundness review of #401 and n153 supplemental certificate. 
 
 ## Notes
 
-Reopened for confirmation adoption and semantic receipt v2 audit. All11 case lanes checked: exact_form=S source rational, value=least safeceil16(S), S<=V<S+1e-16; original source decimals retained separately. MR-3 atlas normalization mismatch reproduced at126/130 and fixed, both regression cases pass. Inspected complete semantic checker input binding including coordinate frame/unit/dispatch/full roster and both controls; repository-owned digests removed. Read final all11+controls replay log75.594s; personally42 final packet/receipt/semantic tests passed3.39s in confirmation checkout and2 atlas normalization tests passed. Updated confirmation review; waiting requested final rebased atlas/citation/rigidity integration snapshot before stable signoff/close.
+Final accepted and frozen in confirmation checkout. All eleven certificate source sides S remain authoritative in receipt and both case exact_form lanes; both displays and generated citations use least safeceil16(S). All eleven atlas full semantic checker inputs equal certification receipts. Final semantic full dual replay plus both full controls passed 75.594 seconds; personally ran 42 packet/receipt/semantic tests and two atlas normalization tests. MR-1/MR-2/MR-3 closed. Post-rebase current numerical motion blocks checked across eleven open cases, with all 311 positive-motion square IDs matching certified witnesses; claims scoped numerically to retained configurations and no optimum conclusion. Final case prose frozen and accepted after records regeneration audits. Review includes exact conversion/SAT theorem, trust boundaries, v2 semantic receipt binding and adoption clarification; 63 math spans survive formatter unchanged. No unresolved mathematical finding.
