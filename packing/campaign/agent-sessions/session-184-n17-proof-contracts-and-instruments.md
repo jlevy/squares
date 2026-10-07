@@ -272,7 +272,7 @@ session:
     objective: Measure exact actualprefix capture bounds and chronological proofdependencies;
       launch unchangedrecipe same-stratum replication while Astra closes fullroot
       cap joins.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: One admitted orbit enables dependency reuse study; reviewed instruments
       can now measure actual global-to-terminal gaps.
@@ -287,11 +287,45 @@ session:
       criteria.
     fallback: Continue widened-slider and global-capture derivations while preserving
       the exact checker failure and selecting a ready dependency.
+    outcome: H286/272 readiness accepted11.23s withall49zero-containingbounds butno
+      local/wideinclusion. H288/275 exactnumericcapjoin accepted1.21s. Exp273samecorefreshinventoryaccepted10.49s/all17owners/3338facts/101931edges/no
+      reductionunderconservativerules. Exp274 renewedfull17prefixpasses11.52s and
+      Bproduceractive. Pushfailed456.39s withretainedknownheavytest evidence; schedulerrepair12controls1.03s,
+      nofullPASS. Observeddisposition 2026-10-07T10:54:21Z after10:51:25Z; integrationoverrun
+      retained.
+    evidence: *id001
+    stop_reason: Actualboundedmeasurements complete and next controlledorbitproduceractive;
+      mathematicalcaptureinput control takes nextslice.
+    next_action: Freshlyreplay B ifcomplete, prepare fullstanding ifclosed; certify
+      numericcapinputjoins and start preregistered16-owneractualround onlyoncontrols.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-430
+    objective: Assess unchangedrecipe B and launch firstactualnumericcap full17seed/16ownerround;
+      build independently checked numericframe bound consumer while mechanicalgates
+      remainasynchronous.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Exactcapjoinaccepted; originaldependencycorehasno reduction. Actualnumericcap
+      capture nowaddressesglobal-to-terminalgap.
+    budget_minutes: 30
+    started_at: '2026-10-07T10:54:21Z'
+    deadline_at: '2026-10-07T11:24:21Z'
+    expected_output: B producer/fresh disposition, H289 control/prereg/actualround,
+      reviewednumericframeconsumer contract, boundedpriorgatefailure dispositions.
+    validation_command: uv run --frozen --all-extras --group dev packing-ledger check
+    kill_condition: Refuse affected interpretation on failed controls or exact joins.
+      Preserve completed and partial artifacts at the slice deadline without retuning
+      criteria.
+    fallback: Continue widened-slider and global-capture derivations while preserving
+      the exact checker failure and selecting a ready dependency.
     outcome: null
     evidence: *id001
     stop_reason: null
-    next_action: Freeze source and descriptor, execute boundedprefix adapter, and
-      keep two independent mechanical lanes beside mathematical review.
+    next_action: Register actualnumericcapinput-control+round beforetarget, enforceall17endpointretention
+      and fullfresh16stepreplay.
   primary_bead: think-ipel
   status: in_progress
   budget:
@@ -826,10 +860,13 @@ session:
     - shared scientific record mutation
   - task: Astra fullroot capjoin and actualdomain review
     operator: GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Phase8 reviewed instruments and exactcontrolledmeasurements delivered;
+      workercontinuesphase9.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-273-h282-tail-a-dependency-inventory.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-275-h288-capture-cap-root-join.md
     files: &id014
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     checks: []
@@ -855,10 +892,13 @@ session:
     - shared scientific record mutation
   - task: Sol dependency independent mechanics and prereg
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Phase8 reviewed instruments and exactcontrolledmeasurements delivered;
+      workercontinuesphase9.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-273-h282-tail-a-dependency-inventory.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-275-h288-capture-cap-root-join.md
     files: &id015
     - packing/devtools/audit_n17_certificate_dependencies.py
     - packing/tests/test_audit_n17_certificate_dependencies.py
@@ -885,10 +925,13 @@ session:
     - shared scientific record mutation
   - task: Sol controlledreplication prereg and snapshotselector
     operator: GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: Phase8 reviewed instruments and exactcontrolledmeasurements delivered;
+      workercontinuesphase9.
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-273-h282-tail-a-dependency-inventory.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-275-h288-capture-cap-root-join.md
     files: &id016
     - packing/devtools/run_negative_controls.py
     checks: []
@@ -912,6 +955,87 @@ session:
     - blocking CI watch
     - unregistered scientific target
     - shared scientific record mutation
+  - task: Astra numericframe proofinterfaces and actualcapture assessment
+    operator: GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id017
+    - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Astra numericframe proofinterfaces and actualcapture assessment
+    phase: 9
+    budget_minutes: 30
+    started_at: '2026-10-07T10:54:21Z'
+    deadline_at: '2026-10-07T11:24:21Z'
+    expected_output: Astra numericframe proofinterfaces and actualcapture assessment
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id017
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol numericcapinput loader and synthetic16stepreadiness
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id018
+    - packing/devtools/check_n17_capture_checkpoint.py
+    - packing/tests/test_pilot_n17_capture.py
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Sol numericcapinput loader and synthetic16stepreadiness
+    phase: 9
+    budget_minutes: 30
+    started_at: '2026-10-07T10:54:21Z'
+    deadline_at: '2026-10-07T11:24:21Z'
+    expected_output: Sol numericcapinput loader and synthetic16stepreadiness
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id018
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
+  - task: Sol actualcustodyreview and boundedgatefailure dispositions
+    operator: GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: &id019
+    - packing/src/sqpack/cli/validate.py
+    - packing/tests/test_validation_cli.py
+    - packing/devtools/suite_files.py
+    checks: []
+    uncertainty: No globalcapture/optimality bound from conditionalchecks or descriptiveextents.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Sol actualcustodyreview and boundedgatefailure dispositions
+    phase: 9
+    budget_minutes: 30
+    started_at: '2026-10-07T10:54:21Z'
+    deadline_at: '2026-10-07T11:24:21Z'
+    expected_output: Sol actualcustodyreview and boundedgatefailure dispositions
+    validation_command: Focusedsourcecontrols, independentreview and preregistrationbeforeactualtarget.
+    kill_condition: Soundnessfailure refuses affectedinterpretation; preserveoutputsatsliceboundary.
+    fallback: Preserve missingdependency, rotate toreadyproof-support work.
+    write_scope: *id019
+    excluded_commands:
+    - blockingCIwatch
+    - unregisteredscientifictarget
+    - sharedadmissionledgermutation
   outputs:
   - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
   - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
@@ -986,6 +1110,8 @@ session:
     timeout/eightpytestfailures; retainedphaseartifacts identify known-best corpus
     poolheavy test and mixed8xdist/PACK_JOBS2 topology. Source/test/layout/docrepairs
     active, nofullPASS.
+  - Exp273 accepted conservativeinventory10.49s andexp275 acceptedexactcapjoin1.21s
+    atclean3575c02, no newbound/censuschange.
   stop_reason: null
   next_action: Execute frozen targets, preserve everyreceipt and keep asynchronous
     validation beside research.

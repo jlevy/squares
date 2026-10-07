@@ -48,9 +48,24 @@ experiment:
       parent time; TERM180/KILL190 cleanup. No producer, new root search, cap tuning
       or object relabel. Preserve honest failed bounds/refusals/interruption.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join
-  results: []
+    commit: 3575c02a761d9ae439add4b19707575e3cfdbcf7
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Fresh accepted full root R and exact endpoint side/derivative identities;
+      0<t_lo<=t_hi<1, positive denominator, negative derivative numerator; exact monotone
+      [F(t_hi),F(t_lo)] and unchanged outward consumer side enclosure; fixed Uprime=935106018721/200000000000
+      strictly above both upper endpoints with Uprime-minus-each-lower endpoint <=1e-12,
+      and Uprime<=1169/250. Generation and new-process checker agree, cap_certified=true,
+      all capture/leaf/global/relabel/producer flags false.
+    outcome: criterion_met
+    checked_by: Generation/freshchecker sciencepayloads agree; fullrootmonotone+consumer
+      sidejoins andallstrictgapguards pass, cap_certified/verification_passed true.
+      Maximumconsumerexcess about4.49048365992313e-13 displayonly; exactrationalcomparisons
+      retained. No producer/capture/global/oldobjectrelabel.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Fresh accepted full root R and exact endpoint side/derivative
       identities; 0<t_lo<=t_hi<1, positive denominator, negative derivative numerator;
       exact monotone [F(t_hi),F(t_lo)] and unchanged outward consumer side enclosure;
@@ -58,12 +73,15 @@ experiment:
       Uprime-minus-each-lower endpoint <=1e-12, and Uprime<=1169/250. Generation and
       new-process checker agree, cap_certified=true, all capture/leaf/global/relabel/producer
       flags false.
-    reason: Registeredbeforeactualroot/cap evaluation after25cap+1pilotcontrols, independentSol26controls2.87s,
-      final soleAstra sourceclear includingbeta-independentidentity and bothoutward/fullrootgap
-      guards. Source/interpreter/exactargv frozen inregistrationcommit.
-  lease:
-    expires: '2026-10-07T11:25:13.041021Z'
-    host: macOS arm64
+    reason: Generation/freshchecker sciencepayloads agree; fullrootmonotone+consumer
+      sidejoins andallstrictgapguards pass, cap_certified/verification_passed true.
+      Maximumconsumerexcess about4.49048365992313e-13 displayonly; exactrationalcomparisons
+      retained. No producer/capture/global/oldobjectrelabel.
+    needs_review: false
+  effort:
+    timebox: Combined180s TERM/KILL190, sampled4096MiB perownedprocess
+    wall_seconds: 1.21
+    stopped_by: criterion
 ---
 # exp-275: Frozen Numeric Cap
 

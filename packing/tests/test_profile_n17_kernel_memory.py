@@ -7,6 +7,8 @@ import json
 import time
 from pathlib import Path
 
+import pytest
+
 from benchmarks import profile_n17_kernel_memory as profiler
 from devtools import check_n17_subpattern as tool
 from devtools import verify_n17_kernel_certificate as kernel_verifier
@@ -77,4 +79,44 @@ def test_the_profiler_marks_production_the_save_and_the_check(tmp_path: Path) ->
     count = verdict["steps_checked"]
     assert phases == ["produce"] * count + ["check"] * count
     report = recorder.report()
-    assert report["peak_rss_mb"] >= report["peak_in_check_mb"] > 0
+    assert report["peak_rss_mb"] > 0
+    assert report["max_check_step_rss_mb"] > 0
+    if recorder.peak_was_reset:
+        assert report["peak_rss_mb"] >= report["peak_in_check_mb"] > 0
+    else:
+        assert report["peak_in_check_mb"] is None
+
+
+@pytest.mark.parametrize("reset", [False, True])
+def test_phase_peak_requires_a_successful_kernel_reset(
+    monkeypatch: pytest.MonkeyPatch, *, reset: bool
+) -> None:
+    peaks = iter([300, 120 if reset else 310])
+    monkeypatch.setattr(
+        profiler, "status_mb", lambda field: next(peaks) if field == "VmHWM" else 90
+    )
+    monkeypatch.setattr(profiler, "reset_peak", lambda: reset)
+    recorder = profiler.Recorder(None)
+    recorder.step("check", 0, 16)
+    report = recorder.report()
+    assert report["peak_before_check_mb"] == 300
+    assert report["peak_rss_mb"] == (300 if reset else 310)
+    assert report["max_check_step_rss_mb"] == 90
+    assert report["peak_in_check_mb"] == (120 if reset else None)
+
+
+def test_marks_use_current_memory_and_do_not_substitute_a_lifetime_peak(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(profiler, "current_memory_bytes", lambda: 12 * 1024 * 1024)
+    monkeypatch.setattr(profiler, "peak_memory_bytes", lambda: 90 * 1024 * 1024)
+    monkeypatch.setattr(profiler.sys, "platform", "darwin")
+    assert profiler.status_mb("VmRSS") == 12
+    assert profiler.status_mb("VmHWM") == 90
+
+    def unavailable() -> int:
+        raise OSError("native current memory unavailable")
+
+    monkeypatch.setattr(profiler, "current_memory_bytes", unavailable)
+    with pytest.raises(OSError, match="native current memory unavailable"):
+        _ = profiler.Recorder(None).sample()

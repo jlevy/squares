@@ -197,7 +197,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-180](agent-sessions/session-180-n17-producer-memo.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 3 | think-wn6x | Review the rebuilt layer that replaces Draft PR 325 under think-wn6x; upstream think-tmz6 remains the research coordinator. No merge or new compute is authorized by this closeout. |
 | [session-182](agent-sessions/session-182-n17-overnight-lanes.md) | stopped | contemporaneous | `review-planning-oversight` (insight) | `review-planning-oversight` (correctness) | 4 | think-tmz6 | BC-418 continues under think-tmz6: the owner's decisions recorded here come first (the resource rollups that resource_usage_unmeasured names, lane K's target 2 with the two held re-runs, and the branch-and-bound recalibration); exp-257 resumes at u31 (think-2pjf). |
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
-| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 8 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
+| [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | in_progress | contemporaneous | `review-planning-oversight` (process) | `research-loop` (insight) | 9 | think-ipel | Execute frozen targets, preserve everyreceipt and keep asynchronous validation beside research. |
 
 ### Workflow summary
 
@@ -210,7 +210,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 29 | 1 | 92 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 42 | 1 |
-| `research-loop` | 37 | 4 | 135 | 9 |
+| `research-loop` | 37 | 4 | 136 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 29 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 204 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 205 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1152,13 +1152,14 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-279 | confirmed | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 2 |  | 10s wall |
 | H-280 | confirmed | proof | The deterministic retained dual seed at exp260 outer negative omega16  |  | 1 |  | 6s wall |
 | H-281 | confirmed | proof | The repaired producer completes one certified eleven-owner round on th |  | 2 |  | 9.2m wall |
-| H-282 | confirmed | proof | At cap1169/250 the repaired current producer preserves every exact-roo |  | 3 |  | 8.7m wall |
+| H-282 | confirmed | proof | At cap1169/250 the repaired current producer preserves every exact-roo |  | 3 |  | 8.8m wall |
 | H-283 | confirmed | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  | 7s wall |
 | H-284 | confirmed | proof | Exact nonnegative finite-gap weights certify a strict homogeneous cont |  | 1 |  | 1.5m wall |
 | H-285 | confirmed | proof | A freshly checked accepted-root guard and independent coarse-domain ra |  | 1 |  | 1s wall |
 | H-286 | confirmed | proof | The current saved full17 endpoint prefix can be consumed with bounded  |  | 1 |  | 11s wall |
 | H-287 | running | proof | The unchanged repaired SW9 envelope recipe closes the next deliberatel |  | 1 |  |  |
-| H-288 | running | proof | The frozen numeric cap bounds the endpoint side over the complete acce |  | 1 |  |  |
+| H-288 | confirmed | proof | The frozen numeric cap bounds the endpoint side over the complete acce |  | 1 |  | 1s wall |
+| H-289 | running | proof | The repaired producer completes the first16 contracting-owner round fr |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1308,7 +1309,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-262 | series-000 | 17 | Sol coordinator executes Astra's mathematical contract, Session184. | H-279 | Apex arithmetic passed, but the receipt encodes retained integer weights beyond the reader guard; fresh replay refuses. Repair the serialization and preregister a successor before retry. |
 | exp-265 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Technical startup refusal: coordinator appended unsupported --partial; CLI exited2 at argument parsing before sources,seed,endpoint checks or production. Original logs preserved; exp268 separately preregisters the corrected same-claim invocation. |
 
-### accepted (74)
+### accepted (76)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1386,6 +1387,8 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-270 | series-000 | 17 | Sol coordinator executes the sole-Astra mathematical contract in Session184; root owns registration and results. | H-285 | Frozen finitecriteria and freshCLI replay pass on independent coarse domain. Physical9/11 non-overlap and actualleaf thinv9/angular/coarseposition premises remain required; analyticimplication sole-Astrahandreview; zero globaladmission. |
 | exp-271 | series-000 | 17 | Sol coordinator executes sole-Astra900-second admission contract; root alone mutates ledger/counts. | H-282 | Separately registered fullstanding replay passes on unchanged exp266 certificate. Ordinarymanifest/ledger/census admission is the separate next join; no smaller-arity projection or success-rate claim. |
 | exp-272 | series-000 | 17 | Sol coordinator owns source freeze, descriptor registration, supervised launch and final interpretation in Session184. | H-286 | Adapterreadiness passes11.23s; all29position and16halfangle enclosures fail bothlocal/wide inclusion; a,b,z andthin-v9/coarse9-11 premises also fail enclosureinclusion. These are incompletebounds, not physical violations. Globalcapture/terminalproof remainsopen. |
+| exp-273 | series-000 | 17 | Sol coordinator owns source/input registration, sampled-memory supervisor, launches, parity comparison and dispositions; Session184. | H-282 | Both44-controlled originalA invocations complete3338typedfacts/101931channelededges, exactacceptedseed/node/standingEOF joins, deterministicdigest65b95a112bc9cf4424065fb6aad85e5f062e5346bfb65b34b3095276a60e0795. Bothownercores areall17: no strictsubset underconservativerules, no necessity/minimality/admission. |
+| exp-275 | series-000 | 17 | Sol coordinator registers/freezes/supervises exact generation and fresh standalone checker; Session184. | H-288 | Generation/freshchecker sciencepayloads agree; fullrootmonotone+consumer sidejoins andallstrictgapguards pass, cap_certified/verification_passed true. Maximumconsumerexcess about4.49048365992313e-13 displayonly; exactrationalcomparisons retained. No producer/capture/global/oldobjectrelabel. |
 
 ### baseline (12)
 
@@ -1404,13 +1407,12 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (3)
+### in-progress (2)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-273 | series-000 | 17 | Sol coordinator owns source/input registration, sampled-memory supervisor, launches, parity comparison and dispositions; Session184. | H-282 | Registered before originalA parsing after44target-freecontrols, freshprocessparity and soleAstra/independentSol review. Source/input and reviewed4096MiB sampledsupervisor frozen before either target. |
 | exp-274 | series-000 | 17 | Sol coordinator executes Astra-prescribed selection/acceptance; root owns registration, owned PythonPID/RSS supervision, records and independent ledger/census admission. Astra owns mathematical interpretation. | H-287 | Registered before B targets; unchanged scientificrecipe and selectionmath reviewed. Prefixsourcebytes changed onlyline-layout afterdraft, so samefixedbudget renewedprefix is requiredbeforeB, with reviewedretained4096MiB sampled-group supervision. |
-| exp-275 | series-000 | 17 | Sol coordinator registers/freezes/supervises exact generation and fresh standalone checker; Session184. | H-288 | Registeredbeforeactualroot/cap target after25cap+1pilotcontrols, independentSolreview and soleAstra mathematically reviewed interface; finalAstra sourceclear remains explicitlaunch prerequisite. |
+| exp-276 | series-000 | 17 | Sol coordinator registers/freezes exact source/input/argv/supervision and interprets Session184 readiness evidence. | H-289 | Registered before H289 actual input/producer/replay phases; all three remain unrun. Root freezes reviewed source and exact leases/argv, then runs the input control first and refuses production if the root/cap/Frame join fails. Scientific input control is part of registered exp276. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1459,7 +1461,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-204 rounds, 2512.1 agent-minutes, 5750.0 wall-minutes.
+205 rounds, 2512.1 agent-minutes, 5750.2 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

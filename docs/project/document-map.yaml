@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packing/campaign/retained/session-184-tail-a-dependencies/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/campaign/retained/session-184-n11-readiness/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md, role: plan, authority: current, lifecycle: transient}

@@ -1455,6 +1455,14 @@ unsupported grammar or identity failure leaves the inventory incomplete or refus
 it does not establish that a smaller core is impossible. No inventory outcome directly
 changes the exclusion census.
 
+The [exp-273 inventory](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/inventory.json)
+and its fresh independent inventory both completed in 10.49 seconds combined. They
+agree on 3,338 facts, 101,931 edges and the deterministic inventory identity. Both the
+geometric and validation owner sets contain all seventeen owners, so
+`strict_subset_proposal=false`. This establishes no reduction under the declared
+conservative rules. It does not establish that every owner is necessary or that the
+certificate is minimal. No smaller-arity certificate or additional exclusion follows.
+
 ## First Saved-Prefix Capture Adapter Contract
 
 The accepted endpoint prefix from exp-266 supplies a concrete first input for the
@@ -1541,14 +1549,14 @@ the common wide-domain premise already fails. `unresolved` is the correct geomet
 result. A failed enclosure inclusion does not show that a physical packing violates the
 desired bound, and one owner update supplies no contraction-rate or fixed-point verdict.
 
-## Prospective Full-Root Join for the Capture Cap
+## Full-Root Join for the Capture Cap
 
 The first adapter used the larger $C(U)$ walls. A successor at a near-optimal numeric
 cap needs a separate exact join; the `None`-to-numeric-$U$ equivalence above cannot be
-reused for a smaller cap. The proposed H-288/exp-275 fixes the historically retained
+reused for a smaller cap. H-288/exp-275 fixes the historically retained
 $U'=935106018721/200000000000$, recorded in the
 [R9 review](../reviews/review-2026-10-05-n17-capture-r9.md), and freshly checks it against
-the full accepted root enclosure. No new cap arithmetic result is asserted here.
+the full accepted root enclosure.
 
 The exact chart formula is
 
@@ -1588,6 +1596,118 @@ freshly admitted against these walls; old $U$-wall objects cannot be relabelled.
 The fresh verifier must retain the explicit checked numeric frame, since the frame name
 alone does not distinguish its capture cap. The original $C(S^*)$ premise and exact
 root shift $\sigma=(U-S^*)/2$ remain unchanged.
+
+The [exp-275 certificate](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json)
+and [fresh replay](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/replay.json)
+passed the finite criterion in 1.21 seconds combined. Their scientific payloads agree.
+The exact stored rationals satisfy the derivative and denominator guards, whole-box
+containment and both cap inequalities. The monotone enclosure gives excesses of
+approximately $[4.49048365876565,4.49048365900895]\times10^{-13}$; the preserved
+consumer enclosure gives
+$[4.49048365785146,4.49048365992313]\times10^{-13}$. These decimals summarize the
+exact receipt. The result certifies the cap/root join only; endpoint-cell containment,
+capture, object relabelling, exclusion and global coverage remain unproved by it.
+
+## Numeric-Cap Checkpoint and Consumer Contracts
+
+The proposed H-289/exp-276 preparation run starts from the actual seventeen endpoint
+cells at the H-288 certified numeric cap. It uses no position box and resumes no old
+checkpoint. One complete round updates each of the sixteen contracting owners once;
+square 6 retains its complete seed cover. The production control checks all seventeen
+endpoint poses after seed admission and after each update. A separate process then
+resumes the complete round-001 checkpoint with the same one-round limit, admits the
+seed, and replays all sixteen steps without producing a new step. Its endpoint check
+is a final-state check; it does not independently repeat the production phase's
+seventeen endpoint checkpoints.
+
+The pilot and cap checker use different outward root enclosures. The pilot reads the
+accepted endpoint receipt's midpoint and inclusion radii, rounded outward to
+$10^{-40}$; the cap checker freshly verifies the root and uses a dyadic enclosure.
+The input join must bind the endpoint receipt's exact midpoint and radii to that same
+checked root, prove that both pilot parameter intervals contain the cap checker's
+inclusion intervals, and require the pilot's computed cap to equal the fixed certified
+$U'$. The corrected upper-excess check also applies to the pilot's own side enclosure.
+Matching certificate names or overlapping side intervals alone is insufficient.
+
+The proposed H-290/exp-277 consumer takes that complete checkpoint's saved seed and
+node. Its descriptor binds the H-288 cap/root certificate, both H-289 phase receipts,
+the exact label-to-owner assignment, actual sixteen-step order, cells, scale, D4 action
+and canonical object identities. It accepts only the stated full seventeen-owner,
+$B=1$, identity-action workload, with no position box, guard or ancestry. The named
+frame retains its original cells and outer cap $U$, and explicitly sets
+`capture_cap=U'`.
+
+For every half-extent $h$, verify the numeric frame's affine wall formula
+
+$$
+\operatorname{field\_centre\_bounds}(h)=
+\left(B\left(\frac{U-U'}2+h\right),
+B\left(\frac{U+U'}2-h\right)\right).
+$$
+
+Equality at $h=0,1$ binds the affine coefficients; exact comparison of every declared
+seed-row wall binds the saved input. A fresh producer-free process must admit the seed
+and replay every saved step to the complete stream end under this explicit numeric
+frame. Require `PASS_SAVED_STALL`, no closure, sixteen steps, the same named owners and
+canonical seed/node identities. The frame name alone cannot distinguish the inner cap.
+The existing `None`-wall prefix receipt supplies no numeric-cap replay premise.
+
+The parent consumer obtains final rows by exact replay and applies the retained
+root-coordinate and complete closed-chart calculations. It must retain all 49 bounds:
+29 position coordinates, sixteen relative half angles, three raw sliders and the direct
+$v_9$ projection. Every interval must contain the endpoint's zero value, all seventeen
+full-root endpoint pose boxes must remain present, and square 6 must satisfy its S2
+premise. The original centred $C(S^*)$ and local composition theorem remain explicit
+inherited premises. Readiness does not require a terminal predicate to pass. No cone,
+coarse-slider or patch certificate is silently added to this workload.
+
+Prospective representation ceilings are 10 MiB compressed and decoded for the seed,
+512 MiB compressed and 2 GiB decoded for the streamed node, and 64 MiB for the retained
+consumer output. Check byte bounds before replay, retain object identity across reads,
+and never load the entire node as one decoded JSON value. The proposed parent ceiling
+is 600 seconds, with a fresh child limited to 300 seconds inside that same clock,
+termination at 600 seconds and forced cleanup ten seconds later. Preserve the existing
+200,000-event checker ceiling and a sampled 4 GiB RSS ceiling. These limits are
+prospective scheduling limits; the registration must confirm them after the H-289
+checkpoint's measured readiness. A ceiling, incomplete stream or incomplete replay
+leaves the consumer incomplete. A root, frame, identity, pose-retention or exact-check
+disagreement refuses it. Neither outcome is evidence against optimality.
+
+## Why the Signed Cones Do Not Cover an Endpoint Product Domain
+
+An endpoint-preserving leaf's coordinate enclosures contain zero. In particular, its
+angle product contains $q_{16}=0$. The negative and positive cones require opposite
+strict signs of $q_{16}$ and bound a shared constrained angle such as $q_1$ by a
+multiple of $|q_{16}|$. Their closures therefore require $q_1=0$ on the section
+$q_{16}=0$. The accepted annulus patch is separated from that section.
+
+Consider a product domain containing
+
+$$
+q_{16}=0,\qquad q_1=\delta,\qquad q_j=0\quad(j\ne1,16),
+$$
+
+where $1/10000<|\delta|\le1/200$. This angle vector lies outside both ratio cones,
+the accepted off-zero patch, the apex radius and the local angle bound. Zero position
+and slider coordinates do not change that conclusion. Thus any declared relaxation
+containing this vector is not covered by the currently accepted sufficient regions.
+The angle intervals retained in exp-272 are broad enough for this obstruction.
+
+This is a witness to a gap in coverage of a relaxation, not a feasible packing or a
+counterexample to optimality. Containment or non-overlap constraints could exclude the
+vector; a checked use of those constraints is additional proof work. Merely splitting the sign of
+$q_{16}$ also leaves arbitrarily small nonzero $|q_{16}|$ paired with an independent
+nonzero $q_1$, outside the ratio cones. A complete use of those cones needs further
+validated angular restrictions or a closed case cover whose remaining cases have
+their own certificates.
+
+For the current unconditional endpoint leaf, the direct objective remains the local
+terminal bounds on all positions and angles. A later guarded capture tree could use
+the signed cones and patch on branches away from the endpoint, but its complete
+coverage, guard propagation and leaf custody would need a new checked interface.
+The present consumer accepts no such tree. This coverage argument is a hand derivation
+by the sole Astra agent; it has not received independent mathematical review or a
+machine-checked coverage proof.
 
 ## A Future Label-Bijection Extension
 

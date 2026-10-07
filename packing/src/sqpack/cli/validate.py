@@ -2043,7 +2043,9 @@ def _type_floor(context: Context) -> str:
     """
     basedpyright = _required_tool(context, "basedpyright")
     threads = _pytest_workers(context.jobs)
-    command = (basedpyright, "--threads", str(threads)) if threads > 1 else (basedpyright,)
+    command = (basedpyright, "--pythonpath", sys.executable)
+    if threads > 1:
+        command += ("--threads", str(threads))
     output = _commands(context, (command,))
     _require_text(output, "0 errors, 0 warnings, 0 notes")
     return output
@@ -5588,10 +5590,13 @@ def _push_test_step(base: str) -> Step:
                 # suite-configuration change, so the serial case was the whole non-exhaustive
                 # suite -- quick lane and slow lane together.
                 *_xdist_distribution(context.jobs),
-                *(
-                    ("--pool-workers", str(context.pool_workers))
+                # Explicit resource shapes need the same complementary pool lane as
+                # implicit broad pushes; otherwise each xdist worker inherits a pool.
+                "--pool-workers",
+                str(
+                    context.pool_workers
                     if context.pool_workers is not None
-                    else ()
+                    else context.inner_jobs
                 ),
             ),
         )

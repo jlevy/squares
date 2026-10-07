@@ -60,9 +60,24 @@ experiment:
       a sampled breach. No instantaneous-peak guarantee. No retries, mask tuning or
       projection.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory
-  results: []
+    commit: 3575c02a761d9ae439add4b19707575e3cfdbcf7
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Both original-input invocations finish inventory_complete under frozen
+      limits, exact accepted seed/node/frame/world/mask/closure/standing-receipt custody
+      and EOF joins. Both dependency channels, complete typed DAG, closure roots,
+      owner sets and deterministic core digest agree, excluding execution/provenance
+      invocation metadata only. All proposal-only false flags remain false. A full17
+      core is a valid completed inventory, not evidence of minimality; a strict subset
+      is a proposal only.
+    outcome: criterion_met
+    checked_by: 'Both44-controlled originalA invocations complete3338typedfacts/101931channelededges,
+      exactacceptedseed/node/standingEOF joins, deterministicdigest65b95a112bc9cf4424065fb6aad85e5f062e5346bfb65b34b3095276a60e0795.
+      Bothownercores areall17: no strictsubset underconservativerules, no necessity/minimality/admission.'
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Both original-input invocations finish inventory_complete under
       frozen limits, exact accepted seed/node/frame/world/mask/closure/standing-receipt
       custody and EOF joins. Both dependency channels, complete typed DAG, closure
@@ -70,12 +85,14 @@ experiment:
       invocation metadata only. All proposal-only false flags remain false. A full17
       core is a valid completed inventory, not evidence of minimality; a strict subset
       is a proposal only.
-    reason: Registered before originalA parsing after44target-freecontrols, freshprocessparity
-      and soleAstra/independentSol review. Source/input and reviewed4096MiB sampledsupervisor
-      frozen before either target.
-  lease:
-    expires: '2026-10-07T11:44:20Z'
-    host: macOS arm64
+    reason: 'Both44-controlled originalA invocations complete3338typedfacts/101931channelededges,
+      exactacceptedseed/node/standingEOF joins, deterministicdigest65b95a112bc9cf4424065fb6aad85e5f062e5346bfb65b34b3095276a60e0795.
+      Bothownercores areall17: no strictsubset underconservativerules, no necessity/minimality/admission.'
+    needs_review: false
+  effort:
+    timebox: Combined180s TERM/KILL190, sampled4096MiB perownedprocess
+    wall_seconds: 10.49
+    stopped_by: criterion
 ---
 # exp-273: Conservative TailA Dependencies
 

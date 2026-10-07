@@ -972,6 +972,45 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     )
 
 
+def test_snapshot_index_keeps_source_tracking_and_snapshot_mutated_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, tree = tmp_path / "source", tmp_path / "worker"
+    source.mkdir()
+    tree.mkdir()
+    environment = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    (source / "tracked source.py").write_text("original")
+    (source / "pruned.py").write_text("not copied")
+    for arguments in (("init", "-q"), ("add", "--", "tracked source.py", "pruned.py")):
+        subprocess.run(("git", "-C", str(source), *arguments), check=True, env=environment)
+    (tree / "tracked source.py").write_text("changed in snapshot")
+    (tree / "untracked-output.json").write_text("{}")
+    monkeypatch.setattr(controls, "REPO", source)
+    controls.index_tree(tree)
+    assert tracked_files(tree, ".") == [tree / "tracked source.py"]
+    indexed = subprocess.run(
+        ("git", "-C", str(tree), "show", ":tracked source.py"),
+        check=True,
+        capture_output=True,
+        env=environment,
+    )
+    assert indexed.stdout == b"changed in snapshot"
+
+
+def test_registry_python_uses_the_harness_interpreter(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("PATH", os.pathsep.join(("/usr/bin", "/bin")))
+    command = "python3 -c " + shlex.quote("import sys; print(sys.executable)")
+    outcome = run_control_command(
+        command,
+        cwd=tmp_path,
+        environment=controls.control_environment(tmp_path, tmp_path / "pycache"),
+    )
+    assert outcome.returncode == 0, outcome.stderr
+    assert Path(outcome.stdout.strip()).resolve() == Path(sys.executable).resolve()
+
+
 #: Control commands whose unmutated baseline is held green in a worker. A control is scored
 #: "exited non-zero and printed its expected message", with no green baseline demanded, so
 #: a checker already red in the worker lets its controls pass for a reason that is not

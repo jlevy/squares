@@ -981,6 +981,11 @@ against the full accepted root and the unchanged outward consumer side enclosure
 Its upper excess uses the lower endpoint of each side interval; no old saved object is
 relabelled with the tighter cap.
 
+[H-289](hypotheses/H-289-n17-numeric-cap-first-round-readiness.md) registers the first
+new numeric-cap full17 seed and16-owner round, then fresh zero-production replay.
+The distinct input control first binds the accepted root, pilot geometry and numeric
+frame. First-round readiness does not establish capture, contraction or an exclusion.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -311,8 +311,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 428 | 219 complete; 65 stopped; 73 blocked; 26 ready; 22 tentative; 23 in progress |
 | Sessions | 183 | 105 completed; 77 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 222 | 55 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
-| Experiments | 204 | 74 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 3 in progress; 1 exhausted |
+| Hypotheses | 223 | 56 confirmed; 33 refuted; 63 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
+| Experiments | 205 | 76 accepted; 38 rejected; 59 unresolved; 12 baseline; 13 blocked; 4 abandoned; 2 in progress; 1 exhausted |
 | Frontier results | 112 | 112 registered, 82 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -573,6 +573,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Session 184: TailA Dependency Reports](packing/campaign/retained/session-184-tail-a-dependencies/README.md) | typed session record | record | retained | — |
 | [Session 184: n11 First-Round Readiness Objects](packing/campaign/retained/session-184-n11-readiness/README.md) | typed session record | record | retained | — |
 | [n17 Proof Interfaces and Finite-Angle LP Contract](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md) | research synthesis | record | retained | — |
 | [n17 Ten-Hour Overnight Session](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | current | transient | — |
@@ -5801,7 +5802,8 @@ round that names the hypothesis, control roles included.
 | [H-285](packing/campaign/hypotheses/H-285-n17-coarse-slider-floor.md) | confirmed | Noncircular coarse square9/11 slider-floor guard | 1 | 1.08s exact generation/fresh replay; actual leaf premises open |
 | [H-286](packing/campaign/hypotheses/H-286-n17-saved-prefix-capture-adapter.md) | confirmed | Exact bounds from the actual one-update saved endpoint prefix | 1 | exp272 readiness accepted11.23s; full17endpoint/49zero-containing bounds retained; geometricunresolved, zeroadmission |
 | [H-287](packing/campaign/hypotheses/H-287-n17-controlled-tail-replication.md) | running | Unchanged-recipe replication on actual residual orbit3096315 | 1 | Registered; renewed120+60prefix required after sourcebyte drift; fullstanding beforeadmission |
-| [H-288](packing/campaign/hypotheses/H-288-n17-capture-cap-root-join.md) | running | Frozen rational cap joins full accepted root and outward side enclosure | 1 | Registered root/caponly; no producer or oldobjectrelabel |
+| [H-288](packing/campaign/hypotheses/H-288-n17-capture-cap-root-join.md) | confirmed | Frozen rational cap joins full accepted root and outward side enclosure | 1 | exp275 accepted1.21s; exact all-root cap gap≤1e-12; no capture or relabel |
+| [H-289](packing/campaign/hypotheses/H-289-n17-numeric-cap-first-round-readiness.md) | running | New full17 numeric-cap seed, one16-owner round and fresh zero-production replay | 1 | Registered60sinputcontrol/900sproducer/300sfresh; readinessonly, no capture |
 
 ### Confirmed
 
@@ -6140,9 +6142,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 204 rounds registered in `series-000`.
+There are 205 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5750.0 wall-minutes.
+They record 2512.1 agent-minutes and 5750.2 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6385,9 +6387,10 @@ archive beside it.
 | [exp-270](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-270-h285-coarse-slider-floor.md) | 17 | target | H-285 | Independent coarse-domain root guard and six SAT exclusions | Finite rootguard/all8SAT cases/exactstrictfloor and fresh replay pass1.08s | accepted |
 | [exp-271](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md) | 17 | target | H-282 | Full standing verification of retained TailA closure | Full standingPASS27steps/1728rows/34452224facetchecks; canonical/source/census joins pass180.51s | accepted |
 | [exp-272](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-272-h286-saved-prefix-capture-leaf.md) | 17 | target | H-286 | Saved endpoint prefix intake and exact capture bounds | Readiness accepted11.23s; actualbounds fail local/wide inclusion, no terminal advance | accepted |
-| [exp-273](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-273-h282-tail-a-dependency-inventory.md) | 17 | target | H-282 | Two-channel acceptedTailA dependency inventory | Registered44controls/freshprocessparity; proposalonly, zeroadmission | in-progress |
+| [exp-273](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-273-h282-tail-a-dependency-inventory.md) | 17 | target | H-282 | Two-channel acceptedTailA dependency inventory | Accepted10.49s;3338facts/101931edges; both conservativechannels retain all17, no reduction | accepted |
 | [exp-274](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-274-h287-current-tail-replication.md) | 17 | target | H-287 | Controlled unchangedrecipe replication3096315 | Registered; renewedfull17prefix prerequisite | in-progress |
-| [exp-275](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-275-h288-capture-cap-root-join.md) | 17 | target | H-288 | Exact frozen numericcap fullroot join | Registered180sgen+fresh; root/caponly | in-progress |
+| [exp-275](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-275-h288-capture-cap-root-join.md) | 17 | target | H-288 | Exact frozen numericcap fullroot join | Accepted1.21s; fullroot/capjoin and fresh exactreplay, no capture | accepted |
+| [exp-276](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-276-h289-numeric-cap-first-round.md) | 17 | target | H-289 | New numeric-cap full17 cell seed and first16-owner round | Registered inputjoin before producer; fullfresh16step replay required | in-progress |
 
 ### Cost and provenance
 
@@ -6594,13 +6597,14 @@ archive beside it.
 | exp-270 | 180s combined generation/fresh replay | 1.08s | — | criterion | clean `549c79b65`; conditional independent coarse-domain floor |
 | exp-271 | 900s full standing verifier;4096MiB sampled RSS | 180.51s | — | criterion | clean `11573546d`; standing fullPASS before ordinaryadmission |
 | exp-272 | Parent180s including freshchild60s;TERM180/KILL190 | 11.23s | — | Accepted | Actualprefix readiness,49bounds retained; geometricunresolved, zeroadmission |
-| exp-273 | One180s combinedinventory+fresh/190KILL;4GiBsampled | Pending | — | Running | Two-channel conservativeDAG/proposal, no rewrite or admission |
+| exp-273 | One180s combinedinventory+fresh/190KILL;4GiBsampled | 10.49s | — | criterion | clean `3575c02a7`; conservative all17 dependencies, no reduction |
 | exp-274 | Prefix120+60;producer1200/fresh900/standing900 ifclosed | Pending | — | Running | Deliberate oneorbit unchangedrecipe, fullstanding beforeadmission |
-| exp-275 | Combined180s generation+fresh/190KILL | Pending | — | Running | Exact root/capjoin, no capture or relabel |
+| exp-275 | Combined180s generation+fresh/190KILL | 1.21s | — | criterion | clean `3575c02a7`; fixed numericcap, no capture or relabel |
+| exp-276 | Distinct60sinput/900sproduction/300sfresh;4GiBsampled | Pending | — | Running | New seed/readiness only, no closure or terminal result |
 
-### What the 204 rounds jointly establish
+### What the 205 rounds jointly establish
 
-The 204 rounds use 2512.1 agent-minutes and 5750.0 wall-minutes under the campaign’s
+The 205 rounds use 2512.1 agent-minutes and 5750.2 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

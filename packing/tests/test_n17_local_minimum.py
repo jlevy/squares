@@ -630,7 +630,7 @@ EXP248_RUN = (
 def test_cli_ratio_on_the_widened_box_passes_end_to_end_as_exp248_run_002(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """exp-248 run-002's command passes at this tree with the retained worst ratio.
+    """exp-248 run-002's recipe passes with exact replay of its newly searched duals.
 
     The receipt records the core-stress blob that ran and gates on nothing about it
     (OR-16), so an edit to `check_n17_core_stress.py` that leaves every mathematical
@@ -652,8 +652,31 @@ def test_cli_ratio_on_the_widened_box_passes_end_to_end_as_exp248_run_002(
     assert receipt["slider_box"] == retained["slider_box"] == _box_record(WIDENED_BOX)
     worst, kept = receipt["c8_c9"]["worst"], retained["c8_c9"]["worst"]
     assert worst["direction"] == kept["direction"]
-    assert worst["worst_ratio"] == kept["worst_ratio"]
     assert receipt["c8_c9"]["total_cells"] == retained["c8_c9"]["total_cells"] == 93
+    assert receipt["radius"]["uniform"] == str(local.DECLARED_RADIUS)
+    family = _family()
+    matrix, _ = local.affine_audit(family, WIDENED_BOX)
+    _, root_radii = local.read_point(local.ROOT_CERTIFICATE.read_bytes())
+    enclosure = local.root_enclosure(family, root_radii)
+    deviation, _ = local.root_box_audit(family, enclosure, WIDENED_BOX, matrix)
+    curvature, _ = local.curvature_audit(
+        family, WIDENED_BOX, dict.fromkeys(family.names, local.DECLARED_RADIUS), enclosure
+    )
+    replay = local.replay_certificates(
+        matrix,
+        curvature,
+        [local.DECLARED_RADIUS] * 45,
+        names=family.names,
+        documents=json.loads(certificates.read_text()),
+        box=WIDENED_BOX,
+        deviation=deviation,
+    )
+    assert replay == receipt["c8_c9_replay"]
+    assert replay["passed"]
+    assert replay["complete"]
+    assert replay["directions"] == 90
+    assert replay["worst_ratio"] == worst["worst_ratio"]
+    assert 0 <= Q(replay["worst_ratio"]) < 1
 
 
 def test_affine_structure_holds_at_symbolic_root_parameters() -> None:

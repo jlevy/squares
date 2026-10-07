@@ -33,7 +33,7 @@ On APFS a snapshot uses copy-on-write cloning. Elsewhere it falls back to a plai
 of a bounded source surface: the packing tree without the literature archive or build
 products, plus the root formatter and git ignore files. The finished tree is then a git
 checkout of itself, so a check that asks git what this repository tracks is answered
-here instead of refusing; see `_index_tree`. One snapshot per worker is reused across
+here instead of refusing; see `index_tree`. One snapshot per worker is reused across
 controls; `.venv` and the cargo target are symlinked back so nothing is rebuilt.
 
 The gate can now run this step concurrently with every other step, and a control can no
@@ -114,6 +114,7 @@ SESSION184_RESULT_ROOTS = frozenset(
         "exp-273-tail-a-dependency-inventory",
         "exp-274-current-tail-b-replication",
         "exp-275-capture-cap-root-join",
+        "exp-276-n17-numeric-cap-first-round",
     )
 )
 
@@ -1111,7 +1112,7 @@ def snapshot_source_bytes() -> int:
     return total
 
 
-def _index_tree(root: Path) -> None:
+def index_tree(root: Path) -> None:
     """Make the finished snapshot a git checkout of itself, so it has an index to ask.
 
     Several checks answer "what does this repository hold?" with
@@ -1128,8 +1129,9 @@ def _index_tree(root: Path) -> None:
     is why the refusal is what was seen and the fallback half was still latent. Adopting
     that question in a fourth check should not have to come with reading this file.
 
-    `git init` and `git add -A` over the finished tree, which is what
-    `tests/test_check_archive_annotations.py` already does for the same reason. No
+    `git init` and add only the source repository's tracked paths that survived the
+    copy. Untracked research outputs and scratch must not become tracked merely
+    because they exist on disk. No
     commit: `git ls-files --cached` reads the index, and writing a tree object would
     cost time and buy nothing. Called after the build-cache sweep and before the
     symlinks, so neither a cache nor the linked-back `.venv` is indexed as this
@@ -1147,9 +1149,32 @@ def _index_tree(root: Path) -> None:
     environment = {
         name: value for name, value in os.environ.items() if not name.startswith("GIT_")
     }
-    for arguments in (("init", "-q"), ("add", "-A")):
+    source_paths = tracked_files(REPO, ".")
+    if source_paths is None:
+        raise ValueError("cannot index worker snapshot without the source tracked set")
+    names = [
+        path.relative_to(REPO).as_posix()
+        for path in source_paths
+        if (root / path.relative_to(REPO)).is_file()
+    ]
+    subprocess.run(
+        ("git", "-C", str(root), "init", "-q"),
+        check=True,
+        capture_output=True,
+        env=environment,
+    )
+    if names:
         subprocess.run(
-            ("git", "-C", str(root), *arguments),
+            (
+                "git",
+                "-C",
+                str(root),
+                "add",
+                "-f",
+                "--pathspec-from-file=-",
+                "--pathspec-file-nul",
+            ),
+            input=b"".join(os.fsencode(name) + b"\0" for name in names),
             check=True,
             capture_output=True,
             env=environment,
@@ -1183,7 +1208,7 @@ def clone_tree(dest: Path) -> None:
     # none of the real checkout: `.venv` alone holds 147 `__pycache__` directories that
     # are not this clone's to delete.
     _strip_build_caches(dest)
-    _index_tree(dest)
+    index_tree(dest)
 
     for rel in LINK_BACK:
         source = ROOT / rel
@@ -1217,6 +1242,9 @@ def control_environment(tree: Path, pycache: Path) -> dict[str, str]:
     """
     work = tree / HERE
     env = os.environ.copy()
+    # Registry commands spell python/python3: use the interpreter running this
+    # harness, including an external frozen environment, rather than the shell's.
+    env["PATH"] = str(Path(sys.executable).parent) + os.pathsep + env.get("PATH", "")
     # The parent owns the control journal, and a nested gate must not start a
     # second artifact capture inside a snapshot.
     env.pop("PACKING_VALIDATION_ARTIFACT_DIR", None)

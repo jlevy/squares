@@ -5,6 +5,8 @@ from __future__ import annotations
 import gzip
 import json
 import math
+import subprocess
+import sys
 import time
 from fractions import Fraction
 from pathlib import Path
@@ -16,12 +18,172 @@ import pytest
 from devtools import pilot_n17_capture as pilot
 from devtools.provenance import git_blob
 from sqpack.hull_kernel import Budget, RefusalError, node, sequential
-from sqpack.hull_kernel.frame import Frame
+from sqpack.hull_kernel.frame import Frame, SymmetryAction
 from sqpack.hull_kernel.geometry import area2, trig
 from sqpack.hull_kernel.induction import strict_core
 from sqpack.hull_kernel.rational import Q
 
 EXCLUSION_CAP = Q(1169, 250)
+
+
+def synthetic_seventeen_owner_endpoint() -> tuple[Frame, pilot.Endpoint]:
+    """A rational replay fixture; no accepted-root or campaign input is loaded."""
+    centres = tuple((Q(2 + 2 * (i % 5)), Q(2 + 2 * (i // 5))) for i in range(17))
+    cells = tuple(
+        tuple(
+            (x + dx, y + dy)
+            for dx, dy in (
+                (Q(-1, 10), Q(-1, 10)),
+                (Q(1, 10), Q(-1, 10)),
+                (Q(1, 10), Q(1, 10)),
+                (Q(-1, 10), Q(1, 10)),
+            )
+        )
+        for x, y in centres
+    )
+    names = tuple(f"synthetic-{i + 1}" for i in range(17))
+    frame = Frame(
+        "synthetic-n17-resume",
+        Q(12),
+        Q(12),
+        cells,
+        names,
+        17,
+        (SymmetryAction("r0", (1, 0, 0, 1), tuple(range(17))),),
+    )
+    targets = tuple(
+        pilot.Target(
+            i + 1,
+            i,
+            names[i],
+            (pilot.Box.point(Fraction(str(x))), pilot.Box.point(Fraction(str(y)))),
+            ((Q(0), Q(0)),),
+            0.0,
+        )
+        for i, (x, y) in enumerate(centres)
+    )
+    return frame, pilot.Endpoint(
+        targets,
+        pilot.Box.point(12),
+        Q(12),
+        (1.0, 0.0),
+        (0.0, 1.0),
+        {"fixture": "synthetic-seventeen-owner"},
+        slides={},
+        coarse=6,
+    )
+
+
+def test_synthetic_n17_sixteen_step_fresh_cli_resume(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    frame, endpoint = synthetic_seventeen_owner_endpoint()
+    checked_labels: list[int] = []
+    original_holds = pilot.endpoint_holds
+
+    def track_holds(target: pilot.Target, rows: Any) -> Any:
+        checked_labels.append(target.label)
+        return original_holds(target, rows)
+
+    monkeypatch.setattr(pilot, "endpoint_holds", track_holds)
+    first = pilot.run_pilot(
+        frame,
+        endpoint,
+        bins=1,
+        max_rounds=1,
+        max_live=1,
+        min_width=Q(1, 2),
+        hull_limit=16,
+        max_seconds=30,
+        progress=False,
+        checkpoints=tmp_path,
+        node_id="n17-capture-pilot",
+    )
+    checkpoint = tmp_path / "checkpoint-round-001.json.gz"
+    assert checkpoint.exists()
+    assert first.endpoint_lost is None
+    assert first.closure is None
+    assert first.rounds[-1]["complete"] is True
+    assert len(first.updates) == len(first.node["steps"]) == 16
+    assert {update["label"] for update in first.updates} == set(range(1, 18)) - {6}
+    assert checked_labels == list(range(1, 18)) * 17
+    assert len(first.seed["cells"]) == len(first.seed["groups"]) == 17
+
+    output, observations = tmp_path / "fresh.json", tmp_path / "observations.json"
+    script = """
+import json, runpy, sys
+from pathlib import Path
+from devtools import pilot_n17_capture as pilot
+namespace = runpy.run_path(sys.argv[1])
+frame, endpoint = namespace['synthetic_seventeen_owner_endpoint']()
+pilot.capture_frame = lambda cap: frame
+pilot.load_endpoint = lambda frame: endpoint
+def forbidden(*args, **kwargs):
+    raise AssertionError('fresh resume attempted production or new seed')
+pilot.produce_step = forbidden
+pilot.build_seed = forbidden
+admitted, checked = [], []
+original_admit, original_holds = pilot.node.admit_seed, pilot.endpoint_holds
+def admit(*args, **kwargs):
+    admitted.append(pilot.producer.content_sha256(args[1]))
+    return original_admit(*args, **kwargs)
+def holds(target, rows):
+    checked.append(target.label)
+    return original_holds(target, rows)
+pilot.node.admit_seed, pilot.endpoint_holds = admit, holds
+status = pilot.main(sys.argv[3:])
+Path(sys.argv[2]).write_text(json.dumps({'admitted': admitted, 'checked': checked}))
+raise SystemExit(status)
+"""
+    argv = [
+        sys.executable,
+        "-c",
+        script,
+        str(Path(__file__).resolve()),
+        str(observations),
+        "--system",
+        "n17",
+        "--cap",
+        "capture",
+        "--max-rounds",
+        "1",
+        "--resume",
+        str(checkpoint),
+        "--bins",
+        "1",
+        "--max-live",
+        "1",
+        "--min-width-log2",
+        "1",
+        "--hull-limit",
+        "16",
+        "--max-seconds",
+        "30",
+        "--replay-share",
+        "0.5",
+        "--output",
+        str(output),
+    ]
+    fresh = subprocess.run(argv, capture_output=True, text=True, timeout=40, check=False)
+    assert fresh.returncode == 0, fresh.stderr
+    result, observed = json.loads(output.read_text()), json.loads(observations.read_text())
+    seed_id, node_id = map(pilot.producer.content_sha256, (first.seed, first.node))
+    assert observed["admitted"] == [seed_id]
+    assert observed["checked"] == list(range(1, 18))
+    assert result["system"] == "n17"
+    assert result["settings"]["box"] is None
+    assert [owner["label"] for owner in result["owners"] if owner["coarse"]] == [6]
+    assert result["updates"] == first.updates
+    assert result["rounds"] == first.rounds
+    assert result["seed_sha256"] == seed_id
+    assert result["node_sha256"] == node_id
+    assert result["resumed"]["round"] == 1
+    assert result["resumed"]["changed_since"] == []
+    assert result["endpoint_control"]["held"] is True
+    assert result["replay"]["status"] == "PASS_REPLAYED"
+    assert result["replay"]["steps"] == 16
+    assert result["replay"]["final_state_agrees"] is True
 
 
 def test_endpoint_cap_upper_excess_uses_side_lower_bound(

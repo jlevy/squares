@@ -24,6 +24,7 @@ from typing import Any
 
 import pytest
 
+from devtools import reachable_tests
 from sqpack import gate_budgets
 from sqpack.cli import validate
 from sqpack.cli.validate import main
@@ -2811,6 +2812,8 @@ def test_push_tests_forward_the_shared_worker_allocation(
             "origin/main",
             "-n",
             "4",
+            "--pool-workers",
+            "1",
         )
     ]
 
@@ -2844,6 +2847,58 @@ def test_exclusive_push_forwards_pytest_and_pool_worker_allocations(
 
     assert validate._push_test_step("origin/main").action(context) == "selected tests passed"
     assert commands[0][-4:] == ("-n", "10", "--pool-workers", "10")
+
+
+def test_explicit_push_runs_complementary_normal_and_exclusive_pool_lanes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Retain both selected files without nested pools in each xdist worker."""
+
+    monkeypatch.delenv("PACKING_REACHABLE_TEST_ARTIFACT_STEM", raising=False)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 4)
+    monkeypatch.setattr(reachable_tests, "changed_paths", lambda _base: [])
+    monkeypatch.setattr(
+        reachable_tests,
+        "select_tests",
+        lambda _paths: reachable_tests.TestSelection(
+            everything=False,
+            reason="synthetic selected files",
+            tests=("packing/tests/test_normal.py", "packing/tests/test_pooled.py"),
+        ),
+    )
+    calls: list[tuple[tuple[str, ...], str]] = []
+
+    def subprocess_run(
+        command: Sequence[str], **kwargs: Any
+    ) -> subprocess.CompletedProcess[str]:
+        if "--summary" in command:
+            return subprocess.CompletedProcess(command, 0, stdout="narrow 2\n", stderr="")
+        calls.append((tuple(command), kwargs["env"]["PACK_JOBS"]))
+        return subprocess.CompletedProcess(command, 0)
+
+    def execute(_context: validate.Context, command: tuple[str, ...]) -> str:
+        assert reachable_tests.main(command[3:]) == 0
+        return "both lanes passed"
+
+    monkeypatch.setattr(validate.subprocess, "run", subprocess_run)
+    monkeypatch.setattr(validate, "_run", execute)
+    context = validate.Context(
+        deep=False, strict=False, jobs=3, inner_jobs=2, environment=os.environ.copy()
+    )
+    step = validate._push_test_step("origin/main")
+    assert step.budget_seconds is None
+    assert step.action(context) == "both lanes passed"
+    assert len(calls) == 2
+    normal, pooled = calls
+    assert normal[1] == "1"
+    assert pooled[1] == "2"
+    assert normal[0][normal[0].index("-m", 3) + 1] == "not exhaustive_exact and not pool_heavy"
+    assert pooled[0][pooled[0].index("-m", 3) + 1] == "not exhaustive_exact and pool_heavy"
+    assert normal[0][normal[0].index("-n") + 1] == "4"
+    assert "-n" not in pooled[0]
+    for command, _jobs in calls:
+        assert "tests/test_normal.py" in command
+        assert "tests/test_pooled.py" in command
 
 
 @pytest.mark.parametrize(
@@ -4580,7 +4635,7 @@ def test_the_type_floor_threads_across_the_cpus_the_selection_leaves(
         deep=False, strict=False, jobs=jobs, inner_jobs=1, environment={}
     )
     validate._type_floor(context)
-    assert captured == [("basedpyright", *threads)]
+    assert captured == [("basedpyright", "--pythonpath", sys.executable, *threads)]
 
 
 @pytest.mark.parametrize(("cpus", "jobs", "workers"), [(4, 2, "2"), (2, 2, "1"), (4, 4, "1")])
