@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eighteen SQUISH upper-bound packings (#401)
 kind: task
 status: in_progress
 priority: 1
-version: 34
+version: 35
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -29,10 +29,11 @@ child_order_hints:
   - is-01m4bxdst7crd9aypqhf05q7ky
   - is-01m4bz6f82s3g9ahbypsr5qcbk
   - is-01m4c2qs4p0gqa1dcfanxr4sm0
+  - is-01m4c486bvartgwnk1s2szjz8x
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T21:01:32.182Z
+updated_at: 2026-10-07T21:27:58.586Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: standard W1 result import, bounded engineering, complete exact rational replay and independent Astra math/correctness review, standard PR review and hosted CI, then authorized formal-stack merge and publication checks. Expanded issue401 scope18counts: original11 in PR415/416 plus12 new or improved geometries in later release (five replacements, seven new); n153 provenance-only byte identity. Native tbd sync now works via supplied gh authentication and confirmed tbd-sync publication; remove tracked fallback outboxes only after verified preservation. User authorizes merge once clean/reviewed, and requires proper results list and main case graphics. Keep parent/author reply open until expanded import settles.
