@@ -12030,4 +12030,5 @@ results:
     notes: Declared V0/C0 from the source claim only. Earlier T-113 and T-114 retain their exact receipts
       and accepted reviews; those reviews do not cover the twelve update geometries. Reported case values
       are upward decimal ceilings of claimed exact rational sides. Prior verified bounds, finder credit
-      and atlas geometry remain retained.
+      and historical geometry evidence remain retained. The current atlas draws the update geometries,
+      checked at its drawing boundary without promoting this result.

@@ -70,8 +70,10 @@ uv run --frozen python -m devtools.squish_followup_packets check
 the original bounded rational parser and retains all thirteen complete rosters. The
 checks establish source identity and normalized-record consistency; neither runs the
 producer checker nor establishes feasible geometry. Complete deciding replay and new
-scoped review are the next entry under think-oxvk. The earlier certified bounds and atlas
-geometry remain available while the twelve tighter claims await confirmation.
+scoped review are the next entry under think-oxvk. The current atlas draws the twelve
+update geometries and checks exact feasibility at the drawing boundary; that check does
+not promote the imported result. Earlier certified bounds, source packets, receipts and
+reviews remain unchanged while these tighter claims await retained confirmation.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

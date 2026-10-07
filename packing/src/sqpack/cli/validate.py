@@ -133,11 +133,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: time, and again that day after Couzo's 3 October packings at n = 208, 209, 228, 263, 272,
 #: 303 and 306 (T-092), which their import left unscreened; the two smaller corpora are not
 #: re-measured. The complete 324-record replay on 2026-10-07 after SQUISH's eleven
-#: imported poses (T-113, T-114) took 364.07s and established the current tripwire.
+#: imported poses (T-113, T-114) took 364.07s. The twelve T-115 update poses were
+#: re-screened serially in 107.952s; unselected records remain unchanged. All three
+#: corpus tripwires below are the sums over the current retained square motions.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (26, 87, 85, 518),
-    "n=1..200": (65, 606, 181, 1883),
-    "n=1..324": (119, 1725, 302, 4489),
+    "n=1..100": (27, 88, 86, 535),
+    "n=1..200": (65, 557, 182, 1931),
+    "n=1..324": (120, 1874, 302, 4686),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

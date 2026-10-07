@@ -671,19 +671,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-122.svg"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n123/n123.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         123
       ],
       "n": 123,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-123.yaml",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-123.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-07",
       "source_n": 123,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n123.txt"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n123/n123.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -714,19 +714,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-125.svg"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n126/n126.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n126/n126.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         126
       ],
       "n": 126,
-      "path": "resources/web/squish-401-2026-10-07/facts/n-126.json.gz",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-126.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
       "retrieved": "2026-10-07",
       "source_n": 126,
-      "url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n126/n126.cert.json"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n126/n126.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -757,19 +757,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-128.svg"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n129/n129.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n129/n129.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         129
       ],
       "n": 129,
-      "path": "resources/web/squish-401-2026-10-07/facts/n-129.json.gz",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-129.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
       "retrieved": "2026-10-07",
       "source_n": 129,
-      "url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n129/n129.cert.json"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n129/n129.cert.json"
     },
     {
       "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n130/n130.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
@@ -947,34 +947,34 @@
       "url": "https://github.com/user-attachments/files/33140088/n153.cert.json"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n154/n154.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n154/n154.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         154
       ],
       "n": 154,
-      "path": "resources/web/squish-401-2026-10-07/facts/n-154.json.gz",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-154.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
       "retrieved": "2026-10-07",
       "source_n": 154,
-      "url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n154/n154.cert.json"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n154/n154.cert.json"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n155/n155.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n155/n155.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         155
       ],
       "n": 155,
-      "path": "resources/web/squish-401-2026-10-07/facts/n-155.json.gz",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-155.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
       "retrieved": "2026-10-07",
       "source_n": 155,
-      "url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n155/n155.cert.json"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n155/n155.cert.json"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -1120,18 +1120,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-178.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n179/n179.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         179
       ],
       "n": 179,
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-179.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-30",
+      "retrieved": "2026-10-07",
       "source_n": 179,
-      "url": "https://kingbird.myphotos.cc/packing/square-179.svg"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n179/n179.cert.json"
     },
     {
       "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n180/n180.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
@@ -1336,19 +1337,19 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n207.txt"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at 6042c56b43b64c09fe5a32c64879e698f399beaf",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n208/n208.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         208
       ],
       "n": 208,
-      "path": "resources/web/franciscouzo-square-packing-2026-10-03/facts/n-208.yaml",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-208.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-10-05",
+      "retrieved": "2026-10-07",
       "source_n": 208,
-      "url": "https://github.com/franciscouzo/square-packing/blob/6042c56b43b64c09fe5a32c64879e698f399beaf/n208.txt"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n208/n208.cert.json"
     },
     {
       "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n209/n209.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
@@ -1554,49 +1555,49 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n236.txt"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n237/n237.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         237
       ],
       "n": 237,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-237.yaml",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-237.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-07",
       "source_n": 237,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n237.txt"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n237/n237.cert.json"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n238/n238.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n238/n238.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         238
       ],
       "n": 238,
-      "path": "resources/web/squish-401-2026-10-07/facts/n-238.json.gz",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-238.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
       "retrieved": "2026-10-07",
       "source_n": 238,
-      "url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n238/n238.cert.json"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n238/n238.cert.json"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n239/n239.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         239
       ],
       "n": 239,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-239.yaml",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-239.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-07",
       "source_n": 239,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n239.txt"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n239/n239.cert.json"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -1643,18 +1644,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-257a.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n258/n258.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         258
       ],
       "n": 258,
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-258.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-07",
       "source_n": 258,
-      "url": "https://kingbird.myphotos.cc/packing/square-258.svg"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n258/n258.cert.json"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -1714,19 +1716,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-262.svg"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at 6042c56b43b64c09fe5a32c64879e698f399beaf",
+      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n263/n263.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         263
       ],
       "n": 263,
-      "path": "resources/web/franciscouzo-square-packing-2026-10-03/facts/n-263.yaml",
+      "path": "resources/web/squish-401-update-2026-10-07/facts/n-263.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-10-05",
+      "retrieved": "2026-10-07",
       "source_n": 263,
-      "url": "https://github.com/franciscouzo/square-packing/blob/6042c56b43b64c09fe5a32c64879e698f399beaf/n263.txt"
+      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n263/n263.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
