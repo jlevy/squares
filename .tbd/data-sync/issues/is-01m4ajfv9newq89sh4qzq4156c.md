@@ -3,9 +3,9 @@ type: is
 id: is-01m4ajfv9newq89sh4qzq4156c
 title: "W7: strict SQUISH #401 import and exact dual-checker receipts"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 9
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:58:20.597Z
-updated_at: 2026-10-07T09:03:35.437Z
+updated_at: 2026-10-07T10:17:57.693Z
 started_at: 2026-10-07T06:58:30.243Z
+closed_at: 2026-10-07T10:17:57.693Z
+close_reason: Local engineering complete at reported 463203adf and confirmed 9ce8ac8ea; validated source, reader, cost and recovery/rebase deliverables. Parent retains pending full checkpoint and HTTP403-blocked publication.
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
@@ -32,3 +36,40 @@ Third broad failure was pre-existing paper-test expectation drift: REVIEW_FIGURE
 
 Final column-layout integration follow-up: reproduced confirmation result-table failure on index.html at1280 with result cuts=[]/stranded=[]/broken=['562949953421312,'] (1failed51.05s, /tmp/squish-result-columns-diagnosis.log). Exact cause: plain Unicode ≤ in T-114 headline meant ASCII-oriented prose math recognition rendered only bare s(153), leaving long rational denominator as ordinary breakable text. Parent approved data-only canonical inline-code math presentation for exact unchanged T-113/T-114 expressions in both results.yaml files. Records confirmed existing convention; senior Astra semantic review accepted that removing delimiters recovers prior text exactly, n153 fraction matches retained fact.side, and existing converter emits numerator\mathbin{/}denominator. No bounds, claims, case/source quotations, count scopes, rungs, styles, layout guards or geometry changed. RESULTS regenerated but byte-identical; SYNOPSIS/research outputs likewise unchanged. Registry checks pass both; prose3tests pass both1.19/1.23s; math-markup checks pass both2.01/1.62s. All six original failing width/page assertions now pass with legal-break, no broken-word and no stranded-punctuation constraints intact: confirmation6passed51.38s, reported6passed43.33s (73deselected each). Logs /tmp/squish-confirmation-columns-fixed.log and /tmp/squish-reported-columns-fixed.log. Source/data freeze sent parent; parent owns commits/pins/rebase and serialized gates.
 Read-only suite cost-record failure also diagnosed:625files44unrecorded, shard4=15/149=10.1% over unchanged10% threshold. Existing suite_files lacks additive merge; admission must use actual successful measurements, not manual invented weights or fabricated hosted cohorts. Scope/validation findings and six-new-module roster handed to records agent, who owns reusable local admission tool/tests/dataset and fresh measurements. No suite tool/data edits by this lane. Engineering bead stays open pending parent disposition and CI.
+
+Local engineering completion (7 October 2026)
+
+The engineering source, reader integration, recovery/rebase, and measured-cost
+handoff are complete. Reported source is committed at
+463203adf56ecb347f9abc83ee1295158efe7c32. Confirmation is committed at
+9ce8ac8eaf16b2bd0f25ef2d5f50b803bfcc3eb0, with the same source ancestry,
+complete exact-replay evidence, accepted mathematical reviews, confirmed V3/C3
+claims, and six genuinely measured module-cost admissions. Current receipt
+binding uses bounded exact semantic geometry; generated-file self-hashes are
+not the integrity boundary. No source-producer executable was available or
+claimed replayed.
+
+The final reported broad gate ran 973.31 seconds: 6,652 passed, 30 skipped and
+one expected failure, with one failure from the stale four-entry long-quotient
+test roster. T-114's 31-digit fraction correctly rendered a binary solidus and
+clean semantic MathML. The three-line roster/comment correction in 463203adf
+passed Ruff and whitespace checks. The subsequent incremental push gate
+completed all 61 steps, with 3,348 passed and 19 skipped, in 493.86 seconds.
+No style, geometry, layout floor, collection threshold, or timeout was loosened.
+
+Confirmation was backed up and rebased twice without scientific drift. All 50
+confirmation scientific/editorial/cost paths remain byte-identical to the
+pre-final-rebase tree; only the test roster and refreshed release pin changed.
+The final release-pin check passes (last data commit cbc03234e548). Recovery
+retains a complete 831 MiB Git bundle, incremental bundles, binary patches,
+raw indices, pending outbox/native notes, and named stashes outside checkouts.
+Backups are /workspace/squares-401-confirmation-backup-20261007T091449Z,
+/workspace/squares-401-confirmation-final-backup-20261007, and
+/workspace/squares-401-confirmation-quotient-backup-20261007.
+
+Close this child for completed local engineering at the parent's instruction.
+The parent bead owns the still-running full confirmation checkpoint and remote
+publication. Feature push was denied HTTP 403; no PR or issue comment was
+published. The full checkpoint is monitored read-only, with no extra browser,
+proof, or test processes started by this lane. Preserve this distinction when
+reporting completion.

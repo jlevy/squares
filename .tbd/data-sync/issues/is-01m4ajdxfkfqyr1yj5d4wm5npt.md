@@ -5,7 +5,7 @@ title: "Import Nate Chaoweeraprasit: eleven SQUISH upper-bound packings (#401)"
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -24,43 +24,50 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T09:28:53.336Z
+updated_at: 2026-10-07T10:17:10.737Z
 started_at: 2026-10-07T06:57:24.624Z
 ---
 Workflow entry: W1 result import stages 1–3, followed by W7 bounded engineering and W2 full exact-rational replay/mapped independent math review, then publication and authorized issue reply. Scope: issue #401 ten pinned repository certificates at 07fe6dde1e5b67405a3076719b90e58e2882b677 plus n153 in comment 6031977107 (eleven counts total). Two separable PRs; no main push or merge without explicit merge consent. Source no-license retention: derived geometry facts and attributed metadata only. Engineering GPT-6.1 Sol, records GPT-6.1 Sol, math/soundness Astra. Native tbd sync known divergent/permission blocked; preserve all work in outbox and working branch.
 
 ## Notes
 
-Reported registration is frozen at962dd806c22b4cc1bf1cd73c24e7aa8b8f637493. Complete
-semantic v2 certification and deterministic replay passed for all eleven witnesses
-(1,885 squares,177,440 unordered pairs per checker) and both full-size invalid controls;
-the final replay took75.594s. Both Astra reviewers accepted, and senior independently
-replayed all311 retained numerical motions. Confirmation's47 proof/review/data paths
-remain byte-identical through rebase onto registration, except the intentionally merged
-result headlines and obsolete release pin.
+All eleven submissions are committed in two local layers: reported registration at
+463203adf56ecb347f9abc83ee1295158efe7c32 and confirmation at
+9ce8ac8eaf16b2bd0f25ef2d5f50b803bfcc3eb0. The confirmation inherits registration
+without changing the original source claims or geometry. V0/C0 and V3/C3 remain
+separable; T-113 and T-114 are provisional until merge.
 
-Historical source adapters preserve selected superseding claims while regenerating
-lower-bound sections and detecting drift. Reader integration fixes preserve valid issue
-comment citations and use existing mathematical headline markup; all six affected
-column-width checks passed on each layer. The twelve-figure test expectation matches
-the previously committed paper. The new cost-admission route refuses incomplete
-collection and setup-only modes;66 tool tests and27 independent Astra tests passed.
-Five reported-module costs are admitted from a real54-test run while preserving all581
-historical weights, cohorts and caps. Confirmation inherits these and separately admits
-its16-test receipt module after rebase.
+Both complete exact-rational checkers passed all eleven witnesses: 1,885 squares and
+177,440 unordered pairs per checker. Both full-size invalid controls were rejected.
+Final deterministic semantic replay passed in 75.594 seconds. Astra mathematical
+and senior correctness reviews accepted; mapped reviews are committed. The senior
+reviewer independently replayed all 311 retained numerical motions. Historical
+adapters preserve superseding claims while checking lower-bound drift. Atlas,
+reader citations, mathematical headline widths, and snapshot caps were verified.
 
-Earlier overlapping broad gates exceeded the existing900s behavioral timeout; diagnosed
-functional failures were corrected. Final registration --push --since origin/main
---jobs1 --inner-jobs1 is now running alone, with all limits unchanged. Confirmation's
-final gate follows it; no full research/merge checkpoint is claimed yet.
+The cost-admission tool passed 66 tests and 27 independent Astra tests. Real whole-
+module measurements admitted five reported modules (54 tests) and the separate
+confirmation module (16 tests), preserving all 581 historical weights, cohorts and
+caps. No verification or timing limits were relaxed.
 
-The tbd GitHub/proxy directions were followed. Fresh scoped direct curl and authenticated
-gh both refuse the API connection, including outside the filesystem sandbox. The saved
-environment draft declares unrestricted networking and has GH_TOKEN, but this does not
-prove a working direct route or validate the owner's token through the mediator.
-Proxied reads work; createPullRequest/addComment and native tbd pushes are denied.
-Issue401 remains open with its original single n153 comment and no new claims. No PR or
-comment was created. Feature branch publication is to be attempted after the final
-gate. Installation/startup instructions, including truthful direct-route troubleshooting,
-are saved in the environment draft for review/save/publish. Import and author reply
-remain open; bead updates are preserved in the outbox.
+The serialized reported broad push gate at 962dd806c ran 6,652 passing tests,
+30 skips and one expected failure, with one stale LONG_QUOTIENTS roster failure.
+The three-line test-only correction at 463203adf left production source unchanged.
+Its incremental push gate passed all 61 selected steps and 3,348 tests, with
+19 skips. The full 101-step confirmation checkpoint at 9ce8ac8ea is running;
+its final outcome is pending, not claimed green.
+
+Publication is blocked. An actual registration branch push returned HTTP 403;
+actual gh PR and issue comment writes were rejected as Resource not accessible by
+integration. No PR or comment was created. The tbd setup-github-cli instructions
+were followed: scoped direct curl and authenticated gh both encountered TCP
+connection refusal, including outside the filesystem sandbox. Proxied reads work
+but do not establish validity of the owner's token. No credentials, TLS settings or
+Git remotes were replaced. The saved cloud draft revision 11 declares unrestricted
+networking; that does not establish a working direct route in this instance.
+
+Native tbd sync remains divergent/write-denied. Preserve both outboxes and local
+branches in the final bundle and handoff. Keep this import and the author-reply
+bead open until publication and the post-merge reply are completed. Merge requires
+session consent. Setup installation/startup instructions are saved for environment
+review and publication; local-only commit restoration is not yet verified.
