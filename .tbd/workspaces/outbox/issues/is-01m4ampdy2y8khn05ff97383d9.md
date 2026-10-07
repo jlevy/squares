@@ -21,6 +21,7 @@ close_reason: Confirmation owning records,11case regeneration, scoped reader pro
 resolution: null
 duplicate_of: null
 ---
+
 ## Notes
 
 Final confirmation records and reader audit completed in isolated confirmation checkout,
