@@ -5,7 +5,7 @@ title: "W7: strict SQUISH #401 import and exact dual-checker receipts"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:58:20.597Z
-updated_at: 2026-10-07T08:24:47.737Z
+updated_at: 2026-10-07T08:51:28.362Z
 started_at: 2026-10-07T06:58:30.243Z
 ---
 
@@ -25,3 +25,7 @@ Follow-up after broad registration pre-push: the original gate had 33 failures a
 Validation: implicated source/parser/generator/color/overview suite556passed plus one discovered GitHub issue website-card contract mismatch,130.44s; that defect fixed and covered by final20regression/ceiling/source-card tests passing12.14s, plus separately10 targeted tests8.00s. All11 selected SQUISH cases now regenerate with0disagreements. Prior25 residual tests passed6.91s. Ruff/BasedPyright clean for all17 engineering-owned changed/new files. Kernel /proc profiler reproduced with required escalation:1passed0.75s. Remaining worker-index issue is untracked new source/test files until parent stages them; parent owns integrity-policy and rigidity floor changes. Logs:/tmp/squish-followup-final-focused.log,/tmp/squish-followup-final-regressions.log,/tmp/squish-followup-last-fixes.log. No confirmation checkout edits, commits or feature branch pushes by this lane. Bead stays in_progress pending parent publication and CI; tbd sync again push-denied and automatically saved outbox.
 
 Adopted-state integration follow-up: made the confirmation display regression fixture valid from both reported and confirmed case records by replacing the source display exactly once, removing an existing verified-display declaration, and injecting exactly one deliberately stale declaration. Production code unchanged; missing-display refusal assertion retained. Reported6affectedtests pass4.06s; confirmation8SQUISH/adoptiontests pass3.65s,91deselected. Copied only this test file into confirmation at parent explicit instruction. Ruff clean. Logs /tmp/squish-fixture-reported-final.log and /tmp/squish-fixture-confirmation-final.log. Parent owns commit/publication and bead disposition.
+
+Final gate follow-up: repaired confirmation local Node dependencies with repo-prescribed npm ci --no-audit --no-fund (96packages2s), because root-package links omitted packages/workbench/node_modules/typescript-eslint8.68.0. No tracked manifests/lockfiles changed. Browser-floor rerun passed2selectedsteps103.84s; liveness56passed44.68s (/tmp/squish-confirmation-browser-floor-repaired.log).
+Reported broad progress isolated two genuine result-overview failures: T-114 canonical issue401 comment citation misclassified as a repository file requiring blob/tree/main. Shared strict exact host/repository numbered issue/discussion+correctly typed comment predicate now classifies these source reports as external citations. Arbitrary IDs, mismatched comment types, host/repository impostors, query/path extensions and file links cannot use exemption. Existing branch/hash-pin/tree-path checks unchanged; meaningful combined negative-control test retains their refusal outputs. Four changed files devtools/repo_links.py,devtools/result_overview.py,tests/test_repo_links.py,tests/test_result_overview.py, copied only code/tests into confirmation as parent directed. Senior static acceptance and independent18tests passed2.39s; reported full affected56tests passed46.07s, confirmation56tests passed65.24s. Ruff/BasedPyright clean. Initial failed two-test reproduction24.83s retained /tmp/squish-reported-result-link-reproduction.log; fixed logs /tmp/squish-reported-result-link-fixed.log and /tmp/squish-confirmation-result-link-fixed.log.
+Third broad failure was pre-existing paper-test expectation drift: REVIEW_FIGURES[PAPER] expected11 while current n11-optimality-review article has12 figures. Endpoint figure body blamed to e37362ff9b Sept30, explicit Figure12 caption to d7a55fa324 Oct5, before SQUISH import. Read-only standalone reproduction1failed74.42s (/tmp/squish-reported-glyph-reproduction.log). Parent authorized two-literal test-only correction to12 and explanatory twelve drawings in tests/test_site_glyphs.py, copied to confirmation. Full original figure assertion now exercises every styling/centering/caption requirement and passes: reported1test53.56s, confirmation1test52.44s. Ruff clean; paper/glyph/layout/geometry code unchanged. Logs /tmp/squish-reported-glyph-count-fixed.log and /tmp/squish-confirmation-glyph-count-fixed.log. Source/test freeze delivered; parent owns common-source commits, rebase, incremental pre-push against d48bcd365 and final CI/publication/bead disposition.
