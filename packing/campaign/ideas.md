@@ -946,6 +946,11 @@ The [closed-cell symmetry follow-up](hypotheses/H-260-n17-closed-cell-symmetry.m
 preregistered; its geometric coverage uses existential assignments without lex-priority
 seam exclusions.
 
+The current known-case readiness control is
+[H-281](hypotheses/H-281-n11-first-round-producer-readiness.md): one complete
+repaired-producer n11 round, preserving the exact endpoint, followed by fresh replay.
+It supplies measured cost and custody without a first-round contraction threshold.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

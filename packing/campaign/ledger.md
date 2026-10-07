@@ -931,7 +931,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 193 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 194 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1151,6 +1151,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | H-278 | confirmed | proof | Across the accepted exp237 root inclusion interval and all eight verti |  | 1 |  | 1s wall |
 | H-279 | confirmed | proof | The 58 retained signed-position duals evaluated at slider origin have  |  | 2 |  | 10s wall |
 | H-280 | confirmed | proof | The deterministic retained dual seed at exp260 outer negative omega16  |  | 1 |  | 6s wall |
+| H-281 | running | proof | The repaired producer completes one certified eleven-owner round on th |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1388,6 +1389,12 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-265 | series-000 | 11 | Sol coordinator executes Astra-approved readiness contract in Session 184 phase 5. | H-281 | Registered before target; source remains the reviewed60b5cc8cf instrument with repaired producer. Freeze runtime/source custody through the launch receipt; no target has run. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1435,7 +1442,7 @@ Status: **active**. Execute the selected ten-hour continuation in Session184: pr
 
 ## Effort
 
-193 rounds, 2512.1 agent-minutes, 5730.3 wall-minutes.
+194 rounds, 2512.1 agent-minutes, 5730.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

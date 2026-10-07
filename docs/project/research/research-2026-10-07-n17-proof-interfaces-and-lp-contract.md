@@ -1028,11 +1028,20 @@ Now retain the wider position and slider premises and allow
 
 $$
 q_{16}=-r,\quad 0<r\le1/200,\quad
-|q_j|\le\varepsilon r\quad(j\ne16),\qquad \varepsilon=1/2048.
+|q_j|\le\varepsilon r\quad
+(j\in\{1,2,3,9,10,13,14,15,17\}),\qquad \varepsilon=1/2048.
 $$
 
-Relative to the baseline at the same $r$, the other angle changes are at most
-$2\varepsilon r$. Each of the six weighted wall gaps increases by at most
+The six remaining labels $\{4,5,7,8,11,12\}$ occur in none of the weighted rows.
+Their half angles may range independently over the entire interval $[-1/200,1/200]$. The
+feature-forcing premise still uses the outer angle bound for all sixteen labels.
+A checker should reconstruct the weighted-row label roster to verify this independence.
+Thus the proposed domain is a cone in ten angle coordinates times a full cube in six
+coordinates; requiring all fifteen non-16 angles to be small would give a valid but
+unnecessarily restrictive subset.
+
+Relative to the baseline at the same $r$, the other angle changes in weighted rows are
+at most $2\varepsilon r$. Each of the six weighted wall gaps increases by at most
 $\varepsilon r$. For the eight weighted pairs not involving 16, either allowed owner
 choice gives a gap increase at most
 
