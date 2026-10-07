@@ -24,7 +24,7 @@ from typing import Any
 
 import pytest
 
-from devtools import reachable_tests
+from devtools import check_search_differential, reachable_tests
 from sqpack import gate_budgets
 from sqpack.cli import validate
 from sqpack.cli.validate import main
@@ -443,7 +443,7 @@ def test_run_ordinary_action_inherits_context_timeout(
         encoding="utf-8",
     )
     engine.chmod(0o755)
-    monkeypatch.setattr(validate, "ENGINE", engine)
+    monkeypatch.setattr(validate, "_engine_path", lambda _context: engine)
     context = validate.Context(
         deep=False,
         strict=False,
@@ -490,7 +490,7 @@ def test_run_selected_interrupt_stops_detached_production_process(
         encoding="utf-8",
     )
     engine.chmod(0o755)
-    monkeypatch.setattr(validate, "ENGINE", engine)
+    monkeypatch.setattr(validate, "_engine_path", lambda _context: engine)
     context = validate.Context(
         deep=False,
         strict=False,
@@ -4452,6 +4452,102 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
         "basin atlas",  # 9.63s
         "basin event record and replay",  # 7.89s
     }
+
+
+@pytest.mark.parametrize("configured", [None, "scratch-target", "/scratch/sqsearch-target"])
+def test_sqsearch_build_and_runtime_use_the_same_target(
+    configured: str | None, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    project = tmp_path / "packing"
+    crate = project / "sqsearch"
+    default = crate / "target" / "release" / "sqsearch"
+    monkeypatch.setattr(validate, "PROJECT_ROOT", project)
+    monkeypatch.setattr(validate, "ENGINE", default)
+    environment = {} if configured is None else {"CARGO_TARGET_DIR": configured}
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=environment
+    )
+    target = Path(configured or "target")
+    if not target.is_absolute():
+        target = crate / target
+    expected = target / "release" / "sqsearch"
+    calls: list[tuple[tuple[str, ...], Path, dict[str, str]]] = []
+
+    def run(child: validate.Context, command: tuple[str, ...], *, cwd: Path = project) -> str:
+        calls.append((command, cwd, dict(child.environment)))
+        return "SELFTEST PASSED" if command[-1] == "--selftest" else ""
+
+    monkeypatch.setattr(validate.shutil, "which", lambda *_, **__: "cargo")
+    monkeypatch.setattr(validate, "_run", run)
+    monkeypatch.setattr(Path, "is_file", lambda path: path == expected)
+    step = next(step for step in validate.STEPS if step.name == "search engine (sqsearch)")
+    assert validate._build_engine(context, [step]) == f"built {expected}"
+    assert step.action(context) == "SELFTEST PASSED"
+    assert validate._differential(context) == ""
+    assert calls == [
+        (("cargo", "build", "--locked", "--release", "--quiet"), crate, environment),
+        ((str(expected), "--selftest"), project, environment),
+        (
+            (
+                sys.executable,
+                "-m",
+                "devtools.check_search_differential",
+                "20000",
+                "--binary",
+                str(expected),
+            ),
+            project,
+            environment,
+        ),
+    ]
+    assert validate._engine_path(context) == expected
+
+
+@pytest.mark.parametrize(("override", "pairs"), [(False, 37), (True, 37), (False, None)])
+def test_search_differential_invokes_the_explicit_binary_with_unchanged_pair_count(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, override: bool, pairs: int | None
+) -> None:
+    engine = tmp_path / "external-target" / "release" / "sqsearch"
+    arguments = ["check_search_differential"]
+    if pairs is not None:
+        arguments.append(str(pairs))
+    if override:
+        arguments.extend(("--binary", str(engine)))
+    monkeypatch.setattr(sys, "argv", arguments)
+    calls: list[list[str]] = []
+
+    def run(command: list[str], **options: object) -> subprocess.CompletedProcess[str]:
+        assert options == {"capture_output": True, "text": True, "check": True}
+        calls.append(command)
+        return subprocess.CompletedProcess(command, 0, stdout="")
+
+    monkeypatch.setattr(check_search_differential.subprocess, "run", run)
+    assert check_search_differential.main() == 0
+    assert calls == [
+        [
+            str(engine if override else check_search_differential.BIN),
+            "--pairdump",
+            "--pairs",
+            str(pairs if pairs is not None else 20000),
+        ]
+    ]
+
+
+def test_sqsearch_override_does_not_fall_back_to_an_old_internal_binary(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    default = tmp_path / "old-engine"
+    default.write_bytes(b"old artifact")
+    monkeypatch.setattr(validate, "ENGINE", default)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={"CARGO_TARGET_DIR": str(tmp_path / "external-target")},
+    )
+    with pytest.raises(validate.StepSkippedError, match="sqsearch binary is absent"):
+        validate._search_engine(context)
 
 
 def test_exact_rust_geometry_is_fast_and_runs_the_differential_oracle(

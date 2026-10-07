@@ -503,6 +503,98 @@ evaluating actual coefficients or removals.
 Its immediate purpose would be to test whether full-square collision implications
 strengthen conditional pruning; it supplies no present exclusion or global proof.
 
+## Prospective Closed Separation Branches
+
+The same polynomial identity gives a complete branch cover when merging alternative
+escape directions loses useful information.
+Fix one partner. In any physical packing under the owner guard, that pair has disjoint
+interiors. The robust collision argument therefore implies $P(y,t)\le0$ for at least one
+signed axis. On a closed subarc containing the actual angle, the Bernstein identity
+implies $b_i(y)\le0$ for at least one $i\in\{0,1,2\}$.
+
+Group by the eight signed axes and three coefficient indices.
+These 24 branches form a closed cover of every possible noncolliding pose of the chosen
+partner. Each branch retains every original row, both subarcs where required, and every
+centre piece clipped by that branch’s coefficient halfplane.
+The coefficients depend on the row and subarc; the common branch index does not replace
+them by one global plane.
+Boundary equality and angular seams remain in the cover.
+
+Within a branch, recover a common owned set for the restricted partner and test it
+against the other owners’ already checked common owned sets.
+This shallow variant changes one partner’s domain and avoids reconditioning every
+foreign piece in every branch.
+Excluding the guard requires all 24 branches to close, by exact empty-cover or
+shared-interior-point evidence.
+A closure in one branch excludes only that branch.
+Further propagation would be a separately declared construction.
+
+The existing SAT witnesses give a useful limitation.
+An exact-wall-valid pairwise escape cannot lie in $Q_0-D$, because that membership would
+force an interior collision.
+It survives the point-conditioned cover and belongs to at least one of the 24 branches.
+The recovered owned set in that branch cannot meet $Q_0$. Thus if every other fixed
+owned set is empty, this shallow branch test against $Q_0$ alone cannot close all
+branches for that partner.
+The actual recovered sets should decide whether this route contains new information
+before allocating a target.
+
+## Prospective Conditional Hitting-Point Certificate
+
+A finite point cover can preserve alternatives without requiring one common owned point
+for each square. Fix sixteen distinct rational points $Z$, initially proposed as
+
+$$
+Z=\left\{\left(o+\frac{kV}{5},\ o+\frac{lV}{5}\right):
+k,l\in\{1,2,3,4\}\right\}.
+$$
+
+For every owner and every surviving closed row under a declared guard, prove coverage of
+its centre domain by
+
+$$
+\bigcup_{z\in Z}(z-D_{jk}),
+$$
+
+where $D_{jk}$ is the checked strict body core for that row.
+Membership $y=z-d$ gives $z=y+d$ strictly inside the physical square.
+Every square consequently contains at least one point of $Z$. Interior-disjoint squares
+cannot share such a point, so seventeen squares cannot all satisfy this condition with
+only sixteen points.
+The selected point may vary with the square’s pose; an empty common-owned intersection
+does not by itself prevent this certificate.
+
+Coverage must include every closed row and piece, including points, segments and seams.
+Using an aggregate row hull is a permitted stronger sufficient obligation, but its
+uncovered points may arise solely from that over-cover.
+Retain the exact choice of domain in the contract.
+All points, core margins and coverage rules must be frozen before inspecting a new
+target. The accepted endpoint forbids this collective certificate on the unconditioned
+parent and supplies a required negative control.
+
+More generally, suppose owner $j$ is guaranteed to contain a point from a specified
+subset $Z_j$. A set of owners $A$ is impossible whenever $|\bigcup_{j\in A}Z_j|<|A|$.
+This is the finite Hall obstruction; it includes the two-owners/one-shared-point
+argument as a special case.
+Any proposed $Z_j$ still needs its complete geometric coverage proof.
+
+A fully accepted point-conditioned receipt could supply explicit inherited domains for a
+cheap first coverage discriminator.
+With the point set and row cores fixed, a checked uncovered point persists when the
+centred guard is enlarged, because the conditional domains enlarge.
+This blocks only that sufficient row-core coverage recipe; it does not refute actual
+containment by the rotating square or a sharper construction.
+Conversely, point coverage proves only a point exclusion.
+A regional claim requires the region’s own checked conditional domains;
+point-conditioned domains cannot be transported to positive width.
+
+This is a concrete conditional-capacity option within
+[X-048’s R2/R3 portfolio](../../../packing/campaign/explorations/X-048-n17-optimality-after-n11.md),
+not a new assertion that the broader route was absent.
+Neither this option nor the 24-branch cover is selected or measured here.
+Their next use requires a bounded resource contract, controls and preregistration
+informed by the actual paired-guard outcome.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

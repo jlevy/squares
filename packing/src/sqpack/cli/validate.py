@@ -2571,10 +2571,22 @@ def _derivation(context: Context) -> str:
     return output
 
 
+def _engine_path(context: Context) -> Path:
+    """Resolve the runtime artifact from cargo's configured build directory."""
+    configured = context.environment.get("CARGO_TARGET_DIR")
+    if configured is None:
+        return ENGINE
+    target = Path(configured)
+    if not target.is_absolute():
+        target = PROJECT_ROOT / "sqsearch" / target
+    return target / "release" / "sqsearch"
+
+
 def _search_engine(context: Context) -> str:
-    if not ENGINE.is_file():
+    engine = _engine_path(context)
+    if not engine.is_file():
         raise StepSkippedError("sqsearch binary is absent")
-    output = _run(context, (str(ENGINE), "--selftest"))
+    output = _run(context, (str(engine), "--selftest"))
     _require_text(output, "SELFTEST PASSED")
     if "FAIL" in output:
         raise StepFailureError(output)
@@ -3687,11 +3699,14 @@ def _n40_rigidity_bracket(context: Context) -> str:
 
 
 def _differential(context: Context) -> str:
-    if not ENGINE.is_file():
+    engine = _engine_path(context)
+    if not engine.is_file():
         raise StepSkippedError(
             "sqsearch binary is absent; differential geometry was not checked"
         )
-    return _module(context, "devtools.check_search_differential", "20000")
+    return _module(
+        context, "devtools.check_search_differential", "20000", "--binary", str(engine)
+    )
 
 
 def _run_returncode(context: Context, command: Sequence[str]) -> int:
@@ -5951,7 +5966,7 @@ def _build_engine(context: Context, selected: Sequence[Step]) -> str:
         (cargo, "build", "--locked", "--release", "--quiet"),
         cwd=PROJECT_ROOT / "sqsearch",
     )
-    suffix = "  built sqsearch/target/release/sqsearch"
+    suffix = f"  built {_engine_path(context)}"
     return f"{output}\n{suffix}".strip()
 
 
