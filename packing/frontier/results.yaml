@@ -11734,16 +11734,21 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: "`s(n) ≤ S_n` at ten counts, n = 108 to 303, from new SQUISH rational packings"
-    claim: 'Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129,
-      130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401 on
-      7 October 2026. Each S_n is the exact rational side in the retained packing facts, from about 0.0004126
-      to 0.0067047 below the earlier reported upper bound here. Each certificate supplies rational centres
-      and rational half-angle parameters for closed unit squares in the rational container. The claim
-      establishes only upper bounds, with no optimality or rigidity conclusion. The author credits David
-      Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance. This repository
-      confirmed the upper bounds by independently re-implemented exact-rational checks: sqpack.witness.exact_verify
-      and devtools.check_rational_witness_independent accept every pair and container wall of each certificate,
-      with both geometric controls rejected.'
+    claim: |
+      Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129,
+      130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on
+      jlevy/squares#401 on 7 October 2026. Each S_n is the exact rational side in the retained
+      packing facts, from about 0.0004126 to 0.0067047 below the earlier reported upper bound
+      here. Each certificate supplies rational centres and rational half-angle parameters for
+      closed unit squares in the rational container.
+
+      The claim establishes only upper bounds, with no optimality or rigidity conclusion. The
+      author credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+      assistance.
+
+      This repository confirmed the upper bounds by independently re-implemented exact-rational
+      checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent accept
+      every pair and container wall of each certificate, with both geometric controls rejected.
     scope:
       n_values:
       - 108
@@ -11861,14 +11866,20 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: "`s(153) ≤ 7250614903299225/562949953421312`, from a SQUISH rational packing"
-    claim: 'Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <= 7250614903299225/562949953421312,
-      about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874
-      below the earlier reported upper bound here. Each certificate supplies rational centres and rational
-      half-angle parameters for closed unit squares in the rational container. The claim establishes only
-      upper bounds, with no optimality or rigidity conclusion. The author credits David Ellsworth’s records
-      and tools and states human-directed Claude Opus 5.5 assistance. This repository confirmed the upper
-      bounds by independently re-implemented exact-rational checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent
-      accept every pair and container wall of each certificate, with both geometric controls rejected.'
+    claim: |
+      Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <=
+      7250614903299225/562949953421312, about 12.8796793733329640, in the supplement to
+      jlevy/squares#401 on 7 October 2026, about 0.0019874 below the earlier reported upper bound
+      here. Each certificate supplies rational centres and rational half-angle parameters for
+      closed unit squares in the rational container.
+
+      The claim establishes only upper bounds, with no optimality or rigidity conclusion. The
+      author credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+      assistance.
+
+      This repository confirmed the upper bounds by independently re-implemented exact-rational
+      checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent accept
+      every pair and container wall of each certificate, with both geometric controls rejected.
     scope:
       n_values:
       - 153
