@@ -11733,7 +11733,7 @@ results:
   - id: T-113
     kind: upper-bound
     registered: '2026-10-07'
-    headline: s(n) ≤ S_n at ten counts, n = 108 to 303, from new SQUISH rational packings
+    headline: "`s(n) ≤ S_n` at ten counts, n = 108 to 303, from new SQUISH rational packings"
     claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(n) <= S_n for n = 108, 126, 129, 130,
       154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401 on 7 October
       2026. Each S_n is the exact rational side in the retained packing facts, from about 0.0004126 to
@@ -11799,7 +11799,7 @@ results:
   - id: T-114
     kind: upper-bound
     registered: '2026-10-07'
-    headline: s(153) ≤ 7250614903299225/562949953421312, from a SQUISH rational packing
+    headline: "`s(153) ≤ 7250614903299225/562949953421312`, from a SQUISH rational packing"
     claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(153) <= 7250614903299225/562949953421312,
       about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874
       below the earlier reported upper bound here. Each certificate supplies rational centres and rational
