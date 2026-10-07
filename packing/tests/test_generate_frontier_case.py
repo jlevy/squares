@@ -1173,7 +1173,15 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
     case["reported_upper_bound"]["value"] = "99.0"
     case["verified_upper_bound"]["value"] = "99.0"
     label = "The source" + chr(0x2019) + "s original finite decimal display is"
-    body = body.replace("Its decimal display is", label)
+    body, source_displays = re.subn(
+        rf"(?:Its decimal display is|{re.escape(label)})\s+\$[0-9.]+\$",
+        lambda _match: f"{label} $99.0$",
+        body,
+    )
+    assert source_displays == 1
+    # Both reported and already confirmed records are valid starting states. Replace
+    # their display declarations rather than appending a second confirmation clause.
+    body = re.sub(r"The verified display is\s+\$[0-9.]+\$", "", body)
     body = body.replace(
         "## Earlier Packing", "The verified display is $99.0$.\n\n## Earlier Packing"
     )

@@ -5,7 +5,7 @@ title: Confirm SQUISH issue 401 exact upper-bound records
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T07:36:53.442Z
-updated_at: 2026-10-07T07:51:16.590Z
+updated_at: 2026-10-07T08:20:19.874Z
 started_at: 2026-10-07T07:37:03.822Z
 ---
 ## Notes

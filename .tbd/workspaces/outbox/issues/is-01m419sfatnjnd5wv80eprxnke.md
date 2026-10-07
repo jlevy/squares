@@ -44,8 +44,8 @@ census_n17_certified’s admission rule.
    New admissions should be verified at 318c28c42 or later.
    The census does not enforce that yet: it counts a receipt from any listed revision.
    Decide whether to restrict the older listings to the receipts that already use them.
-   7\. The n11 receipts register (upstream 27660cf18) names three verification depths for
-   a receipt; consider the same vocabulary for n17 admission.
+   7\. The n11 receipts register (upstream 27660cf18) names three verification depths
+   for a receipt; consider the same vocabulary for n17 admission.
 
 7. (2026-10-03 evening, 74b9b686f.) Items 1, 3 and 6 are fixed.
    (1) A verification matches its certificate by the content ids in the objects’ file
@@ -58,8 +58,8 @@ census_n17_certified’s admission rule.
    file. The census on the committed ledger is unchanged (4 admitted, 126,168 states,
    15,953 orbits); 22 tests.
    Items 2, 4, 5 and 7 are open.
-   9\. The streamed kernel verifier (601bbf110, lane M1) is committed but not listed; its
-   review is its own bead.
+   9\. The streamed kernel verifier (601bbf110, lane M1) is committed but not listed;
+   its review is its own bead.
 
 2026-10-05 (PR 347 status survey).
 Items 2, 4, 5 and 7 are open.

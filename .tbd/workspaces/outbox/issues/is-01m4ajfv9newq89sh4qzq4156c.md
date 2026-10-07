@@ -5,7 +5,7 @@ title: "W7: strict SQUISH #401 import and exact dual-checker receipts"
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:58:20.597Z
-updated_at: 2026-10-07T08:08:14.294Z
+updated_at: 2026-10-07T08:24:47.737Z
 started_at: 2026-10-07T06:58:30.243Z
 ---
 ## Notes
@@ -77,3 +77,15 @@ Logs:/tmp/squish-followup-final-focused.log,/tmp/squish-followup-final-regressio
 No confirmation checkout edits, commits or feature branch pushes by this lane.
 Bead stays in_progress pending parent publication and CI; tbd sync again push-denied and
 automatically saved outbox.
+
+Adopted-state integration follow-up: made the confirmation display regression fixture
+valid from both reported and confirmed case records by replacing the source display
+exactly once, removing an existing verified-display declaration, and injecting exactly
+one deliberately stale declaration.
+Production code unchanged; missing-display refusal assertion retained.
+Reported6affectedtests pass4.06s; confirmation8SQUISH/adoptiontests
+pass3.65s,91deselected. Copied only this test file into confirmation at parent explicit
+instruction. Ruff clean.
+Logs /tmp/squish-fixture-reported-final.log and
+/tmp/squish-fixture-confirmation-final.log.
+Parent owns commit/publication and bead disposition.

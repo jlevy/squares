@@ -5,7 +5,7 @@ title: Replace SQUISH receipt hashes with exact semantic input binding
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 hold: null
 hold_until: null
 created_at: 2026-10-07T07:44:51.635Z
-updated_at: 2026-10-07T07:56:06.059Z
+updated_at: 2026-10-07T08:20:19.877Z
 started_at: 2026-10-07T07:45:48.472Z
 ---
 W7 engineering after OR16/OR18 senior review: remove bindings to repository-owned
