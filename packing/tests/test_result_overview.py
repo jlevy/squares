@@ -401,7 +401,11 @@ def test_every_github_link_names_main_and_a_path_in_the_tree(bodies: dict[str, s
     total = 0
     for result_id, body in bodies.items():
         assert not repo_links.hash_pinned_links(body), result_id
-        github = [href for href in HREF.findall(body) if href.startswith(REPO_URL + "/")]
+        github = [
+            href
+            for href in HREF.findall(body)
+            if href.startswith(REPO_URL + "/") and not repo_links.is_report_link(href)
+        ]
         assert github, result_id
         total += len(github)
         for href in github:
@@ -410,6 +414,36 @@ def test_every_github_link_names_main_and_a_path_in_the_tree(bodies: dict[str, s
         assert paths
         assert not tree.missing(paths), (result_id, tree.missing(paths))
     assert total > 1000
+
+
+def test_source_reports_do_not_relax_main_pin_or_missing_file_guards(
+    overview: overview_data.Overview,
+) -> None:
+    sample = replace(overview, results=[_result(overview, SETTLED)])
+    reports = [
+        f"{REPO_URL}/issues/401",
+        f"{REPO_URL}/issues/401#issuecomment-6031977107",
+        f"{REPO_URL}/discussions/12",
+        f"{REPO_URL}/discussions/12#discussioncomment-345",
+    ]
+    pinned = f"{REPO_URL}/blob/0123456789abcdef0123456789abcdef01234567/README.md"
+    non_main = f"{REPO_URL}/tree/review/packing"
+    missing = "packing/frontier/no-such-source-report-artifact.md"
+    urls = [
+        *reports,
+        pinned,
+        non_main,
+        f"{REPO_URL}/blob/main/{missing}",
+        f"{REPO_URL}/blob/main/README.md",
+    ]
+    body = "".join(f'<a href="{url}">citation</a>' for url in urls)
+    audit = result_overview.link_audit(sample, {SETTLED: body})
+    assert audit.external == 4
+    assert audit.github == 4
+    assert audit.off_main == [f"{SETTLED}: {pinned}", f"{SETTLED}: {non_main}"]
+    assert audit.missing == [f"blob/{missing}"]
+    assert repo_links.hash_pinned_links(body) == [pinned]
+    assert repo_links.branch_paths(body) == {("blob", missing), ("blob", "README.md")}
 
 
 def test_every_line_anchor_opens_the_entry_it_names(bodies: dict[str, str]) -> None:
