@@ -590,6 +590,7 @@ case or experiment separately.
 | [Eleven-Square Optimality Proof: The Delta for the Original Contributor](docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md) | dated review record | record | retained | — |
 | [Unified adversarial review of the tentative optimality proof for eleven squares](docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md) | dated review record | record | retained | — |
 | [Changes in v0.1.4 of the Eleven-Square Optimality Review, for Its W2 Exposition Review](docs/project/reviews/review-2026-10-04-n11-optimality-paper-v0.1.4-changes.md) | dated review record | record | retained | — |
+| [Review of the Eleven-Square Optimality Paper, v0.1.6](docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md) | dated review record | record | retained | — |
 | [Statement Audit: the Lean Formalization of Eleven-Square Optimality](docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md) | dated review record | record | retained | — |
 | [Adversarial Review: the Import of the Lean Formalization of Eleven-Square Optimality](docs/project/reviews/review-2026-10-06-n11-lean-formalization-adversarial.md) | dated review record | record | retained | — |
 | [wand125 Certificates of 3 and 4 October: Review of 28 Mixed Rectangle-Measure Bounds From `n = 42` to `n = 95`](docs/project/reviews/review-2026-10-05-wand125-october-4-certificates.md) | dated review record | record | retained | — |
