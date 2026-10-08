@@ -5,9 +5,9 @@ title: "B5: on-site links for n = N (cases/N.html), epistemics.html on all-resul
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
-delegate: claude-code@vm
+delegate: codex-pr395@spud10.local
 labels:
   - pages
 dependencies: []
@@ -15,7 +15,7 @@ parent_id: is-01m49ph0abvy6j16zcq4jse39y
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:46.764Z
-updated_at: 2026-10-06T22:55:10.518Z
+updated_at: 2026-10-08T00:33:21.026Z
 started_at: 2026-10-06T22:55:10.517Z
 ---
 Lane B. overview_data.py:428-431, render_overview.py:1031, MOVED_PAGES cases.html target.
