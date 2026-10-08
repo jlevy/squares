@@ -3,15 +3,15 @@ type: is
 id: is-01m4c4ghx1nmqv2q398jy5572g
 title: "n17: independently review global contact normalization and complete angle-chart coverage"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-07T21:32:32.543Z
-updated_at: 2026-10-07T21:32:32.543Z
+updated_at: 2026-10-08T01:45:23.089Z
 ---
 Review the sole-Astra hand-derived global contact-normalization argument in
 `docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md`.
