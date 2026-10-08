@@ -1,7 +1,9 @@
 """The published URL boundary: omissions, identity changes, crawl files and aliases."""
 
 import json
+import os
 import subprocess
+from collections.abc import Iterator
 from dataclasses import replace
 from pathlib import Path
 
@@ -665,3 +667,146 @@ def test_every_partial_paper_or_workbench_check_stages_the_shared_card() -> None
         "workbench",
         "pdf",
     }
+
+
+def _memory_site(monkeypatch: pytest.MonkeyPatch, files: dict[str, int]) -> Path:
+    """Exercise physical ownership and byte ceilings without allocating site fixtures."""
+    directory = Path("/virtual-publication")
+    original_glob, original_file, original_stat = Path.rglob, Path.is_file, Path.stat
+
+    def rglob(path: Path, pattern: str) -> Iterator[Path]:
+        if path == directory:
+            return iter(directory / name for name in files)
+        return original_glob(path, pattern)
+
+    def is_file(path: Path) -> bool:
+        if path.is_relative_to(directory):
+            return path.relative_to(directory).as_posix() in files
+        return original_file(path)
+
+    def stat(path: Path, *, follow_symlinks: bool = True) -> os.stat_result:
+        if path.is_relative_to(directory):
+            size = files[path.relative_to(directory).as_posix()]
+            return os.stat_result((0, 0, 0, 0, 0, 0, size, 0, 0, 0))
+        return original_stat(path, follow_symlinks=follow_symlinks)
+
+    monkeypatch.setattr(Path, "rglob", rglob)
+    monkeypatch.setattr(Path, "is_file", is_file)
+    monkeypatch.setattr(Path, "stat", stat)
+    return directory
+
+
+def _catalogue_rows() -> list[site_urls.SiteURL]:
+    return [
+        replace(
+            row(path),
+            kind=kind,
+            producer=site_urls.CATALOGUE_PRODUCER,
+            generator=generator,
+        )
+        for path, (kind, generator) in site_urls.catalogue_output_contracts().items()
+    ]
+
+
+def test_catalogue_outputs_are_exact_and_required_for_the_selected_producer(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    rows = [*_catalogue_rows(), row("index.html")]
+    files = {item.path: 1 for item in rows if item.producer == site_urls.CATALOGUE_PRODUCER}
+    directory = _memory_site(monkeypatch, files)
+    options = {"partial": True, "producers": (site_urls.CATALOGUE_PRODUCER,)}
+    assert not failures(site_urls.check_site(directory, rows, **options))
+    assert "required overview output missing" in failures(site_urls.check_site(directory, rows))
+    for suffix in (
+        "index.json",
+        "metadata/current-n83.json",
+        "coefficients/current-n83.json",
+    ):
+        name = site_urls.CATALOGUE_DATA_PREFIX + suffix
+        assert name in files
+        del files[name]
+        failed = failures(site_urls.check_site(directory, rows, **options))
+        assert f"site {name}: required {site_urls.CATALOGUE_PRODUCER} output missing" in failed
+        files[name] = 1
+    files["index.html"] = 1
+    for name in (
+        site_urls.CATALOGUE_DATA_PREFIX + "metadata/unowned.json",
+        site_urls.CATALOGUE_DATA_PREFIX + "coefficients/unowned.json",
+        "papers/unowned.js",
+    ):
+        files[name] = 1
+        assert f"site {name}: unregistered file" in failures(
+            site_urls.check_site(directory, rows, **options)
+        )
+        del files[name]
+    coefficient = site_urls.CATALOGUE_DATA_PREFIX + "coefficients/current-n83.json"
+    del files[coefficient]
+    assert not failures(
+        site_urls.check_site(directory, rows, partial=True, producers=("overview",))
+    )
+    assert coefficient in failures(site_urls.check_site(directory, rows))
+    owned = next(item for item in rows if item.path == coefficient)
+    for wrong in (
+        replace(owned, producer="overview"),
+        replace(owned, kind="paper-file"),
+        replace(owned, generator="fixture:unowned"),
+        replace(owned, path=site_urls.CATALOGUE_DATA_PREFIX + "unowned.json"),
+    ):
+        assert "exact renderer filename, type and owner" in failures(
+            site_urls.validate_registry([wrong])
+        )
+
+
+def test_archive_cap_requires_the_exact_classified_path_and_owner(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    archive = next(item for item in _catalogue_rows() if item.kind == "archive-file")
+    files = {archive.path: 5_016_486}
+    directory = _memory_site(monkeypatch, files)
+    assert site_urls.HARD_HTML_LIMIT == 2_000_000
+    assert site_urls.html_limit(archive) == 6_000_000
+    assert not failures(site_urls.check_site(directory, [archive]))
+    files[archive.path] = 6_000_001
+    assert "hard limit 6000000" in failures(site_urls.check_site(directory, [archive]))
+    files[archive.path] = 5_016_486
+    for wrong in (
+        replace(
+            archive,
+            path="papers/unowned-complete.html",
+            canonical="papers/unowned-complete.html",
+        ),
+        replace(archive, producer="overview"),
+        replace(archive, generator="fixture:unowned"),
+        replace(archive, kind="paper-file"),
+        replace(archive, canonical="papers/exact-side-values.html"),
+    ):
+        assert site_urls.html_limit(wrong) == site_urls.HARD_HTML_LIMIT
+        assert failures(site_urls.validate_registry([wrong]))
+    ordinary = replace(row("papers/unowned.html"), kind="paper-file")
+    files.clear()
+    files[ordinary.path] = 2_000_001
+    assert "hard limit 2000000" in failures(site_urls.check_site(directory, [ordinary]))
+
+
+def test_deployed_archive_uses_the_same_qualified_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    archive = next(item for item in _catalogue_rows() if item.kind == "archive-file")
+    body = b"x" * 5_016_486
+    monkeypatch.setattr(check_published_site, "head_checks", lambda *_args: [])
+
+    def read(_url: str, *, timeout: float) -> tuple[int, bytes]:
+        assert timeout == 1
+        return 200, body
+
+    assert not failures(
+        check_published_site.deployed_registry_checks(
+            "https://example.org/squares/", read, timeout=1, rows=[archive]
+        )
+    )
+    body = b"x" * 6_000_001
+    assert "registered HTML" in failures(
+        check_published_site.deployed_registry_checks(
+            "https://example.org/squares/", read, timeout=1, rows=[archive]
+        )
+    )

@@ -341,6 +341,8 @@ A delivery-recovery worker checks earlier claimed output.
 | 9 | W7: upstream CI contract repair | Rational refresh, hosted citation identity, publication payloads, snapshot custody, measured suite admissions and startup delay controls repaired; independent Astra review passed |
 | 10 | W7: recovered stack, verified-bound identities and work map (`think-jygq`, `think-808n`) | Original 2026-10-08 A1 checkpoint: rebased both layers through the stacked-PR shortcut; 33 replay-backed rational identities projected without changing case bounds or proof status; four representation gaps then remained |
 | 11 | W7: final publication input repair (`think-x0j9`) | The fresh catalogue job exposed a missing retained KKT-results leaf in its sparse checkout; keep that exact input and exercise the real Git include/exclude contract |
+| 12 | W7: assembled publication contract (`think-wiu3`) | Register all 1,005 catalogue outputs by their exact exporter identities; reserve the 6 MB archive budget for its specific producer/path and bind approved scripts to retained source bytes |
+| 13 | W7: complete PDF layout (`think-vore`) | Hosted-PDF spot QA exposed clipped expanded equations; preserve every coefficient with shorter displays/tables and preflight every display at the actual Letter content width |
 
 The two stack layers have separate registers.
 At the earlier 2026-10-08 CI-repair checkpoint, PR 403 had 286 exact current values, one
@@ -365,6 +367,20 @@ limit.
 The startup self-test checks the measured readiness-call wait for its injected 300
 ms delay, independently of navigation overhead.
 Final validation and publication identities are reported in the PRs.
+
+The lazy catalogue has 1,003 JSON files, one browser script and one complete HTML
+archive in addition to its canonical reader, Markdown and PDF. Their site registrations
+come from the exporter plan; unexpected names or owners remain refused.
+The complete HTML has a specific 6,000,000-byte budget, while ordinary HTML keeps its
+2,000,000-byte cap. Executable payloads and large inline programs retain exact source
+identity, approved path and individual byte budgets.
+
+The PDF preflight typesets all displays at Letter’s content width using the shared
+publication margin token.
+It refuses math that would cross its print column before writing a PDF. Wide individual
+terms use complete coefficient tables; shorter expanded displays retain every term.
+Hosted final-head checks and layout evidence are recorded in the PR, separately from
+local controls.
 
 The efficiency result precedes the expanded historical corpus; it is not the claimed
 wall for the larger final register.

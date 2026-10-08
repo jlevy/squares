@@ -314,6 +314,18 @@ def test_the_retained_degree_672_polynomial_and_source_identity_are_complete() -
     assert "kingbird-exact-side-facts-2026-10-07/facts" in sources
 
 
+def test_a_wide_single_term_retains_every_coefficient_in_a_printable_table() -> None:
+    coefficient = "9" * 48
+    rendered = paper.polynomial_markdown(
+        "P_{4}", _polynomial(["1", coefficient, "-2"]), degree=2, context="wide-term control"
+    )
+    assert "The complete coefficient vector" in rendered
+    assert "| 2 | <code>1</code> |" in rendered
+    assert f"| 1 | <code>{coefficient}</code> |" in rendered
+    assert "| 0 | <code>-2</code> |" in rendered
+    assert rendered.count("<code>") == 3
+
+
 def test_a_polynomial_with_a_missing_coefficient_is_refused() -> None:
     with pytest.raises(paper.ExactSideValuesPaperError, match="requires 4 coefficients"):
         paper.polynomial_markdown(
