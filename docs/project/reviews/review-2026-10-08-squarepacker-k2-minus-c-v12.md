@@ -303,6 +303,25 @@ labelling implementation or human oversight is supplied here.
 The older v1.1 evidence and assurance must remain independently addressable and
 unchanged.
 
+## Integration efficiency block
+
+The first hosted head exposed a private-snapshot accounting breach: 201,395,501 bytes
+against the unchanged 201,326,592-byte ceiling.
+The named copy roster repeated 30 identical destination paths, including complete
+earlier scientific inputs, and therefore rewrote and counted 579,928 bytes twice.
+The shared maintained roster now copies and counts each identical path once.
+Distinct aliases remain separate even when their contents match; no source input,
+archive, cap or timeout is removed.
+
+Three bounded tests include an actual private-clone mutation: changing one alias leaves
+the other alias and original source intact.
+The independent review accepted these controls and the diagnostic CLI’s
+exact-cap/cap-plus-one boundaries.
+The maintained `devtools.run_negative_controls --source-bytes` measured 200,819,815
+bytes before this small review note, leaving 506,777 bytes of headroom.
+This is an efficiency block for the import workflow; hosted full-snapshot and
+native-receipt gates still must pass on the final integrated head.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
