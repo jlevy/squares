@@ -40,7 +40,7 @@ no replacement optimality proof.
 
 | Layer | Exact source and base | Current disposition |
 | --- | --- | --- |
-| [Import PR427](https://github.com/jlevy/squares/pull/427) | Head `f1d7eacafc1249b430771583edf2120b5fc17d7b`; base main `84881f214`. Source, inventory, and metadata repairs remain in history. | Complete the remaining required heavy phase after the supported capability replay; preserve failed attempts below. |
+| [Import PR427](https://github.com/jlevy/squares/pull/427) | Head `f1d7eacafc1249b430771583edf2120b5fc17d7b`; base main `84881f214`. Source, inventory, and metadata repairs remain in history. | Retain the completed separate heavy-phase and supported capability receipts; preserve failed attempts below. |
 | [Confirmation PR429](https://github.com/jlevy/squares/pull/429) | Head `0d01524be4235b7f12e6a971d73ea7d576fbac0f`; base the import head `f1d7eaca`. Source, archive, and metadata revisions remain in history. | Proposed T-116 at V3/C3/S3 remains a draft registration. Reviews A–D published with zero findings; final gate, hosted CI, deployment, and merge pending. |
 
 The import metadata names producer revision `6c615115140c10e281c50d503a3fc46ddf4d4e25`
@@ -68,14 +68,14 @@ receipts.
 | --- | --- | --- |
 | Initial import gate | Exit 1 after 620.24 seconds; four failed steps. Behavioral phase: 14 failed, 6,245 passed, 30 skipped, one expected failure. Heavy phase unrun. | Technical failure: repair the owning source and derived records; retain this receipt. |
 | Corrected `3c` gate | Exit 130, cancelled; terminal accounting was 94 passed commands, one failed, one cancelled. Normal and heavy pytest phases did not complete. | Cancelled attempt: preserve receipt; obtain final-source evidence. |
-| Final `f1` gate | Exit 1 after 983.36 seconds, below the unchanged 1,800-second ceiling. All 97 prior commands passed. Reachable phase: 801.22 seconds, below its 900-second ceiling. Ordinary pytest: 13,219 passed, one failed, 30 skipped, one expected failure in 799.37 seconds. Heavy phase unrun. | Confirmed sandbox capability failure; preserve the broad exit 1 and use the scoped replay below. Heavy phase remains required. |
+| Final `f1` gate | Exit 1 after 983.36 seconds, below the unchanged 1,800-second ceiling. All 97 prior commands passed. Reachable phase: 801.22 seconds, within its recorded whole-suite 1,800-second allowance. Ordinary pytest: 13,219 passed, one failed, 30 skipped, one expected failure in 799.37 seconds. Heavy phase unrun. | Confirmed sandbox capability failure; preserve the broad exit 1 and use the scoped replay below. Heavy phase remains required. |
 
 The sandbox denied the profiler’s own `/proc/self/clear_refs` access.
 The unchanged complete profiler module passed both tests under supported escalation in
 1.65 seconds, exit 0. This capability replay supplements the failed broad gate; it does
 not relabel that gate as green.
-The exact selected heavy phase is pending and will run separately, without repeating the
-13,219 ordinary passes.
+At the initial checkpoint, the exact selected heavy phase was pending for a separate run
+without repeating the 13,219 ordinary passes.
 
 Lower-PR reviews A–D are published.
 Final-source follow-up reviews
@@ -139,9 +139,10 @@ The complete preparation is preserved in a
 release 406258689, tag `intake-425-preparation-2026-10-07`. Draft access requires a
 repository account with access; this is not a public scientific release.
 
-The archive contains 138 files and 6,669,242 bytes, SHA256
+The `issue425-frozen-v2-source-protocol-reviews.tar.gz` archive contains 138 files and
+6,669,242 bytes, SHA256
 `00d4172972c82b2b928bc8427cff24c9a0d3c952da7ec8bf617f55399b8a9d80`. Its 28,616-byte
-member manifest has SHA256
+`file-manifest.json` member manifest has SHA256
 `6b7ba4f5011d799975c5ccab543aa9425c35e27b36131ef07e2f6326efd681c5`. An actual GitHub
 download matched the archive hash, and archive/member-manifest round-trip verification
 passed. Full source acquisition, all ten inputs, runtime/schema/module code and both
@@ -169,6 +170,23 @@ GitHub download matched that hash.
 These are historical publication records; they do not verify the pending issue #422
 deployment.
 
+### Post-checkpoint lower validation receipt
+
+The unchanged full profiler module passed under the supported own-process capability:
+two tests in 1.65 seconds.
+The remaining heavy phase passed separately: one composite test, 185.52 seconds of
+subprocess wall; its original broad-run phase remains unrun.
+The original broad outer exit remains 1, with its complete receipts retained.
+The actual broad command start receipt records the existing 1,800-second allowance
+selected by the validator for the whole suite.
+Its measured ordinary command plus separate heavy phase is 986.74 seconds; the
+validation cost sum is 1,170.53 seconds.
+An earlier coordinator diagnosis treated that broad command as having a 900-second
+allowance. That diagnosis is corrected here: no budget was raised and no timeout or
+budget failure was established.
+A possible affected-test selection optimization remains optional latency work, tracked
+by `think-tl8n`.
+
 ## Remaining Queue and Environment
 
 | Work | Next bounded action |
@@ -193,8 +211,8 @@ Current-instance checks do not establish new-task restoration.
 The final import gate’s sole failing test is
 `tests/test_profile_n17_kernel_memory.py::test_the_profiler_marks_production_the_save_and_the_check`.
 The supported complete-module replay passed; no full-gate success is claimed.
-The selected immediate sequence is to finish the remaining required heavy phase and
-PR429 validation, and obtain clean hosted CI before the formal stack merge.
+The selected immediate sequence is to finish PR429 validation, and obtain clean hosted
+CI before the formal stack merge.
 Verify publication and close the native reply work after merge.
 Issue #425 canonical storage and its first replay remain under their own open bead; the
 remaining mathematical intake proceeds through its bounded reviews.
