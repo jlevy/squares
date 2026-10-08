@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m4d9xm0hq26a4e3gcxvyfpte
-title: "n17: join the 31 reported #413 patterns to admitted/tail/pilot obligations"
+title: "n17: reconcile the current reported #413 patterns with admitted, tail and pilot obligations"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-10-07-n17-issue-coordination.md
 delegate: claude-code@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-08T08:26:18.000Z
-updated_at: 2026-10-08T16:08:23.149Z
+updated_at: 2026-10-08T16:23:48.854Z
 started_at: 2026-10-08T16:08:23.148Z
 ---
 Astra's intake of [#413's 07:47 update](https://github.com/jlevy/squares/issues/413#issuecomment-6055253328)
