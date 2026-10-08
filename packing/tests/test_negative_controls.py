@@ -19,6 +19,7 @@ import pytest
 from devtools import run_negative_controls as controls
 from devtools.check_readme import NO_INDEX
 from devtools.repo_scope import tracked_files
+from devtools.retained_data import read_retained_bytes
 from devtools.run_negative_controls import (
     BUILD_CACHES,
     COPY_SEPARATELY,
@@ -142,8 +143,8 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
         assert source.relative_to(controls.REPO) not in copied_targets
         assert not (tree / HERE / "campaign/agent-sessions" / name).exists()
     for relative in (
-        "campaign/agent-sessions/session-164-efficiency-push.log",
-        "campaign/agent-sessions/session-164-push-final.log",
+        "campaign/agent-sessions/session-164-efficiency-push.log.gz",
+        "campaign/agent-sessions/session-164-push-final.log.gz",
         "campaign/agent-sessions/session-153-native-full.json",
         "campaign/agent-sessions/session-153-native-full.rows.jsonl",
         "frontier/results.yaml",
@@ -155,6 +156,9 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
         source = ROOT / relative
         assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
         assert tree / HERE / relative in (tracked_files(tree, "packing") or []), relative
+        if relative.endswith(".log.gz"):
+            assert read_retained_bytes(tree / HERE / relative) == read_retained_bytes(source)
+            assert not (tree / HERE / relative.removesuffix(".gz")).exists()
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
