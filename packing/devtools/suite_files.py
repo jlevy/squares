@@ -19,7 +19,7 @@ file lands in exactly one shard by construction:
   record without them balances raw cost. The packing reads only the record, so it moves
   when someone re-records and never because a file elsewhere was added or removed;
 * a file the record does not name -- a new test, or a renamed one -- takes
-  `crc32(path) mod N`, except for the six explicit four-shard unknown owners below.
+  `crc32(path) mod N`, except for the explicit four-shard unknown owners below.
   These owners balance unknown file counts, carry no cost weight, and are superseded
   when a complete hosted cohort records the file. Every file remains in one shard.
 
@@ -118,6 +118,14 @@ UNKNOWN_FOUR_SHARD_OWNERS: Final = {
     "packing/tests/test_check_n17_centered_cap_standing.py": 1,
     "packing/tests/test_verify_n17_centered_cap.py": 3,
     "packing/tests/test_probe_n17_conditional_owned_hull.py": 2,
+    # 681 files / 66 unknown after two measured complete-module admissions:
+    # 15/18/18/15 unknowns fit the unchanged 10% guard, with no assigned weights.
+    "packing/tests/test_check_n17_regional_row_coverage.py": 2,
+    "packing/tests/test_check_n17_n11_envelope_representation.py": 2,
+    "packing/tests/test_check_n17_case_preserving_owned_propagation.py": 2,
+    "packing/tests/test_check_n17_full_square_partner_coupling.py": 2,
+    "packing/tests/test_check_n17_normalized_contact_rank_filter.py": 2,
+    "packing/tests/test_check_n17_incircle_disk_projection.py": 3,
 }
 #: What a test file is called where no pytest configuration says otherwise.
 _PYTHON_FILES: Final = ("test_*.py",)

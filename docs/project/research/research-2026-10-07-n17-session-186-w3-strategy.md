@@ -25,8 +25,10 @@ relaxation. Exp309 found potential C1/C2 certificate coverage of 21 current orbi
 union, with no matches in the 95 distance-two orbits or the endpoint assignment.
 Exp310 passed the exact header gate for both manifests; its tree and trigonometric proof
 checks remain unperformed.
+Exp312 rejected all 95 saved pose choices by exact incircle distances; orientation
+realization of those fixed choices is retired.
 The current priority is one bounded C2 FULL replay, whose potential payoff is thirteen
-ordinary orbits, alongside the selected saved-pose distance diagnostic below.
+ordinary orbits, alongside the selected whole-cell octagon redundancy gate below.
 No contributed certificate has yet been admitted by these metadata results.
 The original kickoff ranking below is retained as the decision record; later result
 sections record its updates.
@@ -1243,6 +1245,213 @@ The completed coarse-rank test did not check these orientation or right-hand-sid
 conditions. Their added coupling is a reason to consider this architecture after the
 current certificate-intake work, not evidence that its search is small or that a global
 proof is imminent.
+
+## Actual Saved-Pose Result and Whole-Cell Successor
+
+The
+[exp312 receipt summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/mechanical-summary.json)
+records complete rejection of the 95 frozen saved choices, with identical construction
+and fresh-check payloads.
+Each choice has 14–20 centre pairs with exact squared distance below one.
+The two phases checked all 12,920 pairs and validated the 22 used one-square poses
+against 280 linear rows; supervised elapsed time was 2.057576 seconds.
+Every unit square contains the open radius-$1/2$ disk about its centre, so no
+orientation choice can repair these fixed centres.
+The proposed orientation-realization stage is therefore unselected.
+Alternative centres and alternative membership choices were not tested, and neither the
+95 cell assignments nor their membership-pattern classes are excluded.
+The census and global bracket are unchanged.
+
+There is an exact unconditioned alternative to projecting the nine membership classes.
+For an original closed centre cell $C_i$, put
+
+$$
+E_i=C_i\cap[1/2,U-1/2]^2.
+$$
+
+Every physically contained unit square has its centre in $E_i$, since each coordinate
+half-extent is at least $1/2$. Conversely, every point of $E_i$ supports an axis-aligned
+unit square contained in $[0,U]^2$. Thus $E_i$ is the exact single-square centre
+projection before imposing inter-square nonoverlap.
+It includes its boundary and may be a point or segment.
+This statement does not assert simultaneous realizability of seventeen such squares.
+
+The relative-angle-only architecture has a specific limitation.
+If a pair of these domains has maximum centre distance $D_{ij}\ge1$, its necessary rows
+$C_{ij}\pm S_{ij}\le2D_{ij}-1$ admit the common axis-aligned orientation
+$C_{ij}=1,S_{ij}=0$. All one-square wall upper bounds also admit this orientation.
+Consequently, if every relevant pair has $D_{ij}\ge1$ and every $E_i$ is nonempty, these
+angle-only rows cannot reject the common orientation assignment.
+Their separate distance maxima need not be attained by one simultaneous centre choice.
+A useful successor must preserve shared centres or stronger pair disjunctions.
+No actual whole-cell distance maxima were evaluated for this hand argument.
+
+### Selected Octagon Redundancy Gate
+
+This is a sole-Astra hand derivation with a prospective finite consumer, not independent
+mathematical confirmation.
+Freeze the closed octagon
+
+$$
+P=\{d:n\cdot d\le7\text{ for }n\in
+\{(\pm7,\pm3),(\pm3,\pm7)\}\}.
+$$
+
+Its vertices are the four axis unit points and $(\pm7/10,\pm7/10)$. Their squared norms
+are one and $49/50$, so convexity of the unit disk gives $P$ contained in that disk.
+A physical centre difference of norm at least one is outside the interior of $P$,
+including all valid touching boundary cases.
+For each catalogue pair appearing in at least one of the fixed 95 assignments, define
+
+$$
+D_{ij}=E_j-E_i,\qquad
+H_{ij}=\operatorname{conv}\!\left(
+\bigcup_n\{d\in D_{ij}:n\cdot d\ge7\}\right).
+$$
+
+Every physical packing satisfies $c_i\in E_i$ and $c_j-c_i\in H_{ij}$. The same centre
+variables must appear in all pair constraints.
+The gate does not construct or solve this thirty-four-variable system.
+Instead it uses the exact equivalence
+
+$$
+H_{ij}=D_{ij}
+\quad\Longleftrightarrow\quad
+\text{no extreme vertex of }D_{ij}\text{ lies in }\operatorname{int}P.
+$$
+
+If every extreme vertex is retained by at least one closed outside half-plane, their
+convex hull is $D_{ij}$. Conversely, an extreme vertex in the interior of $P$ cannot be
+a convex combination of other points of $D_{ij}$; it is absent from every retained piece
+and hence from their convex hull.
+This proof also covers segments and points.
+Testing non-extreme input points would be unsound: such a point may be removed while the
+whole convex hull remains unchanged.
+
+The selected H321/exp313 consumer reconstructs all 24 nonempty $E_i$, the complete union
+of relevant pairs, every canonical difference-hull extreme vertex and all eight face
+comparisons. Equality is retained.
+An empty $E_i$ causes a refusal requiring separate review, not an implicit ordinary
+exclusion. Its primary criterion is at least one strictly interior extreme vertex.
+Success establishes a proper pairwise convex cut and selects a future LP decision; it
+establishes no state exclusion.
+If every pair is redundant, any fixed choice of one vertex from each $E_i$
+simultaneously satisfies all the convexified pair constraints for every one of the 95
+assignments. Those centres may overlap, so this is a relaxation witness only.
+
+The prospective limits are 32 original cell vertices, 36 projected vertices, 72
+difference-hull vertices, 276 distinct pairs, 357,696 generated differences and 158,976
+face comparisons, with 4,096-bit rational arithmetic and a 1 MiB output ceiling.
+All $95\times136$ state-pair incidences remain accounted for through the shared pair
+table. Generation and fresh reconstruction each have a 60-second allocation; output,
+arithmetic or time overflow means incomplete.
+The descriptor reuses the three accepted exp308 roles through the saved-pose intake
+without replaying its pose distances or capacity classification.
+Exp312’s accepted miss is the recorded selection prerequisite.
+
+If every extreme vertex of a particular $D_{ij}$ lies strictly inside $P$, each of the
+eight face functionals has a maximum strictly below seven on its whole hull.
+Consequently $D_{ij}\subset\operatorname{int}P\subset\{d:\|d\|<1\}$, so those two
+original cells cannot both contain square centres in a packing at $U$. This includes
+point and segment differences.
+The gate’s ordinary-exclusion flags remain false: promotion requires a separate fresh
+consumer and the ordinary admission and census joins.
+No such pair is presumed to occur.
+
+The separately selected H322/exp314 diagnostic distinguishes the octagon from the exact
+incircle condition. With $H^{\rm disk}_{ij}=\operatorname{conv}(D_{ij}\setminus
+\{d:\|d\|<1\})$, the same extreme-point proof gives
+
+$$
+H^{\rm disk}_{ij}=D_{ij}
+\quad\Longleftrightarrow\quad
+\|v\|^2\ge1\text{ for every extreme vertex }v\text{ of }D_{ij}.
+$$
+
+These squared norms are rational.
+If every relevant extreme has norm at least one, every inscribed-polygon version is also
+redundant. If a vertex has norm below one but is outside or on the fixed octagon, the
+disk convexification is proper although the octagon test may miss it.
+Some sufficiently close rational inscribed polygon would remove that vertex; this
+supplies neither a selected polygon nor a runtime bound.
+If all extremes of one difference hull have norm below one, convexity places the whole
+hull in the open unit disk and gives the two-cell obstruction above.
+
+The disk consumer reconstructs the original geometry through one accepted exp308 intake
+and the frozen octagon construction, then checks every norm and rechecks all held
+premise bytes. Its separate limit is 19,872 norm evaluations, with the inherited
+geometric and 4,096-bit limits, a 1 MiB receipt and 60 seconds per phase.
+Any strict disk extreme is the primary criterion; all-extreme pair obstructions remain
+separately identified candidates without census admission.
+Octagon and disk witness flags are explicitly separate.
+Exp313 does not verify these extra norm predicates.
+
+### Subsequent Decision Boundaries
+
+If the gate finds a strict cut, the next bounded proposal is the shared-centre rational
+LP with all 136 pair constraints in each state.
+An exact Farkas multiplier certificate could prove an ordinary cell-assignment
+exclusion; an exact feasible primal point would prove only survival of this fixed convex
+relaxation. A source-and-control allowance of 45–90 minutes and a separately frozen
+120-second generation plus 120-second fresh-check ceiling are planning bounds, not
+performance predictions.
+Complete feasible results for all 95 assignments would retire this fixed convex
+projection. If the gate finds every pair redundant, it retires that LP before any solver
+implementation, while leaving the stronger disk diagnostic open.
+
+A stronger subsequent route retains the eight closed outside-face alternatives for
+selected pairs and covers every branch with checked shared-centre constraints.
+An exclusion needs all branches; a feasible branch does not supply a physical packing.
+After complete pair redundancy, however, every forest of these pair disjunctions is
+feasible. Fix any vertex $p$ of an owner’s polytope $E_i$. A generic linear functional
+can uniquely minimize at $p$ on $E_i$ and uniquely maximize at a vertex $q$ of $E_j$.
+Then $q-p$ is an exposed vertex of $D_{ij}$ and hence satisfies the retained pair
+relation. Root a tree at any cell vertex and select each child vertex this way; there is
+no second path imposing a conflicting choice.
+Repeat for every tree.
+The argument covers point and segment domains and also the exact disk relation when all
+difference extremes have norm at least one.
+Thus a star-only retry would also be guaranteed to survive.
+This concerns centre-distance relations, not the physical contact graph or full square
+SAT. An informative successor must preserve a cycle or add stronger orientation or
+multi-square constraints.
+This requires a new complete proof tree and roughly a 60–120 minute source-and-control
+allowance, rather than an unchanged repetition of the convex gate.
+The global bounded cubic stationarity system above has a different quantifier: it
+concerns normalized representatives and still lacks a tractable complete branch cover.
+It remains a hand architecture for independent review, not an ordinary 95-state
+exclusion method.
+
+A smaller prospective cycle discriminator is the rational three-cell bound
+
+$$
+M_{ijk}=\max_{c_i\in E_i,\ c_j\in E_j,\ c_k\in E_k}
+\left(\|c_i-c_j\|^2+\|c_j-c_k\|^2+\|c_k-c_i\|^2\right).
+$$
+
+The objective is jointly convex: its quadratic form is the positive-semidefinite
+triangle Laplacian in each coordinate.
+Every point of the product polytope is a convex combination of product extreme vertices,
+so the maximum is attained at one such tuple.
+Exact $M_{ijk}<3$ would exclude simultaneous occupation of those three cells, since a
+physical triple has each squared distance at least one.
+Equality is retained.
+The same argument works for frozen nonnegative rational edge weights with threshold
+equal to their sum.
+
+For three identical unit segments, every pair difference has extremes $-1$ and $1$, yet
+the three-edge maximum is two.
+Thus this discriminator can detect an obstruction that every pair convexification and
+every forest misses.
+It still supplies only a necessary test: $M_{ijk}\ge3$ does not certify pairwise
+nonoverlap or a packing.
+A single predeclared triple has at most $36^3=46,656$ product vertices under the current
+caps. A 20–40 minute source-and-control allowance and a separately selected 60-second
+generation plus 60-second fresh-check ceiling are prospective budgets.
+No actual triple has been selected or evaluated.
+An ordinary clause requires original named-cell and D4 joins and endpoint calibration; a
+complete failed test retires only the declared triple and weights, without triggering a
+denser unregistered search.
 
 These proposals do not estimate the time to complete the n17 theorem.
 The current evidence supports bounded decisions between mathematical approaches; it does

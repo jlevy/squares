@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -17,6 +18,12 @@ from test_check_n17_strict_core_regional_transfer import fixture as transfer_fix
 from devtools import check_n17_one_round_owned_domain_propagation as tool
 
 Q = tool.Q
+
+
+def child_environment() -> dict[str, str]:
+    """Import the selected checkout in a fresh process, preserving caller settings."""
+    project = Path(__file__).resolve().parents[1]
+    return os.environ | {"PYTHONPATH": os.pathsep.join((str(project / "src"), str(project)))}
 
 
 def deadline() -> float:
@@ -595,7 +602,12 @@ def test_two_fresh_clean_processes_match_full_new_payload(
         ["--certificate", str(generated), "--output", str(fresh)],
     ):
         process = subprocess.run(
-            [*argv, *tail], capture_output=True, text=True, timeout=90, check=False
+            [*argv, *tail],
+            env=child_environment(),
+            capture_output=True,
+            text=True,
+            timeout=90,
+            check=False,
         )
         assert process.returncode == 0, process.stderr + process.stdout
     left, right = json.loads(generated.read_text()), json.loads(fresh.read_text())

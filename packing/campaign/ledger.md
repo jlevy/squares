@@ -1214,7 +1214,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | H-317 | confirmed | proof | SciPy-free Joint-Certificate Candidate Relevance |  | 1 |  | 3s wall |
 | H-318 | confirmed | proof | Original-Cell Joint-Certificate Header Preflight |  | 1 |  | 4s wall |
 | H-319 | running | proof | Unsampled C2 Joint-Certificate Replay |  | 1 |  |  |
-| H-320 | running | proof | Saved-Pose Incircle Discriminator |  | 1 |  |  |
+| H-320 | refuted | proof | Saved-Pose Incircle Discriminator |  | 1 |  | 2s wall |
 
 ## Needs review — held for a human, not decided
 
@@ -1224,7 +1224,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Rounds
 
-### rejected (52)
+### rejected (53)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1280,6 +1280,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-304 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-312 | Complete95 negatives; maximum enclosed envelopes6 for47orbits and7 for48orbits, below11. Fresh exact counts and all11 importedsource joins match. This fixed envelope rule is retired; no ordinary exclusion, global bound or census change. Optional endpoint window calibration was not implemented. |
 | exp-305 | series-000 | 17 | Session186 coordinator; think-lyh9. | H-313 | Both cases remain open; no additional surviving-case UNION loss for anyowner. Owner6 retainscombined [1/16,19/32] and owner18 retainsprior11/32 loss. Secondaryverified lower-x owner6 deletion loses1/64 withinthatcase, narrowing [3/8,1/2] to [3/8,31/64]; uppercaseunchanged, so no combined gain. This is not a per-case fixed point. Declared no-combined-gain stop retires the unchanged operator; no automatic repeat or global/census/guard-exclusion claim. |
 | exp-308 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-316 | All95 assignments survive, with zero obstructed masks.216complete original-cell classifications yield68feasible/148infeasible classes; saved survivor largest guaranteed counts6for49states and7for46, far below capacity10. Endpointcounts[6,6,6,5]. Closed-class aliases undercount guaranteed membership and survivors are relaxation models, not physical packings. Retire unchangedfour-window DP; no ordinaryadmission/globalbound/capture. |
+| exp-312 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-320 | All95 fixed saved poses rejected by at least one exact distance-squared<1 pair; all12920 comparisons per phase,22 used poses/280 original one-square rows, fullfresh payload/sourcebytes match, normalcleanup2.058s. Retire orientation realization for this saved recipe. No whole-cell state exclusion/admission/global bound. |
 
 ### exhausted (1)
 
@@ -1498,12 +1499,11 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (2)
+### in-progress (1)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-311 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-319 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
-| exp-312 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-320 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
 
 ## Resumable — stopped on the clock, not on an answer
 

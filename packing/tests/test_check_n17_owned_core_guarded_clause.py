@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -16,6 +17,12 @@ import pytest
 from devtools import check_n17_owned_core_guarded_clause as tool
 
 Q = tool.Q
+
+
+def child_environment() -> dict[str, str]:
+    """Import the selected checkout in a fresh process, preserving caller settings."""
+    project = Path(__file__).resolve().parents[1]
+    return os.environ | {"PYTHONPATH": os.pathsep.join((str(project / "src"), str(project)))}
 
 
 def deadline() -> float:
@@ -283,6 +290,7 @@ print(json.dumps(p,sort_keys=True))
         subprocess.run(
             [sys.executable, "-c", script],
             check=True,
+            env=child_environment(),
             capture_output=True,
             text=True,
             timeout=30,
@@ -347,21 +355,27 @@ def test_post_computation_named_byte_mutation_refuses(
         tool.generate(doc, deadline=deadline())
 
 
-def test_new_receipt_one_mib_ceiling_not_inherited_64_mib(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_new_receipt_one_mib_ceiling_not_inherited_64_mib(tmp_path: Path) -> None:
     descriptor = tmp_path / "descriptor.json"
     descriptor.write_text("{}")
     output = tmp_path / "output.json"
-    monkeypatch.setattr(
-        tool,
-        "generate",
-        lambda *_a, **_k: {
-            "status": "guarded_clause_verified",
-            "payload": "x" * tool.OUTPUT_LIMIT,
-        },
+    runner = tmp_path / "ceiling.py"
+    runner.write_text(
+        "import sys\n"
+        "from devtools import check_n17_owned_core_guarded_clause as t\n"
+        "t.generate=lambda *_a,**_k:{'status':'guarded_clause_verified',\n"
+        "'payload':'x'*t.OUTPUT_LIMIT}\n"
+        "raise SystemExit(t.main(sys.argv[1:]))\n"
     )
-    assert tool.main(["--descriptor", str(descriptor), "--output", str(output)]) == 1
+    result = subprocess.run(
+        [sys.executable, str(runner), "--descriptor", str(descriptor), "--output", str(output)],
+        env=child_environment(),
+        capture_output=True,
+        text=True,
+        timeout=30,
+        check=False,
+    )
+    assert result.returncode == 1, result.stdout + result.stderr
     value = json.loads(output.read_text())
     assert value["status"] == "incomplete"
     assert not value["criterion_met"]

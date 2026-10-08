@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -18,6 +19,12 @@ from devtools import check_n17_n11_envelope_representation as tool
 
 NAMES = [f"synthetic-{i}" for i in range(24)]
 MASK = (1 << 17) - 1
+
+
+def child_environment() -> dict[str, str]:
+    """Import the selected checkout in a fresh process, preserving caller settings."""
+    project = Path(__file__).resolve().parents[1]
+    return os.environ | {"PYTHONPATH": os.pathsep.join((str(project / "src"), str(project)))}
 
 
 def deadline() -> float:
@@ -351,6 +358,7 @@ def test_clean_two_processes_explicit_synthetic_inherited_premise(
                 "60",
                 *tail,
             ],
+            env=child_environment(),
             capture_output=True,
             text=True,
             timeout=70,

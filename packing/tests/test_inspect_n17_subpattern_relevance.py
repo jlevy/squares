@@ -6,6 +6,7 @@ import copy
 import gzip
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -18,6 +19,12 @@ from devtools import inspect_n17_subpattern_relevance as tool
 
 NAMES = [f"cell-{i}" for i in range(24)]
 ACTIONS = {"identity": list(range(24)), "swap": [1, 0, *range(2, 24)]}
+
+
+def child_environment() -> dict[str, str]:
+    """Import the selected checkout in a fresh process, preserving caller settings."""
+    project = Path(__file__).resolve().parents[1]
+    return os.environ | {"PYTHONPATH": os.pathsep.join((str(project / "src"), str(project)))}
 
 
 def deadline() -> float:
@@ -132,7 +139,19 @@ def test_generate_scope_missing_frame_angles_and_cell_enclosure(
             "global_bound_proved",
         ]
     )
-    assert "scipy" not in sys.modules
+    subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import sys; from devtools import inspect_n17_subpattern_relevance; "
+                "assert not any(k == 'scipy' or k.startswith('scipy.') for k in sys.modules)"
+            ),
+        ],
+        env=child_environment(),
+        check=True,
+        timeout=30,
+    )
 
 
 @pytest.mark.parametrize(
@@ -239,6 +258,7 @@ print(json.dumps(r,sort_keys=True))
     outputs = [
         subprocess.run(
             [sys.executable, "-c", script],
+            env=child_environment(),
             capture_output=True,
             text=True,
             check=True,

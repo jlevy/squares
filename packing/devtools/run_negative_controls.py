@@ -198,6 +198,19 @@ PRUNE = frozenset(
         # consumer. Keep primary bytes and declared dependency copy-back intact.
         SESSION184_RESULTS / "exp-308-n11-corner-cardinality/certificate.json",
         SESSION184_RESULTS / "exp-308-n11-corner-cardinality/replay.json",
+        # Exp309/312 generated outputs are not inputs of the new projection checks:
+        # those tools read accepted308 through their declared descriptor roles.
+        # Primary bytes and exact declared worker copyback remain authoritative.
+        SESSION184_RESULTS / "exp-309-subpattern-relevance/certificate.json",
+        SESSION184_RESULTS / "exp-309-subpattern-relevance/replay.json",
+        SESSION184_RESULTS / "exp-312-saved-pose-incircles/certificate.json",
+        SESSION184_RESULTS / "exp-312-saved-pose-incircles/replay.json",
+        # Historical scored-quench/trace outputs have no registered worker reader.
+        # Keep their primary evidence, metadata, log and dependency rescue unchanged.
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-basin-hop.jsonl",
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-multistart.jsonl",
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-basin-hop.trace.jsonl",
+        SESSION184_RESULTS / "exp-204-basin-hopping/D-multistart.trace.jsonl",
         # These historical scored-quench/incomplete-graph outputs have no worker
         # reader. Keep all primary bytes and declared dependency rescue intact.
         SESSION184_RESULTS / "exp-005-basin-entry.jsonl",

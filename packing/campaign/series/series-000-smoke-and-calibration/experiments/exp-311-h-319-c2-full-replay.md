@@ -29,7 +29,9 @@ experiment:
     operator: Session186 coordinator; think-nvkf.
     control: Astra actual309metadata and310header mathematical CLEAR. StandingFULLsource retained/unchanged,
       exact same-header physical-cell/angle-cover composition explicitly audited. New generic public-release
-      acquisition source18fakeclientauthor controls PASS.36s; initial default-config Ruff was weaker than the project floor, which exposed3 findings; keyword-only deadline/call sites and split assertions were corrected, and explicit project-config Ruff/format now PASS; independentROOT18 test invocationINCOMPLETE120s
+      acquisition source18fakeclientauthor controls PASS.36s; initial default-config Ruff was weaker than
+      the project floor, which exposed3 findings; keyword-only deadline/call sites and split assertions
+      were corrected, and explicit project-config Ruff/format now PASS; independentROOT18 test invocationINCOMPLETE120s
       exit124beforeassertions, retained withoutPASSclaim. Rootread/API/source review completes operational
       selection; sourcebindings andactualsourceHEAD are frozen at each launch. Publishedlegacytag is valid
       genericManifest/fetch and explicitly NOTHostedData-v1; no schemaamendment. Contributor2220s is reported
@@ -54,9 +56,14 @@ experiment:
       resources. Externalpublishedcache; uniqueinventory/source/header/FULLreceipts retained inprimary.
       No --sample/--trig-sample/custom--cells.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay
-  results: []
+  results:
+  - shape: determination
+    question: Does the complete unsampled C2 verifier pass?
+    outcome: unresolved
+    checked_by: Public acquisition161 objects complete; FULL supervisor stopsINCOMPLETE onpsaxo1squerytimeout
+      after480.468s, normalownedcleanup, noFULLreceipt.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: ONE complete unsampled FULL C2 standing-verifier PASS, modefull, zero failures,
       all indexed nodes and trigonometric objects verified, closed complete tree, exact canonical manifest505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57
       and original default UNIQUE_24cells. Compose ONLY with accepted310 C2HEADER_ONLYPASS and complete
@@ -65,10 +72,13 @@ experiment:
       FULLPASS permits subsequent separately reviewed ordinary clause admission and fresh census; neither
       acquisition/header/sample/partial nor metadata148union can admit anything. C2 potential13orbits84states/ZERO95tail;
       no endpointcapture/globaloptimality claim. Stop unchanged on refusal/resource/failure.
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T05:25:00Z'
-    host: macOS arm64
+    reason: 'INCOMPLETE guard_unavailable: RSSmonitor psaxo timedout1s, runnerreturn-15/cleanuptrue after480.468s.
+      Lastprogress18000nodes doesnot certify tree/trig closure. NineexactRECOVERYe72sourcebytesmatch;
+      original runningjournal preserved, no invented childreturncode. All161/112191343B acquired78.944s.
+      NoFULLPASS/admission/census; stopunchanged withoutretry.'
+  effort:
+    wall_seconds: 480.46827850001864
+    stopped_by: resource
 ---
 # Unsampled C2 Joint-Certificate Replay
 

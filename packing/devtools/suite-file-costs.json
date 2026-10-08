@@ -104,6 +104,7 @@
     "packing/tests/test_check_n11_selection_routing.py": 0.008,
     "packing/tests/test_check_n17_capacity_one_cover.py": 0.619,
     "packing/tests/test_check_n17_catalogue_polynomial.py": 0.889,
+    "packing/tests/test_check_n17_n11_envelope_windows.py": 1.893,
     "packing/tests/test_check_n17_slider_coverage.py": 1.124,
     "packing/tests/test_check_near45_localization.py": 0.095,
     "packing/tests/test_check_p12_escape_candidate.py": 0.032,
@@ -242,6 +243,7 @@
     "packing/tests/test_independent_ceiling_reader.py": 0.009,
     "packing/tests/test_independent_five_dot_union.py": 0.212,
     "packing/tests/test_index_n11_capture_source.py": 0.032,
+    "packing/tests/test_inspect_n17_subpattern_relevance.py": 0.347,
     "packing/tests/test_intake_sweep.py": 1.623,
     "packing/tests/test_integral_piercing.py": 0.029,
     "packing/tests/test_integrity_ceremony_contract.py": 5.886,
@@ -656,6 +658,34 @@
       "reports": [
         {
           "report": "packing/devtools/suite-file-cost-admissions/squish-401-confirmation-2026-10-07.json",
+          "provenance": {},
+          "tests": 16
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_n11_envelope_windows.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/envelope-ci-repair-2026-10-08.json",
+          "provenance": {},
+          "tests": 36
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_inspect_n17_subpattern_relevance.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/relevance-ci-repair-2026-10-08.json",
           "provenance": {},
           "tests": 16
         }

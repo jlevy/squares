@@ -18,6 +18,12 @@ import pytest
 from devtools import check_n17_n11_envelope_windows as tool
 
 
+def child_environment() -> dict[str, str]:
+    """Import the selected checkout in a fresh process, preserving caller settings."""
+    project = Path(__file__).resolve().parents[1]
+    return os.environ | {"PYTHONPATH": os.pathsep.join((str(project / "src"), str(project)))}
+
+
 def deadline() -> float:
     return time.monotonic() + 60
 
@@ -236,7 +242,7 @@ def test_two_clean_cli_processes_reconstruct_synthetic_premise(tmp_path: Path) -
         "raise SystemExit(t.main())\n"
     )
     paths = [tmp_path / "certificate.json", tmp_path / "replay.json"]
-    env = os.environ.copy()
+    env = child_environment()
     for i, output in enumerate(paths):
         argv = [
             sys.executable,

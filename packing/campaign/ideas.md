@@ -1189,6 +1189,40 @@ wider centre cases; additional progress is measured from the union of surviving 
   No alternate poses/choices, no old corner classification/DP replay, no endpoint
   scientific-pose distance test.
 
+- **H-321 — Whole-Cell Incircle Projection Redundancy.** Complete exact unconditioned
+  E_i=originalC_i intersect[1/2,U-1/2]^2 for all24 original cells, and
+  D_ij=conv(E_j-E_i) for EVERY pair occurring in the accepted95 roster.
+  Fixed rational inscribed octagonP with eight integer face rows(±7,±3)/(±3,±7) dot
+  delta<=7. Primary ANY extreme D vertex strictly inside ALL eight P faces, proving a
+  proper future convex pair constraint; ALL-vertices-outside/boundary proves H_ij=D_ij.
+  All-pair redundancy plus nonemptyE supplies ALL95 shared-convexified-relaxation
+  witnesses and retires THIS fixedP8 LP and a lone-pair disjunction retry.
+  Complete all vertex-differences/hulls/eightfaces and12920 statepair accounting,
+  original accepted308 three roles/heldcustody, fullfresh payload/source match.
+  Positive cuts select a separately registered shared-centre LP, NEVER state
+  exclusion/packing/admission/bound.
+  EmptyE/refusal/resource unresolved.
+  Prospective secondary all vertices strictinsideP selects a distinct ordinary two-cell
+  consumer, not admission here.
+  Exactdisk-norm checks are a separately registered future target, not a313 verdict.
+
+- **H-322 — Exact Disk Convexification Discriminator.** Reconstruct original all24
+  wall-clipped E_i and EVERY relevant D_ij from same accepted308 three byte-bound roles,
+  using313.construct and ONE intake.
+  Primary ANY EXTREME D vertex exactnormsquared<1: disk convexification is proper and a
+  stronger model may gain a necessary constraint.
+  EVERY extreme norm>=1 proves ALL pairwise incircle convexifications redundant,
+  including every inscribedpolygon, and retires convex pair LPs plus forest-only
+  disjunctions. Equality1 retained.
+  Secondary ALL Dextremes norm<1 identifies a whole original-cell pair-exclusion
+  candidate; no ordinary flag/admission/census here.
+  Complete every extreme/every pair/all12920 statepair accounting, ALL transitive
+  heldbytes rechecked AFTER norm stage, fullfresh payload/source match.
+  Per-state/per-pair octagon flags explicitly labelled, disk-relaxation witness only
+  when globaldiskredundancy holds.
+  Partial/resource/refusal unresolved.
+  No arbitrary newpolygon/LP/forest test/physical packing/globalbound.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

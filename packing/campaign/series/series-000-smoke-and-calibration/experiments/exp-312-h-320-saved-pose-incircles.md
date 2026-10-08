@@ -30,9 +30,10 @@ experiment:
       plus new8PASS7.37s; full30 invocation INCOMPLETE at120s/+10 with passing progress/no terminal aggregate
       or JUnit, retained honestly. Explicit packing/pyproject.toml Ruff2filesPASS after strict bounded30s
       invocation; BasedPyright0 frompacking, format0. Earlier default-config Ruff0 is weaker and not substituted
-      for project floor. Independent ROOT 13 controls PASS 0.32 s (17 deselected), covering exact distances and equality, all95 accounting, original pose rows, accepted roles and postread custody. This was a scoped peer check, not a full30 peer run.
-      Source-only controls never evaluated actual308 saved poses. Original endpoint capacity survivor
-      inherited only.'
+      for project floor. Independent ROOT 13 controls PASS 0.32 s (17 deselected), covering exact distances
+      and equality, all95 accounting, original pose rows, accepted roles and postread custody. This was
+      a scoped peer check, not a full30 peer run. Source-only controls never evaluated actual308 saved
+      poses. Original endpoint capacity survivor inherited only.'
     candidate: 'Bind the complete accepted308 criterion_missed/full216/95 certificate and identical freshPASS
       receipt. Validate every USED saved original-cell/class pose with all reconstructed linear walls/polygon/class
       rows, h>=1/2 and2h*h<=1. Check EVERY95*136=12920 exact centre-distance pairs in lex catalogue order:
@@ -52,9 +53,14 @@ experiment:
       normalized used/computed rationals 4096bits; <=216 cached used-pose validations/9072 linear inequalities
       and EXACT 12920 distance pairs perphase. No runtime forecast or source checksum verdict.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles
-  results: []
+  results:
+  - shape: determination
+    question: Does any frozen saved assignment survive all136 incircle checks?
+    outcome: criterion_missed
+    checked_by: Complete95/12920 construction and byte-equal fresh reconstruction; ROOT source/custody
+      audit and sole Astra actual source/receipt mathematical review CLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: 'Bind the complete accepted308 criterion_missed/full216/95 certificate and identical
       freshPASS receipt. Validate every USED saved original-cell/class pose with all reconstructed linear
       walls/polygon/class rows, h>=1/2 and2h*h<=1. Check EVERY95*136=12920 exact centre-distance pairs
@@ -64,10 +70,13 @@ experiment:
       and stops orientation-stage work. Survivors are orientation_realization_candidates only, never physical
       packing, ordinary cell exclusion, census admission or global bound. No alternate poses/choices,
       no old corner classification/DP replay, no endpoint scientific-pose distance test.'
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T05:08:39.020718+00:00'
-    host: macOS arm64
+    reason: All95 fixed saved poses rejected by at least one exact distance-squared<1 pair; all12920 comparisons
+      per phase,22 used poses/280 original one-square rows, fullfresh payload/sourcebytes match, normalcleanup2.058s.
+      Retire orientation realization for this saved recipe. No whole-cell state exclusion/admission/global
+      bound.
+  effort:
+    wall_seconds: 2.0575756250182167
+    stopped_by: criterion
 ---
 # Saved-Pose Incircle Discriminator
 

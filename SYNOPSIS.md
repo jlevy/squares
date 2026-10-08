@@ -6783,6 +6783,7 @@ archive beside it.
 | exp-309 | Construction30s/fresh30s inside60s;4GiB sampled per live process | 3.0044 s | — | criterion | `d91cc22f`; complete metadata projection with matching fresh payload; no admission or speedup claim |
 | exp-310 | Two30s header phases inside60s;4GiB sampled per live process | 4.170 s | — | criterion | Both HEADER_ONLY_PASS; no FULL or admission |
 | exp-311 | Bounded native acquisition and unsampled FULL replay | — | — | — | Prospective; no measured target effort |
+| exp-312 | Fixed saved-pose incircle discriminator | — | — | — | Prospective; no measured target effort |
 
 ### What the 241 rounds jointly establish
 

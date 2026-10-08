@@ -19,6 +19,7 @@ import yaml
 from devtools import probe_n17_conditional_owned_hull as finite
 from devtools.provenance import provenance
 from sqpack import retained_json
+from sqpack.yamlio import safe_load
 
 SCHEMA = "n17-n11-envelope-windows/v1"
 CONTEXT_SCHEMA = "n17-n11-envelope-windows-context/v1"
@@ -160,7 +161,7 @@ def read_registry(document: dict[str, Any], deadline: float) -> Any:
     ).stdout
     require(len(raw) == int(size), "registry Git object size differs")
     tick(deadline)
-    return yaml.safe_load(raw)
+    return safe_load(raw.decode("utf-8"))
 
 
 def intake(

@@ -17,8 +17,10 @@ take 1.332 and 1.202 seconds; outer execution takes 3.004 seconds with normal co
 and cleanup. All 74,928 exact D4 comparisons are accounted.
 The earlier SciPy startup interruption did not produce a completed control measurement,
 so no speedup ratio follows.
-See the [compact summary](mechanical-summary.json), [construction](certificate.json),
-and [fresh reconstruction](replay.json).
+See the [compact summary](mechanical-summary.json), construction receipt
+`certificate.json`, and fresh reconstruction receipt `replay.json`.
+
+The [result directory](.) retains both complete raw receipts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

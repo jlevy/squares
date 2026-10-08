@@ -1176,6 +1176,8 @@ def test_session186_historical_prune_has_no_registered_control_consumer(name: st
         "exp-301-one-round-fixed-core-regional-propagation",
         "exp-307-owned-core-guarded-clause",
         "exp-308-n11-corner-cardinality",
+        "exp-309-subpattern-relevance",
+        "exp-312-saved-pose-incircles",
     ],
 )
 @pytest.mark.parametrize("name", ["certificate.json", "replay.json"])
@@ -1223,6 +1225,16 @@ def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
         ),
         "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
         "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
+        *(
+            "campaign/series/series-000-smoke-and-calibration/results/"
+            "exp-204-basin-hopping/" + name
+            for name in (
+                "D-basin-hop.jsonl",
+                "D-multistart.jsonl",
+                "D-basin-hop.trace.jsonl",
+                "D-multistart.trace.jsonl",
+            )
+        ),
     ],
 )
 def test_session186_diagnostic_output_prune_preserves_declared_copyback(

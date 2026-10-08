@@ -304,6 +304,69 @@ Neither explains model reasoning, compaction or all coordination cost.
 Keep one bounded engineering candidate beside the regional mathematical lane, publish
 scoped receipts at source freezes, and choose any further work from measured results.
 
+## Late-Block Validation and Storage Incident
+
+The local push tier selected roughly 150 reachable test files and nine pytest workers.
+It ended with five failed steps after 955.75 seconds.
+The owned broad test group was terminated to release resources; this is an incomplete
+behavioral run, not a passing suite.
+Three project Ruff findings and an ESLint scan into another chat’s `.worktrees` were
+corrected. Direct follow-up identified the remaining source-floor diagnostics: integrity
+passed, while the session-close report needed its standing renderer.
+The latter was rendered and checked without repeating the broad tier.
+
+This run did not qualify a frozen source commit: source changed while it ran.
+The full checkpoint’s preferred 04:34:50Z and latest 04:39:59Z launch times were missed
+while sealing source and handling critically low storage.
+The full checkpoint remains unlaunched.
+Its 3,600-second scope and ceiling were not shortened, and no subset result replaces its
+verdict. The protected 05:40:09Z research cutoff remains fixed.
+
+At 04:45Z the internal volume had about 146,000 KiB available and the external volume
+about 1,050,000 KiB. Two completed, reproducible test-fixture directories were staged
+with `trash` after no-open-handle checks: `pytest-19` (499,056 KiB allocated) and
+`main-merge-focused/control-snapshot0` (300,088 KiB allocated).
+Their actual destinations are under `/Volumes/spud-ext1/.Trashes/502/`. Trash was not
+emptied. Later free-space measurements include concurrent activity and cannot be
+attributed to same-volume staging.
+Unique research evidence, source, logs and the active environments were kept.
+
+Mathematical targets continued beside this incident.
+Hardened original-cell headers completed in 4.170 seconds.
+The saved-pose incircle construction and fresh verification completed in 2.058 seconds,
+rejecting all 95 fixed saved poses with all 12,920 pairs accounted for per phase.
+This retires their orientation stage without a cell exclusion.
+Published C2 acquisition completed in 78.944 seconds and its single unsampled replay
+started at 04:50Z from immutable recovery source `e72c7f3c6`, under the prospectively
+selected 2,400-second ceiling.
+The primary checkout continues separate whole-cell mathematical work.
+No full replay or ordinary admission is claimed while it runs.
+
+The resulting iteration rule is concrete: use focused source controls and complete
+bounded mathematical discriminators during development, run hosted CI alongside them,
+and diagnose each failed job before another broad local selection.
+This incident supports fixing selection and process isolation; it supplies no measured
+gain for the incomplete coverage-optimization campaign.
+
+The [hosted e72 run](https://github.com/jlevy/squares/actions/runs/37729215869) failed
+all four behavioral shards.
+Five fresh CLI fixtures lacked the selected checkout on their child Python path; an
+in-process output-ceiling control inherited forbidden imports; a SciPy-absence assertion
+inspected the whole pytest process; and the envelope reader bypassed the project YAML
+loader. These were repaired with explicit child environments, fresh-process checks, and
+the equivalent project loader.
+Eight focused controls passed in 94.34 seconds; the complete envelope module passed 36
+controls in 2.08 seconds.
+Its measured 1.893 test-seconds were admitted through the existing whole-module cost
+route. The relevance module passed all 16 controls in 0.47 seconds and supplied a second
+measured cost, 0.347 test-seconds, when another test file landed.
+Scheduling-only ownership changes then brought all four unknown-file shares below the
+unchanged 10% guard; the final two shard controls passed in 0.43 seconds.
+Project Ruff, formatting, types and the focused diff check passed.
+These checks qualify the narrow repair, not a full current-source checkpoint.
+The validate job stopped before validation when its pinned setup-uv action aborted a
+manifest fetch after five seconds; no tool version or mathematical limit was changed.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

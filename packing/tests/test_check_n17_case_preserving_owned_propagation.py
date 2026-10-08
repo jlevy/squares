@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import time
@@ -16,6 +17,12 @@ import pytest
 from devtools import check_n17_case_preserving_owned_propagation as tool
 
 Q = tool.Q
+
+
+def child_environment() -> dict[str, str]:
+    """Import the selected checkout in a fresh process, preserving caller settings."""
+    project = Path(__file__).resolve().parents[1]
+    return os.environ | {"PYTHONPATH": os.pathsep.join((str(project / "src"), str(project)))}
 
 
 def deadline() -> float:
@@ -510,6 +517,7 @@ def test_clean_two_process_reconstruction_with_explicit_synthetic_premises(
                 "60",
                 *tail,
             ],
+            env=child_environment(),
             capture_output=True,
             text=True,
             timeout=70,
