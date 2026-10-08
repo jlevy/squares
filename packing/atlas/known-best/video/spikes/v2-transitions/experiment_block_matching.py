@@ -3,7 +3,7 @@
 
     experiment_block_matching.py 100 110 307        # per-pair block report for the pairs named
     experiment_block_matching.py --sweep            # the discount and the tolerances
-                                                    # over all 158 assignment pairs
+                                                    # over all 160 assignment pairs
 
 The per-pair report lists every block the assignment kept (size, turn, pivots, residual),
 the squares moving alone, the new square with its rule and tie set, and the arrival overlap
@@ -35,7 +35,14 @@ def load_all() -> tuple[dict, dict, dict]:
 def report(n: int, manifest: dict, witnesses: dict, renderings: dict) -> None:
     a, b = witnesses[n], witnesses[n + 1]
     started = time.perf_counter()
-    match = bc.match_pair(a, b, renderings[n], renderings[n + 1], manifest[n + 1])
+    match = bc.match_pair(
+        a,
+        b,
+        renderings[n],
+        renderings[n + 1],
+        manifest[n + 1],
+        manifest_entry_previous=manifest[n],
+    )
     s = bc.pair_stats(a, b, match)
     elapsed = time.perf_counter() - started
     print(
@@ -87,7 +94,12 @@ def sweep(manifest: dict, witnesses: dict, renderings: dict, *, quick: bool = Fa
         n
         for n in range(1, bc.N_MAX)
         if bc.match_pair(
-            witnesses[n], witnesses[n + 1], renderings[n], renderings[n + 1], manifest[n + 1]
+            witnesses[n],
+            witnesses[n + 1],
+            renderings[n],
+            renderings[n + 1],
+            manifest[n + 1],
+            manifest_entry_previous=manifest[n],
         )["kind"]
         == "matched"
     ]
@@ -122,6 +134,7 @@ def sweep(manifest: dict, witnesses: dict, renderings: dict, *, quick: bool = Fa
                 renderings[n],
                 renderings[n + 1],
                 manifest[n + 1],
+                manifest_entry_previous=manifest[n],
             )
             rows.append(bc.pair_stats(witnesses[n], witnesses[n + 1], match))
         elapsed = time.perf_counter() - started
@@ -182,7 +195,14 @@ def draw(n: int, manifest: dict, witnesses: dict, renderings: dict, out_dir) -> 
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     a, b = witnesses[n], witnesses[n + 1]
-    match = bc.match_pair(a, b, renderings[n], renderings[n + 1], manifest[n + 1])
+    match = bc.match_pair(
+        a,
+        b,
+        renderings[n],
+        renderings[n + 1],
+        manifest[n + 1],
+        manifest_entry_previous=manifest[n],
+    )
     s = bc.pair_stats(a, b, match)
     side = max(a["side"], b["side"])
 

@@ -6,7 +6,7 @@
 The table quoted in `NOTES.md` is revision 4's, taken before revision 5 made the matching
 rendering-aware; a fresh run measures the current matcher and need not reproduce it.
 
-For each weight the 158 matched pairs are re-matched and the table reports the mean
+For each weight the 160 matched pairs are re-matched and the table reports the mean
 and maximum of the per-pair maximum displacement, the total squares that move more than
 one unit, the total squares that rotate, the total rotation in degrees, and what the
 4->5 pair does (whether a corner square of n=4 is sent to the centre of n=5).
@@ -49,6 +49,7 @@ def main(argv: list[str]) -> int:
                 renderings[n],
                 renderings[n + 1],
                 manifest[n + 1],
+                manifest_entry_previous=manifest[n],
             )
             if match["kind"] != "matched":
                 continue

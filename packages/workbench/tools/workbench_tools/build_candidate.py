@@ -729,19 +729,39 @@ def static_match(kind: str, n: int, mapping: list[int], new: int, rule: str, **e
     }
 
 
+def recorded_shared_picture(previous: dict, following: dict) -> bool:
+    """A catalogue relation applies only while both selected houses use that picture.
+
+    The next source's listed counts describe its retained upstream catalogue; a newly
+    selected source at the previous count does not inherit that historical relation.
+    """
+    n = previous["n"]
+    a, b = previous.get("source", {}), following.get("source", {})
+    return bool(
+        b.get("source_n") == n + 1
+        and a.get("source_n") == b.get("source_n")
+        and a.get("kind") == b.get("kind")
+        and a.get("url")
+        and a.get("url") == b.get("url")
+        and {n, n + 1}.issubset(a.get("listed_n", []))
+        and {n, n + 1}.issubset(b.get("listed_n", []))
+    )
+
+
 def match_pair(
     prev: dict,
     nxt: dict,
     prev_render: list[dict],
     nxt_render: list[dict],
     manifest_entry_next: dict,
+    *,
+    manifest_entry_previous: dict,
 ) -> dict:
     n = prev["n"]
     a_keys, b_keys = prev["keys"], nxt["keys"]
     if b_keys[:n] == a_keys:
         return static_match("prefix", n, list(range(n)), n, "prefix: square n+1 is appended")
-    source = manifest_entry_next.get("source", {})
-    recorded = source.get("source_n") == n + 1 and n in source.get("listed_n", [])
+    recorded = recorded_shared_picture(manifest_entry_previous, manifest_entry_next)
     removed = shared_picture_removal(prev, nxt)
     if recorded and removed is None:
         raise ValueError(
@@ -2096,6 +2116,7 @@ def main(argv: list[str] | None = None) -> int:
                 renderings[n],
                 renderings[n + 1],
                 manifest_by_n[n + 1],
+                manifest_entry_previous=manifest_by_n[n],
             )
         matches[n] = match
         with clock.stage("measure the pairs"):
