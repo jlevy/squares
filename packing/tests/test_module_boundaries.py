@@ -18,6 +18,7 @@ import pytest
 import yaml
 
 from devtools import (
+    evand_arrangement_reports,
     evand_exact_certificates,
     squish_followup_packets,
     squish_second_update_packets,
@@ -592,6 +593,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # comparison, so that packet rides in the slice, named by the module that reads it; it
     # was missing on jlevy/squares#369's run 37403920231.
     assert f"/packing/resources/web/{evand_exact_certificates.PACKET.name}/" in sparse
+    # The three T-119 atlas sources require their complete retained fact and receipt.
+    assert f"/packing/resources/web/{evand_arrangement_reports.PACKET.name}/" in sparse
     # SQUISH's exact rational facts are a separate packet from the ordinary packet
     # registry; omitting it makes the atlas refuse all eleven newly reported cases.
     assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
