@@ -340,6 +340,7 @@ A delivery-recovery worker checks earlier claimed output.
 | 8 | W7: upstream integration and PDF storage maintenance (`think-okcb`) | Earlier 2026-10-08 checkpoint: 287 current exact values, 170 historical identities and 37 numeric routes; 13 original PDFs hosted outside Git and a universal 5 MiB tracked-PDF gate |
 | 9 | W7: upstream CI contract repair | Rational refresh, hosted citation identity, publication payloads, snapshot custody, measured suite admissions and startup delay controls repaired; independent Astra review passed |
 | 10 | W7: recovered stack, verified-bound identities and work map (`think-jygq`, `think-808n`) | Original 2026-10-08 A1 checkpoint: rebased both layers through the stacked-PR shortcut; 33 replay-backed rational identities projected without changing case bounds or proof status; four representation gaps then remained |
+| 11 | W7: final publication input repair (`think-x0j9`) | The fresh catalogue job exposed a missing retained KKT-results leaf in its sparse checkout; keep that exact input and exercise the real Git include/exclude contract |
 
 The two stack layers have separate registers.
 At the earlier 2026-10-08 CI-repair checkpoint, PR 403 had 286 exact current values, one
@@ -463,6 +464,8 @@ Additional work:
   `evand/square-packing@13ee36e5807727d12a5da36b9b90a96bdba272bf` and checked them
   against `acquisition/upstream-subtree.sha256`. All 320 batch inputs are digest-pinned;
   only these two were selected for recovery.
+  Their 476 and 5,305 bytes are retained in durable evidence outside disposable scratch;
+  the source packet remains digest-only for these inputs.
   The undelivered W7 dependency is the reusable full-active-system driver with an exact
   half-angle export. It must retain the full active/weak/forced contact system, frozen
   variables, precision and residuals, and export exact polynomials with denominator
