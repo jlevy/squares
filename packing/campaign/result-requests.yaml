@@ -262,10 +262,10 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: The separately dated 8 October 07:47 UTC author followup reports 31 patterns, 20 certificate-verified
-      and 11 computed. The retained prior 29/19/10 source and full-verification scope remain unchanged;
-      complete new packages remain unpublished.
-    read_through: '2026-10-08T07:47:25Z'
+    summary: The separately dated 8 October 11:38 UTC author followup reports 32 patterns, 21 certificate-verified
+      and 11 computed. The retained prior 29/19/10 source, dated 31/20/11 report and full-verification
+      scope remain unchanged; complete new packages remain unpublished.
+    read_through: '2026-10-08T11:38:42Z'
     results:
     - key: subpatterns-27
       claim: 29 source subpatterns, with 19 reported certificate verified and 10 computed; only rows
@@ -280,6 +280,16 @@ issues:
       claim: The author reports 31 patterns,20certificate-verified and 11 computed; row 19 newly checked
         by the author fast verifier and rows 30/31 computed with certificates to follow.
       source: https://github.com/jlevy/squares/issues/413#issuecomment-6055253328
+      not_registered: Dated progress report only. No complete new certificate packages, exact domain/frame/cap
+        bindings or full standing receipts have been acquired; no new unconditional exclusion or unresolved-state
+        coverage credit.
+      queued: true
+      bead: think-bmwd
+    - key: subpatterns-32-status-2026-10-08
+      claim: The author reports 32 patterns, 21 certificate-verified and 11 computed; row 20 newly
+        checked by the author fast verifier and row 32 computed as the first nine-cell pattern,
+        with its certificate to follow.
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6059040980
       not_registered: Dated progress report only. No complete new certificate packages, exact domain/frame/cap
         bindings or full standing receipts have been acquired; no new unconditional exclusion or unresolved-state
         coverage credit.
@@ -318,7 +328,8 @@ issues:
       Complete intake packages for rows 1–4 and the two classes in #358 are being prepared; no new
       project admission is supplied. Separately dated author followup at 2026-10-08T07:47:25Z reports
       31/20/11; new complete packages remain unpublished and this status changes no earlier actual
-      full outcome.'
+      full outcome. The later 2026-10-08T11:38:42Z author report gives 32/21/11, with row 20 fast-verified
+      and row 32 computed; its certificate remains unpublished and no project admission changes.'
 
   - number: 414
     title: 'Two preprints: k^2 - M(k) >= 0.1 k^{1/4} (k >= 4.62e12) and > 0.06 k^{1/3} (k >= 3.5e17)'
