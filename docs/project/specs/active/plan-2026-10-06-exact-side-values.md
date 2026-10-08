@@ -23,18 +23,25 @@ The identification lanes in Phase 2 enter **W6** under their own hypotheses.
 
 ## Current Register and Continuation
 
-The parent register covers 324 cases: 176 integer, 29 rational, 65 closed-form, 16
-minimal-polynomial, one degree-only and 37 numeric-only values.
-It certifies 286 exact polynomial roots and retains 18 superseded catalogue identities
+The parent register covers 324 cases: 176 integer, 62 rational, 65 closed-form, 16
+minimal-polynomial, one degree-only and four numeric-only values.
+It certifies 319 exact polynomial roots and retains 18 superseded catalogue identities
 as notes. All 77 proved cases keep their existing status.
 Source refresh adapters preserve the primitive linear polynomial for each of the 23
 upstream certified rational witnesses.
-A witness identity remains a feasible upper bound; its polynomial does not establish
-optimality.
+The register also projects 33 verified rational identities whose reported decimal,
+verified decimal and verified exact fraction are equal.
+Thirty-two are native T-098 certificate sides; $n = 292$ is a certified outward decimal
+ceiling. Current source, count, evidence scope, receipt custody and replay verdicts are
+checked before admission; existing exact source fields take precedence.
+The unequal $n = 105$ bound is refused.
+A witness-side identity retains its upper-bound meaning and proof status.
+Ideal contact and stationarity work remains open even where that finite side is
+rational.
 
 The child [PR 435](https://github.com/jlevy/squares/pull/435) supplies the complete
 degree-672 polynomial at n = 83, 170 historical entries, the web reader and complete
-archives, and the detailed map of the 37 remaining numeric cases.
+archives, and the detailed map of the four remaining numeric cases ($n = 29,55,71,105$).
 The next research entry is delivery recovery in `think-s6np`, followed by `think-ohhz`;
 contact-system and exact-witness obligations remain open.
 
@@ -51,8 +58,9 @@ limit on tracked PDFs.
 
 - **One register, generated:** `packing/frontier/exact-values.json` holds one row per
   $n = 1 \dots 324$, built from the frontier records, the retained Kingbird catalogue
-  and Evan Daniel’s KKT batch, by `devtools.build_exact_values`, with `--update` and
-  `--check`.
+  and Evan Daniel’s KKT batch, plus retained verified-bound certificates and replay
+  custody for rational projections, by `devtools.build_exact_values`, with `--update`
+  and `--check`.
 - **Every polynomial checked, not just transcribed:** for each recorded minimal
   polynomial, the register records an irreducibility certificate over $\mathbb{Q}$, a
   rational isolating interval with exactly one real root, agreement of that root with
@@ -103,17 +111,31 @@ The catalogue prints polynomials at 13 more counts (102, 106, 123, 130, 172, 177
 206, 228, 259, 269, 292, 302). Each belongs to a packing that has since been beaten, so
 none of them is the side of the record packing.
 
-The numeric-only cases split by tractability:
+The four current numeric-only cases have separate routes:
 
-- **n = 29:** the defining six-equation system is retained, and integer relations up to
-  degree 20 with coefficients below 1e22 are excluded at 1000 digits.
-- **n = 55 and n = 71:** the Kingbird SVGs credit an exact analytic solution to
-  Ellsworth, but only the poses were retained (think-xy91).
-- **n = 83:** the polynomial text is in `square-83.svg`, which is not retained
-  (think-krbs).
-- **Everything else:** binary64 witnesses only, but Daniel’s packet carries a
-  numerically confirmed KKT point for 315 counts, and his `exactsolve.py` re-solves it
-  to 60–1000 digits with an `--algdeg` integer-relation search.
+- **n = 29:** the retained six-equation system can support exact elimination and
+  selected real-branch certification.
+  The bounded PSLQ non-return above is not a degree or coefficient lower bound.
+- **n = 55 and n = 71:** PR 435 retains source definitions, seven contact/stationarity
+  equations at 55 and six contact equations at 71, plus approximate branch values.
+  Elimination must exclude extraneous and rank-deficient branches and recover an exact
+  geometry map. The historical quartic and octic at 71 describe different sides.
+- **n = 105:** current Couzo pose/facts and a certified ceiling are available, but a
+  confirmed KKT seed and current contact system are missing.
+  The retained Kingbird SVG concerns an older side and supplies no equations.
+
+The parent degree-only row at n = 83 is completed by the child’s retained degree-672
+polynomial. Ideal KKT/contact research at other counts remains separate from the exact
+identity of a finite rational certificate side.
+The selected delivery slice is W7 `think-s6np`, before W6 experiments: retain the full
+active system and exact half-angle export, recover just the digest-pinned n = 11 and n =
+102 source inputs, prove the known n = 11 octic from contacts, and specify one bounded n
+= 102 run. Broader batches wait for that control and retain each original count and
+branch distinction.
+Legacy numerical probe labels are quarantined as candidate/diagnostic
+outputs under `think-yuqy`; Bézout upper bounds and bounded PSLQ non-return cannot prove
+a degree or coefficient lower bound, and a numerical eliminant residual cannot prove
+exact linkage.
 
 ## Design
 
