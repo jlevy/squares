@@ -1499,7 +1499,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-08'
-    credit: wand125
+    credit: wand125 after Levy
     lineage: builds-on-project
     note: Seven finer-net measure lower-bound reports for n19,20,26,27,28,29,31 at source 61e37d583ad690266da2188ad027ef3f697bf162;
       original archives/nested source identities retained outside live Git. Conditional maintained measure/net-premise
