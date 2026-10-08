@@ -282,18 +282,47 @@ def plan() -> list[tuple[int, Path, str, str]]:
     return entries
 
 
-def _replace_block(text: str, rendered: str, n: int) -> str:
-    """Swap an existing block this tool owns for the freshly derived one."""
-    start = text.find("  rigidity:\n")
-    if start < 0:
+def _rigidity_span(text: str, n: int) -> tuple[int, int]:
+    """Locate exactly one expanded rigidity block inside the front matter."""
+    front_end = text.index("\n---", len("---\n"))
+    marker = "  rigidity:\n"
+    start = text.find(marker, len("---\n"), front_end)
+    if start < 0 or text.count(marker, len("---\n"), front_end) != 1:
         raise ValueError(f"n={n}: expected an existing rigidity block and did not find it")
-    rest = text[start + len("  rigidity:\n") :]
+    rest = text[start + len(marker) : front_end + 1]
     consumed = 0
     for line in rest.split("\n"):
         if line.strip() and not line.startswith("    "):
             break
         consumed += len(line) + 1
-    return text[:start] + rendered + rest[consumed:]
+    return start, start + len(marker) + consumed
+
+
+def _replace_block(text: str, rendered: str, n: int) -> str:
+    """Swap an existing block this tool owns for the freshly derived one."""
+    start, end = _rigidity_span(text, n)
+    return text[:start] + rendered + text[end:]
+
+
+def preserve_block_rendering(existing: str, regenerated: str, n: int) -> str:
+    """Keep equal rigidity metadata in its owner's exact original YAML rendering.
+
+    The caller must establish applicability to the same packing. This operation
+    preserves text only; it neither derives an assessment nor transfers one to a pose.
+    """
+    before, after = _record(existing), _record(regenerated)
+    if (
+        type(n) is not int
+        or type(before["n"]) is not int
+        or type(after["n"]) is not int
+        or before["n"] != n
+        or after["n"] != n
+        or not isinstance(before.get("rigidity"), dict)
+        or before["rigidity"] != after.get("rigidity")
+    ):
+        raise ValueError(f"n={n}: cannot preserve mismatched rigidity metadata")
+    start, end = _rigidity_span(existing, n)
+    return _replace_block(regenerated, existing[start:end], n)
 
 
 def update() -> None:

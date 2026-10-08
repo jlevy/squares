@@ -320,6 +320,11 @@ def test_confirmed_case_adoption_preserves_lower_and_refutes_older_conjecture(
     assert private == confirmation.REPO
     current = (SOURCE / "packing/frontier/n-088.md").read_text()
     adapted = confirmation.adopt_verified(88, current)
+    marker, end = "  rigidity:\n", "  conjectured_optimum:"
+    assert (
+        adapted.split(marker, 1)[1].split(end, 1)[0]
+        == (current.split(marker, 1)[1].split(end, 1)[0])
+    )
     assert confirmation.shared.json_bytes(
         confirmation.safe_load(adapted.split("---\n", 2)[1])["packing"]["rigidity"]
     ) == confirmation.shared.json_bytes(

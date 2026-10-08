@@ -869,10 +869,13 @@ def _adopt_verified(n: int, existing: str, generated: str | None, bound: dict[st
         raise original.PacketError(
             "selected confirmation ceiling differs from admitted evidence"
         )
-    # Re-publishing the same confirmed pose keeps its separately owned assessment.
-    # Initial confirmation cannot transfer rigidity from the earlier geometry.
+    # Direct re-publication of the same confirmed pose keeps its owned assessment.
+    # A generator draft leaves assessment to its separate promotion step, and initial
+    # confirmation cannot transfer rigidity from the earlier geometry.
     current_rigidity = (
-        copy.deepcopy(case["rigidity"]) if EXACT_EVIDENCE in declarations else None
+        copy.deepcopy(case["rigidity"])
+        if generated is None and EXACT_EVIDENCE in declarations
+        else None
     )
     # The reported-only owner still rebuilds its own report and lower/history lanes.
     # Its temporary older verified lane is replaced only after complete admission.
@@ -956,12 +959,17 @@ def _adopt_verified(n: int, existing: str, generated: str | None, bound: dict[st
     )
     if count != 1:
         raise original.PacketError("confirmation needs exactly one current report section")
-    return render_case_verifiers.refresh(
+    rendered = render_case_verifiers.refresh(
         "---\n"
         + yaml.safe_dump(document, sort_keys=False, allow_unicode=True, width=98)
         + "---\n"
         + body
     )
+    if current_rigidity is not None:
+        from devtools.assess_frontier_rigidity import preserve_block_rendering  # noqa: PLC0415
+
+        rendered = preserve_block_rendering(existing, rendered, n)
+    return rendered
 
 
 def main() -> None:
