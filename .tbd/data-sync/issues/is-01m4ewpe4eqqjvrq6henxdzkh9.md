@@ -3,10 +3,11 @@ type: is
 id: is-01m4ewpe4eqqjvrq6henxdzkh9
 title: "Website: compact homepage, consistent case layouts, and scroll-aware navigation"
 kind: epic
-status: in_progress
+status: open
 priority: 1
-version: 11
-delegate: claude-code@spud10.local
+version: 13
+spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
+delegate: null
 labels:
   - website
 dependencies: []
@@ -21,7 +22,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-08T23:24:11.379Z
+updated_at: 2026-10-08T23:24:47.886Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
 W9 remediation of the published Square Packing site. The owner confirmed a substantially shorter homepage with visible small atlas and results previews, prominent buttons to the dedicated Atlas and Results pages, consistent case-page and popover layouts including the reported broken math for n=291, and usual Headroom navigation: hide while scrolling down and reappear immediately while scrolling up on desktop and mobile. The plan spec lists six open implementation and verification issues with acceptance criteria and dependencies. Keep this epic open until the website fixes and combined browser verification are complete.
