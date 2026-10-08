@@ -478,6 +478,79 @@ It does not relabel the current ry-xu packing as Friedman’s construction or ad
 scientific assurance claim.
 Final source-size, integration and hosted checks remain required.
 
+## Current Shared-Picture Routing and Retained Census
+
+The narrow consumer follow-up to `f6f5c4181c405415cb28ff2bc755f229746acb52` is accepted
+with no outstanding findings.
+A catalogue’s shared-picture attribution now applies only when both selected houses
+retain the same source kind, URL and source count, and both source records list the two
+counts. The historical n296 attribution remains intact.
+Since the selected n295 house is now from ry-xu, the workbench matches the two complete
+current pose lists through its existing general matcher.
+When both current sources still claim one picture, differing complete poses remain an
+error.
+
+The new required previous-manifest argument initially left five retained experiment
+callers incompatible.
+All five now pass their existing `manifest[n]`; a bounded signature control checks every
+call. The matching costs, thresholds, complete pose keys and source witnesses remain
+unchanged.
+
+Independent execution passed eight workbench controls in 6.20 seconds, including the
+actual complete n295-to-n296 match, the unchanged historical n296 metadata, refusal of a
+contradictory current shared picture, and the retained caller signatures.
+The actual match took 1.50 seconds.
+The writer’s complete single build passed in 33.9186 seconds under the existing
+300-second ceiling, retained in
+`ryxu-432-gate-evidence/shared-picture-page-build-v33.log`.
+
+Independent counting of the retained complete 323-pair output confirms 159 prefix, four
+shared-picture and 160 matched correspondences.
+The shared-picture counts are 147, 232, 264 and 290; 295 uses general matching.
+Every ordered row agrees with the retained count audit.
+The standalone timing fixture, legacy audit expectations and experiment summaries now
+use those measured counts.
+The full output is retained as
+`ryxu-432-gate-evidence/current-transition-stats-v45.json`.
+
+The census test updates its expected values to the already retained current geometry.
+An independent comparison against the accepted source checkpoint found exactly three
+registered structured-count changes: n70, 70 to 66; n84, 82 to 64; and n86, 85 to 84.
+They account for all 23 fewer structured squares, giving 1,755 of 1,860 non-grid squares
+and 25 records within the stated chunk budget.
+Across the complete 100-entry near partition roster, only n84 changes status, from
+`not-established-search-limit` to `not-established`. The expected totals are therefore
+24 not-established outcomes and seven search-limit outcomes.
+The independent retained-census control passed in 0.51 seconds.
+
+A separate retained legacy prototype audit exposed a presentation-reader assumption:
+`witness_centres` expected centre-angle or corner input and failed on the selected
+rational centre-basis n105 witness.
+That EXIT1 receipt remains in
+`ryxu-432-gate-evidence/shared-picture-browser-check-v38.log`. The reader now uses the
+maintained exact materializer for centre-basis and number-field witnesses, averages
+their exact corners, and converts only the resulting centres to floats.
+The existing centre-angle and corner paths remain unchanged.
+
+Independent controls passed for all centres of n51, n105 and n52, with geometric
+deciders forbidden and source bytes preserved, in 4.72 seconds.
+A separate strict absolute-error audit found a maximum difference below 8.89e-16 for n51
+and zero for n105 and n52. The retained tests explicitly set `rel=0` and `abs=1e-14`.
+This presentation projection preserves the declared field and root and makes no
+feasibility decision.
+The later v42 legacy audit still exited 1 on older UI, timing and font assertions;
+neither legacy audit supplies a current frontend pass.
+The maintained current command, `check_frontend --workers 2`, subsequently passed all
+eight owners in 53.577789 seconds under its unchanged 300-second ceiling.
+Its complete receipt was inspected at
+`ryxu-432-gate-evidence/current-frontend-browser-check-v44.log`. The complete current
+build result above remains scoped to that build; final hosted gates remain separate.
+
+This seven-file consumer repair changes no generator, tolerance, search limit, source
+witness, fact or deciding receipt.
+Its descriptive correspondence and chunk counts add no feasibility, rigidity or
+optimality claim. Final integration, source size and hosted gates remain required.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
