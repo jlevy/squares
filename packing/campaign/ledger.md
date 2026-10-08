@@ -199,7 +199,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
 | [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
-| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 7 | think-2mzl | Publish consolidated source/evidence/docs with bounded CI mechanics beside registered308 exact corner-cardinality construction/fresh verification. Astra selects subsequent global work through fresh W3 and bounded external-package scope relevance; no automatic unchanged retries. |
+| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `efficiency-loop` (efficiency) | 8 | think-2mzl | Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator. Preparesealedfullcheckpoint ahead04:34:50launch; researchremainsglobalpriority. |
 
 ### Workflow summary
 
@@ -211,7 +211,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 11 | 1 | 67 | 3 |
 | `insight-iteration` | 31 | 1 | 95 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 11 | 1 | 46 | 1 |
+| `efficiency-loop` | 11 | 1 | 47 | 1 |
 | `research-loop` | 37 | 4 | 152 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
@@ -955,7 +955,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 237 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 238 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1210,7 +1210,8 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | H-313 | refuted | proof | One simultaneous recovery and collective pass in each retained302 case |  | 1 |  | 1.6m wall |
 | H-314 | unresolved | proof | Independent Envelope Representation Discriminator |  | 1 |  | 2.0m wall |
 | H-315 | confirmed | proof | Same-Core Guarded Clause Transport |  | 1 |  | 10s wall |
-| H-316 | running | proof | Correlated Four-Corner n11 Cardinality |  | 1 |  |  |
+| H-316 | refuted | proof | Correlated Four-Corner n11 Cardinality |  | 1 |  | 1.5m wall |
+| H-317 | running | proof | SciPy-free Joint-Certificate Candidate Relevance |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1220,7 +1221,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Rounds
 
-### rejected (51)
+### rejected (52)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1275,6 +1276,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-303 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-311 | All95 representatives survive with checked35-clone common independent sets; zero obstructions and zero unresolved. The unchanged coarse filter is retired; do not build an atlas from it. Survival neither realizes physical contacts nor disproves the hand normalization theorem. No ordinary exclusions, census admission or bounds change. |
 | exp-304 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-312 | Complete95 negatives; maximum enclosed envelopes6 for47orbits and7 for48orbits, below11. Fresh exact counts and all11 importedsource joins match. This fixed envelope rule is retired; no ordinary exclusion, global bound or census change. Optional endpoint window calibration was not implemented. |
 | exp-305 | series-000 | 17 | Session186 coordinator; think-lyh9. | H-313 | Both cases remain open; no additional surviving-case UNION loss for anyowner. Owner6 retainscombined [1/16,19/32] and owner18 retainsprior11/32 loss. Secondaryverified lower-x owner6 deletion loses1/64 withinthatcase, narrowing [3/8,1/2] to [3/8,31/64]; uppercaseunchanged, so no combined gain. This is not a per-case fixed point. Declared no-combined-gain stop retires the unchanged operator; no automatic repeat or global/census/guard-exclusion claim. |
+| exp-308 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-316 | All95 assignments survive, with zero obstructed masks.216complete original-cell classifications yield68feasible/148infeasible classes; saved survivor largest guaranteed counts6for49states and7for46, far below capacity10. Endpointcounts[6,6,6,5]. Closed-class aliases undercount guaranteed membership and survivors are relaxation models, not physical packings. Retire unchangedfour-window DP; no ordinaryadmission/globalbound/capture. |
 
 ### exhausted (1)
 
@@ -1495,7 +1497,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-308 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-316 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
+| exp-309 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-317 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1546,7 +1548,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Effort
 
-237 rounds, 2512.1 agent-minutes, 5817.7 wall-minutes.
+238 rounds, 2512.1 agent-minutes, 5819.2 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

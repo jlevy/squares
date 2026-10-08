@@ -48,9 +48,15 @@ experiment:
       perliveprocess;10MiBdescriptor/64MiBoutput/4096bitgeometry;4Mvertex triples/64Mrow tests/64M DP
       transitions/3Mperstate/14641states per layer.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality
-  results: []
+  results:
+  - shape: determination
+    question: Does the complete four-corner cardinality relaxation obstruct any of the95 frozen ordinary
+      assignments?
+    outcome: criterion_missed
+    checked_by: Full matching fresh payload,12importedsource observations, complete216classification/95DP/endpoint;
+      soleAstra actual mathematical review and root independent custody checks.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Complete exact 216 cell/class feasibility tests on original convex cells with physical
       wall constraints, shared x/y/h and exact 2*h*h<=1 vertex test; all95 named distance-two assignments
       then receive complete four-count DP with each count<=10. Endpoint assignment must survive calibration.
@@ -59,10 +65,13 @@ experiment:
       all18 reachable-frontier bitmaps; positives retain17 independently checked pattern witnesses. All
       input/domain/theorem joins and full fresh payload must match. No global optimality, capture or automatic
       census admission; refusal/resource stop unresolved. No denser window search on unchanged miss.
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T03:30:00Z'
-    host: macOS arm64
+    reason: All95 assignments survive, with zero obstructed masks.216complete original-cell classifications
+      yield68feasible/148infeasible classes; saved survivor largest guaranteed counts6for49states and7for46,
+      far below capacity10. Endpointcounts[6,6,6,5]. Closed-class aliases undercount guaranteed membership
+      and survivors are relaxation models, not physical packings. Retire unchangedfour-window DP; no ordinaryadmission/globalbound/capture.
+  effort:
+    wall_seconds: 89.48727479099762
+    stopped_by: criterion
 ---
 # Correlated Four-Corner n11 Cardinality
 

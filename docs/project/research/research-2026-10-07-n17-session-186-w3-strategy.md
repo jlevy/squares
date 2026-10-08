@@ -783,6 +783,64 @@ The rank, envelope and four-window tests instead address those other named assig
 Even an ordinary exclusion there would leave the endpoint branch’s capture and terminal
 composition to prove.
 
+### Four-Corner Result and the Next Relational Test
+
+Exp308 completed both phases with matching mathematical payloads and fresh verification.
+It classified all 216 cell-pattern combinations: 68 were feasible and 148 infeasible.
+All 95 assignments retained a capacity-feasible pattern assignment, so the registered
+ordinary-exclusion criterion missed.
+The endpoint control survived with four guaranteed counts $(6,6,6,5)$. Among the 95
+retained survivors, the largest guaranteed count was six for 49 assignments and seven
+for 46 assignments, below the capacity of ten.
+Construction took 62.519 seconds and fresh reconstruction 26.737 seconds; supervised
+elapsed time was 89.487 seconds, with normal completion and cleanup.
+The primary payloads are `certificate.json` and `replay.json` under
+`packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/`.
+The outcome establishes survival of this finite relaxation, not simultaneous physical
+packings or exact membership at class seams.
+Bounds and the ordinary census are unchanged.
+Stop the unchanged four-window dynamic program.
+
+A prospective pair-pattern test would add a dependence absent from that program.
+For each allowed cell-pattern pair $(i,a)$, let $P_{i,a}$ be a convex outer projection
+onto centre coordinates of its complete closed linear $(x,y,h)$ polytope.
+Using the rational upper bound $h\le r$ and omitting the additional quadratic reach
+filter is safe for this outer projection, provided that enlargement is explicit.
+Distinct physical square centres are at distance at least one.
+Hence two pattern choices are incompatible whenever
+
+$$
+\max_{p\in\operatorname{vert}(P_{i,a}),\ q\in\operatorname{vert}(P_{j,b})}
+\|p-q\|^2<1.
+$$
+
+The vertex formula is exact because squared distance is convex in each argument and both
+polygons are compact.
+Equality remains compatible.
+A retained rational pose pair at distance at least one supplies a cheaper nonconflict
+witness; complete projection is needed only to prove a new incompatibility.
+
+The first discriminator should check the existing 95 pattern assignments against these
+binary clauses. If all survive, they already witness failure of this strengthened finite
+relaxation; stop without a new search.
+If some fail, a separately selected finite constraint search may combine pair clauses
+with the four capacity constraints.
+The old count-vector dynamic program cannot certify that stronger problem by itself: it
+forgets which earlier patterns were selected.
+A complete consumer must retain those choices on a graph separator or check an
+exhaustive search certificate.
+Even pair-compatible choices may use different centre witnesses for different
+neighbours, leaving joint geometric compatibility unresolved.
+
+The observed capacity slack lowers the priority of implementing that full search.
+A 30–60 minute source-and-review allocation for the discriminator would be a bounded
+decision cost, not a runtime or success forecast.
+First check whether the contributed seven-square certificates from issue358 have exact
+domain joins and positive marginal coverage of the current residue.
+Such a checked exclusion would reach the ordinary census directly.
+Metadata overlap alone, reported verifier success, and absence of an equal existing
+ledger mask do not establish that exclusion.
+
 ### A Planar Active-Basis Refinement of Normalization
 
 The following is a further sole-Astra hand derivation, self-audited but not
@@ -858,6 +916,95 @@ small, or justify planarity pruning of a graph of merely possible edges.
 A future consumer would need to cover the selected realizable basis and the exact
 crossing-block degeneracies, alongside all original nonoverlap constraints.
 The completed coarse rank miss remains unchanged.
+
+### Global Stationarity With Orientations Included
+
+This is a prospective sole-Astra hand derivation, self-audited but not independently
+reviewed or verified by an instrument.
+It supplies a stronger necessary system for a globally minimal counterexample.
+It does not supply a parameter cover or a new bound.
+
+Suppose a strict counterexample below the proposed endpoint side exists.
+Minimize the container side over all seventeen-square packings with side at most $U$,
+including their orientations.
+Centres and side lie in a compact bounded set, orientations lie in the quarter-turn
+torus, and the packing conditions are closed.
+A minimum exists, with $0<L_*<U$. One may subsequently choose a lexicographic centre
+representative at its fixed orientations without changing this global minimum.
+Perform this normalization before assigning occupancy cells or imposing an endpoint
+guard.
+
+At that representative, choose a containing SAT branch: one signed owner axis for each
+unordered pair. Write $R_i=R(\theta_i)$, let $n_i$ be the chosen signed owner axis, and
+let $v$ run over the other square’s four reference vertices $(\pm1/2,\pm1/2)$. The
+branch’s separation inequalities are the smooth slacks
+
+$$
+g_{ijv}=n_i\cdot(c_j-c_i+R_jv)-\frac12\ge0.
+$$
+
+Retain all four corner inequalities for each selected axis, including ties, and all
+corner inequalities for containment.
+In a local unwrapped orientation chart these are smooth constraints in $34+17+1=52$ real
+variables. There are no artificial chart-boundary inequalities.
+Every feasible point of the branch is a physical packing, so the global representative
+locally minimizes $L$ on every containing branch.
+
+The first-order qualification can be proved directly.
+Use the direction $\dot c_i=c_i$, $\dot L=L_*$, $\dot\theta_i=0$, scaling centres and
+the container while leaving unit-square sizes unchanged.
+At any active containment row its derivative is the relevant half-extent, at least
+$1/2$. At an active pair row, feasibility of all four corner rows means the active
+corner minimizes the other square’s projection.
+Thus
+
+$$
+n_i\cdot(c_j-c_i)=\frac12+h_j(n_i)\ge1,
+$$
+
+which is the pair row’s derivative in this direction.
+All active derivatives are strictly positive.
+The artificial side bounds $0$ and $U$ are inactive.
+
+If a direction decreased $L$ while giving nonnegative derivatives for all active slacks,
+adding a sufficiently small positive multiple of the scaling direction would preserve
+that decrease and make every active derivative strictly positive.
+Smoothness, finiteness of the constraints and the positive inactive slacks would then
+give an actual nearby feasible branch point with smaller side, a contradiction.
+Finite Farkas duality therefore gives multipliers on the active rows satisfying
+
+$$
+\lambda_r\ge0,\qquad e_L=\sum_r\lambda_r\nabla g_r.
+$$
+
+This identity includes centre balance and all seventeen angular equations
+$\sum_r\lambda_r\partial_{\theta_i}g_r=0$. In the unshifted container $[0,L]^2$, only
+right and top containment rows have an $L$ coefficient, equal to one.
+Consequently the sum of their multipliers is exactly one.
+If desired, a conic linear-dependence reduction retains at most 52 nonzero row
+multipliers.
+Multiple retained rows may belong to one square pair; this is not a count of
+distinct contacts.
+
+The quantifier is branch-specific: every containing branch has some such multipliers,
+which may differ between branches.
+Zero multipliers are permitted.
+At a degenerate vertex contact, a selected SAT axis can have active corner rows whose
+projected corners lie outside the owner’s finite face.
+Their derivatives are valid branch constraints, but need not describe forces applied at
+a shared physical contact point.
+Therefore this argument does not justify positive weights on every contact, a common
+multiplier vector for all branches, or planar stress pruning.
+The preceding planar active-basis argument preserves row span and must not silently be
+promoted to a conic or angular-stationarity claim.
+
+A future exact consumer would need a complete branch and orientation cover, the actual
+corner-slack gradients, nonnegative multipliers and complementarity with the active
+rows. Excluding that necessary system would exclude normalized counterexamples.
+The completed coarse-rank test did not check these orientation or right-hand-side
+conditions. Their added coupling is a reason to consider this architecture after the
+current certificate-intake work, not evidence that its search is small or that a global
+proof is imminent.
 
 These proposals do not estimate the time to complete the n17 theorem.
 The current evidence supports bounded decisions between mathematical approaches; it does

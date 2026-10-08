@@ -1140,6 +1140,18 @@ wider centre cases; additional progress is measured from the union of surviving 
   No global optimality, capture or automatic census admission; refusal/resource stop
   unresolved. No denser window search on unchanged miss.
 
+- **H-317 — SciPy-free Joint-Certificate Candidate Relevance.** Complete exact named-D4
+  subset projection for BOTH C1/C2 against accepted4683 currentorbits/36768states, with
+  separate95distance-two accounting, orbit-size weighting and deduplicatedunion/overlap.
+  Fresh completepayload/custody mustmatch.
+  Primary anypositive candidate coverage in the currentordinary residue selects a joint
+  FULL-BB replay candidate; allzero retires these packages for this residue.
+  Coverage is metadata potential only, NEVER an exclusion, source-domain theorem,
+  fulltree verification or ledgeradmission.
+  Explicitmissing scope joins remain unverified; missing B/frame headerfields can be
+  discharged by a later proper standingverifier source convention.
+  No SciPy/censusregeneration and no upstreamtimingforecast.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

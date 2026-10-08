@@ -315,8 +315,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 21 tentative; 24 in progress |
 | Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 250 | 68 confirmed; 46 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 237 | 88 accepted; 51 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 251 | 68 confirmed; 47 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 238 | 88 accepted; 52 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 116 | 116 registered, 86 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -602,6 +602,7 @@ case or experiment separately.
 | [Case-preserving owned propagation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/README.md) | typed session record | record | retained | — |
 | [Envelope representation discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/README.md) | typed session record | record | retained | — |
 | [Same-core guarded clauses](packing/campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/README.md) | typed session record | record | retained | — |
+| [Four-corner n11 cardinality relaxation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/README.md) | typed session record | record | retained | — |
 | [Two Closed Centre Children](packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md) | typed session record | record | retained | — |
 | [n17 Issue Coordination and Certificate Intake](docs/project/reviews/review-2026-10-07-n17-issue-coordination.md) | dated review record | record | retained | — |
 | [Exact Replay Stage Attribution](packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md) | typed session record | record | retained | — |
@@ -5900,7 +5901,8 @@ round that names the hypothesis, control roles included.
 | [H-313](packing/campaign/hypotheses/H-313-case-preserving-owned-propagation.md) | refuted | One recovery and collective pass per accepted closed case | 1 | Complete combined miss; verified lower-x owner6 secondary1/64 shrink; both cases open |
 | [H-314](packing/campaign/hypotheses/H-314-n11-envelope-representation.md) | unresolved | Wall-coupled upper and optimistic lower whole-cell envelopes | 1 | Incomplete at wall ceiling; no certificate or architecture verdict |
 | [H-315](packing/campaign/hypotheses/H-315-owned-core-guarded-clause.md) | confirmed | Same-core exact guarded clauses and endpoint disjointness | 1 | Fresh source-defined clearance checks pass; historical sign error retained explicitly |
-| [H-316](packing/campaign/hypotheses/H-316-n11-corner-cardinality.md) | running | Correlated four-corner n11 cardinality | 1 | Prospective; complete 95-state accounting and endpoint calibration required |
+| [H-316](packing/campaign/hypotheses/H-316-n11-corner-cardinality.md) | refuted | Correlated four-corner n11 cardinality | 1 | Complete method miss: all95 survive;216 classifications; no ordinary obstruction |
+| [H-317](packing/campaign/hypotheses/H-317-subpattern-relevance.md) | running | SciPy-free joint-certificate candidate relevance | 1 | Prospective exact named-D4 subset projection; potential coverage is not admission |
 
 ### Confirmed
 
@@ -6245,9 +6247,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 237 rounds registered in `series-000`.
+There are 238 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5817.7 wall-minutes.
+They record 2512.1 agent-minutes and 5819.2 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6525,7 +6527,8 @@ archive beside it.
 | [exp-305](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-305-h-313-case-preserving-owned-propagation.md) | 17 | target | H-313 | Simultaneous recovery in each closed regional case | Combined additional loss0; lower-x owner6 shrinks1/64 to[3/8,31/64], upper unchanged | rejected |
 | [exp-306](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-306-h-314-n11-envelope-representation.md) | 17 | target | H-314 | All 95 states, two 576-window envelope scans | Construction stopped at 120s; no certificate or replay | unresolved |
 | [exp-307](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-307-h-315-owned-core-guarded-clause.md) | 17 | target | H-315 | Same-core guarded clauses with exact old-box and endpoint checks | Fresh 64 nonnegative-slack minima pass; historical shorthand sign error retained | accepted |
-| [exp-308](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-308-h-316-n11-corner-cardinality.md) | 17 | target | H-316 | Correlated four-corner n11 cardinality across all 95 states | Prospective; endpoint survival and fresh reconstruction required | in-progress |
+| [exp-308](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-308-h-316-n11-corner-cardinality.md) | 17 | target | H-316 | Correlated four-corner n11 cardinality across all95 states | Complete fresh method miss;95 survivors,0 obstructions; endpoint retained | rejected |
+| [exp-309](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-309-h-317-subpattern-relevance.md) | 17 | target | H-317 | Exact named-D4 subset projection of C1/C2 on the accepted current residue | Prospective metadata relevance only; no proof or admission | in-progress |
 
 ### Cost and provenance
 
@@ -6767,11 +6770,12 @@ archive beside it.
 | exp-305 | Construction180s/fresh180s inside360s;4GiB sampled per live process | 97.158146s | — | criterion | Verified per-case progress but no combined gain; no per-case fixed-point claim |
 | exp-306 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 120.137277s | — | guard | Incomplete construction; no certificate or architecture verdict |
 | exp-307 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 10.257994s | — | criterion | Source-defined finite pass; no added loss or global admission |
-| exp-308 | Construction60s/fresh60s inside120s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
+| exp-308 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 89.487275s | — | criterion | Complete fresh method miss; all95 survive; no census or bound change |
+| exp-309 | Construction30s/fresh30s inside60s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
 
-### What the 237 rounds jointly establish
+### What the 238 rounds jointly establish
 
-The 237 rounds use 2512.1 agent-minutes and 5817.7 wall-minutes under the campaign’s
+The 238 rounds use 2512.1 agent-minutes and 5819.2 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded
