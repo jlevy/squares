@@ -1,6 +1,7 @@
 // A single layout read after load and font settlement, followed by scroll sampling.
 () => {
-  /** @type {{supported: boolean, cls: number, lcpMs: number, longestTaskMs: number, blockingMs: number, shifts: number} | undefined} */
+  const sampleStart = performance.now();
+  /** @type {{supported: boolean, cls: number, lcpMs: number, longestTaskMs: number, blockingMs: number, shifts: number, readabilitySamples?: {startTime: number, durationMs: number}[]} | undefined} */
   const timing = Reflect.get(window, "siteRenderingMeasure");
   const math = [...document.querySelectorAll(".kpress-math, .tex, .tex-d")].filter(
     (element) => !element.parentElement?.closest(".kpress-math, .tex, .tex-d"),
@@ -40,7 +41,7 @@
   const article = [...document.querySelectorAll("article, main")].find(visible);
   const h1 = [...document.querySelectorAll("h1")].find(visible);
   const figures = [...document.querySelectorAll("main img, article img")];
-  return {
+  const report = {
     ...timing,
     // biome-ignore lint/nursery/useDomNodeTextContent: the gate measures rendered readable text, excluding hidden content.
     contentChars: (article instanceof HTMLElement ? article.innerText : "").trim().length ?? 0,
@@ -53,4 +54,12 @@
     ).length,
     pending: document.querySelectorAll("[data-kpress-math-pending]").length,
   };
+  // This identifies work performed by the checker without removing it from native
+  // timing. An overlap can then be inspected instead of guessing from one scalar.
+  const sample = { startTime: sampleStart, durationMs: performance.now() - sampleStart };
+  const samples = timing?.readabilitySamples;
+  if (samples && samples.length < 100) {
+    samples.push(sample);
+  }
+  return report;
 };

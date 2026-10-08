@@ -204,7 +204,7 @@ import statistics
 import sys
 from collections.abc import Iterable, Sequence
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from devtools import render_overview
 from devtools.preview_site import (
@@ -220,6 +220,9 @@ from devtools.preview_site import (
 )
 from devtools.render_n11_lower_bounds_explainer import MATH_WRAPPERS
 from sqpack.probes import applied, probe
+
+if TYPE_CHECKING:
+    from playwright.sync_api import Page
 
 PROBES = Path(__file__).resolve().parent / "probes"
 _INSTRUMENT = applied(probe(PROBES, "measure_site_pages/instrument"))
@@ -952,6 +955,13 @@ def _host_faces(faces: Iterable[str]) -> str:
     return ", ".join(sorted({face for face in faces if face.endswith(HOST)}))
 
 
+def read_glyphs(page: Page, *, tex: Sequence[str] = ()) -> dict[str, Any]:
+    """Read the owned glyph probe on an already loaded page without extra measurement."""
+    return page.evaluate(
+        GLYPHS, {"wrappers": MATH_WRAPPERS, "mark": GLYPH_MARK, "tex": list(tex)}
+    )
+
+
 def measure_glyphs(
     base: str,
     pages: Sequence[str],
@@ -1014,9 +1024,7 @@ def measure_glyphs(
             if style:
                 page.add_style_tag(content=style)
                 page.wait_for_timeout(200)
-            found: dict[str, Any] = page.evaluate(
-                GLYPHS, {"wrappers": MATH_WRAPPERS, "mark": GLYPH_MARK, "tex": list(tex)}
-            )
+            found = read_glyphs(page, tex=tex)
             session = page.context.new_cdp_session(page)
             session.send("DOM.enable")
             session.send("CSS.enable")

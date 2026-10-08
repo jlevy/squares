@@ -676,10 +676,7 @@ def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
                     f'<style>@font-face {{font-family: "{family}"; src: {src};'
                     f" font-weight: {weight}; font-style: {style};}}{extra}</style>"
                 )
-                found = page.evaluate(
-                    measure.GLYPHS,
-                    {"wrappers": measure.MATH_WRAPPERS, "mark": measure.GLYPH_MARK},
-                )
+                found = measure.read_glyphs(page)
                 faces = found["faces"]
                 assert faces, (family, src)
                 assert all(face["optional_local"] is optional for face in faces), faces

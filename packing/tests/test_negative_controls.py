@@ -1635,22 +1635,32 @@ print('all 27 complete inputs and nine proof leaves admitted')
     )
 
 
-def test_second_squish_consumers_survive_native_worker_boundaries(
-    control_snapshot: tuple[Path, set[Path]],
-) -> None:
-    """Exercise fresh house and registry admissions and both linked-output guards."""
-    tree, _copied = control_snapshot
-    _run_second_squish_native_program(
-        tree,
-        """
-from devtools import build_known_best_atlas as atlas
-from devtools import check_results
+@pytest.mark.parametrize(
+    "program",
+    [
+        pytest.param(
+            """
 from devtools import squish_second_update_house_links as house
 assert tuple(house.check_houses()) == packet.NUMBERS
+print('nine house reads passed')
+""",
+            id="house-reads",
+        ),
+        pytest.param(
+            """
+from devtools import check_results
+from devtools import squish_second_update_house_links as house
 for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
     relative = path.relative_to(packet.REPO).as_posix()
     assert check_results.repository_file_problem(relative) is None
 assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+print('registry acceptance and refusal passed')
+""",
+            id="registry-routes",
+        ),
+        pytest.param(
+            """
+from devtools import build_known_best_atlas as atlas
 for producer in (atlas.update, lambda: atlas.update_selected([88])):
     try:
         producer()
@@ -1658,9 +1668,18 @@ for producer in (atlas.update, lambda: atlas.update_selected([88])):
         assert 'output escapes' in str(error)
     else:
         raise AssertionError('producer accepted a linked output')
-print('nine house reads, registry routes and both output guards passed')
+print('both producer output guards passed')
 """,
-    )
+            id="producer-guards",
+        ),
+    ],
+)
+def test_second_squish_consumers_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]], program: str
+) -> None:
+    """Keep each consumer contract in its own fresh native worker."""
+    tree, _copied = control_snapshot
+    _run_second_squish_native_program(tree, program)
 
 
 @pytest.mark.parametrize(
