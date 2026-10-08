@@ -5,7 +5,7 @@ title: Reconcile resumed intake ledger and dated source follow-ups
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T20:32:09.852Z
-updated_at: 2026-10-08T23:40:46.173Z
+updated_at: 2026-10-08T23:41:56.765Z
 started_at: 2026-10-08T20:33:04.467Z
 ---
 Add missing425/438 mappings and445 engineering disposition; append all observed maintainer replies and dated375 source updates without changing older result scopes or claiming new replay. Preserve all prior rows and prefixes, give newly identified batch certificate custody an explicit child owner, and validate the enforced request contract on the current intake top.
@@ -34,3 +34,9 @@ Published latest-main continuation: all11 formal430 intake branches contain orig
 Visible user authorization2026-10-08: "can you delegate to subagents to resolve all remaining issues from the reviews, then merge everyting as soon as its ready". Session merge authorization now covers this intake task and its dependency stacks; coordinator alone checks fresh policy/discovery/exact-head final required gates and formal stack membership before merge. No bypass/admin/pending-check auto merge. Prior stack429 landed with a normal two-parent merge commit; use that project stack precedent. Remaining reviewLowA1 andLowE1 will be fixed on owning434 then cascaded, separately from new375historical packet child; all changedheads require current appropriateCI/review binding.
 
 2026-10-08 23:09 UTC merge-authorized continuation: user explicitly requested subagents resolve all remaining review issues, then merge everything as soon as ready; session merge consent covers intake/dependency stacks. Eleven430 open layers remain drafts/unmerged;44 exact-head four-role Astra successor reviews published.434 staged four-file review fixes and telemetry independently accepted; bounded4concurrent/serial native timing controls both pass locally, hosted causality unproven. Approved same-Step functional parallel/timing serial split preserving all four parameter nodes, REQUIRE_CHROMIUM, metrics/ceilings/census.439 and440 full checkpoints fail only site-table native timing (439 alsoCLS); raw immutable logs retained. Fresh main91ca unchanged.403 foundation Astra found B1 pin-write guard, D1 linear zero threshold, D2 serialized interval corruption;435 existing D1/D2 fixes belong down403. Fixed-selector complete-input gzip design preserves data; foreign pruning heads not credited as under-cap.375 independent43-path review +Lowwording repaired, normalhook data78fdc830 +pin a3fcd48a committed clean; futureparent bridge/publication/gates pending. No merges yet.
+
+2026-10-08 final review-fix continuation:434sourcee0792f403b8c47a68a7f4f34e4936155a2acf60f +separatepin49903c6d00a7085c65e84726f8074e78150274e1 pushed ordinarily. Four exact-head Astra I-L formalreviews5464095413/5464095911/5464096436/5464096825 published/readbackPASS; A1/E1 fixeddisposition6071168740 andcurrentheadbodypublished. Originalfour timingnodes and900s shareddeadline preserved, composedbrowserstep191PASS6emptyparams+4serialPASS109.61s;15deadlinecontrols6.62s,23releasecontrols3.11s; scientific/protectedinputsunchanged. Sourcecap200531324/201326592. CurrentPackingrequired37859894227 PASS; Pages37859894381 pages-required113595544158 PASS; full37860239058running (noqualifiedfullpassyet). Origin/main freshlyfetched91ca9b824unchanged, noGitHubmerges.
+
+Externalspud-ext1filled32MiB (writesENOSPC), later51MiB restoredtinywrites only. Allheavybuilds/clones/tests/hooks/cascadepaused; useraskedtofreeexternalTrashspaceorprovidemountedexternalvolume. Trashnotemptied; itsonlystagingdoesnotfreephysicalblocks.439releaseconflict fullfile/stageblobs preserved, ownpinrestored/staged, mergeuncommitted.459oneCSScontracttestcorrection/460singlemissing6043191866sourcecard pendingearliestlayers. Old448fulljob113569389039 failedactual12s per-callguard14.01s house-reads; explicitP1think-utky, exactcloneprofilependinghealthyexternalstorage. Allremainingoldfullfailures441442443449450 timingonly;459overviewcontract; nofailuresrelabeledpasses.
+
+Catalogue403independentproposal finalstagedtree566978fa85162ed58665ff8e40899969feb23a96 includesexactpinwriteguard/linearroot/fullcentre/supportingtestedfixes andbyte-identicalgeneratedgzip storage. Completeprotectedinputbridge7996paths; live=Git197766060/201326592,3560532headroom; sourcepatchnotcommitted/pushed, fullrecordsFAILSQUISHENOSPC50.46s/300UNARMED/allotherchecksPASS. Unique127192Blogsmovedoutofdisposablescratch. Currentforeign4036a9/435760 selectorsnumericallyPASSafter312historicalomissions; contraryearlierconservativewording, noselectorfreezeuserrequirement or concretelostdecidinginputfound. Completeinputgzip remainsstrongerpreservationscope.435currentownPagesC1high:1011publicationcontractfailures (1005unregisteredoutputs,completeHTML5016486>2000000,4startupinline>4096,unclassifiedJS); Astra/Guptaread-onlydesigninflight. Foreignownerrefs/claimsuntouched. Source375a3fcd48cleancommittedsource-onlyV0C0S1 acceptedfourroles; final460bridge/createformalstackPR/CIpending. Allunadmittedbatches/ownerholdsexplicitremainopen.
