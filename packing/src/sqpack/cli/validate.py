@@ -247,8 +247,14 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: quick lane ignores them: in a shard, with no browser, they could only skip, which is
 #: what they did on every pull request until that run.
 SITE_LAYOUT_TESTS = (
+    "tests/test_site_case_records.py",
+    "tests/test_site_math_faces.py",
+    "tests/test_site_column_measurement.py",
+    "tests/test_site_result_filters.py",
     "tests/test_site_result_columns.py",
     "tests/test_site_frontier_table.py",
+    "tests/test_site_rendering.py",
+    "tests/test_site_math_preferences.py",
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
@@ -1929,6 +1935,14 @@ def _browser_floor_liveness(context: Context) -> str:
             "no:cacheprovider",
             BROWSER_FLOOR_LIVENESS_TESTS,
         ),
+    )
+
+
+def _site_url_registry(context: Context) -> str:
+    """Keep published addresses and semantic record identities append-only."""
+    return _run(
+        context,
+        (sys.executable, "-m", "devtools.site_urls", "--check", "--history-ref", "origin/main"),
     )
 
 
@@ -3931,6 +3945,9 @@ _WORKBENCH_INPUTS = (
     "packing/devtools/render_n11_lower_bounds_explainer.py",
     # The site's navigation bar the published page carries, from the shared partial.
     "packing/devtools/render_overview.py",
+    # The published workbench bundles share the site's asset builder.
+    "packing/devtools/site_assets.py",
+    "packing/devtools/probes/site_assets/*",
     "packing/devtools/templates/site-nav.html",
     "packing/devtools/templates/site-nav.css",
     "packing/devtools/templates/paper-type.css",
@@ -4167,6 +4184,13 @@ STEPS: tuple[Step, ...] = (
     # tests, 30s of it rendering three pages once each; 24.16s hosted, 74 passed, in a
     # frontend wall of 93.16s (run 36967092452). Not in the quick lane, whose shards
     # install no browser.
+    Step(
+        "published URL registry and historical compatibility",
+        _site_url_registry,
+        fast=True,
+        records=True,
+        touches=(*_SITE_INPUTS, "packing/site-urls.yaml", "docs/project/site-urls.md"),
+    ),
     Step(
         "site table layout in Chromium",
         _site_layout_tests,

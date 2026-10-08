@@ -1,27 +1,32 @@
-// An init script: note the state of the atlas at the moment its box of tiles is first put
-// in the page, which is before the browser has drawn a tile. A page opened on
-// `?atlas=triangle` must already be in the triangle then, with its tiles arranged, or it
-// would show the grid first and then the triangle; and one opened on `?size=large` must
-// already be at that size, its tiles arranged for it. The notes are left on
-// `atlasViewsSeen` for `seen` to return.
+// Note the query-selected geometry once the static document is parsed. The separate
+// initial probe withholds atlas programs to prove the stylesheet places it directly.
 () => {
-  /** @type {AtlasViewSeen[]} */
-  const seen = [];
-  globalThis.atlasViewsSeen = seen;
-  new MutationObserver((records) => {
-    for (const record of records) {
-      for (const node of record.addedNodes) {
-        if (node instanceof HTMLElement && node.classList.contains("site-atlas-cells")) {
-          const block = node.closest("[data-atlas-grid]");
-          seen.push({
-            view: block instanceof HTMLElement ? (block.dataset.atlasView ?? null) : null,
-            size: block instanceof HTMLElement ? (block.dataset.atlasSize ?? null) : null,
-            per_line: node.style.getPropertyValue("--site-atlas-per-line"),
-            tiles: node.querySelectorAll(".site-atlas-cell").length,
-            moving: document.getAnimations().length,
-          });
-        }
+  globalThis.atlasViewsSeen = [];
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+      const cells = document.querySelector(".site-atlas-cells");
+      if (!(cells instanceof HTMLElement)) {
+        return;
       }
-    }
-  }).observe(document, { childList: true, subtree: true });
+      const root = document.documentElement;
+      globalThis.atlasViewsSeen?.push({
+        view: root.dataset.siteAtlasView === "triangle" ? "triangle" : "grid",
+        size: root.dataset.siteAtlasSize ?? "medium",
+        per_line: String(getComputedStyle(cells).gridTemplateColumns.split(/\s+/).length),
+        tiles: [...cells.querySelectorAll(".site-atlas-cell")].filter(
+          (tile) => tile.getClientRects().length > 0,
+        ).length,
+        moving: document
+          .getAnimations()
+          .filter(
+            (animation) =>
+              !(animation instanceof CSSTransition) &&
+              animation.effect instanceof KeyframeEffect &&
+              animation.effect.target?.matches(".site-atlas-cell") === true,
+          ).length,
+      });
+    },
+    { once: true },
+  );
 };

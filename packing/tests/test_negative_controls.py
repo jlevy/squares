@@ -162,6 +162,61 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
+def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The bounded C8 prune removes outputs while preserving real consumer inputs."""
+    tree, copied_targets = control_snapshot
+    assert controls.HISTORICAL_SNAPSHOT_OUTPUTS <= PRUNE
+    rescued = (
+        "campaign/explorations/X049-families-data/regularized/run.txt",
+        "campaign/explorations/X049-families-data/regularized/shades.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/README.md",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/full-ef8a2e72.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/fast-cbe9fd76.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/slow-cbe9fd76.txt",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/negative-cbe9fd76.txt",
+    )
+    for relative in rescued:
+        source = ROOT / relative
+        assert source.relative_to(controls.REPO) in copied_targets
+        assert (tree / HERE / relative).read_bytes() == source.read_bytes()
+    omitted = (
+        "benchmarks/results/reachable-walker-2026-09-30/comparison.json",
+        "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
+        "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
+        "campaign/explorations/X048-session-177-cached-collision/receipts/profile-packet.json",
+        "campaign/explorations/X048-session-178-full-core-ablation/receipts/endpoint-packet.json",
+        "campaign/explorations/X049-families-data/regularized/n-268-regularized.yaml.gz",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint/slow-cbe9fd76/step-21ffbec363bd41dfa16a9e479105c249.json",
+    )
+    spec = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for relative in omitted:
+        source = ROOT / relative
+        assert source.is_file(), "evidence must remain in the source checkout"
+        assert source.relative_to(controls.REPO) not in copied_targets
+        assert not (tree / HERE / relative).exists()
+        for control in spec["controls"]:
+            assert (ROOT / control["file"]).resolve() != source
+            assert relative not in control["run"]
+    for relative in (
+        "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89-source.json",
+        "campaign/agent-sessions/session-105-validation/push-0e766bfd-source.json",
+        "campaign/explorations/X048-session-177-cached-collision/receipts/J-fixed-tuple-certificate.json",
+        "campaign/explorations/X048-session-178-full-core-ablation/receipts/B-ablation-packet.json",
+        "campaign/explorations/X049-families-data/family-census.json",
+        "campaign/explorations/X049-families-data/contact-shade-census.json",
+        "atlas/known-best/regularized/index.json",
+        "witnesses/known-best/n-268.yaml",
+        "devtools/probe_n17_cached_collision.py",
+        "devtools/probe_n17_full_core_ablation.py",
+        "devtools/regularize_axis_components.py",
+    ):
+        assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
+    assert SNAPSHOT_MAX_BYTES == 192 * 1024 * 1024
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
 def test_oversized_snapshot_is_refused_before_cloning(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -937,6 +992,220 @@ def test_results_register_dependencies_survive_snapshot_pruning() -> None:
     assert "resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf" in retained
 
 
+def test_snapshot_inventory_preserves_copy_count_and_cache_exclusions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    root = tmp_path / "packing"
+    root.mkdir()
+    ordinary = root / "source.py"
+    ordinary.write_bytes(b"source")
+    omitted = root / "old.log"
+    omitted.write_bytes(b"historical output")
+    (root / "source-link.py").symlink_to(ordinary)
+    cache = root / "nested/__pycache__"
+    cache.mkdir(parents=True)
+    (cache / "ignored.pyc").write_bytes(b"not source")
+    docs = tmp_path / "docs"
+    docs.mkdir()
+    document = docs / "notes.md"
+    document.write_bytes(b"notes")
+    (docs / "__pycache__").mkdir()
+    (docs / "__pycache__/ignored.pyc").write_bytes(b"not source")
+    monkeypatch.setattr(controls, "ROOT", root)
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (omitted,))
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", lambda: [omitted])
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (docs,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset((omitted,)))
+    assert controls.snapshot_source_paths() == [omitted, document, ordinary]
+    assert controls.snapshot_source_bytes() == omitted.stat().st_size + 11
+    assert controls.snapshot_duplicate_copy_bytes() == omitted.stat().st_size
+
+
+@pytest.fixture
+def snapshot_audit_fixture(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[Path, Path]:
+    root = tmp_path / "packing"
+    old = root / "old"
+    old.mkdir(parents=True)
+    generated = old / "generated.bin"
+    generated.write_bytes(b"g" * 10)
+    linked = old / "linked.log"
+    linked.write_bytes(b"l" * 14)
+    registered = old / "result.bin"
+    registered.write_bytes(b"r" * 20)
+    core = root / "source.py"
+    core.write_bytes(b"s" * 7)
+    document = tmp_path / "notes.md"
+    document.write_text("[evidence](packing/old/linked.log)\n")
+    register = root / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text("results:\n- artifacts: [packing/old/result.bin]\n")
+    spec = root / "controls.yaml"
+    spec.write_text(
+        "controls:\n"
+        "- name: an exact target consumer\n"
+        "  file: old/generated.bin\n"
+        "  run: python3 -m devtools.example\n"
+        "- name: an exact command consumer\n"
+        "  file: source.py\n"
+        "  run: python3 -m devtools.example old/linked.log\n"
+    )
+    monkeypatch.setattr(controls, "ROOT", root)
+    monkeypatch.setattr(controls, "REPO", tmp_path)
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", ())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
+    monkeypatch.setattr(
+        controls, "snapshot_source_paths", lambda: [generated, linked, registered, core]
+    )
+    return old, spec
+
+
+def test_snapshot_audit_counts_rescue_and_overlapping_candidates_once(
+    snapshot_audit_fixture: tuple[Path, Path],
+) -> None:
+    old, spec = snapshot_audit_fixture
+    report = controls.snapshot_audit([old, old / "generated.bin"], spec_path=spec)
+    assert report["source_bytes"] == 51
+    assert report["copy_operations"] == 4
+    assert report["candidate_net_saved_bytes"] == 10
+    assert report["candidate_source_bytes"] == 41
+    candidates = report["candidates"]
+    assert isinstance(candidates, list)
+    candidate = candidates[0]
+    assert candidate["currently_copied_bytes"] == 44
+    assert candidate["net_saved_bytes"] == 10
+    assert candidate["inline_rescue"] == [{"path": "packing/old/linked.log", "bytes": 14}]
+    assert candidate["result_rescue"] == [{"path": "packing/old/result.bin", "bytes": 20}]
+    assert [row["name"] for row in candidate["registered_mentions"]] == [
+        "an exact target consumer",
+        "an exact command consumer",
+    ]
+
+
+def test_snapshot_audit_rejects_missing_and_escaping_candidates(
+    snapshot_audit_fixture: tuple[Path, Path],
+    tmp_path: Path,
+) -> None:
+    old, spec = snapshot_audit_fixture
+    for candidate in (old / "absent.bin", tmp_path.parent):
+        with pytest.raises(ValueError, match="must exist inside the repository"):
+            controls.snapshot_audit([candidate], spec_path=spec)
+
+
+@pytest.mark.parametrize(
+    ("route", "selection"),
+    [
+        ("root_files", "file"),
+        ("root_files", "parent"),
+        ("COPY_SEPARATELY", "file"),
+        ("COPY_SEPARATELY", "parent"),
+        ("ROOT_DOCUMENTS", "file"),
+        ("ROOT_DOCUMENTS", "parent"),
+        ("ROOT_DOCUMENTS", "directory"),
+        ("ROOT_DOCUMENTS", "descendant"),
+    ],
+)
+def test_snapshot_audit_refuses_unconditional_copy_candidates(
+    snapshot_audit_fixture: tuple[Path, Path],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    *,
+    route: str,
+    selection: str,
+) -> None:
+    _old, spec = snapshot_audit_fixture
+    directory = tmp_path / "always-copied"
+    directory.mkdir()
+    copied = directory / "source.txt"
+    copied.write_bytes(b"unconditional source")
+    target = directory if selection in ("directory", "descendant") else copied
+    candidate = directory if selection in ("directory", "parent") else copied
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    if route == "root_files":
+        monkeypatch.setattr(controls, "root_files", lambda: (target,))
+    else:
+        monkeypatch.setattr(controls, route, (target,))
+    # The actual roster contains one unique unconditional destination.
+    monkeypatch.setattr(controls, "snapshot_source_paths", lambda: [copied])
+    monkeypatch.setattr(
+        controls, "clone_tree", lambda _tree: pytest.fail("audit copied source")
+    )
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args: pytest.fail("audit ran a control")
+    )
+    with pytest.raises(ValueError, match="copies regardless of PRUNE") as error:
+        controls.snapshot_audit([candidate], spec_path=spec)
+    assert route in str(error.value)
+    assert candidate.relative_to(tmp_path).as_posix() in str(error.value)
+    assert target.relative_to(tmp_path).as_posix() in str(error.value)
+    with pytest.raises(SystemExit, match="2"):
+        controls.main([str(spec), "--audit-snapshot", "--prune-candidate", str(candidate)])
+    output = capsys.readouterr()
+    assert output.out == ""
+    assert "copies regardless of PRUNE" in output.err
+    assert route in output.err
+
+
+def test_snapshot_audit_cli_never_clones_or_runs_a_control(
+    snapshot_audit_fixture: tuple[Path, Path],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    old, spec = snapshot_audit_fixture
+    monkeypatch.setattr(
+        controls, "clone_tree", lambda _tree: pytest.fail("audit copied source")
+    )
+    monkeypatch.setattr(
+        controls, "run_control_command", lambda *_args: pytest.fail("audit ran a control")
+    )
+    assert controls.main([str(spec), "--audit-snapshot", "--prune-candidate", str(old)]) == 0
+    report = json.loads(capsys.readouterr().out)
+    assert report["source_bytes"] == 51
+    assert report["candidate_source_bytes"] == 41
+    with pytest.raises(SystemExit, match="2"):
+        controls.main([str(spec), "--prune-candidate", str(old)])
+
+
+def test_tiny_snapshot_prune_rescues_linked_and_registered_files_as_private_copies(
+    snapshot_audit_fixture: tuple[Path, Path],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old, _spec = snapshot_audit_fixture
+    monkeypatch.setattr(controls, "HERE", Path("packing"))
+    monkeypatch.setattr(controls, "PRUNE", frozenset((old,)))
+    monkeypatch.setattr(controls, "DESCEND", frozenset(old.parents))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (old,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (tmp_path / "notes.md",))
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    destination = tmp_path / "worker"
+    controls.clone_tree(destination)
+    retained = tracked_files(destination, "*")
+    assert retained is not None
+    for name in ("linked.log", "result.bin"):
+        landing = destination / "packing/old" / name
+        assert landing.read_bytes() == (old / name).read_bytes()
+        assert not landing.is_symlink()
+        assert landing in retained
+    assert not (destination / "packing/old/generated.bin").exists()
+    assert (old / "generated.bin").read_bytes() == b"g" * 10
+    (destination / "packing/old/result.bin").write_bytes(b"mutated")
+    assert (old / "result.bin").read_bytes() == b"r" * 20
+    # A future inline citation brings an omitted output back without changing PRUNE.
+    (tmp_path / "notes.md").write_text("[new evidence](packing/old/generated.bin)\n")
+    assert old / "generated.bin" in controls.snapshot_pruned_targets()
+
+
 def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -1274,7 +1543,7 @@ def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
 def test_squish_complete_replay_survives_worker_custody_and_private_controls(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
-    """Linked proofs remain readable while mutations use copied admission records."""
+    """Complete replay reads linked proofs and retains private admission records."""
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
 
     tree, copied = control_snapshot
@@ -1298,29 +1567,18 @@ def test_squish_complete_replay_survives_worker_custody_and_private_controls(
         assert relative in copied
         assert not (tree / relative).is_symlink()
         assert (tree / relative).read_bytes() == source.read_bytes()
-    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
-    selected = [c for c in specification["controls"] if c["name"].startswith("SQUISH update -")]
-    assert len(selected) == 2
-    env = controls.control_environment(tree, tree / "squish-baseline-pycache")
-    baseline = subprocess.run(
-        [sys.executable, "-m", "devtools.squish_followup_packets", "check-certification"],
-        cwd=work,
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-        timeout=30,
-    )
+    with tempfile.TemporaryDirectory(prefix="squish-baseline-pycache-", dir=tree) as pycache:
+        env = controls.control_environment(tree, Path(pycache))
+        baseline = subprocess.run(
+            [sys.executable, "-m", "devtools.squish_followup_packets", "check-certification"],
+            cwd=work,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+        )
     assert baseline.returncode == 0, baseline.stdout + baseline.stderr
-    for control in selected:
-        target = resolve_control_target(control["file"], tree=tree, work=work)
-        before = target.read_bytes()
-        source = ROOT / control["file"]
-        source_before = source.read_bytes()
-        passed, detail = controls.run_one(control, tree)
-        assert passed, detail
-        assert target.read_bytes() == before
-        assert source.read_bytes() == source_before
     for name in ("fast-cpu4-bdc28e89", "fast-native-bdc28e89"):
         source = ROOT / f"campaign/agent-sessions/session-105-validation/{name}.json"
         assert source in PRUNE
@@ -1332,6 +1590,33 @@ def test_squish_complete_replay_survives_worker_custody_and_private_controls(
         ).read_bytes() == identity.read_bytes()
     session = ROOT / "campaign/agent-sessions/session-105-stromquist-n26-verification.md"
     assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def _run_second_squish_native_program(tree: Path, program: str) -> None:
+    baseline_program = (
+        """
+from devtools import squish_second_update_confirmation as packet
+def forbidden(*args, **kwargs):
+    raise AssertionError('native admission must not execute a geometric decider')
+packet.decide = packet.original.decide = forbidden
+packet.original.exact_verify = packet.original.independent.check = forbidden
+"""
+        + program
+    )
+    with tempfile.TemporaryDirectory(
+        prefix="second-squish-baseline-pycache-", dir=tree
+    ) as pycache:
+        environment = controls.control_environment(tree, Path(pycache))
+        baseline = subprocess.run(
+            [sys.executable, "-c", baseline_program],
+            cwd=tree / HERE,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+        )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
 
 
 @pytest.mark.slow
@@ -1426,6 +1711,103 @@ print('all 27 complete inputs admitted; eight current and one historical house r
         passed, detail = controls.run_one(control, tree)
         assert passed, detail
         assert source.read_bytes() == original
+
+
+@pytest.mark.parametrize(
+    "program",
+    [
+        pytest.param(
+            """
+from devtools import squish_second_update_house_links as house
+assert tuple(house.check_houses()) == packet.NUMBERS
+print('nine house reads passed')
+""",
+            id="house-reads",
+        ),
+        pytest.param(
+            """
+from devtools import check_results
+from devtools import squish_second_update_house_links as house
+for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
+    relative = path.relative_to(packet.REPO).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+print('registry acceptance and refusal passed')
+""",
+            id="registry-routes",
+        ),
+        pytest.param(
+            """
+from devtools import build_known_best_atlas as atlas
+for producer in (atlas.update, lambda: atlas.update_selected([88])):
+    try:
+        producer()
+    except packet.original.PacketError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked output')
+print('both producer output guards passed')
+""",
+            id="producer-guards",
+        ),
+    ],
+)
+def test_second_squish_consumers_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]], program: str
+) -> None:
+    """Keep each consumer contract in its own fresh native worker."""
+    tree, _copied = control_snapshot
+    _run_second_squish_native_program(tree, program)
+
+
+@pytest.mark.parametrize(
+    ("prefix", "name"),
+    [
+        pytest.param(
+            "SQUISH update -",
+            "SQUISH update - a different source revision cannot inherit the reviewed replay",
+            id="first-source-revision",
+        ),
+        pytest.param(
+            "SQUISH update -",
+            "SQUISH update - an unsafe published decimal cannot inherit the exact bound",
+            id="first-unsafe-decimal",
+        ),
+        pytest.param(
+            "SQUISH second update -",
+            "SQUISH second update - a different revision cannot inherit the complete replay",
+            id="second-source-revision",
+        ),
+        pytest.param(
+            "SQUISH second update -",
+            (
+                "SQUISH second update - unchanged geometry with a wrong canonical "
+                "witness ID is refused"
+            ),
+            id="second-canonical-id",
+        ),
+    ],
+)
+def test_squish_private_mutation_is_detected_and_restored_in_native_worker(
+    control_snapshot: tuple[Path, set[Path]], prefix: str, name: str
+) -> None:
+    """Each registered fault runs in a fresh native process and restores its private target."""
+    tree, _copied = control_snapshot
+    work = tree / HERE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [c for c in specification["controls"] if c["name"].startswith(prefix)]
+    assert len(selected) == 2
+    matches = [control for control in selected if control["name"] == name]
+    assert len(matches) == 1
+    control = matches[0]
+    target = resolve_control_target(control["file"], tree=tree, work=work)
+    before = target.read_bytes()
+    source = ROOT / control["file"]
+    source_before = source.read_bytes()
+    passed, detail = controls.run_one(control, tree)
+    assert passed, detail
+    assert target.read_bytes() == before
+    assert source.read_bytes() == source_before
 
 
 @pytest.mark.parametrize(
