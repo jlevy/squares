@@ -3,15 +3,15 @@ type: is
 id: is-01m4c5mcdjx0zsmfwxzycd2ks9
 title: "n17: quantitatively lift the accepted 25-row point restriction to one closed region"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-07T21:52:06.576Z
-updated_at: 2026-10-07T21:52:06.576Z
+updated_at: 2026-10-08T00:14:04.526Z
 ---
 The accepted exp296 certificate removes25 complete owner18 (label11) closed rows,
 indices19–23 and33–52, under the fixed owner0 pose at tau=53/128.
