@@ -482,7 +482,7 @@ def _committed_composite_svg() -> str:
     return (ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8")
 
 
-#: The cases the retained `n = 1..100` poster prints as an exact value: the 39 of its
+#: The cases the retained `n = 1..100` poster prints as an exact value: the 45 of its
 #: drawing. A poster trails the data until the next version redraws it
 #: (`sqpack.release.COMPOSITES_MAY_TRAIL`), so when it is redrawn this pin fails and moves
 #: to `REBUILT_EQUALITIES`.
@@ -493,16 +493,16 @@ RETAINED_EQUALITIES = frozenset(
         *range(21, 26),
         *range(32, 37),
         *range(45, 50),
-        *range(62, 65),
-        *range(79, 82),
-        *range(98, 101),
+        *range(59, 65),
+        *range(77, 82),
+        *range(97, 101),
     }
 )
-#: What a rebuild from the current records prints: the poster's 39, the five cases
+#: What a rebuild from the current records prints: the same 45, including the five cases
 #: proved here on 2026-10-02 by replayed mixed covers, s(59) = s(60) = s(61) = 8 and
 #: s(77) = s(78) = 9, and s(97) = 10, proved on 2026-10-03 as the case k = 10 of T-064's
 #: s(k^2 - 3) = k, the one count up to 100 that family adds.
-REBUILT_EQUALITIES = RETAINED_EQUALITIES | {59, 60, 61, 77, 78, 97}
+REBUILT_EQUALITIES = RETAINED_EQUALITIES
 
 
 def _assert_current_composite_equalities(bounds: list[str], expected: frozenset[int]) -> None:
@@ -1184,26 +1184,25 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
     # The legend counts the poster's own 324 cases, not the corpus and not the figure's
-    # hundred. Read off the drawing: a badge's glyph is centred and a label is not, so
-    # the labels are the runs that carry no anchor.
+    # hundred. Read the labels by their feature; the poster aligns them at the right
+    # edge while the badge glyphs stay centred.
     legend = root.find(".//svg:g[@data-feature='evidence-legend']", SVG)
     assert legend is not None
     labels = [
-        node.text
-        for node in legend.findall("svg:text", SVG)
-        if node.attrib.get("text-anchor") is None
+        node.text for node in legend.findall("svg:text[@data-feature='legend-label']", SVG)
     ]
     assert labels == [
-        "proved optimal (63)",
-        "exact value known (269)",
-        "only known numerically (55)",
+        "proved optimal (77)",
+        "exact value known (287)",
+        "only known numerically (37)",
         "rigid (established here) (20)",
         "annotated rigid by the catalogue (2)",
-        "recent result, since Aug 2026 (27)",
+        "recent result, since Aug 2026 (297)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
     ]
-    # The published figure's legend is unmoved by any of it.
+    # The published figure keeps its original legend arrangement and counts its own
+    # hundred cases.
     figure_legend = ET.fromstring(_committed_composite_svg()).find(
         ".//svg:g[@data-feature='evidence-legend']", SVG
     )
@@ -1213,9 +1212,9 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         for node in figure_legend.findall("svg:text", SVG)
         if node.attrib.get("text-anchor") is None
     ][:5] == [
-        "proved optimal (39)",
-        "exact value known (95)",
-        "only known numerically (5)",
+        "proved optimal (45)",
+        "exact value known (96)",
+        "only known numerically (4)",
         "rigid (established here) (12)",
         "annotated rigid by the catalogue (2)",
     ]
@@ -1433,15 +1432,23 @@ def test_only_the_bound_numeral_carries_the_new_result_accent() -> None:
     drawn = [
         entry
         for entry in record["figure"]["entries"]
-        if entry["n"] <= 100 and entry["lower"]["recent_result"] and entry["lower"]["shown"]
+        if entry["n"] <= 100 and entry["lower"]["shown"]
+    ]
+    expected_accented = [
+        entry["lower"]["display"] for entry in drawn if entry["lower"]["recent_result"]
+    ]
+    expected_plain = [
+        entry["lower"]["display"] for entry in drawn if not entry["lower"]["recent_result"]
     ]
     # The count is the current record's, so it is held while the figure shows the pinned
     # data. A figure that trails the pin shows the count of the data it was drawn from
     # (`sqpack.release`, rule 5), and `--check-composites` lists the cards that differ.
     identity = known_best_builder.retained_identity(_committed_composite_svg())
     if identity.current or not COMPOSITES_MAY_TRAIL:
-        assert len(accented) == len(drawn)
-    assert len(plain) > len(accented)
+        assert len(accented) == len(expected_accented)
+        assert set(accented) == set(expected_accented)
+        assert len(plain) == len(expected_plain)
+        assert set(plain) == set(expected_plain)
 
 
 def test_fast_composite_check_rejects_a_stale_bound_label(monkeypatch) -> None:

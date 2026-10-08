@@ -291,8 +291,17 @@ void test("layout queries establish only whitelisted root attributes before pain
     "data-site-atlas-size": "large",
     "data-site-view": "embed",
   });
-  assert.deepEqual(bootstrapped("?atlas=unknown&size=invalid&view=unknown"), {});
-  assert.deepEqual(bootstrapped(""), {});
+  assert.deepEqual(bootstrapped("?atlas=grid&size=small&view=embed"), {
+    "data-site-atlas-view": "grid",
+    "data-site-atlas-size": "small",
+    "data-site-view": "embed",
+  });
+  assert.deepEqual(bootstrapped("?atlas=unknown&size=invalid&view=unknown"), {
+    "data-site-atlas-view": "triangle",
+  });
+  assert.deepEqual(bootstrapped(""), {
+    "data-site-atlas-view": "triangle",
+  });
 });
 
 void test("directory forwarders retain canonical HTTP targets and physical file fallbacks", () => {
