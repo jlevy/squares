@@ -25,6 +25,14 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/gupta_refinement_reports.py
+    kind: download
+    boundary: >-
+      Gupta's complete seventeen original issue-438 certificates and comparators
+      are compared with the independently reviewed external acquisition roster
+      before rational parsing. The roster itself is admitted against its frozen
+      external-custody digest. Native deciding inputs and complete outcome fields
+      are separately compared structurally; no checksum decides geometry or pins code.
   - path: packing/devtools/ryxu_arrangement_reports.py
     kind: external-checkout
     boundary: >-

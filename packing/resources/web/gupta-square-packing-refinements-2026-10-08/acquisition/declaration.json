@@ -1,0 +1,65 @@
+{
+  "archived_dir": "source",
+  "claims": [
+    "Fourteen source-reported precision refinements of published SQUISH constructions at n=88,130,153,154,179,180,199,207,208,209,236,237,238,239.",
+    "The source withdraws n=108,123,129 because smaller #432 constructions exist.",
+    "Source feasibility logs remain unconfirmed external reports until native replay. Acquisition establishes no global optimality, rigidity, structural novelty or priority."
+  ],
+  "format": "external-source-declaration-v1",
+  "git_scope": "All 49 files of the pinned Git tree acquired via the GitHub Git API and immutable release ZIP. All 47 ZIP files match pinned blobs; README.md and CITATION.cff were read from Git blobs. No checkout was created and no source program was executed.",
+  "id": "gupta-square-packing-refinements",
+  "license": "No bundle-wide licence stated. The retained Evan Daniel MIT notice covers the cited optimizer only. Factual certificates, comparators, manifests, findings and audit outputs are retained; original programs and prose are pinned only.",
+  "pinned_only": [
+    {
+      "match": "CITATION.cff",
+      "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle."
+    },
+    {
+      "match": "CREDITS.txt",
+      "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle."
+    },
+    {
+      "match": "README.md",
+      "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle."
+    },
+    {
+      "match": "README.txt",
+      "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle."
+    },
+    {
+      "match": "certify.py",
+      "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle."
+    },
+    {
+      "match": "independent_sat.py",
+      "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle."
+    },
+    {
+      "match": "verify.py",
+      "reason": "No repository-wide licence found for this original program or prose. Hash-pinned, not copied or executed. The Evan Daniel MIT notice does not license the complete bundle."
+    }
+  ],
+  "retrieved_at_utc": "2026-10-08T05:29:29Z",
+  "scope": [
+    "CITATION.cff",
+    "CREDITS.txt",
+    "LICENSES",
+    "README.md",
+    "README.txt",
+    "SHA256SUMS",
+    "audit",
+    "certify.py",
+    "comparators",
+    "findings.json",
+    "independent_sat.py",
+    "integrity.json",
+    "negative-controls.txt",
+    "superseded",
+    "verification-results.txt",
+    "verify.py",
+    "witnesses"
+  ],
+  "source_commit": "9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
+  "source_ref": "v1.0.0",
+  "source_url": "https://github.com/SidG2k1/square-packing-refinements"
+}
