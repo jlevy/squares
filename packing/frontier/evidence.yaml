@@ -10106,7 +10106,20 @@ evidence:
         Searched the corpus for systematic screens of translational freedom. The phrase 'translation escape' returns zero files, and no bulk screen appears anywhere. The concept is NOT new, and the record should be read accordingly: Gensane-Ryckelynck 2005 observe of one packing that 'six squares are isolated and six can be displaced by small translations', the Kingbird catalogue annotates individual cases 'Rigid.', and [Friedman DS7] and Trump 2023 assert rigidity case by case. What is novel is the systematic application across 318 retained configurations with replayable certificates, not the idea of checking whether a square can slide. This is the thinnest novelty claim in the register
       gaps: >-
         Kingbird's 'Rigid packings' definition page and its group pages were never archived. [Goebel 1979] is a PDF with no transcription. Trump's personal site and the unpublished communications DS7 cites are absent. The resources README is candid that a 'not retrievable' verdict is a negative search result and this archive has been wrong about it eight times, which is the standing reason this vocabulary says 'apparently' rather than 'confirmed'
-    limitations: 'Sound in one direction only. A hit exhibits a square, a direction and a distance, and every constraint is exactly affine in the slide parameter, so it certifies that the retained configuration admits a non-trivial feasible motion: 296 of the 318 screened records are not rigid on this evidence. A miss is weak and never establishes rigidity, because rotation and coordinated multi-square motion are outside the screen. Coordinates are the witness''s own finite-precision transcription, so every finding is about the retained configuration rather than the true optimum; the smallest certified slide is 2.03e-4 against witness coordinates carrying at least 28 digits. Twenty-three records added on 2026-09-07 (n=132, 154, 155, 156, 179, 180, 181, 182, 206, 207, 208, 209, 210, 238, 239, 240, 241, 270, 273, 297, 301, 305, 307) have movable-square counts that differ between the screen''s four tolerances, because their sources carry fewer digits (17 at n=179); each still holds a replayed hit at the primary tolerance, so the not-rigid verdict stands, and the screen lists them under tolerance_disagreement_ns rather than counting them as stable. n=68, 69, 103, 105, 110 and 131 are excluded by shape residual. Rigidity and optimality are independent and nothing here bears on the latter.'
+    limitations: >-
+      Sound in one direction only. The retained screen audited on 2026-10-08 covers all
+      324 displayed configurations: 302 have a replayed single-square translation, 22
+      have no hit, and none are excluded by shape residual. Its tolerance-disagreement
+      list contains 47 cases; each motion assessment uses the replayed hit at the
+      primary tolerance of 1e-8, not an assertion of stability across tolerances.
+      A hit exhibits a square, direction and distance; every constraint is affine in
+      the slide parameter, with no linearization error. Coordinates are the retained
+      witness's finite-precision transcription and validity is checked at the declared
+      tolerance, so the finding concerns that configuration rather than the true
+      optimum. A miss never establishes rigidity: rotation and coordinated multi-square
+      motion are outside the screen. Rigidity and optimality are independent. The
+      historical novelty assessment remains dated 2026-09-07; this coverage audit does
+      not redate that assessment or claim a new mathematical determination.
     source_reviewed: '2026-09-07'
 
   - id: E-perfect-square-tiling-rigid
