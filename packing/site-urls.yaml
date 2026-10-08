@@ -3098,6 +3098,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: atlas/regularized/n-88.svg
+  canonical: atlas/regularized/n-88.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
 - path: atlas/trump11-overview.svg
   canonical: atlas/trump11-overview.svg
   kind: asset-file
@@ -4001,7 +4009,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-07'
   status: live
 - path: cases/2.html
   canonical: cases/2.html
@@ -4081,7 +4089,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-07'
   status: live
 - path: cases/208.html
   canonical: cases/208.html
@@ -4337,7 +4345,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-07'
   status: live
 - path: cases/237.html
   canonical: cases/237.html
@@ -4929,7 +4937,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-07'
   status: live
 - path: cases/303.html
   canonical: cases/303.html
@@ -5609,7 +5617,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-07'
   status: live
 - path: cases/89.html
   canonical: cases/89.html
@@ -8730,7 +8738,7 @@ urls:
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
-  first_published: '2026-10-03'
+  first_published: '2026-10-02'
   lastmod: '2026-10-03'
   status: live
   identity:
@@ -8764,7 +8772,7 @@ urls:
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
-  first_published: '2026-10-03'
+  first_published: '2026-10-02'
   lastmod: '2026-10-03'
   status: live
   identity:
@@ -8816,7 +8824,7 @@ urls:
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
-  first_published: '2026-10-03'
+  first_published: '2026-10-02'
   lastmod: '2026-10-03'
   status: live
   identity:
@@ -10501,7 +10509,7 @@ urls:
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
-  first_published: '2026-10-07'
+  first_published: '2026-10-06'
   lastmod: '2026-10-07'
   status: live
   identity:
@@ -10561,7 +10569,7 @@ urls:
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
-  first_published: '2026-10-07'
+  first_published: '2026-10-06'
   lastmod: '2026-10-07'
   status: live
   identity:
@@ -10596,7 +10604,7 @@ urls:
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
-  first_published: '2026-10-07'
+  first_published: '2026-10-06'
   lastmod: '2026-10-07'
   status: live
   identity:
@@ -10669,37 +10677,116 @@ urls:
   producer: overview
   first_published: '2026-10-06'
   lastmod: '2026-10-07'
-  status: withdrawn
-  target: result/t-110.html
-  tombstone: This result registration was consolidated into T-110. The replacement retains the same
-    claim and source evidence.
+  status: live
   identity:
-    kind: lower-bound
+    kind: upper-bound
     scope:
       n_values:
-      - 39
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
     established: null
     attribution:
       source_keys:
-      - '[wand125 mixed bounds check2 2026-10-06]'
-      published: '2026-10-06'
+      - '[SQUISH second update 2026-10-07]'
+      published: '2026-10-07'
     builds_on: null
     evidence:
-    - E-n039-wand125-mixed-665-report
-    - E-n039-wand125-mixed-665-sqverify-fast-replay
+    - E-squish-second-update-2026-10-07-report
+    - E-squish-second-update-2026-10-07-exact-replay
     artifacts:
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/README.md
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/audit.json
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/bundle.json
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/compare-census.json
-    - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/cpp-sample/nodes-0394-0415.json
-    - packing/devtools/audit_wand125_declared_net.py
-    - packing/sqverify_fast/SOUNDNESS.md
-    - packing/benchmarks/measure-verifier/census-mixed/census.json
-    - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-check2-2026-10-06/mixed_n39_L665.jsonl.gz
-    - packing/devtools/sqverify_fast_census.py
-    - docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md
-    - docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md
+    - packing/resources/web/squish-422-second-update-2026-10-07/README.md
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/update-claims.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/devtools/squish_second_update_packets.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-088.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-180.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-199.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-207.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-236.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-263.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-302.json.gz
+    - packing/frontier/n-088.md
+    - packing/frontier/n-108.md
+    - packing/frontier/n-179.md
+    - packing/frontier/n-180.md
+    - packing/frontier/n-199.md
+    - packing/frontier/n-207.md
+    - packing/frontier/n-236.md
+    - packing/frontier/n-263.md
+    - packing/frontier/n-302.md
+    - packing/devtools/squish_second_update_confirmation.py
+    - packing/devtools/squish_second_update_house_links.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/certification.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/replay-protocol.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/house-atlas-metadata.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/protocol/replay-adapter.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/protocol/witness.schema.yaml
+    - packing/resources/web/squish-422-second-update-2026-10-07/reviews/math-review.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/reviews/receipt-binding-review.json.xz
+    - docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+    - docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    - packing/witnesses/squish-422-second-update-2026/n-088-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-108-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-179-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-180-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-199-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-207-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-236-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-263-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-302-rational.yaml.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-088.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-108.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-179.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-180.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-199.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-207.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-236.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-263.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-302.json.xz
+  amendments:
+  - date: '2026-10-07'
+    reason: The provisional T-116 n=39 lower-bound registration was consolidated into T-110; main
+      subsequently reused T-116 for the nine-case SQUISH upper-bound record. This amendment retains
+      the former claim and source binding.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 39
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 mixed bounds check2 2026-10-06]'
+        published: '2026-10-06'
+      builds_on: null
+      evidence:
+      - E-n039-wand125-mixed-665-report
+      - E-n039-wand125-mixed-665-sqverify-fast-replay
+      artifacts:
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/README.md
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/audit.json
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/bundle.json
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/compare-census.json
+      - packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/receipts/n39-L665/cpp-sample/nodes-0394-0415.json
+      - packing/devtools/audit_wand125_declared_net.py
+      - packing/sqverify_fast/SOUNDNESS.md
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-check2-2026-10-06/mixed_n39_L665.jsonl.gz
+      - packing/devtools/sqverify_fast_census.py
+      - docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md
+      - docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md
+    historical_target: result/t-110.html
+    historical_title: 'T-110: the former n=39 lower-bound result'
 - path: result/t-117.html
   canonical: result/t-117.html
   kind: result

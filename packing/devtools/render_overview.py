@@ -361,6 +361,8 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "src" / "sqpack",
     PACKING / "devtools" / "site_documents.py",
     PACKING / "devtools" / "result_overview.py",
+    PACKING / "devtools" / "site_urls.py",
+    PACKING / "site-urls.yaml",
     # The card every page's head names is drawn beside the pages, in the page's colours.
     PACKING / "devtools" / "social_card.py",
     PACKING / "devtools" / "rung_scale.py",
@@ -1324,9 +1326,12 @@ def render_all() -> list[Page]:
 
 def result_fragments() -> list[Page]:
     """Every result as a complete page; row overlays extract its article on input."""
-    from devtools import overview_data, overview_sections  # noqa: PLC0415
+    from devtools import overview_data, overview_sections, site_urls  # noqa: PLC0415
 
     overview = overview_data.load()
+    rows = site_urls.load_registry()
+    amendments = {row.path: row.amendments for row in rows}
+    registered_paths = {row.path for row in rows}
     pages = []
     ordered = sorted(overview.results, key=lambda result: result.id)
     positions = {result.id: index for index, result in enumerate(ordered)}
@@ -1347,7 +1352,12 @@ def result_fragments() -> list[Page]:
                 ),
             ),
         )
-        body = overview_sections.result_row_popover_body(result, overview)
+        body = overview_sections.result_row_popover_body(
+            result,
+            overview,
+            amendments=amendments.get(path, ()),
+            registered_paths=registered_paths,
+        )
         body = body.replace('<div class="site-result"', '<article class="site-result"', 1)
         links = []
         for neighbor, relation, label in (

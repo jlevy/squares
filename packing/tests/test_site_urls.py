@@ -263,8 +263,8 @@ def test_not_found_alias_script_keeps_unknown_addresses_and_fragments() -> None:
 @pytest.mark.parametrize(
     ("path", "measured"),
     [
-        ("papers/n11-lower-bounds-explainer.html", 1_417_109),
-        ("papers/n11-threshold-bound-review.html", 824_137),
+        ("papers/n11-lower-bounds-explainer.html", 1_417_498),
+        ("papers/n11-threshold-bound-review.html", 823_322),
     ],
 )
 def test_measured_budget_exception_preserves_the_hard_limit(
@@ -325,3 +325,178 @@ def test_standalone_case_figure_is_registered_from_support_declarations() -> Non
     assert registered.kind == "asset-file"
     assert registered.producer == "overview"
     assert registered.canonical == path
+
+
+@pytest.fixture(scope="module")
+def t116_transition() -> tuple[site_urls.SiteURL, site_urls.SiteURL]:
+    current = next(
+        entry for entry in site_urls.load_registry() if entry.path == "result/t-116.html"
+    )
+    assert current.identity is not None
+    assert current.identity["kind"] == "upper-bound"
+    old = replace(
+        current,
+        status="withdrawn",
+        target="result/t-110.html",
+        tombstone="The provisional n=39 result was consolidated into T-110.",
+        identity=site_urls.result_identity(
+            {
+                "kind": "lower-bound",
+                "scope": {"n_values": [39]},
+                "attribution": {
+                    "source_keys": ["[wand125 mixed bounds check2 2026-10-06]"],
+                    "published": "2026-10-06",
+                },
+                "evidence": ["E-n039-wand125-mixed-665-report"],
+            }
+        ),
+        amendments=(),
+    )
+    amended = replace(
+        current,
+        amendments=(
+            {
+                "date": "2026-10-07",
+                "reason": "Record the n=39 binding after main reused the provisional token.",
+                "previous": old.identity,
+                "historical_target": "result/t-110.html",
+                "historical_title": "T-110: the former n=39 lower-bound result",
+            },
+        ),
+    )
+    return old, amended
+
+
+def test_actual_t116_withdrawal_can_be_explicitly_amended(
+    t116_transition: tuple[site_urls.SiteURL, site_urls.SiteURL],
+) -> None:
+    old, amended = t116_transition
+    target = row("result/t-110.html")
+    assert not failures(site_urls.check_history([amended, target], [old]))
+    current_main_binding = replace(amended, amendments=())
+    assert not failures(site_urls.check_history([amended, target], [current_main_binding]))
+    derived = {entry.path: entry for entry in site_urls.derive_registry([amended])}
+    assert derived[amended.path].amendments == amended.amendments
+    assert derived[amended.path].first_published == "2026-10-06"
+
+
+@pytest.mark.parametrize("amendment", ["absent", "wrong-previous"])
+def test_t116_identity_change_requires_the_exact_previous_binding(
+    t116_transition: tuple[site_urls.SiteURL, site_urls.SiteURL], amendment: str
+) -> None:
+    old, amended = t116_transition
+    if amendment == "absent":
+        candidate = replace(amended, amendments=())
+    else:
+        candidate = replace(
+            amended, amendments=({**amended.amendments[0], "previous": {"wrong": True}},)
+        )
+    assert "identity" in failures(
+        site_urls.check_history([candidate, row("result/t-110.html")], [old])
+    )
+
+
+@pytest.mark.parametrize("prefix", ["deleted", "rewritten"])
+def test_accepted_amendment_prefix_cannot_be_removed_or_rewritten(
+    t116_transition: tuple[site_urls.SiteURL, site_urls.SiteURL], prefix: str
+) -> None:
+    _, amended = t116_transition
+    candidate = replace(
+        amended,
+        amendments=()
+        if prefix == "deleted"
+        else ({**amended.amendments[0], "reason": "Rewrite the accepted history."},),
+    )
+    assert "identity" in failures(
+        site_urls.check_history([candidate, row("result/t-110.html")], [amended])
+    )
+
+
+def test_derivation_rejects_a_silent_withdrawn_to_live_identity_collision(
+    t116_transition: tuple[site_urls.SiteURL, site_urls.SiteURL],
+) -> None:
+    old, _ = t116_transition
+    with pytest.raises(ValueError, match="identity"):
+        site_urls.derive_registry([old])
+
+
+def test_history_seed_keeps_earliest_publication_and_latest_semantics(
+    monkeypatch: pytest.MonkeyPatch,
+    t116_transition: tuple[site_urls.SiteURL, site_urls.SiteURL],
+) -> None:
+    old, current = t116_transition
+    frames = []
+    for entry, registered in ((current, "2026-10-07"), (old, "2026-10-06")):
+        record = {"id": "T-116", "registered": registered, **(entry.identity or {})}
+        payload = json.dumps({"results": [record], "last_reviewed": registered}).encode()
+        frames.append(f"record blob {len(payload)}\n".encode() + payload + b"\n")
+
+    def run(
+        args: list[str], **_kwargs: object
+    ) -> subprocess.CompletedProcess[str] | subprocess.CompletedProcess[bytes]:
+        if args[1] == "log":
+            return subprocess.CompletedProcess(args, 0, "latest\noriginal\n")
+        if args[1] == "cat-file":
+            if args[2] == "-e":
+                return subprocess.CompletedProcess(args, 1, b"")
+            return subprocess.CompletedProcess(args, 0, b"".join(frames))
+        assert args[1] == "ls-tree"
+        return subprocess.CompletedProcess(args, 0, "")
+
+    declarations = (
+        'PAGES = {"index.html": None}\nDOCUMENT_PAGES = ()\n'
+        "MOVED_PAGES = ()\nMOVED_FILES = ()\nPAPERS = ()\n"
+        'SOCIAL_CARD = "preview-card.png"\n'
+    )
+    monkeypatch.setattr(site_urls.subprocess, "run", run)
+    monkeypatch.setattr(
+        site_urls,
+        "_git_read",
+        lambda _ref, path: (
+            "COMPOSITE_ASSETS = ()"
+            if path.endswith("render_n11_lower_bounds_explainer.py")
+            else declarations
+        ),
+    )
+    seeded = {entry.path: entry for entry in site_urls.historical_registry("fixture")}
+    result = seeded["result/t-116.html"]
+    assert result.first_published == "2026-10-06"
+    assert result.lastmod == "2026-10-07"
+    assert result.identity == current.identity
+
+
+def test_failed_history_write_leaves_both_generated_files_unchanged(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    registry, document = tmp_path / "registry.yaml", tmp_path / "register.md"
+    registry.write_bytes(b"accepted registry bytes\n")
+    document.write_bytes(b"accepted document bytes\n")
+    entries = [row("index.html")]
+    monkeypatch.setattr(site_urls, "REGISTRY", registry)
+    monkeypatch.setattr(site_urls, "DOCUMENT", document)
+    monkeypatch.setattr(site_urls, "load_registry", lambda: entries)
+    monkeypatch.setattr(site_urls, "derive_registry", lambda _previous: entries)
+    monkeypatch.setattr(site_urls, "historical_registry", lambda _ref: entries)
+    monkeypatch.setattr(
+        site_urls, "check_history", lambda *_args: [(False, "rejected history")]
+    )
+    assert site_urls.main(["--write", "--history-ref", "fixture"]) == 1
+    assert registry.read_bytes() == b"accepted registry bytes\n"
+    assert document.read_bytes() == b"accepted document bytes\n"
+
+
+def test_t116_registry_retains_the_complete_historical_source_binding() -> None:
+    current = next(
+        entry for entry in site_urls.load_registry() if entry.path == "result/t-116.html"
+    )
+    amendment = current.amendments[0]
+    assert current.first_published == "2026-10-06"
+    assert current.status == "live"
+    assert amendment["date"] == "2026-10-07"
+    assert amendment["historical_target"] == "result/t-110.html"
+    previous = amendment["previous"]
+    assert previous["kind"] == "lower-bound"
+    assert previous["scope"] == {"n_values": [39]}
+    assert previous["attribution"]["published"] == "2026-10-06"
+    assert "E-n039-wand125-mixed-665-sqverify-fast-replay" in previous["evidence"]
+    assert "packing/sqverify_fast/SOUNDNESS.md" in previous["artifacts"]

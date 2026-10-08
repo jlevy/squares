@@ -50,12 +50,13 @@ import html
 import math
 import re
 import sys
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 from dataclasses import replace
 from decimal import Decimal
 from functools import cache
 from pathlib import Path
 from typing import Any, NamedTuple, cast
+from urllib.parse import urlsplit
 
 from devtools import repo_links
 from devtools.overview_data import (
@@ -1011,6 +1012,7 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
     """Refuse a body with a link to nothing: a repository path the working tree lacks, a
     commit-pinned repository link, a page the site does not serve, or a fragment no row
     or record carries."""
+    from devtools.overview_sections import result_fragment  # noqa: PLC0415
     from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
     from devtools.render_overview import SITE_PAGES  # noqa: PLC0415
 
@@ -1026,7 +1028,12 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
         "frontier.html": {f"n-{n}" for n in overview.cases},
         "all-results.html": ids,
     }
-    served = {*SITE_PAGES, CASES_HOME, *(case_url(n) for n in overview.cases)}
+    served = {
+        *SITE_PAGES,
+        CASES_HOME,
+        *(case_url(n) for n in overview.cases),
+        *(result_fragment(result.id) for result in overview.results),
+    }
     for page, fragment in SITE_LINK.findall(body):
         if page not in served:
             missing.append(page)
@@ -1038,12 +1045,62 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
         )
 
 
-def result_popover_html(result: Result, overview: Overview) -> str:
+def compatibility_notices(
+    result: Result,
+    amendments: Sequence[Mapping[str, Any]],
+    *,
+    registered_paths: Collection[str],
+) -> str:
+    """Explain an amended address inside the article that readers may fetch."""
+    notices = []
+    for amendment in amendments:
+        target = amendment.get("historical_target")
+        if not target:
+            continue
+        if not isinstance(target, str):
+            raise TypeError(f"{result.id}: historical target is not a local path")
+        url = urlsplit(target)
+        if (
+            target not in registered_paths
+            or url.scheme
+            or url.netloc
+            or url.query
+            or url.fragment
+            or target.startswith("/")
+            or any(part in {"", ".", ".."} for part in target.split("/"))
+            or "\\" in target
+        ):
+            raise ValueError(f"{result.id}: unregistered local historical target {target!r}")
+        title = amendment.get("historical_title")
+        if not isinstance(title, str) or not title.strip():
+            raise ValueError(f"{result.id}: historical target has no reader title")
+        kind = str(result.record["kind"]).replace("-", " ")
+        updated = _esc(amendment["date"])
+        notices.append(
+            '<aside class="site-result-section site-result-compatibility" '
+            'aria-label="Earlier result at this address"><p><strong>Earlier result at '
+            "this address.</strong> Earlier links referred to "
+            f'<a href="{_esc(target)}">{_esc(title)}</a>. This page now holds '
+            f"a separate {_esc(kind)} result by {_esc(result.credit)}. "
+            f'<span class="site-cell-quiet">Address updated '
+            f'<time datetime="{updated}">{updated}</time>.</span></p></aside>'
+        )
+    return "".join(notices)
+
+
+def result_popover_html(
+    result: Result,
+    overview: Overview,
+    *,
+    amendments: Sequence[Mapping[str, Any]] = (),
+    registered_paths: Collection[str] = (),
+) -> str:
     """The overview of one registered result, as its popover's body: the head, the case
     or cases, the chain of results on them, and the links, every one checked."""
     cases = scope(result)
     body = (
-        head(result, cases)
+        compatibility_notices(result, amendments, registered_paths=registered_paths)
+        + head(result, cases)
         + case_section(result, overview, cases)
         + chain_section(result, overview, cases)
         + links_section(result, overview, cases)

@@ -6,11 +6,19 @@ from collections.abc import Iterator
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 from unittest.mock import patch
+from urllib.parse import urljoin
 
 import pytest
 from kpress.format.markdown import parse_markdown
 
-from devtools import check_site_rendering, preview_site, render_overview, site_assets, site_math
+from devtools import (
+    check_site_rendering,
+    preview_site,
+    render_overview,
+    site_assets,
+    site_math,
+    site_urls,
+)
 from sqpack.probes import probe
 from tests import site_browser
 
@@ -194,5 +202,79 @@ def test_saved_reader_faces_match_native_metric_geometry(
             assert "Sans" not in families["serif"]
             assert "KPress" not in families["stock"]
             assert ("Sans" in families["prose"]) == (prose == "sans")
+    finally:
+        context.close()
+
+
+@pytest.fixture(scope="module")
+def amended_result_pages(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
+    root = tmp_path_factory.mktemp("result-address-notice")
+    records = {page.name: page for page in render_overview.result_fragments()}
+    for name in ("result/t-116.html", "result/t-110.html"):
+        target = root / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(records[name].html)
+    body = (
+        "<main><h1>Result address compatibility</h1><table><tbody>"
+        '<tr data-row-popover="notice"><td>Open the current result</td></tr>'
+        '</tbody></table><div popover id="notice" class="site-popover">'
+        '<button class="site-popover-close" popovertarget="notice">Close</button>'
+        '<div data-row-pop-src="result/t-116.html">'
+        '<a href="result/t-116.html">Read the complete result record</a>'
+        "</div></div></main>"
+    )
+    page = render_overview.static_content_page(
+        body,
+        meta=render_overview.PageMeta(
+            "Result address compatibility", "A former result keeps its own page.", "index.html"
+        ),
+        current="results",
+    )
+    program = site_assets.script_tag(
+        site_assets.shared().assets.script_file(render_overview.ROW_POPOVER_SCRIPT),
+        "index.html",
+    )
+    (root / "index.html").write_text(page.html.replace("</body>", program + "</body>"))
+    site_assets.write_assets(root, site_assets.shared().assets.files())
+    server = preview_site.serve(root, 0)
+    try:
+        yield f"http://127.0.0.1:{server.server_port}"
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.mark.parametrize("javascript", [False, True], ids=["complete-nojs", "fetched-article"])
+def test_former_result_notice_survives_complete_page_and_article_fetch(
+    browser: Browser, amended_result_pages: str, *, javascript: bool
+) -> None:
+    amendment = next(
+        change
+        for row in site_urls.load_registry()
+        if row.path == "result/t-116.html"
+        for change in row.amendments
+        if change.get("historical_target")
+    )
+    context = browser.new_context(java_script_enabled=javascript)
+    try:
+        page = context.new_page()
+        start = "index.html" if javascript else "result/t-116.html"
+        page.goto(f"{amended_result_pages}/{start}", wait_until="load")
+        if javascript:
+            assert page.locator(".site-result-compatibility").count() == 0
+            page.locator("tr[data-row-popover] td").click()
+        notice = page.locator("article.site-result .site-result-compatibility")
+        notice.wait_for(state="visible")
+        assert amendment["historical_title"] in notice.inner_text()
+        assert "separate upper bound result" in notice.inner_text()
+        target = notice.locator("a")
+        expected = f"{amended_result_pages}/{amendment['historical_target']}"
+        href = target.get_attribute("href")
+        assert href is not None
+        assert urljoin(page.url, href) == expected
+        target.click()
+        page.wait_for_url(expected)
+        assert page.locator("main article h1").is_visible()
+        assert "T-110" in page.locator("main article h1").inner_text()
     finally:
         context.close()

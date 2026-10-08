@@ -16,12 +16,12 @@ import itertools
 import math
 import re
 import textwrap
-from collections.abc import Collection, Iterable, Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import date, timedelta
 from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Literal, NamedTuple, get_args
+from typing import Any, Literal, NamedTuple, get_args
 from urllib.parse import urlsplit
 
 from devtools import repo_links
@@ -587,7 +587,13 @@ def _records(result: Result) -> str:
     )
 
 
-def result_row_popover_body(result: Result, overview: Overview) -> str:
+def result_row_popover_body(
+    result: Result,
+    overview: Overview,
+    *,
+    amendments: Sequence[Mapping[str, Any]] = (),
+    registered_paths: Collection[str] = (),
+) -> str:
     """The body of a result row's popover, the one source of it for every table that
     lists results: the recent table on the overview and the results page's table. It is
     the result's whole overview (`result_overview.result_popover_html`): its case drawn,
@@ -601,7 +607,9 @@ def result_row_popover_body(result: Result, overview: Overview) -> str:
     # `result_overview` reads this module for the chips and the film's facts.
     from devtools import result_overview  # noqa: PLC0415
 
-    return result_overview.result_popover_html(result, overview)
+    return result_overview.result_popover_html(
+        result, overview, amendments=amendments, registered_paths=registered_paths
+    )
 
 
 #: Where complete result pages are served under the site's root. The historic

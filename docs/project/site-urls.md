@@ -395,6 +395,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | atlas/regularized/n-306.svg | atlas/regularized/n-306.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/regularized/n-307.svg | atlas/regularized/n-307.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/regularized/n-68.svg | atlas/regularized/n-68.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
+| atlas/regularized/n-88.svg | atlas/regularized/n-88.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/trump11-overview.svg | atlas/trump11-overview.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | cases.html | cases/ | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → cases/index.html |
 | cases/1.html | cases/1.html | record | overview | 2026-10-03 | 2026-10-03 | live |
@@ -507,7 +508,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/196.html | cases/196.html | record | overview | 2026-10-03 | 2026-10-03 | live |
 | cases/197.html | cases/197.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/198.html | cases/198.html | record | overview | 2026-10-03 | 2026-10-06 | live |
-| cases/199.html | cases/199.html | record | overview | 2026-10-03 | 2026-10-05 | live |
+| cases/199.html | cases/199.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/2.html | cases/2.html | record | overview | 2026-10-03 | 2026-10-03 | live |
 | cases/20.html | cases/20.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/200.html | cases/200.html | record | overview | 2026-10-03 | 2026-10-06 | live |
@@ -517,7 +518,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/204.html | cases/204.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/205.html | cases/205.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/206.html | cases/206.html | record | overview | 2026-10-03 | 2026-10-05 | live |
-| cases/207.html | cases/207.html | record | overview | 2026-10-03 | 2026-10-05 | live |
+| cases/207.html | cases/207.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/208.html | cases/208.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/209.html | cases/209.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/21.html | cases/21.html | record | overview | 2026-10-03 | 2026-10-03 | live |
@@ -549,7 +550,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/233.html | cases/233.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/234.html | cases/234.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/235.html | cases/235.html | record | overview | 2026-10-03 | 2026-10-06 | live |
-| cases/236.html | cases/236.html | record | overview | 2026-10-03 | 2026-10-05 | live |
+| cases/236.html | cases/236.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/237.html | cases/237.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/238.html | cases/238.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/239.html | cases/239.html | record | overview | 2026-10-03 | 2026-10-07 | live |
@@ -623,7 +624,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/30.html | cases/30.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/300.html | cases/300.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/301.html | cases/301.html | record | overview | 2026-10-03 | 2026-10-05 | live |
-| cases/302.html | cases/302.html | record | overview | 2026-10-03 | 2026-10-05 | live |
+| cases/302.html | cases/302.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/303.html | cases/303.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/304.html | cases/304.html | record | overview | 2026-10-03 | 2026-10-05 | live |
 | cases/305.html | cases/305.html | record | overview | 2026-10-03 | 2026-10-05 | live |
@@ -708,7 +709,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/85.html | cases/85.html | record | overview | 2026-10-03 | 2026-10-03 | live |
 | cases/86.html | cases/86.html | record | overview | 2026-10-03 | 2026-10-05 | live |
 | cases/87.html | cases/87.html | record | overview | 2026-10-03 | 2026-10-06 | live |
-| cases/88.html | cases/88.html | record | overview | 2026-10-03 | 2026-10-06 | live |
+| cases/88.html | cases/88.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/89.html | cases/89.html | record | overview | 2026-10-03 | 2026-10-05 | live |
 | cases/9.html | cases/9.html | record | overview | 2026-10-03 | 2026-10-03 | live |
 | cases/90.html | cases/90.html | record | overview | 2026-10-03 | 2026-10-05 | live |
@@ -832,9 +833,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-077.html | result/t-077.html | result | overview | 2026-10-03 | 2026-10-03 | live |
 | result/t-078.html | result/t-078.html | result | overview | 2026-10-03 | 2026-10-03 | live |
 | result/t-079.html | result/t-079.html | result | overview | 2026-10-03 | 2026-10-03 | live |
-| result/t-080.html | result/t-080.html | result | overview | 2026-10-03 | 2026-10-03 | live |
-| result/t-081.html | result/t-081.html | result | overview | 2026-10-03 | 2026-10-03 | live |
-| result/t-082.html | result/t-082.html | result | overview | 2026-10-03 | 2026-10-03 | live |
+| result/t-080.html | result/t-080.html | result | overview | 2026-10-02 | 2026-10-03 | live |
+| result/t-081.html | result/t-081.html | result | overview | 2026-10-02 | 2026-10-03 | live |
+| result/t-082.html | result/t-082.html | result | overview | 2026-10-02 | 2026-10-03 | live |
 | result/t-083.html | result/t-083.html | result | overview | 2026-10-02 | 2026-10-02 | live |
 | result/t-084.html | result/t-084.html | result | overview | 2026-10-02 | 2026-10-02 | live |
 | result/t-085.html | result/t-085.html | result | overview | 2026-10-02 | 2026-10-02 | live |
@@ -865,10 +866,10 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-110.html | result/t-110.html | result | overview | 2026-10-06 | 2026-10-06 | live |
 | result/t-111.html | result/t-111.html | result | overview | 2026-10-06 | 2026-10-06 | live |
 | result/t-112.html | result/t-112.html | result | overview | 2026-10-06 | 2026-10-06 | live |
-| result/t-113.html | result/t-113.html | result | overview | 2026-10-07 | 2026-10-07 | live |
-| result/t-114.html | result/t-114.html | result | overview | 2026-10-07 | 2026-10-07 | live |
-| result/t-115.html | result/t-115.html | result | overview | 2026-10-07 | 2026-10-07 | live |
-| result/t-116.html | result/t-116.html | result | overview | 2026-10-06 | 2026-10-07 | withdrawn → result/t-110.html |
+| result/t-113.html | result/t-113.html | result | overview | 2026-10-06 | 2026-10-07 | live |
+| result/t-114.html | result/t-114.html | result | overview | 2026-10-06 | 2026-10-07 | live |
+| result/t-115.html | result/t-115.html | result | overview | 2026-10-06 | 2026-10-07 | live |
+| result/t-116.html | result/t-116.html | result | overview | 2026-10-06 | 2026-10-07 | live |
 | result/t-117.html | result/t-117.html | result | overview | 2026-10-06 | 2026-10-07 | withdrawn → result/t-111.html |
 | result/t-118.html | result/t-118.html | result | overview | 2026-10-06 | 2026-10-07 | withdrawn → result/t-101.html |
 | results.html | all-results.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → all-results.html |
@@ -917,18 +918,18 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 
 | Physical path | Bytes | Reason |
 | --- | ---: | --- |
-| all-results.html | 800,000 | The complete registered-result table with prepared math measures 711,226 bytes. |
+| all-results.html | 800,000 | The complete registered-result table with prepared math measures 717,328 bytes. |
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 500,000 | Complete n=17 proof/certificate record and prepared bounds measure 443,761 bytes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
-| frontier.html | 1,750,000 | All 324 case rows and prepared exact bounds measure 1,529,406 bytes. |
-| papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,109 bytes. |
-| papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 824,137 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
-| result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 708,426 bytes. |
-| result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 351,572 bytes. |
-| result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 505,826 bytes. |
-| result/t-083.html | 800,000 | Complete broad scope history and prepared exact bounds measure 685,816 bytes. |
-| result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 691,685 bytes. |
+| frontier.html | 1,750,000 | All 324 case rows and prepared exact bounds measure 1,536,618 bytes. |
+| papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
+| papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
+| result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |
+| result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. |
+| result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 509,332 bytes. |
+| result/t-083.html | 800,000 | Complete broad scope history and prepared exact bounds measure 688,505 bytes. |
+| result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 694,374 bytes. |
 | tutorial.html | 800,000 | The complete authored tutorial and prepared formulas measure 742,713 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.

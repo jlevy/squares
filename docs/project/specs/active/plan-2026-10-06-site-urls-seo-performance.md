@@ -9,7 +9,7 @@ author: Claude (agent), for the repository owner
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Implemented; final integration and CI verification in progress
+**Status:** Implemented; validation and rollout are tracked in PR #395
 
 **Workflow:** W7 pipeline improvement (the published site is the surface)
 
@@ -24,10 +24,20 @@ are linked to this spec
 PR #395 implements the plan following senior review A and independent senior,
 performance, security and correctness passes.
 All five implementation lanes are complete.
-Canonical pages serve all 324 cases and 115 live results; three previously removed
-result addresses serve explained, non-indexed tombstones.
+Canonical pages serve all 324 cases and 116 live results; two previously removed result
+addresses serve explained, non-indexed tombstones.
 The registry retains old paths and query/fragment aliases, and checks semantic result
 identity against the historical baseline.
+
+The upstream integration reused the provisional `T-116` token for a different result.
+Its explicit pre-registry amendment preserves the former publication date and binding;
+the current article directs prior n = 39 readers to `T-110`. This is an explained token
+reuse, with both results still available, rather than an unchanged semantic permalink.
+The generator rejects unamended identity collisions and failed history checks before
+writing either generated file.
+Six unpublished bootstrap dates were corrected to the earliest explicit registrations
+reconstructed from main history: `T-080`–`T-082` to 2026-10-02, and `T-113`–`T-115` to
+2026-10-06. A proposed PR cannot serve as its own historical authority.
 
 Generic content and the three papers use prepared visual mathematics with retained
 reader font choices.
@@ -36,8 +46,16 @@ Shared immutable assets, local dimensioned drawings, static synopsis chapters an
 separate workbench JSON keep the completed pages within documented path-specific budgets
 and the strict 2 MB ceiling.
 
-Final assembled-site checks, browser measurements, required local gates and exact-head
-CI are in progress.
+All five producers build, including three PDFs and the workbench.
+The rebuilt site has 484 HTML files within their budgets.
+Three-run browser measurements pass over twelve scenarios at both viewports and themes,
+with a separate no-JavaScript check: maximum median CLS 0.075, LCP 836 ms, longest task
+98 ms and blocking time 48 ms.
+Live case/result popover checks and the workbench’s positive and negative policy checks
+also pass.
+
+Required local checkpoints, exact-head CI, independent review dispositions and their
+final evidence are recorded in [PR #395](https://github.com/jlevy/squares/pull/395).
 Deployment and the owner’s Search Console account setup follow merge.
 
 ## Overview
@@ -573,7 +591,7 @@ values are set last, from the merged build.
 - The existing `render_overview --check` double render covers the new files.
 - `check_published_site --local` on the assembled tree in the `publish` job enforces the
   closed world, the budgets and the head contract on every page, including all 324 case
-  pages, 115 live result pages and three withdrawn-result tombstones (no sampling).
+  pages, 116 live result pages and two withdrawn-result tombstones (no sampling).
 - A no-JavaScript render test: Chromium with JavaScript disabled loads each page family
   and asserts that the main content, `h1` and drawings are present and laid out.
 - The layout-stability guard (E1) runs on every pull request that touches a page.

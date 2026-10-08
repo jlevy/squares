@@ -40,7 +40,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
     "papers/n11-threshold-bound-review.html": (
         900_000,
         (
-            "The 401-formula review measures 824,137 bytes after sharing font geometry. "
+            "The 401-formula review measures 823,322 bytes after sharing font geometry. "
             "Its 842,245-byte edition passed three-run desktop/mobile, light/dark and "
             "no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves "
             "headroom above the measured edition."
@@ -60,31 +60,31 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
     ),
     "result/t-007.html": (
         800_000,
-        "Complete broad scope history and prepared exact bounds measure 708,426 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 711,115 bytes.",
     ),
     "result/t-085.html": (
         800_000,
-        "Complete broad scope history and prepared exact bounds measure 691,685 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 694,374 bytes.",
     ),
     "result/t-083.html": (
         800_000,
-        "Complete broad scope history and prepared exact bounds measure 685,816 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 688,505 bytes.",
     ),
     "result/t-058.html": (
         600_000,
-        "Complete broad scope history and prepared exact bounds measure 505,826 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 509,332 bytes.",
     ),
     "result/t-046.html": (
         400_000,
-        "Complete broad scope history and prepared exact bounds measure 351,572 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 355,078 bytes.",
     ),
     "frontier.html": (
         1_750_000,
-        "All 324 case rows and prepared exact bounds measure 1,529,406 bytes.",
+        "All 324 case rows and prepared exact bounds measure 1,536,618 bytes.",
     ),
     "all-results.html": (
         800_000,
-        "The complete registered-result table with prepared math measures 711,226 bytes.",
+        "The complete registered-result table with prepared math measures 717,328 bytes.",
     ),
     "tutorial.html": (
         800_000,
@@ -94,7 +94,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         1_500_000,
         (
             "Four prepared font preferences and the authored paper content "
-            "measure 1,417,109 bytes."
+            "measure 1,417,498 bytes."
         ),
     ),
 }
@@ -435,6 +435,10 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
         current[old.path] = old
     result = sorted(current.values(), key=lambda row: row.path)
     _require_valid(result)
+    if previous is not None:
+        failed = [message for passed, message in check_history(result, previous) if not passed]
+        if failed:
+            raise ValueError("\n".join(failed))
     return result
 
 
@@ -601,6 +605,20 @@ def validate_registry(rows: Sequence[SiteURL]) -> Checks:
                     f"{row.path}: dated amendment with reason and previous identity",
                 )
             )
+            if "historical_target" in amendment:
+                target = amendment["historical_target"]
+                title = amendment.get("historical_title")
+                checks.append(
+                    (
+                        isinstance(target, str)
+                        and _valid_path(target)
+                        and isinstance(title, str)
+                        and bool(title.strip()),
+                        f"{row.path}: historical amendment has a local target and reader title",
+                    )
+                )
+                if isinstance(target, str):
+                    checks += _target_checks(replace(row, target=target), paths)
     return checks
 
 
@@ -658,12 +676,16 @@ def check_history(current: Sequence[SiteURL], baseline: Sequence[SiteURL]) -> Ch
             )
         )
         if old.identity is not None:
-            unchanged = row.identity == old.identity and row.amendments == old.amendments
+            prefix_retained = row.amendments[: len(old.amendments)] == old.amendments
+            unchanged = row.identity == old.identity and prefix_retained
             amendment = row.amendments[len(old.amendments) :]
             amended = (
-                row.amendments[: len(old.amendments)] == old.amendments
+                prefix_retained
                 and len(amendment) == 1
                 and amendment[0].get("previous") == old.identity
+            )
+            checks.append(
+                (prefix_retained, f"history {old.path}: complete amendment prefix retained")
             )
             checks.append(
                 (
@@ -1005,6 +1027,7 @@ def _historical_results(ref: str) -> list[dict[str, Any]]:
         check=True,
     ).stdout
     records: dict[str, dict[str, Any]] = {}
+    first_published: dict[str, str] = {}
     cursor = 0
     for _revision in revisions:
         end = response.index(b"\n", cursor)
@@ -1020,8 +1043,21 @@ def _historical_results(ref: str) -> list[dict[str, Any]]:
             record.setdefault(
                 "registered", record.get("established", document["last_reviewed"])
             )
-            records.setdefault(record["id"], record)
-    return list(records.values())
+            identifier = str(record["id"])
+            # A scientific establishment date is not an earlier URL registration.
+            if "registered" in result:
+                registered = str(result["registered"])
+                first_published[identifier] = min(
+                    first_published.get(identifier, registered), registered
+                )
+            records.setdefault(identifier, record)
+    return [
+        {
+            **record,
+            "_url_first_published": first_published.get(identifier, str(record["registered"])),
+        }
+        for identifier, record in records.items()
+    ]
 
 
 def _seed_history(ref: str) -> list[SiteURL]:
@@ -1078,6 +1114,7 @@ def _seed_history(ref: str) -> list[SiteURL]:
     records = _historical_results(ref)
     for record in records:
         first, lastmod = _result_dates(record)
+        first = str(record.get("_url_first_published", first))
         rows.append(
             _new_row(
                 f"result/{record['id'].lower()}.html",
@@ -1180,7 +1217,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                         f"{path.relative_to(REPO)}: generated register current",
                     )
                 )
-            else:
+            elif all(passed for passed, _message in checks):
                 _write(path, text)
     except (ValueError, TypeError, KeyError, OSError) as error:
         print(f"FAIL URL registry: {error}")

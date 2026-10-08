@@ -5399,7 +5399,9 @@ def test_a_result_rows_popover_body_comes_from_one_function(
         f'<div class="site-result" data-result-overview="{result.id.lower()}">'
     )
 
-    def marked(result: overview_data.Result, _: overview_data.Overview) -> str:
+    def marked(
+        result: overview_data.Result, _: overview_data.Overview, **_metadata: object
+    ) -> str:
         return f"<p>BODY OF {result.id}</p>"
 
     monkeypatch.setattr(overview_sections, "result_row_popover_body", marked)
