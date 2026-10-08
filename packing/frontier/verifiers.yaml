@@ -1535,3 +1535,16 @@ verifiers:
     note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent
       rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner
       conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+  - id: V-evand-arrangement-receipts
+    program: devtools.evand_arrangement_reports
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Binds all three complete source certificates and all nine full deciding inputs/native results;
+      explicit replay repeats both project geometric deciders.
+    source:
+    - packing/devtools/evand_arrangement_reports.py

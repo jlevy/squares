@@ -19,6 +19,28 @@ repository: jlevy/squares
 owner: jlevy
 last_reviewed: '2026-10-07'
 issues:
+  - number: 399
+    title: 'New packings: s(266) ≤ 16.82302875075648, s(270) ≤ 16.93780722844603, s(272) ≤ 16.96811014576960'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Three complete changed rational packings independently certified at V3/C3; source novelty,
+      local minimality and optimality remain unestablished. Historical #375 sources retain their own poses.
+    read_through: '2026-10-07T02:10:44Z'
+    results:
+    - key: three-new-feasible-packings
+      claim: Exact feasible upper bounds at n266,270,272, with complete new poses and rational sides.
+      source: body
+      register:
+      - T-119
+    beads:
+    - think-hh48
+    answer_bead: think-hh48
+    replies: []
+    close_when: The confirmed import is on main and the owner has posted its state; novelty and
+      local/global optimality are outside this feasibility import.
   - number: 419
     title: 'Mechanized exact forms for 269 best-known packings, n ≤ 324 (minimal polynomial, isolating
       interval, exact configuration), checked independently and in Lean: registration request'
@@ -92,6 +114,8 @@ issues:
       bounds, with nothing asked. Two exact checkers of his accept every certificate; that
       the points are KKT local minima is his numerical evidence. The source states AI
       assistance (Claude).
+      Issue399 separately supplies changed arrangements at 266, 270 and 272, now
+      certified in T-119; this request retains its original source13ee36e poses and scope.
     read_through: '2026-10-06T02:41:09Z'
     results:
       - key: exact-optima-48

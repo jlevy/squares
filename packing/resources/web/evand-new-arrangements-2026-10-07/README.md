@@ -1,47 +1,82 @@
-# Evan Daniel’s Three New Arrangements: Reported Intake
+# Evan Daniel’s Three New Arrangements
 
-[Issue #399](https://github.com/jlevy/squares/issues/399) reports arrangements for n =
-266, 270 and 272 from [evand/square-packing](https://github.com/evand/square-packing) at
-`7eef24f7221b8c3371d6171dd664b52541bbd479`, committed on 7 October 2026. The three exact
-rational certificates, two source checkers, format explanation, licences and attribution
-are retained unchanged under `source/`. The acquisition record and manifest bind this
-selected scope to that source tree.
-Certificate aliases elsewhere in the upstream repository are not duplicated.
+[Issue #399](https://github.com/jlevy/squares/issues/399) supplies complete rational
+packings for n = 266, 270 and 272 from
+[evand/square-packing](https://github.com/evand/square-packing) at
+`7eef24f7221b8c3371d6171dd664b52541bbd479`. Nine source files, including all three
+certificates, both source checkers, format explanation, licences and credits, are
+retained unchanged. Acquisition digests bind the downloaded source bytes.
+Duplicate upstream aliases are not repeated.
 
-## Scope and Remaining Work
+## Exact Feasibility
 
-The source claims exact feasibility and new arrangements.
-The certificate’s full side fraction, rather than an issue’s rounded decimal, determines
-any improvement. At this checkpoint, no deciding checker has run and no case bound or
-pose has been adopted from these files.
-The import must parse exactly the declared roster, convert its half-angle parameters
-without rounding, check every wall and pair by both project geometry routes, and reject
-complete-roster duplicate and outside controls before confirming feasibility.
+T-119 certifies the following upper bounds.
+Each display is the least upward sixteen-place ceiling of its complete rational side,
+without side inflation.
+The full side and every ordered pose remain in `facts/complete-certificates.json.xz`.
 
-Arrangement novelty, numerical stationarity, Hessian and local-minimum statements remain
-source reports. Feasibility alone proves no local or global optimum.
-The earlier issue #375 packet, its T-098/T-101 results and their historical poses retain
-their original source meanings.
-This packet must be adopted separately; changing an old source side without changing its
-geometry would be invalid.
-The n = 17 work remains with its existing owner.
+| n | Verified ceiling |
+| --- | --- |
+| 266 | 16.8230287507564760 |
+| 270 | 16.9378072284460292 |
+| 272 | 16.9681101457696006 |
 
-## Credit and Licence
+Both project exact implementations accepted every square, wall and pair in all three
+original packings. Both rejected a complete duplicate-square roster and a complete
+outside-container roster for each count.
+All nine complete deciding inputs and all 18 full native outputs, including exact
+rational minima, are retained in `receipts/exact-certification.json.xz`: 650,496 pair
+decisions across the two routes.
+A separately prompted mathematical reviewer reran every job and obtained identical
+non-timing native results in 202.090 seconds.
+[The review](../../../../docs/project/reviews/review-2026-10-08-evand-new-arrangements.md)
+discloses the shared strict conversion and rational arithmetic.
 
-Evan Daniel authored the source.
-The original MIT licences and `s12/CREDITS.md` are retained, including the source’s
-credits for the packing records and tools it builds on.
-This packet makes no independent novelty attribution beyond the report.
+`devtools.evand_arrangement_reports` strictly admits the entire pinned source roster and
+every result on each call.
+Explicit replay repeats the geometry.
+No source checker was executed or imported.
+The two project routes independently implement the same separating-axis theorem; this is
+implementation diversity within one method.
 
-## Check Retained Bytes
+The case records and atlas use each complete new pose with its exact side.
+The private worker copies the full facts and receipts and admits only three explicit
+atlas read links; producer guards refuse writes through those links.
+Earlier #375 source `13ee36e`, its T-098/T-101 results and their certificates retain
+their original poses and assurance.
+Complete pre-adoption case text is preserved in `acquisition/prior-state.json.xz`.
+
+## Scope and Credit
+
+The source reports new arrangements, KKT points, numerical local-minimum evidence and
+search history. Feasibility does not establish arrangement novelty, local or global
+optimality, rigidity or human oversight.
+Those additional claims remain attributed reports in the retained issue text and source
+explanation.
+
+Evan Daniel authored the source with disclosed Claude assistance under his direction.
+The reported lineage is Ellsworth’s 2024 record for n266 and Couzo’s September record
+for n270. The n272 seed instead comes through Cleemann; Arslanov, Mustafin and
+Shangitbayev’s s210 conversion; Ellsworth; and Stead’s June refinement.
+The source credits the Squares Project (Joshua Levy) register data under CC BY 4.0.
+Original MIT licences and `s12/CREDITS.md` are preserved.
+The n17 work remains with its existing owner.
+
+## Retained Commands
 
 From `packing/`:
 
 ```sh
 uv run --frozen --all-extras --group dev python -m devtools.acquire_source evand-new-arrangements-2026-10-07 --check
+uv run --frozen --all-extras --group dev python -m devtools.evand_arrangement_reports check
+uv run --frozen --all-extras --group dev python -m devtools.evand_arrangement_reports check --replay
 ```
 
-This checks source custody; it does not decide packing feasibility.
+Source acquisition checks bytes; ordinary admission checks complete scientific
+applicability. Only explicit replay repeats both geometric decisions.
+The `certify` command retains individual full subprocess results in an external
+`--jobs-dir` and publishes a receipt only after all nine jobs pass their required
+outcomes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

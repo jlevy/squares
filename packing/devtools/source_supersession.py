@@ -256,6 +256,8 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     ordinary lower lanes and their prose come from the generator. Rigidity is promoted
     afterwards by its existing owner. This is publication adaptation, not certification.
     """
+    from devtools import evand_arrangement_reports as evand  # noqa: PLC0415
+    from devtools import register_evand_arrangements as evand_adoption  # noqa: PLC0415
     from devtools import render_case_verifiers  # noqa: PLC0415
     from devtools import squish_followup_packets as update  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as confirmation  # noqa: PLC0415
@@ -267,16 +269,19 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     if selected is None:
         return generated
     source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
-    if source["source_key"] == second.SOURCE_KEY:
+    if source["source_key"] in (evand.SOURCE_KEY, second.SOURCE_KEY):
         case = safe_load(existing.split("---\n", 2)[1])["packing"]
-        adopter = (
-            confirmation.adopt_verified
-            if confirmation.EXACT_EVIDENCE in case["verified_upper_bound"]["evidence"]
-            else second.adopt_report
-        )
+        if source["source_key"] == evand.SOURCE_KEY:
+            adopter = evand_adoption.adopt_case
+        else:
+            adopter = (
+                confirmation.adopt_verified
+                if confirmation.EXACT_EVIDENCE in case["verified_upper_bound"]["evidence"]
+                else second.adopt_report
+            )
         return (
             adopter(n, existing, generated)
-            if case["reported_upper_bound"]["source_key"] == second.SOURCE_KEY
+            if case["reported_upper_bound"]["source_key"] == source["source_key"]
             else generated
         )
     if source["source_key"] == update.SOURCE_KEY:

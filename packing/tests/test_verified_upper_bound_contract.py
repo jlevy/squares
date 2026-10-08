@@ -214,6 +214,14 @@ DECLARED_CONSUMERS = {
         "the check of that review's fixes, quoting its proposed bracket of a conjecture "
         "between the verified floor and ceiling; a ceiling, not s(n)"
     ),
+    "packing/devtools/register_evand_arrangements.py": (
+        "adopts an exact rational feasible ceiling for the complete new #399 pose; "
+        "preserves older ceilings and poses as historical evidence, never as s(n)"
+    ),
+    "packing/tests/test_evand_arrangement_adoption.py": (
+        "checks exact ceiling/complete-pose adoption and generator preservation; "
+        "never identifies feasibility with optimality or s(n)"
+    ),
     "packing/tests/test_evand_exact_certificates.py": (
         "holds a synthetic case's ceiling against conjectures inside and past half a unit "
         "of their last place, and each T-101 ceiling to the certified side rounded up and "

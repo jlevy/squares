@@ -28540,3 +28540,56 @@ evidence:
       but their bindings and full pinned builds have not been independently audited or replayed.
       No rigidity, isolated strict minimum or global lower bound follows. Same-count replacement poses
       receive no transferred theorem.
+  - id: E-evand-399-new-arrangements-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 266
+      - 270
+      - 272
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    replay_status: not-attempted
+    verifiers: []
+    source_key: '[Daniel new arrangements 2026-10-07]'
+    origin: external
+    novelty: previously-published
+    certificate: packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz
+    limitations: Author-reported new arrangements. Novelty, KKT, local/global optimality and rigidity
+      remain unestablished.
+    source_reviewed: '2026-10-08'
+  - id: E-evand-399-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 266
+      - 270
+      - 272
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    replay_status: passed
+    source_key: '[Daniel new arrangements 2026-10-07]'
+    origin: audited-here
+    novelty: previously-published
+    certificate: packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz
+    replay: From packing/, python -m devtools.evand_arrangement_reports check --replay; all nine complete
+      jobs and both exact routes are repeated.
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    independence_record: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra independent mathematical reviewer
+      note: Fresh nine-job replay agrees with all18 complete native outcomes apart from measured timing;650496
+        pair decisions.
+    limitations: Two independently implemented exact routes share the strict lossless half-angle conversion
+      and Python rational arithmetic. Feasible upper bounds only; no novelty, local/global optimality,
+      rigidity or human-oversight assurance.
+    source_reviewed: '2026-10-08'
