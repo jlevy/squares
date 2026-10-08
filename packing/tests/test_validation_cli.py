@@ -3807,6 +3807,7 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         # An advisory wall's tracking bead is read from the bead store, not the tree.
         "tier ceilings are declared and not slack",
         # New custody checks repeat until their tree reuse is explicitly classified.
+        "FN1 original-input bindings",
         "SQUISH update certification binds complete reviewed inputs",
         "SQUISH second update certification binds complete reviewed inputs",
         "rational refinement custody binds complete replay inputs",

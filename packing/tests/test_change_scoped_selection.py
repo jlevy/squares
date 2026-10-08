@@ -42,6 +42,7 @@ PATTERN_PROBES = (
     "packing/devtools/render_agenda_map.py",
     "packing/devtools/render_packing_svg.py",
     "packing/devtools/check_soundness_perimeter.py",
+    "packing/devtools/wand125_fn1_bindings.py",
     "packing/devtools/render_research_tables.py",
     "packing/tests/test_verify.py",
     "packing/tests/test_browser_floor_contract.py",
