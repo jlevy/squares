@@ -1,35 +1,24 @@
 ---
 type: is
-id: is-01m4bxdtbvasjn91jwhz448s7b
-title: Review current PR reports and plan separate import and verification slices
+id: is-01m4c9ppw9pc5v15m1rejaam8t
+title: "Issue422: publish accurate import, confirmation and deployment replies"
 kind: task
 status: in_progress
-priority: 1
-version: 13
+priority: 2
+version: 3
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
-child_order_hints:
-  - is-01m4c0q4qc17y0rdarxwvqyk0h
-  - is-01m4c0q5bn4xd81bep7db2gtw0
-  - is-01m4c487030p1vr3bjcngfb68e
-  - is-01m4c487gvf6z9323qew6mvntz
-  - is-01m4c4885wq7j9qt283wd4a7s7
-  - is-01m4c488sqxczxzx6d60fhqxbz
-  - is-01m4c489df06vnyyd5fczynnkk
-  - is-01m4cda8f0tb77q5jc9vp2azba
-  - is-01m4cdj4a77gstaf2krs9wr251
+parent_id: is-01m4c486bvartgwnk1s2szjz8x
 hold: null
 hold_until: null
-created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T00:10:41.351Z
-started_at: 2026-10-07T19:28:52.536Z
+created_at: 2026-10-07T23:03:17.128Z
+updated_at: 2026-10-08T00:07:15.202Z
+started_at: 2026-10-08T00:07:10.029Z
 ---
-User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
+Own main-only author replies and request closure for issue422. Current acknowledgement6047406306 created2026-10-07T21:41:08Z edited22:28:26Z; canonicalresultT116reportedlayerpending. Actual27 dualroutes+two distinctAstra complete-input reviews accepted9scope, but canonical confirmation/PRreview/CI/merge/live publication remain. Finalreply statesactualrungs/verifiers/scopedreviews/18negativecontrols safeceil/sourcecredit/oldhistory andmatchingpublishedcase/overview/resultchecks; no automaticissueclosurefromreportedPR. RootownsGH/tbdmutations.
 
 ## Notes
-
-Original415416 nowmerged4850d4146 after all current-headCI/reviews; deploymentagent verifies liveT113/T114 and11casegraphics. Currentreportintake has two completedparallelPR410reviews: maththink-uruv andsnapshotthink-ggd3, detailed reports under /workspace/squares-pr410-math-review and /workspace/squares-pr410-snapshot-inventory. Neither authorizesadmissionorcapraise. NewSQUISH12source076e6cf93684697065adb2762092d6b1652e95fe remotelypublished; requiredpushgate stillrunning and independentconfirmationmappingplan inparallel. Nextboundedentry is finalnewreleasegate/reportPR plus fullmappedconfirmation; preserve allunrelatedPR scopes.
 
 2026-10-08 UTC durable-state checkpoint (coordinator; supersedes earlier pending-head snapshots):
 GitHub reported PR427 head f1d7eacafc1249b430771583edf2120b5fc17d7b and confirmation PR429 head 0d01524be4235b7f12e6a971d73ea7d576fbac0f are both pushed. Formal remote stack430 orders427below429; bothdraft, nonclosingRefs422. Main84881f214086bf5b8ce83a714c4fda6d7be7b2d1 includes merged415/416/418/421/423/426 and closed401 with actual deployed1234/1234,149/149,38/38 checks. Original failures/cancellation retained; no all-green claim.

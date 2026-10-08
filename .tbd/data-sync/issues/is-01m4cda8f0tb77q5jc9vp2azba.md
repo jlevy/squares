@@ -1,35 +1,24 @@
 ---
 type: is
-id: is-01m4bxdtbvasjn91jwhz448s7b
-title: Review current PR reports and plan separate import and verification slices
+id: is-01m4cda8f0tb77q5jc9vp2azba
+title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 4
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
-child_order_hints:
-  - is-01m4c0q4qc17y0rdarxwvqyk0h
-  - is-01m4c0q5bn4xd81bep7db2gtw0
-  - is-01m4c487030p1vr3bjcngfb68e
-  - is-01m4c487gvf6z9323qew6mvntz
-  - is-01m4c4885wq7j9qt283wd4a7s7
-  - is-01m4c488sqxczxzx6d60fhqxbz
-  - is-01m4c489df06vnyyd5fczynnkk
-  - is-01m4cda8f0tb77q5jc9vp2azba
-  - is-01m4cdj4a77gstaf2krs9wr251
+parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
-created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T00:10:41.351Z
-started_at: 2026-10-07T19:28:52.536Z
+created_at: 2026-10-08T00:06:23.456Z
+updated_at: 2026-10-08T00:09:59.435Z
+started_at: 2026-10-08T00:07:06.684Z
 ---
-User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
+Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
-
-Original415416 nowmerged4850d4146 after all current-headCI/reviews; deploymentagent verifies liveT113/T114 and11casegraphics. Currentreportintake has two completedparallelPR410reviews: maththink-uruv andsnapshotthink-ggd3, detailed reports under /workspace/squares-pr410-math-review and /workspace/squares-pr410-snapshot-inventory. Neither authorizesadmissionorcapraise. NewSQUISH12source076e6cf93684697065adb2762092d6b1652e95fe remotelypublished; requiredpushgate stillrunning and independentconfirmationmappingplan inparallel. Nextboundedentry is finalnewreleasegate/reportPR plus fullmappedconfirmation; preserve allunrelatedPR scopes.
 
 2026-10-08 UTC durable-state checkpoint (coordinator; supersedes earlier pending-head snapshots):
 GitHub reported PR427 head f1d7eacafc1249b430771583edf2120b5fc17d7b and confirmation PR429 head 0d01524be4235b7f12e6a971d73ea7d576fbac0f are both pushed. Formal remote stack430 orders427below429; bothdraft, nonclosingRefs422. Main84881f214086bf5b8ce83a714c4fda6d7be7b2d1 includes merged415/416/418/421/423/426 and closed401 with actual deployed1234/1234,149/149,38/38 checks. Original failures/cancellation retained; no all-green claim.
@@ -39,3 +28,6 @@ Scientific422 full27completedjobs retainedonupperbranch,9positives18controls bot
 Issue425 frozenv2 complete10inputs and bothacceptedprotocolreviews: ZEROdeciders, noverdict/promotion. DraftGitHubrelease406258689 tagintake-425-preparation-2026-10-07 at https://github.com/jlevy/squares/releases/tag/untagged-5c79f36e3406b6245cdd retains138files archive6669242B SHA25600d4172972c82b2b928bc8427cff24c9a0d3c952da7ec8bf617f55399b8a9d80; manifest28616B SHA2566b7ba4f5011d799975c5ccab543aa9425c35e27b36131ef07e2f6326efd681c5. Actual authenticatedGitHubdownload roundtripMATCH. SeparateenvironmentZIPasset uploaded. BackupisDRAFTrepositorycustody, NOTpublicscientificpublication; canonical425storageunresolved184799Bbeforeactualfacts>109658Bheadroom.
 CheckpointdocumentationPR creationinflight beadthink-vz6u; no sourceownercheckout overwritten. EnvironmentcurrentinstanceGHpush/PR/native-sync/bootstrapworks; lateststartsave stale_base unsaved, tested4filehandoffretainedonGitHubdraftrelease. Freshsetupchatcurrentsettings reconcile/save/publishrequired, no new-taskrestorationclaim.
 Next: repairprofiler withsupportedcapability and getactualfullgate/heavyreceipt; uppergate+hostedchecks, atomicformal430mergeonlycleanreviewed, actualdeployment/results/graphicschecks, final422reply/ledger/closure. Remaining425/419/420/414/399/375/400/405/413/411/366/256 intake staysopenwithseparateevidentialscope.
+
+Checkpoint update: actual lowerhosted f1 CI30SUCCESS26documentedSKIP CLEAN; upper0d25SUCCESS26SKIP5FAIL (validate,suite-a/b/c,requiredaggregate) run37705180742. DedicatedSol repair_upper_ci diagnosing exactupperfailure. Lower unchanged fullprofiler module supported-capability rerun actual2PASS1.65s EXIT0; broadEXIT1 retained. Exact selected heavy phase separatelyRUNNING; combined ordinary+heavy reachable900s budget remainsrequired, no waiver. UpperA/B/C/D actualformalreview publication receipt pr429-whole-review-publication.json:5449863506/5449863621/5449863708/5449863858 all0findings at0d/basef1.
+ActualGitHubdraftrelease406258689 additionally retains operationalrecords703files43897170Boriginal archive7805026B SHA2565202871832454b89669c1fb4ba673e890fa73068cb5181950ef7d2961bbc16ed; actualdownloadMATCH. Includes queueplans, repair/failure/review/native-state receipts as point-in-time checkpoint before later repairs. Separate425138filearchive remainsunchanged. Canonical425storage/publication/replay remainunresolved,0deciders.

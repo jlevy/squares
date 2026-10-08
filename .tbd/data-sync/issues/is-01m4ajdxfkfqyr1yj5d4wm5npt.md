@@ -3,9 +3,9 @@ type: is
 id: is-01m4ajdxfkfqyr1yj5d4wm5npt
 title: "Import Nate Chaoweeraprasit: eighteen SQUISH upper-bound packings (#401)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 35
+version: 36
 delegate: codex@17e132e9b179
 labels:
   - result-import
@@ -33,8 +33,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:57:17.299Z
-updated_at: 2026-10-07T21:27:58.586Z
+updated_at: 2026-10-07T23:22:23.887Z
 started_at: 2026-10-07T06:57:24.624Z
+closed_at: 2026-10-07T23:22:23.886Z
+close_reason: "All eighteen issue401 cases published and independently verified: reviewed formal stacks417/424 merged; source/geometry and safeceil/credit/history validated at main2af, matching deployment6922702889 and both independent/hosted strictTLS1234/1234 checks, live149/149 and layouts38/38 plusvisualPASS. Actual accuratefinal author reply6048513671 posted22:54:51UTC; issue401 manuallyclosed22:54:52. Final onefileledgermetadata PR426 independentlyreviewed zero findings, actual15hostedPASS39documentedSKIP, merged23:21:51 into main84881f214086bf5b8ce83a714c4fda6d7be7b2d1. Separate nine-case422 remains open underthink-sfpz with draftPR427 and canonicalconfirmation pending; no loss/prematureclosure."
+resolution: null
+duplicate_of: null
 ---
 Workflow entry: standard W1 result import, bounded engineering, complete exact rational replay and independent Astra math/correctness review, standard PR review and hosted CI, then authorized formal-stack merge and publication checks. Expanded issue401 scope18counts: original11 in PR415/416 plus12 new or improved geometries in later release (five replacements, seven new); n153 provenance-only byte identity. Native tbd sync now works via supplied gh authentication and confirmed tbd-sync publication; remove tracked fallback outboxes only after verified preservation. User authorizes merge once clean/reviewed, and requires proper results list and main case graphics. Keep parent/author reply open until expanded import settles.
 

@@ -3,9 +3,9 @@ type: is
 id: is-01m4bvqnk2d26b8ydnvt3h07n1
 title: "Import issue 401 October 7 follow-up: thirteen certificates and revised lineage"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 11
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T18:59:08.514Z
-updated_at: 2026-10-07T22:03:38.611Z
+updated_at: 2026-10-07T23:22:23.884Z
 started_at: 2026-10-07T18:59:12.163Z
+closed_at: 2026-10-07T23:22:23.884Z
+close_reason: "All eighteen issue401 cases published and independently verified: reviewed formal stacks417/424 merged; source/geometry and safeceil/credit/history validated at main2af, matching deployment6922702889 and both independent/hosted strictTLS1234/1234 checks, live149/149 and layouts38/38 plusvisualPASS. Actual accuratefinal author reply6048513671 posted22:54:51UTC; issue401 manuallyclosed22:54:52. Final onefileledgermetadata PR426 independentlyreviewed zero findings, actual15hostedPASS39documentedSKIP, merged23:21:51 into main84881f214086bf5b8ce83a714c4fda6d7be7b2d1. Separate nine-case422 remains open underthink-sfpz with draftPR427 and canonicalconfirmation pending; no loss/prematureclosure."
+resolution: null
+duplicate_of: null
 ---
 W1 result-import stages 1–3 then W2 exact rational replay and mapped Astra reviews. All current issue comments 6043191866 (edited2026-10-07T18:33:04Z) and6043263840 captured. Pin itsnaka/squish-certs5e32bbd7028b6e3b869979278079cd37ed6770aa under squish-submission-2026-10-07. Seven new counts123,179,208,237,239,258,263; five improved126,129,154,155,238; compare n153 to prior attachment exactly. Preserve existing11 witnesses and credits, add revised lineage from author, no-license source stays outside Git except attributed derived facts. Additional reported layer based on codex/confirm-squish-401 followed by independently verified confirmation. GPT-6.1 Sol engineering and Astra deep math. Root owns publication/bead writes. Actual restored push denied403; gh PR attempt pending. Final author reply/main claims only after merge; no merge consent.
 
@@ -56,3 +60,5 @@ New reported source saved remotely076e6cf93684697065adb2762092d6b1652e95fe and d
 Final reported checkpoint e64676d58206fa1e40bb9ce62ba6ef70e420e96a is pushed on GitHub branch codex/import-squish-401-followup and attached PR421. DATA_REVISION ea583e9e4dc789d4e519f64a6f86282399ecd6fa. Hosted final:30successful26inapplicable skips. Required --push --since ea583e9e passed61/101steps793.21s; reachable615.44s under900s cap, normal5472pass30skip1xfail431.76s plus heavy1pass175.36s/PACK_JOBS4. Full historical failed broad run remains preserved; no fullgate success claimed. Source/main/outbox preservation verified and alltracked outbox empty. Newseparateconfirmation think-gsno owner followup_failed_contracts on codex/confirm-squish-401-followup basede646. Standard finalsenior/security/performance reviews pending. The author moves later9toGitHub422, queued think-sfpz; original401 keeps18countscope. User authorizes taskmerge oncecleanandreviewed.
 
 2026-10-07 continuation: Formal follow-up stack424 published and verified remote/local: PR421 reported12 at b4c59000c3ba8ec4bc19fb89a4cc8b175ed6ef7d -> draftPR423 confirmation12 at27344ae28d08cf58f33703bd5b617ff965b88653. Original415/416/418 merged/deployed1230PASS. LowerA1 value-scoped67citations fixed2a27 with266focusedPASS, hosted30success26skip, five formalreviews plusA1disposition accepted. Broader final citation pushEXIT1:5687PASS1fail2mathfixtureerrors; isolatedwholemodules reproducedpopoverrace and mathpassed. MinimalJS-only repair20PASS77.99s, independentAstraaccepted, unchangedDATA_REVISIONb5fb; current88-selector requiredpush running. New browserownerthink-9ky0. Upper27344 initialhostedCI34failures underengineeringrepair; no merge claim. Bothissues401/422 remainopen and no autoclose refs.
+
+2026-10-07 checkpoint: Lower421readyatb4c590: current30hostedPASS26documentedSKIP/CLEAN, scope3294testsPASS19skip plus61tierstepsPASS494.78s97matchingcommands. Source/rootF accepted; earlier5687pass1failure2mathfixtureerrorsandfailedisolatedmodule preserved. Upper423actual34CIrepairfocusedpassed, awaitingrebase/pin/required207/CI/followup. Standardshortcutrequireswhole-stackassessment+addressingbeforeanylowermerge, soholdatomic424 untilupperready. Final401replymustactualmainresultrows/18uniquecases/drawings+nativeoutboxproofaftermerge.
