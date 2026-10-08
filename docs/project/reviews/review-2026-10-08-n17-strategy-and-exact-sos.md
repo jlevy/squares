@@ -138,8 +138,10 @@ $$
 The maximum of the four right sides supplies the absolute projection widths.
 There are eight signed face-axis alternatives per pair, using either square’s axes.
 Thus packing is a finite **disjunction of nonconvex quadratic systems**, with 136 pair
-disjunctions. Dropping the alternatives or replacing squares by centre-distance
-constraints gives a relaxation.
+disjunctions. Omitting pair-separation constraints or replacing squares by
+centre-distance constraints gives a relaxation.
+Retaining only some separating-axis branches restricts the domain and cannot establish
+exclusion of every packing.
 Boundary equality must remain allowed.
 There are 68 real variables at fixed cap, or 69 including $L$, before elimination or
 selector variables. Proven coordinate bounds make each closed branch compact; add an

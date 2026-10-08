@@ -4,6 +4,10 @@ from __future__ import annotations
 
 import copy
 import time
+from pathlib import Path
+from typing import Any
+
+import pytest
 
 from devtools import reconcile_n17_issue_patterns as join
 
@@ -145,3 +149,151 @@ def test_frozen_input_join_and_partial_proof_status() -> None:
         assert "incomplete" in str(exc)
     else:
         raise AssertionError("expired metadata deadline passed")
+
+
+@pytest.mark.parametrize("ids", [[""], [" "], [None], [[]], ["358-C1", "358-C1"], ["413-23"]])
+def test_invalid_and_colliding_pattern_ids_are_refused_before_populations(
+    monkeypatch: pytest.MonkeyPatch, ids: list[Any]
+) -> None:
+    document = {
+        "schema": join.SOURCE_SCHEMA,
+        "reports": [
+            {
+                "source": "synthetic",
+                "table": "\n".join(f"| {i} | cell | Computed | — |" for i in range(1, 34)),
+            }
+        ],
+        "companion_patterns": [{"id": identity} for identity in ids],
+    }
+
+    def no_populations(*_args: Any) -> None:
+        pytest.fail("invalid pattern identity reached population reconstruction")
+
+    monkeypatch.setattr(join, "populations", no_populations)
+    with pytest.raises(join.RefusedError, match="pattern ID"):
+        join.reconcile(document, deadline=time.monotonic() + 5)
+
+
+def synthetic_publication(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[Path, list[str]]:
+    output = tmp_path / "result.json"
+    output.write_text("previous evidence", encoding="utf-8")
+    monkeypatch.setattr(join, "read_document", lambda _path: {})
+    monkeypatch.setattr(join, "reconcile", lambda *_args, **_kwargs: {"synthetic": True})
+    return output, ["--source", "unused", "--output", str(output)]
+
+
+@pytest.mark.parametrize("failure", ["write", "close", "replace"])
+def test_cli_publication_failures_preserve_old_output_and_clean_staging(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    failure: str,
+) -> None:
+    output, arguments = synthetic_publication(tmp_path, monkeypatch)
+    write, close = join.os.write, join.os.close
+
+    def partial_write(descriptor: int, contents: Any) -> int:
+        write(descriptor, contents[:5])
+        raise OSError("injected write failure")
+
+    def failed_close(descriptor: int) -> None:
+        close(descriptor)
+        raise OSError("injected close failure")
+
+    def failed_replace(_source: Path, _destination: Path) -> None:
+        raise OSError("injected replace failure")
+
+    if failure == "write":
+        monkeypatch.setattr(join.os, "write", partial_write)
+    elif failure == "close":
+        monkeypatch.setattr(join.os, "close", failed_close)
+    else:
+        monkeypatch.setattr(join.os, "replace", failed_replace)
+    assert join.main(arguments) == 1
+    captured = capsys.readouterr()
+    assert "REFUSED: injected " + failure + " failure" in captured.err
+    assert "WROTE" not in captured.out
+    assert output.read_text() == "previous evidence"
+    assert list(tmp_path.iterdir()) == [output]
+
+
+def test_publication_completes_short_writes_before_atomic_replacement(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    output = tmp_path / "result.json"
+    output.write_text("previous evidence", encoding="utf-8")
+    write, replace = join.os.write, join.os.replace
+    text = '{"message":"complete λ receipt"}'
+    writes = []
+
+    def short_write(descriptor: int, contents: Any) -> int:
+        count = write(descriptor, contents[:3])
+        writes.append(count)
+        return count
+
+    def inspect_replace(source: Path, destination: Path) -> None:
+        assert source.parent == destination.parent
+        assert source.read_text() == text
+        assert destination.read_text() == "previous evidence"
+        replace(source, destination)
+
+    monkeypatch.setattr(join.os, "write", short_write)
+    monkeypatch.setattr(join.os, "replace", inspect_replace)
+    join.publish_metadata(output, text)
+    assert len(writes) > 1
+    assert output.read_text() == text
+    assert list(tmp_path.iterdir()) == [output]
+
+
+def test_write_failure_remains_primary_when_close_and_cleanup_also_fail(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    output, arguments = synthetic_publication(tmp_path, monkeypatch)
+    write, close = join.os.write, join.os.close
+
+    def partial_write(descriptor: int, contents: Any) -> int:
+        write(descriptor, contents[:5])
+        raise OSError("primary partial write")
+
+    def failed_close(descriptor: int) -> None:
+        close(descriptor)
+        raise OSError("secondary close failure")
+
+    def failed_cleanup(path: Path, *, missing_ok: bool = False) -> None:
+        assert missing_ok
+        assert path.parent == output.parent
+        assert path != output
+        raise OSError("secondary cleanup failure")
+
+    monkeypatch.setattr(join.os, "write", partial_write)
+    monkeypatch.setattr(join.os, "close", failed_close)
+    monkeypatch.setattr(Path, "unlink", failed_cleanup)
+    assert join.main(arguments) == 1
+    captured = capsys.readouterr()
+    assert captured.err.startswith("REFUSED: primary partial write\n")
+    assert "secondary close failure" in captured.err
+    assert "secondary cleanup failure" in captured.err
+    assert "WROTE" not in captured.out
+    assert output.read_text() == "previous evidence"
+    staging = [path for path in tmp_path.iterdir() if path != output]
+    assert len(staging) == 1
+    assert len(staging[0].read_bytes()) == 5
+
+
+def test_zero_length_staging_write_is_refused_without_publication(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    output = tmp_path / "result.json"
+    monkeypatch.setattr(join.os, "write", lambda *_args: 0)
+    with pytest.raises(OSError, match="made no progress"):
+        join.publish_metadata(output, "{}")
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_publication_does_not_create_missing_parents(tmp_path: Path) -> None:
+    parent = tmp_path / "missing"
+    with pytest.raises(FileNotFoundError):
+        join.publish_metadata(parent / "result.json", "{}")
+    assert not parent.exists()

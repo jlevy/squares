@@ -9,12 +9,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
-
-from strif import atomic_output_file
 
 from devtools import census_n17_certified as census
 from devtools import select_n17_sub_patterns as selector
@@ -305,10 +305,16 @@ def reconcile(
     require(document.get("schema") == SOURCE_SCHEMA, "source schema")
     reports = parse_reports(document["reports"])
     require_roster([row["row"] for row in reports["rows"]], list(range(1, 34)), "reported33")
-    cover, admitted, groups, baseline = populations(document, root, deadline)
     patterns = [
         {**row, "id": f"413-{row['row']}", "issue": 413} for row in reports["rows"]
     ] + document["companion_patterns"]
+    identifiers = [pattern.get("id") for pattern in patterns]
+    require(
+        all(type(identity) is str and bool(identity.strip()) for identity in identifiers),
+        "pattern IDs must be nonempty strings",
+    )
+    require(len(set(identifiers)) == len(identifiers), "duplicate pattern ID")
+    cover, admitted, groups, baseline = populations(document, root, deadline)
     class_rows: dict[int, list[str]] = {}
     hit_by_id: dict[str, dict[str, set[int]]] = {}
     rows = []
@@ -424,6 +430,39 @@ def reconcile(
     }
 
 
+def publish_metadata(path: Path, text: str) -> None:
+    """Replace complete bytes using private staging permissions; no durability promise."""
+    descriptor, name = tempfile.mkstemp(
+        dir=path.parent, prefix=f".{path.name}.", suffix=".partial"
+    )
+    temporary = Path(name)
+    try:
+        try:
+            remaining = memoryview(text.encode("utf-8"))
+            while remaining:
+                written = os.write(descriptor, remaining)
+                if written <= 0:
+                    raise OSError("metadata staging write made no progress")
+                remaining = remaining[written:]
+        finally:
+            failure = sys.exception()
+            try:
+                os.close(descriptor)
+            except OSError as error:
+                if failure is None:
+                    raise
+                failure.add_note(f"metadata staging close failed: {error}")
+        temporary.replace(path)
+    finally:
+        failure = sys.exception()
+        try:
+            temporary.unlink(missing_ok=True)
+        except OSError as error:
+            if failure is None:
+                raise
+            failure.add_note(f"metadata staging cleanup failed for {temporary}: {error}")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True)
@@ -442,11 +481,12 @@ def main(argv: list[str] | None = None) -> int:
             print("PASS: complete fresh named-cell reconstruction; admission remains unproved")
         else:
             assert args.output is not None
-            with atomic_output_file(args.output) as temporary:
-                Path(temporary).write_text(text, encoding="utf-8")
+            publish_metadata(args.output, text)
             print("WROTE: conditional metadata projection; no admission")
     except (ValueError, OSError, KeyError, TypeError) as exc:
         print(f"REFUSED: {exc}", file=sys.stderr)
+        for note in getattr(exc, "__notes__", []):
+            print(f"  {note}", file=sys.stderr)
         return 1
     return 0
 
