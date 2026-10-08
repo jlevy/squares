@@ -80,6 +80,8 @@ from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
+from devtools import squish_second_update_confirmation as second
+from devtools import squish_second_update_house_links as house
 from devtools.repo_scope import tracked_files
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
@@ -98,13 +100,25 @@ HERE = ROOT.relative_to(REPO)
 # repository, or build products. `resources/README.md` is copied separately because the
 # README link checker requires that one path. The virtualenv and cargo target are
 # symlinked back so nothing is rebuilt or resolved again.
+HOUSE_LINK_LEAVES = frozenset(path.relative_to(ROOT) for path in house.snapshot_house_links())
 PRUNE = frozenset(
     {
+        second.WITNESSES,
+        *(ROOT / relative for relative in HOUSE_LINK_LEAVES),
         # The gate's own marker. A clone that carried it would make the campaign runner
         # refuse to start, and four controls drive the runner expecting a DIFFERENT
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # Historical push telemetry has no registered worker consumer. Keep the logs
+        # in Git; linked/result dependencies are still rescued dynamically below.
+        # The exact five-file audit saves 395,235 bytes without pruning scientific
+        # receipts, native journals, facts, witnesses or review-linked push logs.
+        ROOT / "campaign/agent-sessions/session-164-push-initial.log",
+        ROOT / "campaign/agent-sessions/session-153-integrated-push.log",
+        ROOT / "campaign/agent-sessions/session-163-push-recovery.log",
+        ROOT / "campaign/agent-sessions/session-163-push-refinement.log",
+        ROOT / "campaign/agent-sessions/session-163-push-final.log",
         # Large, generator-owned rendering outputs are replayed by their dedicated
         # validation steps and are never mutation targets. Copying hundreds of witnesses
         # and renderings into every private worker would exceed the portable snapshot cap.
@@ -198,6 +212,9 @@ PRUNE = frozenset(
         ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/known-best-1-324.svg",
         ROOT / "atlas/known-best/rendering",
+        # Full generated update certificates remain readable through LINK_BACK.
+        # Receipt/code mutations copy the inputs into their private temporary tree.
+        ROOT / "witnesses/squish-401-update-2026",
         # The regularized layer's 51 drawings (think-bgkz, 2026-10-02), 11 MB of generated
         # SVG that `regularized atlas drawings match their index` re-renders and compares,
         # joined on the same grounds when they took the snapshot to 204,959,999 bytes
@@ -250,6 +267,22 @@ PRUNE = frozenset(
         # register lists return through `snapshot_pruned_targets`, 3,299,132 bytes; the
         # attack folder, which a review links, comes back empty. The trace is at
         # `SNAPSHOT_MAX_BYTES`.
+        # The 7 October follow-up crossed the unchanged 192 MiB snapshot cap.
+        # These three historical validation-output roots hold timing archives,
+        # command journals and publication diagnostics, not source or control targets.
+        # General checker file traces and a finished-worker baseline/mutation replay
+        # found no consumer of their unrescued files. All linked inputs still return:
+        # four baselines pass; the schema baseline's existing missing-resource refusals
+        # are byte-identical with and without these three pruned roots.
+        # both legacy checkpoint manifests and their archives, the integrated log,
+        # the native checkpoint, the instrumentation source, and the PDF comparison
+        # pair with its report and postmortem. No ordinary replay fixture is removed.
+        # At the reviewed tree this omits 1,423,523 bytes after copy-back, leaving
+        # 200,942,507 bytes against 201,326,592; future linked or registered files are
+        # rescued by the same snapshot_pruned_targets contract.
+        ROOT / "benchmarks/validation-efficiency/runs",
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
+        ROOT / "campaign/agent-sessions/session-152-validation",
         ROOT / "benchmarks/gate-cost-at-324/runs",
         ROOT / "benchmarks/measure-verifier/census",
         ROOT / "benchmarks/measure-verifier/census-mixed",
@@ -294,6 +327,13 @@ PRUNE = frozenset(
         / "campaign/series/series-000-smoke-and-calibration/results/agenda-040"
         / "one-spare-inventory-n21-orbits.json.gz",
         ROOT / "campaign/agent-sessions/session-105-validation/full-48a4544f.json",
+        # Two older fast-gate telemetry receipts have no command reader, control,
+        # inline link or registered result dependency. Keep their source-identity
+        # records and the ordinary session document; copy-back takes precedence if
+        # either receipt becomes linked or registered. These exact two files save
+        # 117,584 bytes without omitting any SQUISH proof input or changing the cap.
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-cpu4-bdc28e89.json",
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-native-bdc28e89.json",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private
@@ -502,6 +542,13 @@ PRUNE = frozenset(
         ROOT / "witnesses/franciscouzo-2026-10-03",
     }
 )
+# Generated exact witnesses of the regularized drawing layer, independently
+# replayed by its atlas validation steps and never read by a mutation control.
+# Keep the index/view metadata and original source witnesses in every worker.
+REGULARIZED_WITNESSES = frozenset(
+    (ROOT / "atlas/known-best/regularized").glob("n-*-regularized.yaml*")
+)
+PRUNE |= REGULARIZED_WITNESSES
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated
@@ -538,11 +585,14 @@ BUILD_CACHES = frozenset(
     {"__pycache__", ".pytest_cache", ".ruff_cache", "dist", "node_modules"}
 )
 LINK_BACK = (
+    second.WITNESSES.relative_to(ROOT),
+    *sorted(HOUSE_LINK_LEAVES),
     Path(".venv"),
     Path("sqsearch/target"),
     Path("sqverify_exact/target"),
     Path("sqverify_fast/target"),
     Path("n17bb_native/target"),
+    "witnesses/squish-401-update-2026",
 )
 # Individual files rescued from `PRUNE` because a check that runs inside a worker reads
 # that exact path. `clone_tree` copies precisely this tuple and `snapshot_source_bytes`
@@ -574,6 +624,7 @@ LINK_BACK = (
 # closeout naming `.github/PULL_REQUEST_TEMPLATE.md`, which only a link could bring
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
+    *second.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",
@@ -911,6 +962,8 @@ LINKED_PRUNE_ROOTS = (
         not in {
             ROOT / ".gate-running",
             ROOT / ".venv",
+            ROOT / "witnesses/squish-401-update-2026",
+            second.WITNESSES,
             ROOT / "sqsearch/target",
             ROOT / "sqverify_exact/target",
             ROOT / "sqverify_fast/target",
@@ -1118,6 +1171,12 @@ def clone_tree(dest: Path) -> None:
         if not source.exists():
             continue
         link = work / rel
+        # Existing link/result dependency rescue copies and indexes this consumer.
+        # Never replace a rescued private house leaf with a source link.
+        if rel in HOUSE_LINK_LEAVES and link.exists():
+            if link.is_symlink():
+                raise ValueError("rescued house consumer is not a private file")
+            continue
         link.parent.mkdir(parents=True, exist_ok=True)
         link.symlink_to(source)
 

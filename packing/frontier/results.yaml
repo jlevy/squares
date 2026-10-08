@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 results:
   - id: T-001
     kind: lower-bound
@@ -11729,3 +11729,514 @@ results:
       the retained PROOF.md section 8 rather than an unretained upstream note (U-4); and
       the paper's stale sentence (U-3) is rewritten in its follow-up revision. U-8 fell
       away with U-2.
+
+  - id: T-113
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: "`s(n) ≤ S_n` at ten counts, n = 108 to 303, from new SQUISH rational packings"
+    claim: |
+      Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129,
+      130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on
+      jlevy/squares#401 on 7 October 2026. Each S_n is the exact rational side in the retained
+      packing facts, from about 0.0004126 to 0.0067047 below the earlier reported upper bound
+      here. Each certificate supplies rational centres and rational half-angle parameters for
+      closed unit squares in the rational container.
+
+      The claim establishes only upper bounds, with no optimality or rigidity conclusion. The
+      author credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+      assistance.
+
+      This repository confirmed the upper bounds by independently re-implemented exact-rational
+      checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent accept
+      every pair and container wall of each certificate, with both geometric controls rejected.
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: New packings reduce the recorded upper bounds at ten counts by about 0.0004 to 0.0067,
+        substantive case-bound improvements. They settle no exact optimum and introduce no proved general
+        packing theorem.
+      scored: '2026-10-07'
+      by: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md (GPT-6 Astra high reasoning;
+        S3 confirmed against T-056, T-092 and T-098)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH ten packings 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-ten-packings-2026-10-07-report
+    - E-squish-ten-packings-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-401-2026-10-07/README.md
+    - packing/resources/web/squish-401-2026-10-07/facts/n-108.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-126.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-129.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-130.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-154.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-155.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-180.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-209.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-238.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-303.json.gz
+    - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+    - packing/witnesses/squish-401-2026/n-108-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-126-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-129-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-130-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-154-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-155-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-180-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-209-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-238-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-303-rational.yaml.gz
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/devtools/squish_upper_bound_packets.py
+    - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+    next_rung: V4 and C4 need a retained human oversight record for the claim, certificate, assumptions,
+      two deciding implementations, controls and accepted adversarial AI reviews. The two separately prompted
+      project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
+      with the open replay and two human expert reviews. No local or global optimality claim is made by
+      these upper-bound certificates.
+    notes: Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+      on the same day after complete exact-rational dual replay and two accepting project AI reviews,
+      with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
+      oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
+      display the exact source rational side rounded upward at sixteen decimals; their exact_form fields
+      retain that source rational. Across the eleven packings this corrects four source prints upward,
+      tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
+      original source print separately from the verified display.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, high reasoning, separately prompted W2 mathematics lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Exact rational half-angle conversion, complete roster, unit-square/container/all-pair SAT
+        soundness, source/decider independence, two negative controls and decimal ceilings for T-113 and
+        T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    - path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, max reasoning, separately prompted senior correctness and security review
+        lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Import implementation, strict input admission, retained source attribution, source/fact/witness/receipt
+        binding, checker verdict and negative-control consistency, and publication boundaries for T-113
+        and T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    controls:
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/tests/test_squish_upper_bound_packets.py
+    - packing/tests/test_squish_upper_bound_receipts.py
+    - packing/tests/test_import_half_angle_witness.py
+    composition: Each source rational triple is converted without rounding to exact unit-square corners,
+      at the source’s unchanged rational side. Both native exact_verify and the independently written
+      rational-corner checker decide every pair and wall; the source-to-witness conversion and complete
+      scope are accepted by the retained mathematical review. The wrapper binds the receipt to the decided
+      witness, checks the full roster and upward decimal display, and replays both geometric controls.
+      This is an independently re-implemented confirmation, sharing no verification code with the producer;
+      the two first-party routes share the converted corners, YAML and Python rational arithmetic.
+
+  - id: T-114
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: "`s(153) ≤ 7250614903299225/562949953421312`, from a SQUISH rational packing"
+    claim: |
+      Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <=
+      7250614903299225/562949953421312, about 12.8796793733329640, in the supplement to
+      jlevy/squares#401 on 7 October 2026, about 0.0019874 below the earlier reported upper bound
+      here. Each certificate supplies rational centres and rational half-angle parameters for
+      closed unit squares in the rational container.
+
+      The claim establishes only upper bounds, with no optimality or rigidity conclusion. The
+      author credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+      assistance.
+
+      This repository confirmed the upper bounds by independently re-implemented exact-rational
+      checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent accept
+      every pair and container wall of each certificate, with both geometric controls rejected.
+    scope:
+      n_values:
+      - 153
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: New packings reduce the recorded upper bounds at n = 153 by about 0.00199, substantive
+        case-bound improvements. They settle no exact optimum and introduce no proved general packing
+        theorem.
+      scored: '2026-10-07'
+      by: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md (GPT-6 Astra high reasoning;
+        S3 confirmed against T-056, T-092 and T-098)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH n153 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-n153-2026-10-07-report
+    - E-squish-n153-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-401-2026-10-07/README.md
+    - packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
+    - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+    - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/devtools/squish_upper_bound_packets.py
+    - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+    next_rung: V4 and C4 need a retained human oversight record for the claim, certificate, assumptions,
+      two deciding implementations, controls and accepted adversarial AI reviews. The two separately prompted
+      project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
+      with the open replay and two human expert reviews. No local or global optimality claim is made by
+      these upper-bound certificates.
+    notes: |
+      Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+      on the same day after complete exact-rational dual replay and two accepting project AI reviews,
+      with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
+      oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
+      display the exact source rational side rounded upward at sixteen decimals; their exact_form fields
+      retain that source rational. Across the eleven packings this corrects four source prints upward,
+      tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
+      original source print separately from the verified display.
+
+      The original supplement comment
+      is no longer available; the identical certificate remains accessible at
+      https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json.
+      The retained update comparison binds its exact side and rational triples to the original;
+      this source restoration adds no result or assurance rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, high reasoning, separately prompted W2 mathematics lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Exact rational half-angle conversion, complete roster, unit-square/container/all-pair SAT
+        soundness, source/decider independence, two negative controls and decimal ceilings for T-113 and
+        T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    - path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, max reasoning, separately prompted senior correctness and security review
+        lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Import implementation, strict input admission, retained source attribution, source/fact/witness/receipt
+        binding, checker verdict and negative-control consistency, and publication boundaries for T-113
+        and T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    controls:
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/tests/test_squish_upper_bound_packets.py
+    - packing/tests/test_squish_upper_bound_receipts.py
+    - packing/tests/test_import_half_angle_witness.py
+    composition: Each source rational triple is converted without rounding to exact unit-square corners,
+      at the source’s unchanged rational side. Both native exact_verify and the independently written
+      rational-corner checker decide every pair and wall; the source-to-witness conversion and complete
+      scope are accepted by the retained mathematical review. The wrapper binds the receipt to the decided
+      witness, checks the full roster and upward decimal display, and replays both geometric controls.
+      This is an independently re-implemented confirmation, sharing no verification code with the producer;
+      the two first-party routes share the converted corners, YAML and Python rational arithmetic.
+
+  - id: T-115
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: '`s(n) ≤ S_n` at twelve counts, from the SQUISH update’s new and smaller rational packings'
+    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes feasible rational packing upper
+      bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are
+      additional and five tighten the original release. Complete exact rational dual replay accepts
+      all twelve unchanged source sides; both full-size geometric controls are rejected. n153 is identical
+      to its earlier certificate and remains on its original evidence. Optimality and rigidity are
+      not established.
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Twelve confirmed case-bound improvements, adding seven counts and tightening five
+        submitted bounds; no exact optimum or general theorem is established.
+      scored: '2026-10-07'
+      by: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH update 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-update-2026-10-07-report
+    - E-squish-update-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-401-update-2026-10-07/README.md
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/update-claims.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
+    - packing/devtools/squish_followup_packets.py
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-123.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-126.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-129.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-154.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-155.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-208.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-237.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-238.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-239.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-258.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-263.json.gz
+    - packing/witnesses/squish-401-update-2026/n-123-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-126-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-129-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-154-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-155-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-179-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-208-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-237-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-238-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-239-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-258-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-263-rational.yaml.gz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/certification.json.xz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/negative-controls.json.xz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/replay-summary.json
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/reviewed-semantic-binding.json.xz
+    - docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+    - docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    next_rung: V4/C4 require a retained human oversight record for the claim, certificates, assumptions,
+      deciding implementations and accepted AI reviews. Rung 5 requires reviewed proof-assistant formalization.
+      No independently audited human oversight is retained.
+    notes: Confirmation reuses the completed thirteen-case positive replay (108.598 seconds), attributing
+      104.001 seconds to these twelve geometries and excluding unchanged n153. All twelve source rational
+      sides are preserved; source finite prints remain quotations and current bound lanes use their
+      least upward sixteen-place decimal ceilings. Seed credit remains author-reported; Nate Chaoweeraprasit
+      disclosed human-directed Claude Opus 5.5 assistance. Original T-113/T-114 facts, receipts, witnesses
+      and reviews remain historical evidence for their own geometries. No producer checker, optimality
+      or human oversight conclusion follows.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, separately prompted mathematics review lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Pinned source rational half-angle conversion, unchanged exact sides, complete unit-square/wall/all-pair
+        decisions, thirteen-case replay with twelve-case confirmation scope, full controls and decimal
+        ceilings.
+      verdict: accepted
+      covers:
+      - T-115
+    - path: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, separately prompted mathematical and semantic binding review lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: All twelve update source/fact/witness/full receipt inputs, exact corner derivation, both
+        full-size control inputs and verdicts, shared-decider premises and source attribution.
+      verdict: accepted
+      covers:
+      - T-115
+    controls:
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/negative-controls.json.xz
+    - packing/tests/test_squish_update_certification.py
+    - packing/tests/test_generate_frontier_case.py
+    composition: Exact rational half-angle facts are converted without rounding or dilation. Both
+      independently implemented deciding routes inspect every pair and wall. The completed reviewer
+      replay is reused and its full twelve scoped inputs and verdicts retained, with two rejected
+      complete 123-square controls. Fast checks bind current source facts, revision-specific witness
+      metadata, complete semantic input, typed coverage and safe decimal ceilings. Explicit --replay
+      repeats both decisions. Two accepted scoped AI reviews address shared conversion and semantic
+      premises.
+
+  - id: T-116
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: '`s(n) ≤ S_n` at nine counts, from the second SQUISH update’s new rational packings'
+    claim: Nine unchanged rational SQUISH packings establish feasible upper bounds at n = 88, 108, 179,
+      180, 199, 207, 236, 263 and 302. Both exact local routes accepted all nine and rejected both complete-roster
+      controls per case; two distinct separately prompted AI reviews accepted their complete scientific
+      evidence. Five counts are additional and four replace earlier SQUISH packings. Original and first-update
+      certificates remain retained.
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Nine confirmed case-bound improvements, five additional counts and four tighter submitted
+        packings; no exact optimum or general theorem.
+      scored: '2026-10-07'
+      by: think-kqd3 canonical confirmation lane (repository)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH second update 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-second-update-2026-10-07-report
+    - E-squish-second-update-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-422-second-update-2026-10-07/README.md
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/update-claims.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/devtools/squish_second_update_packets.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-088.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-180.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-199.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-207.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-236.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-263.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-302.json.gz
+    - packing/frontier/n-088.md
+    - packing/frontier/n-108.md
+    - packing/frontier/n-179.md
+    - packing/frontier/n-180.md
+    - packing/frontier/n-199.md
+    - packing/frontier/n-207.md
+    - packing/frontier/n-236.md
+    - packing/frontier/n-263.md
+    - packing/frontier/n-302.md
+    - packing/devtools/squish_second_update_confirmation.py
+    - packing/devtools/squish_second_update_house_links.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/certification.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/replay-protocol.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/house-atlas-metadata.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/protocol/replay-adapter.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/protocol/witness.schema.yaml
+    - packing/resources/web/squish-422-second-update-2026-10-07/reviews/math-review.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/reviews/receipt-binding-review.json.xz
+    - docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+    - docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    - packing/witnesses/squish-422-second-update-2026/n-088-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-108-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-179-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-180-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-199-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-207-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-236-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-263-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-302-rational.yaml.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-088.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-108.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-179.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-180.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-199.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-207.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-236.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-263.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-302.json.xz
+    next_rung: V4/C4 needs accountable human review of the claims, complete witnesses, shared premises,
+      both deciding implementations and accepted scoped AI reviews. V5/C5 would require proof-assistant
+      verification; this exact feasibility replay establishes neither.
+    notes: Source prints for 179, 207, 236, 263 and 302 lie below their exact sides and remain quotations.
+      Verified displays are least upward sixteen-place ceilings, with zero side inflation. Earlier source
+      facts, certificates, evidence, reviews and finder credit remain historical evidence for their own
+      geometries. Author-reported Kingbird, Couzo and SQUISH seed lineage and human-directed Claude Opus
+      5.5 assistance remain attributed. Historical actual replay metadata is retained unchanged, separately
+      from canonical repository-relative publication metadata.
+    composition: Strict source admission and exact rational half-angle conversion preserve every side
+      and complete roster. The completed 27-job replay inspected every pair through both independently
+      implemented deciding routes. Bounded XZ retains historical full witnesses, inputs, verdicts and
+      custody unchanged; canonical metadata transformations require exact complete ordered geometry equality.
+      Cheap admission binds all 27 jobs and both accepted scientific reviews. Exact leaf custody and private-output
+      guards apply to the eight eligible generated house read links; n263 stays private and indexed. Explicit
+      --replay repeats both geometric decisions.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+      kind: adversarial
+      reviewer: GPT-6 Astra mathematics reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: All nine immutable source rosters, independently derived ordered corners, exact sides, all
+        27 full deciding inputs, shapes and containment, pair counts and both complete-roster controls
+        per case.
+      verdict: accepted
+      covers:
+      - T-116
+    - path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+      kind: adversarial
+      reviewer: GPT-6 Astra separately prompted semantic-binding reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: All 27 actual receipts, full witness and deciding inputs, source custody, observed runtime
+        modules and selected schema, all 54 verdicts and exact pair/control coverage.
+      verdict: accepted
+      covers:
+      - T-116
+    controls:
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-088.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-108.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-179.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-180.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-199.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-207.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-236.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-263.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-302.json.xz
+    - packing/tests/test_squish_second_update_confirmation.py
+    - packing/tests/test_generate_frontier_case.py

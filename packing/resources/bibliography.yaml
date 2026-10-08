@@ -1308,11 +1308,69 @@ sources:
       repository's README and NOTICE name; its ATTRIBUTION.md credits AI-produced research
       and Lean formalizations to an AI system, and the repository does not cite this
       project (web/chelokot-nagamochi-counterexample-2026-09-05/README.md).
+  - key: '[SQUISH ten packings 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth
+    lineage: independent
+    note: Nate Chaoweeraprasit (itsnaka), using SQUISH (SQuare-packing Using Iterative Shrink-Hopping).
+      The author credits David Ellsworth’s records and tools, including parse_svg_packing.py, and states
+      that solver, verification and issue were written with Claude Opus 5.5 under his direction, management,
+      review and steering. The repository has no LICENSE, so only derived packing facts and source metadata
+      are retained. Ten rational certificates at revision 07fe6dde1e5b67405a3076719b90e58e2882b677, committed
+      2026-10-07T02:28:19Z, in squish-submission-2026-10-06; issue jlevy/squares#401.
+  - key: '[SQUISH n153 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth
+    lineage: independent
+    note: 'Nate Chaoweeraprasit (itsnaka), using SQUISH (SQuare-packing Using Iterative Shrink-Hopping).
+      The author credits David Ellsworth’s records and tools, including parse_svg_packing.py, and states
+      that solver, verification and issue were written with Claude Opus 5.5 under his direction, management,
+      review and steering. The repository has no LICENSE, so only derived packing facts and source metadata
+      are retained. The n153 rational certificate attachment in issue #401 comment 6031977107, published
+      2026-10-07T05:59:18Z; its digest is in the packet manifest.'
+
+  - key: '[SQUISH update 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Couzo and Ellsworth
+    lineage: independent
+    note: Nate Chaoweeraprasit, using SQUISH, reports thirteen new or smaller certificates at revision
+      5e32bbd7028b6e3b869979278079cd37ed6770aa. The author names Francisco Couzo seeds at ten counts
+      and SQUISH seeds at three; per-count seed attribution is retained. David Ellsworth’s numerical checking tool is credited in the update. Human-directed Claude Opus
+      5.5 assistance is disclosed. No LICENSE is published; only attributed derived geometric facts
+      and brief claim quotations are retained. n153 is identical to the earlier attached certificate.
+
+  - key: '[SQUISH second update 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth, Couzo and SQUISH
+    short_credit: Chaoweeraprasit after Ellsworth et al.
+    lineage: independent
+    note: 'Issue422 pins nine new or smaller rational certificates at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
+      Author-reported seeds: Kingbird (David Ellsworth) s(41)/s(37), Couzo s(180)/s(297), and
+      SQUISH own intermediate packings. Human-directed Claude Opus5.5 coding and research assistance
+      disclosed. No root licence; only attributed derived facts and custody metadata retained.
+      Numerical squeeze does not establish rigidity or optimality.'
 # The surname each credited name is cited under, for the names `found_by` and
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being
 # guessed at.
 credited_names:
+  Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang
   David Ellsworth: Ellsworth
   David W. Cantrell: Cantrell

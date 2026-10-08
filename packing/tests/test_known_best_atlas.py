@@ -41,7 +41,9 @@ from sqpack.witness import load_witness
 from sqpack.workers import worker_count
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 31, "n=1..324": 63}
+#: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
+#: the second also moved n = 88. These inventory counts follow the current corpus.
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 26, "n=1..324": 57}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -54,18 +56,18 @@ GOLDEN_UNITSQUARE: dict[str, set[int]] = {
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     "n=1..100": {
         "exact-grid": 64,
-        "kingbird-derived-facts": 35,
-        "packet-derived-facts": 1,
+        "kingbird-derived-facts": 34,
+        "packet-derived-facts": 2,
     },
     "n=1..200": {
         "exact-grid": 114,
-        "kingbird-derived-facts": 66,
-        "packet-derived-facts": 20,
+        "kingbird-derived-facts": 60,
+        "packet-derived-facts": 26,
     },
     "n=1..324": {
         "exact-grid": 176,
-        "kingbird-derived-facts": 98,
-        "packet-derived-facts": 50,
+        "kingbird-derived-facts": 91,
+        "packet-derived-facts": 57,
     },
 }
 
@@ -172,7 +174,6 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         85,
         86,
         87,
-        88,
         89,
     }
     # The hand-audited hundred stay a literal; above it the count of derived records is
@@ -429,7 +430,9 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "packet-derived-facts":
         assert entry["source"]["path"].startswith("resources/web/")
-        assert entry["source"]["path"].endswith(f"/facts/n-{n:03d}.yaml")
+        assert entry["source"]["path"].endswith(
+            (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+        )
         assert witness["source"]["path"] == entry["source"]["path"]
         assert witness["source"]["url"] == entry["source"]["url"]
         assert "not a legal conclusion" in witness["claim"]["limitations"]

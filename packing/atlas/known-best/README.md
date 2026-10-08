@@ -78,7 +78,7 @@ one bought.
 
 ## The regularized views
 
-[`regularized/`](regularized/index.json) holds exact derived views of 51 records,
+[`regularized/`](regularized/index.json) holds exact derived views of 55 records,
 written by `python -m devtools.regularize_axis_components --update-atlas`, checked by
 digest with `--check-atlas` and re-derived with `--verify-atlas`. A view straightens
 near-axis squares and slides axis-aligned ones into exact contact at the certified side,
@@ -94,14 +94,16 @@ explains why and what it changes.
 checkpoint
 ([development.md](../../../development.md#the-deep-gate-the-deferred-surface-before-the-merge)).
 
-**The 89 refused Kingbird-derived records stay refused.** Their 36-digit poses overlap
+**The 87 refused Kingbird-derived records stay refused.** Their 36-digit poses overlap
 by a rounding sliver at centre dilation 1, the only factor the layer uses.
 `promote_rational` would try wider ones: it scales every centre about the container’s
 centre by $1 + 10^{-p}$, $p = 31, 29, \ldots, 3$, and keeps the first exact packing
 within $10^{-9}$ of the printed side.
 The tool’s `--smallest-dilation` flag runs that ladder.
-On 2026-10-02 it was run over all 89, and the census’s `--witness` mode shaded each
-source and view:
+On 2026-10-02 it was run over the 89 records refused at that time, and the census’s
+`--witness` mode shaded each source and view.
+The later SQUISH import replaces two of those source poses with exactly feasible
+rational packings; the historical census below describes the earlier poses:
 
 | Smallest verifying dilation | Records | Views below the register’s verified bound | Light green, house rule | Light green, stage rule |
 | --- | ---: | ---: | --- | --- |

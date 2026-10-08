@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -27831,3 +27831,386 @@ evidence:
       run among them (receipts/n41-L6775/cpp-sample/ in the packet, 642 CPU seconds),
       and was not run in full: samples that decide those nodes only.
     source_reviewed: '2026-10-06'
+
+  - id: E-squish-ten-packings-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH ten packings 2026-10-07]'
+    certificate: packing/resources/web/squish-401-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'Nate Chaoweeraprasit reports exact rational centres and t = tan(theta/2), with cos(theta)
+      = (1-t^2)/(1+t^2) and sin(theta) = 2t/(1+t^2), for pairwise interior-disjoint closed unit squares
+      contained in a square of rational side S. The source reports SQUISH exact Fraction checks and David
+      Ellsworth numerical checks at epsilon 1e-40; none is replay evidence here. The exact rational side
+      is authoritative; s_decimal is a finite display and at n = 130, 154, 238 and 303 lies below it.
+      Only upper bounds are claimed: numerical polishing supplies no optimality, local-optimality or rigidity
+      proof. Source assets publish no license; only derived facts and provenance metadata are retained.
+      The source states human-directed Claude Opus 5.5 assistance.'
+    source_reviewed: '2026-10-07'
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+
+  - id: E-squish-n153-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 153
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH n153 2026-10-07]'
+    certificate: packing/resources/web/squish-401-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'Nate Chaoweeraprasit reports exact rational centres and t = tan(theta/2), with cos(theta)
+      = (1-t^2)/(1+t^2) and sin(theta) = 2t/(1+t^2), for pairwise interior-disjoint closed unit squares
+      contained in a square of rational side S. The source reports SQUISH exact Fraction checks and David
+      Ellsworth numerical checks at epsilon 1e-40; none is replay evidence here. The exact rational side
+      is authoritative; s_decimal is a finite display and at n = 130, 154, 238 and 303 lies below it.
+      Only upper bounds are claimed: numerical polishing supplies no optimality, local-optimality or rigidity
+      proof. Source assets publish no license; only derived facts and provenance metadata are retained.
+      The source states human-directed Claude Opus 5.5 assistance.'
+    source_reviewed: '2026-10-07'
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+
+
+  - id: E-squish-ten-packings-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH ten packings 2026-10-07]'
+    certificate: packing/witnesses/squish-401-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_upper_bound_packets
+      check --replay. The complete replay checks all eleven retained source fact records, losslessly regenerates
+      each rational-corner witness, and runs sqpack.witness.exact_verify and devtools.check_rational_witness_independent
+      on every square pair and wall. Both routes must accept every original and refuse both geometric
+      negative controls. The certification and negative-control receipts are retained in packing/resources/web/squish-401-2026-10-07/receipts/.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-upper-bound-packets
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    limitations: The producer’s verification code is unavailable and was neither retained nor executed.
+      The two first-party deciders independently implement the same separating-axis theorem, sharing the
+      losslessly converted rational corners, YAML infrastructure and Python integer/Fraction arithmetic.
+      The mathematical review checks that shared conversion, the exact unit-square geometry and closed-boundary
+      semantics. All 177,440 pairs over the eleven certificates were decided by each route; this entry
+      covers only its declared counts. No source success log, numerical tolerance, pose optimization or
+      dilation enters the decision. Every retained witness has the original exact rational side; the case’s
+      reported and verified decimal displays are that fraction rounded upward at sixteen decimals, and
+      both case exact_form fields retain the certified rational side. The receipt's exact_form and
+      certified_side fields retain the same source rational. Both 108-square controls preserve the roster
+      and unit-square
+      shapes, force overlap or escape respectively, and are rejected after all 5,778 pairs are examined.
+      The receipt records the complete semantic deciding input, including the count, rational side,
+      unit-square side and corner/id roster. The fast packet check compares that input to the current
+      witness independently of nongeometric metadata, and
+      validates the recorded diagnostics; it does not replace geometric replay. The certificates establish
+      upper bounds only, with no optimality, rigidity, proof-assistant verification or human oversight
+      claim.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+    source_reviewed: '2026-10-07'
+  - id: E-squish-n153-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 153
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH n153 2026-10-07]'
+    certificate: packing/witnesses/squish-401-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_upper_bound_packets
+      check --replay. The complete replay checks all eleven retained source fact records, losslessly regenerates
+      each rational-corner witness, and runs sqpack.witness.exact_verify and devtools.check_rational_witness_independent
+      on every square pair and wall. Both routes must accept every original and refuse both geometric
+      negative controls. The certification and negative-control receipts are retained in packing/resources/web/squish-401-2026-10-07/receipts/.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-upper-bound-packets
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    limitations: The producer’s verification code is unavailable and was neither retained nor executed.
+      The two first-party deciders independently implement the same separating-axis theorem, sharing the
+      losslessly converted rational corners, YAML infrastructure and Python integer/Fraction arithmetic.
+      The mathematical review checks that shared conversion, the exact unit-square geometry and closed-boundary
+      semantics. All 177,440 pairs over the eleven certificates were decided by each route; this entry
+      covers only its declared counts. No source success log, numerical tolerance, pose optimization or
+      dilation enters the decision. Every retained witness has the original exact rational side; the case’s
+      reported and verified decimal displays are that fraction rounded upward at sixteen decimals, and
+      both case exact_form fields retain the certified rational side. The receipt's exact_form and
+      certified_side fields retain the same source rational. Both 108-square controls preserve the roster
+      and unit-square
+      shapes, force overlap or escape respectively, and are rejected after all 5,778 pairs are examined.
+      The receipt records the complete semantic deciding input, including the count, rational side,
+      unit-square side and corner/id roster. The fast packet check compares that input to the current
+      witness independently of nongeometric metadata, and
+      validates the recorded diagnostics; it does not replace geometric replay. The certificates establish
+      upper bounds only, with no optimality, rigidity, proof-assistant verification or human oversight
+      claim.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra high reasoning mathematics reviewer and GPT-6 Astra max reasoning correctness
+        reviewer, separately prompted project AI review lanes
+      note: The two accepted reviews (docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md;
+        docs/project/reviews/review-2026-10-06-squish-import-correctness.md) re-derive exact unit-square
+        geometry from rational half-angle triples, check complete all-pair separating-axis and wall decisions
+        and their trust boundaries, match the eleven source certificates to retained facts, and accept
+        the source-to-witness and receipt bindings. Their reproduced roster, JSON round-trip and receipt-integrity
+        defects were fixed and regression-tested; no mathematical or correctness defect remains open.
+        The source’s own checker was neither retained nor executed. No local/global optimality, rigidity
+        or human oversight is established.
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-update-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH update 2026-10-07]'
+    certificate: packing/resources/web/squish-401-update-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: 'The author reports thirteen rational certificates: twelve new or tighter bounds and
+      an exact duplicate of the earlier n153 attachment. Claims are retained as attributed derived facts
+      only; no producer checker is executed, and no new project feasibility assurance, optimality or
+      rigidity is claimed. Francisco Couzo is credited for ten update seeds and SQUISH for the other
+      three, as recorded per case in acquisition/sources.json. Human-directed Claude Opus 5.5 assistance
+      is disclosed. Finite source prints are kept separate from exact rational sides and safe upward
+      decimal displays.'
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-update-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH update 2026-10-07]'
+    certificate: packing/witnesses/squish-401-update-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_followup_packets
+      check-certification --replay. The retained complete reviewer replay is reused; retention did
+      not rerun either decider. Both routes accepted the twelve exact rational packings and rejected
+      both full-size controls.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-followup-packets
+    independence_record: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    limitations: The twelve geometries contain 2309 squares and 237025 unordered pairs per deciding
+      route. Scoped positive wall time was 104.001 seconds, taken from the completed thirteen-case
+      108.598-second run; the duplicate n153 is excluded. Each 123-square control tested all 7503
+      pairs per route, with 7.684 seconds total measured control time. The first-party routes share
+      exact converted corners, YAML and Python rational arithmetic, but no geometry code. Two separately
+      prompted AI reviews cover the conversion and full semantic source/input/control binding. The
+      producer checker was not executed. Sides are unchanged exact rationals, with least upward sixteen-place
+      decimal displays and separate original source prints. Feasible upper bounds establish neither
+      optimality nor rigidity, proof-assistant verification or independently audited human oversight.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra mathematics and separately prompted semantic binding AI review lanes
+      note: The accepted scoped reviews docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+        and docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md cover these twelve
+        update geometries, full decided inputs and full-size controls. The original eleven-case reviews
+        retain their original scope.
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-second-update-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH second update 2026-10-07]'
+    certificate: packing/resources/web/squish-422-second-update-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Nine source claims are retained as attributed normalized rational facts only.
+      Current reported layer V0/C0 admits no feasibility replay or scoped review; producer code,
+      success logs, raw prose and raw drawings remain outside Git. No optimality, rigidity or
+      human oversight established. Five source decimal prints lie below their exact sides and
+      remain quotations; current displays use safe upward ceilings. Nate Chaoweeraprasit reports
+      Kingbird (David Ellsworth), Francisco Couzo and SQUISH seeds and human-directed Claude Opus5.5
+      assistance. Earlier verified lanes remain unchanged.
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-second-update-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH second update 2026-10-07]'
+    certificate: packing/witnesses/squish-422-second-update-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_second_update_confirmation
+      check-certification --replay. The completed 27-job dual exact replay is retained unchanged; canonical
+      retention itself does not rerun either decider. Both routes accepted all nine positives and rejected
+      all eighteen complete-roster controls.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-second-update-confirmation
+    independence_record: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    limitations: The nine packings contain 1762 squares and 190303 unordered pairs per route. Across nine
+      positives and eighteen full-roster controls, each route tested 570909 pairs, 1141818 across both
+      routes. All 27 children and the outer batch exited zero. The sum of per-job dual-route decision
+      wall times is 222.246477794 seconds; parallel batch elapsed time was not recorded. The two independently
+      implemented SAT routes share the SAT theorem, Python Fraction, YAML loading and serialized source-to-corner
+      conversion. Independent rotation-matrix derivation in the mathematics review addresses that shared
+      conversion. Historical actual witness metadata, complete deciding inputs, runtime identities, schema
+      and source custody remain retained unchanged; canonical repository-relative metadata is an explicit
+      transformation validated by full ordered geometry equality. No source producer executable was run.
+      Exact sides are unchanged, with zero dilation, safe upward sixteen-place displays and separate source
+      prints. Feasibility establishes no optimality, rigidity, proof-assistant verification or independently
+      audited human oversight.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra mathematics and separately prompted GPT-6 Astra semantic-binding AI review
+        lanes
+      note: Two distinct accepted reviews docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+        and docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md cover all
+        nine immutable source geometries, all 27 complete deciding inputs, all 54 outcomes and full-size
+        controls. Their acceptance concerns the completed scientific replay, not a future integration
+        pull request.
+    source_reviewed: '2026-10-07'

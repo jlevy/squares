@@ -32,6 +32,10 @@ from pathlib import Path
 import pytest
 import yaml
 
+from devtools import apply_exact_ceilings
+from devtools import squish_followup_packets as squish_update
+from devtools import squish_second_update_packets as squish_second
+from devtools import squish_upper_bound_packets as squish
 from devtools.check_case_prose import Reading
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.known_best import KNOWN_BEST_CORPUS
@@ -86,6 +90,28 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/squish_second_update_confirmation.py": (
+        "publishes the admitted complete exact replay as a feasible upper ceiling, "
+        "retaining earlier ceilings and refusing optimality claims"
+    ),
+    "packing/tests/test_squish_second_update_confirmation.py": (
+        "checks complete replay custody and preservation of earlier upper ceilings; "
+        "the confirmed feasible construction does not establish s(n)"
+    ),
+    "packing/devtools/squish_second_update_packets.py": (
+        "preserves the previous independently certified ceiling while adopting a stronger "
+        "second-update source report; the historical ceiling is never promoted to the "
+        "new geometry or read as s(n)"
+    ),
+    "packing/tests/test_squish_upper_bound_packets.py": (
+        "checks that source-packet admission preserves the independently certified "
+        "ceiling and cannot grant verification or optimality to a reported packing"
+    ),
+    "packing/devtools/source_supersession.py": (
+        "rebuilds an explicitly selected source report from exact facts while retaining "
+        "the historical independently certified ceiling until the reviewed SQUISH lane "
+        "is present; the two fields remain upper bounds, never exact optima"
+    ),
     "packing/devtools/render_n11_lower_bounds_explainer.py": (
         "admits the solved n11 caption only when the case is proved, its exact lower "
         "identity matches the ceiling and T-060 confirmation is present; the ceiling "
@@ -456,13 +482,65 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     # 3/7 as the widest.
     # 16 at n = 1..100 after n=17's certified endpoint. New cases above 100 trail
     # on the grid ceiling wherever the catalogue reports a non-integer side.
-    assert len(trailing) == TRAILING_BY_CORPUS[KNOWN_BEST_CORPUS.label]
+    # The frozen catalogue certificates identify the old trailing closed forms.
+    # A newly reported source can precede its replay, then disappear from this set
+    # when its own exact ceiling is adopted. Neither event rewrites that old audit.
+    frozen_trailing = {
+        n
+        for n, row in apply_exact_ceilings.committed().items()
+        if not row["agrees_with_report"]
+    } | {29}
+    for corpus, expected in TRAILING_BY_CORPUS.items():
+        limit = int(corpus.split("..", 1)[1])
+        assert sum(n <= limit for n in frozen_trailing) == expected
+    historical = {
+        n
+        for n, row in apply_exact_ceilings.committed().items()
+        if not row["agrees_with_report"]
+        and loaded_cases[n]["reported_upper_bound"]["source_key"] == "[Kingbird]"
+    }
+    pending = {
+        n
+        for n in squish.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish.source_key(n)
+        and not any(
+            e.startswith("E-squish-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    # Earlier SQUISH replay evidence certifies the earlier geometry, not this update.
+    pending |= {
+        n
+        for n in squish_update.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish_update.SOURCE_KEY
+        and not any(
+            e.startswith("E-squish-update-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    pending |= {
+        n
+        for n in squish_second.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish_second.SOURCE_KEY
+        and not any(
+            e.startswith("E-squish-second-update-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    interval = (
+        {29}
+        if loaded_cases[29]["reported_upper_bound"]["source_key"] == "[Kingbird]"
+        else set()
+    )
+    assert set(trailing) == historical | interval | pending
     for n, (reported, verified) in trailing.items():
         assert verified > reported, n
     # Up to 0.464 until 2026-10-06, when T-101's certificates took the last trailing
     # ceilings off the integer grid; what trails now does so by one unit of the printed
     # fourteenth decimal at most.
-    worst = max(verified - reported for reported, verified in trailing.values())
+    worst = max(
+        verified - reported for n, (reported, verified) in trailing.items() if n not in pending
+    )
     assert worst <= Decimal("1E-14")
 
     # And in those cases `exact_form` is exact about the ceiling and says nothing about
@@ -476,7 +554,7 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     }
     assert not grids
     closed = {n for n in trailing if loaded_cases[n]["reported_upper_bound"]["exact_form"]}
-    assert sorted(set(trailing) - closed) == [29]
+    assert sorted(set(trailing) - closed - pending) == sorted(interval)
 
     # Every case carrying an exact_form on the ceiling, split by whether s(n) is known.
     exact_forms = sum(

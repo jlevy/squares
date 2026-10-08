@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import math
+from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
@@ -48,16 +49,18 @@ def record(n: int) -> tuple[Array, float]:
     rows = []
     for s in payload["squares"]:
         if "center" in s:
-            angle = float(s["angle"])
+            angle = float(Fraction(str(s["angle"])))
             rows.append(
                 [
-                    float(s["center"][0]),
-                    float(s["center"][1]),
+                    float(Fraction(str(s["center"][0]))),
+                    float(Fraction(str(s["center"][1]))),
                     math.radians(angle) if in_degrees else angle,
                 ]
             )
             continue
-        pts = np.array([[float(a), float(b)] for a, b in s["corners"]])
+        pts = np.array(
+            [[float(Fraction(str(a))), float(Fraction(str(b)))] for a, b in s["corners"]]
+        )
         edge = pts[1] - pts[0]
         rows.append(
             [
@@ -66,7 +69,7 @@ def record(n: int) -> tuple[Array, float]:
                 math.atan2(edge[1], edge[0]),
             ]
         )
-    return np.array(rows), float(payload["side"])
+    return np.array(rows), float(Fraction(str(payload["side"])))
 
 
 def contact_edges(poses: Array, tol: float = 1e-9) -> list[tuple[int, int]]:

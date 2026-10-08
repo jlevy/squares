@@ -359,6 +359,51 @@ The pull request that registers or raises a result runs
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
 
+### Verify the Published Result
+
+An import’s publication includes its public results and drawings.
+Passing a local build or PR CI establishes the candidate; verify the deployed main tree
+before the final publication reply in stage 7.
+
+Before merge, check the generated result/evidence registers, owning case pages, bound
+citations and selected case/overview graphics together.
+Each drawn packing must match its selected exact source geometry and displayed safe
+ceiling. A confirmation label must refer to evidence for that displayed bound, rather
+than an earlier, weaker ceiling.
+Preserve the source’s decimal print as a quote and the earlier certificate as history
+when a tighter reported packing supersedes it.
+Inspect representative desktop and mobile views for cropped drawings, missing source
+credit or unreadable labels.
+
+Synchronize the owning beads to the native `tbd-sync` branch before clearing fallback
+outbox exports.
+Verify every exported issue identity/version and alias against the remote
+native records, retain the raw variants, and commit outbox cleanup separately.
+An empty local outbox alone does not establish successful synchronization.
+
+After merge:
+
+1. Identify the successful main Pages deployment and its full source commit.
+   A newer deployment is suitable when it contains the merged import.
+   Record its run and commit; a successful PR build is not deployment evidence.
+2. From `packing/`, run the existing site checker with project Python:
+   `uv run --frozen --all-extras --group dev python -m devtools.check_published_site --commit FULL_DEPLOYED_SHA`.
+   Preserve its completion receipt and actual pass/fail/skip counts.
+   Diagnose browser or environment failures without disabling TLS verification or
+   publication checks.
+3. Follow each imported result’s `all-results.html#t-NNN` link on the main site.
+   Check its scope, V/C/S rungs, status and credit against the merged register;
+   provisional branch-only status must not survive publication.
+4. Check every changed case’s main drawing and overview/regularized rendering against
+   the selected source, exact side and safe display.
+   Confirm that reported versus verified labels and their citations agree, and that
+   retained historical evidence remains accessible.
+   Check the rendered layouts as well as their source metadata.
+5. Record deployment, result-row and graphics evidence in the owning intake bead.
+   The final author reply states only the scope actually imported, reviewed and
+   published; a later source revision or newly split issue remains queued with its own
+   owner.
+
 ## Stage 6: Explain
 
 Some results warrant a paper that explains the proof and this project’s review of it to

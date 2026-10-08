@@ -132,11 +132,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: catalogue's September 2026 packings (T-088, T-089), when n = 69 was screened for the first
 #: time, and again that day after Couzo's 3 October packings at n = 208, 209, 228, 263, 272,
 #: 303 and 306 (T-092), which their import left unscreened; the two smaller corpora are not
-#: re-measured.
+#: re-measured. The complete 324-record replay on 2026-10-07 after SQUISH's eleven
+#: imported poses (T-113, T-114) took 364.07s. The twelve T-115 update poses were
+#: re-screened serially in 107.952s; unselected records remain unchanged. All three
+#: corpus tripwires below are the sums over the current retained square motions.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (26, 87, 85, 518),
-    "n=1..200": (65, 606, 181, 1883),
-    "n=1..324": (120, 1867, 302, 4511),
+    "n=1..100": (27, 102, 86, 570),
+    "n=1..200": (66, 558, 182, 2038),
+    "n=1..324": (121, 1578, 302, 4689),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -2427,10 +2430,8 @@ def _frontier_rigidity(context: Context) -> str:
 def _translation_escape_screen(context: Context) -> str:
     """The single-square translation screen, rebuilt from the witnesses every run.
 
-    The counts are pinned here because they are the finding: 25 records hold a square
-    that can be pushed clear of everything it touches, and the two records whose witness
-    geometry is too coarse to read contacts from are excluded rather than reported on.
-    A miss is not rigidity, so nothing here may be restated as one.
+    The current corpus findings and exclusion list are pinned below and must agree
+    with the replay. A miss is not rigidity, so nothing here may be restated as one.
     """
     output = _module(context, "devtools.screen_translation_escape", "--check")
     _require_text(output, f"translation escape screen check passed: {_screen_findings()}")
@@ -2441,9 +2442,9 @@ def _screen_findings() -> str:
     """The screen's corpus findings, as the tool prints them.
 
     The screened count is a corpus fact and scales: the whole of KNOWN_BEST_CORPUS less
-    the records the shape-residual limit throws out. The four findings after it are not
-    counts of anything and stay pinned as tripwires -- think-93on re-argues them, and the
-    exclusion list with them, when the corpus grows. Shared by the whole screen and its
+    the records the shape-residual limit throws out. The four pose measurements after
+    it stay pinned as tripwires -- think-93on re-argues them, and the exclusion list
+    with them, when the corpus grows or its poses change. Shared by the whole screen and its
     sampled stand-in, because the findings are read out of the retained document either
     way and a second copy of this string is a second thing to forget to update.
     """
@@ -3538,6 +3539,18 @@ def _results_register(context: Context) -> str:
     first = _module(context, "devtools.check_results")
     second = _module(context, "devtools.render_results", "--check")
     return f"{first}\n{second}"
+
+
+def _squish_update_certification(context: Context) -> str:
+    # Bounded offline input/provenance admission. Full dual geometric replay is an
+    # explicit --replay operation, with the original completed run retained separately.
+    return _module(context, "devtools.squish_followup_packets", "check-certification")
+
+
+def _squish_second_update_certification(context: Context) -> str:
+    # Reuse the completed full scientific replay; admit all complete deciding inputs
+    # and canonical metadata without repeating either exact feasibility decision.
+    return _module(context, "devtools.squish_second_update_confirmation", "check-certification")
 
 
 def _results_headline(context: Context) -> str:
@@ -5245,6 +5258,40 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/evidence.yaml",
             "packing/frontier/n-*.md",
             "packing/resources/bibliography.yaml",
+        ),
+    ),
+    Step(
+        "SQUISH update certification binds complete reviewed inputs",
+        _squish_update_certification,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/resources/web/squish-401-update-2026-10-07/**",
+            "packing/witnesses/squish-401-update-2026/**",
+        ),
+    ),
+    Step(
+        "SQUISH second update certification binds complete reviewed inputs",
+        _squish_second_update_certification,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/squish_second_update_confirmation.py",
+            "packing/devtools/squish_second_update_house_links.py",
+            "packing/devtools/squish_second_update_packets.py",
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/check_rational_witness_independent.py",
+            "packing/src/sqpack/witness.py",
+            "packing/witnesses/witness.schema.yaml",
+            "packing/resources/web/squish-422-second-update-2026-10-07/**",
+            "packing/witnesses/squish-422-second-update-2026/**",
         ),
     ),
     Step(
