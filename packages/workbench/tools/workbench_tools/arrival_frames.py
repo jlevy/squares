@@ -30,6 +30,7 @@ from typing import Any
 from PIL import Image
 from playwright.sync_api import Page, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.probes import probe
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
@@ -305,7 +306,7 @@ def main() -> int:
         )
         page = browser.new_page(viewport={"width": 1440, "height": 1000})
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.goto(args.page.resolve().as_uri())
+        open_page(page, args.page)
         page.evaluate(probe("capture/fonts-ready"))
         page.evaluate(probe("capture/control"), {"prepare": True, "capture": True})
         for case in CASES:
