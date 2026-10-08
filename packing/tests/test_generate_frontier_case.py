@@ -494,7 +494,7 @@ def test_refinement_redraft_repairs_both_ceilings_from_complete_admitted_inputs(
     expected["reported_upper_bound"].update(value="99", exact_form="99/1")
     expected["verified_upper_bound"].update(value="98", exact_form="98/1")
     body, count = re.subn(
-        r"(at exact side\s+)\$[0-9]+/[0-9]+\$(, whose complete terminating decimal is\s+)"
+        r"(at exact side\s+)\$[0-9]+/[0-9]+\$(,\s+whose complete terminating decimal is\s+)"
         r"\$[0-9.]+\$",
         lambda match: f"{match[1]}$99/1${match[2]}$99$",
         body,

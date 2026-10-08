@@ -82,7 +82,7 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     case["rigidity"] = None
     case["source_reviewed"] = RETRIEVED
     body, count = re.subn(
-        r"(at exact side\s+)\$[0-9]+/[0-9]+\$(, whose complete terminating decimal is\s+)"
+        r"(at exact side\s+)\$[0-9]+/[0-9]+\$(,\s+whose complete terminating decimal is\s+)"
         r"\$[0-9.]+\$",
         lambda match: f"{match[1]}${fact['side']}${match[2]}${value}$",
         body,
