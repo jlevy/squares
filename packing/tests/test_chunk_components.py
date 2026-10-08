@@ -94,7 +94,8 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     # since 2026-10-05: the catalogue's packing at n = 69 (T-088) structures ten more
     # squares than the rendering it replaced and fits six chunks with at most three free;
     # the new packings at n = 83 and 87 (T-089) leave both counts where they were.
-    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1792, 1860)
+    # The second SQUISH update replaces n = 88's 86 structured squares with 72.
+    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1778, 1860)
     assert non_grid["within_six_chunks_and_three_free"] == 26
 
     # The relaxed sweep still structures more of n = 68 and merges its angle classes; the

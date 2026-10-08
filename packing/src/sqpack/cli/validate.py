@@ -137,9 +137,9 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: re-screened serially in 107.952s; unselected records remain unchanged. All three
 #: corpus tripwires below are the sums over the current retained square motions.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (27, 88, 86, 535),
-    "n=1..200": (65, 557, 182, 1931),
-    "n=1..324": (120, 1874, 302, 4686),
+    "n=1..100": (27, 102, 86, 570),
+    "n=1..200": (66, 558, 182, 2038),
+    "n=1..324": (121, 1578, 302, 4689),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -3547,6 +3547,12 @@ def _squish_update_certification(context: Context) -> str:
     return _module(context, "devtools.squish_followup_packets", "check-certification")
 
 
+def _squish_second_update_certification(context: Context) -> str:
+    # Reuse the completed full scientific replay; admit all complete deciding inputs
+    # and canonical metadata without repeating either exact feasibility decision.
+    return _module(context, "devtools.squish_second_update_confirmation", "check-certification")
+
+
 def _results_headline(context: Context) -> str:
     # Sub-second: one register, one document, one rubric. Records tier because it checks
     # presentation of the record -- that every registered result reaches the section a
@@ -5266,6 +5272,26 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/import_half_angle_witness.py",
             "packing/resources/web/squish-401-update-2026-10-07/**",
             "packing/witnesses/squish-401-update-2026/**",
+        ),
+    ),
+    Step(
+        "SQUISH second update certification binds complete reviewed inputs",
+        _squish_second_update_certification,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/squish_second_update_confirmation.py",
+            "packing/devtools/squish_second_update_house_links.py",
+            "packing/devtools/squish_second_update_packets.py",
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/check_rational_witness_independent.py",
+            "packing/src/sqpack/witness.py",
+            "packing/witnesses/witness.schema.yaml",
+            "packing/resources/web/squish-422-second-update-2026-10-07/**",
+            "packing/witnesses/squish-422-second-update-2026/**",
         ),
     ),
     Step(

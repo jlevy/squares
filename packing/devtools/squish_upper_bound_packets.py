@@ -84,12 +84,17 @@ def parse_source(path: Path, expected_n: int) -> tuple[dict[str, Any], bytes]:
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         raise PacketError("invalid source JSON") from error
     required = {"n", "s_exact", "s_decimal", "note", "squares"}
-    if type(source) is not dict or not required <= set(source) <= required | {"phase"}:
+    if type(source) is not dict or not required <= set(source) <= required | {
+        "phase",
+        "squeezed",
+    }:
         raise PacketError("source has missing required or unknown fields")
     if "phase" in source and (
         type(source["phase"]) is not int or not 1 <= source["phase"] <= 100
     ):
         raise PacketError("unsupported source phase metadata")
+    if "squeezed" in source and type(source["squeezed"]) is not bool:
+        raise PacketError("unsupported source squeezed metadata")
     if type(source["n"]) is not int or source["n"] != expected_n:
         raise PacketError("source n differs from expected n")
     side = rational_literal(source["s_exact"], "source side")

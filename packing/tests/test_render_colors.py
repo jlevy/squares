@@ -41,7 +41,7 @@ from sqpack.witness import load_witness
 GOLDEN_MAX_ANGLE_CLASSES: dict[str, tuple[int, int]] = {
     "n=1..100": (14, 69),
     "n=1..200": (67, 182),
-    "n=1..324": (81, 263),
+    "n=1..324": (52, 301),
 }
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
@@ -442,19 +442,15 @@ def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
 
 
 def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries() -> None:
-    """The corpus asks for 81 angle classes in one frame; the palette answers with 20.
+    """The current corpus asks for 52 angle classes in one frame; the palette has 20.
 
-    The playbook's extension step read "widen the palette", and the measurement says the
-    opposite: widening it is what would break it. The renderer colors per frame, so the
-    number that matters is the largest class count in any single frame, not the corpus's
-    distinct angles -- 81, in the updated `n = 263`, against 14 when the corpus stopped
-    at 100. It was 106, in the catalogue's `n = 273`, until the #227 intake replaced
-    that frame, and then 52 at Couzo's `n = 301`. Feeding the largest class count to
-    `square_fill_palette` would crowd its bases around one wheel. The
-    colorizer instead keeps the 20 checked bases and wraps class registrations onto the
-    18 unpinned slots, so the separation the figures rely on is the same one at 81
-    classes as at 14, and repeated hues in a dense frame are an honest statement that a
-    frame carries more angles than any palette can distinguish.
+    The renderer colors per frame, so the relevant count is the largest class count
+    in any single frame: 52 at Couzo's n = 301, against 14 when the corpus stopped at
+    100. It was 106 at the catalogue's n = 273 before the #227 intake, and later 81
+    at the first SQUISH update's n = 263 before the second update replaced that pose.
+    The colorizer keeps the 20 checked bases and wraps class registrations onto the
+    18 unpinned slots. Repeated hues in a dense frame honestly indicate that a frame
+    carries more angles than the palette can distinguish.
 
     Hues 0 and 1 survive the wrap by construction -- `RESERVED_HUES` is subtracted
     before the modulus -- and that is what the last assertion checks on the record: in
