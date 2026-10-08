@@ -43,6 +43,11 @@ def records() -> dict[str, str]:
 
 
 @pytest.fixture(scope="module")
+def result_bodies() -> dict[str, str]:
+    return site_renders.result_bodies()
+
+
+@pytest.fixture(scope="module")
 def frontier() -> str:
     return site_renders.html("frontier.html")
 
@@ -315,8 +320,10 @@ def test_every_record_opens_with_its_visual_summary(
         assert "data-kpress-math" in record, n
 
 
-def test_a_result_about_one_case_shows_the_same_visual_summary() -> None:
-    body = site_renders.result_bodies()["T-060"]
+def test_a_result_about_one_case_shows_the_same_visual_summary(
+    result_bodies: dict[str, str],
+) -> None:
+    body = result_bodies["T-060"]
     assert '<section class="site-case-summary' in body
     assert body.index('<figure class="site-case-figure') < body.index(
         '<div class="site-atlas-gap"'
