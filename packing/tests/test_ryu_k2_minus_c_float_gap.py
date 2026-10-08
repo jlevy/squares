@@ -7,7 +7,7 @@ from typing import TypedDict
 import mpmath
 import pytest
 
-from cases.asymptotic.ryu_k2_minus_c_float_gap import check_float_gap
+from cases.asymptotic.ryu_k2_minus_c_float_gap import MAX_MULTIPLE, MAX_STEPS, check_float_gap
 
 
 class Overrides(TypedDict, total=False):
@@ -21,7 +21,8 @@ class Overrides(TypedDict, total=False):
 def test_full_domain_and_current_binary_constants_are_certified() -> None:
     audit = check_float_gap()
     assert audit.passed
-    assert audit.comparisons == 25929
+    # The published full grid, declared loop bounds and actual enumeration must agree.
+    assert audit.comparisons == MAX_STEPS * (MAX_MULTIPLE + 1) == 25929
     assert audit.closest == (8, 1325)
     assert set(audit.binary_constants) == {
         "pi",
