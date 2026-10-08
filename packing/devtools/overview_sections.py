@@ -671,14 +671,22 @@ def result_row(result: Result, *, trigger: str, starred: bool = False) -> RowDet
     leads nowhere new. A `starred` row's name ends ", new result", what its star says
     (`new_result_star`)."""
     name = f"{result.id}: {plain_text(result.summary)}"
-    return row_detail(
+    detail = row_detail(
         f"pop-result-{result.id.lower()}",
         name=f"{name}, {NEW_RESULT}" if starred else name,
         trigger=trigger,
         label=result.id,
         title=tex_bounds(result.summary),
-        body=_detail(result),
+        body=(
+            f'<p><a href="{result_fragment(result.id)}">Read the complete result record</a></p>'
+        ),
         source=result_fragment(result.id),
+        action=(result_fragment(result.id), "Open Result Record"),
+    )
+    return RowDetail(
+        detail.attributes,
+        f'<a class="site-row-open" href="{result_fragment(result.id)}">{trigger}</a>',
+        detail.popover,
     )
 
 
@@ -952,7 +960,7 @@ def result_text(result: Result) -> str:
     """A result's summary as its Result cell sets it, in both tables of results: the
     register's headline, its math typeset. It links nowhere: the row is the result's
     own in either table, and opens its popover."""
-    return tex_bounds(result.summary)
+    return f'<a href="{result_fragment(result.id)}">{tex_bounds(result.summary)}</a>'
 
 
 def credit_cell(credit: str) -> str:
@@ -1040,6 +1048,10 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
     """
     results = recent_results(overview)
     reference = reference_date(overview)
+    if not here:
+        results = [
+            result for result in results if shown_by_default(result, defaults, reference)
+        ]
     body = []
     popovers = []
     for result in results:
@@ -1049,8 +1061,17 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
         body.append(row)
         popovers.append(popover)
     return (
-        f'<div class="site-wide">{result_filters(overview, results, defaults)}'
-        '<div class="site-table-wrap">'
+        '<div class="site-wide">'
+        + (
+            result_filters(overview, results, defaults)
+            if here
+            else f'<p class="site-recent-scope">{len(results)} recent results of significance '
+            "S3 or higher, "
+            "from the last 180 days, excluding superseded results. "
+            '<a href="all-results.html" data-all-results>Browse and filter every '
+            "result</a>.</p>"
+        )
+        + '<div class="site-table-wrap">'
         '<table class="kpress-table site-table site-results" data-site-table>'
         f"{result_head()}"
         f"<tbody>{''.join(body)}</tbody></table></div>"
@@ -2532,9 +2553,12 @@ def _atlas_cell(n: int, status: str, *, regularized: bool = False, new: bool = F
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.render_case_pages import case_url  # noqa: PLC0415
 
-    square = " data-atlas-square" if math.isqrt(n) ** 2 == n else ""
-    root = frontier.REGULARIZED_RENDERINGS if regularized else frontier.RENDERINGS
-    drawing = frontier.packing_svg(n, units=ATLAS_UNITS, root=root)
+    row = math.isqrt(n - 1) + 1
+    square = " data-atlas-square" if row * row == n else ""
+    position = (
+        f' style="--r:{row};--c:{row * row - n};--o:{int(row > 1 and n == (row - 1) ** 2 + 1)}"'
+    )
+    drawing = frontier.drawing_img(n, regularized=regularized, size=ATLAS_UNITS)
     view = f", {ATLAS_REGULARIZED} view" if regularized else ""
     name = f"n = {n}{view}, {_esc(status)}{f', {NEW_RESULT}' if new else ''}"
     badge = atlas_layer_mark() if regularized else ""
@@ -2542,7 +2566,7 @@ def _atlas_cell(n: int, status: str, *, regularized: bool = False, new: bool = F
     return (
         f'<a class="site-atlas-cell" href="{case_url(n)}" data-case="{n}" '
         f'data-atlas-n="{n}"{square} '
-        f'data-status="{_esc(status)}" aria-label="{name}">'
+        f'data-status="{_esc(status)}" aria-label="{name}"{position}>'
         f'{drawing}<span class="site-atlas-n">{badge}{n}{star}</span></a>'
     )
 
@@ -2558,9 +2582,7 @@ def _atlas_tablist(
     extra: str = "",
 ) -> str:
     """One strip of the atlas's tabs: a tablist of buttons, `default` selected and the
-    strip's one stop in the tab order, each controlling the box of tiles. It ships
-    `hidden`, as the expander's row does: without the script it would do nothing, and
-    the script shows it once the tiles are placed."""
+    strip's one stop in the tab order, each controlling the static box of tiles."""
     tabs = "".join(
         f'<button type="button" role="tab" id="{ids}-{key}" {data}="{key}" '
         f'aria-selected="{"true" if key == default else "false"}" '
@@ -2570,7 +2592,7 @@ def _atlas_tablist(
     )
     return (
         f'<div class="site-tabs {classes}" role="tablist" aria-label="{_esc(name)}" '
-        f"{extra}hidden>{tabs}</div>"
+        f"{extra.rstrip()}>{tabs}</div>"
     )
 
 
@@ -2580,8 +2602,8 @@ def atlas_view_tabs() -> str:
     one set of tiles in place, where the Visualize section's are links to two pages.
 
     The first view is selected and is the only tab in the page's tab order; the arrow
-    keys move between the two (`overview/atlas-view.js`). The strip ships `hidden`
-    (`_atlas_tablist`).
+    keys move between the two (`overview/atlas-view.js`). The strip is present in the
+    first response.
     """
     return _atlas_tablist(
         ATLAS_VIEWS,
@@ -2633,7 +2655,7 @@ def atlas_legend(*, regularized: bool) -> str:
     )
     return (
         '<p class="site-atlas-legend" role="note" '
-        f'aria-label="What a tile{APOSTROPHE}s marks mean" data-atlas-legend hidden>'
+        f'aria-label="What a tile{APOSTROPHE}s marks mean" data-atlas-legend>'
         f"{star}{view}</p>"
     )
 
@@ -2704,14 +2726,19 @@ def atlas_grid() -> str:
         '<div class="site-atlas-controls" data-atlas-controls>'
         f"{atlas_view_tabs()}{atlas_size_tabs()}"
         f"{atlas_legend(regularized=bool(regularized))}</div>"
-        f"<template data-atlas-first>{''.join(cells[:ATLAS_FIRST])}</template>"
-        f"<template data-atlas-rest>{''.join(cells[ATLAS_FIRST:])}</template>"
+        f'<div class="site-atlas-cells" id="{ATLAS_PANEL}">'
+        f"{''.join(cells[:ATLAS_FIRST])}"
+        '<div class="site-atlas-rest" data-atlas-rest hidden>'
+        f"{''.join(cells[ATLAS_FIRST:])}</div></div>"
+        '<noscript><p><a href="cases/">All case records</a> · '
+        '<a href="frontier.html">Every packing and bound in the frontier '
+        "survey</a></p></noscript>"
         # The triangle's one-line key ("Each row ends at a perfect square…") stood here
         # and the line under the expander ("Every case from n = 1 to 324 is also in the
         # frontier survey, and each has a case record.") after it, until 2026-10-02 (the
         # owner, think-l38m): each tile opens its case record, and the Frontier page is a
         # page card. The expander's row ends the block.
-        '<p class="site-action-row site-atlas-toggle-row" hidden>'
+        '<p class="site-action-row site-atlas-toggle-row">'
         '<button type="button" class="site-action site-atlas-toggle" '
         f'data-atlas-toggle aria-expanded="false" aria-controls="{ATLAS_PANEL}" '
         f'aria-label="{name_more}" data-label-more="{more}" data-label-less="{less}" '

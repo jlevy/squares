@@ -13,7 +13,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | apple-touch-icon.png | apple-touch-icon.png | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | ascent-n1-100-poster.png | ascent-n1-100-poster.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
 | ascent-n1-324-poster.png | ascent-n1-324-poster.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
-| assets/{css,js,fonts}/*.{hash}.{ext} | / | asset-file | shared | 2026-09-29 | 2026-10-02 | live |
+| assets/{css,js,fonts}/*.{hash}.{ext} | — | asset-file | shared | 2026-09-29 | 2026-10-02 | live |
 | atlas/house/n-1.svg | atlas/house/n-1.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/house/n-10.svg | atlas/house/n-10.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/house/n-100.svg | atlas/house/n-100.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
@@ -724,7 +724,6 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | conventions.html | conventions.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | defects.html | https://github.com/jlevy/squares/blob/main/defects.md | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → https://github.com/jlevy/squares/blob/main/defects.md |
 | development.html | development.html | page | overview | 2026-09-29 | 2026-10-02 | live |
-| documents/synopsis-model.json | documents/synopsis-model.json | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | epistemics.html | epistemics.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | explainer.html | papers/n11-lower-bounds-explainer.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → papers/n11-lower-bounds-explainer.html |
 | favicon-48.png | favicon-48.png | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
@@ -868,6 +867,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-113.html | result/t-113.html | result | overview | 2026-10-07 | 2026-10-07 | live |
 | result/t-114.html | result/t-114.html | result | overview | 2026-10-07 | 2026-10-07 | live |
 | result/t-115.html | result/t-115.html | result | overview | 2026-10-07 | 2026-10-07 | live |
+| result/t-116.html | result/t-116.html | result | overview | 2026-10-06 | 2026-10-07 | withdrawn → result/t-110.html |
+| result/t-117.html | result/t-117.html | result | overview | 2026-10-06 | 2026-10-07 | withdrawn → result/t-111.html |
+| result/t-118.html | result/t-118.html | result | overview | 2026-10-06 | 2026-10-07 | withdrawn → result/t-101.html |
 | results.html | all-results.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → all-results.html |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-07 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-02 | live |
@@ -895,8 +897,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | t-018-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | copy | assembly | 2026-09-29 | 2026-10-02 | live → papers/n11-lower-bounds-explainer.pdf |
 | tutorial.html | tutorial.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | visualize.html | visualize.html | page | overview | 2026-09-29 | 2026-10-02 | live |
-| workbench/assets/{css,js,fonts}/*.{hash}.{ext} | / | asset-file | workbench | 2026-10-07 | 2026-10-07 | live |
-| workbench/data/corpus.{hash}.json | / | asset-file | workbench | 2026-10-07 | 2026-10-07 | live |
+| workbench/assets/{css,js,fonts}/*.{hash}.{ext} | — | asset-file | workbench | 2026-10-07 | 2026-10-07 | live |
+| workbench/data/corpus.{hash}.json | — | asset-file | workbench | 2026-10-07 | 2026-10-07 | live |
 | workbench/index.html | workbench/ | page | workbench | 2026-09-29 | 2026-10-02 | live |
 
 ## HTML Byte Budgets
@@ -909,6 +911,23 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | paper | 800,000 |
 | workbench | 600,000 |
 | Every HTML file, hard limit | 2,000,000 |
+
+### Measured exceptions
+
+| Physical path | Bytes | Reason |
+| --- | ---: | --- |
+| all-results.html | 800,000 | The complete registered-result table with prepared math measures 746,476 bytes. |
+| cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 434,442 bytes. |
+| cases/17.html | 500,000 | Complete n=17 proof/certificate record and prepared bounds measure 464,002 bytes. |
+| cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 338,937 bytes. |
+| frontier.html | 1,750,000 | All 324 case rows and prepared exact bounds measure 1,601,775 bytes. |
+| papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,109 bytes. |
+| result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 730,659 bytes. |
+| result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 368,258 bytes. |
+| result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 526,374 bytes. |
+| result/t-083.html | 800,000 | Complete broad scope history and prepared exact bounds measure 707,626 bytes. |
+| result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 712,847 bytes. |
+| tutorial.html | 800,000 | The complete authored tutorial and prepared formulas measure 729,410 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

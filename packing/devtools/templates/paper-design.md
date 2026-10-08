@@ -296,10 +296,9 @@ with these exceptions:
 punctuation face, Source Sans 3, Planetaire Mono Text, the KaTeX faces and KPress’s math
 composites), because every page takes them from the same functions,
 `render_n11_lower_bounds_explainer.kpress_css`, `katex_css` and `relation_face_css`: the
-papers and the workbench inline them, and the site’s pages link them as shared files
-(**Shared Assets**, below).
-`devtools.measure_site_pages faces` compares them block by block, reading a linked
-stylesheet as the page’s own.
+published papers, workbench and site pages link them as shared files (**Shared Assets**,
+below). `devtools.measure_site_pages faces` compares them block by block, reading a
+linked stylesheet as the page’s own.
 KPress leads each family token with an embedding host’s hook, `--kpress-host-font-sans`
 and its siblings, so an application embedding a KPress fragment can supply its own face.
 The site does not honor those hooks: a viewer that injects one would draw the page in a
@@ -414,9 +413,11 @@ fetched them again on every page, since a page’s own bytes were all it could c
   a page first draws in them, and a face no page draws, a print instance, only when one
   prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its
-  pages name, with the faces their stylesheets name, and removes any other file under
-  `assets/`; `render_overview --check` compares the directory against that set, and
-  fails a page that names a file no build wrote.
+  pages name, with the faces their stylesheets name.
+  Each producer preserves other producers’ files and refuses different bytes at an
+  existing content-addressed path.
+  Producer checks compare their own files; the assembled-site check validates the
+  complete output.
 - **What the deploy checks.** `check_published_site`, live and with `--local`, holds
   every file a page names, and every face a named stylesheet names, to being served with
   the bytes its name was given for.
@@ -424,12 +425,34 @@ fetched them again on every page, since a page’s own bytes were all it could c
   nothing beside it, puts the shared files back in it: `site_assets.SiteAssets.inlined`
   from a render, `site_assets.inlined_from` from a built site.
 
-The papers and the workbench still inline their assets: the explainer’s math
-preparation, both papers’ PDFs, `compare_math_fonts` and the workbench’s
-content-security policy read them from the page, and each moves to the shared files with
-its own tools. `devtools.measure_site_pages load --network fast-4g --after index.html`
-measures what a reader’s second page costs; on 2026-10-04 it moved 1.0 to 1.3 MB on
-every page before this change.
+Paper renderers retain self-contained output for offline tools.
+Publication prepares math before `site_assets.link_inline_assets` extracts styles, fonts
+and scripts; the lower-bound paper preserves all four measured font contexts.
+A tool that loads a page without its directory uses `site_assets.read_inline_page`,
+resolving resources from the page’s path.
+Paper metadata includes the article title, credits, recorded publication and revision
+dates, scholarly citation tags, and breadcrumbs.
+
+The lower-bound paper has a specific 1,500,000-byte HTML allowance within the site’s
+2,000,000-byte hard limit.
+Its prepared publication measures 1,417,109 bytes: 187,933 bytes before preparation and
+1,229,176 bytes for the measured math across four saved font preferences.
+The 800,000-byte target applies to the other papers.
+This exception keeps each font choice ready before paint without fetching primary
+mathematical content.
+
+The published workbench owns `workbench/assets/` and `workbench/data/`. Its corpus is a
+separate content-addressed JSON file.
+The loader checks the HTTP response and decodes the corpus before starting the
+application; failures remain visible above the viewport.
+Its policy permits same-origin resources and connections.
+The favicon stays inline so the workbench artifact can run independently of the root
+site. The candidate generator continues to produce one self-contained file.
+Browser checks serve published output over HTTP, and the reproducibility check compares
+every emitted file.
+`devtools.measure_site_pages load --network fast-4g --after index.html` measures what a
+reader’s second page costs; on 2026-10-04 it moved 1.0 to 1.3 MB on every page before
+this change.
 
 ## Math Loading
 
@@ -437,7 +460,7 @@ Every page, the optimality paper included, loads its mathematics through the exp
 pipeline, from the same code:
 
 - **Faces and styles.** KaTeX’s faces pruned to those a page can reach, inlined as data
-  URIs on the papers and published as shared files for the site’s pages, and switched
+  URIs for offline tools and linked from shared files in published pages, and switched
   from `font-display: swap` to `block`, so no formula is drawn in a host face and
   redrawn; KPress’s math composites; the three relation glyphs (`relation_face_css`).
 - **Scripts.** `render_n11_lower_bounds_explainer.katex_js`: KaTeX, KPress’s metric
@@ -451,24 +474,22 @@ pipeline, from the same code:
 - **Batching.** `squaresMath.batch` submits sixteen formulas per task, so a formula that
   is ready shows while later ones are still being submitted.
 
-The explainer adds what only a single published page can: its formulas are typeset,
-measured and written into the HTML at publication
-(`render_n11_lower_bounds_explainer --prepare-math`), so the client hydrates rather than
-lays out, and its queue puts the interactive panels first.
-The KPress pages are rendered without a browser, so they typeset in the client, driven
-by `overview/math.js`: the formulas within two screens of the viewport first, the rest
-as the reader scrolls toward them or opens what hides them, and, once the page has
-loaded, one at a time in the browser’s idle time.
-A formula whose faces missed the runtime’s wait is retried twice after the page and its
-fonts load, which a long page needed when every face decoded at once.
-Both mark the end of their load-time work with `math-ready`. The optimality paper is
-typeset as the KPress pages are, by the same two scripts
-(`render_n11_optimality_review.math_scripts`). It used to inline KPress’s own entry
-points, which neither kern a function’s name ($s(11)$ was set without the one-mu space
-it has on every other page) nor wait for a formula’s faces, so a formula that asked for
-a face the page does not ship (`\mathsf`) was drawn from the reader’s machine.
-Under the shared pipeline such a formula keeps its MathML, and the paper’s PDF refuses
-to print with a formula untypeset.
+Published formulas are typeset before the page is served.
+The lower-bound paper also measures their geometry in four font contexts with pinned
+Chromium; its publication command always prepares them, and `--prepare-math` remains
+accepted for existing callers.
+Its client hydrates those boxes and puts interactive panels first in the queue.
+The other papers and ordinary content pages use `site_math.prepare` to render visual
+KaTeX beside semantic MathML without launching a browser.
+Their prose, captions and headings select the matching serif or sans math profile.
+Both paper editions remain readable with JavaScript disabled.
+
+Interactive formulas use the shared runtime.
+A formula whose faces miss the runtime’s wait is retried twice after the page and its
+fonts load, and the paper marks completion with `math-ready`. The review papers retain
+their runtime for browser and print tools (`render_n11_optimality_review.math_scripts`).
+A formula that asks for a face the page does not ship keeps its MathML, and the paper’s
+PDF refuses to print with a formula untypeset.
 
 Each client layout costs a style pass over the whole document, 6ms a formula on the
 synopsis against 0.9ms with KPress’s `:has(.kpress-toc)` layout rules removed: those

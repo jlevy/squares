@@ -50,13 +50,14 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import re
 import sys
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from datetime import datetime
 from functools import cache
 from pathlib import Path
-from typing import TYPE_CHECKING, Literal, NamedTuple
+from typing import TYPE_CHECKING, Any, Literal, NamedTuple
 from urllib.parse import quote
 
 from devtools import repo_links
@@ -425,12 +426,31 @@ class PageMeta(NamedTuple):
     """For a paper that states them, the day it was first published and the day it was
     last revised, as ISO dates (`2026-09-05`)."""
     modified: str = ""
+    structured_data: tuple[Mapping[str, Any], ...] = ()
+    extra_meta: tuple[tuple[str, str], ...] = ()
 
 
 #: The records the results page and the frontier atlas write their heads from, named
 #: here because a forwarder to either previews it (`forwarded_metas`).
 RESULTS_META = PageMeta("Every Result", RESULTS_DESCRIPTION, RESULTS_PAGE)
 FRONTIER_META = PageMeta("The Frontier Survey", FRONTIER_DESCRIPTION, "frontier.html")
+
+
+def breadcrumb_data(*items: tuple[str, str]) -> dict[str, Any]:
+    """Structured breadcrumbs, with each address resolved from the site's root."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": position,
+                "name": label,
+                "item": canonical_url(path),
+            }
+            for position, (label, path) in enumerate(items, start=1)
+        ],
+    }
 
 
 def page_title(name: str) -> str:
@@ -503,10 +523,26 @@ def head_tags(page: PageMeta) -> str:
         for key, moment in (("published", page.published), ("modified", page.modified))
         if moment
     ]
+    title = page.name if page.kind == "article" else page_title(page.name)
     return "\n".join(
         (
-            f"<title>{html.escape(page_title(page.name), quote=False)}</title>",
+            f"<title>{html.escape(title, quote=False)}</title>",
             meta("description", description),
+            meta("robots", "max-image-preview:large"),
+            *(
+                (meta("google-site-verification", SEARCH_CONSOLE_VERIFICATION),)
+                if SEARCH_CONSOLE_VERIFICATION
+                else ()
+            ),
+            *(meta(key, value) for key, value in page.extra_meta),
+            *(
+                '<script type="application/ld+json">'
+                + json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace(
+                    "<", "\\u003c"
+                )
+                + "</script>"
+                for data in page.structured_data
+            ),
             f'<link rel="canonical" href="{attribute(url)}">',
             meta("og:type", page.kind),
             meta("og:site_name", PROJECT_NAME),
@@ -547,6 +583,8 @@ def inputs() -> tuple[Path, ...]:
         dict.fromkeys(
             (
                 *RENDER_INPUTS,
+                BROWSER / "favicon-48.png",
+                BROWSER / "apple-touch-icon.png",
                 *overview_data.INPUTS,
                 *FRONTIER_INPUTS,
                 *CASES_INPUTS,
@@ -604,7 +642,13 @@ def assert_fetches_only_assets(name: str, page: str) -> None:
     `url()` or `<link>` that is not a data URI or a fragment. What a reader opens
     afterwards is fetched then, from the site itself: a page a card's popover frames,
     and a result's overview (`result_fragments`)."""
-    hit = _EXTERNAL_REFERENCE.search(page)
+    checked = re.sub(
+        r'<link rel="(?:icon|apple-touch-icon)"[^>]*href="(?:\.\./)*'
+        r'(?:favicon\.svg|favicon-48\.png|apple-touch-icon\.png)"[^>]*>',
+        "",
+        page,
+    )
+    hit = _EXTERNAL_REFERENCE.search(checked)
     if hit:
         excerpt = page[max(hit.start() - 60, 0) : hit.end() + 80]
         raise SystemExit(f"{name} fetches more than the site's assets: ...{excerpt}...")
@@ -729,11 +773,22 @@ def favicon_url() -> str:
     return f"data:image/svg+xml,{quote(svg)}"
 
 
-def favicon_html() -> str:
+def favicon_html(*, inline: bool = False, root: str = "") -> str:
     """The site's icon as the link every page's head carries once: the site's pages, the
     two papers, the workbench, each case's record file and each forwarder to a page of
     the site (`check_published_site.head_problems`)."""
-    return f'<link rel="icon" type="image/svg+xml" href="{favicon_url()}">'
+    if inline:
+        return f'<link rel="icon" type="image/svg+xml" href="{favicon_url()}">'
+    return "\n".join(
+        (
+            f'<link rel="icon" type="image/svg+xml" href="{root}favicon.svg">',
+            f'<link rel="icon" type="image/png" sizes="48x48" href="{root}favicon-48.png">',
+            (
+                f'<link rel="apple-touch-icon" sizes="180x180" '
+                f'href="{root}apple-touch-icon.png">'
+            ),
+        )
+    )
 
 
 def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
@@ -794,6 +849,9 @@ def kpress_page(
     strict_anchors: bool = False,
     tabs: str = "",
     kind: PageKind = "website",
+    structured_data: tuple[Mapping[str, Any], ...] = (),
+    extra_meta: tuple[tuple[str, str], ...] = (),
+    prepare_math: bool = True,
 ) -> Page:
     """One standalone kpress page with the site's layer, nav and colophon.
 
@@ -822,7 +880,7 @@ def kpress_page(
         body_markdown=markdown,
         trust_mode=trust_mode,
     )
-    head, math_scripts = page_assets()
+    head, _math_scripts = page_assets()
     options = RenderOptions(
         asset_mode="inline",
         asset_policy="none",
@@ -843,11 +901,29 @@ def kpress_page(
     ]
     if errors:
         raise SystemExit(f"{name}: kpress reported errors: {errors[:3]}")
-    page = _site_head(name, rendered.html, PageMeta(title, description, name, kind))
+    page = _site_head(
+        name,
+        rendered.html,
+        PageMeta(
+            title,
+            description,
+            name,
+            kind,
+            structured_data=structured_data,
+            extra_meta=extra_meta,
+        ),
+    )
     prose = 'class="kpress-prose kpress-long-text'
     page = page.replace(prose + '"', prose + ' site-page"', 1)
     page = _document_scrolls(name, page)
     page = _KPRESS_CELL_LABELS.sub("", page)
+    # Site pages have no model-driven widgets; TOC/history use their static DOM.
+    page = re.sub(
+        r'<script type="application/json" id="kpress-(?:page-model|diagnostics)">.*?</script>',
+        "",
+        page,
+        flags=re.DOTALL,
+    )
     if rewrite_body is not None:
         page = rewrite_body(page)
     from devtools import site_assets  # noqa: PLC0415
@@ -857,10 +933,14 @@ def kpress_page(
         f"\n{site_assets.script_tag(ref, _FROM_ROOT)}"
         for ref in (
             kpress_client_asset(),
-            *(assets.script_file(path) for path in (THEME_SCRIPT, MATH_SCRIPT, *page_scripts)),
+            *(assets.script_file(path) for path in (THEME_SCRIPT, *page_scripts)),
         )
     )
-    page = page.replace("</body>", f"{math_scripts}{programs}\n</body>", 1)
+    page = page.replace("</body>", f"{programs}\n</body>", 1)
+    from devtools import site_math  # noqa: PLC0415
+
+    if prepare_math:
+        page = site_math.prepare(page)
     assert_fetches_only_assets(name, page)
     return Page(name, page)
 
@@ -1006,7 +1086,7 @@ def overview_page() -> Page:
         markdown,
         name="index.html",
         current="overview",
-        title=PROJECT_NAME,
+        title="Square Packing: Bounds, Results and Best Packings",
         description=OVERVIEW_DESCRIPTION,
         toc=False,
         rewrite_body=lambda text: _case_links(site_documents.rewrite_overview_blocks(text)),
@@ -1028,7 +1108,7 @@ def results_page() -> Page:
 
     overview = overview_data.load()
     values = {
-        "EPISTEMICS_URL": repo_url(repo_links.EPISTEMICS),
+        "EPISTEMICS_URL": "epistemics.html",
         "RESULTS_TABLE": overview_sections.results_table(overview),
         "STAR_LEGEND": overview_sections.star_legend(),
         "STATUS_COUNTS": overview_sections.status_counts(overview),
@@ -1092,10 +1172,55 @@ def frontier_page() -> Page:
         current="frontier",
         title=FRONTIER_META.name,
         description=FRONTIER_META.description,
+        structured_data=(
+            {
+                "@context": "https://schema.org",
+                "@type": "Dataset",
+                "name": "Square packing frontier register",
+                "description": FRONTIER_DESCRIPTION,
+                "url": canonical_url("frontier.html"),
+                "license": repo_url("LICENSE"),
+                "creator": {"@type": "Organization", "name": PROJECT_NAME},
+            },
+        ),
         toc=False,
         rewrite_body=_case_links,
         page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, CASE_POPOVER_SCRIPT),
     )
+
+
+def static_content_page(body: str, *, meta: PageMeta, current: str) -> Page:
+    """A complete styled page around an already rendered article."""
+    from devtools import site_assets, site_math  # noqa: PLC0415
+    from devtools.render_case_pages import rebase_links  # noqa: PLC0415
+    from devtools.render_n11_lower_bounds_explainer import (  # noqa: PLC0415
+        kpress_static,
+        theme_bootstrap,
+    )
+
+    head, _math_scripts = page_assets()
+    programs = "\n".join(
+        site_assets.script_tag(site_assets.shared().assets.script_file(path), _FROM_ROOT)
+        for path in (THEME_SCRIPT,)
+    )
+    page = fill(
+        (TEMPLATES / "case-record.html").read_text(encoding="utf-8"),
+        {
+            "HEAD": head_tags(meta) + "\n" + favicon_html() + head,
+            "BOOTSTRAP": theme_bootstrap(kpress_static()) + "\n" + _script_text(EMBED_SCRIPT),
+            "NAV": nav_html(current),
+            "RECORD": body,
+            "FOOTER": colophon_html(),
+            "PROGRAMS": programs,
+        },
+        where="case-record.html",
+    )
+    page = site_math.prepare(page)
+    directory = str(Path(meta.path).parent)
+    if directory != ".":
+        page = rebase_links(page, directory)
+    assert_fetches_only_assets(meta.path, page)
+    return Page(meta.path, page)
 
 
 def _case_links(page: str) -> str:
@@ -1177,28 +1302,43 @@ PAGES: dict[str, Callable[[], Page]] = {
 
 def render_all() -> list[Page]:
     """Every page, in a fixed order."""
-    return [build() for build in PAGES.values()]
+    from devtools.site_documents import chapter_pages  # noqa: PLC0415
+
+    return [*[build() for build in PAGES.values()], *chapter_pages()]
 
 
 def result_fragments() -> list[Page]:
-    """Each registered result's overview, in the register's order, as the file its row's
-    popover fetches (`overview_sections.result_fragment`).
-
-    A fragment is not a page: it is one `.site-result` block and nothing else, with no
-    shell, styles or scripts of its own, placed by `overview/row-popover.js` into the
-    popover of a page that has them. The overviews are 2.8 MB between them and two pages
-    list every result, so they are written once, here, rather than into either page.
-    """
+    """Every result as a complete page; row overlays extract its article on input."""
     from devtools import overview_data, overview_sections  # noqa: PLC0415
 
     overview = overview_data.load()
-    return [
-        Page(
-            overview_sections.result_fragment(result.id),
-            overview_sections.result_row_popover_body(result, overview) + "\n",
+    pages = []
+    for result in overview.results:
+        path = overview_sections.result_fragment(result.id)
+        summary = overview_sections.plain_text(result.summary)
+        description = f"{result.id}: {summary}. {result.credit}; {result.status}."
+        if len(description) > DESCRIPTION_LIMIT:
+            description = description[: DESCRIPTION_LIMIT - 1].rsplit(" ", 1)[0] + "."
+        meta = PageMeta(
+            f"{result.id}: {summary[:90]}",
+            description,
+            path,
+            structured_data=(
+                breadcrumb_data(
+                    ("Home", "index.html"), ("Every Result", RESULTS_PAGE), (result.id, path)
+                ),
+            ),
         )
-        for result in overview.results
-    ]
+        body = overview_sections.result_row_popover_body(result, overview)
+        body = body.replace('<div class="site-result"', '<article class="site-result"', 1)
+        body = body.removesuffix("</div>") + "</article>"
+        heading = (
+            f'<h1 id="{result.id.lower()}">{html.escape(result.id)}: '
+            f"{overview_sections.tex_bounds(result.summary)}</h1>"
+        )
+        body = body.replace(">", ">" + heading, 1)
+        pages.append(static_content_page(body, meta=meta, current="results"))
+    return pages
 
 
 def forwarded_metas() -> dict[str, PageMeta]:
@@ -1225,7 +1365,7 @@ def forwarded_metas() -> dict[str, PageMeta]:
     return {meta.path: meta for meta in metas}
 
 
-def forwarder_head(new: str, meta: PageMeta | None) -> str:
+def forwarder_head(new: str, meta: PageMeta | None, *, old: str = "") -> str:
     """A forwarder's identity, by the rule for where it leads (`forwarder_pages`).
 
     To a page of the site, the identity that page's own head carries: the site's whole
@@ -1246,7 +1386,7 @@ def forwarder_head(new: str, meta: PageMeta | None) -> str:
             f"<title>{html.escape(OFF_SITE_TITLES[new], quote=False)}</title>\n"
             f'<link rel="canonical" href="{html.escape(new, quote=True)}">'
         )
-    return f"{head_tags(meta)}\n{favicon_html()}"
+    return f"{head_tags(meta)}\n{favicon_html(root='../' * old.count('/'))}"
 
 
 def forwarder_pages() -> list[Page]:
@@ -1278,16 +1418,23 @@ def forwarder_pages() -> list[Page]:
     for old, new in MOVED_PAGES:
         external = new.startswith("https://")
         target = new if external else posixpath.relpath(new, posixpath.dirname(old))
+        if old == "cases.html":
+            target = "cases/"
         meta = None if external else metas.get(new)
         if not external and meta is None:
             raise SystemExit(f"{old} forwards to {new}, which `forwarded_metas` does not name")
         values = {
             "TARGET": html.escape(target, quote=True),
             "TITLE": html.escape(OFF_SITE_TITLES[new] if meta is None else meta.name),
-            "HEAD": forwarder_head(new, meta),
+            "HEAD": forwarder_head(new, meta, old=old),
             "FORWARD_SCRIPT": _script_text(FORWARD_SCRIPT),
         }
         page = fill(template, values, where=FORWARDER.name)
+        if old == "cases.html":
+            from devtools.render_frontier_page import frontier_cases  # noqa: PLC0415
+
+            known = ",".join(str(case["n"]) for case in frontier_cases())
+            page = page.replace("<html ", f'<html data-case-numbers="{known}" ', 1)
         assert_fetches_only_assets(old, page)
         pages.append(Page(old, page))
     return pages
@@ -1305,6 +1452,33 @@ def asset_files(files: Sequence[Page]) -> dict[str, bytes]:
     from devtools import site_assets  # noqa: PLC0415
 
     return site_assets.shared().assets.referenced(file.html for file in files)
+
+
+FAVICON_FILES = ("favicon.svg", "favicon-48.png", "apple-touch-icon.png")
+SEARCH_CONSOLE_VERIFICATION = ""
+
+
+def support_file_paths() -> tuple[str, ...]:
+    """Lightweight declarations of stable files written beside overview pages."""
+    from devtools.render_frontier_page import drawing_paths  # noqa: PLC0415
+
+    return (*FAVICON_FILES, *drawing_paths())
+
+
+@cache
+def support_files() -> dict[str, bytes]:
+    """Stable icons and standalone atlas drawings."""
+    from devtools.render_frontier_page import drawing_files, packing_svg  # noqa: PLC0415
+    from devtools.site_documents import document_files  # noqa: PLC0415
+
+    svg = packing_svg(11, units=200, ink="#17202a", paper="#ffffff", frame_px=48)
+    svg = svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ', 1)
+    data = svg.encode("utf-8")
+    files = {"favicon.svg": data, **drawing_files(), **document_files()}
+    for name in FAVICON_FILES[1:]:
+        files[name] = (BROWSER / name).read_bytes()
+
+    return files
 
 
 def write_site(output: Path, files: Sequence[Page]) -> None:
@@ -1327,6 +1501,11 @@ def write_site(output: Path, files: Sequence[Page]) -> None:
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(file.html, encoding="utf-8")
     site_assets.write_assets(output, asset_files(files))
+    for name, data in support_files().items():
+        target = output / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+    # The registry lane adds crawl files after all declared producer outputs.
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1367,6 +1546,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         stale += site_assets.stale_assets(
             output, asset_files([*pages, *fragments, *records, *forwarders])
         )
+        stale += [
+            name
+            for name, data in support_files().items()
+            if not (output / name).is_file() or (output / name).read_bytes() != data
+        ]
         if stale:
             print(f"stale or missing: {', '.join(stale)}", file=sys.stderr)
             return 1

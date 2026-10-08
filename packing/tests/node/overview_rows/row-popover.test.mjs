@@ -102,7 +102,11 @@ function page(protocol = "https:") {
      */
     set innerHTML(text) {
       this.content = new StandInElement("fragment", {}, [
-        new StandInElement("div", { class: "fetched", "data-text": text }),
+        new StandInElement("article", {
+          class: "site-result",
+          "data-result-overview": "t-004",
+          "data-text": text,
+        }),
       ]);
     }
 
@@ -113,7 +117,7 @@ function page(protocol = "https:") {
         child.parentElement = null;
       }
       this.children = [];
-      this.append(...fragment.children);
+      this.append(...(fragment.tag === "fragment" ? fragment.children : [fragment]));
     }
 
     /** @param {string} selector */
@@ -356,6 +360,7 @@ function page(protocol = "https:") {
     SOURCE,
     vm.createContext({
       document,
+      URL,
       fetch,
       location: { protocol: protocol === "offline:" ? "https:" : protocol },
       siteMath: {
@@ -547,7 +552,7 @@ void test("a body that names a fuller one is replaced by it when the popover fir
   assert.ok(!fetched.body.hasAttribute("data-row-pop-src"));
   assert.ok(!fetched.body.hasAttribute("data-row-pop-loading"));
   // It landed in an open popover, so its math is typeset here.
-  assert.deepEqual(typeset, [fetched.popover]);
+  assert.deepEqual(typeset, [], "the fetched record already contains rendered math");
   fetched.popover.hidePopover();
   fire(fetched.text, "click");
   await settled();
@@ -566,7 +571,7 @@ void test("a press starts the fetch, and a body that lands before the popover op
   await settled();
   assert.deepEqual(requests, ["result/t-004.html"]);
   assert.equal(fetched.body.children.length, 1);
-  assert.equal(fetched.body.children[0]?.getAttribute("class"), "fetched");
+  assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
 });
 
 void test("a body that cannot be fetched keeps its short form, and the next opening asks again", async () => {

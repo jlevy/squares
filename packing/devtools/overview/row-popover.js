@@ -1,31 +1,7 @@
-// The site's one way to show a table row's detail: the row is the unit
-// (paper-design.md, Row popovers). A row with detail names its popover,
-// `<tr data-row-popover="ID">`, and carries one native trigger in a cell,
-// `<button class="site-row-open" popovertarget="ID">`; the popover is a card's
-// (`.site-popover`), placed after the table. Without this script the trigger opens it and
-// nothing else is needed. This script makes the whole row the control:
-//   - the row takes focus and the trigger leaves the tab order, so each row is one stop;
-//   - a click anywhere on the row, or Enter or Space while the row has focus, opens its
-//     popover; a link, button or form control of the row's own keeps its own behaviour,
-//     and a click that ends a text selection selects rather than opens;
-//   - opening moves focus to the popover's close cross and marks the row expanded;
-//     closing, by the cross, Escape or a click outside, marks it collapsed and returns
-//     focus to the row.
-// Sorting and filtering (`table.js`) move and hide rows; a row finds its popover by id,
-// so the popover follows its row.
-//
-// A popover's body may wait in a `<template data-row-pop-body>`, which the browser
-// parses but neither lays out nor typesets: it is placed just before the popover first
-// opens, however it is opened, and `popover.js` then typesets its math. A page whose
-// every row carries a long body pays for a body only when a reader asks for it.
-//
-// A body too heavy to carry in the page at all names a fuller one beside the page, in
-// `data-row-pop-src` on its `.site-row-pop-body` (an address such as
-// `result/t-060.html`), and holds a short form of it. The fuller body is fetched once,
-// when the row is first pressed or its popover first opens, and takes the short one's
-// place; its math is typeset when it lands, if the popover is open, and by `popover.js`
-// otherwise. Where it cannot be had, on a page read from a file or off the network, the
-// short body stays, and the next opening asks again.
+// Input response: table rows open a detail overlay. Ordinary result links also open
+// the complete canonical page without JavaScript. On the first opening, the overlay
+// fetches that page, extracts its prepared article and resolves relative links against
+// the response URL. Sorting and filtering preserve each row's named overlay.
 (() => {
   /** What a click on a row leaves alone: the row's own links and controls. */
   const CONTROLS = "a[href], button, input, select, textarea, label, summary";
@@ -58,15 +34,30 @@
       }
       body.setAttribute("data-row-pop-loading", "");
       void fetch(source)
-        .then((response) => (response.ok ? response.text() : Promise.reject(response.status)))
-        .then((text) => {
-          const held = document.createElement("template");
-          held.innerHTML = text;
-          body.replaceChildren(held.content);
-          body.removeAttribute("data-row-pop-src");
-          if (popover.matches(":popover-open")) {
-            void globalThis.siteMath?.typeset(popover, true);
+        .then(async (response) => {
+          if (!response.ok) {
+            throw new Error(String(response.status));
           }
+          const held = document.createElement("template");
+          held.innerHTML = await response.text();
+          const article = held.content.querySelector("article.site-result[data-result-overview]");
+          if (!(article instanceof HTMLElement)) {
+            throw new Error("The result page has no record article");
+          }
+          for (const node of article.querySelectorAll("[href], [src]")) {
+            for (const attribute of ["href", "src"]) {
+              const value = node.getAttribute(attribute);
+              if (value === null || value.startsWith("#")) {
+                continue;
+              }
+              node.setAttribute(
+                attribute,
+                new URL(value, response.url || new URL(source, document.baseURI).href).href,
+              );
+            }
+          }
+          body.replaceChildren(article);
+          body.removeAttribute("data-row-pop-src");
         })
         // The short body is already there; a later opening tries again.
         .catch(() => undefined)

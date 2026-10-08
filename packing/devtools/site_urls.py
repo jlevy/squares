@@ -35,6 +35,60 @@ FIRST_SITE_DATE = "2026-09-29"
 # The declared registration day for this URL migration, never the render clock.
 REGISTRATION_DATE = "2026-10-07"
 HARD_HTML_LIMIT = 2_000_000
+# Measured exceptions retain the global two-megabyte ceiling.
+PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
+    "cases/11.html": (
+        500_000,
+        "Complete n=11 proof/certificate record and prepared bounds measure 434,442 bytes.",
+    ),
+    "cases/17.html": (
+        500_000,
+        "Complete n=17 proof/certificate record and prepared bounds measure 464,002 bytes.",
+    ),
+    "cases/18.html": (
+        350_000,
+        "Complete n=18 certificate record; prepared HTML measures 338,937 bytes.",
+    ),
+    "result/t-007.html": (
+        800_000,
+        "Complete broad scope history and prepared exact bounds measure 730,659 bytes.",
+    ),
+    "result/t-085.html": (
+        800_000,
+        "Complete broad scope history and prepared exact bounds measure 712,847 bytes.",
+    ),
+    "result/t-083.html": (
+        800_000,
+        "Complete broad scope history and prepared exact bounds measure 707,626 bytes.",
+    ),
+    "result/t-058.html": (
+        600_000,
+        "Complete broad scope history and prepared exact bounds measure 526,374 bytes.",
+    ),
+    "result/t-046.html": (
+        400_000,
+        "Complete broad scope history and prepared exact bounds measure 368,258 bytes.",
+    ),
+    "frontier.html": (
+        1_750_000,
+        "All 324 case rows and prepared exact bounds measure 1,601,775 bytes.",
+    ),
+    "all-results.html": (
+        800_000,
+        "The complete registered-result table with prepared math measures 746,476 bytes.",
+    ),
+    "tutorial.html": (
+        800_000,
+        "The complete authored tutorial and prepared formulas measure 729,410 bytes.",
+    ),
+    "papers/n11-lower-bounds-explainer.html": (
+        1_500_000,
+        (
+            "Four prepared font preferences and the authored paper content "
+            "measure 1,417,109 bytes."
+        ),
+    ),
+}
 PAGE_BUDGETS = {
     "page": 600_000,
     "record": 300_000,
@@ -307,7 +361,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
             "asset-file",
             "devtools.build_site:build",
             "workbench",
-            FIRST_SITE_DATE,
+            REGISTRATION_DATE,
             day,
             pattern=WORKBENCH_ASSET_PATTERN,
         ),
@@ -317,7 +371,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
             "asset-file",
             "devtools.build_site:build",
             "workbench",
-            FIRST_SITE_DATE,
+            REGISTRATION_DATE,
             day,
             pattern=WORKBENCH_DATA_PATTERN,
         ),
@@ -435,7 +489,7 @@ def render_document(rows: Sequence[SiteURL]) -> str:
         status = row.status + (" → " + row.target if row.target else "")
         cells = (
             row.path,
-            row.canonical or "/",
+            row.canonical or ("—" if row.pattern else "/"),
             row.kind,
             row.producer,
             row.first_published,
@@ -445,7 +499,18 @@ def render_document(rows: Sequence[SiteURL]) -> str:
         lines.append("| " + " | ".join(cell.replace("|", r"\|") for cell in cells) + " |")
     lines += ["", "## HTML Byte Budgets", "", "| Family | Bytes |", "| --- | ---: |"]
     lines += [f"| {family} | {limit:,} |" for family, limit in PAGE_BUDGETS.items()]
-    lines += [f"| Every HTML file, hard limit | {HARD_HTML_LIMIT:,} |", "", FOOTER.rstrip(), ""]
+    lines += [f"| Every HTML file, hard limit | {HARD_HTML_LIMIT:,} |", ""]
+    lines += [
+        "### Measured exceptions",
+        "",
+        "| Physical path | Bytes | Reason |",
+        "| --- | ---: | --- |",
+    ]
+    lines += [
+        f"| {path} | {limit:,} | {reason} |"
+        for path, (limit, reason) in sorted(PAGE_BUDGET_EXCEPTIONS.items())
+    ]
+    lines += ["", FOOTER.rstrip(), ""]
     return "\n".join(lines)
 
 
@@ -458,7 +523,13 @@ def _target_path(target: str) -> str:
 
 
 def validate_registry(rows: Sequence[SiteURL]) -> Checks:
-    checks: Checks = []
+    checks: Checks = [
+        (
+            0 < limit <= HARD_HTML_LIMIT and bool(reason.strip()),
+            f"budget exception {path}: measured reason and ceiling within hard limit",
+        )
+        for path, (limit, reason) in PAGE_BUDGET_EXCEPTIONS.items()
+    ]
     paths = {row.path: row for row in rows}
     checks.append((len(paths) == len(rows), "registry: unique physical paths"))
     for row in rows:
@@ -468,7 +539,12 @@ def validate_registry(rows: Sequence[SiteURL]) -> Checks:
             and bool(row.generator)
             and bool(row.producer)
         )
-        valid = valid and _date(row.first_published) and _date(row.lastmod)
+        valid = (
+            valid
+            and _date(row.first_published)
+            and _date(row.lastmod)
+            and row.first_published <= row.lastmod
+        )
         if row.pattern:
             valid = (
                 valid
@@ -487,6 +563,13 @@ def validate_registry(rows: Sequence[SiteURL]) -> Checks:
                 f"registry {row.path}: valid path, producer, dates and constrained pattern",
             )
         )
+        if not row.pattern and not row.canonical.startswith("https://"):
+            checks.append(
+                (
+                    _target_path(row.canonical) in paths,
+                    f"{row.path}: canonical destination {row.canonical or '/'} registered",
+                )
+            )
         if row.status == "withdrawn":
             checks.append(
                 (
@@ -538,11 +621,7 @@ def _target_checks(row: SiteURL, paths: Mapping[str, SiteURL]) -> Checks:
             checks.append((False, f"{row.path}: unknown target {target}"))
             break
         checks.append((True, f"{row.path}: target {target} registered"))
-        target = (
-            destination.target
-            if destination.status == "forwarded" or destination.kind == "copy"
-            else ""
-        )
+        target = destination.target
     return checks
 
 
@@ -589,6 +668,8 @@ def check_history(current: Sequence[SiteURL], baseline: Sequence[SiteURL]) -> Ch
 
 
 def page_budget(row: SiteURL) -> int:
+    if exception := PAGE_BUDGET_EXCEPTIONS.get(row.path):
+        return exception[0]
     family = (
         "paper"
         if row.kind == "paper-file"
@@ -651,6 +732,18 @@ def check_site(
                     (
                         f"site {row.path}: required {row.producer} output "
                         f"{'present' if row.path in observed else 'missing'}"
+                    ),
+                )
+            )
+    for row in patterns:
+        if not partial or row.producer in selected:
+            present = any(re.fullmatch(row.pattern, name) for name in observed)
+            checks.append(
+                (
+                    present,
+                    (
+                        f"site {row.path}: required {row.producer} namespace "
+                        f"{'present' if present else 'missing'}"
                     ),
                 )
             )
@@ -720,7 +813,10 @@ def render_not_found(rows: Sequence[SiteURL]) -> tuple[str, dict[str, bytes]]:
         f"<title>Page Not Found · {escape(render_overview.PROJECT_NAME)}</title>"
         '<meta name="robots" content="noindex, max-image-preview:large">'
         f'<link rel="stylesheet" href="{root}assets/{shared.kpress_css.output_path}">'
-        f'<link rel="icon" href="{root}favicon.svg"></head><body><main>'
+        f'<link rel="icon" type="image/svg+xml" href="{root}favicon.svg">'
+        f'<link rel="icon" type="image/png" sizes="48x48" href="{root}favicon-48.png">'
+        f'<link rel="apple-touch-icon" href="{root}apple-touch-icon.png">'
+        "</head><body><main>"
         "<h1>Page Not Found</h1><p>This address does not identify a published page.</p>"
         f'<p><a href="{root}">The Squares Project</a></p></main>'
         f'<script type="application/json" id="site-url-aliases">{config}</script>'
@@ -1043,7 +1139,7 @@ def _seed_history(ref: str) -> list[SiteURL]:
     return sorted(
         (
             replace(row, first_published=FIRST_SITE_DATE)
-            if row.first_published == REGISTRATION_DATE
+            if row.first_published == REGISTRATION_DATE and row.kind != "result"
             else row
             for row in rows
         ),
@@ -1053,7 +1149,11 @@ def _seed_history(ref: str) -> list[SiteURL]:
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="fail on registry/document drift")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true", help="fail on registry/document drift")
+    mode.add_argument(
+        "--write", action="store_false", dest="check", help="write registry/document"
+    )
     parser.add_argument("--history-ref", default="origin/main", help="retained URL baseline")
     args = parser.parse_args(argv)
     try:

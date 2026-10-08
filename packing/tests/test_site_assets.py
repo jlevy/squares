@@ -68,7 +68,7 @@ def test_what_a_page_names_includes_its_stylesheets_faces() -> None:
         assets.referenced(['<script src="assets/js/gone.0000000000000000.js"></script>'])
 
 
-def test_a_build_writes_what_its_pages_name_and_nothing_else(tmp_path: Path) -> None:
+def test_independent_builds_keep_each_others_assets(tmp_path: Path) -> None:
     assets, _, page = _bundle()
     files = assets.referenced([page])
     left = tmp_path / "assets" / "js" / "old.0000000000000000.js"
@@ -76,8 +76,11 @@ def test_a_build_writes_what_its_pages_name_and_nothing_else(tmp_path: Path) -> 
     left.write_text("stale", encoding="utf-8")
     assert site_assets.stale_assets(tmp_path, files)
     site_assets.write_assets(tmp_path, files)
-    assert not left.exists()
+    assert left.exists()
     assert site_assets.stale_assets(tmp_path, files) == []
+    assert site_assets.stale_assets(tmp_path, files, exact=True) == [
+        "assets/js/old.0000000000000000.js"
+    ]
     (tmp_path / "assets" / next(iter(files))).write_bytes(b"changed")
     assert site_assets.stale_assets(tmp_path, files) == [f"assets/{next(iter(files))}"]
 
@@ -163,3 +166,29 @@ def test_every_site_page_links_the_shared_design_system(home: tuple[str, str]) -
     assert 'rel="preload"' in page
     assert katex_js(kpress_static()) not in page
     assert katex_js(kpress_static()) in served
+
+
+def test_asset_publication_refuses_changed_content_at_an_existing_path(tmp_path: Path) -> None:
+    site_assets.write_assets(tmp_path, {"js/example.1234567890123456.js": b"one"})
+    with pytest.raises(ValueError, match="asset collision"):
+        site_assets.write_assets(tmp_path, {"js/example.1234567890123456.js": b"two"})
+    assert (tmp_path / "assets/js/example.1234567890123456.js").read_bytes() == b"one"
+
+
+def test_linked_inline_assets_preserve_order_fonts_and_json(tmp_path: Path) -> None:
+    inline = "<head><style>@font-face{src:url(data:font/woff2;base64,d09GMg==)}</style>"
+    inline += "<script>bootstrap</script></head><body><script>application</script>"
+    inline += '<script type="application/json">{"kept":true}</script></body>'
+    linked, files = site_assets.link_inline_assets(inline, "papers/example.html")
+    assert "base64" not in linked
+    assert "<script>bootstrap</script>" in linked
+    assert '<script type="application/json">{"kept":true}</script>' in linked
+    assert '<script src="../assets/js/' in linked
+    assert any(path.endswith(".woff2") for path in files)
+    site_assets.write_assets(tmp_path, files)
+    page = tmp_path / "papers/example.html"
+    page.parent.mkdir()
+    page.write_text(linked)
+    restored = site_assets.read_inline_page(page)
+    assert "<script>application</script>" in restored
+    assert "base64,d09GMg==" in restored

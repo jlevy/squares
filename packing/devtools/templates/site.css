@@ -1699,7 +1699,7 @@ body {
 .kpress .site-frontier .site-col-n {
   padding-inline-start: 0.5rem;
 }
-.site-thumb svg {
+.site-thumb :is(svg, img) {
   block-size: var(--site-frontier-thumb);
   display: block;
   inline-size: var(--site-frontier-thumb);
@@ -2009,10 +2009,12 @@ body {
 }
 /* The three sizes of tile (think-ht8t): Medium is the scale of 1 above, the size the
    atlas had before it offered a choice. */
-.site-page .site-atlas-grid[data-atlas-size="small"] {
+.site-page .site-atlas-grid[data-atlas-size="small"],
+html[data-site-atlas-size="small"] .site-page .site-atlas-grid {
   --site-atlas-scale: 0.667;
 }
-.site-page .site-atlas-grid[data-atlas-size="large"] {
+.site-page .site-atlas-grid[data-atlas-size="large"],
+html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   --site-atlas-scale: 1.5;
 }
 /* The view tabs and the size tabs: two of the section tabs' strip (site-nav.css), on
@@ -2067,6 +2069,7 @@ body {
    again, the script having set fewer to a line. At Medium it is the share alone, no
    wider than `--site-atlas-tile-max`. The grid's least cell is scaled the same way. */
 .site-atlas-cells {
+  --site-atlas-per-line: 19;
   --site-atlas-fit: calc(100cqi / var(--site-atlas-per-line, 1));
   --site-atlas-share: calc(var(--site-atlas-fit) * min(1, var(--site-atlas-scale)));
   --site-atlas-most: calc(var(--site-atlas-tile-max) * var(--site-atlas-scale));
@@ -2109,7 +2112,7 @@ body {
    the link, it went to the lighter accent KPress gives a hovered link's text (`.kpress
    a:hover`, which outranks the cell's own colour), and the outlines all but vanished
    against the squares. */
-.site-atlas-cell svg {
+.site-atlas-cell :is(svg, img) {
   aspect-ratio: 1;
   color: var(--kpress-doc-text);
   display: block;
@@ -2138,7 +2141,7 @@ body {
    frame with the grid's gaps, 1344 pixels wide at 1280, before it settled. A tile keeps
    its own transition, which is the wash alone. */
 .site-atlas-cells,
-.site-atlas-cell svg,
+.site-atlas-cell :is(svg, img),
 .site-atlas-n {
   transition: none;
 }
@@ -2155,10 +2158,15 @@ body {
    a phone to a wide screen. A triangle narrower than the block is centred. The tile's
    width, `--site-atlas-tile`, is declared with the grid's rule above, for the reason
    given there. */
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells {
+.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells,
+html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
   gap: 0;
   grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));
-  justify-content: center;
+  justify-content: safe center;
+  overflow-x: auto;
+}
+.site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
+  --site-atlas-per-line: 35;
 }
 /* The space over a new row, `--site-atlas-row-space`, is a share of a tile: 0.12 where
    every row is one line, and where a row wraps 0.4, larger than anything between two
@@ -2166,23 +2174,29 @@ body {
 .site-atlas-cells[data-atlas-wrapped] {
   --site-atlas-row-space: 0.4;
 }
-.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell {
-  grid-area: var(--site-atlas-line, auto) / var(--site-atlas-column, auto);
+.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell,
+html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell {
+  /* Short inline variables hold the initial geometry; input updates use named ones. */
+  grid-area:
+    var(--site-atlas-line, var(--r, auto)) /
+    var(--site-atlas-column, calc(var(--site-atlas-per-line, 19) - var(--c, 0)));
   margin-block-start: calc(
-    var(--site-atlas-opens, 0) *
+    var(--site-atlas-opens, var(--o, 0)) *
     var(--site-atlas-tile) *
     var(--site-atlas-row-space)
   );
   padding: calc(var(--site-atlas-tile) * 0.07);
 }
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-n {
+.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-n,
+html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-n {
   font-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
   line-height: 1.15;
   margin-block-start: calc(var(--site-atlas-tile) * 0.04);
 }
 /* The perfect squares, down the right edge, are numbered in the text's own colour and
    the medium weight: the row ends there. */
-.site-atlas-grid[data-atlas-view="triangle"] [data-atlas-square] .site-atlas-n {
+.site-atlas-grid[data-atlas-view="triangle"] [data-atlas-square] .site-atlas-n,
+html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site-atlas-n {
   color: var(--kpress-doc-text);
   font-weight: var(--site-font-weight-sans-medium);
 }
@@ -2601,7 +2615,7 @@ body {
 /* The drawing is the figure's own `svg`. A caption's typeset math draws a radical as an
    `svg` of its own, which KaTeX sizes; sized as the drawing, it collapsed to nothing,
    and a side such as 3 + ½√2 read as 3 + ½ 2. */
-.site-case-figure > svg {
+.kpress .site-case-figure > svg {
   block-size: auto;
   color: var(--kpress-doc-text);
   display: block;
@@ -2873,4 +2887,14 @@ body {
 }
 .site-page .site-film-frame figcaption {
   margin-block-start: 0.6rem;
+}
+
+/* Drawing dimensions are reserved before their files load. */
+.kpress .site-page .site-atlas-cell img,
+.kpress .site-page .site-thumb img {
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.kpress .site-case-figure > svg {
+  aspect-ratio: 1;
 }

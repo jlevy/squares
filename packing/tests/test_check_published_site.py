@@ -99,7 +99,7 @@ def head(path: str, *, description: str | None = None) -> str:
     )
     if description is not None:
         meta = meta._replace(description=description)
-    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html()}"
+    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html(root='/squares/')}"
     return f'<!doctype html><html lang="en"><head>{tags}</head>'
 
 
@@ -311,6 +311,9 @@ def fixture_records(monkeypatch: pytest.MonkeyPatch) -> None:
     """Hold the fixture site to the fixture's record links, as rendered at its commit.
     A test that asks about the renderer itself, or about another checkout, sets its own
     first, and that is kept."""
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     if check_published_site.rendered_record_links is rendered_record_links:
         monkeypatch.setattr(
             check_published_site, "rendered_record_links", lambda: EXPECTED_RECORDS
@@ -331,6 +334,10 @@ def failures(
     it says of itself, so a page a test breaks in one way fails them in others; they are
     left out unless `heads` asks for them, and the tests of the heads ask."""
     monkeypatch.setattr(check_published_site, "fetch", fetch)
+    # These fixtures test specialized assurance; the complete walk has its own fixtures.
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     monkeypatch.setattr(
         check_published_site, "head_checks", HEAD_CHECKS if heads else lambda *_: []
     )
@@ -1153,6 +1160,10 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
         assert requested.count(f"https://example.org/{name}") == 1, name
 
     monkeypatch.setattr(check_published_site, "fetch", fetch)
+    # These fixtures test specialized assurance; the complete walk has its own fixtures.
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     monkeypatch.setattr(check_published_site, "head_checks", HEAD_CHECKS)
     lines = [
         line
@@ -1253,7 +1264,12 @@ def test_check_fails_a_forwarder_that_previews_its_page_by_another_name_or_kind(
     forwarders = {moved.name: moved.html for moved in render_overview.forwarder_pages()}
 
     def found(name: str, text: str) -> list[str]:
-        assert check_published_site.head_problems(text, FORWARDED_URLS[name]) == []
+        assert (
+            check_published_site.head_problems(
+                text, FORWARDED_URLS[name], page_url=render_overview.SITE_URL + name
+            )
+            == []
+        )
         site = fake_site(site_pages(**{name: text.encode()}))
         return failures(monkeypatch, site, heads=True)
 

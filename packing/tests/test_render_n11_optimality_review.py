@@ -88,9 +88,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
     html, _ = rendered
     url = render_overview.canonical_url(paper.SITE_PATH)
     assert url == render_overview.SITE_URL + paper.SITE_PATH
-    assert check_published_site.head_problems(html, url) == []
+    assert check_published_site.head_problems(html, url, allow_inline_favicon=True) == []
     head = check_published_site.read_head(html)
-    assert head.titles == (f"{paper.TITLE} · {render_overview.PROJECT_NAME}",)
+    assert head.titles == (paper.TITLE,)
     assert head.meta("og:title") == [paper.TITLE]
     assert head.meta("og:type") == ["article"]
     assert head.meta("description") == [paper.DESCRIPTION]
@@ -102,7 +102,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
         release.OPTIMALITY_REVIEW_REVISED
     )
     assert head.meta("article:modified_time") == [meta.modified]
-    assert meta.published == ""
+    assert meta.published == paper_front.iso_date(
+        release.OPTIMALITY_REVIEW_HISTORY[-1].first_published
+    )
     assert (meta.kind, meta.path) == ("article", paper.SITE_PATH)
     assert paper_front.revised(paper.FRONT) == release.OPTIMALITY_REVIEW_REVISED
 
@@ -130,7 +132,16 @@ def test_the_forwarders_at_the_old_addresses_preview_the_paper_as_it_does(
         "n11-optimality/t-060-explainer.html",
     ]
     for name, forwarder in forwarders.items():
-        assert check_published_site.forwarder_problems(forwarder, url, html) == [], name
+        assert (
+            check_published_site.forwarder_problems(
+                forwarder,
+                url,
+                html,
+                allow_inline_favicon=True,
+                page_url=render_overview.SITE_URL + name,
+            )
+            == []
+        ), name
         head = check_published_site.read_head(forwarder)
         assert head.titles == own.titles, name
         assert head.link("canonical") == own.link("canonical") == [url], name
@@ -538,6 +549,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ),
         (
             '<span class="publication-date">'
+            f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
             f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
             f"Last revised {release.OPTIMALITY_REVIEW_REVISED}</span>"
         ),
@@ -568,7 +580,8 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         "- Human oversight: [**Joshua Levy**](https://x.com/ojoshe)\n"
         "- Agents: **GPT-6 Astra** and **GPT-6 Sol**\n"
         f"- {release.OPTIMALITY_REVIEW_EDITION} ([version history](#version-history))\n"
-        f"- Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
+        f"- First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
+        f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}\n"
         "- Part III of 3 in the n = 11 series\n"
         "- Part I: [New Lower Bounds for Square Packing for n = 11]"

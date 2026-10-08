@@ -1669,3 +1669,16 @@ body #controls.is-sized {
   height: var(--controls-height);
   max-height: none;
 }
+
+/* Published data loading must remain visible above the application's fixed viewport. */
+#workbench-startup {
+  position: fixed;
+  inset: 5rem 1rem auto;
+  z-index: 1000;
+  max-width: 42rem;
+  margin-inline: auto;
+  padding: 1rem;
+  border: 1px solid currentColor;
+  background: var(--bg, #fff);
+  color: var(--fg, #222);
+}

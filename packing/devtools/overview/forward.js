@@ -1,37 +1,132 @@
-// Old links into pages that moved keep working.
-//
-// A page that moved whole, or was withdrawn, is still served at its old address, as a
-// forwarder (`render_overview.forwarder_pages`): its root element names where a visit is
-// sent now, in `data-moved-to`, and every visit is sent there with its query string and
-// its fragment. Three repository documents left the site that way: `results.html` goes
-// to the results table, `status.html` to the frontier atlas, and `defects.html` to the
-// defect log on GitHub. The papers moved that way, to `papers/<slug>.html`: the explainer
-// from `explainer.html` and the optimality paper from
-// `n11-optimality/t-060-explainer.html`. Both keep their state in the fragment --
-// section ids, footnotes (`#fn-3`) and the explainer's certificate picker (`#19-5`,
-// `#381-100`) -- and `?review=fonts` must survive. A forwarder also carries a link and,
-// for a reader without scripts, a refresh, neither of which can keep a fragment.
-//
-// The overview is not a forwarder, and forwards by fragment. The results table moved from
-// it to `all-results.html`: its section, `#every-result`, and each result's row (`#t-018`)
-// are sent there, fragment kept. The results page's title is "Every Result", so the
-// section's old fragment lands on it. Verification Ladders moved there too, on
-// 2026-10-02: its fragment, `#verification-ladders`, and the older
-// `#verification-at-a-glance`, which an empty anchor in its heading keeps, are sent
-// there the same way. The Frontier Survey section left the overview the same day, its
-// account the Frontier page's own: its fragment, `#the-frontier-survey`, and the older
-// `#the-survey` are sent to `frontier.html`, whose title carries the first. The explainer
-// was once the site's root, so any other fragment that names nothing on the overview is
-// sent to the explainer, query string and all. The overview's own ids, the explainer's
-// and the results page's are kept disjoint by a test, so no old link is captured by the
-// wrong page.
+// Input response and registered forwarding: moved pages preserve query and fragment.
+// The overview forwards only the frozen explainer-era anchor inventory. Unknown
+// fragments remain on this page; its own current anchors take precedence.
 (() => {
+  const explainerAnchors = new Set([
+    "19-5",
+    "381-100",
+    "acknowledgments",
+    "actions-19-5",
+    "actions-381-100",
+    "atoms-mass-and-the-budget",
+    "beyond-point-atoms-the-current-bound",
+    "btn-heat-19-5",
+    "btn-heat-381-100",
+    "btn-scan-19-5",
+    "btn-scan-381-100",
+    "btn-tight-19-5",
+    "btn-tight-381-100",
+    "every-placement-covers-mass-at-least-one",
+    "field-19-5",
+    "field-381-100",
+    "field-tip-19-5",
+    "field-tip-381-100",
+    "figure-description",
+    "figure-title",
+    "fn-1",
+    "fn-10",
+    "fn-11",
+    "fn-2",
+    "fn-3",
+    "fn-4",
+    "fn-5",
+    "fn-6",
+    "fn-7",
+    "fn-8",
+    "fn-9",
+    "fnref-1",
+    "fnref-10",
+    "fnref-10-2",
+    "fnref-11",
+    "fnref-2",
+    "fnref-2-2",
+    "fnref-3",
+    "fnref-3-2",
+    "fnref-4",
+    "fnref-5",
+    "fnref-6",
+    "fnref-6-2",
+    "fnref-7",
+    "fnref-7-2",
+    "fnref-7-3",
+    "fnref-8",
+    "fnref-8-2",
+    "fnref-9",
+    "fnref-9-2",
+    "fnref-9-3",
+    "from-a-continuum-of-angles-to-181",
+    "further-reading",
+    "generator-and-verifier",
+    "hint-19-5",
+    "hint-381-100",
+    "kslider-19-5",
+    "kslider-381-100",
+    "kval-19-5",
+    "kval-381-100",
+    "md-19-5",
+    "md-381-100",
+    "mv-19-5",
+    "mv-381-100",
+    "new-lower-bounds-for-square-packing-for-n--11",
+    "panel-0",
+    "panel-0-fills",
+    "panel-0-outlines",
+    "phi-19-5",
+    "phi-381-100",
+    "proof",
+    "proof-of-the-new-lower-bound",
+    "prove-19-5",
+    "prove-381-100",
+    "s-B-19-5",
+    "s-B-381-100",
+    "s-D-19-5",
+    "s-D-381-100",
+    "s-d-19-5",
+    "s-d-381-100",
+    "s-phi-19-5",
+    "s-phi-381-100",
+    "s-prod-19-5",
+    "s-prod-381-100",
+    "s-theta-19-5",
+    "s-theta-381-100",
+    "shrink-19-5",
+    "shrink-381-100",
+    "status-19-5",
+    "status-381-100",
+    "t-025-a-direct-certificate-at-382",
+    "t-026-finer-directions-and-the-new-lower-bound",
+    "the-agentic-research-framework",
+    "the-atom-set",
+    "the-contradiction-argument",
+    "the-five-conditions-for-a-point-certificate",
+    "the-result-and-proof-roadmap",
+    "the-square-packing-problem",
+    "vd-19-5",
+    "vd-381-100",
+    "verifiable-claim",
+    "version-history",
+    "what-a-coarser-net-costs",
+  ]);
   /** @param {string} target */
   const forward = (target) => {
     window.location.replace(`${target}${window.location.search}${window.location.hash}`);
   };
   const moved = document.documentElement.dataset.movedTo;
   if (moved) {
+    const known = document.documentElement.dataset.caseNumbers;
+    if (known) {
+      const url = new URL(window.location.href);
+      const query = url.searchParams.get("n");
+      const fragment = /^#n-(\d+)$/.exec(url.hash)?.[1];
+      const digits = query !== null && /^\d+$/.test(query) ? query : fragment;
+      const n = digits === undefined ? "" : String(Number(digits));
+      if (known.split(",").includes(n)) {
+        url.searchParams.delete("n");
+        const hash = fragment === undefined ? url.hash : "";
+        window.location.replace(`cases/${n}.html${url.search}${hash}`);
+        return;
+      }
+    }
     forward(moved);
     return;
   }
@@ -57,7 +152,7 @@
     forward("all-results.html");
   } else if (id === "the-frontier-survey" || id === "the-survey") {
     forward("frontier.html");
-  } else {
+  } else if (explainerAnchors.has(id)) {
     forward("papers/n11-lower-bounds-explainer.html");
   }
 })();

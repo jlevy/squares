@@ -6,11 +6,11 @@ workbench at `/workbench/` beside the overview at `/` and the explainer, touchin
 That separation is the point -- both are already published and may be linked from
 elsewhere, so nothing here moves `site/index.html`.
 
-The page is already self-contained, which is what makes it deployable at all: one file,
-no external script, stylesheet or font, so it works from any static host. This tool exists
-to put it where the Pages artifact will find it, to check that self-containment rather than
-assume it, to give it a policy under which the browser refuses any network request, and to
-declare its inputs so the workflow rebuilds when they move.
+The candidate generator produces a self-contained offline page. Publication extracts its
+corpus, stylesheets, fonts and scripts into content-addressed files beside `index.html`.
+A small loader validates the fetched corpus before starting the application, and displays
+HTTP or decoding failures in the page. The policy permits resources from the same origin;
+its inline favicon keeps this artifact independent of the site's root files.
 
 The page no longer carries a banner calling itself unchecked, because it is checked. It
 carries one quiet line saying what a reader does have to know -- that the animation model is
@@ -42,15 +42,27 @@ Usage, from `packing/`:
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import subprocess
 import sys
 import tempfile
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
+from functools import cache
+from html import escape
 from pathlib import Path
 
-from devtools.render_overview import PageMeta, head_tags, nav_shell, visualize_tabs
+from kpress.format.assets import content_hash
+
+from devtools import site_assets
+from devtools.render_overview import (
+    PageMeta,
+    favicon_html,
+    head_tags,
+    nav_shell,
+    visualize_tabs,
+)
 from workbench_tools.self_contained import assert_self_contained_html
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
@@ -59,9 +71,13 @@ ROOT = REPO / "packing"
 WORKBENCH_PACKAGE = PACKAGE_ROOT
 OUT = ROOT / "site/workbench"
 
+ASSET_NAMESPACES = ("workbench/assets/css", "workbench/assets/js", "workbench/assets/fonts")
+DATA_NAMESPACE = "workbench/data"
+
 RENDER_INPUTS = (
     Path(__file__),
     ROOT / "devtools/render_n11_lower_bounds_explainer.py",
+    ROOT / "devtools/site_assets.py",
     ROOT / "src/sqpack/render",
     ROOT / "pyproject.toml",
     ROOT / "uv.lock",
@@ -156,8 +172,7 @@ def with_head(page: str) -> str:
     one set (`render_overview.head_tags`), written from `PAGE`, so a shared link to the
     workbench previews as every other page of the site does. Like the bar, they are a
     property of the published page: the candidate the checkers open keeps its own title.
-    Their addresses are absolute and none is a load, so the page stays self-contained
-    and its policy, which grants no network source, is not asked about them.
+    Their absolute addresses identify the page without loading a resource.
     """
     head = page.find("</head>")
     found = TITLE.search(page)
@@ -180,6 +195,7 @@ def with_nav(page: str) -> str:
     Like the note, it is a property of the published page: `body.capture` hides it.
     """
     shell = nav_shell(NAV_PAGE, root=NAV_ROOT, tabs=visualize_tabs(SECTION_TAB, root=NAV_ROOT))
+    shell = shell._replace(head=shell.head.replace(favicon_html(), favicon_html(inline=True)))
     head = HEAD.search(page)
     body = BODY.search(page)
     if head is None or body is None or "</body>" not in page:
@@ -192,11 +208,9 @@ def with_nav(page: str) -> str:
     return page.replace("</body>", f"{shell.script}\n</body>", 1)
 
 
-#: What the published page may load, which is nothing from the network. Scripts and styles
-#: are inline, fonts and images are `data:` URIs, and exports are `blob:` downloads, so the
-#: page needs no source beyond those. `default-src 'none'` covers every fetch the
-#: self-contained scan cannot recognise -- a URL assembled at run time, a worker, a socket.
-#: The browser enforces it; `self_contained` is the build-time half (#125 F21).
+#: The published page loads scripts, fonts, styles and its corpus from its own origin.
+#: Inline theme bootstraps and style attributes remain enabled; no evaluation of strings
+#: or third-party resource source is permitted. The candidate stays self-contained.
 #:
 #: No `'unsafe-eval'`: the page does not evaluate strings, and the public page is not
 #: loosened for test tooling. Playwright compiles an expression-string `wait_for_function`
@@ -204,8 +218,9 @@ def with_nav(page: str) -> str:
 #: probe functions and no checker opens the page with `bypass_csp`. `check_page_policy`
 #: holds this policy to what the page needs.
 CONTENT_SECURITY_POLICY = (
-    "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
-    "img-src data: blob:; font-src data:; base-uri 'none'; form-action 'none'"
+    "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; "
+    "img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; "
+    "base-uri 'none'; form-action 'none'"
 )
 POLICY_META = f'<meta http-equiv="Content-Security-Policy" content="{CONTENT_SECURITY_POLICY}">'
 HEAD = re.compile(r"<head(?:\s[^>]*)?>", re.IGNORECASE)
@@ -267,6 +282,87 @@ def dirty_metadata(*, dirty: bool) -> str:
     return f'<meta name="squares-workbench-dirty" content="{str(dirty).lower()}">'
 
 
+@cache
+def published_script() -> str:
+    """Build the data loader separately from the self-contained candidate application."""
+    with tempfile.TemporaryDirectory(prefix="squares-workbench-loader-") as scratch:
+        output = Path(scratch) / "published.js"
+        subprocess.run(
+            (
+                "node",
+                str(WORKBENCH_PACKAGE / "tools/bundle-browser.ts"),
+                str(WORKBENCH_PACKAGE / "src/published.ts"),
+                str(output),
+            ),
+            cwd=REPO,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        return output.read_text(encoding="utf-8")
+
+
+_DATA_BLOCK = re.compile(
+    r'<script id="atlas-data" type="application/json">(.*?)</script>', re.DOTALL
+)
+_APPLICATION_BLOCK = re.compile(
+    r'(<script id="atlas-data"[^>]*>.*?</script>)\s*<script>(.*?)</script>', re.DOTALL
+)
+
+
+def publish_assets(page: str, out: Path) -> str:
+    """Split the validated offline candidate into an HTML shell and hashed resources."""
+    match = _APPLICATION_BLOCK.search(page)
+    data_match = _DATA_BLOCK.search(page)
+    if match is None or data_match is None:
+        raise ValueError("the workbench has no unique data/application pair")
+    data = json.dumps(
+        json.loads(data_match.group(1)),
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    data_path = f"data/corpus.{content_hash(data)}.json"
+    assets = site_assets.SiteAssets()
+    application = assets.script("workbench.js", match.group(2))
+    loader = assets.script("published.js", published_script())
+    island = (
+        '<script id="atlas-data" type="application/json" '
+        f'data-src="{data_path}" '
+        f'data-application-src="{escape(site_assets.asset_href(application, "index.html"))}"'
+        ">null</script>"
+    )
+    page = (
+        page[: match.start()]
+        + island
+        + site_assets.script_tag(loader, "index.html")
+        + page[match.end() :]
+    )
+    status = '<p id="workbench-startup" role="status">Loading packing data…</p>'
+    page = page.replace('<div id="viewport">', status + '<div id="viewport">', 1)
+    page, files = site_assets.link_inline_assets(page, "index.html", assets=assets)
+    # The application is requested by the loader, not by a resource-bearing HTML tag.
+    files.update(assets.files())
+    site_assets.write_assets(out, files)
+    destination = out / data_path
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(data)
+    # This producer exclusively owns workbench/assets and workbench/data. Remove only
+    # obsolete content-addressed files it previously emitted, never another namespace.
+    wanted = {f"assets/{name}" for name in files} | {data_path}
+    for folder in (out / "assets", out / "data"):
+        for old in folder.rglob("*"):
+            if (
+                old.is_file()
+                and re.fullmatch(r"[\w.-]+\.[0-9a-f]{16}\.(?:css|js|woff2|json)", old.name)
+                and old.relative_to(out).as_posix() not in wanted
+            ):
+                old.unlink()
+    if len(page.encode("utf-8")) > 600_000:
+        raise ValueError("published workbench HTML exceeds its 600 KB budget")
+    return page
+
+
 def build(
     out: Path,
     *,
@@ -274,7 +370,7 @@ def build(
     dirty: bool | None = None,
     citations: Path | None = None,
 ) -> str:
-    """Generate the page and return its text, refusing anything that reaches outside itself.
+    """Validate an offline candidate, publish its assets, and return the HTML shell.
 
     `citations` stands in for the register's citation file, for a page built from a fixture.
     """
@@ -349,6 +445,7 @@ def build(
         raise ValueError(msg)
 
     out.mkdir(parents=True, exist_ok=True)
+    marked = publish_assets(marked, out)
     (out / "index.html").write_text(marked, encoding="utf-8")
     return marked
 
@@ -382,7 +479,18 @@ def check_builds(
 
         published = pool.submit(one, out)
         twin = pool.submit(one, Path(scratch))
-        return published.result(), twin.result()
+        first, second = published.result(), twin.result()
+
+        def files(root: Path) -> dict[str, bytes]:
+            return {
+                path.relative_to(root).as_posix(): path.read_bytes()
+                for path in sorted(root.rglob("*"))
+                if path.is_file()
+            }
+
+        if files(out) != files(Path(scratch)):
+            raise ValueError("the workbench did not reproduce itself: emitted files differ")
+        return first, second
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -408,11 +516,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "the workbench did not reproduce itself; a published page must be deterministic"
             )
             raise ValueError(msg)
-        print(f"deterministic, self-contained, {len(first) / 1024 / 1024:.1f} MB")
+        print(f"deterministic, linked assets, {len(first) / 1024 / 1024:.1f} MB")
         return 0
 
     first = build(o.out, revision=revision, dirty=dirty, citations=o.citations)
-    print(f"{o.out / 'index.html'}: {len(first) / 1024 / 1024:.1f} MB, no external references")
+    print(f"{o.out / 'index.html'}: {len(first) / 1024 / 1024:.1f} MB, same-origin assets")
     return 0
 
 

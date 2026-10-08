@@ -1,4 +1,4 @@
-// Every link to a case record on a page that carries the case popover opens it there: an
+// Input response: every link to a case record on a page that carries the case popover opens it there: an
 // atlas tile on the overview, the `n` of a frontier row, a link in the page's prose or in
 // a record, each an `a[data-case]` whose `href` is the record file, `cases/11.html`
 // (`render_case_pages.mark_case_links`). A result's overview links its cases as pages. A
@@ -184,7 +184,6 @@
     }
     popover.scrollTo({ top: 0, behavior: "instant" });
     body.scrollTo({ top: 0, behavior: "instant" });
-    void globalThis.siteMath?.typeset(body, true);
   };
 
   /**

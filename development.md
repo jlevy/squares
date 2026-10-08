@@ -1084,6 +1084,104 @@ The gate step `the branch cost rollup renders` runs the renderer over every bran
 the records, including one no rollup mentions, because a division by a turn count fails
 on exactly that edge.
 
+## The Published Site
+
+Every content page is complete in its first HTML response: navigation, headings,
+records, drawings and server-rendered math.
+Each case has `cases/N.html`, each result has `result/t-nnn.html`, and directory indexes
+use a trailing slash in reader links.
+The workbench loads its application data from separate cacheable files.
+
+The [published URL table](docs/project/site-urls.md) is generated from
+[site-urls.py](packing/devtools/site_urls.py) and retained in
+[site-urls.yaml](packing/site-urls.yaml).
+Physical paths identify output files; canonical paths identify reader addresses.
+Builder declarations supply live rows.
+Registrations survive as live pages, registered forwarders, file copies or explained
+HTML tombstones. A forwarder’s target must resolve through the register; unknown targets
+and cycles fail validation.
+Hashed CSS, JavaScript, fonts and workbench data have constrained namespace patterns
+rather than one registration for each revision.
+
+A result ID binds to its kind, scope, establishment date, attribution, source lineage,
+evidence IDs and artifact paths.
+Editing a headline or review rating does not change that identity.
+A legitimate correction to the binding adds an `amendments` entry to its registry row,
+with an ISO `date`, a `reason` and the `previous` identity mapping.
+The historical check preserves prior amendments and requires the new amendment to name
+the binding on `origin/main`; changing a date alone cannot authorize ID reuse.
+
+`sitemap.xml` lists live canonical content pages.
+Its dates come from publication records: the site edition, a paper’s revision, a
+result’s registration or amendment, and a case’s latest relevant result or source
+review. Rendering does not read the clock.
+`404.html` uses project-root asset references at every missing depth and redirects only
+known case/result aliases.
+Unrecognized addresses keep the not-found page.
+
+### Adding or Moving a URL
+
+Add a page to its builder’s declarations; add a paper to `render_overview.PAPERS`, a
+case to the frontier or a result to the results register.
+A new family exposes lightweight output-path declarations beside its writer.
+Add a producer and a constrained asset pattern in `site_urls.py` when the family needs
+one; never admit an arbitrary subtree.
+Run the generator, then check its history from `packing/` with the task scratch
+environment:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.site_urls --write
+uv run --frozen --all-extras --group dev python -m devtools.site_urls --check --history-ref origin/main
+```
+
+New page declarations use the explicit `REGISTRATION_DATE`; update that date for a later
+URL migration. Existing registrations retain their first publication dates.
+
+To move a page, retain its entry in `render_overview.MOVED_PAGES`. The generated
+forwarder carries the query and fragment, a refresh and a link for readers without
+scripts, and the destination’s canonical address and link preview.
+`MOVED_FILES` retains Markdown and PDF addresses as byte-identical copies.
+To withdraw a case or result, retain its registration with `status: withdrawn`, a
+`tombstone` explanation and, when applicable, a registered replacement `target`. The
+crawl-file writer renders that disposition at the retained address.
+
+### Validation and Page Budgets
+
+Required PR validation checks registry drift and history.
+Each selected producer checks its own output without rebuilding unrelated papers:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.check_published_site \
+  --local OUTPUT --partial --producer overview
+```
+
+Other producer names are `workbench` and `paper:<slug>`; repeat `--producer` to select
+several. Partial mode is explicit and every selected output is required, including in an
+empty directory. A selected patterned namespace must contain a matching output.
+The assembled tree is checked with `--local OUTPUT` and requires all registrations.
+Unexpected files, missing outputs, malformed metadata and oversized pages fail.
+The deployed check fetches every retained non-asset registration, all cases and results
+included, and validates forwarders and copies.
+
+[HTML budgets](docs/project/site-urls.md#html-byte-budgets) are 600,000 bytes for normal
+pages and the workbench, 800,000 for papers and 300,000 for cases and results.
+Every published HTML file also has a 2,000,000-byte hard ceiling.
+A path-specific exception is a reviewed edit to `site_urls.PAGE_BUDGET_EXCEPTIONS` with
+measured evidence. The generated
+[budget table](docs/project/site-urls.md#html-byte-budgets) records each exception and
+its reason.
+
+### Content-Page Script Classes
+
+A script declares its class in its header: **Head bootstrap** sets root preferences
+before first paint; **Input response** handles reader input, such as sorting or opening
+an overlay; **Non-layout enhancement** adds behavior without moving laid-out content.
+Content pages do not fetch their required content or typeset math after paint.
+Registered forwarders and the 404 alias resolver may redirect; the workbench’s
+application scripts follow its separate startup contract.
+Keep browser code in `.js` or `.ts` files under the browser floor, including probes and
+tests.
+
 ## Publishing the Explainer
 
 For every newly retained result, first complete the
@@ -1221,25 +1319,10 @@ and every shared asset a page names to being there whole (`check_published_site
 --local`); only a push to `main` uploads that tree to Pages.
 The site’s own pages link their design system as content-hashed files under `assets/`,
 which the overview job writes with them (`devtools/site_assets.py`;
-`templates/paper-design.md`, Shared Assets); the papers and the workbench still inline
-theirs.
+`templates/paper-design.md`, Shared Assets); the papers share that bundle, and the
+published workbench links its own assets and corpus data.
+The offline editions remain self-contained.
 
-**An address the site has served keeps working.** The papers moved to `papers/<slug>` on
-2026-10-01, from `explainer.html` and from `n11-optimality/t-060-explainer.html`.
-`render_overview.MOVED_PAGES` lists each page that moved, and the overview’s build
-writes a forwarder at each old address: a page of a few lines whose script
-(`devtools/overview/forward.js`, the one the overview forwards its own old fragments
-with) sends the reader on with the query string and the fragment they came with, with a
-refresh and a link for a reader without scripts, the new address as its canonical URL,
-and, where it leads to a page of the site, that page’s own link preview, written from
-the record the page’s head is written from, so an old link shared now previews the page
-it leads to as a link to that page would.
-`render_overview.MOVED_FILES` lists each file that moved and cannot forward, a paper’s
-Markdown and PDF; the publish job copies each to its old address, and a test holds that
-step to the list. Nothing on the site links an old address.
-`check_published_site` asks the deployed site for every one of them, and visits each
-forwarder in the pinned browser with a query string and a fragment.
-To move a page again, add it to the list; do not delete an entry.
 Before drawing PDF bytes, the exporter checks that visible math is typeset; a completed
 font-error fallback that exposes literal TeX fails this check.
 Readable native MathML fallback is accepted by that check and remains subject to the

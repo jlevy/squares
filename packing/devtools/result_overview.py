@@ -939,7 +939,23 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         if (resolved := _resolve(path)) is not None
     ]
     shown_artifacts = artifacts
-    if len(artifacts) > ARTIFACTS_OPEN:
+    if len(artifacts) > 20:
+        paths = [
+            resolved
+            for path in [*record["artifacts"], *(record.get("controls") or [])]
+            if (resolved := _resolve(path)) is not None
+        ]
+        directories = sorted({path.parent for path in paths})
+        shown_artifacts = [
+            f"<p>{len(artifacts)} artifacts and controls in {len(directories)} directories. "
+            f"{register_link(result, 'Complete artifact list in the result entry')}. "
+            + " ".join(
+                _link(repo_url(directory, kind="tree"), _esc(repo_links.relative(directory)))
+                for directory in directories
+            )
+            + "</p>"
+        ]
+    elif len(artifacts) > ARTIFACTS_OPEN:
         summary = f"{len(artifacts)} artifacts and controls"
         shown_artifacts = [
             f'<details class="site-result-artifacts"><summary>{summary}</summary>'

@@ -1,90 +1,25 @@
 #!/usr/bin/env python3
-"""Check the site as GitHub Pages serves it, against the commit it should be built from.
+"""Check a complete GitHub Pages tree and the deployed site's retained URL contract.
 
-`pages.yml` renders the overview and the pages beside it, the three papers of the n = 11
-series under `papers/` with their Markdown and PDF (`render_overview.PAPERS`), and the
-workbench from `main`, and deploys them. Nothing is
-checked in, so nothing in the repository says whether a deploy landed or what the pages
-it served link to; this asks the live site. From `packing/`:
+From packing/:
 
     uv run --frozen --group dev python -m devtools.check_published_site --commit <sha>
 
-With no `--commit` the checkout's `origin/main` is the expectation, which is the commit
-the last deploy built from once `git fetch` has run. `--site` may also name a site served
-on this machine (`http://127.0.0.1:8765/`, as `devtools.preview_site --serve` serves
-one), which is how the same checks are run on a build before it is deployed; give
-`--commit` the commit that build was made from. One line per check, `ok` or `FAIL`, and
-the exit status is 0 only when every check passes:
+With no --commit, origin/main supplies the expected deployed revision. --site can name
+an HTTP preview built from the same revision. Every registered non-asset address is
+fetched: all content pages, cases, results, paper editions, historical forwarders,
+file copies, tombstones, sitemap and 404. Page budgets and share-preview metadata are
+checked alongside repository links, paper versions, PDF source receipts, record-link
+coverage and workbench startup. Forwarder destinations agree in canonical metadata,
+refresh, script and visible link; pinned-browser arrival preserves query and fragment.
 
-- every page `render_overview.PAGES` owns is served at its URL (the overview at the
-  root), and the lower-bounds explainer at `papers/n11-lower-bounds-explainer.html`;
-  each carries the canonical URL its renderer wrote, a site page the edition stamp
-  `sqpack.release` names, and a paper its own version and not the site's stamp;
-- no page and not the Markdown edition links a repository file at a commit hash: every
-  repository link names `main` (`repo_links`), because a permalink to the commit a page
-  was built from 404s once a squash merge leaves that commit on no branch. Every path a
-  page links on `main` exists in the expected commit's tree, which is `main` when the
-  deploy runs, and each link on the explainer, its Markdown edition, the overview and
-  the frontier atlas is also asked of GitHub;
-- no link written before a page moved or was withdrawn breaks
-  (`render_overview.MOVED_PAGES`, `MOVED_FILES`): each address a page used to have, the
-  papers' among them, still serves a forwarder that names where a visit is sent now in
-  the four places it says it, and they agree: its canonical URL, the address its script
-  reads, the refresh for a reader without scripts, and its link. In the pinned browser
-  a visit to each with a query string and a fragment arrives there with both. Each
-  address a paper's Markdown or PDF used to have serves the same bytes as the new one;
-- every result overview the results table's rows name (`data-row-pop-src`) is served
-  beside the pages and is that result's, and the overviews' repository links pass the
-  same two checks against the tree;
-- the record links are all there. The checks above ask only whether a link that was
-  written resolves, so a deploy that wrote fewer links passed them: on 2026-10-01 every
-  link into `packing/resources` and `packing/campaign` was missing from the live site,
-  with 783 of 783 checks green (D-512). So the renderer is asked what it writes from the
-  register in this checkout, which the deploy job checks out at the deployed commit:
-  each result row of the overview's and the results page's tables carries every record
-  link the renderer gives that result, and the overviews of `RECORD_LINK_SAMPLE` carry
-  every repository link the renderer writes for them. It fetches nothing more;
-- the Markdown edition and the PDF are served beside the page under its slug and the
-  composite assets at the site's root, and the PDF is a PDF with the expected page count
-  and a source receipt matching the exact HTML bytes the site serves;
-- each review, every paper after the first (the threshold-bound review,
-  `papers/n11-threshold-bound-review.html`, and the optimality review,
-  `papers/n11-optimality-review.html`), is served where its Papers card points, with its
-  Markdown and PDF beside it, carries its own version and not the site's, and each
-  paper's bar marks Papers as the current section, from a level below the root. Its own
-  Pages job builds and checks its content. The reviews are the pages whose repository
-  links are held to a commit and not to `main`: a review cites the evidence as it stood
-  when the paper was typeset, so each citation on the page and in its Markdown names the
-  expected commit, the one the deploy built from, which `main` keeps, and every path it
-  cites is in that commit's tree. A citation that names `main`, or any other commit,
-  fails;
-- every link from one paper to another (`devtools.paper_links`), on a page and in a
-  Markdown edition, names a paper the site serves and a heading that paper has, which
-  only a site holding every paper can answer;
-- the workbench names the expected source commit, starts its public API in the pinned
-  browser, and links back to this project's root rather than the account site's root;
-- every page's head carries the site's identity and link-preview tags, exactly one of
-  each (`render_overview.head_tags`): a title that ends in the project's formal name, a
-  description of its own that fits a preview, a canonical link and an `og:url` that are
-  the one address the page is served at, the site's name, the card image with its size
-  and its alt text, and the site's icon. The sampled case records are held as pages
-  are. No two pages share a description. The card every page names is served at the
-  site's root and is a PNG of the size the pages declare. A forwarder to a page of the
-  site previews that page, at that page's address, by the name, kind and description
-  that page's own head gives; the one that leads off the site carries a canonical link
-  to it, in full, and no card.
+--local DIR checks the closed-world registry, required physical outputs, HTML budgets,
+heads and links between papers without fetching the network. --partial requires one
+or more --producer names and checks every output of those producers; missing files
+never select partial mode. --local DIR --inventory reports heads without validation.
 
-`--local DIR` asks only that last group and the links between papers, of a site built into
-a directory
-(`devtools.preview_site`, which also runs it on every build, and the Pages workflow's
-`overview` and `publish` jobs, on the overview's build and on the assembled site), and
-fetches nothing; it holds every HTML file there that is a document, every case record
-and any page this module does not name among them, and each forwarder against the page
-it leads to wherever that page is there too. `--local DIR --inventory` prints what
-every file's head carries and checks nothing.
-
-This checks a live deployment, so it is not a step of the source gate;
-`tests/test_check_published_site.py` covers its parsing and failure controls on fixtures.
+The live deployment check is separate from the required source registry/history gate.
+Tests cover the parsing and failure controls with fixtures.
 """
 
 from __future__ import annotations
@@ -103,7 +38,7 @@ from collections.abc import Callable, Mapping, Sequence
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import NamedTuple
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from playwright.sync_api import Browser, BrowserContext, sync_playwright
 from playwright.sync_api import Error as PlaywrightError
@@ -113,6 +48,7 @@ from devtools import (
     render_case_pages,
     render_overview,
     result_overview,
+    site_urls,
     social_card,
 )
 from devtools.overview_sections import LOWER_BOUNDS_PAPER, OPTIMALITY_PAPER, result_fragment
@@ -148,7 +84,7 @@ CANONICAL = re.compile(r'<link\s+rel="canonical"\s+href="([^"]*)"')
 #: The fuller body a row's popover fetches, as its address beside the page, and how a
 #: result's overview opens: the one block it is, naming its result.
 ROW_SOURCE = re.compile(r'data-row-pop-src="([^"]+)"')
-RESULT_OVERVIEW = re.compile(r'\A<div class="site-result" data-result-overview="(t-\d{3})">')
+RESULT_OVERVIEW = re.compile(r'<div class="site-result" data-result-overview="(t-\d{3})">')
 #: The record page's index, each case's link to its record file beside it, and the
 #: record a record file holds (`render_case_pages`).
 CASE_INDEX_LINK = re.compile(r'href="(\d+)\.html" data-case="(\d+)"')
@@ -277,7 +213,7 @@ REQUIRED_META = (
 ARTICLE_META = ("article:published_time", "article:modified_time")
 _ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 #: How much of a page is handed to the parser at a time. A head ends within the first
-#: megabytes of a page of nine, and the reader stops there.
+#: response; the reader stops as soon as that head closes.
 _HEAD_CHUNK = 1 << 16
 
 
@@ -375,7 +311,13 @@ def read_head(text: str) -> PageHead:
     return PageHead(reader.lang, tuple(reader.titles), tuple(reader.metas), tuple(reader.links))
 
 
-def head_problems(text: str, canonical: str) -> list[str]:
+def head_problems(
+    text: str,
+    canonical: str,
+    *,
+    allow_inline_favicon: bool = False,
+    page_url: str | None = None,
+) -> list[str]:
     """What is wrong with a page's head as the site writes one, for the page served at
     `canonical`; empty when it is clean.
 
@@ -416,10 +358,12 @@ def head_problems(text: str, canonical: str) -> list[str]:
     project = render_overview.PROJECT_NAME
     suffix = render_overview.TITLE_SEPARATOR + project
     if title is not None:
-        if title != project and not (title.endswith(suffix) and title != suffix):
-            problems.append(f"the title {title!r} does not end in {suffix!r}")
-        else:
+        if title.endswith(suffix) and title != suffix:
             require("og:title", tags["og:title"], title.removesuffix(suffix))
+        elif title == project:
+            require("og:title", tags["og:title"], project)
+        elif title != tags["og:title"]:
+            problems.append(f"the title {title!r} does not end in {suffix!r} or match og:title")
     require("twitter:title", tags["twitter:title"], tags["og:title"] or "")
     require("og:site_name", tags["og:site_name"], project)
     require("og:locale", tags["og:locale"], render_overview.SITE_LOCALE)
@@ -458,11 +402,27 @@ def head_problems(text: str, canonical: str) -> list[str]:
         problems.append("og:image:alt is empty")
     require("twitter:image:alt", tags["twitter:image:alt"], alt or "")
     require("twitter:card", tags["twitter:card"], "summary_large_image")
-    # The tab's icon and the one some previews set beside the site's name: the site's
-    # own, once. It is a data URI of a kilobyte, so a mismatch is named, not printed.
-    icon = single(head.link("icon"), "icon links")
-    if icon is not None and icon != render_overview.favicon_url():
-        problems.append("the icon is not the site's (`render_overview.favicon_url`)")
+    # Stable SVG/PNG icons are resolved from each page's address. The standalone
+    # workbench artifact keeps its approved inline SVG under its isolated CSP.
+    icons = head.link("icon")
+    expected_icons = {
+        render_overview.SITE_URL + "favicon.svg",
+        render_overview.SITE_URL + "favicon-48.png",
+    }
+    resolved = [urljoin(page_url or canonical, icon) for icon in icons]
+    inline_workbench = (
+        (allow_inline_favicon or canonical == render_overview.canonical_url(WORKBENCH_PAGE))
+        and len(icons) == 1
+        and icons[0] == render_overview.favicon_url()
+    )
+    if not inline_workbench:
+        if len(icons) != 2:
+            problems.append(f"{len(icons)} icon links, expected the SVG/PNG pair")
+        elif set(resolved) != expected_icons:
+            problems.append("the icon is not the site's SVG/PNG pair")
+        apple = [urljoin(page_url or canonical, icon) for icon in head.link("apple-touch-icon")]
+        if apple != [render_overview.SITE_URL + "apple-touch-icon.png"]:
+            problems.append("the apple-touch icon is missing or not the site's")
     return problems
 
 
@@ -472,7 +432,14 @@ def head_problems(text: str, canonical: str) -> list[str]:
 PREVIEWED = ("og:title", "og:type", "og:description")
 
 
-def forwarder_problems(text: str, canonical: str, destination: str | None = None) -> list[str]:
+def forwarder_problems(
+    text: str,
+    canonical: str,
+    destination: str | None = None,
+    *,
+    allow_inline_favicon: bool = False,
+    page_url: str | None = None,
+) -> list[str]:
     """What is wrong with the head of a page that only sends a reader on to `canonical`,
     by the rule `render_overview.forwarder_head` writes it to.
 
@@ -485,7 +452,9 @@ def forwarder_problems(text: str, canonical: str, destination: str | None = None
     since the site does not write the page it would describe.
     """
     if canonical.startswith(render_overview.SITE_URL):
-        problems = head_problems(text, canonical)
+        problems = head_problems(
+            text, canonical, allow_inline_favicon=allow_inline_favicon, page_url=page_url
+        )
         if destination is not None:
             # A tag the page does not give once is the page's own failure, named there.
             head, page = read_head(text), read_head(destination)
@@ -585,7 +554,9 @@ def head_checks(
     by_address = {render_overview.canonical_url(name): text for name, text in pages.items()}
     for name, (text, canonical) in forwarders.items():
         destination = by_address.get(canonical)
-        problems = forwarder_problems(text, canonical, destination)
+        problems = forwarder_problems(
+            text, canonical, destination, page_url=render_overview.SITE_URL + name
+        )
         within = canonical.startswith(render_overview.SITE_URL)
         line = (
             f"forwarder {name}: head: {'; '.join(problems)}"
@@ -765,7 +736,12 @@ def local_head_checks(directory: Path) -> list[tuple[bool, str]]:
         path = directory / name
         return path.read_text(encoding="utf-8") if path.is_file() else None
 
-    pages = {name: text(name) for name in shared_pages()}
+    withdrawn = (
+        {row.path for row in site_urls.load_registry() if row.status == "withdrawn"}
+        if site_urls.REGISTRY.is_file()
+        else set()
+    )
+    pages = {name: text(name) for name in shared_pages() if name not in withdrawn}
     forwarders = {
         name: (text(name), canonical) for name, canonical in forwarder_canonicals().items()
     }
@@ -774,6 +750,8 @@ def local_head_checks(directory: Path) -> list[tuple[bool, str]]:
     records: dict[str, str] = {}
     for path in sorted(directory.rglob("*.html")):
         name = path.relative_to(directory).as_posix()
+        if name == "404.html" or name in withdrawn:
+            continue
         if name in pages or name in forwarders:
             continue
         found = path.read_text(encoding="utf-8")
@@ -805,6 +783,10 @@ def local_head_checks(directory: Path) -> list[tuple[bool, str]]:
         found = directory / path
         return found.read_bytes() if found.is_file() else None
 
+    if missing_page := text("404.html"):
+        built["404.html"] = missing_page.replace(
+            urlsplit(render_overview.SITE_URL).path + "assets/", "assets/"
+        )
     return results + asset_checks(built, served)
 
 
@@ -1119,8 +1101,11 @@ def forwarder_expected(old: str, new: str) -> dict[str, str | None]:
     """What `forwarder_says` has to answer for the page that moved from `old` to `new`:
     the new address in full as the canonical URL, and relative to the old one elsewhere.
     An address off the site, as the defect log's on GitHub is, is whole in all four."""
+    new = site_urls.canonical_path(new)
     external = new.startswith("https://")
     target = new if external else posixpath.relpath(new, posixpath.dirname(old))
+    if not external and new.endswith("/"):
+        target += "/"
     return {
         "canonical": new if external else render_overview.canonical_url(new),
         "script": target,
@@ -1146,7 +1131,9 @@ def forwarder_arrivals(
     results: list[tuple[bool, str]] = []
     for old, new in render_overview.MOVED_PAGES:
         start = site + visited_address(old) + FORWARDED_SUFFIX
-        arrival = (new if new.startswith("https://") else site + new) + FORWARDED_SUFFIX
+        arrival = (
+            new if new.startswith("https://") else site + site_urls.canonical_path(new)
+        ) + FORWARDED_SUFFIX
         page = browser.new_page()
         try:
             page.goto(start, wait_until="load", timeout=timeout * 1000)
@@ -1177,6 +1164,111 @@ def forwarders_followed(site: str, *, timeout: float) -> list[tuple[bool, str]]:
         return [(False, f"the forwarders could not be visited: {error}")]
 
 
+def deployed_registry_checks(
+    site: str,
+    read: Callable[..., tuple[int, bytes]],
+    *,
+    timeout: float,
+    rows: Sequence[site_urls.SiteURL] | None = None,
+) -> list[tuple[bool, str]]:
+    """Fetch every retained non-asset URL, including all cases and result pages.
+
+    The registry owns the complete walk. The specialized paper/citation checks below
+    share its response cache and retain their stronger content assurance.
+    """
+    rows = list(rows) if rows is not None else site_urls.load_registry()
+    results = site_urls.validate_registry(rows)
+    site = site.rstrip("/") + "/"
+    pages: dict[str, str] = {}
+    forwarded: dict[str, tuple[str, str]] = {}
+    records: dict[str, str] = {}
+    for row in rows:
+        if row.pattern or row.kind == "asset-file":
+            continue
+        status, body = read(site + row.path, timeout=timeout)
+        results.append(
+            (status == 200, f"registered {row.path}: HTTP {status}, {len(body)} bytes")
+        )
+        if status != 200:
+            continue
+        if row.kind == "copy":
+            target_status, target_body = read(site + row.target, timeout=timeout)
+            results.append(
+                (
+                    target_status == 200 and body == target_body,
+                    f"registered copy {row.path}: same bytes as {row.target}",
+                )
+            )
+        if not row.path.endswith(".html"):
+            continue
+        budget = site_urls.page_budget(row)
+        results.append(
+            (
+                len(body) <= min(budget, site_urls.HARD_HTML_LIMIT),
+                f"registered HTML {row.path}: {len(body)} bytes, budget {budget}",
+            )
+        )
+        text = body.decode("utf-8", errors="replace")
+        if row.status == "withdrawn" or row.path == "404.html":
+            results.append(
+                (
+                    bool(read_head(text).meta("robots"))
+                    and "noindex" in read_head(text).meta("robots")[0]
+                    and "<main>" in text
+                    and "<h1>" in text,
+                    f"registered {row.path}: complete noindex disposition page",
+                )
+            )
+            continue
+        canonical = (
+            row.canonical
+            if row.canonical.startswith("https://")
+            else render_overview.SITE_URL + row.canonical
+        )
+        if row.status == "forwarded":
+            forwarded[row.path] = (text, canonical)
+            declared = forwarder_says(text)
+            expected = forwarder_expected(row.path, row.target)
+            results.append(
+                (
+                    declared == expected,
+                    f"registered forwarder {row.path}: all redirect targets agree",
+                )
+            )
+            if not row.target.startswith("https://"):
+                target_status, _ = read(site + row.target, timeout=timeout)
+                results.append(
+                    (
+                        target_status == 200,
+                        f"registered forwarder {row.path}: target served HTTP {target_status}",
+                    )
+                )
+        elif row.kind == "record":
+            records[row.path] = text
+        else:
+            pages[row.path] = text
+    card_status, card = read(site + render_overview.SOCIAL_CARD, timeout=timeout)
+    results += head_checks(pages, forwarded, card if card_status == 200 else None, records)
+    return results
+
+
+def local_site_checks(
+    directory: Path, *, partial: bool = False, producers: Sequence[str] = ()
+) -> list[tuple[bool, str]]:
+    """Explicit producer contract, then every present page's head and linked assets."""
+    from devtools.check_site_scripts import inventory  # noqa: PLC0415
+
+    scripts, script_failures = inventory(directory)
+    script_checks = [(False, error) for error in script_failures] or [
+        (True, f"script inventory: {len(scripts)} reviewed declarations")
+    ]
+    return (
+        site_urls.check_site(directory, partial=partial, producers=producers)
+        + local_head_checks(directory)
+        + script_checks
+    )
+
+
 def check(
     site: str,
     commit: str,
@@ -1185,7 +1277,17 @@ def check(
     browser: bool = True,
 ) -> list[tuple[bool, str]]:
     """Every check as (passed, line), in the order they are printed."""
-    results: list[tuple[bool, str]] = []
+    cache: dict[tuple[str, bool], tuple[int, bytes]] = {}
+
+    def read(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        key = (url, head)
+        if head and (url, False) in cache:
+            return cache[(url, False)]
+        if key not in cache:
+            cache[key] = fetch(url, head=head, timeout=timeout)
+        return cache[key]
+
+    results = deployed_registry_checks(site, read, timeout=timeout)
     site = site.rstrip("/") + "/"
 
     def served_page(
@@ -1197,7 +1299,7 @@ def check(
         paper's own version on a paper, which must then not carry the site's edition
         (the owner, 2026-10-01: papers are individually versioned).
         """
-        status, body = fetch(url, timeout=timeout)
+        status, body = read(url, timeout=timeout)
         text = body.decode("utf-8", errors="replace")
         results.append((status == 200, f"page {url}: HTTP {status}, {len(body)} bytes"))
         # The shared version (think-qsuu), pinned in release.py: a site page names the
@@ -1290,9 +1392,9 @@ def check(
     )
     bodies = []
     for address in overviews:
-        status, body = fetch(site + address, timeout=timeout)
+        status, body = read(site + address, timeout=timeout)
         fragment = body.decode("utf-8", errors="replace")
-        found = RESULT_OVERVIEW.match(fragment)
+        found = RESULT_OVERVIEW.search(fragment)
         holds = None if found is None else result_fragment(found.group(1))
         results.append(
             (
@@ -1319,7 +1421,7 @@ def check(
     records: list[str] = []
     for n in sample:
         address = render_case_pages.case_url(n)
-        status, body = fetch(site + address, timeout=timeout)
+        status, body = read(site + address, timeout=timeout)
         record = body.decode("utf-8", errors="replace")
         found = CASE_RECORD.search(record)
         holds = None if found is None else int(found.group(1))
@@ -1370,7 +1472,7 @@ def check(
     results.append((current, f"{LOWER_BOUNDS_PAPER}: {marked}, linked from a level below"))
     heads[LOWER_BOUNDS_PAPER] = text
 
-    status, markdown = fetch(site + LOWER_BOUNDS_MARKDOWN, timeout=timeout)
+    status, markdown = read(site + LOWER_BOUNDS_MARKDOWN, timeout=timeout)
     results.append(
         (
             status == 200,
@@ -1391,14 +1493,14 @@ def check(
     # request.
     for kind, ref, path in sorted(checked_links):
         url = f"{REPO_URL}/{kind}/{ref}/{path}"
-        status, _ = fetch(url, head=True, timeout=timeout)
+        status, _ = read(url, head=True, timeout=timeout)
         results.append((status == 200, f"link HTTP {status}: {url}"))
 
     for name in SERVED:
         if name == LOWER_BOUNDS_MARKDOWN:
             continue
         head_only = name != LOWER_BOUNDS_PDF
-        status, body = fetch(site + name, head=head_only, timeout=timeout)
+        status, body = read(site + name, head=head_only, timeout=timeout)
         line = f"served {name}: HTTP {status}"
         ok = status == 200
         if name == LOWER_BOUNDS_PDF:
@@ -1448,7 +1550,7 @@ def check(
             review.removeprefix("papers/").removesuffix(".html")
         )
         version = PAPER_VERSIONS[record.slug]
-        status, paper = fetch(site + review, timeout=timeout)
+        status, paper = read(site + review, timeout=timeout)
         paper_text = paper.decode("utf-8", errors="replace")
         current = PAPERS_CURRENT in paper_text
         marked = f"Papers is {'' if current else 'not '}the bar's current entry"
@@ -1477,7 +1579,7 @@ def check(
         review_markdown, _ = paper_files(review)
         for name in paper_files(review):
             cited_here = name == review_markdown
-            status, body = fetch(site + name, head=not cited_here, timeout=timeout)
+            status, body = read(site + name, head=not cited_here, timeout=timeout)
             results.append((status == 200, f"served {name}: HTTP {status}"))
             if cited_here and status == 200:
                 found = body.decode("utf-8", errors="replace")
@@ -1489,7 +1591,7 @@ def check(
     # forwards, and a file's old address serves the same bytes. A deploy that dropped a
     # forwarder would 404 every link written before the change.
     for old, new in render_overview.MOVED_PAGES:
-        status, body = fetch(site + old, timeout=timeout)
+        status, body = read(site + old, timeout=timeout)
         moved_text = body.decode("utf-8", errors="replace")
         # Its head is read with the other pages' below, by the forwarders' rule.
         forwarded[old] = (moved_text, canonicals[old])
@@ -1504,8 +1606,8 @@ def check(
             )
         )
     for old, new in render_overview.MOVED_FILES:
-        old_status, old_body = fetch(site + old, timeout=timeout)
-        new_status, new_body = fetch(site + new, timeout=timeout)
+        old_status, old_body = read(site + old, timeout=timeout)
+        new_status, new_body = read(site + new, timeout=timeout)
         same = old_status == 200 and new_status == 200 and old_body == new_body
         verdict = "the same bytes as" if same else "not the bytes of"
         line = (
@@ -1517,7 +1619,7 @@ def check(
         results.extend(forwarders_followed(site, timeout=timeout))
 
     workbench_url = site + WORKBENCH_PATH
-    status, workbench = fetch(workbench_url, timeout=timeout)
+    status, workbench = read(workbench_url, timeout=timeout)
     workbench_text = workbench.decode("utf-8", errors="replace")
     results.append(
         (
@@ -1548,11 +1650,11 @@ def check(
     # What every page says of itself to a tab, a search engine and a link preview, and
     # the one image they all name, which is served at the root of the site under test.
     heads[WORKBENCH_PAGE] = workbench_text
-    status, card = fetch(site + render_overview.SOCIAL_CARD, timeout=timeout)
+    status, card = read(site + render_overview.SOCIAL_CARD, timeout=timeout)
     results.extend(head_checks(heads, forwarded, card if status == 200 else None, record_heads))
 
     def served(path: str) -> bytes | None:
-        status, body = fetch(site + path, timeout=timeout)
+        status, body = read(site + path, timeout=timeout)
         return body if status == 200 else None
 
     return results + asset_checks(heads, served)
@@ -1578,18 +1680,34 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="check only the heads and the card of a site built into DIR; fetches nothing",
     )
     parser.add_argument(
+        "--partial", action="store_true", help="with --local: selected producers only"
+    )
+    parser.add_argument(
+        "--producer",
+        action="append",
+        default=[],
+        help="selected producer (overview, workbench, paper:slug); requires --partial",
+    )
+    parser.add_argument(
         "--inventory",
         action="store_true",
         help="with --local: print what every file's head carries, and check nothing",
     )
     args = parser.parse_args(argv)
+    if (args.partial or args.producer) and args.local is None:
+        parser.error("--partial/--producer require --local")
     if args.inventory:
         if args.local is None:
             parser.error("--inventory reads a built site: give --local DIR")
         print("\n".join(head_inventory(args.local.resolve())))
         return 0
     if args.local is not None:
-        results = local_head_checks(args.local.resolve())
+        try:
+            results = local_site_checks(
+                args.local.resolve(), partial=args.partial, producers=args.producer
+            )
+        except ValueError as error:
+            parser.error(str(error))
     else:
         commit = args.commit or expected_commit()
         results = check(args.site, commit, timeout=args.timeout, browser=not args.no_browser)

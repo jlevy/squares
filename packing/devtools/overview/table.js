@@ -380,6 +380,44 @@
 
   /** Enhance every site table on the page. */
   function init() {
+    // The overview has a bounded recent set. Its complete-table link carries supported
+    // filter query state, so a query selecting older results reaches the full dataset.
+    const all = document.querySelector("a[data-all-results]");
+    if (all instanceof HTMLAnchorElement) {
+      const target = new URL(all.href);
+      const source = new URLSearchParams(location.search);
+      for (const [key, value] of source) {
+        if (
+          [
+            "status",
+            "kind",
+            "activity",
+            "source",
+            "project",
+            "n",
+            "n-min",
+            "n-max",
+            "s",
+            "s-min",
+            "s-max",
+            "v",
+            "v-min",
+            "v-max",
+            "c",
+            "c-min",
+            "c-max",
+            "age",
+            "age-max",
+            "superseded",
+            "current",
+            "search",
+          ].includes(key)
+        ) {
+          target.searchParams.set(key, value);
+        }
+      }
+      all.href = target.href;
+    }
     for (const table of document.querySelectorAll("table.site-table")) {
       if (!(table instanceof HTMLTableElement)) {
         continue;

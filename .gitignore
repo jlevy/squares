@@ -50,3 +50,5 @@ packing/atlas/known-best/video/spikes/**/frames/
 # `python -m devtools.hosted_data fetch --manifest` with that manifest puts them here.
 # The README files and verification receipts in the same directories are tracked.
 /packing/campaign/explorations/X048-session-168-pilots/certificates/*/*.json.gz
+
+packages/workbench/node_modules/

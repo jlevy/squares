@@ -243,6 +243,7 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 SITE_LAYOUT_TESTS = (
     "tests/test_site_result_columns.py",
     "tests/test_site_frontier_table.py",
+    "tests/test_site_rendering.py",
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
@@ -1923,6 +1924,14 @@ def _browser_floor_liveness(context: Context) -> str:
             "no:cacheprovider",
             BROWSER_FLOOR_LIVENESS_TESTS,
         ),
+    )
+
+
+def _site_url_registry(context: Context) -> str:
+    """Keep published addresses and semantic record identities append-only."""
+    return _run(
+        context,
+        (sys.executable, "-m", "devtools.site_urls", "--check", "--history-ref", "origin/main"),
     )
 
 
@@ -4092,6 +4101,13 @@ STEPS: tuple[Step, ...] = (
     # tests, 30s of it rendering three pages once each; 24.16s hosted, 74 passed, in a
     # frontend wall of 93.16s (run 36967092452). Not in the quick lane, whose shards
     # install no browser.
+    Step(
+        "published URL registry and historical compatibility",
+        _site_url_registry,
+        fast=True,
+        records=True,
+        touches=(*_SITE_INPUTS, "packing/site-urls.yaml", "docs/project/site-urls.md"),
+    ),
     Step(
         "site table layout in Chromium",
         _site_layout_tests,
