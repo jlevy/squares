@@ -128,6 +128,19 @@ Their new measurement remains separate from the historical 35-control cost admis
 See the
 [retained result directory](../results/exp-316-shared-centre-explicit-f1/README.md).
 
+## Annotation
+
+The original registered method commit `0f97f908d08532ee8c07446a798b3a86b40ad39a` is
+unreachable from this rebased PR’s HEAD. Its history remains retained on the remote
+branch
+[`codex/n17-endpoint-source-custody-20261008`](https://github.com/jlevy/squares/tree/codex/n17-endpoint-source-custody-20261008),
+preserved at `5ad3d9c7048aea7331784f5f4bf2890dfb5a73e6` before propagation.
+A shallow or single-branch checkout must fetch that branch and its full history to
+inspect the original source.
+The method commit, registered criterion, manifest, receipts and accepted endpoint
+calibration are unchanged; this annotation records history custody and supplies no new
+qualification.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

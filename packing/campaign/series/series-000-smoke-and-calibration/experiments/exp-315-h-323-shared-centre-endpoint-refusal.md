@@ -118,6 +118,18 @@ optimality claim follows.
 
 See the [raw result directory](../results/exp-315-shared-centre-endpoint/README.md).
 
+## Annotation
+
+The original registered method commit `a056038e4df91fd0fe3bc533e7dc7ddfe8ab0358` is
+unreachable from this rebased PR’s HEAD. Its history remains retained on the remote
+branch
+[`codex/n17-endpoint-source-custody-20261008`](https://github.com/jlevy/squares/tree/codex/n17-endpoint-source-custody-20261008),
+preserved at `5ad3d9c7048aea7331784f5f4bf2890dfb5a73e6` before propagation.
+A shallow or single-branch checkout must fetch that branch and its full history to
+inspect the original source.
+The method commit, registered criterion, manifest, receipts and unresolved refusal are
+unchanged; this annotation records history custody and supplies no new qualification.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
