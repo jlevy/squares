@@ -529,6 +529,25 @@ sources:
       could not reach Zenodo, are kept in its zenodo/ with their digests: 23164302
       (v1.0) is tag v1.0 (0eb29d44) byte for byte, and its preprint PDF is retained;
       23165736 (v1.1) is tag v1.1; and 23165916 is the v1.1 preprint alone.
+  - key: '[squarepacker k2-minus-c v1.2 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-06'
+    credit: squarepacker after Roth, Vaughan
+    lineage: independent
+    note: >-
+      Sungjoon Ryu's version 1.2 of Packing k^2 - c unit squares, immutable tag
+      e16a5cfa7eed489ea8d84b500e590bf6855a5f2f, committed 2026-10-06T17:11:30Z,
+      DOI 10.5281/zenodo.23194031, reported in issue #368 comment 6022000514.
+      The full 78-file composition is bound in
+      web/squarepacker-k2-minus-c-v12-2026-10-06/: ten changed files retained and
+      68 byte-identical files explicitly linked to retained version 1.1 copies.
+      The source reports extensive Claude assistance and no peer review; paper
+      CC BY 4.0, code and data MIT. Its new numerical consequences are checked
+      independently, separately for nine- and thirteen-overlap routes. The
+      independent per-box labelling obligation remains think-k3tk; source custody
+      and arithmetic do not discharge it. No small-count bound is imported.
   - key: '[squarepacker s12 2026-10-05]'
     authors: [Ryu]
     year: 2026

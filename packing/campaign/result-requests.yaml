@@ -294,8 +294,9 @@ issues:
       closed-set disjoint packings at astronomical integer sides. Both v1.0 texts,
       licences, attribution and checking sources are retained at immutable release
       revisions. The constants using computer-assisted Lemma 4.10 depend on
-      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. No project
-      proof review or checking execution is claimed for the new releases.
+      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. A scoped independent proof-chain review and maintained conditional interval
+      arithmetic now cover both releases; no source program execution or new project
+      confirmation is claimed. Independent per-box labelling remains open.
     read_through: '2026-10-07T12:35:34Z'
     results:
       - key: quarter-power-deficiency
@@ -324,8 +325,12 @@ issues:
         state: queued
         bead: think-6ptr
         note: >-
-          The v1.2 dependencies and new geometric arguments need a scoped review;
-          predecessor producer replays and author-supplied AI reviews do not supply it.
+          The full geometric chains and v1.2 dependency have a retained scoped review.
+          The maintained checker independently decides 108 numerical predicates across
+          both quarter-power routes, eight cube-root ranges, geometric ceilings and
+          four asymptotic floors. The consequences remain conditional on the reviewed
+          geometric premises and the independently tracked per-box obligation.
+          Final integration and merge-readiness gates remain pending.
     beads: [think-6ptr]
     answer_bead: think-u1kq
     replies: []
@@ -543,9 +548,15 @@ issues:
           0.0541.
         source: https://github.com/jlevy/squares/issues/368#issuecomment-6022000514
         not_registered: >-
-          Later v1.2 source claim, queued for its own retention and review under think-gcft. The author
-          reports RF2/RF3/RF5 fixes, but RF1 independent per-box labelling remains open; the earlier
-          v1.1 V3/C1 record does not certify these constants.
+          Version 1.2 is retained at immutable tag e16a5cfa7eed489ea8d84b500e590bf6855a5f2f:
+          all 78 source files are bound, with ten changed files retained and 68 byte-identical
+          version 1.1 copies referenced explicitly. Independent interval arithmetic checks
+          34 nine-overlap and 30 thirteen-overlap consequences, with falsifiable source-bound
+          and invalid-domain controls. The scoped geometric review and maintained 25,929-comparison floating-gap
+          checker complete the review slice under think-gcft, subject to final integration gates;
+          RF1 independent per-box labelling remains think-k3tk. The earlier v1.1 whole-source
+          manifest does not certify this revision; only thirteen unchanged deciding leaf lists
+          and their unchanged checking programs can reuse the earlier Lemma 4.10 replay.
         queued: true
         bead: think-gcft
     beads: [think-8nv9, think-gcft]
