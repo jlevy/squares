@@ -46,7 +46,8 @@ experiment:
       all95 states?
     outcome: criterion_missed
     checked_by: Complete95 fresh reconstructed graphic/capacity independent35-clone survival certificates;
-      matching payload, full imported-source custody and soleAstra actual result CLEAR.
+      matching payload, recorded eight-file byte custody, clean-commit Git provenance and soleAstra
+      actual result CLEAR. Deferred catalogue imports were not individually byte-watched.
   verdict:
     decision: rejected
     primary_criterion: 'All95 accepted distance2 representatives, covering744 states, are completely classified
