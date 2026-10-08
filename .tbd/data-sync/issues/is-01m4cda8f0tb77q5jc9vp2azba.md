@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T00:09:59.435Z
+updated_at: 2026-10-08T00:14:48.095Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
@@ -31,3 +31,8 @@ Next: repairprofiler withsupportedcapability and getactualfullgate/heavyreceipt;
 
 Checkpoint update: actual lowerhosted f1 CI30SUCCESS26documentedSKIP CLEAN; upper0d25SUCCESS26SKIP5FAIL (validate,suite-a/b/c,requiredaggregate) run37705180742. DedicatedSol repair_upper_ci diagnosing exactupperfailure. Lower unchanged fullprofiler module supported-capability rerun actual2PASS1.65s EXIT0; broadEXIT1 retained. Exact selected heavy phase separatelyRUNNING; combined ordinary+heavy reachable900s budget remainsrequired, no waiver. UpperA/B/C/D actualformalreview publication receipt pr429-whole-review-publication.json:5449863506/5449863621/5449863708/5449863858 all0findings at0d/basef1.
 ActualGitHubdraftrelease406258689 additionally retains operationalrecords703files43897170Boriginal archive7805026B SHA2565202871832454b89669c1fb4ba673e890fa73068cb5181950ef7d2961bbc16ed; actualdownloadMATCH. Includes queueplans, repair/failure/review/native-state receipts as point-in-time checkpoint before later repairs. Separate425138filearchive remainsunchanged. Canonical425storage/publication/replay remainunresolved,0deciders.
+
+Durable checkpoint PR: https://github.com/jlevy/squares/pull/431, draft head66b360c7d99388a694061ee542b7a1c744bba16d on main84881f214. Four documentation files only; independent documentation/link/map/README checks PASS. No source owner index or branch changed. The report is a dated checkpoint; later outcomes belong to this PR body and native notes. Hosted documentation CI pending final watch. Checkpoint bead think-vz6u under think-msos.
+Lower final gate chain: original broad EXIT1 retained, own-process capability replay2PASS1.65s, exact serial heavy phase EXIT0/1PASS185.52s. All selected assertions executed, but ordinary+heavy986.74s exceeds unchanged compound900s ceiling. Fullgreen compound gate NOT established. Performance owner fix_original_stack_ci investigates semantic affected-test selection; budget bead recorded separately. All tier-cost receipts retained; no waivers.
+Upper source repair think-x2gl in progress for17behavioral/4validation ownership failures. Regenerating confirmation revealed actual repeat-adoption drops nine numerical rigidity fields; source owner repairing preservation through documented ownership rather than deleting data or weakening checks. Original0d reviews remain scoped old head; fresh repair review and final hosted CI required.
+Deployed401 full site audit/renderings custody: actual draft release406258689 asset deployed-401-site-verification-and-renderings.tar.gz,108files,30263587B SHA2560134d248097ca8bcff23732d2a97a71347a8b922d5aef685fec3f51136e13696; actual downloaded hash MATCH. Includes original failed probe assumptions and corrected results; does not prove pending422deployment. New issue428 full rational n68 intake recorded in think-v42c; author-reported checks remain external, no deciding checks executed by this session.
