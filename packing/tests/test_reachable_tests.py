@@ -10,6 +10,7 @@ change nobody can attribute must select everything.
 from __future__ import annotations
 
 import os
+import re
 import subprocess
 import sys
 from collections.abc import Sequence
@@ -19,7 +20,7 @@ from typing import cast
 
 import pytest
 
-from devtools import reachable_tests
+from devtools import pages_scope, reachable_tests
 from devtools.reachable_tests import pytest_command, select_tests
 from sqpack.cli import validate
 
@@ -38,6 +39,7 @@ def _one_static_tree() -> None:
     in whichever test happens to run first: on jlevy/squares#353 it pushed the first one
     past the 12 s per-test rule while the call itself takes well under a second."""
     select_tests(["packing/src/sqpack/cli/validate.py"])
+    select_tests([".github/workflows/pages.yml"])
 
 
 def test_a_change_to_validate_selects_the_tests_that_pinned_it() -> None:
@@ -111,12 +113,105 @@ def test_an_unmapped_python_root_is_still_refused_into_everything() -> None:
         "packing/.python-version",
         "packages/workbench/pyproject.toml",
         ".github/workflows/packing-validation.yml",
-        ".github/workflows/pages.yml",
+        ".github/workflows/unknown.yml",
         "pyproject.toml",
     ],
 )
 def test_suite_configuration_selects_everything(path: str) -> None:
     assert select_tests([path]).everything
+
+
+def test_pages_workflow_selects_every_declared_publication_test() -> None:
+    selection = select_tests([".github/workflows/pages.yml"])
+    assert not selection.everything, selection.reason
+    expected = {
+        "packing/tests/test_pages_workflow.py",
+        "packing/tests/test_pages_scope.py",
+        "packing/tests/test_site_rendering.py",
+        "packing/tests/test_check_published_site.py",
+    }
+    for job in pages_scope.load_workflow()["jobs"].values():
+        for step in job.get("steps", []):
+            expected.update(
+                f"packing/{target}"
+                for target in re.findall(r"\btests/[\w/.-]+\.py\b", str(step.get("run", "")))
+            )
+    assert expected <= set(selection.tests)
+
+
+def test_pages_selection_keeps_real_unmapped_python_fallback() -> None:
+    selection = select_tests([".github/workflows/pages.yml", "docs/scripts/unmapped.py"])
+    assert selection.everything
+    assert "unmapped.py" in selection.reason
+
+
+def test_pages_selection_refuses_missing_workflow_entrypoint(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        pages_scope,
+        "load_workflow",
+        lambda: {
+            "jobs": {"check": {"steps": [{"run": "python -m devtools.missing_pages_tool"}]}}
+        },
+    )
+    selection = select_tests([".github/workflows/pages.yml"])
+    assert selection.everything
+    assert "missing_pages_tool" in selection.reason
+
+
+@pytest.mark.parametrize("module", ["sqpack.some_tool", "cases.some_tool", "$PAGE_TOOL"])
+def test_pages_selection_refuses_unknown_python_entrypoints(
+    monkeypatch: pytest.MonkeyPatch, module: str
+) -> None:
+    monkeypatch.setattr(
+        pages_scope,
+        "load_workflow",
+        lambda: {"jobs": {"check": {"steps": [{"run": f"python -m {module}"}]}}},
+    )
+    selection = select_tests([".github/workflows/pages.yml"])
+    assert selection.everything
+    assert "unknown Pages Python entrypoint" in selection.reason
+
+
+@pytest.mark.parametrize("extra", ["tests", "tests/test_*.py", "$TEST_TARGETS"])
+def test_pages_selection_refuses_mixed_unknown_pytest_targets(
+    monkeypatch: pytest.MonkeyPatch, extra: str
+) -> None:
+    monkeypatch.setattr(
+        pages_scope,
+        "load_workflow",
+        lambda: {
+            "jobs": {
+                "check": {"steps": [{"run": f"pytest -q tests/test_pages_workflow.py {extra}"}]}
+            }
+        },
+    )
+    selection = select_tests([".github/workflows/pages.yml"])
+    assert selection.everything
+    assert "unknown selection" in selection.reason
+
+
+def test_pages_selection_refuses_unreadable_workflow(monkeypatch: pytest.MonkeyPatch) -> None:
+    def unreadable() -> dict[str, object]:
+        raise OSError("unreadable Pages workflow")
+
+    monkeypatch.setattr(pages_scope, "load_workflow", unreadable)
+    selection = select_tests([".github/workflows/pages.yml"])
+    assert selection.everything
+    assert "unreadable Pages workflow" in selection.reason
+
+
+def test_pages_selection_refuses_malformed_workflow(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    path = tmp_path / "pages.yml"
+    path.write_text("jobs: [unterminated", encoding="utf-8")
+    load_workflow = pages_scope.load_workflow
+    monkeypatch.setattr(pages_scope, "load_workflow", lambda: load_workflow(path))
+    selection = select_tests([".github/workflows/pages.yml"])
+    assert selection.everything
+    assert "Pages invocation inputs could not be resolved" in selection.reason
 
 
 @pytest.mark.parametrize("everything", [False, True])
