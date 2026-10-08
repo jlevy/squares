@@ -3,11 +3,11 @@ type: is
 id: is-01m4ewpe4eqqjvrq6henxdzkh9
 title: "Website: compact homepage, consistent case layouts, and scroll-aware navigation"
 kind: epic
-status: in_progress
+status: open
 priority: 1
-version: 20
+version: 21
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
-delegate: codex@spud10.local
+delegate: null
 labels:
   - website
 dependencies: []
@@ -24,7 +24,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:13:39.980Z
-updated_at: 2026-10-08T23:51:11.432Z
+updated_at: 2026-10-08T23:53:19.308Z
 started_at: 2026-10-08T23:22:05.552Z
 ---
-W9 remediation of the published Square Packing site. The owner confirmed a substantially shorter homepage with visible small atlas and results previews and prominent buttons to the dedicated Atlas and Results pages. Its order is the problem intro, Atlas preview, Learn More containing all paper cards, Results preview, then compact resources. Other fixes are consistent case-page and popover layouts including the reported broken math for n=291, and usual Headroom navigation: hide while scrolling down and reappear immediately while scrolling up on desktop and mobile. The plan lists seven open implementation and verification issues with acceptance criteria and dependencies, including the owner's exact PDF problem-definition wording in think-9tcy; the target PDF is pending clarification. Keep the epic open until the fixes and their verification are complete.
+W9 remediation of the published Square Packing site. Confirmed homepage order: a brief problem intro with a compact The Squares Project card to about.html below its text, Atlas preview second, Learn More with all paper cards, Results preview, then compact resources. Atlas and Results previews remain visible with prominent dedicated-page buttons. Move the full project section to About and place About in the shared top nav immediately to the left of GitHub. Other fixes are consistent case/page popover layouts including n=291 math, and usual Headroom behavior: hide scrolling down, immediately reappear scrolling up on desktop and mobile. The plan lists eight open implementation and verification issues, including the exact PDF problem-definition wording in think-9tcy; its PDF target is pending clarification. Keep this epic open until the fixes and verification are complete.
