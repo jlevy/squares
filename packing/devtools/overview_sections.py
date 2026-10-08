@@ -1638,6 +1638,14 @@ PAPER_DESCRIPTIONS: dict[str, str] = {
     PACKING_METHODS: (
         "How seeds, search, local refinement and exact checks produce record upper bounds."
     ),
+    "exact-side-values": (
+        "Exact side values for packing unit squares",
+        (
+            "All retained current and superseded side polynomials through n = 324, "
+            "with exact root and irreducibility checks, closed forms, and routes for "
+            "the remaining numerical values."
+        ),
+    ),
 }
 
 #: The first-principles tutorial's title, as its own H1 writes it in TUTORIAL.md.

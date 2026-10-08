@@ -1,0 +1,204 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 71,
+ "url": "https://kingbird.myphotos.cc/packing/square-71.svg",
+ "retrieved_utc": "2026-10-08T00:31:34Z",
+ "read_from": "fetched into memory",
+ "bytes": 10378,
+ "sha256": "295e241448cbf46e7a1f9718325ddbfd53fd6de236e597a2591bf167da59bebe",
+ "last_modified": "Thu, 10 Sep 2026 01:33:17 GMT",
+ "same_as_reading_of_2026_10_05": true,
+ "credits": [
+  "Found by David W. Cantrell in October 2005.",
+  "Exact polynomial root solution first done by David W. Cantrell.",
+  "Source: https://www.wolframalpha.com/input?i=Pack+71+unit+squares+into+a+square",
+  "Exact polynomial root solution reconstructed by David Ellsworth on June 1, 2023.",
+  "Improved by Thomas Schadt on December 29, 2025, using a GPU simulated annealing program he wrote, starting from an s=9.00000194 approximation of the s(71) found by David W. Cantrell in October 2005.",
+  "Improved by David Ellsworth on January 25, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program, starting from the s(71) found by David W. Cantrell in October 2005.",
+  "Exact analytic solution by David Ellsworth on January 26, 2026."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "8.9440715575703155065652038687172104484570741885199",
+   "notes": []
+  },
+  {
+   "name": "a",
+   "value": "39.829506809220758374494170449382679968120068429417",
+   "notes": []
+  },
+  {
+   "name": "b",
+   "value": "34.556488241174006151984631801065813520462303017222",
+   "notes": []
+  },
+  {
+   "name": "c",
+   "value": "39.865319182097951221441387989081912130608519599086",
+   "notes": []
+  },
+  {
+   "name": "d",
+   "value": "36.299885370761487856635690063568274985223129012063",
+   "notes": []
+  },
+  {
+   "name": "e",
+   "value": "42.298622626376776510010750043438986564368553308581",
+   "notes": []
+  },
+  {
+   "name": "y1",
+   "value": ".83404144603631395997451082987946972463707916813740",
+   "notes": []
+  },
+  {
+   "name": "v2",
+   "value": ".16557437833153007949167068716359170630289769909957",
+   "notes": []
+  },
+  {
+   "name": "u3",
+   "value": ".00046061935408811041391657925350772025851967587454",
+   "notes": []
+  },
+  {
+   "name": "v4",
+   "value": ".51410825207591035868462671665530689593007607283049",
+   "notes": []
+  },
+  {
+   "name": "r5",
+   "value": ".65209095020988397786983914061554340157346715079489",
+   "notes": []
+  },
+  {
+   "name": "r6",
+   "value": ".22249347496939323598104171552640754542545630380314",
+   "notes": []
+  },
+  {
+   "name": "v7",
+   "value": ".01199842782078157990242151756395322041831697665254",
+   "notes": []
+  },
+  {
+   "name": "u8",
+   "value": ".25634889268660288403149631441408235905090339573748",
+   "notes": []
+  },
+  {
+   "name": "v9",
+   "value": ".09173544772914002202018774758993443973098546585072",
+   "notes": []
+  },
+  {
+   "name": "vA",
+   "value": ".77657047624529671547911155208000672527853289292326",
+   "notes": []
+  },
+  {
+   "name": "vB",
+   "value": ".26183712912108622008602196406175188452297161782708",
+   "notes": []
+  },
+  {
+   "name": "yC",
+   "value": ".03587404087091904646165853869813567731285448830349",
+   "notes": []
+  },
+  {
+   "name": "vD",
+   "value": ".12656812388836431431031308730861985454460000116574",
+   "notes": []
+  },
+  {
+   "name": "yE",
+   "value": ".76755327716222994631199068797177455499557463865192",
+   "notes": []
+  },
+  {
+   "name": "vF",
+   "value": ".10414134951055282792191462948108150094769103346514",
+   "notes": []
+  },
+  {
+   "name": "xG",
+   "value": ".08951221139758893366242407429593260154620897037576",
+   "notes": []
+  },
+  {
+   "name": "rH",
+   "value": ".64285890799719553182497313029171597126199102093948",
+   "notes": []
+  },
+  {
+   "name": "xI",
+   "value": ".30936366539092016388775593220999833040315623775298",
+   "notes": []
+  },
+  {
+   "name": "rJ",
+   "value": ".76493945096166545100842677417699958356911211577929",
+   "notes": []
+  }
+ ],
+ "statements": [
+  "Unset[{s, a, b, c, d, e, y1, v2, u3, v4, r5, r6, v7, u8, v9, vA, vB, yC, vD, yE, vF, xG, rH, xI, rJ, f1, f2, f3, f5, f6, solution}]",
+  "y1 = Tan[a]",
+  "v2 = ((s - 6) - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2, 2}])[[1]])/Cos[a]",
+  "u3 = -({0, s - 1 - y1} + RotationTransform[a - Pi/2][{1, -1 + v2}])[[1]]/Sin[a]",
+  "v4 = RotationTransform[-a][{s - 6, s - 3} - {0, s - 1 - y1}][[1]] - 1",
+  "r5 = 1 - RotationTransform[a - c][{1 - u3, v4 - v2}][[2]]",
+  "r6 = 1 - (s - 8)*Cos[b]",
+  "v7 = -({s - 1, 1} + RotationTransform[Pi/2 - b][{-1 - r6, 0}])[[2]]/Sin[b]",
+  "u8 = Cos[b] - Sin[b]",
+  "v9 = v7 - ({s - 1, 1} + RotationTransform[Pi/2 - b][{-2 - r6 + u8, 1 + v7}])[[2]]/Sin[b]",
+  "vA = ((s - 3) - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{3, 1}])[[2]])/Sin[a]",
+  "vB = RotationTransform[-c][({0, s - 1 - y1} + RotationTransform[a - Pi/2][{4, vA}]) - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{2, 1 - r5}])][[1]]",
+  "yC = (1 - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{1, -1 - r5 + vB}])[[1]])/Sin[c]/Cos[c]",
+  "vD = Cos[c] - Sin[c]",
+  "yE = Cos[c]",
+  "vF = RotationTransform[-c][({3, 1 + yE} + RotationTransform[c - Pi/2][{0, 1}]) - {1, 4}][[1]] - 1",
+  "xG = (({s - 1, 1} + RotationTransform[Pi/2 - b][{1 - r6 + u8, 2}])[[2]] - (s - 6))/Sin[b]/Cos[b]",
+  "rH = 1 - RotationTransform[d][{s - 3 - xG, s - 6} - ({s - 1, 1} + RotationTransform[Pi/2 - b][{-r6 + u8, 2 + v7}])][[2]]",
+  "xI = xG + (({s - 1, 1} + RotationTransform[Pi/2 - b][{-r6 + u8, 2 + v7}] + RotationTransform[Pi/2 - d][{1 - rH, 1}])[[2]] - (s - 6))/Sin[d]/Cos[d]",
+  "rJ = 1 - RotationTransform[e][({s - 1, 1} + RotationTransform[Pi/2 - b][{-1 - r6 + u8, 2 + v9}]) - {5, 1}][[1]]",
+  "f1 = RotationTransform[-c][({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{1, -1 - r5 + vB}]) - {1, 4}][[1]]",
+  "f2 = RotationTransform[d][({s - 1, 1} + RotationTransform[Pi/2 - b][{-r6 + u8, 2 + v7}]) - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{5, 1 - r5 + vB + vF}])][[1]] - 1",
+  "f3 = (s - 4 - xI) - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{4, 1 - r5 + vB + 2*vD}])[[1]]",
+  "f4 = RotationTransform[-c][({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{5, 1 - r5 + vB + vF}]) - ({5, 1} + RotationTransform[-e][{-rJ, 1}])][[2]]",
+  "f5 = RotationTransform[e][({s - 1, 1} + RotationTransform[Pi/2 - b][{-r6 + u8, 2 + v7}] + RotationTransform[Pi/2 - d][{-rH, 1}]) - {5, 1}][[2]] - 1",
+  "(*f6 = RotationTransform[-a][{1, s - 1} - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{0, 1 - r5          }])][[2]] - 2;*)",
+  "(*f6 = RotationTransform[-a][{1, s - 1} - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{1, 1 - r5 + vB     }])][[2]] - 3;*)",
+  "f6 = RotationTransform[-a][{1, s - 1} - ({0, s - 1 - y1} + RotationTransform[a - Pi/2][{2 + u3, v2}] + RotationTransform[c - Pi/2][{2, 1 - r5 + vB + vD}])][[2]] - 4",
+  "solution = FindRoot[{f1 == 0, f2 == 0, f3 == 0, f4 == 0, f5 == 0, f6 == 0}, {{s, 8.9}, {a, 40*Pi/180}, {b, 35*Pi/180}, {c, 40*Pi/180}, {d, 36*Pi/180}, {e, 42*Pi/180}}, WorkingPrecision -> 100]",
+  "N[{s, a*180/Pi, b*180/Pi, c*180/Pi, d*180/Pi, e*180/Pi, y1, v2, u3, v4, r5, r6, v7, u8, v9, vA, vB, yC, vD, yE, vF, xG, rH, xI, rJ, {f1, f2, f3, f4, f5, f6}} /. solution, 50]"
+ ],
+ "solver_calls": [
+  {
+   "solver": "FindRoot",
+   "equations": [
+    "f1 == 0",
+    "f2 == 0",
+    "f3 == 0",
+    "f4 == 0",
+    "f5 == 0",
+    "f6 == 0"
+   ],
+   "unknowns": [
+    "s",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e"
+   ],
+   "working_precision": 100,
+   "text": "FindRoot[{f1 == 0, f2 == 0, f3 == 0, f4 == 0, f5 == 0, f6 == 0}, {{s, 8.9}, {a, 40*Pi/180}, {b, 35*Pi/180}, {c, 40*Pi/180}, {d, 36*Pi/180}, {e, 42*Pi/180}}, WorkingPrecision -> 100]"
+  }
+ ],
+ "roots": [],
+ "checks": []
+}

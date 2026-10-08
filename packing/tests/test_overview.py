@@ -44,6 +44,7 @@ from devtools.repo_links import (
     repo_url,
 )
 from devtools.result_credit import OTHERS, source_lineage
+from sqpack import release
 from sqpack.yamlio import safe_load
 from tests import site_renders
 
@@ -6414,6 +6415,7 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         "n11-threshold-bound-review",
         "n11-optimality-review",
         "square-packing-methods-survey",
+        "exact-side-values",
     )
     packing = overview_data.REPO / "packing"
     jobs = load_workflow()["jobs"]
@@ -6443,6 +6445,19 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         assert name in BUILDER_INPUTS, slug
         assert name in {line.split(" ", 1)[0] for line in skip_notices.splitlines()}, slug
     assert render_overview.paper_path("a-b", ".pdf") == "papers/a-b.pdf"
+
+    exact = importlib.import_module("devtools.render_exact_side_values")
+    record = render_overview.paper_record(render_overview.EXACT_SIDE_VALUES)
+    assert record.part is None
+    assert record.label == "Exact values"
+    assert exact.FRONT.source is None
+    assert exact.FRONT.series is None
+    assert exact.FRONT.agents == ("GPT-5.6 Sol", "GPT-6 Astra")
+    assert exact.FRONT.version == release.EXACT_SIDE_VALUES_EDITION
+    assert [(dated.label, dated.day) for dated in exact.FRONT.dates] == [
+        ("First published", release.EXACT_SIDE_VALUES_FIRST_PUBLISHED),
+        ("Last revised", release.EXACT_SIDE_VALUES_REVISED),
+    ]
 
 
 def test_reviewed_paper_titles_are_used_across_the_site(
