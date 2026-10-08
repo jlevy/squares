@@ -5,6 +5,13 @@ This directory is a local, greppable archive of the primary literature behind
 It keeps the literature searchable without refetching, re-extracting, or fighting
 paywalls and bot blocks.
 
+**[Pingyou Fibonacci torus abstract 2026]** — the owner’s undated first-page
+[screenshot packet](web/pingyou-fibonacci-torus-2026-10-07/README.md), received 7
+October 2026: original image, raw OCR, visually corrected transcription, and explicit
+source gaps. The
+[X-050 audit](../campaign/explorations/X-050-fibonacci-torus-and-boundary-information.md)
+contains the dispositions; no full manuscript or geometric torus inverse was supplied.
+
 ## Layout
 
 ```

@@ -1,0 +1,335 @@
+{
+  "arithmetic": "fractions.Fraction; exact rational",
+  "cases": [
+    {
+      "centres": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1/3",
+          "1"
+        ],
+        [
+          "2/3",
+          "2"
+        ],
+        [
+          "1",
+          "3"
+        ],
+        [
+          "4/3",
+          "1/3"
+        ],
+        [
+          "5/3",
+          "4/3"
+        ],
+        [
+          "2",
+          "7/3"
+        ],
+        [
+          "7/3",
+          "10/3"
+        ],
+        [
+          "8/3",
+          "2/3"
+        ],
+        [
+          "3",
+          "5/3"
+        ],
+        [
+          "10/3",
+          "8/3"
+        ]
+      ],
+      "duplicate_square_refused": true,
+      "n": 11,
+      "overlaps": 0,
+      "pairs_checked_by_each_method": 55,
+      "side": "11/3",
+      "straight_seams": {
+        "axis_parallel_rectangular_cut_exists": false,
+        "x": {
+          "boundary_candidates_checked": 11,
+          "exists": false,
+          "gap_end_unwrapped": "1/3",
+          "gap_start": "0",
+          "maximum_cyclic_gap": "1/3",
+          "seam_coordinate": null
+        },
+        "y": {
+          "boundary_candidates_checked": 11,
+          "exists": false,
+          "gap_end_unwrapped": "1/3",
+          "gap_start": "0",
+          "maximum_cyclic_gap": "1/3",
+          "seam_coordinate": null
+        }
+      }
+    },
+    {
+      "centres": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1/4",
+          "1"
+        ],
+        [
+          "1/2",
+          "2"
+        ],
+        [
+          "3/4",
+          "3"
+        ],
+        [
+          "1",
+          "4"
+        ],
+        [
+          "5/4",
+          "3/4"
+        ],
+        [
+          "3/2",
+          "7/4"
+        ],
+        [
+          "7/4",
+          "11/4"
+        ],
+        [
+          "2",
+          "15/4"
+        ],
+        [
+          "9/4",
+          "1/2"
+        ],
+        [
+          "5/2",
+          "3/2"
+        ],
+        [
+          "11/4",
+          "5/2"
+        ],
+        [
+          "3",
+          "7/2"
+        ],
+        [
+          "13/4",
+          "1/4"
+        ],
+        [
+          "7/2",
+          "5/4"
+        ],
+        [
+          "15/4",
+          "9/4"
+        ],
+        [
+          "4",
+          "13/4"
+        ]
+      ],
+      "duplicate_square_refused": true,
+      "n": 17,
+      "overlaps": 0,
+      "pairs_checked_by_each_method": 136,
+      "side": "17/4",
+      "straight_seams": {
+        "axis_parallel_rectangular_cut_exists": false,
+        "x": {
+          "boundary_candidates_checked": 17,
+          "exists": false,
+          "gap_end_unwrapped": "1/4",
+          "gap_start": "0",
+          "maximum_cyclic_gap": "1/4",
+          "seam_coordinate": null
+        },
+        "y": {
+          "boundary_candidates_checked": 17,
+          "exists": false,
+          "gap_end_unwrapped": "1/4",
+          "gap_start": "0",
+          "maximum_cyclic_gap": "1/4",
+          "seam_coordinate": null
+        }
+      }
+    }
+  ],
+  "contact_and_wrap_controls_passed": true,
+  "finite_container_claim": false,
+  "schema": "fibonacci-torus-periodic-audit/v1",
+  "scope": "square flat torus; axis-parallel unit squares; boundary contact allowed",
+  "seam_controls": {
+    "geometric_controls": [
+      {
+        "diagnostic": {
+          "axis_parallel_rectangular_cut_exists": true,
+          "x": {
+            "boundary_candidates_checked": 2,
+            "exists": true,
+            "gap_end_unwrapped": "1",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "1",
+            "seam_coordinate": "1/2"
+          },
+          "y": {
+            "boundary_candidates_checked": 2,
+            "exists": true,
+            "gap_end_unwrapped": "1",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "1",
+            "seam_coordinate": "1/2"
+          }
+        },
+        "name": "touching_boundary",
+        "side": "2"
+      },
+      {
+        "diagnostic": {
+          "axis_parallel_rectangular_cut_exists": true,
+          "x": {
+            "boundary_candidates_checked": 3,
+            "exists": true,
+            "gap_end_unwrapped": "3",
+            "gap_start": "1",
+            "maximum_cyclic_gap": "2",
+            "seam_coordinate": "2"
+          },
+          "y": {
+            "boundary_candidates_checked": 3,
+            "exists": true,
+            "gap_end_unwrapped": "3",
+            "gap_start": "1",
+            "maximum_cyclic_gap": "2",
+            "seam_coordinate": "2"
+          }
+        },
+        "name": "wide_wrapped_gap",
+        "side": "3"
+      },
+      {
+        "diagnostic": {
+          "axis_parallel_rectangular_cut_exists": false,
+          "x": {
+            "boundary_candidates_checked": 5,
+            "exists": false,
+            "gap_end_unwrapped": "1/2",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "1/2",
+            "seam_coordinate": null
+          },
+          "y": {
+            "boundary_candidates_checked": 5,
+            "exists": false,
+            "gap_end_unwrapped": "1/2",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "1/2",
+            "seam_coordinate": null
+          }
+        },
+        "name": "covered_axes",
+        "side": "5/2"
+      },
+      {
+        "diagnostic": {
+          "axis_parallel_rectangular_cut_exists": true,
+          "x": {
+            "boundary_candidates_checked": 1,
+            "exists": true,
+            "gap_end_unwrapped": "7/4",
+            "gap_start": "3/4",
+            "maximum_cyclic_gap": "1",
+            "seam_coordinate": "1/4"
+          },
+          "y": {
+            "boundary_candidates_checked": 1,
+            "exists": true,
+            "gap_end_unwrapped": "7/4",
+            "gap_start": "3/4",
+            "maximum_cyclic_gap": "1",
+            "seam_coordinate": "1/4"
+          }
+        },
+        "name": "singleton_unit_period",
+        "side": "1"
+      },
+      {
+        "diagnostic": {
+          "axis_parallel_rectangular_cut_exists": false,
+          "x": {
+            "boundary_candidates_checked": 4,
+            "exists": true,
+            "gap_end_unwrapped": "3/2",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "3/2",
+            "seam_coordinate": "3/4"
+          },
+          "y": {
+            "boundary_candidates_checked": 8,
+            "exists": false,
+            "gap_end_unwrapped": "3/4",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "3/4",
+            "seam_coordinate": null
+          }
+        },
+        "name": "only_x_seam",
+        "side": "3"
+      },
+      {
+        "diagnostic": {
+          "axis_parallel_rectangular_cut_exists": false,
+          "x": {
+            "boundary_candidates_checked": 8,
+            "exists": false,
+            "gap_end_unwrapped": "3/4",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "3/4",
+            "seam_coordinate": null
+          },
+          "y": {
+            "boundary_candidates_checked": 4,
+            "exists": true,
+            "gap_end_unwrapped": "3/2",
+            "gap_start": "0",
+            "maximum_cyclic_gap": "3/2",
+            "seam_coordinate": "3/4"
+          }
+        },
+        "name": "only_y_seam",
+        "side": "3"
+      }
+    ],
+    "malformed_inputs_refused": [
+      "short_period",
+      "inexact_period",
+      "integer_period",
+      "empty_centers",
+      "tuple_instead_of_list",
+      "list_instead_of_point_tuple",
+      "short_point",
+      "missing_point",
+      "negative_coordinate",
+      "coordinate_at_period",
+      "inexact_coordinate",
+      "integer_coordinate"
+    ]
+  },
+  "seam_criterion": "An empty straight seam exists iff the maximum cyclic projected-center gap is at least one.",
+  "seam_inputs": "Fraction side >= 1; nonempty list of two-tuples of Fraction coordinates in [0,side); repeated coordinates allowed."
+}
