@@ -10,6 +10,8 @@ scope: >
   current project documentation rules.
 documents:
   - {path: docs/project/reviews/review-2026-10-08-n17-merge-readiness.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-n17-strategy-and-exact-sos.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-n17-issue-pattern-reconciliation.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-n17-session-186-storage.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md, role: research-report, authority: supporting, lifecycle: retained}
