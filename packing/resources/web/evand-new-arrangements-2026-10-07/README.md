@@ -142,6 +142,21 @@ Their code, tests and original retained inputs are unchanged from the parent.
 This intake does not regenerate their scientific evidence or claim an aggregate pass.
 Exact-head hosted validation remains a separate publication obligation.
 
+The first published head, `54d61bacb676603379b88b014449e7a5ff60c0fd`, fails required
+hosted run [37731408870](https://github.com/jlevy/squares/actions/runs/37731408870). Its
+five constituent failures identify a missing sparse-checkout source packet and stale
+consumer expectations for the three adopted houses: the complete worker index,
+translation motions, inventory citations and reported-result standings.
+The source packet and all complete scientific inputs are present in the tested Git tree.
+The correction adds the packet to the declared checkout and updates those maintained
+consumer contracts; 70 bounded controls pass in 17.36 seconds, and the three failed
+inventory/sample steps pass in 64.82 seconds.
+Independent review passes 11 targeted controls in 2.98 seconds and confirms the exact
+three house links plus both private scientific inputs remain in their respective
+rosters. The matching deferred run also identifies the parent float-gap tool’s unnamed
+`MAX_STEPS` test binding, which is repaired in the parent layer.
+Neither a full-clone repeat nor an aggregate pass is inferred from these scoped checks.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
