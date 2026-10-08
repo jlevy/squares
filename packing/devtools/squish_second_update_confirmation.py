@@ -153,7 +153,11 @@ def transform_geometry(witness: dict[str, Any], name: str) -> dict[str, Any]:
 
 
 def canonical_witness(fact: dict[str, Any], name: str) -> dict[str, Any]:
-    witness = transform_geometry(to_witness(fact), name)
+    return _canonical_witness(to_witness(fact), name)
+
+
+def _canonical_witness(positive: dict[str, Any], name: str) -> dict[str, Any]:
+    witness = transform_geometry(positive, name)
     if name != JOBS[0]:
         witness["claim"]["coordinate_provenance"] = "reported"
         witness["claim"]["limitations"] = (
@@ -165,6 +169,13 @@ def canonical_witness(fact: dict[str, Any], name: str) -> dict[str, Any]:
 def metadata(witness: dict[str, Any]) -> dict[str, Any]:
     semantic_keys = set(original.checker_input(witness))
     return {key: value for key, value in witness.items() if key not in semantic_keys}
+
+
+def _metadata_from_checked_input(
+    witness: dict[str, Any], checked_input: dict[str, Any]
+) -> dict[str, Any]:
+    """Use the semantic keys from a completed whole-input normalization."""
+    return {key: value for key, value in witness.items() if key not in checked_input}
 
 
 def acquisition() -> dict[int, Any]:
@@ -198,7 +209,13 @@ def acquisition() -> dict[int, Any]:
 def historical_witness(
     fact: dict[str, Any], pin: dict[str, Any], anchor: str, name: str
 ) -> dict[str, Any]:
-    witness = transform_geometry(original.to_witness(fact), name)
+    return _historical_witness(original.to_witness(fact), pin, anchor, name)
+
+
+def _historical_witness(
+    positive: dict[str, Any], pin: dict[str, Any], anchor: str, name: str
+) -> dict[str, Any]:
+    witness = transform_geometry(positive, name)
     witness["id"] = pin["witness_id_reserved"]
     witness["claim"]["coordinate_provenance"] = "reported"
     witness["claim"]["limitations"] = (
@@ -214,8 +231,13 @@ def historical_witness(
 def validate_job(
     row: Any, fact: dict[str, Any], pin: dict[str, Any], protocol: dict[str, Any], name: str
 ) -> None:
-    n = fact["n"]
     expected = historical_witness(fact, pin, protocol["source_custody_anchor"], name)
+    _validate_job(row, fact["n"], expected, protocol, name)
+
+
+def _validate_job(
+    row: Any, n: int, expected: dict[str, Any], protocol: dict[str, Any], name: str
+) -> None:
     if (
         type(row) is not dict
         or type(row.get("n")) is not int
@@ -315,19 +337,26 @@ def validate_case(
         raise original.PacketError(
             "both distinct complete independent input reviews are required"
         )
+    # Derive rational corners once for this case, then copy each full-roster variant.
+    # The baseline is private to this admission; later invocations read facts afresh.
+    positive = to_witness(fact)
     for name, actual, transform in zip(JOBS, rows, transforms, strict=True):
-        validate_job(actual, fact, pin, protocol, name)
-        canonical = canonical_witness(fact, name)
+        expected = _historical_witness(positive, pin, protocol["source_custody_anchor"], name)
+        _validate_job(actual, n, expected, protocol, name)
+        canonical = _canonical_witness(positive, name)
         historical = actual["witness"]
+        historical_input = original.checker_input(historical)
+        canonical_input = original.checker_input(canonical)
         expected_transform = {
             "kind": "canonical-publication-metadata-v1",
             "job": name,
-            "historical_metadata": metadata(historical),
-            "canonical_metadata": metadata(canonical),
+            "historical_metadata": _metadata_from_checked_input(historical, historical_input),
+            "canonical_metadata": _metadata_from_checked_input(canonical, canonical_input),
         }
-        if shared.json_bytes(transform) != shared.json_bytes(
-            expected_transform
-        ) or original.checker_input(historical) != original.checker_input(canonical):
+        if (
+            shared.json_bytes(transform) != shared.json_bytes(expected_transform)
+            or historical_input != canonical_input
+        ):
             raise original.PacketError(
                 "canonical transformation changed geometry or misstates metadata"
             )
@@ -351,7 +380,7 @@ def validate_case(
                 raise original.PacketError(
                     "canonical case differs from complete independent review"
                 )
-    return to_witness(fact)
+    return positive
 
 
 def validate_protocol(protocol: dict[str, Any], admitted: dict[int, Any]) -> None:
