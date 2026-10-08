@@ -272,7 +272,69 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # T-120..T-123 report exact side forms for historical source configurations; no
     # current frontier lane relies on these unverified catalogue assertions.
     assert {"T-120", "T-121", "T-122", "T-123"} <= set(derived)
-    assert len(derived) == 54
+    # Gupta's confirmed fourteen-case refinement supersedes T-114's final ceiling.
+    expected = {
+        "T-001",
+        "T-002",
+        "T-010",
+        "T-015",
+        "T-016",
+        "T-017",
+        "T-018",
+        "T-019",
+        "T-020",
+        "T-021",
+        "T-022",
+        "T-024",
+        "T-025",
+        "T-026",
+        "T-027",
+        "T-028",
+        "T-029",
+        "T-030",
+        "T-032",
+        "T-033",
+        "T-034",
+        "T-037",
+        "T-038",
+        "T-039",
+        "T-040",
+        "T-041",
+        "T-042",
+        "T-043",
+        "T-044",
+        "T-045",
+        "T-046",
+        "T-047",
+        "T-049",
+        "T-050",
+        "T-056",
+        "T-057",
+        "T-061",
+        "T-070",
+        "T-071",
+        "T-072",
+        "T-077",
+        "T-078",
+        "T-079",
+        "T-087",
+        "T-088",
+        "T-089",
+        "T-092",
+        "T-096",
+        "T-099",
+        "T-100",
+        "T-114",
+        "T-120",
+        "T-121",
+        "T-122",
+        "T-123",
+    }
+    # Couzo's later eight-case source report alone holds no current frontier lane.
+    if "T-128" in records.results:
+        expected.add("T-128")
+    assert set(derived) == expected
+    assert len(derived) == len(expected)
     assert {
         "T-020", "T-021", "T-030", "T-043", "T-044", "T-047", "T-049", "T-057", "T-072",
         "T-056", "T-078", "T-079", "T-087", "T-088", "T-089", "T-092",

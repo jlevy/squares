@@ -90,6 +90,14 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/tests/test_confirm_gupta_records.py": (
+        "tests finite ceiling confirmation, retained prior lanes and complete custody; "
+        "a feasibility certificate confers neither s(n) nor optimality"
+    ),
+    "packing/devtools/confirm_gupta_records.py": (
+        "publishes complete admitted rational feasibility as finite upper ceilings; "
+        "preserves historical lower lanes and never claims s(n), optimality or rigidity"
+    ),
     "packing/devtools/confirm_ryxu_records.py": (
         "records finite upper ceilings from complete admitted exact replay, never s(n)"
     ),
