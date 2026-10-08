@@ -5,7 +5,7 @@ title: "PR #395: complete and review the static crawlable site end to end"
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -20,9 +20,10 @@ child_order_hints:
   - is-01m4ck4fqw2q5gjk6a04q031nw
   - is-01m4cp6944c47f84vgrvjycm5z
   - is-01m4crx46j6btjrana5yp2g4dp
+  - is-01m4cthv2bfkmhema6ageaxqsd
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:25:13.204Z
-updated_at: 2026-10-08T03:28:56.016Z
+updated_at: 2026-10-08T03:57:43.370Z
 started_at: 2026-10-08T00:26:25.769Z
 ---
