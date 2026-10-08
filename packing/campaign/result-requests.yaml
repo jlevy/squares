@@ -2461,27 +2461,29 @@ issues:
       side) + updated summary on all 26-10-07 upper bound changes: registration request'
     author: itsnaka
     opened: '2026-10-07'
-    state: open
+    state: closed
+    closed: '2026-10-08'
     kind: result-report
     triage: done
     summary: Nate Chaoweeraprasit reports nine smaller SQUISH packings at the pinned e63e4e52b1728b6671b2f263c5e02a4aa79a39d3
       second-update revision. Five counts are additional to the earlier eighteen-count publication and
       four replace earlier selected reports. The earlier original and first-update geometries, certificates
-      and credit remain historical provenance; this import preserves their verified ceilings and registers
-      only V0/C0 reports. The body also links ten previously imported first-update packings. The author
+      and credit remain historical provenance. Separate local exact replay and review of all nine
+      preserve their rational sides. The body also links ten previously imported first-update packings. The author
       identifies AI assistance under his direction and review, and seed packing credit to Ellsworth/Kingbird
       and Couzo.
-    read_through: '2026-10-07T23:24:18Z'
+    read_through: '2026-10-08T02:52:36Z'
     results:
     - key: nine-updated-packings
       claim: Reported improvements at n = 88, 108, 179, 180, 199, 207, 236, 263 and 302 from second update
         e63e4e52b1728b6671b2f263c5e02a4aa79a39d3; exact rational triples and safe upward decimal displays,
-        with source checker claims awaiting separate local evidence admission.
+        independently re-verified here by both exact local routes, with unchanged rational sides.
       source: body
       register:
       - T-116
       evidence:
       - E-squish-second-update-2026-10-07-report
+      - E-squish-second-update-2026-10-07-exact-replay
       bead: think-sfpz
     - key: ten-first-update-packings
       claim: The body repeats first-update improvements at n = 123, 126, 129, 154, 155, 208, 237, 238,
@@ -2495,8 +2497,13 @@ issues:
     asks:
     - what: Import, independently replay and publish all nine second-update packings with accurate assurance
         and preserved prior source history.
-      state: queued
+      state: done
       bead: think-sfpz
+      note: All nine unchanged rational packings were independently replayed, reviewed and published
+        as T-116 at V3/C3 on main f747407a0fa83d80a7894331c770aeb314b23163. Matching Pages
+        deployment6925744906/run37717788426 succeeded; live406/406 and supplemental793/793 checks
+        passed. Standard-site 1238/1238 rawexit0 and layouts 48/48 rawexit0;
+        final reply https://github.com/jlevy/squares/issues/422#issuecomment-6051191850 reports the actual completed publication scope.
     beads:
     - think-sfpz
     - think-yquo
@@ -2523,10 +2530,67 @@ issues:
         confirmation: C0
       corrects:
       - https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6050615059
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: nine-updated-packings
+      outdated:
+      - The checkpoint described draft confirmation, a required CI failure and pending merge/deployment;
+        the reviewed repair and both import layers subsequently merged, and final publication evidence
+        and the author reply are recorded below.
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6051113157
+      date: '2026-10-08'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: nine-updated-packings
+        id: T-116
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      outdated:
+      - The post-merge reply left browser publication verification and the final reply pending;
+        the complete deployed-site audit passed before the final reply and issue closure.
+    - url: https://github.com/jlevy/squares/issues/422#issuecomment-6051191850
+      date: '2026-10-08'
+      by: jlevy
+      kind: final
+      reported:
+      - result: nine-updated-packings
+        id: T-116
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: nine-updated-packings
+        id: E-squish-second-update-2026-10-07-report
+        status: recorded
+      - result: nine-updated-packings
+        id: E-squish-second-update-2026-10-07-exact-replay
+        status: confirmed
+      - result: ten-first-update-packings
+        id: T-115
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: ten-first-update-packings
+        id: E-squish-update-2026-10-07-report
+        status: recorded
+      - result: ten-first-update-packings
+        id: E-squish-update-2026-10-07-exact-replay
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6047406306
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6048876876
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6050615059
+      - https://github.com/jlevy/squares/issues/422#issuecomment-6051113157
     close_when: All nine second-update packings have complete independent replay and appropriately mapped
       fresh scoped reviews, have merged and deployed, and an accurate final author reply identifies the
       published assurance. The reported import alone does not close this request.
     notes: The acknowledgement was created at 21:41:08 UTC and edited at 22:28:26 UTC on 7 October 2026.
       The immutable second-update revision defines this nine-case import. The nineteen-row source body
       combines these nine with ten first-update claims already mapped to T-115; no late issue 425 or future
-      upstream master revision is admitted here.
+      upstream master revision is admitted here. Final main publication and author reply were verified
+      before issue closure. Native performance follow-up think-c63v and later issues425/428 intake remain
+      separate; no native timing policy was waived by this publication closeout.
