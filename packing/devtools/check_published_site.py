@@ -1451,7 +1451,7 @@ def deployed_registry_checks(
         budget = site_urls.page_budget(row)
         results.append(
             (
-                len(body) <= min(budget, site_urls.HARD_HTML_LIMIT),
+                len(body) <= min(budget, site_urls.html_limit(row)),
                 f"registered HTML {row.path}: {len(body)} bytes, budget {budget}",
             )
         )
