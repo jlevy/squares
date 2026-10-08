@@ -1703,6 +1703,8 @@ body {
   block-size: var(--site-frontier-thumb);
   display: block;
   inline-size: var(--site-frontier-thumb);
+  margin: 0;
+  max-inline-size: none;
 }
 /* Strokes in screen pixels, so a square's outline reads at 50 pixels across. */
 .site-frontier .site-thumb :is(path, rect) {

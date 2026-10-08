@@ -1557,7 +1557,9 @@ def write_site(output: Path, files: Sequence[Page]) -> None:
         target = output / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
-    # The registry lane adds crawl files after all declared producer outputs.
+    from devtools.site_urls import write_crawl_files  # noqa: PLC0415
+
+    write_crawl_files(output)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -1585,8 +1587,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         # case dropped since, is stale too: `write_site` would remove it.
         from devtools.overview_sections import RESULT_FRAGMENTS  # noqa: PLC0415
         from devtools.render_case_pages import CASES_DIR  # noqa: PLC0415
+        from devtools.site_urls import crawl_files  # noqa: PLC0415
 
-        written = {p.name for p in (*pages, *fragments, *records)}
+        crawl, crawl_assets = crawl_files()
+        stale += [
+            name
+            for name, text in crawl.items()
+            if not (output / name).is_file()
+            or (output / name).read_text(encoding="utf-8") != text
+        ]
+        written = {p.name for p in (*pages, *fragments, *records)} | set(crawl)
         stale += [
             path.relative_to(output).as_posix()
             for directory in (RESULT_FRAGMENTS, CASES_DIR)
@@ -1596,7 +1606,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         from devtools import site_assets  # noqa: PLC0415
 
         stale += site_assets.stale_assets(
-            output, asset_files([*pages, *fragments, *records, *forwarders])
+            output, {**asset_files([*pages, *fragments, *records, *forwarders]), **crawl_assets}
         )
         stale += [
             name

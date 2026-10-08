@@ -71,6 +71,17 @@ alongside pull-request CI. Exact-head CI, independent review dispositions and th
 final evidence are recorded in [PR #395](https://github.com/jlevy/squares/pull/395).
 Deployment and the owner’s Search Console account setup follow merge.
 
+Hosted verification exposed missing producer dependencies and browser tests that still
+expected the earlier client-built pages.
+The producer jobs now stage their shared card and own their crawler outputs.
+Required Chromium checks exercise cached drawings, complete static case pages, filter
+navigation and registered retired-result fragments.
+Fetched case popovers declare the font context their prepared prose inherits.
+Disposable mutation snapshots omit measured historical outputs while retaining
+scientific inputs and linked evidence under the unchanged 192 MiB limit; the read-only
+auditor refuses candidates that mandatory copy routes would restore.
+The final hosted run and independent dispositions remain recorded on PR #395.
+
 ## Overview
 
 The site at `https://jlevy.github.io/squares/` is starting to get traffic, and people

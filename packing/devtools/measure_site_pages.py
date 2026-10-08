@@ -231,6 +231,7 @@ LADDERS = probe(PROBES, "measure_site_pages/ladders")
 MATH_FACES = probe(PROBES, "measure_site_pages/math_faces")
 SPACING = probe(PROBES, "measure_site_pages/spacing")
 COLUMNS = probe(PROBES, "measure_site_pages/columns")
+_COLUMNS_SCROLL = probe(PROBES, "measure_site_pages/columns_scroll")
 CHIPS = probe(PROBES, "measure_site_pages/chips")
 POPOVER = probe(PROBES, "measure_site_pages/popover")
 GLYPHS = probe(PROBES, "measure_site_pages/glyphs")
@@ -642,7 +643,12 @@ COLUMN_SHOT_HEIGHT = 1100
 
 
 def measure_columns(
-    base: str, pages: Sequence[str], *, widths: Sequence[int], shots: Path | None = None
+    base: str,
+    pages: Sequence[str],
+    *,
+    widths: Sequence[int],
+    shots: Path | None = None,
+    scroll_check: bool = False,
 ) -> list[dict[str, Any]]:
     """Every shared data table's columns on each page at each width, once its math is
     typeset, one entry a table: its width, how far it runs past what scrolls it sideways,
@@ -664,6 +670,25 @@ def measure_columns(
                 page.goto(f"{base}/{name}", wait_until="load")
                 settle_math(page)
                 found: list[dict[str, Any]] = page.evaluate(COLUMNS)
+                if scroll_check:
+                    # Report both scroll extremes and the restored geometry. The
+                    # observer keeps changed widths visible rather than accepting them.
+                    states = {"initial": [_column_geometry(table) for table in found]}
+                    for state, position in (
+                        ("vertical_end", "bottom"),
+                        ("horizontal_end", "right"),
+                        ("restored", "reset"),
+                    ):
+                        page.evaluate(_COLUMNS_SCROLL, {"position": position})
+                        states[state] = [
+                            _column_geometry(table) for table in page.evaluate(COLUMNS)
+                        ]
+                    if any(len(tables) != len(found) for tables in states.values()):
+                        raise ValueError("the visible table set changed while scrolling")
+                    for index, table in enumerate(found):
+                        table["scroll_geometry"] = {
+                            state: tables[index] for state, tables in states.items()
+                        }
                 results.extend({"page": name, "width": width, **table} for table in found)
                 stem = re.sub(r"[^A-Za-z0-9]+", "-", name.removesuffix(".html")).strip("-")
                 for index, table in enumerate(found):
@@ -682,6 +707,28 @@ def measure_columns(
                 page.close()
         browser.close()
     return results
+
+
+def _column_geometry(table: dict[str, Any]) -> dict[str, Any]:
+    """Keep layout and scroll positions without duplicating each column's contents."""
+    return {
+        **{
+            key: table[key]
+            for key in (
+                "table",
+                "layout",
+                "table_width",
+                "frame_width",
+                "scrolls",
+                "page_scrolls",
+                "window_scroll_x",
+                "window_scroll_y",
+                "frame_scroll_left",
+                "shown_rows",
+            )
+        },
+        "column_widths": {column["column"]: column["width"] for column in table["columns"]},
+    }
 
 
 def measure_chips(
@@ -1779,6 +1826,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="with `load`: open this page first in the same browser, so each page is "
         "measured as a reader's second page, with the first one's files cached",
     )
+    parser.add_argument(
+        "--scroll-check",
+        action="store_true",
+        help="with columns: retain geometry before, during and after "
+        "vertical and horizontal scrolling",
+    )
     parser.add_argument("--port", type=int, default=18961)
     parser.add_argument("--json", type=Path, help="read a saved report rather than measuring")
     parser.add_argument("--markdown", action="store_true", help="print a table, not JSON")
@@ -1881,7 +1934,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             elif args.mode == "space":
                 report = measure_space(base, pages, widths=widths, presses=args.press)
             elif args.mode == "columns":
-                report = measure_columns(base, pages, widths=widths, shots=args.shots)
+                report = measure_columns(
+                    base, pages, widths=widths, shots=args.shots, scroll_check=args.scroll_check
+                )
             elif args.mode == "chips":
                 report = measure_chips(base, pages, widths=widths, presses=args.press)
             elif args.mode == "credits":

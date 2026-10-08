@@ -1896,10 +1896,8 @@ it.
     `tests/test_frontier_page.py` holds every decimal to its closed form’s exact value.
     `devtools.measure_site_pages columns` reports the widths.
 
-- **Result filters.** Every table of results sits under one tools bar, the same on the
-  overview’s recent table and on the results page: the same controls, the same choices
-  and the same order. Only where Significance, Max age and Hide superseded start, and the
-  count at its end, are the table’s own.
+- **Result filters.** The complete results page has a tools bar for every registered
+  result. The overview’s recent table has a static scope label and a link to that page.
   `overview_sections.result_filters` writes it and `overview/table.js` drives it.
   Every table’s bar, the frontier table’s too, is set at the control size,
   `--site-font-size-control`, 0.8 of the sans base and a step under the table’s own
@@ -1985,28 +1983,19 @@ Max age is a number of days, and empty is no limit. There is no date range.
   baseline (`align-items: baseline`): the checkbox’s words, the other labels’ and the
   count read level, on the Frontier page’s bar too.
 
-- **Defaults.** The caller passes them (`FilterDefaults`), and they are the one thing
-  that differs between the two bars.
-  Recent Results on the overview starts at significance S3 and up (S4 until 2026-10-03,
-  `think-x60s`), a maximum age of 180 days and Hide superseded checked
-  (`RECENT_DEFAULTS`); the results page starts at All, no maximum age and the box clear
-  (`RESULTS_DEFAULTS`), so every result shows.
-  Every other control starts at All on both.
-  The bar has no reset control: a control’s default is its state in the HTML, which a
-  fresh load of the page returns to.
-  A row outside its table’s defaults is `hidden` in the HTML, never left out of it, and
-  the count is written there too, so the first paint is already the filtered table and
-  never flashes every row.
-  A control’s state in the HTML is its default, which is all the script knows of it.
+- **Defaults.** Recent Results on the overview contains only results of significance S3
+  and up, at most 180 days old and not superseded (`RECENT_DEFAULTS`). The renderer
+  selects those rows and writes their count and scope into the HTML. The complete
+  results page includes every row and starts at All, no maximum age and Hide superseded
+  clear (`RESULTS_DEFAULTS`). Its other controls start at All too.
+  The bar has no reset control: a fresh page load restores the HTML defaults unless the
+  address presets a supported filter.
 
-- **Age.** On the page an age is measured from the reader’s own day, which the script
-  reads when it loads and at every change, so a default of 180 days moves with the
-  calendar and needs no rebuild.
-  The HTML cannot know that day, and must not read the clock, since two renders of one
-  tree are compared byte for byte.
-  It measures from the newest `registered` date in the register (`reference_date`),
-  which decides only which rows start `hidden` and the count written beside them; the
-  script settles both again on load.
+- **Age.** The renderer measures the overview’s 180-day window from the newest
+  `registered` date in the register (`reference_date`). This keeps two renders of one
+  source tree identical, and the initial subset stays visible without scripts.
+  On the complete results page, an age filter measures from the reader’s own day when
+  the script applies a query preset or responds to a control change.
 
 - **One flat list.** A table of results has no heading row among its rows, on either
   page: every row is a result, in one order, newest first by the date the table shows,
@@ -2020,9 +2009,12 @@ Max age is a number of days, and empty is no limit. There is no date range.
   The script keeps it, and without scripts one rule, `.site-table tr[hidden]:target`,
   shows it.
 
-- **Links.** A link can open either table filtered: each query parameter presets the
-  control it names, `s-min=3`, `source=ours`, `n=17`, `age=30`, `current=true`; an empty
-  value, `s-min=&age=&current=`, clears a default, and so does `current=false`.
+- **Links.** A link can open the complete table filtered: each query parameter presets
+  the control it names, `s-min=3`, `source=ours`, `n=17`, `age=30`, `current=true`; an
+  empty value, `s-min=&age=&current=`, clears a default, and so does `current=false`. On
+  the overview, the ordinary “Browse and filter every result” link reaches the complete
+  table. With scripts, it carries supported query parameters from the current address so
+  a filter for older results reaches the full dataset.
 
 - **A row’s popover** follows it through filtering and sorting, since the row finds it
   by id (**Row popovers**, below).
@@ -2031,9 +2023,9 @@ The bar wraps onto further lines as the page narrows; on a phone each control ta
 about a line. Without scripts a filter cannot be changed, so nothing stays filtered:
 under `@media (scripting: none)` every row shows, and the bar, which would do nothing,
 does not. `tests/node/overview_table/` runs the script’s filters, alone and wired to a
-stand-in table, and `tests/test_overview.py` holds both pages to the identical bar and
-each to its defaults.
-`tests/test_site_result_filters.py` uses Hide superseded in a browser on both pages, by
+stand-in table, and `tests/test_overview.py` checks the static recent subset, its
+complete table link and the complete page’s controls.
+`tests/test_site_result_filters.py` uses Hide superseded on the complete page, by
 pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
 
 - **Row popovers.** The row is the unit: a table row with detail opens one popover for
@@ -2148,15 +2140,15 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `tests/test_overview.py` holds each section’s prose to one paragraph of its own where
   this applies, the cards to their pages, and the three pages to saying each thing once.
 
-- **Recent results.** The overview’s Recent Results section opens with its table, and
-  under the table’s one action, “See all results”, stand two short paragraphs and a key
-  (the owner, 2026-10-02, `think-tgjv`; one paragraph of up to 125 words stood between
-  the heading and the filter bar until then).
+- **Recent results.** The overview’s Recent Results section opens with its scope label
+  and table, and under the table’s one action, “See all results”, stand two short
+  paragraphs and a key (the owner, 2026-10-02, `think-tgjv`; one paragraph of up to 125
+  words stood between the heading and the filter bar until then).
   The first paragraph, 50 to 100 words, is the headline of recent progress, eleven
   squares settled by T-060, seventeen squares bracketed by T-093 and T-065 (T-043 until
   2026-10-05), the new exact values at $n = 21$, $32$ and $45$, each id linked to its
-  row and held to the register by `check_results.READER_TIER`; then one sentence on
-  where the table above starts.
+  row and held to the register by `check_results.READER_TIER`; then one sentence on the
+  scope of the table above and a link to the complete table’s filters.
   The homepage no longer explains the ratings (the owner, 2026-10-03, `think-42dx`): the
   paragraph that said what each rating means and the key of every rung under the table
   are gone, and the Results page carries both.
@@ -2166,23 +2158,22 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   S5; every verification and confirmation chip, V0 to C5, each titled with the rubric’s
   meaning; and the star, “new result”, with a link, “What each rung means”, to the
   Verification Ladders on the Results page.
-  The table is one table, not cards or a list: every result, by the date the table
-  shows, newest first, one row each (`recent_table`). It is the results page’s table,
-  with its columns, its rows, its sorting and its card-per-row form on a phone
-  (**Tables**, above).
+  The table contains the recent subset, by the date the table shows, newest first, one
+  row each (`recent_table`). It shares the results page’s columns, sorting and
+  card-per-row form on a phone (**Tables**, above).
   The ratings, the kinds, the statuses and the dating rule are defined on the Results
   page, and a result’s rungs, review and retained packet are its row’s; the section
   repeats none of them.
   README’s two paragraphs on the same progress opened the section until that day and are
   README’s own now (**Page headings**, above).
-  The results page’s tools bar sits above it (**Result filters**, above), starting at
-  significance S3 and up, a maximum age of 180 days and Hide superseded checked, with
-  the count of rows shown out of the total at the bar’s end.
-  Those three defaults are all that make the table recent and current: no result is left
-  out of it by a date or a status the page fixes, and none is listed anywhere but in it.
+  Its scope label states the number included, significance S3 and up, the 180-day window
+  and the exclusion of superseded results.
+  The homepage offers sorting of that subset; filtering and older results are on the
+  complete results page.
   A result reported and not yet replayed here is a row like any other, its status
   `recorded`. A row shows its records and opens its result’s popover (**Row popovers**,
-  above), as the same row of the results page does, and links nowhere else.
+  above), as the same row of the results page does.
+  Its ordinary result link also reaches the complete result article without scripts.
   The section holds no card or bulleted list, and the “See all results” line, with the
   right arrow, follows the table.
 

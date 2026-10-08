@@ -614,3 +614,49 @@ def test_published_registry_dates_remain_authoritative_after_bootstrap_fix(
     assert "first publication retained" in failures(
         site_urls.check_history([corrected], baseline)
     )
+
+
+def test_overview_writer_emits_every_registered_crawl_output(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The real producer writes its crawler/withdrawal outputs, not only a preview."""
+    monkeypatch.setattr(render_overview, "asset_files", lambda _pages: {})
+    monkeypatch.setattr(render_overview, "support_files", dict)
+    files, assets = site_urls.crawl_files()
+    assert set(files) == {"404.html", "sitemap.xml", "result/t-117.html", "result/t-118.html"}
+    render_overview.write_site(tmp_path, ())
+    assert all(
+        (tmp_path / name).read_text(encoding="utf-8") == text for name, text in files.items()
+    )
+    assert all(
+        (tmp_path / "assets" / name).read_bytes() == data for name, data in assets.items()
+    )
+    assert (
+        sum(path.stat().st_size for path in tmp_path.rglob("*") if path.is_file()) < 10_000_000
+    )
+
+
+def test_every_partial_paper_or_workbench_check_stages_the_shared_card() -> None:
+    from sqpack.yamlio import safe_load  # noqa: PLC0415
+
+    workflow = safe_load((site_urls.REPO / ".github/workflows/pages.yml").read_text())
+    jobs = workflow["jobs"]
+    checked = []
+    for name, job in jobs.items():
+        for step in job.get("steps", []):
+            command = step.get("run", "")
+            if (
+                "--partial --producer paper:" in command
+                or "--partial --producer workbench" in command
+            ):
+                card = "python -m devtools.social_card --output-dir site"
+                publication = "python -m devtools.check_published_site --local site --partial"
+                assert card in command, name
+                assert command.index(card) < command.index(publication), name
+                checked.append(name)
+    assert set(checked) == {
+        "n11-optimality-review",
+        "n11-threshold-bound-review",
+        "workbench",
+        "pdf",
+    }

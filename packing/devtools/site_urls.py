@@ -881,17 +881,24 @@ def _write(path: Path, text: str) -> None:
         output.write_text(text, encoding="utf-8")
 
 
-def write_crawl_files(directory: Path, rows: Sequence[SiteURL] | None = None) -> None:
-    from devtools.site_assets import write_assets  # noqa: PLC0415
-
+def crawl_files(
+    rows: Sequence[SiteURL] | None = None,
+) -> tuple[dict[str, str], dict[str, bytes]]:
+    """The overview producer's crawl pages, retained withdrawals and shared assets."""
     rows = list(rows) if rows is not None else load_registry()
     _require_valid(rows)
     page, assets = render_not_found(rows)
-    _write(directory / "sitemap.xml", render_sitemap(rows))
-    _write(directory / "404.html", page)
-    for row in rows:
-        if row.status == "withdrawn":
-            _write(directory / row.path, render_tombstone(row))
+    files = {"sitemap.xml": render_sitemap(rows), "404.html": page}
+    files.update((row.path, render_tombstone(row)) for row in rows if row.status == "withdrawn")
+    return files, assets
+
+
+def write_crawl_files(directory: Path, rows: Sequence[SiteURL] | None = None) -> None:
+    from devtools.site_assets import write_assets  # noqa: PLC0415
+
+    files, assets = crawl_files(rows)
+    for name, text in files.items():
+        _write(directory / name, text)
     write_assets(directory, assets)
 
 

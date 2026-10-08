@@ -1,24 +1,15 @@
-"""Every formula on the site's pages is set in the face its place asks for, in a browser.
+"""Prepared formulas use the face required by their actual browser text context.
 
-Math takes the face of the text around it, serif in serif prose and sans in sans text,
-and a headline of mathematics standing alone is serif though the headline is sans
-(`templates/paper-design.md`, Math). The face is chosen in the browser, from the text's
-computed face, so only a browser can say what a formula was set in. This renders the
-pages that between them carry every sans surface (cards and their notes, popovers, chips,
-tables and their disclosures, a case record's panels), opens each once in Chromium, has
-its math typeset and walks every formula with the probe `devtools.preview_site` fails a
-build on. A wrong face on any of them fails here; `preview_site --shots` is the same
-walk over every page of a built site.
-
-Each page is rendered and walked once, in a module fixture, so no test carries a page's
-load in its own call time. Skipped where no Chromium can be launched; `SQPACK_CHROMIUM`
-names one the environment supplies, as the other browser tools read it.
+Serif prose uses serif mathematics; sans text uses sans mathematics, while a
+headline consisting only of mathematics is serif. The walk checks complete canonical
+pages and fetched case articles using their prepared visual trees and retained MathML,
+with a controlled wrong-profile mutation proving that a face mismatch is detected.
+The shared browser launcher fails when an installed-browser gate cannot launch it.
 """
 
 from __future__ import annotations
 
 import html
-import os
 import re
 import socket
 from collections.abc import Iterator, Sequence
@@ -30,8 +21,7 @@ import pytest
 from devtools import render_case_pages, render_overview
 from devtools.measure_site_pages import MATH_FACES
 from devtools.preview_site import MATH_FACE, press, serve, settle_math
-from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
-from tests import site_renders
+from tests import site_browser, site_renders
 
 SANS_TEXT = "Source Sans 3 Variable"
 SERIF_MATH, SANS_MATH = "KPress Math Text", "KPress Math Text Sans"
@@ -45,9 +35,9 @@ CASES = (11, 29)
 ROW_HEADLINE = re.compile(
     r'<p class="site-popover-value" id="(pop-result-t-\d+)-title">(.*?)</p>', re.DOTALL
 )
-#: A formula as the page carries it before it is typeset: its TeX, HTML-escaped.
+#: One actual semantic MathML tree retained beside a statically prepared formula.
 FORMULA = re.compile(
-    r'<span class="kpress-math-render" aria-hidden="true">\\\((.*?)\\\)</span>'
+    r'<span class="kpress-math-semantic">(<math\b.*?</math>)</span>', re.DOTALL
 )
 
 #: A walk's findings: the formulas set in the wrong face, and every formula counted by
@@ -57,12 +47,9 @@ Walk = tuple[list[str], dict[tuple[str, str, str], dict[str, Any]]]
 
 @pytest.fixture(scope="module")
 def browser() -> Iterator[Any]:
-    sync_api = pytest.importorskip("playwright.sync_api")
+    sync_api = site_browser.api()
     with sync_api.sync_playwright() as driver:
-        try:
-            launched = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
-        except sync_api.Error as error:
-            pytest.skip(f"no Chromium to launch: {error.message.splitlines()[0]}")
+        launched = site_browser.launch(driver)
         yield launched
         launched.close()
 
@@ -73,13 +60,17 @@ def root(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 
 def walk(
-    browser: Any, address: str, *, presses: Sequence[str], whole: bool, ready: str = ""
+    browser: Any,
+    address: str,
+    *,
+    presses: Sequence[str],
+    whole: bool,
+    ready: str = "",
+    shown_popover: str = "",
 ) -> Walk:
-    """Open `address`, press each of `presses`, and walk its formulas. `whole` first
-    scrolls the page through to its foot, which places what it lays out lazily and
-    typesets all its math; without it the walk reads what the page has typeset by the
-    time the last press's own math is done. `ready` names what a page fetches, which the
-    walk waits for first."""
+    """Open the actual page and walk its prepared formulas after each interaction.
+    The whole-page scroll also places lazy drawings; ready names a fetched or
+    canonical article whose content must be visible before the walk."""
     page = browser.new_page(viewport={"width": 1280, "height": 900})
     try:
         page.goto(address, wait_until="load")
@@ -89,6 +80,8 @@ def walk(
             assert settle_math(page) == 0, "math left untypeset"
         for selector in presses:
             press(page, selector)
+            if shown_popover:
+                assert page.locator(shown_popover).is_visible()
             page.keyboard.press("Escape")
         found: list[dict[str, Any]] = page.evaluate(MATH_FACES)
         rows = {(row["surface"], row["text"], row["math"]): row for row in found}
@@ -117,8 +110,7 @@ def frontier_atlas(browser: Any, root: Path) -> Walk:
 
 @pytest.fixture(scope="module")
 def served(root: Path) -> Iterator[str]:
-    """The frontier page, the record page and the records of `CASES`, served, since a
-    record is fetched; the address, with its closing slash."""
+    """The real frontier, index and two complete records, served for fetch overlays."""
     files = [
         site_renders.page("frontier.html"),
         site_renders.page(render_case_pages.CASES_PAGE),
@@ -145,14 +137,14 @@ def served(root: Path) -> Iterator[str]:
 
 @pytest.fixture(scope="module")
 def case_records(browser: Any, served: str) -> dict[int, Walk]:
-    """Each of `CASES` as a reader opens its record file, shown in the record page."""
+    """Each complete canonical case page, without a dynamic reader wrapper."""
     return {
         n: walk(
             browser,
             f"{served}{render_case_pages.case_url(n)}",
             presses=(),
             whole=True,
-            ready=f'[data-case-reader] article.site-case[data-case="{n}"]',
+            ready=f'article.site-case[data-case="{n}"]',
         )
         for n in CASES
     }
@@ -162,7 +154,7 @@ def case_records(browser: Any, served: str) -> dict[int, Walk]:
 def frontier_popover(browser: Any, served: str) -> Walk:
     """The frontier page with case 11's row pressed: its record in the case popover."""
     return walk(
-        browser, f"{served}frontier.html", presses=("#n-11 td.site-thumb svg",), whole=False
+        browser, f"{served}frontier.html", presses=("#n-11 td.site-thumb img",), whole=False
     )
 
 
@@ -228,26 +220,42 @@ def test_a_case_records_panels_set_sans_math(case_records: dict[int, Walk], n: i
 
 
 def test_the_walk_catches_serif_math_in_a_sans_headline(browser: Any, root: Path) -> None:
-    """The control: mark a headline that has words in it for serif mathematics, as every
-    popover's headline once was, and the walk names it. The headline is a result row's
-    on the results page, the first whose words carry one formula: its popover is opened
-    by its row's own trigger."""
+    """The control changes one prepared formula in a worded sans headline to the
+    serif profile. The clean baseline passes and the same walk names the wrong face,
+    from its actual semantic MathML, after its real row trigger opens it."""
     results = site_renders.html(render_overview.RESULTS_PAGE)
-    target, tex = next(
-        (target, FORMULA.findall(headline)[0])
+    target, headline, semantic = next(
+        (target, headline, FORMULA.findall(headline)[0])
         for target, headline in ROW_HEADLINE.findall(results)
         if len(FORMULA.findall(headline)) == 1 and re.match(r"\s*\w", headline)
     )
-    plain = f'<p class="site-popover-value" id="{target}-title">'
+    plain = f'<p class="site-popover-value" id="{target}-title">{headline}</p>'
     assert results.count(plain) == 1
-    # Beside the results page as the site writes it, so the assets it names are there.
-    site_renders.write(root, render_overview.RESULTS_PAGE)
-    marked = root / "marked.html"
-    marked.write_text(
-        results.replace(plain, plain.replace(" id=", ' data-math-face="serif" id=', 1)),
-        encoding="utf-8",
+    assert 'data-site-math="sans"' in headline
+    # Change the prepared profile, preserving the real visual tree and MathML.
+    damaged = plain.replace('data-site-math="sans"', 'data-site-math="serif"', 1)
+    baseline = site_renders.write(root, render_overview.RESULTS_PAGE)[
+        render_overview.RESULTS_PAGE
+    ]
+    trigger = f'tr[aria-controls="{target}"] td.site-col-date'
+    clean, _ = walk(
+        browser,
+        baseline.as_uri(),
+        presses=(trigger,),
+        whole=False,
+        shown_popover=f"#{target}",
     )
-    trigger = f'.site-row-open[popovertarget="{target}"]'
-    wrong, _ = walk(browser, marked.as_uri(), presses=(trigger,), whole=False)
+    assert clean == []
+    marked = root / "marked.html"
+    marked.write_text(results.replace(plain, damaged, 1), encoding="utf-8")
+    wrong, _ = walk(
+        browser,
+        marked.as_uri(),
+        presses=(trigger,),
+        whole=False,
+        shown_popover=f"#{target}",
+    )
     where = f"p.site-popover-value in #{target}-title"
-    assert wrong == [f"serif math in sans text: {where}: {html.unescape(tex)[:40]}"]
+    example = html.unescape(re.sub(r"<[^>]+>", "", semantic))[:40]
+    assert example
+    assert wrong == [f"serif math in sans text: {where}: {example}"]

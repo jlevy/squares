@@ -389,6 +389,7 @@ jobs:
           uv run --frozen --group dev python -m devtools.render_n11_optimality_review --site site --pdf
           uv run --frozen --group dev python -m devtools.render_n11_optimality_review --site site --check
           test -s site/papers/n11-optimality-review.pdf
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-optimality-review
           uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-optimality-review.html
 
@@ -464,7 +465,7 @@ jobs:
           SQPACK_N11_THRESHOLD_BOUND_REVIEW_BROWSER: "1"
         run: |
           uv run --frozen --all-extras --group dev pytest -q tests/test_n11_threshold_figures.py tests/test_paper_figures.py
-          uv run --frozen --all-extras --group dev pytest -q tests/test_render_n11_threshold_bound_review.py
+          uv run --frozen --all-extras --group dev pytest -q tests/test_render_n11_threshold_bound_review.py tests/test_paper_publication.py
 
       # Rendered where it is served: `site/papers/n11-threshold-bound-review.html`, with
       # its Markdown and its PDF beside it. Nothing else writes `site/papers` on this
@@ -474,6 +475,7 @@ jobs:
           uv run --frozen --group dev python -m devtools.render_n11_threshold_bound_review --site site --pdf
           uv run --frozen --group dev python -m devtools.render_n11_threshold_bound_review --site site --check
           test -s site/papers/n11-threshold-bound-review.pdf
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-threshold-bound-review
           uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-threshold-bound-review.html
 
@@ -633,7 +635,9 @@ jobs:
         run: uv run --frozen --all-extras --group dev python -m workbench_tools.build_site --check --revision "${{ github.sha }}"
 
       - name: Check every declared workbench output
-        run: uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer workbench
+        run: |
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer workbench
 
       - name: Share the workbench with the publication
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -900,6 +904,7 @@ jobs:
 
       - name: Check every declared lower-bounds paper output and static load
         run: |
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-lower-bounds-explainer
           uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-lower-bounds-explainer.html
 

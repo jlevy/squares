@@ -313,14 +313,12 @@ def evidence_links(refs: Iterable[str]) -> str:
 
 
 def thumbnail_svg(n: int) -> str:
-    """The atlas drawing of case `n`, reduced to its squares for a table cell.
+    """The case's cached 1000-unit SVG, in a reserved 50-pixel square image.
 
-    The full drawing carries exact coordinates to 28 digits and a metadata block, about
-    51 MB over the corpus; a cell 50 pixels across needs the outline of each square at
-    whole units of a 100-unit frame, half a pixel at
-    that size, one path per fill colour, and nothing else. The cell that holds it is
-    the `.site-thumb` and sizes it, so the drawing has no wrapper of its own.
+    The drawing lives at its declared atlas address and can be cached across pages.
+    The table cell sizes the image without embedding another copy of its geometry.
     """
+
     return drawing_img(n, size=50)
 
 

@@ -13,6 +13,7 @@ from __future__ import annotations
 import base64
 import html
 import itertools
+import json
 import math
 import re
 import textwrap
@@ -1047,28 +1048,50 @@ def result_table_row(
     return row, detail.popover
 
 
+def retired_result_aliases() -> dict[str, str]:
+    """Exact withdrawn result addresses retained by the published URL register."""
+    from devtools.site_urls import load_registry  # noqa: PLC0415
+
+    return {
+        Path(row.path).stem: row.path
+        for row in load_registry()
+        if row.status == "withdrawn"
+        and row.kind == "result"
+        and not row.pattern
+        and re.fullmatch(r"result/t-\d+\.html", row.path)
+    }
+
+
 def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool) -> str:
-    """A table of results as a page carries it: the tools bar (`result_filters`), every
-    result as one flat table under `result_head`, newest first (`recent_results`),
-    sortable and filterable (`overview/table.js`), and the rows' popovers after it.
+    """The complete results table or the overview's static recent selection.
 
-    Both pages' tables are this one, and they are two filters of it. They differ in
-    `defaults`, where the bar starts, with a row outside them `hidden` in the HTML, so
-    the first paint is already filtered; and in `here`, which is the results page, where
-    each row is the result's own address (`result_table_row`). Every row opens its
-    popover, which carries its records, in both, and a row links to the results page only
-    where its status names the results that supersede it (`supersession_marks`).
+    The complete page keeps every result and its filtering tools, with rows outside
+    the defaults hidden at first paint. The overview emits only rows selected by its
+    published reference date and RECENT_DEFAULTS, followed by an ordinary link to the
+    complete table. Supported query state travels through that link.
 
-    No heading divides the rows. Whose a result is, and what it builds on, is read from
-    its credit (`credit_cell`), and the Source filter narrows the table to this
-    project's results or to others'.
+    Both use the same cells and record popovers. Complete-table rows own their
+    canonical fragment IDs; overview rows name the same result with data-result.
     """
+
     results = recent_results(overview)
     reference = reference_date(overview)
     if not here:
         results = [
             result for result in results if shown_by_default(result, defaults, reference)
         ]
+    aliases = retired_result_aliases()
+    retired = json.dumps(aliases, separators=(",", ":")) if not here else ""
+    notices = (
+        "".join(
+            f'<p class="site-withdrawn-result" id="{_esc(name)}">'
+            f'{_esc(name.upper())} was withdrawn. <a href="{_esc(path)}">'
+            f"{_esc(name.upper())} withdrawal explanation</a>.</p>"
+            for name, path in aliases.items()
+        )
+        if here
+        else ""
+    )
     body = []
     popovers = []
     for result in results:
@@ -1085,13 +1108,16 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
             else f'<p class="site-recent-scope">{len(results)} recent results of significance '
             "S3 or higher, "
             "from the last 180 days, excluding superseded results. "
-            '<a href="all-results.html" data-all-results>Browse and filter every '
+            '<a href="all-results.html" data-all-results '
+            f'data-result-ids="{_esc(" ".join(r.id.lower() for r in overview.results))}" '
+            f'data-retired-results="{_esc(retired)}">'
+            "Browse and filter every "
             "result</a>.</p>"
         )
         + '<div class="site-table-wrap">'
         '<table class="kpress-table site-table site-results" data-site-table>'
         f"{result_head()}"
-        f"<tbody>{''.join(body)}</tbody></table></div>"
+        f"<tbody>{''.join(body)}</tbody></table></div>{notices}"
         f"{rung_legend(here=here)}{''.join(popovers)}</div>"
     )
 
@@ -1342,10 +1368,11 @@ def _ladder_grid(heads: dict[str, str], label: str, frame: str) -> str:
 
 
 def recent_results(overview: Overview) -> list[Result]:
-    """Every result, newest first: by the date the table shows, then by id. It is the
-    order of both tables of results. What makes the overview's table recent is its
-    bar's defaults (`RECENT_DEFAULTS`), which a reader can change, and never a cut the
-    page makes for them."""
+    """Every result ordered by displayed date, then ID, newest first.
+
+    The complete table uses this whole list. The overview selects its static recent
+    subset from it with RECENT_DEFAULTS and the publication's reference date.
+    """
     return sorted(overview.results, key=lambda r: (first_day(r.dated[1]), r.id), reverse=True)
 
 

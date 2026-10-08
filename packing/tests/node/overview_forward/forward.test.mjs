@@ -21,12 +21,21 @@ const EXPLAINER = "papers/n11-lower-bounds-explainer.html";
  * leaves them where they are. `moved` is the page's `data-moved-to`, which only a
  * forwarder page has.
  * @param {string} hash
- * @param {{ search?: string, ids?: readonly string[], moved?: string, fileMoved?: string, caseNumbers?: string, protocol?: string }} [options]
+ * @param {{ search?: string, ids?: readonly string[], results?: readonly string[], retired?: string, moved?: string, fileMoved?: string, caseNumbers?: string, protocol?: string }} [options]
  * @returns {string | null}
  */
 function forwarded(
   hash,
-  { search = "", ids = [], moved, fileMoved, caseNumbers, protocol = "https:" } = {},
+  {
+    search = "",
+    ids = [],
+    results = ["t-018", "t-031", "t-037"],
+    retired = '{"t-117":"result/t-117.html","t-118":"result/t-118.html"}',
+    moved,
+    fileMoved,
+    caseNumbers,
+    protocol = "https:",
+  } = {},
 ) {
   /** @type {string | null} */
   let target = null;
@@ -37,6 +46,15 @@ function forwarded(
       documentElement: { dataset: { movedTo: moved, fileMovedTo: fileMoved, caseNumbers } },
       /** @param {string} id */
       getElementById: (id) => (ids.includes(id) ? {} : null),
+      querySelector: () => ({
+        /** @param {string} name */
+        getAttribute: (name) =>
+          name === "data-result-ids"
+            ? results.join(" ")
+            : name === "data-retired-results"
+              ? retired
+              : null,
+      }),
     },
     window: {
       location: {
@@ -62,6 +80,47 @@ void test("the old results section goes to the results page", () => {
 void test("a result's row goes to its row on the results page", () => {
   assert.equal(forwarded("#t-018"), "all-results.html#t-018");
   assert.equal(forwarded("#t-037", { search: "?x=1" }), "all-results.html?x=1#t-037");
+  assert.equal(
+    forwarded("#%74-031", { search: "?kind=rigidity&current=true" }),
+    "all-results.html?kind=rigidity&current=true#%74-031",
+  );
+});
+
+void test("only statically registered results forward, with current page ids taking precedence", () => {
+  for (const hash of ["#t-999", "#t-31", "#T-031", "#t-031%2Foutside", "#%E0%A4"]) {
+    assert.equal(forwarded(hash), null, hash);
+  }
+  assert.equal(forwarded("#t-031", { results: [] }), null);
+  assert.equal(forwarded("#t-031", { ids: ["t-031"] }), null);
+});
+
+void test("registered retired result fragments forward to their own explanatory tombstones", () => {
+  for (const { hash, path } of [
+    { hash: "#t-117", path: "result/t-117.html" },
+    { hash: "#%74-118", path: "result/t-118.html" },
+  ]) {
+    assert.equal(
+      forwarded(hash, { search: "?current=true&review=legacy" }),
+      `${path}?current=true&review=legacy${hash}`,
+    );
+  }
+  assert.equal(forwarded("#t-117", { ids: ["t-117"] }), null);
+});
+
+void test("retired result metadata fails closed for malformed or unsafe destinations", () => {
+  for (const retired of [
+    "{",
+    "null",
+    "[]",
+    '{"t-117":"https://elsewhere.test/result/t-117.html"}',
+    '{"t-117":"../result/t-117.html"}',
+    '{"t-117":"result/t-118.html"}',
+    '{"t-117":"result/t-117.html?redirect=elsewhere"}',
+  ]) {
+    assert.equal(forwarded("#t-117", { retired }), null, retired);
+  }
+  assert.equal(forwarded("#t-999"), null);
+  assert.equal(forwarded("#%E0%A4"), null);
 });
 
 void test("known explainer fragments and certificate selectors retain their target", () => {

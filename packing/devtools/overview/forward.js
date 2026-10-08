@@ -144,11 +144,27 @@
   if (document.getElementById(id)) {
     return;
   }
+  const all = document.querySelector("[data-all-results]");
+  const retired = (() => {
+    try {
+      const aliases = JSON.parse(all?.getAttribute("data-retired-results") ?? "{}");
+      return /^t-\d+$/.test(id) && Object.hasOwn(aliases, id) && aliases[id] === `result/${id}.html`
+        ? aliases[id]
+        : null;
+    } catch {
+      return null;
+    }
+  })();
+  if (retired) {
+    forward(retired);
+    return;
+  }
+  const registered = (all?.getAttribute("data-result-ids") ?? "").split(/\s+/);
   const result =
     id === "every-result" ||
     id === "verification-ladders" ||
     id === "verification-at-a-glance" ||
-    /^t-\d+$/.test(id);
+    registered.includes(id);
   if (result) {
     forward("all-results.html");
   } else if (id === "the-frontier-survey" || id === "the-survey") {

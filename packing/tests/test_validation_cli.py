@@ -4022,6 +4022,10 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
     for job_name in ("suite-a", "suite-b", "suite-c", "suite-d"):
         assert not _installs_chromium(document["jobs"][job_name], pull_request=True), job_name
     assert set(validate.SITE_LAYOUT_TESTS) == {
+        "tests/test_site_case_records.py",
+        "tests/test_site_math_faces.py",
+        "tests/test_site_column_measurement.py",
+        "tests/test_site_result_filters.py",
         "tests/test_site_result_columns.py",
         "tests/test_site_frontier_table.py",
         "tests/test_site_rendering.py",
@@ -4047,7 +4051,7 @@ def test_a_frontend_job_without_chromium_is_detected() -> None:
     assert _installs_chromium(document["jobs"]["validate"], pull_request=False)
 
 
-def test_the_site_layout_step_requires_a_chromium_and_runs_its_two_files(
+def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """The step fails rather than skips when no Chromium launches: it sets the name

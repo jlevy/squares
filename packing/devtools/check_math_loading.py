@@ -22,6 +22,7 @@ from devtools.render_n11_lower_bounds_explainer_pdf import (
     READY,
     SETTLED,
 )
+from devtools.site_assets import read_inline_page
 from sqpack.probes import applied, probe
 
 #: The probes this module hands the page, one file each under `probes/`.
@@ -310,7 +311,7 @@ def self_test(
     browser_name: Literal["chromium", "firefox", "webkit"] = "chromium",
 ) -> SelfTestReport:
     """Prove in a browser that retained faults make the loading guard fail."""
-    html = path.read_text(encoding="utf-8")
+    html = read_inline_page(path)
     if "</head>" not in html:
         raise ValueError("self-test requires the generated HTML page with a closing head tag")
     baseline = check_loading(path, width=width, browser_name=browser_name)

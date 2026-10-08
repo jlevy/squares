@@ -110,7 +110,7 @@ def case_popover() -> str:
         f'<button type="button" class="site-popover-close" popovertarget="{CASE_POPOVER_ID}" '
         'popovertargetaction="hide" aria-label="Close">\u00d7</button>'
         '<span class="site-card-label">Case record</span>'
-        '<div class="site-case-pop-body" data-case-body></div>'
+        '<div class="site-case-pop-body" data-case-body data-kpress-prose-font="sans"></div>'
         '<p class="site-popover-actions"><a class="site-popover-action" data-go="page" '
         f'data-case-open href="{CASES_HOME}">Open the Case Record</a></p>'
         "</div>"
