@@ -1,17 +1,15 @@
-"""The case records in a browser, served as the deployed site serves them (think-t21m).
+"""Complete canonical case pages and fetched overlays behave as the published site.
 
-A case's record is fetched, by the record page and by every case popover, so these
-checks need a server: a page read from a file cannot fetch another file. They hold the
-three ways in to one record: a frontier row and an atlas cell open it in the case
-popover, which steps to the neighbouring case in place; a record file sends a reader on
-to the record page, which shows it and keeps the record's own address in the bar; and
-the old one-page address, `cases.html#n-17`, still arrives at case 17. Without scripts,
-a record file is read where it is.
+Frontier rows and atlas cells open the same prepared article in a popover, with
+stepping and focus restoration. Each case URL serves its full article before scripts
+run; ordinary links navigate between canonical pages, including without JavaScript.
+Legacy case selectors resolve known records and unknown counts leave the index safe.
 """
 
 from __future__ import annotations
 
 import contextlib
+import re
 import socket
 from collections.abc import Iterator
 from pathlib import Path
@@ -20,13 +18,14 @@ from typing import Any
 import pytest
 
 from devtools import render_case_pages, render_overview
-from devtools.preview_site import serve, settle_math
+from devtools.preview_site import serve
 from sqpack.probes import probe
 from tests import site_browser, site_renders
 
 PROBES = Path(__file__).resolve().parent / "probes"
 FIGURE = probe(PROBES, "case_popover_figure/figure")
 CROSS = probe(PROBES, "case_popover_head/cross")
+EXERCISED_CASES = (10, 11, 12, 13, 14, 17, 29, 32)
 
 
 def _free_port() -> int:
@@ -37,16 +36,18 @@ def _free_port() -> int:
 
 @pytest.fixture(scope="module")
 def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
-    """The overview, the frontier, the record page, every record file and the
-    forwarders, served on a local address; the address, with its closing slash."""
+    """Publish real pages and only the eight case files these tests exercise."""
     root = Path(tmp_path_factory.mktemp("cases"))
     files = [
         site_renders.page("index.html"),
         site_renders.page("frontier.html"),
         site_renders.page(render_case_pages.CASES_PAGE),
         *(
-            render_overview.Page(name, text)
-            for name, text in site_renders.case_records().items()
+            render_overview.Page(
+                render_case_pages.case_url(n),
+                site_renders.case_records()[render_case_pages.case_url(n)],
+            )
+            for n in EXERCISED_CASES
         ),
         *render_overview.forwarder_pages(),
     ]
@@ -97,10 +98,14 @@ def test_a_frontier_row_opens_its_record_and_steps_to_the_next(
         page.goto(f"{served}frontier.html", wait_until="load")
         row = page.locator("#n-12")
         row.scroll_into_view_if_needed()
-        row.locator("td.site-thumb svg").click()
+        row.locator("td.site-thumb img").click()
         popover = page.locator("#pop-case")
         popover.locator("[data-case-body] article.site-case").wait_for()
         assert popover.is_visible()
+        assert (
+            popover.locator("[data-case-body]").get_attribute("data-kpress-prose-font")
+            == "sans"
+        )
         assert _shown_case(popover) == "12"
         assert row.get_attribute("aria-expanded") == "true"
         assert popover.locator(".site-case-summary figure svg").count() == 1
@@ -179,7 +184,7 @@ def test_the_popovers_drawing_fills_its_width_at_its_own_line_weight(
             page.goto(f"{served}frontier.html", wait_until="load")
             row = page.locator("#n-10")
             row.scroll_into_view_if_needed()
-            row.locator("td.site-thumb svg").click()
+            row.locator("td.site-thumb img").click()
         else:
             page.goto(served, wait_until="load")
             page.locator("[data-atlas-grid]").scroll_into_view_if_needed()
@@ -223,7 +228,7 @@ def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
         page.goto(f"{served}frontier.html", wait_until="load")
         row = page.locator("#n-10")
         row.scroll_into_view_if_needed()
-        row.locator("td.site-thumb svg").click()
+        row.locator("td.site-thumb img").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="10"]').wait_for()
         head = page.evaluate(CROSS)
@@ -233,53 +238,105 @@ def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
         assert head["next_right"] <= head["cross_left"] + 0.5, head
 
 
-def test_a_record_file_shows_in_the_record_page_at_its_own_address(
+def _canonical_case(page: Any, n: int) -> None:
+    """The complete article, prepared math and identity at a case's own URL."""
+    article = page.locator(f'article.site-case[data-case="{n}"]')
+    article.wait_for(state="visible")
+    assert page.locator("h1").count() == 1
+    assert article.locator("h1#case-title").inner_text().startswith(f"n = {n}")
+    assert page.title() == render_overview.page_title(
+        f"{n} Unit Squares in a Square: Bounds and Best Packing"
+    )
+    assert page.locator('link[rel="canonical"]').get_attribute("href") == (
+        render_overview.canonical_url(render_case_pages.case_url(n))
+    )
+    assert article.locator('[data-kpress-math-prepared="true"] .katex-html').count() > 0
+    assert article.locator(".kpress-math-semantic math").count() > 0
+
+
+@pytest.mark.parametrize("scripts", [True, False])
+@pytest.mark.parametrize("width", [1280, 390])
+def test_a_record_file_serves_its_complete_page_and_navigates_ordinary_links(
+    browser: Any, served: str, *, scripts: bool, width: int
+) -> None:
+    """Canonical articles are present in the initial response; next/back/index
+    navigation works on desktop and phone with and without JavaScript."""
+    with _page(browser, scripts=scripts, width=width) as page:
+        documents: list[str] = []
+        page.on(
+            "request",
+            lambda request: (
+                documents.append(request.url) if request.resource_type == "document" else None
+            ),
+        )
+        address = f"{served}cases/11.html"
+        response = page.goto(address, wait_until="load")
+        assert response is not None
+        assert response.status == 200
+        initial = response.text()
+        assert re.search(r'<article\b[^>]*\bdata-case="11"', initial)
+        assert 'data-kpress-math-prepared="true"' in initial
+        assert documents == [address]
+        assert page.url == address
+        _canonical_case(page, 11)
+        page.locator('article.site-case a[data-case-step="12"]').click()
+        page.wait_for_url(f"{served}cases/12.html", wait_until="load")
+        assert documents[-1] == f"{served}cases/12.html"
+        _canonical_case(page, 12)
+        page.go_back(wait_until="load")
+        assert page.url == address
+        _canonical_case(page, 11)
+        page.locator("article.site-case a[data-case-index]").click()
+        page.wait_for_url(f"{served}cases/", wait_until="load")
+        assert page.locator("h1#case-records").text_content() == "Case Records"
+        assert page.locator("nav[data-case-index] a[data-case]").count() == 324
+        assert page.locator('link[rel="canonical"]').get_attribute("href") == (
+            render_overview.canonical_url(render_case_pages.CASES_PAGE)
+        )
+
+
+def test_the_old_one_page_address_arrives_at_the_complete_case(
     browser: Any, served: str
 ) -> None:
-    """A shared link to `cases/11.html` lands on the record page showing case 11, with
-    `cases/11.html` still in the bar and the record's own title; its steps move to the
-    neighbouring case in place, and All cases goes back to the index."""
-    with _page(browser) as page:
-        page.goto(f"{served}cases/11.html", wait_until="load")
-        page.wait_for_url(f"{served}cases/11.html")
-        reader = page.locator("[data-case-reader]")
-        reader.locator('article.site-case[data-case="11"]').wait_for()
-        settle_math(page)
-        assert page.title() == "n = 11 · Case Records · The Squares Project"
-        assert not page.locator(".site-case-front").is_visible()
-        reader.locator('a[data-case-step="12"]').click()
-        reader.locator('article.site-case[data-case="12"]').wait_for()
-        assert page.url == f"{served}cases/12.html"
-        page.go_back()
-        reader.locator('article.site-case[data-case="11"]').wait_for()
-        assert page.url == f"{served}cases/11.html"
-        reader.locator("a[data-case-index]").click()
-        page.locator("nav[data-case-index]").wait_for()
-        assert page.url == f"{served}cases/"
-        assert page.locator(".site-case-front").is_visible()
-
-
-def test_the_old_one_page_address_arrives_at_the_case(browser: Any, served: str) -> None:
     with _page(browser) as page:
         page.goto(f"{served}cases.html#n-17", wait_until="load")
-        page.wait_for_url(f"{served}cases/17.html")
-        page.locator('[data-case-reader] article.site-case[data-case="17"]').wait_for()
+        page.wait_for_url(f"{served}cases/17.html", wait_until="load")
+        _canonical_case(page, 17)
 
 
-def test_a_record_that_cannot_be_fetched_does_not_trap_back(browser: Any, served: str) -> None:
-    """An address naming a case with no record file sends the reader to the file itself,
-    in place of the address, so Back returns to where the reader came from."""
-    with _page(browser) as page:
+@pytest.mark.parametrize("scripts", [True, False])
+def test_unknown_cases_leave_a_readable_index_or_404_and_do_not_trap_back(
+    browser: Any, served: str, *, scripts: bool
+) -> None:
+    """An unknown selector stays on the complete index; a missing record returns
+    HTTP 404 at its own address. Both preserve ordinary Back navigation."""
+    with _page(browser, scripts=scripts) as page:
         page.goto(f"{served}frontier.html", wait_until="load")
-        page.goto(f"{served}cases/?n=999", wait_until="load")
-        page.wait_for_url(f"{served}cases/999.html?raw")
+        unknown = f"{served}cases/?n=999"
+        response = page.goto(unknown, wait_until="load")
+        assert response is not None
+        assert response.status == 200
+        assert page.url == unknown
+        assert page.locator("h1#case-records").text_content() == "Case Records"
+        assert page.locator("nav[data-case-index] a[data-case]").count() == 324
+        assert page.locator("article.site-case").count() == 0
+        page.go_back(wait_until="load")
+        assert page.url == f"{served}frontier.html"
+        missing = f"{served}cases/999.html"
+        response = page.goto(missing, wait_until="load")
+        assert response is not None
+        assert response.status == 404
+        assert page.url == missing
         page.go_back(wait_until="load")
         assert page.url == f"{served}frontier.html"
 
 
 def test_without_scripts_a_record_file_is_read_where_it_is(browser: Any, served: str) -> None:
     with _page(browser, scripts=False) as page:
-        page.goto(f"{served}cases/29.html", wait_until="load")
+        response = page.goto(f"{served}cases/29.html", wait_until="load")
+        assert response is not None
+        assert response.status == 200
+        assert re.search(r'<article\b[^>]*\bdata-case="29"', response.text())
         assert page.url == f"{served}cases/29.html"
-        assert page.locator('article.site-case[data-case="29"]').is_visible()
+        _canonical_case(page, 29)
         assert page.locator("article.site-case figure svg").count() == 1

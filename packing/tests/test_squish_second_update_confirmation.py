@@ -8,6 +8,7 @@ import gzip
 import json
 import lzma
 import shutil
+from fractions import Fraction
 from pathlib import Path
 
 import pytest
@@ -109,6 +110,141 @@ def test_complete_canonical_scope_and_historical_equality(private: Path) -> None
     assert confirmation.shared.REVISION == "5e32bbd7028b6e3b869979278079cd37ed6770aa"
 
 
+def _small_checked_witness() -> tuple[dict, dict]:
+    witness = confirmation.original.to_witness(
+        {"n": 1, "side": "2", "squares": [{"x": "0", "y": "0", "t": "0"}]}
+    )
+    return witness, confirmation.original.checker_input(witness)
+
+
+def test_checked_input_reuses_exact_fields_and_normalizes_equivalent_spelling(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    witness, checked = _small_checked_witness()
+    normalize = confirmation.original.checker_input
+    calls = 0
+
+    def counted(value: dict, *, receipt: bool = False) -> dict:
+        nonlocal calls
+        calls += 1
+        return normalize(value, receipt=receipt)
+
+    monkeypatch.setattr(confirmation.original, "checker_input", counted)
+    assert confirmation.input_matching_checked(witness, checked) == checked
+    assert confirmation.input_matching_checked(checked, checked, receipt=True) == checked
+    assert calls == 0
+    coordinate = Fraction(witness["squares"][0]["corners"][0][0])
+    witness["squares"][0]["corners"][0][0] = (
+        f"{2 * coordinate.numerator}/{2 * coordinate.denominator}"
+    )
+    assert confirmation.input_matching_checked(witness, checked) == checked
+    assert calls == 1
+    witness["squares"][0]["corners"][0][0] = str(coordinate + 1)
+    assert confirmation.input_matching_checked(witness, checked) != checked
+    assert calls == 2
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "n-bool",
+        "id-bool",
+        "numeric-corner",
+        "dispatch",
+        "claim-none",
+        "claim-list",
+        "claim-text",
+    ],
+)
+def test_checked_input_cannot_bypass_type_or_dispatch_predicates(mutation: str) -> None:
+    witness, checked = _small_checked_witness()
+    if mutation == "n-bool":
+        witness["n"] = True
+    elif mutation == "id-bool":
+        witness["squares"][0]["id"] = True
+    elif mutation == "numeric-corner":
+        witness["squares"][0]["corners"][0][0] = 0
+    elif mutation == "dispatch":
+        witness["claim"]["method"] = "unverified"
+    else:
+        witness["claim"] = {"claim-none": None, "claim-list": [], "claim-text": "invalid"}[
+            mutation
+        ]
+    with pytest.raises(confirmation.original.PacketError):
+        confirmation.input_matching_checked(witness, checked)
+
+
+def test_admission_normalizes_each_fact_once_and_rechecks_next_call(
+    private: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assert private == confirmation.REPO
+    parsed: list[int] = []
+    parse_source_bytes = confirmation.original.parse_source_bytes
+    checker_input = confirmation.original.checker_input
+    checked_inputs = 0
+
+    def counted(raw: bytes, expected_n: int) -> tuple[dict, bytes]:
+        parsed.append(expected_n)
+        return parse_source_bytes(raw, expected_n)
+
+    def counted_input(value: dict, *, receipt: bool = False) -> dict:
+        nonlocal checked_inputs
+        checked_inputs += 1
+        return checker_input(value, receipt=receipt)
+
+    monkeypatch.setattr(confirmation.original, "parse_source_bytes", counted)
+    monkeypatch.setattr(confirmation.original, "checker_input", counted_input)
+    for _ in range(2):
+        parsed.clear()
+        checked_inputs = 0
+        assert tuple(confirmation.admit_certification()) == confirmation.NUMBERS
+        assert parsed == list(confirmation.NUMBERS)
+        assert checked_inputs == len(confirmation.NUMBERS) * len(confirmation.JOBS)
+
+    target = confirmation.fact_path(88)
+    fact = json.loads(gzip.decompress(target.read_bytes()))
+    fact["printed_side"] = "0.0"
+    target.write_bytes(gzip.compress(confirmation.shared.json_bytes(fact)))
+    parsed.clear()
+    with pytest.raises(confirmation.original.PacketError):
+        confirmation.admit_certification()
+    assert parsed == list(confirmation.NUMBERS)
+
+
+@pytest.mark.parametrize("mutation", ["fact", "private-link"])
+def test_admission_rejects_input_changed_after_its_last_use(
+    private: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mutation: str
+) -> None:
+    assert private == confirmation.REPO
+    read_receipt = confirmation.shared.read_xz_receipt
+    changed = False
+
+    def mutate_after_earlier_case(path: Path) -> dict:
+        nonlocal changed
+        value = read_receipt(path)
+        if path == confirmation.case_path(confirmation.NUMBERS[-1]):
+            target = confirmation.fact_path(88)
+            if mutation == "fact":
+                fact = json.loads(gzip.decompress(target.read_bytes()))
+                fact["printed_side"] = "0.0"
+                target.write_bytes(gzip.compress(confirmation.shared.json_bytes(fact)))
+            else:
+                external = tmp_path / "outside-fact.json.gz"
+                external.write_bytes(target.read_bytes())
+                target.unlink()
+                target.symlink_to(external)
+            changed = True
+        return value
+
+    monkeypatch.setattr(confirmation.shared, "read_xz_receipt", mutate_after_earlier_case)
+    with pytest.raises(
+        confirmation.original.PacketError,
+        match=r"confirmation facts changed|private confirmation input",
+    ):
+        confirmation.admit_certification()
+    assert changed
+
+
 @pytest.fixture
 def linked_proofs(private: Path) -> Path:
     store = private.parent / "proof-store"
@@ -157,6 +293,40 @@ def test_linked_proof_standalone_checks_complete_proof_and_invalid_paths(
         path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
         for path in invalid_paths
     }
+
+
+def test_linked_proof_batch_admits_exact_roster_and_refuses_other_escapes(
+    linked_proofs: Path,
+) -> None:
+    paths = [
+        confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+        for n in confirmation.NUMBERS
+    ]
+    paths += [
+        "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
+        "../outside.yaml",
+        "/outside.yaml",
+    ]
+    batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
+    assert set(batched) == set(paths)
+    assert {path: batched[path] for path in paths[9:]} == {
+        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
+        for path in paths[9:]
+    }
+    assert all(batched[path] is None for path in paths[:9])
+    assert all(batched[path] for path in paths[9:])
+    assert all(confirmation.linked_certificate_problems(paths, repository=SOURCE).values())
+
+
+@pytest.mark.parametrize("n", confirmation.NUMBERS)
+def test_linked_proof_batch_matches_a_fresh_standalone_check(
+    linked_proofs: Path, n: int
+) -> None:
+    relative = confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+    batched = confirmation.linked_certificate_problems([relative], repository=linked_proofs)
+    standalone = confirmation.linked_certificate_problem(relative, repository=linked_proofs)
+    assert batched == {relative: standalone}
+    assert standalone is None
 
 
 @pytest.mark.parametrize("mutation", ["misbound", "malformed"])

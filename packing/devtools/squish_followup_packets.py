@@ -686,6 +686,11 @@ def check_certification(
     return rows
 
 
+def _check_certificate(n: int) -> dict[str, Any]:
+    """Check one complete certificate's metadata and input without geometry replay."""
+    return _check_certificate_input(n)
+
+
 def restore_witnesses() -> None:
     """Recover deterministic proof files offline from admitted retained facts/receipts."""
     rows, _controls = admit_certification()
@@ -704,29 +709,49 @@ def restore_witnesses() -> None:
         save_certificate(path, data)
 
 
+def linked_certificate_problem(path: str, *, repository: Path) -> str | None:
+    return linked_certificate_problems([path], repository=repository)[path]
+
+
 def linked_certificate_problems(
     paths: Iterable[str], *, repository: Path
 ) -> dict[str, str | None]:
-    """Admit a complete private replay once, retaining per-proof refusal diagnostics."""
+    """Admit one call's complete private custody and check every selected linked proof.
+
+    Only the worker's twelve declared proof paths can use its linked proof directory.
+    Every invocation rereads the full facts and replay receipts; each eligible leaf
+    still gets the certification CLI's metadata and geometry checks. Mutation targets
+    and producer outputs retain their separate containment guards.
+    """
     selected = dict.fromkeys(paths)
-    problems: dict[str, str | None] = dict.fromkeys(selected, "resolves outside the repository")
     if repository.resolve() != REPO.resolve() or not WITNESSES.is_symlink():
-        return problems
+        return dict.fromkeys(selected, "resolves outside the repository")
     declared = {certificate_path(n).relative_to(REPO).as_posix(): n for n in RESULT_NUMBERS}
-    eligible = {
-        path: declared[path]
-        for path in selected
-        if path in declared and not certificate_path(declared[path]).is_symlink()
-    }
+    eligible: dict[str, int] = {}
+    problems: dict[str, str | None] = {}
+    for path in selected:
+        n = declared.get(path)
+        if n is None or certificate_path(n).is_symlink():
+            problems[path] = "resolves outside the repository"
+        else:
+            eligible[path] = n
     if not eligible:
         return problems
     try:
-        admit_certification()
+        _ = admit_certification()
     except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
-        for path in eligible:
-            problems[path] = f"linked reviewed proof custody mismatch: {error}"
+        problems.update(
+            dict.fromkeys(eligible, f"linked reviewed proof custody mismatch: {error}")
+        )
         return problems
     for path, n in eligible.items():
+        if (
+            repository.resolve() != REPO.resolve()
+            or not WITNESSES.is_symlink()
+            or certificate_path(n).is_symlink()
+        ):
+            problems[path] = "resolves outside the repository"
+            continue
         try:
             _check_certificate_input(n)
         except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
@@ -734,11 +759,6 @@ def linked_certificate_problems(
         else:
             problems[path] = None
     return problems
-
-
-def linked_certificate_problem(path: str, *, repository: Path) -> str | None:
-    """Admit one linked proof with a fresh complete private source/receipt transaction."""
-    return linked_certificate_problems([path], repository=repository)[path]
 
 
 def confirmed_bound(n: int) -> dict[str, Any]:

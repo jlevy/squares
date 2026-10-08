@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import html
 import re
+import xml.etree.ElementTree as ET
 from fractions import Fraction
 from pathlib import Path
 
@@ -103,38 +104,35 @@ def test_the_record_page_is_served_and_the_old_page_forwards_to_it() -> None:
     assert render_overview.canonical_url(render_case_pages.CASES_PAGE).endswith("/cases/")
 
 
-def test_a_record_file_names_itself_and_sends_a_reader_with_scripts_on(
-    records: dict[str, str],
-) -> None:
-    """A record file has its own title, description, canonical address and link
-    preview, so a shared link to a case reads as that case; its one script sends a
-    reader on to the record page, and it carries no styles or shell."""
+def test_a_record_file_is_a_complete_styled_canonical_page(records: dict[str, str]) -> None:
+    """Scripts and no-script readers get the same complete record at its own address."""
     text = records["cases/29.html"]
-    assert '<html lang="en" data-case="29">' in text
-    assert "<title>n = 29 · Case Records · The Squares Project</title>" in text
+    assert "<title>29 Unit Squares in a Square: Bounds and Best Packing" in text
     canonical = render_overview.canonical_url("cases/29.html")
     assert f'<link rel="canonical" href="{canonical}">' in text
     assert f'<meta property="og:url" content="{canonical}">' in text
-    assert "Packing 29 unit squares in the smallest square" in text
-    forward = render_case_pages.CASE_FORWARD_SCRIPT.read_text(encoding="utf-8")
-    assert text.count("<script") == text.count("<script>") == 1
-    assert forward.strip() in text
-    # One small style of its own, for a plain reading, and none of the site's.
-    assert text.count("<style>") == 1
-    assert ".kpress-math-render{display:none}" in text
-    assert "kpress-shell" not in text
-    # It fetches nothing, not even the shared assets a site page links.
+    assert "Packing 29 unit squares:" in text
+    assert text.count("<h1 ") == 1
+    assert "<main " in text
+    assert 'class="kpress-site-header"' in text
+    assert 'rel="stylesheet"' in text
+    assert "BreadcrumbList" in text
+    assert "case-forward" not in text
+    assert 'data-kpress-math-rendered="true"' in text
     assert_fetches_only_assets("cases/29.html", text)
-    assert f"{site_assets.ASSETS_DIR}/" not in text
+    assert f"{site_assets.ASSETS_DIR}/" in text
 
 
 def test_every_record_file_is_small(records: dict[str, str]) -> None:
     sizes = {name: len(text.encode()) for name, text in records.items()}
-    assert max(sizes.values()) < RECORD_CEILING_BYTES, max(sizes, key=sizes.__getitem__)
+    # These cases preserve their full algebraic proofs and verified result history.
+    exceptions = {"cases/11.html": 500_000, "cases/17.html": 500_000, "cases/18.html": 350_000}
+    for name, size in sizes.items():
+        assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)
 
 
 def test_a_records_links_are_written_from_its_own_directory(
-    records: dict[str, str],
+    records: dict[str, str], tmp_path: Path
 ) -> None:
     """Every relative link in a record file resolves from `cases/`, where the record
     page that shows it also stands: a site page climbs out (`../frontier.html`), a
@@ -152,11 +150,34 @@ def test_a_records_links_are_written_from_its_own_directory(
         for url in re.findall(r'\s(?:href|src)="([^"]*)"', record)
         if not re.match(r"#|[a-zA-Z][a-zA-Z0-9+.-]*:|/", url)
     ]
-    served = {f"../{name}" for name in render_overview.SITE_PAGES} | {"./", "../"}
+    support_paths = render_overview.support_file_paths()
+    served = {f"../{name}" for name in (*render_overview.SITE_PAGES, *support_paths)} | {
+        "./",
+        "../",
+    }
     cases = {f"{n}.html" for n in site_renders.overview().cases}
     for url in relative:
         target = url.partition("#")[0].partition("?")[0]
         assert target in served or target in cases, url
+
+    linked_images = {
+        name: source
+        for name, source in render_case_pages.CASE_IMAGE_FILES.items()
+        if f'src="../{name}"' in record
+    }
+    assert linked_images
+    render_overview.write_site(
+        tmp_path, [render_overview.Page("cases/11.html", records["cases/11.html"])]
+    )
+    for name, source in linked_images.items():
+        assert name in support_paths
+        written = tmp_path / name
+        assert written.read_bytes() == source.read_bytes()
+        width, height = render_overview.image_dimensions(written)
+        image = re.search(rf'<img\b[^>]*src="\.\./{re.escape(name)}"[^>]*>', record)
+        assert image is not None
+        assert f'width="{width}"' in image[0]
+        assert f'height="{height}"' in image[0]
 
 
 @pytest.mark.parametrize(
@@ -264,7 +285,7 @@ def test_the_popover_fetches_the_record_and_opens_its_address() -> None:
     assert "<iframe" not in markup
 
 
-def test_the_record_page_reads_one_record_at_a_time(
+def test_the_case_index_links_complete_records_without_fetching(
     page: str, numbers: list[int], served: dict[str, str]
 ) -> None:
     """The record page holds no record: its reader fetches the one the address names,
@@ -275,7 +296,8 @@ def test_the_record_page_reads_one_record_at_a_time(
     assert tag.startswith('<script src="../assets/js/case-page.')
     assert page.count(tag) == 1
     assert reader.read_text(encoding="utf-8") in served[render_case_pages.CASES_PAGE]
-    assert "data-case-reader hidden" in page
+    assert "data-case-reader" not in page
+    assert "fetch(" not in reader.read_text(encoding="utf-8")
     assert '<article class="site-case"' not in page
     index = page.split('<nav class="site-case-index', 1)[1].split("</nav>", 1)[0]
     assert "data-case-index" in index
@@ -316,7 +338,7 @@ def test_every_record_opens_with_its_visual_summary(
         ]
         assert order == sorted(order), n
         assert "<svg " in record, n
-        assert f"s({n})" in record, n
+        assert f"s({n})" in html.unescape(re.sub(r"<[^>]+>", "", record)), n
         assert "data-kpress-math" in record, n
 
 
@@ -398,7 +420,8 @@ def test_case_11_carries_its_polynomial_results_verification_and_links(
 ) -> None:
     record = _record(records, 11)
     assert "Minimal polynomial, degree 8" in record
-    assert "s^8 - 20s^7" in record
+    assert "<msup><mi>s</mi><mn>8</mn></msup>" in record
+    assert "<msup><mi>s</mi><mn>7</mn></msup>" in record
     for result in ("T-018", "T-026", "T-033"):
         assert f'<a href="../all-results.html#{result.lower()}">{result}</a>' in record
     assert '<a href="../frontier.html#n-11">' in record
@@ -561,8 +584,8 @@ def test_a_link_to_a_record_file_is_marked_for_the_case_popover() -> None:
 def test_the_record_page_lists_no_heading_it_does_not_show(page: str) -> None:
     """kpress lists every heading of a page in its page model; the record page's would
     be every record's, about 80 KB of headings it does not show, so its list is empty."""
-    model = page.split('<script type="application/json" id="kpress-page-model">', 1)[1]
-    assert '"headings": []' in model.split("</script>", 1)[0]
+    assert "kpress-page-model" not in page
+    assert "kpress-diagnostics" not in page
 
 
 def test_a_record_files_description_has_room(records: dict[str, str]) -> None:
@@ -572,7 +595,10 @@ def test_a_record_files_description_has_room(records: dict[str, str]) -> None:
         r'<meta name="description" content="([^"]*)"', "".join(records.values())
     )
     assert len(descriptions) == len(records) == len(set(descriptions))
-    assert max(len(text) for text in descriptions) <= render_overview.DESCRIPTION_LIMIT - 15
+    assert (
+        max(len(html.unescape(text)) for text in descriptions)
+        <= render_overview.DESCRIPTION_LIMIT
+    )
 
 
 def test_a_record_files_description_counts_its_squares(records: dict[str, str]) -> None:
@@ -581,9 +607,9 @@ def test_a_record_files_description_counts_its_squares(records: dict[str, str]) 
         n: re.findall(r'<meta name="description" content="([^"]*)"', records[f"cases/{n}.html"])
         for n in (1, 2, 11)
     }
-    assert said[1][0].startswith("Packing 1 unit square in the smallest square, a case ")
-    assert said[2][0].startswith("Packing 2 unit squares in the smallest square, a case ")
-    assert said[11][0].startswith("Packing 11 unit squares in the smallest square, a case ")
+    assert said[1][0].startswith("Packing 1 unit square:")
+    assert said[2][0].startswith("Packing 2 unit squares:")
+    assert said[11][0].startswith("Packing 11 unit squares:")
 
 
 def test_a_footnote_in_a_case_file_is_refused() -> None:
@@ -620,3 +646,21 @@ def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
         assert (f'data-case-step="{n - 1}">{left}n = {n - 1}</a>' in steps) == (n != numbers[0])
         assert (f"n = {n + 1}{right}</a>" in steps) == (n != numbers[-1])
         assert '<a href="./" data-case-index>All cases</a>' in steps
+
+
+def test_case_eleven_reserves_and_locally_serves_its_original_figure(
+    records: dict[str, str],
+) -> None:
+    """The complete case needs no remote image and reserves the source SVG's size."""
+    path = "atlas/trump11-overview.svg"
+    source = render_case_pages.CASE_IMAGE_FILES[path]
+    figure = ET.parse(source).getroot()
+    record = _record(records, 11)
+    image = re.search(r"<img\b[^>]*trump11-overview\.svg[^>]*>", record)
+    assert image is not None
+    assert f'src="../{path}"' in image[0]
+    for dimension in ("width", "height"):
+        assert f'{dimension}="{figure.attrib[dimension]}"' in image[0]
+    assert "raw.githubusercontent.com" not in image[0]
+    assert path in render_overview.support_file_paths()
+    assert render_overview.support_files()[path] == source.read_bytes()

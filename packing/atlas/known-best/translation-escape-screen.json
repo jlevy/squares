@@ -8333,7 +8333,16 @@
     "excluded": [],
     "generated_by": "python -m devtools.screen_translation_escape",
     "inputs": {"corpus":"manifest.json","witnesses":"witnesses/known-best"},
-    "method": {"certificate_classes":"strict-separating: the square leaves every active contact at once; contact-preserving: it can only move while keeping a contact closed","certificate_replay":"every hit is replayed at build time by translating the square by the recorded distance and re-running sqpack.verify.verify_packing; a failure stops the build, so no unreplayed certificate reaches this file","direction_search":"one interior direction per arc between critical directions, plus every critical direction: complete over directions, not sampled","exactness":"each projection interval shifts by exactly t*(d.n) under translation, so every constraint is affine in t and no linearization enters","materialization_digits":50,"primary_tolerance":"1e-8","shape_residual_limit":"1.00000000000000008334e-30","tolerances":["1e-12","1e-10","1e-8","1e-6"]},
+    "method": {
+      "certificate_classes": "strict-separating: the square leaves every active contact at once; contact-preserving: it can only move while keeping a contact closed",
+      "certificate_replay": "every hit is replayed at build time by translating the square by the recorded distance and checking the complete moved packing; a failure stops the build, so no unreplayed certificate reaches this file. Retained cases may have been replayed by sqpack.verify.verify_packing; the current generator uses sqpack.prepared_verify.prepared_verify_packing with the same complete validity contract",
+      "direction_search": "one interior direction per arc between critical directions, plus every critical direction: complete over directions, not sampled",
+      "exactness": "each projection interval shifts by exactly t*(d.n) under translation, so every constraint is affine in t and no linearization enters",
+      "materialization_digits": 50,
+      "primary_tolerance": "1e-8",
+      "shape_residual_limit": "1.00000000000000008334e-30",
+      "tolerances": ["1e-12","1e-10","1e-8","1e-6"]
+    },
     "one_sidedness": "A hit certifies that one square can be translated. A miss proves only that that one square cannot be translated at that tolerance; rotation and coordinated multi-square motion are outside this test, so no result here may be read as rigidity."
   },
   "softschema": {"contract":"packing.squares:TranslationEscapeScreen/v1","envelope":"screen","schema":"translation-escape-screen.schema.yaml","status":"enforced"}
