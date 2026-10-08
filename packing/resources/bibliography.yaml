@@ -30,6 +30,18 @@ last_reviewed: '2026-10-06'
 # not in the README's Web Sources table, so its `note` says which retained bytes they
 # were read from.
 sources:
+  - key: '[Daniel exact and local reports 2026]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo
+    lineage: independent
+    note: Issue419 reports269 exact side forms, four newly derived forms and258 source Lean feasibility
+      checks. Issue420 reports178 non-strict local minima. Retained f58a017 source metadata and Lean
+      code are reports, without an independent checker or Lean build here; source MIT licences and
+      original credits remain in the packet.
   - key: '[Queuingtheorydotcom n11 optimality 2026]'
     authors: [Queuingtheorydotcom]
     year: 2026

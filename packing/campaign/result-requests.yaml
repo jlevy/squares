@@ -19,6 +19,62 @@ repository: jlevy/squares
 owner: jlevy
 last_reviewed: '2026-10-07'
 issues:
+  - number: 419
+    title: 'Mechanized exact forms for 269 best-known packings, n ≤ 324 (minimal polynomial, isolating
+      interval, exact configuration), checked independently and in Lean: registration request'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
+      and proof obligations kept explicit.
+    read_through: '2026-10-07T20:11:50Z'
+    results:
+    - key: new-exact-forms
+      claim: Four newly derived exact feasible-side forms at102,106,152,177; polynomial minimality
+        remains source-asserted.
+      source: body
+      register:
+      - T-120
+      - T-121
+      - T-122
+      - T-123
+    - key: remaining-catalogue
+      claim: 269 exact forms and258 source Lean feasibility flags over the complete1..324 catalogue.
+      source: body
+      not_registered: The remaining forms are evidence about existing source configurations, not new
+        bounds. The complete reported catalogue is retained; PR403 owns canonical exact-form integration
+        and the source flags are not local verifier outcomes.
+      queued: false
+    beads:
+    - think-8sm2
+    answer_bead: think-8sm2
+    replies: []
+    close_when: The reported import and its disposition are on main and the owner has posted the resulting
+      state; unresolved proof replays remain explicitly owned.
+  - number: 420
+    title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
+    author: evand
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
+      and proof obligations kept explicit.
+    read_through: '2026-10-07T20:11:56Z'
+    results:
+    - key: local-minima-178
+      claim: 178 source configurations are reported non-strict local minima under matched-index perturbations.
+      source: body
+      register:
+      - T-124
+    beads:
+    - think-juuq
+    answer_bead: think-juuq
+    replies: []
+    close_when: The reported import and its disposition are on main and the owner has posted the resulting
+      state; unresolved proof replays remain explicitly owned.
   - number: 375
     title: 'Analytic optima of 48 recent records (s(n) bounds 3e-13 … 5e-11 below the register) and exact certificates for every record n ≤ 104: registration request'
     author: evand
