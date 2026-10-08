@@ -39,10 +39,11 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from kpress.format.markdown import parse_markdown
 from PIL import Image
 
 from devtools import measure_site_pages as measure
-from devtools import render_n11_lower_bounds_explainer, render_overview
+from devtools import render_n11_lower_bounds_explainer, render_overview, site_assets
 from devtools import render_n11_optimality_review as paper
 from devtools import render_n11_threshold_bound_review as threshold
 from devtools.preview_site import serve
@@ -293,6 +294,30 @@ def test_a_page_set_as_the_layers_define_has_no_problems() -> None:
     assert measure.glyph_problems(linux) == []
 
 
+def test_checked_prepared_math_is_measured_without_a_browser_renderer() -> None:
+    found = entry(prepared_katex="0.16.45", math=[math_row(prepared="yes")])
+    assert measure.glyph_problems(found, katex="0.16.45") == []
+
+
+@pytest.mark.parametrize("version", ["", "0.16.9", "0.16.45 / 0.16.9", "0.16.45 / 0.16.45"])
+def test_prepared_math_requires_one_correct_renderer_version(version: str) -> None:
+    found = entry(prepared_katex=version, math=[math_row(prepared="yes")])
+    assert measure.glyph_problems(found, katex="0.16.45") == [
+        f"the prepared math uses KaTeX {version or 'without provenance'}, not 0.16.45"
+    ]
+
+
+def test_prepared_metadata_cannot_stand_in_for_a_missing_runtime_renderer() -> None:
+    found = entry(
+        runtime_katex="",
+        prepared_katex="0.16.45",
+        math=[math_row(prepared="yes"), math_row(prepared="no")],
+    )
+    assert measure.glyph_problems(found, katex="0.16.45") == [
+        "the page runs KaTeX not at all, not 0.16.45"
+    ]
+
+
 def test_a_paper_without_its_platform_flag_is_named_with_every_formula_it_draws() -> None:
     """The defect itself: on macOS the publication layer's flag is missing, so its math
     rule leaves every formula at `geometricPrecision` beside text at `auto`."""
@@ -373,6 +398,48 @@ def test_a_face_of_the_shared_assets_is_shipped_and_not_fetched() -> None:
     )
     assert measure.glyph_problems(found) == [
         "a face is fetched: http://127.0.0.1:1/fonts/pt-serif.woff2"
+    ]
+
+
+@pytest.mark.parametrize("family", ["Site Prose Georgia", "Site Prose Times"])
+def test_an_unavailable_optional_local_prose_fallback_is_reported_without_font_failure(
+    family: str,
+) -> None:
+    face = {
+        "family": family,
+        "weight": "400",
+        "style": "normal",
+        "display": "auto",
+        "status": "error",
+        "inlined": True,
+        "shared": True,
+        "optional_local": True,
+        "faces": 1,
+    }
+    found = entry(faces=[face])
+    assert measure.glyph_problems(found) == []
+    assert measure.glyph_differences([entry(), found])[-1]["paper.html"] == (
+        "auto, optional local, unavailable"
+    )
+
+
+@pytest.mark.parametrize("family", ["Site Prose Georgia", "PT Serif", "KaTeX_Main"])
+def test_a_font_failure_without_verified_optional_local_sources_is_still_named(
+    family: str,
+) -> None:
+    face = {
+        "family": family,
+        "weight": "400",
+        "style": "normal",
+        "display": "auto",
+        "status": "error",
+        "inlined": True,
+        "shared": True,
+        "optional_local": False,
+        "faces": 1,
+    }
+    assert measure.glyph_problems(entry(faces=[face])) == [
+        f"the face {family} 400 normal failed to load"
     ]
 
 
@@ -558,6 +625,63 @@ def chromium() -> None:
             driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE)).close()
         except sync_api.Error as error:
             pytest.skip(f"no Chromium to launch: {error.message.splitlines()[0]}")
+
+
+def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
+    chromium: None,  # noqa: ARG001
+) -> None:
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    cases = [
+        ("Site Prose Georgia", 'local("Georgia")', "400", "normal", "", True),
+        (
+            "Site Prose Times",
+            'local("Times New Roman"), local("Liberation Serif")',
+            "400",
+            "normal",
+            "",
+            True,
+        ),
+        (
+            "Site Prose Georgia",
+            'local("Georgia"), url("/fonts/absent.woff2")',
+            "400",
+            "normal",
+            "",
+            False,
+        ),
+        ("Site Prose Times", 'local("Georgia")', "400", "normal", "", False),
+        ("PT Serif", 'local("Georgia")', "400", "normal", "", False),
+        ("Site Prose Georgia, malformed", 'local("Georgia")', "400", "normal", "", False),
+        ("Site Prose Georgia", 'local("Georgia")', "700", "normal", "", False),
+        ("Site Prose Georgia", 'local("Georgia")', "400", "italic", "", False),
+        (
+            "Site Prose Georgia",
+            'local("Georgia")',
+            "400",
+            "normal",
+            (
+                '@font-face {font-family: "Site Prose Georgia";'
+                ' src: url("/fonts/absent.woff2"); font-weight: 400; font-style: normal;}'
+            ),
+            False,
+        ),
+    ]
+    with sync_playwright() as driver:
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
+        try:
+            page = browser.new_page()
+            for family, src, weight, style, extra, optional in cases:
+                page.set_content(
+                    f'<style>@font-face {{font-family: "{family}"; src: {src};'
+                    f" font-weight: {weight}; font-style: {style};}}{extra}</style>"
+                )
+                found = measure.read_glyphs(page)
+                faces = found["faces"]
+                assert faces, (family, src)
+                assert all(face["optional_local"] is optional for face in faces), faces
+        finally:
+            browser.close()
 
 
 @pytest.fixture(scope="module")
@@ -854,6 +978,88 @@ def test_the_pages_run_one_math_pipeline(pages: dict[str, dict[str, Any]]) -> No
         assert found["math"], name
         assert {row["typeset"] for row in found["math"]} == {measure.TYPESET}, name
         assert found["untypeset"] == 0, name
-    assert render_overview.MATH_SCRIPT.read_text(encoding="utf-8") in (
-        site_renders.served("tutorial.html")
-    )
+    for name in SITE_PAGES:
+        assert pages[name]["prepared_katex"] == measure.shipped_katex()
+        assert {row["prepared"] for row in pages[name]["math"]} == {"yes"}
+        assert render_overview.MATH_SCRIPT.read_text(encoding="utf-8") not in (
+            site_renders.served(name)
+        )
+
+
+@pytest.fixture(scope="module")
+def prepared_controls(
+    chromium: None,  # noqa: ARG001
+    tmp_path_factory: pytest.TempPathFactory,
+) -> Iterator[str]:
+    """Real prepared formulas, and negative controls with a neighboring intact formula."""
+    root = tmp_path_factory.mktemp("prepared-glyph-controls")
+    body = parse_markdown("Inline $x$. Adjacent $y$.", title="Controls").html
+    original = render_overview.static_content_page(
+        body,
+        meta=render_overview.PageMeta("Controls", "Prepared glyph controls.", "index.html"),
+        current="overview",
+    ).html
+    one_math = re.search(r"<math\b.*?</math>", original, re.DOTALL)
+    assert one_math is not None
+    provenance = f'<meta name="site-math-katex" content="{measure.shipped_katex()}">'
+    assert original.count(provenance) == 1
+    variants = {
+        "control.html": original,
+        "missing.html": original.replace(one_math[0], "", 1),
+        "duplicate.html": original.replace(one_math[0], one_math[0] * 2, 1),
+        "unversioned.html": original.replace(provenance, ""),
+        "body-version.html": original.replace(provenance, "").replace(
+            "</body>", provenance + "</body>"
+        ),
+        "duplicate-version.html": original.replace(provenance, provenance * 2),
+        "wrong-version.html": original.replace(
+            provenance, provenance.replace(measure.shipped_katex(), "0.16.9")
+        ),
+    }
+    for name, content in variants.items():
+        (root / name).write_text(content, encoding="utf-8")
+    for output, data in site_assets.shared().assets.referenced([original]).items():
+        target = root / site_assets.ASSETS_DIR / output
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+    with socket.socket() as sock:
+        sock.bind(("127.0.0.1", 0))
+        port = int(sock.getsockname()[1])
+    server = serve(root, port)
+    try:
+        yield f"http://127.0.0.1:{port}"
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.mark.parametrize(
+    ("name", "problem"),
+    [
+        ("control.html", None),
+        ("missing.html", "typeset is KaTeX HTML, not KaTeX HTML + MathML"),
+        ("duplicate.html", "typeset is KaTeX HTML + duplicate MathML, not KaTeX HTML + MathML"),
+        ("unversioned.html", "prepared math uses KaTeX without provenance"),
+        ("body-version.html", "prepared math uses KaTeX without provenance"),
+        ("duplicate-version.html", "prepared math uses KaTeX 0.16.45 / 0.16.45"),
+        ("wrong-version.html", "prepared math uses KaTeX 0.16.9"),
+    ],
+)
+def test_prepared_probe_keeps_semantics_and_renderer_guards(
+    prepared_controls: str, name: str, problem: str | None
+) -> None:
+    found = measured(prepared_controls, (name,))[name]
+    assert found["untypeset"] == 0
+    assert sum(row["count"] for row in found["math"]) == 2
+    assert all(row["prepared"] == "yes" for row in found["math"])
+    problems = measure.glyph_problems(found, katex=measure.shipped_katex())
+    if problem is None:
+        assert problems == []
+    else:
+        assert any(problem in item for item in problems), problems
+        # A missing or duplicate subtree must fail even beside intact semantic math.
+        if name in {"missing.html", "duplicate.html"}:
+            assert (
+                sum(row["count"] for row in found["math"] if row["typeset"] == measure.TYPESET)
+                == 1
+            )

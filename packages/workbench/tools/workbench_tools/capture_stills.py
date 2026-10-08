@@ -29,6 +29,7 @@ from typing import Any
 
 from playwright.sync_api import sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.probes import probe
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
@@ -335,7 +336,7 @@ def from_workbench(table) -> int:
             ),
         )
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
-        page.goto(PAGE.resolve().as_uri())
+        open_page(page, PAGE)
         page.evaluate(probe("capture/fonts-ready"))
         page.wait_for_timeout(900)
         shots(page, table)
@@ -358,7 +359,7 @@ def workbench() -> int:
             ),
         )
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
-        page.goto(PAGE.resolve().as_uri())
+        open_page(page, PAGE)
         page.evaluate(probe("capture/fonts-ready"))
         page.wait_for_timeout(900)
         for name, commands in WB_SHOTS.items():
@@ -378,7 +379,7 @@ def animation_stills(animation: Path, instants: list[float]) -> int:
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch()
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        page.goto(PAGE.resolve().as_uri())
+        open_page(page, PAGE)
         page.evaluate(probe("capture/fonts-ready"))
         imported = control(
             page,
@@ -440,7 +441,7 @@ def main() -> int:
             ),
         )
         page.on("pageerror", lambda e: errors.append(f"pageerror: {e}"))
-        page.goto(PAGE.resolve().as_uri())
+        open_page(page, PAGE)
         page.evaluate(probe("capture/fonts-ready"))
         page.wait_for_timeout(900)
         pairs = control(page, read=["pairs"])["pairs"]

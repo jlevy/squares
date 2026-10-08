@@ -54,6 +54,9 @@ from devtools.render_n11_lower_bounds_explainer_pdf import OUTPUT as PDF_OUTPUT
 from devtools.repo_links import DEFAULT_BRANCH, REPO_URL, RepositoryTree, branch_paths
 from sqpack.release import EXPLAINER_VERSION, OPTIMALITY_REVIEW_EDITION, PUBLICATION_EDITION
 from tests import site_renders
+from tests.site_renders import prepared_forwarders
+
+pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 
 #: A page's text linking into the repository four ways: from markup, from Markdown, from plain
 #: text, and from inside a script, which the check must not read. `{{REPO_URL}}` and `{{SHA}}`
@@ -99,7 +102,7 @@ def head(path: str, *, description: str | None = None) -> str:
     )
     if description is not None:
         meta = meta._replace(description=description)
-    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html()}"
+    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html(root='/squares/')}"
     return f'<!doctype html><html lang="en"><head>{tags}</head>'
 
 
@@ -172,8 +175,8 @@ def result_overview(
 ) -> bytes:
     """A result's overview as it is served: the one block, with a repository link."""
     return (
-        f'<div class="site-result" data-result-overview="{result_id}">'
-        f'<a href="{REPO_URL}/blob/{ref}/{link}">Register</a></div>\n'
+        f'<article class="site-result" data-result-overview="{result_id}">'
+        f'<a href="{REPO_URL}/blob/{ref}/{link}">Register</a></article>\n'
     ).encode()
 
 
@@ -271,6 +274,24 @@ def site_naming(named: Sequence[str], /, **overrides: bytes) -> dict[str, bytes]
     return pages
 
 
+def test_fake_deploy_variants_keep_the_prepared_forwarders_immutable(
+    prepared_forwarders: tuple[render_overview.Page, ...],
+) -> None:
+    first = render_overview.forwarder_pages()
+    second = render_overview.forwarder_pages()
+    assert first is not second
+    assert tuple(first) == tuple(second) == prepared_forwarders
+    first.pop()
+    assert tuple(render_overview.forwarder_pages()) == prepared_forwarders
+    changed = site_pages(**{"cases.html": b"a deliberately broken forwarder"})
+    original = site_pages()
+    assert changed is not original
+    assert original["cases.html"] == next(
+        page.html.encode() for page in prepared_forwarders if page.name == "cases.html"
+    )
+    assert changed["cases.html"] != original["cases.html"]
+
+
 def fake_site(
     pages: dict[str, bytes],
     *,
@@ -311,6 +332,9 @@ def fixture_records(monkeypatch: pytest.MonkeyPatch) -> None:
     """Hold the fixture site to the fixture's record links, as rendered at its commit.
     A test that asks about the renderer itself, or about another checkout, sets its own
     first, and that is kept."""
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     if check_published_site.rendered_record_links is rendered_record_links:
         monkeypatch.setattr(
             check_published_site, "rendered_record_links", lambda: EXPECTED_RECORDS
@@ -331,6 +355,10 @@ def failures(
     it says of itself, so a page a test breaks in one way fails them in others; they are
     left out unless `heads` asks for them, and the tests of the heads ask."""
     monkeypatch.setattr(check_published_site, "fetch", fetch)
+    # These fixtures test specialized assurance; the complete walk has its own fixtures.
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     monkeypatch.setattr(
         check_published_site, "head_checks", HEAD_CHECKS if heads else lambda *_: []
     )
@@ -1023,17 +1051,22 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         good = site_pages()[old]
         expected = check_published_site.forwarder_expected(old, new)
         target, canonical = expected["script"], expected["canonical"]
+        file_target = expected["file"]
         assert target is not None
         assert canonical is not None
-        elsewhere = (target + "-elsewhere").encode()
+        assert file_target is not None
+        elsewhere = (file_target + "-elsewhere").encode()
         wrong = {
             "canonical": good.replace(
                 b'rel="canonical" href="' + canonical.encode(),
                 b'rel="canonical" href="https://example.org/',
             ),
             "script": good.replace(b'data-moved-to="' + target.encode(), b'data-moved="'),
-            "refresh": good.replace(b"0; url=" + target.encode(), b"0; url=" + elsewhere),
-            "link": good.replace(b'<a href="' + target.encode(), b'<a href="' + elsewhere),
+            "file": good.replace(
+                b'data-file-moved-to="' + file_target.encode(), b'data-file-moved="'
+            ),
+            "refresh": good.replace(b"0; url=" + file_target.encode(), b"0; url=" + elsewhere),
+            "link": good.replace(b'<a href="' + file_target.encode(), b'<a href="' + elsewhere),
         }
         for place, body in wrong.items():
             assert body != good, place
@@ -1153,6 +1186,10 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
         assert requested.count(f"https://example.org/{name}") == 1, name
 
     monkeypatch.setattr(check_published_site, "fetch", fetch)
+    # These fixtures test specialized assurance; the complete walk has its own fixtures.
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     monkeypatch.setattr(check_published_site, "head_checks", HEAD_CHECKS)
     lines = [
         line
@@ -1253,7 +1290,12 @@ def test_check_fails_a_forwarder_that_previews_its_page_by_another_name_or_kind(
     forwarders = {moved.name: moved.html for moved in render_overview.forwarder_pages()}
 
     def found(name: str, text: str) -> list[str]:
-        assert check_published_site.head_problems(text, FORWARDED_URLS[name]) == []
+        assert (
+            check_published_site.head_problems(
+                text, FORWARDED_URLS[name], page_url=render_overview.SITE_URL + name
+            )
+            == []
+        )
         site = fake_site(site_pages(**{name: text.encode()}))
         return failures(monkeypatch, site, heads=True)
 

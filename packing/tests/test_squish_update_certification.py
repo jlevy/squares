@@ -78,6 +78,60 @@ def test_linked_proof_read_admission_is_exact_and_keeps_other_escapes_closed(
     assert {path.name: path.read_bytes() for path in source.iterdir()} == before
 
 
+@pytest.mark.usefixtures("private_packet")
+@pytest.mark.parametrize("n", packet.RESULT_NUMBERS)
+def test_linked_proof_batch_matches_a_fresh_standalone_check(n: int) -> None:
+    link_private_proofs()
+    relative = packet.certificate_path(n).relative_to(packet.REPO).as_posix()
+    batched = packet.linked_certificate_problems([relative], repository=packet.REPO)
+    standalone = packet.linked_certificate_problem(relative, repository=packet.REPO)
+    assert batched == {relative: standalone}
+    assert standalone is None
+
+
+@pytest.mark.parametrize("mutation", ["receipt", "missing-proof", "leaf-link"])
+def test_linked_proof_batch_rechecks_changes_between_invocations(
+    private_packet: Path, mutation: str
+) -> None:
+    source = link_private_proofs()
+    paths = [
+        packet.certificate_path(n).relative_to(packet.REPO).as_posix()
+        for n in packet.RESULT_NUMBERS
+    ]
+    assert packet.linked_certificate_problems(paths, repository=packet.REPO) == dict.fromkeys(
+        paths
+    )
+    if mutation == "receipt":
+        receipt_path = private_packet / "receipts/certification.json.xz"
+        receipt = packet.read_xz_receipt(receipt_path)
+        receipt["cases"][0]["checker_input"]["squares"][0]["corners"][0][0] = "99"
+        save_receipt(receipt_path, receipt)
+    else:
+        leaf = source / "n-123-rational.yaml.gz"
+        external = source.with_name(source.name + "-leaf.yaml.gz")
+        if mutation == "leaf-link":
+            external.write_bytes(leaf.read_bytes())
+        leaf.unlink()
+        if mutation == "leaf-link":
+            leaf.symlink_to(external)
+    after = packet.linked_certificate_problems(paths, repository=packet.REPO)
+    assert set(after) == set(paths)
+    if mutation == "receipt":
+        assert all(
+            problem is not None
+            and problem.startswith("linked reviewed proof custody mismatch:")
+            for problem in after.values()
+        )
+    else:
+        first = after[paths[0]]
+        assert first is not None
+        if mutation == "leaf-link":
+            assert first == "resolves outside the repository"
+        else:
+            assert first.startswith("linked reviewed proof custody mismatch:")
+        assert all(after[path] is None for path in paths[1:])
+
+
 @pytest.mark.parametrize("mutation", ["receipt", "proof"])
 def test_linked_proof_read_admission_refuses_complete_custody_corruption(
     private_packet: Path, monkeypatch: pytest.MonkeyPatch, mutation: str

@@ -6,6 +6,8 @@ from __future__ import annotations
 import html
 import re
 from dataclasses import replace
+from unittest.mock import patch
+from urllib.parse import urljoin
 
 import pytest
 
@@ -18,6 +20,7 @@ from devtools import (
     repo_links,
     result_overview,
     site_assets,
+    site_urls,
 )
 from devtools.render_case_pages import BROAD_RESULT
 from devtools.render_recent_results import HOLDS, NO_STANDING, SUPERSEDED
@@ -45,6 +48,12 @@ def overview() -> overview_data.Overview:
 def bodies() -> dict[str, str]:
     """Every register result's overview, rendered once: that none fails is the first check."""
     return site_renders.result_bodies()
+
+
+@pytest.fixture(scope="module")
+def complete_pages() -> dict[str, str]:
+    """The complete registered documents, shared with the head-contract tests."""
+    return {page.name: page.html for page in site_renders.result_pages()}
 
 
 def _result(overview: overview_data.Overview, result_id: str) -> overview_data.Result:
@@ -641,3 +650,85 @@ def test_the_design_document_describes_the_overview() -> None:
     section = design.split("\n## Result Overview\n", 1)[1].split("\n## ", 1)[0]
     for name in ("site-result.css", "result_overview.py", "atlas_film_facts"):
         assert name in section, name
+
+
+def test_amended_result_address_notice_is_inside_the_complete_article(
+    complete_pages: dict[str, str],
+) -> None:
+    rows = site_urls.load_registry()
+    row = next(row for row in rows if row.path == "result/t-116.html")
+    amendment = next(change for change in row.amendments if change.get("historical_target"))
+    current = complete_pages[row.path]
+    article = current.split('<article class="site-result"', 1)[1].split("</article>", 1)[0]
+    notice = article.split('class="site-result-section site-result-compatibility"', 1)[1]
+    notice = notice.split("</aside>", 1)[0]
+    assert html.escape(amendment["historical_title"]) in notice
+    target = html.unescape(HREF.findall(notice)[0])
+    assert urljoin(row.path, target) == amendment["historical_target"]
+    assert "separate upper bound result" in notice
+    assert str(amendment["date"]) in notice
+    assert "SQUISH" in article
+
+
+def test_complete_result_batch_loads_the_address_registry_once(
+    overview: overview_data.Overview,
+) -> None:
+    """Multiple real documents share one validated address registry per render pass."""
+    rows = site_urls.load_registry()
+    results = [_result(overview, result_id) for result_id in ("T-110", "T-116")]
+    with (
+        patch.object(overview_data, "load", return_value=replace(overview, results=results)),
+        patch.object(site_urls, "load_registry", return_value=rows) as loaded,
+    ):
+        pages = render_overview.result_fragments()
+    assert loaded.call_count == 1
+    assert {page.name for page in pages} == {
+        overview_sections.result_fragment(result.id) for result in results
+    }
+    for page in pages:
+        assert '<article class="site-result"' in page.html
+        assert "</html>" in page.html
+
+
+def test_address_notice_escapes_titles_and_credit(overview: overview_data.Overview) -> None:
+    result = replace(_result(overview, "T-116"), credit='A & "B" <C>')
+    notice = result_overview.compatibility_notices(
+        result,
+        [
+            {
+                "date": "2026-10-07",
+                "historical_target": "result/t-110.html",
+                "historical_title": 'Former <claim> & "title"',
+            }
+        ],
+        registered_paths={"result/t-110.html"},
+    )
+    assert "Former &lt;claim&gt; &amp; &quot;title&quot;" in notice
+    assert "A &amp; &quot;B&quot; &lt;C&gt;" in notice
+    assert "<claim>" not in notice
+
+
+@pytest.mark.parametrize(
+    "target",
+    [
+        "../result/t-110.html",
+        "https://other.test/t-110.html",
+        "javascript:alert(1)",
+        "result/t-999.html",
+    ],
+)
+def test_address_notice_requires_a_registered_local_target(
+    target: str, overview: overview_data.Overview
+) -> None:
+    with pytest.raises(ValueError, match="unregistered local historical target"):
+        result_overview.compatibility_notices(
+            _result(overview, "T-116"),
+            [
+                {
+                    "date": "2026-10-07",
+                    "historical_target": target,
+                    "historical_title": "Former result",
+                }
+            ],
+            registered_paths={"result/t-110.html"},
+        )
