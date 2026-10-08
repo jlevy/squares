@@ -1,0 +1,32 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 105,
+ "url": "https://kingbird.myphotos.cc/packing/square-105.svg",
+ "retrieved_utc": "2026-10-08T03:12:13Z",
+ "read_from": "fetched into memory",
+ "bytes": 17810,
+ "sha256": "831a4bb3f4078f61463fcc970d12b0e5000d0b21e170379ea054ae75c6ff21d1",
+ "last_modified": "Wed, 02 Sep 2026 01:19:18 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by Thomas Schadt on December 30, 2025, using a computer program he wrote, starting from randomness.",
+  "Refined by David Ellsworth on December 30, 2025, using his modified version of Thomas Schadt's computer program.",
+  "Refound and refined by David Ellsworth on March 4-6, 2026, using his modified version #3 of Thomas Schadt's computer program."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "10.80761933330707600000000000000000000000000000000000",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "5.40380966665353800000000000000000000000000000000000",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

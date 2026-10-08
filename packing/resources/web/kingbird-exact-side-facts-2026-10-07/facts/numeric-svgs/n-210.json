@@ -1,0 +1,40 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 210,
+ "url": "https://kingbird.myphotos.cc/packing/square-210.svg",
+ "retrieved_utc": "2026-10-08T03:12:26Z",
+ "read_from": "fetched into memory",
+ "bytes": 23027,
+ "sha256": "5d9479de67c1af835bb260d772997a8c596edf3a9890e8ea50ab60187f409b7f",
+ "last_modified": "Thu, 10 Sep 2026 00:08:49 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev in March 2019 (to 11 decimal places of precision: s < 13.98318264114, the last 2 of which appear to be incorrect)",
+  "Source: Improved Packings of n(n\u22121) Unit Squares in a Square (Submitted March 14, 2019; Published October 15, 2021): https://doi.org/10.37236/8586",
+  "Reconstructed by David Ellsworth on November 19, 2024, with exact analytic solution.",
+  "This reconstruction had a bug in which one square (the one now shifted by \"v27\") went slightly outside the enclosing square.",
+  "Improved by David Ellsworth on December 21, 2024.",
+  "Exact polynomial root solution by David Ellsworth on December 23, 2024.",
+  "Modified by David Ellsworth on December 22, 2025, to be consistent with an improvement applied to s(132) and s(156) by David W. Cantrell on March 21, 2025.",
+  "This does not change the side length of the enclosing square. It does fix a bug in which one square (the one now shifted by \"v27\") went slightly outside the enclosing square.",
+  "Improved by David Ellsworth on January 19, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "14.97413341886404592723434714855578079920293612045647",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "7.487066709432022963617173574277890399601468060228235",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

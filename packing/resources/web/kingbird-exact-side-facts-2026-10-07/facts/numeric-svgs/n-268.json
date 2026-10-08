@@ -1,0 +1,28 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 268,
+ "url": "https://kingbird.myphotos.cc/packing/square-268.svg",
+ "retrieved_utc": "2026-10-08T03:12:31Z",
+ "read_from": "fetched into memory",
+ "bytes": 10921,
+ "sha256": "25601c00aee7babe3281f005db670306c1f9971d58244993bc4494e1608a2e4d",
+ "last_modified": "Wed, 16 Sep 2026 20:58:55 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by David Ellsworth on November 30, 2024, with exact polynomial root solution, based on the s(70) found by Joe DeVincentis in April 2014.",
+  "Improved by David W. Cantrell on February 9, 2025, with exact polynomial root solution.",
+  "Exact polynomial root solution reconstructed by David Ellsworth on January 7, 2026.",
+  "Improved by Grigoriy Dyachkov on September 10, 2026, working with Claude Opus 5 and Claude Fable 5."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "16.87931143465371185398163397447013",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

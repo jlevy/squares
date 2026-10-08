@@ -1,0 +1,39 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 240,
+ "url": "https://kingbird.myphotos.cc/packing/square-240.svg",
+ "retrieved_utc": "2026-10-08T03:12:30Z",
+ "read_from": "fetched into memory",
+ "bytes": 27097,
+ "sha256": "3783a18e3314eea7270dca6398c7fa555812341911671074364e262e887c4c0e",
+ "last_modified": "Thu, 10 Sep 2026 00:08:54 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Original s(210) first modified to be an s(240) by K\u00e1roly Hajba on November 24, 2024, and then constructed in SVG by David Ellsworth on that same day (had been planning to do this, but K\u00e1roly Hajba was the first to actually do it).",
+  "Reconverted to an s(240) by David Ellsworth on December 23, 2024, based on the s(210):",
+  "- Found by M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev in March 2019 (to 11 decimal places of precision: s < 13.98318264114, the last 2 of which appear to be incorrect)",
+  "Source: Improved Packings of n(n\u22121) Unit Squares in a Square (Submitted March 14, 2019; Published October 15, 2021): https://doi.org/10.37236/8586",
+  "- Reconstructed by David Ellsworth on November 19, 2024, with exact analytic solution.",
+  "- Improved by David Ellsworth on December 21, 2024.",
+  "Exact polynomial root solution by David Ellsworth on December 23, 2024.",
+  "Improved by David Ellsworth on January 23-25, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "15.97556282833087820656253563260687471827312309967230",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "7.98778141416543910328126781630343735913656154983615",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}
