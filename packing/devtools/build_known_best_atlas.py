@@ -381,7 +381,6 @@ POSTER_INFORMATION_BOTTOM = Decimal(1930)
 POSTER_TITLE_BASELINE = Decimal(204)
 POSTER_RELEASE_BASELINE = Decimal(340)
 POSTER_REPOSITORY_BASELINE = Decimal(450)
-POSTER_DETAILS_BASELINE = Decimal(560)
 POSTER_LEGEND_BASELINE = Decimal(720)
 POSTER_LEGEND_ROW_PITCH = Decimal(96)
 POSTER_EXPLAINER_BASELINE = Decimal(1570)
@@ -2114,7 +2113,7 @@ def _append_poster_information(
 
     text_line(
         "poster-title",
-        f"{canvas.spec.count} BEST KNOWN SQUARE PACKINGS",
+        "BEST KNOWN SQUARE PACKINGS",
         POSTER_TITLE_BASELINE,
         POSTER_TITLE_SIZE,
     )
@@ -2133,12 +2132,6 @@ def _append_poster_information(
     )
     text_line(
         "repository", SUMMARY_REPOSITORY, POSTER_REPOSITORY_BASELINE, POSTER_SUBTITLE_SIZE
-    )
-    text_line(
-        "poster-details",
-        f"n = {canvas.spec.first_n}..{canvas.spec.last_n}; "
-        f"{canvas.spec.rows} square-bound rows; {canvas.spec.square_count:,} unit squares",
-        POSTER_DETAILS_BASELINE,
     )
     _append_summary_legend(block, spec=spec, canvas=canvas)
     _append_summary_explainer(

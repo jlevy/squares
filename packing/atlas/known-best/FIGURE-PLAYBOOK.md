@@ -349,8 +349,8 @@ thirty-five columns.
 Its cards start 60 units from the top; its height follows the eighteen row pitches and
 bottom margin.
 All informational text occupies the upper-right block at $x = 4640..8040$,
-$y = 60..1930$: title, publication date, repository, corpus details, all badge meanings
-and counts, hue and shade keys, explanation, citations, credit and edition stamp.
+$y = 60..1930$: title, publication date, repository, all badge meanings and counts, hue
+and shade keys, explanation, citations, credit and edition stamp.
 The 3400-unit block uses three times the figure’s type sizes: 144 for the title, 78 for
 the release and repository lines, and 57 for the legend and documentation.
 Badge glyphs and shade numerals also grow threefold, to 45 and 34.5. The information has

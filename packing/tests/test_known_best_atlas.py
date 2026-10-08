@@ -928,7 +928,6 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         "poster-title": 48,
         "release": 26,
         "repository": 26,
-        "poster-details": 19,
         "legend-label": 19,
         "explainer": 19,
         "citations": 19,
@@ -937,6 +936,8 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
     }
     block = root.find("svg:g[@data-feature='poster-information']", SVG)
     assert block is not None
+    assert block.find("svg:text[@data-feature='poster-details']", SVG) is None
+    assert "52,650 unit squares" not in "".join(block.itertext())
     information_text = list(block.iter(f"{{{SVG['svg']}}}text"))
     assert baseline_sizes.keys() <= {
         node.attrib.get("data-feature") for node in information_text
@@ -985,11 +986,12 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
     information_text = set(block.iter(f"{{{SVG['svg']}}}text"))
     assert set(root.iter(f"{{{SVG['svg']}}}text")) - card_text == information_text
     features = {node.attrib.get("data-feature") for node in information_text}
+    assert "poster-details" not in features
+    assert "52,650 unit squares" not in "".join(block.itertext())
     assert {
         "poster-title",
         "release",
         "repository",
-        "poster-details",
         "legend-label",
         "explainer",
         "citations",
