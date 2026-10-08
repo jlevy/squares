@@ -19,6 +19,84 @@ repository: jlevy/squares
 owner: jlevy
 last_reviewed: '2026-10-07'
 issues:
+  - number: 414
+    title: 'Two preprints: k^2 - M(k) >= 0.1 k^{1/4} (k >= 4.62e12) and > 0.06 k^{1/3} (k >= 3.5e17)'
+    author: squarepacker
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Sungjoon Ryu reports quarter-power and cube-root deficiency preprints for
+      closed-set disjoint packings at astronomical integer sides. Both v1.0 texts,
+      licences, attribution and checking sources are retained at immutable release
+      revisions. The constants using computer-assisted Lemma 4.10 depend on
+      k2-minus-c v1.2; each also states an analytic-Lemma-4.9 variant. No project
+      proof review or checking execution is claimed for the new releases.
+    read_through: '2026-10-07T12:35:34Z'
+    results:
+      - key: quarter-power-deficiency
+        claim: >-
+          k^2-M(k) >= 0.1 k^{1/4} for integer k >= 4.62*10^12 and liminf
+          (k^2-M(k))/k^{1/4} >= 0.1696; the analytic variant begins at
+          2.17*10^13 with liminf coefficient 0.1411.
+        source: body
+        not_registered: >-
+          Recorded as reported in frontier/asymptotic-waste-bounds.yaml. It settles
+          no count n <= 324, so the current result register has no applicable scope.
+        queued: false
+      - key: cube-root-deficiency
+        claim: >-
+          k^2-M(k) > 10^-4 sqrt(k) on [10^8,2.5*10^15], > 7*10^-5 sqrt(k)
+          on [2.5*10^15,3.5*10^17], and > 0.06 k^{1/3} from 3.5*10^17;
+          liminf coefficient 0.06285. The analytic variant and stronger from-10^21
+          coefficients are separately retained in the asymptotic record.
+        source: body
+        not_registered: >-
+          Recorded as reported in frontier/asymptotic-waste-bounds.yaml. It settles
+          no count n <= 324, so the current result register has no applicable scope.
+        queued: false
+    asks:
+      - what: Review the full preprint chain, statement conventions and numerical constants.
+        state: queued
+        bead: think-6ptr
+        note: >-
+          The v1.2 dependencies and new geometric arguments need a scoped review;
+          predecessor producer replays and author-supplied AI reviews do not supply it.
+    beads: [think-6ptr]
+    answer_bead: think-u1kq
+    replies: []
+    close_when: >-
+      The reported intake and pending proof review are answered from main, and the
+      review request receives a supported verdict or explicit disposition.
+
+  - number: 411
+    title: "wand125's repositories moved to wand125/square-packing (old links keep working)"
+    author: wand125
+    opened: '2026-10-07'
+    state: open
+    kind: other
+    triage: done
+    summary: >-
+      The author consolidated ten repositories into wand125/square-packing,
+      retaining old commit-pinned links and releases. MOVED.json and INDEX.json
+      describe the migration. The canonical repository joins source discovery;
+      historical citation and acquisition pins remain unchanged.
+    read_through: '2026-10-07T11:17:46Z'
+    results:
+      - key: repository-consolidation
+        claim: Historical commit and release addresses remain available after consolidation.
+        source: body
+        not_registered: >-
+          Source-location maintenance, not a mathematical result; the author requests
+          no ledger or result-register change. New discovery does not claim that the
+          canonical repository's full certificate catalogue has been imported.
+        queued: false
+    beads: [think-4y7u]
+    answer_bead: think-4y7u
+    replies: []
+    close_when: The canonical source-discovery addition is merged and acknowledged from main.
+
   - number: 375
     title: 'Analytic optima of 48 recent records (s(n) bounds 3e-13 … 5e-11 below the register) and exact certificates for every record n ≤ 104: registration request'
     author: evand
