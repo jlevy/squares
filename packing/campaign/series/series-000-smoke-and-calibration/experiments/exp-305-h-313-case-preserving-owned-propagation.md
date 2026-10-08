@@ -41,9 +41,15 @@ experiment:
       Shared recovery32M support/4M strictpairs/16Mquadratics and4M ownedintersection products. Per-casecollective
       caps unchanged, aggregate2x. Atmostone complete992pass percase, nofeedback.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation
-  results: []
+  results:
+  - shape: determination
+    question: Does one full simultaneous pass per preserved302 case add combined necessary angle loss
+      or close both cases?
+    outcome: criterion_missed
+    checked_by: Fullmatching construction/fresh payload,25importedsource joins, both16-group recoveries
+      and992-row passes; soleAstra actual mathCLEAR and independentSol custodyCLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Bind accepted302 complete descriptor/certificate/fresh replay, preserve BOTH correlated
       closed cases and every original typed992 row flag. In EACH open case apply its proved row exclusions,
       recover ALL16 foreign groups simultaneously at fixedowner0Q0, then run ONE complete992 self-excluded
@@ -54,11 +60,14 @@ experiment:
       limits precharged. Complete no-gain is an unchanged-method miss and stops this operator. No new
       split, globalcapture, endpoint substitution, ordinarycensus or bound claim. Partial/resource/refusal
       is unresolved.
-    reason: Prospective before target; finalsource author/uniquepeer/static/math/mechanical readiness
-      complete.
-  lease:
-    expires: '2026-10-08T03:00:00Z'
-    host: macOS arm64
+    reason: Both cases remain open; no additional surviving-case UNION loss for anyowner. Owner6 retainscombined
+      [1/16,19/32] and owner18 retainsprior11/32 loss. Secondaryverified lower-x owner6 deletion loses1/64
+      withinthatcase, narrowing [3/8,1/2] to [3/8,31/64]; uppercaseunchanged, so no combined gain. This
+      is not a per-case fixed point. Declared no-combined-gain stop retires the unchanged operator; no
+      automatic repeat or global/census/guard-exclusion claim.
+  effort:
+    wall_seconds: 97.15814574999968
+    stopped_by: criterion
 ---
 # Case-preserving owned propagation
 

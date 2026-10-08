@@ -5,12 +5,23 @@ status: reviewed
 ---
 # n17 Session186 Implementation Readiness
 
-The regional row-coverage route has reusable finite interfaces.
-Its first implementation should reconstruct regional domains and owned sets from the
-original accepted parent, then check the same twenty-five owner-18 rows excluded by
-exp296. No regional radius has been verified.
+This is the October 8, 00:20:56Z kickoff assessment, dated October 7 Pacific.
+At that startup snapshot, the regional row-coverage route had reusable finite
+interfaces. Its first implementation should reconstruct regional domains and owned sets
+from the original accepted parent, then check the same twenty-five owner-18 rows
+excluded by exp296. No regional radius had yet been verified.
 This review examines engineering readiness; Astra owns the mathematical contract and its
 acceptance rule.
+
+Later finite results supersede that startup status.
+[Exp297](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/README.md)
+freshly verifies 22 of the requested 25 rows under the radius-$1/512$ owner0 guard, so
+its fixed SAME25 primary criterion is missed.
+[Exp299](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/README.md)
+freshly verifies the full 25-row restriction at radius $2^{-23}$ using the reviewed
+strict-core transfer argument.
+Both are conditional necessary-domain restrictions; neither changes the global bound or
+census. The remaining readiness text preserves the kickoff source and plan review.
 
 Session186 runs from October 8, 00:10:09Z to 06:10:09Z, with research ending at
 05:40:09Z. The repository date is October 7 Pacific.

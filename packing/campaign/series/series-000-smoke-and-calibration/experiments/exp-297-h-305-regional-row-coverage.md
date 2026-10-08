@@ -70,9 +70,6 @@ experiment:
       \ in the half-angle parameter and is retained as a secondary finite result; no global theorem\
       \ or census admission."
     needs_review: false
-  lease:
-    expires: '2026-10-08T01:00:00Z'
-    host: macOS arm64
   effort:
     stopped_by: criterion
     timebox: 180s construction plus180s fresh; outerTERM360/KILL370, one worker,sampled4GiB current

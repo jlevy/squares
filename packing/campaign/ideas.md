@@ -1081,6 +1081,53 @@ prefilter with the standing verifier in two full-replay ABBA blocks.
 accepted fixed core and foreign row restrictions through a fresh uniform-ownership
 certificate at the separately declared smaller radius.
 
+- H-308: one-round direct regionalowned-domain propagation from the verified22-row
+  h1/512 rule; full992+16-recovery/one-pass, primaryadditionalunionloss or complete
+  scopedclosure, think-lyh9.
+- [H-309](hypotheses/H-309-one-round-fixed-core-regional-propagation.md): separately
+  registered tiny-guard sensitivity after the wider operator’s complete miss; preserve
+  the old25/64 baseline and require additional loss or a checked scoped contradiction.
+
+[H-310](hypotheses/H-310-two-child-collective-propagation.md) tests exactlytwo closed
+wider centre cases; additional progress is measured from the union of surviving cases.
+
+- **H-311 — normalized contact rank filter.** Exact graphic/laminar rejection
+  certificates for all95 distance2 representatives; normalization is a hand premise and
+  ordinary census admission remains separate.
+
+- **H-312 — n11 whole-square envelope windows.** Complete conservative containment
+  windows transfer the settled n11 lower bound to occupied n17 cells; positives need
+  review before ordinary census integration.
+
+- **H-313 — case-preserving owned propagation.** Retain both accepted302 case
+  correlations, recover all16 foreign groups once in each, and measure gain only after
+  union against the existing15/32 and11/32 baselines.
+
+- **H-314 — Independent Envelope Representation Discriminator.** All95 states have
+  complete576 upper and576 optimistic lower window counts (109440 total) with
+  sandwich/monotonic checks; endpointupper576 calibration muststay<=10. Primary either
+  checked11-square UPPER window obstruction or COMPLETE all95 optimisticLOWER no11
+  architecturekill: no independent whole-cell axis-aligned envelope enclosing every
+  cell/wall-compatible square can succeed atH31/8. Lower positives only show potential
+  and NEVERexclude an assignment.
+  Fresh reconstruction compares fullpayload.
+  Existing304negativecounts inherited andchecked; no ordinarycensus
+  admission/globalbound claim.
+  Partial/resource/refusal unresolved.
+  AftercompletearchitecturekillSTOPindependentenvelopes.
+
+- **H-315 — Same-Core Guarded Clause Transport.** Bind completeaccepted302 three roles
+  and fixedSAMEQ0 foreign proofchain, excluding obsolete owner0 targetrow diagnostics.
+  Emitexactcleared-denominator16signed vertex inequalities (jointtotaldegree3
+  incentre+halfangle).
+  Finiteprimary alloldh1/512 guard corners/univariatequadraticminima<=0
+  withreserve2^-21, positiveareaQ0, andNEWfullaxisalignedendpoint disjointness
+  fromQ0xoryspan>1; freshcompletepayload/roles/postcustody match.
+  The same-Q0 transport implication is an explicit source-audited handpremise,
+  independentlyverifiedflagfalse.
+  No guardvolume/strictwidening/complementcover/globalcapture/ordinaryadmission claim;
+  failedfiniteprimary ismiss, resource/refusalunresolved.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -1,5 +1,5 @@
 ---
-title: "exp-302 \u2014 Two Closed Regional Collective Cases"
+title: exp-302 — Two Closed Regional Collective Cases
 softschema:
   contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
@@ -44,9 +44,15 @@ experiment:
       precharged. Per-casecollective1M/16M/8M unchanged andstricter than derivedtotal2M/32M/16M. Atmosttwo
       completeopen992passes, nofeedback.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation
-  results: []
+  results:
+  - shape: determination
+    question: Does the union of both complete closed regional cases add a necessary angle restriction
+      or close the guard?
+    outcome: criterion_met
+    checked_by: Complete matching construction and fresh payload; all992 rows in both open cases; sole
+      Astra actual mathematical CLEAR and independent Sol custody/quantifier audit CLEAR.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Exact accepted300 three-role wide h1/512 complete proof/MISS with inherited1056/all992/all16
       recoveries and old11/32 baseline, plus accepted295 certificate/replay ONLYsameparent fixed owner18/x471/250
       selection. Join all992 original closed typed rows/flags once; parse all17 acceptedgroups. Two closed
@@ -56,13 +62,23 @@ experiment:
       owner, or both complete cases contradicted. One case gain/closure alone does not count. Separate
       fresh process matches complete payload/custody/fullcaseaccounting. No globalcapture, point/tinyguard
       substitution, parent/root replay or ordinary/census claim. Resource/refusal incomplete is not negative.
-    reason: Prospective before target; final source/controls/mathematical and mechanical review CLEAR.
-      Await commit/actual bytefreeze.
-  lease:
-    expires: '2026-10-08T02:30:00Z'
-    host: macOS arm64
+    reason: Both closed cases remain open. After union across cases, owner6 (label3) is restricted from
+      [0,1] to [1/16,19/32], additional half-angle parameter loss15/32. Owner18 retains prior11/32 loss.
+      This is a necessary implication throughout the wider h1/512 regional guard; no guard contradiction,
+      ordinary admission, census change or global optimality proof.
+  effort:
+    wall_seconds: 81.92460320901591
+    stopped_by: criterion
 ---
 # Two Closed Regional Collective Cases
+
+Completed construction and fresh verification match exactly.
+Both closed cases remain open, but their surviving-case union restricts owner6 (label3)
+to $[1/16,19/32]$, an additional $15/32$ of half-angle parameter length.
+The original owner18 loss of $11/32$ is retained.
+This implication holds throughout the wider $h=1/512$ guard; it does not exclude that
+guard or change the global bounds or census.
+See the result directory for compact custody and execution evidence.
 
 Exact accepted300 three-role wide h1/512 complete proof/MISS with
 inherited1056/all992/all16 recoveries and old11/32 baseline, plus accepted295

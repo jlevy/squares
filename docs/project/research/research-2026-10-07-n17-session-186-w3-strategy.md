@@ -5,6 +5,20 @@ status: proposed
 ---
 # n17 Session 186 W3 Strategy
 
+Current disposition: the initial regional tests proved 22 rows throughout $h=1/512$ and
+the original 25 rows throughout $h=2^{-23}$. The single-context recovery tests exp300
+and exp301 both reached complete fixed points.
+Exp302 then proved an additional owner6 half-angle loss of $15/32$ using two closed
+centre cases, with neither case excluded.
+The selected case-preserving recovery test exp305 has now completed without additional
+combined loss. Its lower-centre case deletes one further owner6 row, but the upper case
+still supplies that part of the combined domain.
+Its exact premise and criterion are in the
+[case-preserving contract](research-2026-10-07-n17-case-preserving-owned-propagation.md).
+The ordinary census and global bracket remain unchanged.
+The original kickoff ranking below is retained as the decision record; later result
+sections record its updates.
+
 The first mathematical investment should lift exp296’s same twenty-five excluded rows to
 one declared region of positive width.
 It tests whether the first successful conditional propagation result can become a
@@ -19,7 +33,7 @@ and the
 [mathematical contracts](research-2026-10-07-n17-full-square-partner-coupling.md).
 All new lemmas below are sole-Astra hand derivations, without independent mathematical
 review or formal checking.
-No new target, margin, radius or contact system was evaluated for this W3. Work
+No new target, margin, radius or contact system was evaluated for the original W3. Work
 allowances are proposed decision budgets, not completion estimates.
 
 ## What the Accepted Result Changes
@@ -365,6 +379,393 @@ out of every dependency.
 A successful six-hour block can establish a regional implication, stronger finite
 propagation, or a new admitted external family; none supplies an evidence-based date for
 completing n17 optimality.
+
+## A Global Decision After the Regional Results
+
+The verified wider 22-row and tiny 25-row restrictions establish conditional relations
+within one accepted parent.
+They leave the global lower bound and the residual census unchanged.
+Another two or three hours of such tests can produce useful implications, but current
+evidence does not justify a proof-completion estimate.
+
+The selected global effort is the
+[wall and contact budget](research-2026-10-07-n17-global-contact-budget.md).
+A new self-contained hand argument proves that every packing with side at most
+$1169/250$ has at most four squares touching each wall, hence at most sixteen active
+wall rows. Combined with the carefully quantified fixed-orientation normalization, a
+strict counterexample would have a normalized representative with at least nineteen
+distinct contacting pairs.
+This strengthens the earlier fourteen-contact necessary condition.
+The new note retains the full proof, including global lexicographic choice before
+SAT-branch selection and inactive artificial side bounds $0$ and $U$.
+
+This is a global necessary condition, without independent mathematical review or a new
+side-bound certificate.
+Its first 30–60 minute consumer effort should check the explicit universal arithmetic
+premises and review the normalization interface; the rank-35 existence argument remains
+a hand-proof dependency.
+An unrestricted contact atlas still lacks a tractable complete graph/orientation cover.
+A graph of possible contacts cannot be pruned merely because its degree exceeds a bound
+on actual contacts.
+
+The finite-angle LP route has exact local interfaces but still needs a complete global
+angle/feature cover and the original-to-terminal joins.
+Repeating samples cannot supply those quantifiers.
+The capture interface likewise needs actual complete guarded-domain coverage; the new
+local implications do not prove that every original pose enters a certified region.
+These routes remain secondary to testing whether the accepted regional restriction
+propagates, while the universal wall/contact lemma improves the global normal-form
+specification in parallel.
+
+Any later normalized-contact filter must preregister its complete represented roster and
+require strict pruning.
+If all alternatives survive, stop that filter rather than fund an atlas on the strength
+of its necessary-condition derivation alone.
+There is no current census exclusion from normalization, which must occur before cell
+and guard assignment.
+
+## A Core-Ownership Clause for a Complete Cover
+
+The accepted regional results suggest a way to express their implication without an
+atlas of tiny axis-aligned pose boxes.
+This is a further sole-Astra hand composition, not an implemented consumer or a new
+global exclusion.
+
+Fix a core $Q$ whose foreign-domain argument has been audited to depend on owner0 only
+through strict ownership of $Q$. Let $a<1/2$ be a positive rational threshold.
+For every vertex $q$ of $Q$, both body axes $w\in\{u,v\}$ and both signs $\sigma$,
+define
+
+$$
+F_{q,w,\sigma}(c,t)
+=\bigl(a-\sigma w(t)\cdot(q-c)\bigr)(1+t^2).
+$$
+
+These are polynomials of degree at most two in the half-angle parameter and affine in
+the centre coordinates.
+For example, writing $x=q_x-c_x$, $y=q_y-c_y$ gives
+
+$$
+F_{q,u,\sigma}=(a-\sigma x)-2\sigma yt+(a+\sigma x)t^2,
+\qquad
+F_{q,v,\sigma}=(a-\sigma y)+2\sigma xt+(a+\sigma y)t^2.
+$$
+
+Since $1+t^2>0$, the closed guard defined by all $F\ge0$ places the whole convex core
+strictly inside owner0’s square.
+Under this guard, the audited foreign necessary domains, recovered ownership and
+collective row exclusions retain their original inputs.
+The point-specific owner0 footprint is still excluded from the transported scope.
+
+The inside branch and the individual opposite closed faces form a complete cover:
+
+$$
+\{\text{all }F\ge0\}\ \cup\ \bigcup_{q,w,\sigma}\{F_{q,w,\sigma}\le0\}
+=\{\text{all owner0 poses in the original domain}\}.
+$$
+
+Intersect every branch with that original domain.
+Equality belongs to both sides; disjointness is unnecessary for completeness.
+The outside branches remain unresolved unless they receive their own exclusion or
+terminal proof. A global consumer must retain the polynomial branch predicates as proof
+premises. Merely enclosing an inside branch by a centre/angle product box does not prove
+that every pose in the enclosure satisfies the ownership guard.
+
+This could turn a local proof into a reusable conditional clause: if owner0 owns $Q$,
+owner18 must avoid the proved closed rows.
+Its contrapositive supplies a coupling constraint when owner18 lies in one of those
+rows. It does not establish a larger geometric domain, a whole-parent exclusion or an
+improvement over every existing standing-checker method.
+
+### Why the Point Core May Remain Intrinsically Local
+
+Exp299’s accepted point core has four vertices and the checked reserve
+$\varepsilon=2^{-20}$. Its construction is close to the full tilted unit square.
+Four vertices and the reported coordinate maxima alone are not a certificate of a
+particular inscribed square; the quantitative argument below has an explicit extra
+geometric premise.
+
+Suppose $Q$ contains the square centred at $c^\ast$ with the matched orientation and
+half-side $r=1/2-\varepsilon$. Any unit square containing $Q$ must contain that inner
+square. Let $\gamma\in[0,\pi/4]$ be the orientation difference reduced modulo quarter
+turns. Its projected half-width on either containing-square axis is
+$r(\cos\gamma+\sin\gamma)$. Thus the closed ownership guard at threshold $a$ requires
+
+$$
+|u(t)\cdot(c-c^\ast)|,
+|v(t)\cdot(c-c^\ast)|
+\le a-r(\cos\gamma+\sin\gamma)\le a-r.
+$$
+
+In particular, with $a\le1/2$, the centre distance is at most $\sqrt2\,\varepsilon$.
+Translation cannot compensate for excess projected width.
+For $z=\tan(\gamma/2)<1/2$,
+
+$$
+\cos\gamma+\sin\gamma
+=1+\frac{2z(1-z)}{1+z^2}\ge1+\frac45z.
+$$
+
+Writing $a=1/2-\delta$ with $0\le\delta<\varepsilon$ therefore gives the necessary bound
+
+$$
+z\le\frac{5(\varepsilon-\delta)}{2(1-2\varepsilon)}.
+$$
+
+This hand bound explains why an ownership predicate for a near-full square can remain
+small even when represented exactly.
+Applying it numerically to a retained core would require a separately checked
+inscribed-square premise; no such new target was run for this argument.
+The more eroded core used in exp297 may allow a wider ownership guard, but that is a
+geometry question to measure under a new fixed criterion.
+Its 22-row result does not itself determine that guard’s size or establish the cause of
+the three unresolved rows.
+
+For a general polygon $Q$, the exact possible centre coordinates in the body’s axes are
+
+$$
+u(t)\cdot c\in
+[\max_{q\in Q}u(t)\cdot q-a,\ \min_{q\in Q}u(t)\cdot q+a],
+$$
+
+with the analogous interval for $v$. This supplies an implementable width and
+centre-domain description, without claiming those intervals are nonempty.
+A future consumer can use all vertex inequalities directly; an exact support-envelope
+partition is a separate implementation choice requiring its own complete angle cover.
+
+### Global Admission Obligations and Selection
+
+The known endpoint family requires a new control.
+Disjointness of the small $h$ box does not prove disjointness of this potentially larger
+core guard. Before using it as an excluded region or admitting a global branch result,
+check the complete endpoint family against the new predicate in the original
+root/frame/label conventions, or provide a terminal branch that retains it.
+Original-parent endpoint retention remains a separate control.
+
+The smallest complete consumer would check the fixed core identity, positive strict
+threshold reserve, every polynomial coefficient, inside-branch ownership, and the closed
+inside/outside cover.
+It would then bind the accepted foreign proof and preserve every unresolved complement
+branch. An ordinary census exclusion still requires all of those branches closed under
+the appropriate container theorem; an endpoint terminal requires its separate
+strict-smaller-side composition.
+
+The predeclared first priority was H308/exp300: one recovery/collective pass on the
+accepted wider 22-row restriction.
+A complete fresh fixed point, with zero additional loss and zero new live-row deletions,
+selects one separately preregistered H309/exp301 sensitivity test using the existing
+`fixed_core_regional` mode and accepted exp299 25-row premise at $h=2^{-23}$. Its
+primary criterion is new loss or a complete contradiction, not the old $25/64$
+restriction. The same 180-second construction and fresh ceilings apply; there is no
+runtime forecast or automatic launch.
+This source-ready test precedes new two-centre-case implementation.
+A complete sensitivity miss selects that proposed fallback on the wider base; a positive
+result receives a new disposition.
+Resource incompleteness does not establish either fixed point.
+
+Both selected targets have now completed with fresh matching finite results.
+Exp300 accounted for all 992 foreign rows and all sixteen recoveries on the wider guard,
+with zero additional interval loss, zero new live-row deletions and no contradiction;
+its supervised wall time was 73.1934 seconds.
+Exp301 gave the same completed method miss on the tiny fixed-core guard, in 107.6803
+supervised seconds. The old $11/32$ and $25/64$ restrictions remain valid, but neither
+was strengthened by this operator.
+These are fixed points of the specified recovery/whole-row-deletion procedure, not
+feasible packing witnesses.
+
+The subsequently selected source contract was the
+[two-child collective pass](research-2026-10-07-n17-two-child-collective-propagation.md),
+H310/exp302, whose positive result is recorded above.
+It uses the accepted wider exp300 base; exp301 supplies only the selection trigger.
+In parallel, the
+[normalized contact-rank filter](research-2026-10-07-n17-normalized-contact-rank-filter.md)
+provides a separate global necessary-condition discriminator.
+Its proposed selected roster and normalized-cover scope do not change the ordinary
+census.
+
+Those tests determine whether the current implication propagates.
+The polynomial clause interface is useful if it carries a productive implication into a
+complete guarded proof search; replacing a tiny box by an equally tiny predicate without
+new consequences is not an acceleration result.
+No contact atlas, expanded guard target or clause consumer is authorized by this
+source-only assessment.
+
+## Global Reassessment After the Complete Method Tests
+
+Exp303 found a checked size-35 common-independent-set witness for every one of the 95
+selected distance-two orbits.
+It found no normalized-rank obstruction and left no state unresolved.
+Exp304 checked all 54,720 whole-envelope window counts without an eleven-square
+obstruction: 47 orbits had maximum count six and 48 had maximum seven.
+These are complete misses of the declared relaxations, not packing witnesses.
+They end the unchanged coarse rank filter and whole-cell envelope tests on this roster.
+
+Exp305 completed both case recoveries and both complete 992-row collective passes, with
+matching fresh results, in 97.158 supervised seconds.
+Neither case closed.
+In the lower-centre case, owner6 narrows from $[3/8,1/2]$ to $[3/8,31/64]$, a further
+$1/64$ parameter loss.
+The upper case remains unchanged, so the combined owner6 and owner18 restrictions are
+exactly the accepted exp302 baseline.
+This is a primary combined-loss miss, not a fixed point of each individual case and not
+a claim of zero newly deleted rows.
+The declared no-combined-gain stop applies; repeating this operator unchanged is not the
+next selected mathematical investment.
+
+The present results leave two different proof deficits.
+The regional clauses constrain only packings satisfying a particular owner0 guard.
+The global filters discard enough orientation and positional dependence to admit all
+selected occupancy states.
+Neither deficit is resolved by more CPU alone.
+The existing standing verifier already uses partner-pose information; the finite
+owned-set experiments do not establish that all such methods lack a constraint or that
+their surviving models extend to a packing.
+
+### A Stronger Global Use of the Eleven-Square Theorem
+
+The proposed envelope representation test H314/exp306 is a final bounded check of that
+specific architecture.
+Its lower envelopes can prove that no independent all-pose whole-cell AABB improvement
+at the same window size can help these states.
+That possible conclusion would not rule out constraints relating one square’s pose
+across several windows.
+
+A new hand-derived necessary condition retains that relation.
+Set $U=1169/250$, $H=31/8$, $d=U-H$ and let $h_i=(|\cos\theta_i|+|\sin\theta_i|)/2$ be
+square $i$'s common horizontal and vertical half-extent.
+For a unit square in $[0,U]^2$,
+
+$$
+1/2\le h_i\le\sqrt2/2<r=707107/10^6,
+\qquad h_i\le x_i,y_i\le U-h_i.
+$$
+
+Consider the four side-$H$ windows anchored at the container’s corners.
+Horizontal left membership is $x_i+h_i\le H$; horizontal right membership is
+$x_i-h_i\ge d$. There are analogous bottom and top conditions.
+Since $2r<2H-U$, every square satisfies at least one horizontal and one vertical
+condition. It therefore lies wholly inside at least one corner window.
+The same triple $(x_i,y_i,h_i)$ determines all four memberships.
+
+The inherited T-061 theorem permits at most ten complete unit squares in each window.
+If $m$ squares satisfy both horizontal and both vertical conditions, and $e$ satisfy
+both in exactly one coordinate, counting memberships in the four windows gives
+
+$$
+4m+2e+(17-m-e)\le40,\qquad\text{hence}\qquad3m+e\le23.
+$$
+
+This is a global necessary condition for every seventeen-square packing in this
+container. It does not require contact normalization or a guarded parent.
+The derivation is new hand mathematics by the sole Astra author; it has not been
+independently reviewed or checked by a new instrument.
+
+A stronger finite relaxation keeps the four individual capacities, not only their sum.
+For one original closed centre-cell polygon, enumerate the three horizontal regions
+
+$$
+L:\ x\le d+h,\qquad
+B:\ d+h\le x\le H-h,\qquad
+R:\ x\ge H-h,
+$$
+
+and the three analogous vertical regions, retaining the common variable $h\in[1/2,r]$
+and both container wall bounds.
+These nine products cover every physical pose.
+An $L$ region guarantees left-window membership because $x+h\le d+2h\le d+2r<H$; an $R$
+region guarantees right membership; a $B$ region guarantees both.
+Boundary overlaps may retain fewer guaranteed memberships than the actual pose has,
+which weakens the relaxation safely.
+They must never be interpreted as exact nonmembership assertions.
+
+The selected H316/exp308 consumer uses each exact original convex polygon, not its AABB.
+Its edge inequalities, the four physical wall inequalities, $1/2\le h\le r$ and one
+horizontal/vertical class define a bounded closed rational polytope in $(x,y,h)$.
+Enumerate lexicographically all triples of its constraint planes, solve nonsingular
+triples exactly, and test the resulting point against every inequality.
+A nonempty bounded polytope has a vertex, even if its dimension is less than three; at a
+vertex the active normals span three dimensions, since an orthogonal nonzero direction
+would permit a small feasible motion in both signs.
+Thus exhaustive triples include every necessary vertex candidate.
+
+An additional exact test removes the artificial reach admitted by $r$: accept a feasible
+vertex only when $2h^2\le1$. This does not lose a physical cell-region pose.
+If any point of the linear polytope has $h\le\sqrt2/2$, minimizing the linear coordinate
+$h$ over that polytope attains a vertex with no larger $h$. That vertex passes the
+rational test.
+Conversely every $h\in[1/2,\sqrt2/2]$ is attained by some orientation of a
+unit square, because $(\cos\theta+\sin\theta)/2$ is continuous with that range on
+$[0,\pi/4]$. The reach test therefore requires no algebraic vertex coordinates or
+transcendental evaluation.
+A failed first linear vertex is not a negative result: continue until a passing vertex
+is found or all triples are exhausted.
+
+These nine classifications per catalogue cell are reusable across the 95 assignments.
+Positive classifications retain a checked rational pose and active triple; negative
+classifications require complete vertex absence under the reach test.
+Both class boundaries and cell boundaries are closed.
+
+For each occupied assignment, choose one allowed membership pattern per square and
+require each of the four window counts to be at most ten.
+An exact dynamic program on count vectors in $\{0,\ldots,10\}^4$ can provide either a
+surviving pattern assignment or complete reachable-frontier evidence of failure.
+A negative result would exclude that ordinary named assignment by T-061. A surviving
+pattern assignment is only a countermodel to this finite relaxation; its squares need
+not be mutually nonoverlapping.
+Nor do the guaranteed bits report every actual window membership at a class seam.
+
+The proof consumer would require the exact original cover and all 95 named/D4 joins, the
+inherited T-061 theorem, complete nine-region classifications, complete capacity logic,
+and a retained feasible control for the known endpoint assignment.
+No existing census entry changes without its ordinary admission join.
+The selected construction is deliberately limited to these four windows and this one
+roster. If all 95 admit pattern assignments, stop this four-window relaxation; do not
+automatically add a dense window grid.
+
+### Priority, Costs and Failure Criteria
+
+The next global discriminator should retain a dependence that a completed miss actually
+discarded. The four-window constraint above combines a many-square theorem with one
+shared pose triple per square.
+This gives it a different mathematical purpose from tighter independent AABBs or another
+contact-count atlas.
+Its source and exact controls are a proposed 30–60 minute engineering/review block,
+followed only by a separately registered bounded target.
+There is no measured runtime or predicted success rate.
+The reachable-state bound is $11^4=14,641$ per dynamic-program layer.
+The prospective protocol freezes 120 seconds per phase, four million plane triples, 64
+million linear inequality evaluations and 64 million dynamic-program transitions
+cumulatively, with three million transitions per assignment.
+It retains all 216 cell classifications, all 95 state outcomes and the endpoint control.
+An obstruction stores all eighteen reachable frontiers as canonical finite-set bitmaps;
+a survivor stores seventeen class choices and their four capacity counts.
+Fresh reconstruction checks the complete selected result.
+Any unfinished state makes the target incomplete rather than a negative classification.
+These resource limits and the 30–60 minute source allowance remain prospective until the
+registered target runs.
+
+The contact-normalization lemma remains useful, but its next consumer would need
+orientation-sensitive contact equations or a positive exact dual contradiction, with a
+complete parameter cover.
+Structural rank alone no longer justifies an atlas.
+Nor can one assume all active contacts have positive equilibrium multipliers: degenerate
+or unstressed contacts can carry zero weight, and the side-minimizing dual need not load
+every component. A proposed force-balance pruning rule must explicitly handle those
+cases.
+This is a substantive completeness obligation, not an engineering detail solved by
+faster matroid intersection.
+
+The new [owned-core guard](research-2026-10-07-n17-owned-core-guarded-clauses.md) is a
+useful local proof interface if its finite criterion passes.
+It can carry the accepted clauses beyond a syntactic box description, but its global
+value still depends on a checked complementary cover or a terminal implication.
+Do not fund tiny-box tiling merely because a polynomial description is available.
+An independently checked relational constraint or imported full exclusion certificate
+that reaches the ordinary residue takes priority over another unproductive local round.
+
+These proposals do not estimate the time to complete the n17 theorem.
+The current evidence supports bounded decisions between mathematical approaches; it does
+not supply a completion rate or a proof ETA.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -88,7 +88,7 @@ agenda:
     owner_focus: insight
     instances:
     - 17
-    state: tentative
+    state: in_progress
     priority: 1
     question: Does the contact-normalization hand theorem give a complete useful structural discriminator?
     budget: Six-hourwindow split into slices atmost30minutes; each target has prospectivelydeclared resources.
@@ -98,13 +98,14 @@ agenda:
       next entry.
     bead: think-nvkf
     depends_on: []
-    next_evidence: docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
+    next_evidence: docs/project/research/research-2026-10-07-n17-global-contact-budget.md
     workflows:
     - insight-iteration
     program: n17-optimality
     artifacts:
     - docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
     - packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md
+    - docs/project/research/research-2026-10-07-n17-global-contact-budget.md
     parallel_group: n17-six-hour
   - id: BC-454
     purpose: tool_validation

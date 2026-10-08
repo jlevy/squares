@@ -25,6 +25,12 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_n11_envelope_representation.py
+    kind: generated-artifact
+    boundary: Three generated prior-window receipts bind the finite representation comparison; no Git source checksum determines acceptance.
+  - path: packing/devtools/check_n17_owned_core_guarded_clause.py
+    kind: generated-artifact
+    boundary: Generated accepted two-case and H290 receipts bind the fixed owned core and endpoint premise; these are runtime artifact joins, without source checksum acceptance.
   - path: packing/devtools/check_n17_case_preserving_owned_propagation.py
     kind: generated-artifact
     boundary: The three accepted generated two-case receipts bind the exact regional cases and baseline before fresh propagation; source and commit checksums do not decide acceptance.

@@ -40,9 +40,15 @@ experiment:
     budget: Construction120s, fresh60s, outerTERM180/KILL190; one worker, sampled4GiB currentRSS per liveprocess;
       bounded exact exchange and arithmetic counters.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter
-  results: []
+  results:
+  - shape: determination
+    question: Does the fixed normalized contact relaxation yield at least one checked obstruction among
+      all95 states?
+    outcome: criterion_missed
+    checked_by: Complete95 fresh reconstructed graphic/capacity independent35-clone survival certificates;
+      matching payload, full imported-source custody and soleAstra actual result CLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: 'All95 accepted distance2 representatives, covering744 states, are completely classified
       by exact reconstructed normalized contact incidence rosters. Primary: at least one independently
       checked rank obstruction rank_graph(A)+rank_capacity(E\A)<35, with every other state also receiving
@@ -50,11 +56,13 @@ experiment:
       filter. Separate fresh process checks all selected certificates and complete payload equality. Normalization
       and determinant expansion remain explicit hand-proof premises; no ordinary state exclusion or census
       admission follows. Partial, resource-stopped or refused work is unresolved.'
-    reason: Prospective registration before any selected geometry evaluation; reviewed source and controls
-      ready.
-  lease:
-    expires: '2026-10-08T03:00:00Z'
-    host: macOS arm64
+    reason: All95 representatives survive with checked35-clone common independent sets; zero obstructions
+      and zero unresolved. The unchanged coarse filter is retired; do not build an atlas from it. Survival
+      neither realizes physical contacts nor disproves the hand normalization theorem. No ordinary exclusions,
+      census admission or bounds change.
+  effort:
+    wall_seconds: 19.484242416976485
+    stopped_by: criterion
 ---
 # Normalized contact rank filter
 

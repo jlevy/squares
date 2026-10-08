@@ -270,12 +270,18 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These 31 research reports are the durable topical syntheses:
+These 37 research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
+| [Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | Transport of the verified same-core implication to a polynomial pose guard, with endpoint disjointness and the complementary-cover obligation separated |
+| [Case-Preserving Owned Propagation](docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md) | Verified regional orientation gain, retained case correlations and the next simultaneous propagation contract |
+| [n11 Envelope Transfer](docs/project/research/research-2026-10-07-n17-n11-envelope-transfer.md) | Whole-square containment windows transferring the settled n11 bound, with complete finite positive and negative checks |
+| [Normalized Contact Rank Filter](docs/project/research/research-2026-10-07-n17-normalized-contact-rank-filter.md) | Hand forest/capacity relaxation for full-rank representatives, exact rejection-certificate contract and a bounded prospective 95-orbit discriminator |
+| [Global Contact Budget for n17](docs/project/research/research-2026-10-07-n17-global-contact-budget.md) | Hand normalization proof requiring at least 19 distinct pair contacts and three graph cycles; finite arithmetic checks and global capture remain separate obligations |
+| [Two-Child Collective Propagation](docs/project/research/research-2026-10-07-n17-two-child-collective-propagation.md) | Two closed regional centre cases and a verified additional 15/32 orientation restriction measured after their surviving-case union |
 | [One-Round Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md) | Complete one-round ownership recovery and collective restriction contract on accepted guarded geometry |
-| [Strict Core Regional Transfer](docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md) | Source-audited fixed-core transfer to a declared positive-width guard, pending finite checking |
+| [Strict Core Regional Transfer](docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md) | Freshly checked 25-row conditional restriction at radius $2^{-23}$ in [exp299](packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/README.md); direct reconstruction at radius $1/512$ retains 22 rows in [exp297](packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/README.md) |
 | [n17 Session 186 W3 Strategy](docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md) | Positive-width regional lifting, conditional propagation and measured verification priorities for the six-hour continuation |
 | [Full-square partner coupling](docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md) | Prospective exact separating-axis test and a positive-margin lift to a closed nonzero region |
 | [Complete Partner-Pose Coupling for the n17 Parent](docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md) | Complete-row collision quantifiers, the fixed-witness discriminator, closed-region ladder and endpoint-family safeguards |

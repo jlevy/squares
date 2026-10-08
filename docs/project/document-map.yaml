@@ -9,6 +9,12 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-n11-envelope-transfer.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-normalized-contact-rank-filter.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-global-contact-budget.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-two-child-collective-propagation.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md, role: plan, authority: current, lifecycle: transient}

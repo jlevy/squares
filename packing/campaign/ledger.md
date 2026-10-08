@@ -199,7 +199,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
 | [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
-| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 3 | think-2mzl | Dispose exact regional result and fixed-core transfer prerequisites; preregister one simultaneous ownership recovery discriminator after accepted input. |
+| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 7 | think-2mzl | Seal/publish allcurrentevidence andCIrepairs with boundedpushfloor in selectedcheckout; runnew306 envelope-architecture and307 guarded-core transport onlyafter finalsource controls/preregistration. Astra deepglobalW3 decides nextproofobligations; no unchanged305 repeat. |
 
 ### Workflow summary
 
@@ -209,10 +209,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 4 | 2 | 16 | 2 |
 | `factual-review` | 11 | 1 | 67 | 3 |
-| `insight-iteration` | 31 | 1 | 94 | 4 |
+| `insight-iteration` | 31 | 1 | 95 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 11 | 1 | 45 | 1 |
-| `research-loop` | 37 | 4 | 150 | 9 |
+| `efficiency-loop` | 11 | 1 | 46 | 1 |
+| `research-loop` | 37 | 4 | 152 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -948,14 +948,14 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | BC-450 | research | 17 | in_progress | 1 | think-2mzl | docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md |
 | BC-451 | research | 17 | in_progress | 1 | think-98mg | docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md |
 | BC-452 | measurement_validation | 17 | in_progress | 1 | think-ui2y | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
-| BC-453 | research | 17 | tentative | 1 | think-nvkf | docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md |
+| BC-453 | research | 17 | in_progress | 1 | think-nvkf | docs/project/research/research-2026-10-07-n17-global-contact-budget.md |
 | BC-454 | tool_validation | 17 | blocked | 1 | think-7hy3 | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 226 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 236 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1199,9 +1199,17 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | H-302 | confirmed | proof | Low-frequency stage observers preserve the accepted full exact replay  |  | 1 |  | 1.8m wall |
 | H-303 | refuted | proof | A deterministic two-child closed centre split certifies the declared n |  | 1 |  | 24s wall |
 | H-304 | confirmed | proof | One simultaneous collective union pass strictly reduces a foreign owne |  | 1 |  | 28s wall |
-| H-305 | running | proof | At fixed h=1/512, the SAME25 accepted owner18 rows are necessarily exc |  | 1 |  |  |
-| H-306 | blocked | proof | Exact strict closed-Y rejection of coverage-edge candidates speeds ful |  | 0 |  |  |
-| H-307 | blocked | proof | The accepted point Q0 and SAME25 foreign row restrictions transfer to  |  | 0 |  |  |
+| H-305 | refuted | proof | At fixed h=1/512, the SAME25 accepted owner18 rows are necessarily exc |  | 1 |  | 3.9m wall |
+| H-306 | unresolved | proof | Exact strict closed-Y rejection of coverage-edge candidates speeds ful |  | 1 |  | 12.3m wall |
+| H-307 | confirmed | proof | The accepted point Q0 and SAME25 foreign row restrictions transfer to  |  | 1 |  | 37s wall |
+| H-308 | refuted | proof | One simultaneous foreign owned-set recovery and full collective pass a |  | 1 |  | 1.2m wall |
+| H-309 | refuted | proof | One simultaneous recovery and complete collective pass adds a strict n |  | 1 |  | 1.8m wall |
+| H-310 | confirmed | proof | Two complete closed centre cases add a necessary exact angle-union res |  | 1 |  | 1.4m wall |
+| H-311 | refuted | proof | The coarse exact contact incidence relaxation excludes at least one of |  | 1 |  | 19s wall |
+| H-312 | refuted | proof | At least one of95 distance2 ordinary occupancy representatives forces  |  | 1 |  | 2s wall |
+| H-313 | refuted | proof | One simultaneous recovery and collective pass in each retained302 case |  | 1 |  | 1.6m wall |
+| H-314 | running | proof | Independent Envelope Representation Discriminator |  | 1 |  |  |
+| H-315 | running | proof | Same-Core Guarded Clause Transport |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1211,7 +1219,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Rounds
 
-### rejected (45)
+### rejected (51)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1260,6 +1268,12 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-292 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-300 | All16exactpartner minima are nonpositive, with no positivepartner or regional lift. Fifteen retainednegativewitnesses passexactnumericwalls; owner4alone fails bottomwall at49/64 by-75040/10713553. Common-coreerosion is not thesoleexplanation. No simultaneouspacking established. |
 | exp-293 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-301 | The complete h=0 point context has no empty foreign owner or shared strictly owned point. All992 foreign rows remain nonempty. The h=1/512 regional context is unstarted under the preregistered monotonic inclusion rule. This is a completed recipe miss, not a packing witness or global impossibility result. |
 | exp-295 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-303 | Complete fresh-matched point miss; both selected children remain open, so the regional phase is skipped by fixed-cut nesting. |
+| exp-297 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes in Session186. | H-305 | Complete fresh reconstruction agrees on22 covered rows19–23 and35–51, leaving33,34,52 uncovered. The SAME25 primary criterion is missed. The narrower regional restriction loses11/32 in the half-angle parameter and is retained as a secondary finite result; no global theorem or census admission. |
+| exp-300 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes inSession186; think-lyh9. | H-308 | Both complete phases match. All16 additional union losses are0, no new live row deletion and no closure. This chosen operator is at a fixed point; prior22-row11/32 implication is retained. No feasibility, global theorem or census change follows. |
+| exp-301 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes inSession186; think-lyh9. | H-309 | Both complete phases match. All16 additional union losses are0, no new live row deletion and no closure. The chosen operator is at a fixed point even under the tinyguard; old25/64 implication retained. No feasibility, global theorem or census change follows. |
+| exp-303 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-311 | All95 representatives survive with checked35-clone common independent sets; zero obstructions and zero unresolved. The unchanged coarse filter is retired; do not build an atlas from it. Survival neither realizes physical contacts nor disproves the hand normalization theorem. No ordinary exclusions, census admission or bounds change. |
+| exp-304 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-312 | Complete95 negatives; maximum enclosed envelopes6 for47orbits and7 for48orbits, below11. Fresh exact counts and all11 importedsource joins match. This fixed envelope rule is retired; no ordinary exclusion, global bound or census change. Optional endpoint window calibration was not implemented. |
+| exp-305 | series-000 | 17 | Session186 coordinator; think-lyh9. | H-313 | Both cases remain open; no additional surviving-case UNION loss for anyowner. Owner6 retainscombined [1/16,19/32] and owner18 retainsprior11/32 loss. Secondaryverified lower-x owner6 deletion loses1/64 withinthatcase, narrowing [3/8,1/2] to [3/8,31/64]; uppercaseunchanged, so no combined gain. This is not a per-case fixed point. Declared no-combined-gain stop retires the unchanged operator; no automatic repeat or global/census/guard-exclusion claim. |
 
 ### exhausted (1)
 
@@ -1277,7 +1291,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-231 | series-000 | 11 | Claude Session 156, Opus extra-high lane and coordinator | H-236 | The declared caps ran out with 58 of 256 subtrees open and no counterexample candidate, so H-236 is neither confirmed nor refuted; the remaining subtrees are a bounded computation for the unchanged frozen instrument. |
 | exp-289 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Construction resource stop before the coupling predicate: per-row residual piece ceiling64 exceeded after3.176s; fresh unstarted. Sampled supervisor completednormalrc1 in3.507s with cleanup. No mathematical negative. |
 
-### unresolved (59)
+### unresolved (60)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1340,6 +1354,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-254 | series-000 | 17 | Claude Session 182; the run operator's BC-425 queue produced and verified each certificate on one slot and then two, and admitted each closure in the session checkout | H-267 | Eight of the ten frozen arity-8 flags closed under lane K's frozen SW9 recipe and were admitted on the standing verifier's full pass, and two stopped at its 24-round cap. The certified census fell from 72,248 states in 9,162 orbits to 39,656 states in 5,057 orbits with the endpoint surviving, but arity-8 classes bear on H-267's arity-seven criterion only as progress on the census, so H-267 is unresolved by this round. |
 | exp-255 | series-000 | 17 | Claude Session 182; the run operator's lane E queue ran the ten shards on a second clean run worktree in the slot left after the kernel lanes | H-273 | All 95 distance-2 orbits were searched and none placed, while every shard's control placed. Under the frozen criterion that is no placement in 95 searches, not a proof of infeasibility, so H-273 stays unresolved. The 0.00027 near miss on mask 3963647 is the orbit a later exact or longer search would take first. |
 | exp-260 | series-000 | 17 | GPT-6.1 Sol coordinator executes Astra's frozen mathematical contract, Session184. | H-277 | Forty-three targets have positive finite numerical minima; five all-infeasible targets lack exact Farkas witnesses. The frozen positive criterion is unavailable. Slider omission exposes a negative relaxed margin, so slider coverage remains essential. |
+| exp-298 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes in Session186. | H-306 | Six full exactparity replays completed; process-memory guard ps call timedout after1s, causing ownedgroup termination738.165964s withcompletecleanup. Seventh lacksreceipt/eighthunstarted. The two completeABBA prerequisite is unmet; no speedup verdict/no capchange or automaticrepeat. |
 
 ### blocked (18)
 
@@ -1364,7 +1379,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (85)
+### accepted (87)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1453,6 +1468,8 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-290 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-299 | Unchanged-regime attempt2 completes both full exact replays with matched mathematical/inputbyte identities and all16boundary observations. Firstattempt12.202s guard_unavailable remainspreserved. Diagnostic only; no speedup or new geometricadmission. |
 | exp-294 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-302 | Fresh full STAGES replay matches accepted NONE mathematical/input identities and all16 PHASES step boundaries. Coverage is the largest measured stage:57.292715s exclusive wall; collisions10.218034s. Diagnostic only; no speedup, exp284 explanation or geometric admission. |
 | exp-296 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-304 | Complete fresh-matched conditional necessary-domain restriction: owner18 loses25/64 closed-angle union length; all992 rows accounted, all other owners unchanged. No whole-owner empty, point contradiction, regional or census result. |
+| exp-299 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes in Session186. | H-307 | Construction and fresh verification agree on SAME25 regional restriction under uniformly strict fixedQ0; soleAstra hand dependency theorem, exact finite premises and scope are explicit. No unconditional parent, guard contradiction, census/global theorem. |
+| exp-302 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes inSession186; think-lyh9. | H-310 | Both closed cases remain open. After union across cases, owner6 (label3) is restricted from [0,1] to [1/16,19/32], additional half-angle parameter loss15/32. Owner18 retains prior11/32 loss. This is a necessary implication throughout the wider h1/512 regional guard; no guard contradiction, ordinary admission, census change or global optimality proof. |
 
 ### baseline (12)
 
@@ -1471,11 +1488,12 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (1)
+### in-progress (2)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-297 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes in Session186. | H-305 | Prospectively registered before target; complete source and author/independent controls clear. |
+| exp-306 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-314 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
+| exp-307 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-315 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1526,7 +1544,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Effort
 
-226 rounds, 2512.1 agent-minutes, 5792.3 wall-minutes.
+236 rounds, 2512.1 agent-minutes, 5815.5 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

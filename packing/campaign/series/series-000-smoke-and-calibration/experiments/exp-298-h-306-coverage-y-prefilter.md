@@ -40,9 +40,18 @@ experiment:
     budget: 180s cooperative per replay; outerTERM1440/KILL1450 for8-phase campaign,one worker,sampled4GiB
       current RSS per live process; existing standing verifier caps unchanged.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter
-  results: []
+    commit: 2d6b35c8b995d3502c98d90545714df0cb956abb
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Do both complete ABBAblocks satisfy the predeclared exact gain criterion?
+    outcome: invalid
+    checked_by: Ownedgroup supervisor failclosed after psRSSsample1s timeout,6complete matching fullreplays,
+      seventhterminated/eighthunstarted. All6 fullpayload/input/full16boundary/proofcounterparity
+      checked. No complete8phase comparison or acceptedgain.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: Two quiet ABBA blocks,8 complete separate-process full replays on the SAME
       accepted object/container/cells/input bytes/cache/profile/resource/source regime. Both block
       medians candidate wall and CPU strictly lower; overall candidate median wall and CPU each at
@@ -52,19 +61,38 @@ experiment:
       events retained; exact event/probe/first-uncovered synthetic parity mandatory. Any incomplete
       phase/block clears speedup verdict. All8 receipts retained; no predicted gain or unrelated
       producer explanation.
-    reason: Prospectively registered before matched target; all source/independent controls clear.
-  lease:
-    expires: '2026-10-08T01:40:00Z'
-    host: macOS arm64
+    reason: Six full exactparity replays completed; process-memory guard ps call timedout after1s,
+      causing ownedgroup termination738.165964s withcompletecleanup. Seventh lacksreceipt/eighthunstarted.
+      The two completeABBA prerequisite is unmet; no speedup verdict/no capchange or automaticrepeat.
+    needs_review: false
+  effort:
+    stopped_by: guard
+    timebox: 180s cooperative per replay; outerTERM1440/KILL1450 for8-phase campaign,one worker,sampled4GiB
+      current RSS per live process; existing standing verifier caps unchanged.
+    wall_seconds: 738.1659635830438
 ---
 # Exact Coverage Y Prefilter
 
-Eight fresh full-replay processes run in two ABBA blocks.
-Both arms use identical PHASES instrumentation and the accepted same-object control; no
-per-edge diagnostic observation is enabled.
-Any incomplete phase clears a speedup verdict.
-The frozen comparison requires mathematical/input/full16-boundary/proof-counter parity
-and predeclared wall, CPU and sampled memory criteria.
+The registered eight-process campaign is incomplete.
+Six full replays match the accepted mathematical payload, input bytes, all16 standing
+boundaries and proof-work counters.
+The source bytes remain frozen.
+The process-memory sampler timed out after1second, and the supervisor terminated the
+owned group with complete cleanup after738.165964seconds.
+
+The seventh process has no receipt and the eighth never started.
+The raw phase file retains its earlier running status because the runner was terminated
+too; canonical supervision establishes that execution ended.
+The required two complete ABBA blocks are absent, so no speedup is accepted and no
+negative performance result is claimed.
+The six exact replay receipts and diagnostic clocks are retained, without a
+partial-campaign gain comparison or automatic retry.
+
+The
+[mechanical summary](../results/exp-298-coverage-y-prefilter/mechanical-summary.json)
+records parity and orchestration.
+A separately reviewed guard/reporting improvement may prevent future wasted runs while
+retaining fail-closed resource enforcement.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

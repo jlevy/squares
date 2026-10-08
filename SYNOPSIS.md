@@ -308,14 +308,14 @@ hypothesis status and summarizes experiment verdicts, and the
 
 <!-- BEGIN CURRENT-RESEARCH-STATUS -->
 
-| Record | Count | Current state |
-| --- | --- | --- |
+| Record | Total | State |
+| --- | ---: | --- |
 | Agendas | 42 | 21 active; 15 completed; 5 paused; 1 superseded |
-| Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 22 tentative; 23 in progress |
+| Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 21 tentative; 24 in progress |
 | Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 241 | 65 confirmed; 40 refuted; 66 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 226 | 85 accepted; 45 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 249 | 67 confirmed; 46 refuted; 64 blocked; 21 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
+| Experiments | 236 | 87 accepted; 51 rejected; 60 unresolved; 12 baseline; 18 blocked; 5 abandoned; 2 in progress; 1 exhausted |
 | Frontier results | 115 | 115 registered, 85 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -576,6 +576,12 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n17 Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | research synthesis | record | retained | — |
+| [n17 Case-Preserving Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md) | research synthesis | record | retained | — |
+| [n17 Whole-Square Envelope Transfer from n11](docs/project/research/research-2026-10-07-n17-n11-envelope-transfer.md) | research synthesis | record | retained | — |
+| [n17 Normalized Contact Rank Filter](docs/project/research/research-2026-10-07-n17-normalized-contact-rank-filter.md) | research synthesis | record | retained | — |
+| [n17 Global Wall and Contact Budget](docs/project/research/research-2026-10-07-n17-global-contact-budget.md) | research synthesis | record | retained | — |
+| [n17 Two-Child Collective Propagation](docs/project/research/research-2026-10-07-n17-two-child-collective-propagation.md) | research synthesis | record | retained | — |
 | [n17 One-Round Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md) | research synthesis | record | retained | — |
 | [n17 Strict-Core Regional Transfer](docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md) | research synthesis | record | retained | — |
 | [n17 Six-Hour Mathematical and Efficiency Continuation](docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md) | implementation plan | current | transient | — |
@@ -5868,9 +5874,17 @@ round that names the hypothesis, control roles included.
 | [H-302](packing/campaign/hypotheses/H-302-n17-stages-replay-observations.md) | confirmed | Full exact replay with nested stage attribution | 1 | Accepted full same-object mathematical replay and nested stage observations; no speed gain |
 | [H-303](packing/campaign/hypotheses/H-303-n17-two-center-children.md) | refuted | Deterministic two closed centre children on the accepted exp293 point context | 1 | Complete fresh-matched point miss; both selected children open, regional skipped |
 | [H-304](packing/campaign/hypotheses/H-304-n17-collective-row-coverage.md) | confirmed | One simultaneous collective closed-row restriction | 1 | Accepted fresh exact25/64 half-angle-parameter loss owner18; no point contradiction |
-| [H-305](packing/campaign/hypotheses/H-305-regional-row-coverage.md) | running | SAME25 closed rows throughout one fixed positive-width guard | 1 | Source and independent controls clear; frozen target preregistered, unrun |
-| [H-306](packing/campaign/hypotheses/H-306-coverage-y-prefilter.md) | blocked | Exact closed-Y coverage event prefilter | 0 | Prospective two-block ABBA full replay comparison; target unrun |
-| [H-307](packing/campaign/hypotheses/H-307-strict-core-regional-transfer.md) | blocked | Fixed owned-core transfer to a positive-width guard | 0 | Prospective h2^-23 criterion; finite premise checker pending |
+| [H-305](packing/campaign/hypotheses/H-305-regional-row-coverage.md) | refuted | SAME25 closed rows throughout one fixed positive-width guard | 1 | PrimarySAME25miss; narrower22-row regional11/32 implication verified |
+| [H-306](packing/campaign/hypotheses/H-306-coverage-y-prefilter.md) | unresolved | Exact closed-Y coverage event prefilter | 1 | Six full parity replays; eight-phase campaign INCOMPLETE after RSS guard timeout; no gain verdict |
+| [H-307](packing/campaign/hypotheses/H-307-strict-core-regional-transfer.md) | confirmed | Fixed owned-core transfer to a positive-width guard | 1 | Freshuniform Q0 proof:64quadratics/all992; SAME25 regional at h2^-23 |
+| [H-308](packing/campaign/hypotheses/H-308-one-round-direct-regional-propagation.md) | refuted | One-round regional ownership recovery and collective propagation | 1 | Complete wider operator miss; zero additional union loss;73.193s fresh-matched |
+| [H-309](packing/campaign/hypotheses/H-309-one-round-fixed-core-regional-propagation.md) | refuted | One-round uniform-core tinyguard sensitivity | 1 | Complete tiny operator miss; zero additional union loss;107.680s fresh-matched |
+| [H-310](packing/campaign/hypotheses/H-310-two-child-collective-propagation.md) | confirmed | Two closed regional collective cases with survivor union | 1 | Accepted owner6 additional15/32 parameter loss; both cases open; no guard exclusion |
+| [H-311](packing/campaign/hypotheses/H-311-normalized-contact-rank-filter.md) | refuted | Complete95-state normalized contact rank filter | 1 | All95 survive with checked35-clone sets; no ordinary exclusions or census admission |
+| [H-312](packing/campaign/hypotheses/H-312-n11-envelope-windows.md) | refuted | Whole-square n11 envelopes in576 closed windows | 1 | Complete95 method miss; maxima6/7, no ordinary exclusion |
+| [H-313](packing/campaign/hypotheses/H-313-case-preserving-owned-propagation.md) | refuted | One recovery and collective pass per accepted closed case | 1 | Complete combined miss; verified lower-x owner6 secondary1/64 shrink; both cases open |
+| [H-314](packing/campaign/hypotheses/H-314-n11-envelope-representation.md) | running | Wall-coupled upper and optimistic lower whole-cell envelopes | 1 | Prospective; upper obstruction or complete lower-negative architecture test |
+| [H-315](packing/campaign/hypotheses/H-315-owned-core-guarded-clause.md) | running | Same-core exact guarded clauses and endpoint disjointness | 1 | Prospective; no guard volume or ordinary admission claim |
 
 ### Confirmed
 
@@ -6182,6 +6196,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
 | `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
 | `codex-task-tree-session185-final-checkpoint.yaml` | session-185 | 2,405 | 14.34 h | 3.78 h | 3.78 h | yes |
+| `codex-task-tree-session186-checkpoint0148.yaml` | session-186 | 1,344 | 6.2 h | 1.63 h | 1.63 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6196,8 +6211,8 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 128 |
-| unmeasured | 57 |
+| measured | 129 |
+| unmeasured | 56 |
 | **total** | **185** |
 
 <!-- END GENERATED: session-close-report -->
@@ -6214,9 +6229,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 226 rounds registered in `series-000`.
+There are 236 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5792.3 wall-minutes.
+They record 2512.1 agent-minutes and 5815.5 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6483,7 +6498,17 @@ archive beside it.
 | [exp-294](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-294-h-302-stages-exact-replay.md) | 17 | target | H-302 | Matched full exact replay with STAGES observations | Full mathematical baseline match and16stage boundaries | accepted |
 | [exp-295](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-295-h-303-two-center-children.md) | 17 | target | H-303 | Deterministic two closed centre children | Complete fresh-matched miss23.77s; both children open, regional unstarted | rejected |
 | [exp-296](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-296-h-304-collective-row-coverage.md) | 17 | target | H-304 | Simultaneous original-owned-set collective row coverage | Fresh-matched exact25/64 half-angle-parameter union loss for owner18; all992 accounted | accepted |
-| [exp-297](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-297-h-305-regional-row-coverage.md) | 17 | target | H-305 | Direct positive-width regional SAME25 coverage | Prospective180+180-second frozen two-phase recipe; target unrun | in-progress |
+| [exp-297](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-297-h-305-regional-row-coverage.md) | 17 | target | H-305 | Direct positive-width regional SAME25 coverage | Primary miss; fresh22-row regional restriction with11/32 loss | rejected |
+| [exp-298](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-298-h-306-coverage-y-prefilter.md) | 17 | target | H-306 | Eight fresh matched coverage replay processes | Six full parity replays; guard stop/no speedup verdict | unresolved |
+| [exp-299](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-299-h-307-strict-core-regional-transfer.md) | 17 | target | H-307 | Uniform strict-core regional SAME25 transfer | Matching construction/fresh;64 exact quadratics/full992 | accepted |
+| [exp-300](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-300-h-308-one-round-direct-regional-propagation.md) | 17 | target | H-308 | One-round wider regional ownership and collective pass | Complete fresh-matched miss; all16 additional union losses0 | rejected |
+| [exp-301](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-301-h-309-one-round-fixed-core-regional-propagation.md) | 17 | target | H-309 | One-round tiny uniform-core regional sensitivity | Complete fresh-matched miss; all16 additional union losses0 | rejected |
+| [exp-302](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-302-h-310-two-child-collective-propagation.md) | 17 | target | H-310 | Two closed regional collective cases | Owner6 survivor union[1/16,19/32], additional15/32; both cases open | accepted |
+| [exp-303](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-303-h-311-normalized-contact-rank-filter.md) | 17 | target | H-311 | Complete95 normalized contact relaxation | All95 survive; zero obstructions/unresolved; no ordinary exclusion | rejected |
+| [exp-304](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-304-h-312-n11-envelope-windows.md) | 17 | target | H-312 | Whole-square envelopes in576 closed31/8 windows | Complete95 fresh-matched miss; maxima6/7 below11 | rejected |
+| [exp-305](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-305-h-313-case-preserving-owned-propagation.md) | 17 | target | H-313 | Simultaneous recovery in each closed regional case | Combined additional loss0; lower-x owner6 shrinks1/64 to[3/8,31/64], upper unchanged | rejected |
+| [exp-306](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-306-h-314-n11-envelope-representation.md) | 17 | target | H-314 | All 95 states, two complete 576-window envelope scans | Prospective; endpoint upper calibration and fresh reconstruction required | in-progress |
+| [exp-307](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-307-h-315-owned-core-guarded-clause.md) | 17 | target | H-315 | Same-core guarded clauses with exact old-box and endpoint checks | Prospective; inherited transport premise remains explicit | in-progress |
 
 ### Cost and provenance
 
@@ -6714,11 +6739,21 @@ archive beside it.
 | exp-294 | STAGES180s cooperative;TERM190/KILL200;4GiB per process sampled | 108.621s | — | criterion | Full same-object diagnostic replay; no speed gain |
 | exp-295 | Construction180s/fresh180s inside360s;4GiB per process sampled | 23.770s | — | criterion | Source d68a; both point children remain open; regional skipped |
 | exp-296 | Construction60s/fresh60s inside120s;4GiB per process sampled | 28.142s | — | criterion | `65dbccbc`; conditional necessary-domain restriction only |
-| exp-297 | Construction180s/fresh180s inside360s;4GiB per live process sampled | pending | — | in progress | Frozen prospective source and criterion; target unrun |
+| exp-297 | Construction180s/fresh180s inside360s;4GiB per live process sampled | 233.753s | — | criterion | a01f9adf; primaryMISS, secondary22-row region |
+| exp-298 | Eight180s replay leases inside1440s;4GiB per live process sampled | 738.165964s | — | guard | Six complete exact-parity replays; RSS sample timeout; cleanup true; no gain |
+| exp-299 | Construction60s/fresh60s inside120s;4GiB per live process sampled | 36.985s | — | criterion | 06168fc3; regional25 transfer; globalscopefalse |
+| exp-300 | 180s construction plus180s fresh; outer360s and4GiB per live process | 73.193379s | — | criterion | Complete wider operator miss; old11/32 retained |
+| exp-301 | 180s construction plus180s fresh; outer360s and4GiB per live process | 107.680302s | — | criterion | Complete tiny operator miss; old25/64 retained |
+| exp-302 | Construction180s/fresh180s inside360s;4GiB sampled per live process | 81.924603s | — | criterion | Fresh case-union restriction only; no guard exclusion |
+| exp-303 | Construction120s/fresh60s inside180s;4GiB sampled per live process | 19.484242s | — | criterion | All95 normalized relaxation survivors; no ordinary admission |
+| exp-304 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 2.043806s | — | criterion | Complete95 envelope miss; theorem inherited |
+| exp-305 | Construction180s/fresh180s inside360s;4GiB sampled per live process | 97.158146s | — | criterion | Verified per-case progress but no combined gain; no per-case fixed-point claim |
+| exp-306 | Construction60s/fresh60s inside120s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
+| exp-307 | Construction60s/fresh60s inside120s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
 
-### What the 226 rounds jointly establish
+### What the 236 rounds jointly establish
 
-The 226 rounds use 2512.1 agent-minutes and 5792.3 wall-minutes under the campaign’s
+The 236 rounds use 2512.1 agent-minutes and 5815.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

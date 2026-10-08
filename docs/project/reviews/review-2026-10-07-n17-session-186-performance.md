@@ -159,6 +159,134 @@ That certifies its required hosted surface, not full current-source certificatio
 new merge. Follow the [validation tiers](../../../development.md#validation-tiers) and
 retain `think-7hy3` as the full-certification obligation.
 
+## Session186: Observed Validation Causes and a Sealed Checkpoint Recipe
+
+The early Session186 failures identify source selection and consumer-contract defects,
+not a measured Python execution regression.
+The local push floor stopped at its 120.106-second outer ceiling.
+Its exact-verification step completed in 80.089 seconds; lint also saw two overlong
+lines in a concurrently authored, untracked one-round draft.
+Those draft lines were outside the committed `a01f` source.
+The timeout and earlier Mac post-test hang do not establish where Python spent time.
+
+The hosted `a01f9adf5ac108f755ce164e410220da42fe9c8d` run completed with 22 successes,
+30 conditional skips and four failures, including the required rollup.
+Its concrete causes were different:
+
+- A narrative mutation still named 225 rounds while the rendered synopsis contained 228,
+  so its literal anchor no longer resolved.
+- An earlier worker prune omitted the exact 38,637-byte n13 family file consumed by the
+  retained n32 inventory control.
+  The full source kept that evidence, but the private worker lacked it.
+- Newly tracked regional source contained genuine accepted-artifact byte boundaries that
+  needed entries in the generated-artifact registry.
+  The detector itself and its prohibition on source pins stayed unchanged.
+
+The repairs preserve the original consumer assertion, the 192 MiB worker cap and the
+integrity detector. An isolated copy-back control preserves the family’s exact bytes
+while omitting sibling operational bulk.
+Later source-only review found three more modules with legitimate accepted-input or
+receipt boundaries; their registry entries remain pending a sealed checkpoint check.
+These are readiness repairs, not evidence that the latest hosted surface is green.
+A numeric synopsis anchor must be refreshed with its corresponding rendered count,
+including any subsequent registration.
+
+The existing [validator](../../../packing/src/sqpack/cli/validate.py) can support a
+bounded checkpoint without a new policy or omitted checks:
+
+1. Root selects an isolated checkout at the reviewed source and preserves its unique
+   untracked assets. Confirm that the lint target directories contain no unrelated draft
+   Python files: a clean tracked diff alone does not seal ignored files.
+   Bind the external interpreter, that checkout’s Python roots and its own Cargo target.
+2. Run [checkout import preflight](../../../packing/devtools/check_checkout_imports.py)
+   with `--checkout PATH --bind-paths --output FILE`. Apply the same checkout-specific
+   environment to the subsequent gate; the preflight changes only its child.
+   Keep `PACKING_PROJECT_ROOT` absent, and let mutation workers bind their own source
+   roots.
+3. Inspect `packing-validate --push --since BASE --list` and the declared budgets, then
+   run that required selection with retained command and step artifacts.
+   Push keeps the edit floor and selects reachable tests conservatively; unsafe
+   narrowing falls back to the whole suite.
+   `--since` includes dirty, staged and untracked changes, so it does not create a
+   snapshot. Artifact metadata records those inputs but does not lock them against
+   concurrent writers.
+4. Retain an explicit enclosing wall ceiling and owned-process cleanup.
+   The existing `--timeout-seconds` bounds individual subprocesses, not the whole run.
+   A completed focused `--only` check proves its named scope; it does not replace
+   required push coverage.
+   Keep the normal and pooled-heavy lanes and all selected consumer checks.
+
+The current performance experiment remains the one selected optimization.
+No further cache, clipping or gate optimization is justified by these failures.
+A future launcher repair should first demonstrate selected-import parity, successful
+private-worker mutation detection and unchanged required step/test selection on the same
+sealed tree. Only after attributing repeated gate cost should root select a timing
+experiment with matched source, work, resource limits and complete verdicts.
+Incomplete runs have no speedup verdict.
+The quiet eight-replay exact-Y campaign’s already frozen wall, CPU, memory and
+mathematical-parity criteria remain its acceptance rule.
+
+## First Matched Campaign: Six Valid Replays, No Gain Verdict
+
+[Exp298](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/README.md)
+ended incomplete after 738.166 supervised seconds.
+Six full fresh replays completed; each returned the same accepted `PASS_STALL`
+mathematical payload, input identities, all sixteen step boundaries, proof counters and
+memo-eviction observations.
+The seventh phase was interrupted and the eighth never started.
+No performance threshold was evaluated, and no gain is accepted from that prefix.
+
+The terminal supervisor records `guard_unavailable`: its `/bin/ps` RSS sample exceeded
+the unchanged one-second timeout.
+It terminated the owned group, recorded return code −15 and completed cleanup.
+The largest sampled current RSS was 440,221,696 bytes per live process.
+This does not explain the host delay or replace the sampled guard with a hard allocation
+limit.
+The phase journal still said `running` after termination; its status is stale, not
+evidence that work continued.
+A derived terminal report must join the supervisor and preserve the original journal and
+unknown child outcome.
+
+After the campaign ended, the independent full one-round synthetic suite passed all 36
+controls in 102.10 seconds under its 120-second outer ceiling.
+Three focused CI controls passed in 10.60 seconds, and scoped Ruff, format and
+BasedPyright checks had zero findings.
+These checks cover the exact family-file copy-back, current literal anchor and live
+artifact registry; they do not establish a full push or checkpoint pass.
+The anchor was 228 at that check and must follow a later rendered-count freeze.
+
+## Remaining Full-Certification Debt
+
+The old five failed steps do not all remain unexplained.
+The malformed campaign command and guard CLI fixture have later focused repairs.
+Checkout import binding and explicit engine paths also have focused evidence; neither
+has yet replaced the old full run with a correctly bound current-source checkpoint.
+The engine-path tests used synthetic engines, so they do not certify the actual
+soundness perimeter’s engine cells.
+
+Two Taylor historical byte pins remain unchanged.
+Their retained new three-owner certificates passed complete independent verification
+with zero failures, which settles those artifacts’ geometric validity but leaves their
+difference from historical bytes unexplained.
+The Rust partial-line control and two-worker progress control still need a bounded quiet
+reproduction with their original internal ceilings.
+The Mac contact-shade census drift is also unrepaired; a descriptive golden mismatch is
+not an n17 exclusion failure.
+Repeated producer runs, golden replacement or longer test timeouts would not resolve
+these distinctions by themselves.
+
+A new full checkpoint is feasible within this session’s remaining clock, but its old
+3,402.14-second runtime is not a completion promise.
+After the quiet campaign, select a sealed source, pass import/artifact readiness and
+retain per-command artifacts.
+The existing default full tier has a 3,600-second ceiling; adding `--deep` or `--strict`
+would introduce a different rebuild/skip contract.
+Prefer launching by 04:34:50Z, leaving cleanup and five minutes before the 05:40:09Z
+research boundary. Root must budget setup separately and report actual contention,
+failures, skips and cleanup.
+Keep `think-7hy3` open until its required current-source evidence is obtained; neither
+hosted fast green nor accumulated focused repairs is a full-checkpoint pass.
+
 ## Where the Four-Hour Budget Went
 
 The

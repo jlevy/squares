@@ -10,11 +10,14 @@ specified owner0 guard, with no global bound or census change.
 
 The [descriptor](descriptor.json) binds seven source roles; the
 [command plan](execution-manifest.json) and [launch receipt](launch.json) freeze source
-and byte custody. The [construction](certificate.json) and [fresh receipt](replay.json)
-match on the full mathematical payload.
-[Phase execution](phase-execution.json) and [supervision](supervision.json) retain the
-actual233.752806s elapsed wall, normal exit and complete cleanup.
+and byte custody.
+The `certificate.json` and `replay.json` match on the full mathematical
+payload. [Phase execution](phase-execution.json) and [supervision](supervision.json)
+retain the actual233.752806s elapsed wall, normal exit and complete cleanup.
 Maximum sampled RSS was663568384B per live owned process.
+
+The [compact mechanical summary](mechanical-summary.json) records raw receipt paths,
+byte identities and complete custody joins.
 
 The same25 success flag remains false.
 The22 complete component coverage proofs are preserved as a narrower finite regional

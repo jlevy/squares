@@ -41,9 +41,19 @@ experiment:
       currentRSS per live process;32 corevertices/512 closedquadratics/1MiBoutput; accepted64MiBinputs/10MiBdescriptor
       and unchanged collective exactwork caps. No cap or radius change after observation.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer
-  results: []
+    commit: 06168fc33778c270b08f289ef9fb65cf1460bdf8
+    dirty: false
+  results:
+  - shape: determination
+    role: outcome
+    question: Does fixedQ0 uniform strict ownership transfer all25 prior row implications throughout
+      h2^-23?
+    outcome: criterion_met
+    checked_by: Complete compact mathematical payload match in a separate fresh process; all992 prior
+      decisions checked once per phase, actualfixedQ0 pointmargin and closed-arc ownership quadratics,
+      newguard-family and inherited17 endpointpremise.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Freshly bind accepted exp296descriptor/construction/fresh byte custody and
       complete original parent joins; reconstruct all992 accepted foreign row decisions and SAME25
       identities. Check actual accepted Q0 point margin epsilon=2^-20 and closed guard h=2^-23. Exact
@@ -53,19 +63,37 @@ experiment:
       domains/K/union proof only through the reviewed Q0 dependency; do not transport old point-only
       guarded_owner0 diagnostic. No full parent/root replay, unconditional restriction, census/global
       theorem or adaptive radius. Refusal/incomplete has no negative verdict.
-    reason: Prospectively registered after author/peer22 and source reviews, before any actual numerical
-      target.
-  lease:
-    expires: '2026-10-08T01:20:00Z'
-    host: macOS arm64
+    reason: Construction and fresh verification agree on SAME25 regional restriction under uniformly
+      strict fixedQ0; soleAstra hand dependency theorem, exact finite premises and scope are explicit.
+      No unconditional parent, guard contradiction, census/global theorem.
+    needs_review: false
+  effort:
+    stopped_by: criterion
+    timebox: 60s construction plus60s fresh; owned-group outerTERM120/KILL130, one worker, sampled4096MiB
+      currentRSS per live process;32 corevertices/512 closedquadratics/1MiBoutput; accepted64MiBinputs/10MiBdescriptor
+      and unchanged collective exactwork caps. No cap or radius change after observation.
+    wall_seconds: 36.98480550001841
 ---
 # Strict Core Regional Transfer
 
-The two fixed60-second phases are registered before the actual target.
-The selected theorem transports only the foreign dependency on uniformly owned Q0; the
-old point-only owner0 diagnostic footprint is excluded.
-Construction and a separate fresh process must agree on the complete compact premise and
-quantifier payload.
+The fixedh=2^-23 test passed construction and separate fresh verification.
+All25 accepted point row exclusions transfer through uniform strict ownership of the
+original Q0 with pointmargin2^-20. Each phase reconstructs all992 prior collective
+decisions once, checks the new guard-family disjointness and proves uniform Q0 ownership
+by exact closed-arc corner quadratics.
+
+Original17 endpoint retention and the foreign conditioning remain explicitly inherited.
+The old point-only owner0 diagnostic footprint is excluded from the transport.
+The exact finite premises support the sole-Astra hand dependency theorem; this is not
+independent mathematical confirmation or a formalized global proof.
+
+Construction took21.149028s and fresh verification15.545607s; outer elapsed36.984806s,
+normal exit, complete cleanup, maximum sampled per-live RSS386039808B. The full compact
+mathematical payload agrees.
+The [result README](../results/exp-299-strict-core-regional-transfer/README.md) links
+the immutable inputs and receipts.
+No unconditional parent deletion, guard contradiction, ordinary-U census admission or
+global n17 optimality result follows.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

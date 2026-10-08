@@ -30,40 +30,48 @@ experiment:
     control: Prospectively registered beforeany actualpropagation inputevaluation. Sourcefrozen01:07:40Z;36uniqueauthor
       controls across25+2+1+8batches PASS, one earlierregex-onlyfailure preserved/corrected;Ruff/format/BPy0.
       SoleAstra final mathematical SOURCE CLEAR; independentSol mechanical sourceCLEAR. Independent36
-      control execution PASS36 in102.10s under120s enclosing ceiling; source freeze follows before target. No mathematical gain forecast.
-      Prerequisites refer toacceptedoriginalproofcontext, notthe refutedH305all25 claim.
-    candidate: Only direct_regional mode on accepted widerexp297context; point andtinytransfer modes
-      are sourcecontrols, not numericalarms.
+      control execution PASS36 in102.10s under120s enclosing ceiling; source freeze follows before target.
+      No mathematical gain forecast. Prerequisites refer toacceptedoriginalproofcontext, notthe refutedH305all25
+      claim.
+    candidate: Only direct_regional mode on accepted widerexp297context; point andtinytransfer modes are
+      sourcecontrols, not numericalarms.
     runs_per_condition: 1
     interleaved: false
     entry_point: packing/devtools/check_n17_one_round_owned_domain_propagation.py
     command: Frozen two phase argv arrays inexecution-manifest.json; actualsource/immutablebytefreeze
       recordedatlaunch afterindependentcontrols.
-    budget: 180s construction plus180s fresh underowned-groupTERM360/KILL370; one worker,sampled4GiB
-      currentRSS perliveprocess;64MiBoutput/inputs,10MiBdescriptor,exactbitbound finite.BIT_LIMIT,owner0vertices
-      guard.OWNER0_LIMIT/foreign guard.OWNED_LIMIT;512 transferquadratics NOT invoked in directmode.
-      Newrecovery andprior/newcollective caps remain separate andunchanged; cumulative2Mintersectionproducts
-      precharged,guard.INTERSECTION_LIMIT outputs; no internalhomogeneouseventcap claim.
+    budget: 180s construction plus180s fresh underowned-groupTERM360/KILL370; one worker,sampled4GiB currentRSS
+      perliveprocess;64MiBoutput/inputs,10MiBdescriptor,exactbitbound finite.BIT_LIMIT,owner0vertices
+      guard.OWNER0_LIMIT/foreign guard.OWNED_LIMIT;512 transferquadratics NOT invoked in directmode. Newrecovery
+      andprior/newcollective caps remain separate andunchanged; cumulative2Mintersectionproducts precharged,guard.INTERSECTION_LIMIT
+      outputs; no internalhomogeneouseventcap claim.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation
-  results: []
+  results:
+  - shape: determination
+    question: Does the complete one-round direct-regional operator add strict union loss or a checked
+      contradiction?
+    outcome: criterion_missed
+    checked_by: Complete matching construction/fresh payload; all16 recoveries/strictchecks and992 prior/new
+      decisions; soleAstra scoped result CLEAR.
   verdict:
-    decision: in-progress
-    primary_criterion: Bind exact acceptedexp297 three roles and full named immutable dependency
-      chain; preserve SAME25primaryMISS and verified22-row secondary baseline11/32. Inherit complete
-      regionalconditioning, freshly reconstruct all992 prior collective decisions exactlyonce; join
-      every originalclosed typedrow and baselineunion, with full1056/inherited17parent premise. Apply
-      proved oldexclusions, simultaneously recoverall16foreign ownedgroups at epsilon2^-20 with fixedowner0Q0,
-      prechargebounded exactintersectionwork, then atmostone simultaneous self-owner-excluded full992
-      closed-domain union-coverage pass. Primarystrict additional exacthalf-angle parameter unionlengthloss
-      foranyowner, or separatelychecked complete sharedstrictpoint/ownercover-empty contradiction.
-      Old11/32 loss nevercountsagain; partial centre restrictions/newgroupvertexcounts alone are
-      diagnostic. Fresh separate process must match complete payload/custody/quantifier scope. No
-      feedback/childsplits/pointsubstitution/globalcapture/ordinaryU/census claim. Resource/refusal
-      incomplete is not a negative verdict.
-    reason: Prospective before actual target; author/source reviews CLEAR and independent36 controls PASS102.10s. Await source freeze before launch.
-  lease:
-    expires: '2026-10-08T02:00:00Z'
-    host: macOS arm64
+    decision: rejected
+    primary_criterion: Bind exact acceptedexp297 three roles and full named immutable dependency chain;
+      preserve SAME25primaryMISS and verified22-row secondary baseline11/32. Inherit complete regionalconditioning,
+      freshly reconstruct all992 prior collective decisions exactlyonce; join every originalclosed typedrow
+      and baselineunion, with full1056/inherited17parent premise. Apply proved oldexclusions, simultaneously
+      recoverall16foreign ownedgroups at epsilon2^-20 with fixedowner0Q0, prechargebounded exactintersectionwork,
+      then atmostone simultaneous self-owner-excluded full992 closed-domain union-coverage pass. Primarystrict
+      additional exacthalf-angle parameter unionlengthloss foranyowner, or separatelychecked complete
+      sharedstrictpoint/ownercover-empty contradiction. Old11/32 loss nevercountsagain; partial centre
+      restrictions/newgroupvertexcounts alone are diagnostic. Fresh separate process must match complete
+      payload/custody/quantifier scope. No feedback/childsplits/pointsubstitution/globalcapture/ordinaryU/census
+      claim. Resource/refusal incomplete is not a negative verdict.
+    reason: Both complete phases match. All16 additional union losses are0, no new live row deletion and
+      no closure. This chosen operator is at a fixed point; prior22-row11/32 implication is retained.
+      No feasibility, global theorem or census change follows.
+  effort:
+    wall_seconds: 73.19337891699979
+    stopped_by: criterion
 ---
 # One-Round Direct Regional Propagation
 

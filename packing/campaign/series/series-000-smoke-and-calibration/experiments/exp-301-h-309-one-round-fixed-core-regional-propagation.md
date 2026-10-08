@@ -42,9 +42,14 @@ experiment:
       prior/newcollective and2Mprechargedintersection caps. Full uniformtransfer64quadratics plusall992
       prior once perphase; no second fullprior check.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation
-  results: []
+  results:
+  - shape: determination
+    question: Does the complete tiny fixed-core regional operator add strict union loss or a checked contradiction?
+    outcome: criterion_missed
+    checked_by: Complete matching construction/fresh payload; all16 recoveries/strictchecks and992 prior/new
+      decisions; soleAstra scoped actual result CLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: Reuse accepted296 full collective proof and accepted299 uniform strictQ0 transfer
       at h=2^-23 with exact six-role byte custody. Freshly reconstruct all992 prior collective decisions
       once through transfer.check; preserve original1056/inherited17 endpoint premise and old25/64 baseline
@@ -54,11 +59,12 @@ experiment:
       Full separate fresh process matches complete payload and custody. No feedback, childsplit, oldpoint
       footprint transfer, parent/root replay, globalcapture or census claim. Resource/refusal incomplete
       is not a negative verdict.
-    reason: Prospective before target; same reviewed source and independent36 controls complete; awaiting
-      sourcefreeze.
-  lease:
-    expires: '2026-10-08T02:10:00Z'
-    host: macOS arm64
+    reason: Both complete phases match. All16 additional union losses are0, no new live row deletion and
+      no closure. The chosen operator is at a fixed point even under the tinyguard; old25/64 implication
+      retained. No feasibility, global theorem or census change follows.
+  effort:
+    wall_seconds: 107.68030154198641
+    stopped_by: criterion
 ---
 # One-Round Fixed-Core Regional Sensitivity
 

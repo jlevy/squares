@@ -169,6 +169,37 @@ PRUNE = frozenset(
         SESSION184_RESULTS
         / "exp-301-one-round-fixed-core-regional-propagation/certificate.json",
         SESSION184_RESULTS / "exp-301-one-round-fixed-core-regional-propagation/replay.json",
+        # Exp302's two case receipts are inputs to the primary scientific exp305
+        # launch, but no registered mutation command or synthetic test consumes
+        # their native bytes. Omit only these worker files; keep all primary
+        # evidence, descriptors and sibling metadata. Inline/frontier-declared
+        # consumers remain authoritative through exact dependency copyback.
+        SESSION184_RESULTS / "exp-302-two-child-collective-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-302-two-child-collective-propagation/replay.json",
+        # Exp304's completed envelope receipts likewise have no registered CI
+        # mutation or synthetic-test consumer. Preserve primary bytes and all
+        # sibling inputs; real inline/frontier declarations still copy back.
+        # Exp305 is primary scientific evidence, with no registered mutation or
+        # actual worker-test consumer. Declared inline/frontier inputs still
+        # copy back; its descriptor and compact siblings remain selected.
+        SESSION184_RESULTS / "exp-305-case-preserving-owned-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-305-case-preserving-owned-propagation/replay.json",
+        SESSION184_RESULTS / "exp-304-n11-envelope-windows/certificate.json",
+        SESSION184_RESULTS / "exp-304-n11-envelope-windows/replay.json",
+        # Exp303's complete rank classification is retained as primary evidence;
+        # source tests use synthetic graphs, not these actual 95-pattern outputs.
+        SESSION184_RESULTS / "exp-303-normalized-contact-rank-filter/certificate.json",
+        SESSION184_RESULTS / "exp-303-normalized-contact-rank-filter/replay.json",
+        # The six complete exp298 replay outputs are retained diagnostic evidence,
+        # not mutation/test inputs; no gain verdict was accepted. Its README links
+        # compact journals/summary, not these files. Exact declared inputs still
+        # copy back; primary replay receipts and all operational metadata remain.
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/01-baseline.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/02-candidate.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/03-candidate.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/04-baseline.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/05-baseline.json",
+        SESSION184_RESULTS / "exp-298-coverage-y-prefilter/06-candidate.json",
         # Session186 main-refresh measurement: these five historical output roots
         # are absent from registered control targets/commands and test consumers.
         # Keep every inline/frontier-declared input through the existing copyback;

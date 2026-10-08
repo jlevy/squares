@@ -43,9 +43,15 @@ experiment:
     budget: 60s construction+60s fresh; outerTERM120/KILL130; one worker,sampled4GiB currentRSS perliveprocess;10MiBinput,64MiBoutput,4096bit
       arithmetic.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows
-  results: []
+  results:
+  - shape: determination
+    question: Does any of95 ordinary representative states force eleven whole square envelopes into a31/8
+      window?
+    outcome: criterion_missed
+    checked_by: Fullfresh54,720 counts and exactpayload equality; all95 complete negatives; soleAstra
+      actual mathematical CLEAR.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: 'All95 accepted distance2 representatives receive complete exact576-window classifications,54,720
       counts total. Primary: at least one checked window contains whole unit-square envelopes from11 distinct
       occupied cells in an H=31/8 square, contradicting the inherited T061 exact n11 lower bound3875000000/999999999.
@@ -54,10 +60,12 @@ experiment:
       count. All95 complete negatives retire this conservative envelope rule only. No ordinary census
       admission occurs without separate review/integration. Resource/refusal or partial outcomes remain
       unresolved.'
-    reason: Prospective before target geometry; author/peer controls and finalstatics complete.
-  lease:
-    expires: '2026-10-08T03:00:00Z'
-    host: macOS arm64
+    reason: Complete95 negatives; maximum enclosed envelopes6 for47orbits and7 for48orbits, below11. Fresh
+      exact counts and all11 importedsource joins match. This fixed envelope rule is retired; no ordinary
+      exclusion, global bound or census change. Optional endpoint window calibration was not implemented.
+  effort:
+    wall_seconds: 2.043805792054627
+    stopped_by: criterion
 ---
 # n11 whole-square envelope windows
 
