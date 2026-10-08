@@ -7,7 +7,6 @@ round. Importing this module reads no research inputs and evaluates no endpoint.
 from __future__ import annotations
 
 import argparse
-import copy
 import hashlib
 import itertools
 import json
@@ -376,7 +375,14 @@ def packet_bytes(packet: dict[str, Any], budget: Budget) -> bytes:
     """Bound retained output while encoding, before allocating a complete oversized JSON."""
     chunks: list[bytes] = []
     size = 0
-    for chunk in json.JSONEncoder(sort_keys=True, allow_nan=False).iterencode(packet):
+    encoded = iter(json.JSONEncoder(sort_keys=True, allow_nan=False).iterencode(packet))
+    while True:
+        try:
+            chunk = next(encoded)
+        except StopIteration:
+            break
+        except RecursionError as error:
+            raise ValueError("packet nesting exceeds encoder depth") from error
         budget.tick()
         raw = chunk.encode("utf-8")
         size += len(raw)
@@ -516,8 +522,20 @@ def endpoint_packet(
     Accepted intake retains its existing guards. Its source-cover reconstruction is
     inherited code, not a newly claimed per-operation guarded proof execution.
     """
-    frozen = copy.deepcopy(document)
-    require(document.get("schema") == CONTEXT_SCHEMA, "endpoint context schema differs")
+    roles = projection.prior.ROLES
+    require(
+        type(document) is dict
+        and document.get("schema") == CONTEXT_SCHEMA
+        and set(document)
+        == {"schema", *(key for role in roles for key in (role, role + "_sha256"))},
+        "endpoint descriptor shape differs",
+    )
+    require(
+        all(type(document[key]) is str for role in roles for key in (role, role + "_sha256")),
+        "endpoint descriptor role path/identity must be strings",
+    )
+    # The inherited descriptor contract is flat; freeze it without recursive traversal.
+    frozen = document.copy()
     adapted = document | {"schema": projection.prior.CONTEXT_SCHEMA}
     polygons, names, _roster, accepted, held = projection.prior.intake(adapted, budget.deadline)
     context = accepted["accepted_inputs"]
@@ -621,9 +639,12 @@ def main(argv: list[str] | None = None) -> int:
             "frozen phase wall ceiling",
         )
         budget = Budget(time.monotonic() + args.max_seconds, args.max_operations)
-        descriptor_raw, document = projection.finite.read_json(
-            args.descriptor, DESCRIPTOR_LIMIT
-        )
+        try:
+            descriptor_raw, document = projection.finite.read_json(
+                args.descriptor, DESCRIPTOR_LIMIT
+            )
+        except RecursionError as error:
+            raise ValueError("descriptor JSON nesting exceeds decoder depth") from error
         held = {args.descriptor: descriptor_raw}
         if args.check is None:
             mathematical = endpoint_packet(
@@ -638,7 +659,12 @@ def main(argv: list[str] | None = None) -> int:
                 "verification_passed": False,
             }
         else:
-            constructed_raw, constructed = projection.finite.read_json(args.check, PACKET_LIMIT)
+            try:
+                constructed_raw, constructed = projection.finite.read_json(
+                    args.check, PACKET_LIMIT
+                )
+            except RecursionError as error:
+                raise ValueError("construction JSON nesting exceeds decoder depth") from error
             held[args.check] = constructed_raw
             require(
                 constructed.get("schema") == "n17-shared-centre-endpoint/v1"

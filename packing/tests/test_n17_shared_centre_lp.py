@@ -23,6 +23,17 @@ def budget(operations: int = 2_000_000) -> tool.Budget:
     return tool.Budget(time.monotonic() + 30, operations)
 
 
+def synthetic_descriptor() -> dict[str, Any]:
+    return {
+        "schema": tool.CONTEXT_SCHEMA,
+        **{
+            key: "unused"
+            for role in tool.projection.prior.ROLES
+            for key in (role, role + "_sha256")
+        },
+    }
+
+
 def synthetic_polygons() -> list[list[tool.Point]]:
     polygon = [(Q(1, 2), Q(1, 2)), (Q(4), Q(1, 2)), (Q(4), Q(4)), (Q(1, 2), Q(4))]
     return [polygon[:] for _ in range(24)]
@@ -378,7 +389,7 @@ def test_wrong_catalogue_action_is_refused_before_witness_io(
     )
     with pytest.raises(ValueError, match="wrong canonical endpoint orbit"):
         tool.endpoint_packet(
-            {"schema": tool.CONTEXT_SCHEMA},
+            synthetic_descriptor(),
             tmp_path / "absent-witness.yaml",
             "unused",
             budget(),
@@ -527,16 +538,14 @@ def test_witness_byte_ceiling_is_incomplete_before_digest_check(
     witness_path, _digest = synthetic_intake(tmp_path, monkeypatch)
     monkeypatch.setattr(tool, "WITNESS_LIMIT", 8)
     with pytest.raises(tool.IncompleteError, match="witness byte ceiling"):
-        tool.endpoint_packet({"schema": tool.CONTEXT_SCHEMA}, witness_path, "wrong", budget())
+        tool.endpoint_packet(synthetic_descriptor(), witness_path, "wrong", budget())
 
 
 def test_held_lookup_aliases_match_resolved_intake_keys(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     witness_path, digest = synthetic_intake(tmp_path, monkeypatch)
-    result = tool.endpoint_packet(
-        {"schema": tool.CONTEXT_SCHEMA}, witness_path, digest, budget()
-    )
+    result = tool.endpoint_packet(synthetic_descriptor(), witness_path, digest, budget())
     assert len(result["model"]["pairs"]) == 136
     assert len(result["point"]) == 34
 
@@ -694,7 +703,7 @@ def test_cli_malformed_synthetic_yaml_publishes_refusal(
     raw = b"["
     witness.write_bytes(raw)
     descriptor = tmp_path / "descriptor.json"
-    descriptor.write_text(json.dumps({"schema": tool.CONTEXT_SCHEMA}), encoding="utf-8")
+    descriptor.write_text(json.dumps(synthetic_descriptor()), encoding="utf-8")
     output = tmp_path / "refused.json"
     assert (
         tool.main(
@@ -764,3 +773,140 @@ def test_cli_publication_collision_reports_failure_without_overwrite(
     assert output.read_bytes() == original
     assert list(tmp_path.iterdir()) == [output]
     assert "endpoint receipt publication failed" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("key", ["unexpected", "corner_descriptor"])
+def test_cli_nested_descriptor_publishes_refusal_before_intake(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, key: str
+) -> None:
+    descriptor, output = tmp_path / "descriptor.json", tmp_path / "refused.json"
+    document = synthetic_descriptor()
+    document.pop(key, None)
+    flat = json.dumps(document)[:-1]
+    descriptor.write_text(
+        flat + ', "' + key + '":' + "[" * 1200 + "0" + "]" * 1200 + "}",
+        encoding="utf-8",
+    )
+
+    def no_intake(*_args: Any) -> None:
+        pytest.fail("malformed descriptor reached accepted-input intake")
+
+    monkeypatch.setattr(tool.projection.prior, "intake", no_intake)
+    assert (
+        tool.main(
+            [
+                "--descriptor",
+                str(descriptor),
+                "--witness",
+                "unused",
+                "--witness-sha256",
+                "unused",
+                "--output",
+                str(output),
+            ]
+        )
+        == 1
+    )
+    result = json.loads(output.read_bytes())
+    assert result["status"] == "refused"
+    assert result["verification_passed"] is False
+    assert "endpoint descriptor" in result["reason"]
+
+
+def test_cli_nested_submitted_payload_publishes_refusal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    descriptor, submitted = tmp_path / "descriptor.json", tmp_path / "constructed.json"
+    descriptor.write_text("{}", encoding="utf-8")
+    submitted.write_text(
+        '{"schema":"n17-shared-centre-endpoint/v1","status":"constructed",'
+        '"frame_action":"r3","mathematical":{"point":' + "[" * 1200 + "0" + "]" * 1200 + "}}",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(tool, "endpoint_packet", lambda *_args, **_kwargs: {"point": []})
+    output = tmp_path / "refused.json"
+    assert (
+        tool.main(
+            [
+                "--descriptor",
+                str(descriptor),
+                "--witness",
+                "unused",
+                "--witness-sha256",
+                "unused",
+                "--check",
+                str(submitted),
+                "--output",
+                str(output),
+            ]
+        )
+        == 1
+    )
+    result = json.loads(output.read_bytes())
+    assert result["status"] == "refused"
+    assert result["verification_passed"] is False
+    assert "packet nesting exceeds encoder depth" in result["reason"]
+
+
+@pytest.mark.parametrize("boundary", ["descriptor", "construction"])
+def test_cli_json_decoder_depth_failure_publishes_refusal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, boundary: str
+) -> None:
+    descriptor, submitted = tmp_path / "descriptor.json", tmp_path / "constructed.json"
+    descriptor.write_text("{}", encoding="utf-8")
+    output = tmp_path / "refused.json"
+    read_json = tool.projection.finite.read_json
+
+    def excessive_depth(path: Path, ceiling: int) -> tuple[bytes, dict[str, Any]]:
+        if path == (descriptor if boundary == "descriptor" else submitted):
+            raise RecursionError("injected decoder depth failure")
+        return read_json(path, ceiling)
+
+    monkeypatch.setattr(tool.projection.finite, "read_json", excessive_depth)
+    arguments = ["--check", str(submitted)] if boundary == "construction" else []
+    assert (
+        tool.main(
+            [
+                "--descriptor",
+                str(descriptor),
+                "--witness",
+                "unused",
+                "--witness-sha256",
+                "unused",
+                "--output",
+                str(output),
+                *arguments,
+            ]
+        )
+        == 1
+    )
+    result = json.loads(output.read_bytes())
+    assert result["status"] == "refused"
+    assert result["verification_passed"] is False
+    assert boundary + " JSON nesting exceeds decoder depth" in result["reason"]
+
+
+def test_cli_unrelated_recursion_error_remains_a_programming_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    descriptor, output = tmp_path / "descriptor.json", tmp_path / "receipt.json"
+    descriptor.write_text("{}", encoding="utf-8")
+
+    def broken_construction(*_args: Any, **_kwargs: Any) -> dict[str, Any]:
+        raise RecursionError("synthetic programming error")
+
+    monkeypatch.setattr(tool, "endpoint_packet", broken_construction)
+    with pytest.raises(RecursionError, match="synthetic programming error"):
+        tool.main(
+            [
+                "--descriptor",
+                str(descriptor),
+                "--witness",
+                "unused",
+                "--witness-sha256",
+                "unused",
+                "--output",
+                str(output),
+            ]
+        )
+    assert not output.exists()
