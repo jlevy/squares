@@ -447,6 +447,37 @@ and the post-integration private-copy size remain release gates.
 This closure does not confirm the source’s 191-contact assertion or promote optimality,
 local minimality, novelty, human review, or C4 assurance.
 
+## Historical Q(sqrt 7) Replay Routing
+
+The narrow follow-up to `1a7980d3554bbd406d495208a17f57c3e331c491` is accepted with no
+findings. The lifted Q(sqrt 7) case now selects the complete historical Friedman n86
+witness retained before the ry-xu adoption.
+It reads that entire document through the ordinary Witness/v2 schema and semantic
+validator, then requires n86, its original witness ID and the exact Kingbird source key
+and square-86.svg URL. Only n86 uses this explicitly named historical route; n18
+continues to use its original live witness path.
+
+An independent audit found the historical document byte-equal to its pre-intake Git
+version, and the schema-loaded object equal in every field, including all 86 poses.
+Four full-source/schema/refusal tests passed in 16.47 seconds.
+Two additional identity controls refused a wrong witness ID and a wrong source URL. AST
+comparison found the lift function unchanged and the builder changed only at its
+input-reader call. The current ry-xu n86 witness, n18 witness and exact replay program
+are unchanged.
+
+The writer’s retained `lifted-q7-exact-replay-v30.log` records EXIT0 in 14.172782
+seconds against its 120-second selected-command ceiling: n18 passed all 153 pairs and
+n86 all 3,655 pairs, with all walls checked and both duplicate controls refused.
+The field, isolating interval, side identities, tilt identities, lift bounds and exact
+predicates remain unchanged.
+This independent review inspected that actual replay receipt without repeating the
+geometry.
+
+This repairs the historical verifier’s source selection.
+It does not relabel the current ry-xu packing as Friedman’s construction or add a
+scientific assurance claim.
+Final source-size, integration and hosted checks remain required.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
