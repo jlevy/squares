@@ -5,7 +5,7 @@ title: Review and import issue428 n68 rational refinement without display-ceilin
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:10:41.351Z
-updated_at: 2026-10-08T00:48:05.209Z
+updated_at: 2026-10-08T01:11:18.574Z
 started_at: 2026-10-08T00:14:57.694Z
 ---
 Issue428 author requests n68 feasibility registration at immutable lollipoll/certified-square-packing-68 fded686668e29258dad2eb29d0482fa3fd51bd6b releasev1.1.0. Preserve full exact rational; author claims approximately8.7988e-20 improvement over Daniel while18place upward-rounded display is larger than Daniel. Author-reported geometry/analytic runs remain external claims. Next retrieve complete inputs, independently review math and binding with Astra, select meaningful exact controls, run documented dual routes, register results/list/graphics through standard intake only after verification. No current-session deciders executed; no optimality/rigidity promotion.
@@ -27,3 +27,8 @@ Final Astra wholepost0d E/F/G/H round3 at9d all0remainingfindings, published E54
 Final localgate currentrunebcee2ef593845dd98df67e71f861edf at9d usesprojecttoolPATH+tini-s+supportedown-proc capability, fullyimplicitstandard4CPU scheduling.98metadata commands/62editstepsPASS, ordinarywholebehavior running with3506PASS0FAIL atlatestownerupdate; heavy/terminalstillPENDING. Prior9d attempt cancelled130 because Ruff/typecheck PATH discovery missing, sourceunchanged; priora6 serialization/process failures+cancellation retained. Never inferoutergreen from progress.
 CheckpointPR431final91c6 reviewed/formalA and actual16SUCCESS38documentedSKIP, READYnon-draft, mergehelduntilsource stack. CIsetupdelay wasapt downloads21.5MB at27.3kB/s, 13m7s; npm1s/browsercachesHIT; actualfrontendcontractsPASS98s. No credential/appfailure or sourcechange/rerun required.
 New428 complete source50files/Gitbundle/tag+3releaseassets retained,68poses272corners/5completejobs prepared, fullR improvement confirmed onlyarithmetically,16/18displayceilingsworseDaniel. Mathsourcebaseline complete; pair/containment/replayUNRUN. Bindingreview found oldhardcodedjobpairtotal26830 vs correct11390, separatebugcreated. Engineer preservingv1/fixingv2; finaldualprotocolreviews/GitHubcustody/CPUlease required beforeactualreplay. No IDsreserved/lower/local/globaloptimum/assurancepromotion.
+
+Current custody/protocol continuation (2026-10-08):
+New operationalarchive squares-operational-evidence-20261008.tar.gz1968members120072986expandedB18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc uploadedrelease406258689; ACTUALdownloadarchive/manifesthashMATCH andall1968downloadedmembersverifiedPASS. Nativefullsnapshot export/full-current-state/outboxproof alsoGitHubdownloadhashverified; both outboxesEMPTY andsourcecheckoutsCLEAN. Latestpending sourcecommits lower3345c393/upper2aeb518d saved in separateGitbundles uploaded/downloadedBUNDLEverifyPASS; predecessorsf1/9d alreadyGitHub. Sourcebranchpushespendingnativeprepushchecks, formalstack430notmerged; alloriginalfailure/cancellation preserved.
+Issue428 math finalfrozen-v2 protocolACCEPT zero findings full340square/1360corner five-envelope independentlyreconstructed baseline SHA256d9b98489ee59ccbbfb140b11d7ec3d96514a084d7c822c989a7863369992045b; binding finalfrozen-v2 protocolACCEPT zero findings250checks completebaseline d72645a527aed455345d9101560b80d8aa1220443be6a21e51d77b41054285cf. Reviewfiles final-protocol-review-v2.md/.json in independentmath/bindingdirs; runner e4f22b90/manifest5b4cc7ee sourcefded686668. Priorv1wrong26830 preserved; v2derived11390perroute and3meaningfulmocktestsPASS actualEXIT0. Fullinputsunchanged. Bothfinalreviews nowacceptedbut scientificgeometrydeciders0, no actualreplaychildren/upstreamproducer, noassurancepromotion. Newfinalreviewcustodyarchiveinpreparation (notyetuploadproven). Parentthink-v42c remainsopen; wrongcountthink-wgdcpendingdurablefinalreviewsclosure.
+Additional engineeringlane plan_next_storage_slice GPT6.1Sol read-only concreteexistingOR18release/privatecopierindexedstorageplan for425/428 beforeactualreplay; no budget/caprise/consumedproofdeletion. Selectednextentry remains lowerpin/upperparentfinalCI→stackmerge→actualmatching422live/results/drawingsverification thenreply/ledger;425/428 actualdeciders afterCPUleaseandcanonicalstorage/admissionprereqs. Latestreusableenvironmentstartupsave remainsstale_base/unsaved; currentinstancetested distinctfromfresh-taskrestoration.

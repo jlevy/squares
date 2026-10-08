@@ -5,14 +5,14 @@ title: "Issue425: triage five exact Couzo certificate refinements, two possible 
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-07T22:46:22.110Z
-updated_at: 2026-10-08T00:10:02.178Z
+updated_at: 2026-10-08T01:11:18.974Z
 started_at: 2026-10-07T22:52:14.379Z
 ---
 New itsnaka request captured with all comments and immutable sourcebc389ddf7d65277cd19a9b08fb285d86346d6806 in /workspace/squares-new-report-intake/late-425-256. Request105,263,292;130/272 historical-only. n263 claimed side is weaker than alreadymergedSQUISH bound and author excludes no-longer-improving ceilings. Compare exact105/292 against current record; delegate Astra mathematical/input binding before any replay/registry changes; retain full source/credit/history and honor explicit unrequested lower-bound exclusions. Metadata discovery only; no new feasibility assurance yet.
@@ -33,3 +33,8 @@ Next: repairprofiler withsupportedcapability and getactualfullgate/heavyreceipt;
 
 Checkpoint update: actual lowerhosted f1 CI30SUCCESS26documentedSKIP CLEAN; upper0d25SUCCESS26SKIP5FAIL (validate,suite-a/b/c,requiredaggregate) run37705180742. DedicatedSol repair_upper_ci diagnosing exactupperfailure. Lower unchanged fullprofiler module supported-capability rerun actual2PASS1.65s EXIT0; broadEXIT1 retained. Exact selected heavy phase separatelyRUNNING; combined ordinary+heavy reachable900s budget remainsrequired, no waiver. UpperA/B/C/D actualformalreview publication receipt pr429-whole-review-publication.json:5449863506/5449863621/5449863708/5449863858 all0findings at0d/basef1.
 ActualGitHubdraftrelease406258689 additionally retains operationalrecords703files43897170Boriginal archive7805026B SHA2565202871832454b89669c1fb4ba673e890fa73068cb5181950ef7d2961bbc16ed; actualdownloadMATCH. Includes queueplans, repair/failure/review/native-state receipts as point-in-time checkpoint before later repairs. Separate425138filearchive remainsunchanged. Canonical425storage/publication/replay remainunresolved,0deciders.
+
+Current custody/protocol continuation (2026-10-08):
+New operationalarchive squares-operational-evidence-20261008.tar.gz1968members120072986expandedB18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc uploadedrelease406258689; ACTUALdownloadarchive/manifesthashMATCH andall1968downloadedmembersverifiedPASS. Nativefullsnapshot export/full-current-state/outboxproof alsoGitHubdownloadhashverified; both outboxesEMPTY andsourcecheckoutsCLEAN. Latestpending sourcecommits lower3345c393/upper2aeb518d saved in separateGitbundles uploaded/downloadedBUNDLEverifyPASS; predecessorsf1/9d alreadyGitHub. Sourcebranchpushespendingnativeprepushchecks, formalstack430notmerged; alloriginalfailure/cancellation preserved.
+Issue428 math finalfrozen-v2 protocolACCEPT zero findings full340square/1360corner five-envelope independentlyreconstructed baseline SHA256d9b98489ee59ccbbfb140b11d7ec3d96514a084d7c822c989a7863369992045b; binding finalfrozen-v2 protocolACCEPT zero findings250checks completebaseline d72645a527aed455345d9101560b80d8aa1220443be6a21e51d77b41054285cf. Reviewfiles final-protocol-review-v2.md/.json in independentmath/bindingdirs; runner e4f22b90/manifest5b4cc7ee sourcefded686668. Priorv1wrong26830 preserved; v2derived11390perroute and3meaningfulmocktestsPASS actualEXIT0. Fullinputsunchanged. Bothfinalreviews nowacceptedbut scientificgeometrydeciders0, no actualreplaychildren/upstreamproducer, noassurancepromotion. Newfinalreviewcustodyarchiveinpreparation (notyetuploadproven). Parentthink-v42c remainsopen; wrongcountthink-wgdcpendingdurablefinalreviewsclosure.
+Additional engineeringlane plan_next_storage_slice GPT6.1Sol read-only concreteexistingOR18release/privatecopierindexedstorageplan for425/428 beforeactualreplay; no budget/caprise/consumedproofdeletion. Selectednextentry remains lowerpin/upperparentfinalCI→stackmerge→actualmatching422live/results/drawingsverification thenreply/ledger;425/428 actualdeciders afterCPUleaseandcanonicalstorage/admissionprereqs. Latestreusableenvironmentstartupsave remainsstale_base/unsaved; currentinstancetested distinctfromfresh-taskrestoration.
