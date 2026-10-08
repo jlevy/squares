@@ -505,7 +505,7 @@ def test_a_page_without_the_sites_icon_once_is_named(icons: str, finding: str) -
 def test_a_results_overview_is_a_fragment_with_no_head() -> None:
     """A result's overview is fetched into a popover and is no document: it has no head,
     so it carries no card and no broken one."""
-    fragment = render_overview.result_fragments()[0]
+    fragment = next(render_overview.iter_result_fragments())
     assert fragment.html.startswith('<div class="site-result"')
     assert read_head(fragment.html) == check_published_site.PageHead(None, (), (), ())
     assert not check_published_site.is_document(fragment.html)

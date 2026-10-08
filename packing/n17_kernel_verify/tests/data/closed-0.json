@@ -1,0 +1,31 @@
+{
+ "certificate": {
+  "seed_sha256": "44087ccf034ad7fb3ffaba40821106165ec720d4394ce8800ce1a7c127d69f31",
+  "node_sha256": "bab4f2d50baa1142b947160fb8df2296ad5a2b814a80ef512075cae6840cc99d"
+ },
+ "mask": [
+  0,
+  1
+ ],
+ "cells": [
+  "a",
+  "b"
+ ],
+ "bins": 3,
+ "closure": {
+  "kind": "all_parent_poses_forbidden",
+  "owner": 1,
+  "step": 1
+ },
+ "closed": true,
+ "counts": {
+  "collision_facet_checks": 576,
+  "collision_regions": 6,
+  "cover_checks": 6,
+  "partner_rows": 9,
+  "rows_full": 6,
+  "seed_points": 0,
+  "seed_rows": 6,
+  "steps": 2
+ }
+}

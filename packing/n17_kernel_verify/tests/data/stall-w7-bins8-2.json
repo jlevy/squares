@@ -1,0 +1,37 @@
+{
+ "certificate": {
+  "seed_sha256": "ada29c627aad3c29b9a252605d1d62377f9aa8f86263ba6f2da7966725a3701b",
+  "node_sha256": "8120340cba08eb37e9edab89f45d29f70a8f826c6f88679ba1e9121551ff66d6"
+ },
+ "mask": [
+  0,
+  5,
+  6,
+  10,
+  14,
+  16,
+  18
+ ],
+ "cells": [
+  "corner-SW",
+  "side-N0",
+  "side-W0",
+  "side-W1",
+  "side-W2",
+  "interior-SW",
+  "interior-W"
+ ],
+ "bins": 8,
+ "closure": null,
+ "closed": false,
+ "counts": {
+  "collision_facet_checks": 19740,
+  "collision_regions": 64,
+  "cover_checks": 28,
+  "partner_rows": 672,
+  "rows_full": 28,
+  "seed_points": 4,
+  "seed_rows": 56,
+  "steps": 14
+ }
+}

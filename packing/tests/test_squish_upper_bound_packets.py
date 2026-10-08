@@ -34,7 +34,8 @@ def source_data(n: int = 2) -> dict[str, object]:
 def parse(tmp_path: Path, data: object, n: int = 2) -> dict[str, object]:
     path = tmp_path / "source.json"
     path.write_text(json.dumps(data))
-    fact, _raw = packet.parse_source(path, n)
+    fact, raw = packet.parse_source(path, n)
+    assert packet.parse_source_bytes(raw, n) == (fact, raw)
     return fact
 
 
@@ -96,6 +97,8 @@ def test_exact_rotated_conversion_and_both_control_refusals(tmp_path: Path) -> N
 def test_malformed_source_is_refused(tmp_path: Path, mutation: dict[str, object]) -> None:
     with pytest.raises(ValueError, match=r"source|square|exact|roster|required"):
         parse(tmp_path, {**source_data(), **mutation})
+    with pytest.raises(ValueError, match=r"source|square|exact|roster|required"):
+        packet.parse_source_bytes(json.dumps({**source_data(), **mutation}).encode(), 2)
 
 
 def test_duplicate_json_and_bounded_inputs(
@@ -105,12 +108,19 @@ def test_duplicate_json_and_bounded_inputs(
     path.write_text('{"n":2,"n":2}')
     with pytest.raises(ValueError, match="duplicate"):
         packet.parse_source(path, 2)
+    with pytest.raises(ValueError, match="duplicate"):
+        packet.parse_source_bytes(path.read_bytes(), 2)
     path.write_text(json.dumps(source_data()))
     monkeypatch.setattr(packet, "MAX_SOURCE_BYTES", 16)
     with pytest.raises(ValueError, match="byte ceiling"):
         packet.parse_source(path, 2)
     with pytest.raises(ValueError, match="admission"):
         packet.parse_source(path, 325)
+    with pytest.raises(ValueError, match="byte ceiling"):
+        packet.parse_source_bytes(path.read_bytes(), 2)
+    for expected in (True, 0, 325):
+        with pytest.raises(ValueError, match="admission"):
+            packet.parse_source_bytes(path.read_bytes(), expected)
 
 
 def test_integer_decimal_ceiling_never_understates_exact_bound() -> None:

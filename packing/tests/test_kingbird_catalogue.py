@@ -386,10 +386,12 @@ def test_frontier_transcription_diverges_nowhere_below_the_case_maximum() -> Non
     cases = _frontier_cases()
     assert sorted(cases) == list(KNOWN_BEST_CORPUS.numbers)
 
+    catalogue = _record_catalogue()
+    source_key = _kingbird_source_key()
     errors, compared, facts = catalogue_transcription_errors(
         cases,
-        _record_catalogue(),
-        _kingbird_source_key(),
+        catalogue,
+        source_key,
         completeness_bound_from_text(_catalogue_text()),
     )
 
@@ -402,9 +404,8 @@ def test_frontier_transcription_diverges_nowhere_below_the_case_maximum() -> Non
     selected = {
         n
         for n, case in cases.items()
-        if case["reported_upper_bound"]["source_key"] == _kingbird_source_key()
+        if case["reported_upper_bound"]["source_key"] == source_key
     }
-    catalogue = _record_catalogue()
     assert compared == len(selected & catalogue.keys())
     expected_facts = len(cases) + len(selected - catalogue.keys())
     expected_facts += sum(
