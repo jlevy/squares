@@ -19,6 +19,7 @@ from jsonschema_rs import Draft202012Validator
 from devtools import register_gupta_reports as register
 from devtools import run_negative_controls as controls
 from devtools import source_supersession, verifier_registry
+from devtools.assess_frontier_rigidity import preserve_block_rendering
 from devtools.register_refinement_reports import dump, save
 from sqpack import assurance
 from sqpack.yamlio import safe_load
@@ -193,7 +194,10 @@ def case_plan(positives: dict[int, Any]) -> list[tuple[Path, str]]:
         if count != 1:
             raise ValueError("one selected complete Gupta construction section required")
         body = register.ceiling_prose(n, case, body)
-        plan.append((path, prefix + "---\n" + dump(document) + "---\n" + body))
+        rendered = prefix + "---\n" + dump(document) + "---\n" + body
+        # Confirmation changes a finite ceiling, not the retained witness assessment.
+        rendered = preserve_block_rendering(original, rendered, n)
+        plan.append((path, rendered))
     return plan
 
 

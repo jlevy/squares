@@ -1327,8 +1327,11 @@ def render_all() -> list[Page]:
     return [*[build() for build in PAGES.values()], *chapter_pages()]
 
 
-def iter_result_fragments() -> Iterator[Page]:
-    """Every result as a complete page; row overlays extract its article on input."""
+def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterator[Page]:
+    """Complete result pages, optionally selecting ids without narrowing their context.
+
+    Chains, amendments and neighbors always use the complete register; row overlays
+    extract each page's article on input."""
     from devtools import overview_data, overview_sections, site_urls  # noqa: PLC0415
 
     overview = overview_data.load()
@@ -1338,6 +1341,8 @@ def iter_result_fragments() -> Iterator[Page]:
     ordered = sorted(overview.results, key=lambda result: result.id)
     positions = {result.id: index for index, result in enumerate(ordered)}
     for result in overview.results:
+        if result_ids is not None and result.id not in result_ids:
+            continue
         index = positions[result.id]
         path = overview_sections.result_fragment(result.id)
         summary = overview_sections.plain_text(result.summary)
