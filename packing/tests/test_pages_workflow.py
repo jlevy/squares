@@ -1855,7 +1855,10 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
     # What each review's job keeps of the two trees: the retained data its render reads
     # and the archived files it cites, each a directory (`/` at its end) or a file.
     kept = {
-        "exact-side-values": ("/packing/resources/web/kingbird-squares-in-squares.md",),
+        "exact-side-values": (
+            "/packing/resources/web/kingbird-squares-in-squares.md",
+            "/packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+        ),
         "n11-optimality-review": (
             "/packing/resources/web/n11-optimality-2026-09-29/",
             "/packing/resources/papers/kingbird-square-11-provenance.svg",
@@ -1963,6 +1966,18 @@ REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
         (
             "packing/resources/web/unrelated/README.md",
             "packing/resources/papers/unrelated.pdf",
+            "packing/campaign/old/README.md",
+        ),
+    ),
+    "exact-side-values": (
+        (
+            "packing/resources/README.md",
+            "packing/resources/web/kingbird-squares-in-squares.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+        ),
+        (
+            "packing/resources/web/unrelated/README.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/inputs/n-102.txt",
             "packing/campaign/old/README.md",
         ),
     ),
