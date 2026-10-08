@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,17 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T01:46:58.403Z
+updated_at: 2026-10-08T01:50:11.615Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
+
+LATEST TRANSPORT / CONCURRENT INTAKE UPDATE — 2026-10-08 UTC:
+Upper429 ef47295da87143b96b3b8a66ca6dd84493b953dd actual nonforce push SUCCEEDED and gitlsremote exactSHA matched. Normal merge068ca510 preserves2e3f/807 and lower3345; documented pin101026bd.23release tests/raw0, pinowner and324regularizedproducerPASS. Exact finaltree equals807, allother bytes vsvalidated2aeb unchanged beyondnineatlasrefs+pin. Fresh independentAstra finalreviewACCEPT0findings; all1762squares7048corners bindverifiedcertificates. Formal current-head ReviewI published; upper markedready. Terminal hostedCIpending. Full2aeb63selectedpush/785.600s/rawEXIT0 retains originalsourceheadscope. Checkpoint431body rewritten currentstate, OR9PASS, actualGHupdated.
+Concurrent next intakePR43478229c9e29ac90d8d69834018f380ba991fa996e is now thirdformalstack430 layer above429, DRAFT with66files,8hostedFAIL21SUCCESS27SKIP atlatestread, noindependentformalreviews. Claims425tenfrozenjobs raw0/453.856653s and428THREE upstreamsourcegeometryjobs raw0/7.843s (distinctfrom ourfrozenFIVEproject-route protocol). T117/T118 remainV0C0S2 pendingpubliccustody/finalreview. Claimsactualpublicdata/refinement-evidence-425-428-v1 custody andlosslesshistorical-log108280workersavings/24custodytests. Theseotherlaneclaims are being independentlyread/audited, notassertedthissessionranours428decidersorcompletedstorageadmission. Preservecoownerclaims/nativeupdates andkeep434draft. Onlyscoped ghstackmerge429--yes--merge maymerge427+429; ghstackmerge430 wouldincludeungated434 and isforbiddenuntilitsowngatepasses.
+AllthreecurrentPRdescriptions/nativeworkremainlinked; final recoveryarchive is beingfrozenwithcurrentcompleted gates,reviews,concurrentgraph andstate. Nextsourcepublish/deployment/issue422reply remainopen; nofalseclosure/allrepoCIgreen claim.
 
 LATEST STATE — 2026-10-08 UTC; supersedes older pending/head summaries below.
 User requests every completed source change PR'd and full state retained in PRs and native beads. Workflow entry: create-or-update-pr-simple with formal remote stack430 (reported427 then confirmation429); checkpoint431 standalone. Root owns all GitHub/tbd writes; Sol engineering and Astra deep reviews proceed in separate lanes.
