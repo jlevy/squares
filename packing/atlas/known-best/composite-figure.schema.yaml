@@ -43,7 +43,7 @@ properties:
         range: {$ref: '#/$defs/range'}
         columns: {type: integer, minimum: 1}
         rows: {type: integer, minimum: 1}
-        layout: {type: string, pattern: '^[0-9]+ by [0-9]+, row-major n=[0-9]+\.\.[0-9]+$'}
+        layout: {type: string, pattern: '^[0-9]+ by [0-9]+, (row-major|left-aligned square-bound triangle) n=[0-9]+\.\.[0-9]+$'}
         square_count: {type: integer, minimum: 1}
     # Each published figure's grid is pinned, the way this file used to pin the range
     # with constants: one clause per stem, in an `allOf` because a schema carries one
@@ -63,9 +63,9 @@ properties:
           required: [stem, columns, rows, layout, square_count]
           properties:
             stem: {const: known-best-1-324}
-            columns: {const: 18}
+            columns: {const: 35}
             rows: {const: 18}
-            layout: {const: '18 by 18, row-major n=1..324'}
+            layout: {const: '35 by 18, left-aligned square-bound triangle n=1..324'}
             square_count: {const: 52650}
   generated_by: {type: string, minLength: 1}
   provenance_vocabulary:

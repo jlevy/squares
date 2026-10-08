@@ -250,6 +250,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_frontier_table.py",
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
+    "tests/test_site_atlas_views.py",
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
@@ -1942,7 +1943,7 @@ def _site_url_registry(context: Context) -> str:
 
 
 def _site_layout_tests(context: Context) -> str:
-    """Measure the site's tables in the Chromium the frontend runner installs.
+    """Measure the site's layouts in the Chromium the frontend runner installs.
 
     `SITE_LAYOUT_TESTS` pin pixel widths, which no behavioural shard can measure, so they
     run here, one file to an xdist worker as the quick lane runs its files, and they fail

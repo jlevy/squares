@@ -93,61 +93,45 @@ void test("the longest row has 2k - 1 tiles: 19 of a hundred cases and 35 of 324
   assert.equal(atlas.widest(324), 35);
 });
 
-void test("a line holds as many least tiles as fit, and no more than the longest row", () => {
-  // A desktop block, where the hundred's nineteen and all 324's thirty-five fit.
-  assert.equal(atlas.perLine(1200, 26, 19), 19);
-  assert.equal(atlas.perLine(1200, 26, 35), 35);
-  assert.equal(atlas.perLine(944, 26, 35), 35);
-  // A 768-pixel window's block holds 26 of the 35, and a phone's eight of 40 pixels.
-  assert.equal(atlas.perLine(688, 26, 35), 26);
-  assert.equal(atlas.perLine(358, 40, 19), 8);
-  assert.equal(atlas.perLine(360, 40, 19), 9);
-  // Never none, and with no width or no least to go by, the longest row.
-  assert.equal(atlas.perLine(10, 40, 19), 1);
-  assert.equal(atlas.perLine(0, 40, 19), 19);
-  assert.equal(atlas.perLine(358, Number.NaN, 19), 19);
+void test("a line budgets the shared cell minimum and the gaps between tiles", () => {
+  assert.equal(atlas.perLine(1200, 108, 19, 8), 10);
+  assert.equal(atlas.perLine(1200, 108, 35, 8), 10);
+  assert.equal(atlas.perLine(944, 108, 35, 8), 8);
+  assert.equal(atlas.perLine(688, 108, 35, 8), 6);
+  assert.equal(atlas.perLine(358, 73.6, 19, 5.6), 4);
+  // The final tile needs no gap after it: two 108px tiles fit in exactly 224px.
+  assert.equal(atlas.perLine(224, 108, 19, 8), 2);
+  assert.equal(atlas.perLine(223, 108, 19, 8), 1);
+  assert.equal(atlas.perLine(2240, 108, 19, 8), 19);
+  assert.equal(atlas.perLine(10, 108, 19, 8), 1);
+  assert.equal(atlas.perLine(0, 108, 19, 8), 19);
+  assert.equal(atlas.perLine(358, Number.NaN, 19, 8), 19);
 });
 
-void test("Small and Medium hold the same tiles to a line, and Large fewer", () => {
-  // Medium is `perLine`, and Small draws the same tiles smaller.
-  /** @type {[number, number, number][]} */
-  const blocks = [
-    [1200, 26, 19],
-    [1200, 26, 35],
-    [688, 26, 35],
-    [358, 40, 19],
-  ];
-  for (const [width, least, most] of blocks) {
-    const medium = atlas.perLine(width, least, most);
-    assert.equal(atlas.perLineAt(width, least, 72, most, 1), medium);
-    assert.equal(atlas.perLineAt(width, least, 72, most, 0.667), medium);
-  }
-  // Large: as many as tiles half as wide again as Medium's leave room for. A desktop
-  // block's hundred go from 19 to a line to 13, and all 324 from 35 to 23; a 768-pixel
-  // window's 324 from 26 to 17, and a phone's hundred from 8 to 5.
-  assert.equal(atlas.perLineAt(1200, 26, 72, 19, 1.5), 13);
-  assert.equal(atlas.perLineAt(1200, 26, 72, 35, 1.5), 23);
-  assert.equal(atlas.perLineAt(944, 26, 72, 35, 1.5), 23);
-  assert.equal(atlas.perLineAt(688, 26, 72, 35, 1.5), 17);
-  assert.equal(atlas.perLineAt(358, 40, 72, 19, 1.5), 5);
-  // A block so wide that Medium's tiles stop at the most a tile may be grows them first:
-  // at 140rem the hundred keep their nineteen to a line at Large.
-  assert.equal(atlas.perLineAt(2240, 26, 72, 19, 1.5), 19);
-  // Never more than at Medium, never none, and with no scale or no most to go by, the
-  // line's share alone.
-  assert.equal(atlas.perLineAt(10, 40, 72, 19, 1.5), 1);
-  assert.equal(atlas.perLineAt(1200, 26, 72, 19, Number.NaN), 19);
-  assert.equal(atlas.perLineAt(1200, 26, Number.NaN, 19, 1.5), 13);
+void test("each size fits as many scaled cells as the shared grid minimum allows", () => {
+  assert.equal(atlas.perLineAt(1200, 108, 19, 0.667, 8), 15);
+  assert.equal(atlas.perLineAt(1200, 108, 19, 1, 8), 10);
+  assert.equal(atlas.perLineAt(1200, 108, 19, 1.5, 8), 7);
+  assert.equal(atlas.perLineAt(358, 73.6, 19, 0.667, 5.6), 6);
+  assert.equal(atlas.perLineAt(358, 73.6, 19, 1, 5.6), 4);
+  assert.equal(atlas.perLineAt(358, 73.6, 19, 1.5, 5.6), 3);
+  assert.equal(atlas.perLineAt(10, 108, 19, 1.5, 8), 1);
+  assert.equal(atlas.perLineAt(1200, 108, 19, Number.NaN, 8), 10);
   for (let width = 300; width <= 2400; width += 7) {
     for (const most of [19, 35]) {
-      const medium = atlas.perLine(width, 26, most);
-      const large = atlas.perLineAt(width, 26, 72, most, 1.5);
-      assert.ok(large >= 1 && large <= medium, `${width}, ${most}`);
+      const small = atlas.perLineAt(width, 108, most, 0.667, 8);
+      const medium = atlas.perLineAt(width, 108, most, 1, 8);
+      const large = atlas.perLineAt(width, 108, most, 1.5, 8);
+      assert.ok(1 <= large && large <= medium && medium <= small && small <= most);
+      for (const scale of [0.667, 1, 1.5]) {
+        const per = atlas.perLineAt(width, 108, most, scale, 8);
+        assert.ok(per * 108 * scale + (per - 1) * 8 <= width);
+      }
     }
   }
 });
 
-void test("where every row fits, row k is line k and ends at the last column", () => {
+void test("where every row fits, row k is line k and starts at the first column", () => {
   for (const [last, per] of /** @type {[number, number][]} */ ([
     [100, 19],
     [324, 35],
@@ -156,7 +140,7 @@ void test("where every row fits, row k is line k and ends at the last column", (
       const k = atlas.row(n);
       assert.deepEqual(
         place(n, per),
-        { row: k, line: k, column: per - (k * k - n), opens: k > 1 },
+        { row: k, line: k, column: n - (k - 1) * (k - 1), opens: k > 1 },
         `n = ${n}`,
       );
     }
@@ -185,19 +169,19 @@ void test("nineteen tiles at eight a line are lines of 8, 8 and 3, ending at the
       [97, 8],
     ],
   );
-  // The three left over stand last, from the right, so 100 is in the last column.
+  // The short last line also starts at the left edge.
   assert.deepEqual(
     row[2]?.map(({ n, column }) => [n, column]),
     [
-      [98, 6],
-      [99, 7],
-      [100, 8],
+      [98, 1],
+      [99, 2],
+      [100, 3],
     ],
   );
-  assert.deepEqual(row[2]?.at(-1), { n: 100, column: 8, row: 10, opens: false });
+  assert.deepEqual(row[2]?.at(-1), { n: 100, column: 3, row: 10, opens: false });
 });
 
-void test("a row that fits is one line, set from the right", () => {
+void test("a row that fits is one line, set from the left", () => {
   // At eight a line rows 1 to 4 fit: 1, 3, 5 and 7 tiles.
   for (let k = 1; k <= 4; k += 1) {
     assert.deepEqual(rowLines(k, 8), [2 * k - 1]);
@@ -205,11 +189,11 @@ void test("a row that fits is one line, set from the right", () => {
   assert.deepEqual(
     lines(16, 8)[2]?.map(({ n, column }) => [n, column]),
     [
-      [5, 4],
-      [6, 5],
-      [7, 6],
-      [8, 7],
-      [9, 8],
+      [5, 1],
+      [6, 2],
+      [7, 3],
+      [8, 4],
+      [9, 5],
     ],
   );
   // A row exactly as long as a line is that line, full.
@@ -224,10 +208,14 @@ void test("a row that is a whole number of lines has no short line", () => {
   assert.deepEqual(place(25, 3), { row: 5, line: 10, column: 3, opens: false });
 });
 
-void test("every perfect square stands in the last column, at any width", () => {
+void test("every perfect square ends its row in the last occupied column, at any width", () => {
   for (let per = 1; per <= 40; per += 1) {
     for (let k = 1; k <= 18; k += 1) {
-      assert.equal(atlas.place(k * k, per).column, per, `${k} squared at ${per} a line`);
+      assert.equal(
+        atlas.place(k * k, per).column,
+        ((2 * k - 2) % per) + 1,
+        `${k} squared at ${per} a line`,
+      );
     }
   }
 });
@@ -258,7 +246,7 @@ void test("the cases read in order, left to right and top to bottom, one to a pl
   }
 });
 
-void test("a wrapped row's lines but the last are full from the left, and its last ends at the right", () => {
+void test("every line starts at the left, including a wrapped row's short last line", () => {
   for (let per = 1; per <= 40; per += 1) {
     for (let k = 1; k <= 18; k += 1) {
       const sizes = rowLines(k, per);
@@ -274,8 +262,7 @@ void test("a wrapped row's lines but the last are full from the left, and its la
       );
       assert.ok((sizes.at(-1) ?? 0) >= 1 && (sizes.at(-1) ?? 0) <= per);
     }
-    // Every line of a wrapped row but its last starts in the first column, and every
-    // row's last line ends in the last.
+    // Every line fills consecutive columns from the first, including short lines.
     /** @type {Map<number, ReturnType<typeof lines>>} */
     const rows = new Map();
     for (const line of lines(324, per)) {
@@ -283,10 +270,10 @@ void test("a wrapped row's lines but the last are full from the left, and its la
       rows.set(k, [...(rows.get(k) ?? []), line]);
     }
     for (const [k, found] of rows) {
-      for (const line of found.slice(0, -1)) {
+      for (const line of found) {
         assert.equal(line[0]?.column, 1, `row ${k} at ${per}`);
+        assert.equal(line.at(-1)?.column, line.length, `row ${k} at ${per}`);
       }
-      assert.equal(found.at(-1)?.at(-1)?.column, per, `row ${k} at ${per}`);
     }
   }
 });
@@ -306,23 +293,23 @@ void test("the first line of each row after the first opens it, and no other lin
   }
 });
 
-void test("the address names the triangle and says nothing for the grid", () => {
-  assert.equal(atlas.viewOf(""), "grid");
+void test("the address defaults to Triangle and explicitly names Grid", () => {
+  assert.equal(atlas.viewOf(""), "triangle");
   assert.equal(atlas.viewOf("?atlas=triangle"), "triangle");
   assert.equal(atlas.viewOf("?atlas=grid"), "grid");
-  assert.equal(atlas.viewOf("?atlas=pyramid"), "grid");
-  assert.equal(atlas.viewOf("?s-min=4&atlas=triangle&age=180"), "triangle");
-  assert.equal(atlas.searchFor("", "triangle"), "?atlas=triangle");
-  assert.equal(atlas.searchFor("?atlas=triangle", "grid"), "");
-  assert.equal(atlas.searchFor("", "grid"), "");
+  assert.equal(atlas.viewOf("?atlas=pyramid"), "triangle");
+  assert.equal(atlas.viewOf("?s-min=4&atlas=grid&age=180"), "grid");
+  assert.equal(atlas.searchFor("", "triangle"), "");
+  assert.equal(atlas.searchFor("?atlas=triangle", "grid"), "?atlas=grid");
+  assert.equal(atlas.searchFor("?atlas=grid", "triangle"), "");
 });
 
 void test("writing the view keeps every other parameter, and round-trips", () => {
-  assert.equal(atlas.searchFor("?s-min=4&age=180", "triangle"), "?s-min=4&age=180&atlas=triangle");
-  assert.equal(atlas.searchFor("?s-min=4&atlas=triangle&age=180", "grid"), "?s-min=4&age=180");
+  assert.equal(atlas.searchFor("?s-min=4&age=180", "grid"), "?s-min=4&age=180&atlas=grid");
+  assert.equal(atlas.searchFor("?s-min=4&atlas=grid&age=180", "triangle"), "?s-min=4&age=180");
   assert.equal(
-    atlas.searchFor("?atlas=grid&project=evand-square-packing", "triangle"),
-    "?atlas=triangle&project=evand-square-packing",
+    atlas.searchFor("?atlas=triangle&project=evand-square-packing", "grid"),
+    "?atlas=grid&project=evand-square-packing",
   );
   for (const search of ["", "?age=180", "?atlas=triangle", "?x=1&atlas=grid"]) {
     for (const view of /** @type {AtlasView[]} */ (["grid", "triangle"])) {
@@ -352,17 +339,17 @@ void test("the address names Small and Large and says nothing for Medium", () =>
 
 void test("the view and the size are two parameters that never overwrite each other", () => {
   let search = "?age=180";
-  search = atlas.searchFor(search, "triangle");
-  search = atlas.searchForSize(search, "large");
-  assert.equal(search, "?age=180&atlas=triangle&size=large");
-  assert.equal(atlas.viewOf(search), "triangle");
-  assert.equal(atlas.sizeOf(search), "large");
   search = atlas.searchFor(search, "grid");
+  search = atlas.searchForSize(search, "large");
+  assert.equal(search, "?age=180&atlas=grid&size=large");
+  assert.equal(atlas.viewOf(search), "grid");
+  assert.equal(atlas.sizeOf(search), "large");
+  search = atlas.searchFor(search, "triangle");
   assert.equal(search, "?age=180&size=large");
   assert.equal(atlas.sizeOf(search), "large");
   search = atlas.searchForSize(search, "medium");
   assert.equal(search, "?age=180");
-  assert.equal(atlas.viewOf(search), "grid");
+  assert.equal(atlas.viewOf(search), "triangle");
 });
 
 void test("the arrow keys wrap between the tabs, Home and End go to the ends", () => {

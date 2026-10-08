@@ -2010,17 +2010,11 @@ body {
 .site-page .site-atlas-grid {
   --site-wide: var(--site-bleed-max);
   --site-atlas-toggle-space: 1.2rem;
-  /* The triangle's tiles: the least width one may have, which sets how many a line
-     holds (overview/atlas-view.js reads it, in rem or px), and the most. The least is
-     the smallest at which a drawing still reads as a packing and its three-figure
-     number fits under it, a little over the 24 pixels a pointer target needs; it lets
-     all 35 tiles of the eighteenth row stand on one line from a 1024-pixel window up. */
-  --site-atlas-tile-min: 1.625rem;
-  --site-atlas-tile-max: 4.5rem;
-  /* The grid's least cell at Medium, and the size's scale (overview/atlas-view.js reads
-     it): Small draws a tile two thirds as wide and Large half as wide again, in either
-     view. The block's `data-atlas-size` sets it, below. */
+  /* Both views share the grid's readable cell minimum and gap. The script reads
+     these tokens in rem or px; long triangle rows wrap at that cell width. The size's
+     scale makes Small two thirds as wide and Large half as wide again. */
   --site-atlas-cell-min: 6.4rem;
+  --site-atlas-cell-gap: 0.5rem;
   --site-atlas-scale: 1;
   /* The move between the views: one duration and one easing for every tile, read by
      the script. Reduced motion makes the switch instant, as it does every hover. */
@@ -2030,12 +2024,6 @@ body {
      (`100cqi`) and the tiles a line holds. */
   container-type: inline-size;
   position: relative;
-}
-/* Under a finger a tile is at least 2.5rem, 40 pixels, so a phone's line holds eight. */
-@media (max-width: 40rem), (pointer: coarse) {
-  .site-page .site-atlas-grid {
-    --site-atlas-tile-min: 2.5rem;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-page .site-atlas-grid {
@@ -2095,56 +2083,42 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   display: inline-flex;
   gap: 0.3rem;
 }
-/* The two custom properties are the triangle's (below); they are declared here, in the
-   rule both views share, because every line of every drawing inherits them, and a
-   declaration for the triangle alone would have the browser restyle all of those, some
-   three thousand elements, at each change of view. A tile is its line's share of the
-   block, no wider than the most a tile may be, both scaled by the size: Small draws it
-   two thirds as wide, never under the least tile, and Large lets it grow to half as wide
-   again, the script having set fewer to a line. At Medium it is the share alone, no
-   wider than `--site-atlas-tile-max`. The grid's least cell is scaled the same way. */
+/* The triangle's column count and tile width live in the shared rule so changing
+   view does not restyle every drawing's inherited properties. The count uses the same
+   scaled cell minimum and gaps as Grid, and the tile fills one column after the gaps
+   are reserved. Container arithmetic also places the static Triangle before scripts. */
 .site-atlas-cells {
   --site-atlas-widest: 19;
-  --site-atlas-medium-columns: min(
-    var(--site-atlas-widest),
-    max(1, round(down, 100cqi / var(--site-atlas-tile-min), 1))
-  );
-  --site-atlas-medium-tile: min(
-    var(--site-atlas-tile-max),
-    100cqi /
-    var(--site-atlas-medium-columns)
-  );
+  --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
   --site-atlas-per-line: max(
     1,
     min(
-      var(--site-atlas-medium-columns),
-      round(nearest, 100cqi / (max(1, var(--site-atlas-scale)) * var(--site-atlas-medium-tile)), 1)
+      var(--site-atlas-widest),
+      round(
+        down,
+        (100cqi + var(--site-atlas-cell-gap)) /
+        (var(--site-atlas-cell) + var(--site-atlas-cell-gap)),
+        1
+      )
     )
   );
-  --site-atlas-fit: calc(100cqi / var(--site-atlas-per-line, 1));
-  --site-atlas-share: calc(var(--site-atlas-fit) * min(1, var(--site-atlas-scale)));
-  --site-atlas-most: calc(var(--site-atlas-tile-max) * var(--site-atlas-scale));
-  --site-atlas-tile: clamp(
-    var(--site-atlas-tile-min),
-    var(--site-atlas-share),
-    var(--site-atlas-most)
+  --site-atlas-tile: calc(
+    (100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-cell-gap)) /
+    var(--site-atlas-per-line)
   );
-  --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
   --site-atlas-row-space: calc(
     0.12 +
     0.28 *
     clamp(0, var(--site-atlas-widest) - var(--site-atlas-per-line), 1)
   );
   display: grid;
-  gap: 0.5rem;
+  gap: var(--site-atlas-cell-gap);
   grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));
 }
 @media (max-width: 40rem) {
   .site-page .site-atlas-grid {
     --site-atlas-cell-min: 4.6rem;
-  }
-  .site-atlas-cells {
-    gap: 0.35rem;
+    --site-atlas-cell-gap: 0.35rem;
   }
 }
 /* A tile in a move between the views is scaled about its own corner, which is where the
@@ -2201,24 +2175,24 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
   transition: none;
 }
 /* The triangle: the same tiles, set by the grid bound. Row k holds the 2k - 1 cases a
-   square of side k is known to hold and ends at k squared on the right edge, so the
-   perfect squares, whose packing is the grid itself, run down it. A row too long for
-   the block wraps in reading order: every line but its last is full, from the left,
-   and the last holds what is left over, set from the right so it still ends at the
-   square. overview/atlas-view.js says how many tiles a line holds
+   square of side k is known to hold, starting at the left edge and ending at k squared.
+   A row too long for the block wraps in reading order: every line starts at the left,
+   every line but its last is full, and the last holds what is left over.
+   overview/atlas-view.js says how many tiles a line holds
    (`--site-atlas-per-line`) and writes each tile's line and column; every size here
-   follows from that one number and the block's width. A tile is its line's share of
-   the block, no wider than `--site-atlas-tile-max`, and its inset, its number and the
-   space over a new row are fractions of it, so the triangle keeps its proportions from
-   a phone to a wide screen. A triangle narrower than the block is centred. The tile's
-   width, `--site-atlas-tile`, is declared with the grid's rule above, for the reason
+   follows from that one number and the block's width. Both views have the same cell
+   minimum, gaps and drawing inset; the space over a new row is a fraction of a tile.
+   The head bootstrap's Grid query overrides the static block's Triangle default. The
+   tile's width, `--site-atlas-tile`, is declared with the grid's rule above, for the reason
    given there. */
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells,
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid[data-atlas-view="triangle"]
+  .site-atlas-cells,
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
-  gap: 0;
   grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));
-  justify-content: safe center;
+  justify-content: start;
   overflow-x: auto;
+  row-gap: 0;
 }
 .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
   --site-atlas-widest: 35;
@@ -2229,16 +2203,16 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
 .site-atlas-cells[data-atlas-wrapped] {
   --site-atlas-row-space: 0.4;
 }
-.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell,
+html:not([data-site-atlas-view="grid"])
+  .kpress
+  .site-atlas-grid[data-atlas-view="triangle"]
+  .site-atlas-cell,
 html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell {
   /* Initial positions mirror place() in atlas-view.js. Each earlier row contributes
      ceil((2k - 1) / columns) lines; --r is the row and --c its offset from the square.
      Container arithmetic settles the query-selected layout before any script runs. */
   --site-atlas-in-row: calc(2 * var(--r, 1) - 1 - var(--c, 0));
-  --site-atlas-row-tiles: calc(2 * var(--r, 1) - 1);
-  --site-atlas-row-lines: round(up, var(--site-atlas-row-tiles) / var(--site-atlas-per-line), 1);
   --site-atlas-in-line: round(up, var(--site-atlas-in-row) / var(--site-atlas-per-line), 1);
-  --site-atlas-last-line: clamp(0, 1 - var(--site-atlas-row-lines) + var(--site-atlas-in-line), 1);
   --site-atlas-above: calc(
     round(up, 1 / var(--site-atlas-per-line), 1) *
     clamp(0, var(--r, 1) - 1, 1) +
@@ -2278,13 +2252,7 @@ html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell 
   --site-atlas-initial-line: calc(var(--site-atlas-above) + var(--site-atlas-in-line));
   --site-atlas-initial-column: calc(
     mod(var(--site-atlas-in-row) - 1, var(--site-atlas-per-line)) +
-    1 +
-    var(--site-atlas-last-line) *
-    (
-      var(--site-atlas-per-line) -
-      mod(var(--site-atlas-row-tiles) - 1, var(--site-atlas-per-line)) -
-      1
-    )
+    1
   );
   --site-atlas-initial-opens: calc(
     clamp(0, var(--r, 1) - 1, 1) *
@@ -2298,17 +2266,19 @@ html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell 
     var(--site-atlas-tile) *
     var(--site-atlas-row-space)
   );
-  padding: calc(var(--site-atlas-tile) * 0.07);
 }
-.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-n,
+html:not([data-site-atlas-view="grid"]) .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-n,
 html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-n {
   font-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);
   line-height: 1.15;
   margin-block-start: calc(var(--site-atlas-tile) * 0.04);
 }
-/* The perfect squares, down the right edge, are numbered in the text's own colour and
-   the medium weight: the row ends there. */
-.site-atlas-grid[data-atlas-view="triangle"] [data-atlas-square] .site-atlas-n,
+/* The perfect squares that end each row are numbered in the text's own colour and
+   the medium weight. */
+html:not([data-site-atlas-view="grid"])
+  .site-atlas-grid[data-atlas-view="triangle"]
+  [data-atlas-square]
+  .site-atlas-n,
 html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site-atlas-n {
   color: var(--kpress-doc-text);
   font-weight: var(--site-font-weight-sans-medium);

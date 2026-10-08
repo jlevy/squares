@@ -10,7 +10,7 @@ figures and their exports included.
 
 ## Rebuild it
 
-Two commands, for two layers that change for different reasons:
+The data layer and the drawings are updated separately:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update
@@ -34,9 +34,23 @@ has the rule, and `--check-composites` lists the cards that trail.
 It refuses to draw while the pinned data revision is stale or the data has uncommitted
 changes.
 
+For a layout change, refresh the composite geometry in both data records without
+rebuilding any witness:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update-composite-records
+```
+
+This command preserves case facts and legend totals and refuses unrelated record changes
+before writing either [`manifest.json`](manifest.json) or
+[`composite-figure.json`](composite-figure.json).
+Those records and their schema contracts are release data.
+Commit them, run `python -m devtools.release_pin --update`, commit the new pin, then run
+`--update-composites` to draw under that identity.
+
 Each composite’s exports are one family: a single run draws all of them from the same
 SVG, and a single `--check` reports every one that has fallen behind.
-Both commands are idempotent: a second run changes nothing.
+These commands are idempotent: a second run changes nothing.
 Then confirm nothing drifted:
 
 ```bash
@@ -261,19 +275,19 @@ for m in build_contact_scaffold_atlas \
 done
 ```
 
-Changing the canvas size means four edits, not one: the card metrics in
-`devtools/build_known_best_atlas.py`, the pinned dimensions in
-[`known-best-atlas.schema.yaml`](known-best-atlas.schema.yaml), the expected dimensions
-in `tests/test_known_best_atlas.py`, and the `width` and `height` on the `img` tag in
-`devtools/templates/n11-lower-bounds-explainer-article.md`, which reserves the space the
-page scrolls past.
-The card metrics are shared, so an edit to them moves both composites;
-the schema pins each canvas under its own stem, so a silent resize of either fails the
-gate. The last three pin every raster each composite publishes — for the figure, the 1x
-preview, the 2x export and the link-preview crop — so a canvas change that moves one and
-not the others is caught rather than shipped.
-Only the builder needs a single edit: each raster derives its size from the canvas
-constants and its own whole-number scale.
+Change an arrangement in its `CompositeSpec` in `src/sqpack/known_best.py`. The canvas
+follows the number of columns and rows at the shared card scale; changing card metrics
+in `devtools/build_known_best_atlas.py` affects both composites.
+Update the pinned geometry in
+[`known-best-atlas.schema.yaml`](known-best-atlas.schema.yaml) and
+[`composite-figure.schema.yaml`](composite-figure.schema.yaml), the expected dimensions
+and placements in `tests/test_known_best_atlas.py`, and any consumer that declares the
+changed image’s dimensions.
+The figure’s consumer is the `img` tag in
+`devtools/templates/n11-lower-bounds-explainer-article.md`. Each raster derives its size
+from the canvas and its own whole-number scale, and the PDF keeps the SVG’s intrinsic
+dimensions. Refresh the layout records, commit and re-pin as above, then redraw the
+composites.
 
 ## Staleness cannot pass quietly
 
@@ -316,39 +330,48 @@ center, in opposite directions.
 ## The two composites
 
 The corpus publishes two figures of itself: the 10-by-10 **figure** of `n = 1..100`, and
-the 18-by-18 **poster** of the whole corpus, `n = 1..324`. They share a builder, a
-record, a palette and a card design; 324 falls into 18 columns of 18 with no short row,
-which is why the poster stops where the catalogue’s completeness statement does.
-The figure is untouched by everything below, byte for byte.
+the triangular **poster** of the whole corpus, `n = 1..324`. They share a builder, a
+record, a palette and a card design.
+The poster’s row $k$ holds $n = (k-1)^2 + 1$ through $k^2$, starting in the leftmost
+column. The increasing rows leave the upper-right corner free for a right-aligned
+information block. Eighteen rows cover the catalogue’s complete range, with thirty-five
+cards in the final row.
+The figure keeps its 10-by-10 geometry, card scale and square encoding.
 
 ### A composite is a specification
 
 `KNOWN_BEST_COMPOSITES` in `src/sqpack/known_best.py` is the whole of it.
-Four fields say what a figure draws — first $n$, last $n$, columns, filename stem — and
-the rest of the geometry follows: rows, the canvas, the legend and footer baselines, the
+First $n$, last $n$, columns, filename stem and placement say what a figure draws.
+The remaining geometry follows: rows, the canvas, the legend and footer baselines, the
 layout string, the manifest record and the figure record’s own legend totals.
-Nothing is absolute, which is what a second entry demonstrated: eighteen columns is
-eight more column pitches of width, and eighteen rows moves the legend and all four
-footer lines by eight row pitches.
+The triangle keeps the figure’s card and label sizes, widening the canvas to fit its
+thirty-five columns.
+Its cards start 60 units from the top; its height follows the eighteen row pitches and
+bottom margin.
+All informational text occupies the upper-right block at $x = 6840..8040$,
+$y = 60..650$: title, publication date, repository, corpus details, all badge meanings
+and counts, hue and shade keys, explanation, citations, credit and edition stamp.
+The 1200-unit block keeps the existing type sizes; rendering refuses a line wider than
+the block.
 
 |  | figure | poster |
 | --- | --- | --- |
 | Cases | `n = 1..100` | `n = 1..324` |
-| Grid | 10 by 10 | 18 by 18 |
-| Canvas | 2400 × 2896 units | 4224 × 4912 units |
+| Arrangement | 10 by 10, row-major | 18 square-bound rows, left-aligned, up to 35 cards |
+| Canvas | 2400 × 2896 units | 8100 × 4656 units |
 | Squares drawn | 5,050 | 52,650 |
 | Rasters | 1x, 2x, link-preview card | 1x |
-| PDF page | 25 × 30.17 in | 44 × 51.17 in |
+| PDF page | 25 × 30.17 in | 84.38 × 48.5 in |
 
 The remaining fields are the decisions a figure of another size has to make: which
 rasters it publishes, whether it publishes a link-preview crop, and what it may leave
 out of a square to stay inside a byte budget.
-The poster publishes one raster, and the reason is measured rather than assumed: its 1x
-export is 2,369,558 bytes, a 2x of the same drawing is 5,055,264 at 83 megapixels, and
-the PDF carries that detail at any zoom for 491,026. The figure’s 3x was rejected at
-2,150,682 on exactly that argument, so a poster 2x at more than twice the price is not a
-close call. It publishes no link-preview card either: the card is one page’s unfurl, and
-that page already has one.
+The poster publishes one raster.
+On the rectangular poster, a 2x raster measured 5,055,264 bytes at 83 megapixels, while
+its vector PDF measured 491,026 bytes and preserved the detail at any zoom.
+The triangle uses a wider canvas and keeps the same export set.
+It publishes no link-preview card either: the card is one page’s unfurl, and that page
+already has one.
 
 The accessible `<title>` and `<desc>` are the one thing a specification cannot compute —
 nothing spells “one through three hundred twenty-four” from two integers — so they are
@@ -360,8 +383,9 @@ render rather than borrowing another figure’s words.
 The house encoding spends about 460 bytes on every square the figure draws: the
 `points`, the fill, a stroke repeated on each polygon, and six per-square `data-*` facts
 that let a reader interrogate the drawing without the record beside it.
-On the poster it would spend 490, because a wider canvas and larger grids make each
-coordinate longer. At 5,050 squares that is a 2.3 MB file.
+On the rectangular poster it spent 490, because a wider canvas and larger grids made
+each coordinate longer.
+At 5,050 squares that is a 2.3 MB file.
 At 52,650 it is 24.6 MB, which is not a file to commit, so the poster spends less per
 square — and what it stops spending was chosen against measurements rather than guessed.
 `build_known_best_atlas --report` prints them for whatever is committed:
@@ -370,7 +394,9 @@ square — and what it stops spending was chosen against measurements rather tha
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --report
 ```
 
-Each lever below was measured on its own and in combination, on the same 52,650 squares:
+Each lever below was measured on its own and in combination on the rectangular poster’s
+52,650 squares.
+The triangle keeps the same encoding; `--report` gives its current sizes.
 
 | Encoding | SVG bytes | Per square |
 | --- | --- | --- |
@@ -388,7 +414,7 @@ The two obvious levers together reach 8.84 MiB, which is over the 8 MiB budget, 
 third was needed rather than optional.
 And the last row is why the coordinates stop at three decimals rather than two: the
 fourth lever buys 5.6 percent and gives up a factor of ten of precision, on a drawing
-whose container is 158 units wide and whose PDF page is 44 inches.
+whose containers are 158 units wide.
 
 What each lever is, and where the fact it drops still lives:
 
@@ -408,7 +434,7 @@ What each lever is, and where the fact it drops still lives:
   specification and recorded in the drawing’s metadata, never inherited from the ambient
   decimal context, which is [`D-359`](../../../defects.md).
   A thousandth of a unit is 1/158,000 of a container: below one device dot at 1200 dpi
-  on the 44-inch page.
+  at the poster’s intrinsic print scale.
 
 The per-`n` renderings keep all three.
 They are where a reader interrogates one packing; the poster is where a reader sees the

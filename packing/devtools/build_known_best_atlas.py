@@ -3,6 +3,7 @@
 
 Usage:
     uv run --frozen python -m devtools.build_known_best_atlas --update
+    uv run --frozen python -m devtools.build_known_best_atlas --update-composite-records
     uv run --frozen python -m devtools.build_known_best_atlas --update-composites
     uv run --frozen python -m devtools.build_known_best_atlas --check
     uv run --frozen python -m devtools.build_known_best_atlas --check --jobs 4
@@ -15,7 +16,10 @@ the two posters and their PNG and PDF exports from the retained witnesses, and i
 a version bump or on demand, never because the data moved: a poster states the data
 commit it was drawn from (`CompositeIdentity`) and may trail the pin until the next
 version (`sqpack.release`, rules 4 and 5). `--check-composites` holds the retained
-posters to that record without rebuilding anything.
+posters to that record without rebuilding anything. A layout change first uses
+`--update-composite-records` to refresh only the composite geometry in the manifest and
+figure record, refusing changed case facts; commit and re-pin those records before
+redrawing the posters.
 """
 
 from __future__ import annotations
@@ -66,6 +70,7 @@ from sqpack.known_best import (
     KNOWN_BEST_CORPUS,
     RETRIEVED_DATE,
     UNITSQUARE_BASE_URL,
+    CompositePlacement,
     CompositeSpec,
     CorpusRange,
     catalogue_source_map,
@@ -363,6 +368,19 @@ SUMMARY_RELEASE_BASELINE = Decimal(114)
 SUMMARY_RELEASE_SIZE = SUMMARY_SUBTITLE_SIZE
 SUMMARY_RELEASE_GAP = Decimal(11)
 SUMMARY_SUBTITLE_BASELINE = Decimal(148)
+
+#: The poster uses the triangle's upper-right whitespace instead of a title band and
+#: bottom footer. Its information keeps the figure's type sizes inside this one box.
+POSTER_INFORMATION_WIDTH = Decimal(1200)
+POSTER_INFORMATION_TOP = SUMMARY_SIDE_MARGIN
+POSTER_INFORMATION_BOTTOM = Decimal(650)
+POSTER_TITLE_BASELINE = Decimal(108)
+POSTER_RELEASE_BASELINE = Decimal(148)
+POSTER_REPOSITORY_BASELINE = Decimal(182)
+POSTER_DETAILS_BASELINE = Decimal(224)
+POSTER_LEGEND_BASELINE = Decimal(276)
+POSTER_LEGEND_ROW_PITCH = Decimal(32)
+POSTER_EXPLAINER_BASELINE = Decimal(550)
 # Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
 # absent. No webfont is referenced, so nothing is fetched at render time and the
 # figure is the same family everywhere it is opened.
@@ -534,11 +552,11 @@ def _whole_units(value: Decimal, what: str) -> int:
 class CompositeCanvas:
     """Where every part of one composite sits, computed from its specification.
 
-    Nothing here is an absolute constant. The canvas is the grid the specification asks
-    for, plus the margins, the legend and the footer, so a composite of another size
-    moves all of them together instead of leaving a baseline behind at a number chosen
-    for a canvas that no longer exists. The 1-100 figure's 2400 by 2896 canvas, its
-    legend at 2724 and its footer at 2790/2817/2844/2871 are what these formulas return
+    The row-major figure reserves a title band and a bottom legend and footer. The
+    triangle poster keeps the same card scale and puts that information in its upper
+    right, so its height follows the cards and margins alone. The 1-100 figure's 2400
+    by 2896 canvas, its legend at 2724 and its footer at 2790/2817/2844/2871 are what
+    these formulas return
     for ten columns of ten.
     """
 
@@ -553,17 +571,37 @@ class CompositeCanvas:
         )
 
     @property
+    def information_in_corner(self) -> bool:
+        return self.spec.placement == CompositePlacement.square_bound_triangle
+
+    @property
+    def grid_top(self) -> Decimal:
+        return SUMMARY_SIDE_MARGIN if self.information_in_corner else SUMMARY_GRID_TOP
+
+    @property
+    def information_right(self) -> Decimal:
+        return Decimal(self.width) - SUMMARY_SIDE_MARGIN
+
+    @property
+    def information_left(self) -> Decimal:
+        return self.information_right - POSTER_INFORMATION_WIDTH
+
+    @property
     def grid_bottom(self) -> Decimal:
-        """One row pitch below the last row's top, where the footer block begins."""
-        return SUMMARY_GRID_TOP + SUMMARY_ROW_PITCH * self.spec.rows
+        """One row pitch below the last row's top."""
+        return self.grid_top + SUMMARY_ROW_PITCH * self.spec.rows
 
     @property
     def legend_baseline(self) -> Decimal:
-        """The first legend row; the second sits one legend pitch under it."""
+        """The first legend line, in the corner block or below the row-major grid."""
+        if self.information_in_corner:
+            return POSTER_LEGEND_BASELINE
         return self.grid_bottom + SUMMARY_LEGEND_GAP
 
     @property
     def explainer_baseline(self) -> Decimal:
+        if self.information_in_corner:
+            return POSTER_EXPLAINER_BASELINE
         return self.legend_baseline + SUMMARY_LEGEND_ROW_PITCH + SUMMARY_FOOTER_GAP
 
     @property
@@ -580,9 +618,12 @@ class CompositeCanvas:
 
     @property
     def height(self) -> int:
-        return _whole_units(
-            self.stamp_baseline + SUMMARY_BOTTOM_MARGIN, f"{self.spec.stem} height"
+        bottom = (
+            self.grid_bottom + SUMMARY_SIDE_MARGIN
+            if self.information_in_corner
+            else self.stamp_baseline + SUMMARY_BOTTOM_MARGIN
         )
+        return _whole_units(bottom, f"{self.spec.stem} height")
 
     @property
     def svg_path(self) -> Path:
@@ -650,8 +691,12 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
     "known-best-1-324": (
         "Best known packings of one through three hundred twenty-four unit squares",
         (
-            "An eighteen-by-eighteen poster of the retained best known unit-square "
-            "packings for n equals 1 through 324, the whole audited corpus. Each tile is "
+            "A left-aligned triangular poster of the retained best known unit-square "
+            "packings for n equals 1 through 324, the whole audited corpus. Row k holds "
+            "n equals (k minus 1) squared plus 1 through k squared, starting in the "
+            "leftmost column. Eighteen rows end at 324, with thirty-five tiles in the "
+            "final row. A right-aligned information block in the upper-right corner "
+            "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
             "best proved lower bound beneath it. A star in crimson marks a recent result, "
@@ -1287,9 +1332,9 @@ def _append_summary_card(
     root: ET.Element, built: BuiltCase, *, spec: RenderSpec, canvas: CompositeCanvas
 ) -> None:
     n = built.frontier.n
-    row, column = divmod(n - canvas.spec.first_n, canvas.spec.columns)
+    row, column = canvas.spec.card_position(n)
     card_x = SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column
-    card_y = SUMMARY_GRID_TOP + SUMMARY_ROW_PITCH * row
+    card_y = canvas.grid_top + SUMMARY_ROW_PITCH * row
     packing_x = card_x + SUMMARY_PACKING_INSET_X
     packing_y = card_y + SUMMARY_PACKING_INSET_Y
     frame = frame_from_witness(built.witness)
@@ -1669,8 +1714,9 @@ def _legend_row(
     *,
     baseline: Decimal,
     canvas_width: int,
+    right_edge: Decimal | None = None,
 ) -> None:
-    """Lay one centerd legend row, centered on a canvas this wide.
+    """Lay one legend row centered on the canvas or ending at a right edge.
 
     Each entry is (mark, label), where mark is either a badge triple or a run of
     swatches. Widths are estimated from the label length because the renderer
@@ -1688,9 +1734,14 @@ def _legend_row(
         mark_width(mark) + Decimal(8) + _text_width(label, SUMMARY_FOOTER_SIZE)
         for mark, label in entries
     ]
+    row_width = sum(widths, Decimal(0)) + gap * Decimal(len(entries) - 1)
+    if right_edge is not None and row_width > POSTER_INFORMATION_WIDTH:
+        raise ValueError("a poster legend line exceeds its information block")
     cursor = (
-        Decimal(canvas_width) - sum(widths, Decimal(0)) - gap * Decimal(len(entries) - 1)
-    ) / 2
+        (Decimal(canvas_width) - row_width) / 2
+        if right_edge is None
+        else right_edge - row_width
+    )
     for (mark, label), width in zip(entries, widths, strict=True):
         if isinstance(mark, tuple):
             glyph, style, name = mark
@@ -1734,8 +1785,15 @@ def _legend_row(
             legend,
             "text",
             {
-                "x": format_svg_number(run_end + Decimal(8)),
+                "x": format_svg_number(
+                    run_end + Decimal(8) if right_edge is None else cursor + width
+                ),
                 "y": format_svg_number(baseline),
+                **(
+                    {"text-anchor": "end", "data-feature": "legend-label"}
+                    if right_edge is not None
+                    else {}
+                ),
                 "font-family": SUMMARY_FONT,
                 "font-size": SUMMARY_FOOTER_SIZE,
                 "font-weight": SUMMARY_FOOTER_WEIGHT,
@@ -1748,7 +1806,7 @@ def _legend_row(
 def _append_summary_legend(
     root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas
 ) -> None:
-    """Two rows: what the badges assert, then what color and shade encode."""
+    """Badge meanings and color encodings, in rows or a right-aligned column."""
     record = load_figure_record()
     totals = next(
         composite["totals"]
@@ -1780,12 +1838,9 @@ def _append_summary_legend(
         ("R", "muted", "annotated rigid by the catalogue"),
         ("", "star", RECENT_LABEL),
     ]
-    _legend_row(
-        legend,
-        [(badge, f"{badge[2]} ({tally.get(badge[2], 0)})") for badge in badges],
-        baseline=canvas.legend_baseline,
-        canvas_width=canvas.width,
-    )
+    badge_entries: list[tuple[object, str]] = [
+        (badge, f"{badge[2]} ({tally.get(badge[2], 0)})") for badge in badges
+    ]
     # Color carries the tilt angle, shade the contact count. Four hues stand in
     # for the twenty; the citron ramp illustrates the shades because that family
     # shows every contact count in the atlas.
@@ -1793,82 +1848,83 @@ def _append_summary_legend(
     shade_run = [
         (fill, str(spec.shades_per_hue - 1 - index)) for index, fill in enumerate(palette[1])
     ]
-    _legend_row(
-        legend,
-        [
-            (hue_run, "colors indicate distinct tilt angles"),
-            (shade_run, "shade indicates number of full-side contacts"),
-        ],
-        baseline=canvas.legend_baseline + SUMMARY_LEGEND_ROW_PITCH,
-        canvas_width=canvas.width,
-    )
-
-
-@emission_precision()
-def render_known_best_summary_svg(
-    built: Sequence[BuiltCase], canvas: CompositeCanvas, identity: CompositeIdentity
-) -> str:
-    """Render a complete, zoomable overview of one composite's range of cases.
-
-    `identity` is what the drawing says of itself: the data commit it shows, in its
-    metadata and its footer, and that commit's date, in its dateline. The caller says
-    which: `drawable_identity` for a new drawing, the retained one to check an old one.
-
-    The pin covers the per-card scale and corner arithmetic in `_append_summary_card`
-    and `_summary_points`, which is its own Decimal work rather than the house
-    renderer's, and so would otherwise track whatever precision the process was left in.
-    """
-    composite = canvas.spec
-    numbers = [item.frontier.n for item in built]
-    if numbers != list(composite.numbers):
-        raise ValueError(
-            f"the {composite.stem} composite requires exactly {composite.cases.label} in order"
+    color_entries: list[tuple[object, str]] = [
+        (hue_run, "colors indicate distinct tilt angles"),
+        (shade_run, "shade indicates number of full-side contacts"),
+    ]
+    if canvas.information_in_corner:
+        for index, entry in enumerate([*badge_entries, *color_entries]):
+            _legend_row(
+                legend,
+                [entry],
+                baseline=canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index,
+                canvas_width=canvas.width,
+                right_edge=canvas.information_right,
+            )
+    else:
+        _legend_row(
+            legend, badge_entries, baseline=canvas.legend_baseline, canvas_width=canvas.width
         )
-    accessible_title, accessible_description = SUMMARY_PROSE[composite.stem]
-    width, height = canvas.width, canvas.height
-    spec = RenderSpec(overlays=frozenset())
-    root = element(
-        "svg",
-        {
-            "width": str(width),
-            "height": str(height),
-            "viewBox": f"0 0 {width} {height}",
-            "role": "img",
-            "aria-labelledby": "figure-title figure-description",
-        },
+        _legend_row(
+            legend,
+            color_entries,
+            baseline=canvas.legend_baseline + SUMMARY_LEGEND_ROW_PITCH,
+            canvas_width=canvas.width,
+        )
+
+
+def _append_summary_explainer(
+    root: ET.Element, *, baseline: Decimal, canvas_width: int, right_edge: Decimal | None = None
+) -> None:
+    kern_width = Decimal(SUMMARY_FOOTER_SIZE) * SUMMARY_ITALIC_KERN
+    kern = format_svg_number(kern_width)
+    line_width = sum(
+        (_text_width(text, SUMMARY_FOOTER_SIZE) for text, _italic in SUMMARY_EXPLAINER_RUNS),
+        Decimal(0),
+    ) + kern_width * Decimal(
+        sum(
+            1
+            for index, (_text, italic) in enumerate(SUMMARY_EXPLAINER_RUNS)
+            if index and not italic and SUMMARY_EXPLAINER_RUNS[index - 1][1]
+        )
     )
-    append_title_desc(root, accessible_title, accessible_description)
-    append_metadata(
+    if right_edge is not None and line_width > POSTER_INFORMATION_WIDTH:
+        raise ValueError("the poster explainer exceeds its information block")
+    explainer = sub(
         root,
+        "text",
         {
-            "angle-class-contract": ANGLE_CLASS_CONTRACT,
-            "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
-            "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
-            "color-hue-count": str(spec.hue_count),
-            "color-hue-scheme": spec.hue_scheme.value,
-            "color-shade-lightness-span": str(spec.shade_lightness_span),
-            "color-shade-scheme": spec.shade_scheme.value,
-            "color-shades-per-hue": str(spec.shades_per_hue),
-            "columns": str(composite.columns),
-            "first-n": str(composite.first_n),
-            IDENTITY_DATE_KEY: identity.data_date,
-            IDENTITY_REVISION_KEY: identity.data_revision,
-            "generated-by": GENERATOR,
-            "last-n": str(composite.last_n),
-            "rows": str(composite.rows),
-            "square-count": str(composite.square_count),
-            **_encoding_metadata(composite),
+            "data-feature": "explainer",
+            # Anchored from the left rather than centred: a centred run made of several
+            # tspans is not laid out as one chunk by every renderer, and the parts stack
+            # on the same centre. Measuring the line and starting it is unambiguous.
+            "x": format_svg_number(
+                (Decimal(canvas_width) - line_width) / 2
+                if right_edge is None
+                else right_edge - line_width
+            ),
+            "y": format_svg_number(baseline),
+            "font-family": SUMMARY_FONT,
+            "font-size": SUMMARY_FOOTER_SIZE,
+            "font-weight": SUMMARY_SMALL_WEIGHT,
+            "fill": SUMMARY_SMALL_FILL,
         },
     )
-    sub(
-        root,
-        "rect",
-        {
-            "width": str(width),
-            "height": str(height),
-            "fill": PAPER_THEME.background,
-        },
-    )
+    previous_italic = False
+    for text, italic in SUMMARY_EXPLAINER_RUNS:
+        attributes: dict[str, str] = {"font-style": "italic"} if italic else {}
+        # An upright run following an italic one needs the same thin space the cards use.
+        if previous_italic and not italic:
+            attributes["dx"] = kern
+        sub(explainer, "tspan", attributes).text = text
+        previous_italic = italic
+
+
+def _append_summary_information(
+    root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas, identity: CompositeIdentity
+) -> None:
+    width = canvas.width
+    composite = canvas.spec
     heading_x = str(width // 2)
     sub(
         root,
@@ -1925,42 +1981,7 @@ def render_known_best_summary_svg(
         },
     ).text = SUMMARY_REPOSITORY
     _append_summary_legend(root, spec=spec, canvas=canvas)
-    kern_width = Decimal(SUMMARY_FOOTER_SIZE) * SUMMARY_ITALIC_KERN
-    kern = format_svg_number(kern_width)
-    line_width = sum(
-        (_text_width(text, SUMMARY_FOOTER_SIZE) for text, _italic in SUMMARY_EXPLAINER_RUNS),
-        Decimal(0),
-    ) + kern_width * Decimal(
-        sum(
-            1
-            for index, (_text, italic) in enumerate(SUMMARY_EXPLAINER_RUNS)
-            if index and not italic and SUMMARY_EXPLAINER_RUNS[index - 1][1]
-        )
-    )
-    explainer = sub(
-        root,
-        "text",
-        {
-            "data-feature": "explainer",
-            # Anchored from the left rather than centred: a centred run made of several
-            # tspans is not laid out as one chunk by every renderer, and the parts stack
-            # on the same centre. Measuring the line and starting it is unambiguous.
-            "x": format_svg_number((Decimal(width) - line_width) / 2),
-            "y": format_svg_number(canvas.explainer_baseline),
-            "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
-            "font-weight": SUMMARY_SMALL_WEIGHT,
-            "fill": SUMMARY_SMALL_FILL,
-        },
-    )
-    previous_italic = False
-    for text, italic in SUMMARY_EXPLAINER_RUNS:
-        attributes: dict[str, str] = {"font-style": "italic"} if italic else {}
-        # An upright run following an italic one needs the same thin space the cards use.
-        if previous_italic and not italic:
-            attributes["dx"] = kern
-        sub(explainer, "tspan", attributes).text = text
-        previous_italic = italic
+    _append_summary_explainer(root, baseline=canvas.explainer_baseline, canvas_width=width)
     sub(
         root,
         "text",
@@ -2003,6 +2024,165 @@ def render_known_best_summary_svg(
             "fill": SUMMARY_SMALL_FILL,
         },
     ).text = identity.stamp
+
+
+def _append_poster_information(
+    root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas, identity: CompositeIdentity
+) -> None:
+    right = canvas.information_right
+    block = sub(
+        root,
+        "g",
+        {
+            "data-feature": "poster-information",
+            "data-left": format_svg_number(canvas.information_left),
+            "data-right": format_svg_number(right),
+            "data-top": format_svg_number(POSTER_INFORMATION_TOP),
+            "data-bottom": format_svg_number(POSTER_INFORMATION_BOTTOM),
+        },
+    )
+
+    def text_line(
+        feature: str, content: str, baseline: Decimal, size: str = SUMMARY_FOOTER_SIZE
+    ) -> ET.Element:
+        spacing = Decimal("1.5") if feature == "poster-title" else Decimal(0)
+        extent = _text_width(content, size) + spacing * max(len(content) - 1, 0)
+        if extent > POSTER_INFORMATION_WIDTH:
+            raise ValueError(f"the poster {feature} line exceeds its information block")
+        node = sub(
+            block,
+            "text",
+            {
+                "data-feature": feature,
+                "x": format_svg_number(right),
+                "y": format_svg_number(baseline),
+                "text-anchor": "end",
+                "font-family": SUMMARY_FONT,
+                "font-size": size,
+                "font-weight": "700",
+                "fill": PAPER_THEME.ink
+                if feature in {"poster-title", "release", "repository"}
+                else SUMMARY_SMALL_FILL,
+            },
+        )
+        if spacing:
+            node.set("letter-spacing", format_svg_number(spacing))
+        node.text = content
+        return node
+
+    text_line(
+        "poster-title",
+        f"{canvas.spec.count} BEST KNOWN SQUARE PACKINGS",
+        POSTER_TITLE_BASELINE,
+        "48",
+    )
+    text_line("release", identity.dateline, POSTER_RELEASE_BASELINE, SUMMARY_RELEASE_SIZE)
+    star_span = SUMMARY_STAR_INSET * 2 * _star_scale(SUMMARY_RELEASE_SIZE)
+    release_width = _text_width(identity.dateline, SUMMARY_RELEASE_SIZE)
+    if release_width + SUMMARY_RELEASE_GAP + star_span > POSTER_INFORMATION_WIDTH:
+        raise ValueError("the poster release line and star exceed its information block")
+    _append_star(
+        block,
+        center_x=right - release_width - SUMMARY_RELEASE_GAP - star_span / 2,
+        center_y=_star_center_y(POSTER_RELEASE_BASELINE, SUMMARY_RELEASE_SIZE),
+        feature="release-star",
+        scale=_star_scale(SUMMARY_RELEASE_SIZE),
+    )
+    text_line(
+        "repository", SUMMARY_REPOSITORY, POSTER_REPOSITORY_BASELINE, SUMMARY_REPOSITORY_SIZE
+    )
+    text_line(
+        "poster-details",
+        f"n = {canvas.spec.first_n}..{canvas.spec.last_n}; "
+        f"{canvas.spec.rows} square-bound rows; {canvas.spec.square_count:,} unit squares",
+        POSTER_DETAILS_BASELINE,
+    )
+    _append_summary_legend(block, spec=spec, canvas=canvas)
+    _append_summary_explainer(
+        block,
+        baseline=canvas.explainer_baseline,
+        canvas_width=canvas.width,
+        right_edge=right,
+    )
+    text_line("citations", SUMMARY_CITATIONS, canvas.citations_baseline)
+    text_line("credit", SUMMARY_CREDIT, canvas.credit_baseline)
+    text_line("release-stamp", identity.stamp, canvas.stamp_baseline)
+
+
+@emission_precision()
+def render_known_best_summary_svg(
+    built: Sequence[BuiltCase], canvas: CompositeCanvas, identity: CompositeIdentity
+) -> str:
+    """Render a complete, zoomable overview of one composite's range of cases.
+
+    `identity` is what the drawing says of itself: the data commit it shows, in its
+    metadata and its footer, and that commit's date, in its dateline. The caller says
+    which: `drawable_identity` for a new drawing, the retained one to check an old one.
+
+    The pin covers the per-card scale and corner arithmetic in `_append_summary_card`
+    and `_summary_points`, which is its own Decimal work rather than the house
+    renderer's, and so would otherwise track whatever precision the process was left in.
+    """
+    composite = canvas.spec
+    numbers = [item.frontier.n for item in built]
+    if numbers != list(composite.numbers):
+        raise ValueError(
+            f"the {composite.stem} composite requires exactly {composite.cases.label} in order"
+        )
+    accessible_title, accessible_description = SUMMARY_PROSE[composite.stem]
+    width, height = canvas.width, canvas.height
+    spec = RenderSpec(overlays=frozenset())
+    root = element(
+        "svg",
+        {
+            "width": str(width),
+            "height": str(height),
+            "viewBox": f"0 0 {width} {height}",
+            "role": "img",
+            "aria-labelledby": "figure-title figure-description",
+        },
+    )
+    append_title_desc(root, accessible_title, accessible_description)
+    append_metadata(
+        root,
+        {
+            "angle-class-contract": ANGLE_CLASS_CONTRACT,
+            "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+            "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
+            "color-hue-count": str(spec.hue_count),
+            "color-hue-scheme": spec.hue_scheme.value,
+            "color-shade-lightness-span": str(spec.shade_lightness_span),
+            "color-shade-scheme": spec.shade_scheme.value,
+            "color-shades-per-hue": str(spec.shades_per_hue),
+            "columns": str(composite.columns),
+            "first-n": str(composite.first_n),
+            IDENTITY_DATE_KEY: identity.data_date,
+            IDENTITY_REVISION_KEY: identity.data_revision,
+            "generated-by": GENERATOR,
+            "last-n": str(composite.last_n),
+            "rows": str(composite.rows),
+            "square-count": str(composite.square_count),
+            **(
+                {"layout": composite.layout}
+                if composite.placement == CompositePlacement.square_bound_triangle
+                else {}
+            ),
+            **_encoding_metadata(composite),
+        },
+    )
+    sub(
+        root,
+        "rect",
+        {
+            "width": str(width),
+            "height": str(height),
+            "fill": PAPER_THEME.background,
+        },
+    )
+    if canvas.information_in_corner:
+        _append_poster_information(root, spec=spec, canvas=canvas, identity=identity)
+    else:
+        _append_summary_information(root, spec=spec, canvas=canvas, identity=identity)
     for item in built:
         _append_summary_card(root, item, spec=spec, canvas=canvas)
     return serialize_svg(root)
@@ -2646,6 +2826,63 @@ def retained_identity(svg_text: str) -> CompositeIdentity:
     return CompositeIdentity(values[IDENTITY_REVISION_KEY], values[IDENTITY_DATE_KEY])
 
 
+def _without_composite_geometry(document: dict, envelope: str) -> dict:
+    unchanged = copy.deepcopy(document)
+    for composite in unchanged[envelope]["composites"]:
+        for key in ("columns", "rows", "layout"):
+            composite.pop(key, None)
+        for key in ("svg", "png_preview", "png_high_resolution", "png_link_preview_card"):
+            if key in composite:
+                composite[key].pop("width", None)
+                composite[key].pop("height", None)
+    return unchanged
+
+
+def update_composite_records() -> None:
+    """Refresh layout facts, refusing changes to cases, sources, or legend totals.
+
+    Read retained witnesses instead of re-deriving their feasibility receipts. Both
+    documents pass preflight before either is written, so a layout refresh cannot
+    silently import a data change or repair unrelated record drift.
+    """
+    figure_path = build_composite_figure_data.RECORD
+    retained_figure = json.loads(figure_path.read_text(encoding="utf-8"))
+    retained_manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    problems, entries = _retained_problems(
+        composite_records=retained_manifest["atlas"]["composites"]
+    )
+    if problems or entries is None:
+        raise ValueError(
+            "unrelated retained atlas discrepancies prevent a layout refresh:\n  "
+            + "\n  ".join(problems[:20])
+        )
+    expected_figure = build_composite_figure_data.build_record()
+    expected_entries = [_manifest_entry(case) for case in retained_cases(CORPUS.numbers)]
+    expected_manifest = _manifest_document(
+        expected_entries, [_composite_record(canvas) for canvas in COMPOSITES]
+    )
+    for envelope, retained, expected in (
+        ("figure", retained_figure, expected_figure),
+        ("atlas", retained_manifest, expected_manifest),
+    ):
+        if _without_composite_geometry(retained, envelope) != _without_composite_geometry(
+            expected, envelope
+        ):
+            raise ValueError(
+                f"unrelated {envelope} facts differ; a layout refresh changes only geometry"
+            )
+    outputs = (
+        (figure_path, retained_json.dumps(expected_figure, sort_keys=True, ensure_ascii=False)),
+        (MANIFEST, _manifest_text(expected_manifest)),
+    )
+    for path, content in outputs:
+        if path.read_text(encoding="utf-8") != content:
+            with atomic_output_file(path) as temporary:
+                temporary.write_text(content, encoding="utf-8")
+    _figure_entries.cache_clear()
+    print("known-best composite records refreshed: layout only; case facts preserved")
+
+
 def update_composites() -> None:
     """Redraw both composites and every export, from the retained witnesses.
 
@@ -2744,7 +2981,9 @@ def check(workers: int = 1) -> None:
     )
 
 
-def _retained_problems() -> tuple[list[str], list[dict] | None]:
+def _retained_problems(
+    *, composite_records: Sequence[dict] | None = None
+) -> tuple[list[str], list[dict] | None]:
     """Everything the retained data records say about themselves, checked without geometry.
 
     This is the half of `check` that does not rebuild a case, and at `n=1..324` it is
@@ -2757,7 +2996,8 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
     Returns the problems and, when the manifest is readable and covers the declared
     range, its entries. `None` means the sampled half has nothing to compare against and
     must not run: a missing manifest should be reported as a missing manifest rather than
-    as whatever the next reader of it raises.
+    as whatever the next reader of it raises. A layout refresh supplies the old
+    composite records so this preflight still catches every other manifest discrepancy.
     """
     squish_house.check_houses()
     if not MANIFEST.is_file():
@@ -2771,7 +3011,12 @@ def _retained_problems() -> tuple[list[str], list[dict] | None]:
     if stated != list(CORPUS.numbers):
         return [f"manifest entries are not exactly {CORPUS.label}"], None
     problems: list[str] = []
-    rebuilt = _manifest_document(entries, [_composite_record(canvas) for canvas in COMPOSITES])
+    composites = (
+        list(composite_records)
+        if composite_records is not None
+        else [_composite_record(canvas) for canvas in COMPOSITES]
+    )
+    rebuilt = _manifest_document(entries, composites)
     if _manifest_text(rebuilt) != retained:
         problems.append(
             f"stale {_relative(MANIFEST)}: everything but its entries is re-derived here"
@@ -3234,6 +3479,12 @@ def parser() -> argparse.ArgumentParser:
         help="regenerate the data layer: witnesses, renderings, manifest, frontier links",
     )
     mode.add_argument(
+        "--update-composite-records",
+        action="store_true",
+        help="refresh composite layout records without rebuilding witnesses; "
+        "refuse changes to case facts before writing either record",
+    )
+    mode.add_argument(
         "--update-composites",
         action="store_true",
         help="redraw both composites and their PNG and PDF exports from the retained "
@@ -3298,6 +3549,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         fetch_sources(refresh=args.refresh)
     elif args.update:
         update(workers)
+    elif args.update_composite_records:
+        update_composite_records()
     elif args.update_composites:
         update_composites()
     elif args.check_composites:

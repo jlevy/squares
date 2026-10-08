@@ -7,20 +7,21 @@ the reader sets as a grid or as a triangle (`templates/paper-design.md`, Atlas v
 at a size of tile, Small, Medium or Large (`overview/atlas-view.js`). A tile carries the
 new-result star after its number where the case has a new result, and the regularized
 layer's badge before it where it is drawn from that view.
-The triangle's row k holds the 2k - 1 cases a square of side k is known to hold and ends
-at k squared on the right edge; a row too long for the page wraps in reading order, every
-line but its last full from the left and the last holding what is left over, set from the
-right. This opens a built overview in Chromium and reports what the browser made of that:
+The triangle's row k holds the 2k - 1 cases a square of side k is known to hold, starting
+at the left edge and ending at k squared. A row too long for the page wraps in reading
+order: every line starts at the left, every line but its last is full, and its last
+holds what is left over. This opens a built overview in Chromium and reports what the
+browser made of that:
 
 - `layout` reports each view at each width, with the first hundred cases and with all of
   them: the block's width, how many tiles a line holds, a tile's and a drawing's width,
   the size of a tile's number, how many lines the tiles take and how tall they stand, and
   the rows that wrap. With them it reports what a layout may not do (`layout_problems`):
   run past the window, set a tile outside the block or over another, break the order of
-  the cases, leave a perfect square off the right edge, cut a row into lines other than
-  `row_lines` gives, or start a line of a wrapped row, but its last, anywhere but the
-  left edge. Each layout is read at each size (`SIZES`), and a tile's marks have their
-  own faults (`mark_problems`): a star that runs over its number or leaves its tile, a
+  the cases, cut a row into lines other than `row_lines` gives, or start any Triangle
+  line away from the block's left edge. Each layout is read at each size (`SIZES`), and
+  a tile's marks have their own faults (`mark_problems`): a star that runs over its
+  number or leaves its tile, a
   badge that does either, and a number not centred in its tile.
   `--markdown` prints one line a layout.
 - `move` times each change of layout (`CHANGES`: to the triangle and back, with a hundred
@@ -193,9 +194,9 @@ def _lines(tiles: Sequence[dict[str, Any]]) -> list[list[dict[str, Any]]]:
 def layout_problems(report: dict[str, Any]) -> list[str]:
     """What is wrong with a settled layout, in either view: the page runs past the
     window, a tile stands outside the block or over another, or the cases are out of
-    order reading left to right and top to bottom. In the triangle also: a perfect
-    square off the right edge, a row cut into lines other than `row_lines` gives, and a
-    wrapped row with a line, other than its last, that does not start at the left edge."""
+    order reading left to right and top to bottom. In the triangle also: a row cut into
+    lines other than `row_lines` gives, or any line that does not start at the block's
+    left edge, including a row that fits and a wrapped row's short last line."""
     problems: list[str] = []
     tiles: list[dict[str, Any]] = report["tiles"]
     if not tiles:
@@ -229,34 +230,25 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
     per = report["per_line"]
     if not per:
         return [*problems, "the triangle has no tiles to a line"]
-    right = max(tile["right"] for tile in tiles)
-    left = min(tile["left"] for tile in tiles)
-    off = [
-        tile["n"]
-        for tile in tiles
-        if is_square(tile["n"]) and abs(tile["right"] - right) > EDGE
-    ]
-    if off:
-        problems.append(f"perfect squares off the right edge: {off}")
     last = max(reading)
     by_row: dict[int, list[list[int]]] = {}
     for line in lines:
-        by_row.setdefault(row_of(line[0]["n"]), []).append([tile["n"] for tile in line])
+        k = row_of(line[0]["n"])
+        by_row.setdefault(k, []).append([tile["n"] for tile in line])
         if len({row_of(tile["n"]) for tile in line}) > 1:
             problems.append(f"the line of n = {line[0]['n']} holds two rows")
+        first = line[0]
+        if abs(first["left"] - cells["left"]) > EDGE:
+            problems.append(
+                f"row {k}'s line of n = {first['n']} starts "
+                f"{first['left'] - cells['left']}px in"
+            )
     for k, found in sorted(by_row.items()):
         if k * k > last:
             continue
         sizes = tuple(len(line) for line in found)
         if sizes != row_lines(k, per):
             problems.append(f"row {k} is set {sizes}, not {row_lines(k, per)}")
-        for line in found[:-1]:
-            first = next(tile for tile in tiles if tile["n"] == line[0])
-            if abs(first["left"] - left) > EDGE:
-                problems.append(
-                    f"row {k} wraps and its line of n = {line[0]} starts "
-                    f"{first['left'] - left}px in"
-                )
     return problems
 
 
@@ -343,14 +335,14 @@ def settle(page: Any) -> None:
 
 
 def query_for(view: str, size: str = MEDIUM) -> str:
-    """The query string that asks for `view` and `size`: nothing for the grid at Medium,
+    """The query string that asks for `view` and `size`: nothing for Triangle at Medium,
     the defaults."""
     if view not in VIEWS:
         raise ValueError(f"the atlas has no view {view!r}")
     if size not in SIZES:
         raise ValueError(f"the atlas has no size {size!r}")
     params = [
-        *(["atlas=triangle"] if view == "triangle" else []),
+        *(["atlas=grid"] if view == "grid" else []),
         *([f"size={size}"] if size != MEDIUM else []),
     ]
     return f"?{'&'.join(params)}" if params else ""
@@ -361,7 +353,7 @@ def open_atlas(
     address: str,
     *,
     width: int,
-    view: str = "grid",
+    view: str = "triangle",
     size: str = MEDIUM,
     query: str | None = None,
     scheme: str = "light",
@@ -464,7 +456,7 @@ def measure_move(
         browser = launch(driver)
         for width in widths:
             for run in range(runs):
-                page = open_atlas(browser, address, width=width)
+                page = open_atlas(browser, address, width=width, view="grid")
                 top(page)
                 client = page.context.new_cdp_session(page)
                 client.send("Performance.enable", {"timeDomain": "threadTicks"})
@@ -567,7 +559,7 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
                     page.close()
         for width, height in FRAME_WINDOWS:
             for shown in (100, 324):
-                page = open_atlas(browser, address, width=width, height=height)
+                page = open_atlas(browser, address, width=width, height=height, view="grid")
                 if shown == 324:
                     expand(page)
                 top(page)

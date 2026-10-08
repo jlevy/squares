@@ -43,27 +43,33 @@ where the 2x export is 1,294,216 for 27.8.
 
 [![The complete known-best atlas from n equals one through three hundred twenty-four.](known-best-1-324.png)](known-best-1-324.svg)
 
-Every case the register holds, at the figure’s card scale: 18 columns of 18, with 52,650
-square polygons from the same witnesses.
-The image above is the raster; the vector it was drawn from is one click away, and the
-PDF is a 44-by-51-inch page.
+Every case the register holds, at the figure’s card scale, arranged in a triangle: row
+$k$ holds $n = (k-1)^2 + 1$ through $k^2$, beginning in the leftmost column.
+The eighteen rows end at 324; the final row has thirty-five cards.
+The poster draws 52,650 square polygons from the same witnesses.
+Its title, publication details, complete legend, explanation, citations and credit form
+one right-aligned block in the upper-right whitespace, leaving the bottom for the final
+row of packings.
+The image above is the raster; the vector it was drawn from is one click
+away, and the PDF is an 84.38-by-48.5-inch page.
 
-| File | Size | Bytes | For |
-| --- | --- | --- | --- |
-| [`known-best-1-324.svg`](known-best-1-324.svg) | 4224 × 4912 units | 6,198,351 | the source; scales to anything |
-| [`known-best-1-324.png`](known-best-1-324.png) | 4224 × 4912 px | 2,369,558 | the raster embedded above |
-| [`known-best-1-324.pdf`](known-best-1-324.pdf) | 44 × 51.17 in | 491,026 | printing; vector, so text stays selectable |
+| File | Size | For |
+| --- | --- | --- |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 8100 × 4656 units | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 8100 × 4656 px | the raster embedded above |
+| [`known-best-1-324.pdf`](known-best-1-324.pdf) | 84.38 × 48.5 in | printing; vector, so text stays selectable |
 
-One raster rather than three, measured rather than assumed: a 2x of the same drawing is
-5,055,264 bytes for 83 megapixels, more than twice what the figure’s 3x cost when that
-was rejected as too expensive, and the PDF carries the same detail at any zoom for
-491,026. The link-preview card is one page’s unfurl, which the figure above supplies.
+The poster publishes one raster and a vector PDF. The rectangular poster’s 2x raster
+measured 5,055,264 bytes for 83 megapixels; the triangle uses a wider canvas, while the
+PDF preserves every square at any zoom.
+The link-preview card is one page’s unfurl, which the figure above supplies.
 
 The poster also draws a square more cheaply than the figure does, because ten times as
 many of them will not fit in a file anyone should clone.
-The house encoding costs 490 bytes a square here, or 24.6 MB; the poster drops the
-per-square `data-*` facts, states the stroke once per card instead of once per polygon,
-and rounds coordinates to three decimals, which brings it to 117.7 bytes a square.
+The poster drops the per-square `data-*` facts, states the stroke once per card instead
+of once per polygon, and rounds coordinates to three decimals.
+Measured on the rectangular poster, those choices reduced the house encoding’s 490 bytes
+a square to 117.7. The triangle uses the same encoding.
 All three departures are recorded in the drawing’s own metadata, the facts they drop are
 still carried per case by [`rendering/`](rendering/) and
 [`composite-figure.json`](composite-figure.json), and each was measured before it was
@@ -309,6 +315,9 @@ The first command acquires only missing UnitSquare assets unless `--refresh` is
 requested; Kingbird live audits are ephemeral and write no geometry.
 The second rebuilds witnesses, individual house renderings, the manifest, and frontier
 witness links from retained inputs.
+For a layout change, `--update-composite-records` refreshes only the composite geometry
+in the manifest and figure record, refusing changes to case facts or legend totals.
+Commit those data records and re-pin the release before redrawing the composites.
 The two composites and their exports are drawn apart, by `--update-composites`, at a
 version bump or on demand; each states the data commit it was drawn from, and
 `--check-composites` holds it to that statement without rebuilding anything

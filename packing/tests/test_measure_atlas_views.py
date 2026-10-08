@@ -57,8 +57,8 @@ def _report(view: str, per: int | None, tiles: list[dict[str, Any]]) -> dict[str
 
 def _triangle(last: int, per: int) -> dict[str, Any]:
     """Cases 1 to `last` set as the triangle is at `per` tiles to a line: each row's
-    lines from `row_lines`, in reading order, every line full from the left but the
-    last, which holds what is left over and is set from the right."""
+    lines from `row_lines`, in reading order, every line starting from the left.
+    Each line but the last is full, and the last holds what is left over."""
     size = WIDTH / per
     tiles: list[dict[str, Any]] = []
     top, n = 0.0, 1
@@ -66,10 +66,9 @@ def _triangle(last: int, per: int) -> dict[str, Any]:
         lines = atlas.row_lines(k, per)
         top += 6 if k > 1 else 0
         for index, count in enumerate(lines):
-            start = per - count if index == len(lines) - 1 else 0
             assert index == len(lines) - 1 or count == per
             for column in range(count):
-                tiles.append(_tile(n, LEFT + (start + column) * size, top, size))
+                tiles.append(_tile(n, LEFT + column * size, top, size))
                 n += 1
             top += size + 12
     return _report("triangle", per, [tile for tile in tiles if tile["n"] <= last])
@@ -135,7 +134,7 @@ def test_a_row_is_cut_in_reading_order_into_full_lines_with_the_rest_last() -> N
 
 
 @pytest.mark.parametrize(("last", "per"), [(100, 19), (324, 35), (100, 8), (324, 8), (324, 26)])
-def test_a_right_triangle_has_no_problem(last: int, per: int) -> None:
+def test_a_left_aligned_triangle_has_no_problem(last: int, per: int) -> None:
     report = _triangle(last, per)
     assert atlas.layout_problems(report) == []
     found = atlas.summary(report)
@@ -161,9 +160,10 @@ def test_each_fault_of_a_layout_is_named() -> None:
 
     assert "past the window" in problems({**right, "overflow": 12})
     assert "still in a move" in problems({**right, "moving": 3})
-    assert "outside the block: [100]" in problems(_moved(right, 100, by=30))
+    assert "outside the block: [100]" in problems(_moved(right, 100, by=300))
     assert "n = 99 runs over n = 100" in problems(_moved(right, 99, by=20))
-    assert "perfect squares off the right edge: [81]" in problems(_moved(right, 81, by=-4))
+    assert "row 9's line of n = 81 starts -4.0px in" in problems(_moved(right, 81, by=-4))
+    assert "row 1's line of n = 1 starts 4.0px in" in problems(_moved(right, 1, by=4))
     # A whole line set over the one above it.
     over = right
     for n in range(93, 101):
@@ -174,12 +174,12 @@ def test_each_fault_of_a_layout_is_named() -> None:
     shifted = right
     for n in range(82, 90):
         shifted = _moved(shifted, n, by=WIDTH / 16)
-    assert "row 10 wraps and its line of n = 82 starts 25.0px in" in problems(shifted)
-    # A wrapped row's leftover line set from the left, so its square leaves the edge.
+    assert "row 10's line of n = 82 starts 25.0px in" in problems(shifted)
+    # A short last line set from the right instead of the left.
     leftover = right
     for n in (98, 99, 100):
-        leftover = _moved(leftover, n, by=-5 * (WIDTH / 8))
-    assert "perfect squares off the right edge: [100]" in problems(leftover)
+        leftover = _moved(leftover, n, by=5 * (WIDTH / 8))
+    assert "row 10's line of n = 98 starts 250.0px in" in problems(leftover)
     # A row cut into lines other than the width gives.
     assert "row 10 is set (8, 8, 3), not (9, 9, 1)" in problems(
         {**_triangle(100, 8), "per_line": 9}
@@ -200,11 +200,11 @@ def test_a_grid_is_held_to_order_and_room_and_not_to_the_triangle() -> None:
 
 
 def test_the_views_and_their_controls_are_named_one_way() -> None:
-    assert atlas.query_for("grid") == ""
-    assert atlas.query_for("triangle") == "?atlas=triangle"
-    assert atlas.query_for("grid", "large") == "?size=large"
-    assert atlas.query_for("triangle", "small") == "?atlas=triangle&size=small"
-    assert atlas.query_for("triangle", "medium") == "?atlas=triangle"
+    assert atlas.query_for("grid") == "?atlas=grid"
+    assert atlas.query_for("triangle") == ""
+    assert atlas.query_for("grid", "large") == "?atlas=grid&size=large"
+    assert atlas.query_for("triangle", "small") == "?size=small"
+    assert atlas.query_for("triangle", "medium") == ""
     assert atlas.tab("triangle") == '[data-atlas-tab="triangle"]'
     assert atlas.size_tab("large") == '[data-atlas-size-tab="large"]'
     assert atlas.SIZES == ("small", "medium", "large")

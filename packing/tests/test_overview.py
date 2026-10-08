@@ -624,25 +624,24 @@ def test_the_atlas_expander_reuses_the_action_button_and_tokens() -> None:
     assert ".site-atlas-rest[hidden] {\n  display: none;" in css
 
 
-def test_the_atlas_is_rendered_as_the_grid_under_tabs_that_ship_hidden(
+def test_the_atlas_is_rendered_as_medium_triangle_under_its_view_tabs(
     page: str, served: Callable[[str], str]
 ) -> None:
-    """The page is rendered in the grid view, the default, with the two view tabs over
-    the tiles: a tablist of buttons, Grid selected and the one stop in the tab order,
-    each controlling the box of tiles the script places. The strip ships `hidden`, since
-    without the script it would do nothing, as the expander's row does. Both scripts are
-    linked, the views' first: the grid's calls it. `test_site_atlas_views` reads the
-    two views in a browser."""
+    """The page is rendered in Medium Triangle, the default, with two view tabs over
+    the tiles: a tablist of buttons, Triangle selected and the one stop in the tab order,
+    each controlling the box of tiles the script places. The strip and static Triangle
+    are present in the first response. Both scripts are linked, the views' first: the
+    grid's calls it. `test_site_atlas_views` reads the two views in a browser."""
     block = re.findall(r'<div class="site-wide site-atlas-grid" ([^>]*)>', page)
-    assert block == ['data-atlas-view="grid" data-atlas-size="medium" data-atlas-grid']
+    assert block == ['data-atlas-view="triangle" data-atlas-size="medium" data-atlas-grid']
     tabs = overview_sections.atlas_view_tabs()
     assert tabs == (
         '<div class="site-tabs site-atlas-views" role="tablist" aria-label="Atlas layout" '
         'data-atlas-views data-atlas-panel="atlas-cells">'
         '<button type="button" role="tab" id="atlas-view-grid" data-atlas-tab="grid" '
-        'aria-selected="true" aria-controls="atlas-cells">Grid</button>'
+        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Grid</button>'
         '<button type="button" role="tab" id="atlas-view-triangle" data-atlas-tab="triangle" '
-        'aria-selected="false" aria-controls="atlas-cells" tabindex="-1">Triangle</button>'
+        'aria-selected="true" aria-controls="atlas-cells">Triangle</button>'
         "</div>"
     )
     assert page.count(tabs) == 1
@@ -684,9 +683,9 @@ def test_the_atlas_is_rendered_as_the_grid_under_tabs_that_ship_hidden(
 
 
 def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(page: str) -> None:
-    """A perfect square ends its row of the triangle, and its tile says so; that mark is
-    all the triangle adds to a tile's markup. Where a tile stands is the script's to
-    write, since it follows from the window's width."""
+    """A perfect square ends its left aligned row of the triangle, and its tile says so;
+    that mark is all the triangle adds to a tile's markup. Where a tile stands is the
+    script's to write, since it follows from the window's width."""
     grid = page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
     squares = re.findall(r'data-atlas-n="(\d+)" data-atlas-square ', grid)
     assert [int(n) for n in squares] == [k * k for k in range(1, 19)]
@@ -774,7 +773,8 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     assert "readdress(searchForSize(location.search, next));" in select_size
     assert "history.replaceState(history.state" in view
     assert '"--site-atlas-scale"' in view
-    assert '"--site-atlas-tile-max"' in view
+    assert '"--site-atlas-cell-min"' in view
+    assert '"--site-atlas-cell-gap"' in view
     assert "cells.append" not in grid
 
 
@@ -883,9 +883,8 @@ def test_the_atlas_key_names_the_star_and_the_badge_and_ships_hidden() -> None:
 def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
     """Medium is a scale of 1, the atlas as it was; Small two thirds and Large half as
     wide again, set on the block by its `data-atlas-size`. The grid's least cell is the
-    scale times 6.4rem, 4.6rem on a phone, as it was at Medium; the triangle's tile is its
-    line's share, scaled down at Small, and no wider than the most a tile may be, scaled,
-    never under the least tile."""
+    scale times 6.4rem, 4.6rem on a phone; Triangle uses the same minimum and gaps,
+    reserving the gaps before sharing the block's width among its columns."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     block = _rule(css, ".site-page .site-atlas-grid")
     assert "--site-atlas-scale: 1;" in block
@@ -899,21 +898,15 @@ def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
     plain = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
     assert re.search(
         r"@media \(max-width: 40rem\) \{\s*"
-        r"\.site-page \.site-atlas-grid \{\s*--site-atlas-cell-min: 4\.6rem;\s*\}",
+        r"\.site-page \.site-atlas-grid \{\s*--site-atlas-cell-min: 4\.6rem;\s*"
+        r"--site-atlas-cell-gap: 0\.35rem;\s*\}",
         plain,
     )
     shared = _rule(css, ".site-atlas-cells")
     for declaration in (
-        "--site-atlas-fit: calc(100cqi / var(--site-atlas-per-line, 1));",
-        "--site-atlas-share: calc(var(--site-atlas-fit) * min(1, var(--site-atlas-scale)));",
-        "--site-atlas-most: calc(var(--site-atlas-tile-max) * var(--site-atlas-scale));",
-        (
-            "--site-atlas-tile: clamp(\n"
-            "    var(--site-atlas-tile-min),\n"
-            "    var(--site-atlas-share),\n"
-            "    var(--site-atlas-most)\n"
-            "  );"
-        ),
+        "--site-atlas-tile: calc(",
+        "(100cqi - (var(--site-atlas-per-line) - 1) * var(--site-atlas-cell-gap)) /",
+        "gap: var(--site-atlas-cell-gap);",
         "--site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));",
         "grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));",
     ):
@@ -1048,8 +1041,8 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
 
 
 def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
-    """The triangle's least and greatest tile and the move's duration and easing are
-    tokens of the atlas block. The script reads the least tile, in rem, to say how many
+    """The shared cell minimum and gap and the move's duration and easing are tokens
+    of the atlas block. The script reads the scaled cell minimum and gap to say how many
     a line holds, and the two timing tokens to move the tiles; reduced motion sets the
     duration to 0ms, which is no move. A tile's size is the stylesheet's, from the block's
     width and the tiles a line holds, and nothing in the sheet transitions or animates a
@@ -1057,8 +1050,8 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     block = _rule(css, ".site-page .site-atlas-grid")
     for declaration in (
-        "--site-atlas-tile-min: 1.625rem;",
-        "--site-atlas-tile-max: 4.5rem;",
+        "--site-atlas-cell-min: 6.4rem;",
+        "--site-atlas-cell-gap: 0.5rem;",
         "--site-atlas-move-duration: 360ms;",
         "--site-atlas-move-easing: cubic-bezier(0.2, 0, 0, 1);",
         "container-type: inline-size;",
@@ -1066,32 +1059,35 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
         assert declaration in block, declaration
     plain = re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL)
     assert re.search(
-        r"@media \(max-width: 40rem\), \(pointer: coarse\) \{\s*"
-        r"\.site-page \.site-atlas-grid \{\s*--site-atlas-tile-min: 2\.5rem;\s*\}",
-        plain,
-    )
-    assert re.search(
         r"@media \(prefers-reduced-motion: reduce\) \{\s*"
         r"\.site-page \.site-atlas-grid \{\s*--site-atlas-move-duration: 0ms;\s*\}",
         plain,
     )
     assert css.count("--site-atlas-move-duration:") == 2
     # The tile's width is declared in the rule both views share, so a change of view
-    # restyles no drawing; the triangle's rule reads it. At Medium, a scale of 1, it is
-    # the line's share no wider than the most a tile may be, as it was before the sizes
-    # (`test_the_sizes_scale_a_tile_by_one_token_in_either_view`).
+    # restyles no drawing; the triangle's rule reads it. The line shares the width left
+    # after reserving the same gaps Grid uses.
     shared = _rule(css, ".site-atlas-cells")
-    assert "--site-atlas-tile: clamp(" in shared
+    assert "--site-atlas-tile: calc(" in shared
     assert re.search(r"0\.12\s*\+\s*0\.28\s*\*\s*clamp\(", shared)
     assert "--site-atlas-row-space: 0.4;" in _rule(css, ".site-atlas-cells[data-atlas-wrapped]")
     assert "transform-origin: 0 0;" in _rule(css, ".kpress .site-atlas-cell")
-    cells = _rule(css, '.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells')
+    cells = _rule(
+        css,
+        'html:not([data-site-atlas-view="grid"]) '
+        '.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells',
+    )
     assert "--site-atlas-tile:" not in cells
+    assert "justify-content: start;" in cells
     assert (
         "grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));"
         in cells
     )
-    tile = _rule(css, '.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell')
+    tile = _rule(
+        css,
+        'html:not([data-site-atlas-view="grid"]) '
+        '.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell',
+    )
     assert "var(--site-atlas-line, var(--site-atlas-initial-line)) /" in tile
     for rule in (cells, tile):
         assert "transition" not in rule
@@ -1103,8 +1099,8 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     assert "transition: none;" in still
     script = render_overview.ATLAS_VIEW_SCRIPT.read_text(encoding="utf-8")
     for token in (
-        "--site-atlas-tile-min",
-        "--site-atlas-tile-max",
+        "--site-atlas-cell-min",
+        "--site-atlas-cell-gap",
         "--site-atlas-scale",
         "--site-atlas-move-duration",
         "--site-atlas-move-easing",

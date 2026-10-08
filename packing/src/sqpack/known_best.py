@@ -8,8 +8,10 @@ import re
 from collections.abc import Iterable, Mapping, Sequence
 from copy import deepcopy
 from dataclasses import dataclass
+from enum import StrEnum
 from fractions import Fraction
 from itertools import pairwise
+from math import isqrt
 from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree as ET
@@ -109,16 +111,22 @@ class CorpusRange:
         return f"n={self.first_n}..{self.last_n}"
 
 
+class CompositePlacement(StrEnum):
+    """How case counts occupy cells without changing the shared card dimensions."""
+
+    row_major = "row-major"
+    square_bound_triangle = "square-bound-triangle"
+
+
 @dataclass(frozen=True)
 class CompositeSpec:
-    """One composite figure: the cases it draws, its grid width, and its filename stem.
+    """One composite figure: its cases, cell placement, grid width, and filename stem.
 
-    Everything about a composite that is not a drawing decision follows from the four
-    fields below, so a second figure is a second specification rather than a second set
-    of constants; the fields after them are the drawing decisions a figure of another
-    size has to make -- which exports it publishes, and what it may leave out of a square
-    to stay inside a byte budget. Rows, the canvas, the legend and footer baselines and
-    the layout string are all computed; the ones that need the card metrics are computed
+    Each figure declares its range, columns, placement and filename, plus the exports
+    and square encoding it uses to stay inside a byte budget. A second figure is a
+    second specification rather than a second set of constants.
+    Rows, the canvas, the legend and footer baselines, and the layout string are all
+    computed; the ones that need the card metrics are computed
     by ``CompositeCanvas`` in ``devtools/build_known_best_atlas.py``, which is where
     those metrics live.
     """
@@ -158,6 +166,9 @@ class CompositeSpec:
     #: figure applies is a property of the figure, recorded in its metadata and pinned
     #: here, not something the process it was built in happened to be left in.
     coordinate_decimals: int | None = None
+    #: Square-bound rows grow from the left, with k**2 at each row's end. The canvas widens
+    #: to fit their cells at the same scale as a rectangular figure.
+    placement: CompositePlacement = CompositePlacement.row_major
 
     def __post_init__(self) -> None:
         # Constructing the range is what validates first_n and last_n.
@@ -165,6 +176,12 @@ class CompositeSpec:
             raise ValueError("a composite needs at least one case and one column")
         if not self.stem:
             raise ValueError("a composite needs a filename stem")
+        if self.placement == CompositePlacement.square_bound_triangle and (
+            self.first_n != 1 or self.columns != 2 * self.rows - 1
+        ):
+            raise ValueError(
+                "a square-bound triangle starts at 1 and needs 2 * rows - 1 columns"
+            )
         if self.card_units is not None and self.card_units < 1:
             raise ValueError("a link-preview crop keeps a positive number of units")
         if any(scale < 1 for scale in self.raster_scales):
@@ -191,13 +208,29 @@ class CompositeSpec:
 
     @property
     def rows(self) -> int:
-        """Rows the grid needs, the last one short where the count does not fill it."""
+        """Rows the arrangement needs, including a partially filled final row."""
+        if self.placement == CompositePlacement.square_bound_triangle:
+            return isqrt(self.last_n - 1) + 1
         return -(-self.count // self.columns)
+
+    def card_position(self, n: int) -> tuple[int, int]:
+        """Zero-based cell for a case; triangle rows start at (k-1)**2 + 1 on the left."""
+        if n not in self.numbers:
+            raise ValueError(f"n={n} is outside {self.cases.label}")
+        if self.placement == CompositePlacement.square_bound_triangle:
+            row = isqrt(n - 1)
+            return row, n - row**2 - 1
+        return divmod(n - self.first_n, self.columns)
 
     @property
     def layout(self) -> str:
-        """The grid, columns first: ``10 by 10, row-major n=1..100``."""
-        return f"{self.columns} by {self.rows}, row-major {self.cases.label}"
+        """The arrangement, columns first, as recorded beside every export."""
+        arrangement = (
+            "left-aligned square-bound triangle"
+            if self.placement == CompositePlacement.square_bound_triangle
+            else "row-major"
+        )
+        return f"{self.columns} by {self.rows}, {arrangement} {self.cases.label}"
 
     @property
     def svg_name(self) -> str:
@@ -416,18 +449,17 @@ KNOWN_BEST_COMPOSITES = (
     CompositeSpec(
         first_n=1,
         last_n=324,
-        columns=18,
+        columns=35,
         stem="known-best-1-324",
-        # The poster of the whole corpus, at the card scale of the figure above it: 324
-        # cases fall into 18 columns of 18 with no short row, which is the only square
-        # grid the range admits and the reason the horizon is 324 rather than 300.
+        placement=CompositePlacement.square_bound_triangle,
+        # At the figure's card scale, row k holds (k-1)**2+1 through k**2. Starting the
+        # rows on the left keeps the upper-right corner free for the information
+        # block, and the final row sets the canvas width without shrinking any card.
         #
-        # One raster, not two, and the reason is measured: the 1x export is 2,369,558
-        # bytes at 4224 by 4912, and a 2x of the same drawing is 5,055,264 at 83
-        # megapixels -- more than twice what the figure's 3x cost when that was rejected
-        # as too expensive for detail already in the vector. The PDF carries that detail
-        # at any zoom for 491,026 bytes. The published figure keeps its 2x because it is
-        # the copy people attach; nobody attaches a poster.
+        # One raster: the original rectangular poster's 2x export cost 5,055,264 bytes
+        # at 83 megapixels. The triangle widens the canvas further, while the PDF keeps
+        # every square sharp at any zoom. The published figure keeps its 2x because it
+        # is the copy people attach.
         raster_scales=(1,),
         # No link-preview card either. The card is the unfurl of one page, the
         # repository's front door, and that page already has one; a second would be a
@@ -445,10 +477,10 @@ KNOWN_BEST_COMPOSITES = (
 )
 """Every composite figure published from the known-best corpus.
 
-Two: the published 10-by-10 figure of the first hundred cases, and the 18-by-18 poster
-of the whole corpus. A third is a third entry here, not a third copy of the builder: the
-geometry, the export set, the manifest record and the drift report all read the
-specification.
+Two: the published 10-by-10 figure of the first hundred cases, and the left-aligned
+square-bound triangle poster of the whole corpus. A third is a third entry here, not a
+third copy of the builder: the geometry, the export set, the manifest record and the
+drift report all read the specification.
 """
 
 _NUMBER = r"[-+]?(?:(?:\d+(?:\.\d*)?)|(?:\.\d+))(?:[eE][-+]?\d+)?"

@@ -3,11 +3,13 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import re
 import subprocess
 from collections import Counter
+from decimal import Decimal
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -16,8 +18,8 @@ import jsonschema
 import pytest
 import yaml
 
+from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import build_known_best_atlas as known_best_builder
-from devtools import render_composite_pdf
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     CompositeSpec,
@@ -360,19 +362,17 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
                 "width": 2400,
             },
         },
-        # The poster: the same card scale over eighteen columns of eighteen, one raster
-        # and no link-preview crop. Its absence of a `png_high_resolution` key is part of
-        # the golden answer, not an omission -- a 2x of a 20.7-megapixel canvas is about
-        # five megabytes on every clone for detail the PDF already carries.
+        # The poster keeps the figure's card scale in eighteen square-bound rows.
+        # One raster and no link-preview crop; the PDF carries detail at any zoom.
         {
-            "columns": 18,
-            "layout": "18 by 18, row-major n=1..324",
+            "columns": 35,
+            "layout": "35 by 18, left-aligned square-bound triangle n=1..324",
             "png_preview": {
                 "derived_from": "atlas/known-best/known-best-1-324.svg",
-                "height": 4912,
+                "height": 4656,
                 "path": "atlas/known-best/known-best-1-324.png",
                 "scale": 1,
-                "width": 4224,
+                "width": 8100,
             },
             "range": {"count": 324, "first_n": 1, "last_n": 324},
             "renderer": "sqpack deterministic composite renderer",
@@ -380,9 +380,9 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             "square_count": 52650,
             "stem": "known-best-1-324",
             "svg": {
-                "height": 4912,
+                "height": 4656,
                 "path": "atlas/known-best/known-best-1-324.svg",
-                "width": 4224,
+                "width": 8100,
             },
         },
     ]
@@ -763,26 +763,28 @@ def test_the_1_100_canvas_is_what_its_specification_computes() -> None:
 def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     """The poster's numbers, as the golden answer to the same formulas.
 
-    Written as literals for the same reason the figure's are: 4224 by 4912, a legend at
-    4740 and a footer at 4806/4833/4860/4887 are what `CompositeCanvas` returns for eighteen
-    columns of eighteen, and a formula that quietly stopped agreeing with the drawing
-    should fail here rather than in a byte comparison.
+    The triangle's last row needs thirty-five columns at the figure's card scale.
+    Its information fits in the upper-right whitespace, leaving eighteen rows at the
+    original card scale and no bottom footer allocation. The 8100 by 4656 canvas starts
+    the cards at the top margin and keeps the original drawing and caption dimensions.
     """
     canvas = known_best_builder.COMPOSITES[1]
     composite = canvas.spec
 
-    assert (composite.first_n, composite.last_n, composite.columns) == (1, 324, 18)
+    assert (composite.first_n, composite.last_n, composite.columns) == (1, 324, 35)
     assert (composite.count, composite.rows, composite.square_count) == (324, 18, 52650)
     assert composite.square_count == 324 * 325 // 2
-    assert composite.layout == "18 by 18, row-major n=1..324"
+    assert composite.layout == "35 by 18, left-aligned square-bound triangle n=1..324"
     assert composite.cases.label == "n=1..324"
-    assert (canvas.width, canvas.height) == (4224, 4912)
-    assert canvas.grid_bottom == 4710
-    assert canvas.legend_baseline == 4740
-    assert canvas.explainer_baseline == 4806
-    assert canvas.citations_baseline == 4833
-    assert canvas.credit_baseline == 4860
-    assert canvas.stamp_baseline == 4887
+    assert (canvas.width, canvas.height) == (8100, 4656)
+    assert canvas.grid_top == 60
+    assert canvas.grid_bottom == 4596
+    assert (canvas.information_left, canvas.information_right) == (6840, 8040)
+    assert canvas.legend_baseline == 276
+    assert canvas.explainer_baseline == 550
+    assert canvas.citations_baseline == 577
+    assert canvas.credit_baseline == 604
+    assert canvas.stamp_baseline == 631
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "known-best-1-324.pdf",
@@ -792,6 +794,201 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert composite.card_units is None
     assert [export.manifest_key for export in canvas.rasters] == ["png_preview"]
     assert composite.stem in known_best_builder.SUMMARY_PROSE
+
+
+def test_layout_record_refresh_preserves_facts_and_refuses_unrelated_changes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    canvas = known_best_builder.CompositeCanvas(CompositeSpec(1, 1, 1, "synthetic"))
+    entries = [{"n": 1, "reported_side": "1"}]
+    current_manifest = known_best_builder._manifest_document(  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+        entries,
+        [known_best_builder._composite_record(canvas)],  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    )
+    current_figure = {
+        "figure": {
+            "entries": [{"n": 1, "side": {"display": "s(1) = 1"}}],
+            "composites": [
+                {
+                    "stem": "synthetic",
+                    "columns": 1,
+                    "rows": 1,
+                    "layout": canvas.spec.layout,
+                    "totals": {"proved_optimal": 1},
+                }
+            ],
+        }
+    }
+    old_manifest = copy.deepcopy(current_manifest)
+    old_manifest["atlas"]["composites"][0]["columns"] = 2
+    old_manifest["atlas"]["composites"][0]["svg"]["width"] = 576
+    old_figure = copy.deepcopy(current_figure)
+    old_figure["figure"]["composites"][0]["columns"] = 2
+    manifest_path, figure_path = tmp_path / "manifest.json", tmp_path / "composite-figure.json"
+    manifest_text = json.dumps(old_manifest)
+    manifest_path.write_text(manifest_text)
+    monkeypatch.setattr(known_best_builder, "MANIFEST", manifest_path)
+    monkeypatch.setattr(known_best_builder, "COMPOSITES", (canvas,))
+    monkeypatch.setattr(build_composite_figure_data, "RECORD", figure_path)
+    monkeypatch.setattr(build_composite_figure_data, "build_record", lambda: current_figure)
+    monkeypatch.setattr(
+        known_best_builder, "_retained_problems", lambda **_kwargs: ([], entries)
+    )
+    monkeypatch.setattr(known_best_builder, "retained_cases", lambda _numbers: [entries[0]])
+    monkeypatch.setattr(known_best_builder, "_manifest_entry", lambda case: case)
+    for envelope, location, key, wrong in (
+        ("figure", "entries", "side", {"display": "s(1) = 2"}),
+        ("figure", "composites", "totals", {"proved_optimal": 0}),
+        ("atlas", "entries", "reported_side", "2"),
+    ):
+        unrelated_manifest, unrelated_figure = (
+            copy.deepcopy(old_manifest),
+            copy.deepcopy(old_figure),
+        )
+        unrelated = unrelated_figure if envelope == "figure" else unrelated_manifest
+        unrelated[envelope][location][0][key] = wrong
+        manifest_text, figure_text = (
+            json.dumps(unrelated_manifest),
+            json.dumps(unrelated_figure),
+        )
+        manifest_path.write_text(manifest_text)
+        figure_path.write_text(figure_text)
+        with pytest.raises(ValueError, match="unrelated"):
+            known_best_builder.update_composite_records()
+        assert manifest_path.read_text() == manifest_text
+        assert figure_path.read_text() == figure_text
+    manifest_path.write_text(json.dumps(old_manifest))
+    figure_path.write_text(json.dumps(old_figure))
+    assert known_best_builder.main(["--update-composite-records"]) == 0
+    assert json.loads(manifest_path.read_text()) == current_manifest
+    assert json.loads(figure_path.read_text()) == current_figure
+
+
+def test_poster_places_cases_in_left_aligned_square_bound_rows() -> None:
+    poster = known_best_builder.COMPOSITES[1].spec
+    positions = []
+    for k in range(1, 19):
+        numbers = range((k - 1) ** 2 + 1, k**2 + 1)
+        expected = [(k - 1, column) for column in range(len(numbers))]
+        observed = [poster.card_position(n) for n in numbers]
+        assert observed == expected, k
+        positions.extend(observed)
+    assert len(set(positions)) == 324
+    figure = known_best_builder.PRIMARY_COMPOSITE.spec
+    assert [figure.card_position(n) for n in (1, 10, 11, 100)] == [
+        (0, 0),
+        (0, 9),
+        (1, 0),
+        (9, 9),
+    ]
+
+
+def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
+    root = ET.fromstring(_committed_poster_svg())
+    cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
+    assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 325))
+    for card in cards:
+        n = int(card.attrib["data-n"])
+        k = next(k for k in range(1, 19) if n <= k**2)
+        row, column = k - 1, n - (k - 1) ** 2 - 1
+        assert (int(card.attrib["data-row"]), int(card.attrib["data-column"])) == (
+            row,
+            column,
+        ), n
+        outline = card.find('svg:rect[@data-feature="container-outline"]', SVG)
+        assert outline is not None
+        assert (float(outline.attrib["x"]), float(outline.attrib["y"])) == (
+            84 + 228 * column,
+            72 + 252 * row,
+        ), n
+        assert (outline.attrib["width"], outline.attrib["height"]) == ("158", "158"), n
+        for feature, baseline, font_size in (
+            ("packing-label", 203, "29"),
+            ("side-bound", 220, "14"),
+        ):
+            label = card.find(f'svg:text[@data-feature="{feature}"]', SVG)
+            assert label is not None
+            assert float(label.attrib["y"]) == 60 + 252 * row + baseline, n
+            assert label.attrib["font-size"] == font_size, n
+
+
+def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> None:
+    root = ET.fromstring(_committed_poster_svg())
+    block = root.find('svg:g[@data-feature="poster-information"]', SVG)
+    assert block is not None
+    left, right, top, bottom = (
+        Decimal(block.attrib[f"data-{edge}"]) for edge in ("left", "right", "top", "bottom")
+    )
+    assert (left, right, top, bottom) == (6840, 8040, 60, 650)
+    cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
+    card_text = {node for card in cards for node in card.iter(f"{{{SVG['svg']}}}text")}
+    information_text = set(block.iter(f"{{{SVG['svg']}}}text"))
+    assert set(root.iter(f"{{{SVG['svg']}}}text")) - card_text == information_text
+    features = {node.attrib.get("data-feature") for node in information_text}
+    assert {
+        "poster-title",
+        "release",
+        "repository",
+        "poster-details",
+        "legend-label",
+        "explainer",
+        "citations",
+        "credit",
+        "release-stamp",
+    } <= features
+    labels = [
+        node for node in information_text if node.attrib.get("data-feature") == "legend-label"
+    ]
+    assert len(labels) == 8
+    assert {
+        "proved optimal",
+        "exact value known",
+        "only known numerically",
+        "rigid (established here)",
+        "annotated rigid by the catalogue",
+        known_best_builder.RECENT_LABEL,
+        "colors indicate distinct tilt angles",
+        "shade indicates number of full-side contacts",
+    } == {((node.text or "").rsplit(" (", 1)[0]) for node in labels}
+    text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    for node in information_text:
+        x, y = Decimal(node.attrib["x"]), Decimal(node.attrib["y"])
+        size = Decimal(node.attrib["font-size"])
+        content = "".join(node.itertext())
+        extent = text_width(content, str(size))
+        extent += Decimal(node.attrib.get("letter-spacing", "0")) * max(len(content) - 1, 0)
+        extent += sum((Decimal(child.attrib.get("dx", "0")) for child in node), Decimal(0))
+        anchor = node.attrib.get("text-anchor", "start")
+        text_left = (
+            x - extent if anchor == "end" else x - extent / 2 if anchor == "middle" else x
+        )
+        text_right = text_left + extent
+        assert left <= text_left <= text_right <= right
+        assert top <= y - size
+        assert y + size * Decimal("0.3") <= bottom
+        if node.attrib.get("data-feature") == "explainer":
+            assert text_right == right
+        elif node.attrib.get("data-feature"):
+            assert anchor == "end"
+            assert x == right
+    for card in cards:
+        row, column = int(card.attrib["data-row"]), int(card.attrib["data-column"])
+        card_top, card_left = 60 + 252 * row, 60 + 228 * column
+        assert card_top >= bottom or card_left + 216 < left
+
+
+def test_poster_information_refuses_a_line_that_would_clip(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(known_best_builder, "SUMMARY_CREDIT", "W" * 300)
+    append = known_best_builder._append_poster_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    with pytest.raises(ValueError, match="credit line exceeds"):
+        append(
+            ET.Element("svg"),
+            spec=RenderSpec(overlays=frozenset()),
+            canvas=known_best_builder.COMPOSITES[1],
+            identity=known_best_builder.retained_identity(_committed_composite_svg()),
+        )
 
 
 def test_every_composite_footer_says_where_the_citations_are() -> None:
@@ -821,8 +1018,11 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
             float(canvas.credit_baseline),
             float(canvas.stamp_baseline),
         ], canvas.spec.stem
-        # Centred, so it clears both edges when its advance fits between the margins.
-        room = canvas.width - 2 * known_best_builder.SUMMARY_SIDE_MARGIN
+        room = (
+            known_best_builder.POSTER_INFORMATION_WIDTH
+            if canvas.information_in_corner
+            else canvas.width - 2 * known_best_builder.SUMMARY_SIDE_MARGIN
+        )
         assert text_width(citations, known_best_builder.SUMMARY_FOOTER_SIZE) < room
         description = root.find("svg:desc", SVG)
         assert description is not None
@@ -831,29 +1031,23 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
 
 
 def test_a_second_composite_is_a_specification_and_not_a_second_set_of_constants() -> None:
-    """Nothing in the poster's geometry is absolute; all of it is the figure's, shifted.
+    """The same card metrics govern both arrangements and their canvas dimensions.
 
-    This is the whole point of the parameterization, and it is asserted as differences
-    rather than as literals -- the literals are the test above -- because what is being
-    checked here is that no constant was edited by hand: eight more columns is eight more
-    column pitches of width, and eight more rows moves the legend and all four footer
-    lines by eight row pitches.
+    The triangle widens by whole column pitches and its height follows its rows, with
+    information in the corner. A row-major third figure still follows the original
+    title-and-footer policy.
     """
     poster = known_best_builder.COMPOSITES[1]
     figure = known_best_builder.PRIMARY_COMPOSITE
 
     extra_columns = poster.spec.columns - figure.spec.columns
-    extra_rows = poster.spec.rows - figure.spec.rows
     widening = extra_columns * known_best_builder.SUMMARY_COLUMN_PITCH
-    shift = extra_rows * known_best_builder.SUMMARY_ROW_PITCH
     assert poster.width == figure.width + widening
-    assert poster.grid_bottom == figure.grid_bottom + shift
-    assert poster.legend_baseline == figure.legend_baseline + shift
-    assert poster.explainer_baseline == figure.explainer_baseline + shift
-    assert poster.citations_baseline == figure.citations_baseline + shift
-    assert poster.credit_baseline == figure.credit_baseline + shift
-    assert poster.stamp_baseline == figure.stamp_baseline + shift
-    assert poster.height == figure.height + shift
+    assert (
+        poster.grid_bottom
+        == poster.grid_top + poster.spec.rows * known_best_builder.SUMMARY_ROW_PITCH
+    )
+    assert poster.height == poster.grid_bottom + known_best_builder.SUMMARY_SIDE_MARGIN
 
     # And a third would be a third specification: one declared here, never rendered,
     # measured while its cards do not exist.
@@ -954,8 +1148,8 @@ def test_the_poster_exports_carry_the_source_receipt() -> None:
 
     assert [export.path.name for export in exports] == ["known-best-1-324.png"]
     assert known_best_builder.png_summary_receipt(exports[0].path.read_bytes()) == (
-        4224,
-        4912,
+        8100,
+        4656,
         expected,
     )
     assert (

@@ -3,9 +3,10 @@ of tile, and the marks its tiles carry, in a browser.
 
 The atlas is one set of tiles under two tabs (`templates/paper-design.md`, Atlas views).
 The grid is the stylesheet's alone. The triangle sets row k as the 2k - 1 cases a square
-of side k holds, ending at k squared on the right edge, and wraps a row too long for the
-page: `overview/atlas-view.js` says where each tile stands and moves the tiles between
-the views. `tests/node/overview_atlas_view` holds the script's arithmetic; what a reader
+of side k holds, starting at the left edge and ending at k squared, and wraps a row too
+long for the page: `overview/atlas-view.js` says where each tile stands and moves the
+tiles between the views. `tests/node/overview_atlas_view` holds the script's arithmetic;
+what a reader
 gets is the browser's to say, so this opens the rendered overview in Chromium and reads
 it: where every tile stands in each view at a desktop width and on a phone, what a press
 of a tab starts, what the keyboard does, what the address says, and what a reader who
@@ -23,13 +24,13 @@ on a browser in its own time. The layouts are read with the measuring tool's pro
 judged by its `layout_problems`, which `tests/test_measure_atlas_views.py` holds to the
 shapes it must refuse.
 
-Skipped where no Chromium can be launched; `SQPACK_CHROMIUM` names one the environment
-supplies, as the other browser tools read it.
+Chromium is launched through `tests.site_browser`, with unhinted text for consistent
+pixels across macOS and Linux. A missing browser skips locally and fails where the
+frontend gate sets `SQPACK_REQUIRE_CHROMIUM`.
 """
 
 from __future__ import annotations
 
-import os
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any, TypedDict
@@ -37,9 +38,8 @@ from typing import Any, TypedDict
 import pytest
 
 from devtools import measure_atlas_views as atlas
-from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from sqpack.probes import applied, probe
-from tests import site_renders
+from tests import site_browser, site_renders
 
 PROBES = Path(__file__).resolve().parent / "probes"
 PRESSED = probe(PROBES, "site_atlas_views/pressed")
@@ -72,6 +72,7 @@ MID_MOVE = 120
 SETTLE_MS = 400
 #: The settled layouts the fixture reads, each in the view named.
 LAYOUTS = {
+    "default": "triangle",
     "grid": "grid",
     "triangle": "triangle",
     "grid again": "grid",
@@ -133,6 +134,10 @@ def _desktop(browser: Any, address: str) -> Readings:
     seen: Readings = {}
     page = atlas.open_atlas(browser, address, **DESKTOP)
     atlas.top(page)
+    seen["default"] = atlas.layout(page)
+    page.locator(GRID).click()
+    atlas.settle(page)
+    atlas.top(page)
     seen["grid"] = atlas.layout(page)
     seen["actions"] = page.evaluate(ACTIONS)
     seen["press triangle"] = page.evaluate(PRESSED, {"press": TRIANGLE})
@@ -185,7 +190,7 @@ def _desktop(browser: Any, address: str) -> Readings:
 
     page.set_viewport_size(PHONE)
     page.wait_for_function(
-        probe(PROBES, "site_atlas_views/arranged"), arg={"per_line": 8}, timeout=5000
+        probe(PROBES, "site_atlas_views/arranged"), arg={"per_line": 4}, timeout=5000
     )
     seen["resized to a phone"] = atlas.layout(page)
     page.close()
@@ -213,7 +218,7 @@ def _phone(browser: Any, address: str) -> Readings:
 def _reduced(browser: Any, address: str) -> Readings:
     """A reader who asks for reduced motion presses Triangle."""
     seen: Readings = {}
-    page = atlas.open_atlas(browser, address, reduced_motion="reduce", **DESKTOP)
+    page = atlas.open_atlas(browser, address, view="grid", reduced_motion="reduce", **DESKTOP)
     seen["reduced press"] = page.evaluate(PRESSED, {"press": TRIANGLE})
     seen["reduced motion"] = atlas.layout(page)
     page.close()
@@ -244,6 +249,8 @@ def _sizes(browser: Any, address: str) -> Readings:
     Medium."""
     seen: Readings = {}
     page = atlas.open_atlas(browser, address, **DESKTOP)
+    page.locator(GRID).click()
+    atlas.settle(page)
     atlas.top(page)
     seen["sizes, medium"] = atlas.layout(page)
     seen["press large"] = page.evaluate(PRESSED, {"press": LARGE})
@@ -296,7 +303,7 @@ def _phone_sizes(browser: Any, address: str) -> Readings:
 @pytest.fixture(scope="module")
 def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
     """Everything the sessions read, by name."""
-    sync_api = pytest.importorskip("playwright.sync_api")
+    sync_api = site_browser.api()
     root = Path(tmp_path_factory.mktemp("site"))
     path = site_renders.write(root, "index.html")["index.html"]
     from devtools import render_overview, site_assets  # noqa: PLC0415
@@ -315,45 +322,45 @@ def seen(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Readings]:
     initial.write_text(static, encoding="utf-8")
     address = path.as_uri()
     with sync_api.sync_playwright() as driver:
-        try:
-            browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
-        except sync_api.Error as error:
-            pytest.skip(f"no Chromium to launch: {error.message.splitlines()[0]}")
+        browser = site_browser.launch(driver)
         found: Readings = {}
         for session in (_desktop, _phone, _reduced, _linked, _sizes, _phone_sizes):
             found.update(session(browser, address))
-        for size in ("medium", "large"):
-            page = browser.new_page(viewport=PHONE)
-            page.goto(initial.as_uri() + atlas.query_for("triangle", size), wait_until="load")
-            found[f"initial CSS, {size}"] = page.evaluate(INITIAL)
-            page.close()
+        for view in atlas.VIEWS:
+            for size in ("medium", "large"):
+                page = browser.new_page(viewport=PHONE)
+                page.goto(initial.as_uri() + atlas.query_for(view, size), wait_until="load")
+                found[f"initial CSS, {view}, {size}"] = page.evaluate(INITIAL)
+                page.close()
         browser.close()
         yield found
 
 
-def test_a_plain_address_opens_the_grid_under_its_two_tabs(seen: Readings) -> None:
-    """With no parameter the atlas is the grid: its tab is selected and is the one stop
-    in the tab order, both tabs show, in the section tabs' type, side by side, and the
+def test_a_plain_address_opens_medium_triangle_under_its_two_tabs(seen: Readings) -> None:
+    """With no parameter the atlas is Medium Triangle: its tab is selected and is the
+    one stop in the tab order, both tabs show, in the section tabs' type, side by side, and the
     box of tiles is the panel they control, named by the selected tab."""
-    grid = seen["grid"]
-    assert grid["view"] == "grid"
-    assert grid["search"] == ""
-    tabs = _tabs(grid)
+    triangle = seen["default"]
+    assert triangle["view"] == "triangle"
+    assert (triangle["size"], triangle["search"]) == ("medium", "")
+    tabs = _tabs(triangle)
     assert list(tabs) == ["grid", "triangle"]
     assert [tab["label"] for tab in tabs.values()] == ["Grid", "Triangle"]
-    assert (tabs["grid"]["selected"], tabs["grid"]["tabindex"]) == ("true", 0)
-    assert (tabs["triangle"]["selected"], tabs["triangle"]["tabindex"]) == ("false", -1)
-    assert all(tab["shown"] and tab["controls"] == grid["panel"]["id"] for tab in tabs.values())
-    assert grid["panel"] == {
+    assert (tabs["triangle"]["selected"], tabs["triangle"]["tabindex"]) == ("true", 0)
+    assert (tabs["grid"]["selected"], tabs["grid"]["tabindex"]) == ("false", -1)
+    assert all(
+        tab["shown"] and tab["controls"] == triangle["panel"]["id"] for tab in tabs.values()
+    )
+    assert triangle["panel"] == {
         "id": "atlas-cells",
         "role": "tabpanel",
-        "labelledby": tabs["grid"]["id"],
+        "labelledby": tabs["triangle"]["id"],
     }
     # The strip's type is the bar's and the section tabs': the note step, 17.48px.
     assert {tab["font_px"] for tab in tabs.values()} == {17.48}
     assert tabs["grid"]["box"]["top"] == tabs["triangle"]["box"]["top"]
     assert tabs["grid"]["box"]["right"] <= tabs["triangle"]["box"]["left"] + 1
-    assert len(grid["tiles"]) == 100
+    assert len(triangle["tiles"]) == 100
 
 
 def test_pressing_triangle_moves_every_tile_on_its_transform_alone(seen: Readings) -> None:
@@ -371,27 +378,31 @@ def test_pressing_triangle_moves_every_tile_on_its_transform_alone(seen: Reading
     assert seen["press expander"]["followers"] > 0
 
 
-def test_the_triangle_sets_row_k_as_2k_minus_1_tiles_ending_at_the_right_edge(
+def test_the_triangle_sets_row_k_as_2k_minus_1_tiles_starting_at_the_left_edge(
     seen: Readings,
 ) -> None:
-    """At a desktop width no row wraps: ten rows of 1, 3, 5, ... 19 tiles, each a line,
-    and every perfect square's tile ends at the block's right edge."""
+    """At a desktop width a line holds ten Grid-sized tiles; rows 6 to 10 wrap and
+    every line starts at the block's left edge, including each short last line."""
     triangle = seen["triangle"]
     assert triangle["view"] == "triangle"
-    assert triangle["per_line"] == 19
+    assert triangle["per_line"] == 10
+    assert _same_places(triangle, seen["default"])
+    assert _drawing_width(triangle) == pytest.approx(_drawing_width(seen["grid"]), abs=0.5)
     tiles = {tile["n"]: tile for tile in triangle["tiles"]}
     assert sorted(tiles) == list(range(1, 101))
-    right = triangle["cells"]["right"]
+    left = triangle["cells"]["left"]
     for k in range(1, 11):
         row = [tiles[n] for n in range((k - 1) ** 2 + 1, k * k + 1)]
-        assert len(row) == 2 * k - 1
-        assert len({tile["top"] for tile in row}) == 1, f"row {k} is not one line"
-        assert abs(tiles[k * k]["right"] - right) <= atlas.EDGE, f"{k * k} is off the edge"
-        lefts = [tile["left"] for tile in row]
-        assert lefts == sorted(lefts)
-    tops = [tiles[k * k]["top"] for k in range(1, 11)]
-    assert tops == sorted(tops)
-    assert len(set(tops)) == 10
+        tops = sorted({tile["top"] for tile in row})
+        sizes = tuple(sum(tile["top"] == top for tile in row) for top in tops)
+        assert sizes == atlas.row_lines(k, 10)
+        for top in tops:
+            line = [tile for tile in row if tile["top"] == top]
+            assert abs(min(tile["left"] for tile in line) - left) <= atlas.EDGE, k
+        reading = [
+            tile["n"] for tile in sorted(row, key=lambda tile: (tile["top"], tile["left"]))
+        ]
+        assert reading == [tile["n"] for tile in row]
     assert _tabs(triangle)["triangle"]["selected"] == "true"
     assert triangle["panel"]["labelledby"] == _tabs(triangle)["triangle"]["id"]
 
@@ -416,7 +427,7 @@ def test_a_second_press_mid_move_starts_from_where_the_tiles_are(seen: Readings)
     assert after["view"] == "grid"
     assert after["moving"] == 0
     assert _same_places(after, seen["grid"])
-    assert after["search"] == ""
+    assert after["search"] == "?atlas=grid"
     assert _tabs(after)["grid"]["focused"]
 
 
@@ -457,11 +468,11 @@ def test_the_tiles_follow_the_tabs_in_the_tab_order_in_case_order(seen: Readings
     assert seen["tab order"] == ["atlas-size-medium", "regularized view", "1", "2"]
 
 
-def test_the_address_names_the_triangle_and_keeps_what_else_it_holds(seen: Readings) -> None:
-    """The triangle is `?atlas=triangle` and the grid no parameter; a press writes it
+def test_the_address_names_grid_and_keeps_what_else_it_holds(seen: Readings) -> None:
+    """Grid is `?atlas=grid` and the default Triangle has no parameter; a press writes it
     without a new history entry's worth of change to anything else in the address."""
-    assert seen["triangle"]["search"] == "?atlas=triangle"
-    assert seen["grid again"]["search"] == ""
+    assert seen["triangle"]["search"] == ""
+    assert seen["grid again"]["search"] == "?atlas=grid"
     linked = seen["linked"]
     assert (linked["view"], linked["search"], linked["hash"]) == (
         "triangle",
@@ -472,13 +483,13 @@ def test_the_address_names_the_triangle_and_keeps_what_else_it_holds(seen: Readi
     to_grid = seen["linked, to grid"]
     assert (to_grid["view"], to_grid["search"], to_grid["hash"]) == (
         "grid",
-        "?age=180",
+        "?age=180&atlas=grid",
         "#the-atlas",
     )
     back = seen["linked, back"]
     assert (back["view"], back["search"], back["hash"]) == (
         "triangle",
-        "?age=180&atlas=triangle",
+        "?age=180",
         "#the-atlas",
     )
     assert _same_places(back, linked)
@@ -489,7 +500,7 @@ def test_a_linked_triangle_is_the_triangle_before_a_tile_is_drawn(seen: Readings
     arranged and nothing in a move, at the moment its tiles are first put in the page:
     the grid is never shown first."""
     assert seen["phone, first placed"] == [
-        {"view": "triangle", "size": "medium", "per_line": "8", "tiles": 100, "moving": 0}
+        {"view": "triangle", "size": "medium", "per_line": "4", "tiles": 100, "moving": 0}
     ]
 
 
@@ -504,63 +515,62 @@ def test_reduced_motion_switches_at_once(seen: Readings) -> None:
     assert _same_places(reduced, seen["triangle"])
 
 
-def test_a_phone_wraps_the_long_rows_and_keeps_every_square_on_the_right_edge(
+def test_a_phone_wraps_the_long_rows_and_starts_every_line_at_the_left_edge(
     seen: Readings,
 ) -> None:
-    """At 390 pixels a line holds eight tiles of 40 pixels or more. Rows 1 to 4 fit; row
-    10, nineteen tiles, is lines of 8, 8 and 3 in reading order. No tile runs past the
-    block or the page, every perfect square ends at the block's right edge, and every
-    line of a wrapped row but its last starts at the block's left edge."""
+    """At 390 pixels a line holds four Grid-sized tiles. Rows 1 and 2 fit; row
+    10, nineteen tiles, is lines of 4, 4, 4, 4 and 3 in reading order. No tile runs past the
+    block or the page, and every line starts at the block's left edge, including a
+    wrapped row's short last line."""
     phone = seen["phone"]
-    assert phone["per_line"] == 8
+    assert phone["per_line"] == 4
     assert phone["overflow"] == 0
     cells = phone["cells"]
     tiles = {tile["n"]: tile for tile in phone["tiles"]}
-    assert min(tile["width"] for tile in tiles.values()) >= 40
+    assert _drawing_width(phone) == pytest.approx(_drawing_width(seen["phone, grid"]), abs=0.5)
     for tile in tiles.values():
         assert tile["left"] >= cells["left"] - atlas.EDGE, tile["n"]
         assert tile["right"] <= cells["right"] + atlas.EDGE, tile["n"]
     for k in range(1, 11):
-        assert abs(tiles[k * k]["right"] - cells["right"]) <= atlas.EDGE, k
         row = [tiles[n] for n in range((k - 1) ** 2 + 1, k * k + 1)]
         tops = sorted({tile["top"] for tile in row})
         sizes = tuple(sum(tile["top"] == top for tile in row) for top in tops)
-        assert sizes == atlas.row_lines(k, 8), k
-        for top in tops[:-1]:
+        assert sizes == atlas.row_lines(k, 4), k
+        for top in tops:
             line = [tile for tile in row if tile["top"] == top]
             assert abs(min(tile["left"] for tile in line) - cells["left"]) <= atlas.EDGE, k
         # The cases read on in order along each line and down the lines.
         assert [tile["n"] for tile in sorted(row, key=lambda t: (t["top"], t["left"]))] == [
             tile["n"] for tile in row
         ]
-    assert atlas.row_lines(10, 8) == (8, 8, 3)
-    assert [k for k in range(1, 11) if len(atlas.row_lines(k, 8)) == 1] == [1, 2, 3, 4]
+    assert atlas.row_lines(10, 4) == (4, 4, 4, 4, 3)
+    assert [k for k in range(1, 11) if len(atlas.row_lines(k, 4)) == 1] == [1, 2]
 
 
 def test_the_space_over_a_row_is_larger_than_between_the_lines_of_one(seen: Readings) -> None:
     """Where rows wrap, a new row starts further below the line above it than a wrapped
     row's own lines stand apart, so the lines of a row read as one group."""
     tiles = {tile["n"]: tile for tile in seen["phone"]["tiles"]}
-    # Row 10 at eight a line: 82 to 89, 90 to 97, 98 to 100. Row 9 ends at 81.
-    within = tiles[90]["top"] - tiles[82]["bottom"]
+    # Row 10 at four a line: 82 to 85, 86 to 89, and three further lines.
+    within = tiles[86]["top"] - tiles[82]["bottom"]
     between = tiles[82]["top"] - tiles[81]["bottom"]
-    assert within == pytest.approx(tiles[98]["top"] - tiles[90]["bottom"], abs=0.5)
+    assert within == pytest.approx(tiles[90]["top"] - tiles[86]["bottom"], abs=0.5)
     assert between > within + 10, (between, within)
 
 
 def test_the_expander_works_in_the_triangle(seen: Readings) -> None:
-    """Showing every case in the triangle moves the hundred into their smaller places
-    and sets eighteen rows, the last of 35 tiles; collapsing puts the hundred back where
-    they stood. On a phone all 324 wrap at eight a line."""
+    """Showing every case keeps the hundred at their readable size and extends the
+    wrapped triangle through row 18; collapsing restores the hundred. A phone keeps
+    four tiles to a line even when all 324 show."""
     assert seen["press expander"]["moving"] > 0
     every = seen["triangle, every case"]
-    assert (every["view"], every["expanded"], every["per_line"]) == ("triangle", "true", 35)
+    assert (every["view"], every["expanded"], every["per_line"]) == ("triangle", "true", 10)
     assert sorted(tile["n"] for tile in every["tiles"]) == list(range(1, 325))
     collapsed = seen["triangle, collapsed"]
-    assert (collapsed["expanded"], collapsed["per_line"]) == ("false", 19)
+    assert (collapsed["expanded"], collapsed["per_line"]) == ("false", 10)
     assert _same_places(collapsed, seen["triangle"])
     phone = seen["phone, every case"]
-    assert (phone["per_line"], len(phone["tiles"])) == (8, 324)
+    assert (phone["per_line"], len(phone["tiles"])) == (4, 324)
     assert len(seen["phone, grid"]["tiles"]) == 324
 
 
@@ -568,7 +578,7 @@ def test_a_narrower_window_rearranges_the_triangle_without_a_move(seen: Readings
     """Made a phone's width, the desktop's triangle is the phone's: the same tiles to a
     line and every tile where a phone opened on the triangle has it, with no move."""
     resized = seen["resized to a phone"]
-    assert resized["per_line"] == 8
+    assert resized["per_line"] == 4
     assert resized["moving"] == 0
     assert _same_places(resized, seen["phone"])
 
@@ -579,7 +589,7 @@ def test_no_layout_runs_past_the_page_or_sets_a_tile_over_another(
 ) -> None:
     """Every settled layout, in either view and at either width: nothing in a move, no
     tile outside the block or over another, the cases in order, and in the triangle
-    every square on the right edge and every row cut as `row_lines` gives."""
+    every line at the left edge and every row cut as `row_lines` gives."""
     report = seen[name]
     assert report["view"] == LAYOUTS[name]
     assert atlas.layout_problems(report) == []
@@ -659,13 +669,18 @@ def _width(report: dict[str, Any]) -> float:
     return widths[len(widths) // 2]
 
 
+def _drawing_width(report: dict[str, Any]) -> float:
+    """The visible drawing width most of a layout's tiles have, after padding."""
+    widths = sorted(tile["drawing"]["width"] for tile in report["tiles"])
+    return widths[len(widths) // 2]
+
+
 def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_medium(seen: Readings) -> None:
     """A plain address is at Medium, under a second strip on the view tabs' line, in
     their type and at their height: Small, Medium and Large, Medium selected and the
     strip's one stop in the tab order, each controlling the box of tiles. The key to a
-    tile's marks stands under both strips and over the tiles, and the grid at Medium is
-    the grid the atlas had before it had sizes."""
-    medium = seen["sizes, medium"]
+    tile's marks stands under both strips and over the tiles."""
+    medium = seen["default"]
     assert (medium["size"], medium["search"]) == ("medium", "")
     sizes = _size_tabs(medium)
     assert list(sizes) == ["small", "medium", "large"]
@@ -686,7 +701,7 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_medium(seen: Readi
     assert legend["font_px"] == 17.48
     assert legend["box"]["top"] >= views["grid"]["box"]["bottom"]
     assert legend["box"]["bottom"] <= medium["cells"]["top"]
-    assert _same_places(medium, seen["grid"])
+    assert _same_places(medium, seen["triangle"])
 
 
 def test_a_change_of_size_moves_the_tiles_as_a_change_of_view_does(seen: Readings) -> None:
@@ -717,33 +732,34 @@ def test_the_grid_holds_more_and_smaller_tiles_at_small_and_fewer_and_larger_at_
     widths = [_width(seen[name]) for name in names]
     assert widths == sorted(widths)
     assert len(set(widths)) == 3
-    assert [seen[name]["search"] for name in names] == ["?size=small", "", "?size=large"]
+    assert [seen[name]["search"] for name in names] == [
+        "?atlas=grid&size=small",
+        "?atlas=grid",
+        "?atlas=grid&size=large",
+    ]
     assert atlas.summary(seen["phone, grid"])["per_line"] == 4
     small = seen["phone, small grid"]
-    assert (small["size"], small["search"]) == ("small", "?size=small")
+    assert (small["size"], small["search"]) == ("small", "?size=small&atlas=grid")
     assert atlas.summary(small)["per_line"] == 6
 
 
-def test_the_triangle_shrinks_at_small_and_wraps_its_long_rows_at_large(seen: Readings) -> None:
-    """At 1280 pixels Small keeps the hundred's nineteen to a line, drawn smaller and
-    centred in the block; Large sets thirteen to a line, its tiles larger, so rows 8 to
-    10 wrap by the one rule, and all 324 twenty-three. Back at Medium every case stands
-    where the triangle had it before any size was chosen."""
+def test_the_triangle_matches_grid_sizes_and_wraps_its_long_rows(seen: Readings) -> None:
+    """At each size Triangle uses Grid's readable width and fits the same number of
+    tiles. Expanding preserves that width; returning to Medium restores its layout."""
     small, medium, large = seen["triangle, small"], seen["triangle"], seen["triangle, large"]
-    assert (small["per_line"], medium["per_line"], large["per_line"]) == (19, 19, 13)
+    assert (small["per_line"], medium["per_line"], large["per_line"]) == (15, 10, 7)
     assert _width(small) < _width(medium) < _width(large)
-    assert atlas.summary(small)["wrapped"] == []
-    assert atlas.summary(large)["wrapped"] == [8, 9, 10]
-    left = min(tile["left"] for tile in small["tiles"]) - small["cells"]["left"]
-    right = small["cells"]["right"] - max(tile["right"] for tile in small["tiles"])
-    assert left > 100
-    assert abs(left - right) <= 1, (left, right)
-    assert small["search"] == "?size=small&atlas=triangle"
-    assert large["search"] == "?size=large&atlas=triangle"
+    for triangle, grid in ((small, seen["grid, small"]), (large, seen["grid, large"])):
+        assert _drawing_width(triangle) == pytest.approx(_drawing_width(grid), abs=0.5)
+    assert atlas.summary(small)["wrapped"] == [9, 10]
+    assert atlas.summary(large)["wrapped"] == [5, 6, 7, 8, 9, 10]
+    assert small["search"] == "?size=small"
+    assert large["search"] == "?size=large"
     every = seen["triangle, large, every case"]
-    assert (every["per_line"], len(every["tiles"])) == (23, 324)
+    assert (every["per_line"], len(every["tiles"])) == (7, 324)
+    assert _width(every) == pytest.approx(_width(large), abs=0.5)
     back = seen["triangle, medium, every case"]
-    assert (back["size"], back["search"], back["per_line"]) == ("medium", "?atlas=triangle", 35)
+    assert (back["size"], back["search"], back["per_line"]) == ("medium", "", 10)
     assert _same_places(back, seen["triangle, every case"])
 
 
@@ -776,11 +792,11 @@ def test_the_arrow_keys_move_between_the_size_tabs_and_select_the_one_focused(
 
 def test_a_linked_size_is_that_size_before_a_tile_is_drawn(seen: Readings) -> None:
     """Opened on an address that names the triangle at Large, the block is at Large, its
-    tiles arranged five to a line on a phone, at the moment they are first put in the
+    tiles arranged three to a line on a phone, at the moment they are first put in the
     page; the phone's layout is larger than at Medium and runs past nothing, with the size
     tabs beside the view tabs or under them."""
     assert seen["phone, large, first placed"] == [
-        {"view": "triangle", "size": "large", "per_line": "5", "tiles": 100, "moving": 0}
+        {"view": "triangle", "size": "large", "per_line": "3", "tiles": 100, "moving": 0}
     ]
     phone = seen["phone, large"]
     assert phone["overflow"] == 0
@@ -822,20 +838,30 @@ def test_a_tile_carries_the_star_of_a_new_result_and_the_badge_of_its_regularize
         assert shown & regularized == regularized
 
 
-@pytest.mark.parametrize(("size", "columns"), [("medium", 8), ("large", 5)])
-def test_direct_mobile_triangle_queries_fit_before_atlas_programs_run(
-    seen: Readings, size: str, columns: int
+@pytest.mark.parametrize(
+    ("view", "size", "columns"),
+    [
+        ("triangle", "medium", 4),
+        ("triangle", "large", 3),
+        ("grid", "medium", 4),
+        ("grid", "large", 3),
+    ],
+)
+def test_direct_mobile_queries_fit_before_atlas_programs_run(
+    seen: Readings, view: str, size: str, columns: int
 ) -> None:
     """Responsive container geometry works without initialization or a resize event."""
-    report = seen[f"initial CSS, {size}"]
+    report = seen[f"initial CSS, {view}, {size}"]
     assert report is not None
     assert all(report["supported"].values())
-    assert (report["view"], report["size"], report["columns"]) == ("triangle", size, columns)
+    assert (report["view"], report["size"], report["columns"]) == (view, size, columns)
     assert report["overflow"] == 0
     assert [tile["n"] for tile in report["tiles"]] == list(range(1, 101))
     for tile in report["tiles"]:
         assert tile["left"] >= -0.5, tile["n"]
         assert tile["right"] <= report["width"] + 0.5, tile["n"]
-    for tile in report["tiles"]:
-        if int(tile["n"] ** 0.5) ** 2 == tile["n"]:
-            assert tile["right"] == pytest.approx(report["width"], abs=0.5)
+    if view == "triangle":
+        tops = {tile["top"] for tile in report["tiles"]}
+        for top in tops:
+            line = [tile for tile in report["tiles"] if tile["top"] == top]
+            assert min(tile["left"] for tile in line) == pytest.approx(0, abs=0.5)

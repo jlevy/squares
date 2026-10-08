@@ -2500,9 +2500,12 @@ def arrow_icon(direction: str = "right") -> str:
 
 
 #: The atlas's two views, in tab order: the key the block's `data-atlas-view` and the
-#: address's `?atlas=` take, and the tab's label. The first is the default and the one
-#: the page is rendered in; `overview/atlas-view.js` lays the other out.
+#: address's `?atlas=` take, and the tab's label. The default is independent of tab
+#: order; `overview/atlas-view.js` selects the view the address asks for.
 ATLAS_VIEWS: tuple[tuple[str, str], ...] = (("grid", "Grid"), ("triangle", "Triangle"))
+
+#: The view a plain address opens, also rendered in the first response.
+ATLAS_VIEW = "triangle"
 
 #: The atlas's three sizes of tile, in tab order: the key the block's `data-atlas-size`
 #: and the address's `?size=` take, and the tab's label. Medium is the size the atlas had
@@ -2645,13 +2648,13 @@ def atlas_view_tabs() -> str:
     section tabs' strip (`.site-tabs`), but a tablist of two buttons that rearrange the
     one set of tiles in place, where the Visualize section's are links to two pages.
 
-    The first view is selected and is the only tab in the page's tab order; the arrow
+    Triangle is selected and is the only tab in the page's tab order; the arrow
     keys move between the two (`overview/atlas-view.js`). The strip is present in the
     first response.
     """
     return _atlas_tablist(
         ATLAS_VIEWS,
-        default=ATLAS_VIEWS[0][0],
+        default=ATLAS_VIEW,
         ids="atlas-view",
         data="data-atlas-tab",
         classes="site-atlas-views",
@@ -2711,12 +2714,12 @@ def atlas_grid() -> str:
     own page does: the visual summary, the drawing large and the bounds' number line,
     then the record's further data (`render_case_pages`, think-t21m).
 
-    The block is rendered in the grid view (`data-atlas-view`), under tabs that switch
-    it to the triangle (`atlas_view_tabs`). Both views are one set of tiles: the triangle
+    The block is rendered in the triangle view (`data-atlas-view`), under tabs that
+    also offer the grid (`atlas_view_tabs`). Both views are one set of tiles: the triangle
     uses positions supplied by the static markup and stylesheet, so a tile's markup is
     the same in both.
     A perfect square's tile is marked `data-atlas-square`: it ends its row of the
-    triangle, on the right edge, and the triangle numbers it in the text's colour. The
+    triangle, and the triangle numbers it in the text's colour. The
     block is rendered at the medium size (`data-atlas-size`), under tabs beside the view
     tabs that make every tile smaller or larger (`atlas_size_tabs`), in either view.
 
@@ -2765,7 +2768,7 @@ def atlas_grid() -> str:
     name_more = f"Show more: all {len(cases)} cases"
     name_less = f"Show less: the first {ATLAS_FIRST}"
     return (
-        f'<div class="site-wide site-atlas-grid" data-atlas-view="{ATLAS_VIEWS[0][0]}" '
+        f'<div class="site-wide site-atlas-grid" data-atlas-view="{ATLAS_VIEW}" '
         f'data-atlas-size="{ATLAS_SIZE}" data-atlas-grid>'
         '<div class="site-atlas-controls" data-atlas-controls>'
         f"{atlas_view_tabs()}{atlas_size_tabs()}"

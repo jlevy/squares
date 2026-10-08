@@ -242,16 +242,19 @@ Each file belongs to exactly one shard and each runner imports only its own file
 The shard jobs retain full Git history for history-reading tests, but none installs Node
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
-pinned Node toolchain, and so does `site table layout in Chromium`, the two test files
-that pin the tables’ pixels, on the runner that installs the pinned Chromium.
-They launch it with `--font-render-hinting=none`: the headless shell hints text at
-`HINTING_FULL` by default, which on Linux rounds every glyph’s advance to a whole pixel,
-and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Where no
-Chromium launches they fail rather than skip, because a skip on that runner is a hole in
-the surface. Each shard writes a per-file cost report beside its JUnit and timing
-artifacts; the recorder accepts complete coherent cohorts and rejects failed, partial,
-duplicated, coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at
-one shard count may be packed into another, which is how the lane is repartitioned.
+pinned Node toolchain.
+The same runner installs the pinned Chromium and runs `site table layout in Chromium`:
+nine test files cover table and atlas layout, readable drawing sizes, and browser
+interactions.
+The browser tests launch it with `--font-render-hinting=none`: the headless
+shell hints text at `HINTING_FULL` by default, which on Linux rounds every glyph’s
+advance to a whole pixel, and the pins were read on macOS, where nothing is hinted
+([D-513](defects.md)). Where no Chromium launches they fail rather than skip, because a
+skip on that runner is a hole in the surface.
+Each shard writes a per-file cost report beside its JUnit and timing artifacts; the
+recorder accepts complete coherent cohorts and rejects failed, partial, duplicated,
+coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at one shard
+count may be packed into another, which is how the lane is repartitioned.
 The current declared ceilings are 143 seconds for shards A and D and 168 seconds for B
 and C. They rose from 131 and 154 seconds on 2026-10-05, with `frontend` (150 to 165
 seconds) and `checks` (140 to 150 seconds), by the owner’s decision under `think-p684`,

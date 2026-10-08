@@ -78,8 +78,8 @@ interface AtlasMove {
 interface SiteAtlasViewApi {
   row(n: number): number;
   widest(last: number): number;
-  perLine(width: number, least: number, most: number): number;
-  perLineAt(width: number, least: number, largest: number, most: number, scale: number): number;
+  perLine(width: number, least: number, most: number, gap?: number): number;
+  perLineAt(width: number, least: number, most: number, scale: number, gap?: number): number;
   place(n: number, per: number): AtlasTrianglePlace;
   viewOf(search: string): AtlasView;
   searchFor(search: string, view: AtlasView): string;
