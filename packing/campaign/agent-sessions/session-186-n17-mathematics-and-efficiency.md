@@ -268,7 +268,7 @@ session:
     objective: 'Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate
       scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator.
       Preparesealedfullcheckpoint ahead04:34:50launch; researchremainsglobalpriority.'
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Four-window completeMISS andsource-publishedmergeconflicts select bounded performance/intake/CI
       consolidation beside deepermathematics.
@@ -283,12 +283,51 @@ session:
       alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
     fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
       mathematical lane moving beside mechanical blockers.
+    outcome: '309 complete metadata relevance in3.004s: C1 14/104, C2 13/84, union21/148, bothzero95tail;
+      fresh/source custody match. c804 merged currentmain7a8 withfour reviewed conflicts; d91 seals308
+      actual and309 source. Header-only20controls peerPASS, Astra requests convex-edge hardening before
+      actualheader. CurrentCI projection repair remains bounded and parallel.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/mechanical-summary.json
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
+    stop_reason: Actual boundary 2026-10-08T03:59:49Z; nominal03:58:21 passed during compact result/custody
+      review.
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-451
+    bead: think-98mg
+    objective: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Positive ordinary metadata relevance and zero95-tail coverage select bounded external
+      intake beside deeper joint-constraint research.
+    budget_minutes: 30
+    started_at: '2026-10-08T03:59:49Z'
+    deadline_at: '2026-10-08T04:29:49Z'
+    expected_output: Actual hardened headers and explicit FULL replay disposition; precise next95-tail
+      discriminator; published currentmain consolidation and CI evidence.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: 'Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate
-      scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator.
-      Preparesealedfullcheckpoint ahead04:34:50launch; researchremainsglobalpriority.'
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
   primary_bead: think-2mzl
   status: in_progress
   budget:
@@ -307,9 +346,10 @@ session:
   progress:
     metric: Scoped necessary restrictions and global normalization obligations toward n17 optimality
     before: Accepted point-only collective restriction; wider guard and global contact budget unverified.
-    after: 308 complete95survivor/216class methodMISS89.487s.307finiteguardedclauses accepted10.258s withhistoricalsignnotationdeviation;306120sINCOMPLETE.
-      c285consolidation pushed/PR404and405progresspublicreadverified. Newmain7a8 introduces4mergeconflicts,
-      delegatedisolatedrecoveryrepair; mathcontinuesbesideCI. Globalbounds/census unchanged.
+    after: '309 complete metadata relevance in3.004s: C1 14/104, C2 13/84, union21/148, bothzero95tail;
+      fresh/source custody match. c804 merged currentmain7a8 withfour reviewed conflicts; d91 seals308
+      actual and309 source. Header-only20controls peerPASS, Astra requests convex-edge hardening before
+      actualheader. CurrentCI projection repair remains bounded and parallel. Global bounds/census unchanged.'
   delegations:
   - task: Astra fresh mathematical W3 and deep strategy
     operator: /root/astra_strategy; GPT-6 Astra xhigh
@@ -1209,20 +1249,28 @@ session:
     - native release upload
   - task: Mathematical review and deeperglobalconstraint selection
     operator: /root/astra_strategy; GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: '309 complete metadata relevance in3.004s: C1 14/104, C2 13/84, union21/148, bothzero95tail;
+      fresh/source custody match. c804 merged currentmain7a8 withfour reviewed conflicts; d91 seals308
+      actual and309 source. Header-only20controls peerPASS, Astra requests convex-edge hardening before
+      actualheader. CurrentCI projection repair remains bounded and parallel.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/mechanical-summary.json
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
     files:
     - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
-    checks: []
+    checks:
+    - Complete309 source/fresh mechanical custody; no ordinary admission. Current full certification remains
+      open.
     uncertainty: Externalcandidate package scope/FULLreplay incomplete; globalhandlemmas notindependentlyformalized;
       fullcurrentcertificationopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: 'Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate
-      scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator.
-      Preparesealedfullcheckpoint ahead04:34:50launch; researchremainsglobalpriority.'
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
     phase: 8
     budget_minutes: 30
     started_at: '2026-10-08T03:28:21Z'
@@ -1245,21 +1293,29 @@ session:
     - native release upload
   - task: Thinmetadata intake / explicitstartup bottleneck optimization
     operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: '309 complete metadata relevance in3.004s: C1 14/104, C2 13/84, union21/148, bothzero95tail;
+      fresh/source custody match. c804 merged currentmain7a8 withfour reviewed conflicts; d91 seals308
+      actual and309 source. Header-only20controls peerPASS, Astra requests convex-edge hardening before
+      actualheader. CurrentCI projection repair remains bounded and parallel.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/mechanical-summary.json
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
     files:
     - packing/devtools/inspect_n17_subpattern_relevance.py
     - packing/tests/test_inspect_n17_subpattern_relevance.py
-    checks: []
+    checks:
+    - Complete309 source/fresh mechanical custody; no ordinary admission. Current full certification remains
+      open.
     uncertainty: Externalcandidate package scope/FULLreplay incomplete; globalhandlemmas notindependentlyformalized;
       fullcurrentcertificationopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: 'Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate
-      scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator.
-      Preparesealedfullcheckpoint ahead04:34:50launch; researchremainsglobalpriority.'
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
     phase: 8
     budget_minutes: 30
     started_at: '2026-10-08T03:28:21Z'
@@ -1283,23 +1339,31 @@ session:
     - native release upload
   - task: IsolatedPR404conflictresolution / CImechanics
     operator: /root/n17_github_tracker; GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: '309 complete metadata relevance in3.004s: C1 14/104, C2 13/84, union21/148, bothzero95tail;
+      fresh/source custody match. c804 merged currentmain7a8 withfour reviewed conflicts; d91 seals308
+      actual and309 source. Header-only20controls peerPASS, Astra requests convex-edge hardening before
+      actualheader. CurrentCI projection repair remains bounded and parallel.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/mechanical-summary.json
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
     files:
     - README.md
     - SYNOPSIS.md
     - docs/project/document-map.yaml
     - packing/devtools/run_negative_controls.py
-    checks: []
+    checks:
+    - Complete309 source/fresh mechanical custody; no ordinary admission. Current full certification remains
+      open.
     uncertainty: Externalcandidate package scope/FULLreplay incomplete; globalhandlemmas notindependentlyformalized;
       fullcurrentcertificationopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: 'Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate
-      scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator.
-      Preparesealedfullcheckpoint ahead04:34:50launch; researchremainsglobalpriority.'
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
     phase: 8
     budget_minutes: 30
     started_at: '2026-10-08T03:28:21Z'
@@ -1317,6 +1381,125 @@ session:
     - SYNOPSIS.md
     - docs/project/document-map.yaml
     - packing/devtools/run_negative_controls.py
+    excluded_commands:
+    - primary git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Mathematical header/result review and deeper95-tail joint constraint strategy
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
+    checks: []
+    uncertainty: Header scope/FULL external proof remain unverified until actual checks; global stationarity
+      lemmas hand-derived and not independently formalized; currentfull certificationopen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
+    phase: 9
+    budget_minutes: 30
+    started_at: '2026-10-08T03:59:49Z'
+    deadline_at: '2026-10-08T04:29:49Z'
+    expected_output: Actual hardened headers and explicit FULL replay disposition; precise next95-tail
+      discriminator; published currentmain consolidation and CI evidence.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
+    excluded_commands:
+    - primary git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Hardened header preflight and bounded external FULL replay readiness
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/devtools/check_n17_bb_header.py
+    - packing/tests/test_check_n17_bb_header.py
+    checks: []
+    uncertainty: Header scope/FULL external proof remain unverified until actual checks; global stationarity
+      lemmas hand-derived and not independently formalized; currentfull certificationopen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
+    phase: 9
+    budget_minutes: 30
+    started_at: '2026-10-08T03:59:49Z'
+    deadline_at: '2026-10-08T04:29:49Z'
+    expected_output: Actual hardened headers and explicit FULL replay disposition; precise next95-tail
+      discriminator; published currentmain consolidation and CI evidence.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
+    write_scope:
+    - packing/devtools/check_n17_bb_header.py
+    - packing/tests/test_check_n17_bb_header.py
+    excluded_commands:
+    - primary git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: CI projection repair, current PR/issue consolidation and sealed checkpoint readiness
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
+    checks: []
+    uncertainty: Header scope/FULL external proof remain unverified until actual checks; global stationarity
+      lemmas hand-derived and not independently formalized; currentfull certificationopen.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+      with same-recovery normalCargo reuse.'
+    phase: 9
+    budget_minutes: 30
+    started_at: '2026-10-08T03:59:49Z'
+    deadline_at: '2026-10-08T04:29:49Z'
+    expected_output: Actual hardened headers and explicit FULL replay disposition; precise next95-tail
+      discriminator; published currentmain consolidation and CI evidence.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
+    write_scope:
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
     excluded_commands:
     - primary git commit
     - git push
@@ -1405,10 +1588,14 @@ session:
     actualmergeabilityCI failed4conflicts, so no newfullsuiteverdict. IsolatedSol resolutionauthorizedwithoutprimaryHEADchanges.
   - Half-hourpriorityreminder03:40Z reiteratedjoint actual-square proofprogress; currentC2bundle161assets/112191343compressedB
     inventoryonly. Independentmetadata16peerPASS19.95s; newheader-only readiness gate sourcework keepsFULLdefaultuntouched.
+  - 309 complete metadata target source d91:1.332s construction/1.202s fresh/3.004s outer; 12source observations
+    match. Candidate counts cannot alter ordinary admissions. Externalvolume03:57 has~3GiB; boundedpublishedinput
+    acquisition only, no large bootstrap or native export.
   stop_reason: null
-  next_action: 'Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate
-    scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator. Preparesealedfullcheckpoint
-    ahead04:34:50launch; researchremainsglobalpriority.'
+  next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
+    for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
+    currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
+    with same-recovery normalCargo reuse.'
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session186-checkpoint0148.yaml
 ---

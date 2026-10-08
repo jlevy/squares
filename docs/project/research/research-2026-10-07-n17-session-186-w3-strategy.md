@@ -20,6 +20,12 @@ Exp307 subsequently verified the fixed-core polynomial guard and its endpoint-fa
 disjointness, without new parameter loss or global capture.
 The independent-envelope architecture test exp306 stopped operationally before producing
 a certificate, so it has no mathematical disposition.
+Exp308 completed with all 95 assignments surviving the four-corner cardinality
+relaxation. Exp309 found potential C1/C2 certificate coverage of 21 current orbits in
+union, with no matches in the 95 distance-two orbits or the endpoint assignment.
+The current priority is an exact header gate and one bounded C2 FULL replay, whose
+potential payoff is thirteen ordinary orbits.
+No contributed certificate has yet been admitted by these metadata results.
 The original kickoff ranking below is retained as the decision record; later result
 sections record its updates.
 
@@ -841,6 +847,21 @@ Such a checked exclusion would reach the ordinary census directly.
 Metadata overlap alone, reported verifier success, and absence of an equal existing
 ledger mask do not establish that exclusion.
 
+Exp309 subsequently completed the metadata test with matching fresh output in 3.004
+supervised seconds. Across all 4,683 current orbits, C1 potentially covers 14 orbits and
+104 assignments; C2 covers 13 and 84. Their overlap is six orbits and 40 assignments, so
+the union is 21 orbits and 148 assignments.
+Neither matches a distance-two orbit or the known endpoint assignment.
+These are D4 subset matches after the inherited sixty-admission partition, not admitted
+exclusions. The primary receipts are under
+`packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/`.
+The selected priority is one bounded C2 FULL replay after a passing exact header gate.
+Its possible ordinary-census payoff is more concrete than an unimplemented pair-pattern
+search, but it does not reach the 95 critical orbits or establish endpoint capture.
+The forty-minute replay allocation is a ceiling; the contributor’s reported 2,220
+seconds does not predict this host’s runtime.
+A header refusal stops this route before bulk proof work.
+
 ### A Planar Active-Basis Refinement of Normalization
 
 The following is a further sole-Astra hand derivation, self-audited but not
@@ -935,9 +956,12 @@ Perform this normalization before assigning occupancy cells or imposing an endpo
 guard.
 
 At that representative, choose a containing SAT branch: one signed owner axis for each
-unordered pair. Write $R_i=R(\theta_i)$, let $n_i$ be the chosen signed owner axis, and
-let $v$ run over the other square’s four reference vertices $(\pm1/2,\pm1/2)$. The
-branch’s separation inequalities are the smooth slacks
+unordered pair.
+Choose strictly positive separation slack for every closed-disjoint pair,
+so active pair rows belong only to touching pairs.
+Write $R_i=R(\theta_i)$, let $n_i$ be the chosen signed owner axis, and let $v$ run over
+the other square’s four reference vertices $(\pm1/2,\pm1/2)$. The branch’s separation
+inequalities are the smooth slacks
 
 $$
 g_{ijv}=n_i\cdot(c_j-c_i+R_jv)-\frac12\ge0.
@@ -986,6 +1010,31 @@ multipliers.
 Multiple retained rows may belong to one square pair; this is not a count of
 distinct contacts.
 
+The multiplier domain is bounded without assuming a bound on individual contact forces.
+Summing the centre equations gives equal left/right wall-weight sums and equal
+bottom/top sums.
+Therefore the total wall weight is $W=2$. Let $P$ be the total weight on
+pair-corner rows. Taking the stationarity identity’s inner product with the scaling
+direction gives
+
+$$
+L_*=\sum_{\text{wall rows}}\lambda_r h_r
+ +\sum_{\text{pair rows}}\lambda_r\left(\frac12+h_r\right).
+$$
+
+Here the relevant unit-square half-extents satisfy $1/2\le h_r<3/4$. Consequently
+
+$$
+1+P\le L_*\le\frac32+\frac54P,
+\qquad
+\frac{4L_*-6}{5}\le P\le L_*-1,
+\qquad W+P\le L_*+1<U+1<6.
+$$
+
+Thus every multiplier lies in the fixed closed outer interval $[0,6]$. This is a
+necessary bound for the selected stationary representative, not a positivity assertion
+for each contact.
+
 The quantifier is branch-specific: every containing branch has some such multipliers,
 which may differ between branches.
 Zero multipliers are permitted.
@@ -1000,7 +1049,26 @@ promoted to a conic or angular-stationarity claim.
 
 A future exact consumer would need a complete branch and orientation cover, the actual
 corner-slack gradients, nonnegative multipliers and complementarity with the active
-rows. Excluding that necessary system would exclude normalized counterexamples.
+rows. One algebraic representation introduces $(a_i,b_i)=(\cos\theta_i,\sin\theta_i)$
+with $a_i,b_i\ge0$ and $a_i^2+b_i^2=1$, covering orientations modulo quarter-turn.
+Containment slacks are linear and pair-corner slacks quadratic in centres and these
+orientation variables.
+Angular differentiation uses $D_i=-b_i\partial_{a_i}+a_i\partial_{b_i}$, preserving that
+degree. The equations $\lambda_r g_r=0$ and $\sum_r\lambda_r D_i g_r=0$ therefore have
+total degree at most three; centre balance has degree at most two.
+The endpoints of the quarter-turn chart do not add stationarity multipliers: rotation
+remains locally unrestricted modulo quarter-turn.
+Centres, $L$, orientation variables and multipliers all have explicit bounded outer
+domains. This describes a finite union of bounded cubic systems, but does not make its
+branch count or solution cost small.
+Excluding that necessary system below the proposed endpoint side would exclude
+normalized strict counterexamples.
+An obstruction restricted to one cell assignment excludes only stationary normalized
+representatives in that assignment.
+The initial packing may normalize into a different assignment, with different
+orientations. Such an obstruction cannot enter the ordinary exclusion census.
+A global conclusion requires a complete cover of possible normalized assignments and a
+strict-smaller-side terminal argument for every surviving part.
 The completed coarse-rank test did not check these orientation or right-hand-side
 conditions. Their added coupling is a reason to consider this architecture after the
 current certificate-intake work, not evidence that its search is small or that a global

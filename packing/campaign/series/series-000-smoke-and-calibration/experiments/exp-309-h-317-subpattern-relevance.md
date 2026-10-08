@@ -49,9 +49,15 @@ experiment:
       percompactmanifest,64MiBoutput; atmost16candidates/1Msubsetcomparisons; originalacceptedroster4683/95
       only.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance
-  results: []
+  results:
+  - shape: determination
+    question: Do either of the complete named-D4 metadata projections have positive potential coverage
+      in the current ordinary residue?
+    outcome: criterion_met
+    checked_by: Complete matching fresh payload; 12 imported source-byte observations; 74,928 exact comparisons.
+      Mathematical result review recorded separately.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Complete exact named-D4 subset projection for BOTH C1/C2 against accepted4683 currentorbits/36768states,
       with separate95distance-two accounting, orbit-size weighting and deduplicatedunion/overlap. Fresh
       completepayload/custody mustmatch. Primary anypositive candidate coverage in the currentordinary
@@ -60,10 +66,14 @@ experiment:
       or ledgeradmission. Explicitmissing scope joins remain unverified; missing B/frame headerfields
       can be discharged by a later proper standingverifier source convention. No SciPy/censusregeneration
       and no upstreamtimingforecast.
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T03:55:00Z'
-    host: macOS arm64
+    reason: 'Metadata relevance criterion met: C1 potentially matches 14 orbits/104 states and C2 13/84;
+      overlap6/40, union21/148. Both match zero of95 distance-two orbits/744 states. This selects a candidate
+      for further header/FULL verification only: no original-cell geometry, full tree, ordinary exclusion
+      or admission was proved. Fresh full payload and source custody match. The earlier60s SciPy import
+      interruption provides no completed timing control or speedup ratio.'
+  effort:
+    wall_seconds: 3.004369249974843
+    stopped_by: criterion
 ---
 # SciPy-free Joint-Certificate Candidate Relevance
 

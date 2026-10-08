@@ -1152,6 +1152,16 @@ wider centre cases; additional progress is measured from the union of surviving 
   discharged by a later proper standingverifier source convention.
   No SciPy/censusregeneration and no upstreamtimingforecast.
 
+- **H-318 — Original-Cell Joint-Certificate Header Preflight.** Primary BOTH exact
+  retained C1/C2 manifests complete HEADER_ONLY_PASS with complete original-cell
+  halfplane enclosure, all21 pair roster, complete shifted closed-angle chart and exact
+  input custody. This is header-only computational scope, NEVER FULL/tree/trig
+  verification or ordinary admission.
+  Prospectively C2 is evaluated first: its individual HEADER_ONLY_PASS selects ONE
+  bounded FULL C2 replay even if separate C1 subsequently refuses; C2 refusal/resource
+  exhaustion stops C2 acquisition/replay without unchanged retry.
+  No actual header has yet been evaluated.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

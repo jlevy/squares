@@ -199,7 +199,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
 | [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
-| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `efficiency-loop` (efficiency) | 8 | think-2mzl | Efficiency slice: resolvePR404againstnewmain and currentCI; thin reusable #358candidate scope join avoids observedSciPyimport startup; Astra evaluatesboundedpair-pattern discriminator. Preparesealedfullcheckpoint ahead04:34:50launch; researchremainsglobalpriority. |
+| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-2mzl | Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59 with same-recovery normalCargo reuse. |
 
 ### Workflow summary
 
@@ -212,7 +212,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 31 | 1 | 95 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 47 | 1 |
-| `research-loop` | 37 | 4 | 152 | 9 |
+| `research-loop` | 37 | 4 | 153 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -955,7 +955,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 238 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 239 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1211,7 +1211,8 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | H-314 | unresolved | proof | Independent Envelope Representation Discriminator |  | 1 |  | 2.0m wall |
 | H-315 | confirmed | proof | Same-Core Guarded Clause Transport |  | 1 |  | 10s wall |
 | H-316 | refuted | proof | Correlated Four-Corner n11 Cardinality |  | 1 |  | 1.5m wall |
-| H-317 | running | proof | SciPy-free Joint-Certificate Candidate Relevance |  | 1 |  |  |
+| H-317 | confirmed | proof | SciPy-free Joint-Certificate Candidate Relevance |  | 1 |  | 3s wall |
+| H-318 | running | proof | Original-Cell Joint-Certificate Header Preflight |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1383,7 +1384,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (88)
+### accepted (89)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1475,6 +1476,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-299 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes in Session186. | H-307 | Construction and fresh verification agree on SAME25 regional restriction under uniformly strict fixedQ0; soleAstra hand dependency theorem, exact finite premises and scope are explicit. No unconditional parent, guard contradiction, census/global theorem. |
 | exp-302 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes inSession186; think-lyh9. | H-310 | Both closed cases remain open. After union across cases, owner6 (label3) is restricted from [0,1] to [1/16,19/32], additional half-angle parameter loss15/32. Owner18 retains prior11/32 loss. This is a necessary implication throughout the wider h1/512 regional guard; no guard contradiction, ordinary admission, census change or global optimality proof. |
 | exp-307 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-315 | The frozen source/documented nonnegative-slack test passes:16 degree-three joint inequalities and64 exact corner/univariate minima retain the old h1/512 box, with positive-area SAME Q0 and both axis spans>1 proving disjointness from the inherited axis-aligned endpoint family. Accepted302 foreign restrictions transport under the explicitly source-audited SAME-Q0 hand implication. No added parameter loss, guard-volume/widening, complement exclusion, global capture, ordinary admission or independently formalized transport follows. The historical prospective shorthand says quadratic minima<=0. That sign direction is a documentation error: the pretarget frozen source and hand contract use MIN of nonnegative clearance slack>=0. Equivalently MAX of its negative<=0, not MIN of the negative<=0. The historical criterion text is preserved. Acceptance here is against that already-frozen source/contract, not the incorrect literal shorthand; no source, threshold or outcome was retuned and no target rerun occurred. |
+| exp-309 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-317 | Metadata relevance criterion met: C1 potentially matches 14 orbits/104 states and C2 13/84; overlap6/40, union21/148. Both match zero of95 distance-two orbits/744 states. This selects a candidate for further header/FULL verification only: no original-cell geometry, full tree, ordinary exclusion or admission was proved. Fresh full payload and source custody match. The earlier60s SciPy import interruption provides no completed timing control or speedup ratio. |
 
 ### baseline (12)
 
@@ -1497,7 +1499,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-309 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-317 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
+| exp-310 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-318 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1548,7 +1550,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Effort
 
-238 rounds, 2512.1 agent-minutes, 5819.2 wall-minutes.
+239 rounds, 2512.1 agent-minutes, 5819.2 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

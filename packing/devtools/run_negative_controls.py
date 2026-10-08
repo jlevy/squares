@@ -194,6 +194,14 @@ PRUNE = frozenset(
         # sibling metadata; exact inline/frontier declarations still copy back.
         SESSION184_RESULTS / "exp-307-owned-core-guarded-clause/certificate.json",
         SESSION184_RESULTS / "exp-307-owned-core-guarded-clause/replay.json",
+        # Exp308's completed classification outputs have no registered worker
+        # consumer. Keep primary bytes and declared dependency copy-back intact.
+        SESSION184_RESULTS / "exp-308-n11-corner-cardinality/certificate.json",
+        SESSION184_RESULTS / "exp-308-n11-corner-cardinality/replay.json",
+        # The historical contact-chart report is an output, not a worker command
+        # input. Its checker reconstructs from the original upper-packing source;
+        # primary evidence and exact declared-dependency copy-back remain intact.
+        SESSION184_RESULTS / "exp-236-n17-contact-chart/run-001/result.json",
         SESSION184_RESULTS / "exp-304-n11-envelope-windows/certificate.json",
         SESSION184_RESULTS / "exp-304-n11-envelope-windows/replay.json",
         # Exp303's complete rank classification is retained as primary evidence;

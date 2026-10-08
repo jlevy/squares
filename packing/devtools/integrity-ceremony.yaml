@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_bb_header.py
+    kind: generated-artifact
+    boundary: The retained compact BB manifest is bound to its stated compressed bytes and canonical object identity before standing header checks; no source or commit digest controls acceptance.
   - path: packing/devtools/inspect_n17_subpattern_relevance.py
     kind: generated-artifact
     boundary: Generated accepted residue descriptor and compact candidate manifest bytes bind the metadata-only named D4 projection before and after reconstruction; no source or commit checksum decides acceptance.

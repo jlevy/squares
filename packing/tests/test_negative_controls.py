@@ -1169,15 +1169,20 @@ def test_session186_historical_prune_has_no_registered_control_consumer(name: st
 
 
 @pytest.mark.parametrize(
-    "result_root",
+    ("result_root", "name"),
     [
-        "exp-297-regional-row-coverage",
-        "exp-300-one-round-direct-regional-propagation",
-        "exp-301-one-round-fixed-core-regional-propagation",
-        "exp-307-owned-core-guarded-clause",
-    ],
+        (root, name)
+        for root in (
+            "exp-297-regional-row-coverage",
+            "exp-300-one-round-direct-regional-propagation",
+            "exp-301-one-round-fixed-core-regional-propagation",
+            "exp-307-owned-core-guarded-clause",
+            "exp-308-n11-corner-cardinality",
+        )
+        for name in ("certificate.json", "replay.json")
+    ]
+    + [("exp-236-n17-contact-chart/run-001", "result.json")],
 )
-@pytest.mark.parametrize("name", ["certificate.json", "replay.json"])
 def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
     result_root: str, name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
