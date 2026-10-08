@@ -1334,6 +1334,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_translation_escape_screen.py": {
             "test_squish_n108_retains_its_replayed_tolerance_instability",
         },
+        # Hosted run37743601485/job113199788788, 2026-10-08: 25.04s for the
+        # actual complete clone, all three #399 houses/native custody and two private
+        # producer/native refusal transactions; 45/30/45s child deadlines unchanged.
+        "test_evand_arrangement_adoption.py": {
+            "test_production_clone_copies_every_scientific_input_and_admits_exact_links",
+        },
         # Hosted run37739373988/job113186283659: actual complete clone, independent
         # custody bytes and subprocess admission; no clone or assertion is removed.
         "test_refinement_custody.py": {

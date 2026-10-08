@@ -232,6 +232,7 @@ def test_snapshot_deduplicates_only_identical_declared_paths(
     assert controls.snapshot_copy_targets() == (first, alias, rescued, tmp_path / "new")
 
 
+@pytest.mark.slow
 def test_production_clone_copies_every_scientific_input_and_admits_exact_links(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
