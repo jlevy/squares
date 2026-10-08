@@ -3,10 +3,10 @@ type: is
 id: is-01m41csdc2gp36ry5p6n7c2x2y
 title: "Follow up on every result-report issue: acknowledge now, final reply from main after the stack lands, close the settled ones"
 kind: epic
-status: open
+status: in_progress
 priority: 1
-version: 29
-delegate: claude-code@vm
+version: 30
+delegate: codex@spud10
 labels:
   - issues
   - result-import
@@ -39,7 +39,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-03T17:25:32.674Z
-updated_at: 2026-10-05T07:47:06.966Z
+updated_at: 2026-10-08T01:37:25.051Z
 started_at: 2026-10-05T03:21:49.943Z
 ---
 Owner instruction 2026-10-03 ~18:00 UTC: 'follow up on all issues'. Acknowledge the issues with no reply yet (#316, #309, #308, #296, #295, #281, #280) without provisional T-ids, linking the PRs. think-yl2j landed the stack on 2026-10-03; from then on, post one final reply per issue from main with check_requests --draft N, and close the issues check_requests reports closeable. Per-issue answer beads are children.
