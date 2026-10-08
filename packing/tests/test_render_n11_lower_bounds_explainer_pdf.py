@@ -1148,3 +1148,41 @@ def test_a_relative_link_in_the_pdf_resolves_against_the_pages_own_address() -> 
 @pytest.mark.parametrize("overflow", [False, True])
 def test_math_snapshot_tracks_visible_text_without_hiding_omissions(*, overflow: bool) -> None:
     _run_node("math-snapshot.mjs", *(["overflow"] if overflow else []))
+
+
+@pytest.mark.parametrize("mode", ["--update", "--check-artifact"])
+def test_site_override_scopes_paths_and_preserves_source_receipts(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, mode: str
+) -> None:
+    root = tmp_path / "external-preview"
+    page = root / pdf.paper_path(pdf.N11_LOWER_BOUNDS_EXPLAINER)
+    page.parent.mkdir(parents=True)
+    page.write_bytes(b"<html>external preview source</html>")
+    output = page.with_suffix(".pdf")
+    original = pdf.PAGE, pdf.OUTPUT
+    raw = _HEADER + _pages(pdf.EXPECTED_PAGE_COUNT)
+    monkeypatch.setattr(pdf, "render_pdf_bytes", lambda: raw)
+    monkeypatch.setattr(pdf, "font_findings", lambda _: [])
+    if mode == "--check-artifact":
+        output.write_bytes(pdf._with_receipt(raw, page.read_bytes()))
+    assert pdf.main([mode, "--site", str(root)]) == 0
+    assert output.read_bytes() == pdf._with_receipt(raw, page.read_bytes())
+    assert original == (pdf.PAGE, pdf.OUTPUT)
+
+
+def test_missing_external_site_reports_the_selected_path_and_restores_defaults(
+    tmp_path: Path,
+) -> None:
+    original = pdf.PAGE, pdf.OUTPUT
+    root = tmp_path / "missing-preview"
+    with pytest.raises(SystemExit, match=r"missing-preview/papers/.*is missing; render"):
+        pdf.main(["--update", "--site", str(root)])
+    assert original == (pdf.PAGE, pdf.OUTPUT)
+
+
+def test_site_override_refuses_a_file(tmp_path: Path) -> None:
+    root = tmp_path / "not-a-directory"
+    root.write_text("keep")
+    with pytest.raises(SystemExit, match="not a site directory"):
+        pdf.main(["--update", "--site", str(root)])
+    assert root.read_text() == "keep"

@@ -10,6 +10,8 @@ const sans = {
 const dormant = { dataset: { squaresMathContexts: "system-sans" }, parentElement: null };
 /** @param {string} text */
 const output = (text) => ({
+  textContent: text,
+  outerHTML: `<output>${text}</output>`,
   /** @param {string} selector */
   querySelectorAll: (selector) =>
     selector === ".katex"
@@ -40,7 +42,7 @@ const targets = [
 
 const math = /** @type {() => object} */ (probe("devtools/probes/math/library.js"))();
 const readouts =
-  /** @type {(input: { targets: typeof targets, math: object }) => { expected_source: string, actual_value: string, source: string, state_matches: boolean, sans: boolean, supported: boolean }[]} */ (
+  /** @type {(input: { targets: typeof targets, math: object }) => { expected_source: string, actual_value: string, source: string, state_matches: boolean, sans: boolean, supported: boolean, html: string, text: string }[]} */ (
     probe("devtools/probes/check_math_loading/readouts.js")
   )({ targets, math });
 const [angle, direction] = /** @type {[(typeof readouts)[number], (typeof readouts)[number]]} */ (
@@ -49,8 +51,12 @@ const [angle, direction] = /** @type {[(typeof readouts)[number], (typeof readou
 assert.equal(angle.expected_source, "41.200^{\\circ}");
 assert.equal(angle.actual_value, "196");
 assert.equal(angle.source, "19.600^{\\circ}");
+assert.equal(angle.text, "19.600^{\\circ}");
+assert.equal(angle.html, "<output>19.600^{\\circ}</output>");
 assert.equal(direction.expected_source, "k = 7");
 assert.equal(direction.actual_value, "123");
 assert.equal(direction.source, "k = 123");
+assert.equal(direction.text, "k = 123");
+assert.equal(direction.html, "<output>k = 123</output>");
 assert.equal(direction.state_matches, false);
 assert.ok(readouts.every((readout) => readout.sans && readout.supported));

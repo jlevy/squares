@@ -17,8 +17,8 @@ from pathlib import Path
 import pytest
 
 from devtools import check_published_site, render_overview
+from devtools.site_assets import read_inline_page
 from workbench_tools import build_site
-from workbench_tools.self_contained import assert_self_contained_html
 
 TEMPLATE = build_site.WORKBENCH_PACKAGE / "assets" / "template.html"
 
@@ -29,7 +29,7 @@ def fake_run(args: Sequence[str], **_: object) -> subprocess.CompletedProcess[st
     if "--out" in argv:
         out = Path(argv[argv.index("--out") + 1])
         (out / "workbench.html").write_text(
-            TEMPLATE.read_text(encoding="utf-8"), encoding="utf-8"
+            TEMPLATE.read_text(encoding="utf-8").replace("__DATA__", "{}"), encoding="utf-8"
         )
     return subprocess.CompletedProcess(argv, 0, "", "")
 
@@ -38,9 +38,10 @@ def fake_run(args: Sequence[str], **_: object) -> subprocess.CompletedProcess[st
 def page(tmp_path_factory: pytest.TempPathFactory) -> str:
     with pytest.MonkeyPatch.context() as patch:
         patch.setattr(build_site.subprocess, "run", fake_run)
-        return build_site.build(
-            tmp_path_factory.mktemp("workbench"), revision="0" * 40, dirty=False
-        )
+        patch.setattr(build_site, "published_script", lambda: "loader")
+        out = tmp_path_factory.mktemp("workbench")
+        build_site.build(out, revision="0" * 40, dirty=False)
+        return read_inline_page(out / "index.html")
 
 
 def test_the_page_carries_the_shared_nav_with_visualize_current(page: str) -> None:
@@ -71,7 +72,7 @@ def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: st
     assert template.count("<title>Square packing workbench</title>") == 1
     assert "<title>Square packing workbench</title>" not in page
     assert page.count("<title>") == 1
-    assert_self_contained_html(page)
+    assert 'data-src="data/corpus.' in page
     assert page.index(build_site.POLICY_META) < page.index("<title>")
     with pytest.raises(ValueError, match="the page has no title"):
         build_site.with_head("<html><head></head><body></body></html>")
@@ -145,4 +146,4 @@ def test_the_theme_is_applied_before_paint_and_the_gear_is_wired(page: str) -> N
 def test_the_bar_is_set_in_its_own_face_and_fetches_nothing(page: str) -> None:
     assert 'font-family: "Source Sans 3 Variable"' in page
     assert 'url("../fonts/' not in page
-    build_site.assert_self_contained_html(page)
+    assert 'data-src="data/corpus.' in page

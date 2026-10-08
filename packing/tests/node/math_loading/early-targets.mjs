@@ -16,7 +16,16 @@ const sliders = ["kslider-one", "phi-one", "kslider-two", "phi-two"].map((id) =>
   },
 }));
 const initial = sliders.map((slider) => slider.value);
+const control = {
+  timing: {
+    /** @type {number|null} */
+    earlyEventsStarted: null,
+    /** @type {number|null} */
+    earlyEventsCompleted: null,
+  },
+};
 Object.assign(globalThis, {
+  __mathLoadControl: control,
   document: { querySelectorAll: () => sliders },
   window: {
     dispatchEvent() {
@@ -30,6 +39,9 @@ Object.assign(globalThis, {
 const targets = /** @type {() => readonly { id: string, value: string }[]} */ (
   probe("devtools/probes/check_math_loading/early_events.js")
 )();
+assert.ok(typeof control.timing.earlyEventsStarted === "number");
+assert.ok(typeof control.timing.earlyEventsCompleted === "number");
+assert.ok(control.timing.earlyEventsCompleted >= control.timing.earlyEventsStarted);
 assert.equal(Object.isFrozen(targets), true);
 assert.equal(new Set(targets.map((target) => target.value)).size, sliders.length);
 for (const [i, target] of targets.entries()) {

@@ -24,6 +24,7 @@ one `assets/` without a conflict.
 
 from __future__ import annotations
 
+import base64
 import re
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass
@@ -33,6 +34,11 @@ from pathlib import Path, PurePosixPath
 from typing import Literal, NamedTuple
 
 from kpress.format.assets import AssetLoading, AssetRef, content_hash
+from kpress.output import write_bytes_atomic
+
+from sqpack.probes import applied, probe
+
+FONT_PRELOAD_PROGRAM = Path(__file__).resolve().parent / "probes/site_assets/preload_fonts.js"
 
 #: The directory under the site's root the shared assets are published in.
 ASSETS_DIR = "assets"
@@ -155,17 +161,31 @@ def inline_assets(page: str, read: Callable[[str], bytes]) -> str:
     from a built site (`inlined_from`)."""
     from devtools.render_n11_lower_bounds_explainer import inline_face  # noqa: PLC0415
 
+    for tag in _MARKED_STYLESHEET_TAG.finditer(page):
+        if _STYLESHEET_TAG.fullmatch(tag[0]) is None:
+            raise SystemExit(f"unsupported marked math stylesheet: {tag[0]}")
+
+    def checked_read(output: str) -> bytes:
+        if any(part in ("", ".", "..") for part in output.split("/")) or any(
+            character in output for character in "\\?#\x00"
+        ):
+            raise SystemExit(f"invalid shared asset path: {output!r}")
+        return read(output)
+
     def style(match: re.Match[str]) -> str:
-        css = read(match.group(1)).decode("utf-8")
+        css = checked_read(match.group("output")).decode("utf-8")
         css = _STYLESHEET_REFERENCE.sub(
-            lambda face: f'url("{inline_face(face.group(1), read(face.group(1)))}")', css
+            lambda face: f'url("{inline_face(face.group(1), checked_read(face.group(1)))}")',
+            css,
         )
-        return f"<style>{css}</style>"
+        marker = " data-site-math-styles" if match.group("marker") else ""
+        return f"<style{marker}>{css}</style>"
 
     def script(match: re.Match[str]) -> str:
-        return f"<script>{read(match.group(1)).decode('utf-8')}</script>"
+        return f"<script>{checked_read(match.group(1)).decode('utf-8')}</script>"
 
     page = _PRELOAD_TAG.sub("", page)
+    page = _FONT_PRELOAD_BOOTSTRAP_TAG.sub("", page)
     page = _STYLESHEET_TAG.sub(style, page)
     return _SCRIPT_TAG.sub(script, page)
 
@@ -179,32 +199,171 @@ def inlined_from(site: Path, page: str) -> str:
 
 
 def write_assets(site: Path, files: dict[str, bytes]) -> None:
-    """Write `files`, by path under `assets/`, into `site`'s `assets/`, and remove any
-    file already there that is not among them, so the directory holds what its pages
-    name and nothing a previous build left."""
+    """Publish a producer's assets without removing another producer's files.
+
+    Content-addressed paths are immutable. A different payload at an existing path
+    indicates corruption or a collision, and publication refuses it.
+    """
     root = site / ASSETS_DIR
-    for stale in sorted(path for path in root.rglob("*") if path.is_file()):
-        if stale.relative_to(root).as_posix() not in files:
-            stale.unlink()
     for output, data in files.items():
+        relative = PurePosixPath(output)
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError(f"invalid asset path: {output!r}")
         path = root / output
-        if not path.is_file() or path.read_bytes() != data:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(data)
+        if path.exists():
+            if not path.is_file() or path.read_bytes() != data:
+                raise ValueError(f"asset collision: {path}")
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        write_bytes_atomic(path, data)
 
 
-def stale_assets(site: Path, files: dict[str, bytes]) -> list[str]:
-    """Where `site`'s `assets/` differs from `files`: each file missing, different or
-    extra, by its path from the site's root."""
+def stale_assets(site: Path, files: dict[str, bytes], *, exact: bool = False) -> list[str]:
+    """Missing or changed producer assets; optionally include unclaimed files.
+
+    Shared publication combines several independent producers. Only a caller owning
+    the complete assembled manifest can request an exact directory comparison.
+    """
     root = site / ASSETS_DIR
     present = {path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()}
+    compared = present | set(files) if exact else set(files)
     return [
         f"{ASSETS_DIR}/{output}"
-        for output in sorted(present | set(files))
+        for output in sorted(compared)
         if output not in files
         or output not in present
         or (root / output).read_bytes() != files[output]
     ]
+
+
+_INLINE_STYLE = re.compile(
+    r"<style(?P<marker> data-site-math-styles)?>(?P<css>.*?)</style>", re.DOTALL
+)
+_MARKED_INLINE_STYLE = re.compile(
+    r"<style\b[^>]*\bdata-site-math-styles(?=\s|=|>)[^>]*>.*?</style>",
+    re.DOTALL,
+)
+_INLINE_SCRIPT = re.compile(r"<script>(.*?)</script>", re.DOTALL)
+_INLINE_FONT = re.compile(r"url\([\"']?data:font/woff2;base64,([A-Za-z0-9+/=]+)[\"']?\)")
+
+
+def link_inline_assets(
+    page: str, page_path: str, *, assets: SiteAssets | None = None
+) -> tuple[str, dict[str, bytes]]:
+    """Publish an already prepared inline page as linked, cacheable assets.
+
+    The bytes of CSS and scripts retain their order. Tiny head scripts stay inline
+    because they set preferences before first paint. JSON data blocks are untouched.
+    Fonts reuse the shared bundle's names wherever their bytes match.
+    """
+    for tag in _MARKED_INLINE_STYLE.finditer(page):
+        if _INLINE_STYLE.fullmatch(tag[0]) is None:
+            raise SystemExit(f"unsupported marked inline math stylesheet: {tag[0]}")
+    bundle = shared()
+    target = assets if assets is not None else bundle.assets
+    names = {
+        data: PurePosixPath(name).name.rsplit(".", 2)[0] + ".woff2"
+        for name, data in bundle.assets.files().items()
+        if name.endswith(".woff2")
+    }
+    inline_shared = {
+        bundle.assets.inlined(stylesheet_tag(ref, page_path)): ref
+        for ref in (bundle.kpress_css, bundle.katex_css, bundle.relation_css)
+    }
+    if target is bundle.assets:
+        # The explainer originally combines these two stylesheets in one element.
+        joined = (
+            "<style>"
+            + "".join(
+                text.removeprefix("<style>").removesuffix("</style>")
+                for text in list(inline_shared)[:2]
+            )
+            + "</style>"
+        )
+        page = page.replace(
+            joined,
+            stylesheet_tag(bundle.kpress_css, page_path)
+            + stylesheet_tag(bundle.katex_css, page_path),
+        )
+        for inline, ref in inline_shared.items():
+            page = page.replace(inline, stylesheet_tag(ref, page_path))
+
+    def font(match: re.Match[str]) -> str:
+        data = base64.b64decode(match.group(1), validate=True)
+        name = names.get(data, f"font-{content_hash(data)}.woff2")
+        return f'url("{target.face(name, data)}")'
+
+    def style(match: re.Match[str]) -> str:
+        css = _INLINE_FONT.sub(font, match.group("css"))
+        marker = bool(match.group("marker"))
+        name = "site-math.css" if marker else "page.css"
+        linked = stylesheet_tag(target.stylesheet(name, css), page_path)
+        return linked.replace("<link ", "<link data-site-math-styles ", 1) if marker else linked
+
+    page = _INLINE_STYLE.sub(style, page)
+    head_end = page.find("</head>")
+
+    def script(match: re.Match[str]) -> str:
+        text = match.group(1)
+        if match.start() < head_end and len(text.encode("utf-8")) <= 4096:
+            return match.group(0)
+        return script_tag(target.script("page.js", text), page_path)
+
+    page = _INLINE_SCRIPT.sub(script, page)
+    files = target.referenced([page])
+    preloads = {
+        reference[1]: tag
+        for tag in preload_tags(target, page_path).splitlines()
+        if (reference := _PAGE_REFERENCE.search(tag)) and reference[1] in files
+    }
+    if preloads and _STYLESHEET_TAG.search(page):
+        page = _PRELOAD_TAG.sub(
+            lambda match: (
+                ""
+                if any(name in preloads for name in _PAGE_REFERENCE.findall(match[0]))
+                else match[0]
+            ),
+            page,
+        )
+        page = _FONT_PRELOAD_BOOTSTRAP_TAG.sub("", page)
+        first_sheet = _STYLESHEET_TAG.search(page)
+        assert first_sheet is not None
+        offset = first_sheet.start()
+        page = (
+            page[:offset]
+            + "\n".join(preloads.values())
+            + "\n"
+            + font_preload_bootstrap_tag()
+            + "\n"
+            + page[offset:]
+        )
+    return page, files
+
+
+def read_inline_page(path: Path) -> str:
+    """Read a published or offline page, resolving linked assets from its own root."""
+    text = path.read_text(encoding="utf-8")
+    # The offline tool consumes the page without a base URL or network access.
+    # Stable publication favicons can therefore be replaced by their inline SVG.
+    from devtools.render_overview import favicon_html  # noqa: PLC0415
+
+    text, icons = re.subn(
+        r'<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*href="(?:\.\./)*(?:favicon\.svg|favicon-48\.png|apple-touch-icon\.png)"[^>]*>',
+        "",
+        text,
+    )
+    if icons and favicon_html(inline=True) not in text:
+        text = text.replace("</head>", favicon_html(inline=True) + "</head>", 1)
+    roots = {
+        (path.parent / match.group(1)).resolve()
+        for match in re.finditer(r'(?:href|src)="((?:\.\./)*assets)/[^"#?]+"', text)
+    }
+    if not roots:
+        return text
+    if len(roots) != 1:
+        raise ValueError(f"page references multiple asset roots: {path}")
+    root = roots.pop()
+    return inline_assets(text, lambda output: (root / output).read_bytes())
 
 
 #: A file of the bundle as a page names it, from any depth, and as a stylesheet in
@@ -213,9 +372,21 @@ _PAGE_REFERENCE = re.compile(rf'(?:href|src)="(?:\.\./)*{ASSETS_DIR}/([^"#?]+)"'
 _STYLESHEET_REFERENCE = re.compile(r'url\("\.\./(fonts/[^"]+)"\)')
 #: The three tags this module writes into a page, as `stylesheet_tag`, `script_tag` and
 #: `preload_tags` write them, each capturing the path under `assets/`.
-_STYLESHEET_TAG = re.compile(rf'<link rel="stylesheet" href="(?:\.\./)*{ASSETS_DIR}/([^"]+)">')
+_STYLESHEET_TAG = re.compile(
+    rf'<link(?P<marker> data-site-math-styles)? rel="stylesheet" '
+    rf'href="(?:\.\./)*{ASSETS_DIR}/(?P<output>[^"]+)">'
+)
+# Only the generated bare math marker is supported; malformed marked links fail
+# instead of silently leaving an external stylesheet in a self-contained export.
+_MARKED_STYLESHEET_TAG = re.compile(r"<link\b[^>]*\bdata-site-math-styles(?=\s|=|>)[^>]*>")
 _SCRIPT_TAG = re.compile(rf'<script src="(?:\.\./)*{ASSETS_DIR}/([^"]+)"></script>')
-_PRELOAD_TAG = re.compile(rf'<link rel="preload" href="(?:\.\./)*{ASSETS_DIR}/[^"]+"[^>]*>\n?')
+_PRELOAD_TAG = re.compile(
+    rf'<link (?:rel="preload"|data-site-font-preload) '
+    rf'href="(?:\.\./)*{ASSETS_DIR}/[^"]+"[^>]*>\n?'
+)
+_FONT_PRELOAD_BOOTSTRAP_TAG = re.compile(
+    r"<script data-site-font-preloads>.*?</script>\n?", re.DOTALL
+)
 
 
 def asset_href(ref: AssetRef, page: str) -> str:
@@ -237,16 +408,25 @@ def script_tag(ref: AssetRef, page: str) -> str:
 
 
 def preload_tags(assets: SiteAssets, page: str) -> str:
-    """A preload for each face in `PRELOADED_FACES` the bundle holds."""
+    """Inert font declarations, activated with the correct protocol's credentials
+    before stylesheets. With no JavaScript, the existing CSS loads its faces normally."""
     tags = []
     for name in PRELOADED_FACES:
         ref = assets.face_ref(name)
         if ref is not None:
             href = escape(asset_href(ref, page))
             tags.append(
-                f'<link rel="preload" href="{href}" as="font" type="font/woff2" crossorigin>'
+                f'<link data-site-font-preload href="{href}" as="font" type="font/woff2">'
             )
+    if tags:
+        tags.append(font_preload_bootstrap_tag())
     return "\n".join(tags)
+
+
+def font_preload_bootstrap_tag() -> str:
+    """The reviewed prepaint program; no active CORS hint precedes its decision."""
+    program = applied(probe(Path(__file__).with_name("probes"), "site_assets/preload_fonts"))
+    return f"<script data-site-font-preloads>{program}</script>"
 
 
 class SharedAssets(NamedTuple):

@@ -52,6 +52,7 @@ import numpy as np
 from PIL import Image
 from playwright.sync_api import Page, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.capture_video import (
     PAGE,
     FrameSample,
@@ -582,7 +583,7 @@ def beat_of_cut(
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        page.goto(page_path.resolve().as_uri())
+        open_page(page, page_path)
         page.wait_for_function(probe("benchmark/page-api-ready"))
         opened = apply(page, [["setMode", "animate"], ["state"]])
         apply(
