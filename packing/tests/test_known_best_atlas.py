@@ -1022,6 +1022,7 @@ def test_poster_math_variables_are_italic_and_degree_has_its_own_line() -> None:
     assert all(above + Decimal("17.1") <= below - 57 for above, below in pairwise(baselines))
     assert baselines[-1] + Decimal("17.1") <= 2020
     pdf = cairosvg.svg2pdf(bytestring=ET.tostring(root))
+    assert isinstance(pdf, bytes)
     fonts = re.findall(rb"/FontName\s*/([^\s/>]+)", pdf)
     assert any(b"italic" in font.lower() or b"oblique" in font.lower() for font in fonts)
     assert any(
