@@ -35,9 +35,14 @@ exact elimination, branch selection, and geometric feasibility link it to the pa
 
 The table includes integers and rational values as well as nonrational radical forms.
 An exact rational feasibility bound $p/q$ in lowest terms has degree one and primitive
-polynomial $qs-p=0$. This identifies the certified witness’s side; it does not determine
-the degree or value of the unknown optimum $s(n)$. “Claim” describes the geometric and
-global status recorded for that value.
+polynomial $qs-p=0$. Native witness sides and certified outward ceilings have distinct
+provenance.
+The verified-bound projection requires the reported decimal, verified decimal
+and exact fraction to agree exactly, together with matching source/count evidence and
+retained certificate/replay custody.
+At $n = 292$, the represented rational is an outward ceiling above the native witness
+side. Its identity does not determine an ideal stationary side or the unknown optimum
+$s(n)$. “Claim” describes the geometric and global status recorded for that value.
 
 {{EXACT_FORMS}}
 
