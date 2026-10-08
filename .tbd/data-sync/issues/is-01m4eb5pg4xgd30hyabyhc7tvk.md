@@ -5,7 +5,7 @@ title: "n17 supporting CI: admit measured reconciliation-module test cost"
 kind: bug
 status: in_progress
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m4e47f19w8w1d7tyka9raahk
 hold: null
 hold_until: null
 created_at: 2026-10-08T18:07:25.686Z
-updated_at: 2026-10-08T18:55:59.913Z
+updated_at: 2026-10-08T21:14:24.523Z
 started_at: 2026-10-08T18:07:44.585Z
 ---
 PR454 crossed the unchanged suite-record coverage ceiling. Retain the failed hosted cohort unchanged; use established admit-local only after successful unfiltered whole-module measurement and records validation. Do not invent weights, relax coverage, or alter research records.
@@ -23,3 +23,5 @@ PR454 crossed the unchanged suite-record coverage ceiling. Retain the failed hos
 ## Notes
 
 PR454 measuredtest-cost repair committed/pushed64a24101d423e5eafeab5c5b9e543430eb46cabf. Maintainedadmit-local accepted completeunfiltered5test/exit0 originalreport1140B, weight7.538testseconds;615historicalweights, hostedprovenance,capacities,prioradmissions unchanged. Pre-mutationrecords46PASS252.32/300s; wholemodule5PASS10.49s;23real-tree/admissioncontrolsPASS0.85s; twofileJSONpolicy+diffPASS. Unknown66/682;shardshares9.7,9.7,9.7,9.6%underunchanged10%. Failedhostedcohortpreserved/refusednotretyped. SourcewritefirstrefusedENOSPC, absentpartial; laterstoragecheckpointallowedtinyretention/admission. NewheadCIpending; no mathematicalrecord/admission/Tmovement. Parent404mainintegrationapprovalpending separately.
+
+2026-10-08 current source64a24101d423e5eafeab5c5b9e543430eb46cabf and measured cost admission remain published in PR454. Exact-base mergeability PASS; current-head ordinary Packing/Pages still absent at21:03UTC because GitHub did not generate merge ref after one19:10close/reopen. No repeated state cycling, changed base or unsupported old-head dispatch. Existing complete46records/5module/23admission receipts and9.7%unknown share retain their stated scope. Formal stack455 now includes childPR461, which obtains ordinary current-head CI on its own merge ref; that does NOT qualify parent454's head. Pending hosted parent qualification remains separate from snapshot-cap human hold.
