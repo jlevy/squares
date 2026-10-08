@@ -111,7 +111,7 @@ GENERATOR = "python -m devtools.build_exact_values"
 CONTRACT = "packing.squares:ExactValues/v1"
 SCHEMA = "exact-values.schema.yaml"
 
-#: Evan Daniel's exact-contact batch: one exact KKT point per count, solved at 80 digits
+#: Evan Daniel's exact-contact batch: numerical KKT points computed at 80 digits
 #: and printed to 39 significant digits, independent of every source this register reads.
 KKT_BATCH = (
     "resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/"
@@ -134,6 +134,11 @@ CERTIFIED_CEILING_SOURCES = {
     "[SQUISH update 2026-10-07]": "E-squish-update-2026-10-07-exact-replay",
     "[SQUISH second update 2026-10-07]": "E-squish-second-update-2026-10-07-exact-replay",
 }
+SVG_FACTS = "resources/web/kingbird-exact-side-facts-2026-10-07/facts"
+HISTORICAL_FACTS = (
+    "resources/web/kingbird-exact-side-facts-2026-10-07/facts/historical-polynomials.json"
+)
+SVG_RECEIPTS = "resources/web/known-best-packings/receipts/kingbird-2026-10-05-pictures.json"
 #: Significant digits of the root's decimal.
 DECIMAL_DIGITS = 40
 #: The decimal grid every root is refined onto: a power of ten finer than any value the
@@ -148,8 +153,7 @@ PRIME_BUDGET = 200
 #: Galois groups SymPy computes, and the register records, for these degrees only.
 GALOIS_DEGREES = range(2, 7)
 
-#: The route to an exact value, and the bead that owns it, for each numeric-only count
-#: with a lane of its own. Every other numeric-only count is the high-precision sweep's.
+#: Every current numeric-only count has a named lane and an owning bead.
 ROUTES: dict[int, tuple[str, str]] = {
     102: (
         "think-eu89",
@@ -164,47 +168,99 @@ ROUTES: dict[int, tuple[str, str]] = {
     29: (
         "think-je8y",
         (
-            "The defining six-equation contact system is retained (X-004); eliminating "
-            "it for an exact side is open."
+            "The defining six-equation contact system is retained (X-004); exact "
+            "elimination and real-branch certification remain open."
         ),
     ),
     55: (
-        "think-xy91",
+        "think-phh8",
         (
-            "Kingbird's square-55.svg credits an exact analytic solution to David "
-            "Ellsworth; only the poses were retained."
+            "Kingbird's square-55.svg retains seven exact contact/stationarity equations "
+            "and credits David Ellsworth. Eliminate them and certify the current real branch."
         ),
     ),
     71: (
-        "think-xy91",
+        "think-1blg",
         (
-            "Kingbird's square-71.svg credits an exact analytic solution to David "
-            "Ellsworth; only the poses were retained."
+            "Kingbird's square-71.svg retains six exact contact equations and credits "
+            "David Ellsworth. Eliminate them and certify the current real branch; the "
+            "two retained historical polynomials describe weaker packings."
         ),
     ),
 }
+#: Disjoint sweep and seed lanes from the continuation plan. Claimed outputs must be
+#: recovered and replayed before they can count as identifications.
+ROUTE_GROUPS = (
+    (
+        (102, 106, 152, 172, 177, 206, 268, 297, 301),
+        "think-ohhz",
+        (
+            "Earlier beads claim a polynomial identification, but its referenced output "
+            "is unavailable on this branch. Recover or reproduce it (think-s6np), then "
+            "check coefficients, irreducibility, root, and current contact branch."
+        ),
+    ),
+    (
+        (68, 103, 110, 131, 132, 156),
+        "think-056g",
+        (
+            "Recover the digest-pinned KKT input (think-s6np), re-solve at rising precision, "
+            "and run a bounded integer-relation search in the low-count sweep; "
+            "retain scoped negatives."
+        ),
+    ),
+    (
+        (181, 182, 210, 228, 240, 241),
+        "think-d2kj",
+        (
+            "Recover the digest-pinned KKT input (think-s6np), re-solve at rising precision, "
+            "and run a bounded integer-relation search in the middle-count sweep; "
+            "retain scoped negatives."
+        ),
+    ),
+    (
+        (259, 269, 270, 271, 273, 304, 305, 306, 307),
+        "think-gg4k",
+        (
+            "Recover the digest-pinned KKT input (think-s6np), re-solve at rising precision, "
+            "and run a bounded integer-relation search in the high-count sweep; "
+            "retain scoped negatives. "
+            "A historical source polynomial cannot replace the current side."
+        ),
+    ),
+)
+for _counts, _bead, _route in ROUTE_GROUPS:
+    for _n in _counts:
+        ROUTES[_n] = (_bead, _route)
+for _n, _bead in (
+    (105, "think-gl59"),
+    (211, "think-uc8i"),
+    (272, "think-olv8"),
+    (292, "think-w622"),
+):
+    ROUTES[_n] = (
+        _bead,
+        (
+            "Daniel's retained batch supplies no confirmed KKT local minimum for this "
+            "count. Establish the current witness's active contact system and a stable "
+            "high-precision KKT seed before attempting polynomial identification."
+        ),
+    )
 SWEEP_BEAD = "think-eu89"
-#: Recorded integer-relation searches that came back empty, with their scope.
+#: Recorded integer-relation searches that came back empty, with their exact scope.
 RELATION_NEGATIVES: dict[int, tuple[str, int, str]] = {
     29: (
         "think-je8y",
         20,
         (
-            "PSLQ on 1000 digits found no integer relation of degree 2 to 20 with "
-            "coefficients below 10^22 (session 042, X-004)."
+            "X-004 re-solved the system at 1200 digits and ran PSLQ at 700 digits for "
+            "degrees 2 through 20, tolerance 1e-675, maxcoeff 10^22, and maxsteps 50000; "
+            "no relation was found in that bounded search."
         ),
     ),
 }
-#: Degrees the catalogue prints with no polynomial text the repository retains.
-MISSING_POLYNOMIAL_TEXT: dict[int, tuple[str, str]] = {
-    83: (
-        "think-nymu",
-        (
-            "Kingbird prints degree 672, but the polynomial text is only in "
-            "square-83.svg, which is not retained (think-nymu, think-krbs)."
-        ),
-    ),
-}
+#: A future catalogue degree without retained coefficients gets an explicit route.
+MISSING_POLYNOMIAL_TEXT: dict[int, tuple[str, str]] = {}
 
 STATES = (
     "integer",
@@ -323,9 +379,9 @@ class Root:
 
     Either `exact` is the rational root itself (degree one), or the root lies strictly
     inside the open cell `(lo, hi)` of the decimal grid and is the only root in a larger
-    window the certificate proved. Comparisons refine by exact bisection when a point
-    falls inside the cell, which a point of the coarser grids the register compares with
-    never does.
+    window the certificate proved. For an interior comparison point, its polynomial
+    sign and the lower endpoint's sign decide which side of the unique root it lies on.
+    This remains exact even when the comparison has more decimal places than the cell.
     """
 
     coefficients: tuple[int, ...]
@@ -337,18 +393,14 @@ class Root:
         """-1, 0 or 1 as the root is below, equal to, or above `x`."""
         if self.exact is not None:
             return (self.exact > x) - (self.exact < x)
-        lo, hi = self.lo, self.hi
-        low_sign = _sign_at(self.coefficients, lo)
-        while lo < x < hi:
-            middle = (lo + hi) / 2
-            middle_sign = _sign_at(self.coefficients, middle)
-            if middle_sign == 0:
-                raise ExactValuesError("a rational root of an irreducible polynomial")
-            if middle_sign == low_sign:
-                lo = middle
-            else:
-                hi = middle
-        return 1 if x <= lo else -1
+        if x <= self.lo:
+            return 1
+        if x >= self.hi:
+            return -1
+        point_sign = _sign_at(self.coefficients, x)
+        if point_sign == 0:
+            raise ExactValuesError("a rational root of an irreducible polynomial")
+        return 1 if point_sign == _sign_at(self.coefficients, self.lo) else -1
 
 
 def _grid(value: Fraction) -> int:
@@ -538,7 +590,7 @@ def _divmod_mod(dividend: _Vector, divisor: _Vector, prime: int) -> tuple[_Vecto
     """Quotient and remainder over GF(prime), highest degree first.
 
     One vectorised row operation per quotient term. Every entry stays below `prime`
-    (at most 1223 for the first 200 primes), so no int64 product here can overflow.
+    and factor_degrees_mod checks the degree/prime product bound before calling it.
     """
     remainder = dividend.copy()
     degree = len(divisor) - 1
@@ -563,7 +615,8 @@ def _gcd_mod(left: _Vector, right: _Vector, prime: int) -> _Vector:
 
 
 def _mulmod(left: _Vector, right: _Vector, modulus: _Vector, prime: int) -> _Vector:
-    # A product of two reduced vectors sums at most 158 terms below 1223^2, inside int64.
+    # Both convolution and matrix products are bounded by degree * (prime - 1)^2;
+    # factor_degrees_mod refuses inputs outside int64 before any arithmetic runs.
     return _divmod_mod(np.convolve(left, right) % prime, modulus, prime)[1]
 
 
@@ -578,6 +631,8 @@ def factor_degrees_mod(coefficients: Sequence[int], prime: int) -> list[int] | N
     are `gcd(f, x^(p^i) - x)` once the lower degrees are divided out. NumPy carries the
     arithmetic, all of it exact in int64.
     """
+    if prime < 2 or (len(coefficients) - 1) * (prime - 1) ** 2 >= 2**63:
+        raise ExactValuesError("modular arithmetic would exceed the exact int64 bound")
     if coefficients[0] % prime == 0:
         return None
     modulus = np.array([c % prime for c in coefficients], dtype=np.int64)
@@ -811,26 +866,51 @@ def _catalogue_polynomial(entry: CatalogueEntry | None) -> tuple[int, ...] | Non
     return _normalized(entry.minimal_polynomial)
 
 
-def _superseded_note(reported: dict, entry: CatalogueEntry | None) -> dict | None:
+def _polynomial_record(coefficients: tuple[int, ...]) -> dict:
+    """The complete polynomial, in the register's machine and reader forms."""
+    return {
+        "coefficients": [str(c) for c in coefficients],
+        "text": format_polynomial(coefficients),
+        "latex": polynomial_latex(coefficients),
+        "height_digits": len(str(max(abs(c) for c in coefficients))),
+    }
+
+
+def _superseded_note(
+    n: int, reported: dict, entry: CatalogueEntry | None, budget: int
+) -> dict | None:
     """The catalogue's polynomial for a packing the record has since replaced, if any."""
     printed = _catalogue_polynomial(entry)
     if entry is None or printed is None:
         return None
     same_source = reported.get("source_key") == CATALOGUE_KEY
-    if same_source and str(reported["value"]) == entry.side_decimal:
+    current = reported.get("minimal_polynomial")
+    if same_source and (
+        str(reported["value"]) == entry.side_decimal
+        or (current is not None and _normalized(str(current)) == printed)
+    ):
         return None
     verb = (
         "beaten"
         if Decimal(str(reported["value"])) < Decimal(entry.side_decimal)
         else "replaced"
     )
-    return _note(
+    note = _note(
         "superseded-catalogue-polynomial",
         f"The catalogue's degree-{len(printed) - 1} polynomial is for its own packing of "
         f"side {entry.side_decimal}, since {verb} by the record's "
         f"({reported.get('source_key')}); it is not this side's minimal polynomial.",
         degree=len(printed) - 1,
     )
+    checks, _ = polynomial_checks(n, printed, entry.side_decimal, None, budget)
+    checks["catalogue"] = "matches"
+    checks["galois"] = _galois(printed)
+    note.update(
+        side=entry.side_decimal,
+        polynomial=_polynomial_record(printed),
+        checks=checks,
+    )
+    return note
 
 
 def _galois(coefficients: tuple[int, ...]) -> dict | None:
@@ -848,7 +928,7 @@ def _galois(coefficients: tuple[int, ...]) -> dict | None:
     }
 
 
-def _source_check(
+def source_check(
     n: int,
     reported: dict,
     coefficients: tuple[int, ...],
@@ -871,7 +951,6 @@ def _source_check(
         and printed is not None
         and entry is not None
         and reported.get("source_key") == CATALOGUE_KEY
-        and str(reported["value"]) == entry.side_decimal
     ):
         if printed != coefficients:
             raise ExactValuesError(
@@ -879,7 +958,52 @@ def _source_check(
                 f"line {entry.source_line}"
             )
         return "matches"
+    if source == CATALOGUE and reported.get("source_key") == CATALOGUE_KEY:
+        fact = retained_svg_fact(n)
+        if fact is not None:
+            printed = tuple(
+                int(c)
+                for c in next(root for root in fact["roots"] if root["assigned_to"] == "s")[
+                    "coefficients"
+                ]
+            )
+            if printed != coefficients:
+                raise ExactValuesError(f"n = {n}: the polynomial differs from the retained SVG")
+            return "matches-svg"
+        raise ExactValuesError(
+            f"n = {n}: no retained polynomial source for this catalogue claim"
+        )
     return "not-in-catalogue"
+
+
+@cache
+def retained_svg_fact(n: int) -> dict | None:
+    """Exact source identity from a retained extraction, bound to the acquisition pin.
+
+    The register replays its mathematics independently. A source's `verified` flag is
+    not a certificate, and prime patterns from the extraction are only replay hints.
+    """
+    path = ROOT / SVG_FACTS / f"n-{n:03d}.json"
+    if not path.exists():
+        return None
+    fact = json.loads(path.read_text(encoding="utf-8"))
+    roots = [root for root in fact["roots"] if root["assigned_to"] == "s"]
+    if not roots:
+        return None
+    receipts = json.loads((ROOT / SVG_RECEIPTS).read_text(encoding="utf-8"))
+    pins = [pin for pin in receipts["readings"] if pin["n"] == n]
+    if (
+        fact["format"] != "kingbird-svg-exact-facts-v1"
+        or fact["n"] != n
+        or len(roots) != 1
+        or len(fact["checks"]) != 1
+        or len(pins) != 1
+        or any(fact[key] != pins[0][key] for key in ("sha256", "bytes", "url"))
+        or roots[0]["coefficients"] is None
+        or roots[0]["degree"] != len(roots[0]["coefficients"]) - 1
+    ):
+        raise ExactValuesError(f"n = {n}: retained SVG facts do not match the pinned source")
+    return fact
 
 
 def enclose(expression: sp.Expr, places: int) -> tuple[Fraction, Fraction]:
@@ -934,6 +1058,9 @@ def check_closed_form_is_the_root(n: int, exact_form: str, root: Root) -> None:
     the closed form strictly inside that cell therefore identifies the two; one disjoint
     from it refuses. An enclosure straddling a cell end is refined before either.
     """
+    derived = derive_from_exact_form(exact_form)
+    if derived.coefficients != root.coefficients:
+        raise ExactValuesError(f"n = {n}: {exact_form} is not the recorded root")
     value = parse_form(exact_form)
     for places in (60, 120, 240):
         low, high = enclose(value, places)
@@ -956,9 +1083,19 @@ def polynomial_checks(
     budget: int = PRIME_BUDGET,
     *,
     upward_ceiling: bool = False,
+    certificate_primes: Sequence[int] | None = None,
 ) -> tuple[dict, Root]:
-    """Irreducibility, the root, and its agreement with the record and the KKT value."""
-    certificate = irreducibility(coefficients, budget)
+    """Rebuild every check; retained prime hints choose work, never supply a verdict."""
+    if certificate_primes is None:
+        certificate = irreducibility(coefficients, budget)
+    else:
+        if not certificate_primes or len(certificate_primes) > budget:
+            raise ExactValuesError(f"n = {n}: empty or over-budget SVG prime hints")
+        if not all(sp.isprime(prime) for prime in certificate_primes):
+            raise ExactValuesError(f"n = {n}: SVG prime hints include a composite")
+        if not verify_modular_certificate(coefficients, certificate_primes):
+            raise ExactValuesError(f"n = {n}: SVG prime hints do not prove irreducibility")
+        certificate = {"method": "modular-degree-patterns", "primes": list(certificate_primes)}
     kkt_value = None if kkt is None else kkt["value"]
     root, window = isolate_root(coefficients, record_value, kkt_value)
     inside = contains_recorded_side(root, record_value, upward_ceiling=upward_ceiling)
@@ -1473,7 +1610,6 @@ def build_entry(
     degree = None if recorded_degree is None else int(recorded_degree)
     polynomial_text = reported.get("minimal_polynomial")
     polynomial_text = None if polynomial_text is None else str(polynomial_text)
-    state = _state(exact_form, degree, polynomial_text)
 
     kkt = None
     if kkt_row is not None and kkt_row.get("S_exact"):
@@ -1500,25 +1636,39 @@ def build_entry(
                 f"{len(coefficients) - 1}"
             )
         degree = len(coefficients) - 1
-        polynomial = {
-            "coefficients": [str(c) for c in coefficients],
-            "text": format_polynomial(coefficients),
-            "latex": polynomial_latex(coefficients),
-            "height_digits": len(str(max(abs(c) for c in coefficients))),
-        }
+        polynomial = _polynomial_record(coefficients)
         # The source first: a polynomial that is not the one its source gives is refused
         # as that, before its root is sought at all.
-        agreement_with_source = _source_check(n, reported, coefficients, entry)
+        agreement_with_source = source_check(n, reported, coefficients, entry)
+        svg_fact = retained_svg_fact(n) if agreement_with_source == "matches-svg" else None
+        hints = None if svg_fact is None else svg_fact["checks"][0]["irreducibility"]["primes"]
         numeric, root = polynomial_checks(
             n,
             coefficients,
             value,
             kkt,
             budget,
+            certificate_primes=hints,
             upward_ceiling=(
                 imported is not None or _certified_rational_ceiling(packing, coefficients)
             ),
         )
+        if (
+            agreement_with_source == "matches"
+            and entry is not None
+            and not contains_recorded_side(root, entry.side_decimal)
+        ):
+            raise ExactValuesError(f"n = {n}: the root differs from the catalogue side")
+        if svg_fact is not None:
+            sides = [item["value"] for item in svg_fact["entities"] if item["name"] == "s"]
+            if len(sides) != 1 or not contains_recorded_side(root, sides[0]):
+                raise ExactValuesError(f"n = {n}: the root differs from the retained SVG side")
+            numeric["root"]["source_index"] = {
+                "stated": next(
+                    item for item in svg_fact["roots"] if item["assigned_to"] == "s"
+                )["index"],
+                "counted": None,
+            }
         checks.update(numeric)
         checks["catalogue"] = agreement_with_source
         if exact_form is not None:
@@ -1553,10 +1703,11 @@ def build_entry(
     elif exact_form is not None:
         raise ExactValuesError(f"n = {n}: a closed form with no minimal polynomial")
 
+    state = _state(exact_form, degree, polynomial_text)
     if n in MISSING_POLYNOMIAL_TEXT and state == "degree-only":
         bead, text = MISSING_POLYNOMIAL_TEXT[n]
         notes.append(_note("missing-polynomial-text", text, bead=bead, degree=degree))
-    superseded = _superseded_note(reported, entry)
+    superseded = _superseded_note(n, reported, entry, budget)
     if superseded is not None:
         notes.append(superseded)
     if state == "numeric-only" or admitted is not None or imported is not None:
@@ -1608,6 +1759,9 @@ def _numeric_only_notes(n: int, kkt_row: dict | None) -> list[dict]:
     notes: list[dict] = []
     if n in ROUTES:
         bead, text = ROUTES[n]
+        status = None if kkt_row is None else str(kkt_row["status"])
+        if status != KKT_LOCAL_MIN:
+            text += f" No confirmed KKT local minimum is retained (batch status {status!r})."
         notes.append(_note("route", text, bead=bead))
     else:
         status = None if kkt_row is None else str(kkt_row["status"])
@@ -1626,6 +1780,149 @@ def _numeric_only_notes(n: int, kkt_row: dict | None) -> list[dict]:
         bead, degree, text = RELATION_NEGATIVES[n]
         notes.append(_note("relation-search-negative", text, bead=bead, degree=degree))
     return notes
+
+
+def _registered_root(entry: dict) -> Root:
+    coefficients = tuple(int(c) for c in entry["polynomial"]["coefficients"])
+    lo, hi = (Fraction(value) for value in entry["checks"]["root"]["interval"])
+    return Root(coefficients, lo, hi, lo if lo == hi else None)
+
+
+def _occurrence_sources(pair: dict) -> list[dict]:
+    return [
+        {**occurrence["source"], "source_flags": occurrence["source_flags"]}
+        for occurrence in pair["occurrences"]
+    ]
+
+
+def reported_source_historical_entries(entries: list[dict]) -> list[dict]:
+    """Project independently checked source notes without admitting a current packing."""
+    rows = []
+    for entry in entries:
+        for note in entry["notes"]:
+            if note["kind"] != "unreconciled-source-polynomial":
+                continue
+            current_side = str(entry["side"]["value"])
+            if Fraction(note["checks"]["root"]["interval"][1]) >= Fraction(current_side):
+                raise ExactValuesError(
+                    f"n = {entry['n']}: unreconciled source root is not strictly below "
+                    "the current recorded bound"
+                )
+            rows.append(
+                {
+                    **note,
+                    "n": entry["n"],
+                    "kind": "unreconciled-source",
+                    "current_side": current_side,
+                    "algebraic_source": "reported-source-polynomial",
+                }
+            )
+    return rows
+
+
+def build_historical_entries(entries: list[dict]) -> list[dict]:
+    """Recheck the complete printed-source corpus at each source's own side.
+
+    Source equations can be correct even when their proposed geometry is invalid. These
+    entries never change the current side, status or bound. The source flags and exact
+    algebraic certificates travel separately and every coefficient is retained.
+    """
+    # The collector calls this module's arithmetic only after decoding the sources.
+    from devtools.collect_kingbird_historical_polynomials import (  # noqa: PLC0415 -- cycle
+        verify_source_identity,
+    )
+
+    document = json.loads((ROOT / HISTORICAL_FACTS).read_text(encoding="utf-8"))
+    verify_source_identity(document)
+    if document["unparsed_rows"]:
+        raise ExactValuesError("historical source inventory has unparsed equation rows")
+    current = {entry["n"]: entry for entry in entries}
+    historical: list[dict] = []
+    for pair in document["entries"]:
+        n, side = int(pair["n"]), str(pair["historical_side"])
+        coefficients = tuple(int(c) for c in pair["coefficients"])
+        for occurrence in pair["occurrences"]:
+            if _normalized(occurrence["printed_equation"]) != coefficients:
+                raise ExactValuesError(
+                    f"n = {n}: historical coefficients differ from the source equation"
+                )
+        sources = _occurrence_sources(pair)
+        entry = current.get(n)
+        if (
+            entry is not None
+            and entry["polynomial"] is not None
+            and tuple(int(c) for c in entry["polynomial"]["coefficients"]) == coefficients
+            and contains_recorded_side(_registered_root(entry), side)
+        ):
+            entry.setdefault("source_occurrences", []).extend(sources)
+            continue
+        checks, _ = polynomial_checks(n, coefficients, side, None)
+        checks.update(catalogue="matches", galois=_galois(coefficients))
+        current_side = None if entry is None else str(entry["side"]["value"])
+        if "invalid" in pair["source_statuses"] and "fixed" not in pair["source_statuses"]:
+            kind = "source-invalid"
+        elif entry is None:
+            kind = "outside-frontier"
+        elif current_side is not None and Decimal(side) > Decimal(current_side):
+            kind = "superseded"
+        else:
+            kind = "unreconciled-source"
+        historical.append(
+            {
+                "n": n,
+                "kind": kind,
+                "current_side": current_side,
+                "side": side,
+                "degree": len(coefficients) - 1,
+                "polynomial": _polynomial_record(coefficients),
+                "checks": checks,
+                "sources": sources,
+                "source_statuses": pair["source_statuses"],
+                "attribution": pair["attribution"],
+                "bead": "think-492g" if kind == "unreconciled-source" else None,
+            }
+        )
+    # The main catalogue's older rows remain even if a comparison page omits one. Merge
+    # an exact same root's citations instead of printing that polynomial twice.
+    for entry in entries:
+        for note in entry["notes"]:
+            if note["kind"] != "superseded-catalogue-polynomial":
+                continue
+            matches = [
+                row
+                for row in historical
+                if row["n"] == entry["n"]
+                and row["polynomial"]["coefficients"] == note["polynomial"]["coefficients"]
+                and contains_recorded_side(_registered_root(row), note["side"])
+            ]
+            catalogue_entry = catalogue_entries()[entry["n"]]
+            source = {
+                "path": f"packing/{CATALOGUE_MARKDOWN}",
+                "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html",
+                "kind": "current-catalogue",
+                "locator": {"line": catalogue_entry.source_line, "section": str(entry["n"])},
+                "source_flags": [],
+            }
+            if matches:
+                matches[0]["sources"].append(source)
+            else:
+                historical.append(
+                    {
+                        "n": entry["n"],
+                        "kind": "superseded",
+                        "current_side": entry["side"]["value"],
+                        "side": note["side"],
+                        "degree": note["degree"],
+                        "polynomial": note["polynomial"],
+                        "checks": note["checks"],
+                        "sources": [source],
+                        "source_statuses": [],
+                        "attribution": {"date_mentions": [], "source_text": []},
+                        "bead": None,
+                    }
+                )
+    historical.extend(reported_source_historical_entries(entries))
+    return sorted(historical, key=lambda row: (row["n"], Decimal(row["side"]), row["kind"]))
 
 
 # --- the register -----------------------------------------------------------------------
@@ -2043,8 +2340,11 @@ def build_record() -> dict:
         )
         for n in KNOWN_BEST_CORPUS.numbers
     ]
-    historical = append_reported_source_notes(entries)
+    superseded_reported = append_reported_source_notes(entries)
+    historical = build_historical_entries(entries)
+    historical.extend(superseded_reported)
     historical.extend(source_certificate_history(entries, verified_inputs=verified_inputs))
+    historical.sort(key=lambda row: (row["n"], Decimal(row["side"]), row["kind"]))
     return {
         "softschema": {
             "contract": CONTRACT,
@@ -2058,6 +2358,9 @@ def build_record() -> dict:
             "sources": {
                 "records": "frontier/n-NNN.md",
                 "catalogue": CATALOGUE_MARKDOWN,
+                "svg_facts": SVG_FACTS,
+                "svg_receipts": SVG_RECEIPTS,
+                "historical_polynomials": HISTORICAL_FACTS,
                 "kkt": {"path": KKT_BATCH, "key": KKT_KEY, "digits": KKT_DIGITS},
             },
             "totals": _totals(entries),

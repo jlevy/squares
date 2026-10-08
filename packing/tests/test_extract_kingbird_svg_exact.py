@@ -322,9 +322,9 @@ def test_svg_command_keeps_facts_and_never_the_picture(
     assert facts["same_as_reading_of_2026_10_05"] is True
     assert facts["read_from"] == "fetched into memory"
     assert facts["checks"][0]["verified"] is True
-    assert [root["polynomial"] for root in facts["roots"] if root["assigned_to"] == "s"] == [
-        POLYNOMIAL_11
-    ]
+    (side,) = [root for root in facts["roots"] if root["assigned_to"] == "s"]
+    assert side["coefficients"] == list(COEFFICIENTS_11)
+    assert side["polynomial"] == POLYNOMIAL_11
 
 
 def test_svg_command_reports_a_refused_fetch(

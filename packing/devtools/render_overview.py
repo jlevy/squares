@@ -233,6 +233,7 @@ N11_LOWER_BOUNDS_EXPLAINER = "n11-lower-bounds-explainer"
 N11_THRESHOLD_BOUND_REVIEW = "n11-threshold-bound-review"
 N11_OPTIMALITY_REVIEW = "n11-optimality-review"
 PACKING_METHODS = "square-packing-methods-survey"
+EXACT_SIDE_VALUES = "exact-side-values"
 #: From a paper's page back up to the site's root, which is where the bar's links, the
 #: other pages and the atlas's files are.
 PAPERS_ROOT = "../"
@@ -293,6 +294,13 @@ PAPERS: tuple[PaperRecord, ...] = (
         label="Methods tutorial",
         part=None,
         title="How Record Square Packings Are Found",
+    ),
+    PaperRecord(
+        slug=EXACT_SIDE_VALUES,
+        module="devtools.render_exact_side_values",
+        label="Exact values",
+        part=None,
+        title="Exact Side Values for Packing Unit Squares",
     ),
 )
 

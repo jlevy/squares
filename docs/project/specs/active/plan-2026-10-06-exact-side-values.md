@@ -1,13 +1,17 @@
-# Feature: Exact Side Values Register, Paper and Backfill
+# Exact Side Values: Collection, Publication and Remaining Identification
 
 **Date:** 2026-10-06 (last updated 2026-10-09)
 
-**Author:** Joshua Levy, with Claude, GPT-6.1 Sol and GPT-6 Astra
+**Author:** Joshua Levy, with Claude, GPT-5.6 Sol, GPT-6.1 Sol and GPT-6 Astra
 
-**Status:** Register and backfill implemented; publication continues in PR 435.
-Identification lanes remain open.
+**Status:** Collection and publication implemented; identification lanes remain open.
 
-## Overview
+## Scope and Current Result
+
+The formal stack is `main` → PR 403 (`claude/friendly-sagan-jk7qzy`) → PR 435
+(`codex/exact-polynomial-coverage`). Workflow entry is W1 `research-survey` for
+source collection and W7 `pipeline-improvement` for record and publication maintenance.
+Future identification experiments enter W6 with their own preregistered acceptance rule.
 
 Every exact fact the repository holds about the side $s$ of a best known packing
 (radical closed forms, minimal polynomials, algebraic degrees) is collected in one
@@ -16,15 +20,21 @@ web report with typeset mathematics and tables.
 The frontier records are backfilled until no derivable fact is missing from them, and
 the import process regenerates the register and the paper whenever a result changes one.
 
-Workflow entry: **W7 `pipeline-improvement`** for the register, the checks, the paper
-and the import revision; **W1 `research-survey`** for the backfill of facts that
-retained sources state.
-The identification lanes in Phase 2 enter **W6** under their own hypotheses.
+The [register](../../../../packing/frontier/exact-values.json.gz) covers all current
+cases $n = 1\ldots324$ and retains source polynomials for larger counts separately.
+The freshly verified parent checkpoint has 320 exact identities, one degree-only row and
+three numeric-only cases: $n = 29,55,71$. The child is expected to reach 321 exact
+identities after its $n = 83$ polynomial is replayed; its refreshed register has not yet
+been generated or verified.
+Each remaining numeric-only case has a specific route and bead.
+The source corpus is bounded by the retained comparison catalogues, explicit thematic
+locators, and the pinned SVG readings; this is a complete extraction of that corpus, not
+a claim that every polynomial ever published has been found.
 
 ## Current Register and Continuation
 
 The parent refresh integrates `origin/main` at
-`657cc486130e9020608ff244d8a86d1d04153634`. Its regenerated register covers 324 cases:
+`0f16c033a87464cfab127ba54748ca5e2536babd`. Its regenerated register covers 324 cases:
 176 integer, 72 rational, 60 closed-form, 12 minimal-polynomial, one degree-only and
 three numeric-only values.
 It certifies 320 exact polynomial roots.
@@ -57,8 +67,8 @@ They have no admitted geometry or Lean replay and remain V0/C0, under `think-8sm
 $n = 102$ is now superseded by the current RyXu finite bound; its original coefficients,
 root cell, source flags and V0/C0 envelope remain historical evidence.
 
-The parent retains 30 additional source occurrences: that superseded Daniel root and 29
-nonselected finite certificates representing 28 distinct rational sides.
+The parent retains 28 additional identities: that superseded Daniel root and 27
+nonselected finite certificates.
 Eight RyXu, three Gupta and three Daniel T-129 certificates are superseded.
 Eight Couzo T-128 and five Couzo T-130 offers improve current finite sides and remain
 pending adoption, with native replay retained and V0/C0 geometry-adoption status.
@@ -66,16 +76,10 @@ Both distinct offers at $n = 105$ are preserved.
 `think-lhtz` owns independent replay review and the V3/C3 adoption/atlas slice for T-128
 and T-130; `think-0mlq` owns T-128 historical source-house custody.
 T-130 import `think-88r0` is closed after PR 469 merged; adoption remains open.
-The 60 finite rational certificate occurrences partition into 31 selected current, 14
-superseded and 15 pending certificates representing 14 distinct pending bounds.
-PR 478 adds Daniel’s source-only $n = 132$ certificate as T-131 and a separate $n = 155$
-certificate as evidence for T-128. The latter has the same exact side as Couzo’s
-retained offer, with distinct source and replay custody; equal sides establish no
-local-minimum or motion equivalence.
-Both remain V0/C0 pending adoption.
-The separate current $n = 51$ radical brings the adopted-current backfill to 32. The
-certificate envelope keeps its source pin, facts, original certificate, receipt,
-assurance, replay and adoption status.
+The 58 finite rational source identities partition into 31 selected current, 14
+superseded and 13 pending certificates; the separate current $n = 51$ radical brings the
+adopted-current backfill to 32. The certificate envelope keeps its source pin, facts,
+original certificate, receipt, assurance, replay and adoption status.
 Source retention is not frontier promotion.
 
 The merged Rehwaldt $n = 68$ v1.2 packet contains a multivariate rational polynomial
@@ -86,10 +90,8 @@ not packing-side identities.
 Whole-net native replay, review and adoption remain separate (`think-ndvg` at 27).
 Couzo’s retained extended-range decimal poses are outside this register’s $1..324$ range
 and do not create inferred exact linear identities.
-PR 479 retains the later reports at $n = 375,378$ from revision `2d32a6e` as derived
-decimal facts. The superseded `ffd900d` reports remain historical; `think-1545` owns the
-outside-corpus reader.
-These reports change none of the 324 selected cases.
+The later reports at $n = 375,378$ from revision `2d32a6e` are not retained in the
+pinned `ffd900d` packet; `think-1545` owns their intake and supersession design.
 
 The child [PR 435](https://github.com/jlevy/squares/pull/435) contains the complete
 degree-672 polynomial at $n = 83$, the web report and retained source history.
@@ -121,24 +123,7 @@ controls remain retained.
 Earlier child counts and qualification receipts cover their stated heads, not this
 refreshed stack.
 
-## Resumed Upstream Checkpoint, 2026-10-10
-
-The resumed integration uses fixed main `657cc486130e9020608ff244d8a86d1d04153634`,
-including PR 478’s record-hunt evidence and PR 482’s n=17 completion plan.
-The previous fixed checkpoint was `1871b14dc`; its source and validation receipts remain
-dated. The source-only n=132 and second n=155 certificate occurrences do not replace
-current sides or alter any case status, lower bound or global proof claim.
-
-The external volume disconnected twice during qualification.
-Parent hosted checks and its full checkpoint passed at f378; its local reachable-test
-timeout remains a negative receipt.
-The amended child at 4819 completed web reconstruction, while its one local push attempt
-ended with exit 138 during the second disconnect before an edit-tier verdict.
-Source heads survived both interruptions; no internal scratch fallback was used.
-Qualification of this resumed stack requires fresh final-head local checks, automatic PR
-checks and the full hosted checkpoint.
-
-## Goals
+**Expected child partition, pending regeneration:**
 
 - **One register, generated:** `packing/frontier/exact-values.json.gz` holds one row per
   $n = 1 \dots 324$, built from the frontier records, the retained Kingbird catalogue
@@ -231,39 +216,45 @@ full picture is assembled, and it does not hold the facts itself:
 
 | State | Count | Where the fact lives |
 | --- | ---: | --- |
-| Integer side (degree 1) | 182 | Frontier `exact_form` |
-| Radical, degree 2 or 4, polynomial derived by the figure builder only | 66 | Frontier `exact_form`; polynomial null in the record |
-| Catalogue minimal polynomial | 21 | Frontier `minimal_polynomial`, transcribed |
-| Catalogue degree with no polynomial text (n = 83, degree 672) | 1 | Frontier `algebraic_degree` |
-| Numeric only | 54 | Nothing exact |
+| Integer | 176 | None |
+| Rational | 64 | Includes the finite refinements and new arrangements at $n = 68,105,266,270,272,292$ |
+| Radical closed form | 65 | Earlier displaced source forms remain historical |
+| Minimal polynomial | 16 | Full degree-672 polynomial recovered at $n = 83$; replay pending |
+| Degree only | 0 | Expected after the $n = 83$ replay passes |
+| Numeric only | 3 | $n = 29,55,71$, each with a named continuation lane |
 
-Of the 21 transcribed polynomials, only n = 17 has been recomputed from a contact system
-in this repository (H-265, exp-245). n = 11 enters through its published polynomial
-(`cases/trump11/derive_field.py`); n = 69 and n = 87 were checked once in scratch code
-(`review-2026-10-05-kingbird-intake-n69-n83-n87.md`). The gate checks transcription
-fidelity (`devtools.check_source_coverage.polynomial_errors`), not roots or
-irreducibility.
+**Original extraction checkpoint, 2026-10-07:** the historical collector decoded 201
+source occurrences into 182 distinct triples of $n$, printed side and integer
+coefficient array, reaching $n = 2135$, with zero unparsed rows.
+Twenty-one triples matched the original 270-current-exact register entries.
+The other 161, plus one additional main-catalogue entry, gave 162 historical register
+entries: 152 superseded, three marked invalid by their source, and seven outside the
+current frontier. Subsequent delivered child work expanded that record to 170 historical
+entries; the refreshed child projection remains pending.
+Every entry retains its polynomial in full, exact arithmetic checks, source locator,
+attribution and source flags.
 
-The catalogue prints polynomials at 13 more counts (102, 106, 123, 130, 172, 177, 199,
-206, 228, 259, 269, 292, 302). Each belongs to a packing that has since been beaten, so
-none of them is the side of the record packing.
+An algebraic certificate concerns a side value.
+It does not change geometric feasibility, verified bounds, optimality, or a result’s
+verification rung.
 
-The three current numeric-only cases have separate routes:
+## Delivered Components
 
-- **n = 29:** the retained six-equation system can support exact elimination and
-  selected real-branch certification.
-  The bounded PSLQ non-return above is not a degree or coefficient lower bound.
+- **Frontier vocabulary and backfill.** The parent implementation records
+  `algebraic_source` as `catalogue`, `derived-from-exact-form`, or `contact-system`.
+  Radical minimal polynomials are derived exactly; the composite figure reads the
+  frontier facts rather than owning a separate derivation.
 
-- **n = 55 and n = 71:** PR 435 retains source definitions, seven contact/stationarity
-  equations at 55 and six contact equations at 71, plus approximate branch values.
-  Elimination must exclude extraneous and rank-deficient branches and recover an exact
-  geometry map. The historical quartic and octic at 71 describe different sides.
+- **SVG facts.** The pinned readings for $n = 55,71,83,126$ retain exact source text and
+  acquisition metadata.
+  The first two contain complete contact systems, the third contains all 673
+  coefficients of its degree-672 polynomial, and the last exposes neither a polynomial
+  nor a current defining system.
 
-The finite rational identity at $n = 105$ is now represented, while `think-gl59` still
-needs a confirmed ideal KKT seed and current contact system.
-Its retained Kingbird SVG concerns an older side and supplies no equations.
-The refined finite sides at $n = 68$ and $n = 292$ likewise leave their ideal contact
-routes open in `think-056g` and `think-w622`.
+- **Historical collection.** `devtools.collect_kingbird_historical_polynomials` rebuilds
+  the bounded source corpus from retained primary articles.
+  Source cells delimit invalid/fixed flags and credit; neighboring rows cannot supply
+  either.
 
 The child’s retained degree-672 polynomial is expected to complete the parent’s $n = 83$
 degree-only row once the child rebuild passes.
@@ -284,186 +275,161 @@ outputs under `think-yuqy`; Bézout upper bounds and bounded PSLQ non-return can
 a degree or coefficient lower bound, and a numerical eliminant residual cannot prove
 exact linkage.
 
-## Design
+- **Independent audit.** `devtools.audit_historical_side_polynomials` checks the 182
+  historical pairs independently with SymPy rational/finite-field factorization and a
+  Möbius-transform/Descartes uniqueness argument.
+  It also expands every printed source equation at its retained locator.
+  Its 29.19 s replay fits the PR surface; it runs in the routine gates and at
+  records/full checkpoints.
 
-### Approach
+- **Paper.** `devtools.render_exact_side_values` generates HTML, Markdown and PDF from
+  the register. All expressions and coefficients are included, including large
+  coefficient tables. The paper is independent of the three-part $n = 11$ series.
 
-The frontier records stay the system of record, and the register is a view checked
-against them, as `composite-figure.json` is.
-The paper is a view of the register, and no fact on it is typed into a template.
+- **Publication and imports.** Pages has a dedicated paper job with an explicit wall
+  ceiling. The overview, artifact dates, release metadata, published-site contract and
+  import runbook include this fourth paper.
 
-### Components
+The [mathematical review](../../reviews/review-2026-10-07-exact-polynomial-coverage.md)
+records independent checks, defects corrected during review, and the remaining limits.
+The
+[source packet](../../../../packing/resources/web/kingbird-exact-side-facts-2026-10-07/README.md)
+provides extraction receipts and primary-source context.
 
-1. **Record vocabulary** (`frontier/square-packing-case.schema.yaml`).
-   `reported_upper_bound.algebraic_source` is one of:
+## Continuation Slices and Ownership
 
-   - `catalogue`: the source prints the degree or polynomial;
+The implementation was divided before execution into disjoint parallel lanes.
+The coordinator owns shared frontier records, schema, integration, beads and the PR;
+workers own source extraction and publication; two Astra reviewers own independent
+mathematical reviews.
+A delivery-recovery worker checks earlier claimed output.
 
-   - `derived-from-exact-form`: computed here from the source’s radical;
-
-   - `contact-system`: computed here from an exact contact system, citing evidence.
-
-   The original backfill records it with derived or transcribed polynomial facts.
-   Current finite-refinement source rows carry the primitive linear polynomial and its
-   derived origin after backfill.
-   The register accepts either that supported form or an omitted polynomial only after
-   the scoped custody checks.
-   `devtools.generate_frontier_case` writes it for new catalogue intakes.
-
-2. **Backfill** (`devtools.backfill_algebraic_facts`, one-shot with `--check`).
-
-   - Writes `algebraic_degree`, `minimal_polynomial` and
-     `algebraic_source: derived-from-exact-form` for every record whose `exact_form` is
-     a radical, and `algebraic_source: catalogue` for the 22 transcribed records.
-
-   - The composite figure then reads the source from the record (think-26at), and
-     `build_composite_figure_data --review` reports zero facts derived only in the
-     figure.
-
-3. **Register builder** (`devtools.build_exact_values`, data in
-   `frontier/exact-values.json.gz` under contract `packing.squares:ExactValues/v1`). Per
-   $n$ it holds:
-
-   - the side, lower bound and status;
-
-   - the exact form, the polynomial as primitive integer coefficients, the degree and
-     `algebraic_source`;
-
-   - checks: the irreducibility certificate (factorization for low degree, otherwise the
-     primes whose factorization patterns exclude every proper factor degree), the
-     isolating interval, root agreement with the record, digits of agreement with
-     Daniel’s `S_exact`, and the Galois group and solvability for degree ≤ 6;
-
-   - notes: a superseded catalogue polynomial, missing polynomial text, the route and
-     owning bead for numeric-only cases, and any recorded integer-relation negative with
-     its scope.
-
-   `--check` recomputes the register and compares it with the stored copy, so it runs in
-   the fast tier only if it fits the wall ceiling (OR-17). If not, the expensive
-   certificates move to `--records` and the fast tier checks only structure and record
-   agreement.
-
-4. **Paper** (`devtools.render_exact_side_values`, template
-   `devtools/templates/exact-side-values-article.md`).
-
-   - Sections: what “exact” means here and what each source proves; the closed-form
-     families; the polynomial table (degree, height, Galois data, checks); every
-     polynomial in full in an appendix; the numeric-only cases with 39-digit values and
-     routes; superseded catalogue polynomials; open problems.
-
-   - It is registered in `render_overview.PAPERS` with its Pages job, budget and
-     version, per `development.md`.
-
-5. **Import revision.** These documents change:
-
-   - `campaign/result-import.md`: Stage 3 records exact facts with `algebraic_source`;
-     Stage 5 runs `build_exact_values --update` and the paper renderer.
-
-   - `campaign/documentation-pass.md`, New Result Publication: lists the register and
-     the paper.
-
-   - `development.md`: the register and the paper.
-
-## Implementation Plan
-
-### Phase 1: Register and Backfill in PR 403; Publication in PR 435
-
-- [x] Schema: `algebraic_source`; generator support; contract test.
-
-- [x] Backfill tool and records: 66 derived and 22 catalogue sources; composite-figure
-  reads the record; think-kj6n and think-26at closed.
-
-- [x] Register builder with irreducibility, root isolation, Daniel agreement and Galois
-  data; tests with controls (a reducible polynomial, a wrong root, a perturbed
-  coefficient, a superseded catalogue polynomial).
-
-- [x] Gate step wired at the tier its measured cost allows.
-
-- [ ] Paper renderer, template and site registration (PAPERS, `pages.yml`, budgets,
-  release version, artifact dates, published-site check).
-
-- [ ] Import runbook, documentation pass and development guide revised.
-
-### Phase 2: Identification lanes (one W6 slice each, separate pull requests)
-
-These lanes are parallel and disjoint:
-
-- [ ] **High-precision sweep.** Wrap `exactsolve.py` from its retained copy in an
-  instrument that re-solves Daniel’s KKT points for the numeric-only counts at rising
-  precision and runs a bounded integer-relation search.
-  Accepted identifications go to the register as `contact-system` with root and
-  irreducibility checks.
-  Negatives are recorded with their degree, height and digit scope.
-
-- [ ] **Retention.** Retain `square-55.svg`, `square-71.svg` and `square-83.svg` from
-  Kingbird in a packet, and transcribe any defining system or polynomial they hold
-  (think-xy91, think-krbs).
-
-- [ ] **Recomputation.** Recompute the transcribed catalogue polynomials from contact
-  systems by a generic driver: witness → active set (`exactsolve` or
-  `sqpack.promote.contacts`) → half-angle system → resultant elimination, in the exp-245
-  pattern. Start with small degrees (28, 39, 70, 153, 37, 11).
-
-- [ ] **Closed forms.** Certify exact algebraic witnesses for the radical families over
-  $\mathbb{Q}(\sqrt 2)$ and $\mathbb{Q}(\sqrt 7)$, so a verified upper bound can equal
-  the exact form instead of trailing it (the T-101 gap).
-
-## Beads
-
-Epic `think-fh50`, under `think-wfz1`.
-
-| Bead | Work | Blocked by |
+| Block | Entry and deliverable | Disposition |
 | --- | --- | --- |
-| `think-k9fg` | Schema `algebraic_source`, generator and intakes | — |
-| `think-kj6n` | Backfill of derived degrees and polynomials | `think-k9fg` |
-| `think-26at` | Composite figure reads the record | `think-kj6n` |
-| `think-pxnx` | Register builder and its checks | `think-k9fg`, `think-kj6n` |
-| `think-py2q` | Register gate step at its measured tier | `think-pxnx` |
-| `think-vtc1` | Paper renderer and template | `think-pxnx` |
-| `think-mepe` | Paper site registration | `think-vtc1` |
-| `think-t7a9` | Import runbook, documentation pass, frontier README | `think-pxnx`, `think-vtc1` |
-| `think-9ok9` | Phase 1 close: validation and pull request | all of Phase 1 |
-| `think-eu89` | High-precision identification sweep | `think-pxnx` |
-| `think-nymu` | Kingbird SVG retention (55, 71, 83); feeds `think-xy91`, `think-krbs` | — |
-| `think-qgt4` | Generic contact-system driver; feeds `think-3lro` | `think-pxnx` |
-| `think-ifc9` | Recompute small-degree catalogue polynomials | `think-qgt4` |
-| `think-blbm` | Exact algebraic witnesses for the radical families | `think-pxnx` |
+| 1 | W1: source survey, pinned SVG facts, complete bounded historical extraction | Retained in the source packet; zero undecoded occurrences |
+| 2 | W7: exact admission and historical projection | Original collection checkpoint: 270 current exact sides and 162 historical entries |
+| 3 | W2 review of W1/W7: independent source, irreducibility and real-root checks | Correctness findings fixed; review retained |
+| 4 | W7 **efficiency block**: exact interior-sign root comparisons | Full mathematical replay preserved; initial replay reduced to 31.67 s locally |
+| 5 | W7: generated paper, site wiring and import documentation | HTML/Markdown/PDF renderer and publication contracts implemented |
+| 6 | W7: final checks, PR, delivery audit and replanning | Final validation is reported in the PR; unavailable earlier outputs remain an explicit dependency |
 
-## Testing Strategy
+The efficiency result precedes the expanded historical corpus; it is not the claimed
+wall for the larger final register.
+No cached mathematical verdict replaces a check.
 
-- Unit tests for the polynomial checks, each with a positive case and a refused negative
-  control.
+## Remaining Work and Beads
 
-- The register `--check` and the paper `--check` as gate steps.
+The parent epic is `think-fh50`, under `think-wfz1`; this continuation is `think-wgo1`.
+Parent Phase 1 code beads `think-k9fg`, `think-kj6n`, `think-26at`, `think-pxnx` and
+`think-py2q` already closed.
+The continuation supplies the paper and publication work formerly assigned to
+`think-vtc1`, `think-mepe` and `think-t7a9`, and the retained-source work formerly
+assigned to `think-nymu`. Old delegated claims are preserved until their owner
+reconciles them.
 
-- `check_source_coverage` continues to hold catalogue fidelity, and the backfill must
-  not trip it.
+| Continuation bead | Deliverable |
+| --- | --- |
+| `think-tj83` | Pinned source facts and the complete historical extraction |
+| `think-831v` | Verified historical register entries, including larger $n$ |
+| `think-432w` | Comprehensive generated paper |
+| `think-xe25` | Independent Astra mathematical reviews and retained audit tool |
+| `think-rno9` | Correctness findings and negative regression controls |
+| `think-ymo4` | Site, CI, import process, final validation and PR |
+| `think-492g` | Reconcile apparently stronger $n = 259$ source claim: its own cell marks micro-overlaps, so it is retained as source-invalid |
 
-- Before the push, the push tier and the fast tier of `packing-validate`.
+Every numeric-only current count appears exactly once in the following map.
 
-## Rollout Plan
+| Bead | Count | Next work and dependency |
+| --- | --- | --- |
+| `think-je8y` | 29 | Eliminate the retained six-equation X-004 system and certify its real branch; preserve `think-obgk`, `think-xy0e`, `think-utlo` and `think-gucc` |
+| `think-phh8` | 55 | Eliminate the seven retained contact/stationarity equations and select the current packing branch |
+| `think-1blg` | 71 | Eliminate the six retained equations; the historical degree-8 and degree-4 polynomials describe different, weaker sides |
 
-PR 403 contains the register and backfill.
-Dependent PR 435 contains the expanded source collection and publication.
-Pages publishes the paper when the stack merges.
-Phase 2 lanes each update the register through the revised import process.
+The original ideal-research batches below retain their count and branch distinctions.
+A finite rational side identity does not close their contact-system or stationarity
+work. In particular, the source-exact refinements at $n = 68,105,292$ retain their
+`think-056g`, `think-gl59` and `think-w622` routes.
+A successful identification must preserve producer inputs and contact branch, prove
+polynomial irreducibility and unique root selection, and meet the current record’s
+source/side contract before admission.
+Bounded integer-relation searches supply candidates and scoped negatives; a candidate
+relation alone is insufficient.
 
-## Open Questions
+| Bead | Counts | Next work and dependency |
+| --- | --- | --- |
+| `think-1atr` | 126 | Recover the current witness/KKT contact system; the retained SVG has a different side and the three historical polynomials do not identify the current record |
+| `think-ohhz` | 102, 106, 152, 172, 177, 199, 206, 207, 268, 297, 301 | Audit and admit the eleven earlier claimed identifications (including an unconfirmed KKT seed at 177) only after `think-s6np` recovers or reproduces their outputs |
+| `think-056g` | 68, 103, 110, 123, 131, 132, 154, 155, 156 | Low-count precision/degree sweep after the reusable driver is delivered by `think-s6np` |
+| `think-d2kj` | 180, 181, 182, 208, 209, 210, 228, 236, 237, 238, 239, 240, 241 | Middle-count sweep, same dependency |
+| `think-gg4k` | 259, 269, 270, 271, 273, 302, 303, 304, 305, 306, 307 | High-count sweep, same dependency; preserve historical/invalid source distinctions |
+| `think-gl59` | 105 | Establish a current contact system and confirmed KKT seed |
+| `think-hg9i` | 130 | Establish a current contact system and confirmed KKT seed |
+| `think-uc8i` | 211 | Replace the batch’s bound-only value with a confirmed KKT seed |
+| `think-is2e` | 263 | Replace the batch’s bound-only value with a confirmed KKT seed |
+| `think-olv8` | 272 | Replace the batch’s bound-only value with a confirmed KKT seed |
+| `think-w622` | 292 | Establish a current contact system and confirmed KKT seed |
 
-- Whether the recomputation of degree-144 and degree-158 polynomial certificates fits
-  the fast-tier ceiling.
-  This is measured in Phase 1 and decides where the step runs.
+The existing $n = 29$ negative is specifically a PSLQ run at 700 search digits, using a
+1200-digit re-solve, degrees 2 through 20, tolerance $10^{-675}$, `maxcoeff = 10^22` and
+`maxsteps = 50000`. No relation was returned in that search.
+It is not a proof of a minimum algebraic degree.
 
-## References
+Legacy numerical probe labels remain quarantined as candidate/diagnostic outputs under
+`think-yuqy`. Bézout upper bounds and bounded PSLQ non-return do not prove a degree or
+coefficient lower bound; numerical eliminant residuals do not prove exact linkage.
 
-- [`packing/campaign/result-import.md`](../../../../packing/campaign/result-import.md)
+Additional work:
 
-- [`packing/atlas/known-best/composite-figure.json`](../../../../packing/atlas/known-best/composite-figure.json)
+- **Delivery recovery (`think-s6np`).** The original delivery audit found five commits
+  and a generic producer named by closed `think-qgt4` and `think-ifc9` absent from that
+  branch, remote deliveries and local worktrees.
+  PR 403 then had four delivered commits; its originating Claude session was
+  inaccessible. The eleven claimed ideal results remain unadmitted.
+  This recovery has already retained the native $n = 11$ and $n = 102$ inputs from
+  `evand/square-packing@13ee36e5807727d12a5da36b9b90a96bdba272bf` and checked them
+  against `acquisition/upstream-subtree.sha256`. All 320 batch inputs are digest-pinned;
+  only these two were selected for recovery.
+  The undelivered W7 dependency is the reusable full-active-system driver with an exact
+  half-angle export. After delivery, prove the known $n = 11$ octic from contacts as its
+  control, then preregister one bounded $n = 102$ W6 slice in `think-ohhz`. This
+  recovery has executed no solver, contact-derived control or bounded search.
 
-- `packing/resources/web/evand-square-packing-2026-10-05/`
+- **Independent contact derivations (`think-o0az`).** After delivery recovery,
+  independently rederive the small-degree catalogue cases (28, 39, 37, 70, 153, 11)
+  before attempting the larger cases.
+  Source transcription plus algebraic checking does not establish the geometric
+  construction.
 
-- Beads: think-kj6n, think-26at, think-18mu, think-xy91, think-krbs, think-je8y,
-  think-obgk, think-3lro
+- **Optional source-index count (`think-chsu`).** Independently count the $n = 83$
+  source’s `Root[...,27]` index.
+  Index 27 is disclosed as stated and uncounted; unique selection at the reported side
+  is already certified.
+
+- **Exact geometric witnesses (`think-blbm`).** The existing radical-family lane remains
+  separate: a side expression and its polynomial do not by themselves close the
+  exact-witness gap tracked by T-101.
+
+The selected next entry is **W7 `think-s6np`**, followed by the known $n = 11$
+contact-derived control and then one bounded $n = 102$ W6 slice in `think-ohhz`; the
+independent $n = 55$ and $71$ elimination lanes can proceed in parallel.
+The continuation epic stays open while these identification and witness obligations
+remain.
+
+## Validation and Acceptance
+
+The push and PR run the project’s edit, reachable-test and fast surfaces.
+The full register rebuild remains on the fast surface; the independent historical audit
+runs at PR and records/full checkpoints.
+Regressions include perturbed coefficients, a reducible polynomial, an alternate
+conjugate, rational approximations substituted for radical forms, a destination-side
+mismatch, inward-rounded error bounds, forged modular hints, and source flags or credits
+taken from neighboring rows.
+
+The paper checks completeness against the register, independent-series metadata, source
+quotation handling, page construction, artifact dates and Pages scope.
+The final PDF is rendered with the pinned browser and inspected for layout.
+Local and hosted outcomes, costs and final commit identity are recorded in the PR. Pages
+publishes on merge; the current request creates and reviews the continuation PR.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
