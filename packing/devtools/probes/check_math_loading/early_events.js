@@ -3,6 +3,10 @@
 // Playwright retains this snapshot outside the page, independently of boot resets.
 /** @returns {ReadonlyArray<Readonly<{ id: string, value: string }>>} */
 () => {
+  const control = globalThis.__mathLoadControl;
+  if (control) {
+    control.timing.earlyEventsStarted = performance.now();
+  }
   const sliders = [
     .../** @type {NodeListOf<HTMLInputElement>} */ (
       document.querySelectorAll('input[type="range"]')
@@ -33,5 +37,8 @@
   window.dispatchEvent(new Event("resize"));
   window.dispatchEvent(new Event("beforeprint"));
   window.dispatchEvent(new Event("afterprint"));
+  if (control) {
+    control.timing.earlyEventsCompleted = performance.now();
+  }
   return targets;
 };

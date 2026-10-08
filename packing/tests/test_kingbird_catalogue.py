@@ -385,6 +385,8 @@ def test_frontier_transcription_diverges_nowhere_below_the_case_maximum() -> Non
     """The gate `think-l0vj` exists to hold: zero divergences at n = 1..100."""
     cases = _frontier_cases()
     assert sorted(cases) == list(KNOWN_BEST_CORPUS.numbers)
+    catalogue = _record_catalogue()
+    source_key = _kingbird_source_key()
 
     catalogue = _record_catalogue()
     source_key = _kingbird_source_key()

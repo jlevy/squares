@@ -15,6 +15,12 @@ Object.assign(globalThis, {
   },
 });
 const document = {
+  /** @type {Map<string, () => void>} */
+  events: new Map(),
+  /** @param {string} name @param {() => void} callback */
+  addEventListener(name, callback) {
+    this.events.set(name, callback);
+  },
   fonts: new (class {
     /** @param {string[]} args */
     load(...args) {
@@ -34,7 +40,7 @@ Object.assign(globalThis, { document });
 assert.equal("FontFaceSet" in globalThis, false);
 
 /** @type {() => void} */ (probe("devtools/probes/check_math_loading/hold_fonts.js"))();
-/** @type {{ heldLoads: number, release(): void, nativeLoad(spec: string): Promise<unknown> }} */
+/** @type {{ heldLoads: number, timing: { firstFontCall: number|null, firstHeldLoad: number|null, domContentLoaded: number|null, released: number|null }, release(): void, nativeLoad(spec: string): Promise<unknown> }} */
 const control = Reflect.get(globalThis, "__mathLoadControl");
 const FontFace = Reflect.get(globalThis, "FontFace");
 
@@ -49,6 +55,11 @@ const requests = [
     emptyDone = true;
   }),
 ];
+document.events.get("DOMContentLoaded")?.();
+assert.equal(typeof control.timing.firstFontCall, "number");
+assert.equal(typeof control.timing.firstHeldLoad, "number");
+assert.equal(typeof control.timing.domContentLoaded, "number");
+assert.equal(control.timing.released, null);
 assert.equal(document.fonts.check("16px test", "x"), true);
 assert.deepEqual(
   await control.nativeLoad("16px test"),
@@ -64,6 +75,7 @@ assert.equal(
   false,
 );
 control.release();
+assert.equal(typeof control.timing.released, "number");
 await Promise.all(requests);
 assert.equal(matchedDone, true);
 assert.equal(document.fonts.check("16px missing", "x"), false);

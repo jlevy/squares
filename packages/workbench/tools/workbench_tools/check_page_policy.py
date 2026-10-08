@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import sys
 import tempfile
 from collections.abc import Sequence
@@ -41,13 +42,14 @@ from typing import Any
 from playwright.sync_api import ConsoleMessage, sync_playwright
 
 from sqpack.probes import applied
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_site import OUT, POLICY_META
 from workbench_tools.probes import probe
 
 DEFAULT_PAGE = OUT / "index.html"
 
 #: The negative control: the published policy with the page's fonts refused.
-FONTS_REFUSED = POLICY_META.replace("font-src data:", "font-src 'none'")
+FONTS_REFUSED = POLICY_META.replace("font-src 'self' data:", "font-src 'none'")
 
 #: How long the page runs in each view before its violations are read, in milliseconds.
 SETTLE_MS = 300
@@ -87,7 +89,7 @@ def load(page_path: Path, *, exercise: bool) -> PolicyRun:
             page = context.new_page()
             page.on("console", console)
             page.on("pageerror", lambda error: errors.append(f"pageerror: {error}"))
-            page.goto(page_path.resolve().as_uri(), wait_until="load")
+            open_page(page, page_path, wait_until="load")
             started = page.evaluate(probe("policy/started"))
             if exercise:
                 for mode in ("#mode-animate", "#mode-search", "#mode-pack"):
@@ -134,17 +136,50 @@ def check(page_path: Path) -> str:
     with_policy(page_text, POLICY_META)
     published = load(page_path, exercise=True)
     with tempfile.TemporaryDirectory(prefix="squares-page-policy-") as scratch:
-        control = Path(scratch) / "fonts-refused.html"
+        root = Path(scratch) / "control"
+        shutil.copytree(page_path.parent, root)
+        control = root / "fonts-refused.html"
         control.write_text(with_policy(page_text, FONTS_REFUSED), encoding="utf-8")
         refused = load(control, exercise=False)
     found = faults(published, refused)
     if found:
         raise ValueError("page policy check failed:\n  " + "\n  ".join(found))
+    check_startup_failures(page_path)
     count = len(refused.violations or [])
     return (
         "published policy: page starts, switches views and runs Pack with no violation; "
-        f"recorder live ({count} font-src refusals under a control policy)"
+        f"recorder live ({count} font-src refusals); HTTP and decode failures stay visible"
     )
+
+
+def check_startup_failures(page_path: Path) -> None:
+    """Failed HTTP and invalid corpus responses must leave a visible recovery message."""
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(
+            headless=True, executable_path=os.environ.get("SQUARES_BROWSER_EXECUTABLE")
+        )
+        try:
+            for status, body in ((503, "unavailable"), (200, "not json"), (200, "{}")):
+                page = browser.new_page()
+                page.route(
+                    "**/data/corpus.*.json",
+                    lambda route, *, status=status, body=body: route.fulfill(
+                        status=status, content_type="application/json", body=body
+                    ),
+                )
+                open_page(page, page_path, wait_ready=False)
+                alert = page.get_by_role("alert")
+                alert.wait_for(state="visible", timeout=10_000)
+                message = alert.inner_text()
+                if "Unable to open the workbench." not in message or "Reload" not in message:
+                    raise ValueError(f"startup failure did not explain recovery: {message}")
+                if status == 503 and "HTTP 503" not in message:
+                    raise ValueError(f"startup failure hid the HTTP status: {message}")
+                if page.evaluate(probe("policy/api-ready")):
+                    raise ValueError("application started after corpus validation failed")
+                page.close()
+        finally:
+            browser.close()
 
 
 def main(argv: Sequence[str] | None = None) -> int:

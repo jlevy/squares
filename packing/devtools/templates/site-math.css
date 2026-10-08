@@ -1,0 +1,83 @@
+/* Static math profiles follow the prepaint reader font choice. Only the new hosts
+   match these rules; the lower-bound paper retains its own prepared variants. */
+[data-site-math] {
+  --site-math-main: "KPress Math Text", KaTeX_Main, "Times New Roman", serif;
+  --site-math-variable: "KPress Math Text", KaTeX_Math, serif;
+  --site-math-weight: 400;
+  --site-math-bold: 700;
+  --site-math-size: 1em;
+  --site-math-display-size: 1em;
+}
+[data-site-math="sans"],
+[data-kpress-prose-font="sans"] [data-site-math="prose"] {
+  --site-math-main: "KPress Math Text Sans", KaTeX_Main, "Times New Roman", serif;
+  --site-math-variable: "KPress Math Text Sans", KaTeX_Math, serif;
+  --site-math-weight: var(--_kpress-math-sans-regular-weight, 400);
+  --site-math-bold: 650;
+}
+[data-site-math="katex"],
+[data-kpress-font-set="system"] [data-site-math],
+.kpress[data-kpress-fonts="system"] [data-site-math] {
+  --site-math-main: KaTeX_Main, "Times New Roman", serif;
+  --site-math-variable: KaTeX_Math, serif;
+  --site-math-weight: 400;
+  --site-math-bold: 700;
+  --site-math-size: 1.05em;
+  --site-math-display-size: 1.1em;
+}
+:is(.kpress, .kpress-tooltip) [data-site-math] .katex.katex {
+  font-family: var(--site-math-main);
+  font-weight: var(--site-math-weight);
+  font-size: var(--site-math-size);
+}
+:is(.kpress, .kpress-tooltip) [data-site-math] .katex-display .katex.katex {
+  font-size: var(--site-math-display-size);
+}
+:is(.kpress, .kpress-tooltip) [data-site-math] .katex.katex :is(.mathnormal, .boldsymbol) {
+  font-family: var(--site-math-variable);
+}
+:is(.kpress, .kpress-tooltip)
+  [data-site-math]
+  .katex.katex
+  :is(.mathit, .mathbf, .textrm, .mainrm) {
+  font-family: var(--site-math-main);
+}
+:is(.kpress, .kpress-tooltip) [data-site-math] .katex.katex :is(.mathbf, .boldsymbol) {
+  font-weight: var(--site-math-bold);
+}
+[data-site-math] > .site-math-variant {
+  display: none;
+}
+:is([data-site-math="prose"], [data-site-math="serif"]) > [data-site-math-profile~="prose"],
+[data-site-math="sans"] > [data-site-math-profile~="sans"],
+[data-site-math="katex"] > [data-site-math-profile~="katex"] {
+  display: inline;
+}
+[data-kpress-prose-font="sans"] [data-site-math="prose"] > .site-math-variant {
+  display: none;
+}
+[data-kpress-prose-font="sans"] [data-site-math="prose"] > [data-site-math-profile~="sans"] {
+  display: inline;
+}
+:is([data-kpress-font-set="system"], .kpress[data-kpress-fonts="system"])
+  [data-site-math]
+  > .site-math-variant {
+  display: none;
+}
+:is([data-kpress-font-set="system"], .kpress[data-kpress-fonts="system"])
+  [data-site-math]
+  > [data-site-math-profile~="katex"] {
+  display: inline;
+}
+/* Standalone paper wrappers have no native KPress semantic sibling. Keep their one
+   generated MathML subtree accessible without painting it beside the visual math. */
+[data-site-math] > .katex-mathml {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}

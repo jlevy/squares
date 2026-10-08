@@ -16,6 +16,7 @@ A review's renderer is modelled on the optimality review's
 from __future__ import annotations
 
 import importlib
+from dataclasses import replace
 from pathlib import Path
 from types import ModuleType
 
@@ -58,10 +59,12 @@ DATES = {
         f"Last revised {release.EXPLAINER_REVISED}"
     ),
     THRESHOLD: (
+        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
         f"Last revised {release.THRESHOLD_REVIEW_REVISED}"
     ),
     REVIEW: (
+        f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}"
     ),
@@ -142,7 +145,7 @@ def test_every_form_axis_is_the_same_on_every_paper(rows: list[dict[str, object]
 
 def test_the_shared_form_is_the_one_the_design_names(rows: list[dict[str, object]]) -> None:
     found = {str(row["axis"]): str(row[EXPLAINER]) for row in rows}
-    assert found["head: title"] == "name · project"
+    assert found["head: title"] == "article name"
     assert found["head: og:type"] == "article"
     assert found["formats row"] == (
         "MD → <slug>.md · PDF → <slug>.pdf · GITHUB → https://github.com/jlevy/squares"
@@ -280,10 +283,7 @@ def test_the_tool_prints_the_audit_of_a_built_site(
     assert paper_structure.main([str(tmp_path), "--markdown"]) == 0
     out = capsys.readouterr().out
     assert "| axis |" in out
-    assert (
-        "| head: title | form | name · project | name · project | name · project | True |"
-        in out
-    )
+    assert "| head: title | form | article name | article name | article name | True |" in out
     assert structures[REVIEW].pdf == {}
 
     # A paper whose credits set a name plain is a form difference, and the tool says so.
@@ -301,6 +301,32 @@ def test_the_tool_prints_the_audit_of_a_built_site(
     (tmp_path / paper_path(REVIEW)).unlink()
     with pytest.raises(SystemExit, match=r"has no papers/n11-optimality-review\.html"):
         paper_structure.main([str(tmp_path)])
+
+
+@pytest.mark.parametrize(
+    ("title", "name"),
+    [
+        (f"A paper{render_overview.TITLE_SEPARATOR}{render_overview.PROJECT_NAME}", "A paper"),
+        ("A different paper", "A paper"),
+        ("", "A paper"),
+        ("A paper", ""),
+        ("", ""),
+    ],
+    ids=["project-suffix", "wrong-title", "missing-title", "missing-name", "both-missing"],
+)
+def test_article_title_form_refuses_suffixes_mismatches_and_missing_names(
+    title: str, name: str
+) -> None:
+    good = paper_structure.read(
+        "good",
+        '<head><title>A paper</title><meta property="og:title" content="A paper"></head>',
+    )
+    assert paper_structure.axes(good)["head: title"] == "article name"
+    bad = replace(good, paper="bad", title=title, name=name)
+    assert paper_structure.axes(bad)["head: title"] != "article name"
+    assert [
+        row["axis"] for row in paper_structure.differences(paper_structure.compare(good, bad))
+    ] == ["head: title"]
 
 
 def test_the_pdf_is_read_for_its_title_size_and_dates() -> None:

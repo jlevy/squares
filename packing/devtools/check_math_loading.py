@@ -14,7 +14,7 @@ import json
 import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Literal, TypedDict
+from typing import Literal, NotRequired, TypedDict
 
 from devtools.render_n11_lower_bounds_explainer_pdf import (
     BROWSER_OVERRIDE,
@@ -22,6 +22,7 @@ from devtools.render_n11_lower_bounds_explainer_pdf import (
     READY,
     SETTLED,
 )
+from devtools.site_assets import read_inline_page
 from sqpack.probes import applied, probe
 
 #: The probes this module hands the page, one file each under `probes/`.
@@ -55,6 +56,8 @@ class Readout(TypedDict):
     sans: bool
     state_matches: bool
     supported: bool
+    html: NotRequired[str]
+    text: NotRequired[str]
 
 
 class LoadingReport(TypedDict):
@@ -72,6 +75,11 @@ class LoadingReport(TypedDict):
     readouts: list[str]
     no_javascript: dict[str, int]
     findings: list[str]
+    timing: NotRequired[dict[str, float | None]]
+    font_wait: NotRequired[list[dict[str, object]]]
+    font_resources: NotRequired[list[dict[str, object]]]
+    readout_details: NotRequired[list[Readout]]
+    console: NotRequired[list[str]]
 
 
 #: Keep font loading pending long enough for several paints and an initial ResizeObserver
@@ -203,7 +211,11 @@ def check_loading(
         try:
             page = browser.new_page(viewport={"width": width, "height": 720})
             errors: list[str] = []
+            messages: list[str] = []
             page.on("pageerror", lambda error: errors.append(str(error)))
+            page.on(
+                "console", lambda message: messages.append(f"{message.type}: {message.text}")
+            )
             page.add_init_script(HOLD_FONTS_SCRIPT)
             page.add_init_script(MATH_LIBRARY_INIT)
             page.add_init_script(FIRST_PAINT_SCRIPT)
@@ -226,6 +238,8 @@ def check_loading(
             readouts: list[Readout] = page.evaluate(
                 READOUTS, {"targets": targets, "math": page.evaluate_handle(MATH_LIBRARY)}
             )
+            report["readout_details"] = readouts
+            report["console"] = messages
             for readout in readouts:
                 report["readouts"].append(f"{readout['id']}: {readout['source']}")
             report["findings"].extend(readout_findings(readouts))
@@ -310,7 +324,7 @@ def self_test(
     browser_name: Literal["chromium", "firefox", "webkit"] = "chromium",
 ) -> SelfTestReport:
     """Prove in a browser that retained faults make the loading guard fail."""
-    html = path.read_text(encoding="utf-8")
+    html = read_inline_page(path)
     if "</head>" not in html:
         raise ValueError("self-test requires the generated HTML page with a closing head tag")
     baseline = check_loading(path, width=width, browser_name=browser_name)

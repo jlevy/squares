@@ -15,6 +15,7 @@ from typing import Any
 
 from playwright.sync_api import Page, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_site import build
 from workbench_tools.check_layout import check_open as check_layout_open
 from workbench_tools.probes import probe
@@ -34,7 +35,7 @@ def check(page_path: Path) -> str:
             reduced_motion="reduce", viewport={"width": 1440, "height": 1000}
         )
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.goto(page_path.resolve().as_uri())
+        open_page(page, page_path)
         handle = page.locator("#stage-resize")
 
         def require(condition: bool, message: str) -> None:  # noqa: FBT001
@@ -158,7 +159,7 @@ def check(page_path: Path) -> str:
         reload_observation("after-load")
         # Loading the document does not imply that its workbench API and font layout
         # are ready. Use the same readiness boundaries as the retained layout checker.
-        page.wait_for_function(probe("benchmark/page-api-ready"))
+        page.wait_for_function(probe("policy/api-ready"))
         page.evaluate(probe("capture/fonts-ready"))
         after_ready = reload_observation("after-ready")
         require(

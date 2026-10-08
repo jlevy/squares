@@ -32,6 +32,8 @@
         !direction ||
         (slider?.getAttribute("aria-valuetext") || "").startsWith(`Direction ${target.value} of `),
       supported: angle || direction,
+      html: output?.outerHTML || "",
+      text: output?.textContent || "",
     };
   });
 };
