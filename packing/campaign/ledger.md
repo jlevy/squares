@@ -199,6 +199,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
 | [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
+| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 3 | think-2mzl | Dispose exact regional result and fixed-core transfer prerequisites; preregister one simultaneous ownership recovery discriminator after accepted input. |
 
 ### Workflow summary
 
@@ -208,10 +209,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-survey` | 4 | 2 | 16 | 2 |
 | `factual-review` | 11 | 1 | 67 | 3 |
-| `insight-iteration` | 30 | 1 | 93 | 4 |
+| `insight-iteration` | 31 | 1 | 94 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 11 | 1 | 44 | 1 |
-| `research-loop` | 37 | 4 | 149 | 9 |
+| `efficiency-loop` | 11 | 1 | 45 | 1 |
+| `research-loop` | 37 | 4 | 150 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -938,11 +939,23 @@ Status: **completed**. Execute the separately authorized four-hour extension thr
 | BC-441 | research | 17 | complete | 1 | think-hkqz | docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md |
 | BC-442 | measurement_validation | 17 | complete | 1 | think-svkl | docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md |
 
+### [agenda-045](agendas/agenda-045-n17-mathematics-and-efficiency.md) — n17 Six-Hour Mathematical and Efficiency Continuation
+
+Status: **active**. Produce substantive exact mathematical results toward n17 optimality with fresh W3 insight, parallel measured optimization and autonomous bounded research/insight loops; fast iteration and complete current PR/issue handoff.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-450 | research | 17 | in_progress | 1 | think-2mzl | docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md |
+| BC-451 | research | 17 | in_progress | 1 | think-98mg | docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md |
+| BC-452 | measurement_validation | 17 | in_progress | 1 | think-ui2y | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
+| BC-453 | research | 17 | tentative | 1 | think-nvkf | docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md |
+| BC-454 | tool_validation | 17 | blocked | 1 | think-7hy3 | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
+
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 225 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 226 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1186,6 +1199,9 @@ Status: **completed**. Execute the separately authorized four-hour extension thr
 | H-302 | confirmed | proof | Low-frequency stage observers preserve the accepted full exact replay  |  | 1 |  | 1.8m wall |
 | H-303 | refuted | proof | A deterministic two-child closed centre split certifies the declared n |  | 1 |  | 24s wall |
 | H-304 | confirmed | proof | One simultaneous collective union pass strictly reduces a foreign owne |  | 1 |  | 28s wall |
+| H-305 | running | proof | At fixed h=1/512, the SAME25 accepted owner18 rows are necessarily exc |  | 1 |  |  |
+| H-306 | blocked | proof | Exact strict closed-Y rejection of coverage-edge candidates speeds ful |  | 0 |  |  |
+| H-307 | blocked | proof | The accepted point Q0 and SAME25 foreign row restrictions transfer to  |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1455,6 +1471,12 @@ Status: **completed**. Execute the separately authorized four-hour extension thr
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-297 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes in Session186. | H-305 | Prospectively registered before target; complete source and author/independent controls clear. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -1504,7 +1526,7 @@ Status: **completed**. Execute the separately authorized four-hour extension thr
 
 ## Effort
 
-225 rounds, 2512.1 agent-minutes, 5792.3 wall-minutes.
+226 rounds, 2512.1 agent-minutes, 5792.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

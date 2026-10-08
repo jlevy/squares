@@ -1071,6 +1071,16 @@ owned sets. Its primary criterion is positive exact loss of a closed angle union
 selects the route but contributes no child geometry.
 No regional or global exclusion follows from this narrower criterion.
 
+[H-305](hypotheses/H-305-regional-row-coverage.md) tests the SAME25 row exclusions
+throughout one fixed positive-width guard by complete fresh regional reconstruction.
+
+[H-306](hypotheses/H-306-coverage-y-prefilter.md) compares an exact closed-Y event
+prefilter with the standing verifier in two full-replay ABBA blocks.
+
+[H-307](hypotheses/H-307-strict-core-regional-transfer.md) tests transfer of the
+accepted fixed core and foreign row restrictions through a fresh uniform-ownership
+certificate at the separately declared smaller radius.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -7,12 +7,12 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 184
+count: 185
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
   sessions_measured: 128
-  sessions_unmeasured: 56
+  sessions_unmeasured: 57
   attributed:
     rollups: 297
     turns: 76355
@@ -3233,3 +3233,13 @@ sessions:
     active_union_hours: 3.78
     wall_hours: 3.78
     snapshot_incomplete: true
+- id: session-186
+  title: "n17 Six-Hour Mathematical and Efficiency Continuation"
+  status: in_progress
+  primary_bead: think-2mzl
+  phases: 2
+  measured: false
+  unmeasured_reason: >-
+    declares no resource measurement
+  rollups: []
+  codex_receipts: []

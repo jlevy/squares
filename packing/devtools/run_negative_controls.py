@@ -153,6 +153,16 @@ PRUNE = frozenset(
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # Session186 main-refresh measurement: these five historical output roots
+        # are absent from registered control targets/commands and test consumers.
+        # Keep every inline/frontier-declared input through the existing copyback;
+        # the full original logs, journals and receipts remain in the primary tree.
+        # This is worker selection only; the portable 192 MiB cap is unchanged.
+        SESSION184_RESULTS / "agenda-037",
+        SESSION184_RESULTS / "agenda-040",
+        SESSION184_RESULTS / "bc-201-n11-tight-cell-census.json",
+        SESSION184_RESULTS / "bc-241-trump-local-theorem-review.json",
+        SESSION184_RESULTS / "exp-053-h-057-n17-parent-bound-parallel-speedup.raw",
         # Large, generator-owned rendering outputs are replayed by their dedicated
         # validation steps and are never mutation targets. Copying hundreds of witnesses
         # and renderings into every private worker would exceed the portable snapshot cap.

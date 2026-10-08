@@ -9,6 +9,12 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-186-performance.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-n17-session-185-progress.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md, role: session-record, authority: record, lifecycle: retained}

@@ -310,12 +310,12 @@ hypothesis status and summarizes experiment verdicts, and the
 
 | Record | Count | Current state |
 | --- | --- | --- |
-| Agendas | 41 | 20 active; 15 completed; 5 paused; 1 superseded |
-| Commitments | 431 | 228 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
-| Sessions | 184 | 105 completed; 79 stopped; all terminal |
+| Agendas | 42 | 21 active; 15 completed; 5 paused; 1 superseded |
+| Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 22 tentative; 23 in progress |
+| Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 238 | 65 confirmed; 40 refuted; 64 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 225 | 85 accepted; 45 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 241 | 65 confirmed; 40 refuted; 66 blocked; 20 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 226 | 85 accepted; 45 rejected; 59 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 115 | 115 registered, 85 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -576,6 +576,12 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n17 One-Round Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md) | research synthesis | record | retained | — |
+| [n17 Strict-Core Regional Transfer](docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md) | research synthesis | record | retained | — |
+| [n17 Six-Hour Mathematical and Efficiency Continuation](docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md) | implementation plan | current | transient | — |
+| [n17 Session 186 W3 Strategy](docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md) | research synthesis | record | retained | — |
+| [n17 Session186 Performance and Validation Review](docs/project/reviews/review-2026-10-07-n17-session-186-performance.md) | dated review record | record | retained | — |
+| [n17 Session186 Implementation Readiness](docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md) | dated review record | record | retained | — |
 | [n17 Session 185 Coupling and Replay Progress](docs/project/reviews/review-2026-10-07-n17-session-185-progress.md) | dated review record | record | retained | — |
 | [Collective Closed-Row Coverage](packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/README.md) | typed session record | record | retained | — |
 | [Two Closed Centre Children](packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md) | typed session record | record | retained | — |
@@ -5862,6 +5868,9 @@ round that names the hypothesis, control roles included.
 | [H-302](packing/campaign/hypotheses/H-302-n17-stages-replay-observations.md) | confirmed | Full exact replay with nested stage attribution | 1 | Accepted full same-object mathematical replay and nested stage observations; no speed gain |
 | [H-303](packing/campaign/hypotheses/H-303-n17-two-center-children.md) | refuted | Deterministic two closed centre children on the accepted exp293 point context | 1 | Complete fresh-matched point miss; both selected children open, regional skipped |
 | [H-304](packing/campaign/hypotheses/H-304-n17-collective-row-coverage.md) | confirmed | One simultaneous collective closed-row restriction | 1 | Accepted fresh exact25/64 half-angle-parameter loss owner18; no point contradiction |
+| [H-305](packing/campaign/hypotheses/H-305-regional-row-coverage.md) | running | SAME25 closed rows throughout one fixed positive-width guard | 1 | Source and independent controls clear; frozen target preregistered, unrun |
+| [H-306](packing/campaign/hypotheses/H-306-coverage-y-prefilter.md) | blocked | Exact closed-Y coverage event prefilter | 0 | Prospective two-block ABBA full replay comparison; target unrun |
+| [H-307](packing/campaign/hypotheses/H-307-strict-core-regional-transfer.md) | blocked | Fixed owned-core transfer to a positive-width guard | 0 | Prospective h2^-23 criterion; finite premise checker pending |
 
 ### Confirmed
 
@@ -6188,8 +6197,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | Coverage | sessions |
 | --- | ---: |
 | measured | 128 |
-| unmeasured | 56 |
-| **total** | **184** |
+| unmeasured | 57 |
+| **total** | **185** |
 
 <!-- END GENERATED: session-close-report -->
 
@@ -6205,7 +6214,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 225 rounds registered in `series-000`.
+There are 226 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5792.3 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6474,6 +6483,7 @@ archive beside it.
 | [exp-294](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-294-h-302-stages-exact-replay.md) | 17 | target | H-302 | Matched full exact replay with STAGES observations | Full mathematical baseline match and16stage boundaries | accepted |
 | [exp-295](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-295-h-303-two-center-children.md) | 17 | target | H-303 | Deterministic two closed centre children | Complete fresh-matched miss23.77s; both children open, regional unstarted | rejected |
 | [exp-296](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-296-h-304-collective-row-coverage.md) | 17 | target | H-304 | Simultaneous original-owned-set collective row coverage | Fresh-matched exact25/64 half-angle-parameter union loss for owner18; all992 accounted | accepted |
+| [exp-297](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-297-h-305-regional-row-coverage.md) | 17 | target | H-305 | Direct positive-width regional SAME25 coverage | Prospective180+180-second frozen two-phase recipe; target unrun | in-progress |
 
 ### Cost and provenance
 
@@ -6704,10 +6714,11 @@ archive beside it.
 | exp-294 | STAGES180s cooperative;TERM190/KILL200;4GiB per process sampled | 108.621s | — | criterion | Full same-object diagnostic replay; no speed gain |
 | exp-295 | Construction180s/fresh180s inside360s;4GiB per process sampled | 23.770s | — | criterion | Source d68a; both point children remain open; regional skipped |
 | exp-296 | Construction60s/fresh60s inside120s;4GiB per process sampled | 28.142s | — | criterion | `65dbccbc`; conditional necessary-domain restriction only |
+| exp-297 | Construction180s/fresh180s inside360s;4GiB per live process sampled | pending | — | in progress | Frozen prospective source and criterion; target unrun |
 
-### What the 225 rounds jointly establish
+### What the 226 rounds jointly establish
 
-The 225 rounds use 2512.1 agent-minutes and 5792.3 wall-minutes under the campaign’s
+The 226 rounds use 2512.1 agent-minutes and 5792.3 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

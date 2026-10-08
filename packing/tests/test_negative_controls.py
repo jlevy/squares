@@ -1077,6 +1077,31 @@ def test_session185_selected_output_prune_is_exact_and_keeps_declared_inputs(
     )
 
 
+@pytest.mark.parametrize(
+    "name",
+    [
+        "agenda-037",
+        "agenda-040",
+        "bc-201-n11-tight-cell-census.json",
+        "bc-241-trump-local-theorem-review.json",
+        "exp-053-h-057-n17-parent-bound-parallel-speedup.raw",
+    ],
+)
+def test_session186_historical_prune_has_no_registered_control_consumer(name: str) -> None:
+    path = controls.SESSION184_RESULTS / name
+    assert path in PRUNE
+    assert path.exists()
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    relative = path.relative_to(ROOT).as_posix()
+    for control in specification["controls"]:
+        assert not controls.in_pruned_roots(
+            (ROOT / control["file"]).resolve(), frozenset({path})
+        )
+        assert relative not in control["run"]
+    # The selection is exact, including a file whose sibling shares its prefix.
+    assert not controls.in_pruned_roots(path.with_name(name + "-other"), frozenset({path}))
+
+
 def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> None:
     root = ROOT / "benchmarks/validation-efficiency/runs"
     copied = [path for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)]
