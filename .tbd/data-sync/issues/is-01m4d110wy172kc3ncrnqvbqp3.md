@@ -5,15 +5,16 @@ title: "n17: gate PR410 native verifier and establish ordinary-U full parity bef
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 child_order_hints:
   - is-01m4d2mbv5at5v053xsp9s68tg
+  - is-01m4d4bwbwwad71djypagwfrra
 created_at: 2026-10-08T05:50:52.317Z
-updated_at: 2026-10-08T06:18:54.691Z
+updated_at: 2026-10-08T06:49:13.851Z
 ---
 ---
 title: PR410 Integration Review for the n17 Continuation
