@@ -1344,6 +1344,7 @@ case or experiment separately.
 | [Five Dots Exclude One Four-Owner Branch at $q=3.84$](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md) | research synthesis | record | retained | — |
 | [From One Excluded Branch to a Stronger Eleven-Square Bound](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md) | research synthesis | record | retained | — |
 | [Evan Daniel’s New Arrangements: Independent Replay Review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md) | dated review record | record | retained | — |
+| [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
 | `packing/benchmarks/math-startup/explorations/*.md` | typed idea provenance | record | retained | — |
 | `packing/benchmarks/math-startup/hypotheses/*.md` | typed hypothesis record | definitive | maintained | — |
