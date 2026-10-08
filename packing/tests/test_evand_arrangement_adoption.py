@@ -15,6 +15,7 @@ from typing import Any
 import pytest
 
 from devtools import build_known_best_atlas as atlas
+from devtools import check_results
 from devtools import evand_arrangement_houses as houses
 from devtools import evand_arrangement_reports as reports
 from devtools import register_evand_arrangements as adoption
@@ -170,13 +171,86 @@ def test_all_house_producers_refuse_before_writing(private: Path) -> None:
         assert houses.house_path(266).read_bytes() == before
 
 
+def test_unrelated_private_root_rejects_lexical_house_paths(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(check_results, "REPO", tmp_path)
+    for n in reports.NUMBERS:
+        problem = check_results.linked_repository_file_problem(
+            f"packing/witnesses/known-best/n-{n:03d}.yaml"
+        )
+        assert problem is not None
+        assert "escapes" in problem
+
+
+def test_actual_snapshot_preserves_separate_alias_destinations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = tmp_path / "source"
+    packing = source / "packing"
+    packing.mkdir(parents=True)
+    first, alias = packing / "first", packing / "alias"
+    first.write_bytes(b"complete source bytes")
+    alias.symlink_to(first)
+    monkeypatch.setattr(controls, "REPO", source)
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (first, alias))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({first, alias}))
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", lambda: [first, alias])
+    monkeypatch.setattr(controls, "linked_pruned_directories", list)
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(
+        controls, "_clone_into", lambda _source, target: target.mkdir(parents=True)
+    )
+    before = first.read_bytes()
+    assert controls.snapshot_source_bytes() == 2 * len(before)
+    assert controls.snapshot_duplicate_copy_bytes() == 2 * len(before)
+    tree = tmp_path / "private"
+    controls.clone_tree(tree)
+    copied_first, copied_alias = tree / "packing/first", tree / "packing/alias"
+    assert copied_first.read_bytes() == before
+    assert copied_alias.read_bytes() == before
+    assert not copied_alias.is_symlink()
+    copied_alias.write_bytes(b"private mutation")
+    assert copied_first.read_bytes() == before
+    assert first.read_bytes() == before
+
+
+def test_snapshot_deduplicates_only_identical_declared_paths(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    first, alias, rescued = (tmp_path / name for name in ("first", "alias", "rescued"))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (first, alias))
+    monkeypatch.setattr(controls, "root_files", lambda: (first,))
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", lambda: [rescued, alias])
+    assert controls.snapshot_copy_targets() == (first, alias, rescued)
+    monkeypatch.setattr(
+        controls, "snapshot_pruned_targets", lambda: [rescued, tmp_path / "new"]
+    )
+    assert controls.snapshot_copy_targets() == (first, alias, rescued, tmp_path / "new")
+
+
 def test_production_clone_copies_every_scientific_input_and_admits_exact_links(
-    tmp_path: Path,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     assert set(houses.private_input_paths()) <= set(controls.COPY_SEPARATELY)
     assert controls.snapshot_source_bytes() <= controls.SNAPSHOT_MAX_BYTES
     tree = tmp_path / "worker"
+    scientific = houses.private_input_paths()
+    copied_sources: list[Path] = []
+    original_copy = controls.shutil.copy2
+
+    def counted_copy(source: Any, destination: Any, **kwargs: Any) -> Any:
+        path = Path(source)
+        if path in scientific:
+            copied_sources.append(path)
+        return original_copy(source, destination, **kwargs)
+
+    monkeypatch.setattr(controls.shutil, "copy2", counted_copy)
     controls.clone_tree(tree)
+    assert all(copied_sources.count(path) == 1 for path in scientific)
     for path in houses.private_input_paths():
         copied = tree / path.relative_to(SOURCE)
         assert copied.is_file()

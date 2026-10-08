@@ -460,7 +460,7 @@ def linked_repository_file_problem(path: str) -> str | None:
         return house.linked_house_problem(path, repository=REPO)
     if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in refinements.NUMBERS}:
         return refinements.linked_house_problem(path, repository=REPO)
-    if path in {evand.house_path(n).relative_to(REPO).as_posix() for n in evand.NUMBERS}:
+    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in evand.NUMBERS}:
         return evand.linked_house_problem(path, repository=REPO)
     return linked_certificate_problem(path, repository=REPO)
 

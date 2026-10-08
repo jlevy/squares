@@ -78,6 +78,41 @@ The `certify` command retains individual full subprocess results in an external
 `--jobs-dir` and publishes a receipt only after all nine jobs pass their required
 outcomes.
 
+## Worker-copy efficiency check
+
+This bounded efficiency iteration compares repeated named-file copies with one copy per
+declared destination.
+Accept it only if the actual production clone retains both complete scientific inputs as
+independently mutable private files, copies each once, preserves separate alias
+destinations, rereads mutations on later invocations, and fits the unchanged
+201,326,592-byte source cap.
+The 45-second linked admission ceiling also stays unchanged.
+No geometric input or native verdict is removed.
+
+The baseline at the first complete #399/refinement integration measured 201,400,080
+bytes, 73,488 bytes over the cap, and the production-clone test refused at that guard.
+The proposed roster deduplicates identical declared paths per invocation, without
+resolving aliases or caching filesystem validity.
+Results follow the actual clone and mutation checks; external storage and concurrent
+host activity preclude a pristine-host latency claim.
+
+The actual production clone and its mutation checks pass, including one copy of each
+complete private scientific input and refusal of a changed receipt on a later call.
+The separate alias/counting and unchanged-cap refusal regressions also pass.
+At the measured candidate tree, the retained `python -m devtools.run_negative_controls
+--source-bytes` command reports 200,849,695 bytes with 476,897 bytes of headroom and
+606,622 bytes of avoided repeated named copies.
+On that same tree, repeated copies would count 201,456,317 bytes.
+The earlier baseline predates the final refinement and generated-view refresh and is
+retained as an earlier observation.
+
+The storage acceptance rule passes.
+This is not a measured latency improvement: the four production/alias tests took 451.11
+seconds on this host, dominated by private Git indexing on the external volume.
+Linked admission and post-mutation rejection each completed within their unchanged
+45-second subprocess bounds.
+Final footprint checks include the completed review and this record.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

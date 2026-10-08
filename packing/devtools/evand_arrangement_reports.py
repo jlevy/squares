@@ -273,9 +273,7 @@ def run_case(
     started = time.monotonic()
     cpu = time.process_time()
     first, _report = legacy.exact_verify(
-        to_witness(
-            actual, witness_prefix=witness_prefix, claim_limitations=claim_limitations
-        )
+        to_witness(actual, witness_prefix=witness_prefix, claim_limitations=claim_limitations)
     )
     first_seconds = time.process_time() - cpu
     cpu = time.process_time()

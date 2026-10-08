@@ -147,6 +147,74 @@ The author of the scientific core owns the integration changes.
 This reviewer owns only this review document; the remaining disposition will be added
 after the integration freeze.
 
+## Integration Review at 7a695bd98
+
+The reviewer inspected the adoption checkpoint
+`3f5e7d73d8d5b7b1c43f57fb4d8633987e845674` and its refinement merge `7a695bd98`.
+Scientific facts and the nine deciding jobs retain the scope above.
+The final whole-house comparison admits all three complete geometries, source records,
+claims and native certificate fields against the private source facts and retained
+outcomes.
+Both scientific XZ inputs are listed in `COPY_SEPARATELY` for each worker; only
+the three generated atlas leaves may link back.
+The source selection and full-roster result checks precede expected-house
+reconstruction. Selected and full atlas producers refuse external leaf targets before
+their first write.
+
+An independent record audit checked that every case’s exact verified side equals its
+source rational, its displayed value rounds upward by less than 10⁻¹⁶, and its new
+ceiling is strictly smaller than the archived prior verified ceiling.
+Both earlier lower bound records are unchanged.
+The selected source’s minimal polynomial and conjectured optimum remain unset.
+Historical source facts and prior complete case text remain separate from the three new
+arrangements. T-119 admits these feasible upper bounds; arrangement novelty and the
+source’s local or global optimality assertions remain unestablished.
+
+The integration initially routed an unrelated private fixture through
+`evand.house_path(n).relative_to(check_results.REPO)`, which raised `ValueError` before
+returning a refusal.
+The reviewed fix routes by the exact lexical repository names and then calls the owner’s
+repository/custody guard.
+The same independent reproduction now returns `resolves outside the repository` without
+an exception.
+
+The first production-clone gate measured 201,400,080 bytes against the unchanged
+201,326,592-byte cap and failed before creating the worker.
+The failure exposed repeated counting and copying of identical destination paths:
+scientific inputs appeared in both explicit private dependencies and result-derived
+rescued dependencies.
+The reviewed repair rebuilds one ordered roster of unique `Path` keys on every
+invocation and uses it for both copying and byte accounting.
+It does not resolve those keys to deduplicate distinct aliases, cache source validity,
+omit scientific inputs or raise the cap.
+Separate source paths still produce separate private files, even when one source path is
+a symlink to the other.
+
+The reviewer independently ran the unrelated-root refusal, actual alias-copy and
+changing-roster regressions: **3 passed in 0.74s**. The retained log is
+`evand-copy-dedup-review.log` in the external review directory.
+The author also ran the production-clone regression with those three tests: **4 passed
+in 451.11s**, recorded in `399-private-copy-dedup-tests.log` in the author’s external
+task directory. The reviewer inspected the passing log and the complete test, which uses
+the production copier, asserts each complete scientific input is copied exactly once as
+a regular private file, admits all three houses in a real subprocess, checks producer
+refusal, and rejects a subsequent private native-receipt mutation.
+The subprocess ceilings remain 45 seconds for admission and mutation refusal and 30
+seconds for producer refusal.
+The reviewer did not repeat that full clone.
+
+**The private-worker custody and storage findings are closed for the reviewed repair.**
+The independent `python -m devtools.run_negative_controls --source-bytes` measurement
+before this closure text reported 200,850,735 bytes against the unchanged
+201,326,592-byte cap, leaving 475,857 bytes; it identified 606,622 bytes of repeated
+named-destination writes avoided.
+Final publication checks must include the completed review and any later integration
+changes.
+
+The read-only record and house audit exited 0; its log is
+`evand-final-record-house-audit.log` in the external review directory.
+No additional scientific replay was needed for these metadata and custody changes.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
