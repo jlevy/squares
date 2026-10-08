@@ -5,7 +5,10 @@ from __future__ import annotations
 
 import html
 import re
+import xml.etree.ElementTree as ET
+from collections import Counter
 from dataclasses import replace
+from decimal import Decimal
 from unittest.mock import patch
 from urllib.parse import urljoin
 
@@ -16,6 +19,7 @@ from devtools import (
     overview_sections,
     register_prose,
     render_case_pages,
+    render_frontier_page,
     render_overview,
     repo_links,
     result_overview,
@@ -204,6 +208,89 @@ def test_an_open_case_draws_both_bounds_and_the_span_between(bodies: dict[str, s
     assert f'<span class="is-upper">{overview_data.math_html(fact["upper"])}</span>' in body
 
 
+def _case_cells(body: str) -> dict[int, list[ET.Element]]:
+    """Expand native row spans as a reader does, rejecting gaps and excess cells."""
+    match = re.search(r'<table class="site-result-cases".*?</table>', body)
+    assert match is not None
+    table = ET.fromstring(match[0])
+    assert table.attrib["aria-label"] == "The cases of this result"
+    headings = table.findall("./thead/tr/th")
+    assert [heading.text for heading in headings] == [
+        "n",
+        "Proved lower",
+        "Best known",
+        "Gap",
+        "Status",
+        "Records",
+    ]
+    assert all(heading.attrib == {"scope": "col"} for heading in headings)
+    pending: dict[int, tuple[ET.Element, int]] = {}
+    expanded = {}
+    for row in table.findall("./tbody/tr"):
+        n = int(row.attrib["data-overview-case"])
+        assert n not in expanded
+        physical = iter(row)
+        cells = []
+        for column in range(6):
+            if column in pending:
+                cell, left = pending.pop(column)
+                if left > 1:
+                    pending[column] = cell, left - 1
+            else:
+                cell = next(physical)
+                assert cell.tag == "td"
+                assert "colspan" not in cell.attrib
+                count = int(cell.attrib.get("rowspan", "1"))
+                assert count > 0
+                if count > 1:
+                    assert 1 <= column <= 4
+                    pending[column] = cell, count - 1
+            cells.append(cell)
+        assert next(physical, None) is None
+        expanded[n] = cells
+    assert not pending
+    return expanded
+
+
+def _inner(cell: ET.Element) -> str:
+    return (cell.text or "") + "".join(ET.tostring(child, encoding="unicode") for child in cell)
+
+
+def _assert_case_values(cases: list[int], overview: overview_data.Overview, body: str) -> None:
+    rows = _case_cells(body)
+    assert list(rows) == cases
+    facts = result_overview.film_facts()
+    for n, cells in rows.items():
+        fact, case = facts[n], overview.cases[n]
+        lower = fact["lower"] if fact["lower"] is not None else fact["upper"]
+        assert cells[0][0].attrib["href"] == f"cases/{n}.html"
+        assert cells[0][0].text == str(n)
+        assert cells[1].attrib["class"] == "lower"
+        assert cells[1].text == lower
+        stars = cells[1].findall("span")
+        assert bool(stars) is fact["star"]
+        if stars:
+            assert len(stars) == 1
+            assert stars[0].attrib == {"class": "site-star", "title": "Recent lower bound"}
+            assert stars[0].text == "★"
+        assert cells[2].attrib["class"] == "upper"
+        assert cells[2].text == fact["upper"]
+        _, gap = render_frontier_page.gap(case)
+        assert cells[3].text == render_frontier_page.decimal_text(Decimal(gap).normalize())
+        expected_status = ET.fromstring(
+            "<td>"
+            + overview_sections.case_status_chip(case["status"])
+            + result_overview.case_badges(n)
+            + "</td>"
+        )
+        assert _inner(cells[4]) == _inner(expected_status)
+        assert cells[5].attrib["class"] == "records"
+        assert [(link.attrib["href"], link.text) for link in cells[5].findall("a")] == [
+            (f"frontier.html#n-{n}", "frontier"),
+            (repo_links.repo_url(result_overview.case_file(n)), f"n-{n:03d}.md"),
+        ]
+
+
 def test_a_broad_result_lists_its_cases_instead_of_drawing_them(
     overview: overview_data.Overview, bodies: dict[str, str]
 ) -> None:
@@ -215,17 +302,88 @@ def test_a_broad_result_lists_its_cases_instead_of_drawing_them(
     assert "site-atlas-gap" not in body
     assert "<svg" not in body
     assert "This result concerns 49 cases, too many to draw one by one." in body
-    listing = body.split('class="site-result-cases"', 1)[1].split("</div></div></section>", 1)[
-        0
+    assert re.findall(r'data-overview-case="(\d+)"', body) == [str(n) for n in cases]
+    _assert_case_values(cases, overview, body)
+
+
+def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
+    overview: overview_data.Overview,
+) -> None:
+    """T-124's complete broad report fits without losing cases, chain or source links."""
+    result = _result(overview, "T-124")
+    cases = result_overview.scope(result)
+    assert len(cases) == 178
+    body = result_overview.result_popover_html(result, overview)
+    _assert_case_values(cases, overview, body)
+    assert 'rowspan="' in body
+    for paragraph in register_prose.paragraphs(result.record["claim"]):
+        assert f'<p class="site-result-claim">{overview_data.tex_bounds(paragraph)}</p>' in body
+    for label, value in (
+        ("Significance", result.record["significance"]["rationale"]),
+        ("Composition", result.record.get("composition")),
+        ("Next rung", result.record.get("next_rung")),
+    ):
+        if value:
+            assert f"<dt>{label}</dt><dd>{result_overview.prose_html(value)}</dd>" in body
+    members = result_overview.chain(overview, cases)
+    assert len(members) >= 67
+    assert [identity for identity, _ in STEP.findall(body)] == [
+        member.id.lower() for member in members
     ]
-    assert re.findall(r'data-overview-case="(\d+)"', listing) == [str(n) for n in cases]
-    facts = result_overview.film_facts()
-    for n in cases:
-        row = listing.split(f'data-overview-case="{n}"', 1)[1].split('role="row"', 1)[0]
-        assert f'<a href="cases/{n}.html">{n}</a>' in row
-        assert f'<a href="frontier.html#n-{n}">frontier</a>' in row
-        assert f"{REPO_URL}/blob/main/packing/frontier/n-{n:03d}.md" in row
-        assert f'<span class="is-upper">{facts[n]["upper"]}</span>' in row
+    for member in members:
+        step = body.split(f'data-step="{member.id.lower()}"', 1)[1].split("</li>", 1)[0]
+        assert overview_data.tex_bounds(member.summary) in step
+        assert html.escape(member.credit) in step
+        shared = [n for n in result_overview.scope(member) if n in cases]
+        if len(shared) <= result_overview.CASES_NAMED:
+            label = "case " if len(shared) == 1 else "cases "
+            assert label + ", ".join(map(str, shared)) in step.split("</p>", 1)[0]
+    pages = list(render_overview.iter_result_fragments(result_ids=frozenset({result.id})))
+    assert len(pages) == 1
+    page = pages[0]
+    assert page.name == "result/t-124.html"
+    row = next(row for row in site_urls.load_registry() if row.path == page.name)
+    assert site_urls.page_budget(row) == 300_000
+    assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row)
+    article = page.html.split('<article class="site-result"', 1)[1].split("</article>", 1)[0]
+    assert re.findall(r'data-overview-case="(\d+)"', article) == [str(n) for n in cases]
+    assert STEP.findall(article) == STEP.findall(body)
+    expected_links = Counter(html.unescape(link) for link in HREF.findall(body))
+    ordered = sorted(overview.results, key=lambda other: other.id)
+    index = next(i for i, other in enumerate(ordered) if other.id == result.id)
+    for offset, relation in ((-1, "prev"), (1, "next")):
+        neighbor = ordered[index + offset].id
+        target = overview_sections.result_fragment(neighbor)
+        expected_links[target] += 1
+        neighbor_href = re.search(rf'rel="{relation}" href="([^"]+)"', article)
+        assert neighbor_href is not None
+        assert urljoin(page.name, html.unescape(neighbor_href[1])) == target
+    assert (
+        Counter(urljoin(page.name, html.unescape(link)) for link in HREF.findall(article))
+        == expected_links
+    )
+
+
+@pytest.mark.parametrize("result_id", [BROAD, "T-124"])
+def test_repository_links_keep_explanatory_titles(
+    result_id: str, overview: overview_data.Overview
+) -> None:
+    result = _result(overview, result_id)
+    link = result_overview.register_link(result)
+    assert f'title="{result_id} in results.yaml"' in link
+    assert f"results.yaml?plain=1#L{result_overview.register_line(result)}" in link
+
+
+def test_repository_links_do_not_repeat_a_title_already_in_the_target(
+    overview: overview_data.Overview,
+) -> None:
+    result = _result(overview, "T-124")
+    key = result.record["attribution"]["source_keys"][0]
+    link = result_overview.bibliography_link(key)
+    line = result_overview.bibliography_lines()[key]
+    assert f"bibliography.yaml?plain=1#L{line}" in link
+    assert html.escape(key.strip("[]")) in link
+    assert "title=" not in link
 
 
 def test_a_result_about_a_few_cases_draws_each(bodies: dict[str, str]) -> None:
@@ -549,15 +707,19 @@ def test_a_link_to_nothing_fails_the_render(overview: overview_data.Overview) ->
 
 
 def test_the_overview_depends_on_no_popover(bodies: dict[str, str]) -> None:
-    """The body is content alone: no id, no popover of its own, no script, and no table
-    for a results table's script to count, so any page may place it, more than once. The
-    module calls nothing of the row mechanism that shows it."""
+    """The body is content alone: no id, popover or script of its own. A broad case
+    list's native table has no interactive result-row hooks, so any page may place the
+    body more than once. The module calls nothing of the row mechanism that shows it."""
     for result_id, body in bodies.items():
         assert not re.search(r'\sid="', body), result_id
         assert "popover" not in re.sub(r'class="[^"]*"', "", body), result_id
-        for tag in ("<script", "<table", "<tr", "<iframe", "<button"):
+        for tag in ("<script", "<iframe", "<button"):
             assert tag not in body, (result_id, tag)
         assert not re.search(r"\sdata-(result|n|case|atlas-(?!open))[=\s>]", body), result_id
+        for tag in re.findall(r"<table[^>]*>", body):
+            assert tag == (
+                '<table class="site-result-cases" aria-label="The cases of this result">'
+            ), result_id
     source = (render_overview.PACKING / "devtools" / "result_overview.py").read_text(
         encoding="utf-8"
     )
