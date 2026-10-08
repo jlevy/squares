@@ -2,3 +2,11 @@
 .cert-page.methods-paper > .kpress-table-wrap {
   max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
 }
+
+/* The long methods table flows across pages; KPress still keeps each row intact. */
+@media print {
+  .cert-page.methods-paper #methods-and-record-examples + p + .kpress-table-wrap .kpress-table {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+}
