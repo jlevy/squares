@@ -115,10 +115,7 @@ def read_fact(n: int) -> dict[str, Any]:
         "note": "Derived facts",
         "squares": [[square[k] for k in ("x", "y", "t")] for square in fact["squares"]],
     }
-    with tempfile.TemporaryDirectory() as directory:
-        temporary = Path(directory) / "source.json"
-        temporary.write_bytes(shared.json_bytes(source))
-        normalized, _ = original.parse_source(temporary, n)
+    normalized, _ = original.parse_source_bytes(shared.json_bytes(source), n)
     if shared.json_bytes(normalized) != shared.json_bytes(fact):
         raise original.PacketError("confirmation facts differ from normalized complete roster")
     return fact

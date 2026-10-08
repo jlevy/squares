@@ -1091,6 +1091,7 @@ def test_the_root_files_reach_every_worker(control_snapshot: tuple[Path, set[Pat
         assert (tree / relative).read_bytes() == path.read_bytes(), relative
 
 
+@pytest.mark.slow
 def test_unmutated_results_checker_is_green_inside_a_worker(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -1261,6 +1262,7 @@ def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
     assert source.read_text() == original
 
 
+@pytest.mark.slow
 def test_squish_complete_replay_survives_worker_custody_and_private_controls(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
