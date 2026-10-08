@@ -17,12 +17,11 @@ tools include David Ellsworth’s refine_packing, Couzo’s basin hopping and Ev
 fq. The issue also credits Claude Code under Couzo’s direction.
 These are source attributions, not independent priority findings.
 
-The source reports passes from Evan Daniel’s checker and a copy of this repository’s
-sqpack verifier. The maintained replay uses existing exact_verify and independent
-arrangement routes; both share certificate parsing, half-angle conversion, Fraction
-arithmetic and the separating-axis method.
-One source checker derives from this repository, so route count alone does not establish
-implementation independence from the source producer.
+The source reports passes from Evan Daniel’s checker and copied this repository’s sqpack
+verifier. The maintained exact_verify route overlaps that source checker.
+The second maintained rational-geometry route is a separate deciding implementation.
+Both routes share certificate parsing, half-angle conversion, Fraction arithmetic and
+the separating-axis method; they do not establish two independent mathematical methods.
 
 Acquisition, source admission and complete maintained native replay are recorded.
 All eight positives passed both exact routes; duplicate-square and outside-container

@@ -13026,12 +13026,16 @@ results:
     - packing/tests/test_negative_controls.py
     notes: 'All sixteen complete original factual files and all 24 native jobs are retained. The first
       two-worker attempt was incomplete after 181.19 seconds; the fresh serial attempt passed in 398.40
-      seconds (6.64 wall minutes, 4.1025 CPU minutes) with unchanged 45-second children. The actual
-      private worker passed complete stored-input admission, six late mutations and restoration checks
-      without geometric deciders: 8.91 seconds call, 26.72 seconds setup and 38.36 seconds total. The
-      call fits the unchanged 12-second fast ceiling; the child deadline remains 45 seconds. The source
-      author copied this repository''s sqpack verifier, so the exact_verify route overlaps that source
-      checker. The second maintained rational-geometry route is a separate deciding implementation;
+      seconds (6.64 wall minutes, 4.1025 CPU minutes) with unchanged 45-second children.
+
+
+      The actual private worker passed complete stored-input admission, six late mutations and restoration
+      checks without geometric deciders: 8.91 seconds call, 26.72 seconds setup and 38.36 seconds total.
+      The call fits the unchanged 12-second fast ceiling; the child deadline remains 45 seconds.
+
+
+      The source author copied this repository''s sqpack verifier, so the exact_verify route overlaps
+      that source checker. The second maintained rational-geometry route is a separate deciding implementation;
       both routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
       method. No two independent methods, human oversight or optimality is claimed.'
     next_rung: Preserve and validate each complete historical source house before any selected-house

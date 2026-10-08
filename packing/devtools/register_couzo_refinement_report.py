@@ -101,11 +101,11 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
             "All sixteen complete original factual files and all 24 native jobs are "
             "retained. The first two-worker attempt was incomplete after 181.19 seconds; "
             "the fresh serial attempt passed in 398.40 seconds (6.64 wall minutes, "
-            "4.1025 CPU minutes) with unchanged 45-second children. The actual private "
+            "4.1025 CPU minutes) with unchanged 45-second children.\n\nThe actual private "
             "worker passed complete stored-input admission, six late mutations and "
             "restoration checks without geometric deciders: 8.91 seconds call, "
             "26.72 seconds setup and 38.36 seconds total. The call fits the unchanged "
-            "12-second fast ceiling; the child deadline remains 45 seconds. " + DISCLOSURE
+            "12-second fast ceiling; the child deadline remains 45 seconds.\n\n" + DISCLOSURE
         ),
         "next_rung": (
             "Preserve and validate each complete historical source house before any "
@@ -243,7 +243,7 @@ def plan() -> list[tuple[Path, str]]:
                 "year": 2026,
                 "venue": "GitHub",
                 "dated": DAY,
-                "lineage": "independent",
+                "lineage": "builds-on-project",
                 "credit": "Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel",
                 "short_credit": "Couzo after Xu et al.",
                 "note": (

@@ -41,6 +41,14 @@ def test_complete_source_only_plan_is_schema_valid_and_preserves_current_cases()
         assert {key: value for key, value in new.items() if key != field} == {
             key: value for key, value in old.items() if key != field
         }
+    bibliography = next(text for path, text in proposed if path.name == "bibliography.yaml")
+    credit = next(
+        row
+        for row in safe_load(bibliography)["sources"]
+        if row["key"] == register.reports.SOURCE_KEY
+    )
+    assert credit["lineage"] == "builds-on-project"
+    assert credit["credit"] == "Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel"
     assert len(cases) == 324
     assert all(path.read_bytes() == raw for path, raw in {**cases, **deciding}.items())
     assert result["verification"] == "V0"

@@ -1512,7 +1512,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-08'
-    lineage: independent
+    lineage: builds-on-project
     credit: Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel
     short_credit: Couzo after Xu et al.
     note: Eight complete certificates and decimal context poses at ffd900dfff6d2674ad995359208c2f0714915c82;

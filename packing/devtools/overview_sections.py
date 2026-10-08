@@ -1817,9 +1817,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Francisco Couzo",
         (
             "Improved packings for 49 counts from n = 68 to 307. "
-            "Eight complete rational refinements in issue451 have retained native "
-            "finite-feasibility outcomes and actual private-worker custody (T-128); "
-            "historical source-house integration and confirmation remain pending."
+            "Eight complete rational refinements in issue451 have retained "
+            "finite-feasibility results (T-128); selected-case integration remains pending."
         ),
     ),
     (
