@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,18 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T02:22:56.896Z
+updated_at: 2026-10-08T02:33:32.320Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
+
+ACTUAL SOURCE MERGE / RECOVERY COMPLETION — 2026-10-08 UTC:
+HostedfinalPR429fc988 all30SUCCESS26documentedSKIP, run37717184184 includingformerlyfailedsuiteD. Lower4273345 likewiseCLEANreviewedgreen. Freshcurrenthead ReviewJ5450641707 ACCEPTsourcecorrectness0findings; old E–I/fullscientificscopesretained. Actualatomic ghstackmerge429--yes--merge SUCCEEDED at02:25:19UTC, mergingONLY427+429 intomain f747407a0fa83d80a7894331c770aeb314b23163. BothGitHubPRstatesMERGED/mergeCommitf747verified. Draft434 excludedandstillpendingownfinalCI/review. Noadmin/force/contextspoof/limitweakening.
+NativewallgapremainsP2think-c63vOPEN:2853assertionspass butnativeD raw1, target14.74>12/tier182.67>143. Thisknownlocalfailureisnotrewrittenasgreen. Codeperformance sourceequivalence108fullenvelopes/27metadata/freshinputs intact; source acceptance/CIengineering cancloseatmergedmilestone whilec63v/deploymentparentsremainopen.
+AllsourcebranchhistoryandnewfixsavedGitHub. Latestfinalrepairarchive squares-confirmation-repair-custody-20261008.tar.gz1568217B SHA2560cc4f87c994de456fa275e78545ca76065713846f668daeb8f1c1ef9f795ac20 actualupload/downloadALL63membershashMATCH; all4downloadedassetsMATCH; upper-conversion-repair-fc988788.bundle downloadedGitverifyEXIT0 requiringalreadyGitHub-savedef472. Prior1769gates/44GitHubaudit/1968operations/124finalreviews/703older/138425/108actual401 archivesremainimmutable/downloadverified. Raw failures/cancellation/oldunavailableouter preserved. RecoveryfullstatebodyPR43191c6 reviewedCLEAN16SUCCESS50SKIP remainsopenuntilsciencepublicationstable, allstatecurrentbeadnoteslinked.
+Rootsourcecheckoutnowactualmainf747 clean; Pagesrun37717788426 deploySUCCESS andverify-deploymentpendingatlastread. Final liveagent116rows23cases46SVG48layouts awaitsrawsuccessfulrun/deployment/statusmatchingmain/source ownership. Issue422stillOPEN untilactualliveaudit/finalreply/ledger; think-qc6y/sfpz remainOPEN. Latestenvironmentstartup save stillstale_base unsaved despite testedcurrentbootstrap/GH/tbd; GitHubZIPrecoverable/newsetupchatneeded. Currentnewintake434 ten425jobs/three428upstreamjobsandpublic103filecustodyproved butfive428projectjobs/finalproductionadmission/census/review/8CIfails remainseparateowningclaims; donotreassignv42c.
 
 CURRENT COMMITTED REPAIR / EXACT SOURCE STATE — 2026-10-08 UTC:
 PR429 sourcefc9887888a09196798c664a45d836dcdee68212f is committedclean, actualnonforcepushed/remoteGitSHAandPRAPIverified. Parentef472, onlyupper-ownedconfirmation.py40insert/11delete (blobebb66385), everyother15801treeentry/data/science/case/test/budgetunchanged. Pin101026ownerPASS. Fresh currenthead Astra ReviewJ ROUND5 ACCEPTsourcecorrectness0findings https://github.com/jlevy/squares/pull/429#pullrequestreview-5450641707. Original E–I scopes retained; no newfullSCI replay needed/claimed.137existingfocusedtestsPASS88.85raw0, lint/format/type/pinraw0. Full108envelopes/27metadata transforms identical;162→108normalizationcalls onlyduplicatefullsameinputs removed; publicfreshentry/18freshcasecalls/mutationisolation andalloriginalpredicates preserved.

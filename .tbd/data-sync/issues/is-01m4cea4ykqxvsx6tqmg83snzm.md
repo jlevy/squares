@@ -3,9 +3,9 @@ type: is
 id: is-01m4cea4ykqxvsx6tqmg83snzm
 title: Preserve canonical rigidity-owner block bytes on confirmed re-adoption
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 7
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,22 @@ parent_id: is-01m4cdj4xvndxnrt6cw38acpxb
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:23:48.435Z
-updated_at: 2026-10-08T01:53:00.516Z
+updated_at: 2026-10-08T02:33:34.802Z
 started_at: 2026-10-08T00:32:10.089Z
+closed_at: 2026-10-08T02:33:34.802Z
+close_reason: Source scope fixed, independently reviewed, actual final PR CI green and merged in main f747407 via PR429; retain native timing follow-up think-c63v and actual deployment/reply scope open.
+resolution: null
+duplicate_of: null
 ---
 Actual upper gate at a6 flags all9 rigidity assessed-here blocks stale. Independent Astra confirms numerical dictionaries and screen bytes are unchanged; c5ee/0d original blocks are owner-canonical. Re-adoption at a6 dumps whole frontmatter width98 and rewraps blocks owned by assess_frontier_rigidity standalone width96+indent4; owner check compares text. Medium cross-producer serialization defect introduced by latest repair, not stale mathematics at old0d. Sol repair_upper_ci must preserve/splice exact owned block after strict same-confirmed-pose admission, with all-nine raw-byte/idempotence/initial-admission regression and existing owner --check PASS. Preserve historical gate cancellation/failures and original scientific receipts. Fresh source review and final CI required.
 
 ## Notes
+
+ACTUAL SOURCE MERGE / RECOVERY COMPLETION — 2026-10-08 UTC:
+HostedfinalPR429fc988 all30SUCCESS26documentedSKIP, run37717184184 includingformerlyfailedsuiteD. Lower4273345 likewiseCLEANreviewedgreen. Freshcurrenthead ReviewJ5450641707 ACCEPTsourcecorrectness0findings; old E–I/fullscientificscopesretained. Actualatomic ghstackmerge429--yes--merge SUCCEEDED at02:25:19UTC, mergingONLY427+429 intomain f747407a0fa83d80a7894331c770aeb314b23163. BothGitHubPRstatesMERGED/mergeCommitf747verified. Draft434 excludedandstillpendingownfinalCI/review. Noadmin/force/contextspoof/limitweakening.
+NativewallgapremainsP2think-c63vOPEN:2853assertionspass butnativeD raw1, target14.74>12/tier182.67>143. Thisknownlocalfailureisnotrewrittenasgreen. Codeperformance sourceequivalence108fullenvelopes/27metadata/freshinputs intact; source acceptance/CIengineering cancloseatmergedmilestone whilec63v/deploymentparentsremainopen.
+AllsourcebranchhistoryandnewfixsavedGitHub. Latestfinalrepairarchive squares-confirmation-repair-custody-20261008.tar.gz1568217B SHA2560cc4f87c994de456fa275e78545ca76065713846f668daeb8f1c1ef9f795ac20 actualupload/downloadALL63membershashMATCH; all4downloadedassetsMATCH; upper-conversion-repair-fc988788.bundle downloadedGitverifyEXIT0 requiringalreadyGitHub-savedef472. Prior1769gates/44GitHubaudit/1968operations/124finalreviews/703older/138425/108actual401 archivesremainimmutable/downloadverified. Raw failures/cancellation/oldunavailableouter preserved. RecoveryfullstatebodyPR43191c6 reviewedCLEAN16SUCCESS50SKIP remainsopenuntilsciencepublicationstable, allstatecurrentbeadnoteslinked.
+Rootsourcecheckoutnowactualmainf747 clean; Pagesrun37717788426 deploySUCCESS andverify-deploymentpendingatlastread. Final liveagent116rows23cases46SVG48layouts awaitsrawsuccessfulrun/deployment/statusmatchingmain/source ownership. Issue422stillOPEN untilactualliveaudit/finalreply/ledger; think-qc6y/sfpz remainOPEN. Latestenvironmentstartup save stillstale_base unsaved despite testedcurrentbootstrap/GH/tbd; GitHubZIPrecoverable/newsetupchatneeded. Currentnewintake434 ten425jobs/three428upstreamjobsandpublic103filecustodyproved butfive428projectjobs/finalproductionadmission/census/review/8CIfails remainseparateowningclaims; donotreassignv42c.
 
 CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
 Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.

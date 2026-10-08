@@ -3,9 +3,9 @@ type: is
 id: is-01m4ces8vfzrp7wzkr7rsj2w5n
 title: Admit the SQUISH confirmation packet once per results-checker invocation
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 6
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,22 @@ parent_id: is-01m4cdj4xvndxnrt6cw38acpxb
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:32:03.950Z
-updated_at: 2026-10-08T01:53:01.040Z
+updated_at: 2026-10-08T02:33:35.061Z
 started_at: 2026-10-08T00:47:51.849Z
+closed_at: 2026-10-08T02:33:35.061Z
+close_reason: Source scope fixed, independently reviewed, actual final PR CI green and merged in main f747407 via PR429; retain native timing follow-up think-c63v and actual deployment/reply scope open.
+resolution: null
+duplicate_of: null
 ---
 Actual hosted a6 unmutated private result worker45.95s exceeds unchanged45s threshold. Profile instruments copied worker only: nine admissions43.98s cumulative, repeated27-job geometry/metadata reconstruction dominant41.06s; compressed-factI/O2.075s. Profiled child65.52s includes instrumentation overhead, not a baseline budget verdict. Sol sourceowner repairing main-local batch admission exactlyonce, completepacket premises validated, each selectedproof leaf retains unchanged strict checks, directstandaloneAPI fresh, no cross-invocation/global cache. Fresh mutation/refusal/batch equivalence controls, exact privateworker45s test and independentAstra review required. No cap/grace/assertion changes.
 
 ## Notes
+
+ACTUAL SOURCE MERGE / RECOVERY COMPLETION — 2026-10-08 UTC:
+HostedfinalPR429fc988 all30SUCCESS26documentedSKIP, run37717184184 includingformerlyfailedsuiteD. Lower4273345 likewiseCLEANreviewedgreen. Freshcurrenthead ReviewJ5450641707 ACCEPTsourcecorrectness0findings; old E–I/fullscientificscopesretained. Actualatomic ghstackmerge429--yes--merge SUCCEEDED at02:25:19UTC, mergingONLY427+429 intomain f747407a0fa83d80a7894331c770aeb314b23163. BothGitHubPRstatesMERGED/mergeCommitf747verified. Draft434 excludedandstillpendingownfinalCI/review. Noadmin/force/contextspoof/limitweakening.
+NativewallgapremainsP2think-c63vOPEN:2853assertionspass butnativeD raw1, target14.74>12/tier182.67>143. Thisknownlocalfailureisnotrewrittenasgreen. Codeperformance sourceequivalence108fullenvelopes/27metadata/freshinputs intact; source acceptance/CIengineering cancloseatmergedmilestone whilec63v/deploymentparentsremainopen.
+AllsourcebranchhistoryandnewfixsavedGitHub. Latestfinalrepairarchive squares-confirmation-repair-custody-20261008.tar.gz1568217B SHA2560cc4f87c994de456fa275e78545ca76065713846f668daeb8f1c1ef9f795ac20 actualupload/downloadALL63membershashMATCH; all4downloadedassetsMATCH; upper-conversion-repair-fc988788.bundle downloadedGitverifyEXIT0 requiringalreadyGitHub-savedef472. Prior1769gates/44GitHubaudit/1968operations/124finalreviews/703older/138425/108actual401 archivesremainimmutable/downloadverified. Raw failures/cancellation/oldunavailableouter preserved. RecoveryfullstatebodyPR43191c6 reviewedCLEAN16SUCCESS50SKIP remainsopenuntilsciencepublicationstable, allstatecurrentbeadnoteslinked.
+Rootsourcecheckoutnowactualmainf747 clean; Pagesrun37717788426 deploySUCCESS andverify-deploymentpendingatlastread. Final liveagent116rows23cases46SVG48layouts awaitsrawsuccessfulrun/deployment/statusmatchingmain/source ownership. Issue422stillOPEN untilactualliveaudit/finalreply/ledger; think-qc6y/sfpz remainOPEN. Latestenvironmentstartup save stillstale_base unsaved despite testedcurrentbootstrap/GH/tbd; GitHubZIPrecoverable/newsetupchatneeded. Currentnewintake434 ten425jobs/three428upstreamjobsandpublic103filecustodyproved butfive428projectjobs/finalproductionadmission/census/review/8CIfails remainseparateowningclaims; donotreassignv42c.
 
 CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
 Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
