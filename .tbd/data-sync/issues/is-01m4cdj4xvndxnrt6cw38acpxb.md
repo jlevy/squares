@@ -5,7 +5,7 @@ title: Repair PR429 final-head hosted contracts and generated owners
 kind: bug
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: codex@17e132e9b179
 labels: []
 dependencies:
@@ -18,12 +18,18 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:10:41.979Z
-updated_at: 2026-10-08T01:56:40.255Z
+updated_at: 2026-10-08T02:22:58.057Z
 started_at: 2026-10-08T00:11:46.371Z
 ---
 CI run37705180742 at0d01524b has25SUCCESS26SKIP5FAIL. Preserve exact17 behavioral failures across suites A12/B4/C1 and4 validation-owner failures. Repair historical packet and canonical citation scope, selected proof snapshot/index controls, mutable fixture-root ownership, exact integrity trust boundaries, verified-ceiling consumer census, and generated frontier/doc/ceiling prose. Dedicated GPT6.1Sol repair_upper_ci owns source; root owns native and GitHub. Full gate, fresh review of source delta, hosted CI, deployment remain pending. Original wholeA/B/C/D zero findings stay scoped to old0d head, not future repair.
 
 ## Notes
+
+CURRENT COMMITTED REPAIR / EXACT SOURCE STATE — 2026-10-08 UTC:
+PR429 sourcefc9887888a09196798c664a45d836dcdee68212f is committedclean, actualnonforcepushed/remoteGitSHAandPRAPIverified. Parentef472, onlyupper-ownedconfirmation.py40insert/11delete (blobebb66385), everyother15801treeentry/data/science/case/test/budgetunchanged. Pin101026ownerPASS. Fresh currenthead Astra ReviewJ ROUND5 ACCEPTsourcecorrectness0findings https://github.com/jlevy/squares/pull/429#pullrequestreview-5450641707. Original E–I scopes retained; no newfullSCI replay needed/claimed.137existingfocusedtestsPASS88.85raw0, lint/format/type/pinraw0. Full108envelopes/27metadata transforms identical;162→108normalizationcalls onlyduplicatefullsameinputs removed; publicfreshentry/18freshcasecalls/mutationisolation andalloriginalpredicates preserved.
+Native suiteD2853PASS5SKIP1XFAIL butrawouter1/183.196s isreal localpolicy failure:14.74s≥12testlimit,182.67≥143tier. Original45.41hostedfailure remains unchanged. Same-node isolated19.94→12.18 is~39%faster, not a hostedclaim. ActualnewheadhostedCIrunningunderdeclaredPRadvisory12/hard45, withno observedfailureatlastread. NativegaptrackedP2think-c63v OPEN; no lower-ownedscalarprimitive changed/waiver/contextspoof. Requirednewhead CI mustactuallypassbeforemerge. Engineeringx2gl/sourceacceptancekqd3/deploymentqc6y remainOPEN withactualdepsx2gl→kqd3→qc6y.
+AllcurrentworkPRsaved:4273345greenready,429fc988readycurrentCIPENDING,43191c6greenreadyfull-statebody,43478229draft8failotherlane. Explicitmerge429targetincludes427+429only, excludes434. CurrentfullstatebothPRbodiesOR9PASS andnative recordslinked, issue422progress6050615059,434audit6050602101. Allpriorarchives/1769gates+44GitHubauditmembers andsourceGitbundles actualdownload/memberhashverified. Newfinalrepairbundlefc988 andfrozenlocalnative-failure/sourceequivalence/test/ReviewJ supplementpreparedforupload; sourcecommittransportalreadydone. WIPpatchebb66385 alsoGitHubcustody, explicitlynotoldhostedgreenclaim.
+Actual422livepublication remainsUNRUN awaitingactualmergedmainPages/deployment/status; standardagent116rows23cases46SVG48mobile/desktoplayouts prepared. Keep422open untilactualaudit/finalreply/ledger. 434public103payloadfilehashesverified, ten425jobs/three428UPSTREAMjobsretainedrealexecution; five428PROJECTrouteprotocolnotestablished, finaladmission/census/review/CIremainpendingowningcoowner. Latestreusableenvironmentstartupsave stillstale_base unsaved;testedcurrentinstance andGitHubZIPrecovery saved, newsetupchatcurrentsettingsrequired.
 
 LATEST FINAL-HOSTED FAILURE / DURABLE PROOF — 2026-10-08 UTC:
 Upperef472 exacthostedrun37714712284 completed28SUCCESS26SKIP2FAIL; actualsolecause test_linked_proof_batch_matches_all_fresh_standalone_checks call45.41s >=unchanged45s pertestPRlimit. SuiteD172.50/143 advisorytierisnotunderlyingfailure. RequiredaggregatefollowssuiteD. Correctness assertionspassed; thisisstillarealrequiredCI failure, no mergeallowed. Solsourceownerrepairsworkcost andAstraindependentsemanticsanalysis active; no caps/assertions/scienceweakened.

@@ -5,7 +5,7 @@ title: Review current PR reports and plan separate import and verification slice
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -25,12 +25,18 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T02:18:31.356Z
+updated_at: 2026-10-08T02:22:57.496Z
 started_at: 2026-10-07T19:28:52.536Z
 ---
 User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
 
 ## Notes
+
+CURRENT COMMITTED REPAIR / EXACT SOURCE STATE — 2026-10-08 UTC:
+PR429 sourcefc9887888a09196798c664a45d836dcdee68212f is committedclean, actualnonforcepushed/remoteGitSHAandPRAPIverified. Parentef472, onlyupper-ownedconfirmation.py40insert/11delete (blobebb66385), everyother15801treeentry/data/science/case/test/budgetunchanged. Pin101026ownerPASS. Fresh currenthead Astra ReviewJ ROUND5 ACCEPTsourcecorrectness0findings https://github.com/jlevy/squares/pull/429#pullrequestreview-5450641707. Original E–I scopes retained; no newfullSCI replay needed/claimed.137existingfocusedtestsPASS88.85raw0, lint/format/type/pinraw0. Full108envelopes/27metadata transforms identical;162→108normalizationcalls onlyduplicatefullsameinputs removed; publicfreshentry/18freshcasecalls/mutationisolation andalloriginalpredicates preserved.
+Native suiteD2853PASS5SKIP1XFAIL butrawouter1/183.196s isreal localpolicy failure:14.74s≥12testlimit,182.67≥143tier. Original45.41hostedfailure remains unchanged. Same-node isolated19.94→12.18 is~39%faster, not a hostedclaim. ActualnewheadhostedCIrunningunderdeclaredPRadvisory12/hard45, withno observedfailureatlastread. NativegaptrackedP2think-c63v OPEN; no lower-ownedscalarprimitive changed/waiver/contextspoof. Requirednewhead CI mustactuallypassbeforemerge. Engineeringx2gl/sourceacceptancekqd3/deploymentqc6y remainOPEN withactualdepsx2gl→kqd3→qc6y.
+AllcurrentworkPRsaved:4273345greenready,429fc988readycurrentCIPENDING,43191c6greenreadyfull-statebody,43478229draft8failotherlane. Explicitmerge429targetincludes427+429only, excludes434. CurrentfullstatebothPRbodiesOR9PASS andnative recordslinked, issue422progress6050615059,434audit6050602101. Allpriorarchives/1769gates+44GitHubauditmembers andsourceGitbundles actualdownload/memberhashverified. Newfinalrepairbundlefc988 andfrozenlocalnative-failure/sourceequivalence/test/ReviewJ supplementpreparedforupload; sourcecommittransportalreadydone. WIPpatchebb66385 alsoGitHubcustody, explicitlynotoldhostedgreenclaim.
+Actual422livepublication remainsUNRUN awaitingactualmergedmainPages/deployment/status; standardagent116rows23cases46SVG48mobile/desktoplayouts prepared. Keep422open untilactualaudit/finalreply/ledger. 434public103payloadfilehashesverified, ten425jobs/three428UPSTREAMjobsretainedrealexecution; five428PROJECTrouteprotocolnotestablished, finaladmission/census/review/CIremainpendingowningcoowner. Latestreusableenvironmentstartupsave stillstale_base unsaved;testedcurrentinstance andGitHubZIPrecovery saved, newsetupchatcurrentsettingsrequired.
 
 CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
 Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
