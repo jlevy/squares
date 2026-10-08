@@ -979,7 +979,6 @@ fn receipt_publication_write_failure_preserves_old_file() {
 
 #[test]
 fn receipt_publication_rename_failure_preserves_old_file() {
-    use std::io::Write;
     let directory = tempfile::tempdir().unwrap();
     let output = directory.path().join("receipt.json");
     std::fs::write(&output, b"old receipt\n").unwrap();
@@ -988,7 +987,7 @@ fn receipt_publication_rename_failure_preserves_old_file() {
     let result = write_receipt_with(
         &output,
         &receipt,
-        |file, bytes| file.write_all(bytes),
+        std::io::Write::write_all,
         |staged, destination| {
             assert_eq!(staged.parent(), destination.parent());
             assert_eq!(std::fs::read_to_string(&staged).unwrap(), expected);
@@ -1051,7 +1050,6 @@ fn receipt_publication_replaces_symlink_and_uses_private_permissions() {
 
 #[test]
 fn receipt_publication_reports_cleanup_failure_with_original_error() {
-    use std::io::Write;
     let directory = tempfile::tempdir().unwrap();
     let output = directory.path().join("receipt.json");
     std::fs::write(&output, b"old receipt\n").unwrap();
@@ -1059,7 +1057,7 @@ fn receipt_publication_reports_cleanup_failure_with_original_error() {
     let result = write_receipt_with(
         &output,
         &json!({"status": "PASS"}),
-        |file, bytes| file.write_all(bytes),
+        std::io::Write::write_all,
         |staged, _| {
             std::fs::remove_file(&staged).unwrap();
             std::fs::create_dir(&staged).unwrap();

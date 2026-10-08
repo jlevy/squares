@@ -1378,11 +1378,10 @@ pub fn verify(directory: &str, cells: &Cells, opt: &Options) -> Result<Value> {
 /// Staging is in the destination directory. This promises atomic visibility, not
 /// crash durability or preservation of destination metadata; a symlink is replaced.
 pub fn write_receipt(path: &Path, receipt: &Value) -> Result<()> {
-    use std::io::Write;
     write_receipt_with(
         path,
         receipt,
-        |file, bytes| file.write_all(bytes),
+        std::io::Write::write_all,
         |staged, destination| staged.persist(destination),
     )
 }
@@ -1409,18 +1408,18 @@ pub(crate) fn write_receipt_with(
     if let Err(error) =
         write(staged.as_file_mut(), bytes.as_bytes()).and_then(|()| staged.as_file_mut().flush())
     {
-        return receipt_publication_error(path, error, staged.into_temp_path());
+        return receipt_publication_error(path, &error, staged.into_temp_path());
     }
     // Close the staged file before replacing, including on Windows.
     match publish(staged.into_temp_path(), path) {
         Ok(()) => Ok(()),
-        Err(error) => receipt_publication_error(path, error.error, error.path),
+        Err(error) => receipt_publication_error(path, &error.error, error.path),
     }
 }
 
 fn receipt_publication_error(
     path: &Path,
-    error: std::io::Error,
+    error: &std::io::Error,
     staged: tempfile::TempPath,
 ) -> Result<()> {
     let context = format!("cannot publish receipt {}: {error}", path.display());
