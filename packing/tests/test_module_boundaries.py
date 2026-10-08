@@ -1314,6 +1314,14 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_n5_local_rigidity.py": {
             "test_every_control_rejects",  # 8.0s
         },
+        # 2026-10-08, final merged parent ef9ef806: 92.43s call, 95.60s pytest wall.
+        # One actual full private copy, complete FN1/SQUISH admission, three receipt/input
+        # mutants and restorations; no shared fixture/build or geometric replay.
+        # Durable receipt: review-notes/fn1-final-evidence/fn1-actual-worker.log and JUnit
+        # outside disposable scratch. Every bounded source/receipt control stays fast.
+        "test_fn1_input_bindings.py": {
+            "test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant",  # 92.43s
+        },
         # 8s of call time across 1; 8.15s on the hosted PR runner. This directly copies
         # the source tree into a worker and has no shared builder whose cost can move to
         # a neighbouring test, so the slow marker is the measured classification.

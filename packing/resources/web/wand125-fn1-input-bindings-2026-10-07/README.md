@@ -41,9 +41,17 @@ manifest. At the measured pre-#432 parent, the maintained source-byte command re
 201,334,850 bytes against the unchanged 201,326,592-byte cap.
 That receipt is an early integration observation.
 The frozen #432 parent is now integrated.
-The merged source budget is admitted after lossless complete-receipt retention; actual
-private-worker positive, mutation and restoration admission remains required on the
-final hosted head. No input is dropped or linked to make the tree fit.
+The merged source budget is admitted after lossless complete-receipt retention.
+One actual private-worker transaction passes in 95.60 seconds at the final merged parent
+`ef9ef806`, with 92.43 seconds of call time.
+Every declared FN1 input and the complete SQUISH receipt are copied exactly once as
+independent, byte-equal files.
+All eight original-input chains and all eleven complete SQUISH inputs/native outcomes
+admit; actual old-receipt, native-result and checker-input mutations refuse, and their
+original bytes admit after restoration.
+The eight child commands retain their 45-second limits.
+No input is dropped or linked to make the tree fit.
+Exact-head hosted checks remain required before readiness.
 
 ## Efficiency Slice: Complete Receipt Retention
 
@@ -56,8 +64,9 @@ asset is recompressed.
 The receipt reader retains its 4,000,000-byte decoded limit, ordinary JSON its
 1,000,000-byte limit, and the worker its 201,326,592-byte source cap.
 
-The merged budget measurement is 200,003,301 bytes before the final twin regression and
-this note, leaving 1,323,291 bytes.
+The early merged budget measurement was 200,003,301 bytes before the final twin
+regression. The final-parent measurement before the marker and this note is 200,069,199
+bytes, leaving 1,257,393 bytes under the unchanged cap.
 Final publication remeasures the complete tree.
 All 52 bounded receipt/source controls pass in 8.32 seconds, with the bulk worker
 explicitly excluded; scoped Ruff and BasedPyright report no findings.
@@ -67,7 +76,13 @@ partial producer runs.
 It reproduces 13 controls in 6.82 seconds and the six final twin/producer checks in 1.33
 seconds. These are custody and representation checks, without geometry replay or changes
 to claims, bounds or assurance ratings.
-The actual hosted worker remains pending; source acceptance is not a worker pass.
+The actual worker’s measured call is classified as slow with its retained log/JUnit,
+while all bounded source/receipt controls remain on the fast surface.
+The final records tier passes all 48 selected steps in 138.36 seconds under its
+300-second ceiling. The actual transaction performs custody admission; it runs no
+geometric decider. Its complete receipt, storage preflight and command output are
+retained outside disposable scratch.
+Hosted exact-head checks remain pending.
 
 ## Retained Commands
 

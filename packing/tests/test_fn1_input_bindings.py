@@ -174,6 +174,9 @@ def test_complete_input_cannot_be_replaced_by_a_link(
         fn1.verify(packet, existing, repository)
 
 
+# Measured full private-copy and fresh admission transaction: 92.43s call on
+# 2026-10-08; durable fn1-actual-worker.log/JUnit at reviewed parent ef9ef806.
+@pytest.mark.slow
 def test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
