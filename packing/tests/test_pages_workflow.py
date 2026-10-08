@@ -57,7 +57,6 @@ AWAITING_FIRST_RUN = frozenset(
         "publish",
         "n11-threshold-bound-review",
         "square-packing-methods-survey",
-        "exact-side-values",
     }
 )
 #: Independently built papers, each named by its registry slug.
@@ -1479,13 +1478,7 @@ def test_every_page_job_a_pull_request_runs_is_budgeted() -> None:
         if where in unmeasured:
             assert entry["measured_on"] is None, where
             assert entry["measured_where"] is None, where
-            if where == "exact-side-values":
-                # This first-run provision prints the full 366-page coefficient
-                # appendix. Its 147.85s local cold render precedes tests/upload;
-                # replace this exception with the first hosted measurement.
-                assert entry["ceiling_seconds"] == 300.0, where
-            else:
-                assert 0 < entry["ceiling_seconds"] < 180.0, where
+            assert 0 < entry["ceiling_seconds"] < 180.0, where
             assert entry["argument"].strip(), where
             continue
         assert entry["measured_seconds"] > 0, where

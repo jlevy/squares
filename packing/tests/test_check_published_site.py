@@ -1118,9 +1118,19 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
     serves and, with an anchor, a heading of that paper, on the page and in the Markdown
     edition alike. A link to a paper not in the build is reported and not failed; one to
     a paper the site does not serve, or to a heading the paper does not have, fails."""
-    explainer, threshold, optimality, methods = (
-        render_overview.paper_path(paper.slug) for paper in render_overview.PAPERS
+    series = tuple(paper for paper in render_overview.PAPERS if paper.part is not None)
+    assert [paper.part for paper in series] == [1, 2, 3]
+    assert [paper.slug for paper in series] == [
+        render_overview.N11_LOWER_BOUNDS_EXPLAINER,
+        render_overview.N11_THRESHOLD_BOUND_REVIEW,
+        render_overview.N11_OPTIMALITY_REVIEW,
+    ]
+    explainer, threshold, optimality = (
+        render_overview.paper_path(paper.slug) for paper in series
     )
+    methods = render_overview.paper_path(render_overview.PACKING_METHODS)
+    exact = render_overview.paper_path(render_overview.EXACT_SIDE_VALUES)
+    assert render_overview.paper_record(render_overview.EXACT_SIDE_VALUES).part is None
     site = render_overview.SITE_URL + "papers/"
     pages = {
         explainer: _paper_page(
@@ -1135,6 +1145,7 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
                 '<a href="n11-lower-bounds-explainer.html#the-result-and-proof-roadmap">I</a>'
             ),
         ),
+        exact: _paper_page("coverage"),
     }
     pages[methods] = _paper_page(
         "from-a-seed-to-a-certified-bound",
@@ -1551,6 +1562,7 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
         "papers/square-packing-methods-survey.html",
+        "papers/exact-side-values.html",
     )
     # The record files the check samples are pages a reader shares too.
     records = [
