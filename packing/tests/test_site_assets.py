@@ -14,6 +14,7 @@ import re
 from pathlib import Path
 
 import pytest
+from nodejs_wheel import node
 
 from devtools import check_published_site, render_overview, site_assets, site_math
 from devtools.render_case_pages import rebase_links
@@ -164,7 +165,7 @@ def test_every_site_page_links_the_shared_design_system(home: tuple[str, str]) -
 
     page, served = home
     assert "@font-face" not in page
-    assert 'rel="preload"' in page
+    assert "data-site-font-preload" in page
     assert katex_js(kpress_static()) not in page
     assert katex_js(kpress_static()) not in served
     bundle = site_assets.shared()
@@ -216,11 +217,19 @@ def test_linked_publication_preloads_only_its_front_faces_once_before_styles(
         f"<head>{site_assets.stylesheet_tag(bundle.kpress_css, page_path)}</head>"
     )
     linked, files = site_assets.link_inline_assets(inline, page_path)
-    expected = site_assets.preload_tags(bundle.assets, page_path).splitlines()
+    expected = re.findall(
+        r"<link data-site-font-preload [^>]+>\n?",
+        site_assets.preload_tags(bundle.assets, page_path),
+    )
     assert len(expected) == len(site_assets.PRELOADED_FACES)
     for tag in expected:
         assert linked.count(tag) == 1
         assert linked.index(tag) < linked.index('rel="stylesheet"')
+        assert "crossorigin" not in tag
+        assert 'rel="preload"' not in tag
+    bootstrap = site_assets.font_preload_bootstrap_tag()
+    assert linked.count(bootstrap) == 1
+    assert linked.index(bootstrap) < linked.index('rel="stylesheet"')
     assert site_assets.link_inline_assets(linked, page_path) == (linked, files)
     assert bundle.assets.inlined(linked) == inline
 
@@ -229,8 +238,14 @@ def test_linked_publication_preloads_only_its_front_faces_once_before_styles(
     small, small_files = site_assets.link_inline_assets(
         "<head><style>p{color:navy}</style></head>", page_path
     )
-    assert 'rel="preload"' not in small
+    assert "data-site-font-preload" not in small
     assert not any(name.endswith(".woff2") for name in small_files)
+
+
+def test_font_preload_activation_chooses_credentials_before_starting_requests() -> None:
+    fixture = Path(__file__).parent / "node/site_assets/preload-fonts.mjs"
+    result = node([str(fixture)], return_completed_process=True, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
 
 
 def test_prepared_shared_shell_inlines_metric_css_and_remains_idempotent() -> None:

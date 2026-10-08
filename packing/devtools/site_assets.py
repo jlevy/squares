@@ -36,6 +36,10 @@ from typing import Literal, NamedTuple
 from kpress.format.assets import AssetLoading, AssetRef, content_hash
 from kpress.output import write_bytes_atomic
 
+from sqpack.probes import applied, probe
+
+FONT_PRELOAD_PROGRAM = Path(__file__).resolve().parent / "probes/site_assets/preload_fonts.js"
+
 #: The directory under the site's root the shared assets are published in.
 ASSETS_DIR = "assets"
 
@@ -181,6 +185,7 @@ def inline_assets(page: str, read: Callable[[str], bytes]) -> str:
         return f"<script>{checked_read(match.group(1)).decode('utf-8')}</script>"
 
     page = _PRELOAD_TAG.sub("", page)
+    page = _FONT_PRELOAD_BOOTSTRAP_TAG.sub("", page)
     page = _STYLESHEET_TAG.sub(style, page)
     return _SCRIPT_TAG.sub(script, page)
 
@@ -320,10 +325,18 @@ def link_inline_assets(
             ),
             page,
         )
+        page = _FONT_PRELOAD_BOOTSTRAP_TAG.sub("", page)
         first_sheet = _STYLESHEET_TAG.search(page)
         assert first_sheet is not None
         offset = first_sheet.start()
-        page = page[:offset] + "\n".join(preloads.values()) + "\n" + page[offset:]
+        page = (
+            page[:offset]
+            + "\n".join(preloads.values())
+            + "\n"
+            + font_preload_bootstrap_tag()
+            + "\n"
+            + page[offset:]
+        )
     return page, files
 
 
@@ -367,7 +380,13 @@ _STYLESHEET_TAG = re.compile(
 # instead of silently leaving an external stylesheet in a self-contained export.
 _MARKED_STYLESHEET_TAG = re.compile(r"<link\b[^>]*\bdata-site-math-styles(?=\s|=|>)[^>]*>")
 _SCRIPT_TAG = re.compile(rf'<script src="(?:\.\./)*{ASSETS_DIR}/([^"]+)"></script>')
-_PRELOAD_TAG = re.compile(rf'<link rel="preload" href="(?:\.\./)*{ASSETS_DIR}/[^"]+"[^>]*>\n?')
+_PRELOAD_TAG = re.compile(
+    rf'<link (?:rel="preload"|data-site-font-preload) '
+    rf'href="(?:\.\./)*{ASSETS_DIR}/[^"]+"[^>]*>\n?'
+)
+_FONT_PRELOAD_BOOTSTRAP_TAG = re.compile(
+    r"<script data-site-font-preloads>.*?</script>\n?", re.DOTALL
+)
 
 
 def asset_href(ref: AssetRef, page: str) -> str:
@@ -389,16 +408,25 @@ def script_tag(ref: AssetRef, page: str) -> str:
 
 
 def preload_tags(assets: SiteAssets, page: str) -> str:
-    """A preload for each face in `PRELOADED_FACES` the bundle holds."""
+    """Inert font declarations, activated with the correct protocol's credentials
+    before stylesheets. With no JavaScript, the existing CSS loads its faces normally."""
     tags = []
     for name in PRELOADED_FACES:
         ref = assets.face_ref(name)
         if ref is not None:
             href = escape(asset_href(ref, page))
             tags.append(
-                f'<link rel="preload" href="{href}" as="font" type="font/woff2" crossorigin>'
+                f'<link data-site-font-preload href="{href}" as="font" type="font/woff2">'
             )
+    if tags:
+        tags.append(font_preload_bootstrap_tag())
     return "\n".join(tags)
+
+
+def font_preload_bootstrap_tag() -> str:
+    """The reviewed prepaint program; no active CORS hint precedes its decision."""
+    program = applied(probe(FONT_PRELOAD_PROGRAM.parent, FONT_PRELOAD_PROGRAM.stem))
+    return f"<script data-site-font-preloads>{program}</script>"
 
 
 class SharedAssets(NamedTuple):

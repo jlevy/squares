@@ -54,6 +54,9 @@ from devtools.render_n11_lower_bounds_explainer_pdf import OUTPUT as PDF_OUTPUT
 from devtools.repo_links import DEFAULT_BRANCH, REPO_URL, RepositoryTree, branch_paths
 from sqpack.release import EXPLAINER_VERSION, OPTIMALITY_REVIEW_EDITION, PUBLICATION_EDITION
 from tests import site_renders
+from tests.site_renders import prepared_forwarders
+
+pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 
 #: A page's text linking into the repository four ways: from markup, from Markdown, from plain
 #: text, and from inside a script, which the check must not read. `{{REPO_URL}}` and `{{SHA}}`
@@ -269,6 +272,24 @@ def site_naming(named: Sequence[str], /, **overrides: bytes) -> dict[str, bytes]
     for name in RECORD_LINK_PAGES:
         pages[name] += results_table(here=name == render_overview.RESULTS_PAGE)
     return pages
+
+
+def test_fake_deploy_variants_keep_the_prepared_forwarders_immutable(
+    prepared_forwarders: tuple[render_overview.Page, ...],
+) -> None:
+    first = render_overview.forwarder_pages()
+    second = render_overview.forwarder_pages()
+    assert first is not second
+    assert tuple(first) == tuple(second) == prepared_forwarders
+    first.pop()
+    assert tuple(render_overview.forwarder_pages()) == prepared_forwarders
+    changed = site_pages(**{"cases.html": b"a deliberately broken forwarder"})
+    original = site_pages()
+    assert changed is not original
+    assert original["cases.html"] == next(
+        page.html.encode() for page in prepared_forwarders if page.name == "cases.html"
+    )
+    assert changed["cases.html"] != original["cases.html"]
 
 
 def fake_site(

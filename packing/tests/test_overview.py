@@ -221,6 +221,10 @@ def test_the_page_fetches_only_the_shared_assets(page: str) -> None:
     for shared, elsewhere in (
         ('<script src="assets/js/', '<script src="js/'),
         ('<link rel="stylesheet" href="assets/css/', '<link rel="stylesheet" href="css/'),
+        (
+            '<link data-site-font-preload href="assets/fonts/',
+            '<link data-site-font-preload href="https://example.com/fonts/',
+        ),
     ):
         moved = page.replace(shared, elsewhere, 1)
         assert moved != page, shared

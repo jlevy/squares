@@ -347,6 +347,8 @@ RENDER_INPUTS: tuple[Path, ...] = (
     SITE_CSS,
     PACKING / "devtools/templates/site-math.css",
     PACKING / "devtools/site_math.py",
+    PACKING / "devtools/site_assets.py",
+    PACKING / "devtools/probes/site_assets/preload_fonts.js",
     PACKING / "devtools/node/render-site-math.mjs",
     SITE_RESULT_CSS,
     SITE_NAV,
@@ -391,7 +393,8 @@ _ASSET_PATH = r"(?:\.\./)*assets/"
 _EXTERNAL_REFERENCE = re.compile(
     rf'<script(?![^>]*\ssrc="{_ASSET_PATH}js/)[^>]*\ssrc='
     r'|<link(?![^>]*\srel="canonical")(?![^>]*\shref="data:)'
-    rf'(?![^>]*\srel="(?:stylesheet|preload)"[^>]*\shref="{_ASSET_PATH})[^>]*\shref='
+    rf'(?![^>]*\srel="(?:stylesheet|preload)"[^>]*\shref="{_ASSET_PATH})'
+    rf'(?![^>]*\sdata-site-font-preload(?=\s|>)[^>]*\shref="{_ASSET_PATH}fonts/)[^>]*\shref='
     r"|@import\b"
     r"""|url\(\s*(?!["']?(?:data:|#))"""
 )

@@ -78,6 +78,7 @@ RENDER_INPUTS = (
     Path(__file__),
     ROOT / "devtools/render_n11_lower_bounds_explainer.py",
     ROOT / "devtools/site_assets.py",
+    ROOT / "devtools/probes/site_assets/preload_fonts.js",
     ROOT / "src/sqpack/render",
     ROOT / "pyproject.toml",
     ROOT / "uv.lock",

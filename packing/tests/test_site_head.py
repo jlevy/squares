@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import html
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -49,7 +50,11 @@ from devtools.render_overview import (
     head_tags,
     page_title,
 )
+from sqpack.probes import probe
 from tests import site_renders
+from tests.site_renders import prepared_forwarders
+
+pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 
 RESULTS = PageMeta(
     name="Every Result",
@@ -339,6 +344,73 @@ def test_a_head_is_read_by_a_parser_and_only_to_its_end() -> None:
     ) == check_published_site.PageHead(None, (), (), ())
 
 
+@pytest.mark.parametrize("boundary", [0, (1 << 16) - 3])
+def test_head_markers_in_raw_text_and_attributes_do_not_end_the_head(boundary: int) -> None:
+    """Only the parser's real head boundary ends metadata, including across chunks."""
+    prefix = '<!doctype html><html lang="en"><head>'
+    padding = " " * max(0, boundary - len(prefix))
+    marker = probe(check_published_site.PROBES, "check_published_site/head_marker")
+    page = (
+        prefix
+        + padding
+        + f"<script>{marker}</script>"
+        + "<style>/* </head><title>Not this</title> */</style>"
+        + "<!-- </head><title>Not this either</title> -->"
+        + '<meta data-note="</head>" name="extra" content="whole">'
+        + head_tags(RESULTS)
+        + favicon_html()
+        + '</head><body><meta property="og:title" content="Body"></body></html>'
+    )
+    head = read_head(page)
+    assert head.titles == ("Every Result · The Squares Project",)
+    assert head.meta("extra") == ["whole"]
+    assert head_problems(page, SITE_URL + RESULTS.path) == []
+
+
+@pytest.mark.parametrize("boundary", [0, (1 << 16) - 3])
+def test_head_reader_does_not_parse_the_math_body(
+    monkeypatch: pytest.MonkeyPatch, boundary: int
+) -> None:
+    """A metadata pass ends at the real boundary, before tokenizing dense body markup."""
+    prefix = '<!doctype html><html lang="en"><head>'
+    padding = " " * max(0, boundary - len(prefix) - len(head_tags(RESULTS)))
+    scanned: list[str] = []
+    original = HTMLParser.parse_starttag
+
+    def observe(reader: HTMLParser, position: int) -> int:
+        tag = re.match(r"<([a-z]+)", reader.rawdata[position:])
+        assert tag is not None
+        scanned.append(tag.group(1))
+        return original(reader, position)
+
+    monkeypatch.setattr(HTMLParser, "parse_starttag", observe)
+    page = (
+        prefix
+        + head_tags(RESULTS)
+        + padding
+        + "</head><body>"
+        + ("<math><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math>" * 800)
+        + "</body></html>"
+    )
+    assert read_head(page).titles == ("Every Result · The Squares Project",)
+    assert "body" not in scanned
+    assert "math" not in scanned
+
+
+def test_document_detection_stops_at_the_first_document_marker(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Detecting a document does not parse its metadata or the prepared math body."""
+
+    def refuse_head(*_args: object) -> None:
+        raise AssertionError("document detection reached the head")
+
+    monkeypatch.setattr(HTMLParser, "parse_starttag", refuse_head)
+    assert check_published_site.is_document(
+        "<!doctype html><html><head><title>Page</title></head><body></body></html>"
+    )
+
+
 def test_a_long_or_missing_description_is_a_finding() -> None:
     long = "x" * (DESCRIPTION_LIMIT + 1)
     tags = head_tags(RESULTS).replace(RESULTS.description, long)
@@ -538,7 +610,12 @@ def test_a_page_without_the_sites_exact_icon_pair_is_named(icons: str, finding: 
 
 @pytest.fixture(scope="module")
 def result_pages() -> dict[str, str]:
-    return {page.name: page.html for page in render_overview.result_fragments()}
+    return {page.name: page.html for page in site_renders.result_pages()}
+
+
+@pytest.fixture(scope="module")
+def records() -> dict[str, str]:
+    return site_renders.case_records()
 
 
 def test_result_overviews_are_complete_canonical_documents(
@@ -721,6 +798,7 @@ def published(
     pages: dict[str, str],
     card: bytes,
     result_pages: dict[str, str],
+    records: dict[str, str],
 ) -> Path:
     """Everything the overview's Pages job publishes, as it writes it: the site's pages,
     every case's record file, every forwarder and the card, with a result's overview
@@ -729,10 +807,7 @@ def published(
     root = tmp_path_factory.mktemp("published")
     files = [
         *(render_overview.Page(name, text) for name, text in pages.items()),
-        *(
-            render_overview.Page(name, text)
-            for name, text in site_renders.case_records().items()
-        ),
+        *(render_overview.Page(name, text) for name, text in records.items()),
         *render_overview.forwarder_pages(),
         *(render_overview.Page(name, text) for name, text in result_pages.items()),
         *site_documents.chapter_pages(),
@@ -743,7 +818,7 @@ def published(
 
 
 def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(
-    published: Path, result_pages: dict[str, str]
+    published: Path, result_pages: dict[str, str], records: dict[str, str]
 ) -> None:
     """The metadata contract, over every HTML file the overview's build publishes: each
     page and each case's record file carries the whole set at its own address, with the
@@ -753,7 +828,6 @@ def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(
     results = local_head_checks(published)
     assert [line for passed, line in results if not passed] == []
     lines = [line for _, line in results]
-    records = site_renders.case_records()
     assert len(records) == 324
     assert (
         f"case records: each of {len(records)} carries one of each identity and card tag, "
@@ -776,14 +850,17 @@ def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(
             "compare"
         )
         assert rule in lines, old
-    crawl, _ = site_urls.crawl_files()
+    crawl_html = {
+        "404.html",
+        *(row.path for row in site_urls.load_registry() if row.status == "withdrawn"),
+    }
     held = {
         *render_overview.PAGES,
         *records,
         *(old for old, _ in render_overview.MOVED_PAGES),
         *result_pages,
         *chapters,
-        *(name for name in crawl if name.endswith(".html")),
+        *(name for name in crawl_html if name.endswith(".html")),
     }
     assert {
         path.relative_to(published).as_posix() for path in published.rglob("*.html")
@@ -793,7 +870,7 @@ def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(
 
 
 def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
-    tmp_path: Path, pages: dict[str, str], card: bytes
+    tmp_path: Path, pages: dict[str, str], card: bytes, records: dict[str, str]
 ) -> None:
     """The negative controls: a page no list names that ships with a head and no preview,
     one whose head says nothing at all, a record file that loses its image, one without
@@ -801,11 +878,11 @@ def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
     every forwarder did before 2026-10-03, and one that previews the page beside it by
     another name than the page's own are each a failure of the check the overview's job
     runs."""
-    record = site_renders.case_records()["cases/11.html"]
+    record = records["cases/11.html"]
     good = {
         "index.html": pages["index.html"],
         "cases/11.html": record,
-        "cases/12.html": site_renders.case_records()["cases/12.html"],
+        "cases/12.html": records["cases/12.html"],
     }
     render_overview.write_site(tmp_path, [render_overview.Page(n, t) for n, t in good.items()])
     (tmp_path / SOCIAL_CARD).write_bytes(card)

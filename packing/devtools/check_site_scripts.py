@@ -100,6 +100,11 @@ PAPER_PROGRAMS = (
 )
 HEAD_PROGRAMS = (
     (
+        "Protocol-aware first-screen font preloads:",
+        "pre-paint",
+        "Activate owned font hints with protocol-correct credentials before stylesheets.",
+    ),
+    (
         "KPress pre-paint bootstrap",
         "pre-paint",
         "Set persisted reader attributes before body paint.",

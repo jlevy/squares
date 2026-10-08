@@ -408,10 +408,13 @@ fetched them again on every page, since a page’s own bytes were all it could c
 - **Faces.** Every face keeps `font-display: block`, so a face that arrives late holds
   the text it draws invisible.
   The faces a page draws its first screen in, PT Serif’s regular and Source Sans 3’s
-  upright, are preloaded beside the stylesheets (`site_assets.PRELOADED_FACES`), so they
-  are asked for with the stylesheet rather than after layout; the rest are fetched when
-  a page first draws in them, and a face no page draws, a print instance, only when one
-  prints.
+  upright, are declared beside the stylesheets (`site_assets.PRELOADED_FACES`). A small
+  prepaint program activates these hints with anonymous CORS on HTTP and HTTPS, and
+  without CORS for local files; choosing the mode before requesting the fonts avoids
+  WebKit’s file-origin cache failure while preserving shared HTTP font downloads.
+  With JavaScript disabled, the same stylesheets load their faces normally.
+  The rest are fetched when a page first draws in them, and a face no page draws, a
+  print instance, only when one prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its
   pages name, with the faces their stylesheets name.
   Each producer preserves other producers’ files and refuses different bytes at an

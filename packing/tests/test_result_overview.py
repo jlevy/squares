@@ -50,6 +50,12 @@ def bodies() -> dict[str, str]:
     return site_renders.result_bodies()
 
 
+@pytest.fixture(scope="module")
+def complete_pages() -> dict[str, str]:
+    """The complete registered documents, shared with the head-contract tests."""
+    return {page.name: page.html for page in site_renders.result_pages()}
+
+
 def _result(overview: overview_data.Overview, result_id: str) -> overview_data.Result:
     return next(result for result in overview.results if result.id == result_id)
 
@@ -646,14 +652,13 @@ def test_the_design_document_describes_the_overview() -> None:
         assert name in section, name
 
 
-def test_amended_result_address_notice_is_inside_the_complete_article() -> None:
+def test_amended_result_address_notice_is_inside_the_complete_article(
+    complete_pages: dict[str, str],
+) -> None:
     rows = site_urls.load_registry()
     row = next(row for row in rows if row.path == "result/t-116.html")
     amendment = next(change for change in row.amendments if change.get("historical_target"))
-    with patch.object(site_urls, "load_registry", return_value=rows) as loaded:
-        pages = render_overview.result_fragments()
-    assert loaded.call_count == 1
-    current = next(page.html for page in pages if page.name == row.path)
+    current = complete_pages[row.path]
     article = current.split('<article class="site-result"', 1)[1].split("</article>", 1)[0]
     notice = article.split('class="site-result-section site-result-compatibility"', 1)[1]
     notice = notice.split("</aside>", 1)[0]
@@ -663,6 +668,26 @@ def test_amended_result_address_notice_is_inside_the_complete_article() -> None:
     assert "separate upper bound result" in notice
     assert str(amendment["date"]) in notice
     assert "SQUISH" in article
+
+
+def test_complete_result_batch_loads_the_address_registry_once(
+    overview: overview_data.Overview,
+) -> None:
+    """Multiple real documents share one validated address registry per render pass."""
+    rows = site_urls.load_registry()
+    results = [_result(overview, result_id) for result_id in ("T-110", "T-116")]
+    with (
+        patch.object(overview_data, "load", return_value=replace(overview, results=results)),
+        patch.object(site_urls, "load_registry", return_value=rows) as loaded,
+    ):
+        pages = render_overview.result_fragments()
+    assert loaded.call_count == 1
+    assert {page.name for page in pages} == {
+        overview_sections.result_fragment(result.id) for result in results
+    }
+    for page in pages:
+        assert '<article class="site-result"' in page.html
+        assert "</html>" in page.html
 
 
 def test_address_notice_escapes_titles_and_credit(overview: overview_data.Overview) -> None:

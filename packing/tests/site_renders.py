@@ -22,9 +22,10 @@ A worker of a parallel run is a process of its own and renders its own.
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from functools import cache
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -135,3 +136,25 @@ def result_bodies() -> dict[str, str]:
 def case_records() -> dict[str, str]:
     """Every case's record file (`render_overview.case_records`), by served name."""
     return {record.name: record.html for record in render_overview.case_records()}
+
+
+@cache
+def result_pages() -> tuple[render_overview.Page, ...]:
+    """Every complete result document, immutable and rendered once per process."""
+    return tuple(render_overview.result_fragments())
+
+
+@cache
+def forwarders() -> tuple[render_overview.Page, ...]:
+    """The actual forwarders, including the validated case-routing inventory."""
+    return tuple(render_overview.forwarder_pages())
+
+
+@pytest.fixture(scope="module")
+def prepared_forwarders() -> Iterator[tuple[render_overview.Page, ...]]:
+    """Prepare immutable renderer input before per-test patches, then give each
+    checker invocation a fresh list. Its parsing and every mutated-page check still
+    run; repeated fake deploys need not revalidate 324 unchanged case records."""
+    rendered = forwarders()
+    with patch.object(render_overview, "forwarder_pages", side_effect=lambda: list(rendered)):
+        yield rendered

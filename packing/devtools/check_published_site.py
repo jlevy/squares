@@ -240,12 +240,17 @@ class PageHead(NamedTuple):
         return [href for name, href in self.links if name == rel]
 
 
+class _HeadCompleteError(Exception):
+    """Stop the parser as soon as its requested document boundary is known."""
+
+
 class _HeadReader(HTMLParser):
     """Reads the head and stops at its end. A real parser, since a head's inline scripts
     and styles are megabytes that may spell a tag in a comment or a string."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, document_only: bool = False) -> None:
         super().__init__(convert_charrefs=True)
+        self._document_only = document_only
         self.lang: str | None = None
         self.titles: list[str] = []
         self.metas: list[tuple[str, str]] = []
@@ -255,16 +260,30 @@ class _HeadReader(HTMLParser):
         self.document = False
         self._title: list[str] | None = None
 
+    def feed(self, data: str) -> None:
+        """Stop within a chunk, before tokenizing any prepared mathematics in the body."""
+        if self.done:
+            return
+        try:
+            super().feed(data)
+        except _HeadCompleteError:
+            self.done = True
+
+    def _found_document(self) -> None:
+        self.document = True
+        if self._document_only:
+            raise _HeadCompleteError
+
     def handle_decl(self, decl: str) -> None:
         if decl.lower().startswith("doctype"):
-            self.document = True
+            self._found_document()
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if self.done:
             return
         values = dict(attrs)
         if tag in ("html", "head"):
-            self.document = True
+            self._found_document()
         if tag == "html":
             self.lang = values.get("lang")
         elif tag == "title":
@@ -276,14 +295,14 @@ class _HeadReader(HTMLParser):
         elif tag == "link":
             self.links.append((values.get("rel") or "", values.get("href") or ""))
         elif tag == "body":
-            self.done = True
+            raise _HeadCompleteError
 
     def handle_endtag(self, tag: str) -> None:
         if tag == "title" and self._title is not None:
             self.titles.append("".join(self._title))
             self._title = None
         elif tag == "head":
-            self.done = True
+            raise _HeadCompleteError
 
     def handle_data(self, data: str) -> None:
         if self._title is not None:
@@ -295,7 +314,7 @@ def is_document(text: str) -> bool:
     `<head>`, whatever its head then carries. A result's overview, a block fetched into a
     popover, has none of them. What a head says is no test, since a page with no `lang`,
     no title and no named `<meta>` says nothing and is a page all the same."""
-    reader = _HeadReader()
+    reader = _HeadReader(document_only=True)
     for start in range(0, len(text), _HEAD_CHUNK):
         reader.feed(text[start : start + _HEAD_CHUNK])
         if reader.document or reader.done:

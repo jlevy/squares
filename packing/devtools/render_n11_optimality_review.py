@@ -145,6 +145,7 @@ ARCHIVED_CITATION_SOURCES = (
 RENDER_INPUTS = (
     Path(__file__),
     PACKING / "devtools/site_assets.py",
+    PACKING / "devtools/probes/site_assets/preload_fonts.js",
     PACKING / "devtools/site_math.py",
     PACKING / "devtools/node/render-site-math.mjs",
     PACKING / "devtools/templates/site-math.css",
