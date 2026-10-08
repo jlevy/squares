@@ -15,7 +15,7 @@
       <sqpack:value name="color-shades-per-hue">5</sqpack:value>
       <sqpack:value name="columns">10</sqpack:value>
       <sqpack:value name="data-date">2026-10-08</sqpack:value>
-      <sqpack:value name="data-revision">4550adb27c1aa3fd1afacd9d457cdfd361b78fc8</sqpack:value>
+      <sqpack:value name="data-revision">216637e3793ce54a2e2748bae56a9bea2b401bd4</sqpack:value>
       <sqpack:value name="first-n">1</sqpack:value>
       <sqpack:value name="generated-by">python -m devtools.build_known_best_atlas</sqpack:value>
       <sqpack:value name="last-n">100</sqpack:value>
@@ -66,7 +66,7 @@
   <text data-feature="explainer" x="709.572" y="2790" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="1.045">(</tspan><tspan font-style="italic">n</tspan><tspan dx="1.045">) is the side of the smallest square holding </tspan><tspan font-style="italic">n</tspan><tspan dx="1.045"> unit squares; deg is the algebraic degree of that side length</tspan></text>
   <text data-feature="citations" x="1200" y="2817" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">Citations for all results are available in the Squares Project: github.com/jlevy/squares</text>
   <text data-feature="credit" x="1200" y="2844" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">Diagram by Joshua Levy with assistance from Claude and Codex</text>
-  <text data-feature="release-stamp" x="1200" y="2871" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">v0.5.0-4550ad</text>
+  <text data-feature="release-stamp" x="1200" y="2871" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#47525f">v0.5.0-216637</text>
   <g data-feature="packing-card" data-n="1" data-row="0" data-column="0" data-source-id="W-known-best-n001">
     <rect data-feature="container-outline" x="84" y="186" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />
     <polygon data-feature="square-fill" data-square="n-001-square-001" data-hue-index="0" data-shade-index="0" data-contact-sides="4" data-orientation-radians="0.0" points="84,344 242,344 242,186 84,186" fill="#257260" stroke="#000000" stroke-width="0.42" stroke-linejoin="round" data-angle-class="0" />
