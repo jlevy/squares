@@ -321,6 +321,21 @@ No new n11 proof, rank search, ordinary census admission or global side-bound cl
 part of this test. A complete architecture kill ends this independent-envelope route on
 the selected roster; do not respond with an unchanged grid or contact atlas.
 
+### Exp306 Operational Disposition
+
+The registered exp306 attempt ended incomplete after 120.137 supervised seconds, with
+the owned process group cleaned up.
+No construction certificate or fresh receipt was produced; fresh verification never
+started. The retained
+[supervision receipt](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/supervision.json)
+records a wall-limit stop, while the unfinished phase journal still records the
+construction as running.
+This is not a complete mathematical miss, an upper-envelope exclusion or a
+lower-envelope architecture kill.
+No selected-state count or endpoint calibration result is available.
+The cause is left to separate operational diagnosis; the experiment was not rerun for
+this mathematical review.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -16,6 +16,10 @@ still supplies that part of the combined domain.
 Its exact premise and criterion are in the
 [case-preserving contract](research-2026-10-07-n17-case-preserving-owned-propagation.md).
 The ordinary census and global bracket remain unchanged.
+Exp307 subsequently verified the fixed-core polynomial guard and its endpoint-family
+disjointness, without new parameter loss or global capture.
+The independent-envelope architecture test exp306 stopped operationally before producing
+a certificate, so it has no mathematical disposition.
 The original kickoff ranking below is retained as the decision record; later result
 sections record its updates.
 
@@ -625,6 +629,8 @@ their surviving models extend to a packing.
 
 The proposed envelope representation test H314/exp306 is a final bounded check of that
 specific architecture.
+Its first attempt stopped incomplete at the outer wall ceiling, before any certificate
+or fresh result, and established no architecture verdict.
 Its lower envelopes can prove that no independent all-pose whole-cell AABB improvement
 at the same window size can help these states.
 That possible conclusion would not rule out constraints relating one square’s pose
@@ -755,13 +761,103 @@ cases.
 This is a substantive completeness obligation, not an engineering detail solved by
 faster matroid intersection.
 
-The new [owned-core guard](research-2026-10-07-n17-owned-core-guarded-clauses.md) is a
-useful local proof interface if its finite criterion passes.
-It can carry the accepted clauses beyond a syntactic box description, but its global
-value still depends on a checked complementary cover or a terminal implication.
+The new [owned-core guard](research-2026-10-07-n17-owned-core-guarded-clauses.md) has
+passed exp307’s finite criterion with matching fresh reconstruction.
+It checks 64 quadratic minima for four core vertices, old-box inclusion and coordinate
+spans strictly greater than one, and joins the endpoint’s exact axis-aligned charts.
+The frozen polynomials use nonnegative slack and require minimum at least zero; the
+registered shorthand “minima<=0” is clarified as a sign-direction notation error in the
+result note, without changing the pretarget source or threshold.
+The clauses remain conditional on the same-Q0 hand transport and original parent.
+They extend beyond a syntactic box description, but their global value still depends on
+a checked complementary cover or a terminal implication.
 Do not fund tiny-box tiling merely because a polynomial description is available.
 An independently checked relational constraint or imported full exclusion certificate
 that reaches the ordinary residue takes priority over another unproductive local round.
+
+These local clauses and the selected global tests address different parts of the
+eventual cover. The accepted owned-core parent is the endpoint occupancy assignment; its
+guard targets poses away from the certified endpoint family within that assignment.
+It does not automatically cover any of the 95 distance-two occupancy orbits.
+The rank, envelope and four-window tests instead address those other named assignments.
+Even an ordinary exclusion there would leave the endpoint branch’s capture and terminal
+composition to prove.
+
+### A Planar Active-Basis Refinement of Normalization
+
+The following is a further sole-Astra hand derivation, self-audited but not
+independently reviewed or formally checked.
+It supplies a necessary form for a selected active basis, not an assumption that every
+physical contact graph has a noncrossing centre drawing.
+
+For interior-disjoint unit squares, all distinct centres are at distance at least one,
+because their open radius-$1/2$ incircles are disjoint.
+A physical contact pair has centre distance at most $\sqrt2$: a shared point is at
+distance at most $\sqrt2/2$ from each centre.
+Suppose two contact centre segments cross properly.
+They are the diagonals of a convex quadrilateral whose four sides have length at least
+one and whose diagonals have length at most $\sqrt2$. An interior angle greater than a
+right angle would, by the cosine law, force its opposite diagonal to have squared length
+greater than two.
+Thus all four angles are at most right angles, and their sum forces all
+four to be right angles.
+The diagonal bound then forces all sides to equal one and both diagonals to equal
+$\sqrt2$.
+
+The four centres therefore form a unit square.
+For either contacting diagonal pair, equality in the circumradius triangle inequality
+forces the contact to be the diagonal midpoint and a corner of both unit squares.
+Hence all four physical squares align with the centre block and meet in the familiar
+four-square grid block.
+Each such diagonal has only one possible crossing partner, since its endpoints uniquely
+determine the other two vertices of that unit square.
+
+Now take the globally lexicographically normalized representative from the
+[contact-budget proof](research-2026-10-07-n17-global-contact-budget.md), with
+orientations fixed and artificial side bounds inactive.
+For every **closed-disjoint** pair choose a weak SAT inequality with strictly positive
+slack at this representative.
+Such an axis exists: the origin lies strictly outside the compact polygon given by the
+two squares’ Minkowski difference, so one of its facet inequalities is strictly
+violated; those facet normals are square axes.
+For each touching pair choose a zero-slack SAT row.
+Every such complete row selection defines a closed physical nonoverlap branch containing
+the representative. Global lexicographic minimality over the entire finite union makes
+the representative a vertex of every containing branch, not merely of a conveniently
+chosen branch. The active physical row normals therefore span all 35 variables.
+
+Within each crossing block, choose the same one of its two body axes for both diagonal
+SAT rows. In local coordinates write the centres in cyclic order as
+$A=(0,0),B=(1,0),C=(1,1),D=(0,1)$ and select the horizontal axis $u$. For the affine
+contact slacks $r_{XY}=u\cdot(c_Y-c_X)-1$,
+
+$$
+r_{AB}+r_{DC}-r_{AC}-r_{DB}=0.
+$$
+
+The side rows $AB$ and $DC$ are necessarily horizontal contact rows.
+Either diagonal row can therefore be removed without changing the span of active
+normals. Its removal is a rank operation; it is not a claim that the corresponding
+inequality is implied on the whole feasible polyhedron.
+Perform this removal once per crossing block.
+The supporting side edges have length one and cannot themselves be crossing diagonals,
+so these span-preserving removals do not invalidate one another.
+
+The remaining contact segments do not cross.
+No segment passes through another centre: that would require length at least two.
+The same separation argument excludes collinear overlapping edges without a common
+endpoint. Consequently the remaining active contact graph has a straight-line planar
+embedding, while the active row span still has rank 35. Choose any 35 independent
+remaining physical rows.
+At most sixteen are wall rows, so at least nineteen are distinct contact rows in this
+noncrossing graph.
+
+This refines the existence of a normalized contact basis.
+It does not remove any current state, identify its orientations, make a contact atlas
+small, or justify planarity pruning of a graph of merely possible edges.
+A future consumer would need to cover the selected realizable basis and the exact
+crossing-block degeneracies, alongside all original nonoverlap constraints.
+The completed coarse rank miss remains unchanged.
 
 These proposals do not estimate the time to complete the n17 theorem.
 The current evidence supports bounded decisions between mathematical approaches; it does

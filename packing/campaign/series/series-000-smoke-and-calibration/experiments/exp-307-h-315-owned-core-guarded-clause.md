@@ -46,9 +46,14 @@ experiment:
     budget: 60s construction+60s fresh; outerTERM120/KILL130; one worker,sampled4GiB currentRSS perliveprocess;10MiBdescriptor/64MiBacceptedinputs/1MiBNEWoutput/4096bitgeometry;512oldboxcornerquadraticminima
       maximum.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause
-  results: []
+  results:
+  - shape: determination
+    question: Does the already-frozen nonnegative-slack guarded-clause contract pass?
+    outcome: criterion_met
+    checked_by: Full matching construction/fresh payload,25source observations/three generated roles;
+      soleAstra actual semantic acceptance and independentSol custody audit.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Bind completeaccepted302 three roles and fixedSAMEQ0 foreign proofchain, excluding
       obsolete owner0 targetrow diagnostics. Emitexactcleared-denominator16signed vertex inequalities
       (jointtotaldegree3 incentre+halfangle). Finiteprimary alloldh1/512 guard corners/univariatequadraticminima<=0
@@ -56,10 +61,20 @@ experiment:
       match. The same-Q0 transport implication is an explicit source-audited handpremise, independentlyverifiedflagfalse.
       No guardvolume/strictwidening/complementcover/globalcapture/ordinaryadmission claim; failedfiniteprimary
       ismiss, resource/refusalunresolved.
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T03:30:00Z'
-    host: macOS arm64
+    reason: 'The frozen source/documented nonnegative-slack test passes:16 degree-three joint inequalities
+      and64 exact corner/univariate minima retain the old h1/512 box, with positive-area SAME Q0 and both
+      axis spans>1 proving disjointness from the inherited axis-aligned endpoint family. Accepted302 foreign
+      restrictions transport under the explicitly source-audited SAME-Q0 hand implication. No added parameter
+      loss, guard-volume/widening, complement exclusion, global capture, ordinary admission or independently
+      formalized transport follows. The historical prospective shorthand says quadratic minima<=0. That
+      sign direction is a documentation error: the pretarget frozen source and hand contract use MIN of
+      nonnegative clearance slack>=0. Equivalently MAX of its negative<=0, not MIN of the negative<=0.
+      The historical criterion text is preserved. Acceptance here is against that already-frozen source/contract,
+      not the incorrect literal shorthand; no source, threshold or outcome was retuned and no target rerun
+      occurred.'
+  effort:
+    wall_seconds: 10.257993582985364
+    stopped_by: criterion
 ---
 # Same-Core Guarded Clause Transport
 

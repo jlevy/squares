@@ -314,8 +314,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 21 tentative; 24 in progress |
 | Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 249 | 67 confirmed; 46 refuted; 64 blocked; 21 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
-| Experiments | 236 | 87 accepted; 51 rejected; 60 unresolved; 12 baseline; 18 blocked; 5 abandoned; 2 in progress; 1 exhausted |
+| Hypotheses | 250 | 68 confirmed; 46 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 237 | 88 accepted; 51 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 115 | 115 registered, 85 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -590,6 +590,17 @@ case or experiment separately.
 | [n17 Session186 Implementation Readiness](docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md) | dated review record | record | retained | — |
 | [n17 Session 185 Coupling and Replay Progress](docs/project/reviews/review-2026-10-07-n17-session-185-progress.md) | dated review record | record | retained | — |
 | [Collective Closed-Row Coverage](packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/README.md) | typed session record | record | retained | — |
+| [Direct Regional Closed-Row Coverage](packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/README.md) | typed session record | record | retained | — |
+| [Incomplete Matched Coverage Benchmark](packing/campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/README.md) | typed session record | record | retained | — |
+| [Strict Core Regional Transfer](packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/README.md) | typed session record | record | retained | — |
+| [One-Round Regional Propagation: Complete Method Miss](packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/README.md) | typed session record | record | retained | — |
+| [One-Round Regional Propagation: Complete Method Miss](packing/campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/README.md) | typed session record | record | retained | — |
+| [Two closed regional collective cases](packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/README.md) | typed session record | record | retained | — |
+| [Normalized contact rank filter](packing/campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/README.md) | typed session record | record | retained | — |
+| [n11 whole-square envelope windows](packing/campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/README.md) | typed session record | record | retained | — |
+| [Case-preserving owned propagation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/README.md) | typed session record | record | retained | — |
+| [Envelope representation discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/README.md) | typed session record | record | retained | — |
+| [Same-core guarded clauses](packing/campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/README.md) | typed session record | record | retained | — |
 | [Two Closed Centre Children](packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md) | typed session record | record | retained | — |
 | [n17 Issue Coordination and Certificate Intake](docs/project/reviews/review-2026-10-07-n17-issue-coordination.md) | dated review record | record | retained | — |
 | [Exact Replay Stage Attribution](packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md) | typed session record | record | retained | — |
@@ -5883,8 +5894,9 @@ round that names the hypothesis, control roles included.
 | [H-311](packing/campaign/hypotheses/H-311-normalized-contact-rank-filter.md) | refuted | Complete95-state normalized contact rank filter | 1 | All95 survive with checked35-clone sets; no ordinary exclusions or census admission |
 | [H-312](packing/campaign/hypotheses/H-312-n11-envelope-windows.md) | refuted | Whole-square n11 envelopes in576 closed windows | 1 | Complete95 method miss; maxima6/7, no ordinary exclusion |
 | [H-313](packing/campaign/hypotheses/H-313-case-preserving-owned-propagation.md) | refuted | One recovery and collective pass per accepted closed case | 1 | Complete combined miss; verified lower-x owner6 secondary1/64 shrink; both cases open |
-| [H-314](packing/campaign/hypotheses/H-314-n11-envelope-representation.md) | running | Wall-coupled upper and optimistic lower whole-cell envelopes | 1 | Prospective; upper obstruction or complete lower-negative architecture test |
-| [H-315](packing/campaign/hypotheses/H-315-owned-core-guarded-clause.md) | running | Same-core exact guarded clauses and endpoint disjointness | 1 | Prospective; no guard volume or ordinary admission claim |
+| [H-314](packing/campaign/hypotheses/H-314-n11-envelope-representation.md) | unresolved | Wall-coupled upper and optimistic lower whole-cell envelopes | 1 | Incomplete at wall ceiling; no certificate or architecture verdict |
+| [H-315](packing/campaign/hypotheses/H-315-owned-core-guarded-clause.md) | confirmed | Same-core exact guarded clauses and endpoint disjointness | 1 | Fresh source-defined clearance checks pass; historical sign error retained explicitly |
+| [H-316](packing/campaign/hypotheses/H-316-n11-corner-cardinality.md) | running | Correlated four-corner n11 cardinality | 1 | Prospective; complete 95-state accounting and endpoint calibration required |
 
 ### Confirmed
 
@@ -6229,9 +6241,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 236 rounds registered in `series-000`.
+There are 237 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5815.5 wall-minutes.
+They record 2512.1 agent-minutes and 5817.7 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6507,8 +6519,9 @@ archive beside it.
 | [exp-303](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-303-h-311-normalized-contact-rank-filter.md) | 17 | target | H-311 | Complete95 normalized contact relaxation | All95 survive; zero obstructions/unresolved; no ordinary exclusion | rejected |
 | [exp-304](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-304-h-312-n11-envelope-windows.md) | 17 | target | H-312 | Whole-square envelopes in576 closed31/8 windows | Complete95 fresh-matched miss; maxima6/7 below11 | rejected |
 | [exp-305](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-305-h-313-case-preserving-owned-propagation.md) | 17 | target | H-313 | Simultaneous recovery in each closed regional case | Combined additional loss0; lower-x owner6 shrinks1/64 to[3/8,31/64], upper unchanged | rejected |
-| [exp-306](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-306-h-314-n11-envelope-representation.md) | 17 | target | H-314 | All 95 states, two complete 576-window envelope scans | Prospective; endpoint upper calibration and fresh reconstruction required | in-progress |
-| [exp-307](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-307-h-315-owned-core-guarded-clause.md) | 17 | target | H-315 | Same-core guarded clauses with exact old-box and endpoint checks | Prospective; inherited transport premise remains explicit | in-progress |
+| [exp-306](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-306-h-314-n11-envelope-representation.md) | 17 | target | H-314 | All 95 states, two 576-window envelope scans | Construction stopped at 120s; no certificate or replay | unresolved |
+| [exp-307](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-307-h-315-owned-core-guarded-clause.md) | 17 | target | H-315 | Same-core guarded clauses with exact old-box and endpoint checks | Fresh 64 nonnegative-slack minima pass; historical shorthand sign error retained | accepted |
+| [exp-308](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-308-h-316-n11-corner-cardinality.md) | 17 | target | H-316 | Correlated four-corner n11 cardinality across all 95 states | Prospective; endpoint survival and fresh reconstruction required | in-progress |
 
 ### Cost and provenance
 
@@ -6748,12 +6761,13 @@ archive beside it.
 | exp-303 | Construction120s/fresh60s inside180s;4GiB sampled per live process | 19.484242s | — | criterion | All95 normalized relaxation survivors; no ordinary admission |
 | exp-304 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 2.043806s | — | criterion | Complete95 envelope miss; theorem inherited |
 | exp-305 | Construction180s/fresh180s inside360s;4GiB sampled per live process | 97.158146s | — | criterion | Verified per-case progress but no combined gain; no per-case fixed-point claim |
-| exp-306 | Construction60s/fresh60s inside120s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
-| exp-307 | Construction60s/fresh60s inside120s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
+| exp-306 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 120.137277s | — | guard | Incomplete construction; no certificate or architecture verdict |
+| exp-307 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 10.257994s | — | criterion | Source-defined finite pass; no added loss or global admission |
+| exp-308 | Construction60s/fresh60s inside120s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
 
-### What the 236 rounds jointly establish
+### What the 237 rounds jointly establish
 
-The 236 rounds use 2512.1 agent-minutes and 5815.5 wall-minutes under the campaign’s
+The 237 rounds use 2512.1 agent-minutes and 5817.7 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

@@ -45,9 +45,17 @@ experiment:
     budget: 60s construction+60s fresh, outerTERM120/KILL130; one worker,sampled4GiB currentRSS perliveprocess;10MiBdescriptor/64MiBoutput/4096bitgeometry;
       exact576windows×95×2 plus576endpointupper counts.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation
-  results: []
+  results:
+  - shape: determination
+    role: outcome
+    question: Did the registered two-phase discriminator yield a complete scientifically interpretable
+      determination?
+    outcome: invalid
+    checked_by: Outer supervisor stopped construction at120.137276875s; no certificate or fresh replay
+      exists. This invalidates a scientific determination; it is not a criterion miss or architecture
+      kill. Raw journal and report-only reconciliation retained.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: 'All95 states have complete576 upper and576 optimistic lower window counts (109440
       total) with sandwich/monotonic checks; endpointupper576 calibration muststay<=10. Primary either
       checked11-square UPPER window obstruction or COMPLETE all95 optimisticLOWER no11 architecturekill:
@@ -55,10 +63,14 @@ experiment:
       succeed atH31/8. Lower positives only show potential and NEVERexclude an assignment. Fresh reconstruction
       compares fullpayload. Existing304negativecounts inherited andchecked; no ordinarycensus admission/globalbound
       claim. Partial/resource/refusal unresolved. AftercompletearchitecturekillSTOPindependentenvelopes.'
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T03:30:00Z'
-    host: macOS arm64
+    reason: Construction stopped at the registered outer wall ceiling before producing a certificate;
+      fresh verification was unstarted. This is INCOMPLETE, not a mathematical miss or envelope-architecture
+      retirement. Raw journal remains unchanged; report-only phase reconciliation records interruption
+      without inventing a child returncode. Empty logs do not establish the exact internal cause. No automatic
+      unchanged retry.
+  effort:
+    wall_seconds: 120.13727687502978
+    stopped_by: guard
 ---
 # Independent Envelope Representation Discriminator
 

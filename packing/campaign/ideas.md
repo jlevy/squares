@@ -1128,6 +1128,18 @@ wider centre cases; additional progress is measured from the union of surviving 
   No guardvolume/strictwidening/complementcover/globalcapture/ordinaryadmission claim;
   failedfiniteprimary ismiss, resource/refusalunresolved.
 
+- **H-316 — Correlated Four-Corner n11 Cardinality.** Complete exact 216 cell/class
+  feasibility tests on original convex cells with physical wall constraints, shared
+  x/y/h and exact 2*h*h<=1 vertex test; all95 named distance-two assignments then
+  receive complete four-count DP with each count<=10. Endpoint assignment must survive
+  calibration. Primary at least one fresh-verified ordinary n11 corner-cardinality
+  obstruction with complete95 accounting; all95 survivors retire this exact four-corner
+  relaxation. Negative certificates retain all18 reachable-frontier bitmaps; positives
+  retain17 independently checked pattern witnesses.
+  All input/domain/theorem joins and full fresh payload must match.
+  No global optimality, capture or automatic census admission; refusal/resource stop
+  unresolved. No denser window search on unchanged miss.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -10,7 +10,7 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **23** in_progress, **25** ready, **22** tentative, **73** blocked, **65** stopped, **228** complete.
+- **24** in_progress, **25** ready, **21** tentative, **73** blocked, **65** stopped, **228** complete.
 
 - **30 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`, `BC-396`, `BC-436`, `BC-438`, `BC-454`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
@@ -89,7 +89,7 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-045 | `BC-450` | in_progress | 1 | process | research | Coordinate six-hour proof priority, kickoff, current PR/main and complete final handoff | `think-2mzl` |
 | agenda-045 | `BC-451` | in_progress | 1 | insight | research | Can the SAME25 accepted point-row exclusions lift to a certified positive-width region? | `think-98mg` |
 | agenda-045 | `BC-452` | in_progress | 1 | efficiency | measurement_validation | Which measured coverage or gate bottleneck should be optimized to unblock n17 progress? | `think-ui2y` |
-| agenda-045 | `BC-453` | tentative | 1 | insight | research | Does the contact-normalization hand theorem give a complete useful structural discriminator? | `think-nvkf` |
+| agenda-045 | `BC-453` | in_progress | 1 | insight | research | Does the contact-normalization hand theorem give a complete useful structural discriminator? | `think-nvkf` |
 
 ## Blocked, and on what
 
@@ -234,7 +234,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-042 | active | 5 | 9 |  | 2 | 4 | 36 | 56 |
 | agenda-043 | active | 2 |  |  | 2 |  | 6 | 10 |
 | agenda-044 | completed |  |  |  |  |  | 3 | 3 |
-| agenda-045 | active | 3 |  | 1 | 1 |  |  | 5 |
+| agenda-045 | active | 4 |  |  | 1 |  |  | 5 |
 
 ## By program
 
@@ -541,7 +541,7 @@ Open frontier: `BC-306`.
 | agenda-045 | `BC-450` | in_progress | Coordinate six-hour proof priority, kickoff, current PR/main and complete final handoff |
 | agenda-045 | `BC-451` | in_progress | Can the SAME25 accepted point-row exclusions lift to a certified positive-width region? |
 | agenda-045 | `BC-452` | in_progress | Which measured coverage or gate bottleneck should be optimized to unblock n17 progress? |
-| agenda-045 | `BC-453` | tentative | Does the contact-normalization hand theorem give a complete useful structural discriminator? |
+| agenda-045 | `BC-453` | in_progress | Does the contact-normalization hand theorem give a complete useful structural discriminator? |
 | agenda-045 | `BC-454` | blocked | Can exact current-source certification debt be repaired beside mathematical work? |
 
 Open frontier: `BC-430`, `BC-436`, `BC-438`, `BC-439`, `BC-450`, `BC-451`, `BC-452`, `BC-453`, `BC-454`.

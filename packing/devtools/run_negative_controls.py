@@ -184,6 +184,11 @@ PRUNE = frozenset(
         # copy back; its descriptor and compact siblings remain selected.
         SESSION184_RESULTS / "exp-305-case-preserving-owned-propagation/certificate.json",
         SESSION184_RESULTS / "exp-305-case-preserving-owned-propagation/replay.json",
+        # Exp307's measured 59,412-byte receipt pair has no registered mutation
+        # or native worker-test consumer. Preserve primary proof bytes and all
+        # sibling metadata; exact inline/frontier declarations still copy back.
+        SESSION184_RESULTS / "exp-307-owned-core-guarded-clause/certificate.json",
+        SESSION184_RESULTS / "exp-307-owned-core-guarded-clause/replay.json",
         SESSION184_RESULTS / "exp-304-n11-envelope-windows/certificate.json",
         SESSION184_RESULTS / "exp-304-n11-envelope-windows/replay.json",
         # Exp303's complete rank classification is retained as primary evidence;

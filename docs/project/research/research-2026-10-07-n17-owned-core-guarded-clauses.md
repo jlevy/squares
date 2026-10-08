@@ -14,8 +14,9 @@ complement is excluded.
 
 This is a sole-Astra hand composition supported by a source dependency audit.
 It has not received independent mathematical review or formal verification.
-H315/exp307 is reserved for a fresh finite check of the stated algebra and premises; no
-target result is asserted here.
+H315/exp307 has completed its fresh finite check of the stated algebra and premises.
+The accepted finite result is recorded below; it does not independently establish the
+hand transport theorem.
 
 ## Accepted Premises and the Transported Conclusion
 
@@ -212,6 +213,44 @@ or a complementary proof.
 Its near-square owned core may itself force a narrow pose range.
 Retain the exact set description before assigning it any global reach or funding a
 tiling scheme.
+
+## Accepted Finite Result and Sign Convention
+
+Exp307 completed construction and
+[fresh reconstruction summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/mechanical-summary.json)
+with identical mathematical payloads, in 10.258 supervised seconds with normal cleanup.
+The adjacent retained `replay.json` contains the complete primary coefficients and
+corner-minimum witnesses.
+The retained $Q_0$ has four vertices, giving sixteen signed-axis polynomials and 64
+exact old-box corner minima under the 512-check ceiling.
+All inclusion checks pass with $a=1048575/2097152$. Both coordinate spans are
+
+$$
+2193045852766801957914895339/1564554737662369175472439296>1.
+$$
+
+The fresh result therefore verifies the new guard’s disjointness from the inherited
+axis-aligned endpoint family.
+Its source binding is the accepted H290 receipt’s
+`custody.input_control.endpoint_roster[0].charts`, with exact alternatives $[0,0]$ and
+$[1,1]$ for label1/owner0. Original seventeen-owner endpoint retention remains
+inherited.
+
+The registered shorthand “quadratic minima<=0” has a sign-direction notation error.
+The pretarget hand contract and frozen checker use the nonnegative slack polynomials
+$p=(1+t^2)(a-\sigma n(t)\cdot(q-c))$ displayed above and require $\min p\ge0$. With the
+opposite signed violation $q=-p$, the equivalent criterion is $\max q\le0$, not
+$\min q\le0$. This clarification preserves the registered text as history; no source,
+threshold or target was changed after seeing the result.
+
+The accepted output carries the existing owner6 and owner18 clauses under this exact
+owned-core guard and the same original parent and container, conditional on the hand
+dependency induction.
+It proves no additional parameter loss, physical packing, complement exclusion, global
+capture or census admission.
+The old owner0 target-row diagnostic is not transported.
+The finite receipt explicitly leaves independent mathematical verification of the hand
+transport false.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

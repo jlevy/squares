@@ -1139,6 +1139,7 @@ def test_session186_historical_prune_has_no_registered_control_consumer(name: st
         "exp-297-regional-row-coverage",
         "exp-300-one-round-direct-regional-propagation",
         "exp-301-one-round-fixed-core-regional-propagation",
+        "exp-307-owned-core-guarded-clause",
     ],
 )
 @pytest.mark.parametrize("name", ["certificate.json", "replay.json"])

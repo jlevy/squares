@@ -271,10 +271,10 @@ session:
   progress:
     metric: Scoped necessary restrictions and global normalization obligations toward n17 optimality
     before: Accepted point-only collective restriction; wider guard and global contact budget unverified.
-    after: Verified302 regional15/32 additional owner6 restriction;305 primarycombinedMISS withsecondary1/64
-      lower-caseowner6 deletion. Complete303 all95rank survivors and304 all54,720countsnegative; unchangedfilters
-      retired. Globalbounds/census unchanged. New architecture discriminator and guarded-core transport
-      source work proceeds beside currentPR/CI consolidation.
+    after: Accepted302 combined15/32 owner6 restriction;305 combinedMISS with secondary1/64 lower-case
+      loss.307 finite guarded-clause transport accepted under frozen source/hand contract with explicit
+      prospective sign-wording error.306 outer120s INCOMPLETE/no counts;303/304 completed globalmethod
+      misses. Globalbounds/census unchanged;308 four-corner cardinality prospective andsource-ready.
   delegations:
   - task: Astra fresh mathematical W3 and deep strategy
     operator: /root/astra_strategy; GPT-6 Astra xhigh
@@ -1214,10 +1214,23 @@ session:
   - Current worker selection12exact nonconsumerrawfiles measured201012061B under201326592B;305 newrawpair30,589,904B
     laterexactpruned afterconsumer audit, source201100472B/headroom226120B. Primaryraws andrequireddeclaredcopyback
     unchanged; scopedselector10PASS20.90s.
+  - 'Half-hour global priority reminder delivered03:10Z: substantive mathematics toward n17 optimality
+    leads; CI/storage/bookkeeping run beside proof work.'
+  - Independent ROOT308 FULL26 synthetic controls PASS3.32s, after author26 PASS19.70s and soleAstra mathematical
+    SOURCE CLEAR; no actual308 classifications before registration03:13:33Z.
+  - 'Recovery5e15b exact import preflight PASS; boundedpush floor incomplete120.01s with48PASS,4FAIL,10unresolved/unstarted.
+    Two source findings: staleagenda map and nineunmapped resultREADME docs; two launcher-environment
+    findings: externalvenv/bin absent fromPATH. Both error types retained distinctly, no currentfullPASS.'
+  - 306 INCOMPLETE120.137s/cleanuptrue/no certificate/freshunstarted, no architecturekill or exact internal
+    cause. Report-only reconciliation derives interruption without rewritingrawjournal or inferring childreturncode.307
+    complete10.258s/fullfreshpayloadmatch/64exactminima/16explicitpolynomials; historical MIN<=0 preregshorthand
+    is wrong, already-frozen source/hand contract MINclearance>=0 passes. No retuned source/threshold/replay.
+  - 'Disk03:12: external6GiB/internal1.4GiB free; task-specific caches/builds remain external, heavy newbootstrap
+    notselected. UserTrashnotemptied; unique source/research/proofevidence preserved.'
   stop_reason: null
-  next_action: Seal/publish allcurrentevidence andCIrepairs with boundedpushfloor in selectedcheckout;
-    runnew306 envelope-architecture and307 guarded-core transport onlyafter finalsource controls/preregistration.
-    Astra deepglobalW3 decides nextproofobligations; no unchanged305 repeat.
+  next_action: Publish consolidated source/evidence/docs with bounded CI mechanics beside registered308
+    exact corner-cardinality construction/fresh verification. Astra selects subsequent global work through
+    fresh W3 and bounded external-package scope relevance; no automatic unchanged retries.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session186-checkpoint0148.yaml
 ---
