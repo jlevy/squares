@@ -34,9 +34,9 @@ REGISTER = REPO / "packing/devtools/gate-budgets.yaml"
 #: starts, and the dispatch-only timing experiment.
 DEPLOY_PATH = {"deploy", "verify-deployment"}
 
-# These jobs can provision Python and their browser without the rendered page. They
-# start beside `prepare`, then join its exact artifact before the first page consumer.
-OVERLAPPED_PREPARED_PAGE_JOBS = {
+# Native dependencies keep these consumers off runners until prepare succeeds.
+# Their bounded artifact join still validates the exact run, attempt and artifact id.
+PREPARED_PAGE_CONSUMERS = {
     "pdf",
     "print-layout",
     "typography",
@@ -257,13 +257,15 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
         for half in halves
     }
     assert gated == {
-        "n11_lower_bounds_explainer": {"prepare", *OVERLAPPED_PREPARED_PAGE_JOBS},
+        "n11_lower_bounds_explainer": {"prepare", *PREPARED_PAGE_CONSUMERS},
         "workbench": {"workbench"},
         "overview": {"overview"},
         **{slug.replace("-", "_"): {slug} for slug in PAPER_JOBS},
     }
     for roots in gated.values():
-        assert all(needs_of(jobs[root]) == ["scope"] for root in roots)
+        for root in roots:
+            expected = ["scope", "prepare"] if root in PREPARED_PAGE_CONSUMERS else ["scope"]
+            assert needs_of(jobs[root]) == expected
     # A skip is said in the scope job, not by a runner allocated to print one line: until
     # 2026-10-05 each page had an `*-unchanged` job that ran only when it was skipped.
     assert not [name for name, job in jobs.items() if "!= 'true'" in str(job.get("if", ""))]
@@ -682,12 +684,12 @@ def test_deployment_waits_for_the_cross_browser_loading_checks() -> None:
     )
 
 
-def test_page_check_setup_overlaps_prepare_then_joins_its_exact_artifact() -> None:
-    """Independent provisioning starts early; no page consumer can outrun prepare."""
+def test_page_consumers_wait_for_prepare_then_validate_its_exact_artifact() -> None:
+    """Queued producers cannot exhaust consumer runners or their artifact deadline."""
     jobs = load()["jobs"]
-    for name in OVERLAPPED_PREPARED_PAGE_JOBS:
+    for name in PREPARED_PAGE_CONSUMERS:
         job = jobs[name]
-        assert needs_of(job) == ["scope"]
+        assert needs_of(job) == ["scope", "prepare"]
         assert job["if"] == "needs.scope.outputs.n11_lower_bounds_explainer == 'true'"
         assert job["permissions"] == {"contents": "read", "actions": "read"}
         steps = job["steps"]
@@ -1303,8 +1305,12 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
 _SCOPE_GATE = re.compile(r"needs\.scope\.outputs\.(\w+) (==|!=) 'true'")
 
 
-def pull_request_outcomes(decision: Mapping[str, bool]) -> dict[str, str]:
-    """Every pull-request job's result, for one scope decision, when nothing fails.
+def pull_request_outcomes(
+    decision: Mapping[str, bool],
+    *,
+    failures: Mapping[str, str] | None = None,
+) -> dict[str, str]:
+    """Scheduled pull-request outcomes, optionally injecting a failed prerequisite.
 
     GitHub's rule, for the forms this workflow uses: a job whose condition has no status
     function runs only when every need succeeded; `always()` and `!cancelled()` run
@@ -1336,7 +1342,7 @@ def pull_request_outcomes(decision: Mapping[str, bool]) -> dict[str, str]:
                 if gate:
                     half, operator = gate.groups()
                     runs = runs and decision[half] == (operator == "==")
-            results[name] = "success" if runs else "skipped"
+            results[name] = (failures or {}).get(name, "success") if runs else "skipped"
             pending.remove(name)
     return results
 
@@ -1742,8 +1748,8 @@ def test_every_browser_checks_the_same_prepared_publication() -> None:
         "startup-timing",
     } <= set(checks)
     for name in checks:
-        if name in OVERLAPPED_PREPARED_PAGE_JOBS:
-            assert needs_of(jobs[name]) == ["scope"], name
+        if name in PREPARED_PAGE_CONSUMERS:
+            assert needs_of(jobs[name]) == ["scope", "prepare"], name
             artifact_id = "${{ steps.prepared.outputs.artifact_id }}"
         else:
             assert needs_of(jobs[name]) == ["prepare"], name
@@ -2202,3 +2208,39 @@ def test_dispatch_timing_uses_frozen_pairs_and_retains_failed_measurements() -> 
     assert uploads[0]["if"] == "always()"
     assert uploads[0]["with"]["path"] == "/tmp/math-startup-timing"
     assert uploads[0]["with"]["if-no-files-found"] == "error"
+
+
+@pytest.mark.parametrize("producer_result", ["failure", "cancelled", "scope-skipped"])
+def test_prepare_failure_skips_consumers_and_fails_the_real_aggregate(
+    producer_result: str,
+) -> None:
+    decision = dict.fromkeys(BUILDER_INPUTS, True)
+    decision["n11_lower_bounds_explainer"] = producer_result != "scope-skipped"
+    failures = {} if producer_result == "scope-skipped" else {"prepare": producer_result}
+    outcome = pull_request_outcomes(decision, failures=failures)
+    assert outcome["prepare"] == (
+        "skipped" if producer_result == "scope-skipped" else producer_result
+    )
+    assert all(outcome[name] == "skipped" for name in PREPARED_PAGE_CONSUMERS)
+    assert all(outcome[name] == "success" for name in {"overview", "workbench", *REVIEW_JOBS})
+    jobs = load()["jobs"]
+    assert "prepare" in needs_of(jobs["pages-required"])
+    aggregate = next(
+        step
+        for step in jobs["pages-required"]["steps"]
+        if step.get("name") == "Require every page this run builds to pass"
+    )
+    needs: dict[str, dict[str, Any]] = {
+        name: {"result": outcome[name]} for name in needs_of(jobs["pages-required"])
+    }
+    needs["scope"]["outputs"] = {
+        half: "true" if in_scope else "false" for half, in_scope in decision.items()
+    }
+    ran = subprocess.run(
+        ("bash", "-c", aggregate["run"]),
+        env={**os.environ, "NEEDS": json.dumps(needs)},
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert ran.returncode == (0 if producer_result == "scope-skipped" else 1), ran
