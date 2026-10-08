@@ -17,6 +17,8 @@ import pytest
 import yaml
 
 from devtools import build_known_best_atlas as known_best_builder
+from devtools import evand_arrangement_houses as evand_houses
+from devtools import evand_arrangement_reports as evand_reports
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinement_sources
 from devtools import render_composite_pdf
@@ -438,6 +440,11 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "packet-derived-facts":
         assert entry["source"]["path"].startswith("resources/web/")
+        evand_url = (
+            f"{evand_reports.SOURCE}/blob/{evand_reports.REVISION}/{evand_reports.source_path(n)}"
+            if n in evand_houses.NUMBERS
+            else None
+        )
         source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
         if n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
             # Complete rational and number-field records retain all poses and deciding
@@ -446,7 +453,21 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
             assert entry["source"]["path"] == facts.relative_to(ROOT).as_posix()
             assert witness == ryxu_houses.check_houses([n])[n]
             assert witness["source"]["path"] == entry["source"]["path"]
+        elif entry["source"]["url"] == evand_url:
+            assert (
+                entry["witness"]["path"]
+                == evand_houses.house_path(n).relative_to(ROOT).as_posix()
+            )
+            assert (
+                entry["source"]["path"]
+                == evand_reports.fact_path().relative_to(ROOT).as_posix()
+            )
+            assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
+            evand_houses.check_houses([n])
         elif source is not None and entry["source"]["url"] == source.url(n):
+            assert entry["source"]["path"].endswith(
+                (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+            )
             # New source facts use repository-relative custody paths. Admit the whole
             # imported house, not merely an accepted alternative path spelling.
             assert witness["source"] == refinement_sources.to_witness(source, n)["source"]

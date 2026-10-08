@@ -12,6 +12,7 @@ the violation it tests for, and the guard would -- correctly -- refuse this file
 
 from __future__ import annotations
 
+import ast
 import json
 import os
 import shutil
@@ -102,6 +103,84 @@ def test_a_built_script_argument_fails(script: str) -> None:
 def test_a_javascript_string_fails_wherever_it_is_written() -> None:
     assert _rules(f"SCRIPT = {PLANTED!r}\n") == ["JavaScript string"]
     assert _rules(f"def build():\n    return [{PLANTED!r}]\n") == ["JavaScript string"]
+
+
+LEAN_TEMPLATES = (
+    "chain_lean.py",
+    "localmin_lean.py",
+)
+LEAN_DIRECTORY = (
+    Path(__file__).resolve().parent.parent
+    / "resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact"
+)
+
+
+def _lean_template(name: str) -> ast.JoinedStr:
+    """Read the complete original source; keep its generated Lean literal unchanged."""
+    source = (LEAN_DIRECTORY / name).read_text()
+    assert guard.scan_source(name, source, POLICY) == []
+    marker = (
+        "namespace UnitSquarePacking." if name == "chain_lean.py" else "noncomputable def lcert"
+    )
+    for syntax in ast.walk(ast.parse(source)):
+        if isinstance(syntax, ast.JoinedStr) and any(
+            isinstance(part, ast.Constant)
+            and isinstance(part.value, str)
+            and marker in part.value
+            for part in syntax.values
+        ):
+            return syntax
+    raise AssertionError(f"retained source has no expected Lean template: {name}")
+
+
+@pytest.mark.parametrize("name", LEAN_TEMPLATES)
+def test_original_lean_templates_are_not_javascript(name: str) -> None:
+    _lean_template(name)
+
+
+@pytest.mark.parametrize("name", LEAN_TEMPLATES)
+def test_javascript_inside_the_original_lean_template_is_still_refused(name: str) -> None:
+    template = _lean_template(name)
+    template.values.insert(1, ast.Constant("\n" + PLANTED + "\n"))
+    assert _rules("DATA = " + ast.unparse(template)) == ["JavaScript string"]
+
+
+@pytest.mark.parametrize("name", LEAN_TEMPLATES)
+def test_a_lean_template_passed_to_the_browser_is_still_refused(name: str) -> None:
+    template = _lean_template(name)
+    assert _rules("DATA = " + ast.unparse(template) + "\npage.evaluate(DATA)\n") == [
+        "script argument"
+    ]
+
+
+OVERLAP_PROBES = {
+    "document-body": probe(PROBES, "no_embedded_js/document-body"),
+    "window-location": probe(PROBES, "no_embedded_js/window-location"),
+}
+
+
+@pytest.mark.parametrize(
+    ("prefix", "name"),
+    [
+        ("fun (x := ", "document-body"),
+        ("match x with | some (", "window-location"),
+    ],
+)
+def test_a_lean_arrow_parameter_cannot_hide_an_overlapping_javascript_signature(
+    prefix: str, name: str
+) -> None:
+    expression = OVERLAP_PROBES[name]
+    body = expression.split("=>", 1)[1].strip().removesuffix(";")
+    text = prefix + body + ") => x"
+    assert _rules(f"DATA = {text!r}") == ["JavaScript string"]
+
+
+@pytest.mark.parametrize("prefix", ["fun (", "match x with | some ("])
+def test_a_lean_looking_parameter_cannot_hide_an_inner_javascript_arrow(
+    prefix: str,
+) -> None:
+    text = prefix + PLANTED.replace("()", "x") + ") => y"
+    assert _rules(f"DATA = {text!r}") == ["JavaScript string"]
 
 
 def _javascript(text: str) -> bool:
