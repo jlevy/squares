@@ -1128,7 +1128,7 @@
         "other-polyomino": 14,
         "singleton": 153
       },
-      "tilted_components": 132
+      "tilted_components": 133
     }
   },
   "subject": {
@@ -1200,8 +1200,8 @@
       "4": 9
     },
     "singleton": {
-      "0": 228,
-      "1": 48,
+      "0": 230,
+      "1": 46,
       "2": 38,
       "4": 1
     }

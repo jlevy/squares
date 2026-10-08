@@ -12951,7 +12951,7 @@ results:
     - E-gupta-438-rational-report
     artifacts:
     - packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
-    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
     - packing/devtools/gupta_refinement_reports.py
     next_rung: Native outcomes, source/house binding, independent review and actual private-worker custody
       are required before confirmation.

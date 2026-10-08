@@ -1467,7 +1467,22 @@ sources:
     note: Issue399 supplies three complete changed rational packings at266,270,272. Pinned7eef24f source
       MIT licences and original lineage remain retained. Exact feasibility is certified independently;
       source arrangement novelty and local/global optimality are unestablished.
+  - key: '[Gupta rational refinements 2026-10-08]'
+    authors:
+    - Gupta
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: independent
+    credit: Gupta after Chaoweeraprasit, Daniel
+    short_credit: Gupta after Chaoweeraprasit et al.
+    note: Siddharth Gupta's seventeen rational precision certificates at 9643cb5a78c1d4dcfc867c80a6920c3a6219d05a
+      refine SQUISH constructions and credit Nate Chaoweeraprasit and Evan Daniel. Fourteen offers are
+      selected; three are withdrawn. Complete factual inputs are retained; unlicensed programs/prose
+      are hash-pinned, and the solver MIT notice is not a bundle licence.
 credited_names:
+  Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
+  Siddharth Gupta: Gupta
   ry-xu: ry-xu
   Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit

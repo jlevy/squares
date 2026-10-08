@@ -11,6 +11,7 @@ from typing import Any
 import pytest
 from jsonschema_rs import Draft202012Validator
 
+from devtools import build_bound_citations as citations
 from devtools import build_known_best_atlas as atlas
 from devtools import check_results
 from devtools import check_source_coverage as coverage_check
@@ -398,6 +399,15 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
     }
     register.register()
     coverage = safe_load(source_path.read_text())
+    monkeypatch.setattr(citations, "EVIDENCE", register.FRONTIER / "evidence.yaml")
+    monkeypatch.setattr(citations, "RESULTS", result_path)
+    monkeypatch.setattr(
+        citations, "BIBLIOGRAPHY", register.REPO / "packing/resources/bibliography.yaml"
+    )
+    catalogue = citations.load_register()
+    assert houses.reports.SOURCE_KEY in catalogue.sources
+    bound = register.reported_bound(88)
+    assert all(person in catalogue.names for person in bound["found_by"] + bound["improved_by"])
     for name in ("evidence", "results", "source-coverage"):
         validated = safe_load((register.FRONTIER / f"{name}.yaml").read_text())
         schema_path = SOURCE / "packing/frontier" / validated["softschema"]["schema"]

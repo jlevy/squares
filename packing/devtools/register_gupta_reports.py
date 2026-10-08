@@ -392,7 +392,7 @@ def register() -> None:
                 "venue": "GitHub",
                 "dated": DAY,
                 "lineage": "independent",
-                "credit": "Gupta after Chaoweeraprasit and Daniel",
+                "credit": "Gupta after Chaoweeraprasit, Daniel",
                 "short_credit": "Gupta after Chaoweeraprasit et al.",
                 "note": "Siddharth Gupta's seventeen rational precision certificates at "
                 + houses.reports.REVISION
@@ -405,13 +405,18 @@ def register() -> None:
         "key",
     )
     bibliography = REPO / "packing/resources/bibliography.yaml"
-    if "  Siddharth Gupta: Gupta\n" not in bibliography.read_text():
-        save(
-            bibliography,
-            bibliography.read_text().replace(
-                "credited_names:\n", "credited_names:\n  Siddharth Gupta: Gupta\n"
-            ),
-        )
+    for person, name in (
+        ("Siddharth Gupta", "Gupta"),
+        ("Nate Chaoweeraprasit (itsnaka)", "Chaoweeraprasit"),
+    ):
+        entry = f"  {person}: {name}\n"
+        if entry not in bibliography.read_text():
+            save(
+                bibliography,
+                bibliography.read_text().replace(
+                    "credited_names:\n", "credited_names:\n" + entry
+                ),
+            )
     index = REPO / "packing/resources/README.md"
     if "**" + houses.reports.SOURCE_KEY + "**" not in index.read_text():
         entry = (
