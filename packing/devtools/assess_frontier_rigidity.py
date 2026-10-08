@@ -291,10 +291,10 @@ def _rigidity_span(text: str, n: int) -> tuple[int, int]:
         raise ValueError(f"n={n}: expected an existing rigidity block and did not find it")
     rest = text[start + len(marker) : front_end + 1]
     consumed = 0
-    for line in rest.split("\n"):
+    for line in rest.splitlines(keepends=True):
         if line.strip() and not line.startswith("    "):
             break
-        consumed += len(line) + 1
+        consumed += len(line)
     return start, start + len(marker) + consumed
 
 

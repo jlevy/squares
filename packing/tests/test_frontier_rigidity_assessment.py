@@ -217,6 +217,18 @@ def test_preserving_owned_rendering_refuses_changed_metadata(mutation: str) -> N
         assess.preserve_block_rendering(existing, regenerated, 88)
 
 
+def test_preserving_last_frontmatter_block_keeps_the_yaml_envelope() -> None:
+    existing = (assess.FRONTIER / "n-088.md").read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = yaml.safe_load(front)
+    case = document["packing"]
+    case["rigidity"] = case.pop("rigidity")
+    reordered = "---\n" + yaml.safe_dump(document, sort_keys=False) + "---\n" + body
+    preserved = assess.preserve_block_rendering(reordered, reordered, 88)
+    assert preserved == reordered
+    assert yaml.safe_load(preserved.split("---\n", 2)[1]) == document
+
+
 @pytest.mark.parametrize(
     "record",
     [
