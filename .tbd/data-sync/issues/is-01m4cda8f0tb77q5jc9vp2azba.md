@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,18 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T02:01:35.739Z
+updated_at: 2026-10-08T02:22:56.896Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
+
+CURRENT COMMITTED REPAIR / EXACT SOURCE STATE — 2026-10-08 UTC:
+PR429 sourcefc9887888a09196798c664a45d836dcdee68212f is committedclean, actualnonforcepushed/remoteGitSHAandPRAPIverified. Parentef472, onlyupper-ownedconfirmation.py40insert/11delete (blobebb66385), everyother15801treeentry/data/science/case/test/budgetunchanged. Pin101026ownerPASS. Fresh currenthead Astra ReviewJ ROUND5 ACCEPTsourcecorrectness0findings https://github.com/jlevy/squares/pull/429#pullrequestreview-5450641707. Original E–I scopes retained; no newfullSCI replay needed/claimed.137existingfocusedtestsPASS88.85raw0, lint/format/type/pinraw0. Full108envelopes/27metadata transforms identical;162→108normalizationcalls onlyduplicatefullsameinputs removed; publicfreshentry/18freshcasecalls/mutationisolation andalloriginalpredicates preserved.
+Native suiteD2853PASS5SKIP1XFAIL butrawouter1/183.196s isreal localpolicy failure:14.74s≥12testlimit,182.67≥143tier. Original45.41hostedfailure remains unchanged. Same-node isolated19.94→12.18 is~39%faster, not a hostedclaim. ActualnewheadhostedCIrunningunderdeclaredPRadvisory12/hard45, withno observedfailureatlastread. NativegaptrackedP2think-c63v OPEN; no lower-ownedscalarprimitive changed/waiver/contextspoof. Requirednewhead CI mustactuallypassbeforemerge. Engineeringx2gl/sourceacceptancekqd3/deploymentqc6y remainOPEN withactualdepsx2gl→kqd3→qc6y.
+AllcurrentworkPRsaved:4273345greenready,429fc988readycurrentCIPENDING,43191c6greenreadyfull-statebody,43478229draft8failotherlane. Explicitmerge429targetincludes427+429only, excludes434. CurrentfullstatebothPRbodiesOR9PASS andnative recordslinked, issue422progress6050615059,434audit6050602101. Allpriorarchives/1769gates+44GitHubauditmembers andsourceGitbundles actualdownload/memberhashverified. Newfinalrepairbundlefc988 andfrozenlocalnative-failure/sourceequivalence/test/ReviewJ supplementpreparedforupload; sourcecommittransportalreadydone. WIPpatchebb66385 alsoGitHubcustody, explicitlynotoldhostedgreenclaim.
+Actual422livepublication remainsUNRUN awaitingactualmergedmainPages/deployment/status; standardagent116rows23cases46SVG48mobile/desktoplayouts prepared. Keep422open untilactualaudit/finalreply/ledger. 434public103payloadfilehashesverified, ten425jobs/three428UPSTREAMjobsretainedrealexecution; five428PROJECTrouteprotocolnotestablished, finaladmission/census/review/CIremainpendingowningcoowner. Latestreusableenvironmentstartupsave stillstale_base unsaved;testedcurrentinstance andGitHubZIPrecovery saved, newsetupchatcurrentsettingsrequired.
 
 LATEST AUDIT/DISPOSITION CUSTODY — 2026-10-08 UTC:
 AdditionalGitHubauditsupplementuploaded/downloadedall44memberhashPASS: squares-github-audit-supplement-20261008.tar.gz462404B SHA40e208d511a6131b32e50827952e2f955ed0e8fbf55fb37ab24e2f173a2532f3; immutable01:55:39snapshot includesall4PRheads/reviews/comments/threads/CI, actual429/434failurelogs, full103public434payloadhashproof and compactsource/replayreceipts. Actualgithub-audit-supplement-roundtrip-receipt.json uploaded. Priorcompleted-gates archive1769members remainsverifiedimmutable. LatestPR431body linksbothsupplements, allsourceheads andactualfailure/nextwork; OR9PASS. Currentissue422progresscomment https://github.com/jlevy/squares/issues/422#issuecomment-6050615059, additional434scope/dispositioncomment https://github.com/jlevy/squares/pull/434#issuecomment-6050602101.
