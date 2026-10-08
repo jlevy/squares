@@ -69,6 +69,7 @@ name: Certificate page
       - packing/devtools/templates/site-nav.html
       - packing/devtools/templates/site-nav.css
       - packing/devtools/templates/paper-type.css
+      - packing/devtools/templates/site-math.css
       - packing/devtools/templates/site.css
       - packing/devtools/templates/site-result.css
       - packing/devtools/templates/overview-article.md
@@ -123,6 +124,22 @@ name: Certificate page
       - package-lock.json
       - packages/workbench/**
       - packing/devtools/check_published_site.py
+      - packing/devtools/site_urls.py
+      - packing/site-urls.yaml
+      - packing/devtools/site_math.py
+      - packing/devtools/node/render-site-math.mjs
+      - packing/devtools/site_assets.py
+      - packing/devtools/assemble_site.py
+      - packing/devtools/check_site_scripts.py
+      - packing/tests/test_site_scripts.py
+      - packing/devtools/check_site_rendering.py
+      - packing/devtools/probes/check_site_rendering/**
+      - packing/tests/test_site_urls.py
+      - packing/tests/test_site_math.py
+      - packing/tests/test_site_rendering.py
+      - packing/tests/test_site_math_preferences.py
+      - packing/tests/probes/site_math_preferences/**
+      - packing/tests/test_assemble_site.py
       - packing/devtools/pages_scope.py
       - packing/devtools/paper_links.py
       - packing/devtools/render_n11_threshold_bound_review.py
@@ -362,22 +379,25 @@ jobs:
           SQPACK_N11_OPTIMALITY_REVIEW_BROWSER: "1"
         run: |
           uv run --frozen --all-extras --group dev pytest -q tests/test_n11_optimality_figures.py tests/test_n11_optimality_overview_figures.py tests/test_n11_optimality_mechanism_figures.py
-          uv run --frozen --all-extras --group dev pytest -q tests/test_render_n11_optimality_review.py
+          uv run --frozen --all-extras --group dev pytest -q tests/test_render_n11_optimality_review.py tests/test_paper_publication.py
 
       # Rendered where it is served: `site/papers/n11-optimality-review.html`, with its
       # Markdown and its PDF beside it. Nothing else writes `site/papers` on this runner,
-      # so the artifact is this paper's three files.
+      # so the artifact keeps the paper and its shared assets at their served paths.
       - name: Render and check the paper in HTML, Markdown, and PDF
         run: |
           uv run --frozen --group dev python -m devtools.render_n11_optimality_review --site site --pdf
           uv run --frozen --group dev python -m devtools.render_n11_optimality_review --site site --check
           test -s site/papers/n11-optimality-review.pdf
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-optimality-review
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-optimality-review.html
 
       - name: Share the checked paper
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: n11-optimality-review-page
-          path: packing/site/papers
+          path: packing/site
           if-no-files-found: error
           retention-days: 7
 
@@ -445,22 +465,25 @@ jobs:
           SQPACK_N11_THRESHOLD_BOUND_REVIEW_BROWSER: "1"
         run: |
           uv run --frozen --all-extras --group dev pytest -q tests/test_n11_threshold_figures.py tests/test_paper_figures.py
-          uv run --frozen --all-extras --group dev pytest -q tests/test_render_n11_threshold_bound_review.py
+          uv run --frozen --all-extras --group dev pytest -q tests/test_render_n11_threshold_bound_review.py tests/test_paper_publication.py
 
       # Rendered where it is served: `site/papers/n11-threshold-bound-review.html`, with
       # its Markdown and its PDF beside it. Nothing else writes `site/papers` on this
-      # runner, so the artifact is this paper's three files.
+      # runner, so the artifact keeps the paper and its shared assets at their served paths.
       - name: Render and check the paper in HTML, Markdown, and PDF
         run: |
           uv run --frozen --group dev python -m devtools.render_n11_threshold_bound_review --site site --pdf
           uv run --frozen --group dev python -m devtools.render_n11_threshold_bound_review --site site --check
           test -s site/papers/n11-threshold-bound-review.pdf
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-threshold-bound-review
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-threshold-bound-review.html
 
       - name: Share the checked paper
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: n11-threshold-bound-review-page
-          path: packing/site/papers
+          path: packing/site
           if-no-files-found: error
           retention-days: 7
 
@@ -611,6 +634,11 @@ jobs:
       - name: Build the workbench at its own URL
         run: uv run --frozen --all-extras --group dev python -m workbench_tools.build_site --check --revision "${{ github.sha }}"
 
+      - name: Check every declared workbench output
+        run: |
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer workbench
+
       - name: Share the workbench with the publication
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
@@ -665,6 +693,14 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
 
+      - name: Install Node 24 for static mathematics
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+
+      - name: Install the pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
       # The pages are not checked in, so a render that does not reproduce itself would
       # show only here: two renders, at once as `prepare`'s are, the second outside
       # `site/`, have to agree on every file they write, the shared assets under `assets/`
@@ -698,8 +734,16 @@ jobs:
           twin_pid=$!
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           wait "$twin_pid"
+          # The overview uses preview media normally supplied by the lower-bounds
+          # producer. Its partial browser check needs the same committed images.
+          for destination in site "$twin"; do
+            cp atlas/known-best/known-best-1-100-card.png \
+               atlas/known-best/known-best-1-324.png \
+               ../packages/workbench/assets/ascent-n1-324-poster.png "$destination/"
+          done
           diff --recursive site "$twin"
-          uv run --frozen --group dev python -m devtools.check_published_site --local site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer overview
+          uv run --frozen --group dev python -m devtools.check_site_rendering site
 
       - name: Share the site's pages with the publication
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -864,6 +908,12 @@ jobs:
           path: /tmp/n11-lower-bounds-explainer-pdf-check
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Check every declared lower-bounds paper output and static load
+        run: |
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:n11-lower-bounds-explainer
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/n11-lower-bounds-explainer.html
 
       # The print half of the saved-setting geometry; the screen half is `geometry`.
       # The trap is what lets a cancelled run stop here: `uv run` turns the runner's
@@ -1740,16 +1790,10 @@ jobs:
       - name: Put the site's pages at the root, refusing any name already there
         env:
           STAGED: ${{ runner.temp }}/overview-pages
+        working-directory: packing
         run: |
           test -s "$STAGED/index.html"
-          for staged in "$STAGED"/*; do
-            name=$(basename "$staged")
-            if [ -e "packing/site/$name" ]; then
-              echo "::error::the site's pages and the explainer both publish $name"
-              exit 1
-            fi
-          done
-          cp -R "$STAGED"/. packing/site/
+          uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
       - name: Use the workbench
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
@@ -1769,17 +1813,10 @@ jobs:
       - name: Put the threshold-bound review beside the other paper, refusing any name already there
         env:
           STAGED: ${{ runner.temp }}/n11-threshold-bound-review-page
+        working-directory: packing
         run: |
-          test -s "$STAGED/n11-threshold-bound-review.html"
-          test -s packing/site/papers/n11-lower-bounds-explainer.html
-          for staged in "$STAGED"/*; do
-            name=$(basename "$staged")
-            if [ -e "packing/site/papers/$name" ]; then
-              echo "::error::two papers publish papers/$name"
-              exit 1
-            fi
-          done
-          cp -R "$STAGED"/. packing/site/papers/
+          test -s "$STAGED/papers/n11-threshold-bound-review.html"
+          uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
       - name: Use the checked optimality review
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
@@ -1790,18 +1827,10 @@ jobs:
       - name: Put the optimality review beside the other papers, refusing any name already there
         env:
           STAGED: ${{ runner.temp }}/n11-optimality-review-page
+        working-directory: packing
         run: |
-          test -s "$STAGED/n11-optimality-review.html"
-          test -s packing/site/papers/n11-lower-bounds-explainer.html
-          test -s packing/site/papers/n11-threshold-bound-review.html
-          for staged in "$STAGED"/*; do
-            name=$(basename "$staged")
-            if [ -e "packing/site/papers/$name" ]; then
-              echo "::error::two papers publish papers/$name"
-              exit 1
-            fi
-          done
-          cp -R "$STAGED"/. packing/site/papers/
+          test -s "$STAGED/papers/n11-optimality-review.html"
+          uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
       # The papers moved to `papers/<slug>` on 2026-10-01. A page that moved is forwarded
       # by a page of the overview's build; a Markdown file or a PDF cannot forward, so

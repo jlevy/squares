@@ -76,6 +76,7 @@ from typing import Any
 
 from strif import atomic_output_file
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.delivery import (
     DEFAULT_PROFILE,
     FRAME_PATTERN,
@@ -124,7 +125,8 @@ Runner = Callable[..., subprocess.CompletedProcess[str]]
 
 #: The page's data block, as `tools/check-candidate-corpus.ts` finds it.
 DATA_BLOCK = re.compile(
-    r'<script\s+id="atlas-data"\s+type="application/json">(.*?)</script>', re.DOTALL
+    r'<script\s+id="atlas-data"\s+type="application/json"(?P<attrs>[^>]*)>(?P<data>.*?)</script>',
+    re.DOTALL,
 )
 
 
@@ -137,14 +139,26 @@ class PageEdition:
     citations_sha256: str | None
 
 
-def page_edition(page: str) -> PageEdition:
+def page_edition(page: str, *, page_path: Path | None = None) -> PageEdition:
     """The edition a page's own data states, read from its text rather than asked of a browser,
     so the receipt names what the bytes it digested carry."""
-    blocks = DATA_BLOCK.findall(page)
+    blocks = list(DATA_BLOCK.finditer(page))
     if len(blocks) != 1:
         raise SystemExit(f"the page has {len(blocks)} data blocks, not one")
     # The builder writes `</` as `<\/`, which JSON reads as the same two characters.
-    data = json.loads(blocks[0])
+    block = blocks[0]
+    linked = re.search(r'data-src="([^"]+)"', block.group("attrs"))
+    if linked:
+        name = linked.group(1)
+        digest = re.fullmatch(r"data/corpus\.([0-9a-f]{16})\.json", name)
+        if page_path is None or digest is None:
+            raise SystemExit("a linked corpus needs the page path and a local hashed data URL")
+        payload = (page_path.parent / name).read_bytes()
+        if hashlib.sha256(payload).hexdigest()[:16] != digest.group(1):
+            raise SystemExit("the linked corpus does not match its content-addressed name")
+        data = json.loads(payload)
+    else:
+        data = json.loads(block.group("data"))
     citations = data.get("citations") or {}
     version = data.get("version")
     if not isinstance(version, str):
@@ -420,7 +434,7 @@ def priced_range(
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": STAGE_WIDTH, "height": STAGE_HEIGHT})
-        page.goto(page_path.resolve().as_uri(), wait_until="load")
+        open_page(page, page_path)
         page.evaluate(probe("capture/fonts-ready"))
         opened = _control(page, commands=[["setMode", "animate"]], read=["state"])["state"]
         _control(
@@ -469,7 +483,7 @@ def render_frames(
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": STAGE_WIDTH, "height": STAGE_HEIGHT})
-        page.goto(page_path.resolve().as_uri(), wait_until="load")
+        open_page(page, page_path)
         page.evaluate(probe("capture/fonts-ready"))
         opened = _control(page, commands=[["setMode", "animate"]], read=["state"])["state"]
         _control(
@@ -784,7 +798,7 @@ def main() -> int:
     # Digested before it is loaded, so the receipt names the page the frames came from rather
     # than whatever sits at that path once the capture is over.
     page_sha256 = _digest(o.page)
-    edition = page_edition(o.page.read_text(encoding="utf-8"))
+    edition = page_edition(o.page.read_text(encoding="utf-8"), page_path=o.page)
     if o.citations and o.animation is not None:
         raise SystemExit(
             "--citations draws the catalogue's CITATION section, not an animation's"
@@ -811,7 +825,7 @@ def main() -> int:
                 viewport={"width": STAGE_WIDTH, "height": STAGE_HEIGHT},
                 device_scale_factor=scale,
             )
-            page.goto(o.page.resolve().as_uri(), wait_until="load")
+            open_page(page, o.page)
             page.evaluate(probe("capture/fonts-ready"))
             # The page's own defaults, read before `prepare` reduces them. `atlasTransitions`
             # answers only while the catalogue owns the page, so Animate is entered first.

@@ -11,12 +11,26 @@
 // side by side: `thumb` is the drawing's cell, with the drawing's size and whether
 // anything else is in the cell, and `n` is the number's own text, with its weight.
 // Null where the page has no such table.
-(/** @type {{rows: string[]}} */ { rows }) => {
+async (/** @type {{rows: string[]}} */ { rows }) => {
   const table = document.querySelector(".site-frontier table.site-table");
   if (!(table instanceof HTMLTableElement)) {
     return null;
   }
+  for (const id of rows) {
+    const row = document.getElementById(id);
+    const image = row?.querySelector(".site-thumb img");
+    const expected = `atlas/house/${id}.svg`;
+    if (!(image instanceof HTMLImageElement) || image.getAttribute("src") !== expected) {
+      throw new Error(`missing or mismatched drawing for ${id}`);
+    }
+    image.loading = "eager";
+    await image.decode();
+    if (!image.complete || image.naturalWidth !== 1000 || image.naturalHeight !== 1000) {
+      throw new Error(`invalid drawing dimensions for ${id}`);
+    }
+  }
   /** What scrolls the table sideways: its nearest ancestor that clips or scrolls. */
+
   const frame = (() => {
     for (let held = table.parentElement; held; held = held.parentElement) {
       if (getComputedStyle(held).overflowX !== "visible") {
@@ -97,6 +111,8 @@
         top: round(box.top),
         vertical_align: style.verticalAlign,
         position: style.position,
+        font: style.fontFamily,
+        font_size: style.fontSize,
       };
     }),
     rows: rows.map((id) => {
@@ -106,7 +122,7 @@
       }
       const cells = [...row.cells];
       const thumbCell = cells.find((cell) => cell.classList.contains("site-thumb"));
-      const drawing = thumbCell?.querySelector("svg");
+      const drawing = thumbCell?.querySelector("img");
       const link = cells
         .find((cell) => cell.classList.contains("site-col-n"))
         ?.querySelector("a[data-case]");
