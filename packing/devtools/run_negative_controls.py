@@ -80,6 +80,8 @@ from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
+from devtools import squish_second_update_confirmation as second
+from devtools import squish_second_update_house_links as house
 from devtools.repo_scope import tracked_files
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
@@ -146,8 +148,11 @@ SESSION184_RESULT_ROOTS = frozenset(
 # repository, or build products. `resources/README.md` is copied separately because the
 # README link checker requires that one path. The virtualenv and cargo target are
 # symlinked back so nothing is rebuilt or resolved again.
+HOUSE_LINK_LEAVES = frozenset(path.relative_to(ROOT) for path in house.snapshot_house_links())
 PRUNE = frozenset(
     {
+        second.WITNESSES,
+        *(ROOT / relative for relative in HOUSE_LINK_LEAVES),
         # The gate's own marker. A clone that carried it would make the campaign runner
         # refuse to start, and four controls drive the runner expecting a DIFFERENT
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
@@ -215,6 +220,15 @@ PRUNE = frozenset(
         SESSION184_RESULTS / "bc-201-n11-tight-cell-census.json",
         SESSION184_RESULTS / "bc-241-trump-local-theorem-review.json",
         SESSION184_RESULTS / "exp-053-h-057-n17-parent-bound-parallel-speedup.raw",
+        # Historical push telemetry has no registered worker consumer. Keep the logs
+        # in Git; linked/result dependencies are still rescued dynamically below.
+        # The exact five-file audit saves 395,235 bytes without pruning scientific
+        # receipts, native journals, facts, witnesses or review-linked push logs.
+        ROOT / "campaign/agent-sessions/session-164-push-initial.log",
+        ROOT / "campaign/agent-sessions/session-153-integrated-push.log",
+        ROOT / "campaign/agent-sessions/session-163-push-recovery.log",
+        ROOT / "campaign/agent-sessions/session-163-push-refinement.log",
+        ROOT / "campaign/agent-sessions/session-163-push-final.log",
         # Large, generator-owned rendering outputs are replayed by their dedicated
         # validation steps and are never mutation targets. Copying hundreds of witnesses
         # and renderings into every private worker would exceed the portable snapshot cap.
@@ -773,6 +787,8 @@ BUILD_CACHES = frozenset(
     {"__pycache__", ".pytest_cache", ".ruff_cache", "dist", "node_modules"}
 )
 LINK_BACK = (
+    second.WITNESSES.relative_to(ROOT),
+    *sorted(HOUSE_LINK_LEAVES),
     Path(".venv"),
     Path("sqsearch/target"),
     Path("sqverify_exact/target"),
@@ -813,6 +829,7 @@ COPY_SEPARATELY = (
     # The retained n13 family is an exact worker consumer asserted by the n32
     # inventory contract; agenda-040's unrelated generated bulk stays pruned.
     SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json",
+    *second.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",
@@ -1151,6 +1168,7 @@ LINKED_PRUNE_ROOTS = (
             ROOT / ".gate-running",
             ROOT / ".venv",
             ROOT / "witnesses/squish-401-update-2026",
+            second.WITNESSES,
             ROOT / "sqsearch/target",
             ROOT / "sqverify_exact/target",
             ROOT / "sqverify_fast/target",
@@ -1381,6 +1399,12 @@ def clone_tree(dest: Path) -> None:
         if not source.exists():
             continue
         link = work / rel
+        # Existing link/result dependency rescue copies and indexes this consumer.
+        # Never replace a rescued private house leaf with a source link.
+        if rel in HOUSE_LINK_LEAVES and link.exists():
+            if link.is_symlink():
+                raise ValueError("rescued house consumer is not a private file")
+            continue
         link.parent.mkdir(parents=True, exist_ok=True)
         link.symlink_to(source)
 

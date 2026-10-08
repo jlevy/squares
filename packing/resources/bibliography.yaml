@@ -1350,6 +1350,21 @@ sources:
       and SQUISH seeds at three; per-count seed attribution is retained. David Ellsworth’s numerical checking tool is credited in the update. Human-directed Claude Opus
       5.5 assistance is disclosed. No LICENSE is published; only attributed derived geometric facts
       and brief claim quotations are retained. n153 is identical to the earlier attached certificate.
+
+  - key: '[SQUISH second update 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth, Couzo and SQUISH
+    short_credit: Chaoweeraprasit after Ellsworth et al.
+    lineage: independent
+    note: 'Issue422 pins nine new or smaller rational certificates at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
+      Author-reported seeds: Kingbird (David Ellsworth) s(41)/s(37), Couzo s(180)/s(297), and
+      SQUISH own intermediate packings. Human-directed Claude Opus5.5 coding and research assistance
+      disclosed. No root licence; only attributed derived facts and custody metadata retained.
+      Numerical squeeze does not establish rigidity or optimality.'
 # The surname each credited name is cited under, for the names `found_by` and
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being

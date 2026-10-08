@@ -20,6 +20,7 @@ from typing import Any
 import pytest
 
 from devtools import build_bound_citations as citations
+from devtools import squish_second_update_packets as second_update
 from devtools import validate_schemas
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.yamlio import safe_load
@@ -580,9 +581,19 @@ def test_an_earlier_certificate_confirms_only_the_displayed_upper_value(
         assert (line["note"], line["assurance"]) == ("(reported)", "reported")
 
 
+def _first_update_case(n: int) -> dict[str, Any]:
+    """Retain the first update's actual lanes when a later report supersedes it."""
+    case = citations.load_case(n)
+    if n in (179, 263):
+        prior = second_update.prior_lanes()[n]
+        case["reported_upper_bound"] = prior["prior_reported"]
+        case["verified_upper_bound"] = prior["prior_verified"]
+    return case
+
+
 @pytest.mark.parametrize("n", [123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263])
 def test_the_selected_squish_update_does_not_inherit_earlier_confirmation(n: int) -> None:
-    case = citations.load_case(n)
+    case = _first_update_case(n)
     # Hold the earlier verified lane independently of whether the live update has
     # since been confirmed. These are the actual twelve pre-confirmation bounds.
     previous = json.loads(
@@ -602,11 +613,12 @@ def test_the_selected_squish_update_does_not_inherit_earlier_confirmation(n: int
 
 @pytest.mark.parametrize("n", [123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263])
 def test_the_confirmed_squish_update_cites_only_its_matching_result(n: int) -> None:
-    case = citations.load_case(n)
+    case = _first_update_case(n)
     assert bounds_agree_at_declared_precision(
         case["reported_upper_bound"], case["verified_upper_bound"]
     )
-    upper = _entry(n)["upper"]
+    upper = citations.upper_citation(n, case, _register())
+    assert upper is not None
     assert upper["value"] == case["verified_upper_bound"]["value"]
     assert upper["confirmed_by"] == ["T-115"]
     assert (upper["note"], upper["assurance"]) == ("(confirmed T-115)", "verified")

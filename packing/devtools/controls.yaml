@@ -19,6 +19,24 @@ controls:
   expect: update claims mismatch
 
 
+- name: SQUISH second update - a different revision cannot inherit the complete replay
+  file: resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+  replace:
+  - "\n  \"source_commit\": \"e63e4e52b1728b6671b2f263c5e02a4aa79a39d3\",\n"
+  - "\n  \"source_commit\": \"unreviewed-revision\",\n"
+  run: uv run --frozen --all-extras --group dev python -m devtools.squish_second_update_confirmation
+    check-certification
+  expect: confirmation acquisition identity mismatch
+- name: SQUISH second update - unchanged geometry with a wrong canonical witness ID is refused
+  file: devtools/squish_second_update_confirmation.py
+  replace:
+  - witness["id"] = reported.witness_id(n)
+  - witness["id"] = f"W-unreviewed-n{n:03d}"
+  run: uv run --frozen --all-extras --group dev python -m devtools.squish_second_update_confirmation
+    check-certification
+  expect: canonical transformation changed geometry or misstates metadata
+
+
 - name: test harness - missing configured test directory
   file: pyproject.toml
   replace: ['testpaths = ["tests"]', 'testpaths = ["tests-missing"]']
