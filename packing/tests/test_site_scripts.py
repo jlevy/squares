@@ -14,7 +14,7 @@ def test_inventory_includes_application_assets_and_rejects_unknown_scripts(
     )
     (tmp_path / "index.html").write_text(
         '<script type="application/json" data-application-src="workbench.0123456789abcdef.js">'
-        '{}</script>'
+        "{}</script>"
         '<script src="published.0123456789abcdef.js"></script>'
     )
     records, errors = inventory(tmp_path)

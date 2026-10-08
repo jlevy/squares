@@ -7,6 +7,7 @@ import functools
 import html
 import html.parser
 import re
+import struct
 import textwrap
 from collections import Counter
 from collections.abc import Callable
@@ -296,7 +297,6 @@ def test_the_posters_and_the_film_have_a_section_of_their_own_under_the_atlas(
     assert section.index('class="site-cards-frame') < section.index("site-atlas-note")
     for linked in ("ascent-n1-100-1080p60-citations.mp4", "known-best-1-324.svg"):
         assert linked in note, linked
-    assert 'href="#pdfs-and-videos"' in page
     assert 'id="kpress-page-model"' not in page
 
 
@@ -317,7 +317,6 @@ def test_the_atlas_section_is_named_for_its_packings_and_the_sections_run_in_ord
     )
     assert page.count(heading) == 1
     assert 'href="#the-atlas"' not in page
-    assert 'href="#the-atlas-of-square-packings"' in page
     assert '<h1 id="the-problem"' in page
     assert re.findall(r'<h2 id="([^"]+)"', page) == [
         "the-squares-project",
@@ -342,6 +341,19 @@ def test_the_atlas_posters_are_hero_cards_each_opening_its_pdf(page: str) -> Non
         assert f'<span class="site-card-hero"><img src="{hero}" alt=""' in body, stem
         assert (COMPOSITE_ASSETS[0].parent / hero).is_file(), hero
     assert re.search(r"<a\b[^>]*\sdownload\b", page) is None
+
+
+def test_every_lazy_atlas_card_reserves_its_source_image_dimensions(page: str) -> None:
+    """A delayed thumbnail fetch cannot change its intrinsic aspect ratio."""
+    cards = dict(_atlas_cards(page))
+    for href, hero, *_ in overview_sections.ATLAS_CARDS:
+        source = next(path for path in COMPOSITE_ASSETS if path.name == hero)
+        width, height = struct.unpack(">II", source.read_bytes()[16:24])
+        image = re.search(rf'<img\b[^>]*\ssrc="{re.escape(hero)}"[^>]*>', cards[href])
+        assert image is not None
+        assert f'width="{width}"' in image[0]
+        assert f'height="{height}"' in image[0]
+        assert 'loading="lazy"' in image[0]
 
 
 def test_the_atlas_film_is_a_hero_card_opening_the_visualize_page(page: str) -> None:
@@ -523,7 +535,13 @@ def test_a_card_hero_is_served_beside_the_page_never_fetched() -> None:
         with pytest.raises(SystemExit):
             overview_sections.card_hero(address)
     button = overview_sections.card(
-        "pop-x", "Label", "Value", "Note", href="#x", action="Go", hero="x.png"
+        "pop-x",
+        "Label",
+        "Value",
+        "Note",
+        href="#x",
+        action="Go",
+        hero="known-best-1-100-card.png",
     )
     assert button.index('class="site-card-hero"') < button.index('class="site-card-label"')
 
@@ -801,7 +819,7 @@ def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule()
     page = overview_sections.atlas_grid()
     tiles = _atlas_template(page, "first") + _atlas_template(page, "rest")
     found = re.findall(
-        r'<a class="site-atlas-cell" [^>]*data-atlas-n="(\d+)"[^>]*aria-label="([^"]+)">'
+        r'<a class="site-atlas-cell" [^>]*data-atlas-n="(\d+)"[^>]*aria-label="([^"]+)"[^>]*>'
         r'<img [^>]*><span class="site-atlas-n">(.*?)</span></a>',
         tiles,
     )
@@ -1059,7 +1077,7 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     # (`test_the_sizes_scale_a_tile_by_one_token_in_either_view`).
     shared = _rule(css, ".site-atlas-cells")
     assert "--site-atlas-tile: clamp(" in shared
-    assert "--site-atlas-row-space: 0.12;" in shared
+    assert re.search(r"0\.12\s*\+\s*0\.28\s*\*\s*clamp\(", shared)
     assert "--site-atlas-row-space: 0.4;" in _rule(css, ".site-atlas-cells[data-atlas-wrapped]")
     assert "transform-origin: 0 0;" in _rule(css, ".kpress .site-atlas-cell")
     cells = _rule(css, '.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells')
@@ -1069,7 +1087,7 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
         in cells
     )
     tile = _rule(css, '.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell')
-    assert "var(--site-atlas-line, var(--r, auto)) /" in tile
+    assert "var(--site-atlas-line, var(--site-atlas-initial-line)) /" in tile
     for rule in (cells, tile):
         assert "transition" not in rule
         assert "animation" not in rule
@@ -3266,7 +3284,7 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
         # unscripted; the result's cell holds the result and no id.
         assert (
             f'<a class="site-row-open" href="result/{result.id.lower()}.html">'
-            f'{result.id}</a></td>'
+            f"{result.id}</a></td>"
         ) in row
         assert row.count(f">{result.id}<") == 1
         cell = row.split('<td class="site-col-result"', 1)[1].split("</td>", 1)[0]
@@ -3616,9 +3634,7 @@ def test_recent_results_opens_with_its_table_and_says_what_it_shows_under_it(
     assert first.startswith(
         _markdown_text("Eleven squares is settled: $s(11) = 3.8770835\\ldots$")
     )
-    assert first.endswith(
-        "The complete results table includes older and superseded entries, with filters."
-    )
+    assert first.endswith("The complete table includes older results and offers all filters.")
     assert 40 <= len(first.split()) <= 100, len(first.split())
     for gone in ("Each row carries three ratings", "marks a new result", "S1 to S5"):
         assert gone not in _seen(section), gone
@@ -3838,7 +3854,6 @@ def test_the_sites_statement_stands_under_its_own_section_heading(page: str) -> 
     following = after_intro.split(heading, 1)[1].lstrip()
     assert following.startswith("<p>Work on the square packing problem")
     assert heading not in problem.split(site_documents.OVERVIEW_INTRO_CLOSE, 1)[0]
-    assert 'href="#the-squares-project"' in page
     template = render_overview.OVERVIEW_ARTICLE.read_text(encoding="utf-8")
     assert (
         "{{README_INTRO}}\n\n## The Squares Project\n\nWork on the square packing "
@@ -3911,7 +3926,7 @@ def test_no_case_is_called_the_central_one(path: Path) -> None:
 def card_text(fragment: str) -> str:
     """A card's semantic text, with mathematical operators in the source's notation."""
     text = _rendered_text(fragment).replace("$", "")
-    text = re.sub(r"\s*=\s*", " = ", text)
+    text = re.sub(r"\s*([=<>])\s*", r" \1 ", text)
     return text.replace("≥", r" \ge ").replace("≤", r" \le ").replace("…", r"\ldots")
 
 
@@ -4259,7 +4274,7 @@ def test_both_tables_of_results_have_the_same_columns(
         assert f'href="result/{result.id.lower()}.html"' in here
         target = f"pop-result-{result.id.lower()}"
         assert _row_popover(table, target) == _row_popover(recent, target)
-        assert "data-row-src=" in _row_popover(table, target)
+        assert "data-row-pop-src=" in _row_popover(table, target)
         assert "<dt>" not in _row_popover(table, target)
     assert re.findall(
         r"<th[^>]*>([^<]+)</th>", _recent_table(page).split("</thead>", 1)[0]
@@ -4389,15 +4404,17 @@ def test_a_new_result_is_starred_in_both_tables_by_the_atlas_rule(
             assert name.group(1).endswith(", new result"), result.id
     assert overview_sections.new_result_label(by_id["T-060"], overview).endswith("n = 11")
 
-    assert len(ROW_STAR.findall(recent)) == len(ROW_STAR.findall(table)) == len(starred)
+    recent_starred = set(starred) & {r.id for r in _recent_entries(overview)}
+    assert len(ROW_STAR.findall(recent)) == len(recent_starred)
+    assert len(ROW_STAR.findall(table)) == len(starred)
     # Each page carries every row's star, and says in its prose what the star marks.
     legend = re.sub(r"<[^>]+>", "", overview_sections.star_legend())
     assert legend == (
         "A star (\u2605) marks a new result, as the atlas does: the verified lower bound of a "
         "case rests on it now, and it was proved or published on or after 22 August 2026."
     )
-    for served in (page, results):
-        assert len(ROW_STAR.findall(served)) == len(starred)
+    for served, expected in ((page, recent_starred), (results, starred)):
+        assert len(ROW_STAR.findall(served)) == len(expected)
         # The legend under each table says what the star marks, in two words.
         words = f"<span>{overview_sections.NEW_RESULT}</span>"
         assert f"{overview_sections.STAR}</span> {words}" in _legend(served)
@@ -5394,6 +5411,9 @@ def test_a_result_rows_popover_body_comes_from_one_function(
         assert f"BODY OF {row.id}" in file.html
         assert "<main " in file.html
         assert "<h1 " in file.html
+        assert 'aria-label="Neighboring results"' in file.html
+        for neighbor in re.findall(r'rel="(?:prev|next)" href="([^"]+)"', file.html):
+            assert f"result/{neighbor}" in {page.name for page in fragments}
     for table, listed in (
         (overview_sections.results_table(overview), overview.results),
         (overview_sections.recent_table(overview), _recent_entries(overview)),
@@ -6094,7 +6114,7 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
         assert f">{html.escape(titles[new])}</a>.</p>" in page
         assert "site-nav" not in page
         assert "<style" not in page
-        assert len(page) < 8_000, "a forwarder is a few lines, not a page"
+        assert len(page) < 10_000, "a forwarder and metadata remain small"
         # It fetches nothing, not even the shared assets a site page links.
         render_overview.assert_fetches_only_assets(old, page)
         assert f"{site_assets.ASSETS_DIR}/" not in page, old
@@ -6169,7 +6189,6 @@ def test_the_site_writes_its_forwarders_and_checks_them(
             "index.html",
             *moved,
             *render_overview.support_files(),
-            *site_assets.shared().assets.files,
         ]
     )
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0

@@ -576,6 +576,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Published Site URLs](docs/project/site-urls.md) | generated status view | generated | generated | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
 | [SQUISH update: mathematical and semantic binding review](docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematics Review: Eleven SQUISH Upper-Bound Packings](docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md) | dated review record | record | retained | — |

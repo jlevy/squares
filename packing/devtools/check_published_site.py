@@ -84,7 +84,9 @@ CANONICAL = re.compile(r'<link\s+rel="canonical"\s+href="([^"]*)"')
 #: The fuller body a row's popover fetches, as its address beside the page, and how a
 #: result's overview opens: the one block it is, naming its result.
 ROW_SOURCE = re.compile(r'data-row-pop-src="([^"]+)"')
-RESULT_OVERVIEW = re.compile(r'<div class="site-result" data-result-overview="(t-\d{3})">')
+RESULT_OVERVIEW = re.compile(
+    r'<(?:article|div) class="site-result" data-result-overview="(t-\d{3})">'
+)
 #: The record page's index, each case's link to its record file beside it, and the
 #: record a record file holds (`render_case_pages`).
 CASE_INDEX_LINK = re.compile(r'href="(\d+)\.html" data-case="(\d+)"')

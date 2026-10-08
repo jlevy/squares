@@ -1,4 +1,4 @@
-// Head bootstrap: registered legacy case-index aliases resolve before first paint.
+// Registered forwarding: known legacy case-index aliases resolve to complete records.
 // The static index links are the authority for known counts; ordinary links navigate
 // to complete pages. A valid ?n takes precedence over #n-N. Meaningful record fragments
 // and embedding state survive; invalid counts leave the reader at the index.

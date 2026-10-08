@@ -42,7 +42,7 @@ function arrival(address) {
 }
 
 for (const alias of ["cases/n-11.html", "cases/011.html", "cases/n-011.html"]) {
-  test(`${alias} preserves query and fragment at the canonical case`, () => {
+  void test(`${alias} preserves query and fragment at the canonical case`, () => {
     assert.equal(
       arrival(`https://example.org/squares/${alias}?view=embed#proof`),
       "https://example.org/squares/cases/11.html?view=embed#proof",
@@ -50,14 +50,14 @@ for (const alias of ["cases/n-11.html", "cases/011.html", "cases/n-011.html"]) {
   });
 }
 
-test("uppercase result ID leads to its retained page", () => {
+void test("uppercase result ID leads to its retained page", () => {
   assert.equal(
     arrival("https://example.org/squares/result/T-001.html?view=embed#proof"),
     "https://example.org/squares/result/t-001.html?view=embed#proof",
   );
 });
 
-test("missing canonical result page leads to its known row", () => {
+void test("missing canonical result page leads to its known row", () => {
   assert.equal(
     arrival("https://example.org/squares/result/t-001.html?view=embed#proof"),
     "https://example.org/squares/all-results.html?view=embed#t-001",
@@ -65,11 +65,11 @@ test("missing canonical result page leads to its known row", () => {
 });
 
 for (const path of ["cases/012.html", "result/T-999.html", "result/T-001.html/evil"]) {
-  test(`unknown address ${path} keeps the 404 page`, () => {
+  void test(`unknown address ${path} keeps the 404 page`, () => {
     assert.equal(arrival(`https://example.org/squares/${path}#proof`), null);
   });
 }
 
-test("a path outside the project cannot redirect", () => {
+void test("a path outside the project cannot redirect", () => {
   assert.equal(arrival("https://example.org/result/T-001.html"), null);
 });

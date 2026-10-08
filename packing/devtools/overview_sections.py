@@ -201,11 +201,19 @@ def card_hero(src: str) -> str:
     picture covers from its top edge. It is decorative (`alt=""`), since the card's own
     label and value say what it shows, and loads lazily. `src` is a file served beside
     the page, never an address off the site."""
+    from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS  # noqa: PLC0415
+    from devtools.render_overview import image_dimensions  # noqa: PLC0415
+
     if "://" in src or src.startswith("//"):
         raise SystemExit(f"{src}: a card's hero is served beside the page, never fetched")
+    source = next((path for path in COMPOSITE_ASSETS if path.name == src), None)
+    if source is None:
+        raise SystemExit(f"{src}: a card's hero must be a published atlas image")
+    width, height = image_dimensions(source)
     return (
         '<span class="site-card-hero">'
-        f'<img src="{_esc(src)}" alt="" loading="lazy" decoding="async"></span>'
+        f'<img src="{_esc(src)}" alt="" width="{width}" height="{height}" '
+        'loading="lazy" decoding="async"></span>'
     )
 
 
@@ -596,8 +604,9 @@ def result_row_popover_body(result: Result, overview: Overview) -> str:
     return result_overview.result_popover_html(result, overview)
 
 
-#: Where the result overviews are served, under the site's root: a directory of
-#: fragments, one a result, which are not pages. Not `results/`: `results.html` is still
+#: Where complete result pages are served under the site's root. The historic
+#: constant name remains for callers that also use their articles in popovers.
+#: Not `results/`: `results.html` is still
 #: served, as the forwarder where `RESULTS.md` was a page, and a host may serve either
 #: at `/results`.
 RESULT_FRAGMENTS = "result"

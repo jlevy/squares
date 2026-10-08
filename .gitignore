@@ -51,4 +51,4 @@ packing/atlas/known-best/video/spikes/**/frames/
 # The README files and verification receipts in the same directories are tracked.
 /packing/campaign/explorations/X048-session-168-pilots/certificates/*/*.json.gz
 
-packages/workbench/node_modules/
+packages/workbench/node_modules

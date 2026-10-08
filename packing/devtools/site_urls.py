@@ -37,49 +37,58 @@ REGISTRATION_DATE = "2026-10-07"
 HARD_HTML_LIMIT = 2_000_000
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
+    "papers/n11-threshold-bound-review.html": (
+        900_000,
+        (
+            "The 401-formula review measures 824,137 bytes after sharing font geometry. "
+            "Its 842,245-byte edition passed three-run desktop/mobile, light/dark and "
+            "no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves "
+            "headroom above the measured edition."
+        ),
+    ),
     "cases/11.html": (
         500_000,
-        "Complete n=11 proof/certificate record and prepared bounds measure 434,442 bytes.",
+        "Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes.",
     ),
     "cases/17.html": (
         500_000,
-        "Complete n=17 proof/certificate record and prepared bounds measure 464,002 bytes.",
+        "Complete n=17 proof/certificate record and prepared bounds measure 443,761 bytes.",
     ),
     "cases/18.html": (
         350_000,
-        "Complete n=18 certificate record; prepared HTML measures 338,937 bytes.",
+        "Complete n=18 certificate record; prepared HTML measures 326,548 bytes.",
     ),
     "result/t-007.html": (
         800_000,
-        "Complete broad scope history and prepared exact bounds measure 730,659 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 708,426 bytes.",
     ),
     "result/t-085.html": (
         800_000,
-        "Complete broad scope history and prepared exact bounds measure 712,847 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 691,685 bytes.",
     ),
     "result/t-083.html": (
         800_000,
-        "Complete broad scope history and prepared exact bounds measure 707,626 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 685,816 bytes.",
     ),
     "result/t-058.html": (
         600_000,
-        "Complete broad scope history and prepared exact bounds measure 526,374 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 505,826 bytes.",
     ),
     "result/t-046.html": (
         400_000,
-        "Complete broad scope history and prepared exact bounds measure 368,258 bytes.",
+        "Complete broad scope history and prepared exact bounds measure 351,572 bytes.",
     ),
     "frontier.html": (
         1_750_000,
-        "All 324 case rows and prepared exact bounds measure 1,601,775 bytes.",
+        "All 324 case rows and prepared exact bounds measure 1,529,406 bytes.",
     ),
     "all-results.html": (
         800_000,
-        "The complete registered-result table with prepared math measures 746,476 bytes.",
+        "The complete registered-result table with prepared math measures 711,226 bytes.",
     ),
     "tutorial.html": (
         800_000,
-        "The complete authored tutorial and prepared formulas measure 729,410 bytes.",
+        "The complete authored tutorial and prepared formulas measure 742,713 bytes.",
     ),
     "papers/n11-lower-bounds-explainer.html": (
         1_500_000,
@@ -244,6 +253,7 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
         render_overview,
         site_documents,
     )
+    from devtools.check_source_coverage import scope_contains  # noqa: PLC0415
     from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS  # noqa: PLC0415
     from devtools.render_research_tables import load_cases  # noqa: PLC0415
     from sqpack.release import PUBLICATION_DATE  # noqa: PLC0415
@@ -272,12 +282,9 @@ def derive_registry(previous: Sequence[SiteURL] | None = None) -> list[SiteURL]:
     for case in load_cases():
         n = case["n"]
         dates = [str(case.get("source_reviewed", FIRST_SITE_DATE))]
-        for record in records:
-            scope = record.get("scope") or {}
-            if n in scope.get("n_values", []) or (
-                scope.get("n_range") and scope["n_range"][0] <= n <= scope["n_range"][1]
-            ):
-                dates.append(_result_dates(record)[1])
+        dates.extend(
+            _result_dates(record)[1] for record in records if scope_contains(record["scope"], n)
+        )
         rows.append(
             _new_row(
                 f"cases/{n}.html",

@@ -36,7 +36,10 @@ FAMILIES = {
         "input-response",
         "Open a canonical case record after a case link is pressed.",
     ),
-    "case-page": ("input-response", "Open case controls over a complete prepared record."),
+    "case-page": (
+        "registered-forwarder",
+        "Resolve known legacy case-index query/fragment aliases to canonical records.",
+    ),
     "film": ("non-layout", "Play within a poster's reserved media rectangle."),
     "atlas-grid": ("non-layout", "Enhance existing tiles inside a reserved grid."),
     "atlas-view": ("input-response", "Apply requested atlas layout to existing static tiles."),
@@ -68,6 +71,11 @@ FAMILIES = {
 # Paper publication links pre-existing inline programs as page.<hash>.js. These
 # stable source markers give each retained program its own reviewed declaration.
 PAPER_PROGRAMS = (
+    (
+        "Typesets a kpress page's formulas",
+        "non-layout",
+        "Readiness wiring skips already prepared primary mathematics.",
+    ),
     ("The reader's colour theme:", "input-response", "Reader theme controls."),
     (
         "shared: certificate picker and queued static math",

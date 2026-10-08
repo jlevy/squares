@@ -244,6 +244,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_result_columns.py",
     "tests/test_site_frontier_table.py",
     "tests/test_site_rendering.py",
+    "tests/test_site_math_preferences.py",
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.

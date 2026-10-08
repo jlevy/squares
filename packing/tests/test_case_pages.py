@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import html
 import re
+import xml.etree.ElementTree as ET
 from fractions import Fraction
 from pathlib import Path
 
@@ -615,3 +616,21 @@ def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
         assert (f'data-case-step="{n - 1}">{left}n = {n - 1}</a>' in steps) == (n != numbers[0])
         assert (f"n = {n + 1}{right}</a>" in steps) == (n != numbers[-1])
         assert '<a href="./" data-case-index>All cases</a>' in steps
+
+
+def test_case_eleven_reserves_and_locally_serves_its_original_figure(
+    records: dict[str, str],
+) -> None:
+    """The complete case needs no remote image and reserves the source SVG's size."""
+    path = "atlas/trump11-overview.svg"
+    source = render_case_pages.CASE_IMAGE_FILES[path]
+    figure = ET.parse(source).getroot()
+    record = _record(records, 11)
+    image = re.search(r"<img\b[^>]*trump11-overview\.svg[^>]*>", record)
+    assert image is not None
+    assert f'src="../{path}"' in image[0]
+    for dimension in ("width", "height"):
+        assert f'{dimension}="{figure.attrib[dimension]}"' in image[0]
+    assert "raw.githubusercontent.com" not in image[0]
+    assert path in render_overview.support_file_paths()
+    assert render_overview.support_files()[path] == source.read_bytes()

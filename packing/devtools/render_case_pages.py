@@ -40,6 +40,11 @@ CASES_HOME = f"{CASES_DIR}/"
 #: The one popover a page opens every case record in.
 CASE_POPOVER_ID = "pop-case"
 
+#: Original case figures published locally, preserving their source drawing and size.
+CASE_IMAGE_FILES = {
+    "atlas/trump11-overview.svg": PACKING / "atlas" / "rendering" / "trump11-overview.svg",
+}
+
 #: Every file this page reads beyond the frontier atlas's own inputs.
 CASES_INPUTS: tuple[Path, ...] = (
     Path(__file__).resolve(),
@@ -47,6 +52,7 @@ CASES_INPUTS: tuple[Path, ...] = (
     CASE_RECORD,
     CASE_PAGE_SCRIPT,
     CASE_POPOVER_SCRIPT,
+    *CASE_IMAGE_FILES.values(),
 )
 
 #: A case file's minimal polynomial longer than this, in characters, opens on request.
@@ -987,6 +993,27 @@ def cases_meta() -> PageMeta:
     return PageMeta("Case Records", CASES_DESCRIPTION, CASES_PAGE)
 
 
+def reserve_case_images(markup: str) -> str:
+    """Reserve each locally published case figure before its lazy image loads."""
+    from devtools.render_overview import image_dimensions  # noqa: PLC0415
+
+    dimensions = {name: image_dimensions(source) for name, source in CASE_IMAGE_FILES.items()}
+
+    def reserve(match: re.Match[str]) -> str:
+        tag = match.group(0)
+        source = re.search(r'\ssrc="([^"]+)"', tag)
+        if source is None or source[1] not in dimensions:
+            return tag
+        width, height = dimensions[source[1]]
+        for name, value in (("width", width), ("height", height)):
+            attribute = re.compile(rf'\s{name}="[^"]*"')
+            tag = attribute.sub("", tag)
+            tag = f'{tag[:-1]} {name}="{value}">'
+        return tag
+
+    return re.sub(r"<img\b[^>]*>", reserve, markup)
+
+
 @cache
 def _rendered() -> str:
     """Every record as one kpress page, with the case files' links made to work, its
@@ -1013,6 +1040,10 @@ def _rendered() -> str:
         ),
         aliases={
             **site_documents.RECORD_PAGES,
+            **{
+                source.relative_to(PACKING.parent).as_posix(): name
+                for name, source in CASE_IMAGE_FILES.items()
+            },
             **{f"packing/frontier/n-{n:03d}.md": case_url(n) for n in numbers},
         },
     )
@@ -1025,8 +1056,8 @@ def _rendered() -> str:
         title=meta.name,
         description=meta.description,
         toc=False,
-        rewrite_body=lambda text: site_documents.rewrite_article(
-            text, context=context, report=report
+        rewrite_body=lambda text: reserve_case_images(
+            site_documents.rewrite_article(text, context=context, report=report)
         ),
         page_scripts=(CASE_PAGE_SCRIPT,),
         prepare_math=False,

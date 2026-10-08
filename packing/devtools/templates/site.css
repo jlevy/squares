@@ -1972,6 +1972,11 @@ body {
    like a card and opens the case popover (Case records, below). The wash is the cell's
    background,
    behind the drawing, and it is all that changes: every line keeps the page's ink. */
+/* Expansion moves following sections. Keep the viewport fixed through that input
+   response instead of scroll-anchoring a result row below the changing atlas. */
+.site-page:has([data-atlas-grid]) {
+  overflow-anchor: none;
+}
 .site-page .site-atlas-grid {
   --site-wide: var(--site-bleed-max);
   --site-atlas-toggle-space: 1.2rem;
@@ -2069,7 +2074,23 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
    again, the script having set fewer to a line. At Medium it is the share alone, no
    wider than `--site-atlas-tile-max`. The grid's least cell is scaled the same way. */
 .site-atlas-cells {
-  --site-atlas-per-line: 19;
+  --site-atlas-widest: 19;
+  --site-atlas-medium-columns: min(
+    var(--site-atlas-widest),
+    max(1, round(down, 100cqi / var(--site-atlas-tile-min), 1))
+  );
+  --site-atlas-medium-tile: min(
+    var(--site-atlas-tile-max),
+    100cqi /
+    var(--site-atlas-medium-columns)
+  );
+  --site-atlas-per-line: max(
+    1,
+    min(
+      var(--site-atlas-medium-columns),
+      round(nearest, 100cqi / (max(1, var(--site-atlas-scale)) * var(--site-atlas-medium-tile)), 1)
+    )
+  );
   --site-atlas-fit: calc(100cqi / var(--site-atlas-per-line, 1));
   --site-atlas-share: calc(var(--site-atlas-fit) * min(1, var(--site-atlas-scale)));
   --site-atlas-most: calc(var(--site-atlas-tile-max) * var(--site-atlas-scale));
@@ -2079,7 +2100,11 @@ html[data-site-atlas-size="large"] .site-page .site-atlas-grid {
     var(--site-atlas-most)
   );
   --site-atlas-cell: calc(var(--site-atlas-cell-min) * var(--site-atlas-scale));
-  --site-atlas-row-space: 0.12;
+  --site-atlas-row-space: calc(
+    0.12 +
+    0.28 *
+    clamp(0, var(--site-atlas-widest) - var(--site-atlas-per-line), 1)
+  );
   display: grid;
   gap: 0.5rem;
   grid-template-columns: repeat(auto-fill, minmax(var(--site-atlas-cell), 1fr));
@@ -2166,7 +2191,7 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
   overflow-x: auto;
 }
 .site-atlas-cells:has(.site-atlas-rest:not([hidden])) {
-  --site-atlas-per-line: 35;
+  --site-atlas-widest: 35;
 }
 /* The space over a new row, `--site-atlas-row-space`, is a share of a tile: 0.12 where
    every row is one line, and where a row wraps 0.4, larger than anything between two
@@ -2176,12 +2201,70 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid .site-atlas-cells {
 }
 .kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell,
 html[data-site-atlas-view="triangle"] .kpress .site-atlas-grid .site-atlas-cell {
-  /* Short inline variables hold the initial geometry; input updates use named ones. */
+  /* Initial positions mirror place() in atlas-view.js. Each earlier row contributes
+     ceil((2k - 1) / columns) lines; --r is the row and --c its offset from the square.
+     Container arithmetic settles the query-selected layout before any script runs. */
+  --site-atlas-in-row: calc(2 * var(--r, 1) - 1 - var(--c, 0));
+  --site-atlas-row-tiles: calc(2 * var(--r, 1) - 1);
+  --site-atlas-row-lines: round(up, var(--site-atlas-row-tiles) / var(--site-atlas-per-line), 1);
+  --site-atlas-in-line: round(up, var(--site-atlas-in-row) / var(--site-atlas-per-line), 1);
+  --site-atlas-last-line: clamp(0, 1 - var(--site-atlas-row-lines) + var(--site-atlas-in-line), 1);
+  --site-atlas-above: calc(
+    round(up, 1 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 1, 1) +
+    round(up, 3 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 2, 1) +
+    round(up, 5 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 3, 1) +
+    round(up, 7 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 4, 1) +
+    round(up, 9 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 5, 1) +
+    round(up, 11 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 6, 1) +
+    round(up, 13 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 7, 1) +
+    round(up, 15 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 8, 1) +
+    round(up, 17 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 9, 1) +
+    round(up, 19 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 10, 1) +
+    round(up, 21 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 11, 1) +
+    round(up, 23 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 12, 1) +
+    round(up, 25 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 13, 1) +
+    round(up, 27 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 14, 1) +
+    round(up, 29 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 15, 1) +
+    round(up, 31 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 16, 1) +
+    round(up, 33 / var(--site-atlas-per-line), 1) *
+    clamp(0, var(--r, 1) - 17, 1)
+  );
+  --site-atlas-initial-line: calc(var(--site-atlas-above) + var(--site-atlas-in-line));
+  --site-atlas-initial-column: calc(
+    mod(var(--site-atlas-in-row) - 1, var(--site-atlas-per-line)) +
+    1 +
+    var(--site-atlas-last-line) *
+    (
+      var(--site-atlas-per-line) -
+      mod(var(--site-atlas-row-tiles) - 1, var(--site-atlas-per-line)) -
+      1
+    )
+  );
+  --site-atlas-initial-opens: calc(
+    clamp(0, var(--r, 1) - 1, 1) *
+    clamp(0, 2 - var(--site-atlas-in-line), 1)
+  );
   grid-area:
-    var(--site-atlas-line, var(--r, auto)) /
-    var(--site-atlas-column, calc(var(--site-atlas-per-line, 19) - var(--c, 0)));
+    var(--site-atlas-line, var(--site-atlas-initial-line)) /
+    var(--site-atlas-column, var(--site-atlas-initial-column));
   margin-block-start: calc(
-    var(--site-atlas-opens, var(--o, 0)) *
+    var(--site-atlas-opens, var(--site-atlas-initial-opens)) *
     var(--site-atlas-tile) *
     var(--site-atlas-row-space)
   );
@@ -2897,4 +2980,12 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid [data-atlas-square] .site
 }
 .kpress .site-case-figure > svg {
   aspect-ratio: 1;
+}
+
+.site-result-neighbors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-start: 2rem;
 }

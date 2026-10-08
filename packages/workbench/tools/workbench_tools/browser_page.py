@@ -6,12 +6,32 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
-from typing import Any
+from typing import Any, cast
 
 from workbench_tools.probes import probe
 
 
 class _QuietHandler(SimpleHTTPRequestHandler):
+    def _same_origin(self) -> bool:
+        """A loopback bind alone does not prevent DNS rebinding or cross-origin reads."""
+        server = cast(ThreadingHTTPServer, self.server)
+        authority = f"127.0.0.1:{server.server_port}"
+        origins = self.headers.get_all("Origin", [])
+        if self.headers.get_all("Host", []) != [authority] or (
+            origins and origins != [f"http://{authority}"]
+        ):
+            self.send_error(403, "Foreign Host or Origin")
+            return False
+        return True
+
+    def do_GET(self) -> None:
+        if self._same_origin():
+            super().do_GET()
+
+    def do_HEAD(self) -> None:
+        if self._same_origin():
+            super().do_HEAD()
+
     def log_message(self, format: str, *args: Any) -> None:  # noqa: A002
         pass
 

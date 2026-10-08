@@ -3098,6 +3098,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-07'
   status: live
+- path: atlas/trump11-overview.svg
+  canonical: atlas/trump11-overview.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-07'
+  lastmod: '2026-10-07'
+  status: live
 - path: cases.html
   canonical: cases/
   kind: forwarder

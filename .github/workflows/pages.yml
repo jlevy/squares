@@ -69,6 +69,7 @@ name: Certificate page
       - packing/devtools/templates/site-nav.html
       - packing/devtools/templates/site-nav.css
       - packing/devtools/templates/paper-type.css
+      - packing/devtools/templates/site-math.css
       - packing/devtools/templates/site.css
       - packing/devtools/templates/site-result.css
       - packing/devtools/templates/overview-article.md
@@ -136,6 +137,8 @@ name: Certificate page
       - packing/tests/test_site_urls.py
       - packing/tests/test_site_math.py
       - packing/tests/test_site_rendering.py
+      - packing/tests/test_site_math_preferences.py
+      - packing/tests/probes/site_math_preferences/**
       - packing/tests/test_assemble_site.py
       - packing/devtools/pages_scope.py
       - packing/devtools/paper_links.py

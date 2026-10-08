@@ -172,8 +172,8 @@ def result_overview(
 ) -> bytes:
     """A result's overview as it is served: the one block, with a repository link."""
     return (
-        f'<div class="site-result" data-result-overview="{result_id}">'
-        f'<a href="{REPO_URL}/blob/{ref}/{link}">Register</a></div>\n'
+        f'<article class="site-result" data-result-overview="{result_id}">'
+        f'<a href="{REPO_URL}/blob/{ref}/{link}">Register</a></article>\n'
     ).encode()
 
 

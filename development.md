@@ -184,24 +184,24 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 43 of 98 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 58 of 98 | 240 s | 59.4 s |
+| `--records` | contributor, before touching a registry; also every pull request | 46 of 103 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 62 of 103 | 240 s | 59.4 s |
 | `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 85 of 98 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 61 of 98 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 98 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 98 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 98 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 98 | 143 s | 114.58 s, the geometric mean of twelve hosted readings on 2026-10-01 of the three-shard partition after the day’s growth, band 83.91–128.65 s (1.53x); two more walls that day, 131.58 and 132.67 s, were over the ceiling with every test green and are named, not averaged; the 85.03 s two-reading record stays in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 98 | 168 s | 114.38 s, the geometric mean of eleven hosted readings on 2026-10-01 of the same partition, band 79.30–139.35 s (1.76x); the 104.65 s single reading stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 98 | 168 s | 132.05 s, the geometric mean of eleven hosted readings on 2026-10-01 after the day’s files landed in it, band 90.34–147.16 s (1.63x); the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 98 | 143 s | pending its first hosted cohort under `think-t7k5`; the record’s cohort predicts about 84 s for its 278.9 test-second share |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 98 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 2 of 98 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 kernel’s step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 98 of 98 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 90 of 103 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 65 of 103 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 103 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 103 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 103 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 103 | 143 s | 114.58 s, the geometric mean of twelve hosted readings on 2026-10-01 of the three-shard partition after the day’s growth, band 83.91–128.65 s (1.53x); two more walls that day, 131.58 and 132.67 s, were over the ceiling with every test green and are named, not averaged; the 85.03 s two-reading record stays in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 103 | 168 s | 114.38 s, the geometric mean of eleven hosted readings on 2026-10-01 of the same partition, band 79.30–139.35 s (1.76x); the 104.65 s single reading stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 103 | 168 s | 132.05 s, the geometric mean of eleven hosted readings on 2026-10-01 after the day’s files landed in it, band 90.34–147.16 s (1.63x); the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 103 | 143 s | pending its first hosted cohort under `think-t7k5`; the record’s cohort predicts about 84 s for its 278.9 test-second share |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 103 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 2 of 103 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 kernel’s step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 103 of 103 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 98-step registry, read from `packing-validate --list`
-on 2026-10-03. Dated costs retain their measured source and resource shape; they are not
+Step counts describe the current 103-step registry, read from `packing-validate --list`
+on 2026-10-07. Dated costs retain their measured source and resource shape; they are not
 fresh measurements of the new scheduling.
 
 `--geometry`’s recorded cost is the geometric mean of seven readings at the reference
@@ -1179,8 +1179,57 @@ an overlay; **Non-layout enhancement** adds behavior without moving laid-out con
 Content pages do not fetch their required content or typeset math after paint.
 Registered forwarders and the 404 alias resolver may redirect; the workbench’s
 application scripts follow its separate startup contract.
+The executable inventory is `devtools.check_site_scripts`: it checks every script file
+and executable HTML tag, including the workbench’s application entry.
+Known program families carry their class and reason; unknown programs, missing files and
+remote startup dependencies fail the build.
+Content hashes select cache editions, not policy exceptions.
+The assembled publication check runs this inventory automatically.
+
+| Class | Retained programs | Initial-content contract |
+| --- | --- | --- |
+| Pre-paint bootstrap | persisted theme/font attributes, embed/atlas query attributes, font hinting | Root attributes are set before body paint; inline programs stay under 4,096 bytes |
+| Input response | table filters/sorts, theme controls, case/result popovers, atlas controls, paper certificate controls | Primary records and mathematics already exist; a reader action may open or update a reserved region |
+| Non-layout enhancement | film playback, atlas grid helpers, document behavior and paper readiness wiring | Reserved media boxes and prepared prose/math retain their layout |
+| Registered forwarding | moved-page and case-index forwarders, and the known-alias 404 resolver | Only registered historical paths and fragments are redirected |
+| Workbench application | validated corpus loader and the packing application | Static heading/help remains readable; application data loads from an immutable JSON URL |
+
 Keep browser code in `.js` or `.ts` files under the browser floor, including probes and
 tests.
+
+### Browser Load and Readability Protocol
+
+`devtools.check_site_rendering` measures a producer tree with fresh Chromium contexts at
+1,280 and 390 pixels, in light and dark schemes.
+It uses the local gzip server without network throttling.
+A native performance observer is installed before navigation; after load and font
+readiness, the tool samples the initial viewport and scrolls to the middle and end, with
+a 250 ms settling interval at each point.
+No reader input is generated.
+CLS uses native session windows, excluding shifts after recent input.
+A separate context with JavaScript disabled requires visible primary headings/prose,
+rendered mathematics and reserved image dimensions.
+
+Limits are CLS 0.1, LCP 4,000 ms, longest task 300 ms and cumulative blocking beyond 50
+ms of 600 ms.
+Missing native timing, page errors, failed requests, hidden primary content
+and missing visual math fail the check.
+Every structural sample must pass; `--runs 3` reports the median of each timing metric.
+The early-shift and hidden-content negative fixtures prove that the gate observes
+failures.
+
+Run from `packing/`, with the task scratch environment:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.check_site_rendering OUTPUT --runs 3
+uv run --frozen --all-extras --group dev python -m devtools.check_site_rendering OUTPUT \
+  --page 'index.html?atlas=triangle&size=large' --runs 3
+```
+
+Overview and paper producer jobs run the protocol on pull requests.
+The final assembly checks every registered output and script, while the retained browser
+contracts cover mobile atlas geometry, complete case/result content, overlays, font
+choices, keyboard controls and the workbench’s same-origin loading contract.
 
 ## Publishing the Explainer
 

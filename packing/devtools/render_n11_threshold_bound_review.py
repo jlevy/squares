@@ -275,6 +275,7 @@ RENDER_INPUTS = tuple(
             PACKING / "devtools/site_assets.py",
             PACKING / "devtools/site_math.py",
             PACKING / "devtools/node/render-site-math.mjs",
+            PACKING / "devtools/templates/site-math.css",
             ARTICLE,
             SHELL,
             STYLE,
@@ -637,7 +638,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     from devtools import site_assets, site_math  # noqa: PLC0415
 
     site = args.site.resolve()
-    html = site_math.prepare(html)
+    html = site_math.prepare(html, page_path=SITE_PATH)
     html = html.replace(favicon_html(inline=True), favicon_html(root="../"))
     html, assets = site_assets.link_inline_assets(html, SITE_PATH)
     outputs = output_files(site, html, markdown)

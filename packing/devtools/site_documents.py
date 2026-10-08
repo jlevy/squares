@@ -144,7 +144,7 @@ DOCUMENTS: tuple[SiteDocument, ...] = (
         "readme.html",
         # The file's name: the page's own would repeat the project's, which follows it.
         "README",
-        "The square packing project: current results, operating principles, "
+        "The Squares Project: current results, operating principles, "
         "reproducible evidence, and guides to its papers and research record.",
     ),
     _document(

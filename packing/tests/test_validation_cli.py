@@ -780,10 +780,12 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "-q",
         *validate.BEHAVIORAL_TEST_ROOTS,
         f"--ignore={validate.BROWSER_FLOOR_LIVENESS_TESTS}",
-        # The two files that pin the tables' pixels run where Chromium is installed, in
+        # Browser layout and prepared mathematics run where Chromium is installed, in
         # `site table layout in Chromium`; a shard has no browser for them (D-513).
         "--ignore=tests/test_site_result_columns.py",
         "--ignore=tests/test_site_frontier_table.py",
+        "--ignore=tests/test_site_rendering.py",
+        "--ignore=tests/test_site_math_preferences.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -3806,6 +3808,8 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         "campaign record",
         # An advisory wall's tracking bead is read from the bead store, not the tree.
         "tier ceilings are declared and not slack",
+        # Historical site identity compares with the mutable base, not just this tree.
+        "published URL registry and historical compatibility",
         # New custody checks repeat until their tree reuse is explicitly classified.
         "SQUISH update certification binds complete reviewed inputs",
     }
@@ -4019,6 +4023,8 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
     assert set(validate.SITE_LAYOUT_TESTS) == {
         "tests/test_site_result_columns.py",
         "tests/test_site_frontier_table.py",
+        "tests/test_site_rendering.py",
+        "tests/test_site_math_preferences.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path

@@ -9,7 +9,7 @@ author: Claude (agent), for the repository owner
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Approved by the owner in conversation (2026-10-06); in implementation
+**Status:** Implemented; final integration and CI verification in progress
 
 **Workflow:** W7 pipeline improvement (the published site is the surface)
 
@@ -21,15 +21,24 @@ are linked to this spec
 
 ## Implementation Checkpoint (2026-10-07)
 
-PR #395 now tracks implementation of the plan, following senior review A. The generated
-registry and historical audit are in place; static case and result pages, chaptered
-reference pages, prepared mathematics, shared paper assets and workbench assets are
-being integrated in parallel.
-The historical audit found three previously removed result addresses, which require
-explained tombstones before the compatibility gate can pass.
-The remaining work is integration, browser measurements, independent technical reviews,
-and the required CI gates.
-No deployment has been made.
+PR #395 implements the plan following senior review A and independent senior,
+performance, security and correctness passes.
+All five implementation lanes are complete.
+Canonical pages serve all 324 cases and 115 live results; three previously removed
+result addresses serve explained, non-indexed tombstones.
+The registry retains old paths and query/fragment aliases, and checks semantic result
+identity against the historical baseline.
+
+Generic content and the three papers use prepared visual mathematics with retained
+reader font choices.
+Primary content reads without JavaScript.
+Shared immutable assets, local dimensioned drawings, static synopsis chapters and
+separate workbench JSON keep the completed pages within documented path-specific budgets
+and the strict 2 MB ceiling.
+
+Final assembled-site checks, browser measurements, required local gates and exact-head
+CI are in progress.
+Deployment and the owner’s Search Console account setup follow merge.
 
 ## Overview
 
@@ -323,21 +332,28 @@ Each row records the path, its kind (`page`, `record`, `result`, `paper-file`,
 Hashed assets are one pattern row, not 45 rows.
 Two families are permanent by rule: `cases/{n}.html` for every *n* the register has
 covered (the range only grows), and `result/t-{nnn}.html` for every ID that has ever
-been on `main`; the registry keeps each result’s registration date, so an ID cannot
-silently change identity.
+been on `main`. Each result’s stable identity includes its kind, scope, establishment
+date, attribution, source lineage, evidence IDs and artifact paths.
+Historical checks compare these semantic fields; dates alone do not identify a result.
+A correction records the previous binding in a dated, explained amendment.
+Same-date ID swaps fail; ordinary wording and review-rating corrections remain possible.
 A rendered Markdown page, `docs/project/site-urls.md`, shows the same table for readers
 and is linked from `development.md`.
 
 Three checks hold the registry to the site:
 
-1. **Closed world** (`publish` job and `preview_site`): every file the assembled site
-   contains matches a registry row, and every `live` row exists.
-2. **Append-only** (the push tier): every path listed in the registry on `origin/main`
-   is still listed, as `live`, `forwarded` to a target that resolves, or `withdrawn`. A
-   withdrawn result or a removed case renders a tombstone page that names what replaced
-   it.
-3. **Deployed** (`check_published_site`): every non-asset row is fetched, in place of
-   the hand lists and the three-record sample, and forwarders are followed.
+1. **Required PR history and drift:** the registry must derive from current builder
+   declarations and preserve every historical public path and result identity against
+   `origin/main`. This runs in fast, records and edit validation; a push check alone is
+   not the enforcement surface.
+2. **Closed world:** every selected producer checks all of its declared files, metadata,
+   asset namespaces and budgets.
+   Partial builds name their producers explicitly and reject omitted outputs or empty
+   namespaces. Final assembly and `preview_site` require every registration.
+   Missing or unexpected files fail; removed records retain an explained tombstone and,
+   where known, a registered replacement.
+3. **Deployed** (`check_published_site`): every non-asset row is fetched, all cases and
+   results included, and registered forwarders and byte copies are checked.
 
 `sitemap.xml` is written from the registry: every `live` row of kind `page`, `record`,
 `result` and paper HTML, with `<lastmod>` taken from record dates (a paper’s revision
@@ -353,10 +369,14 @@ drawing with explicit `width`, `height` and `viewBox`, server-rendered math, and
 to the neighbouring cases.
 `case-forward.js` is deleted.
 `cases/` becomes a static index of all cases, rendered at build time, with a small head
-script that forwards a legacy `?n=N` to `N.html`. `case-page.js` no longer renders
-records; any behaviour it still has (fragment handling for `#n-N`) moves to the
-forwarder or is dropped.
-Popovers that preview a case keep fetching `N.html` and extracting its `article`.
+script that forwards legacy `?n=N` and `#n-N` aliases to `N.html`. Both `cases/#n-N` and
+`cases/index.html#n-N` remain supported, as does `cases.html#n-N`. A valid numeric query
+takes precedence over the case fragment; other query state, meaningful record fragments
+and embedding state survive.
+Invalid counts leave the static index readable.
+`case-page.js` performs only this registered alias forwarding; it does not render
+records. Popovers that preview a case keep fetching `N.html` and extracting its
+`article`.
 
 Titles and descriptions are written from the record:
 
@@ -412,12 +432,17 @@ structured data and robots directives through `PageMeta`.
   The self-contained copy remains a build output for offline use.
 - **The overview carries only what it shows.** Recent results render server-side (the
   rows `RECENT_DEFAULTS` selects), with “See all results” linking `all-results.html`.
+  Broad filters live on that complete table; the overview explains its recent subset and
+  passes supported query state to the full-table link.
   The atlas tiles leave the HTML: each tile is an SVG file under `atlas/` referenced by
   `<img width height>`, which keeps them in Google Images and in the browser cache; a
   tile that must follow the site’s theme ink uses a shared SVG sprite with `<use>`
   instead.
-- **Frontier and synopsis**: inline drawings move to files the same way; the synopsis
-  model JSON moves to a cached data file.
+- **Frontier and synopsis**: drawings use standalone SVG files.
+  The synopsis becomes a static chapter index and complete static chapter pages, with
+  every old heading ID retained on the index beside an ordinary chapter link.
+  Primary content no longer needs browser page-model JSON. A legacy fragment reaches its
+  heading and chapter link; reading the chapter takes one additional navigation.
 - **Workbench**: its 3.3 MB of data becomes separate hashed JSON files.
 - **Budgets**, enforced by `check_published_site --local` on the assembled site:
 
@@ -435,8 +460,25 @@ A page over budget fails the build; raising a budget is a reviewed edit to one t
 
 ### Layout Stability and Script Inventory
 
-*Filled in from the performance audit; see the section added below the Implementation
-Plan once it lands.*
+The retained measurement protocol and executable script inventory are described in
+[development.md → Browser Load and Readability Protocol](../../../../development.md#browser-load-and-readability-protocol).
+The build observes navigation before first paint, tests desktop/mobile and light/dark,
+and checks complete visible primary content in a separate no-JavaScript context.
+CI enforces CLS, LCP and task limits; it rejects unknown startup programs and includes
+negative fixtures for early shifts, hidden headings/prose/math, missing assets and
+undeclared scripts. Direct atlas query URLs are measured as navigation scenarios.
+
+Prepared visual math uses the pinned renderer’s actual metrics for each reader font
+choice. Existing semantics remain in the HTML, once per formula.
+The lower paper’s four prepared choices are retained; generic pages share their visual
+structure and select metric differences before paint.
+Images reserve their intrinsic proportions; mobile atlas wrapping is determined in CSS
+before its interaction program runs.
+
+Each family retains its byte budget, and every HTML page retains the 2,000,000-byte hard
+ceiling. The generated [budget exceptions](../../site-urls.md#html-byte-budgets) name
+individual complete records or papers and their measured reason.
+Exceptions do not admit a new family-wide limit.
 
 ### Where Things Are Documented
 
@@ -460,62 +502,62 @@ Each bead below names its lane.
 **Lane A — URL registry and crawl files** (`site_urls.py`, `site-urls.yaml`,
 `check_published_site.py`, `write_site` hooks, `development.md`):
 
-- [ ] A1: `site_urls.py` registry derived from builder declarations, `site-urls.yaml`
+- [x] A1: `site_urls.py` registry derived from builder declarations, `site-urls.yaml`
   and `docs/project/site-urls.md` written with `--check` drift detection
-- [ ] A2: closed-world and append-only checks against `origin/main`; tombstone rendering
+- [x] A2: closed-world and append-only checks against `origin/main`; tombstone rendering
   for withdrawn rows
-- [ ] A3: `sitemap.xml` from the registry with record-derived `lastmod`
-- [ ] A4: `404.html` with root-absolute assets and the alias table
-- [ ] A5: per-page byte budgets and the 2,000,000-byte hard limit in
+- [x] A3: `sitemap.xml` from the registry with record-derived `lastmod`
+- [x] A4: `404.html` with root-absolute assets and the alias table
+- [x] A5: per-page byte budgets and the 2,000,000-byte hard limit in
   `check_published_site --local`; retire `PAGE_CEILINGS`
-- [ ] A6: `check_published_site` (deployed mode) fetches registry rows instead of hand
+- [x] A6: `check_published_site` (deployed mode) fetches registry rows instead of hand
   lists and samples
-- [ ] A7: `development.md` “The Published Site” section; replace the stale URL Layout
+- [x] A7: `development.md` “The Published Site” section; replace the stale URL Layout
   table
 
 **Lane B — Static case and result pages** (`render_case_pages.py`, `case-record.html`,
 `cases-article.md`, `overview/case-*.js`, `overview/row-popover.js`, result rendering in
 `render_overview.py`/`overview_sections.py`, `overview_data.py`):
 
-- [ ] B1: `cases/N.html` rendered as a complete site page (nav, breadcrumb, `h1`,
+- [x] B1: `cases/N.html` rendered as a complete site page (nav, breadcrumb, `h1`,
   `<main>`, reserved drawing size, server-rendered math, neighbour links); delete
   `case-forward.js`
-- [ ] B2: `cases/` as a static index; legacy `?n=N` and `cases.html#n-N` forward to
+- [x] B2: `cases/` as a static index; legacy `?n=N` and `cases.html#n-N` forward to
   `N.html`; retire record rendering in `case-page.js`
-- [ ] B3: case titles and descriptions from the record; `BreadcrumbList`
-- [ ] B4: `result/t-nnn.html` as complete pages with rebased links; popovers extract
+- [x] B3: case titles and descriptions from the record; `BreadcrumbList`
+- [x] B4: `result/t-nnn.html` as complete pages with rebased links; popovers extract
   from them; overview drops inline popover summaries
-- [ ] B5: every “n = N” link points at `cases/N.html`; `epistemics.html` instead of the
+- [x] B5: every “n = N” link points at `cases/N.html`; `epistemics.html` instead of the
   GitHub copy on `all-results.html`; `cases.html` forwards to `cases/`
 
 **Lane C — Head metadata and structured data** (`head_tags`, `PageMeta`, `page_title`,
 `site_documents.py` descriptions, paper front matter, favicon files):
 
-- [ ] C1: `h1` and topical title on the overview
-- [ ] C2: `ScholarlyArticle` JSON-LD and `citation_*` tags for the papers; article
+- [x] C1: `h1` and topical title on the overview
+- [x] C2: `ScholarlyArticle` JSON-LD and `citation_*` tags for the papers; article
   titles without the site suffix; published dates for Parts II and III
-- [ ] C3: `BreadcrumbList` for papers and documents; `Dataset` on `frontier.html`;
+- [x] C3: `BreadcrumbList` for papers and documents; `Dataset` on `frontier.html`;
   `max-image-preview:large`
-- [ ] C4: favicon files at stable paths; verification-token constant
-- [ ] C5: lengthen reader-document descriptions; `SITE_URL` single definition
+- [x] C4: favicon files at stable paths; verification-token constant
+- [x] C5: lengthen reader-document descriptions; `SITE_URL` single definition
 
 **Lane D — Page weight** (paper renderers and shells, `site_assets.py`,
 `overview_sections.py` atlas and recent rows, frontier and synopsis drawings, workbench
 data):
 
-- [ ] D1: papers link the shared asset bundle; offline copy remains a build output;
+- [x] D1: papers link the shared asset bundle; offline copy remains a build output;
   print and PDF checks follow
-- [ ] D2: overview renders only the recent rows and links the full table
-- [ ] D3: atlas tiles, frontier drawings and the synopsis model JSON move to files
-- [ ] D4: workbench data in separate hashed files
+- [x] D2: overview renders only the recent rows and links the full table
+- [x] D3: atlas tiles, frontier drawings and the synopsis model JSON move to files
+- [x] D4: workbench data in separate hashed files
 
 **Lane E — Layout stability** (scope set by the performance audit):
 
-- [ ] E1: CLS, LCP and long-task guard in CI over representative pages at 1280 and 390
+- [x] E1: CLS, LCP and long-task guard in CI over representative pages at 1280 and 390
   widths, with probes in files per the browser-code rule
-- [ ] E2: fix each measured shift source (server-render math, reserve drawing and media
+- [x] E2: fix each measured shift source (server-render math, reserve drawing and media
   sizes, font metric overrides, theme before paint)
-- [ ] E3: script inventory: every content-page script declares its class; delete or
+- [x] E3: script inventory: every content-page script declares its class; delete or
   replace the forbidden ones
 
 Lanes A–E run in parallel.
@@ -531,7 +573,7 @@ values are set last, from the merged build.
 - The existing `render_overview --check` double render covers the new files.
 - `check_published_site --local` on the assembled tree in the `publish` job enforces the
   closed world, the budgets and the head contract on every page, including all 324 case
-  pages and 111 result pages (no sampling).
+  pages, 115 live result pages and three withdrawn-result tombstones (no sampling).
 - A no-JavaScript render test: Chromium with JavaScript disabled loads each page family
   and asserts that the main content, `h1` and drawings are present and laid out.
 - The layout-stability guard (E1) runs on every pull request that touches a page.

@@ -15,11 +15,12 @@ import statistics
 from collections.abc import Sequence
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
+from urllib.parse import unquote, urlsplit
 
 from sqpack.probes import applied, probe
 
 if TYPE_CHECKING:
-    from playwright.sync_api import Browser
+    from playwright.sync_api import Browser, BrowserContext, Page
 
 PROBES = Path(__file__).parent / "probes"
 INSTRUMENT = applied(probe(PROBES, "check_site_rendering/instrument"))
@@ -40,6 +41,21 @@ DEFAULT_PAGES = (
 )
 
 
+def install_observer(context: BrowserContext) -> None:
+    """Install the production observer before a test or measured navigation."""
+    context.add_init_script(INSTRUMENT)
+
+
+def read_report(page: Page) -> dict[str, Any]:
+    """Read the production report; fixtures exercise the same visibility/timing probe."""
+    return page.evaluate(REPORT)
+
+
+def wait_for_fonts(page: Page) -> None:
+    """Settle the current document's face loads before measurement."""
+    page.evaluate(_FONTS)
+
+
 def measure(
     browser: Browser,
     url: str,
@@ -56,7 +72,7 @@ def measure(
     )
     try:
         if javascript:
-            context.add_init_script(INSTRUMENT)
+            install_observer(context)
         page = context.new_page()
         errors: list[str] = []
         page.on("pageerror", lambda error: errors.append(str(error)))
@@ -71,13 +87,13 @@ def measure(
         response = page.goto(url, wait_until="load", timeout=30_000)
         if response is None or not response.ok:
             raise ValueError(f"navigation failed: {url}")
-        page.evaluate(_FONTS)
+        wait_for_fonts(page)
         page.wait_for_timeout(SETTLE_MS)
-        reports = [page.evaluate(REPORT)]
+        reports = [read_report(page)]
         for fraction in (0.5, 1.0):
             page.evaluate(_SCROLL, fraction)
             page.wait_for_timeout(SETTLE_MS)
-            reports.append(page.evaluate(REPORT))
+            reports.append(read_report(page))
         report = dict(reports[-1])
         report["unreadableMath"] = max(row["unreadableMath"] for row in reports)
         report["errors"] = errors
@@ -110,6 +126,15 @@ def problems(report: dict[str, Any], *, javascript: bool = True) -> list[str]:
     return found
 
 
+def scenario_path(name: str) -> Path:
+    """A scenario may carry the same query/fragment that a direct reader URL uses."""
+    parsed = urlsplit(name)
+    path = Path(unquote(parsed.path))
+    if parsed.scheme or parsed.netloc or path.is_absolute() or ".." in path.parts:
+        raise ValueError("a scenario must name a local published page")
+    return path
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
@@ -123,7 +148,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.runs < 1:
         parser.error("--runs must be positive")
     names = args.page or [name for name in DEFAULT_PAGES if (args.directory / name).is_file()]
-    if not names or any(not (args.directory / name).is_file() for name in names):
+    try:
+        paths = [scenario_path(name) for name in names]
+    except ValueError as error:
+        parser.error(str(error))
+    if not names or any(not (args.directory / path).is_file() for path in paths):
         parser.error("every selected page must exist, and the selection must be nonempty")
     failures: list[str] = []
     results: list[dict[str, Any]] = []

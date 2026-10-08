@@ -1,12 +1,20 @@
 """The published URL boundary: omissions, identity changes, crawl files and aliases."""
 
+import json
 import subprocess
 from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
-from devtools import check_published_site, site_urls
+from devtools import (
+    check_published_site,
+    overview_data,
+    render_overview,
+    render_research_tables,
+    site_documents,
+    site_urls,
+)
 
 
 def row(path: str) -> site_urls.SiteURL:
@@ -252,11 +260,68 @@ def test_not_found_alias_script_keeps_unknown_addresses_and_fragments() -> None:
     assert result.returncode == 0, result.stdout + result.stderr
 
 
-def test_measured_budget_exception_preserves_the_hard_limit(tmp_path: Path) -> None:
-    path = "papers/n11-lower-bounds-explainer.html"
-    paper = replace(row(path), kind="paper-file", producer="paper:n11-lower-bounds-explainer")
+@pytest.mark.parametrize(
+    ("path", "measured"),
+    [
+        ("papers/n11-lower-bounds-explainer.html", 1_417_109),
+        ("papers/n11-threshold-bound-review.html", 824_137),
+    ],
+)
+def test_measured_budget_exception_preserves_the_hard_limit(
+    tmp_path: Path, path: str, measured: int
+) -> None:
+    paper = replace(row(path), kind="paper-file", producer="paper:" + Path(path).stem)
     (tmp_path / "papers").mkdir()
-    (tmp_path / path).write_bytes(b"x" * 1_417_109)
+    (tmp_path / path).write_bytes(b"x" * measured)
     assert not failures(site_urls.check_site(tmp_path, [paper]))
+    budget = site_urls.page_budget(paper)
+    (tmp_path / path).write_bytes(b"x" * (budget + 1))
+    assert str(budget) in failures(site_urls.check_site(tmp_path, [paper]))
     (tmp_path / path).write_bytes(b"x" * 2_000_001)
     assert "2000000" in failures(site_urls.check_site(tmp_path, [paper]))
+
+
+@pytest.mark.parametrize(
+    ("scope", "covered"),
+    [({"n_values": [4, 6]}, {4, 6}), ({"n_min": 4, "n_max": 6}, {4, 5, 6})],
+)
+def test_case_lastmod_follows_amended_results_within_declared_scope(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    scope: dict[str, int | list[int]],
+    covered: set[int],
+) -> None:
+    result = {
+        "id": "T-007",
+        "kind": "lower-bound",
+        "registered": "2026-10-07",
+        "scope": scope,
+        "amendments": [{"date": "2026-10-08"}],
+    }
+    records = tmp_path / "results.yaml"
+    records.write_text(json.dumps({"results": [result]}), encoding="utf-8")
+    monkeypatch.setattr(overview_data, "RESULTS", records)
+    monkeypatch.setattr(
+        render_research_tables, "load_cases", lambda: [{"n": n} for n in range(3, 8)]
+    )
+    monkeypatch.setattr(render_overview, "PAGES", {"index.html": None})
+    monkeypatch.setattr(render_overview, "PAPERS", ())
+    monkeypatch.setattr(render_overview, "MOVED_PAGES", ())
+    monkeypatch.setattr(render_overview, "MOVED_FILES", ())
+    monkeypatch.setattr(render_overview, "support_file_paths", lambda: ())
+    monkeypatch.setattr(site_documents, "chapter_names", lambda: ())
+    rows = {row.path: row for row in site_urls.derive_registry()}
+    assert rows["result/t-007.html"].lastmod == "2026-10-08"
+    for n in range(3, 8):
+        expected = "2026-10-08" if n in covered else "2026-10-07"
+        assert rows[f"cases/{n}.html"].lastmod == expected
+
+
+def test_standalone_case_figure_is_registered_from_support_declarations() -> None:
+    path = "atlas/trump11-overview.svg"
+    assert path in render_overview.support_file_paths()
+    rows = {row.path: row for row in site_urls.derive_registry(site_urls.load_registry())}
+    registered = rows[path]
+    assert registered.kind == "asset-file"
+    assert registered.producer == "overview"
+    assert registered.canonical == path

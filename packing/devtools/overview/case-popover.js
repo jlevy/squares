@@ -8,7 +8,7 @@
 // names in `data-case-href`; the row of the case shown reads as expanded. Without this
 // script every link goes to the record file, which sends a reader on to the record page.
 //
-// The record is fetched, not framed. The file holds the record alone, as HTML, in
+// The complete case page is fetched and its prepared article is extracted from
 // `article.site-case`; it is parsed in a `<template>`, so none of its scripts runs (one
 // would send this page away), and the article is placed in the popover's body
 // (`[data-case-body]`), with the action under it (`[data-case-open]`) pointed at the
@@ -73,6 +73,70 @@
     }
   };
 
+  /** Styles shared by fetched case and result records, including pending loads. */
+  const styleState =
+    /** @type {typeof globalThis & { squaresStaticMathStyles?: Map<string, Promise<void>> }} */ (
+      globalThis
+    );
+  styleState.squaresStaticMathStyles ??= new Map();
+  const mathStyles = styleState.squaresStaticMathStyles;
+
+  /**
+   * Load the canonical page's prepared metric rules before placing its article.
+   * @param {DocumentFragment} parsed
+   * @param {string} base
+   */
+  const loadMathStyles = async (parsed, base) => {
+    const responseURL = new URL(base, document.baseURI);
+    const pageURL = new URL(document.baseURI);
+    const assetRoot = new URL("../assets/css/", responseURL);
+    for (const declared of parsed.querySelectorAll("link[data-site-math-styles]")) {
+      const href = declared.getAttribute("href");
+      if (!href) {
+        throw new Error("The prepared mathematics stylesheet has no address");
+      }
+      const url = new URL(href, responseURL);
+      if (
+        responseURL.origin !== pageURL.origin ||
+        url.origin !== pageURL.origin ||
+        !url.pathname.startsWith(assetRoot.pathname) ||
+        !url.pathname.endsWith(".css")
+      ) {
+        throw new Error("The prepared mathematics stylesheet is outside this site");
+      }
+      let pending = mathStyles.get(url.href);
+      if (pending === undefined) {
+        const existing = Array.from(document.querySelectorAll("link[data-site-math-styles]")).find(
+          (link) => new URL(link.getAttribute("href") || "", document.baseURI).href === url.href,
+        );
+        const link =
+          existing instanceof HTMLLinkElement ? existing : document.createElement("link");
+        pending = link.sheet
+          ? Promise.resolve()
+          : new Promise((resolve, reject) => {
+              link.addEventListener("load", () => resolve(), { once: true });
+              link.addEventListener(
+                "error",
+                () => {
+                  link.remove();
+                  reject(new Error("The prepared mathematics stylesheet could not load"));
+                },
+                { once: true },
+              );
+              if (!existing) {
+                link.setAttribute("rel", "stylesheet");
+                link.setAttribute("href", url.href);
+                link.setAttribute("data-site-math-styles", "");
+                document.head.append(link);
+              }
+            });
+        mathStyles.set(url.href, pending);
+        void pending.catch(() => mathStyles.delete(url.href));
+      }
+      await pending;
+    }
+  };
+
   /**
    * The record in the file at `url`, its links resolved.
    * @param {string} url
@@ -92,7 +156,9 @@
     if (!(article instanceof HTMLElement)) {
       throw new Error(`${url} holds no case record`);
     }
-    rebase(article, response.url || url);
+    const base = response.url || url;
+    await loadMathStyles(parsed.content, base);
+    rebase(article, base);
     return article;
   };
 

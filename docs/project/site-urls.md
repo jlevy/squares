@@ -395,6 +395,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | atlas/regularized/n-306.svg | atlas/regularized/n-306.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/regularized/n-307.svg | atlas/regularized/n-307.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | atlas/regularized/n-68.svg | atlas/regularized/n-68.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
+| atlas/trump11-overview.svg | atlas/trump11-overview.svg | asset-file | overview | 2026-10-07 | 2026-10-07 | live |
 | cases.html | cases/ | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → cases/index.html |
 | cases/1.html | cases/1.html | record | overview | 2026-10-03 | 2026-10-03 | live |
 | cases/10.html | cases/10.html | record | overview | 2026-10-03 | 2026-10-03 | live |
@@ -916,18 +917,19 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 
 | Physical path | Bytes | Reason |
 | --- | ---: | --- |
-| all-results.html | 800,000 | The complete registered-result table with prepared math measures 746,476 bytes. |
-| cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 434,442 bytes. |
-| cases/17.html | 500,000 | Complete n=17 proof/certificate record and prepared bounds measure 464,002 bytes. |
-| cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 338,937 bytes. |
-| frontier.html | 1,750,000 | All 324 case rows and prepared exact bounds measure 1,601,775 bytes. |
+| all-results.html | 800,000 | The complete registered-result table with prepared math measures 711,226 bytes. |
+| cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
+| cases/17.html | 500,000 | Complete n=17 proof/certificate record and prepared bounds measure 443,761 bytes. |
+| cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
+| frontier.html | 1,750,000 | All 324 case rows and prepared exact bounds measure 1,529,406 bytes. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,109 bytes. |
-| result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 730,659 bytes. |
-| result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 368,258 bytes. |
-| result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 526,374 bytes. |
-| result/t-083.html | 800,000 | Complete broad scope history and prepared exact bounds measure 707,626 bytes. |
-| result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 712,847 bytes. |
-| tutorial.html | 800,000 | The complete authored tutorial and prepared formulas measure 729,410 bytes. |
+| papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 824,137 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
+| result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 708,426 bytes. |
+| result/t-046.html | 400,000 | Complete broad scope history and prepared exact bounds measure 351,572 bytes. |
+| result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 505,826 bytes. |
+| result/t-083.html | 800,000 | Complete broad scope history and prepared exact bounds measure 685,816 bytes. |
+| result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 691,685 bytes. |
+| tutorial.html | 800,000 | The complete authored tutorial and prepared formulas measure 742,713 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

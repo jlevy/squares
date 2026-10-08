@@ -15,8 +15,13 @@ const SOURCE = readFileSync(
   "utf8",
 );
 
+const CASE_SOURCE = readFileSync(
+  new URL("../../../devtools/overview/case-popover.js", import.meta.url),
+  "utf8",
+);
+
 /** The script's own selectors, which is all the stand-in has to match. */
-const COMPOUND = /^([a-z]+)?((?:\[[a-z-]+\]|\.[a-z-]+|:popover-open)*)$/;
+const COMPOUND = /^([a-z]+)?((?:\[[^\]]+\]|\.[a-z-]+|:popover-open)*)$/;
 
 /**
  * @typedef {object} Press what a test dispatches: a click or a key press
@@ -53,6 +58,8 @@ function page(protocol = "https:") {
       this.listeners = new Map();
       this.tabIndex = tag === "a" || tag === "button" ? 0 : -1;
       this.open = false;
+      /** @type {object | null} */
+      this.sheet = null;
       /** @type {StandInElement | null} what a `<template>` holds, as its fragment */
       this.content = null;
       this.append(...children);
@@ -71,10 +78,25 @@ function page(protocol = "https:") {
       }
     }
 
-    /** @param {StandInElement} child */
+    /** @param {StandInElement} [child] */
     remove(child) {
-      this.children = this.children.filter((other) => other !== child);
+      if (child === undefined) {
+        this.parentElement?.remove(this);
+        this.parentElement = null;
+      } else {
+        this.children = this.children.filter((other) => other !== child);
+      }
     }
+
+    get href() {
+      return new URL(this.getAttribute("href") || "", document.baseURI).href;
+    }
+
+    get target() {
+      return this.getAttribute("target") || "";
+    }
+
+    scrollTo() {}
 
     /** @param {string} name */
     getAttribute(name) {
@@ -101,10 +123,15 @@ function page(protocol = "https:") {
      * @param {string} text
      */
     set innerHTML(text) {
+      const isCase = text.includes('class="site-case"');
+      const style = /<link data-site-math-styles href="([^"]+)"/.exec(text);
       this.content = new StandInElement("fragment", {}, [
+        ...(style
+          ? [new StandInElement("link", { "data-site-math-styles": "", href: style[1] || "" })]
+          : []),
         new StandInElement("article", {
-          class: "site-result",
-          "data-result-overview": "t-004",
+          class: isCase ? "site-case" : "site-result",
+          ...(isCase ? { "data-case": "11" } : { "data-result-overview": "t-004" }),
           "data-text": text,
         }),
       ]);
@@ -126,7 +153,7 @@ function page(protocol = "https:") {
         const found = COMPOUND.exec(part.trim());
         assert.ok(found, `the stand-in does not read the selector ${part}`);
         const [, tag, rest = ""] = found;
-        const conditions = rest.match(/\[[a-z-]+\]|\.[a-z-]+|:popover-open/g) ?? [];
+        const conditions = rest.match(/\[[^\]]+\]|\.[a-z-]+|:popover-open/g) ?? [];
         return (
           (tag === undefined || tag === this.tag) &&
           conditions.every((condition) => {
@@ -136,7 +163,15 @@ function page(protocol = "https:") {
             if (condition.startsWith(".")) {
               return (this.attributes.get("class") ?? "").split(" ").includes(condition.slice(1));
             }
-            return this.attributes.has(condition.slice(1, -1));
+            const attribute = /^\[([a-z-]+)(?:([~]?=)"([^"]*)")?\]$/.exec(condition);
+            assert.ok(attribute);
+            const [, name = "", operator, value] = attribute;
+            const actual = this.getAttribute(name);
+            return operator === "="
+              ? actual === value
+              : operator === "~="
+                ? (actual || "").split(" ").includes(value || "")
+                : actual !== null;
           })
         );
       });
@@ -201,6 +236,8 @@ function page(protocol = "https:") {
 
     hidePopover() {
       this.open = false;
+      /** @type {object | null} */
+      this.sheet = null;
       fire(this, "toggle", { newState: "closed" });
     }
   }
@@ -213,9 +250,14 @@ function page(protocol = "https:") {
   }
 
   const body = new StandInElement("body");
+  const head = new StandInElement("head");
+  /** @type {Map<string, ((event: object) => void)[]>} */
+  const documentListeners = new Map();
   const document = {
     readyState: "complete",
     body,
+    head,
+    baseURI: "https://example.test/squares/index.html",
     /** @type {StandInElement | null} */
     activeElement: body,
     /**
@@ -230,7 +272,15 @@ function page(protocol = "https:") {
     getElementById: (id) =>
       [body, ...body.querySelectorAll("[id]")].find((element) => element.id === id) ?? null,
     /** @param {string} selector */
-    querySelectorAll: (selector) => body.querySelectorAll(selector),
+    querySelectorAll: (selector) => [
+      ...head.querySelectorAll(selector),
+      ...body.querySelectorAll(selector),
+    ],
+    /** @param {string} selector */
+    querySelector: (selector) => body.querySelector(selector),
+    /** @param {string} type @param {(event: object) => void} listener */
+    addEventListener: (type, listener) =>
+      documentListeners.set(type, [...(documentListeners.get(type) || []), listener]),
   };
 
   /**
@@ -269,6 +319,11 @@ function page(protocol = "https:") {
     }
     for (const element of path) {
       for (const listener of element.listeners.get(type) ?? []) {
+        listener(event);
+      }
+    }
+    if (!toggles) {
+      for (const listener of documentListeners.get(type) || []) {
         listener(event);
       }
     }
@@ -327,8 +382,24 @@ function page(protocol = "https:") {
     fetched.popover,
   );
 
+  const caseBody = new StandInElement("div", { "data-case-body": "" });
+  const caseAction = new StandInElement("a", { "data-case-open": "" });
+  const caseClose = new StandInElement("button", { class: "site-popover-close" });
+  const casePopover = new StandInElement("div", { "data-case-popover": "", id: "case-popover" }, [
+    caseBody,
+    caseAction,
+    caseClose,
+  ]);
+  const caseLink = new StandInElement("a", { "data-case": "11", href: "cases/11.html" });
+  body.append(casePopover, caseLink);
+
   /** What the site serves, by address; an address it lacks is a 404. */
-  const served = new Map([["result/t-004.html", "the whole overview of t-004"]]);
+  const served = new Map([
+    ["result/t-004.html", "the whole overview of t-004"],
+    [caseLink.href, '<article class="site-case">Case 11</article>'],
+  ]);
+  /** @type {Map<string, string>} */
+  const responseURLs = new Map();
   /** @type {string[]} every address asked for, in order */
   const requests = [];
   /** @type {StandInElement[]} every root the math driver was asked to typeset */
@@ -343,6 +414,7 @@ function page(protocol = "https:") {
       protocol === "offline:"
         ? Promise.reject(new TypeError("Failed to fetch"))
         : Promise.resolve({
+            url: responseURLs.get(address) || new URL(address, document.baseURI).href,
             ok: text !== undefined,
             status: text === undefined ? 404 : 200,
             text: () => Promise.resolve(text ?? "Not found"),
@@ -356,26 +428,29 @@ function page(protocol = "https:") {
     await new Promise((resolve) => setImmediate(resolve));
   };
 
-  vm.runInContext(
-    SOURCE,
-    vm.createContext({
-      document,
-      URL,
-      fetch,
-      location: { protocol: protocol === "offline:" ? "https:" : protocol },
-      siteMath: {
-        /** @param {StandInElement} root */
-        typeset: (root) => {
-          typeset.push(root);
-          return Promise.resolve();
-        },
+  const navigation = { protocol: protocol === "offline:" ? "https:" : protocol, href: "" };
+  const context = vm.createContext({
+    document,
+    URL,
+    fetch,
+    location: navigation,
+    siteMath: {
+      /** @param {StandInElement} root */
+      typeset: (root) => {
+        typeset.push(root);
+        return Promise.resolve();
       },
-      Element: StandInElement,
-      HTMLElement: StandInElement,
-      HTMLTemplateElement: StandInElement,
-      ToggleEvent: StandInToggleEvent,
-    }),
-  );
+    },
+    Element: StandInElement,
+    HTMLElement: StandInElement,
+    HTMLTemplateElement: StandInElement,
+    HTMLAnchorElement: StandInElement,
+    HTMLTableRowElement: StandInElement,
+    HTMLLinkElement: StandInElement,
+    ToggleEvent: StandInToggleEvent,
+  });
+  vm.runInContext(SOURCE, context);
+  vm.runInContext(CASE_SOURCE, context);
   return {
     document,
     fire,
@@ -385,6 +460,11 @@ function page(protocol = "https:") {
     fetched,
     tbody,
     served,
+    responseURLs,
+    navigation,
+    caseBody,
+    caseLink,
+    casePopover,
     requests,
     typeset,
     settled,
@@ -610,4 +690,123 @@ void test("a row whose body names nothing fetches nothing", async () => {
   fire(second.text, "click");
   await settled();
   assert.deepEqual(requests, []);
+});
+
+void test("case and result articles wait for one shared response-relative metric stylesheet", async () => {
+  const { document, fire, fetched, served, caseBody, caseLink, casePopover, settled } = page();
+  const marker = '<link data-site-math-styles href="../assets/css/site-math-profile.css">';
+  served.set("result/t-004.html", `${marker}Result 4`);
+  served.set(caseLink.href, `${marker}<article class="site-case">Case 11</article>`);
+  assert.equal(document.head.children.length, 0, "nothing loads before input");
+  fire(fetched.text, "pointerdown");
+  fire(caseLink, "click");
+  await settled();
+  assert.equal(document.head.children.length, 1, "pending stylesheet shared across both scripts");
+  const stylesheet = document.head.children[0];
+  assert.ok(stylesheet);
+  assert.equal(stylesheet.href, "https://example.test/squares/assets/css/site-math-profile.css");
+  assert.deepEqual(fetched.body.children, [fetched.detail]);
+  assert.equal(caseBody.children.length, 0);
+  assert.equal(casePopover.open, false);
+  stylesheet.sheet = {};
+  fire(stylesheet, "load");
+  await settled();
+  assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
+  assert.equal(caseBody.children[0]?.getAttribute("class"), "site-case");
+  assert.equal(casePopover.open, true);
+});
+
+void test("a failed metric stylesheet preserves the row fallback and can be retried", async () => {
+  const { document, fire, fetched, served, settled } = page();
+  served.set(
+    "result/t-004.html",
+    '<link data-site-math-styles href="../assets/css/site-math-retry.css">Result',
+  );
+  fire(fetched.text, "pointerdown");
+  await settled();
+  const stylesheet = document.head.children[0];
+  assert.ok(stylesheet);
+  fire(stylesheet, "error");
+  await settled();
+  assert.deepEqual(fetched.body.children, [fetched.detail]);
+  assert.equal(document.head.children.length, 0);
+  fire(fetched.text, "pointerdown");
+  await settled();
+  assert.equal(document.head.children.length, 1);
+  const retry = document.head.children[0];
+  assert.ok(retry);
+  fire(retry, "load");
+  await settled();
+  assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
+});
+
+void test("only this site's stylesheet namespace is accepted", async () => {
+  for (const href of ["https://other.test/assets/css/math.css", "../unrelated/math.css"]) {
+    const { document, fire, fetched, served, settled } = page();
+    served.set("result/t-004.html", `<link data-site-math-styles href="${href}">Result`);
+    fire(fetched.text, "pointerdown");
+    await settled();
+    assert.equal(document.head.children.length, 0);
+    assert.deepEqual(fetched.body.children, [fetched.detail]);
+    assert.ok(!fetched.body.hasAttribute("data-row-pop-loading"));
+  }
+});
+
+void test("already loaded metric rules are reused without another request", async () => {
+  const { document, fire, fetched, served, settled } = page();
+  const link = document.createElement("link");
+  link.setAttribute("href", "assets/css/site-math-existing.css");
+  link.setAttribute("data-site-math-styles", "");
+  link.sheet = {};
+  document.head.append(link);
+  served.set(
+    "result/t-004.html",
+    '<link data-site-math-styles href="../assets/css/site-math-existing.css">Result',
+  );
+  fire(fetched.text, "pointerdown");
+  await settled();
+  assert.equal(document.head.children.length, 1);
+  assert.equal(fetched.body.children[0]?.getAttribute("class"), "site-result");
+});
+
+void test("a case stylesheet failure follows the ordinary case link and retries on a later input", async () => {
+  const { document, fire, served, caseLink, caseBody, navigation, requests, settled } = page();
+  served.set(
+    caseLink.href,
+    '<link data-site-math-styles href="../assets/css/site-math-case.css"><article class="site-case">Case 11</article>',
+  );
+  fire(caseLink, "click");
+  await settled();
+  const link = document.head.children[0];
+  assert.ok(link);
+  fire(link, "error");
+  await settled();
+  assert.equal(navigation.href, caseLink.href);
+  assert.equal(caseBody.children.length, 0);
+  fire(caseLink, "click");
+  await settled();
+  assert.equal(requests.length, 2);
+  assert.equal(document.head.children.length, 1);
+  const retry = document.head.children[0];
+  assert.ok(retry);
+  fire(retry, "load");
+  await settled();
+  assert.equal(caseBody.children[0]?.getAttribute("class"), "site-case");
+});
+
+void test("the canonical response address resolves its prepared stylesheet", async () => {
+  const { document, fire, served, caseLink, responseURLs, caseBody, settled } = page();
+  responseURLs.set(caseLink.href, "https://example.test/edition/cases/11.html");
+  served.set(
+    caseLink.href,
+    '<link data-site-math-styles href="../assets/css/site-math-response.css"><article class="site-case">Case 11</article>',
+  );
+  fire(caseLink, "click");
+  await settled();
+  const link = document.head.children[0];
+  assert.ok(link);
+  assert.equal(link.href, "https://example.test/edition/assets/css/site-math-response.css");
+  fire(link, "load");
+  await settled();
+  assert.equal(caseBody.children[0]?.getAttribute("class"), "site-case");
 });

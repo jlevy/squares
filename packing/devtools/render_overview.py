@@ -11,10 +11,10 @@ adds the front door and the pages around it, as the plan in
   and recent list point into by row (`#t-018`);
 - `frontier.html`, the frontier atlas: one row for every case, from its
   `SquarePackingCase/v2` record;
-- `cases/index.html`, the record page: the index of every case and the reader that shows
-  one case's record file, `cases/N.html`, which this module writes beside it
-  (`case_records`) and the atlas grid and the frontier table both open in their case
-  popover (`render_case_pages`); `cases.html`, where every record was until 2026-10-03,
+- `cases/index.html`, the static case index: ordinary links to each complete canonical
+  case page, `cases/N.html`, which this module writes beside it (`case_records`).
+  The atlas grid and frontier table open these same pages in their case popover
+  (`render_case_pages`); `cases.html`, where every record was until 2026-10-03,
   is a forwarder to it;
 - `papers.html`, the Papers section's page: one large card per paper, from the one list
   `overview_sections.PAPERS`. The three parts of the n = 11 series, in reading order
@@ -34,8 +34,8 @@ adds the front door and the pages around it, as the plan in
   size. Its second tab is the workbench at `workbench/`, which
   `workbench_tools.build_site` builds and gives the same tab bar (`visualize_tabs`).
 
-Every page is a kpress standalone page with its assets inlined, so it opens the same
-way from a file, from GitHub Pages and from an artifact host. The explainer's paper
+Every page is a complete kpress document with shared assets linked relative to its
+served path and its mathematical notation prepared during the build. The explainer's paper
 typography and accent are carried by `templates/site.css`, and one navigation partial,
 `templates/site-nav.html`, joins the pages. No value on a page is typed into a template:
 bounds, rungs, credits and counts are read from the record at render time.
@@ -52,7 +52,9 @@ import argparse
 import html
 import json
 import re
+import struct
 import sys
+import xml.etree.ElementTree as ET
 from collections.abc import Callable, Mapping, Sequence
 from datetime import datetime
 from functools import cache
@@ -343,6 +345,9 @@ FORWARDER = TEMPLATES / "site-forwarder.html"
 RENDER_INPUTS: tuple[Path, ...] = (
     Path(__file__).resolve(),
     SITE_CSS,
+    PACKING / "devtools/templates/site-math.css",
+    PACKING / "devtools/site_math.py",
+    PACKING / "devtools/node/render-site-math.mjs",
     SITE_RESULT_CSS,
     SITE_NAV,
     SITE_NAV_CSS,
@@ -588,6 +593,7 @@ def inputs() -> tuple[Path, ...]:
                 *overview_data.INPUTS,
                 *FRONTIER_INPUTS,
                 *CASES_INPUTS,
+                *explainer.COMPOSITE_ASSETS,
                 *explainer.WALKTHROUGH,
                 explainer.THRESHOLD_CERTIFICATE,
                 explainer.THRESHOLD_FINE_CERTIFICATE,
@@ -606,19 +612,10 @@ class Page(NamedTuple):
 
 
 def page_assets() -> tuple[str, str]:
-    """The shared assets every site page links, from the site's root: its head's face
-    preloads and stylesheets, and the math pipeline's script.
+    """Shared face preloads and stylesheets, followed by the site's type and layout.
 
-    The stylesheets are the explainer's (`kpress_css`, `katex_css`, `relation_face_css`),
-    with the same faces, so a reader moving between the explainer and these pages sees
-    one design system; `paper-type.css`, the text tokens the explainer also carries,
-    follows them, then the site's own. The script is the explainer's math pipeline,
-    `render_n11_lower_bounds_explainer.katex_js`: KaTeX, kpress's metric tables and shared
-    runtime, and the explainer's host adapter (`squaresMath`), without kpress's auto-render
-    entry point and its whole-page synchronous pass. `overview/math.js`, which `kpress_page`
-    places after it, drives the adapter over kpress's own math markup. The pipeline is described
-    in `templates/paper-design.md`, under Math Loading. Each is a file of the site's
-    `assets/` (`site_assets.shared`), fetched by a reader once for every page.
+    The returned script is retained for self-contained paper callers. General site
+    pages prepare mathematics during the build and do not load that runtime.
     """
     from devtools import site_assets  # noqa: PLC0415
 
@@ -771,6 +768,24 @@ def favicon_url() -> str:
     svg = packing_svg(11, units=200, ink="#17202a", paper="#ffffff", frame_px=FAVICON_PX)
     svg = svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ', 1)
     return f"data:image/svg+xml,{quote(svg)}"
+
+
+def image_dimensions(source: Path) -> tuple[int, int]:
+    """An existing PNG or SVG's intrinsic size, without a native imaging runtime."""
+    if source.suffix == ".png":
+        with source.open("rb") as image:
+            header = image.read(24)
+        if header[:8] != b"\x89PNG\r\n\x1a\n" or header[12:16] != b"IHDR":
+            raise SystemExit(f"{source}: expected a PNG with an IHDR header")
+        width, height = struct.unpack(">II", header[16:24])
+    elif source.suffix == ".svg":
+        attributes = ET.parse(source).getroot().attrib
+        width, height = (int(attributes[name]) for name in ("width", "height"))
+    else:
+        raise SystemExit(f"{source}: no intrinsic-size reader for this image format")
+    if width < 1 or height < 1:
+        raise SystemExit(f"{source}: image dimensions must be positive")
+    return width, height
 
 
 def favicon_html(*, inline: bool = False, root: str = "") -> str:
@@ -1313,7 +1328,10 @@ def result_fragments() -> list[Page]:
 
     overview = overview_data.load()
     pages = []
+    ordered = sorted(overview.results, key=lambda result: result.id)
+    positions = {result.id: index for index, result in enumerate(ordered)}
     for result in overview.results:
+        index = positions[result.id]
         path = overview_sections.result_fragment(result.id)
         summary = overview_sections.plain_text(result.summary)
         description = f"{result.id}: {summary}. {result.credit}; {result.status}."
@@ -1331,7 +1349,23 @@ def result_fragments() -> list[Page]:
         )
         body = overview_sections.result_row_popover_body(result, overview)
         body = body.replace('<div class="site-result"', '<article class="site-result"', 1)
-        body = body.removesuffix("</div>") + "</article>"
+        links = []
+        for neighbor, relation, label in (
+            (index - 1, "prev", "Previous result"),
+            (index + 1, "next", "Next result"),
+        ):
+            if 0 <= neighbor < len(ordered):
+                other = ordered[neighbor].id
+                target = overview_sections.result_fragment(other)
+                links.append(
+                    f'<a rel="{relation}" href="{target}">{label}: {html.escape(other)}</a>'
+                )
+        navigation = (
+            '<nav class="site-result-neighbors" aria-label="Neighboring results">'
+            + " ".join(links)
+            + "</nav>"
+        )
+        body = body.removesuffix("</div>") + navigation + "</article>"
         heading = (
             f'<h1 id="{result.id.lower()}">{html.escape(result.id)}: '
             f"{overview_sections.tex_bounds(result.summary)}</h1>"
@@ -1460,21 +1494,28 @@ SEARCH_CONSOLE_VERIFICATION = ""
 
 def support_file_paths() -> tuple[str, ...]:
     """Lightweight declarations of stable files written beside overview pages."""
+    from devtools.render_case_pages import CASE_IMAGE_FILES  # noqa: PLC0415
     from devtools.render_frontier_page import drawing_paths  # noqa: PLC0415
 
-    return (*FAVICON_FILES, *drawing_paths())
+    return (*FAVICON_FILES, *drawing_paths(), *CASE_IMAGE_FILES)
 
 
 @cache
 def support_files() -> dict[str, bytes]:
     """Stable icons and standalone atlas drawings."""
+    from devtools.render_case_pages import CASE_IMAGE_FILES  # noqa: PLC0415
     from devtools.render_frontier_page import drawing_files, packing_svg  # noqa: PLC0415
     from devtools.site_documents import document_files  # noqa: PLC0415
 
     svg = packing_svg(11, units=200, ink="#17202a", paper="#ffffff", frame_px=48)
     svg = svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ', 1)
     data = svg.encode("utf-8")
-    files = {"favicon.svg": data, **drawing_files(), **document_files()}
+    files = {
+        "favicon.svg": data,
+        **drawing_files(),
+        **document_files(),
+        **{name: source.read_bytes() for name, source in CASE_IMAGE_FILES.items()},
+    }
     for name in FAVICON_FILES[1:]:
         files[name] = (BROWSER / name).read_bytes()
 
