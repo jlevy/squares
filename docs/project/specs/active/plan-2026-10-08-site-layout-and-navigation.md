@@ -22,7 +22,8 @@ The homepage gives a short introduction, visible previews of the atlas and recen
 results, and prominent buttons to the complete Atlas and Results pages.
 Case records and popovers share readable layouts and math.
 A shared header hides while scrolling down and returns immediately when scrolling up, on
-desktop and mobile.
+desktop and mobile. The PDF copy fix uses the owner’s supplied definition of the square
+packing problem.
 
 The owner confirmed both the header direction and the requirement to keep the atlas and
 results previews visible.
@@ -37,6 +38,7 @@ This spec lists the fixes and their acceptance criteria.
 - Consistent case-page and popover layouts, with readable mathematics, starting with the
   reported rendering problem for $n = 291$.
 - Navigation that remains easy to reach while scrolling on desktop and mobile.
+- A clear problem definition in the requested PDF, using the owner’s exact wording.
 
 ## Non-Goals
 
@@ -124,6 +126,18 @@ Check prepared math, its inherited font context, and long bound expressions befo
 choosing a fix. Keep exact expressions available; reflow or locally scroll long formulas
 without clipping glyphs or creating page-wide horizontal overflow.
 
+### PDF problem definition
+
+Use this exact sentence in the requested PDF:
+
+> The square packing problem asks for the side $s(n)$ of the smallest square that can
+> hold $n$ unit squares, where the squares are free to rotate but cannot overlap.
+
+The target PDF is pending owner clarification.
+Identify its authoritative source, replace the current definition, and rebuild with its
+existing renderer. Verify the sentence and its inline math in the rendered PDF. Keep the
+paper’s claims and other mathematical content unchanged.
+
 ### Shared Headroom header
 
 Use the owner’s confirmed behavior:
@@ -176,11 +190,13 @@ their combined behavior.
 | L4: Publish the complete dedicated Atlas page | `think-a9au` | P1 | All 324 cases and existing view controls work at `atlas.html`; case links/popovers work; navigation and the URL registry include it; legacy atlas links and view state still reach the full atlas. |
 | L5: Add shared Headroom navigation | `think-byu7` | P1 | Hide down, show immediately up on desktop and mobile; visible at top and during focus/menu use; all four shell families covered; no layout jump or obscured anchor target. |
 | L6: Verify the combined website layouts and interactions | `think-xio5` | P2 | Browser checks cover previews and their buttons, the dedicated pages, $n = 291$ math, popover scrolling/focus, and header direction across representative shells, widths and themes. Retain reviewed before/after screenshots with the implementation evidence. |
+| L7: Clarify the PDF problem definition | `think-9tcy` | P2 | Identify the requested PDF, update its source with the exact sentence above, rebuild it, and verify readable inline math and unclipped text. The target requires owner clarification before editing. |
 
 Start with L1’s reproduction so its regression identifies a real failure.
 L2 and L5 can be developed independently.
 L3 and L4 integrate together so preview buttons always have a working destination.
 L6 depends on the five implementation issues.
+L7 has its own PDF rendering check and can proceed once its target is identified.
 Give parallel writers disjoint files; keep shared templates, route registration, and
 integration with one owner.
 
@@ -226,6 +242,8 @@ Planning completion leaves the implementation issues open.
 - The precise $n = 291$ failure and smallest effective fix require reproduction.
 - Choose the representative preview tiles and final compact copy during visual review;
   the visible previews, prominent destination buttons, and header direction are decided.
+- Identify the PDF that should receive the supplied problem definition; its wording is
+  decided.
 
 ## References
 
