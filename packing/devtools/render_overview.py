@@ -52,7 +52,7 @@ import argparse
 import html
 import re
 import sys
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Iterator, Sequence
 from datetime import datetime
 from functools import cache
 from pathlib import Path
@@ -1180,7 +1180,7 @@ def render_all() -> list[Page]:
     return [build() for build in PAGES.values()]
 
 
-def result_fragments() -> list[Page]:
+def iter_result_fragments() -> Iterator[Page]:
     """Each registered result's overview, in the register's order, as the file its row's
     popover fetches (`overview_sections.result_fragment`).
 
@@ -1192,13 +1192,16 @@ def result_fragments() -> list[Page]:
     from devtools import overview_data, overview_sections  # noqa: PLC0415
 
     overview = overview_data.load()
-    return [
-        Page(
+    for result in overview.results:
+        yield Page(
             overview_sections.result_fragment(result.id),
             overview_sections.result_row_popover_body(result, overview) + "\n",
         )
-        for result in overview.results
-    ]
+
+
+def result_fragments() -> list[Page]:
+    """Materialize every result fragment for complete site publication."""
+    return list(iter_result_fragments())
 
 
 def forwarded_metas() -> dict[str, PageMeta]:

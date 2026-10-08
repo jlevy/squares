@@ -13,7 +13,6 @@ import hashlib
 import json
 import re
 import sys
-import tempfile
 from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
@@ -108,10 +107,7 @@ def read_fact(n: int) -> dict[str, Any]:
         "note": "Derived geometric facts; no producer prose retained.",
         "squares": [[entry[key] for key in ("x", "y", "t")] for entry in entries],
     }
-    with tempfile.TemporaryDirectory() as directory:
-        temporary = Path(directory) / "source.json"
-        temporary.write_bytes(followup.json_bytes(source))
-        normalized, _raw = original.parse_source(temporary, n)
+    normalized, _raw = original.parse_source_bytes(followup.json_bytes(source), n)
     if normalized != fact:
         raise original.PacketError("second-update facts are not normalized")
     return normalized
