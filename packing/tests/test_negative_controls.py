@@ -1546,3 +1546,135 @@ print('all 17 sources/3017 poses/51 jobs/four private inputs/14 houses admitted;
         assert source.read_bytes() == original
         assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
     assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+@pytest.mark.parametrize(
+    ("number", "canonical"),
+    [
+        (136, "paired-cover"),
+        (140, "owner-footprint-cover"),
+        (142, "owner-footprint-cover"),
+        (143, "four-owner-footprint-cover"),
+        (144, "four-owner-endpoint-full-net-replay"),
+    ],
+)
+def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
+    number: int, canonical: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Historical duplicate output may leave a worker, never its required input."""
+    relative = "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+    extension = "json" if number == 136 else "jsonl"
+    output = ROOT / relative / f"exp-{number}-stdout.{extension}"
+    retained = output.with_name(f"exp-{number}-{canonical}.json")
+    assert output in PRUNE
+    assert not controls.in_pruned_roots(retained, PRUNE)
+    source_names = [path.relative_to(controls.REPO).as_posix() for path in (output, retained)]
+    blobs = [
+        subprocess.run(
+            ["git", "rev-parse", f"HEAD:{name}"],
+            cwd=controls.REPO,
+            capture_output=True,
+            check=True,
+            timeout=10,
+        ).stdout
+        for name in source_names
+    ]
+    assert blobs[0] == blobs[1]
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for control in specification["controls"]:
+        assert (ROOT / control["file"]).resolve() != output
+        assert output.name not in control["run"]
+    packing = tmp_path / "packing"
+    receipt = packing / relative / output.name
+    receipt.parent.mkdir(parents=True)
+    receipt.write_text('{"duplicate":true}\n')
+    scientific = receipt.with_name(retained.name)
+    scientific.write_bytes(receipt.read_bytes())
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[declared input](packing/{relative}/{receipt.name})\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (receipt,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [receipt]
+    assert controls.snapshot_source_bytes() == sum(
+        path.stat().st_size for path in (document, receipt, scientific)
+    )
+
+
+@pytest.mark.parametrize("declaration", ["inline", "frontier", "none"])
+@pytest.mark.parametrize("explicit", [False, True])
+def test_git_projection_preserves_sparse_declared_inputs(
+    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, explicit: bool
+) -> None:
+    """Absent sparse files still count; genuine declarations rescue exact outputs."""
+    packing = tmp_path / "packing"
+    output = packing / "results/duplicate.json"
+    output.parent.mkdir(parents=True)
+    output.write_bytes(b"diagnostic output")
+    canonical = output.with_name("canonical.json")
+    canonical.write_bytes(output.read_bytes())
+    regularized = packing / "atlas/known-best/regularized/n-011-regularized.yaml.gz"
+    regularized.parent.mkdir(parents=True)
+    regularized.write_bytes(b"generated witness")
+    index = regularized.with_name("index.json")
+    index.write_text('{"source":true}\n')
+    source = packing / "source.py"
+    source.write_text("source = True\n")
+    document = tmp_path / "README.md"
+    document.write_text(
+        "[input](packing/results/duplicate.json)\n" if declaration == "inline" else "Reader\n"
+    )
+    register = packing / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text(
+        "results:\n- artifacts: [packing/results/duplicate.json]\n"
+        if declaration == "frontier"
+        else "results: []\n"
+    )
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True, timeout=10)
+    subprocess.run(["git", "-C", str(tmp_path), "add", "."], check=True, timeout=10)
+    tree = (
+        subprocess.run(
+            ["git", "-C", str(tmp_path), "write-tree"],
+            check=True,
+            capture_output=True,
+            timeout=10,
+        )
+        .stdout.decode()
+        .strip()
+    )
+    expected = sum(
+        path.stat().st_size for path in (canonical, source, document, register, index)
+    )
+    if explicit or declaration != "none":
+        expected += output.stat().st_size
+    output.unlink()
+    canonical.unlink()
+    document.unlink()
+    regularized.unlink()
+    index.unlink()
+    monkeypatch.setattr(controls, "REPO", tmp_path)
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (output,) if explicit else ())
+    assert controls.snapshot_git_source_bytes(tree) == expected
+
+
+def test_snapshot_prunes_leave_native_crate_fixtures_selected() -> None:
+    """The cap repair cannot drop PR410's native source, tests or data fixtures."""
+    listed = subprocess.run(
+        ["git", "ls-tree", "-r", "--name-only", "HEAD", "packing/n17_kernel_verify"],
+        cwd=controls.REPO,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    ).stdout.splitlines()
+    assert listed
+    for relative in listed:
+        path = controls.REPO / relative
+        assert not controls.in_pruned_roots(path, PRUNE)
