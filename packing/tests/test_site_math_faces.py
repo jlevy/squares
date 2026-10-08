@@ -46,6 +46,11 @@ Walk = tuple[list[str], dict[tuple[str, str, str], dict[str, Any]]]
 
 
 @pytest.fixture(scope="module")
+def frontier_math_counts() -> tuple[int, int]:
+    return site_renders.frontier_math_counts()
+
+
+@pytest.fixture(scope="module")
 def browser() -> Iterator[Any]:
     sync_api = site_browser.api()
     with sync_api.sync_playwright() as driver:
@@ -185,14 +190,18 @@ def test_the_results_table_sets_sans_math(results: Walk) -> None:
     assert all(row["count"] == row["alone"] for row in serif.values())
 
 
-def test_the_frontier_table_sets_sans_math(frontier_atlas: Walk) -> None:
+def test_the_frontier_table_sets_sans_math(
+    frontier_atlas: Walk, frontier_math_counts: tuple[int, int]
+) -> None:
     """The frontier atlas's table is sans math. The page has no subtitle: its range of
     cases, set as sans math under the title, went on 2026-10-02 (the owner,
     `think-wz9d`). Its case popover, which fetches a record, is walked where the
     records are served (`frontier_popover`)."""
     wrong, rows = frontier_atlas
     assert wrong == []
-    assert rows[("table cell", SANS_TEXT, SANS_MATH)]["count"] > 0
+    native = rows[("table cell", SANS_TEXT, SANS_TEXT)]
+    assert native["count"] == frontier_math_counts[0]
+    assert native["backend"] == "native-mathml"
     assert not [key for key in rows if key[0] == "subtitle"]
 
 
@@ -259,3 +268,24 @@ def test_the_walk_catches_serif_math_in_a_sans_headline(browser: Any, root: Path
     example = html.unescape(re.sub(r"<[^>]+>", "", semantic))[:40]
     assert example
     assert wrong == [f"serif math in sans text: {where}: {example}"]
+
+
+def test_frontier_native_math_wrong_face_is_reported(
+    browser: Any,
+    frontier_math_counts: tuple[int, int],
+    tmp_path: Path,
+) -> None:
+    path = site_renders.write(tmp_path, "frontier.html")["frontier.html"]
+    source = path.read_text()
+    source = source.replace(
+        "</head>",
+        '<style>.site-frontier [data-site-native-math="frontier"] :is(mi,mn,mtext,ms) '
+        '{font-family:"Times New Roman";}</style></head>',
+        1,
+    )
+    path.write_text(source)
+    wrong, rows = walk(browser, path.as_uri(), presses=(), whole=False)
+    assert any("native frontier math" in finding for finding in wrong)
+    mutant = rows[("table cell", SANS_TEXT, "Times New Roman")]
+    assert mutant["count"] == frontier_math_counts[0]
+    assert mutant["backend"] == "native-mathml"

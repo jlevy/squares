@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from kpress.format import markdown
 
 from devtools import render_frontier_page as frontier
 from devtools import render_overview, site_assets
@@ -105,6 +106,11 @@ class Rows(HTMLParser):
             self._body = False
         elif tag in {"td", "th"}:
             self._cell = None
+
+
+@pytest.fixture(scope="module")
+def frontier_math_counts() -> tuple[int, int]:
+    return site_renders.frontier_math_counts()
 
 
 @pytest.fixture(scope="module")
@@ -396,8 +402,10 @@ def test_the_gap_is_exact_where_both_bounds_are(rows, cases) -> None:
     # 15680000/3949423, 31360/7901 and 15680/3951 before it), so the gap is 57/2000.
     assert gaps[12] is not None
     assert abs(float(gaps[12]) - 57 / 2000) < 1e-15
-    html_12, _ = frontier.gap(cases[12])
-    assert r"\dfrac{57}{2000}" in html_12
+    html_12, _ = frontier.gap(cases[12], native=True)
+    fraction = re.search(r"<mfrac>(.*?)</mfrac>", html_12, re.DOTALL)
+    assert fraction is not None
+    assert re.findall(r"<mn>(.*?)</mn>", fraction[1]) == ["57", "2000"]
     assert html_12.endswith('<span class="site-approx">= 0.0285</span>')
 
 
@@ -594,12 +602,22 @@ def test_a_row_opens_its_case_record(cases: dict[int, dict[str, Any]]) -> None:
     assert "<details" not in table
 
 
-def test_no_math_is_left_as_source_text_in_the_table(page: str) -> None:
+def test_no_math_is_left_as_source_text_in_the_table(
+    page: str, frontier_math_counts: tuple[int, int]
+) -> None:
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     assert "$" not in table
     assert "sqrt(" not in table
-    assert 'class="katex"' in table
-    assert "<math" in table
+    assert 'class="katex"' not in table
+    assert (
+        table.count("<math ")
+        == table.count('data-site-native-math="frontier"')
+        == frontier_math_counts[0]
+        > 0
+    )
+    prose = page[: page.index("<tbody>")] + page[page.index("</tbody>") :]
+    assert prose.count('data-kpress-math="inline"') == 9
+    assert 'class="katex"' in prose
     assert r"\(\dfrac{7943}{2000}\)" not in table
 
 
@@ -666,3 +684,95 @@ def test_a_minimal_polynomial_with_radical_coefficients_renders_as_latex() -> No
     assert tex == r"24s^4-(1400+352\sqrt{2})s^3+641430=0"
     with pytest.raises(ValueError, match="no LaTeX form"):
         tables.polynomial_latex("s^2 - log(2) = 0")
+
+
+@pytest.mark.parametrize("tex", [r"\dfrac{31}{8}", r"1+\sqrt{2}", r"\frac{5}{2}"])
+def test_table_math_reuses_the_existing_semantic_mathml_exactly(tex: str) -> None:
+    semantic = re.findall(
+        r"<math\b[^>]*>.*?</math>",
+        markdown.parse_markdown(f"${tex}$", title="Semantic control").html,
+        re.DOTALL,
+    )
+    assert len(semantic) == 1
+    assert frontier.math_html(tex, native=True) == (
+        '<span class="kpress-math kpress-math-inline" data-site-native-math="frontier">'
+        + semantic[0]
+        + "</span>"
+    )
+
+
+@pytest.mark.parametrize(
+    "rendered",
+    [
+        '<span data-kpress-math-error="true">invalid</span>',
+        "<span>no semantic root</span>",
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>' * 2,
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><merror><mi>x</mi></merror></math>',
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"></math>',
+        '<math xmlns="http://www.w3.org/1999/xhtml"><mi>x</mi></math>',
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</math>',
+    ],
+    ids=[
+        "render-error",
+        "missing",
+        "ambiguous",
+        "math-error",
+        "empty",
+        "wrong-namespace",
+        "malformed",
+    ],
+)
+def test_table_math_refuses_invalid_semantic_output(
+    monkeypatch: pytest.MonkeyPatch,
+    rendered: str,
+) -> None:
+    monkeypatch.setattr(markdown, "_render_math", lambda *_args, **_kwargs: rendered)
+    with pytest.raises(ValueError, match="frontier table mathematics"):
+        frontier.math_html("x", native=True)
+
+
+def test_shared_frontier_helpers_keep_prepared_katex_unless_table_opts_in(cases) -> None:
+    shared = [
+        frontier.math_html(r"1+\sqrt{2}"),
+        frontier.value_html(cases[5]["reported_upper_bound"]),
+        frontier.gap(cases[12])[0],
+    ]
+    for rendered in shared:
+        assert 'data-kpress-math-renderer="katex"' in rendered
+        assert 'class="kpress-math-semantic"' in rendered
+        assert 'data-site-native-math="frontier"' not in rendered
+    for rendered in (
+        frontier.value_html(cases[5]["reported_upper_bound"], native=True),
+        frontier.gap(cases[12], native=True)[0],
+    ):
+        assert 'data-site-native-math="frontier"' in rendered
+        assert "katex-html" not in rendered
+
+
+def test_frontier_formula_oracle_refuses_missing_rows_and_invalid_math() -> None:
+    formula = (
+        '<span class="kpress-math" data-site-native-math="frontier">'
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn></math></span>'
+    )
+    rows = "".join(
+        f'<tr id="n-{n}"><td>{formula if n == 1 else ""}</td></tr>' for n in range(1, 325)
+    )
+    source = (
+        '<table id="frontier-table"><tbody>'
+        + rows
+        + "</tbody></table>"
+        + '<span class="kpress-math">prose</span>' * 9
+    )
+    assert site_renders.count_frontier_math(source) == (1, 10)
+    for mutant in (
+        source.replace('<tr id="n-324"><td></td></tr>', ""),
+        source.replace("<mn>1</mn>", "<mn></mn>"),
+        source.replace("<mn>1</mn>", "<merror><mn>1</mn></merror>"),
+        source.replace(
+            "</math>",
+            '</math><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn></math>',
+        ),
+        source.replace("http://www.w3.org/1998/Math/MathML", "invalid-namespace"),
+    ):
+        with pytest.raises(AssertionError):
+            site_renders.count_frontier_math(mutant)

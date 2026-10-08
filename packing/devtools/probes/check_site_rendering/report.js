@@ -33,6 +33,34 @@
     return !held || visible(held);
   });
   const unreadable = shown.filter((element) => {
+    if (element.getAttribute("data-site-native-math") === "frontier") {
+      if (!visible(element) || !element.closest(".site-frontier td")) {
+        return true;
+      }
+      const namespace = "http://www.w3.org/1998/Math/MathML";
+      const roots = [...element.children].filter(
+        (node) => node.namespaceURI === namespace && node.localName === "math",
+      );
+      const root = roots[0];
+      if (roots.length !== 1 || !root || root.querySelector("merror")) {
+        return true;
+      }
+      const box = root.getBoundingClientRect();
+      if (box.width <= 0 || box.height <= 0 || getComputedStyle(root).visibility === "hidden") {
+        return true;
+      }
+      // A visible host or empty math box does not prove mathematical text is drawn.
+      return ![...root.querySelectorAll("mi, mn, mo, mtext, ms")].some((node) => {
+        const token = node.getBoundingClientRect();
+        return (
+          node.namespaceURI === namespace &&
+          (node.textContent ?? "").trim().length > 0 &&
+          token.width > 0 &&
+          token.height > 0 &&
+          getComputedStyle(node).visibility !== "hidden"
+        );
+      });
+    }
     const visual = [...element.querySelectorAll(".katex-html")].find(
       (node) => node.getClientRects().length && getComputedStyle(node).visibility !== "hidden",
     );
