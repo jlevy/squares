@@ -1546,6 +1546,8 @@ print('all 17 sources/3017 poses/51 jobs/four private inputs/14 houses admitted;
         assert source.read_bytes() == original
         assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
     assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+
+
 @pytest.mark.parametrize(
     ("number", "canonical"),
     [
