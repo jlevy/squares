@@ -271,6 +271,23 @@ def test_t060_article_selects_only_its_page(declared: dict[str, tuple[Path, ...]
     assert in_scope(
         ["packing/devtools/templates/n11-optimality-review-article.md"], declared
     ) == {"n11_optimality_review"}
+
+
+def test_exact_values_inputs_select_the_complete_paper_job(
+    declared: dict[str, tuple[Path, ...]],
+) -> None:
+    for changed in (
+        "packing/devtools/render_exact_side_values.py",
+        "packing/devtools/templates/exact-side-values-article.md",
+        "packing/devtools/templates/exact-side-values-shell.html",
+        "packing/devtools/templates/exact-side-values.css",
+        "packing/tests/test_render_exact_side_values.py",
+    ):
+        assert in_scope([changed], declared) == {"exact_side_values"}, changed
+    assert in_scope(["packing/frontier/exact-values.json"], declared) == {
+        "exact_side_values",
+        "overview",
+    }
     assert in_scope(
         ["packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json"],
         declared,
@@ -308,6 +325,7 @@ def test_each_paper_has_an_independent_required_build(slug: str) -> None:
     browser_name = module.removeprefix("render_").upper()
     assert browser_control["env"][f"SQPACK_{browser_name}_BROWSER"] == "1"
     commands = "\n".join(str(step.get("run", "")) for step in job["steps"])
+    assert f"pytest -q tests/test_{module}.py" in commands
     # Rendered where it is served: under `papers/` in the site, by the paper's slug.
     assert f"{module} --site site --pdf" in commands
     assert f"{module} --site site --check" in commands

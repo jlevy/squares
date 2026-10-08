@@ -169,6 +169,14 @@ name: Certificate page
       - packing/tests/probes/site_math_preferences/**
       - packing/tests/test_assemble_site.py
       - packing/devtools/pages_scope.py
+      - packing/devtools/render_exact_side_values.py
+      - packing/devtools/build_exact_values.py
+      - packing/devtools/extract_kingbird_svg_exact.py
+      - packing/devtools/templates/exact-side-values-article.md
+      - packing/devtools/templates/exact-side-values-shell.html
+      - packing/devtools/templates/exact-side-values.css
+      - packing/tests/test_render_exact_side_values.py
+      - packing/resources/web/kingbird-exact-side-facts-2026-10-07/**
       - packing/devtools/paper_links.py
       - packing/devtools/render_n11_threshold_bound_review.py
       - packing/devtools/n11_threshold_figures.py
@@ -229,6 +237,7 @@ concurrency:
 #   scope ─┬─ n11-threshold-bound-review ──────────────┤
 #          ├─ n11-optimality-review ───────────────────┤
 #          ├─ square-packing-methods-survey ──────────┤
+#          ├─ exact-side-values ──────────────────────┤
 #          ├─ workbench ───────────────────────────────┐
 #          ├─ overview ────────────────────────────────┤
 #          ├─ prepare ─┬─ pdf ─────────────────────────┼─ publish ─┐
@@ -257,7 +266,7 @@ concurrency:
 #
 # The papers are served under `papers/`, each by its slug (`render_overview.PAPERS`),
 # and a job, an output or an artifact that is one paper's carries that slug. The three
-# n = 11 papers and the standalone `square-packing-methods-survey` each render into
+# n = 11 papers and the standalone methods survey and exact-values paper each render into
 # `site/papers/` on their own runner, where they are served, so every check reads the
 # page at its published path and `publish` renames nothing.
 jobs:
@@ -289,6 +298,8 @@ jobs:
       n11_optimality_review_reason: ${{ steps.scope.outputs.n11_optimality_review_reason }}
       square_packing_methods_survey: ${{ steps.scope.outputs.square_packing_methods_survey }}
       square_packing_methods_survey_reason: ${{ steps.scope.outputs.square_packing_methods_survey_reason }}
+      exact_side_values: ${{ steps.scope.outputs.exact_side_values }}
+      exact_side_values_reason: ${{ steps.scope.outputs.exact_side_values_reason }}
     defaults:
       run:
         working-directory: packing
@@ -355,6 +366,7 @@ jobs:
           n11_threshold_bound_review threshold-bound review
           n11_optimality_review optimality review
           square_packing_methods_survey square packing methods survey
+          exact_side_values exact-side-values paper
           PAGES
 
   n11-optimality-review:
@@ -427,6 +439,78 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: n11-optimality-review-page
+          path: packing/site
+          if-no-files-found: error
+          retention-days: 7
+
+  # The register paper is independent of the n = 11 series. Its JSON is already
+  # checked by the packing gate; this job checks publication, including every coefficient.
+  exact-side-values:
+    needs: scope
+    if: needs.scope.outputs.exact_side_values == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the repository and the retained exact-values register
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/packing/resources/*/
+            !/packing/campaign/*/
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Install Node 24 for KPress math
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+
+      - name: Cache the pinned Chromium browser
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install the pinned Chromium headless shell
+        run: uv run --frozen --group dev python -m playwright install --only-shell chromium
+
+      - name: Check the exact-values paper renderer
+        env:
+          SQPACK_EXACT_SIDE_VALUES_BROWSER: "1"
+        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py
+
+      # Rendered where it is served: `site/papers/exact-side-values.html`, with its
+      # Markdown and its PDF beside it. Nothing else writes `site/papers` on this runner,
+      # so the artifact is this paper's three files.
+      - name: Render and check the paper in HTML, Markdown, and PDF
+        run: |
+          uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --pdf
+          uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --check
+          test -s site/papers/exact-side-values.pdf
+          uv run --frozen --group dev python -m devtools.artifact_dates --pdf site/papers/exact-side-values.pdf --revised exact-values
+          uv run --frozen --group dev python -m devtools.social_card --output-dir site
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:exact-side-values
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/exact-side-values.html
+
+      - name: Share the checked paper
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: exact-side-values-page
           path: packing/site
           if-no-files-found: error
           retention-days: 7
@@ -1819,14 +1903,14 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  # What the deployment publishes, assembled from the seven jobs that produce it: the
+  # What the deployment publishes, assembled from its producer jobs: the
   # lower-bounds explainer and its Markdown under `/papers/`, with the atlas's files at
   # the root (`prepare`), its checked PDF beside it (`pdf`), the site's own pages at the
   # root with the forwarders at the papers' old addresses (`overview`), the workbench at
   # `/workbench/` (`workbench`), and the threshold-bound review and the optimality review,
   # each with its Markdown and PDF, under `/papers/` (`n11-threshold-bound-review`,
   # `n11-optimality-review`), and the standalone methods survey
-  # (`square-packing-methods-survey`).
+  # (`square-packing-methods-survey`) and the exact-values paper (`exact-side-values`).
   # It runs on pull requests too -- a missing artifact fails
   # review rather than the next deploy -- lists every file with its size and digest so
   # the tree can be compared across runs, and holds every page's head in it to the site's
@@ -1841,7 +1925,7 @@ jobs:
   # touches an input all builds share (the workflow, the scope tool, kpress, the
   # lockfile). A partial tree is never a publication, so there is nothing to assemble.
   publish:
-    needs: [prepare, pdf, overview, workbench, n11-threshold-bound-review, n11-optimality-review, square-packing-methods-survey]
+    needs: [prepare, pdf, overview, workbench, n11-threshold-bound-review, n11-optimality-review, square-packing-methods-survey, exact-side-values]
     runs-on: ubuntu-latest
     steps:
       # The assembled site is held to the head contract once it is whole, with the
@@ -1966,6 +2050,25 @@ jobs:
         run: |
           test -s "$STAGED/papers/square-packing-methods-survey.html"
           uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
+      - name: Use the checked exact-side-values paper
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: exact-side-values-page
+          path: ${{ runner.temp }}/exact-side-values-page
+
+      - name: Put the exact-side-values paper beside the others, refusing any name already there
+        env:
+          STAGED: ${{ runner.temp }}/exact-side-values-page
+        working-directory: packing
+        run: |
+          test -s "$STAGED/papers/exact-side-values.html"
+          test -s "$STAGED/papers/exact-side-values.md"
+          test -s "$STAGED/papers/exact-side-values.pdf"
+          test -s site/papers/n11-lower-bounds-explainer.html
+          test -s site/papers/n11-threshold-bound-review.html
+          test -s site/papers/n11-optimality-review.html
+          test -s site/papers/square-packing-methods-survey.html
+          uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
       # The papers moved to `papers/<slug>` on 2026-10-01. A page that moved is forwarded
       # by a page of the overview's build; a Markdown file or a PDF cannot forward, so
@@ -2029,6 +2132,7 @@ jobs:
       - n11-threshold-bound-review
       - n11-optimality-review
       - square-packing-methods-survey
+      - exact-side-values
       - pdf
       - print-layout
       - typography
@@ -2050,10 +2154,11 @@ jobs:
           jq -r 'to_entries[] | "\(.value.result)\t\(.key)"' <<< "$NEEDS"
           jq -e '
             .scope.result == "success"
-            and ([.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, .scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, .scope.outputs.n11_optimality_review, .scope.outputs.square_packing_methods_survey] | all(. == "true" or . == "false"))
+            and ([.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, .scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, .scope.outputs.n11_optimality_review, .scope.outputs.square_packing_methods_survey, .scope.outputs.exact_side_values] | all(. == "true" or . == "false"))
             and (.scope.outputs.n11_threshold_bound_review != "true" or .["n11-threshold-bound-review"].result == "success")
             and (.scope.outputs.n11_optimality_review != "true" or .["n11-optimality-review"].result == "success")
             and (.scope.outputs.square_packing_methods_survey != "true" or .["square-packing-methods-survey"].result == "success")
+            and (.scope.outputs.exact_side_values != "true" or .["exact-side-values"].result == "success")
             and ([.[].result] | all(. == "success" or . == "skipped"))
           ' <<< "$NEEDS" > /dev/null
 

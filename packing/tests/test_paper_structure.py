@@ -3,10 +3,10 @@
 The owner asked on 2026-10-01 that the papers' "formats, formatting, and all structure
 should be similar". `devtools.paper_structure` reads each rendered paper on every
 structural axis and `devtools.paper_front` writes every paper's front from one record;
-these tests render every paper of the site (`render_overview.PAPERS`, the three parts of
-the n = 11 series) and hold every form axis of each equal to the first paper's, and hold
-the credits of each to the owner's dictated form (think-2cqu) with the series strip
-under them (the series plan, 2026-10-05).
+these tests render every paper of the site (`render_overview.PAPERS`), hold their common
+form axes equal to the first paper's, and hold the credits of each to the owner's
+dictated form (think-2cqu). The three n = 11 papers carry their series strip; the
+independent exact-values paper carries none.
 
 A review's renderer is modelled on the optimality review's
 (`render_n11_optimality_review`): each is rendered here through the same entry points,
@@ -43,6 +43,7 @@ THRESHOLD = N11_THRESHOLD_BOUND_REVIEW
 REVIEW = paper.SLUG
 METHODS = PACKING_METHODS
 SERIES = tuple(record for record in PAPERS if record.part is not None)
+EXACT = render_overview.EXACT_SIDE_VALUES
 #: Every review, in reading order: the papers after the first.
 REVIEWS = tuple(record.slug for record in PAPERS[1:])
 #: Each review's source, as the first two lines of its credits name it.
@@ -56,6 +57,7 @@ VERSIONS = {
     THRESHOLD: release.THRESHOLD_REVIEW_EDITION,
     REVIEW: release.OPTIMALITY_REVIEW_EDITION,
     METHODS: release.PACKING_METHODS_EDITION,
+    EXACT: release.EXACT_SIDE_VALUES_EDITION,
 }
 DATES = {
     EXPLAINER: (
@@ -72,6 +74,14 @@ DATES = {
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}"
     ),
     METHODS: f"Published {release.PACKING_METHODS_FIRST_PUBLISHED}",
+    EXACT: (
+        f"Published {release.EXACT_SIDE_VALUES_FIRST_PUBLISHED}"
+        if release.EXACT_SIDE_VALUES_FIRST_PUBLISHED == release.EXACT_SIDE_VALUES_REVISED
+        else (
+            f"First published {release.EXACT_SIDE_VALUES_FIRST_PUBLISHED} · "
+            f"Last revised {release.EXACT_SIDE_VALUES_REVISED}"
+        )
+    ),
 }
 
 
@@ -117,7 +127,7 @@ def rows(structures: dict[str, paper_structure.Structure]) -> list[dict[str, obj
 
 
 def test_the_audit_reads_every_paper_of_the_site_in_reading_order() -> None:
-    assert paper_structure.PAPERS == (EXPLAINER, THRESHOLD, REVIEW, METHODS)
+    assert paper_structure.PAPERS == (EXPLAINER, THRESHOLD, REVIEW, METHODS, EXACT)
     assert paper_structure.CREDIT_KINDS[-1] == "series"
 
 
@@ -225,13 +235,15 @@ def test_each_papers_credits_follow_the_owners_form(
         assert release.DATA_REVISION[: release.DATA_REVISION_LENGTH] not in version.text
         assert dates.text == DATES[slug], slug
         assert version.text.startswith(VERSIONS[slug]), slug
-        # The series strip: which part, then each other part by its title, linked.
         part = paper_record(slug).part
         if part is None:
+            assert renderer(slug).FRONT.series is None
             assert all(line.kind != "series" for line in lines)
             continue
         head, *others = lines[-strip:]
-        assert head.text == f"Part {paper_front.numeral(part)} of {strip} in the n = 11 series"
+        assert head.text == (
+            f"Part {paper_front.numeral(part)} of {strip} in the n = 11 series"
+        )
         assert head.links == head.bold == ()
         assert [line.text for line in others] == [
             f"Part {paper_front.numeral(record.part)}: {record.title}"
@@ -251,6 +263,26 @@ def test_each_papers_credits_follow_the_owners_form(
     methods = structures[METHODS].credits
     assert methods[-2].text == "v0.1.0 (version history)"
     assert methods[-2].links == (("version history", "#version-history"),)
+    exact = structures[EXACT].credits
+    assert exact[-2].text == release.EXACT_SIDE_VALUES_EDITION
+    assert exact[-2].links == ()
+
+
+def test_the_independent_paper_has_shared_publication_form_without_series_or_figures(
+    renders: dict[str, tuple[str, str]],
+    structures: dict[str, paper_structure.Structure],
+) -> None:
+    html, _markdown = renders[EXACT]
+    axes = paper_structure.axes(structures[EXACT])
+    assert axes["figures: captions"] == "no figures"
+    assert axes["figures: count"] == "0"
+    assert axes["footnotes"] == "none"
+    assert axes["series: strip"] == "none"
+    assert axes["series: part"] == "none"
+    assert '<article class="kpress kpress-doc kpress-prose cert-page ' in html
+    assert (
+        render_n11_lower_bounds_explainer.PUBLICATION_STYLE.read_text(encoding="utf-8") in html
+    )
 
 
 def test_the_markdown_editions_open_as_the_pages_do(
@@ -297,7 +329,7 @@ def test_the_tool_prints_the_audit_of_a_built_site(
     assert "| axis |" in out
     assert (
         "| head: title | form | article name | article name | "
-        "article name | article name | True |" in out
+        "article name | article name | article name | True |" in out
     )
     assert structures[REVIEW].pdf == {}
 
@@ -523,6 +555,10 @@ def test_each_paper_takes_its_series_strip_from_the_one_registry() -> None:
     the paper's own. A paper the site does not list has no strip to take."""
     for record in SERIES:
         series = paper_front.series(record.slug)
+        if record.part is None:
+            assert series is None
+            continue
+        assert series is not None
         assert series.name == paper_front.SERIES_NAME == "the n = 11 series"
         assert series.part == record.part
         assert [(part.number, part.slug, part.title) for part in series.parts] == [

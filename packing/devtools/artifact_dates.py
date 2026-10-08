@@ -63,6 +63,7 @@ EXPLAINER_ARTICLE = TEMPLATES / "n11-lower-bounds-explainer-article.md"
 THRESHOLD_ARTICLE = TEMPLATES / "n11-threshold-bound-review-article.md"
 OPTIMALITY_ARTICLE = TEMPLATES / "n11-optimality-review-article.md"
 PACKING_METHODS_ARTICLE = TEMPLATES / "packing-methods-article.md"
+EXACT_SIDE_VALUES_ARTICLE = TEMPLATES / "exact-side-values-article.md"
 RESULTS = PACKING / "frontier/results.yaml"
 SYNOPSIS = REPO / "SYNOPSIS.md"
 #: The result each review reviews, whose publication is its "Original proof".
@@ -199,8 +200,31 @@ def _paper_rows() -> list[Row]:
     threshold_proof, threshold_review = threshold_dates()
     threshold_changed = last_change(THRESHOLD_ARTICLE)
     methods_changed = last_change(PACKING_METHODS_ARTICLE)
+    exact_changed = last_change(EXACT_SIDE_VALUES_ARTICLE)
     unknown = "git cannot date the article here"
     return [
+        Row(
+            "exact side values, First published",
+            release.EXACT_SIDE_VALUES_FIRST_PUBLISHED,
+            "release.EXACT_SIDE_VALUES_HISTORY, oldest edition",
+            "the first edition's declared publication date",
+            held_by="typed; the paper carries its own version history",
+        ),
+        Row(
+            "exact side values, Last revised",
+            release.EXACT_SIDE_VALUES_REVISED,
+            "release.EXACT_SIDE_VALUES_REVISED",
+            f"the last commit that changed {EXACT_SIDE_VALUES_ARTICLE.name}",
+            None if exact_changed is None else long_date(exact_changed),
+            unknown,
+        ),
+        Row(
+            "exact side values PDF CreationDate, ModDate",
+            publication_date_text(written_date(release.EXACT_SIDE_VALUES_REVISED)),
+            "set by render_exact_side_values --pdf",
+            "Last revised, at noon UTC",
+            held_by="built at deploy; artifact_dates --pdf holds a built file",
+        ),
         Row(
             "explainer, First published",
             release.EXPLAINER_FIRST_PUBLISHED,
@@ -357,6 +381,7 @@ def check_pdf(pdf: Path, paper: str) -> int:
         "threshold": threshold_revised,
         "optimality": optimality_revised,
         "packing-methods": lambda: written_date(release.PACKING_METHODS_REVISED),
+        "exact-values": lambda: written_date(release.EXACT_SIDE_VALUES_REVISED),
     }[paper]()
     problem = date_problem(pdf.read_bytes(), day)
     if problem is not None:
@@ -374,7 +399,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--pdf", type=Path, help="a built PDF whose dates to hold")
     parser.add_argument(
         "--revised",
-        choices=("explainer", "threshold", "optimality", "packing-methods"),
+        choices=("explainer", "threshold", "optimality", "packing-methods", "exact-values"),
         help="with --pdf: the paper whose revised date the PDF's dates must be",
     )
     arguments = parser.parse_args(argv)

@@ -22,7 +22,7 @@ description: >-
   manifest paths inside reported_source are repository-relative.
 type: object
 additionalProperties: false
-required: [generated_by, range, sources, totals, entries]
+required: [generated_by, range, sources, totals, entries, historical_entries]
 properties:
   generated_by: {type: string, minLength: 1}
   range:
@@ -35,15 +35,18 @@ properties:
   sources:
     type: object
     additionalProperties: false
-    required: [records, catalogue, kkt]
+    required: [records, catalogue, svg_facts, svg_receipts, historical_polynomials, kkt]
     properties:
       records: {type: string, minLength: 1}
       catalogue: {type: string, minLength: 1}
+      svg_facts: {type: string, minLength: 1}
+      svg_receipts: {type: string, minLength: 1}
+      historical_polynomials: {type: string, minLength: 1}
       kkt:
         type: object
         additionalProperties: false
         description: >-
-          Evan Daniel's exact-contact batch: an exact KKT point per count, solved at 80
+          Evan Daniel's exact-contact batch: a numerical KKT point per count, computed at 80
           digits and printed to `digits` significant digits, cited by its bibliography key.
         required: [path, key, digits]
         properties:
@@ -81,6 +84,10 @@ properties:
     type: array
     minItems: 1
     items: {$ref: '#/$defs/entry'}
+  historical_entries:
+    type: array
+    description: Source polynomials at their own sides; these never promote a frontier bound.
+    items: {$ref: '#/$defs/historical_entry'}
 $defs:
   source_occurrence:
     type: object
@@ -169,6 +176,55 @@ $defs:
       lean_replay: {const: not-attempted}
       current_pose_identity: {const: not-established}
       global_optimality: {const: not-established}
+  historical_entry:
+    type: object
+    additionalProperties: false
+    required: [n, kind, current_side, side, degree, polynomial, checks, sources, source_statuses, attribution, bead]
+    allOf:
+      - if:
+          anyOf:
+            - required: [reported_source]
+            - required: [assurance]
+            - required: [algebraic_source]
+              properties:
+                algebraic_source: {const: reported-source-polynomial}
+        then:
+          required: [algebraic_source, reported_source, assurance, text]
+          properties:
+            algebraic_source: {const: reported-source-polynomial}
+            kind: {const: unreconciled-source}
+            degree: {enum: [8, 32, 40]}
+            checks: {$ref: '#/$defs/source_root_checks'}
+    properties:
+      n: {type: integer, minimum: 1}
+      kind: {enum: [superseded, outside-frontier, source-invalid, unreconciled-source]}
+      algebraic_source:
+        description: The retained source polynomial's origin; source-only roots establish no packing bound.
+        enum: [catalogue, reported-source-polynomial]
+      reported_source: {$ref: '#/$defs/reported_source'}
+      assurance: {$ref: '#/$defs/source_assurance'}
+      text: {type: string, minLength: 1}
+      current_side:
+        oneOf:
+          - {$ref: '#/$defs/decimal'}
+          - {type: 'null'}
+      side: {$ref: '#/$defs/decimal'}
+      degree: {type: integer, minimum: 1}
+      polynomial: {$ref: '#/$defs/polynomial'}
+      checks: {$ref: '#/$defs/checks'}
+      sources: {type: array, minItems: 1, items: {$ref: '#/$defs/source_occurrence'}}
+      source_statuses: {type: array, items: {type: string}}
+      attribution:
+        type: object
+        additionalProperties: false
+        required: [date_mentions, source_text]
+        properties:
+          date_mentions: {type: array, items: {type: string}}
+          source_text: {type: array, items: {type: string}}
+      bead:
+        oneOf:
+          - {type: string, pattern: '^think-[a-z0-9]+$'}
+          - {type: 'null'}
   rational:
     type: string
     pattern: '^-?[0-9]+/[0-9]+$'
@@ -188,6 +244,11 @@ $defs:
           properties:
             degree: {enum: [8, 32, 40]}
             checks: {$ref: '#/$defs/source_root_checks'}
+      - if:
+          properties:
+            kind: {const: superseded-catalogue-polynomial}
+        then:
+          required: [side, polynomial, checks]
     properties:
       side:
         description: The reported source root, which establishes no current packing bound.
@@ -295,6 +356,16 @@ $defs:
                   The recorded decimal is the root truncated or rounded to its printed
                   places. False would be a wrong polynomial, which fails the build.
               window: {enum: [kkt, record, exact]}
+              source_index:
+                type: object
+                additionalProperties: false
+                required: [stated, counted]
+                properties:
+                  stated: {type: integer, minimum: 1}
+                  counted:
+                    oneOf:
+                      - {type: integer, minimum: 1}
+                      - {type: 'null'}
       decimal:
         description: The isolated root to 40 significant digits, correctly rounded.
         oneOf:
@@ -315,11 +386,12 @@ $defs:
       catalogue:
         description: >-
           `matches`: the record transcribes the catalogue's polynomial for the same packing.
+          `matches-svg`: coefficients and the side agree with the pinned retained SVG facts.
           `derived-here`: computed from the record's closed form, and recomputed on every
           build. `not-in-catalogue`: neither.
         oneOf:
           - {type: 'null'}
-          - {enum: [matches, derived-here, not-in-catalogue]}
+          - {enum: [matches, matches-svg, derived-here, not-in-catalogue]}
       galois:
         description: SymPy's Galois group, for degrees 2 to 6 only.
         oneOf:
@@ -349,6 +421,9 @@ $defs:
       - kkt
       - notes
     properties:
+      source_occurrences:
+        type: array
+        items: {$ref: '#/$defs/source_occurrence'}
       n: {type: integer, minimum: 1}
       status: {enum: [proved, open]}
       side:

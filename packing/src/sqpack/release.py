@@ -518,6 +518,18 @@ PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
 PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
 PACKING_METHODS_REVISED = "October 8, 2026"
 
+#: The independent exact-side-values register paper's own edition and dates.
+EXACT_SIDE_VALUES_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.0",
+        first_published="October 7, 2026",
+        result_scope="The current and superseded algebraic side values through n = 324.",
+    ),
+)
+EXACT_SIDE_VALUES_FIRST_PUBLISHED = EXACT_SIDE_VALUES_HISTORY[0].first_published
+EXACT_SIDE_VALUES_EDITION = f"Draft {EXACT_SIDE_VALUES_HISTORY[0].version}"
+EXACT_SIDE_VALUES_REVISED = "October 7, 2026"
+
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is
 #: pinned for the reason `DATA_REVISION` is: those documents are compared byte for byte with a

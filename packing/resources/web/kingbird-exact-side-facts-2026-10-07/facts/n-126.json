@@ -1,0 +1,41 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 126,
+ "url": "https://kingbird.myphotos.cc/packing/square-126.svg",
+ "retrieved_utc": "2026-10-08T00:36:48Z",
+ "read_from": "fetched into memory",
+ "bytes": 11783,
+ "sha256": "82f306eb3ea857e4a46156b8d1bb205f08bcf6a6771ffb8f8c537f12634f751d",
+ "last_modified": "Thu, 10 Sep 2026 05:32:09 GMT",
+ "same_as_reading_of_2026_10_05": true,
+ "credits": [
+  "Found by David Ellsworth on December 14, 2024, with exact polynomial root solution, based on the s(39) found by David W. Cantrell in August 2002.",
+  "Improved by David W. Cantrell on December 16, 2024, including corresponding exact polynomial root solution.",
+  "Exact polynomial root solution reconstructed by David Ellsworth on December 16, 2024.",
+  "Improved by Thomas Schadt on December 16, 2025, using a computer program he wrote, starting from a simplified version of the above.",
+  "Reimproved by David Ellsworth on December 30, 2025, and January 7, 2026, using his modified version of Thomas Schadt's computer program, with the same starting state, reaching s=11.77635574, serving as a reference for analytic optimization.",
+  "Optimized by David Ellsworth on January 8, 2026, with exact polynomial root solution.",
+  "Improved by Joost de Winter on August 14, 2026, working with unspecified AI (probably GPT5.6-Sol and/or Claude Fable 5)",
+  "Source: Private communication from Joost de Winter to David Ellsworth, on August 14, 2026",
+  "The following notes were provided:",
+  "Found by an evolutionary beam search run from scratch:",
+  "structured perturbation of known good packings, followed by numerical refinement (sequential linear programming over separating-axis constraints, margin homotopy, clearance ladder). 53 rotated squares. Not analytically optimised.",
+  "Cleaned up by David Ellsworth on September 9, 2026."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "11.774735132406546",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "5.887367566203273",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

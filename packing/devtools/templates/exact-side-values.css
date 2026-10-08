@@ -1,0 +1,119 @@
+/* The exact-values paper uses the shared publication type and layout. These rules only
+   contain its wide generated tables and polynomial catalogue. */
+.exact-side-values-paper .kpress-table-wrap {
+  overflow-x: auto;
+}
+.cert-page.exact-side-values-paper > .kpress-table-wrap {
+  max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+}
+.exact-side-values-paper td {
+  overflow-wrap: anywhere;
+}
+.exact-side-values-paper td code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+}
+.exact-side-values-paper .source-quote code {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.exact-side-values-paper h3 {
+  break-after: avoid;
+}
+.exact-side-values-paper h3 + p {
+  break-after: avoid;
+}
+.exact-side-values-paper .kpress-math-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+@media print {
+  @page exact-values-wide {
+    size: Letter landscape;
+    margin: 0.5in;
+  }
+  .exact-side-values-paper .kpress-table-wrap {
+    overflow: visible;
+  }
+  .exact-side-values-paper .kpress-table-wrap:has(th:nth-child(7)) {
+    page: exact-values-wide;
+    max-width: 100%;
+    width: 100%;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(7)) {
+    table-layout: fixed;
+    width: 100%;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(7)) th,
+  .exact-side-values-paper .kpress-table:has(th:nth-child(7)) td {
+    font-size: 6.8pt;
+    line-height: 1.2;
+    max-width: none;
+    min-width: 0;
+    padding: 0.12rem 0.2rem;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(1) {
+    width: 3%;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(2) {
+    width: 8%;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(3),
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(6),
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(9) {
+    width: 10%;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(4),
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(8),
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(10) {
+    width: 12%;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(5) {
+    width: 7%;
+  }
+  .exact-side-values-paper .kpress-table:has(th:nth-child(10)) th:nth-child(7) {
+    width: 16%;
+  }
+  .exact-side-values-paper
+    .kpress-table:has(th:nth-child(7)):not(:has(th:nth-child(8)))
+    th:nth-child(1) {
+    width: 4%;
+  }
+  .exact-side-values-paper
+    .kpress-table:has(th:nth-child(7)):not(:has(th:nth-child(8)))
+    th:nth-child(2),
+  .exact-side-values-paper
+    .kpress-table:has(th:nth-child(7)):not(:has(th:nth-child(8)))
+    th:nth-child(5) {
+    width: 10%;
+  }
+  .exact-side-values-paper
+    .kpress-table:has(th:nth-child(7)):not(:has(th:nth-child(8)))
+    th:nth-child(3) {
+    width: 5%;
+  }
+  .exact-side-values-paper
+    .kpress-table:has(th:nth-child(7)):not(:has(th:nth-child(8)))
+    th:nth-child(4) {
+    width: 12%;
+  }
+  .exact-side-values-paper
+    .kpress-table:has(th:nth-child(7)):not(:has(th:nth-child(8)))
+    th:nth-child(6) {
+    width: 24%;
+  }
+  .exact-side-values-paper
+    .kpress-table:has(th:nth-child(7)):not(:has(th:nth-child(8)))
+    th:nth-child(7) {
+    width: 35%;
+  }
+  .exact-side-values-paper tr {
+    break-inside: avoid;
+  }
+  .exact-side-values-paper .kpress-math-display {
+    overflow: visible;
+    break-inside: avoid;
+  }
+}
