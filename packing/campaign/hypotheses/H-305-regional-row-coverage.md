@@ -45,7 +45,7 @@ hypothesis:
     supervised13.005720s rc0/cleanuptrue. Ruff/format/BasedPyright0; soleAstra final mathematical source
     review CLEAR. No actual target inputs evaluated before registration. Seven byte roles and fixedh1/512/SAME25/complete1056+992/17endpoint+family
     controls; stronger contradiction labelled separately. Freeze actualsource/descriptor/phases before
-    launch.
+    launch. Exp297 subsequently completed construction/fresh233.752806s; SAME25 primary rejected, with22 covered rows retained as the secondary regional11/32 restriction.
   registered: '2026-10-07'
 ---
 # Regional Collective Closed-Row Coverage
