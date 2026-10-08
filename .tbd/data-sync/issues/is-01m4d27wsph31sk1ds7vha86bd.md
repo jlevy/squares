@@ -5,14 +5,16 @@ title: "PR #433 merge-ready: merge upstream and verify Fibonacci research integr
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: codex-fibonacci-merge-ready
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m4d3eryja3jhzk668anzbtwd
 hold: null
 hold_until: null
 created_at: 2026-10-08T06:12:06.069Z
-updated_at: 2026-10-08T06:14:16.515Z
+updated_at: 2026-10-08T06:33:20.081Z
 started_at: 2026-10-08T06:14:10.398Z
 ---
 
