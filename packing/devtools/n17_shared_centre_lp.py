@@ -21,7 +21,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from fractions import Fraction as Q
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 import yaml
 
@@ -43,6 +43,7 @@ DESCRIPTOR_LIMIT, OPERATION_LIMIT, PHASE_SECONDS = 10 << 20, 2_000_000, 120
 CONTEXT_SCHEMA = "n17-shared-centre-endpoint-context/v1"
 type Point = tuple[Q, Q]
 type Plane = tuple[Q, Q, Q]
+type FrameAction = Literal["r3", "f1"]
 IncompleteError = projection.finite.IncompleteError
 require = projection.require
 
@@ -394,6 +395,56 @@ def check_held(held: dict[Path, bytes], budget: Budget) -> None:
         budget.tick()
 
 
+def frame_assignment(
+    names: list[str],
+    assignment: list[dict[str, Any]],
+    d4: dict[str, list[int]],
+    budget: Budget,
+    frame_action: FrameAction = "r3",
+) -> tuple[dict[int, int], tuple[int, ...]]:
+    """Check the selected catalogue action before any witness or geometry evaluation."""
+    budget.tick()
+    require(frame_action in ("r3", "f1"), "unsupported endpoint frame action")
+    require(len(names) == 24 and len(set(names)) == 24, "original named 24-cell catalogue")
+    require(
+        len(assignment) == 17
+        and all(type(r.get("label")) is int for r in assignment)
+        and {r["label"] for r in assignment} == set(range(1, 18)),
+        "complete H256 candidate label assignment",
+    )
+    selected = d4.get(frame_action)
+    require(
+        type(selected) is list
+        and len(selected) == 24
+        and all(type(i) is int for i in selected)
+        and sorted(selected) == list(range(24)),
+        f"complete {frame_action} cell permutation",
+    )
+    permutation = tuple(cast(list[int], selected))
+    assigned: dict[int, int] = {}
+    transformed: set[int] = set()
+    for row in assignment:
+        budget.charge()
+        cell = names.index(row["cell"])
+        assigned[row["label"]] = cell
+        require(permutation[cell] not in transformed, "duplicate transformed endpoint cell")
+        transformed.add(permutation[cell])
+    require(
+        sum(1 << cell for cell in transformed) == ENDPOINT_MASK,
+        "wrong canonical endpoint orbit",
+    )
+    budget.tick()
+    return assigned, permutation
+
+
+def frame_point(point: Point, budget: Budget, frame_action: FrameAction = "r3") -> Point:
+    """Apply exactly the caller-selected action using the same guarded arithmetic seam."""
+    require(frame_action in ("r3", "f1"), "unsupported endpoint frame action")
+    x, y = point
+    first = budget.checked(y) if frame_action == "r3" else (Guarded(U, budget) - y).value
+    return first, (Guarded(U, budget) - x).value
+
+
 def endpoint_coordinates(
     witness: dict[str, Any],
     names: list[str],
@@ -402,6 +453,7 @@ def endpoint_coordinates(
     polygons: list[list[Point]],
     *,
     budget: Budget,
+    frame_action: FrameAction = "r3",
 ) -> tuple[tuple[int, ...], tuple[Q, ...]]:
     require(
         witness.get("n") == 17
@@ -421,17 +473,7 @@ def endpoint_coordinates(
     )
     squares = cast(list[dict[str, Any]], squares)
     require([row.get("id") for row in squares] == list(range(1, 18)), "source row IDs differ")
-    require(
-        len(assignment) == 17 and {r["label"] for r in assignment} == set(range(1, 18)),
-        "complete H256 candidate label assignment",
-    )
-    assigned = {r["label"]: names.index(r["cell"]) for r in assignment}
-    rotation = d4.get("r3")
-    require(
-        type(rotation) is list and len(rotation) == 24 and sorted(rotation) == list(range(24)),
-        "complete r3 cell permutation",
-    )
-    rotation = cast(list[int], rotation)
+    assigned, permutation = frame_assignment(names, assignment, d4, budget, frame_action)
     delta = (Guarded(U, budget) - SIDE) / 2
     points: dict[int, Point] = {}
     for row, label in zip(squares, SOURCE_ROW_LABELS, strict=True):
@@ -453,16 +495,21 @@ def endpoint_coordinates(
         for a, b, rhs in planes(polygons[cell], budget):
             value = Guarded(a, budget) * centre[0] + Guarded(b, budget) * centre[1]
             require(value <= rhs, "source centre outside candidate original closed cell")
-        rotated = rotation[cell]
-        require(rotated not in points, "duplicate transformed endpoint cell")
-        points[rotated] = centre[1], (Guarded(U, budget) - centre[0]).value
+        transformed = permutation[cell]
+        require(transformed not in points, "duplicate transformed endpoint cell")
+        points[transformed] = frame_point((centre[0], centre[1]), budget, frame_action)
     cells = tuple(sorted(points))
     require(sum(1 << i for i in cells) == ENDPOINT_MASK, "wrong canonical endpoint orbit")
     return cells, tuple(q for i in cells for q in points[i])
 
 
 def endpoint_packet(
-    document: dict[str, Any], witness_path: Path, witness_sha256: str, budget: Budget
+    document: dict[str, Any],
+    witness_path: Path,
+    witness_sha256: str,
+    budget: Budget,
+    *,
+    frame_action: FrameAction = "r3",
 ) -> dict[str, Any]:
     """Reconstruct an endpoint packet; import never evaluates source inputs.
 
@@ -490,6 +537,7 @@ def endpoint_packet(
     family = cover["endpoint"]["family"]["h256-centroid"]
     require(family.get("one_state") is True, "accepted candidate assignment is incomplete")
     assignment = family["squares"]
+    frame_assignment(names, assignment, context["d4"], budget, frame_action)
     budget.tick()
     with witness_path.open("rb") as stream:
         raw = stream.read(WITNESS_LIMIT + 1)
@@ -508,7 +556,13 @@ def endpoint_packet(
     )
     witness = cast(dict[str, Any], source["witness"])
     cells, point = endpoint_coordinates(
-        witness, names, assignment, context["d4"], polygons, budget=budget
+        witness,
+        names,
+        assignment,
+        context["d4"],
+        polygons,
+        budget=budget,
+        frame_action=frame_action,
     )
     model = build_model(polygons, cells, budget)
     packet = {"model": model_payload(model, budget), "point": list(map(str, point))}
@@ -525,9 +579,13 @@ def check_endpoint_packet(
     witness_sha256: str,
     packet: dict[str, Any],
     budget: Budget,
+    *,
+    frame_action: FrameAction = "r3",
 ) -> dict[str, Any]:
     """Freshly rebuild geometry and all endpoint coordinates, then compare complete payloads."""
-    expected = endpoint_packet(document, witness_path, witness_sha256, budget)
+    expected = endpoint_packet(
+        document, witness_path, witness_sha256, budget, frame_action=frame_action
+    )
     require(
         packet_bytes(packet, budget) == packet_bytes(expected, budget),
         "fresh endpoint mathematical payload differs",
@@ -535,6 +593,7 @@ def check_endpoint_packet(
     budget.tick()
     return {
         "verification_passed": True,
+        "frame_action": frame_action,
         "operations": budget.operations,
         "ordinary_assignment_exclusion_proved": False,
         "census_admission_proved": False,
@@ -551,9 +610,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--witness-sha256", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--check", type=Path)
+    parser.add_argument("--frame-action", choices=("r3", "f1"), default="r3")
     parser.add_argument("--max-seconds", type=float, default=PHASE_SECONDS)
     parser.add_argument("--max-operations", type=int, default=OPERATION_LIMIT)
     args = parser.parse_args(argv)
+    frame_action = cast(FrameAction, args.frame_action)
     try:
         require(
             math.isfinite(args.max_seconds) and 0 < args.max_seconds <= PHASE_SECONDS,
@@ -565,10 +626,13 @@ def main(argv: list[str] | None = None) -> int:
         )
         held = {args.descriptor: descriptor_raw}
         if args.check is None:
-            mathematical = endpoint_packet(document, args.witness, args.witness_sha256, budget)
+            mathematical = endpoint_packet(
+                document, args.witness, args.witness_sha256, budget, frame_action=frame_action
+            )
             result = {
                 "schema": "n17-shared-centre-endpoint/v1",
                 "status": "constructed",
+                "frame_action": frame_action,
                 "mathematical": mathematical,
                 "operations": budget.operations,
                 "verification_passed": False,
@@ -582,8 +646,17 @@ def main(argv: list[str] | None = None) -> int:
                 and type(constructed.get("mathematical")) is dict,
                 "construction envelope differs",
             )
+            require(
+                constructed.get("frame_action") == frame_action,
+                "construction frame action differs from frozen checker choice",
+            )
             result = check_endpoint_packet(
-                document, args.witness, args.witness_sha256, constructed["mathematical"], budget
+                document,
+                args.witness,
+                args.witness_sha256,
+                constructed["mathematical"],
+                budget,
+                frame_action=frame_action,
             )
             result.update(schema="n17-shared-centre-endpoint/v1", status="verified")
         # Provenance's inherited subprocess timeouts remain outer-supervised work.
@@ -603,6 +676,7 @@ def main(argv: list[str] | None = None) -> int:
         result = {
             "schema": "n17-shared-centre-endpoint/v1",
             "status": "incomplete" if isinstance(error, IncompleteError) else "refused",
+            "frame_action": frame_action,
             "reason": str(error),
             "verification_passed": False,
         }

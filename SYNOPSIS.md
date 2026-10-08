@@ -323,8 +323,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
 | Explorations | 48 | 28 linked to proposed hypotheses; 20 uncodified |
-| Hypotheses | 256 | 72 confirmed; 48 refuted; 64 blocked; 23 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 243 | 92 accepted; 53 rejected; 62 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 258 | 72 confirmed; 48 refuted; 64 blocked; 24 unresolved; 10 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 244 | 92 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 124 | 124 registered, 94 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -5945,6 +5945,8 @@ round that names the hypothesis, control roles included.
 | [H-320](packing/campaign/hypotheses/H-320-saved-pose-incircles.md) | refuted | Saved-pose incircle discriminator | 1 | All 95 fixed saved poses fail an exact incircle-distance test; no whole-cell exclusion |
 | [H-321](packing/campaign/hypotheses/H-321-incircle-projection-redundancy.md) | confirmed | Whole-cell incircle projection redundancy | 1 | Exact P8 diagnostic detects 102 proper pair constraints; no ordinary exclusion or LP result |
 | [H-322](packing/campaign/hypotheses/H-322-incircle-disk-projection.md) | confirmed | Exact incircle-disk projection | 1 | Exact disk diagnostic detects 114 proper pair constraints and zero ordinary-impossible pairs |
+| [H-323](packing/campaign/hypotheses/H-323-shared-centre-endpoint-control.md) | unresolved | Exact rational endpoint calibration under the originally registered r3 action | 1 | exp315 refused wrong canonical mask before E/D/H; fresh unstarted; prospective f1 correction only |
+| [H-324](packing/campaign/hypotheses/H-324-shared-centre-explicit-f1-control.md) | open | Separately registered explicit-f1 endpoint calibration with identical inputs and limits | 0 | Original exp315 refusal preserved;43 synthetic controls pass; exp316 unrun at registration |
 
 ### Confirmed
 
@@ -6292,7 +6294,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 243 rounds registered in `series-000`.
+There are 244 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5827.4 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6579,6 +6581,7 @@ archive beside it.
 | [exp-312](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md) | 17 | target | H-320 | Exact saved-pose incircle distances | All 95 fixed poses fail; 12920 pairs checked per phase; no ordinary exclusion | rejected |
 | [exp-313](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-313-h-321-incircle-projection-redundancy.md) | 17 | target | H-321 | Exact whole-cell P8 projection diagnostic | 102 proper pair constraints; fresh payload agreement; no ordinary exclusion | accepted |
 | [exp-314](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-314-h-322-incircle-disk-projection.md) | 17 | target | H-322 | Exact whole-cell disk projection diagnostic | 114 proper pair constraints; zero ordinary-impossible pairs; fresh payload agreement | accepted |
+| [exp-315](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-315-h-323-shared-centre-endpoint-refusal.md) | 17 | calibration | H-323 | Registered r3 endpoint frame control | Wrong canonical-mask guard refused; E/D/H and fresh unstarted; no mathematical contradiction | unresolved |
 
 ### Cost and provenance
 
@@ -6827,10 +6830,11 @@ archive beside it.
 | exp-312 | Fixed saved-pose incircle discriminator | 2.058 s | — | criterion | All fixed poses rejected; no ordinary exclusion |
 | exp-313 | Exact whole-cell P8 projection diagnostic | 1.458 s | — | criterion | 102 proper pair constraints; diagnostic only |
 | exp-314 | Exact whole-cell disk projection diagnostic | 1.752 s | — | criterion | 114 proper pair constraints; diagnostic only |
+| exp-315 | Construction120s/fresh120s; outerTERM240/KILL250; sampled4GiB per live process | 2.479017708043102 s | — | guard | `a056038e4`; original r3 frame refused, fresh unstarted |
 
-### What the 243 rounds jointly establish
+### What the 244 rounds jointly establish
 
-The 243 rounds use 2512.1 agent-minutes and 5827.4 wall-minutes under the campaign’s
+The 244 rounds use 2512.1 agent-minutes and 5827.4 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

@@ -25,6 +25,13 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/n17_shared_centre_lp.py
+    kind: generated-artifact
+    boundary: >-
+      The generated exp235 physical positive-control witness bytes are held against
+      the identity frozen in the registered endpoint execution manifest across
+      construction and fresh verification processes; this refuses substituted runtime
+      input, not Git source or commit changes.
   - path: packing/devtools/check_n17_saved_pose_incircles.py
     kind: generated-artifact
     boundary: Accepted corner descriptor and full certificate/replay bytes are held by exact artifact identities before used saved-pose validation and after fresh fixed-pose incircle reconstruction; no source or commit pins.

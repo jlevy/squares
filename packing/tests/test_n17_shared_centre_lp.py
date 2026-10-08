@@ -231,6 +231,226 @@ def synthetic_endpoint() -> tuple[
     return witness, names, assignment, {"r3": list(range(24))}, synthetic_polygons()
 
 
+def retained_assignment_metadata() -> tuple[
+    list[str], list[dict[str, Any]], dict[str, list[int]]
+]:
+    # Integer-only exp247 catalogue metadata, accepted through exp308. No witness
+    # or physical cell geometry is used by this fixture.
+    cells = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 18, 20, 21]
+    names = [f"catalogue-{i}" for i in range(24)]
+    assignment = [
+        {"label": label, "cell": names[cell]}
+        for label, cell in zip(range(1, 18), cells, strict=True)
+    ]
+    d4 = {
+        "r3": [
+            2,
+            0,
+            3,
+            1,
+            14,
+            15,
+            5,
+            4,
+            10,
+            11,
+            9,
+            8,
+            6,
+            7,
+            13,
+            12,
+            17,
+            23,
+            20,
+            18,
+            21,
+            19,
+            16,
+            22,
+        ],
+        "f1": [
+            3,
+            1,
+            2,
+            0,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            8,
+            7,
+            6,
+            5,
+            4,
+            23,
+            17,
+            20,
+            21,
+            18,
+            19,
+            22,
+            16,
+        ],
+    }
+    return names, assignment, d4
+
+
+def test_selected_nonidentity_catalogue_action_keeps_legacy_r3_refusal() -> None:
+    names, assignment, d4 = retained_assignment_metadata()
+    cells = [names.index(row["cell"]) for row in assignment]
+    assert sum(1 << cell for cell in cells) == 3439615
+    assert sum(1 << d4["r3"][cell] for cell in cells) == 3730943
+    assert sum(1 << d4["f1"][cell] for cell in cells) == 1900015
+    with pytest.raises(ValueError, match="wrong canonical endpoint orbit"):
+        tool.frame_assignment(names, assignment, d4, budget())
+    assigned, permutation = tool.frame_assignment(names, assignment, d4, budget(), "f1")
+    assert [assigned[label] for label in range(1, 18)] == cells
+    assert permutation == tuple(d4["f1"])
+
+
+@pytest.mark.parametrize("damage", ["missing", "duplicate", "boolean"])
+def test_selected_catalogue_permutation_must_be_complete(damage: str) -> None:
+    names, assignment, d4 = retained_assignment_metadata()
+    if damage == "missing":
+        del d4["f1"]
+    elif damage == "duplicate":
+        d4["f1"][0] = d4["f1"][1]
+    else:
+        d4["f1"][0] = True
+    with pytest.raises(ValueError, match="complete f1 cell permutation"):
+        tool.frame_assignment(names, assignment, d4, budget(), "f1")
+
+
+def test_selected_point_action_distinguishes_asymmetric_r3_and_f1() -> None:
+    point = (Q(3, 4), Q(9, 8))
+    assert tool.frame_point(point, budget()) == (Q(9, 8), tool.U - Q(3, 4))
+    assert tool.frame_point(point, budget(), "f1") == (tool.U - Q(9, 8), tool.U - Q(3, 4))
+    with pytest.raises(ValueError, match="unsupported endpoint frame action"):
+        tool.frame_point(point, budget(), cast(Any, "r0"))
+
+
+def test_selected_f1_uses_same_nonidentity_action_for_cells_and_synthetic_centres() -> None:
+    witness = synthetic_endpoint()[0]
+    names, assignment, d4 = retained_assignment_metadata()
+    cells, point = tool.endpoint_coordinates(
+        witness, names, assignment, d4, synthetic_polygons(), budget=budget(), frame_action="f1"
+    )
+    labels = (1, 5, 2, 6, 3, 7, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)
+    delta = (tool.U - tool.SIDE) / 2
+    expected = {}
+    for row, label in enumerate(labels):
+        original = names.index(assignment[label - 1]["cell"])
+        expected[d4["f1"][original]] = (
+            tool.U - Q(2) - Q(row, 200) - delta,
+            tool.U - Q(2) - Q(row, 100) - delta,
+        )
+    assert cells == tuple(sorted(expected))
+    assert point == tuple(q for cell in sorted(expected) for q in expected[cell])
+
+
+def test_wrong_catalogue_action_is_refused_before_witness_io(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    names, assignment, d4 = retained_assignment_metadata()
+    partition, cover = tmp_path / "partition.json", tmp_path / "cover.json"
+    held = {
+        partition: json.dumps({"orbits": [{"distance": 0, "mask": 1900015}]}).encode(),
+        cover: json.dumps(
+            {
+                "endpoint": {
+                    "family": {
+                        "h256-centroid": {
+                            "one_state": True,
+                            "squares": assignment,
+                        }
+                    }
+                }
+            }
+        ).encode(),
+    }
+    accepted = {"accepted_inputs": {"partition": str(partition), "cover": str(cover), "d4": d4}}
+    monkeypatch.setattr(
+        tool.projection.prior, "intake", lambda *_args: ([], names, [], accepted, held)
+    )
+    with pytest.raises(ValueError, match="wrong canonical endpoint orbit"):
+        tool.endpoint_packet(
+            {"schema": tool.CONTEXT_SCHEMA},
+            tmp_path / "absent-witness.yaml",
+            "unused",
+            budget(),
+        )
+
+
+def test_cli_frozen_frame_choice_is_retained_and_checked_independently(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    descriptor = tmp_path / "descriptor.json"
+    descriptor.write_text("{}", encoding="utf-8")
+    actions: list[str] = []
+
+    def synthetic_construction(*_args: Any, frame_action: tool.FrameAction) -> dict[str, Any]:
+        actions.append(frame_action)
+        return {"model": {}, "point": []}
+
+    monkeypatch.setattr(tool, "endpoint_packet", synthetic_construction)
+    monkeypatch.setattr(tool, "provenance", lambda *_args: {})
+    common = [
+        "--descriptor",
+        str(descriptor),
+        "--witness",
+        "unused",
+        "--witness-sha256",
+        "unused",
+    ]
+    constructed = tmp_path / "constructed.json"
+    assert tool.main([*common, "--frame-action", "f1", "--output", str(constructed)]) == 0
+    envelope = json.loads(constructed.read_text())
+    assert envelope["frame_action"] == "f1"
+    verified = tmp_path / "verified.json"
+    assert (
+        tool.main(
+            [
+                *common,
+                "--frame-action",
+                "f1",
+                "--check",
+                str(constructed),
+                "--output",
+                str(verified),
+            ]
+        )
+        == 0
+    )
+    assert json.loads(verified.read_text())["frame_action"] == "f1"
+    assert actions == ["f1", "f1"]
+    mismatch = tmp_path / "mismatch.json"
+    assert tool.main([*common, "--check", str(constructed), "--output", str(mismatch)]) == 1
+    refused = json.loads(mismatch.read_text())
+    assert refused["frame_action"] == "r3"
+    assert "differs from frozen checker choice" in refused["reason"]
+    assert actions == ["f1", "f1"]  # Refusal precedes reconstruction; no packet adoption.
+    del envelope["frame_action"]
+    missing = tmp_path / "missing-action.json"
+    missing.write_text(json.dumps(envelope))
+    output = tmp_path / "missing-refused.json"
+    assert (
+        tool.main(
+            [*common, "--frame-action", "f1", "--check", str(missing), "--output", str(output)]
+        )
+        == 1
+    )
+    assert "differs from frozen checker choice" in json.loads(output.read_text())["reason"]
+    assert actions == ["f1", "f1"]
+    legacy = tmp_path / "legacy.json"
+    assert tool.main([*common, "--output", str(legacy)]) == 0
+    assert json.loads(legacy.read_text())["frame_action"] == "r3"
+    assert actions == ["f1", "f1", "r3"]
+
+
 def test_synthetic_endpoint_mapping_uses_exact_mean_shift_and_rotation() -> None:
     arguments = synthetic_endpoint()
     cells, point = tool.endpoint_coordinates(*arguments, budget=budget())
@@ -349,7 +569,7 @@ def test_cli_refuses_changed_descriptor_after_proof_work(
     descriptor, output = tmp_path / "descriptor.json", tmp_path / "output.json"
     descriptor.write_text("{}", encoding="utf-8")
 
-    def synthetic_construction(*_args: Any) -> dict[str, Any]:
+    def synthetic_construction(*_args: Any, **_kwargs: Any) -> dict[str, Any]:
         descriptor.write_text('{"changed":true}', encoding="utf-8")
         return packet(model)
 
@@ -379,7 +599,7 @@ def test_fresh_checker_refuses_changed_synthetic_coordinates(
     monkeypatch: pytest.MonkeyPatch, model: tool.Model
 ) -> None:
     original = packet(model)
-    monkeypatch.setattr(tool, "endpoint_packet", lambda *_args: original)
+    monkeypatch.setattr(tool, "endpoint_packet", lambda *_args, **_kwargs: original)
     result = tool.check_endpoint_packet({}, Path("unused"), "unused", original, budget())
     assert result["verification_passed"] is True
     assert result["census_admission_proved"] is False

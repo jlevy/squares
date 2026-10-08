@@ -955,7 +955,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 243 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 244 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1217,7 +1217,8 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-320 | refuted | proof | Saved-Pose Incircle Discriminator |  | 1 |  | 2s wall |
 | H-321 | confirmed | proof | Whole-Cell Incircle Projection Redundancy |  | 1 |  | 1s wall |
 | H-322 | confirmed | proof | Exact Disk Convexification Discriminator |  | 1 |  | 2s wall |
-| H-323 | open | proof | The accepted rational n17 packing supplies an exact feasible endpoint  |  | 0 |  |  |
+| H-323 | unresolved | proof | The accepted rational n17 packing supplies an exact feasible endpoint  |  | 1 |  | 2s wall |
+| H-324 | open | proof | The accepted rational n17 packing supplies an exact feasible endpoint  |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1301,7 +1302,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | exp-231 | series-000 | 11 | Claude Session 156, Opus extra-high lane and coordinator | H-236 | The declared caps ran out with 58 of 256 subtrees open and no counterexample candidate, so H-236 is neither confirmed nor refuted; the remaining subtrees are a bounded computation for the unchanged frozen instrument. |
 | exp-289 | series-000 | 17 | Sol coordinator registers/freezes/supervises/disposes in Session185. | H-298 | Construction resource stop before the coupling predicate: per-row residual piece ceiling64 exceeded after3.176s; fresh unstarted. Sampled supervisor completednormalrc1 in3.507s with cleanup. No mathematical negative. |
 
-### unresolved (62)
+### unresolved (63)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1367,6 +1368,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | exp-298 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes in Session186. | H-306 | Six full exactparity replays completed; process-memory guard ps call timedout after1s, causing ownedgroup termination738.165964s withcompletecleanup. Seventh lacksreceipt/eighthunstarted. The two completeABBA prerequisite is unmet; no speedup verdict/no capchange or automaticrepeat. |
 | exp-306 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-314 | Construction stopped at the registered outer wall ceiling before producing a certificate; fresh verification was unstarted. This is INCOMPLETE, not a mathematical miss or envelope-architecture retirement. Raw journal remains unchanged; report-only phase reconciliation records interruption without inventing a child returncode. Empty logs do not establish the exact internal cause. No automatic unchanged retry. |
 | exp-311 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-319 | INCOMPLETE guard_unavailable: RSSmonitor psaxo timedout1s, runnerreturn-15/cleanuptrue after480.468s. Lastprogress18000nodes doesnot certify tree/trig closure. NineexactRECOVERYe72sourcebytesmatch; original runningjournal preserved, no invented childreturncode. All161/112191343B acquired78.944s. NoFULLPASS/admission/census; stopunchanged withoutretry. |
+| exp-315 | series-000 | 17 | Sol coordinator with Astra mathematical/source review; think-dvcs | H-323 | The registered r3 action gives mask3730943, not canonical1900015; construction refused before E/D/H and primal checking. Fresh verification was unstarted. Finite metadata identifies unique f1=(U-y,U-x) as a prospective corrected frame; the original H323 criterion and manifest remain unchanged. No packing contradiction, exclusion, admission or bound improvement. |
 
 ### blocked (18)
 
@@ -1554,7 +1556,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 
 ## Effort
 
-243 rounds, 2512.1 agent-minutes, 5827.4 wall-minutes.
+244 rounds, 2512.1 agent-minutes, 5827.4 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

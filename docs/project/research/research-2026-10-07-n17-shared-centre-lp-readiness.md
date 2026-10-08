@@ -10,8 +10,13 @@ all pairs share the same seventeen centres.
 The geometry and certificate contract below have sole-Astra mathematical review.
 The [guarded endpoint adapter](../../../packing/devtools/n17_shared_centre_lp.py) and
 synthetic geometry, custody and resource controls are implemented.
-Publication, custody and resource controls passed; the endpoint round is registered as
+Publication, custody and resource controls passed; the original endpoint round is
+recorded as
 [H-323](../../../packing/campaign/hypotheses/H-323-shared-centre-endpoint-control.md).
+The separate explicit-f1 correction is registered as
+[H-324](../../../packing/campaign/hypotheses/H-324-shared-centre-explicit-f1-control.md)
+after sole-Astra final action/custody review and all43 synthetic controls passed.
+The real corrected endpoint is unrun at registration.
 The numerical proposal layer and first-eight pilot remain unimplemented and unexecuted;
 no LP runtime or exclusion is predicted.
 
@@ -137,11 +142,18 @@ guarded reproof.
 
 The accepted
 [exp-235 rational witness](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml)
-has side $S=4675530093604551/10^{15}<U$. The initial positive control uses its exact
-corner means, translated by $(U-S)/2$ and rotated by $r3=(y,U-x)$ into the canonical
-endpoint mask `1900015`. The source row-label mapping is a candidate join; fresh
-original-cell membership and the exact mask are checked directly.
-The exact positive control has not run.
+has side $S=4675530093604551/10^{15}<U$. The original H-323 control used exact corner
+means translated by $(U-S)/2$, with registered rotation $r3=(y,U-x)$.
+[Exp315](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-315-h-323-shared-centre-endpoint-refusal.md)
+refused the canonical-mask guard before E/D/H construction or primal checking; fresh
+verification was unstarted.
+All original-cell membership checks passed.
+The accepted raw assignment mask is `3439615`; r3 gives `3730943`, while the unique
+canonicalizing action f1 gives `1900015`, with coordinates $(U-y,U-x)$. The design and
+source review missed this finite metadata join.
+The original criterion, manifest and receipts remain unchanged and unresolved;
+correcting the premise needs a separate prospective registration and establishes no
+contradiction or feasibility result.
 
 The [synthetic controls](../../../packing/tests/test_n17_shared_centre_lp.py) exercise
 closed touching, points and segments, complete pair and row custody, source label
