@@ -64,6 +64,16 @@ def results() -> str:
 
 
 @pytest.fixture(scope="module")
+def result_bodies() -> dict[str, str]:
+    """Render complete result bodies during setup, before per-test monkeypatches.
+
+    Each preview still renders afresh; its complete context comes from the same
+    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
+    """
+    return site_renders.result_bodies()
+
+
+@pytest.fixture(scope="module")
 def register() -> list[dict]:
     return safe_load(overview_data.RESULTS.read_text(encoding="utf-8"))["results"]
 
@@ -5507,12 +5517,12 @@ def test_a_result_rows_popover_body_comes_from_one_function(
 
 
 def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragment(
-    overview: overview_data.Overview,
+    overview: overview_data.Overview, result_bodies: dict[str, str]
 ) -> None:
     """Both tables retain each complete claim offline; fetched views keep its context."""
     for result in overview.results:
         preview = overview_sections.result_row(result, trigger="row").popover
-        full = overview_sections.result_row_popover_body(result, overview)
+        full = result_bodies[result.id]
         assert overview_sections.prose_html(result.record["claim"]) in preview, result.id
         assert (
             overview_sections.prose_html(result.record["significance"]["rationale"]) in preview
