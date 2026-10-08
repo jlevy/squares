@@ -5,7 +5,7 @@ title: "Import issue422 second SQUISH update: five new counts and four replaceme
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 15
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T21:27:58.586Z
-updated_at: 2026-10-08T00:10:00.320Z
+updated_at: 2026-10-08T00:16:39.909Z
 started_at: 2026-10-07T21:37:07.551Z
 ---
 Pin e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b. New88/199/207/236/302; tighter108/179/180/263, all exact side comparisons strict. Separate nine-certificate layer after frozen PR421 twelve-case5e32 batch; preserve earlier geometries/receipts/credits. Current parser refuses new263 boolean squeezed; explicit bounded metadata decision plus meaningful controls required. Its source print below exact side mustremain quotation and use safe ceiling16.7404196795387766. No feasibility replay/adoption yet; source/README/allnine JSON pinned in squares-new-report-intake.
@@ -46,3 +46,12 @@ Next: repairprofiler withsupportedcapability and getactualfullgate/heavyreceipt;
 
 Checkpoint update: actual lowerhosted f1 CI30SUCCESS26documentedSKIP CLEAN; upper0d25SUCCESS26SKIP5FAIL (validate,suite-a/b/c,requiredaggregate) run37705180742. DedicatedSol repair_upper_ci diagnosing exactupperfailure. Lower unchanged fullprofiler module supported-capability rerun actual2PASS1.65s EXIT0; broadEXIT1 retained. Exact selected heavy phase separatelyRUNNING; combined ordinary+heavy reachable900s budget remainsrequired, no waiver. UpperA/B/C/D actualformalreview publication receipt pr429-whole-review-publication.json:5449863506/5449863621/5449863708/5449863858 all0findings at0d/basef1.
 ActualGitHubdraftrelease406258689 additionally retains operationalrecords703files43897170Boriginal archive7805026B SHA2565202871832454b89669c1fb4ba673e890fa73068cb5181950ef7d2961bbc16ed; actualdownloadMATCH. Includes queueplans, repair/failure/review/native-state receipts as point-in-time checkpoint before later repairs. Separate425138filearchive remainsunchanged. Canonical425storage/publication/replay remainunresolved,0deciders.
+
+Durable checkpoint PR: https://github.com/jlevy/squares/pull/431, draft head66b360c7d99388a694061ee542b7a1c744bba16d on main84881f214. Four documentation files only; independent documentation/link/map/README checks PASS. No source owner index or branch changed. The report is a dated checkpoint; later outcomes belong to this PR body and native notes. Hosted documentation CI pending final watch. Checkpoint bead think-vz6u under think-msos.
+Lower final gate chain: original broad EXIT1 retained, own-process capability replay2PASS1.65s, exact serial heavy phase EXIT0/1PASS185.52s. All selected assertions executed, but ordinary+heavy986.74s exceeds unchanged compound900s ceiling. Fullgreen compound gate NOT established. Performance owner fix_original_stack_ci investigates semantic affected-test selection; budget bead recorded separately. All tier-cost receipts retained; no waivers.
+Upper source repair think-x2gl in progress for17behavioral/4validation ownership failures. Regenerating confirmation revealed actual repeat-adoption drops nine numerical rigidity fields; source owner repairing preservation through documented ownership rather than deleting data or weakening checks. Original0d reviews remain scoped old head; fresh repair review and final hosted CI required.
+Deployed401 full site audit/renderings custody: actual draft release406258689 asset deployed-401-site-verification-and-renderings.tar.gz,108files,30263587B SHA2560134d248097ca8bcff23732d2a97a71347a8b922d5aef685fec3f51136e13696; actual downloaded hash MATCH. Includes original failed probe assumptions and corrected results; does not prove pending422deployment. New issue428 full rational n68 intake recorded in think-v42c; author-reported checks remain external, no deciding checks executed by this session.
+
+CORRECTION from the actual runner receipt (8 October UTC):
+The prior compound-900-second budget diagnosis was wrong. The exact broad-command start receipt command-c30dfd1a66fd4452bbd3f4cf9b12be9e.start.json for run2a901bed9ed345a79ced825056629aa8 records timeout_seconds1800.0. The existing validator selects FAST_SUITE_BUDGET_SECONDS=1800 when affected-test selection is everything. Recorded ordinary command801.22s plus separately completed heavy185.52s totals986.74s, within the existing broad allowance; total cost1170.53s also within the1800 tier. No timeout/budget verdict, cap raise, test skip or assertion weakening occurred. The original broad EXIT1 still remains a real own-process profiler capability failure; unchanged full module2PASS1.65s and selected heavy1PASS185.52s are separate actual receipts completing selected assertions. Never rewrite the broad outer exit as0. Optional selector optimization in think-tl8n is latency work, not a demonstrated merge blocker.
+This correction is being saved on checkpoint PR431 and source PR427. Upper CI repairs remain necessary in think-x2gl, with future-head review and final checks required. Native source/reply/deployment beads remain open until actual integration/publication.

@@ -5,7 +5,7 @@ title: Review current PR reports and plan separate import and verification slice
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -22,7 +22,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T00:10:41.351Z
+updated_at: 2026-10-08T00:16:39.647Z
 started_at: 2026-10-07T19:28:52.536Z
 ---
 User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
@@ -39,3 +39,7 @@ Scientific422 full27completedjobs retainedonupperbranch,9positives18controls bot
 Issue425 frozenv2 complete10inputs and bothacceptedprotocolreviews: ZEROdeciders, noverdict/promotion. DraftGitHubrelease406258689 tagintake-425-preparation-2026-10-07 at https://github.com/jlevy/squares/releases/tag/untagged-5c79f36e3406b6245cdd retains138files archive6669242B SHA25600d4172972c82b2b928bc8427cff24c9a0d3c952da7ec8bf617f55399b8a9d80; manifest28616B SHA2566b7ba4f5011d799975c5ccab543aa9425c35e27b36131ef07e2f6326efd681c5. Actual authenticatedGitHubdownload roundtripMATCH. SeparateenvironmentZIPasset uploaded. BackupisDRAFTrepositorycustody, NOTpublicscientificpublication; canonical425storageunresolved184799Bbeforeactualfacts>109658Bheadroom.
 CheckpointdocumentationPR creationinflight beadthink-vz6u; no sourceownercheckout overwritten. EnvironmentcurrentinstanceGHpush/PR/native-sync/bootstrapworks; lateststartsave stale_base unsaved, tested4filehandoffretainedonGitHubdraftrelease. Freshsetupchatcurrentsettings reconcile/save/publishrequired, no new-taskrestorationclaim.
 Next: repairprofiler withsupportedcapability and getactualfullgate/heavyreceipt; uppergate+hostedchecks, atomicformal430mergeonlycleanreviewed, actualdeployment/results/graphicschecks, final422reply/ledger/closure. Remaining425/419/420/414/399/375/400/405/413/411/366/256 intake staysopenwithseparateevidentialscope.
+
+CORRECTION from the actual runner receipt (8 October UTC):
+The prior compound-900-second budget diagnosis was wrong. The exact broad-command start receipt command-c30dfd1a66fd4452bbd3f4cf9b12be9e.start.json for run2a901bed9ed345a79ced825056629aa8 records timeout_seconds1800.0. The existing validator selects FAST_SUITE_BUDGET_SECONDS=1800 when affected-test selection is everything. Recorded ordinary command801.22s plus separately completed heavy185.52s totals986.74s, within the existing broad allowance; total cost1170.53s also within the1800 tier. No timeout/budget verdict, cap raise, test skip or assertion weakening occurred. The original broad EXIT1 still remains a real own-process profiler capability failure; unchanged full module2PASS1.65s and selected heavy1PASS185.52s are separate actual receipts completing selected assertions. Never rewrite the broad outer exit as0. Optional selector optimization in think-tl8n is latency work, not a demonstrated merge blocker.
+This correction is being saved on checkpoint PR431 and source PR427. Upper CI repairs remain necessary in think-x2gl, with future-head review and final checks required. Native source/reply/deployment beads remain open until actual integration/publication.
