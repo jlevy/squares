@@ -11,6 +11,7 @@ import copy
 import json
 import re
 import tempfile
+from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -81,6 +82,35 @@ def section(n: int, *, confirmed: bool) -> str:
         "optimizer, local-minimum, rigidity, novelty, priority, global-optimality, formal "
         "proof or human-oversight assurance.\n"
     )
+
+
+def ceiling_prose(n: int, case: dict[str, Any], body: str) -> str:
+    """Expose a retained older ceiling without assigning it to the reported pose."""
+    heading = "## The verified upper bound is a ceiling"
+    pattern = rf"\n{heading}\n.*?(?=\n## |\n<!-- This document follows)"
+    body = re.sub(pattern, "", body, flags=re.DOTALL)
+    verified = case["verified_upper_bound"]["value"]
+    reported = case["reported_upper_bound"]["value"]
+    if Fraction(case["verified_upper_bound"]["exact_form"]) == Fraction(
+        case["reported_upper_bound"]["exact_form"]
+    ):
+        return body
+    with localcontext() as context:
+        context.prec = 28
+        gap = Decimal(verified) - Decimal(reported)
+    section = (
+        f"\n{heading}\n\n"
+        f"`verified_upper_bound` retains the earlier construction's certified ceiling "
+        f"${verified}$. The selected `reported_upper_bound` is ${reported}$, smaller "
+        f"by ${gap}$. The verified ceiling is not the value of $s({n})$ and does not "
+        "certify the selected Gupta geometry. Complete native results for that geometry "
+        "are retained; actual private-worker admission and confirming record review "
+        "remain pending.\n"
+    )
+    marker = "\n## The lower bound"
+    if body.count(marker) != 1:
+        raise ValueError("one lower-bound section required for the ceiling comparison")
+    return body.replace(marker, section + marker, 1)
 
 
 def historical_prose(n: int, body: str) -> str:
@@ -177,6 +207,16 @@ def pending_blockers(case: dict[str, Any]) -> list[dict[str, Any]]:
     return blockers
 
 
+def render_selected_case(n: int, document: dict[str, Any], body: str, existing: str) -> str:
+    """Preserve the equal source-bound assessment in its maintained owner rendering."""
+    rendered = "---\n" + dump(document) + "---\n" + body
+    if isinstance(document["packing"].get("rigidity"), dict):
+        from devtools.assess_frontier_rigidity import preserve_block_rendering  # noqa: PLC0415
+
+        rendered = preserve_block_rendering(existing, rendered, n)
+    return rendered
+
+
 def record_cases() -> None:
     """Preflight all fourteen cases, atomically retain originals, then write any case.
 
@@ -202,9 +242,11 @@ def record_cases() -> None:
                 raise ValueError("selected case lacks its complete original custody boundary")
             if houses.reports.EXACT_EVIDENCE not in case["verified_upper_bound"]["evidence"]:
                 blockers = pending_blockers(case)
-                if blockers != case["blockers"]:
-                    case["blockers"] = blockers
-                    plan.append((path, "---\n" + dump(document) + "---\n" + body))
+                case["blockers"] = blockers
+            corrected = ceiling_prose(n, case, body)
+            desired = render_selected_case(n, document, corrected, current)
+            if desired != current:
+                plan.append((path, desired))
             continue
         original = current if retained is None else originals[n]["frontier"]
         if current != original:
@@ -249,6 +291,7 @@ def record_cases() -> None:
         body = historical_prose(n, body).replace(
             FOOTER, section(n, confirmed=False) + "\n" + FOOTER
         )
+        body = ceiling_prose(n, case, body)
         plan.append((path, "---\n" + dump(document) + "---\n" + body))
     if not plan:
         return
@@ -296,7 +339,8 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     )
     if count != 1:
         raise ValueError("one Gupta source construction section required")
-    return render_case_verifiers.refresh("---\n" + dump(document) + "---\n" + body)
+    body = ceiling_prose(n, case, body)
+    return render_case_verifiers.refresh(render_selected_case(n, document, body, existing))
 
 
 def register() -> None:

@@ -19,6 +19,7 @@ import yaml
 from devtools import build_known_best_atlas as known_best_builder
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
+from devtools import gupta_house_links as gupta_houses
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinement_sources
 from devtools import render_composite_pdf
@@ -46,6 +47,7 @@ from sqpack.render.model import RenderSpec
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR
 from sqpack.witness import load_witness
 from sqpack.workers import worker_count
+from sqpack.yamlio import safe_load
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
@@ -413,7 +415,8 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         assert (ROOT / entry["witness"]["path"]).is_file()
         assert (ROOT / entry["rendering"]["path"]).is_file()
         frontier = (ROOT / entry["frontier_path"]).read_text(encoding="utf-8")
-        assert f"    - {entry['witness']['id']}\n" in frontier
+        case = safe_load(frontier.split("---\n", 2)[1])["packing"]
+        assert entry["witness"]["id"] in case["reported_upper_bound"]["witnesses"]
         if n in sampled:
             _assert_witness_agrees_with_entry(entry, release_by_n)
 
@@ -442,7 +445,18 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
             else None
         )
         source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
-        if n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
+        if (
+            n in gupta_houses.NUMBERS
+            and witness["source"]["key"] == gupta_houses.reports.SOURCE_KEY
+        ):
+            assert ROOT / entry["witness"]["path"] == gupta_houses.house_path(n)
+            assert (
+                entry["source"]["path"]
+                == gupta_houses.reports.fact_path().relative_to(ROOT).as_posix()
+            )
+            assert witness["source"]["path"] == entry["source"]["path"]
+            gupta_houses.check_houses([n])
+        elif n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
             # Complete rational and number-field records retain all poses and deciding
             # inputs. Admit their entire house; a matching path alone is insufficient.
             facts = ryxu_radical.fact_path() if n == 51 else ryxu_reports.fact_path()

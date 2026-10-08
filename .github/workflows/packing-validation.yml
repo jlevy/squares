@@ -1401,6 +1401,7 @@ jobs:
             /packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/
             /packing/resources/web/rehwaldt-n68-refinement-2026-10-07/
             /packing/resources/web/ry-xu-new-packings-2026-10-08/
+            /packing/resources/web/gupta-square-packing-refinements-2026-10-08/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
