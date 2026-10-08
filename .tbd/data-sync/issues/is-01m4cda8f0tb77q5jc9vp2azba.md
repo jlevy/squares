@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,17 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T01:50:11.615Z
+updated_at: 2026-10-08T01:55:20.037Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
+
+LATEST FINAL-HOSTED FAILURE / DURABLE PROOF — 2026-10-08 UTC:
+Upperef472 exacthostedrun37714712284 completed28SUCCESS26SKIP2FAIL; actualsolecause test_linked_proof_batch_matches_all_fresh_standalone_checks call45.41s >=unchanged45s pertestPRlimit. SuiteD172.50/143 advisorytierisnotunderlyingfailure. RequiredaggregatefollowssuiteD. Correctness assertionspassed; thisisstillarealrequiredCI failure, no mergeallowed. Solsourceownerrepairsworkcost andAstraindependentsemanticsanalysis active; no caps/assertions/scienceweakened.
+FullsourcealreadyGitHub-saved ef472/lower3345/checkpoint91c6/refinementdraft78229. Download-verified latestincrementalarchive squares-completed-gates-state-20261008.tar.gz4708390B SHA256f2b7b22f0a6bc97f2d32fb5ee5aeb7ace69a4c90b001d9ceefce67e0300ff9ae: ALL1769downloadedmembers siz/hashMATCH manifest; all5assetsMATCH, downloadedfinalupperGitbundleverifyEXIT0. Actualproof final-state-github-roundtrip-receipt.json uploadedwith currentlinkednativeexport. Earlierarchivesimmutable. Snapshot01:51:49precededterminalCI; thisfailureandsubsequentrepair remainslaterobservation, notrewrittenarchive. BothsourcePR/431bodies now explicitlyrequiredCI failureandopenrepair; originalgatesretain exactscope.
+Read-only auditor verified434PUBLICprereleasearchive1689220B SHA2784fde... andall103payloadmembers70533258B+files.json hashes/sizes. Publicfilecustodygapcompleted, butproductionstoragecensus/semanticadmission/finalscientificreview/promotionstillpendingcoowner. 425compact10childEXIT0 and428THREEsource-programjobsscopeindependentlyread; no claimcloud428FIVEprojectrouteprotocolran. Keep434draft andexcludedfrom427+429merge.
 
 LATEST TRANSPORT / CONCURRENT INTAKE UPDATE — 2026-10-08 UTC:
 Upper429 ef47295da87143b96b3b8a66ca6dd84493b953dd actual nonforce push SUCCEEDED and gitlsremote exactSHA matched. Normal merge068ca510 preserves2e3f/807 and lower3345; documented pin101026bd.23release tests/raw0, pinowner and324regularizedproducerPASS. Exact finaltree equals807, allother bytes vsvalidated2aeb unchanged beyondnineatlasrefs+pin. Fresh independentAstra finalreviewACCEPT0findings; all1762squares7048corners bindverifiedcertificates. Formal current-head ReviewI published; upper markedready. Terminal hostedCIpending. Full2aeb63selectedpush/785.600s/rawEXIT0 retains originalsourceheadscope. Checkpoint431body rewritten currentstate, OR9PASS, actualGHupdated.

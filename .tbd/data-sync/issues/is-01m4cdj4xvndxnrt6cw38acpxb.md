@@ -5,7 +5,7 @@ title: Repair PR429 final-head hosted contracts and generated owners
 kind: bug
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -16,12 +16,17 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:10:41.979Z
-updated_at: 2026-10-08T01:53:00.006Z
+updated_at: 2026-10-08T01:55:19.511Z
 started_at: 2026-10-08T00:11:46.371Z
 ---
 CI run37705180742 at0d01524b has25SUCCESS26SKIP5FAIL. Preserve exact17 behavioral failures across suites A12/B4/C1 and4 validation-owner failures. Repair historical packet and canonical citation scope, selected proof snapshot/index controls, mutable fixture-root ownership, exact integrity trust boundaries, verified-ceiling consumer census, and generated frontier/doc/ceiling prose. Dedicated GPT6.1Sol repair_upper_ci owns source; root owns native and GitHub. Full gate, fresh review of source delta, hosted CI, deployment remain pending. Original wholeA/B/C/D zero findings stay scoped to old0d head, not future repair.
 
 ## Notes
+
+LATEST FINAL-HOSTED FAILURE / DURABLE PROOF — 2026-10-08 UTC:
+Upperef472 exacthostedrun37714712284 completed28SUCCESS26SKIP2FAIL; actualsolecause test_linked_proof_batch_matches_all_fresh_standalone_checks call45.41s >=unchanged45s pertestPRlimit. SuiteD172.50/143 advisorytierisnotunderlyingfailure. RequiredaggregatefollowssuiteD. Correctness assertionspassed; thisisstillarealrequiredCI failure, no mergeallowed. Solsourceownerrepairsworkcost andAstraindependentsemanticsanalysis active; no caps/assertions/scienceweakened.
+FullsourcealreadyGitHub-saved ef472/lower3345/checkpoint91c6/refinementdraft78229. Download-verified latestincrementalarchive squares-completed-gates-state-20261008.tar.gz4708390B SHA256f2b7b22f0a6bc97f2d32fb5ee5aeb7ace69a4c90b001d9ceefce67e0300ff9ae: ALL1769downloadedmembers siz/hashMATCH manifest; all5assetsMATCH, downloadedfinalupperGitbundleverifyEXIT0. Actualproof final-state-github-roundtrip-receipt.json uploadedwith currentlinkednativeexport. Earlierarchivesimmutable. Snapshot01:51:49precededterminalCI; thisfailureandsubsequentrepair remainslaterobservation, notrewrittenarchive. BothsourcePR/431bodies now explicitlyrequiredCI failureandopenrepair; originalgatesretain exactscope.
+Read-only auditor verified434PUBLICprereleasearchive1689220B SHA2784fde... andall103payloadmembers70533258B+files.json hashes/sizes. Publicfilecustodygapcompleted, butproductionstoragecensus/semanticadmission/finalscientificreview/promotionstillpendingcoowner. 425compact10childEXIT0 and428THREEsource-programjobsscopeindependentlyread; no claimcloud428FIVEprojectrouteprotocolran. Keep434draft andexcludedfrom427+429merge.
 
 CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
 Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
