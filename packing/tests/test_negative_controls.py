@@ -39,6 +39,21 @@ COMPOSITE_VECTORS = frozenset(
     ROOT / "atlas/known-best" / name
     for name in ("known-best-1-100.svg", "known-best-1-324.svg")
 )
+SESSION163_PUSH_LOGS = frozenset(
+    ROOT / "campaign/agent-sessions" / name
+    for name in (
+        "session-163-push-recovery.log",
+        "session-163-push-refinement.log",
+        "session-163-push-final.log",
+    )
+)
+HISTORICAL_DIAGNOSTIC_OUTPUTS = frozenset(
+    ROOT / relative
+    for relative in (
+        "campaign/explorations/X048-session-177-cached-collision/receipts/profile-packet.json",
+        "campaign/series/series-000-smoke-and-calibration/results/bc-201-n11-tight-cell-census.json",
+    )
+)
 #: The 2026-10-06 breach's answer (PR #382): receipt roots traced as no control's input.
 RETAINED_RECEIPT_ROOTS = frozenset(
     ROOT / relative
@@ -768,6 +783,135 @@ def test_historical_byproducts_are_kept_in_git_but_not_workers(
         / "bentz2016-one-spare-receipt.md",
     ):
         assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def test_historical_diagnostics_have_no_declared_worker_consumer() -> None:
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for source in HISTORICAL_DIAGNOSTIC_OUTPUTS:
+        assert source.is_file()
+        assert all(
+            (ROOT / control["file"]).resolve() != source and source.name not in control["run"]
+            for control in specification["controls"]
+        )
+    assert not HISTORICAL_DIAGNOSTIC_OUTPUTS.intersection(controls.snapshot_pruned_targets())
+
+
+def test_historical_diagnostics_leave_workers_but_declared_dependencies_return(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Exercise the real copier, counter and private index on a small source fixture."""
+    source_repo = tmp_path / "source"
+    source_root = source_repo / HERE
+
+    def rebase(path: Path) -> Path:
+        return source_repo / path.relative_to(controls.REPO)
+
+    omitted = {rebase(path): path.read_bytes() for path in HISTORICAL_DIAGNOSTIC_OUTPUTS}
+    for path, payload in omitted.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+    reader = source_root / "devtools/check_results.py"
+    reader.parent.mkdir(parents=True)
+    reader.write_bytes((ROOT / "devtools/check_results.py").read_bytes())
+    record = source_root / "campaign/README.md"
+    record.write_text("Retained diagnostic record.\n")
+    register = source_root / "frontier/results.yaml"
+    register.parent.mkdir()
+    register.write_text("results: []\n")
+
+    prunes = frozenset(rebase(path) for path in PRUNE)
+    linked_roots = tuple(rebase(path) for path in controls.LINKED_PRUNE_ROOTS)
+    descend = frozenset(
+        ancestor
+        for path in prunes
+        for ancestor in path.parents
+        if source_root in (ancestor, *ancestor.parents)
+    )
+    monkeypatch.setattr(controls, "REPO", source_repo)
+    monkeypatch.setattr(controls, "ROOT", source_root)
+    monkeypatch.setattr(controls, "PRUNE", prunes)
+    monkeypatch.setattr(controls, "DESCEND", descend)
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", linked_roots)
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+
+    for route in ("omitted", "linked", "registered"):
+        if route == "linked":
+            record.write_text(
+                "\n".join(
+                    f"[diagnostic]({os.path.relpath(path, record.parent)})" for path in omitted
+                )
+            )
+            assert set(controls.linked_pruned_targets()) == set(omitted)
+        elif route == "registered":
+            record.write_text("Retained diagnostic record.\n")
+            register.write_text(
+                "results:\n- artifacts:\n"
+                + "".join(
+                    f"  - {path.relative_to(source_repo).as_posix()}\n" for path in omitted
+                )
+            )
+            assert set(result_pruned_targets()) == set(omitted)
+        tree = tmp_path / route
+        clone_tree(tree)
+        assert (tree / reader.relative_to(source_repo)).read_bytes() == reader.read_bytes()
+        assert (tree / record.relative_to(source_repo)).read_bytes() == record.read_bytes()
+        indexed = tracked_files(tree, ".")
+        assert indexed is not None
+        assert tree / reader.relative_to(source_repo) in indexed
+        expected_bytes = reader.stat().st_size + record.stat().st_size + register.stat().st_size
+        for path, payload in omitted.items():
+            target = tree / path.relative_to(source_repo)
+            assert path.read_bytes() == payload
+            if route == "omitted":
+                assert not target.exists()
+                assert target not in indexed
+            else:
+                assert target.read_bytes() == payload
+                assert not target.is_symlink()
+                assert target in indexed
+                expected_bytes += len(payload)
+        assert snapshot_source_bytes() == expected_bytes
+
+
+def test_session163_push_logs_are_not_control_inputs() -> None:
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert SESSION163_PUSH_LOGS <= PRUNE
+    for source in SESSION163_PUSH_LOGS:
+        assert source.is_file()
+        assert source.stat().st_size > 0
+        assert all(
+            (ROOT / control["file"]).resolve() != source and source.name not in control["run"]
+            for control in specification["controls"]
+        )
+
+
+def test_session163_push_logs_leave_workers_while_the_record_survives(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    for source in SESSION163_PUSH_LOGS:
+        relative = source.relative_to(controls.REPO)
+        assert source.is_file()
+        assert relative not in copied_targets
+        assert not (tree / relative).exists()
+    session = ROOT / "campaign/agent-sessions/session-163-native-bounds-and-census.md"
+    assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def test_session163_push_logs_return_when_a_checked_document_links_them(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    document = tmp_path / "linked-logs.md"
+    document.write_text(
+        "\n".join(
+            f"[log]({os.path.relpath(source, tmp_path)})"
+            for source in sorted(SESSION163_PUSH_LOGS)
+        )
+    )
+    monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
+    assert set(controls.linked_pruned_targets()) >= SESSION163_PUSH_LOGS
 
 
 def test_old_validation_archive_is_pruned_while_current_records_survive(

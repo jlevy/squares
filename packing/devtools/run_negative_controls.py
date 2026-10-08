@@ -159,6 +159,18 @@ PRUNE = frozenset(
         ROOT / "campaign/agent-sessions/session-163-push-recovery.log",
         ROOT / "campaign/agent-sessions/session-163-push-refinement.log",
         ROOT / "campaign/agent-sessions/session-163-push-final.log",
+        # Two retained diagnostics have no mutation-control consumer, checked inline
+        # link or registered result dependency: the opt-in Session 177 cached-collision
+        # profile and exp-063's older tight-cell census. Their records and live inputs,
+        # including Session 177's J certificate and compact summary, stay in workers.
+        # These exact files total 798,416 bytes at PR #433's reviewed head; keep them in
+        # Git and let the existing link/result rescue take precedence if a use is added.
+        ROOT
+        / "campaign/explorations/X048-session-177-cached-collision/receipts"
+        / "profile-packet.json",
+        ROOT
+        / "campaign/series/series-000-smoke-and-calibration/results"
+        / "bc-201-n11-tight-cell-census.json",
         # Large, generator-owned rendering outputs are replayed by their dedicated
         # validation steps and are never mutation targets. Copying hundreds of witnesses
         # and renderings into every private worker would exceed the portable snapshot cap.
