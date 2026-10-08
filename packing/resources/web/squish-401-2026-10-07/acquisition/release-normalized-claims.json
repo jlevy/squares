@@ -1,6 +1,6 @@
 {
   "basis": "Safe decimal displays of the source exact rational bounds, rounded upward at the source display precision by the complete replay receipt. Original source finite displays remain in the acquisition and original claims records.",
-  "certificate_receipt": "packing/resources/web/squish-401-2026-10-07/receipts/certification.json",
+  "certificate_receipt": "packing/resources/web/squish-401-2026-10-07/receipts/certification.json.gz",
   "original_claims_record": "packing/resources/web/squish-401-2026-10-07/acquisition/release-claims.json",
   "results": [
     {

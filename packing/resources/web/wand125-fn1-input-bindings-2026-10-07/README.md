@@ -40,8 +40,34 @@ complete eight earlier candidates and receipts, both acquisition records and the
 manifest. At the measured pre-#432 parent, the maintained source-byte command refused
 201,334,850 bytes against the unchanged 201,326,592-byte cap.
 That receipt is an early integration observation.
-Final private-worker admission and storage acceptance await the #432 parent and the
-actual merged snapshot; no input is dropped or linked to make this partial tree fit.
+The frozen #432 parent is now integrated.
+The merged source budget is admitted after lossless complete-receipt retention; actual
+private-worker positive, mutation and restoration admission remains required on the
+final hosted head. No input is dropped or linked to make the tree fit.
+
+## Efficiency Slice: Complete Receipt Retention
+
+The acceptance rule is unchanged source-byte admission, complete decoded receipt
+identity, and every FN1 input retained independently.
+The original SQUISH #401 certification receipt stores all eleven deciding inputs and
+full native results as 230,218 gzip bytes instead of 1,661,609 plain bytes, saving
+1,431,391 bytes. Decoded bytes equal the complete Git-parent receipt; no source gzip
+asset is recompressed.
+The receipt reader retains its 4,000,000-byte decoded limit, ordinary JSON its
+1,000,000-byte limit, and the worker its 201,326,592-byte source cap.
+
+The merged budget measurement is 200,003,301 bytes before the final twin regression and
+this note, leaving 1,323,291 bytes.
+Final publication remeasures the complete tree.
+All 52 bounded receipt/source controls pass in 8.32 seconds, with the bulk worker
+explicitly excluded; scoped Ruff and BasedPyright report no findings.
+Independent review confirms complete decoded byte equality, physical-path twin
+comparisons, legacy plain-only admission and full previous-roster preservation on
+partial producer runs.
+It reproduces 13 controls in 6.82 seconds and the six final twin/producer checks in 1.33
+seconds. These are custody and representation checks, without geometry replay or changes
+to claims, bounds or assurance ratings.
+The actual hosted worker remains pending; source acceptance is not a worker pass.
 
 ## Retained Commands
 

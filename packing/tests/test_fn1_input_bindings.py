@@ -15,6 +15,7 @@ import pytest
 
 from devtools import acquire_source as acquisition
 from devtools import run_negative_controls as controls
+from devtools import squish_upper_bound_packets as squish
 from devtools import wand125_fn1_bindings as fn1
 from devtools.retained_data import compressed_path, read_retained_bytes
 
@@ -178,6 +179,7 @@ def test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant(
 ) -> None:
     scientific = fn1.private_input_paths()
     assert set(scientific) <= set(controls.COPY_SEPARATELY)
+    complete_inputs = (*scientific, squish.receipt_path())
     assert controls.snapshot_source_bytes() <= controls.SNAPSHOT_MAX_BYTES
     worker = tmp_path / "worker"
     copied: list[Path] = []
@@ -185,14 +187,14 @@ def test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant(
 
     def counted_copy(source: Any, target: Any, **kwargs: Any) -> Any:
         path = Path(source)
-        if path in scientific:
+        if path in complete_inputs:
             copied.append(path)
         return original_copy(source, target, **kwargs)
 
     monkeypatch.setattr(controls.shutil, "copy2", counted_copy)
     controls.clone_tree(worker)
-    assert all(copied.count(path) == 1 for path in scientific)
-    for path in scientific:
+    assert all(copied.count(path) == 1 for path in complete_inputs)
+    for path in complete_inputs:
         private = worker / path.relative_to(fn1.REPO)
         assert private.is_file()
         assert not private.is_symlink()
@@ -238,3 +240,39 @@ def test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant(
         timeout=45,
     )
     assert restored.returncode == 0, restored.stdout + restored.stderr
+
+    squish_path = worker / squish.receipt_path().relative_to(squish.REPO)
+    squish_bytes = squish_path.read_bytes()
+    complete_receipt = squish.read_json(squish_path)
+    assert {row["n"] for row in complete_receipt["cases"]} == set(squish.NUMBERS)
+    assert all(
+        len(row["checker_input"]["squares"]) == row["n"] for row in complete_receipt["cases"]
+    )
+    squish_command = [sys.executable, "-m", "devtools.squish_upper_bound_packets", "check"]
+
+    def check_squish() -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            squish_command,
+            cwd=worker / controls.HERE,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=45,
+        )
+
+    positive = check_squish()
+    assert positive.returncode == 0, positive.stdout + positive.stderr
+    for mutant in ("native", "input"):
+        value = squish.read_json(squish_path)
+        if mutant == "native":
+            value["cases"][0]["exact_verify"]["verification_passed"] = False
+        else:
+            value["cases"][0]["checker_input"]["squares"][0]["corners"][0][0] = "-1"
+        squish_path.write_bytes(gzip.compress(json.dumps(value).encode(), mtime=0))
+        negative = check_squish()
+        assert negative.returncode == 2
+        assert "checker coverage" in negative.stderr or "semantic mismatch" in negative.stderr
+        squish_path.write_bytes(squish_bytes)
+        restored_squish = check_squish()
+        assert restored_squish.returncode == 0, restored_squish.stdout + restored_squish.stderr
