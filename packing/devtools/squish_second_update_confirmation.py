@@ -869,6 +869,11 @@ def _adopt_verified(n: int, existing: str, generated: str | None, bound: dict[st
         raise original.PacketError(
             "selected confirmation ceiling differs from admitted evidence"
         )
+    # Re-publishing the same confirmed pose keeps its separately owned assessment.
+    # Initial confirmation cannot transfer rigidity from the earlier geometry.
+    current_rigidity = (
+        copy.deepcopy(case["rigidity"]) if EXACT_EVIDENCE in declarations else None
+    )
     # The reported-only owner still rebuilds its own report and lower/history lanes.
     # Its temporary older verified lane is replaced only after complete admission.
     case["verified_upper_bound"] = copy.deepcopy(prior["prior_verified"])
@@ -881,9 +886,14 @@ def _adopt_verified(n: int, existing: str, generated: str | None, bound: dict[st
     )
     adapted = reported.adopt_report(n, provisional, generated)
     _, front, body = adapted.split("---\n", 2)
+    body = body.replace(
+        "## Earlier SQUISH update\n\nNate Chaoweeraprasit",
+        "## Earlier SQUISH update\n\nPreviously, Nate Chaoweeraprasit",
+    )
     document = safe_load(front)
     case = document["packing"]
     case["verified_upper_bound"] = bound
+    case["rigidity"] = current_rigidity
     conjecture = prior["prior_conjectured_optimum"]
     if conjecture is not None and Fraction(bound["exact_form"]) < Fraction(conjecture):
         pending_claim = (

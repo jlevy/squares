@@ -320,6 +320,11 @@ def test_confirmed_case_adoption_preserves_lower_and_refutes_older_conjecture(
     assert private == confirmation.REPO
     current = (SOURCE / "packing/frontier/n-088.md").read_text()
     adapted = confirmation.adopt_verified(88, current)
+    assert confirmation.shared.json_bytes(
+        confirmation.safe_load(adapted.split("---\n", 2)[1])["packing"]["rigidity"]
+    ) == confirmation.shared.json_bytes(
+        confirmation.safe_load(current.split("---\n", 2)[1])["packing"]["rigidity"]
+    )
     case = confirmation.safe_load(adapted.split("---\n", 2)[1])["packing"]
     prior = confirmation.reported.prior_lanes()[88]
     for field, value in prior["hand_authored_lower"].items():

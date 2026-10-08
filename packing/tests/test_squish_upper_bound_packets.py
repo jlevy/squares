@@ -324,12 +324,29 @@ def test_acquisition_binds_all_nine_before_writing(
     assert acquisition["cases"][-2]["reported_metadata"]["squeezed"] is True
 
 
+def historical_second_report(n: int) -> str:
+    """Project the historical source report and earlier ceiling without publishing it."""
+    current = (second.REPO / f"packing/frontier/n-{n:03d}.md").read_text()
+    _, front, body = current.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    fact = second.read_fact(n)
+    case["reported_upper_bound"].update(
+        value=first.display(fact["side"]),
+        exact_form=fact["side"],
+        source_key=second.SOURCE_KEY,
+        evidence=[second.EVIDENCE_ID],
+    )
+    case["verified_upper_bound"] = copy.deepcopy(second.prior_lanes()[n]["prior_verified"])
+    projected = "---\n" + yaml.safe_dump(document, sort_keys=False) + "---\n" + body
+    return second.adopt_report(n, projected)
+
+
 @pytest.mark.parametrize("n", second.NUMBERS)
 def test_second_update_reconstructs_report_without_replacing_prior_verified_lane(
     n: int,
 ) -> None:
-    path = second.REPO / f"packing/frontier/n-{n:03d}.md"
-    current = path.read_text()
+    current = historical_second_report(n)
     expected = second.adopt_report(n, current)
     _, front, body = current.split("---\n", 2)
     document = safe_load(front)
@@ -390,7 +407,7 @@ def test_second_update_refuses_unknown_confirmation_and_output_escape(
 
 def test_second_update_adoption_keeps_title_and_leads_with_current_report() -> None:
     """Temporal qualification belongs to a paragraph, never to the Markdown title."""
-    text = (second.REPO / "packing/frontier/n-088.md").read_text()
+    text = historical_second_report(88)
     _, front, body = text.split("---\n", 2)
     body = re.sub(
         rf"\n{second.HEADING}\n.*?{re.escape(second.REPORT_END)}\n",

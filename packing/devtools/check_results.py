@@ -433,17 +433,21 @@ def repository_file_problem(path: str) -> str | None:
     try:
         target.relative_to(REPO.resolve())
     except ValueError:
-        from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
-        from devtools import squish_second_update_house_links as house  # noqa: PLC0415
         from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
+        from devtools.squish_second_update_packets import NUMBERS  # noqa: PLC0415
 
         proofs = {
-            second.certificate_path(n).relative_to(REPO).as_posix() for n in second.NUMBERS
+            f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+            for n in NUMBERS
         }
-        houses = {house.house_path(n).relative_to(REPO).as_posix() for n in house.LINK_NUMBERS}
+        houses = {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in NUMBERS if n != 263}
         if path in proofs:
+            from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+
             return second.linked_certificate_problem(path, repository=REPO)
         if path in houses:
+            from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+
             return house.linked_house_problem(path, repository=REPO)
         return linked_certificate_problem(path, repository=REPO)
     if not target.is_file():

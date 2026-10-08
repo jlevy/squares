@@ -976,6 +976,8 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     and would put a reader's `attic/` scratch in it (PR 207).
     """
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
+    from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
 
     tree, _copied = control_snapshot
     listed = tracked_files(tree, ".")
@@ -995,6 +997,12 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
         packet.certificate_path(n).relative_to(controls.REPO).as_posix()
         for n in packet.RESULT_NUMBERS
     }
+    linked_proofs.update(
+        second.certificate_path(n).relative_to(controls.REPO).as_posix() for n in second.NUMBERS
+    )
+    linked_proofs.update(
+        house.house_path(n).relative_to(controls.REPO).as_posix() for n in house.LINK_NUMBERS
+    )
     for relative in linked_proofs:
         assert (tree / relative).is_file()
         assert (tree / relative).resolve() == (controls.REPO / relative).resolve()
