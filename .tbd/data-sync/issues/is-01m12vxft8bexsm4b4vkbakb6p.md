@@ -3,14 +3,18 @@ type: is
 id: is-01m12vxft8bexsm4b4vkbakb6p
 title: "n=29: eliminate the retained six-equation system for an exact side"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: codex-polynomial-resume-01a11d93
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
+hold: null
+hold_until: null
 created_at: 2026-08-28T00:22:03.847Z
-updated_at: 2026-08-28T01:26:23.417Z
+updated_at: 2026-10-08T22:46:28.138Z
+started_at: 2026-10-08T22:46:28.138Z
 ---
 resources/papers/kingbird-square-29-provenance.svg retains Ellsworth's full construction: six defining equations f1..f6 in six unknowns (s,a,b,c,d,i), solved at line 24 with FindRoot at WorkingPrecision 200 -- numerically, never eliminated, so no degree was ever published. cases/kingbird29/verify_svg.py replays the equations numerically only.
 
