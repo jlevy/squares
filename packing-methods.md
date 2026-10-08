@@ -362,7 +362,9 @@ regressed proved controls.
 Basin hopping over the LP quench improved ordinary test cells but came nowhere near a
 record; it also exposed the need to repair floating-point LP solutions monotonically
 before calling them packings.
-Differentiable simulation at the $n=11$ contact kink performed worse than plain descent.
+At the $n=11$ contact kink, the tested Powell and Nelder–Mead angle searches performed
+worse than finite-difference descent
+([exp-006](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md)).
 These are scoped negative results, not impossibility theorems
 ([simulation-mechanism survey](docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md)).
 
