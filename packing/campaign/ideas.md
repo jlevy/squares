@@ -1175,6 +1175,20 @@ wider centre cases; additional progress is measured from the union of surviving 
   anything. C2 potential13orbits84states/ZERO95tail; no endpointcapture/globaloptimality
   claim. Stop unchanged on refusal/resource/failure.
 
+- **H-320 — Saved-Pose Incircle Discriminator.** Bind the complete accepted308
+  criterion_missed/full216/95 certificate and identical freshPASS receipt.
+  Validate every USED saved original-cell/class pose with all reconstructed linear
+  walls/polygon/class rows, h>=1/2 and2h*h<=1. Check EVERY95*136=12920 exact
+  centre-distance pairs in lex catalogue order: distance squared<1 rejects ONLY those
+  fixed centres for every square orientation; equality1 is compatible.
+  Primary at least one incircle-compatible saved assignment, complete95/12920 accounting
+  and full fresh payload/custody equality.
+  All95 rejected is complete criterion_missed and stops orientation-stage work.
+  Survivors are orientation_realization_candidates only, never physical packing,
+  ordinary cell exclusion, census admission or global bound.
+  No alternate poses/choices, no old corner classification/DP replay, no endpoint
+  scientific-pose distance test.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

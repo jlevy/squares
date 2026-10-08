@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-n11-envelope-transfer.md, role: research-report, authority: record, lifecycle: retained}

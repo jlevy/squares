@@ -3237,7 +3237,7 @@ sessions:
   title: "n17 Six-Hour Mathematical and Efficiency Continuation"
   status: in_progress
   primary_bead: think-2mzl
-  phases: 8
+  phases: 10
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session186-checkpoint0148.yaml

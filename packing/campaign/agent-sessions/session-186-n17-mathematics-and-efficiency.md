@@ -306,7 +306,7 @@ session:
       for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
       currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
       with same-recovery normalCargo reuse.'
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: Positive ordinary metadata relevance and zero95-tail coverage select bounded external
       intake beside deeper joint-constraint research.
@@ -321,13 +321,57 @@ session:
       alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
     fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
       mathematical lane moving beside mechanical blockers.
+    outcome: '310 complete hardened HEADER_ONLY_PASS for C1/C2, source2ada/10 byte observations/4.170s;
+      no FULL or admission. 311 source and 300s acquisition/2400s FULL registered before target. Primary
+      e72 sealed after normal hook repaired staged/unstaged formatter conflict; recovery exacte72 acquisition
+      launched. Saved-pose source Astra CLEAR/projectRuff PASS/30 unique author batch controls; ROOT13
+      synthetic PASS0.32s, H320/312 registered04:48:39 before actual poses. Push tier955.75s FAILED: 9-worker
+      reachable tests deliberately stopped, actual projectRuff3/ESLint .worktrees findings corrected;
+      integrity/cost causes not yet diagnosed. Full checkpoint04:34:50/latest04:39:59 UNLAUNCHED because
+      source sealing and critically low disk; no full PASS or silently extended gate.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
+    stop_reason: Actual transition2026-10-08T04:49:44Z; nominal04:29:49 overrun through source/CI resource
+      incident and hook repair. Full checkpoint lateststart missed, retained as debt.
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
+  - workflow: research-loop
+    focus: insight
+    recording: contemporaneous
+    clock_role: work
+    commitment: BC-451
+    bead: think-98mg
+    objective: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Header premise accepted; disk-limited full validation cannot hold the mathematical
+      lanes idle.
+    budget_minutes: 30
+    started_at: '2026-10-08T04:49:44Z'
+    deadline_at: '2026-10-08T05:19:44Z'
+    expected_output: Actual311 acquisition/FULL disposition or honest interruption; actual312 full fresh
+      result or resource stop; current PR/CI and Astra whole-cell contract.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
-      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
-      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
-      with same-recovery normalCargo reuse.'
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
   primary_bead: think-2mzl
   status: in_progress
   budget:
@@ -1389,21 +1433,33 @@ session:
     - native release upload
   - task: Mathematical header/result review and deeper95-tail joint constraint strategy
     operator: /root/astra_strategy; GPT-6 Astra xhigh
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: '310 complete hardened HEADER_ONLY_PASS for C1/C2, source2ada/10 byte observations/4.170s;
+      no FULL or admission. 311 source and 300s acquisition/2400s FULL registered before target. Primary
+      e72 sealed after normal hook repaired staged/unstaged formatter conflict; recovery exacte72 acquisition
+      launched. Saved-pose source Astra CLEAR/projectRuff PASS/30 unique author batch controls; ROOT13
+      synthetic PASS0.32s, H320/312 registered04:48:39 before actual poses. Push tier955.75s FAILED: 9-worker
+      reachable tests deliberately stopped, actual projectRuff3/ESLint .worktrees findings corrected;
+      integrity/cost causes not yet diagnosed. Full checkpoint04:34:50/latest04:39:59 UNLAUNCHED because
+      source sealing and critically low disk; no full PASS or silently extended gate.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
     files:
     - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
-    checks: []
+    checks:
+    - Exact310 receipts/source match; source controls scoped as stated; no currentfull PASS.
     uncertainty: Header scope/FULL external proof remain unverified until actual checks; global stationarity
       lemmas hand-derived and not independently formalized; currentfull certificationopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
-      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
-      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
-      with same-recovery normalCargo reuse.'
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
     phase: 9
     budget_minutes: 30
     started_at: '2026-10-08T03:59:49Z'
@@ -1426,22 +1482,34 @@ session:
     - native release upload
   - task: Hardened header preflight and bounded external FULL replay readiness
     operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: '310 complete hardened HEADER_ONLY_PASS for C1/C2, source2ada/10 byte observations/4.170s;
+      no FULL or admission. 311 source and 300s acquisition/2400s FULL registered before target. Primary
+      e72 sealed after normal hook repaired staged/unstaged formatter conflict; recovery exacte72 acquisition
+      launched. Saved-pose source Astra CLEAR/projectRuff PASS/30 unique author batch controls; ROOT13
+      synthetic PASS0.32s, H320/312 registered04:48:39 before actual poses. Push tier955.75s FAILED: 9-worker
+      reachable tests deliberately stopped, actual projectRuff3/ESLint .worktrees findings corrected;
+      integrity/cost causes not yet diagnosed. Full checkpoint04:34:50/latest04:39:59 UNLAUNCHED because
+      source sealing and critically low disk; no full PASS or silently extended gate.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
     files:
     - packing/devtools/check_n17_bb_header.py
     - packing/tests/test_check_n17_bb_header.py
-    checks: []
+    checks:
+    - Exact310 receipts/source match; source controls scoped as stated; no currentfull PASS.
     uncertainty: Header scope/FULL external proof remain unverified until actual checks; global stationarity
       lemmas hand-derived and not independently formalized; currentfull certificationopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
-      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
-      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
-      with same-recovery normalCargo reuse.'
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
     phase: 9
     budget_minutes: 30
     started_at: '2026-10-08T03:59:49Z'
@@ -1465,24 +1533,36 @@ session:
     - native release upload
   - task: CI projection repair, current PR/issue consolidation and sealed checkpoint readiness
     operator: /root/n17_github_tracker; GPT-6.1 Sol high
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: '310 complete hardened HEADER_ONLY_PASS for C1/C2, source2ada/10 byte observations/4.170s;
+      no FULL or admission. 311 source and 300s acquisition/2400s FULL registered before target. Primary
+      e72 sealed after normal hook repaired staged/unstaged formatter conflict; recovery exacte72 acquisition
+      launched. Saved-pose source Astra CLEAR/projectRuff PASS/30 unique author batch controls; ROOT13
+      synthetic PASS0.32s, H320/312 registered04:48:39 before actual poses. Push tier955.75s FAILED: 9-worker
+      reachable tests deliberately stopped, actual projectRuff3/ESLint .worktrees findings corrected;
+      integrity/cost causes not yet diagnosed. Full checkpoint04:34:50/latest04:39:59 UNLAUNCHED because
+      source sealing and critically low disk; no full PASS or silently extended gate.'
+    evidence:
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/mechanical-summary.json
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md
+    - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
     files:
     - packing/devtools/run_negative_controls.py
     - packing/tests/test_negative_controls.py
     - SYNOPSIS.md
     - packing/campaign/ledger.md
-    checks: []
+    checks:
+    - Exact310 receipts/source match; source controls scoped as stated; no currentfull PASS.
     uncertainty: Header scope/FULL external proof remain unverified until actual checks; global stationarity
       lemmas hand-derived and not independently formalized; currentfull certificationopen.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
-      for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
-      currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
-      with same-recovery normalCargo reuse.'
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
     phase: 9
     budget_minutes: 30
     started_at: '2026-10-08T03:59:49Z'
@@ -1500,6 +1580,125 @@ session:
     - packing/tests/test_negative_controls.py
     - SYNOPSIS.md
     - packing/campaign/ledger.md
+    excluded_commands:
+    - primary git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Whole-cell mathematical successors and actual311/312 review
+    operator: /root/astra_strategy; GPT-6 Astra xhigh
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
+    checks: []
+    uncertainty: 311 acquisition/FULL unverified; 312 fixed-pose result unknown; no new ordinary admission
+      or fullcurrentCI.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
+    phase: 10
+    budget_minutes: 30
+    started_at: '2026-10-08T04:49:44Z'
+    deadline_at: '2026-10-08T05:19:44Z'
+    expected_output: Actual311 acquisition/FULL disposition or honest interruption; actual312 full fresh
+      result or resource stop; current PR/CI and Astra whole-cell contract.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
+    write_scope:
+    - docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md
+    excluded_commands:
+    - primary git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Saved-pose source/currentrecords mechanics
+    operator: /root/sol_overnight_engineering; GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/devtools/check_n17_saved_pose_incircles.py
+    - packing/tests/test_check_n17_saved_pose_incircles.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
+    checks: []
+    uncertainty: 311 acquisition/FULL unverified; 312 fixed-pose result unknown; no new ordinary admission
+      or fullcurrentCI.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
+    phase: 10
+    budget_minutes: 30
+    started_at: '2026-10-08T04:49:44Z'
+    deadline_at: '2026-10-08T05:19:44Z'
+    expected_output: Actual311 acquisition/FULL disposition or honest interruption; actual312 full fresh
+      result or resource stop; current PR/CI and Astra whole-cell contract.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
+    write_scope:
+    - packing/devtools/check_n17_saved_pose_incircles.py
+    - packing/tests/test_check_n17_saved_pose_incircles.py
+    - SYNOPSIS.md
+    - packing/campaign/ledger.md
+    excluded_commands:
+    - primary git commit
+    - git push
+    - tbd sync
+    - unregistered scientific target
+    - native release upload
+  - task: Scoped CI diagnostics, Trash evidence and publishedPR/issue coordination
+    operator: /root/n17_github_tracker; GPT-6.1 Sol high
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
+    checks: []
+    uncertainty: 311 acquisition/FULL unverified; 312 fixed-pose result unknown; no new ordinary admission
+      or fullcurrentCI.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+      e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+      strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+      unchanged; no unchanged broad test retry.
+    phase: 10
+    budget_minutes: 30
+    started_at: '2026-10-08T04:49:44Z'
+    deadline_at: '2026-10-08T05:19:44Z'
+    expected_output: Actual311 acquisition/FULL disposition or honest interruption; actual312 full fresh
+      result or resource stop; current PR/CI and Astra whole-cell contract.
+    validation_command: Frozen registered-phase argv and POSIX supervision; target-specific fresh payload/custody/endpoint
+      checks; source-only focused controls for transfer; no idle CI waits.
+    kill_condition: No scientific target before reviewed source/preregistration; stop lane on soundness/custody
+      alarm. No overwrite of unique evidence or unaccepted exp284 reuse.
+    fallback: Preserve incomplete contract and prioritize a named complete finite discriminator; keep
+      mathematical lane moving beside mechanical blockers.
+    write_scope:
+    - packing/devtools/run_negative_controls.py
+    - packing/tests/test_negative_controls.py
     excluded_commands:
     - primary git commit
     - git push
@@ -1591,11 +1790,22 @@ session:
   - 309 complete metadata target source d91:1.332s construction/1.202s fresh/3.004s outer; 12source observations
     match. Candidate counts cannot alter ordinary admissions. Externalvolume03:57 has~3GiB; boundedpublishedinput
     acquisition only, no large bootstrap or native export.
+  - 'Half-hour priority checkpoint actual04:45:55Z: mathematical significance leads; disk-heavy fullvalidation
+    held, source/math work continue in all4slots.'
+  - Root required push-tier actual955.75s endedFAIL after intentional owned broadpytestgroup TERM; 9workers/150testfiles
+    are not a fast ordinary edit cycle. Fivefailedsteps retained, targetedRuff/ESLint fixes source-reviewed;
+    integrity/costdiagnosisopen.
+  - 'Full checkpoint preferred04:34:50/latest04:39:59 UNLAUNCHED: source/hook freeze and disk availability.
+    Do not substitute a subset PASS or launch a3600s gate beyond protectedresearchcutoff.'
+  - Disk04:45 external1049604KiB/internal145964KiB; mounted/writable externalcache only; no heavybootstrap.
+    User resourcequestion pending. Trash leaves physicalallocation until userreviews/empties.
+  - e72 normalhook1.56s sealed310header receipts and311source/prospective; acquisition source/output checkout
+    distinction explicit atlaunch.
   stop_reason: null
-  next_action: 'Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay
-    for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish
-    currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59
-    with same-recovery normalCargo reuse.'
+  next_action: Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery
+    e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell
+    strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30
+    unchanged; no unchanged broad test retry.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session186-checkpoint0148.yaml
 ---

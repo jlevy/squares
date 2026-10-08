@@ -315,8 +315,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 21 tentative; 24 in progress |
 | Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 253 | 70 confirmed; 47 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 240 | 90 accepted; 52 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 254 | 70 confirmed; 47 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
+| Experiments | 241 | 90 accepted; 52 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 2 in progress; 1 exhausted |
 | Frontier results | 116 | 116 registered, 86 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -577,6 +577,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Saved-pose incircle discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md) | typed session record | record | retained | — |
 | [n17 Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | research synthesis | record | retained | — |
 | [n17 Case-Preserving Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md) | research synthesis | record | retained | — |
 | [n17 Whole-Square Envelope Transfer from n11](docs/project/research/research-2026-10-07-n17-n11-envelope-transfer.md) | research synthesis | record | retained | — |
@@ -5907,6 +5908,7 @@ round that names the hypothesis, control roles included.
 | [H-317](packing/campaign/hypotheses/H-317-subpattern-relevance.md) | confirmed | SciPy-free joint-certificate candidate relevance | 1 | Complete fresh-matched metadata projection: C1 14 orbits/104 states, C2 13/84, overlap 6/40, union 21/148; both zero in the 95-orbit distance-two tail. Potential coverage is not admission |
 | [H-318](packing/campaign/hypotheses/H-318-bb-header-preflight.md) | confirmed | Original-cell joint-certificate header preflight | 1 | Both compact headers pass; 4.170 s wall, no FULL tree verification or admission |
 | [H-319](packing/campaign/hypotheses/H-319-c2-full-replay.md) | running | Unsampled C2 joint-certificate replay | 1 | Prospective bounded native acquisition and unsampled FULL replay; no admission verdict |
+| [H-320](packing/campaign/hypotheses/H-320-saved-pose-incircles.md) | running | Saved-pose incircle discriminator | 1 | Prospective full95 fixed-pose diagnostic; no target verdict |
 
 ### Confirmed
 
@@ -6251,7 +6253,7 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 240 rounds registered in `series-000`.
+There are 241 rounds registered in `series-000`.
 
 They record 2512.1 agent-minutes and 5819.3 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
@@ -6535,6 +6537,7 @@ archive beside it.
 | [exp-309](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-309-h-317-subpattern-relevance.md) | 17 | target | H-317 | Exact named-D4 subset projection of C1/C2 on the accepted current residue | Fresh-matched potential union 21 orbits/148 states; both candidates match zero distance-two orbits. Metadata only, no proof or admission | accepted |
 | [exp-310](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-310-h-318-bb-header-preflight.md) | 17 | target | H-318 | C2-first then C1 original-cell compact-header checks | Both HEADER_ONLY_PASS; no FULL tree verification or admission | accepted |
 | [exp-311](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md) | 17 | target | H-319 | Native C2 acquisition and unsampled FULL replay | Prospective; no FULL or admission verdict | in-progress |
+| [exp-312](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md) | 17 | target | H-320 | Exact saved-pose incircle distances | Prospective; no packing or ordinary exclusion claim | in-progress |
 
 ### Cost and provenance
 
@@ -6781,9 +6784,9 @@ archive beside it.
 | exp-310 | Two30s header phases inside60s;4GiB sampled per live process | 4.170 s | — | criterion | Both HEADER_ONLY_PASS; no FULL or admission |
 | exp-311 | Bounded native acquisition and unsampled FULL replay | — | — | — | Prospective; no measured target effort |
 
-### What the 240 rounds jointly establish
+### What the 241 rounds jointly establish
 
-The 240 rounds use 2512.1 agent-minutes and 5819.3 wall-minutes under the campaign’s
+The 241 rounds use 2512.1 agent-minutes and 5819.3 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

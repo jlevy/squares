@@ -199,7 +199,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
 | [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
-| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 9 | think-2mzl | Research slice: hardened cheap C1/C2 headers, select at most one bounded FULL C2 replay for ordinary residue if header passes; deeper95-tail joint constraints remain Astra priority. Publish currentmain consolidation/CI repair without waiting forCI. Prepare full checkpoint04:34:50/latest04:39:59 with same-recovery normalCargo reuse. |
+| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `research-loop` (insight) | 10 | think-2mzl | Finish one bounded published C2 acquisition then one unsampled FULL from immutable recovery e72; primary separate frozen saved-pose construction/fresh discriminator. Keep Astra genuine whole-cell strategy and Sol scoped CI/issue reviews beside targets. Research cutoff05:40:09/protected final30 unchanged; no unchanged broad test retry. |
 
 ### Workflow summary
 
@@ -212,7 +212,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 31 | 1 | 95 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
 | `efficiency-loop` | 11 | 1 | 47 | 1 |
-| `research-loop` | 37 | 4 | 153 | 9 |
+| `research-loop` | 37 | 4 | 154 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
@@ -955,7 +955,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 240 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 241 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1214,6 +1214,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | H-317 | confirmed | proof | SciPy-free Joint-Certificate Candidate Relevance |  | 1 |  | 3s wall |
 | H-318 | confirmed | proof | Original-Cell Joint-Certificate Header Preflight |  | 1 |  | 4s wall |
 | H-319 | running | proof | Unsampled C2 Joint-Certificate Replay |  | 1 |  |  |
+| H-320 | running | proof | Saved-Pose Incircle Discriminator |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1497,11 +1498,12 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 | exp-201 | series-000 | 18 | claude-opus-5 | H-201 | Calibration, not a scored round: it freezes p_perturb = 1.0, perturb_scale = 2 and a flat mu = 5 for exp-202 and exp-203, and it turned up a schedule-length effect that is now registered as H-204 rather than folded into an arm. |
 
-### in-progress (1)
+### in-progress (2)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-311 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-319 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
+| exp-312 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-320 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1552,7 +1554,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Effort
 
-240 rounds, 2512.1 agent-minutes, 5819.3 wall-minutes.
+241 rounds, 2512.1 agent-minutes, 5819.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

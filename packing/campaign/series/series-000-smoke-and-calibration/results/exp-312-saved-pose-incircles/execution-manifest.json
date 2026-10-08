@@ -1,0 +1,85 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_saved_pose_incircles",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_saved_pose_incircles",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 60,
+    "fresh_seconds": 60,
+    "combined_term_seconds": 120,
+    "combined_kill_seconds": 130,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 1048576
+  },
+  "criterion": "Bind the complete accepted308 criterion_missed/full216/95 certificate and identical freshPASS receipt. Validate every USED saved original-cell/class pose with all reconstructed linear walls/polygon/class rows, h>=1/2 and2h*h<=1. Check EVERY95*136=12920 exact centre-distance pairs in lex catalogue order: distance squared<1 rejects ONLY those fixed centres for every square orientation; equality1 is compatible. Primary at least one incircle-compatible saved assignment, complete95/12920 accounting and full fresh payload/custody equality. All95 rejected is complete criterion_missed and stops orientation-stage work. Survivors are orientation_realization_candidates only, never physical packing, ordinary cell exclusion, census admission or global bound. No alternate poses/choices, no old corner classification/DP replay, no endpoint scientific-pose distance test.",
+  "registered_at": "2026-10-08T04:48:39.009140+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch"
+}

@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_saved_pose_incircles.py
+    kind: generated-artifact
+    boundary: Accepted corner descriptor and full certificate/replay bytes are held by exact artifact identities before used saved-pose validation and after fresh fixed-pose incircle reconstruction; no source or commit pins.
   - path: packing/devtools/fetch_external_release_inventory.py
     kind: download
     boundary: An external release acquisition inventory is byte-bound before and after inbound asset fetching; published asset sizes and SHA values are verified by the existing generic atomic downloader, with no source or commit pins.
