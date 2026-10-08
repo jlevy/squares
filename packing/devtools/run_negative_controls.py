@@ -236,8 +236,66 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
     }
 )
+# Frozen numerical outputs from earlier research lanes can leave mutation workers;
+# their narrative records, queues and ordinary replay fixtures remain. Selecting
+# leaves rather than whole agendas also leaves the existing inline/result rescue
+# unchanged. The retained audit measured 3,937,571 candidate bytes before protecting
+# those fixtures; no registered mutation target or command names these roots.
+HISTORICAL_RESEARCH_ROOTS = frozenset(
+    ROOT / "campaign/series/series-000-smoke-and-calibration/results" / name
+    for name in (
+        "agenda-037",
+        "agenda-038",
+        "agenda-040",
+        "bc-241-trump-local-theorem-review.json",
+        "exp-053-h-057-n17-parent-bound-parallel-speedup.raw",
+        "exp-204-basin-hopping",
+        "exp-212-h214-preset-signatures.json",
+        "exp-242-n17-core-stress",
+        "exp-243-n17-charge-floor-pilot",
+        "exp-249-n17-first-certified-sub-patterns",
+        "exp-251-n17-overnight-flag-certification",
+        "exp-253-n17-stalls-under-adaptive-rows",
+        "exp-254-n17-second-tranche-flags",
+        "exp-256-n17-third-tranche-flags",
+        "exp-257-n17-unsampled-strata",
+        "exp-258-n17-draw-31",
+    )
+)
+HISTORICAL_REPLAY_INPUTS = frozenset(
+    ROOT / "campaign/series/series-000-smoke-and-calibration/results/agenda-040" / name
+    for name in (
+        "exp-214-n13-399-100-family.json",
+        "exp-214-n13-399-100-family-merged.json",
+        "exp-218-n17-23-5-family.json",
+        "exp-218-n17-23-5-family-merged.json",
+        "exp-219-n11-96-25-clip-covering.json",
+        "exp-220-n11-96-25-class-covering.json",
+        "h230-gap-wedge-port-partial.patch",
+        "h232-threshold-clip-partial.patch",
+    )
+)
+
+
+def historical_research_output(path: Path) -> bool:
+    """Recognize historical output leaves without dropping records or replay inputs."""
+    return (
+        any(path == root or root in path.parents for root in HISTORICAL_RESEARCH_ROOTS)
+        and path.suffix not in {".md", ".yaml", ".yml", ".py", ".js", ".ts"}
+        and not path.name.endswith(".schema.json")
+        and path not in HISTORICAL_REPLAY_INPUTS
+    )
+
+
+HISTORICAL_RESEARCH_OUTPUTS = frozenset(
+    path
+    for root in HISTORICAL_RESEARCH_ROOTS
+    for path in ([root] if root.is_file() else root.rglob("*"))
+    if path.is_file() and historical_research_output(path)
+)
 PRUNE = frozenset(
     {
+        *HISTORICAL_RESEARCH_OUTPUTS,
         second.WITNESSES,
         *(ROOT / relative for relative in HOUSE_LINK_LEAVES),
         # The gate's own marker. A clone that carried it would make the campaign runner
@@ -1683,8 +1741,9 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         for path in inventory
         if (path.parent == regularized_root and path.match(REGULARIZED_WITNESS_PATTERN))
     )
-    effective_prune = PRUNE | regularized
-    roots = frozenset(LINKED_PRUNE_ROOTS) | regularized
+    historical = frozenset(path for path in inventory if historical_research_output(path))
+    effective_prune = PRUNE | regularized | historical
+    roots = frozenset(LINKED_PRUNE_ROOTS) | regularized | historical
     documents = [
         path
         for path in inventory

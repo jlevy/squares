@@ -70,6 +70,7 @@ name: Certificate page
       - packing/devtools/render_n11_lower_bounds_explainer_pdf.py
       - packing/tests/test_pdf_math_browser.py
       - packing/tests/probes/pdf_math_browser/**
+      - packing/tests/probes/paper_publication/**
       - packing/tests/probes/render_n11_optimality_review/**
       - packing/tests/probes/render_n11_threshold_bound_review/**
       - packing/devtools/sans_instances.py

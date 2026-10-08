@@ -1358,6 +1358,42 @@ def test_unread_worker_outputs_leave_workers_while_declared_files_return(
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
+def test_historical_research_outputs_leave_workers_without_losing_custody(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The cap repair omits unused output and preserves every declared or replay input."""
+    tree, rescued = control_snapshot
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    omitted = []
+    for source in controls.HISTORICAL_RESEARCH_OUTPUTS:
+        relative = source.relative_to(controls.REPO)
+        packing_relative = source.relative_to(ROOT).as_posix()
+        assert all(
+            (ROOT / control["file"]).resolve() != source
+            and packing_relative not in control["run"]
+            for control in specification["controls"]
+        )
+        landed = tree / relative
+        if relative in rescued:
+            assert landed.read_bytes() == source.read_bytes()
+        else:
+            omitted.append(source)
+            assert not landed.exists()
+    assert sum(path.stat().st_size for path in omitted) > 3_500_000
+    for root in controls.HISTORICAL_RESEARCH_ROOTS:
+        sources = [root] if root.is_file() else root.rglob("*")
+        for source in sources:
+            if source.is_file() and not controls.historical_research_output(source):
+                assert (
+                    tree / source.relative_to(controls.REPO)
+                ).read_bytes() == source.read_bytes()
+    for source in controls.HISTORICAL_REPLAY_INPUTS:
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == source.read_bytes()
+    for control in specification["controls"]:
+        source = (ROOT / control["file"]).resolve()
+        assert (tree / source.relative_to(controls.REPO)).is_file()
+
+
 def test_math_startup_reports_are_pruned_but_record_sources_survive(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -3224,8 +3260,14 @@ def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
 
 @pytest.mark.parametrize("declaration", ["inline", "frontier", "none"])
 @pytest.mark.parametrize("explicit", [False, True])
+@pytest.mark.parametrize("selector", ["explicit", "historical"])
 def test_git_projection_preserves_sparse_declared_inputs(
-    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, explicit: bool
+    declaration: str,
+    selector: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    explicit: bool,
 ) -> None:
     """Absent sparse files still count; genuine declarations rescue exact outputs."""
     packing = tmp_path / "packing"
@@ -3277,8 +3319,14 @@ def test_git_projection_preserves_sparse_declared_inputs(
     monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
-    monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
-    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
+    monkeypatch.setattr(
+        controls, "PRUNE", frozenset({output}) if selector == "explicit" else frozenset()
+    )
+    monkeypatch.setattr(
+        controls, "LINKED_PRUNE_ROOTS", (output,) if selector == "explicit" else ()
+    )
+    monkeypatch.setattr(controls, "HISTORICAL_RESEARCH_ROOTS", frozenset({output.parent}))
+    monkeypatch.setattr(controls, "HISTORICAL_REPLAY_INPUTS", frozenset({canonical}))
     monkeypatch.setattr(controls, "COPY_SEPARATELY", (output,) if explicit else ())
     assert controls.snapshot_git_source_bytes(tree) == expected
 

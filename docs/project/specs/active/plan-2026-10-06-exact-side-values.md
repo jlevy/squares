@@ -1,10 +1,11 @@
 # Feature: Exact Side Values Register, Paper and Backfill
 
-**Date:** 2026-10-06 (last updated 2026-10-06)
+**Date:** 2026-10-06 (last updated 2026-10-08)
 
-**Author:** Joshua Levy, with Claude
+**Author:** Joshua Levy, with Claude, GPT-6.1 Sol and GPT-6 Astra
 
-**Status:** Draft
+**Status:** Register and backfill implemented; publication continues in PR 435.
+Identification lanes remain open.
 
 ## Overview
 
@@ -19,6 +20,32 @@ Workflow entry: **W7 `pipeline-improvement`** for the register, the checks, the 
 and the import revision; **W1 `research-survey`** for the backfill of facts that
 retained sources state.
 The identification lanes in Phase 2 enter **W6** under their own hypotheses.
+
+## Current Register and Continuation
+
+The parent register covers 324 cases: 176 integer, 29 rational, 65 closed-form, 16
+minimal-polynomial, one degree-only and 37 numeric-only values.
+It certifies 286 exact polynomial roots and retains 18 superseded catalogue identities
+as notes. All 77 proved cases keep their existing status.
+Source refresh adapters preserve the primitive linear polynomial for each of the 23
+upstream certified rational witnesses.
+A witness identity remains a feasible upper bound; its polynomial does not establish
+optimality.
+
+The child [PR 435](https://github.com/jlevy/squares/pull/435) supplies the complete
+degree-672 polynomial at n = 83, 170 historical entries, the web reader and complete
+archives, and the detailed map of the 37 remaining numeric cases.
+The next research entry is delivery recovery in `think-s6np`, followed by `think-ohhz`;
+contact-system and exact-witness obligations remain open.
+
+The shared upstream maintenance repairs are tracked under `think-okcb`. Exact register
+replay, rational source regeneration, snapshot custody, ceiling consumers and the
+browser startup controls are checked on both stack layers.
+Historical mutation-worker outputs leave the snapshot while declared evidence and replay
+inputs remain, under the unchanged 192 MiB cap.
+`think-t1lk` owns dependency-based snapshot selection.
+The child additionally hosts 13 original source PDFs outside Git and enforces a 5 MiB
+limit on tracked PDFs.
 
 ## Goals
 
@@ -152,15 +179,15 @@ The paper is a view of the register, and no fact on it is typed into a template.
 
 ## Implementation Plan
 
-### Phase 1: Register, backfill, paper and process (one pull request)
+### Phase 1: Register and Backfill in PR 403; Publication in PR 435
 
-- [ ] Schema: `algebraic_source`; generator support; contract test.
-- [ ] Backfill tool and records: 66 derived and 22 catalogue sources; composite-figure
+- [x] Schema: `algebraic_source`; generator support; contract test.
+- [x] Backfill tool and records: 66 derived and 22 catalogue sources; composite-figure
   reads the record; think-kj6n and think-26at closed.
-- [ ] Register builder with irreducibility, root isolation, Daniel agreement and Galois
+- [x] Register builder with irreducibility, root isolation, Daniel agreement and Galois
   data; tests with controls (a reducible polynomial, a wrong root, a perturbed
   coefficient, a superseded catalogue polynomial).
-- [ ] Gate step wired at the tier its measured cost allows.
+- [x] Gate step wired at the tier its measured cost allows.
 - [ ] Paper renderer, template and site registration (PAPERS, `pages.yml`, budgets,
   release version, artifact dates, published-site check).
 - [ ] Import runbook, documentation pass and development guide revised.
@@ -218,8 +245,9 @@ Epic `think-fh50`, under `think-wfz1`.
 
 ## Rollout Plan
 
-Phase 1 merges as one pull request.
-Pages publishes the paper on merge.
+PR 403 contains the register and backfill.
+Dependent PR 435 contains the expanded source collection and publication.
+Pages publishes the paper when the stack merges.
 Phase 2 lanes each update the register through the revised import process.
 
 ## Open Questions

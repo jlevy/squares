@@ -1071,6 +1071,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_direct_regional_replays_complete_component_without_reconditioning",  # 16.19s
             "test_two_fresh_clean_processes_match_full_new_payload",  # 15.96s
         },
+        # Focused Mac CPython 3.14.7 frozen upstream-integration replay, 2026-10-08:
+        # 2.83s call at two CPUs (5.60s command wall). Its existing slow marker meets
+        # the two-second marking floor; smaller entry rebuilds stay in the quick lane.
+        "test_build_exact_values.py": {
+            "test_the_committed_register_equals_a_fresh_build",
+        },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.
         "test_n17_endpoint_feasibility.py": {
