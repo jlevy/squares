@@ -3,15 +3,19 @@ type: is
 id: is-01m4d0bx4kv8076gctqgtcgffr
 title: "n17: implement and preregister the first eight-state shared-centre exact LP pilot"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md
+delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
+hold: null
+hold_until: null
 created_at: 2026-10-08T05:39:20.323Z
-updated_at: 2026-10-08T08:29:22.488Z
+updated_at: 2026-10-08T19:15:43.170Z
+started_at: 2026-10-08T19:15:43.156Z
 ---
 ---
 title: n17 Shared-Centre LP Readiness
