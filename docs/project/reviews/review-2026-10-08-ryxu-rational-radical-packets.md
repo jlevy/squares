@@ -234,6 +234,98 @@ separate gates. The new worker regression must retain a bounded subprocess and c
 unchanged storage ceiling before copying; that pre-freeze feedback was sent to its
 owner.
 
+## Production Integration Findings
+
+**R3, Medium, open: historical custody is saved after case mutations.** In
+`register_ryxu_reports.record_cases`, each frontier file is saved before the remaining
+roster is checked and before the complete original history is archived.
+An independent isolated reproduction supplied a valid first case, n=51, followed by a
+non-improving n=70 bound.
+The function refused n=70 after changing n=51, while the history file did not exist.
+A subsequent run would skip the already selected n=51 case.
+The existing-history refusal also occurs after these writes.
+This is an importer recovery defect; no corruption of the currently retained eighteen
+historical records was observed.
+
+**Fix:** build and validate the complete adoption plan and history custody boundary
+before changing any frontier file, retain the complete original history before the first
+case write, and allow an interrupted run to resume from that immutable history.
+A later-case refusal should leave every frontier byte unchanged.
+The confirmed reproduction is retained as
+`ryxu-adoption-history-preflight-confirmed.log` in the external review directory.
+The first reproduction stopped at the fixture’s output guard; the confirmed run
+correctly rooted that guard in the fixture and reached the stated failure.
+
+The reviewer also requested a fresh refusal after corrupting a private scientific input
+inside the actual production worker, using the same clone as its positive and producer
+checks. The fixture mutation tests alone do not demonstrate that final copier boundary.
+The worker test now has a 45-second subprocess ceiling and checks the unchanged storage
+cap before and after copying; those two corrections were inspected.
+Final custody acceptance remains pending the complete worker result and correction of
+R3.
+
+## Full Production Integration
+
+**Decision: accepted.** This acceptance covers source checkpoint
+`609038af757cf364bac38467d861b1ac7061d9a7`: the eighteen complete house views, private
+scientific custody, guarded production outputs and recoverable adoption.
+The scientific modules and deciding inputs remain those reviewed above; this checkpoint
+adds production integration rather than a new geometric assertion.
+Final confirmation records and their reader-facing expression require a separate check.
+
+The current house roster is 51, 70, 84, 86, 102, 103, 105, 108, 123, 126, 127, 129, 131,
+146, 175, 261, 267 and 295. Each complete house is reconstructed from admitted source
+facts and actual native results, including its entire side, pose, field declaration,
+source, claim and certificate metadata.
+The n=51 unit coefficient pair is normalized to the schema’s literal unit; its field,
+side and all source poses remain exact.
+Only the public house identifier changes in its retained native positive result.
+The rational n=51 construction remains separately retained.
+
+**R3, closed:** the reviewed repair validates the complete original history and all
+remaining case transformations before any frontier write.
+It writes the complete immutable original history before the first case mutation and
+resumes an interrupted adoption against that same history.
+It refuses an incomplete history, a selected prefix without its original history, and a
+changed unadopted original.
+The reviewer independently ran the later-case preflight refusal, interrupted-write and
+retry, and incomplete-history controls at the frozen checkpoint.
+All three passed in 93.35 seconds under external-volume I/O contention; their test calls
+took 4.25, 8.81 and 0.02 seconds respectively.
+The remaining wall time included fixture setup and teardown.
+The receipt is `ryxu-adoption-history-fix-review.log` in the external review directory.
+
+The reviewer inspected the actual production-worker regression and its completed
+receipt, `actual-private-worker-v6.log`, under the writer’s external production task
+directory. The writer ran that test at the frozen checkpoint: one passed, 62 deselected,
+in 406.23 seconds. The preserved worker contains all eight required private inputs as
+ordinary files with byte-for-byte source equality: rational facts and all 75 deciding
+jobs, radical facts, all three complete radical job receipts, house metadata and
+original frontier history.
+The child process admitted all eighteen current houses, the earlier #425 thirteen-job
+custody index and all nine earlier #422 constructions.
+It refused both selected and whole-atlas producers without changing their output
+manifests. It then corrupted a rational pair count and a radical deciding gap in the
+copied receipts, refused each mutation, restored the original bytes and admitted the
+houses again. This was the actual production clone, not only a fixture approximation.
+
+The child retained its 45-second timeout, and the complete clone regression passed the
+unchanged source-size ceiling before and after copying.
+The writer’s post-test, review-document-inclusive measurement was 200,722,177 bytes
+against 201,326,592 bytes, leaving 604,415 bytes before this closure addendum.
+After adding this closure, the reviewer independently compared all eight
+preserved-worker inputs with the source: every file was ordinary and byte-identical.
+The same command measured the current working snapshot, including the confirmation
+draft, at 200,745,688 bytes, leaving 580,904 bytes.
+The owner must remeasure the final checkpoint if later integration changes its contents.
+The 406.23-second whole-test wall time is not evidence that the test meets the fast
+lane’s 12-second per-call ceiling; final test selection and CI results remain separate
+operational gates. No cap, deadline or acceptance criterion was raised for this review.
+
+This closes the production prerequisites for finite-feasibility confirmation at V3/C3
+only. It does not establish the source’s 191-touching-pair assertion, optimality, local
+minimality, rigidity, novelty, human review or a C4 claim.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

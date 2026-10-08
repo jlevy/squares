@@ -15,7 +15,9 @@ import mpmath as mp
 import pytest
 
 from devtools import build_known_best_atlas as atlas
+from devtools import confirm_ryxu_records as confirmation
 from devtools import generate_frontier_case as generator
+from devtools import refinement_packets
 from devtools import register_ryxu_reports as register
 from devtools import run_negative_controls as controls
 from devtools import ryxu_house_links as houses
@@ -182,6 +184,7 @@ def test_radical_upward_display_is_strictly_outward() -> None:
     assert (houses.radical.Q2(shown - Fraction(1, 10**16)) - side).sign() < 0
 
 
+@pytest.mark.slow
 def test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers(
     tmp_path: Path,
 ) -> None:
@@ -290,7 +293,12 @@ def test_source_adoption_refuses_mutable_upper_geometry_claims(
     result = safe_load(adopted.split("---\n", 2)[1])["packing"]
     assert result["reported_upper_bound"] == register.reported_bound(n)
     before = safe_load(old.split("---\n", 2)[1])["packing"]
-    assert result["verified_upper_bound"] == before["verified_upper_bound"]
+    original_case = safe_load(original.split("---\n", 2)[1])["packing"]
+    confirmed = any(
+        ref.startswith("E-ryxu-") for ref in original_case["verified_upper_bound"]["evidence"]
+    )
+    expected_upper = houses.bound(n) if confirmed else before["verified_upper_bound"]
+    assert result["verified_upper_bound"] == expected_upper
     lower_draft = safe_load(drafted.split("---\n", 2)[1])["packing"]
     for field in ("reported_lower_bound", "verified_lower_bound", "status"):
         assert result[field] == lower_draft[field]
@@ -387,3 +395,92 @@ def test_existing_incomplete_history_is_refused_before_case_writes(
     assert originals == {
         n: (register.FRONTIER / f"n-{n:03d}.md").read_text() for n in houses.NUMBERS
     }
+
+
+def confirmation_frontier(private: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    frontier = private / "packing/frontier"
+    frontier.mkdir(parents=True)
+    monkeypatch.setattr(register, "FRONTIER", frontier)
+    monkeypatch.setattr(refinement_packets, "REPO", private)
+    for name in ("results.yaml", "evidence.yaml", "verifiers.yaml", "source-coverage.yaml"):
+        shutil.copyfile(SOURCE / "packing/frontier" / name, frontier / name)
+    for n in houses.NUMBERS:
+        name = f"n-{n:03d}.md"
+        shutil.copyfile(SOURCE / "packing/frontier" / name, frontier / name)
+    review = private / confirmation.REVIEW
+    review.parent.mkdir(parents=True)
+    review.write_text(
+        "## Full Production Integration\n**Decision: accepted.**\n**R3, closed:**\n"
+    )
+    return frontier
+
+
+def test_confirmation_requires_actual_independent_acceptance(private: Path) -> None:
+    review = private / confirmation.REVIEW
+    review.parent.mkdir(parents=True)
+    review.write_text("## Full Production Integration\n**Decision: pending.**\n")
+    with pytest.raises(ValueError, match="accepted independent"):
+        confirmation.confirm()
+    assert not (private / "packing/frontier").exists()
+
+
+def test_confirmation_refuses_later_case_before_any_record_write(
+    private: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    frontier = confirmation_frontier(private, monkeypatch)
+    path = frontier / "n-070.md"
+    prefix, front, body = path.read_text().split("---\n", 2)
+    value = safe_load(front)
+    value["packing"]["reported_upper_bound"]["value"] = "0"
+    path.write_text(prefix + "---\n" + register.dump(value) + "---\n" + body)
+    before = {path.name: path.read_bytes() for path in frontier.iterdir()}
+    with pytest.raises(ValueError, match="complete admitted facts"):
+        confirmation.confirm()
+    assert before == {path.name: path.read_bytes() for path in frontier.iterdir()}
+
+
+def test_confirmation_preserves_complete_scope_history_and_lower_lanes(
+    private: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    frontier = confirmation_frontier(private, monkeypatch)
+    original_history = register.HISTORY.read_bytes()
+    original_source = safe_load((frontier / "source-coverage.yaml").read_text())
+    before = {
+        n: safe_load((frontier / f"n-{n:03d}.md").read_text().split("---\n", 2)[1])["packing"]
+        for n in houses.NUMBERS
+    }
+    native_houses = {n: houses.house_path(n).read_bytes() for n in houses.NUMBERS}
+    confirmation.confirm()
+    results = safe_load((frontier / "results.yaml").read_text())["results"]
+    for identifier, numbers in (("T-125", houses.reports.NUMBERS), ("T-126", (51,))):
+        row = next(row for row in results if row["id"] == identifier)
+        assert row["verification"] == "V3"
+        assert row["confirmation"] == "C3"
+        assert row["scope"]["n_values"] == list(numbers)
+        assert row["reviews"][0]["reviewer_kind"] == "ai"
+        assert "human oversight" in row["next_rung"]
+    for n in houses.NUMBERS:
+        text = (frontier / f"n-{n:03d}.md").read_text()
+        case = safe_load(text.split("---\n", 2)[1])["packing"]
+        assert case["verified_upper_bound"] == houses.bound(n)
+        for field in (
+            "reported_lower_bound",
+            "verified_lower_bound",
+            "reported_status",
+            "status",
+        ):
+            assert case[field] == before[n][field]
+        assert case["conjectured_optimum"] is None
+        assert case["rigidity"] is None
+        assert "V3/C3" in text
+        assert "191-touching-pair assertion" in text
+    after_source = safe_load((frontier / "source-coverage.yaml").read_text())
+    assert set(after_source) == set(original_source)
+    for field in original_source.keys() - {"sources", "selected_overrides"}:
+        assert after_source[field] == original_source[field]
+    assert {n: houses.house_path(n).read_bytes() for n in houses.NUMBERS} == native_houses
+    assert register.HISTORY.read_bytes() == original_history
+    first = {path.name: path.read_bytes() for path in frontier.iterdir()}
+    confirmation.confirm()
+    assert first == {path.name: path.read_bytes() for path in frontier.iterdir()}
+    assert register.HISTORY.read_bytes() == original_history

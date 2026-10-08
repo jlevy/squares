@@ -83,9 +83,42 @@ python -m devtools.ryxu_radical_n51 certify
 python -m devtools.ryxu_radical_n51 check --replay
 ```
 
-Both imports still require independent review, production custody and frontier
-integration checks before their assurance status is promoted.
-The source facts and actual deciding results are preserved even if an input is
+## Confirmed frontier and private-worker integration
+
+The [independent review](../../../../docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md)
+accepts complete finite feasibility and production custody. T-125 confirms all 25
+rational certificates at V3/C3; T-126 separately confirms the undilated n51 construction.
+Seventeen rational certificates and the smaller radical n51 witness now supply the 18
+selected exact atlas houses. The eight non-selected rational certificates, including
+rational n51, retain their complete source facts and actual deciding results.
+No optimality, local-minimum theorem, rigidity, novelty, human oversight or source
+191-contact assertion is promoted.
+
+The original frontier text and full previous house geometry for all 18 selections remain
+in `acquisition/frontier-prior-state.json.xz`. The importer preflights the full roster,
+atomically preserves that complete boundary before any case mutation, and resumes an
+interrupted write against the same immutable history.
+All lower-bound lanes remain independent of this upper-bound import.
+
+Private workers copy all source facts, the 75 rational jobs, all three radical jobs,
+complete house metadata and historical inputs. Generated house leaves can be read-only
+links only when private input and full metadata equality admit them.
+An actual production clone admitted all 18 houses and the displaced #425/#422 packets;
+it refused corrupted rational and radical deciding receipts, restored exact bytes, and
+admitted them afresh. Every linked producer refused before writing its outputs.
+The actual copy/control test is selected in the existing deferred slow lane: its
+406.23-second call was I/O contended, while its admission subprocess retained the
+45-second deadline. Direct controls remain on the fast surface with the unchanged
+12-second per-test ceiling. Final exact-head CI remains the integration gate.
+
+After the recorded independent acceptance, this explicit command integrates the
+confirmation records without running a geometric predicate:
+
+```bash
+python -m devtools.confirm_ryxu_records
+```
+
+The source facts and actual deciding results remain preserved when a certificate is
 superseded.
 
 <!-- This document follows common-doc-guidelines.md.

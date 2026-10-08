@@ -28732,3 +28732,102 @@ evidence:
       This does not assert equality with s(51), optimality, rigidity or the unconfirmed 191-touching-pair
       source claim.
     source_reviewed: '2026-10-08'
+  - id: E-ryxu-432-rational-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+      - 70
+      - 84
+      - 86
+      - 88
+      - 102
+      - 103
+      - 105
+      - 108
+      - 123
+      - 126
+      - 127
+      - 129
+      - 130
+      - 131
+      - 146
+      - 153
+      - 175
+      - 179
+      - 236
+      - 258
+      - 261
+      - 263
+      - 267
+      - 295
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz
+    replay: 'From packing with project Python 3.14: python -m devtools.ryxu_arrangement_reports check
+      --replay. This runs all 75 complete jobs through both native routes and compares full retained
+      outcomes.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-ryxu-complete-custody
+    independence_record: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
+    limitations: 'All 25 complete rational source certificates, including seven superseded configurations,
+      pass both routes; each of 50 duplicate and outside full-roster controls fails both. The 75-job
+      batch retained 2078082 pair decisions and wall 330.19143345800694s. Shared exact half-angle conversion
+      was independently reviewed; deciding geometry implementations are distinct. The source dilation
+      is already baked into each rational input; no further dilation or rounding is applied. Rational
+      n51 is separate from the selected undilated radical witness. Complete source/result/house binding,
+      private-worker copied inputs, mutation refusals, producer guards and original-frontier recovery
+      were independently reviewed. Offline admission is not a fresh deciding replay. Only finite feasibility
+      enters: no optimality, lower bound, local-minimum theorem, rigidity, novelty, formal proof or
+      human oversight is established.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra separately prompted ry-xu integration review
+      note: Accepted finite scientific feasibility and production custody only.
+    source_reviewed: '2026-10-08'
+  - id: E-ryxu-432-radical-n51-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/n051-undilated-record.json.xz
+    replay: 'From packing with project Python 3.14: python -m devtools.ryxu_radical_n51 check --replay.
+      This runs all three complete native and independent jobs and compares full results with retained
+      actual outcomes.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-ryxu-undilated-n51-independent
+    - V-ryxu-complete-custody
+    independence_record: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
+    limitations: 'All three full 51-square jobs accept the positive and reject duplicate and outside
+      controls in both routes; 7650 pair decisions, original batch wall 18.707450165995397s. A scoped
+      independent review repeated complete inputs and outcomes. The admitted exact side is (16+5sqrt(2))/3,
+      with polynomial 9s^2-96s+206=0, a feasible construction ceiling. Native and independent routes
+      observe 119 touching/1156 strict pairs; the source''s 191 assertion remains unconfirmed. Complete
+      source/result/house binding, private-worker copied inputs, mutation refusals, producer guards
+      and original-frontier recovery were independently reviewed. Offline admission is not a fresh deciding
+      replay. Only finite feasibility enters: no optimality, lower bound, local-minimum theorem, rigidity,
+      novelty, formal proof or human oversight is established.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra separately prompted ry-xu integration review
+      note: Accepted finite scientific feasibility and production custody only.
+    source_reviewed: '2026-10-08'
