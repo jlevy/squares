@@ -25,6 +25,12 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_two_child_collective_propagation.py
+    kind: generated-artifact
+    boundary: The accepted generated regional propagation and child-selection receipts bind inherited finite premises; no Git source checksum decides acceptance.
+  - path: packing/devtools/check_n17_normalized_contact_rank_filter.py
+    kind: generated-artifact
+    boundary: The generated capacity cover and complete finite partition receipts bind the reconstructed incidence roster; curated source and proof premises are identified by Git rather than source checksums.
   - path: packing/devtools/run_registered_phases.py
     kind: generated-artifact
     boundary: The generated phase journal is joined to its runtime execution manifest bytes before deriving a new supervision reconciliation receipt; no Git source or commit digest decides acceptance.
