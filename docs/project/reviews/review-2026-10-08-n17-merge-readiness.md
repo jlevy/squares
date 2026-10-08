@@ -87,6 +87,22 @@ all ten shared repository-scope controls pass in 0.66 seconds.
 Targeted lint/format/type checks are clean.
 These results verify the bounded repairs, not a full gate or proof replay.
 
+The latest-main source integration joins `91ca9b824` after nine conflict resolutions.
+It preserves the earlier held merge and original source history.
+All eight memory-profiler controls pass in 1.06 seconds; the local-certificate
+end-to-end control passes in 14.03 seconds with independent exact replay and a fresh
+rational ratio at least as strong as the retained bound.
+The three source-index controls pass again in 3.36 seconds, with 122 unrelated cases
+deselected. Both resolved test modules pass Ruff/format and BasedPyright with zero
+findings.
+
+The edit tier takes 179.75 seconds and passes 62 of 63 selected steps.
+Its browser-floor failure is a missing isolated-worktree dependency link, not a source
+lint failure. Reusing the existing installed dependency completes the focused browser
+floor and its 56 liveness controls in a 30.97-second two-step PASS. This composes the
+edit qualification; no clean full edit invocation, push gate or complete checkpoint is
+claimed. Documentation, SYNOPSIS, ledger and 403 declared commands pass.
+
 Earlier owning-layer repairs pass all 18 reconciliation controls and all 49 endpoint
 controls. Their source blobs survive formal stack rebasing.
 Final selected documentation/SYNOPSIS and ledger checks passed in 10.86 seconds; the

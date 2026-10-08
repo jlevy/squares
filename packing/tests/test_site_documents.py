@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import posixpath
 import re
 
 import pytest
@@ -257,21 +258,25 @@ def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
     anyone neither reaches, and the canonical address of the place it stands for."""
     forwarders = {page.name: page.html for page in render_overview.forwarder_pages()}
     assert list(forwarders) == [old for old, _ in render_overview.MOVED_PAGES]
-    defects = f"{REPO_URL}/blob/{BRANCH}/defects.md"
-    expected = {
-        "results.html": ("all-results.html", f"{render_overview.SITE_URL}all-results.html"),
-        "status.html": ("frontier.html", f"{render_overview.SITE_URL}frontier.html"),
-        "defects.html": (defects, defects),
-    }
     script = render_overview.FORWARD_SCRIPT.read_text(encoding="utf-8")
-    for old, (target, canonical) in expected.items():
+    for old, destination in render_overview.MOVED_PAGES:
+        external = destination.startswith("https://")
+        physical = (
+            destination if external else posixpath.relpath(destination, posixpath.dirname(old))
+        )
+        target = "cases/" if old == "cases.html" else physical
+        canonical = destination if external else render_overview.canonical_url(destination)
         page = forwarders[old]
-        assert f'<html lang="en" data-moved-to="{target}">' in page, old
+        opening = re.search(r"<html\b[^>]*>", page)
+        assert opening is not None, old
+        assert 'lang="en"' in opening[0], old
+        assert f'data-moved-to="{target}"' in opening[0], old
+        assert f'data-file-moved-to="{physical}"' in opening[0], old
         assert (
-            f'<noscript><meta http-equiv="refresh" content="0; url={target}"></noscript>'
+            f'<noscript><meta http-equiv="refresh" content="0; url={physical}"></noscript>'
             in page
         )
-        assert f'<a href="{target}">' in page, old
+        assert f'<a href="{physical}">' in page, old
         assert f'<link rel="canonical" href="{canonical}">' in page, old
         assert f"<script>{script}</script>" in page, old
         assert "{{" not in page, old
@@ -361,10 +366,12 @@ def test_no_relative_repository_link_survives(pages: dict[str, render_overview.P
 
 
 def test_the_tutorial_math_is_kpress_math(pages: dict[str, render_overview.Page]) -> None:
-    """Each `$…$` span reaches the page as kpress math markup, which KaTeX renders on load."""
+    """Each formula retains KPress semantics and a visual prepared before publication."""
     body = pages["tutorial.html"].html
     assert len(re.findall(r'data-kpress-math="inline"', body)) >= 14
     assert 'data-kpress-math-error="true">' not in body
+    assert len(re.findall(r'data-kpress-math-rendered="true"', body)) >= 14
+    assert len(re.findall(r'class="katex-html"', body)) >= 14
 
 
 def test_long_reports_get_a_contents_rail_and_short_ones_do_not(

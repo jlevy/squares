@@ -127,6 +127,9 @@ allowlist:
   - path: packing/devtools/audit_n17_certificate_dependencies.py
     kind: generated-artifact
     boundary: Runtime-generated canonical seed/node objects and their full-standing verification receipt bind streamed saved evidence and independently generated dependency inventories; raw objects and fresh inventories have no Git revision names.
+  - path: packages/workbench/tools/workbench_tools/capture_video.py
+    kind: generated-artifact
+    boundary: Cache correctness for the generated published workbench corpus; its payload must match the immutable data/corpus.<hash>.json URL before a video receipt names that corpus edition. No repository source is hashed by this predicate.
   - path: packing/devtools/probe_n17_raw_row_support.py
     kind: generated-artifact
     boundary: Cold saved-check receipts and witness packets identify generated seed/node objects and their derived raw atoms; these runtime artifacts are not named by Git revisions.

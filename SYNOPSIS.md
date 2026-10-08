@@ -314,7 +314,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Agendas | 42 | 20 active; 16 completed; 5 paused; 1 superseded |
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
-| Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
+| Explorations | 48 | 28 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 256 | 72 confirmed; 48 refuted; 64 blocked; 23 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 243 | 92 accepted; 53 rejected; 62 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 116 | 116 registered, 86 by others |
@@ -577,6 +577,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [N17 Merge Readiness Review — October 8, 2026](docs/project/reviews/review-2026-10-08-n17-merge-readiness.md) | dated review record | record | retained | — |
 | [PR410 Integration Review for the n17 Continuation](docs/project/reviews/review-2026-10-07-n17-pr410-integration.md) | dated review record | record | retained | — |
 | [Session186 storage disposition](docs/project/reviews/review-2026-10-07-n17-session-186-storage.md) | dated review record | record | retained | — |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
@@ -636,6 +637,12 @@ case or experiment separately.
 | [Session 184: n11 First-Round Readiness Objects](packing/campaign/retained/session-184-n11-readiness/README.md) | typed session record | record | retained | — |
 | [n17 Proof Interfaces and Finite-Angle LP Contract](docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md) | research synthesis | record | retained | — |
 | [n17 Ten-Hour Overnight Session](docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md) | implementation plan | current | transient | — |
+| [Published Site URLs](docs/project/site-urls.md) | generated status view | generated | generated | — |
+| [Fibonacci Torus: Independent Algebra Audit](docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md) | dated review record | record | retained | — |
+| [Review: The Fibonacci-Torus Contact Geometry](docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md) | dated review record | record | retained | — |
+| [Fibonacci Torus Source Review](docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md) | dated review record | record | retained | — |
+| [Fibonacci Torus Research and Audit](docs/project/specs/active/plan-2026-10-07-fibonacci-torus.md) | implementation plan | record | retained | — |
+| [Fibonacci Torus Confirmation Checks](packing/cases/fibonacci_torus/README.md) | component scope and use | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
@@ -647,6 +654,7 @@ case or experiment separately.
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
 | [The n = 17 Optimality Proof, Explained](docs/project/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
 | [N11: A Three-Paper Explainer Series](docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md) | implementation plan | current | transient | — |
+| [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Eleven-Square Threshold-Bound Paper: Exposition Reviews and Their Disposition](docs/project/reviews/review-2026-10-05-n11-threshold-bound-review.md) | dated review record | record | retained | — |
 | [Nagamochi’s Lemma 1 Is False: What T-007 Rests On Now](docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md) | dated review record | record | retained | — |
@@ -981,6 +989,9 @@ case or experiment separately.
 | [Soundness of sqverify-fast](packing/sqverify_fast/SOUNDNESS.md) | component scope and use | definitive | maintained | — |
 | [sqverify-fast](packing/sqverify_fast/README.md) | component scope and use | supporting | maintained | — |
 | [n17bb-native](packing/n17bb_native/README.md) | component scope and use | supporting | maintained | — |
+| [n17_kernel_verifier: an independent Rust verifier of n = 17 kernel certificates](packing/n17_kernel_verify/README.md) | component scope and use | supporting | maintained | — |
+| [Provenance of `n17_kernel_verifier/`](packing/n17_kernel_verify/PROVENANCE.md) | component scope and use | supporting | maintained | — |
+| [Tests](packing/n17_kernel_verify/TESTING.md) | component scope and use | supporting | maintained | — |
 | [Native n17 Branch-and-Bound Benchmark](packing/benchmarks/n17-bb-native/README.md) | component scope and use | supporting | maintained | — |
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
@@ -6238,6 +6249,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `session-165-codex-task-tree.yaml` | session-165 | 2,730 | 13.15 h | 3.96 h | 3.96 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
+| `codex-task-tree-pr410-preparation-checkpoint.yaml` | unattributed | 459 | 2.3 h | 0.63 h | 0.63 h | yes |
 | `codex-task-tree-session184-through-100444.yaml` | unattributed | 2,176 | 11.95 h | 2.94 h | 2.94 h | yes |
 | `codex-task-tree-session184-through-121500.yaml` | unattributed | 3,620 | 20.64 h | 5.11 h | 5.11 h | yes |
 | `codex-task-tree-session184-through-20261007T141342Z.yaml` | unattributed | 4,891 | 28.9 h | 7.09 h | 7.09 h | yes |

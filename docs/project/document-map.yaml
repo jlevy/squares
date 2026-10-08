@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-08-n17-merge-readiness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-n17-session-186-storage.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md, role: research-report, authority: supporting, lifecycle: retained}
@@ -68,6 +69,12 @@ documents:
   - {path: packing/campaign/retained/session-184-n11-readiness/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/site-urls.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-07-fibonacci-torus.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/cases/fibonacci_torus/README.md, role: component-guide, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md, role: review, authority: record, lifecycle: retained}
@@ -79,6 +86,7 @@ documents:
   - {path: packing/devtools/n17-diagnostics.md, role: development-guide, authority: current, lifecycle: maintained}
   - {path: docs/project/n17-optimality-explainer.md, role: tutorial, authority: supporting, lifecycle: maintained}
   - {path: docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-n11-threshold-bound-review.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md, role: review, authority: record, lifecycle: retained}
@@ -413,6 +421,9 @@ documents:
   - {path: packing/sqverify_fast/SOUNDNESS.md, role: component-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/sqverify_fast/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/n17bb_native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/PROVENANCE.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/TESTING.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/n17-bb-native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/measure-verifier/census/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}

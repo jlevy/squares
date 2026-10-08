@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from kpress.format import markdown
 
 from devtools import render_frontier_page as frontier
 from devtools import render_overview, site_assets
@@ -38,7 +39,7 @@ from tests import site_renders
 #: than carries: 1,656,135 bytes, with the ceiling, 4 MiB until then, lowered by as much
 #: to keep the room it had. The merge of main into PR 305 that day, carrying both,
 #: measured 1,681,361 bytes.
-PAGE_CEILING_BYTES = 2_350_000
+PAGE_CEILING_BYTES = 1_750_000
 
 #: The columns as a reader meets them: the drawing under no heading, the case, the star,
 #: and then what is known.
@@ -195,10 +196,9 @@ def test_the_columns_run_drawing_case_star_and_then_what_is_known(parsed: Rows) 
         n = attributes["data-n"]
         assert len(cells) == len(COLUMNS), n
         thumb, number, star = cells[0], cells[column("n")], cells[column("Recent")]
-        # The drawing, bare: one `svg` of paths and nothing to read.
+        # A standalone SVG image reserves its size without expanding the table HTML.
         assert thumb["class"] == "site-thumb", n
-        assert (thumb["tags"] or "").split()[0] == "svg", n
-        assert set((thumb["tags"] or "").split()) == {"svg", "rect", "g", "path"}, n
+        assert thumb["tags"] == "img", n
         assert thumb["words"] == "", n
         assert "data-value" not in thumb
         # The number alone, as the one link to the case record.
@@ -397,8 +397,10 @@ def test_the_gap_is_exact_where_both_bounds_are(rows, cases) -> None:
     # 15680000/3949423, 31360/7901 and 15680/3951 before it), so the gap is 57/2000.
     assert gaps[12] is not None
     assert abs(float(gaps[12]) - 57 / 2000) < 1e-15
-    html_12, _ = frontier.gap(cases[12])
-    assert r"\dfrac{57}{2000}" in html_12
+    html_12, _ = frontier.gap(cases[12], native=True)
+    fraction = re.search(r"<mfrac>(.*?)</mfrac>", html_12, re.DOTALL)
+    assert fraction is not None
+    assert re.findall(r"<mn>(.*?)</mn>", fraction[1]) == ["57", "2000"]
     assert html_12.endswith('<span class="site-approx">= 0.0285</span>')
 
 
@@ -483,8 +485,8 @@ def test_the_tables_cells_carry_those_decimals(page: str, cases) -> None:
         '<span class="site-approx">= 3.9715</span>',
         '<span class="site-approx">= 0.0285</span>',
     ]
-    assert r"\(\dfrac{7943}{2000}\)</span>" in row_12
-    assert r"\(\dfrac{57}{2000}\)</span>" in row_12
+    assert "<mfrac><mrow><mn>7943</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
+    assert "<mfrac><mrow><mn>57</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     expected = sum(
         bool(frontier.bound_approx_html(case[field]))
@@ -599,7 +601,12 @@ def test_no_math_is_left_as_source_text_in_the_table(page: str) -> None:
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     assert "$" not in table
     assert "sqrt(" not in table
-    assert r"\(\dfrac{7943}{2000}\)" in table
+    assert 'class="katex"' not in table
+    assert table.count("<math ") == table.count('data-site-native-math="frontier"') > 300
+    prose = page[: page.index("<tbody>")] + page[page.index("</tbody>") :]
+    assert prose.count('data-kpress-math="inline"') == 9
+    assert 'class="katex"' in prose
+    assert r"\(\dfrac{7943}{2000}\)" not in table
 
 
 def test_the_frontier_inputs_are_render_inputs() -> None:
@@ -634,8 +641,11 @@ def test_a_polynomial_root_has_no_closed_form() -> None:
 
 
 def test_every_thumbnail_draws_its_cases_squares() -> None:
-    svg = frontier.thumbnail_svg(11)
+    image = frontier.thumbnail_svg(11)
+    assert 'src="atlas/house/n-11.svg" width="50" height="50"' in image
+    svg = frontier.drawing_files()[frontier.drawing_path(11)].decode()
     assert svg.count("z") == 11
+    assert 'xmlns="http://www.w3.org/2000/svg"' in svg
     assert "id=" not in svg
 
 
@@ -644,3 +654,66 @@ def test_a_minimal_polynomial_with_radical_coefficients_renders_as_latex() -> No
     assert tex == r"24s^4-(1400+352\sqrt{2})s^3+641430=0"
     with pytest.raises(ValueError, match="no LaTeX form"):
         tables.polynomial_latex("s^2 - log(2) = 0")
+
+
+@pytest.mark.parametrize("tex", [r"\dfrac{31}{8}", r"1+\sqrt{2}", r"\frac{5}{2}"])
+def test_table_math_reuses_the_existing_semantic_mathml_exactly(tex: str) -> None:
+    semantic = re.findall(
+        r"<math\b[^>]*>.*?</math>",
+        markdown.parse_markdown(f"${tex}$", title="Semantic control").html,
+        re.DOTALL,
+    )
+    assert len(semantic) == 1
+    assert frontier.math_html(tex, native=True) == (
+        '<span class="kpress-math kpress-math-inline" data-site-native-math="frontier">'
+        + semantic[0]
+        + "</span>"
+    )
+
+
+@pytest.mark.parametrize(
+    "rendered",
+    [
+        '<span data-kpress-math-error="true">invalid</span>',
+        "<span>no semantic root</span>",
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math>' * 2,
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><merror><mi>x</mi></merror></math>',
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"></math>',
+        '<math xmlns="http://www.w3.org/1999/xhtml"><mi>x</mi></math>',
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</math>',
+    ],
+    ids=[
+        "render-error",
+        "missing",
+        "ambiguous",
+        "math-error",
+        "empty",
+        "wrong-namespace",
+        "malformed",
+    ],
+)
+def test_table_math_refuses_invalid_semantic_output(
+    monkeypatch: pytest.MonkeyPatch,
+    rendered: str,
+) -> None:
+    monkeypatch.setattr(markdown, "_render_math", lambda *_args, **_kwargs: rendered)
+    with pytest.raises(ValueError, match="frontier table mathematics"):
+        frontier.math_html("x", native=True)
+
+
+def test_shared_frontier_helpers_keep_prepared_katex_unless_table_opts_in(cases) -> None:
+    shared = [
+        frontier.math_html(r"1+\sqrt{2}"),
+        frontier.value_html(cases[5]["reported_upper_bound"]),
+        frontier.gap(cases[12])[0],
+    ]
+    for rendered in shared:
+        assert 'data-kpress-math-renderer="katex"' in rendered
+        assert 'class="kpress-math-semantic"' in rendered
+        assert 'data-site-native-math="frontier"' not in rendered
+    for rendered in (
+        frontier.value_html(cases[5]["reported_upper_bound"], native=True),
+        frontier.gap(cases[12], native=True)[0],
+    ):
+        assert 'data-site-native-math="frontier"' in rendered
+        assert "katex-html" not in rendered

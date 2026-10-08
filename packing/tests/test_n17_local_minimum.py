@@ -630,7 +630,8 @@ EXP248_RUN = (
 def test_cli_ratio_on_the_widened_box_passes_end_to_end_as_exp248_run_002(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """exp-248 run-002's recipe passes with exact replay of its newly searched duals.
+    """exp-248 run-002's recipe exactly replays newly searched duals at least as strong as
+    the retained bound.
 
     The receipt records the core-stress blob that ran and gates on nothing about it
     (OR-16), so an edit to `check_n17_core_stress.py` that leaves every mathematical
@@ -652,6 +653,10 @@ def test_cli_ratio_on_the_widened_box_passes_end_to_end_as_exp248_run_002(
     assert receipt["slider_box"] == retained["slider_box"] == _box_record(WIDENED_BOX)
     worst, kept = receipt["c8_c9"]["worst"], retained["c8_c9"]["worst"]
     assert worst["direction"] == kept["direction"]
+    # HiGHS proposes floating multipliers; their 44-bit rationalization can differ
+    # across builds. All exact certificate replays above must pass, and the fresh
+    # certified bound must be at least as strong as the retained one, without slack.
+    assert 0 < Q(worst["worst_ratio"]) <= Q(kept["worst_ratio"]) < 1
     assert receipt["c8_c9"]["total_cells"] == retained["c8_c9"]["total_cells"] == 93
     assert receipt["radius"]["uniform"] == str(local.DECLARED_RADIUS)
     family = _family()

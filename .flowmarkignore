@@ -279,3 +279,6 @@ docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.
 # source-faithful archives; directory mode uses this checkout's exclusion rules.
 # Formatting them from the parent would cross the source-ownership boundary.
 .worktrees/
+
+# Generated URL registry: devtools.site_urls checks its renderer for drift.
+docs/project/site-urls.md

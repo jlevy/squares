@@ -36,8 +36,8 @@ totals:
     wall_hours: 713.93
 codex_receipts:
   attributed: 82
-  unattributed: 8
-  measured: 90
+  unattributed: 9
+  measured: 91
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:

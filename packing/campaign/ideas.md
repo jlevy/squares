@@ -49,7 +49,22 @@ Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 
 ## Orientation
 
-The next owner-requested W3 entry is
+The owner’s Fibonacci-torus question is assessed in
+[X-050](explorations/X-050-fibonacci-torus-and-boundary-information.md).
+Its exact checks support a small contact-family explanation for eleven, while ordinary
+torus relaxation loses the wall information needed for the finite-container bound.
+These are W3 handoffs; no new target experiment is registered from the abstract alone.
+
+| Idea | Status | Crux |
+| --- | --- | --- |
+| [X-050 contact-envelope simplification](explorations/X-050-fibonacci-torus-and-boundary-information.md#the-contact-equations-are-the-strongest-positive-finding) | shaped | `think-zbkk`: the exact family theorem is checked; next derive its envelope from the existing 128 local branches without fixing angles or contacts |
+| [X-050 marked inverse](explorations/X-050-fibonacci-torus-and-boundary-information.md#claim-by-claim-disposition) | parked | `think-aj43`: recover the full source’s map and its domain before claiming geometric equivalence |
+| [X-050 seams and wall defects](explorations/X-050-fibonacci-torus-and-boundary-information.md#a-torus-without-its-seams-is-too-weak) | shaped | Derive a necessary boundary-aware inequality that rejects the explicit $11/3$ and $17/4$ periodic controls |
+| [X-050 n17 contact-core elimination](explorations/X-050-fibonacci-torus-and-boundary-information.md#ranked-directions-and-first-discriminators) | shaped | Feed checked simplifications into existing H-254 through H-258; retain unequal tilts and slider fibres |
+| [X-050 direct regular-pair transfer to 17](explorations/X-050-fibonacci-torus-and-boundary-information.md#what-fails-at-seventeen) | dead | An involution rules out every regular action on the 136 pairs induced by label permutations; Fibonacci also has no quotient field of order 17 |
+| [X-050 unmarked torus infeasibility](explorations/X-050-fibonacci-torus-and-boundary-information.md#a-torus-without-its-seams-is-too-weak) | dead | Exactly verified periodic examples lie below both finite-container targets |
+
+The existing owner-requested optimality program is
 [X-048: Optimality Routes After n = 11](explorations/X-048-n17-optimality-after-n11.md),
 with its
 [session plan](../../docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md).
