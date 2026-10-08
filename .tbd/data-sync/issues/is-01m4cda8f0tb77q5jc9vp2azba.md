@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 22
+version: 23
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,19 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T03:05:23.697Z
+updated_at: 2026-10-08T03:08:25.786Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
 
+FINAL OWNED PR/IMPORT CLOSEOUT — 2026-10-08 UTC:
+PR427/429MERGEDf747; actualmatchingf747site406/793/1238/48allPASSraw0/visual46figuresPASS/independentAstra0findings, everyoriginalnegative preserved. Final422reply6051191850posted02:52:36 andissueCLOSED02:53:15. PR431checkpointMERGED0170350at02:54:39 after16SUCCESS50SKIP/fullreviews. NEWrequestledgerPR437 ACTUALMERGED7a8d9c16daa267c3a778554036374884194c2c36 at03:07:12 afterfreshCLEAN/exacthead1bb923gate15SUCCESS39SKIP, seniorAstraA5450856645+dedicatedSolBaccepted0findings. Only422ledger71insert7delete; fiveactualcomments/closedstate/readthrough/currentIDs/askDONE recorded, allother15802Gitentries/23issueobjects/science/sourcebudgets unchanged. Rootcheckoutmain7a8 clean; sourcebranches1bb andpriorheads savedGitHub. No force/admin/waiver.
+Issue422answer/import COMPLETE; think-qc6y/think-sfpz canclosewithtrackedledgerDONEonmain. Sourceconfirmationkqd3/engineeringx2gl/lbku/cr0f/yi1c/yquoprepallclosedatactualacceptedscopes. NativeperformanceP2think-c63v OPEN(rawsuiteD1/strictwalls); remaining19unrelatedlive-ledgerdifferencesownedbythink-6lrh OPEN underglobalmsos; otherdraft434/435+repoformalfindings/conflictskeepownowners, no blanketallrepoCIclaim.
+Preservationthink-vz6u finalbackup/dlverificationinprogress only: immutablefinalarchivewillincludeactualsource/PR/merge/CI/review/frozen186sitefiles/nativecomplete/remote/outbox/requestclosure/synthetichistory distinction; oldarchives unchanged. Afteractualupload/download+everymemberhashMATCH, closepreservation andverifyfinalnativeGitremote/outboxes. Lateststartup save stale_baseunsaved/externalnewsetupchatrequired; testedcurrentinstance+GitHubZIPbackup preserved. Exactf747sitepassdoesnotassertlaterdocumentationdeployment; latestdocPagesworkflowisbeingobserved separately.
+
+HISTORICAL RECORD(retained):
 CURRENT PR AND PRESERVATION CLOSEOUT — 2026-10-08 UTC:
 Allsource+checkpointPR427429431MERGED; sourcef747actualsite406/793/1238/48allPASS+aggregate0/Astraaccepted/46figuresvisualPASS, actualfinal422reply6051191850posted02:52:36 andissueCLOSED02:53:15. Checkpoint431MERGED0170350dce57337d1073cf0c3f98c3fd84b63374 at02:54:39, exacthead91c6/16SUCCESS50SKIP/reviewed/freshCLEANgate.
 NEWLEDGERPR437 https://github.com/jlevy/squares/pull/437 source1bb923e12f9dcfb0e204237d2b7bf045f1c51821 parent0170350, clean/nonforceGitHubbranchsavedcodex/close-squish-422-publication/exactPRbodyHEADonefilepathverified. ONLYcampaign/result-requests.yaml71insert7delete, only422semanticschange; all15802otherGitentries/23otherissues unchanged. All5actualcommentURLauthor/date/closedstate/readthrough mapped, finalcorrects4priorcheckpoints; existingT116T115confirmations/evidence resolve/askDONE/closeablenoreplydue. 44existingfocusedtests0.96s plus requestschema/report/pin/hooksraw0; independentexactAstra ReviewA5450856645ACCEPT0findings anddedicatedSoldocumentationBpublished. ActualnewheadhostedCIINPROGRESS atlastread9SUCCESS38SKIP5running; no merge or terminal-greenclaim. Userauthorizedmergeafterallclean/reviewed; rootwillfreshgateandmerge437whenactualCIpasses.
