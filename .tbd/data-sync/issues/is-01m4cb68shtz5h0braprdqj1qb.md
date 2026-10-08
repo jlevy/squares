@@ -3,9 +3,9 @@ type: is
 id: is-01m4cb68shtz5h0braprdqj1qb
 title: "Address PR #427 review A: nine-case source integration and CI"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 17
+version: 19
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -24,8 +24,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:29:15.569Z
-updated_at: 2026-10-08T01:18:24.539Z
+updated_at: 2026-10-08T01:34:36.146Z
 started_at: 2026-10-07T23:29:19.638Z
+closed_at: 2026-10-08T01:34:36.146Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 Address every A1-A8 finding at83748 from https://github.com/jlevy/squares/pull/427#pullrequestreview-5449633758. Keep strict math, source scope, assurance and 192MiB/900s/1800s budgets. Source owner repair_followup_import, root owns GitHub/tracker; dedicated B,C,D report no additional findings. Final whole reported/confirmed stack requires fresh checks/reviews/actual deployment.
 
@@ -57,3 +61,7 @@ PR43191c6d398 ready/reviewed hosted16SUCCESS50SKIP; latest cost-first body updat
 New lowerremote b59aaa8515c9508dc05bba475cddd186f45e0a1e corrects10 oldregularizedatlascertificate refs only, originalgeometry/science unchanged. IndependentAstra full1867squares7468corners bindingPASS. Explicit later exception to broad unselected-atlas-bytepreservation wording; primarymanifest/witnessdata preserved. Hostedlower28SUCCESS26SKIP2FAIL staleDATA_REVISION suite-c anddependentaggregate; pinrepair committedlocal3345c393182c8e322cd214685f24c200c28693f3 (pinb59), exactheadselectedgate inprogress. Upper9d omitsnewloweratlasrows; dedicatedSol integratesfinalparent with normalmerge+documentedmandatorypin and scopedchecks. Formalstack430 remainsdraft/unmerged, issue422open, matchingdeploymentUNRUN.
 Newcuratedoperationalarchive locallymemberverified1968members120072986rawB/18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc; upload/downloadproofpending. Allprior draftrelease406258689 assets remainimmutable. Sourceheads retainedonGitHub, native tbd-sync separate; finaloutboxaudit dueafterwrites.
 Issue428 frozen-v2 correctsworkload total11390perroute, meaningfulmock3PASS EXIT0, full5inputsidenticalto preservedv1. Scientificdeciders0; finalprotocolreviews not yetaccepted, custody andstorage/admissionpending. Wrongmetricfindingthink-wgdc staysopenpendingfinalreviews; no sciencepromotion. Issue42510preparedinputs/protocolaccepted butactualdeciders0/storageunresolved. Standard422 postmerge live/results/casegraphics/atlasverificationprepared75artifactchecks; actualmatchingdeployment remainsrequired.
+
+Final lower engineering acceptance nowactual: PR427 currentGitHubhead3345c393182c8e322cd214685f24c200c28693f3, ready/nonDraft, CLEAN30SUCCESS26SKIP allterminal. ScopeReviewE https://github.com/jlevy/squares/pull/427#pullrequestreview-5450344176 publishedat exacthead. Pinb59 matchescomputedlastdatacommit;10regularizedreferences correctedandfull1867squares7468cornersAstraauditPASS geometryunchanged. Reconciledselectedcoverage61metadata-step/97commandPASS plus identical173-filebehavior underLOWERownvenv:5296PASS30SKIP1XFAIL335.04s;serialheavy1PASS5344deselected161.89s;combinednativeouterEXIT0/505.306603s<unchanged900s. Earlierwholeattempt130/mixedenvironment3observedfailures remainsunaltered. CorrectownlowerPython3.14.7 pkgcensus allsqpack/devtools/workbench/kpress lower; upperownmodulecensus alsoPASS. Sourceassertions/budgets/capsunchanged. Closingonly environmentfindingthink-wyc9 andlowerrepairthink-lbku engineering scope; parentthink-sfpz/kqd3/qc6y remainsopenformalstackuppervalidation/deployment/finalreply.
+Upper2aeb518d selectedgate d82c3bb... all62editstepPASS;183-fileordinary4worker underwaythenheavy/rawouterpending. CandidateGitbundleGitHubdownloadverified. Main848 unchanged atthisstage; no new422publicationclaim.
+Currentsetupdraft readrevision22 butnewstartsaveagainCONFLICT/stale_base, toolstatesrereadingcannotfixboundbase. Complete4file environment-startup-handoff-20261008.zip8140B SHA2560847d2eaed839412ef11780b5db219c5c8d72caa73c3db5c6219e631f33f5f13 actualGitHubdownload/all4memberhashPASS; freshsetupchatfromcurrentsettings mustreconcile/save, publish/newtaskrestoreunconfirmed. Bothcheckoutsbootstrap5/5PASS. Latest428finalreviewsAcceptedandmetricchildthink-wgdcCLOSED/synced, scientificdeciders0; storageplanfourassetsGitHubdownloadhashMATCH currentstaticheadroom99281B and425coreexceeds85518B, supportedHostedData+privatecustodyplanexplicitconditional.
