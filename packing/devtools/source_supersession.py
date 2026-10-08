@@ -249,13 +249,14 @@ def _adopt_selected_update(n: int, existing: str, generated: str) -> str:
 
 
 def adopt_selected_report(n: int, existing: str, generated: str) -> str:
-    """Apply SQUISH's selected report to a genuine historical draft.
+    """Apply the selected source report to a genuine historical draft.
 
     Report geometry comes from the retained exact facts. Reviewed source-history prose,
     resources, evidence and blockers belong to the intake and remain editorial additions;
     ordinary lower lanes and their prose come from the generator. Rigidity is promoted
     afterwards by its existing owner. This is publication adaptation, not certification.
     """
+    from devtools import confirm_refinement_records as refinement  # noqa: PLC0415
     from devtools import evand_arrangement_reports as evand  # noqa: PLC0415
     from devtools import register_evand_arrangements as evand_adoption  # noqa: PLC0415
     from devtools import render_case_verifiers  # noqa: PLC0415
@@ -269,9 +270,14 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     if selected is None:
         return generated
     source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
-    if source["source_key"] in (evand.SOURCE_KEY, second.SOURCE_KEY):
+    is_refinement = source["source_key"] in {
+        item.key for item in refinement.packets.SOURCES.values()
+    }
+    if is_refinement or source["source_key"] in (evand.SOURCE_KEY, second.SOURCE_KEY):
         case = safe_load(existing.split("---\n", 2)[1])["packing"]
-        if source["source_key"] == evand.SOURCE_KEY:
+        if is_refinement:
+            adopter = refinement.adopt_case
+        elif source["source_key"] == evand.SOURCE_KEY:
             adopter = evand_adoption.adopt_case
         else:
             adopter = (

@@ -4,7 +4,7 @@ The [source repository](https://github.com/lollipoll/couzo-five-exact-certificat
 is pinned at `bc389ddf7d65277cd19a9b08fb285d86346d6806`, published 7 October 2026 and retrieved
 8 October 2026. This packet carries only the active finite-witness upper-bound request
 from [issue 425](https://github.com/jlevy/squares/issues/425).
-Its reported registration assigns no local feasibility or optimality assurance.
+The complete finite rational witness is locally exact-replayed at V3/C3; no optimality assurance is assigned.
 
 The original five-case release also carries n=130,263,272. The author withdrew them from the active ceiling request because smaller public ceilings exist; they remain historical source evidence. The separate restricted n105 dual is not an unrestricted packing lower bound and is outside this registration. 
 
@@ -57,7 +57,7 @@ that drawing’s feasibility separate from result confirmation. The explicit n68
 runs both producer geometry implementations on all 68 squares and all 2,278 pairs,
 then runs complete overlap and outside-container mutants. The retained receipt names
 actual inputs, both complete results and timings; admission and scoped review are
-still required before result promotion. No analytic launcher or optimizer is run.
+completed before finite-feasibility confirmation. No analytic launcher or optimizer is run.
 
 ## Complete Replay Custody
 
@@ -70,7 +70,7 @@ The compact admission catalogue records complete input identities and actual rou
 python -m devtools.refinement_custody recover --destination /Volumes/spud-ext1/agent-scratch/refinement-recovery
 ```
 
-The recovered inputs must equal all thirteen recorded deciding jobs, including the complete invalid rosters. The final independent custody and integration review is required before a confirmation rung is assigned.
+The recovered inputs must equal all thirteen recorded deciding jobs, including the complete invalid rosters. The [independent closure review](../../../../docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) accepted complete scientific custody after two actual fresh public recoveries. All 103 original files and all thirteen complete deciding inputs/results matched. This supports only finite witness feasibility at V3/C3; publication and the offline check do not decide geometry.
 
 ## Compressed Files
 

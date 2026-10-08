@@ -90,6 +90,14 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/register_refinement_reports.py": (
+        "registers rational source reports while preserving earlier verified ceilings; "
+        "the reported geometry and a historical ceiling never establish s(n)"
+    ),
+    "packing/devtools/confirm_refinement_records.py": (
+        "publishes accepted complete replay as a finite feasible upper ceiling; "
+        "retains historical verification and establishes no optimality or value of s(n)"
+    ),
     "packing/devtools/squish_second_update_confirmation.py": (
         "publishes the admitted complete exact replay as a feasible upper ceiling, "
         "retaining earlier ceilings and refusing optimality claims"

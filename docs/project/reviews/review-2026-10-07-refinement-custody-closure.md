@@ -1,9 +1,10 @@
 # Refinement Replay Custody and Worker Admission Review
 
-The complete local #425/#428 replay archive and its compact admission agree.
-Final confirmation remains pending public download and recovery and the final snapshot
-measurement. The worker admission fixes below pass their scoped regression checks.
-This review does not assign a result rung.
+The #425/#428 finite-feasibility replay, public evidence recovery and private-worker
+admission are accepted within the scope below.
+All four findings are closed.
+The retained executions support confirming-origin V3/C3 evidence for the complete
+rational witnesses at n = 68, 105 and 292; the result records assign those rungs.
 
 Reviewer: the separately prompted `refinement_review` agent, strong tier, GPT-6 Astra at
 xhigh reasoning. The document date is 7 October 2026 in America/Los_Angeles; execution
@@ -12,6 +13,8 @@ and acquisition occurred on 8 October UTC. The initial source checkpoint is
 `b9dc1d3bad016ad12f174427464624537aeab2d5`, including fix commit
 `493a34ad1c007a15c94876a1b59c3ea1cd163d0c`; the scoped modules and tests had no pending
 changes during that check.
+The publication checkpoint is `78229c9e29ac90d8d69834018f380ba991fa996e`; the scoped
+scientific modules and tests remained unchanged there.
 The [host relocation review](review-2026-10-07-refinement-host-rebind.md) is preserved
 unchanged. Its source, mathematical and runtime acceptance boundaries still apply.
 
@@ -67,17 +70,29 @@ No deciding input or result was stripped.
 
 The reviewer checked every local archive member against the complete file manifest.
 The runner, adapter, original and relocated manifest/runtime identities match the prior
-accepted pins. Public download and fresh-directory recovery are still pending; local
-archive equality alone does not establish them.
+accepted pins.
+
+The public, non-draft prerelease targets the publication checkpoint above.
+GitHub identifies the archive as asset `RA_kwDOTXp6xc4k-XBj` and reports the same size
+and SHA-256 as the retained manifest.
+The reviewer then ran `python -m devtools.refinement_custody recover --destination
+/Volumes/spud-ext1/agent-scratch/import-resume-review/public-recovery-425428-v1` with
+project Python 3.14.7, without the local-archive option, into a previously absent
+directory on the external volume.
+The command downloaded the published asset and exited zero: **103 byte-identical files
+recovered; all 13 full input/result jobs bind to the canonical facts**. Recovery checked
+the outer asset, inner manifest, exact complete file roster and every member’s original
+bytes, then reconstructed the canonical admission from the recovered inputs, actual
+receipts, stdout and runtime.
 
 ## Findings and Disposition
 
 - **R1, closed earlier:** schema-valid changes to private facts were accepted without
   source equality. Independently recomputed canonical fact pins and nine validly shaped
   side, coordinate and metadata mutants now bind all three complete source conversions.
-- **R2, pending:** durable recovery and final storage admission.
-  Complete local archive custody is checked above; public roundtrip and the final
-  measured snapshot remain.
+- **R2, closed:** durable recovery and storage admission.
+  Independent download from the public release and full recovery passed as recorded
+  above. The final private-worker snapshot remains below the unchanged ceiling.
 - **R3, closed:** the actual worker copier omitted three fact files, admission and house
   metadata because `resources/` is pruned.
   The original fixture copied entire packets and missed this.
@@ -98,7 +113,16 @@ admits all three houses from its copied private inputs.
 Only the three named generated witness leaves may link back.
 Their complete geometry and metadata must equal the private source reconstruction;
 control targets remain private, producers refuse linked outputs, and no snapshot ceiling
-is relaxed. The final measurement must include this addendum and all integration fixes.
+is relaxed. At the publication checkpoint, `snapshot_source_bytes()` independently
+measured **201,222,972 bytes** against the unchanged **201,326,592-byte** ceiling,
+leaving **103,620 bytes** with the draft addendum included.
+After this closure text, the measured snapshot is **201,224,556 bytes**, leaving
+**102,036 bytes** of headroom; this includes the completed addendum.
+
+The offline fast/records gate admits all thirteen complete source/control bindings
+without downloading the full archive or rerunning a scientific predicate.
+Full public recovery remains an explicit command; it preserves the original evidence
+needed to audit those bindings rather than replacing it with summarized verdicts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
