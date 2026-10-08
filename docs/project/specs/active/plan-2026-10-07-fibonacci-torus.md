@@ -95,6 +95,16 @@ Their original files and owning session remain retained, and the existing depend
 rescue rules still restore them if a checked document or registered result needs them.
 Regression tests cover omission, record preservation and future inline-link rescue.
 
+The deferred atlas check also found twelve stale certificate references inherited from
+the base branch: 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258 and 263. Their
+existing first-update rational certificates match all 2,309 squares and 9,236 corners
+exactly. The regularization producer changes only the retained-certificate reference and
+match flag in those twelve index rows; all other 312 rows, geometry metadata and
+regenerated packing files are unchanged.
+This is a provenance repair using retained evidence, not another packing import.
+The existing release-pin tool updates the publication’s data edition after that data
+commit, without regenerating drawings.
+
 The selected proof-simplification follow-up is `think-zbkk`, which first asks whether
 the envelope can survive the existing local proof’s independent-angle and broken-contact
 branches. The missing manuscript and its specific rational Erdős witness are tracked by
