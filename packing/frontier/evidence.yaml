@@ -28127,3 +28127,90 @@ evidence:
         update geometries, full decided inputs and full-size controls. The original eleven-case reviews
         retain their original scope.
     source_reviewed: '2026-10-07'
+
+  - id: E-squish-second-update-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[SQUISH second update 2026-10-07]'
+    certificate: packing/resources/web/squish-422-second-update-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Nine source claims are retained as attributed normalized rational facts only.
+      Current reported layer V0/C0 admits no feasibility replay or scoped review; producer code,
+      success logs, raw prose and raw drawings remain outside Git. No optimality, rigidity or
+      human oversight established. Five source decimal prints lie below their exact sides and
+      remain quotations; current displays use safe upward ceilings. Nate Chaoweeraprasit reports
+      Kingbird (David Ellsworth), Francisco Couzo and SQUISH seeds and human-directed Claude Opus5.5
+      assistance. Earlier verified lanes remain unchanged.
+    source_reviewed: '2026-10-07'
+
+  - id: E-squish-second-update-2026-10-07-exact-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[SQUISH second update 2026-10-07]'
+    certificate: packing/witnesses/squish-422-second-update-2026
+    replay: From packing/, uv run --frozen --all-extras --group dev python -m devtools.squish_second_update_confirmation
+      check-certification --replay. The completed 27-job dual exact replay is retained unchanged; canonical
+      retention itself does not rerun either decider. Both routes accepted all nine positives and rejected
+      all eighteen complete-roster controls.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-squish-second-update-confirmation
+    independence_record: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    limitations: The nine packings contain 1762 squares and 190303 unordered pairs per route. Across nine
+      positives and eighteen full-roster controls, each route tested 570909 pairs, 1141818 across both
+      routes. All 27 children and the outer batch exited zero. The sum of per-job dual-route decision
+      wall times is 222.246477794 seconds; parallel batch elapsed time was not recorded. The two independently
+      implemented SAT routes share the SAT theorem, Python Fraction, YAML loading and serialized source-to-corner
+      conversion. Independent rotation-matrix derivation in the mathematics review addresses that shared
+      conversion. Historical actual witness metadata, complete deciding inputs, runtime identities, schema
+      and source custody remain retained unchanged; canonical repository-relative metadata is an explicit
+      transformation validated by full ordered geometry equality. No source producer executable was run.
+      Exact sides are unchanged, with zero dilation, safe upward sixteen-place displays and separate source
+      prints. Feasibility establishes no optimality, rigidity, proof-assistant verification or independently
+      audited human oversight.
+    external_review:
+      state: informally-verified
+      date: '2026-10-07'
+      reviewed_by: GPT-6 Astra mathematics and separately prompted GPT-6 Astra semantic-binding AI review
+        lanes
+      note: Two distinct accepted reviews docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+        and docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md cover all
+        nine immutable source geometries, all 27 complete deciding inputs, all 54 outcomes and full-size
+        controls. Their acceptance concerns the completed scientific replay, not a future integration
+        pull request.
+    source_reviewed: '2026-10-07'

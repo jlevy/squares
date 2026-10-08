@@ -1511,3 +1511,27 @@ verifiers:
       native exact_verify and independently written rational-corner checker decide geometry; both
       share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata
       checks are premises, not additional geometric deciders.
+
+  - id: V-squish-second-update-confirmation
+    program: devtools.squish_second_update_confirmation
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_second_update_confirmation.py
+    - packing/devtools/squish_second_update_house_links.py
+    - packing/devtools/squish_second_update_packets.py
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the complete immutable second-update roster, all historical full replay inputs and
+      outcomes, accepted complete review records and the explicit canonical metadata transformation. Checks
+      bounded decoding, full coverage, safe ceilings and exact house witness custody; fresh dual decisions
+      require explicit --replay.
+    independence_record: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent
+      rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner
+      conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.

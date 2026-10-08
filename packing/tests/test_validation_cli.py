@@ -3812,6 +3812,7 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         "published URL registry and historical compatibility",
         # New custody checks repeat until their tree reuse is explicitly classified.
         "SQUISH update certification binds complete reviewed inputs",
+        "SQUISH second update certification binds complete reviewed inputs",
     }
 
     # Fail closed: a new fast step is repeated until explicitly classified.

@@ -88,10 +88,30 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: carry binary64 coordinates, so a contact gap near the tightest tolerance moves more
 #: of them than it moved the 28-digit records they replaced.
 GOLDEN_UNSTABLE = {
-    "n=1..100": [68],
-    "n=1..200": [68, 102, 105, 106, 108, 110, 123, 129, 130, 132, 172, 177, 180, 199],
+    "n=1..100": [68, 88],
+    "n=1..200": [
+        68,
+        88,
+        102,
+        105,
+        106,
+        108,
+        110,
+        123,
+        129,
+        130,
+        132,
+        154,
+        155,
+        172,
+        177,
+        179,
+        180,
+        199,
+    ],
     "n=1..324": [
         68,
+        88,
         102,
         105,
         106,
