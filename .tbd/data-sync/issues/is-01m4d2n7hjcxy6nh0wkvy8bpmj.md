@@ -5,7 +5,7 @@ title: Make the exact-values catalogue practical to browse on the web
 kind: feature
 status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-01a118e4
 labels: []
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T06:19:23.056Z
-updated_at: 2026-10-08T08:40:15.998Z
+updated_at: 2026-10-08T08:49:42.600Z
 started_at: 2026-10-08T06:20:25.579Z
 ---
 User says the366-page PDF is unmanageably large and asks for efficient web rendering. W7 continuation: canonical searchable/filterable/paginated catalogue; load individual entry metadata and full coefficient strings on demand; retain complete HTML/Markdown/PDF archival exports and every existing mathematical/source-status boundary. Compare static initial payload against existing4811981-byte HTML with a retained measurement tool; do not claim unmeasured browser latency or throughput. Coordinator owns shared records, publication integration, measurements, docs, sole commits/PR updates; renderer and browser workers own disjoint files and Astra independently reviews mathematical presentation/serialization. Keep all temp/build/cache data on verified external scratch.
@@ -33,3 +33,5 @@ Web integration validation, 2026-10-08: final focused renderer/export/measuremen
 Hosted publication at 6900cb94207eeea589dbcf3cb8c75a45eabbb633: Packing PR run 37745690101 passed. Pages 37745689888 refused complete-archive canonical/og:url pointing at the browser and duplicate descriptions; the required aggregate wall result is derivative and unmeasurable, not a timing regression. Root corrected separate archive metadata and PDF link base. A regression with the actual check_published_site validators fails before the fix; corrected renderer/export/measurement/scope/workflow selection passes 94 tests in 25.62 s, Ruff and BasedPyright pass. The obsolete full 37745798682 was explicitly canceled and preserved; a corrected-head full checkpoint will replace it. Mathematical data and browser initial bytes are unchanged.
 
 Corrected final web head a910a0e6ad2a72bc8e57c63e1649c9e25ca5a2f3 is pushed to PR435. All 62 applicable edit checks pass (393.66 s on this host; prior web edit 109.01 s), with unchanged ceiling/assertions. Exact-head automatic Packing37748141349, Pages37748141430 and mergeability37748135243 plus full checkpoint37748134343 are under read-only delegated watch. The rebuilt browser preview visibly links this exact source head and retains n83 certificate and uncounted source ordinal boundaries. Completed test copies/caches were moved to Trash after inactivity and evidence checks; unique logs remain in external agent-evidence.
+
+Full checkpoint37748134343 at a910a0e6 completed with eleven deep/portability jobs passing, ten intentional skips, and one actual main-gate failure plus its dependent aggregate. Only fast behavioral shard C failed: test_a_frontier_row_opens_its_record_and_steps_to_the_next observes an invisible native popover with one aria-expanded=true row (3,243 other tests passed). Gate wall1371.41 s; full run1505 s. Complete failed log and compact timing/summary receipts are retained outside scratch. Claimed child think-gtyf covers a source fix and deterministic close-state regression; moderate browser worker owns the disjoint JS/tests/probe and Astra independently reviews event ordering, focus and request lifecycle. Ordinary row reopening already invalidates older requests; no second normal-row stale-fetch production defect is claimed. All earlier automatic PR checks remain passed at that head, and the corrected source head will receive fresh automatic/full validation.
