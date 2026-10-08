@@ -364,12 +364,18 @@ def test_results_prose_font_arrival_retains_layout(
         report = check_site_rendering.read_report(page)
         assert report["shownMath"] > 0
         assert report["unreadableMath"] == 0
+        assert report["supported"], report
+        assert report["lcpMs"] > 0, report
+        # Holding a font, substituting CSS and inspecting fonts through CDP is
+        # not the production load protocol. Keep readability and native CLS here;
+        # The production CLI enforces LCP, task and blocking budgets on normal loads.
+        assert not check_site_rendering.problems(report, javascript=False), report
         if fallback == "unadjusted":
             # The original fallback is a real negative control: exposing a
             # first paint before PT Serif arrives must still trip the .1 guard.
             assert report["cls"] > check_site_rendering.CLS_LIMIT, report
         else:
-            assert not check_site_rendering.problems(report), report
+            assert report["cls"] <= check_site_rendering.CLS_LIMIT, report
     finally:
         context.close()
 

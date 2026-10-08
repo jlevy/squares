@@ -18,6 +18,7 @@ import math
 import re
 import sys
 import tempfile
+from collections.abc import Iterable
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -664,17 +665,7 @@ def check_certification(
     rows, controls = admit_certification()
     for n in selected:
         row = rows[n]
-        expected = to_witness(read_fact(n))
-        certificate = read_certificate(n)
-        if (
-            certificate.get("id") != expected["id"]
-            or certificate.get("source") != expected["source"]
-            or certificate.get("certificate") != expected["certificate"]
-            or original.checker_input(certificate) != original.checker_input(expected)
-        ):
-            raise original.PacketError(
-                f"n={n} revision-specific witness metadata/input mismatch"
-            )
+        certificate = _check_certificate(n)
         if replay and original.decide(certificate) != {
             checker: row[checker] for checker in CHECKERS
         }:
@@ -682,6 +673,19 @@ def check_certification(
     if replay:
         validate_controls(controls, replay=True)
     return rows
+
+
+def _check_certificate(n: int) -> dict[str, Any]:
+    expected = to_witness(read_fact(n))
+    certificate = read_certificate(n)
+    if (
+        certificate.get("id") != expected["id"]
+        or certificate.get("source") != expected["source"]
+        or certificate.get("certificate") != expected["certificate"]
+        or original.checker_input(certificate) != original.checker_input(expected)
+    ):
+        raise original.PacketError(f"n={n} revision-specific witness metadata/input mismatch")
+    return certificate
 
 
 def restore_witnesses() -> None:
@@ -703,25 +707,55 @@ def restore_witnesses() -> None:
 
 
 def linked_certificate_problem(path: str, *, repository: Path) -> str | None:
-    """Admit only the worker's twelve complete, read-only linked reviewed proofs.
+    return linked_certificate_problems([path], repository=repository)[path]
 
-    The worker keeps the complete private source facts and replay receipts. Its
-    generated proof directory links back to the source checkout to stay within
-    the snapshot ceiling. Reading such an artifact requires the same complete
-    semantic admission as the certification CLI; existence alone is insufficient.
-    Mutation targets and producer outputs retain their separate containment guards.
+
+def linked_certificate_problems(
+    paths: Iterable[str], *, repository: Path
+) -> dict[str, str | None]:
+    """Admit one call's complete private custody and check every selected linked proof.
+
+    Only the worker's twelve declared proof paths can use its linked proof directory.
+    Every invocation rereads the full facts and replay receipts; each eligible leaf
+    still gets the certification CLI's metadata and geometry checks. Mutation targets
+    and producer outputs retain their separate containment guards.
     """
+    selected = dict.fromkeys(paths)
     if repository.resolve() != REPO.resolve() or not WITNESSES.is_symlink():
-        return "resolves outside the repository"
+        return dict.fromkeys(selected, "resolves outside the repository")
     declared = {certificate_path(n).relative_to(REPO).as_posix(): n for n in RESULT_NUMBERS}
-    n = declared.get(path)
-    if n is None or certificate_path(n).is_symlink():
-        return "resolves outside the repository"
+    eligible: dict[str, int] = {}
+    problems: dict[str, str | None] = {}
+    for path in selected:
+        n = declared.get(path)
+        if n is None or certificate_path(n).is_symlink():
+            problems[path] = "resolves outside the repository"
+        else:
+            eligible[path] = n
+    if not eligible:
+        return problems
     try:
-        check_certification([n])
+        _ = admit_certification()
     except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
-        return f"linked reviewed proof custody mismatch: {error}"
-    return None
+        problems.update(
+            dict.fromkeys(eligible, f"linked reviewed proof custody mismatch: {error}")
+        )
+        return problems
+    for path, n in eligible.items():
+        if (
+            repository.resolve() != REPO.resolve()
+            or not WITNESSES.is_symlink()
+            or certificate_path(n).is_symlink()
+        ):
+            problems[path] = "resolves outside the repository"
+            continue
+        try:
+            _ = _check_certificate(n)
+        except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
+            problems[path] = f"linked reviewed proof custody mismatch: {error}"
+        else:
+            problems[path] = None
+    return problems
 
 
 def confirmed_bound(n: int) -> dict[str, Any]:

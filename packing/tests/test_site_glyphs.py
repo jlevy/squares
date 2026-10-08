@@ -401,6 +401,48 @@ def test_a_face_of_the_shared_assets_is_shipped_and_not_fetched() -> None:
     ]
 
 
+@pytest.mark.parametrize("family", ["Site Prose Georgia", "Site Prose Times"])
+def test_an_unavailable_optional_local_prose_fallback_is_reported_without_font_failure(
+    family: str,
+) -> None:
+    face = {
+        "family": family,
+        "weight": "400",
+        "style": "normal",
+        "display": "auto",
+        "status": "error",
+        "inlined": True,
+        "shared": True,
+        "optional_local": True,
+        "faces": 1,
+    }
+    found = entry(faces=[face])
+    assert measure.glyph_problems(found) == []
+    assert measure.glyph_differences([entry(), found])[-1]["paper.html"] == (
+        "auto, optional local, unavailable"
+    )
+
+
+@pytest.mark.parametrize("family", ["Site Prose Georgia", "PT Serif", "KaTeX_Main"])
+def test_a_font_failure_without_verified_optional_local_sources_is_still_named(
+    family: str,
+) -> None:
+    face = {
+        "family": family,
+        "weight": "400",
+        "style": "normal",
+        "display": "auto",
+        "status": "error",
+        "inlined": True,
+        "shared": True,
+        "optional_local": False,
+        "faces": 1,
+    }
+    assert measure.glyph_problems(entry(faces=[face])) == [
+        f"the face {family} 400 normal failed to load"
+    ]
+
+
 def test_a_page_that_fetches_or_fails_is_named() -> None:
     face = {"family": "KaTeX_Main", "weight": "400", "style": "normal", "display": "swap"}
     found = entry(
@@ -583,6 +625,66 @@ def chromium() -> None:
             driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE)).close()
         except sync_api.Error as error:
             pytest.skip(f"no Chromium to launch: {error.message.splitlines()[0]}")
+
+
+def test_the_probe_only_marks_exact_local_prose_fallback_sources_optional(
+    chromium: None,  # noqa: ARG001
+) -> None:
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    cases = [
+        ("Site Prose Georgia", 'local("Georgia")', "400", "normal", "", True),
+        (
+            "Site Prose Times",
+            'local("Times New Roman"), local("Liberation Serif")',
+            "400",
+            "normal",
+            "",
+            True,
+        ),
+        (
+            "Site Prose Georgia",
+            'local("Georgia"), url("/fonts/absent.woff2")',
+            "400",
+            "normal",
+            "",
+            False,
+        ),
+        ("Site Prose Times", 'local("Georgia")', "400", "normal", "", False),
+        ("PT Serif", 'local("Georgia")', "400", "normal", "", False),
+        ("Site Prose Georgia, malformed", 'local("Georgia")', "400", "normal", "", False),
+        ("Site Prose Georgia", 'local("Georgia")', "700", "normal", "", False),
+        ("Site Prose Georgia", 'local("Georgia")', "400", "italic", "", False),
+        (
+            "Site Prose Georgia",
+            'local("Georgia")',
+            "400",
+            "normal",
+            (
+                '@font-face {font-family: "Site Prose Georgia";'
+                ' src: url("/fonts/absent.woff2"); font-weight: 400; font-style: normal;}'
+            ),
+            False,
+        ),
+    ]
+    with sync_playwright() as driver:
+        browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
+        try:
+            page = browser.new_page()
+            for family, src, weight, style, extra, optional in cases:
+                page.set_content(
+                    f'<style>@font-face {{font-family: "{family}"; src: {src};'
+                    f" font-weight: {weight}; font-style: {style};}}{extra}</style>"
+                )
+                found = page.evaluate(
+                    measure.GLYPHS,
+                    {"wrappers": measure.MATH_WRAPPERS, "mark": measure.GLYPH_MARK},
+                )
+                faces = found["faces"]
+                assert faces, (family, src)
+                assert all(face["optional_local"] is optional for face in faces), faces
+        finally:
+            browser.close()
 
 
 @pytest.fixture(scope="module")

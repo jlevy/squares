@@ -1092,8 +1092,19 @@ def _glyph_settings(
         named = f"face {face['family']} {face['weight']} {face['style']}"
         # A face no glyph asked for stays unloaded, which says nothing of how a page is
         # drawn; one that failed to load does.
-        source = "inlined" if face["inlined"] else "shared" if face.get("shared") else "fetched"
-        failed = ", failed" if face["status"] == "error" else ""
+        optional = face.get("optional_local", False)
+        source = (
+            "optional local"
+            if optional
+            else "inlined"
+            if face["inlined"]
+            else "shared"
+            if face.get("shared")
+            else "fetched"
+        )
+        failed = (
+            (", unavailable" if optional else ", failed") if face["status"] == "error" else ""
+        )
         page.setdefault(named, set()).add(f"{face['display']}, {source}{failed}")
     return settings
 
@@ -1221,8 +1232,9 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
     none on a page set as `templates/paper-design.md` describes.
 
     A page: every formula typeset, by the KaTeX `katex` names when one is given; every
-    face inlined or a file of the site's shared assets (`site_assets`), and loaded, and
-    nothing else fetched. A page of the publication layer: its
+    shipped face inlined or a file of the site's shared assets (`site_assets`), and
+    loaded; optional local-only prose fallbacks may be absent. Nothing else fetched.
+    A page of the publication layer: its
     platform flag set on macOS and nowhere else. A formula: KaTeX's HTML over MathML; at
     its text's own size and in its text's own colour; at the regular weight of the
     composite it is set in; every glyph from a face the page ships; and rasterised as
@@ -1259,7 +1271,7 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
         named = f"{face['family']} {face['weight']} {face['style']}"
         if not face["inlined"] and not face.get("shared"):
             problems.append(f"the face {named} is neither inlined nor a shared asset")
-        if face["status"] == "error":
+        if face["status"] == "error" and not face.get("optional_local", False):
             problems.append(f"the face {named} failed to load")
     mac = entry["platform"].startswith("Mac")
     flagged = entry["root"].get(NATIVE_METRICS) == "true"

@@ -1523,7 +1523,7 @@ def test_new_operating_rule_control_reaches_summary_drift_after_future_rules(
 def test_squish_complete_replay_survives_worker_custody_and_private_controls(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
-    """Linked proofs remain readable while mutations use copied admission records."""
+    """Complete replay reads linked proofs and retains private admission records."""
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
 
     tree, copied = control_snapshot
@@ -1547,29 +1547,18 @@ def test_squish_complete_replay_survives_worker_custody_and_private_controls(
         assert relative in copied
         assert not (tree / relative).is_symlink()
         assert (tree / relative).read_bytes() == source.read_bytes()
-    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
-    selected = [c for c in specification["controls"] if c["name"].startswith("SQUISH update -")]
-    assert len(selected) == 2
-    env = controls.control_environment(tree, tree / "squish-baseline-pycache")
-    baseline = subprocess.run(
-        [sys.executable, "-m", "devtools.squish_followup_packets", "check-certification"],
-        cwd=work,
-        env=env,
-        capture_output=True,
-        text=True,
-        check=False,
-        timeout=30,
-    )
+    with tempfile.TemporaryDirectory(prefix="squish-baseline-pycache-", dir=tree) as pycache:
+        env = controls.control_environment(tree, Path(pycache))
+        baseline = subprocess.run(
+            [sys.executable, "-m", "devtools.squish_followup_packets", "check-certification"],
+            cwd=work,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=30,
+        )
     assert baseline.returncode == 0, baseline.stdout + baseline.stderr
-    for control in selected:
-        target = resolve_control_target(control["file"], tree=tree, work=work)
-        before = target.read_bytes()
-        source = ROOT / control["file"]
-        source_before = source.read_bytes()
-        passed, detail = controls.run_one(control, tree)
-        assert passed, detail
-        assert target.read_bytes() == before
-        assert source.read_bytes() == source_before
     for name in ("fast-cpu4-bdc28e89", "fast-native-bdc28e89"):
         source = ROOT / f"campaign/agent-sessions/session-105-validation/{name}.json"
         assert source in PRUNE
@@ -1613,7 +1602,7 @@ packet.original.exact_verify = packet.original.independent.check = forbidden
 def test_second_squish_complete_replay_survives_native_worker_boundaries(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
-    """Exercise the production copy, real index, complete replay and both live mutants."""
+    """Exercise the production copy, real index and every complete proof leaf."""
     from devtools import squish_second_update_confirmation as packet  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
 
@@ -1644,19 +1633,6 @@ assert tuple(packet.check_certification()) == packet.NUMBERS
 print('all 27 complete inputs and nine proof leaves admitted')
 """,
     )
-    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
-    selected = [
-        control
-        for control in specification["controls"]
-        if control["name"].startswith("SQUISH second update -")
-    ]
-    assert len(selected) == 2
-    for control in selected:
-        source = ROOT / control["file"]
-        original = source.read_bytes()
-        passed, detail = controls.run_one(control, tree)
-        assert passed, detail
-        assert source.read_bytes() == original
 
 
 def test_second_squish_consumers_survive_native_worker_boundaries(
@@ -1685,6 +1661,56 @@ for producer in (atlas.update, lambda: atlas.update_selected([88])):
 print('nine house reads, registry routes and both output guards passed')
 """,
     )
+
+
+@pytest.mark.parametrize(
+    ("prefix", "name"),
+    [
+        pytest.param(
+            "SQUISH update -",
+            "SQUISH update - a different source revision cannot inherit the reviewed replay",
+            id="first-source-revision",
+        ),
+        pytest.param(
+            "SQUISH update -",
+            "SQUISH update - an unsafe published decimal cannot inherit the exact bound",
+            id="first-unsafe-decimal",
+        ),
+        pytest.param(
+            "SQUISH second update -",
+            "SQUISH second update - a different revision cannot inherit the complete replay",
+            id="second-source-revision",
+        ),
+        pytest.param(
+            "SQUISH second update -",
+            (
+                "SQUISH second update - unchanged geometry with a wrong canonical "
+                "witness ID is refused"
+            ),
+            id="second-canonical-id",
+        ),
+    ],
+)
+def test_squish_private_mutation_is_detected_and_restored_in_native_worker(
+    control_snapshot: tuple[Path, set[Path]], prefix: str, name: str
+) -> None:
+    """Each registered fault runs in a fresh native process and restores its private target."""
+    tree, _copied = control_snapshot
+    work = tree / HERE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [c for c in specification["controls"] if c["name"].startswith(prefix)]
+    assert len(selected) == 2
+    matches = [control for control in selected if control["name"] == name]
+    assert len(matches) == 1
+    control = matches[0]
+    target = resolve_control_target(control["file"], tree=tree, work=work)
+    before = target.read_bytes()
+    source = ROOT / control["file"]
+    source_before = source.read_bytes()
+    passed, detail = controls.run_one(control, tree)
+    assert passed, detail
+    assert target.read_bytes() == before
+    assert source.read_bytes() == source_before
 
 
 @pytest.mark.parametrize(

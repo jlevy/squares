@@ -240,7 +240,9 @@ def linked_proofs(private: Path) -> Path:
     return private
 
 
-def test_linked_proof_batch_matches_all_fresh_standalone_checks(linked_proofs: Path) -> None:
+def test_linked_proof_batch_admits_exact_roster_and_refuses_other_escapes(
+    linked_proofs: Path,
+) -> None:
     paths = [
         confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
         for n in confirmation.NUMBERS
@@ -251,13 +253,25 @@ def test_linked_proof_batch_matches_all_fresh_standalone_checks(linked_proofs: P
         "/outside.yaml",
     ]
     batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
-    assert batched == {
+    assert set(batched) == set(paths)
+    assert {path: batched[path] for path in paths[9:]} == {
         path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
-        for path in paths
+        for path in paths[9:]
     }
     assert all(batched[path] is None for path in paths[:9])
     assert all(batched[path] for path in paths[9:])
     assert all(confirmation.linked_certificate_problems(paths, repository=SOURCE).values())
+
+
+@pytest.mark.parametrize("n", confirmation.NUMBERS)
+def test_linked_proof_batch_matches_a_fresh_standalone_check(
+    linked_proofs: Path, n: int
+) -> None:
+    relative = confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+    batched = confirmation.linked_certificate_problems([relative], repository=linked_proofs)
+    standalone = confirmation.linked_certificate_problem(relative, repository=linked_proofs)
+    assert batched == {relative: standalone}
+    assert standalone is None
 
 
 @pytest.mark.parametrize("mutation", ["misbound", "malformed"])

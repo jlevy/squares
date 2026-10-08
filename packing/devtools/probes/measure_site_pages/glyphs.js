@@ -34,7 +34,9 @@
   const { wrappers, mark } = options;
   const wanted = new Set(options.tex ?? []);
   /** @param {string} family */
-  const first = (family) => (family.split(",")[0] ?? "").trim().replace(/^["']|["']$/g, "");
+  const faceName = (family) => family.trim().replace(/^["']|["']$/g, "");
+  /** @param {string} family */
+  const first = (family) => faceName(family.split(",")[0] ?? "");
   /** @param {number} value */
   const round = (value) => Math.round(value * 1000) / 1000;
   const canvas = document.createElement("canvas");
@@ -307,13 +309,20 @@
     });
   }
 
-  /** @type {Map<string, {family: string, weight: string, style: string, display: string, status: string, inlined: boolean, shared: boolean, faces: number}>} */
+  /** @type {Map<string, {family: string, weight: string, style: string, display: string, status: string, inlined: boolean, shared: boolean, optional_local: boolean, faces: number}>} */
   const faces = new Map();
   /** @type {Map<string, boolean>} */
   const inlined = new Map();
   // A face of the site's shared assets, as its stylesheet beside the faces names it.
   /** @type {Map<string, boolean>} */
   const shared = new Map();
+  /** @type {Map<string, boolean>} */
+  const optionalLocal = new Map();
+  /** @type {Map<string, string[]>} */
+  const fallbackSources = new Map([
+    ["Site Prose Georgia", ["Georgia"]],
+    ["Site Prose Times", ["Times New Roman", "Liberation Serif"]],
+  ]);
   for (const sheet of document.styleSheets) {
     for (const rule of sheet.cssRules) {
       if (rule instanceof CSSFontFaceRule) {
@@ -322,7 +331,23 @@
         const src = rule.style.getPropertyValue("src");
         const weight = rule.style.getPropertyValue("font-weight") || "normal";
         const slant = rule.style.getPropertyValue("font-style") || "normal";
-        const named = `${first(rule.style.getPropertyValue("font-family"))}|${weight}|${slant}`;
+        const family = faceName(rule.style.getPropertyValue("font-family"));
+        const named = `${family}|${weight}|${slant}`;
+        const localSource = /local\(\s*(?:"([^"]+)"|'([^']+)'|([^()]+))\s*\)/g;
+        const locals = [...src.matchAll(localSource)].map((match) =>
+          (match[1] ?? match[2] ?? match[3] ?? "").trim(),
+        );
+        const expected = fallbackSources.get(family);
+        const optional =
+          (weight === "400" || weight === "normal") &&
+          slant === "normal" &&
+          expected !== undefined &&
+          locals.length === expected.length &&
+          locals.every((name, index) => name === expected[index]) &&
+          src.replace(localSource, "").replace(/[\s,]/g, "") === "";
+        // Missing optional host fallbacks do not mean a shipped font failed. Every
+        // declaration of this face must contain exactly the expected local sources.
+        optionalLocal.set(named, (optionalLocal.get(named) ?? true) && optional);
         inlined.set(named, (inlined.get(named) ?? true) && !/url\(\s*(?!["']?data:)/.test(src));
         shared.set(
           named,
@@ -332,7 +357,8 @@
     }
   }
   for (const face of document.fonts) {
-    const named = `${first(face.family)}|${face.weight}|${face.style}`;
+    const family = faceName(face.family);
+    const named = `${family}|${face.weight}|${face.style}`;
     const key = `${named}|${face.display}|${face.status}`;
     const row = faces.get(key);
     if (row) {
@@ -340,13 +366,14 @@
       continue;
     }
     faces.set(key, {
-      family: first(face.family),
+      family,
       weight: face.weight,
       style: face.style,
       display: face.display,
       status: face.status,
       inlined: inlined.get(named) ?? false,
       shared: shared.get(named) ?? false,
+      optional_local: optionalLocal.get(named) ?? false,
       faces: 1,
     });
   }
