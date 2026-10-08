@@ -936,6 +936,9 @@ case or experiment separately.
 | [Soundness of sqverify-fast](packing/sqverify_fast/SOUNDNESS.md) | component scope and use | definitive | maintained | — |
 | [sqverify-fast](packing/sqverify_fast/README.md) | component scope and use | supporting | maintained | — |
 | [n17bb-native](packing/n17bb_native/README.md) | component scope and use | supporting | maintained | — |
+| [n17_kernel_verifier: an independent Rust verifier of n = 17 kernel certificates](packing/n17_kernel_verify/README.md) | component scope and use | supporting | maintained | — |
+| [Provenance of `n17_kernel_verifier/`](packing/n17_kernel_verify/PROVENANCE.md) | component scope and use | supporting | maintained | — |
+| [Tests](packing/n17_kernel_verify/TESTING.md) | component scope and use | supporting | maintained | — |
 | [Native n17 Branch-and-Bound Benchmark](packing/benchmarks/n17-bb-native/README.md) | component scope and use | supporting | maintained | — |
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
@@ -6095,6 +6098,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `session-165-codex-task-tree.yaml` | session-165 | 2,730 | 13.15 h | 3.96 h | 3.96 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
+| `codex-task-tree-pr410-preparation-checkpoint.yaml` | unattributed | 459 | 2.3 h | 0.63 h | 0.63 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

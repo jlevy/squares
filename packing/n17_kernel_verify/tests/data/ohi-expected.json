@@ -1,0 +1,21 @@
+{
+ "status": "PASS",
+ "closure": {
+  "kind": "owned_hulls_intersect",
+  "owners": [
+   0,
+   1
+  ],
+  "step": 0
+ },
+ "counts": {
+  "collision_facet_checks": 288,
+  "collision_regions": 6,
+  "cover_checks": 6,
+  "partner_rows": 3,
+  "rows_full": 6,
+  "seed_points": 3,
+  "seed_rows": 6,
+  "steps": 1
+ }
+}
