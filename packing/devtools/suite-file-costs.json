@@ -438,6 +438,7 @@
     "packing/tests/test_read_tier_walls.py": 0.028,
     "packing/tests/test_readme.py": 0.136,
     "packing/tests/test_recent_results.py": 1.93,
+    "packing/tests/test_reconcile_n17_issue_patterns.py": 7.538,
     "packing/tests/test_rectangle_ceiling.py": 0.854,
     "packing/tests/test_rectangle_density.py": 0.986,
     "packing/tests/test_rectangle_density_cli_golden.py": 0.88,
@@ -688,6 +689,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/relevance-ci-repair-2026-10-08.json",
           "provenance": {},
           "tests": 16
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_reconcile_n17_issue_patterns.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-issue-reconciliation-2026-10-08.json",
+          "provenance": {},
+          "tests": 5
         }
       ]
     }
