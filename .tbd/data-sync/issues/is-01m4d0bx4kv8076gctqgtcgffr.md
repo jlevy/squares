@@ -5,13 +5,13 @@ title: "n17: implement and preregister the first eight-state shared-centre exact
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
 spec_path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-08T05:39:20.323Z
-updated_at: 2026-10-08T05:39:20.323Z
+updated_at: 2026-10-08T08:29:22.488Z
 ---
 ---
 title: n17 Shared-Centre LP Readiness
@@ -194,6 +194,34 @@ contract. A verified primal is a relaxation survivor.
 Resource exhaustion is incomplete; absence of a certificate is unresolved.
 No new LP engine, pilot result, ordinary admission, or global bound is established by
 this readiness handoff.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
+
+## Notes
+
+Astra read-only intake of [#413's 07:47 update](https://github.com/jlevy/squares/issues/413#issuecomment-6055253328):
+31 reported patterns comprise four reported standing-FULL passes, sixteen fast-verifier-only
+passes and eleven computed results. Row 19 moves into the fast-only group; rows 30 and 31
+are new computed results. None changes the admitted census, unresolved roster or bound.
+
+Preserve the reviewed first eight canonical shared-centre P8 assignments and the separate
+exact endpoint calibration. A square-placement exclusion does not imply this weaker LP
+is infeasible; LP survival does not contradict such an exclusion. No LP was run here.
+The bounded adapter and arithmetic/deadline guards still need implementation.
+
+Before expensive new exclusion targeting, `think-ewea` reconciles all 31 patterns by
+exact catalogue, frame, cap, closed angle domain, boundary convention, guards and D4
+equality versus containment against the 60 admitted classes, current 95-orbit roster and
+first eight. Unadmitted overlap is scheduling metadata. Repackaged rows 1–4 and #358
+require fresh manifest identities. The reported floating placement for class `14355456`
+is neither an exact packing nor a seventeen-square assignment certificate.
+PR410 kernel qualification does not discharge branch-and-bound certificate intake.
+
+The immutable [LP readiness contract](https://github.com/jlevy/squares/blob/ecb0bf82c38958089c7a41aa3980ce62dcc848b8/docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md)
+and [issue coordination contract](https://github.com/jlevy/squares/blob/ecb0bf82c38958089c7a41aa3980ce62dcc848b8/docs/project/reviews/review-2026-10-07-n17-issue-coordination.md)
+retain the proof premises and acceptance requirements.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
