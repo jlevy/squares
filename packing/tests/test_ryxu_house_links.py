@@ -1,0 +1,270 @@
+"""Exact source presentation, complete house custody and actual worker admission."""
+
+from __future__ import annotations
+
+import copy
+import json
+import shutil
+import subprocess
+import sys
+from decimal import getcontext
+from fractions import Fraction
+from pathlib import Path
+
+import mpmath as mp
+import pytest
+
+from devtools import build_known_best_atlas as atlas
+from devtools import register_ryxu_reports as register
+from devtools import run_negative_controls as controls
+from devtools import ryxu_house_links as houses
+from sqpack.render import render_packing_svg
+from sqpack.render.model import EvidenceTier, RenderSpec, ScalarKind
+from sqpack.witness import materialize_exact_witness, witness_document
+from sqpack.yamlio import safe_load
+
+SOURCE = houses.REPO
+
+
+@pytest.fixture
+def private(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    repo = tmp_path / "private"
+    packet = repo / houses.reports.PACKET.relative_to(SOURCE)
+    shutil.copytree(houses.reports.PACKET, packet)
+    original_metadata = houses.METADATA
+    monkeypatch.setattr(houses.reports, "REPO", repo)
+    monkeypatch.setattr(houses.reports, "PACKET", packet)
+    monkeypatch.setattr(houses, "REPO", repo)
+    monkeypatch.setattr(houses, "METADATA", repo / original_metadata.relative_to(SOURCE))
+    monkeypatch.setattr(houses.shared.confirmation, "REPO", repo)
+    monkeypatch.setattr(register, "REPO", repo)
+    monkeypatch.setattr(
+        register, "HISTORY", packet / "acquisition/frontier-prior-state.json.xz"
+    )
+    for n in houses.NUMBERS:
+        path = houses.house_path(n)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.symlink_to(SOURCE / path.relative_to(repo))
+    return repo
+
+
+def test_exact_radical_projection_keeps_all_coefficient_geometry() -> None:
+    witness = houses.expected_witness(51)
+    original = copy.deepcopy(witness)
+    frame = atlas.frame_from_witness(witness)
+    assert frame.evidence is EvidenceTier.CERTIFIED_UPPER_BOUND
+    assert json.loads(frame.container_side.source) == {
+        "coefficients": ["16/3", "5/3"],
+        "field": witness["scalar"],
+    }
+    _side, poses = houses.radical.inputs("positive")
+    half = houses.radical.Q2(Fraction(1, 2))
+    diagonal = houses.radical.Q2(b=Fraction(1, 2))
+    for square, (x, y, angle) in zip(frame.squares, poses, strict=True):
+        expected = (
+            [
+                (x - half, y - half),
+                (x + half, y - half),
+                (x + half, y + half),
+                (x - half, y + half),
+            ]
+            if angle == "0"
+            else [(x, y - diagonal), (x + diagonal, y), (x, y + diagonal), (x - diagonal, y)]
+        )
+        for point, (cx, cy) in zip(square.corners, expected, strict=True):
+            assert point.x.kind is point.y.kind is ScalarKind.EXACT
+            assert json.loads(point.x.source)["coefficients"] == cx.scalar()
+            assert json.loads(point.y.source)["coefficients"] == cy.scalar()
+    baseline = render_packing_svg(frame, spec=RenderSpec(overlays=frozenset()))
+    decimal_precision, mp_precision = getcontext().prec, mp.mp.dps
+    try:
+        getcontext().prec = 5
+        mp.mp.dps = 5
+        projected = atlas.frame_from_witness(witness)
+        assert render_packing_svg(projected, spec=RenderSpec(overlays=frozenset())) == baseline
+        assert getcontext().prec == mp.mp.dps == 5
+    finally:
+        getcontext().prec, mp.mp.dps = decimal_precision, mp_precision
+    assert witness == original
+
+
+def test_rational_center_basis_corners_remain_exact() -> None:
+    witness = houses.expected_witness(70)
+    original = copy.deepcopy(witness)
+    frame = atlas.frame_from_witness(witness)
+    assert frame.container_side.kind is ScalarKind.RATIONAL
+    assert Fraction(frame.container_side.source) == Fraction(witness["side"])
+    for square, source in zip(frame.squares, witness["squares"], strict=True):
+        cx, cy = map(Fraction, source["center"])
+        c, s = map(Fraction, source["basis"])
+        expected = [
+            (cx - c / 2 + s / 2, cy - s / 2 - c / 2),
+            (cx + c / 2 + s / 2, cy + s / 2 - c / 2),
+            (cx + c / 2 - s / 2, cy + s / 2 + c / 2),
+            (cx - c / 2 - s / 2, cy - s / 2 + c / 2),
+        ]
+        for point, pair in zip(square.corners, expected, strict=True):
+            assert point.x.kind is point.y.kind is ScalarKind.RATIONAL
+            assert (Fraction(point.x.source), Fraction(point.y.source)) == pair
+    corners, side = materialize_exact_witness(witness)
+    assert side == Fraction(witness["side"])
+    assert all(isinstance(value, Fraction) for square in corners for p in square for value in p)
+    assert witness == original
+
+
+def test_full_house_admission_calls_no_geometric_predicate(
+    private: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assert private == houses.REPO
+
+    def forbidden(*_args, **_kwargs):
+        pytest.fail("house admission invoked a new geometric decider")
+
+    monkeypatch.setattr(houses.radical, "exact_verify", forbidden)
+    monkeypatch.setattr(houses.reports.legacy, "exact_verify", forbidden)
+    monkeypatch.setattr(houses.reports.legacy.independent, "check_squares", forbidden)
+    monkeypatch.setattr(houses.radical, "independent", forbidden)
+    admitted = houses.check_houses()
+    assert tuple(admitted) == houses.NUMBERS
+    assert admitted[51]["side"] == ["16/3", "5/3"]
+    assert admitted[51]["square_size"] == "1"
+
+
+@pytest.mark.parametrize("n", [51, 70, 105, 108, 295])
+@pytest.mark.parametrize("mutation", ["source", "claim", "result", "geometry", "extra"])
+def test_complete_house_mutants_are_refused(
+    private: Path, tmp_path: Path, n: int, mutation: str
+) -> None:
+    assert private == houses.REPO
+    witness = houses.check_houses([n])[n]
+    if mutation == "source":
+        witness["source"]["revision"] = "wrong-source"
+    elif mutation == "claim":
+        witness["claim"]["limitations"] = "Global optimality has been proved."
+    elif mutation == "result":
+        witness["certificate"]["result"]["pairs_tested"] -= 1
+    elif mutation == "extra":
+        witness["certificate"]["result"]["global_optimality"] = True
+    else:
+        witness["squares"][0]["center"][0] = ["2", "0"] if n == 51 else "2"
+    changed = tmp_path / "changed.yaml"
+    changed.write_text(witness_document(witness, schema="../witness.schema.yaml"))
+    leaf = houses.house_path(n)
+    leaf.unlink()
+    leaf.symlink_to(changed)
+    with pytest.raises((ValueError, RuntimeError), match=r"differs|schema-invalid"):
+        houses.check_houses([n])
+
+
+@pytest.mark.parametrize("n", houses.NUMBERS)
+def test_each_linked_house_producer_refuses_before_write(private: Path, n: int) -> None:
+    assert private == houses.REPO
+    before = houses.house_path(n).read_bytes()
+    with pytest.raises(ValueError, match="escapes"):
+        houses.guard_house_outputs([n])
+    assert houses.house_path(n).read_bytes() == before
+
+
+def test_private_metadata_cannot_change_scope(private: Path) -> None:
+    assert private == houses.REPO
+    value = houses.reports.kernel.read_xz(houses.METADATA)
+    value["cases"][0]["metadata"]["certificate"]["result"]["limitations"] = "Global optimality."
+    houses.reports.save(houses.METADATA, value)
+    with pytest.raises(ValueError, match="native result differs"):
+        houses.check_houses([51])
+
+
+def test_radical_upward_display_is_strictly_outward() -> None:
+    side, _poses = houses.radical.inputs("positive")
+    shown = Fraction(houses.radical_display())
+    assert (houses.radical.Q2(shown) - side).sign() >= 0
+    assert (houses.radical.Q2(shown - Fraction(1, 10**16)) - side).sign() < 0
+
+
+def test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers(
+    tmp_path: Path,
+) -> None:
+    carried = {*controls.COPY_SEPARATELY, *controls.snapshot_pruned_targets()}
+    assert set(houses.private_input_paths()) <= carried
+    assert controls.snapshot_source_bytes() <= controls.SNAPSHOT_MAX_BYTES
+    tree = tmp_path / "worker"
+    controls.clone_tree(tree)
+    for path in houses.private_input_paths():
+        private = tree / path.relative_to(SOURCE)
+        assert private.is_file()
+        assert not private.is_symlink()
+        assert private.read_bytes() == path.read_bytes()
+    script = """
+from devtools import ryxu_house_links as h, build_known_best_atlas as a
+from devtools import refinement_custody as old425
+from devtools import squish_second_update_confirmation as old422
+old425.check_index(old425.read_index()); old422.admit_certification(); h.check_houses()
+before=(a.MANIFEST.read_bytes(),a.SOURCE_MANIFEST.read_bytes())
+for producer in (lambda: a.update_selected([51]), a.update):
+    try: producer()
+    except ValueError as e: assert 'escapes' in str(e)
+    else: raise AssertionError('producer followed an external geometry leaf')
+assert before==(a.MANIFEST.read_bytes(),a.SOURCE_MANIFEST.read_bytes())
+"""
+    result = subprocess.run(
+        [sys.executable, "-c", script],
+        cwd=tree / controls.HERE,
+        env=controls.control_environment(tree, tmp_path / "pycache"),
+        capture_output=True,
+        text=True,
+        timeout=45,
+        check=False,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert controls.snapshot_source_bytes() <= controls.SNAPSHOT_MAX_BYTES
+
+
+def test_frontier_witness_field_parser_is_independent_of_key_order() -> None:
+    case = atlas._frontier_case(51)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    updated = atlas._frontier_with_witness(case, "W-known-best-n051")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    original = safe_load(case.text.split("---\n", 2)[1])
+    assert safe_load(updated.split("---\n", 2)[1]) == original
+
+
+@pytest.mark.parametrize("n", [51, 105, 108])
+@pytest.mark.parametrize("mutation", ["side", "credit", "body"])
+def test_source_adoption_refuses_mutable_upper_geometry_claims(
+    private: Path, n: int, mutation: str
+) -> None:
+    assert private == houses.REPO
+    original = (SOURCE / f"packing/frontier/n-{n:03d}.md").read_text()
+    prefix, front, body = original.split("---\n", 2)
+    document = safe_load(front)
+    if mutation == "side":
+        document["packing"]["reported_upper_bound"]["value"] = "99"
+        document["packing"]["reported_upper_bound"]["exact_form"] = "99"
+    elif mutation == "credit":
+        document["packing"]["reported_upper_bound"]["found_by"] = ["wrong-finder"]
+    else:
+        body = body.replace("displayed upward as", "global optimum exactly equals")
+    changed = prefix + "---\n" + register.dump(document) + "---\n" + body
+    history = houses.reports.kernel.read_xz(register.HISTORY)
+    old = next(row for row in history["cases"] if row["n"] == n)["frontier"]
+    adopted = register.adopt_case(n, changed, old)
+    result = safe_load(adopted.split("---\n", 2)[1])["packing"]
+    assert result["reported_upper_bound"] == register.reported_bound(n)
+    before = safe_load(old.split("---\n", 2)[1])["packing"]
+    for field in (
+        "verified_upper_bound",
+        "reported_lower_bound",
+        "verified_lower_bound",
+        "status",
+    ):
+        assert result[field] == before[field]
+    assert "global optimum exactly equals" not in adopted
+
+
+def test_unmapped_confirming_evidence_is_refused(private: Path) -> None:
+    assert private == houses.REPO
+    original = (SOURCE / "packing/frontier/n-051.md").read_text()
+    prefix, front, body = original.split("---\n", 2)
+    document = safe_load(front)
+    document["packing"]["verified_upper_bound"]["evidence"] = ["E-ryxu-made-up-feasibility"]
+    changed = prefix + "---\n" + register.dump(document) + "---\n" + body
+    with pytest.raises(ValueError, match="unmapped confirming evidence"):
+        register.adopt_case(51, changed, original)

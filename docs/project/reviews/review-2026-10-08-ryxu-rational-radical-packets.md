@@ -191,6 +191,49 @@ jobs and 7,650 pair decisions; it is not the reviewer’s wall measurement.
 No claimed source search result, source program output or contact count substituted for
 an independently evaluated geometric predicate.
 
+## Exact Presentation API Review
+
+The presentation changes were reviewed on the working patch over
+`e49f3417a7eea2fe89b6f29b862677f76a33105d`, before the production-adoption freeze.
+`materialize_exact_witness` exposes the existing exact parser and pose expansion.
+It performs no packing predicate and assigns no assurance.
+The atlas renderer keeps rational coordinates as `Fraction` identities.
+For number-field coordinates and the side, it retains the reduced coefficient vector and
+the entire declared field polynomial and root-isolating interval as the exact identity;
+the field’s decimal projection is used only for drawing.
+This is an appropriate separation between exact source representation and display.
+The materializer docstring records that boundary, and callers that decide feasibility
+still use the exact verifier.
+
+The reviewer independently compared every corner of the complete n=51 input against a
+direct rational-pair axis/diamond construction and every corner of the complete n=70
+input against direct `Fraction` pose expansion.
+The test also checked that changing the selected algebraic root changes both the exact
+identity and projection, that the numerical n=52 route remains numerical, and that none
+of the three input dictionaries changes.
+Packing predicates and margin computation were replaced with immediate failures during
+this reproduction; none was called.
+The reproduction passed in 0.181 seconds, recorded in `ryxu-presentation-api-review.log`
+in the external review directory.
+
+Three source tests were independently run with project Python 3.14.7:
+`test_exact_radical_projection_keeps_all_coefficient_geometry`,
+`test_rational_center_basis_corners_remain_exact`, and
+`test_radical_upward_display_is_strictly_outward`. **All three passed in 1.10 seconds.**
+The first also checks that low ambient Decimal and mpmath precision neither changes the
+rendering nor leaks a changed precision context.
+The third proves the displayed radical ceiling is outward by exact order and is the
+smallest decimal at the selected precision with that property.
+The log is `ryxu-presentation-tests.log` in the external review directory.
+
+No presentation defect was found in this reviewed scope.
+This acceptance does not close production adoption: complete metadata for all eighteen
+selected houses, actual private-worker admission and mutation refusals, preservation of
+earlier source packets, final storage admission and the final record expressions remain
+separate gates. The new worker regression must retain a bounded subprocess and check the
+unchanged storage ceiling before copying; that pre-freeze feedback was sent to its
+owner.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

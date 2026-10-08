@@ -28615,3 +28615,65 @@ evidence:
       note: The retained closure review accepts complete finite-feasibility replay and public custody
         only.
     source_reviewed: '2026-10-07'
+  - id: E-ryxu-432-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+      - 70
+      - 84
+      - 86
+      - 88
+      - 102
+      - 103
+      - 105
+      - 108
+      - 123
+      - 126
+      - 127
+      - 129
+      - 130
+      - 131
+      - 146
+      - 153
+      - 175
+      - 179
+      - 236
+      - 258
+      - 261
+      - 263
+      - 267
+      - 295
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The source reports finite rational feasible ceilings for all 25 complete certificates
+      retained in the factual packet. Eighteen improve the current source displays; seven are superseded
+      and retained. This claim establishes no optimality or local-minimum theorem.
+    source_reviewed: '2026-10-08'
+  - id: E-ryxu-432-radical-n51-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 51
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[ry-xu square packing 2026]'
+    certificate: packing/resources/web/ry-xu-new-packings-2026-10-08/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The 51 exact coefficient poses give the construction upper bound s(51) <= (16+5sqrt(2))/3.
+      This does not assert equality with s(51), optimality, rigidity or the unconfirmed 191-touching-pair
+      source claim.
+    source_reviewed: '2026-10-08'

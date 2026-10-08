@@ -257,6 +257,7 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     afterwards by its existing owner. This is publication adaptation, not certification.
     """
     from devtools import confirm_refinement_records as refinement  # noqa: PLC0415
+    from devtools import register_ryxu_reports as ryxu  # noqa: PLC0415
     from devtools import render_case_verifiers  # noqa: PLC0415
     from devtools import squish_followup_packets as update  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as confirmation  # noqa: PLC0415
@@ -268,13 +269,16 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     if selected is None:
         return generated
     source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
+    is_ryxu = source["source_key"] == ryxu.houses.SOURCE_KEY
     is_refinement = source["source_key"] in {
         item.key for item in refinement.packets.SOURCES.values()
     }
-    if is_refinement or source["source_key"] == second.SOURCE_KEY:
+    if is_ryxu or is_refinement or source["source_key"] == second.SOURCE_KEY:
         case = safe_load(existing.split("---\n", 2)[1])["packing"]
         adopter = (
-            refinement.adopt_case
+            ryxu.adopt_case
+            if is_ryxu
+            else refinement.adopt_case
             if is_refinement
             else (
                 confirmation.adopt_verified

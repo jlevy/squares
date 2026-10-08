@@ -1405,7 +1405,17 @@ sources:
       issue 428, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
       Normalized geometric facts and attributed source custody are retained; source notices assign no
       blanket licence.
+  - key: '[ry-xu square packing 2026]'
+    authors:
+    - ry-xu
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: independent
+    note: The retained factual source certificates at 8dc415296f697f5140caea27c7a0193d52deb4e6 identify
+      ry-xu and disclose LLM assistance; no unrestricted optimality or contact-count theorem is admitted.
 credited_names:
+  ry-xu: ry-xu
   Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang

@@ -273,10 +273,19 @@ def test_xz_trailing_and_schema_contract_refused(private: Path) -> None:
 
 
 def add_house_files(private: Path) -> None:
+    rows = confirmation.admit_certification()
+    metadata = house.admitted_metadata(rows)
+    retained = private.parent / "historical-houses"
+    retained.mkdir(exist_ok=True)
     for n in confirmation.NUMBERS:
         path = house.house_path(n)
         path.parent.mkdir(parents=True, exist_ok=True)
-        source = SOURCE / path.relative_to(private)
+        witness = confirmation.original.to_witness(confirmation.read_fact(n))
+        witness.update(copy.deepcopy(metadata[n]["metadata"]))
+        source = retained / path.name
+        source.write_text(
+            confirmation.witness_document(witness, schema="../witness.schema.yaml")
+        )
         if n in house.LINK_NUMBERS:
             path.symlink_to(source)
         else:
