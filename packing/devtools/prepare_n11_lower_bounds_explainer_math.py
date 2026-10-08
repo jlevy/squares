@@ -1157,7 +1157,9 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("viewport width must be positive")
     if args.output and args.output.resolve() == args.page.resolve():
         parser.error("the JSON report must not overwrite its input HTML")
-    source = args.page.read_text(encoding="utf-8")
+    from devtools.site_assets import read_inline_page  # noqa: PLC0415
+
+    source = read_inline_page(args.page)
     report = check_geometry(
         source,
         browser_name=args.browser,

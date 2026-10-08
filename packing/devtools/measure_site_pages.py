@@ -204,7 +204,7 @@ import statistics
 import sys
 from collections.abc import Iterable, Sequence
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from devtools import render_overview
 from devtools.preview_site import (
@@ -221,6 +221,9 @@ from devtools.preview_site import (
 from devtools.render_n11_lower_bounds_explainer import MATH_WRAPPERS
 from sqpack.probes import applied, probe
 
+if TYPE_CHECKING:
+    from playwright.sync_api import Page
+
 PROBES = Path(__file__).resolve().parent / "probes"
 _INSTRUMENT = applied(probe(PROBES, "measure_site_pages/instrument"))
 _DONE = probe(PROBES, "measure_site_pages/done")
@@ -231,6 +234,7 @@ LADDERS = probe(PROBES, "measure_site_pages/ladders")
 MATH_FACES = probe(PROBES, "measure_site_pages/math_faces")
 SPACING = probe(PROBES, "measure_site_pages/spacing")
 COLUMNS = probe(PROBES, "measure_site_pages/columns")
+_COLUMNS_SCROLL = probe(PROBES, "measure_site_pages/columns_scroll")
 CHIPS = probe(PROBES, "measure_site_pages/chips")
 POPOVER = probe(PROBES, "measure_site_pages/popover")
 GLYPHS = probe(PROBES, "measure_site_pages/glyphs")
@@ -642,7 +646,12 @@ COLUMN_SHOT_HEIGHT = 1100
 
 
 def measure_columns(
-    base: str, pages: Sequence[str], *, widths: Sequence[int], shots: Path | None = None
+    base: str,
+    pages: Sequence[str],
+    *,
+    widths: Sequence[int],
+    shots: Path | None = None,
+    scroll_check: bool = False,
 ) -> list[dict[str, Any]]:
     """Every shared data table's columns on each page at each width, once its math is
     typeset, one entry a table: its width, how far it runs past what scrolls it sideways,
@@ -664,6 +673,25 @@ def measure_columns(
                 page.goto(f"{base}/{name}", wait_until="load")
                 settle_math(page)
                 found: list[dict[str, Any]] = page.evaluate(COLUMNS)
+                if scroll_check:
+                    # Report both scroll extremes and the restored geometry. The
+                    # observer keeps changed widths visible rather than accepting them.
+                    states = {"initial": [_column_geometry(table) for table in found]}
+                    for state, position in (
+                        ("vertical_end", "bottom"),
+                        ("horizontal_end", "right"),
+                        ("restored", "reset"),
+                    ):
+                        page.evaluate(_COLUMNS_SCROLL, {"position": position})
+                        states[state] = [
+                            _column_geometry(table) for table in page.evaluate(COLUMNS)
+                        ]
+                    if any(len(tables) != len(found) for tables in states.values()):
+                        raise ValueError("the visible table set changed while scrolling")
+                    for index, table in enumerate(found):
+                        table["scroll_geometry"] = {
+                            state: tables[index] for state, tables in states.items()
+                        }
                 results.extend({"page": name, "width": width, **table} for table in found)
                 stem = re.sub(r"[^A-Za-z0-9]+", "-", name.removesuffix(".html")).strip("-")
                 for index, table in enumerate(found):
@@ -682,6 +710,28 @@ def measure_columns(
                 page.close()
         browser.close()
     return results
+
+
+def _column_geometry(table: dict[str, Any]) -> dict[str, Any]:
+    """Keep layout and scroll positions without duplicating each column's contents."""
+    return {
+        **{
+            key: table[key]
+            for key in (
+                "table",
+                "layout",
+                "table_width",
+                "frame_width",
+                "scrolls",
+                "page_scrolls",
+                "window_scroll_x",
+                "window_scroll_y",
+                "frame_scroll_left",
+                "shown_rows",
+            )
+        },
+        "column_widths": {column["column"]: column["width"] for column in table["columns"]},
+    }
 
 
 def measure_chips(
@@ -905,6 +955,13 @@ def _host_faces(faces: Iterable[str]) -> str:
     return ", ".join(sorted({face for face in faces if face.endswith(HOST)}))
 
 
+def read_glyphs(page: Page, *, tex: Sequence[str] = ()) -> dict[str, Any]:
+    """Read the owned glyph probe on an already loaded page without extra measurement."""
+    return page.evaluate(
+        GLYPHS, {"wrappers": MATH_WRAPPERS, "mark": GLYPH_MARK, "tex": list(tex)}
+    )
+
+
 def measure_glyphs(
     base: str,
     pages: Sequence[str],
@@ -967,9 +1024,7 @@ def measure_glyphs(
             if style:
                 page.add_style_tag(content=style)
                 page.wait_for_timeout(200)
-            found: dict[str, Any] = page.evaluate(
-                GLYPHS, {"wrappers": MATH_WRAPPERS, "mark": GLYPH_MARK, "tex": list(tex)}
-            )
+            found = read_glyphs(page, tex=tex)
             session = page.context.new_cdp_session(page)
             session.send("DOM.enable")
             session.send("CSS.enable")
@@ -1045,8 +1100,19 @@ def _glyph_settings(
         named = f"face {face['family']} {face['weight']} {face['style']}"
         # A face no glyph asked for stays unloaded, which says nothing of how a page is
         # drawn; one that failed to load does.
-        source = "inlined" if face["inlined"] else "shared" if face.get("shared") else "fetched"
-        failed = ", failed" if face["status"] == "error" else ""
+        optional = face.get("optional_local", False)
+        source = (
+            "optional local"
+            if optional
+            else "inlined"
+            if face["inlined"]
+            else "shared"
+            if face.get("shared")
+            else "fetched"
+        )
+        failed = (
+            (", unavailable" if optional else ", failed") if face["status"] == "error" else ""
+        )
         page.setdefault(named, set()).add(f"{face['display']}, {source}{failed}")
     return settings
 
@@ -1174,8 +1240,9 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
     none on a page set as `templates/paper-design.md` describes.
 
     A page: every formula typeset, by the KaTeX `katex` names when one is given; every
-    face inlined or a file of the site's shared assets (`site_assets`), and loaded, and
-    nothing else fetched. A page of the publication layer: its
+    shipped face inlined or a file of the site's shared assets (`site_assets`), and
+    loaded; optional local-only prose fallbacks may be absent. Nothing else fetched.
+    A page of the publication layer: its
     platform flag set on macOS and nowhere else. A formula: KaTeX's HTML over MathML; at
     its text's own size and in its text's own colour; at the regular weight of the
     composite it is set in; every glyph from a face the page ships; and rasterised as
@@ -1189,8 +1256,19 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
     problems: list[str] = []
     if entry["untypeset"]:
         problems.append(f"{entry['untypeset']} formulas are left untypeset")
-    if katex is not None and entry["math"] and entry["katex"] != katex:
-        problems.append(f"the page runs KaTeX {entry['katex'] or 'not at all'}, not {katex}")
+    runtime = entry.get("runtime_katex", entry["katex"])
+    if (
+        katex is not None
+        and any(row.get("prepared") != "yes" for row in entry["math"])
+        and runtime != katex
+    ):
+        problems.append(f"the page runs KaTeX {runtime or 'not at all'}, not {katex}")
+    if katex is not None and any(row.get("prepared") == "yes" for row in entry["math"]):
+        version = entry.get("prepared_katex", "")
+        if version != katex:
+            problems.append(
+                f"the prepared math uses KaTeX {version or 'without provenance'}, not {katex}"
+            )
     problems.extend(
         f"a face is fetched: {url}"
         for url in entry["font_requests"]
@@ -1201,7 +1279,7 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
         named = f"{face['family']} {face['weight']} {face['style']}"
         if not face["inlined"] and not face.get("shared"):
             problems.append(f"the face {named} is neither inlined nor a shared asset")
-        if face["status"] == "error":
+        if face["status"] == "error" and not face.get("optional_local", False):
             problems.append(f"the face {named} failed to load")
     mac = entry["platform"].startswith("Mac")
     flagged = entry["root"].get(NATIVE_METRICS) == "true"
@@ -1768,6 +1846,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="with `load`: open this page first in the same browser, so each page is "
         "measured as a reader's second page, with the first one's files cached",
     )
+    parser.add_argument(
+        "--scroll-check",
+        action="store_true",
+        help="with columns: retain geometry before, during and after "
+        "vertical and horizontal scrolling",
+    )
     parser.add_argument("--port", type=int, default=18961)
     parser.add_argument("--json", type=Path, help="read a saved report rather than measuring")
     parser.add_argument("--markdown", action="store_true", help="print a table, not JSON")
@@ -1870,7 +1954,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             elif args.mode == "space":
                 report = measure_space(base, pages, widths=widths, presses=args.press)
             elif args.mode == "columns":
-                report = measure_columns(base, pages, widths=widths, shots=args.shots)
+                report = measure_columns(
+                    base, pages, widths=widths, shots=args.shots, scroll_check=args.scroll_check
+                )
             elif args.mode == "chips":
                 report = measure_chips(base, pages, widths=widths, presses=args.press)
             elif args.mode == "credits":

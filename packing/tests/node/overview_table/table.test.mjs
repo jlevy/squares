@@ -189,3 +189,130 @@ void test("a covers control takes the plain key as its query parameter, and an a
   assert.equal(table.controlParam("date", "age"), "age");
   assert.equal(table.controlParam("s", "min"), "s-min");
 });
+
+/**
+ * Run the real homepage init with its statically registered result ids.
+ * @param {string} search
+ * @param {string} hash
+ * @param {string} ids
+ * @param {string} [nextHash]
+ * @param {string} [retired]
+ */
+function homepageLink(
+  search,
+  hash,
+  ids = "t-001 t-018 t-031",
+  nextHash,
+  retired = '{"t-117":"result/t-117.html","t-118":"result/t-118.html"}',
+) {
+  class Link {
+    href = "https://example.test/all-results.html";
+    /** @param {string} name */
+    getAttribute(name) {
+      return name === "data-result-ids" ? ids : name === "data-retired-results" ? retired : null;
+    }
+  }
+  const all = new Link();
+  const location = { search, hash };
+  let changed = () => {};
+  const context = vm.createContext({
+    URL,
+    URLSearchParams,
+    location,
+    HTMLAnchorElement: Link,
+    window: {
+      /** @param {string} name @param {() => void} listener */
+      addEventListener(name, listener) {
+        if (name === "hashchange") {
+          changed = listener;
+        }
+      },
+    },
+    document: {
+      readyState: "loading",
+      addEventListener() {},
+      querySelector() {
+        return all;
+      },
+      querySelectorAll() {
+        return [];
+      },
+    },
+  });
+  vm.runInContext(SOURCE, context);
+  context.SiteTable.init();
+  if (nextHash !== undefined) {
+    location.hash = nextHash;
+    changed();
+  }
+  return new URL(all.href);
+}
+
+void test("the home link carries supported filters and a known historical result fragment", () => {
+  const target = homepageLink(
+    "?kind=rigidity&current=true&s-min=3&age=180&utm_source=unrelated&redirect=elsewhere",
+    "#t-031",
+  );
+  assert.equal(target.pathname, "/all-results.html");
+  assert.equal(target.search, "?kind=rigidity&current=true&s-min=3&age=180");
+  assert.equal(target.hash, "#t-031");
+});
+
+void test("unknown and unrelated home fragments never become result anchors", () => {
+  for (const hash of ["#t-999", "#atlas", "#T-031", "#t-031-extra", ""]) {
+    const target = homepageLink("?current=false&search=kept&unrelated=omitted", hash);
+    assert.equal(target.hash, "", hash);
+    assert.equal(target.search, "?current=false&search=kept");
+  }
+});
+
+void test("home fragments are decoded safely and matched against exact registered ids", () => {
+  assert.equal(homepageLink("", "#%74-031").hash, "#%74-031");
+  assert.equal(homepageLink("", "#t%2D018").hash, "#t%2D018");
+  for (const hash of ["#%", "#%E0%A4", "#t-031%2Foutside", "#t-031%00"]) {
+    assert.equal(homepageLink("?s-min=", hash).hash, "", hash);
+  }
+  assert.equal(homepageLink("", "#t-031", "t-018").hash, "");
+});
+
+void test("reader fragment changes update the home link and clear an obsolete known target", () => {
+  const ids = "t-018 t-031";
+  assert.equal(homepageLink("?current=true", "", ids, "#t-031").hash, "#t-031");
+  const target = homepageLink("?kind=rigidity", "#t-031", ids, "#atlas");
+  assert.equal(target.hash, "");
+  assert.equal(target.search, "?kind=rigidity");
+});
+
+void test("retired result fragments select the registered tombstone and preserve supported state", () => {
+  const target = homepageLink(
+    "?current=true&kind=rigidity&unrelated=omitted",
+    "",
+    "t-031",
+    "#%74-117",
+  );
+  assert.equal(target.pathname, "/result/t-117.html");
+  assert.equal(target.search, "?current=true&kind=rigidity");
+  assert.equal(target.hash, "#%74-117");
+  assert.equal(homepageLink("", "#t-118").pathname, "/result/t-118.html");
+  const restored = homepageLink("?current=false", "#t-117", "t-031", "#t-031");
+  assert.equal(restored.pathname, "/all-results.html");
+  assert.equal(restored.hash, "#t-031");
+  const cleared = homepageLink("", "#t-117", "t-031", "#t-999");
+  assert.equal(cleared.pathname, "/all-results.html");
+  assert.equal(cleared.hash, "");
+});
+
+void test("retired home link targets reject malformed and unsafe alias metadata", () => {
+  for (const retired of [
+    "{",
+    "null",
+    "[]",
+    '{"t-117":"https://elsewhere.test/"}',
+    '{"t-117":"../result/t-117.html"}',
+    '{"t-117":"result/t-118.html"}',
+  ]) {
+    const target = homepageLink("?current=false", "#t-117", "", undefined, retired);
+    assert.equal(target.pathname, "/all-results.html", retired);
+    assert.equal(target.hash, "", retired);
+  }
+});

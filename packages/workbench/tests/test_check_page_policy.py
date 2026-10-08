@@ -37,7 +37,7 @@ def test_an_init_probe_is_called_once_with_no_argument() -> None:
 def test_the_control_policy_refuses_only_the_fonts() -> None:
     assert "'unsafe-eval'" not in CONTENT_SECURITY_POLICY
     assert FONTS_REFUSED != POLICY_META
-    assert FONTS_REFUSED.replace("font-src 'none'", "font-src data:") == POLICY_META
+    assert FONTS_REFUSED.replace("font-src 'none'", "font-src 'self' data:") == POLICY_META
 
 
 def test_a_page_without_the_published_policy_is_refused() -> None:

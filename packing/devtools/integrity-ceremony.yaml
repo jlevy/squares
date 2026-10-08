@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packages/workbench/tools/workbench_tools/capture_video.py
+    kind: generated-artifact
+    boundary: Cache correctness for the generated published workbench corpus; its payload must match the immutable data/corpus.<hash>.json URL before a video receipt names that corpus edition. No repository source is hashed by this predicate.
   - path: packing/devtools/probe_n17_raw_row_support.py
     kind: generated-artifact
     boundary: Cold saved-check receipts and witness packets identify generated seed/node objects and their derived raw atoms; these runtime artifacts are not named by Git revisions.

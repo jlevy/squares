@@ -157,6 +157,7 @@ WORKBENCH_ROOT = REPOSITORY_ROOT / "packages/workbench"
 ENGINE = PROJECT_ROOT / "sqsearch/target/release/sqsearch"
 EXACT_GEOMETRY_CRATE = PROJECT_ROOT / "sqverify_exact"
 MEASURE_VERIFIER_CRATE = PROJECT_ROOT / "sqverify_fast"
+N17_KERNEL_CRATE = PROJECT_ROOT / "n17_kernel_verify"
 RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
 ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"
 DEFAULT_CPU_COUNT = 4
@@ -241,8 +242,14 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: quick lane ignores them: in a shard, with no browser, they could only skip, which is
 #: what they did on every pull request until that run.
 SITE_LAYOUT_TESTS = (
+    "tests/test_site_case_records.py",
+    "tests/test_site_math_faces.py",
+    "tests/test_site_column_measurement.py",
+    "tests/test_site_result_filters.py",
     "tests/test_site_result_columns.py",
     "tests/test_site_frontier_table.py",
+    "tests/test_site_rendering.py",
+    "tests/test_site_math_preferences.py",
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
@@ -1926,6 +1933,14 @@ def _browser_floor_liveness(context: Context) -> str:
     )
 
 
+def _site_url_registry(context: Context) -> str:
+    """Keep published addresses and semantic record identities append-only."""
+    return _run(
+        context,
+        (sys.executable, "-m", "devtools.site_urls", "--check", "--history-ref", "origin/main"),
+    )
+
+
 def _site_layout_tests(context: Context) -> str:
     """Measure the site's tables in the Chromium the frontend runner installs.
 
@@ -2653,6 +2668,63 @@ def _rust_n17_bb_native(context: Context) -> str:
     if "skipped" in tests or not re.search(r"\b[1-9]\d* passed\b", tests):
         raise StepFailureError("n17 native gate requires passing, unskipped replay tests")
     return f"{output}\n{tests}"
+
+
+def _rust_n17_kernel_verifier(context: Context) -> str:
+    """Require the ordinary-U kernel's complete native controls and Rust floor."""
+    cargo = shutil.which("cargo", path=context.environment.get("PATH"))
+    if cargo is None:
+        raise StepFailureError("n17 kernel verifier gate requires cargo")
+    environment = dict(context.environment)
+    environment["RUSTDOCFLAGS"] = f"{environment.get('RUSTDOCFLAGS', '')} -D warnings".strip()
+    # This is a prospective warm per-command ceiling, not a measured runtime claim.
+    # Hosted CI prepares cold dependencies separately under an explicit 600s ceiling.
+    child = replace(
+        context, environment=environment, timeout_seconds=min(context.timeout_seconds, 120)
+    )
+    output = _commands(
+        child,
+        (
+            (cargo, "fmt", "--all", "--check"),
+            (
+                cargo,
+                "clippy",
+                "--locked",
+                "--release",
+                "--all-targets",
+                "--quiet",
+                "--",
+                "-D",
+                "warnings",
+            ),
+            (cargo, "doc", "--locked", "--release", "--no-deps", "--quiet"),
+            (
+                sys.executable,
+                str(PROJECT_ROOT / "devtools/check_rust_floor.py"),
+                "--crate",
+                str(N17_KERNEL_CRATE),
+            ),
+        ),
+        cwd=N17_KERNEL_CRATE,
+    )
+    tests = _run(
+        child,
+        (cargo, "test", "--locked", "--release", "--all-targets", "--quiet"),
+        cwd=N17_KERNEL_CRATE,
+    )
+    # Count cargo test itself, not other commands' output. The first target is the
+    # library's 22 controls; the final integration target binds the compiled world.
+    counts = [int(count) for count in re.findall(r"test result: ok\. (\d+) passed", tests)]
+    if len(counts) < 2 or counts[0] < 22 or counts[-1] < 1:
+        raise StepFailureError(
+            "n17 kernel verifier gate requires 22 unit controls and world control"
+        )
+    if re.search(r"\b[1-9]\d* (?:ignored|filtered out)\b", tests):
+        raise StepFailureError("n17 kernel verifier gate refuses omitted native controls")
+    return (
+        f"{output}\n{tests}\n  ordinary-U native controls and Rust floor passed; "
+        "no centered-mode or census adoption claim"
+    ).strip()
 
 
 def _rust_measure_verifier(context: Context) -> str:
@@ -3862,6 +3934,9 @@ _WORKBENCH_INPUTS = (
     "packing/devtools/render_n11_lower_bounds_explainer.py",
     # The site's navigation bar the published page carries, from the shared partial.
     "packing/devtools/render_overview.py",
+    # The published workbench bundles share the site's asset builder.
+    "packing/devtools/site_assets.py",
+    "packing/devtools/probes/site_assets/*",
     "packing/devtools/templates/site-nav.html",
     "packing/devtools/templates/site-nav.css",
     "packing/devtools/templates/paper-type.css",
@@ -4098,6 +4173,13 @@ STEPS: tuple[Step, ...] = (
     # tests, 30s of it rendering three pages once each; 24.16s hosted, 74 passed, in a
     # frontend wall of 93.16s (run 36967092452). Not in the quick lane, whose shards
     # install no browser.
+    Step(
+        "published URL registry and historical compatibility",
+        _site_url_registry,
+        fast=True,
+        records=True,
+        touches=(*_SITE_INPUTS, "packing/site-urls.yaml", "docs/project/site-urls.md"),
+    ),
     Step(
         "site table layout in Chromium",
         _site_layout_tests,
@@ -4591,6 +4673,23 @@ STEPS: tuple[Step, ...] = (
             "packing/tests/test_n17_bb_native_edges.py",
             "packing/tests/test_build_n17_bb_native.py",
             "packing/devtools/check_rust_floor.py",
+            "packing/tests/test_rust_floor_contract.py",
+        ),
+    ),
+    Step(
+        "n17 kernel verifier (Rust)",
+        _rust_n17_kernel_verifier,
+        fast=True,
+        broad=True,
+        measure_verifier=True,
+        touches=(
+            *_CORE,
+            "packing/n17_kernel_verify/*",
+            "packing/devtools/verify_n17_kernel_certificate.py",
+            "packing/devtools/check_n17_capacity_one_cover.py",
+            "packing/campaign/explorations/X048-session-168-pilots/audit-verifier-rewrites/fixture-w7-bins8/*",
+            "packing/devtools/check_rust_floor.py",
+            "packing/tests/test_n17_kernel_gate.py",
             "packing/tests/test_rust_floor_contract.py",
         ),
     ),

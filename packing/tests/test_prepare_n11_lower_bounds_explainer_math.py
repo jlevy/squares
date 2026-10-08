@@ -123,7 +123,19 @@ def test_cli_prepares_before_comparing_or_writing_the_publication_artifact(
     site = str(tmp_path)
     main = render_n11_lower_bounds_explainer.main
     assert main(["--site", site, "--prepare-math", "--check"]) == 0
-    assert main(["--site", site, "--check"]) == 1
+    # Both invocations compare prepared publication HTML; the flag is retained for
+    # compatibility with older callers rather than selecting a raw publication mode.
+    assert main(["--site", site, "--check"]) == 0
+    document = page.with_suffix(".md")
+    for path, current in ((page, "<p>prepared</p>"), (document, "the Markdown edition")):
+        path.write_text("stale")
+        assert main(["--site", site, "--check"]) == 1
+        assert main(["--site", site, "--prepare-math", "--check"]) == 1
+        assert path.read_text() == "stale"
+        path.unlink()
+        assert main(["--site", site, "--check"]) == 1
+        assert not path.exists()
+        path.write_text(current)
     monkeypatch.setattr(render_n11_lower_bounds_explainer, "COMPOSITE_ASSETS", ())
     page.write_text("stale")
     assert main(["--site", site, "--prepare-math"]) == 0
