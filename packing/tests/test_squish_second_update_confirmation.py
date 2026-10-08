@@ -295,6 +295,29 @@ def test_linked_proof_standalone_checks_complete_proof_and_invalid_paths(
     }
 
 
+def test_linked_proof_batch_admits_exact_roster_and_refuses_other_escapes(
+    linked_proofs: Path,
+) -> None:
+    paths = [
+        confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+        for n in confirmation.NUMBERS
+    ]
+    paths += [
+        "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
+        "../outside.yaml",
+        "/outside.yaml",
+    ]
+    batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
+    assert set(batched) == set(paths)
+    assert {path: batched[path] for path in paths[9:]} == {
+        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
+        for path in paths[9:]
+    }
+    assert all(batched[path] is None for path in paths[:9])
+    assert all(batched[path] for path in paths[9:])
+    assert all(confirmation.linked_certificate_problems(paths, repository=SOURCE).values())
+
+
 @pytest.mark.parametrize("n", confirmation.NUMBERS)
 def test_linked_proof_batch_matches_a_fresh_standalone_check(
     linked_proofs: Path, n: int
