@@ -24,9 +24,20 @@ arithmetic and the separating-axis method.
 One source checker derives from this repository, so route count alone does not establish
 implementation independence from the source producer.
 
-Acquisition and source admission are complete.
-Maintained native replay remains pending.
-No standing house or bound changes occur in this preparation packet.
+Acquisition, source admission and complete maintained native replay are recorded.
+All eight positives passed both exact routes; duplicate-square and outside-container
+controls failed both routes for every certificate. The fresh serial run completed
+24 full jobs, 48 route outcomes and 770,052 pair decisions in 398.40 seconds
+(6.64 wall minutes, 4.1025 CPU minutes). Its longest native job took 40.89 seconds
+under the unchanged 45-second child deadline.
+
+The earlier two-worker attempt remains recorded as incomplete: 14 full job objects,
+three started jobs with partial logs and seven unstarted jobs, in 181.19 seconds.
+The complete serial run uses a distinct fresh job directory.
+[Execution receipts](receipts/execution-attempts.json) preserve both dispositions.
+Source and outcome review accepted the finite feasibility results; actual production
+private-worker custody and record integration remain pending.
+No standing house or bound changes occur in this packet.
 Optimizer, KKT, local-minimum, global-optimality, rigidity, novelty and human-review
 claims remain outside the admitted scope.
 
@@ -42,7 +53,7 @@ No author program executes.
 The maintained acquire_source and retained_data contracts check the declaration,
 complete original-byte map and compression table.
 Derived facts bind each full source text to that independent acquisition map before
-parsing. A proposed native receipt must retain all 24 jobs: positive, duplicate square
+parsing. The retained full native receipt contains all 24 jobs: positive, duplicate square
 and outside-container controls for every certificate, with both complete route results
 and pair counts. The unchanged child deadline is 45 seconds.
 
