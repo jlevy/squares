@@ -5,7 +5,7 @@ title: "Issue422: publish accurate import, confirmation and deployment replies"
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,20 @@ parent_id: is-01m4c486bvartgwnk1s2szjz8x
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:03:17.128Z
-updated_at: 2026-10-08T02:54:02.060Z
+updated_at: 2026-10-08T03:05:23.196Z
 started_at: 2026-10-08T00:07:10.029Z
 ---
 Own main-only author replies and request closure for issue422. Current acknowledgement6047406306 created2026-10-07T21:41:08Z edited22:28:26Z; canonicalresultT116reportedlayerpending. Actual27 dualroutes+two distinctAstra complete-input reviews accepted9scope, but canonical confirmation/PRreview/CI/merge/live publication remain. Finalreply statesactualrungs/verifiers/scopedreviews/18negativecontrols safeceil/sourcecredit/oldhistory andmatchingpublishedcase/overview/resultchecks; no automaticissueclosurefromreportedPR. RootownsGH/tbdmutations.
 
 ## Notes
 
+CURRENT PR AND PRESERVATION CLOSEOUT — 2026-10-08 UTC:
+Allsource+checkpointPR427429431MERGED; sourcef747actualsite406/793/1238/48allPASS+aggregate0/Astraaccepted/46figuresvisualPASS, actualfinal422reply6051191850posted02:52:36 andissueCLOSED02:53:15. Checkpoint431MERGED0170350dce57337d1073cf0c3f98c3fd84b63374 at02:54:39, exacthead91c6/16SUCCESS50SKIP/reviewed/freshCLEANgate.
+NEWLEDGERPR437 https://github.com/jlevy/squares/pull/437 source1bb923e12f9dcfb0e204237d2b7bf045f1c51821 parent0170350, clean/nonforceGitHubbranchsavedcodex/close-squish-422-publication/exactPRbodyHEADonefilepathverified. ONLYcampaign/result-requests.yaml71insert7delete, only422semanticschange; all15802otherGitentries/23otherissues unchanged. All5actualcommentURLauthor/date/closedstate/readthrough mapped, finalcorrects4priorcheckpoints; existingT116T115confirmations/evidence resolve/askDONE/closeablenoreplydue. 44existingfocusedtests0.96s plus requestschema/report/pin/hooksraw0; independentexactAstra ReviewA5450856645ACCEPT0findings anddedicatedSoldocumentationBpublished. ActualnewheadhostedCIINPROGRESS atlastread9SUCCESS38SKIP5running; no merge or terminal-greenclaim. Userauthorizedmergeafterallclean/reviewed; rootwillfreshgateandmerge437whenactualCIpasses.
+Nativeanswerqc6y andparent422sfpz stayOPENuntil437trackedledgerlands. Toolingpreparationyquo canclose: metadata/schema/custodyfindings fullyresolved inacceptedcanonicalsource/replays/reviews+actualsite. NativeperformanceP2think-c63v remainsOPEN/rawsuiteD1strictwallsunchanged. Remaining19unrelatedlive-ledgerdifferences explicitlytrackedNEWthink-6lrh underglobalmsos; actualevidencefileactual-live-github-consistency.log inretainedcloseoutfolder, zero422differences. Preserve434/435coowners/scopedacceptedsciencevsremainingCI/otherrepositoryPRfindings; no repo-wideallgreenclaim.
+FinalstatecustodycapturingexactcurrentPR/bead/outbox/remotehead/committedledger+review/source/rawfailures/fullactualdeployment186files/fivepubliccomments/preparationhistory. Preservationvz6uOPENuntilactualGitHubdownload/memberhashproof; finalarchiveimmutableobservationmayprecede437terminalCI, latermerge/nativeclosuregivenownreceipt. Lateststartup save explicitlystale_baseunsaved; currentruntimeGHpush/PR/merge/tbd/bootstrap+strictbrowserexistingNSStrust verified, testedsetupZIPGitHubpreserved; newsetupchatneededforreusableconfigsave, notadditionalcredentials.
+
+HISTORICAL RECORD(retained):
 ACTUAL LIVE ACCEPTANCE AND AUTHOR CLOSEOUT — 2026-10-08 UTC:
 Exactmainf747407a0fa83d80a7894331c770aeb314b23163 sourceclean, Pages37717788426/deployment6925744906SUCCESS, mainPackingvalidation37717788417COMPLETEDSUCCESS. Finalactuallive406/406,supplemental793/793,standard1238/1238,layout48/48PASS; allcurrentstep andaggregateEXIT0. All116results23cases46ordinary/regularizedSVGs+46mainfiguremobile/desktop screenshots,6expandedoverview+2resultsviews visuallyPASS. IndependentAstra finalreceiptACCEPT0findings;186frozenartifactfiles20579425B manifestready. Initialheader/auditor404of406FAIL/browserstandard1230of1238raw1/layoutcallbackabort/raw1/oldaggregate1 preserved distinct. StrictTLSneverdisabled; approvedexecutionusesexistingNSStrust, noCAimport/HOMEproxychange/sourcepatch.
 Finalauthorreply ACTUAL https://github.com/jlevy/squares/issues/422#issuecomment-6051191850 created2026-10-08T02:52:36Z, accurateT116/T115V3C3S3/bothroutes27jobs1141818pairs/feasibilityscope/sharedpremises/sourcecredit/realdeployment. Issue422 ACTUALCLOSED at2026-10-08T02:53:15Z. Earlierpostmergeprogress6051113157 and earlierpendingcheckpointreplies stayhistorical.
