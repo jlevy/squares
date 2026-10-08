@@ -10,9 +10,9 @@ order rather than imposing one across them.
 
 ## The short version
 
-- **24** in_progress, **25** ready, **21** tentative, **73** blocked, **65** stopped, **228** complete.
+- **20** in_progress, **25** ready, **21** tentative, **72** blocked, **65** stopped, **233** complete.
 
-- **30 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`, `BC-396`, `BC-436`, `BC-438`, `BC-454`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
+- **29 blocked commitments carry a manual condition** (`BC-016`, `BC-025`, `BC-033`, `BC-050`, `BC-115`, `BC-170`, `BC-204`, `BC-205`, `BC-212`, `BC-207`, `BC-208`, `BC-209`, `BC-215`, `BC-217`, `BC-221`, `BC-238`, `BC-248`, `BC-270`, `BC-306`, `BC-337`, `BC-327`, `BC-329`, `BC-330`, `BC-358`, `BC-364`, `BC-365`, `BC-396`, `BC-436`, `BC-438`). Dependency edges alone cannot make these ready; each condition is named in the table below and must be explicitly cleared.
 
 ## Live queue
 
@@ -86,10 +86,6 @@ Commitments a session may take now, in each agenda's declared order.
 | agenda-042 | `BC-380` | ready | 3 | correctness | tool_validation | Can a direction-dependent parent-centre clip behind colgen's clip parameter, and a converter from a frozen… | `think-m9iz` |
 | agenda-043 | `BC-430` | in_progress | 0 | process | research | Coordinate the bounded ten-hour continuation | `think-ipel` |
 | agenda-043 | `BC-439` | in_progress | 1 | efficiency | measurement_validation | Close efficiency evidence and integration handoff | `think-ypk2` |
-| agenda-045 | `BC-450` | in_progress | 1 | process | research | Coordinate six-hour proof priority, kickoff, current PR/main and complete final handoff | `think-2mzl` |
-| agenda-045 | `BC-451` | in_progress | 1 | insight | research | Can the SAME25 accepted point-row exclusions lift to a certified positive-width region? | `think-98mg` |
-| agenda-045 | `BC-452` | in_progress | 1 | efficiency | measurement_validation | Which measured coverage or gate bottleneck should be optimized to unblock n17 progress? | `think-ui2y` |
-| agenda-045 | `BC-453` | in_progress | 1 | insight | research | Does the contact-normalization hand theorem give a complete useful structural discriminator? | `think-nvkf` |
 
 ## Blocked, and on what
 
@@ -169,7 +165,6 @@ A commitment blocked by other commitments names them; one blocked by something e
 | agenda-042 | `BC-396` | 1 | — | no | The intake lane's accepting review of evand/square-packing's s(32) certificate at 167d842, which is also the reading of… |
 | agenda-043 | `BC-436` | 1 | — | no | Held source nodes are absent on this Mac and the required owner ruling is outstanding. |
 | agenda-043 | `BC-438` | 1 | — | no | All 200 manifest objects are absent locally; release has zero assets at review. |
-| agenda-045 | `BC-454` | 1 | — | no | Current-source environment and performance review must establish scoped diagnostic and frozen full-checkpoint recipe;… |
 
 ## Discharged elsewhere
 
@@ -234,7 +229,7 @@ A commitment whose exit another agenda's commitment satisfied. Recorded as an ed
 | agenda-042 | active | 5 | 9 |  | 2 | 4 | 36 | 56 |
 | agenda-043 | active | 2 |  |  | 2 |  | 6 | 10 |
 | agenda-044 | completed |  |  |  |  |  | 3 | 3 |
-| agenda-045 | active | 4 |  |  | 1 |  |  | 5 |
+| agenda-045 | completed |  |  |  |  |  | 5 | 5 |
 
 ## By program
 
@@ -538,13 +533,13 @@ Open frontier: `BC-306`.
 | agenda-044 | `BC-440` | complete | Coordinate the four-hour continuation and complete public handoff |
 | agenda-044 | `BC-441` | complete | Can complete partner-pose coupling exclude a nonzero witness neighbourhood? |
 | agenda-044 | `BC-442` | complete | Which repeated exact replay operation dominates an accepted control? |
-| agenda-045 | `BC-450` | in_progress | Coordinate six-hour proof priority, kickoff, current PR/main and complete final handoff |
-| agenda-045 | `BC-451` | in_progress | Can the SAME25 accepted point-row exclusions lift to a certified positive-width region? |
-| agenda-045 | `BC-452` | in_progress | Which measured coverage or gate bottleneck should be optimized to unblock n17 progress? |
-| agenda-045 | `BC-453` | in_progress | Does the contact-normalization hand theorem give a complete useful structural discriminator? |
-| agenda-045 | `BC-454` | blocked | Can exact current-source certification debt be repaired beside mathematical work? |
+| agenda-045 | `BC-450` | complete | Coordinate six-hour proof priority, kickoff, current PR/main and complete final handoff |
+| agenda-045 | `BC-451` | complete | Can the SAME25 accepted point-row exclusions lift to a certified positive-width region? |
+| agenda-045 | `BC-452` | complete | Which measured coverage or gate bottleneck should be optimized to unblock n17 progress? |
+| agenda-045 | `BC-453` | complete | Does the contact-normalization hand theorem give a complete useful structural discriminator? |
+| agenda-045 | `BC-454` | complete | Can exact current-source certification debt be repaired beside mathematical work? |
 
-Open frontier: `BC-430`, `BC-436`, `BC-438`, `BC-439`, `BC-450`, `BC-451`, `BC-452`, `BC-453`, `BC-454`.
+Open frontier: `BC-430`, `BC-436`, `BC-438`, `BC-439`.
 
 ### `post-optimality-low-n`
 

@@ -36,8 +36,8 @@ totals:
     wall_hours: 713.93
 codex_receipts:
   attributed: 82
-  unattributed: 7
-  measured: 89
+  unattributed: 8
+  measured: 90
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -3235,21 +3235,21 @@ sessions:
     snapshot_incomplete: true
 - id: session-186
   title: "n17 Six-Hour Mathematical and Efficiency Continuation"
-  status: in_progress
+  status: stopped
   primary_bead: think-2mzl
-  phases: 11
+  phases: 12
   measured: true
   rollups:
-  - packing/campaign/resource-usage/codex-task-tree-session186-checkpoint0535.yaml
+  - packing/campaign/resource-usage/codex-task-tree-session186-final-checkpoint.yaml
   turns: null
   tool_calls: null
   tool_errors: null
   one_off_code: null
   wall_hours: null
   codex_receipts:
-  - path: packing/campaign/resource-usage/codex-task-tree-session186-checkpoint0535.yaml
-    model_responses: 4128
-    agent_hours: 20.28
-    active_union_hours: 5.41
-    wall_hours: 5.41
+  - path: packing/campaign/resource-usage/codex-task-tree-session186-final-checkpoint.yaml
+    model_responses: 4425
+    agent_hours: 21.42
+    active_union_hours: 5.83
+    wall_hours: 5.83
     snapshot_incomplete: true

@@ -199,7 +199,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-183](agent-sessions/session-183-n17-draw-31.md) | stopped | contemporaneous | `review-planning-oversight` (correctness) | `review-planning-oversight` (correctness) | 3 | think-2pjf | BC-418 continues under think-tmz6. The certificate objects await upload with Session 182's (think-jhgi). |
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
 | [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
-| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | in_progress | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (insight) | 11 | think-2mzl | Source-ready future shared34-centre octagon LP contract; first8 canonical states plus SAME endpoint exact34-vector calibration next block. No rushed LP/triple target. Protect05:40-06:10 for immutable PR/records/cost/debt handoff and asynchronous CI. |
+| [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 12 | think-2mzl | think-7hy3 |
 
 ### Workflow summary
 
@@ -216,7 +216,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |
 | `remediation` | 2 | 1 | 6 | 3 |
-| `review-planning-oversight` | 10 | 3 | 56 | 6 |
+| `review-planning-oversight` | 10 | 3 | 57 | 6 |
 | `general-improvement` | 1 | 0 | 7 | 1 |
 
 ## Experiment agendas
@@ -941,15 +941,15 @@ Status: **completed**. Execute the separately authorized four-hour extension thr
 
 ### [agenda-045](agendas/agenda-045-n17-mathematics-and-efficiency.md) — n17 Six-Hour Mathematical and Efficiency Continuation
 
-Status: **active**. Produce substantive exact mathematical results toward n17 optimality with fresh W3 insight, parallel measured optimization and autonomous bounded research/insight loops; fast iteration and complete current PR/issue handoff.
+Status: **completed**. Produce substantive exact mathematical results toward n17 optimality with fresh W3 insight, parallel measured optimization and autonomous bounded research/insight loops; fast iteration and complete current PR/issue handoff.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-450 | research | 17 | in_progress | 1 | think-2mzl | docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md |
-| BC-451 | research | 17 | in_progress | 1 | think-98mg | docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md |
-| BC-452 | measurement_validation | 17 | in_progress | 1 | think-ui2y | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
-| BC-453 | research | 17 | in_progress | 1 | think-nvkf | docs/project/research/research-2026-10-07-n17-global-contact-budget.md |
-| BC-454 | tool_validation | 17 | blocked | 1 | think-7hy3 | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
+| BC-450 | research | 17 | complete | 1 | think-2mzl | docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md |
+| BC-451 | research | 17 | complete | 1 | think-98mg | docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md |
+| BC-452 | measurement_validation | 17 | complete | 1 | think-ui2y | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
+| BC-453 | research | 17 | complete | 1 | think-nvkf | docs/project/research/research-2026-10-07-n17-global-contact-budget.md |
+| BC-454 | tool_validation | 17 | complete | 1 | think-7hy3 | docs/project/reviews/review-2026-10-07-n17-session-186-performance.md |
 
 ## Series
 

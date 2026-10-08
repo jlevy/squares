@@ -371,6 +371,40 @@ numerical-container, hull-48 parent used here.
 No new admission, success rate over the residue, or verification speedup follows from
 reported upstream counts.
 
+### PR410 Integration After the Final Source Review
+
+The final read-only review checked
+[PR410 head `763ecd3`](https://github.com/jlevy/squares/pull/410/commits/763ecd3bae4be5ccca55fdd626d3f43b38897216).
+Relative to the previously reviewed `6bc6f96`, only tests and documentation changed.
+The current source checks ordinary U, B=1, root-only ancestry, complete closed angle
+partitions, strict cores, all live rows of each cited partner and streamed canonical
+EOF. It retains the sixteen-vertex hull limit and has no centered-container context.
+This bounded source review found no new soundness defect; no Rust build, test or
+certificate replay was executed here.
+The seven cases at one and eight threads comprise fourteen contributor-reported
+receipts; the full receipts and certificates remain unpublished.
+
+The selected integration step is a bounded full-mode Python/Rust parity pilot on the
+already retained ordinary-U Tail A/B objects, first with one thread and then eight.
+Bind the exact cell/world data and canonical objects, compare the complete receipt
+outside declared provenance, directory and timing fields, and retain input custody and
+resource controls. Obtaining all 215 MB of the contributor’s cases does not block this
+first pilot.
+Centered support follows only after ordinary parity: explicitly review outer
+U, inner V, offset, hull-48 compression, final-state header joins and the declared
+two-hull owner pair.
+The present closure rederivation does not authenticate that declared pair identity.
+
+Track this mechanical integration under `think-ui2y`, in parallel with the selected
+shared-centre LP work under `think-dvcs`. PR410 does not directly verify C2’s BB/v1
+tree, implement the LP, or establish global capture.
+Python finite consumers would need a reviewed native interface before gaining from its
+arithmetic or coverage routines.
+Prefer integrating the reviewed crate to copying another Rust kernel implementation; no
+speedup or proof-completion forecast is assigned before matched measurements.
+The [integration review](../reviews/review-2026-10-07-n17-pr410-integration.md) retains
+the evidence, CI and adoption gaps.
+
 ## Allocation and Stop Decisions
 
 The [six-hour plan](../specs/active/plan-2026-10-07-n17-six-hour-continuation.md) has

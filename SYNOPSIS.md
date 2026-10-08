@@ -311,9 +311,9 @@ hypothesis status and summarizes experiment verdicts, and the
 
 | Record | Total | State |
 | --- | ---: | --- |
-| Agendas | 42 | 21 active; 15 completed; 5 paused; 1 superseded |
-| Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 21 tentative; 24 in progress |
-| Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
+| Agendas | 42 | 20 active; 16 completed; 5 paused; 1 superseded |
+| Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
+| Sessions | 185 | 105 completed; 80 stopped; all terminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 256 | 72 confirmed; 48 refuted; 64 blocked; 23 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 243 | 92 accepted; 53 rejected; 62 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
@@ -577,6 +577,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [PR410 Integration Review for the n17 Continuation](docs/project/reviews/review-2026-10-07-n17-pr410-integration.md) | dated review record | record | retained | — |
 | [Session186 storage disposition](docs/project/reviews/review-2026-10-07-n17-session-186-storage.md) | dated review record | record | retained | — |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
 | [Saved-pose incircle discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md) | typed session record | record | retained | — |
@@ -1728,14 +1729,16 @@ run.
 
 No bound, frontier field or open status changed.
 
-[Session185](packing/campaign/agent-sessions/session-185-n17-coupling-and-replay.md) is
-the active four-hour continuation, ending at22:17:58Z. Complete partner-pose coupling is
-the first mathematical discriminator, with a matched full exact replay diagnostic beside
-it. Exp289 stopped at its frozen 64-piece-per-row resource ceiling before the coupling
-predicate; fresh reconstruction never started.
-Its mathematical criterion remains unmeasured.
-A bounded structural audit must precede a separate resource amendment.
-The full-square separating-axis and joint-domain contracts are prospective.
+[Session186](packing/campaign/agent-sessions/session-186-n17-mathematics-and-efficiency.md)
+stopped at 05:59:45Z with current-source certification pending.
+Its conditional regional and case restrictions remain scoped; all 95 ordinary
+distance-two orbits remain open.
+Exp313/314 identify 102/114 proper pair constraints, without solving a shared-centre LP
+or proving ordinary exclusions.
+C2 FULL replay stopped incomplete on the RSS query guard; no FULL receipt or admission
+follows.
+The reviewed first-eight shared-centre pilot and PR410 ordinary-container parity
+pilot are future work, with separate endpoint and native-adoption controls.
 
 **Selected next entry:** `think-7hy3`, the owed full current-source checkpoint
 certification.
@@ -6227,7 +6230,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
 | `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
 | `codex-task-tree-session185-final-checkpoint.yaml` | session-185 | 2,405 | 14.34 h | 3.78 h | 3.78 h | yes |
-| `codex-task-tree-session186-checkpoint0535.yaml` | session-186 | 4,128 | 20.28 h | 5.41 h | 5.41 h | yes |
+| `codex-task-tree-session186-final-checkpoint.yaml` | session-186 | 4,425 | 21.42 h | 5.83 h | 5.83 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6240,6 +6243,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session184-through-20261007T141342Z.yaml` | unattributed | 4,891 | 28.9 h | 7.09 h | 7.09 h | yes |
 | `codex-task-tree-session185-checkpoint.yaml` | unattributed | 1,321 | 9.23 h | 2.44 h | 2.45 h | yes |
 | `codex-task-tree-session186-checkpoint0148.yaml` | unattributed | 1,344 | 6.2 h | 1.63 h | 1.63 h | yes |
+| `codex-task-tree-session186-checkpoint0535.yaml` | unattributed | 4,128 | 20.28 h | 5.41 h | 5.41 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
