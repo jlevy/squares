@@ -1,0 +1,38 @@
+[package]
+name = "n17-kernel-verifier"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.98"
+publish = false
+
+[dependencies]
+rug = { version = "1.27", default-features = false, features = ["integer", "rational"] }
+serde_json = { version = "1", features = ["arbitrary_precision", "preserve_order"] }
+flate2 = "1"
+sha2 = "0.10"
+rayon = "1"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+
+[build-dependencies]
+sha2 = "0.10"
+
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "deny"
+warnings = "deny"
+
+[lints.clippy]
+pedantic = { level = "deny", priority = -1 }
+# These baseline exceptions retain documented public items without prescribing
+# separate Errors/Panics headings, redundant module names, or function length.
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+too_many_lines = "allow"
+# Keep must_use_candidate denied: the existing pedantic live probe uses it.
+unwrap_used = "deny"
