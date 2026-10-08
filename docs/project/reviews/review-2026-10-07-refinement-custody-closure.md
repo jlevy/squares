@@ -124,6 +124,35 @@ without downloading the full archive or rerunning a scientific predicate.
 Full public recovery remains an explicit command; it preserves the original evidence
 needed to audit those bindings rather than replacing it with summarized verdicts.
 
+## Final Expression and Diagnostic Portability Review
+
+The reviewer accepted the final integration at
+`156d9116577d0d97b28d6bd79ff3139fe3c1f6b4`, with data checkpoint
+`e91301d73f4518843fc3bbbc5870ed2ae1c806be`. T-117 and T-118 retain the
+finite-feasibility scope above.
+The confirmation adapter requires complete public recovery, canonical admission and
+whole-house equality before publishing the three exact upper bounds.
+The n=68 case now identifies the earlier displayed pose and its numerical comparison as
+historical, and identifies the current witness as the 7 October rational refinement.
+
+The separate contact-shade diagnostic now projects trigonometric values through 80-digit
+mpmath arithmetic before rounding once to binary64. Its thresholds and bin boundaries
+are unchanged; the generated changes concern tiny numerical clearances, while the
+exact-witness spectrum is unchanged.
+Canonical packing geometry, scientific deciding inputs and complete native outcomes
+retain their previously accepted bytes and scope.
+This diagnostic change supplies no additional geometric or rigidity claim.
+
+With project Python 3.14.7, the reviewer independently ran
+`test_projection_ignores_platform_libm_and_ambient_precision` and
+`test_refinement_redraft_repairs_both_ceilings_from_complete_admitted_inputs[68]`: **2
+passed in 1.29s**. The first rejects dependence on platform libm and ambient mpmath
+precision; the second checks source-derived regeneration of the corrected n=68 case.
+The retained log is `refinement-expression-final.log` in the external review directory.
+Final publication checks and the snapshot measurement must include this addendum.
+The original host-relocation review and the public-custody acceptance above are
+preserved.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
