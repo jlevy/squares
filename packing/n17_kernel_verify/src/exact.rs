@@ -1,23 +1,32 @@
+//! Python-compatible numeric coercion and exact rational coordinates.
 use crate::value::Value;
 use crate::{Result, malformed};
-use rug::{Integer, Rational};
+use rug::{Integer, Rational, ops::Pow};
+/// An arbitrary-precision rational used by every geometric predicate.
 pub type Q = Rational;
+/// Exact Cartesian coordinates `(x, y)`.
 pub type Point = (Q, Q);
+/// The closed half-plane coefficients `(a, b, c)` for `a*x + b*y <= c`.
 pub type Plane = (Q, Q, Q);
+/// Polygon vertices in their supplied boundary order.
 pub type Poly = Vec<Point>;
+/// Require an object member, reporting a malformed certificate when absent.
 pub fn get<'a>(v: &'a Value, key: &str) -> Result<&'a Value> {
     v.as_object()
         .and_then(|o| o.get(key))
         .ok_or_else(|| malformed(format!("missing member {key}")))
 }
+/// Require a JSON array without coercing other iterable values.
 pub fn array(v: &Value) -> Result<&Vec<Value>> {
     v.as_array().ok_or_else(|| malformed("expected array"))
 }
+/// Require an array element at a zero-based index.
 pub fn at(v: &Value, i: usize) -> Result<&Value> {
     array(v)?
         .get(i)
         .ok_or_else(|| malformed("array index out of range"))
 }
+/// Require a JSON object while preserving its key domain.
 pub fn object(v: &Value) -> Result<&crate::value::Map> {
     v.as_object().ok_or_else(|| malformed("expected object"))
 }
@@ -40,6 +49,7 @@ fn decimal(c: char) -> Option<u32> {
         .iter()
         .find_map(|&start| (n >= start && n < start + 10).then(|| n - start))
 }
+/// Parse Python decimal integer syntax, including Unicode digits and underscores.
 pub fn integer(s: &str) -> Result<Integer> {
     let s = trim_python(s);
     let (negative, body) = if let Some(s) = s.strip_prefix('-') {
@@ -67,7 +77,9 @@ fn digits(s: &str) -> Result<String> {
                 return Err(malformed("invalid numeric underscore"));
             }
         } else if let Some(n) = decimal(*c) {
-            out.push(char::from(b'0' + n as u8));
+            out.push(char::from(
+                b'0' + u8::try_from(n).expect("Unicode decimal digits are between zero and nine"),
+            ));
         } else {
             return Err(malformed("invalid decimal digit"));
         }
@@ -77,6 +89,11 @@ fn digits(s: &str) -> Result<String> {
     }
     Ok(out)
 }
+/// Parse Python fraction text exactly, including decimal exponents.
+#[expect(
+    clippy::many_single_char_names,
+    reason = "Numerator and denominator symbols mirror Python fraction parsing."
+)]
 pub fn fraction_str(s: &str) -> Result<Q> {
     let s = trim_python(s);
     // Most certificate coordinates are plain ASCII integers or integer ratios.
@@ -166,7 +183,6 @@ pub fn fraction_str(s: &str) -> Result<Q> {
         .abs()
         .to_u32()
         .ok_or_else(|| malformed("decimal exponent exceeds addressable size"))?;
-    use rug::ops::Pow;
     let ten = Integer::from(10).pow(magnitude);
     Ok(if power >= 0 {
         Q::from(n * ten)
@@ -174,10 +190,13 @@ pub fn fraction_str(s: &str) -> Result<Q> {
         Q::from((n, ten))
     })
 }
+/// Recognize integer JSON numbers and Python boolean integers.
+#[must_use]
 pub fn is_int(v: &Value) -> bool {
     matches!(v, Value::Bool(_))
         || matches!(v,Value::Number(n) if !n.to_string().contains(['.','e','E']) && !matches!(n.to_string().as_str(), "NaN" | "Infinity" | "-Infinity"))
 }
+/// Coerce an integer number or boolean to an exact integer.
 pub fn int_value(v: &Value) -> Result<Integer> {
     match v {
         Value::Bool(b) => Ok(Integer::from(u8::from(*b))),
@@ -185,27 +204,30 @@ pub fn int_value(v: &Value) -> Result<Integer> {
         _ => Err(malformed("expected integer")),
     }
 }
+/// Coerce a Python fraction input; JSON floats use their binary64 rational value.
 pub fn q(v: &Value) -> Result<Q> {
     match v {
         Value::String(s) => fraction_str(s),
         Value::Bool(b) => Ok(Q::from(u8::from(*b))),
         Value::Number(n) => {
             let s = n.to_string();
-            if !s.contains(['.', 'e', 'E']) {
-                Ok(Q::from(integer(&s)?))
-            } else {
+            if s.contains(['.', 'e', 'E']) {
                 let f = s.parse::<f64>().map_err(|_| malformed("invalid float"))?;
                 Q::from_f64(f).ok_or_else(|| malformed("nonfinite Fraction"))
+            } else {
+                Ok(Q::from(integer(&s)?))
             }
         }
         _ => Err(malformed("expected rational number")),
     }
 }
+/// Require a nonnegative integer that fits a platform index.
 pub fn index(v: &Value) -> Result<usize> {
     int_value(v)?
         .to_usize()
         .ok_or_else(|| malformed("index out of range"))
 }
+/// Read the first two coordinates using the certificate point conventions.
 pub fn point(v: &Value) -> Result<Point> {
     if let Some(s) = v.as_str() {
         let mut chars = s.chars();
@@ -219,6 +241,7 @@ pub fn point(v: &Value) -> Result<Point> {
     }
     Ok((q(at(v, 0)?)?, q(at(v, 1)?)?))
 }
+/// Iterate arrays, object keys, or Unicode string characters with Python semantics.
 pub fn iterable(v: &Value) -> Result<Vec<std::borrow::Cow<'_, Value>>> {
     use std::borrow::Cow;
     match v {
@@ -234,9 +257,11 @@ pub fn iterable(v: &Value) -> Result<Vec<std::borrow::Cow<'_, Value>>> {
         _ => Err(malformed("value is not iterable")),
     }
 }
+/// Read an iterable of exact points, preserving the supplied order.
 pub fn poly(v: &Value) -> Result<Poly> {
     iterable(v)?.iter().map(|v| point(v)).collect()
 }
+/// Read declared normals and upper bounds as exact half-planes.
 pub fn planes(v: &Value) -> Result<Vec<Plane>> {
     iterable(v)?
         .iter()
@@ -246,6 +271,8 @@ pub fn planes(v: &Value) -> Result<Vec<Plane>> {
         })
         .collect()
 }
+/// Render a point using Python Fraction diagnostic syntax.
+#[must_use]
 pub fn repr_point(p: &Point) -> String {
     format!(
         "(Fraction({}, {}), Fraction({}, {}))",
@@ -255,10 +282,13 @@ pub fn repr_point(p: &Point) -> String {
         p.1.denom()
     )
 }
+/// Evaluate an exact linear form at a point.
+#[must_use]
 pub fn dot(a: &Q, b: &Q, p: &Point) -> Q {
     Q::from(a * &p.0) + Q::from(b * &p.1)
 }
 
+/// Count array entries, object keys, or Python Unicode code points.
 pub fn pylen(v: &Value) -> Result<usize> {
     match v {
         Value::Array(a) => Ok(a.len()),
@@ -268,6 +298,7 @@ pub fn pylen(v: &Value) -> Result<usize> {
         _ => Err(malformed("value has no length")),
     }
 }
+/// Require a numeric JSON value for an exact comparison.
 pub fn numeric(v: &Value) -> Result<Q> {
     match v {
         Value::Number(_) | Value::Bool(_) => q(v),

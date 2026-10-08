@@ -6,6 +6,7 @@ use std::cmp::Ordering;
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
 #[derive(Clone, Debug, Eq, PartialEq)]
+/// An exact integer backed by i128 when possible and GMP otherwise.
 pub struct Int(Repr);
 #[derive(Clone, Debug, Eq, PartialEq)]
 enum Repr {
@@ -54,6 +55,7 @@ impl Int {
         }
     }
     /// Compare a*b with c*d without allocating even when i128 products overflow.
+    #[must_use]
     pub fn cmp_products(a: &Self, b: &Self, c: &Self, d: &Self) -> Ordering {
         if let (Repr::Small(a), Repr::Small(b), Repr::Small(c), Repr::Small(d)) =
             (&a.0, &b.0, &c.0, &d.0)
@@ -76,6 +78,8 @@ impl Int {
         }
         Integer::from(&*a.big() * &*b.big()).cmp(&Integer::from(&*c.big() * &*d.big()))
     }
+    /// Return the nonnegative greatest common divisor.
+    #[must_use]
     pub fn gcd(self, other: &Self) -> Self {
         if let (Repr::Small(a), Repr::Small(b)) = (&self.0, &other.0) {
             let (mut a, mut b) = (a.unsigned_abs(), b.unsigned_abs());
@@ -94,6 +98,8 @@ impl Int {
         }
         Integer::from(self.big().gcd_ref(&other.big())).into()
     }
+    /// Divide exactly with rounding toward negative infinity; the divisor must be nonzero.
+    #[must_use]
     pub fn div_floor(self, other: &Self) -> Self {
         if let (Repr::Small(a), Repr::Small(b)) = (&self.0, &other.0)
             && let Some(q) = a.checked_div(*b)
@@ -125,8 +131,13 @@ impl Ord for Int {
         match (&self.0, &rhs.0) {
             (Repr::Small(a), Repr::Small(b)) => a.cmp(b),
             (Repr::Big(a), Repr::Big(b)) => a.cmp(b),
-            (Repr::Big(a), Repr::Small(b)) => a.partial_cmp(b).unwrap(),
-            (Repr::Small(a), Repr::Big(b)) => b.partial_cmp(a).unwrap().reverse(),
+            (Repr::Big(a), Repr::Small(b)) => a
+                .partial_cmp(b)
+                .expect("GMP integer and i128 comparisons are total"),
+            (Repr::Small(a), Repr::Big(b)) => b
+                .partial_cmp(a)
+                .expect("GMP integer and i128 comparisons are total")
+                .reverse(),
         }
     }
 }

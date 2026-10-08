@@ -1,8 +1,13 @@
+//! Exact convex geometry and strict ownership predicates.
 use crate::exact::{Plane, Point, Poly, Q, dot};
 use crate::{Result, require};
+/// Return the exact signed orientation of three points.
+#[must_use]
 pub fn cross(o: &Point, a: &Point, b: &Point) -> Q {
     Q::from(&a.0 - &o.0) * Q::from(&b.1 - &o.1) - Q::from(&a.1 - &o.1) * Q::from(&b.0 - &o.0)
 }
+/// Return the convex hull, removing duplicate and collinear interior points.
+#[must_use]
 pub fn hull(points: &[Point]) -> Poly {
     let mut pts: Vec<_> = points.iter().collect();
     pts.sort();
@@ -43,6 +48,8 @@ pub fn hull(points: &[Point]) -> Poly {
     lower.extend(upper);
     lower.into_iter().map(|i| pts[i].clone()).collect()
 }
+/// Return twice the unsigned polygon area, or zero for fewer than three vertices.
+#[must_use]
 pub fn area2(p: &[Point]) -> Q {
     if p.len() < 3 {
         return Q::new();
@@ -55,6 +62,12 @@ pub fn area2(p: &[Point]) -> Q {
     }
     sum.abs()
 }
+/// Clip a polygon to `a*x + b*y <= c`, retaining boundary points.
+#[must_use]
+#[expect(
+    clippy::many_single_char_names,
+    reason = "Coordinate and polynomial symbols match the exact geometric formulas."
+)]
 pub fn clip_closed(polygon: &[Point], a: &Q, b: &Q, c: &Q) -> Poly {
     let mut out = vec![];
     let values: Vec<_> = polygon.iter().map(|p| dot(a, b, p) - c).collect();
@@ -80,6 +93,11 @@ pub fn clip_closed(polygon: &[Point], a: &Q, b: &Q, c: &Q) -> Poly {
     }
     out
 }
+/// Derive closed inward half-planes from a nondegenerate convex hull.
+#[expect(
+    clippy::many_single_char_names,
+    reason = "Coordinate and polynomial symbols match the exact geometric formulas."
+)]
 pub fn planes_of(polygon: &[Point]) -> Result<Vec<Plane>> {
     let h = hull(polygon);
     require(h.len() >= 3, "planes of a degenerate polygon")?;
@@ -94,14 +112,19 @@ pub fn planes_of(polygon: &[Point]) -> Result<Vec<Plane>> {
         })
         .collect())
 }
+/// Test membership in the closed convex hull, including its boundary.
 pub fn inside(polygon: &[Point], pt: &Point) -> Result<bool> {
     Ok(planes_of(polygon)?
         .iter()
         .all(|(a, b, c)| dot(a, b, pt) <= *c))
 }
+/// Compare convex hulls as exact geometric sets.
+#[must_use]
 pub fn same_set(a: &[Point], b: &[Point]) -> bool {
     hull(a) == hull(b)
 }
+/// Return rational cosine and sine for the half-angle tangent parameter.
+#[must_use]
 pub fn trig(t: &Q) -> (Q, Q) {
     let tt = t.clone() * t;
     (
@@ -109,6 +132,12 @@ pub fn trig(t: &Q) -> (Q, Q) {
         t.clone() * 2 / (Q::from(1) + tt),
     )
 }
+/// Construct the interval wall box at the declared side cap.
+#[must_use]
+#[expect(
+    clippy::many_single_char_names,
+    reason = "Coordinate and polynomial symbols match the exact geometric formulas."
+)]
 pub fn wall_box(lo: &Q, hi: &Q, cap: &Q) -> Poly {
     let (c, s) = trig(lo);
     let (d, t) = trig(hi);
@@ -121,6 +150,7 @@ pub fn wall_box(lo: &Q, hi: &Q, cap: &Q) -> Poly {
         (h, far),
     ]
 }
+/// Intersect with the closed half-planes of the other convex hull.
 pub fn intersect_convex(polygon: &[Point], other: &[Point]) -> Result<Poly> {
     let mut p = polygon.to_vec();
     for (a, b, c) in planes_of(other)? {
@@ -131,6 +161,8 @@ pub fn intersect_convex(polygon: &[Point], other: &[Point]) -> Result<Poly> {
     }
     Ok(p)
 }
+/// Test strict quadratic positivity at endpoints and any interior minimum.
+#[must_use]
 pub fn quad_min_positive(a0: &Q, a1: &Q, a2: &Q, lo: &Q, hi: &Q) -> bool {
     let eval = |t: &Q| a0.clone() + a1.clone() * t + a2.clone() * t * t;
     if eval(lo) <= 0 || eval(hi) <= 0 {
@@ -144,6 +176,8 @@ pub fn quad_min_positive(a0: &Q, a1: &Q, a2: &Q, lo: &Q, hi: &Q) -> bool {
     }
     true
 }
+/// Test every core vertex for strict inclusion over the angle interval.
+#[must_use]
 pub fn core_strict(core: &[Point], lo: &Q, hi: &Q) -> bool {
     let half = Q::from((1, 2));
     for (x, y) in core {
@@ -167,6 +201,8 @@ pub fn core_strict(core: &[Point], lo: &Q, hi: &Q) -> bool {
     }
     true
 }
+/// Return the convex hull of all pairwise point differences.
+#[must_use]
 pub fn minkowski_diff(first: &[Point], second: &[Point]) -> Poly {
     hull(
         &first
@@ -179,6 +215,7 @@ pub fn minkowski_diff(first: &[Point], second: &[Point]) -> Poly {
             .collect::<Poly>(),
     )
 }
+/// Certify strict ownership by interval bounds, bisecting to depth eighteen.
 pub fn owned(cell: &[Point], pt: &Point, cap: &Q, lo: &Q, hi: &Q, depth: usize) -> Result<bool> {
     let legal = intersect_convex(cell, &wall_box(lo, hi, cap))?;
     if legal.is_empty() {
@@ -216,6 +253,7 @@ pub fn owned(cell: &[Point], pt: &Point, cap: &Q, lo: &Q, hi: &Q, depth: usize) 
     Ok(owned(cell, pt, cap, lo, &mid, depth + 1)? && owned(cell, pt, cap, &mid, hi, depth + 1)?)
 }
 #[cfg(test)]
+/// Subtract a closed convex region for the area-based test oracle.
 pub fn subtract_pieces(pieces: Vec<Poly>, region: &[Point]) -> Result<Vec<Poly>> {
     let planes = planes_of(region)?;
     let mut out = vec![];
@@ -234,6 +272,7 @@ pub fn subtract_pieces(pieces: Vec<Poly>, region: &[Point]) -> Result<Vec<Poly>>
     Ok(out)
 }
 #[cfg(test)]
+/// Use exact remaining area as an independent full-dimensional test oracle.
 pub fn covered_by_area(domain: &[Point], regions: &[Poly]) -> Result<(bool, usize)> {
     let mut pieces = vec![domain.to_vec()];
     for r in regions {

@@ -1,15 +1,25 @@
+//! Exact closed-set coverage by vertical sweep events and sections.
 use crate::exact::{Plane, Point, Poly, Q, dot};
 use crate::geom::{hull, planes_of};
 use crate::int::Int;
 use crate::{Result, malformed, require};
 use std::collections::{BTreeMap, BTreeSet};
+/// Homogeneous Cartesian coordinates `(x, y, z)` with positive denominator z.
 pub type HPoint = (Int, Int, Int);
+/// A numerator and denominator pair; ordered operations require a positive denominator.
 pub type Ratio = (Int, Int);
+/// An exact integer normal direction `(nx, ny)`.
 pub type Direction = (Int, Int);
+/// A normal and support bound `(nx, ny, numerator, denominator)`.
 pub type Facet = (Int, Int, Int, Int);
+/// A closed ordinate interval `(low, high)`.
 pub type Section = (Ratio, Ratio);
+/// A polygon index and the ordinate bounds of one vertical edge.
 pub type Vertical = (usize, Ratio, Ratio);
+/// Vertical edge spans grouped by their normalized abscissa.
 pub type Verticals = BTreeMap<Ratio, Vec<Vertical>>;
+/// Convert an exact point to a common positive denominator.
+#[must_use]
 pub fn homogeneous(p: &Point) -> HPoint {
     let dx = Int::from(p.0.denom());
     let dy = Int::from(p.1.denom());
@@ -23,12 +33,17 @@ pub fn homogeneous(p: &Point) -> HPoint {
         z,
     )
 }
+/// Compare ratios strictly by exact cross products.
+#[must_use]
 pub fn ratio_lt(a: &Ratio, b: &Ratio) -> bool {
     Int::cmp_products(&a.0, &b.1, &b.0, &a.1).is_lt()
 }
+/// Order ratios by exact cross products, assuming positive denominators.
+#[must_use]
 pub fn ratio_cmp(a: &Ratio, b: &Ratio) -> std::cmp::Ordering {
     Int::cmp_products(&a.0, &b.1, &b.0, &a.1)
 }
+/// Reduce a ratio and make its denominator positive, rejecting zero.
 pub fn normalised(mut n: Int, mut d: Int) -> Result<Ratio> {
     if d == 0 {
         return Err(malformed("zero denominator"));
@@ -43,6 +58,11 @@ pub fn normalised(mut n: Int, mut d: Int) -> Result<Ratio> {
     }
     Ok((n / g.clone(), d / g))
 }
+/// Construct an exact rational strictly between two ordered positive-denominator ratios.
+#[expect(
+    clippy::similar_names,
+    reason = "Paired endpoint and row names preserve the replay formula notation."
+)]
 pub fn between(a: &Ratio, b: &Ratio) -> Result<Ratio> {
     require(
         a.1 > 0 && b.1 > 0 && ratio_lt(a, b),
@@ -76,6 +96,7 @@ pub fn between(a: &Ratio, b: &Ratio) -> Result<Ratio> {
     }
     Ok((n, d))
 }
+/// Return the exact minimum and maximum of a nonempty ratio sequence.
 pub fn ratio_extremes(values: &[Ratio]) -> Result<(Ratio, Ratio)> {
     let first = values
         .first()
@@ -90,6 +111,7 @@ pub fn ratio_extremes(values: &[Ratio]) -> Result<(Ratio, Ratio)> {
     }
     Ok((low.clone(), high.clone()))
 }
+/// Derive primitive boundary normals, rejecting zero-length edges.
 pub fn directions(p: &[HPoint]) -> Result<Vec<Direction>> {
     let mut out = vec![];
     for i in 0..p.len() {
@@ -105,6 +127,8 @@ pub fn directions(p: &[HPoint]) -> Result<Vec<Direction>> {
     }
     Ok(out)
 }
+/// Return the extreme linear form over homogeneous vertices; empty input yields (0, 0).
+#[must_use]
 pub fn support(p: &[HPoint], nx: &Int, ny: &Int, largest: bool) -> Ratio {
     let (mut n, mut d) = (Int::from(0), Int::from(0));
     for (x, y, z) in p {
@@ -123,6 +147,7 @@ pub fn support(p: &[HPoint], nx: &Int, ny: &Int, largest: bool) -> Ratio {
     }
     (n, d)
 }
+/// Compile exact support facets for the partner-minus-core hull.
 pub fn difference_facets(partner: &[HPoint], core: &[HPoint]) -> Result<Vec<Facet>> {
     let mut normals = directions(partner)?;
     normals.extend(directions(core)?.into_iter().map(|(x, y)| (-x, -y)));
@@ -139,14 +164,22 @@ pub fn difference_facets(partner: &[HPoint], core: &[HPoint]) -> Result<Vec<Face
     Ok(out)
 }
 #[derive(Clone, Debug)]
+/// A nonvertical boundary segment with positive line coefficient b.
 pub struct Edge {
+    /// Index of the source polygon in the compiled polygon list.
     pub polygon: usize,
+    /// Closed left abscissa of the segment.
     pub lo: Ratio,
+    /// Closed right abscissa of the segment.
     pub hi: Ratio,
+    /// X coefficient of the supporting line.
     pub a: Int,
+    /// Positive Y coefficient of the supporting line.
     pub b: Int,
+    /// Constant coefficient of the supporting line.
     pub c: Int,
 }
+/// Compile nonvertical lines and vertical spans while retaining polygon identity.
 pub fn compile_edges(polygons: &[Vec<HPoint>]) -> Result<(Vec<Edge>, Verticals)> {
     let mut edges = vec![];
     let mut verticals: Verticals = BTreeMap::new();
@@ -189,6 +222,7 @@ pub fn compile_edges(polygons: &[Vec<HPoint>]) -> Result<(Vec<Edge>, Verticals)>
     }
     Ok((edges, verticals))
 }
+/// Collect vertex and segment-crossing abscissae inside the closed sweep interval.
 pub fn sweep_events(
     polygons: &[Vec<HPoint>],
     edges: &[Edge],
@@ -235,11 +269,11 @@ pub fn sweep_events(
             let start = [&e.lo, &o.lo, left]
                 .into_iter()
                 .max_by(|a, b| ratio_cmp(a, b))
-                .unwrap();
+                .expect("three fixed sweep lower bounds form a nonempty iterator");
             let stop = [&e.hi, &o.hi, right]
                 .into_iter()
                 .min_by(|a, b| ratio_cmp(a, b))
-                .unwrap();
+                .expect("three fixed sweep upper bounds form a nonempty iterator");
             let r = (xn, det);
             if !ratio_lt(&r, start) && !ratio_lt(stop, &r) {
                 events.insert(normalised(r.0, r.1)?);
@@ -251,9 +285,12 @@ pub fn sweep_events(
     out.sort_by(ratio_cmp);
     Ok(out)
 }
+/// Require positive denominators and correctly ordered closed section endpoints.
+#[must_use]
 pub fn well_formed(s: &Section) -> bool {
     s.0.1 > 0 && s.1.1 > 0 && !ratio_lt(&s.1, &s.0)
 }
+/// Test closed target coverage by merging exact closed spans.
 pub fn section_covered(target: &Section, mut spans: Vec<Section>) -> Result<bool> {
     section_covered_slice(target, &mut spans)
 }
@@ -280,6 +317,8 @@ fn section_covered_slice(target: &Section, spans: &mut [Section]) -> Result<bool
     }
     Ok(false)
 }
+/// Expand an optional section to contain the given low and high ordinates.
+#[must_use]
 pub fn widen(found: Option<Section>, low: Ratio, high: Ratio) -> Section {
     match found {
         None => (low, high),
@@ -289,6 +328,7 @@ pub fn widen(found: Option<Section>, low: Ratio, high: Ratio) -> Section {
         ),
     }
 }
+/// Check all event sections and intervening slabs for exact closed-set coverage.
 pub fn covered_by_sweep(domain: &[Point], regions: &[Poly]) -> Result<(bool, Option<Q>)> {
     let mut polygons = vec![domain.iter().map(homogeneous).collect::<Vec<_>>()];
     polygons.extend(
@@ -370,6 +410,7 @@ pub fn covered_by_sweep(domain: &[Point], regions: &[Poly]) -> Result<(bool, Opt
     }
     Ok((true, None))
 }
+/// Derive half-planes for polygons, segments, and points without losing boundaries.
 pub fn closed_planes(region: &[Point]) -> Result<Vec<Plane>> {
     let ends = hull(region);
     if ends.len() >= 3 {
@@ -402,6 +443,7 @@ pub fn closed_planes(region: &[Point]) -> Result<Vec<Plane>> {
         (Q::new(), Q::from(-1), -y.clone()),
     ])
 }
+/// Check point or segment domains against a union of closed convex regions.
 pub fn degenerate_covered(domain: &[Point], regions: &[Poly]) -> Result<bool> {
     let ends = hull(domain);
     require(

@@ -1,3 +1,4 @@
+//! Command-line entry point for the native n17 certificate verifier.
 #![forbid(unsafe_code)]
 use n17_kernel_verifier::json;
 use n17_kernel_verifier::{
@@ -91,7 +92,7 @@ fn run() -> Result<i32> {
     write_receipt(std::path::Path::new(&output), &receipt)?;
     let summary = json!({"status":receipt["status"],"failure":receipt["failure"],"mode":receipt["mode"],"seconds":receipt["seconds"]});
     println!("{}", pyjson::compact(&summary)?);
-    Ok(if receipt["status"] == "PASS" { 0 } else { 1 })
+    Ok(i32::from(receipt["status"] != "PASS"))
 }
 fn main() {
     match run() {

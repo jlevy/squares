@@ -1,4 +1,10 @@
-//! CPython 3.14 / Unicode 16.0.0 non-printable ranges, for str repr only.
+//! `CPython` 3.14 / Unicode 16.0.0 non-printable ranges, for str repr only.
+/// Test Python Unicode printability using the retained range table.
+#[must_use]
+#[expect(
+    clippy::nonminimal_bool,
+    reason = "This is the complement of the retained nonprintable interval membership predicate."
+)]
 pub fn printable(c: u32) -> bool {
     const RANGES: &[(u32, u32)] = &[
         (0x0, 0x1f),
@@ -737,7 +743,7 @@ pub fn printable(c: u32) -> bool {
         (0x2fa1e, 0x2ffff),
         (0x3134b, 0x3134f),
         (0x323b0, 0xe00ff),
-        (0xe01f0, 0x10ffff),
+        (0xe01f0, 0x10_ffff),
     ];
     let i = RANGES.partition_point(|&(_, end)| end < c);
     !RANGES.get(i).is_some_and(|&(start, _)| start <= c)

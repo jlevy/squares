@@ -4,14 +4,21 @@ use crate::{Result, malformed};
 pub use serde_json::Number;
 use std::ops::Index;
 #[derive(Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
-pub struct Key(pub Vec<u32>);
+/// Python string code points used for JSON object keys and their ordering.
+pub struct Key(
+    /// Unicode code points, including unpaired UTF-16 surrogates.
+    pub Vec<u32>,
+);
 impl Key {
+    /// Convert to UTF-8, rejecting code points that are not Unicode scalar values.
     pub fn text(&self) -> Result<String> {
         self.0
             .iter()
             .map(|&c| char::from_u32(c).ok_or_else(|| malformed("surrogate in text field")))
             .collect()
     }
+    /// Compare a key with a UTF-8 string by code point.
+    #[must_use]
     pub fn is(&self, s: &str) -> bool {
         self.0.iter().copied().eq(s.chars().map(u32::from))
     }
@@ -27,29 +34,43 @@ impl From<&str> for Key {
     }
 }
 #[derive(Clone, Debug, Default, PartialEq)]
+/// An insertion-ordered object preserving Python string keys.
 pub struct Map(Vec<(Key, Value)>);
 impl Map {
+    /// Create an empty insertion-ordered object.
+    #[must_use]
     pub fn new() -> Self {
         Self::default()
     }
+    /// Count distinct object keys.
+    #[must_use]
     pub fn len(&self) -> usize {
         self.0.len()
     }
+    /// Test whether the object contains no keys.
+    #[must_use]
     pub fn is_empty(&self) -> bool {
         self.0.is_empty()
     }
+    /// Iterate keys in insertion order.
     pub fn keys(&self) -> impl Iterator<Item = &Key> {
         self.0.iter().map(|(k, _)| k)
     }
+    /// Iterate key/value pairs in insertion order.
     pub fn iter(&self) -> impl Iterator<Item = (&Key, &Value)> {
         self.0.iter().map(|(k, v)| (k, v))
     }
+    /// Find an object member by its UTF-8 key, returning None on absence.
+    #[must_use]
     pub fn get(&self, s: &str) -> Option<&Value> {
         self.0.iter().find(|(k, _)| k.is(s)).map(|(_, v)| v)
     }
+    /// Find a member using a Python code-point key.
+    #[must_use]
     pub fn get_key(&self, k: &Key) -> Option<&Value> {
         self.0.iter().find(|(key, _)| key == k).map(|(_, v)| v)
     }
+    /// Replace an existing value without changing key order, returning the old value.
     pub fn insert(&mut self, k: Key, v: Value) -> Option<Value> {
         if let Some((_, old)) = self.0.iter_mut().find(|(key, _)| *key == k) {
             Some(std::mem::replace(old, v))
@@ -74,16 +95,26 @@ impl Index<&Key> for Map {
     }
 }
 #[derive(Clone, Debug, PartialEq)]
+/// A JSON value whose strings and numbers include Python decoder extensions.
 pub enum Value {
+    /// JSON null.
     Null,
+    /// A JSON boolean.
     Bool(bool),
+    /// An integer or binary64 token, including nonfinite extensions.
     Number(Number),
+    /// A string consisting entirely of Unicode scalar values.
     String(String),
+    /// A Python string containing unpaired surrogates.
     SurrogateString(Vec<u32>),
+    /// An ordered JSON array.
     Array(Vec<Value>),
+    /// An insertion-ordered JSON object.
     Object(Map),
 }
 impl Value {
+    /// Use a UTF-8 string when possible, retaining surrogate code points otherwise.
+    #[must_use]
     pub fn string(points: Vec<u32>) -> Self {
         match points
             .iter()
@@ -94,6 +125,8 @@ impl Value {
             None => Self::SurrogateString(points),
         }
     }
+    /// Convert either string representation to a code-point object key.
+    #[must_use]
     pub fn key(&self) -> Option<Key> {
         match self {
             Self::String(s) => Some(Key::from(s.as_str())),
@@ -101,12 +134,18 @@ impl Value {
             _ => None,
         }
     }
+    /// Test for the JSON null variant.
+    #[must_use]
     pub fn is_null(&self) -> bool {
         matches!(self, Self::Null)
     }
+    /// Recognize both UTF-8 and surrogate-containing Python strings.
+    #[must_use]
     pub fn is_string(&self) -> bool {
         matches!(self, Self::String(_) | Self::SurrogateString(_))
     }
+    /// Borrow a UTF-8 string; surrogate-containing strings return None.
+    #[must_use]
     pub fn as_str(&self) -> Option<&str> {
         if let Self::String(s) = self {
             Some(s)
@@ -114,6 +153,8 @@ impl Value {
             None
         }
     }
+    /// Read a boolean without numeric coercion.
+    #[must_use]
     pub fn as_bool(&self) -> Option<bool> {
         if let Self::Bool(b) = self {
             Some(*b)
@@ -121,6 +162,8 @@ impl Value {
             None
         }
     }
+    /// Parse a number as binary64, retaining nonfinite extensions.
+    #[must_use]
     pub fn as_f64(&self) -> Option<f64> {
         if let Self::Number(n) = self {
             n.to_string().parse().ok()
@@ -128,6 +171,8 @@ impl Value {
             None
         }
     }
+    /// Borrow array entries without coercion.
+    #[must_use]
     pub fn as_array(&self) -> Option<&Vec<Value>> {
         if let Self::Array(a) = self {
             Some(a)
@@ -135,6 +180,8 @@ impl Value {
             None
         }
     }
+    /// Borrow object members without coercion.
+    #[must_use]
     pub fn as_object(&self) -> Option<&Map> {
         if let Self::Object(o) = self {
             Some(o)
@@ -142,6 +189,8 @@ impl Value {
             None
         }
     }
+    /// Mutably borrow object members without coercion.
+    #[must_use]
     pub fn as_object_mut(&mut self) -> Option<&mut Map> {
         if let Self::Object(o) = self {
             Some(o)
@@ -149,6 +198,8 @@ impl Value {
             None
         }
     }
+    /// Find an object member by its UTF-8 key, returning None on absence.
+    #[must_use]
     pub fn get(&self, k: &str) -> Option<&Value> {
         self.as_object().and_then(|o| o.get(k))
     }
@@ -243,10 +294,11 @@ impl<T: Into<Value>> From<Vec<T>> for Value {
     }
 }
 #[macro_export]
+/// Build certificate JSON values while preserving the custom Python value domain.
 macro_rules! json{
  (null)=>{$crate::value::Value::Null};
  ({$($tt:tt)*})=>{{#[allow(unused_mut)] let mut m=$crate::value::Map::new();$crate::json!(@object m $($tt)*,);$crate::value::Value::Object(m)}};
- ([$($tt:tt)*])=>{{#[allow(unused_mut)] let mut a=Vec::new();$crate::json!(@array a $($tt)*,);$crate::value::Value::Array(a)}};
+ ([$($tt:tt)*])=>{{#[allow(clippy::vec_init_then_push, reason = "Recursive JSON macro rules append each heterogeneous token after creating the array.")] let a={#[allow(unused_mut)] let mut a=Vec::new();$crate::json!(@array a $($tt)*,);a};$crate::value::Value::Array(a)}};
  (@object $m:ident ,)=>{};
  (@object $m:ident)=>{};
  (@object $m:ident $k:literal : null, $($rest:tt)*)=>{$m.insert($k.into(),$crate::value::Value::Null);$crate::json!(@object $m $($rest)*);};
@@ -513,7 +565,7 @@ fn decoded(bytes: &[u8]) -> Result<Vec<u32>> {
         } else {
             chunk.iter().rev().fold(0, |a, &c| (a << 8) | u32::from(c))
         };
-        if n > 0x10ffff {
+        if n > 0x10_ffff {
             return Err(malformed("invalid Unicode scalar"));
         }
         units.push(n);
@@ -539,6 +591,7 @@ fn decoded(bytes: &[u8]) -> Result<Vec<u32>> {
     }
     Ok(out)
 }
+/// Decode a complete Python-compatible JSON value, including Unicode byte encodings.
 pub fn from_slice(bytes: &[u8]) -> Result<Value> {
     let mut p = Parser {
         input: decoded(bytes)?,
@@ -551,10 +604,13 @@ pub fn from_slice(bytes: &[u8]) -> Result<Value> {
     }
     Ok(v)
 }
+/// Decode a complete UTF-8 JSON value with Python number and string extensions.
 pub fn from_str(s: &str) -> Result<Value> {
     from_slice(s.as_bytes())
 }
 
+/// Clone a supported Rust value into the certificate JSON domain.
+#[must_use]
 pub fn to_value<T: Clone>(v: &T) -> Value
 where
     Value: From<T>,
@@ -562,7 +618,7 @@ where
     Value::from(v.clone())
 }
 
-/// raw_decode's prefix behavior, used only at a streamed member/step boundary.
+/// `raw_decode`'s prefix behavior, used only at a streamed member/step boundary.
 pub fn prefix_utf8(bytes: &[u8]) -> Result<(Value, usize)> {
     let text = std::str::from_utf8(bytes).map_err(|_| malformed("invalid UTF-8"))?;
     let mut p = Parser {
@@ -593,12 +649,12 @@ fn utf8_surrogatepass(bytes: &[u8]) -> Result<Vec<u32>> {
             let b = *bytes
                 .get(i + j)
                 .ok_or_else(|| malformed("truncated UTF-8"))?;
-            if b & 192 != 128 {
+            if b & 0xc0 != 0x80 {
                 return Err(malformed("invalid UTF-8 continuation"));
             }
             code = (code << 6) | u32::from(b & 63);
         }
-        if code < min || code > 0x10ffff {
+        if code < min || code > 0x10_ffff {
             return Err(malformed("invalid UTF-8 scalar"));
         }
         out.push(code);

@@ -1,3 +1,4 @@
+//! Embed the optional default cover and record the verifier source digest.
 use sha2::{Digest, Sha256};
 use std::{env, fs, path::PathBuf};
 fn main() -> Result<(), Box<dyn std::error::Error>> {

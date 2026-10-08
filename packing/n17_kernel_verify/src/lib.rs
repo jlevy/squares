@@ -1,20 +1,35 @@
+//! Exact native replay of n17 certificate objects with Python-compatible receipts.
 #![forbid(unsafe_code)]
+/// Python-compatible numeric coercion and exact rational coordinates.
 pub mod exact;
+/// Exact convex geometry and strict ownership predicates.
 pub mod geom;
+/// Exact integer arithmetic with checked small-integer operations.
 pub mod int;
+/// Python-compatible JSON canonicalization and receipt rendering.
 pub mod pyjson;
+/// Python-compatible integer-seeded Mersenne Twister sampling.
 pub mod pyrandom;
+/// Read-once gzip node streaming and canonical object digests.
 pub mod stream;
+/// Exact closed-set coverage by vertical sweep events and sections.
 pub mod sweep;
 mod unicode_repr;
+/// JSON values preserving Python Unicode and nonfinite numbers.
 pub mod value;
+/// Certificate admission, replay, closure checks, and receipts.
 pub mod verify;
 
+/// Verifier result separating check failures from malformed input.
 pub type Result<T> = std::result::Result<T, Error>;
 #[derive(Debug, Clone)]
+/// A receipt-compatible validation or input failure.
 pub enum Error {
+    /// A failed certificate predicate.
     Check(String),
+    /// A predicate diagnostic containing Python surrogate code points.
     UnicodeCheck(Vec<u32>),
+    /// Input that cannot be decoded or interpreted as a certificate.
     Malformed(String),
 }
 impl std::fmt::Display for Error {
@@ -27,9 +42,12 @@ impl std::fmt::Display for Error {
     }
 }
 impl std::error::Error for Error {}
+/// Construct a malformed-input failure with diagnostic context.
+#[must_use]
 pub fn malformed(s: impl Into<String>) -> Error {
     Error::Malformed(s.into())
 }
+/// Reject a failed certificate predicate with its check diagnostic.
 pub fn require(b: bool, s: impl Into<String>) -> Result<()> {
     if b {
         Ok(())
@@ -52,6 +70,8 @@ impl From<serde_json::Error> for Error {
 mod tests;
 
 impl Error {
+    /// Preserve Python Unicode diagnostics when constructing a receipt value.
+    #[must_use]
     pub fn receipt_value(&self) -> value::Value {
         match self {
             Self::UnicodeCheck(s) => value::Value::string(s.clone()),

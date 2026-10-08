@@ -1,3 +1,4 @@
+//! Read-once gzip node streaming and canonical object digests.
 use crate::pyjson::{canonical, digest, escape_points, repr_key};
 use crate::value::{Key, Map, Value};
 use crate::{Result, malformed, require};
@@ -8,12 +9,14 @@ use std::{
     io::{BufRead, BufReader, Read},
     path::Path,
 };
+/// Open a buffered concatenated-gzip byte stream for strict UTF-8 parsing.
 pub fn gunzip_text(path: &Path) -> Result<Box<dyn BufRead>> {
     Ok(Box::new(BufReader::with_capacity(
         1 << 20,
         MultiGzDecoder::new(File::open(path)?),
     )))
 }
+/// Read a gzip object and return its Python-canonical SHA-256.
 pub fn load_object(path: &Path) -> Result<(Value, String)> {
     let mut raw = Vec::new();
     gunzip_text(path)?.read_to_end(&mut raw)?;
@@ -21,10 +24,13 @@ pub fn load_object(path: &Path) -> Result<(Value, String)> {
     let sha = digest(canonical(&v)?.as_bytes());
     Ok((v, sha))
 }
+/// A read-once node iterator whose digest is final only after complete EOF validation.
 pub struct NodeStream {
     pending: std::collections::VecDeque<u8>,
     acquired: bool,
+    /// Members parsed outside the streamed steps array.
     pub header: Value,
+    /// Canonical digest populated only after the stream reaches validated EOF.
     pub sha256: Option<String>,
     source: Box<dyn BufRead>,
     digest: Sha256,
@@ -33,9 +39,11 @@ pub struct NodeStream {
     count: usize,
 }
 impl NodeStream {
+    /// Open a gzip node and parse members preceding the steps array.
     pub fn new(path: &Path) -> Result<Self> {
         Self::from_reader(gunzip_text(path)?)
     }
+    /// Parse a buffered node source without buffering its steps array.
     pub fn from_reader(source: Box<dyn BufRead>) -> Result<Self> {
         let mut s = Self {
             pending: std::collections::VecDeque::new(),
@@ -207,24 +215,25 @@ impl NodeStream {
         crate::value::from_str(text)
     }
 
+    /// Read one step, or finalize trailing members and require EOF before returning None.
     pub fn next_step(&mut self) -> Result<Option<Value>> {
         if self.finished {
             return Ok(None);
         }
-        let separator = if !self.started {
-            self.started = true;
-            if self.peek()? == Some(b']') {
-                self.char()?.unwrap_or(0)
-            } else {
-                b','
-            }
-        } else {
+        let separator = if self.started {
             let c = self.char()?.unwrap_or(0);
             require(
                 b",]".contains(&c),
                 "the node's steps are not comma-separated",
             )?;
             c
+        } else {
+            self.started = true;
+            if self.peek()? == Some(b']') {
+                self.char()?.unwrap_or(0)
+            } else {
+                b','
+            }
         };
         if separator == b',' {
             let step = self.value()?;
@@ -261,6 +270,7 @@ impl NodeStream {
         Ok(None)
     }
     // Explicit generator acquisition, for callers needing Python's read-once check.
+    /// Acquire the steps generator once, before any step has been read.
     pub fn steps(&mut self) -> Result<()> {
         require(
             !self.acquired && !self.started,

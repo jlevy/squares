@@ -1,6 +1,16 @@
-use crate::exact::*;
-use crate::geom::*;
-use crate::sweep::*;
+//! Certificate admission, replay, closure checks, and receipts.
+use crate::exact::{
+    Plane, Point, Poly, Q, array, at, dot, get, index, int_value, integer, is_int, iterable,
+    numeric, object, planes, point, poly, pylen, q, repr_point,
+};
+use crate::geom::{
+    area2, clip_closed, core_strict, hull, intersect_convex, minkowski_diff, owned, planes_of,
+    same_set, wall_box,
+};
+use crate::sweep::{
+    Direction, Facet, HPoint, Ratio, covered_by_sweep, degenerate_covered, difference_facets,
+    homogeneous, support,
+};
 use crate::{Result, malformed, require};
 use crate::{json, value::Value};
 use crate::{
@@ -12,22 +22,28 @@ use rayon::prelude::*;
 use rug::Integer;
 use std::{
     collections::{BTreeMap, BTreeSet},
+    io::Write,
     path::Path,
     time::Instant,
 };
 
 #[derive(Clone)]
+/// Ordered certificate cells and the provenance of their supplied geometry.
 pub struct Cells {
+    /// Cell names in the source order.
     pub names: Vec<Value>,
+    /// Cell polygons aligned with names.
     pub polygons: Vec<Poly>,
+    /// Exact declared wall side cap.
     pub cap: Q,
+    /// Receipt metadata identifying the source of cell geometry.
     pub source: Value,
 }
 impl Cells {
     fn from_data(data: &Value, source: Value) -> Result<Self> {
         let names: Vec<Value> = iterable(get(data, "order")?)?
             .into_iter()
-            .map(|v| v.into_owned())
+            .map(std::borrow::Cow::into_owned)
             .collect();
         let obj = get(data, "cells")?;
         let polygons = names
@@ -51,6 +67,7 @@ impl Cells {
         })
     }
 }
+/// Load declared cell geometry only after its byte digest matches the supplied SHA-256.
 pub fn file_cells(path: &str, sha256: &str) -> Result<Cells> {
     let raw = std::fs::read(path)?;
     let digest = pyjson::digest(&raw);
@@ -61,6 +78,7 @@ pub fn file_cells(path: &str, sha256: &str) -> Result<Cells> {
     let data: Value = crate::value::from_slice(&raw)?;
     Cells::from_data(&data, json!({"kind":"file","path":path,"sha256":digest}))
 }
+/// Load the build-time embedded cover, failing when no cover was supplied.
 pub fn cover_cells() -> Result<Cells> {
     let raw = include_bytes!(concat!(env!("OUT_DIR"), "/cover.json"));
     if raw.is_empty() {
@@ -72,14 +90,22 @@ pub fn cover_cells() -> Result<Cells> {
     Cells::from_data(&data, json!({"kind":"cover","design":get(&data,"design")?}))
 }
 #[derive(Clone)]
+/// An admitted cover row with homogeneous geometry and cached domain support minima.
 pub struct CoverRow {
+    /// Original declared domain retained for equality checks.
     pub domain_given: Value,
+    /// Original declared core retained for equality checks.
     pub core_given: Value,
+    /// Admitted homogeneous domain hull.
     pub domain: Vec<HPoint>,
+    /// Admitted homogeneous core hull.
     pub core: Vec<HPoint>,
+    /// Support minima cached by exact normal direction.
     pub minima: BTreeMap<Direction, Ratio>,
 }
 impl CoverRow {
+    /// Return and memoize the exact minimum support for a domain normal.
+    #[must_use]
     pub fn minimum(&mut self, nx: &crate::int::Int, ny: &crate::int::Int) -> Ratio {
         self.minima
             .entry((nx.clone(), ny.clone()))
@@ -88,11 +114,17 @@ impl CoverRow {
     }
 }
 #[derive(Clone)]
+/// An accepted interval row carrying its outer hull, residuals, and optional cover.
 pub struct Row {
+    /// Exact half-angle parameter bounds.
     pub interval: Point,
+    /// Original row reference used by predecessor resolution.
     pub reference: Value,
+    /// Admitted outer convex hull.
     pub outer: Poly,
+    /// Remaining polygon regions after admitted exclusions.
     pub residual: Vec<Poly>,
+    /// Optional admitted cover payload.
     pub cover: Option<CoverRow>,
 }
 impl Row {
@@ -108,16 +140,21 @@ impl Row {
 }
 type CorePair = (Vec<HPoint>, Vec<HPoint>);
 type HullPair = (Poly, Poly);
+/// Exact integer counters emitted into verification receipts.
 pub type Stats = BTreeMap<String, Integer>;
 fn tick(stats: &mut Stats, key: &str, n: usize) {
     *stats.entry(key.into()).or_default() += n;
 }
 #[derive(Default)]
+/// Geometry caches keyed by the complete exact operands.
 pub struct Memos {
+    /// Facets cached by the complete partner/core pair.
     pub facets: BTreeMap<CorePair, Vec<Facet>>,
+    /// Forbidden hulls cached by the complete group/core pair.
     pub forbidden: BTreeMap<HullPair, Poly>,
 }
 impl Memos {
+    /// Memoize partner-minus-core support facets by exact homogeneous hull pairs.
     pub fn difference(&mut self, partner: &[HPoint], core: &[HPoint]) -> Result<&[Facet]> {
         let key = (partner.to_vec(), core.to_vec());
         let entry = self.facets.entry(key);
@@ -128,6 +165,8 @@ impl Memos {
             }
         })
     }
+    /// Memoize the group-minus-core hull by exact point sets.
+    #[must_use]
     pub fn forbidden_region(&mut self, group: &[Point], core: &[Point]) -> Poly {
         self.forbidden
             .entry((group.to_vec(), core.to_vec()))
@@ -135,15 +174,25 @@ impl Memos {
             .clone()
     }
 }
+/// Per-object replay state; owners, rows, and caches remain local to that object.
 pub struct State {
+    /// Ordered exact cell polygons.
     pub cells: Vec<Poly>,
+    /// Exact declared wall side cap.
     pub cap: Q,
+    /// Exact number of declared angle bins.
     pub bins: Integer,
+    /// Owner indices in declared order.
     pub mask: Vec<usize>,
+    /// Original owner values aligned with mask.
     pub mask_values: Vec<Value>,
+    /// Replayed group hulls indexed by owner.
     pub groups: BTreeMap<usize, Poly>,
+    /// Accepted interval rows indexed by owner.
     pub rows: BTreeMap<usize, Vec<Row>>,
+    /// Exact verification counters.
     pub stats: Stats,
+    /// Per-object geometry caches.
     pub memos: Memos,
 }
 impl State {
@@ -160,6 +209,7 @@ impl State {
             memos: Memos::default(),
         }
     }
+    /// Add n to a named exact replay counter.
     pub fn tick(&mut self, key: &str, n: usize) {
         tick(&mut self.stats, key, n);
     }
@@ -195,6 +245,11 @@ fn polies(v: &Value, convex: bool) -> Result<Vec<Poly>> {
         })
         .collect()
 }
+/// Validate seed/node framing and return the declared owner mask.
+#[expect(
+    clippy::similar_names,
+    reason = "The certificate seed and its seen-cell set have distinct roles."
+)]
 pub fn check_frame(seed: &Value, node: &Value, cells: &Cells) -> Result<Vec<usize>> {
     require(
         eq(get(seed, "schema")?, &json!("generic_wall_seed_v1")),
@@ -262,6 +317,7 @@ pub fn check_frame(seed: &Value, node: &Value, cells: &Cells) -> Result<Vec<usiz
     }
     array(mask)?.iter().map(index).collect()
 }
+/// Admit seed groups and rows after checking their geometry and ownership.
 pub fn check_seed(state: &mut State, seed: &Value, node: &Value) -> Result<()> {
     for o in state.mask.clone() {
         let name = state.owner_name(o)?;
@@ -341,6 +397,7 @@ pub fn check_seed(state: &mut State, seed: &Value, node: &Value) -> Result<()> {
     }
     Ok(())
 }
+/// Validate declared cover geometry before caching its homogeneous form.
 pub fn admit_cover(row: &Row, item: &Value, si: usize, pj: usize) -> Result<CoverRow> {
     let vertices: Poly = row.residual.iter().flatten().cloned().collect();
     let domain = hull(&vertices);
@@ -367,6 +424,7 @@ pub fn admit_cover(row: &Row, item: &Value, si: usize, pj: usize) -> Result<Cove
         minima: BTreeMap::new(),
     })
 }
+/// Check referenced partner covers and exact residual coverage.
 pub fn check_partners(
     state: &mut State,
     step: &Value,
@@ -428,6 +486,7 @@ pub fn check_partners(
     }
     Ok(partners)
 }
+/// Validate collision half-planes against replayed partner geometry.
 pub fn check_collisions(
     memos: &mut Memos,
     stats: &mut Stats,
@@ -525,6 +584,10 @@ struct CoverCheck<'a> {
     collisions: Vec<Poly>,
     residual: &'a [Poly],
 }
+#[expect(
+    clippy::similar_names,
+    reason = "Replay state and separately accumulated stats have distinct roles."
+)]
 fn check_cover(
     state: &State,
     memos: &mut Memos,
@@ -567,9 +630,11 @@ fn check_cover(
     tick(stats, "cover_checks", 1);
     Ok(())
 }
+/// Canonicalize a predecessor reference for exact matching.
 pub fn reference_key(v: &Value) -> Result<String> {
     pyjson::canonical(v)
 }
+/// Resolve predecessor rows from accepted references for the current step.
 pub fn predecessors(accepted: &[Row], rs: &Value, si: usize) -> Result<Vec<Row>> {
     require(
         rs.as_array().is_some_and(|a| !a.is_empty()),
@@ -599,7 +664,7 @@ pub fn predecessors(accepted: &[Row], rs: &Value, si: usize) -> Result<Vec<Row>>
             lo < hi && hi <= 1,
             format!("{where_}: interval is empty or ends past 1"),
         )?;
-        cursor = hi.clone();
+        cursor.clone_from(&hi);
         let prior = by_reference.get(&reference_key(get(row, "prior_reference")?)?);
         require(
             prior.is_some(),
@@ -625,6 +690,10 @@ struct Prepared {
     planes: Vec<Plane>,
     live: bool,
 }
+#[expect(
+    clippy::many_single_char_names,
+    reason = "Coordinate and polynomial symbols match the exact geometric formulas."
+)]
 fn prepare_row(
     state: &State,
     row: &Value,
@@ -649,10 +718,10 @@ fn prepare_row(
         row.get("self_hull_cuts").is_none_or(empty),
         format!("{where_}: self-hull cuts"),
     )?;
-    let required = if !prior.outer.is_empty() {
-        intersect_convex(&prior.outer, &wall_box(lo, hi, &state.cap))?
-    } else {
+    let required = if prior.outer.is_empty() {
         vec![]
+    } else {
+        intersect_convex(&prior.outer, &wall_box(lo, hi, &state.cap))?
     };
     let residual = polies(get(row, "residual_polygons")?, true)?;
     let vertices: Vec<&Point> = residual.iter().flatten().collect();
@@ -742,6 +811,7 @@ fn prepare_row(
         live,
     })
 }
+#[derive(Clone, Copy)]
 struct FullRow<'a> {
     raw: &'a Value,
     prepared: &'a Prepared,
@@ -749,6 +819,10 @@ struct FullRow<'a> {
     ri: usize,
     owner: usize,
 }
+#[expect(
+    clippy::similar_names,
+    reason = "Replay state and separately accumulated stats have distinct roles."
+)]
 fn full_row(
     state: &State,
     memos: &mut Memos,
@@ -780,6 +854,11 @@ fn full_row(
         },
     )
 }
+/// Replay one step and return its admitted rows and supporting geometry.
+#[expect(
+    clippy::similar_names,
+    reason = "Replay state and separately accumulated stats have distinct roles."
+)]
 pub fn check_step(
     state: &mut State,
     step: &Value,
@@ -887,6 +966,7 @@ pub fn check_step(
     }
     Ok((new_rows, all_planes, any_live))
 }
+/// Apply an admitted step to owner state and validate row compression.
 pub fn compress(
     state: &mut State,
     step: &Value,
@@ -984,6 +1064,7 @@ pub fn compress(
         format!("step {si}: owned hull too large"),
     )
 }
+/// Derive an optional owner closure from replayed empty residuals.
 pub fn derive_closure(state: &State, owner: usize, si: usize) -> Result<Option<Value>> {
     if !rows(state, owner)?.iter().any(|r| !r.residual.is_empty()) {
         return Ok(Some(
@@ -991,7 +1072,7 @@ pub fn derive_closure(state: &State, owner: usize, si: usize) -> Result<Option<V
         ));
     }
     let mut mask = state.mask.clone();
-    mask.sort();
+    mask.sort_unstable();
     for oj in mask {
         if oj != owner && !group(state, oj)?.is_empty() && !group(state, owner)?.is_empty() {
             let common = if group(state, oj)?.len() >= 3 {
@@ -1001,7 +1082,7 @@ pub fn derive_closure(state: &State, owner: usize, si: usize) -> Result<Option<V
             };
             if !common.is_empty() {
                 let mut owners = vec![owner, oj];
-                owners.sort();
+                owners.sort_unstable();
                 return Ok(Some(
                     json!({"kind":"owned_hulls_intersect","owners":owners,"step":si}),
                 ));
@@ -1010,6 +1091,7 @@ pub fn derive_closure(state: &State, owner: usize, si: usize) -> Result<Option<V
     }
     Ok(None)
 }
+/// Validate declared final state against replayed rows and closure.
 pub fn check_final(state: &State, node: &Value, stall: bool) -> Result<()> {
     let final_ = get(node, "final_state")?;
     for &o in &state.mask {
@@ -1031,10 +1113,10 @@ pub fn check_final(state: &State, node: &Value, stall: bool) -> Result<()> {
                 format!("final reference {name}"),
             )?;
             require(
-                if !r.outer.is_empty() {
-                    same_set(&poly(get(recorded, "outer_domain")?)?, &r.outer)
-                } else {
+                if r.outer.is_empty() {
                     empty(get(recorded, "outer_domain")?)
+                } else {
+                    same_set(&poly(get(recorded, "outer_domain")?)?, &r.outer)
                 },
                 format!("final outer domain {name}"),
             )?;
@@ -1063,6 +1145,7 @@ pub fn check_final(state: &State, node: &Value, stall: bool) -> Result<()> {
         "the node claims more than a closure",
     )
 }
+/// Retire stale group caches and cap retained facet entries.
 pub fn bound_memos(state: &mut State, owner: usize, before: &[Point]) -> Result<()> {
     if group(state, owner)? != before {
         state.memos.forbidden.retain(|(g, _), _| g != before);
@@ -1073,10 +1156,15 @@ pub fn bound_memos(state: &mut State, owner: usize, before: &[Point]) -> Result<
     Ok(())
 }
 #[derive(Clone)]
+/// Verification controls; sampled runs are diagnostic and do not certify full closure.
 pub struct Options {
+    /// Optional diagnostic sample count; None replays every object.
     pub sample: Option<Integer>,
+    /// Python-compatible deterministic sampling seed.
     pub sample_seed: Integer,
+    /// Whether to emit progress diagnostics during replay.
     pub progress: bool,
+    /// Positive worker count; receipt objects retain their selected order.
     pub threads: usize,
 }
 impl Default for Options {
@@ -1092,6 +1180,7 @@ impl Default for Options {
 fn int_json(n: &Integer) -> Result<Value> {
     crate::value::from_str(&n.to_string())
 }
+/// Verify selected object pairs and construct deterministic per-object receipt entries.
 pub fn verify_objects(directory: &str, cells: &Cells, opt: &Options) -> Result<Value> {
     let mut seeds = vec![];
     let mut nodes = vec![];
@@ -1217,7 +1306,6 @@ pub fn verify_objects(directory: &str, cells: &Cells, opt: &Options) -> Result<V
                 .count();
             let progress = json!({"step":si,"owner":owner_value,"live_rows":live,"rows_checked_in_full":full.len(),"closure":derived.is_some(),"seconds":pyjson::round_float(clock.elapsed().as_secs_f64(),1)?});
             println!("{}", pyjson::compact(&progress)?);
-            use std::io::Write;
             std::io::stdout().flush()?;
         }
         if let Some(d) = &derived {
@@ -1251,6 +1339,7 @@ pub fn verify_objects(directory: &str, cells: &Cells, opt: &Options) -> Result<V
         json!({"certificate":{"seed_sha256":seed_sha,"node_sha256":stream.sha256},"mask":state.mask_values,"cells":state.mask.iter().map(|&k|cells.names[k].clone()).collect::<Vec<_>>(),"bins":bins,"closure":contradiction,"closed":!stall,"counts":counts}),
     )
 }
+/// Construct a versioned receipt, preserving verification failure as a FAIL result.
 pub fn verify(directory: &str, cells: &Cells, opt: &Options) -> Result<Value> {
     let clock = Instant::now();
     let mut receipt = json!({"schema":"n17-certificate-verification/v1","verifier":"kernel","provenance":{"implementation":"rust","crate":"n17-kernel-verifier","version":env!("CARGO_PKG_VERSION"),"source_sha256":env!("SOURCE_SHA256")},"directory":directory,"cells_source":cells.source,"mode":if opt.sample.is_none(){"full"}else{"sample"},"sample_rows_per_step":opt.sample.as_ref().map(int_json).transpose()?,"sample_seed":if opt.sample.is_some(){int_json(&opt.sample_seed)?}else{Value::Null}});
@@ -1284,6 +1373,7 @@ pub fn verify(directory: &str, cells: &Cells, opt: &Options) -> Result<Value> {
     );
     Ok(receipt)
 }
+/// Write the Python-compatible formatted receipt to the requested path.
 pub fn write_receipt(path: &Path, receipt: &Value) -> Result<()> {
     if let Some(parent) = path.parent().filter(|p| !p.as_os_str().is_empty()) {
         std::fs::create_dir_all(parent)?;

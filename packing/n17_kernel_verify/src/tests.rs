@@ -1,6 +1,7 @@
 use crate::{exact::*, geom::*, pyjson, pyrandom::Random, stream::NodeStream, sweep::*, verify::*};
 use crate::{json, value::Value};
 use rug::Integer;
+use std::collections::BTreeMap;
 use std::{io::Cursor, path::PathBuf};
 fn p(x: i32, y: i32) -> Point {
     (Q::from(x), Q::from(y))
@@ -10,8 +11,8 @@ fn rect(x: i32, y: i32, w: i32, h: i32) -> Poly {
 }
 fn ratio(n: i32, d: i32) -> Ratio {
     (
-        crate::int::Int::from(n as i128),
-        crate::int::Int::from(d as i128),
+        crate::int::Int::from(i128::from(n)),
+        crate::int::Int::from(i128::from(d)),
     )
 }
 fn section(a: i32, b: i32) -> Section {
@@ -61,8 +62,8 @@ fn fraction_parsing() {
     assert_eq!(
         q(&json!(0.1)).unwrap(),
         Q::from((
-            Integer::from(3602879701896397i64),
-            Integer::from(36028797018963968i64)
+            Integer::from(3_602_879_701_896_397_i64),
+            Integer::from(36_028_797_018_963_968_i64)
         ))
     );
     assert_eq!(q(&json!(true)).unwrap(), 1);
@@ -274,9 +275,9 @@ fn edges_and_events() {
 fn random_polygon(rng: &mut Random) -> Poly {
     let pts: Poly = (0..8)
         .map(|_| {
-            let x = rng.word() as i32 % 9;
-            let y = rng.word() as i32 % 9;
-            let d = (rng.word() % 3 + 1) as i32;
+            let x = rng.word().cast_signed() % 9;
+            let y = rng.word().cast_signed() % 9;
+            let d = (rng.word() % 3 + 1).cast_signed();
             (Q::from((x, d)), Q::from((y, d)))
         })
         .collect();
@@ -321,7 +322,7 @@ fn hidden_lens_zero_gap_passes_positive_gap_fails() {
 }
 #[test]
 fn sweep_matches_area_random_rationals() {
-    let mut rng = Random::new(&7654321.into());
+    let mut rng = Random::new(&7_654_321.into());
     for iteration in 0..150 {
         let domain = random_polygon(&mut rng);
         if domain.len() < 3 {
@@ -329,7 +330,7 @@ fn sweep_matches_area_random_rationals() {
         }
         let mut regions: Vec<_> = (0..4).map(|_| random_polygon(&mut rng)).collect();
         if iteration % 3 == 0 {
-            let cut = Q::from((rng.word() % 5) as i32 - 2);
+            let cut = Q::from((rng.word() % 5).cast_signed() - 2);
             regions = vec![
                 hull(&clip_closed(&domain, &Q::from(1), &Q::new(), &cut)),
                 hull(&clip_closed(&domain, &Q::from(-1), &Q::new(), &-cut)),
@@ -414,8 +415,8 @@ fn canonical_table() {
     ));
     assert!(!pyjson::equal(&json!("1"), &json!(1)));
     assert!(!pyjson::equal(
-        &json!(9007199254740993u64),
-        &json!(9007199254740992.0)
+        &json!(9_007_199_254_740_993_u64),
+        &json!(9_007_199_254_740_992.0)
     ));
     assert_eq!(pyjson::repr_string("a'b"), "\"a'b\"");
     assert_eq!(pyjson::repr_string("a\n"), "'a\\n'");
@@ -448,7 +449,7 @@ fn python_sampling_table() {
     }
     let mut r = Random::new(&12345.into());
     assert_eq!(r.getrandbits(0), 0);
-    assert_eq!(r.getrandbits(32), 1789368711u32);
+    assert_eq!(r.getrandbits(32), 1_789_368_711_u32);
     assert!(r.sample(1, 2).is_err());
     assert!(r.randbelow(0).is_err());
 }
@@ -494,7 +495,7 @@ fn streaming_checks_and_hash() {
             "the node's member 'a' follows its steps",
         ),
         (r#"{"steps":[]} 0"#, "data follows the node"),
-        (r#"{1:2}"#, "a node member's name is not a string"),
+        (r"{1:2}", "a node member's name is not a string"),
         (r#"{"a" 1}"#, "a node member's name lacks its colon"),
         (
             r#"{"steps":[{} {}]}"#,
@@ -599,8 +600,8 @@ fn verification_fixtures_all_thread_counts() {
 fn python_json_extended_domain() {
     for (raw, wanted) in [
         (
-            r#"[NaN,Infinity,-Infinity,1e999,-1e999]"#,
-            r#"[NaN,Infinity,-Infinity,Infinity,-Infinity]"#,
+            r"[NaN,Infinity,-Infinity,1e999,-1e999]",
+            r"[NaN,Infinity,-Infinity,Infinity,-Infinity]",
         ),
         (
             r#"{"\ud800":"\udfff","\ue000":"x","😀":"\ud800a\udc00"}"#,
@@ -659,6 +660,10 @@ fn python_json_extended_domain() {
 }
 
 #[test]
+#[expect(
+    clippy::float_cmp,
+    reason = "These fixtures require exact Python binary64 rounding results."
+)]
 fn repr_and_rounding() {
     for (s, expected) in [
         ("\u{feff}", "'\\ufeff'"),
@@ -690,9 +695,9 @@ fn threaded_failure_is_lowest_sequential_row() {
             bins: 3.into(),
             mask: vec![0, 1],
             mask_values: vec![json!(0), json!(1)],
-            groups: Default::default(),
-            rows: Default::default(),
-            stats: Default::default(),
+            groups: BTreeMap::default(),
+            rows: BTreeMap::default(),
+            stats: BTreeMap::default(),
             memos: Memos::default(),
         };
         check_seed(&mut state, &seed, &node).unwrap();
@@ -782,8 +787,8 @@ fn homogeneous_hull_matches_rational_hull_with_large_coordinates() {
             let mut points: Poly = (0..15)
                 .map(|_| {
                     (
-                        Q::from((rng.word() as i32 % 9, 7)) * &scale,
-                        Q::from((rng.word() as i32 % 9, 11)) / &scale,
+                        Q::from((rng.word().cast_signed() % 9, 7)) * &scale,
+                        Q::from((rng.word().cast_signed() % 9, 11)) / &scale,
                     )
                 })
                 .collect();

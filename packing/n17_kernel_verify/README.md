@@ -25,7 +25,9 @@ It shares no code with any certificate generator: the generator (`check_n17_subp
 ## What it checks
 
 Exactly what the Python verifier checks, with exact rational and integer arithmetic
-throughout (no floating point decides anything):
+after parsing. Rational strings retain their stated values; numeric JSON floats first
+round to binary64, then become exact binary rationals.
+Geometric comparisons use those parsed values, without an epsilon:
 
 - the frame: the seed’s and node’s schemas, cap, mask and world against the cells, and
   the node naming the seed by the SHA-256 of its canonical JSON;
@@ -38,8 +40,10 @@ throughout (no floating point decides anything):
   required domain by an exact vertical sweep (or exact parameter intervals for a
   degenerate domain);
 - compression witnesses (exact convex combinations on the 2^-20 grid, hull size ≤ 16);
-- the closure derived after each step and equal to the declared one, no step after it,
-  and the final state.
+- the closure re-derived after each step, its declared step, kind and owner checked, no
+  step after it, and the final state.
+  For `owned_hulls_intersect`, the declared `owners` list is untrusted metadata and is
+  not compared with a checked owner pair.
 
 The node is streamed a step at a time and its content id is computed over the same
 canonical bytes as Python’s `json.dumps(sort_keys=True, separators=(",", ":"))`.
@@ -62,16 +66,42 @@ The exit status is 0 only for PASS.
 
 Building needs a C toolchain and `m4` for GMP (`build-essential` and `m4` on Ubuntu).
 
-## Agreement and speed
+### Evidence and intake limits
+
+`--sample N` is a planning check.
+It skips full collision and coverage checks in earlier steps and can return
+`status: PASS` with exit status 0. A proof consumer must require `mode: full`, complete
+closure, and exact input and frame identities; sample receipts cannot support a proof or
+census admission.
+
+A full PASS establishes only the supplied root/mask closure.
+Global capture, the capacity-one cover premise, and n = 17 optimality require separate
+arguments. This crate currently supports the ordinary `[0,U]` container with `B=1` and
+hulls of at most 16 vertices.
+Centered U/V/offset frames require a separate extension.
+
+Operational adoption requires independent same-object full-mode parity and the
+repository’s provenance/admission wrapper.
+Bind the actual cells and seed world as well as the code revision: the embedded
+`cells/cover.json` is outside `SOURCE_SHA256`. The current census consumer does not
+admit this crate’s receipt format.
+
+Run untrusted certificates under external wall and memory limits and an input-size
+preflight. The parser limits nesting, but does not impose decoded seed/step byte limits
+or rational exponent limits.
+
+## Contributor-reported agreement and speed
 
 Seven certificates were produced with upstream’s standard procedure (main `4148483da`);
 four are closed and three stalled.
 On all seven, the receipts agree with the Python verifier’s on every field above.
 
-- This revision was checked at 1 and 8 threads.
+- The contributor’s pre-integration revision `763ecd3ba` was checked at 1 and 8 threads.
 - The earlier revision that gave the timings below was checked at 1 and 16 threads.
 
 TESTING.md lists the certificate and build identities.
+The floor-adjusted integration source has passed the retained native controls; its
+seven-case same-object replay remains an operational-adoption prerequisite.
 
 Timings were taken with that earlier revision on one machine (16 vCPU, otherwise idle),
 in wall seconds:

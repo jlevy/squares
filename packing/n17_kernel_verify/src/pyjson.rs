@@ -5,9 +5,14 @@ use crate::value::Value;
 use crate::{Result, malformed};
 use rug::{Integer, Rational, ops::Pow};
 use sha2::{Digest, Sha256};
+use std::fmt::Write as _;
+/// Quote a UTF-8 string using Python ASCII JSON escaping.
+#[must_use]
 pub fn escape(s: &str) -> String {
     escape_points(s.chars().map(u32::from))
 }
+/// Quote Python Unicode code points, preserving unpaired surrogates.
+#[must_use]
 pub fn escape_points(points: impl IntoIterator<Item = u32>) -> String {
     let mut out = String::from("\"");
     for c in points {
@@ -19,21 +24,29 @@ pub fn escape_points(points: impl IntoIterator<Item = u32>) -> String {
             9 => out.push_str("\\t"),
             8 => out.push_str("\\b"),
             12 => out.push_str("\\f"),
-            32..=126 => out.push(char::from(c as u8)),
-            0..=0xffff => out.push_str(&format!("\\u{c:04x}")),
+            32..=126 => out.push(
+                char::from_u32(c).expect("the matched ASCII range contains only Unicode scalars"),
+            ),
+            0..=0xffff => {
+                write!(out, "\\u{c:04x}").expect("formatting into a String is infallible");
+            }
             _ => {
                 let n = c - 0x10000;
-                out.push_str(&format!(
+                write!(
+                    out,
                     "\\u{:04x}\\u{:04x}",
                     0xd800 + (n >> 10),
                     0xdc00 + (n & 1023)
-                ));
+                )
+                .expect("formatting into a String is infallible");
             }
         }
     }
     out.push('"');
     out
 }
+/// Render a Python string diagnostic with its quote and printability rules.
+#[must_use]
 pub fn repr_key(k: &crate::value::Key) -> String {
     let quote = if k.0.contains(&39) && !k.0.contains(&34) {
         '"'
@@ -55,25 +68,29 @@ pub fn repr_key(k: &crate::value::Key) -> String {
                 out.push_str("\\t");
             } else if !crate::unicode_repr::printable(n) {
                 if n <= 255 {
-                    out.push_str(&format!("\\x{n:02x}"));
+                    write!(out, "\\x{n:02x}").expect("formatting into a String is infallible");
                 } else if n <= 65535 {
-                    out.push_str(&format!("\\u{n:04x}"));
+                    write!(out, "\\u{n:04x}").expect("formatting into a String is infallible");
                 } else {
-                    out.push_str(&format!("\\U{n:08x}"));
+                    write!(out, "\\U{n:08x}").expect("formatting into a String is infallible");
                 }
             } else {
                 out.push(c);
             }
         } else {
-            out.push_str(&format!("\\u{n:04x}"));
+            write!(out, "\\u{n:04x}").expect("formatting into a String is infallible");
         }
     }
     out.push(quote);
     out
 }
+/// Render a UTF-8 string using Python string representation rules.
+#[must_use]
 pub fn repr_string(s: &str) -> String {
     repr_key(&crate::value::Key::from(s))
 }
+/// Render binary64 using Python shortest round-trip decimals and ties to even.
+#[must_use]
 pub fn float_repr(f: f64) -> String {
     if f.is_nan() {
         return "NaN".into();
@@ -98,7 +115,10 @@ pub fn float_repr(f: f64) -> String {
     let ds = mant.replace('.', "");
     let mut digits = ds.clone();
     if let Ok(n) = integer(&ds) {
-        let power = exponent - (ds.len() as i32 - 1);
+        let power = exponent
+            - (i32::try_from(ds.len())
+                .expect("binary64 shortest decimals have at most seventeen digits")
+                - 1);
         let ten = Integer::from(10).pow(power.unsigned_abs());
         let target = Rational::from_f64(f.abs()).unwrap_or_default();
         let mut best: Option<(Rational, Integer)> = None;
@@ -132,7 +152,11 @@ pub fn float_repr(f: f64) -> String {
         }
     }
     // A carry can add one digit; a borrow can remove one.
-    let mut exponent = exponent + digits.len() as i32 - ds.len() as i32;
+    let mut exponent = exponent
+        + i32::try_from(digits.len())
+            .expect("a binary64 decimal candidate has at most eighteen digits")
+        - i32::try_from(ds.len())
+            .expect("binary64 shortest decimals have at most seventeen digits");
     while digits.len() > 1 && digits.ends_with('0') {
         digits.pop();
     }
@@ -141,7 +165,39 @@ pub fn float_repr(f: f64) -> String {
     } else {
         String::new()
     };
-    if !(-4..16).contains(&exponent) {
+    if (-4..16).contains(&exponent) {
+        let position = exponent + 1;
+        if position <= 0 {
+            out.push_str("0.");
+            out.push_str(
+                &"0".repeat(
+                    usize::try_from(-position)
+                        .expect("the decimal position is nonpositive in this branch"),
+                ),
+            );
+            out.push_str(&digits);
+        } else if usize::try_from(position)
+            .expect("the decimal position is positive in this branch")
+            >= digits.len()
+        {
+            out.push_str(&digits);
+            out.push_str(&"0".repeat(
+                usize::try_from(position).expect("the decimal position is positive in this branch")
+                    - digits.len(),
+            ));
+            out.push_str(".0");
+        } else {
+            out.push_str(
+                &digits[..usize::try_from(position)
+                    .expect("the decimal position is positive in this branch")],
+            );
+            out.push('.');
+            out.push_str(
+                &digits[usize::try_from(position)
+                    .expect("the decimal position is positive in this branch")..],
+            );
+        }
+    } else {
         out.push_str(&digits[..1]);
         if digits.len() > 1 {
             out.push('.');
@@ -150,25 +206,11 @@ pub fn float_repr(f: f64) -> String {
         out.push('e');
         out.push(if exponent < 0 { '-' } else { '+' });
         exponent = exponent.abs();
-        out.push_str(&format!("{exponent:02}"));
-    } else {
-        let position = exponent + 1;
-        if position <= 0 {
-            out.push_str("0.");
-            out.push_str(&"0".repeat((-position) as usize));
-            out.push_str(&digits);
-        } else if position as usize >= digits.len() {
-            out.push_str(&digits);
-            out.push_str(&"0".repeat(position as usize - digits.len()));
-            out.push_str(".0");
-        } else {
-            out.push_str(&digits[..position as usize]);
-            out.push('.');
-            out.push_str(&digits[position as usize..]);
-        }
+        write!(out, "{exponent:02}").expect("formatting into a String is infallible");
     }
     out
 }
+/// Canonicalize an integer or binary64 JSON token using Python numeric rendering.
 pub fn number(n: &serde_json::Number) -> Result<String> {
     let s = n.to_string();
     if matches!(s.as_str(), "NaN" | "Infinity" | "-Infinity") {
@@ -252,25 +294,32 @@ fn write(v: &Value, out: &mut String, style: Style, depth: usize) -> Result<()> 
     }
     Ok(())
 }
+/// Render ASCII JSON with sorted keys and compact canonical separators.
 pub fn canonical(v: &Value) -> Result<String> {
     let mut out = String::new();
     write(v, &mut out, Style::Canonical, 0)?;
     Ok(out)
 }
+/// Render receipt JSON with one-space indentation and a trailing newline.
 pub fn pretty(v: &Value) -> Result<String> {
     let mut out = String::new();
     write(v, &mut out, Style::Pretty, 0)?;
     out.push('\n');
     Ok(out)
 }
+/// Render a one-line Python JSON summary with spaced separators.
 pub fn compact(v: &Value) -> Result<String> {
     let mut out = String::new();
     write(v, &mut out, Style::Compact, 0)?;
     Ok(out)
 }
+/// Return the lowercase SHA-256 of the supplied bytes.
+#[must_use]
 pub fn digest(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
+/// Compare certificate values with Python numeric and container equality semantics.
+#[must_use]
 pub fn equal(a: &Value, b: &Value) -> bool {
     match (a, b) {
         (Value::Number(_) | Value::Bool(_), Value::Number(_) | Value::Bool(_)) => {
@@ -295,6 +344,7 @@ pub fn equal(a: &Value, b: &Value) -> bool {
         _ => a == b,
     }
 }
+/// Convert common certificate scalar values using Python str conventions.
 pub fn pystr(v: &Value) -> Result<String> {
     Ok(match v {
         Value::String(s) => s.clone(),

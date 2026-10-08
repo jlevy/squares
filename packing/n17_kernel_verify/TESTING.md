@@ -131,7 +131,7 @@ Runs whose receipts agree with the standing verifier’s on every field except
 | build of this crate (`provenance.source_sha256`) | threads | machine |
 | --- | --- | --- |
 | `71e7bb956c29e4bd8c00560e8b59bf71eb24c05972b0819abe0ca8d99d332e1d`, a revision before this PR’s first commit | 1 and 16 | Linux, 16 vCPU; the timings in README.md |
-| `4ac56281192febb95cf4268c4ea51672d168bceeb3435c234c04b8a3b14b277b`, this revision | 1 and 8 | macOS, 14-core arm64 |
+| `4ac56281192febb95cf4268c4ea51672d168bceeb3435c234c04b8a3b14b277b`, contributor’s pre-integration `763ecd3ba` build | 1 and 8 | macOS, 14-core arm64 |
 
 The certificates (215 MB) and all receipts (the standing verifier’s and this crate’s)
 are kept by the contributor and can be supplied on request.
