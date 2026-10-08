@@ -352,10 +352,14 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     ordered = sorted(overview.results, key=lambda other: other.id)
     index = next(i for i, other in enumerate(ordered) if other.id == result.id)
     for offset, relation in ((-1, "prev"), (1, "next")):
-        neighbor = ordered[index + offset].id
+        neighbor_href = re.search(rf'rel="{relation}" href="([^"]+)"', article)
+        neighbor_index = index + offset
+        if not 0 <= neighbor_index < len(ordered):
+            assert neighbor_href is None
+            continue
+        neighbor = ordered[neighbor_index].id
         target = overview_sections.result_fragment(neighbor)
         expected_links[target] += 1
-        neighbor_href = re.search(rf'rel="{relation}" href="([^"]+)"', article)
         assert neighbor_href is not None
         assert urljoin(page.name, html.unescape(neighbor_href[1])) == target
     assert (
