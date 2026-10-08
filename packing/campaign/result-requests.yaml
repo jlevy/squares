@@ -611,28 +611,28 @@ issues:
       claim: The author reports complete exact certificates at105 and130 at7eef24f, bringing the batch
         to323/324, with both source checkers accepting.
       source: https://github.com/jlevy/squares/issues/375#issuecomment-6029511519
-      not_registered: These later named certificate/input bytes are outside the selected issue399 acquisition
-        scope. Exact complete custody/replay is not established by this reconciliation; corresponding
-        current ceilings may already be superseded by later source-specific witnesses. Preserve the
-        original13ee36e T-098/T-101 scope.
-      queued: true
       bead: think-tiou
+      register:
+      - T-129
+      evidence:
+      - E-daniel-375-dated-105-130-report
     - key: certificate-292-status-2026-10-07
       claim: The author reports exact certification of292 atf58a017 and324/324 batch completion; numerical
         local-minimum observations remain source claims.
       source: https://github.com/jlevy/squares/issues/375#issuecomment-6045966142
-      not_registered: The f58a017 exact-form/Lean catalogue is retained, but its declaration does not
-        include this batch certificate and approximate input. Rehwaldt’s distinct292 witness is already
-        confirmed under T-117; no geometric identity or assurance transfers by count.
-      queued: true
       bead: think-tiou
+      register:
+      - T-129
+      evidence:
+      - E-daniel-375-dated-292-report
     - key: source-valid-invalid-wrapper-correction-2026-10-07
-      claim: The author corrected verify_all.sh atcca7bf1 from grep -q VALID to an exact VALID-line
-        match so INVALID no longer passes that wrapper, and reports rerunning the full batch.
+      claim: The author corrected verify_all.sh atcca7bf1 from grep -q VALID to an exact VALID-line match
+        so INVALID no longer passes that wrapper, and reports rerunning the full batch.
       source: https://github.com/jlevy/squares/issues/375#issuecomment-6046733132
-      not_registered: A dated source-wrapper defect/correction, not a new bound. Preserve the frozen
-        older script and complete maintained native receipts; the author’s new rerun is attributed and
-        earns no independent replay credit here.
+      not_registered: The exact cca7bf1 wrapper correction is retained separately in packing/resources/web/evand-batch-wrapper-2026-10-07/
+        and linked as a T-129 artifact. It is a source-wrapper correction, not a new bound. The author
+        rerun remains attributed; no author program or geometric replay was executed here. Older scripts
+        and complete source-specific receipts remain unchanged.
       queued: false
     beads:
     - think-t6ok

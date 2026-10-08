@@ -13041,3 +13041,40 @@ results:
     next_rung: Preserve and validate each complete historical source house before any selected-house
       replacement, then independently review source-specific adoption and confirming records. Final
       exact-head CI remains required.
+  - id: T-129
+    kind: upper-bound
+    registered: '2026-10-08'
+    headline: Three dated Daniel certificate reports with historical source custody
+    claim: Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and separate
+      immutable pins. All three exact sides are superseded by smaller currently verified bounds; selected
+      cases and original T-098/T-101 assurance are unchanged.
+    scope:
+      n_values:
+      - 105
+      - 130
+      - 292
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 1
+      rationale: Historical certificate custody without a current frontier improvement.
+      scored: '2026-10-08'
+      by: think-tiou dated375 source import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel dated certificates 105 and 130 2026-10-07]'
+      - '[Daniel dated certificate 292 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-daniel-375-dated-105-130-report
+    - E-daniel-375-dated-292-report
+    artifacts:
+    - packing/resources/web/evand-batch-105-130-2026-10-07/README.md
+    - packing/resources/web/evand-batch-292-2026-10-07/README.md
+    - packing/resources/web/evand-batch-wrapper-2026-10-07/README.md
+    notes: The author VALID-prefix wrapper correction is separately retained and not rerun. Complete
+      source custody and parsing establish no geometric feasibility, local minimum, rigidity, optimality
+      or verification transfer. n17 remains with its existing owner.
+    next_rung: Optional scoped historical geometry replay requires dedicated complete deciding inputs
+      and controls; it would not replace any current selected bound.

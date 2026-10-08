@@ -295,6 +295,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-123](packing/frontier/RESULTS.md) | 177 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json, new_form_claims.177, with its retained rational root interval. |
 | [T-124](packing/frontier/RESULTS.md) | 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 28, 30, 31, 32, 33, 34, 35, 36, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 60, 61, 62, 63, 64, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports that 178 configurations are non-strict local minima under the source matched-index perturbation convention. |
 | [T-063](packing/frontier/RESULTS.md) | 61 | `V3` | `C3` | `S1` | `previously-published` | s(61) = 8, as a corollary of s(60) = 8 (T-062), which Evan Daniel published with it on 28 September 2026. |
+| [T-129](packing/frontier/RESULTS.md) | 105, 130, 292 | `V0` | `C0` | `S1` | `previously-published` | Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and separate immutable pins. |
 
 | Significance | What [`epistemics.md`](epistemics.md#significance-and-novelty) anchors it to |
 | --- | --- |
@@ -329,7 +330,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 48 | 28 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 209 | 45 confirmed; 33 refuted; 63 blocked; 19 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 187 | 63 accepted; 38 rejected; 58 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 128 | 128 registered, 98 by others |
+| Frontier results | 129 | 129 registered, 99 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 

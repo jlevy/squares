@@ -897,6 +897,22 @@ Independent whole-net replay and controls remain pending.
   Ryan Xu, Nate Chaoweeraprasit, Siddharth Gupta, David Ellsworth and Evan Daniel
   receive the source’s construction/refinement credits; no optimality is asserted.
 
+- **[Daniel dated certificates 105 and 130 2026-10-07]** — Evan Daniel’s complete dated
+  certificate reports and matching inputs for Francisco Couzo constructions at 105 and
+  130, pinned at 7eef24f.
+  [Historical source packet](web/evand-batch-105-130-2026-10-07/README.md).
+  T-129 records V0/C0/S1; both sides are superseded by smaller currently verified
+  bounds. Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0.
+  No geometry replay or selected-case change.
+
+- **[Daniel dated certificate 292 2026-10-07]** — Evan Daniel’s complete dated
+  certificate report and matching input for Francisco Couzo’s 292 construction, pinned
+  at f58a017. [Historical source packet](web/evand-batch-292-2026-10-07/README.md).
+  T-129 records V0/C0/S1; its side is superseded by the current verified bound.
+  Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0. The
+  [separate wrapper correction](web/evand-batch-wrapper-2026-10-07/README.md) is pinned
+  at cca7bf1; its reported rerun earns no replay credit here.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -1519,6 +1519,32 @@ sources:
       source credits and tools are attributed. The source uses Squares Project (Levy) verification code;
       this project lineage is not independent. No optimizer/local/global claims. Unlicensed programs/prose
       are pinned rather than copied.
+  - key: '[Daniel dated certificates 105 and 130 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo, Levy
+    lineage: builds-on-project
+    note: Complete dated certificates and matching inputs at 7eef24f7221b8c3371d6171dd664b52541bbd479,
+      retained in web/evand-batch-105-130-2026-10-07/. Francisco Couzo construction credit, Evan Daniel
+      refinement and source code credit; Joshua Levy and squares register-data lineage. Source discloses
+      Claude assistance. MIT code and CC BY4.0 batch data are distinct. Source-only historical reports;
+      no new maintained geometry replay or selected-bound adoption.
+  - key: '[Daniel dated certificate 292 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo, Levy
+    lineage: builds-on-project
+    note: Complete dated certificates and matching inputs at f58a01774a733b232a88576470332185d8d11641,
+      retained in web/evand-batch-292-2026-10-07/. Francisco Couzo construction credit, Evan Daniel
+      refinement and source code credit; Joshua Levy and squares register-data lineage. Source discloses
+      Claude assistance. MIT code and CC BY4.0 batch data are distinct. Source-only historical reports;
+      no new maintained geometry replay or selected-bound adoption.
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta

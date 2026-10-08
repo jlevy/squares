@@ -1,0 +1,35 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-08T21:46:50Z",
+  "git_scope": "Selected complete immutable named files acquired through the GitHub contents API; every original is bound to its Git blob and SHA-256. No checkout, author execution, geometric decision, native replay or standing-bound adoption.",
+  "sources": [
+    {
+      "id": "evand-batch-wrapper-2026-10-07",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "cca7bf1f53c038907a819815c5e441df9783e93d",
+      "source_commit": "cca7bf1f53c038907a819815c5e441df9783e93d",
+      "committed_utc": "2026-10-07T20:58:42Z",
+      "git_tree": "83592218c9a240770429b9ccb91495f6b77f25de",
+      "archived_path": "packing/resources/web/evand-batch-wrapper-2026-10-07/source",
+      "subtree_manifest": "packing/resources/web/evand-batch-wrapper-2026-10-07/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "s12/search/exact/README.md",
+        "s12/search/exact/batch/README.md",
+        "s12/search/exact/batch/summarize.py",
+        "s12/search/exact/batch/verify_all.sh",
+        "s12/search/exact/verify_cert.py",
+        "s12/search/exact/verify_cert2.py"
+      ],
+      "subtree_file_count": 6,
+      "subtree_total_bytes": 29081,
+      "retained_file_count": 6,
+      "retained_total_bytes": 29081,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "MIT for source code, copyright Evan Daniel; batch register data is CC BY 4.0, Joshua Levy and the squares project. Construction credit Francisco Couzo; refinement credit Evan Daniel; source discloses Claude assistance. No blanket MIT claim for packing data or excluded website material.",
+      "claims": [
+        "The author changes batch wrapper result detection to exact VALID line prefixes. This is a source artifact correction, with no new bound or repository replay."
+      ]
+    }
+  ]
+}

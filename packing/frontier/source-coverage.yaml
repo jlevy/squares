@@ -2997,6 +2997,51 @@ sources:
     catalogue and all standing claims remain unchanged. Complete archive/candidate/source custody and
     exact conditional mass/net premises accepted; author full positives and sampled controls over 32 directions
     do not supply maintained capture or whole-net controls. Source-only work remains under think-ndvg.
+- id: evand-batch-105-130-2026-10-07
+  title: "Evan Daniel's dated certificate reports at 105 and 130, issue #375"
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/7eef24f7221b8c3371d6171dd664b52541bbd479
+  local: resources/web/evand-batch-105-130-2026-10-07
+  claims_record: resources/web/evand-batch-105-130-2026-10-07/source/s12/search/exact/batch/certs
+  source_key: '[Daniel dated certificates 105 and 130 2026-10-07]'
+  scope:
+    n_values:
+    - 105
+    - 130
+  reviewed: '2026-10-08'
+  source_date: '2026-10-07'
+  disposition: superseded-covered
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-batch-105-130-2026-10-07/README.md
+  evidence:
+  - E-daniel-375-dated-105-130-report
+  notes: All named certificates and matching approximate inputs are retained under this exact revision.
+    Source-only historical scope; source wrapper correction is separately pinned, with no acceptance
+    or geometry replay transferred.
+- id: evand-batch-292-2026-10-07
+  title: "Evan Daniel's dated certificate reports at 292, issue #375"
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/f58a01774a733b232a88576470332185d8d11641
+  local: resources/web/evand-batch-292-2026-10-07
+  claims_record: resources/web/evand-batch-292-2026-10-07/source/s12/search/exact/batch/certs
+  source_key: '[Daniel dated certificate 292 2026-10-07]'
+  scope:
+    n_values:
+    - 292
+  reviewed: '2026-10-08'
+  source_date: '2026-10-07'
+  disposition: superseded-covered
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-batch-292-2026-10-07/README.md
+  evidence:
+  - E-daniel-375-dated-292-report
+  notes: All named certificates and matching approximate inputs are retained under this exact revision.
+    Source-only historical scope; source wrapper correction is separately pinned, with no acceptance
+    or geometry replay transferred.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026
@@ -4882,5 +4927,26 @@ superseded_reports:
   superseded_by: ry-xu-new-packings-2026-10-08
   reason: The withdrawn Gupta rational certificate is larger than the selected ry-xu construction;
     its complete source and replay remain retained.
+- n: 105
+  source_id: evand-batch-105-130-2026-10-07
+  value: '10.806077865519704632682966129102'
+  superseded_by: ry-xu-new-packings-2026-10-08
+  reason: The complete dated source certificate has a strictly larger exact rational side than the
+    current verified selected bound; original custody remains historical and does not inherit another
+    packet's geometry verification.
+- n: 130
+  source_id: evand-batch-105-130-2026-10-07
+  value: '11.911187706535762355657987890878'
+  superseded_by: gupta-square-packing-refinements-2026-10-08
+  reason: The complete dated source certificate has a strictly larger exact rational side than the
+    current verified selected bound; original custody remains historical and does not inherit another
+    packet's geometry verification.
+- n: 292
+  source_id: evand-batch-292-2026-10-07
+  value: '17.597249391156465040647414499422'
+  superseded_by: rehwaldt-couzo-refinements-2026-10-07
+  reason: The complete dated source certificate has a strictly larger exact rational side than the
+    current verified selected bound; original custody remains historical and does not inherit another
+    packet's geometry verification.
 beyond_horizon_claims: []
 pending_catalogue_intake: []

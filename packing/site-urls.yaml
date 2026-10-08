@@ -11681,6 +11681,35 @@ urls:
     - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/execution-attempts.json
     - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/private-custody-668cc1a-v1.json
     - packing/devtools/couzo_refinement_reports.py
+- path: result/t-129.html
+  canonical: result/t-129.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 130
+      - 292
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel dated certificates 105 and 130 2026-10-07]'
+      - '[Daniel dated certificate 292 2026-10-07]'
+      published: '2026-10-07'
+    builds_on: null
+    evidence:
+    - E-daniel-375-dated-105-130-report
+    - E-daniel-375-dated-292-report
+    artifacts:
+    - packing/resources/web/evand-batch-105-130-2026-10-07/README.md
+    - packing/resources/web/evand-batch-292-2026-10-07/README.md
+    - packing/resources/web/evand-batch-wrapper-2026-10-07/README.md
 - path: results.html
   canonical: all-results.html
   kind: forwarder

@@ -29052,3 +29052,48 @@ evidence:
       and independent result review remain pending. The copied project kernel establishes no independent
       implementation. No standing bound or rating changes; the original seven-case report is preserved.
     source_reviewed: '2026-10-08'
+  - id: E-daniel-375-dated-105-130-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 130
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel dated certificates 105 and 130 2026-10-07]'
+    certificate: packing/resources/web/evand-batch-105-130-2026-10-07/source/s12/search/exact/batch/certs
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: Complete dated certificate and matching input custody is retained. Maintained parsing
+      and exact side comparison are not geometric replay. Every claimed side is strictly larger than
+      the corresponding currently verified selected side; older source-specific receipts and T-098/T-101
+      remain scoped to their original inputs. Author acceptance counters, numerical local-minimum, flat-motion
+      and batch-completion claims remain source reports. No optimality, rigidity, independent-method
+      count or standing-bound upgrade.
+  - id: E-daniel-375-dated-292-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel dated certificate 292 2026-10-07]'
+    certificate: packing/resources/web/evand-batch-292-2026-10-07/source/s12/search/exact/batch/certs
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: Complete dated certificate and matching input custody is retained. Maintained parsing
+      and exact side comparison are not geometric replay. Every claimed side is strictly larger than
+      the corresponding currently verified selected side; older source-specific receipts and T-098/T-101
+      remain scoped to their original inputs. Author acceptance counters, numerical local-minimum, flat-motion
+      and batch-completion claims remain source reports. No optimality, rigidity, independent-method
+      count or standing-bound upgrade.
