@@ -5,7 +5,7 @@ title: Make the exact-values catalogue practical to browse on the web
 kind: feature
 status: in_progress
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-01a118e4
 labels: []
@@ -18,7 +18,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T06:19:23.056Z
-updated_at: 2026-10-08T06:20:40.483Z
+updated_at: 2026-10-08T06:33:40.410Z
 started_at: 2026-10-08T06:20:25.579Z
 ---
 User says the366-page PDF is unmanageably large and asks for efficient web rendering. W7 continuation: canonical searchable/filterable/paginated catalogue; load individual entry metadata and full coefficient strings on demand; retain complete HTML/Markdown/PDF archival exports and every existing mathematical/source-status boundary. Compare static initial payload against existing4811981-byte HTML with a retained measurement tool; do not claim unmeasured browser latency or throughput. Coordinator owns shared records, publication integration, measurements, docs, sole commits/PR updates; renderer and browser workers own disjoint files and Astra independently reviews mathematical presentation/serialization. Keep all temp/build/cache data on verified external scratch.
+
+## Notes
+
+Predeclared web acceptance, 2026-10-08: automatic initial HTML plus browser script/style plus index JSON must be <=25% of the preserved 4,811,981-byte complete HTML. All current and historical records, nested-note coefficient vectors, decimal/rational strings, source statuses and route/proof distinctions must round-trip unchanged; no coefficients are fetched before explicit expansion. Metric is raw static bytes, not measured latency, DOM memory or compressed transfer. Use retained tooling and an independent Astra review. Root prepares shared integration/docs and sole commits; workers own disjoint exporter/browser files. Restore mathematical driver recovery think-s6np as selected next continuation after this web slice.
