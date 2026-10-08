@@ -6,6 +6,8 @@ import argparse
 import copy
 import json
 import re
+from decimal import Decimal
+from typing import Any
 
 from devtools import evand_arrangement_reports as reports
 from devtools import register_refinement_reports as registry
@@ -172,22 +174,84 @@ def adopt_case(n: int, existing: str, generated: str | None = None) -> str:
     return render_case_verifiers.refresh("---\n" + registry.dump(document) + "---\n" + body)
 
 
-def register() -> None:
+def read_history() -> list[dict[str, Any]]:
+    """Admit the complete original case roster before any producer mutation."""
+    path = reports.PACKET / "acquisition/prior-state.json.xz"
+    if not path.resolve().is_relative_to(reports.REPO.resolve()):
+        raise reports.ReportError("history must remain inside the repository")
+    value = reports.read_xz(path)
+    if (
+        type(value) is not list
+        or any(
+            type(row) is not dict
+            or set(row) != {"n", "complete_case"}
+            or type(row["n"]) is not int
+            or type(row["complete_case"]) is not str
+            for row in value
+        )
+        or [row["n"] for row in value] != list(reports.NUMBERS)
+    ):
+        raise reports.ReportError("complete immutable previous case roster required")
+    for row in value:
+        original = safe_load(row["complete_case"].split("---\n", 2)[1])["packing"]
+        if (
+            original["n"] != row["n"]
+            or original["reported_upper_bound"]["source_key"] == reports.SOURCE_KEY
+        ):
+            raise reports.ReportError("history must contain every original pre-adoption source")
+    return value
+
+
+def record_cases() -> None:
+    """Preflight the full roster, retain immutable originals, then publish cases.
+
+    An interrupted write resumes against the complete original history and never
+    replaces that history with the remaining subset. Unrelated source changes refuse.
+    """
     reports.check_certification()
+    history = reports.PACKET / "acquisition/prior-state.json.xz"
+    if not history.resolve().is_relative_to(reports.REPO.resolve()):
+        raise reports.ReportError("history must remain inside the repository")
+    retained = read_history() if history.exists() else None
+    historical = {} if retained is None else {row["n"]: row for row in retained}
     prior = []
+    plan = []
     for n in reports.NUMBERS:
         path = FRONTIER / f"n-{n:03d}.md"
-        original = path.read_text()
-        if (
-            safe_load(original.split("---\n", 2)[1])["packing"]["reported_upper_bound"][
-                "source_key"
-            ]
-            != reports.SOURCE_KEY
-        ):
-            prior.append({"n": n, "complete_case": original})
-        registry.save(path, adopt_case(n, original))
-    if prior:
-        reports.save_xz(reports.PACKET / "acquisition/prior-state.json.xz", prior)
+        if not path.resolve().is_relative_to(reports.REPO.resolve()):
+            raise reports.ReportError("case output must remain inside the repository")
+        current = path.read_text()
+        case = safe_load(current.split("---\n", 2)[1])["packing"]
+        if case["n"] != n:
+            raise reports.ReportError("case count differs from the complete selected roster")
+        if case["reported_upper_bound"]["source_key"] == reports.SOURCE_KEY:
+            if retained is None:
+                raise reports.ReportError("selected case lacks complete original history")
+            continue
+        original = current if retained is None else historical[n]["complete_case"]
+        if current != original:
+            raise reports.ReportError(
+                "refuse a changed historical source before any case write"
+            )
+        bound = reports.confirmed_bound(n)
+        if Decimal(bound["value"]) >= Decimal(case["reported_upper_bound"]["value"]):
+            raise reports.ReportError(
+                f"n={n}: selected display is not smaller than current bound"
+            )
+        prior.append({"n": n, "complete_case": original})
+        plan.append((path, adopt_case(n, original)))
+    if not plan:
+        return
+    if retained is None:
+        # Full-roster admission and every transformation completed before this boundary.
+        reports.save_xz(history, prior)
+        read_history()
+    for path, text in plan:
+        registry.save(path, text)
+
+
+def register() -> None:
+    record_cases()
     registry.append_rows(
         FRONTIER / "evidence.yaml",
         "evidence",

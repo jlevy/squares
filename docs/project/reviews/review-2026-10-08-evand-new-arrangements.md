@@ -215,6 +215,69 @@ The read-only record and house audit exited 0; its log is
 `evand-final-record-house-audit.log` in the external review directory.
 No additional scientific replay was needed for these metadata and custody changes.
 
+## Producer Recovery Review at 6021e46b2
+
+**E1 — Medium, closed by the repair below: save the complete original state before
+changing cases.** In `packing/devtools/register_evand_arrangements.py`, `register()`
+saves each adopted frontier inside its loop (line 188 at
+`6021e46b2f7f4d33ff8edc9d83f5fe8c457b448a`) and writes `acquisition/prior-state.json.xz`
+only after that loop (line 190). A later case’s validation failure therefore leaves
+earlier cases changed without retaining their original text.
+A retry skips those already-selected cases when collecting prior state and can save only
+the remaining subset, replacing an existing archive without checking its complete
+original roster.
+
+The reviewer reproduced the first failure using the real three archived prior cases,
+complete source facts and native-receipt admission.
+The fixture removed only the second case’s title and redirected all outputs to
+disposable external review scratch.
+The producer refused with `case requires its existing title`, after changing n = 266; n
+= 270 and 272 remained unchanged, and no original-state archive had been written.
+The isolated run exited 0 after asserting that behavior.
+Its retained log is `evand-adoption-history-preflight-confirmed.log` in the external
+review directory. No production case or scientific input was changed.
+
+**Fix:** construct and validate every proposed case before any case write, validate an
+existing complete history without replacing it with a partial retry, and retain the
+immutable complete original history before the first frontier write.
+An interrupted run must resume from that history.
+Add a later-case failure regression proving that all frontier bytes and any existing
+history remain unchanged on preflight refusal.
+
+This finding reopens producer recovery readiness only.
+The accepted nine-job mathematical review, native-receipt custody, private-worker
+mutation refusal and source-byte accounting above remain valid for their reviewed
+inputs.
+
+### E1 Closure
+
+The reviewed repair separates `record_cases()` from registry publication.
+It first admits the complete ordered three-case history when one exists, checks private
+output paths, rejects changed unadopted originals, and builds every transformed case in
+memory.
+For a new adoption it atomically writes and rereads the complete original history
+before saving any frontier.
+A retry uses that immutable history; an already-adopted prefix without it is refused.
+Existing complete history is never rewritten with a remaining subset.
+The scientific source facts, native outcomes and case claim scope are unchanged.
+
+The reviewer independently ran the natural later-case refusal/restoration and injected
+second-write interruption/idempotent-retry regressions: **2 passed in 1.32s**. Their
+call times were 0.39s and 0.32s, within the unchanged fast-test ceiling.
+The tests use the real atomic case writer and prove original-history byte preservation
+across retry. The passing log is `evand-adoption-history-fix-rerun-review.log` in the
+external review directory.
+An earlier run is retained as `evand-adoption-history-fix-review.log`: both tests
+refused the first fixture write because the shared writer’s repository root had not been
+rebound to the fixture.
+Correcting that fixture root preserved the production output guard; no guard was
+relaxed.
+
+**E1 is closed for this scoped producer repair over `6021e46b2`.** No mathematical
+replay or production clone was repeated for this change.
+Final publication validation still belongs to the integration owner at the final branch
+head.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
