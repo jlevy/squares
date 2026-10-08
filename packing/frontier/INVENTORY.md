@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **458** evidence records. **290** are formal; **283** of those were established here.
-- **160** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **459** evidence records. **290** are formal; **283** of those were established here.
+- **161** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **41** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -195,7 +195,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n029-schadt-numerical` | 0 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | previously-published | independent | `V-sqpack-verify` |
 | `E-n029-interval-certified-upper` | 1 | upper-bound | verified | strict inequalities only | here | - | apparently-novel | independent | `V-sqpack-verify` |
 | `E-n029-schadt-rational-upper` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | independent | `V-check-rational-witness-independent` |
-| `E-translation-escape-not-rigid` | 303 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel | producer’s code | `V-screen-translation-escape` |
+| `E-translation-escape-not-rigid` | 289 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel | producer’s code | `V-screen-translation-escape` |
 | `E-perfect-square-tiling-rigid` | 18 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | no code | `V-assess-frontier-rigidity` |
 | `E-bentz46-theorem8-audit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-cover` |
 | `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-cover` |
@@ -458,13 +458,13 @@ results, it is a statement about what this repository has itself examined.
 | `E-n030-wand125-mixed-58835-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | `V-sqverify-fast` |
 | `E-n039-wand125-mixed-665-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | `V-sqverify-fast` |
 | `E-n041-wand125-mixed-6775-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | `V-sqverify-fast` |
-| `E-squish-ten-packings-2026-10-07-report` | 3 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
-| `E-squish-n153-2026-10-07-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
+| `E-squish-ten-packings-2026-10-07-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
+| `E-squish-n153-2026-10-07-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | *none held* |
 | `E-squish-ten-packings-2026-10-07-exact-replay` | 3 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-squish-upper-bound-packets` |
 | `E-squish-n153-2026-10-07-exact-replay` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-squish-upper-bound-packets` |
-| `E-squish-update-2026-10-07-report` | 7 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
+| `E-squish-update-2026-10-07-report` | 2 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-squish-update-2026-10-07-exact-replay` | 7 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-squish-followup-packets` |
-| `E-squish-second-update-2026-10-07-report` | 8 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
+| `E-squish-second-update-2026-10-07-report` | 2 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-squish-second-update-2026-10-07-exact-replay` | 8 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-squish-second-update-confirmation` |
 | `E-rehwaldt-couzo-refinements-2026-10-07-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-rehwaldt-n68-refinement-2026-10-07-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
@@ -481,13 +481,14 @@ results, it is a statement about what this repository has itself examined.
 | `E-ryxu-432-radical-n51-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 | `E-ryxu-432-rational-feasibility` | 17 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-ryxu-complete-custody` |
 | `E-ryxu-432-radical-n51-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-ryxu-undilated-n51-independent`, `V-ryxu-complete-custody` |
+| `E-gupta-438-rational-report` | 14 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 164, verified 290
-- **method**: exact-algebraic 112, interval-certified 162, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 164
-- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 399
-- **relationship to the producer's code**: generator 5, independent-implementation 163, not-applicable 20, same-implementation 247, shared-components 17, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 165, verified 290
+- **method**: exact-algebraic 112, interval-certified 162, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 165
+- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 400
+- **relationship to the producer's code**: generator 5, independent-implementation 163, not-applicable 20, same-implementation 248, shared-components 17, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -497,7 +498,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
-| `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 303 | numerically-checked |
+| `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 289 | numerically-checked |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |

@@ -11,6 +11,7 @@ from typing import Any
 import pytest
 from jsonschema_rs import Draft202012Validator
 
+from devtools import build_bound_citations as citations
 from devtools import build_known_best_atlas as atlas
 from devtools import check_results
 from devtools import check_source_coverage as coverage_check
@@ -64,6 +65,10 @@ def original_pair(
         register, "HISTORY", packet / "acquisition/frontier-prior-state.json.xz"
     )
     register.FRONTIER.mkdir(parents=True)
+    for name in ("bibliography.yaml", "README.md"):
+        metadata = repo / "packing/resources" / name
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_bytes((SOURCE / "packing/resources" / name).read_bytes())
     originals = {}
     for n in houses.NUMBERS:
         original = SOURCE / "packing/frontier" / f"n-{n:03d}.md"
@@ -336,6 +341,18 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
         (register.FRONTIER / f"{name}.yaml").write_bytes(
             (SOURCE / f"packing/frontier/{name}.yaml").read_bytes()
         )
+    result_path = register.FRONTIER / "results.yaml"
+    original_result = next(
+        row
+        for row in safe_load(result_path.read_text())["results"]
+        if row["id"] == register.RESULT
+    )
+    sentinel = register.PACKET_PATH + "/receipts/exact-certification.json.xz"
+    register.replace_row(
+        result_path,
+        "results",
+        {**original_result, "artifacts": [*original_result["artifacts"], sentinel]},
+    )
     source_path = register.FRONTIER / "source-coverage.yaml"
     source_path.write_bytes((SOURCE / "packing/frontier/source-coverage.yaml").read_bytes())
     original = safe_load(source_path.read_text())
@@ -382,6 +399,15 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
     }
     register.register()
     coverage = safe_load(source_path.read_text())
+    monkeypatch.setattr(citations, "EVIDENCE", register.FRONTIER / "evidence.yaml")
+    monkeypatch.setattr(citations, "RESULTS", result_path)
+    monkeypatch.setattr(
+        citations, "BIBLIOGRAPHY", register.REPO / "packing/resources/bibliography.yaml"
+    )
+    catalogue = citations.load_register()
+    assert houses.reports.SOURCE_KEY in catalogue.sources
+    bound = register.reported_bound(88)
+    assert all(person in catalogue.names for person in bound["found_by"] + bound["improved_by"])
     for name in ("evidence", "results", "source-coverage"):
         validated = safe_load((register.FRONTIER / f"{name}.yaml").read_text())
         schema_path = SOURCE / "packing/frontier" / validated["softschema"]["schema"]
@@ -421,9 +447,23 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
             == original_selected[n]
         )
         assert withdrawn[n]["superseded_by"] == original_selected[n]["source_id"]
+    result = next(
+        row
+        for row in safe_load(result_path.read_text())["results"]
+        if row["id"] == register.RESULT
+    )
+    assert result["artifacts"] == [
+        register.PACKET_PATH + "/README.md",
+        register.PACKET_PATH + "/facts/complete-certificates-and-comparators.json.xz",
+        "packing/devtools/gupta_refinement_reports.py",
+        sentinel,
+    ]
+    assert (result["verification"], result["confirmation"]) == ("V0", "C0")
+    result_bytes = result_path.read_bytes()
     first = source_path.read_bytes()
     register.register()
     assert source_path.read_bytes() == first
+    assert result_path.read_bytes() == result_bytes
 
 
 def test_unaffected_ryxu_link_keeps_its_complete_private_source_owner(
@@ -489,3 +529,38 @@ def test_historical_prose_preserves_names_and_dates_the_compared_atlas_pose() ->
     assert "the atlas pictured at that intake for this count" in rewritten
     assert rewritten.endswith(current)
     assert register.historical_prose(88, rewritten) == rewritten
+
+
+def test_pending_upper_blocker_survives_registration_resume_without_replacing_history(
+    original_pair: dict[int, str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(registry.packets, "REPO", register.REPO)
+    prior_cases = {
+        n: safe_load(text.split("---\n", 2)[1])["packing"] for n, text in original_pair.items()
+    }
+    register.record_cases()
+    boundary = register.HISTORY.read_bytes()
+    for n, prior in prior_cases.items():
+        case = safe_load(
+            (register.FRONTIER / f"n-{n:03d}.md").read_text().split("---\n", 2)[1]
+        )["packing"]
+        assert case["blockers"][:-1] == prior["blockers"]
+        assert case["blockers"][-1]["evidence"] == [register.REPORT]
+        assert case["blockers"][-1]["kind"] == "source-evidence"
+        for field in ("reported_lower_bound", "verified_lower_bound", "verified_upper_bound"):
+            assert case[field] == prior[field]
+    path = register.FRONTIER / "n-130.md"
+    _, front, body = path.read_text().split("---\n", 2)
+    document = safe_load(front)
+    document["packing"]["blockers"].pop()
+    path.write_text("---\n" + register.dump(document) + "---\n" + body)
+    register.record_cases()
+    assert register.HISTORY.read_bytes() == boundary
+    restored = frontier_bytes()
+    assert safe_load(restored[130].decode().split("---\n", 2)[1])["packing"]["blockers"][-1][
+        "evidence"
+    ] == [register.REPORT]
+    register.record_cases()
+    assert frontier_bytes() == restored
+    assert register.HISTORY.read_bytes() == boundary

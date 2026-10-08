@@ -27,7 +27,7 @@ from devtools.census_chunk_taxonomy import (
     taxonomy,
     wall_seating,
 )
-from sqpack.yamlio import safe_load
+from sqpack.witness import load_witness, materialize_exact_witness
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -54,7 +54,7 @@ def test_only_the_new_radical_strip_has_tilted_unexpressed_components() -> None:
     angles = {
         str(component["angle_degrees"])
         for entry in band()
-        if entry["n"] not in (51, 88)
+        if entry["n"] != 51
         for component in entry["components"]
         if component["shape"] == "other-polyomino"
     }
@@ -62,12 +62,14 @@ def test_only_the_new_radical_strip_has_tilted_unexpressed_components() -> None:
     # Francisco Couzo's numerically optimized pose since 2026-09-29, at 3.2e-10 degrees.
     assert "0" in angles
     assert all(abs(float(angle)) < 1e-9 for angle in angles), angles
-    # n = 88's fitted angle class prints 89.999999999 degrees because the class also
-    # includes approximate neighbours. Both residue components themselves consist of
-    # exactly axis-aligned rational edges; inspect every member, without widening the
-    # original residual limit to accommodate the rounded class representative.
-    witness = safe_load((ROOT / "witnesses/known-best/n-088.yaml").read_text())
-    squares = {str(square["id"]): square for square in witness["witness"]["squares"]}
+    # Gupta's refined n = 88 puts both residue components in the zero-degree class.
+    # Inspect every member's rational edge as well as that descriptive fitted angle.
+    witness = load_witness(ROOT / "witnesses/known-best/n-088.yaml")
+    geometry, _side = materialize_exact_witness(witness)
+    squares = {
+        str(square["id"]): corners
+        for square, corners in zip(witness["squares"], geometry, strict=True)
+    }
     residue = [
         component
         for entry in band()
@@ -77,9 +79,9 @@ def test_only_the_new_radical_strip_has_tilted_unexpressed_components() -> None:
     ]
     assert sorted(component["size"] for component in residue) == [16, 25]
     for component in residue:
-        assert component["angle_degrees"] == "89.999999999"
+        assert component["angle_degrees"] == "0"
         for member in component["members"]:
-            corners = squares[member]["corners"]
+            corners = squares[member]
             dx = Fraction(str(corners[1][0])) - Fraction(str(corners[0][0]))
             dy = Fraction(str(corners[1][1])) - Fraction(str(corners[0][1]))
             assert (dx == 0) != (dy == 0), member

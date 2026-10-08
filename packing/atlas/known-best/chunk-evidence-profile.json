@@ -26,7 +26,7 @@
           88
         ],
         "primary_structured_square_count": 1755,
-        "sensitivity_structured_square_count": 1777,
+        "sensitivity_structured_square_count": 1775,
         "within_budget_flip_ns": [
           70
         ]
@@ -1061,7 +1061,7 @@
           "status": "not-established"
         },
         "primary": {
-          "angle_class_count": 17,
+          "angle_class_count": 18,
           "contact_component_count": 5,
           "contact_edge_count": 98,
           "free_square_count": 16,
@@ -1074,8 +1074,8 @@
         },
         "sensitivity_delta": {
           "contact_component_count": -1,
-          "free_square_count": -4,
-          "structured_square_count": 4,
+          "free_square_count": -2,
+          "structured_square_count": 2,
           "within_budget_changed": false
         },
         "source_kind": "packet-derived-facts",

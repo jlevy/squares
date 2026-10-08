@@ -48,7 +48,7 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
             "changed_case_count": 5,
             "changed_ns": [68, 70, 71, 84, 88],
             "primary_structured_square_count": 1755,
-            "sensitivity_structured_square_count": 1777,
+            "sensitivity_structured_square_count": 1775,
             "within_budget_flip_ns": [70],
         },
         "source_strata": [
