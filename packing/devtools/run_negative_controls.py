@@ -137,6 +137,19 @@ PRUNE = frozenset(
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # These five historical stdout copies have identical Git blobs to the
+        # retained scientific receipts beside them (284,187 bytes in total).
+        # No registered control reads them; omit only the duplicate output, keeping
+        # canonical receipts, primary bytes and dynamic declared-input rescue.
+        ROOT
+        / "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+        / "exp-136-stdout.json",
+        *(
+            ROOT
+            / "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+            / f"exp-{number}-stdout.jsonl"
+            for number in (140, 142, 143, 144)
+        ),
         # Historical push telemetry has no registered worker consumer. Keep the logs
         # in Git; linked/result dependencies are still rescued dynamically below.
         # The exact five-file audit saves 395,235 bytes without pruning scientific
@@ -549,6 +562,7 @@ PRUNE = frozenset(
         ROOT / "sqverify_exact/target",
         ROOT / "sqverify_fast/target",
         ROOT / "n17bb_native/target",
+        ROOT / "n17_kernel_verify/target",
         ROOT / "witnesses/prospective",
         # The exact certificates of T-056 and T-057 join on 2026-09-29, when their intake
         # (jlevy/squares#227) put the snapshot at 174,743,423 bytes against the
@@ -571,8 +585,9 @@ PRUNE = frozenset(
 # Generated exact witnesses of the regularized drawing layer, independently
 # replayed by its atlas validation steps and never read by a mutation control.
 # Keep the index/view metadata and original source witnesses in every worker.
+REGULARIZED_WITNESS_PATTERN = "n-*-regularized.yaml*"
 REGULARIZED_WITNESSES = frozenset(
-    (ROOT / "atlas/known-best/regularized").glob("n-*-regularized.yaml*")
+    (ROOT / "atlas/known-best/regularized").glob(REGULARIZED_WITNESS_PATTERN)
 )
 PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS
 # Build caches: excluded from the counted surface and from every worker tree, by
@@ -975,7 +990,7 @@ def _clone_into(src: Path, dst: Path) -> None:
 
 
 INLINE_LINK = re.compile(r"\]\(([^)#\s]+)\)")
-# Omitted sources a checked document may legitimately link into. `.venv` and the three
+# Omitted sources a checked document may legitimately link into. `.venv` and the five
 # cargo `target` directories are symlinked back whole, and `.gate-running` is a
 # marker, so the linked-file copy covers only the content prunes and referenced
 # workflows.
@@ -994,6 +1009,7 @@ LINKED_PRUNE_ROOTS = (
             ROOT / "sqverify_exact/target",
             ROOT / "sqverify_fast/target",
             ROOT / "n17bb_native/target",
+            ROOT / "n17_kernel_verify/target",
         }
     ),
     REPO / ".github/workflows",
@@ -1219,6 +1235,119 @@ def snapshot_audit(
         "candidate_net_saved_bytes": saved,
         "candidate_source_bytes": total - saved,
     }
+
+
+def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
+    """Project committed worker bytes even when this checkout is sparse.
+
+    This uses the current selector and a named Git tree, including every inline
+    and frontier-declared copyback. It excludes working-tree edits and untracked
+    files; ``snapshot_source_bytes`` remains the live worker guard.
+    """
+    result = subprocess.run(
+        ["git", "ls-tree", "-rlz", revision],
+        cwd=REPO,
+        check=True,
+        capture_output=True,
+        timeout=30,
+    )
+    inventory: dict[Path, tuple[str, int]] = {}
+    for raw in result.stdout.split(b"\0"):
+        if not raw:
+            continue
+        metadata, relative = raw.split(b"\t", 1)
+        mode, kind, oid, size = metadata.split()
+        if kind == b"blob" and mode in {b"100644", b"100755"}:
+            inventory[REPO / os.fsdecode(relative)] = (oid.decode("ascii"), int(size))
+    # The live selector discovers this exact generated-file class by glob. Sparse
+    # checkout absence must not turn that established omission into copied bytes.
+    regularized_root = ROOT / "atlas/known-best/regularized"
+    regularized = frozenset(
+        path
+        for path in inventory
+        if (path.parent == regularized_root and path.match(REGULARIZED_WITNESS_PATTERN))
+    )
+    effective_prune = PRUNE | regularized
+    roots = frozenset(LINKED_PRUNE_ROOTS) | regularized
+    documents = [
+        path
+        for path in inventory
+        if path.suffix == ".md"
+        and (
+            path.is_relative_to(ROOT / "campaign")
+            or any(
+                path == document or path.is_relative_to(document) for document in ROOT_DOCUMENTS
+            )
+        )
+        and BUILD_CACHES.isdisjoint(path.relative_to(REPO).parts)
+    ]
+    register = ROOT / "frontier/results.yaml"
+    readers = [*documents, register]
+    queries = "".join(inventory[path][0] + "\n" for path in readers)
+    contents = subprocess.run(
+        ["git", "cat-file", "--batch"],
+        input=queries.encode("ascii"),
+        cwd=REPO,
+        check=True,
+        capture_output=True,
+        timeout=30,
+    ).stdout
+    texts: dict[Path, str] = {}
+    offset = 0
+    for path in readers:
+        end = contents.index(b"\n", offset)
+        _oid, kind, size = contents[offset:end].split()
+        if kind != b"blob":
+            raise ValueError("worker inventory expected a Git blob")
+        offset = end + 1
+        length = int(size)
+        texts[path] = contents[offset : offset + length].decode("utf-8", errors="ignore")
+        offset += length + 1
+    rescued: set[Path] = set()
+    for document in documents:
+        for raw in INLINE_LINK.findall(texts[document]):
+            path = (document.parent / raw).resolve()
+            if path in inventory and in_pruned_roots(path, roots):
+                rescued.add(path)
+    register_value = safe_load(texts[register])
+    for record in register_value["results"]:
+        paths = [*(record.get("artifacts") or []), *(record.get("controls") or [])]
+        paths.extend(review["path"] for review in record.get("reviews") or [])
+        for raw in paths:
+            path = (REPO / raw).resolve()
+            if path in inventory and in_pruned_roots(path, roots):
+                rescued.add(path)
+    named = {*COPY_SEPARATELY, *ROOT_DOCUMENTS}
+    separate = [
+        *COPY_SEPARATELY,
+        *(path for path in inventory if path.parent == REPO and path not in named),
+    ]
+    selected = [*separate, *rescued]
+    for document in ROOT_DOCUMENTS:
+        selected.extend(
+            path
+            for path in inventory
+            if (path == document or path.is_relative_to(document))
+            and BUILD_CACHES.isdisjoint(path.relative_to(REPO).parts)
+        )
+    selected.extend(
+        path
+        for path in inventory
+        if (
+            path.is_relative_to(ROOT)
+            and BUILD_CACHES.isdisjoint(path.relative_to(ROOT).parts)
+            and not in_pruned_roots(path, effective_prune)
+        )
+    )
+    projected: dict[Path, int] = {}
+    for path in selected:
+        projected[path] = projected.get(path, 0) + inventory[path][1]
+    return projected
+
+
+def snapshot_git_source_bytes(revision: str = "HEAD") -> int:
+    """Sum the committed selector projection; the live worker guard is unchanged."""
+    return sum(snapshot_git_source_inventory(revision).values())
 
 
 def _index_tree(root: Path) -> None:
