@@ -16,7 +16,11 @@ recorded as
 The separate explicit-f1 correction is registered as
 [H-324](../../../packing/campaign/hypotheses/H-324-shared-centre-explicit-f1-control.md)
 after sole-Astra final action/custody review and all43 synthetic controls passed.
-The real corrected endpoint is unrun at registration.
+[Exp316](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-316-h-324-shared-centre-explicit-f1.md)
+now passes construction and independent fresh verification:17cells,136pairs,810rows
+and34 exact coordinates in4.9302544590318576s supervised wall.
+This accepts endpoint relaxation calibration under the inherited premises; all
+proof-scope flags remain false.
 The numerical proposal layer and first-eight pilot remain unimplemented and unexecuted;
 no LP runtime or exclusion is predicted.
 
@@ -119,9 +123,13 @@ Accept only one of these exact certificates:
   exactly and $b^Ty<0$. A zero gap proves no contradiction and retains boundary contact.
 
 A dual proposal may suggest at most thirty-five supported rows.
-Reconstruct its weights from $[A_S^T;\mathbf1^T]y=(0,\ldots,0,1)$, select independent
-equations exactly, solve the resulting square system, then check all thirty-five
-equations and the complete original row identities.
+Reconstruct its weights from $[A_S^T;\mathbf1^T]y=(0,\ldots,0,1)$. For support size
+$1\le s\le35$, force the normalization equation and let one bounded numerical QR
+proposal select $s-1$ distinct coordinate equations.
+For $s=1$, skip QR. Solve that single $s\times s$ system with guarded exact pivots, then
+check all thirty-five equations and the complete original row identities.
+Numerical rank is only a proposal; a singular exact choice is unresolved, with no
+alternate basis or exact rank prepass.
 Do not silently truncate a larger proposal.
 If positively scaled rows were used, map multipliers back with the retained scales
 before checking the original system.
@@ -234,6 +242,26 @@ false floating-point infeasibility, shared-centre inconsistency and
 sparse-versus-complete evaluation with closed degeneracies.
 Its allocation must be registered separately; H-323’s 120-second phase limits do not
 allocate the eight-state experiment.
+
+### One-Solve Sparse Dual Reconstruction
+
+Astra’s bounded seam review clarifies the earlier equation-selection contract.
+For support size s, retain the normalization row (index34) and let one numerical
+`scipy.linalg.qr(A_S, pivoting=True)` proposal choose s−1 coordinate indices from0..33.
+The proposal is untrusted: one exact guarded square solve must succeed, and the checker
+must verify all34 cancellations, sum(y)=1, nonnegative weights, strictly negative
+b-transpose-y and the original support identities.
+A singular choice is unresolved; do not scan alternate bases or call `independent_rows`.
+
+The conservative solve-and-full-dual-check count is at most92,647 scalar operations for
+s≤35, including one weight parse, signs and zero tests.
+A prospective100,000-operation reconstruction subcap covers that count.
+It excludes geometry, numerical QR, an earlier direct binary-rational attempt, a full
+primal check and serialization; those need their own registered allocations within the
+aggregate ceiling. This is an arithmetic bound, not a measured runtime or target result.
+QR acts on the bounded s×34 supported-row matrix but has no cooperative time-limit hook,
+so the whole numerical proposal remains under the outer wall/RSS supervisor.
+No first-eight numerical proposal or exact reconstruction was executed in this review.
 
 ## Required Readiness and Disposition
 
