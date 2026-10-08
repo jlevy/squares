@@ -39,6 +39,7 @@ from typing import Any
 
 from playwright.sync_api import sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.probes import probe
 from workbench_tools.transition_contract import (
     Finding,
@@ -132,7 +133,7 @@ def _opened(page_path: Path) -> Iterator[Any]:
             headless=True, executable_path=os.environ.get("SQUARES_BROWSER_EXECUTABLE")
         )
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        page.goto(page_path.resolve().as_uri(), wait_until="load")
+        open_page(page, page_path, wait_until="load")
         page.evaluate(probe("capture/fonts-ready"))
         try:
             yield page

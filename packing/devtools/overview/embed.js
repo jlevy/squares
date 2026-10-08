@@ -1,3 +1,4 @@
+// Head bootstrap: preserve whitelisted layout queries before the body is painted.
 // A site page shown inside another page's popover. The overview's cards open their
 // target in a narrow frame with `?view=embed`; such a page drops its site chrome (the
 // navigation bar) so only the document shows, and a link out of it opens in the whole
@@ -5,7 +6,15 @@
 // inside the frame. A link to a place on the same page still scrolls the frame.
 // Runs in the head, before the body is drawn, so the chrome never flashes.
 (() => {
-  if (new URLSearchParams(location.search).get("view") !== "embed") {
+  const query = new URLSearchParams(location.search);
+  if (query.get("atlas") === "triangle") {
+    document.documentElement.setAttribute("data-site-atlas-view", "triangle");
+  }
+  const size = query.get("size");
+  if (size === "small" || size === "large") {
+    document.documentElement.setAttribute("data-site-atlas-size", size);
+  }
+  if (query.get("view") !== "embed") {
     return;
   }
   document.documentElement.setAttribute("data-site-view", "embed");

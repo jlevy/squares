@@ -22,9 +22,10 @@ A worker of a parallel run is a process of its own and renders its own.
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from functools import cache
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -86,8 +87,8 @@ def served(name: str) -> str:
 
 def write(root: Path, *names: str) -> dict[str, Path]:
     """Write the pages `names` under `root` as the site serves them, with every shared
-    asset they name under `root`'s `assets/`, and return each page's path: a directory a
-    browser can open the pages from, with nothing they link missing. Pages written into
+    asset they name under `root`'s `assets/` and every declared support file. Return each
+    page's path, with its browser dependencies present. Pages written into
     the same `root` by several calls keep each other's assets."""
     from devtools import site_assets  # noqa: PLC0415
 
@@ -97,6 +98,11 @@ def write(root: Path, *names: str) -> dict[str, Path]:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(html(name), encoding="utf-8")
         written[name] = path
+    support = render_overview.support_files()
+    for output in render_overview.support_file_paths():
+        target = root / output
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(support[output])
     files = site_assets.shared().assets.referenced(html(name) for name in names)
     for output, data in files.items():
         target = root / site_assets.ASSETS_DIR / output
@@ -130,3 +136,25 @@ def result_bodies() -> dict[str, str]:
 def case_records() -> dict[str, str]:
     """Every case's record file (`render_overview.case_records`), by served name."""
     return {record.name: record.html for record in render_overview.case_records()}
+
+
+@cache
+def result_pages() -> tuple[render_overview.Page, ...]:
+    """Every complete result document, immutable and rendered once per process."""
+    return tuple(render_overview.result_fragments())
+
+
+@cache
+def forwarders() -> tuple[render_overview.Page, ...]:
+    """The actual forwarders, including the validated case-routing inventory."""
+    return tuple(render_overview.forwarder_pages())
+
+
+@pytest.fixture(scope="module")
+def prepared_forwarders() -> Iterator[tuple[render_overview.Page, ...]]:
+    """Prepare immutable renderer input before per-test patches, then give each
+    checker invocation a fresh list. Its parsing and every mutated-page check still
+    run; repeated fake deploys need not revalidate 324 unchanged case records."""
+    rendered = forwarders()
+    with patch.object(render_overview, "forwarder_pages", side_effect=lambda: list(rendered)):
+        yield rendered

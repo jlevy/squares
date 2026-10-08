@@ -29,17 +29,22 @@ is `compare_math_fonts verify`, run as a gate rather than under pytest.
 from __future__ import annotations
 
 from dataclasses import replace
+from pathlib import Path
 
 import pytest
 
+from devtools import site_assets
 from devtools.compare_math_fonts import (
     DEFAULT_FACES,
     GREEK_SCALE,
+    KATEX_FONTS,
     PROSE_FONTS,
     WHOLE_FACE,
     FaceMetrics,
     Variant,
+    build_variants,
     built_in_variants,
+    check_routes,
     measure,
     metrics_table,
     page_faces,
@@ -47,6 +52,7 @@ from devtools.compare_math_fonts import (
     reconcile,
     stock_katex_baseline,
 )
+from devtools.render_n11_lower_bounds_explainer import inline_face
 
 
 @pytest.fixture(scope="module")
@@ -294,3 +300,82 @@ def test_the_baseline_switches_the_pages_own_math_text_face_off() -> None:
 
     bare = '<!doctype html>\n<html lang="en">\n<head>'
     assert '<html lang="en" data-kpress-math-text="katex">' in stock_katex_baseline(bare)
+
+
+def _font_page(tmp_path: Path) -> tuple[Path, dict[str, bytes]]:
+    prose = (
+        ("normal", "400", "pt-serif-latin-400-normal.woff2"),
+        ("italic", "400", "pt-serif-latin-400-italic.woff2"),
+        ("normal", "700", "pt-serif-latin-700-normal.woff2"),
+    )
+    css = "".join(
+        f'@font-face {{ font-family: "PT Serif"; font-style: {style}; '
+        f"font-weight: {weight}; "
+        f'src: url("{inline_face(name, (PROSE_FONTS / name).read_bytes())}"); }}'
+        for style, weight, name in prose
+    )
+    css += "".join(
+        f"@font-face{{font-display:swap;font-family:{family};font-style:{style};"
+        f'font-weight:400;src:url("{inline_face(name, (KATEX_FONTS / name).read_bytes())}")}}'
+        for family, style, name in (
+            ("KaTeX_Main", "normal", "KaTeX_Main-Regular.woff2"),
+            ("KaTeX_Math", "italic", "KaTeX_Math-Italic.woff2"),
+        )
+    )
+    shell = f"<html><head><style>{css}</style></head><body><p>Font routes</p></body></html>"
+    linked, files = site_assets.link_inline_assets(
+        shell, "papers/example.html", assets=site_assets.SiteAssets()
+    )
+    site_assets.write_assets(tmp_path, files)
+    page = tmp_path / "papers/example.html"
+    page.parent.mkdir()
+    page.write_text(linked)
+    return page, files
+
+
+def test_routes_read_the_published_pages_own_stylesheets_and_font_bytes(tmp_path: Path) -> None:
+    page, _ = _font_page(tmp_path)
+    assert "data:font" not in page.read_text()
+    assert check_routes(page) == []
+    whole = site_assets.read_inline_page(page)
+    faces = page_faces(whole)
+    assert faces.pt_regular == inline_face(
+        "pt-serif-latin-400-normal.woff2",
+        (PROSE_FONTS / "pt-serif-latin-400-normal.woff2").read_bytes(),
+    )
+
+
+def test_relocated_font_variants_keep_the_published_faces_without_an_asset_tree(
+    tmp_path: Path,
+) -> None:
+    page, _ = _font_page(tmp_path / "published")
+    variants = build_variants(page, tmp_path / "relocated")
+    assert len(variants) == 8
+    original = page_faces(site_assets.read_inline_page(page))
+    for variant in variants:
+        whole = variant.read_text()
+        assert 'data-kpress-math-text="katex"' in whole
+        assert 'href="../assets/' not in whole
+        assert page_faces(whole) == original
+        assert check_routes(variant) == []
+
+
+@pytest.mark.parametrize("suffix", [".css", ".woff2"])
+def test_route_checks_refuse_missing_declared_assets(tmp_path: Path, suffix: str) -> None:
+    page, files = _font_page(tmp_path)
+    missing = next(name for name in files if name.endswith(suffix))
+    (tmp_path / "assets" / missing).unlink()
+    with pytest.raises(FileNotFoundError):
+        check_routes(page)
+
+
+def test_route_checks_refuse_ambiguous_asset_roots(tmp_path: Path) -> None:
+    page, files = _font_page(tmp_path)
+    stylesheet = next(name for name in files if name.endswith(".css"))
+    page.write_text(
+        page.read_text().replace(
+            "</head>", f'<link rel="stylesheet" href="assets/{stylesheet}"></head>'
+        )
+    )
+    with pytest.raises(ValueError, match="multiple asset roots"):
+        check_routes(page)
