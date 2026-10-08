@@ -207,6 +207,32 @@ def test_linked_inline_assets_preserve_order_fonts_and_json(tmp_path: Path) -> N
     assert "base64,d09GMg==" in restored
 
 
+@pytest.mark.parametrize("page_path", ["index.html", "papers/example.html"])
+def test_linked_publication_preloads_only_its_front_faces_once_before_styles(
+    page_path: str,
+) -> None:
+    bundle = site_assets.shared()
+    inline = bundle.assets.inlined(
+        f"<head>{site_assets.stylesheet_tag(bundle.kpress_css, page_path)}</head>"
+    )
+    linked, files = site_assets.link_inline_assets(inline, page_path)
+    expected = site_assets.preload_tags(bundle.assets, page_path).splitlines()
+    assert len(expected) == len(site_assets.PRELOADED_FACES)
+    for tag in expected:
+        assert linked.count(tag) == 1
+        assert linked.index(tag) < linked.index('rel="stylesheet"')
+    assert site_assets.link_inline_assets(linked, page_path) == (linked, files)
+    assert bundle.assets.inlined(linked) == inline
+
+    # A shared bundle cache containing these faces does not make a font-free
+    # fragment depend on them or enlarge a tiny prepared-math publication.
+    small, small_files = site_assets.link_inline_assets(
+        "<head><style>p{color:navy}</style></head>", page_path
+    )
+    assert 'rel="preload"' not in small
+    assert not any(name.endswith(".woff2") for name in small_files)
+
+
 def test_prepared_shared_shell_inlines_metric_css_and_remains_idempotent() -> None:
     bundle = site_assets.shared()
     page_path = "papers/example.html"

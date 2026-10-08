@@ -305,7 +305,26 @@ def link_inline_assets(
         return script_tag(target.script("page.js", text), page_path)
 
     page = _INLINE_SCRIPT.sub(script, page)
-    return page, target.referenced([page])
+    files = target.referenced([page])
+    preloads = {
+        reference[1]: tag
+        for tag in preload_tags(target, page_path).splitlines()
+        if (reference := _PAGE_REFERENCE.search(tag)) and reference[1] in files
+    }
+    if preloads and _STYLESHEET_TAG.search(page):
+        page = _PRELOAD_TAG.sub(
+            lambda match: (
+                ""
+                if any(name in preloads for name in _PAGE_REFERENCE.findall(match[0]))
+                else match[0]
+            ),
+            page,
+        )
+        first_sheet = _STYLESHEET_TAG.search(page)
+        assert first_sheet is not None
+        offset = first_sheet.start()
+        page = page[:offset] + "\n".join(preloads.values()) + "\n" + page[offset:]
+    return page, files
 
 
 def read_inline_page(path: Path) -> str:

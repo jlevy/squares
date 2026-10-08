@@ -734,6 +734,13 @@ jobs:
           twin_pid=$!
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           wait "$twin_pid"
+          # The overview uses preview media normally supplied by the lower-bounds
+          # producer. Its partial browser check needs the same committed images.
+          for destination in site "$twin"; do
+            cp atlas/known-best/known-best-1-100-card.png \
+               atlas/known-best/known-best-1-324.png \
+               ../packages/workbench/assets/ascent-n1-324-poster.png "$destination/"
+          done
           diff --recursive site "$twin"
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer overview
           uv run --frozen --group dev python -m devtools.check_site_rendering site

@@ -1117,8 +1117,8 @@ def table_of_results(overview: Overview, defaults: FilterDefaults, *, here: bool
         + '<div class="site-table-wrap">'
         '<table class="kpress-table site-table site-results" data-site-table>'
         f"{result_head()}"
-        f"<tbody>{''.join(body)}</tbody></table></div>{notices}"
-        f"{rung_legend(here=here)}{''.join(popovers)}</div>"
+        f"<tbody>{''.join(body)}</tbody></table></div>"
+        f"{rung_legend(here=here)}{notices}{''.join(popovers)}</div>"
     )
 
 

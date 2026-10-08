@@ -30,6 +30,7 @@ from devtools import (
     result_overview,
     result_status,
     site_assets,
+    site_urls,
 )
 from devtools.check_results import scope_values
 from devtools.render_n11_lower_bounds_explainer import COMPOSITE_ASSETS, OVERVIEW_FILM_POSTER
@@ -5504,9 +5505,12 @@ def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     assert sorted(
         path.relative_to(tmp_path).as_posix() for path in tmp_path.rglob("*.html")
     ) == [
+        "404.html",
         "index.html",
         "papers/n11-lower-bounds-explainer.html",
         "result/t-001.html",
+        "result/t-117.html",
+        "result/t-118.html",
     ]
     assert (tmp_path / "result" / "t-001.html").read_text(encoding="utf-8") == "<p>one</p>\n"
     monkeypatch.setattr(render_overview, "render_all", lambda: files[:1])
@@ -6184,6 +6188,8 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     assert [file.name for file in render_overview.render_site()] == ["index.html", *moved]
     assert {"explainer.html", "n11-optimality/index.html"} < set(moved)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
+    crawl, crawl_assets = site_urls.crawl_files()
+    assert set(crawl) == {"404.html", "sitemap.xml", "result/t-117.html", "result/t-118.html"}
     assert sorted(
         path.relative_to(tmp_path).as_posix() for path in tmp_path.rglob("*") if path.is_file()
     ) == sorted(
@@ -6191,6 +6197,8 @@ def test_the_site_writes_its_forwarders_and_checks_them(
             "index.html",
             *moved,
             *render_overview.support_files(),
+            *crawl,
+            *(f"{site_assets.ASSETS_DIR}/{name}" for name in crawl_assets),
         ]
     )
     assert render_overview.main(["--output", str(tmp_path), "--check"]) == 0

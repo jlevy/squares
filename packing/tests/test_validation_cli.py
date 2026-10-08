@@ -782,6 +782,10 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         f"--ignore={validate.BROWSER_FLOOR_LIVENESS_TESTS}",
         # Browser layout and prepared mathematics run where Chromium is installed, in
         # `site table layout in Chromium`; a shard has no browser for them (D-513).
+        "--ignore=tests/test_site_case_records.py",
+        "--ignore=tests/test_site_math_faces.py",
+        "--ignore=tests/test_site_column_measurement.py",
+        "--ignore=tests/test_site_result_filters.py",
         "--ignore=tests/test_site_result_columns.py",
         "--ignore=tests/test_site_frontier_table.py",
         "--ignore=tests/test_site_rendering.py",

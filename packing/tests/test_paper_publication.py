@@ -5,18 +5,24 @@ from __future__ import annotations
 import json
 import os
 import re
+import time
 from pathlib import Path
 from types import ModuleType
+from typing import Literal, override
 
 import pytest
 
+from devtools import check_site_rendering, preview_site, render_overview, site_assets, site_math
 from devtools import render_n11_lower_bounds_explainer as lower
 from devtools import render_n11_optimality_review as optimality
 from devtools import render_n11_threshold_bound_review as threshold
-from devtools import render_overview, site_assets, site_math
+from sqpack.probes import applied, probe
 from sqpack.yamlio import safe_load
+from tests import site_browser
 from tests import test_render_n11_optimality_review as optimality_fixture
 from tests import test_render_n11_threshold_bound_review as threshold_fixture
+
+FONT_LAYOUT = probe(Path(__file__).with_name("probes"), "paper_publication/font_layout")
 
 PAPER_BROWSER_FIXTURES = [
     pytest.param(
@@ -112,6 +118,82 @@ def test_prepared_paper_metric_and_page_styles_share_the_served_asset_root(
     sheets[0].unlink()
     with pytest.raises(FileNotFoundError):
         site_assets.read_inline_page(output)
+
+
+@pytest.mark.parametrize("fixture", PAPER_BROWSER_FIXTURES)
+@pytest.mark.parametrize("width", [1280, 390])
+@pytest.mark.parametrize("scheme", ["light", "dark"])
+def test_linked_paper_front_has_early_font_discovery_and_stable_first_paint(
+    fixture: ModuleType,
+    width: int,
+    scheme: Literal["light", "dark"],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    html, _ = fixture.paper.render(
+        fixture.SOURCE,
+        figures=fixture.FIGURES,
+        revision=fixture.REVISION,
+        article=fixture.ARTICLE,
+    )
+    output, _ = _write_linked_page(html, fixture.paper.SITE_PATH, tmp_path)
+    linked = output.read_text()
+    critical_css = f"/assets/{site_assets.shared().kpress_css.output_path}"
+
+    class FontDiscoveryHandler(preview_site._PagesHandler):  # noqa: SLF001 # pyright: ignore[reportPrivateUsage]
+        @override
+        def do_GET(self) -> None:
+            # Keep an explicit discovery window: hinted fonts finish before the
+            # blocking stylesheet; CSS-discovered fonts finish after first layout.
+            if self.path == critical_css:
+                time.sleep(0.2)
+            elif self.path.endswith(".woff2"):
+                time.sleep(0.1)
+            super().do_GET()
+
+    monkeypatch.setattr(preview_site, "_PagesHandler", FontDiscoveryHandler)
+    server = preview_site.serve(tmp_path, 0, as_pages=True)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            context = browser.new_context(
+                viewport={"width": width, "height": 900}, color_scheme=scheme
+            )
+            try:
+                check_site_rendering.install_observer(context)
+                context.add_init_script(applied(FONT_LAYOUT))
+                page = context.new_page()
+                page.goto(
+                    f"http://127.0.0.1:{server.server_port}/{fixture.paper.SITE_PATH}",
+                    wait_until="load",
+                )
+                check_site_rendering.wait_for_fonts(page)
+                page.wait_for_timeout(check_site_rendering.SETTLE_MS)
+                report = check_site_rendering.read_report(page)
+                attribution = page.evaluate(FONT_LAYOUT)
+                (tmp_path / "font-layout.json").write_text(
+                    json.dumps({"report": report, "attribution": attribution}, indent=2)
+                )
+                assert report["cls"] <= check_site_rendering.CLS_LIMIT, attribution
+                assert report["shownMath"] > 0
+                assert report["unreadableMath"] == 0
+                assert page.locator("h1").is_visible()
+            finally:
+                context.close()
+                browser.close()
+        expected = site_assets.preload_tags(
+            site_assets.shared().assets, fixture.paper.SITE_PATH
+        )
+        first_sheet = linked.index('rel="stylesheet"')
+        for tag in expected.splitlines():
+            assert linked.count(tag) == 1
+            assert linked.index(tag) < first_sheet
+        assert sum(path.stat().st_size for path in tmp_path.rglob("*") if path.is_file()) < (
+            3 * 1024 * 1024
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
 
 
 @pytest.mark.parametrize(
