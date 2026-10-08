@@ -2854,7 +2854,7 @@ issues:
     summary: All seven fine-net lower-bound statements are recorded as attributed reports with complete
       original-source custody and accepted conditional maintained input-premise review. Fresh complete
       native capture and whole-net controls remain pending; standing bounds and ratings do not change.
-    read_through: '2026-10-08T09:36:13Z'
+    read_through: '2026-10-08T16:53:52Z'
     results:
     - key: fine-net-n19
       claim: Author reports lower bound 1931/400 for n=19 using all 2073 declared net directions.
@@ -2891,6 +2891,13 @@ issues:
       source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n31_L597/README.md
       evidence:
       - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n27-5655-followup
+      claim: At 16:53 UTC on 8 October, the author reports lower bound 1131/200 for n27, improving the
+        original reported 2261/400 by 1/400. Complete source custody and conditional maintained input
+        premises are accepted; project native capture remains pending.
+      source: https://github.com/jlevy/squares/issues/446#issuecomment-6064831911
+      evidence:
+      - E-wand125-fine-net-n27-5655-followup-report
     asks:
     - what: Run a reviewed maintained-only complete seven-case native capture and whole-net v2 control
         protocol, with full input/result custody, before any lower-bound or rating promotion.
@@ -2898,6 +2905,12 @@ issues:
       bead: think-ndvg
       note: Author32direction197/200controls are sampled reports; no replay or bound admission supplied
         by source-only publication.
+    - what: Replay and review the separate later n27 candidate at 1131/200 over all 2073 directions,
+        with whole-net controls, restored positives and actual private-worker input/result custody.
+      state: queued
+      bead: think-ndvg
+      note: Source-author full positives and 32 sampled negative directions are attributed reports; accepted
+        input premises alone change no standing lower bound or assurance rating.
     beads:
     - think-ndvg
     answer_bead: think-ndvg

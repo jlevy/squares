@@ -707,6 +707,7 @@ COPY_SEPARATELY = (
     ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md",
     ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json",
     ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json",
     REPO / ".flowmarkignore",
     REPO / ".gitignore",
     REPO / ".github/PULL_REQUEST_TEMPLATE.md",

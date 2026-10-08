@@ -2943,6 +2943,27 @@ sources:
     Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
     standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget
     remain pending under think-ndvg.
+- id: wand125-fine-net-n27-5655-followup-2026-10-08
+  title: Wand125 later reported n27 fine-net lower bound, issue446
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/bf85d6b537a7e854ac2f885c871474ea46db65ac/problems/square-lower-bounds/certificates/mixed_n27_L5655
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-08/
+  source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+  scope:
+    n_values:
+    - 27
+  reviewed: '2026-10-08'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  evidence:
+  - E-wand125-fine-net-n27-5655-followup-report
+  notes: The later reported 1131/200 supersedes the original reported n27 value only. Original seven-case
+    catalogue and all standing claims remain unchanged. Complete archive/candidate/source custody and
+    exact conditional mass/net premises accepted; author full positives and sampled controls over 32 directions
+    do not supply maintained capture or whole-net controls. Source-only work remains under think-ndvg.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026
