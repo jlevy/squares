@@ -79,6 +79,13 @@ def parse_source(path: Path, expected_n: int) -> tuple[dict[str, Any], bytes]:
         raise PacketError("expected n exceeds the bounded admission range")
     with path.open("rb") as stream:
         raw = stream.read(MAX_SOURCE_BYTES + 1)
+    return parse_source_bytes(raw, expected_n)
+
+
+def parse_source_bytes(raw: bytes, expected_n: int) -> tuple[dict[str, Any], bytes]:
+    """Admit bounded source bytes through the same complete strict source parser."""
+    if type(expected_n) is not int or not 1 <= expected_n <= MAX_N:
+        raise PacketError("expected n exceeds the bounded admission range")
     if len(raw) > MAX_SOURCE_BYTES:
         raise PacketError("source exceeds byte ceiling")
     try:
@@ -244,10 +251,7 @@ def read_fact(n: int) -> dict[str, Any]:
         "note": "derived facts",
         "squares": [[entry[key] for key in ("x", "y", "t")] for entry in entries],
     }
-    with tempfile.TemporaryDirectory() as directory:
-        path = Path(directory) / "facts.json"
-        path.write_bytes(_json(source))
-        normalized, _raw = parse_source(path, n)
+    normalized, _raw = parse_source_bytes(_json(source), n)
     return normalized
 
 

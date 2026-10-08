@@ -509,6 +509,19 @@ def repository_file_problems(paths: Iterable[str]) -> dict[str, str | None]:
         from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
 
         problems.update(second.linked_certificate_problems(linked, repository=REPO))
+    from devtools import squish_followup_packets as first  # noqa: PLC0415
+
+    first_declared = {
+        first.certificate_path(n).relative_to(first.REPO).as_posix()
+        for n in first.RESULT_NUMBERS
+    }
+    first_linked = [
+        path
+        for path in selected
+        if path in first_declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    if first_linked:
+        problems.update(first.linked_certificate_problems(first_linked, repository=REPO))
     problems.update(
         (path, repository_file_problem(path)) for path in selected if path not in problems
     )

@@ -51,9 +51,13 @@ def test_linked_proof_read_admission_is_exact_and_keeps_other_escapes_closed(
     source = link_private_proofs()
     monkeypatch.setattr(check_results, "REPO", packet.REPO)
     before = {path.name: path.read_bytes() for path in source.iterdir()}
-    for n in packet.RESULT_NUMBERS:
-        relative = packet.certificate_path(n).relative_to(packet.REPO).as_posix()
-        assert check_results.repository_file_problem(relative) is None
+    relatives = [
+        packet.certificate_path(n).relative_to(packet.REPO).as_posix()
+        for n in packet.RESULT_NUMBERS
+    ]
+    assert check_results.repository_file_problems(relatives) == dict.fromkeys(relatives)
+    assert check_results.repository_file_problem(relatives[0]) is None
+    for relative in relatives:
         assert packet.linked_certificate_problem(relative, repository=source) == (
             "resolves outside the repository"
         )
@@ -82,8 +86,13 @@ def test_linked_proof_read_admission_refuses_complete_custody_corruption(
 
     source = link_private_proofs()
     monkeypatch.setattr(check_results, "REPO", packet.REPO)
+    path = (
+        private_packet / "receipts/certification.json.xz"
+        if mutation == "receipt"
+        else source / "n-123-rational.yaml.gz"
+    )
+    original = path.read_bytes()
     if mutation == "receipt":
-        path = private_packet / "receipts/certification.json.xz"
         receipt = packet.read_xz_receipt(path)
         receipt["cases"][0]["checker_input"]["squares"][0]["corners"][0][0] = "99"
         save_receipt(path, receipt)
@@ -93,6 +102,18 @@ def test_linked_proof_read_admission_refuses_complete_custody_corruption(
     problem = check_results.repository_file_problem(relative)
     assert problem is not None
     assert problem.startswith("linked reviewed proof custody mismatch:")
+    sibling = packet.certificate_path(126).relative_to(packet.REPO).as_posix()
+    problems = check_results.repository_file_problems([relative, sibling])
+    assert problems[relative] is not None
+    if mutation == "receipt":
+        assert problems[sibling] is not None
+    else:
+        assert problems[sibling] is None
+    path.write_bytes(original)
+    assert check_results.repository_file_problems([relative, sibling]) == {
+        relative: None,
+        sibling: None,
+    }
 
 
 @pytest.mark.usefixtures("private_packet")
