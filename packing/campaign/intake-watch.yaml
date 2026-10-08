@@ -155,3 +155,21 @@ repositories:
       dual_exact doc pointers of 27dd68a), the literature and proof-anatomy notes,
       QUADRANT_EXACT.md's pointer to the now-public reviews, S3Lower.lean's toy s3_eq_2 and
       Average.lean's averaging lemma, which bounds nothing. Nothing else to import.
+
+  - url: https://github.com/squarepacker/k2-minus-c
+    read_through: 0ff7d6a1a28eccc755f69e94c61a016a95ad781d
+    read_on: '2026-10-08'
+    note: >-
+      The single commit after the retained v1.2 pin changes only README citation URLs: software DOI 23194031 and paper DOI 23194104. The paper, certificate inputs and verifier programs are unchanged. No new result to import.
+
+  - url: https://github.com/squarepacker/k2-minus-c-cube-root
+    read_through: e7334a675ebfa28aeb0091c7426a01e14e2854e0
+    read_on: '2026-10-08'
+    note: >-
+      All three commits after the retained v1.0 pin change only README: software and paper DOI links, and an explicit k >= 2 domain in the introductory equivalence. The retained paper and verifier programs are unchanged; this is not a new theorem or replay. No new result to import.
+
+  - url: https://github.com/squarepacker/k2-minus-c-quarter
+    read_through: c3a65d5ca1f1c4fcf2a2c9c98da8f801b6e2dcdb
+    read_on: '2026-10-08'
+    note: >-
+      Both commits after the retained v1.0 pin change only README software and paper DOI links. The retained paper, certificate inputs and verifier programs are unchanged. No new result to import.

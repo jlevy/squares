@@ -3161,7 +3161,8 @@ issues:
         unestablished.
     beads:
     - think-hpiy
-    answer_bead: think-hpiy
+    - think-n01y
+    answer_bead: think-n01y
     replies:
     - url: https://github.com/jlevy/squares/issues/445#issuecomment-6065522259
       date: '2026-10-08'
