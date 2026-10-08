@@ -115,3 +115,15 @@ def test_complete_radical_outcome_custody(tmp_path, monkeypatch, mutation: str) 
     radical.rational.save(path, row)
     with pytest.raises(ValueError, match="complete frozen"):
         radical.check_certification()
+
+
+def test_actual_negative_radical_replay_survives_json_failure_normalization(
+    monkeypatch,
+) -> None:
+    """Native tuple failures and retained JSON lists must represent the same full outcome."""
+    control = "duplicate-square-overlap"
+    monkeypatch.setattr(radical.rational, "JOBS", (control,))
+    admitted = radical.check_certification(replay=True)
+    assert admitted[control]["exact_verify"]["verification_passed"] is False
+    assert admitted[control]["independent"]["verification_passed"] is False
+    assert admitted[control]["exact_verify"]["pairs_tested"] == 1275

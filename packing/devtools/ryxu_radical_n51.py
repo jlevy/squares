@@ -309,7 +309,9 @@ def check_certification(*, replay: bool = False) -> dict[str, Any]:
             or other["pairs_tested"] != 1275
         ):
             raise ValueError("radical receipt incomplete native verdict")
-        if replay and row != run_case(control):
+        if replay and rational.canonical_json(row) != rational.canonical_json(
+            run_case(control)
+        ):
             raise ValueError("fresh full radical outcome differs from retained receipt")
         rows[control] = row
     return rows

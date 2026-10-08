@@ -74,8 +74,9 @@ The three complete 51-square jobs retain native inputs and both full outcomes in
 Its positive passed and both controls failed.
 Native number-field diagnostic decimals are retained as diagnostics; the complete input
 coefficient pairs define the exact geometry.
-The independent checker counted 119 pairs touching on a separating axis; this count is
-not the source’s different contact statistic.
+The independent checker counted 119 pairs touching on a separating axis.
+The source reports 191 touching pairs; that count remains unconfirmed and is not used to
+admit feasibility.
 
 ```bash
 python -m devtools.ryxu_radical_n51 certify
