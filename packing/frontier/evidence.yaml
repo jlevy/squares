@@ -28911,3 +28911,30 @@ evidence:
       proof/replay work remains open under think-nv5o; source-byte custody is not mathematical assurance.
       T-118 and all standing bounds remain unchanged.
     source_reviewed: '2026-10-08'
+  - id: E-wand125-fine-net-lower-bounds-446-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 19
+      - 20
+      - 26
+      - 27
+      - 28
+      - 29
+      - 31
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Complete original candidate/log/source byte custody and conditional measure/net premise
+      review do not decide full native capture. Author positive results and 32 sampled 197/200 controls
+      remain attributed; maintained whole-net v2 controls, private-worker/input/result controls, independent
+      result review and explicit hosted research budget remain pending. No bound, theorem, optimality
+      or rating promotion; earlier FN1/T-102–T-111 results unchanged.
+    source_reviewed: '2026-10-08'

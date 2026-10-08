@@ -262,20 +262,29 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: The latest author status reports 19 certificate-verified and 10 computed patterns
-      among 29 named subpatterns. Only rows 1–4 report full standing verification; the other fifteen
-      checked patterns use the author fast verifier. Complete admission packages remain unpublished.
-    read_through: '2026-10-08T05:41:20Z'
+    summary: The separately dated 8 October 07:47 UTC author followup reports 31 patterns, 20 certificate-verified
+      and 11 computed. The retained prior 29/19/10 source and full-verification scope remain unchanged;
+      complete new packages remain unpublished.
+    read_through: '2026-10-08T07:47:25Z'
     results:
     - key: subpatterns-27
-      claim: 29 source subpatterns, with 19 reported certificate verified and 10 computed; only rows 1–4
-        report upstream full standing verification.
+      claim: 29 source subpatterns, with 19 reported certificate verified and 10 computed; only rows
+        1–4 report upstream full standing verification.
       source: https://github.com/jlevy/squares/issues/413#issuecomment-6053187784
       not_registered: Complete immutable certificates, hosted manifests, named cell/frame/cap/domain
         bindings and full receipts have not been acquired. Producer status is retained without new
         unconditional exclusion credit; no D4 join or coverage of unresolved global states was computed.
       queued: true
       bead: think-x4v4
+    - key: subpatterns-31-status-2026-10-08
+      claim: The author reports 31 patterns,20certificate-verified and 11 computed; row 19 newly checked
+        by the author fast verifier and rows 30/31 computed with certificates to follow.
+      source: https://github.com/jlevy/squares/issues/413#issuecomment-6055253328
+      not_registered: Dated progress report only. No complete new certificate packages, exact domain/frame/cap
+        bindings or full standing receipts have been acquired; no new unconditional exclusion or unresolved-state
+        coverage credit.
+      queued: true
+      bead: think-bmwd
     asks:
     - what: Acquire complete packages for rows1–4 first and join exact named-cell, frame, cap, closed-domain
         and receipt custody before admission.
@@ -283,25 +292,33 @@ issues:
       bead: think-x4v4
       note: The owner’s request at issuecomment6047161738 identifies these missing inputs. The six-cell
         example in367 omits interior-S and does not refute row3, which includes it.
+    - what: Acquire complete immutable new source/certificate packages and exact domain/receipt bindings
+        before any assurance change from the dated 31/20/11 status.
+      state: queued
+      bead: think-bmwd
+      note: Preserve the prior 29-source/19-certificate/10-computed record and existing rows 1–4 full-standing
+        scope. The later author fast status is attributed only.
     beads:
     - think-x4v4
+    - think-bmwd
     answer_bead: think-x4v4
     replies:
-      - url: https://github.com/jlevy/squares/issues/413#issuecomment-6047161738
-        date: '2026-10-07'
-        by: jlevy
-        kind: follow-up
-        reported:
-          - result: subpatterns-27
-            status: incomplete
+    - url: https://github.com/jlevy/squares/issues/413#issuecomment-6047161738
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: subpatterns-27
+        status: incomplete
     close_when: The named owner completes or explicitly dispositions the queued work and posts the
       recorded state; source status alone grants no theorem admission.
-    notes: >-
-      The owner reply of 7 October acknowledged the then-current 17 verified / 10 computed split and
-      requested complete custody and domain bindings. Later author updates add row 26 to the verified
-      set and two computed patterns, producing
-      the 19 / 10 split across 29 patterns summarized above. Complete intake packages for rows 1–4
-      and the two classes in #358 are being prepared; no new project admission is supplied.
+    notes: 'The owner reply of 7 October acknowledged the then-current 17 verified / 10 computed split
+      and requested complete custody and domain bindings. Later author updates add row 26 to the verified
+      set and two computed patterns, producing the 19 / 10 split across 29 patterns summarized above.
+      Complete intake packages for rows 1–4 and the two classes in #358 are being prepared; no new
+      project admission is supplied. Separately dated author followup at 2026-10-08T07:47:25Z reports
+      31/20/11; new complete packages remain unpublished and this status changes no earlier actual
+      full outcome.'
 
   - number: 414
     title: 'Two preprints: k^2 - M(k) >= 0.1 k^{1/4} (k >= 4.62e12) and > 0.06 k^{1/3} (k >= 3.5e17)'
@@ -2759,3 +2776,64 @@ issues:
     close_when: Accurate imported and reviewed states have reached main and remaining proof/replay obligations
       and any owner response have explicit dispositions. Source-only publication does not close this
       request.
+  - number: 446
+    title: 'Seven fine-net measure certificates: lower bounds for n = 19, 20, 26, 27, 28, 29, 31 (after
+      T-102 to T-111)'
+    author: wand125
+    opened: '2026-10-08'
+    state: open
+    kind: result-report
+    triage: done
+    summary: All seven fine-net lower-bound statements are recorded as attributed reports with complete
+      original-source custody and accepted conditional maintained input-premise review. Fresh complete
+      native capture and whole-net controls remain pending; standing bounds and ratings do not change.
+    read_through: '2026-10-08T09:36:13Z'
+    results:
+    - key: fine-net-n19
+      claim: Author reports lower bound 1931/400 for n=19 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n20
+      claim: Author reports lower bound 393/80 for n=20 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n26
+      claim: Author reports lower bound 1111/200 for n=26 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n27
+      claim: Author reports lower bound 2261/400 for n=27 using all 2073 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n27_L56525/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n28
+      claim: Author reports lower bound 287/50 for n=28 using all 832 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n28_L574/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n29
+      claim: Author reports lower bound 1163/200 for n=29 using all 832 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n29_L5815/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    - key: fine-net-n31
+      claim: Author reports lower bound 597/100 for n=31 using all 832 declared net directions.
+      source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n31_L597/README.md
+      evidence:
+      - E-wand125-fine-net-lower-bounds-446-report
+    asks:
+    - what: Run a reviewed maintained-only complete seven-case native capture and whole-net v2 control
+        protocol, with full input/result custody, before any lower-bound or rating promotion.
+      state: queued
+      bead: think-ndvg
+      note: Author32direction197/200controls are sampled reports; no replay or bound admission supplied
+        by source-only publication.
+    beads:
+    - think-ndvg
+    answer_bead: think-ndvg
+    replies: []
+    close_when: Accurate source-only disposition reaches main and the remaining independent native/review
+      obligations have explicit dispositions. Source-byte custody alone does not close this request.

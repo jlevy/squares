@@ -2916,6 +2916,33 @@ sources:
     custody is preserved outside live Git; no whole-publication license was observed. No numeric selection
     claims_record is supplied because the root expression is not admitted as a frontier value. Independent
     review/replay is queued under think-nv5o; earlier rational T-118 remains unchanged.
+- id: wand125-fine-net-lower-bounds-446-2026-10-08
+  title: Wand125 seven reported fine-net lower bounds, issue446
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-08/
+  source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+  scope:
+    n_values:
+    - 19
+    - 20
+    - 26
+    - 27
+    - 28
+    - 29
+    - 31
+  reviewed: '2026-10-08'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  evidence:
+  - E-wand125-fine-net-lower-bounds-446-report
+  notes: All seven original archives and sealed source/log/member identities retained outside live Git.
+    Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
+    standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget
+    remain pending under think-ndvg.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

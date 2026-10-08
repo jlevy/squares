@@ -869,6 +869,15 @@ earlier finite rational T-118 result remains unchanged.
 Complete original custody is preserved outside live Git; public files contain attributed
 factual metadata and external-byte identities only.
 
+## Reported Fine-Net Lower Bounds
+
+**[wand125 fine-net lower bounds 2026-10-08]**: wand125, using the project’s maintained
+geometric kernel, reports seven finer-net measure certificates for n19, n20, n26, n27,
+n28, n29 and n31. The
+[authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
+records the reported bounds and complete source references.
+Independent whole-net replay and controls remain pending.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
