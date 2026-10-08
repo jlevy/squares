@@ -5,17 +5,18 @@ title: Review and import issue428 n68 rational refinement without display-ceilin
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: codex@spud10
 labels: []
 dependencies: []
 parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 child_order_hints:
   - is-01m4cfnx8vkbyx6cpn5v6dqc8k
+  - is-01m4dbvnt8ach1hsq4dq2aezqn
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:10:41.351Z
-updated_at: 2026-10-08T01:11:18.574Z
+updated_at: 2026-10-08T09:00:11.463Z
 started_at: 2026-10-08T00:14:57.694Z
 ---
 Issue428 author requests n68 feasibility registration at immutable lollipoll/certified-square-packing-68 fded686668e29258dad2eb29d0482fa3fd51bd6b releasev1.1.0. Preserve full exact rational; author claims approximately8.7988e-20 improvement over Daniel while18place upward-rounded display is larger than Daniel. Author-reported geometry/analytic runs remain external claims. Next retrieve complete inputs, independently review math and binding with Astra, select meaningful exact controls, run documented dual routes, register results/list/graphics through standard intake only after verification. No current-session deciders executed; no optimality/rigidity promotion.
