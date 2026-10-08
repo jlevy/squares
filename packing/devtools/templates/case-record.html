@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="en" data-case="{{N}}">
+<html lang="en" data-kpress-viewport data-kpress-theme="system" data-kpress-resolved-theme="light" data-kpress-palette="neutral" data-kpress-prose-font="serif" data-kpress-math-text="prose" data-kpress-mono-font="planetaire">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 {{HEAD}}
-<!-- A case's record file (`render_case_pages.case_records`): its own address, title and
-     link preview, and the record itself, plain, for a reader without scripts and for a
-     crawler. A reader with scripts is sent on at once to the record page, `./?n=N`,
-     which fetches this file and shows its record in the site's design
-     (`overview/case-forward.js`); `?raw` keeps a reader here. -->
-<script>{{FORWARD_SCRIPT}}</script>
-<!-- Read plain, without scripts: the column at a reading width, the drawing at the size
-     the record page sets it, and each formula once, as its MathML (the TeX beside it is
-     for the site's math pipeline, which a plain reading has not got). -->
-<style>body{font-family:sans-serif;line-height:1.5;margin:0 auto;max-width:44rem;padding:1rem}svg{height:auto;max-width:min(28rem,100%)}.kpress-math-render{display:none}</style>
+<script>{{BOOTSTRAP}}</script>
 </head>
-<body>
+<body class="kpress-frame" data-kpress-frame>
+<main class="kpress-page-main">
+<header class="kpress-site-header">{{NAV}}</header>
+<div class="kpress kpress-doc kpress-print-surface" data-kpress-profile="document" data-kpress-fonts="custom">
+<div class="kpress-doc-layout"><div class="kpress-prose kpress-long-text site-page">
 {{RECORD}}
+</div></div></div>
+<footer class="kpress-site-footer">{{FOOTER}}</footer>
+</main>
+{{PROGRAMS}}
 </body>
 </html>

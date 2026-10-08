@@ -12,6 +12,7 @@ from typing import Any
 
 from playwright.sync_api import Browser, Page, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_site import build
 from workbench_tools.probes import probe
 
@@ -193,7 +194,7 @@ def _check_quiet_live_regions(browser: Browser, page_path: Path, errors: list[st
         reduced_motion="no-preference", viewport={"width": 1440, "height": 1000}
     )
     page.on("pageerror", lambda error: errors.append(str(error)))
-    page.goto(page_path.resolve().as_uri())
+    open_page(page, page_path)
     page.locator("#mode-pack").click()
     facts = page.locator("#pack-stage-facts")
     _require(facts.is_visible(), "the Pack stage facts are hidden after choosing Pack")
@@ -234,7 +235,7 @@ def check(page_path: Path) -> str:
             reduced_motion="reduce", viewport={"width": 1440, "height": 1000}
         )
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.goto(page_path.resolve().as_uri())
+        open_page(page, page_path)
         page.locator("#mode-pack").click()
         panel = page.locator("#pack-workspace")
         squares = page.locator("#pack-squares > g")

@@ -6,7 +6,7 @@
 
 <!-- The explainer has a section of this name, and an old explainer link to it must
      still reach the explainer (forward.js), so this heading keeps the overview's own id. -->
-<h2 id="the-problem" class="site-title">The Square Packing Problem</h2>
+<h1 id="the-problem" class="site-title">The Square Packing Problem</h1>
 
 <!-- The section's first two paragraphs are README's, read from its project-intro block
      (site_documents.overview_intro), so the problem is introduced in one text. Edit them
@@ -98,8 +98,9 @@ packing, by [T-060](all-results.html#t-060). Seventeen squares is bracketed by
 machine-checked bounds, [T-093](all-results.html#t-093) below and
 [T-065](all-results.html#t-065) above, and [$n = 21$](cases/21.html),
 [$32$](cases/32.html) and [$45$](cases/45.html) have new exact values.
-The table above starts at significance S3 and up, max age 180 days and superseded
-hidden.
+The recent table includes results of significance S3 and up from the last 180 days,
+excluding superseded results.
+The [complete table](all-results.html) includes older results and offers all filters.
 
 <!-- Verification Ladders stood here, between Recent Results and the atlas, until
      2026-10-02 (the owner, think-hqb3): the section is the Results page's, under its

@@ -47,7 +47,10 @@
     if (mathSans !== (textSans && !alone)) {
       const where = host.closest("[id]")?.id ?? "";
       const tag = `${host.tagName.toLowerCase()}.${host.className || "-"}`;
-      const tex = math.querySelector("annotation")?.textContent ?? "";
+      const tex =
+        math.querySelector("annotation")?.textContent ??
+        math.querySelector("math")?.textContent ??
+        "";
       const around = alone ? "a headline that is all math" : `${textSans ? "sans" : "serif"} text`;
       found.push(
         `${mathSans ? "sans" : "serif"} math in ${around}: ` +

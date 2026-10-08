@@ -8,6 +8,7 @@ import re
 import shlex
 import shutil
 import subprocess
+import sys
 from collections.abc import Mapping
 from fnmatch import fnmatchcase
 from pathlib import Path
@@ -116,7 +117,7 @@ def browser_check_jobs(jobs: Mapping[str, Mapping[str, Any]]) -> list[str]:
     return [
         name
         for name, job in jobs.items()
-        if name not in {"prepare", *REVIEW_JOBS, *DEPLOY_PATH}
+        if name not in {"prepare", "overview", *REVIEW_JOBS, *DEPLOY_PATH}
         and any("playwright install" in step.get("run", "") for step in job.get("steps", []))
     ]
 
@@ -820,7 +821,7 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
     assert produced["workbench-page"] == ("workbench", "packing/site/workbench")
     assert produced["overview-pages"] == ("overview", "packing/site")
     for review in REVIEW_JOBS:
-        assert produced[f"{review}-page"] == (review, "packing/site/papers")
+        assert produced[f"{review}-page"] == (review, "packing/site")
     (upload,) = [
         step
         for step in steps
@@ -952,7 +953,11 @@ def test_publication_holds_the_assembled_site_to_the_head_contract() -> None:
     )
     assert check < upload
     # The overview's own build is checked the same way, in its own job.
-    assert any(LOCAL_HEAD_CHECK in step.get("run", "").splitlines() for step in overview)
+    assert any(
+        (LOCAL_HEAD_CHECK + " --partial --producer overview")
+        in step.get("run", "").splitlines()
+        for step in overview
+    )
 
 
 def _assembled(
@@ -986,19 +991,19 @@ def _assembled(
         (pages / page).parent.mkdir(parents=True, exist_ok=True)
         (pages / page).write_text(f"overview build's {page}")
     staged_threshold = root / "n11-threshold-bound-review-page"
-    staged_threshold.mkdir()
+    (staged_threshold / "papers").mkdir(parents=True)
     for suffix in ("html", "md", "pdf"):
-        (staged_threshold / f"n11-threshold-bound-review.{suffix}").write_text(
+        (staged_threshold / "papers" / f"n11-threshold-bound-review.{suffix}").write_text(
             f"threshold review {suffix}"
         )
     for extra in threshold:
-        (staged_threshold / extra).write_text("threshold review's")
+        (staged_threshold / "papers" / extra).write_text("threshold review's")
     staged = root / "n11-optimality-review-page"
-    staged.mkdir()
+    (staged / "papers").mkdir(parents=True)
     for suffix in ("html", "md", "pdf"):
-        (staged / f"n11-optimality-review.{suffix}").write_text(f"review {suffix}")
+        (staged / "papers" / f"n11-optimality-review.{suffix}").write_text(f"review {suffix}")
     for extra in review:
-        (staged / extra).write_text("review's")
+        (staged / "papers" / extra).write_text("review's")
     results = []
     for step_name, cwd, environment in (
         ("Put the site's pages at the root, refusing any name already there", root, pages),
@@ -1021,10 +1026,28 @@ def _assembled(
         if environment is not None:
             assert step["env"] == {"STAGED": "${{ runner.temp }}/" + environment.name}
             env["STAGED"] = str(environment)
+        command_cwd = cwd
+        if environment is not None:
+            assert step["working-directory"] == "packing"
+            assert step["run"].splitlines()[-1] == (
+                "uv run --frozen --group dev python -m devtools.assemble_site "
+                '--destination site "$STAGED"'
+            )
+            command = (
+                sys.executable,
+                "-m",
+                "devtools.assemble_site",
+                "--destination",
+                str(site),
+                str(environment),
+            )
+            command_cwd = REPO / "packing"
+        else:
+            command = (bash, "-e", "-c", step["run"])
         results.append(
             subprocess.run(
-                (bash, "-e", "-c", step["run"]),
-                cwd=cwd,
+                command,
+                cwd=command_cwd,
                 env=env,
                 capture_output=True,
                 text=True,
@@ -1119,7 +1142,7 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
     already published there."""
     site, results = _assembled(tmp_path, "root", overview=("known-best-1-100.svg",))
     assert [result.returncode for result in results] == [1]
-    assert "both publish known-best-1-100.svg" in results[0].stdout
+    assert "publication collision: known-best-1-100.svg" in results[0].stderr
     assert (site / "known-best-1-100.svg").read_text() == "atlas"
     assert not (site / "index.html").exists()
 
@@ -1127,7 +1150,7 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
         tmp_path, "threshold", threshold=("n11-lower-bounds-explainer.md",)
     )
     assert [result.returncode for result in results] == [0, 1]
-    assert "two papers publish papers/n11-lower-bounds-explainer.md" in results[1].stdout
+    assert "publication collision: papers/n11-lower-bounds-explainer.md" in results[1].stderr
     assert (site / "papers" / "n11-lower-bounds-explainer.md").read_text() == (
         "explainer markdown"
     )
@@ -1135,7 +1158,7 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
 
     site, results = _assembled(tmp_path, "papers", review=("n11-threshold-bound-review.md",))
     assert [result.returncode for result in results] == [0, 0, 1]
-    assert "two papers publish papers/n11-threshold-bound-review.md" in results[2].stdout
+    assert "publication collision: papers/n11-threshold-bound-review.md" in results[2].stderr
     assert (site / "papers" / "n11-threshold-bound-review.md").read_text() == (
         "threshold review md"
     )

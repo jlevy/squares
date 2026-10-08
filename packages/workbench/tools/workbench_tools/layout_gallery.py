@@ -36,6 +36,7 @@ from typing import Any
 
 from playwright.sync_api import Browser, Page, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_site import OUT
 from workbench_tools.check_search_panel import run_plan
 from workbench_tools.probes import probe
@@ -169,7 +170,7 @@ def _open(
         device_scale_factor=scale,
     )
     page = context.new_page()
-    page.goto(page_path.resolve().as_uri())
+    open_page(page, page_path)
     page.wait_for_function(probe("benchmark/page-api-ready"))
     page.evaluate(probe("capture/fonts-ready"))
     view.drive(page)

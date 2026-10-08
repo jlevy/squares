@@ -313,15 +313,13 @@ def evidence_links(refs: Iterable[str]) -> str:
 
 
 def thumbnail_svg(n: int) -> str:
-    """The atlas drawing of case `n`, reduced to its squares for a table cell.
+    """The case's cached 1000-unit SVG, in a reserved 50-pixel square image.
 
-    The full drawing carries exact coordinates to 28 digits and a metadata block, about
-    51 MB over the corpus; a cell 50 pixels across needs the outline of each square at
-    whole units of a 100-unit frame, half a pixel at
-    that size, one path per fill colour, and nothing else. The cell that holds it is
-    the `.site-thumb` and sizes it, so the drawing has no wrapper of its own.
+    The drawing lives at its declared atlas address and can be cached across pages.
+    The table cell sizes the image without embedding another copy of its geometry.
     """
-    return packing_svg(n)
+
+    return drawing_img(n, size=50)
 
 
 def packing_svg(
@@ -396,6 +394,45 @@ def packing_svg(
         f'stroke="{ink}" stroke-width="{frame_width:f}"{crisp}/><g stroke="{ink}" '
         f'stroke-width="{line_width:f}" stroke-linejoin="round">{body}</g></svg>'
     )
+
+
+def drawing_path(n: int, *, regularized: bool = False) -> str:
+    """Stable address of a compact standalone atlas drawing."""
+    return f"atlas/{'regularized' if regularized else 'house'}/n-{n}.svg"
+
+
+def drawing_img(n: int, *, regularized: bool = False, size: int = 100) -> str:
+    """A drawing with a reserved square box; tiles use a deliberate white canvas."""
+    return (
+        f'<img src="{drawing_path(n, regularized=regularized)}" width="{size}" '
+        f'height="{size}" loading="lazy" decoding="async" alt="Packing of {n} unit squares">'
+    )
+
+
+def drawing_paths() -> tuple[str, ...]:
+    """Published drawing declarations without rendering their contents."""
+    return tuple(
+        drawing_path(int(path.stem.split("-")[1]), regularized=regularized)
+        for regularized, root in ((False, RENDERINGS), (True, REGULARIZED_RENDERINGS))
+        for path in sorted(root.glob("n-*.svg"))
+    )
+
+
+@cache
+def drawing_files() -> dict[str, bytes]:
+    """Compact standalone SVG files, usable by images and directly by a browser."""
+    files = {}
+    for regularized, root in ((False, RENDERINGS), (True, REGULARIZED_RENDERINGS)):
+        for path in sorted(root.glob("n-*.svg")):
+            n = int(path.stem.split("-")[1])
+            svg = packing_svg(n, units=1000, root=root, ink="#17202a", paper="#ffffff")
+            svg = svg.replace(
+                "<svg ",
+                '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" ',
+                1,
+            )
+            files[drawing_path(n, regularized=regularized)] = svg.encode("utf-8")
+    return files
 
 
 def _square_path(corners: list[tuple[int, int]]) -> str:
