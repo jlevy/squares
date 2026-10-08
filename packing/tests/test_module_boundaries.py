@@ -1036,13 +1036,6 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
-        # Full Linux checkpoint on 2026-10-08: run 37719434270, job 113123437955,
-        # 16.76s call; focused Mac CPython 3.14.7 frozen run: 20.43s. This test runs
-        # two complete 346,104-state D4 censuses of the committed ledger, with and
-        # without selector flags. The cover is cached; the census results are not.
-        "test_census_n17_certified.py": {
-            "test_the_committed_ledger_projects_the_recheck_flags_it_has_not_admitted",
-        },
         # Focused file run on 2026-10-07 with `pytest --durations=0 -q`: 7.08s call
         # to rebuild and exactly validate all 182 retained historical polynomial-side
         # pairs. The seven fast decoder/source-identity controls cost at most 0.16s

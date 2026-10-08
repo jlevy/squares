@@ -1184,20 +1184,18 @@ def _assembled(
                 "uv run --frozen --group dev python -m devtools.assemble_site "
                 '--destination site "$STAGED"'
             )
+            # Run the artifact-presence guards too, using this test's interpreter
+            # instead of provisioning another environment through uv.
             command = (
-                sys.executable,
-                "-m",
-                "devtools.assemble_site",
-                "--destination",
-                str(site),
-                str(environment),
+                bash,
+                "-e",
+                "-c",
+                step["run"].replace(
+                    "uv run --frozen --group dev python", shlex.quote(sys.executable)
+                ),
             )
-            guards = [
-                line.replace("site/papers/", f"{shlex.quote(str(site))}/papers/")
-                for line in step["run"].splitlines()[:-1]
-            ]
-            command = (bash, "-e", "-c", "\n".join([*guards, shlex.join(command)]))
-            command_cwd = REPO / "packing"
+            command_cwd = root / step["working-directory"]
+            env["PYTHONPATH"] = str(REPO / "packing")
         else:
             command = (bash, "-e", "-c", step["run"])
         results.append(
@@ -1346,6 +1344,24 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
     )
     assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
     assert not (site / "papers" / "exact-side-values.html").exists()
+
+    site, results = _assembled(
+        tmp_path,
+        "exact-collision",
+        exact_files=(
+            "exact-side-values.html",
+            "exact-side-values.md",
+            "exact-side-values.pdf",
+            "exact-side-values-complete.html",
+            "exact-side-values-data/index.json",
+            "exact-side-values-browser.js",
+            "n11-lower-bounds-explainer.md",
+        ),
+    )
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
+    assert "publication collision: papers/n11-lower-bounds-explainer.md" in results[4].stderr
+    assert (site / "papers/n11-lower-bounds-explainer.md").read_text() == "explainer markdown"
+    assert not (site / "papers/exact-side-values.html").exists()
 
     site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
     assert [result.returncode for result in results] == [0, 0, 0, 0, 0, 1]
@@ -1839,13 +1855,13 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
     # What each review's job keeps of the two trees: the retained data its render reads
     # and the archived files it cites, each a directory (`/` at its end) or a file.
     kept = {
+        "exact-side-values": ("/packing/resources/web/kingbird-squares-in-squares.md",),
         "n11-optimality-review": (
             "/packing/resources/web/n11-optimality-2026-09-29/",
             "/packing/resources/papers/kingbird-square-11-provenance.svg",
             KLEDDAMAG_README_PATTERN,
         ),
         "square-packing-methods-survey": METHODS_CITATION_PATTERNS,
-        "exact-side-values": (),
         "n11-threshold-bound-review": (
             "/packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/",
             "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz",

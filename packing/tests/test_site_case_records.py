@@ -137,7 +137,7 @@ def test_native_close_collapses_the_row_before_the_queued_toggle(
     """Native visibility and the row's ARIA state agree in the closing task itself."""
     with _page(browser) as page:
         page.goto(f"{served}frontier.html", wait_until="load")
-        page.locator("#n-12 td.site-thumb svg").click()
+        page.locator("#n-12 td.site-thumb img").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
         assert page.locator("#n-12").get_attribute("aria-expanded") == "true"
@@ -153,7 +153,7 @@ def test_cached_reopen_keeps_its_row_expanded_and_its_close_focus(
     with _page(browser) as page:
         page.goto(f"{served}frontier.html", wait_until="load")
         row = page.locator("#n-12")
-        row.locator("td.site-thumb svg").click()
+        row.locator("td.site-thumb img").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
         state = page.evaluate(probe(PROBES, "case_popover_state/close"), {"reopen": 12})
@@ -179,7 +179,7 @@ def test_closing_invalidates_an_awaited_record_without_stealing_outside_focus(
 
         page.route("**/cases/14.html", hold)
         page.goto(f"{served}frontier.html", wait_until="load")
-        page.locator("#n-12 td.site-thumb svg").click()
+        page.locator("#n-12 td.site-thumb img").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
         observer = page.evaluate_handle(
