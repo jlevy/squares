@@ -5,7 +5,7 @@ title: "PR #456: reduce frontier startup layout within the existing rendering bu
 kind: bug
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: codex-pr395-site-review
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4e2d5gyj7m218hm9f5g01xd
 hold: null
 hold_until: null
 created_at: 2026-10-08T18:55:39.537Z
-updated_at: 2026-10-08T18:57:07.172Z
+updated_at: 2026-10-08T19:20:57.090Z
 started_at: 2026-10-08T18:57:07.172Z
 ---
-Frontier startup violated unchanged300ms longest-task limit in mainf0ec run37808133069 at390/light341ms and PR456 head3d run37821312270 at390/dark395ms. Independent Astra MAX attribution found real early style/layout on324rows359formulas31315elements; later readability probes are not the offending task. Fixed table tracks rejected because CLS.177 exceeded.1 and largest layout did not improve. Next bounded candidate loads the two observed first-screen KaTeX math faces earlier only on frontier.html, using existing protocol-aware preload path; bootstrap must safely accept their ASCII uppercase/underscore hashed-local names. Preserve static content, all ordinarylinks, noJS/file-origin compatibility, print, same-origin/path restrictions and existing rendering limits. No accepted candidate or hosted cure yet. Require final review, exact-head CI and deployed verification under think-7wlz.
+Frontier startup violated unchanged300ms longest-task limit in mainf0ec run37808133069 at390/light341ms and PR456 head3d run37821312270 at390/dark395ms. Independent Astra MAX attribution established real early style/layout on324 rows359 formulas31316 elements, not later readability probes. Fixed tracks and earlier math-font hints failed predeclared comparisons; retain negative evidence, ship neither. Bounded frontier-table-only native semantic MathML candidate preserves350 semantic trees, row/link/fragment identities and nine prose KaTeX formulas; removes18049 redundant elements, paired peakLayout241.886 to126.713ms. Native candidate currently lacks an explicit supported-backend readability contract; shared control/candidate desktop-darkCLS.177 remains unresolved. Moderate agent implements explicit marker and fail-closed visible/nonempty native probe, meaningful positive/missing/hidden/empty controls, no dependency/vendor/global rewrite. Unchanged full current-source table/font/print/noJS/file/browser contracts and fresh hosted300ms gate are required before admission; no accepted or deployed cure yet. Evidence rollout-frontier-perf-456-diagnosis.json under protected external verification workspace.
