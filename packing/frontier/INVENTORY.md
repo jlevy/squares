@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **459** evidence records. **290** are formal; **283** of those were established here.
-- **161** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **461** evidence records. **290** are formal; **283** of those were established here.
+- **163** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **41** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -482,13 +482,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-ryxu-432-rational-feasibility` | 17 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-ryxu-complete-custody` |
 | `E-ryxu-432-radical-n51-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | `V-sqpack-verify`, `V-ryxu-undilated-n51-independent`, `V-ryxu-complete-custody` |
 | `E-gupta-438-rational-report` | 14 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
+| `E-rehwaldt-n68-root-feasibility-v12-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
+| `E-rehwaldt-n68-restricted-attainment-v12-report` | 0 | derived-structure | reported | - | elsewhere | - | previously-published | producer’s code | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 4, reported 165, verified 290
-- **method**: exact-algebraic 112, interval-certified 162, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 165
-- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 400
-- **relationship to the producer's code**: generator 5, independent-implementation 163, not-applicable 20, same-implementation 248, shared-components 17, unknown-historical 6
+- **assurance**: numerically-checked 4, reported 167, verified 290
+- **method**: exact-algebraic 112, interval-certified 162, numerical-multiprecision 4, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 167
+- **novelty**: apparently-novel 41, common-knowledge 4, not assessed 14, previously-published 402
+- **relationship to the producer's code**: generator 5, independent-implementation 163, not-applicable 20, same-implementation 250, shared-components 17, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
