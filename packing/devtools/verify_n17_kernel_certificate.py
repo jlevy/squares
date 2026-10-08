@@ -519,7 +519,7 @@ def compile_edges(
     return edges, verticals
 
 
-def sweep_events(
+def sweep_events_reference(
     polygons: Sequence[Sequence[HPoint]], edges: Sequence[Edge], left: Ratio, right: Ratio
 ) -> list[Ratio]:
     """Every vertex abscissa in `[left, right]` and every crossing of two edges there.
@@ -553,6 +553,87 @@ def sweep_events(
                 events.add(normalised(xn, det))
         active.append(i)
     return sorted(events, key=lambda r: Q(*r))
+
+
+def sweep_events_y_filtered(
+    polygons: Sequence[Sequence[HPoint]],
+    edges: Sequence[Edge],
+    left: Ratio,
+    right: Ratio,
+    *,
+    filter_y: bool = True,
+    counts: dict[str, int] | None = None,
+) -> list[Ratio]:
+    """Exact reference sweep with only strictly disjoint closed Y ranges rejected.
+
+    Endpoint ordinates come from the unchanged exact edge line. Touching/equal
+    ranges remain candidates. Counters are optional diagnostic work, not proof
+    obligations; no clocks or global tracing run inside the pair loop.
+    """
+    if counts is not None:
+        for name in (
+            "pair_candidates",
+            "strict_y_rejections",
+            "executed_determinants",
+            "event_calls",
+            "events",
+            "probes",
+        ):
+            counts.setdefault(name, 0)
+    ranges = []
+    if filter_y:
+        for edge in edges:
+            ordinates = [
+                (-(edge.a * x + edge.c * z), edge.b * z) for x, z in (edge.lo, edge.hi)
+            ]
+            ranges.append(ratio_extremes(ordinates))
+    events: set[Ratio] = set()
+    for polygon in polygons:
+        for x, _, z in polygon:
+            if not ratio_lt((x, z), left) and not ratio_lt(right, (x, z)):
+                events.add(normalised(x, z))
+    order = sorted(range(len(edges)), key=lambda i: Q(*edges[i].lo))
+    active: list[int] = []
+    for i in order:
+        edge = edges[i]
+        if ratio_lt(edge.hi, left) or ratio_lt(right, edge.lo):
+            continue
+        active = [j for j in active if not ratio_lt(edges[j].hi, edge.lo)]
+        for j in active:
+            other = edges[j]
+            if counts is not None:
+                counts["pair_candidates"] = counts.get("pair_candidates", 0) + 1
+            if filter_y and (
+                ratio_lt(ranges[i][1], ranges[j][0]) or ratio_lt(ranges[j][1], ranges[i][0])
+            ):
+                if counts is not None:
+                    counts["strict_y_rejections"] = counts.get("strict_y_rejections", 0) + 1
+                continue
+            if counts is not None:
+                counts["executed_determinants"] = counts.get("executed_determinants", 0) + 1
+            det = edge.a * other.b - edge.b * other.a
+            if det == 0:
+                continue
+            xn = edge.b * other.c - edge.c * other.b
+            if det < 0:
+                xn, det = -xn, -det
+            start = ratio_extremes([edge.lo, other.lo, left])[1]
+            stop = ratio_extremes([edge.hi, other.hi, right])[0]
+            if not ratio_lt((xn, det), start) and not ratio_lt(stop, (xn, det)):
+                events.add(normalised(xn, det))
+        active.append(i)
+    if counts is not None:
+        counts["event_calls"] = counts.get("event_calls", 0) + 1
+        counts["events"] = counts.get("events", 0) + len(events)
+        counts["probes"] = counts.get("probes", 0) + max(0, 2 * len(events) - 1)
+    return sorted(events, key=lambda r: Q(*r))
+
+
+def sweep_events(
+    polygons: Sequence[Sequence[HPoint]], edges: Sequence[Edge], left: Ratio, right: Ratio
+) -> list[Ratio]:
+    """The exact closed-Y prefilter; the original sweep remains the reference."""
+    return sweep_events_y_filtered(polygons, edges, left, right)
 
 
 def well_formed(section: Any) -> bool:
