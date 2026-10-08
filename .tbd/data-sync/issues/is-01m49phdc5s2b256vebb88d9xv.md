@@ -5,9 +5,9 @@ title: "D2: overview renders only the recent rows and links the full table"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
-delegate: codex-pr395@spud10.local
+delegate: codex-pr395-site-review
 labels:
   - pages
 dependencies:
@@ -17,7 +17,7 @@ parent_id: is-01m49ph0abvy6j16zcq4jse39y
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:51.749Z
-updated_at: 2026-10-08T00:33:21.331Z
+updated_at: 2026-10-08T11:19:54.938Z
 started_at: 2026-10-06T22:53:50.824Z
 ---
 Lane D. RECENT_DEFAULTS.

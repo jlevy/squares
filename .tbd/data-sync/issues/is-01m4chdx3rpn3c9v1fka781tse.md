@@ -5,14 +5,14 @@ title: "E1: derive case lastmod from broad result n_min/n_max scopes"
 kind: bug
 status: in_progress
 priority: 1
-version: 2
-delegate: claude-code@spud10.local
+version: 3
+delegate: codex-pr395-site-review
 labels: []
 dependencies: []
 parent_id: is-01m4cecqqmt13gys8265mpra32
 hold: null
 hold_until: null
 created_at: 2026-10-08T01:18:17.207Z
-updated_at: 2026-10-08T01:18:41.508Z
+updated_at: 2026-10-08T11:19:55.017Z
 started_at: 2026-10-08T01:18:41.506Z
 ---

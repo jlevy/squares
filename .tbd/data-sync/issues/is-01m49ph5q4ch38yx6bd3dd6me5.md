@@ -5,9 +5,9 @@ title: "B1: cases/N.html as a complete static site page; delete case-forward.js"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
-delegate: codex-pr395@spud10.local
+delegate: codex-pr395-site-review
 labels:
   - pages
 dependencies:
@@ -23,7 +23,7 @@ parent_id: is-01m49ph0abvy6j16zcq4jse39y
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:43.908Z
-updated_at: 2026-10-08T00:33:20.868Z
+updated_at: 2026-10-08T11:19:54.870Z
 started_at: 2026-10-06T22:55:08.068Z
 ---
 Lane B. Nav, breadcrumb, one h1, main, drawing with width/height/viewBox, server-rendered math, neighbour links, self canonical. render_case_pages.case_records, templates/case-record.html.

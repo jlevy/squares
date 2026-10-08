@@ -5,9 +5,9 @@ title: "Spec: a static, crawlable site with a registered URL scheme"
 kind: epic
 status: in_progress
 priority: 1
-version: 28
+version: 29
 spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
-delegate: claude-code@spud10.local
+delegate: codex-pr395-site-review
 labels:
   - pages
   - seo
@@ -42,7 +42,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:38.379Z
-updated_at: 2026-10-08T05:03:54.302Z
+updated_at: 2026-10-08T11:19:54.994Z
 started_at: 2026-10-08T00:32:24.610Z
 ---
 Every published page complete static HTML at a registered permanent URL; cases/N.html the canonical case page; sitemap, 404, structured data; byte and CLS budgets in CI. Spec: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
