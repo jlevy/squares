@@ -190,6 +190,52 @@ optimality remain separate obligations.
 No lower bound, verified upper bound, optimality status or verification rung moves in
 this collection update.
 
+## Web Projection Review (2026-10-08)
+
+A separate Astra review checked the compact browser and lazy exporter against the
+canonical register.
+An independent reconstruction restored all 486 current and historical
+records, including nested note polynomials; every original field and integer coefficient
+string matched, apart from redundant polynomial text/LaTeX retained in the complete
+archives. All 2,880 non-boolean metadata integers fit JavaScript’s exact range.
+
+Chromium controls used real exported payloads at $n=50,69,83,210,259,1850$: rational
+open bounds, multiple historical sides, degree-672 coefficient strings, unchecked root
+ordinal 27, mixed fixed/invalid source flags, source-invalid bound disclaimers, and
+outside-frontier records remained distinct.
+No coefficients were fetched when the unselected index opened.
+The fixture error, `source_index.count` instead of `counted`, was corrected before the
+final review.
+
+The reviewer found no unresolved mathematical presentation defect in the working diff
+against `1d094ccb114a46d9836581c7ac8157593939817e`. This review covers serialization and
+presentation; it does not repeat the degree-672 certificate computation or claim a new
+polynomial admission.
+The
+[bounded byte-count record](../../../packing/benchmarks/exact-catalogue-web/report.md)
+reports the default initial payload; timing, compression and browser memory remain
+unmeasured.
+
+## Web Precommit Review
+
+The coordinator reviewed the uncommitted exporter, browser, measurement and publication
+changes against `1d094ccb114a46d9836581c7ac8157593939817e`. The design keeps the
+complete archives and gives the browser a small index with exact coefficient files; this
+avoids another mathematical representation to maintain.
+Documentation and publication scope cover the new outputs and the retained experiment.
+
+One Medium finding was corrected: `git diff --quiet` omitted staged and untracked inputs
+from the measurement tool’s dirty flag.
+The tool now reads porcelain status; a real temporary Git repository verifies clean,
+untracked, staged and edited states.
+Both earlier measurement receipts remain unchanged.
+
+The precommit site’s missing-path reports were traced to its deliberate `HEAD` tree
+contract: the five newly staged experiment documents do not enter that tree until
+commit. The committed-head publication checks remain required.
+Local Mac timing and solver-snapshot failures are recorded separately from the web slice
+and retain their existing follow-up beads; no gate ceiling or assertion was relaxed.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

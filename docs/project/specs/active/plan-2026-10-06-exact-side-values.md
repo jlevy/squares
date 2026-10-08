@@ -287,9 +287,10 @@ exact linkage.
   Its 29.19 s replay fits the PR surface; it runs in the routine gates and at
   records/full checkpoints.
 
-- **Paper.** `devtools.render_exact_side_values` generates HTML, Markdown and PDF from
-  the register. All expressions and coefficients are included, including large
-  coefficient tables. The paper is independent of the three-part $n = 11$ series.
+- **Paper.** `devtools.render_exact_side_values` generates a searchable web browser and
+  complete HTML, Markdown and PDF archives from the register.
+  All expressions and coefficients are included, including large coefficient tables.
+  The paper is independent of the three-part $n = 11$ series.
 
 - **Publication and imports.** Pages has a dedicated paper job with an explicit wall
   ceiling. The overview, artifact dates, release metadata, published-site contract and
@@ -316,7 +317,8 @@ A delivery-recovery worker checks earlier claimed output.
 | 3 | W2 review of W1/W7: independent source, irreducibility and real-root checks | Correctness findings fixed; review retained |
 | 4 | W7 **efficiency block**: exact interior-sign root comparisons | Full mathematical replay preserved; initial replay reduced to 31.67 s locally |
 | 5 | W7: generated paper, site wiring and import documentation | HTML/Markdown/PDF renderer and publication contracts implemented |
-| 6 | W7: final checks, PR, delivery audit and replanning | Final validation is reported in the PR; unavailable earlier outputs remain an explicit dependency |
+| 6 | W7 **efficiency block**: practical web reading (`think-mo36`) | Searchable index, lazy metadata and coefficient vectors; complete archives retained |
+| 7 | W7: final checks, PR, delivery audit and replanning | Final validation is reported in the PR; unavailable earlier outputs remain an explicit dependency |
 
 The efficiency result precedes the expanded historical corpus; it is not the claimed
 wall for the larger final register.
@@ -440,6 +442,15 @@ Regressions include perturbed coefficients, a reducible polynomial, an alternate
 conjugate, rational approximations substituted for radical forms, a destination-side
 mismatch, inward-rounded error bounds, forged modular hints, and source flags or credits
 taken from neighboring rows.
+
+The canonical web page adds search, section/kind/status filters and pagination.
+Individual records and exact coefficient strings load only when opened; numeric rows and
+historical source-invalid or superseded rows keep their separate meanings.
+`think-r4rt` owns the export, `think-uunz` the browser and `think-3t5y` the independent
+Astra review under `think-mo36`. The
+[bounded measurement](../../../../packing/benchmarks/exact-catalogue-web/report.md)
+checks the predeclared raw-byte threshold; complete archives preserve the full record.
+The selected mathematical continuation remains `think-s6np`.
 
 The paper checks completeness against the register, independent-series metadata, source
 quotation handling, page construction, artifact dates and Pages scope.

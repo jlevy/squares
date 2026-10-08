@@ -1409,7 +1409,10 @@ rerun the geometric proof.
 The independent **exact side values paper** lives at `/papers/exact-side-values.html`.
 [`render_exact_side_values.py`](packing/devtools/render_exact_side_values.py) reads
 [`exact-values.json`](packing/frontier/exact-values.json) as its only mathematical input
-and prints every recorded closed form and integer polynomial in full.
+and publishes a searchable browser with a compact index, individual metadata files and
+lazy coefficient payloads.
+Its complete HTML, Markdown and PDF archives print every recorded closed form and
+integer polynomial in full.
 The register keeps the current $n=1\ldots324$ values and their totals separate from
 historical polynomial-side pairs transcribed from retained catalogues and exact-solution
 articles, including facts outside that horizon.
@@ -1431,11 +1434,23 @@ uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_va
 uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --check
 ```
 
-The renderer writes `site/papers/exact-side-values.html`, `.md`, and `.pdf`. Its
-`--check` rebuilds HTML and Markdown from the register and refuses stale output.
-The dedicated `exact-side-values` Pages job runs the focused renderer tests, builds the
-three files, checks the two reproducible text editions, and contributes one guarded
-artifact to `publish`.
+The renderer writes the browser to `site/papers/exact-side-values.html`, its classic
+script beside it, and index/metadata/coefficient JSON under `exact-side-values-data/`.
+The complete editions are `exact-side-values-complete.html`, `exact-side-values.md` and
+`exact-side-values.pdf`; `--pdf` prints the complete HTML archive.
+`--check` rebuilds all text payloads and refuses missing, stale or extra generated
+files. The dedicated `exact-side-values` Pages job checks the renderer and lossless
+projection, builds the complete artifact and contributes it to `publish`. Required
+Chromium controls run in the existing frontend gate, where the browser is installed.
+
+The retained `devtools.measure_exact_catalogue_web` tool counts the default browser
+route’s automatic raw assets and independently restores its records against the
+register. Its `--baseline PATH --site site` comparison excludes clicked records and
+coefficients; it does not measure latency or compression.
+The bounded [experiment record](packing/benchmarks/exact-catalogue-web/ideas.md) keeps
+the frozen criterion, original receipt and generated report.
+Regenerate or check the report with
+`python -m devtools.report_exact_catalogue_web [--check]` from `packing/`.
 
 Publication uses `python -m devtools.render_n11_lower_bounds_explainer --prepare-math`
 after installing the locked Playwright Chromium.

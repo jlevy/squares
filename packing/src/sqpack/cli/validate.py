@@ -261,6 +261,7 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_frontier_table.py",
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
+    "tests/test_exact_side_values_browser.py",
 )
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared
@@ -277,6 +278,7 @@ REQUIRE_CHROMIUM = "SQPACK_REQUIRE_CHROMIUM"
 _SITE_INPUTS = (
     "packing/devtools/*",
     "packing/tests/test_site_*.py",
+    "packing/tests/test_exact_side_values_browser.py",
     "packing/tests/site_*.py",
     "packing/tests/probes/*",
     "packing/frontier/*",
@@ -1962,12 +1964,13 @@ def _site_url_registry(context: Context) -> str:
 
 
 def _site_layout_tests(context: Context) -> str:
-    """Run functional pixel/layout checks in parallel, then load budgets serially.
+    """Run site and lazy catalogue layout in parallel, then load budgets serially.
 
-    The four native-frontier timing cases use one browser command after the functional
-    workers exit. Both commands require Chromium and retain the existing assertions;
-    serial allocation removes browser competition within this step, without promising
-    an otherwise idle host. Both phases share the original total subprocess timeout.
+    `SITE_LAYOUT_TESTS` checks tables and lazy requests in required Chromium. The four
+    native-frontier timing cases use one browser command after the functional workers
+    exit. Both commands require Chromium and retain the existing assertions; serial
+    allocation removes browser competition within this step, without promising an
+    otherwise idle host. Both phases share the original total subprocess timeout.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()

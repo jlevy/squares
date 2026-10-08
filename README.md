@@ -105,6 +105,9 @@ is generated from the [exact-values register](packing/frontier/exact-values.json
 It assembles 270 exact current sides across $n = 1\ldots324$ and 162 historical
 polynomial entries, with every coefficient, source locator and algebraic certificate.
 Historical examples reach $n = 2135$; source-invalid proposals retain their flags.
+The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html)
+supports search, filters and per-entry coefficient downloads.
+Complete HTML, Markdown and PDF archives remain available beside it.
 The
 [mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
 states what was independently checked, and the

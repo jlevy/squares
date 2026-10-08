@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-kpress-theme="system" data-kpress-resolved-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+{{PAGE_HEAD}}
+{{SITE_FAVICON}}
+<style>{{SITE_NAV_CSS}}</style>
+<style>{{BROWSER_STYLE}}</style>
+<script>{{THEME_BOOTSTRAP}}</script>
+<script defer src="{{BROWSER_SCRIPT_URL}}"></script>
+</head>
+<body>
+<a class="skip-link" href="#catalogue-controls">Skip to catalogue</a>
+{{SITE_NAV}}
+<main id="exact-browser" data-index-url="{{BROWSER_INDEX_URL}}">
+<header class="catalogue-intro">
+<h1>Exact side values</h1>
+<p>Version {{BROWSER_VERSION}} · <a href="{{REGISTER_SOURCE_URL}}">Source register</a></p>
+<p>Browse the algebraic certificates and recorded sides of square packings. Current entries and historical source records are separate; numeric entries remain in the current catalogue.</p>
+<p class="archive-links">Complete archives: <a href="{{COMPLETE_HTML_URL}}">HTML</a> · <a href="{{COMPLETE_MARKDOWN_URL}}">Markdown</a> · <a href="{{COMPLETE_PDF_URL}}">PDF</a></p>
+<noscript><p>This index needs JavaScript. <a href="{{COMPLETE_HTML_URL}}">Read the complete HTML catalogue</a>, including every entry and coefficient.</p></noscript>
+</header>
+<form id="catalogue-controls" class="catalogue-controls" role="search">
+<label>Search entries<input id="entry-search" type="search" placeholder="n:83, source, status…" aria-describedby="search-help"></label>
+<label>Catalogue section<select id="entry-section"><option value="current">Current</option><option value="historical">Historical</option><option value="all">Current and historical</option></select></label>
+<label>Entry kind<select id="entry-kind"><option value="all">All kinds</option><option value="polynomial">Polynomial</option><option value="numeric">Numeric</option></select></label>
+<label>Recorded status<select id="entry-status"><option value="all">All statuses</option></select></label>
+<button type="button" id="clear-filters">Clear filters</button>
+<p id="search-help">Use <code>n:83</code> for an exact case number, including cases beyond the current frontier. Other words search titles, sources and statuses.</p>
+</form>
+<div class="catalogue-columns">
+<section class="catalogue-index" aria-labelledby="index-title">
+<h2 id="index-title">Catalogue entries</h2>
+<p id="index-message" role="status" aria-live="polite">Loading the index…</p>
+<button type="button" id="retry-index" hidden>Retry index</button>
+<ul id="entry-list" class="entry-list"></ul>
+<div class="pager" aria-label="Entry pages"><button type="button" id="previous-entries" disabled>Previous entries</button><span id="entry-page"></span><button type="button" id="next-entries" disabled>Next entries</button></div>
+</section>
+<section id="entry-detail" class="entry-detail" aria-labelledby="detail-title">
+<h2 id="detail-title" tabindex="-1">Select an entry</h2>
+<p id="detail-message" role="status" aria-live="polite">Open an entry to load its recorded metadata.</p>
+<button type="button" id="retry-metadata" hidden>Retry entry</button>
+<div id="detail-content" hidden>
+<p id="entry-claim"></p>
+<div class="claim-guide">
+<h3>Algebraic certificate</h3><p>A polynomial and an isolated root identify an algebraic value. They do not by themselves certify a packing.</p>
+<h3>Geometry</h3><p>A feasible construction establishes a packing bound. Source-invalid records are retained as source history and must not be used as packing bounds.</p>
+<h3>Optimality</h3><p>A feasible packing or a KKT local minimum does not establish a global optimum. Read the original relation and status below.</p>
+<p>Side decimals are recorded approximations. A root check named <code>contains_recorded_side</code> records rounding or truncation agreement, not literal inclusion of the printed decimal in the isolating interval. A source root ordinal with no count is not independently verified, even when the interval has exactly one real root.</p>
+</div>
+<h3>Recorded metadata</h3>
+<div id="metadata"></div>
+<section id="coefficient-section" aria-labelledby="coefficient-title" hidden>
+<h3 id="coefficient-title">Polynomial coefficients</h3>
+<p>Integer strings, in descending power order, preserved in full. Only the displayed batch is placed in the table.</p>
+<button type="button" id="open-coefficients" aria-expanded="false" aria-controls="coefficient-content">Open coefficients</button>
+<div id="coefficient-content" hidden>
+<p id="coefficient-message" role="status" aria-live="polite"></p>
+<button type="button" id="retry-coefficients" hidden>Retry coefficients</button>
+<div id="coefficient-actions" hidden><a id="download-coefficients" download>Download complete coefficient JSON</a> <button type="button" id="copy-coefficients">Copy complete coefficient JSON</button></div>
+<label id="copy-fallback" hidden>Complete coefficient JSON: select and copy<textarea id="coefficient-copy" readonly rows="6"></textarea></label>
+<div class="coefficient-table-wrap"><table><caption>Complete values for this batch</caption><thead><tr><th scope="col">Power</th><th scope="col">Integer coefficient</th></tr></thead><tbody id="coefficient-body"></tbody></table></div>
+<div class="pager" aria-label="Coefficient pages"><button type="button" id="previous-coefficients" disabled>Previous coefficients</button><span id="coefficient-page"></span><button type="button" id="next-coefficients" disabled>Next coefficients</button></div>
+</div>
+</section>
+</div>
+</section>
+</div>
+<p class="catalogue-colophon">{{COLOPHON}}</p>
+</main>
+<script>{{SITE_THEME}}</script>
+</body>
+</html>

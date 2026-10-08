@@ -459,11 +459,18 @@ def test_the_retained_register_renders_every_expression_check_and_missing_route(
 
 def test_output_names_follow_the_paper_slug(tmp_path: Path, rendered: tuple[str, str]) -> None:
     html, markdown = rendered
-    outputs = paper.output_files(tmp_path, html, markdown)
-    assert set(outputs) == {
+    outputs = paper.output_files(
+        tmp_path, html, markdown, register=small_document()["register"]
+    )
+    assert {
         tmp_path / "papers/exact-side-values.html",
+        tmp_path / "papers/exact-side-values-complete.html",
         tmp_path / "papers/exact-side-values.md",
-    }
+        tmp_path / "papers/exact-side-values-browser.js",
+        tmp_path / "papers/exact-side-values-data/index.json",
+    }.issubset(outputs)
+    assert outputs[tmp_path / "papers/exact-side-values-complete.html"] == html
+    assert outputs[tmp_path / "papers/exact-side-values.md"] == markdown
     assert 'src="http' not in html
     assert 'href="http' in html
 
@@ -484,3 +491,107 @@ def test_check_rebuilds_from_the_register_and_catches_drift(
     source.write_text(json.dumps(changed), encoding="utf-8")
     with pytest.raises(SystemExit, match="stale exact-side-values output"):
         paper.main([*arguments, "--check"])
+
+
+def test_the_lazy_export_checks_every_payload_and_removes_stale_extras(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = tmp_path / "exact-values.json"
+    source.write_text(json.dumps(small_document()), encoding="utf-8")
+    monkeypatch.setattr(paper, "REGISTER", source)
+    site = tmp_path / "site"
+    arguments = ["--site", str(site), "--revision", REVISION]
+    assert paper.main(arguments) == 0
+    browser = site / "papers/exact-side-values.html"
+    archive = site / "papers/exact-side-values-complete.html"
+    assert "exact-browser" in browser.read_text(encoding="utf-8")
+    assert "kpress-math" not in browser.read_text(encoding="utf-8")
+    assert "kpress-math" in archive.read_text(encoding="utf-8")
+    data = site / "papers/exact-side-values-data"
+    index = json.loads((data / "index.json").read_text(encoding="utf-8"))
+    coefficient = site / "papers" / index["entries"][0]["coefficients_url"]
+    original = coefficient.read_text(encoding="utf-8")
+    coefficient.write_text("", encoding="utf-8")
+    with pytest.raises(SystemExit, match="stale exact-side-values output"):
+        paper.main([*arguments, "--check"])
+    coefficient.write_text(original, encoding="utf-8")
+    coefficient.unlink()
+    with pytest.raises(SystemExit, match="stale exact-side-values output"):
+        paper.main([*arguments, "--check"])
+    assert paper.main(arguments) == 0
+    extra = data / "metadata/old.json"
+    extra.write_text("{}", encoding="utf-8")
+    with pytest.raises(SystemExit, match="stale exact-side-values output"):
+        paper.main([*arguments, "--check"])
+    assert paper.main(arguments) == 0
+    assert not extra.exists()
+    assert paper.main([*arguments, "--check"]) == 0
+
+
+def test_pdf_uses_the_complete_archive(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    source = tmp_path / "exact-values.json"
+    source.write_text(json.dumps(small_document()), encoding="utf-8")
+    monkeypatch.setattr(paper, "REGISTER", source)
+    site = tmp_path / "site"
+    calls: list[tuple[Path, Path]] = []
+    monkeypatch.setattr(paper, "_print_pdf", lambda html, pdf: calls.append((html, pdf)))
+    assert paper.main(["--site", str(site), "--revision", REVISION, "--pdf"]) == 0
+    assert calls == [
+        (site / "papers/exact-side-values-complete.html", site / "papers/exact-side-values.pdf")
+    ]
+
+
+def test_failed_publication_preserves_the_previous_complete_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from contextlib import contextmanager  # noqa: PLC0415
+
+    source = tmp_path / "exact-values.json"
+    source.write_text(json.dumps(small_document()), encoding="utf-8")
+    monkeypatch.setattr(paper, "REGISTER", source)
+    site = tmp_path / "site"
+    archive = site / "papers/exact-side-values-complete.html"
+    archive.parent.mkdir(parents=True)
+    archive.write_text("previous complete file", encoding="utf-8")
+    atomic = paper.atomic_output_file
+
+    @contextmanager
+    def interrupted(path: Path):
+        with atomic(path) as temporary:
+            yield temporary
+            raise OSError("injected publication failure")
+
+    monkeypatch.setattr(paper, "atomic_output_file", interrupted)
+    with pytest.raises(OSError, match="injected publication failure"):
+        paper.main(["--site", str(site), "--revision", REVISION])
+    assert archive.read_text(encoding="utf-8") == "previous complete file"
+    assert set(archive.parent.iterdir()) == {archive}
+
+
+def test_generated_payload_traversal_refuses_symlinks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = tmp_path / "exact-values.json"
+    source.write_text(json.dumps(small_document()), encoding="utf-8")
+    monkeypatch.setattr(paper, "REGISTER", source)
+    site = tmp_path / "site"
+    data = site / "papers/exact-side-values-data"
+    data.mkdir(parents=True)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    retained = outside / "retained.json"
+    retained.write_text("source evidence", encoding="utf-8")
+    (data / "linked").symlink_to(outside, target_is_directory=True)
+    with pytest.raises(paper.ExactSideValuesPaperError, match="symlink"):
+        paper.main(["--site", str(site), "--revision", REVISION])
+    assert retained.read_text(encoding="utf-8") == "source evidence"
+
+
+def test_browser_keeps_publication_version_and_pinned_source() -> None:
+    page = paper.render_browser(revision=REVISION)
+    assert paper.FRONT.version in page
+    assert (
+        f"https://github.com/jlevy/squares/blob/{REVISION}/packing/frontier/exact-values.json"
+        in page
+    )
+    assert "exact-side-values-complete.html" in page

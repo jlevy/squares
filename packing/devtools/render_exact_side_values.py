@@ -4,9 +4,9 @@
 The register is the paper's only mathematical source.  The article template supplies
 exposition; every count, expression, polynomial, check, route, and bead is generated
 from ``frontier/exact-values.json``.  Given the site's root with ``--site``, this module
-writes ``papers/exact-side-values.html`` and ``.md`` beside it.  ``--pdf`` prints the
-HTML through the shared KPress publication layer, and ``--check`` refuses stale HTML or
-Markdown.
+writes a compact browser, lazy JSON payloads, a complete HTML archive, and Markdown.
+``--pdf`` prints the complete archive through the shared KPress publication layer;
+``--check`` refuses missing, stale, or unexpected browser and archive outputs.
 """
 
 from __future__ import annotations
@@ -25,7 +25,7 @@ from kpress.format.pdf import _await_print_fonts  # pyright: ignore[reportPrivat
 from kpress.output import write_bytes_atomic
 from strif import atomic_output_file
 
-from devtools import paper_front, render_n11_lower_bounds_explainer
+from devtools import exact_catalogue, paper_front, render_n11_lower_bounds_explainer
 from devtools.render_n11_lower_bounds_explainer_pdf import dated
 from devtools.render_overview import (
     EMBED_SCRIPT,
@@ -59,10 +59,15 @@ STYLE = TEMPLATES / "exact-side-values.css"
 # The shared review shell has every publication and site layer this paper needs.  The
 # renderer changes only its article class; the paper has no diagrams or private script.
 SHELL = TEMPLATES / "exact-side-values-shell.html"
+BROWSER_SHELL = TEMPLATES / "exact-side-values-browser-shell.html"
+BROWSER_STYLE = TEMPLATES / "exact-side-values-browser.css"
+BROWSER_SCRIPT = PACKING / "devtools/overview/exact-side-values.js"
+BROWSER_SCRIPT_NAME = "exact-side-values-browser.js"
 REGISTER = PACKING / "frontier/exact-values.json"
 SITE = PACKING / "site"
 SLUG = EXACT_SIDE_VALUES
 SITE_PATH = paper_path(SLUG)
+COMPLETE_PATH = paper_path(f"{SLUG}-complete")
 SITE_ROOT = PAPERS_ROOT
 TITLE = "Exact Side Values for Packing Unit Squares"
 DESCRIPTION = (
@@ -110,6 +115,10 @@ RENDER_INPUTS = (
     ARTICLE,
     STYLE,
     SHELL,
+    BROWSER_SHELL,
+    BROWSER_STYLE,
+    BROWSER_SCRIPT,
+    Path(exact_catalogue.__file__),
     REGISTER,
     PACKING / "devtools/paper_front.py",
     PACKING / "devtools/render_overview.py",
@@ -1081,11 +1090,77 @@ def render(
     return page, paper_front.published(expanded, FRONT)
 
 
-def output_files(site: Path, html: str, markdown: str) -> dict[Path, str]:
-    return {
-        site / SITE_PATH: html,
-        site / paper_path(SLUG, ".md"): markdown,
+def render_browser(*, revision: str | None = None) -> str:
+    """The browser shell ships no mathematical payload or embedded font distribution."""
+    static = render_n11_lower_bounds_explainer.kpress_static()
+    values = {
+        "PAGE_HEAD": head_tags(page_meta()),
+        "SITE_FAVICON": favicon_html(),
+        "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
+        "SITE_NAV": nav_html("papers", root=SITE_ROOT),
+        "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
+        "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
+        "COLOPHON": colophon_lines(edition=""),
+        "BROWSER_VERSION": escape(FRONT.version),
+        "REGISTER_SOURCE_URL": (
+            f"https://github.com/jlevy/squares/blob/{revision or link_revision()}/"
+            "packing/frontier/exact-values.json"
+        ),
+        "BROWSER_STYLE": BROWSER_STYLE.read_text(encoding="utf-8"),
+        "BROWSER_INDEX_URL": escape(exact_catalogue.INDEX_PATH.as_posix(), quote=True),
+        "BROWSER_SCRIPT_URL": escape(BROWSER_SCRIPT_NAME, quote=True),
+        "COMPLETE_HTML_URL": escape(Path(COMPLETE_PATH).name, quote=True),
+        "COMPLETE_MARKDOWN_URL": escape(Path(paper_path(SLUG, ".md")).name, quote=True),
+        "COMPLETE_PDF_URL": escape(Path(paper_path(SLUG, ".pdf")).name, quote=True),
     }
+    return _fill(
+        BROWSER_SHELL.read_text(encoding="utf-8"), values, source=BROWSER_SHELL, strict=True
+    )
+
+
+def output_files(
+    site: Path,
+    html: str,
+    markdown: str,
+    *,
+    register: Mapping[str, Any],
+    revision: str | None = None,
+) -> dict[Path, str]:
+    """Plan the entire deterministic export, publishing the browser after its dependencies."""
+    return {
+        site / COMPLETE_PATH: html,
+        site / paper_path(SLUG, ".md"): markdown,
+        site / Path(SITE_PATH).parent / BROWSER_SCRIPT_NAME: BROWSER_SCRIPT.read_text(
+            encoding="utf-8"
+        ),
+        **exact_catalogue.output_files(register, papers=site / Path(SITE_PATH).parent),
+        site / SITE_PATH: render_browser(revision=revision),
+    }
+
+
+def _payload_files(site: Path) -> tuple[Path, ...]:
+    """The generated data directory is owned by this exporter; never follow links."""
+    root = site / Path(SITE_PATH).parent / exact_catalogue.DATA_DIRECTORY
+    if root.is_symlink():
+        raise ExactSideValuesPaperError(f"generated payload directory is a symlink: {root}")
+    if not root.exists():
+        return ()
+    if not root.is_dir():
+        raise ExactSideValuesPaperError(
+            f"generated payload directory is not a directory: {root}"
+        )
+
+    def failed(error: OSError) -> None:
+        raise error
+
+    files: list[Path] = []
+    for directory, directories, names in root.walk(on_error=failed, follow_symlinks=False):
+        for name in (*directories, *names):
+            path = directory / name
+            if path.is_symlink():
+                raise ExactSideValuesPaperError(f"generated payload path is a symlink: {path}")
+        files.extend(directory / name for name in names)
+    return tuple(sorted(files))
 
 
 def _publication_day() -> datetime:
@@ -1133,34 +1208,48 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="the site's root; the paper is written under papers/ in it",
     )
     parser.add_argument("--revision", default=None, help="full Git commit for source links")
-    parser.add_argument("--pdf", action="store_true", help="also print the HTML with KPress")
-    parser.add_argument("--check", action="store_true", help="compare current HTML/Markdown")
+    parser.add_argument(
+        "--pdf", action="store_true", help="also print the complete HTML archive with KPress"
+    )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="compare browser, complete archive, and every lazy payload",
+    )
     args = parser.parse_args(argv)
     register = load_register()
+    revision = args.revision or link_revision()
     html, markdown = render(
-        ARTICLE.read_text(encoding="utf-8"),
-        register=register,
-        revision=args.revision or link_revision(),
+        ARTICLE.read_text(encoding="utf-8"), register=register, revision=revision
     )
     site = args.site.resolve()
-    outputs = output_files(site, html, markdown)
+    outputs = output_files(site, html, markdown, register=register, revision=revision)
+    extra = [path for path in _payload_files(site) if path not in outputs]
     if args.check:
         if args.pdf:
-            parser.error("--check compares HTML and Markdown; use --pdf for a fresh PDF")
+            parser.error("--check compares browser/archive outputs; use --pdf for a fresh PDF")
         stale = [
             path
             for path, content in outputs.items()
             if not path.is_file() or path.read_text(encoding="utf-8") != content
         ]
+        stale.extend(extra)
         if stale:
             raise SystemExit(f"stale {SLUG} output: " + ", ".join(map(str, stale)))
         return 0
     for path, content in outputs.items():
         path.parent.mkdir(parents=True, exist_ok=True)
-        with atomic_output_file(path) as temporary:
-            temporary.write_text(content, encoding="utf-8")
+        temporary: Path | None = None
+        try:
+            with atomic_output_file(path) as temporary:
+                temporary.write_text(content, encoding="utf-8")
+        finally:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
+    for path in extra:
+        path.unlink()
     if args.pdf:
-        _print_pdf(site / SITE_PATH, site / paper_path(SLUG, ".pdf"))
+        _print_pdf(site / COMPLETE_PATH, site / paper_path(SLUG, ".pdf"))
     return 0
 
 

@@ -278,9 +278,13 @@ def test_exact_values_inputs_select_the_complete_paper_job(
 ) -> None:
     for changed in (
         "packing/devtools/render_exact_side_values.py",
+        "packing/devtools/exact_catalogue.py",
         "packing/devtools/templates/exact-side-values-article.md",
         "packing/devtools/templates/exact-side-values-shell.html",
         "packing/devtools/templates/exact-side-values.css",
+        "packing/devtools/templates/exact-side-values-browser-shell.html",
+        "packing/devtools/templates/exact-side-values-browser.css",
+        "packing/tests/test_exact_catalogue.py",
         "packing/tests/test_render_exact_side_values.py",
     ):
         assert in_scope([changed], declared) == {"exact_side_values"}, changed
@@ -465,3 +469,12 @@ def test_an_identical_pair_of_revisions_changes_nothing() -> None:
     assert pages_scope.changed_paths("HEAD", "HEAD") == []
     with pytest.raises(SystemExit, match="git diff"):
         pages_scope.changed_paths("HEAD", "no-such-revision-anywhere")
+
+
+def test_a_pytest_command_selects_every_test_argument() -> None:
+    command = (
+        "uv run pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py"
+    )
+    files = pages_scope.commands_run([{"steps": [{"run": command}]}])
+    assert REPO / "packing/tests/test_render_exact_side_values.py" in files
+    assert REPO / "packing/tests/test_exact_catalogue.py" in files

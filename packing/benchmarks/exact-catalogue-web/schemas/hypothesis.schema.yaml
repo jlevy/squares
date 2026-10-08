@@ -1,0 +1,10 @@
+type: object
+additionalProperties: false
+required: [id, claim, registered, criterion, maximum_fraction, bead]
+properties:
+  id: {const: H-001}
+  claim: {type: string, minLength: 1}
+  registered: {type: string, minLength: 1}
+  criterion: {const: initial_raw_bytes}
+  maximum_fraction: {const: 0.25}
+  bead: {const: think-mo36}

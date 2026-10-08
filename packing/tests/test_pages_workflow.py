@@ -1088,6 +1088,11 @@ def _assembled(
         "exact-side-values.html",
         "exact-side-values.md",
         "exact-side-values.pdf",
+        "exact-side-values-complete.html",
+        "exact-side-values-browser.js",
+        "exact-side-values-data/index.json",
+        "exact-side-values-data/metadata/current-n83.json",
+        "exact-side-values-data/coefficients/current-n83.json",
     ),
 ) -> tuple[Path, list[subprocess.CompletedProcess[str]]]:
     """Run the `publish` job's assembly steps, in order, on a tree shaped like the one
@@ -1137,7 +1142,9 @@ def _assembled(
     staged_exact = root / "exact-side-values-page"
     (staged_exact / "papers").mkdir(parents=True)
     for filename in exact_files:
-        (staged_exact / "papers" / filename).write_text(f"exact paper {Path(filename).suffix}")
+        target = staged_exact / "papers" / filename
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"exact paper {Path(filename).suffix}")
     results = []
     for step_name, cwd, environment in (
         ("Put the site's pages at the root, refusing any name already there", root, pages),
@@ -1279,6 +1286,11 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "papers/exact-side-values.html",
         "papers/exact-side-values.md",
         "papers/exact-side-values.pdf",
+        "papers/exact-side-values-complete.html",
+        "papers/exact-side-values-browser.js",
+        "papers/exact-side-values-data/index.json",
+        "papers/exact-side-values-data/metadata/current-n83.json",
+        "papers/exact-side-values-data/coefficients/current-n83.json",
         "t-018-explainer.md",
         "t-018-explainer.pdf",
     ]

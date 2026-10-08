@@ -170,11 +170,14 @@ name: Certificate page
       - packing/tests/test_assemble_site.py
       - packing/devtools/pages_scope.py
       - packing/devtools/render_exact_side_values.py
+      - packing/devtools/exact_catalogue.py
       - packing/devtools/build_exact_values.py
       - packing/devtools/extract_kingbird_svg_exact.py
       - packing/devtools/templates/exact-side-values-article.md
       - packing/devtools/templates/exact-side-values-shell.html
       - packing/devtools/templates/exact-side-values.css
+      - packing/devtools/templates/exact-side-values-browser-shell.html
+      - packing/devtools/templates/exact-side-values-browser.css
       - packing/tests/test_render_exact_side_values.py
       - packing/resources/web/kingbird-exact-side-facts-2026-10-07/**
       - packing/devtools/paper_links.py
@@ -489,19 +492,22 @@ jobs:
       - name: Install the pinned Chromium headless shell
         run: uv run --frozen --group dev python -m playwright install --only-shell chromium
 
-      - name: Check the exact-values paper renderer
+      - name: Check the exact-values renderer and complete lazy data projection
         env:
           SQPACK_EXACT_SIDE_VALUES_BROWSER: "1"
-        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py
+        run: uv run --frozen --all-extras --group dev pytest -q tests/test_render_exact_side_values.py tests/test_exact_catalogue.py
 
-      # Rendered where it is served: `site/papers/exact-side-values.html`, with its
-      # Markdown and its PDF beside it. Nothing else writes `site/papers` on this runner,
-      # so the artifact is this paper's three files.
+      # The canonical HTML is the compact browser. The complete HTML/Markdown/PDF
+      # archives and the index, script, metadata and coefficient payloads travel together.
+      # Nothing else writes `site/papers` on this runner.
       - name: Render and check the paper in HTML, Markdown, and PDF
         run: |
           uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --pdf
           uv run --frozen --group dev python -m devtools.render_exact_side_values --site site --check
           test -s site/papers/exact-side-values.pdf
+          test -s site/papers/exact-side-values-complete.html
+          test -s site/papers/exact-side-values-data/index.json
+          test -s site/papers/exact-side-values-browser.js
           uv run --frozen --group dev python -m devtools.artifact_dates --pdf site/papers/exact-side-values.pdf --revised exact-values
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
           uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:exact-side-values
@@ -2064,6 +2070,9 @@ jobs:
           test -s "$STAGED/papers/exact-side-values.html"
           test -s "$STAGED/papers/exact-side-values.md"
           test -s "$STAGED/papers/exact-side-values.pdf"
+          test -s "$STAGED/papers/exact-side-values-complete.html"
+          test -s "$STAGED/papers/exact-side-values-data/index.json"
+          test -s "$STAGED/papers/exact-side-values-browser.js"
           test -s site/papers/n11-lower-bounds-explainer.html
           test -s site/papers/n11-threshold-bound-review.html
           test -s site/papers/n11-optimality-review.html

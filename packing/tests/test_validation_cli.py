@@ -792,6 +792,7 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "--ignore=tests/test_site_frontier_table.py",
         "--ignore=tests/test_site_rendering.py",
         "--ignore=tests/test_site_math_preferences.py",
+        "--ignore=tests/test_exact_side_values_browser.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -4298,6 +4299,7 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         "tests/test_site_frontier_table.py",
         "tests/test_site_rendering.py",
         "tests/test_site_math_preferences.py",
+        "tests/test_exact_side_values_browser.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path

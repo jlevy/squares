@@ -598,6 +598,12 @@ The
 and [generated paper](packing/devtools/templates/exact-side-values-article.md) keep
 source attribution, algebraic checks, geometric realization and optimality separate.
 
+The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html) has a
+searchable index and loads individual records and coefficient vectors when opened.
+Complete archives preserve the full printed catalogue; the bounded
+[payload measurement](packing/benchmarks/exact-catalogue-web/report.md) records the
+initial raw-byte reduction without making a latency claim.
+
 All 54 numeric-only current cases have a specific bead in the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
 The next entry is `think-s6np`: recover or reproduce earlier claimed contact-driver
@@ -699,6 +705,11 @@ case or experiment separately.
 | [SQUISH update: mathematical and semantic binding review](docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematics Review: Eleven SQUISH Upper-Bound Packings](docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md) | dated review record | record | retained | — |
 | [Correctness and Security Review: SQUISH #401 Import](docs/project/reviews/review-2026-10-06-squish-import-correctness.md) | dated review record | record | retained | — |
+| [Catalogue Publication Integration](packing/benchmarks/exact-catalogue-web/experiments/exp-002-publication.md) | research synthesis | record | retained | — |
+| [Exact Catalogue Web Reading](packing/benchmarks/exact-catalogue-web/ideas.md) | implementation plan | supporting | maintained | — |
+| [Lazy Catalogue Payload](packing/benchmarks/exact-catalogue-web/hypotheses/H-001-lazy-catalogue.md) | implementation plan | supporting | maintained | — |
+| [Lazy Catalogue and Complete Archives](packing/benchmarks/exact-catalogue-web/experiments/exp-001-lazy-catalogue.md) | research synthesis | record | retained | — |
+| [Exact Catalogue Web Payload](packing/benchmarks/exact-catalogue-web/report.md) | generated status view | generated | generated | — |
 | [Exact Polynomial Collection: Mathematical Review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md) | dated review record | record | retained | — |
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
