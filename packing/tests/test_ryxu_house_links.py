@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -15,16 +16,19 @@ import mpmath as mp
 import pytest
 
 from devtools import build_known_best_atlas as atlas
+from devtools import census_atlas_contact_shades as shades
 from devtools import confirm_ryxu_records as confirmation
 from devtools import generate_frontier_case as generator
 from devtools import refinement_packets
 from devtools import register_ryxu_reports as register
+from devtools import regularize_axis_components as regularizer
 from devtools import run_negative_controls as controls
 from devtools import ryxu_house_links as houses
 from sqpack.render import render_packing_svg
 from sqpack.render.model import EvidenceTier, RenderSpec, ScalarKind
 from sqpack.witness import materialize_exact_witness, witness_document
 from sqpack.yamlio import safe_load
+from workbench_tools import build_candidate
 
 SOURCE = houses.REPO
 
@@ -397,7 +401,9 @@ def test_existing_incomplete_history_is_refused_before_case_writes(
     }
 
 
-def confirmation_frontier(private: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+def confirmation_frontier(
+    private: Path, monkeypatch: pytest.MonkeyPatch, *, reported: bool = False
+) -> Path:
     frontier = private / "packing/frontier"
     frontier.mkdir(parents=True)
     monkeypatch.setattr(register, "FRONTIER", frontier)
@@ -407,6 +413,51 @@ def confirmation_frontier(private: Path, monkeypatch: pytest.MonkeyPatch) -> Pat
     for n in houses.NUMBERS:
         name = f"n-{n:03d}.md"
         shutil.copyfile(SOURCE / "packing/frontier" / name, frontier / name)
+    if reported:
+        for name, field, identifiers in (
+            ("results.yaml", "results", {"T-125", "T-126"}),
+            ("evidence.yaml", "evidence", {confirmation.RATIONAL, confirmation.RADICAL}),
+            (
+                "verifiers.yaml",
+                "verifiers",
+                {confirmation.INDEPENDENT_Q2, confirmation.CUSTODY},
+            ),
+        ):
+            path = frontier / name
+            document = safe_load(path.read_text())
+            if field == "results":
+                for row in document[field]:
+                    if row["id"] in identifiers:
+                        row["verification"], row["confirmation"] = "V0", "C0"
+                        row["evidence"] = [
+                            ref
+                            for ref in row["evidence"]
+                            if ref not in {confirmation.RATIONAL, confirmation.RADICAL}
+                        ]
+                        confirmation.replace_row(path, field, row)
+            else:
+                text = path.read_text()
+                for identifier in identifiers:
+                    text = re.sub(
+                        rf"(?m)^  - id: {re.escape(identifier)}\n.*?(?=^  - id:|\Z)",
+                        "",
+                        text,
+                        flags=re.DOTALL,
+                    )
+                path.write_text(text)
+        originals = {row["n"]: row for row in register.read_history()}
+        for n in houses.NUMBERS:
+            path = frontier / f"n-{n:03d}.md"
+            prefix, front, body = path.read_text().split("---\n", 2)
+            document = safe_load(front)
+            old = safe_load(originals[n]["frontier"].split("---\n", 2)[1])["packing"]
+            document["packing"]["verified_upper_bound"] = old["verified_upper_bound"]
+            document["packing"]["evidence"] = [
+                ref
+                for ref in document["packing"]["evidence"]
+                if ref not in {confirmation.RATIONAL, confirmation.RADICAL}
+            ]
+            path.write_text(prefix + "---\n" + register.dump(document) + "---\n" + body)
     review = private / confirmation.REVIEW
     review.parent.mkdir(parents=True)
     review.write_text(
@@ -439,10 +490,11 @@ def test_confirmation_refuses_later_case_before_any_record_write(
     assert before == {path.name: path.read_bytes() for path in frontier.iterdir()}
 
 
+@pytest.mark.slow
 def test_confirmation_preserves_complete_scope_history_and_lower_lanes(
     private: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    frontier = confirmation_frontier(private, monkeypatch)
+    frontier = confirmation_frontier(private, monkeypatch, reported=True)
     original_history = register.HISTORY.read_bytes()
     original_source = safe_load((frontier / "source-coverage.yaml").read_text())
     before = {
@@ -450,7 +502,14 @@ def test_confirmation_preserves_complete_scope_history_and_lower_lanes(
         for n in houses.NUMBERS
     }
     native_houses = {n: houses.house_path(n).read_bytes() for n in houses.NUMBERS}
+    stale = confirmation.confirming_evidence(radical=False)
+    stale["limitations"] = "Stale count: including seven superseded configurations."
+    register.append_rows(frontier / "evidence.yaml", "evidence", [stale], "id")
     confirmation.confirm()
+    actual_evidence = safe_load((frontier / "evidence.yaml").read_text())["evidence"]
+    assert next(row for row in actual_evidence if row["id"] == confirmation.RATIONAL) == (
+        confirmation.confirming_evidence(radical=False)
+    )
     results = safe_load((frontier / "results.yaml").read_text())["results"]
     for identifier, numbers in (("T-125", houses.reports.NUMBERS), ("T-126", (51,))):
         row = next(row for row in results if row["id"] == identifier)
@@ -476,6 +535,12 @@ def test_confirmation_preserves_complete_scope_history_and_lower_lanes(
         assert "191-touching-pair assertion" in text
     after_source = safe_load((frontier / "source-coverage.yaml").read_text())
     assert set(after_source) == set(original_source)
+    selected = {row["n"]: row for row in after_source["selected_overrides"]}
+    for n in houses.NUMBERS:
+        case = safe_load((frontier / f"n-{n:03d}.md").read_text().split("---\n", 2)[1])[
+            "packing"
+        ]
+        assert selected[n]["evidence"] in case["reported_upper_bound"]["evidence"]
     for field in original_source.keys() - {"sources", "selected_overrides"}:
         assert after_source[field] == original_source[field]
     assert {n: houses.house_path(n).read_bytes() for n in houses.NUMBERS} == native_houses
@@ -484,3 +549,104 @@ def test_confirmation_preserves_complete_scope_history_and_lower_lanes(
     confirmation.confirm()
     assert first == {path.name: path.read_bytes() for path in frontier.iterdir()}
     assert register.HISTORY.read_bytes() == original_history
+
+
+def test_historical_bounds_keep_heading_and_current_lower_lane() -> None:
+    body = (
+        "# s(70) — Square Packing Case\n\n"
+        "The current lower bound is unchanged.\n\n"
+        "It is **larger** than the best known $8.88166675$ two fields above it.\n\n"
+        "The verified upper bound and the printed side now agree.\n\n"
+        "That proves $s(70) \\le 8.88166675700901$, the verified upper bound at that intake.\n"
+        "\n## The ry-xu construction\n\nThe selected exact side is current.\n"
+    )
+    rewritten = register.historical_upper_prose(70, body)
+    assert rewritten.startswith("# s(70) — Square Packing Case\n")
+    assert "The current lower bound is unchanged." in rewritten
+    assert "It was **larger** than the then-reported $8.88166675$" in rewritten
+    assert "two fields above it" not in rewritten
+    assert "printed side at that intake agreed" in rewritten
+    assert "That previously proved $s(70) \\le 8.88166675700901$" in rewritten
+    assert rewritten.endswith("The selected exact side is current.\n")
+    assert register.historical_upper_prose(70, rewritten) == rewritten
+
+
+def test_pose_consumers_keep_rational_corners_and_refuse_radical_regularization() -> None:
+    rational = houses.expected_witness(70)
+    original = copy.deepcopy(rational)
+    expanded, side = materialize_exact_witness(rational)
+    frame = regularizer.exact_frame(rational)
+    assert frame.side == side
+    assert [piece.corners for piece in frame.pieces] == expanded
+    assert rational == original
+    packing, rounded, degrees = shades.packings_from_witness(rational)
+    assert len(packing.squares) == len(rounded.squares) == len(degrees) == 70
+    assert packing.side == float(side)
+    for square, corners in zip(packing.squares, expanded, strict=True):
+        assert square.x == float(sum(x for x, _ in corners) / 4)
+        assert square.y == float(sum(y for _, y in corners) / 4)
+    radical = houses.expected_witness(51)
+    original = copy.deepcopy(radical)
+    packing, rounded, degrees = shades.packings_from_witness(radical)
+    assert len(packing.squares) == len(rounded.squares) == len(degrees) == 51
+    assert packing.side == pytest.approx((16 + 5 * 2**0.5) / 3)
+    with pytest.raises(regularizer.RegularizeError, match="algebraic field"):
+        regularizer.exact_frame(radical)
+    assert radical == original
+
+
+def test_workbench_projects_all_exact_source_poses_and_preserves_numeric_path(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    numerical = build_candidate.load_witness(52)
+    original = build_candidate.WITNESSES
+    monkeypatch.setattr(build_candidate, "WITNESSES", tmp_path)
+    shutil.copyfile(original / "n-052.yaml", tmp_path / "n-052.yaml")
+    repeated = build_candidate.load_witness(52)
+    assert repeated["side"] == numerical["side"]
+    assert repeated["squares"] == numerical["squares"]
+    assert repeated["keys"] == numerical["keys"]
+    for n in (51, 70):
+        source = houses.expected_witness(n)
+        before = copy.deepcopy(source)
+        path = tmp_path / f"n-{n:03d}.yaml"
+        path.write_text(register.dump({"witness": source}))
+        projected = build_candidate.load_witness(n)
+        corners, side = materialize_exact_witness(source)
+        assert projected["side"] == float(side)
+        assert len(projected["squares"]) == len(projected["keys"]) == n
+        for row, points, key in zip(
+            projected["squares"], corners, projected["keys"], strict=True
+        ):
+            assert row[:2] == (
+                float(sum(x for x, _ in points) / 4),
+                float(sum(y for _, y in points) / 4),
+            )
+            assert json.loads(key[1])["scalar"] == source["scalar"]
+        assert source == before
+        if n == 51:
+            alternate = copy.deepcopy(source)
+            alternate["scalar"]["isolating_interval"] = ["-2", "-1"]
+            path.write_text(register.dump({"witness": alternate}))
+            reflected = build_candidate.load_witness(n)
+            assert reflected["keys"] != projected["keys"]
+            assert reflected["side"] != projected["side"]
+
+
+def test_confirmation_disposes_prior_upper_gap_but_keeps_green_lower_blocker() -> None:
+    history_bytes = register.HISTORY.read_bytes()
+    history = next(row for row in register.read_history() if row["n"] == 261)
+    old = safe_load(history["frontier"].split("---\n", 2)[1])["packing"]
+    untouched = copy.deepcopy(old)
+    assert register.remaining_blockers(old) == old["blockers"]
+    current = copy.deepcopy(old)
+    current["reported_upper_bound"] = register.reported_bound(261)
+    current["verified_upper_bound"] = houses.bound(261)
+    remaining = register.remaining_blockers(current)
+    assert len(old["blockers"]) == 2
+    assert remaining == [old["blockers"][1]]
+    assert remaining[0]["evidence"] == ["E-green-ds7-theorem9-reported-lower"]
+    current["verified_upper_bound"]["value"] = old["verified_upper_bound"]["value"]
+    assert register.remaining_blockers(current) == old["blockers"]
+    assert old == untouched
+    assert register.HISTORY.read_bytes() == history_bytes

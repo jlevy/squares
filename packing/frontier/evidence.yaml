@@ -28710,8 +28710,10 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     limitations: The source reports finite rational feasible ceilings for all 25 complete certificates
-      retained in the factual packet. Eighteen improve the current source displays; seven are superseded
-      and retained. This claim establishes no optimality or local-minimum theorem.
+      retained in the factual packet. Compared with the pre-intake frontier, eighteen rational certificates
+      improve the displays. After selecting undilated radical n51, seventeen rational certificates are
+      selected and eight are non-selected; all remain retained. This claim establishes no optimality
+      or local-minimum theorem.
     source_reviewed: '2026-10-08'
   - id: E-ryxu-432-radical-n51-report
     claim: upper-bound
@@ -28778,16 +28780,17 @@ evidence:
     - V-check-rational-witness-independent
     - V-ryxu-complete-custody
     independence_record: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
-    limitations: 'All 25 complete rational source certificates, including seven superseded configurations,
-      pass both routes; each of 50 duplicate and outside full-roster controls fails both. The 75-job
-      batch retained 2078082 pair decisions and wall 330.19143345800694s. Shared exact half-angle conversion
-      was independently reviewed; deciding geometry implementations are distinct. The source dilation
-      is already baked into each rational input; no further dilation or rounding is applied. Rational
-      n51 is separate from the selected undilated radical witness. Complete source/result/house binding,
-      private-worker copied inputs, mutation refusals, producer guards and original-frontier recovery
-      were independently reviewed. Offline admission is not a fresh deciding replay. Only finite feasibility
-      enters: no optimality, lower bound, local-minimum theorem, rigidity, novelty, formal proof or
-      human oversight is established.'
+    limitations: 'All 25 complete rational source certificates pass both routes. Eight rational certificates
+      are non-selected in the current atlas, including the separate rational n51; all remain retained.
+      Each of 50 duplicate and outside full-roster controls fails both. The 75-job batch retained 2078082
+      pair decisions and wall 330.19143345800694s. Shared exact half-angle conversion was independently
+      reviewed; deciding geometry implementations are distinct. The source dilation is already baked
+      into each rational input; no further dilation or rounding is applied. Rational n51 is separate
+      from the selected undilated radical witness. Complete source/result/house binding, private-worker
+      copied inputs, mutation refusals, producer guards and original-frontier recovery were independently
+      reviewed. Offline admission is not a fresh deciding replay. Only finite feasibility enters: no
+      optimality, lower bound, local-minimum theorem, rigidity, novelty, formal proof or human oversight
+      is established.'
     external_review:
       state: informally-verified
       date: '2026-10-08'

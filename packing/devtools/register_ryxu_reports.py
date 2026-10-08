@@ -15,6 +15,7 @@ from typing import Any
 
 from devtools import render_case_verifiers
 from devtools import ryxu_house_links as houses
+from devtools.confirm_refinement_records import replace_row
 from devtools.register_refinement_reports import FOOTER, append_rows, dump, save
 from sqpack.yamlio import safe_load
 
@@ -24,6 +25,7 @@ DAY = houses.RETRIEVED
 REPORT = "E-ryxu-432-rational-report"
 RADICAL_REPORT = "E-ryxu-432-radical-n51-report"
 RADICAL_EXACT = "E-ryxu-432-radical-n51-feasibility"
+RATIONAL_EXACT = "E-ryxu-432-rational-feasibility"
 HISTORY = houses.reports.PACKET / "acquisition/frontier-prior-state.json.xz"
 SECTION = "## The ry-xu construction"
 
@@ -89,8 +91,8 @@ def _historical_prose(body: str) -> str:
             "Previously, the best known published packing",
         ),
         ("The best known published packing", "Previously, the best known published packing"),
-        ("Open. The best known packing gives", "The earlier packing gave"),
-        ("The best known packing gives", "The earlier packing gave"),
+        ("Open. The best known packing gives", "Previously, the packing gave"),
+        ("The best known packing gives", "Previously, the packing gave"),
         ("the atlas pictures", "the atlas then pictured"),
         ("the atlas\npictures", "the atlas\nthen pictured"),
         (
@@ -104,6 +106,98 @@ def _historical_prose(body: str) -> str:
     for before, after in replacements:
         body = body.replace(before, after)
     return body
+
+
+def historical_upper_prose(n: int, body: str) -> str:
+    """Retain older source numbers with explicit past-tense upper-bound attribution."""
+    historical, separator, construction = body.partition("\n" + SECTION + "\n")
+    historical = historical.replace(
+        "`verified_upper_bound` for this case is",
+        "The verified ceiling at that intake was",
+    ).replace(
+        "## The verified upper bound is a ceiling",
+        "## The earlier verified ceiling",
+    )
+    historical = historical.replace("The earlier packing gave", "Previously, the packing gave")
+    historical = historical.replace(
+        "The `mathematics` blocker in the frontmatter records the difference.",
+        "That certificate gap was the upper-bound blocker at that intake.",
+    ).replace(
+        "packings this register lists as\nbest known",
+        "packings this register then listed as\nbest known",
+    )
+    historical = re.sub(
+        r"is (\*\*larger\*\*|larger) than the\s+best known",
+        r"was \1 than the then-reported",
+        historical,
+    )
+    historical = re.sub(r" two fields\s+above it", "", historical)
+    historical = historical.replace(
+        "The verified upper bound and the printed side now agree",
+        "The verified upper bound and the printed side at that intake agreed",
+    ).replace(
+        "The printed side itself is not certified here: the certificate’s side lies above it.",
+        "The printed side itself was not certified by that rational certificate: "
+        "the certificate’s side lay above it.",
+    )
+    # Repair earlier generated sentence prefixes before paragraph-local attribution.
+    historical = re.sub(r"(?m)^Previously, (# )", r"\1", historical)
+    historical = historical.replace("Previously, Earlier source", "Earlier source")
+    historical = re.sub(r"Previously, [Tt]hat proves", "That previously proved", historical)
+    historical = historical.replace(
+        "Previously, This repository’s exact audit checks",
+        "This repository’s exact audit previously checked",
+    )
+    historical = re.sub(
+        r"Previously, (The|This|That)\b",
+        lambda match: "Previously, " + match[1].lower(),
+        historical,
+    )
+    upper = re.compile(rf"s\({n}\)\s*(?:\\le|≤|<=)")
+    marker = re.compile(
+        r"now\s+weaker|previously|second\s+strongest|\buntil\b|superseded|\bwas\b",
+        re.IGNORECASE,
+    )
+    paragraphs = historical.split("\n\n")
+    for paragraph_index, paragraph in enumerate(paragraphs):
+        pieces = re.split(r"((?<=[a-z0-9)])\.\s+(?=[A-Z]))", paragraph)
+        for index in range(0, len(pieces), 2):
+            sentence = pieces[index]
+            if not upper.search(sentence) or marker.search(sentence):
+                continue
+            if "proves" in sentence:
+                sentence = sentence.replace("proves", "previously proved")
+            elif " gives " in sentence:
+                sentence = sentence.replace(" gives ", " previously gave ")
+            else:
+                sentence = "Previously, " + sentence[0].lower() + sentence[1:]
+            pieces[index] = sentence
+        paragraphs[paragraph_index] = "".join(pieces)
+    return "\n\n".join(paragraphs) + separator + construction
+
+
+def remaining_blockers(case: dict[str, Any]) -> list[dict[str, Any]]:
+    """Dispose the displaced certificate-print gap only after exact upper confirmation.
+
+    This closes an obstacle to the current frontier; it does not certify the earlier
+    packing at its closed-form side. Its complete old record remains in HISTORY.
+    """
+    verified, reported = case["verified_upper_bound"], case["reported_upper_bound"]
+    blocks = case["blockers"]
+    if not {RATIONAL_EXACT, RADICAL_EXACT}.intersection(verified["evidence"]) or any(
+        verified[field] != reported[field] for field in ("value", "exact_form")
+    ):
+        return list(blocks)
+    old_gap = "verified_upper_bound is E-evand-exact-ceilings-2026-10-05-exact-replay"
+    return [
+        block
+        for block in blocks
+        if not (
+            block["kind"] == "mathematics"
+            and block["detail"].startswith(old_gap)
+            and "Closing the gap needs an exact" in block["detail"]
+        )
+    ]
 
 
 def adopt_case(n: int, existing: str, generated: str) -> str:
@@ -132,6 +226,7 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
         case[field] = draft[field]
     if confirmed:
         case["verified_upper_bound"] = houses.bound(n)
+        case["blockers"] = remaining_blockers(case)
     else:
         prior = houses.reports.kernel.read_xz(HISTORY)
         if prior["format"] != "ryxu-432-prior-frontier-and-house-v1":
@@ -158,7 +253,7 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     body, count = re.subn(
         pattern, lambda _match: section(n, confirmed=confirmed), body, flags=re.DOTALL
     )
-    body = _historical_prose(body)
+    body = historical_upper_prose(n, _historical_prose(body))
     if count != 1:
         raise ValueError("selected ry-xu case needs one source-bound construction section")
     return render_case_verifiers.refresh("---\n" + dump(document) + "---\n" + body)
@@ -266,7 +361,7 @@ def record_cases() -> list[dict[str, Any]]:
                 "evidence": [evidence],
             }
         )
-        body = _historical_prose(body)
+        body = historical_upper_prose(n, _historical_prose(body))
         body = body.replace(FOOTER, section(n, confirmed=False) + "\n" + FOOTER)
         plan.append((path, "---\n" + dump(document) + "---\n" + body))
     if not plan:
@@ -292,10 +387,11 @@ def _register_records() -> None:
             "Complete rational construction reports at 25 counts",
             (
                 "The source reports finite rational feasible ceilings for all 25 "
-                "complete certificates retained in the factual packet. Eighteen "
-                "improve the current source displays; seven are superseded and "
-                "retained. This claim establishes no optimality or local-minimum "
-                "theorem."
+                "complete certificates retained in the factual packet. Compared with "
+                "the pre-intake frontier, eighteen rational certificates improve the "
+                "displays. After selecting undilated radical n51, seventeen rational "
+                "certificates are selected and eight are non-selected; all remain "
+                "retained. This claim establishes no optimality or local-minimum theorem."
             ),
         ),
         (
@@ -335,6 +431,14 @@ def _register_records() -> None:
             ],
             "id",
         )
+        evidence_path = FRONTIER / "evidence.yaml"
+        current = next(
+            row
+            for row in safe_load(evidence_path.read_text())["evidence"]
+            if row["id"] == evidence
+        )
+        if current["limitations"] != claim:
+            replace_row(evidence_path, "evidence", {**current, "limitations": claim})
         append_rows(
             FRONTIER / "results.yaml",
             "results",
@@ -351,8 +455,9 @@ def _register_records() -> None:
                     "significance": {
                         "score": 3,
                         "rationale": (
-                            "Current feasible construction ceilings improve at 18 counts, "
-                            "without a solved case or lower-bound theorem."
+                            "Rational certificates improve the pre-intake ceilings at 18 "
+                            "counts; 17 are currently selected alongside separate radical "
+                            "n51. No solved case or lower-bound theorem."
                         )
                         if result == "T-125"
                         else (
@@ -417,9 +522,10 @@ def register() -> None:
                     "complete-certificates.json.xz"
                 ),
                 "notes": (
-                    "All 25 full source geometries retained. Eighteen current "
-                    "improvements; canonical n51 is the separate undilated radical "
-                    "construction. No 191-contact assertion admitted."
+                    "All 25 full rational source geometries retained. The current atlas "
+                    "selects 17 rational certificates plus the separate undilated radical "
+                    "n51 construction; eight rational certificates are non-selected. "
+                    "No 191-contact assertion admitted."
                 ),
             }
         ],

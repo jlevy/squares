@@ -140,8 +140,9 @@ def confirming_evidence(*, radical: bool) -> dict[str, Any]:
                 "191 assertion remains unconfirmed."
                 if radical
                 else (
-                    "All 25 complete rational source certificates, including seven "
-                    "superseded configurations, pass both routes; each of 50 duplicate and "
+                    "All 25 complete rational source certificates pass both routes. Eight "
+                    "rational certificates are non-selected in the current atlas, including "
+                    "the separate rational n51; all remain retained. Each of 50 duplicate and "
                     "outside full-roster controls fails both. The 75-job batch retained "
                     "2078082 pair decisions and wall 330.19143345800694s. Shared exact "
                     "half-angle conversion was independently reviewed; deciding geometry "
@@ -186,7 +187,7 @@ def case_plan() -> list[tuple[Path, str]]:
         reported = register.RADICAL_REPORT if n == 51 else register.REPORT
         case["blockers"] = [
             block
-            for block in case["blockers"]
+            for block in register.remaining_blockers(case)
             if not (
                 reported in block["evidence"] and "Issue432 remains V0/C0" in block["detail"]
             )
@@ -202,6 +203,7 @@ def case_plan() -> list[tuple[Path, str]]:
             raise ValueError(
                 "selected case needs exactly one source-bound construction section"
             )
+        body = register.historical_upper_prose(n, body)
         plan.append((path, prefix + "---\n" + dump(document) + "---\n" + body))
     return plan
 
@@ -233,11 +235,25 @@ def confirm() -> None:
     append_rows(register.FRONTIER / "verifiers.yaml", "verifiers", verifier_rows(), "id")
     for radical, result_id in ((False, "T-125"), (True, "T-126")):
         evidence = confirming_evidence(radical=radical)
-        append_rows(register.FRONTIER / "evidence.yaml", "evidence", [evidence], "id")
+        evidence_path = register.FRONTIER / "evidence.yaml"
+        append_rows(evidence_path, "evidence", [evidence], "id")
+        retained = next(
+            row
+            for row in safe_load(evidence_path.read_text())["evidence"]
+            if row["id"] == evidence["id"]
+        )
+        if retained != evidence:
+            replace_row(evidence_path, "evidence", evidence)
         rows = safe_load((register.FRONTIER / "results.yaml").read_text())["results"]
         result = next(row for row in rows if row["id"] == result_id)
         original = copy.deepcopy(result)
         result.update(verification="V3", confirmation="C3")
+        if not radical:
+            result["significance"]["rationale"] = (
+                "Rational certificates improve the pre-intake ceilings at 18 counts; "
+                "17 are currently selected alongside separate radical n51. No solved "
+                "case or lower-bound theorem."
+            )
         result["claim"] = (
             "Complete independently reviewed exact replay confirms the undilated "
             "51-square construction ceiling s(51) <= (16+5sqrt(2))/3. This is finite "
@@ -297,6 +313,13 @@ def confirm() -> None:
     for source in value["sources"]:
         if source["id"] not in {houses.SOURCE_ID, houses.RADICAL_SOURCE_ID}:
             continue
+        if source["id"] == houses.SOURCE_ID:
+            source["notes"] = (
+                "All 25 full rational source geometries retained. The current atlas "
+                "selects 17 rational certificates plus the separate undilated radical "
+                "n51 construction; eight rational certificates are non-selected. "
+                "No 191-contact assertion admitted."
+            )
         confirming = RADICAL if source["id"] == houses.RADICAL_SOURCE_ID else RATIONAL
         if confirming not in source["evidence"]:
             source["evidence"].append(confirming)
@@ -307,7 +330,7 @@ def confirm() -> None:
     for row in value["selected_overrides"]:
         if row["source_id"] not in {houses.SOURCE_ID, houses.RADICAL_SOURCE_ID}:
             continue
-        row["evidence"] = RADICAL if row["n"] == 51 else RATIONAL
+        row["evidence"] = register.RADICAL_REPORT if row["n"] == 51 else register.REPORT
         row["reason"] = (
             "Smaller exact finite construction confirmed after scoped replay/custody review."
         )

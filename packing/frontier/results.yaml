@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-07'
+last_reviewed: '2026-10-08'
 results:
   - id: T-001
     kind: lower-bound
@@ -12826,8 +12826,8 @@ results:
     confirmation: C3
     significance:
       score: 3
-      rationale: Current feasible construction ceilings improve at 18 counts, without a solved case
-        or lower-bound theorem.
+      rationale: Rational certificates improve the pre-intake ceilings at 18 counts; 17 are currently
+        selected alongside separate radical n51. No solved case or lower-bound theorem.
       scored: '2026-10-08'
       by: think-1cvf source integration
     novelty: previously-published

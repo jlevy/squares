@@ -51,6 +51,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import connected_components
 
 from sqpack.release import PUBLICATION_EDITION
+from sqpack.witness import materialize_exact_witness
 from workbench_tools.self_contained import assert_self_contained_html
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
@@ -303,11 +304,35 @@ def load_witness(n: int) -> dict:
     data = yaml.load((WITNESSES / f"n-{n:03d}.yaml").read_text(), Loader=Loader)["witness"]
     representation = data["representation"]
     angle_unit = data["coordinates"]["angle_unit"]
-    side = float(Fraction(data["side"]))
+    exact_geometry = None
+    scalar_kind = data.get("scalar", {}).get("kind")
+    if scalar_kind == "algebraic-number-field" or (
+        scalar_kind == "rational" and representation != "corners"
+    ):
+        exact_geometry, exact_side = materialize_exact_witness(data)
+        side = float(exact_side)
+    else:
+        side = float(Fraction(data["side"]))
     squares = []
     keys = []
-    for square in data["squares"]:
-        if representation == "center-angle":
+    for index, square in enumerate(data["squares"]):
+        if exact_geometry is not None:
+            corners = exact_geometry[index]
+            cx = float(sum(x for x, _ in corners) / 4)
+            cy = float(sum(y for _, y in corners) / 4)
+            (x0, y0), (x1, y1) = corners[0], corners[1]
+            angle = math.degrees(math.atan2(float(y1 - y0), float(x1 - x0))) % 90.0
+            # Animation uses floats; its picture-sharing key keeps the full exact
+            # field/root and pose identity rather than the rounded projection.
+            identity = {
+                "scalar": data["scalar"],
+                "coordinates": data["coordinates"],
+                "representation": representation,
+                "side": data["side"],
+                "square": {key: value for key, value in square.items() if key != "id"},
+            }
+            keys.append(("exact", json.dumps(identity, sort_keys=True, separators=(",", ":"))))
+        elif representation == "center-angle":
             cx, cy = (float(Fraction(value)) for value in square["center"])
             angle = _angle_degrees(square["angle"], angle_unit) % 90.0
             keys.append(("ca", square["center"][0], square["center"][1], square["angle"]))

@@ -2149,8 +2149,9 @@ sources:
     - E-ryxu-432-radical-n51-report
     - E-ryxu-432-rational-feasibility
     claims_record: resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz
-    notes: All 25 full source geometries retained. Eighteen current improvements; canonical n51 is the
-      separate undilated radical construction. No 191-contact assertion admitted.
+    notes: All 25 full rational source geometries retained. The current atlas selects 17 rational certificates
+      plus the separate undilated radical n51 construction; eight rational certificates are non-selected.
+      No 191-contact assertion admitted.
   - id: ry-xu-undilated-n51-2026
     title: ry-xu undilated n51 exact construction
     role: source-repository
@@ -2206,17 +2207,17 @@ selected_overrides:
   - n: 102
     source_id: ry-xu-new-packings-2026-10-08
     value: '10.6058286965106059'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 103
     source_id: ry-xu-new-packings-2026-10-08
     value: '10.6792320475106793'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 105
     source_id: ry-xu-new-packings-2026-10-08
     value: '10.7906765754107907'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 106
     source_id: evand-square-packing-2026-10-05
@@ -2233,7 +2234,7 @@ selected_overrides:
   - n: 131
     source_id: ry-xu-new-packings-2026-10-08
     value: '11.9511500449119512'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 132
     source_id: evand-square-packing-2026-10-05
@@ -2412,7 +2413,7 @@ selected_overrides:
   - n: 108
     source_id: ry-xu-new-packings-2026-10-08
     value: '10.9048247851109049'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 130
     source_id: squish-ten-packings-2026-10-07
@@ -2447,17 +2448,17 @@ selected_overrides:
   - n: 123
     source_id: ry-xu-new-packings-2026-10-08
     value: '11.5913781457115914'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 126
     source_id: ry-xu-new-packings-2026-10-08
     value: '11.7426406872117427'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 129
     source_id: ry-xu-new-packings-2026-10-08
     value: '11.8720298492118721'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 154
     source_id: squish-update-2026-10-07
@@ -2522,52 +2523,52 @@ selected_overrides:
   - n: 51
     source_id: ry-xu-undilated-n51-2026
     value: '7.6903559372884918'
-    evidence: E-ryxu-432-radical-n51-feasibility
+    evidence: E-ryxu-432-radical-n51-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 70
     source_id: ry-xu-new-packings-2026-10-08
     value: '8.8809603717088810'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 84
     source_id: ry-xu-new-packings-2026-10-08
     value: '9.6980520605096981'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 86
     source_id: ry-xu-new-packings-2026-10-08
     value: '9.8205657300098206'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 127
     source_id: ry-xu-new-packings-2026-10-08
     value: '11.8109366475118110'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 146
     source_id: ry-xu-new-packings-2026-10-08
     value: '12.5837822775125838'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 175
     source_id: ry-xu-new-packings-2026-10-08
     value: '13.7688992766137689'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 261
     source_id: ry-xu-new-packings-2026-10-08
     value: '16.6787798754166788'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 267
     source_id: ry-xu-new-packings-2026-10-08
     value: '16.8388319611168389'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 295
     source_id: ry-xu-new-packings-2026-10-08
     value: '17.7042327915177043'
-    evidence: E-ryxu-432-rational-feasibility
+    evidence: E-ryxu-432-rational-report
     reason: Smaller exact finite construction confirmed after scoped replay/custody review.
   - n: 266
     source_id: evand-new-arrangements-2026-10-07

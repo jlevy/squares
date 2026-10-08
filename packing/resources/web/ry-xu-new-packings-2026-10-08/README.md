@@ -108,8 +108,11 @@ it refused corrupted rational and radical deciding receipts, restored exact byte
 admitted them afresh. Every linked producer refused before writing its outputs.
 The actual copy/control test is selected in the existing deferred slow lane: its
 406.23-second call was I/O contended, while its admission subprocess retained the
-45-second deadline. Direct controls remain on the fast surface with the unchanged
-12-second per-test ceiling. Final exact-head CI remains the integration gate.
+45-second deadline. The complete confirmation/idempotence transaction is also selected
+in that lane after measured 24.04-second and 16.06-second calls; its full admission and
+preservation coverage is retained. Small direct controls remain on the fast surface
+with the unchanged 12-second per-test ceiling. Final exact-head CI remains the
+integration gate.
 
 After the recorded independent acceptance, this explicit command integrates the
 confirmation records without running a geometric predicate:
