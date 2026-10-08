@@ -198,10 +198,10 @@ PRUNE = frozenset(
         # consumer. Keep primary bytes and declared dependency copy-back intact.
         SESSION184_RESULTS / "exp-308-n11-corner-cardinality/certificate.json",
         SESSION184_RESULTS / "exp-308-n11-corner-cardinality/replay.json",
-        # The historical contact-chart report is an output, not a worker command
-        # input. Its checker reconstructs from the original upper-packing source;
-        # primary evidence and exact declared-dependency copy-back remain intact.
-        SESSION184_RESULTS / "exp-236-n17-contact-chart/run-001/result.json",
+        # These historical scored-quench/incomplete-graph outputs have no worker
+        # reader. Keep all primary bytes and declared dependency rescue intact.
+        SESSION184_RESULTS / "exp-005-basin-entry.jsonl",
+        SESSION184_RESULTS / "exp-126-h099-complete-graph-candidate/packet.json",
         SESSION184_RESULTS / "exp-304-n11-envelope-windows/certificate.json",
         SESSION184_RESULTS / "exp-304-n11-envelope-windows/replay.json",
         # Exp303's complete rank classification is retained as primary evidence;
@@ -482,6 +482,11 @@ PRUNE = frozenset(
         # 117,584 bytes without omitting any SQUISH proof input or changing the cap.
         ROOT / "campaign/agent-sessions/session-105-validation/fast-cpu4-bdc28e89.json",
         ROOT / "campaign/agent-sessions/session-105-validation/fast-native-bdc28e89.json",
+        # The later Session 105 fast/push receipts are likewise historical telemetry,
+        # with no worker command reader or registered dependency. Preserve their
+        # source-identity companions and primary bytes; declared copy-back still wins.
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
+        ROOT / "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private

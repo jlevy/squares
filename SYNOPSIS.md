@@ -315,8 +315,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 21 tentative; 24 in progress |
 | Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 252 | 69 confirmed; 47 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
-| Experiments | 239 | 89 accepted; 52 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
+| Hypotheses | 253 | 70 confirmed; 47 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 1 running; 1 exhausted |
+| Experiments | 240 | 90 accepted; 52 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 1 in progress; 1 exhausted |
 | Frontier results | 116 | 116 registered, 86 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -603,6 +603,7 @@ case or experiment separately.
 | [Envelope representation discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/README.md) | typed session record | record | retained | — |
 | [Same-core guarded clauses](packing/campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/README.md) | typed session record | record | retained | — |
 | [Four-corner n11 cardinality relaxation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/README.md) | typed session record | record | retained | — |
+| [Original-cell BB header preflight](packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/README.md) | typed session record | record | retained | — |
 | [Joint-certificate metadata relevance](packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/README.md) | typed session record | record | retained | — |
 | [Two Closed Centre Children](packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md) | typed session record | record | retained | — |
 | [n17 Issue Coordination and Certificate Intake](docs/project/reviews/review-2026-10-07-n17-issue-coordination.md) | dated review record | record | retained | — |
@@ -5904,7 +5905,8 @@ round that names the hypothesis, control roles included.
 | [H-315](packing/campaign/hypotheses/H-315-owned-core-guarded-clause.md) | confirmed | Same-core exact guarded clauses and endpoint disjointness | 1 | Fresh source-defined clearance checks pass; historical sign error retained explicitly |
 | [H-316](packing/campaign/hypotheses/H-316-n11-corner-cardinality.md) | refuted | Correlated four-corner n11 cardinality | 1 | Complete method miss: all95 survive;216 classifications; no ordinary obstruction |
 | [H-317](packing/campaign/hypotheses/H-317-subpattern-relevance.md) | confirmed | SciPy-free joint-certificate candidate relevance | 1 | Complete fresh-matched metadata projection: C1 14 orbits/104 states, C2 13/84, overlap 6/40, union 21/148; both zero in the 95-orbit distance-two tail. Potential coverage is not admission |
-| [H-318](packing/campaign/hypotheses/H-318-bb-header-preflight.md) | running | Original-cell joint-certificate header preflight | 1 | Prospective C2-first then C1 compact-header checks; no FULL tree verification or admission |
+| [H-318](packing/campaign/hypotheses/H-318-bb-header-preflight.md) | confirmed | Original-cell joint-certificate header preflight | 1 | Both compact headers pass; 4.170 s wall, no FULL tree verification or admission |
+| [H-319](packing/campaign/hypotheses/H-319-c2-full-replay.md) | running | Unsampled C2 joint-certificate replay | 1 | Prospective bounded native acquisition and unsampled FULL replay; no admission verdict |
 
 ### Confirmed
 
@@ -6249,9 +6251,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 239 rounds registered in `series-000`.
+There are 240 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5819.2 wall-minutes.
+They record 2512.1 agent-minutes and 5819.3 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6531,7 +6533,8 @@ archive beside it.
 | [exp-307](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-307-h-315-owned-core-guarded-clause.md) | 17 | target | H-315 | Same-core guarded clauses with exact old-box and endpoint checks | Fresh 64 nonnegative-slack minima pass; historical shorthand sign error retained | accepted |
 | [exp-308](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-308-h-316-n11-corner-cardinality.md) | 17 | target | H-316 | Correlated four-corner n11 cardinality across all95 states | Complete fresh method miss;95 survivors,0 obstructions; endpoint retained | rejected |
 | [exp-309](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-309-h-317-subpattern-relevance.md) | 17 | target | H-317 | Exact named-D4 subset projection of C1/C2 on the accepted current residue | Fresh-matched potential union 21 orbits/148 states; both candidates match zero distance-two orbits. Metadata only, no proof or admission | accepted |
-| [exp-310](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-310-h-318-bb-header-preflight.md) | 17 | target | H-318 | C2-first then C1 original-cell compact-header checks | Prospective; no header, FULL tree or admission verdict | in-progress |
+| [exp-310](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-310-h-318-bb-header-preflight.md) | 17 | target | H-318 | C2-first then C1 original-cell compact-header checks | Both HEADER_ONLY_PASS; no FULL tree verification or admission | accepted |
+| [exp-311](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md) | 17 | target | H-319 | Native C2 acquisition and unsampled FULL replay | Prospective; no FULL or admission verdict | in-progress |
 
 ### Cost and provenance
 
@@ -6775,11 +6778,12 @@ archive beside it.
 | exp-307 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 10.257994s | — | criterion | Source-defined finite pass; no added loss or global admission |
 | exp-308 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 89.487275s | — | criterion | Complete fresh method miss; all95 survive; no census or bound change |
 | exp-309 | Construction30s/fresh30s inside60s;4GiB sampled per live process | 3.0044 s | — | criterion | `d91cc22f`; complete metadata projection with matching fresh payload; no admission or speedup claim |
-| exp-310 | Two30s header phases inside60s;4GiB sampled per live process | — | — | — | Prospective; no actual target timing |
+| exp-310 | Two30s header phases inside60s;4GiB sampled per live process | 4.170 s | — | criterion | Both HEADER_ONLY_PASS; no FULL or admission |
+| exp-311 | Bounded native acquisition and unsampled FULL replay | — | — | — | Prospective; no measured target effort |
 
-### What the 239 rounds jointly establish
+### What the 240 rounds jointly establish
 
-The 239 rounds use 2512.1 agent-minutes and 5819.2 wall-minutes under the campaign’s
+The 240 rounds use 2512.1 agent-minutes and 5819.3 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

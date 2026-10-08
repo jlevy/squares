@@ -955,7 +955,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 239 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 240 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -1212,7 +1212,8 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | H-315 | confirmed | proof | Same-Core Guarded Clause Transport |  | 1 |  | 10s wall |
 | H-316 | refuted | proof | Correlated Four-Corner n11 Cardinality |  | 1 |  | 1.5m wall |
 | H-317 | confirmed | proof | SciPy-free Joint-Certificate Candidate Relevance |  | 1 |  | 3s wall |
-| H-318 | running | proof | Original-Cell Joint-Certificate Header Preflight |  | 1 |  |  |
+| H-318 | confirmed | proof | Original-Cell Joint-Certificate Header Preflight |  | 1 |  | 4s wall |
+| H-319 | running | proof | Unsampled C2 Joint-Certificate Replay |  | 1 |  |  |
 
 ## Needs review — held for a human, not decided
 
@@ -1384,7 +1385,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-283 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Original registered trial refused after8.43568754s supervised wall, rc1 and normal cleanup. Frozen producer reports centered same-object full stall premise differs before conditional initialization, initial intersection, updates, child creation or fresh replay. No mathematical criterion was evaluated. Preserve original receipts and repair the operational accepted-receipt schema join before a separately registered replication; all scientific parameters and budgets remain frozen. |
 | exp-284 | series-000 | 17 | Sol coordinator owns registration/source freeze, supervised launch and disposition in Session184. | H-293 | Actual replication ended INCOMPLETE after619.36475s supervised wall, rc1/normal cleanup. Production returned a complete16-update nonclosed candidate with zero splits:310.09119s subprocess wall,292.01744s internal producer wall and288.36272s producer CPU. Fresh full conditional replay hit its300s source deadline (conditional gate wall ceiling); fresh subprocess wall308.84117s. No accepted conditional child, mathematical criterion-miss, exclusion or admission. Preserve native child and all receipts; do not retry the unchanged long replay or use its unaccepted geometry as a finite-case premise. |
 
-### accepted (89)
+### accepted (90)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -1477,6 +1478,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 | exp-302 | series-000 | 17 | Coordinator registers/freezes/supervises/disposes inSession186; think-lyh9. | H-310 | Both closed cases remain open. After union across cases, owner6 (label3) is restricted from [0,1] to [1/16,19/32], additional half-angle parameter loss15/32. Owner18 retains prior11/32 loss. This is a necessary implication throughout the wider h1/512 regional guard; no guard contradiction, ordinary admission, census change or global optimality proof. |
 | exp-307 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-315 | The frozen source/documented nonnegative-slack test passes:16 degree-three joint inequalities and64 exact corner/univariate minima retain the old h1/512 box, with positive-area SAME Q0 and both axis spans>1 proving disjointness from the inherited axis-aligned endpoint family. Accepted302 foreign restrictions transport under the explicitly source-audited SAME-Q0 hand implication. No added parameter loss, guard-volume/widening, complement exclusion, global capture, ordinary admission or independently formalized transport follows. The historical prospective shorthand says quadratic minima<=0. That sign direction is a documentation error: the pretarget frozen source and hand contract use MIN of nonnegative clearance slack>=0. Equivalently MAX of its negative<=0, not MIN of the negative<=0. The historical criterion text is preserved. Acceptance here is against that already-frozen source/contract, not the incorrect literal shorthand; no source, threshold or outcome was retuned and no target rerun occurred. |
 | exp-309 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-317 | Metadata relevance criterion met: C1 potentially matches 14 orbits/104 states and C2 13/84; overlap6/40, union21/148. Both match zero of95 distance-two orbits/744 states. This selects a candidate for further header/FULL verification only: no original-cell geometry, full tree, ordinary exclusion or admission was proved. Fresh full payload and source custody match. The earlier60s SciPy import interruption provides no completed timing control or speedup ratio. |
+| exp-310 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-318 | Both C1/C2 HEADER_ONLY_PASS with complete original-cell halfplane enclosure and exact compressed/canonical identities; source2ada and10 importedbyte observations unchanged. C2 phase3.508s/C1 .343s, outer4.170s normalcleanup. Header checks join original physical cells/U, all21 pairs and complete shifted closed-angle covers. This selects ONE C2 FULL replay; no tree/trig/FULL or ordinary exclusion/admission was checked. |
 
 ### baseline (12)
 
@@ -1499,7 +1501,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-310 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-318 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
+| exp-311 | series-000 | 17 | Session186 coordinator; think-nvkf. | H-319 | Prospective beforetarget; source author/peer/static/math and mechanical readiness complete. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -1550,7 +1552,7 @@ Status: **active**. Produce substantive exact mathematical results toward n17 op
 
 ## Effort
 
-239 rounds, 2512.1 agent-minutes, 5819.2 wall-minutes.
+240 rounds, 2512.1 agent-minutes, 5819.3 wall-minutes.
 
 These totals exclude 4 historical rounds with unrecorded timing; their cost is unknown, not zero.
 

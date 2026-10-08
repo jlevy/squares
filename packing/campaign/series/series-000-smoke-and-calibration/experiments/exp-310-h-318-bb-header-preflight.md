@@ -48,19 +48,27 @@ experiment:
       perliveprocess;1MiBcompressed/10MiBdecoded/4096usedrationalbits/1MiBoutput percase; externalTMP
       snapshot; no tree/trig assets.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight
-  results: []
+  results:
+  - shape: determination
+    question: Do both retained compact manifests pass the hardened complete-original-cell header check?
+    outcome: criterion_met
+    checked_by: Two distinct actual HEADER_ONLY phases, 10 source-byte observations; sole Astra actual
+      source/receipt mathematical review CLEAR.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: 'Primary BOTH exact retained C1/C2 manifests complete HEADER_ONLY_PASS with complete
       original-cell halfplane enclosure, all21 pair roster, complete shifted closed-angle chart and exact
       input custody. This is header-only computational scope, NEVER FULL/tree/trig verification or ordinary
       admission. Prospectively C2 is evaluated first: its individual HEADER_ONLY_PASS selects ONE bounded
       FULL C2 replay even if separate C1 subsequently refuses; C2 refusal/resource exhaustion stops C2
       acquisition/replay without unchanged retry. No actual header has yet been evaluated.'
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T04:20:00Z'
-    host: macOS arm64
+    reason: Both C1/C2 HEADER_ONLY_PASS with complete original-cell halfplane enclosure and exact compressed/canonical
+      identities; source2ada and10 importedbyte observations unchanged. C2 phase3.508s/C1 .343s, outer4.170s
+      normalcleanup. Header checks join original physical cells/U, all21 pairs and complete shifted closed-angle
+      covers. This selects ONE C2 FULL replay; no tree/trig/FULL or ordinary exclusion/admission was checked.
+  effort:
+    wall_seconds: 4.170011084002908
+    stopped_by: criterion
 ---
 # Original-Cell Joint-Certificate Header Preflight
 

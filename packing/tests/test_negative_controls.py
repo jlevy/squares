@@ -1169,20 +1169,16 @@ def test_session186_historical_prune_has_no_registered_control_consumer(name: st
 
 
 @pytest.mark.parametrize(
-    ("result_root", "name"),
+    "result_root",
     [
-        (root, name)
-        for root in (
-            "exp-297-regional-row-coverage",
-            "exp-300-one-round-direct-regional-propagation",
-            "exp-301-one-round-fixed-core-regional-propagation",
-            "exp-307-owned-core-guarded-clause",
-            "exp-308-n11-corner-cardinality",
-        )
-        for name in ("certificate.json", "replay.json")
-    ]
-    + [("exp-236-n17-contact-chart/run-001", "result.json")],
+        "exp-297-regional-row-coverage",
+        "exp-300-one-round-direct-regional-propagation",
+        "exp-301-one-round-fixed-core-regional-propagation",
+        "exp-307-owned-core-guarded-clause",
+        "exp-308-n11-corner-cardinality",
+    ],
 )
+@pytest.mark.parametrize("name", ["certificate.json", "replay.json"])
 def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
     result_root: str, name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -1214,6 +1210,54 @@ def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
     assert not controls.in_pruned_roots(sibling, frozenset({receipt}))
     assert controls.snapshot_source_bytes() == sum(
         path.stat().st_size for path in (document, receipt, sibling, descriptor)
+    )
+
+
+@pytest.mark.parametrize(
+    "relative",
+    [
+        "campaign/series/series-000-smoke-and-calibration/results/exp-005-basin-entry.jsonl",
+        (
+            "campaign/series/series-000-smoke-and-calibration/results/"
+            "exp-126-h099-complete-graph-candidate/packet.json"
+        ),
+        "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
+        "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
+    ],
+)
+def test_session186_diagnostic_output_prune_preserves_declared_copyback(
+    relative: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = ROOT / relative
+    assert source in PRUNE
+    assert source.is_file()
+    if "session-105-validation" in relative:
+        identity = source.with_name(source.stem + "-source.json")
+        assert identity.is_file()
+        assert identity not in PRUNE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for control in specification["controls"]:
+        assert (ROOT / control["file"]).resolve() != source
+        assert relative not in control["run"]
+    packing = tmp_path / "packing"
+    receipt = packing / relative
+    receipt.parent.mkdir(parents=True)
+    receipt.write_text('{"diagnostic":true}\n')
+    sibling = receipt.with_name(receipt.name + ".other")
+    sibling.write_text("retained sibling\n")
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[declared input](packing/{relative})\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (receipt,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [receipt]
+    assert not controls.in_pruned_roots(sibling, frozenset({receipt}))
+    assert controls.snapshot_source_bytes() == sum(
+        path.stat().st_size for path in (document, receipt, sibling)
     )
 
 

@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/fetch_external_release_inventory.py
+    kind: download
+    boundary: An external release acquisition inventory is byte-bound before and after inbound asset fetching; published asset sizes and SHA values are verified by the existing generic atomic downloader, with no source or commit pins.
   - path: packing/devtools/check_n17_bb_header.py
     kind: generated-artifact
     boundary: The retained compact BB manifest is bound to its stated compressed bytes and canonical object identity before standing header checks; no source or commit digest controls acceptance.

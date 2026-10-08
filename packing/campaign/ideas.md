@@ -1162,6 +1162,19 @@ wider centre cases; additional progress is measured from the union of surviving 
   exhaustion stops C2 acquisition/replay without unchanged retry.
   No actual header has yet been evaluated.
 
+- **H-319 — Unsampled C2 Joint-Certificate Replay.** ONE complete unsampled FULL C2
+  standing-verifier PASS, modefull, zero failures, all indexed nodes and trigonometric
+  objects verified, closed complete tree, exact canonical
+  manifest505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57 and original
+  default UNIQUE_24cells. Compose ONLY with accepted310 C2HEADER_ONLYPASS and complete
+  original-cell halfplane enclosure on identical compressed
+  manifestd9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d. Published
+  input acquisition must validate ALL161 roster objects112191343compressedB before
+  replay. FULLPASS permits subsequent separately reviewed ordinary clause admission and
+  fresh census; neither acquisition/header/sample/partial nor metadata148union can admit
+  anything. C2 potential13orbits84states/ZERO95tail; no endpointcapture/globaloptimality
+  claim. Stop unchanged on refusal/resource/failure.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

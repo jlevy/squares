@@ -23,8 +23,10 @@ a certificate, so it has no mathematical disposition.
 Exp308 completed with all 95 assignments surviving the four-corner cardinality
 relaxation. Exp309 found potential C1/C2 certificate coverage of 21 current orbits in
 union, with no matches in the 95 distance-two orbits or the endpoint assignment.
-The current priority is an exact header gate and one bounded C2 FULL replay, whose
-potential payoff is thirteen ordinary orbits.
+Exp310 passed the exact header gate for both manifests; its tree and trigonometric proof
+checks remain unperformed.
+The current priority is one bounded C2 FULL replay, whose potential payoff is thirteen
+ordinary orbits, alongside the selected saved-pose distance diagnostic below.
 No contributed certificate has yet been admitted by these metadata results.
 The original kickoff ranking below is retained as the decision record; later result
 sections record its updates.
@@ -861,6 +863,174 @@ search, but it does not reach the 95 critical orbits or establish endpoint captu
 The forty-minute replay allocation is a ceiling; the contributor’s reported 2,220
 seconds does not predict this host’s runtime.
 A header refusal stops this route before bulk proof work.
+
+Exp310 subsequently completed both header checks in 4.170 supervised seconds.
+Both receipts have `HEADER_ONLY_PASS`, one header check and
+`complete_original_cell_halfplane_enclosure_checked=true`. They bind the declared
+compressed and canonical manifest identities to the original physical cell source, all
+21 square pairs, root boxes enclosing the whole cells and closed shifted angle intervals
+wider than a quarter-turn.
+Every physical square orientation has an equivalent representative in such an interval.
+The additional enclosure check verifies that every original cell vertex lies in every
+declared inward cell halfplane; local turning signs and a matching vertex set alone
+would not establish this for a wrongly ordered polygon.
+The primary receipts are `c1-header.json` and `c2-header.json` under
+`packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/`.
+Only a subsequent unsampled FULL tree and trigonometric replay on the same manifest,
+complete objects and cell source can complete this certificate composition.
+The header results themselves admit no exclusion.
+
+### Selected Saved-Pose Discriminator
+
+This is a prospective two-stage contract, selected after the complete exp308 miss.
+No saved pair distances or orientation predicates were evaluated in selecting it.
+It takes one simultaneous set of seventeen saved poses per assignment, rather than
+allowing a square to use a different centre for each neighbour.
+The previously proposed pair-pattern projection test remains unimplemented.
+
+Stage one freezes the exact ninety-five exp308 pattern assignments and the rational
+$(x,y,h)$ vertex already saved for each selected cell-pattern class.
+It tries no alternate class, vertex, centre or half-extent.
+Three generated input roles identify the accepted corner descriptor, certificate and
+fresh replay. Their complete ninety-five-state classification and matching mathematical
+payload are inherited premises.
+One `corner.intake` reconstructs the original twenty-four polygons and current named
+roster; it does not repeat the polytope enumeration or capacity dynamic program.
+For every referenced pose, the new consumer reconstructs `pattern_rows` from the
+original polygon and class, checks all its linear inequalities, and checks $h\ge1/2$ and
+$2h^2\le1$. It independently recomputes the four guaranteed counts and requires each to
+be at most ten. In particular, it does not rely on `verify_state` to establish pose
+feasibility: that function joins feasible-class flags and counts, not the saved pose
+inequalities.
+
+For each state, check all $\binom{17}{2}=136$ rational squared centre distances.
+If one is strictly below one, the two open radius-$1/2$ incircles intersect.
+No unit-square orientations at those fixed centres can avoid interior overlap.
+Retain the first such pair in catalogue-index order, its exact squared distance and the
+number of failing pairs; account for all 136 pairs even after finding a failure.
+Equality at one is compatible with the necessary condition.
+A state without a failing pair is an incircle-compatible candidate, with no assertion
+that its squares can be oriented consistently.
+
+A complete fresh reconstruction of all $95\cdot136=12,920$ tests decides this
+diagnostic. The stage-one candidate criterion is that at least one incircle-compatible
+assignment survives; complete accounting and fresh verification are separate receipt
+fields. If every state has a failing pair, retire these fixed pose choices and stop
+before implementing algebraic orientations.
+This is a complete failure of the saved-pose recipe, not an exclusion of any whole cell
+assignment or membership pattern.
+The known endpoint’s saved capacity witness need not itself be a physical packing and is
+not a required positive distance control.
+The endpoint’s capacity-relaxation control remains an inherited exp308 premise; this
+consumer performs no fresh physical endpoint-pose replay.
+
+The proposed resource bounds are 60 seconds for each of construction and fresh
+reconstruction, one worker, the existing sampled 4 GiB per-live-process limit, 10 MiB
+for the descriptor, 64 MiB for each accepted receipt, 1 MiB for the output and 4,096
+bits for used rational inputs and intermediate values.
+At most 216 distinct poses require at most 42 linear inequalities each, followed by the
+12,920 squared-distance tests.
+These are finite work bounds, not a runtime forecast.
+An implementation and source-review allocation of 20–30 minutes does not estimate the
+time to resolve the packing problem.
+The fresh process reconstructs the same choices and predicates and checks all named
+input bytes again after computation.
+Malformed premises refuse; an unfinished bounded run is incomplete.
+
+Stage two is selected and preregistered only if stage one retains candidates.
+For a saved half-extent $h$, put $A=1/2-h^2\ge0$. Modulo quarter-turn, its two possible
+square orientations have
+
+$$
+(\cos\theta,\sin\theta)=(h+\sqrt A,h-\sqrt A)
+\quad\text{or}\quad(h-\sqrt A,h+\sqrt A).
+$$
+
+The coordinates are nonnegative, their squared sum is one, and their sum is $2h$. The
+two choices may coincide as physical square orientations at a boundary.
+Assign one Boolean to each of the seventeen squares, keeping its saved centre and
+half-extent fixed across all pairs.
+For each pair and each of its four Boolean combinations, test the eight signed owner
+axes. An axis separates the pair exactly when all four opposite-square corner slacks are
+nonnegative:
+
+$$
+n_i\cdot(c_j-c_i+R_jv)-\frac12\ge0,
+\qquad v\in\{(\pm1/2,\pm1/2)\}.
+$$
+
+Each slack has the form $a+b\sqrt A+c\sqrt B+d\sqrt{AB}$ with rational coefficients.
+Its sign can be decided without floating point or root approximation.
+Write it as $x+y\sqrt B$, with $x,y\in\mathbb Q(\sqrt A)$. If the summands have opposite
+signs, compare $x^2-By^2$ in that quadratic field; otherwise their signs determine the
+result directly. Quadratic-field signs reduce, after their own sign cases, to a rational
+comparison $p^2-q^2A$. Zero radicals, zero summands and exact equality are separate
+cases. This argument compares real values and does not assume that the two radicals
+generate a degree-four extension.
+
+An overlapping Boolean combination gives a two-variable forbidden-choice clause.
+A satisfying assignment is checked afresh against all 136 square-pair predicates and the
+individual containment constraints.
+It would prove a physical unit-square packing in $C(U)$ in the named assignment.
+Since $U$ exceeds the proposed endpoint side, that result would not be a strict-smaller
+counterexample to endpoint optimality.
+An unsatisfiable implication cycle proves only failure of these fixed centres and
+half-extents. For all ninety-five states, the exhaustive bound is 1,653,760 exact slack
+signs; a prospective implementation can cap them at two million, retain the 4,096-bit
+bound, and use separately declared 120-second construction and replay ceilings.
+None of this second stage is authorized merely by writing its contract.
+
+For a later domain-wide discriminator, separating-axis geometry also gives a direct
+relative-orientation constraint.
+This is a prospective sole-Astra hand implication, without an evaluated domain bound.
+If two interior-disjoint unit squares have centre distance $d$ and relative angle
+$\phi$, whichever owner axis separates them satisfies
+
+$$
+d\ge\frac{1+|\cos\phi|+|\sin\phi|}{2}.
+$$
+
+The owner’s support is $1/2$, the other square’s support is $(|\cos\phi|+|\sin\phi|)/2$,
+and the projected centre displacement is at most $d$. Consequently a certified upper
+bound $d\le D$ over the complete pair of centre domains forces $|\sin2\phi|\le4D(D-1)$.
+For $1\le D<(1+\sqrt2)/2$, this restricts relative orientation.
+In the first-quadrant unit-circle charts, put $C=a_i a_j+b_i b_j\ge0$ and
+$S=a_i b_j-b_i a_j$. The unsquared implication is the pair of quadratic inequalities
+
+$$
+C+S\le2D-1,\qquad C-S\le2D-1.
+$$
+
+Quarter-turn aliases at the chart boundaries are retained.
+A future consumer would need an upper bound for every possible centre pair in the
+declared domains, not just the saved exp308 centres, and a complete orientation
+feasibility argument after adding these inequalities.
+If no tested domain pair has an informative bound, stop this projection.
+It is a consequence of full pair SAT, so it gives no dominance claim over an existing
+checker that already retains those constraints.
+
+The rational centre projection for this future test needs no three-dimensional vertex
+enumeration. Let $d=U-H$ and keep the original closed cell polygon.
+The lower bounds on the shared half-extent are $1/2$, together with $x-d$ for horizontal
+class L or $H-x$ for class R, and the analogous vertical bounds.
+The upper bounds are $r,x,U-x,y,U-y$, together with $x-d,H-x$ for horizontal class B and
+the analogous bounds for vertical class B. Intersect the cell with every inequality
+saying that a lower bound is at most an upper bound.
+This is the exact projection of the rational linear polytope: all those inequalities
+hold exactly when the single shared interval of allowed $h$ is nonempty.
+There are at most fifteen additional halfplanes: the three cases have $3\cdot5$,
+$2\cdot7$ or $1\cdot9$ lower/upper comparisons.
+Retain closed segments and points as well as polygons.
+Omitting $2h^2\le1$ makes this an explicit outer domain for physical poses.
+A uniform squared-distance upper bound then requires all pairs of projected vertices;
+convexity makes that finite maximum exact for these outer polygons.
+A single sufficiently distant vertex pair can establish that this particular outer
+domain has no informative uniform upper bound, but cannot establish a physical packing.
+Conversely, excluding every centre and orientation for one saved class assignment still
+does not exclude its seventeen-cell state.
+An ordinary exclusion needs a complete cover of all physical class choices and a checked
+constraint-search certificate, or an unconditioned whole-cell proof.
+The four-count dynamic program alone forgets the choices needed by general pair clauses.
 
 ### A Planar Active-Basis Refinement of Normalization
 
