@@ -3,17 +3,21 @@ type: is
 id: is-01m4e1ystmf4jz09bbbmykwqrx
 title: Summarize current PRs and verified n17 progress after Session186 and PR410 merge
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-08T15:26:22.547Z
-updated_at: 2026-10-08T15:31:33.758Z
+updated_at: 2026-10-08T15:36:25.315Z
 started_at: 2026-10-08T15:26:54.929Z
+closed_at: 2026-10-08T15:36:25.314Z
+close_reason: "Completed live PR/proof-status review with Astra and two Sol agents: n17 bracket unchanged; merged-main versus open-branch census and new contributor reports distinguished. All379 PRs audited for n-17 labeling;65 relevant tagged,53 added,12 existing, full live readback0missing and0other labels lost. No source/scientific changes."
+resolution: null
+duplicate_of: null
 ---
 Read-only live GitHub PR and issue inventory with Astra mathematical status and two Sol inventories. Compare merged main, open research branches and external reports against Session186/PR410 closeout; answer whether the verified n17 bound changed. No builds, replay, source edits or scientific promotion. Deliver ground-up user summary with links and dispositions.
 
