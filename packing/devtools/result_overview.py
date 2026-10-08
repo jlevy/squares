@@ -521,6 +521,41 @@ def case_panel(n: int, overview: Overview, *, label: bool) -> str:
     )
 
 
+def _case_table(rows: Sequence[tuple[int, Sequence[str]]]) -> str:
+    """Native cells share only consecutive, exactly equal bounds or status markup.
+
+    Case identifiers and record links always have their own cell. Row spans retain all
+    six logical cells of each case without repeating identical badges and bounds."""
+    spans = [[1] * 6 for _ in rows]
+    for column in range(1, 5):
+        start = 0
+        while start < len(rows):
+            end = start + 1
+            while end < len(rows) and rows[end][1][column] == rows[start][1][column]:
+                end += 1
+            spans[start][column] = end - start
+            for index in range(start + 1, end):
+                spans[index][column] = 0
+            start = end
+    body = []
+    for (n, cells), counts in zip(rows, spans, strict=True):
+        rendered = []
+        for column, (content, count) in enumerate(zip(cells, counts, strict=True)):
+            if not count:
+                continue
+            rowspan = f' rowspan="{count}"' if count > 1 else ""
+            name = {1: "lower", 2: "upper", 5: "records"}.get(column)
+            classes = f' class="{name}"' if name else ""
+            rendered.append(f"<td{classes}{rowspan}>{content}</td>")
+        body.append(f'<tr data-overview-case="{n}">{"".join(rendered)}</tr>')
+    headings = ("n", "Proved lower", "Best known", "Gap", "Status", "Records")
+    head = "".join(f'<th scope="col">{heading}</th>' for heading in headings)
+    return (
+        '<table class="site-result-cases" aria-label="The cases of this result">'
+        f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table>"
+    )
+
+
 def case_list(cases: Sequence[int], overview: Overview) -> str:
     """A broad result's cases, one compact row each: the film's two bounds and the gap,
     the case's status, and its record on this site, its row in the frontier atlas and
@@ -544,42 +579,28 @@ def case_list(cases: Sequence[int], overview: Overview) -> str:
             else ""
         )
         rows.append(
-            _grid_row(
+            (
+                n,
                 [
-                    _cell(f'<a href="{case_url(n)}">{n}</a>', classes="num"),
-                    _cell(f'<span class="is-lower">{_esc(lower)}</span>{star}', classes="num"),
-                    _cell(
-                        f'<span class="is-upper">{_esc(fact["upper"])}</span>', classes="num"
-                    ),
-                    _cell(_esc(gap), classes="num"),
-                    _cell(case_status_chip(status) + case_badges(n)),
-                    _cell(
+                    f'<a href="{case_url(n)}">{n}</a>',
+                    _esc(lower) + star,
+                    _esc(fact["upper"]),
+                    _esc(gap),
+                    case_status_chip(status) + case_badges(n),
+                    (
                         f'<a href="frontier.html#n-{n}">frontier</a> '
                         f'<a href="{_esc(repo_url(case_file(n)))}">'
-                        f"{_esc(case_file(n).name)}</a>",
-                        classes="site-result-case-records",
+                        f"{_esc(case_file(n).name)}</a>"
                     ),
                 ],
-                f' data-overview-case="{n}"',
             )
         )
-    heads = _grid_row(
-        [
-            _cell("n", "columnheader", "num"),
-            _cell("Proved lower", "columnheader", "num"),
-            _cell("Best known", "columnheader", "num"),
-            _cell("Gap", "columnheader", "num"),
-            _cell("Status", "columnheader"),
-            _cell("Records", "columnheader"),
-        ]
-    )
     return (
         f'<p class="site-result-note">This result concerns {len(cases)} cases, too many '
         "to draw one by one. Each is listed with the film\u2019s bounds, the proved lower "
         "bound and the best known side, and links to its case record, where its packing "
         "and number line are drawn.</p>"
-        '<div class="site-result-case-list"><div class="site-result-cases" role="table" '
-        f'aria-label="The cases of this result">{heads}{"".join(rows)}</div></div>'
+        f'<div class="site-result-case-list">{_case_table(rows)}</div>'
     )
 
 
@@ -663,7 +684,7 @@ def case_section(result: Result, overview: Overview, cases: Sequence[int]) -> st
 
 
 def _link(url: str, label: str, title: str = "") -> str:
-    titled = f' title="{_esc(title)}"' if title else ""
+    titled = f' title="{_esc(title)}"' if title and title not in url else ""
     return f'<a href="{_esc(url)}"{titled}>{label}</a>'
 
 
@@ -779,11 +800,13 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
     shared = [n for n in scope(other) if n in wanted]
     on = ""
     if len(cases) > 1:
-        on = DOT + (
-            math_html("n = " + ", ".join(map(str, shared)))
-            if len(shared) <= CASES_NAMED
-            else f"{len(shared)} of these cases"
-        )
+        if len(shared) > CASES_NAMED:
+            on = DOT + f"{len(shared)} of these cases"
+        elif is_broad(cases):
+            label = "case " if len(shared) == 1 else "cases "
+            on = DOT + label + ", ".join(map(str, shared))
+        else:
+            on = DOT + math_html("n = " + ", ".join(map(str, shared)))
     current_mark, this = "", ""
     if other.id == current.id:
         current_mark = ' data-current=""'
