@@ -153,6 +153,22 @@ PRUNE = frozenset(
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # Session186 regional receipts are generated finite outputs, absent from
+        # registered mutation commands/targets and synthetic test inputs. Keep
+        # descriptors and sibling metadata; declared inline/frontier consumers
+        # still copy these exact files back. Primary receipts remain untouched.
+        SESSION184_RESULTS / "exp-297-regional-row-coverage/certificate.json",
+        SESSION184_RESULTS / "exp-297-regional-row-coverage/replay.json",
+        # Exp300's complete one-round receipts have no registered mutation/test
+        # consumer. Preserve descriptors and primary evidence; future declared
+        # inline/frontier consumers still rescue either exact file below.
+        SESSION184_RESULTS / "exp-300-one-round-direct-regional-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-300-one-round-direct-regional-propagation/replay.json",
+        # The same consumer audit applies to the completed fixed-core variant.
+        # Exact files only; its descriptor, metadata and future input copyback stay.
+        SESSION184_RESULTS
+        / "exp-301-one-round-fixed-core-regional-propagation/certificate.json",
+        SESSION184_RESULTS / "exp-301-one-round-fixed-core-regional-propagation/replay.json",
         # Session186 main-refresh measurement: these five historical output roots
         # are absent from registered control targets/commands and test consumers.
         # Keep every inline/frontier-declared input through the existing copyback;
@@ -758,6 +774,9 @@ LINK_BACK = (
 # closeout naming `.github/PULL_REQUEST_TEMPLATE.md`, which only a link could bring
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
+    # The retained n13 family is an exact worker consumer asserted by the n32
+    # inventory contract; agenda-040's unrelated generated bulk stays pruned.
+    SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json",
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",

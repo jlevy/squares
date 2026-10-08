@@ -528,6 +528,37 @@ def test_individually_rescued_paths_reach_the_worker(
         assert landed.read_bytes() == source.read_bytes()
 
 
+def test_pruned_historical_family_copyback_keeps_bytes_and_omits_bulk(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The exact historical consumer survives a pruned agenda without its bulk."""
+    source = controls.SESSION184_RESULTS / "agenda-040/exp-214-n13-399-100-family.json"
+    assert source in COPY_SEPARATELY
+    packing = tmp_path / "source/packing"
+    agenda = packing / "campaign/results/agenda-040"
+    agenda.mkdir(parents=True)
+    family = agenda / source.name
+    family.write_bytes(source.read_bytes())
+    bulk = agenda / "unneeded-inventory.json"
+    bulk.write_text("unneeded generated output\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "REPO", packing.parent)
+    monkeypatch.setattr(controls, "PRUNE", frozenset({agenda}))
+    monkeypatch.setattr(controls, "DESCEND", frozenset(agenda.parents))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (family,))
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", ())
+    monkeypatch.setattr(controls, "LINK_BACK", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "snapshot_pruned_targets", list)
+    monkeypatch.setattr(controls, "linked_pruned_directories", list)
+    monkeypatch.setattr(controls, "index_tree", lambda _tree: None)
+    tree = tmp_path / "worker"
+    controls.clone_tree(tree)
+    landed = tree / family.relative_to(packing.parent)
+    assert landed.read_bytes() == family.read_bytes() == source.read_bytes()
+    assert not (tree / bulk.relative_to(packing.parent)).exists()
+
+
 def test_agenda_041_bulk_output_is_pruned_but_linked_receipts_survive(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
@@ -1100,6 +1131,49 @@ def test_session186_historical_prune_has_no_registered_control_consumer(name: st
         assert relative not in control["run"]
     # The selection is exact, including a file whose sibling shares its prefix.
     assert not controls.in_pruned_roots(path.with_name(name + "-other"), frozenset({path}))
+
+
+@pytest.mark.parametrize(
+    "result_root",
+    [
+        "exp-297-regional-row-coverage",
+        "exp-300-one-round-direct-regional-propagation",
+        "exp-301-one-round-fixed-core-regional-propagation",
+    ],
+)
+@pytest.mark.parametrize("name", ["certificate.json", "replay.json"])
+def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
+    result_root: str, name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = controls.SESSION184_RESULTS / result_root / name
+    assert source in PRUNE
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    for control in specification["controls"]:
+        assert (ROOT / control["file"]).resolve() != source
+        assert source.relative_to(ROOT).as_posix() not in control["run"]
+    packing = tmp_path / "packing"
+    output = packing / "results" / result_root
+    output.mkdir(parents=True)
+    receipt = output / name
+    receipt.write_text('{"exact":true}\n')
+    sibling = output / (name + ".other")
+    sibling.write_text("unique sibling evidence\n")
+    descriptor = output / "descriptor.json"
+    descriptor.write_text('{"premise":true}\n')
+    document = tmp_path / "SYNOPSIS.md"
+    document.write_text(f"[declared input](packing/results/{output.name}/{name})\n")
+    monkeypatch.setattr(controls, "ROOT", packing)
+    monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
+    monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
+    monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (receipt,))
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "root_files", lambda: ())
+    monkeypatch.setattr(controls, "result_pruned_targets", list)
+    assert controls.snapshot_pruned_targets() == [receipt]
+    assert not controls.in_pruned_roots(sibling, frozenset({receipt}))
+    assert controls.snapshot_source_bytes() == sum(
+        path.stat().st_size for path in (document, receipt, sibling, descriptor)
+    )
 
 
 def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> None:

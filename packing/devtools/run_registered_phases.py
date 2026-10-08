@@ -21,6 +21,7 @@ from typing import Any, TextIO, cast
 from sqpack import retained_json
 
 SCHEMA = "registered-phase-execution/v1"
+RECONCILIATION_SCHEMA = "registered-phase-supervision-reconciliation/v1"
 PLAN_LIMIT = 10 << 20
 PHASE_LIMIT = 64
 OUTPUT_LIMIT = 64 << 20
@@ -170,13 +171,195 @@ def execute(manifest: Path, output: Path) -> dict[str, Any]:
         return report
 
 
+def read_record(path: Path, limit: int) -> tuple[bytes, dict[str, Any]]:
+    with path.open("rb") as stream:
+        raw = stream.read(limit + 1)
+    require(len(raw) <= limit, "reconciliation input byte ceiling")
+
+    def floating(token: str) -> float:
+        value = float(token)
+        require(math.isfinite(value), "nonfinite reconciliation number")
+        return value
+
+    record = json.loads(
+        raw, object_pairs_hook=unique, parse_constant=nonfinite, parse_float=floating
+    )
+    require(type(record) is dict, "reconciliation input object required")
+    return raw, cast(dict[str, Any], record)
+
+
+def check_journal(
+    journal: dict[str, Any], phases: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    require(journal.get("schema") == SCHEMA, "phase journal schema differs")
+    require(
+        journal.get("scientific_result_interpreted") is False,
+        "journal must not interpret science",
+    )
+    entries = journal.get("phases")
+    require(type(entries) is list and len(entries) <= len(phases), "journal phase prefix")
+    entries = cast(list[dict[str, Any]], entries)
+    for index, entry in enumerate(entries):
+        require(type(entry) is dict, "journal phase object required")
+        require(
+            entry.get("name") == phases[index]["name"]
+            and entry.get("argv") == phases[index]["argv"],
+            "journal phase identity/order differs",
+        )
+        status, code, wall = (
+            entry.get("status"),
+            entry.get("returncode"),
+            entry.get("wall_seconds"),
+        )
+        require(type(entry.get("started_at")) is str, "phase start required")
+        if status == "running":
+            require(
+                index == len(entries) - 1 and code is None and wall is None,
+                "running phase must be the unresolved tail",
+            )
+        else:
+            require(
+                type(wall) in (int, float) and cast(float, wall) >= 0,
+                "terminal phase wall required",
+            )
+            require(type(entry.get("ended_at")) is str, "phase end required")
+            require(
+                (status == "completed" and type(code) is int and code == 0)
+                or (status == "failed" and type(code) is int and code != 0)
+                or (status in ("launch_failed", "interrupted") and code is None),
+                "terminal phase status/returncode differs",
+            )
+            require(
+                status == "completed" or index == len(entries) - 1,
+                "failed phase cannot have successors",
+            )
+    require(
+        journal.get("unstarted_phase_names") == [p["name"] for p in phases[len(entries) :]],
+        "unstarted phase roster differs",
+    )
+    require(
+        journal.get("status") in ("running", "completed", "failed", "interrupted", "refused"),
+        "unsupported journal status",
+    )
+    return entries
+
+
+def reconcile(
+    manifest: Path, journal: Path, supervision: Path, output: Path, execution_root: Path
+) -> dict[str, Any]:
+    """Derive terminal execution status without changing any original evidence.
+
+    The supervisor establishes owned-group termination, not a child's missing
+    exit code or a scientific verdict. A stale running entry remains unresolved.
+    """
+    paths = {"manifest": manifest, "journal": journal, "supervision": supervision}
+    require(len({p.resolve() for p in paths.values()}) == 3, "distinct inputs required")
+    require(
+        output.resolve() not in {p.resolve() for p in paths.values()}, "output aliases input"
+    )
+    raw, phases = load_plan(manifest)
+    journal_raw, observed = read_record(journal, OUTPUT_LIMIT)
+    supervisor_raw, guard = read_record(supervision, PLAN_LIMIT)
+    require(
+        observed.get("manifest_sha256") == hashlib.sha256(raw).hexdigest(),
+        "journal manifest byte identity differs",
+    )
+
+    def resolved(value: str) -> Path:
+        path = Path(value)
+        return (path if path.is_absolute() else execution_root / path).resolve()
+
+    require(
+        type(observed.get("manifest")) is str
+        and resolved(observed["manifest"]) == manifest.resolve(),
+        "journal manifest path differs",
+    )
+    entries = check_journal(observed, phases)
+    argv = guard.get("argv")
+    require(
+        type(argv) is list
+        and len(argv) == 7
+        and all(type(token) is str for token in argv)
+        and bool(argv[0])
+        and argv[1:3] == ["-m", "devtools.run_registered_phases"]
+        and set(argv[3::2]) == {"--manifest", "--output"},
+        "supervisor command is not this phase runner",
+    )
+    argv = cast(list[str], argv)
+    flags = dict(zip(argv[3::2], argv[4::2], strict=True))
+    require(
+        resolved(flags["--manifest"]) == manifest.resolve()
+        and resolved(flags["--output"]) == journal.resolve(),
+        "supervisor runner paths differ",
+    )
+    require(
+        guard.get("schema") == "posix-bounded-command-supervision/v1"
+        and guard.get("status") in ("COMPLETED", "INCOMPLETE")
+        and guard.get("cleanup_complete") is True
+        and type(guard.get("returncode")) is int
+        and type(guard.get("pid")) is int
+        and guard["pid"] > 0
+        and type(guard.get("owned_pgid")) is int
+        and guard["pid"] == guard["owned_pgid"],
+        "terminal owned-group cleanup evidence required",
+    )
+    complete = (
+        observed["status"] == "completed"
+        and len(entries) == len(phases)
+        and all(p["status"] == "completed" for p in entries)
+    )
+    if guard["status"] == "COMPLETED" and guard["returncode"] == 0:
+        require(complete, "successful supervisor conflicts with incomplete journal")
+        status = "completed"
+    else:
+        status = "incomplete" if guard["status"] == "INCOMPLETE" else "failed"
+    derived = copy.deepcopy(entries)
+    for phase in derived:
+        if phase["status"] == "running":
+            phase["status"] = "interrupted_by_supervisor"
+    report = {
+        "schema": RECONCILIATION_SCHEMA,
+        "status": status,
+        "reconciled_at": utc_now(),
+        "inputs": {
+            name: {"path": str(paths[name]), "sha256": hashlib.sha256(data).hexdigest()}
+            for name, data in zip(paths, (raw, journal_raw, supervisor_raw), strict=True)
+        },
+        "original_journal_status": observed["status"],
+        "phases": derived,
+        "unstarted_phase_names": observed["unstarted_phase_names"],
+        "supervisor": guard,
+        "scientific_result_interpreted": False,
+        "missing_child_returncodes_inferred": False,
+        "raw_evidence_modified": False,
+    }
+    for path, data in zip(paths.values(), (raw, journal_raw, supervisor_raw), strict=True):
+        with path.open("rb") as stream:
+            require(stream.read(len(data) + 1) == data, "reconciliation input bytes changed")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("x", encoding="utf-8") as stream:
+        write_report(stream, report)
+    return report
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--journal", type=Path)
+    parser.add_argument("--supervision", type=Path)
+    parser.add_argument("--execution-root", type=Path, default=Path.cwd())
     args = parser.parse_args(argv)
+    if (args.journal is None) != (args.supervision is None):
+        parser.error("report-only reconciliation requires both --journal and --supervision")
     try:
-        report = execute(args.manifest, args.output)
+        report = (
+            execute(args.manifest, args.output)
+            if args.journal is None
+            else reconcile(
+                args.manifest, args.journal, args.supervision, args.output, args.execution_root
+            )
+        )
     except (OSError, ValueError, TypeError) as exc:
         print(
             retained_json.dumps({"schema": SCHEMA, "status": "refused", "error": str(exc)}),

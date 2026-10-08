@@ -25,6 +25,24 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/run_registered_phases.py
+    kind: generated-artifact
+    boundary: The generated phase journal is joined to its runtime execution manifest bytes before deriving a new supervision reconciliation receipt; no Git source or commit digest decides acceptance.
+  - path: packing/devtools/check_n17_global_contact_budget.py
+    kind: generated-artifact
+    boundary: The saved generated scalar certificate binds its descriptor bytes during fresh exact arithmetic reconstruction; this runtime artifact custody comparison does not pin Git source or commits.
+  - path: packing/devtools/check_n17_one_round_owned_domain_propagation.py
+    kind: generated-artifact
+    boundary: Accepted generated collective, regional and uniform-transfer receipts and native parent bytes bind inherited finite premises before and after one-round reconstruction; no Git source checksum decides acceptance.
+  - path: packing/devtools/check_n17_strict_core_regional_transfer.py
+    kind: generated-artifact
+    boundary: Accepted generated collective descriptor, certificate and replay bytes remain fixed across fresh finite uniform-core transfer; these runtime proof artifacts are not Git source integrity pins.
+  - path: packing/devtools/profile_n17_coverage_candidate.py
+    kind: generated-artifact
+    boundary: Generated accepted-control receipt bytes, replay mathematical payload identities and native input hashes establish matched runtime measurement custody and equivalence, without binding verification to source or commit digests.
+  - path: packing/devtools/check_n17_regional_row_coverage.py
+    kind: generated-artifact
+    boundary: Accepted generated collective certificate/replay and guard descriptor bytes bind runtime regional premises before and after complete fresh reconstruction; these three custody comparisons do not pin Git source or commits.
   - path: packing/devtools/check_n17_collective_row_coverage.py
     kind: generated-artifact
     boundary: Accepted generated exp293 finite point geometry and exp295 route-selection receipts are byte-bound runtime premises; the new checker independently reconstructs the complete collective row payload, without source checksum acceptance.
