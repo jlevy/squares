@@ -388,8 +388,6 @@ def test_frontier_transcription_diverges_nowhere_below_the_case_maximum() -> Non
     catalogue = _record_catalogue()
     source_key = _kingbird_source_key()
 
-    catalogue = _record_catalogue()
-    source_key = _kingbird_source_key()
     errors, compared, facts = catalogue_transcription_errors(
         cases,
         catalogue,
