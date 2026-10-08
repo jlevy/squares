@@ -70,8 +70,9 @@ properties:
                 width: {const: 2400}
                 height: {const: 1256}
       # The poster: square-bound rows start at (k-1)**2 + 1 in the leftmost column. Eighteen
-      # rows need thirty-five columns at the figure's unchanged card scale, plus a
-      # 79-unit half-drawing-width break before grids following an irregular prefix. One
+      # logical rows contain up to thirty-five cards. Splitting the final four grid
+      # suffixes creates twenty-two physical lines in a twenty-seven-column envelope,
+      # with 79 units of extra separation between non-grid and grid segments. One
       # raster and no link-preview crop, which is why only `png_preview` is pinned
       # here; a second raster would be a change to the specification and to this
       # clause, never a file that quietly appeared.
@@ -88,15 +89,15 @@ properties:
               type: object
               required: [width, height]
               properties:
-                width: {const: 8347}
-                height: {const: 4766}
+                width: {const: 6523}
+                height: {const: 6090}
             png_preview:
               type: object
               required: [scale, width, height]
               properties:
                 scale: {const: 1}
-                width: {const: 8347}
-                height: {const: 4766}
+                width: {const: 6523}
+                height: {const: 6090}
   entries:
     type: array
     minItems: 1
