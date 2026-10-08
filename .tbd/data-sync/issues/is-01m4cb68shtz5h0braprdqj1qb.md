@@ -5,7 +5,7 @@ title: "Address PR #427 review A: nine-case source integration and CI"
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -20,10 +20,11 @@ child_order_hints:
   - is-01m4cb6br8mxfs6km5qp1f1530
   - is-01m4cb6c5bwe1mwp4dcwght61c
   - is-01m4cdsc59abxsw1y5c6jef1ta
+  - is-01m4che48vje14earfhcfasx0r
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:29:15.569Z
-updated_at: 2026-10-08T01:04:39.025Z
+updated_at: 2026-10-08T01:18:24.539Z
 started_at: 2026-10-07T23:29:19.638Z
 ---
 Address every A1-A8 finding at83748 from https://github.com/jlevy/squares/pull/427#pullrequestreview-5449633758. Keep strict math, source scope, assurance and 192MiB/900s/1800s budgets. Source owner repair_followup_import, root owns GitHub/tracker; dedicated B,C,D report no additional findings. Final whole reported/confirmed stack requires fresh checks/reviews/actual deployment.
