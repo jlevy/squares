@@ -357,6 +357,9 @@ documents:
   - {path: packing/sqverify_fast/SOUNDNESS.md, role: component-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/sqverify_fast/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/n17bb_native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/PROVENANCE.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/TESTING.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/n17-bb-native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/measure-verifier/census/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
