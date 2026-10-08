@@ -381,6 +381,72 @@ Final source-size and exact-head CI checks remain integration gates.
 The source’s 191-touching-pair assertion remains unconfirmed; the review establishes no
 optimality, local-minimum, rigidity or novelty claim.
 
+## Consumer Integration Review
+
+A separately prompted strong reviewer accepted the consumer changes in `f0c28d610`,
+their normal integration at `fc0cc69e206bf7785561751f80005a253bb077cf`, and the
+subsequent reported-stage fixture correction.
+This review covers source routing, diagnostic projection, generated consumer records,
+and presentation. It does not repeat the native source campaign.
+
+The diagnostic pose reader materializes complete rational and number-field centre-basis
+witnesses before converting them to floating poses.
+It preserves the declared field and root through the maintained materializer and makes
+no feasibility decision.
+Independent n51 and n70 controls compare every projected centre and angle with the exact
+source and forbid the geometry decider.
+Existing corner and angle representations remain supported.
+
+Historical generator and citation controls now read the complete pre-intake records.
+The displaced n105 refinement fixture also retains its complete old house and private
+metadata. The Göbel strip checker compares n84 with that strip’s historical side; its
+exact five-size construction and negative controls remain the subject of the check.
+It does not relabel the smaller selected n84 packing as Göbel’s construction.
+
+The revised #422 worker control first refuses the current n108 house against the old
+#422 receipt. It then writes the complete retained historical house to an ordinary
+private path and runs the unchanged whole-house reader over all nine old constructions.
+It restores the path selector before checking other artifact reads and producer output
+guards. Complete input coverage, native-result binding, mutant/restoration controls, and
+the worker’s existing deadlines remain required.
+
+An independent bounded audit admitted all 27 #422 deciding inputs and eight current
+houses with every geometry decider forbidden.
+It refused current n108 and schema-loaded the complete historical n108 house, whose full
+geometry and private metadata exactly matched the admitted old source.
+This audit did not create the production worker clone; the revised actual-worker control
+still requires hosted execution.
+
+The frontier table uses one closed-form display predicate for both lines.
+Long rational bounds use compact decimal presentation while preserving the complete raw
+fraction in a title and leaving the source record unchanged.
+Integers, radicals and polynomial-root forms keep their prior semantics.
+The n51, n70 and n108 rows are now included in the four-width browser sample.
+
+Source cards and citations retain finite construction scope.
+The chunk, family, contact and evidence-profile records reflect the selected houses,
+including the radical n51 interior tilted components.
+Their sensitivity and outlier information remains present; the descriptive diagnostics
+grant no exact rigidity or optimality claim.
+The slow-marker roster names the previously measured full-worker and confirmation
+transactions without raising the fast-call or child-process ceilings.
+
+Independent controls passed: three rendering checks in 7.09 seconds; nine exact
+projection, historical refinement, refusal and taxonomy checks in 6.66 seconds; and
+three profile regeneration, sensitivity and contact-gallery checks in 1.20 seconds.
+The final three-line fixture correction resets only the simulated reported-stage
+rigidity to `None`; the confirmation’s no-promotion, lower-lane, complete-history and
+idempotence assertions remain intact.
+The writer’s explicit bounded transaction passed in 19.56 seconds, with a 17.95-second
+call, recorded in `ryxu-432-gate-evidence/confirmation-hosted-failure-control-v25.log`.
+
+The ry-xu rational, radical and house-binding modules and complete ry-xu packet have no
+diff from the accepted `dc8f15cf3` scope; source facts and deciding receipts remain
+unchanged from `609038af757cf364bac38467d861b1ac7061d9a7`. Final hosted fast/full checks
+and the post-integration private-copy size remain release gates.
+This closure does not confirm the source’s 191-contact assertion or promote optimality,
+local minimality, novelty, human review, or C4 assurance.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

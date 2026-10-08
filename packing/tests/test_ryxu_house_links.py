@@ -452,6 +452,9 @@ def confirmation_frontier(
             document = safe_load(front)
             old = safe_load(originals[n]["frontier"].split("---\n", 2)[1])["packing"]
             document["packing"]["verified_upper_bound"] = old["verified_upper_bound"]
+            # Simulate the reported intake before the separate numerical rigidity writer.
+            # Confirmation itself must grant no rigidity claim.
+            document["packing"]["rigidity"] = None
             document["packing"]["evidence"] = [
                 ref
                 for ref in document["packing"]["evidence"]
