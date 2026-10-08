@@ -3,18 +3,21 @@ type: is
 id: is-01m4ez392javr049tjjg63hkcp
 title: "n17 PR404 CI: isolate malformed-input CLI controls from producer imports"
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
-delegate: sol-merge-engineering
+delegate: claude-code@spud10.local
 labels:
   - n-17
   - ci
 dependencies: []
 parent_id: is-01m4eq9mdaejkedd1b09qqn09p
+hold: null
+hold_until: null
 created_at: 2026-10-08T23:55:37.937Z
-updated_at: 2026-10-08T23:55:37.937Z
+updated_at: 2026-10-08T23:56:18.824Z
+started_at: 2026-10-08T23:56:18.823Z
 ---
 Current-source hosted Packing runs40437860039766,45437860039856 and46137860039390 all fail12 shardB controls: ten nested descriptor path/hash refusals expect "paths and digests" but encounter process-wide "producer/kernel/root import in full-square checker"; two gzip EOF CLI refusals likewise encounter the independent-checker purity guard first. The same controls passed as part of366 affected controls run in separate module processes; that retained result did not qualify a combined shard.
 
