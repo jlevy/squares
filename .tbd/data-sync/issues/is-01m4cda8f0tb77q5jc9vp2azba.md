@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,17 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T01:55:20.037Z
+updated_at: 2026-10-08T02:01:35.739Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
+
+LATEST AUDIT/DISPOSITION CUSTODY — 2026-10-08 UTC:
+AdditionalGitHubauditsupplementuploaded/downloadedall44memberhashPASS: squares-github-audit-supplement-20261008.tar.gz462404B SHA40e208d511a6131b32e50827952e2f955ed0e8fbf55fb37ab24e2f173a2532f3; immutable01:55:39snapshot includesall4PRheads/reviews/comments/threads/CI, actual429/434failurelogs, full103public434payloadhashproof and compactsource/replayreceipts. Actualgithub-audit-supplement-roundtrip-receipt.json uploaded. Priorcompleted-gates archive1769members remainsverifiedimmutable. LatestPR431body linksbothsupplements, allsourceheads andactualfailure/nextwork; OR9PASS. Currentissue422progresscomment https://github.com/jlevy/squares/issues/422#issuecomment-6050615059, additional434scope/dispositioncomment https://github.com/jlevy/squares/pull/434#issuecomment-6050602101.
+Nativeprerequisitesareactualedgesnow: think-kqd3depends think-x2gl, think-qc6ydepends think-kqd3, synced. Closedlower/env/metricfindingrecordsremainclosed; engineeringupper/sourceacceptance/deploymentparents remainopen. Concurrent425/428ownersretained. Independentpublic434roundtrip103memberproof closesfileintegrity/downloadgaponly; finalsemanticadmission/census/assurancereview remainpending, draft434eightCIfailuresnotcertified.
+Sourceef472CI45.41s testfailureactivelyrepairedwithinvocation-localconversionreuse, no globalcache/capchange/checkskip. Solworkingtreebenchmark19.94→14.86s25.5%faster; Astraindependentlyproved108fullvariantoutputsbyteidentical/27jobs/9facts,18freshcaseinvocationsonceconversioneach, distinctmutablegraphs/unpoisonedfreshinvokes andAST-identicaloriginaljobpredicates. FullaffectedsuiteD/lint/type/pinchecks runningbeforecommit. This WIP isnotyetGitHubnewhead; preservationremainsinprogressuntil newcommittedsourceworkpushedandnewheadstatecaptured. Oldef472 source/review/gates/bundles arealreadydurable; no newhostedCIpassclaimed.
 
 LATEST FINAL-HOSTED FAILURE / DURABLE PROOF — 2026-10-08 UTC:
 Upperef472 exacthostedrun37714712284 completed28SUCCESS26SKIP2FAIL; actualsolecause test_linked_proof_batch_matches_all_fresh_standalone_checks call45.41s >=unchanged45s pertestPRlimit. SuiteD172.50/143 advisorytierisnotunderlyingfailure. RequiredaggregatefollowssuiteD. Correctness assertionspassed; thisisstillarealrequiredCI failure, no mergeallowed. Solsourceownerrepairsworkcost andAstraindependentsemanticsanalysis active; no caps/assertions/scienceweakened.
