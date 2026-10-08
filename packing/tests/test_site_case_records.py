@@ -131,6 +131,82 @@ def test_a_frontier_row_opens_its_record_and_steps_to_the_next(
         assert popover.is_visible()
 
 
+def test_native_close_collapses_the_row_before_the_queued_toggle(
+    browser: Any, served: str
+) -> None:
+    """Native visibility and the row's ARIA state agree in the closing task itself."""
+    with _page(browser) as page:
+        page.goto(f"{served}frontier.html", wait_until="load")
+        page.locator("#n-12 td.site-thumb svg").click()
+        popover = page.locator("#pop-case")
+        popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
+        assert page.locator("#n-12").get_attribute("aria-expanded") == "true"
+        state = page.evaluate(probe(PROBES, "case_popover_state/close"), {"reopen": None})
+        assert state["closed"] == {"open": False, "expanded": []}
+        site_browser.api().expect(page.locator("#n-12")).to_be_focused()
+
+
+def test_cached_reopen_keeps_its_row_expanded_and_its_close_focus(
+    browser: Any, served: str
+) -> None:
+    """Coalesced native toggles cannot collapse or steal focus from a reopened record."""
+    with _page(browser) as page:
+        page.goto(f"{served}frontier.html", wait_until="load")
+        row = page.locator("#n-12")
+        row.locator("td.site-thumb svg").click()
+        popover = page.locator("#pop-case")
+        popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
+        state = page.evaluate(probe(PROBES, "case_popover_state/close"), {"reopen": 12})
+        assert state["closed"] == {"open": False, "expanded": []}
+        assert state["reopened"] == {"open": True, "expanded": ["12"]}
+        site_browser.api().expect(popover.locator(".site-popover-close")).to_be_focused()
+        page.keyboard.press("Escape")
+        assert not popover.is_visible()
+        assert row.get_attribute("aria-expanded") == "false"
+        site_browser.api().expect(row).to_be_focused()
+
+
+@pytest.mark.parametrize("status", [200, 503])
+def test_closing_invalidates_an_awaited_record_without_stealing_outside_focus(
+    browser: Any, served: str, status: int
+) -> None:
+    """Late success cannot reopen a closed panel; late failure cannot navigate away."""
+    with _page(browser) as page:
+        held: list[Any] = []
+
+        def hold(route: Any) -> None:
+            held.append(route)
+
+        page.route("**/cases/14.html", hold)
+        page.goto(f"{served}frontier.html", wait_until="load")
+        page.locator("#n-12 td.site-thumb svg").click()
+        popover = page.locator("#pop-case")
+        popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
+        observer = page.evaluate_handle(
+            probe(PROBES, "case_popover_state/observe_request"),
+            {"url": f"{served}cases/14.html"},
+        )
+        row = page.locator("#n-14")
+        row.focus()
+        with page.expect_request("**/cases/14.html"):
+            page.keyboard.press("Enter")
+        page.evaluate(probe(PROBES, "case_popover_state/close"), {"reopen": None})
+        held[0].fulfill(
+            status=status,
+            content_type="text/html",
+            body=site_renders.case_records()["cases/14.html"] if status == 200 else "failed",
+        )
+        state = page.evaluate(
+            probe(PROBES, "case_popover_state/settled"), {"observer": observer}
+        )
+        assert state == {"open": False, "expanded": [], "active": "14"}
+        assert page.url == f"{served}frontier.html"
+        page.unroute("**/cases/14.html", hold)
+        page.keyboard.press("Enter")
+        popover.locator('[data-case-body] article.site-case[data-case="14"]').wait_for()
+        assert row.get_attribute("aria-expanded") == "true"
+
+
 def test_a_record_opens_a_case_its_prose_links_in_place(browser: Any, served: str) -> None:
     """A case file's link to another case file is marked for the case popover
     (`mark_case_links`): in the popover it loads that case in place, and the page stays
