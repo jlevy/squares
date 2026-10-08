@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
 import os
 import shlex
@@ -11,8 +12,11 @@ import subprocess
 import sys
 import tempfile
 import time
+from collections.abc import Callable
 from datetime import datetime, timedelta
 from pathlib import Path
+from types import ModuleType
+from typing import Any
 
 import pytest
 
@@ -1857,12 +1861,233 @@ print('all 27 complete inputs admitted; eight current and one historical house r
         assert source.read_bytes() == original
 
 
+def _guarded_second_squish_admission(packet: ModuleType) -> Callable[[], dict[int, Any]]:
+    """Reuse one actual admission in one child while every admission premise is fixed."""
+    from copy import deepcopy  # noqa: PLC0415
+    from pathlib import Path  # noqa: PLC0415
+
+    repository = packet.REPO
+    resolved_repository = repository.resolve()
+    modules = (packet, packet.original, packet.reported, packet.shared)
+    admit = packet.admit_certification
+
+    def frozen(value: Any) -> tuple[type, Any]:
+        kind = type(value)
+        if isinstance(value, dict):
+            return kind, tuple((frozen(key), frozen(item)) for key, item in value.items())
+        if isinstance(value, (list, tuple)):
+            return kind, tuple(frozen(item) for item in value)
+        if isinstance(value, (set, frozenset)):
+            return kind, frozenset(frozen(item) for item in value)
+        if callable(value) or isinstance(value, ModuleType):
+            return kind, id(value)
+        return kind, value
+
+    def namespace(module: ModuleType) -> dict[str, Any]:
+        return {
+            name: frozen(value)
+            for name, value in vars(module).items()
+            if name != "__builtins__"
+            and not (module is packet and name == "admit_certification")
+        }
+
+    namespaces = tuple(namespace(module) for module in modules)
+    paths = (*packet.private_input_paths(), Path(packet.original.__file__))
+    assert len(paths) == len(set(paths)), "admission fixture has duplicate inputs"
+    resolved = tuple(path.resolve(strict=True) for path in paths)
+    ceiling = max(
+        packet.original.MAX_SOURCE_BYTES,
+        packet.original.MAX_RECEIPT_BYTES,
+        packet.MAX_REVIEW_ROSTER_BYTES,
+    )
+
+    def read(path: Path, expected_size: int | None = None) -> bytes:
+        assert path.is_relative_to(repository), "admission fixture path changed"
+        assert not path.is_symlink(), "admission fixture file custody changed"
+        assert path.is_file(), "admission fixture file custody changed"
+        assert path.resolve(strict=True).is_relative_to(resolved_repository), (
+            "admission fixture input escaped"
+        )
+        for parent in path.parents:
+            assert not parent.is_symlink(), "admission fixture parent custody changed"
+            if parent == repository:
+                break
+        size = path.stat().st_size
+        limit = ceiling if expected_size is None else expected_size
+        assert size <= limit, "admission fixture input size changed"
+        assert expected_size is None or size == expected_size, (
+            "admission fixture input size changed"
+        )
+        with path.open("rb") as stream:
+            data = stream.read(limit + 1)
+        assert len(data) == size, "admission fixture input changed during read"
+        return data
+
+    captured = tuple(read(path) for path in paths)
+
+    def unchanged() -> None:
+        assert repository == packet.REPO, "admission fixture repository changed"
+        assert packet.REPO.resolve() == resolved_repository, (
+            "admission fixture repository changed"
+        )
+        assert packet.admit_certification is admit or packet.admit_certification is guarded, (
+            "admission fixture callback changed"
+        )
+        assert tuple(namespace(module) for module in modules) == namespaces, (
+            "admission fixture loaded functions or constants changed"
+        )
+        assert (*packet.private_input_paths(), Path(packet.original.__file__)) == paths, (
+            "admission fixture input roster changed"
+        )
+        for path, target, raw in zip(paths, resolved, captured, strict=True):
+            assert path.resolve(strict=True) == target, "admission fixture input path changed"
+            assert read(path, len(raw)) == raw, "admission fixture input bytes changed"
+
+    def guarded() -> dict[int, Any]:
+        unchanged()
+        return deepcopy(rows)
+
+    unchanged()
+    rows = admit()
+    unchanged()
+    assert tuple(rows) == packet.NUMBERS, "admission fixture lost complete nine-case scope"
+    return guarded
+
+
+@pytest.fixture
+def guarded_admission_packet(tmp_path: Path) -> Any:
+    """Tiny ordinary inputs exercise the guard without creating a worker snapshot."""
+    packet: Any = ModuleType("guarded_packet")
+    packet.REPO = tmp_path / "repo"
+    packet.REPO.mkdir()
+    packet.NUMBERS = (88, 92, 108, 113, 125, 131, 263, 269, 281)
+    packet.MAX_REVIEW_ROSTER_BYTES = 128
+    packet.REVISION = "retained-source"
+    original: Any = ModuleType("guarded_original")
+    original.MAX_SOURCE_BYTES = original.MAX_RECEIPT_BYTES = 128
+    packet.original = original
+    packet.reported = ModuleType("guarded_reported")
+    packet.shared = ModuleType("guarded_shared")
+    paths = []
+    for n in packet.NUMBERS:
+        path = packet.REPO / str(n) / "input"
+        path.parent.mkdir()
+        path.write_bytes(f"complete-input-{n}".encode())
+        paths.append(path)
+    trusted = packet.REPO / "trusted-adapter.py"
+    trusted.write_bytes(b"trusted-adapter")
+    packet.original.__file__ = str(trusted)
+    packet.private_input_paths = lambda: tuple(paths)
+    packet.read_fact = lambda n: {"n": n}
+    packet.admit_certification = lambda: {
+        n: {"case": {"n": n, "premise": ["retained"]}} for n in packet.NUMBERS
+    }
+    return packet
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "late-bytes",
+        "larger-input",
+        "trusted-adapter",
+        "linked-file",
+        "linked-parent",
+        "input-roster",
+        "loaded-function",
+        "loaded-constant",
+        "equal-valued-type",
+    ],
+)
+def test_guarded_admission_refuses_changed_premises_and_accepts_restoration(
+    guarded_admission_packet: Any, tmp_path: Path, mutation: str
+) -> None:
+    packet = guarded_admission_packet
+    guarded = _guarded_second_squish_admission(packet)
+    packet.admit_certification = guarded
+    original = guarded()
+    path = packet.private_input_paths()[-1]
+    if mutation == "trusted-adapter":
+        path = Path(packet.original.__file__)
+    raw = path.read_bytes()
+    outside = tmp_path / "outside"
+    previous_paths = packet.private_input_paths
+    previous_fact = packet.read_fact
+    revision = packet.REVISION
+    source_ceiling = packet.original.MAX_SOURCE_BYTES
+    if mutation in {"late-bytes", "trusted-adapter"}:
+        path.write_bytes(b"!" + raw[1:])
+    elif mutation == "larger-input":
+        path.write_bytes(raw + b"!")
+    elif mutation == "linked-file":
+        outside.write_bytes(raw)
+        path.unlink()
+        path.symlink_to(outside)
+    elif mutation == "linked-parent":
+        path.parent.rename(outside)
+        path.parent.symlink_to(outside, target_is_directory=True)
+    elif mutation == "input-roster":
+        packet.private_input_paths = lambda: previous_paths()[:-1]
+    elif mutation == "loaded-function":
+        packet.read_fact = lambda n: {"changed": n}
+    elif mutation == "equal-valued-type":
+        packet.original.MAX_SOURCE_BYTES = float(source_ceiling)
+    else:
+        packet.REVISION = "changed-source"
+    try:
+        with pytest.raises(AssertionError, match="admission fixture"):
+            guarded()
+    finally:
+        if mutation == "linked-file":
+            path.unlink()
+            path.write_bytes(raw)
+        elif mutation == "linked-parent":
+            path.parent.unlink()
+            outside.rename(path.parent)
+        elif mutation in {"late-bytes", "larger-input", "trusted-adapter"}:
+            path.write_bytes(raw)
+        packet.private_input_paths = previous_paths
+        packet.read_fact = previous_fact
+        packet.REVISION = revision
+        packet.original.MAX_SOURCE_BYTES = source_ceiling
+    restored = guarded()
+    assert restored == original
+    assert restored is not original
+    restored[packet.NUMBERS[-1]]["case"]["premise"].append("changed-return")
+    assert guarded() == original
+
+
+def test_guarded_admission_refuses_an_input_changed_during_real_admission(
+    guarded_admission_packet: Any,
+) -> None:
+    packet = guarded_admission_packet
+    path = packet.private_input_paths()[-1]
+    raw = path.read_bytes()
+    actual = packet.admit_certification
+
+    def changed() -> dict[int, Any]:
+        rows = actual()
+        path.write_bytes(b"!" + raw[1:])
+        return rows
+
+    packet.admit_certification = changed
+    try:
+        with pytest.raises(AssertionError, match="admission fixture input bytes changed"):
+            _guarded_second_squish_admission(packet)
+    finally:
+        path.write_bytes(raw)
+        packet.admit_certification = actual
+    guarded = _guarded_second_squish_admission(packet)
+    assert tuple(guarded()) == packet.NUMBERS
+
+
 @pytest.mark.parametrize(
     "program",
     [
         pytest.param(
             """
 from devtools import squish_second_update_house_links as house
+packet.admit_certification = _guarded_second_squish_admission(packet)
 # The current n108 house is #432 geometry and must not satisfy the old #422 receipt.
 try:
     house.check_houses([108])
@@ -1935,6 +2160,13 @@ def test_second_squish_consumers_survive_native_worker_boundaries(
     expected_gupta_module = (controls.REPO / gupta_module).is_file()
     program = (
         f"assert (packet.REPO / {gupta_module!r}).is_file() is {expected_gupta_module!r}\n"
+        + program
+    )
+    program = (
+        "from collections.abc import Callable\n"
+        "from types import ModuleType\nfrom typing import Any\n"
+        + inspect.getsource(_guarded_second_squish_admission)
+        + "\n"
         + program
     )
     _run_second_squish_native_program(tree, program)
