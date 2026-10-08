@@ -3,16 +3,20 @@ type: is
 id: is-01m4ey826ykymayr66y0fz3f55
 title: Resolve Gupta-layer native house-reader wall failure within 12 seconds
 kind: bug
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
 assignee: intake_remaining_fixes
+delegate: codex@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4ekeq41zfgtf5dp8r462n05
+hold: null
+hold_until: null
 created_at: 2026-10-08T23:40:46.173Z
-updated_at: 2026-10-08T23:40:46.173Z
+updated_at: 2026-10-08T23:40:57.274Z
+started_at: 2026-10-08T23:40:57.272Z
 ---
 The actual old PR448 head 13a53457549b62b56b3573d1c77a638ada0f9573 failed its full checkpoint run 37852701067, validate job 113569389039: https://github.com/jlevy/squares/actions/runs/37852701067/job/113569389039. Fast behavioral shard D reported tests/test_negative_controls.py::test_second_squish_consumers_survive_native_worker_boundaries[house-reads] at 14.01 seconds, exceeding the unchanged 12-second per-test wall ceiling. This is a real performance-guard failure, not a passing assertion result or an infrastructure disposition.
 
