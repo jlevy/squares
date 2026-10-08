@@ -110,9 +110,14 @@ RELATIVE_ANCHOR = re.compile(r'(?P<start><a\b[^>]*\bhref=")(?P<url>\.\.?/[^"]+)(
 CONTRACT = "packing.squares:ExactValues/v1"
 POLYNOMIAL_STATES = frozenset(("integer", "rational", "closed-form", "minimal-polynomial"))
 COEFFICIENT_TABLE_DEGREE = 64
-COEFFICIENT_TABLE_DIGITS = 72
+COEFFICIENT_TABLE_DIGITS = 48
 TERMS_PER_DISPLAY = 4
-DISPLAY_CHARACTER_BUDGET = 112
+# The complete archive prints at the shared 12pt face and Letter reading measure.
+# Long numeric terms need shorter displays; a wide single term uses its full table.
+DISPLAY_CHARACTER_BUDGET = 56
+PRINT_PROBES = PACKING / "devtools/probes"
+PRINT_CONTENT_WIDTH = probe(PRINT_PROBES, "render_exact_side_values/print_content_width")
+PRINT_MATH_FIT = probe(PRINT_PROBES, "render_exact_side_values/print_math_fit")
 
 RENDER_INPUTS = (
     Path(__file__),
@@ -123,6 +128,8 @@ RENDER_INPUTS = (
     BROWSER_STYLE,
     BROWSER_SCRIPT,
     Path(exact_catalogue.__file__),
+    PRINT_PROBES / "render_exact_side_values/print_content_width.js",
+    PRINT_PROBES / "render_exact_side_values/print_math_fit.js",
     REGISTER,
     PACKING / "devtools/paper_front.py",
     PACKING / "devtools/render_overview.py",
@@ -1193,6 +1200,12 @@ def _print_pdf(html_path: Path, pdf_path: Path) -> None:
             page.goto(html_path.as_uri(), wait_until="networkidle")
             page.evaluate(ABSOLUTE_LINKS, SITE_URL + COMPLETE_PATH)
             page.emulate_media(media="print")
+            content_width = page.evaluate(PRINT_CONTENT_WIDTH)
+            if not isinstance(content_width, int | float) or not 0 < content_width <= 816:
+                raise ExactSideValuesPaperError("invalid Letter print content width")
+            # A print-media viewport excludes @page margins, just as the physical page
+            # content box does. Preflight at that width before Chromium paginates.
+            page.set_viewport_size({"width": int(content_width), "height": 1056})
             hosts = page.locator(".kpress-math")
             if hosts.count() == 0:
                 raise ExactSideValuesPaperError("the paper has no typeset math")
@@ -1206,6 +1219,13 @@ def _print_pdf(html_path: Path, pdf_path: Path) -> None:
             if page.locator(".katex-error, math merror").count():
                 raise ExactSideValuesPaperError("the paper contains a math rendering error")
             _await_print_fonts(page)  # pyright: ignore[reportArgumentType]
+            fit = page.evaluate(PRINT_MATH_FIT)
+            if fit["checked"] != page.locator(".kpress-math-display").count():
+                raise ExactSideValuesPaperError("print math fit check missed a display")
+            if fit["overflows"]:
+                raise ExactSideValuesPaperError(
+                    "paper math exceeds its print column: " + json.dumps(fit["overflows"][:5])
+                )
             drawn = page.pdf(format="Letter", prefer_css_page_size=True, print_background=True)
             write_bytes_atomic(pdf_path, dated(drawn, _publication_day().date()))
         finally:
