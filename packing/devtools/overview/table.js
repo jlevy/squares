@@ -380,6 +380,67 @@
 
   /** Enhance every site table on the page. */
   function init() {
+    // The overview has a bounded recent set. Its complete-table link carries supported
+    // filter query state, so a query selecting older results reaches the full dataset.
+    const all = document.querySelector("a[data-all-results]");
+    if (all instanceof HTMLAnchorElement) {
+      const destination = all.href;
+      const updateDestination = () => {
+        const fragment = fragmentTarget();
+        const retired = (() => {
+          try {
+            const aliases = JSON.parse(all.getAttribute("data-retired-results") ?? "{}");
+            return /^t-\d+$/.test(fragment) &&
+              Object.hasOwn(aliases, fragment) &&
+              aliases[fragment] === `result/${fragment}.html`
+              ? aliases[fragment]
+              : null;
+          } catch {
+            return null;
+          }
+        })();
+        const target = new URL(retired ?? destination, destination);
+        const source = new URLSearchParams(location.search);
+        for (const [key, value] of source) {
+          if (
+            [
+              "status",
+              "kind",
+              "activity",
+              "source",
+              "project",
+              "n",
+              "n-min",
+              "n-max",
+              "s",
+              "s-min",
+              "s-max",
+              "v",
+              "v-min",
+              "v-max",
+              "c",
+              "c-min",
+              "c-max",
+              "age",
+              "age-max",
+              "superseded",
+              "current",
+              "search",
+            ].includes(key)
+          ) {
+            target.searchParams.set(key, value);
+          }
+        }
+        const known = (all.getAttribute("data-result-ids") ?? "").split(/\s+/);
+        target.hash = "";
+        if (fragment && (retired || known.includes(fragment))) {
+          target.hash = location.hash;
+        }
+        all.href = target.href;
+      };
+      updateDestination();
+      window.addEventListener("hashchange", updateDestination);
+    }
     for (const table of document.querySelectorAll("table.site-table")) {
       if (!(table instanceof HTMLTableElement)) {
         continue;

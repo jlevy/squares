@@ -90,7 +90,7 @@ def test_the_script_fixtures_are_present() -> None:
     assert len(list((FIXTURES / "allowed").glob("*.html"))) == 3
 
 
-def test_the_published_page_carries_a_policy_that_grants_no_network_source() -> None:
+def test_the_published_policy_allows_only_its_own_origin_for_resources() -> None:
     """The second layer (#125 F21): whatever the scan misses, the browser refuses."""
     page = with_policy('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">')
     head = page.index("<head>") + len("<head>")
@@ -101,10 +101,18 @@ def test_the_published_page_carries_a_policy_that_grants_no_network_source() -> 
         if part.strip()
     }
     assert directives["default-src"] == ["'none'"]
+    assert directives == {
+        "default-src": ["'none'"],
+        "script-src": ["'self'", "'unsafe-inline'"],
+        "style-src": ["'self'", "'unsafe-inline'"],
+        "img-src": ["'self'", "data:", "blob:"],
+        "font-src": ["'self'", "data:"],
+        "connect-src": ["'self'"],
+        "base-uri": ["'none'"],
+        "form-action": ["'none'"],
+    }
     granted = [source for sources in directives.values() for source in sources]
-    assert set(granted) <= {"'none'", "'unsafe-inline'", "data:", "blob:"}
     assert "'unsafe-eval'" not in granted, "the public page is not loosened for test tooling"
-    assert "connect-src" not in directives, "requests fall to default-src 'none'"
     assert page.count("Content-Security-Policy") == 1
 
 

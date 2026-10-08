@@ -38,7 +38,8 @@ WHAT A RESULT MEANS, AND WHAT IT DOES NOT
 
 - A HIT is a sound certificate of play, modulo the contact tolerance.  The direction and
   the slide distance are recorded, and this module replays each one: it translates the
-  square by that distance in that direction and re-runs `sqpack.verify.verify_packing`
+  square by that distance in that direction and runs the complete prepared verifier
+  `sqpack.prepared_verify.prepared_verify_packing`
   on the moved configuration.  A certificate that does not replay is not reported.
 - A MISS proves only that THAT ONE SQUARE cannot be TRANSLATED, at that tolerance.  It
   is not rigidity and must never be read as rigidity.  Rotating the square, and moving
@@ -91,7 +92,8 @@ from sqpack.known_best import (
     SCREEN_SAMPLE_STRIDE,
     sampled_numbers,
 )
-from sqpack.verify import Square, edge_axes, float_sign, project, verify_packing
+from sqpack.prepared_verify import prepared_verify_packing
+from sqpack.verify import Square, edge_axes, float_sign, project
 from sqpack.witness import load_witness, materialize_witness
 from sqpack.workers import worker_count
 from sqpack.yamlio import load_yaml
@@ -513,13 +515,13 @@ def certify_square(
 def _replay(geometry: RecordGeometry, certificate: dict[str, Any], tolerance: Scalar) -> bool:
     """Re-verify the packing with the square actually moved where the certificate says.
 
-    The certificate is a claim about geometry, so it is checked by the same validity
-    oracle the rest of the project uses rather than by the code that produced it.
+    The certificate is checked by the complete prepared execution of the project's
+    validity oracle, independently of the direction search and slide calculation.
     """
     direction = (mp.mpf(certificate["direction"]["x"]), mp.mpf(certificate["direction"]["y"]))
     distance = mp.mpf(certificate["slide_distance"])
     moved = translated(geometry.squares, certificate["square_index"], direction, distance)
-    report = verify_packing(
+    report = prepared_verify_packing(
         moved,
         geometry.side,
         sign=float_sign(tolerance),
@@ -861,8 +863,11 @@ def _document(cases: list[dict[str, Any]], excluded: list[dict[str, Any]]) -> di
             ),
             "certificate_replay": (
                 "every hit is replayed at build time by translating the square by the "
-                "recorded distance and re-running sqpack.verify.verify_packing; a "
-                "failure stops the build, so no unreplayed certificate reaches this file"
+                "recorded distance and checking the complete moved packing; a failure "
+                "stops the build, so no unreplayed certificate reaches this file. "
+                "Retained cases may have been replayed by sqpack.verify.verify_packing; "
+                "the current generator uses sqpack.prepared_verify.prepared_verify_packing "
+                "with the same complete validity contract"
             ),
             "direction_search": (
                 "one interior direction per arc between critical directions, plus "

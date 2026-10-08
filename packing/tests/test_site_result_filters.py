@@ -1,47 +1,43 @@
-"""Hide superseded, the result filters' checkbox, in a browser.
+"""The static homepage subset and the complete results page's browser filters.
 
-Both tables of results sit under one filter bar (`overview_sections.result_filters`,
-`templates/paper-design.md`, Result filters). Its one checkbox, Hide superseded, starts
-checked on the overview and clear on the results page. This opens both rendered pages in
-Chromium and uses the checkbox as a reader does, with the pointer on its label and with
-the keyboard, and reads the table after each change through one probe: the rows showing
-are the ones the register's standings say, the count follows, the checkbox composes
-with Status, and a fresh load of the page starts again from that page's own default. The
-bar has no reset control, so a load is the only reset there is; the default a load
-returns to is the checkbox's state in the HTML, which the probe reports too.
-
-The page's clock is fixed at the register's reference date, the day the HTML's own
-`hidden` rows are reckoned from (`overview_sections.reference_date`), so the rows Max age
-keeps are the same in the browser as in the render, whatever day the test runs.
-
-The checkbox and its label are also measured at the three widths the design is shot at:
-the label on one line, inside the bar, its words level with the labels beside it.
-
-Skipped where no Chromium can be launched; `SQPACK_CHROMIUM` names one the environment
-supplies, as the other browser tools read it.
+The complete page retains pointer/keyboard, defaults, composition, counts and label
+geometry checks. The homepage keeps only its declared recent rows with scripts on or
+off; its ordinary link carries supported legacy filters and registered row fragments
+into the complete table, where the named row must remain visible despite the filters.
+The clock is fixed at the register's reference date for deterministic age checks.
 """
 
 from __future__ import annotations
 
-import os
 from collections.abc import Iterator
 from datetime import datetime, time
 from pathlib import Path
 from typing import Any
+from urllib.parse import parse_qs, urlsplit
 
 import pytest
 
-from devtools import overview_data, overview_sections, render_recent_results, result_status
-from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
+from devtools import (
+    overview_data,
+    overview_sections,
+    render_recent_results,
+    result_status,
+    site_urls,
+)
 from sqpack.probes import probe
-from tests import site_renders
+from tests import site_browser, site_renders
 
 PROBES = Path(__file__).resolve().parent / "probes"
 STATE = probe(PROBES, "site_result_filters/state")
+HOME = probe(PROBES, "site_result_filters/home")
+RETIRED = tuple(
+    row
+    for row in site_urls.load_registry()
+    if row.status == "withdrawn" and row.kind == "result"
+)
 
-#: Each page with a table of results, and where its bar starts.
+#: The complete table has controls; index.html has a static recent subset instead.
 PAGES = {
-    "index.html": overview_sections.RECENT_DEFAULTS,
     "all-results.html": overview_sections.RESULTS_DEFAULTS,
 }
 #: The widths the design is shot at: a desktop, a tablet and a phone.
@@ -58,19 +54,25 @@ def overview() -> overview_data.Overview:
 
 @pytest.fixture(scope="module")
 def browser() -> Iterator[Any]:
-    sync_api = pytest.importorskip("playwright.sync_api")
-    with sync_api.sync_playwright() as driver:
-        try:
-            launched = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
-        except sync_api.Error as error:
-            pytest.skip(f"no Chromium to launch: {error.message.splitlines()[0]}")
+    with site_browser.api().sync_playwright() as driver:
+        launched = site_browser.launch(driver)
         yield launched
         launched.close()
 
 
 @pytest.fixture(scope="module")
 def pages(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
-    return site_renders.write(tmp_path_factory.mktemp("site"), *PAGES)
+    root = tmp_path_factory.mktemp("site")
+    written = site_renders.write(root, "index.html", *PAGES)
+    crawl, _ = site_urls.crawl_files()
+    for row in RETIRED:
+        target = root / row.path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(crawl[row.path], encoding="utf-8")
+        written[row.path] = target
+    size = sum(path.stat().st_size for path in root.rglob("*") if path.is_file())
+    assert size < 30 * 1024 * 1024, f"bounded browser fixture wrote {size} bytes"
+    return written
 
 
 def opened(
@@ -110,9 +112,8 @@ def count(shown: int, overview: overview_data.Overview) -> str:
 def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     browser: Any, pages: dict[str, Path], overview: overview_data.Overview, name: str
 ) -> None:
-    """On load the checkbox is checked on the overview and clear on the results page,
-    as its HTML has it; the rows showing are the ones that page's defaults keep, and
-    the count is theirs. The rows that carry the flag are, on both pages, every result
+    """On load the complete page's checkbox is clear as its HTML has it; every row
+    shows and the count is theirs. The rows that carry the flag are every result
     that is not superseded: the current bests, the second certificates and the results
     that claim no bound, which have no standing, but for one the register declares a
     later result implies whole (T-031, superseded by T-060)."""
@@ -125,7 +126,7 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     assert found["type"] == "checkbox"
     assert found["label"] == LABEL
     assert found["checked"] is found["starts_checked"] is defaults.hide_superseded
-    assert defaults.hide_superseded is (name == "index.html")
+    assert defaults.hide_superseded is False
     expected = rows(overview, defaults)
     assert sorted(found["shown"]) == expected
     assert found["total"] == len(overview.results)
@@ -152,10 +153,7 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     assert [result.id for result in kept if result.standing == "superseded"] == ["T-003"]
     assert "t-031" not in current
     assert "t-036" in current
-    if defaults.hide_superseded:
-        assert set(found["shown"]) < set(found["current"])
-    else:
-        assert set(found["current"]) < set(found["shown"])
+    assert set(found["current"]) < set(found["shown"])
 
 
 @pytest.mark.parametrize("name", PAGES)
@@ -306,13 +304,10 @@ def test_kind_shows_the_results_of_one_kind(
 def test_a_link_can_set_it_or_clear_it(
     browser: Any, pages: dict[str, Path], overview: overview_data.Overview
 ) -> None:
-    """`current=true` opens the results page with the box checked, and `current=false` opens
-    the overview with it clear, each with the rows that leaves."""
-    opens = {
-        "all-results.html": ("?current=true", True),
-        "index.html": ("?current=false", False),
-    }
-    for name, (query, checked) in opens.items():
+    """Both current presets apply on the complete page and leave its HTML default clear."""
+    name = "all-results.html"
+    for checked in (True, False):
+        query = f"?current={str(checked).lower()}"
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         noon = datetime.combine(overview_sections.reference_date(overview), time(12))
         page.clock.set_fixed_time(noon)
@@ -326,6 +321,282 @@ def test_a_link_can_set_it_or_clear_it(
         expected = rows(overview, PAGES[name]._replace(hide_superseded=checked))
         assert sorted(found["shown"]) == expected, name
         assert found["count"] == count(len(expected), overview), name
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+@pytest.mark.parametrize("javascript", [True, False])
+def test_home_includes_only_its_visible_recent_subset_and_ordinary_links(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    width: int,
+    *,
+    javascript: bool,
+) -> None:
+    expected = rows(overview, overview_sections.RECENT_DEFAULTS)
+    assert 0 < len(expected) < len(overview.results)
+    page = browser.new_page(
+        viewport={"width": width, "height": 900}, java_script_enabled=javascript
+    )
+    try:
+        page.goto(pages["index.html"].as_uri(), wait_until="load")
+        assert page.evaluate(STATE) is None, "home must not offer a filter over incomplete data"
+        found = page.evaluate(HOME)
+    finally:
+        page.close()
+    assert found is not None
+    assert found["bar_count"] == found["controls"] == 0
+    assert sorted(found["included"]) == sorted(found["visible"]) == expected
+    assert found["hidden"] == [], "omitted results must not be duplicated as hidden rows"
+    assert f"{len(expected)} recent results" in found["scope"]
+    assert "S3 or higher" in found["scope"]
+    assert "last 180 days" in found["scope"]
+    assert "excluding superseded" in found["scope"]
+    assert sorted(found["registered"]) == sorted(r.id.lower() for r in overview.results)
+    assert found["retired"] == {Path(row.path).stem: row.path for row in RETIRED}
+    assert {row["result"]: row["href"] for row in found["links"]} == {
+        result: f"result/{result}.html" for result in expected
+    }
+    assert urlsplit(found["destination"]).path.endswith("/all-results.html")
+    assert found["overflow"] <= 0
+
+
+@pytest.mark.parametrize("width", [1280, 390])
+def test_legacy_home_query_and_registered_fragment_reach_the_complete_filtered_table(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    width: int,
+) -> None:
+    target = "t-031"
+    defaults = overview_sections.RECENT_DEFAULTS
+    expected = sorted(
+        result.id.lower()
+        for result in overview.results
+        if result.record["kind"] == "rigidity"
+        and overview_sections.shown_by_default(
+            result, defaults, overview_sections.reference_date(overview)
+        )
+    )
+    assert target not in expected
+    assert target not in rows(overview, defaults)
+    query = "?kind=rigidity&current=true&s-min=3&age=180&utm_source=omitted"
+    page = opened(browser, pages["index.html"], overview, width)
+    try:
+        page.goto(pages["index.html"].as_uri() + query, wait_until="load")
+        # Editing the fragment in the address is a same-document reader action.
+        # Initial legacy result addresses have their separate automatic-forward test.
+        page.goto(pages["index.html"].as_uri() + query + f"#{target}", wait_until="load")
+        home = page.evaluate(HOME)
+        assert home is not None
+        assert sorted(home["included"]) == rows(overview, defaults)
+        assert home["bar_count"] == 0
+        destination = urlsplit(home["destination"])
+        assert destination.fragment == target
+        assert parse_qs(destination.query) == {
+            "kind": ["rigidity"],
+            "current": ["true"],
+            "s-min": ["3"],
+            "age": ["180"],
+        }
+        with page.expect_navigation(wait_until="load"):
+            page.get_by_role("link", name="Browse and filter every result", exact=True).click()
+        landed = urlsplit(page.url)
+        assert landed.path.endswith("/all-results.html")
+        assert landed.query == destination.query
+        assert landed.fragment == target
+        assert page.locator(KIND).input_value() == "rigidity"
+        assert page.get_by_label(LABEL).is_checked()
+        assert page.locator('[data-filter="s"][data-bound="min"]').input_value() == "3"
+        assert page.locator('[data-filter="date"][data-bound="age"]').input_value() == "180"
+        found = state(page)
+        assert sorted(found["shown"]) == sorted([*expected, target])
+        assert found["total"] == len(overview.results)
+        assert found["count"] == count(len(expected) + 1, overview)
+        assert page.locator(f"tr#{target}").is_visible()
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("fragment", ["t-999", "atlas", "%E0%A4"])
+def test_unknown_home_fragments_and_unrelated_query_keys_do_not_change_the_subset(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    fragment: str,
+) -> None:
+    page = opened(browser, pages["index.html"], overview)
+    try:
+        page.goto(
+            pages["index.html"].as_uri() + "?current=false&unrelated=omitted#" + fragment,
+            wait_until="load",
+        )
+        found = page.evaluate(HOME)
+        assert found is not None
+        assert sorted(found["included"]) == rows(overview, overview_sections.RECENT_DEFAULTS)
+        assert found["hidden"] == []
+        assert found["controls"] == 0
+        destination = urlsplit(found["destination"])
+        assert destination.fragment == ""
+        assert parse_qs(destination.query) == {"current": ["false"]}
+        assert urlsplit(page.url).path.endswith("/index.html"), "unknown anchors must stay put"
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("fragment", ["t-031", "%74-031"])
+def test_initial_registered_home_result_fragment_retains_automatic_forwarding(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    fragment: str,
+) -> None:
+    query = "?kind=rigidity&current=true&s-min=3&age=180"
+    target = "t-031"
+    expected = {
+        result.id.lower()
+        for result in overview.results
+        if result.record["kind"] == "rigidity"
+        and overview_sections.shown_by_default(
+            result,
+            overview_sections.RECENT_DEFAULTS,
+            overview_sections.reference_date(overview),
+        )
+    }
+    assert target not in expected
+    page = opened(browser, pages["all-results.html"], overview)
+    try:
+        page.goto(pages["index.html"].as_uri() + query + "#" + fragment, wait_until="load")
+        landed = urlsplit(page.url)
+        assert landed.path.endswith("/all-results.html")
+        assert landed.query == query.removeprefix("?")
+        assert landed.fragment == fragment
+        assert page.locator(KIND).input_value() == "rigidity"
+        assert page.get_by_label(LABEL).is_checked()
+        found = state(page)
+        assert set(found["shown"]) == expected | {target}
+        assert found["count"] == count(len(expected) + 1, overview)
+        assert page.locator(f"tr#{target}").is_visible()
+    finally:
+        page.close()
+
+
+def assert_tombstone(page: Any, row: site_urls.SiteURL, fragment: str, query: str) -> None:
+    """The actual retained page explains the withdrawal at its registered address."""
+    landed = urlsplit(page.url)
+    assert landed.path.endswith("/" + row.path)
+    assert landed.fragment == fragment
+    assert parse_qs(landed.query) == parse_qs(query)
+    assert page.get_by_role("heading", name="Withdrawn Address", exact=True).is_visible()
+    assert row.tombstone in " ".join(page.locator("main").inner_text().split())
+    assert page.locator('link[rel="canonical"]').get_attribute("href") == (
+        site_urls.site_url() + row.canonical
+    )
+    assert page.get_by_role("link", name=row.target, exact=True).get_attribute("href") == (
+        site_urls.site_url() + row.target
+    )
+
+
+@pytest.mark.parametrize("row", RETIRED, ids=lambda row: Path(row.path).stem)
+@pytest.mark.parametrize("encoded", [False, True])
+def test_initial_retired_home_fragments_reach_the_registered_explanation(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    row: site_urls.SiteURL,
+    *,
+    encoded: bool,
+) -> None:
+    name = Path(row.path).stem
+    fragment = name.replace("t", "%74", 1) if encoded else name
+    query = "current=true&kind=rigidity&review=legacy"
+    page = opened(browser, pages["all-results.html"], overview, 390)
+    try:
+        page.goto(
+            pages["index.html"].as_uri() + "?" + query + "#" + fragment, wait_until="load"
+        )
+        assert_tombstone(page, row, fragment, query)
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("row", RETIRED, ids=lambda row: Path(row.path).stem)
+@pytest.mark.parametrize("encoded", [False, True])
+def test_retired_reader_fragment_updates_the_ordinary_home_link_and_reaches_its_tombstone(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    row: site_urls.SiteURL,
+    *,
+    encoded: bool,
+) -> None:
+    name = Path(row.path).stem
+    fragment = name.replace("t", "%74", 1) if encoded else name
+    query = "current=true&kind=rigidity&unrelated=omitted"
+    supported = "current=true&kind=rigidity"
+    page = opened(browser, pages["index.html"], overview, 390)
+    try:
+        page.goto(pages["index.html"].as_uri() + "?" + query, wait_until="load")
+        page.goto(
+            pages["index.html"].as_uri() + "?" + query + "#" + fragment, wait_until="load"
+        )
+        home = page.evaluate(HOME)
+        assert home is not None
+        assert sorted(home["included"]) == rows(overview, overview_sections.RECENT_DEFAULTS)
+        destination = urlsplit(home["destination"])
+        assert destination.path.endswith("/" + row.path)
+        assert destination.fragment == fragment
+        assert parse_qs(destination.query) == parse_qs(supported)
+        with page.expect_navigation(wait_until="load"):
+            page.get_by_role("link", name="Browse and filter every result", exact=True).click()
+        assert_tombstone(page, row, fragment, supported)
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("row", RETIRED, ids=lambda row: Path(row.path).stem)
+@pytest.mark.parametrize("javascript", [True, False])
+def test_direct_retired_results_fragment_has_a_visible_static_notice_and_tombstone_link(
+    browser: Any,
+    pages: dict[str, Path],
+    overview: overview_data.Overview,
+    row: site_urls.SiteURL,
+    *,
+    javascript: bool,
+) -> None:
+    name = Path(row.path).stem
+    page = browser.new_page(
+        viewport={"width": 390, "height": 900}, java_script_enabled=javascript
+    )
+    try:
+        page.goto(pages["all-results.html"].as_uri() + "#" + name, wait_until="load")
+        notice = page.locator(f"p.site-withdrawn-result#{name}")
+        assert notice.count() == 1, "the retained fragment needs an ordinary static notice"
+        assert urlsplit(page.url).path.endswith("/all-results.html")
+        assert urlsplit(page.url).fragment == name
+        assert "withdrawn" in notice.inner_text()
+        box = notice.bounding_box()
+        assert box is not None
+        # Fragment scrolling rounds the target offset to a device pixel.
+        assert -0.5 <= box["y"] < box["y"] + box["height"] <= 900.5
+        assert page.locator("p.site-withdrawn-result").count() == len(RETIRED)
+        assert page.locator("#t-999").count() == 0, "unknown fragments must not gain anchors"
+        assert page.locator("table.site-results tbody tr").count() == len(overview.results)
+        found = state(page)
+        assert found["total"] == len(overview.results)
+        assert sorted(found["shown"]) == sorted(
+            result.id.lower() for result in overview.results
+        )
+        assert found["count"] == count(len(overview.results), overview)
+        link = notice.get_by_role(
+            "link", name=f"{name.upper()} withdrawal explanation", exact=True
+        )
+        assert link.get_attribute("href") == row.path
+        with page.expect_navigation(wait_until="load"):
+            link.click()
+        assert_tombstone(page, row, "", "")
+    finally:
+        page.close()
 
 
 @pytest.mark.parametrize("width", WIDTHS)
