@@ -1,0 +1,38 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 241,
+ "url": "https://kingbird.myphotos.cc/packing/square-241.svg",
+ "retrieved_utc": "2026-10-08T03:12:31Z",
+ "read_from": "fetched into memory",
+ "bytes": 26896,
+ "sha256": "b66a90b47511e15f66d088a7dd9e66c40393770dc2934a65e4fb9635d074679f",
+ "last_modified": "Thu, 10 Sep 2026 00:08:56 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev in March 2019 (to 8 decimal places of precision: s < 15.99595004)",
+  "Source: Improved Packings of n(n\u22121) Unit Squares in a Square (Submitted March 14, 2019; Published October 15, 2021): https://doi.org/10.37236/8586",
+  "Improved by David Ellsworth on November 30, 2024, by adapting a technique from the s(240) found by K\u00e1roly Hajba in September 2015.",
+  "The squeeze achieved here is better than that of the paper by 0.00215139.",
+  "Modified by David Ellsworth on December 22, 2025, to be consistent with an improvement applied to s(132) and s(156) by David W. Cantrell on March 21, 2025.",
+  "This does not result in any side length improvement to the enclosing square, but may conceivably result in better future improvement.",
+  "Improved by David Ellsworth on January 21-22, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "15.99080517810520676514008986816734279398731613031138",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "7.99540258905260338257004493408367139699365806515569",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

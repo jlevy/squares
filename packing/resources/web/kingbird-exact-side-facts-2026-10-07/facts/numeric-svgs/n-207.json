@@ -1,0 +1,36 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 207,
+ "url": "https://kingbird.myphotos.cc/packing/square-207.svg",
+ "retrieved_utc": "2026-10-08T03:12:25Z",
+ "read_from": "fetched into memory",
+ "bytes": 12812,
+ "sha256": "ab8b79d67cd695b841e3f22024bfc652838ca972b0b7b42ce8634782d35fe2cc",
+ "last_modified": "Thu, 10 Sep 2026 00:08:40 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Originally found by Sigvart Brendberg's program, https://hohmiyazawa.github.io/squares_in_rects/squaredrawer.html",
+  "Extended from the s(88) found by Erich Friedman in 1997, by generalizing the s(41) technique found by Charles F. Cottingham in 1979.",
+  "Improved by David Ellsworth on November 25, 2024, by adapting the s(102) improvement by David W. Cantrell in November 2024, as was applied to the s(102) found by K\u00e1roly Hajba in September 2024.",
+  "Improved by David Ellsworth on November 29, 2024, by adapting and extending the full technique used in the s(37) found by David W. Cantrell in September 2002, and the s(130) improvement by David W. Cantrell on November 26, 2024.",
+  "Improved by David Ellsworth on January 20-21, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "14.89395494255333409568479740522850491213470026866840",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "7.44697747127666704784239870261425245606735013433420",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

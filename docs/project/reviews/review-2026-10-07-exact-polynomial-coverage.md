@@ -39,6 +39,31 @@ checked at its own side.
 This extraction is complete for the declared retained corpus; it is not an exhaustive
 literature theorem about which other polynomials exist.
 
+## Numeric SVG Coverage
+
+The current register’s 54 numeric sides do not imply 54 catalogue-numeric rows.
+The pinned catalogue supplies 13 polynomial rows and two exact-form rows for different
+source packings; $n = 211$ has no catalogue picture.
+The other 38 rows are numeric.
+Four were already inspected ($n = 29,55,71,126$); the source packet retains a final
+34-picture audit through `devtools.extract_kingbird_svg_exact`. The derived facts record
+no Mathematica statements, solver calls or `Root` objects in those 34 readings.
+Their rows say “Not yet analytically optimized.”
+
+These 34 first-time readings have their own fetch URLs, dates and byte hashes.
+They are absent from the 2026-10-05 picture receipt, so no earlier-byte agreement is
+claimed. The source packet retains derived mathematical facts and acquisition metadata;
+raw SVG assets are discarded under its retention policy.
+The absence is scoped to these source readings and does not prove that no polynomial can
+be derived or that none exists elsewhere.
+
+All six article URLs used by the historical collector were re-fetched on 2026-10-08 UTC
+and matched their retained HTML byte for byte.
+The packet’s
+[`acquisition/articles.json`](../../../packing/resources/web/kingbird-exact-side-facts-2026-10-07/acquisition/articles.json)
+records the URLs, dates, full hashes and retained paths; no printed polynomial row
+changed in that bounded corpus.
+
 ## Independent Algebraic Checks
 
 One reviewer checked all 126 historical pairs of degree at most 12 with independent
