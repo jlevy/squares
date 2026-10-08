@@ -199,7 +199,11 @@ def test_complete_proposal_preserves_all_lower_history_withdrawals_and_unowned_r
         assert current == expected
         assert Fraction(current["reported_upper_bound"]["exact_form"]) == facts[n].side
         assert "V3/C3 using independently" in text
-        assert "## The retained independently verified ceiling" not in text
+        assert "## The verified upper bound is a ceiling" not in text
+        assert (
+            "actual private-worker admission and confirming record review remain pending."
+            not in " ".join(text.split())
+        )
         assert register.pending_blockers(current) == current["blockers"]
     # Only the explicit 14-case/4-registry roster changes. The other 310 records,
     # three withdrawals, complete houses and four deciding inputs stay exact.
