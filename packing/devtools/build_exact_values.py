@@ -127,6 +127,7 @@ KKT_LOCAL_MIN = "KKT local min"
 KKT_AGREEMENT_FLOOR = 30
 
 CATALOGUE_KEY = "[Kingbird]"
+DERIVED_FROM_SOURCE_CLOSED_FORM = "derived-from-source-closed-form"
 #: Retained exact replay evidence for sources whose rational bounds use upward displays.
 CERTIFIED_CEILING_SOURCES = {
     "[SQUISH ten packings 2026-10-07]": "E-squish-ten-packings-2026-10-07-exact-replay",
@@ -1820,8 +1821,83 @@ def reported_source_historical_entries(entries: list[dict]) -> list[dict]:
     return rows
 
 
+def _catalogue_occurrence(n: int, entry: CatalogueEntry, kind: str) -> dict:
+    return {
+        "path": f"packing/{CATALOGUE_MARKDOWN}",
+        "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html",
+        "kind": kind,
+        "locator": {"line": entry.source_line, "section": str(n)},
+        "source_flags": [],
+    }
+
+
+def source_closed_form_history(entry: dict, source: CatalogueEntry) -> dict | None:
+    """Check a superseded catalogue expression at its own root, with derived provenance."""
+    exact_form = source.exact_form
+    side, current_side = source.side_decimal, str(entry["side"]["value"])
+    if exact_form is None or Decimal(side) <= Decimal(current_side):
+        return None
+    facts = derive_from_exact_form(exact_form)
+    if (
+        entry["polynomial"] is not None
+        and tuple(int(c) for c in entry["polynomial"]["coefficients"]) == facts.coefficients
+        and contains_recorded_side(_registered_root(entry), side)
+    ):
+        return None
+    checks, root = polynomial_checks(entry["n"], facts.coefficients, side, None)
+    check_closed_form_is_the_root(entry["n"], exact_form, root)
+    if root.compare(Fraction(Decimal(current_side))) <= 0:
+        return None
+    checks.update(catalogue="derived-here", galois=_galois(facts.coefficients))
+    return {
+        "n": entry["n"],
+        "kind": "superseded",
+        "current_side": current_side,
+        "side": side,
+        "exact_form": exact_form,
+        "algebraic_source": DERIVED_FROM_SOURCE_CLOSED_FORM,
+        "degree": facts.degree,
+        "polynomial": _polynomial_record(facts.coefficients),
+        "checks": checks,
+        "sources": [_catalogue_occurrence(entry["n"], source, DERIVED_FROM_SOURCE_CLOSED_FORM)],
+        "source_statuses": [],
+        "attribution": {
+            "date_mentions": [] if source.found_year is None else [str(source.found_year)],
+            "source_text": [] if source.credit_line is None else [source.credit_line],
+        },
+        "bead": None,
+    }
+
+
+def append_source_closed_form_history(entries: list[dict], historical: list[dict]) -> None:
+    """Keep omitted source expressions, merging citations only for the same exact root."""
+    catalogue = catalogue_entries()
+    for entry in entries:
+        source = catalogue.get(entry["n"])
+        if source is None:
+            continue
+        derived = source_closed_form_history(entry, source)
+        if derived is None:
+            continue
+        matches = [
+            row
+            for row in historical
+            if row["n"] == entry["n"]
+            and row["polynomial"]["coefficients"] == derived["polynomial"]["coefficients"]
+            and contains_recorded_side(_registered_root(row), derived["side"])
+        ]
+        if not matches:
+            historical.append(derived)
+            continue
+        row = matches[0]
+        row["exact_form"] = derived["exact_form"]
+        for citation in derived["sources"]:
+            if citation not in row["sources"]:
+                row["sources"].append(citation)
+
+
 def build_historical_entries(entries: list[dict]) -> list[dict]:
-    """Recheck the complete printed-source corpus at each source's own side.
+    """Recheck printed equations and retained closed forms at each source's own side.
 
     Source equations can be correct even when their proposed geometry is invalid. These
     entries never change the current side, status or bound. The source flags and exact
@@ -1871,6 +1947,7 @@ def build_historical_entries(entries: list[dict]) -> list[dict]:
             {
                 "n": n,
                 "kind": kind,
+                "algebraic_source": CATALOGUE,
                 "current_side": current_side,
                 "side": side,
                 "degree": len(coefficients) - 1,
@@ -1896,13 +1973,7 @@ def build_historical_entries(entries: list[dict]) -> list[dict]:
                 and contains_recorded_side(_registered_root(row), note["side"])
             ]
             catalogue_entry = catalogue_entries()[entry["n"]]
-            source = {
-                "path": f"packing/{CATALOGUE_MARKDOWN}",
-                "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html",
-                "kind": "current-catalogue",
-                "locator": {"line": catalogue_entry.source_line, "section": str(entry["n"])},
-                "source_flags": [],
-            }
+            source = _catalogue_occurrence(entry["n"], catalogue_entry, "current-catalogue")
             if matches:
                 matches[0]["sources"].append(source)
             else:
@@ -1910,6 +1981,7 @@ def build_historical_entries(entries: list[dict]) -> list[dict]:
                     {
                         "n": entry["n"],
                         "kind": "superseded",
+                        "algebraic_source": CATALOGUE,
                         "current_side": entry["side"]["value"],
                         "side": note["side"],
                         "degree": note["degree"],
@@ -1921,6 +1993,7 @@ def build_historical_entries(entries: list[dict]) -> list[dict]:
                         "bead": None,
                     }
                 )
+    append_source_closed_form_history(entries, historical)
     historical.extend(reported_source_historical_entries(entries))
     return sorted(historical, key=lambda row: (row["n"], Decimal(row["side"]), row["kind"]))
 
