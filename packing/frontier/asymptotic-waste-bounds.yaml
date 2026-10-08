@@ -247,12 +247,15 @@ lower_bounds:
     note: >-
       W1 reported intake of issue #414, v1.0 at abbedcf4bba2e4053f0278e669d84966a89c8b73,
       DOI 10.5281/zenodo.23211207. Statements were checked against the retained primary
-      TeX; confidence describes statement fidelity, not proof acceptance. No source
-      checker ran here and no project confirmation is claimed. The author reports
-      AI reviews and analogue tests, extensive Claude assistance and no human peer
-      review. The v1.2 dependency and new geometric flow arguments await complete
-      review under think-6ptr; the earlier producer replay of v1.1 Lemma 4.10 does
-      not confirm this chain. The theorem settles no count n <= 324, so no
+      TeX; confidence describes statement fidelity. The complete geometric flow chain and
+      v1.2 dependency received a scoped independent review, retained in
+      docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md. The maintained
+      cases/asymptotic/quarter_cube_constants.py checks the two threshold margins,
+      derivative conditions and asymptotic floors in interval arithmetic. These
+      numerical consequences remain conditional on the reviewed geometric premises;
+      independent per-box labelling remains think-k3tk. No source checker ran here
+      and no new project confirmation is claimed. The author reports AI reviews,
+      analogue tests, extensive Claude assistance and no human peer review. The theorem settles no count n <= 324, so no
       result-register entry or small-n lane changes.
   - bound: >-
       REPORTED: k^2 - M(k) > 10^-4 sqrt(k) for integer k in [10^8, 2.5*10^15],
@@ -280,10 +283,14 @@ lower_bounds:
     note: >-
       W1 reported intake of issue #414, v1.0 at 15045f9c6b74bd52f60394b9be593ebe4fb3debc,
       DOI 10.5281/zenodo.23212059. Statements were checked against the retained primary
-      TeX; confidence describes statement fidelity, not proof acceptance. No source
-      checker ran here and no project confirmation is claimed. The path-inclination
-      argument, black-box dependencies, constants and closed-packing reduction await
-      review under think-6ptr. The source reports extensive Claude assistance and AI
+      TeX; confidence describes statement fidelity. The path-inclination argument, inherited
+      dependencies, endpoint branches and closed-packing reduction received the
+      scoped review recorded in docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md.
+      The maintained quarter_cube_constants.py checks all eight published ranges,
+      outward table bounds and both asymptotic floors. Its numerical consequences
+      remain conditional on the reviewed geometric premises; independent per-box
+      labelling remains think-k3tk. No source checker ran here and no new project
+      confirmation is claimed. The source reports extensive Claude assistance and AI
       reviews, not human peer review. No small-n bound changes.
 
   - bound: >-

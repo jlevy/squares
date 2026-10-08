@@ -50,8 +50,10 @@ All thirteen original deciding leaf lists and their checking programs are byte-i
 to the earlier replay inputs.
 Its Lemma 4.10 subclaim therefore retains the original runtime and outcomes; this does
 not transfer the changed whole-source manifest to the new proof.
-The independent per-box labelling obligation remains `think-k3tk`. The revised proof’s
-remaining floating-count obligation is tracked in the scoped review under `think-gcft`.
+The independent per-box labelling obligation remains `think-k3tk`. The maintained `cases/asymptotic/ryu_k2_minus_c_float_gap.py` checks all 25,929
+finite angular comparisons and the specified binary64 operation budget. This certifies
+current-host constants; the historical libm output was not recorded. The scoped
+review preserves that limit and the independent per-box obligation.
 No upstream program was executed for this acquisition, and no small-count bound,
 register T-number, or global optimality claim is added.
 
