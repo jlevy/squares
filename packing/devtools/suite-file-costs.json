@@ -445,6 +445,7 @@
     "packing/tests/test_render_n11_lower_bounds_explainer_pdf.py": 1.659,
     "packing/tests/test_render_n11_optimality_review.py": 4.806,
     "packing/tests/test_render_n11_threshold_bound_review.py": 5.779,
+    "packing/tests/test_render_packing_methods.py": 1.015,
     "packing/tests/test_render_regularized_atlas.py": 0.08,
     "packing/tests/test_render_stack_results.py": 1.023,
     "packing/tests/test_render_wave_efficiency.py": 3.545,
@@ -636,6 +637,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/squish-401-confirmation-2026-10-07.json",
           "provenance": {},
           "tests": 16
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_render_packing_methods.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/packing-methods-2026-10-08.json",
+          "provenance": {},
+          "tests": 10
         }
       ]
     }
