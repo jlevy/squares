@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,20 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T02:50:49.943Z
+updated_at: 2026-10-08T02:54:02.589Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
 
+ACTUAL LIVE ACCEPTANCE AND AUTHOR CLOSEOUT — 2026-10-08 UTC:
+Exactmainf747407a0fa83d80a7894331c770aeb314b23163 sourceclean, Pages37717788426/deployment6925744906SUCCESS, mainPackingvalidation37717788417COMPLETEDSUCCESS. Finalactuallive406/406,supplemental793/793,standard1238/1238,layout48/48PASS; allcurrentstep andaggregateEXIT0. All116results23cases46ordinary/regularizedSVGs+46mainfiguremobile/desktop screenshots,6expandedoverview+2resultsviews visuallyPASS. IndependentAstra finalreceiptACCEPT0findings;186frozenartifactfiles20579425B manifestready. Initialheader/auditor404of406FAIL/browserstandard1230of1238raw1/layoutcallbackabort/raw1/oldaggregate1 preserved distinct. StrictTLSneverdisabled; approvedexecutionusesexistingNSStrust, noCAimport/HOMEproxychange/sourcepatch.
+Finalauthorreply ACTUAL https://github.com/jlevy/squares/issues/422#issuecomment-6051191850 created2026-10-08T02:52:36Z, accurateT116/T115V3C3S3/bothroutes27jobs1141818pairs/feasibilityscope/sharedpremises/sourcecredit/realdeployment. Issue422 ACTUALCLOSED at2026-10-08T02:53:15Z. Earlierpostmergeprogress6051113157 and earlierpendingcheckpointreplies stayhistorical.
+Publication answerbeadthink-qc6y andparent422think-sfpz stayOPEN untilnew minimalonefile requestledgerPRlands, recordingactualreply/date/closedstate/evidence andresolvingqueuedask. Sourceengineering+confirmationchildrenclosed; nativeperformanceP2think-c63vremainsOPEN/raw1 unchanged. CurrentfullstatePR431ready16green50skip/exactfourdoc91c6/currentbodyOR9reviewed; rootlandingcheckpointbefore separateclosureledgerPR. Laterdocumentationmaindeploymentisnotincludedinthisexactf747sitepass.
+FullfinalPR/bead/outbox/recovery supplementbeingfrozen+uploaded; preservationthink-vz6u staysOPENuntilactualGitHubdownload/memberhashverified. Otherdraft434/435 andremainingrepositoryPRfindings/conflicts retainowners/currentauditedscopes; no allrepoPRmerge-readyclaim. Latestreusablestartupsavestillstale_base unsaved, currentinstance andGH/tbdopsverified, testedZIPGitHubbackup preserved.
+
+HISTORICAL RECORD(retained):
 POSTMERGE PUBLICATION AND CURRENT HANDOFF — 2026-10-08 UTC:
 PR427/429 MERGED main f747407a0fa83d80a7894331c770aeb314b23163; hosted final42930SUCCESS26SKIP, matching main Packing validation run37717788417 nowCOMPLETEDSUCCESS, Pages37717788426/deployment6925744906SUCCESS. Exact independentReviewJ retained; strict native suiteD raw1 remains separate P2think-c63vOPEN.
 Actual live HTTP content406/406 and supplemental793/793 PASS, independent auditor-repair90checksPASS; strict browser layout48/48PASS including46casefigure/screens and expandedoverview/results. ExistingNSSCAtrustworks inapprovedexecution withoutCAimport/HOMEproxychange/TLSdisable. Initialstandard1230/1238raw1 and initialexternalcallbacklayoutabort/raw1 are preserved; finalstandard rerun stillrunning, so no final aggregate/publication claim yet.

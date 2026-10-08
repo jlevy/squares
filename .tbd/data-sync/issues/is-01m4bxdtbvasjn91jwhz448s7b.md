@@ -5,7 +5,7 @@ title: Review current PR reports and plan separate import and verification slice
 kind: task
 status: in_progress
 priority: 1
-version: 22
+version: 23
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -25,13 +25,20 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T02:50:48.316Z
+updated_at: 2026-10-08T02:54:00.910Z
 started_at: 2026-10-07T19:28:52.536Z
 ---
 User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
 
 ## Notes
 
+ACTUAL LIVE ACCEPTANCE AND AUTHOR CLOSEOUT — 2026-10-08 UTC:
+Exactmainf747407a0fa83d80a7894331c770aeb314b23163 sourceclean, Pages37717788426/deployment6925744906SUCCESS, mainPackingvalidation37717788417COMPLETEDSUCCESS. Finalactuallive406/406,supplemental793/793,standard1238/1238,layout48/48PASS; allcurrentstep andaggregateEXIT0. All116results23cases46ordinary/regularizedSVGs+46mainfiguremobile/desktop screenshots,6expandedoverview+2resultsviews visuallyPASS. IndependentAstra finalreceiptACCEPT0findings;186frozenartifactfiles20579425B manifestready. Initialheader/auditor404of406FAIL/browserstandard1230of1238raw1/layoutcallbackabort/raw1/oldaggregate1 preserved distinct. StrictTLSneverdisabled; approvedexecutionusesexistingNSStrust, noCAimport/HOMEproxychange/sourcepatch.
+Finalauthorreply ACTUAL https://github.com/jlevy/squares/issues/422#issuecomment-6051191850 created2026-10-08T02:52:36Z, accurateT116/T115V3C3S3/bothroutes27jobs1141818pairs/feasibilityscope/sharedpremises/sourcecredit/realdeployment. Issue422 ACTUALCLOSED at2026-10-08T02:53:15Z. Earlierpostmergeprogress6051113157 and earlierpendingcheckpointreplies stayhistorical.
+Publication answerbeadthink-qc6y andparent422think-sfpz stayOPEN untilnew minimalonefile requestledgerPRlands, recordingactualreply/date/closedstate/evidence andresolvingqueuedask. Sourceengineering+confirmationchildrenclosed; nativeperformanceP2think-c63vremainsOPEN/raw1 unchanged. CurrentfullstatePR431ready16green50skip/exactfourdoc91c6/currentbodyOR9reviewed; rootlandingcheckpointbefore separateclosureledgerPR. Laterdocumentationmaindeploymentisnotincludedinthisexactf747sitepass.
+FullfinalPR/bead/outbox/recovery supplementbeingfrozen+uploaded; preservationthink-vz6u staysOPENuntilactualGitHubdownload/memberhashverified. Otherdraft434/435 andremainingrepositoryPRfindings/conflicts retainowners/currentauditedscopes; no allrepoPRmerge-readyclaim. Latestreusablestartupsavestillstale_base unsaved, currentinstance andGH/tbdopsverified, testedZIPGitHubbackup preserved.
+
+HISTORICAL RECORD(retained):
 POSTMERGE PUBLICATION AND CURRENT HANDOFF — 2026-10-08 UTC:
 PR427/429 MERGED main f747407a0fa83d80a7894331c770aeb314b23163; hosted final42930SUCCESS26SKIP, matching main Packing validation run37717788417 nowCOMPLETEDSUCCESS, Pages37717788426/deployment6925744906SUCCESS. Exact independentReviewJ retained; strict native suiteD raw1 remains separate P2think-c63vOPEN.
 Actual live HTTP content406/406 and supplemental793/793 PASS, independent auditor-repair90checksPASS; strict browser layout48/48PASS including46casefigure/screens and expandedoverview/results. ExistingNSSCAtrustworks inapprovedexecution withoutCAimport/HOMEproxychange/TLSdisable. Initialstandard1230/1238raw1 and initialexternalcallbacklayoutabort/raw1 are preserved; finalstandard rerun stillrunning, so no final aggregate/publication claim yet.
