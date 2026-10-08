@@ -1173,7 +1173,6 @@ def test_selected_squish_report_refreshes_geometry_and_lower_lanes_without_losin
     availability = load_availability()
     catalogue = load_drafting_catalogue([n], availability)
     committed = record_path(FRONTIER, n).read_text()
-    payload = safe_load(committed.split("---\n", 2)[1])["packing"]
     args = argparse.Namespace(
         out=tmp_path, review_date="2026-10-07", retrieved_date="2026-10-07", force=False
     )
@@ -1190,6 +1189,21 @@ def test_selected_squish_report_refreshes_geometry_and_lower_lanes_without_losin
     )
     assert "  rigidity: null\n" in drafted
     assert normalized(with_rigidity_of(committed, drafted)) == normalized(committed)
+
+
+@pytest.mark.parametrize("n", [108, 126, 130, 153, 155])
+def test_selected_squish_report_restores_stale_geometry_and_lower_lanes(
+    n: int, tmp_path: Path
+) -> None:
+    """Refuse, repair and freshly admit each independently corrupted current record."""
+    availability = load_availability()
+    catalogue = load_drafting_catalogue([n], availability)
+    committed = record_path(FRONTIER, n).read_text()
+    payload = safe_load(committed.split("---\n", 2)[1])["packing"]
+    args = argparse.Namespace(
+        out=tmp_path, review_date="2026-10-07", retrieved_date="2026-10-07", force=False
+    )
+    path = record_path(tmp_path, n)
     # A stale display and fraction must not become a self-fulfilling draft. The body
     # declaration and the ordinary verified lower lane are independently regenerated.
     report = payload["reported_upper_bound"]

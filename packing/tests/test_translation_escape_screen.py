@@ -240,6 +240,7 @@ def test_small_records_rescreen_to_the_retained_result() -> None:
         assert screened == (True, cases[n])
 
 
+@pytest.mark.slow
 def test_squish_n108_retains_its_replayed_tolerance_instability() -> None:
     entry = next(row for row in manifest_entries() if row["n"] == 108)
     screened = screen_translation_escape._screen_entry(entry)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
