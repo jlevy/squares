@@ -286,6 +286,47 @@ lower_bounds:
       review under think-6ptr. The source reports extensive Claude assistance and AI
       reviews, not human peer review. No small-n bound changes.
 
+  - bound: >-
+      REPORTED: k^2 - M(k) >= 0.0353 log k for every integer k >= 2;
+      k^2 - M(k) >= 1.99954 (log k - 13.06675)/30.418.
+    side_condition: Integer sides and unit squares pairwise disjoint as closed sets in [0,k]^2; natural logarithms.
+    authors: [Sungjoon Ryu]
+    year: 2026
+    source_key: '[squarepacker k2-minus-c v1.2 2026]'
+    local: web/squarepacker-k2-minus-c-v12-2026-10-06/source/paper/paper
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: log k, at integer sides approached from below
+    constant: >-
+      REPORTED: all-k coefficient 0.0353 and asymptotic coefficient 0.0657.
+      The analytic variant without computer-assisted Lemma 4.10 reports 0.0319.
+      Corollary 1.3 reports 0.0541 for all k >= 2 conditional on Daniel's
+      s(k^2-3) = k for integer k >= 6.
+    corollary: >-
+      REPORTED: c*(k) >= 0.0353 log k - 1, hence s(k^2-c) = k for every fixed c
+      and all sufficiently large k. The explicit formula gives the strict threshold
+      log k > 13.06675 + 30.418c/1.99954 for its fixed-c conclusion.
+    complementary_case: >-
+      This revision settles no count n <= 324 and changes no current small-count bound.
+    note: >-
+      Retained from primary version 1.2 at immutable tag commit
+      e16a5cfa7eed489ea8d84b500e590bf6855a5f2f, committed 2026-10-06 UTC, DOI
+      10.5281/zenodo.23194031; issue #368 comment 6022000514. The full 78-file
+      composition is bound by the acquisition manifest: ten changed files retained
+      and 68 byte-identical files bound to retained version 1.1 copies. Ryu reports
+      extensive Claude assistance and no peer review. This row records reported
+      statements with independently checked numerical consequences: 34 interval rows
+      on the nine-overlap route and 30 on the analytic thirteen-overlap route.
+      The arithmetic remains conditional on the geometric lemmas and coverage.
+      The revised argument adds Lemmas 3.5 and 4.15 and the cutoff 236000. The scoped review and maintained floating-count checker
+      cover all 25,929 finite angular comparisons under explicit binary64 premises.
+      They certify current-host constants, not an unobserved historical libm output;
+      independent per-box labelling remains think-k3tk. All thirteen deciding leaf lists and their checking programs are byte-identical
+      to the earlier replay; that subclaim can reuse its recorded runtime and
+      outcomes, while the changed whole-source manifest is not reused.
+      The earlier version's V3/C1 record and replay remain unchanged. No upstream
+      program was executed for this acquisition.
+
 related_results:
   - result: >
       In computing the asymptotic growth of wasted space it suffices to consider

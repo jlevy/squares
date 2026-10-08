@@ -463,9 +463,14 @@ issues:
           0.0541.
         source: https://github.com/jlevy/squares/issues/368#issuecomment-6022000514
         not_registered: >-
-          Later v1.2 source claim, queued for its own retention and review under think-gcft. The author
-          reports RF2/RF3/RF5 fixes, but RF1 independent per-box labelling remains open; the earlier
-          v1.1 V3/C1 record does not certify these constants.
+          Version 1.2 is retained at immutable tag e16a5cfa7eed489ea8d84b500e590bf6855a5f2f:
+          all 78 source files are bound, with ten changed files retained and 68 byte-identical
+          version 1.1 copies referenced explicitly. Independent interval arithmetic checks
+          34 nine-overlap and 30 thirteen-overlap consequences, with falsifiable source-bound
+          and invalid-domain controls. Scoped proof closure remains under think-gcft;
+          RF1 independent per-box labelling remains think-k3tk. The earlier v1.1 whole-source
+          manifest does not certify this revision; only thirteen unchanged deciding leaf lists
+          and their unchanged checking programs can reuse the earlier Lemma 4.10 replay.
         queued: true
         bead: think-gcft
     beads: [think-8nv9, think-gcft]
