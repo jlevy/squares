@@ -345,7 +345,12 @@ def test_interrupted_atomic_write_resumes_from_the_unchanged_complete_history(
 def test_confirmation_preserves_current_owned_assessment_rendering() -> None:
     from devtools import assess_frontier_rigidity as assessment  # noqa: PLC0415
 
-    positives = confirmation.admit_confirmation()
+    # The transaction tests above admit the full receipts. This writer regression
+    # needs their fourteen immutable source sides, not a second custody transaction.
+    positives = {
+        n: {"checker_input": {"side": str(houses.reports.read_fact(n).side)}}
+        for n in houses.NUMBERS
+    }
     planned = dict(confirmation.case_plan(positives))
     assert set(planned) == {FRONTIER / f"n-{n:03d}.md" for n in houses.NUMBERS}
     for path, rendered in planned.items():
