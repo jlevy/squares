@@ -83,6 +83,7 @@ from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
+from devtools import couzo_refinement_reports as couzo
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import gupta_house_links as gupta
 from devtools import refinement_house_links as refinements
@@ -691,6 +692,7 @@ LINK_BACK = (
 # closeout naming `.github/PULL_REQUEST_TEMPLATE.md`, which only a link could bring
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
+    *couzo.private_input_paths(),
     *second.private_input_paths(),
     *refinements.private_input_paths(),
     *ryxu.private_input_paths(),

@@ -157,6 +157,7 @@ def admit_original(n: int, row: Any, pins: dict[int, Any]) -> legacy.Certificate
 
 
 def import_facts() -> None:
+    ensure_private(fact_path())
     pins = source_pins()
     cases = []
     for n in NUMBERS:
@@ -231,6 +232,11 @@ def check_certification() -> dict[int, Any]:
     return validate_certification(kernel.read_xz(receipt_path()), facts)
 
 
+def private_input_paths() -> tuple[Path, ...]:
+    """Complete original-byte map, all eight source contexts and all24 deciding jobs."""
+    return (PACKET / "acquisition/case-inputs.json", fact_path(), receipt_path())
+
+
 def run_child(job: tuple[int, str], directory: Path, timeout: int) -> dict[str, Any]:
     n, control = job
     if type(n) is not int or n not in NUMBERS or control not in JOBS:
@@ -282,6 +288,7 @@ def certify(directory: Path, *, workers: int = 2, timeout: int = JOB_TIMEOUT) ->
         or not 1 <= timeout <= JOB_TIMEOUT
     ):
         raise kernel.ReportError("invalid bounded worker/deadline selection")
+    ensure_private(receipt_path())
     facts = read_facts()
     if directory.exists():
         raise kernel.ReportError("native job directory must be a fresh attempt")
