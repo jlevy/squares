@@ -24,8 +24,25 @@ from sqpack.yamlio import safe_load
 SOURCE = houses.REPO
 
 
+@pytest.fixture(scope="module")
+def original_source() -> dict[int, dict[str, Any]]:
+    """Complete source state preceding adoption, rather than later current-case text."""
+    if register.HISTORY.exists():
+        return {row["n"]: row for row in register.read_history()}
+    return {
+        n: {
+            "n": n,
+            "frontier": (SOURCE / "packing/frontier" / f"n-{n:03d}.md").read_text(),
+            "house": houses.house_path(n).read_text(),
+        }
+        for n in houses.NUMBERS
+    }
+
+
 @pytest.fixture
-def original_pair(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[int, str]:
+def original_pair(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, original_source: dict[int, dict[str, Any]]
+) -> dict[int, str]:
     repo = tmp_path / "private"
     packet = repo / houses.reports.PACKET.relative_to(SOURCE)
     original_packet = houses.reports.PACKET
@@ -50,11 +67,11 @@ def original_pair(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[int, 
     originals = {}
     for n in houses.NUMBERS:
         original = SOURCE / "packing/frontier" / f"n-{n:03d}.md"
-        originals[n] = original.read_text()
+        originals[n] = original_source[n]["frontier"]
         (register.FRONTIER / original.name).write_text(originals[n])
         house = houses.house_path(n)
         house.parent.mkdir(parents=True, exist_ok=True)
-        house.write_bytes((SOURCE / house.relative_to(repo)).read_bytes())
+        house.write_text(original_source[n]["house"])
     return originals
 
 
@@ -62,12 +79,12 @@ def frontier_bytes() -> dict[int, bytes]:
     return {n: (register.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in houses.NUMBERS}
 
 
-def test_all_fourteen_current_exact_lanes_are_strictly_improved() -> None:
+def test_all_fourteen_previous_exact_lanes_are_strictly_improved(
+    original_source: dict[int, dict[str, Any]],
+) -> None:
     facts = houses.reports.read_facts()
     for n in houses.NUMBERS:
-        document = safe_load(
-            (register.FRONTIER / f"n-{n:03d}.md").read_text().split("---\n", 2)[1]
-        )["packing"]
+        document = safe_load(original_source[n]["frontier"].split("---\n", 2)[1])["packing"]
         for lane in ("reported_upper_bound", "verified_upper_bound"):
             assert facts[n].side < Fraction(document[lane]["exact_form"])
         assert document["conjectured_optimum"] is None
@@ -307,7 +324,9 @@ def test_linked_house_owner_follows_private_current_frontier(
 
 
 def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory(
-    original_pair: dict[int, str], monkeypatch: pytest.MonkeyPatch
+    original_pair: dict[int, str],
+    monkeypatch: pytest.MonkeyPatch,
+    original_source: dict[int, dict[str, Any]],
 ) -> None:
     assert tuple(original_pair) == houses.NUMBERS
     monkeypatch.setattr(houses, "NUMBERS", houses.reports.SELECTED)
@@ -320,6 +339,43 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
     source_path = register.FRONTIER / "source-coverage.yaml"
     source_path.write_bytes((SOURCE / "packing/frontier/source-coverage.yaml").read_bytes())
     original = safe_load(source_path.read_text())
+    if any(row["source_id"] == register.SOURCE_ID for row in original["selected_overrides"]):
+        prior_selections = {}
+        for n, row in original_source.items():
+            prior = safe_load(row["frontier"].split("---\n", 2)[1])["packing"][
+                "reported_upper_bound"
+            ]
+            source = next(
+                item
+                for item in original["sources"]
+                if item["source_key"] == prior["source_key"]
+            )
+            prior_selections[n] = {
+                "n": n,
+                "source_id": source["id"],
+                "value": prior["value"],
+                "evidence": prior["evidence"][0],
+                "reason": "Complete retained source before Gupta adoption.",
+            }
+        original["sources"] = [
+            row for row in original["sources"] if row["id"] != register.SOURCE_ID
+        ]
+        original["selected_overrides"] = [
+            prior_selections.get(row["n"], row) for row in original["selected_overrides"]
+        ]
+        original["superseded_reports"] = [
+            row
+            for row in original["superseded_reports"]
+            if row["source_id"] != register.SOURCE_ID
+            and not (
+                row["n"] in prior_selections
+                and row["source_id"] == prior_selections[row["n"]]["source_id"]
+            )
+        ]
+        for row in original["superseded_reports"]:
+            if row["n"] in prior_selections:
+                row["superseded_by"] = prior_selections[row["n"]]["source_id"]
+        source_path.write_text(register.dump(original))
     withdrawals = (108, 123, 129)
     original_selected = {
         row["n"]: row for row in original["selected_overrides"] if row["n"] in withdrawals
@@ -397,3 +453,24 @@ def test_unaffected_ryxu_link_keeps_its_complete_private_source_owner(
     monkeypatch.setattr(ryxu.reports.kernel, "run_case", forbidden)
     monkeypatch.setattr(ryxu.radical, "exact_verify", forbidden)
     assert check_results.repository_file_problem(path.relative_to(repo).as_posix()) is None
+
+
+@pytest.mark.parametrize("indent", ["", "  "])
+def test_registry_append_preserves_existing_list_indentation(
+    indent: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(registry.packets, "REPO", tmp_path)
+    path = tmp_path / "registry.yaml"
+    text = f"# retained comment\nentries:\n{indent}- id: original\nother: unchanged\n"
+    path.write_text(text)
+    registry.append_rows(path, "entries", [{"id": "new", "value": "3/2"}], "id")
+    value = safe_load(path.read_text())
+    assert value == {
+        "entries": [{"id": "original"}, {"id": "new", "value": "3/2"}],
+        "other": "unchanged",
+    }
+    assert path.read_text().startswith(text.split("other:", maxsplit=1)[0])
+    assert path.read_text().endswith("other: unchanged\n")
+    first = path.read_bytes()
+    registry.append_rows(path, "entries", [{"id": "new", "value": "9/2"}], "id")
+    assert path.read_bytes() == first

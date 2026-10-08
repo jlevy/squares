@@ -44,8 +44,10 @@ def append_rows(path: Path, field: str, rows: list[dict[str, Any]], key: str) ->
         raise ValueError(f"missing {field} list")
     after = re.search(r"^[a-z_]+:", text[start.end() :], re.MULTILINE)
     end = start.end() + after.start() if after else len(text)
+    first = re.search(r"^([ ]*)- ", text[start.end() : end], re.MULTILINE)
+    indent = first.group(1) if first is not None else "  "
     rendered = "".join(
-        "  " + line if line.strip() else line for line in dump(new).splitlines(keepends=True)
+        indent + line if line.strip() else line for line in dump(new).splitlines(keepends=True)
     )
     save(path, text[:end].rstrip() + "\n" + rendered + text[end:])
 

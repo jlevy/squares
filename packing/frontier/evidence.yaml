@@ -28834,3 +28834,38 @@ evidence:
       reviewed_by: GPT-6 Astra separately prompted ry-xu integration review
       note: Accepted finite scientific feasibility and production custody only.
     source_reviewed: '2026-10-08'
+  - id: E-gupta-438-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 123
+      - 129
+      - 130
+      - 153
+      - 154
+      - 179
+      - 180
+      - 199
+      - 207
+      - 208
+      - 209
+      - 236
+      - 237
+      - 238
+      - 239
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Gupta rational refinements 2026-10-08]'
+    certificate: packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: Seventeen complete originals; fourteen improve both current exact upper lanes, three
+      withdrawn certificates remain retained. No optimizer, optimality, rigidity, priority or novelty
+      is established.

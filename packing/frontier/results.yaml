@@ -12909,3 +12909,52 @@ results:
       verdict: accepted
       covers:
       - T-126
+  - id: T-127
+    kind: upper-bound
+    registered: '2026-10-08'
+    headline: Fourteen rational refinements, seventeen complete source cases
+    claim: Seventeen complete rational source certificates are retained, three withdrawals; fourteen
+      offer strictly smaller exact construction sides than both prior upper lanes. No lower bound or
+      optimum is established.
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 123
+      - 129
+      - 130
+      - 153
+      - 154
+      - 179
+      - 180
+      - 199
+      - 207
+      - 208
+      - 209
+      - 236
+      - 237
+      - 238
+      - 239
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: Fourteen strict finite upper-bound improvements; no solved case or lower-bound theorem.
+      scored: '2026-10-08'
+      by: think-q3pd Gupta refinement import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Gupta rational refinements 2026-10-08]'
+      published: '2026-10-08'
+    evidence:
+    - E-gupta-438-rational-report
+    artifacts:
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/
+    - packing/devtools/gupta_refinement_reports.py
+    next_rung: Native outcomes, source/house binding, independent review and actual private-worker custody
+      are required before confirmation.
+    notes: SQUISH credit remains with Nate Chaoweeraprasit; source credits Evan Daniel's optimizer and
+      Siddharth Gupta's precision refinements. Only factual inputs are copied; unlicensed programs/prose
+      are hash-pinned.
