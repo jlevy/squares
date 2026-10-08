@@ -19,6 +19,18 @@ author: Claude (agent), for the repository owner
 are linked to this spec
 (`tbd list --spec plan-2026-10-06-site-urls-seo-performance.md`).
 
+## Implementation Checkpoint (2026-10-07)
+
+PR #395 now tracks implementation of the plan, following senior review A. The generated
+registry and historical audit are in place; static case and result pages, chaptered
+reference pages, prepared mathematics, shared paper assets and workbench assets are
+being integrated in parallel.
+The historical audit found three previously removed result addresses, which require
+explained tombstones before the compatibility gate can pass.
+The remaining work is integration, browser measurements, independent technical reviews,
+and the required CI gates.
+No deployment has been made.
+
 ## Overview
 
 The site at `https://jlevy.github.io/squares/` is starting to get traffic, and people
