@@ -2058,17 +2058,18 @@ pages:
       ceiling matches the unmeasured threshold review until a hosted run supplies this
       job's own cost; its 10-minute operational timeout bounds setup faults.
   - id: exact-side-values
-    measured_seconds: null
-    measured_on: null
-    measured_where: null
-    ceiling_seconds: 300.0
+    measured_seconds: 103.0
+    measured_on: 2026-10-08
+    measured_where: run 37717191603, job 113116412409
+    ceiling_seconds: 150.0
     argument: >-
       The full 366-page coefficient appendix is printed deliberately on this paper's
-      runner. The local final HTML/Markdown/PDF render took 147.85s (2026-10-07),
-      before the renderer tests and artifact upload; this is a provisioning ceiling,
-      not a claimed hosted cost. The first hosted run will replace the null measurement.
+      runner. The first hosted run at 69ebd1a93 took 103s from 02:19:37 to 02:21:20 UTC,
+      including setup, renderer tests, the 55s HTML/Markdown/PDF render/check and upload.
+      The 150s ceiling is 1.46 times that measured job wall, inside max_headroom.
       Full coefficients, source-invalid labels and real PDF layout checks remain;
-      the 10-minute operational timeout bounds provisioning faults.
+      the 10-minute operational timeout bounds provisioning faults. Evidence:
+      https://github.com/jlevy/squares/actions/runs/37717191603/job/113116412409
   - id: pdf
     measured_seconds: 73.3
     measured_on: 2026-09-16

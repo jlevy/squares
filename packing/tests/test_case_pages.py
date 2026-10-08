@@ -438,6 +438,18 @@ def test_case_11_carries_its_polynomial_results_verification_and_links(
     assert '<span class="site-card-label">Verification</span>' in record
 
 
+def test_case_83_keeps_its_exact_degree_and_links_every_coefficient_from_a_small_record(
+    records: dict[str, str],
+) -> None:
+    record = _record(records, 83)
+    assert "Minimal polynomial, degree 672" in record
+    assert "673 coefficients" in record
+    assert '<a href="../papers/exact-side-values.html#current-polynomial-for--83">' in record
+    assert "Exact Side Values for Packing Unit Squares" in record
+    assert "s^{672}" not in record
+    assert len(records["cases/83.html"].encode()) < RECORD_CEILING_BYTES
+
+
 def test_a_case_records_results_list_significance_first(records: dict[str, str]) -> None:
     """Each result in a case record shows its rungs after its id as the tables do: S,
     then V, then C (`overview_sections.rung_chips`)."""
