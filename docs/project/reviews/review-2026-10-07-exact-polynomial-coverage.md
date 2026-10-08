@@ -243,6 +243,35 @@ A regression runs the real published-site head and shared-description checks aga
 both generated pages; it reproduces the failure before the correction.
 The browser’s mathematical data and initial payload are unchanged.
 
+## Native Case Popover Review
+
+The full checkpoint at `a910a0e6ad2a72bc8e57c63e1649c9e25ca5a2f3` exposed one browser
+contract failure: Escape hid the native case popover while its frontier row still
+reported `aria-expanded="true"`. The other 3,243 tests in that behavioral shard and all
+eleven deep/portability jobs passed.
+The main gate and its dependent aggregate failed; their actual logs and timing receipts
+remain retained.
+
+The independent Astra trace confirmed that row collapse waited for a queued `toggle`
+event after native closure.
+The corrected `beforetoggle` close handler collapses the row and invalidates pending
+requests synchronously, retaining that session’s focus target.
+The queued handler restores focus only while the panel remains closed, so it cannot take
+focus from a reopened panel or an outside control.
+
+The retained native-close probe failed before the fix: the same task observed
+`open=false` with row 12 still expanded.
+All 17 required-Chromium case-record controls then passed in 41.34 s, with the original
+immediate Escape assertions intact.
+Held success/error responses exercise a pending external-row change followed by closure;
+cached reopening and outside-focus controls cover the closing session’s boundaries.
+Scoped lint/types passed.
+Astra independently waited for actual queued toggle events and verified final focus
+after closing, rapid reopening and an outside focus change; all three new probes are
+included in the type floor.
+No unresolved review finding remains.
+The close-state review adds no mathematical admission.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

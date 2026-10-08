@@ -452,6 +452,11 @@ Astra review under `think-mo36`. The
 checks the predeclared raw-byte threshold; complete archives preserve the full record.
 The selected mathematical continuation remains `think-s6np`.
 
+The final full checkpoint exercises the shared case-record browser as well.
+`think-gtyf` tracks synchronous case-popover close state, with a deterministic
+regression and independent Astra review; final corrected-head validation is recorded in
+the PR.
+
 The paper checks completeness against the register, independent-series metadata, source
 quotation handling, page construction, artifact dates and Pages scope.
 The final PDF is rendered with the pinned browser and inspected for layout.
