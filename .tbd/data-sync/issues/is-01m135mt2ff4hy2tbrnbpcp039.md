@@ -3,14 +3,18 @@ type: is
 id: is-01m135mt2ff4hy2tbrnbpcp039
 title: n=55 and n=71 have no exact characterization in any retained source
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: codex-polynomial-01a118e4
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
+hold: null
+hold_until: null
 created_at: 2026-08-28T03:12:05.198Z
-updated_at: 2026-08-28T03:12:18.151Z
+updated_at: 2026-10-08T02:34:10.615Z
+started_at: 2026-10-08T02:34:10.613Z
 ---
 Of the five cases with no exact value on record, n=29 has a retained defining system (think-je8y) and n=68/69 have a witness-fidelity blocker (think-ecqk). That leaves n=55 and n=71 with nothing: no radical, no minimal polynomial, no algebraic degree, and no defining equations, across their entire recorded history in resources/web/kingbird-squares-in-squares-compared.md (twelve and eight prior states respectively, all decimal).
 
