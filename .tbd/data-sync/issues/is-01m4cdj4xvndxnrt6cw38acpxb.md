@@ -5,10 +5,12 @@ title: Repair PR429 final-head hosted contracts and generated owners
 kind: bug
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: codex@17e132e9b179
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m4c9pr2kyc3e7ppz4v9ae72y
 parent_id: is-01m4c9pr2kyc3e7ppz4v9ae72y
 child_order_hints:
   - is-01m4cea4ykqxvsx6tqmg83snzm
@@ -16,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:10:41.979Z
-updated_at: 2026-10-08T01:55:19.511Z
+updated_at: 2026-10-08T01:56:40.255Z
 started_at: 2026-10-08T00:11:46.371Z
 ---
 CI run37705180742 at0d01524b has25SUCCESS26SKIP5FAIL. Preserve exact17 behavioral failures across suites A12/B4/C1 and4 validation-owner failures. Repair historical packet and canonical citation scope, selected proof snapshot/index controls, mutable fixture-root ownership, exact integrity trust boundaries, verified-ceiling consumer census, and generated frontier/doc/ceiling prose. Dedicated GPT6.1Sol repair_upper_ci owns source; root owns native and GitHub. Full gate, fresh review of source delta, hosted CI, deployment remain pending. Original wholeA/B/C/D zero findings stay scoped to old0d head, not future repair.
