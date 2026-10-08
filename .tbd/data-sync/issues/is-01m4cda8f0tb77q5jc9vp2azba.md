@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 19
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,70 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T02:33:32.320Z
+updated_at: 2026-10-08T02:41:45.885Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
 
+CURRENT VERIFIED PUBLICATION STATE — 8 October UTC. This supplemental note supersedes
+the older CI-running/unmerged summaries below while retaining their original receipts.
+PR #427 (3345c393) and PR #429 (fc988788) merged at 02:25:18–19Z into main
+f747407a0fa83d80a7894331c770aeb314b23163. Final upper hosted checks passed 30 SUCCESS /
+26 documented SKIP and Review J accepted the final source scope.
+The matching Pages deployment is now complete with SUCCESS, as verified by the
+coordinator. Actual post-deployment live results, case drawings and atlas verification
+remain PENDING; source issue #422 and its final reply/ledger closure remain OPEN. Do not
+close think-sfpz, think-qc6y or think-msos before those actual checks and reply
+complete. Preserve think-vz6u until final supplemental GitHub custody, native
+sync/export/outbox proof and checkpoint publication are complete.
+
+Native source-scope closures are current: think-x2gl, think-cr0f, think-yi1c and
+think-kqd3 CLOSED at 02:33:34–35Z for fixed/reviewed/hosted-green merged engineering
+only. Existing CLOSED think-lbku, think-wyc9 and think-wgdc retain their own scoped
+resolutions. Existing dependency chain think-x2gl → think-kqd3 → think-qc6y remains
+correct; the first two are closed source prerequisites, while final publication/reply
+remains open.
+think-yquo remains in_progress in the inspected record and requires its own
+disposition. Local timing follow-up think-c63v stays OPEN; its native node/tier EXIT1
+timing failure is retained despite hosted source acceptance.
+No budgets, caps or assertions were relaxed.
+
+Keep concurrent refinements separate.
+PR #434 is DRAFT at d702281cc48d37713e5b2dae6b6ce63d3bab06a8, now based on main f747407.
+It carries retained independent finite-feasibility/custody closure ACCEPT and T117/T118
+V3/C3 scientific claims from the earlier 78229 scope, plus newer d702 integration
+changes; current saved CI is 28 SUCCESS / 26 SKIP / 2 FAIL, including
+contact-shade/sweep failure and dependent aggregate.
+That scientific scope is distinct from complete final-head PR integration acceptance.
+Public recovery is claimed complete for 103 files / 13 jobs, source footprint
+201,258,251 B against unchanged 201,326,592 B cap; preserve actual ten-job #425 host-v3
+and three-job #428 source-program receipts without calling the cloud five-job #428
+project-route protocol executed.
+Preserve native think-v42c under codex@spud10 and think-f3dl under codex@17e132e9b179;
+no coowner reclaim/closure from this audit.
+PR #434 remains outside the completed merge through #429.
+
+PR #435 is a separate DRAFT at 69ebd1a93b055020e73d107669d078923fa1b652, based on the PR
+#403 polynomial branch, with six failing checks.
+Epic think-wgo1 remains in_progress under codex-polynomial-01a118e4; selected recovery
+think-s6np is OPEN and blocks think-ohhz and the four followup lanes think-056g,
+think-d2kj, think-gg4k and think-o0az. Preserve polynomial/root/publication claims
+separately from geometric feasibility and the completed SQUISH merge.
+
+Setup remains explicit: both current checkout bootstraps passed 5/5 and the tested
+four-file startup handoff has verified GitHub recovery.
+Latest reusable start_skill save remains CONFLICT/stale_base despite reading draft
+revision 22; save/publication/new-task restoration are unconfirmed.
+A fresh setup chat from current environment settings must reconcile/save the tested
+instructions. Current-machine readiness and archived startup ZIP do not establish
+reusable configuration publication.
+Historical failures, cancellations, skipped/xfail outcomes and unavailable raw exits
+remain unchanged.
+
+
+HISTORICAL RECORD (retained):
 ACTUAL SOURCE MERGE / RECOVERY COMPLETION — 2026-10-08 UTC:
 HostedfinalPR429fc988 all30SUCCESS26documentedSKIP, run37717184184 includingformerlyfailedsuiteD. Lower4273345 likewiseCLEANreviewedgreen. Freshcurrenthead ReviewJ5450641707 ACCEPTsourcecorrectness0findings; old E–I/fullscientificscopesretained. Actualatomic ghstackmerge429--yes--merge SUCCEEDED at02:25:19UTC, mergingONLY427+429 intomain f747407a0fa83d80a7894331c770aeb314b23163. BothGitHubPRstatesMERGED/mergeCommitf747verified. Draft434 excludedandstillpendingownfinalCI/review. Noadmin/force/contextspoof/limitweakening.
 NativewallgapremainsP2think-c63vOPEN:2853assertionspass butnativeD raw1, target14.74>12/tier182.67>143. Thisknownlocalfailureisnotrewrittenasgreen. Codeperformance sourceequivalence108fullenvelopes/27metadata/freshinputs intact; source acceptance/CIengineering cancloseatmergedmilestone whilec63v/deploymentparentsremainopen.
