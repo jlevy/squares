@@ -779,12 +779,12 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert (canvas.width, canvas.height) == (8100, 4656)
     assert canvas.grid_top == 60
     assert canvas.grid_bottom == 4596
-    assert (canvas.information_left, canvas.information_right) == (6840, 8040)
-    assert canvas.legend_baseline == 276
-    assert canvas.explainer_baseline == 550
-    assert canvas.citations_baseline == 577
-    assert canvas.credit_baseline == 604
-    assert canvas.stamp_baseline == 631
+    assert (canvas.information_left, canvas.information_right) == (4640, 8040)
+    assert canvas.legend_baseline == 720
+    assert canvas.explainer_baseline == 1570
+    assert canvas.citations_baseline == 1660
+    assert canvas.credit_baseline == 1750
+    assert canvas.stamp_baseline == 1840
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "known-best-1-324.pdf",
@@ -912,6 +912,66 @@ def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
             assert label.attrib["font-size"] == font_size, n
 
 
+def test_poster_enlarges_information_type_without_changing_card_geometry() -> None:
+    canvas = known_best_builder.COMPOSITES[1]
+    root = ET.Element("svg")
+    spec = RenderSpec(overlays=frozenset())
+    append_information = known_best_builder._append_poster_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    append_card = known_best_builder._append_summary_card  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    append_information(
+        root,
+        spec=spec,
+        canvas=canvas,
+        identity=known_best_builder.retained_identity(_committed_poster_svg()),
+    )
+    baseline_sizes = {
+        "poster-title": 48,
+        "release": 26,
+        "repository": 26,
+        "poster-details": 19,
+        "legend-label": 19,
+        "explainer": 19,
+        "citations": 19,
+        "credit": 19,
+        "release-stamp": 19,
+    }
+    block = root.find("svg:g[@data-feature='poster-information']", SVG)
+    assert block is not None
+    information_text = list(block.iter(f"{{{SVG['svg']}}}text"))
+    assert baseline_sizes.keys() <= {
+        node.attrib.get("data-feature") for node in information_text
+    }
+    for node in information_text:
+        feature = node.attrib.get("data-feature", "")
+        size = Decimal(node.attrib["font-size"])
+        if feature in baseline_sizes:
+            assert size == baseline_sizes[feature] * 3
+            assert size >= baseline_sizes[feature] * 2
+        else:
+            assert size in {Decimal(45), Decimal("34.5")}
+    assert (canvas.width, canvas.height) == (8100, 4656)
+    assert (canvas.grid_top, canvas.grid_bottom) == (60, 4596)
+    for case in known_best_builder.retained_cases((11, 12)):
+        append_card(root, case, spec=spec, canvas=canvas)
+        card = root.find(
+            f"svg:g[@data-feature='packing-card'][@data-n='{case.frontier.n}']", SVG
+        )
+        assert card is not None
+        outline = card.find("svg:rect[@data-feature='container-outline']", SVG)
+        assert outline is not None
+        assert (outline.attrib["x"], outline.attrib["y"]) == (
+            str(312 if case.frontier.n == 11 else 540),
+            "828",
+        )
+        assert (outline.attrib["width"], outline.attrib["height"]) == ("158", "158")
+        for node in card.iter(f"{{{SVG['svg']}}}text"):
+            feature = node.attrib.get("data-feature", "")
+            expected_size = "29" if feature == "packing-label" else "14" if feature else "15"
+            assert node.attrib["font-size"] == expected_size
+        for badge in card.findall("svg:rect[@data-feature='evidence-badge']", SVG):
+            assert (badge.attrib["width"], badge.attrib["height"]) == ("19", "19")
+
+
 def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> None:
     root = ET.fromstring(_committed_poster_svg())
     block = root.find('svg:g[@data-feature="poster-information"]', SVG)
@@ -919,7 +979,7 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
     left, right, top, bottom = (
         Decimal(block.attrib[f"data-{edge}"]) for edge in ("left", "right", "top", "bottom")
     )
-    assert (left, right, top, bottom) == (6840, 8040, 60, 650)
+    assert (left, right, top, bottom) == (4640, 8040, 60, 1930)
     cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
     card_text = {node for card in cards for node in card.iter(f"{{{SVG['svg']}}}text")}
     information_text = set(block.iter(f"{{{SVG['svg']}}}text"))
@@ -1023,7 +1083,12 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
             if canvas.information_in_corner
             else canvas.width - 2 * known_best_builder.SUMMARY_SIDE_MARGIN
         )
-        assert text_width(citations, known_best_builder.SUMMARY_FOOTER_SIZE) < room
+        size = (
+            known_best_builder.POSTER_FOOTER_SIZE
+            if canvas.information_in_corner
+            else known_best_builder.SUMMARY_FOOTER_SIZE
+        )
+        assert text_width(citations, size) < room
         description = root.find("svg:desc", SVG)
         assert description is not None
         assert description.text is not None

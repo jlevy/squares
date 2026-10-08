@@ -369,18 +369,23 @@ SUMMARY_RELEASE_SIZE = SUMMARY_SUBTITLE_SIZE
 SUMMARY_RELEASE_GAP = Decimal(11)
 SUMMARY_SUBTITLE_BASELINE = Decimal(148)
 
-#: The poster uses the triangle's upper-right whitespace instead of a title band and
-#: bottom footer. Its information keeps the figure's type sizes inside this one box.
-POSTER_INFORMATION_WIDTH = Decimal(1200)
+#: The information uses the triangle's upper-right whitespace at three times the
+#: figure's type size. Cards and the canvas keep their original scale and positions.
+POSTER_INFORMATION_TYPE_SCALE = Decimal(3)
+POSTER_TITLE_SIZE = "144"
+POSTER_SUBTITLE_SIZE = "78"
+POSTER_FOOTER_SIZE = "57"
+POSTER_INFORMATION_WIDTH = Decimal(3400)
 POSTER_INFORMATION_TOP = SUMMARY_SIDE_MARGIN
-POSTER_INFORMATION_BOTTOM = Decimal(650)
-POSTER_TITLE_BASELINE = Decimal(108)
-POSTER_RELEASE_BASELINE = Decimal(148)
-POSTER_REPOSITORY_BASELINE = Decimal(182)
-POSTER_DETAILS_BASELINE = Decimal(224)
-POSTER_LEGEND_BASELINE = Decimal(276)
-POSTER_LEGEND_ROW_PITCH = Decimal(32)
-POSTER_EXPLAINER_BASELINE = Decimal(550)
+POSTER_INFORMATION_BOTTOM = Decimal(1930)
+POSTER_TITLE_BASELINE = Decimal(204)
+POSTER_RELEASE_BASELINE = Decimal(340)
+POSTER_REPOSITORY_BASELINE = Decimal(450)
+POSTER_DETAILS_BASELINE = Decimal(560)
+POSTER_LEGEND_BASELINE = Decimal(720)
+POSTER_LEGEND_ROW_PITCH = Decimal(96)
+POSTER_EXPLAINER_BASELINE = Decimal(1570)
+POSTER_FOOTER_LINE_PITCH = Decimal(90)
 # Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
 # absent. No webfont is referenced, so nothing is fetched at render time and the
 # figure is the same family everywhere it is opened.
@@ -606,15 +611,30 @@ class CompositeCanvas:
 
     @property
     def citations_baseline(self) -> Decimal:
-        return self.explainer_baseline + SUMMARY_FOOTER_LINE_PITCH
+        pitch = (
+            POSTER_FOOTER_LINE_PITCH
+            if self.information_in_corner
+            else SUMMARY_FOOTER_LINE_PITCH
+        )
+        return self.explainer_baseline + pitch
 
     @property
     def credit_baseline(self) -> Decimal:
-        return self.citations_baseline + SUMMARY_FOOTER_LINE_PITCH
+        pitch = (
+            POSTER_FOOTER_LINE_PITCH
+            if self.information_in_corner
+            else SUMMARY_FOOTER_LINE_PITCH
+        )
+        return self.citations_baseline + pitch
 
     @property
     def stamp_baseline(self) -> Decimal:
-        return self.credit_baseline + SUMMARY_FOOTER_LINE_PITCH
+        pitch = (
+            POSTER_FOOTER_LINE_PITCH
+            if self.information_in_corner
+            else SUMMARY_FOOTER_LINE_PITCH
+        )
+        return self.credit_baseline + pitch
 
     @property
     def height(self) -> int:
@@ -1652,24 +1672,32 @@ def _badge_baseline(glyph: str) -> Decimal:
 
 
 def _append_badge(
-    parent: ET.Element, glyph: str, style: str, label: str, *, x: Decimal, top: Decimal
+    parent: ET.Element,
+    glyph: str,
+    style: str,
+    label: str,
+    *,
+    x: Decimal,
+    top: Decimal,
+    type_scale: Decimal = Decimal(1),
 ) -> None:
     """Draw one badge at an explicit box top.
 
     Callers position the box rather than passing a text baseline, so the card can
     sit its badges flush with the top of the big number.
     """
+    size = SUMMARY_BADGE_SIZE * type_scale
     if style == "star":
         # The legend's star is the same polygon the cards carry, centred in a badge box
         # so the row lays out as if it were one. `glyph` is unused: there is no star to
         # typeset, which is the point.
         _append_star(
             parent,
-            center_x=x + SUMMARY_BADGE_SIZE / 2,
-            center_y=top + SUMMARY_BADGE_SIZE / 2,
+            center_x=x + size / 2,
+            center_y=top + size / 2,
             feature="legend-star",
             label=label,
-            scale=SUMMARY_BADGE_SIZE * SUMMARY_BADGE_STAR_SPAN / (SUMMARY_STAR_INSET * 2),
+            scale=size * SUMMARY_BADGE_STAR_SPAN / (SUMMARY_STAR_INSET * 2),
         )
         return
     fill, stroke, glyph_fill = {
@@ -1685,23 +1713,23 @@ def _append_badge(
             "data-evidence": label,
             "x": format_svg_number(x),
             "y": format_svg_number(top),
-            "width": format_svg_number(SUMMARY_BADGE_SIZE),
-            "height": format_svg_number(SUMMARY_BADGE_SIZE),
-            "rx": "4.5",
+            "width": format_svg_number(size),
+            "height": format_svg_number(size),
+            "rx": format_svg_number(Decimal("4.5") * type_scale),
             "fill": fill,
             "stroke": stroke,
-            "stroke-width": "1.2",
+            "stroke-width": format_svg_number(Decimal("1.2") * type_scale),
         },
     )
     sub(
         parent,
         "text",
         {
-            "x": format_svg_number(x + SUMMARY_BADGE_SIZE / 2),
-            "y": format_svg_number(top + _badge_baseline(glyph)),
+            "x": format_svg_number(x + size / 2),
+            "y": format_svg_number(top + _badge_baseline(glyph) * type_scale),
             "text-anchor": "middle",
             "font-family": SUMMARY_FONT,
-            "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE),
+            "font-size": format_svg_number(SUMMARY_BADGE_FONT_SIZE * type_scale),
             "font-weight": "650",
             "fill": glyph_fill,
         },
@@ -1715,6 +1743,7 @@ def _legend_row(
     baseline: Decimal,
     canvas_width: int,
     right_edge: Decimal | None = None,
+    type_scale: Decimal = Decimal(1),
 ) -> None:
     """Lay one legend row centered on the canvas or ending at a right edge.
 
@@ -1722,17 +1751,19 @@ def _legend_row(
     swatches. Widths are estimated from the label length because the renderer
     holds no font metrics, so widths come from the Helvetica advance table.
     """
-    top = baseline - SUMMARY_BADGE_SIZE + Decimal(4)
+    badge_size = SUMMARY_BADGE_SIZE * type_scale
+    footer_size = format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
+    mark_gap = Decimal(8) * type_scale
+    top = baseline - badge_size + Decimal(4) * type_scale
 
     def mark_width(mark: object) -> Decimal:
         if isinstance(mark, tuple):
-            return SUMMARY_BADGE_SIZE
-        return SUMMARY_BADGE_SIZE * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
+            return badge_size
+        return badge_size * Decimal(len(mark))  # pyright: ignore[reportArgumentType]
 
-    gap = Decimal(34)
+    gap = Decimal(34) * type_scale
     widths = [
-        mark_width(mark) + Decimal(8) + _text_width(label, SUMMARY_FOOTER_SIZE)
-        for mark, label in entries
+        mark_width(mark) + mark_gap + _text_width(label, footer_size) for mark, label in entries
     ]
     row_width = sum(widths, Decimal(0)) + gap * Decimal(len(entries) - 1)
     if right_edge is not None and row_width > POSTER_INFORMATION_WIDTH:
@@ -1745,8 +1776,8 @@ def _legend_row(
     for (mark, label), width in zip(entries, widths, strict=True):
         if isinstance(mark, tuple):
             glyph, style, name = mark
-            _append_badge(legend, glyph, style, name, x=cursor, top=top)
-            run_end = cursor + SUMMARY_BADGE_SIZE
+            _append_badge(legend, glyph, style, name, x=cursor, top=top, type_scale=type_scale)
+            run_end = cursor + badge_size
         else:
             run_end = cursor
             for fill, numeral in mark:  # pyright: ignore[reportGeneralTypeIssues]
@@ -1757,11 +1788,11 @@ def _legend_row(
                         "data-feature": "legend-swatch",
                         "x": format_svg_number(run_end),
                         "y": format_svg_number(top),
-                        "width": format_svg_number(SUMMARY_BADGE_SIZE),
-                        "height": format_svg_number(SUMMARY_BADGE_SIZE),
+                        "width": format_svg_number(badge_size),
+                        "height": format_svg_number(badge_size),
                         "fill": fill,
                         "stroke": PAPER_THEME.container,
-                        "stroke-width": "0.8",
+                        "stroke-width": format_svg_number(Decimal("0.8") * type_scale),
                     },
                 )
                 if numeral:
@@ -1769,24 +1800,24 @@ def _legend_row(
                         legend,
                         "text",
                         {
-                            "x": format_svg_number(run_end + SUMMARY_BADGE_SIZE / 2),
-                            "y": format_svg_number(top + Decimal("13.4")),
+                            "x": format_svg_number(run_end + badge_size / 2),
+                            "y": format_svg_number(top + Decimal("13.4") * type_scale),
                             "text-anchor": "middle",
                             "font-family": SUMMARY_FONT,
-                            "font-size": "11.5",
+                            "font-size": format_svg_number(Decimal("11.5") * type_scale),
                             "font-weight": "650",
                             "fill": PAPER_THEME.background
                             if hex_oklch(fill)[0] < 0.62
                             else PAPER_THEME.ink,
                         },
                     ).text = numeral
-                run_end += SUMMARY_BADGE_SIZE
+                run_end += badge_size
         sub(
             legend,
             "text",
             {
                 "x": format_svg_number(
-                    run_end + Decimal(8) if right_edge is None else cursor + width
+                    run_end + mark_gap if right_edge is None else cursor + width
                 ),
                 "y": format_svg_number(baseline),
                 **(
@@ -1795,7 +1826,7 @@ def _legend_row(
                     else {}
                 ),
                 "font-family": SUMMARY_FONT,
-                "font-size": SUMMARY_FOOTER_SIZE,
+                "font-size": footer_size,
                 "font-weight": SUMMARY_FOOTER_WEIGHT,
                 "fill": SUMMARY_SMALL_FILL,
             },
@@ -1860,6 +1891,7 @@ def _append_summary_legend(
                 baseline=canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index,
                 canvas_width=canvas.width,
                 right_edge=canvas.information_right,
+                type_scale=POSTER_INFORMATION_TYPE_SCALE,
             )
     else:
         _legend_row(
@@ -1874,12 +1906,18 @@ def _append_summary_legend(
 
 
 def _append_summary_explainer(
-    root: ET.Element, *, baseline: Decimal, canvas_width: int, right_edge: Decimal | None = None
+    root: ET.Element,
+    *,
+    baseline: Decimal,
+    canvas_width: int,
+    right_edge: Decimal | None = None,
+    type_scale: Decimal = Decimal(1),
 ) -> None:
-    kern_width = Decimal(SUMMARY_FOOTER_SIZE) * SUMMARY_ITALIC_KERN
+    font_size = format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
+    kern_width = Decimal(font_size) * SUMMARY_ITALIC_KERN
     kern = format_svg_number(kern_width)
     line_width = sum(
-        (_text_width(text, SUMMARY_FOOTER_SIZE) for text, _italic in SUMMARY_EXPLAINER_RUNS),
+        (_text_width(text, font_size) for text, _italic in SUMMARY_EXPLAINER_RUNS),
         Decimal(0),
     ) + kern_width * Decimal(
         sum(
@@ -1905,7 +1943,7 @@ def _append_summary_explainer(
             ),
             "y": format_svg_number(baseline),
             "font-family": SUMMARY_FONT,
-            "font-size": SUMMARY_FOOTER_SIZE,
+            "font-size": font_size,
             "font-weight": SUMMARY_SMALL_WEIGHT,
             "fill": SUMMARY_SMALL_FILL,
         },
@@ -2043,9 +2081,13 @@ def _append_poster_information(
     )
 
     def text_line(
-        feature: str, content: str, baseline: Decimal, size: str = SUMMARY_FOOTER_SIZE
+        feature: str, content: str, baseline: Decimal, size: str = POSTER_FOOTER_SIZE
     ) -> ET.Element:
-        spacing = Decimal("1.5") if feature == "poster-title" else Decimal(0)
+        spacing = (
+            Decimal("1.5") * POSTER_INFORMATION_TYPE_SCALE
+            if feature == "poster-title"
+            else Decimal(0)
+        )
         extent = _text_width(content, size) + spacing * max(len(content) - 1, 0)
         if extent > POSTER_INFORMATION_WIDTH:
             raise ValueError(f"the poster {feature} line exceeds its information block")
@@ -2074,22 +2116,23 @@ def _append_poster_information(
         "poster-title",
         f"{canvas.spec.count} BEST KNOWN SQUARE PACKINGS",
         POSTER_TITLE_BASELINE,
-        "48",
+        POSTER_TITLE_SIZE,
     )
-    text_line("release", identity.dateline, POSTER_RELEASE_BASELINE, SUMMARY_RELEASE_SIZE)
-    star_span = SUMMARY_STAR_INSET * 2 * _star_scale(SUMMARY_RELEASE_SIZE)
-    release_width = _text_width(identity.dateline, SUMMARY_RELEASE_SIZE)
-    if release_width + SUMMARY_RELEASE_GAP + star_span > POSTER_INFORMATION_WIDTH:
+    text_line("release", identity.dateline, POSTER_RELEASE_BASELINE, POSTER_SUBTITLE_SIZE)
+    star_span = SUMMARY_STAR_INSET * 2 * _star_scale(POSTER_SUBTITLE_SIZE)
+    release_width = _text_width(identity.dateline, POSTER_SUBTITLE_SIZE)
+    release_gap = SUMMARY_RELEASE_GAP * POSTER_INFORMATION_TYPE_SCALE
+    if release_width + release_gap + star_span > POSTER_INFORMATION_WIDTH:
         raise ValueError("the poster release line and star exceed its information block")
     _append_star(
         block,
-        center_x=right - release_width - SUMMARY_RELEASE_GAP - star_span / 2,
-        center_y=_star_center_y(POSTER_RELEASE_BASELINE, SUMMARY_RELEASE_SIZE),
+        center_x=right - release_width - release_gap - star_span / 2,
+        center_y=_star_center_y(POSTER_RELEASE_BASELINE, POSTER_SUBTITLE_SIZE),
         feature="release-star",
-        scale=_star_scale(SUMMARY_RELEASE_SIZE),
+        scale=_star_scale(POSTER_SUBTITLE_SIZE),
     )
     text_line(
-        "repository", SUMMARY_REPOSITORY, POSTER_REPOSITORY_BASELINE, SUMMARY_REPOSITORY_SIZE
+        "repository", SUMMARY_REPOSITORY, POSTER_REPOSITORY_BASELINE, POSTER_SUBTITLE_SIZE
     )
     text_line(
         "poster-details",
@@ -2103,6 +2146,7 @@ def _append_poster_information(
         baseline=canvas.explainer_baseline,
         canvas_width=canvas.width,
         right_edge=right,
+        type_scale=POSTER_INFORMATION_TYPE_SCALE,
     )
     text_line("citations", SUMMARY_CITATIONS, canvas.citations_baseline)
     text_line("credit", SUMMARY_CREDIT, canvas.credit_baseline)

@@ -49,9 +49,11 @@ The eighteen rows end at 324; the final row has thirty-five cards.
 The poster draws 52,650 square polygons from the same witnesses.
 Its title, publication details, complete legend, explanation, citations and credit form
 one right-aligned block in the upper-right whitespace, leaving the bottom for the final
-row of packings.
-The image above is the raster; the vector it was drawn from is one click
-away, and the PDF is an 84.38-by-48.5-inch page.
+row of packings. The information uses three times the figure’s type size, with more room
+between lines and sections; the packing drawings and card captions keep their original
+scale.
+The image above is the raster; the vector it was drawn from is one click away, and
+the PDF is an 84.38-by-48.5-inch page.
 
 | File | Size | For |
 | --- | --- | --- |
