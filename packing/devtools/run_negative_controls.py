@@ -85,6 +85,7 @@ from devtools import refinement_house_links as refinements
 from devtools import ryxu_house_links as ryxu
 from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
+from devtools import wand125_fn1_bindings as fn1
 from devtools.repo_scope import tracked_files
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
@@ -638,6 +639,7 @@ COPY_SEPARATELY = (
     *refinements.private_input_paths(),
     *ryxu.private_input_paths(),
     *evand_houses.private_input_paths(),
+    *fn1.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",

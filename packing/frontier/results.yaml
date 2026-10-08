@@ -11815,7 +11815,7 @@ results:
     - packing/witnesses/squish-401-2026/n-209-rational.yaml.gz
     - packing/witnesses/squish-401-2026/n-238-rational.yaml.gz
     - packing/witnesses/squish-401-2026/n-303-rational.yaml.gz
-    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json.gz
     - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
     - packing/devtools/squish_upper_bound_packets.py
     - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
@@ -11921,7 +11921,7 @@ results:
     - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
     - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
     - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
-    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json.gz
     - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
     - packing/devtools/squish_upper_bound_packets.py
     - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md

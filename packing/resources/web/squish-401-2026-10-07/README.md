@@ -93,8 +93,8 @@ Both are accepted project AI reviews.
 Their reproduced roster and receipt defects were fixed and regression-tested.
 No human oversight record is retained.
 
-The [`certification receipt`](receipts/certification.json) records all eleven complete
-dual decisions and the rational witness paths under
+The [`certification receipt`](receipts/certification.json.gz) records all eleven
+complete dual decisions and the rational witness paths under
 [`packing/witnesses/squish-401-2026/`](../../../witnesses/squish-401-2026/). The
 [`negative-control receipt`](receipts/negative-controls.json) records two mutations of
 the 108-square certificate: duplicate one square to force interior overlap, and move one
@@ -107,8 +107,9 @@ provenance bindings.
 The verified decimal ceiling is the exact certificate side rounded upward at sixteen
 decimals; the case’s `exact_form` remains the original certified rational side.
 The receipt’s `exact_form` and `certified_side` retain that same source rational.
-Both bound lanes use this safe decimal display of the source’s exact rational claim. The original source finite display is retained here, in acquisition and original
-claims metadata, and in the replay receipt.
+Both bound lanes use this safe decimal display of the source’s exact rational claim.
+The original source finite display is retained here, in acquisition and original claims
+metadata, and in the replay receipt.
 At five counts the upward ceiling is smaller than the source display, which was farther
 above the exact fraction; at four it is one unit above a display that lay below the
 fraction.
@@ -147,12 +148,26 @@ fractions. The normalization raises four source displays by one final-place unit
 tightens five overly high displays by eight or nine units, and leaves two unchanged.
 No certificate establishes local or global optimality or rigidity.
 
+## Complete Receipt Retention
+
+The complete certification receipt is stored as deterministic gzip, without changing any
+decoded byte. All eleven deciding inputs and both full native results per count remain
+present. The bounded reader accepts the logical plain name or physical gzip name,
+compares both forms when present, and rereads each invocation.
+The decoded receipt ceiling remains 4,000,000 bytes; ordinary JSON retains its
+1,000,000-byte ceiling.
+Selected producer runs admit the previous complete roster before writing certificates
+and preserve every unselected row.
+Producers refuse twins rather than leaving a stale second representation.
+This representation change does not replay geometry or change claims, verification
+ratings, source assets or bounds.
+
 ## Derived Fact Files
 
 The packet stores derived rational geometry as deterministic gzip.
 The bounded source reader and semantic-input checks validate these files; Git records
-their retained versions. Original upstream byte digests remain in the acquisition
-manifest.
+their retained versions.
+Original upstream byte digests remain in the acquisition manifest.
 
 | Stored path | Squares |
 | --- | --- |
@@ -170,9 +185,8 @@ manifest.
 
 From `packing/`, regenerate complete verification receipts with
 `uv run --frozen --all-extras --group dev python -m devtools.squish_upper_bound_packets certify --workers 2`,
-then replay them with the same command prefix and `check --replay`.
-These commands compare exact deciding geometry; descriptive metadata is outside that
-comparison.
+then replay them with the same command prefix and `check --replay`. These commands
+compare exact deciding geometry; descriptive metadata is outside that comparison.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

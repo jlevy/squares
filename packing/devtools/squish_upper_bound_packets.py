@@ -16,6 +16,7 @@ import json
 import re
 import sys
 import tempfile
+import zlib
 from concurrent.futures import ProcessPoolExecutor
 from fractions import Fraction
 from pathlib import Path
@@ -29,6 +30,7 @@ from devtools.import_half_angle_witness import (
     rational_literal,
     unique_json_object,
 )
+from devtools.retained_data import compressed_path, read_retained_bytes, retained_exists
 from sqpack.witness import exact_verify, load_witness, witness_document
 
 REPO = Path(__file__).resolve().parents[2]
@@ -136,12 +138,25 @@ def _json(value: object) -> bytes:
     return (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
 
 
+def receipt_path() -> Path:
+    """Name the physical receipt, preserving legacy plain packets."""
+    logical = PACKET / "receipts/certification.json"
+    packed = compressed_path(logical)
+    # A restored agreeing plain twin must keep the retained physical claim link.
+    return logical if logical.is_file() and not packed.is_file() else packed
+
+
 def read_json(path: Path) -> Any:
-    ceiling = MAX_RECEIPT_BYTES if path.name == "certification.json" else MAX_SOURCE_BYTES
-    with path.open("rb") as stream:
-        data = stream.read(ceiling + 1)
-    if len(data) > ceiling:
-        raise PacketError("retained JSON exceeds byte ceiling")
+    # Normalize a physical gzip name before the shared reader compares plain/gzip
+    # twins. Reading the gzip directly would bypass that comparison.
+    logical = path.with_suffix("") if path.suffix == ".gz" else path
+    ceiling = MAX_RECEIPT_BYTES if logical.name == "certification.json" else MAX_SOURCE_BYTES
+    try:
+        data = read_retained_bytes(logical, limit=ceiling)
+    except (OSError, ValueError, EOFError, zlib.error) as error:
+        raise PacketError(
+            f"retained JSON byte ceiling or gzip integrity failure: {error}"
+        ) from error
     return json.loads(data, object_pairs_hook=unique_json_object)
 
 
@@ -458,30 +473,42 @@ def negative_controls() -> dict[str, Any]:
 
 
 def certify(numbers: list[int], workers: int) -> None:
-    with ProcessPoolExecutor(max_workers=workers) as pool:
-        rows = list(pool.map(certify_one, sorted(numbers, reverse=True)))
-    path = PACKET / "receipts/certification.json"
-    previous_receipt = read_json(path) if path.exists() else {}
+    logical = PACKET / "receipts/certification.json"
+    if logical.is_file() and compressed_path(logical).is_file():
+        raise PacketError("receipt producer requires one plain or gzip representation")
+    path = receipt_path()
+    # Admit the previous roster before any certificate producer can write. A
+    # selected recertification must preserve all unselected complete input rows.
+    previous_receipt = read_json(logical) if retained_exists(logical) else {}
+    if type(previous_receipt) is not dict:
+        raise PacketError("previous certification roster requires an object")
     if previous_receipt and previous_receipt.get("format") != CERTIFICATION_FORMAT:
         if set(numbers) != set(NUMBERS):
             raise PacketError("old receipts require complete semantic recertification")
         previous_receipt = {}
     previous = previous_receipt.get("cases", [])
+    if (
+        type(previous) is not list
+        or any(type(row) is not dict or type(row.get("n")) is not int for row in previous)
+        or len({row["n"] for row in previous}) != len(previous)
+        or any(row["n"] not in NUMBERS for row in previous)
+    ):
+        raise PacketError("previous certification roster has duplicate or unknown counts")
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        rows = list(pool.map(certify_one, sorted(numbers, reverse=True)))
     merged = {row["n"]: row for row in previous + rows}
-    _write(
-        path,
-        _json(
-            {
-                "format": CERTIFICATION_FORMAT,
-                "producer_checker_replayed": False,
-                "checkers": [
-                    "devtools.check_rational_witness_independent",
-                    "sqpack.witness.exact_verify",
-                ],
-                "cases": [merged[n] for n in sorted(merged)],
-            }
-        ),
+    data = _json(
+        {
+            "format": CERTIFICATION_FORMAT,
+            "producer_checker_replayed": False,
+            "checkers": [
+                "devtools.check_rational_witness_independent",
+                "sqpack.witness.exact_verify",
+            ],
+            "cases": [merged[n] for n in sorted(merged)],
+        }
     )
+    _write(path, gzip.compress(data, mtime=0) if path.suffix == ".gz" else data)
     if NUMBERS[0] in merged:
         _write(PACKET / "receipts/negative-controls.json", _json(negative_controls()))
     if set(merged) == set(NUMBERS):
@@ -499,9 +526,7 @@ def normalized_claims(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
                 "Original source finite displays remain in the acquisition and original "
                 "claims records."
             ),
-            "certificate_receipt": (PACKET / "receipts/certification.json")
-            .relative_to(REPO)
-            .as_posix(),
+            "certificate_receipt": receipt_path().relative_to(REPO).as_posix(),
             "original_claims_record": (PACKET / f"acquisition/{label}-claims.json")
             .relative_to(REPO)
             .as_posix(),
@@ -521,7 +546,7 @@ def normalized_claims(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
 
 
 def check(numbers: list[int], *, replay: bool) -> None:
-    receipt = read_json(PACKET / "receipts/certification.json")
+    receipt = read_json(receipt_path())
     if receipt.get("format") != CERTIFICATION_FORMAT:
         raise PacketError("old receipt format requires semantic recertification")
     if receipt["producer_checker_replayed"] is not False or receipt["checkers"] != [

@@ -30,12 +30,14 @@ def test_duplicate_receipt_rosters_refused(
             }[record]
         )
     )
-    value = json.loads(path.read_text())
+    value = packet.read_json(path)
     if record == "controls":
         value["controls"][1] = value["controls"][0]
     else:
         value["cases"].append(value["cases"][0])
-    path.write_text(json.dumps(value))
+    physical = path if path.is_file() else path.with_name(path.name + ".gz")
+    data = json.dumps(value).encode()
+    physical.write_bytes(gzip.compress(data, mtime=0) if physical.suffix == ".gz" else data)
     monkeypatch.setattr(packet, "PACKET", local)
     monkeypatch.setattr(
         packet, "fact_path", lambda n: original_packet / "facts" / f"n-{n:03d}.json.gz"
@@ -133,7 +135,11 @@ def test_inconsistent_success_receipt_refused(
     monkeypatch.setattr(
         packet,
         "read_json",
-        lambda path: receipt if path.name == "certification.json" else original_load(path),
+        lambda path: (
+            receipt
+            if path.name in {"certification.json", "certification.json.gz"}
+            else original_load(path)
+        ),
     )
     with pytest.raises(ValueError, match="full checker coverage"):
         packet.check([packet.NUMBERS[0]], replay=False)

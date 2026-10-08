@@ -3592,6 +3592,11 @@ def _class_record_claims(context: Context) -> str:
     return _module(context, "devtools.check_class_record_claims")
 
 
+def _fn1_original_bindings(context: Context) -> str:
+    """Complete original-input custody, without geometric replay (#366 FN-1)."""
+    return _module(context, "devtools.wand125_fn1_bindings")
+
+
 def _retained_json_layout(context: Context) -> str:
     # About 1.5s: a line count of every tracked JSON larger than the threshold, then a
     # parse and re-layout of the few over it that no exemption names. Records tier for the
@@ -4511,6 +4516,19 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step("soft-schema validation", _schemas, fast=True, records=True),
+    Step(
+        "FN1 original-input bindings",
+        _fn1_original_bindings,
+        fast=True,
+        records=True,
+        touches=(
+            "packing/devtools/wand125_fn1_bindings.py",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/retained_data.py",
+            "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/*",
+            "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/*",
+        ),
+    ),
     Step(
         "class records do not claim the unconditional bound",
         _class_record_claims,

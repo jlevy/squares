@@ -77,6 +77,14 @@ allowlist:
   - path: packing/devtools/audit_s12_v11_certificate.py
     kind: download
     boundary: squarepacker's v1.1 certificate and Daniel's points against the digests the source and the 2 October packet pinned (#363).
+  - path: packing/devtools/wand125_fn1_bindings.py
+    kind: download
+    boundary: >-
+      Eight original FN-1 compressed inputs and the pinned external binding manifest
+      are compared with the raw byte hashes in the previously retained check2 receipts,
+      the byte-identical published candidates and their mathematical digests. These
+      comparisons close original external-input custody without geometric replay,
+      new bounds, assurance promotion or internal code/verdict hashes.
   - path: packing/devtools/audit_wand125_declared_net.py
     kind: download
     boundary: wand125's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
