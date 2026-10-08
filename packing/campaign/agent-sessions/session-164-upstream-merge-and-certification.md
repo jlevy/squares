@@ -102,7 +102,7 @@ session:
       skipped and 19 deselected in 856.20 seconds wall. The merged branch was published; hosted certification
       remains in progress.'
     evidence:
-    - packing/campaign/agent-sessions/session-164-push-final.log
+    - packing/campaign/agent-sessions/session-164-push-final.log.gz
     - packing/tests/test_synopsis_handoff.py
     stop_reason: Local merged-source push validation passed and was published.
     next_action: Run the supervised efficiency slice beside hosted certification, then reconcile its results
@@ -169,7 +169,7 @@ session:
       and all nine workers started.
     evidence:
     - docs/project/reviews/review-2026-09-29-validation-parallelism.md
-    - packing/campaign/agent-sessions/session-164-efficiency-push.log
+    - packing/campaign/agent-sessions/session-164-efficiency-push.log.gz
     stop_reason: The repaired candidate is published and its hosted checks are running.
     next_action: Integrate the independently reviewed parallel follow-ups and measure the new worker allocation
       while the hosted fanout runs.
@@ -1455,7 +1455,7 @@ session:
     results certify the predecessor integration tree.
   - 'Efficiency candidate 1afb75ca6: default broad push passed 7,714 tests with 9 skips in 968.77 seconds;
     total wall 1,034.70 seconds. The sole failed step was an unmapped new review document. The document-map
-    omission is repaired separately; the original failed log is retained as session-164-efficiency-push.log.
+    omission is repaired separately; the original failed log is retained as session-164-efficiency-push.log.gz.
     Different selection from the earlier 2,959-test run prevents a matched speedup claim.'
   - 'Parallel efficiency follow-ups: think-08ht main/daily fanout passed independent Sol review and five
     focused tests in an isolated checkout; think-14lz child-pytest observability and think-ysvk pool-heavy

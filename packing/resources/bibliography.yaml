@@ -1391,7 +1391,32 @@ sources:
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being
 # guessed at.
+  - key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at bc389ddf7d65277cd19a9b08fb285d86346d6806,
+      issue 425, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
+  - key: '[Rehwaldt n68 refinement 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at fded686668e29258dad2eb29d0482fa3fd51bd6b,
+      issue 428, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
 credited_names:
+  Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang
   David Ellsworth: Ellsworth
