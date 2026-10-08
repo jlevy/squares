@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,25 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T01:34:35.515Z
+updated_at: 2026-10-08T01:46:58.403Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
 
+LATEST STATE — 2026-10-08 UTC; supersedes older pending/head summaries below.
+User requests every completed source change PR'd and full state retained in PRs and native beads. Workflow entry: create-or-update-pr-simple with formal remote stack430 (reported427 then confirmation429); checkpoint431 standalone. Root owns all GitHub/tbd writes; Sol engineering and Astra deep reviews proceed in separate lanes.
+Lower4273345c393182c8e322cd214685f24c200c28693f3 is pushed, ready/CLEAN, hosted30successful checks and documented skips; current ReviewE5450344176 zero findings. Own-checkout173-file native behavior replay:5296PASS30SKIP1XFAIL335.04s, heavy1PASS161.89s, combined rawEXIT0/505.306603s within unchanged900s subset cap. Original metadata61steps97commandsPASS and cancelled130attempts remain separate historical outcomes. Engineeringthink-lbku/environmentthink-wyc9 CLOSED and synced; science/deployment parents OPEN.
+Upper local2aeb518da55f96b79ed5e0e9b2634f269ce27b3b completed native selected push gate63/103stepsPASS rawouter/toolEXIT0,785.600s<unchanged1800 allowance; ordinary5608PASS30SKIP1XFAIL427.84s, heavy1PASS166.66s. Normal merge2e3f1735d6e225df6138a15d10080861cab2db4a preserved concurrenta2 and lower3345; complete tree identical2aeb,23release tests/pin/324atlasPASS, scoped AstraACCEPT. Both nonforce pushes correctly rejected because remote moved again to807ebfb85360e22e3479b8b26380238d5e82550b, adding nine confirmed-certificate atlas references via101026bd and pin. Source owner now integrates807 normally; independent Astra audits all nine exact bindings. Do not force/drop either history or claim2aeb fullgate at later head. Current remote upper remainsdraft/conflicting until integration; actual finalhead CI/review/merge pending.
+PR43191c6d398f38432d3a41f41271a00c84b15758c85 ready/reviewed, hosted16SUCCESS50SKIP. Four documentation files only; preserve dated report, update current PR body and native notes. Hold documentation merge until source stack settles. All3PR reviewThreads empty in latest audit; read all formal/comment updates again before merge. No unrelated openPR readiness claim (433 other owner has failures).
+Issue401 fully merged/deployed/closed:1234sitechecks,149bindings/drawings,38browser/layout checks. Issue422 scientific27completejobs/9positives18controls dualroute1141818totalpairdecisions retained; proposedT116V3C3S3 only, nooptimum/exactrigidity. Actual422deployment remainsUNRUN; agentprepared116rows/23unioncases46SVGs48layouts mobile/desktop, matching actual mergedmain Pages/deployment/status/SHA required. Final422reply/closure/ledger remainsafteractualpublication underthink-qc6y.
+Issue425 frozen10inputsv2 and both protocolreviewsACCEPT, actualprojectdeciders0. Issue428 frozenfiveinputsv2 correct11390pairs/route, complete inputbytes unchanged, both independentmath/bindingreviewsACCEPT0findings (250nongeometrybindingchecks); actualprojectdeciders0. Wrongmetricthink-wgdc CLOSED/synced; parentthink-v42c claimedcodex@spud10, do not reassign/execute without coordination. Storage nextslice prepared:actualsnapshot201227311B/cap201326592B leaves99281B,425184799Bcore exceedsmargin85518B. Rescue closes allthree tempting prunes with0netsavings. Price supportedHostedData plus semanticcustody beforenewreplay; no capraise or claimtransport solvesadmission.
+Authenticated draftrelease406258689 preserves download/memberhash-verified original425138files, earlier703operationsfiles, actual401108renderingfiles, new1968operationsfiles,124finalreviewsfiles, source2aeb/lower3345Gitbundles/nativeexports, storageplanfourassets and newestsetuphandoffZIP. These are authenticated recovery custody, not publicscientific acceptance. Final incremental currentgates/concurrentmerge/review/source/native snapshot archive being prepared; older archives remainimmutable.
+Environment actualbothcheckoutsbootstrap5/5 and GHCLI/API/push/tbd-sync work. Latest complete startup draftsave explicitlyCONFLICT/stale_base; tool says rereading cannot repair it. Download-verified environment-startup-handoff-20261008.zip 8140B SHA2560847d2eaed839412ef11780b5db219c5c8d72caa73c3db5c6219e631f33f5f13 contains proposedstartskill/existinginstall/testedhelper/recoveryREADME. New setupchat fromcurrentsettings reconcile/save needed; productpublication/freshtaskrestore unconfirmed.
+NEXT: publish final normalintegrated upperhead, current-head scopedreview and terminalhostedchecks; atomic cleanreviewed stack430merge; actual matchingmain deployment/results/graphics audit; final422reply/ledger; checkpoint431integration/merge; final GitHubstate/native sync and physical/tracked/PRdiff outboxesEMPTY. Keep source acceptance parents open until actual corresponding milestones. Preservation can close once allsourceheads and currentstate/evidence are GitHubdurable, even if dependent scientificpublication remainsopen.
+
+HISTORICAL APPEND-ONLY RECORD:
 2026-10-08 UTC durable-state checkpoint (coordinator; supersedes earlier pending-head snapshots):
 GitHub reported PR427 head f1d7eacafc1249b430771583edf2120b5fc17d7b and confirmation PR429 head 0d01524be4235b7f12e6a971d73ea7d576fbac0f are both pushed. Formal remote stack430 orders427below429; bothdraft, nonclosingRefs422. Main84881f214086bf5b8ce83a714c4fda6d7be7b2d1 includes merged415/416/418/421/423/426 and closed401 with actual deployed1234/1234,149/149,38/38 checks. Original failures/cancellation retained; no all-green claim.
 Lower final gate run2a901bed9ed345a79ced825056629aa8: actualOUTEREXIT1 total983.36s<1800, reachable801.22s<900, ordinary13219PASS1FAIL30SKIP1XFAIL in799.37s, all97prior commandsPASS, heavyUNRUN. Sole profiler test test_the_profiler_marks_production_the_save_and_the_check; ownerdiagnosis/repairpending. Original620.24s EXIT1/14behavior failures and3c EXIT130 cancellation remain historical receipts.
