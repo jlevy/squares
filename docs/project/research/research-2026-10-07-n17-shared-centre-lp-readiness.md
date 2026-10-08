@@ -46,14 +46,19 @@ hull lies in the open disk.
 Both completed with fresh verification; these are route-selection results, not ordinary
 assignment exclusions or census entries.
 
-Before a target, freeze the first eight assignment records in increasing numerical
-canonical-mask order and a separate accepted endpoint mask.
-The endpoint must have an exact feasible thirty-four-coordinate certificate under the
-same constraints as the pilot.
-Its inherited root or capacity-survivor metadata is insufficient for that check.
-Freeze the union of the pilot and endpoint pair rosters: some of the endpoint’s 136
-pairs may be absent from exp313’s table.
-Reconstruct every required pair from the original cells.
+Freeze the accepted exp308 assignment records for these eight masks, in this order:
+`849919,850943,851839,851903,916351,980927,981887,1630207`. Join their occupied
+catalogue cell identities and retain the union with the separately accepted endpoint’s
+pair roster, at most 24 cells and 276 catalogue pairs.
+Do not choose from a different census or substitute a survivor after observing a result.
+The masks already name canonical catalogue cells; the endpoint’s `f1` action applies
+only to its witness-to-endpoint join, not to these eight assignments.
+Keep $U=1169/250$ and the existing P8 threshold and normals unchanged.
+The accepted endpoint must retain its exact feasible thirty-four-coordinate certificate
+under the same constraints as the pilot; inherited root or capacity-survivor metadata is
+insufficient for that check.
+Reconstruct every required pair from the original cells, including endpoint pairs absent
+from exp313’s table.
 Any incomplete or unresolved pilot state prevents a complete-eight verdict; retain valid
 individual certificates as partial evidence.
 
@@ -205,20 +210,44 @@ This allocation has no measured feasibility or speed forecast.
 
 ## Minimal First-Eight Extension
 
-Astra’s bounded source review identifies a smaller producer path after the endpoint
-control.
-Build each required cell and pair domain once per process: the union contains at
-most 24 cells and 276 pairs.
-Fresh checking constructs its own cache from the held inputs; it never accepts the
-producer’s cached geometry as a premise.
+Implement one pilot module with construction and fresh-check CLI modes, reusing the
+endpoint adapter’s geometry, rows, exact scalar guards, bounded serialization and atomic
+no-replace publication.
+Each process rebuilds its own held-input E/H and closed-plane cache; the checker never
+trusts producer geometry.
+Build each required cell and pair domain once per process.
+Require cached/uncached row parity.
 
-Use one bounded numerical proposal per state with identity row scaling.
-First try the proposed finite coordinates or at-most-thirty-five supported dual weights
-as exact binary rationals.
-Accept only a complete exact primal or Farkas check.
-If that fails, permit one proposed basis/support reconstruction per state; singular
-bases, excess support and failed exact signs remain unresolved.
-Do not scan alternate bases or run exact simplex in this slice.
+Each state receives one fixed bounded proposal sequence:
+
+1. Build the complete exact model before converting a separate copy to finite binary64
+   in original row order with identity scaling.
+   Call `linprog` once with objective `[0]*34+[1]`, inequalities `[A,-1] <= b`, free
+   bounds on all 34 centres, `rho >= 0` and `method="highs-ds"`. Bound the shape before
+   native work: at most 12,580 inequalities and 35 variables.
+   Status, message, iterations and rho are bounded diagnostics, not acceptance tests.
+2. For a completed proposal with the expected finite arrays, try the 34 coordinates as
+   exact binary rationals against every original inequality.
+   An exact primal ends this state’s work as relaxation survival.
+3. Otherwise propose `y=-ineqlin.marginals`. Support means every numerically nonzero
+   entry, preserving negative entries and without tolerance pruning.
+   Only support size 1 through 35 enables the dual path.
+   Try exact binary-rational weights, normalized only by a checked positive sum, through
+   the complete exact Farkas check.
+4. If neither direct certificate passes, allow one fallback.
+   Positive rho uses the reviewed dual reconstruction on admissible support, with QR
+   skipped for support size one; unusable support is unresolved.
+   Nonpositive rho uses one primal basis proposal: sort rows by `abs(slack-rho)`,
+   breaking ties by original row index, take at most the first 68, and use one QR of
+   their transposed coefficient matrix to propose 34 distinct rows.
+   Fewer than 34 candidates is unresolved.
+   Solve that one 34-by-34 system exactly and check every original inequality.
+   No alternate support, pool or basis, exact rank prepass, exact simplex or additional
+   solver call follows failure.
+
+Charge and checkpoint finite-binary64 conversion and retain its exact binary rational
+value. Guard every matrix entry, right side, constant, comparison and certificate
+accumulation.
 
 `solve_square_system` preserves its caller’s scalar operations when every matrix entry,
 right side and its `one` are `Guarded`. This avoids shared solver edits and an exact
@@ -236,12 +265,10 @@ At the row ceilings, one sparse pass needs at most 110,806 checked operations, c
 with 538,526 for the current dense scan.
 These are algebraic work bounds, not elapsed-time measurements or an executed pilot.
 
-The extension still needs controls for guarded elimination growth/deadlines, singular or
-incorrect bases, row/support mutations, negative weights, zero gap, failed cancellation,
-false floating-point infeasibility, shared-centre inconsistency and
-sparse-versus-complete evaluation with closed degeneracies.
-Its allocation must be registered separately; H-323’s 120-second phase limits do not
-allocate the eight-state experiment.
+A failed direct primal followed by a primal fallback permits at most two complete
+all-row passes. These arithmetic counts exclude native numerical work and predict no
+runtime. The extension’s allocation must be registered separately; H-323’s 120-second
+phase limits do not allocate the eight-state experiment.
 
 ### One-Solve Sparse Dual Reconstruction
 
@@ -276,15 +303,55 @@ and [`test_promote_exact_lp.py`](../../../packing/tests/test_promote_exact_lp.py
 contain relevant certificate and basis controls; they were inventoried, not rerun for
 this handoff.
 
-Fresh checking must reconstruct the selected geometry and row map, verify the exact
-certificate, compare mathematical payloads, and recheck all named generated inputs after
-proof work. Curated source identity remains Git provenance.
+Preregister one visit to each frozen state in order and all statuses before targets.
+An exact primal or dual ends that state’s work.
+Malformed/nonfinite proposals, numerical difficulties, infeasible/unbounded numerical
+statuses, singular selection and failed exact certificates are unresolved.
+Per-call solver-limit status 1 makes that state incomplete without retry; later frozen
+states may still run while aggregate guards allow.
+Phase-level resource or cleanup failure stops the phase incomplete.
+Invalid accepted input, custody or model identity is refused.
+Preserve the first failure reason and completed partial evidence.
+
+Explicitly allocate the existing 120-second construction and fresh phases, 2,000,000 new
+guarded scalar operations per phase, 4096-bit reduced operands/results, geometry/row
+ceilings and an 8 MiB new packet.
+Retain 10 MiB descriptor and 64 MiB accepted-role input limits, outer TERM at 240
+seconds, KILL at 250, ten-second cleanup, sampled 4 GiB RSS per live process, a
+0.25-second inter-sample sleep and a one-second cap per `ps` sample.
+This samples per-process RSS; it is not an exact cadence or hard memory cap.
+Prospective native allocation is at most five requested HiGHS seconds and 10,000
+iterations per state, with solve time further bounded by remaining phase time.
+At most eight solver calls total, one per state, and at most one QR per state are
+allowed; no call starts after the phase deadline.
+Imports, conversion, QR and cleanup still require outer supervision.
+These are proposed allocations, not measurements or permissions to enlarge guards.
+
+A normally completed producer can retain per-state unresolved or incomplete
+dispositions; that is no complete-eight verdict.
+Its fresh process reconstructs all geometry/rows, checks exact certificates and original
+identities, accounts for every frozen state, compares mathematical payloads and rechecks
+held bytes after proof work, without numerical proposals, QR or elimination.
+A nonzero/resource-aborted producer stops the existing phase runner before fresh
+checking; saved locally checked candidates are not accepted fresh results, and no extra
+phase or retry is launched.
+
+Keep compact state identities and either 34 exact coordinates or at most 35 original row
+IDs and exact weights, with bounded diagnostics; no submitted dense float arrays or row
+coefficients become premises.
+Before registration, review controls for proposal shapes/signs/statuses, exactly one
+fallback, singular selection, full cancellation equations, zero gap, negative weights,
+row identities, guarded growth/deadlines, sparse/dense and cached/uncached parity, and
+fresh custody. Freeze argv, source provenance, accepted inputs, numerical
+versions/options, roster, status rules and unused output paths.
+Use the existing registered runner and supervisor; do not replay H324 as an unregistered
+exploratory control.
+Any unresolved or incomplete state prevents a complete-eight verdict.
+Curated source identity remains Git provenance.
+A verified primal is a relaxation survivor.
 A verified contradiction can support only a separately reviewed ordinary-assignment
-result; any census admission still needs the standing composition and deduplication
-contract. A verified primal is a relaxation survivor.
-Resource exhaustion is incomplete; absence of a certificate is unresolved.
-The endpoint adapter supplies the geometry and primal-reading seam for a future LP
-producer. Exact Gaussian reconstruction and Farkas checking still need bounded adapters
+result; census admission still needs the standing composition and deduplication
+contract. Exact Gaussian reconstruction and Farkas checking still need bounded adapters
 before the numerical proposal layer can be qualified.
 No first-eight pilot result, ordinary admission or global bound is established here.
 

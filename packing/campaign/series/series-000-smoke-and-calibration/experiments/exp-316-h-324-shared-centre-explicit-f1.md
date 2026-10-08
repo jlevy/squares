@@ -54,8 +54,9 @@ experiment:
     outcome: criterion_met
     checked_by: Fresh reconstructed full mathematical model/point matches, all810rows pass exactly,17cells136pairs34coordinates,291079construction/291080fresh
       operations. Both phasesexit0; owned-group supervisionCOMPLETED/normal_exit rc0/cleanuptrue.
-      All held inputbytes rechecked after proof/provenance; sole Astra source/receipt custody
-      review clear without predicate rerun. All4proof-scope flags false.
+      Witness and transitive accepted inputs rechecked after reconstruction and exact primal
+      checking; descriptor and construction packet additionally rechecked after provenance.
+      Sole Astra source/receipt custody review clear without predicate rerun. All4proof-scope flags false.
   verdict:
     decision: accepted
     primary_criterion: At U=1169/250 and lambda=1, reconstruct all seventeen E_i and all136
