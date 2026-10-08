@@ -12,6 +12,7 @@ from typing import Any
 
 import yaml
 
+from sqpack.exact_values import algebraic_fields
 from sqpack.yamlio import safe_load
 
 COVERAGE = Path(__file__).resolve().parents[1] / "frontier/source-coverage.yaml"
@@ -69,8 +70,7 @@ def _adopt_selected_update(n: int, existing: str, generated: str) -> str:
     report.update(
         value=update.display(fact["side"]),
         exact_form=fact["side"],
-        algebraic_degree=1,
-        minimal_polynomial=None,
+        **algebraic_fields(fact["side"], 1, None),
         analytically_optimized=None,
         catalogue_rigid="not-stated",
         construction_method="unknown",
@@ -312,8 +312,7 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
             else fact["printed_side"]
         ),
         exact_form=fact["side"],
-        algebraic_degree=1,
-        minimal_polynomial=None,
+        **algebraic_fields(fact["side"], 1, None),
         analytically_optimized=None,
         catalogue_rigid="not-stated",
         construction_method="unknown",

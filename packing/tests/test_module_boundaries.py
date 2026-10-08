@@ -1035,6 +1035,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
+        # Focused Mac CPython 3.14.7 frozen upstream-integration replay, 2026-10-08:
+        # 2.83s call at two CPUs (5.60s command wall). Its existing slow marker meets
+        # the two-second marking floor; smaller entry rebuilds stay in the quick lane.
+        "test_build_exact_values.py": {
+            "test_the_committed_register_equals_a_fresh_build",
+        },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.
         "test_n17_endpoint_feasibility.py": {

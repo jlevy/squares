@@ -392,7 +392,18 @@ def self_test(
             findings.append(f"{control}: missing final-validation cost")
     baseline = observations["control"]["metrics"]
     delayed = observations["delayed"]["metrics"]
-    if delayed.get("parameters_ready_ms", 0) - baseline.get("parameters_ready_ms", 0) < 150:
+    # Navigation and instrumentation overhead vary between fresh browsers. The
+    # injected delay belongs to one readiness call, whose own wait the probe records.
+    baseline_wait = baseline.get("initial_ready_wait_ms")
+    delayed_wait = delayed.get("initial_ready_wait_ms")
+    if not (
+        isinstance(baseline_wait, (int, float))
+        and isinstance(delayed_wait, (int, float))
+        and math.isfinite(baseline_wait)
+        and math.isfinite(delayed_wait)
+        and baseline_wait >= 0
+        and delayed_wait - baseline_wait >= 150
+    ):
         findings.append("the delayed control did not record the known 300 ms delay")
     if mode == "full":
         changed = observations["width-change"]
