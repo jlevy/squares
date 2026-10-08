@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,21 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T02:41:45.885Z
+updated_at: 2026-10-08T02:50:49.943Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
 
+POSTMERGE PUBLICATION AND CURRENT HANDOFF — 2026-10-08 UTC:
+PR427/429 MERGED main f747407a0fa83d80a7894331c770aeb314b23163; hosted final42930SUCCESS26SKIP, matching main Packing validation run37717788417 nowCOMPLETEDSUCCESS, Pages37717788426/deployment6925744906SUCCESS. Exact independentReviewJ retained; strict native suiteD raw1 remains separate P2think-c63vOPEN.
+Actual live HTTP content406/406 and supplemental793/793 PASS, independent auditor-repair90checksPASS; strict browser layout48/48PASS including46casefigure/screens and expandedoverview/results. ExistingNSSCAtrustworks inapprovedexecution withoutCAimport/HOMEproxychange/TLSdisable. Initialstandard1230/1238raw1 and initialexternalcallbacklayoutabort/raw1 are preserved; finalstandard rerun stillrunning, so no final aggregate/publication claim yet.
+Cost-first fullstatePR431body updated, OR9PASS, exact publishedbody/sourcehead91c6 verified. Actualpostmerge422progress https://github.com/jlevy/squares/issues/422#issuecomment-6051113157; issueOPENuntilfinalstandard/live receipt+authorreply+requestledger. Minimalonefileledgerpatch/reply/process/validatedsyntheticfixture prepared outsidecheckout; real6reply/date/count placeholders must befilled fromactualreceipts, never syntheticcommitted.
+All sourcebranches pushed/merged; rootmainf747 andlower3345 clean; all physicaldiscovered andtrackedoutboxes empty. All9completeowningnotes verified onactualremote tbd-sync snapshot05d94013b. Currentall-openPRaudit captured14open+merged427429:434d702draft2fastfail(contactshade/aggregate), retainedscientificclosureV3C3distinctfromintegration;43569ebddraft6failownpolynomialscope;395/410formalfindings and403404433conflicts remainwithowners. Native coowners and threeupstream428 vsfiveprojectprepared protocol distinctions preserved. Setup reusablelateststartsave stillstale_base unsaved; currentinstance tested and setupZIPGitHubrecovered, newsetupchat required.
+Finalcustody supplement willretainexactcurrentPR/native/merge/CI/deployment/initialfailure+rerun/closeoutpreparation state; preservationthink-vz6u staysopen untilactualdownload verification. Publicationqc6y and422parent sfpz stayopen untilrealcloseout ledger lands; globalmsos tracksremainingintake.
+
+HISTORICAL RECORD (retained):
 CURRENT VERIFIED PUBLICATION STATE — 8 October UTC. This supplemental note supersedes
 the older CI-running/unmerged summaries below while retaining their original receipts.
 PR #427 (3345c393) and PR #429 (fc988788) merged at 02:25:18–19Z into main

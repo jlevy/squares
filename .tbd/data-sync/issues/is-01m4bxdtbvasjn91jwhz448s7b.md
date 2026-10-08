@@ -5,7 +5,7 @@ title: Review current PR reports and plan separate import and verification slice
 kind: task
 status: in_progress
 priority: 1
-version: 21
+version: 22
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -25,13 +25,21 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T02:41:44.232Z
+updated_at: 2026-10-08T02:50:48.316Z
 started_at: 2026-10-07T19:28:52.536Z
 ---
 User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
 
 ## Notes
 
+POSTMERGE PUBLICATION AND CURRENT HANDOFF — 2026-10-08 UTC:
+PR427/429 MERGED main f747407a0fa83d80a7894331c770aeb314b23163; hosted final42930SUCCESS26SKIP, matching main Packing validation run37717788417 nowCOMPLETEDSUCCESS, Pages37717788426/deployment6925744906SUCCESS. Exact independentReviewJ retained; strict native suiteD raw1 remains separate P2think-c63vOPEN.
+Actual live HTTP content406/406 and supplemental793/793 PASS, independent auditor-repair90checksPASS; strict browser layout48/48PASS including46casefigure/screens and expandedoverview/results. ExistingNSSCAtrustworks inapprovedexecution withoutCAimport/HOMEproxychange/TLSdisable. Initialstandard1230/1238raw1 and initialexternalcallbacklayoutabort/raw1 are preserved; finalstandard rerun stillrunning, so no final aggregate/publication claim yet.
+Cost-first fullstatePR431body updated, OR9PASS, exact publishedbody/sourcehead91c6 verified. Actualpostmerge422progress https://github.com/jlevy/squares/issues/422#issuecomment-6051113157; issueOPENuntilfinalstandard/live receipt+authorreply+requestledger. Minimalonefileledgerpatch/reply/process/validatedsyntheticfixture prepared outsidecheckout; real6reply/date/count placeholders must befilled fromactualreceipts, never syntheticcommitted.
+All sourcebranches pushed/merged; rootmainf747 andlower3345 clean; all physicaldiscovered andtrackedoutboxes empty. All9completeowningnotes verified onactualremote tbd-sync snapshot05d94013b. Currentall-openPRaudit captured14open+merged427429:434d702draft2fastfail(contactshade/aggregate), retainedscientificclosureV3C3distinctfromintegration;43569ebddraft6failownpolynomialscope;395/410formalfindings and403404433conflicts remainwithowners. Native coowners and threeupstream428 vsfiveprojectprepared protocol distinctions preserved. Setup reusablelateststartsave stillstale_base unsaved; currentinstance tested and setupZIPGitHubrecovered, newsetupchat required.
+Finalcustody supplement willretainexactcurrentPR/native/merge/CI/deployment/initialfailure+rerun/closeoutpreparation state; preservationthink-vz6u staysopen untilactualdownload verification. Publicationqc6y and422parent sfpz stayopen untilrealcloseout ledger lands; globalmsos tracksremainingintake.
+
+HISTORICAL RECORD (retained):
 CURRENT VERIFIED PUBLICATION STATE — 8 October UTC. This supplemental note supersedes
 the older CI-running/unmerged summaries below while retaining their original receipts.
 PR #427 (3345c393) and PR #429 (fc988788) merged at 02:25:18–19Z into main
