@@ -1223,6 +1223,21 @@ wider centre cases; additional progress is measured from the union of surviving 
   Partial/resource/refusal unresolved.
   No arbitrary newpolygon/LP/forest test/physical packing/globalbound.
 
+- **H-323 — Exact Shared-Centre Endpoint Control.** Use the accepted exp-235 rational
+  packing at lambda=1 and U=1169/250, with exact centre means, concentric translation
+  and r3 rotation into endpoint mask1900015. Fresh original-cell membership must pass;
+  source row labels and inherited candidate cells alone are insufficient.
+  Construct all seventeen centre domains and all136 pair domains, retain every closed
+  row, and require the exact34-coordinate primal to satisfy the complete system.
+  A separate process reconstructs the full geometry and point, compares mathematical
+  payloads and rechecks held generated inputs.
+  Complete successful bounded supervision is required.
+  The registered cooperative120s phase limits, combined240s TERM/250s KILL, sampled4GiB
+  per-process RSS, scalar and output limits are allocation rather than performance
+  claims. Resource stops and unavailable sampling are scientifically incomplete; invalid
+  input/membership remains refused and unresolved.
+  No first-eight LP result, ordinary exclusion, census admission or bound movement.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

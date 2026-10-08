@@ -365,6 +365,7 @@
     "packing/tests/test_n17_root_certificate_producer.py": 0.007,
     "packing/tests/test_n17_scheduled_row_support.py": 0.042,
     "packing/tests/test_n17_selective_halving.py": 0.731,
+    "packing/tests/test_n17_shared_centre_lp.py": 16.098,
     "packing/tests/test_n17_weighted_certificate.py": 0.166,
     "packing/tests/test_n17_weighted_certificate_child.py": 3.126,
     "packing/tests/test_n17_weighted_certificate_parallel.py": 1.942,
@@ -703,6 +704,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/n17-issue-reconciliation-2026-10-08.json",
           "provenance": {},
           "tests": 5
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_n17_shared_centre_lp.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-shared-centre-endpoint-2026-10-08.json",
+          "provenance": {},
+          "tests": 35
         }
       ]
     }

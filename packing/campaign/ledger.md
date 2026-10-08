@@ -1217,6 +1217,7 @@ Status: **completed**. Produce substantive exact mathematical results toward n17
 | H-320 | refuted | proof | Saved-Pose Incircle Discriminator |  | 1 |  | 2s wall |
 | H-321 | confirmed | proof | Whole-Cell Incircle Projection Redundancy |  | 1 |  | 1s wall |
 | H-322 | confirmed | proof | Exact Disk Convexification Discriminator |  | 1 |  | 2s wall |
+| H-323 | open | proof | The accepted rational n17 packing supplies an exact feasible endpoint  |  | 0 |  |  |
 
 ## Needs review — held for a human, not decided
 
