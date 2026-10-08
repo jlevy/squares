@@ -754,6 +754,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | n11-optimality/t-060-explainer.md | papers/n11-optimality-review.md | copy | assembly | 2026-09-29 | 2026-10-02 | live → papers/n11-optimality-review.md |
 | n11-optimality/t-060-explainer.pdf | papers/n11-optimality-review.pdf | copy | assembly | 2026-09-29 | 2026-10-02 | live → papers/n11-optimality-review.pdf |
 | papers.html | papers.html | page | overview | 2026-09-29 | 2026-10-02 | live |
+| papers/exact-side-values.html | papers/exact-side-values.html | paper-file | paper:exact-side-values | 2026-10-07 | 2026-10-08 | live |
+| papers/exact-side-values.md | papers/exact-side-values.md | paper-file | paper:exact-side-values | 2026-10-07 | 2026-10-08 | live |
+| papers/exact-side-values.pdf | papers/exact-side-values.pdf | paper-file | paper:exact-side-values | 2026-10-07 | 2026-10-08 | live |
 | papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |
 | papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |
 | papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |

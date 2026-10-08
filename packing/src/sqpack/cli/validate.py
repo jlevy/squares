@@ -3771,6 +3771,12 @@ def _retained_json_layout(context: Context) -> str:
     return _module(context, "devtools.check_retained_json")
 
 
+def _tracked_pdf_sizes(context: Context) -> str:
+    # Only staged blob metadata is read. The universal limit holds the bytes that a
+    # commit would retain, even if a working copy has since shrunk or disappeared.
+    return _module(context, "devtools.check_tracked_pdfs")
+
+
 def _rung_figures(context: Context) -> str:
     # Sub-second: it sums a few dozen certificate atoms in exact Fraction arithmetic and
     # regex-scans results.yaml, evidence.yaml, and defects.yaml. Records tier because it
@@ -4738,6 +4744,14 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/repo_scope.py",
             "packing/src/sqpack/retained_json.py",
         ),
+    ),
+    Step(
+        "tracked PDFs stay within 5 MiB",
+        _tracked_pdf_sizes,
+        fast=True,
+        records=True,
+        # An indexed PDF can appear anywhere, with any suffix case.
+        touches=("*",),
     ),
     Step(
         "derivation (needs sympy)",
@@ -6040,6 +6054,8 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # The same shape: the tracked JSON, its own policy and `biome.json`, and the
         # writer it re-lays them with. No clock, no network, no history.
         "retained JSON is one record per line",
+        # Git index blob sizes are a function of the checked tree, not its history.
+        "tracked PDFs stay within 5 MiB",
         # The same shape: it reads the tracked Markdown under `packing/resources/` and
         # compares three numbers found in those bytes. No clock, no network, no history.
         "archive annotation census agrees with the archive",

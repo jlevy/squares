@@ -34,7 +34,10 @@ exact elimination, branch selection, and geometric feasibility link it to the pa
 ### Every recorded exact expression
 
 The table includes integers and rational values as well as nonrational radical forms.
-“Claim” describes the geometric and global status recorded for that value.
+An exact rational feasibility bound $p/q$ in lowest terms has degree one and primitive
+polynomial $qs-p=0$. This identifies the certified witness’s side; it does not determine
+the degree or value of the unknown optimum $s(n)$. “Claim” describes the geometric and
+global status recorded for that value.
 
 {{EXACT_FORMS}}
 
@@ -42,7 +45,11 @@ The table includes integers and rational values as well as nonrational radical f
 
 The record/KKT column gives decimal digits of agreement in that order.
 “One real root” refers to the stated rational interval, not to all real roots of the
-polynomial.
+polynomial. Recorded decimals ordinarily truncate or round the isolated root.
+For a replay-backed SQUISH rational upper bound, the display is an upward decimal
+ceiling: if its final printed unit is $u$, the exact rational side $r$ and display $d$
+satisfy $r\le d<r+u$. The register retains $r$ exactly and checks this inequality; the
+decimal ceiling establishes no additional optimality claim.
 
 {{CHECK_SUMMARIES}}
 
@@ -57,13 +64,18 @@ Routes and bead identifiers are reproduced from the register.
 ## Historical Source Polynomials
 
 This collection keeps the current $n=1\ldots324$ values and their totals separate from
-additional polynomial-side pairs printed in retained primary sources.
+additional exact sides from retained primary sources.
 It includes superseded sides and facts beyond the current frontier.
+A `catalogue` row retains a printed polynomial.
+A `derived-from-source-closed-form` row retains the source’s expression and a polynomial
+computed from it here; its citation identifies that expression rather than a printed
+equation. Citations for the same polynomial and isolated root are merged.
 A `source-invalid` row preserves a printed equation that may pass its algebraic checks,
 but the source row does not furnish a valid packing upper bound.
 Each entry carries its own attribution and source labels.
-Its checks compare the polynomial with its printed side; they do not compare it with a
-current packing’s KKT value.
+Its checks compare the polynomial with the source’s side and, where retained, verify
+that the closed form selects that root.
+They do not compare it with a current packing’s KKT value.
 
 {{HISTORICAL_SUMMARY}}
 

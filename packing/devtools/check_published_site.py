@@ -444,20 +444,26 @@ def head_problems(
         problems.append("og:image:alt is empty")
     require("twitter:image:alt", tags["twitter:image:alt"], alt or "")
     require("twitter:card", tags["twitter:card"], "summary_large_image")
-    # Stable SVG/PNG icons are resolved from each page's address. The standalone
-    # workbench artifact keeps its approved inline SVG under its isolated CSP.
+    # Site pages use stable SVG/PNG icons. Self-contained artifacts keep the exact
+    # approved inline SVG so a downloaded complete document needs no icon files.
     icons = head.link("icon")
     expected_icons = {
         render_overview.SITE_URL + "favicon.svg",
         render_overview.SITE_URL + "favicon-48.png",
     }
     resolved = [urljoin(page_url or canonical, icon) for icon in icons]
-    inline_workbench = (
-        (allow_inline_favicon or canonical == render_overview.canonical_url(WORKBENCH_PAGE))
+    inline_pages = {
+        render_overview.canonical_url(WORKBENCH_PAGE),
+        render_overview.canonical_url(
+            render_overview.paper_path(f"{render_overview.EXACT_SIDE_VALUES}-complete")
+        ),
+    }
+    inline_artifact = (
+        (allow_inline_favicon or canonical in inline_pages)
         and len(icons) == 1
         and icons[0] == render_overview.favicon_url()
     )
-    if not inline_workbench:
+    if not inline_artifact:
         if len(icons) != 2:
             problems.append(f"{len(icons)} icon links, expected the SVG/PNG pair")
         elif set(resolved) != expected_icons:

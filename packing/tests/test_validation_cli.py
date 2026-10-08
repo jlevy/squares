@@ -1513,6 +1513,21 @@ def test_the_records_tier_selects_every_record_check_and_no_test() -> None:
     assert all(step.fast for step in selected)
 
 
+def test_the_pdf_size_guard_runs_in_records_edit_and_pull_request_checks() -> None:
+    name = "tracked PDFs stay within 5 MiB"
+    selections = (
+        validate._select_steps(only=[], fast=False, records=True),
+        validate._select_steps(only=[], fast=False, edit=True),
+        validate._select_steps(only=[], fast=False, checks=True),
+        validate._select_steps(only=[], fast=True),
+    )
+    for selected in selections:
+        assert name in {step.name for step in selected}
+    for path in ("nested/New Source.PdF", "packing/devtools/check_tracked_pdfs.py"):
+        selected = validate.select_for_paths([path], validate.STEPS)
+        assert name in {step.name for step in selected.steps}
+
+
 def test_strict_mode_enables_deep_validation(monkeypatch: pytest.MonkeyPatch) -> None:
     observed: validate.Context | None = None
 

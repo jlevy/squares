@@ -234,6 +234,15 @@ entries; the refreshed child projection remains pending.
 Every entry retains its polynomial in full, exact arithmetic checks, source locator,
 attribution and source flags.
 
+At the earlier upstream-integration checkpoint, the delivered child retained 170
+historical identities: 160 superseded, three source-invalid and seven outside the
+current frontier.
+Five printed identities and three source closed forms became historical
+when upstream supplied better certified rational witness sides.
+The closed forms at $n = 237,258,263$ have derived polynomials and explicit
+source-expression provenance; the bounded printed corpus has no equation rows at
+$n = 237$ or $263$.
+
 An algebraic certificate concerns a side value.
 It does not change geometric feasibility, verified bounds, optimality, or a result’s
 verification rung.
@@ -244,6 +253,8 @@ verification rung.
   `algebraic_source` as `catalogue`, `derived-from-exact-form`, or `contact-system`.
   Radical minimal polynomials are derived exactly; the composite figure reads the
   frontier facts rather than owning a separate derivation.
+  The linear identities at $n = 7,8,15$ are marked as derived from their exact forms,
+  rather than as source-printed equations.
 
 - **SVG facts.** The pinned readings for $n = 55,71,83,126$ retain exact source text and
   acquisition metadata.
@@ -296,6 +307,12 @@ exact linkage.
   ceiling. The overview, artifact dates, release metadata, published-site contract and
   import runbook include this fourth paper.
 
+- **Source PDF custody.** The 13 hosted originals retain their source bytes.
+  The [manifest](../../../../packing/hosted/source-pdfs.yaml) records original archive
+  paths, sizes and SHA-256 digests; the loader checks downloaded bytes against it.
+  Faithful extractions and acquisition metadata remain in the repository, and the
+  tracked-PDF guard keeps its 5 MiB ceiling.
+
 The [mathematical review](../../reviews/review-2026-10-07-exact-polynomial-coverage.md)
 records independent checks, defects corrected during review, and the remaining limits.
 The
@@ -319,6 +336,7 @@ A delivery-recovery worker checks earlier claimed output.
 | 5 | W7: generated paper, site wiring and import documentation | HTML/Markdown/PDF renderer and publication contracts implemented |
 | 6 | W7 **efficiency block**: practical web reading (`think-mo36`) | Searchable index, lazy metadata and coefficient vectors; complete archives retained |
 | 7 | W7: final checks, PR, delivery audit and replanning | Final validation is reported in the PR; unavailable earlier outputs remain an explicit dependency |
+| 8 | W7: upstream integration and PDF storage maintenance (`think-okcb`) | Earlier 2026-10-08 checkpoint: 287 current exact values, 170 historical identities and 37 numeric routes; 13 original PDFs hosted outside Git and a universal 5 MiB tracked-PDF gate |
 
 The efficiency result precedes the expanded historical corpus; it is not the claimed
 wall for the larger final register.
@@ -376,6 +394,17 @@ relation alone is insufficient.
 | `think-is2e` | 263 | Replace the batch’s bound-only value with a confirmed KKT seed |
 | `think-olv8` | 272 | Replace the batch’s bound-only value with a confirmed KKT seed |
 | `think-w622` | 292 | Establish a current contact system and confirmed KKT seed |
+
+At the earlier upstream-integration checkpoint, 17 former numeric cases became certified
+rational current values and left the numeric-only map.
+Their contact and stationarity work stays open where it seeks an ideal algebraic packing
+rather than the finite rational certificate.
+In particular, `think-1atr` at 126, `think-hg9i` at 130 and `think-is2e` at 263 retain
+their contact-system obligations.
+A linear polynomial for a feasible witness side does not close those research questions
+or prove optimality.
+The upstream integration is `think-5lcy` and the hosted-PDF migration is `think-286j`,
+under `think-okcb`.
 
 The existing $n = 29$ negative is specifically a PSLQ run at 700 search digits, using a
 1200-digit re-solve, degrees 2 through 20, tolerance $10^{-675}$, `maxcoeff = 10^22` and

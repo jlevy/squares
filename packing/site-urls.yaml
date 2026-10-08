@@ -5977,6 +5977,30 @@ urls:
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: live
+- path: papers/exact-side-values.html
+  canonical: papers/exact-side-values.html
+  kind: paper-file
+  generator: devtools.render_exact_side_values:main
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values.md
+  canonical: papers/exact-side-values.md
+  kind: paper-file
+  generator: devtools.render_exact_side_values:main
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/exact-side-values.pdf
+  canonical: papers/exact-side-values.pdf
+  kind: paper-file
+  generator: devtools.render_exact_side_values:main
+  producer: paper:exact-side-values
+  first_published: '2026-10-07'
+  lastmod: '2026-10-08'
+  status: live
 - path: papers/n11-lower-bounds-explainer.html
   canonical: papers/n11-lower-bounds-explainer.html
   kind: paper-file

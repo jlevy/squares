@@ -528,7 +528,7 @@ EXACT_SIDE_VALUES_HISTORY = (
 )
 EXACT_SIDE_VALUES_FIRST_PUBLISHED = EXACT_SIDE_VALUES_HISTORY[0].first_published
 EXACT_SIDE_VALUES_EDITION = f"Draft {EXACT_SIDE_VALUES_HISTORY[0].version}"
-EXACT_SIDE_VALUES_REVISED = "October 7, 2026"
+EXACT_SIDE_VALUES_REVISED = "October 8, 2026"
 
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is

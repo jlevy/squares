@@ -484,7 +484,7 @@
       "status": "proved",
       "support": {
         "area_bound": {"basis":"area","decimal":"2.645751311064","exact":"sqrt(7)","nagamochi_excess":"0.354248688935"},
-        "case_prose_published_proofs": {"defects":["D-344–D-347"],"proofs":[{"at":"packing/frontier/n-007.md:132","label":"El Moumni’s Theorem 1","source":"packing/resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf"}],"status":"published-archived-unregistered"},
+        "case_prose_published_proofs": null,
         "chelokot_lean": {"claims":[{"applies":"direct","reported_at":["packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/upstream/docs/nagamochi-score-counterexample.md:135","packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/README.md:114","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:35","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:94","packing/resources/web/evand-square-packing-2026-10-01/source/site/www/sources.html:136"],"statement":"s(n^2 - 2) = n for every n >= 2, by a Lean compensation proof","value":3,"verified":true}],"kind":"Lean theorem, replayed here with its axiom receipt","verified":true},
         "karakus_explicit_bound": null,
         "karakus_k2_minus_1": null,
@@ -511,7 +511,7 @@
       "status": "proved",
       "support": {
         "area_bound": {"basis":"area","decimal":"2.828427124746","exact":"2*sqrt(2)","nagamochi_excess":"0.171572875253"},
-        "case_prose_published_proofs": {"defects":["D-516"],"proofs":[{"at":"packing/frontier/n-008.md:125","label":"El Moumni’s Proposition 3","source":"packing/resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf"},{"at":"packing/frontier/n-008.md:132","label":"Friedman’s DS7, Theorem 3","source":"packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md"}],"status":"published-archived-unregistered"},
+        "case_prose_published_proofs": {"defects":["D-516"],"proofs":[{"at":"packing/frontier/n-008.md:132","label":"Friedman’s DS7, Theorem 3","source":"packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md"}],"status":"published-archived-unregistered"},
         "chelokot_lean": {"claims":[{"applies":"monotonicity from s(k^2 - 2)","reported_at":["packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/upstream/docs/nagamochi-score-counterexample.md:135","packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/README.md:114","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:35","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:94","packing/resources/web/evand-square-packing-2026-10-01/source/site/www/sources.html:136"],"statement":"s(n^2 - 2) = n for every n >= 2, by a Lean compensation proof","value":3,"verified":true}],"kind":"Lean theorem, replayed here with its axiom receipt","verified":true},
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"3.000000000000","exact":"3","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000"},
         "karakus_k2_minus_1": {"statement":"s(8) = 3","value":3},
@@ -715,7 +715,7 @@
       "status": "proved",
       "support": {
         "area_bound": {"basis":"area","decimal":"3.872983346207","exact":"sqrt(15)","nagamochi_excess":"0.127016653792"},
-        "case_prose_published_proofs": {"defects":["D-516"],"proofs":[{"at":"packing/frontier/n-015.md:126","label":"El Moumni’s Theorem 2","source":"packing/resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf"},{"at":"packing/frontier/n-015.md:132","label":"Friedman’s DS7, Theorem 4","source":"packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md"}],"status":"published-archived-unregistered"},
+        "case_prose_published_proofs": {"defects":["D-516"],"proofs":[{"at":"packing/frontier/n-015.md:132","label":"Friedman’s DS7, Theorem 4","source":"packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md"}],"status":"published-archived-unregistered"},
         "chelokot_lean": {"claims":[{"applies":"monotonicity from s(k^2 - 2)","reported_at":["packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/upstream/docs/nagamochi-score-counterexample.md:135","packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/README.md:114","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:35","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:94","packing/resources/web/evand-square-packing-2026-10-01/source/site/www/sources.html:136"],"statement":"s(n^2 - 2) = n for every n >= 2, by a Lean compensation proof","value":4,"verified":true}],"kind":"Lean theorem, replayed here with its axiom receipt","verified":true},
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"4.000000000000","exact":"4","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000"},
         "karakus_k2_minus_1": {"statement":"s(15) = 4","value":4},

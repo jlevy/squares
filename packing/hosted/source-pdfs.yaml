@@ -1,0 +1,75 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+repository: jlevy/squares
+tag: data/source-pdfs-v1
+description: Original source PDFs above the 5 MiB Git limit, preserved byte-for-byte. Fetch restores each
+  ignored PDF to its original archive path; faithful text extractions and acquisition records remain in
+  Git.
+objects:
+- path: packing/resources/papers/antonova-yang-jatavallabhula-2022-rethinking-optimization-differentiable-simulation.pdf
+  asset: antonova-yang-jatavallabhula-2022-rethinking-optimization-differentiable-simulation.pdf
+  size: 12566680
+  sha256: 3a7d56e45da4132ea04a7ce4c04f6a8cefc96f5228f56d6b23c573b0c6d9a44d
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2207.00167'
+- path: packing/resources/papers/bender-muller-macklin-2017-survey-position-based-dynamics.pdf
+  asset: bender-muller-macklin-2017-survey-position-based-dynamics.pdf
+  size: 30796422
+  sha256: 386cbba120382662af433cd4df363d01e3a7ec99a1e03d84074fd4e7f703709b
+  description: 'Original archived PDF; source: https://www.animation.rwth-aachen.de/media/papers/2017-EG-CourseNotes.pdf'
+- path: packing/resources/papers/debnath-tiwari-sadekar-2025-rasp-shadow-guided-packing.pdf
+  asset: debnath-tiwari-sadekar-2025-rasp-shadow-guided-packing.pdf
+  size: 7329718
+  sha256: aab89aca5f574cdf3eca958a1a5a2e61e87821ce9520202d7abcae2cb1d526f9
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2504.02465v1'
+- path: packing/resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf
+  asset: el-moumni-1999-optimal-packings-unit-squares.pdf
+  size: 25831878
+  sha256: fcb1c90f491ffb19d1151630e461f331b3d829545e5d184941c0d6026e5dad9c
+  description: 'Original archived PDF; source: https://real-j.mtak.hu/5478/'
+- path: packing/resources/papers/klement-engel-2021-newtonian-event-chain-monte-carlo-collision-prediction-polyhedra.pdf
+  asset: klement-engel-2021-newtonian-event-chain-monte-carlo-collision-prediction-polyhedra.pdf
+  size: 7856254
+  sha256: facfe324edee7e15d8a06e7c6826c1701edba20a67f04a12cde1c16f46028c08
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2104.06829v1'
+- path: packing/resources/papers/macklin-storey-lu-2019-small-steps-physics-simulation.pdf
+  asset: macklin-storey-lu-2019-small-steps-physics-simulation.pdf
+  size: 8208308
+  sha256: 658cb1428a7c34af6419a59fcb1652f25dd8f6cca9472687b337ed9f2f0efca8
+  description: 'Original archived PDF; source: https://mmacklin.com/smallsteps.pdf'
+- path: packing/resources/papers/maher-stillinger-torquato-2021-kinetic-frustration-2d-convex-packings.pdf
+  asset: maher-stillinger-torquato-2021-kinetic-frustration-2d-convex-packings.pdf
+  size: 8528034
+  sha256: 17eb5bf411db4565b5a3c50caf625ce2e752b90263c254d2506e861bf285b084
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2103.06290v1'
+- path: packing/resources/papers/mazhar-heyn-pazouki-2013-chrono-parallel-multiphysics-library.pdf
+  asset: mazhar-heyn-pazouki-2013-chrono-parallel-multiphysics-library.pdf
+  size: 6998244
+  sha256: d6769a68ab009b1b1c9319bdf2e65429abe68990c7411747da355b1fb1de6e41
+  description: 'Original archived PDF; source: https://ms.copernicus.org/articles/4/49/2013/ms-4-49-2013.pdf'
+- path: packing/resources/papers/muller-macklin-chentanez-2020-detailed-rigid-body-xpbd.pdf
+  asset: muller-macklin-chentanez-2020-detailed-rigid-body-xpbd.pdf
+  size: 20096142
+  sha256: 58e4ceb2e12f387adbea906c541f5e63c96e454ccefe865dc29eeebf71db8a47
+  description: 'Original archived PDF; source: https://matthias-research.github.io/pages/publications/PBDBodies.pdf'
+- path: packing/resources/papers/stuyck-chen-2023-diffxpbd.pdf
+  asset: stuyck-chen-2023-diffxpbd.pdf
+  size: 24303210
+  sha256: 04f52ac53eea6f59bb12cfabad23e1531186c33de0b7b515200ebd29816ad445
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2301.01396v3'
+- path: packing/resources/papers/wang-lu-2024-image-space-collage-and-packing-differentiable-rendering.pdf
+  asset: wang-lu-2024-image-space-collage-and-packing-differentiable-rendering.pdf
+  size: 23505208
+  sha256: 1c10cb5cf84dc0933b11e152c090439fab43b576d6901f3279b6e1acac02ad23
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2406.04008'
+- path: packing/resources/papers/zhang-lyu-rudra-2026-sequential-object-placement-convex-decomposition.pdf
+  asset: zhang-lyu-rudra-2026-sequential-object-placement-convex-decomposition.pdf
+  size: 5881825
+  sha256: 3ac52b8353bcae8fe838d4b6f92248dd6c0c2785cbd76d359c19defd84a53ef3
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2608.25162v1'
+- path: packing/resources/papers/zhou-he-zheng-2023-geometric-batch-optimization-equal-circles.pdf
+  asset: zhou-he-zheng-2023-geometric-batch-optimization-equal-circles.pdf
+  size: 17042764
+  sha256: 66472d71adab27f2b331955adbe2e29c121a4f1b56ddcb909e462ec648de2913
+  description: 'Original archived PDF; source: https://arxiv.org/pdf/2303.02650v1'

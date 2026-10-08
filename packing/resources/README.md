@@ -59,6 +59,22 @@ Readers go through [`devtools.retained_data`](../devtools/retained_data.py), whi
 `X` or `X.gz`, and [`tests/test_retained_data.py`](../tests/test_retained_data.py)
 re-derives every table.
 
+**Original PDFs above 5 MiB are hosted as release assets.** The
+[manifest](../hosted/source-pdfs.yaml) lists the unchanged bytes and their original
+archive paths; the
+[source PDF release](https://github.com/jlevy/squares/releases/tag/data/source-pdfs-v1)
+provides direct downloads.
+Faithful text extractions, source acquisition records and citation keys remain in the
+repository. To restore the original PDFs to their ignored local paths, run from
+`packing/`:
+
+```bash
+uv run --frozen --group dev python -m devtools.hosted_data fetch --manifest hosted/source-pdfs.yaml
+```
+
+Add `--only 'el-moumni-*.pdf'` to fetch one source.
+The loader verifies each downloaded PDF’s size and SHA-256 against the manifest.
+
 The archive’s normal form stores a paper three ways; the documented exceptions follow:
 
 | File | What it is | Use it for |

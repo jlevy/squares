@@ -86,7 +86,9 @@ properties:
     items: {$ref: '#/$defs/entry'}
   historical_entries:
     type: array
-    description: Source polynomials at their own sides; these never promote a frontier bound.
+    description: >-
+      Printed source polynomials and polynomials derived from retained source closed forms,
+      checked at their own sides. These never promote a frontier bound.
     items: {$ref: '#/$defs/historical_entry'}
 $defs:
   source_certificate:
@@ -281,6 +283,30 @@ $defs:
       recorded_agreement_digits: {$ref: '#/$defs/checks/properties/recorded_agreement_digits'}
       catalogue: {const: not-in-catalogue}
       galois: {type: 'null'}
+  derived_source_checks:
+    type: object
+    additionalProperties: false
+    required: [irreducible, root, decimal, kkt_agreement_digits, recorded_agreement_digits, catalogue, galois]
+    properties:
+      irreducible:
+        unevaluatedProperties: false
+        oneOf:
+          - {type: 'null'}
+          - {$ref: '#/$defs/checks/properties/irreducible/oneOf/1'}
+      root:
+        unevaluatedProperties: false
+        oneOf:
+          - {type: 'null'}
+          - {$ref: '#/$defs/checks/properties/root/oneOf/1'}
+      decimal: {$ref: '#/$defs/checks/properties/decimal'}
+      kkt_agreement_digits: {$ref: '#/$defs/checks/properties/kkt_agreement_digits'}
+      recorded_agreement_digits: {$ref: '#/$defs/checks/properties/recorded_agreement_digits'}
+      catalogue: {const: derived-here}
+      galois:
+        unevaluatedProperties: false
+        oneOf:
+          - {type: 'null'}
+          - {$ref: '#/$defs/checks/properties/galois/oneOf/1'}
   source_assurance:
     type: object
     additionalProperties: false
@@ -296,7 +322,7 @@ $defs:
   historical_entry:
     type: object
     additionalProperties: false
-    required: [n, kind, current_side, side, degree, polynomial, checks, sources, source_statuses, attribution, bead]
+    required: [n, kind, algebraic_source, current_side, side, degree, polynomial, checks, sources, source_statuses, attribution, bead]
     allOf:
       - if:
           anyOf:
@@ -327,6 +353,7 @@ $defs:
           required: [algebraic_source, source_certificate, exact_form, text]
           properties:
             algebraic_source: {const: derived-from-source-closed-form}
+            exact_form: {$ref: '#/$defs/rational'}
             kind: {enum: [unreconciled-source, superseded]}
             degree: {const: 1}
             checks: {$ref: '#/$defs/source_root_checks'}
@@ -352,17 +379,41 @@ $defs:
             source_certificate:
               properties:
                 adoption: {const: not-selected}
+      - if:
+          not:
+            required: [source_certificate]
+        then:
+          if:
+            properties:
+              algebraic_source: {const: derived-from-source-closed-form}
+          then:
+            required: [exact_form]
+            properties:
+              checks: {$ref: '#/$defs/derived_source_checks'}
+              sources:
+                contains:
+                  properties:
+                    kind: {const: derived-from-source-closed-form}
+          else:
+            properties:
+              sources:
+                contains:
+                  properties:
+                    kind: {not: {const: derived-from-source-closed-form}}
     properties:
       n: {type: integer, minimum: 1}
       kind: {enum: [superseded, outside-frontier, source-invalid, unreconciled-source]}
       algebraic_source:
-        description: The retained source polynomial's origin; source-only roots establish no packing bound.
+        description: Whether coefficients are retained from a catalogue, derived from its expression, or independently checked as a source-only root establishing no packing bound.
         enum: [catalogue, derived-from-source-closed-form, reported-source-polynomial]
       reported_source: {$ref: '#/$defs/reported_source'}
       assurance: {$ref: '#/$defs/source_assurance'}
       source_certificate: {$ref: '#/$defs/source_certificate'}
-      exact_form: {$ref: '#/$defs/rational'}
       text: {type: string, minLength: 1}
+      exact_form:
+        description: The retained source expression, where one is available; checked against this row's root.
+        type: string
+        minLength: 1
       current_side:
         oneOf:
           - {$ref: '#/$defs/decimal'}
@@ -513,7 +564,10 @@ $defs:
                 const: true
                 description: >-
                   The recorded decimal is the root truncated or rounded to its printed
-                  places. False would be a wrong polynomial, which fails the build.
+                  places. A replay-backed SQUISH rational upper bound may instead use its
+                  upward decimal ceiling: the exact value is at most the display and less
+                  than one printed unit below it. This identifies a feasible bound's value,
+                  without asserting that it is an optimum. A mismatch fails the build.
               window: {enum: [kkt, record, exact]}
               source_index:
                 type: object

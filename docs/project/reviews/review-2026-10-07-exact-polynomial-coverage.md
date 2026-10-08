@@ -18,8 +18,8 @@ The new
 retains pinned SVG facts at $n = 55,71,83,126$ and a complete bounded extraction of
 printed integer polynomials from retained Kingbird comparison articles and explicit
 thematic locators. The [generated register](../../../packing/frontier/exact-values.json)
-now records 270 exact current sides and 162 historical entries; 54 current sides remain
-numeric.
+recorded 270 exact current sides and 162 historical entries at the initial 2026-10-07
+collection; 54 current sides then remained numeric.
 
 The historical corpus contains 201 source occurrences and 182 distinct triples of count,
 historical printed side and coefficient array, with no unparsed rows.
@@ -41,7 +41,7 @@ literature theorem about which other polynomials exist.
 
 ## Numeric SVG Coverage
 
-The current register’s 54 numeric sides do not imply 54 catalogue-numeric rows.
+The initial register’s 54 numeric sides did not imply 54 catalogue-numeric rows.
 The pinned catalogue supplies 13 polynomial rows and two exact-form rows for different
 source packings; $n = 211$ has no catalogue picture.
 The other 38 rows are numeric.
@@ -173,9 +173,9 @@ receives its own validation measurement.
 
 The
 [plan’s complete bead map](../specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads)
-assigns all 54 numeric-only counts, seven missing/weak KKT seeds (six individual seed
-lanes plus the claimed $n = 177$ lane), independent contact rederivations, exact radical
-witnesses and optional $n = 83$ source-index counting.
+assigned all 54 initial numeric-only counts and seven initial missing/weak KKT seeds
+(six individual seed lanes plus the claimed $n = 177$ lane), independent contact
+rederivations, exact radical witnesses and optional $n = 83$ source-index counting.
 
 Closed earlier beads claim eleven polynomial identifications and a generic contact
 producer, but their referenced commits/output are absent from the delivered branch,
@@ -187,8 +187,10 @@ This is a missing-delivery dependency, not a mathematical negative.
 
 Source parsing, algebraic certification, geometric branch realization and global
 optimality remain separate obligations.
-No lower bound, verified upper bound, optimality status or verification rung moves in
-this collection update.
+The initial collection did not move a lower bound, verified upper bound, optimality
+status or verification rung.
+The upstream continuation below preserves newly verified witness sides and the proved
+statuses already present upstream.
 
 ## Web Projection Review (2026-10-08)
 
@@ -271,6 +273,42 @@ after closing, rapid reopening and an outside focus change; all three new probes
 included in the type floor.
 No unresolved review finding remains.
 The close-state review adds no mathematical admission.
+
+## Upstream Mathematical Integration (2026-10-08)
+
+Two Astra review passes checked the integration of upstream’s 23 certified rational
+witness sides.
+Each fraction $p/q$ in lowest terms yields the primitive linear polynomial
+$q s-p$. The reported decimal is allowed to round upward only when the retained source
+and replay evidence identify that same certified finite side; its exact root must lie in
+$(d-u,d]$, where $d$ is the displayed decimal and $u$ its last-place unit.
+Ordinary nearest-rounding/truncation checks keep their existing rule.
+Negative controls reject mismatched fractions, values, authority, replay evidence,
+downward rounding and a full-unit error.
+A feasible witness side establishes an upper bound; its linear polynomial establishes
+neither a stationary minimum nor a global optimum.
+
+The regenerated register has 287 exact current values, 37 numeric cases and the same 77
+proved cases. The 170 historical entries comprise 160 superseded sides, three
+source-invalid proposals and seven beyond the current frontier.
+Five displaced printed identities and the source radicals at $n = 237,258,263$ add eight
+to the initial 162. The printed source corpus has no equation rows at 237 or 263, so
+those two derived identities require their own historical rows rather than citation
+merges. A same-polynomial, same-root control separately checks idempotent citation
+merging.
+
+At $n = 258$, the retained expression $(19/2)+5\sqrt2$ gives $4s^2-76s+161$. It is
+checked at its own historical side, with the exact closed-form branch and source
+citation retained. The register marks its polynomial as derived from a source closed
+form; it does not label the equation as source-printed.
+The complete HTML and Markdown archives now print retained historical expressions and
+algebraic origins, and browser help describes the certified upward-display rule.
+Astra found no mathematical blocker in the arithmetic, provenance or root selection; its
+two publication follow-through findings prompted these rendering changes.
+
+The bounded source extraction remains 201 decoded occurrences and 182 distinct printed
+pairs. Upstream rational certificates change the current-value classification without
+expanding that source boundary or claiming additional optimality proofs.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

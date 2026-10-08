@@ -16,6 +16,7 @@ import gzip
 import io
 import json
 from collections.abc import Callable
+from dataclasses import replace
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
@@ -1783,6 +1784,8 @@ def test_the_totals_partition_the_range() -> None:
     entries = list(_entries().values())
     totals = register["totals"]
     assert sum(totals[state] for state in exact.STATES) == len(entries) == 324
+    assert [totals[state] for state in exact.STATES] == [176, 29, 65, 17, 0, 37]
+    assert totals["proved"] == 77
     with_polynomial = sum(1 for entry in entries if entry["polynomial"] is not None)
     assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial
 
@@ -1952,18 +1955,153 @@ def test_stale_plain_register_update_preserves_transitional_storage(
 def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
     numeric = {n for n, entry in _entries().items() if entry["state"] == "numeric-only"}
     assert numeric == set(exact.ROUTES)
-    assert len(numeric) == 54
+    assert len(numeric) == 37
     for n in numeric:
         (route,) = [note for note in _entries()[n]["notes"] if note["kind"] == "route"]
         assert route["bead"] == exact.ROUTES[n][0]
     assert exact.ROUTES[55][0] != exact.ROUTES[71][0]
-    assert exact.ROUTES[126][0] not in {exact.ROUTES[55][0], exact.ROUTES[71][0]}
+    assert _entries()[126]["state"] == "rational"
+    assert 126 not in exact.ROUTES
+
+
+def test_a_superseded_source_radical_gets_derived_provenance_and_its_own_root() -> None:
+    current = _build(258)
+    original = copy.deepcopy(current)
+    source = exact.catalogue_entries()[258]
+    assert source.minimal_polynomial is None
+    derived = exact.source_closed_form_history(current, source)
+    assert derived is not None
+    assert current == original
+    assert current["state"] == "rational"
+    assert current["side"]["relation"] == "upper-bound"
+    assert derived["side"] == "16.57106781186547"
+    assert derived["exact_form"] == "(19/2) + 5 sqrt(2)"
+    assert derived["degree"] == 2
+    assert derived["polynomial"]["coefficients"] == ["4", "-76", "161"]
+    assert derived["algebraic_source"] == "derived-from-source-closed-form"
+    assert derived["checks"]["catalogue"] == "derived-here"
+    assert derived["checks"]["root"]["unique"]
+    assert derived["checks"]["kkt_agreement_digits"] is None
+    (citation,) = derived["sources"]
+    assert citation["path"] == f"packing/{exact.CATALOGUE_MARKDOWN}"
+    assert citation["locator"] == {"line": source.source_line, "section": "258"}
+    assert citation["kind"] == "derived-from-source-closed-form"
+    _refused(
+        lambda: exact.source_closed_form_history(
+            current, replace(source, exact_form="(19/2) - 5 sqrt(2)")
+        ),
+        "isolated root",
+    )
+    assert exact.source_closed_form_history(_build(5), exact.catalogue_entries()[5]) is None
+
+
+def test_source_radicals_merge_into_the_same_printed_root_without_altering_its_facts() -> None:
+    """Synthetic printed counterparts exercise merging; the archive has no such rows."""
+    printed: list[dict] = []
+    for n, side in ((237, "15.914213562373095"), (263, "16.742640687119285")):
+        row = exact.source_closed_form_history(_build(n), exact.catalogue_entries()[n])
+        assert row is not None
+        del row["exact_form"]
+        row["side"] = side
+        row["algebraic_source"] = "catalogue"
+        row["checks"]["catalogue"] = "matches"
+        row["sources"] = [
+            {
+                "path": "synthetic-printed-equations.md",
+                "url": "https://example.test/printed-equations",
+                "kind": "comparison-catalogue",
+                "locator": {"line": n, "section": str(n)},
+                "source_flags": ["invalid", "fixed"],
+            }
+        ]
+        row["source_statuses"] = ["invalid", "fixed"]
+        printed.append(row)
+    original = copy.deepcopy(printed)
+    current = [_build(n) for n in (237, 258, 263)]
+    exact.append_source_closed_form_history(current, printed)
+    assert len(printed) == 3
+    once = copy.deepcopy(printed)
+    exact.append_source_closed_form_history(current, printed)
+    assert printed == once
+    for before in original:
+        row = next(row for row in printed if row["n"] == before["n"])
+        assert {
+            key: value for key, value in row.items() if key not in {"exact_form", "sources"}
+        } == {
+            key: value for key, value in before.items() if key not in {"exact_form", "sources"}
+        }
+        assert row["sources"][: len(before["sources"])] == before["sources"]
+        assert any(
+            source["kind"] == "derived-from-source-closed-form" for source in row["sources"]
+        )
+    derived = next(row for row in printed if row["n"] == 258)
+    assert derived["algebraic_source"] == "derived-from-source-closed-form"
+
+
+def test_a_derived_historical_identity_requires_its_expression_and_honest_citation() -> None:
+    schema = load_yaml((exact.FRONTIER / exact.SCHEMA).read_text(encoding="utf-8"))
+    validator = Draft202012Validator(
+        {
+            "$schema": schema["$schema"],
+            "$defs": schema["$defs"],
+            "$ref": "#/$defs/historical_entry",
+        }
+    )
+    derived = exact.source_closed_form_history(_build(258), exact.catalogue_entries()[258])
+    assert derived is not None
+    assert not list(validator.iter_errors(derived))
+    for control in ("missing_form", "printed_check", "printed_citation", "printed_origin"):
+        broken = copy.deepcopy(derived)
+        if control == "missing_form":
+            del broken["exact_form"]
+        elif control == "printed_check":
+            broken["checks"]["catalogue"] = "matches"
+        elif control == "printed_citation":
+            broken["sources"][0]["kind"] = "current-catalogue"
+        else:
+            broken["algebraic_source"] = "catalogue"
+        assert list(validator.iter_errors(broken)), control
+
+
+def test_the_eight_displaced_current_exact_sides_remain_in_history() -> None:
+    rows = _register()["register"]["historical_entries"]
+    for n, degree in (
+        (88, 20),
+        (108, 144),
+        (129, 20),
+        (153, 4),
+        (179, 158),
+        (237, 2),
+        (258, 2),
+        (263, 2),
+    ):
+        side = exact.catalogue_entries()[n].side_decimal
+        (row,) = [row for row in rows if row["n"] == n and row["side"] == side]
+        assert row["degree"] == degree, n
+        assert row["kind"] == "superseded", n
+        assert row["current_side"] == _entries()[n]["side"]["value"], n
+        assert row["polynomial"], n
+        assert row["checks"]["irreducible"], n
+        assert row["sources"], n
+        assert _entries()[n]["state"] == "rational", n
+    for n, coefficients in (
+        (237, ["4", "-116", "833"]),
+        (258, ["4", "-76", "161"]),
+        (263, ["4", "-100", "553"]),
+    ):
+        row = next(row for row in rows if row["n"] == n)
+        assert row["algebraic_source"] == "derived-from-source-closed-form"
+        assert row["exact_form"] == exact.catalogue_entries()[n].exact_form
+        assert row["polynomial"]["coefficients"] == coefficients
+        assert {source["kind"] for source in row["sources"]} == {
+            "derived-from-source-closed-form"
+        }
 
 
 def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier() -> None:
     rows = _register()["register"]["historical_entries"]
-    assert len(rows) == 162
-    assert sum(row["kind"] == "superseded" for row in rows) == 152
+    assert len(rows) == 170
+    assert sum(row["kind"] == "superseded" for row in rows) == 160
     invalid = [row for row in rows if row["kind"] == "source-invalid"]
     assert len(invalid) == 3
     n259 = next(row for row in invalid if row["n"] == 259)

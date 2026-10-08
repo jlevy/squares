@@ -48,7 +48,7 @@
 <h3>Algebraic certificate</h3><p>A polynomial and an isolated root identify an algebraic value. They do not by themselves certify a packing.</p>
 <h3>Geometry</h3><p>A feasible construction establishes a packing bound. Source-invalid records are retained as source history and must not be used as packing bounds.</p>
 <h3>Optimality</h3><p>A feasible packing or a KKT local minimum does not establish a global optimum. Read the original relation and status below.</p>
-<p>Side decimals are recorded approximations. A root check named <code>contains_recorded_side</code> records rounding or truncation agreement, not literal inclusion of the printed decimal in the isolating interval. A source root ordinal with no count is not independently verified, even when the interval has exactly one real root.</p>
+<p>Side decimals are recorded approximations. A root check named <code>contains_recorded_side</code> records rounding or truncation agreement, not literal inclusion of the printed decimal in the isolating interval. For a replay-backed SQUISH rational upper bound, this check permits the registered upward decimal ceiling: at least the exact side and less than one final printed unit above it. A source root ordinal with no count is not independently verified, even when the interval has exactly one real root.</p>
 </div>
 <h3>Recorded metadata</h3>
 <div id="metadata"></div>
