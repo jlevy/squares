@@ -5,17 +5,19 @@ title: "n17 PR404: finish reviewed main integration after snapshot-budget decisi
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
   - n-17
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m4er1sp28wpk94dg47yct64v
 parent_id: is-01m4e47f19w8w1d7tyka9raahk
 hold: null
 hold_until: null
 created_at: 2026-10-08T18:18:41.130Z
-updated_at: 2026-10-08T19:16:05.958Z
+updated_at: 2026-10-08T21:52:29.377Z
 started_at: 2026-10-08T18:18:55.250Z
 ---
 Bounded mechanical review of live PR404 head against freshly read main. Identify actual conflicting paths and safe ownership, without changing primary checkout or scientific premises. User previously authorized resolving404 conflicts; substantive mathematical conflict resolutions require Astra review. Preserve research evidence and source.
