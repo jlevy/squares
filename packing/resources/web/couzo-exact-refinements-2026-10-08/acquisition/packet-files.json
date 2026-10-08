@@ -1,0 +1,95 @@
+{
+  "format": "preparation-file-manifest/v1",
+  "files": [
+    {
+      "path": "acquisition/case-inputs.json",
+      "bytes": 7619,
+      "sha256": "67495e4cb9400d9db6c86aa6ac4e3ec578b515de063cc927b2ecd334369e624e"
+    },
+    {
+      "path": "acquisition/git-tree.json",
+      "bytes": 36631,
+      "sha256": "d4b988b81316a3f0e12f61be8470a524fee829b34ccb7439a0267db7bcd576dc"
+    },
+    {
+      "path": "source/certificates/n105.cert.gz",
+      "bytes": 3617,
+      "sha256": "0d1fd58900db39b1c46214ef10786c9fca8d24049dec27c593ba8afc1c091c09"
+    },
+    {
+      "path": "source/certificates/n108.cert.gz",
+      "bytes": 2340,
+      "sha256": "1615a47ad7dda1e09f707b67e806849df882f4ecd2206478e7ee9d68937464ea"
+    },
+    {
+      "path": "source/certificates/n127.cert.gz",
+      "bytes": 4242,
+      "sha256": "5e2309a56cb286dd8e30789a328ca5a4006c397915405a61cdb3234a34069fca"
+    },
+    {
+      "path": "source/certificates/n131.cert.gz",
+      "bytes": 2996,
+      "sha256": "85a8c4707fbbd7e64d5c53a988497b4bafbaa0f056fa53f84c8c7de5ec0ae44f"
+    },
+    {
+      "path": "source/certificates/n155.cert.gz",
+      "bytes": 3514,
+      "sha256": "806631b6688d8abe580577f785e944931d06e0653ab9177605afa816346d341c"
+    },
+    {
+      "path": "source/certificates/n180.cert.gz",
+      "bytes": 3460,
+      "sha256": "bd1aeb21a3dd02f5e08973f9bb29e4c231d9efb8e5c7d266f8cfb73a9fd06803"
+    },
+    {
+      "path": "source/certificates/n228.cert.gz",
+      "bytes": 4436,
+      "sha256": "c914a1d7e519103beb9ab713caea580487845b53961b8c606573bc1ed6718fae"
+    },
+    {
+      "path": "source/certificates/n306.cert.gz",
+      "bytes": 6919,
+      "sha256": "f271a4f700ab0d5ce410eebc60bbe69bc9acb60a2d78cd195cd81795389d51ef"
+    },
+    {
+      "path": "source/n105.txt.gz",
+      "bytes": 2767,
+      "sha256": "235613a5452f8a0fabf0338204b4d80c25338b63a9eff5880c9d01713a35cb14"
+    },
+    {
+      "path": "source/n108.txt.gz",
+      "bytes": 1469,
+      "sha256": "98c884522381ffb804e1cd1e7038252af8bfe4af45eaf187afab18b186a7cca7"
+    },
+    {
+      "path": "source/n127.txt.gz",
+      "bytes": 3651,
+      "sha256": "2c72768d449da592e0a305d072c4d469cbcb45228ec149726f38bdacd28999a5"
+    },
+    {
+      "path": "source/n131.txt.gz",
+      "bytes": 3054,
+      "sha256": "f101fea13c9fb08c06d0f910ad76cfad4562e1f42727d0c08901cbdbc42706df"
+    },
+    {
+      "path": "source/n155.txt.gz",
+      "bytes": 3563,
+      "sha256": "e9a43347436d6e6e6327d357680e680fc13605eff6a69c7d7140b27415b7af15"
+    },
+    {
+      "path": "source/n180.txt.gz",
+      "bytes": 3961,
+      "sha256": "5e6875a7717575b1187c690034469ad251ac57d41f2fbfe2b5b91aad94850f80"
+    },
+    {
+      "path": "source/n228.txt.gz",
+      "bytes": 5073,
+      "sha256": "aecc69251739a5c543967746474975be19e616b614ac916bfd4723488e47bf53"
+    },
+    {
+      "path": "source/n306.txt.gz",
+      "bytes": 6805,
+      "sha256": "0c93a02b82540be1fb58deb908d203386e5f9cdd7de35b6ca86a70324356ce10"
+    }
+  ]
+}
