@@ -195,7 +195,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n029-schadt-numerical` | 0 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | previously-published | independent | `V-sqpack-verify` |
 | `E-n029-interval-certified-upper` | 1 | upper-bound | verified | strict inequalities only | here | - | apparently-novel | independent | `V-sqpack-verify` |
 | `E-n029-schadt-rational-upper` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | independent | `V-check-rational-witness-independent` |
-| `E-translation-escape-not-rigid` | 289 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel | producer’s code | `V-screen-translation-escape` |
+| `E-translation-escape-not-rigid` | 303 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel | producer’s code | `V-screen-translation-escape` |
 | `E-perfect-square-tiling-rigid` | 18 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | no code | `V-assess-frontier-rigidity` |
 | `E-bentz46-theorem8-audit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-cover` |
 | `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | `V-sqpack-cover` |
@@ -500,7 +500,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
-| `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 289 | numerically-checked |
+| `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 303 | numerically-checked |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |

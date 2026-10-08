@@ -1447,31 +1447,9 @@ print('all 27 complete inputs admitted; all nine original houses admitted from '
         assert source.read_bytes() == original
 
 
-def test_gupta_complete_sources_survive_native_worker_boundaries(
-    control_snapshot: tuple[Path, set[Path]],
-) -> None:
-    """Use the actual shared copier, all four private inputs and live refusal/restores."""
-    from devtools import gupta_house_links as house  # noqa: PLC0415
-
-    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
-    tree, _copied = control_snapshot
-    inputs = house.private_input_paths()
-    assert len(inputs) == 4
-    original_inputs = {path: path.read_bytes() for path in inputs}
-    for source, original in original_inputs.items():
-        target = tree / source.relative_to(controls.REPO)
-        assert target.is_file()
-        assert not target.is_symlink()
-        assert target.read_bytes() == original
-    for source in house.snapshot_house_links():
-        target = tree / source.relative_to(controls.REPO)
-        assert target.is_symlink()
-        assert target.resolve() == source.resolve()
-        with pytest.raises(ValueError, match="escapes private snapshot"):
-            resolve_control_target(
-                source.relative_to(ROOT).as_posix(), tree=tree, work=tree / HERE
-            )
-    program = """
+def _gupta_worker_program() -> str:
+    """The actual custody child; literal escapes must survive serialization."""
+    return r"""
 import copy
 from fractions import Fraction
 from devtools import build_known_best_atlas as atlas
@@ -1531,6 +1509,37 @@ print('all 17 sources/3017 poses/51 jobs/four private inputs/14 houses admitted;
       'native verdict, complete input, original and comparator mutants refused/restored; '
       'all producer guards passed without deciders')
 """
+
+
+def test_gupta_worker_program_compiles() -> None:
+    compile(_gupta_worker_program(), "gupta-custody-child", "exec")
+
+
+def test_gupta_complete_sources_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Use the actual shared copier, all four private inputs and live refusal/restores."""
+    from devtools import gupta_house_links as house  # noqa: PLC0415
+
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    tree, _copied = control_snapshot
+    inputs = house.private_input_paths()
+    assert len(inputs) == 4
+    original_inputs = {path: path.read_bytes() for path in inputs}
+    for source, original in original_inputs.items():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_file()
+        assert not target.is_symlink()
+        assert target.read_bytes() == original
+    for source in house.snapshot_house_links():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_symlink()
+        assert target.resolve() == source.resolve()
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(
+                source.relative_to(ROOT).as_posix(), tree=tree, work=tree / HERE
+            )
+    program = _gupta_worker_program()
     completed = subprocess.run(
         [sys.executable, "-c", program],
         cwd=tree / HERE,

@@ -144,9 +144,9 @@ def test_complete_history_precedes_first_write_and_survives_interrupted_retry(
             "verified_upper_bound",
             "reported_status",
             "status",
-            "blockers",
         ):
             assert after[field] == before[field]
+        assert after["blockers"] == register.pending_blockers(before)
         assert after["rigidity"] is None
     adopted = frontier_bytes()
     register.record_cases()
@@ -564,3 +564,33 @@ def test_pending_upper_blocker_survives_registration_resume_without_replacing_hi
     register.record_cases()
     assert frontier_bytes() == restored
     assert register.HISTORY.read_bytes() == boundary
+
+
+def test_pending_ceiling_disclosure_uses_current_report_and_retained_verified_lane() -> None:
+    n = 88
+    text = (register.FRONTIER / f"n-{n:03d}.md").read_text()
+    _, front, body = text.split("---\n", 2)
+    case = safe_load(front)["packing"]
+    rewritten = register.ceiling_prose(n, case, body)
+    assert register.ceiling_prose(n, case, rewritten) == rewritten
+    section = rewritten.split("## The verified upper bound is a ceiling\n", 1)[1]
+    section = section.split("\n## ", 1)[0]
+    assert f"${case['reported_upper_bound']['value']}$" in section
+    assert f"${case['verified_upper_bound']['value']}$" in section
+    assert "not the value of $s(88)$" in section
+    assert "actual private-worker admission" in section
+    assert "pending" in section
+
+
+def test_report_resume_preserves_equal_current_assessment_rendering() -> None:
+    from devtools import assess_frontier_rigidity as assessment  # noqa: PLC0415
+
+    n = 88
+    text = (register.FRONTIER / f"n-{n:03d}.md").read_text()
+    _, front, body = text.split("---\n", 2)
+    document = safe_load(front)
+    current = next(row for row in assessment.plan() if row[0] == n)
+    assert current[2] == current[3], "source-bound assessment must match its owner's output"
+    rewritten = register.render_selected_case(n, document, body, text)
+    assert rewritten == text
+    assert safe_load(rewritten.split("---\n", 2)[1]) == document

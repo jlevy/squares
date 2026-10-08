@@ -216,17 +216,18 @@ def publish(path: Path, text: str) -> None:
 
 def replace_coverage_source(row: dict[str, Any]) -> None:
     """Replace one source without consuming the following top-level coverage sections."""
+    from devtools.source_supersession import coverage_list_span  # noqa: PLC0415
+
     path = register.FRONTIER / "source-coverage.yaml"
     text = path.read_text()
-    pattern = (
-        rf"(?m)^  - id: {re.escape(row['id'])}\n.*?"
-        r"(?=^  - id:|^[a-z_]+:|\Z)"
-    )
-    match = re.search(pattern, text, re.DOTALL)
-    if match is None:
+    span = coverage_list_span(text, "sources", identifier=row["id"])
+    if span is None:
         raise ValueError("expected retained ry-xu coverage source")
-    rendered = "".join("  " + line for line in dump([row]).splitlines(keepends=True))
-    publish(path, text[: match.start()] + rendered + text[match.end() :])
+    start, end = span
+    first_line = text[start:].splitlines()[0]
+    indent = first_line[: len(first_line) - len(first_line.lstrip(" "))]
+    rendered = "".join(indent + line for line in dump([row]).splitlines(keepends=True))
+    publish(path, text[:start] + rendered + text[end:])
 
 
 def confirm() -> None:

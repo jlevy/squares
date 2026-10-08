@@ -1673,6 +1673,16 @@ def hero() -> str:
 #: every source repository in the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
+        "https://github.com/SidG2k1/square-packing-refinements",
+        "Siddharth Gupta",
+        (
+            "Seventeen rational refinements of Nate Chaoweeraprasit's SQUISH packings, "
+            "using Evan Daniel's optimizer; fourteen reports selected here (T-127) and "
+            "three withdrawn. Production confirmation remains pending; optimality is "
+            "not established."
+        ),
+    ),
+    (
         "https://github.com/ry-xu/square_packing",
         "Ryan Xu",
         (

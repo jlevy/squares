@@ -11,8 +11,9 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+from yaml.nodes import MappingNode, Node, SequenceNode
 
-from sqpack.yamlio import safe_load
+from sqpack.yamlio import FastSafeLoader, safe_load
 
 COVERAGE = Path(__file__).resolve().parents[1] / "frontier/source-coverage.yaml"
 
@@ -418,6 +419,60 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     return render_case_verifiers.refresh(rendered)
 
 
+def _coverage_content_end(node: Node) -> int:
+    """Exclude separator comments that a block collection's end mark consumes."""
+    if isinstance(node, MappingNode) and not node.flow_style:
+        children = [value for _, value in node.value]
+    elif isinstance(node, SequenceNode) and not node.flow_style:
+        children = node.value
+    else:
+        return node.end_mark.index
+    return max(
+        (_coverage_content_end(child) for child in children), default=node.end_mark.index
+    )
+
+
+def _coverage_line_end(text: str, node: Node) -> int:
+    end = _coverage_content_end(node)
+    while end > node.start_mark.index and text[end - 1] in "\r\n":
+        end -= 1
+    newline = text.find("\n", end)
+    return len(text) if newline < 0 else newline + 1
+
+
+def coverage_list_span(
+    text: str, name: str, *, identifier: str | None = None
+) -> tuple[int, int] | None:
+    """Locate a block coverage list or an id-keyed row from YAML marks, keeping comments."""
+    document = yaml.compose(text, Loader=FastSafeLoader)
+    if not isinstance(document, MappingNode):
+        raise TypeError("coverage record must be a YAML mapping")
+    for key, value in document.value:
+        if key.value != name:
+            continue
+        if not isinstance(value, SequenceNode):
+            raise TypeError(f"coverage field {name} must be a YAML list")
+        if identifier is not None:
+            for row in value.value:
+                if not isinstance(row, MappingNode):
+                    raise TypeError(f"coverage field {name} must contain YAML mappings")
+                if any(k.value == "id" and v.value == identifier for k, v in row.value):
+                    start = text.rfind("\n", 0, row.start_mark.index) + 1
+                    return start, _coverage_line_end(text, row)
+            return None
+        return key.start_mark.index, _coverage_line_end(text, value)
+    return None
+
+
+def replace_coverage_list(text: str, name: str, block: str) -> str:
+    """Replace just one parsed coverage list; other fields and separator comments stay."""
+    span = coverage_list_span(text, name)
+    if span is None:
+        raise ValueError(f"missing coverage list {name}")
+    start, end = span
+    return text[:start] + block + text[end:]
+
+
 def preserve_other_coverage(original: str, rendered: str, owned_counts: Collection[int]) -> str:
     """Update owned counts without reordering or rewriting another import's entries."""
     old, new = safe_load(original), safe_load(rendered)
@@ -432,12 +487,11 @@ def preserve_other_coverage(original: str, rendered: str, owned_counts: Collecti
             elif key in replacement:
                 rows.append(replacement.pop(key))
         rows.extend(row for row in replacement.values() if row["n"] in owned_counts)
-        pattern = re.compile(rf"^{name}:.*\n(?:(?:  |    ).*\n)*", re.MULTILINE)
         if rows == old[name]:
-            match = pattern.search(original)
-            if match is None:
+            span = coverage_list_span(original, name)
+            if span is None:
                 raise ValueError(f"missing coverage list {name}")
-            block = match.group()
+            block = original[span[0] : span[1]]
         else:
             lines = [f"{name}:\n"]
             for row in rows:
@@ -447,5 +501,5 @@ def preserve_other_coverage(original: str, rendered: str, owned_counts: Collecti
                     for i, line in enumerate(dumped.splitlines())
                 )
             block = "".join(lines) if rows else f"{name}: []\n"
-        rendered = pattern.sub(lambda _match, replacement=block: replacement, rendered, count=1)
+        rendered = replace_coverage_list(rendered, name, block)
     return rendered

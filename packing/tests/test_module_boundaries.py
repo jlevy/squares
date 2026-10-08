@@ -595,6 +595,9 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert f"/packing/resources/web/{evand_exact_certificates.PACKET.name}/" in sparse
     # The three T-119 atlas sources require their complete retained fact and receipt.
     assert f"/packing/resources/web/{evand_arrangement_reports.PACKET.name}/" in sparse
+    from devtools import gupta_refinement_reports  # noqa: PLC0415
+
+    assert f"/packing/resources/web/{gupta_refinement_reports.PACKET.name}/" in sparse
     # SQUISH's exact rational facts are a separate packet from the ordinary packet
     # registry; omitting it makes the atlas refuse all eleven newly reported cases.
     assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
