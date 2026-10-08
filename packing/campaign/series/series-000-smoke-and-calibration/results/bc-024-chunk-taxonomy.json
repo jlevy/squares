@@ -541,7 +541,7 @@
         "size": 5,
         "source": "packet-derived-facts",
         "tilted": false,
-        "walls_touched": 1
+        "walls_touched": 2
       },
       {
         "is_the_whole_record": false,
@@ -963,8 +963,7 @@
     },
     "tilted": 0,
     "walls_touched": {
-      "1": 1,
-      "2": 67,
+      "2": 68,
       "4": 44
     },
     "whole_record": 44
@@ -1151,19 +1150,17 @@
   "wall_seating_by_shape": {
     "L": {
       "0": 6,
-      "1": 1,
-      "2": 25,
+      "2": 26,
       "4": 1
     },
     "bar": {
-      "0": 81,
-      "1": 5,
-      "2": 8,
+      "0": 77,
+      "1": 7,
+      "2": 10,
       "3": 1
     },
     "other-polyomino": {
-      "1": 1,
-      "2": 67,
+      "2": 68,
       "4": 44
     },
     "rectangle": {

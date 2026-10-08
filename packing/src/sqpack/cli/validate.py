@@ -3553,6 +3553,12 @@ def _squish_second_update_certification(context: Context) -> str:
     return _module(context, "devtools.squish_second_update_confirmation", "check-certification")
 
 
+def _refinement_custody(context: Context) -> str:
+    # Admit the complete retained input/result bindings from the reviewed replay;
+    # publication and this offline check do not repeat a scientific decision.
+    return _module(context, "devtools.refinement_custody", "check")
+
+
 def _results_headline(context: Context) -> str:
     # Sub-second: one register, one document, one rubric. Records tier because it checks
     # presentation of the record -- that every registered result reaches the section a
@@ -5292,6 +5298,22 @@ STEPS: tuple[Step, ...] = (
             "packing/witnesses/witness.schema.yaml",
             "packing/resources/web/squish-422-second-update-2026-10-07/**",
             "packing/witnesses/squish-422-second-update-2026/**",
+        ),
+    ),
+    Step(
+        "rational refinement custody binds complete replay inputs",
+        _refinement_custody,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/refinement_*.py",
+            "packing/hosted/refinement-evidence-425-428-v1.yaml",
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/**",
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/**",
+            "packing/witnesses/known-best/n-068.yaml",
+            "packing/witnesses/known-best/n-105.yaml",
+            "packing/witnesses/known-best/n-292.yaml",
         ),
     ),
     Step(

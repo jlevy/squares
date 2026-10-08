@@ -12240,6 +12240,84 @@ results:
     - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-302.json.xz
     - packing/tests/test_squish_second_update_confirmation.py
     - packing/tests/test_generate_frontier_case.py
+  - id: T-117
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Exact rational ceiling refinements at n = 105, 292
+    claim: Seth Rehwaldt reports finite rational upper-bound refinements of existing Couzo constructions
+      at n = 105, 292. The complete exact sides and ordered rosters are retained as reported; no optimality
+      claim is registered.
+    scope:
+      n_values:
+      - 105
+      - 292
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: Certificate refinements of existing constructions; tiny exact improvements over newer
+        retrieved certificates, with no solved case or new arrangement.
+      scored: '2026-10-07'
+      by: think-f3dl / think-v42c import lane (repository)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Rehwaldt Couzo refinements 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-rehwaldt-couzo-refinements-2026-10-07-report
+    artifacts:
+    - packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/README.md
+    - packing/devtools/refinement_packets.py
+    - packing/frontier/n-105.md
+    - packing/frontier/n-292.md
+    next_rung: Complete replay admission, two mutant refusals per accepted checker, durable receipts
+      and mapped mathematical review are required before confirmation. The current complete-roster drawing
+      check assigns no result rung.
+    notes: Refinement work by Seth Rehwaldt with OpenAI Codex assistance; Couzo and earlier construction
+      contributors retain credit. All prior verified ceilings, sources and receipts remain historical.
+      Restricted analytic claims are outside this import.
+    composition: The exact half-angle map gives unit frames; translating each already repaired source
+      center by S/2 gives the lower-left frame. The complete rational side is authoritative and no coordinate
+      or side is rounded.
+  - id: T-118
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Exact rational ceiling refinements at n = 68
+    claim: Seth Rehwaldt reports finite rational upper-bound refinements of existing Couzo constructions
+      at n = 68. The complete exact sides and ordered rosters are retained as reported; no optimality
+      claim is registered.
+    scope:
+      n_values:
+      - 68
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: Certificate refinements of existing constructions; tiny exact improvements over newer
+        retrieved certificates, with no solved case or new arrangement.
+      scored: '2026-10-07'
+      by: think-f3dl / think-v42c import lane (repository)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Rehwaldt n68 refinement 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-rehwaldt-n68-refinement-2026-10-07-report
+    artifacts:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/README.md
+    - packing/devtools/refinement_packets.py
+    - packing/frontier/n-068.md
+    next_rung: Complete replay admission, two mutant refusals per accepted checker, durable receipts
+      and mapped mathematical review are required before confirmation. The current complete-roster drawing
+      check assigns no result rung.
+    notes: Refinement work by Seth Rehwaldt with OpenAI Codex assistance; Couzo and earlier construction
+      contributors retain credit. All prior verified ceilings, sources and receipts remain historical.
+      Restricted analytic claims are outside this import.
+    composition: The exact half-angle map gives unit frames; translating each already repaired source
+      center by S/2 gives the lower-left frame. The complete rational side is authoritative and no coordinate
+      or side is rounded.
 
   - id: T-120
     kind: upper-bound
@@ -12396,10 +12474,10 @@ results:
   - id: T-124
     kind: restricted-optimality
     registered: '2026-10-07'
-    headline: Reported non-strict local minima for178 source configurations
-    claim: Evan Daniel reports that178 configurations are non-strict local minima under the source
-      matched-index perturbation convention. The retained catalogue names176 integer-band cases and
-      the separate n11 and n28 cases, with angles taken modulo90 degrees and plateaux allowed. This
+    headline: Reported non-strict local minima for 178 source configurations
+    claim: Evan Daniel reports that 178 configurations are non-strict local minima under the source
+      matched-index perturbation convention. The retained catalogue names 176 integer-band cases and
+      the separate n11 and n28 cases, with angles taken modulo 90 degrees and plateaux allowed. This
       assertion is restricted to those source configurations and their local neighborhoods; no global
       bound or rigidity is claimed here.
     scope:
@@ -12606,7 +12684,7 @@ results:
       and perturbation definitions to that pose, and independently build the pinned Lean proof before
       raising either rung.
     notes: Reported non-strict local minima under the source matched-index perturbation convention,
-      with angles modulo90 degrees and plateaux permitted. The actual roster has176 integer-band configurations
+      with angles modulo 90 degrees and plateaux permitted. The actual roster has176 integer-band configurations
       plus n11 and n28; it is not every count in the shorthand bands. Full source Lean code is retained;
       generated configuration proofs and their geometric inputs were not all acquired or replayed.
       No rigidity, isolated strict minimum or global lower bound follows. Same-count replacement poses

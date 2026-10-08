@@ -99,6 +99,19 @@ allowlist:
       to the acquired e63e4e52 source and its raw external-checkout bytes at retention.
       Complete internal witnesses, receipts and verdicts are compared structurally;
       source digests do not certify geometry or replace either exact checker.
+  - path: packing/devtools/refinement_packets.py
+    kind: external-checkout
+    boundary: >-
+      The pinned issue-425/428 raw external certificates and two n68 source checker
+      programs. Complete normalized facts are admitted against independently checked
+      source conversions; those identities neither decide geometry nor assign assurance.
+  - path: packing/devtools/refinement_custody.py
+    kind: download
+    boundary: >-
+      The public refinement-evidence release archive and its complete original-file
+      manifest, actual external replay receipts, and compact admission projection. All
+      thirteen complete inputs and actual result fields are compared on recovery; pins
+      preserve external custody and never replace the reviewed mathematical replay.
   - path: packing/devtools/build_known_best_atlas.py
     kind: download
     boundary: Upstream's declared digest of a known-best packing it publishes (H9).
