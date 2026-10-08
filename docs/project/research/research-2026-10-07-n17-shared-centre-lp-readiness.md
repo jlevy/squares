@@ -1,16 +1,19 @@
 ---
 title: n17 Shared-Centre LP Readiness
 date: 2026-10-07
-status: proposed
+status: in-progress
 ---
 # n17 Shared-Centre LP Readiness
 
 A future pilot can test whether the pairwise incircle relaxations remain feasible when
 all pairs share the same seventeen centres.
 The geometry and certificate contract below have sole-Astra mathematical review.
-The bounded adapter, numerical proposal layer, pilot source, and readiness controls are
-**not implemented or registered**. No LP was evaluated during this handoff, and no
-runtime or exclusion is predicted.
+The [guarded endpoint adapter](../../../packing/devtools/n17_shared_centre_lp.py) and
+synthetic geometry, custody and resource controls are implemented.
+Publication, custody and resource controls passed; the endpoint round is registered as
+[H-323](../../../packing/campaign/hypotheses/H-323-shared-centre-endpoint-control.md).
+The numerical proposal layer and first-eight pilot remain unimplemented and unexecuted;
+no LP runtime or exclusion is predicted.
 
 ## Accepted Evidence and Pilot Selection
 
@@ -122,7 +125,30 @@ exactly, and check the result against all rows.
 Singular bases, failed reconstruction, nonfinite numeric proposals, or uncertified signs
 are unresolved.
 
-## Reusable Code and Remaining Guards
+## Endpoint Instrument and Remaining Guards
+
+The endpoint adapter reconstructs every required original-cell domain, all 136 pair
+domains and their labelled rows.
+Its exact scalar wrapper enforces the operation, cooperative deadline and
+reduced-Fraction bit limits throughout the new geometry, centre transformation and
+primal checks. Accepted-role and YAML parsing, `build_cover`, D4 reconstruction and
+physical witness validity remain inherited premises; they are not claimed as a new
+guarded reproof.
+
+The accepted
+[exp-235 rational witness](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/portable-witness.yaml)
+has side $S=4675530093604551/10^{15}<U$. The initial positive control uses its exact
+corner means, translated by $(U-S)/2$ and rotated by $r3=(y,U-x)$ into the canonical
+endpoint mask `1900015`. The source row-label mapping is a candidate join; fresh
+original-cell membership and the exact mask are checked directly.
+The exact positive control has not run.
+
+The [synthetic controls](../../../packing/tests/test_n17_shared_centre_lp.py) exercise
+closed touching, points and segments, complete pair and row custody, source label
+mapping, changed bytes, reduced-rational intermediate growth, deadlines and operation
+exhaustion. These controls do not evaluate the physical endpoint or the first eight.
+The standing registered-phase runner and POSIX supervisor provide separate phase
+processes and owned-group wall, sampled-RSS and cleanup evidence.
 
 [`sqpack.exact_lp`](../../../packing/src/sqpack/exact_lp.py) uses the standard library
 and `sqpack.verify`; it does not import SciPy.
@@ -157,6 +183,46 @@ The implementation must preregister solver, reconstruction, work, output, and ar
 limits before any target.
 This allocation has no measured feasibility or speed forecast.
 
+## Minimal First-Eight Extension
+
+Astra’s bounded source review identifies a smaller producer path after the endpoint
+control.
+Build each required cell and pair domain once per process: the union contains at
+most 24 cells and 276 pairs.
+Fresh checking constructs its own cache from the held inputs; it never accepts the
+producer’s cached geometry as a premise.
+
+Use one bounded numerical proposal per state with identity row scaling.
+First try the proposed finite coordinates or at-most-thirty-five supported dual weights
+as exact binary rationals.
+Accept only a complete exact primal or Farkas check.
+If that fails, permit one proposed basis/support reconstruction per state; singular
+bases, excess support and failed exact signs remain unresolved.
+Do not scan alternate bases or run exact simplex in this slice.
+
+`solve_square_system` preserves its caller’s scalar operations when every matrix entry,
+right side and its `one` are `Guarded`. This avoids shared solver edits and an exact
+independence prepass.
+The reviewed worst-case scalar count for size $k$ is
+$k(k+1)/2+k+k(k+1)+k(k-1)+2k(k-1)(k+1)$: 81,481 operations/comparisons at size 34 and
+88,795 at size 35. A prospective 100,000-operation reconstruction subcap covers the
+solve and small dual check; it excludes the full all-row primal pass and remains
+subordinate to separately registered aggregate limits.
+
+Derive the two containment or four pair coordinate indices from freshly reconstructed
+rows. Evaluating those terms checks every inequality while avoiding the dense scan of 34
+coefficient-zero tests per row.
+At the row ceilings, one sparse pass needs at most 110,806 checked operations, compared
+with 538,526 for the current dense scan.
+These are algebraic work bounds, not elapsed-time measurements or an executed pilot.
+
+The extension still needs controls for guarded elimination growth/deadlines, singular or
+incorrect bases, row/support mutations, negative weights, zero gap, failed cancellation,
+false floating-point infeasibility, shared-centre inconsistency and
+sparse-versus-complete evaluation with closed degeneracies.
+Its allocation must be registered separately; H-323’s 120-second phase limits do not
+allocate the eight-state experiment.
+
 ## Required Readiness and Disposition
 
 Controls must cover exact feasible and infeasible systems, zero-gap touching, degenerate
@@ -177,8 +243,10 @@ A verified contradiction can support only a separately reviewed ordinary-assignm
 result; any census admission still needs the standing composition and deduplication
 contract. A verified primal is a relaxation survivor.
 Resource exhaustion is incomplete; absence of a certificate is unresolved.
-No new LP engine, pilot result, ordinary admission, or global bound is established by
-this readiness handoff.
+The endpoint adapter supplies the geometry and primal-reading seam for a future LP
+producer. Exact Gaussian reconstruction and Farkas checking still need bounded adapters
+before the numerical proposal layer can be qualified.
+No first-eight pilot result, ordinary admission or global bound is established here.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
