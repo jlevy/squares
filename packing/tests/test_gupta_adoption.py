@@ -594,3 +594,30 @@ def test_report_resume_preserves_equal_current_assessment_rendering() -> None:
     rewritten = register.render_selected_case(n, document, body, text)
     assert rewritten == text
     assert safe_load(rewritten.split("---\n", 2)[1]) == document
+
+
+def test_formatted_gupta_sections_survive_current_redraft() -> None:
+    n = 179
+    existing = (register.FRONTIER / f"n-{n:03d}.md").read_text()
+    assert register.adopt_case(n, existing, existing) == existing
+
+
+@pytest.mark.parametrize("section", ["ceiling", "source"])
+def test_gupta_redraft_replaces_changed_prose_values(section: str) -> None:
+    n = 179
+    original = (register.FRONTIER / f"n-{n:03d}.md").read_text()
+    if section == "ceiling":
+        changed = original.replace("smaller by $1.2881E-12$", "smaller by $0$", 1)
+        expected = "smaller by $1.2881E-12$"
+        refused = "smaller by $0$"
+    else:
+        changed = original.replace("Siddharth Gupta refines", "Siddharth Gupta proves", 1)
+        expected = "Siddharth Gupta refines"
+        refused = "Siddharth Gupta proves"
+    assert changed != original
+    regenerated = register.adopt_case(n, changed, original)
+    assert expected in regenerated
+    assert refused not in regenerated
+    assert safe_load(regenerated.split("---\n", 2)[1]) == safe_load(
+        original.split("---\n", 2)[1]
+    )
