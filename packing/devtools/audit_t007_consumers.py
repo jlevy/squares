@@ -86,6 +86,7 @@ from strif import atomic_output_file
 
 from devtools import check_nagamochi_bounds as nagamochi
 from sqpack import retained_json
+from sqpack.hosted_data import load_manifest
 from sqpack.yamlio import load_yaml
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -768,8 +769,31 @@ def chelokot_entry(n: int) -> dict[str, Any] | None:
     }
 
 
-_PAPER_LINK = re.compile(r"\[([^\]]+)\]\(\.\./resources/papers/([^)#]+)\)")
+_PAPER_LINK = re.compile(r"\[([^\]]+)\]\(([^)#]+)\)")
 _DEFECT_LINK = re.compile(r"\[(D-\d+(?:[–-]D-\d+)?)\]")
+
+
+@cache
+def hosted_paper_sources() -> dict[str, str]:
+    """Release citations retain the original archive path as their source identity."""
+    path = ROOT / "hosted/source-pdfs.yaml"
+    if not path.is_file():
+        return {}
+    manifest = load_manifest(path)
+    base = f"https://github.com/{manifest.repository}/releases/download/{manifest.tag}/"
+    return {
+        base + item.asset: item.path
+        for item in manifest.objects
+        if item.path.startswith("packing/resources/papers/")
+    }
+
+
+def paper_source(link: str) -> str | None:
+    """Recognize archived papers and only manifest-declared hosted replacements."""
+    prefix = "../resources/papers/"
+    if link.startswith(prefix):
+        return "packing/resources/papers/" + link.removeprefix(prefix)
+    return hosted_paper_sources().get(link)
 
 
 def prose_published_proofs(n: int) -> dict[str, Any] | None:
@@ -790,12 +814,12 @@ def prose_published_proofs(n: int) -> dict[str, Any] | None:
     proofs = [
         {
             "label": match.group(1),
-            "source": f"packing/resources/papers/{match.group(2)}",
+            "source": source,
             "at": f"{path}:{i + 1}",
         }
         for i in range(start, end)
         for match in _PAPER_LINK.finditer(lines[i])
-        if "nagamochi" not in match.group(2)
+        if (source := paper_source(match.group(2))) is not None and "nagamochi" not in source
     ]
     if not proofs:
         return None

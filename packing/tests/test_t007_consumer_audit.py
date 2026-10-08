@@ -262,6 +262,48 @@ def test_case_prose_proofs_and_their_defects_are_carried() -> None:
     assert by_n[150]["support"]["case_prose_published_proofs"] is None
 
 
+@pytest.mark.parametrize(
+    "link",
+    [
+        "../resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf",
+        (
+            "https://github.com/jlevy/squares/releases/download/data/source-pdfs-v1/"
+            "el-moumni-1999-optimal-packings-unit-squares.pdf"
+        ),
+    ],
+)
+def test_hosted_paper_citations_preserve_archived_proof_identity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, link: str
+) -> None:
+    root = tmp_path / "repo"
+    frontier = root / "packing/frontier"
+    frontier.mkdir(parents=True)
+    source = "packing/resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf"
+    hosted = (
+        "https://github.com/jlevy/squares/releases/download/data/source-pdfs-v1/"
+        "el-moumni-1999-optimal-packings-unit-squares.pdf"
+    )
+    monkeypatch.setattr(audit, "REPO", root)
+    monkeypatch.setattr(audit, "hosted_paper_sources", lambda: {hosted: source})
+    (frontier / "n-007.md").write_text(
+        "## The lower bound\n"
+        f"[El Moumni’s Theorem 1]({link})\n"
+        "[Other paper](https://example.invalid/other.pdf)\n"
+        "[D-344–D-347](../../defects.md)\n"
+    )
+    assert audit.prose_published_proofs(7) == {
+        "status": "published-archived-unregistered",
+        "proofs": [
+            {
+                "label": "El Moumni’s Theorem 1",
+                "source": source,
+                "at": "packing/frontier/n-007.md:2",
+            }
+        ],
+        "defects": ["D-344–D-347"],
+    }
+
+
 def test_the_scan_sorts_lines_into_tiers() -> None:
     lines = (
         "Nagamochi proved s(k^2 - 2) = k.",
