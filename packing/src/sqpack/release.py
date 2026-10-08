@@ -183,6 +183,7 @@ DATA_PATHS: tuple[str, ...] = ("packing/frontier", "packing/atlas/known-best")
 #: line then needed a one-word playbook edit that would have done it again.
 DATA_EXCLUDED: tuple[str, ...] = (
     "packing/atlas/known-best/known-best-1-*",
+    "packing/atlas/known-best/square-packings-*-????????.pdf",
     "packing/atlas/known-best/video",
     "packing/frontier/README.md",
     "packing/atlas/known-best/README.md",
