@@ -74,6 +74,10 @@ DESCRIPTION = (
     "Exact side expressions and certified polynomials for 1 through 324 unit-square "
     "packings, with historical source polynomials and open exact-value routes."
 )
+ARCHIVE_DESCRIPTION = (
+    "Complete exact-side archive with every polynomial coefficient, current and historical "
+    "source records, certificates and open derivation routes."
+)
 EDITION = EXACT_SIDE_VALUES_EDITION
 FIRST_PUBLISHED = EXACT_SIDE_VALUES_FIRST_PUBLISHED
 REVISED = EXACT_SIDE_VALUES_REVISED
@@ -1014,11 +1018,11 @@ def expanded_markdown(
     return _repository_links(source, source=article, revision=revision)
 
 
-def page_meta() -> PageMeta:
+def page_meta(*, complete: bool = False) -> PageMeta:
     return PageMeta(
         name=TITLE,
-        description=DESCRIPTION,
-        path=SITE_PATH,
+        description=ARCHIVE_DESCRIPTION if complete else DESCRIPTION,
+        path=COMPLETE_PATH if complete else SITE_PATH,
         kind="article",
         published=paper_front.iso_date(FIRST_PUBLISHED),
         modified=paper_front.iso_date(paper_front.revised(FRONT)),
@@ -1064,7 +1068,7 @@ def render(
         )
     static = render_n11_lower_bounds_explainer.kpress_static()
     values = {
-        "PAGE_HEAD": head_tags(page_meta()),
+        "PAGE_HEAD": head_tags(page_meta(complete=True)),
         "KPRESS_CSS": render_n11_lower_bounds_explainer.kpress_css(static),
         "KATEX_CSS": render_n11_lower_bounds_explainer.katex_css(static)
         if document.has_math
@@ -1176,7 +1180,7 @@ def _print_pdf(html_path: Path, pdf_path: Path) -> None:
         try:
             page = browser.new_page()
             page.goto(html_path.as_uri(), wait_until="networkidle")
-            page.evaluate(ABSOLUTE_LINKS, SITE_URL + SITE_PATH)
+            page.evaluate(ABSOLUTE_LINKS, SITE_URL + COMPLETE_PATH)
             page.emulate_media(media="print")
             hosts = page.locator(".kpress-math")
             if hosts.count() == 0:

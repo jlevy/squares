@@ -16,6 +16,7 @@ from typing import Any
 
 import pytest
 
+from devtools import check_published_site
 from devtools import render_exact_side_values as paper
 
 REVISION = "a" * 40
@@ -595,3 +596,16 @@ def test_browser_keeps_publication_version_and_pinned_source() -> None:
         in page
     )
     assert "exact-side-values-complete.html" in page
+
+
+def test_browser_and_complete_archive_have_distinct_publication_identity(
+    rendered: tuple[str, str],
+) -> None:
+    archive, _ = rendered
+    pages = {
+        paper.SITE_PATH: paper.render_browser(revision=REVISION),
+        paper.COMPLETE_PATH: archive,
+    }
+    for path, page in pages.items():
+        assert check_published_site.head_problems(page, paper.SITE_URL + path) == []
+    assert check_published_site.shared_descriptions(pages) == []

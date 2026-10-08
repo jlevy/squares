@@ -236,6 +236,13 @@ commit. The committed-head publication checks remain required.
 Local Mac timing and solver-snapshot failures are recorded separately from the web slice
 and retain their existing follow-up beads; no gate ceiling or assertion was relaxed.
 
+Hosted publication subsequently caught a separate archive identity defect: the complete
+HTML used the browser’s canonical URL, Open Graph URL and description.
+The archive now has its own publication metadata and PDF link base.
+A regression runs the real published-site head and shared-description checks against
+both generated pages; it reproduces the failure before the correction.
+The browser’s mathematical data and initial payload are unchanged.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
