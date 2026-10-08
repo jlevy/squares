@@ -712,6 +712,7 @@ def test_the_sample_cites_the_archive_and_the_campaign_whatever_the_checkout(
     [
         ("papers/n11-threshold-bound-review.html", "Part II"),
         ("papers/n11-optimality-review.html", "Part III"),
+        ("papers/packing-methods.html", "Methods tutorial"),
     ],
 )
 def test_check_requires_each_review_where_its_papers_card_points(
@@ -775,7 +776,7 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
     serves and, with an anchor, a heading of that paper, on the page and in the Markdown
     edition alike. A link to a paper not in the build is reported and not failed; one to
     a paper the site does not serve, or to a heading the paper does not have, fails."""
-    explainer, threshold, optimality = (
+    explainer, threshold, optimality, methods = (
         render_overview.paper_path(paper.slug) for paper in render_overview.PAPERS
     )
     site = render_overview.SITE_URL + "papers/"
@@ -793,6 +794,10 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
             ),
         ),
     }
+    pages[methods] = _paper_page(
+        "from-a-seed-to-a-certified-bound",
+        links='<a href="n11-lower-bounds-explainer.html">Lower bounds</a>',
+    )
     markdowns = {
         paper_files(optimality)[0]: (
             f"[I]({site}n11-lower-bounds-explainer.html#the-result-and-proof-roadmap) "
@@ -801,12 +806,12 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
     }
     assert heading_ids(pages[threshold]) == {"the-result", "what-is-new"}
     found = cross_paper_link_checks(pages, markdowns)
-    assert [passed for passed, _ in found] == [True, True, True]
+    assert [passed for passed, _ in found] == [True] * 4
     assert found[0][1] == (
         f"{explainer}: 2 links to other papers, "
         "each to a paper served here and a heading it has"
     )
-    assert paper_files(optimality)[0] in found[2][1]
+    assert paper_files(optimality)[0] in found[-1][1]
 
     broken = {
         **pages,
@@ -1203,6 +1208,7 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
     assert REVIEW_PAPERS == (
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
+        "papers/packing-methods.html",
     )
     # The record files the check samples are pages a reader shares too.
     records = [

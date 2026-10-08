@@ -483,8 +483,13 @@ def _series_form(structure: Structure) -> str:
     """How the series strip is set: under the dates, which part of how many, then every
     other part by its number and its title, each plain and linking its paper."""
     strip = _series_lines(structure)
+    record = next(
+        (paper for paper in render_overview.PAPERS if paper.slug == structure.paper), None
+    )
     if not strip:
-        return "none"
+        return "missing required series" if record is not None and record.part else "none"
+    if record is not None and record.part is None:
+        return "a series strip on a standalone paper"
     kinds = [line.kind for line in structure.credits]
     head = _SERIES_HEAD.match(strip[0].text)
     problems = []
@@ -563,6 +568,7 @@ CONTENT_AXES = frozenset(
         "sections: count",
         "figures: count",
         "tables",
+        "footnotes",
         "footnotes: count",
         "closing: last section",
         "pdf: pages",
@@ -589,10 +595,16 @@ def compare(reference: Structure, *others: Structure) -> list[dict[str, Any]]:
 def _agree(axis: str, values: Sequence[Any]) -> bool:
     """Whether every paper sets `axis` as the first does. A heading-case axis is held
     only over the papers that have such headings: a paper with no subsections has no
-    case to disagree with (`heading_case` reports `none`)."""
+    case to disagree with (`heading_case` reports `none`). Likewise, a standalone paper
+    has no series strip and a paper without figures has no captions to compare; strips
+    and captions that are present still follow the shared grammar."""
     if axis.endswith(" case"):
         values = [value for value in values if value != "none"]
-    return all(value == values[0] for value in values)
+    if axis == "series: strip":
+        values = [value for value in values if value != "none"]
+    if axis == "figures: captions":
+        values = [value for value in values if value != "no figures"]
+    return not values or all(value == values[0] for value in values)
 
 
 def differences(rows: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:

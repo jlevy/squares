@@ -484,7 +484,6 @@ documents:
   - {path: README.md, role: orientation, authority: definitive, lifecycle: maintained}
   - {path: SYNOPSIS.md, role: technical-synthesis, authority: definitive, lifecycle: maintained}
   - {path: TUTORIAL.md, role: tutorial, authority: supporting, lifecycle: maintained}
-  - {path: packing-methods.md, role: tutorial, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/enumerated/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/known-best/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
@@ -1230,6 +1229,6 @@ exclusions:
       GitHub math probe `devtools.check_github_math --probe` fetches: not documents.
   - pattern: packing/devtools/templates/*.md
     reason: >-
-      Templates for devtools.render_n11_lower_bounds_explainer and devtools.render_verifiable_claim:
-      Markdown with placeholders and stamping markers, not documents. The rendered page
-      and the generated claim documents are the documents.
+      Manuscripts and templates for the paper, site and claim renderers:
+      Markdown with placeholders and stamping markers. The rendered papers and pages
+      and the generated claim documents are the published documents.

@@ -1,0 +1,4 @@
+/* Cap a table's scrolling wrap at the shared column, including its side insets. */
+.cert-page.methods-paper > .kpress-table-wrap {
+  max-width: min(100%, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+}

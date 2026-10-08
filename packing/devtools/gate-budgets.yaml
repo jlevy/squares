@@ -1689,6 +1689,18 @@ pages:
       one figure evaluates the charge field over a grid of centres. The ceiling is the
       optimality review's 80 seconds with a quarter added for that data until a hosted
       run gives the job its own reading; its 10-minute job timeout bounds setup faults.
+  # First hosted build supplies this standalone paper's own timing.
+  - id: packing-methods
+    measured_seconds: null
+    measured_on: null
+    measured_where: null
+    ceiling_seconds: 100.0
+    argument: >-
+      The methods explainer uses the review papers' native HTML, Markdown and PDF
+      producer path, renderer tests, PDF date audit, page-head and browser rendering
+      checks, and artifact upload. It reads no certificate packet. The provisional
+      ceiling matches the unmeasured threshold review until a hosted run supplies this
+      job's own cost; its 10-minute operational timeout bounds setup faults.
   - id: pdf
     measured_seconds: 73.3
     measured_on: 2026-09-16

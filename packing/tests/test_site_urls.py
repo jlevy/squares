@@ -657,6 +657,7 @@ def test_every_partial_paper_or_workbench_check_stages_the_shared_card() -> None
     assert set(checked) == {
         "n11-optimality-review",
         "n11-threshold-bound-review",
+        "packing-methods",
         "workbench",
         "pdf",
     }

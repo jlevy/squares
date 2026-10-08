@@ -19,9 +19,9 @@ to learn it properly.
 [§11](#11-a-notation-card) collects every symbol on one page.
 
 For the methods that produced record packings, see
-[How Record Square Packings Are Found](packing-methods.md), which connects geometric
-construction, annealing, surgery, and local refinement to the published packing
-histories.
+[How Record Square Packings Are Found](https://jlevy.github.io/squares/papers/packing-methods.html),
+which connects geometric construction, annealing, surgery, and local refinement to the
+published packing histories.
 
 ## Contents
 
@@ -1970,7 +1970,7 @@ An optional system is used only to rederive one constant.
 | what has gone wrong and what now stops it recurring | [`defects.md`](defects.md) |
 | the mathematics of $s(11)$ in depth | [Packing 11 Unit Squares](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) |
 | the whole $n = 11$ story before T-060, from what a proof must do to what was left | [`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end) |
-| how record packings are constructed, searched, refined and certified | [How Record Square Packings Are Found](packing-methods.md) |
+| how record packings are constructed, searched, refined and certified | [How Record Square Packings Are Found](https://jlevy.github.io/squares/papers/packing-methods.html) |
 | implementation methods and solver tooling | [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) |
 | why pointing should beat scaling | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) |
 | what is known for every $n \le 324$ | [`frontier/`](packing/frontier/README.md) |

@@ -5969,6 +5969,30 @@ urls:
   first_published: '2026-10-05'
   lastmod: '2026-10-05'
   status: live
+- path: papers/packing-methods.html
+  canonical: papers/packing-methods.html
+  kind: paper-file
+  generator: devtools.render_packing_methods:main
+  producer: paper:packing-methods
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/packing-methods.md
+  canonical: papers/packing-methods.md
+  kind: paper-file
+  generator: devtools.render_packing_methods:main
+  producer: paper:packing-methods
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/packing-methods.pdf
+  canonical: papers/packing-methods.pdf
+  kind: paper-file
+  generator: devtools.render_packing_methods:main
+  producer: paper:packing-methods
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
 - path: readme.html
   canonical: readme.html
   kind: page

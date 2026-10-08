@@ -20,8 +20,6 @@ import pytest
 from devtools import (
     overview_data,
     pages_scope,
-    render_n11_lower_bounds_explainer,
-    render_n11_optimality_review,
     render_overview,
 )
 from devtools.pages_scope import (
@@ -55,21 +53,16 @@ def in_scope(changed: list[str], declared: dict[str, tuple[Path, ...]]) -> set[s
 @pytest.mark.parametrize(
     ("half", "builder_inputs"),
     [
-        ("n11_lower_bounds_explainer", lambda: render_n11_lower_bounds_explainer.RENDER_INPUTS),
+        *(
+            (
+                pages_scope.half_name(paper.slug),
+                lambda module=paper.module: importlib.import_module(module).RENDER_INPUTS,
+            )
+            for paper in render_overview.PAPERS
+        ),
         ("workbench", lambda: build_site.RENDER_INPUTS),
         ("overview", lambda: render_overview.RENDER_INPUTS),
         ("overview", lambda: overview_data.INPUTS),
-        ("n11_optimality_review", lambda: render_n11_optimality_review.RENDER_INPUTS),
-        (
-            "n11_threshold_bound_review",
-            lambda: (
-                importlib.import_module(
-                    render_overview.paper_record(
-                        render_overview.N11_THRESHOLD_BOUND_REVIEW
-                    ).module
-                ).RENDER_INPUTS
-            ),
-        ),
     ],
 )
 def test_every_builder_input_puts_its_page_in_scope(
@@ -91,25 +84,19 @@ def test_the_scope_reads_each_builder_declaration_live(monkeypatch: pytest.Monke
     here, and the control shows the added path was out of scope before it was declared.
     """
     added = REPO / "packing" / "devtools" / "templates" / "a-new-render-input.css"
-    before = declared_inputs()
-    assert "n11_lower_bounds_explainer" not in in_scope([probe(added)], before)
-    monkeypatch.setattr(
-        render_n11_lower_bounds_explainer,
-        "RENDER_INPUTS",
-        (*render_n11_lower_bounds_explainer.RENDER_INPUTS, added),
-    )
-    assert "n11_lower_bounds_explainer" in in_scope([probe(added)], declared_inputs())
+    assert not in_scope([probe(added)], declared_inputs())
+    selected: set[str] = set()
+    for paper in render_overview.PAPERS:
+        renderer = importlib.import_module(paper.module)
+        monkeypatch.setattr(renderer, "RENDER_INPUTS", (*renderer.RENDER_INPUTS, added))
+        selected.add(pages_scope.half_name(paper.slug))
+        assert in_scope([probe(added)], declared_inputs()) == selected
     monkeypatch.setattr(build_site, "RENDER_INPUTS", (*build_site.RENDER_INPUTS, added))
-    assert in_scope([probe(added)], declared_inputs()) == {
-        "n11_lower_bounds_explainer",
-        "workbench",
-    }
+    selected.add("workbench")
+    assert in_scope([probe(added)], declared_inputs()) == selected
     monkeypatch.setattr(overview_data, "INPUTS", (*overview_data.INPUTS, added))
-    assert in_scope([probe(added)], declared_inputs()) == {
-        "n11_lower_bounds_explainer",
-        "workbench",
-        "overview",
-    }
+    selected.add("overview")
+    assert in_scope([probe(added)], declared_inputs()) == selected
 
 
 def test_every_tool_a_pull_request_runs_for_a_page_is_that_pages_input(
@@ -226,8 +213,8 @@ def test_a_change_to_the_record_or_the_reader_documents_builds_only_the_overview
 ) -> None:
     """The site's own pages read what neither other build does, and share what they do.
 
-    A register evidence entry, a case record, the bibliography, `epistemics.md` and the
-    tutorial are the overview's alone, so a pull request changing only those
+    A register evidence entry, a case record, the bibliography and `epistemics.md`
+    are the overview's alone, so a pull request changing only those
     runs its job and no explainer Chromium. The register itself is read by the explainer
     too, and so is n = 11's case record, whose exact T-060 endpoint Figure 3 checks
     (`render_n11_lower_bounds_explainer.n11_solved`), and the register by the optimality
@@ -235,8 +222,9 @@ def test_a_change_to_the_record_or_the_reader_documents_builds_only_the_overview
     also writes the navigation bar the Visualizer's build takes (`nav_shell`); and kpress by all
     three.
     """
+    # The methods paper also cites the tutorial, so its render checks that source.
+    assert in_scope(["TUTORIAL.md"], declared) == {"overview", "packing_methods"}
     for changed in (
-        "TUTORIAL.md",
         "epistemics.md",
         "packing/frontier/evidence.yaml",
         "packing/frontier/n-012.md",
@@ -267,16 +255,10 @@ def test_every_paper_of_the_site_is_a_half_by_its_slug() -> None:
     """A paper is one entry in the site's registry (`render_overview.PAPERS`) and its
     renderer, and the scope reads the registry: each paper is a half, named by its slug
     with underscores, in reading order, before the workbench and the site's own pages."""
-    assert list(pages_scope.BUILDER_INPUTS) == [
-        "n11_lower_bounds_explainer",
-        "n11_threshold_bound_review",
-        "n11_optimality_review",
-        "workbench",
-        "overview",
-    ]
-    assert [pages_scope.half_name(paper.slug) for paper in render_overview.PAPERS] == list(
-        pages_scope.BUILDER_INPUTS
-    )[:3]
+    paper_halves = [pages_scope.half_name(paper.slug) for paper in render_overview.PAPERS]
+    assert paper_halves
+    assert len(set(paper_halves)) == len(paper_halves)
+    assert list(pages_scope.BUILDER_INPUTS) == [*paper_halves, "workbench", "overview"]
 
 
 def test_t037_article_selects_only_its_page(declared: dict[str, tuple[Path, ...]]) -> None:
@@ -295,13 +277,25 @@ def test_t060_article_selects_only_its_page(declared: dict[str, tuple[Path, ...]
     ) == {"n11_optimality_review"}
 
 
+def test_methods_manuscript_selects_only_its_own_page(
+    declared: dict[str, tuple[Path, ...]],
+) -> None:
+    assert in_scope(["packing/devtools/templates/packing-methods-article.md"], declared) == {
+        "packing_methods"
+    }
+
+
 @pytest.mark.parametrize(
-    "slug", [render_overview.N11_THRESHOLD_BOUND_REVIEW, render_overview.N11_OPTIMALITY_REVIEW]
+    "slug",
+    [
+        paper.slug
+        for paper in render_overview.PAPERS
+        if paper.slug != render_overview.N11_LOWER_BOUNDS_EXPLAINER
+    ],
 )
-def test_each_review_has_an_independent_required_build(slug: str) -> None:
-    """Each review, T-037's and T-060's, is built and checked by a job of its own, gated
-    on its own half, that renders it where it is served and is required by the
-    publication and the aggregate."""
+def test_each_paper_has_an_independent_required_build(slug: str) -> None:
+    """Every independent paper is built by its scoped job at its served path and is
+    required by both the publication and the aggregate."""
     jobs = load_workflow()["jobs"]
     half = pages_scope.half_name(slug)
     module = render_overview.paper_record(slug).module.removeprefix("devtools.")
@@ -309,9 +303,7 @@ def test_each_review_has_an_independent_required_build(slug: str) -> None:
     assert f"needs.scope.outputs.{half} == 'true'" in job["if"]
     assert job["timeout-minutes"] == 10
     browser_control = next(
-        step
-        for step in job["steps"]
-        if step.get("name") == "Check the paper's figures and renderer"
+        step for step in job["steps"] if f"tests/test_{module}.py" in str(step.get("run", ""))
     )
     assert browser_control["env"][f"SQPACK_{half.upper()}_BROWSER"] == "1"
     commands = "\n".join(str(step.get("run", "")) for step in job["steps"])
@@ -321,7 +313,9 @@ def test_each_review_has_an_independent_required_build(slug: str) -> None:
     assert f"test -s site/papers/{slug}.pdf" in commands
     assert slug in jobs["publish"]["needs"]
     assert slug in jobs["pages-required"]["needs"]
-    # A skipped review is said by `scope`'s skip-notice step, not by a job of its own.
+    assert f"--partial --producer paper:{slug}" in commands
+    assert f"check_site_rendering site --page papers/{slug}.html" in commands
+    # A skipped paper is said by `scope`'s skip-notice step, not by a job of its own.
     notices = next(
         step["run"]
         for step in jobs["scope"]["steps"]
@@ -437,16 +431,9 @@ def test_the_workflow_outputs_and_summary_are_written(
     assert pages_scope.main(["--all", "a test"]) == 0
     lines = outputs.read_text(encoding="utf-8").splitlines()
     assert lines == [
-        "n11_lower_bounds_explainer=true",
-        "n11_lower_bounds_explainer_reason=every page is built on a test",
-        "n11_threshold_bound_review=true",
-        "n11_threshold_bound_review_reason=every page is built on a test",
-        "n11_optimality_review=true",
-        "n11_optimality_review_reason=every page is built on a test",
-        "workbench=true",
-        "workbench_reason=every page is built on a test",
-        "overview=true",
-        "overview_reason=every page is built on a test",
+        line
+        for half in pages_scope.BUILDER_INPUTS
+        for line in (f"{half}=true", f"{half}_reason=every page is built on a test")
     ]
     assert "| n11_lower_bounds_explainer | builds and checks |" in summary.read_text(
         encoding="utf-8"

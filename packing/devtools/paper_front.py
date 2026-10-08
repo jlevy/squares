@@ -131,11 +131,18 @@ def numeral(number: int) -> str:
 
 def series(slug: str) -> Series:
     """The series strip of the site's paper `slug`, from the site's one list of papers
-    (`render_overview.PAPERS`): every paper of the site, in reading order, by its part."""
+    (`render_overview.PAPERS`): the entries with a part number, in reading order."""
+    part = render_overview.paper_record(slug).part
+    if part is None:
+        raise ValueError(f"{slug}: this standalone paper belongs to no series")
     return Series(
         SERIES_NAME,
-        tuple(Part(paper.part, paper.slug, paper.title) for paper in render_overview.PAPERS),
-        render_overview.paper_record(slug).part,
+        tuple(
+            Part(paper.part, paper.slug, paper.title)
+            for paper in render_overview.PAPERS
+            if paper.part is not None
+        ),
+        part,
     )
 
 

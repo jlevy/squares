@@ -18,6 +18,7 @@ import pytest
 
 from devtools import render_n11_optimality_review as optimality_paper
 from devtools import render_overview
+from devtools import render_packing_methods as methods_paper
 from devtools.pages_scope import BUILDER_INPUTS, declared_inputs, pull_request_jobs
 from devtools.render_n11_lower_bounds_explainer import SITE_PATH as EXPLAINER_PATH
 from sqpack.yamlio import safe_load
@@ -50,25 +51,36 @@ OVERLAPPED_PREPARED_PAGE_JOBS = {
 #: ceiling and null measurements; the first pull-request run that includes them is the
 #: measurement, and whoever records it removes the name here, so the exception cannot
 #: quietly outlive the reason for it.
-AWAITING_FIRST_RUN = frozenset({"overview", "publish", "n11-threshold-bound-review"})
-#: The jobs that build a paper other than the first, one per review, each named by the
-#: paper's slug (`render_overview.PAPERS`).
-REVIEW_JOBS = frozenset(
+AWAITING_FIRST_RUN = frozenset(
+    {"overview", "publish", "n11-threshold-bound-review", "packing-methods"}
+)
+#: Independently built papers, each named by its registry slug.
+PAPER_JOBS = frozenset(
     paper.slug
     for paper in render_overview.PAPERS
     if paper.slug != render_overview.N11_LOWER_BOUNDS_EXPLAINER
 )
 
-#: The `publish` steps that put each review beside the papers already in the tree.
+#: The `publish` steps that put each independent paper beside the existing papers.
 PUT_THRESHOLD_REVIEW = (
     "Put the threshold-bound review beside the other paper, refusing any name already there"
 )
 PUT_OPTIMALITY_REVIEW = (
     "Put the optimality review beside the other papers, refusing any name already there"
 )
+PUT_METHODS_PAPER = (
+    "Put the methods explainer beside the other papers, refusing any name already there"
+)
 #: The archived copy of Kleddamag's proof, which both reviews cite.
 KLEDDAMAG = "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
 KLEDDAMAG_README_PATTERN = f"/{KLEDDAMAG}/README.md"
+#: Every citation the methods renderer requires inside the two omitted source trees.
+METHODS_CITATION_PATTERNS = tuple(
+    "/" + path.relative_to(REPO).as_posix()
+    for path in methods_paper.CITATION_SOURCES
+    if path.is_relative_to(REPO / "packing/resources")
+    or path.is_relative_to(REPO / "packing/campaign")
+)
 
 #: The step right before every download by artifact id, reading the same id expression.
 #: With `merge-multiple`, an empty `artifact-ids` downloads every artifact in the run.
@@ -88,6 +100,7 @@ SKIP_NOTICE_PAGES = {
     "overview": "overview and the site's own pages",
     "n11_threshold_bound_review": "threshold-bound review",
     "n11_optimality_review": "optimality review",
+    "packing_methods": "packing methods explainer",
 }
 
 
@@ -117,7 +130,7 @@ def browser_check_jobs(jobs: Mapping[str, Mapping[str, Any]]) -> list[str]:
     return [
         name
         for name, job in jobs.items()
-        if name not in {"prepare", "overview", *REVIEW_JOBS, *DEPLOY_PATH}
+        if name not in {"prepare", "overview", *PAPER_JOBS, *DEPLOY_PATH}
         and any("playwright install" in step.get("run", "") for step in job.get("steps", []))
     ]
 
@@ -186,6 +199,26 @@ def test_the_push_filter_covers_the_developer_tools_its_jobs_run() -> None:
     assert workflow["on"]["pull_request"] is None, "pull requests are scoped by the scope job"
 
 
+def test_every_paper_render_input_is_a_push_trigger() -> None:
+    """Paper-owned declarations protect deployment as well as pull-request scope."""
+    patterns = load()["on"]["push"]["paths"]
+    for paper in render_overview.PAPERS:
+        inputs = BUILDER_INPUTS[paper.slug.replace("-", "_")]()
+        assert inputs, paper.slug
+        missing = []
+        for path in inputs:
+            relative = path.relative_to(REPO).as_posix()
+            changed = f"{relative}/__changed__" if path.is_dir() else relative
+            if not any(
+                fnmatchcase(relative, pattern) or fnmatchcase(changed, pattern)
+                for pattern in patterns
+            ):
+                missing.append(relative)
+        assert not missing, (
+            f"{paper.slug}: render inputs outside the Pages push filter: {missing}"
+        )
+
+
 def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
     """No browser work runs on a pull request that changed neither page, and none silently.
 
@@ -200,13 +233,8 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
     jobs = workflow["jobs"]
     scope = jobs["scope"]
     halves = tuple(BUILDER_INPUTS)
-    assert set(halves) == {
-        "n11_lower_bounds_explainer",
-        "n11_threshold_bound_review",
-        "n11_optimality_review",
-        "workbench",
-        "overview",
-    }
+    paper_halves = {paper.slug.replace("-", "_") for paper in render_overview.PAPERS}
+    assert set(halves) == {*paper_halves, "workbench", "overview"}
     assert set(scope["outputs"]) == {
         name for half in halves for name in (half, f"{half}_reason")
     }
@@ -232,8 +260,7 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
         "n11_lower_bounds_explainer": {"prepare", *OVERLAPPED_PREPARED_PAGE_JOBS},
         "workbench": {"workbench"},
         "overview": {"overview"},
-        "n11_threshold_bound_review": {"n11-threshold-bound-review"},
-        "n11_optimality_review": {"n11-optimality-review"},
+        **{slug.replace("-", "_"): {slug} for slug in PAPER_JOBS},
     }
     for roots in gated.values():
         assert all(needs_of(jobs[root]) == ["scope"] for root in roots)
@@ -244,11 +271,12 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
     steps = [step.get("id") or step.get("name") for step in scope["steps"]]
     assert steps.index(SKIP_NOTICE_STEP) == steps.index("scope") + 1
 
-    builders = (
-        r"python -m (devtools\.render_(?:n11_lower_bounds_explainer|overview"
-        r"|n11_threshold_bound_review|n11_optimality_review)"
-        r"|workbench_tools\.build_site)\b"
+    builder_modules = (
+        *(paper.module for paper in render_overview.PAPERS),
+        "devtools.render_overview",
+        "workbench_tools.build_site",
     )
+    builders = r"python -m (?:" + "|".join(map(re.escape, builder_modules)) + r")\b"
     for name, job in jobs.items():
         commands = "\n".join(step.get("run", "") for step in job.get("steps", []))
         works = "playwright install" in commands or re.search(builders, commands)
@@ -257,7 +285,7 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
                 f"needs.scope.outputs.{half} == 'true'" for half in halves
             }
             assert (
-                upstream(jobs, name) & {"prepare", "workbench", "overview", *REVIEW_JOBS}
+                upstream(jobs, name) & {"prepare", "workbench", "overview", *PAPER_JOBS}
                 or directly_scoped
             ), f"{name} does page work on a pull request without waiting for the scope"
 
@@ -337,13 +365,16 @@ def test_the_required_aggregate_passes_a_justified_skip_and_nothing_else() -> No
     assert step["env"]["NEEDS"] == "${{ toJSON(needs) }}"
     program = step["run"]
     assert '.scope.result == "success"' in program
-    decisions = (
-        "[.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, "
-        ".scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, "
-        ".scope.outputs.n11_optimality_review]"
+    decisions = re.search(
+        r"\[(\.scope\.outputs\.\w+(?:, \.scope\.outputs\.\w+)*)\] "
+        r'\| all\(\. == "true" or \. == "false"\)',
+        program,
     )
-    assert f'{decisions} | all(. == "true" or . == "false")' in program
-    for review in sorted(REVIEW_JOBS):
+    assert decisions is not None
+    assert set(re.findall(r"\.scope\.outputs\.(\w+)", decisions.group(1))) == set(
+        BUILDER_INPUTS
+    )
+    for review in sorted(PAPER_JOBS):
         half = review.replace("-", "_")
         assert (f'(.scope.outputs.{half} != "true" or .["{review}"].result == "success")') in (
             program
@@ -351,6 +382,47 @@ def test_the_required_aggregate_passes_a_justified_skip_and_nothing_else() -> No
     assert '[.[].result] | all(. == "success" or . == "skipped")' in program
     assert "jq -e" in program
     assert set(needs_of(jobs["deploy"])) == {"publish", "pages-required"}
+    bash = shutil.which("bash")
+    if bash is None or shutil.which("jq") is None:
+        pytest.skip("the aggregate needs bash and jq, which every hosted runner has")
+    baseline: dict[str, dict[str, Any]] = {
+        name: {"result": "success"} for name in needs_of(aggregate)
+    }
+    outputs = dict.fromkeys(BUILDER_INPUTS, "true")
+    baseline["scope"]["outputs"] = outputs
+
+    def verdict(needs: dict[str, dict[str, Any]]) -> int:
+        return subprocess.run(
+            (bash, "--noprofile", "--norc", "-eo", "pipefail", "-c", program),
+            env={"PATH": os.environ.get("PATH", ""), "NEEDS": json.dumps(needs)},
+            capture_output=True,
+            text=True,
+            check=False,
+        ).returncode
+
+    assert verdict(baseline) == 0
+    for half in BUILDER_INPUTS:
+        for invalid in ("", "unexpected", None):
+            broken = {key: value for key, value in outputs.items() if key != half}
+            if invalid is not None:
+                broken[half] = invalid
+            assert verdict({**baseline, "scope": {"result": "success", "outputs": broken}}) != 0
+    for paper in PAPER_JOBS:
+        half = paper.replace("-", "_")
+        skipped = {**baseline, paper: {"result": "skipped"}}
+        assert verdict(skipped) != 0, paper
+        assert (
+            verdict(
+                {
+                    **skipped,
+                    "scope": {"result": "success", "outputs": {**outputs, half: "false"}},
+                }
+            )
+            == 0
+        ), paper
+    for need in needs_of(aggregate):
+        for failure in ("failure", "cancelled"):
+            assert verdict({**baseline, need: {"result": failure}}) != 0, (need, failure)
 
 
 def conjuncts(condition: str) -> list[str] | None:
@@ -746,9 +818,9 @@ def test_live_verification_waits_for_the_exact_deployed_revision() -> None:
 
 
 def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -> None:
-    """What `build` uploaded from one directory is now six artifacts put back together.
+    """The checked producer artifacts are assembled into one publication tree.
 
-    The three papers under `/papers/`, each by its slug with its Markdown and PDF beside
+    The papers under `/papers/`, each by its slug with its Markdown and PDF beside
     it, the atlas's files and the site's own pages at the root, and the workbench under
     `/workbench/` share one published tree; the only upload to Pages is a push to `main`.
     Each paper is rendered where it is served, so nothing is renamed here.
@@ -760,8 +832,7 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
         "pdf",
         "overview",
         "workbench",
-        "n11-threshold-bound-review",
-        "n11-optimality-review",
+        *PAPER_JOBS,
     }
     steps = publish["steps"]
     # The checkout and its Python come first (`test_publication_holds_the_assembled_site_
@@ -789,14 +860,11 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
         {"name": "n11-lower-bounds-explainer-pdf", "path": "packing/site/papers"},
         {"name": "overview-pages", "path": "${{ runner.temp }}/overview-pages"},
         {"name": "workbench-page", "path": "packing/site/workbench"},
-        {
-            "name": "n11-threshold-bound-review-page",
-            "path": "${{ runner.temp }}/n11-threshold-bound-review-page",
-        },
-        {
-            "name": "n11-optimality-review-page",
-            "path": "${{ runner.temp }}/n11-optimality-review-page",
-        },
+        *(
+            {"name": f"{paper.slug}-page", "path": "${{ runner.temp }}/" + paper.slug + "-page"}
+            for paper in render_overview.PAPERS
+            if paper.slug in PAPER_JOBS
+        ),
     ]
     assert not [step["name"] for step in steps if "mv " in step.get("run", "")]
     prepare = jobs["prepare"]
@@ -820,7 +888,7 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
     )
     assert produced["workbench-page"] == ("workbench", "packing/site/workbench")
     assert produced["overview-pages"] == ("overview", "packing/site")
-    for review in REVIEW_JOBS:
+    for review in PAPER_JOBS:
         assert produced[f"{review}-page"] == (review, "packing/site")
     (upload,) = [
         step
@@ -848,6 +916,41 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
     )
     assert build < share
     assert "--check" in shlex.split(workbench[build]["run"])
+
+
+def test_methods_paper_audits_its_pdf_before_sharing_the_producer() -> None:
+    """The served producer keeps the checked PDF, without an optional artifact audit."""
+    job = load()["jobs"]["packing-methods"]
+    steps = job["steps"]
+    audit = next(
+        index
+        for index, step in enumerate(steps)
+        if "devtools.artifact_dates --pdf site/papers/packing-methods.pdf"
+        in step.get("run", "")
+    )
+    commands = steps[audit]["run"].splitlines()
+    draw = next(index for index, line in enumerate(commands) if "--site site --pdf" in line)
+    dates = next(
+        index for index, line in enumerate(commands) if "devtools.artifact_dates" in line
+    )
+    assert draw < dates
+    assert shlex.split(commands[dates])[-4:] == [
+        "--pdf",
+        "site/papers/packing-methods.pdf",
+        "--revised",
+        "packing-methods",
+    ]
+    assert not steps[audit].get("if")
+    assert not steps[audit].get("continue-on-error")
+    share = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("with", {}).get("name") == "packing-methods-page"
+    )
+    assert audit < share
+    assert steps[share]["with"]["if-no-files-found"] == "error"
+    assert not steps[share].get("if")
+    assert not steps[share].get("continue-on-error")
 
 
 def test_the_site_pages_render_twice_beside_prepare_and_agree() -> None:
@@ -942,6 +1045,7 @@ def test_publication_holds_the_assembled_site_to_the_head_contract() -> None:
     writes = (
         PUT_THRESHOLD_REVIEW,
         PUT_OPTIMALITY_REVIEW,
+        PUT_METHODS_PAPER,
         "Serve each moved file at its old address too",
     )
     assert max(_publish_step(steps, name) for name in writes) < check
@@ -967,11 +1071,12 @@ def _assembled(
     overview: tuple[str, ...] = (),
     threshold: tuple[str, ...] = (),
     review: tuple[str, ...] = (),
+    methods: tuple[str, ...] = (),
 ) -> tuple[Path, list[subprocess.CompletedProcess[str]]]:
-    """Run the `publish` job's four shell steps, in order, on a tree shaped like the one
+    """Run the `publish` job's assembly steps, in order, on a tree shaped like the one
     its downloads leave: the lower-bounds explainer and its PDF under `papers/` with an
-    atlas file at the root, and the site's pages and the two reviews staged apart.
-    `overview`, `threshold` and `review` add files to the three staged trees. Returns the
+    atlas file at the root, and the site's pages and independent papers staged apart.
+    The keyword arguments add files to each staged tree. Returns the
     site and each step's result; a step that fails stops the rest, as it does on a
     runner."""
     steps = load()["jobs"]["publish"]["steps"]
@@ -1004,6 +1109,14 @@ def _assembled(
         (staged / "papers" / f"n11-optimality-review.{suffix}").write_text(f"review {suffix}")
     for extra in review:
         (staged / "papers" / extra).write_text("review's")
+    staged_methods = root / "packing-methods-page"
+    (staged_methods / "papers").mkdir(parents=True)
+    for suffix in ("html", "md", "pdf"):
+        (staged_methods / "papers" / f"packing-methods.{suffix}").write_text(
+            f"methods explainer {suffix}"
+        )
+    for extra in methods:
+        (staged_methods / "papers" / extra).write_text("methods explainer's")
     results = []
     for step_name, cwd, environment in (
         ("Put the site's pages at the root, refusing any name already there", root, pages),
@@ -1016,6 +1129,11 @@ def _assembled(
             PUT_OPTIMALITY_REVIEW,
             root,
             staged,
+        ),
+        (
+            PUT_METHODS_PAPER,
+            root,
+            staged_methods,
         ),
         ("Serve each moved file at its old address too", site, None),
     ):
@@ -1067,7 +1185,7 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
 
     Each paper is rendered and checked where it is served, so the assembly renames
     nothing: it puts the site's pages at the root, where the forwarders at the papers'
-    old addresses come with them, puts the second and third papers beside the first, and
+    old addresses come with them, puts the independent papers beside the first, and
     copies
     each Markdown file and PDF to the address it had before the move. The steps are run
     here on a tree shaped like the real one. The copies are exactly
@@ -1086,6 +1204,8 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
             PUT_THRESHOLD_REVIEW,
             "Use the checked optimality review",
             PUT_OPTIMALITY_REVIEW,
+            "Use the checked methods explainer",
+            PUT_METHODS_PAPER,
             "Serve each moved file at its old address too",
             "List what the publication holds",
         )
@@ -1098,7 +1218,7 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
     )
 
     site, results = _assembled(tmp_path, "whole")
-    assert [result.returncode for result in results] == [0, 0, 0, 0], results
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 0], results
     served = sorted(
         path.relative_to(site).as_posix() for path in site.rglob("*") if path.is_file()
     )
@@ -1120,6 +1240,9 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "papers/n11-threshold-bound-review.html",
         "papers/n11-threshold-bound-review.md",
         "papers/n11-threshold-bound-review.pdf",
+        "papers/packing-methods.html",
+        "papers/packing-methods.md",
+        "papers/packing-methods.pdf",
         "t-018-explainer.md",
         "t-018-explainer.pdf",
     ]
@@ -1164,9 +1287,15 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
     )
     assert not (site / "papers" / "n11-optimality-review.html").exists()
 
-    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    site, results = _assembled(tmp_path, "methods", methods=("n11-optimality-review.md",))
     assert [result.returncode for result in results] == [0, 0, 0, 1]
-    assert "t-018-explainer.md is already published" in results[3].stdout
+    assert "publication collision: papers/n11-optimality-review.md" in results[3].stderr
+    assert (site / "papers" / "n11-optimality-review.md").read_text() == "review md"
+    assert not (site / "papers" / "packing-methods.html").exists()
+
+    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
+    assert "t-018-explainer.md is already published" in results[4].stdout
     assert (site / "t-018-explainer.md").read_text() == "overview build's t-018-explainer.md"
 
 
@@ -1213,27 +1342,24 @@ def pull_request_outcomes(decision: Mapping[str, bool]) -> dict[str, str]:
 
 
 def test_every_scope_decision_passes_the_aggregate_and_builds_its_pages() -> None:
-    """Thirty-two decisions, from nothing in scope to everything, on a pull request.
+    """Every scope combination, from nothing in scope to everything, on a pull request.
 
     Each build runs exactly when its page is in scope, and no job runs when it is not
     (`scope` says why itself); the assembly runs only for a whole site, which is every
     push to `main`; and the required
     aggregate, which sees a skip as a pass only because its scope decided it, passes all
-    thirty-two. A pull request that changes only the overview's inputs builds the
+    combinations. A pull request that changes only the overview's inputs builds the
     overview and nothing else.
     """
     halves = tuple(BUILDER_INPUTS)
     assert halves == (
-        "n11_lower_bounds_explainer",
-        "n11_threshold_bound_review",
-        "n11_optimality_review",
+        *(paper.slug.replace("-", "_") for paper in render_overview.PAPERS),
         "workbench",
         "overview",
     )
     builds = {
         "n11_lower_bounds_explainer": "prepare",
-        "n11_threshold_bound_review": "n11-threshold-bound-review",
-        "n11_optimality_review": "n11-optimality-review",
+        **{slug.replace("-", "_"): slug for slug in PAPER_JOBS},
         "workbench": "workbench",
         "overview": "overview",
     }
@@ -1660,6 +1786,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/resources/papers/kingbird-square-11-provenance.svg",
             KLEDDAMAG_README_PATTERN,
         ),
+        "packing-methods": METHODS_CITATION_PATTERNS,
         "n11-threshold-bound-review": (
             "/packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/",
             "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz",
@@ -1672,7 +1799,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/campaign/agent-sessions/session-153-native-reconciliation.json",
         ),
     }
-    assert set(kept) == REVIEW_JOBS
+    assert set(kept) == PAPER_JOBS
 
     def keeps(job: str, declared: Path) -> bool:
         for pattern in kept.get(job, ()):
@@ -1706,7 +1833,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
         "prepare",
         "workbench",
         "overview",
-        *REVIEW_JOBS,
+        *PAPER_JOBS,
         *browser_check_jobs(jobs),
     } <= set(sparse)
     omitted_roots = (REPO / "packing/resources", REPO / "packing/campaign")
@@ -1756,6 +1883,14 @@ def test_optimality_archive_links_are_all_in_its_sparse_checkout() -> None:
 #: What each review's partial checkout must materialize of the two omitted trees, and two
 #: files beside them it must not.
 REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
+    "packing-methods": (
+        tuple(pattern.removeprefix("/") for pattern in METHODS_CITATION_PATTERNS),
+        (
+            "packing/resources/web/unrelated/README.md",
+            "packing/resources/papers/unrelated.pdf",
+            "packing/campaign/old/README.md",
+        ),
+    ),
     "n11-optimality-review": (
         (
             "packing/resources/README.md",

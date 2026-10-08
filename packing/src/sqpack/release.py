@@ -500,6 +500,23 @@ THRESHOLD_REVIEW_REVISED = "October 5, 2026"
 #: 11-squares-certified-bound), which its "Original proof" date prints.
 THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 
+#: The standalone tutorial on finding and verifying record packings. Its draft
+#: version and dates belong to the paper, independently of the site and n = 11 series.
+PACKING_METHODS_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.1.0",
+        first_published="October 8, 2026",
+        result_scope=(
+            "The first draft: a systematic tutorial on modelling, searching, refining, "
+            "reconstructing and verifying record square packings."
+        ),
+    ),
+)
+PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
+PACKING_METHODS_EDITION = f"Draft {PACKING_METHODS_VERSION}"
+PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
+PACKING_METHODS_REVISED = "October 8, 2026"
+
 #: The commit the committed claim documents link to
 #: (`render_n11_lower_bounds_explainer.edition_file`), at this repository's short length. It is
 #: pinned for the reason `DATA_REVISION` is: those documents are compared byte for byte with a
