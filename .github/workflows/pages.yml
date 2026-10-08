@@ -221,11 +221,10 @@ concurrency:
 # workbench stack's pull requests, 381 s on pull requests into `main`, and 471 s on the
 # push to `main` that merged the stack (run 35017781374). None of those checks reads
 # another's result -- each loads the one prepared page -- so they are split into jobs
-# balanced by their measured step times. Firefox and WebKit provisioning starts beside
-# `prepare`, then joins it through a bounded, fail-closed artifact wait immediately
-# before the page is read. The long pole therefore overlaps independent setup rather
-# than serializing it. Every check that ran before still runs, on the same prepared
-# artifact; nothing moved off the pull request (`OR-13`).
+# balanced by their measured step times. Page consumers wait for `prepare` through
+# native dependencies, so a queued producer cannot fill consumer runners or exhaust
+# their bounded artifact join. Independent page producers remain parallel. Every check
+# still reads the same prepared artifact; nothing moved off the pull request (`OR-13`).
 #
 # The three papers of the n = 11 series are served under `papers/`, each by its slug
 # (`render_overview.PAPERS`), and a job, an output or an artifact that is one paper's
@@ -771,15 +770,15 @@ jobs:
   # spread over three jobs, because balanced by cost is what keeps the longest job short.
   # Each job downloads the one prepared page, so all of them check the bytes that are
   # published, and a failure now names its job rather than a step in a 388 s queue.
-  # Their checkout, Python and browser provisioning do not consume the page, so those
-  # steps start beside `prepare`; each job joins the exact `prepared-page` artifact only
-  # after setup. Run 35127260004 showed that leaving this setup behind `prepare` made
-  # `typography` the new 194 s critical path after the cross-browser jobs were overlapped.
+  # Provisioning waits for `prepare`: run 37821312270 queued that producer beyond
+  # the consumers' 600 s join and exhausted the installation API quota while they
+  # occupied runners. Native needs prevent that queue inversion; each consumer still
+  # validates the exact run, attempt and artifact id after setup.
 
   # Everything the PDF is: drawn once, from the prepared page, then checked in place and
   # handed to `publish` unchanged.
   pdf:
-    needs: scope
+    needs: [scope, prepare]
     if: needs.scope.outputs.n11_lower_bounds_explainer == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -951,7 +950,7 @@ jobs:
           retention-days: 7
 
   print-layout:
-    needs: scope
+    needs: [scope, prepare]
     if: needs.scope.outputs.n11_lower_bounds_explainer == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -1039,7 +1038,7 @@ jobs:
           test "$self_status" -eq 0
 
   typography:
-    needs: scope
+    needs: [scope, prepare]
     if: needs.scope.outputs.n11_lower_bounds_explainer == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -1148,7 +1147,7 @@ jobs:
 
   # Math faces, font loading and the reading position, all on the prepared page.
   screen:
-    needs: scope
+    needs: [scope, prepare]
     if: needs.scope.outputs.n11_lower_bounds_explainer == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -1248,7 +1247,7 @@ jobs:
   # carries the host check and the negative controls, about 41 s of this job's 61; the
   # mobile settings run in `typography` and the print settings in `pdf`.
   geometry:
-    needs: scope
+    needs: [scope, prepare]
     if: needs.scope.outputs.n11_lower_bounds_explainer == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -1343,7 +1342,7 @@ jobs:
   # 39 s on them serially and missed OR-14's 180 s outer edge by 9 s. Two pairs preserve
   # headroom on the four-CPU runner while removing roughly half that serial tail.
   font-loading:
-    needs: scope
+    needs: [scope, prepare]
     if: needs.scope.outputs.n11_lower_bounds_explainer == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -1478,7 +1477,7 @@ jobs:
           retention-days: 7
 
   browser-geometry:
-    needs: scope
+    needs: [scope, prepare]
     if: needs.scope.outputs.n11_lower_bounds_explainer == 'true'
     runs-on: ubuntu-latest
     permissions:
