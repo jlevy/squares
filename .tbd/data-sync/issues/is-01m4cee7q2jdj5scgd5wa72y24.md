@@ -5,7 +5,7 @@ title: Continue exact polynomial collection and publication from PR403
 kind: epic
 status: in_progress
 priority: 1
-version: 24
+version: 25
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-01a118e4
 labels: []
@@ -34,10 +34,11 @@ child_order_hints:
   - is-01m4cg9gby17vmrn7df05d28mq
   - is-01m4cg9h0q2mvjqrz033qzy50c
   - is-01m4cg9hqrf70vyzndk9sbr7j6
+  - is-01m4cgwrzx5a3ykr2tn5ec9e1v
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:26:02.337Z
-updated_at: 2026-10-08T00:58:25.911Z
+updated_at: 2026-10-08T01:08:55.920Z
 started_at: 2026-10-08T00:26:33.782Z
 ---
 W1 source collection and W7 integration continuation from claude/friendly-sagan-jk7qzy (d948311d8), on codex/exact-polynomial-coverage. Reconcile claimed upstream lane outputs with reachable commits; collect all available current and superseded side polynomials through n=324; independently review the algebraic contracts with Astra; publish a generated comprehensive register/report; map every remaining source, derivation, witness and publication gap as a dependency-linked bead. Coordinator owns shared records, identifiers, integration and PR; no mathematical optimality inference from a polynomial.
