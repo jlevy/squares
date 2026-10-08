@@ -84,10 +84,21 @@ def section(n: int, *, confirmed: bool) -> str:
     )
 
 
+def preserve_prose_rendering(expected: str, existing: str) -> str:
+    """Keep owner layout only when the complete text differs by typographic formatting."""
+    punctuation = str.maketrans({"\u2019": "'", "\u2018": "'", "\u201c": '"', "\u201d": '"'})
+
+    def normalized(text: str) -> str:
+        return " ".join(text.translate(punctuation).split())
+
+    return existing if normalized(existing) == normalized(expected) else expected
+
+
 def ceiling_prose(n: int, case: dict[str, Any], body: str) -> str:
     """Expose a retained older ceiling without assigning it to the reported pose."""
     heading = "## The verified upper bound is a ceiling"
     pattern = rf"\n{heading}\n.*?(?=\n## |\n<!-- This document follows)"
+    retained = re.search(pattern, body, flags=re.DOTALL)
     body = re.sub(pattern, "", body, flags=re.DOTALL)
     verified = case["verified_upper_bound"]["value"]
     reported = case["reported_upper_bound"]["value"]
@@ -107,6 +118,8 @@ def ceiling_prose(n: int, case: dict[str, Any], body: str) -> str:
         "are retained; actual private-worker admission and confirming record review "
         "remain pending.\n"
     )
+    if retained is not None:
+        section = preserve_prose_rendering(section, retained.group())
     marker = "\n## The lower bound"
     if body.count(marker) != 1:
         raise ValueError("one lower-bound section required for the ceiling comparison")
@@ -335,7 +348,10 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
         raise ValueError("one retained lower-bound section required")
     pattern = rf"\n{SECTION}\n.*?(?=\n## |\n<!-- This document follows)"
     body, count = re.subn(
-        pattern, lambda _m: section(n, confirmed=confirmed), body, flags=re.DOTALL
+        pattern,
+        lambda match: preserve_prose_rendering(section(n, confirmed=confirmed), match.group()),
+        body,
+        flags=re.DOTALL,
     )
     if count != 1:
         raise ValueError("one Gupta source construction section required")
