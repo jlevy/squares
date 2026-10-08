@@ -1,0 +1,10 @@
+{
+  "commit": "1bf942a7af1ea330e95489d8997deebd4227ca71",
+  "run_id": "37414883750",
+  "run_attempt": "1",
+  "configuration_sha256": {
+    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+    "lakefile.lean": "4d454e7edfaf096378a8f68a3bd5f5b074c3d25399c3bc13e1b88ee84df3da45",
+    "lake-manifest.json": "120e40965dd632c94746b59767715975b8c172383f784da8707373f58d320a82"
+  }
+}

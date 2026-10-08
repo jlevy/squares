@@ -49,6 +49,9 @@ allowlist:
   - path: packing/devtools/audit_wand125_declared_net.py
     kind: download
     boundary: wand125's finer-net bundle, its candidate, axis tables and checker files against the digests its manifest and the n50 packet's upstream copy pin (#366).
+  - path: packing/devtools/audit_n11_lean.py
+    kind: download
+    boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.
   - path: packing/devtools/capture_web_source.py
     kind: download
     boundary: Zenodo deposits and deployed web pages against the MD5 and digests the record or a retained manifest states.
@@ -79,6 +82,9 @@ allowlist:
   - path: packing/cases/n54_source_contract/verify.py
     kind: download
     boundary: The retained n54 source and its clean-room copy, BC-141's contract (H8).
+  - path: packing/devtools/squish_followup_packets.py
+    kind: external-checkout
+    boundary: SQUISH's pinned 7 October update source bytes, admitted from an external checkout and compared with their acquisition digests when --source is supplied; derived internal facts are compared structurally.
   - path: packing/devtools/build_known_best_atlas.py
     kind: download
     boundary: Upstream's declared digest of a known-best packing it publishes (H9).

@@ -278,10 +278,12 @@ Two marks sit beside a status and are no part of it.
   The whole is marked *superseded*; a part is marked *superseded in part* and the result
   stays current, since it still holds the rest.
   `T-060`’s $s(11) = T$ implies `T-036`’s bound for its family and not its equality
-  case, since `T-060` makes no claim of uniqueness, so `T-036` is superseded in part.
-  [`devtools/check_results.py`](packing/devtools/check_results.py) holds each named
-  result to one dated no earlier, on a case the two share, and refuses the field on a
-  bound, whose supersession is derived.
+  case, since `T-060` makes no claim of uniqueness, so `T-036` is superseded in part;
+  `T-112`, the uniqueness corollary of `T-060`, implies the equality case and is a
+  second part. No mark says that two parts together make the whole, so `T-036` stays
+  current. [`devtools/check_results.py`](packing/devtools/check_results.py) holds each
+  named result to one dated no earlier, on a case the two share, and refuses the field
+  on a bound, whose supersession is derived.
 - **Activity** says who has the next move, where the record shows it.
   A register entry may carry `activity`, with a `state` of `in-analysis` (a replay, a
   review or an audit of the result is under way here) or `waiting` (a question, a
@@ -378,6 +380,7 @@ matters; the kind says what sort of claim it is.
 | lower bound | Proves $s(n) \ge v$ or $s(n) > v$: no packing of $n$ unit squares fits in a smaller square |
 | upper bound | Proves $s(n) \le v$ by a packing of $n$ unit squares in a square of side $v$ |
 | optimality | Settles an exact value $s(n) = v$: a lower bound that meets an upper bound |
+| uniqueness | Classifies every packing that attains $s(n)$: each is one of finitely many named packings, up to the container’s symmetries and the relabelling of the squares, and moves no bound |
 | simplification | Proves again a result the record already holds, by a shorter, cleaner or more elementary route, and moves no bound |
 | rigidity | Says whether one named packing can move at fixed side: its flexes, its rigidity at first or second order, the isolation of its pose |
 | case exclusion | Shows that one named class of configurations, such as a branch, a corner class or a region of pose space, holds no packing at a stated side, and moves no bound by itself |
@@ -387,7 +390,7 @@ matters; the kind says what sort of claim it is.
 | audit | Checks an existing proof or certificate independently and finds it correct as published |
 
 The register stores a kind in lowercase with hyphens, `lower-bound` or `case-exclusion`.
-A result has exactly one, chosen by three rules.
+A result has exactly one, chosen by four rules.
 
 - The kind is what the claim concludes.
   Where a claim ends in a bound or a value of $s(n)$, the kind is that bound, however it
@@ -395,6 +398,9 @@ A result has exactly one, chosen by three rules.
   monotonicity from another result.
 - A lower bound that meets a known upper bound is optimality, because the claim states
   the value.
+- A classification of the packings at a value the record already settles is uniqueness,
+  not a second optimality: it concludes which packings attain $s(n)$, not what $s(n)$
+  is.
 - A second proof of a result the record already holds is a simplification, and its claim
   names the result it proves again.
 
@@ -404,8 +410,8 @@ bound, `≤` or `<` an upper bound and `=` optimality, and only a simplification
 restate one.
 A bound cites evidence that claims that bound, and optimality cites an exact
 value or both halves.
-Rigidity, case exclusion and restricted optimality cite `derived-structure` evidence and
-state no relation on $s(n)$ in their headline.
+Uniqueness, rigidity, case exclusion and restricted optimality cite `derived-structure`
+evidence and state no relation on $s(n)$ in their headline.
 Method limit, correction and audit are told apart by review alone.
 
 A result’s standing, whether a case bound rests on it now, is about bounds.

@@ -118,6 +118,7 @@ $defs:
           - lower-bound
           - upper-bound
           - optimality
+          - uniqueness
           - simplification
           - rigidity
           - case-exclusion
@@ -128,8 +129,9 @@ $defs:
         description: >-
           What the result is, named for what its claim concludes (epistemics.md, Result
           Kinds): a lower or an upper bound on s(n); optimality, an exact value settled;
-          a simplification, a second and simpler proof of a result the record holds; the
-          rigidity of one packing; the exclusion of one class of configurations; the
+          uniqueness, every packing that attains s(n) classified; a simplification, a
+          second and simpler proof of a result the record holds; the rigidity of one
+          packing; the exclusion of one class of configurations; the
           best packing within a restricted family; the limit of a method; a correction
           to a published statement; or an audit of an existing proof or certificate.
           One kind per result, written right after `id`. Declared, and cross-checked by

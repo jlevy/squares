@@ -9,6 +9,10 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/results/session-173-windows-supervision/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/devtools/windows-supervision.md, role: development-guide, authority: current, lifecycle: maintained}
   - {path: packing/devtools/n17-diagnostics.md, role: development-guide, authority: current, lifecycle: maintained}
@@ -23,6 +27,9 @@ documents:
   - {path: docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-04-n11-optimality-paper-v0.1.4-changes.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-n11-lean-formalization-adversarial.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-wand125-october-4-certificates.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-couzo-6042c56.md, role: review, authority: record, lifecycle: retained}
@@ -30,6 +37,8 @@ documents:
   - {path: docs/project/reviews/review-2026-10-06-evand-exact-optima-fix-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-evand-exact-ceilings.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-evand-exact-ceilings-fix-check.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-n11-uniqueness-fix-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-guzhou-r071.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-wand125-finer-net-n18-n19.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md, role: review, authority: record, lifecycle: retained}
@@ -38,6 +47,8 @@ documents:
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-s12-v11-certificate.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-03-n11-gpt6-pro-review-integration.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-03-n11-optimality-paper-adversarial.md, role: review, authority: record, lifecycle: retained}
@@ -105,6 +116,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-09-30-n11-explainer-intuition.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-codex-cloud-github-publication.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-02-s12-beyond-rescaling.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-02-author-checker-profile.md, role: research-report, authority: record, lifecycle: retained}

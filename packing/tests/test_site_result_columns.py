@@ -110,9 +110,9 @@ REM = 16
 CASES_MEASURE = 224.8
 CASES_MIN = 120.4
 CASES_LINES = 9
-#: The result with the longest list of cases, and the four whose quotients are long.
+#: The result with the longest list of cases, and the five whose quotients are long.
 MOST_CASES = "T-101"
-LONG_QUOTIENTS = ("T-022", "T-024", "T-026", "T-033")
+LONG_QUOTIENTS = ("T-022", "T-024", "T-026", "T-033", "T-114")
 #: How far a table of results may run past its frame, with every row showing: at its
 #: floors it is 1095.5 pixels, 151.5 more than the 944-pixel frame at 1024 and 407.5
 #: more than the 688-pixel one at 768 (measured with eight columns, 2026-10-04; nine
@@ -388,7 +388,7 @@ def test_a_cell_of_cases_holds_each_value_in_a_box_and_reads_as_the_register_doe
 def test_a_long_quotient_may_end_a_line_after_its_solidus() -> None:
     """A quotient of more than 24 digits sets its solidus as a binary operator, after
     which a line may end; a shorter one, a decimal and a quotient inside a group are left
-    alone. Four results' summaries hold such a quotient, and each is set so in both
+    alone. Five results' summaries hold such a quotient, and each is set so in both
     tables of results, with no TeX left in the MathML a screen reader is given."""
     breakable = overview_data.breakable_quotients
     long = r"s(11) \ge 955000\sqrt{2073600042893309449}/359341754646249 = 3.8269975\ldots"

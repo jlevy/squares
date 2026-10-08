@@ -35,10 +35,23 @@ Queuingtheorydotcom, building on this project and Kleddamag.
 This repository independently replayed the proof’s exact inputs and audited their
 mathematical composition (`V3/C3/S5`: machine-checked, review record pending);
 [T-011](packing/frontier/RESULTS.md) verifies Trump’s matching witness.
+The same argument, read at side exactly $T$, shows that Trump’s packing is the only
+optimal one up to the eight symmetries of the container and relabelling of the squares:
+[T-112](packing/frontier/RESULTS.md) registers that direct corollary of T-060, which
+adds no computation (`V3/C2/S3`: its step at side $T$ is prose).
 The [case record](packing/frontier/n-011.md),
 [review](docs/project/reviews/review-2026-09-29-n11-optimality.md), and
 [retained packet](packing/resources/web/n11-optimality-2026-09-29/README.md) state what
 the confirmation depends on and the reproducibility defects found in the source.
+On 6 October 2026 the proof was announced as formalized in Lean 4 “thanks to Astra and
+Claude”, in
+[11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) by
+Queuingtheorydotcom and contributors.
+This project’s statement audit reads its theorem as exactly $s(11) = T$, and its source
+reports that its full verification run, resumed from earlier validated receipts, passed,
+trusting Lean’s compiler for its numerical certificates.
+It is recorded on T-060 as the source’s report; a complete build this record can rest
+on, and a human expert’s review of the formalization, are still to come.
 
 **The results live on the project site,
 [Square Packing](https://jlevy.github.io/squares/).** It carries the
@@ -257,10 +270,11 @@ The Motion Lab is an exploratory instrument, not a citable research result.
 
 ## Reports
 
-These 23 research reports are the durable topical syntheses:
+These 24 research reports are the durable topical syntheses:
 
 | Report | Scope |
 | --- | --- |
+| [Publishing GitHub Work from Codex Cloud](docs/project/research/research-2026-10-07-codex-cloud-github-publication.md) | Diagnosis of GitHub access in Codex Cloud, the verified publication repair, and reusable setup and validation evidence |
 | [s(12) Beyond Rescaling](docs/project/research/research-2026-10-02-s12-beyond-rescaling.md) | Daniel’s s(12) certificate scaled past #309 at a finer angle net, then re-weighted by linear programming to a candidate s(12) ≥ 15680000/3949423, with source-verifier receipts and controls |
 | [Where the Authors’ Measure Checkers Spend Their Time](docs/project/research/research-2026-10-02-author-checker-profile.md) | Function-level profiles of Tokoharu’s and wand125’s outward-rounded checkers on one certificate per family, and what they imply for an independent verifier; withheld from that verifier’s clean-room implementers |
 | [Exact Arithmetic for Independent Verifiers](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md) | Source-level comparison of Python and Rust rational arithmetic, native-library options, sampled profiles, and a controlled experiment measuring redundant normalization |

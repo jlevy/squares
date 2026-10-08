@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **91** programs: **34** external and **57** first-party; **70** decide claims and **21** check premises.
-- **383** of **410** evidence entries name the programs that verified them: 224 reproduced with the producer’s code, 133 independently re-implemented, 16 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
+- **95** programs: **35** external and **60** first-party; **71** decide claims and **24** check premises.
+- **411** of **441** evidence entries name the programs that verified them: 226 reproduced with the producer’s code, 158 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -62,14 +62,15 @@ second implementation agrees.
 | [`V-mira-17squares-point-checker`](#v-mira-17squares-point-checker) | verify_certificate.py | Mira | external | decides | 1 | 0 |
 | [`V-stanislavfort-17squares-point-checker`](#v-stanislavfort-17squares-point-checker) | verify_certificate.py | Stanislav Fort | external | decides | 1 | 0 |
 | [`V-queuingtheory-n11-verify`](#v-queuingtheory-n11-verify) | VERIFY.py | Queuingtheorydotcom | external | decides | 1 | 1 |
+| [`V-queuingtheory-n11-lean`](#v-queuingtheory-n11-lean) | The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack) | Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis | external | decides | 2 | 1 |
 | [`V-wand125-tools`](#v-wand125-tools) | The wand125 tools repository's transfer/l_cap.py and general_pose_tree | wand125 | external | decides | 3 | 2 |
 | [`V-squarepacker-indep-check-cpp`](#v-squarepacker-indep-check-cpp) | indep_check.cpp | squarepacker | external | decides | 4 | 2 |
 | [`V-schadt-n29-check-py`](#v-schadt-n29-check-py) | check.py | Schadt | external | decides | 1 | 0 |
 | [`V-anabologyco-n17-checker`](#v-anabologyco-n17-checker) | scripts/check_certificate.py and its event pipeline | anabologyco-maker | external | decides | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 14 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 14 | 4 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 10 | 8 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 17 | 7 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 13 | 11 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -101,16 +102,17 @@ second implementation agrees.
 | [`V-wall-owner-containment`](#v-wall-owner-containment) | devtools.wall_owner_containment | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-n17-endpoint-checkers`](#v-n17-endpoint-checkers) | devtools.check_n17_root_certificate and devtools.check_n17_endpoint_feasibility | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-n17-catalogue-polynomial`](#v-n17-catalogue-polynomial) | devtools.check_n17_catalogue_polynomial | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-n11-optimality-checkers`](#v-n11-optimality-checkers) | The devtools.check_n11_optimality | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-n11-optimality-checkers`](#v-n11-optimality-checkers) | The devtools.check_n11_optimality | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 4 | 2 |
-| [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
+| [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
 | [`V-audit-n17-endpoint-receipt`](#v-audit-n17-endpoint-receipt) | devtools.audit_n17_endpoint_receipt | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-tokoharu-density`](#v-audit-tokoharu-density) | devtools.audit_tokoharu_density | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-wand125-rectangles`](#v-audit-wand125-rectangles) | devtools.audit_wand125_rectangles | Squares Project (Levy) | first-party | premises | 4 | 4 |
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 86 | 19 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 108 | 20 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 5 | 5 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 9 | 8 |
@@ -123,6 +125,8 @@ second implementation agrees.
 | [`V-audit-valid7-independent`](#v-audit-valid7-independent) | devtools.audit_valid7_independent | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-validtilt9-independent`](#v-audit-validtilt9-independent) | devtools.audit_validtilt9_independent | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-probe-valid7-fixes`](#v-probe-valid7-fixes) | devtools.probe_valid7_fixes | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
+| [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 
 ## By Program
 
@@ -787,6 +791,21 @@ The publisher's advertised replay of its n = 11 optimality proof, binding every 
 | --- | --- | --- | --- |
 | `E-n011-global-optimality-report` | the source’s own run | no code | T-060 |
 
+### `V-queuingtheory-n11-lean`
+
+**The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake at its pinned toolchain, with scripts/run_verification.sh and the finalizer scripts/finalize_verification.py driving the build and the axiom audit** · Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis · external · decides · Lean 4, Python, Bash · proof-assistant-checked
+
+Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7: the geometry, checker soundness and assembly kernel-checked, and 10,464 numerical certificate declarations decided by native_decide; the finalizer accepts the run only when every module's receipt, source hash and axiom report agree and no admission or unapproved axiom remains.
+
+- Source: [`packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ElevenSquare/Optimality.lean`](../../packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ElevenSquare/Optimality.lean), [`packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/scripts/run_verification.sh`](../../packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/scripts/run_verification.sh), [`packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/scripts/finalize_verification.py`](../../packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/scripts/finalize_verification.py)
+- Versions run: revision `cdc746ed907d` (the integrated commit; its Lean trees and pins are 11SquaresEvolving 1bf942a7's, which passed run 37414883750 at the source; not built here in full)
+- Note: Only the statement files, the 18-module closure of ElevenSquare.Foundations, the three modules at the top of the lower bound's assembly and the runner are retained; the other modules, 7,920 in all, are pinned by the commit and by the SHA-256 of each in the run's final audit.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-n011-lean-formalization-report` | the source’s own run | producer’s code | T-060 |
+| `E-n011-lean-statement-closure-build` | replayed here | producer’s code | - |
+
 ### `V-wand125-tools`
 
 **The wand125 tools repository's transfer/l_cap.py and general_pose_tree** · wand125 · external · decides · Python, Rust · exact-algebraic
@@ -898,6 +917,9 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-n029-interval-certified-upper` | replayed here | independent | T-009 |
 | `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independent | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independent | T-101 |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
 
 ### `V-check-rational-witness-independent`
 
@@ -922,6 +944,9 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-n087-chang-2026-09-exact-replay` | replayed here | independent | T-089 |
 | `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independent | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independent | T-101 |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -1408,6 +1433,7 @@ Consume the published n = 11 optimality proposals component by component and dec
 | evidence | run | code | results |
 | --- | --- | --- | --- |
 | `E-n011-global-optimality-independent` | audited here | shared components | T-060 |
+| `E-n011-optimum-uniqueness` | audited here | shared components | T-112 |
 
 ### `V-evand-exact-certificates`
 
@@ -1439,6 +1465,21 @@ Reconciles the n = 11 component receipts' reviewed bindings; it reruns no geomet
 | evidence | run | code | results |
 | --- | --- | --- | --- |
 | `E-n011-global-optimality-independent` | audited here | shared components | T-060 |
+| `E-n011-optimum-uniqueness` | audited here | shared components | T-112 |
+
+### `V-audit-n11-lean`
+
+**devtools.audit_n11_lean, with the statement probe AuditN11Statement.lean it stages** · Squares Project (Levy) · first-party · checks premises · Python, Lean 4 · proof-assistant-checked
+
+Stages the statement closure of the 11SquaresFormalized proof from retained bytes, and with the probe checks in Lean that its Optimality is IsLeast {S | Packable 11 S} T for the register's exact T; extracts the public theorems' axioms from the source's final audit; and hashes and scans every module of the commit's archive against that audit. It decides no bound: Lean's kernel, on the source's modules, does.
+
+- Source: [`packing/devtools/audit_n11_lean.py`](../../packing/devtools/audit_n11_lean.py), [`packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/AuditN11Statement.lean`](../../packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/AuditN11Statement.lean)
+- Versions run: this repository's commits, which Git holds
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-n011-lean-formalization-report` | the source’s own run | producer’s code | T-060 |
+| `E-n011-lean-statement-closure-build` | replayed here | producer’s code | - |
 
 ### `V-audit-n17-endpoint-receipt`
 
@@ -1549,7 +1590,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 - Source: [`packing/sqverify_fast`](../../packing/sqverify_fast), [`packing/devtools/sqverify_fast_census.py`](../../packing/devtools/sqverify_fast_census.py), [`packing/devtools/check_sqverify_fast.py`](../../packing/devtools/check_sqverify_fast.py), [`packing/src/sqpack/rectangle_density.py`](../../packing/src/sqpack/rectangle_density.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/sqverify_fast/independence-record.yaml`](../../packing/sqverify_fast/independence-record.yaml)
-- Note: A clean-room verifier, written from the mathematics without opening the authors' checkers (packing/sqverify_fast/INDEPENDENCE.md), its lemmas proved in packing/sqverify_fast/SOUNDNESS.md, and accepted at 4ddf37d9c by the two adversarial reviews of 3 October 2026, of its soundness and of its testing and independence. Its declared-net change (f007d7afd and 910b6b12c, source_sha256 d97758bb...) was accepted by the soundness review of 6 October 2026 (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md), for a declared net once the control's exact evaluator read that net (its DR-1), which the same day's re-check confirmed. Its census drives the binary, keeps every direction's receipt and puts negative controls on a certificate at its least-bound direction, with check_sqverify_fast's exact evaluator and mutation helpers; for format T at the least-bound leaf centre of least exact capture, evaluated by sqpack.rectangle_density, which was written before the crate and which its authors read (the format T route review of 6 October 2026, docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md). None of these decides coverage. tests/test_sqverify_fast_census.py admits a census row as evidence only for a build of a reviewed source.
+- Note: A clean-room verifier, written from the mathematics without opening the authors' checkers (packing/sqverify_fast/INDEPENDENCE.md), its lemmas proved in packing/sqverify_fast/SOUNDNESS.md, and accepted at 4ddf37d9c by the two adversarial reviews of 3 October 2026, of its soundness and of its testing and independence. Its declared-net change (f007d7afd and 910b6b12c, source_sha256 d97758bb...) was accepted by the soundness review of 6 October 2026 (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md), for a declared net once the control's exact evaluator read that net (its DR-1), which the same day's re-check confirmed. Its census drives the binary, keeps every direction's receipt and puts negative controls on a certificate: for format M the original and a near-threshold mutant at its least-bound direction, and since the review of 6 October of FC-1's fix (docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md) the 99/100 mutant at every direction of the net, with check_sqverify_fast's exact evaluator and mutation helpers; for format T the original and both mutants at the least-bound leaf centre of least exact capture, evaluated by sqpack.rectangle_density, which was written before the crate and which its authors read (the format T route review of 6 October 2026, docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md). None of these decides coverage. tests/test_sqverify_fast_census.py admits a census row as evidence only for a build of a reviewed source.
 
 | evidence | run | code | results |
 | --- | --- | --- | --- |
@@ -1627,6 +1668,28 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n093-wand125-mixed-988-sqverify-fast-replay` | replayed here | independent | T-090 |
 | `E-n094-wand125-mixed-994-sqverify-fast-replay` | replayed here | independent | T-090 |
 | `E-n095-wand125-mixed-9965-sqverify-fast-replay` | replayed here | independent | T-090 |
+| `E-n051-wand125-mixed-746-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n052-wand125-mixed-755-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n055-wand125-mixed-7728-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n058-wand125-mixed-7905-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n069-wand125-mixed-8612-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n070-wand125-mixed-86475-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n071-wand125-mixed-8705-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n073-wand125-mixed-8809-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n074-wand125-mixed-88675-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n075-wand125-mixed-892-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n076-wand125-mixed-896-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n086-wand125-mixed-950-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n087-wand125-mixed-955-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n088-wand125-mixed-960-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n089-wand125-mixed-965-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n090-wand125-mixed-9725-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n091-wand125-mixed-975-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n092-wand125-mixed-977-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n093-wand125-mixed-986-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n094-wand125-mixed-992-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n095-wand125-mixed-996-sqverify-fast-replay` | replayed here | independent | T-082 |
+| `E-n096-wand125-mixed-997-sqverify-fast-replay` | replayed here | independent | T-082 |
 | `E-n018-wand125-mixed-4704-sqverify-fast-replay` | replayed here | independent | T-099 |
 | `E-n019-wand125-mixed-48229-sqverify-fast-replay` | replayed here | independent | T-100 |
 | `E-n018-wand125-mixed-4705-sqverify-fast-replay` | replayed here | shared components | T-102 |
@@ -1811,6 +1874,37 @@ Runs the 2 October review's demonstrations of D-1, D-2 and D-3 against each reta
 | evidence | run | code | results |
 | --- | --- | --- | --- |
 | `E-k2m3-wand125-valid7-independent` | replayed here | independent | T-064 |
+
+### `V-squish-upper-bound-packets`
+
+**devtools.squish_upper_bound_packets** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits the bounded complete SQUISH source roster, converts rational half-angle facts to exact rational-corner witnesses without changing the side, drives both exact deciders, and checks source/fact/witness/receipt bindings, full pair counts, upward display ceilings and the two geometric controls.
+
+- Source: [`packing/devtools/squish_upper_bound_packets.py`](../../packing/devtools/squish_upper_bound_packets.py), [`packing/devtools/import_half_angle_witness.py`](../../packing/devtools/import_half_angle_witness.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md`](../../docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md)
+- Note: Written from the published rational certificate format and the geometry. No SQUISH producer executable is retained or run. The native exact_verify and independent rational-corner checker decide feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party routes share the converted witness, YAML and Python rational arithmetic, not geometry code.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
+
+### `V-squish-followup-packets`
+
+**devtools.squish_followup_packets** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits the pinned update source and complete reviewed replay, binds revision-specific fact/witness/receipt inputs, full pair and control coverage, typed replay provenance and upward display ceilings; explicitly reruns both deciding routes only with --replay.
+
+- Source: [`packing/devtools/squish_followup_packets.py`](../../packing/devtools/squish_followup_packets.py), [`packing/devtools/squish_upper_bound_packets.py`](../../packing/devtools/squish_upper_bound_packets.py), [`packing/devtools/import_half_angle_witness.py`](../../packing/devtools/import_half_angle_witness.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md`](../../docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md)
+- Note: The wrapper shares strict admission and rational half-angle conversion with the original packet while keeping a distinct revision namespace. No SQUISH producer executable is run. The native exact_verify and independently written rational-corner checker decide geometry; both share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata checks are premises, not additional geometric deciders.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

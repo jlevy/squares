@@ -203,7 +203,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "ae61bb15b2af1025c21b3a52351dd6b9ad21abc1"
+DATA_REVISION = "e834c7c3984b47ab7e6a7bd3621b0fd436e3f1a5"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -358,6 +358,29 @@ EXPLAINER_REVISED = "October 5, 2026"
 #: (think-2cqu).
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.1.7",
+        first_published="October 7, 2026",
+        result_scope=(
+            "The exposition review corrects the shorter symmetry proof's intermediate "
+            "counts and states both propagation rules, distinguishes cases from masks "
+            "and contact from a zero projection gap, limits the contact deformation "
+            "to its root neighborhood, puts figure symbols after their definitions, "
+            "and clarifies shared geometric code and the reported Lean formalization."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.1.6",
+        first_published="October 6, 2026",
+        result_scope=(
+            "The uniqueness corollary is registered as T-112 and no longer called "
+            "unreviewed, with its prior art: Trump's rigidity claim is local, and "
+            "Stromquist's three optimal packings of ten squares show uniqueness is not "
+            "automatic; and Queuingtheorydotcom's report of a complete Lean 4 "
+            "formalization of October 6 is cited, with its native-compiler trust base "
+            "and the project's statement audit."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.1.5",
         first_published="October 5, 2026",
         result_scope=(
@@ -440,7 +463,7 @@ OPTIMALITY_REVIEW_EDITION = " ".join(
 #: prints, by the rule `EXPLAINER_REVISED` follows -- the author date of the last commit
 #: that changed its article, `n11-optimality-review-article.md`, held to git by
 #: `devtools.artifact_dates`. Change it in the commit that changes the article.
-OPTIMALITY_REVIEW_REVISED = "October 5, 2026"
+OPTIMALITY_REVIEW_REVISED = "October 7, 2026"
 
 #: The day the proof the review explains was published by its source, which the review's
 #: "Original proof" date prints. A fact about someone else's work, so it is typed, and

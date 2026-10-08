@@ -1,0 +1,318 @@
+{
+ "all_bytes": 1092571432,
+ "all_files": 8064,
+ "final_audit_modules": 7920,
+ "in_audit_not_in_tree": [],
+ "in_tree_not_in_audit": [
+  "lakefile",
+  "scripts.fixtures.T07GeometryRoles",
+  "scripts.fixtures.T07RowBlockCover",
+  "simplification.benchmarks.t07.T07WitnessBenchLarger",
+  "simplification.benchmarks.t07.T07WitnessBenchMedium",
+  "simplification.benchmarks.t07.T07WitnessBenchSmall",
+  "simplification.benchmarks.t07.stage.T07StageS135Compact",
+  "simplification.benchmarks.t07.stage.T07StageS135Literal"
+ ],
+ "lean_bytes": 1053173196,
+ "lean_files": 7928,
+ "sha256_match": 7920,
+ "sha256_mismatch": [],
+ "stripping": "Comments (nested /- -/ blocks and -- lines), string literals with escapes, raw strings r#\"...\"# and character literals are blanked before the in-code count, offsets and lines kept.",
+ "tokens": {
+  "admit": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\badmit\\b",
+   "raw_hits": []
+  },
+  "axiom_decl": {
+   "files_code": 0,
+   "files_raw": 1,
+   "occurrences_code": 0,
+   "occurrences_raw": 1,
+   "pattern": "(?m)^[ \\t]*(?:@\\[[^\\]]*\\][ \\t]*)?(?:private[ \\t]+|protected[ \\t]+|noncomputable[ \\t]+|unsafe[ \\t]+)*axiom\\b",
+   "raw_hits": [
+    {
+     "in_code": false,
+     "line": 11,
+     "path": "ElevenSquare/Pending/S06_Baseline.lean"
+    }
+   ]
+  },
+  "csimp": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "@\\[[^\\]]*\\bcsimp\\b",
+   "raw_hits": []
+  },
+  "decide_native": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "decide[ \\t]*\\+native",
+   "raw_hits": []
+  },
+  "elab_attribute": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "@\\[[^\\]]*\\b(?:tactic|term_elab|command_elab|macro|delab|app_unexpander)\\b",
+   "raw_hits": []
+  },
+  "env_mod": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\bmodifyEnv\\b|\\baddDecl\\b|\\baddDeclCore\\b|\\baddDeclWithoutChecking\\b|\\bEnvironment\\.add\\b|\\bsetEnv\\b",
+   "raw_hits": []
+  },
+  "eval": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "(?m)^[ \\t]*#eval\\b",
+   "raw_hits": []
+  },
+  "exit": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "(?m)^[ \\t]*#exit\\b",
+   "raw_hits": []
+  },
+  "export": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "(?m)^[ \\t]*export\\b",
+   "raw_hits": []
+  },
+  "extern": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "@\\[[^\\]]*\\bextern\\b",
+   "raw_hits": []
+  },
+  "implemented_by": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\bimplemented_by\\b",
+   "raw_hits": []
+  },
+  "import_Lean": {
+   "files_code": 9,
+   "files_raw": 9,
+   "occurrences_code": 9,
+   "occurrences_raw": 9,
+   "pattern": "(?m)^import[ \\t]+Lean(?:\\.|\\s|$)",
+   "raw_hits": [
+    {
+     "in_code": true,
+     "line": 2,
+     "path": "ElevenSquare/CaseCountSupport.lean"
+    },
+    {
+     "in_code": true,
+     "line": 2,
+     "path": "ElevenSquare/Pending/FinitePartition.lean"
+    },
+    {
+     "in_code": true,
+     "line": 2,
+     "path": "ElevenSquare/Pending/NatRangeCertificates.lean"
+    },
+    {
+     "in_code": true,
+     "line": 2,
+     "path": "ElevenSquare/Pending/SortedDisjoint.lean"
+    },
+    {
+     "in_code": true,
+     "line": 5,
+     "path": "ElevenSquare/Pending/Types.lean"
+    },
+    {
+     "in_code": true,
+     "line": 1,
+     "path": "ElevenSquare/Tasks/T06/Data.lean"
+    },
+    {
+     "in_code": true,
+     "line": 1,
+     "path": "ElevenSquare/Tasks/T06/DataFeatures.lean"
+    },
+    {
+     "in_code": true,
+     "line": 4,
+     "path": "ElevenSquare/Tasks/T06/Gradients.lean"
+    },
+    {
+     "in_code": true,
+     "line": 1,
+     "path": "scripts/fixtures/T07RowBlockCover.lean"
+    }
+   ]
+  },
+  "initialize": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "(?m)^[ \\t]*(?:builtin_)?initialize\\b",
+   "raw_hits": []
+  },
+  "instance": {
+   "files_code": 3,
+   "files_raw": 3,
+   "occurrences_code": 4,
+   "occurrences_raw": 4,
+   "pattern": "(?m)^[ \\t]*(?:@\\[[^\\]]*\\][ \\t]*)?(?:(?:scoped|local|private|noncomputable)[ \\t]+)*instance\\b",
+   "raw_hits": [
+    {
+     "in_code": true,
+     "line": 24,
+     "path": "ElevenSquare/Simplified/LocalCommonArithmetic.lean"
+    },
+    {
+     "in_code": true,
+     "line": 13,
+     "path": "ElevenSquare/Tasks/T06/BranchAliasDefinitions.lean"
+    },
+    {
+     "in_code": true,
+     "line": 27,
+     "path": "ElevenSquare/Tasks/T06/DataIntegral.lean"
+    },
+    {
+     "in_code": true,
+     "line": 32,
+     "path": "ElevenSquare/Tasks/T06/DataIntegral.lean"
+    }
+   ]
+  },
+  "macro": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "(?m)^[ \\t]*(?:@\\[[^\\]]*\\][ \\t]*)?(?:local[ \\t]+|scoped[ \\t]+)?(?:macro|macro_rules|syntax|elab|elab_rules|declare_syntax_cat)\\b",
+   "raw_hits": []
+  },
+  "native_decide": {
+   "files_code": 1839,
+   "files_raw": 1839,
+   "occurrences_code": 10464,
+   "occurrences_raw": 10464,
+   "pattern": "\\bnative_decide\\b",
+   "raw_hits": "over the limit"
+  },
+  "notation": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "(?m)^[ \\t]*(?:@\\[[^\\]]*\\][ \\t]*)?(?:local[ \\t]+|scoped[ \\t]+)?(?:notation\\d*|infix|infixl|infixr|prefix|postfix)\\b",
+   "raw_hits": []
+  },
+  "ofReduceBool": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\bofReduceBool\\b|\\breduceBool\\b",
+   "raw_hits": []
+  },
+  "opaque": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "(?m)^[ \\t]*(?:@\\[[^\\]]*\\][ \\t]*)?(?:private[ \\t]+|protected[ \\t]+|noncomputable[ \\t]+)*opaque\\b",
+   "raw_hits": []
+  },
+  "open_renaming": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\bopen\\b[^\\n]*\\b(?:renaming|hiding)\\b",
+   "raw_hits": []
+  },
+  "run_cmd": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\brun_cmd\\b|\\brun_elab\\b|\\brun_meta\\b|\\brun_tac\\b",
+   "raw_hits": []
+  },
+  "skipKernelTC": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "skipKernelTC|debug\\.skip",
+   "raw_hits": []
+  },
+  "sorry": {
+   "files_code": 0,
+   "files_raw": 4,
+   "occurrences_code": 0,
+   "occurrences_raw": 4,
+   "pattern": "\\bsorry\\b",
+   "raw_hits": [
+    {
+     "in_code": false,
+     "line": 4,
+     "path": "ElevenSquare/Pending/S06_Data.lean"
+    },
+    {
+     "in_code": false,
+     "line": 6,
+     "path": "ElevenSquare/Pending/S07_Bridge.lean"
+    },
+    {
+     "in_code": false,
+     "line": 4,
+     "path": "ElevenSquare/Pending/S08_Packet.lean"
+    },
+    {
+     "in_code": false,
+     "line": 10,
+     "path": "ElevenSquare/Pending/Types.lean"
+    }
+   ]
+  },
+  "trustCompiler": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\btrustCompiler\\b",
+   "raw_hits": []
+  },
+  "unsafe": {
+   "files_code": 0,
+   "files_raw": 0,
+   "occurrences_code": 0,
+   "occurrences_raw": 0,
+   "pattern": "\\bunsafe\\b",
+   "raw_hits": []
+  }
+ },
+ "url": "https://codeload.github.com/Queuingtheorydotcom/11SquaresFormalized/tar.gz/cdc746ed907d258057c283aeb6d077cb2c27e349"
+}

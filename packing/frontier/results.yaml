@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 results:
   - id: T-001
     kind: lower-bound
@@ -3226,8 +3226,15 @@ results:
     notes: >-
       2026-10-03: T-060, which confirms that s(11) is Trump's exact side U (its T), implies
       this result's first clause and not its equality clause (superseded_by), so this
-      result remains the register's one statement that a packing of eleven squares is
+      result remained the register's one statement that a packing of eleven squares is
       unique, for the six-plus-five family near Trump's tilt.
+
+      2026-10-06: T-112 registers the uniqueness corollary of T-060, that every packing of
+      eleven squares at side T is Trump's up to the eight container symmetries and
+      relabelling, which implies the equality clause. Each of the two implies a part of
+      this result and together they imply all of it; the register marks each as a part,
+      since it cannot mark a supersession that only two results make jointly
+      (think-0syl), so this result stays listed as current.
     superseded_by:
       - result: T-060
         extent: part
@@ -3237,6 +3244,13 @@ results:
           packing in the family attains U only as a quarter-turn image of Trump's pose with
           the squares relabelled within the two classes, is not implied, since T-060 makes
           no claim of uniqueness.
+      - result: T-112
+        extent: part
+        what: >-
+          The equality clause: a packing in the family at side U is Trump's packing after
+          a container symmetry and a relabelling, by T-112, and reflections leave the
+          family, so it is a quarter-turn image with the squares relabelled within the two
+          classes.
 
   - id: T-037
     kind: lower-bound
@@ -5200,7 +5214,7 @@ results:
     attribution:
       source_keys: ['[Queuingtheorydotcom n11 optimality 2026]']
       published: '2026-09-29'
-    evidence: [E-n011-global-optimality-report, E-n011-global-optimality-independent]
+    evidence: [E-n011-global-optimality-report, E-n011-global-optimality-independent, E-n011-lean-formalization-report]
     composition: >-
       The complete 2184-pattern cover and 2180 exclusions leave four symmetric
       survivors. The D4 bridge reduces these to case 438; the 14-round root
@@ -5210,6 +5224,14 @@ results:
       Trump witness attains `T`. All premises have completed exact executions, which is V3/C3.
       One adversarial AI review is retained and mapped, by GPT-6 Astra at max reasoning; it is
       not a human oversight record. No second machine method is claimed.
+
+      The Lean 4 formalization in 11SquaresFormalized states the whole claim as one theorem,
+      `ElevenSquare.optimality`, which the 6 October statement audit reads as this claim
+      with the same exact `T`. Its source reports that its full verification run, resumed
+      from earlier validated receipts, passed with an axiom audit that trusts Lean's
+      compiler for 13,308 `native_decide` axioms. That run is private and recorded as
+      reported, so it sets no rung; the build here covers the statement closure and the
+      upper half only.
     reviews:
       - path: docs/project/reviews/review-2026-09-29-n11-optimality-census-contract.md
         kind: adversarial
@@ -5231,10 +5253,24 @@ results:
       - packing/resources/web/n11-optimality-2026-09-29/receipts/exclusion-inventory.json
       - packing/resources/web/n11-optimality-2026-09-29/receipts/completion-inventory.json
       - docs/project/reviews/review-2026-09-29-n11-optimality.md
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/axioms-public-theorems.json
+      - docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md
     next_rung: >-
+      V5 needs two records the register lacks. One is a complete build of the
+      11SquaresFormalized proof that the record can rest on, with its axiom receipt: run here
+      from the retained pin at its toolchain, or a third party's build retained here. The
+      source's own run is private and is recorded as reported
+      (E-n011-lean-formalization-report). The other is a retained formalization review by a
+      named human expert who is not its author and states competence in Lean and in the
+      mathematics, checking statement fidelity, the definitions, the axioms (the 13,308
+      `native_decide` axioms the theorem trusts to Lean's compiler among them) and that
+      build.
+
       V4 and C4 need the owner's oversight record and a second adversarial AI review by a
-      reviewer distinct from Astra. Rung 5 requires a proof-assistant formalization reviewed
-      by human experts. Engineering follow-up think-e2ot
+      reviewer distinct from Astra. C5 needs that build made here at the pinned toolchain,
+      an `open_review` pointer and two such expert reviews. Engineering
+      follow-up think-e2ot
       will orchestrate fresh whole-ensemble replay through reviewed state-equivalence
       bindings. Simplification was to precede the n11 explainer, tracked separately, which is
       now the [eleven-square optimality
@@ -5265,6 +5301,31 @@ results:
       that the prior-family proof does not use the 1,931-case baseline premise that the
       accepted certificates of cases 2175 and 2176 carry. This project has not reviewed
       or replayed either formalization, and no rung rests on them.
+
+      2026-10-06: the Lean 4 formalization in
+      [11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) is
+      imported (bead think-8spq). Its author, Queuingtheorydotcom, who posts on X as
+      @ManassehA06, announced that day that the optimality "has been formalized in lean
+      thanks to Astra and Claude", thanking Joshua Levy, Kleddamag, wand125, Guzhou0806 and
+      ctjlewis; the retained first post of the thread does not name the repository. Its
+      acknowledgements credit Queuingtheorydotcom, EvolvingPrograms and ctjlewis, wand125,
+      Benjamin Gurevitch, Julian-JJ and Guzhou0806.
+
+      Joshua Levy [quoted the announcement](https://x.com/ojoshe/status/2107513739222380935)
+      the same day with the formalization's context, as "a Lean formalization from
+      @ManassehA06 assembled over the last few days, with assistance from @ctjlewis
+      @guzhou0806 and others".
+
+      The 6 October statement audit reads its theorem ElevenSquare.optimality as this claim.
+      Its source reports that its full verification run passed in EvolvingPrograms run
+      37414883750, resumed from earlier receipts, with axioms propext, Classical.choice,
+      Quot.sound and 13,308 native_decide axioms: a compiler-trusting check, not a
+      kernel-only one. The run is private, so it is recorded as reported
+      (E-n011-lean-formalization-report), as the separately prompted adversarial review of
+      6 October asked; the full build was not repeated here, and the statement closure and
+      upper half were (E-n011-lean-statement-closure-build). Nothing about it raises C: the
+      owner asked that C stay where the confirming evidence puts it until everything is
+      imported.
 
   - id: T-061
     kind: lower-bound
@@ -6456,7 +6517,10 @@ results:
       s(60) = 8 (T-062), when their covers' replays landed, at n = 86 the same day by
       s(86) >= 471/50 from the replayed n = 85 mixed certificate (T-071), and at n = 29,
       38, 39, 41 to 44, 53 to 55, 68 to 70, 74 and 95 by wand125's raised certificates of 1
-      October (T-074), when their replays were merged; stays true as stated.
+      October (T-074), when their replays were merged; stays true as stated. The counts it
+      took on the morning of 6 October, n = 51, 57 and 72, went later that day to T-090's
+      mixed certificates when sqverify-fast decided them, and n = 52, the last count it
+      held, to T-082's the same day.
     notes: >-
       Machine-checked, review record pending, as T-045: V3/C3. A later release than T-045's,
       so a separate entry (result-import.md, register table). The rung does not rest on an
@@ -7785,16 +7849,17 @@ results:
   - id: T-082
     kind: lower-bound
     registered: '2026-10-03'
-    headline: "Mixed rectangle-measure lower bounds reported at 22 counts in `n = 51…96`"
+    headline: "Mixed rectangle-measure lower bounds verified at 22 counts in `n = 51…96`"
     claim: >-
-      wand125/square-packing-bounds reports 22 rectangle-density certificates published on 3
-      October 2026: s(51) >= 373/50 = 7.46, s(52) >= 151/20 = 7.55, s(55) >= 966/125 = 7.728,
-      s(58) >= 1581/200 = 7.905, s(69) >= 2153/250 = 8.612, s(70) >= 3459/400 = 8.6475, s(71)
-      >= 1741/200 = 8.705, s(73) >= 8809/1000 = 8.809, s(74) >= 3547/400 = 8.8675, s(75) >=
-      223/25 = 8.92, s(76) >= 224/25 = 8.96, s(86) >= 19/2 = 9.5, s(87) >= 191/20 = 9.55,
-      s(88) >= 48/5 = 9.6, s(89) >= 193/20 = 9.65, s(90) >= 389/40 = 9.725, s(91) >= 39/4 =
-      9.75, s(92) >= 977/100 = 9.77, s(93) >= 493/50 = 9.86, s(94) >= 248/25 = 9.92, s(95) >=
-      249/25 = 9.96 and s(96) >= 997/100 = 9.97.
+      Twenty-two rectangle densities of wand125/square-packing-bounds, checked at coverage
+      one and published on 3 October 2026, prove s(51) >= 373/50 = 7.46, s(52) >= 151/20 =
+      7.55, s(55) >= 966/125 = 7.728, s(58) >= 1581/200 = 7.905, s(69) >= 2153/250 = 8.612,
+      s(70) >= 3459/400 = 8.6475, s(71) >= 1741/200 = 8.705, s(73) >= 8809/1000 = 8.809,
+      s(74) >= 3547/400 = 8.8675, s(75) >= 223/25 = 8.92, s(76) >= 224/25 = 8.96, s(86) >=
+      19/2 = 9.5, s(87) >= 191/20 = 9.55, s(88) >= 48/5 = 9.6, s(89) >= 193/20 = 9.65,
+      s(90) >= 389/40 = 9.725, s(91) >= 39/4 = 9.75, s(92) >= 977/100 = 9.77, s(93) >=
+      493/50 = 9.86, s(94) >= 248/25 = 9.92, s(95) >= 249/25 = 9.96 and s(96) >= 997/100 =
+      9.97.
 
       Each is a density of 303 to 571 uniform rectangles in D4 orbits and no point mass, of
       total mass n - 1/100000, at core side 9977/10000 on 201 net half-angles of step
@@ -7805,69 +7870,107 @@ results:
       verified at the same count: at n = 76 (T-072), 87, 91, 92 and 96 (T-075), and 90
       (T-069).
 
-      21 of the values are above what the record reported at their counts, by 0.015 to
+      21 of the values were above what the record reported at their counts, by 0.015 to
       0.125: over the source's rectangle certificates (T-046, T-070, T-074, T-077) at 13
-      counts, and over its earlier mixed certificates directly at five and by monotonicity at
-      n = 86, 88 and 93. At n = 96, 997/100 is below the s(96) = 10 reported from Evan
-      Daniel's s(k^2 - 4) = k (T-081, not replayed), and above the verified 249/25 (T-075) by
-      0.01. A
-      packing of n + 1 squares contains one of n, but at each next count the record already
-      reports more, or holds its own certificate here, so none carries further.
+      counts, and over its earlier mixed certificates directly at five and by monotonicity
+      at n = 86, 88 and 93. At n = 96, 997/100 is below the side 10 that Evan Daniel's
+      s(k^2 - 4) = k reports there (T-081).
 
-      Here the source was retained, its exact premises were recomputed from the retained
-      bytes, and the replay's checks before its first angle were run on each pinned tarball.
-      None of it decides coverage, and no angle was replayed. The values stand as reported,
-      and the verified lower bounds are unchanged.
+      The source's later certificates are higher at 16 of the counts, T-090's of 3 and 4
+      October at n = 51, 69, 75, 86, 93 and 95 and T-091's of 4 October at n = 58, 70, 71,
+      73, 76, 87, 88, 90, 91 and 94, each verified here, so the verified lower bound there
+      is theirs. At the other six, n = 52, 55, 74, 89, 92 and 96, these are the verified
+      lower bounds, above those they replace by 0.005 to 0.03. A packing of n + 1 squares
+      contains one of n, but at each next count the record already holds more, so none
+      carries further.
+
+      Each certificate was decided here on 6 October 2026 by sqverify-fast, this
+      repository's clean-room measure verifier, at all 201 net directions of the retained
+      candidate, and two mutants of each scaled below coverage one were refused:
+      confirmed, independently re-implemented. At n = 96 the first control failed closed,
+      its mutant scaled to 99/100 verifying at the one direction it ran, which showed the
+      certificate's slack there and not a fault (think-0uia); the repaired control, which
+      runs that mutant at every net direction, refused it at 187 of the 201, each
+      at an exact capture below one.
+
+      The verifier shares no code with the source's checker and runs the same
+      net-and-shrink method, so it is a second implementation and not a second method. The
+      source's own checker was not run here.
 
       wand125 after Tokoharu and Levy,
       [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/2aff2076c492d62340e986c84f60a0a29eb668df/certificates).
       Registration was requested in 22 comments of 3 October 2026 on jlevy/squares#282. The
       source says parts of the work were produced with AI assistance under human direction.
     scope: {n_values: [51, 52, 55, 58, 69, 70, 71, 73, 74, 75, 76, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96]}
-    verification: V0
-    confirmation: C1
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if the replays pass, the strongest verified lower bounds on record
-        at 22 counts from n = 51 to 96, and the strongest reported at 21 of them. Further sizes from the generator and checker of T-069,
-        T-071, T-072 and T-075, with no new technique, at S3 as those are; the score gates
-        nothing.
+        The strongest verified lower bounds on record at six counts, n = 52, 55, 74, 89, 92
+        and 96, and the strongest reported at five of them (at n = 96 T-081 reports 10); at
+        the other 16 the source's later certificates (T-090, T-091) are higher. Further
+        sizes from the
+        generator and checker of T-069, T-071, T-072 and T-075, with no new technique, at S3
+        as those are; the 3 October review of these certificates proposed S3, which the
+        replays leave standing.
       scored: '2026-10-03'
-      by: 'issue-282 October 3 import, registering lane (repository; draft)'
+      by: docs/project/reviews/review-2026-10-03-wand125-october-3-certificates.md (repository; confirms the registering lane's draft)
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 mixed bounds 2026-10-03]']
       published: '2026-10-03'
     composition: >-
-      22 primary certificates, each on its own reported entry, at V0/C1: read by the 3
-      October review of these certificates, and not replayed. Coverage is decided by the
-      source's C++ checker alone, byte for byte the checker the 28 September and 2 October
-      reviews read; the axis tables are a second implementation for one direction and not a
-      second method.
+      22 primary certificates, each on its own reported entry and its own replay entry. Each
+      replay is sqverify-fast at all 201 net directions of the retained candidate: one
+      interval-certified method, replayed here by an independent implementation, C3. The
+      source's checker and axis tables were not run here, so no second method and no
+      reproduction with the producer's code stands beside it.
     evidence:
       - E-n051-wand125-mixed-746-report
+      - E-n051-wand125-mixed-746-sqverify-fast-replay
       - E-n052-wand125-mixed-755-report
+      - E-n052-wand125-mixed-755-sqverify-fast-replay
       - E-n055-wand125-mixed-7728-report
+      - E-n055-wand125-mixed-7728-sqverify-fast-replay
       - E-n058-wand125-mixed-7905-report
+      - E-n058-wand125-mixed-7905-sqverify-fast-replay
       - E-n069-wand125-mixed-8612-report
+      - E-n069-wand125-mixed-8612-sqverify-fast-replay
       - E-n070-wand125-mixed-86475-report
+      - E-n070-wand125-mixed-86475-sqverify-fast-replay
       - E-n071-wand125-mixed-8705-report
+      - E-n071-wand125-mixed-8705-sqverify-fast-replay
       - E-n073-wand125-mixed-8809-report
+      - E-n073-wand125-mixed-8809-sqverify-fast-replay
       - E-n074-wand125-mixed-88675-report
+      - E-n074-wand125-mixed-88675-sqverify-fast-replay
       - E-n075-wand125-mixed-892-report
+      - E-n075-wand125-mixed-892-sqverify-fast-replay
       - E-n076-wand125-mixed-896-report
+      - E-n076-wand125-mixed-896-sqverify-fast-replay
       - E-n086-wand125-mixed-950-report
+      - E-n086-wand125-mixed-950-sqverify-fast-replay
       - E-n087-wand125-mixed-955-report
+      - E-n087-wand125-mixed-955-sqverify-fast-replay
       - E-n088-wand125-mixed-960-report
+      - E-n088-wand125-mixed-960-sqverify-fast-replay
       - E-n089-wand125-mixed-965-report
+      - E-n089-wand125-mixed-965-sqverify-fast-replay
       - E-n090-wand125-mixed-9725-report
+      - E-n090-wand125-mixed-9725-sqverify-fast-replay
       - E-n091-wand125-mixed-975-report
+      - E-n091-wand125-mixed-975-sqverify-fast-replay
       - E-n092-wand125-mixed-977-report
+      - E-n092-wand125-mixed-977-sqverify-fast-replay
       - E-n093-wand125-mixed-986-report
+      - E-n093-wand125-mixed-986-sqverify-fast-replay
       - E-n094-wand125-mixed-992-report
+      - E-n094-wand125-mixed-992-sqverify-fast-replay
       - E-n095-wand125-mixed-996-report
+      - E-n095-wand125-mixed-996-sqverify-fast-replay
       - E-n096-wand125-mixed-997-report
+      - E-n096-wand125-mixed-997-sqverify-fast-replay
     reviews:
       - path: docs/project/reviews/review-2026-10-03-wand125-october-3-certificates.md
         kind: adversarial
@@ -7886,28 +7989,110 @@ results:
       - docs/project/reviews/review-2026-10-03-wand125-october-3-certificates.md
       - docs/project/reviews/review-2026-09-28-wand125-n50-mixed-verifier.md
       - packing/resources/web/wand125-mixed-bounds-2026-10-04/README.md
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n51_L746.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n52_L755.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n55_L7728.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n58_L7905.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n69_L8612.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n70_L86475.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n71_L8705.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n73_L8809.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n74_L88675.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n75_L892.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n76_L896.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n86_L950.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n87_L955.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n88_L960.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n89_L965.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n90_L9725.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n91_L975.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n92_L977.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n93_L986.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n94_L992.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n95_L996.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n96_L997.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n96_L997.control-failed-v1.json
+      - packing/devtools/sqverify_fast_census.py
+      - docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md
+      - docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md
+      - docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md
+      - docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.md
+    controls:
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n51_L746.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n52_L755.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n55_L7728.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n58_L7905.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n69_L8612.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n70_L86475.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n71_L8705.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n73_L8809.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n74_L88675.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n75_L892.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n76_L896.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n86_L950.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n87_L955.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n88_L960.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n89_L965.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n90_L9725.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n91_L975.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n92_L977.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n93_L986.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n94_L992.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n95_L996.control.json
+      - packing/benchmarks/measure-verifier/census-mixed/wand125-mixed-bounds-2026-10-03/mixed_n96_L997.control.json
+      - packing/tests/test_sqverify_fast_census.py
     next_rung: >-
-      The complete replays, about 162 CPU-hours planned (179 by the source's own oblique
-      seconds), with devtools.audit_wand125_point_and_mixed mixed-shard
-      wand125-mixed-bounds-2026-10-03 --runners 8 for the ranges, mixed-replay on each and
-      mixed-merge per certificate, before any verified lower bound is raised; a count's
-      verified lower bound moves when its replay returns the certificate's own record at all
-      201 directions.
+      V4 and C4 need a human
+      oversight record and two adversarial AI reviews of the claim by distinct reviewers:
+      the 3 October review of these certificates is one, and the review of the census route
+      of 5 October decided the route, not these certificates' mathematics. Replays of the
+      source's own checker (about 162 CPU-hours planned,
+      devtools.audit_wand125_point_and_mixed mixed-shard wand125-mixed-bounds-2026-10-03
+      --runners 8) would add a reproduction with the producer's code beside the rung; a
+      second machine method would be a method-distinct decision of rotated coverage.
     notes: >-
-      V0 because each cited entry is the source's claim: assurance reported, replay not
-      attempted. C1 because the 3 October review of these certificates is recorded as each
-      report entry's external_review, with no blocking defect. That review was prompted
-      separately from the lane that retained the packet and registered the entry. One entry
-      for the 22, all pinned at one revision, as T-075 is for its six; a later revision than
-      T-075's, so a separate entry. The review's OC-1 is in the n = 88 and 93 entries'
-      limitations: the source's improvement figures there are not lower bounds.
+      Raised from V0/C1 by think-wpuu on 6 October 2026: the 22 sqverify-fast replays, 551
+      to 2,069 CPU seconds each at two threads, 8.0 CPU-hours in all, with two mutants of
+      each refused, under the census route the review of 5 October 2026 accepted
+      (docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md,
+      Carrying the Route to T-082, T-090 and T-091) and the 3 October review of these
+      certificates' mathematics, with no blocking defect. The build is main's crate
+      source, which the soundness review of 6 October accepted for standard-net
+      certificates
+      (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md);
+      each certificate here is on the standard net. The 162 CPU-hours planned for replays
+      of the source's checker were not spent.
 
-      The source
-      answered OC-1 and OC-2 on 4 October by removing every completion audit and changing
-      nothing else; the 4 October packet retains the answer, and each report entry records it
-      as an evidence update that moves no rung. The proof-bundle tarballs are pinned by
-      digest and not retained.
+      At n = 96 the control's mutant scaled to 99/100 verified at the least-bound
+      direction, as finding FC-1 of the 6 October check of the declared-net fixes foresaw
+      (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md):
+      the receipt is CONTROL_FAILED and is kept as mixed_n96_L997.control-failed-v1.json,
+      outside the receipts the census's tests hold to CONTROLS_REFUSED.
 
+      Under think-0uia the control now runs that mutant at every net direction and counts
+      only coverage refusals at a centre in the per-bin domain whose exact capture is
+      below one, with the near-threshold run confirmed by an exact witness; two separately
+      prompted reviews of 6 October read the change
+      (docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md and its
+      re-check, review-2026-10-06-sqverify-fast-census-control-fc1-recheck.md), and their
+      blocking findings were fixed. Its receipt for n = 96, the census's first
+      sqverify-fast-control/v2, refused the mutant at 187 of the 201 directions and the
+      near-threshold mutant at the least-bound one, and the decision then counted.
+
+      Each count's verified value moves to the side of the largest certificate there whose
+      own replay passed, as the 3 October review of these certificates set out: this
+      entry's at n = 52, 55, 74, 89, 92 and 96. At the other 16 the source's later
+      certificates are higher and keep the verified lower bound; this entry keeps its
+      claim there.
+
+      One entry for the 22, all pinned at one revision, as T-075 is for its six; a later
+      revision than T-075's, so a separate entry. The review's OC-1 is in the n = 88 and
+      93 entries' limitations: the source's improvement figures there are not lower
+      bounds. The source answered OC-1 and OC-2 on 4 October by removing every completion
+      audit and changing nothing else; the 4 October packet retains the answer, and each
+      report entry records it as an evidence update that moves no rung. The proof-bundle
+      tarballs are pinned by digest and not retained.
   - id: T-083
     kind: lower-bound
     registered: '2026-10-02'
@@ -11405,3 +11590,511 @@ results:
       title included: its "T-108", "T-109", "T-110", "T-111", "T-112", "T-113", "T-114",
       "T-115", "T-116" and "T-117" are T-102, T-103, T-104, T-105, T-106, T-107, T-108,
       T-109, T-110 and T-111, in that order, and its "T-117" is this entry, T-111.
+
+  - id: T-112
+    kind: uniqueness
+    registered: '2026-10-06'
+    headline: "Trump's packing is the only optimal packing of eleven squares, up to symmetry"
+    established: '2026-10-06'
+    claim: >-
+      Every packing of eleven unit squares in a square of side T =
+      3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump's 1979 packing
+      after one of the eight symmetries of the container and a relabelling of the squares.
+      Independent rotations and boundary contact are allowed. A quarter-turn
+      reparametrization of one square is the same physical square and does not count as
+      another packing. No symmetry of the container maps Trump's packing to itself, so
+      there are exactly eight optimal packings as unlabelled configurations, the images
+      of one another.
+
+      This is a direct corollary of T-060 and adds no computation. T-060's proof embeds
+      any packing of side S <= T concentrically in the rational cap U > T, where its
+      2,180 exclusions, the D4 reduction to case 438, the closed capture partition and
+      pose inclusion all apply, and maps it rigidly into the fixed side-T frame, where
+      the local isolation lemma forces the exact construction. For S < T the
+      construction's span T is a contradiction, which is T-060. For S = T nothing is
+      contradicted: the packing is the construction after the alignment, a D4 element
+      composed with the case-438 quarter turn, which is this result.
+
+      It is T-036's equality clause without T-036's restriction to six squares at angle
+      0 and five near Trump's tilt, and with reflections, which leave that family.
+    scope: {n_values: [11]}
+    verification: V3
+    confirmation: C2
+    significance:
+      score: 3
+      rationale: >-
+        A substantive case result: it completes the classification at eleven squares,
+        the optimum being a single rigid packing up to symmetry, with no sliding family
+        and no second contact type at T, in the case T-060 settled. It moves no bound and
+        adds no method, since it is T-060's argument read at equality, which is what an
+        S4 would need; it is one step above T-036's restricted equality case.
+      scored: '2026-10-06'
+      by: docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md (U-5; the registration proposed S4)
+    novelty: apparently-novel
+    builds_on:
+      credit: [Queuingtheorydotcom]
+      source_keys: ['[Queuingtheorydotcom n11 optimality 2026]']
+    evidence: [E-n011-optimum-uniqueness]
+    composition: >-
+      One entry, E-n011-optimum-uniqueness, proof-audited, which cites the completed
+      exact executions of E-n011-global-optimality-independent unchanged and adds one
+      prose step, that every premise of T-060's endpoint is stated for side S <= T and
+      at S = T yields the construction rather than a contradiction. Proof-audited with a
+      proof block supports V3. The step is prose and not mechanised, so the declared
+      confirmation is C2, as for T-036's composing step, though every quantity it
+      consumes is T-060's and re-implemented sharing named components.
+
+      T-060's evidence, E-n011-global-optimality-independent, is a premise of the entry and
+      is not cited here beside it: it claims the exact value, which would give this
+      result a bound's standing that it does not have.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md
+        kind: adversarial
+        reviewer: GPT-6 Pro, reconciling two of its own reviews, received from the owner
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-03'
+        scope: >-
+          Section 2.4 and S7: whether T-060's capture and inclusion premises admit side
+          S = T, and the rigid-map deduction of uniqueness up to the eight container
+          symmetries and relabelling.
+        verdict: accepted
+      - path: docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md
+        kind: adversarial
+        reviewer: Fable, adversarial mathematical review, separately prompted from the lane that registered this result, sharing none of its context beyond the brief and the committed record
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-06'
+        scope: >-
+          Whether every premise of T-060's proof holds at side exactly T, re-derived from
+          PROOF.md and four upstream notes fetched at the pin; the symmetry bookkeeping,
+          rattlers and continuous families; and the registered text, rungs, kind and
+          significance, at 5ecb1307b.
+        verdict: defect-open
+        covers: [T-112]
+      - path: docs/project/reviews/review-2026-10-06-n11-uniqueness-fix-check.md
+        kind: confirming
+        reviewer: Fable, the reviewer of the adversarial review of the same day, prompted separately from the lane that registered and fixed this result, sharing none of its context beyond the brief and the committed record
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-06'
+        scope: >-
+          Findings U-1 to U-9 of the adversarial review against the merged and renumbered
+          record, at 0df76fc26, with the exact stabiliser re-derived in Q(u) and the
+          quotations checked against the archive.
+        verdict: defects-resolved
+        covers: [T-112]
+    artifacts:
+      - packing/resources/web/n11-optimality-2026-09-29/source/PROOF.md
+      - packing/resources/web/n11-optimality-2026-09-29/receipts/final-composition.json
+      - packing/devtools/templates/n11-optimality-review-article.md
+      - docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md
+      - docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md
+      - docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md
+      - docs/project/reviews/review-2026-10-06-n11-uniqueness-fix-check.md
+    controls:
+      - packing/tests/test_n11_composition_joins.py
+      - packing/tests/test_trump11_symmetry.py
+    next_rung: >-
+      C3 needs the step at S = T mechanised, or reviewed again by a distinct reviewer
+      with the oversight record the ladder asks for. The Lean theorem
+      ElevenSquare.optimality in 11SquaresFormalized, whose statement the project's audit
+      of 6 October reads as s(11) = T, states the lower bound and the construction and no
+      equality case; a Lean statement of the equality case would be the route to rung 5,
+      once a formalization is reviewed here. Rung 4 needs what T-060's rung 4 needs: the
+      owner's oversight record and a second adversarial review of the global chain.
+    notes: >-
+      Registered on 6 October 2026 by the owner's decision, to state separately what
+      the record had held only as a conditional corollary: the paper stated it from
+      v0.1.2 and the register registered only optimality. It supersedes T-036's equality
+      clause; with T-060 it implies all of T-036, which the register marks as two parts,
+      since a joint supersession has no mark.
+
+      Registered as T-102 and renumbered to T-112 when it was merged with main, where
+      T-102 to T-111 had been taken the same day. The adversarial review is stored as its
+      reviewer wrote it: its "T-102" is this entry. The established date is the registration
+      day: the corollary was stated conditionally in the paper on 3 October, but no
+      record held it as a claim until this entry. Its verdict, defect-open, rests on two
+      blocking findings about the registration, not the mathematics: U-1, the id clash,
+      and U-2, Lean sentences that duplicated main's import of the formalization; both
+      were resolved in the merge.
+
+      Its non-blocking findings were handled the same day:
+      S3 for S4 (U-5); the epistemics definition allows finitely many named packings
+      (U-6); the entry's limitations say what its certificate and verifiers decide (U-7);
+      the trivial stabiliser and the eight optimal configurations are stated (U-9), and
+      packing/tests/test_trump11_symmetry.py checks it exactly in the packing's number
+      field: no other symmetry maps more than four of the eleven squares onto squares of
+      the packing; the novelty basis cites
+      the retained PROOF.md section 8 rather than an unretained upstream note (U-4); and
+      the paper's stale sentence (U-3) is rewritten in its follow-up revision. U-8 fell
+      away with U-2.
+
+  - id: T-113
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: "`s(n) ≤ S_n` at ten counts, n = 108 to 303, from new SQUISH rational packings"
+    claim: |
+      Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129,
+      130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on
+      jlevy/squares#401 on 7 October 2026. Each S_n is the exact rational side in the retained
+      packing facts, from about 0.0004126 to 0.0067047 below the earlier reported upper bound
+      here. Each certificate supplies rational centres and rational half-angle parameters for
+      closed unit squares in the rational container.
+
+      The claim establishes only upper bounds, with no optimality or rigidity conclusion. The
+      author credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+      assistance.
+
+      This repository confirmed the upper bounds by independently re-implemented exact-rational
+      checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent accept
+      every pair and container wall of each certificate, with both geometric controls rejected.
+    scope:
+      n_values:
+      - 108
+      - 126
+      - 129
+      - 130
+      - 154
+      - 155
+      - 180
+      - 209
+      - 238
+      - 303
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: New packings reduce the recorded upper bounds at ten counts by about 0.0004 to 0.0067,
+        substantive case-bound improvements. They settle no exact optimum and introduce no proved general
+        packing theorem.
+      scored: '2026-10-07'
+      by: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md (GPT-6 Astra high reasoning;
+        S3 confirmed against T-056, T-092 and T-098)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH ten packings 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-ten-packings-2026-10-07-report
+    - E-squish-ten-packings-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-401-2026-10-07/README.md
+    - packing/resources/web/squish-401-2026-10-07/facts/n-108.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-126.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-129.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-130.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-154.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-155.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-180.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-209.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-238.json.gz
+    - packing/resources/web/squish-401-2026-10-07/facts/n-303.json.gz
+    - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+    - packing/witnesses/squish-401-2026/n-108-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-126-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-129-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-130-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-154-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-155-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-180-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-209-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-238-rational.yaml.gz
+    - packing/witnesses/squish-401-2026/n-303-rational.yaml.gz
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/devtools/squish_upper_bound_packets.py
+    - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+    next_rung: V4 and C4 need a retained human oversight record for the claim, certificate, assumptions,
+      two deciding implementations, controls and accepted adversarial AI reviews. The two separately prompted
+      project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
+      with the open replay and two human expert reviews. No local or global optimality claim is made by
+      these upper-bound certificates.
+    notes: Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+      on the same day after complete exact-rational dual replay and two accepting project AI reviews,
+      with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
+      oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
+      display the exact source rational side rounded upward at sixteen decimals; their exact_form fields
+      retain that source rational. Across the eleven packings this corrects four source prints upward,
+      tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
+      original source print separately from the verified display.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, high reasoning, separately prompted W2 mathematics lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Exact rational half-angle conversion, complete roster, unit-square/container/all-pair SAT
+        soundness, source/decider independence, two negative controls and decimal ceilings for T-113 and
+        T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    - path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, max reasoning, separately prompted senior correctness and security review
+        lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Import implementation, strict input admission, retained source attribution, source/fact/witness/receipt
+        binding, checker verdict and negative-control consistency, and publication boundaries for T-113
+        and T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    controls:
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/tests/test_squish_upper_bound_packets.py
+    - packing/tests/test_squish_upper_bound_receipts.py
+    - packing/tests/test_import_half_angle_witness.py
+    composition: Each source rational triple is converted without rounding to exact unit-square corners,
+      at the source’s unchanged rational side. Both native exact_verify and the independently written
+      rational-corner checker decide every pair and wall; the source-to-witness conversion and complete
+      scope are accepted by the retained mathematical review. The wrapper binds the receipt to the decided
+      witness, checks the full roster and upward decimal display, and replays both geometric controls.
+      This is an independently re-implemented confirmation, sharing no verification code with the producer;
+      the two first-party routes share the converted corners, YAML and Python rational arithmetic.
+
+  - id: T-114
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: "`s(153) ≤ 7250614903299225/562949953421312`, from a SQUISH rational packing"
+    claim: |
+      Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <=
+      7250614903299225/562949953421312, about 12.8796793733329640, in the supplement to
+      jlevy/squares#401 on 7 October 2026, about 0.0019874 below the earlier reported upper bound
+      here. Each certificate supplies rational centres and rational half-angle parameters for
+      closed unit squares in the rational container.
+
+      The claim establishes only upper bounds, with no optimality or rigidity conclusion. The
+      author credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5
+      assistance.
+
+      This repository confirmed the upper bounds by independently re-implemented exact-rational
+      checks: sqpack.witness.exact_verify and devtools.check_rational_witness_independent accept
+      every pair and container wall of each certificate, with both geometric controls rejected.
+    scope:
+      n_values:
+      - 153
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: New packings reduce the recorded upper bounds at n = 153 by about 0.00199, substantive
+        case-bound improvements. They settle no exact optimum and introduce no proved general packing
+        theorem.
+      scored: '2026-10-07'
+      by: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md (GPT-6 Astra high reasoning;
+        S3 confirmed against T-056, T-092 and T-098)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH n153 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-n153-2026-10-07-report
+    - E-squish-n153-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-401-2026-10-07/README.md
+    - packing/resources/web/squish-401-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
+    - packing/resources/web/squish-401-2026-10-07/acquisition/frontier-comparison.json
+    - packing/witnesses/squish-401-2026/n-153-rational.yaml.gz
+    - packing/resources/web/squish-401-2026-10-07/receipts/certification.json
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/devtools/squish_upper_bound_packets.py
+    - docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    - docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+    next_rung: V4 and C4 need a retained human oversight record for the claim, certificate, assumptions,
+      two deciding implementations, controls and accepted adversarial AI reviews. The two separately prompted
+      project AI reviews are retained; human oversight is not. Rung 5 needs a proof-assistant formalization
+      with the open replay and two human expert reviews. No local or global optimality claim is made by
+      these upper-bound certificates.
+    notes: |
+      Registered at V0/C0 on 7 October 2026 from the source’s upper-bound claim. Raised to V3/C3
+      on the same day after complete exact-rational dual replay and two accepting project AI reviews,
+      with the reproduced receipt and roster defects fixed. No producer checker was reproduced. No human
+      oversight record is retained, so the two AI reviews do not establish rung 4. Both case bound lanes
+      display the exact source rational side rounded upward at sixteen decimals; their exact_form fields
+      retain that source rational. Across the eleven packings this corrects four source prints upward,
+      tightens five prints downward and leaves two unchanged. The packet preserves and attributes every
+      original source print separately from the verified display.
+
+      The original supplement comment
+      is no longer available; the identical certificate remains accessible at
+      https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json.
+      The retained update comparison binds its exact side and rational triples to the original;
+      this source restoration adds no result or assurance rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, high reasoning, separately prompted W2 mathematics lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Exact rational half-angle conversion, complete roster, unit-square/container/all-pair SAT
+        soundness, source/decider independence, two negative controls and decimal ceilings for T-113 and
+        T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    - path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, max reasoning, separately prompted senior correctness and security review
+        lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Import implementation, strict input admission, retained source attribution, source/fact/witness/receipt
+        binding, checker verdict and negative-control consistency, and publication boundaries for T-113
+        and T-114.
+      verdict: accepted
+      covers:
+      - T-113
+      - T-114
+    controls:
+    - packing/resources/web/squish-401-2026-10-07/receipts/negative-controls.json
+    - packing/tests/test_squish_upper_bound_packets.py
+    - packing/tests/test_squish_upper_bound_receipts.py
+    - packing/tests/test_import_half_angle_witness.py
+    composition: Each source rational triple is converted without rounding to exact unit-square corners,
+      at the source’s unchanged rational side. Both native exact_verify and the independently written
+      rational-corner checker decide every pair and wall; the source-to-witness conversion and complete
+      scope are accepted by the retained mathematical review. The wrapper binds the receipt to the decided
+      witness, checks the full roster and upward decimal display, and replays both geometric controls.
+      This is an independently re-implemented confirmation, sharing no verification code with the producer;
+      the two first-party routes share the converted corners, YAML and Python rational arithmetic.
+
+  - id: T-115
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: '`s(n) ≤ S_n` at twelve counts, from the SQUISH update’s new and smaller rational packings'
+    claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes feasible rational packing upper
+      bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are
+      additional and five tighten the original release. Complete exact rational dual replay accepts
+      all twelve unchanged source sides; both full-size geometric controls are rejected. n153 is identical
+      to its earlier certificate and remains on its original evidence. Optimality and rigidity are
+      not established.
+    scope:
+      n_values:
+      - 123
+      - 126
+      - 129
+      - 154
+      - 155
+      - 179
+      - 208
+      - 237
+      - 238
+      - 239
+      - 258
+      - 263
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Twelve confirmed case-bound improvements, adding seven counts and tightening five
+        submitted bounds; no exact optimum or general theorem is established.
+      scored: '2026-10-07'
+      by: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH update 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-update-2026-10-07-report
+    - E-squish-update-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-401-update-2026-10-07/README.md
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/update-claims.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json
+    - packing/devtools/squish_followup_packets.py
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-123.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-126.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-129.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-153.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-154.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-155.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-208.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-237.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-238.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-239.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-258.json.gz
+    - packing/resources/web/squish-401-update-2026-10-07/facts/n-263.json.gz
+    - packing/witnesses/squish-401-update-2026/n-123-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-126-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-129-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-154-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-155-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-179-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-208-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-237-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-238-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-239-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-258-rational.yaml.gz
+    - packing/witnesses/squish-401-update-2026/n-263-rational.yaml.gz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/certification.json.xz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/negative-controls.json.xz
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/replay-summary.json
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/reviewed-semantic-binding.json.xz
+    - docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+    - docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    next_rung: V4/C4 require a retained human oversight record for the claim, certificates, assumptions,
+      deciding implementations and accepted AI reviews. Rung 5 requires reviewed proof-assistant formalization.
+      No independently audited human oversight is retained.
+    notes: Confirmation reuses the completed thirteen-case positive replay (108.598 seconds), attributing
+      104.001 seconds to these twelve geometries and excluding unchanged n153. All twelve source rational
+      sides are preserved; source finite prints remain quotations and current bound lanes use their
+      least upward sixteen-place decimal ceilings. Seed credit remains author-reported; Nate Chaoweeraprasit
+      disclosed human-directed Claude Opus 5.5 assistance. Original T-113/T-114 facts, receipts, witnesses
+      and reviews remain historical evidence for their own geometries. No producer checker, optimality
+      or human oversight conclusion follows.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, separately prompted mathematics review lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Pinned source rational half-angle conversion, unchanged exact sides, complete unit-square/wall/all-pair
+        decisions, thirteen-case replay with twelve-case confirmation scope, full controls and decimal
+        ceilings.
+      verdict: accepted
+      covers:
+      - T-115
+    - path: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+      kind: adversarial
+      reviewer: GPT-6 Astra, separately prompted mathematical and semantic binding review lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: All twelve update source/fact/witness/full receipt inputs, exact corner derivation, both
+        full-size control inputs and verdicts, shared-decider premises and source attribution.
+      verdict: accepted
+      covers:
+      - T-115
+    controls:
+    - packing/resources/web/squish-401-update-2026-10-07/receipts/negative-controls.json.xz
+    - packing/tests/test_squish_update_certification.py
+    - packing/tests/test_generate_frontier_case.py
+    composition: Exact rational half-angle facts are converted without rounding or dilation. Both
+      independently implemented deciding routes inspect every pair and wall. The completed reviewer
+      replay is reused and its full twelve scoped inputs and verdicts retained, with two rejected
+      complete 123-square controls. Fast checks bind current source facts, revision-specific witness
+      metadata, complete semantic input, typed coverage and safe decimal ceilings. Explicit --replay
+      repeats both decisions. Two accepted scoped AI reviews address shared conversion and semantic
+      premises.

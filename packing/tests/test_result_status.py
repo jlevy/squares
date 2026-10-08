@@ -9,6 +9,7 @@ to its fields, its link and its age.
 
 from __future__ import annotations
 
+import dataclasses
 from collections import Counter
 from typing import Any
 
@@ -264,8 +265,10 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # certificates of their pictures (T-088, T-089); forty-six when wand125's check2
     # certificate at n = 20 (T-104) took both of that count's lanes, the last T-077 held;
     # forty-eight when the check2 certificates of n = 18 and 19 (T-102, T-103) took both
-    # lanes there from T-099 and T-100, the one count each held.
-    assert len(derived) == 48
+    # lanes there from T-099 and T-100, the one count each held; forty-nine when wand125's
+    # mixed certificate of 3 October for n = 52 (T-082), decided here by sqverify-fast,
+    # took the last count T-070 held.
+    assert len(derived) == 49
     assert {
         "T-020", "T-021", "T-030", "T-043", "T-044", "T-047", "T-049", "T-057", "T-072",
         "T-078", "T-079", "T-087", "T-088", "T-089", "T-092",
@@ -312,11 +315,12 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     assert view.superseding(exact, records) == ("T-060",)
     upper = {"id": "T-999", "kind": "upper-bound", "scope": {"n_values": [11]}}
     assert view.superseding(upper, records) == ("T-011",)
-    # T-060 implies T-036's bound and not its equality case (think-7df0); it implies
-    # T-023's exclusion and not its count of the branch, and the whole of T-031's
-    # exclusion, since no packing of eleven squares fits at side 96/25 (think-rl2b).
+    # T-060 implies T-036's bound and T-112 its equality case (think-7df0, think-d1bd);
+    # T-060 implies T-023's exclusion and not its count of the branch, and the whole of
+    # T-031's exclusion, since no packing of eleven squares fits at side 96/25
+    # (think-rl2b).
     expected = {
-        "T-036": ["superseded in part by T-060"],
+        "T-036": ["superseded in part by T-060 and T-112"],
         "T-023": ["superseded in part by T-060"],
         "T-031": ["superseded by T-060"],
     }
@@ -328,15 +332,21 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
 def test_a_superseding_report_is_named_as_one() -> None:
     """A result no replay has confirmed holds a case's reported bound and never its
     verified one, so where it supersedes an entry the mark says so after its id. Until
-    2026-10-06 T-044's mark named T-082, a report at C1, like the confirmed results
-    beside it."""
+    T-082's replays raised it to C3 on 6 October, T-044's mark named it, a report at C1,
+    beside the confirmed results; no live mark names a report since, so the rule is held
+    on the register with T-082 put back at C1."""
     view = render_recent_results
     records = view.load_records()
     record = records.results["T-044"]
     (mark,) = view.supersessions(record, view.standing(record, records), records)
     assert "T-082" in mark.by
+    assert mark.reported == frozenset()
+    assert "(reported)" not in mark.words()
+    reported = {**records.results["T-082"], "confirmation": "C1"}
+    before = dataclasses.replace(records, results={**records.results, "T-082": reported})
+    (mark,) = view.supersessions(record, view.standing(record, before), before)
     assert mark.reported == {
-        result for result in mark.by if records.results[result]["confirmation"] in ("C0", "C1")
+        result for result in mark.by if before.results[result]["confirmation"] in ("C0", "C1")
     }
     assert mark.reported == {"T-082"}
     assert "T-082 (reported)" in mark.words()

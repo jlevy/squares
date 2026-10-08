@@ -875,7 +875,10 @@ def test_every_retained_kingbird_witness_agreed_with_the_pictures_of_5_october()
         for path in WITNESSES.glob("n-*.yaml")
         if "kingbird.myphotos.cc" in path.read_text(encoding="utf-8")
     }
-    assert set(readings) == retained
+    # This is the frozen 98-picture audit of 5 October. Later packings can replace
+    # active witnesses without changing which pictures this receipt actually checked.
+    assert retained <= set(readings)
+    assert all(row["identical"] or row["worst_ulp"] <= 1 for row in readings.values())
     for n in (69, 83, 87):
         assert readings[n]["from_parse"]
         assert readings[n]["same_side"]

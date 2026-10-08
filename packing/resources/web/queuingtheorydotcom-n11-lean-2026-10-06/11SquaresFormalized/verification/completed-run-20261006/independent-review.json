@@ -1,0 +1,51 @@
+{
+  "format_version": 1,
+  "status": "SOURCE_LOG_AND_RECEIPT_AUDIT_PASS",
+  "repository": "EvolvingPrograms/11SquaresEvolving",
+  "run_id": "37414883750",
+  "run_attempt": "1",
+  "commit": "1bf942a7af1ea330e95489d8997deebd4227ca71",
+  "proof_status": "OPTIMALITY_PROVED_WITH_NATIVE_CERTIFICATES",
+  "trust_model": "lean_kernel_and_native_compiler",
+  "global_optimality_proved_in_run": true,
+  "checked_modules": 7920,
+  "source_hashes_rechecked": 7920,
+  "accepted_receipts_rechecked": 7920,
+  "dependency_edges_rechecked": 17744,
+  "axiom_outputs_rechecked": 2244,
+  "distinct_axiom_targets": 2234,
+  "native_certificate_sources": 1839,
+  "approved_native_declarations": 10464,
+  "generated_native_axioms": 13308,
+  "unapproved_axioms": 0,
+  "explicit_admissions": 0,
+  "compiler": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "worker_flags": [
+    "-j64"
+  ],
+  "configuration_sha256": {
+    "lean-toolchain": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+    "lakefile.lean": "4d454e7edfaf096378a8f68a3bd5f5b074c3d25399c3bc13e1b88ee84df3da45",
+    "lake-manifest.json": "120e40965dd632c94746b59767715975b8c172383f784da8707373f58d320a82"
+  },
+  "native_certificate_manifest_sha256": "dea046ab1252ae499c4efdb68eb9c6096603af072cffdbc7aa4abc607d97f6e5",
+  "artifact_zip_sha256": {
+    "proof-evidence": "ebe3c4388a90907225361927f4f3fab12912cd7a3ce8af1e2b69347939a3d104",
+    "proof-diagnostics": "97e5287e3268598bfeb0480ab44ca3e4927407c1df47414d76b87c213a9342af"
+  },
+  "independent_lean_recompilation": false,
+  "compiled_object_bytes_independently_rehashed": false,
+  "limitations": [
+    "This audit rechecks downloaded successful-run source hashes, receipts, logs, exact axiom ownership, configuration, and provenance.",
+    "Compiled object hashes were checked for internal dependency consistency against receipts. The 8 GB compiled checkpoint was not downloaded and object bytes were not independently rehashed.",
+    "No independent Lean recompilation was performed. Proof compilation and final compiled-object validation are evidenced by the successful GitHub Actions run.",
+    "Expensive numerical certificates retain the documented Lean native compiler trust assumption."
+  ],
+  "fresh_source_assembly_check": {
+    "status": "SOURCE_ASSEMBLY_PASS",
+    "local_modules": 7920,
+    "explicit_admissions": 0,
+    "native_certificate_declarations": 10464,
+    "global_optimality_proved": false
+  }
+}

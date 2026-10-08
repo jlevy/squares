@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-02'
+last_reviewed: '2026-10-07'
 verifiers:
   # --- External programs -------------------------------------------------------------
   - id: V-tokoharu-verify-cpp
@@ -589,6 +589,34 @@ verifiers:
     versions:
       - {sha256: 14ce28b3cbebb4c8c43316beeb43c69460ae243e752de218ca1fa378c439c5e1, revision: f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c}
 
+  - id: V-queuingtheory-n11-lean
+    program: >-
+      The 11SquaresFormalized Lean 4 development (ElevenSquare and Sqpack), built by lake
+      at its pinned toolchain, with scripts/run_verification.sh and the finalizer
+      scripts/finalize_verification.py driving the build and the axiom audit
+    author: Queuingtheorydotcom, wand125, Guzhou0806, Benjamin Gurevitch, Julian-JJ, EvolvingPrograms and ctjlewis
+    provenance: external
+    language: [Lean 4, Python, Bash]
+    methods: [proof-assistant-checked]
+    role: decides
+    summary: >-
+      Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7:
+      the geometry, checker soundness and assembly kernel-checked, and 10,464 numerical
+      certificate declarations decided by native_decide; the finalizer accepts the run
+      only when every module's receipt, source hash and axiom report agree and no
+      admission or unapproved axiom remains.
+    source:
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ElevenSquare/Optimality.lean
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/scripts/run_verification.sh
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/scripts/finalize_verification.py
+    versions:
+      - {revision: cdc746ed907d258057c283aeb6d077cb2c27e349, note: "the integrated commit; its Lean trees and pins are 11SquaresEvolving 1bf942a7's, which passed run 37414883750 at the source; not built here in full"}
+    note: >-
+      Only the statement files, the 18-module closure of ElevenSquare.Foundations, the
+      three modules at the top of the lower bound's assembly and the runner are retained;
+      the other modules, 7,920 in all, are pinned by the commit and by the SHA-256 of each
+      in the run's final audit.
+
   - id: V-wand125-tools
     program: The wand125 tools repository's transfer/l_cap.py and general_pose_tree
     author: wand125
@@ -1146,6 +1174,24 @@ verifiers:
     summary: Reconciles the n = 11 component receipts' reviewed bindings; it reruns no geometry.
     source: [packing/devtools/check_n11_final_composition.py]
 
+  - id: V-audit-n11-lean
+    program: >-
+      devtools.audit_n11_lean, with the statement probe AuditN11Statement.lean it stages
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python, Lean 4]
+    methods: [proof-assistant-checked]
+    role: premises
+    summary: >-
+      Stages the statement closure of the 11SquaresFormalized proof from retained bytes,
+      and with the probe checks in Lean that its Optimality is IsLeast {S | Packable 11 S}
+      T for the register's exact T; extracts the public theorems' axioms from the source's
+      final audit; and hashes and scans every module of the commit's archive against that
+      audit. It decides no bound: Lean's kernel, on the source's modules, does.
+    source:
+      - packing/devtools/audit_n11_lean.py
+      - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/AuditN11Statement.lean
+
   - id: V-audit-n17-endpoint-receipt
     program: devtools.audit_n17_endpoint_receipt
     author: Squares Project (Levy)
@@ -1252,9 +1298,13 @@ verifiers:
       (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md),
       for a declared net once the control's exact evaluator read that net (its DR-1),
       which the same day's re-check confirmed. Its census drives the binary, keeps every
-      direction's receipt and puts negative controls on a certificate at its least-bound
-      direction, with check_sqverify_fast's exact evaluator and mutation helpers; for
-      format T at the least-bound leaf centre of least exact capture, evaluated by
+      direction's receipt and puts negative controls on a certificate: for format M the
+      original and a near-threshold mutant at its least-bound direction, and since the
+      review of 6 October of FC-1's fix
+      (docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md) the
+      99/100 mutant at every direction of the net, with check_sqverify_fast's exact
+      evaluator and mutation helpers; for format T the original and both mutants at the
+      least-bound leaf centre of least exact capture, evaluated by
       sqpack.rectangle_density, which was written before the crate and which its authors
       read (the format T route review of 6 October 2026,
       docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md). None of
@@ -1417,3 +1467,47 @@ verifiers:
       each finding is present at the first commit and gone at the fix. Decides nothing
       about Valid7.
     source: [packing/devtools/probe_valid7_fixes.py]
+
+  - id: V-squish-upper-bound-packets
+    program: devtools.squish_upper_bound_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the bounded complete SQUISH source roster, converts rational half-angle facts to exact
+      rational-corner witnesses without changing the side, drives both exact deciders, and checks source/fact/witness/receipt
+      bindings, full pair counts, upward display ceilings and the two geometric controls.
+    independence_record: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md
+    note: Written from the published rational certificate format and the geometry. No SQUISH producer
+      executable is retained or run. The native exact_verify and independent rational-corner checker decide
+      feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party
+      routes share the converted witness, YAML and Python rational arithmetic, not geometry code.
+
+  - id: V-squish-followup-packets
+    program: devtools.squish_followup_packets
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/squish_followup_packets.py
+    - packing/devtools/squish_upper_bound_packets.py
+    - packing/devtools/import_half_angle_witness.py
+    summary: Admits the pinned update source and complete reviewed replay, binds revision-specific
+      fact/witness/receipt inputs, full pair and control coverage, typed replay provenance and upward
+      display ceilings; explicitly reruns both deciding routes only with --replay.
+    independence_record: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md
+    note: The wrapper shares strict admission and rational half-angle conversion with the original
+      packet while keeping a distinct revision namespace. No SQUISH producer executable is run. The
+      native exact_verify and independently written rational-corner checker decide geometry; both
+      share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata
+      checks are premises, not additional geometric deciders.

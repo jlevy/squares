@@ -1,0 +1,113 @@
+name: Verify simplified proof
+
+# Reviewed, maintainer-started code on a runner available to this repository.
+on:
+  workflow_dispatch:
+    inputs:
+      runner_label:
+        description: 'Runner label available to this repository (for example ubuntu-latest or ubuntu-heavy)'
+        type: string
+        default: 'ubuntu-latest'
+      jobs:
+        description: Lean worker threads per module (modules remain serial)
+        type: string
+        default: '2'
+      fresh:
+        description: Ignore accepted local receipts and replay every module
+        type: boolean
+        default: false
+      resume_run:
+        description: 'Checkpoint run ID, or auto for the newest available on this branch (ignored when fresh)'
+        type: string
+        default: 'auto'
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: full-proof-replay
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ${{ inputs.runner_label }}
+    timeout-minutes: 360
+    steps:
+      - name: Check out selected revision
+        timeout-minutes: 5
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Restore an accepted-module checkpoint
+        if: ${{ !inputs.fresh }}
+        timeout-minutes: 10
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RESUME_RUN: ${{ inputs.resume_run }}
+        run: python3 scripts/verification_artifacts.py restore --run "$RESUME_RUN"
+
+      - name: Replay all modules and audit the final theorem
+        id: replay
+        timeout-minutes: 290
+        shell: bash
+        env:
+          VERIFY_JOBS: ${{ inputs.jobs }}
+          VERIFY_FRESH: ${{ inputs.fresh }}
+        run: |
+          args=(--ci --bootstrap --jobs "$VERIFY_JOBS")
+          if [[ "$VERIFY_FRESH" == true ]]; then args+=(--fresh); fi
+          # Stop normally before Actions cancels the entire job. TERM lets the
+          # runner stop its compiler group and preserve completed receipts.
+          # Keep time for packaging and the large checkpoint upload below.
+          timeout --signal=TERM --kill-after=90s 285m \
+            bash scripts/run_verification.sh "${args[@]}"
+
+      - name: Prepare verification evidence and checkpoint
+        if: ${{ always() && steps.replay.outcome != 'skipped' }}
+        timeout-minutes: 10
+        run: python3 scripts/verification_artifacts.py package
+
+      # Publish the resumable objects before smaller, non-resumable reports.
+      # Step budgets total 355 minutes, leaving overhead within the 360-minute job.
+      - name: Upload resumable compiled-module checkpoint
+        if: ${{ always() && steps.replay.outcome != 'skipped' }}
+        timeout-minutes: 30
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: proof-checkpoint
+          path: .verification/artifacts/checkpoint.tar
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 1
+          # A retry of this run must not delete its last completed checkpoint.
+          # Start a new workflow run to publish a newer resumable checkpoint.
+          overwrite: false
+
+      - name: Upload verification report and module timings
+        if: ${{ always() && steps.replay.outcome != 'skipped' }}
+        timeout-minutes: 5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: proof-evidence
+          path: .verification/artifacts/evidence/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+          overwrite: true
+
+      - name: Upload compiler diagnostics
+        if: ${{ always() && steps.replay.outcome != 'skipped' }}
+        timeout-minutes: 5
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: proof-diagnostics
+          path: .verification/artifacts/diagnostics.tar
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 1
+          overwrite: true

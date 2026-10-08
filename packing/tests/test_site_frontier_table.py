@@ -229,8 +229,9 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     # 747/100 (T-090; 373/50, T-082, until 5 October), and from the morning of 6 October
     # its own replayed rectangle certificate, 2977/400 (T-070), until sqverify-fast
     # decided T-090's certificates later that day. Since then it is n = 96, 1993/200 by
-    # mass from n = 95 (T-090) below the reported s(96) = 10 (T-081).
-    assert rows["n-96"]["cells"][column("Verified lower")]["approx"] == ["= 9.965"]
+    # mass from n = 95 (T-090) below the reported s(96) = 10 (T-081), and from later that
+    # day its own certificate's 997/100 (T-082), decided here by sqverify-fast.
+    assert rows["n-96"]["cells"][column("Verified lower")]["approx"] == ["= 9.97"]
     assert all(cell["approx"] == [] for cell in rows["n-1"]["cells"])
     assert rows["n-11"]["cells"][column("Reported lower")]["broken"] == []
 

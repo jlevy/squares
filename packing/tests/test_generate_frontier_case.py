@@ -62,7 +62,9 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
 
+from devtools import squish_followup_packets as update
 from devtools import validate_schemas
 from devtools.apply_upper_bound_packets import PREVIOUS_HEADING, earlier_reports, normalized
 from devtools.check_basic_bounds import check_case_basic_bounds
@@ -1091,7 +1093,9 @@ def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: P
     availability = load_availability()
     catalogue = load_drafting_catalogue([179], availability)
     committed = (FRONTIER / "n-179.md").read_text(encoding="utf-8")
-    stale = committed.replace("value: '13.89534106997649'", "value: '13.89540982243640'", 1)
+    report = safe_load(committed.split("---\n", 2)[1])["packing"]["reported_upper_bound"]
+    stale = committed.replace(f"value: '{report['value']}'", "value: '99.0'", 1)
+    assert stale != committed
     record_path(tmp_path, 179).write_text(stale, encoding="utf-8")
     args = argparse.Namespace(
         out=tmp_path, review_date="2026-09-30", retrieved_date="2026-09-30", force=False
@@ -1115,6 +1119,137 @@ def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: P
     )
     assert "  rigidity: null\n" in drafted
     assert normalized(with_rigidity_of(committed, drafted)) == normalized(committed)
+
+
+@pytest.mark.parametrize("n", [108, 126, 130, 153, 155])
+def test_selected_squish_report_refreshes_geometry_and_lower_lanes_without_losing_review(
+    n: int, tmp_path: Path
+) -> None:
+    availability = load_availability()
+    catalogue = load_drafting_catalogue([n], availability)
+    committed = record_path(FRONTIER, n).read_text()
+    payload = safe_load(committed.split("---\n", 2)[1])["packing"]
+    args = argparse.Namespace(
+        out=tmp_path, review_date="2026-10-07", retrieved_date="2026-10-07", force=False
+    )
+    path = record_path(tmp_path, n)
+    path.write_text(committed)
+    assert check_records([n], args, availability, catalogue) == 0
+    drafted = redraft(
+        n,
+        committed,
+        availability=availability,
+        catalogue=catalogue,
+        review_date="2026-10-07",
+        retrieved_date="2026-10-07",
+    )
+    assert "  rigidity: null\n" in drafted
+    assert normalized(with_rigidity_of(committed, drafted)) == normalized(committed)
+    # A stale display and fraction must not become a self-fulfilling draft. The body
+    # declaration and the ordinary verified lower lane are independently regenerated.
+    report = payload["reported_upper_bound"]
+    stale = committed.replace(f"value: '{report['value']}'", "value: '99.0'", 1)
+    stale = stale.replace(f"exact_form: {report['exact_form']}", "exact_form: 99/1", 1)
+    stale = stale.replace("S_n = \\frac{", "S_n = \\frac{999", 1)
+    lower = payload["verified_lower_bound"]["value"]
+    stale = stale.replace(f"value: '{lower}'", "value: '1.0'", 1)
+    path.write_text(stale)
+    assert check_records([n], args, availability, catalogue) == 1
+    assert refresh_records([n], args, availability, catalogue) == 0
+    assert normalized(path.read_text()) == normalized(committed)
+    assert check_records([n], args, availability, catalogue) == 0
+
+
+def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
+    """The confirmation phase has a ceiling and a separate original source quotation."""
+    from fractions import Fraction  # noqa: PLC0415
+
+    from yaml import safe_dump  # noqa: PLC0415
+
+    from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
+
+    n = 108
+    existing = record_path(FRONTIER, n).read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    case["verified_upper_bound"]["evidence"] = ["E-squish-ten-packings-2026-10-07-exact-replay"]
+    case["reported_upper_bound"]["value"] = "99.0"
+    case["verified_upper_bound"]["value"] = "99.0"
+    label = "The source" + chr(0x2019) + "s original finite decimal display is"
+    body, source_displays = re.subn(
+        rf"(?:Its decimal display is|{re.escape(label)})\s+\$[0-9.]+\$",
+        lambda _match: f"{label} $99.0$",
+        body,
+    )
+    assert source_displays == 1
+    # Both reported and already confirmed records are valid starting states. Replace
+    # their display declarations rather than appending a second confirmation clause.
+    body = re.sub(r"The verified display is\s+\$[0-9.]+\$", "", body)
+    body = body.replace(
+        "## Earlier Packing", "The verified display is $99.0$.\n\n## Earlier Packing"
+    )
+    edited = "---\n" + safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    availability = load_availability()
+    historical = adopt_upper_bound_packet(
+        n,
+        generate_record(
+            n,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        ),
+    )
+    refreshed = source_supersession.adopt_selected_report(n, edited, historical)
+    fact = squish_upper_bound_packets.read_fact(n)
+    assert f"{label} ${fact['printed_side']}$" in refreshed
+    value = squish_upper_bound_packets.verified_value(
+        Fraction(fact["side"]), fact["printed_side"]
+    )
+    assert f"The verified display is ${value}$" in refreshed
+    assert "## The verified upper bound is a ceiling" not in refreshed
+    assert "  rigidity: null\n" in refreshed
+    with pytest.raises(ValueError, match="exactly one verified-display"):
+        source_supersession.adopt_selected_report(
+            n, edited.replace("The verified display is", "Stale display is"), historical
+        )
+    with pytest.raises(ValueError, match="exactly one generated lower-bound"):
+        source_supersession.adopt_selected_report(
+            n, edited.replace("## The lower bound", "## Deleted lower bound"), historical
+        )
+    # Coverage selecting a later source does not authorize assigning that source's
+    # facts to an earlier draft's evidence, resources or body before intake.
+    assert source_supersession.adopt_selected_report(n, historical, historical) == historical
+
+
+def test_selected_squish_publication_admits_integer_rational_sides(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
+
+    n = 108
+    existing = record_path(FRONTIER, n).read_text()
+    availability = load_availability()
+    historical = adopt_upper_bound_packet(
+        n,
+        generate_record(
+            n,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        ),
+    )
+    fact = squish_upper_bound_packets.read_fact(n)
+    fact.update(side="11", printed_side="11.0000000000000000")
+    monkeypatch.setattr(squish_upper_bound_packets, "read_fact", lambda _n: fact)
+    adapted = source_supersession.adopt_selected_report(n, existing, historical)
+    assert r"S_n = \frac{11}{1}" in adapted
+    assert (
+        safe_load(adapted.split("---\n", 2)[1])["packing"]["reported_upper_bound"]["exact_form"]
+        == "11"
+    )
 
 
 def test_an_optimizer_the_line_credits_nowhere_else_is_credited_and_dated() -> None:
@@ -1327,3 +1462,121 @@ def test_a_pictured_integer_side_case_is_recorded_as_the_trivial_grid() -> None:
         assert upper["analytically_optimized"] is None
         assert upper["evidence"] == ["E-kingbird-upper-register"]
         assert payload["status"] == "proved"
+
+
+@pytest.mark.parametrize("n", [n for n in update.NUMBERS if n != 153])
+def test_selected_update_repairs_both_lanes_without_rewriting_history(n: int) -> None:
+    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    expected_verified = case["verified_upper_bound"].copy()
+    case["reported_upper_bound"].update(value="99.0", exact_form="99/1")
+    case["verified_upper_bound"].update(value="98.0", exact_form="98/1")
+    case["verified_lower_bound"]["value"] = "1.0"
+    body, count = re.subn(
+        rf"\$s\({n}\) \\le [0-9.]+\$,\s+with exact side\s+\$[0-9]+(?:/[0-9]+)?\$",
+        lambda _match: f"$s({n}) \\le 99.0$, with exact side $99/1$",
+        body,
+    )
+    assert count == 1
+    body, count = re.subn(r"source print\s+\$[0-9.]+\$", "source print $99.0$", body)
+    assert count == 1
+    if n in update.REPLACEMENTS:
+        body, count = re.subn(
+            r"S_n = \\frac\{[0-9]+\}\{[0-9]+\}",
+            lambda _match: r"S_n = \frac{999}{1}",
+            body,
+        )
+        assert count == 1
+    stale = (
+        "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    )
+    assert stale != existing
+    availability = load_availability()
+    catalogue = load_drafting_catalogue([n], availability)
+    refreshed = redraft(
+        n,
+        stale,
+        availability=availability,
+        catalogue=catalogue,
+        review_date="2026-10-07",
+        retrieved_date="2026-10-07",
+    )
+    payload = safe_load(refreshed.split("---\n", 2)[1])["packing"]
+    assert payload["verified_upper_bound"] == expected_verified
+    assert payload["reported_upper_bound"]["source_key"] == update.SOURCE_KEY
+    assert payload["reported_upper_bound"]["evidence"] == ["E-squish-update-2026-10-07-report"]
+    assert payload["rigidity"] is None
+    assert re.sub(r"\s+", " ", with_rigidity_of(existing, refreshed)) == re.sub(
+        r"\s+", " ", existing
+    )
+
+
+@pytest.mark.parametrize("declaration", ["with exact side", "source print", "S_n = "])
+def test_selected_update_refuses_missing_geometry_declarations(declaration: str) -> None:
+    n = 126
+    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    assert existing.count(declaration) == 1
+    stale = existing.replace(declaration, "Missing declaration ", 1)
+    availability = load_availability()
+    with pytest.raises(GenerationError, match=r"exactly one .*side/display declaration"):
+        redraft(
+            n,
+            stale,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        )
+
+
+@pytest.mark.parametrize("mutation", ["missing", "duplicate"])
+def test_confirmed_update_refuses_missing_or_duplicate_assurance(mutation: str) -> None:
+    n = 126
+    existing = record_path(FRONTIER, n).read_text()
+    declaration = re.search(
+        r"This update is\s+confirmed at V3/C3.*?been established\.",
+        existing,
+        re.DOTALL,
+    )
+    assert declaration is not None
+    assurance = declaration.group()
+    replacement = "Missing assurance." if mutation == "missing" else assurance + assurance
+    stale = existing.replace(assurance, replacement, 1)
+    availability = load_availability()
+    with pytest.raises(GenerationError, match="assurance declaration"):
+        redraft(
+            n,
+            stale,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        )
+
+
+@pytest.mark.parametrize("n", [126, 179])
+def test_update_refresh_refuses_unmapped_confirmation_evidence(n: int) -> None:
+    existing = record_path(FRONTIER, n).read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    case["verified_upper_bound"] = {
+        "value": case["reported_upper_bound"]["value"],
+        "exact_form": case["reported_upper_bound"]["exact_form"],
+        "evidence": ["E-squish-update-unmapped-exact-replay"],
+    }
+    confirmed = (
+        "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    )
+    availability = load_availability()
+    with pytest.raises(GenerationError, match="unmapped confirmed SQUISH update evidence"):
+        redraft(
+            n,
+            confirmed,
+            availability=availability,
+            catalogue=load_drafting_catalogue([n], availability),
+            review_date="2026-10-07",
+            retrieved_date="2026-10-07",
+        )

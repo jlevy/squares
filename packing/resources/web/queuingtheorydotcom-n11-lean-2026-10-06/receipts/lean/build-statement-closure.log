@@ -1,0 +1,503 @@
+# devtools.audit_n11_lean build, Queuingtheorydotcom/11SquaresFormalized cdc746ed907d258057c283aeb6d077cb2c27e349
+# staged 22 files, every upstream one at the packet manifest's SHA-256
+# host: 4 cores; started 2026-10-06T19:34:32Z; LEAN_NUM_THREADS=2, nice -n 10
+# command: lean --version
+Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)
+# exit 0; wall 0.1 s
+# command: lake --version
+Lake version 5.0.0-src+5045d00 (Lean version 4.34.1)
+# exit 0; wall 0.1 s
+# command: lake build ElevenSquare.Geometry
+⚠ [783/783] Built ElevenSquare.Geometry (2.8s)
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+Build completed successfully (783 jobs).
+# exit 0; wall 4.7 s
+# command: lake build ElevenSquare.CaseCountSupport
+✔ [875/875] Built ElevenSquare.CaseCountSupport (11s)
+Build completed successfully (875 jobs).
+# exit 0; wall 13.4 s
+# command: lake build ElevenSquare.Endpoint
+⚠ [2098/2098] Built ElevenSquare.Endpoint (4.0s)
+warning: ElevenSquare/Endpoint.lean:26:456: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Build completed successfully (2098 jobs).
+# exit 0; wall 7.4 s
+# command: lake build ElevenSquare.CoverData
+⚠ [792/792] Built ElevenSquare.CoverData (2.5s)
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+Build completed successfully (792 jobs).
+# exit 0; wall 4.2 s
+# command: lake build ElevenSquare.BasicGeometry
+⚠ [783/866] Replayed ElevenSquare.Geometry
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+✔ [866/866] Built ElevenSquare.BasicGeometry (8.2s)
+Build completed successfully (866 jobs).
+# exit 0; wall 9.9 s
+# command: lake build ElevenSquare.Orientation
+⚠ [782/918] Replayed ElevenSquare.Geometry
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [985/985] Built ElevenSquare.Orientation (5.8s)
+warning: ElevenSquare/Orientation.lean:92:18: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+Build completed successfully (985 jobs).
+# exit 0; wall 7.5 s
+# command: lake build ElevenSquare.Combinatorics
+⚠ [999/999] Built ElevenSquare.Combinatorics (15s)
+warning: ElevenSquare/Combinatorics.lean:20:40: This simp argument is unused:
+  Fin.rev_inj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [halfTurnMask, Finset.mem_image]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (999 jobs).
+# exit 0; wall 18.1 s
+# command: lake build ElevenSquare.ConstructionData
+⚠ [2098/2101] Replayed ElevenSquare.Endpoint
+warning: ElevenSquare/Endpoint.lean:26:456: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [2100/2101] Replayed ElevenSquare.Geometry
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+✔ [2101/2101] Built ElevenSquare.ConstructionData (122s)
+Build completed successfully (2101 jobs).
+# exit 0; wall 126.2 s
+# command: lake build ElevenSquare.EndpointBounds
+⚠ [2098/2099] Replayed ElevenSquare.Endpoint
+warning: ElevenSquare/Endpoint.lean:26:456: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [2099/2099] Built ElevenSquare.EndpointBounds (7.3s)
+Build completed successfully (2099 jobs).
+# exit 0; wall 10.6 s
+# command: lake build ElevenSquare.CoverChecks
+⚠ [791/852] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+✔ [868/868] Built ElevenSquare.CoverChecks (4.2s)
+Build completed successfully (868 jobs).
+# exit 0; wall 7.0 s
+# command: lake build ElevenSquare.Construction
+⚠ [2098/2103] Replayed ElevenSquare.Endpoint
+warning: ElevenSquare/Endpoint.lean:26:456: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [2100/2103] Replayed ElevenSquare.Geometry
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [2103/2103] Built ElevenSquare.Construction (58s)
+warning: ElevenSquare/Construction.lean:67:15: This simp argument is unused:
+  hcross
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [projectionRadius, constructionSquare, constructionAxis, constructionSeparator, constructionSepRadius,
+    dot, perp, hi, hge, abs_of_pos hc, abs_of_pos hs, hnorm, hcross', add_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Construction.lean:67:23: This simp argument is unused:
+  hcross'
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [projectionRadius, constructionSquare, constructionAxis, constructionSeparator, constructionSepRadius,
+    dot, perp, hi, hge, abs_of_pos hc, abs_of_pos hs, hnorm, hcross, add_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (2103 jobs).
+# exit 0; wall 61.3 s
+# command: lake build ElevenSquare.GeneratedCover0
+⚠ [791/835] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+✔ [869/869] Built ElevenSquare.GeneratedCover0 (64s)
+Build completed successfully (869 jobs).
+# exit 0; wall 66.4 s
+# command: lake build ElevenSquare.GeneratedCover1
+⚠ [792/869] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+✔ [869/869] Built ElevenSquare.GeneratedCover1 (27s)
+Build completed successfully (869 jobs).
+# exit 0; wall 29.1 s
+# command: lake build ElevenSquare.GeneratedCover2
+⚠ [791/859] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+✔ [869/869] Built ElevenSquare.GeneratedCover2 (26s)
+Build completed successfully (869 jobs).
+# exit 0; wall 28.1 s
+# command: lake build ElevenSquare.GeneratedCover3
+⚠ [792/869] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+✔ [869/869] Built ElevenSquare.GeneratedCover3 (36s)
+Build completed successfully (869 jobs).
+# exit 0; wall 38.0 s
+# command: lake build ElevenSquare.Cover
+⚠ [852/1008] Replayed ElevenSquare.Geometry
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [1002/1008] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [1008/1008] Built ElevenSquare.Cover (6.4s)
+warning: ElevenSquare/Cover.lean:27:39: Unused tactic linter: `norm_num` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: ElevenSquare/Cover.lean:27:39: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ElevenSquare/Cover.lean:28:35: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:29:35: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:68:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:68:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:77:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:77:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:79:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:122:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:122:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:130:15: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:130:25: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+Build completed successfully (1008 jobs).
+# exit 0; wall 8.2 s
+# command: lake build ElevenSquare.Cases
+⚠ [851/1007] Replayed ElevenSquare.Geometry
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [1001/1007] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [1008/1045] Replayed ElevenSquare.Cover
+warning: ElevenSquare/Cover.lean:27:39: Unused tactic linter: `norm_num` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: ElevenSquare/Cover.lean:27:39: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ElevenSquare/Cover.lean:28:35: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:29:35: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:68:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:68:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:77:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:77:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:79:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:122:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:122:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:130:15: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:130:25: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [1044/1045] Replayed ElevenSquare.Combinatorics
+warning: ElevenSquare/Combinatorics.lean:20:40: This simp argument is unused:
+  Fin.rev_inj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [halfTurnMask, Finset.mem_image]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [1045/1045] Built ElevenSquare.Cases (2.7s)
+Build completed successfully (1045 jobs).
+# exit 0; wall 4.5 s
+# command: lake build ElevenSquare.Foundations
+⚠ [2098/2116] Replayed ElevenSquare.Endpoint
+warning: ElevenSquare/Endpoint.lean:26:456: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [2101/2116] Replayed ElevenSquare.Geometry
+warning: ElevenSquare/Geometry.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [2104/2116] Replayed ElevenSquare.Construction
+warning: ElevenSquare/Construction.lean:67:15: This simp argument is unused:
+  hcross
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [projectionRadius, constructionSquare, constructionAxis, constructionSeparator, constructionSepRadius,
+    dot, perp, hi, hge, abs_of_pos hc, abs_of_pos hs, hnorm, hcross', add_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Construction.lean:67:23: This simp argument is unused:
+  hcross'
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [projectionRadius, constructionSquare, constructionAxis, constructionSeparator, constructionSepRadius,
+    dot, perp, hi, hge, abs_of_pos hc, abs_of_pos hs, hnorm, hcross, add_comm, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [2105/2116] Replayed ElevenSquare.Orientation
+warning: ElevenSquare/Orientation.lean:92:18: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [2106/2116] Replayed ElevenSquare.CoverData
+warning: ElevenSquare/CoverData.lean:1:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [2112/2116] Replayed ElevenSquare.Cover
+warning: ElevenSquare/Cover.lean:27:39: Unused tactic linter: `norm_num` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: ElevenSquare/Cover.lean:27:39: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ElevenSquare/Cover.lean:28:35: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:29:35: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:68:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:68:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:77:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:77:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:79:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ElevenSquare/Cover.lean:122:13: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:122:23: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:130:15: This simp argument is unused:
+  Prod.fst
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.snd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ElevenSquare/Cover.lean:130:25: This simp argument is unused:
+  Prod.snd
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Prod.fst]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [2114/2116] Replayed ElevenSquare.Combinatorics
+warning: ElevenSquare/Combinatorics.lean:20:40: This simp argument is unused:
+  Fin.rev_inj
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [halfTurnMask, Finset.mem_image]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+✔ [2116/2116] Built ElevenSquare.Foundations (3.5s)
+Build completed successfully (2116 jobs).
+# exit 0; wall 5.7 s
+# command: lake env lean AuditN11Statement.lean
+def ElevenSquare.Optimality : Prop :=
+Packable 11 T ∧ ∀ (S : ℝ), Packable 11 S → T ≤ S
+def ElevenSquare.T : ℝ :=
+(6 * u + 4) / (1 + 2 * u - u ^ 2)
+def ElevenSquare.u : ℝ :=
+Classical.choose endpoint_root_exists
+def ElevenSquare.endpointPolynomial : ℝ → ℝ :=
+fun x => 5 * x ^ 8 - 10 * x ^ 7 - 2 * x ^ 6 + 14 * x ^ 5 + 12 * x ^ 4 - 6 * x ^ 3 + 2 * x ^ 2 + 2 * x - 1
+@[reducible] def ElevenSquare.Point : Type :=
+ℝ × ℝ
+def ElevenSquare.dot : Point → Point → ℝ :=
+fun p q => p.1 * q.1 + p.2 * q.2
+def ElevenSquare.normSq : Point → ℝ :=
+fun p => dot p p
+def ElevenSquare.perp : Point → Point :=
+fun p => (-p.2, p.1)
+structure ElevenSquare.UnitSquare : Type
+number of parameters: 0
+fields:
+  ElevenSquare.UnitSquare.center : Point
+  ElevenSquare.UnitSquare.axis : Point
+  ElevenSquare.UnitSquare.axis_unit : normSq self.axis = 1
+constructor:
+  ElevenSquare.UnitSquare.mk (center axis : Point) (axis_unit : normSq axis = 1) : UnitSquare
+def ElevenSquare.localX : UnitSquare → Point → ℝ :=
+fun q p => dot (p - q.center) q.axis
+def ElevenSquare.localY : UnitSquare → Point → ℝ :=
+fun q p => dot (p - q.center) (perp q.axis)
+def ElevenSquare.ClosedSquare : UnitSquare → Point → Prop :=
+fun q p => |localX q p| ≤ 1 / 2 ∧ |localY q p| ≤ 1 / 2
+def ElevenSquare.OpenSquare : UnitSquare → Point → Prop :=
+fun q p => |localX q p| < 1 / 2 ∧ |localY q p| < 1 / 2
+def ElevenSquare.InContainer : ℝ → Point → Prop :=
+fun S p => 0 ≤ p.1 ∧ p.1 ≤ S ∧ 0 ≤ p.2 ∧ p.2 ≤ S
+structure ElevenSquare.Packing (n : ℕ) (S : ℝ) : Type
+number of parameters: 2
+fields:
+  ElevenSquare.Packing.squares : Fin n → UnitSquare
+  ElevenSquare.Packing.side_nonneg : 0 ≤ S
+  ElevenSquare.Packing.contained : ∀ (i : Fin n) (p : Point), ClosedSquare (self.squares i) p → InContainer S p
+  ElevenSquare.Packing.interior_disjoint : ∀ (i j : Fin n),
+      i ≠ j → ∀ (p : Point), ¬(OpenSquare (self.squares i) p ∧ OpenSquare (self.squares j) p)
+constructor:
+  ElevenSquare.Packing.mk {n : ℕ} {S : ℝ} (squares : Fin n → UnitSquare) (side_nonneg : 0 ≤ S)
+    (contained : ∀ (i : Fin n) (p : Point), ClosedSquare (squares i) p → InContainer S p)
+    (interior_disjoint :
+      ∀ (i j : Fin n), i ≠ j → ∀ (p : Point), ¬(OpenSquare (squares i) p ∧ OpenSquare (squares j) p)) :
+    Packing n S
+def ElevenSquare.Packable : ℕ → ℝ → Prop :=
+fun n S => Nonempty (Packing n S)
+'ElevenSquare.construction_packable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ElevenSquare.optimality_of_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ElevenSquare.u_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ElevenSquare.T_lt_U' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ElevenSquare.improvement_within_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ElevenSquare.packing_has_canonical_mask' depends on axioms: [propext, Classical.choice, Quot.sound]
+# exit 0; wall 5.7 s
+# finished 2026-10-06T19:42:08Z; exit 0

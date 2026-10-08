@@ -1,0 +1,103 @@
+{
+ "what": "The axioms the source's final audit records for its public theorems, extracted here by devtools.audit_n11_lean from verification/completed-run-20261006/final-audit.json.gz at Queuingtheorydotcom/11SquaresFormalized cdc746ed907d258057c283aeb6d077cb2c27e349. The audit is the source's own: its finalizer parses '#print axioms' output from the compiler logs of EvolvingPrograms/11SquaresEvolving run 37414883750 (source commit 1bf942a7). Nothing here re-ran Lean on these theorems. The finalizer recognises a native axiom by its name; that no hand-written axiom takes such a name is the archive scan's finding (tree-scan.json), not this one.",
+ "final_audit_gz_sha256": "3c7e3b393a390f62470ce73c8fb95a7ce8c12e64de1d764f632a8ff269f6ff10",
+ "final_audit_sha256": "d66a07c2dcf8f8405dc46151ba500ba40c7de521ff64a28d8cbf772f12575788",
+ "summary_json_final_audit_uncompressed_sha256": "d66a07c2dcf8f8405dc46151ba500ba40c7de521ff64a28d8cbf772f12575788",
+ "status": "OPTIMALITY_PROVED_WITH_NATIVE_CERTIFICATES",
+ "trust_model": "lean_kernel_and_native_compiler",
+ "global_optimality_proved": true,
+ "checked_modules": 7920,
+ "lean_toolchain": "leanprover/lean4:v4.34.1",
+ "mathlib_revision": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+ "explicit_native_admissions": 0,
+ "audited_targets": 2234,
+ "non_native_axioms_anywhere": [
+  "Classical.choice",
+  "Quot.sound",
+  "propext"
+ ],
+ "native_decide_axioms_in_audit": 13308,
+ "native_decide_owner_declarations_in_audit": 10464,
+ "public_theorems": {
+  "ElevenSquare.optimality": {
+   "axiom_count": 13311,
+   "non_native_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+   ],
+   "sorryAx": false,
+   "native_decide_axioms": 13308,
+   "native_decide_owner_declarations": 10464,
+   "native_set_equals_audit_native_list": true,
+   "native_subset_of_audit_native_list": true
+  },
+  "ElevenSquare.optimal_side_lower_bound": {
+   "axiom_count": 13311,
+   "non_native_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+   ],
+   "sorryAx": false,
+   "native_decide_axioms": 13308,
+   "native_decide_owner_declarations": 10464,
+   "native_set_equals_audit_native_list": true,
+   "native_subset_of_audit_native_list": true
+  },
+  "ElevenSquare.Pending.global_lower_bound": {
+   "axiom_count": 13311,
+   "non_native_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+   ],
+   "sorryAx": false,
+   "native_decide_axioms": 13308,
+   "native_decide_owner_declarations": 10464,
+   "native_set_equals_audit_native_list": true,
+   "native_subset_of_audit_native_list": true
+  },
+  "ElevenSquare.Pending.baseline_certificate_exists": {
+   "axiom_count": 3349,
+   "non_native_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+   ],
+   "sorryAx": false,
+   "native_decide_axioms": 3346,
+   "native_decide_owner_declarations": 3346,
+   "native_set_equals_audit_native_list": false,
+   "native_subset_of_audit_native_list": true
+  },
+  "ElevenSquare.Pending.prior_certificate_exists": {
+   "axiom_count": 1835,
+   "non_native_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+   ],
+   "sorryAx": false,
+   "native_decide_axioms": 1832,
+   "native_decide_owner_declarations": 1832,
+   "native_set_equals_audit_native_list": false,
+   "native_subset_of_audit_native_list": true
+  },
+  "ElevenSquare.Pending.returned_certificate_exists": {
+   "axiom_count": 3923,
+   "non_native_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+   ],
+   "sorryAx": false,
+   "native_decide_axioms": 3920,
+   "native_decide_owner_declarations": 3920,
+   "native_set_equals_audit_native_list": false,
+   "native_subset_of_audit_native_list": true
+  }
+ },
+ "native_axiom_list": "native-axioms.txt, the audit's native_certificate_axioms sorted, one per line",
+ "final_audit_matches_summary": true
+}

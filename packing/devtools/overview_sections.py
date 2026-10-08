@@ -1710,6 +1710,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Improved packings for 49 counts from n = 68 to 307.",
     ),
     (
+        "https://github.com/itsnaka/squish-certs",
+        "Nate Chaoweeraprasit",
+        "Exact rational certificates for SQUISH upper-bound packings.",
+    ),
+    (
         "https://github.com/griffcass/square-packing",
         "Griffin Casson",
         "Improved packings for n = 103, 105 and other cases.",
@@ -1723,6 +1728,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
         "Queuingtheorydotcom",
         "A computer-assisted proof that Trump's packing of eleven squares is optimal.",
+    ),
+    (
+        "https://github.com/Queuingtheorydotcom/11SquaresFormalized",
+        "Queuingtheorydotcom et al.",
+        "A Lean 4 formalization of that proof, trusting Lean's compiler for its certificates.",
     ),
     (
         "https://github.com/Kleddamag/11-squares-certified-bound",
@@ -1802,7 +1812,7 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
     ),
 )
 
-#: The other places off GitHub that the record cites results from, ranked with the
+#: Other cited result pages, including first-party GitHub issue reports, ranked with the
 #: projects on GitHub: each one's address, its name (a post's is its title, as the post
 #: gives it), its author as the record credits them, and what it holds. They are the
 #: source-coverage register's two sources off GitHub that are not a catalogue,
@@ -1812,6 +1822,12 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
 #: reviews to a card, here or in `OTHER_PROJECTS`, and every address here and in
 #: `CATALOGUE_SITES` to one the record cites.
 OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
+    (
+        "https://github.com/jlevy/squares/issues/401#issuecomment-6031977107",
+        "SQUISH packing of 153 squares",
+        "Nate Chaoweeraprasit",
+        "The supplemental rational certificate submitted with the SQUISH packings.",
+    ),
     (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
         "Proposing a Better Lower Bound for n = 17 Square Packing",

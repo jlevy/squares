@@ -123,6 +123,7 @@ KINDS = (
     "lower-bound",
     "upper-bound",
     "optimality",
+    "uniqueness",
     "simplification",
     "rigidity",
     "case-exclusion",
@@ -140,9 +141,12 @@ KIND_RELATIONS = {
     "optimality": frozenset({"="}),
 }
 BOUND_KINDS = frozenset(KIND_RELATIONS)
-#: The kinds that say nothing about `s(n)`: a property of one packing or one class of
-#: configurations, which the evidence contract types as `derived-structure`.
-STRUCTURE_KINDS = frozenset({"rigidity", "case-exclusion", "restricted-optimality"})
+#: The kinds that say nothing about `s(n)`: a property of one packing, one class of
+#: configurations or the packings that attain `s(n)`, which the evidence contract types
+#: as `derived-structure`.
+STRUCTURE_KINDS = frozenset(
+    {"uniqueness", "rigidity", "case-exclusion", "restricted-optimality"}
+)
 STRUCTURE_CLAIM = "derived-structure"
 #: `s(n)` and the relation written after it. Several counts may share one relation,
 #: `s(27), s(28) ≥ 28/5`. The lookbehind keeps `cos(x) =` from reading as `s(x) =`.
@@ -429,7 +433,9 @@ def repository_file_problem(path: str) -> str | None:
     try:
         target.relative_to(REPO.resolve())
     except ValueError:
-        return "resolves outside the repository"
+        from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
+
+        return linked_certificate_problem(path, repository=REPO)
     if not target.is_file():
         return "does not name a file"
     return None

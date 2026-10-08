@@ -1,0 +1,20 @@
+# token<TAB>one line of Lean source that must count once under that token.
+# Kept out of the test module: Lean's `=>` reads as JavaScript to check_no_embedded_js.
+native_decide	theorem x : 2 + 2 = 4 := by native_decide
+decide_native	theorem x : p := by decide +native
+axiom_decl	axiom bad : False
+axiom_decl	private axiom bad : False
+implemented_by	@[implemented_by fastF] def f := 0
+extern	@[extern "c_f"] opaque f : Nat
+notation	local notation "T" => 3
+macro	macro_rules | `(T) => `(3)
+eval	#eval 1
+run_cmd	run_cmd pure ()
+export	export ElevenSquare (Optimality)
+elab_attribute	@[term_elab foo] def elabFoo := 0
+instance	instance : Sub Point := ⟨fun a b => a⟩
+open_renaming	open Foo renaming bar → baz
+axiom_decl	unsafe axiom bad : False
+sorry	theorem x : False := sorry
+skipKernelTC	set_option debug.skipKernelTC true
+import_Lean	import Lean.Elab.Tactic.Omega

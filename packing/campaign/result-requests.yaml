@@ -17,7 +17,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-06'
+last_reviewed: '2026-10-07'
 issues:
   - number: 375
     title: 'Analytic optima of 48 recent records (s(n) bounds 3e-13 … 5e-11 below the register) and exact certificates for every record n ≤ 104: registration request'
@@ -360,6 +360,11 @@ issues:
             id: E-n019-wand125-mixed-48229-report
           - result: n19-48229
             id: E-n019-wand125-mixed-48229-sqverify-fast-replay
+      - url: https://github.com/jlevy/squares/issues/366#issuecomment-6026340743
+        date: '2026-10-06'
+        by: jlevy
+        kind: follow-up
+        reported: []
     close_when: >-
       The s(18) certificate is confirmed or refuted and the reply saying so is posted from
       main, and the offered sqverify_fast change is taken in or declined; and the two
@@ -481,7 +486,7 @@ issues:
       reports three corrections to the paper v0.1.3 (formalization in progress elsewhere,
       13 completed root updates rather than 14, Figure 8's caption against the text) and
       a dependency remark on cases 2175 and 2176.
-    read_through: '2026-10-05T17:22:23Z'
+    read_through: '2026-10-06T22:55:01Z'
     results: []
     asks:
       - what: >-
@@ -495,6 +500,16 @@ issues:
           docs/project/reviews/review-2026-10-04-n11-optimality-paper-v0.1.4-changes.md,
           and T-060's notes gained a dated entry. Answered on the issue on 5 October,
           https://github.com/jlevy/squares/issues/317#issuecomment-5999533910.
+      - what: >-
+          The Lean formalization Queuingtheorydotcom/11SquaresFormalized, announced on 6
+          October
+        state: done
+        note: >-
+          Imported at cdc746ed in #391 and #393: the statement audited and its closure built
+          here, the axiom audit pinned, the tree scanned. T-060 stays V3/C3 until a complete
+          build is held by the record and a human Lean expert who is not an author reviews
+          the formalization. Answered on 6 October,
+          https://github.com/jlevy/squares/issues/317#issuecomment-6026940690.
     beads: [think-1gbu, think-nnrx, think-if2i, think-wbpu]
     answer_bead: think-1gbu
     replies:
@@ -502,6 +517,11 @@ issues:
         date: '2026-10-05'
         by: jlevy
         kind: acknowledgement
+        reported: []
+      - url: https://github.com/jlevy/squares/issues/317#issuecomment-6026940690
+        date: '2026-10-06'
+        by: jlevy
+        kind: import
         reported: []
     close_when: >-
       The owner's call: the umbrella's open beads are closed or moved, and wand125's
@@ -1085,7 +1105,8 @@ issues:
     title: 'Mixed rectangle-measure certificates for n = 37, 65, 66, 90, 92 (after T-048): registration request'
     author: wand125
     opened: '2026-10-01'
-    state: open
+    state: closed
+    closed: '2026-10-06'
     kind: result-report
     triage: done
     summary: >-
@@ -1097,7 +1118,7 @@ issues:
       4 October 07:04 to 19:04 UTC, at n = 53 to 94, twelve of them again at counts already
       posted, and three more on 5 October from 06:06 to 08:11 UTC, at n = 67, 84 and 66, all
       again at counts already posted.
-    read_through: '2026-10-06T02:41:07Z'
+    read_through: '2026-10-06T23:13:30Z'
     results:
       - key: mixed-five
         claim: s(37) >= 161/25, s(65) >= 167/20, s(66) >= 421/50, s(90) >= 48/5 and s(92) >= 969/100
@@ -1182,7 +1203,7 @@ issues:
           mixed_n66_L842 = 421/50 (T-069), which it supersedes
         source: https://github.com/jlevy/squares/issues/282#issuecomment-5990620723
         register: [T-097]
-    beads: [think-ye2x, think-fb6h, think-09ag, think-r7yt, think-wpuu, think-e6ss, think-07s1, think-wrdq, think-0xb8, think-flv5, think-4qit, think-8qo9]
+    beads: [think-ye2x, think-fb6h, think-09ag, think-r7yt, think-wpuu, think-0uia, think-e6ss, think-07s1, think-wrdq, think-0xb8, think-flv5, think-4qit, think-8qo9]
     answer_bead: think-7gop
     replies:
       - url: https://github.com/jlevy/squares/issues/282#issuecomment-5972354526
@@ -1310,6 +1331,16 @@ issues:
             status: confirmed
           - result: oct4-n86-n69
             id: T-090
+            verification: V3
+            confirmation: C3
+            status: confirmed
+      - url: https://github.com/jlevy/squares/issues/282#issuecomment-6027158015
+        date: '2026-10-06'
+        by: jlevy
+        kind: confirmation
+        reported:
+          - result: oct3-mixed-22
+            id: T-082
             verification: V3
             confirmation: C3
             status: confirmed
@@ -1838,3 +1869,162 @@ issues:
     close_when: >-
       Closed by its author on 25 September. A late reply stating T-044 at V3/C3 is owed and
       keeps it closed.
+
+  - number: 401
+    title: '18 new packings below record for n = 108–303: registration request (updated 2026-10-07)'
+    author: itsnaka
+    opened: '2026-10-07'
+    state: closed
+    kind: result-report
+    triage: done
+    summary: The original ten packings, n153 supplement and twelve changed first-update geometries are
+      registered and confirmed at V3/C3 in T-113, T-114 and T-115. Formal stacks 417 and 424 have merged;
+      the matching main deployment passed independent and hosted live verification, and the final author
+      reply closes the eighteen-count request. The n153 update is identical to its retained original
+      certificate and adds provenance only. Earlier geometries, evidence and finder/seed credit remain
+      historical; no optimality is established.
+    read_through: '2026-10-07T22:54:51Z'
+    results:
+    - key: ten-new-packings
+      claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(n) <= S_n for n = 108, 126, 129,
+        130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401
+        on 7 October 2026. Each S_n is the exact rational side in the retained packing facts, from about
+        0.0004126 to 0.0067047 below the earlier reported upper bound here. Each certificate supplies
+        rational centres and rational half-angle parameters for closed unit squares in the rational
+        container. The claim establishes only upper bounds, with no optimality or rigidity conclusion.
+        The author credits David Ellsworth’s records and tools and states human-directed Claude Opus
+        5.5 assistance.
+      source: body
+      register:
+      - T-113
+      evidence:
+      - E-squish-ten-packings-2026-10-07-report
+      - E-squish-ten-packings-2026-10-07-exact-replay
+      bead: think-mc4u
+    - key: n153-supplement
+      claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports s(153) <= 7250614903299225/562949953421312,
+        about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874
+        below the earlier reported upper bound here. Each certificate supplies rational centres and
+        rational half-angle parameters for closed unit squares in the rational container. The claim
+        establishes only upper bounds, with no optimality or rigidity conclusion. The author credits
+        David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
+      source: https://github.com/jlevy/squares/issues/401#issuecomment-6031977107
+      register:
+      - T-114
+      evidence:
+      - E-squish-n153-2026-10-07-report
+      - E-squish-n153-2026-10-07-exact-replay
+      bead: think-mc4u
+    - key: update-twelve-new-bounds
+      claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, reports rational packing upper bounds for
+        n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are new to the
+        submission and five have smaller certificates than the original release. Exact rational sides
+        and complete rational half-angle rosters are retained in the revision-specific acquisition packet.
+        The n153 certificate is identical to the earlier retained attachment and is an evidence/provenance
+        update only. These are source-reported feasible upper bounds, with no optimality or rigidity
+        claim.
+      source: https://github.com/jlevy/squares/issues/401#issuecomment-6043191866
+      register:
+      - T-115
+      evidence:
+      - E-squish-update-2026-10-07-report
+      - E-squish-update-2026-10-07-exact-replay
+      bead: think-gsno
+    beads:
+    - think-mc4u
+    - think-jai1
+    - think-8gzc
+    - think-oxvk
+    - think-gsno
+    answer_bead: think-crhh
+    replies:
+    - url: https://github.com/jlevy/squares/issues/401#issuecomment-6044898026
+      date: '2026-10-07'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: ten-new-packings
+      - result: n153-supplement
+      - result: update-twelve-new-bounds
+      outdated:
+      - The original PRs415/416 had not merged, and the first update was not registered on main. Both
+        formal import/confirmation stacks have now merged.
+    - url: https://github.com/jlevy/squares/issues/401#issuecomment-6046723077
+      date: '2026-10-07'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: ten-new-packings
+        id: T-113
+        verification: V3
+        confirmation: C3
+      - result: n153-supplement
+        id: T-114
+        verification: V3
+        confirmation: C3
+      - result: update-twelve-new-bounds
+        verification: V0
+        confirmation: C0
+      outdated:
+      - The first-update PRs421/423 were drafts at V0/C0 on main while final integration checks remained
+        pending. Both are now merged, with T-115 confirmed at V3/C3; the final reply must report the
+        matching deployment check.
+    - url: https://github.com/jlevy/squares/issues/401#issuecomment-6048513671
+      date: '2026-10-07'
+      by: jlevy
+      kind: final
+      reported:
+      - result: ten-new-packings
+        id: T-113
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: ten-new-packings
+        id: E-squish-ten-packings-2026-10-07-report
+        status: reviewed
+      - result: ten-new-packings
+        id: E-squish-ten-packings-2026-10-07-exact-replay
+        status: confirmed
+      - result: n153-supplement
+        id: T-114
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n153-supplement
+        id: E-squish-n153-2026-10-07-report
+        status: reviewed
+      - result: n153-supplement
+        id: E-squish-n153-2026-10-07-exact-replay
+        status: confirmed
+      - result: update-twelve-new-bounds
+        id: T-115
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: update-twelve-new-bounds
+        id: E-squish-update-2026-10-07-report
+        status: recorded
+      - result: update-twelve-new-bounds
+        id: E-squish-update-2026-10-07-exact-replay
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/401#issuecomment-6044898026
+      - https://github.com/jlevy/squares/issues/401#issuecomment-6046723077
+    close_when: All eighteen current counts have complete replay and appropriate scoped review recorded,
+      and the confirmation layer has actually merged and deployed. An accurate final author reply must
+      then identify the entries and assurance published on main. The progress reply is historical; a
+      draft confirmation record does not close this request.
+    notes: The author moved the next nine certificates to issue422 in https://github.com/jlevy/squares/issues/401#issuecomment-6047131959,
+      created2026-10-07T21:23:34Z. They remain a separate request and source revision. Both reviewed
+      first-update PRs421/423 merged atomically through formal stack424 into main2af487e7cfe85d84b2a67fa984e2d36a77548d97
+      at22:44UTC. Each final hosted head passed30 checks with26 documented inapplicable skips. The upper
+      actual209-file required push passed62steps879.49s, exit0, including all34 previously failing hosted
+      tests. The lower scoped61-step gate passed; its unavailable outer-wrapper exit remains unknown.
+      Historical failed runs and earlier progress replies remain preserved. The separate422 acknowledgement
+      is https://github.com/jlevy/squares/issues/422#issuecomment-6047406306. Matching Pages deployment6922702889/run37698041439
+      succeeded on main2af487e7. Both independent and hosted full published-site checks passed1234/1234
+      with strict TLS. Separate live bindings passed149/149 for all18cases/all36drawings/final T113/T114/T115
+      and sourcecredit/history; desktop/mobile layouts38/38 and representative visual inspection passed.
+      Final reply https://github.com/jlevy/squares/issues/401#issuecomment-6048513671 was posted before
+      manual issue closure; issue422 remains separate and open.
+    closed: '2026-10-07'

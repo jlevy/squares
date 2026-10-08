@@ -104,6 +104,7 @@ def test_an_entry_that_claims_no_bound_has_no_standing(records: view.Records) ->
     assert view.NO_STANDING not in view.STANDINGS
     assert not any("bound" in standing for standing in view.STANDINGS)
     assert set(without.values()) == {
+        "uniqueness",
         "rigidity",
         "case-exclusion",
         "restricted-optimality",
@@ -113,7 +114,9 @@ def test_an_entry_that_claims_no_bound_has_no_standing(records: view.Records) ->
         # recomputation of its counterexample, which claims no bound.
         "correction",
     }
-    assert len(without) == 10
+    # T-112, from 2026-10-06: the uniqueness of the optimal packing of eleven squares
+    # cites only its derived-structure entry, which claims no bound.
+    assert len(without) == 11
 
 
 def test_standing_agrees_with_the_recent_rows(

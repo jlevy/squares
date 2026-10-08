@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-05'
+last_reviewed: '2026-10-06'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -41,12 +41,42 @@ sources:
     lineage: builds-on-project
     note: >-
       11SquaresOptimal at f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c, announced by
-      Queuingtheorydotcom (@MathCompSciFTW) as an Astra-assisted global optimality proof.
+      Queuingtheorydotcom, who posts on X as @ManassehA06, as an Astra-assisted global
+      optimality proof (announced on 29 September as @MathCompSciFTW; the post is retained
+      in web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/announcement/).
       README and THIRD_PARTY_NOTICES credit jlevy/squares at c55726e1e885227f63110131c0a914665175ff89,
       Walter Trump's construction and David Ellsworth's reconstruction diagram; the
       announcement credits Kleddamag. No blanket license covers the collection.
       The public derivative has not had a fresh full geometric replay according to
       docs/PUBLICATION.md. Retained intake: web/n11-optimality-2026-09-29/.
+  - key: '[Queuingtheorydotcom 11SquaresFormalized 2026]'
+    authors: [Queuingtheorydotcom, ctjlewis, wand125, Gurevitch, Julian-JJ, Guzhou0806]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-06'
+    credit: Queuingtheorydotcom et al. after Levy, Daniel
+    lineage: builds-on-project
+    note: >-
+      11SquaresFormalized at cdc746ed907d258057c283aeb6d077cb2c27e349, the Lean 4
+      formalization of T-060's optimality proof. Queuingtheorydotcom, who posts on X as
+      @ManassehA06, announced on 6 October 2026 that it "has been formalized in lean thanks
+      to Astra and Claude", thanking Joshua Levy (@ojoshe), Kleddamag, wand125, Guzhou0806
+      and ctjlewis "for aiding in the process"; the post, the author's own and 1/n of a
+      thread, links this project's n = 11 page as its image credit and does not name the
+      repository. Joshua Levy quoted it that day
+      (https://x.com/ojoshe/status/2107513739222380935), calling it "a Lean formalization
+      from @ManassehA06 assembled over the last few days, with assistance from @ctjlewis
+      @guzhou0806 and others"; both posts are retained in the intake's
+      receipts/announcement/. Authors as read from ACKNOWLEDGEMENTS.md: Queuingtheorydotcom (the underlying
+      computer-assisted proof, and the formalization's development and integration),
+      EvolvingPrograms and ctjlewis (verification infrastructure and the complete replay),
+      wand125 (n11-optimality-lean, certificate checkers, generated proofs), Benjamin
+      Gurevitch (T03), Julian-JJ (running the proof on an HPC cluster) and Guzhou0806
+      (proof, transport and verification work); it credits jlevy/squares for the exact
+      packing formulas, Evan Daniel for the square-packing definitions, and Walter Trump
+      for the packing. No licence at the root; MIT notices for the incorporated wand125
+      and Daniel work. Retained intake: web/queuingtheorydotcom-n11-lean-2026-10-06/.
   - key: '[wand125 tools 2026]'
     authors: [wand125]
     year: 2026
@@ -1278,11 +1308,54 @@ sources:
       repository's README and NOTICE name; its ATTRIBUTION.md credits AI-produced research
       and Lean formalizations to an AI system, and the repository does not cite this
       project (web/chelokot-nagamochi-counterexample-2026-09-05/README.md).
+  - key: '[SQUISH ten packings 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth
+    lineage: independent
+    note: Nate Chaoweeraprasit (itsnaka), using SQUISH (SQuare-packing Using Iterative Shrink-Hopping).
+      The author credits David Ellsworth’s records and tools, including parse_svg_packing.py, and states
+      that solver, verification and issue were written with Claude Opus 5.5 under his direction, management,
+      review and steering. The repository has no LICENSE, so only derived packing facts and source metadata
+      are retained. Ten rational certificates at revision 07fe6dde1e5b67405a3076719b90e58e2882b677, committed
+      2026-10-07T02:28:19Z, in squish-submission-2026-10-06; issue jlevy/squares#401.
+  - key: '[SQUISH n153 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth
+    lineage: independent
+    note: 'Nate Chaoweeraprasit (itsnaka), using SQUISH (SQuare-packing Using Iterative Shrink-Hopping).
+      The author credits David Ellsworth’s records and tools, including parse_svg_packing.py, and states
+      that solver, verification and issue were written with Claude Opus 5.5 under his direction, management,
+      review and steering. The repository has no LICENSE, so only derived packing facts and source metadata
+      are retained. The n153 rational certificate attachment in issue #401 comment 6031977107, published
+      2026-10-07T05:59:18Z; its digest is in the packet manifest.'
+
+  - key: '[SQUISH update 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Couzo and Ellsworth
+    lineage: independent
+    note: Nate Chaoweeraprasit, using SQUISH, reports thirteen new or smaller certificates at revision
+      5e32bbd7028b6e3b869979278079cd37ed6770aa. The author names Francisco Couzo seeds at ten counts
+      and SQUISH seeds at three; per-count seed attribution is retained. David Ellsworth’s numerical checking tool is credited in the update. Human-directed Claude Opus
+      5.5 assistance is disclosed. No LICENSE is published; only attributed derived geometric facts
+      and brief claim quotations are retained. n153 is identical to the earlier attached certificate.
 # The surname each credited name is cited under, for the names `found_by` and
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being
 # guessed at.
 credited_names:
+  Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang
   David Ellsworth: Ellsworth
   David W. Cantrell: Cantrell
@@ -1305,6 +1378,7 @@ credited_names:
   Thomas Schadt: Schadt
   UnitSquare Project: UnitSquare Project
   Walter Trump: Trump
+  Benjamin Gurevitch: Gurevitch
   Ke Wang: Wang
   Can Li: Li
   Z.K. Shangitbayev: Shangitbayev

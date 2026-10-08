@@ -262,3 +262,15 @@ docs/project/reviews/review-2026-10-06-evand-exact-ceilings-fix-check.md
 # apostrophes and 38 straight double quotes retyped as curly, several inside quotations of
 # the records and source files it reviews. Same rule as the reviews above.
 docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md
+
+# The separately prompted review of the census control's fix for FC-1 (think-0uia), stored
+# byte-identical to the reviewer's output as the lane brief requires: SHA-256 e7b304ab...
+# Measured on a copy in directory mode with the pinned flowmark-rs 0.4.0 on 2026-10-06: 95
+# of its 232 lines change, reflow plus 54 straight apostrophes and 22 straight double
+# quotes retyped as curly and two characters escaped. Same rule as the reviews above.
+docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md
+
+# The separately prompted re-check of that review's fixes, stored the same way: SHA-256
+# 02423c85... Measured the same way on 2026-10-06: 93 of its 249 lines change, reflow
+# plus 57 straight apostrophes and 14 straight double quotes retyped as curly.
+docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.md

@@ -1,0 +1,33 @@
+{
+  "status": "OPTIMALITY_PROVED_WITH_NATIVE_CERTIFICATES",
+  "global_optimality_proved": true,
+  "trust_model": "lean_kernel_and_native_compiler",
+  "checked_modules": 7920,
+  "explicit_admissions": 0,
+  "audited_theorem_targets": 2234,
+  "native_certificate_axioms": 13308,
+  "source_repository": "EvolvingPrograms/11SquaresEvolving",
+  "source_commit": "1bf942a7af1ea330e95489d8997deebd4227ca71",
+  "source_run_id": 37414883750,
+  "source_run_attempt": 1,
+  "source_run_url": "https://github.com/EvolvingPrograms/11SquaresEvolving/actions/runs/37414883750",
+  "destination_repository": "Queuingtheorydotcom/11SquaresFormalized",
+  "destination_base": "b237948fa44eb8876ed87eeb21329ab5577c833c",
+  "preserved_source_git_objects": {
+    "ElevenSquare": "675fd364894163aa09e3616c346cb3b54b66b84b",
+    "Sqpack": "fba7b40418253025937a63324e716b37f2095a87",
+    "ElevenSquare.lean": "f336591c12142a4d56bf9c9a9ed3f49d5fc6ae09",
+    "Sqpack.lean": "1b4d5aa7bd6ee3f3a79165a7528e246f32cf7a92",
+    "lean-toolchain": "ba8ebf2dbaf6a668cd2a0e086186d6d569b69ff5",
+    "lakefile.lean": "43bd538bac590fd6b2fc29e19c8a8849580f10bf",
+    "lake-manifest.json": "89a374ea198e5f7a1fd8a9c5fc2250111a7cafb9"
+  },
+  "preserved_t03_tree": "59311c5ece4160ae3004cb5aa2b764f63fc5775a",
+  "artifact_sha256": {
+    "proof-evidence.zip": "ebe3c4388a90907225361927f4f3fab12912cd7a3ce8af1e2b69347939a3d104",
+    "proof-diagnostics.zip": "97e5287e3268598bfeb0480ab44ca3e4927407c1df47414d76b87c213a9342af"
+  },
+  "final_audit_uncompressed_sha256": "d66a07c2dcf8f8405dc46151ba500ba40c7de521ff64a28d8cbf772f12575788",
+  "verification_scope": "Successful CI replay and final audit, followed by independent source-hash, receipt-graph, and axiom-log reconciliation. No new local Lean replay or independent compiled-object rehash during integration.",
+  "runtime_scope": "Resumed successful run; no cold-build or macOS timing claim."
+}

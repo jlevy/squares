@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import dataclasses
 import functools
 import html
 import html.parser
@@ -768,7 +769,8 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     """Each case with a regularized view has one tile, drawn from that view: the
     regularized rendering reduced by `packing_svg`, the code that reduces a house
     rendering, so it differs from the house drawing only where the view moved a square
-    or changed a square's shade, and for every such case it does differ. Its name says
+    or changed a square's shade. At tile resolution, subpixel moves can round to the
+    same drawing; the audited equality set is pinned below. Its name says
     it is the regularized view and its number carries the layer's badge before it. Every
     other case is drawn from its house rendering, unbadged. Read from the generator's own
     markup, before the page's renderer normalizes it."""
@@ -786,6 +788,7 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     }
     assert list(drawn) == list(range(1, 325))
     mark = overview_sections.atlas_layer_mark()
+    identical_thumbnails: set[int] = set()
     for n in regularized:
         open_tag, drawing, number = drawn[n]
         assert ", regularized view, " in open_tag, n
@@ -793,7 +796,14 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         assert drawing == frontier.packing_svg(
             n, units=overview_sections.ATLAS_UNITS, root=frontier.REGULARIZED_RENDERINGS
         )
-        assert drawing != frontier.packing_svg(n, units=overview_sections.ATLAS_UNITS), n
+        assert (frontier.REGULARIZED_RENDERINGS / f"n-{n:03d}.svg").read_bytes() != (
+            frontier.RENDERINGS / f"n-{n:03d}.svg"
+        ).read_bytes(), n
+        if drawing == frontier.packing_svg(n, units=overview_sections.ATLAS_UNITS):
+            identical_thumbnails.add(n)
+    # n155's 337 snaps move at most 8.011e-13, with unchanged shades. Integer
+    # rounding to the 400-unit tile hides these moves while the full SVG differs.
+    assert identical_thumbnails == {155}
     for n in sorted(set(drawn) - set(regularized)):
         open_tag, drawing, number = drawn[n]
         assert "regularized" not in open_tag, n
@@ -2126,7 +2136,8 @@ def test_every_website_card_opens_a_place_the_record_cites(
     David Ellsworth's catalogue, the record's `[Kingbird]`, is there and leads the
     section, ahead of Friedman's original page and Evan Daniel's atlas, and its card
     counts exactly the results the register files under the catalogue's venue. No
-    website is on GitHub, and every address `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES`
+    GitHub website is an issue or discussion rather than a repository, and every address
+    `PROJECT_EXTRA_KEYS` and `SOURCE_VENUES`
     name is listed."""
     texts = [
         path.read_text(encoding="utf-8")
@@ -2138,7 +2149,9 @@ def test_every_website_card_opens_a_place_the_record_cites(
     for url, name, author, note in sites:
         whole = re.compile(re.escape(url) + r"""(?=[\s)\]>"'`|]|$)""", re.MULTILINE)
         assert any(whole.search(text) for text in texts), url
-        assert urlsplit(url).hostname != "github.com", url
+        parsed = urlsplit(url)
+        if parsed.hostname == "github.com":
+            assert re.fullmatch(r"/[^/]+/[^/]+/(?:issues|discussions)/[0-9]+", parsed.path), url
         assert all((name, author, note)), url
     assert [urlsplit(url).hostname for url, _, _, _ in overview_sections.CATALOGUE_SITES] == [
         "kingbird.myphotos.cc",
@@ -3053,18 +3066,28 @@ def test_every_result_shows_its_status_and_its_place_on_the_frontier(
     assert t060 in _row(results, "T-037")
     assert not overview_sections.is_superseded(by_id["T-036"])
     in_part = render_recent_results.SUPERSEDED_IN_PART
+    # Since 2026-10-06 T-112, the uniqueness corollary of T-060, implies its equality
+    # clause, so its mark names both.
     assert by_id["T-036"].supersessions == (
-        render_recent_results.Supersession(in_part, ("T-060",)),
+        render_recent_results.Supersession(in_part, ("T-060", "T-112")),
     )
     assert t060 in _row(results, "T-036")
     # A superseding result that no replay has confirmed is named as a report, in the
-    # register's words (`Supersession.words`): T-044's mark names T-082, at C1, since
-    # 2026-10-06 as "T-082 (reported)".
-    t082 = f'<a href="{overview_sections.result_url("T-082")}">T-082</a> (reported)'
+    # register's words (`Supersession.words`). T-044's mark named T-082, at C1, as
+    # "T-082 (reported)" until T-082's replays raised it to C3 on 6 October; since then it
+    # names it as a confirmed result, and the words of a report are held on the same mark
+    # with T-082 put back among the reports.
+    t082 = f'<a href="{overview_sections.result_url("T-082")}">T-082</a>'
     assert t082 in _row(results, "T-044")
+    assert f"{t082} (reported)" not in _row(results, "T-044")
     (mark,) = by_id["T-044"].supersessions
     shown = overview_sections.supersession_marks(by_id["T-044"])
     assert html.unescape(re.sub(r"<[^>]+>", "", shown)) == mark.words()
+    reported = mark._replace(reported=frozenset({"T-082"}))
+    before = dataclasses.replace(by_id["T-044"], supersessions=(reported,))
+    shown = overview_sections.supersession_marks(before)
+    assert f"{t082} (reported)" in shown
+    assert html.unescape(re.sub(r"<[^>]+>", "", shown)) == reported.words()
     for second in ("T-054", "T-055"):
         assert by_id[second].record["kind"] == "simplification"
         assert "second certificate" not in _row(results, second), second
@@ -3172,11 +3195,12 @@ def test_every_result_shows_its_kind(
     # own standing; `in part` leads the quiet text after it, so the line reads as the
     # register's does, and the status column is no wider than `superseded` (think-kmi4).
     t060 = f'<a href="{overview_sections.result_url("T-060")}">T-060</a>'
+    t112 = f'<a href="{overview_sections.result_url("T-112")}">T-112</a>'
     marks = overview_sections.supersession_marks(t036)
     assert marks == (
         '<span class="site-superseded"><span class="site-chip" '
         'data-standing="superseded-in-part">superseded</span> '
-        f'<span class="site-cell-quiet">in part by {t060}</span></span>'
+        f'<span class="site-cell-quiet">in part by {t060} and {t112}</span></span>'
     )
     (in_part,) = t036.supersessions
     assert html.unescape(re.sub(r"<[^>]+>", "", marks)) == in_part.words()

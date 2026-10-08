@@ -1,0 +1,6 @@
+/.lake/
+/.verification/
+__pycache__/
+*.pyc
+*.checkpoint.tmp
+/SOURCE_MANIFEST.json

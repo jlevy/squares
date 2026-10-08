@@ -233,6 +233,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-077](packing/frontier/RESULTS.md) | 20, 42, 70 | `V3` | `C3` | `S3` | `previously-published` | Three rectangle-density certificates in wand125/square-packing-bounds, raised on 2 October 2026, prove s(20) >= 49/10 = 4.9, s(42) >= 2731/400 = 6.8275 and s(70) >= 3451/400 = 8.6275. |
 | [T-079](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S3` | `apparently-novel` | s(12) >= 15680000/3949423 = 3.97020020 …, by re-weighting Evan Daniel’s 1,736 points. |
 | [T-080](packing/frontier/RESULTS.md) | 101, 102, 103, 104, 105 | `V3` | `C3` | `S3` | `previously-published` | A measure of points, segments and rectangles that wand125/square-packing-bounds published on 2 October 2026 proves s(101) >= 257/25 = 10.28. |
+| [T-082](packing/frontier/RESULTS.md) | 51, 52, 55, 58, 69, 70, 71, 73, 74, 75, 76, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96 | `V3` | `C3` | `S3` | `previously-published` | Twenty-two rectangle densities of wand125/square-packing-bounds, checked at coverage one and published on 3 October 2026, prove s(51) >= 373/50 = 7.46, s(52) >= 151/20 = 7.55, s(55) >= 966/125 = 7.728, s(58) >= 1581/200 = 7.905, s(69) >= 2153/250 = 8.612, s(70) >= 3459/400 = 8.6475, s(71) >= 1741/200 = 8.705, s(73) >= 8809/1000 = 8.809, s(74) >= 3547/400 = 8.8675, s(75) >= 223/25 = 8.92, s(76) >= 224/25 = 8.96, s(86) >= 19/2 = 9.5, s(87) >= 191/20 = 9.55, s(88) >= 48/5 = 9.6, s(89) >= 193/20 = 9.65, s(90) >= 389/40 = 9.725, s(91) >= 39/4 = 9.75, s(92) >= 977/100 = 9.77, s(93) >= 493/50 = 9.86, s(94) >= 248/25 = 9.92, s(95) >= 249/25 = 9.96 and s(96) >= 997/100 = 9.97. |
 | [T-083](packing/frontier/RESULTS.md) | 8, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323 | `V3` | `C3` | `S3` | `previously-published` | For every nonsquare integer 8 <= N <= 324, Karakuş 2026, Corollary 6.2 gives s(N) >= 1/2 + sqrt(N - floor(sqrt(N)) + 1/4), which is strictly above sqrt(N). |
 | [T-084](packing/frontier/RESULTS.md) | 8, 15, 24, 35, 48, 63, 80, 99, 120, 143, 168, 195, 224, 255, 288, 323 | `V3` | `C3` | `S3` | `previously-published` | s(k^2 - 1) = k for every integer k >= 3: Karakuş 2026, Corollary 1.2. |
 | [T-085](packing/frontier/RESULTS.md) | 10-324 | `V3` | `C3` | `S3` | `previously-published` | Lemma 1 of Nagamochi 2005 -- every square of side in (1, 1.01] inside [0,a] x [0,b] scores more than one against the paper’s unavoidable set -- is false for every container with a > 3 and b > 2. |
@@ -256,9 +257,12 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-109](packing/frontier/RESULTS.md) | 30 | `V3` | `C3` | `S3` | `previously-published` | A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it declares and published on 6 October 2026, proves s(30) >= 11767/2000 = 5.8835. |
 | [T-110](packing/frontier/RESULTS.md) | 39 | `V3` | `C3` | `S3` | `previously-published` | A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it declares and published on 6 October 2026, proves s(39) >= 133/20 = 6.65. |
 | [T-111](packing/frontier/RESULTS.md) | 41 | `V3` | `C3` | `S3` | `previously-published` | A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net it declares and published on 6 October 2026, proves s(41) >= 271/40 = 6.775. |
+| [T-113](packing/frontier/RESULTS.md) | 108, 126, 129, 130, 154, 155, 180, 209, 238, 303 | `V3` | `C3` | `S3` | `previously-published` | Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129, 130, 154, 155, 180, 209, 238 and 303 in the ten-packing release submitted on jlevy/squares#401 on 7 October 2026. |
+| [T-114](packing/frontier/RESULTS.md) | 153 | `V3` | `C3` | `S3` | `previously-published` | Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <= 7250614903299225/562949953421312, about 12.8796793733329640, in the supplement to jlevy/squares#401 on 7 October 2026, about 0.0019874 below the earlier reported upper bound here. |
+| [T-115](packing/frontier/RESULTS.md) | 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263 | `V3` | `C3` | `S3` | `previously-published` | Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes feasible rational packing upper bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
+| [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
-| [T-082](packing/frontier/RESULTS.md) | 51, 52, 55, 58, 69, 70, 71, 73, 74, 75, 76, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96 | `V0` | `C1` | `S3` | `previously-published` | wand125/square-packing-bounds reports 22 rectangle-density certificates published on 3 October 2026: s(51) >= 373/50 = 7.46, s(52) >= 151/20 = 7.55, s(55) >= 966/125 = 7.728, s(58) >= 1581/200 = 7.905, s(69) >= 2153/250 = 8.612, s(70) >= 3459/400 = 8.6475, s(71) >= 1741/200 = 8.705, s(73) >= 8809/1000 = 8.809, s(74) >= 3547/400 = 8.8675, s(75) >= 223/25 = 8.92, s(76) >= 224/25 = 8.96, s(86) >= 19/2 = 9.5, s(87) >= 191/20 = 9.55, s(88) >= 48/5 = 9.6, s(89) >= 193/20 = 9.65, s(90) >= 389/40 = 9.725, s(91) >= 39/4 = 9.75, s(92) >= 977/100 = 9.77, s(93) >= 493/50 = 9.86, s(94) >= 248/25 = 9.92, s(95) >= 249/25 = 9.96 and s(96) >= 997/100 = 9.97. |
 | [T-087](packing/frontier/RESULTS.md) | 37, 61 | `V3` | `C1` | `S3` | `previously-published` | Bašić and Slivková 2018, Theorem 7 with Proposition 8: no more than B(x) unit squares fit in a square of side x, where B(x) counts the points of an equilateral-lattice piercing set, floor(x)(m + 2) plus floor((m + 2)/2) when frac(x) >= 1/2, with m = floor((2/sqrt 3)(x + 1 - 2 sqrt 2)). |
 | [T-046](packing/frontier/RESULTS.md) | 18, 19, 20, 26, 27, 28, 29, 30, 31, 37, 38, 39, 40, 41, 42, 43, 44, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 86, 88, 89, 90, 91, 94, 95 | `V0` | `C0` | `S3` | `previously-published` | wand125/square-packing-bounds reports one standing rectangle-density certificate for each of 48 counts from n = 18 to n = 95, added or raised between 26 and 28 September 2026. |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V3` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
@@ -312,7 +316,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 209 | 45 confirmed; 33 refuted; 63 blocked; 19 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 187 | 63 accepted; 38 rejected; 58 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 111 | 111 registered, 82 by others |
+| Frontier results | 115 | 115 registered, 85 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -572,6 +576,10 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
+| [SQUISH update: mathematical and semantic binding review](docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md) | dated review record | record | retained | — |
+| [Mathematics Review: Eleven SQUISH Upper-Bound Packings](docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md) | dated review record | record | retained | — |
+| [Correctness and Security Review: SQUISH #401 Import](docs/project/reviews/review-2026-10-06-squish-import-correctness.md) | dated review record | record | retained | — |
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
@@ -586,6 +594,9 @@ case or experiment separately.
 | [Eleven-Square Optimality Proof: The Delta for the Original Contributor](docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md) | dated review record | record | retained | — |
 | [Unified adversarial review of the tentative optimality proof for eleven squares](docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md) | dated review record | record | retained | — |
 | [Changes in v0.1.4 of the Eleven-Square Optimality Review, for Its W2 Exposition Review](docs/project/reviews/review-2026-10-04-n11-optimality-paper-v0.1.4-changes.md) | dated review record | record | retained | — |
+| [Review of the Eleven-Square Optimality Paper, v0.1.6](docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md) | dated review record | record | retained | — |
+| [Statement Audit: the Lean Formalization of Eleven-Square Optimality](docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md) | dated review record | record | retained | — |
+| [Adversarial Review: the Import of the Lean Formalization of Eleven-Square Optimality](docs/project/reviews/review-2026-10-06-n11-lean-formalization-adversarial.md) | dated review record | record | retained | — |
 | [wand125 Certificates of 3 and 4 October: Review of 28 Mixed Rectangle-Measure Bounds From `n = 42` to `n = 95`](docs/project/reviews/review-2026-10-05-wand125-october-4-certificates.md) | dated review record | record | retained | — |
 | [wand125 Certificates of 5 October and the Independent Replays: Review of `s(67) ≥ 212/25`, `s(84) ≥ 9411/1000` and the sqverify-fast Route](docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md) | dated review record | record | retained | — |
 | [Review: Couzo’s Revision of 3 October 2026, Seven Lower Sides From `n = 208` to `306` (T-092)](docs/project/reviews/review-2026-10-05-couzo-6042c56.md) | dated review record | record | retained | — |
@@ -593,6 +604,8 @@ case or experiment separately.
 | [Fix Check: The Review of T-098, Evan Daniel’s Exact Optima](docs/project/reviews/review-2026-10-06-evand-exact-optima-fix-check.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Exact Certificates as Verified Ceilings at 77 Counts (T-118)](docs/project/reviews/review-2026-10-06-evand-exact-ceilings.md) | dated review record | record | retained | — |
 | [Fix Check: Evan Daniel’s Exact Certificates as Verified Ceilings (T-118)](docs/project/reviews/review-2026-10-06-evand-exact-ceilings-fix-check.md) | dated review record | record | retained | — |
+| [Review: The Uniqueness of Trump’s Eleven-Square Packing (T-102)](docs/project/reviews/review-2026-10-06-n11-uniqueness-adversarial.md) | dated review record | record | retained | — |
+| [Fix Check: The Uniqueness of Trump’s Eleven-Square Packing (T-112)](docs/project/reviews/review-2026-10-06-n11-uniqueness-fix-check.md) | dated review record | record | retained | — |
 | [Proof Review: Guzhou0806’s R071, `s(17) > 18641771/4000000 = 4.66044275`](docs/project/reviews/review-2026-10-05-guzhou-r071.md) | dated review record | record | retained | — |
 | [Review: wand125’s `s(18) ≥ 588/125` and `s(19) ≥ 48229/10000` on Declared Nets (T-099, T-100)](docs/project/reviews/review-2026-10-06-wand125-finer-net-n18-n19.md) | dated review record | record | retained | — |
 | [Review: wand125’s Ten Declared-Net Certificates of 6 October (T-108 to T-117)](docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md) | dated review record | record | retained | — |
@@ -601,6 +614,8 @@ case or experiment separately.
 | [sqverify-fast Declared Nets: Re-Check of the Fixes for DR-1 to DR-3 (`36b52538a`) and the Proposed Flip](docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md) | dated review record | record | retained | — |
 | [Review: wand125’s Checker on ValidTilt9 (`T-081`), Lane R3](docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md) | dated review record | record | retained | — |
 | [Review of the sqverify-fast format T route: census rows and controls for T-068’s 34 rectangle certificates](docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md) | dated review record | record | retained | — |
+| [sqverify-fast Census `--control`: Review of the FC-1 Fix (`9f36ede38`)](docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md) | dated review record | record | retained | — |
+| [sqverify-fast Census `--control`: Re-check of the FC-1 Fix Response (`f1ddc2379`)](docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.md) | dated review record | record | retained | — |
 | [Proof Review: squarepacker’s v1.1, `s(12) ≥ 7943/2000 = 3.9715`](docs/project/reviews/review-2026-10-05-s12-v11-certificate.md) | dated review record | record | retained | — |
 | [Integration of GPT-6 Pro’s Adversarial Review of the Eleven-Square Optimality Proof](docs/project/reviews/review-2026-10-03-n11-gpt6-pro-review-integration.md) | dated review record | record | retained | — |
 | [Eleven-Square Optimality Paper: Adversarial Review](docs/project/reviews/review-2026-10-03-n11-optimality-paper-adversarial.md) | dated review record | record | retained | — |
@@ -668,6 +683,7 @@ case or experiment separately.
 | [Plan: Transfer Recent Optimality Methods to n = 17 and Other Low Cases](docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md) | implementation plan | current | transient | — |
 | [Plan: Release Assets on Demand, and One Rule per Date](docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md) | implementation plan | current | transient | — |
 | [N11 Optimality Review — Intuition and Visual Structure](docs/project/reviews/review-2026-09-30-n11-explainer-intuition.md) | dated review record | record | retained | — |
+| [Research: Publishing GitHub Work from Codex Cloud](docs/project/research/research-2026-10-07-codex-cloud-github-publication.md) | research synthesis | record | retained | — |
 | [Research: s(12) Beyond Rescaling](docs/project/research/research-2026-10-02-s12-beyond-rescaling.md) | research synthesis | record | retained | — |
 | [Research: Exact Arithmetic and Verifier Performance](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md) | research synthesis | record | retained | — |
 | [Research: Where the Authors’ Measure Checkers Spend Their Time](docs/project/research/research-2026-10-02-author-checker-profile.md) | research synthesis | record | retained | — |
@@ -1781,6 +1797,16 @@ mathematical composition, including all 2,180 exclusions, ten capture nodes, loc
 isolation, and the exact witness.
 The publisher’s four cached final-state digests are stale; our acceptance rests on fresh
 source-bound geometry, not those cached results.
+On 2026-10-06 the
+[Lean 4 formalization](packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md)
+of the proof, `ElevenSquare.optimality` in Queuingtheorydotcom/11SquaresFormalized,
+announced as formalized with Astra and Claude, entered the record as the source’s
+reported proof-assistant evidence.
+The statement audit reads its theorem as exactly T-060’s claim; the source reports that
+its full verification run, resumed from earlier receipts, passed with Lean’s compiler
+trusted for 13,308 `native_decide` axioms; and the statement closure and upper half were
+built here. It moves no rung until a complete build the record can rest on and a human
+expert’s review of the formalization are retained.
 T-037’s verified $s(11) > 31/8$ and T-059’s reported row-minimum equality retain their
 separate scopes. PR 246 merged with the verified result; the next handoff is a bounded
 fresh-ensemble replay entry point.

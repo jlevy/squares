@@ -21,8 +21,10 @@ mixed certificates at their counts.
 
 What was checked here is SHA-256 digests, Git blob ids, the exact premises the audit below
 recomputes from the retained bytes, and every check the replay makes before its first
-angle, run on each pinned tarball. Nothing was replayed: no direction of any of the 22 has
-been decided here.
+angle, run on each pinned tarball. On 6 October 2026 `sqverify-fast`, this repository’s
+clean-room measure verifier, decided the 22 retained candidates at all 201 net directions
+([the independent replays](#the-independent-replays)); the source’s own checker has not
+been run here on any of the 22.
 
 ## Source and Pin
 
@@ -283,7 +285,58 @@ loaded runner. For eight 4-core runners it gives:
 
 Each runner runs its `mixed-replay` commands one after another, then commits and pushes
 its receipts; `mixed-merge NAME` is run for each certificate once every range of it has
-arrived. No replay has been launched.
+arrived. No replay of the source’s checker has been launched.
+
+## The Independent Replays
+
+On 6 October 2026 `devtools.sqverify_fast_census --family mixed` ran `sqverify-fast` on
+each retained `candidate.json.gz` at all 201 net directions, at the threshold the
+certificate declares, and then ran its two mutants scaled below coverage one at the
+least-bound direction.
+All 22 are `VERIFIED`, and the control refused both mutants of each; the receipts are in
+[`benchmarks/measure-verifier/census-mixed/`](../../../benchmarks/measure-verifier/census-mixed/README.md),
+and each certificate’s evidence entry `E-…-sqverify-fast-replay` states its run.
+At `mixed_n96_L997` the first control failed closed: the mutant scaled to $99/100$
+verified too, at the one direction that control runs it, the certificate having more
+than 1% to spare there (think-0uia). Its receipt is kept as
+`mixed_n96_L997.control-failed-v1.json`. The repaired control runs that mutant at every
+net direction and refused it at 187 of the 201, each at a centre in the per-bin
+domain whose exact capture is below 1; its receipt, `mixed_n96_L997.control.json`, is
+the census’s first of kind `sqverify-fast-control/v2`.
+The build is main’s crate source `d97758bb…`, which the
+[soundness review of 6 October](../../../../docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md)
+accepted for standard-net certificates; all 22 are on the standard net.
+
+| Certificate | Nodes | Least certified bound (index) | CPU seconds | Threads |
+| --- | ---: | --- | ---: | ---: |
+| `mixed_n51_L746` | 68,387,056 | $1.000000000282108$ (124) | 940 | 2 |
+| `mixed_n52_L755` | 72,804,986 | $1.0000000001604281$ (126) | 1,108 | 2 |
+| `mixed_n55_L7728` | 64,084,694 | $1.0000000008205456$ (106) | 1,023 | 2 |
+| `mixed_n58_L7905` | 32,915,022 | $1.0000000004229204$ (86) | 556 | 2 |
+| `mixed_n69_L8612` | 87,975,724 | $1.0000000004388068$ (142) | 1,859 | 2 |
+| `mixed_n70_L86475` | 87,628,026 | $1.0000000002290894$ (170) | 1,754 | 2 |
+| `mixed_n71_L8705` | 81,498,764 | $1.0000000006115706$ (172) | 1,678 | 2 |
+| `mixed_n73_L8809` | 76,715,880 | $1.0000000002704519$ (188) | 1,820 | 2 |
+| `mixed_n74_L88675` | 76,705,524 | $1.0000000001923686$ (161) | 1,741 | 2 |
+| `mixed_n75_L892` | 34,025,184 | $1.0000000001483238$ (94) | 716 | 2 |
+| `mixed_n76_L896` | 37,661,682 | $1.0000000001194138$ (177) | 700 | 2 |
+| `mixed_n86_L950` | 79,636,976 | $1.0000000005619347$ (188) | 1,366 | 2 |
+| `mixed_n87_L955` | 74,542,782 | $1.000000000093562$ (34) | 1,395 | 2 |
+| `mixed_n88_L960` | 70,872,248 | $1.00000000024589$ (189) | 1,342 | 2 |
+| `mixed_n89_L965` | 85,890,638 | $1.0000000003462486$ (135) | 1,533 | 2 |
+| `mixed_n90_L9725` | 91,021,318 | $1.0000000001882379$ (199) | 2,001 | 2 |
+| `mixed_n91_L975` | 92,358,716 | $1.0000000001703604$ (171) | 2,069 | 2 |
+| `mixed_n92_L977` | 29,174,516 | $1.0000000019666107$ (101) | 551 | 2 |
+| `mixed_n93_L986` | 75,386,950 | $1.0000000005644345$ (119) | 1,609 | 2 |
+| `mixed_n94_L992` | 47,197,040 | $1.0000000001531857$ (101) | 1,056 | 2 |
+| `mixed_n95_L996` | 45,979,446 | $1.0000000007947085$ (166) | 907 | 2 |
+| `mixed_n96_L997` | 59,643,606 | $1.0000000000057894$ (139) | 979 | 2 |
+
+They took 8.0 CPU-hours in all, at two threads on a shared four-core host. The
+verifier was written without opening the source’s checker and shares no code with it,
+so these are independent decisions of coverage by the same method, not reproductions of
+the source’s records. The source’s checker remains unreplayed here; the range commands
+above would add that reproduction.
 
 ## Where the Requests and the Retained Files Differ
 
@@ -307,8 +360,8 @@ The [review of these certificates](../../../../docs/project/reviews/review-2026-
 
 ## Limitations
 
-- **Nothing is replayed.** Coverage is decided by the source’s C++ alone, and no direction
-  of any of the 22 has been run here.
+- **The source’s checker is not replayed.** Coverage was decided here by `sqverify-fast`
+  alone; the source’s C++ and its axis tables have not run on any of the 22.
 - **The bundles are pinned and not held.** A replay needs each tarball from the source at
   the pinned revision, with the digest above. `--via git` fetches it by Git.
 
