@@ -31,6 +31,10 @@ SOURCE = r"""{{FRONT_MATTER}}
 A verified packing in a container of side $L$ establishes $s(n) \le L$.
 See the [paper front](../paper_front.py) and the
 [lower-bound paper]({{PAPER:n11-lower-bounds-explainer}}).
+
+## Version History
+
+{{VERSION_HISTORY}}
 """
 
 
@@ -46,7 +50,15 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
     assert_self_contained(html)
     assert paper.FRONT.series is None
     assert paper.FRONT.source is None
-    assert paper.FRONT.version == release.PACKING_METHODS_EDITION == "Draft v0.1.0"
+    assert paper.SLUG == "square-packing-methods-survey"
+    assert paper.SITE_PATH == "papers/square-packing-methods-survey.html"
+    assert (paper.ARTICLE.name, paper.SHELL.name, paper.STYLE.name) == (
+        "packing-methods-article.md",
+        "packing-methods-shell.html",
+        "packing-methods.css",
+    )
+    assert paper.FRONT.history == "version-history"
+    assert paper.FRONT.version == release.PACKING_METHODS_EDITION == "v0.1.0"
     assert paper_front.revised(paper.FRONT) == release.PACKING_METHODS_REVISED
     assert "Part IV" not in html
     assert "the n = 11 series" not in markdown
@@ -58,10 +70,14 @@ def test_the_tutorial_uses_the_shared_paper_front_and_its_own_identity(
         "dates",
     ]
     assert [chip.href for chip in structure.chips] == [
-        "packing-methods.md",
-        "packing-methods.pdf",
+        "square-packing-methods-survey.md",
+        "square-packing-methods-survey.pdf",
         "https://github.com/jlevy/squares",
     ]
+    version = next(line for line in structure.credits if line.kind == "version")
+    assert version.text == "v0.1.0 (version history)"
+    assert version.links == (("version history", "#version-history"),)
+    assert version.bold == ()
     assert structure.h1 == ("How Record Square Packings Are Found",)
     assert structure.title == paper.TITLE
     assert structure.published == structure.modified == "2026-10-08"
@@ -116,7 +132,15 @@ def test_the_canonical_manuscript_renders_through_the_registered_interface() -> 
     assert markdown.startswith(f"# {paper.TITLE}\n")
     assert "{{" not in markdown
     assert 'class="kpress-math' in html
-    assert "packing-methods.pdf" in html
+    assert "square-packing-methods-survey.pdf" in html
+    assert 'id="version-history"' in html
+    history = markdown.partition("## Version History\n")[2]
+    assert history
+    assert release.PACKING_METHODS_HISTORY[0].version == "v0.1.0"
+    for entry in release.PACKING_METHODS_HISTORY:
+        assert (
+            f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}" in history
+        )
 
 
 def test_cli_checks_the_same_files_and_assets_it_publishes(
@@ -136,7 +160,7 @@ def test_cli_checks_the_same_files_and_assets_it_publishes(
     assert markdown.is_file()
     assert paper.main([*args, "--check"]) == 0
     page.write_text(page.read_text(encoding="utf-8") + "stale", encoding="utf-8")
-    with pytest.raises(SystemExit, match="stale packing-methods output"):
+    with pytest.raises(SystemExit, match="stale square-packing-methods-survey output"):
         paper.main([*args, "--check"])
     with pytest.raises(SystemExit) as refusal:
         paper.main([*args, "--check", "--pdf"])

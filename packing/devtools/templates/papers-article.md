@@ -22,8 +22,8 @@ proof, [T-060](all-results.html#t-060), which is machine-checked and reviewed he
 its review record pending (`V3/C3`). T-060 settles the case; Part III explains it.
 
 The [square-packing tutorial](tutorial.html) introduces the problem and its mathematics.
-[How Record Square Packings Are Found](papers/packing-methods.html) follows the
-discovery process from a seed through search and local refinement to a certified upper
-bound, with examples from published record packings.
+[How Record Square Packings Are Found](papers/square-packing-methods-survey.html)
+follows the discovery process from a seed through search and local refinement to a
+certified upper bound, with examples from published record packings.
 
 {{PAPER_CARDS}}

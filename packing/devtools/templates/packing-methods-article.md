@@ -21,6 +21,7 @@ improvement in its last decimal places can be a different contribution.
 7. [Turning Coordinates Into a Bound](#turning-coordinates-into-a-bound)
 8. [Reading the Record](#reading-the-record)
 9. [Vocabulary and Further Reading](#vocabulary-and-further-reading)
+10. [Version History](#version-history)
 
 ## The Problem and the Kind of Result
 
@@ -198,31 +199,41 @@ rearrangement; adding pieces supplies a harder starting state.
 SQUISH’s original release says nine of its ten original packings began from its own
 neighboring certified packings this way, while $n=126$ began with nearby search from the
 published record. A supplement added $n=153$. Later reports give explicit deletion
-chains: $110\to108$ and $182\to180$ remove two squares, while $155\to154$ and
-$239\to238$ remove one, followed by nearby search and polishing
+chains: $182\to180$ removes two squares, while $155\to154$ and $239\to238$ remove one,
+followed by nearby search and polishing
 ([original release](../../resources/web/squish-401-2026-10-07/README.md);
 [first update](../../resources/web/squish-401-update-2026-10-07/README.md);
 [second update](../../resources/web/squish-422-second-update-2026-10-07/README.md)).
 
-**Grafting** installs a useful subpacking in a target-count arrangement.
-Reported lineages include Couzo $102\to123$, Couzo $105\to126$, and Kingbird $41\to88$.
-For the last, the author says he replaced a component of the older $n=88$ record with
-the $n=41$ packing improved in January 2026. The arrow names the seed component and the
-resulting total count; it does not mean that 41 squares alone became 88. **Repeated
-reuse** then carried SQUISH’s reported $n=88$ packing into $n=207$, $236$, and $302$
-([source explanation](https://github.com/jlevy/squares/issues/422);
-[retained second update](../../resources/web/squish-422-second-update-2026-10-07/README.md)).
+**Grafting** installs a useful subpacking in a target-count arrangement; **carving**
+reduces a substantially larger arrangement to a target-count seed.
+The five operations below distinguish what structure the author reports transferring.
+Nate Chaoweeraprasit, using SQUISH, reported all the resulting poses; the names in the
+lineage column credit the seed contributors.
+An arrow names the parent or component count and the resulting total count.
+For a graft, it does not mean that the smaller packing alone supplies all the target’s
+squares.
 
-**Carving** starts farther away in count.
-The reported $297\to263$ construction carved down Couzo’s large packing, then used
-nearby search and a final squeeze.
-The squeeze tried roughly 120 random perturbations, at amplitudes $10^{-5}$ to $10^{-3}$
-times the side, each followed by polishing.
-It improved $n=263$ by about $4\times10^{-10}$; at the other eight counts, it found no
-improvement above $10^{-11}$
+| Operation | Author-reported lineage and source | Stage and transferred structure |
+| --- | --- | --- |
+| Neighbor-count deletion | SQUISH $110\to108$; Francisco Couzo $180\to179$ ([second update](../../resources/web/squish-422-second-update-2026-10-07/README.md)) | Seed construction: remove two squares or one, respectively, preserving the rest at the old side; then search nearby and polish. |
+| Component grafting | Couzo $102\to123$, $105\to126$, and $210\to239$ ([first update](../../resources/web/squish-401-update-2026-10-07/README.md)) | Seed construction: transplant a useful component into a target-count catalogue packing before further optimization. |
+| Updating an inherited core | Kingbird catalogue $41\to88$, using the Schadt/Ellsworth core refined in January 2026 ([core history](../../resources/web/kingbird-squares-in-squares-compared-2026-08-22.md); [second update](../../resources/web/squish-422-second-update-2026-10-07/README.md)) | Seed construction: replace the older core in the $n=88$ construction with its newer version, then refine the resulting packing. |
+| Reusing a newly improved component | SQUISH $88\to207,236,302$ ([second update](../../resources/web/squish-422-second-update-2026-10-07/README.md)) | Seed construction: reuse the newly improved $n=88$ component in three larger target packings, propagating one gain into several counts. |
+| Carving a larger construction | Couzo $297\to263$ ([second update](../../resources/web/squish-422-second-update-2026-10-07/README.md)) | Seed construction, exploration, then refinement: reduce the larger arrangement, search nearby, and apply a final squeeze. |
+
+For the inherited core, the author explicitly says the $n=41$ improvement postdated the
+older $n=88$ construction
+([lineage explanation](https://github.com/jlevy/squares/issues/422)). The final squeeze
+is a separate local search stage: roughly 120 random perturbations, at amplitudes
+$10^{-5}$ to $10^{-3}$ times the side, each followed by polishing.
+It improved $n=263$ by about $4\times10^{-10}$; at the other eight counts in the second
+update, it found no improvement above $10^{-11}$
 ([reported protocol](https://github.com/jlevy/squares/issues/422)).
 
 These are author-reported lineages.
+Independent exact replay confirms feasibility of the resulting poses; it does not
+reconstruct the surgeries or reproduce the searches.
 The packets do not disclose which squares were removed, graft interfaces, carving
 decisions, or the optimizer behind nearby search and squeeze.
 Francisco Couzo supplied many of the seeds: his September release contains 49 improved
@@ -335,8 +346,9 @@ from randomness. These histories separate the seed’s contribution from the ann
 refiner
 ([Kingbird comparison](../../resources/web/kingbird-squares-in-squares-compared-2026-08-22.md)).
 
-Griffin Casson’s September 2026 pipeline ran 8,192 single-precision GPU chains for
-twelve minutes on an RTX 3070, seeded from published records, with twelve CPU polishers.
+Griffin Casson’s September 2026 release gives a reproduction command with 8,192
+single-precision GPU chains, a twelve-minute search setting, and twelve CPU polishers.
+The command seeds the search from published records; the reported GPU was an RTX 3070.
 Annealing supplied candidates; sequential linear programming refined them.
 It found new arrangements at $n=106$ and $123$. Direct local refinement of published
 records supplied another 37 reported numerical improvements
@@ -453,11 +465,20 @@ minimum. Singular branches can require more general first-order conditions, and
 satisfying KKT alone does not prove a minimum
 ([tutorial’s stationarity conditions](../../../TUTORIAL.md#contact-graphs-stationary-branches-and-rattlers)).
 
-Daniel’s equilibrium LP identifies contacts that can carry force.
+Daniel’s equilibrium LP identifies the **load-bearing contacts**: contacts that can
+carry positive force in at least one nonnegative equilibrium.
+Squares with no such contact are force-free; they include **rattlers**, squares with
+room for local motion.
 His solver projects the pose onto contact equations and takes high-precision Newton
 steps in the KKT system: each step uses a linear approximation to correct the current
-solution. Squares outside the force-bearing set are moved to gain clearance where
-possible.
+solution. When contact equations are redundant, he selects an independent subset and
+checks the omitted equations afterwards.
+Flat motions, such as sliding between parallel sides, can make the Newton system
+singular. He freezes the corresponding variables during the solve, then checks their
+omitted stationarity equations.
+Force-free squares are moved to gain clearance where possible; those that cannot gain
+positive clearance are brought into the contact system
+([solver’s active-set treatment](../../resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md)).
 
 Corner-to-corner touches require additional care: the squares can separate along
 different branches. Daniel sets these alternatives apart from the smooth contact
@@ -539,6 +560,25 @@ the other two.
 
 ## Reading the Record
 
+### Methods and record examples
+
+The eight categories below place each method at its stage in the workflow.
+Examples retain their finder and source credit, including historical records that have
+since been improved.
+A source’s description of discovery or refinement and an independent feasibility check
+answer different questions.
+
+| Method family | Stage and mechanism | Source, finder, and representative result |
+| --- | --- | --- |
+| Geometric construction and composition | Seed construction or a complete construction: design diagonal strips, tilted cores, boundary extensions, or combinations of smaller packings; optimize the remaining parameters. | Frits Göbel’s strip families and Walter Trump’s 1979 $n=11$ construction are historical examples ([Friedman survey](../../resources/web/friedman-ds7-survey-2009-html.md)). |
+| Billiard / inflation search | Exploration and refinement: translate and rotate squares by random admissible endpoint moves, increase their common size, adapt move amplitudes, and shake the whole configuration when jammed. | Thierry Gensane and Philippe Ryckelynck’s 2004 $n=29$ packing set a historical record. Their $n=37$ result was a reported improvement but did not beat Cantrell’s earlier packing ([published algorithm](../../resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md); [catalogue history](../../resources/web/kingbird-squares-in-squares-compared-2026-08-22.md)). |
+| GPU simulated annealing | Exploration: run many stochastic chains in parallel from random or selected seeds; refine promising outputs separately. | Thomas Schadt found the $n=29$, $51$, and $55$ structures with his annealer. David Ellsworth used its modified GPU version to refind and refine the latter two, then analytically optimized the packings. The energy, proposal distribution, and full cooling schedule remain unpublished ([record histories](../../resources/web/kingbird-squares-in-squares-compared-2026-08-22.md)). |
+| Sequential linear programming (SLP) | Local refinement: repeatedly linearize angle-dependent separation constraints and optimize centres, angles, and side; restart from perturbed poses when useful. | Griffin Casson’s September 2026 release reports two new arrangements, at $n=106,123$, from GPU annealing followed by SLP, and 37 numerical improvements from SLP directly on catalogue packings ([first-party method and results](../../resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md)). |
+| Surgery followed by basin hopping | Seed construction, exploration, then refinement: delete, add, graft, or carve; perturb and locally optimize the transformed seed, then polish. | Nate Chaoweeraprasit’s SQUISH releases report neighboring-count seeds and explicit component lineages. The resulting rational packings have independent exact checks here; detailed hop mechanics remain undisclosed ([original packet](../../resources/web/squish-401-2026-10-07/README.md); [update lineages](../../resources/web/squish-422-second-update-2026-10-07/README.md)). |
+| Contact-equation and stationarity refinement | Local refinement: identify geometric contacts and solve their equations together with stationarity conditions, removing numerical slack near an existing arrangement. | Ellsworth’s analytic optimization is an antecedent of Evan Daniel’s contact/KKT solver. Daniel’s 5 October 2026 batch supplied 48 smaller certified sides, principally for existing arrangements; exact rational certification follows the numerical solve ([analytic method](../../resources/web/kingbird-squares-in-squares-analytic-minimization.md); [batch report](../../resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md)). |
+| Adaptive search with grouped-angle refinement | Exploration and local refinement, as reported: search the full packing, then refine groups sharing an angle. The adaptive algorithm and grouping rule are unspecified. | Joost de Winter’s $n=211$ release names those stages and interval-verified export. Its checker and interval boxes are unpublished; separate exact and interval checks here establish feasibility of the supplied pose ([disclosure and independent checks](../../resources/web/de-winter-square-packing-211-2026-09-16/README.md)). |
+| Discovery method undisclosed | Discovery remains unknown; exported coordinates supply a witness for separate feasibility checks. They do not identify the search algorithm. | Francisco Couzo’s September 2026 release supplies 49 improved packings, with subsequent revisions. The source names no search method or checker; exact and interval checks here establish safe bounds independently ([provenance and certification](../../resources/web/franciscouzo-square-packing-2026-09-27/README.md)). |
+
 ### Discovery gains and numerical gains
 
 The releases below combine the four jobs in different ways.
@@ -570,8 +610,9 @@ account of how the new seed reached the improved result
 ### Rare hits and scoped failures
 
 A basin can be rare under a particular search.
-Ellsworth’s retained $n=51$ statistics classify 3,004 annealer outcomes: only four
-refined to the record pattern.
+Ellsworth’s retained $n=51$ statistics describe an RTX 3080 Ti running 65,536 GPU search
+threads.
+Of 3,004 categorized annealer outcomes, only four refined to the record pattern.
 The source estimates 4.917 GPU hours per hit on its tuned RTX 3080 Ti setup.
 This measures that implementation’s sampling and refinement, rather than the geometric
 volume of a basin or a portable cost for another search
@@ -581,12 +622,24 @@ Negative experiments help distinguish missing exploration from weak refinement.
 This repository’s fixed-side shrink-and-re-anneal attempts, using single-square moves,
 failed to escape the grid.
 Simultaneous all-square perturbations substantially improved $n=10$, $11$, $17$, and
-$26$, but returned the grid unchanged at $n=29$, $37$, $50$, and $52$. An isotropic
-spread penalty favored a round cloud rather than the square container and regressed
-proved controls. Basin hopping over the LP quench improved ordinary test cells but
-reached no record; it also exposed the need to repair floating-point LP outputs
-monotonically before calling them packings
+$26$, but returned the grid unchanged at $n=29$, $37$, $50$, and $52$. At $n=17$, the
+median side across five seeds per arm fell from $5.000000$ under the single-square
+control to $4.707376$ with collective moves, at the same declared pair-test budget.
+Both remained above the $4.675530$ incumbent; neither arm beat a record
+([collective-move experiment](../../campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md#result)).
+An isotropic spread penalty favored a round cloud rather than the square container and
+regressed proved controls.
+Basin hopping over the LP quench improved ordinary test cells but reached no record; it
+also exposed the need to repair floating-point LP outputs monotonically before calling
+them packings
 ([retained experiments and discussion](../../../docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md#9-what-this-repository-has-already-tried-in-this-direction)).
+The workbench’s force-and-shake physics experiment likewise reached no record in the
+reviewed runs; its closest repaired result, at $n=5$, remained about 0.15% above the
+record after 39,871 seeds.
+These runs used the previous-count record, the target side, and rigid blocks matched
+from both records. The quoted result followed harness repair and checking; the report
+does not retain the final poses as an independent certificate
+([measured physics results](../../campaign/explorations/X-034-the-workbench-physics-as-a-search.md#4-what-a-repaired-run-is-worth)).
 
 At the $n=11$ contact kink, the tested Powell and Nelder–Mead angle searches performed
 worse than finite-difference descent.
@@ -612,11 +665,17 @@ optimal.
 | Witness | a container side and complete square poses |
 | Certified upper bound | a side at which feasibility has been rigorously established |
 
-A useful record names the finder, seed and parent count, exploration method, local
-refiner, verifier, certified side, publication date, and source revision.
+A useful record names the finder, seed source and parent count, seed transformation,
+exploration algorithm, local refiner, certificate method and verifier, certified side,
+publication date, and source revision.
+Each method or lineage field should distinguish author-reported mechanics from
+independently reproduced steps; independently checked feasibility describes the output.
 Missing fields remain unknown.
-This preserves the distinction between a producer’s account of the search and
-independently checked feasibility of its output.
+The register’s single `construction_method` field has coarse labels such as
+`simulated-annealing`, `inflation-billiard`, and `unknown`
+([field vocabulary](../../frontier/square-packing-case.schema.yaml)). Recording seed,
+exploration, refinement, and certification separately would retain the distinctions in
+these hybrid workflows.
 
 The [tutorial](../../../TUTORIAL.md) develops the mathematical model, cell and basin
 distinctions, exact reconstruction, and optimality proofs.
@@ -631,6 +690,10 @@ provide deeper mechanism comparisons and their source limitations.
 For the other half of the problem,
 [the lower-bound explainer]({{PAPER:n11-lower-bounds-explainer}}) shows how a
 certificate can exclude every packing below a specified side.
+
+## Version History
+
+{{VERSION_HISTORY}}
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

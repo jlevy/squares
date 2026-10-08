@@ -45,12 +45,15 @@ name: Certificate page
       - packing/tests/test_render_packing_methods.py
       - docs/project/research/research-2026-09-08-annealing-for-square-packing.md
       - docs/project/research/research-2026-09-09-simulation-mechanisms-for-packing.md
+      - packing/campaign/explorations/X-034-the-workbench-physics-as-a-search.md
       - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+      - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md
       - packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
       - packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md
       - packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
       - packing/resources/web/evand-square-packing-2026-10-05/README.md
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md
+      - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md
       - packing/resources/web/franciscouzo-square-packing-2026-09-27/README.md
       - packing/resources/web/franciscouzo-square-packing-2026-10-03/README.md
       - packing/resources/web/friedman-ds7-survey-2009-html.md
@@ -224,7 +227,7 @@ concurrency:
 #
 #   scope ─┬─ n11-threshold-bound-review ──────────────┤
 #          ├─ n11-optimality-review ───────────────────┤
-#          ├─ packing-methods ─────────────────────────┤
+#          ├─ square-packing-methods-survey ──────────┤
 #          ├─ workbench ───────────────────────────────┐
 #          ├─ overview ────────────────────────────────┤
 #          ├─ prepare ─┬─ pdf ─────────────────────────┼─ publish ─┐
@@ -253,7 +256,7 @@ concurrency:
 #
 # The papers are served under `papers/`, each by its slug (`render_overview.PAPERS`),
 # and a job, an output or an artifact that is one paper's carries that slug. The three
-# n = 11 papers and the standalone `packing-methods` explainer each render into
+# n = 11 papers and the standalone `square-packing-methods-survey` each render into
 # `site/papers/` on their own runner, where they are served, so every check reads the
 # page at its published path and `publish` renames nothing.
 jobs:
@@ -283,8 +286,8 @@ jobs:
       n11_threshold_bound_review_reason: ${{ steps.scope.outputs.n11_threshold_bound_review_reason }}
       n11_optimality_review: ${{ steps.scope.outputs.n11_optimality_review }}
       n11_optimality_review_reason: ${{ steps.scope.outputs.n11_optimality_review_reason }}
-      packing_methods: ${{ steps.scope.outputs.packing_methods }}
-      packing_methods_reason: ${{ steps.scope.outputs.packing_methods_reason }}
+      square_packing_methods_survey: ${{ steps.scope.outputs.square_packing_methods_survey }}
+      square_packing_methods_survey_reason: ${{ steps.scope.outputs.square_packing_methods_survey_reason }}
     defaults:
       run:
         working-directory: packing
@@ -350,7 +353,7 @@ jobs:
           overview overview and the site's own pages
           n11_threshold_bound_review threshold-bound review
           n11_optimality_review optimality review
-          packing_methods packing methods explainer
+          square_packing_methods_survey square packing methods survey
           PAGES
 
   n11-optimality-review:
@@ -513,12 +516,12 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  # The standalone methods explainer uses the same paper publication path as the
+  # The standalone methods survey uses the same paper publication path as the
   # reviews: its renderer contract, served HTML and Markdown, printed PDF, and checked
   # producer artifact. It reads no retained certificate packet.
-  packing-methods:
+  square-packing-methods-survey:
     needs: scope
-    if: needs.scope.outputs.packing_methods == 'true'
+    if: needs.scope.outputs.square_packing_methods_survey == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     defaults:
@@ -536,12 +539,15 @@ jobs:
             /*
             !/packing/resources/*/
             !/packing/campaign/*/
+            /packing/campaign/explorations/X-034-the-workbench-physics-as-a-search.md
             /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+            /packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-202-round-1-perturbation.md
             /packing/resources/papers/gensane-ryckelynck-2005-improved-dense-packings.raw.md
             /packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/README.md
             /packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
             /packing/resources/web/evand-square-packing-2026-10-05/README.md
             /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/README.md
+            /packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/README.md
             /packing/resources/web/franciscouzo-square-packing-2026-09-27/README.md
             /packing/resources/web/franciscouzo-square-packing-2026-10-03/README.md
             /packing/resources/web/friedman-ds7-survey-2009-html.md
@@ -585,16 +591,16 @@ jobs:
         run: |
           uv run --frozen --group dev python -m devtools.render_packing_methods --site site --pdf
           uv run --frozen --group dev python -m devtools.render_packing_methods --site site --check
-          test -s site/papers/packing-methods.pdf
-          uv run --frozen --group dev python -m devtools.artifact_dates --pdf site/papers/packing-methods.pdf --revised packing-methods
+          test -s site/papers/square-packing-methods-survey.pdf
+          uv run --frozen --group dev python -m devtools.artifact_dates --pdf site/papers/square-packing-methods-survey.pdf --revised packing-methods
           uv run --frozen --group dev python -m devtools.social_card --output-dir site
-          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:packing-methods
-          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/packing-methods.html
+          uv run --frozen --group dev python -m devtools.check_published_site --local site --partial --producer paper:square-packing-methods-survey
+          uv run --frozen --group dev python -m devtools.check_site_rendering site --page papers/square-packing-methods-survey.html
 
       - name: Share the checked paper
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: packing-methods-page
+          name: square-packing-methods-survey-page
           path: packing/site
           if-no-files-found: error
           retention-days: 7
@@ -1818,7 +1824,8 @@ jobs:
   # root with the forwarders at the papers' old addresses (`overview`), the workbench at
   # `/workbench/` (`workbench`), and the threshold-bound review and the optimality review,
   # each with its Markdown and PDF, under `/papers/` (`n11-threshold-bound-review`,
-  # `n11-optimality-review`), and the standalone methods explainer (`packing-methods`).
+  # `n11-optimality-review`), and the standalone methods survey
+  # (`square-packing-methods-survey`).
   # It runs on pull requests too -- a missing artifact fails
   # review rather than the next deploy -- lists every file with its size and digest so
   # the tree can be compared across runs, and holds every page's head in it to the site's
@@ -1833,7 +1840,7 @@ jobs:
   # touches an input all builds share (the workflow, the scope tool, kpress, the
   # lockfile). A partial tree is never a publication, so there is nothing to assemble.
   publish:
-    needs: [prepare, pdf, overview, workbench, n11-threshold-bound-review, n11-optimality-review, packing-methods]
+    needs: [prepare, pdf, overview, workbench, n11-threshold-bound-review, n11-optimality-review, square-packing-methods-survey]
     runs-on: ubuntu-latest
     steps:
       # The assembled site is held to the head contract once it is whole, with the
@@ -1945,18 +1952,18 @@ jobs:
           test -s "$STAGED/papers/n11-optimality-review.html"
           uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
-      - name: Use the checked methods explainer
+      - name: Use the checked methods survey
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: packing-methods-page
-          path: ${{ runner.temp }}/packing-methods-page
+          name: square-packing-methods-survey-page
+          path: ${{ runner.temp }}/square-packing-methods-survey-page
 
-      - name: Put the methods explainer beside the other papers, refusing any name already there
+      - name: Put the methods survey beside the other papers, refusing any name already there
         env:
-          STAGED: ${{ runner.temp }}/packing-methods-page
+          STAGED: ${{ runner.temp }}/square-packing-methods-survey-page
         working-directory: packing
         run: |
-          test -s "$STAGED/papers/packing-methods.html"
+          test -s "$STAGED/papers/square-packing-methods-survey.html"
           uv run --frozen --group dev python -m devtools.assemble_site --destination site "$STAGED"
 
       # The papers moved to `papers/<slug>` on 2026-10-01. A page that moved is forwarded
@@ -2020,7 +2027,7 @@ jobs:
       - overview
       - n11-threshold-bound-review
       - n11-optimality-review
-      - packing-methods
+      - square-packing-methods-survey
       - pdf
       - print-layout
       - typography
@@ -2042,10 +2049,10 @@ jobs:
           jq -r 'to_entries[] | "\(.value.result)\t\(.key)"' <<< "$NEEDS"
           jq -e '
             .scope.result == "success"
-            and ([.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, .scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, .scope.outputs.n11_optimality_review, .scope.outputs.packing_methods] | all(. == "true" or . == "false"))
+            and ([.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, .scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, .scope.outputs.n11_optimality_review, .scope.outputs.square_packing_methods_survey] | all(. == "true" or . == "false"))
             and (.scope.outputs.n11_threshold_bound_review != "true" or .["n11-threshold-bound-review"].result == "success")
             and (.scope.outputs.n11_optimality_review != "true" or .["n11-optimality-review"].result == "success")
-            and (.scope.outputs.packing_methods != "true" or .["packing-methods"].result == "success")
+            and (.scope.outputs.square_packing_methods_survey != "true" or .["square-packing-methods-survey"].result == "success")
             and ([.[].result] | all(. == "success" or . == "skipped"))
           ' <<< "$NEEDS" > /dev/null
 

@@ -1054,7 +1054,7 @@ def test_the_sample_cites_the_archive_and_the_campaign_whatever_the_checkout(
     [
         ("papers/n11-threshold-bound-review.html", "Part II"),
         ("papers/n11-optimality-review.html", "Part III"),
-        ("papers/packing-methods.html", "Methods tutorial"),
+        ("papers/square-packing-methods-survey.html", "Methods tutorial"),
     ],
 )
 def test_check_requires_each_review_where_its_papers_card_points(
@@ -1550,7 +1550,7 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
     assert REVIEW_PAPERS == (
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
-        "papers/packing-methods.html",
+        "papers/square-packing-methods-survey.html",
     )
     # The record files the check samples are pages a reader shares too.
     records = [

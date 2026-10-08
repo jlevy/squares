@@ -753,9 +753,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/n11-threshold-bound-review.html | papers/n11-threshold-bound-review.html | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-05 | live |
 | papers/n11-threshold-bound-review.md | papers/n11-threshold-bound-review.md | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-05 | live |
 | papers/n11-threshold-bound-review.pdf | papers/n11-threshold-bound-review.pdf | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-05 | live |
-| papers/packing-methods.html | papers/packing-methods.html | paper-file | paper:packing-methods | 2026-10-08 | 2026-10-08 | live |
-| papers/packing-methods.md | papers/packing-methods.md | paper-file | paper:packing-methods | 2026-10-08 | 2026-10-08 | live |
-| papers/packing-methods.pdf | papers/packing-methods.pdf | paper-file | paper:packing-methods | 2026-10-08 | 2026-10-08 | live |
+| papers/square-packing-methods-survey.html | papers/square-packing-methods-survey.html | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-08 | live |
+| papers/square-packing-methods-survey.md | papers/square-packing-methods-survey.md | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-08 | live |
+| papers/square-packing-methods-survey.pdf | papers/square-packing-methods-survey.pdf | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-08 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-002.html | result/t-002.html | result | overview | 2026-08-31 | 2026-08-31 | live |

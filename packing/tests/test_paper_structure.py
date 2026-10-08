@@ -252,6 +252,9 @@ def test_each_papers_credits_follow_the_owners_form(
     assert explainer[-2 - strip].links == (("version history", "#version-history"),)
     assert review[-2 - strip].text == f"{release.OPTIMALITY_REVIEW_EDITION} (version history)"
     assert review[-2 - strip].links == (("version history", "#version-history"),)
+    methods = structures[METHODS].credits
+    assert methods[-2].text == "v0.1.0 (version history)"
+    assert methods[-2].links == (("version history", "#version-history"),)
 
 
 def test_the_markdown_editions_open_as_the_pages_do(

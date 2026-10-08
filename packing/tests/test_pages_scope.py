@@ -223,7 +223,7 @@ def test_a_change_to_the_record_or_the_reader_documents_builds_only_the_overview
     three.
     """
     # The methods paper also cites the tutorial, so its render checks that source.
-    assert in_scope(["TUTORIAL.md"], declared) == {"overview", "packing_methods"}
+    assert in_scope(["TUTORIAL.md"], declared) == {"overview", "square_packing_methods_survey"}
     for changed in (
         "epistemics.md",
         "packing/frontier/evidence.yaml",
@@ -281,7 +281,7 @@ def test_methods_manuscript_selects_only_its_own_page(
     declared: dict[str, tuple[Path, ...]],
 ) -> None:
     assert in_scope(["packing/devtools/templates/packing-methods-article.md"], declared) == {
-        "packing_methods"
+        "square_packing_methods_survey"
     }
 
 
@@ -305,7 +305,8 @@ def test_each_paper_has_an_independent_required_build(slug: str) -> None:
     browser_control = next(
         step for step in job["steps"] if f"tests/test_{module}.py" in str(step.get("run", ""))
     )
-    assert browser_control["env"][f"SQPACK_{half.upper()}_BROWSER"] == "1"
+    browser_name = module.removeprefix("render_").upper()
+    assert browser_control["env"][f"SQPACK_{browser_name}_BROWSER"] == "1"
     commands = "\n".join(str(step.get("run", "")) for step in job["steps"])
     # Rendered where it is served: under `papers/` in the site, by the paper's slug.
     assert f"{module} --site site --pdf" in commands

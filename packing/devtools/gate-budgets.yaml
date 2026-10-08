@@ -1690,13 +1690,13 @@ pages:
       optimality review's 80 seconds with a quarter added for that data until a hosted
       run gives the job its own reading; its 10-minute job timeout bounds setup faults.
   # First hosted build supplies this standalone paper's own timing.
-  - id: packing-methods
+  - id: square-packing-methods-survey
     measured_seconds: null
     measured_on: null
     measured_where: null
     ceiling_seconds: 100.0
     argument: >-
-      The methods explainer uses the review papers' native HTML, Markdown and PDF
+      The methods survey uses the review papers' native HTML, Markdown and PDF
       producer path, renderer tests, PDF date audit, page-head and browser rendering
       checks, and artifact upload. It reads no certificate packet. The provisional
       ceiling matches the unmeasured threshold review until a hosted run supplies this

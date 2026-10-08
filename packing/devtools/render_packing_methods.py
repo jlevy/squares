@@ -2,11 +2,11 @@
 
 The canonical manuscript is templates/packing-methods-article.md. It uses the site's
 shared paper front, typography, scholarly metadata, math preparation and PDF printer,
-with its own draft version and dates. This tutorial belongs to no numbered series and
+with its own version and dates. This tutorial belongs to no numbered series and
 has no certificate or generated figure inputs.
 
-Run with --site SITE to write papers/packing-methods.html and .md, add --pdf for its
-PDF, or use --check to compare the prepared HTML and Markdown with an existing build.
+Run with --site SITE to write papers/square-packing-methods-survey.html and .md, and
+add --pdf for its PDF. Use --check to compare prepared HTML and Markdown with a build.
 """
 
 from __future__ import annotations
@@ -55,6 +55,7 @@ from devtools.render_overview import (
 from sqpack.release import (
     PACKING_METHODS_EDITION,
     PACKING_METHODS_FIRST_PUBLISHED,
+    PACKING_METHODS_HISTORY,
     PACKING_METHODS_REVISED,
 )
 
@@ -80,6 +81,7 @@ FRONT = paper_front.check(
         oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
         agents=("GPT-6 Astra", "GPT-6 Sol"),
         version=PACKING_METHODS_EDITION,
+        history="version-history",
         dates=(
             paper_front.Dated("First published", PACKING_METHODS_FIRST_PUBLISHED),
             paper_front.Dated(paper_front.REVISED, PACKING_METHODS_REVISED),
@@ -155,6 +157,14 @@ def render_all_facts() -> dict[str, str]:
     return {}
 
 
+def version_history_markdown() -> str:
+    """The paper's own editions, newest first, with publication date and changes."""
+    return "\n".join(
+        f"- **{entry.version} — {entry.first_published}.** {entry.result_scope}"
+        for entry in PACKING_METHODS_HISTORY
+    )
+
+
 def expanded_markdown(
     source: str,
     *,
@@ -165,7 +175,9 @@ def expanded_markdown(
     """Fill the shared front and sibling-paper links, and pin source citations."""
     filled = paper_front.fill(source, FRONT)
     filled = paper_links.fill_paper_links(filled, edition=edition)
-    filled = fill_template(filled, {}, source=article)
+    filled = fill_template(
+        filled, {"VERSION_HISTORY": version_history_markdown()}, source=article
+    )
     return repository_links(filled, source=article, revision=revision)
 
 

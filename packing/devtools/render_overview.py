@@ -23,7 +23,7 @@ adds the front door and the pages around it, as the plan in
   `render_n11_lower_bounds_explainer`), the threshold-bound review
   (`papers/n11-threshold-bound-review.html`, `render_n11_threshold_bound_review`) and the
   optimality review (`papers/n11-optimality-review.html`, `render_n11_optimality_review`),
-  then the standalone methods tutorial (`papers/packing-methods.html`,
+  then the standalone methods tutorial (`papers/square-packing-methods-survey.html`,
   `render_packing_methods`) and the first-principles tutorial (`tutorial.html`). The
   bar's Papers entry is current throughout the section;
 - a forwarder at each address a page used to have (`MOVED_PAGES`), the papers' old
@@ -215,7 +215,7 @@ PAPERS_DIR = "papers"
 N11_LOWER_BOUNDS_EXPLAINER = "n11-lower-bounds-explainer"
 N11_THRESHOLD_BOUND_REVIEW = "n11-threshold-bound-review"
 N11_OPTIMALITY_REVIEW = "n11-optimality-review"
-PACKING_METHODS = "packing-methods"
+PACKING_METHODS = "square-packing-methods-survey"
 #: From a paper's page back up to the site's root, which is where the bar's links, the
 #: other pages and the atlas's files are.
 PAPERS_ROOT = "../"

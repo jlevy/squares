@@ -500,20 +500,21 @@ THRESHOLD_REVIEW_REVISED = "October 5, 2026"
 #: 11-squares-certified-bound), which its "Original proof" date prints.
 THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 
-#: The standalone tutorial on finding and verifying record packings. Its draft
-#: version and dates belong to the paper, independently of the site and n = 11 series.
+#: The standalone tutorial on finding and verifying record packings. Its version and
+#: dates belong to the paper, independently of the site and n = 11 series.
 PACKING_METHODS_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.0",
         first_published="October 8, 2026",
         result_scope=(
-            "The first draft: a systematic tutorial on modelling, searching, refining, "
-            "reconstructing and verifying record square packings."
+            "First publication: a systematic tutorial on modelling, searching, refining, "
+            "reconstructing and verifying record square packings, with sourced method "
+            "and seed lineage tables."
         ),
     ),
 )
 PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
-PACKING_METHODS_EDITION = f"Draft {PACKING_METHODS_VERSION}"
+PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
 PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
 PACKING_METHODS_REVISED = "October 8, 2026"
 

@@ -423,7 +423,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
         "papers/n11-lower-bounds-explainer.html",
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
-        "papers/packing-methods.html",
+        "papers/square-packing-methods-survey.html",
         "tutorial.html",
         "workbench/",
     ]
@@ -1261,7 +1261,7 @@ def test_the_page_cards_keep_the_series_together_at_one_column_width(
             "papers/n11-threshold-bound-review.html",
             "papers/n11-optimality-review.html",
         ],
-        ["papers/packing-methods.html", "tutorial.html", "workbench/"],
+        ["papers/square-packing-methods-survey.html", "tutorial.html", "workbench/"],
     ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     gap = css[css.index(".site-cards + .site-cards {") :]
@@ -3998,7 +3998,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "papers/n11-lower-bounds-explainer.html",
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
-        "papers/packing-methods.html",
+        "papers/square-packing-methods-survey.html",
         "tutorial.html",
     ]
     assert [paper.label for paper in papers] == [
@@ -4057,7 +4057,7 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
         ("all-results.html#t-060", "T-060"),
         ("tutorial.html", "square-packing tutorial"),
-        ("papers/packing-methods.html", "How Record Square Packings Are Found"),
+        ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
     ]
     for body in re.findall(r"<a\b[^>]*>(.*?)</a>", cards, re.DOTALL):
         assert "<a" not in body
@@ -6043,9 +6043,9 @@ def _old_addresses() -> set[str]:
 
 def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
     """`conventions.md`: a paper has one name, its slug, which says the case, the subject
-    and the kind of paper. The site serves it at `papers/<slug>.html`, and the renderer,
-    its templates, its test and its half of the Pages workflow carry the slug, so a
-    reader of the repository finds a paper by the name the site gives it."""
+    and the kind of paper. The site serves it at `papers/<slug>.html`; the registry
+    connects that address to its renderer, templates, tests and Pages scope. The methods
+    survey retains its private packing_methods module and packing-methods templates."""
     import importlib  # noqa: PLC0415
 
     from devtools.pages_scope import BUILDER_INPUTS, load_workflow  # noqa: PLC0415
@@ -6055,7 +6055,7 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         "n11-lower-bounds-explainer",
         "n11-threshold-bound-review",
         "n11-optimality-review",
-        "packing-methods",
+        "square-packing-methods-survey",
     )
     packing = overview_data.REPO / "packing"
     jobs = load_workflow()["jobs"]
@@ -6066,19 +6066,21 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
     )
     for slug in slugs:
         name = slug.replace("-", "_")
-        assert render_overview.paper_record(slug).module == f"devtools.render_{name}"
-        renderer = importlib.import_module(f"devtools.render_{name}")
+        private_name = "packing_methods" if slug == render_overview.PACKING_METHODS else name
+        assert render_overview.paper_record(slug).module == f"devtools.render_{private_name}"
+        renderer = importlib.import_module(render_overview.paper_record(slug).module)
         assert render_overview.paper_record(slug).title == renderer.TITLE
         assert slug == renderer.SLUG
         assert renderer.SITE_PATH == render_overview.paper_path(slug) == f"papers/{slug}.html"
         assert renderer.SITE_PATH in render_overview.SITE_PAGES
         assert renderer.SITE_ROOT == render_overview.PAPERS_ROOT == "../"
         assert renderer.SITE_PATH in {paper.href for paper in overview_sections.PAPERS}
-        for template in (f"{slug}-article.md", f"{slug}-shell.html"):
+        template_name = private_name.replace("_", "-")
+        for template in (f"{template_name}-article.md", f"{template_name}-shell.html"):
             assert (render_overview.TEMPLATES / template).is_file(), template
         tests = packing / "tests"
-        assert (tests / f"test_render_{name}.py").is_file() or (
-            tests / f"test_{name}.py"
+        assert (tests / f"test_render_{private_name}.py").is_file() or (
+            tests / f"test_{private_name}.py"
         ).is_file(), slug
         assert name in BUILDER_INPUTS, slug
         assert name in {line.split(" ", 1)[0] for line in skip_notices.splitlines()}, slug

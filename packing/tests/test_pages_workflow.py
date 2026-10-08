@@ -52,7 +52,7 @@ PREPARED_PAGE_CONSUMERS = {
 #: measurement, and whoever records it removes the name here, so the exception cannot
 #: quietly outlive the reason for it.
 AWAITING_FIRST_RUN = frozenset(
-    {"overview", "publish", "n11-threshold-bound-review", "packing-methods"}
+    {"overview", "publish", "n11-threshold-bound-review", "square-packing-methods-survey"}
 )
 #: Independently built papers, each named by its registry slug.
 PAPER_JOBS = frozenset(
@@ -69,7 +69,7 @@ PUT_OPTIMALITY_REVIEW = (
     "Put the optimality review beside the other papers, refusing any name already there"
 )
 PUT_METHODS_PAPER = (
-    "Put the methods explainer beside the other papers, refusing any name already there"
+    "Put the methods survey beside the other papers, refusing any name already there"
 )
 #: The archived copy of Kleddamag's proof, which both reviews cite.
 KLEDDAMAG = "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
@@ -100,7 +100,7 @@ SKIP_NOTICE_PAGES = {
     "overview": "overview and the site's own pages",
     "n11_threshold_bound_review": "threshold-bound review",
     "n11_optimality_review": "optimality review",
-    "packing_methods": "packing methods explainer",
+    "square_packing_methods_survey": "square packing methods survey",
 }
 
 
@@ -922,12 +922,12 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
 
 def test_methods_paper_audits_its_pdf_before_sharing_the_producer() -> None:
     """The served producer keeps the checked PDF, without an optional artifact audit."""
-    job = load()["jobs"]["packing-methods"]
+    job = load()["jobs"]["square-packing-methods-survey"]
     steps = job["steps"]
     audit = next(
         index
         for index, step in enumerate(steps)
-        if "devtools.artifact_dates --pdf site/papers/packing-methods.pdf"
+        if "devtools.artifact_dates --pdf site/papers/square-packing-methods-survey.pdf"
         in step.get("run", "")
     )
     commands = steps[audit]["run"].splitlines()
@@ -938,7 +938,7 @@ def test_methods_paper_audits_its_pdf_before_sharing_the_producer() -> None:
     assert draw < dates
     assert shlex.split(commands[dates])[-4:] == [
         "--pdf",
-        "site/papers/packing-methods.pdf",
+        "site/papers/square-packing-methods-survey.pdf",
         "--revised",
         "packing-methods",
     ]
@@ -947,7 +947,7 @@ def test_methods_paper_audits_its_pdf_before_sharing_the_producer() -> None:
     share = next(
         index
         for index, step in enumerate(steps)
-        if step.get("with", {}).get("name") == "packing-methods-page"
+        if step.get("with", {}).get("name") == "square-packing-methods-survey-page"
     )
     assert audit < share
     assert steps[share]["with"]["if-no-files-found"] == "error"
@@ -1111,10 +1111,10 @@ def _assembled(
         (staged / "papers" / f"n11-optimality-review.{suffix}").write_text(f"review {suffix}")
     for extra in review:
         (staged / "papers" / extra).write_text("review's")
-    staged_methods = root / "packing-methods-page"
+    staged_methods = root / "square-packing-methods-survey-page"
     (staged_methods / "papers").mkdir(parents=True)
     for suffix in ("html", "md", "pdf"):
-        (staged_methods / "papers" / f"packing-methods.{suffix}").write_text(
+        (staged_methods / "papers" / f"square-packing-methods-survey.{suffix}").write_text(
             f"methods explainer {suffix}"
         )
     for extra in methods:
@@ -1206,7 +1206,7 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
             PUT_THRESHOLD_REVIEW,
             "Use the checked optimality review",
             PUT_OPTIMALITY_REVIEW,
-            "Use the checked methods explainer",
+            "Use the checked methods survey",
             PUT_METHODS_PAPER,
             "Serve each moved file at its old address too",
             "List what the publication holds",
@@ -1242,9 +1242,9 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "papers/n11-threshold-bound-review.html",
         "papers/n11-threshold-bound-review.md",
         "papers/n11-threshold-bound-review.pdf",
-        "papers/packing-methods.html",
-        "papers/packing-methods.md",
-        "papers/packing-methods.pdf",
+        "papers/square-packing-methods-survey.html",
+        "papers/square-packing-methods-survey.md",
+        "papers/square-packing-methods-survey.pdf",
         "t-018-explainer.md",
         "t-018-explainer.pdf",
     ]
@@ -1293,7 +1293,7 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
     assert [result.returncode for result in results] == [0, 0, 0, 1]
     assert "publication collision: papers/n11-optimality-review.md" in results[3].stderr
     assert (site / "papers" / "n11-optimality-review.md").read_text() == "review md"
-    assert not (site / "papers" / "packing-methods.html").exists()
+    assert not (site / "papers" / "square-packing-methods-survey.html").exists()
 
     site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
     assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
@@ -1792,7 +1792,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/resources/papers/kingbird-square-11-provenance.svg",
             KLEDDAMAG_README_PATTERN,
         ),
-        "packing-methods": METHODS_CITATION_PATTERNS,
+        "square-packing-methods-survey": METHODS_CITATION_PATTERNS,
         "n11-threshold-bound-review": (
             "/packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/",
             "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz",
@@ -1889,7 +1889,7 @@ def test_optimality_archive_links_are_all_in_its_sparse_checkout() -> None:
 #: What each review's partial checkout must materialize of the two omitted trees, and two
 #: files beside them it must not.
 REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
-    "packing-methods": (
+    "square-packing-methods-survey": (
         tuple(pattern.removeprefix("/") for pattern in METHODS_CITATION_PATTERNS),
         (
             "packing/resources/web/unrelated/README.md",
@@ -2222,7 +2222,7 @@ def test_prepare_failure_skips_consumers_and_fails_the_real_aggregate(
         "skipped" if producer_result == "scope-skipped" else producer_result
     )
     assert all(outcome[name] == "skipped" for name in PREPARED_PAGE_CONSUMERS)
-    assert all(outcome[name] == "success" for name in {"overview", "workbench", *REVIEW_JOBS})
+    assert all(outcome[name] == "success" for name in {"overview", "workbench", *PAPER_JOBS})
     jobs = load()["jobs"]
     assert "prepare" in needs_of(jobs["pages-required"])
     aggregate = next(

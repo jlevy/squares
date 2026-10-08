@@ -4,12 +4,12 @@
   "provenance": {},
   "exit_status": 0,
   "tests": 10,
-  "seconds": 1.015,
+  "seconds": 0.959,
   "files": [
     {
       "file": "packing/tests/test_render_packing_methods.py",
       "tests": 10,
-      "seconds": 1.015
+      "seconds": 0.959
     }
   ],
   "module_scope": {

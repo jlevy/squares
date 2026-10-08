@@ -93,10 +93,10 @@ Three of them form one series on $n = 11$, read in order:
    [source](packing/devtools/templates/n11-optimality-review-article.md)).
 
 For how record packings are found, read
-[**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/packing-methods.html),
+[**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html),
 a tutorial on geometric construction, physics-inspired search, annealing, surgery, local
 refinement, and upper-bound certification
-([PDF](https://jlevy.github.io/squares/papers/packing-methods.pdf),
+([PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf),
 [source](packing/devtools/templates/packing-methods-article.md)).
 
 This repository also contains
@@ -117,7 +117,7 @@ The rest of this README is about that work.
 | Where | What |
 | --- | --- |
 | [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
-| [**How Record Packings Are Found**](https://jlevy.github.io/squares/papers/packing-methods.html) | Geometric construction, physics-inspired search, annealing, surgery, local refinement, and upper-bound certification, with sourced record histories |
+| [**How Record Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) | Geometric construction, physics-inspired search, annealing, surgery, local refinement, and upper-bound certification, with sourced record histories |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for $n = 1\ldots324$, with reported and verified bounds kept separate |
