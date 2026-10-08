@@ -1238,6 +1238,12 @@ wider centre cases; additional progress is measured from the union of surviving 
   input/membership remains refused and unresolved.
   No first-eight LP result, ordinary exclusion, census admission or bound movement.
 
+- **H-324 — Explicit-f1 Shared-Centre Endpoint Control.** Separately register the unique
+  catalogue action f1=(U-y,U-x), preserving H323’s refusedr3 attempt and every other
+  input/resource limit.
+  Finalsource/Astrareview and43 synthetic controls passed; actual endpoint is unrun at
+  registration. No first8, exclusion, admission or bound movement.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

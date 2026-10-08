@@ -63,7 +63,7 @@ hypothesis:
   replication: false
   registered: '2026-10-08'
   notes: >-
-    Pre-target registration; the real exp235 endpoint predicate has not run.
+    Original pre-target registration retained. Exp315 refused the wrong canonical endpoint orbit before E/D/H or primal checking; fresh verification was unstarted. The scientific verdict is unresolved, stopped by a guard. Finite metadata gives r3=3730943 and unique f1=1900015; a corrected control requires a separate prospective registration. The registered r3 criterion and original manifest are unchanged.
     Astra mathematical and final source review cleared; all35 synthetic controls passed.
     Launch records actual Git provenance; Git identities do not determine verdicts.
     Existing run_registered_phases and supervise_posix own two fresh processes,
