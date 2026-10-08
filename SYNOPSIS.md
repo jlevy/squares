@@ -6082,6 +6082,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `session-165-codex-task-tree.yaml` | session-165 | 2,730 | 13.15 h | 3.96 h | 3.96 h | yes |
 | `codex-task-tree-pr137-publication-tail.yaml` | unattributed | 610 | 4.39 h | 1.77 h | 1.82 h | yes |
 | `codex-task-tree-pr142-publication-tail.yaml` | unattributed | 136 | 0.87 h | 0.41 h | 0.58 h | yes |
+| `codex-task-tree-pr410-preparation-checkpoint.yaml` | unattributed | 459 | 2.3 h | 0.63 h | 0.63 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |

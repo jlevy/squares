@@ -4433,6 +4433,7 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
         "exact rectangle Rust geometry",  # exact crate lint/tests and Python oracle
         "measure verifier Rust (sqverify-fast)",  # clean-room crate, oracle, controls
         "n17 branch-and-bound native (Rust)",  # native pilot build and bitwise replay
+        "n17 kernel verifier (Rust)",  # standalone ordinary-certificate controls and floor
         # The four record sweeps, split at their measured seams on 2026-09-06 so the pull
         # request's second runner can schedule them. The figures beside them are the
         # 148.50s and 102.56s above, divided by the same measurement that split them:
