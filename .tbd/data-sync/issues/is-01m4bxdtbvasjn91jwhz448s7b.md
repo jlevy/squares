@@ -5,7 +5,7 @@ title: Review current PR reports and plan separate import and verification slice
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -24,13 +24,22 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T01:29:24.191Z
+updated_at: 2026-10-08T01:52:57.975Z
 started_at: 2026-10-07T19:28:52.536Z
 ---
 User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
 
 ## Notes
 
+CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
+Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
+Lower ownvenv173filereplay5296PASS30SKIP1XFAIL+1heavyPASS rawouter0/505.306603s<unchanged900; originalcancelledmetadataattempts retain130. Upper2aeb selectednative63/103checksPASS outer785.600s/raw0<unchanged1800,5608ordinaryPASS+1heavyPASS. Finalef472 supplements with23releasePASSraw0, pinowner101026 and324atlasproducerPASS. Completeotherbytes preserved vs2aeb; only9confirmedatlasrefs+pin, all1762squares7048corners exactbinding independentlyPASS.10lowerregularizedrefs separately1867squares7468cornersPASS;19provenancerows explicit preservationexception, primary/history unchanged. Originalolderfail/cancel/rawunavailable outcomes unchanged.
+CheckpointPR43191c6d398f38432d3a41f41271a00c84b15758c85 ready/reviewed16hostedSUCCESS50SKIP; currentcost-first body givesfullstate, actualscopes, review/source/custodylinks andnextdependency. Recoverydraftrelease406258689 retains download/memberverified priorarchives, originalsource/reviews/queue/nativefailedreceipts, actual401deployment108files, testedsetupZIP/storageplan/Gitbundles. Latestcompletedgates/concurrentmerge/currentreviews/freshstate incrementalsupplement being finalized; do notclaimpendingroundtripdone.
+ConcurrentdraftPR43478229c9e nowthirdlayer reports actual425tenjobs453.856653s and428THREEupstreamgeometryjobs7.843s; independentread ofcompactreceiptsconfirms10childrenraw0 andthreepositive/duplicate/outsideinputs. Distinctfromouroriginal428FIVEprojectrouteprotocol: no suchfivejobcompletionclaim. T117/T118 remainV0C0S2,8CIFAIL21SUCCESS27SKIP atlastread, publiccustody/finalreview/storageacceptancepending. Preservecoownerthink-v42c codex@spud10; do notoverwriteclaims ormerge434.
+Nextentry: finishupperfinalCI; scopedatomic ghstackmerge429--yes--merge includes427+429 ONLY (notstack430wholewithdraft434). Actualmatchingmergedmain Pages/deployment/status/site/source ownership required before116resultrows/23cases46SVG48layout liveaudit andfinal422reply/ledger/closure underthink-qc6y. Prepared75checks isnotactualdeployment. Issue422 remainsOPEN. CompletedengineeringchildrenmaycloseaftercurrentCIreview; sourceacceptance/deployment/replyparentsstayOPENuntilactualmilestones.
+Bothtrackedsourcecheckouts clean, physical/tracked/PRdiffoutboxesEMPTY at01:51:49 snapshot full-state-preservation-final-20261008.json; nativeexports saved separatelyon tbd-sync. Latestcompleteenvironmentstartup save explicitlyCONFLICT/stale_base; currentinstance testedGHpush/tbd/bootstrapworks, GitHubverifiedfourfilesetupZIPpreserved. New setupchat currentsettings reconcile/save required; no published/freshtaskrestoreclaim.
+
+HISTORICAL RECORD:
 Original415416 nowmerged4850d4146 after all current-headCI/reviews; deploymentagent verifies liveT113/T114 and11casegraphics. Currentreportintake has two completedparallelPR410reviews: maththink-uruv andsnapshotthink-ggd3, detailed reports under /workspace/squares-pr410-math-review and /workspace/squares-pr410-snapshot-inventory. Neither authorizesadmissionorcapraise. NewSQUISH12source076e6cf93684697065adb2762092d6b1652e95fe remotelypublished; requiredpushgate stillrunning and independentconfirmationmappingplan inparallel. Nextboundedentry is finalnewreleasegate/reportPR plus fullmappedconfirmation; preserve allunrelatedPR scopes.
 
 2026-10-08 UTC durable-state checkpoint (coordinator; supersedes earlier pending-head snapshots):

@@ -5,7 +5,7 @@ title: Repair PR429 final-head hosted contracts and generated owners
 kind: bug
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -16,13 +16,22 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:10:41.979Z
-updated_at: 2026-10-08T01:04:40.628Z
+updated_at: 2026-10-08T01:53:00.006Z
 started_at: 2026-10-08T00:11:46.371Z
 ---
 CI run37705180742 at0d01524b has25SUCCESS26SKIP5FAIL. Preserve exact17 behavioral failures across suites A12/B4/C1 and4 validation-owner failures. Repair historical packet and canonical citation scope, selected proof snapshot/index controls, mutable fixture-root ownership, exact integrity trust boundaries, verified-ceiling consumer census, and generated frontier/doc/ceiling prose. Dedicated GPT6.1Sol repair_upper_ci owns source; root owns native and GitHub. Full gate, fresh review of source delta, hosted CI, deployment remain pending. Original wholeA/B/C/D zero findings stay scoped to old0d head, not future repair.
 
 ## Notes
 
+CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
+Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
+Lower ownvenv173filereplay5296PASS30SKIP1XFAIL+1heavyPASS rawouter0/505.306603s<unchanged900; originalcancelledmetadataattempts retain130. Upper2aeb selectednative63/103checksPASS outer785.600s/raw0<unchanged1800,5608ordinaryPASS+1heavyPASS. Finalef472 supplements with23releasePASSraw0, pinowner101026 and324atlasproducerPASS. Completeotherbytes preserved vs2aeb; only9confirmedatlasrefs+pin, all1762squares7048corners exactbinding independentlyPASS.10lowerregularizedrefs separately1867squares7468cornersPASS;19provenancerows explicit preservationexception, primary/history unchanged. Originalolderfail/cancel/rawunavailable outcomes unchanged.
+CheckpointPR43191c6d398f38432d3a41f41271a00c84b15758c85 ready/reviewed16hostedSUCCESS50SKIP; currentcost-first body givesfullstate, actualscopes, review/source/custodylinks andnextdependency. Recoverydraftrelease406258689 retains download/memberverified priorarchives, originalsource/reviews/queue/nativefailedreceipts, actual401deployment108files, testedsetupZIP/storageplan/Gitbundles. Latestcompletedgates/concurrentmerge/currentreviews/freshstate incrementalsupplement being finalized; do notclaimpendingroundtripdone.
+ConcurrentdraftPR43478229c9e nowthirdlayer reports actual425tenjobs453.856653s and428THREEupstreamgeometryjobs7.843s; independentread ofcompactreceiptsconfirms10childrenraw0 andthreepositive/duplicate/outsideinputs. Distinctfromouroriginal428FIVEprojectrouteprotocol: no suchfivejobcompletionclaim. T117/T118 remainV0C0S2,8CIFAIL21SUCCESS27SKIP atlastread, publiccustody/finalreview/storageacceptancepending. Preservecoownerthink-v42c codex@spud10; do notoverwriteclaims ormerge434.
+Nextentry: finishupperfinalCI; scopedatomic ghstackmerge429--yes--merge includes427+429 ONLY (notstack430wholewithdraft434). Actualmatchingmergedmain Pages/deployment/status/site/source ownership required before116resultrows/23cases46SVG48layout liveaudit andfinal422reply/ledger/closure underthink-qc6y. Prepared75checks isnotactualdeployment. Issue422 remainsOPEN. CompletedengineeringchildrenmaycloseaftercurrentCIreview; sourceacceptance/deployment/replyparentsstayOPENuntilactualmilestones.
+Bothtrackedsourcecheckouts clean, physical/tracked/PRdiffoutboxesEMPTY at01:51:49 snapshot full-state-preservation-final-20261008.json; nativeexports saved separatelyon tbd-sync. Latestcompleteenvironmentstartup save explicitlyCONFLICT/stale_base; currentinstance testedGHpush/tbd/bootstrapworks, GitHubverifiedfourfilesetupZIPpreserved. New setupchat currentsettings reconcile/save required; no published/freshtaskrestoreclaim.
+
+HISTORICAL RECORD:
 Durable checkpoint PR: https://github.com/jlevy/squares/pull/431, draft head66b360c7d99388a694061ee542b7a1c744bba16d on main84881f214. Four documentation files only; independent documentation/link/map/README checks PASS. No source owner index or branch changed. The report is a dated checkpoint; later outcomes belong to this PR body and native notes. Hosted documentation CI pending final watch. Checkpoint bead think-vz6u under think-msos.
 Lower final gate chain: original broad EXIT1 retained, own-process capability replay2PASS1.65s, exact serial heavy phase EXIT0/1PASS185.52s. All selected assertions executed, but ordinary+heavy986.74s exceeds unchanged compound900s ceiling. Fullgreen compound gate NOT established. Performance owner fix_original_stack_ci investigates semantic affected-test selection; budget bead recorded separately. All tier-cost receipts retained; no waivers.
 Upper source repair think-x2gl in progress for17behavioral/4validation ownership failures. Regenerating confirmation revealed actual repeat-adoption drops nine numerical rigidity fields; source owner repairing preservation through documented ownership rather than deleting data or weakening checks. Original0d reviews remain scoped old head; fresh repair review and final hosted CI required.

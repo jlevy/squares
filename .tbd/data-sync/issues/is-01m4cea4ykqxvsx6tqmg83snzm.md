@@ -5,7 +5,7 @@ title: Preserve canonical rigidity-owner block bytes on confirmed re-adoption
 kind: bug
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,22 @@ parent_id: is-01m4cdj4xvndxnrt6cw38acpxb
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:23:48.435Z
-updated_at: 2026-10-08T00:48:03.923Z
+updated_at: 2026-10-08T01:53:00.516Z
 started_at: 2026-10-08T00:32:10.089Z
 ---
 Actual upper gate at a6 flags all9 rigidity assessed-here blocks stale. Independent Astra confirms numerical dictionaries and screen bytes are unchanged; c5ee/0d original blocks are owner-canonical. Re-adoption at a6 dumps whole frontmatter width98 and rewraps blocks owned by assess_frontier_rigidity standalone width96+indent4; owner check compares text. Medium cross-producer serialization defect introduced by latest repair, not stale mathematics at old0d. Sol repair_upper_ci must preserve/splice exact owned block after strict same-confirmed-pose admission, with all-nine raw-byte/idempotence/initial-admission regression and existing owner --check PASS. Preserve historical gate cancellation/failures and original scientific receipts. Fresh source review and final CI required.
 
 ## Notes
 
+CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
+Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
+Lower ownvenv173filereplay5296PASS30SKIP1XFAIL+1heavyPASS rawouter0/505.306603s<unchanged900; originalcancelledmetadataattempts retain130. Upper2aeb selectednative63/103checksPASS outer785.600s/raw0<unchanged1800,5608ordinaryPASS+1heavyPASS. Finalef472 supplements with23releasePASSraw0, pinowner101026 and324atlasproducerPASS. Completeotherbytes preserved vs2aeb; only9confirmedatlasrefs+pin, all1762squares7048corners exactbinding independentlyPASS.10lowerregularizedrefs separately1867squares7468cornersPASS;19provenancerows explicit preservationexception, primary/history unchanged. Originalolderfail/cancel/rawunavailable outcomes unchanged.
+CheckpointPR43191c6d398f38432d3a41f41271a00c84b15758c85 ready/reviewed16hostedSUCCESS50SKIP; currentcost-first body givesfullstate, actualscopes, review/source/custodylinks andnextdependency. Recoverydraftrelease406258689 retains download/memberverified priorarchives, originalsource/reviews/queue/nativefailedreceipts, actual401deployment108files, testedsetupZIP/storageplan/Gitbundles. Latestcompletedgates/concurrentmerge/currentreviews/freshstate incrementalsupplement being finalized; do notclaimpendingroundtripdone.
+ConcurrentdraftPR43478229c9e nowthirdlayer reports actual425tenjobs453.856653s and428THREEupstreamgeometryjobs7.843s; independentread ofcompactreceiptsconfirms10childrenraw0 andthreepositive/duplicate/outsideinputs. Distinctfromouroriginal428FIVEprojectrouteprotocol: no suchfivejobcompletionclaim. T117/T118 remainV0C0S2,8CIFAIL21SUCCESS27SKIP atlastread, publiccustody/finalreview/storageacceptancepending. Preservecoownerthink-v42c codex@spud10; do notoverwriteclaims ormerge434.
+Nextentry: finishupperfinalCI; scopedatomic ghstackmerge429--yes--merge includes427+429 ONLY (notstack430wholewithdraft434). Actualmatchingmergedmain Pages/deployment/status/site/source ownership required before116resultrows/23cases46SVG48layout liveaudit andfinal422reply/ledger/closure underthink-qc6y. Prepared75checks isnotactualdeployment. Issue422 remainsOPEN. CompletedengineeringchildrenmaycloseaftercurrentCIreview; sourceacceptance/deployment/replyparentsstayOPENuntilactualmilestones.
+Bothtrackedsourcecheckouts clean, physical/tracked/PRdiffoutboxesEMPTY at01:51:49 snapshot full-state-preservation-final-20261008.json; nativeexports saved separatelyon tbd-sync. Latestcompleteenvironmentstartup save explicitlyCONFLICT/stale_base; currentinstance testedGHpush/tbd/bootstrapworks, GitHubverifiedfourfilesetupZIPpreserved. New setupchat currentsettings reconcile/save required; no published/freshtaskrestoreclaim.
+
+HISTORICAL RECORD:
 Latest pushed upper checkpoint ed42b23e00ab307e1c93f983eed78832ba1ad264, source/data9a383fca01132a1f9ec326362593feef80ccd4e5; canonical owner bytes and all9 completefrontmatter equal original0d. Original11 generator assertions retained,22 focusedtests48.19s, release23/.56s, type/lint/ownerchecks PASS. Directrecord preserves already-confirmed exactsamepose metadata; source-generator redraft still clears it under original contract. U9 final-source raw-block owner check passes. Fresh wholeacceptance pending performancechange/review/finalgates, sourceparentsopen.
 Actual cancelled supported a6 run journal1641ordinaryPASS2FAIL, originalouterEXIT130. U10 launch lacked tini-s; unchanged fullfixed_core_packet135PASS12.27default and135PASS12.20supported undertini-s. Independent causal delayed-reaper control observed owned SIGKILL zombie and exact worker-group-alive refusal, pytestEXIT1 expected and preserved, harnessEXIT0 after own orphan cleanup. No supervisor/test/grace/cap sourcechanges. Finalgate will usetini-s+supportedown-proc capability.
 Measured privateworker budget failure45.95>unchanged45s has its own repairchild. Profiled copy child65.52 includes instrumentation; nine admissions43.98s/repeated reconstruction41.06 dominates, factI/O2.075s. Sourceowner authorized invocation-localbatch with allpremises/perleafchecks and fresh separateinvocations. No globalcache, no arbitrary caller validation rows; focused mutation and budget tests thennewfreeze/push/Astrareview/finalCI.

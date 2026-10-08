@@ -5,7 +5,7 @@ title: "Issue422: publish accurate import, confirmation and deployment replies"
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,22 @@ parent_id: is-01m4c486bvartgwnk1s2szjz8x
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:03:17.128Z
-updated_at: 2026-10-08T00:16:40.708Z
+updated_at: 2026-10-08T01:52:59.513Z
 started_at: 2026-10-08T00:07:10.029Z
 ---
 Own main-only author replies and request closure for issue422. Current acknowledgement6047406306 created2026-10-07T21:41:08Z edited22:28:26Z; canonicalresultT116reportedlayerpending. Actual27 dualroutes+two distinctAstra complete-input reviews accepted9scope, but canonical confirmation/PRreview/CI/merge/live publication remain. Finalreply statesactualrungs/verifiers/scopedreviews/18negativecontrols safeceil/sourcecredit/oldhistory andmatchingpublishedcase/overview/resultchecks; no automaticissueclosurefromreportedPR. RootownsGH/tbdmutations.
 
 ## Notes
 
+CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
+Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
+Lower ownvenv173filereplay5296PASS30SKIP1XFAIL+1heavyPASS rawouter0/505.306603s<unchanged900; originalcancelledmetadataattempts retain130. Upper2aeb selectednative63/103checksPASS outer785.600s/raw0<unchanged1800,5608ordinaryPASS+1heavyPASS. Finalef472 supplements with23releasePASSraw0, pinowner101026 and324atlasproducerPASS. Completeotherbytes preserved vs2aeb; only9confirmedatlasrefs+pin, all1762squares7048corners exactbinding independentlyPASS.10lowerregularizedrefs separately1867squares7468cornersPASS;19provenancerows explicit preservationexception, primary/history unchanged. Originalolderfail/cancel/rawunavailable outcomes unchanged.
+CheckpointPR43191c6d398f38432d3a41f41271a00c84b15758c85 ready/reviewed16hostedSUCCESS50SKIP; currentcost-first body givesfullstate, actualscopes, review/source/custodylinks andnextdependency. Recoverydraftrelease406258689 retains download/memberverified priorarchives, originalsource/reviews/queue/nativefailedreceipts, actual401deployment108files, testedsetupZIP/storageplan/Gitbundles. Latestcompletedgates/concurrentmerge/currentreviews/freshstate incrementalsupplement being finalized; do notclaimpendingroundtripdone.
+ConcurrentdraftPR43478229c9e nowthirdlayer reports actual425tenjobs453.856653s and428THREEupstreamgeometryjobs7.843s; independentread ofcompactreceiptsconfirms10childrenraw0 andthreepositive/duplicate/outsideinputs. Distinctfromouroriginal428FIVEprojectrouteprotocol: no suchfivejobcompletionclaim. T117/T118 remainV0C0S2,8CIFAIL21SUCCESS27SKIP atlastread, publiccustody/finalreview/storageacceptancepending. Preservecoownerthink-v42c codex@spud10; do notoverwriteclaims ormerge434.
+Nextentry: finishupperfinalCI; scopedatomic ghstackmerge429--yes--merge includes427+429 ONLY (notstack430wholewithdraft434). Actualmatchingmergedmain Pages/deployment/status/site/source ownership required before116resultrows/23cases46SVG48layout liveaudit andfinal422reply/ledger/closure underthink-qc6y. Prepared75checks isnotactualdeployment. Issue422 remainsOPEN. CompletedengineeringchildrenmaycloseaftercurrentCIreview; sourceacceptance/deployment/replyparentsstayOPENuntilactualmilestones.
+Bothtrackedsourcecheckouts clean, physical/tracked/PRdiffoutboxesEMPTY at01:51:49 snapshot full-state-preservation-final-20261008.json; nativeexports saved separatelyon tbd-sync. Latestcompleteenvironmentstartup save explicitlyCONFLICT/stale_base; currentinstance testedGHpush/tbd/bootstrapworks, GitHubverifiedfourfilesetupZIPpreserved. New setupchat currentsettings reconcile/save required; no published/freshtaskrestoreclaim.
+
+HISTORICAL RECORD:
 2026-10-08 UTC durable-state checkpoint (coordinator; supersedes earlier pending-head snapshots):
 GitHub reported PR427 head f1d7eacafc1249b430771583edf2120b5fc17d7b and confirmation PR429 head 0d01524be4235b7f12e6a971d73ea7d576fbac0f are both pushed. Formal remote stack430 orders427below429; bothdraft, nonclosingRefs422. Main84881f214086bf5b8ce83a714c4fda6d7be7b2d1 includes merged415/416/418/421/423/426 and closed401 with actual deployed1234/1234,149/149,38/38 checks. Original failures/cancellation retained; no all-green claim.
 Lower final gate run2a901bed9ed345a79ced825056629aa8: actualOUTEREXIT1 total983.36s<1800, reachable801.22s<900, ordinary13219PASS1FAIL30SKIP1XFAIL in799.37s, all97prior commandsPASS, heavyUNRUN. Sole profiler test test_the_profiler_marks_production_the_save_and_the_check; ownerdiagnosis/repairpending. Original620.24s EXIT1/14behavior failures and3c EXIT130 cancellation remain historical receipts.

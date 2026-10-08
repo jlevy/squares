@@ -5,7 +5,7 @@ title: "Import issue422 second SQUISH update: five new counts and four replaceme
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T21:27:58.586Z
-updated_at: 2026-10-08T01:04:37.554Z
+updated_at: 2026-10-08T01:52:58.472Z
 started_at: 2026-10-07T21:37:07.551Z
 ---
 Pin e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b. New88/199/207/236/302; tighter108/179/180/263, all exact side comparisons strict. Separate nine-certificate layer after frozen PR421 twelve-case5e32 batch; preserve earlier geometries/receipts/credits. Current parser refuses new263 boolean squeezed; explicit bounded metadata decision plus meaningful controls required. Its source print below exact side mustremain quotation and use safe ceiling16.7404196795387766. No feasibility replay/adoption yet; source/README/allnine JSON pinned in squares-new-report-intake.
@@ -27,6 +27,15 @@ Source issue: https://github.com/jlevy/squares/issues/422. Author comment6047131
 
 ## Notes
 
+CURRENT STATE HANDOFF — 2026-10-08 UTC (supersedes earlier current-head/pending summaries; history below retained):
+Source is GitHub-saved in formalstack430: reportedPR4273345c393182c8e322cd214685f24c200c28693f3 ready/CLEAN30hostedSUCCESS; confirmationPR429ef47295da87143b96b3b8a66ca6dd84493b953dd pushednonforce/remoteSHAverified, ready, currenthostedCIrunning withno failures atlastread. Exactcandidate fresh independentAstra ReviewI ACCEPT0findings. Fulloriginalscience27jobs/two routes/allchildrenexit0/1141818pairdecisions unchanged. ProposedT116 V3C3S3, nooptimum/exactrigidity.
+Lower ownvenv173filereplay5296PASS30SKIP1XFAIL+1heavyPASS rawouter0/505.306603s<unchanged900; originalcancelledmetadataattempts retain130. Upper2aeb selectednative63/103checksPASS outer785.600s/raw0<unchanged1800,5608ordinaryPASS+1heavyPASS. Finalef472 supplements with23releasePASSraw0, pinowner101026 and324atlasproducerPASS. Completeotherbytes preserved vs2aeb; only9confirmedatlasrefs+pin, all1762squares7048corners exactbinding independentlyPASS.10lowerregularizedrefs separately1867squares7468cornersPASS;19provenancerows explicit preservationexception, primary/history unchanged. Originalolderfail/cancel/rawunavailable outcomes unchanged.
+CheckpointPR43191c6d398f38432d3a41f41271a00c84b15758c85 ready/reviewed16hostedSUCCESS50SKIP; currentcost-first body givesfullstate, actualscopes, review/source/custodylinks andnextdependency. Recoverydraftrelease406258689 retains download/memberverified priorarchives, originalsource/reviews/queue/nativefailedreceipts, actual401deployment108files, testedsetupZIP/storageplan/Gitbundles. Latestcompletedgates/concurrentmerge/currentreviews/freshstate incrementalsupplement being finalized; do notclaimpendingroundtripdone.
+ConcurrentdraftPR43478229c9e nowthirdlayer reports actual425tenjobs453.856653s and428THREEupstreamgeometryjobs7.843s; independentread ofcompactreceiptsconfirms10childrenraw0 andthreepositive/duplicate/outsideinputs. Distinctfromouroriginal428FIVEprojectrouteprotocol: no suchfivejobcompletionclaim. T117/T118 remainV0C0S2,8CIFAIL21SUCCESS27SKIP atlastread, publiccustody/finalreview/storageacceptancepending. Preservecoownerthink-v42c codex@spud10; do notoverwriteclaims ormerge434.
+Nextentry: finishupperfinalCI; scopedatomic ghstackmerge429--yes--merge includes427+429 ONLY (notstack430wholewithdraft434). Actualmatchingmergedmain Pages/deployment/status/site/source ownership required before116resultrows/23cases46SVG48layout liveaudit andfinal422reply/ledger/closure underthink-qc6y. Prepared75checks isnotactualdeployment. Issue422 remainsOPEN. CompletedengineeringchildrenmaycloseaftercurrentCIreview; sourceacceptance/deployment/replyparentsstayOPENuntilactualmilestones.
+Bothtrackedsourcecheckouts clean, physical/tracked/PRdiffoutboxesEMPTY at01:51:49 snapshot full-state-preservation-final-20261008.json; nativeexports saved separatelyon tbd-sync. Latestcompleteenvironmentstartup save explicitlyCONFLICT/stale_base; currentinstance testedGHpush/tbd/bootstrapworks, GitHubverifiedfourfilesetupZIPpreserved. New setupchat currentsettings reconcile/save required; no published/freshtaskrestoreclaim.
+
+HISTORICAL RECORD:
 Author issue422 body/all currentcomments captured and cross-scope audit complete. Exact nine sourcefiles/bytes/hash/roster pinned e63e4e5, five new88,199,207,236,302; four replacement108,179,180,263. Queue acknowledgment posted https://github.com/jlevy/squares/issues/422#issuecomment-6047406306 naming both complete rational verifier routes and postmerge graphics/results checks. No nine-case exact replay or admission is claimed. Preserve earlier verified certificates and5e32history, and qualify179/263 supersession in nextlayer. Captured detailed summary includes10 firstupdate bounds stillcurrent plus9secondsource bounds.
 
 2026-10-07 continuation: Issue422 separatelyacknowledged https://github.com/jlevy/squares/issues/422#issuecomment-6047406306. Immutablee63e4e52b1728b6671b2f263c5e02a4aa79a39d3 ninecounts88,108,179,180,199,207,236,263,302: five new/fourreplacement. External/workspace/squares-422-import-preparation boundedthinparserpatch/facts/acquisition/seedcredit/source-pin retained;38cheaptestsPASS0.33s,RuffPASS,patchapplycheckPASS.1762rationaltriples captured, originalfirstupdate5e32unchanged. n263 sourceprint belowexact; separate safeceil16.7404196795387766 retained. No9geometricdecision/registryadoption yet. Continue separatelayerafter421/423published, mathematicalreview/dualexact/controls/graphics/standarddeployment required.
