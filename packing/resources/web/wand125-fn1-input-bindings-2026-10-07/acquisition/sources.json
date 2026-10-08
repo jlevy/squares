@@ -1,0 +1,50 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-08T03:45:32Z",
+  "git_scope": "Eleven explicitly selected files at the immutable FN-1 supplement revision: all eight original recorded gzip inputs, the source binding manifest and explanation, and the root licence. No archive bundle or geometric checker is acquired or run.",
+  "sources": [
+    {
+      "id": "wand125-fn1-input-bindings",
+      "source_url": "https://github.com/wand125/square-packing-bounds",
+      "source_ref": "refs/heads/main",
+      "source_commit": "b73473fcf60421222b739294d3f7d9c4a8b8da07",
+      "committed_utc": "2026-10-07T01:46:24Z",
+      "git_tree": "92e86ea7078cc70f067e3a4810a16ab1e25276fc",
+      "archived_path": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/square-packing-bounds",
+      "subtree_manifest": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "verification/fn1/README.md",
+        "verification/fn1/input-bindings.json",
+        "certificates/mixed_n19_L4825/check2/recorded-input.json.gz",
+        "certificates/mixed_n20_L4905/check2/recorded-input.json.gz",
+        "certificates/mixed_n26_L5545/check2/recorded-input.json.gz",
+        "certificates/mixed_n27_L56435/check2/recorded-input.json.gz",
+        "certificates/mixed_n28_L5735/check2/recorded-input.json.gz",
+        "certificates/mixed_n30_L58835/check2/recorded-input.json.gz",
+        "certificates/mixed_n39_L665/check2/recorded-input.json.gz",
+        "certificates/mixed_n41_L6775/check2/recorded-input.json.gz"
+      ],
+      "subtree_file_count": 11,
+      "subtree_total_bytes": 201666,
+      "retained_file_count": 11,
+      "retained_total_bytes": 201666,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "MIT, Copyright (c) 2026 wand125 (root LICENSE)",
+      "claims": [
+        "Original compressed inputs bind the existing eight check2 records to byte-identical retained candidates; mathematical digests and existing bounds are unchanged."
+      ],
+      "original_gzip": [
+        "square-packing-bounds/certificates/mixed_n19_L4825/check2/recorded-input.json.gz",
+        "square-packing-bounds/certificates/mixed_n20_L4905/check2/recorded-input.json.gz",
+        "square-packing-bounds/certificates/mixed_n26_L5545/check2/recorded-input.json.gz",
+        "square-packing-bounds/certificates/mixed_n27_L56435/check2/recorded-input.json.gz",
+        "square-packing-bounds/certificates/mixed_n28_L5735/check2/recorded-input.json.gz",
+        "square-packing-bounds/certificates/mixed_n30_L58835/check2/recorded-input.json.gz",
+        "square-packing-bounds/certificates/mixed_n39_L665/check2/recorded-input.json.gz",
+        "square-packing-bounds/certificates/mixed_n41_L6775/check2/recorded-input.json.gz"
+      ]
+    }
+  ]
+}
