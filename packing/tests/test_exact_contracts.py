@@ -9,6 +9,7 @@ import pytest
 
 from sqpack import verify
 from sqpack.field import NumberField
+from sqpack.prepared_verify import prepared_verify_packing
 from sqpack.verify import verify_packing
 
 
@@ -104,7 +105,9 @@ def test_verifier_reuse_preserves_full_exact_and_tolerant_reports(
             1,
             1,
         ]
-        assert verify_packing(squares, 5, sign, bucket=bucket) == verify.Report(
+        reference = verify_packing(squares, 5, sign, bucket=bucket)
+        assert prepared_verify_packing(squares, 5, sign, bucket=bucket) == reference
+        assert reference == verify.Report(
             valid=True,
             n=4,
             container_contacts=8,
@@ -120,20 +123,20 @@ def test_verifier_recomputes_after_geometry_or_tolerance_changes() -> None:
         _unit_square(Fraction(0), Fraction(0)),
         _unit_square(Fraction(999, 1000), Fraction(0)),
     ]
-    loose = verify_packing(squares, 3, verify.float_sign(1e-2))
-    tight = verify_packing(squares, 3, verify.float_sign(1e-4))
+    loose = prepared_verify_packing(squares, 3, verify.float_sign(1e-2))
+    tight = prepared_verify_packing(squares, 3, verify.float_sign(1e-4))
     assert loose.valid
     assert loose.touching_pair_indices == [(0, 1)]
     assert not tight.valid
     assert tight.failures == [("overlap", "squares 0 and 1 overlap")]
 
     squares[1][:] = _unit_square(Fraction(2), Fraction(0))
-    moved = verify_packing(squares, 3, _fraction_sign)
+    moved = prepared_verify_packing(squares, 3, _fraction_sign)
     assert moved.valid
     assert moved.strict_pairs == 1
     assert moved.touching_pair_indices == []
     squares[1][:] = squares[0]
-    assert verify_packing(squares, 3, _fraction_sign).failures == [
+    assert prepared_verify_packing(squares, 3, _fraction_sign).failures == [
         ("overlap", "squares 0 and 1 overlap")
     ]
 
@@ -179,12 +182,12 @@ def test_verifier_reuses_only_own_axis_arithmetic_within_each_call(
 
     axes_calls = 0
     trace.clear()
-    first = verify_packing(squares, 5, _fraction_sign)
+    first = prepared_verify_packing(squares, 5, _fraction_sign)
     assert axes_calls == 4
     assert trace == expected
     axes_calls = 0
     trace.clear()
-    assert verify_packing(squares, 5, _fraction_sign) == first
+    assert prepared_verify_packing(squares, 5, _fraction_sign) == first
     assert axes_calls == 4
     assert trace == expected
 
@@ -195,14 +198,14 @@ def test_verifier_builds_both_axis_lists_before_a_strict_early_return() -> None:
     with pytest.raises(IndexError):
         verify.separated(first, malformed, _fraction_sign)
     with pytest.raises(IndexError):
-        verify_packing([first, malformed], 5, _fraction_sign, check_shapes=False)
+        prepared_verify_packing([first, malformed], 5, _fraction_sign, check_shapes=False)
 
 
 def test_verifier_leaves_unpaired_axes_and_unreached_projections_unused(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     # With no pair, check_shapes=False never asks whether a piece has three vertices.
-    assert verify_packing(
+    assert prepared_verify_packing(
         [[(Fraction(1), Fraction(1))]], 5, _fraction_sign, check_shapes=False
     ) == verify.Report(valid=True, n=1)
     first = _unit_square(Fraction(0), Fraction(0))
@@ -215,7 +218,7 @@ def test_verifier_leaves_unpaired_axes_and_unreached_projections_unused(
         return original_project(square, axis, sign)
 
     monkeypatch.setattr(verify, "project", checked_project)
-    assert verify_packing([first, second], 5, _fraction_sign).valid
+    assert prepared_verify_packing([first, second], 5, _fraction_sign).valid
     assert calls == [(first, (0, 1)), (second, (0, 1))]
 
 
@@ -229,9 +232,9 @@ def test_verifier_keeps_degenerate_shape_disabled_pair_semantics() -> None:
         verify.separated(squares[i], squares[j], _fraction_sign)
         for i, j in verify.candidate_pairs(squares)
     ] == [1, 1, 1]
-    assert verify_packing(squares, 5, _fraction_sign, check_shapes=False) == verify.Report(
-        valid=True, n=3, container_contacts=8, strict_pairs=3, pairs_tested=3
-    )
+    assert prepared_verify_packing(
+        squares, 5, _fraction_sign, check_shapes=False
+    ) == verify.Report(valid=True, n=3, container_contacts=8, strict_pairs=3, pairs_tested=3)
 
 
 def test_verifier_reuse_preserves_an_exact_algebraic_rotated_square() -> None:
@@ -254,7 +257,9 @@ def test_verifier_reuse_preserves_an_exact_algebraic_rotated_square() -> None:
         verify.separated(squares[i], squares[j], field.sign)
         for i, j in verify.candidate_pairs(squares)
     ] == [0, 0, 1, 0, 1, 1]
-    assert verify_packing(squares, field.rational(5), field.sign) == verify.Report(
+    reference = verify_packing(squares, field.rational(5), field.sign)
+    assert prepared_verify_packing(squares, field.rational(5), field.sign) == reference
+    assert reference == verify.Report(
         valid=True,
         n=4,
         container_contacts=8,
@@ -263,3 +268,23 @@ def test_verifier_reuse_preserves_an_exact_algebraic_rotated_square() -> None:
         pairs_tested=6,
         touching_pair_indices=[(0, 1), (0, 2), (1, 2)],
     )
+
+
+@pytest.mark.parametrize("failure", ["shape", "container", "overlap"])
+@pytest.mark.parametrize("bucket", [False, True])
+def test_prepared_verifier_preserves_complete_failure_reports(
+    failure: str, *, bucket: bool
+) -> None:
+    squares = _four_squares()
+    if failure == "shape":
+        x, y = squares[3][2]
+        squares[3][2] = (x + Fraction(1, 10), y)
+    elif failure == "container":
+        squares[0] = [(x - Fraction(1, 10), y) for x, y in squares[0]]
+    else:
+        squares[1] = [(x - Fraction(1, 10), y) for x, y in squares[1]]
+    reference = verify_packing(squares, 5, _fraction_sign, bucket=bucket)
+    prepared = prepared_verify_packing(squares, 5, _fraction_sign, bucket=bucket)
+    assert prepared == reference
+    assert not reference.valid
+    assert any(kind == failure for kind, _ in reference.failures)
