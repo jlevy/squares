@@ -135,6 +135,7 @@ The ones that carry the most weight:
   side’s last place as the same displayed bound.
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
   exactly only when `status` is `proved`.
+
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
   bounds match exactly.
   There are currently 77 proved and 247 open formal cases.
