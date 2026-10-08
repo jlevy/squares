@@ -244,12 +244,14 @@ def plan() -> list[tuple[Path, str]]:
                 "venue": "GitHub",
                 "dated": DAY,
                 "lineage": "builds-on-project",
-                "credit": "Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel",
+                "credit": "Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel, Levy",
                 "short_credit": "Couzo after Xu et al.",
                 "note": (
                     "Eight complete certificates and decimal context poses at "
                     + reports.REVISION
                     + "; source credits and tools are attributed. "
+                    "The source uses Squares Project (Levy) verification code; "
+                    "this project lineage is not independent. "
                     "No optimizer/local/global claims. "
                     "Unlicensed programs/prose are pinned rather than copied."
                 ),

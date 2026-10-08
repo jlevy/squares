@@ -48,7 +48,8 @@ def test_complete_source_only_plan_is_schema_valid_and_preserves_current_cases()
         if row["key"] == register.reports.SOURCE_KEY
     )
     assert credit["lineage"] == "builds-on-project"
-    assert credit["credit"] == "Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel"
+    assert credit["credit"] == "Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel, Levy"
+    assert "Squares Project (Levy) verification code" in credit["note"]
     assert len(cases) == 324
     assert all(path.read_bytes() == raw for path, raw in {**cases, **deciding}.items())
     assert result["verification"] == "V0"
@@ -56,6 +57,43 @@ def test_complete_source_only_plan_is_schema_valid_and_preserves_current_cases()
     assert "overlaps that source checker" in result["notes"]
     assert "second maintained rational-geometry" in result["notes"]
     assert "claims_record" not in source
+
+
+def test_missing_bibliography_row_inherits_full_credit_and_project_lineage(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    bibliography = register.REPO / "packing/resources/bibliography.yaml"
+    original_bytes = bibliography.read_bytes()
+    original = safe_load(bibliography.read_text())
+    retained = {
+        **original,
+        "sources": [
+            row for row in original["sources"] if row["key"] != register.reports.SOURCE_KEY
+        ],
+    }
+    assert len(retained["sources"]) == len(original["sources"]) - 1
+    real_read = Path.read_text
+
+    def read(path: Path, *args, **kwargs) -> str:
+        if path == bibliography:
+            return register.dump(retained)
+        return real_read(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", read)
+    proposed = register.plan()
+    inserted = safe_load(next(text for path, text in proposed if path == bibliography))
+    assert inserted["sources"][:-1] == retained["sources"]
+    credit = inserted["sources"][-1]
+    assert credit["key"] == register.reports.SOURCE_KEY
+    assert credit["credit"] == "Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel, Levy"
+    assert credit["short_credit"] == "Couzo after Xu et al."
+    assert credit["lineage"] == "builds-on-project"
+    assert "Squares Project (Levy) verification code" in credit["note"]
+    assert "this project lineage is not independent" in credit["note"]
+    assert {key: value for key, value in inserted.items() if key != "sources"} == {
+        key: value for key, value in retained.items() if key != "sources"
+    }
+    assert bibliography.read_bytes() == original_bytes
 
 
 def test_late_registry_contract_failure_writes_nothing(monkeypatch: pytest.MonkeyPatch) -> None:
