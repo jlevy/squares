@@ -5,15 +5,15 @@ title: "PR #395: resolve broad push-gate regressions before completion"
 kind: bug
 status: in_progress
 priority: 1
-version: 2
-delegate: claude-code@spud10.local
+version: 3
+delegate: codex-pr395-site-review
 labels: []
 dependencies: []
 parent_id: is-01m4cecqqmt13gys8265mpra32
 hold: null
 hold_until: null
 created_at: 2026-10-08T03:28:56.016Z
-updated_at: 2026-10-08T03:29:10.726Z
+updated_at: 2026-10-08T10:59:48.048Z
 started_at: 2026-10-08T03:29:10.723Z
 ---
 The interrupted push gate on 1cf7ca0 passed 62 of 64 steps. Browser floor failed two design-token contracts for newly added workbench-startup CSS literals, and the broad normal Python test run showed F/E markers before interruption for the independently confirmed C3 guard correction. Diagnose with fail-fast reporting, retain meaningful contracts, fix all regressions, and rerun required push/full/exact-head hosted CI.
