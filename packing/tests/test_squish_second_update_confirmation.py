@@ -96,6 +96,61 @@ def test_complete_canonical_scope_and_historical_equality(private: Path) -> None
     assert confirmation.shared.REVISION == "5e32bbd7028b6e3b869979278079cd37ed6770aa"
 
 
+@pytest.fixture
+def linked_proofs(private: Path) -> Path:
+    store = private.parent / "proof-store"
+    confirmation.WITNESSES.rename(store)
+    confirmation.WITNESSES.symlink_to(store, target_is_directory=True)
+    return private
+
+
+def test_linked_proof_batch_matches_all_fresh_standalone_checks(linked_proofs: Path) -> None:
+    paths = [
+        confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+        for n in confirmation.NUMBERS
+    ]
+    paths += [
+        "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
+        "../outside.yaml",
+        "/outside.yaml",
+    ]
+    batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
+    assert batched == {
+        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
+        for path in paths
+    }
+    assert all(batched[path] is None for path in paths[:9])
+    assert all(batched[path] for path in paths[9:])
+    assert all(confirmation.linked_certificate_problems(paths, repository=SOURCE).values())
+
+
+@pytest.mark.parametrize("mutation", ["misbound", "malformed"])
+def test_linked_proof_batch_rechecks_mutations_between_invocations(
+    linked_proofs: Path, mutation: str
+) -> None:
+    paths = [
+        confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+        for n in (88, 108)
+    ]
+    assert confirmation.linked_certificate_problems(
+        paths, repository=linked_proofs
+    ) == dict.fromkeys(paths)
+    target = confirmation.certificate_path(88)
+    replacement = (
+        confirmation.certificate_path(108).read_bytes()
+        if mutation == "misbound"
+        else gzip.compress(b"not a witness")
+    )
+    target.write_bytes(replacement)
+    batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
+    assert batched[paths[0]]
+    assert batched[paths[1]] is None
+    assert batched == {
+        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
+        for path in paths
+    }
+
+
 @pytest.mark.parametrize(
     "mutation",
     [

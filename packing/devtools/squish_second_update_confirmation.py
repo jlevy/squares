@@ -16,6 +16,7 @@ import json
 import lzma
 import re
 import tempfile
+from collections.abc import Iterable
 from fractions import Fraction
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -730,7 +731,7 @@ def read_certificate(n: int) -> dict[str, Any]:
     if len(data) > original.MAX_RECEIPT_BYTES:
         raise original.PacketError("canonical certificate exceeds ceiling")
     document = safe_load(data.decode())
-    if document.get("softschema") != {
+    if not isinstance(document, dict) or document.get("softschema") != {
         "schema": "../witness.schema.yaml",
         "contract": "packing.squares:Witness/v2",
         "envelope": "witness",
@@ -780,10 +781,7 @@ def check_certification(
         raise original.PacketError("empty, repeated or unknown canonical confirmation scope")
     rows = admit_certification()
     for n in selected:
-        expected = to_witness(read_fact(n))
-        actual = read_certificate(n)
-        if shared.json_bytes(actual) != shared.json_bytes(expected):
-            raise original.PacketError("canonical whole witness metadata/geometry mismatch")
+        _check_certificate(n)
         if replay:
             for name, retained in zip(
                 JOBS, rows[n]["case"]["historical_actual_receipts"], strict=True
@@ -795,6 +793,13 @@ def check_certification(
                         "canonical replay differs from historical exact verdict"
                     )
     return rows
+
+
+def _check_certificate(n: int) -> None:
+    expected = to_witness(read_fact(n))
+    actual = read_certificate(n)
+    if shared.json_bytes(actual) != shared.json_bytes(expected):
+        raise original.PacketError("canonical whole witness metadata/geometry mismatch")
 
 
 def restore_witnesses() -> None:
@@ -815,17 +820,42 @@ def restore_witnesses() -> None:
 
 
 def linked_certificate_problem(path: str, *, repository: Path) -> str | None:
+    return linked_certificate_problems([path], repository=repository)[path]
+
+
+def linked_certificate_problems(
+    paths: Iterable[str], *, repository: Path
+) -> dict[str, str | None]:
+    """Admit one invocation's complete custody, then check every selected leaf freshly."""
+    selected = dict.fromkeys(paths)
     if repository.resolve() != REPO.resolve() or not WITNESSES.is_symlink():
-        return "resolves outside the repository"
+        return dict.fromkeys(selected, "resolves outside the repository")
     declared = {certificate_path(n).relative_to(REPO).as_posix(): n for n in NUMBERS}
-    n = declared.get(path)
-    if n is None or certificate_path(n).is_symlink():
-        return "resolves outside the repository"
+    eligible: dict[str, int] = {}
+    problems: dict[str, str | None] = {}
+    for path in selected:
+        n = declared.get(path)
+        if n is None or certificate_path(n).is_symlink():
+            problems[path] = "resolves outside the repository"
+        else:
+            eligible[path] = n
+    if not eligible:
+        return problems
     try:
-        check_certification([n])
+        _ = admit_certification()
     except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
-        return f"linked second-update proof custody mismatch: {error}"
-    return None
+        problems.update(
+            dict.fromkeys(eligible, f"linked second-update proof custody mismatch: {error}")
+        )
+        return problems
+    for path, n in eligible.items():
+        try:
+            _check_certificate(n)
+        except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
+            problems[path] = f"linked second-update proof custody mismatch: {error}"
+        else:
+            problems[path] = None
+    return problems
 
 
 def confirmed_bound(n: int) -> dict[str, Any]:

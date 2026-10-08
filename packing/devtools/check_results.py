@@ -455,6 +455,31 @@ def repository_file_problem(path: str) -> str | None:
     return None
 
 
+def repository_file_problems(paths: Iterable[str]) -> dict[str, str | None]:
+    """Check one register invocation, sharing only the complete linked-proof admission."""
+    from devtools.squish_second_update_packets import NUMBERS  # noqa: PLC0415
+
+    selected = dict.fromkeys(paths)
+    declared = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in NUMBERS
+    }
+    linked = [
+        path
+        for path in selected
+        if path in declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    problems: dict[str, str | None] = {}
+    if linked:
+        from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+
+        problems.update(second.linked_certificate_problems(linked, repository=REPO))
+    problems.update(
+        (path, repository_file_problem(path)) for path in selected if path not in problems
+    )
+    return problems
+
+
 def _frontmatter(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---\n"):
@@ -1118,6 +1143,12 @@ def main() -> int:
     problems.extend(superseded_by_cycles(results))
 
     standings: dict[str, Standing] = {}
+    artifact_problems = repository_file_problems(
+        path
+        for record in results
+        for field in ("artifacts", "controls")
+        for path in record.get(field) or []
+    )
     for record in results:
         rid = record["id"]
         scope = record["scope"]
@@ -1137,7 +1168,7 @@ def main() -> int:
             problems.extend(
                 f"{rid}: {field} path {problem}: {path}"
                 for path in record.get(field) or []
-                if (problem := repository_file_problem(path))
+                if (problem := artifact_problems[path])
             )
 
         problems.extend(attribution_problems(record, sources))
