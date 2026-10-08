@@ -179,20 +179,20 @@ def test_admission_normalizes_each_fact_once_and_rechecks_next_call(
 ) -> None:
     assert private == confirmation.REPO
     parsed: list[int] = []
-    parse_source = confirmation.original.parse_source
+    parse_source_bytes = confirmation.original.parse_source_bytes
     checker_input = confirmation.original.checker_input
     checked_inputs = 0
 
-    def counted(path: Path, expected_n: int) -> tuple[dict, bytes]:
+    def counted(raw: bytes, expected_n: int) -> tuple[dict, bytes]:
         parsed.append(expected_n)
-        return parse_source(path, expected_n)
+        return parse_source_bytes(raw, expected_n)
 
     def counted_input(value: dict, *, receipt: bool = False) -> dict:
         nonlocal checked_inputs
         checked_inputs += 1
         return checker_input(value, receipt=receipt)
 
-    monkeypatch.setattr(confirmation.original, "parse_source", counted)
+    monkeypatch.setattr(confirmation.original, "parse_source_bytes", counted)
     monkeypatch.setattr(confirmation.original, "checker_input", counted_input)
     for _ in range(2):
         parsed.clear()
@@ -293,6 +293,29 @@ def test_linked_proof_standalone_checks_complete_proof_and_invalid_paths(
         path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
         for path in invalid_paths
     }
+
+
+def test_linked_proof_batch_admits_exact_roster_and_refuses_other_escapes(
+    linked_proofs: Path,
+) -> None:
+    paths = [
+        confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
+        for n in confirmation.NUMBERS
+    ]
+    paths += [
+        "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
+        "../outside.yaml",
+        "/outside.yaml",
+    ]
+    batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
+    assert set(batched) == set(paths)
+    assert {path: batched[path] for path in paths[9:]} == {
+        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
+        for path in paths[9:]
+    }
+    assert all(batched[path] is None for path in paths[:9])
+    assert all(batched[path] for path in paths[9:])
+    assert all(confirmation.linked_certificate_problems(paths, repository=SOURCE).values())
 
 
 @pytest.mark.parametrize("n", confirmation.NUMBERS)

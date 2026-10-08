@@ -510,9 +510,8 @@ def repository_file_problems(paths: Iterable[str]) -> dict[str, str | None]:
         from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
 
         problems.update(second.linked_certificate_problems(linked, repository=REPO))
-
     first_declared = {
-        first.certificate_path(n).relative_to(first.REPO).as_posix()
+        f"packing/witnesses/squish-401-update-2026/n-{n:03d}-rational.yaml.gz"
         for n in first.RESULT_NUMBERS
     }
     first_linked = [

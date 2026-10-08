@@ -1160,11 +1160,10 @@ def snapshot_duplicate_copy_bytes() -> int:
 
 
 def snapshot_source_paths() -> list[Path]:
-    """Actual copy operations, excluding build products and caches.
+    """Actual copied source destinations, excluding build products and caches.
 
-    Separately declared and rescued inputs share one named destination, exactly as
-    snapshot_copy_targets and clone_tree require. Distinct path aliases remain
-    distinct; snapshot_duplicate_copy_bytes reports avoided repeated writes.
+    Explicit and dependency-rescued paths share the copier's unique named roster;
+    repeated declarations do not add another physical file to the worker.
     """
     paths = list(snapshot_copy_targets())
     for document in ROOT_DOCUMENTS:

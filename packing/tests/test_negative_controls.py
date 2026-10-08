@@ -1771,7 +1771,7 @@ packet.original.exact_verify = packet.original.independent.check = forbidden
 def test_second_squish_complete_replay_survives_native_worker_boundaries(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
-    """Exercise the production copy, real index and every complete proof leaf."""
+    """Exercise the production copy, real index, native readers and both live mutants."""
     from devtools import squish_second_update_confirmation as packet  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
 
@@ -1795,13 +1795,85 @@ def test_second_squish_complete_replay_survives_native_worker_boundaries(
         target = tree / source.relative_to(controls.REPO)
         assert not target.is_symlink()
         assert target.read_bytes() == source.read_bytes()
-    _run_second_squish_native_program(
-        tree,
-        """
+    baseline_program = """
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import squish_second_update_confirmation as packet
+from devtools import squish_second_update_house_links as house
+def forbidden(*args, **kwargs):
+    raise AssertionError('native admission must not execute a geometric decider')
+packet.decide = packet.original.decide = forbidden
+packet.original.exact_verify = packet.original.independent.check = forbidden
 assert tuple(packet.check_certification()) == packet.NUMBERS
-print('all 27 complete inputs and nine proof leaves admitted')
-""",
+# The current n108 house is #432 geometry and must not satisfy the old #422 receipt.
+try:
+    house.check_houses([108])
+except packet.original.PacketError as error:
+    assert 'full geometry or private metadata custody mismatch' in str(error)
+else:
+    raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
+from devtools.register_ryxu_reports import read_history
+from devtools import register_gupta_reports as gupta
+historical = {row['n']: row['house'] for row in read_history()}
+if gupta.HISTORY.exists():
+    for row in gupta.read_history():
+        historical.setdefault(row['n'], row['house'])
+    try:
+        house.check_houses([88])
+    except packet.original.PacketError as error:
+        assert 'full geometry or private metadata custody mismatch' in str(error)
+    else:
+        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
+historical_paths = {}
+for n in packet.NUMBERS:
+    if n in historical:
+        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
+        path.write_text(historical[n])
+        historical_paths[n] = path
+current_house_path = house.house_path
+house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
+assert tuple(house.check_houses()) == packet.NUMBERS
+for path in historical_paths.values():
+    path.unlink()
+house.house_path = current_house_path
+for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
+    relative = path.relative_to(packet.REPO).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+for producer in (atlas.update, lambda: atlas.update_selected([88])):
+    try:
+        producer()
+    except packet.original.PacketError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked output')
+print('all 27 complete inputs admitted; all nine original houses admitted from '
+      'current or full retained history; current selected owner reads and output guards passed')
+"""
+    environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
+    baseline = subprocess.run(
+        [sys.executable, "-c", baseline_program],
+        cwd=work,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=60,
     )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    selected = [
+        control
+        for control in specification["controls"]
+        if control["name"].startswith("SQUISH second update -")
+    ]
+    assert len(selected) == 2
+    for control in selected:
+        source = ROOT / control["file"]
+        original = source.read_bytes()
+        passed, detail = controls.run_one(control, tree)
+        assert passed, detail
+        assert source.read_bytes() == original
 
 
 @pytest.mark.parametrize(

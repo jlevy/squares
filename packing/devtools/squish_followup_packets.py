@@ -676,7 +676,7 @@ def check_certification(
     rows, controls = admit_certification()
     for n in selected:
         row = rows[n]
-        certificate = _check_certificate(n)
+        certificate = _check_certificate_input(n)
         if replay and original.decide(certificate) != {
             checker: row[checker] for checker in CHECKERS
         }:
@@ -687,16 +687,8 @@ def check_certification(
 
 
 def _check_certificate(n: int) -> dict[str, Any]:
-    expected = to_witness(read_fact(n))
-    certificate = read_certificate(n)
-    if (
-        certificate.get("id") != expected["id"]
-        or certificate.get("source") != expected["source"]
-        or certificate.get("certificate") != expected["certificate"]
-        or original.checker_input(certificate) != original.checker_input(expected)
-    ):
-        raise original.PacketError(f"n={n} revision-specific witness metadata/input mismatch")
-    return certificate
+    """Check one complete certificate's metadata and input without geometry replay."""
+    return _check_certificate_input(n)
 
 
 def restore_witnesses() -> None:
@@ -761,7 +753,7 @@ def linked_certificate_problems(
             problems[path] = "resolves outside the repository"
             continue
         try:
-            _ = _check_certificate(n)
+            _check_certificate_input(n)
         except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
             problems[path] = f"linked reviewed proof custody mismatch: {error}"
         else:
