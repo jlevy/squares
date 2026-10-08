@@ -64,6 +64,16 @@ def results() -> str:
 
 
 @pytest.fixture(scope="module")
+def result_bodies() -> dict[str, str]:
+    """Render complete result bodies during setup, before per-test monkeypatches.
+
+    Each preview still renders afresh; its complete context comes from the same
+    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
+    """
+    return site_renders.result_bodies()
+
+
+@pytest.fixture(scope="module")
 def register() -> list[dict]:
     return safe_load(overview_data.RESULTS.read_text(encoding="utf-8"))["results"]
 
@@ -127,18 +137,29 @@ def test_counts_are_the_declared_rungs(register: list[dict]) -> None:
     assert stats.cases_1_100_proved + stats.cases_1_100_open == 100
 
 
+@pytest.fixture
+def shared_html(request: pytest.FixtureRequest) -> str:
+    """Resolve the shared page during setup, before its independent fresh render.
+
+    Resolving it in the assertion rendered a cold overview twice in call time
+    (12.49 s on run 37777128452). The fresh render remains uncached.
+    """
+    return cast(str, request.getfixturevalue(request.param))
+
+
 @pytest.mark.parametrize(
-    ("render", "shared"),
+    ("render", "shared_html"),
     [(render_overview.overview_page, "page"), (render_overview.results_page, "results")],
     ids=["overview", "results"],
+    indirect=["shared_html"],
 )
 def test_the_render_is_deterministic(
-    render: Callable[[], render_overview.Page], shared: str, request: pytest.FixtureRequest
+    render: Callable[[], render_overview.Page], shared_html: str
 ) -> None:
     """A fresh render of each page is the shared one, byte for byte, which is what lets
     every other check read the shared render. One page per node: the two fresh renders
     together held one node past the per-test ceiling (12.25 s on run 37372707772)."""
-    assert render().html == request.getfixturevalue(shared)
+    assert render().html == shared_html
 
 
 def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
@@ -5496,12 +5517,12 @@ def test_a_result_rows_popover_body_comes_from_one_function(
 
 
 def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragment(
-    overview: overview_data.Overview,
+    overview: overview_data.Overview, result_bodies: dict[str, str]
 ) -> None:
     """Both tables retain each complete claim offline; fetched views keep its context."""
     for result in overview.results:
         preview = overview_sections.result_row(result, trigger="row").popover
-        full = overview_sections.result_row_popover_body(result, overview)
+        full = result_bodies[result.id]
         assert overview_sections.prose_html(result.record["claim"]) in preview, result.id
         assert (
             overview_sections.prose_html(result.record["significance"]["rationale"]) in preview
