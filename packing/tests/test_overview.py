@@ -127,18 +127,29 @@ def test_counts_are_the_declared_rungs(register: list[dict]) -> None:
     assert stats.cases_1_100_proved + stats.cases_1_100_open == 100
 
 
+@pytest.fixture
+def shared_html(request: pytest.FixtureRequest) -> str:
+    """Resolve the shared page during setup, before its independent fresh render.
+
+    Resolving it in the assertion rendered a cold overview twice in call time
+    (12.49 s on run 37777128452). The fresh render remains uncached.
+    """
+    return cast(str, request.getfixturevalue(request.param))
+
+
 @pytest.mark.parametrize(
-    ("render", "shared"),
+    ("render", "shared_html"),
     [(render_overview.overview_page, "page"), (render_overview.results_page, "results")],
     ids=["overview", "results"],
+    indirect=["shared_html"],
 )
 def test_the_render_is_deterministic(
-    render: Callable[[], render_overview.Page], shared: str, request: pytest.FixtureRequest
+    render: Callable[[], render_overview.Page], shared_html: str
 ) -> None:
     """A fresh render of each page is the shared one, byte for byte, which is what lets
     every other check read the shared render. One page per node: the two fresh renders
     together held one node past the per-test ceiling (12.25 s on run 37372707772)."""
-    assert render().html == request.getfixturevalue(shared)
+    assert render().html == shared_html
 
 
 def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
