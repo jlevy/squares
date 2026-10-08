@@ -12240,3 +12240,81 @@ results:
     - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-302.json.xz
     - packing/tests/test_squish_second_update_confirmation.py
     - packing/tests/test_generate_frontier_case.py
+  - id: T-117
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Exact rational ceiling refinements at n = 105, 292
+    claim: Seth Rehwaldt reports finite rational upper-bound refinements of existing Couzo constructions
+      at n = 105, 292. The complete exact sides and ordered rosters are retained as reported; no optimality
+      claim is registered.
+    scope:
+      n_values:
+      - 105
+      - 292
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: Certificate refinements of existing constructions; tiny exact improvements over newer
+        retrieved certificates, with no solved case or new arrangement.
+      scored: '2026-10-07'
+      by: think-f3dl / think-v42c import lane (repository)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Rehwaldt Couzo refinements 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-rehwaldt-couzo-refinements-2026-10-07-report
+    artifacts:
+    - packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/README.md
+    - packing/devtools/refinement_packets.py
+    - packing/frontier/n-105.md
+    - packing/frontier/n-292.md
+    next_rung: Complete replay admission, two mutant refusals per accepted checker, durable receipts
+      and mapped mathematical review are required before confirmation. The current complete-roster drawing
+      check assigns no result rung.
+    notes: Refinement work by Seth Rehwaldt with OpenAI Codex assistance; Couzo and earlier construction
+      contributors retain credit. All prior verified ceilings, sources and receipts remain historical.
+      Restricted analytic claims are outside this import.
+    composition: The exact half-angle map gives unit frames; translating each already repaired source
+      center by S/2 gives the lower-left frame. The complete rational side is authoritative and no coordinate
+      or side is rounded.
+  - id: T-118
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Exact rational ceiling refinements at n = 68
+    claim: Seth Rehwaldt reports finite rational upper-bound refinements of existing Couzo constructions
+      at n = 68. The complete exact sides and ordered rosters are retained as reported; no optimality
+      claim is registered.
+    scope:
+      n_values:
+      - 68
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: Certificate refinements of existing constructions; tiny exact improvements over newer
+        retrieved certificates, with no solved case or new arrangement.
+      scored: '2026-10-07'
+      by: think-f3dl / think-v42c import lane (repository)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Rehwaldt n68 refinement 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-rehwaldt-n68-refinement-2026-10-07-report
+    artifacts:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/README.md
+    - packing/devtools/refinement_packets.py
+    - packing/frontier/n-068.md
+    next_rung: Complete replay admission, two mutant refusals per accepted checker, durable receipts
+      and mapped mathematical review are required before confirmation. The current complete-roster drawing
+      check assigns no result rung.
+    notes: Refinement work by Seth Rehwaldt with OpenAI Codex assistance; Couzo and earlier construction
+      contributors retain credit. All prior verified ceilings, sources and receipts remain historical.
+      Restricted analytic claims are outside this import.
+    composition: The exact half-angle map gives unit frames; translating each already repaired source
+      center by S/2 gives the lower-left frame. The complete rational side is authoritative and no coordinate
+      or side is rounded.

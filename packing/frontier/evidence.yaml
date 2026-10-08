@@ -28214,3 +28214,44 @@ evidence:
         controls. Their acceptance concerns the completed scientific replay, not a future integration
         pull request.
     source_reviewed: '2026-10-07'
+  - id: E-rehwaldt-couzo-refinements-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 292
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source-reported finite rational witnesses for existing constructions. Center-expansion
+      metadata describes repair already applied; no additional expansion is performed. Source checker
+      reports are external claims. No unrestricted lower-bound, optimality, rigidity or human-oversight
+      assurance is admitted.
+    source_reviewed: '2026-10-08'
+  - id: E-rehwaldt-n68-refinement-2026-10-07-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 68
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 refinement 2026-10-07]'
+    certificate: packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Source-reported finite rational witnesses for existing constructions. Center-expansion
+      metadata describes repair already applied; no additional expansion is performed. Source checker
+      reports are external claims. No unrestricted lower-bound, optimality, rigidity or human-oversight
+      assurance is admitted.
+    source_reviewed: '2026-10-08'

@@ -339,19 +339,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-67.svg"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "Seth Rehwaldt after Francisco Couzo, https://github.com/lollipoll/certified-square-packing-68/blob/fded686668e29258dad2eb29d0482fa3fd51bd6b/refinement-v1.1.0/n68.json at fded686668e29258dad2eb29d0482fa3fd51bd6b",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         68
       ],
       "n": 68,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-068.yaml",
+      "path": "resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-08",
       "source_n": 68,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n68.txt"
+      "url": "https://github.com/lollipoll/certified-square-packing-68/blob/fded686668e29258dad2eb29d0482fa3fd51bd6b/refinement-v1.1.0/n68.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -570,19 +570,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-104.svg"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "Seth Rehwaldt after Francisco Couzo, https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n105.json at bc389ddf7d65277cd19a9b08fb285d86346d6806",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         105
       ],
       "n": 105,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-105.yaml",
+      "path": "resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-08",
       "source_n": 105,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n105.txt"
+      "url": "https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n105.json"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -1910,19 +1910,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-291.svg"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "Seth Rehwaldt after Francisco Couzo, https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n292.json at bc389ddf7d65277cd19a9b08fb285d86346d6806",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         292
       ],
       "n": 292,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-292.yaml",
+      "path": "resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-08",
       "source_n": 292,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n292.txt"
+      "url": "https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n292.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

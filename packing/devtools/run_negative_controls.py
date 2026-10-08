@@ -80,6 +80,7 @@ from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
+from devtools import refinement_house_links as refinements
 from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
 from devtools.repo_scope import tracked_files
@@ -100,7 +101,10 @@ HERE = ROOT.relative_to(REPO)
 # repository, or build products. `resources/README.md` is copied separately because the
 # README link checker requires that one path. The virtualenv and cargo target are
 # symlinked back so nothing is rebuilt or resolved again.
-HOUSE_LINK_LEAVES = frozenset(path.relative_to(ROOT) for path in house.snapshot_house_links())
+HOUSE_LINK_LEAVES = frozenset(
+    path.relative_to(ROOT)
+    for path in (*house.snapshot_house_links(), *refinements.snapshot_house_links())
+)
 PRUNE = frozenset(
     {
         second.WITNESSES,
