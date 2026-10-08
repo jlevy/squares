@@ -5,7 +5,7 @@ title: Continue exact polynomial collection and publication from PR403
 kind: epic
 status: in_progress
 priority: 1
-version: 34
+version: 35
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-01a118e4
 labels: []
@@ -45,7 +45,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:26:02.337Z
-updated_at: 2026-10-08T22:26:10.056Z
+updated_at: 2026-10-08T22:48:50.866Z
 started_at: 2026-10-08T00:26:33.782Z
 ---
 W1 source collection and W7 integration continuation from claude/friendly-sagan-jk7qzy (d948311d8), on codex/exact-polynomial-coverage. Reconcile claimed upstream lane outputs with reachable commits; collect all available current and superseded side polynomials through n=324; independently review the algebraic contracts with Astra; publish a generated comprehensive register/report; map every remaining source, derivation, witness and publication gap as a dependency-linked bead. Coordinator owns shared records, identifiers, integration and PR; no mathematical optimality inference from a polynomial.
@@ -60,3 +60,5 @@ The collection and practical web reader are delivered together in ready PR435 at
 
 
 Read-only performance triage after attempt 2 found two concrete repetition paths, unmeasured. certificate_data calls hosted_data.require for 200 object records; require reparses/revalidates the manifest after load_ledger already loaded it, for 201 parses per successful census. The 58 ledger entries are all admitted, and empty selector receipts trigger three identical admitted-mask count projections. Investigate invocation-local validated-manifest and count reuse under think-z8cv, preserving object presence/size/digest checks and mutation controls; a global path-only cache would be unsafe. The ten-shard test calls main ten times, rebuilding the same 346,104-state population before choosing each shard. Investigate a real shared prepared-population fixture under think-lyuh, retaining all ten CLI/shard/partition/output assertions and the separate cold CLI control. Both source paths and committed inputs are unchanged from a910a0e6 to a0ca6346. No patch, profile, benchmark or host-cause finding was produced. Adequate external capacity and a preregistered matched-shape comparison are required before heavy follow-up. The earlier overview-fragment cache opportunity remains under think-kyzi.
+
+Recovery audit,2026-10-08: Formal stack447 parent/child rebased through requested stacked-upstream workflow onto main91ca9b8; unpublished repairs preserved by explicit backuprefs. A1 verified-bound projection admits33 current rational identities (32 native T098 sides andn292 outward ceiling), preserving every reported/verified bound,KKT,proofstatus and ideal-route obligation. Parent319 exact plusdegreeonly83/four numeric; childtarget320/four numeric/170historical;77proved unchanged. Actual current representation gaps are29,55,71,105. Original ideal-research batches retain all counts and eleven undelivered claims remain unadmitted. Selected next slice is W7think-s6np driver delivery before W6control/target execution; legacy unsupported inference labels quarantined under think-yuqy. Final recovered-head local/hosted gate and artifact outcomes will be appended after verification under think-jygq; prior receipt/failure history remains above.

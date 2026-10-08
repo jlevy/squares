@@ -3,19 +3,17 @@ type: is
 id: is-01m12vxft8bexsm4b4vkbakb6p
 title: "n=29: eliminate the retained six-equation system for an exact side"
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 3
-delegate: codex-polynomial-resume-01a11d93
+version: 4
+delegate: null
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 hold: null
 hold_until: null
 created_at: 2026-08-28T00:22:03.847Z
-updated_at: 2026-10-08T22:46:28.138Z
+updated_at: 2026-10-08T22:48:49.427Z
 started_at: 2026-10-08T22:46:28.138Z
 ---
-resources/papers/kingbird-square-29-provenance.svg retains Ellsworth's full construction: six defining equations f1..f6 in six unknowns (s,a,b,c,d,i), solved at line 24 with FindRoot at WorkingPrecision 200 -- numerically, never eliminated, so no degree was ever published. cases/kingbird29/verify_svg.py replays the equations numerically only.
-
-This is the one missing-degree case that is neither a transcription omission nor a dead end: the complete specification is in the repository and a Groebner/resultant elimination would yield the minimal polynomial without any new source. Note that integer-relation recovery cannot substitute: a PSLQ scan over the retained 99-digit side finds nothing, but the same scan also fails on n=51 whose degree-12 polynomial we already hold, so the negative carries no information. Witness sides run 45-99 digits, far short of the ~1500+ that the degree-42/44 neighbourhood would need.
+Ellsworth X-004 retains the six equations in s,a,b,c,d,i, numerical branch seed, layout map, refinement, half-angle export and interval/Krawczyk machinery. Current database gap29 can proceed independently of the missing generic driver. Remaining work: exact elimination/back-substitution, irreducibility and rational isolation linked to the original real system, excluded denominators and all physical square inequalities. The retained scoped PSLQ negative is a1200-digit re-solve with700 search digits, degrees2..20,tolerance1e-675,maxcoeff1e22,maxsteps50000 returning no relation; it proves no degree or coefficient lower bound. Legacy contrary labels are quarantined under think-yuqy. Preserve think-obgk/xy0e/utlo/gucc geometry work.
