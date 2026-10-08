@@ -1,0 +1,34 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 301,
+ "url": "https://kingbird.myphotos.cc/packing/square-301.svg",
+ "retrieved_utc": "2026-10-08T03:12:37Z",
+ "read_from": "fetched into memory",
+ "bytes": 14361,
+ "sha256": "49482c615122d221f306b6e01a4878c6988481da2b07f10aa10e940930fe2d70",
+ "last_modified": "Thu, 10 Sep 2026 00:09:10 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by David Ellsworth on January 7, 15-16, and 19, 2025.",
+  "Unfinished rough draft; work in progress, with some micro-overlaps. Size is approximated.",
+  "Found by David Ellsworth on December 31, 2025, by feeding the above rough draft into his modified version of Thomas Schadt's simulated annealing program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "17.86889155557430721461694392014690976799760087772155",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "8.934445777787153607308471960073454883998800438860775",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

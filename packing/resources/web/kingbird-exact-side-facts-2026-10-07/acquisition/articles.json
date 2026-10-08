@@ -1,0 +1,85 @@
+{
+  "format": "kingbird-historical-article-freshness-v1",
+  "local_capture_date": "2026-10-07 America/Los_Angeles",
+  "retention_policy": "acquisition-metadata-only; live raw pages are not duplicated in this packet",
+  "scope": {
+    "source_count": 6,
+    "comparison_equation_rows": 189,
+    "supplemental_locator_rows": 12,
+    "decoded_source_rows": 201,
+    "unique_polynomial_side_pairs": 182
+  },
+  "result": {
+    "all_live_html_byte_equal_to_retained": true,
+    "new_or_changed_printed_polynomial_rows": 0,
+    "bounded_corpus_live_current": true
+  },
+  "sources": [
+    {
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__compared.html",
+      "retrieved_utc": "2026-10-08T03:25:10Z",
+      "last_modified": "Thu, 24 Sep 2026 02:21:57 GMT",
+      "bytes": 156269,
+      "sha256": "3c58479928b9a8607c2ff7000ace2a397d028b4d43b4a42f6d929e53e8b2c6fc",
+      "retained_html_path": "packing/resources/web/kingbird-squares-in-squares-compared.html",
+      "byte_equal_to_retained": true,
+      "acquisition_tool": "devtools.capture_kingbird_catalogue",
+      "command": "uv run --frozen --all-extras --group dev python -m devtools.capture_kingbird_catalogue --url https://kingbird.myphotos.cc/packing/squares_in_squares__compared.html --stem kingbird-squares-in-squares-compared --out \"$FRESH\""
+    },
+    {
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__compared2.html",
+      "retrieved_utc": "2026-10-08T03:25:19Z",
+      "last_modified": "Sun, 20 Sep 2026 05:49:35 GMT",
+      "bytes": 218326,
+      "sha256": "95a08874f81c96519094f281072bcfed0684861ba98b34788b954c2285d351aa",
+      "retained_html_path": "packing/resources/web/kingbird-squares-in-squares-compared2.html",
+      "byte_equal_to_retained": true,
+      "acquisition_tool": "devtools.capture_kingbird_catalogue",
+      "command": "uv run --frozen --all-extras --group dev python -m devtools.capture_kingbird_catalogue --url https://kingbird.myphotos.cc/packing/squares_in_squares__compared2.html --stem kingbird-squares-in-squares-compared2 --out \"$FRESH\""
+    },
+    {
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__compared3.html",
+      "retrieved_utc": "2026-10-08T03:25:24Z",
+      "last_modified": "Thu, 24 Sep 2026 16:55:56 GMT",
+      "bytes": 236747,
+      "sha256": "6403c2b5a32eeec67ba9b4c898ae0738a4f37d303e4c6f8afccaa21d50c76cf5",
+      "retained_html_path": "packing/resources/web/kingbird-squares-in-squares-compared3.html",
+      "byte_equal_to_retained": true,
+      "acquisition_tool": "devtools.capture_kingbird_catalogue",
+      "command": "uv run --frozen --all-extras --group dev python -m devtools.capture_kingbird_catalogue --url https://kingbird.myphotos.cc/packing/squares_in_squares__compared3.html --stem kingbird-squares-in-squares-compared3 --out \"$FRESH\""
+    },
+    {
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__n%5E2-n-1.html",
+      "retrieved_utc": "2026-10-08T03:25:29Z",
+      "last_modified": "Wed, 09 Sep 2026 23:57:54 GMT",
+      "bytes": 66054,
+      "sha256": "60c1dd438dfe761b4e2bb3c244ccd9ad2366dbd02d28d42e8cad55c6d21732cf",
+      "retained_html_path": "packing/resources/web/kingbird-squares-in-squares-n2-n-1.html",
+      "byte_equal_to_retained": true,
+      "acquisition_tool": "devtools.capture_kingbird_catalogue",
+      "command": "uv run --frozen --all-extras --group dev python -m devtools.capture_kingbird_catalogue --url https://kingbird.myphotos.cc/packing/squares_in_squares__n%5E2-n-1.html --stem kingbird-squares-in-squares-n2-n-1 --out \"$FRESH\""
+    },
+    {
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html",
+      "retrieved_utc": "2026-10-08T03:25:36Z",
+      "last_modified": "Mon, 09 Feb 2026 04:11:00 GMT",
+      "bytes": 23468,
+      "sha256": "d041c144dd0cbfee78ea0540c212520866476228a7918cd9058ce4606ca7ea4e",
+      "retained_html_path": "packing/resources/web/kingbird-squares-in-squares-gobel-squares.html",
+      "byte_equal_to_retained": true,
+      "acquisition_tool": "devtools.capture_kingbird_catalogue",
+      "command": "uv run --frozen --all-extras --group dev python -m devtools.capture_kingbird_catalogue --url https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_squares.html --stem kingbird-squares-in-squares-gobel-squares --out \"$FRESH\""
+    },
+    {
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_strips.html",
+      "retrieved_utc": "2026-10-08T03:25:42Z",
+      "last_modified": "Mon, 09 Feb 2026 04:11:06 GMT",
+      "bytes": 77913,
+      "sha256": "94840551cd3f250a3658db8c99c66193bb562e765a1bb32cbef884313d43cf35",
+      "retained_html_path": "packing/resources/web/kingbird-squares-in-squares-gobel-strips.html",
+      "byte_equal_to_retained": true,
+      "acquisition_tool": "devtools.capture_kingbird_catalogue",
+      "command": "uv run --frozen --all-extras --group dev python -m devtools.capture_kingbird_catalogue --url https://kingbird.myphotos.cc/packing/squares_in_squares__G%C3%B6bel_strips.html --stem kingbird-squares-in-squares-gobel-strips --out \"$FRESH\""
+    }
+  ]
+}

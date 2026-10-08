@@ -1,0 +1,41 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 156,
+ "url": "https://kingbird.myphotos.cc/packing/square-156.svg",
+ "retrieved_utc": "2026-10-08T03:12:21Z",
+ "read_from": "fetched into memory",
+ "bytes": 18373,
+ "sha256": "460858d51b60077384df14213f0f275e20f865c961668b5f103f6c701b7e2530",
+ "last_modified": "Thu, 10 Sep 2026 00:07:46 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev in March 2019 (to 7 decimal digits of precision: s < 12.9940424).",
+  "Source: Improved Packings of n(n\u22121) Unit Squares in a Square (Submitted March 14, 2019; Published October 15, 2021): https://doi.org/10.37236/8586",
+  "Exact analytic solution by David Ellsworth on November 13, 2024.",
+  "Improved by David Ellsworth on December 20, 2024, with exact analytic solution.",
+  "Improved by David W. Cantrell on March 21, 2025, with exact analytic solution.",
+  "Source: E-mail from David W. Cantrell to David Ellsworth, on March 21, 2025, with attached mathematical data",
+  "A separate email was also sent by David W. Cantrell to David Ellsworth, M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev, with the side length to 13 decimal places. The latter three never replied.",
+  "Exact analytic solution reconstructed by David Ellsworth on December 22, 2025.",
+  "Improved by David Ellsworth on January 17, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026",
+  "Cleaned up slightly by David Ellsworth on September 9, 2026."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "12.98208376048414368051530749478333290363527714075116",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "6.49104188024207184025765374739166645181763857037558",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}
