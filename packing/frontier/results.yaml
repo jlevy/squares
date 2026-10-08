@@ -9870,6 +9870,12 @@ results:
       findings were handled after it, except that each record's reported lane still lists
       the finder's pose under S' (EX-9, think-5n3o).
 
+
+      On 7 October 2026, T-119 separately certified three changed arrangements at
+      n = 266, 270 and 272 with strictly smaller feasible sides. This entry keeps its
+      original source13ee36e certificates, poses, scope, credits and reviews; its
+      historical decisions are not proofs of the newly adopted arrangements.
+
   - id: T-099
     kind: lower-bound
     registered: '2026-10-06'
@@ -10297,6 +10303,12 @@ results:
       2026, the next id after the register's T-100, in every record, view, test and tool
       that names it. The two reviews are stored as their reviewers wrote them and are not
       edited: "T-118" in either review, its title included, is this entry, T-101.
+
+
+      On 7 October 2026, T-119 separately certified three changed arrangements at
+      n = 266, 270 and 272 with strictly smaller feasible sides. This entry keeps its
+      original source13ee36e certificates, poses, scope, credits and reviews; its
+      historical decisions are not proofs of the newly adopted arrangements.
 
   - id: T-102
     kind: lower-bound
@@ -12346,6 +12358,64 @@ results:
       verdict: accepted
       covers:
       - T-118
+  - id: T-119
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: Three exact feasible upper bounds at n=266,270,272 from new source arrangements
+    claim: Complete rational packings establish s(266)<=16.8230287507564760, s(270)<=16.9378072284460292
+      and s(272)<=16.9681101457696006. All displays are upward ceilings of exact rational sides; arrangement
+      novelty remains author-reported.
+    scope:
+      n_values:
+      - 266
+      - 270
+      - 272
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Three strictly smaller exact feasible ceilings with complete changed poses; no solved
+        case or optimality claim.
+      scored: '2026-10-07'
+      by: 'think-hh48 #399 import'
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel new arrangements 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-evand-399-new-arrangements-report
+    - E-evand-399-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-new-arrangements-2026-10-07/README.md
+    - packing/resources/web/evand-new-arrangements-2026-10-07/facts/complete-certificates.json.xz
+    - packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz
+    - packing/devtools/evand_arrangement_reports.py
+    - packing/frontier/n-266.md
+    - packing/frontier/n-270.md
+    - packing/frontier/n-272.md
+    reviews:
+    - path: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+      kind: adversarial
+      reviewer: GPT-6 Astra mathematical reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-08'
+      scope: All three complete sources, exact half-angle conversion and full nine-job/18-result replay;650496
+        pair decisions.
+      verdict: accepted
+      covers:
+      - T-119
+    controls:
+    - packing/resources/web/evand-new-arrangements-2026-10-07/receipts/exact-certification.json.xz
+    - packing/tests/test_evand_arrangement_reports.py
+    composition: Full-roster source admission precedes exact rational conversion; both independent routes
+      inspect every wall and pair. Every complete input and native verdict is retained. Private worker
+      inputs bind only three explicitly guarded atlas read links.
+    notes: 'Historical #375 source13ee36e, T-098/T-101 certificates, credits and original poses remain
+      unchanged. Source new-arrangement and KKT/local-minimum assertions are not promoted by feasibility.'
+    next_rung: V4/C4 requires accountable human review. V5/C5 requires proof-assistant verification;
+      this replay establishes neither.
 
   - id: T-120
     kind: upper-bound

@@ -1414,6 +1414,18 @@ sources:
     lineage: independent
     note: The retained factual source certificates at 8dc415296f697f5140caea27c7a0193d52deb4e6 identify
       ry-xu and disclose LLM assistance; no unrestricted optimality or contact-count theorem is admitted.
+  - key: '[Daniel new arrangements 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Levy, Ellsworth, Couzo, Stead
+    short_credit: Daniel after Levy et al.
+    lineage: builds-on-project
+    note: Issue399 supplies three complete changed rational packings at266,270,272. Pinned7eef24f source
+      MIT licences and original lineage remain retained. Exact feasibility is certified independently;
+      source arrangement novelty and local/global optimality are unestablished.
 credited_names:
   ry-xu: ry-xu
   Seth Rehwaldt: Rehwaldt

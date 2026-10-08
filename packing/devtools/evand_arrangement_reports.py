@@ -36,7 +36,7 @@ PACKET = ROOT / "resources/web/evand-new-arrangements-2026-10-07"
 NUMBERS = (266, 270, 272)
 REVISION = "7eef24f7221b8c3371d6171dd664b52541bbd479"
 SOURCE = "https://github.com/evand/square-packing"
-SOURCE_KEY = "evand-new-arrangements-2026-10-07"
+SOURCE_KEY = "[Daniel new arrangements 2026-10-07]"
 EXACT_EVIDENCE = "E-evand-399-exact-feasibility"
 FACT_FORMAT = "evand-399-complete-source-facts-v1"
 RECEIPT_FORMAT = "evand-399-complete-exact-replay-v1"
@@ -273,9 +273,7 @@ def run_case(
     started = time.monotonic()
     cpu = time.process_time()
     first, _report = legacy.exact_verify(
-        to_witness(
-            actual, witness_prefix=witness_prefix, claim_limitations=claim_limitations
-        )
+        to_witness(actual, witness_prefix=witness_prefix, claim_limitations=claim_limitations)
     )
     first_seconds = time.process_time() - cpu
     cpu = time.process_time()

@@ -147,7 +147,12 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     if lower is None:
         raise ValueError("historical draft has no generated lower-bound section")
     body, count = re.subn(lower_pattern, lambda _match: lower.group(), body, flags=re.DOTALL)
-    if count != 1:
+    if count == 0:
+        marker = "\n<!-- BEGIN verification code"
+        if body.count(marker) != 1:
+            raise ValueError("selected ry-xu case needs one lower-section insertion point")
+        body = body.replace(marker, lower.group() + marker, 1)
+    elif count != 1:
         raise ValueError("selected ry-xu case needs one generated lower-bound section")
     pattern = rf"\n{SECTION}\n.*?(?=\n## |\n<!-- This document follows)"
     body, count = re.subn(
@@ -159,21 +164,69 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     return render_case_verifiers.refresh("---\n" + dump(document) + "---\n" + body)
 
 
+def read_history() -> list[dict[str, Any]]:
+    houses.reports.ensure_private(HISTORY)
+    value = houses.reports.kernel.read_xz(HISTORY)
+    if (
+        type(value) is not dict
+        or set(value) != {"format", "cases"}
+        or value["format"] != "ryxu-432-prior-frontier-and-house-v1"
+        or type(value["cases"]) is not list
+        or any(
+            type(row) is not dict
+            or set(row) != {"n", "frontier", "house"}
+            or type(row["frontier"]) is not str
+            or type(row["house"]) is not str
+            for row in value["cases"]
+        )
+        or [row.get("n") for row in value["cases"]] != list(houses.NUMBERS)
+    ):
+        raise ValueError("complete immutable previous frontier/geometry roster required")
+    for row in value["cases"]:
+        original = safe_load(row["frontier"].split("---\n", 2)[1])["packing"]
+        if (
+            original["n"] != row["n"]
+            or original["reported_upper_bound"]["source_key"] == houses.SOURCE_KEY
+        ):
+            raise ValueError("history must contain every original pre-adoption source")
+    return value["cases"]
+
+
 def record_cases() -> list[dict[str, Any]]:
-    """Preserve complete previous frontmatter and geometry before updating current counts."""
-    prior = []
+    """Preflight all transforms, preserve complete history, then publish case changes.
+
+    A partial write is resumable only against the complete immutable original roster.
+    Unrelated intervening source changes and changed historical originals are refused.
+    """
+    retained = read_history() if HISTORY.exists() else None
+    historical = {} if retained is None else {row["n"]: row for row in retained}
+    prior: list[dict[str, Any]] = []
+    plan = []
     for n in houses.NUMBERS:
         path = FRONTIER / f"n-{n:03d}.md"
-        original = path.read_text()
+        houses.reports.ensure_private(path)
+        current = path.read_text()
+        current_case = safe_load(current.split("---\n", 2)[1])["packing"]
+        if current_case["n"] != n:
+            raise ValueError("case count differs from the complete selected roster")
+        if current_case["reported_upper_bound"]["source_key"] == houses.SOURCE_KEY:
+            if retained is None:
+                raise ValueError("selected case lacks the complete original custody boundary")
+            continue
+        original = current if retained is None else historical[n]["frontier"]
+        if current != original:
+            raise ValueError("refuse a changed historical source before any case write")
         _, front, body = original.split("---\n", 2)
         document = safe_load(front)
         case = document["packing"]
-        if case["reported_upper_bound"]["source_key"] == houses.SOURCE_KEY:
-            continue
         bound = houses.bound(n)
         if Decimal(bound["value"]) >= Decimal(case["reported_upper_bound"]["value"]):
             raise ValueError(f"n={n}: selected ry-xu display is not smaller than current bound")
-        prior.append({"n": n, "frontier": original, "house": houses.house_path(n).read_text()})
+        prior.append(
+            historical[n]
+            if retained is not None
+            else {"n": n, "frontier": original, "house": houses.house_path(n).read_text()}
+        )
         old = copy.deepcopy(case["reported_upper_bound"])
         case["reported_upper_bound"] = reported_bound(n)
         case["rigidity"] = None
@@ -215,16 +268,19 @@ def record_cases() -> list[dict[str, Any]]:
         )
         body = _historical_prose(body)
         body = body.replace(FOOTER, section(n, confirmed=False) + "\n" + FOOTER)
-        save(path, "---\n" + dump(document) + "---\n" + body)
-    if prior:
-        if HISTORY.exists():
-            raise ValueError(
-                "do not overwrite the retained previous frontier/geometry boundary"
-            )
+        plan.append((path, "---\n" + dump(document) + "---\n" + body))
+    if not plan:
+        return []
+    if retained is None:
+        # Every source/transform and path was checked before preserving this boundary.
+        # Atomic output completes the full original roster before the first case write.
         houses.reports.save(
             HISTORY, {"format": "ryxu-432-prior-frontier-and-house-v1", "cases": prior}
         )
-    return prior
+        read_history()
+    for path, text in plan:
+        save(path, text)
+    return retained if retained is not None else prior
 
 
 def _register_records() -> None:
@@ -336,10 +392,7 @@ def register() -> None:
     houses.radical.check_certification()
     prior = record_cases()
     if not prior:
-        retained = houses.reports.kernel.read_xz(HISTORY)
-        if retained["format"] != "ryxu-432-prior-frontier-and-house-v1":
-            raise ValueError("unknown retained previous-record boundary")
-        prior = retained["cases"]
+        prior = read_history()
     _register_records()
     append_rows(
         FRONTIER / "source-coverage.yaml",

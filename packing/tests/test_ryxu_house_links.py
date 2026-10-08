@@ -15,6 +15,7 @@ import mpmath as mp
 import pytest
 
 from devtools import build_known_best_atlas as atlas
+from devtools import generate_frontier_case as generator
 from devtools import register_ryxu_reports as register
 from devtools import run_negative_controls as controls
 from devtools import ryxu_house_links as houses
@@ -199,12 +200,28 @@ from devtools import ryxu_house_links as h, build_known_best_atlas as a
 from devtools import refinement_custody as old425
 from devtools import squish_second_update_confirmation as old422
 old425.check_index(old425.read_index()); old422.admit_certification(); h.check_houses()
-before=(a.MANIFEST.read_bytes(),a.SOURCE_MANIFEST.read_bytes())
+paths=(a.MANIFEST,a.SOURCE_MANIFEST,a.MANIFEST.parent/'composite-figure.json')
+def contents(): return tuple(path.read_bytes() if path.exists() else None for path in paths)
+before=contents()
 for producer in (lambda: a.update_selected([51]), a.update):
     try: producer()
     except ValueError as e: assert 'escapes' in str(e)
     else: raise AssertionError('producer followed an external geometry leaf')
-assert before==(a.MANIFEST.read_bytes(),a.SOURCE_MANIFEST.read_bytes())
+assert before==contents()
+for path, route in [(h.reports.receipt_path(),'rational'),
+                    (h.reports.PACKET/'receipts/n051-radical-positive.json.xz','radical')]:
+    original=path.read_bytes()
+    value=h.reports.kernel.read_xz(path)
+    if route=='rational': value['cases'][0]['exact_verify']['pairs_tested']-=1
+    else: value['exact_verify']['minimum_best_pair_gap']='1'
+    try:
+        h.reports.save(path,value)
+        try: h.check_houses()
+        except ValueError: pass
+        else: raise AssertionError('copied deciding receipt corruption was accepted')
+    finally: path.write_bytes(original)
+    assert path.read_bytes()==original
+    h.check_houses()
 """
     result = subprocess.run(
         [sys.executable, "-c", script],
@@ -245,17 +262,38 @@ def test_source_adoption_refuses_mutable_upper_geometry_claims(
     changed = prefix + "---\n" + register.dump(document) + "---\n" + body
     history = houses.reports.kernel.read_xz(register.HISTORY)
     old = next(row for row in history["cases"] if row["n"] == n)["frontier"]
-    adopted = register.adopt_case(n, changed, old)
+    if n < 101:
+        # The first hundred are curated source records, outside the generic source map.
+        # Give the publication adapter a declared lower-lane draft with the complete
+        # retained original frontmatter; its upper mutation must not alter that lane.
+        drafted = (
+            "---\n"
+            + old.split("---\n", 2)[1]
+            + (
+                "---\n\n## The lower bound\n\nRetained lower-lane draft.\n"
+                "\n<!-- BEGIN verification code: written by "
+                "devtools.render_case_verifiers -->\n"
+                "<!-- END verification code -->\n"
+            )
+        )
+    else:
+        availability = generator.load_availability()
+        catalogue = generator.load_drafting_catalogue([n], availability)
+        drafted = generator.generate_record(
+            n,
+            availability=availability,
+            catalogue=catalogue,
+            review_date="2026-10-08",
+            retrieved_date="2026-10-08",
+        )
+    adopted = register.adopt_case(n, changed, drafted)
     result = safe_load(adopted.split("---\n", 2)[1])["packing"]
     assert result["reported_upper_bound"] == register.reported_bound(n)
     before = safe_load(old.split("---\n", 2)[1])["packing"]
-    for field in (
-        "verified_upper_bound",
-        "reported_lower_bound",
-        "verified_lower_bound",
-        "status",
-    ):
-        assert result[field] == before[field]
+    assert result["verified_upper_bound"] == before["verified_upper_bound"]
+    lower_draft = safe_load(drafted.split("---\n", 2)[1])["packing"]
+    for field in ("reported_lower_bound", "verified_lower_bound", "status"):
+        assert result[field] == lower_draft[field]
     assert "global optimum exactly equals" not in adopted
 
 
@@ -268,3 +306,84 @@ def test_unmapped_confirming_evidence_is_refused(private: Path) -> None:
     changed = prefix + "---\n" + register.dump(document) + "---\n" + body
     with pytest.raises(ValueError, match="unmapped confirming evidence"):
         register.adopt_case(51, changed, original)
+
+
+@pytest.fixture
+def original_pair(
+    private: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[Path, dict[int, str]]:
+    monkeypatch.setattr(houses, "NUMBERS", (51, 70))
+    monkeypatch.setattr(register, "FRONTIER", private / "packing/frontier")
+    register.FRONTIER.mkdir(parents=True)
+    rows = houses.reports.kernel.read_xz(register.HISTORY)["cases"]
+    originals = {row["n"]: row["frontier"] for row in rows if row["n"] in houses.NUMBERS}
+    for n, text in originals.items():
+        (register.FRONTIER / f"n-{n:03d}.md").write_text(text)
+    register.HISTORY.unlink()
+    monkeypatch.setattr(register, "save", lambda path, text: path.write_text(text))
+    return private, originals
+
+
+def test_later_case_preflight_failure_never_changes_an_earlier_case(
+    original_pair: tuple[Path, dict[int, str]],
+) -> None:
+    private, originals = original_pair
+    assert private == houses.REPO
+    path = register.FRONTIER / "n-070.md"
+    original = safe_load(originals[70].split("---\n", 2)[1])
+    original["packing"]["reported_upper_bound"]["value"] = "0"
+    body = originals[70].split("---\n", 2)[2]
+    path.write_text("---\n" + register.dump(original) + "---\n" + body)
+    before = {n: (register.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in houses.NUMBERS}
+    with pytest.raises(ValueError, match="not smaller"):
+        register.record_cases()
+    assert not register.HISTORY.exists()
+    assert before == {
+        n: (register.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in houses.NUMBERS
+    }
+
+
+def test_complete_original_history_survives_interrupted_writes_and_retry(
+    original_pair: tuple[Path, dict[int, str]], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    private, originals = original_pair
+    assert private == houses.REPO
+
+    def interrupt_second(path: Path, text: str) -> None:
+        assert register.HISTORY.exists()
+        rows = register.read_history()
+        assert {r["n"]: r["frontier"] for r in rows} == originals
+        if path.name == "n-070.md":
+            raise OSError("simulated interrupted second write")
+        path.write_text(text)
+
+    monkeypatch.setattr(register, "save", interrupt_second)
+    with pytest.raises(OSError, match="interrupted second write"):
+        register.record_cases()
+    original_boundary = register.HISTORY.read_bytes()
+    assert (register.FRONTIER / "n-070.md").read_text() == originals[70]
+    monkeypatch.setattr(register, "save", lambda path, text: path.write_text(text))
+    register.record_cases()
+    for n in houses.NUMBERS:
+        case = safe_load(
+            (register.FRONTIER / f"n-{n:03d}.md").read_text().split("---\n", 2)[1]
+        )["packing"]
+        assert case["reported_upper_bound"] == register.reported_bound(n)
+    assert register.HISTORY.read_bytes() == original_boundary
+    assert register.record_cases() == []
+    assert register.HISTORY.read_bytes() == original_boundary
+
+
+def test_existing_incomplete_history_is_refused_before_case_writes(
+    original_pair: tuple[Path, dict[int, str]],
+) -> None:
+    private, originals = original_pair
+    assert private == houses.REPO
+    houses.reports.save(
+        register.HISTORY, {"format": "ryxu-432-prior-frontier-and-house-v1", "cases": []}
+    )
+    with pytest.raises(ValueError, match="complete immutable"):
+        register.record_cases()
+    assert originals == {
+        n: (register.FRONTIER / f"n-{n:03d}.md").read_text() for n in houses.NUMBERS
+    }

@@ -441,6 +441,7 @@ def repository_file_problem(path: str) -> str | None:
 
 def linked_repository_file_problem(path: str) -> str | None:
     """Only separately admitted exact proof and atlas leaves may link outside."""
+    from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
     from devtools import refinement_house_links as refinements  # noqa: PLC0415
     from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
@@ -462,6 +463,8 @@ def linked_repository_file_problem(path: str) -> str | None:
         return house.linked_house_problem(path, repository=REPO)
     if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in refinements.NUMBERS}:
         return refinements.linked_house_problem(path, repository=REPO)
+    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in evand.NUMBERS}:
+        return evand.linked_house_problem(path, repository=REPO)
     return linked_certificate_problem(path, repository=REPO)
 
 

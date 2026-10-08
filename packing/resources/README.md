@@ -818,6 +818,18 @@ Consult the original publisher before redistributing.
   `fded686668e29258dad2eb29d0482fa3fd51bd6b`;
   [packet](web/rehwaldt-n68-refinement-2026-10-07/README.md).
 
+## Three new rational arrangements, 7 October 2026
+
+**[Daniel new arrangements 2026-10-07]**: Evan Daniel’s complete certificates for n =
+266, 270 and 272, pinned at `7eef24f7221b8c3371d6171dd664b52541bbd479`;
+[packet](web/evand-new-arrangements-2026-10-07/README.md).
+Both project exact routes accept all three and reject all six complete-roster controls.
+Source novelty and local/global optimality remain unestablished.
+The source credits Ellsworth, Couzo, Cleemann, Arslanov, Mustafin, Shangitbayev and
+Stead, with register data from the Squares Project (Joshua Levy) under CC BY 4.0 and
+Claude assistance under Daniel’s direction.
+Source MIT licences and the earlier #375 namespace remain unchanged.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

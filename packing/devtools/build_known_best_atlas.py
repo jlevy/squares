@@ -47,6 +47,8 @@ import mpmath as mp
 from strif import atomic_output_file
 
 from devtools import build_composite_figure_data, render_composite_pdf
+from devtools import evand_arrangement_houses as evand_houses
+from devtools import evand_arrangement_reports as evand_reports
 from devtools import evand_exact_certificates as evand_certificates
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinements
@@ -832,6 +834,15 @@ def _modern_packet_plan(case: FrontierCase, pictured: str) -> SourcePlan | None:
         if not path.is_file():
             raise ValueError("selected ry-xu source facts are absent")
         return SourcePlan(PACKET_KIND, path, ryxu_houses.source_url(case.n), case.n, (case.n,))
+    if pictured == evand_reports.SOURCE_KEY:
+        evand_reports.read_fact(case.n)
+        return SourcePlan(
+            PACKET_KIND,
+            evand_reports.fact_path(),
+            f"{evand_reports.SOURCE}/blob/{evand_reports.REVISION}/{evand_reports.source_path(case.n)}",
+            case.n,
+            (case.n,),
+        )
     for source in refinements.SOURCES.values():
         if pictured == source.key:
             path = refinements.fact_path(source, case.n)
@@ -983,6 +994,9 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
             if n in ryxu_houses.NUMBERS and plan.url == ryxu_houses.source_url(n):
                 attribution = f"ry-xu, {plan.url} at {ryxu_houses.reports.REVISION}"
                 retrieved = ryxu_houses.RETRIEVED
+            elif plan.path == evand_reports.fact_path() and n in evand_reports.NUMBERS:
+                attribution = f"Evan Daniel, {plan.url} at {evand_reports.REVISION}"
+                retrieved = "2026-10-07"
             elif refinement is not None:
                 attribution = (
                     f"Seth Rehwaldt after Francisco Couzo, {plan.url} at {refinement.revision}"
@@ -1007,12 +1021,20 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
                 {
                     "attribution": attribution,
                     "kind": plan.kind,
-                    "license_status": "no-licence-published",
+                    "license_status": (
+                        "MIT"
+                        if plan.path == evand_reports.fact_path()
+                        else "no-licence-published"
+                    ),
                     "listed_n": list(plan.listed_n),
                     "n": n,
                     "path": _relative(plan.path),
-                    "raw_asset_retained": False,
-                    "retention_policy": KINGBIRD_RETENTION_POLICY,
+                    "raw_asset_retained": plan.path == evand_reports.fact_path(),
+                    "retention_policy": (
+                        "Complete source certificates and MIT licences retained unchanged."
+                        if plan.path == evand_reports.fact_path()
+                        else KINGBIRD_RETENTION_POLICY
+                    ),
                     "retrieved": retrieved,
                     "source_n": plan.source_n,
                     "url": plan.url,
@@ -1117,12 +1139,17 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
             )
         if plan.kind == PACKET_KIND:
             refinement = _refinement_source(case.n, plan.path)
-            if pictured_source_key(case) == ryxu_houses.SOURCE_KEY or refinement is not None:
-                return (
-                    _refinement_derived_witness(case, refinement)
-                    if refinement is not None
-                    else _ryxu_derived_witness(case)
-                )
+            if pictured_source_key(case) == ryxu_houses.SOURCE_KEY:
+                witness = _ryxu_derived_witness(case)
+            elif plan.path == evand_reports.fact_path() and case.n in evand_reports.NUMBERS:
+                witness = evand_houses.build_witness(case.n)
+                _assert_side_matches(case, str(witness["side"]))
+            elif refinement is not None:
+                witness = _refinement_derived_witness(case, refinement)
+            else:
+                witness = None
+            if witness is not None:
+                return witness
             if _squish_layer(case.n, plan.path) is not None:
                 return _squish_derived_witness(case, plan)
             retained = load_witness(plan.path, fallback_schema=WITNESS_SCHEMA)
@@ -2399,7 +2426,8 @@ def _manifest_entry(built: BuiltCase) -> dict:
             derivation = (
                 "exact rational half-angle conversion of retained source facts, checked "
                 "with exact predicates"
-                if _squish_layer(n, plan.path) is not None
+                if plan.path == evand_reports.fact_path()
+                or _squish_layer(n, plan.path) is not None
                 or _refinement_source(n, plan.path) is not None
                 else "deterministic reuse of a source packet's retained Witness/v2 facts"
             )
@@ -2633,6 +2661,9 @@ def retained_cases(numbers: Sequence[int]) -> list[BuiltCase]:
     ]
     if ryxu:
         ryxu_houses.check_houses(ryxu)
+    evand_scoped = [n for n in numbers if n in evand_reports.NUMBERS]
+    if evand_scoped:
+        evand_houses.check_houses(evand_scoped)
     plans = source_plans()
     cases = []
     for n in numbers:
@@ -2659,6 +2690,7 @@ def update(workers: int = 1) -> None:
     squish_house.guard_house_outputs(list(CORPUS.numbers))
     refinement_houses.guard_house_outputs(list(CORPUS.numbers))
     ryxu_houses.guard_house_outputs(list(CORPUS.numbers))
+    evand_houses.guard_house_outputs(list(CORPUS.numbers))
     # The figure record decides every claim a drawing states, so refresh it first and
     # drop the memo, or the comparison below would read a stale one.
     build_composite_figure_data.update()
@@ -2690,6 +2722,7 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     squish_house.guard_house_outputs(list(numbers))
     refinement_houses.guard_house_outputs(list(numbers))
     ryxu_houses.guard_house_outputs(list(numbers))
+    evand_houses.guard_house_outputs(list(numbers))
     selected = set(numbers)
     if not selected or len(selected) != len(numbers) or not selected <= set(CORPUS.numbers):
         raise ValueError("selected atlas refresh requires unique corpus counts")
