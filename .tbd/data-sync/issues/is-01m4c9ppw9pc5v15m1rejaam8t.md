@@ -5,7 +5,7 @@ title: "Issue422: publish accurate import, confirmation and deployment replies"
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,13 +13,70 @@ parent_id: is-01m4c486bvartgwnk1s2szjz8x
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:03:17.128Z
-updated_at: 2026-10-08T02:22:59.105Z
+updated_at: 2026-10-08T02:41:45.338Z
 started_at: 2026-10-08T00:07:10.029Z
 ---
 Own main-only author replies and request closure for issue422. Current acknowledgement6047406306 created2026-10-07T21:41:08Z edited22:28:26Z; canonicalresultT116reportedlayerpending. Actual27 dualroutes+two distinctAstra complete-input reviews accepted9scope, but canonical confirmation/PRreview/CI/merge/live publication remain. Finalreply statesactualrungs/verifiers/scopedreviews/18negativecontrols safeceil/sourcecredit/oldhistory andmatchingpublishedcase/overview/resultchecks; no automaticissueclosurefromreportedPR. RootownsGH/tbdmutations.
 
 ## Notes
 
+CURRENT VERIFIED PUBLICATION STATE — 8 October UTC. This supplemental note supersedes
+the older CI-running/unmerged summaries below while retaining their original receipts.
+PR #427 (3345c393) and PR #429 (fc988788) merged at 02:25:18–19Z into main
+f747407a0fa83d80a7894331c770aeb314b23163. Final upper hosted checks passed 30 SUCCESS /
+26 documented SKIP and Review J accepted the final source scope.
+The matching Pages deployment is now complete with SUCCESS, as verified by the
+coordinator. Actual post-deployment live results, case drawings and atlas verification
+remain PENDING; source issue #422 and its final reply/ledger closure remain OPEN. Do not
+close think-sfpz, think-qc6y or think-msos before those actual checks and reply
+complete. Preserve think-vz6u until final supplemental GitHub custody, native
+sync/export/outbox proof and checkpoint publication are complete.
+
+Native source-scope closures are current: think-x2gl, think-cr0f, think-yi1c and
+think-kqd3 CLOSED at 02:33:34–35Z for fixed/reviewed/hosted-green merged engineering
+only. Existing CLOSED think-lbku, think-wyc9 and think-wgdc retain their own scoped
+resolutions. Existing dependency chain think-x2gl → think-kqd3 → think-qc6y remains
+correct; the first two are closed source prerequisites, while final publication/reply
+remains open.
+think-yquo remains in_progress in the inspected record and requires its own
+disposition. Local timing follow-up think-c63v stays OPEN; its native node/tier EXIT1
+timing failure is retained despite hosted source acceptance.
+No budgets, caps or assertions were relaxed.
+
+Keep concurrent refinements separate.
+PR #434 is DRAFT at d702281cc48d37713e5b2dae6b6ce63d3bab06a8, now based on main f747407.
+It carries retained independent finite-feasibility/custody closure ACCEPT and T117/T118
+V3/C3 scientific claims from the earlier 78229 scope, plus newer d702 integration
+changes; current saved CI is 28 SUCCESS / 26 SKIP / 2 FAIL, including
+contact-shade/sweep failure and dependent aggregate.
+That scientific scope is distinct from complete final-head PR integration acceptance.
+Public recovery is claimed complete for 103 files / 13 jobs, source footprint
+201,258,251 B against unchanged 201,326,592 B cap; preserve actual ten-job #425 host-v3
+and three-job #428 source-program receipts without calling the cloud five-job #428
+project-route protocol executed.
+Preserve native think-v42c under codex@spud10 and think-f3dl under codex@17e132e9b179;
+no coowner reclaim/closure from this audit.
+PR #434 remains outside the completed merge through #429.
+
+PR #435 is a separate DRAFT at 69ebd1a93b055020e73d107669d078923fa1b652, based on the PR
+#403 polynomial branch, with six failing checks.
+Epic think-wgo1 remains in_progress under codex-polynomial-01a118e4; selected recovery
+think-s6np is OPEN and blocks think-ohhz and the four followup lanes think-056g,
+think-d2kj, think-gg4k and think-o0az. Preserve polynomial/root/publication claims
+separately from geometric feasibility and the completed SQUISH merge.
+
+Setup remains explicit: both current checkout bootstraps passed 5/5 and the tested
+four-file startup handoff has verified GitHub recovery.
+Latest reusable start_skill save remains CONFLICT/stale_base despite reading draft
+revision 22; save/publication/new-task restoration are unconfirmed.
+A fresh setup chat from current environment settings must reconcile/save the tested
+instructions. Current-machine readiness and archived startup ZIP do not establish
+reusable configuration publication.
+Historical failures, cancellations, skipped/xfail outcomes and unavailable raw exits
+remain unchanged.
+
+
+HISTORICAL RECORD (retained):
 CURRENT COMMITTED REPAIR / EXACT SOURCE STATE — 2026-10-08 UTC:
 PR429 sourcefc9887888a09196798c664a45d836dcdee68212f is committedclean, actualnonforcepushed/remoteGitSHAandPRAPIverified. Parentef472, onlyupper-ownedconfirmation.py40insert/11delete (blobebb66385), everyother15801treeentry/data/science/case/test/budgetunchanged. Pin101026ownerPASS. Fresh currenthead Astra ReviewJ ROUND5 ACCEPTsourcecorrectness0findings https://github.com/jlevy/squares/pull/429#pullrequestreview-5450641707. Original E–I scopes retained; no newfullSCI replay needed/claimed.137existingfocusedtestsPASS88.85raw0, lint/format/type/pinraw0. Full108envelopes/27metadata transforms identical;162→108normalizationcalls onlyduplicatefullsameinputs removed; publicfreshentry/18freshcasecalls/mutationisolation andalloriginalpredicates preserved.
 Native suiteD2853PASS5SKIP1XFAIL butrawouter1/183.196s isreal localpolicy failure:14.74s≥12testlimit,182.67≥143tier. Original45.41hostedfailure remains unchanged. Same-node isolated19.94→12.18 is~39%faster, not a hostedclaim. ActualnewheadhostedCIrunningunderdeclaredPRadvisory12/hard45, withno observedfailureatlastread. NativegaptrackedP2think-c63v OPEN; no lower-ownedscalarprimitive changed/waiver/contextspoof. Requirednewhead CI mustactuallypassbeforemerge. Engineeringx2gl/sourceacceptancekqd3/deploymentqc6y remainOPEN withactualdepsx2gl→kqd3→qc6y.
