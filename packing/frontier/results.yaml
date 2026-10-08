@@ -12680,12 +12680,13 @@ results:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/localmin_lean.py
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/tasks/exact-minpoly/chain-lemma.md
-    next_rung: Acquire each complete configuration and generated proof, bind the local-minimum statement
-      and perturbation definitions to that pose, and independently build the pinned Lean proof before
-      raising either rung.
+    next_rung: Audit the retained theorem, embedded configuration and perturbation-definition bindings and pinned
+      dependencies, acquire any inputs that audit finds missing, and independently build the pinned Lean
+      proof before raising either rung.
     notes: Reported non-strict local minima under the source matched-index perturbation convention,
       with angles modulo 90 degrees and plateaux permitted. The actual roster has176 integer-band configurations
       plus n11 and n28; it is not every count in the shorthand bands. Full source Lean code is retained;
-      generated configuration proofs and their geometric inputs were not all acquired or replayed.
+      the 176 band localMin statements and N11L/N28L theorems with embedded configurations are retained,
+      but their bindings and full pinned builds have not been independently audited or replayed.
       No rigidity, isolated strict minimum or global lower bound follows. Same-count replacement poses
       receive no transferred theorem.

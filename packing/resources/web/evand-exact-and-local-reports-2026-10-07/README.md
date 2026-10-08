@@ -41,6 +41,11 @@ Its mutation tests refuse duplicated counts, malformed intervals, incorrect degr
 source flags with the wrong types and altered claim scopes.
 
 Referenced `minpoly/data/` geometry payloads are outside the retained scope.
+The committed Lean tree includes all 176 band `localMin` statements and the N11L/N28L
+local-minimum theorems, with their embedded configurations.
+Their presence is retained source evidence; theorem/configuration bindings, pinned
+dependencies and complete builds have not been independently audited or replayed here.
+
 The generated 258-count `Packs` output is not fully committed upstream; the catalogue’s
 flags are not a substitute for those inputs and outputs.
 Kernel replay requires the source’s pinned toolchain/dependencies, complete certificate

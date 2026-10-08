@@ -28262,6 +28262,7 @@ evidence:
       n_values:
       - 102
     assurance: reported
+    source_reviewed: '2026-10-07'
     reported_method: exact-algebraic
     performed_by: source-author
     relationship_to_generator: same-implementation
@@ -28282,6 +28283,7 @@ evidence:
       n_values:
       - 106
     assurance: reported
+    source_reviewed: '2026-10-07'
     reported_method: exact-algebraic
     performed_by: source-author
     relationship_to_generator: same-implementation
@@ -28302,6 +28304,7 @@ evidence:
       n_values:
       - 152
     assurance: reported
+    source_reviewed: '2026-10-07'
     reported_method: exact-algebraic
     performed_by: source-author
     relationship_to_generator: same-implementation
@@ -28322,6 +28325,7 @@ evidence:
       n_values:
       - 177
     assurance: reported
+    source_reviewed: '2026-10-07'
     reported_method: exact-algebraic
     performed_by: source-author
     relationship_to_generator: same-implementation
@@ -28519,6 +28523,7 @@ evidence:
       - 323
       - 324
     assurance: reported
+    source_reviewed: '2026-10-07'
     reported_method: proof-assistant-checked
     performed_by: source-author
     relationship_to_generator: same-implementation
@@ -28531,6 +28536,7 @@ evidence:
     limitations: Reported non-strict local minima under the source matched-index perturbation convention,
       with angles modulo 90 degrees and plateaux permitted. The actual roster has 176 integer-band configurations
       plus n11 and n28; it is not every count in the shorthand bands. Full source Lean code is retained;
-      generated configuration proofs and their geometric inputs were not all acquired or replayed.
+      the 176 band localMin statements and N11L/N28L theorems with embedded configurations are retained,
+      but their bindings and full pinned builds have not been independently audited or replayed.
       No rigidity, isolated strict minimum or global lower bound follows. Same-count replacement poses
       receive no transferred theorem.
