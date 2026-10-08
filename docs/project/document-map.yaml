@@ -484,6 +484,7 @@ documents:
   - {path: README.md, role: orientation, authority: definitive, lifecycle: maintained}
   - {path: SYNOPSIS.md, role: technical-synthesis, authority: definitive, lifecycle: maintained}
   - {path: TUTORIAL.md, role: tutorial, authority: supporting, lifecycle: maintained}
+  - {path: packing-methods.md, role: tutorial, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/enumerated/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/known-best/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
