@@ -5,7 +5,7 @@ title: "Import issue422 second SQUISH update: five new counts and four replaceme
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T21:27:58.586Z
-updated_at: 2026-10-08T00:32:14.647Z
+updated_at: 2026-10-08T00:48:04.775Z
 started_at: 2026-10-07T21:37:07.551Z
 ---
 Pin e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b. New88/199/207/236/302; tighter108/179/180/263, all exact side comparisons strict. Separate nine-certificate layer after frozen PR421 twelve-case5e32 batch; preserve earlier geometries/receipts/credits. Current parser refuses new263 boolean squeezed; explicit bounded metadata decision plus meaningful controls required. Its source print below exact side mustremain quotation and use safe ceiling16.7404196795387766. No feasibility replay/adoption yet; source/README/allnine JSON pinned in squares-new-report-intake.
@@ -64,3 +64,9 @@ Latest pushed upper checkpoint ed42b23e00ab307e1c93f983eed78832ba1ad264, source/
 Actual cancelled supported a6 run journal1641ordinaryPASS2FAIL, originalouterEXIT130. U10 launch lacked tini-s; unchanged fullfixed_core_packet135PASS12.27default and135PASS12.20supported undertini-s. Independent causal delayed-reaper control observed owned SIGKILL zombie and exact worker-group-alive refusal, pytestEXIT1 expected and preserved, harnessEXIT0 after own orphan cleanup. No supervisor/test/grace/cap sourcechanges. Finalgate will usetini-s+supportedown-proc capability.
 Measured privateworker budget failure45.95>unchanged45s has its own repairchild. Profiled copy child65.52 includes instrumentation; nine admissions43.98s/repeated reconstruction41.06 dominates, factI/O2.075s. Sourceowner authorized invocation-localbatch with allpremises/perleafchecks and fresh separateinvocations. No globalcache, no arbitrary caller validation rows; focused mutation and budget tests thennewfreeze/push/Astrareview/finalCI.
 Checkpoint PR431 reviewedfinal91c6d3 hosted14SUCCESS38SKIP withfrontend npm/browserinstallationstillpending atlatestread; originalfirst66b hostedwatchEXIT0. No current91c hosted-green claim untilactualterminal. Nativeoutboxes lastauditbothempty, all three branchrefsroundtriplsremote verified; nativehead changes withlatestnotes.
+
+Current complete committed source is pushed on PR4299d58262095e247e41d1d069ee9d32b4246172361 (source data9a383fca). Performance fixe99 admits whole packet once per invocation, preserving complete27 premises and eachselected leaf; no cache/trusted caller rows. Exact privateworker unprofiledCALL10.23s (<unchanged45), setup4.72/total17.49 EXIT0. Last-frontmatter-field delimiter defect fixed9d with6regressionsPASS. Original9 completecasefrontmatters andownedblocks match0d; all324 records/fullscientificbytes preserved.
+Final Astra wholepost0d E/F/G/H round3 at9d all0remainingfindings, published E5450087185/F5450087315/G5450087437 and H in pr429-final-9d-review-publication.json. Security76freshchecks/15deltafiles PASS; all27 custody admittedfresh once/invocation, source/schema mutations failclosed, wrong/scalar leaf localized with untouchedsiblinggreen. Diagnosticlimit invalid YAML/truncatedgzip can abort entire call failclosed; no acceptedmap and no bypass. Independent math10.55s allnine direct/generator/firstadmission/lastfield/wrongbound controls; no new geometry decisions.
+Final localgate currentrunebcee2ef593845dd98df67e71f861edf at9d usesprojecttoolPATH+tini-s+supportedown-proc capability, fullyimplicitstandard4CPU scheduling.98metadata commands/62editstepsPASS, ordinarywholebehavior running with3506PASS0FAIL atlatestownerupdate; heavy/terminalstillPENDING. Prior9d attempt cancelled130 because Ruff/typecheck PATH discovery missing, sourceunchanged; priora6 serialization/process failures+cancellation retained. Never inferoutergreen from progress.
+CheckpointPR431final91c6 reviewed/formalA and actual16SUCCESS38documentedSKIP, READYnon-draft, mergehelduntilsource stack. CIsetupdelay wasapt downloads21.5MB at27.3kB/s, 13m7s; npm1s/browsercachesHIT; actualfrontendcontractsPASS98s. No credential/appfailure or sourcechange/rerun required.
+New428 complete source50files/Gitbundle/tag+3releaseassets retained,68poses272corners/5completejobs prepared, fullR improvement confirmed onlyarithmetically,16/18displayceilingsworseDaniel. Mathsourcebaseline complete; pair/containment/replayUNRUN. Bindingreview found oldhardcodedjobpairtotal26830 vs correct11390, separatebugcreated. Engineer preservingv1/fixingv2; finaldualprotocolreviews/GitHubcustody/CPUlease required beforeactualreplay. No IDsreserved/lower/local/globaloptimum/assurancepromotion.
