@@ -3,17 +3,21 @@ type: is
 id: is-01m4ey38agyscjyj4xn5j0jbep
 title: Clarify the square packing problem definition in the PDF
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
+delegate: codex@spud10.local
 labels:
   - website
   - pdf
 dependencies: []
 parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
+hold: null
+hold_until: null
 created_at: 2026-10-08T23:38:08.591Z
-updated_at: 2026-10-08T23:38:08.591Z
+updated_at: 2026-10-08T23:41:23.763Z
+started_at: 2026-10-08T23:41:23.762Z
 ---
 Use the owner's exact definition in the requested PDF: The square packing problem asks for the side $s(n)$ of the smallest square that can hold $n$ unit squares, where the squares are free to rotate but cannot overlap.
 
