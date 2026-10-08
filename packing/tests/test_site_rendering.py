@@ -34,8 +34,9 @@ def test_early_shift_is_measured_and_missing_static_math_fails(
 ) -> None:
     page = tmp_path / "index.html"
     page.write_text(
-        '<!doctype html><html><body style="margin:0"><main><h1>Static content</h1>'
-        '<p style="font-size:40px">A readable paragraph whose movement is large enough '
+        '<!doctype html><html><body style="margin:0"><main>'
+        '<h1>Static content</h1><p style="font-size:40px">A readable paragraph whose '
+        "movement is large enough "
         "to fail the declared layout budget.</p></main></body></html>"
     )
     server = preview_site.serve(tmp_path, 0)
@@ -52,6 +53,14 @@ def test_early_shift_is_measured_and_missing_static_math_fails(
             shifted.wait_for_timeout(450)
             bad = check_site_rendering.read_report(shifted)
             assert bad["cls"] > check_site_rendering.CLS_LIMIT
+            sources = [source for shift in bad["layoutShifts"] for source in shift["sources"]]
+            moved = next(
+                (source for source in sources if source["node"] == "html > body"), None
+            )
+            assert moved is not None, sources
+            # Chromium attributes this inserted gap to the body's changed box.
+            assert moved["currentRect"]["height"] - moved["previousRect"]["height"] >= 500
+            assert moved["previousRect"]["width"] > 0
             assert any(
                 problem.startswith("cls ") for problem in check_site_rendering.problems(bad)
             )
