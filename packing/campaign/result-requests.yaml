@@ -2716,3 +2716,46 @@ issues:
       upstream master revision is admitted here. Final main publication and author reply were verified
       before issue closure. Native performance follow-up think-c63v and later issues425/428 intake remain
       separate; no native timing policy was waived by this publication closeout.
+  - number: 428
+    title: 'n=68 exact certificate refinement below the retrieved rational ceiling: registration request'
+    author: lollipoll
+    opened: '2026-10-07'
+    state: open
+    kind: result-report
+    triage: done
+    summary: The original rational refinement is T-118 at V3/C3. The separate v1.2 exact-root feasibility
+      and restricted-family attainment statements are recorded as attributed reports with complete external
+      custody; independent mathematical review/replay remains pending.
+    read_through: '2026-10-08T02:01:59Z'
+    results:
+    - key: finite-rational-refinement
+      claim: The complete finite rational n68 witness at original source revision fded686668e29258dad2eb29d0482fa3fd51bd6b.
+      source: body
+      register:
+      - T-118
+    - key: v12-root-feasibility
+      claim: All 68 root frames, 2,278 unordered pairs and 1,088 corner-wall predicates are source-reported
+        feasible at L*=z*[136].
+      source: https://github.com/jlevy/squares/issues/428#issuecomment-6050646954
+      evidence:
+      - E-rehwaldt-n68-root-feasibility-v12-report
+    - key: v12-restricted-attainment
+      claim: Same-root attainment is reported inside the specified restricted contact family only.
+      source: https://github.com/jlevy/squares/issues/428#issuecomment-6050646954
+      evidence:
+      - E-rehwaldt-n68-restricted-attainment-v12-report
+    asks:
+    - what: Independently review and replay the v1.2 root-feasibility and same-root restricted-family
+        obligations before any assurance promotion.
+      state: queued
+      bead: think-nv5o
+      note: Source-only publication and complete byte custody decide no theorem; proof review, complete
+        inputs, rejection/restoration and actual private-worker gates remain pending.
+    beads:
+    - think-v42c
+    - think-nv5o
+    answer_bead: think-nv5o
+    replies: []
+    close_when: Accurate imported and reviewed states have reached main and remaining proof/replay obligations
+      and any owner response have explicit dispositions. Source-only publication does not close this
+      request.

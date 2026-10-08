@@ -28869,3 +28869,45 @@ evidence:
     limitations: Seventeen complete originals; fourteen improve both current exact upper lanes, three
       withdrawn certificates remain retained. No optimizer, optimality, rigidity, priority or novelty
       is established.
+  - id: E-rehwaldt-n68-root-feasibility-v12-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 68
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 exact-root report v1.2]'
+    certificate: packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The specified exact-root packing is a source-reported upper bound only. No contraction,
+      nonsingularity, polynomial identity, full geometry or private-worker replay has run here. The
+      old rational pose cannot represent this root configuration. Independent proof/replay work remains
+      open under think-nv5o; source-byte custody is not mathematical assurance. T-118 and all standing
+      bounds remain unchanged.
+    source_reviewed: '2026-10-08'
+  - id: E-rehwaldt-n68-restricted-attainment-v12-report
+    claim: derived-structure
+    scope:
+      n_values:
+      - 68
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Rehwaldt n68 exact-root report v1.2]'
+    certificate: packing/resources/web/rehwaldt-n68-exact-root-2026-10-08/reported-catalogue.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: Attainment concerns only the specified same-root contact family with 145 held equalities,
+      eight signed inequalities, eight angle groups, 35 fixed poses, 22 gauges and radius 10^-11. No
+      unrestricted local/global optimum, lower bound or minimal polynomial is established. Independent
+      proof/replay work remains open under think-nv5o; source-byte custody is not mathematical assurance.
+      T-118 and all standing bounds remain unchanged.
+    source_reviewed: '2026-10-08'

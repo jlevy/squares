@@ -1467,6 +1467,19 @@ sources:
     note: Issue399 supplies three complete changed rational packings at266,270,272. Pinned7eef24f source
       MIT licences and original lineage remain retained. Exact feasibility is certified independently;
       source arrangement novelty and local/global optimality are unestablished.
+  - key: '[Rehwaldt n68 exact-root report v1.2]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt with disclosed OpenAI Codex assistance, source revision 495238e3d5a542008ff2f01a1dbbb78527cbe732
+      and release v1.2.0. Exact-root feasibility and restricted-family attainment are reported only.
+      The release was published 8 October UTC, 7 October in America/Chicago. No whole-publication license
+      was observed; authored metadata and external-byte identities are public, with the original publication
+      preserved outside live Git.
 credited_names:
   ry-xu: ry-xu
   Seth Rehwaldt: Rehwaldt

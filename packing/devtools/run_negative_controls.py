@@ -661,6 +661,10 @@ COPY_SEPARATELY = (
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",
+    # The reported-only n68 packet is complete factual metadata, not author code.
+    ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md",
+    ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/reported-catalogue.json",
+    ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/source-manifest.json",
     REPO / ".flowmarkignore",
     REPO / ".gitignore",
     REPO / ".github/PULL_REQUEST_TEMPLATE.md",

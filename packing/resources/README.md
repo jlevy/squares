@@ -848,6 +848,17 @@ Source MIT licences and the earlier #375 namespace remain unchanged.
   The packet preserves factual inputs and credits Xu’s direction and LLM assistance; it
   does not treat the unlicensed source programs as a licensed software bundle.
 
+## Exact-Root Report for n68, v1.2
+
+**[Rehwaldt n68 exact-root report v1.2]**: Seth Rehwaldt after Couzo and earlier
+contributors, with OpenAI Codex assistance.
+The [authored packet](web/rehwaldt-n68-exact-root-2026-10-08/README.md) records
+exact-root feasibility and restricted-family attainment at pinned revision
+`495238e3d5a542008ff2f01a1dbbb78527cbe732`. Both claims remain unconfirmed here; the
+earlier finite rational T-118 result remains unchanged.
+Complete original custody is preserved outside live Git; public files contain attributed
+factual metadata and external-byte identities only.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
