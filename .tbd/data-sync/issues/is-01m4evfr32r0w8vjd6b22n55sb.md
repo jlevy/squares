@@ -3,16 +3,20 @@ type: is
 id: is-01m4evfr32r0w8vjd6b22n55sb
 title: "n17 PR404 B2: retain structured refusal for malformed input boundaries"
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
+delegate: sol-merge-engineering
 labels:
   - n-17
 dependencies: []
 parent_id: is-01m4eq9mdaejkedd1b09qqn09p
+hold: null
+hold_until: null
 created_at: 2026-10-08T22:52:32.225Z
-updated_at: 2026-10-08T22:52:32.225Z
+updated_at: 2026-10-08T23:01:03.110Z
+started_at: 2026-10-08T23:01:03.110Z
 ---
 PR404 full review B2, pinned head 1d1691bf5e6e1115ad1597b5f72bbd12ad9b0b88.
 

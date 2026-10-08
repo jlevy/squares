@@ -3,16 +3,20 @@ type: is
 id: is-01m4evfqne9cemzns36aetar5h
 title: "n17 PR404 B1: reject colliding producer output paths"
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
+delegate: sol-merge-engineering
 labels:
   - n-17
 dependencies: []
 parent_id: is-01m4eq9mdaejkedd1b09qqn09p
+hold: null
+hold_until: null
 created_at: 2026-10-08T22:52:31.789Z
-updated_at: 2026-10-08T22:52:31.789Z
+updated_at: 2026-10-08T23:01:03.096Z
+started_at: 2026-10-08T23:01:03.092Z
 ---
 PR404 full review B1, pinned head 1d1691bf5e6e1115ad1597b5f72bbd12ad9b0b88.
 
