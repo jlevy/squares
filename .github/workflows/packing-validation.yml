@@ -258,6 +258,40 @@ jobs:
           steps.measure-cache.outputs.cache-hit == 'true'
         run: git ls-files -z -- sqverify_fast | xargs -0 touch -t 200001010000
 
+      # The 600s cold-build ceiling is provisional. The native floor below retains
+      # its 120s warm per-command ceiling and the verifier tier's measured wall ceiling.
+      # Partial dependency builds are reusable; cargo validates every fingerprint.
+      - name: Key the ordinary n17 verifier cache
+        id: n17-kernel-key
+        if: "github.event_name != 'pull_request'"
+        working-directory: packing/n17_kernel_verify
+        run: |
+          rustc_vv="$(rustc -vV)"
+          echo "tree=$(git rev-parse HEAD:packing/n17_kernel_verify)" >> "$GITHUB_OUTPUT"
+          echo "lock=$(sha256sum Cargo.lock | cut -c1-16)" >> "$GITHUB_OUTPUT"
+          echo "rustc=$(printf '%s' "$rustc_vv" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore ordinary n17 verifier dependencies and build
+        id: n17-kernel-cache
+        if: "github.event_name != 'pull_request'"
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: >-
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{
+            steps.n17-kernel-key.outputs.lock }}-${{ steps.n17-kernel-key.outputs.tree }}
+          restore-keys: |
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{ steps.n17-kernel-key.outputs.lock }}-
+
+      - name: Prepare the ordinary n17 verifier under its cold ceiling
+        if: "github.event_name != 'pull_request'"
+        working-directory: packing/n17_kernel_verify
+        run: |
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          timeout --signal=TERM --kill-after=10s 600s \
+            cargo test --locked --release --all-targets --no-run --quiet \
+            2>&1 | tee "$PACKING_VALIDATION_ARTIFACT_DIR/n17-kernel-cold-build.log"
+
       # `--fast` is the pull-request surface, and two separate pieces of work in one day
       # made it what it is. They pull in opposite directions on purpose.
       #
@@ -457,6 +491,15 @@ jobs:
         with:
           path: packing/sqverify_fast/target
           key: ${{ steps.measure-cache.outputs.cache-primary-key }}
+
+      - name: Retain ordinary n17 verifier dependency intermediates
+        if: >-
+          always() && steps.n17-kernel-cache.outcome == 'success' &&
+          steps.n17-kernel-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: ${{ steps.n17-kernel-cache.outputs.cache-primary-key }}
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -1045,6 +1088,37 @@ jobs:
         if: "steps.n17-native-cache.outputs.cache-hit == 'true'"
         run: git ls-files -z -- n17bb_native | xargs -0 touch -t 200001010000
 
+      # The 600s cold-build ceiling is provisional. The native floor below retains
+      # its 120s warm per-command ceiling and the verifier tier's measured wall ceiling.
+      # Partial dependency builds are reusable; cargo validates every fingerprint.
+      - name: Key the ordinary n17 verifier cache
+        id: n17-kernel-key
+        working-directory: packing/n17_kernel_verify
+        run: |
+          rustc_vv="$(rustc -vV)"
+          echo "tree=$(git rev-parse HEAD:packing/n17_kernel_verify)" >> "$GITHUB_OUTPUT"
+          echo "lock=$(sha256sum Cargo.lock | cut -c1-16)" >> "$GITHUB_OUTPUT"
+          echo "rustc=$(printf '%s' "$rustc_vv" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore ordinary n17 verifier dependencies and build
+        id: n17-kernel-cache
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: >-
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{
+            steps.n17-kernel-key.outputs.lock }}-${{ steps.n17-kernel-key.outputs.tree }}
+          restore-keys: |
+            ${{ runner.os }}-n17-kernel-${{ steps.n17-kernel-key.outputs.rustc }}-${{ steps.n17-kernel-key.outputs.lock }}-
+
+      - name: Prepare the ordinary n17 verifier under its cold ceiling
+        working-directory: packing/n17_kernel_verify
+        run: |
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          timeout --signal=TERM --kill-after=10s 600s \
+            cargo test --locked --release --all-targets --no-run --quiet \
+            2>&1 | tee "$PACKING_VALIDATION_ARTIFACT_DIR/n17-kernel-cold-build.log"
+
       - name: Run the required pull-request measure verifier tier
         run: >-
           uv run --frozen --all-extras --group dev
@@ -1069,6 +1143,15 @@ jobs:
         with:
           path: packing/n17bb_native/target
           key: ${{ steps.n17-native-cache.outputs.cache-primary-key }}
+
+      - name: Retain ordinary n17 verifier dependency intermediates
+        if: >-
+          always() && steps.n17-kernel-cache.outcome == 'success' &&
+          steps.n17-kernel-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: packing/n17_kernel_verify/target
+          key: ${{ steps.n17-kernel-cache.outputs.cache-primary-key }}
 
       - name: Preserve validation timings and partial logs
         if: always()
