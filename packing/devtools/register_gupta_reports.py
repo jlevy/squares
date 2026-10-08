@@ -10,7 +10,9 @@ import argparse
 import copy
 import json
 import re
+import tempfile
 from fractions import Fraction
+from pathlib import Path
 from typing import Any
 
 from devtools import gupta_house_links as houses
@@ -85,9 +87,42 @@ def historical_prose(n: int, body: str) -> str:
     return previous.historical_upper_prose(n, body)
 
 
-def read_history() -> list[dict[str, Any]]:
-    houses.reports.ensure_private(HISTORY)
-    value = houses.reports.kernel.read_xz(HISTORY)
+def validate_prior_house(row: dict[str, Any], case: dict[str, Any]) -> None:
+    """Schema-load every original pose, then bind its source and side to the old case."""
+    shared = houses.shared
+    source_key = case["reported_upper_bound"]["source_key"]
+    n = row["n"]
+    if source_key == shared.confirmation.reported.SOURCE_KEY:
+        source_url = shared.confirmation.reported.source_url(n)
+    elif source_key == shared.shared.SOURCE_KEY:
+        source_url = shared.shared.source_url(n)
+    elif source_key == shared.original.source_key(n):
+        source_url = shared.original.source_url(n)
+    else:
+        raise ValueError("history requires an admitted original SQUISH source")
+    if len(row["house"].encode()) > shared.original.MAX_RECEIPT_BYTES:
+        raise ValueError("history prior house exceeds the existing witness ceiling")
+    try:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "original-house.yaml"
+            path.write_text(row["house"])
+            witness = shared.bounded_house(path)
+        identity_matches = (
+            witness["n"] == n
+            and witness["id"] == f"W-known-best-n{n:03d}"
+            and witness["source"]["key"] == source_key
+            and witness["source"]["url"] == source_url
+            and Fraction(witness["side"])
+            == Fraction(case["reported_upper_bound"]["exact_form"])
+        )
+    except (ValueError, KeyError, TypeError, AttributeError) as error:
+        raise ValueError("complete original prior house witness required") from error
+    if not identity_matches:
+        raise ValueError("complete original prior house identity/source/side required")
+
+
+def validate_history(value: Any) -> list[dict[str, Any]]:
+    """Validate the same complete original boundary before its first save or a retry."""
     if (
         type(value) is not dict
         or set(value) != {"format", "cases"}
@@ -111,7 +146,13 @@ def read_history() -> list[dict[str, Any]]:
             or case["reported_upper_bound"]["source_key"] == houses.reports.SOURCE_KEY
         ):
             raise ValueError("history requires every original pre-adoption source")
+        validate_prior_house(row, case)
     return value["cases"]
+
+
+def read_history() -> list[dict[str, Any]]:
+    houses.reports.ensure_private(HISTORY)
+    return validate_history(houses.reports.kernel.read_xz(HISTORY))
 
 
 def record_cases() -> None:
@@ -184,8 +225,9 @@ def record_cases() -> None:
     if not plan:
         return
     if retained is None:
-        houses.reports.save_xz(HISTORY, {"format": HISTORY_FORMAT, "cases": prior})
-        read_history()
+        boundary = {"format": HISTORY_FORMAT, "cases": prior}
+        validate_history(boundary)
+        houses.reports.save_xz(HISTORY, boundary)
     for path, text in plan:
         save(path, text)
 
@@ -345,7 +387,6 @@ def register() -> None:
                 "value": row["value"],
                 "superseded_by": SOURCE_ID,
                 "reason": "Complete Gupta source certificate is strictly smaller.",
-                "evidence": row["evidence"],
             }
         )
         coverage["selected_overrides"].remove(row)
@@ -359,9 +400,29 @@ def register() -> None:
                     "n": n,
                     "source_id": SOURCE_ID,
                     "value": reported_bound(n)["value"],
-                    "evidence": [REPORT],
+                    "evidence": REPORT,
+                    "reason": "The complete rational precision refinement is strictly "
+                    "smaller than both previous exact upper lanes.",
                 }
             )
+    selected = {row["n"]: row for row in coverage["selected_overrides"]}
+    for n in houses.reports.NUMBERS:
+        if n in houses.NUMBERS or any(
+            row["n"] == n and row["source_id"] == SOURCE_ID
+            for row in coverage["superseded_reports"]
+        ):
+            continue
+        coverage["superseded_reports"].append(
+            {
+                "n": n,
+                "source_id": SOURCE_ID,
+                "value": reported_bound(n)["value"],
+                "superseded_by": selected[n]["source_id"],
+                "reason": "The withdrawn Gupta rational certificate is larger than "
+                "the selected ry-xu construction; its complete source and replay "
+                "remain retained.",
+            }
+        )
     coverage["selected_overrides"].sort(key=lambda row: row["n"])
     save(path, dump(coverage))
 

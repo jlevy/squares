@@ -3,16 +3,22 @@
 from __future__ import annotations
 
 import copy
+import json
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
 import pytest
+from jsonschema_rs import Draft202012Validator
 
 from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import check_source_coverage as coverage_check
 from devtools import gupta_house_links as houses
 from devtools import register_gupta_reports as register
+from devtools import register_refinement_reports as registry
 from devtools import run_negative_controls as controls
+from devtools import ryxu_house_links as ryxu
 from sqpack.yamlio import safe_load
 
 SOURCE = houses.REPO
@@ -194,3 +200,200 @@ def test_all_four_complete_private_gupta_dependencies_are_in_production_copy_ros
     assert set(houses.snapshot_house_links()) <= {
         controls.ROOT / path for path in controls.HOUSE_LINK_LEAVES
     }
+
+
+HOUSE_MUTANTS = ("empty", "truncated", "n", "id", "source", "url", "side", "missing-pose")
+
+
+def mutate_house(text: str, mutation: str) -> str:
+    if mutation == "empty":
+        return ""
+    if mutation == "truncated":
+        return text[: len(text) // 2]
+    document = safe_load(text)
+    witness = document["witness"]
+    if mutation == "n":
+        witness["n"] -= 1
+    elif mutation == "id":
+        witness["id"] = "W-known-best-n088"
+    elif mutation == "source":
+        witness["source"]["key"] = "[wrong source]"
+    elif mutation == "url":
+        witness["source"]["url"] = "https://example.invalid/wrong-source"
+    elif mutation == "side":
+        witness["side"] = str(Fraction(witness["side"]) + 1)
+    else:
+        assert mutation == "missing-pose"
+        witness["squares"].pop()
+    return register.dump(document)
+
+
+@pytest.mark.parametrize("mutation", HOUSE_MUTANTS)
+def test_late_invalid_house_refuses_before_history_or_frontier_write(
+    original_pair: dict[int, str], mutation: str
+) -> None:
+    assert tuple(original_pair) == houses.NUMBERS
+    path = houses.house_path(130)
+    path.write_text(mutate_house(path.read_text(), mutation))
+    before = frontier_bytes()
+    with pytest.raises(ValueError, match="complete original prior house"):
+        register.record_cases()
+    assert frontier_bytes() == before
+    assert not register.HISTORY.exists()
+
+
+@pytest.mark.parametrize("mutation", HOUSE_MUTANTS)
+def test_existing_history_requires_every_complete_original_house(
+    original_pair: dict[int, str], mutation: str
+) -> None:
+    rows = [
+        {"n": n, "frontier": text, "house": houses.house_path(n).read_text()}
+        for n, text in original_pair.items()
+    ]
+    rows[-1]["house"] = mutate_house(rows[-1]["house"], mutation)
+    houses.reports.save_xz(register.HISTORY, {"format": register.HISTORY_FORMAT, "cases": rows})
+    before = frontier_bytes()
+    boundary = register.HISTORY.read_bytes()
+    with pytest.raises(ValueError, match="complete original prior house"):
+        register.record_cases()
+    assert frontier_bytes() == before
+    assert register.HISTORY.read_bytes() == boundary
+
+
+def test_linked_house_owner_follows_private_current_frontier(
+    original_pair: dict[int, str], monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    second = houses.shared.confirmation
+    original_paths = second.private_input_paths()
+    repo = houses.REPO
+    for original in original_paths:
+        destination = repo / original.relative_to(SOURCE)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(original.read_bytes())
+    monkeypatch.setattr(second, "REPO", repo)
+    monkeypatch.setattr(second, "PACKET", repo / second.PACKET.relative_to(SOURCE))
+    monkeypatch.setattr(second, "SCHEMA", repo / second.SCHEMA.relative_to(SOURCE))
+    monkeypatch.setattr(second, "WITNESSES", repo / second.WITNESSES.relative_to(SOURCE))
+    monkeypatch.setattr(check_results, "REPO", repo)
+
+    def forbidden(*_args, **_kwargs):
+        pytest.fail("source-owner admission ran a geometric decider")
+
+    monkeypatch.setattr(second.original, "decide", forbidden)
+    monkeypatch.setattr(houses.reports.kernel, "run_case", forbidden)
+    path = houses.house_path(88)
+    old = path.read_bytes()
+    external = tmp_path / "linked-house.yaml"
+    external.write_bytes(old)
+    path.unlink()
+    path.symlink_to(external)
+    relative = path.relative_to(repo).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+
+    frontier = register.FRONTIER / "n-088.md"
+    document = safe_load(original_pair[88].split("---\n", 2)[1])
+    document["packing"]["reported_upper_bound"] = register.reported_bound(88)
+    frontier.write_text(
+        "---\n" + register.dump(document) + "---\n" + original_pair[88].split("---\n", 2)[2]
+    )
+    assert check_results.repository_file_problem(relative)
+    expected = houses.build_witness(88)
+    external.write_text(second.witness_document(expected, schema="../witness.schema.yaml"))
+    assert check_results.repository_file_problem(relative) is None
+    frontier.write_text(original_pair[88])
+    assert check_results.repository_file_problem(relative)
+    frontier.unlink()
+    assert check_results.repository_file_problem(relative)
+
+
+def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory(
+    original_pair: dict[int, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assert tuple(original_pair) == houses.NUMBERS
+    monkeypatch.setattr(houses, "NUMBERS", houses.reports.SELECTED)
+    monkeypatch.setattr(register, "record_cases", lambda: None)
+    monkeypatch.setattr(registry.packets, "REPO", houses.REPO)
+    for name in ("evidence", "results"):
+        (register.FRONTIER / f"{name}.yaml").write_bytes(
+            (SOURCE / f"packing/frontier/{name}.yaml").read_bytes()
+        )
+    source_path = register.FRONTIER / "source-coverage.yaml"
+    source_path.write_bytes((SOURCE / "packing/frontier/source-coverage.yaml").read_bytes())
+    original = safe_load(source_path.read_text())
+    withdrawals = (108, 123, 129)
+    original_selected = {
+        row["n"]: row for row in original["selected_overrides"] if row["n"] in withdrawals
+    }
+    register.register()
+    coverage = safe_load(source_path.read_text())
+    for name in ("evidence", "results", "source-coverage"):
+        validated = safe_load((register.FRONTIER / f"{name}.yaml").read_text())
+        schema_path = SOURCE / "packing/frontier" / validated["softschema"]["schema"]
+        schema = safe_load(schema_path.read_text())
+        validated.pop("softschema")
+        assert Draft202012Validator(schema).is_valid(validated), name
+    claims = json.loads((houses.reports.PACKET / "acquisition/claims.json").read_text())
+    offered = {row["n"]: row["offered_side"] for row in claims["results"]}
+    n_min, n_max = (coverage["case_corpus"][key] for key in ("n_min", "n_max"))
+    baseline_source = coverage_check.source_by_id(coverage, "kingbird-current")
+    baseline = coverage_check.parse_kingbird(
+        SOURCE / "packing" / baseline_source["local"], n_min, n_max
+    )
+    if pending := coverage.get("pending_catalogue_intake"):
+        earlier = coverage_check.parse_kingbird(
+            SOURCE / "packing" / coverage_check.INTAKE_CATALOGUE_HTML, n_min, n_max
+        )
+        baseline.update({row["n"]: earlier[row["n"]] for row in pending})
+    assert (
+        coverage_check.selection_errors(coverage, baseline, {register.SOURCE_ID: offered}) == []
+    )
+    selected = {
+        row["n"]: row
+        for row in coverage["selected_overrides"]
+        if row["source_id"] == register.SOURCE_ID
+    }
+    withdrawn = {
+        row["n"]: row
+        for row in coverage["superseded_reports"]
+        if row["source_id"] == register.SOURCE_ID
+    }
+    assert tuple(sorted(selected)) == houses.NUMBERS
+    assert tuple(sorted(withdrawn)) == withdrawals
+    for n in withdrawals:
+        assert (
+            next(row for row in coverage["selected_overrides"] if row["n"] == n)
+            == original_selected[n]
+        )
+        assert withdrawn[n]["superseded_by"] == original_selected[n]["source_id"]
+    first = source_path.read_bytes()
+    register.register()
+    assert source_path.read_bytes() == first
+
+
+def test_unaffected_ryxu_link_keeps_its_complete_private_source_owner(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = tmp_path / "ryxu-private"
+    paths = ryxu.private_input_paths()
+    for original in paths:
+        path = repo / original.relative_to(SOURCE)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(original.read_bytes())
+    monkeypatch.setattr(ryxu, "METADATA", repo / ryxu.METADATA.relative_to(SOURCE))
+    monkeypatch.setattr(ryxu.reports, "PACKET", repo / ryxu.reports.PACKET.relative_to(SOURCE))
+    monkeypatch.setattr(ryxu.reports, "REPO", repo)
+    monkeypatch.setattr(ryxu, "REPO", repo)
+    monkeypatch.setattr(check_results, "REPO", repo)
+    frontier = repo / "packing/frontier/n-070.md"
+    frontier.parent.mkdir(parents=True)
+    frontier.write_bytes((SOURCE / frontier.relative_to(repo)).read_bytes())
+    path = ryxu.house_path(70)
+    path.parent.mkdir(parents=True)
+    path.symlink_to(SOURCE / path.relative_to(repo))
+
+    def forbidden(*_args, **_kwargs):
+        pytest.fail("unaffected-source admission ran a geometric decider")
+
+    monkeypatch.setattr(ryxu.reports.kernel, "run_case", forbidden)
+    monkeypatch.setattr(ryxu.radical, "exact_verify", forbidden)
+    assert check_results.repository_file_problem(path.relative_to(repo).as_posix()) is None
