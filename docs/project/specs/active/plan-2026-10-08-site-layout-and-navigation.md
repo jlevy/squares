@@ -18,15 +18,18 @@ author: Codex, for the repository owner
 ## Overview
 
 Make the Square Packing website easier to scan and navigate.
-The homepage gives a short introduction, visible previews of the atlas and recent
-results, and prominent buttons to the complete Atlas and Results pages.
-Case records and popovers share readable layouts and math.
-A shared header hides while scrolling down and returns immediately when scrolling up, on
-desktop and mobile. The PDF copy fix uses the owner’s supplied definition of the square
-packing problem.
+The homepage starts with a short problem introduction and a **The Squares Project** card
+linking to `about.html`. The atlas preview comes next, followed by **Learn More** with
+all paper cards, then a visible recent-results preview.
+Prominent buttons lead to the complete Atlas and Results pages.
+The full project section moves to the About page, with **About** in the top navigation
+immediately to the left of **GitHub**. Case records and popovers share readable layouts
+and math. A shared header hides while scrolling down and returns immediately when
+scrolling up, on desktop and mobile.
+The PDF copy fix uses the owner’s supplied definition of the square packing problem.
 
-The owner confirmed both the header direction and the requirement to keep the atlas and
-results previews visible.
+The owner confirmed the header direction, visible atlas and results previews, the
+homepage order, paper-card grouping, and the About page and navigation position.
 This spec lists the fixes and their acceptance criteria.
 
 ## Goals
@@ -35,6 +38,11 @@ This spec lists the fixes and their acceptance criteria.
   and visible atlas and results previews.
 - Prominent buttons from those previews to dedicated pages containing the complete atlas
   and results table.
+- The atlas directly after the problem introduction, followed by **Learn More** with all
+  paper cards.
+- A dedicated About page for the full **The Squares Project** section, a compact project
+  card beneath the homepage intro text, and **About** immediately before **GitHub** in
+  the top navigation.
 - Consistent case-page and popover layouts, with readable mathematics, starting with the
   reported rendering problem for $n = 291$.
 - Navigation that remains easy to reach while scrolling on desktop and mobile.
@@ -79,13 +87,29 @@ preserves the static pages, canonical addresses, and published-link guarantees o
 
 Keep the homepage in this order:
 
-1. A compact problem and project introduction, with the main destinations easy to find.
+1. A compact introduction to the square packing problem, followed by a **The Squares
+   Project** card linking to `about.html` within the same intro area.
 2. A visible atlas preview, one short introductory sentence, and a prominent **Explore
-   the atlas** button.
-3. A visible recent-results preview, one short introductory sentence, and a prominent
+   the atlas** button, immediately after the introduction.
+3. A **Learn More** section immediately below the atlas, containing all paper cards with
+   brief descriptions and links to the complete papers.
+4. A visible recent-results preview, one short introductory sentence, and a prominent
    **View all results** button.
-4. Compact links or disclosures for papers, visualization, project documentation,
-   related projects, and contribution information.
+5. Compact links or disclosures for visualization, project documentation, related
+   projects, and contribution information.
+
+Move paper cards out of the introduction or atlas area into **Learn More**. Keep every
+paper reachable through that group and use concise card copy.
+
+Move the full **The Squares Project** section’s project narrative, approach,
+attribution, and contextual links to `about.html`. Its homepage card has a brief
+description and opens that page.
+Keeping the card within the intro area leaves Atlas as the second section.
+Add **About** to the shared top navigation immediately before **GitHub**, on desktop and
+mobile.
+Use the shared header for the About page and retain the source material’s meaning
+and links. Preserve the existing homepage `#the-squares-project` destination on the
+project card or forward it to the About page.
 
 Use at most eight representative atlas tiles and six recent results as the initial
 preview limits. These are proposed design defaults.
@@ -100,8 +124,8 @@ Keep the complete results table and filters at `all-results.html`. Retain the Fr
 survey and case index as distinct destinations.
 The shared navigation exposes the Atlas page while retaining access to Frontier.
 
-Register the new page in `packing/site-urls.yaml` and the builders’ page, asset, crawl,
-preview, and Pages-scope declarations.
+Register `atlas.html` and `about.html` in `packing/site-urls.yaml` and the builders’
+page, asset, crawl, preview, and Pages-scope declarations.
 Preserve the existing homepage atlas fragments and query view state when forwarding to
 the full atlas. Keep the recent-results anchor useful for its preview and preserve
 existing result and case addresses.
@@ -172,7 +196,7 @@ need coverage; their markup is not currently identical.
 | Workbench shell | `packages/workbench/tools/workbench_tools/build_site.py` |
 | Published addresses and deployment scope | `packing/site-urls.yaml`, `packing/devtools/pages_scope.py`, `.github/workflows/pages.yml` |
 
-The new Atlas address is the only proposed public route addition.
+Atlas and About are the two proposed public route additions.
 Reuse current case, result, and table interfaces, the existing design tokens, and the
 prepared-math pipeline.
 
@@ -186,16 +210,17 @@ their combined behavior.
 | --- | --- | --- | --- |
 | L1: Repair the $n = 291$ case math | `think-18kd` | P1 | Reproduce on the direct page and case popover, identify the failure, then render all formulas without parse errors, missing glyphs, clipping, or raw markup. Retain a regression that exercises the actual failure. |
 | L2: Normalize case and popover layouts | `think-0ahf` | P1 | Consistent headings, spacing, drawings, bounds and math across both containers. No viewport-wide overflow; long content scrolls inside the popover and its close control remains reachable. |
-| L3: Tighten the homepage and preserve both previews | `think-5c8r` | P1 | Brief introductions; at most eight atlas tiles and six results initially; both previews visibly present; prominent buttons to Atlas and Results; papers and resources still reachable. |
+| L3: Tighten the homepage and preserve both previews | `think-5c8r` | P1 | Order: problem intro with The Squares Project card to About, Atlas preview, Learn More with all paper cards, Results preview, compact resources. Brief introductions; at most eight atlas tiles and six results initially; both previews visibly present; prominent buttons to Atlas and Results; every paper and resource still reachable. |
 | L4: Publish the complete dedicated Atlas page | `think-a9au` | P1 | All 324 cases and existing view controls work at `atlas.html`; case links/popovers work; navigation and the URL registry include it; legacy atlas links and view state still reach the full atlas. |
 | L5: Add shared Headroom navigation | `think-byu7` | P1 | Hide down, show immediately up on desktop and mobile; visible at top and during focus/menu use; all four shell families covered; no layout jump or obscured anchor target. |
-| L6: Verify the combined website layouts and interactions | `think-xio5` | P2 | Browser checks cover previews and their buttons, the dedicated pages, $n = 291$ math, popover scrolling/focus, and header direction across representative shells, widths and themes. Retain reviewed before/after screenshots with the implementation evidence. |
+| L6: Verify the combined website layouts and interactions | `think-xio5` | P2 | Browser checks cover section order, paper-card grouping, previews and buttons, the About page and project card, About immediately before GitHub in the nav, the dedicated Atlas and Results pages, $n = 291$ math, popover scrolling/focus, and header direction. Retain reviewed before/after screenshots across representative shells, widths and themes. |
 | L7: Clarify the PDF problem definition | `think-9tcy` | P2 | Identify the requested PDF, update its source with the exact sentence above, rebuild it, and verify readable inline math and unclipped text. The target requires owner clarification before editing. |
+| L8: Publish The Squares Project About page | `think-h21i` | P1 | Move the full project section to `about.html`; retain its narrative, attribution and links; add About immediately before GitHub in the shared top nav; the homepage project card opens About; register and crawl the new route. |
 
 Start with L1’s reproduction so its regression identifies a real failure.
 L2 and L5 can be developed independently.
-L3 and L4 integrate together so preview buttons always have a working destination.
-L6 depends on the five implementation issues.
+L3 integrates with L4 and L8 so the preview buttons and project card have working
+destinations. L6 depends on all six website implementation issues.
 L7 has its own PDF rendering check and can proceed once its target is identified.
 Give parallel writers disjoint files; keep shared templates, route registration, and
 integration with one owner.
@@ -218,8 +243,11 @@ math.
 
 Header checks include top, down, immediate up, focus, an open theme menu, resize, anchor
 navigation, a paper page, a generated case/result page, and the Workbench.
-Homepage checks assert actual preview limits and both primary buttons; Atlas checks
-assert complete case coverage and old-link forwarding.
+Homepage checks assert the section order, all paper cards grouped under **Learn More**,
+the project card’s About target, actual preview limits, and both primary buttons.
+About checks assert the retained project content and links, and **About** immediately
+before **GitHub** in the shared top navigation.
+Atlas checks assert complete case coverage and old-link forwarding.
 Reuse `preview_site.py` for the visual review and the existing site-page measurement
 tools for established rendering budgets.
 
@@ -232,8 +260,8 @@ Fast regressions belong in the existing CI surface.
 
 Build and review the local static site with desktop and mobile screenshots before
 publishing the website changes.
-Update the URL registry and generated route view with the Atlas addition, verify old
-addresses, and use the existing Pages deployment workflow.
+Update the URL registry and generated route view with the Atlas and About additions,
+verify old addresses, and use the existing Pages deployment workflow.
 Close the epic when all implementation issues and the combined browser review pass.
 Planning completion leaves the implementation issues open.
 
