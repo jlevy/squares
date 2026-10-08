@@ -1,0 +1,47 @@
+{
+  "format": "kingbird-exact-side-source-manifest-v1",
+  "retention_policy": "metadata-and-derived-mathematical-facts-only",
+  "raw_asset_retained": false,
+  "sources": [
+    {
+      "n": 55,
+      "url": "https://kingbird.myphotos.cc/packing/square-55.svg",
+      "retrieved_utc": "2026-10-08T00:31:34Z",
+      "bytes": 8953,
+      "sha256": "77a0ff9aee57df261c922f45250d7b17b8fdc063c63be3a9a1c0772eb85eb3f7",
+      "last_modified": "Sun, 08 Feb 2026 23:18:28 GMT",
+      "same_as_reading_of_2026_10_05": true,
+      "facts": "../facts/n-055.json"
+    },
+    {
+      "n": 71,
+      "url": "https://kingbird.myphotos.cc/packing/square-71.svg",
+      "retrieved_utc": "2026-10-08T00:31:34Z",
+      "bytes": 10378,
+      "sha256": "295e241448cbf46e7a1f9718325ddbfd53fd6de236e597a2591bf167da59bebe",
+      "last_modified": "Thu, 10 Sep 2026 01:33:17 GMT",
+      "same_as_reading_of_2026_10_05": true,
+      "facts": "../facts/n-071.json"
+    },
+    {
+      "n": 83,
+      "url": "https://kingbird.myphotos.cc/packing/square-83.svg",
+      "retrieved_utc": "2026-10-08T00:35:01Z",
+      "bytes": 350947,
+      "sha256": "8f3274fa8ddd2c348eda4dc50e4c298438cc95afbd8d94b70bf693e53bb5020c",
+      "last_modified": "Thu, 24 Sep 2026 16:37:57 GMT",
+      "same_as_reading_of_2026_10_05": true,
+      "facts": "../facts/n-083.json"
+    },
+    {
+      "n": 126,
+      "url": "https://kingbird.myphotos.cc/packing/square-126.svg",
+      "retrieved_utc": "2026-10-08T00:36:48Z",
+      "bytes": 11783,
+      "sha256": "82f306eb3ea857e4a46156b8d1bb205f08bcf6a6771ffb8f8c537f12634f751d",
+      "last_modified": "Thu, 10 Sep 2026 05:32:09 GMT",
+      "same_as_reading_of_2026_10_05": true,
+      "facts": "../facts/n-126.json"
+    }
+  ]
+}

@@ -90,6 +90,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/results/session-173-windows-supervision/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/devtools/windows-supervision.md, role: development-guide, authority: current, lifecycle: maintained}
   - {path: packing/devtools/n17-diagnostics.md, role: development-guide, authority: current, lifecycle: maintained}

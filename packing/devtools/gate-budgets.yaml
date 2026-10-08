@@ -2057,6 +2057,17 @@ pages:
       checks, and artifact upload. It reads no certificate packet. The provisional
       ceiling matches the unmeasured threshold review until a hosted run supplies this
       job's own cost; its 10-minute operational timeout bounds setup faults.
+  - id: exact-side-values
+    measured_seconds: null
+    measured_on: null
+    measured_where: null
+    ceiling_seconds: 120.0
+    argument: >-
+      A new independent register paper: renderer tests, deterministic HTML and Markdown,
+      the full coefficient appendix (including degree 672), PDF print, and artifact
+      upload. The provisional ceiling adds 40 seconds to the measured optimality paper's
+      80 for the much larger appendix until the first hosted run supplies a measurement.
+      The 10-minute operational timeout bounds provisioning faults.
   - id: pdf
     measured_seconds: 73.3
     measured_on: 2026-09-16

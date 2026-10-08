@@ -580,6 +580,32 @@ The argument for it, and the measurement registered to kill it if it is wrong, a
 slice, experiment, round, and run—and the mathematical terms used narrowly here.
 Those definitions apply in the campaign artifacts and the beads too, not only here.
 
+### Exact-Side Collection, October 7
+
+The [exact-values register](packing/frontier/exact-values.json) now assembles 270 exact
+current sides for $n = 1\ldots324$: 176 integer, six rational, 66 radical closed forms
+and 22 minimal-polynomial sides.
+The degree-672 polynomial at $n = 83$ is retained in full and independently checked; its
+source root index 27 remains stated and uncounted.
+No geometric or optimality rung changes.
+
+The bounded retained-source extraction covers 182 polynomial/side pairs from 201
+occurrences, reaching $n = 2135$, with no undecoded rows.
+The register retains 162 historical entries, including three proposals explicitly
+invalidated by their source.
+The
+[independent mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
+and [generated paper](packing/devtools/templates/exact-side-values-article.md) keep
+source attribution, algebraic checks, geometric realization and optimality separate.
+
+All 54 numeric-only current cases have a specific bead in the
+[continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
+The next entry is `think-s6np`: recover or reproduce earlier claimed contact-driver
+outputs, then audit the eleven claimed identifications under `think-ohhz`. The retained
+current systems at $n = 55$ and $71$ support parallel elimination lanes `think-phh8` and
+`think-1blg`. Exact geometric witnesses and independent contact rederivations remain
+open.
+
 ### Document Map
 
 The validated [document map](docs/project/document-map.yaml) distinguishes current rules
@@ -673,6 +699,7 @@ case or experiment separately.
 | [SQUISH update: mathematical and semantic binding review](docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematics Review: Eleven SQUISH Upper-Bound Packings](docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md) | dated review record | record | retained | — |
 | [Correctness and Security Review: SQUISH #401 Import](docs/project/reviews/review-2026-10-06-squish-import-correctness.md) | dated review record | record | retained | — |
+| [Exact Polynomial Collection: Mathematical Review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md) | dated review record | record | retained | — |
 | [Session 173: Windows owned-Job supervision](packing/campaign/results/session-173-windows-supervision/README.md) | typed session record | record | retained | — |
 | [Windows owned-Job supervision](packing/devtools/windows-supervision.md) | engineering and validation rules | current | maintained | — |
 | [Retained n17 diagnostics](packing/devtools/n17-diagnostics.md) | engineering and validation rules | current | maintained | — |
@@ -835,7 +862,7 @@ case or experiment separately.
 | [Plan: The First Application of the Result Import Process](docs/project/specs/active/plan-2026-10-01-result-import-first-application.md) | implementation plan | current | transient | — |
 | [Measure Verifier Milestone C: The Continuous-Angle Family](docs/project/specs/active/plan-2026-10-03-measure-verifier-milestone-c.md) | implementation plan | current | transient | — |
 | [Plan: n = 17 Overnight, 5 October 2026](docs/project/specs/active/plan-2026-10-05-n17-overnight.md) | implementation plan | current | transient | — |
-| [Feature: Exact Side Values Register, Paper and Backfill](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) | implementation plan | current | transient | — |
+| [Exact Side Values: Collection, Publication and Remaining Identification](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) | implementation plan | current | transient | — |
 | [Feature: A Top-Level Overview Page for the Published Site](docs/project/specs/active/plan-2026-09-29-github-pages-overview.md) | implementation plan | current | transient | — |
 | [BC329 Calibration Reader: Source-Distinct Review](docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md) | dated review record | record | retained | — |
 | [BC329 Reader Repair: Exact-Commit Rereview](docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md) | dated review record | record | retained | — |

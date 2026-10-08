@@ -1302,16 +1302,17 @@ The survey posters are not redrawn for a result; they are
 [release assets](#release-assets-are-drawn-at-a-version-bump-or-on-demand).
 That sequence also applies when no explainer edition changes.
 
-**The site’s three papers are served under `papers/`, each by its slug**, and the slug
-is the paper’s name in the source too (see
-[conventions.md → Naming](conventions.md#2-naming)). They are one series on n = 11, read
-in order:
+**The site’s four papers are served under `papers/`, each by its slug**, and the slug is
+the paper’s name in the source too (see
+[conventions.md → Naming](conventions.md#2-naming)). Three form the n = 11 series; the
+exact-values paper is independent and carries no series strip:
 
-| Part | Slug | Title | Renderer |
+| Series part | Slug | Title | Renderer |
 | --- | --- | --- | --- |
 | I | `n11-lower-bounds-explainer` | New Lower Bounds for Square Packing for n = 11 | `render_n11_lower_bounds_explainer` |
 | II | `n11-threshold-bound-review` | A Review of the Certified Lower Bound s(11) > 31/8 for 11 Squares | `render_n11_threshold_bound_review` |
 | III | `n11-optimality-review` | A Review of the Optimality Proof of the Trump Packing of 11 Squares | `render_n11_optimality_review` |
+| Independent | `exact-side-values` | Exact Side Values for Packing Unit Squares | `render_exact_side_values` |
 
 Each is `papers/<slug>.html` with `papers/<slug>.md` and `papers/<slug>.pdf` beside it.
 **The list of papers is written once**, as `render_overview.PAPERS` (slug, renderer
@@ -1329,6 +1330,9 @@ dates in `sqpack.release`, its rows in `devtools.artifact_dates`, and its versio
 missing. A renderer is given the site’s root (`--site`, by default `packing/site/`) and
 writes its paper there, where it is served, so every check reads the page at its
 published path and the publication renames nothing.
+Set `part` to `None` for an independent paper; `paper_front.series` then emits no series
+credits, while the structure audit still checks the common front, typography, formats,
+metadata and colophon.
 
 The explainer at
 <https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html> is not checked
@@ -1402,6 +1406,37 @@ A dedicated Pages job builds this paper and its PDF independently of the histori
 explainer. The paper is an explanation of accepted evidence, and rendering it does not
 rerun the geometric proof.
 
+The independent **exact side values paper** lives at `/papers/exact-side-values.html`.
+[`render_exact_side_values.py`](packing/devtools/render_exact_side_values.py) reads
+[`exact-values.json`](packing/frontier/exact-values.json) as its only mathematical input
+and prints every recorded closed form and integer polynomial in full.
+The register keeps the current $n=1\ldots324$ values and their totals separate from
+historical polynomial-side pairs transcribed from retained catalogues and exact-solution
+articles, including facts outside that horizon.
+Each historical row keeps its own attribution, source identity and status; inclusion
+does not say that it is current, geometrically feasible, locally optimal, or globally
+optimal.
+
+The exact-value intake also reads the retained Kingbird SVG facts packet.
+That route supplies the complete degree-672 polynomial at $n=83$ and keeps the source’s
+Root index distinct from the independently rebuilt irreducibility and root-isolation
+checks. Numeric-only rows and any source fact still missing exact text retain their
+assigned route beads in the register and paper.
+From `packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --update
+uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --check
+uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --pdf
+uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --check
+```
+
+The renderer writes `site/papers/exact-side-values.html`, `.md`, and `.pdf`. Its
+`--check` rebuilds HTML and Markdown from the register and refuses stale output.
+The dedicated `exact-side-values` Pages job runs the focused renderer tests, builds the
+three files, checks the two reproducible text editions, and contributes one guarded
+artifact to `publish`.
+
 Publication uses `python -m devtools.render_n11_lower_bounds_explainer --prepare-math`
 after installing the locked Playwright Chromium.
 This pass measures the final math bases under the page’s CSS and ships their geometry
@@ -1428,7 +1463,7 @@ The overview, other papers and workbench build beside `prepare`. The workbench j
 selects Node 24.18.0, installs the root lockfile with scripts disabled, and builds the
 typed workbench package into the self-contained `/workbench/` page, beside `prepare`
 rather than after it.
-The publish job puts the three papers, the checked PDF, the site’s own pages and the
+The publish job puts the four papers, the checked PDF, the site’s own pages and the
 workbench back into one tree and holds every page’s head in it to the site’s contract,
 and every shared asset a page names to being there whole (`check_published_site
 --local`); only a push to `main` uploads that tree to Pages.
@@ -1668,10 +1703,10 @@ its source and whether it is what the rule gives:
   calendar.
 - A paper’s “revised” date is the date of the last commit that changed its article.
   The explainer’s is `EXPLAINER_REVISED`, the threshold-bound review’s
-  `THRESHOLD_REVIEW_REVISED` and the optimality paper’s `OPTIMALITY_REVIEW_REVISED`, all
-  in `release.py`, where each paper’s front reads it (`devtools.paper_front`). Change it
-  in the commit that changes the article; `tests/test_artifact_dates.py` fails when it
-  stands still.
+  `THRESHOLD_REVIEW_REVISED`, the optimality paper’s `OPTIMALITY_REVIEW_REVISED`, and
+  the exact-values paper’s `EXACT_SIDE_VALUES_REVISED`, all in `release.py`, where each
+  paper’s front reads it (`devtools.paper_front`). Change it in the commit that changes
+  the article; `tests/test_artifact_dates.py` fails when it stands still.
 - A poster’s dateline is the date of the data commit it was drawn from.
 - A PDF’s `CreationDate` and `ModDate` are the date on its face, at noon UTC, and never
   the build clock.
@@ -1729,8 +1764,8 @@ It is one edit, in the commit that makes the change, with no command:
    `October 2, 2026`, and one sentence on what changed in the paper.
    The number is the paper’s own and is not the site’s; a number already published is
    never changed.
-2. Set `EXPLAINER_REVISED` (or `THRESHOLD_REVIEW_REVISED`, or
-   `OPTIMALITY_REVIEW_REVISED`) to the commit’s date, as any change to the article
+2. Set `EXPLAINER_REVISED` (or `THRESHOLD_REVIEW_REVISED`, `OPTIMALITY_REVIEW_REVISED`,
+   or `EXACT_SIDE_VALUES_REVISED`) to the commit’s date, as any change to the article
    requires; `python -m devtools.artifact_dates --check` and
    `tests/test_artifact_dates.py` hold it to git.
 3. Where the entry points name the paper’s version, update them: TUTORIAL.md names the

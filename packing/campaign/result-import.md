@@ -259,6 +259,13 @@ Triage decides what the import is before anything is retained, in an hour or les
 - **The bibliography key** carries the date of the pinned revision as `dated`, and is
   defined in the [resources README](../resources/README.md) as well.
   Credit is read from the source’s own files, now and not after the review.
+- **Exact source text is retained with its extraction evidence.** Keep the catalogue,
+  article, or SVG that prints a polynomial-side pair, the acquisition receipt that pins
+  it, and the structured extraction used by `build_exact_values`. The retained Kingbird
+  SVG facts are the model: the record preserves the printed coefficients, side,
+  attribution and Root index, then independently rebuilds the polynomial checks.
+  A source page that prints several polynomials, or values beyond $n=324$, is retained
+  whole rather than reduced to the one row that first prompted the intake.
 
 ## Stage 3: Record
 
@@ -298,6 +305,19 @@ register entry with its ratings and `next_rung`. Four rules are the process’s 
   leaves the count numeric-only in the
   [exact side values register](../frontier/exact-values.json.gz) until an identification
   lands.
+- **Historical exact facts stay separate from the current case.** A printed integer
+  polynomial and side that is superseded, belongs to another conjugate, or lies beyond
+  the $n=1\ldots324$ frontier enters the register’s historical collection with its own
+  source identity, attribution and status.
+  It does not change a case’s best known side and does not inherit the current packing’s
+  KKT comparison. For a superseded value inside the frontier, the case entry may also
+  carry the route or historical note that explains the relationship; the paper renders
+  the register-level polynomial once.
+- **Every unresolved exact value keeps an owner.** Numeric-only current rows and
+  retained sources whose polynomial or exact side text is incomplete name the route and
+  open bead that can resolve them.
+  A negative PSLQ search records its degree, height and precision scope; it does not
+  promote the numerical side to an exact value.
 
 The record checks pass without a packet, a coverage entry or evidence over the whole
 scope. The reviewer of the pull request looks for those.
@@ -384,10 +404,24 @@ The pull request that registers or raises a result runs
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
 Where the result changes an exact fact, those views include the exact side values
-register (`devtools.build_exact_values --update`). The gate’s register check fails until
-the register is regenerated.
-The exact side values paper belongs to the later publication layer, which supplies its
-renderer.
+register and its independent paper.
+This includes a new exact form or polynomial for the current best packing, a retained
+SVG transcription, and a historical polynomial-side pair admitted from a compared
+primary catalogue or exact-solution article.
+From `packing/`, regenerate and then rehearse both drift checks:
+
+```shell
+uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --update
+uv run --frozen --all-extras --group dev python -m devtools.build_exact_values --check
+uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values
+uv run --frozen --all-extras --group dev python -m devtools.render_exact_side_values --check
+```
+
+The builder admits only source-labelled exact facts and recomputes their polynomial and
+root checks. The renderer derives HTML and Markdown from that register and prints every
+coefficient; Pages draws the PDF from the same output.
+The gate fails while the register trails its inputs, and the paper’s Pages half runs
+whenever the register, renderer, template, or focused controls change.
 
 ### Verify the Published Result
 

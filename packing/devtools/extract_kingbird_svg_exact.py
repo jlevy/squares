@@ -1147,6 +1147,9 @@ def run_svg(args: argparse.Namespace) -> int:
                 "assigned_to": root.assigned_to,
                 "index": root.index,
                 "degree": root.degree,
+                "coefficients": (
+                    list(root.coefficients) if root.coefficients is not None else None
+                ),
                 "polynomial": root.polynomial,
                 "problem": root.problem,
             }

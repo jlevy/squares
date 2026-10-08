@@ -1598,6 +1598,14 @@ SERIES_CARDS: dict[str, tuple[str, str]] = {
             "local isolation."
         ),
     ),
+    "exact-side-values": (
+        "Exact side values for packing unit squares",
+        (
+            "All retained current and superseded side polynomials through n = 324, "
+            "with exact root and irreducibility checks, closed forms, and routes for "
+            "the remaining numerical values."
+        ),
+    ),
 }
 
 #: Where each part of the series is served, under `papers/` by its slug

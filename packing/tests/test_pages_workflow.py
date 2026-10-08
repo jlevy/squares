@@ -52,7 +52,13 @@ PREPARED_PAGE_CONSUMERS = {
 #: measurement, and whoever records it removes the name here, so the exception cannot
 #: quietly outlive the reason for it.
 AWAITING_FIRST_RUN = frozenset(
-    {"overview", "publish", "n11-threshold-bound-review", "square-packing-methods-survey"}
+    {
+        "overview",
+        "publish",
+        "n11-threshold-bound-review",
+        "square-packing-methods-survey",
+        "exact-side-values",
+    }
 )
 #: Independently built papers, each named by its registry slug.
 PAPER_JOBS = frozenset(
@@ -70,6 +76,9 @@ PUT_OPTIMALITY_REVIEW = (
 )
 PUT_METHODS_PAPER = (
     "Put the methods survey beside the other papers, refusing any name already there"
+)
+PUT_EXACT_VALUES = (
+    "Put the exact-side-values paper beside the others, refusing any name already there"
 )
 #: The archived copy of Kleddamag's proof, which both reviews cite.
 KLEDDAMAG = "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
@@ -101,6 +110,7 @@ SKIP_NOTICE_PAGES = {
     "n11_threshold_bound_review": "threshold-bound review",
     "n11_optimality_review": "optimality review",
     "square_packing_methods_survey": "square packing methods survey",
+    "exact_side_values": "exact-side-values paper",
 }
 
 
@@ -1048,6 +1058,7 @@ def test_publication_holds_the_assembled_site_to_the_head_contract() -> None:
         PUT_THRESHOLD_REVIEW,
         PUT_OPTIMALITY_REVIEW,
         PUT_METHODS_PAPER,
+        PUT_EXACT_VALUES,
         "Serve each moved file at its old address too",
     )
     assert max(_publish_step(steps, name) for name in writes) < check
@@ -1074,6 +1085,11 @@ def _assembled(
     threshold: tuple[str, ...] = (),
     review: tuple[str, ...] = (),
     methods: tuple[str, ...] = (),
+    exact_files: tuple[str, ...] = (
+        "exact-side-values.html",
+        "exact-side-values.md",
+        "exact-side-values.pdf",
+    ),
 ) -> tuple[Path, list[subprocess.CompletedProcess[str]]]:
     """Run the `publish` job's assembly steps, in order, on a tree shaped like the one
     its downloads leave: the lower-bounds explainer and its PDF under `papers/` with an
@@ -1119,6 +1135,10 @@ def _assembled(
         )
     for extra in methods:
         (staged_methods / "papers" / extra).write_text("methods explainer's")
+    staged_exact = root / "exact-side-values-page"
+    (staged_exact / "papers").mkdir(parents=True)
+    for filename in exact_files:
+        (staged_exact / "papers" / filename).write_text(f"exact paper {Path(filename).suffix}")
     results = []
     for step_name, cwd, environment in (
         ("Put the site's pages at the root, refusing any name already there", root, pages),
@@ -1136,6 +1156,11 @@ def _assembled(
             PUT_METHODS_PAPER,
             root,
             staged_methods,
+        ),
+        (
+            PUT_EXACT_VALUES,
+            root,
+            staged_exact,
         ),
         ("Serve each moved file at its old address too", site, None),
     ):
@@ -1161,6 +1186,11 @@ def _assembled(
                 str(site),
                 str(environment),
             )
+            guards = [
+                line.replace("site/papers/", f"{shlex.quote(str(site))}/papers/")
+                for line in step["run"].splitlines()[:-1]
+            ]
+            command = (bash, "-e", "-c", "\n".join([*guards, shlex.join(command)]))
             command_cwd = REPO / "packing"
         else:
             command = (bash, "-e", "-c", step["run"])
@@ -1208,6 +1238,8 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
             PUT_OPTIMALITY_REVIEW,
             "Use the checked methods survey",
             PUT_METHODS_PAPER,
+            "Use the checked exact-side-values paper",
+            PUT_EXACT_VALUES,
             "Serve each moved file at its old address too",
             "List what the publication holds",
         )
@@ -1220,7 +1252,7 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
     )
 
     site, results = _assembled(tmp_path, "whole")
-    assert [result.returncode for result in results] == [0, 0, 0, 0, 0], results
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 0, 0], results
     served = sorted(
         path.relative_to(site).as_posix() for path in site.rglob("*") if path.is_file()
     )
@@ -1245,6 +1277,9 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "papers/square-packing-methods-survey.html",
         "papers/square-packing-methods-survey.md",
         "papers/square-packing-methods-survey.pdf",
+        "papers/exact-side-values.html",
+        "papers/exact-side-values.md",
+        "papers/exact-side-values.pdf",
         "t-018-explainer.md",
         "t-018-explainer.pdf",
     ]
@@ -1295,9 +1330,15 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
     assert (site / "papers" / "n11-optimality-review.md").read_text() == "review md"
     assert not (site / "papers" / "square-packing-methods-survey.html").exists()
 
-    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    site, results = _assembled(
+        tmp_path, "exact-partial", exact_files=("exact-side-values.html",)
+    )
     assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
-    assert "t-018-explainer.md is already published" in results[4].stdout
+    assert not (site / "papers" / "exact-side-values.html").exists()
+
+    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 0, 1]
+    assert "t-018-explainer.md is already published" in results[5].stdout
     assert (site / "t-018-explainer.md").read_text() == "overview build's t-018-explainer.md"
 
 
@@ -1793,6 +1834,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             KLEDDAMAG_README_PATTERN,
         ),
         "square-packing-methods-survey": METHODS_CITATION_PATTERNS,
+        "exact-side-values": (),
         "n11-threshold-bound-review": (
             "/packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/",
             "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz",

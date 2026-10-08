@@ -3368,13 +3368,20 @@ def _exact_values(context: Context) -> str:
     The rebuild is the check: every minimal polynomial is certified irreducible over Q
     again, its root isolated again in exact rational arithmetic, and the record's decimal
     and the closed form's derivation compared again, so a record edit that breaks any of
-    them fails here rather than in the paper rendered from the register. Measured whole on
-    2026-10-06 at 4.3s wall for `--check` on a four-cpu box, the two modular certificates
-    at degree 144 and 158 most of the arithmetic, so there is no cheaper mode for the pull
-    request to run instead.
+    them fails here rather than in the paper rendered from the register. The degree-672
+    source admission is rechecked too: exact-sign comparisons inside the isolated cell
+    keep the complete replay at 31.67s on the 2026-10-07 local reference, with no cached
+    mathematical verdict replacing a check.
     """
     output = _module(context, "devtools.build_exact_values", "--check")
     _require_text(output, "exact values register check passed")
+    return output
+
+
+def _historical_side_polynomial_audit(context: Context) -> str:
+    """Independent source, finite-field and Descartes replay (29.19s locally)."""
+    output = _module(context, "devtools.audit_historical_side_polynomials")
+    _require_text(output, '"status": "PASS"')
     return output
 
 
@@ -5017,7 +5024,8 @@ STEPS: tuple[Step, ...] = (
             "docs/*",
         ),
     ),
-    # 4.3s: every polynomial re-certified, which is why it rebuilds rather than compares.
+    # Every polynomial is re-certified, including degree 672; direct root comparisons
+    # keep the measured full replay in the routine gate (31.67s locally, 2026-10-07).
     Step(
         "exact side values register",
         _exact_values,
@@ -5078,11 +5086,32 @@ STEPS: tuple[Step, ...] = (
             "packing/resources/web/evand-square-packing-2026-10-05/*",
             "packing/resources/web/franciscouzo-square-packing-2026-09-27/*",
             "packing/witnesses/franciscouzo-2026/*",
+            "packing/devtools/collect_kingbird_historical_polynomials.py",
+            "packing/resources/web/kingbird-squares-in-squares-*.md",
+            "packing/resources/web/kingbird-*solutions*.md",
             # The records, the register and its schema all live here.
             "packing/frontier/*",
             # The catalogue it reads printed polynomials from, and the KKT batch.
             "packing/resources/web/kingbird-squares-in-squares.md",
+            "packing/resources/web/kingbird-exact-side-facts-2026-10-07/*",
+            "packing/resources/web/known-best-packings/receipts/kingbird-2026-10-05-pictures.json",
             "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/results.json.gz",
+        ),
+    ),
+    # The independent full-corpus audit fits the PR surface at 29.19s (2026-10-07).
+    # Records remain a subset of the edit floor; no cached verdict replaces this replay.
+    Step(
+        "historical side polynomials independently audited",
+        _historical_side_polynomial_audit,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/audit_historical_side_polynomials.py",
+            "packing/devtools/collect_kingbird_historical_polynomials.py",
+            "packing/resources/web/kingbird-exact-side-facts-2026-10-07/*",
+            "packing/resources/web/kingbird-squares-in-squares-*.md",
+            "packing/resources/web/kingbird-*solutions*.md",
         ),
     ),
     Step(
@@ -6015,6 +6044,7 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # bound certificates, source manifests and replay receipts determine the exact
         # rebuild. No clock, no network or repository history enters its verdict.
         "exact side values register",
+        "historical side polynomials independently audited",
         "derivation (needs sympy)",
         "search engine (sqsearch)",
         "lint floor (rust)",

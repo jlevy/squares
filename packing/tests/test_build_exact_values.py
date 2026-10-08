@@ -220,6 +220,24 @@ def test_the_root_is_isolated_in_the_kkt_window() -> None:
     assert exact.unique_root_in(N5, root.lo, root.hi)
 
 
+def test_fine_rational_comparisons_use_the_unique_root_cell() -> None:
+    _, root = exact.polynomial_checks(5, N5, "2.70710678118654", None)
+    # Both points are far finer than the stored 45-place cell and lie on opposite sides.
+    low = Fraction(
+        "2.70710678118654752440084436210484903928483593768847403658833986899536623923"
+    )
+    high = low + Fraction(1, 10**74)
+    assert root.lo < low < high < root.hi
+    assert root.compare(low) == 1
+    assert root.compare(high) == -1
+    assert root.compare(root.lo) == root.compare(root.lo - 1) == 1
+    assert root.compare(root.hi) == root.compare(root.hi + 1) == -1
+    # An opposite crossing direction gives the same ordering result.
+    descending = exact.Root(tuple(-c for c in root.coefficients), root.lo, root.hi)
+    assert descending.compare(low) == 1
+    assert descending.compare(high) == -1
+
+
 def test_a_wrong_kkt_value_falls_back_to_the_record_window() -> None:
     wrong = {"value": "2.70710678118654752440084436000000000000", "status": "KKT local min"}
     checks, _ = exact.polynomial_checks(5, N5, "2.70710678118654", wrong)
@@ -1300,6 +1318,85 @@ def test_a_perturbed_coefficient_in_a_derived_record_is_refused() -> None:
     _refused(lambda: _build(5, packing), "is not the minimal polynomial of")
 
 
+def test_a_catalogue_closed_form_must_be_the_root_not_an_in_cell_approximation() -> None:
+    packing = copy.deepcopy(exact.load_packing(28))
+    entry = _build(28, packing)
+    lo, hi = (Fraction(value) for value in entry["checks"]["root"]["interval"])
+    midpoint = (lo + hi) / 2
+    packing["reported_upper_bound"]["exact_form"] = str(midpoint)
+    _refused(lambda: _build(28, packing), "is not the recorded root")
+
+
+def test_more_decimal_digits_do_not_bypass_catalogue_polynomial_identity() -> None:
+    packing = copy.deepcopy(exact.load_packing(28))
+    entry = _build(28, packing)
+    packing["reported_upper_bound"]["value"] = entry["checks"]["decimal"]
+    assert _build(28, packing)["checks"]["catalogue"] == "matches"
+    assert not any(
+        note["kind"] == "superseded-catalogue-polynomial"
+        for note in _build(28, packing)["notes"]
+    )
+    coefficients = list(
+        normalized_polynomial(packing["reported_upper_bound"]["minimal_polynomial"])
+    )
+    coefficients = [10**60 * coefficient for coefficient in coefficients]
+    coefficients[-1] += 1
+    packing["reported_upper_bound"]["minimal_polynomial"] = format_polynomial(coefficients)
+    _refused(lambda: _build(28, packing), "differs from the catalogue")
+
+
+def test_the_same_catalogue_polynomial_cannot_select_a_different_conjugate() -> None:
+    packing = copy.deepcopy(exact.load_packing(28))
+    packing["reported_upper_bound"]["value"] = "8.43374053857677034043457625232"
+    _refused(
+        lambda: exact.build_entry(28, packing, exact.catalogue_entries()[28], None),
+        "root differs from the catalogue side",
+    )
+
+
+@pytest.mark.parametrize(("n", "state"), [(9, "integer"), (50, "rational")])
+def test_state_uses_the_inferred_polynomial_degree(n: int, state: str) -> None:
+    packing = copy.deepcopy(exact.load_packing(n))
+    packing["reported_upper_bound"]["algebraic_degree"] = None
+    entry = _build(n, packing)
+    assert entry["degree"] == 1
+    assert entry["state"] == state
+
+
+def test_n83_polynomial_must_equal_the_retained_source() -> None:
+    reported = exact.load_packing(83)["reported_upper_bound"]
+    fact = exact.retained_svg_fact(83)
+    assert fact is not None
+    coefficients = tuple(int(c) for c in fact["roots"][0]["coefficients"])
+    assert exact.source_check(83, reported, coefficients, None) == "matches-svg"
+    altered = (*coefficients[:-1], coefficients[-1] + 1)
+    _refused(
+        lambda: exact.source_check(83, reported, altered, None),
+        "differs from the retained SVG",
+    )
+
+
+def test_retained_prime_hints_are_replayed_not_trusted() -> None:
+    checks, _ = exact.polynomial_checks(5, N5, "2.70710678118654", None, certificate_primes=[5])
+    assert checks["irreducible"]["primes"] == [5]
+    _refused(
+        lambda: exact.polynomial_checks(
+            5, N5, "2.70710678118654", None, certificate_primes=[9]
+        ),
+        "include a composite",
+    )
+    _refused(
+        lambda: exact.polynomial_checks(
+            5, N5, "2.70710678118654", None, certificate_primes=[7]
+        ),
+        "do not prove irreducibility",
+    )
+
+
+def test_modular_arithmetic_refuses_int64_overflow() -> None:
+    _refused(lambda: exact.factor_degrees_mod(N5, 2**40), "exceed the exact int64 bound")
+
+
 def test_a_transcription_that_differs_from_the_catalogue_is_refused() -> None:
     packing = copy.deepcopy(exact.load_packing(28))
     assert _build(28, packing)["checks"]["catalogue"] == "matches"
@@ -1530,14 +1627,65 @@ def test_source_notes_are_collected_after_all_current_entries_once(
     monkeypatch.setattr(exact, "catalogue_entries", dict)
     monkeypatch.setattr(exact, "kkt_rows", dict)
     monkeypatch.setattr(exact, "load_packing", lambda _n: {})
+
+    def historical(entries):
+        assert len(calls) == 1
+        assert all(entries[n - 1]["notes"] for n in (102, 106, 152, 177))
+        return exact.reported_source_historical_entries(entries)
+
     monkeypatch.setattr(exact, "build_entry", entry)
     monkeypatch.setattr(exact.reported_roots, "collect", collect)
     monkeypatch.setattr(exact, "source_certificate_history", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(exact, "build_historical_entries", historical)
     record = exact.build_record()["register"]
     assert len(calls) == 1
     assert {row["n"] for row in record["entries"] if row["notes"]} == {102, 106, 152, 177}
     assert all(row["polynomial"] is None for row in record["entries"])
     assert record["totals"]["numeric-only"] == len(built)
+    assert {row["n"] for row in record["historical_entries"]} == {102, 106, 152, 177}
+
+
+def test_reported_source_history_preserves_complete_source_only_notes(
+    monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
+) -> None:
+    entries = [_build(n) for n in (102, 106, 152, 177)]
+    monkeypatch.setattr(
+        exact.reported_roots, "collect", lambda: copy.deepcopy(reported_source_candidates)
+    )
+    exact.append_reported_source_notes(entries)
+    before = copy.deepcopy(entries)
+    rows = exact.reported_source_historical_entries(entries)
+    assert {row["n"] for row in rows} == {102, 106, 152, 177}
+    for row, entry in zip(rows, entries, strict=True):
+        note = entry["notes"][-1]
+        assert row == {
+            **note,
+            "n": entry["n"],
+            "kind": "unreconciled-source",
+            "current_side": entry["side"]["value"],
+            "algebraic_source": "reported-source-polynomial",
+        }
+        assert row["assurance"]["verification"] == "V0"
+        assert row["assurance"]["confirmation"] == "C0"
+        assert row["assurance"]["current_pose_identity"] == "not-established"
+        assert row["assurance"]["geometry_replay"] == "not-attempted"
+        assert row["assurance"]["lean_replay"] == "not-attempted"
+        assert row["bead"] == "think-8sm2"
+    assert entries == before
+
+
+def test_source_history_refuses_a_stale_below_current_pointer(
+    monkeypatch: pytest.MonkeyPatch, reported_source_candidates: list[dict[str, Any]]
+) -> None:
+    entries = [_build(102)]
+    monkeypatch.setattr(
+        exact.reported_roots, "collect", lambda: [copy.deepcopy(reported_source_candidates[0])]
+    )
+    exact.append_reported_source_notes(entries)
+    entries[0]["side"]["value"] = entries[0]["notes"][-1]["checks"]["root"]["interval"][0]
+    before = copy.deepcopy(entries)
+    _refused(lambda: exact.reported_source_historical_entries(entries), "not strictly below")
+    assert entries == before
 
 
 def test_source_custody_refusal_prevents_any_register_write(
@@ -1588,6 +1736,28 @@ def test_source_note_schema_refuses_lost_custody_and_unchecked_claims(
 # --- the register -----------------------------------------------------------------------
 
 
+def test_superseded_polynomial_is_complete_and_checked_against_its_own_side() -> None:
+    entry = _build(102)
+    (note,) = [
+        note for note in entry["notes"] if note["kind"] == "superseded-catalogue-polynomial"
+    ]
+    catalogue = exact.catalogue_entries()[102]
+    assert note["side"] == catalogue.side_decimal
+    assert note["side"] != entry["side"]["value"]
+    polynomial_text = catalogue.minimal_polynomial
+    assert polynomial_text is not None
+    assert note["polynomial"]["coefficients"] == [
+        str(c) for c in normalized_polynomial(polynomial_text)
+    ]
+    checks = note["checks"]
+    assert checks["irreducible"]
+    assert checks["root"]["unique"]
+    assert checks["root"]["contains_recorded_side"]
+    assert checks["kkt_agreement_digits"] is None
+    assert entry["polynomial"] is None
+    assert entry["state"] == "numeric-only"
+
+
 def test_the_register_validates_against_its_schema() -> None:
     schema = load_yaml((exact.FRONTIER / exact.SCHEMA).read_text(encoding="utf-8"))
     validator = Draft202012Validator(schema)
@@ -1597,6 +1767,15 @@ def test_the_register_validates_against_its_schema() -> None:
     broken["entries"][4]["checks"]["root"]["contains_recorded_side"] = False
     broken["entries"][5]["state"] = "approximately-known"
     assert len(list(validator.iter_errors(broken))) == 2
+    incomplete = copy.deepcopy(register)
+    historical = next(
+        note
+        for entry in incomplete["entries"]
+        for note in entry["notes"]
+        if note["kind"] == "superseded-catalogue-polynomial"
+    )
+    del historical["polynomial"]
+    assert list(validator.iter_errors(incomplete))
 
 
 def test_the_totals_partition_the_range() -> None:
@@ -1650,7 +1829,8 @@ def test_every_numeric_only_count_names_its_route_and_bead() -> None:
         routes = [note for note in entry["notes"] if note["kind"] == "route"]
         assert len(routes) == 1, n
         assert routes[0]["bead"], n
-        if "No exact KKT point" in routes[0]["text"]:
+        if entry["kkt"] is None or entry["kkt"]["status"] != exact.KKT_LOCAL_MIN:
+            assert "No confirmed KKT local minimum" in routes[0]["text"]
             without_kkt_point.append(n)
     assert without_kkt_point == []
     assert any(
@@ -1659,14 +1839,41 @@ def test_every_numeric_only_count_names_its_route_and_bead() -> None:
         if note["kind"] == "route"
     )
     assert _entries()[29]["notes"][0]["bead"] == "think-je8y"
-    assert _entries()[83]["notes"][0]["kind"] == "missing-polynomial-text"
+    assert _entries()[83]["state"] == "minimal-polynomial"
+    assert _entries()[83]["degree"] == 672
+    assert _entries()[83]["checks"]["catalogue"] == "matches-svg"
+    assert _entries()[83]["checks"]["root"]["source_index"] == {"stated": 27, "counted": None}
 
 
-@pytest.mark.parametrize("n", [1, 5, 11, 17, 28, 29, 54, 83, 102, 106, 152, 177, 230, 266, 292])
+# A complete degree-672 replay is measured at 31.67s: kept in the slow lane.
+@pytest.mark.parametrize(
+    "n",
+    [
+        1,
+        5,
+        11,
+        17,
+        28,
+        29,
+        54,
+        pytest.param(83, marks=pytest.mark.slow),
+        102,
+        106,
+        152,
+        177,
+        230,
+        266,
+        292,
+    ],
+)
 def test_the_committed_entries_equal_a_fresh_build(n: int) -> None:
-    # Source notes are appended once after every current entry is built; the four-row
-    # assembly control above compares their complete payloads against the register.
-    expected = copy.deepcopy(_entries()[n])
+    # Source notes and occurrence citations follow the per-frontier arithmetic pass.
+    # Separate assembly and whole-register controls compare the complete metadata.
+    expected = {
+        key: copy.deepcopy(value)
+        for key, value in _entries()[n].items()
+        if key != "source_occurrences"
+    }
     if n in (106, 152, 177):
         assert expected["notes"].pop()["kind"] == "unreconciled-source-polynomial"
     assert _build(n) == expected
@@ -1740,3 +1947,41 @@ def test_stale_plain_register_update_preserves_transitional_storage(
     assert logical.read_text() == exact.register_text(document)
     assert not compressed_path(logical).exists()
     assert exact.load_record() == document["register"]
+
+
+def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
+    numeric = {n for n, entry in _entries().items() if entry["state"] == "numeric-only"}
+    assert numeric == set(exact.ROUTES)
+    assert len(numeric) == 54
+    for n in numeric:
+        (route,) = [note for note in _entries()[n]["notes"] if note["kind"] == "route"]
+        assert route["bead"] == exact.ROUTES[n][0]
+    assert exact.ROUTES[55][0] != exact.ROUTES[71][0]
+    assert exact.ROUTES[126][0] not in {exact.ROUTES[55][0], exact.ROUTES[71][0]}
+
+
+def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier() -> None:
+    rows = _register()["register"]["historical_entries"]
+    assert len(rows) == 162
+    assert sum(row["kind"] == "superseded" for row in rows) == 152
+    invalid = [row for row in rows if row["kind"] == "source-invalid"]
+    assert len(invalid) == 3
+    n259 = next(row for row in invalid if row["n"] == 259)
+    assert n259["side"] == "16.60255251726339"
+    assert n259["source_statuses"] == ["invalid"]
+    assert n259["checks"]["root"]["unique"]
+    assert n259["checks"]["root"]["contains_recorded_side"]
+    assert _entries()[259]["polynomial"] is None
+    outside = [row for row in rows if row["kind"] == "outside-frontier"]
+    assert len(outside) == 7
+    assert {row["n"] for row in outside} == {1453, 1765, 1850, 2043, 2135}
+    assert all(row["current_side"] is None for row in outside)
+    assert all(row["sources"] and row["checks"]["irreducible"] for row in rows)
+    n210 = [row for row in rows if row["n"] == 210]
+    assert any(
+        {"invalid", "fixed"} <= set(row["source_statuses"])
+        and row["kind"] == "superseded"
+        and {tuple(source["source_flags"]) for source in row["sources"]}
+        >= {("invalid",), ("fixed",)}
+        for row in n210
+    )

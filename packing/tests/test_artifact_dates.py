@@ -19,6 +19,7 @@ import pytest
 
 from devtools import (
     artifact_dates,
+    render_exact_side_values,
     render_n11_lower_bounds_explainer,
     render_n11_optimality_review,
 )
@@ -54,6 +55,14 @@ def test_no_derived_date_in_the_tree_is_other_than_its_rule_gives() -> None:
         "optimality paper, Original proof",
         "threshold-bound review, Original proof",
     } <= derived
+    exact = next(row for row in found if row.artifact == "exact side values, Last revised")
+    # A newly added article has no committed change date in the branch that introduces
+    # it.  Once it is committed, the same row becomes derived and the general wrong-row
+    # check above holds it to that commit date.
+    if artifact_dates.last_change(artifact_dates.EXACT_SIDE_VALUES_ARTICLE) is None:
+        assert exact.expected is None
+    else:
+        assert exact.artifact in derived
     assert artifact_dates.main(["--check"]) == 0
 
 
@@ -64,9 +73,12 @@ def test_a_papers_revised_date_is_the_day_its_article_last_changed() -> None:
     explainer's is `release.EXPLAINER_REVISED`, the optimality paper's is
     `release.OPTIMALITY_REVIEW_REVISED`, the threshold-bound review's is
     `release.THRESHOLD_REVIEW_REVISED`, and each is changed in the commit that changes
-    the article. The articles are `n11-lower-bounds-explainer-article.md`,
-    `n11-optimality-review-article.md` and `n11-threshold-bound-review-article.md`,
-    named here so that the pre-push tier selects this file when any changes.
+    the article. The exact-values paper follows the same rule through
+    `release.EXACT_SIDE_VALUES_REVISED`. The articles are
+    `n11-lower-bounds-explainer-article.md`,
+    `n11-optimality-review-article.md`, `n11-threshold-bound-review-article.md` and
+    `exact-side-values-article.md`, named here so that the pre-push tier selects this
+    file when any changes.
     """
     assert artifact_dates.optimality_dates() == (
         release.OPTIMALITY_PROOF_PUBLISHED,
@@ -88,6 +100,11 @@ def test_a_papers_revised_date_is_the_day_its_article_last_changed() -> None:
             artifact_dates.PACKING_METHODS_ARTICLE,
             release.PACKING_METHODS_REVISED,
             "PACKING_METHODS_REVISED",
+        ),
+        (
+            artifact_dates.EXACT_SIDE_VALUES_ARTICLE,
+            release.EXACT_SIDE_VALUES_REVISED,
+            "EXACT_SIDE_VALUES_REVISED",
         ),
     ):
         changed = artifact_dates.last_change(article)
@@ -127,6 +144,7 @@ def test_the_articles_named_here_are_the_ones_the_renderers_read() -> None:
     assert artifact_dates.THRESHOLD_ARTICLE == threshold.ARTICLE
     methods = importlib.import_module("devtools.render_packing_methods")
     assert artifact_dates.PACKING_METHODS_ARTICLE == methods.ARTICLE
+    assert artifact_dates.EXACT_SIDE_VALUES_ARTICLE == render_exact_side_values.ARTICLE
 
 
 def test_a_stale_revised_date_is_reported_and_fails_the_check(
@@ -162,6 +180,17 @@ def test_the_optimality_papers_front_prints_publication_proof_and_revision_dates
     assert "This review revised" not in render_n11_optimality_review.ARTICLE.read_text(
         encoding="utf-8"
     )
+
+
+def test_the_exact_values_front_prints_its_edition_dates() -> None:
+    front = render_exact_side_values.FRONT
+    assert front.version == release.EXACT_SIDE_VALUES_EDITION == "Draft v0.1.0"
+    assert [(dated.label, dated.day) for dated in front.dates] == [
+        ("First published", release.EXACT_SIDE_VALUES_FIRST_PUBLISHED),
+        ("Last revised", release.EXACT_SIDE_VALUES_REVISED),
+    ]
+    assert front.source is None
+    assert front.series is None
 
 
 def test_dates_are_written_and_read_the_way_the_papers_write_them() -> None:
@@ -239,6 +268,9 @@ def test_a_built_pdf_is_held_to_its_papers_revised_date(
     assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 0
     built.write_bytes(CHROMIUM)
     assert artifact_dates.main(["--pdf", str(built), "--revised", "packing-methods"]) == 1
+    exact_day = artifact_dates.written_date(release.EXACT_SIDE_VALUES_REVISED)
+    built.write_bytes(dated(CHROMIUM, exact_day))
+    assert artifact_dates.main(["--pdf", str(built), "--revised", "exact-values"]) == 0
     with pytest.raises(SystemExit):
         artifact_dates.main(["--pdf", str(built)])
 

@@ -607,7 +607,23 @@ def compare(reference: Structure, *others: Structure) -> list[dict[str, Any]]:
             "axis": axis,
             "compared": "content" if axis in CONTENT_AXES else "form",
             **{paper: values[axis] for paper, values in found},
-            "same": _agree(axis, [values[axis] for _, values in found]),
+            "same": _agree(
+                axis,
+                [
+                    values[axis]
+                    for paper, values in found
+                    if axis != "series: strip"
+                    or render_overview.paper_record(paper).part is not None
+                ],
+            )
+            and (
+                axis != "series: strip"
+                or all(
+                    values[axis] == "none"
+                    for paper, values in found
+                    if render_overview.paper_record(paper).part is None
+                )
+            ),
         }
         for axis in sorted(first, key=lambda axis: (axis in CONTENT_AXES, axis))
     ]

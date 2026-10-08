@@ -129,7 +129,7 @@ def numeral(number: int) -> str:
     return _NUMERALS[number - 1]
 
 
-def series(slug: str) -> Series:
+def series(slug: str) -> Series | None:
     """The series strip of the site's paper `slug`, from the site's one list of papers
     (`render_overview.PAPERS`): the entries with a part number, in reading order."""
     part = render_overview.paper_record(slug).part
