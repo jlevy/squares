@@ -1,0 +1,41 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 208,
+ "url": "https://kingbird.myphotos.cc/packing/square-208.svg",
+ "retrieved_utc": "2026-10-08T03:12:25Z",
+ "read_from": "fetched into memory",
+ "bytes": 22046,
+ "sha256": "e59d30600de778ff767c2033cc588af1af6bc30a1ff3cda2b31255dac4c444ec",
+ "last_modified": "Thu, 10 Sep 2026 00:08:43 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by David Ellsworth on January 27-28, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program, starting from the following s(239) edited to remove 31 squares along the top and right sides:",
+  "Found by David Ellsworth on January 25-27, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program, starting from the following s(272) edited to remove 33 squares along the top and right sides:",
+  "Converted to an s(272) by David Ellsworth on December 23, 2024, based on the s(210):",
+  "- Found by M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev in March 2019 (to 11 decimal places of precision: s < 13.98318264114, the last 2 of which appear to be incorrect)",
+  "Source: Improved Packings of n(n\u22121) Unit Squares in a Square (Submitted March 14, 2019; Published October 15, 2021): https://doi.org/10.37236/8586",
+  "- Reconstructed by David Ellsworth on November 19, 2024, with exact analytic solution.",
+  "- Improved by David Ellsworth on December 21, 2024.",
+  "Original s(210) first modified to be an s(272) by David Ellsworth on November 30, 2024.",
+  "Exact polynomial root solution by David Ellsworth on December 23, 2024.",
+  "Improved by David Ellsworth on January 19-20, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026"
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "14.93776656277905825340656494448121020181227719017185",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "7.468883281389529126703282472240605100906138595085925",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

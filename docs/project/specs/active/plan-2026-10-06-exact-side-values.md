@@ -250,6 +250,11 @@ verification rung.
   The first two contain complete contact systems, the third contains all 673
   coefficients of its degree-672 polynomial, and the last exposes neither a polynomial
   nor a current defining system.
+  The remaining 34 numeric catalogue SVGs have a separate receipt and derived-facts
+  audit in that packet; these are first-time readings, with no earlier digest to
+  compare. The source-coverage partition also identifies 13 polynomial rows, two
+  exact-form rows and the missing $n = 211$ picture among the initial collection’s 54
+  numeric cases.
 
 - **Historical collection.** `devtools.collect_kingbird_historical_polynomials` rebuilds
   the bounded source corpus from retained primary articles.
@@ -331,6 +336,7 @@ reconciles them.
 | --- | --- |
 | `think-tj83` | Pinned source facts and the complete historical extraction |
 | `think-831v` | Verified historical register entries, including larger $n$ |
+| `think-64cy` | Derived-facts receipts and complete bounded coverage audit of the remaining numeric SVGs |
 | `think-432w` | Comprehensive generated paper |
 | `think-xe25` | Independent Astra mathematical reviews and retained audit tool |
 | `think-rno9` | Correctness findings and negative regression controls |
@@ -408,6 +414,16 @@ Additional work:
 - **Exact geometric witnesses (`think-blbm`).** The existing radical-family lane remains
   separate: a side expression and its polynomial do not by themselves close the
   exact-witness gap tracked by T-101.
+
+- **macOS mathematical snapshots (`think-e4qp`).** Replace solver-dependent byte or
+  floating-point snapshots with assertions on the exact mathematical contract.
+  Independent verification accepted the fresh OBBT certificates and all 13 checks on the
+  fresh $n = 17$ widened theorem; the narrower reported ratio also satisfies the bound.
+  The cause of the platform-dependent output remains unproved.
+
+- **macOS test portability (`think-1fwk`).** Audit inherited RSS, subprocess-startup and
+  copy-heavy timing assumptions under external scratch storage.
+  Keep declared gate budgets and the required external-storage policy intact.
 
 The selected next entry is **W7 `think-s6np`**, followed by the known $n = 11$
 contact-derived control and then one bounded $n = 102$ W6 slice in `think-ohhz`; the

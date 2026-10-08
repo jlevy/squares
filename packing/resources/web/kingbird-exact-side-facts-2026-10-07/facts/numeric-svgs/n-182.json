@@ -1,0 +1,39 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 182,
+ "url": "https://kingbird.myphotos.cc/packing/square-182.svg",
+ "retrieved_utc": "2026-10-08T03:12:23Z",
+ "read_from": "fetched into memory",
+ "bytes": 21782,
+ "sha256": "9f7913ac42fc4e35bfdd17dbdc265aaf862194a54673c5805bba403facaca893",
+ "last_modified": "Thu, 10 Sep 2026 00:08:22 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by M.Z. Arslanov, S.A. Mustafin, and Z.K. Shangitbayev in March 2019 (to 11 decimal places of precision: s < 13.98318264114, the last 2 of which appear to be incorrect)",
+  "Source: Improved Packings of n(n\u22121) Unit Squares in a Square (Submitted March 14, 2019; Published October 15, 2021): https://doi.org/10.37236/8586",
+  "Source: Private communication from K\u00e1roly Hajba to David Ellsworth, October 23, 2024 (Showed me a bitmap render of his recreation of the paper's s(182), which confirmed we both correctly interpreted the paper)",
+  "Reconstructed by David Ellsworth on November 19, 2024, with exact analytic solution.",
+  "Improved by David Ellsworth on December 20, 2024.",
+  "Exact polynomial root solution by David Ellsworth on December 23, 2024.",
+  "Improved by David Ellsworth on January 18, 2026, using his modified version of Thomas Schadt's GPU simulated annealing computer program.",
+  "Improved by Tej Stead on June 16, 2026, working with Claude Fable 5.",
+  "Source: Private communication from Tej Stead to David Ellsworth, on June 16, 2026",
+  "Cleaned up slightly by David Ellsworth on September 9, 2026, to match the adjacency decisions of the previous version."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "13.97419105332569632786714716099750417438544155746772",
+   "notes": []
+  },
+  {
+   "name": "hs",
+   "value": "6.98709552666284816393357358049875208719272077873386",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

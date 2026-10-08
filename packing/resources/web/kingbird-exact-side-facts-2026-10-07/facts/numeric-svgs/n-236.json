@@ -1,0 +1,30 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 236,
+ "url": "https://kingbird.myphotos.cc/packing/square-236.svg",
+ "retrieved_utc": "2026-10-08T03:12:28Z",
+ "read_from": "fetched into memory",
+ "bytes": 9421,
+ "sha256": "af60e1ca64d3d061af09dfa12567ceab8c1ca6c0e9d49c15785a21c8b267aadb",
+ "last_modified": "Thu, 17 Sep 2026 03:20:20 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Originally found by Sigvart Brendberg's program, https://hohmiyazawa.github.io/squares_in_rects/squaredrawer.html",
+  "Extended from the s(88) found by Erich Friedman in 1997, by generalizing the s(41) technique found by Charles F. Cottingham in 1979.",
+  "Improved by David Ellsworth on November 26, 2024, by adapting the s(102) improvement by David W. Cantrell in November 2024, as was applied to the s(102) found by K\u00e1roly Hajba in September 2024.",
+  "Improved by David Ellsworth on December 28, 2024.",
+  "Improved by Grigoriy Dyachkov on September 10, 2026, working with Claude Opus 5 and Claude Fable 5.",
+  "Probably approximates the technique found independently by both David W. Cantrell and David Ellsworth in January 2025, which has been applied so far to s(88), s(102), s(123), and s(146)."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "15.87607539315201514666554014285145",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}

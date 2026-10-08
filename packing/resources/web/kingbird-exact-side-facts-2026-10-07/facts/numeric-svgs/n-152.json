@@ -1,0 +1,29 @@
+{
+ "format": "kingbird-svg-exact-facts-v1",
+ "n": 152,
+ "url": "https://kingbird.myphotos.cc/packing/square-152.svg",
+ "retrieved_utc": "2026-10-08T03:12:18Z",
+ "read_from": "fetched into memory",
+ "bytes": 7844,
+ "sha256": "7d42bd8089db7c9ad7339d0cddfc6c05294b71d2032f87f855496788704c91b1",
+ "last_modified": "Wed, 16 Sep 2026 21:25:35 GMT",
+ "same_as_reading_of_2026_10_05": null,
+ "credits": [
+  "Found by David Ellsworth on January 6, 2025 based on seeing that David W. Cantrell had submitted an s(152), but without looking at it or its side length until after having recreated it otherwise independently.",
+  "Based on the s(69) found by Maurizio Morandi in June 2010, adapting and extending the s(69) improvement found by David W. Cantrell on August 3, 2023.",
+  "It turned out this version was better than David W. Cantrell's, which had s = 12.837159337688750497430639697700645114..., found by David W. Cantrell on January 6, 2025, based on the s(69) improvement he found on August 3, 2023.",
+  "Improved by Grigoriy Dyachkov on September 10, 2026, working with Claude Opus 5 and Claude Fable 5.",
+  "Applies a similar improvement to s(152) as that done to s(69) on July 29, 2026."
+ ],
+ "entities": [
+  {
+   "name": "s",
+   "value": "12.83095954472600847197551196593646",
+   "notes": []
+  }
+ ],
+ "statements": [],
+ "solver_calls": [],
+ "roots": [],
+ "checks": []
+}
