@@ -87,6 +87,14 @@ from the sparse checkout, so those runs are not claimed as passing gates.
 The complete PR surface and deferred checkpoint are required on the hosted complete
 checkout before closeout; the pull request owns their final status and run links.
 
+The first hosted run exposed a stale exploration count in SYNOPSIS and a mutation
+snapshot 103,018 bytes over its unchanged 192 MiB cap.
+The count is reconciled; three historical Session 163 push logs, totaling 230,221 bytes,
+are omitted from disposable workers after a static consumer audit.
+Their original files and owning session remain retained, and the existing dependency
+rescue rules still restore them if a checked document or registered result needs them.
+Regression tests cover omission, record preservation and future inline-link rescue.
+
 The selected proof-simplification follow-up is `think-zbkk`, which first asks whether
 the envelope can survive the existing local proof’s independent-angle and broken-contact
 branches. The missing manuscript and its specific rational Erdős witness are tracked by

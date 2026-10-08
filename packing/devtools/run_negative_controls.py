@@ -303,6 +303,15 @@ PRUNE = frozenset(
         # precedence if a checked document later links either file.
         ROOT / "campaign/agent-sessions/session-106-validation" / "fast-3deb90fc.tar.gz",
         ROOT / "campaign/agent-sessions/session-152-validation" / "full-initial-diagnostic.log",
+        # Session 163's three historical push logs total 230,221 bytes. A static audit
+        # found no named control target, command, code reader, inline link or registered
+        # result dependency; two paths occur only as session YAML outputs. This is not
+        # a runtime trace: the generic README text sweep reads the worker's own index,
+        # so omitted logs leave that sweep. Keep the logs and session record in Git;
+        # exact linked/registered dependency rescue below still takes precedence.
+        ROOT / "campaign/agent-sessions/session-163-push-recovery.log",
+        ROOT / "campaign/agent-sessions/session-163-push-refinement.log",
+        ROOT / "campaign/agent-sessions/session-163-push-final.log",
         # The n=21 orbit inventory and Session 105 full-gate JSON are older generated
         # byproducts, named only in historical prose/output fields. Neither is a
         # registered result dependency, inline link, control target, or control input.

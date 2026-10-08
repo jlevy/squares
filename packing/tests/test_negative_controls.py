@@ -39,6 +39,14 @@ COMPOSITE_VECTORS = frozenset(
     ROOT / "atlas/known-best" / name
     for name in ("known-best-1-100.svg", "known-best-1-324.svg")
 )
+SESSION163_PUSH_LOGS = frozenset(
+    ROOT / "campaign/agent-sessions" / name
+    for name in (
+        "session-163-push-recovery.log",
+        "session-163-push-refinement.log",
+        "session-163-push-final.log",
+    )
+)
 #: The 2026-10-06 breach's answer (PR #382): receipt roots traced as no control's input.
 RETAINED_RECEIPT_ROOTS = frozenset(
     ROOT / relative
@@ -678,6 +686,45 @@ def test_historical_byproducts_are_kept_in_git_but_not_workers(
         / "bentz2016-one-spare-receipt.md",
     ):
         assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def test_session163_push_logs_are_not_control_inputs() -> None:
+    specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
+    assert SESSION163_PUSH_LOGS <= PRUNE
+    for source in SESSION163_PUSH_LOGS:
+        assert source.is_file()
+        assert source.stat().st_size > 0
+        assert all(
+            (ROOT / control["file"]).resolve() != source and source.name not in control["run"]
+            for control in specification["controls"]
+        )
+
+
+def test_session163_push_logs_leave_workers_while_the_record_survives(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    for source in SESSION163_PUSH_LOGS:
+        relative = source.relative_to(controls.REPO)
+        assert source.is_file()
+        assert relative not in copied_targets
+        assert not (tree / relative).exists()
+    session = ROOT / "campaign/agent-sessions/session-163-native-bounds-and-census.md"
+    assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
+
+
+def test_session163_push_logs_return_when_a_checked_document_links_them(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    document = tmp_path / "linked-logs.md"
+    document.write_text(
+        "\n".join(
+            f"[log]({os.path.relpath(source, tmp_path)})"
+            for source in sorted(SESSION163_PUSH_LOGS)
+        )
+    )
+    monkeypatch.setattr(controls, "_linked_documents", lambda: [document])
+    assert set(controls.linked_pruned_targets()) >= SESSION163_PUSH_LOGS
 
 
 def test_old_validation_archive_is_pruned_while_current_records_survive(
