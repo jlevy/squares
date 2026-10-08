@@ -1486,8 +1486,9 @@ def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
 
 
 @pytest.mark.parametrize("declaration", ["inline", "frontier", "none"])
+@pytest.mark.parametrize("explicit", [False, True])
 def test_git_projection_preserves_sparse_declared_inputs(
-    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    declaration: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, explicit: bool
 ) -> None:
     """Absent sparse files still count; genuine declarations rescue exact outputs."""
     packing = tmp_path / "packing"
@@ -1529,7 +1530,7 @@ def test_git_projection_preserves_sparse_declared_inputs(
     expected = sum(
         path.stat().st_size for path in (canonical, source, document, register, index)
     )
-    if declaration != "none":
+    if explicit or declaration != "none":
         expected += output.stat().st_size
     output.unlink()
     canonical.unlink()
@@ -1541,7 +1542,7 @@ def test_git_projection_preserves_sparse_declared_inputs(
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
     monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (output,))
-    monkeypatch.setattr(controls, "COPY_SEPARATELY", ())
+    monkeypatch.setattr(controls, "COPY_SEPARATELY", (output,) if explicit else ())
     assert controls.snapshot_git_source_bytes(tree) == expected
 
 
