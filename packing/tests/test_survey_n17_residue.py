@@ -265,9 +265,21 @@ def test_shards_partition_the_draw_in_mask_order() -> None:
             _ = survey.shard_of(drawn, bad)
 
 
-def test_ten_shards_cover_the_distance_two_frame_once(tmp_path: Path) -> None:
+def test_ten_shards_cover_the_distance_two_frame_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """H-273's 95-orbit frame in ten shards: each places the control first, and the shards
     are disjoint and together hold all 95 orbits."""
+    enumerate_states = selector.all_states
+
+    @cache
+    def shared_states(cells: int, size: int) -> np.ndarray:
+        # All ten shards use the same state universe; population filtering stays live.
+        states = enumerate_states(cells, size)
+        states.setflags(write=False)
+        return states
+
+    monkeypatch.setattr(selector, "all_states", shared_states)
     seen: list[int] = []
     for k in range(10):
         output = tmp_path / f"shard-{k}.json"
@@ -280,3 +292,5 @@ def test_ten_shards_cover_the_distance_two_frame_once(tmp_path: Path) -> None:
         assert header["population"]["frame"]["drawn"] == len(drawn) - 1 in (9, 10)
         seen.extend(row["mask"] for row in drawn[1:])
     assert len(seen) == len(set(seen)) == 95
+    assert shared_states.cache_info().misses == 1
+    assert shared_states.cache_info().hits == 9
