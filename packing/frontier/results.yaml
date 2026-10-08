@@ -12244,15 +12244,14 @@ results:
     kind: upper-bound
     registered: '2026-10-07'
     headline: Exact rational ceiling refinements at n = 105, 292
-    claim: Seth Rehwaldt reports finite rational upper-bound refinements of existing Couzo constructions
-      at n = 105, 292. The complete exact sides and ordered rosters are retained as reported; no optimality
-      claim is registered.
+    claim: Complete exact replay confirms the finite rational upper-bound refinement at n = 105, 292.
+      Only finite feasibility enters; no optimality claim is registered.
     scope:
       n_values:
       - 105
       - 292
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: Certificate refinements of existing constructions; tiny exact improvements over newer
@@ -12266,32 +12265,46 @@ results:
       published: '2026-10-07'
     evidence:
     - E-rehwaldt-couzo-refinements-2026-10-07-report
+    - E-rehwaldt-couzo-refinements-2026-10-07-exact-replay
     artifacts:
     - packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/README.md
     - packing/devtools/refinement_packets.py
     - packing/frontier/n-105.md
     - packing/frontier/n-292.md
-    next_rung: Complete replay admission, two mutant refusals per accepted checker, durable receipts
-      and mapped mathematical review are required before confirmation. The current complete-roster drawing
-      check assigns no result rung.
+    next_rung: C4 requires two distinct accepted confirming adversarial reviews and an actual human
+      oversight record; neither publication nor input admission supplies them.
     notes: Refinement work by Seth Rehwaldt with OpenAI Codex assistance; Couzo and earlier construction
       contributors retain credit. All prior verified ceilings, sources and receipts remain historical.
       Restricted analytic claims are outside this import.
     composition: The exact half-angle map gives unit frames; translating each already repaired source
       center by S/2 gives the lower-left frame. The complete rational side is authoritative and no coordinate
       or side is rounded.
+    controls:
+    - packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz
+    - packing/tests/test_refinement_custody.py
+    reviews:
+    - path: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md
+      kind: adversarial
+      reviewer: GPT-6 Astra refinement custody reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Complete finite rational geometry, actual deciding inputs/results, controls, public recovery
+        and worker custody.
+      verdict: accepted
+      covers:
+      - T-117
   - id: T-118
     kind: upper-bound
     registered: '2026-10-07'
     headline: Exact rational ceiling refinements at n = 68
-    claim: Seth Rehwaldt reports finite rational upper-bound refinements of existing Couzo constructions
-      at n = 68. The complete exact sides and ordered rosters are retained as reported; no optimality
-      claim is registered.
+    claim: Complete exact replay confirms the finite rational upper-bound refinement at n = 68. Only
+      finite feasibility enters; no optimality claim is registered.
     scope:
       n_values:
       - 68
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: Certificate refinements of existing constructions; tiny exact improvements over newer
@@ -12305,19 +12318,34 @@ results:
       published: '2026-10-07'
     evidence:
     - E-rehwaldt-n68-refinement-2026-10-07-report
+    - E-rehwaldt-n68-refinement-2026-10-07-exact-replay
     artifacts:
     - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/README.md
     - packing/devtools/refinement_packets.py
     - packing/frontier/n-068.md
-    next_rung: Complete replay admission, two mutant refusals per accepted checker, durable receipts
-      and mapped mathematical review are required before confirmation. The current complete-roster drawing
-      check assigns no result rung.
+    next_rung: C4 requires two distinct accepted confirming adversarial reviews and an actual human
+      oversight record; neither publication nor input admission supplies them.
     notes: Refinement work by Seth Rehwaldt with OpenAI Codex assistance; Couzo and earlier construction
       contributors retain credit. All prior verified ceilings, sources and receipts remain historical.
       Restricted analytic claims are outside this import.
     composition: The exact half-angle map gives unit frames; translating each already repaired source
       center by S/2 gives the lower-left frame. The complete rational side is authoritative and no coordinate
       or side is rounded.
+    controls:
+    - packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz
+    - packing/tests/test_refinement_custody.py
+    reviews:
+    - path: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md
+      kind: adversarial
+      reviewer: GPT-6 Astra refinement custody reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: Complete finite rational geometry, actual deciding inputs/results, controls, public recovery
+        and worker custody.
+      verdict: accepted
+      covers:
+      - T-118
 
   - id: T-120
     kind: upper-bound

@@ -567,6 +567,10 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         # jlevy/squares#248's first run.
         "/packing/resources/web/franciscouzo-square-packing-2026-09-27/",
         "/packing/resources/web/de-winter-square-packing-211-2026-09-16/",
+        # The three refinement houses require private full source facts and metadata,
+        # even in the atlas sweep's sparse checkout.
+        "/packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/",
+        "/packing/resources/web/rehwaldt-n68-refinement-2026-10-07/",
         "/packing/resources/papers/kingbird-square-29-provenance.svg",
         # X-049's two censuses compare against JSON retained beside the exploration, and
         # the campaign history is otherwise outside the slice; without this directory the

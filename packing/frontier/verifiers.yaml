@@ -1535,3 +1535,55 @@ verifiers:
     note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent
       rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner
       conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+  - id: V-rehwaldt-n68-verify
+    program: verify.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/verify.py.txt
+    versions:
+    - sha256: 911b9822334636ffc49472e4df32e38cb162efbfad9a4684879f006b1c90e7f9
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+  - id: V-rehwaldt-n68-independent-support-check
+    program: independent_support_check.py
+    author: Seth Rehwaldt
+    provenance: external
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/rehwaldt-n68-refinement-2026-10-07/source/independent_support_check.py.txt
+    versions:
+    - sha256: 48e1ae336855ba5cc05c3fd161bf51ef71cab24ebc33ae590be040f78a932423
+      note: fded686668e29258dad2eb29d0482fa3fd51bd6b
+    summary: Decides all 68 rational unit squares, containment and 2278 unordered pairs.
+    note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two
+      programs use the same SAT theorem and arithmetic; their distinct code does not establish independence
+      from the source producer. Analytic root and dual programs are outside this replay.
+  - id: V-refinement-custody
+    program: devtools.refinement_custody
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/refinement_custody.py
+    - packing/devtools/refinement_packets.py
+    - packing/devtools/refinement_house_links.py
+    summary: Admits all 13 complete actual input/result jobs, immutable source conversion, process outcomes,
+      full control coverage and three complete house witnesses.
+    note: Offline admission reconciles retained executions and runs no geometric predicate.
