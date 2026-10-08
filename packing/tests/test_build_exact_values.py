@@ -1755,8 +1755,14 @@ def test_superseded_polynomial_is_complete_and_checked_against_its_own_side() ->
     assert checks["root"]["unique"]
     assert checks["root"]["contains_recorded_side"]
     assert checks["kkt_agreement_digits"] is None
-    assert entry["polynomial"] is None
-    assert entry["state"] == "numeric-only"
+    assert entry["state"] == "rational"
+    side = Fraction(entry["exact_form"])
+    assert entry["polynomial"]["coefficients"] == [str(side.denominator), str(-side.numerator)]
+    assert entry["polynomial"]["coefficients"] != note["polynomial"]["coefficients"]
+    assert entry["checks"]["irreducible"]["method"] == "linear"
+    assert entry["checks"]["root"]["interval"] == [str(side), str(side)]
+    assert entry["checks"]["root"]["contains_recorded_side"]
+    assert side == Fraction(entry["side"]["value"])
 
 
 def test_the_register_validates_against_its_schema() -> None:
@@ -1784,7 +1790,7 @@ def test_the_totals_partition_the_range() -> None:
     entries = list(_entries().values())
     totals = register["totals"]
     assert sum(totals[state] for state in exact.STATES) == len(entries) == 324
-    assert [totals[state] for state in exact.STATES] == [176, 29, 65, 17, 0, 37]
+    assert [totals[state] for state in exact.STATES] == [176, 62, 65, 17, 0, 4]
     assert totals["proved"] == 77
     with_polynomial = sum(1 for entry in entries if entry["polynomial"] is not None)
     assert totals["irreducible-certified"] == totals["root-isolated"] == with_polynomial
@@ -1953,14 +1959,45 @@ def test_stale_plain_register_update_preserves_transitional_storage(
 
 
 def test_all_numeric_cases_have_disjoint_current_work_routes() -> None:
-    numeric = {n for n, entry in _entries().items() if entry["state"] == "numeric-only"}
-    assert numeric == set(exact.ROUTES)
-    assert len(numeric) == 37
-    for n in numeric:
-        (route,) = [note for note in _entries()[n]["notes"] if note["kind"] == "route"]
-        assert route["bead"] == exact.ROUTES[n][0]
+    entries = _entries()
+    numeric = {n for n, entry in entries.items() if entry["state"] == "numeric-only"}
+    finite = set(VERIFIED_FALLBACK_COUNTS)
+    assert numeric == {29, 55, 71, 105}
+    assert len(finite) == 33
+    assert numeric.isdisjoint(finite)
+    assert numeric | finite == set(exact.ROUTES)
+    for n in numeric | finite:
+        entry = entries[n]
+        routes = [note for note in entry["notes"] if note["kind"] == "route"]
+        (route,) = [note for note in routes if note["bead"] == exact.ROUTES[n][0]]
+        assert route["bead"], n
+        diagnostics = [note for note in routes if note["bead"] == exact.SWEEP_BEAD]
+        agreement = entry["checks"]["kkt_agreement_digits"]
+        if (
+            entry["kkt"] is not None
+            and entry["kkt"]["status"] == exact.KKT_LOCAL_MIN
+            and agreement is not None
+            and agreement < exact.KKT_AGREEMENT_FLOOR
+        ):
+            (diagnostic,) = diagnostics
+            assert f"KKT value to {agreement} digits only" in diagnostic["text"], n
+            assert "different points" in diagnostic["text"], n
+        else:
+            assert not diagnostics, n
+        assert len(routes) == 1 + len(diagnostics), n
+        if n in finite:
+            assert entries[n]["state"] == "rational", n
+            assert "ideal contact research open" in route["text"], n
+            (provenance,) = [
+                note
+                for note in entries[n]["notes"]
+                if note["kind"] in {"verified-witness-side", "verified-bound-ceiling"}
+            ]
+            assert provenance["kind"] == (
+                "verified-bound-ceiling" if n == 292 else "verified-witness-side"
+            ), n
     assert exact.ROUTES[55][0] != exact.ROUTES[71][0]
-    assert _entries()[126]["state"] == "rational"
+    assert entries[126]["state"] == "rational"
     assert 126 not in exact.ROUTES
 
 
@@ -2109,7 +2146,29 @@ def test_historical_projection_preserves_invalidity_and_counts_beyond_frontier()
     assert n259["source_statuses"] == ["invalid"]
     assert n259["checks"]["root"]["unique"]
     assert n259["checks"]["root"]["contains_recorded_side"]
-    assert _entries()[259]["polynomial"] is None
+    current = _entries()[259]
+    assert current["state"] == "rational"
+    assert current["status"] == "open"
+    assert current["side"]["relation"] == "upper-bound"
+    side = Fraction(current["exact_form"])
+    assert current["polynomial"]["coefficients"] == [
+        str(side.denominator),
+        str(-side.numerator),
+    ]
+    assert current["polynomial"]["coefficients"] != n259["polynomial"]["coefficients"]
+    assert current["checks"]["catalogue"] == "derived-here"
+    assert current["checks"]["root"]["interval"] == [str(side), str(side)]
+    assert side == Fraction(current["side"]["value"])
+    assert side != Fraction(n259["side"])
+    # An invalid source polynomial cannot replace the current finite bound's identity.
+    wrong = copy.deepcopy(exact.load_packing(259))
+    wrong["reported_upper_bound"].update(
+        exact_form=current["exact_form"],
+        algebraic_degree=n259["degree"],
+        minimal_polynomial=n259["polynomial"]["text"],
+        algebraic_source=exact.DERIVED_FROM_EXACT_FORM,
+    )
+    _refused(lambda: _build(259, wrong), "not the minimal polynomial of")
     outside = [row for row in rows if row["kind"] == "outside-frontier"]
     assert len(outside) == 7
     assert {row["n"] for row in outside} == {1453, 1765, 1850, 2043, 2135}
