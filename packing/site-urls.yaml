@@ -10817,9 +10817,8 @@ urls:
     - packing/frontier/n-292.md
   amendments:
   - date: '2026-10-08'
-    reason: This integration retains the former withdrawn T-117 source binding while registering the
-      intake refinement result at the reused ID. The former claim remains at its consolidated result
-      URL.
+    reason: Register the finite rational n=105 and n=292 refinements under the reused result ID; retain
+      the former n=41 lower-bound binding at T-111.
     previous:
       kind: lower-bound
       scope:
@@ -10877,9 +10876,8 @@ urls:
     - packing/frontier/n-068.md
   amendments:
   - date: '2026-10-08'
-    reason: This integration retains the former withdrawn T-118 source binding while registering the
-      intake refinement result at the reused ID. The former claim remains at its consolidated result
-      URL.
+    reason: Register the finite rational n=68 refinement under the reused result ID; retain the former
+      Evan Daniel exact-ceiling binding at T-101.
     previous:
       kind: upper-bound
       scope:
@@ -10983,7 +10981,7 @@ urls:
       - packing/devtools/apply_exact_ceilings.py
       - packing/devtools/check_rational_witness_independent.py
     historical_target: result/t-101.html
-    historical_title: 'T-101: the former SQUISH upper-bound result'
+    historical_title: 'T-101: the former Evan Daniel exact-ceiling result'
 - path: results.html
   canonical: all-results.html
   kind: forwarder
