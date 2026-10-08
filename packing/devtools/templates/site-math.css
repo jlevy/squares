@@ -81,3 +81,13 @@
   position: absolute;
   width: 1px;
 }
+/* Frontier table values paint their existing semantic tree directly. Math font
+   metrics paint constructions and operators; text tokens follow the reader sans
+   face, including custom/system choices and the static print instances. */
+.site-frontier [data-site-native-math="frontier"] > math {
+  font-family: math;
+  font-size: 1em;
+}
+.site-frontier [data-site-native-math="frontier"] :is(mn, mi, mtext, ms) {
+  font-family: var(--kpress-font-sans);
+}
