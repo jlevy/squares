@@ -64,9 +64,9 @@ from typing import Any
 import pytest
 import yaml
 
+from devtools import source_supersession, validate_schemas
 from devtools import squish_followup_packets as update
 from devtools import squish_second_update_packets as second
-from devtools import validate_schemas
 from devtools.apply_upper_bound_packets import PREVIOUS_HEADING, earlier_reports, normalized
 from devtools.check_basic_bounds import check_case_basic_bounds
 from devtools.check_case_prose import check_case_file
@@ -260,7 +260,9 @@ def _regenerate(n: int, *, facts: CatalogueFacts | None = None) -> str:
     generated_payload = safe_load(generated.split("---\n", 2)[1])["packing"]
     promotion = lower_bound_promotion_from_records(payload, generated_payload)
     drafted = generate_record(n, **arguments, lower_bound_promotion=promotion)
-    return adopt_upper_bound_packet(n, drafted)
+    historical = adopt_upper_bound_packet(n, drafted)
+    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    return source_supersession.adopt_selected_report(n, existing, historical)
 
 
 PROMOTED_LOWER_CASES = (
@@ -479,6 +481,44 @@ def test_regenerates_a_hand_written_record_field_by_field(n: int) -> None:
     unreproduced = [path for path, verdict in verdicts.items() if verdict == "not reproduced"]
     assert unreproduced, "the rigidity block should be reported, not silently absent"
     assert all(path.startswith("packing.rigidity") for path in unreproduced), unreproduced
+
+
+@pytest.mark.parametrize("n", [68, 105, 292])
+def test_refinement_redraft_repairs_both_ceilings_from_complete_admitted_inputs(n: int) -> None:
+    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    expected = document["packing"]
+    report = expected["reported_upper_bound"].copy()
+    verified = expected["verified_upper_bound"].copy()
+    expected["reported_upper_bound"].update(value="99", exact_form="99/1")
+    expected["verified_upper_bound"].update(value="98", exact_form="98/1")
+    body, count = re.subn(
+        r"(at exact side\s+)\$[0-9]+/[0-9]+\$(, whose complete terminating decimal is\s+)"
+        r"\$[0-9.]+\$",
+        lambda match: f"{match[1]}$99/1${match[2]}$99$",
+        body,
+    )
+    assert count == 1
+    edited = "---\n" + yaml.safe_dump(document, sort_keys=False) + "---\n" + body
+    restored = source_supersession.adopt_selected_report(n, edited, existing)
+    actual = safe_load(restored.split("---\n", 2)[1])["packing"]
+    assert actual["reported_upper_bound"] == report
+    assert actual["verified_upper_bound"] == verified
+    assert f"${report['exact_form']}$" in restored
+    assert actual["status"] == "open"
+    assert actual["rigidity"] is None
+
+
+@pytest.mark.parametrize("n", [68, 105, 292])
+def test_refinement_redraft_refuses_unmapped_confirmation(n: int) -> None:
+    existing = (FRONTIER / f"n-{n:03d}.md").read_text()
+    _, front, body = existing.split("---\n", 2)
+    document = safe_load(front)
+    document["packing"]["verified_upper_bound"]["evidence"] = ["E-unreviewed-promotion"]
+    edited = "---\n" + yaml.safe_dump(document, sort_keys=False) + "---\n" + body
+    with pytest.raises(ValueError, match="lacks its complete confirming evidence"):
+        source_supersession.adopt_selected_report(n, edited, existing)
 
 
 @pytest.mark.parametrize("n", GOLDEN_CASES)

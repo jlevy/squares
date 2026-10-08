@@ -4,7 +4,7 @@ The [source repository](https://github.com/lollipoll/certified-square-packing-68
 is pinned at `fded686668e29258dad2eb29d0482fa3fd51bd6b`, published 7 October 2026 and retrieved
 8 October 2026. This packet carries only the active finite-witness upper-bound request
 from [issue 428](https://github.com/jlevy/squares/issues/428).
-Its reported registration assigns no local feasibility or optimality assurance.
+The complete finite rational witness is locally exact-replayed at V3/C3; no optimality assurance is assigned.
 
 The contact-system root has not been certified against every packing inequality. The source’s analytic statements concern restricted families; only its finite rational witness enters this report. 
 
@@ -14,8 +14,7 @@ construction contributors retain their credit: the n68 lineage includes Jake Loy
 Brendberg, Schadt and Ellsworth, and Evan Daniel supplied the intervening exact
 certificate. No new-arrangement or worldwide-priority claim is made.
 
-The source assigns no blanket licence. Only normalized rational geometric facts,
-attributed metadata and source custody are retained here. Original source bytes and
+The source assigns no blanket licence. Normalized rational geometric facts, attributed metadata, and the two pinned standalone geometry checker source files are retained here with their original notices. Original source bytes and
 notices remain at the immutable upstream revision. The #425 preparation, original
 protocol reviews and complete source custody additionally remain in the repository’s
 [checkpoint release](https://github.com/jlevy/squares/releases/tag/intake-425-preparation-2026-10-07),
@@ -56,7 +55,9 @@ that drawing’s feasibility separate from result confirmation. The explicit n68
 runs both producer geometry implementations on all 68 squares and all 2,278 pairs,
 then runs complete overlap and outside-container mutants. The retained receipt names
 actual inputs, both complete results and timings; admission and scoped review are
-still required before result promotion. No analytic launcher or optimizer is run.
+completed before finite-feasibility confirmation. No analytic launcher or optimizer is run.
+
+The complete executed source programs are retained byte-identically as [verify.py](source/verify.py.txt) and [independent_support_check.py](source/independent_support_check.py.txt). Their .txt suffix preserves archival bytes outside the first-party Python formatting floor.
 
 ## Complete Replay Custody
 
@@ -69,7 +70,7 @@ The compact admission catalogue records complete input identities and actual rou
 python -m devtools.refinement_custody recover --destination /Volumes/spud-ext1/agent-scratch/refinement-recovery
 ```
 
-The recovered inputs must equal all thirteen recorded deciding jobs, including the complete invalid rosters. The final independent custody and integration review is required before a confirmation rung is assigned.
+The recovered inputs must equal all thirteen recorded deciding jobs, including the complete invalid rosters. The [independent closure review](../../../../docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) accepted complete scientific custody after two actual fresh public recoveries. All 103 original files and all thirteen complete deciding inputs/results matched. This supports only finite witness feasibility at V3/C3; publication and the offline check do not decide geometry.
 
 ## Compressed Files
 

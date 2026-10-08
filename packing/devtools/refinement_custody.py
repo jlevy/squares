@@ -63,9 +63,7 @@ def read_index() -> dict[str, Any]:
     with lzma.open(INDEX, "rb") as stream:
         raw = stream.read(64_001)
     if len(raw) > 64_000 or digest(raw) != ADMISSION_SHA256:
-        raise ValueError(
-            "compact admission differs from the pinned external replay catalogue"
-        )
+        raise ValueError("compact admission differs from the pinned external replay catalogue")
     return json.loads(raw)
 
 
