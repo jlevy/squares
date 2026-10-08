@@ -3,8 +3,12 @@
 
 The frontier records are the system of record: each `reported_upper_bound` carries the
 side's closed form, its degree over the rationals, its minimal polynomial, and where each
-came from (`algebraic_source`). This register is a view of them, one entry per `n`, and
-the paper on exact side values renders from it and from nothing else.
+came from (`algebraic_source`). For an open record without that identity, a verified
+rational bound is admitted only when it equals both current decimals exactly and its
+retained certificate and passing replay bind the current source and count. Native witness
+sides and outward ceilings carry distinct provenance; neither establishes an ideal contact
+packing or optimality. This register is a view of those records and proof inputs, one
+entry per `n`, and the paper on exact side values renders from it and from nothing else.
 
 A view that only copied the records would add nothing, so every polynomial is checked
 here rather than transcribed, and every check is exact -- no float decides anything:
@@ -62,6 +66,9 @@ from sympy.polys.domains import ZZ
 from sympy.polys.galoistools import gf_ddf_zassenhaus, gf_from_int_poly, gf_monic, gf_sqf_p
 from sympy.polys.numberfields.galoisgroups import galois_group
 
+from devtools import evand_exact_certificates as evand
+from devtools import upper_bound_packets
+from devtools.retained_data import read_retained_text
 from sqpack import retained_json
 from sqpack.exact_values import (
     CATALOGUE,
@@ -748,7 +755,7 @@ def _state(exact_form: str | None, degree: int | None, polynomial: str | None) -
     if exact_form is not None:
         if degree != 1:
             return "closed-form"
-        # Six degree-1 sides are fractions (n = 50 is 7 + 4/7), so degree 1 alone does not
+        # A degree-1 side can be fractional (n = 50 is 7 + 4/7), so degree 1 alone does not
         # make a side an integer: its minimal polynomial is monic only when it is one.
         return "integer" if polynomial is not None and _monic(polynomial) else "rational"
     if polynomial is not None:
@@ -953,6 +960,168 @@ def polynomial_checks(
     return checks, root
 
 
+class VerifiedRationalInputs:
+    """Proof inputs reused within one build, never across mathematical invocations."""
+
+    def __init__(self) -> None:
+        self.evidence: dict[str, dict] | None = None
+        self.native_rows: dict[int, dict] | None = None
+        self.source_rows: dict[int, dict] = {}
+        self.packet_validated = False
+
+    def evidence_row(self, n: int, identifier: str, source_key: str) -> dict:
+        if self.evidence is None:
+            record = safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
+            self.evidence = {row["id"]: row for row in record["evidence"]}
+        row = self.evidence[identifier]
+        if (
+            row.get("claim") != "upper-bound"
+            or row.get("assurance") != "verified"
+            or row.get("method") != "exact-algebraic"
+            or row.get("replay_status") != "passed"
+            or row.get("source_key") != source_key
+            or n not in row.get("scope", {}).get("n_values", [])
+            or not row.get("certificate")
+            or not row.get("replay")
+        ):
+            raise ValueError("the upper-bound evidence does not certify this source/count")
+        return row
+
+    def native_side(self, n: int) -> Fraction:
+        if self.native_rows is None:
+            problems = evand.receipt_problems()
+            if problems:
+                raise ValueError("; ".join(problems))
+            first = json.loads(read_retained_text(evand.FIRST_PARTY_RECEIPT))
+            source = json.loads(read_retained_text(evand.SOURCE_REPLAY_RECEIPT))
+            expected = f"{evand.SOURCE}/tree/{evand.REVISION}/"
+            if (
+                first.get("format") != evand.FORMAT
+                or first.get("source") != expected + evand.UPSTREAM_CERTS
+                or source.get("format") != evand.FORMAT
+                or source.get("source") != expected + "s12/search/exact"
+            ):
+                raise ValueError("native replay receipts name a different source")
+            self.native_rows = {int(row["n"]): row for row in first["rows"]}
+            self.source_rows = {int(row["n"]): row for row in source["rows"]}
+        row = self.native_rows[n]
+        source_row = self.source_rows[n]
+        source_passed = all(
+            source_row[name]["exit_status"] == 0
+            and source_row[name]["last_line"].startswith(prefix)
+            for name, prefix in (("verify_cert", "VALID: s(n) <="), ("verify_cert2", "VALID:"))
+        )
+        if (
+            not row["exact_verify"]["passed"]
+            or not row["independent"]["passed"]
+            or not source_passed
+        ):
+            raise ValueError("the native certificate's replay did not pass")
+        certificate = evand.parse(
+            evand.certificate_path(evand.CERTS, n).read_text(encoding="utf-8"), expected_n=n
+        )
+        if certificate.side != Fraction(row["side"]):
+            raise ValueError("native certificate side differs from its replay")
+        return certificate.side
+
+    def packet_ceiling(self, n: int, rational: Fraction) -> None:
+        source = upper_bound_packets.FRANCISCOUZO
+        if upper_bound_packets.acquisition(source)["source_commit"] != source.revision:
+            raise ValueError("the ceiling packet names a different source revision")
+        if not self.packet_validated:
+            problems = upper_bound_packets.fast_problems(source)
+            if problems:
+                raise ValueError("; ".join(problems))
+            self.packet_validated = True
+        row = upper_bound_packets.certification(source)[n]
+        witness = safe_load(
+            gzip.decompress(source.certificate(n).read_bytes()).decode("utf-8")
+        )["witness"]
+        if witness["n"] != n or row["n"] != n or row["promotion"] != "certificate-produced":
+            raise ValueError("the ceiling certificate/receipt names a different count")
+        side = Fraction(witness["side"])
+        printed = upper_bound_packets.cases(source)[n]["side"]
+        derived = upper_bound_packets.derived(printed, side)
+        if (
+            side > rational
+            or Fraction(derived["exact_form"]) != rational
+            or Fraction(derived["verified_value"]) != rational
+        ):
+            raise ValueError("the registered fraction is not the certified outward ceiling")
+
+    def provenance(self, n: int, rational: Fraction, replay: str, source_key: str) -> dict:
+        evidence = self.evidence_row(n, replay, source_key)
+        if source_key == KKT_KEY:
+            if (ROOT / evidence["certificate"]).resolve() != evand.CERTS.resolve():
+                raise ValueError("the evidence names a different native certificate directory")
+            if self.native_side(n) != rational:
+                raise ValueError("the registered fraction differs from the native witness side")
+            kind = "verified-witness-side"
+            certificate = evand.certificate_path(evand.CERTS, n)
+            receipt = evand.FIRST_PARTY_RECEIPT
+            text = "This is the verified native rational witness side"
+        else:
+            source = upper_bound_packets.FRANCISCOUZO
+            if (ROOT / evidence["certificate"]).resolve() != source.certificate(
+                n
+            ).parent.resolve():
+                raise ValueError("the evidence names a different ceiling certificate directory")
+            self.packet_ceiling(n, rational)
+            kind = "verified-bound-ceiling"
+            certificate = source.certificate(n)
+            receipt = source.certification
+            text = "This is a certified outward ceiling, not the native witness side"
+        return _note(
+            kind,
+            f"{text}, from {source_key}; certificate {certificate.relative_to(ROOT)}, "
+            f"replay {replay}, receipt {receipt.relative_to(ROOT)}. "
+            "Its degree-one identity establishes neither stationarity nor global optimality.",
+            degree=1,
+        )
+
+
+def _verified_rational_fallback(
+    n: int, packing: dict, inputs: VerifiedRationalInputs
+) -> tuple[Fraction, dict] | None:
+    reported = packing["reported_upper_bound"]
+    verified = packing.get("verified_upper_bound", {})
+    source_key = reported.get("source_key")
+    replays = {
+        KKT_KEY: "E-evand-exact-optima-2026-10-05-exact-replay",
+        upper_bound_packets.FRANCISCOUZO.key: "E-franciscouzo-2026-09-27-exact-replay",
+    }
+    replay = replays.get(source_key)
+    if (
+        packing.get("n") != n
+        or packing.get("status") != "open"
+        or any(
+            reported.get(key) is not None
+            for key in (
+                "exact_form",
+                "algebraic_degree",
+                "minimal_polynomial",
+                "algebraic_source",
+            )
+        )
+        or replay is None
+        or replay not in verified.get("evidence", [])
+    ):
+        return None
+    try:
+        rational = Fraction(str(verified.get("exact_form")))
+        if rational != Fraction(str(reported["value"])) or rational != Fraction(
+            str(verified["value"])
+        ):
+            return None
+    except ValueError, ZeroDivisionError, KeyError:
+        return None
+    try:
+        note = inputs.provenance(n, rational, replay, source_key)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        raise ExactValuesError(f"n = {n}: verified rational bound refused: {error}") from error
+    return rational, note
+
+
 def _certified_rational_ceiling(packing: dict, coefficients: tuple[int, ...]) -> bool:
     """Only a replay-backed rational upper bound may use an upward display ceiling."""
     reported = packing["reported_upper_bound"]
@@ -981,9 +1150,25 @@ def build_entry(
     entry: CatalogueEntry | None,
     kkt_row: dict | None,
     budget: int = PRIME_BUDGET,
+    *,
+    verified_inputs: VerifiedRationalInputs | None = None,
 ) -> dict:
     """One register entry from one record, its catalogue block and its KKT row."""
     reported = packing["reported_upper_bound"]
+    fallback = _verified_rational_fallback(
+        n, packing, verified_inputs or VerifiedRationalInputs()
+    )
+    if fallback is not None:
+        rational, _provenance = fallback
+        reported = {
+            **reported,
+            "exact_form": f"{rational.numerator}/{rational.denominator}",
+            "algebraic_degree": 1,
+            "minimal_polynomial": format_polynomial(
+                (rational.denominator, -rational.numerator)
+            ),
+            "algebraic_source": DERIVED_FROM_EXACT_FORM,
+        }
     status = str(packing["status"])
     value = str(reported["value"])
     exact_form = reported.get("exact_form")
@@ -998,7 +1183,7 @@ def build_entry(
     if kkt_row is not None and kkt_row.get("S_exact"):
         kkt = {"value": str(kkt_row["S_exact"]), "status": str(kkt_row["status"])}
 
-    notes: list[dict] = []
+    notes: list[dict] = [] if fallback is None else [fallback[1]]
     checks: dict[str, Any] = {
         "irreducible": None,
         "root": None,
@@ -1074,8 +1259,25 @@ def build_entry(
     superseded = _superseded_note(reported, entry)
     if superseded is not None:
         notes.append(superseded)
-    if state == "numeric-only":
-        notes.extend(_numeric_only_notes(n, kkt_row))
+    if state == "numeric-only" or fallback is not None:
+        for note in _numeric_only_notes(n, kkt_row):
+            if fallback is not None:
+                note["text"] = (
+                    "The finite rational bound leaves ideal contact research open. "
+                    + note["text"]
+                )
+            same_route = next(
+                (
+                    old
+                    for old in notes
+                    if old["kind"] == note["kind"] and old["bead"] == note["bead"]
+                ),
+                None,
+            )
+            if same_route is None:
+                notes.append(note)
+            else:
+                same_route["text"] += " " + note["text"]
 
     return {
         "n": n,
@@ -1137,8 +1339,11 @@ def _totals(entries: list[dict]) -> dict:
 def build_record() -> dict:
     catalogue = catalogue_entries()
     kkt = kkt_rows()
+    verified_inputs = VerifiedRationalInputs()
     entries = [
-        build_entry(n, load_packing(n), catalogue.get(n), kkt.get(n))
+        build_entry(
+            n, load_packing(n), catalogue.get(n), kkt.get(n), verified_inputs=verified_inputs
+        )
         for n in KNOWN_BEST_CORPUS.numbers
     ]
     return {
