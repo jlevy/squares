@@ -3,17 +3,24 @@ type: is
 id: is-01m4eyh9kr2djjzbxdtnpa8w9w
 title: "Atlas poster footer: put citations and repository URL last"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 1
+version: 3
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: sol-merge-engineering
 labels:
   - atlas
 dependencies: []
 parent_id: is-01m4eq9mdaejkedd1b09qqn09p
+hold: null
+hold_until: null
 created_at: 2026-10-08T23:45:48.663Z
-updated_at: 2026-10-08T23:45:48.663Z
+updated_at: 2026-10-08T23:46:00.819Z
+started_at: 2026-10-08T23:46:00.495Z
+closed_at: 2026-10-08T23:46:00.819Z
+close_reason: Requested footer source and three poster exports completed and visually verified with five focused controls; remains uncommitted in atlas-cleanups with unrelated edits/staging preserved. Bounded local result only; no full/current CI qualification.
+resolution: null
+duplicate_of: null
 ---
 Completed the user-requested atlas poster footer adjustment in /Users/levy/.codex/worktrees/atlas-cleanups/squares.
 
