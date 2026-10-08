@@ -46,6 +46,9 @@ where the 2x export is 1,294,216 for 27.8.
 Every case the register holds, at the figure’s card scale, arranged in a triangle: row
 $k$ holds $n = (k-1)^2 + 1$ through $k^2$, beginning in the leftmost column.
 The eighteen rows end at 324; the final row has thirty-five cards.
+GRID and its count mark each row’s first retained regular axis-aligned grid packing.
+Where irregular packings precede it, an extra gap of half a drawing width (79 units)
+separates the groups; rows that are all grid receive no added gap.
 The poster draws 52,650 square polygons from the same witnesses.
 Its title, publication date, repository, complete legend, explanation, citations and
 credit form one right-aligned block in the upper-right whitespace, leaving the bottom
@@ -53,13 +56,13 @@ for the final row of packings.
 The information uses three times the figure’s type size, with more room between lines
 and sections; the packing drawings and card captions keep their original scale.
 The image above is the raster; the vector it was drawn from is one click away, and the
-PDF is an 84.38-by-48.5-inch page.
+PDF is an 85.20-by-48.5-inch page.
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-324.svg`](known-best-1-324.svg) | 8100 × 4656 units | the source; scales to anything |
-| [`known-best-1-324.png`](known-best-1-324.png) | 8100 × 4656 px | the raster embedded above |
-| [`known-best-1-324.pdf`](known-best-1-324.pdf) | 84.38 × 48.5 in | printing; vector, so text stays selectable |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 8179 × 4656 units | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 8179 × 4656 px | the raster embedded above |
+| [`known-best-1-324.pdf`](known-best-1-324.pdf) | 85.20 × 48.5 in | printing; vector, so text stays selectable |
 
 The poster publishes one raster and a vector PDF. The rectangular poster’s 2x raster
 measured 5,055,264 bytes for 83 megapixels; the triangle uses a wider canvas, while the

@@ -373,7 +373,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
                 "height": 4656,
                 "path": "atlas/known-best/known-best-1-324.png",
                 "scale": 1,
-                "width": 8100,
+                "width": 8179,
             },
             "range": {"count": 324, "first_n": 1, "last_n": 324},
             "renderer": "sqpack deterministic composite renderer",
@@ -383,7 +383,7 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
             "svg": {
                 "height": 4656,
                 "path": "atlas/known-best/known-best-1-324.svg",
-                "width": 8100,
+                "width": 8179,
             },
         },
     ]
@@ -766,7 +766,7 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
 
     The triangle's last row needs thirty-five columns at the figure's card scale.
     Its information fits in the upper-right whitespace, leaving eighteen rows at the
-    original card scale and no bottom footer allocation. The 8100 by 4656 canvas starts
+    original card scale and no bottom footer allocation. The 8179 by 4656 canvas starts
     the cards at the top margin and keeps the original drawing and caption dimensions.
     """
     canvas = known_best_builder.COMPOSITES[1]
@@ -777,15 +777,15 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert composite.square_count == 324 * 325 // 2
     assert composite.layout == "35 by 18, left-aligned square-bound triangle n=1..324"
     assert composite.cases.label == "n=1..324"
-    assert (canvas.width, canvas.height) == (8100, 4656)
+    assert (canvas.width, canvas.height) == (8179, 4656)
     assert canvas.grid_top == 60
     assert canvas.grid_bottom == 4596
-    assert (canvas.information_left, canvas.information_right) == (4640, 8040)
+    assert (canvas.information_left, canvas.information_right) == (4719, 8119)
     assert canvas.legend_baseline == 720
-    assert canvas.explainer_baseline == 1570
-    assert canvas.citations_baseline == 1750
-    assert canvas.credit_baseline == 1840
-    assert canvas.stamp_baseline == 1930
+    assert canvas.explainer_baseline == 1666
+    assert canvas.citations_baseline == 1846
+    assert canvas.credit_baseline == 1936
+    assert canvas.stamp_baseline == 2026
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "known-best-1-324.pdf",
@@ -887,6 +887,8 @@ def test_poster_places_cases_in_left_aligned_square_bound_rows() -> None:
 def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
     root = ET.fromstring(_committed_poster_svg())
     cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
+    transitions = known_best_builder._poster_grid_transitions(known_best_builder.COMPOSITES[1])  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    by_row = {transition.row: transition for transition in transitions}
     assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 325))
     for card in cards:
         n = int(card.attrib["data-n"])
@@ -898,8 +900,10 @@ def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
         ), n
         outline = card.find('svg:rect[@data-feature="container-outline"]', SVG)
         assert outline is not None
+        transition = by_row[k]
+        gap = 79 if transition.has_irregular_prefix and n >= transition.first_grid_n else 0
         assert (float(outline.attrib["x"]), float(outline.attrib["y"])) == (
-            84 + 228 * column,
+            84 + 228 * column + gap,
             72 + 252 * row,
         ), n
         assert (outline.attrib["width"], outline.attrib["height"]) == ("158", "158"), n
@@ -911,6 +915,110 @@ def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
             assert label is not None
             assert float(label.attrib["y"]) == 60 + 252 * row + baseline, n
             assert label.attrib["font-size"] == font_size, n
+
+
+def test_poster_grid_transition_gap_uses_the_retained_group_and_preserves_card_scale() -> None:
+    canvas = known_best_builder.COMPOSITES[1]
+    resolve = known_best_builder._poster_grid_transitions  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    transitions = resolve(canvas)
+    by_row = {transition.row: transition for transition in transitions}
+    assert canvas.card_left(211, by_row[15]) == 3252
+    assert canvas.card_left(212, by_row[15]) == 3559
+    assert canvas.card_left(213, by_row[15]) - canvas.card_left(212, by_row[15]) == 228
+    assert [canvas.card_left(n, by_row[2]) for n in (2, 3, 4)] == [60, 288, 516]
+    assert (
+        known_best_builder.POSTER_GRID_GAP == known_best_builder.SUMMARY_PACKING_SIZE / 2 == 79
+    )
+    root = ET.Element("svg")
+    append_card = known_best_builder._append_summary_card  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    for case in known_best_builder.retained_cases((5, 6, 7)):
+        append_card(
+            root,
+            case,
+            spec=RenderSpec(overlays=frozenset()),
+            canvas=canvas,
+            grid_transition=by_row[3],
+        )
+    cards = root.findall("svg:g[@data-feature='packing-card']", SVG)
+    outlines = [card.find("svg:rect[@data-feature='container-outline']", SVG) for card in cards]
+    assert all(outline is not None for outline in outlines)
+    assert [Decimal(outline.attrib["x"]) for outline in outlines if outline is not None] == [
+        84,
+        391,
+        619,
+    ]
+    for outline in outlines:
+        assert outline is not None
+        assert (outline.attrib["width"], outline.attrib["height"], outline.attrib["y"]) == (
+            "158",
+            "158",
+            "576",
+        )
+    labels = [card.find("svg:text[@data-feature='packing-label']", SVG) for card in cards]
+    assert len(labels) == 3
+    for label in labels:
+        assert label is not None
+        assert label.attrib["font-size"] == "29"
+
+
+def test_poster_grid_markers_fit_the_separator_or_the_all_grid_margin() -> None:
+    canvas = known_best_builder.COMPOSITES[1]
+    resolve = known_best_builder._poster_grid_transitions  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    append = known_best_builder._append_grid_transition_marker  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    root = ET.Element("svg")
+    transitions = resolve(canvas)
+    for transition in transitions:
+        append(root, transition, canvas=canvas)
+    markers = root.findall("svg:g[@data-feature='grid-transition']", SVG)
+    assert len(markers) == 18
+    assert [int(marker.attrib["data-first-grid-n"]) for marker in markers] == [
+        transition.first_grid_n for transition in transitions
+    ]
+    for marker, transition in zip(markers, transitions, strict=True):
+        assert "data-n" not in marker.attrib
+        assert Decimal(marker.attrib["data-extra-gap"]) == (
+            79 if transition.has_irregular_prefix else 0
+        )
+        card_left = canvas.card_left(transition.first_grid_n, transition)
+        left, right = (
+            (card_left - 79, card_left)
+            if transition.has_irregular_prefix
+            else (Decimal(0), Decimal(60))
+        )
+        row_top = Decimal(60 + 252 * (transition.row - 1))
+        label, count = marker.findall("svg:text", SVG)
+        assert (label.text, count.text) == ("GRID", str(transition.first_grid_n))
+        for node in (label, count):
+            extent = text_width(node.text or "", node.attrib["font-size"])
+            center = Decimal(node.attrib["x"])
+            baseline = Decimal(node.attrib["y"])
+            size = Decimal(node.attrib["font-size"])
+            assert left <= center - extent / 2 <= center + extent / 2 <= right
+            assert row_top + 12 <= baseline - size
+            assert baseline + size * Decimal("0.3") <= row_top + 170
+
+
+def test_triangle_crop_resolves_complete_records_and_row_major_skips_grid_preflight(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    resolve = known_best_builder._poster_grid_transitions  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    crop = known_best_builder.CompositeCanvas(
+        CompositeSpec(
+            1,
+            5,
+            5,
+            "triangle-crop",
+            placement=known_best_builder.CompositePlacement.square_bound_triangle,
+        )
+    )
+    assert [transition.first_grid_n for transition in resolve(crop)] == [1, 2]
+    monkeypatch.setattr(known_best_builder, "MANIFEST", tmp_path / "absent.json")
+    assert resolve(known_best_builder.PRIMARY_COMPOSITE) == ()
+    assert (
+        known_best_builder.PRIMARY_COMPOSITE.width,
+        known_best_builder.PRIMARY_COMPOSITE.height,
+    ) == (2400, 2896)
 
 
 def test_poster_enlarges_information_type_without_changing_card_geometry() -> None:
@@ -930,6 +1038,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         "release": 26,
         "repository": 26,
         "legend-label": 19,
+        "grid-explainer": 19,
         "explainer": 19,
         "degree-explainer": 19,
         "citations": 19,
@@ -952,7 +1061,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
             assert size >= baseline_sizes[feature] * 2
         else:
             assert size in {Decimal(45), Decimal("34.5")}
-    assert (canvas.width, canvas.height) == (8100, 4656)
+    assert (canvas.width, canvas.height) == (8179, 4656)
     assert (canvas.grid_top, canvas.grid_bottom) == (60, 4596)
     for case in known_best_builder.retained_cases((11, 12)):
         append_card(root, case, spec=spec, canvas=canvas)
@@ -976,7 +1085,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
 
 
 def test_poster_math_variables_are_italic_and_degree_has_its_own_line() -> None:
-    root = ET.Element(f"{{{SVG['svg']}}}svg", {"width": "8100", "height": "4656"})
+    root = ET.Element(f"{{{SVG['svg']}}}svg", {"width": "8179", "height": "4656"})
     append = known_best_builder._append_poster_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     append(
         root,
@@ -1012,15 +1121,15 @@ def test_poster_math_variables_are_italic_and_degree_has_its_own_line() -> None:
     for line in (first, second):
         extent = text_width("".join(line.itertext()), line.attrib["font-size"])
         extent += sum((Decimal(span.attrib.get("dx", "0")) for span in line), Decimal(0))
-        assert Decimal(line.attrib["x"]) + extent == 8040
-        assert Decimal(line.attrib["x"]) >= 4640
+        assert Decimal(line.attrib["x"]) + extent == 8119
+        assert Decimal(line.attrib["x"]) >= 4719
     features = ("explainer", "degree-explainer", "citations", "credit", "release-stamp")
     lines = [block.find(f"svg:text[@data-feature='{feature}']", SVG) for feature in features]
     assert all(line is not None for line in lines)
     baselines = [Decimal(line.attrib["y"]) for line in lines if line is not None]
-    assert baselines == [1570, 1660, 1750, 1840, 1930]
+    assert baselines == [1666, 1756, 1846, 1936, 2026]
     assert all(above + Decimal("17.1") <= below - 57 for above, below in pairwise(baselines))
-    assert baselines[-1] + Decimal("17.1") <= 2020
+    assert baselines[-1] + Decimal("17.1") <= 2116
     pdf = cairosvg.svg2pdf(bytestring=ET.tostring(root))
     assert isinstance(pdf, bytes)
     fonts = re.findall(rb"/FontName\s*/([^\s/>]+)", pdf)
@@ -1051,11 +1160,16 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
     left, right, top, bottom = (
         Decimal(block.attrib[f"data-{edge}"]) for edge in ("left", "right", "top", "bottom")
     )
-    assert (left, right, top, bottom) == (4640, 8040, 60, 2020)
+    assert (left, right, top, bottom) == (4719, 8119, 60, 2116)
     cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
     card_text = {node for card in cards for node in card.iter(f"{{{SVG['svg']}}}text")}
     information_text = set(block.iter(f"{{{SVG['svg']}}}text"))
-    assert set(root.iter(f"{{{SVG['svg']}}}text")) - card_text == information_text
+    marker_text = {
+        node
+        for marker in root.findall("svg:g[@data-feature='grid-transition']", SVG)
+        for node in marker.iter(f"{{{SVG['svg']}}}text")
+    }
+    assert set(root.iter(f"{{{SVG['svg']}}}text")) - card_text - marker_text == information_text
     features = {node.attrib.get("data-feature") for node in information_text}
     assert "poster-details" not in features
     assert "52,650 unit squares" not in "".join(block.itertext())
@@ -1064,6 +1178,7 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
         "release",
         "repository",
         "legend-label",
+        "grid-explainer",
         "explainer",
         "degree-explainer",
         "citations",
@@ -1105,9 +1220,14 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
         elif node.attrib.get("data-feature"):
             assert anchor == "end"
             assert x == right
+    transitions = known_best_builder._poster_grid_transitions(known_best_builder.COMPOSITES[1])  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    by_row = {transition.row: transition for transition in transitions}
     for card in cards:
         row, column = int(card.attrib["data-row"]), int(card.attrib["data-column"])
-        card_top, card_left = 60 + 252 * row, 60 + 228 * column
+        n = int(card.attrib["data-n"])
+        transition = by_row[row + 1]
+        gap = 79 if transition.has_irregular_prefix and n >= transition.first_grid_n else 0
+        card_top, card_left = 60 + 252 * row, 60 + 228 * column + gap
         assert card_top >= bottom or card_left + 216 < left
 
 
@@ -1193,7 +1313,7 @@ def test_a_second_composite_is_a_specification_and_not_a_second_set_of_constants
 
     extra_columns = poster.spec.columns - figure.spec.columns
     widening = extra_columns * known_best_builder.SUMMARY_COLUMN_PITCH
-    assert poster.width == figure.width + widening
+    assert poster.width == figure.width + widening + 79
     assert (
         poster.grid_bottom
         == poster.grid_top + poster.spec.rows * known_best_builder.SUMMARY_ROW_PITCH
@@ -1299,7 +1419,7 @@ def test_the_poster_exports_carry_the_source_receipt() -> None:
 
     assert [export.path.name for export in exports] == ["known-best-1-324.png"]
     assert known_best_builder.png_summary_receipt(exports[0].path.read_bytes()) == (
-        8100,
+        8179,
         4656,
         expected,
     )

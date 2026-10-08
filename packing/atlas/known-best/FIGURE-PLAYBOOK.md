@@ -336,6 +336,12 @@ The poster’s row $k$ holds $n = (k-1)^2 + 1$ through $k^2$, starting in the le
 column. The increasing rows leave the upper-right corner free for a right-aligned
 information block. Eighteen rows cover the catalogue’s complete range, with thirty-five
 cards in the final row.
+GRID and the count in the separator mark each row’s first retained regular axis-aligned
+grid packing. The threshold comes from the canonical atlas manifest, not a count formula
+or the derived regularized view.
+Where an irregular prefix precedes the grid suffix, the suffix moves right by half a
+drawing width: 79 units.
+All-grid rows keep their original positions and place the marker in the left margin.
 The figure keeps its 10-by-10 geometry, card scale and square encoding.
 
 ### A composite is a specification
@@ -348,8 +354,8 @@ The triangle keeps the figure’s card and label sizes, widening the canvas to f
 thirty-five columns.
 Its cards start 60 units from the top; its height follows the eighteen row pitches and
 bottom margin.
-All informational text occupies the upper-right block at $x = 4640..8040$,
-$y = 60..2020$: title, publication date, repository, all badge meanings and counts, hue
+All informational text occupies the upper-right block at $x = 4719..8119$,
+$y = 60..2116$: title, publication date, repository, all badge meanings and counts, hue
 and shade keys, explanation, citations, credit and edition stamp.
 The 3400-unit block uses three times the figure’s type sizes: 144 for the title, 78 for
 the release and repository lines, and 57 for the legend and documentation.
@@ -358,16 +364,17 @@ Badge glyphs and shade numerals also grow threefold, to 45 and 34.5. The informa
 sections; rendering refuses a line wider than the block or documentation lines that
 overlap. The $s(n)$ explanation sets $s$ and $n$ in italic with upright parentheses; the
 definition of `deg` follows on its own line.
-The triangle, packing drawings, card captions and canvas dimensions stay unchanged.
+The additional gap widens the canvas by 79 units.
+The row pitch, packing drawings, card captions and canvas height stay unchanged.
 
 |  | figure | poster |
 | --- | --- | --- |
 | Cases | `n = 1..100` | `n = 1..324` |
 | Arrangement | 10 by 10, row-major | 18 square-bound rows, left-aligned, up to 35 cards |
-| Canvas | 2400 × 2896 units | 8100 × 4656 units |
+| Canvas | 2400 × 2896 units | 8179 × 4656 units |
 | Squares drawn | 5,050 | 52,650 |
 | Rasters | 1x, 2x, link-preview card | 1x |
-| PDF page | 25 × 30.17 in | 84.38 × 48.5 in |
+| PDF page | 25 × 30.17 in | 85.20 × 48.5 in |
 
 The remaining fields are the decisions a figure of another size has to make: which
 rasters it publishes, whether it publishes a link-preview crop, and what it may leave

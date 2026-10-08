@@ -74,8 +74,10 @@ from sqpack.known_best import (
     CompositePlacement,
     CompositeSpec,
     CorpusRange,
+    GridTransition,
     catalogue_source_map,
     exact_grid_witness,
+    grid_transitions,
     kingbird_derived_witness,
     packet_derived_witness,
     parse_unitsquare_svg,
@@ -190,6 +192,8 @@ SUMMARY_SIDE_MARGIN = SUMMARY_GRID_LEFT
 SUMMARY_CARD_WIDTH = Decimal(216)
 SUMMARY_CARD_HEIGHT = Decimal(242)
 SUMMARY_PACKING_SIZE = Decimal(158)
+#: Additional separation before the retained regular-grid suffix, in drawing units.
+POSTER_GRID_GAP = SUMMARY_PACKING_SIZE / 2
 SUMMARY_PACKING_INSET_X = Decimal(24)
 SUMMARY_PACKING_INSET_Y = Decimal(12)
 SUMMARY_LABEL_BASELINE = Decimal(203)
@@ -378,13 +382,17 @@ POSTER_SUBTITLE_SIZE = "78"
 POSTER_FOOTER_SIZE = "57"
 POSTER_INFORMATION_WIDTH = Decimal(3400)
 POSTER_INFORMATION_TOP = SUMMARY_SIDE_MARGIN
-POSTER_INFORMATION_BOTTOM = Decimal(2020)
+POSTER_INFORMATION_BOTTOM = Decimal(2116)
 POSTER_TITLE_BASELINE = Decimal(204)
 POSTER_RELEASE_BASELINE = Decimal(340)
 POSTER_REPOSITORY_BASELINE = Decimal(450)
 POSTER_LEGEND_BASELINE = Decimal(720)
 POSTER_LEGEND_ROW_PITCH = Decimal(96)
-POSTER_EXPLAINER_BASELINE = Decimal(1570)
+POSTER_GRID_NOTE_BASELINE = POSTER_LEGEND_BASELINE + POSTER_LEGEND_ROW_PITCH * 8
+POSTER_GRID_NOTE = (
+    "GRID marks the first regular grid packing; extra gap = half a drawing width."
+)
+POSTER_EXPLAINER_BASELINE = Decimal(1666)
 POSTER_FOOTER_LINE_PITCH = Decimal(90)
 POSTER_EXPLAINER_LINES = (
     (*SUMMARY_EXPLAINER_RUNS[:-1], (" unit squares", False)),
@@ -578,7 +586,9 @@ class CompositeCanvas:
     def width(self) -> int:
         """A side margin either side of `columns` cells of one column pitch each."""
         return _whole_units(
-            SUMMARY_SIDE_MARGIN * 2 + SUMMARY_COLUMN_PITCH * self.spec.columns,
+            SUMMARY_SIDE_MARGIN * 2
+            + SUMMARY_COLUMN_PITCH * self.spec.columns
+            + (POSTER_GRID_GAP if self.information_in_corner else Decimal(0)),
             f"{self.spec.stem} width",
         )
 
@@ -589,6 +599,21 @@ class CompositeCanvas:
     @property
     def grid_top(self) -> Decimal:
         return SUMMARY_SIDE_MARGIN if self.information_in_corner else SUMMARY_GRID_TOP
+
+    def card_left(self, n: int, transition: GridTransition | None = None) -> Decimal:
+        """A cell's left edge, with a gap only in a triangle's regular-grid suffix."""
+        row, column = self.spec.card_position(n)
+        if transition is not None and transition.row != row + 1:
+            raise ValueError("a grid transition must belong to the card's square-bound row")
+        gap = (
+            POSTER_GRID_GAP
+            if self.information_in_corner
+            and transition is not None
+            and transition.has_irregular_prefix
+            and n >= transition.first_grid_n
+            else Decimal(0)
+        )
+        return SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column + gap
 
     @property
     def information_right(self) -> Decimal:
@@ -723,7 +748,10 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "packings for n equals 1 through 324, the whole audited corpus. Row k holds "
             "n equals (k minus 1) squared plus 1 through k squared, starting in the "
             "leftmost column. Eighteen rows end at 324, with thirty-five tiles in the "
-            "final row. A right-aligned information block in the upper-right corner "
+            "final row. GRID and a count mark the first retained regular grid packing "
+            "in each row; where an irregular prefix precedes it, an extra half-drawing "
+            "width separates the groups. A right-aligned information block in the "
+            "upper-right corner "
             "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
@@ -1356,12 +1384,80 @@ def _summary_points(
     )
 
 
+def _poster_grid_transitions(canvas: CompositeCanvas) -> tuple[GridTransition, ...]:
+    """Resolve the full retained corpus before selecting a triangle, including a crop.
+
+    The shared contract requires complete square-bound rows. A partial drawing must
+    therefore resolve against the complete canonical manifest, not its selected cases.
+    Row-major figures and generic geometry readers never enter this preflight.
+    """
+    if not canvas.information_in_corner:
+        return ()
+    entries = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
+    return tuple(
+        transition
+        for transition in grid_transitions(entries)
+        if transition.first_grid_n in canvas.spec.numbers
+    )
+
+
+def _append_grid_transition_marker(
+    root: ET.Element, transition: GridTransition, *, canvas: CompositeCanvas
+) -> None:
+    """A compact count in the added gap, or the left margin of an all-grid row."""
+    center = (
+        canvas.card_left(transition.first_grid_n, transition) - POSTER_GRID_GAP / 2
+        if transition.has_irregular_prefix
+        else SUMMARY_SIDE_MARGIN / 2
+    )
+    row_top = canvas.grid_top + SUMMARY_ROW_PITCH * (transition.row - 1)
+    marker = sub(
+        root,
+        "g",
+        {
+            "data-feature": "grid-transition",
+            "data-row": str(transition.row - 1),
+            "data-first-grid-n": str(transition.first_grid_n),
+            "data-extra-gap": format_svg_number(
+                POSTER_GRID_GAP if transition.has_irregular_prefix else Decimal(0)
+            ),
+            "aria-label": f"Regular grid packings begin at n={transition.first_grid_n}",
+        },
+    )
+    for feature, content, size, baseline in (
+        ("grid-transition-label", "GRID", "14", row_top + 82),
+        ("grid-transition-count", str(transition.first_grid_n), "20", row_top + 108),
+    ):
+        room = POSTER_GRID_GAP if transition.has_irregular_prefix else SUMMARY_SIDE_MARGIN
+        if _text_width(content, size) > room:
+            raise ValueError("a grid transition marker exceeds its separator space")
+        sub(
+            marker,
+            "text",
+            {
+                "data-feature": feature,
+                "x": format_svg_number(center),
+                "y": format_svg_number(baseline),
+                "text-anchor": "middle",
+                "font-family": SUMMARY_FONT,
+                "font-size": size,
+                "font-weight": "700",
+                "fill": SUMMARY_SMALL_FILL,
+            },
+        ).text = content
+
+
 def _append_summary_card(
-    root: ET.Element, built: BuiltCase, *, spec: RenderSpec, canvas: CompositeCanvas
+    root: ET.Element,
+    built: BuiltCase,
+    *,
+    spec: RenderSpec,
+    canvas: CompositeCanvas,
+    grid_transition: GridTransition | None = None,
 ) -> None:
     n = built.frontier.n
     row, column = canvas.spec.card_position(n)
-    card_x = SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column
+    card_x = canvas.card_left(n, grid_transition)
     card_y = canvas.grid_top + SUMMARY_ROW_PITCH * row
     packing_x = card_x + SUMMARY_PACKING_INSET_X
     packing_y = card_y + SUMMARY_PACKING_INSET_Y
@@ -2163,6 +2259,7 @@ def _append_poster_information(
         "repository", SUMMARY_REPOSITORY, POSTER_REPOSITORY_BASELINE, POSTER_SUBTITLE_SIZE
     )
     _append_summary_legend(block, spec=spec, canvas=canvas)
+    text_line("grid-explainer", POSTER_GRID_NOTE, POSTER_GRID_NOTE_BASELINE)
     for index, runs in enumerate(POSTER_EXPLAINER_LINES):
         _append_summary_explainer(
             block,
@@ -2233,7 +2330,10 @@ def render_known_best_summary_svg(
             "rows": str(composite.rows),
             "square-count": str(composite.square_count),
             **(
-                {"layout": composite.layout}
+                {
+                    "layout": composite.layout,
+                    "regular-grid-extra-gap": format_svg_number(POSTER_GRID_GAP),
+                }
                 if composite.placement == CompositePlacement.square_bound_triangle
                 else {}
             ),
@@ -2253,8 +2353,15 @@ def render_known_best_summary_svg(
         _append_poster_information(root, spec=spec, canvas=canvas, identity=identity)
     else:
         _append_summary_information(root, spec=spec, canvas=canvas, identity=identity)
+    transitions = _poster_grid_transitions(canvas)
+    by_row = {transition.row: transition for transition in transitions}
     for item in built:
-        _append_summary_card(root, item, spec=spec, canvas=canvas)
+        row, _column = composite.card_position(item.frontier.n)
+        _append_summary_card(
+            root, item, spec=spec, canvas=canvas, grid_transition=by_row.get(row + 1)
+        )
+    for transition in transitions:
+        _append_grid_transition_marker(root, transition, canvas=canvas)
     return serialize_svg(root)
 
 

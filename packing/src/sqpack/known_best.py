@@ -111,6 +111,73 @@ class CorpusRange:
         return f"n={self.first_n}..{self.last_n}"
 
 
+@dataclass(frozen=True)
+class GridTransition:
+    """The first retained exact grid in square-bound row ``row``, the one-based side k.
+
+    This describes the canonical packing source, independent of any regularized drawing
+    derived from it. A row whose first case is already a grid has no separating gap.
+    """
+
+    row: int
+    first_grid_n: int
+
+    def __post_init__(self) -> None:
+        if self.row < 1 or not self.first_n <= self.first_grid_n <= self.last_n:
+            raise ValueError("a grid transition must stand inside its square-bound row")
+
+    @property
+    def first_n(self) -> int:
+        return (self.row - 1) ** 2 + 1
+
+    @property
+    def last_n(self) -> int:
+        return self.row**2
+
+    @property
+    def has_irregular_prefix(self) -> bool:
+        return self.first_grid_n > self.first_n
+
+
+def grid_transitions(entries: Sequence[Mapping[str, Any]]) -> tuple[GridTransition, ...]:
+    """Read each complete row's first grid from canonical atlas manifest entries.
+
+    ``source.kind == exact-grid`` records a canonical axis-aligned integer-grid witness;
+    its reported side must equal the row's one-based side k. No threshold is inferred
+    from n alone, and the regularized drawing layer is not consulted. Entries must cover
+    complete square-bound rows from n=1 in case order, with an unbroken grid suffix in
+    every row. Refuse stale or changed facts rather than label a later irregular case as
+    a grid. This pure linear scan reads no files and keeps no cache.
+    """
+    if not entries:
+        return ()
+    numbers = [entry["n"] for entry in entries]
+    if any(type(n) is not int for n in numbers) or numbers != list(range(1, len(entries) + 1)):
+        raise ValueError("grid transitions require contiguous entries from n=1 in case order")
+    rows = isqrt(numbers[-1])
+    if rows**2 != numbers[-1]:
+        raise ValueError("grid transitions require complete square-bound rows")
+    found: list[GridTransition] = []
+    for row in range(1, rows + 1):
+        first_grid: int | None = None
+        for entry in entries[(row - 1) ** 2 : row**2]:
+            n = entry["n"]
+            is_grid = entry["source"]["kind"] == "exact-grid"
+            if is_grid:
+                if Fraction(entry["reported_side"]) != row:
+                    raise ValueError(
+                        f"n={n}: exact grid's reported side does not equal row {row}"
+                    )
+                if first_grid is None:
+                    first_grid = n
+            elif first_grid is not None:
+                raise ValueError(f"row {row}: non-grid n={n} follows first grid n={first_grid}")
+        if first_grid is None:
+            raise ValueError(f"row {row} has no retained exact grid")
+        found.append(GridTransition(row, first_grid))
+    return tuple(found)
+
+
 class CompositePlacement(StrEnum):
     """How case counts occupy cells without changing the shared card dimensions."""
 
