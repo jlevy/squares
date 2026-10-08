@@ -576,6 +576,11 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Fibonacci Torus: Independent Algebra Audit](docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md) | dated review record | record | retained | — |
+| [Review: The Fibonacci-Torus Contact Geometry](docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md) | dated review record | record | retained | — |
+| [Fibonacci Torus Source Review](docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md) | dated review record | record | retained | — |
+| [Fibonacci Torus Research and Audit](docs/project/specs/active/plan-2026-10-07-fibonacci-torus.md) | implementation plan | record | retained | — |
+| [Fibonacci Torus Confirmation Checks](packing/cases/fibonacci_torus/README.md) | component scope and use | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
 | [SQUISH update: mathematical and semantic binding review](docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematics Review: Eleven SQUISH Upper-Bound Packings](docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md) | dated review record | record | retained | — |
