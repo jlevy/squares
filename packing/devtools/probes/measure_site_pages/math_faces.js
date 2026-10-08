@@ -1,8 +1,6 @@
-// Every typeset formula's face beside the face of the text it sits in, counted by the
-// surface it is on: a card's headline or note, a chip, a table, a popover, the nav, a
-// caption, a case record's panels, a heading, a list, the prose. One row per surface,
-// text face and math face, with how many formulas it stands for, how many of those are
-// a headline that is math standing alone, and one formula's TeX as an example.
+// Every typeset formula's actual face beside its surrounding text, counted by surface.
+// Native frontier cells inspect a visible MathML token; prepared KaTeX keeps its visual
+// root. Backend labels describe the inspected output, without substituting desired faces.
 // `preview_site/math_face.js` holds the rule these are judged by.
 () => {
   /** @param {string} family */
@@ -37,22 +35,42 @@
         (node instanceof Element && node.matches(".kpress-math")) ||
         !(node.textContent ?? "").trim(),
     );
-  /** @type {Map<string, {surface: string, text: string, math: string, count: number, alone: number, example: string}>} */
+  /** @type {Map<string, {surface: string, text: string, math: string, backend: string, count: number, alone: number, example: string}>} */
   const rows = new Map();
-  for (const math of document.querySelectorAll(".kpress-math[data-kpress-math-rendered]")) {
+  for (const math of document.querySelectorAll(
+    '.kpress-math[data-kpress-math-rendered], .kpress-math[data-site-native-math="frontier"]',
+  )) {
     const host = math.parentElement;
-    const katex = math.querySelector(".katex");
-    if (!(host && katex)) {
+    if (!host) {
+      continue;
+    }
+    const native = math.getAttribute("data-site-native-math") === "frontier";
+    const root = native ? math.querySelector(":scope > math") : null;
+    const visual = native
+      ? [...(root?.querySelectorAll("mi, mn, mtext, ms") ?? [])].find((node) => {
+          const box = node.getBoundingClientRect();
+          return (
+            node.namespaceURI === "http://www.w3.org/1998/Math/MathML" &&
+            (node.textContent ?? "").trim() &&
+            box.width > 0 &&
+            box.height > 0 &&
+            getComputedStyle(node).visibility !== "hidden"
+          );
+        })
+      : math.querySelector(".katex");
+    if (!native && !visual) {
       continue;
     }
     const surface = surfaces.find(([selector]) => host.closest(selector))?.[1] ?? "prose";
     const text = first(getComputedStyle(host).fontFamily);
-    const face = first(getComputedStyle(katex).fontFamily);
-    const key = `${surface}|${text}|${face}`;
+    const face = visual ? first(getComputedStyle(visual).fontFamily) : "missing native MathML";
+    const backend = native ? "native-mathml" : "katex";
+    const key = `${surface}|${text}|${face}|${backend}`;
     const row = rows.get(key) ?? {
       surface,
       text,
       math: face,
+      backend,
       count: 0,
       alone: 0,
       example: (
