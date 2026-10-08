@@ -166,20 +166,20 @@ def test_admission_normalizes_each_fact_once_and_rechecks_next_call(
 ) -> None:
     assert private == confirmation.REPO
     parsed: list[int] = []
-    parse_source = confirmation.original.parse_source
+    parse_source_bytes = confirmation.original.parse_source_bytes
     checker_input = confirmation.original.checker_input
     checked_inputs = 0
 
-    def counted(path: Path, expected_n: int) -> tuple[dict, bytes]:
+    def counted(raw: bytes, expected_n: int) -> tuple[dict, bytes]:
         parsed.append(expected_n)
-        return parse_source(path, expected_n)
+        return parse_source_bytes(raw, expected_n)
 
     def counted_input(value: dict, *, receipt: bool = False) -> dict:
         nonlocal checked_inputs
         checked_inputs += 1
         return checker_input(value, receipt=receipt)
 
-    monkeypatch.setattr(confirmation.original, "parse_source", counted)
+    monkeypatch.setattr(confirmation.original, "parse_source_bytes", counted)
     monkeypatch.setattr(confirmation.original, "checker_input", counted_input)
     for _ in range(2):
         parsed.clear()
