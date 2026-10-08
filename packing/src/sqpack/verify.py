@@ -117,6 +117,52 @@ def separated(a: Square, b: Square, sign) -> int | None:
     return best
 
 
+class _ProjectionCache:
+    """Reuse only a square's own-axis arithmetic within one packing check."""
+
+    def __init__(self, squares: Sequence[Square], sign: Callable) -> None:
+        self._squares = squares
+        self._sign = sign
+        self._axes: dict[int, list] = {}
+        self._own_intervals: dict[tuple[int, int], tuple] = {}
+
+    def _axes_for(self, index: int) -> list:
+        if index not in self._axes:
+            self._axes[index] = edge_axes(self._squares[index])
+        return self._axes[index]
+
+    def _own_projection(self, index: int, slot: int, axis) -> tuple:
+        key = (index, slot)
+        if key not in self._own_intervals:
+            self._own_intervals[key] = project(self._squares[index], axis, self._sign)
+        return self._own_intervals[key]
+
+    def separated(self, i: int, j: int) -> int | None:
+        a, b = self._squares[i], self._squares[j]
+        # Match separated: both complete axis lists precede the first projection,
+        # but a later projection must remain uncomputed after a strict separation.
+        axes_a, axes_b = self._axes_for(i), self._axes_for(j)
+        best = None
+        for owner, axes in ((i, axes_a), (j, axes_b)):
+            for slot, axis in enumerate(axes):
+                alo, ahi = (
+                    self._own_projection(i, slot, axis)
+                    if owner == i
+                    else project(a, axis, self._sign)
+                )
+                blo, bhi = (
+                    project(b, axis, self._sign)
+                    if owner == i
+                    else self._own_projection(j, slot, axis)
+                )
+                gap = max(self._sign(blo - ahi), self._sign(alo - bhi))
+                if gap > 0:
+                    return 1
+                if gap == 0:
+                    best = 0
+        return best
+
+
 def _buckets(squares: Sequence[Square], cell: float = 2.0) -> dict:
     """Grid-bucket square centres so pair enumeration is linear in n.
 
@@ -187,6 +233,10 @@ def verify_packing(
     separation is exactly zero, so any tolerance large enough to accept those
     contacts also accepts overlaps smaller than the tolerance, and a
     tolerance of zero rejects the valid packing outright.
+
+    Coordinates and arithmetic precision must stay fixed during the call, and
+    `sign` must deterministically classify a given scalar value. A square's
+    own-axis projections are reused only within this call.
     """
     report = Report(valid=True, n=len(squares))
     if check_shapes:
@@ -206,9 +256,10 @@ def verify_packing(
                 elif s == 0:
                     report.container_contacts += 1
 
+    projections = _ProjectionCache(squares, sign)
     for i, j in candidate_pairs(squares, bucket=bucket):
         report.pairs_tested += 1
-        verdict = separated(squares[i], squares[j], sign)
+        verdict = projections.separated(i, j)
         if verdict is None:
             report.failures.append(("overlap", f"squares {i} and {j} overlap"))
         elif verdict == 0:
