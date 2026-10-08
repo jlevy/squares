@@ -133,11 +133,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: time, and again that day after Couzo's 3 October packings at n = 208, 209, 228, 263, 272,
 #: 303 and 306 (T-092), which their import left unscreened; the two smaller corpora are not
 #: re-measured. The complete 324-record replay on 2026-10-07 after SQUISH's eleven
-#: imported poses (T-113, T-114) took 364.07s and established the current tripwire.
+#: imported poses (T-113, T-114) took 364.07s. The twelve T-115 update poses were
+#: re-screened serially in 107.952s; unselected records remain unchanged. All three
+#: corpus tripwires below are the sums over the current retained square motions.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (26, 87, 85, 518),
-    "n=1..200": (65, 606, 181, 1883),
-    "n=1..324": (119, 1725, 302, 4489),
+    "n=1..100": (27, 88, 86, 535),
+    "n=1..200": (65, 557, 182, 1931),
+    "n=1..324": (120, 1874, 302, 4686),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -3555,6 +3557,12 @@ def _results_register(context: Context) -> str:
     return f"{first}\n{second}"
 
 
+def _squish_update_certification(context: Context) -> str:
+    # Bounded offline input/provenance admission. Full dual geometric replay is an
+    # explicit --replay operation, with the original completed run retained separately.
+    return _module(context, "devtools.squish_followup_packets", "check-certification")
+
+
 def _results_headline(context: Context) -> str:
     # Sub-second: one register, one document, one rubric. Records tier because it checks
     # presentation of the record -- that every registered result reaches the section a
@@ -5263,6 +5271,20 @@ STEPS: tuple[Step, ...] = (
             "packing/frontier/evidence.yaml",
             "packing/frontier/n-*.md",
             "packing/resources/bibliography.yaml",
+        ),
+    ),
+    Step(
+        "SQUISH update certification binds complete reviewed inputs",
+        _squish_update_certification,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/resources/web/squish-401-update-2026-10-07/**",
+            "packing/witnesses/squish-401-update-2026/**",
         ),
     ),
     Step(

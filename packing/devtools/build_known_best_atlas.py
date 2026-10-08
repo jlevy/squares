@@ -48,6 +48,7 @@ from strif import atomic_output_file
 
 from devtools import build_composite_figure_data, render_composite_pdf
 from devtools import evand_exact_certificates as evand_certificates
+from devtools import squish_followup_packets as squish_followup
 from devtools import squish_upper_bound_packets as squish_packets
 from devtools import upper_bound_packets as packets
 from devtools.build_bound_citations import RECENT_SINCE
@@ -782,6 +783,13 @@ def _source_plan(
             upstream_digest,
         )
     pictured = pictured_source_key(case)
+    if pictured == squish_followup.SOURCE_KEY:
+        path = squish_followup.fact_path(case.n)
+        if case.n not in squish_followup.NUMBERS or case.n == 153 or not path.is_file():
+            raise ValueError(f"n={case.n}: {pictured} retains no new packing for this case")
+        return SourcePlan(
+            PACKET_KIND, path, squish_followup.source_url(case.n), case.n, (case.n,)
+        )
     if pictured in SQUISH_SOURCE_KEYS:
         path = squish_packets.fact_path(case.n)
         if (
@@ -933,7 +941,12 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
             )
             continue
         if plan.kind == PACKET_KIND:
-            if plan.path == squish_packets.fact_path(n):
+            if plan.path == squish_followup.fact_path(n):
+                author = squish_packets.AUTHOR
+                revision = squish_followup.REVISION
+                attribution = f"{author}, {plan.url} at {revision}"
+                retrieved = squish_followup.RETRIEVED
+            elif plan.path == squish_packets.fact_path(n):
                 author = squish_packets.AUTHOR
                 revision = squish_packets.REVISION if n != 153 else "issuecomment-6031977107"
                 attribution = f"{author}, {plan.url} at {revision}"
@@ -1042,7 +1055,10 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
                 revision_sha256=_retained_revision(retained, "revision_sha256"),
             )
         if plan.kind == PACKET_KIND:
-            if plan.path == squish_packets.fact_path(case.n):
+            if plan.path in {
+                squish_packets.fact_path(case.n),
+                squish_followup.fact_path(case.n),
+            }:
                 return _squish_derived_witness(case, plan)
             retained = load_witness(plan.path, fallback_schema=WITNESS_SCHEMA)
             _assert_side_matches(case, str(retained["side"]))
@@ -1075,12 +1091,21 @@ def _squish_derived_witness(case: FrontierCase, plan: SourcePlan) -> dict:
     feasibility. This check establishes the drawing's geometry, while confirmation of
     the imported result remains the frontier record's separate evidence lane.
     """
-    fact = squish_packets.read_fact(case.n)
-    normalized_side = squish_packets.verified_value(
-        Fraction(fact["side"]), fact["printed_side"]
-    )
-    if Fraction(case.side) not in {Fraction(fact["printed_side"]), Fraction(normalized_side)}:
-        raise ValueError("source display disagrees with the reported frontier side")
+    is_update = plan.path == squish_followup.fact_path(case.n)
+    if is_update:
+        fact = squish_followup.read_fact(case.n)
+        if case.side != squish_followup.display(fact["side"]):
+            raise ValueError("source display disagrees with the prescribed update ceiling")
+    else:
+        fact = squish_packets.read_fact(case.n)
+        normalized_side = squish_packets.verified_value(
+            Fraction(fact["side"]), fact["printed_side"]
+        )
+        if Fraction(case.side) not in {
+            Fraction(fact["printed_side"]),
+            Fraction(normalized_side),
+        }:
+            raise ValueError("source display disagrees with the reported frontier side")
     if fact["n"] != case.n or len(fact["squares"]) != case.n:
         raise ValueError("derived facts do not contain the requested square count")
     witness = squish_packets.to_witness(fact)
@@ -1102,8 +1127,14 @@ def _squish_derived_witness(case: FrontierCase, plan: SourcePlan) -> dict:
         "key": pictured_source_key(case),
         "path": _relative(plan.path),
         "url": plan.url,
-        "retrieved": squish_packets.RETRIEVED,
-        "revision": squish_packets.REVISION if case.n != 153 else "issuecomment-6031977107",
+        "retrieved": squish_followup.RETRIEVED if is_update else squish_packets.RETRIEVED,
+        "revision": (
+            squish_followup.REVISION
+            if is_update
+            else squish_packets.REVISION
+            if case.n != 153
+            else "issuecomment-6031977107"
+        ),
     }
     witness["certificate"] = {
         "kind": "exact-rational-sat",
@@ -2233,7 +2264,7 @@ def _manifest_entry(built: BuiltCase) -> dict:
         derivation = (
             "exact rational half-angle conversion of retained source facts, checked "
             "with exact predicates"
-            if plan.path == squish_packets.fact_path(n)
+            if plan.path in {squish_packets.fact_path(n), squish_followup.fact_path(n)}
             else "deterministic reuse of a source packet's retained Witness/v2 facts"
         )
     elif n == plan.source_n:

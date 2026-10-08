@@ -17,7 +17,12 @@ from typing import cast
 import pytest
 import yaml
 
-from devtools import evand_exact_certificates, squish_upper_bound_packets, upper_bound_packets
+from devtools import (
+    evand_exact_certificates,
+    squish_followup_packets,
+    squish_upper_bound_packets,
+    upper_bound_packets,
+)
 from devtools.check_readme import meaningful_top_level_entries
 from sqpack.cli import validate
 from sqpack.project import ProjectLayoutError, require_project_root
@@ -585,6 +590,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # SQUISH's exact rational facts are a separate packet from the ordinary packet
     # registry; omitting it makes the atlas refuse all eleven newly reported cases.
     assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
+    assert f"/packing/resources/web/{squish_followup_packets.PACKET.name}/" in sparse
     full_step = next(
         _mapping(step)
         for step in validate_steps
