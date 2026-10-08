@@ -20,6 +20,9 @@ from devtools import build_known_best_atlas as known_best_builder
 from devtools import refinement_house_links as refinement_houses
 from devtools import refinement_packets as refinement_sources
 from devtools import render_composite_pdf
+from devtools import ryxu_arrangement_reports as ryxu_reports
+from devtools import ryxu_house_links as ryxu_houses
+from devtools import ryxu_radical_n51 as ryxu_radical
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     CompositeSpec,
@@ -44,8 +47,9 @@ from sqpack.workers import worker_count
 
 #: Catalogue-derived witnesses above the hand-audited hundred, per corpus (think-93on).
 #: The first SQUISH update moved n = 179 and 258 onto packet-derived facts;
-#: the second also moved n = 88. These inventory counts follow the current corpus.
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 26, "n=1..324": 57}
+#: the second also moved n = 88. Complete evand and ry-xu packets now supersede
+#: earlier catalogue sources. These inventory counts follow the current corpus.
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 23, "n=1..324": 50}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -58,18 +62,18 @@ GOLDEN_UNITSQUARE: dict[str, set[int]] = {
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     "n=1..100": {
         "exact-grid": 64,
-        "kingbird-derived-facts": 34,
-        "packet-derived-facts": 2,
+        "kingbird-derived-facts": 30,
+        "packet-derived-facts": 6,
     },
     "n=1..200": {
         "exact-grid": 114,
-        "kingbird-derived-facts": 60,
-        "packet-derived-facts": 26,
+        "kingbird-derived-facts": 53,
+        "packet-derived-facts": 33,
     },
     "n=1..324": {
         "exact-grid": 176,
-        "kingbird-derived-facts": 91,
-        "packet-derived-facts": 57,
+        "kingbird-derived-facts": 80,
+        "packet-derived-facts": 68,
     },
 }
 
@@ -421,6 +425,8 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
 
 def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
     n = entry["n"]
+    if n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
+        assert ROOT / entry["witness"]["path"] == ryxu_houses.house_path(n)
     witness = load_witness(ROOT / entry["witness"]["path"], fallback_schema=SCHEMA)
     assert witness["n"] == n
     assert witness["id"] == entry["witness"]["id"]
@@ -432,17 +438,24 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "packet-derived-facts":
         assert entry["source"]["path"].startswith("resources/web/")
-        assert entry["source"]["path"].endswith(
-            (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
-        )
         source = refinement_houses.source(n) if n in refinement_houses.NUMBERS else None
-        if source is not None and entry["source"]["url"] == source.url(n):
+        if n in ryxu_houses.NUMBERS and entry["source"]["url"] == ryxu_houses.source_url(n):
+            # Complete rational and number-field records retain all poses and deciding
+            # inputs. Admit their entire house; a matching path alone is insufficient.
+            facts = ryxu_radical.fact_path() if n == 51 else ryxu_reports.fact_path()
+            assert entry["source"]["path"] == facts.relative_to(ROOT).as_posix()
+            assert witness == ryxu_houses.check_houses([n])[n]
+            assert witness["source"]["path"] == entry["source"]["path"]
+        elif source is not None and entry["source"]["url"] == source.url(n):
             # New source facts use repository-relative custody paths. Admit the whole
             # imported house, not merely an accepted alternative path spelling.
             assert witness["source"] == refinement_sources.to_witness(source, n)["source"]
             assert witness["source"]["path"] == "packing/" + entry["source"]["path"]
             refinement_houses.check_houses([n])
         else:
+            assert entry["source"]["path"].endswith(
+                (f"/facts/n-{n:03d}.yaml", f"/facts/n-{n:03d}.json.gz")
+            )
             assert witness["source"]["path"] == entry["source"]["path"]
             assert "not a legal conclusion" in witness["claim"]["limitations"]
         assert witness["source"]["url"] == entry["source"]["url"]
@@ -450,6 +463,15 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert witness["source"]["revision"] == (
             f"upstream-declared parent-content SHA-256 {release_by_n[n]['record_sha256']}"
         )
+
+
+@pytest.mark.parametrize("n", [51, 70])
+def test_ryxu_manifest_refuses_a_noncanonical_house_path(n: int) -> None:
+    document = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))
+    entry = next(row for row in document["atlas"]["entries"] if row["n"] == n)
+    changed = {**entry, "witness": {**entry["witness"], "path": "witnesses/other-house.yaml"}}
+    with pytest.raises(AssertionError):
+        _assert_witness_agrees_with_entry(changed, {})
 
 
 @pytest.mark.slow

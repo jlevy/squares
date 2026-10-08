@@ -326,6 +326,61 @@ This closes the production prerequisites for finite-feasibility confirmation at 
 only. It does not establish the source’s 191-touching-pair assertion, optimality, local
 minimality, rigidity, novelty, human review or a C4 claim.
 
+## Final Presentation and Record Review
+
+A separately prompted strong reviewer accepted the final presentation and record changes
+at `fb5309b258e10e5f56201620dbc06f0afc633380` on 8 October 2026 UTC. This is a scoped
+follow-up to the scientific, API and production decisions above.
+Those decisions and their limits remain unchanged.
+
+The contact census and workbench expand the complete exact poses before projecting them
+for display. Workbench matching keys retain the scalar declaration, algebraic field and
+selected root, coordinate convention, side and source pose.
+Rational regularization uses the exact expanded corners; number-field regularization
+refuses before attempting a rational parse.
+The existing numeric and rational-corner workbench paths remain in place.
+
+An independent read-only audit loaded all eighteen selected workbench constructions and
+checked their complete square and key counts.
+Exactly seventeen are rational and one is the separate undilated radical n=51
+construction. Each source override points to the reported construction evidence; each
+verified upper lane points to the separate feasibility evidence.
+Their upward ceilings agree, and every case remains open.
+All twenty-five rational source certificates remain retained, including the eight not
+selected in the current atlas.
+
+The review found and closed three expression issues: stale final-selection counts,
+historical prose referring to displaced frontmatter values, and five obsolete
+certificate-gap blockers.
+The corrected text distinguishes the eighteen rational improvements over the pre-intake
+frontier from the final seventeen rational selections alongside radical n=51.
+
+The blocker correction removes only the earlier Evan Daniel certificate-print gap after
+mapped ry-xu confirming evidence and matching reported/verified upper values and exact
+forms are present. An independent comparison against the complete original history found
+exactly five such dispositions, at n=127, 175, 261, 267 and 295. All eighteen reported
+and verified lower lanes and all other blockers were unchanged, including the separate
+missing Green lower-proof blocker at n=261. The old complete records remain in the
+immutable history.
+
+The reviewer ran the exact-pose and historical-prose controls: two passed in 1.21
+seconds, with the pose call taking 0.15 seconds.
+After the blocker correction, the historical and real-history n=261 controls both passed
+in 1.19 seconds; the blocker call took 0.18 seconds.
+The complete workbench/routing audit took 0.97 seconds, and the final history/blocker
+audit took 0.556 seconds.
+The writer separately ran the full n=51/n=70 workbench projection, alternate-root
+identity and unchanged n=52 numeric-path control; that recorded run passed in 1.27
+seconds.
+
+`git diff --exit-code 609038af757cf364bac38467d861b1ac7061d9a7` over the
+rational/radical scientific modules, house-binding module, full source facts and actual
+`receipts/` directory returned 0. This follow-up did not repeat the geometric batch or
+the actual private-worker run accepted above.
+Final source-size and exact-head CI checks remain integration gates.
+The source’s 191-touching-pair assertion remains unconfirmed; the review establishes no
+optimality, local-minimum, rigidity or novelty claim.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
