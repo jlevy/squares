@@ -504,24 +504,47 @@ def test_a_matching_display_cannot_replace_the_native_side_or_packet_ceiling() -
         )
 
 
+@pytest.mark.parametrize(
+    ("field", "value", "reason"),
+    [
+        pytest.param(
+            "stored_sha256",
+            "0" * 64,
+            "stored certificate differs from its receipt",
+            id="certificate-digest",
+        ),
+        pytest.param(
+            "exact_form",
+            "1/2",
+            "receipt's verified value or units above do not follow from it",
+            id="registered-ceiling",
+        ),
+        pytest.param(
+            "n",
+            291,
+            "the ceiling certificate/receipt names a different count",
+            id="count",
+        ),
+        pytest.param(
+            "independent",
+            {"verification_passed": False},
+            "the independent checker refused the certificate",
+            id="independent-replay",
+        ),
+    ],
+)
 def test_a_packet_ceiling_requires_the_original_certificate_receipt(
     monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    value: object,
+    reason: str,
 ) -> None:
     source = exact.upper_bound_packets.FRANCISCOUZO
     receipts = exact.upper_bound_packets.certification(source)
-    for field, value in (
-        ("stored_sha256", "0" * 64),
-        ("exact_form", "1/2"),
-        ("n", 291),
-        ("independent", {"verification_passed": False}),
-    ):
-        bad = copy.deepcopy(receipts)
-        bad[292][field] = value
-        with monkeypatch.context() as control:
-            control.setattr(
-                exact.upper_bound_packets, "certification", lambda _source, bad=bad: bad
-            )
-            _refused(lambda: _build(292), "verified rational bound refused")
+    bad = copy.deepcopy(receipts)
+    bad[292][field] = value
+    monkeypatch.setattr(exact.upper_bound_packets, "certification", lambda _source: bad)
+    _refused(lambda: _build(292), reason)
 
 
 def test_a_packet_ceiling_refuses_missing_replays_and_changed_certificates(
