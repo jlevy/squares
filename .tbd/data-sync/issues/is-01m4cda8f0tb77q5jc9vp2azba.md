@@ -3,9 +3,9 @@ type: is
 id: is-01m4cda8f0tb77q5jc9vp2azba
 title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 24
+version: 26
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,12 +13,18 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T03:16:04.826Z
+updated_at: 2026-10-08T03:22:25.058Z
 started_at: 2026-10-08T00:07:06.684Z
+closed_at: 2026-10-08T03:22:25.057Z
+close_reason: AllfourownedPRs merged andsourceonGitHubmain/PRrefs; fullstateonPR431+remoteBeads; actual376memberfinalarchive andall4assets upload/download size+hashverified; actualsite/results/graphics+issue/ledgercomplete; remainingnative/intake/setup scopes owned.
+resolution: null
+duplicate_of: null
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
 
 ## Notes
+
+PRESERVATION COMPLETE 2026-10-08 UTC: ActualGitHubupload/download all4finalassetsMATCH andall376archive member sizes/SHA256MATCH. squares-final-publication-state-20261008.tar.gz19402600B SHA2569f5f398574623157d9099afeb3b2e5490559b2f2122a5cdc1f9033f2767c9747; manifest+receipt+checksums anduploadedfinal-publication-github-roundtrip-receipt.json onauthenticateddraftrelease406258689. AllownedPR427429431437MERGED,422site/reply/ledgercomplete; qcy/sfpzclosed/synced. BothcheckoutsCLEAN/outboxesEMPTY/sourceheads preservedGitHubmain/PRrefs. Full03:17state+186sitefiles/104images+failurehistory archived. Remainingc63v/6lrh anddraft434bcff30green/435e17631green underowners; setupstale_baseunsaved. Fullpriornotesbelowretained verbatim; compactcompletionnote respectsTBD50000charlimit. Finalclosed-native export/remoteproof recordedseparately.
 
 LATEST CONCURRENT OWNER SNAPSHOT — 2026-10-08 UTC:
 Freshread-onlyGitHubsnapshot supersedesdatedowner-head/CIfailure summaries:434bcff749ce3e34064dc9961e0a33875025e54e1eb DRAFT30SUCCESS26SKIP;435e17685ef36cad388d937a32d5082d5fddc2cb18d DRAFT31SUCCESS26SKIP. Both remainwiththeirexistingowners/currentreview/readiness gates; rootclaimsnofreshscientificacceptanceatthesenewheads andwillnotpromotedraftsfromCIalone. Earlier782/d702/69ebd failures/reviews remainhistorical scopes. Retained434scientificclosure andten425projectjobs/three428upstreamjobs remain distinctfromoriginalfive428projectprotocol preparation.
