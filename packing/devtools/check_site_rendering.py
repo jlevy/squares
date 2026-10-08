@@ -12,7 +12,8 @@ from __future__ import annotations
 import argparse
 import json
 import statistics
-from collections.abc import Sequence
+import time
+from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 from urllib.parse import unquote, urlsplit
@@ -32,6 +33,9 @@ LCP_LIMIT_MS = 4000
 LONGEST_TASK_LIMIT_MS = 300
 BLOCKING_LIMIT_MS = 600
 SETTLE_MS = 250
+NATIVE_TRACE_CATEGORIES = (
+    "devtools.timeline,disabled-by-default-devtools.timeline,blink.user_timing,loading"
+)
 DEFAULT_PAGES = (
     "index.html",
     "all-results.html",
@@ -56,6 +60,101 @@ def wait_for_fonts(page: Page) -> None:
     page.evaluate(_FONTS)
 
 
+def native_trace_summary(events: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    """Inclusive native phases and measured selector work; nested totals overlap."""
+    phases: dict[str, dict[str, float | int]] = {}
+    selectors: dict[str, dict[str, int]] = {}
+    for event in events:
+        if event.get("ph") == "X" and "dur" in event:
+            duration = event["dur"] / 1000
+            phase = phases.setdefault(
+                event["name"], {"count": 0, "inclusive_ms": 0.0, "max_ms": 0.0}
+            )
+            phase["count"] += 1
+            phase["inclusive_ms"] += duration
+            phase["max_ms"] = max(phase["max_ms"], duration)
+        timings = event.get("args", {}).get("selector_stats", {}).get("selector_timings", [])
+        for timing in timings:
+            selector_row = selectors.setdefault(
+                timing["selector"], {"elapsed_us": 0, "match_attempts": 0, "match_count": 0}
+            )
+            selector_row["elapsed_us"] += timing["elapsed (us)"]
+            selector_row["match_attempts"] += timing["match_attempts"]
+            selector_row["match_count"] += timing["match_count"]
+    return {
+        "event_count": len(events),
+        "interpretation": "inclusive phases overlap; tracing overhead; no gate timing credit",
+        "phases": dict(
+            sorted(phases.items(), key=lambda item: item[1]["max_ms"], reverse=True)
+        ),
+        "selectors": [
+            {"selector": selector, **data}
+            for selector, data in sorted(
+                selectors.items(), key=lambda item: item[1]["elapsed_us"], reverse=True
+            )[:20]
+        ],
+    }
+
+
+def record_native_trace(page: Page, destination: Path) -> Callable[[], None]:
+    """Capture initial native style/layout/paint work separately from gate credit.
+
+    The optional diagnostic adds tracing overhead. Raw CDP events remain intact, and
+    an existing receipt is never overwritten."""
+    if destination.exists():
+        raise FileExistsError(f"native trace already exists: {destination}")
+    session = page.context.new_cdp_session(page)
+    events: list[dict[str, Any]] = []
+    completion: dict[str, Any] | None = None
+
+    def collected(parameters: dict[str, Any]) -> None:
+        events.extend(parameters["value"])
+
+    def finished(parameters: dict[str, Any]) -> None:
+        nonlocal completion
+        completion = dict(parameters)
+
+    session.on("Tracing.dataCollected", collected)
+    session.on("Tracing.tracingComplete", finished)
+    session.send(
+        "Tracing.start",
+        {
+            "categories": NATIVE_TRACE_CATEGORIES,
+            "options": "recordUntilFull",
+            "transferMode": "ReportEvents",
+        },
+    )
+
+    def stop() -> None:
+        try:
+            session.send("Tracing.end")
+            deadline = time.monotonic() + 10
+            while completion is None:
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("native tracing did not finish within 10 seconds")
+                page.wait_for_timeout(10)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            with destination.open("x", encoding="utf-8") as output:
+                json.dump(
+                    {
+                        "traceEvents": events,
+                        "summary": native_trace_summary(events),
+                        "diagnostic": {
+                            "overhead": "native tracing enabled; no gate timing credit",
+                            "categories": NATIVE_TRACE_CATEGORIES,
+                            "url": page.url,
+                            "browser": session.send("Browser.getVersion"),
+                            "tracingComplete": completion,
+                        },
+                    },
+                    output,
+                )
+        finally:
+            session.detach()
+
+    return stop
+
+
 def measure(
     browser: Browser,
     url: str,
@@ -63,6 +162,7 @@ def measure(
     width: int,
     scheme: Literal["light", "dark"],
     javascript: bool = True,
+    trace: Path | None = None,
 ) -> dict[str, Any]:
     """Measure one navigation without reusing a cache or a browser context."""
     context = browser.new_context(
@@ -70,6 +170,7 @@ def measure(
         color_scheme=scheme,
         java_script_enabled=javascript,
     )
+    stop_trace: Callable[[], None] | None = None
     try:
         if javascript:
             install_observer(context)
@@ -84,11 +185,15 @@ def measure(
                 else None
             ),
         )
+        stop_trace = record_native_trace(page, trace) if trace is not None else None
         response = page.goto(url, wait_until="load", timeout=30_000)
         if response is None or not response.ok:
             raise ValueError(f"navigation failed: {url}")
         wait_for_fonts(page)
         page.wait_for_timeout(SETTLE_MS)
+        if stop_trace is not None:
+            finish_trace, stop_trace = stop_trace, None
+            finish_trace()
         reports = [read_report(page)]
         for fraction in (0.5, 1.0):
             page.evaluate(_SCROLL, fraction)
@@ -97,9 +202,16 @@ def measure(
         report = dict(reports[-1])
         report["unreadableMath"] = max(row["unreadableMath"] for row in reports)
         report["errors"] = errors
+        if trace is not None:
+            report["diagnosticTrace"] = str(trace)
+            report["timingCredit"] = "diagnostic only; tracing overhead included"
         return report
     finally:
-        context.close()
+        try:
+            if stop_trace is not None:
+                stop_trace()
+        finally:
+            context.close()
 
 
 def problems(report: dict[str, Any], *, javascript: bool = True) -> list[str]:
@@ -144,6 +256,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("directory", type=Path)
     parser.add_argument("--page", action="append")
     parser.add_argument("--runs", type=int, default=1)
+    parser.add_argument(
+        "--trace",
+        type=Path,
+        help="save one initial native CDP trace; includes diagnostic overhead",
+    )
+    parser.add_argument(
+        "--trace-scenario",
+        choices=("1280-light", "1280-dark", "390-light", "390-dark"),
+        default="1280-light",
+        help="which existing viewport/theme pair to trace; the full gate still runs",
+    )
     args = parser.parse_args(argv)
     if args.runs < 1:
         parser.error("--runs must be positive")
@@ -154,6 +277,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error(str(error))
     if not names or any(not (args.directory / path).is_file() for path in paths):
         parser.error("every selected page must exist, and the selection must be nonempty")
+    if args.trace is not None and (len(names) != 1 or args.runs != 1):
+        parser.error("--trace requires exactly one page and one run")
+    if args.trace is not None and args.trace.exists():
+        parser.error("--trace refuses to overwrite an existing receipt")
     failures: list[str] = []
     results: list[dict[str, Any]] = []
     server = serve(args.directory, 0, as_pages=True)
@@ -166,7 +293,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                     for width in (1280, 390):
                         for scheme in ("light", "dark"):
                             samples = [
-                                measure(browser, f"{base}/{name}", width=width, scheme=scheme)
+                                measure(
+                                    browser,
+                                    f"{base}/{name}",
+                                    width=width,
+                                    scheme=scheme,
+                                    trace=args.trace
+                                    if args.trace_scenario == f"{width}-{scheme}"
+                                    else None,
+                                )
                                 for _ in range(args.runs)
                             ]
                             report = dict(samples[0])

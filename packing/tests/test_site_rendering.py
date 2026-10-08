@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import json
 import re
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
+from unittest.mock import Mock
 from urllib.parse import urlsplit
 
 import pytest
@@ -418,3 +420,91 @@ def test_results_prose_fallback_preserves_reader_choices(
         assert check_site_rendering.read_report(page)["unreadableMath"] == 0
     finally:
         context.close()
+
+
+def test_native_trace_retains_full_events_and_marks_diagnostic_overhead(tmp_path: Path) -> None:
+    page = Mock()
+    page.url = "http://127.0.0.1/papers/n11-threshold-bound-review.html"
+    session = page.context.new_cdp_session.return_value
+    callbacks: dict[str, Callable[[dict[str, Any]], None]] = {}
+
+    def on(name: str, callback: Callable[[dict[str, Any]], None]) -> None:
+        callbacks[name] = callback
+
+    session.on.side_effect = on
+    session.send.return_value = {"product": "test Chromium"}
+    destination = tmp_path / "native.json"
+    stop = check_site_rendering.record_native_trace(cast("Page", page), destination)
+    events = [
+        {"name": "UpdateLayoutTree", "ph": "X", "dur": 351000, "args": {"data": {"nodeId": 7}}},
+        {"name": "Paint", "ph": "X", "dur": 8000, "args": {"frame": "initial"}},
+    ]
+    callbacks["Tracing.dataCollected"]({"value": events[:1]})
+    callbacks["Tracing.dataCollected"]({"value": events[1:]})
+    callbacks["Tracing.tracingComplete"]({"dataLossOccurred": False})
+    stop()
+    payload = json.loads(destination.read_text())
+    assert payload["traceEvents"] == events
+    assert payload["diagnostic"]["url"] == page.url
+    assert payload["diagnostic"]["tracingComplete"] == {"dataLossOccurred": False}
+    assert "no gate timing credit" in payload["diagnostic"]["overhead"]
+    session.detach.assert_called_once()
+    assert check_site_rendering.LONGEST_TASK_LIMIT_MS == 300
+
+
+def test_native_trace_refuses_to_overwrite_unique_evidence(tmp_path: Path) -> None:
+    destination = tmp_path / "native.json"
+    destination.write_text("retained actual receipt")
+    page = Mock()
+    with pytest.raises(FileExistsError, match="already exists"):
+        check_site_rendering.record_native_trace(cast("Page", page), destination)
+    assert destination.read_text() == "retained actual receipt"
+    page.context.new_cdp_session.assert_not_called()
+
+
+def test_native_trace_detaches_and_refuses_an_incomplete_capture(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    page = Mock()
+    session = page.context.new_cdp_session.return_value
+    destination = tmp_path / "native.json"
+    stop = check_site_rendering.record_native_trace(cast("Page", page), destination)
+    times = iter((0, 11))
+    monkeypatch.setattr(check_site_rendering.time, "monotonic", lambda: next(times))
+    with pytest.raises(TimeoutError, match="did not finish"):
+        stop()
+    session.detach.assert_called_once()
+    assert not destination.exists()
+
+
+def test_native_trace_summary_reports_inclusive_work_without_changing_events() -> None:
+    events = [
+        {"name": "Layout", "ph": "X", "dur": 12000},
+        {"name": "Layout", "ph": "X", "dur": 4000},
+        {"name": "Paint", "ph": "X", "dur": 500},
+        {
+            "name": "SelectorStats",
+            "args": {
+                "selector_stats": {
+                    "selector_timings": [
+                        {
+                            "selector": ".actual",
+                            "elapsed (us)": 25,
+                            "match_attempts": 7,
+                            "match_count": 3,
+                        }
+                    ]
+                }
+            },
+        },
+    ]
+    preserved = json.dumps(events, sort_keys=True)
+    summary = check_site_rendering.native_trace_summary(events)
+    assert summary["event_count"] == 4
+    assert summary["phases"]["Layout"] == {"count": 2, "inclusive_ms": 16.0, "max_ms": 12.0}
+    assert summary["selectors"] == [
+        {"selector": ".actual", "elapsed_us": 25, "match_attempts": 7, "match_count": 3}
+    ]
+    assert "overlap" in summary["interpretation"]
+    assert "no gate timing credit" in summary["interpretation"]
+    assert json.dumps(events, sort_keys=True) == preserved
