@@ -5,7 +5,7 @@ title: Review current PR reports and plan separate import and verification slice
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -18,10 +18,11 @@ child_order_hints:
   - is-01m4c488sqxczxzx6d60fhqxbz
   - is-01m4c489df06vnyyd5fczynnkk
   - is-01m4cda8f0tb77q5jc9vp2azba
+  - is-01m4cdj4a77gstaf2krs9wr251
 hold: null
 hold_until: null
 created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T00:07:13.764Z
+updated_at: 2026-10-08T00:10:41.351Z
 started_at: 2026-10-07T19:28:52.536Z
 ---
 User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.

@@ -5,15 +5,17 @@ title: "Issue422: retain canonical nine-case exact confirmation and proof custod
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 parent_id: is-01m4c486bvartgwnk1s2szjz8x
+child_order_hints:
+  - is-01m4cdj4xvndxnrt6cw38acpxb
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:03:18.355Z
-updated_at: 2026-10-08T00:10:01.004Z
+updated_at: 2026-10-08T00:10:41.979Z
 started_at: 2026-10-08T00:07:08.295Z
 ---
 Engineeringowner issue422_replay_engineering preparesnewcanonicalupperadapter outsidecheckouts. Preserveactual27 full historicalreceiptinputs/9positives18full-rostercontrols/two distinctcompleteinputreviews plusexplicitcanonical metadata transform and wholegeometryidentity. Own9proofpaths, strictboundedpercaseXZ, restore/preflight/read/index/mutationcontainment; preservealloldpackets/records/reviews/credit. Current395235B minimal5unconsumedjournal privatecopyprune repairsreportedcap; upperneedsfurtheractualstoragecensus/consumeraudit. No cap/time/reader relaxation or newdeciderrerun. NeedsformalstackdraftaboveT116reported+exactheadstrongintegrationreviews/allcurrentCI/gates/live beforepromotionmainclaims.
