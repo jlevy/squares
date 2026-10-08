@@ -16,6 +16,7 @@ import json
 import lzma
 import re
 import tempfile
+from collections.abc import Iterable
 from fractions import Fraction
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -730,7 +731,7 @@ def read_certificate(n: int) -> dict[str, Any]:
     if len(data) > original.MAX_RECEIPT_BYTES:
         raise original.PacketError("canonical certificate exceeds ceiling")
     document = safe_load(data.decode())
-    if document.get("softschema") != {
+    if not isinstance(document, dict) or document.get("softschema") != {
         "schema": "../witness.schema.yaml",
         "contract": "packing.squares:Witness/v2",
         "envelope": "witness",
@@ -780,10 +781,7 @@ def check_certification(
         raise original.PacketError("empty, repeated or unknown canonical confirmation scope")
     rows = admit_certification()
     for n in selected:
-        expected = to_witness(read_fact(n))
-        actual = read_certificate(n)
-        if shared.json_bytes(actual) != shared.json_bytes(expected):
-            raise original.PacketError("canonical whole witness metadata/geometry mismatch")
+        _check_certificate(n)
         if replay:
             for name, retained in zip(
                 JOBS, rows[n]["case"]["historical_actual_receipts"], strict=True
@@ -795,6 +793,13 @@ def check_certification(
                         "canonical replay differs from historical exact verdict"
                     )
     return rows
+
+
+def _check_certificate(n: int) -> None:
+    expected = to_witness(read_fact(n))
+    actual = read_certificate(n)
+    if shared.json_bytes(actual) != shared.json_bytes(expected):
+        raise original.PacketError("canonical whole witness metadata/geometry mismatch")
 
 
 def restore_witnesses() -> None:
@@ -815,17 +820,42 @@ def restore_witnesses() -> None:
 
 
 def linked_certificate_problem(path: str, *, repository: Path) -> str | None:
+    return linked_certificate_problems([path], repository=repository)[path]
+
+
+def linked_certificate_problems(
+    paths: Iterable[str], *, repository: Path
+) -> dict[str, str | None]:
+    """Admit one invocation's complete custody, then check every selected leaf freshly."""
+    selected = dict.fromkeys(paths)
     if repository.resolve() != REPO.resolve() or not WITNESSES.is_symlink():
-        return "resolves outside the repository"
+        return dict.fromkeys(selected, "resolves outside the repository")
     declared = {certificate_path(n).relative_to(REPO).as_posix(): n for n in NUMBERS}
-    n = declared.get(path)
-    if n is None or certificate_path(n).is_symlink():
-        return "resolves outside the repository"
+    eligible: dict[str, int] = {}
+    problems: dict[str, str | None] = {}
+    for path in selected:
+        n = declared.get(path)
+        if n is None or certificate_path(n).is_symlink():
+            problems[path] = "resolves outside the repository"
+        else:
+            eligible[path] = n
+    if not eligible:
+        return problems
     try:
-        check_certification([n])
+        _ = admit_certification()
     except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
-        return f"linked second-update proof custody mismatch: {error}"
-    return None
+        problems.update(
+            dict.fromkeys(eligible, f"linked second-update proof custody mismatch: {error}")
+        )
+        return problems
+    for path, n in eligible.items():
+        try:
+            _check_certificate(n)
+        except (original.PacketError, OSError, KeyError, TypeError, ValueError) as error:
+            problems[path] = f"linked second-update proof custody mismatch: {error}"
+        else:
+            problems[path] = None
+    return problems
 
 
 def confirmed_bound(n: int) -> dict[str, Any]:
@@ -869,6 +899,14 @@ def _adopt_verified(n: int, existing: str, generated: str | None, bound: dict[st
         raise original.PacketError(
             "selected confirmation ceiling differs from admitted evidence"
         )
+    # Direct re-publication of the same confirmed pose keeps its owned assessment.
+    # A generator draft leaves assessment to its separate promotion step, and initial
+    # confirmation cannot transfer rigidity from the earlier geometry.
+    current_rigidity = (
+        copy.deepcopy(case["rigidity"])
+        if generated is None and EXACT_EVIDENCE in declarations
+        else None
+    )
     # The reported-only owner still rebuilds its own report and lower/history lanes.
     # Its temporary older verified lane is replaced only after complete admission.
     case["verified_upper_bound"] = copy.deepcopy(prior["prior_verified"])
@@ -881,9 +919,14 @@ def _adopt_verified(n: int, existing: str, generated: str | None, bound: dict[st
     )
     adapted = reported.adopt_report(n, provisional, generated)
     _, front, body = adapted.split("---\n", 2)
+    body = body.replace(
+        "## Earlier SQUISH update\n\nNate Chaoweeraprasit",
+        "## Earlier SQUISH update\n\nPreviously, Nate Chaoweeraprasit",
+    )
     document = safe_load(front)
     case = document["packing"]
     case["verified_upper_bound"] = bound
+    case["rigidity"] = current_rigidity
     conjecture = prior["prior_conjectured_optimum"]
     if conjecture is not None and Fraction(bound["exact_form"]) < Fraction(conjecture):
         pending_claim = (
@@ -946,12 +989,17 @@ def _adopt_verified(n: int, existing: str, generated: str | None, bound: dict[st
     )
     if count != 1:
         raise original.PacketError("confirmation needs exactly one current report section")
-    return render_case_verifiers.refresh(
+    rendered = render_case_verifiers.refresh(
         "---\n"
         + yaml.safe_dump(document, sort_keys=False, allow_unicode=True, width=98)
         + "---\n"
         + body
     )
+    if current_rigidity is not None:
+        from devtools.assess_frontier_rigidity import preserve_block_rendering  # noqa: PLC0415
+
+        rendered = preserve_block_rendering(existing, rendered, n)
+    return rendered
 
 
 def main() -> None:

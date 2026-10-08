@@ -90,6 +90,14 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/squish_second_update_confirmation.py": (
+        "publishes the admitted complete exact replay as a feasible upper ceiling, "
+        "retaining earlier ceilings and refusing optimality claims"
+    ),
+    "packing/tests/test_squish_second_update_confirmation.py": (
+        "checks complete replay custody and preservation of earlier upper ceilings; "
+        "the confirmed feasible construction does not establish s(n)"
+    ),
     "packing/devtools/squish_second_update_packets.py": (
         "preserves the previous independently certified ceiling while adopting a stronger "
         "second-update source report; the historical ceiling is never promoted to the "

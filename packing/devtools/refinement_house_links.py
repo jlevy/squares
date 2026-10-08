@@ -56,6 +56,22 @@ def validate_metadata(n: int, value: dict[str, Any]) -> None:
     house.shared.validate_verdict(result, n, passed=True)
     if (
         value != expected_metadata(n, result)
+        or set(result)
+        != {
+            "operation",
+            "id",
+            "coordinate_provenance",
+            "method",
+            "verification_passed",
+            "n",
+            "side",
+            "pairs_tested",
+            "minimum_containment_clearance",
+            "minimum_best_pair_gap",
+            "field_certificate",
+            "failures",
+            "limitations",
+        }
         or result["id"] != f"W-known-best-n{n:03d}"
         or result["operation"] != "verify"
         or result["coordinate_provenance"] != "verified"
@@ -63,6 +79,8 @@ def validate_metadata(n: int, value: dict[str, Any]) -> None:
         or result["side"] != packets.read_fact(source(n), n)["side"]
         or result["field_certificate"]
         != {"field": "Q", "preconditions": "degree-one rational field"}
+        or result["limitations"]
+        != "Verifies witness feasibility and its upper bound, not global optimality."
     ):
         raise ValueError("refinement house metadata differs from private facts")
     index = custody.read_index()
@@ -132,6 +150,15 @@ def snapshot_house_links() -> tuple[Path, ...]:
     controls = safe_load((REPO / "packing/devtools/controls.yaml").read_text())
     private = {(REPO / "packing" / row["file"]).resolve() for row in controls["controls"]}
     return tuple(house_path(n) for n in NUMBERS if house_path(n) not in private)
+
+
+def private_input_paths() -> tuple[Path, ...]:
+    """Minimal complete scientific custody copied before read-only atlas links."""
+    return (
+        METADATA,
+        custody.INDEX,
+        *(packets.fact_path(source(n), n) for n in NUMBERS),
+    )
 
 
 def linked_house_problem(path: str, *, repository: Path) -> str | None:

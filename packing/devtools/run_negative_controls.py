@@ -628,6 +628,7 @@ LINK_BACK = (
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
     *second.private_input_paths(),
+    *refinements.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",

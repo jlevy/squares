@@ -7,6 +7,8 @@ import gzip
 import json
 import lzma
 import shutil
+import subprocess
+import sys
 from fractions import Fraction
 from pathlib import Path
 
@@ -15,6 +17,7 @@ import pytest
 from devtools import refinement_custody as custody
 from devtools import refinement_house_links as houses
 from devtools import refinement_packets as packets
+from devtools import run_negative_controls as controls
 
 SOURCE = packets.REPO
 
@@ -132,3 +135,42 @@ def test_linked_house_changed_complete_geometry_is_refused(
     leaf.symlink_to(changed)
     with pytest.raises(ValueError, match="complete refinement geometry"):
         houses.check_houses([292])
+
+
+@pytest.mark.parametrize("change", ["limitations", "extra"])
+def test_n68_certificate_result_cannot_claim_more(private: Path, change: str) -> None:
+    assert private == packets.REPO
+    rows = json.loads(lzma.decompress(houses.METADATA.read_bytes()))
+    result = rows[0]["metadata"]["certificate"]["result"]
+    if change == "limitations":
+        result["limitations"] = "Global optimality has been proved."
+    else:
+        result["global_optimality"] = True
+    with pytest.raises(ValueError, match="metadata differs"):
+        houses.validate_metadata(68, rows[0]["metadata"])
+
+
+def test_production_snapshot_copies_complete_refinement_custody(tmp_path: Path) -> None:
+    carried = {*controls.COPY_SEPARATELY, *controls.snapshot_pruned_targets()}
+    assert set(houses.private_input_paths()) <= carried
+    tree = tmp_path / "worker"
+    controls.clone_tree(tree)
+    for path in houses.private_input_paths():
+        copied = tree / path.relative_to(SOURCE)
+        assert copied.is_file()
+        assert not copied.is_symlink()
+        assert copied.read_bytes() == path.read_bytes()
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "from devtools.refinement_house_links import check_houses; check_houses()",
+        ],
+        cwd=tree / controls.HERE,
+        env=controls.control_environment(tree, tmp_path / "pycache"),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert controls.snapshot_source_bytes() <= controls.SNAPSHOT_MAX_BYTES
