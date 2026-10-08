@@ -27,9 +27,10 @@ three numeric-only cases: $n = 29,55,71$. The child is expected to reach 321 exa
 identities after its $n = 83$ polynomial is replayed; its refreshed register has not yet
 been generated or verified.
 Each remaining numeric-only case has a specific route and bead.
-The source corpus is bounded by the retained comparison catalogues, explicit thematic
-locators, and the pinned SVG readings; this is a complete extraction of that corpus, not
-a claim that every polynomial ever published has been found.
+Ideal contact-system research remains open separately from the identity of a finite
+certified bound. The source corpus is bounded by the retained comparison catalogues,
+explicit thematic locators, and the pinned SVG readings; this is a complete extraction
+of that corpus, not a claim that every polynomial ever published has been found.
 
 ## Current Register and Continuation
 
@@ -330,7 +331,7 @@ A delivery-recovery worker checks earlier claimed output.
 | Block | Entry and deliverable | Disposition |
 | --- | --- | --- |
 | 1 | W1: source survey, pinned SVG facts, complete bounded historical extraction | Retained in the source packet; zero undecoded occurrences |
-| 2 | W7: exact admission and historical projection | Original collection checkpoint: 270 current exact sides and 162 historical entries |
+| 2 | W7: exact admission and historical projection | Initial 2026-10-07 collection: 270 current exact sides and 162 historical entries |
 | 3 | W2 review of W1/W7: independent source, irreducibility and real-root checks | Correctness findings fixed; review retained |
 | 4 | W7 **efficiency block**: exact interior-sign root comparisons | Full mathematical replay preserved; initial replay reduced to 31.67 s locally |
 | 5 | W7: generated paper, site wiring and import documentation | HTML/Markdown/PDF renderer and publication contracts implemented |
@@ -338,6 +339,7 @@ A delivery-recovery worker checks earlier claimed output.
 | 7 | W7: final checks, PR, delivery audit and replanning | Final validation is reported in the PR; unavailable earlier outputs remain an explicit dependency |
 | 8 | W7: upstream integration and PDF storage maintenance (`think-okcb`) | Earlier 2026-10-08 checkpoint: 287 current exact values, 170 historical identities and 37 numeric routes; 13 original PDFs hosted outside Git and a universal 5 MiB tracked-PDF gate |
 | 9 | W7: upstream CI contract repair | Rational refresh, hosted citation identity, publication payloads, snapshot custody, measured suite admissions and startup delay controls repaired; independent Astra review passed |
+| 10 | W7: recovered stack, verified-bound identities and work map (`think-jygq`, `think-808n`) | Original 2026-10-08 A1 checkpoint: rebased both layers through the stacked-PR shortcut; 33 replay-backed rational identities projected without changing case bounds or proof status; four representation gaps then remained |
 
 The two stack layers have separate registers.
 At the earlier 2026-10-08 CI-repair checkpoint, PR 403 had 286 exact current values, one
@@ -345,6 +347,11 @@ degree-only value at $n = 83$, 37 numeric-only values and 18 legacy historical n
 PR 435 supplied the $n = 83$ polynomial and full 170-entry historical collection.
 Both retained 77 proved cases.
 The refreshed parent and pending child partitions are recorded above.
+
+At the later original A1 checkpoint on 2026-10-08, the parent had 319 exact identities,
+one degree-only row and four numeric-only cases; the child had 320 exact identities and
+the same four gaps, with 170 historical entries.
+Those are pre-PR-434 observations, not the refreshed census.
 
 The integration repair beads are `think-3y4q`, `think-uy3e`, `think-9sgi`, `think-kfpc`,
 `think-qr37` and `think-s5ou`, under `think-okcb`. At that earlier checkpoint, the
@@ -404,16 +411,16 @@ relation alone is insufficient.
 | Bead | Counts | Next work and dependency |
 | --- | --- | --- |
 | `think-1atr` | 126 | Recover the current witness/KKT contact system; the retained SVG has a different side and the three historical polynomials do not identify the current record |
-| `think-ohhz` | 102, 106, 152, 172, 177, 199, 206, 207, 268, 297, 301 | Audit and admit the eleven earlier claimed identifications (including an unconfirmed KKT seed at 177) only after `think-s6np` recovers or reproduces their outputs |
-| `think-056g` | 68, 103, 110, 123, 131, 132, 154, 155, 156 | Low-count precision/degree sweep after the reusable driver is delivered by `think-s6np` |
-| `think-d2kj` | 180, 181, 182, 208, 209, 210, 228, 236, 237, 238, 239, 240, 241 | Middle-count sweep, same dependency |
-| `think-gg4k` | 259, 269, 270, 271, 273, 302, 303, 304, 305, 306, 307 | High-count sweep, same dependency; preserve historical/invalid source distinctions |
+| `think-ohhz` | 102, 106, 152, 172, 177, 199, 206, 207, 268, 297, 301 | Recover or reproduce all eleven claimed ideal-side identifications through `think-s6np`; establish a confirmed KKT seed at 177; treat 199 and 207 as displaced branches |
+| `think-056g` | 68, 103, 110, 123, 131, 132, 154, 155, 156 | Low-count ideal-side precision/degree sweep after the reusable driver is delivered by `think-s6np` |
+| `think-d2kj` | 180, 181, 182, 208, 209, 210, 228, 236, 237, 238, 239, 240, 241 | Middle-count ideal-side sweep, same dependency; preserve current and displaced-side distinctions |
+| `think-gg4k` | 259, 269, 270, 271, 273, 302, 303, 304, 305, 306, 307 | High-count ideal-side sweep, same dependency; preserve historical and source-invalid distinctions |
 | `think-gl59` | 105 | Establish a current contact system and confirmed KKT seed |
 | `think-hg9i` | 130 | Establish a current contact system and confirmed KKT seed |
 | `think-uc8i` | 211 | Replace the batch’s bound-only value with a confirmed KKT seed |
 | `think-is2e` | 263 | Replace the batch’s bound-only value with a confirmed KKT seed |
 | `think-olv8` | 272 | Replace the batch’s bound-only value with a confirmed KKT seed |
-| `think-w622` | 292 | Establish a current contact system and confirmed KKT seed |
+| `think-w622` | 292 | Establish a current contact system and confirmed KKT seed; its finite rational refinement is already represented |
 
 At the earlier upstream-integration checkpoint, 17 former numeric cases became certified
 rational current values and left the numeric-only map.
@@ -421,8 +428,10 @@ Their contact and stationarity work stays open where it seeks an ideal algebraic
 rather than the finite rational certificate.
 In particular, `think-1atr` at 126, `think-hg9i` at 130 and `think-is2e` at 263 retain
 their contact-system obligations.
-A linear polynomial for a feasible witness side does not close those research questions
-or prove optimality.
+`think-eu89` retains the original batch routing and KKT diagnostics; it does not define
+the current numeric-only count.
+A linear polynomial for a feasible witness side neither closes those research questions
+nor proves optimality.
 The upstream integration is `think-5lcy` and the hosted-PDF migration is `think-286j`,
 under `think-okcb`.
 
@@ -437,19 +446,30 @@ coefficient lower bound; numerical eliminant residuals do not prove exact linkag
 
 Additional work:
 
+- **Driver assurance labels (`think-yuqy`).** Quarantine `probe_system_degree`,
+  `probe_minimal_polynomial` and `probe_elimination` as candidate/export diagnostics
+  before driver reuse.
+  Their Bézout, bounded PSLQ and numerical-residual outputs cannot establish
+  degree/coefficient lower bounds, exact ideal membership or real geometry.
+  Preserve scoped search negatives and distinguish operational refusals from them.
+
 - **Delivery recovery (`think-s6np`).** The original delivery audit found five commits
   and a generic producer named by closed `think-qgt4` and `think-ifc9` absent from that
   branch, remote deliveries and local worktrees.
   PR 403 then had four delivered commits; its originating Claude session was
-  inaccessible. The eleven claimed ideal results remain unadmitted.
+  inaccessible. The eleven claimed ideal results remain unadmitted; the finite rational
+  projection does not depend on those missing deliveries.
   This recovery has already retained the native $n = 11$ and $n = 102$ inputs from
   `evand/square-packing@13ee36e5807727d12a5da36b9b90a96bdba272bf` and checked them
   against `acquisition/upstream-subtree.sha256`. All 320 batch inputs are digest-pinned;
   only these two were selected for recovery.
   The undelivered W7 dependency is the reusable full-active-system driver with an exact
-  half-angle export. After delivery, prove the known $n = 11$ octic from contacts as its
-  control, then preregister one bounded $n = 102$ W6 slice in `think-ohhz`. This
-  recovery has executed no solver, contact-derived control or bounded search.
+  half-angle export. It must retain the full active/weak/forced contact system, frozen
+  variables, precision and residuals, and export exact polynomials with denominator
+  exclusions. Generating digits from the known polynomial is only search calibration.
+  After delivery, prove the known $n = 11$ octic from contacts as its control, then
+  preregister one bounded $n = 102$ W6 slice in `think-ohhz`. This recovery has executed
+  no solver, contact-derived control or bounded search.
 
 - **Independent contact derivations (`think-o0az`).** After delivery recovery,
   independently rederive the small-degree catalogue cases (28, 39, 37, 70, 153, 11)
@@ -476,11 +496,14 @@ Additional work:
   copy-heavy timing assumptions under external scratch storage.
   Keep declared gate budgets and the required external-storage policy intact.
 
-The selected next entry is **W7 `think-s6np`**, followed by the known $n = 11$
-contact-derived control and then one bounded $n = 102$ W6 slice in `think-ohhz`; the
-independent $n = 55$ and $71$ elimination lanes can proceed in parallel.
-The continuation epic stays open while these identification and witness obligations
-remain.
+The selected next entry is **W7 `think-s6np` driver delivery**, followed by the known
+$n = 11$ contact-derived control and then one bounded $n = 102$ W6 slice in
+`think-ohhz`. The independent $n = 29,55,71$ elimination lanes can proceed in parallel;
+the $n = 105$ system/seed lane remains ideal research.
+Each experiment enters W6 with its own hypothesis and acceptance rule; a relation for an
+ideal side must not replace a different finite certificate merely because their printed
+decimals are close. The continuation epic stays open while these identification and
+witness obligations remain.
 
 ## Validation and Acceptance
 
@@ -491,6 +514,11 @@ Regressions include perturbed coefficients, a reducible polynomial, an alternate
 conjugate, rational approximations substituted for radical forms, a destination-side
 mismatch, inward-rounded error bounds, forged modular hints, and source flags or credits
 taken from neighboring rows.
+Verified-bound projection controls also refuse unequal fractions below displayed
+precision, wrong source/count/evidence scope, stale or missing custody/replay inputs,
+proved cases and replacement of existing algebraic identities.
+The retained pre-refinement $n = 292$ control keeps outward-ceiling provenance distinct
+from its native certificate side.
 
 The canonical web page adds search, section/kind/status filters and pagination.
 Individual records and exact coefficient strings load only when opened; numeric rows and
@@ -499,7 +527,7 @@ historical source-invalid or superseded rows keep their separate meanings.
 Astra review under `think-mo36`. The
 [bounded measurement](../../../../packing/benchmarks/exact-catalogue-web/report.md)
 checks the predeclared raw-byte threshold; complete archives preserve the full record.
-The selected mathematical continuation remains `think-s6np`.
+The selected mathematical continuation remains W7 driver delivery in `think-s6np`.
 
 The final full checkpoint exercises the shared case-record browser as well.
 `think-gtyf` tracks synchronous case-popover close state, with a deterministic
