@@ -63,7 +63,7 @@
   return {
     view: block.dataset.atlasView ?? null,
     size: block.dataset.atlasSize ?? null,
-    per_line: Number(cells.style.getPropertyValue("--site-atlas-per-line")) || null,
+    per_line: getComputedStyle(cells).gridTemplateColumns.split(/\s+/).length,
     cells: box(cells),
     block: box(block),
     panel: {
@@ -100,7 +100,7 @@
     moving: moving.length,
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     tiles: tiles.map((tile) => {
-      const drawing = tile.querySelector("svg");
+      const drawing = tile.querySelector("svg, img");
       const number = tile.querySelector(".site-atlas-n");
       const mark = tile.querySelector(".site-atlas-layer-mark");
       const star = tile.querySelector(".site-star");

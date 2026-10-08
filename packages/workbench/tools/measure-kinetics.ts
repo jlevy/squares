@@ -1,4 +1,3 @@
-import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { performance } from "node:perf_hooks";
 import { illustrationFrame, type MotionTrack } from "../src/animation/illustration.ts";
@@ -43,7 +42,7 @@ import {
   type Trajectory,
   type TrajectoryPhysicsConfiguration,
 } from "../src/simulation/trajectory.ts";
-import { candidateCorpus } from "./check-candidate-corpus.ts";
+import { readCorpus } from "./check-candidate-corpus.ts";
 import {
   analyzeMotionTrace,
   identicalMotionFrames,
@@ -359,9 +358,7 @@ function boundedLaw(
 }
 
 async function loadCorpus(path: string): Promise<Corpus> {
-  const source = await readFile(path, "utf8");
-  const value = source.trimStart().startsWith("{") ? JSON.parse(source) : candidateCorpus(source);
-  return decodeCorpus(value);
+  return decodeCorpus(await readCorpus(path));
 }
 
 function transition(corpus: Corpus, instance: number): { pairIndex: number; pair: CorpusPair } {

@@ -12,11 +12,12 @@ import ast
 import copy
 import gzip
 import hashlib
+import io
 import json
 import lzma
 import re
 import tempfile
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from fractions import Fraction
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -93,11 +94,23 @@ def private_input_paths() -> tuple[Path, ...]:
     )
 
 
-def read_fact(n: int) -> dict[str, Any]:
+def _fact_bytes(n: int) -> bytes:
     path = fact_path(n)
     if path.stat().st_size > original.MAX_SOURCE_BYTES:
         raise original.PacketError("compressed confirmation facts exceed ceiling")
-    with gzip.open(path, "rb") as stream:
+    with path.open("rb") as stream:
+        compressed = stream.read(original.MAX_SOURCE_BYTES + 1)
+    if len(compressed) > original.MAX_SOURCE_BYTES:
+        raise original.PacketError("compressed confirmation facts exceed ceiling")
+    return compressed
+
+
+def read_fact(n: int) -> dict[str, Any]:
+    return _parse_fact(n, _fact_bytes(n))
+
+
+def _parse_fact(n: int, compressed: bytes) -> dict[str, Any]:
+    with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:
         raw = stream.read(original.MAX_SOURCE_BYTES + 1)
     if len(raw) > original.MAX_SOURCE_BYTES:
         raise original.PacketError("confirmation facts exceed ceiling")
@@ -176,6 +189,10 @@ def _metadata_from_checked_input(
 
 
 def acquisition() -> dict[int, Any]:
+    return _acquisition(read_fact)
+
+
+def _acquisition(fact_for: Callable[[int], dict[str, Any]]) -> dict[int, Any]:
     value = shared.read_review_json(PACKET / "acquisition/sources.json")
     if (
         value["source_commit"] != REVISION
@@ -186,7 +203,7 @@ def acquisition() -> dict[int, Any]:
         raise original.PacketError("confirmation acquisition identity mismatch")
     rows = shared.roster(value["cases"], NUMBERS)
     for n, row in rows.items():
-        fact = read_fact(n)
+        fact = fact_for(n)
         if (
             row["exact_side"] != fact["side"]
             or row["side"] != fact["printed_side"]
@@ -232,9 +249,27 @@ def validate_job(
     _validate_job(row, fact["n"], expected, protocol, name)
 
 
+def input_matching_checked(
+    value: dict[str, Any], checked: dict[str, Any], *, receipt: bool = False
+) -> dict[str, Any]:
+    """Reuse a whole validated input only for byte-equal semantic fields.
+
+    JSON equality preserves type distinctions such as True versus 1. A different
+    representation still goes through the original normalizer, including equivalent
+    noncanonical rational strings. Witness method dispatch is never bypassed.
+    """
+    if not receipt and type(value) is dict and type(value.get("claim")) is not dict:
+        raise original.PacketError("checker input requires exact-algebraic dispatch")
+    if type(value) is dict and (receipt or value["claim"].get("method") == "exact-algebraic"):
+        semantic = {key: value.get(key) for key in checked}
+        if shared.json_bytes(semantic) == shared.json_bytes(checked):
+            return checked
+    return original.checker_input(value, receipt=receipt)
+
+
 def _validate_job(
     row: Any, n: int, expected: dict[str, Any], protocol: dict[str, Any], name: str
-) -> None:
+) -> dict[str, Any]:
     if (
         type(row) is not dict
         or type(row.get("n")) is not int
@@ -251,9 +286,10 @@ def _validate_job(
         or shared.json_bytes(row.get("witness")) != shared.json_bytes(expected)
         or shared.json_bytes(row.get("checker_runtime"))
         != shared.json_bytes(protocol["historical_runtime"])
-        or original.checker_input(row["checker_input"], receipt=True)
-        != original.checker_input(expected)
     ):
+        raise original.PacketError("historical full replay identity/provenance/input mismatch")
+    checked = original.checker_input(expected)
+    if input_matching_checked(row["checker_input"], checked, receipt=True) != checked:
         raise original.PacketError("historical full replay identity/provenance/input mismatch")
     shared.seconds(row["wall_seconds"])
     summary_job = next(
@@ -281,6 +317,7 @@ def _validate_job(
         for checker in CHECKERS
     ):
         raise original.PacketError("both containment-control negative clearances are required")
+    return checked
 
 
 def reviewed_roster(path: Path) -> dict[tuple[int, str], Any]:
@@ -303,7 +340,16 @@ def reviewed_roster(path: Path) -> dict[tuple[int, str], Any]:
 def validate_case(
     value: Any, n: int, admitted: dict[int, Any], protocol: dict[str, Any]
 ) -> dict[str, Any]:
-    fact = read_fact(n)
+    return _validate_case(value, n, admitted, protocol, read_fact(n))
+
+
+def _validate_case(
+    value: Any,
+    n: int,
+    admitted: dict[int, Any],
+    protocol: dict[str, Any],
+    fact: dict[str, Any],
+) -> dict[str, Any]:
     if (
         type(value) is not dict
         or value.get("format") != CASE_FORMAT
@@ -339,11 +385,10 @@ def validate_case(
     positive = to_witness(fact)
     for name, actual, transform in zip(JOBS, rows, transforms, strict=True):
         expected = _historical_witness(positive, pin, protocol["source_custody_anchor"], name)
-        _validate_job(actual, n, expected, protocol, name)
+        historical_input = _validate_job(actual, n, expected, protocol, name)
         canonical = _canonical_witness(positive, name)
         historical = actual["witness"]
-        historical_input = original.checker_input(historical)
-        canonical_input = original.checker_input(canonical)
+        canonical_input = input_matching_checked(canonical, historical_input)
         expected_transform = {
             "kind": "canonical-publication-metadata-v1",
             "job": name,
@@ -382,6 +427,14 @@ def validate_case(
 
 def validate_protocol(protocol: dict[str, Any], admitted: dict[int, Any]) -> None:
     """Admit historical runtime roles, complete job summary and source attribution."""
+    _validate_protocol(protocol, admitted, read_fact)
+
+
+def _validate_protocol(
+    protocol: dict[str, Any],
+    admitted: dict[int, Any],
+    fact_for: Callable[[int], dict[str, Any]],
+) -> None:
     runtime = protocol["historical_runtime"]
     historical = "/workspace/squares-422-exact-replay-preparation"
     expected_runtime = {
@@ -429,7 +482,7 @@ def validate_protocol(protocol: dict[str, Any], admitted: dict[int, Any]) -> Non
         raise original.PacketError("historical job timing sum mismatch")
     pins = shared.roster(protocol["source_custody"]["cases"], NUMBERS)
     for n, pin in pins.items():
-        fact = read_fact(n)
+        fact = fact_for(n)
         if (
             pin["reported_seed"] != admitted[n]["reported_seed"]
             or pin["safe_ceiling_16"] != shared.display(fact["side"])
@@ -696,10 +749,18 @@ def retain_reviewed_replay(review_root: Path, math_root: Path, binding_root: Pat
         save(path, data)
 
 
-def admit_certification() -> dict[int, Any]:
+def _check_private_inputs() -> None:
     if any(not path.resolve().is_relative_to(REPO.resolve()) for path in private_input_paths()):
         raise original.PacketError("private confirmation input escapes the worker checkout")
-    admitted = acquisition()
+
+
+def admit_certification() -> dict[int, Any]:
+    _check_private_inputs()
+    # These exact bounded bytes and their validated meanings belong only to this call.
+    # Recheck bytes and custody before returning; no next admission inherits a cache.
+    compressed = {n: _fact_bytes(n) for n in NUMBERS}
+    facts = {n: _parse_fact(n, data) for n, data in compressed.items()}
+    admitted = _acquisition(facts.__getitem__)
     index = shared.read_xz_receipt(PACKET / "receipts/certification.json.xz")
     if (
         index["format"] != FORMAT
@@ -729,11 +790,11 @@ def admit_certification() -> dict[int, Any]:
         or [row["n"] for row in protocol["source_custody"]["cases"]] != list(NUMBERS)
     ):
         raise original.PacketError("retained replay protocol mismatch")
-    validate_protocol(protocol, admitted)
+    _validate_protocol(protocol, admitted, facts.__getitem__)
     validate_review_records(protocol)
     rows = shared.roster(index["cases"], NUMBERS)
     for n, row in rows.items():
-        fact = read_fact(n)
+        fact = facts[n]
         if (
             row["receipt"] != case_path(n).relative_to(PACKET).as_posix()
             or row["certificate"] != certificate_path(n).relative_to(REPO).as_posix()
@@ -743,8 +804,11 @@ def admit_certification() -> dict[int, Any]:
         ):
             raise original.PacketError("canonical proof path or safe bound mismatch")
         case = shared.read_xz_receipt(case_path(n))
-        validate_case(case, n, admitted, protocol)
+        _validate_case(case, n, admitted, protocol, fact)
         row["case"] = case
+    _check_private_inputs()
+    if any(_fact_bytes(n) != data for n, data in compressed.items()):
+        raise original.PacketError("confirmation facts changed during custody admission")
     return rows
 
 

@@ -19,7 +19,8 @@
 // `faces` is every face the document declares (`document.fonts`): family, weight, style,
 // `font-display`, whether its bytes are inlined or a file of the site's shared assets,
 // and whether it loaded. `root` is what
-// the page stamped on `<html>`, `katex` the KaTeX it runs, `publication` whether it
+// the page stamped on `<html>`, `katex` its checked running or prepared renderer,
+// `prepared_katex` the build-time version record, `publication` whether it
 // carries the papers' publication layer, `reading` whether it has a reading column at
 // all (the workbench and a result overview opened alone have none), `sans` and `prose`
 // the faces that lead the two text stacks, and `tokens` what the shared text tokens come
@@ -33,7 +34,9 @@
   const { wrappers, mark } = options;
   const wanted = new Set(options.tex ?? []);
   /** @param {string} family */
-  const first = (family) => (family.split(",")[0] ?? "").trim().replace(/^["']|["']$/g, "");
+  const faceName = (family) => family.trim().replace(/^["']|["']$/g, "");
+  /** @param {string} family */
+  const first = (family) => faceName(family.split(",")[0] ?? "");
   /** @param {number} value */
   const round = (value) => Math.round(value * 1000) / 1000;
   const canvas = document.createElement("canvas");
@@ -226,7 +229,7 @@
     /** @type {Map<string, Element>} */
     const found = new Map();
     for (const node of katex.querySelectorAll(".katex-html *")) {
-      if (!ownText(node)) {
+      if (!shown(node) || !ownText(node)) {
         continue;
       }
       const style = getComputedStyle(node);
@@ -259,13 +262,18 @@
     const drawn = drawing(katex);
     const around = drawing(host);
     const glyphs = runs(katex);
-    const tex = katex.querySelector("annotation")?.textContent ?? "";
+    // A prepared formula keeps its one semantic MathML subtree beside the visual
+    // wrapper. Associate only this formula's host, never a surrounding paragraph.
+    const prepared = katex.closest('[data-kpress-math-prepared="true"]');
+    const semantic = prepared?.closest(".kpress-math") ?? prepared ?? katex;
+    const mathml = semantic.querySelectorAll("math");
+    const tex = semantic.querySelector("annotation")?.textContent ?? "";
     const setting = {
       surface: surfaces.find(([selector]) => host.closest(selector))?.[1] ?? "prose",
       layout: display ? "display" : "inline",
       typeset:
         (katex.querySelector(".katex-html") ? "KaTeX HTML" : "no HTML") +
-        (katex.querySelector(".katex-mathml") ? " + MathML" : ""),
+        (mathml.length === 1 ? " + MathML" : mathml.length ? " + duplicate MathML" : ""),
       math: drawn.family,
       glyphs: [...glyphs.keys()].sort().join(" + "),
       weight: drawn.weight,
@@ -282,7 +290,7 @@
       synthesis: drawn.synthesis,
       face_mark:
         katex.closest("[data-kpress-math-face]")?.getAttribute("data-kpress-math-face") ?? "",
-      prepared: katex.closest('[data-kpress-math-prepared="true"]') ? "yes" : "no",
+      prepared: prepared ? "yes" : "no",
     };
     const key = JSON.stringify(setting) + (wanted.has(tex) ? `|${tex}` : "");
     const row = math.get(key);
@@ -301,13 +309,20 @@
     });
   }
 
-  /** @type {Map<string, {family: string, weight: string, style: string, display: string, status: string, inlined: boolean, shared: boolean, faces: number}>} */
+  /** @type {Map<string, {family: string, weight: string, style: string, display: string, status: string, inlined: boolean, shared: boolean, optional_local: boolean, faces: number}>} */
   const faces = new Map();
   /** @type {Map<string, boolean>} */
   const inlined = new Map();
   // A face of the site's shared assets, as its stylesheet beside the faces names it.
   /** @type {Map<string, boolean>} */
   const shared = new Map();
+  /** @type {Map<string, boolean>} */
+  const optionalLocal = new Map();
+  /** @type {Map<string, string[]>} */
+  const fallbackSources = new Map([
+    ["Site Prose Georgia", ["Georgia"]],
+    ["Site Prose Times", ["Times New Roman", "Liberation Serif"]],
+  ]);
   for (const sheet of document.styleSheets) {
     for (const rule of sheet.cssRules) {
       if (rule instanceof CSSFontFaceRule) {
@@ -316,7 +331,23 @@
         const src = rule.style.getPropertyValue("src");
         const weight = rule.style.getPropertyValue("font-weight") || "normal";
         const slant = rule.style.getPropertyValue("font-style") || "normal";
-        const named = `${first(rule.style.getPropertyValue("font-family"))}|${weight}|${slant}`;
+        const family = faceName(rule.style.getPropertyValue("font-family"));
+        const named = `${family}|${weight}|${slant}`;
+        const localSource = /local\(\s*(?:"([^"]+)"|'([^']+)'|([^()]+))\s*\)/g;
+        const locals = [...src.matchAll(localSource)].map((match) =>
+          (match[1] ?? match[2] ?? match[3] ?? "").trim(),
+        );
+        const expected = fallbackSources.get(family);
+        const optional =
+          (weight === "400" || weight === "normal") &&
+          slant === "normal" &&
+          expected !== undefined &&
+          locals.length === expected.length &&
+          locals.every((name, index) => name === expected[index]) &&
+          src.replace(localSource, "").replace(/[\s,]/g, "") === "";
+        // Missing optional host fallbacks do not mean a shipped font failed. Every
+        // declaration of this face must contain exactly the expected local sources.
+        optionalLocal.set(named, (optionalLocal.get(named) ?? true) && optional);
         inlined.set(named, (inlined.get(named) ?? true) && !/url\(\s*(?!["']?data:)/.test(src));
         shared.set(
           named,
@@ -326,7 +357,8 @@
     }
   }
   for (const face of document.fonts) {
-    const named = `${first(face.family)}|${face.weight}|${face.style}`;
+    const family = faceName(face.family);
+    const named = `${family}|${face.weight}|${face.style}`;
     const key = `${named}|${face.display}|${face.status}`;
     const row = faces.get(key);
     if (row) {
@@ -334,13 +366,14 @@
       continue;
     }
     faces.set(key, {
-      family: first(face.family),
+      family,
       weight: face.weight,
       style: face.style,
       display: face.display,
       status: face.status,
       inlined: inlined.get(named) ?? false,
       shared: shared.get(named) ?? false,
+      optional_local: optionalLocal.get(named) ?? false,
       faces: 1,
     });
   }
@@ -384,8 +417,15 @@
   ];
   const tokens = Object.fromEntries(names.map(([name, length]) => [name, token(name, length)]));
   ruler.remove();
+  const runtime = /** @type {{katex?: {version?: string}}} */ (globalThis).katex?.version ?? "";
+  const preparedVersions = [...document.head.querySelectorAll('meta[name="site-math-katex"]')].map(
+    (meta) => meta.getAttribute("content") ?? "",
+  );
+  const preparedKatex = preparedVersions.join(" / ");
   return {
-    katex: /** @type {{katex?: {version?: string}}} */ (globalThis).katex?.version ?? "",
+    katex: runtime || preparedKatex,
+    runtime_katex: runtime,
+    prepared_katex: preparedKatex,
     platform: navigator.platform,
     publication: document.querySelector(".cert-page") !== null,
     reading: document.querySelector(".kpress-prose") !== null,

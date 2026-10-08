@@ -55,7 +55,11 @@
       math: face,
       count: 0,
       alone: 0,
-      example: math.querySelector("annotation")?.textContent?.slice(0, 40) ?? "",
+      example: (
+        math.querySelector("annotation")?.textContent ??
+        math.querySelector("math")?.textContent ??
+        ""
+      ).slice(0, 40),
     };
     row.count += 1;
     row.alone += host.matches(headlines) && allMath(host) ? 1 : 0;

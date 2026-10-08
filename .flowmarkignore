@@ -274,3 +274,6 @@ docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md
 # 02423c85... Measured the same way on 2026-10-06: 93 of its 249 lines change, reflow
 # plus 57 straight apostrophes and 14 straight double quotes retyped as curly.
 docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1-recheck.md
+
+# Generated URL registry: devtools.site_urls checks its renderer for drift.
+docs/project/site-urls.md

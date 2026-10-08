@@ -12,6 +12,7 @@ from typing import Any
 
 from playwright.sync_api import sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_site import build
 from workbench_tools.probes import probe
 
@@ -33,7 +34,7 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
         )
         errors: list[str] = []
         page.on("pageerror", lambda error: errors.append(str(error)))
-        page.goto(page_path.resolve().as_uri())
+        open_page(page, page_path)
         tabs = page.evaluate(probe("modes/tabs"))
         if [tab[0] for tab in tabs] != ["animate", "pack", "search"] or tabs[0][2] != "true":
             raise ValueError(f"tabs are not Animate, Pack, Search with Animate open: {tabs}")

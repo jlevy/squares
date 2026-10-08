@@ -40,7 +40,7 @@ from pathlib import Path
 from typing import Any, NamedTuple
 
 from devtools import render_overview
-from devtools.render_overview import PROJECT_NAME, TITLE_SEPARATOR, paper_path
+from devtools.render_overview import paper_path
 
 #: The site's papers, in reading order, which is the order the audit reads them: the
 #: first paper is the reference every other is compared with.
@@ -383,7 +383,6 @@ def axes(structure: Structure) -> dict[str, str]:
     papers share, or the content that is this paper's own (`CONTENT_AXES`)."""
     lines = {line.kind: line for line in structure.credits}
     slug = structure.paper
-    expected_title = f"{structure.name}{TITLE_SEPARATOR}{PROJECT_NAME}"
     dates = _dates(lines.get("dates"))
     named = [
         line for line in structure.credits if line.kind in ("source", "oversight", "agents")
@@ -396,8 +395,8 @@ def axes(structure: Structure) -> dict[str, str]:
     version = lines.get("version")
     pdf = structure.pdf
     return {
-        "head: title": "name · project"
-        if structure.title == expected_title
+        "head: title": "article name"
+        if structure.name and structure.title == structure.name
         else structure.title,
         "head: og:type": structure.kind,
         "head: article dates": " and ".join(

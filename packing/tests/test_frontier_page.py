@@ -38,7 +38,7 @@ from tests import site_renders
 #: than carries: 1,656,135 bytes, with the ceiling, 4 MiB until then, lowered by as much
 #: to keep the room it had. The merge of main into PR 305 that day, carrying both,
 #: measured 1,681,361 bytes.
-PAGE_CEILING_BYTES = 2_350_000
+PAGE_CEILING_BYTES = 1_750_000
 
 #: The columns as a reader meets them: the drawing under no heading, the case, the star,
 #: and then what is known.
@@ -195,10 +195,9 @@ def test_the_columns_run_drawing_case_star_and_then_what_is_known(parsed: Rows) 
         n = attributes["data-n"]
         assert len(cells) == len(COLUMNS), n
         thumb, number, star = cells[0], cells[column("n")], cells[column("Recent")]
-        # The drawing, bare: one `svg` of paths and nothing to read.
+        # A standalone SVG image reserves its size without expanding the table HTML.
         assert thumb["class"] == "site-thumb", n
-        assert (thumb["tags"] or "").split()[0] == "svg", n
-        assert set((thumb["tags"] or "").split()) == {"svg", "rect", "g", "path"}, n
+        assert thumb["tags"] == "img", n
         assert thumb["words"] == "", n
         assert "data-value" not in thumb
         # The number alone, as the one link to the case record.
@@ -483,8 +482,8 @@ def test_the_tables_cells_carry_those_decimals(page: str, cases) -> None:
         '<span class="site-approx">= 3.9715</span>',
         '<span class="site-approx">= 0.0285</span>',
     ]
-    assert r"\(\dfrac{7943}{2000}\)</span>" in row_12
-    assert r"\(\dfrac{57}{2000}\)</span>" in row_12
+    assert "<mfrac><mrow><mn>7943</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
+    assert "<mfrac><mrow><mn>57</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     expected = sum(
         bool(frontier.bound_approx_html(case[field]))
@@ -599,7 +598,9 @@ def test_no_math_is_left_as_source_text_in_the_table(page: str) -> None:
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     assert "$" not in table
     assert "sqrt(" not in table
-    assert r"\(\dfrac{7943}{2000}\)" in table
+    assert 'class="katex"' in table
+    assert "<math" in table
+    assert r"\(\dfrac{7943}{2000}\)" not in table
 
 
 def test_the_frontier_inputs_are_render_inputs() -> None:
@@ -652,8 +653,11 @@ def test_a_polynomial_root_has_no_closed_form() -> None:
 
 
 def test_every_thumbnail_draws_its_cases_squares() -> None:
-    svg = frontier.thumbnail_svg(11)
+    image = frontier.thumbnail_svg(11)
+    assert 'src="atlas/house/n-11.svg" width="50" height="50"' in image
+    svg = frontier.drawing_files()[frontier.drawing_path(11)].decode()
     assert svg.count("z") == 11
+    assert 'xmlns="http://www.w3.org/2000/svg"' in svg
     assert "id=" not in svg
 
 
