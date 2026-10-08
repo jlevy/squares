@@ -4305,6 +4305,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
         "papers/square-packing-methods-survey.html",
+        "papers/exact-side-values.html",
         "tutorial.html",
     ]
     assert [paper.label for paper in paper_specs] == [
@@ -4312,6 +4313,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "Part II",
         "Part III",
         "Methods tutorial",
+        "Exact values",
         "Tutorial",
     ]
     assert [paper.href for paper in paper_specs[:-1]] == [
