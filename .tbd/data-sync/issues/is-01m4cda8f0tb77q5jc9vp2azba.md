@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T01:04:36.250Z
+updated_at: 2026-10-08T01:11:19.349Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
@@ -61,3 +61,8 @@ PR43191c6d398 ready/reviewed hosted16SUCCESS50SKIP; latest cost-first body updat
 New lowerremote b59aaa8515c9508dc05bba475cddd186f45e0a1e corrects10 oldregularizedatlascertificate refs only, originalgeometry/science unchanged. IndependentAstra full1867squares7468corners bindingPASS. Explicit later exception to broad unselected-atlas-bytepreservation wording; primarymanifest/witnessdata preserved. Hostedlower28SUCCESS26SKIP2FAIL staleDATA_REVISION suite-c anddependentaggregate; pinrepair committedlocal3345c393182c8e322cd214685f24c200c28693f3 (pinb59), exactheadselectedgate inprogress. Upper9d omitsnewloweratlasrows; dedicatedSol integratesfinalparent with normalmerge+documentedmandatorypin and scopedchecks. Formalstack430 remainsdraft/unmerged, issue422open, matchingdeploymentUNRUN.
 Newcuratedoperationalarchive locallymemberverified1968members120072986rawB/18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc; upload/downloadproofpending. Allprior draftrelease406258689 assets remainimmutable. Sourceheads retainedonGitHub, native tbd-sync separate; finaloutboxaudit dueafterwrites.
 Issue428 frozen-v2 correctsworkload total11390perroute, meaningfulmock3PASS EXIT0, full5inputsidenticalto preservedv1. Scientificdeciders0; finalprotocolreviews not yetaccepted, custody andstorage/admissionpending. Wrongmetricfindingthink-wgdc staysopenpendingfinalreviews; no sciencepromotion. Issue42510preparedinputs/protocolaccepted butactualdeciders0/storageunresolved. Standard422 postmerge live/results/casegraphics/atlasverificationprepared75artifactchecks; actualmatchingdeployment remainsrequired.
+
+Current custody/protocol continuation (2026-10-08):
+New operationalarchive squares-operational-evidence-20261008.tar.gz1968members120072986expandedB18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc uploadedrelease406258689; ACTUALdownloadarchive/manifesthashMATCH andall1968downloadedmembersverifiedPASS. Nativefullsnapshot export/full-current-state/outboxproof alsoGitHubdownloadhashverified; both outboxesEMPTY andsourcecheckoutsCLEAN. Latestpending sourcecommits lower3345c393/upper2aeb518d saved in separateGitbundles uploaded/downloadedBUNDLEverifyPASS; predecessorsf1/9d alreadyGitHub. Sourcebranchpushespendingnativeprepushchecks, formalstack430notmerged; alloriginalfailure/cancellation preserved.
+Issue428 math finalfrozen-v2 protocolACCEPT zero findings full340square/1360corner five-envelope independentlyreconstructed baseline SHA256d9b98489ee59ccbbfb140b11d7ec3d96514a084d7c822c989a7863369992045b; binding finalfrozen-v2 protocolACCEPT zero findings250checks completebaseline d72645a527aed455345d9101560b80d8aa1220443be6a21e51d77b41054285cf. Reviewfiles final-protocol-review-v2.md/.json in independentmath/bindingdirs; runner e4f22b90/manifest5b4cc7ee sourcefded686668. Priorv1wrong26830 preserved; v2derived11390perroute and3meaningfulmocktestsPASS actualEXIT0. Fullinputsunchanged. Bothfinalreviews nowacceptedbut scientificgeometrydeciders0, no actualreplaychildren/upstreamproducer, noassurancepromotion. Newfinalreviewcustodyarchiveinpreparation (notyetuploadproven). Parentthink-v42c remainsopen; wrongcountthink-wgdcpendingdurablefinalreviewsclosure.
+Additional engineeringlane plan_next_storage_slice GPT6.1Sol read-only concreteexistingOR18release/privatecopierindexedstorageplan for425/428 beforeactualreplay; no budget/caprise/consumedproofdeletion. Selectednextentry remains lowerpin/upperparentfinalCI→stackmerge→actualmatching422live/results/drawingsverification thenreply/ledger;425/428 actualdeciders afterCPUleaseandcanonicalstorage/admissionprereqs. Latestreusableenvironmentstartupsave remainsstale_base/unsaved; currentinstancetested distinctfromfresh-taskrestoration.
