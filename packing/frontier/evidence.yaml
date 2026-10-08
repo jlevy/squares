@@ -28999,3 +28999,34 @@ evidence:
       note: Accepted complete finite rational feasibility and actual production custody only; no human
         oversight or higher-rung claim.
     source_reviewed: '2026-10-08'
+  - id: E-couzo-451-rational-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 108
+      - 127
+      - 131
+      - 155
+      - 180
+      - 228
+      - 306
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo exact refinements 2026-10-08]'
+    certificate: packing/resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-08'
+    limitations: 'This atom records the source author''s report. A separate complete repository replay
+      is retained: eight positives and sixteen controls on both routes passed their required outcomes
+      in 398.40 seconds. Actual production private-worker custody passed all complete-input and mutation-restoration
+      checks without geometric deciders. Historical source-house integration and confirmation remain
+      pending. The source author copied this repository''s sqpack verifier, so the exact_verify route
+      overlaps that source checker. The second maintained rational-geometry route is a separate deciding
+      implementation; both routes share certificate parsing, half-angle conversion, Fraction arithmetic
+      and the separating-axis method. No two independent methods, human oversight or optimality is claimed.'

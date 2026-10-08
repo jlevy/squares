@@ -1,7 +1,7 @@
 """Register all eight #451 source claims without changing selected cases or assurance.
 
-Complete native outcomes are retained artifacts. A production private-worker receipt
-and the later record review remain required before any confirmation or house adoption.
+Complete native outcomes and actual private-worker custody are retained artifacts.
+Historical source-house integration and record review remain required before adoption.
 """
 
 from __future__ import annotations
@@ -54,8 +54,9 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
             "This atom records the source author's report. A separate complete "
             "repository replay is retained: eight positives and sixteen controls "
             "on both routes passed their required outcomes in 398.40 seconds. "
-            "Production private-worker custody and confirmed-record integration "
-            "are pending. " + DISCLOSURE
+            "Actual production private-worker custody passed all complete-input and "
+            "mutation-restoration checks without geometric deciders. Historical "
+            "source-house integration and confirmation remain pending. " + DISCLOSURE
         ),
     }
     result = {
@@ -65,9 +66,9 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
         "headline": "Eight complete rational refinements from Francisco Couzo",
         "claim": (
             "Eight complete rational source certificates report finite upper-bound "
-            "improvements at105,108,127,131,155,180,228,306. Complete native feasibility "
+            "improvements at 105,108,127,131,155,180,228,306. Complete native feasibility "
             "outcomes are retained separately; selected standing cases are unchanged "
-            "pending production custody and record integration."
+            "pending historical source-house integration and record review."
         ),
         "scope": scope,
         "verification": "V0",
@@ -88,20 +89,28 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
             PACKET_PATH + "/receipts/exact-certification.json.xz",
             PACKET_PATH + "/receipts/exact-replay-incomplete-62268899-v1.json.xz",
             PACKET_PATH + "/receipts/execution-attempts.json",
+            PACKET_PATH + "/receipts/private-custody-668cc1a-v1.json",
             "packing/devtools/couzo_refinement_reports.py",
         ],
-        "controls": ["packing/tests/test_couzo_refinement_reports.py"],
+        "controls": [
+            "packing/tests/test_couzo_refinement_reports.py",
+            "packing/tests/test_couzo_custody.py",
+            "packing/tests/test_negative_controls.py",
+        ],
         "notes": (
-            "All sixteen complete original factual files and all24 native jobs are "
-            "retained. The first two-worker attempt was incomplete after181.19 seconds; "
-            "the fresh serial attempt passed in398.40 seconds (6.64 wall minutes, "
-            "4.1025 CPU minutes) with unchanged45-second children. Native result "
-            "objects alone do not establish production private-worker custody. " + DISCLOSURE
+            "All sixteen complete original factual files and all 24 native jobs are "
+            "retained. The first two-worker attempt was incomplete after 181.19 seconds; "
+            "the fresh serial attempt passed in 398.40 seconds (6.64 wall minutes, "
+            "4.1025 CPU minutes) with unchanged 45-second children. The actual private "
+            "worker passed complete stored-input admission, six late mutations and "
+            "restoration checks without geometric deciders: 8.91 seconds call, "
+            "26.72 seconds setup and 38.36 seconds total. The call fits the unchanged "
+            "12-second fast ceiling; the child deadline remains 45 seconds. " + DISCLOSURE
         ),
         "next_rung": (
-            "Complete source/native admission in an actual private worker, live "
-            "mutant refusals/restores and independent record review are required "
-            "before confirmation or selected-house changes."
+            "Preserve and validate each complete historical source house before any "
+            "selected-house replacement, then independently review source-specific "
+            "adoption and confirming records. Final exact-head CI remains required."
         ),
     }
     source = {
@@ -123,15 +132,16 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
         "evidence": [REPORT],
         "notes": (
             "All eight complete claims and their exact sides remain in pinned factual "
-            "inputs; T-128 records the aggregate source report. All24 native jobs "
+            "inputs; T-128 records the aggregate source report. All 24 native jobs "
             "have full outcomes. No selected override or superseded claim is created "
             "at this source-only stage; current cases and earlier source ownership "
-            "remain unchanged until production custody and adoption are reviewed."
+            "remain unchanged. Actual private-worker custody passed; historical owner "
+            "integration, adoption and confirmation remain pending."
         ),
     }
     request = {
         "number": 451,
-        "title": "105,108,127,131,155,180,228,306: registration request",
+        "title": "105, 108, 127, 131, 155, 180, 228, 306: registration request",
         "author": "franciscouzo",
         "opened": DAY,
         "state": "open",
@@ -139,8 +149,9 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
         "triage": "done",
         "summary": (
             "All eight complete source certificates and decimal context poses are "
-            "retained. The complete24-job native finite-feasibility replay passed; "
-            "production custody and current-case integration remain pending."
+            "retained. The complete 24-job native finite-feasibility replay passed; "
+            "actual private-worker custody passed without geometric deciders. "
+            "Historical source-house integration and confirmation remain pending."
         ),
         "read_through": "2026-10-08T15:53:07Z",
         "results": [
@@ -149,6 +160,18 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
                 "claim": result["claim"],
                 "source": "body",
                 "register": [RESULT],
+            }
+        ],
+        "asks": [
+            {
+                "what": (
+                    "Credit the constructions and refinement tools identified by the source."
+                ),
+                "state": "done",
+                "note": (
+                    "Complete source lineage is retained in the packet, T-128 notes and "
+                    "bibliography; current selected construction credits remain unchanged."
+                ),
             }
         ],
         "beads": ["think-edo8"],
@@ -248,9 +271,11 @@ def plan() -> list[tuple[Path, str]]:
             raise ValueError("one resources guideline footer required")
         entry = (
             "- " + marker + " — Francisco Couzo's eight complete rational certificates "
-            "and separate decimal context poses; T-128 remains V0/C0 pending production "
-            "custody and integration. All24 native jobs completed their finite-feasibility "
-            "and control outcomes in 6.64 wall minutes. [Factual packet]"
+            "and separate decimal context poses; T-128 remains V0/C0 pending historical "
+            "source-house integration and confirmation. All 24 native jobs completed "
+            "their finite-feasibility "
+            "and control outcomes in 6.64 wall minutes; actual private-worker custody "
+            "passed complete stored-input and mutation-restoration checks. [Factual packet]"
             "(web/couzo-exact-refinements-2026-10-08/README.md). "
             "Ryan Xu, Nate Chaoweeraprasit, Siddharth Gupta, David Ellsworth and Evan Daniel "
             "receive the source's construction/refinement credits; "

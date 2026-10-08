@@ -1506,6 +1506,18 @@ sources:
       review accepted, native capture/outcomes/adoption pending. Nearest enclosing project MIT notice
       does not settle nested verifier third-party redistribution. The source adapts this project’s sqverify_fast
       geometric kernel; the prospective maintained replay is not another independent implementation.
+  - key: '[Couzo exact refinements 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: independent
+    credit: Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel
+    short_credit: Couzo after Xu et al.
+    note: Eight complete certificates and decimal context poses at ffd900dfff6d2674ad995359208c2f0714915c82;
+      source credits and tools are attributed. No optimizer/local/global claims. Unlicensed programs/prose
+      are pinned rather than copied.
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta

@@ -2946,6 +2946,36 @@ sources:
     Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
     standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget
     remain pending under think-ndvg.
+- id: couzo-451-exact-refinements
+  title: Francisco Couzo's eight rational refinements, issue451
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/ffd900dfff6d2674ad995359208c2f0714915c82
+  local: resources/web/couzo-exact-refinements-2026-10-08
+  source_key: '[Couzo exact refinements 2026-10-08]'
+  scope:
+    n_values:
+    - 105
+    - 108
+    - 127
+    - 131
+    - 155
+    - 180
+    - 228
+    - 306
+  reviewed: '2026-10-08'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+  evidence:
+  - E-couzo-451-rational-report
+  notes: All eight complete claims and their exact sides remain in pinned factual inputs; T-128 records
+    the aggregate source report. All 24 native jobs have full outcomes. No selected override or superseded
+    claim is created at this source-only stage; current cases and earlier source ownership remain
+    unchanged. Actual private-worker custody passed; historical owner integration, adoption and confirmation
+    remain pending.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

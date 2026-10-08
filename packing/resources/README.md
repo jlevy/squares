@@ -887,6 +887,16 @@ n28, n29 and n31. The
 records the reported bounds and complete source references.
 Independent whole-net replay and controls remain pending.
 
+- **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
+  certificates and separate decimal context poses; T-128 remains V0/C0 pending
+  historical source-house integration and confirmation.
+  All 24 native jobs completed their finite-feasibility and control outcomes in 6.64
+  wall minutes; actual private-worker custody passed complete stored-input and
+  mutation-restoration checks.
+  [Factual packet](web/couzo-exact-refinements-2026-10-08/README.md).
+  Ryan Xu, Nate Chaoweeraprasit, Siddharth Gupta, David Ellsworth and Evan Daniel
+  receive the source’s construction/refinement credits; no optimality is asserted.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

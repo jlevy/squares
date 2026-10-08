@@ -32,8 +32,12 @@ def test_complete_source_only_plan_is_schema_valid_and_preserves_current_cases()
         field, row = expected[path.name]
         old = safe_load(path.read_text())
         new = safe_load(text)
-        assert new[field][:-1] == old[field]
-        assert new[field][-1] == row
+        identity = "number" if field == "issues" else "id"
+        if any(item[identity] == row[identity] for item in old[field]):
+            assert new[field] == old[field]
+        else:
+            assert new[field][:-1] == old[field]
+            assert new[field][-1] == row
         assert {key: value for key, value in new.items() if key != field} == {
             key: value for key, value in old.items() if key != field
         }

@@ -1815,7 +1815,12 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/franciscouzo/square-packing",
         "Francisco Couzo",
-        "Improved packings for 49 counts from n = 68 to 307.",
+        (
+            "Improved packings for 49 counts from n = 68 to 307. "
+            "Eight complete rational refinements in issue451 have retained native "
+            "finite-feasibility outcomes and actual private-worker custody (T-128); "
+            "historical source-house integration and confirmation remain pending."
+        ),
     ),
     (
         "https://github.com/itsnaka/squish-certs",

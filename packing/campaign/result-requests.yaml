@@ -2860,3 +2860,33 @@ issues:
     replies: []
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
+  - number: 451
+    title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
+    author: franciscouzo
+    opened: '2026-10-08'
+    state: open
+    kind: result-report
+    triage: done
+    summary: All eight complete source certificates and decimal context poses are retained. The complete
+      24-job native finite-feasibility replay passed; actual private-worker custody passed without geometric
+      deciders. Historical source-house integration and confirmation remain pending.
+    read_through: '2026-10-08T15:53:07Z'
+    results:
+    - key: eight-rational-refinements
+      claim: Eight complete rational source certificates report finite upper-bound improvements at 105,108,127,131,155,180,228,306.
+        Complete native feasibility outcomes are retained separately; selected standing cases are unchanged
+        pending historical source-house integration and record review.
+      source: body
+      register:
+      - T-128
+    asks:
+    - what: Credit the constructions and refinement tools identified by the source.
+      state: done
+      note: Complete source lineage is retained in the packet, T-128 notes and bibliography; current
+        selected construction credits remain unchanged.
+    beads:
+    - think-edo8
+    answer_bead: think-edo8
+    replies: []
+    close_when: The supported import and disposition are on main and the owner posts the resulting state;
+      optimizer and local/global optimality remain separate claims.

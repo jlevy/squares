@@ -26,17 +26,23 @@ implementation independence from the source producer.
 
 Acquisition, source admission and complete maintained native replay are recorded.
 All eight positives passed both exact routes; duplicate-square and outside-container
-controls failed both routes for every certificate. The fresh serial run completed
-24 full jobs, 48 route outcomes and 770,052 pair decisions in 398.40 seconds
-(6.64 wall minutes, 4.1025 CPU minutes). Its longest native job took 40.89 seconds
-under the unchanged 45-second child deadline.
+controls failed both routes for every certificate.
+The fresh serial run completed 24 full jobs, 48 route outcomes and 770,052 pair
+decisions in 398.40 seconds (6.64 wall minutes, 4.1025 CPU minutes).
+Its longest native job took 40.89 seconds under the unchanged 45-second child deadline.
 
 The earlier two-worker attempt remains recorded as incomplete: 14 full job objects,
 three started jobs with partial logs and seven unstarted jobs, in 181.19 seconds.
 The complete serial run uses a distinct fresh job directory.
 [Execution receipts](receipts/execution-attempts.json) preserve both dispositions.
-Source and outcome review accepted the finite feasibility results; actual production
-private-worker custody and record integration remain pending.
+Source and outcome review accepted the finite feasibility results.
+The actual production private worker admitted all eight complete sources and 24 stored
+native jobs, refused six late input/result mutations and restored every input byte.
+It ran no geometric deciders.
+[Private-worker receipt](receipts/private-custody-668cc1a-v1.json) records the
+8.91-second test call, 26.72-second setup and 38.36-second total, with unchanged
+12-second call and 45-second child limits.
+Historical source-house integration and confirming records remain pending.
 No standing house or bound changes occur in this packet.
 Optimizer, KKT, local-minimum, global-optimality, rigidity, novelty and human-review
 claims remain outside the admitted scope.
@@ -53,9 +59,10 @@ No author program executes.
 The maintained acquire_source and retained_data contracts check the declaration,
 complete original-byte map and compression table.
 Derived facts bind each full source text to that independent acquisition map before
-parsing. The retained full native receipt contains all 24 jobs: positive, duplicate square
-and outside-container controls for every certificate, with both complete route results
-and pair counts. The unchanged child deadline is 45 seconds.
+parsing. The retained full native receipt contains all 24 jobs: positive, duplicate
+square and outside-container controls for every certificate, with both complete route
+results and pair counts.
+The unchanged child deadline is 45 seconds.
 
 ## Compressed Files
 
