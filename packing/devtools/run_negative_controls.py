@@ -81,6 +81,7 @@ from threading import Lock
 from uuid import uuid4
 
 from devtools import evand_arrangement_houses as evand_houses
+from devtools import gupta_house_links as gupta
 from devtools import refinement_house_links as refinements
 from devtools import ryxu_house_links as ryxu
 from devtools import squish_second_update_confirmation as second
@@ -110,6 +111,7 @@ HOUSE_LINK_LEAVES = frozenset(
         *house.snapshot_house_links(),
         *refinements.snapshot_house_links(),
         *ryxu.snapshot_house_links(),
+        *gupta.snapshot_house_links(),
         *evand_houses.snapshot_house_links(),
     )
 )
@@ -638,6 +640,7 @@ COPY_SEPARATELY = (
     *second.private_input_paths(),
     *refinements.private_input_paths(),
     *ryxu.private_input_paths(),
+    *gupta.private_input_paths(),
     *evand_houses.private_input_paths(),
     *fn1.private_input_paths(),
     ROOT / "resources/README.md",
