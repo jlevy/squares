@@ -5,19 +5,19 @@ title: Investigate complete-checkpoint per-test wall crossings
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
-delegate: codex-pr395-site-review
+delegate: null
 labels: []
 dependencies: []
-parent_id: is-01m4d2n7hjcxy6nh0wkvy8bpmj
+parent_id: is-01m4cee7q2jdj5scgd5wa72y24
 child_order_hints:
   - is-01m4dj5bn5abmfwtszq9a2vzae
   - is-01m4dj5c1eanf3jhea0vfk9m3j
 hold: null
 hold_until: null
 created_at: 2026-10-08T10:04:44.884Z
-updated_at: 2026-10-08T11:08:25.666Z
+updated_at: 2026-10-08T11:08:52.596Z
 started_at: 2026-10-08T10:07:01.510Z
 ---
 Full checkpoint 37756689659 at a0ca63461d33c7dc2e12f4d08c9af6008aa1ba20 has two preserved failed attempts. Attempt 1 crossed the 12-second per-test call ceiling in the overview-fragment control (12.43 seconds). Exactly one unchanged-head failed-job retry crossed different controls: census ledger 14.63 seconds and ten-shard residue 12.71 seconds. The overview failure was absent on attempt 2; no functional failure class was reported. Attempt 2 gate wall 1771.02 seconds remained within 3600 seconds; all eleven deep/portability jobs were reused passes. Automatic PR checks are separately green (31 passes, 26 intentional skips). Do not claim the complete checkpoint passed or infer a host cause from these wall readings.
