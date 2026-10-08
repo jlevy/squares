@@ -136,10 +136,12 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: imported poses (T-113, T-114) took 364.07s. The twelve T-115 update poses were
 #: re-screened serially in 107.952s; unselected records remain unchanged. All three
 #: corpus tripwires below are the sums over the current retained square motions.
+#: The three T-117/T-118 rational refinements replace the motions at 68, 105 and 292;
+#: these are the corresponding sums from their refreshed retained numerical screen.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (27, 102, 86, 570),
-    "n=1..200": (66, 558, 182, 2038),
-    "n=1..324": (121, 1578, 302, 4689),
+    "n=1..100": (27, 94, 86, 570),
+    "n=1..200": (66, 539, 182, 2047),
+    "n=1..324": (121, 1494, 302, 4698),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

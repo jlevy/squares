@@ -89,6 +89,14 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     )
     if count != 1:
         raise ValueError("selected refinement needs one exact side and decimal declaration")
+    draft_body = generated.split("---\n", 2)[2]
+    lower_pattern = r"\n## The lower bound\n.*?(?=\n<!-- BEGIN verification code)"
+    lower = re.search(lower_pattern, draft_body, re.DOTALL)
+    if lower is None:
+        raise ValueError("historical draft has no generated lower-bound section")
+    body, count = re.subn(lower_pattern, lambda _match: lower.group(), body, flags=re.DOTALL)
+    if count != 1:
+        raise ValueError("selected refinement needs one generated lower-bound section")
     rendered = "---\n" + dump(document) + "---\n" + body
     return render_case_verifiers.refresh(rendered)
 
