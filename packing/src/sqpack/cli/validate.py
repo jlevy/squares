@@ -253,6 +253,13 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
 )
+#: The four HTTP load/no-JS cases measure browser timing without competing browser
+#: workers from the functional layout command. Their assertions and budgets stay shared
+#: with the production checker; this changes allocation, not the measured contract.
+SITE_LOAD_BUDGET_TEST = (
+    "tests/test_site_rendering.py::"
+    "test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets"
+)
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
 REQUIRE_CHROMIUM = "SQPACK_REQUIRE_CHROMIUM"
@@ -1944,30 +1951,50 @@ def _site_url_registry(context: Context) -> str:
 
 
 def _site_layout_tests(context: Context) -> str:
-    """Measure the site's tables in the Chromium the frontend runner installs.
+    """Run functional pixel/layout checks in parallel, then load budgets serially.
 
-    `SITE_LAYOUT_TESTS` pin pixel widths, which no behavioural shard can measure, so they
-    run here, one file to an xdist worker as the quick lane runs its files, and they fail
-    rather than skip when no Chromium launches: `REQUIRE_CHROMIUM` is set for this command
-    alone, and `tests.site_browser` reads it.
+    The four native-frontier timing cases use one browser command after the functional
+    workers exit. Both commands require Chromium and retain the existing assertions;
+    serial allocation removes browser competition within this step, without promising
+    an otherwise idle host. Both phases share the original total subprocess timeout.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
-    return _run(
-        context,
+    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    commands = (
         (
-            sys.executable,
-            "-m",
-            "pytest",
-            "-q",
-            "-p",
-            "no:cacheprovider",
+            *common,
             *distribution,
             *loadfile,
             *SITE_LAYOUT_TESTS,
+            "-k",
+            f"not {SITE_LOAD_BUDGET_TEST.rpartition('::')[-1]}",
         ),
-        extra_environment={REQUIRE_CHROMIUM: "1"},
+        (*common, "-n", "0", SITE_LOAD_BUDGET_TEST),
     )
+    outputs: list[str] = []
+    deadline = time.monotonic() + context.timeout_seconds
+    for command in commands:
+        try:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise StepTimeoutError(
+                    "site table layout in Chromium exhausted its "
+                    f"{context.timeout_seconds:g}s subprocess budget"
+                )
+            outputs.append(
+                _run(
+                    context,
+                    command,
+                    timeout_seconds=remaining,
+                    extra_environment={REQUIRE_CHROMIUM: "1"},
+                )
+            )
+        except StepFailureError as error:
+            if outputs:
+                raise type(error)("\n".join((*outputs, str(error)))) from error
+            raise
+    return "\n".join(output for output in outputs if output)
 
 
 def _browser_code_in_files(context: Context) -> str:
