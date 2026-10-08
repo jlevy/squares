@@ -226,6 +226,24 @@ def check_certification() -> dict[int, Any]:
     return positives
 
 
+def to_witness(certificate: legacy.Certificate) -> dict[str, Any]:
+    """The unchanged complete half-angle conversion under the Gupta finite claim."""
+    return kernel.to_witness(
+        certificate, witness_prefix=WITNESS_PREFIX, claim_limitations=CLAIM_LIMITATIONS
+    )
+
+
+def confirmed_bound(n: int) -> dict[str, Any]:
+    """The least upward sixteen-place display of the full admitted rational side."""
+    _count(n)
+    row = check_certification()[n]
+    return {
+        "value": legacy.ceiling_decimal(Fraction(row["checker_input"]["side"]), 16),
+        "exact_form": row["checker_input"]["side"],
+        "evidence": [EXACT_EVIDENCE],
+    }
+
+
 def run_child(job: tuple[int, str], directory: Path, timeout: int) -> dict[str, Any]:
     n, control = job
     path = directory / f"n{n}-{control}.json"
