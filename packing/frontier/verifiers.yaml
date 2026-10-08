@@ -1638,3 +1638,20 @@ verifiers:
       jobs, required controls and all 18 complete houses.
     note: Admission reconciles retained executions and private-worker scientific inputs. It executes
       no geometric predicate and does not itself confer a confirmation rung.
+  - id: V-gupta-complete-custody
+    program: devtools.gupta_house_links
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    source:
+    - packing/devtools/gupta_refinement_reports.py
+    - packing/devtools/gupta_house_links.py
+    - packing/devtools/evand_arrangement_reports.py
+    summary: Admits all seventeen pinned originals and comparators, all 51 complete actual input/result
+      jobs, required controls and fourteen complete selected houses.
+    note: Reconciles retained executions and ordinary private scientific inputs. No geometric predicate
+      runs and admission alone confers no confirmation rung.

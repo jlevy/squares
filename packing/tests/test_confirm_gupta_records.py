@@ -8,6 +8,7 @@ no geometric decider may execute during receipt admission or record composition.
 from __future__ import annotations
 
 import copy
+import re
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -56,6 +57,48 @@ def private_proposal(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     monkeypatch.setattr(register, "FRONTIER", repo / "packing/frontier")
     monkeypatch.setattr(register, "HISTORY", history)
     monkeypatch.setattr(registry.packets, "REPO", repo)
+    # Construct the reported stage explicitly even after the live record is
+    # confirmed. Its old verified ceiling comes from validated immutable history;
+    # every deciding input and complete current source house remains untouched.
+    history_rows = {row["n"]: row for row in register.read_history()}
+    for n in houses.NUMBERS:
+        path = register.FRONTIER / f"n-{n:03d}.md"
+        text = path.read_text()
+        document = safe_load(text.split("---\n", 2)[1])
+        current = document["packing"]
+        previous = case(history_rows[n]["frontier"])
+        current["verified_upper_bound"] = copy.deepcopy(previous["verified_upper_bound"])
+        current["evidence"] = [
+            item for item in current["evidence"] if item != confirmation.EXACT
+        ]
+        current["blockers"] = register.pending_blockers(current)
+        body = re.sub(
+            rf"\n{register.SECTION}\n.*?(?=\n## |\n<!-- This document follows)",
+            lambda _match, n=n: register.section(n, confirmed=False),
+            text.split("---\n", 2)[2],
+            flags=re.DOTALL,
+        )
+        body = register.ceiling_prose(n, current, body)
+        path.write_text("---\n" + register.dump(document) + "---\n" + body)
+    for name, identifier in (
+        ("evidence", confirmation.EXACT),
+        ("verifiers", confirmation.CUSTODY),
+    ):
+        path = register.FRONTIER / f"{name}.yaml"
+        document = safe_load(path.read_text())
+        document[name] = [row for row in document[name] if row["id"] != identifier]
+        path.write_text(register.dump(document))
+    path = register.FRONTIER / "results.yaml"
+    document = safe_load(path.read_text())
+    result = next(row for row in document["results"] if row["id"] == register.RESULT)
+    result["verification"], result["confirmation"] = "V0", "C0"
+    result["evidence"] = [item for item in result["evidence"] if item != confirmation.EXACT]
+    path.write_text(register.dump(document))
+    path = register.FRONTIER / "source-coverage.yaml"
+    document = safe_load(path.read_text())
+    source = next(row for row in document["sources"] if row["id"] == register.SOURCE_ID)
+    source["evidence"] = [item for item in source["evidence"] if item != confirmation.EXACT]
+    path.write_text(register.dump(document))
     # No production clone/count claim: actual custody and footprint have separate
     # retained reviews. Exercise the same unchanged cap comparison in this fixture.
     monkeypatch.setattr(

@@ -347,7 +347,7 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
         for row in safe_load(result_path.read_text())["results"]
         if row["id"] == register.RESULT
     )
-    sentinel = register.PACKET_PATH + "/receipts/exact-certification.json.xz"
+    sentinel = register.REVIEW
     register.replace_row(
         result_path,
         "results",
@@ -452,13 +452,11 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
         for row in safe_load(result_path.read_text())["results"]
         if row["id"] == register.RESULT
     )
-    assert result["artifacts"] == [
-        register.PACKET_PATH + "/README.md",
-        register.PACKET_PATH + "/facts/complete-certificates-and-comparators.json.xz",
-        "packing/devtools/gupta_refinement_reports.py",
-        sentinel,
-    ]
-    assert (result["verification"], result["confirmation"]) == ("V0", "C0")
+    assert result["artifacts"] == [*original_result["artifacts"], sentinel]
+    assert (result["verification"], result["confirmation"]) == (
+        original_result["verification"],
+        original_result["confirmation"],
+    )
     result_bytes = result_path.read_bytes()
     first = source_path.read_bytes()
     register.register()
@@ -571,6 +569,10 @@ def test_pending_ceiling_disclosure_uses_current_report_and_retained_verified_la
     text = (register.FRONTIER / f"n-{n:03d}.md").read_text()
     _, front, body = text.split("---\n", 2)
     case = safe_load(front)["packing"]
+    prior = next(row for row in register.read_history() if row["n"] == 88)
+    case["verified_upper_bound"] = copy.deepcopy(
+        safe_load(prior["frontier"].split("---\n", 2)[1])["packing"]["verified_upper_bound"]
+    )
     rewritten = register.ceiling_prose(n, case, body)
     assert register.ceiling_prose(n, case, rewritten) == rewritten
     section = rewritten.split("## The verified upper bound is a ceiling\n", 1)[1]
@@ -607,6 +609,24 @@ def test_gupta_redraft_replaces_changed_prose_values(section: str) -> None:
     n = 179
     original = (register.FRONTIER / f"n-{n:03d}.md").read_text()
     if section == "ceiling":
+        # Exercise the earlier unconfirmed disclosure after live confirmation.
+        # Its complete old ceiling comes from immutable history in memory.
+        _, front, body = original.split("---\n", 2)
+        document = safe_load(front)
+        previous = next(row for row in register.read_history() if row["n"] == n)
+        current = document["packing"]
+        current["verified_upper_bound"] = copy.deepcopy(
+            safe_load(previous["frontier"].split("---\n", 2)[1])["packing"][
+                "verified_upper_bound"
+            ]
+        )
+        current["evidence"] = [
+            item for item in current["evidence"] if item != houses.reports.EXACT_EVIDENCE
+        ]
+        current["blockers"] = register.pending_blockers(current)
+        original = register.render_selected_case(
+            n, document, register.ceiling_prose(n, current, body), original
+        )
         changed = original.replace("smaller by $1.2881E-12$", "smaller by $0$", 1)
         expected = "smaller by $1.2881E-12$"
         refused = "smaller by $0$"

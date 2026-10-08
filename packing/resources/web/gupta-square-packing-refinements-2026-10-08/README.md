@@ -58,10 +58,34 @@ certificate chain; an altered imprint was refused.
 The commands and outputs are in `acquisition/timestamp-custody-check.json`. External
 timestamp trust has not been independently established.
 
-The factual audit records the bounded checks.
-Native execution must decide both maintained routes for all seventeen complete inputs
-and their full-roster overlap and outside-container controls, including the three
-withdrawals.
+## Finite Feasibility Verification
+
+The original two-worker native campaign completed all 51 full jobs in 255.693 seconds:
+seventeen positives and 34 duplicate/outside controls through both maintained routes,
+including every withdrawal.
+The complete source facts and actual inputs/results remain in
+`facts/complete-certificates-and-comparators.json.xz` and
+`receipts/exact-certification.json.xz`.
+
+T-127 records V3/C3 finite feasibility with independently re-implemented deciding code.
+This relation concerns the source producer’s verification code; the two repository
+routes share rational parsing, half-angle conversion, Fraction arithmetic and SAT
+methodology. The
+[mapped review](../../../../docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md)
+retains that scope.
+
+A separate actual hosted private-worker transaction passed in 15.224 seconds with all
+four ordinary scientific inputs, complete 17-source/51-job admission, all fourteen
+houses, live input/result/source/comparator mutations and restorations, and producer
+guards under the unchanged 45-second child deadline.
+It forbids geometric deciders; custody admission is not a fresh replay or a source of
+assurance by itself.
+
+Fourteen exact finite upper bounds are selected.
+The three withdrawn certificates remain fully verified and retained without
+selected-bound credit.
+No optimizer, lower-bound theorem, local minimum, rigidity, novelty, priority, global
+optimum, formal proof or human oversight is established.
 
 ## Compressed Files
 

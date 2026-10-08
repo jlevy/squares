@@ -1677,9 +1677,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Siddharth Gupta",
         (
             "Seventeen rational refinements of Nate Chaoweeraprasit's SQUISH packings, "
-            "using Evan Daniel's optimizer; fourteen reports selected here (T-127) and "
-            "three withdrawn. Production confirmation remains pending; optimality is "
-            "not established."
+            "using Evan Daniel's optimizer; fourteen finite upper-bound improvements selected "
+            "here (T-127) and three withdrawn. Exact feasibility is confirmed with "
+            "independently re-implemented code; optimality is not established."
         ),
     ),
     (

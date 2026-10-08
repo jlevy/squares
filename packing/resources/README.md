@@ -850,13 +850,15 @@ Source MIT licences and the earlier #375 namespace remain unchanged.
 
 - **[Gupta rational refinements 2026-10-08]** — Siddharth Gupta’s seventeen complete
   rational source cases at `9643cb5a78c1d4dcfc867c80a6920c3a6219d05a`; fourteen selected
-  reported improvements and three withdrawals, T-127 at V0/C0.
+  finite upper-bound improvements and three withdrawals, T-127 at V3/C3.
   [Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md).
+  Independently re-implemented deciding code verified every complete source certificate
+  and full-roster control; actual private custody admitted the complete retained
+  inputs/results without repeating geometry.
+  These results establish finite feasibility, not optimality or human oversight.
   SQUISH credit remains with Nate Chaoweeraprasit, and Evan Daniel’s optimizer is
-  credited. Full native outcomes exist; private-worker custody and final production
-  review remain pending.
-  Unlicensed programs/prose are hash-pinned; the solver MIT notice is not treated as a
-  bundle licence.
+  credited. Unlicensed programs/prose remain hash-pinned; the solver MIT notice is not
+  treated as a bundle licence.
 
 ## Exact-Root Report for n68, v1.2
 

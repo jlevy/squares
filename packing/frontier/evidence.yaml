@@ -28938,3 +28938,64 @@ evidence:
       result review and explicit hosted research budget remain pending. No bound, theorem, optimality
       or rating promotion; earlier FN1/T-102–T-111 results unchanged.
     source_reviewed: '2026-10-08'
+  - id: E-gupta-438-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 123
+      - 129
+      - 130
+      - 153
+      - 154
+      - 179
+      - 180
+      - 199
+      - 207
+      - 208
+      - 209
+      - 236
+      - 237
+      - 238
+      - 239
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Gupta rational refinements 2026-10-08]'
+    certificate: packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
+    replay: 'From packing with project Python 3.14 and external TMPDIR: python -m devtools.gupta_refinement_reports
+      certify --jobs-dir "$TMPDIR/gupta-native-jobs" --workers 2. This executes all 51 complete jobs
+      through both native routes; check admits the retained full outcomes without repeating geometry.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-gupta-complete-custody
+    independence_record: docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md
+    limitations: 'All seventeen complete rational source certificates pass both routes. All 34 full-roster
+      duplicate and outside controls fail both routes, covering 3017 poses and 1714956 pair decisions
+      in the original 255.692986-second two-worker campaign. Fourteen sides are selected; the three
+      withdrawn offers 108/123/129 retain complete inputs and results without current upper-bound credit.
+      First-party deciding geometry is independently re-implemented from the theorem and certificate
+      format; no author program runs. Both repository routes share certificate parsing, rational half-angle
+      conversion, Fraction arithmetic, source inputs and the SAT method. Their separate deciding implementations
+      do not make them independent of those shared premises. The recorded source-code relationship is
+      to the author''s solver verification, not to the other repository route. No dilation or rounding
+      changes source geometry. The actual hosted private-worker transaction passed in 15.224 seconds
+      with all four ordinary inputs, live native/input/original/comparator refusals and restorations,
+      producer guards and the unchanged 45-second child. That transaction forbids geometric deciders;
+      offline admission is not a fresh native replay. Only finite feasibility enters: no lower bound,
+      optimum, optimizer, local-minimum theorem, rigidity, novelty, priority, formal proof or human
+      oversight is established.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-08'
+      reviewed_by: GPT-6 Astra source/native reviewer and separately prompted project custody and record
+        reviewers
+      note: Accepted complete finite rational feasibility and actual production custody only; no human
+        oversight or higher-rung claim.
+    source_reviewed: '2026-10-08'

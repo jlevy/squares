@@ -12913,9 +12913,9 @@ results:
     kind: upper-bound
     registered: '2026-10-08'
     headline: Fourteen rational refinements, seventeen complete source cases
-    claim: Seventeen complete rational source certificates are retained, three withdrawals; fourteen
-      offer strictly smaller exact construction sides than both prior upper lanes. No lower bound or
-      optimum is established.
+    claim: Independently re-implemented exact verification confirms finite feasibility of all seventeen
+      rational source certificates; fourteen strictly improve both prior finite upper lanes. Three withdrawn
+      offers remain fully retained. No lower bound, optimum or local-minimum theorem is established.
     scope:
       n_values:
       - 88
@@ -12935,8 +12935,8 @@ results:
       - 237
       - 238
       - 239
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: Fourteen strict finite upper-bound improvements; no solved case or lower-bound theorem.
@@ -12949,12 +12949,34 @@ results:
       published: '2026-10-08'
     evidence:
     - E-gupta-438-rational-report
+    - E-gupta-438-exact-feasibility
     artifacts:
     - packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md
     - packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
     - packing/devtools/gupta_refinement_reports.py
-    next_rung: Native outcomes, source/house binding, independent review and actual private-worker custody
-      are required before confirmation.
-    notes: SQUISH credit remains with Nate Chaoweeraprasit; source credits Evan Daniel's optimizer and
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/receipts/exact-certification.json.xz
+    next_rung: V4/C4 requires two distinct accepted adversarial reviews and a retained human oversight
+      record; none is supplied by drawing, admission or AI review alone.
+    notes: The original 51-job native campaign and the separately accepted actual private custody transaction
+      support finite V3/C3 only. Admission checks retained executions; it does not repeat geometry.
+      Both deciding routes share rational parsing, half-angle conversion, Fraction arithmetic and SAT
+      methodology; their recorded independent code relationship is to the source producer's verifier.
+      SQUISH credit remains with Nate Chaoweeraprasit; the source credits Evan Daniel's optimizer and
       Siddharth Gupta's precision refinements. Only factual inputs are copied; unlicensed programs/prose
-      are hash-pinned.
+      remain hash-pinned. No human oversight or higher-rung claim.
+    controls:
+    - packing/resources/web/gupta-square-packing-refinements-2026-10-08/receipts/exact-certification.json.xz
+    - packing/tests/test_gupta_refinement_reports.py
+    - packing/tests/test_negative_controls.py
+    reviews:
+    - path: docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md
+      kind: adversarial
+      reviewer: GPT-6 Astra source/native review with separate project custody review
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-08'
+      scope: All seventeen full source/native geometries and controls, fourteen selected houses, actual
+        private scientific custody and finite upper bounds only.
+      verdict: accepted
+      covers:
+      - T-127
