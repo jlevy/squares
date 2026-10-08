@@ -1214,7 +1214,7 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         *COPY_SEPARATELY,
         *(path for path in inventory if path.parent == REPO and path not in named),
     ]
-    selected = [*separate, *rescued]
+    selected = list(dict.fromkeys((*separate, *rescued)))
     for document in ROOT_DOCUMENTS:
         selected.extend(
             path
