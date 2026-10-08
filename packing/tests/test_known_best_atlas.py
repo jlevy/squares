@@ -10,6 +10,7 @@ import re
 import subprocess
 from collections import Counter
 from decimal import Decimal
+from itertools import pairwise
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -782,9 +783,9 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert (canvas.information_left, canvas.information_right) == (4640, 8040)
     assert canvas.legend_baseline == 720
     assert canvas.explainer_baseline == 1570
-    assert canvas.citations_baseline == 1660
-    assert canvas.credit_baseline == 1750
-    assert canvas.stamp_baseline == 1840
+    assert canvas.citations_baseline == 1750
+    assert canvas.credit_baseline == 1840
+    assert canvas.stamp_baseline == 1930
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "known-best-1-324.pdf",
@@ -930,6 +931,7 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
         "repository": 26,
         "legend-label": 19,
         "explainer": 19,
+        "degree-explainer": 19,
         "citations": 19,
         "credit": 19,
         "release-stamp": 19,
@@ -973,6 +975,74 @@ def test_poster_enlarges_information_type_without_changing_card_geometry() -> No
             assert (badge.attrib["width"], badge.attrib["height"]) == ("19", "19")
 
 
+def test_poster_math_variables_are_italic_and_degree_has_its_own_line() -> None:
+    root = ET.Element(f"{{{SVG['svg']}}}svg", {"width": "8100", "height": "4656"})
+    append = known_best_builder._append_poster_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    append(
+        root,
+        spec=RenderSpec(overlays=frozenset()),
+        canvas=known_best_builder.COMPOSITES[1],
+        identity=known_best_builder.retained_identity(_committed_poster_svg()),
+    )
+    block = root.find("svg:g[@data-feature='poster-information']", SVG)
+    assert block is not None
+    first = block.find("svg:text[@data-feature='explainer']", SVG)
+    second = block.find("svg:text[@data-feature='degree-explainer']", SVG)
+    assert first is not None
+    assert second is not None
+    assert "".join(first.itertext()) == (
+        "s(n) is the side of the smallest square holding n unit squares"
+    )
+    assert "".join(second.itertext()) == "deg is the algebraic degree of that side length"
+    spans = list(first)
+    assert [(span.text, span.attrib.get("font-style", "normal")) for span in spans] == [
+        ("s", "italic"),
+        ("(", "normal"),
+        ("n", "italic"),
+        (") is the side of the smallest square holding ", "normal"),
+        ("n", "italic"),
+        (" unit squares", "normal"),
+    ]
+    assert all(
+        span.attrib["font-family"].startswith("Arial")
+        for span in spans
+        if span.attrib.get("font-style") == "italic"
+    )
+    text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    for line in (first, second):
+        extent = text_width("".join(line.itertext()), line.attrib["font-size"])
+        extent += sum((Decimal(span.attrib.get("dx", "0")) for span in line), Decimal(0))
+        assert Decimal(line.attrib["x"]) + extent == 8040
+        assert Decimal(line.attrib["x"]) >= 4640
+    features = ("explainer", "degree-explainer", "citations", "credit", "release-stamp")
+    lines = [block.find(f"svg:text[@data-feature='{feature}']", SVG) for feature in features]
+    assert all(line is not None for line in lines)
+    baselines = [Decimal(line.attrib["y"]) for line in lines if line is not None]
+    assert baselines == [1570, 1660, 1750, 1840, 1930]
+    assert all(above + Decimal("17.1") <= below - 57 for above, below in pairwise(baselines))
+    assert baselines[-1] + Decimal("17.1") <= 2020
+    pdf = cairosvg.svg2pdf(bytestring=ET.tostring(root))
+    fonts = re.findall(rb"/FontName\s*/([^\s/>]+)", pdf)
+    assert any(b"italic" in font.lower() or b"oblique" in font.lower() for font in fonts)
+    assert any(
+        b"italic" not in font.lower() and b"oblique" not in font.lower() for font in fonts
+    )
+
+
+def test_poster_documentation_refuses_overlapping_lines(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(known_best_builder, "POSTER_FOOTER_LINE_PITCH", Decimal(50))
+    append = known_best_builder._append_poster_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    with pytest.raises(ValueError, match="documentation lines overlap"):
+        append(
+            ET.Element("svg"),
+            spec=RenderSpec(overlays=frozenset()),
+            canvas=known_best_builder.COMPOSITES[1],
+            identity=known_best_builder.retained_identity(_committed_poster_svg()),
+        )
+
+
 def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> None:
     root = ET.fromstring(_committed_poster_svg())
     block = root.find('svg:g[@data-feature="poster-information"]', SVG)
@@ -980,7 +1050,7 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
     left, right, top, bottom = (
         Decimal(block.attrib[f"data-{edge}"]) for edge in ("left", "right", "top", "bottom")
     )
-    assert (left, right, top, bottom) == (4640, 8040, 60, 1930)
+    assert (left, right, top, bottom) == (4640, 8040, 60, 2020)
     cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
     card_text = {node for card in cards for node in card.iter(f"{{{SVG['svg']}}}text")}
     information_text = set(block.iter(f"{{{SVG['svg']}}}text"))
@@ -994,6 +1064,7 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
         "repository",
         "legend-label",
         "explainer",
+        "degree-explainer",
         "citations",
         "credit",
         "release-stamp",
@@ -1028,7 +1099,7 @@ def test_poster_information_is_complete_right_aligned_and_clear_of_cards() -> No
         assert left <= text_left <= text_right <= right
         assert top <= y - size
         assert y + size * Decimal("0.3") <= bottom
-        if node.attrib.get("data-feature") == "explainer":
+        if node.attrib.get("data-feature") in {"explainer", "degree-explainer"}:
             assert text_right == right
         elif node.attrib.get("data-feature"):
             assert anchor == "end"
@@ -1057,16 +1128,20 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
     """The cards print bounds and no sources, so the footer says where the sources are.
 
     The owner asked for it on 2026-09-28: "citations for all results are available in
-    the squares project". It is the footer's second line, under the explainer and above
-    the credit, and the accessible description carries the same sentence so a reader
+    the squares project". It sits under the explanatory notes and above the credit,
+    and the accessible description carries the same sentence so a reader
     who never sees the drawing is told as well. Read off both retained composites, since
     the line is shared and a canvas that dropped it should fail by name.
     """
     citations = known_best_builder.SUMMARY_CITATIONS
     assert citations.endswith(known_best_builder.SUMMARY_REPOSITORY)
-    order = ("explainer", "citations", "credit", "release-stamp")
     text_width = known_best_builder._text_width  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     for canvas in known_best_builder.COMPOSITES:
+        order = (
+            ("explainer", "degree-explainer", "citations", "credit", "release-stamp")
+            if canvas.information_in_corner
+            else ("explainer", "citations", "credit", "release-stamp")
+        )
         root = ET.fromstring(canvas.svg_path.read_text(encoding="utf-8"))
         footer = {
             node.attrib["data-feature"]: node
@@ -1074,12 +1149,20 @@ def test_every_composite_footer_says_where_the_citations_are() -> None:
             if node.attrib.get("data-feature") in order
         }
         assert footer["citations"].text == citations, canvas.spec.stem
-        assert [float(footer[feature].attrib["y"]) for feature in order] == [
+        baselines = [
             float(canvas.explainer_baseline),
             float(canvas.citations_baseline),
             float(canvas.credit_baseline),
             float(canvas.stamp_baseline),
-        ], canvas.spec.stem
+        ]
+        if canvas.information_in_corner:
+            baselines.insert(
+                1,
+                float(canvas.explainer_baseline + known_best_builder.POSTER_FOOTER_LINE_PITCH),
+            )
+        assert [float(footer[feature].attrib["y"]) for feature in order] == baselines, (
+            canvas.spec.stem
+        )
         room = (
             known_best_builder.POSTER_INFORMATION_WIDTH
             if canvas.information_in_corner

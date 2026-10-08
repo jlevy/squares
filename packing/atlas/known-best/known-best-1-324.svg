@@ -28,12 +28,11 @@
     </sqpack:profile>
   </metadata>
   <rect width="8100" height="4656" fill="#ffffff" />
-  <g data-feature="poster-information" data-left="4640" data-right="8040" data-top="60" data-bottom="1930">
-    <text data-feature="poster-title" x="8040" y="204" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="144" font-weight="700" fill="#17202a" letter-spacing="4.5">324 BEST KNOWN SQUARE PACKINGS</text>
+  <g data-feature="poster-information" data-left="4640" data-right="8040" data-top="60" data-bottom="2020">
+    <text data-feature="poster-title" x="8040" y="204" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="144" font-weight="700" fill="#17202a" letter-spacing="4.5">BEST KNOWN SQUARE PACKINGS</text>
     <text data-feature="release" x="8040" y="340" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="700" fill="#17202a">Including new results (October 8, 2026)</text>
     <polygon data-feature="release-star" points="6521.445428571428571428571429,279.2714285714285714285714286 6529.306714285714285714285715,301.8802857142857142857142857 6553.236,302.3705714285714285714285714 6534.165,316.834 6541.095857142857142857142858,339.7437142857142857142857143 6521.445428571428571428571429,326.0714285714285714285714286 6501.795,339.7437142857142857142857143 6508.725857142857142857142858,316.834 6489.654857142857142857142858,302.3705714285714285714285714 6513.584142857142857142857143,301.8802857142857142857142857" fill="#a3123f" />
     <text data-feature="repository" x="8040" y="450" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="700" fill="#17202a">github.com/jlevy/squares</text>
-    <text data-feature="poster-details" x="8040" y="560" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">n = 1..324; 18 square-bound rows; 52,650 unit squares</text>
     <g data-feature="evidence-legend">
       <rect data-feature="evidence-badge" data-evidence="proved optimal" x="7433.232" y="675" width="57" height="57" rx="13.5" fill="#5c6673" stroke="none" stroke-width="3.6" />
       <text x="7461.732" y="719.25" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="45" font-weight="650" fill="#ffffff">O</text>
@@ -69,10 +68,11 @@
       <text x="6780.696" y="1387.2" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="34.5" font-weight="650" fill="#17202a">0</text>
       <text x="8040" y="1392" text-anchor="end" data-feature="legend-label" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">shade indicates number of full-side contacts</text>
     </g>
-    <text data-feature="explainer" x="5097.432" y="1570" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f"><tspan font-style="italic">s</tspan><tspan dx="3.135">(</tspan><tspan font-style="italic">n</tspan><tspan dx="3.135">) is the side of the smallest square holding </tspan><tspan font-style="italic">n</tspan><tspan dx="3.135"> unit squares; deg is the algebraic degree of that side length</tspan></text>
-    <text data-feature="citations" x="8040" y="1660" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">Citations for all results are available in the Squares Project: github.com/jlevy/squares</text>
-    <text data-feature="credit" x="8040" y="1750" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">Diagram by Joshua Levy with assistance from Claude and Codex</text>
-    <text data-feature="release-stamp" x="8040" y="1840" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">v0.5.0-4550ad</text>
+    <text data-feature="explainer" x="6386.658" y="1570" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f"><tspan font-style="italic" font-family="Arial, Helvetica, sans-serif">s</tspan><tspan dx="3.135">(</tspan><tspan font-style="italic" font-family="Arial, Helvetica, sans-serif">n</tspan><tspan dx="3.135">) is the side of the smallest square holding </tspan><tspan font-style="italic" font-family="Arial, Helvetica, sans-serif">n</tspan><tspan dx="3.135"> unit squares</tspan></text>
+    <text data-feature="degree-explainer" x="6798.312" y="1660" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f"><tspan>deg is the algebraic degree of that side length</tspan></text>
+    <text data-feature="citations" x="8040" y="1750" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">Citations for all results are available in the Squares Project: github.com/jlevy/squares</text>
+    <text data-feature="credit" x="8040" y="1840" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">Diagram by Joshua Levy with assistance from Claude and Codex</text>
+    <text data-feature="release-stamp" x="8040" y="1930" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="57" font-weight="700" fill="#47525f">v0.5.0-4550ad</text>
   </g>
   <g data-feature="packing-card" data-n="1" data-row="0" data-column="0" data-source-id="W-known-best-n001">
     <rect data-feature="container-outline" x="84" y="72" width="158" height="158" fill="#ffffff" stroke="#000000" stroke-width="1.15" />

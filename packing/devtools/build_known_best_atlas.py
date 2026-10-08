@@ -42,6 +42,7 @@ from datetime import date
 from decimal import ROUND_HALF_EVEN, Decimal
 from fractions import Fraction
 from functools import cache
+from itertools import pairwise
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
@@ -377,7 +378,7 @@ POSTER_SUBTITLE_SIZE = "78"
 POSTER_FOOTER_SIZE = "57"
 POSTER_INFORMATION_WIDTH = Decimal(3400)
 POSTER_INFORMATION_TOP = SUMMARY_SIDE_MARGIN
-POSTER_INFORMATION_BOTTOM = Decimal(1930)
+POSTER_INFORMATION_BOTTOM = Decimal(2020)
 POSTER_TITLE_BASELINE = Decimal(204)
 POSTER_RELEASE_BASELINE = Decimal(340)
 POSTER_REPOSITORY_BASELINE = Decimal(450)
@@ -385,6 +386,13 @@ POSTER_LEGEND_BASELINE = Decimal(720)
 POSTER_LEGEND_ROW_PITCH = Decimal(96)
 POSTER_EXPLAINER_BASELINE = Decimal(1570)
 POSTER_FOOTER_LINE_PITCH = Decimal(90)
+POSTER_EXPLAINER_LINES = (
+    (*SUMMARY_EXPLAINER_RUNS[:-1], (" unit squares", False)),
+    (("deg is the algebraic degree of that side length", False),),
+)
+#: Quartz selects upright Helvetica Bold even for italic SVG spans. Arial's italic
+#: face embeds correctly in Cairo's PDF and has compatible advances for these letters.
+POSTER_ITALIC_FONT = "Arial, Helvetica, sans-serif"
 # Helvetica, with Arial as the metric-compatible stand-in where Helvetica is
 # absent. No webfont is referenced, so nothing is fetched at render time and the
 # figure is the same family everywhere it is opened.
@@ -615,7 +623,8 @@ class CompositeCanvas:
             if self.information_in_corner
             else SUMMARY_FOOTER_LINE_PITCH
         )
-        return self.explainer_baseline + pitch
+        lines = len(POSTER_EXPLAINER_LINES) if self.information_in_corner else 1
+        return self.explainer_baseline + pitch * lines
 
     @property
     def credit_baseline(self) -> Decimal:
@@ -1911,18 +1920,21 @@ def _append_summary_explainer(
     canvas_width: int,
     right_edge: Decimal | None = None,
     type_scale: Decimal = Decimal(1),
+    runs: Sequence[tuple[str, bool]] = SUMMARY_EXPLAINER_RUNS,
+    feature: str = "explainer",
+    italic_font_family: str | None = None,
 ) -> None:
     font_size = format_svg_number(Decimal(SUMMARY_FOOTER_SIZE) * type_scale)
     kern_width = Decimal(font_size) * SUMMARY_ITALIC_KERN
     kern = format_svg_number(kern_width)
     line_width = sum(
-        (_text_width(text, font_size) for text, _italic in SUMMARY_EXPLAINER_RUNS),
+        (_text_width(text, font_size) for text, _italic in runs),
         Decimal(0),
     ) + kern_width * Decimal(
         sum(
             1
-            for index, (_text, italic) in enumerate(SUMMARY_EXPLAINER_RUNS)
-            if index and not italic and SUMMARY_EXPLAINER_RUNS[index - 1][1]
+            for index, (_text, italic) in enumerate(runs)
+            if index and not italic and runs[index - 1][1]
         )
     )
     if right_edge is not None and line_width > POSTER_INFORMATION_WIDTH:
@@ -1931,7 +1943,7 @@ def _append_summary_explainer(
         root,
         "text",
         {
-            "data-feature": "explainer",
+            "data-feature": feature,
             # Anchored from the left rather than centred: a centred run made of several
             # tspans is not laid out as one chunk by every renderer, and the parts stack
             # on the same centre. Measuring the line and starting it is unambiguous.
@@ -1948,8 +1960,10 @@ def _append_summary_explainer(
         },
     )
     previous_italic = False
-    for text, italic in SUMMARY_EXPLAINER_RUNS:
+    for text, italic in runs:
         attributes: dict[str, str] = {"font-style": "italic"} if italic else {}
+        if italic and italic_font_family is not None:
+            attributes["font-family"] = italic_font_family
         # An upright run following an italic one needs the same thin space the cards use.
         if previous_italic and not italic:
             attributes["dx"] = kern
@@ -2067,6 +2081,21 @@ def _append_poster_information(
     root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas, identity: CompositeIdentity
 ) -> None:
     right = canvas.information_right
+    document_baselines = [
+        canvas.explainer_baseline + POSTER_FOOTER_LINE_PITCH * index
+        for index in range(len(POSTER_EXPLAINER_LINES))
+    ] + [canvas.citations_baseline, canvas.credit_baseline, canvas.stamp_baseline]
+    font_size = Decimal(POSTER_FOOTER_SIZE)
+    if any(
+        above + font_size * Decimal("0.3") > below - font_size
+        for above, below in pairwise(document_baselines)
+    ):
+        raise ValueError("poster documentation lines overlap")
+    if (
+        document_baselines[0] - font_size < POSTER_INFORMATION_TOP
+        or document_baselines[-1] + font_size * Decimal("0.3") > POSTER_INFORMATION_BOTTOM
+    ):
+        raise ValueError("poster documentation lies outside its information block")
     block = sub(
         root,
         "g",
@@ -2134,13 +2163,17 @@ def _append_poster_information(
         "repository", SUMMARY_REPOSITORY, POSTER_REPOSITORY_BASELINE, POSTER_SUBTITLE_SIZE
     )
     _append_summary_legend(block, spec=spec, canvas=canvas)
-    _append_summary_explainer(
-        block,
-        baseline=canvas.explainer_baseline,
-        canvas_width=canvas.width,
-        right_edge=right,
-        type_scale=POSTER_INFORMATION_TYPE_SCALE,
-    )
+    for index, runs in enumerate(POSTER_EXPLAINER_LINES):
+        _append_summary_explainer(
+            block,
+            baseline=document_baselines[index],
+            canvas_width=canvas.width,
+            right_edge=right,
+            type_scale=POSTER_INFORMATION_TYPE_SCALE,
+            runs=runs,
+            feature="explainer" if index == 0 else "degree-explainer",
+            italic_font_family=POSTER_ITALIC_FONT,
+        )
     text_line("citations", SUMMARY_CITATIONS, canvas.citations_baseline)
     text_line("credit", SUMMARY_CREDIT, canvas.credit_baseline)
     text_line("release-stamp", identity.stamp, canvas.stamp_baseline)
