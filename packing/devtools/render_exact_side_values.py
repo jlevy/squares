@@ -867,6 +867,15 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
             if current_side is None
             else f"The current register side is `{_table_text(current_side)}`."
         )
+        identity_lines = []
+        for field, label in (
+            ("algebraic_source", "Polynomial origin"),
+            ("exact_form", "Retained source expression"),
+        ):
+            value = entry.get(field)
+            if value is not None:
+                literal = escape(str(value), quote=False)
+                identity_lines.append(f"{label}: <code>{literal}</code>.")
         bead = entry.get("bead")
         bead_text = "none" if bead is None else f"`{_table_text(bead)}`"
         name = f"H_{{{n},{seen[n]}}}"
@@ -885,6 +894,8 @@ def historical_polynomials_markdown(register: Mapping[str, Any]) -> str:
                         + (", ".join(f"`{_table_text(value)}`" for value in statuses) or "none")
                         + f". Route bead: {bead_text}."
                     ),
+                    "",
+                    *identity_lines,
                     "",
                     f"Exact checks: {_historical_checks(entry)}.",
                     "",
@@ -1077,7 +1088,7 @@ def render(
         "PAPER_TYPE_CSS": PAPER_TYPE_CSS.read_text(encoding="utf-8"),
         **render_n11_lower_bounds_explainer.publication_layer(),
         "PAPER_CSS": STYLE.read_text(encoding="utf-8"),
-        "SITE_FAVICON": favicon_html(),
+        "SITE_FAVICON": favicon_html(inline=True),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
         "SITE_NAV": nav_html("papers", root=SITE_ROOT),
         "COLOPHON": colophon_lines(edition=""),
@@ -1099,7 +1110,7 @@ def render_browser(*, revision: str | None = None) -> str:
     static = render_n11_lower_bounds_explainer.kpress_static()
     values = {
         "PAGE_HEAD": head_tags(page_meta()),
-        "SITE_FAVICON": favicon_html(),
+        "SITE_FAVICON": favicon_html(root=SITE_ROOT),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
         "SITE_NAV": nav_html("papers", root=SITE_ROOT),
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),

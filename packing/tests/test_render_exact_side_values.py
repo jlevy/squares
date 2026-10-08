@@ -10,12 +10,13 @@ from __future__ import annotations
 
 import json
 from copy import deepcopy
-from html import escape
+from html import escape, unescape
 from pathlib import Path
 from typing import Any
 
 import pytest
 
+from devtools import build_exact_values as exact
 from devtools import check_published_site
 from devtools import render_exact_side_values as paper
 
@@ -107,6 +108,7 @@ def small_document() -> dict[str, Any]:
         "url": "https://example.test/compared.html",
     }
     historical = {
+        "algebraic_source": "catalogue",
         "attribution": {
             "date_mentions": ["September 2023"],
             "source_text": ["The source labels this row invalid."],
@@ -409,6 +411,38 @@ def test_retained_attribution_is_literal_source_text_not_paper_markdown() -> Non
     assert 'href="squares_in_squares__n^2-n-1.html"' not in rendered
     assert "kpress-math" not in rendered
     assert r"\Nn{8.96028765944389}" in rendered
+
+
+def test_the_complete_archive_preserves_n258_source_expression_and_derived_origin() -> None:
+    source = exact.catalogue_entries()[258]
+    current = exact.build_entry(258, exact.load_packing(258), source, exact.kkt_rows().get(258))
+    historical = exact.source_closed_form_history(current, source)
+    assert historical is not None
+    register = small_document()["register"]
+    register["historical_entries"] = [historical]
+    html, markdown = paper.render(
+        paper.ARTICLE.read_text(encoding="utf-8"), register=register, revision=REVISION
+    )
+    for output in (html, markdown):
+        assert "Retained source expression: <code>(19/2) + 5 sqrt(2)</code>." in output
+        assert "Polynomial origin: <code>derived-from-source-closed-form</code>." in output
+        assert "4s^{2}" in output
+        assert "https://kingbird.myphotos.cc/packing/squares_in_squares.html" in output
+    historical["exact_form"] = '<span id="source-expression-control">sqrt(2)</span>'
+    html, markdown = paper.render(
+        paper.ARTICLE.read_text(encoding="utf-8"), register=register, revision=REVISION
+    )
+    for output in (html, markdown):
+        assert '<span id="source-expression-control">' not in output
+        assert historical["exact_form"] in unescape(output)
+        assert "&lt;span" in output
+
+
+def test_browser_help_describes_the_certified_upward_display_check() -> None:
+    page = paper.render_browser(revision=REVISION)
+    assert "rounding or truncation agreement" in page
+    assert "For a replay-backed SQUISH rational upper bound" in page
+    assert "at least the exact side and less than one final printed unit above it" in page
 
 
 def test_current_source_occurrences_are_rendered_without_duplicate_polynomials() -> None:
