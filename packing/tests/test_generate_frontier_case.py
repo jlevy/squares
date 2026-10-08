@@ -59,6 +59,7 @@ import shutil
 import subprocess
 import sys
 from collections.abc import Mapping
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -69,6 +70,7 @@ from devtools import source_supersession, validate_schemas
 from devtools import squish_followup_packets as update
 from devtools import squish_second_update_packets as second
 from devtools.apply_upper_bound_packets import PREVIOUS_HEADING, earlier_reports, normalized
+from devtools.backfill_algebraic_facts import backfilled
 from devtools.check_basic_bounds import check_case_basic_bounds
 from devtools.check_case_prose import check_case_file
 from devtools.check_source_coverage import COVERAGE, pending_intake_blocker, record_catalogue
@@ -116,6 +118,7 @@ from devtools.generate_frontier_case import (
 )
 from sqpack.assurance import check_case_semantics
 from sqpack.exact_values import CATALOGUE as CATALOGUE_SOURCE
+from sqpack.exact_values import DERIVED_FROM_EXACT_FORM, format_polynomial
 from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -1336,6 +1339,77 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays(
     # Coverage selecting a later source does not authorize assigning that source's
     # facts to an earlier draft's evidence, resources or body before intake.
     assert source_supersession.adopt_selected_report(n, historical, historical) == historical
+
+
+@pytest.mark.parametrize(
+    "n",
+    [
+        88,
+        108,
+        123,
+        126,
+        129,
+        130,
+        153,
+        154,
+        155,
+        179,
+        180,
+        199,
+        207,
+        208,
+        209,
+        236,
+        237,
+        238,
+        239,
+        258,
+        263,
+        302,
+        303,
+    ],
+)
+def test_selected_rational_metadata_survives_refresh_and_backfill(n: int) -> None:
+    """Rebuilding a selected certificate restores its primitive rational identity."""
+    committed = record_path(FRONTIER, n).read_text()
+    _, front, body = committed.split("---\n", 2)
+    document = safe_load(front)
+    case = document["packing"]
+    report = case["reported_upper_bound"]
+    rational = Fraction(report["exact_form"])
+    expected = {
+        "algebraic_degree": 1,
+        "minimal_polynomial": format_polynomial((rational.denominator, -rational.numerator)),
+        "algebraic_source": DERIVED_FROM_EXACT_FORM,
+    }
+    assert {field: report[field] for field in expected} == expected
+    verified = case["verified_upper_bound"]
+    status = (case["reported_status"], case["status"])
+    report["minimal_polynomial"] = None
+    stale = (
+        "---\n" + yaml.safe_dump(document, sort_keys=False, allow_unicode=True) + "---\n" + body
+    )
+    availability = load_availability()
+    if n == 88:
+        availability[n] = _availability(n, CATALOGUE)
+    refreshed = redraft(
+        n,
+        stale,
+        availability=availability,
+        catalogue=load_drafting_catalogue([n], availability),
+        review_date="2026-10-07",
+        retrieved_date="2026-10-07",
+    )
+    rebuilt = safe_load(refreshed.split("---\n", 2)[1])["packing"]
+    regenerated = rebuilt["reported_upper_bound"]
+    assert {field: regenerated[field] for field in expected} == expected
+    assert regenerated["exact_form"] == report["exact_form"]
+    assert regenerated["source_key"] == report["source_key"]
+    assert regenerated["evidence"] == report["evidence"]
+    assert rebuilt["verified_upper_bound"] == verified
+    assert (rebuilt["reported_status"], rebuilt["status"]) == status
+    assert backfilled(refreshed, n) == refreshed
+    assert backfilled(backfilled(stale, n), n) == backfilled(stale, n)
 
 
 def test_selected_squish_publication_admits_integer_rational_sides(

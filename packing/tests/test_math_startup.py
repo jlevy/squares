@@ -326,3 +326,37 @@ def test_cli_requires_complete_pairs_and_positive_run_counts() -> None:
         with pytest.raises(SystemExit) as error:
             check_math_startup.main(args)
         assert error.value.code == 2
+
+
+@pytest.mark.parametrize("wait", [300, 0, None, math.nan])
+def test_known_delay_uses_its_readiness_wait_even_after_a_slow_navigation(
+    monkeypatch: pytest.MonkeyPatch, wait: float | None
+) -> None:
+    required_findings = {
+        "missing-math": "incorrect parameter math",
+        "wrong-active-variant": "incorrect parameter math",
+        "missing-counters": "missing instrumentation: font_hooks",
+        "late-target": "expected 14 active parameter targets, found 15",
+    }
+
+    def measure(path: Path, **_options: object) -> JsonRecord:
+        control = path.stem
+        return {
+            "metrics": {
+                "finish_validation_ms": 1,
+                "parameters_ready_ms": 325.9 if control == "delayed" else 200.9,
+                "initial_ready_wait_ms": wait if control == "delayed" else 0,
+            },
+            "counters": {
+                "ready_calls": 0 if control == "no-warmup" else 1,
+                "anchor_samples": 0,
+            },
+            "findings": [required_findings[control]] if control in required_findings else [],
+        }
+
+    monkeypatch.setattr(check_math_startup, "measure_startup", measure)
+    report = check_math_startup.self_test(mode="parameters")
+    expected = (
+        [] if wait == 300 else ["the delayed control did not record the known 300 ms delay"]
+    )
+    assert report["findings"] == expected
