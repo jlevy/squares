@@ -3,10 +3,11 @@ type: is
 id: is-01m49ph0abvy6j16zcq4jse39y
 title: "Spec: a static, crawlable site with a registered URL scheme"
 kind: epic
-status: open
+status: in_progress
 priority: 1
-version: 25
+version: 26
 spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
+delegate: claude-code@spud10.local
 labels:
   - pages
   - seo
@@ -36,7 +37,10 @@ child_order_hints:
   - is-01m49phfh02r7qahr2cvfdj7bm
   - is-01m49phg7djcnvfnnrcvaj2bn6
   - is-01m49phgy0q97dv3qsz0865ev7
+hold: null
+hold_until: null
 created_at: 2026-10-06T22:49:38.379Z
-updated_at: 2026-10-06T22:49:55.392Z
+updated_at: 2026-10-08T00:32:24.625Z
+started_at: 2026-10-08T00:32:24.610Z
 ---
 Every published page complete static HTML at a registered permanent URL; cases/N.html the canonical case page; sitemap, 404, structured data; byte and CLS budgets in CI. Spec: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md

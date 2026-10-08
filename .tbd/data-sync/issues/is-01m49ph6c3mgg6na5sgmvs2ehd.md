@@ -5,7 +5,7 @@ title: "B2: cases/ as a static index; legacy ?n=N and cases.html#n-N forward to 
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-06-site-urls-seo-performance.md
 delegate: claude-code@vm
 labels:
@@ -15,7 +15,11 @@ parent_id: is-01m49ph0abvy6j16zcq4jse39y
 hold: null
 hold_until: null
 created_at: 2026-10-06T22:49:44.579Z
-updated_at: 2026-10-06T22:55:08.694Z
+updated_at: 2026-10-08T00:32:33.748Z
 started_at: 2026-10-06T22:55:08.694Z
 ---
 Lane B.
+
+## Notes
+
+PR #395 review A1: preserve cases/#n-N, cases/index.html#n-N, cases/?n=N with meaningful fragment and embed query state, and cases.html#n-N. Review: https://github.com/jlevy/squares/pull/395#pullrequestreview-5450014385.
