@@ -104,6 +104,7 @@ def linked_proofs(private: Path) -> Path:
     return private
 
 
+@pytest.mark.slow
 def test_linked_proof_batch_matches_all_fresh_standalone_checks(linked_proofs: Path) -> None:
     paths = [
         confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
