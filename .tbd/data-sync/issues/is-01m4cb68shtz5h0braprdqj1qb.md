@@ -5,7 +5,7 @@ title: "Address PR #427 review A: nine-case source integration and CI"
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:29:15.569Z
-updated_at: 2026-10-08T00:16:40.453Z
+updated_at: 2026-10-08T01:04:39.025Z
 started_at: 2026-10-07T23:29:19.638Z
 ---
 Address every A1-A8 finding at83748 from https://github.com/jlevy/squares/pull/427#pullrequestreview-5449633758. Keep strict math, source scope, assurance and 192MiB/900s/1800s budgets. Source owner repair_followup_import, root owns GitHub/tracker; dedicated B,C,D report no additional findings. Final whole reported/confirmed stack requires fresh checks/reviews/actual deployment.
@@ -50,3 +50,9 @@ Deployed401 full site audit/renderings custody: actual draft release406258689 as
 CORRECTION from the actual runner receipt (8 October UTC):
 The prior compound-900-second budget diagnosis was wrong. The exact broad-command start receipt command-c30dfd1a66fd4452bbd3f4cf9b12be9e.start.json for run2a901bed9ed345a79ced825056629aa8 records timeout_seconds1800.0. The existing validator selects FAST_SUITE_BUDGET_SECONDS=1800 when affected-test selection is everything. Recorded ordinary command801.22s plus separately completed heavy185.52s totals986.74s, within the existing broad allowance; total cost1170.53s also within the1800 tier. No timeout/budget verdict, cap raise, test skip or assertion weakening occurred. The original broad EXIT1 still remains a real own-process profiler capability failure; unchanged full module2PASS1.65s and selected heavy1PASS185.52s are separate actual receipts completing selected assertions. Never rewrite the broad outer exit as0. Optional selector optimization in think-tl8n is latency work, not a demonstrated merge blocker.
 This correction is being saved on checkpoint PR431 and source PR427. Upper CI repairs remain necessary in think-x2gl, with future-head review and final checks required. Native source/reply/deployment beads remain open until actual integration/publication.
+
+2026-10-08 current remote preservation audit supersedes earlier head/pending summaries.
+PR43191c6d398 ready/reviewed hosted16SUCCESS50SKIP; latest cost-first body updated. PR4299d582620 hosted30SUCCESS26SKIP; selectedpushgate ebcee... completed63/103selectedPASS1161.29s<existing1800s; ordinary13260PASS30SKIP1XFAIL778.33s, serialheavy1PASS13352deselected178.06s, behavioral endPASS960.94s. Raw outer shell exit unavailable after environmenttransition; no103-step/fullgate or rawEXIT0 claim. Final9d Astra E5450087185/F5450087315/G5450087437/H5450108996 zero remaining findings. Originalfail/cancel outcomes remain unchanged.
+New lowerremote b59aaa8515c9508dc05bba475cddd186f45e0a1e corrects10 oldregularizedatlascertificate refs only, originalgeometry/science unchanged. IndependentAstra full1867squares7468corners bindingPASS. Explicit later exception to broad unselected-atlas-bytepreservation wording; primarymanifest/witnessdata preserved. Hostedlower28SUCCESS26SKIP2FAIL staleDATA_REVISION suite-c anddependentaggregate; pinrepair committedlocal3345c393182c8e322cd214685f24c200c28693f3 (pinb59), exactheadselectedgate inprogress. Upper9d omitsnewloweratlasrows; dedicatedSol integratesfinalparent with normalmerge+documentedmandatorypin and scopedchecks. Formalstack430 remainsdraft/unmerged, issue422open, matchingdeploymentUNRUN.
+Newcuratedoperationalarchive locallymemberverified1968members120072986rawB/18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc; upload/downloadproofpending. Allprior draftrelease406258689 assets remainimmutable. Sourceheads retainedonGitHub, native tbd-sync separate; finaloutboxaudit dueafterwrites.
+Issue428 frozen-v2 correctsworkload total11390perroute, meaningfulmock3PASS EXIT0, full5inputsidenticalto preservedv1. Scientificdeciders0; finalprotocolreviews not yetaccepted, custody andstorage/admissionpending. Wrongmetricfindingthink-wgdc staysopenpendingfinalreviews; no sciencepromotion. Issue42510preparedinputs/protocolaccepted butactualdeciders0/storageunresolved. Standard422 postmerge live/results/casegraphics/atlasverificationprepared75artifactchecks; actualmatchingdeployment remainsrequired.

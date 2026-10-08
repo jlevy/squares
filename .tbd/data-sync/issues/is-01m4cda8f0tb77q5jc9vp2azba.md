@@ -5,7 +5,7 @@ title: Preserve complete cloud intake checkpoint on PRs and GitHub
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:06:23.456Z
-updated_at: 2026-10-08T00:48:02.626Z
+updated_at: 2026-10-08T01:04:36.250Z
 started_at: 2026-10-08T00:07:06.684Z
 ---
 Save the current import branches and formal stack, accurate terminal validation/review state, native finding ownership, remaining intake queue, and complete unreplayed issue425 research backup in durable GitHub PRs and synced beads. Verify remote heads, release custody, and empty outboxes without implying unfinished acceptance.
@@ -55,3 +55,9 @@ Final Astra wholepost0d E/F/G/H round3 at9d all0remainingfindings, published E54
 Final localgate currentrunebcee2ef593845dd98df67e71f861edf at9d usesprojecttoolPATH+tini-s+supportedown-proc capability, fullyimplicitstandard4CPU scheduling.98metadata commands/62editstepsPASS, ordinarywholebehavior running with3506PASS0FAIL atlatestownerupdate; heavy/terminalstillPENDING. Prior9d attempt cancelled130 because Ruff/typecheck PATH discovery missing, sourceunchanged; priora6 serialization/process failures+cancellation retained. Never inferoutergreen from progress.
 CheckpointPR431final91c6 reviewed/formalA and actual16SUCCESS38documentedSKIP, READYnon-draft, mergehelduntilsource stack. CIsetupdelay wasapt downloads21.5MB at27.3kB/s, 13m7s; npm1s/browsercachesHIT; actualfrontendcontractsPASS98s. No credential/appfailure or sourcechange/rerun required.
 New428 complete source50files/Gitbundle/tag+3releaseassets retained,68poses272corners/5completejobs prepared, fullR improvement confirmed onlyarithmetically,16/18displayceilingsworseDaniel. Mathsourcebaseline complete; pair/containment/replayUNRUN. Bindingreview found oldhardcodedjobpairtotal26830 vs correct11390, separatebugcreated. Engineer preservingv1/fixingv2; finaldualprotocolreviews/GitHubcustody/CPUlease required beforeactualreplay. No IDsreserved/lower/local/globaloptimum/assurancepromotion.
+
+2026-10-08 current remote preservation audit supersedes earlier head/pending summaries.
+PR43191c6d398 ready/reviewed hosted16SUCCESS50SKIP; latest cost-first body updated. PR4299d582620 hosted30SUCCESS26SKIP; selectedpushgate ebcee... completed63/103selectedPASS1161.29s<existing1800s; ordinary13260PASS30SKIP1XFAIL778.33s, serialheavy1PASS13352deselected178.06s, behavioral endPASS960.94s. Raw outer shell exit unavailable after environmenttransition; no103-step/fullgate or rawEXIT0 claim. Final9d Astra E5450087185/F5450087315/G5450087437/H5450108996 zero remaining findings. Originalfail/cancel outcomes remain unchanged.
+New lowerremote b59aaa8515c9508dc05bba475cddd186f45e0a1e corrects10 oldregularizedatlascertificate refs only, originalgeometry/science unchanged. IndependentAstra full1867squares7468corners bindingPASS. Explicit later exception to broad unselected-atlas-bytepreservation wording; primarymanifest/witnessdata preserved. Hostedlower28SUCCESS26SKIP2FAIL staleDATA_REVISION suite-c anddependentaggregate; pinrepair committedlocal3345c393182c8e322cd214685f24c200c28693f3 (pinb59), exactheadselectedgate inprogress. Upper9d omitsnewloweratlasrows; dedicatedSol integratesfinalparent with normalmerge+documentedmandatorypin and scopedchecks. Formalstack430 remainsdraft/unmerged, issue422open, matchingdeploymentUNRUN.
+Newcuratedoperationalarchive locallymemberverified1968members120072986rawB/18844811compressedB SHA25607d7116be95698e1c4a3ec4f7d51c55d3f52da6072afd71ddfa729d11ed5d7fc; upload/downloadproofpending. Allprior draftrelease406258689 assets remainimmutable. Sourceheads retainedonGitHub, native tbd-sync separate; finaloutboxaudit dueafterwrites.
+Issue428 frozen-v2 correctsworkload total11390perroute, meaningfulmock3PASS EXIT0, full5inputsidenticalto preservedv1. Scientificdeciders0; finalprotocolreviews not yetaccepted, custody andstorage/admissionpending. Wrongmetricfindingthink-wgdc staysopenpendingfinalreviews; no sciencepromotion. Issue42510preparedinputs/protocolaccepted butactualdeciders0/storageunresolved. Standard422 postmerge live/results/casegraphics/atlasverificationprepared75artifactchecks; actualmatchingdeployment remainsrequired.
