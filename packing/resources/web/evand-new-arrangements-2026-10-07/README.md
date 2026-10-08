@@ -113,6 +113,35 @@ Linked admission and post-mutation rejection each completed within their unchang
 45-second subprocess bounds.
 Final footprint checks include the completed review and this record.
 
+## Publication Validation
+
+The required `packing-validate --push --since b8eff87c241c1c4f28f96fd5df1296cbb2dc4ef0
+--jobs 2 --inner-jobs 1` run at `337171f65` exited 1 after 1,837.14 seconds.
+Its reachable behavioral suite hit the unchanged 1,800-second ceiling after archived
+source Python conservatively selected the full suite.
+Concurrent host work and external storage contention were observed; this is a failed
+aggregate, not a latency estimate.
+The ignored workbench dependency link, Lean-string classification and three stale
+rigidity blocks were repaired with scoped checks.
+Original acquired bytes remain unchanged, and the current three poses were independently
+rescreened before updating their numerical rigidity summaries.
+
+The index also exceeded its unchanged 2,800,000-byte cap at 2,826,013 bytes.
+The bounded payload correction retains every full claim, significance, novelty and
+record link in the offline row preview, while keeping composition and next-rung context
+in the full fetched result view.
+Its acceptance rule requires all those content checks and both unchanged page caps.
+The maintained overview regression reports 2,612,808 bytes for the index and 1,252,013
+bytes for the results page, below its 1,450,000-byte cap.
+The combined scanner and preview controls pass 132 tests in 17.56 seconds; the final
+whole-claim and cap checks pass two tests in 13.40 seconds.
+
+Three inherited n17 assertions still fail in a separate targeted reproduction: the
+widened-box worst-ratio receipt and two pilot interval-certificate chunk identities.
+Their code, tests and original retained inputs are unchanged from the parent.
+This intake does not regenerate their scientific evidence or claim an aggregate pass.
+Exact-head hosted validation remains a separate publication obligation.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
