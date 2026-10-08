@@ -5,7 +5,7 @@ title: Try a narrower poster with the last four grid segments on separate lines
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,11 +13,11 @@ parent_id: is-01m4e35s7r1e65r1qmpz250h0p
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:29:58.047Z
-updated_at: 2026-10-08T23:07:13.114Z
+updated_at: 2026-10-08T23:21:27.260Z
 started_at: 2026-10-08T22:30:07.762Z
 ---
 Render a reviewable 324-packing PDF variant: from n=197 onward, keep each non-grid prefix left aligned and move the complete regular-grid suffix onto its own second, right-aligned physical line. Make the poster approximately as wide as the logical row starting at n=170, keeping drawing scale, half-drawing separation, clear outer margins and dimension labels. Move and fit the upper-right information block inward so its right edge follows the final drawing. Preserve the current poster in Git for comparison. Acceptance: all 324 drawings remain complete and unchanged internally; canonical segment membership is correct; grid suffixes and final information align at the right edge; text and markers do not overlap or clip; maintain the latest names-only credits and four-line closing block. Update declared layout metadata, existing regressions, measured documentation, exports and preview; independently review the actual PDF before PR validation.
 
 ## Notes
 
-Source and focused placement checks are frozen and independently reviewed. Canvas is 6523 x 6090, with 27 physical columns and 22 lines; n=197 onward grid suffixes align at x=6369. Drawing size remains 158, gap 79, and upper-right information width 2600. Retained figure and manifest layout records have been refreshed without changing case facts. Actual composite regeneration and final PDF visual review are next.
+Implemented and independently reviewed source and actual PDF. Retained records declare 6523 x 6090; both export families pass receipts at v0.5.0-d32a82. Four suffix lines begin at 212, 242, 274 and 308 and align at x=6369; unchanged drawing scale, clean margins, three balanced credit lines and four closing lines are verified. All 67 mandatory atlas Chromium checks pass with no skips. Final integrated gate and PR remain in think-142l.
