@@ -29030,3 +29030,25 @@ evidence:
       overlaps that source checker. The second maintained rational-geometry route is a separate deciding
       implementation; both routes share certificate parsing, half-angle conversion, Fraction arithmetic
       and the separating-axis method. No two independent methods, human oversight or optimality is claimed.'
+
+  - id: E-wand125-fine-net-n27-5655-followup-report
+    claim: lower-bound
+    scope:
+      n_values:
+      - 27
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The author reports 1131/200 at all 2073 directions; complete original byte custody and
+      conditional maintained mass/net premises are accepted. The 32-direction 197/200 control remains
+      sampled. Fresh full native capture, whole-net controls, restored positives, private-worker binding
+      and independent result review remain pending. The copied project kernel establishes no independent
+      implementation. No standing bound or rating changes; the original seven-case report is preserved.
+    source_reviewed: '2026-10-08'

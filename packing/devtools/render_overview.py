@@ -1387,7 +1387,7 @@ def iter_result_fragments() -> Iterator[Page]:
 
 
 def result_fragments() -> list[Page]:
-    """Materialize every canonical result page for complete site publication."""
+    """Materialize canonical result pages for complete site publication."""
     return list(iter_result_fragments())
 
 
