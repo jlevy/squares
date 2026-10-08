@@ -5,13 +5,13 @@ title: "n17: quantitatively lift the accepted 25-row point restriction to one cl
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-07T21:52:06.576Z
-updated_at: 2026-10-08T00:14:04.526Z
+updated_at: 2026-10-08T05:38:03.361Z
 ---
 The accepted exp296 certificate removes25 complete owner18 (label11) closed rows,
 indices19–23 and33–52, under the fixed owner0 pose at tau=53/128.
@@ -40,6 +40,14 @@ prospective contract. No new target starts from this handoff automatically.
 The accepted point restriction and hand-derived existence argument change neither the
 ordinary census nor the global bounds. Global capture remains separate. Mechanical
 current-source certification under think-7hy3 should run beside this mathematical lane.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
+
+## Notes
+
+Session186 disposition:297 freshly reconstructed originalregionaldomains but only22/25 exclusions at h1/512.299 achieved SAME25positivewidth h2^-23/25/64 restriction through fixed-Q0 ownership and inheritedforeignproofchain; regional_domains_reconstructed=false. Geometriclift objective achieved by alternative transport, literaloriginal992fresh-domain implementation requirement remainsunmet. Keepthisbeadopen; do not claim originalalgorithmPASS or ordinaryadmission.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

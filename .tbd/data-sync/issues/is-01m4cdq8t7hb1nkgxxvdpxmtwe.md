@@ -5,7 +5,7 @@ title: Coordinate Session186 six-hour n17 mathematical and efficiency continuati
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-07-n17-six-hour-continuation.md
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 child_order_hints:
   - is-01m4ch0gxyme0y2vdmdty08dss
 created_at: 2026-10-08T00:13:29.789Z
-updated_at: 2026-10-08T01:10:58.728Z
+updated_at: 2026-10-08T05:38:02.155Z
 ---
 ---
 title: n17 Six-Hour Mathematical and Efficiency Continuation
@@ -175,6 +175,14 @@ Set `TMPDIR`, `UV_CACHE_DIR` and checkout-specific `CARGO_TARGET_DIR` under
 `/Volumes/spud-ext1/agent-scratch/n17-six-hour-01a114fb/`. Use the existing external
 Python3.14.7 environment; never the older `python3` on PATH. Native binary export
 remains blocked pending explicit authorization; no upload workaround is authorized.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
+
+## Notes
+
+Session18605:37 boundary: scientific targets297-314 disposition retained, 313/314 proper102octagon/114disk cuts, zeroordinary impossiblepairs, future shared34-centre LP first8+endpoint protocol ready. C2FULL incomplete480.468s sampler ps1s timeout; no admission/bounds/capture. Sourceb92 seals currentviews256/243. Full checkpointunlaunched/disk/lateststart missed; final30 now publication/CI/records/cost/debt. Sessionremainsactiveuntil06:10:09.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

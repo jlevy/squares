@@ -5,13 +5,13 @@ title: "n17: independently review global contact normalization and complete angl
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 spec_path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-07T21:32:32.543Z
-updated_at: 2026-10-08T01:45:23.089Z
+updated_at: 2026-10-08T05:38:02.765Z
 ---
 Review the sole-Astra hand-derived global contact-normalization argument in
 `docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md`.
@@ -32,6 +32,14 @@ Budget two mathematical review blocks first. Select an implementation/measuremen
 block only after the reviewed contract identifies a complete finite coverage interface
 and a predeclared useful outcome. Exact evidence and failed approaches belong in the
 registry; keep global capture and current-source certification separate.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
+
+## Notes
+
+Session186 Astra hand derivations expanded: complete52-variable bounded-degree stationarity/chart contract, rank35filter completeMISS/all95survive, tiltedowner necessarycondition2419tau^2-2338tau+81<=0, forest/triangle/convexification lemmas. Sole Astra mathematics, no independent confirmation. Actual313/314 exactnecessarypaircuts select future shared-centre LP, not censusexclusion. Independent mathematical review/globalcapture remainopen. W3andfutureLPnote retained.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
