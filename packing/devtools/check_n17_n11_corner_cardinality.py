@@ -351,7 +351,7 @@ def intake(document: Any, deadline: float) -> tuple[Any, ...]:
         "corner-cardinality context differs",
     )
     document = cast(dict[str, Any], document)
-    adapted = copy.deepcopy(document) | {"schema": old.CONTEXT_SCHEMA}
+    adapted = document | {"schema": old.CONTEXT_SCHEMA}
     _, names, roster, held = old.intake(adapted, deadline)
     from devtools.check_n17_capacity_one_cover import (  # noqa: PLC0415
         DESIGNS,
@@ -418,8 +418,8 @@ def construct(
 
 
 def generate(document: Any, *, deadline: float) -> dict[str, Any]:
-    frozen = finite.canonical(document)
     polygons, names, roster, endpoint, held = intake(document, deadline)
+    frozen = finite.canonical(document)
     result = construct(polygons, roster, endpoint, deadline=deadline)
     for path, raw in held.items():
         tick(deadline)

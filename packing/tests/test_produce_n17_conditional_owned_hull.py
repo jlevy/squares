@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import gzip
+import hashlib
 import json
 import sys
 import time
@@ -365,6 +366,10 @@ def test_cli_retains_compressed_child_with_content_identity(
     report = json.loads(output.read_text())
     native = json.loads(gzip.decompress(child.read_bytes()))
     assert report["child_object"]["canonical_sha256"] == control.identity(native)
+    assert (
+        report["child_object"]["compressed_sha256"]
+        == hashlib.sha256(child.read_bytes()).hexdigest()
+    )
     assert report["conditional_exclusion_proved"] is False
     assert report["invocation"]["interpreter"] == sys.executable
     stream = ChildStream(child, time.monotonic() + 10)
@@ -419,6 +424,46 @@ def test_child_compressed_and_decoded_limits_are_separate(
         control.output_within(b"123456789")
     with pytest.raises(IncompleteError, match="compressed"):
         control.compressed_within(b"12345")
+
+
+@pytest.mark.parametrize("alias", ["same", "resolved", "symlink", "hardlink", "new"])
+def test_cli_output_alias_refuses_before_scientific_reads_and_preserves_files(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, alias: str
+) -> None:
+    output = tmp_path / "receipt.json"
+    if alias != "new":
+        output.write_bytes(b"preserved evidence")
+    child = output
+    if alias == "resolved":
+        (tmp_path / "subdir").mkdir()
+        child = tmp_path / "subdir/../receipt.json"
+    elif alias in {"symlink", "hardlink"}:
+        child = tmp_path / "child.json.gz"
+        if alias == "symlink":
+            child.symlink_to(output)
+        else:
+            child.hardlink_to(output)
+    monkeypatch.setattr(
+        control, "import_module", lambda _: pytest.fail("scientific checker imported")
+    )
+    with pytest.raises(SystemExit) as refused:
+        control.main(
+            [
+                "--descriptor",
+                "unused",
+                "--max-seconds",
+                "1",
+                "--output",
+                str(output),
+                "--child-output",
+                str(child),
+            ]
+        )
+    assert refused.value.code == 2
+    if alias == "new":
+        assert not output.exists()
+    else:
+        assert output.read_bytes() == child.read_bytes() == b"preserved evidence"
 
 
 @pytest.mark.parametrize("seconds", ["0", "-1", "nan", "inf"])

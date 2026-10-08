@@ -70,6 +70,15 @@ No actual307 Q0 target measured before prospective registration.
 H290endpointchart owner0/label1 axisalignment remains explicit inheritedpremise, not
 newlyformalized.
 
+## Annotation
+
+The historical `quadraticminima<=0` shorthand above has a sign error.
+The frozen implementation checks that the minimum clearance slack is nonnegative,
+equivalently that the maximum negative slack is nonpositive.
+This is the notation clarification already recorded in
+[exp-307](../series/series-000-smoke-and-calibration/experiments/exp-307-h-315-owned-core-guarded-clause.md);
+it does not change the criterion, experiment or outcome.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

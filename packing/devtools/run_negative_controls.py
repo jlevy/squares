@@ -1371,7 +1371,7 @@ def index_tree(root: Path) -> None:
     environment = {
         name: value for name, value in os.environ.items() if not name.startswith("GIT_")
     }
-    source_paths = tracked_files(REPO, ".")
+    source_paths = tracked_files(REPO, ".", environment=environment)
     if source_paths is None:
         raise ValueError("cannot index worker snapshot without the source tracked set")
     names = [

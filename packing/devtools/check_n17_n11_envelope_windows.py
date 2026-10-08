@@ -130,38 +130,35 @@ def read_registry(document: dict[str, Any], deadline: float) -> Any:
         "curated registry Git identity required",
     )
     object_name = document["theorem_registry_git_commit"] + ":" + document["theorem_registry"]
-    tick(deadline)
-    timeout = min(10.0, max(0.001, deadline - time.monotonic()))
-    kind = subprocess.run(
-        ["git", "cat-file", "-t", document["theorem_registry_git_commit"]],
-        cwd=REPO,
-        capture_output=True,
-        check=True,
-        timeout=timeout,
-    ).stdout
+
+    def git_output(*arguments: str) -> bytes:
+        tick(deadline)
+        try:
+            return subprocess.run(
+                ["git", *arguments],
+                cwd=REPO,
+                capture_output=True,
+                check=True,
+                timeout=min(10.0, max(0.001, deadline - time.monotonic())),
+            ).stdout
+        except subprocess.TimeoutExpired as exc:
+            raise finite.IncompleteError("theorem registry Git wall ceiling") from exc
+        except subprocess.CalledProcessError as exc:
+            raise ValueError("theorem registry Git read failed") from exc
+
+    kind = git_output("cat-file", "-t", document["theorem_registry_git_commit"])
     require(kind == b"commit\n", "registry revision must resolve to a Git commit")
-    tick(deadline)
-    size = subprocess.run(
-        ["git", "cat-file", "-s", object_name],
-        cwd=REPO,
-        capture_output=True,
-        check=True,
-        timeout=min(10.0, max(0.001, deadline - time.monotonic())),
-    ).stdout
+    size = git_output("cat-file", "-s", object_name)
     require(len(size) <= 32 and size.strip().isdigit(), "registry Git byte count required")
     if int(size) > INPUT_LIMIT:
         raise finite.IncompleteError("theorem registry byte ceiling")
-    tick(deadline)
-    raw = subprocess.run(
-        ["git", "show", object_name],
-        cwd=REPO,
-        capture_output=True,
-        check=True,
-        timeout=min(10.0, max(0.001, deadline - time.monotonic())),
-    ).stdout
+    raw = git_output("show", object_name)
     require(len(raw) == int(size), "registry Git object size differs")
     tick(deadline)
-    return safe_load(raw.decode("utf-8"))
+    try:
+        return safe_load(raw.decode("utf-8"))
+    except yaml.YAMLError as exc:
+        raise ValueError("theorem registry YAML is invalid") from exc
 
 
 def intake(

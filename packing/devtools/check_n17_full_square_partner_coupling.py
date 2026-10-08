@@ -346,9 +346,19 @@ def constants() -> dict[str, Any]:
 
 
 def generate(document: dict[str, Any], *, deadline: float) -> dict[str, Any]:
-    require(document["schema"] == DESCRIPTOR_SCHEMA, "full-square descriptor schema differs")
+    fields = {k for name in parent.INPUTS for k in (name, name + "_sha256")}
+    require(
+        type(document) is dict
+        and set(document) == {"schema", *fields}
+        and document["schema"] == DESCRIPTOR_SCHEMA,
+        "full-square descriptor fields/schema differs",
+    )
+    require(
+        all(type(document[k]) is str for k in fields),
+        "full-square descriptor paths and digests must be strings",
+    )
     frozen = finite.canonical(document)
-    adapted = copy.deepcopy(document) | {"schema": parent.DESCRIPTOR_SCHEMA}
+    adapted = document | {"schema": parent.DESCRIPTOR_SCHEMA}
     held: dict[Path, tuple[str, int]] = {}
     final, custody, roster, centre = parent.intake(adapted, held, deadline)
     gate = finite.read_json(
@@ -370,7 +380,7 @@ def generate(document: dict[str, Any], *, deadline: float) -> dict[str, Any]:
     tick(deadline)
     return {
         "schema": SCHEMA,
-        "accepted_inputs": copy.deepcopy(document),
+        "accepted_inputs": dict(document),
         "container": standing.CenteredContainer(cases.U, cases.V).record(),
         "parent_custody": {
             k: copy.deepcopy(custody[k])

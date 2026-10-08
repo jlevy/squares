@@ -51,17 +51,15 @@ def nonfinite(_token: str) -> Any:
 def validate(plan: Any) -> list[dict[str, Any]]:
     """Other manifest metadata is retained by its byte identity, not executed."""
 
-    def finite_tree(value: Any) -> None:
+    pending = [plan]
+    while pending:
+        value = pending.pop()
         if type(value) is float:
             require(math.isfinite(value), "nonfinite execution-plan number")
         elif type(value) is list:
-            for item in value:
-                finite_tree(item)
+            pending.extend(value)
         elif type(value) is dict:
-            for item in value.values():
-                finite_tree(item)
-
-    finite_tree(plan)
+            pending.extend(value.values())
     require(type(plan) is dict, "execution plan object required")
     phases = plan.get("phases")
     require(

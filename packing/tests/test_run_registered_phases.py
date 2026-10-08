@@ -118,6 +118,37 @@ def test_nonfinite_plan_refused(number: str, tmp_path: Path) -> None:
         runner.execute(path, tmp_path / "phase-execution.json")
 
 
+@pytest.mark.parametrize("number", ["0", "1e999999"])
+def test_deep_opaque_metadata_is_validated_without_recursive_walk(
+    number: str, tmp_path: Path
+) -> None:
+    path = tmp_path / "deep.json"
+    path.write_text(
+        '{"phases":[{"name":"synthetic","argv":["unused"]}],"metadata":'
+        + "[" * 1200
+        + number
+        + "]" * 1200
+        + "}"
+    )
+    if number == "0":
+        raw, phases = runner.load_plan(path)
+        assert raw == path.read_bytes()
+        assert phases == [{"name": "synthetic", "argv": ["unused"]}]
+    else:
+        with pytest.raises(ValueError, match="nonfinite"):
+            runner.load_plan(path)
+
+
+def test_deep_wrong_plan_retains_normal_cli_refusal(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    path, output = tmp_path / "deep.json", tmp_path / "unused.json"
+    path.write_text('{"metadata":' + "[" * 1200 + "0" + "]" * 1200 + "}")
+    assert runner.main(["--manifest", str(path), "--output", str(output)]) == 2
+    assert json.loads(capsys.readouterr().err)["status"] == "refused"
+    assert not output.exists()
+
+
 def test_partial_receipt_written_before_launch_and_interrupt(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

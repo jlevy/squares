@@ -13,6 +13,7 @@ import json
 import math
 import sys
 import time
+from collections.abc import Iterator
 from fractions import Fraction as Q
 from pathlib import Path, PurePosixPath
 from typing import Any, cast
@@ -42,6 +43,20 @@ class ChildStream(finite.BoundedNode):
     """Separate child decoded ceiling; the accepted parent keeps its 2GiB cap."""
 
     def _fill(self) -> None:
+        if not self.wrapped:
+            source = self._source
+
+            def submitted_text() -> Iterator[str]:
+                while True:
+                    try:
+                        piece = next(source)
+                    except StopIteration:
+                        return
+                    except EOFError as exc:
+                        raise ValueError("conditional child gzip stream is truncated") from exc
+                    yield piece
+
+            self._source = submitted_text()
         super()._fill()
         if self.decoded > CHILD_DECODED_LIMIT:
             raise IncompleteError("conditional child decoded byte ceiling")

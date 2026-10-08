@@ -7,6 +7,7 @@ import json
 import subprocess
 import sys
 import time
+from importlib import import_module
 from pathlib import Path
 from typing import Any
 
@@ -300,3 +301,58 @@ def test_cli_scoped_incomplete_or_refused(
     assert result["status"] == ("refused" if kind == "wrong_schema" else "incomplete")
     assert not result["criterion_met"]
     assert all(result[k] is False for k in tool.parent.scope())
+
+
+@pytest.mark.parametrize(
+    "field", [k for role in tool.parent.INPUTS for k in (role, role + "_sha256")]
+)
+def test_nested_path_or_digest_refuses_before_parent_intake(
+    field: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fields = {k: "unused" for role in tool.parent.INPUTS for k in (role, role + "_sha256")}
+    document = fields | {"schema": tool.DESCRIPTOR_SCHEMA}
+    document[field] = "deep-marker"
+    descriptor, output = tmp_path / "deep.json", tmp_path / "refused.json"
+    descriptor.write_text(
+        json.dumps(document).replace('"deep-marker"', "[" * 1200 + "0" + "]" * 1200)
+    )
+    monkeypatch.setattr(tool.parent, "intake", lambda *_: pytest.fail("parent input read"))
+    assert tool.main(["--descriptor", str(descriptor), "--output", str(output)]) == 1
+    result = json.loads(output.read_bytes())
+    assert result["status"] == "refused"
+    assert "paths and digests" in result["error"]
+    assert not result["criterion_met"]
+    assert all(result[k] is False for k in tool.parent.scope())
+
+
+@pytest.mark.parametrize(
+    "module",
+    [
+        "check_n17_full_square_partner_coupling",
+        "check_n17_guard_conditioned_ownership",
+        "check_n17_n11_corner_cardinality",
+        "check_n17_incircle_projection_redundancy",
+        "check_n17_incircle_disk_projection",
+        "check_n17_two_center_children",
+    ],
+)
+def test_schema_adapters_reject_unknown_deep_metadata_before_input_reads(
+    module: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    adapter = import_module("devtools." + module)
+    nested: Any = 0
+    for _ in range(1200):
+        nested = [nested]
+    schema = getattr(adapter, "DESCRIPTOR_SCHEMA", None) or adapter.CONTEXT_SCHEMA
+    document = {"schema": schema, "unknown": nested}
+    monkeypatch.setattr(
+        adapter.finite, "read_json", lambda *_: pytest.fail("submitted unknown input read")
+    )
+    if module == "check_n17_two_center_children":
+        with pytest.raises(ValueError, match=r"descriptor|context"):
+            adapter.regional(document, {}, {}, deadline())
+    else:
+        with pytest.raises(ValueError, match=r"descriptor|context"):
+            adapter.generate(document, deadline=deadline())
+    assert document["schema"] == schema
+    assert document["unknown"] is nested

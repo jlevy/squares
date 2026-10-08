@@ -733,11 +733,11 @@ def scope() -> dict[str, bool]:
 
 def generate(document: dict[str, Any], *, deadline: float) -> dict[str, Any]:
     require(document["schema"] == DESCRIPTOR_SCHEMA, "guard-owned descriptor schema differs")
-    frozen = finite.canonical(document)
     held: dict[Path, tuple[str, int]] = {}
     final, custody, roster, centre = parent.intake(
-        copy.deepcopy(document) | {"schema": parent.DESCRIPTOR_SCHEMA}, held, deadline
+        document | {"schema": parent.DESCRIPTOR_SCHEMA}, held, deadline
     )
+    frozen = finite.canonical(document)
     gate = finite.read_json(
         finite.retained_path(document["parent_descriptor"]), parent.JSON_LIMIT
     )[1]

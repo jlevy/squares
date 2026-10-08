@@ -58,9 +58,9 @@ def generate(document: Any, *, deadline: float) -> dict[str, Any]:
         type(document) is dict and document.get("schema") == CONTEXT_SCHEMA,
         "disk descriptor schema",
     )
-    frozen = finite.canonical(document)
-    adapted = copy.deepcopy(document) | {"schema": prior.prior.CONTEXT_SCHEMA}
+    adapted = document | {"schema": prior.prior.CONTEXT_SCHEMA}
     polygons, names, roster, _accepted, held = prior.prior.intake(adapted, deadline)
+    frozen = finite.canonical(document)
     base = prior.construct(polygons, names, roster, deadline=deadline)
     require(
         base["complete_classification"] is True

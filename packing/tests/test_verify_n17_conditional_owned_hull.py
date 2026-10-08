@@ -518,6 +518,45 @@ def test_child_nested_duplicate_and_float_refused(tmp_path: Path, raw: bytes) ->
         control.ChildStream(path, time.monotonic() + 10)
 
 
+@pytest.mark.parametrize("read_bytes", [64, 1 << 20])
+def test_gzip_trailer_eof_retains_cli_refusal_at_initial_or_final_read(
+    read_bytes: int, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "truncated.json.gz"
+    raw = b'{"a":1,"steps":[],"z":"' + b"x" * 256 + b'"}'
+    path.write_bytes(gzip.compress(raw)[:-8])
+    descriptor, output = tmp_path / "descriptor.json", tmp_path / "receipt.json"
+    descriptor.write_text("{}")
+    monkeypatch.setattr(control.standing, "READ_BYTES", read_bytes)
+
+    def consume(_document: Any, *, deadline: float) -> Any:
+        stream = control.ChildStream(path, deadline)
+        list(stream.steps())
+        pytest.fail("truncated child accepted")
+
+    monkeypatch.setattr(control, "consume", consume)
+    assert control.main(["--descriptor", str(descriptor), "--output", str(output)]) == 1
+    report = json.loads(output.read_bytes())
+    assert report["status"] == "REFUSED"
+    assert "gzip stream is truncated" in report["error"]
+    assert not report["conditional_exclusion_proved"]
+
+
+@pytest.mark.parametrize("error", [EOFError, RuntimeError])
+def test_child_stream_does_not_normalize_non_read_programming_errors(
+    error: type[Exception], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "complete.json.gz"
+    path.write_bytes(gzip.compress(b'{"steps":[]}'))
+
+    def broken(_deadline: float) -> None:
+        raise error("injected non-read failure")
+
+    monkeypatch.setattr(control.finite, "tick", broken)
+    with pytest.raises(error, match="injected non-read failure"):
+        control.ChildStream(path, time.monotonic() + 10)
+
+
 def test_expired_after_initial_scan_never_reports_closed(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:

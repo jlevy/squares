@@ -199,9 +199,9 @@ def generate(document: Any, *, deadline: float) -> dict[str, Any]:
         type(document) is dict and document.get("schema") == CONTEXT_SCHEMA,
         "projection descriptor schema",
     )
-    frozen = finite.canonical(document)
-    adapted = copy.deepcopy(document) | {"schema": prior.CONTEXT_SCHEMA}
+    adapted = document | {"schema": prior.CONTEXT_SCHEMA}
     polygons, names, roster, _accepted, held = prior.intake(adapted, deadline)
+    frozen = finite.canonical(document)
     result = construct(polygons, names, roster, deadline=deadline)
     for p, raw in held.items():
         tick(deadline)

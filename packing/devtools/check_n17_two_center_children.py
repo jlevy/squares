@@ -235,7 +235,7 @@ def regional(
     deadline: float,
 ) -> dict[str, Any]:
     final, custody, roster, centre = parent.intake(
-        copy.deepcopy(document) | {"schema": parent.DESCRIPTOR_SCHEMA}, held, deadline
+        document | {"schema": parent.DESCRIPTOR_SCHEMA}, held, deadline
     )
     require(
         custody["node_sha256"] == accepted["parent_custody"]["node_sha256"]

@@ -15,6 +15,7 @@ import json
 import math
 import sys
 import time
+from contextlib import suppress
 from importlib import import_module
 from pathlib import Path
 from typing import Any
@@ -295,6 +296,15 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if not math.isfinite(args.max_seconds) or args.max_seconds <= 0:
         parser.error("max-seconds must be finite and positive")
+    try:
+        aliases = args.output.resolve() == args.child_output.resolve()
+        if not aliases:
+            with suppress(FileNotFoundError):
+                aliases = args.output.samefile(args.child_output)
+    except OSError as exc:
+        parser.error(f"cannot resolve output paths: {exc}")
+    if aliases:
+        parser.error("output and child-output must name distinct files")
     checker = import_module("devtools.verify_n17_conditional_owned_hull")
     deadline = time.monotonic() + args.max_seconds
     result: dict[str, Any]

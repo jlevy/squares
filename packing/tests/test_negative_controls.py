@@ -1438,6 +1438,53 @@ def test_snapshot_index_keeps_source_tracking_and_snapshot_mutated_bytes(
     assert indexed.stdout == b"changed in snapshot"
 
 
+@pytest.mark.parametrize("foreign_variable", ["GIT_INDEX_FILE", "GIT_DIR"])
+def test_snapshot_index_ignores_foreign_git_environment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, foreign_variable: str
+) -> None:
+    source, foreign, tree = (tmp_path / name for name in ("source", "foreign", "worker"))
+    environment = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    for repository in (source, foreign):
+        repository.mkdir()
+        subprocess.run(
+            ("git", "-C", str(repository), "init", "-q"), check=True, env=environment
+        )
+    (source / "tracked source.py").write_text("original")
+    (source / "pruned.py").write_text("not copied")
+    (foreign / "untracked-output.json").write_text("{}")
+    for repository, names in (
+        (source, ("tracked source.py", "pruned.py")),
+        (foreign, ("untracked-output.json",)),
+    ):
+        subprocess.run(
+            ("git", "-C", str(repository), "add", "--", *names),
+            check=True,
+            env=environment,
+        )
+    source_index = (source / ".git/index").read_bytes()
+    foreign_index = (foreign / ".git/index").read_bytes()
+    tree.mkdir()
+    (tree / "tracked source.py").write_text("changed in snapshot")
+    (tree / "untracked-output.json").write_text("{}")
+    monkeypatch.setattr(controls, "REPO", source)
+    foreign_path = foreign / ".git"
+    if foreign_variable == "GIT_INDEX_FILE":
+        foreign_path /= "index"
+    monkeypatch.setenv(foreign_variable, str(foreign_path))
+    controls.index_tree(tree)
+    assert tracked_files(tree, ".", environment=environment) == [tree / "tracked source.py"]
+    indexed = subprocess.run(
+        ("git", "-C", str(tree), "show", ":tracked source.py"),
+        check=True,
+        capture_output=True,
+        env=environment,
+    )
+    assert indexed.stdout == b"changed in snapshot"
+    assert (source / ".git/index").read_bytes() == source_index
+    assert (foreign / ".git/index").read_bytes() == foreign_index
+    assert os.environ[foreign_variable] == str(foreign_path)
+
+
 def test_registry_python_uses_the_harness_interpreter(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

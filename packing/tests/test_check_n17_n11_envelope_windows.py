@@ -11,9 +11,11 @@ import sys
 import time
 from fractions import Fraction as Q
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
+import yaml
 
 from devtools import check_n17_n11_envelope_windows as tool
 
@@ -371,3 +373,63 @@ def test_generated_artifact_digest_tamper_refuses_before_geometry(tmp_path: Path
     document["partition_sha256"] = "0" * 64
     with pytest.raises(ValueError, match="bytes differ"):
         tool.intake(document, deadline())
+
+
+@pytest.mark.parametrize("stage", [1, 2, 3])
+@pytest.mark.parametrize("failure", ["missing", "timeout"])
+def test_registry_git_boundary_normalizes_failure_for_every_caller(
+    stage: int, failure: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls = 0
+
+    def run(argv: list[str], **_kwargs: Any) -> Any:
+        nonlocal calls
+        calls += 1
+        if calls == stage:
+            if failure == "timeout":
+                raise subprocess.TimeoutExpired(argv, 0.1)
+            raise subprocess.CalledProcessError(128, argv)
+        return SimpleNamespace(
+            stdout=b"commit\n" if calls == 1 else b"2" if calls == 2 else b"{}"
+        )
+
+    monkeypatch.setattr(tool.subprocess, "run", run)
+    expected = tool.finite.IncompleteError if failure == "timeout" else ValueError
+    with pytest.raises(expected, match="registry Git") as refused:
+        tool.read_registry(
+            {
+                "theorem_registry": "packing/frontier/results.yaml",
+                "theorem_registry_git_commit": "0" * 40,
+            },
+            deadline(),
+        )
+    assert isinstance(
+        refused.value.__cause__,
+        subprocess.TimeoutExpired if failure == "timeout" else subprocess.CalledProcessError,
+    )
+    assert calls == stage
+
+
+def test_registry_yaml_read_boundary_normalizes_only_parser_errors(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    raw = b"results: ["
+    responses = iter((b"commit\n", str(len(raw)).encode(), raw))
+    monkeypatch.setattr(
+        tool.subprocess, "run", lambda *_a, **_k: SimpleNamespace(stdout=next(responses))
+    )
+    document = {
+        "theorem_registry": "packing/frontier/results.yaml",
+        "theorem_registry_git_commit": "0" * 40,
+    }
+    with pytest.raises(ValueError, match="registry YAML") as refused:
+        tool.read_registry(document, deadline())
+    assert isinstance(refused.value.__cause__, yaml.YAMLError)
+    responses = iter((b"commit\n", str(len(raw)).encode(), raw))
+
+    def broken(_text: str) -> Any:
+        raise RuntimeError("injected parser programming error")
+
+    monkeypatch.setattr(tool, "safe_load", broken)
+    with pytest.raises(RuntimeError, match="programming error"):
+        tool.read_registry(document, deadline())
