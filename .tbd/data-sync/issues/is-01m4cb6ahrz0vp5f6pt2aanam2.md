@@ -3,14 +3,18 @@ type: is
 id: is-01m4cb6ahrz0vp5f6pt2aanam2
 title: "PR #427 A4 — Medium: the external raw-source digest boundary is not registered."
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 parent_id: is-01m4cb68shtz5h0braprdqj1qb
+hold: null
+hold_until: null
 created_at: 2026-10-07T23:29:17.368Z
-updated_at: 2026-10-07T23:29:17.368Z
+updated_at: 2026-10-08T00:20:32.636Z
+started_at: 2026-10-08T00:20:32.636Z
 ---
 Review https://github.com/jlevy/squares/pull/427#pullrequestreview-5449633758 head83748.
 

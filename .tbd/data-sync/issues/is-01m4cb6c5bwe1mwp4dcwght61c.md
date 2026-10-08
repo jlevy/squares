@@ -3,14 +3,18 @@ type: is
 id: is-01m4cb6c5bwe1mwp4dcwght61c
 title: "PR #427 A8 — Medium: source-sensitive behavioral contracts were not brought forward with the import."
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 parent_id: is-01m4cb68shtz5h0braprdqj1qb
+hold: null
+hold_until: null
 created_at: 2026-10-07T23:29:19.019Z
-updated_at: 2026-10-07T23:29:19.019Z
+updated_at: 2026-10-08T00:20:36.049Z
+started_at: 2026-10-08T00:20:36.049Z
 ---
 Review https://github.com/jlevy/squares/pull/427#pullrequestreview-5449633758 head83748.
 

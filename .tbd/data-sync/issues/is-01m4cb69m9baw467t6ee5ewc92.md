@@ -3,14 +3,18 @@ type: is
 id: is-01m4cb69m9baw467t6ee5ewc92
 title: "PR #427 A2 — High: the selected atlas refresh leaves chunk derivatives for the previous geometry."
 kind: bug
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
+delegate: codex@17e132e9b179
 labels: []
 dependencies: []
 parent_id: is-01m4cb68shtz5h0braprdqj1qb
+hold: null
+hold_until: null
 created_at: 2026-10-07T23:29:16.424Z
-updated_at: 2026-10-07T23:29:16.424Z
+updated_at: 2026-10-08T00:20:30.609Z
+started_at: 2026-10-08T00:20:30.609Z
 ---
 Review https://github.com/jlevy/squares/pull/427#pullrequestreview-5449633758 head83748.
 
