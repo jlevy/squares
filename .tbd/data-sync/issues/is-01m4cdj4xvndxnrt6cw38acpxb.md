@@ -5,7 +5,7 @@ title: Repair PR429 final-head hosted contracts and generated owners
 kind: bug
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T00:10:41.979Z
-updated_at: 2026-10-08T00:32:03.950Z
+updated_at: 2026-10-08T00:32:14.023Z
 started_at: 2026-10-08T00:11:46.371Z
 ---
 CI run37705180742 at0d01524b has25SUCCESS26SKIP5FAIL. Preserve exact17 behavioral failures across suites A12/B4/C1 and4 validation-owner failures. Repair historical packet and canonical citation scope, selected proof snapshot/index controls, mutable fixture-root ownership, exact integrity trust boundaries, verified-ceiling consumer census, and generated frontier/doc/ceiling prose. Dedicated GPT6.1Sol repair_upper_ci owns source; root owns native and GitHub. Full gate, fresh review of source delta, hosted CI, deployment remain pending. Original wholeA/B/C/D zero findings stay scoped to old0d head, not future repair.
@@ -35,3 +35,8 @@ This correction is being saved on checkpoint PR431 and source PR427. Upper CI re
 Latest durable GitHub heads: PR427 f1d7eacafc1249b430771583edf2120b5fc17d7b, PR429 a6b840dc55df32bb15862599184d37929a60162a (CI source repair229dc7335fe6e46992045d4a15563607267da323/data pin), checkpoint PR43191c6d398f38432d3a41f41271a00c84b15758c85. Both source branches and documentation branch pushed. Checkpoint independent final-head review published. Original8 lower source finding beads closed after focused checks, independent E/F/G/H and hosted30SUCCESS26SKIP; parent intake/deployment remain open.
 Upper seven CI groups U1–U7 plus confirmed re-adoption U8 focused repairs pass58/16/snapshot/release/type/owner checks at a6. New full gate initially cancelled EXIT130 edit-only to use supported own-process profiler capability, then supported restart exposed U9 serialization owner defect: all9 numeric fields match old0d/screens, but whole-document rewrap changes owner-canonical block bytes. Do NOT claim c5ee/0d mathematical assessment stale. New dedicated U9 bead underthink-x2gl. Supported full run cancelled before expensive completion; ordinary also raised process-supervision test failure under independent Sol diagnosis. All failed/cancelled receipts remain retained; no final upper green claim. Source owner repairing exact owned block bytes with meaningful regression, new freeze/push/review/CI needed.
 Published deployment verification is still pending stack430 merge. Independent Sol deployment lane prepared75 checks for23 union cases and116 results, strict TLS/canonical geometry/SVG/result/history/desktop/mobile plans. No actual new deployment claim. Source/research original425 archive and operational/deployed401 backup custody remains verified GitHub draft406258689.
+
+Latest pushed upper checkpoint ed42b23e00ab307e1c93f983eed78832ba1ad264, source/data9a383fca01132a1f9ec326362593feef80ccd4e5; canonical owner bytes and all9 completefrontmatter equal original0d. Original11 generator assertions retained,22 focusedtests48.19s, release23/.56s, type/lint/ownerchecks PASS. Directrecord preserves already-confirmed exactsamepose metadata; source-generator redraft still clears it under original contract. U9 final-source raw-block owner check passes. Fresh wholeacceptance pending performancechange/review/finalgates, sourceparentsopen.
+Actual cancelled supported a6 run journal1641ordinaryPASS2FAIL, originalouterEXIT130. U10 launch lacked tini-s; unchanged fullfixed_core_packet135PASS12.27default and135PASS12.20supported undertini-s. Independent causal delayed-reaper control observed owned SIGKILL zombie and exact worker-group-alive refusal, pytestEXIT1 expected and preserved, harnessEXIT0 after own orphan cleanup. No supervisor/test/grace/cap sourcechanges. Finalgate will usetini-s+supportedown-proc capability.
+Measured privateworker budget failure45.95>unchanged45s has its own repairchild. Profiled copy child65.52 includes instrumentation; nine admissions43.98s/repeated reconstruction41.06 dominates, factI/O2.075s. Sourceowner authorized invocation-localbatch with allpremises/perleafchecks and fresh separateinvocations. No globalcache, no arbitrary caller validation rows; focused mutation and budget tests thennewfreeze/push/Astrareview/finalCI.
+Checkpoint PR431 reviewedfinal91c6d3 hosted14SUCCESS38SKIP withfrontend npm/browserinstallationstillpending atlatestread; originalfirst66b hostedwatchEXIT0. No current91c hosted-green claim untilactualterminal. Nativeoutboxes lastauditbothempty, all three branchrefsroundtriplsremote verified; nativehead changes withlatestnotes.
