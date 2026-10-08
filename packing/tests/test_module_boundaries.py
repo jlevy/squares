@@ -1339,6 +1339,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             # nine-house admission and two live mutants; module-scoped clone is setup,
             # while these uncached complete-reader transactions are measured call time.
             "test_second_squish_complete_replay_survives_native_worker_boundaries",  # 16.87s
+            # Hosted run37773892849/job113299852249, 2026-10-08: 15.224s call,
+            # 14.99s CPU lower bound for complete Gupta admission, four mutations and
+            # restorations. The shared clone remains setup and child45s is unchanged.
+            "test_gupta_complete_sources_survive_native_worker_boundaries",  # 15.224s
         },
         # Hosted run37739373988/job113186283659: 14.52s; 68 full geometry replays
         # cover 85,204 pair decisions across the n108 translation/tolerance surface.
