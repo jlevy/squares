@@ -65,6 +65,48 @@ def test_record_decodes_exact_rational_scalars(
     assert poses[0, 2] == expected_angle
 
 
+@pytest.mark.parametrize("n", [51, 70])
+def test_record_projects_complete_exact_bases_without_geometry_decisions(
+    n: int, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The radical and rational houses retain every centre in diagnostic float poses."""
+    from decimal import Decimal, localcontext  # noqa: PLC0415
+
+    from sqpack import witness as witness_api  # noqa: PLC0415
+
+    source = WITNESSES / f"n-{n:03d}.yaml"
+    original = source.read_bytes()
+    witness = safe_load(original.decode())["witness"]
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> None:
+        raise AssertionError("a diagnostic reader must not decide feasibility")
+
+    monkeypatch.setattr(witness_api, "verify_packing", forbidden)
+    poses, side = record(n)
+    with localcontext() as context:
+        context.prec = 80
+
+        def scalar(value: Any) -> float:
+            if n == 70:
+                return float(Fraction(str(value)))
+            rational, root = (Fraction(str(part)) for part in value)
+            return float(
+                Decimal(rational.numerator) / Decimal(rational.denominator)
+                + Decimal(root.numerator) / Decimal(root.denominator) * Decimal(2).sqrt()
+            )
+
+        assert side == scalar(witness["side"])
+        assert poses.shape == (n, 3)
+        for index, square in enumerate(witness["squares"]):
+            for axis in (0, 1):
+                assert poses[index, axis] == pytest.approx(
+                    scalar(square["center"][axis]), abs=CONVERSION_SCALE, rel=0
+                )
+            angle = math.atan2(scalar(square["basis"][1]), scalar(square["basis"][0]))
+            assert poses[index, 2] == pytest.approx(angle, abs=CONVERSION_SCALE, rel=0)
+    assert source.read_bytes() == original
+
+
 def _record_frame(*, lift: float = 0.0, grow: float = 0.0) -> dict[str, Any]:
     """The retained n = 2 record as an animation frame naming it, optionally moved."""
     poses, side = record(2)

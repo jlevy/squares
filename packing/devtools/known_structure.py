@@ -29,6 +29,7 @@ from devtools.divide_and_concur import (
     pair_separation,
     wall_clearance,
 )
+from sqpack.witness import materialize_witness
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -38,14 +39,29 @@ WITNESSES = ROOT / "witnesses/known-best"
 def record(n: int) -> tuple[Array, float]:
     """The retained best-known packing for `n`, as poses and a side.
 
-    Witnesses come in two representations and both are in the atlas: `center-angle`, and
-    `corners` for the cases whose coordinates are rational and whose squares are all
-    axis-aligned. A reader that handles only the first silently works for `n = 11` and
-    `n = 17` and raises a `KeyError` on `n = 12`.
+    Decimal centre-angle and rational corner witnesses retain their existing conversion.
+    Exact centre-basis witnesses are materialized before diagnostic float projection,
+    including the radical n51 source; this reader assigns no feasibility assurance.
     """
     payload = safe_load((WITNESSES / f"n-{n:03d}.yaml").read_text(encoding="utf-8"))["witness"]
+    if payload.get("representation") == "center-basis":
+        # Exact rational and number-field bases are projected for this diagnostic reader.
+        # Materialization expands the source representation without deciding feasibility.
+        squares, projected_side = materialize_witness(payload, digits=80)
+        rows = []
+        for square in squares:
+            pts = np.array([[float(x), float(y)] for x, y in square])
+            edge = pts[1] - pts[0]
+            rows.append(
+                [
+                    float(pts.mean(axis=0)[0]),
+                    float(pts.mean(axis=0)[1]),
+                    math.atan2(edge[1], edge[0]),
+                ]
+            )
+        return np.array(rows), float(projected_side)
     # The packet-derived frames of the #227 intake declare radians; the rest declare degrees.
-    in_degrees = payload["coordinates"]["angle_unit"] == "degrees"
+    in_degrees = payload["coordinates"].get("angle_unit", "not-applicable") == "degrees"
     rows = []
     for s in payload["squares"]:
         if "center" in s:

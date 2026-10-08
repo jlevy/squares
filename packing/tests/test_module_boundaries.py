@@ -1035,6 +1035,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
+        # Full private snapshot/admission measured406.23s under IO contention;
+        # complete confirmation/idempotence measured24.04s and16.06s per call.
+        # The fast12s and child45s ceilings remain unchanged.
+        "test_ryxu_house_links.py": {
+            "test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers",
+            "test_confirmation_preserves_complete_scope_history_and_lower_lanes",
+        },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.
         "test_n17_endpoint_feasibility.py": {
@@ -1312,6 +1319,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # a neighbouring test, so the slow marker is the measured classification.
         "test_negative_controls.py": {
             "test_build_caches_leave_the_counted_surface_and_the_worker_trees",  # 8.15s on CI
+            # Hosted run37736038877/job113175670339, 2026-10-08: complete 27-input,
+            # nine-house admission and two live mutants; module-scoped clone is setup,
+            # while these uncached complete-reader transactions are measured call time.
+            "test_second_squish_complete_replay_survives_native_worker_boundaries",  # 16.87s
         },
         # 3s of call time across 1, measured 2026-09-20: `git worktree add --detach` of
         # Session 148's opening commit -- a whole checkout of the tree -- and then

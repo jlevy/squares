@@ -30,59 +30,53 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     profile = retained["profile"]
     assert profile["aggregate"] == {
         "case_count": 36,
-        "contact_component_count": 162,
+        "contact_component_count": 165,
         "coverage_threshold_cases": {
             "at_least_50_percent": 35,
             "at_least_75_percent": 33,
-            "at_least_90_percent": 27,
+            "at_least_90_percent": 26,
         },
-        "fully_structured_cases": 10,
-        "internal_slide_dof": 871,
+        "fully_structured_cases": 9,
+        "internal_slide_dof": 860,
         "narrow_partition_status_counts": {
             "established": 3,
-            "not-established": 23,
-            "not-established-search-limit": 8,
+            "not-established": 24,
+            "not-established-search-limit": 7,
             "outside-registered-budget": 2,
         },
         "sensitivity_comparison": {
-            "changed_case_count": 3,
-            "changed_ns": [68, 71, 88],
-            "primary_structured_square_count": 1778,
-            "sensitivity_structured_square_count": 1787,
-            "within_budget_flip_ns": [],
+            "changed_case_count": 5,
+            "changed_ns": [68, 70, 71, 84, 88],
+            "primary_structured_square_count": 1755,
+            "sensitivity_structured_square_count": 1777,
+            "within_budget_flip_ns": [70],
         },
         "source_strata": [
-            # n = 69 left its UnitSquare rendering on 2026-10-05 for the catalogue's later
-            # side for the same packing (T-088), read from a binary64 parse of the SVG; the
-            # rendering stratum is empty and is not listed. n = 83 and 87 stay here with
-            # their new packings (T-089).
             {
-                "case_count": 34,
-                "fully_structured_cases": 10,
+                "case_count": 30,
+                "fully_structured_cases": 8,
                 "sensitivity_changed_ns": [71],
                 "source_kind": "kingbird-derived-facts",
-                "square_count": 1704,
-                "structured_fraction": "0.966549295775",
-                "structured_square_count": 1647,
-                "within_six_components_and_three_free_cases": 26,
+                "square_count": 1413,
+                "structured_fraction": "0.96178343949",
+                "structured_square_count": 1359,
+                "within_six_components_and_three_free_cases": 23,
             },
-            # n = 68 moved from its UnitSquare rendering onto Francisco Couzo's
-            # packet facts on 2026-09-29; n = 88 joins it with the second SQUISH update.
             {
-                "case_count": 2,
-                "fully_structured_cases": 0,
-                "sensitivity_changed_ns": [68, 88],
+                "case_count": 6,
+                "fully_structured_cases": 1,
+                "sensitivity_changed_ns": [68, 70, 84, 88],
                 "source_kind": "packet-derived-facts",
-                "square_count": 156,
-                "structured_fraction": "0.839743589744",
-                "structured_square_count": 131,
-                "within_six_components_and_three_free_cases": 0,
+                "square_count": 447,
+                "structured_fraction": "0.885906040268",
+                "structured_square_count": 396,
+                "within_six_components_and_three_free_cases": 2,
             },
         ],
         "square_count": 1860,
-        "structured_fraction": "0.955913978495",
-        "structured_square_count": 1778,
-        "within_six_components_and_three_free_cases": 26,
+        "structured_fraction": "0.943548387097",
+        "structured_square_count": 1755,
+        "within_six_components_and_three_free_cases": 25,
     }
     assert "DESCRIPTIVE · NO VERDICT" in rendering
     assert "Connectedness is not rigidity" in rendering

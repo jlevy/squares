@@ -90,6 +90,15 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/confirm_ryxu_records.py": (
+        "records finite upper ceilings from complete admitted exact replay, never s(n)"
+    ),
+    "packing/devtools/register_ryxu_reports.py": (
+        "preserves the historical verified ceiling while selecting a reported upper bound"
+    ),
+    "packing/tests/test_ryxu_house_links.py": (
+        "checks finite upper-bound admission and complete custody, never optimality"
+    ),
     "packing/devtools/register_refinement_reports.py": (
         "registers rational source reports while preserving earlier verified ceilings; "
         "the reported geometry and a historical ceiling never establish s(n)"
