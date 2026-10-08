@@ -365,11 +365,11 @@ def test_article_title_form_refuses_suffixes_mismatches_and_missing_names(
     title: str, name: str
 ) -> None:
     good = paper_structure.read(
-        "good",
+        EXPLAINER,
         '<head><title>A paper</title><meta property="og:title" content="A paper"></head>',
     )
     assert paper_structure.axes(good)["head: title"] == "article name"
-    bad = replace(good, paper="bad", title=title, name=name)
+    bad = replace(good, paper=EXACT, title=title, name=name)
     assert paper_structure.axes(bad)["head: title"] != "article name"
     assert [
         row["axis"] for row in paper_structure.differences(paper_structure.compare(good, bad))

@@ -4750,8 +4750,14 @@ STEPS: tuple[Step, ...] = (
         _tracked_pdf_sizes,
         fast=True,
         records=True,
-        # An indexed PDF can appear anywhere, with any suffix case.
-        touches=("*",),
+        # An indexed PDF can appear anywhere, with any suffix case. Claim its
+        # suffix and guard sources without masking the unknown-path whole-gate fallback.
+        touches=(
+            "*.[pP][dD][fF]",
+            "packing/devtools/check_tracked_pdfs.py",
+            "packing/tests/test_check_tracked_pdfs.py",
+            "packing/src/sqpack/cli/validate.py",
+        ),
     ),
     Step(
         "derivation (needs sympy)",

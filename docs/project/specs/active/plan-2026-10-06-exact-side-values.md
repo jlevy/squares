@@ -337,6 +337,26 @@ A delivery-recovery worker checks earlier claimed output.
 | 6 | W7 **efficiency block**: practical web reading (`think-mo36`) | Searchable index, lazy metadata and coefficient vectors; complete archives retained |
 | 7 | W7: final checks, PR, delivery audit and replanning | Final validation is reported in the PR; unavailable earlier outputs remain an explicit dependency |
 | 8 | W7: upstream integration and PDF storage maintenance (`think-okcb`) | Earlier 2026-10-08 checkpoint: 287 current exact values, 170 historical identities and 37 numeric routes; 13 original PDFs hosted outside Git and a universal 5 MiB tracked-PDF gate |
+| 9 | W7: upstream CI contract repair | Rational refresh, hosted citation identity, publication payloads, snapshot custody, measured suite admissions and startup delay controls repaired; independent Astra review passed |
+
+The two stack layers have separate registers.
+At the earlier 2026-10-08 CI-repair checkpoint, PR 403 had 286 exact current values, one
+degree-only value at $n = 83$, 37 numeric-only values and 18 legacy historical notes.
+PR 435 supplied the $n = 83$ polynomial and full 170-entry historical collection.
+Both retained 77 proved cases.
+The refreshed parent and pending child partitions are recorded above.
+
+The integration repair beads are `think-3y4q`, `think-uy3e`, `think-9sgi`, `think-kfpc`,
+`think-qr37` and `think-s5ou`, under `think-okcb`. At that earlier checkpoint, the
+snapshot repair omitted 312 unused historical output files (3,670,529 bytes), retained
+declared evidence, source and replay inputs, and passed all 174 registered mutation
+controls with the existing 192 MiB cap.
+Its headroom is narrow; `think-t1lk` owns dependency-based selection.
+Local admissions retain the existing suite-cost observations and 10% unrecorded-share
+limit.
+The startup self-test checks the measured readiness-call wait for its injected 300
+ms delay, independently of navigation overhead.
+Final validation and publication identities are reported in the PRs.
 
 The efficiency result precedes the expanded historical corpus; it is not the claimed
 wall for the larger final register.

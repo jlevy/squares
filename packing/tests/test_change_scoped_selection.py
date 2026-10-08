@@ -43,6 +43,7 @@ PATTERN_PROBES = (
     "packing/devtools/render_packing_svg.py",
     "packing/devtools/check_soundness_perimeter.py",
     "packing/devtools/wand125_fn1_bindings.py",
+    "packing/devtools/check_tracked_pdfs.py",
     "packing/devtools/render_research_tables.py",
     "packing/tests/test_verify.py",
     "packing/tests/test_browser_floor_contract.py",
@@ -100,6 +101,25 @@ def test_an_unclaimed_path_selects_the_whole_gate() -> None:
     selection = select_for_paths(["packing/some/file/nobody/attributed.xyz"])
     assert selection.is_whole_gate
     assert selection.unattributed_paths == ("packing/some/file/nobody/attributed.xyz",)
+
+
+def test_pdf_guard_claims_mixed_case_pdfs_and_its_sources_without_hiding_unknowns() -> None:
+    guard = next(step for step in STEPS if step.name == "tracked PDFs stay within 5 MiB")
+    for path in (
+        "source.pdf",
+        "new/location/source.PDF",
+        "new/location/source.PdF",
+        "new/location/source.pDf",
+        "packing/devtools/check_tracked_pdfs.py",
+        "packing/tests/test_check_tracked_pdfs.py",
+        "packing/src/sqpack/cli/validate.py",
+    ):
+        selected = select_for_paths([path], (guard,))
+        assert selected.steps == (guard,)
+        assert selected.unattributed_paths == ()
+    for path in ("new/location/unrelated.xyz", "new/location/source.pdf.json"):
+        selected = select_for_paths([path], (guard,))
+        assert selected.unattributed_paths == (path,)
 
 
 def test_exact_rust_source_selects_its_own_gate_without_search_engine_build() -> None:
