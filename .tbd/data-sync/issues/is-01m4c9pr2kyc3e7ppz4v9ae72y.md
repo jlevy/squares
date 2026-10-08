@@ -5,7 +5,7 @@ title: "Issue422: retain canonical nine-case exact confirmation and proof custod
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T23:03:18.355Z
-updated_at: 2026-10-08T00:16:40.173Z
+updated_at: 2026-10-08T00:23:56.635Z
 started_at: 2026-10-08T00:07:08.295Z
 ---
 Engineeringowner issue422_replay_engineering preparesnewcanonicalupperadapter outsidecheckouts. Preserveactual27 full historicalreceiptinputs/9positives18full-rostercontrols/two distinctcompleteinputreviews plusexplicitcanonical metadata transform and wholegeometryidentity. Own9proofpaths, strictboundedpercaseXZ, restore/preflight/read/index/mutationcontainment; preservealloldpackets/records/reviews/credit. Current395235B minimal5unconsumedjournal privatecopyprune repairsreportedcap; upperneedsfurtheractualstoragecensus/consumeraudit. No cap/time/reader relaxation or newdeciderrerun. NeedsformalstackdraftaboveT116reported+exactheadstrongintegrationreviews/allcurrentCI/gates/live beforepromotionmainclaims.
@@ -42,3 +42,7 @@ Deployed401 full site audit/renderings custody: actual draft release406258689 as
 CORRECTION from the actual runner receipt (8 October UTC):
 The prior compound-900-second budget diagnosis was wrong. The exact broad-command start receipt command-c30dfd1a66fd4452bbd3f4cf9b12be9e.start.json for run2a901bed9ed345a79ced825056629aa8 records timeout_seconds1800.0. The existing validator selects FAST_SUITE_BUDGET_SECONDS=1800 when affected-test selection is everything. Recorded ordinary command801.22s plus separately completed heavy185.52s totals986.74s, within the existing broad allowance; total cost1170.53s also within the1800 tier. No timeout/budget verdict, cap raise, test skip or assertion weakening occurred. The original broad EXIT1 still remains a real own-process profiler capability failure; unchanged full module2PASS1.65s and selected heavy1PASS185.52s are separate actual receipts completing selected assertions. Never rewrite the broad outer exit as0. Optional selector optimization in think-tl8n is latency work, not a demonstrated merge blocker.
 This correction is being saved on checkpoint PR431 and source PR427. Upper CI repairs remain necessary in think-x2gl, with future-head review and final checks required. Native source/reply/deployment beads remain open until actual integration/publication.
+
+Latest durable GitHub heads: PR427 f1d7eacafc1249b430771583edf2120b5fc17d7b, PR429 a6b840dc55df32bb15862599184d37929a60162a (CI source repair229dc7335fe6e46992045d4a15563607267da323/data pin), checkpoint PR43191c6d398f38432d3a41f41271a00c84b15758c85. Both source branches and documentation branch pushed. Checkpoint independent final-head review published. Original8 lower source finding beads closed after focused checks, independent E/F/G/H and hosted30SUCCESS26SKIP; parent intake/deployment remain open.
+Upper seven CI groups U1–U7 plus confirmed re-adoption U8 focused repairs pass58/16/snapshot/release/type/owner checks at a6. New full gate initially cancelled EXIT130 edit-only to use supported own-process profiler capability, then supported restart exposed U9 serialization owner defect: all9 numeric fields match old0d/screens, but whole-document rewrap changes owner-canonical block bytes. Do NOT claim c5ee/0d mathematical assessment stale. New dedicated U9 bead underthink-x2gl. Supported full run cancelled before expensive completion; ordinary also raised process-supervision test failure under independent Sol diagnosis. All failed/cancelled receipts remain retained; no final upper green claim. Source owner repairing exact owned block bytes with meaningful regression, new freeze/push/review/CI needed.
+Published deployment verification is still pending stack430 merge. Independent Sol deployment lane prepared75 checks for23 union cases and116 results, strict TLS/canonical geometry/SVG/result/history/desktop/mobile plans. No actual new deployment claim. Source/research original425 archive and operational/deployed401 backup custody remains verified GitHub draft406258689.
