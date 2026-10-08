@@ -349,7 +349,7 @@ def test_head_markers_in_raw_text_and_attributes_do_not_end_the_head(boundary: i
     """Only the parser's real head boundary ends metadata, including across chunks."""
     prefix = '<!doctype html><html lang="en"><head>'
     padding = " " * max(0, boundary - len(prefix))
-    marker = probe(check_published_site.PROBES, "check_published_site/head_marker")
+    marker = probe(Path(__file__).with_name("probes"), "check_published_site/head_marker")
     page = (
         prefix
         + padding

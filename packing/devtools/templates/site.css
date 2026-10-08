@@ -20,6 +20,34 @@ body {
   overflow: visible;
 }
 
+/* The shared prose face can arrive after first layout even with its preload.
+   Approximate PT Serif's Latin advances while it loads, so a narrow paragraph does
+   not rewrap from the platform's smaller fallback. These local aliases transfer no
+   bytes; the more specific KPress sans/system reader choices still select their
+   own stacks. The delayed-face regression covers both fallback families. */
+@font-face {
+  font-family: "Site Prose Georgia";
+  src: local("Georgia");
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 101%;
+}
+@font-face {
+  font-family: "Site Prose Times";
+  src: local("Times New Roman"), local("Liberation Serif");
+  font-style: normal;
+  font-weight: 400;
+  size-adjust: 110.5%;
+}
+:root,
+.kpress,
+.kpress-page-main,
+.kpress-tooltip {
+  --kpress-font-prose:
+    var(--kpress-font-punctuation), "PT Serif", "Site Prose Georgia", "Site Prose Times", Georgia,
+    "Times New Roman", serif;
+}
+
 /* One accent, everywhere: the explainer's rule, redeclared where kpress sets the link. */
 :root,
 .kpress,

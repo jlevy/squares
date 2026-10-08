@@ -3878,6 +3878,7 @@ _WORKBENCH_INPUTS = (
     "packing/devtools/render_overview.py",
     # The published workbench bundles share the site's asset builder.
     "packing/devtools/site_assets.py",
+    "packing/devtools/probes/site_assets/*",
     "packing/devtools/templates/site-nav.html",
     "packing/devtools/templates/site-nav.css",
     "packing/devtools/templates/paper-type.css",

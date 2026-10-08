@@ -1583,10 +1583,37 @@ def test_squish_complete_replay_survives_worker_custody_and_private_controls(
     assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
 
 
+def _run_second_squish_native_program(tree: Path, program: str) -> None:
+    baseline_program = (
+        """
+from devtools import squish_second_update_confirmation as packet
+def forbidden(*args, **kwargs):
+    raise AssertionError('native admission must not execute a geometric decider')
+packet.decide = packet.original.decide = forbidden
+packet.original.exact_verify = packet.original.independent.check = forbidden
+"""
+        + program
+    )
+    with tempfile.TemporaryDirectory(
+        prefix="second-squish-baseline-pycache-", dir=tree
+    ) as pycache:
+        environment = controls.control_environment(tree, Path(pycache))
+        baseline = subprocess.run(
+            [sys.executable, "-c", baseline_program],
+            cwd=tree / HERE,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+        )
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+
+
 def test_second_squish_complete_replay_survives_native_worker_boundaries(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
-    """Exercise the production copy, real index, native readers and both live mutants."""
+    """Exercise the production copy, real index, complete replay and both live mutants."""
     from devtools import squish_second_update_confirmation as packet  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
 
@@ -1610,41 +1637,13 @@ def test_second_squish_complete_replay_survives_native_worker_boundaries(
         target = tree / source.relative_to(controls.REPO)
         assert not target.is_symlink()
         assert target.read_bytes() == source.read_bytes()
-    baseline_program = """
-from devtools import build_known_best_atlas as atlas
-from devtools import check_results
-from devtools import squish_second_update_confirmation as packet
-from devtools import squish_second_update_house_links as house
-def forbidden(*args, **kwargs):
-    raise AssertionError('native admission must not execute a geometric decider')
-packet.decide = packet.original.decide = forbidden
-packet.original.exact_verify = packet.original.independent.check = forbidden
+    _run_second_squish_native_program(
+        tree,
+        """
 assert tuple(packet.check_certification()) == packet.NUMBERS
-assert tuple(house.check_houses()) == packet.NUMBERS
-for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
-    relative = path.relative_to(packet.REPO).as_posix()
-    assert check_results.repository_file_problem(relative) is None
-assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
-for producer in (atlas.update, lambda: atlas.update_selected([88])):
-    try:
-        producer()
-    except packet.original.PacketError as error:
-        assert 'output escapes' in str(error)
-    else:
-        raise AssertionError('producer accepted a linked output')
-print('all 27 complete inputs admitted; nine house reads and both output guards passed')
-"""
-    environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
-    baseline = subprocess.run(
-        [sys.executable, "-c", baseline_program],
-        cwd=work,
-        env=environment,
-        capture_output=True,
-        text=True,
-        check=False,
-        timeout=60,
+print('all 27 complete inputs and nine proof leaves admitted')
+""",
     )
-    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
     specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
     selected = [
         control
@@ -1658,3 +1657,31 @@ print('all 27 complete inputs admitted; nine house reads and both output guards 
         passed, detail = controls.run_one(control, tree)
         assert passed, detail
         assert source.read_bytes() == original
+
+
+def test_second_squish_consumers_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Exercise fresh house and registry admissions and both linked-output guards."""
+    tree, _copied = control_snapshot
+    _run_second_squish_native_program(
+        tree,
+        """
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import squish_second_update_house_links as house
+assert tuple(house.check_houses()) == packet.NUMBERS
+for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
+    relative = path.relative_to(packet.REPO).as_posix()
+    assert check_results.repository_file_problem(relative) is None
+assert check_results.repository_file_problem('packing/witnesses/known-best/unrelated.yaml')
+for producer in (atlas.update, lambda: atlas.update_selected([88])):
+    try:
+        producer()
+    except packet.original.PacketError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked output')
+print('nine house reads, registry routes and both output guards passed')
+""",
+    )

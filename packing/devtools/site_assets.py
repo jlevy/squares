@@ -425,7 +425,7 @@ def preload_tags(assets: SiteAssets, page: str) -> str:
 
 def font_preload_bootstrap_tag() -> str:
     """The reviewed prepaint program; no active CORS hint precedes its decision."""
-    program = applied(probe(FONT_PRELOAD_PROGRAM.parent, FONT_PRELOAD_PROGRAM.stem))
+    program = applied(probe(Path(__file__).with_name("probes"), "site_assets/preload_fonts"))
     return f"<script data-site-font-preloads>{program}</script>"
 
 

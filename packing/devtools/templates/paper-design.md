@@ -413,6 +413,11 @@ fetched them again on every page, since a page’s own bytes were all it could c
   without CORS for local files; choosing the mode before requesting the fonts avoids
   WebKit’s file-origin cache failure while preserving shared HTTP font downloads.
   With JavaScript disabled, the same stylesheets load their faces normally.
+  While regular PT Serif loads, the default prose stack uses metric-adjusted local
+  Georgia or Times New Roman/Liberation Serif aliases to keep opening paragraphs stable.
+  The delayed-face regression checks both fallback families, final PT Serif attribution,
+  paragraph geometry and the existing layout-shift limit; saved sans and system choices
+  retain their more specific stacks.
   The rest are fetched when a page first draws in them, and a face no page draws, a
   print instance, only when one prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its

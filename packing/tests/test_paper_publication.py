@@ -185,9 +185,11 @@ def test_linked_paper_front_has_early_font_discovery_and_stable_first_paint(
             site_assets.shared().assets, fixture.paper.SITE_PATH
         )
         first_sheet = linked.index('rel="stylesheet"')
-        for tag in expected.splitlines():
+        bootstrap = site_assets.font_preload_bootstrap_tag()
+        assert expected.endswith(bootstrap)
+        for tag in [*expected.removesuffix(bootstrap).splitlines(), bootstrap]:
             assert linked.count(tag) == 1
-            assert linked.index(tag) < first_sheet
+            assert linked.index(tag) + len(tag) < first_sheet
         assert sum(path.stat().st_size for path in tmp_path.rglob("*") if path.is_file()) < (
             3 * 1024 * 1024
         )
