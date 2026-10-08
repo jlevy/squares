@@ -323,8 +323,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 233 complete; 65 stopped; 72 blocked; 25 ready; 21 tentative; 20 in progress |
 | Sessions | 185 | 105 completed; 80 stopped; all terminal |
 | Explorations | 48 | 28 linked to proposed hypotheses; 20 uncodified |
-| Hypotheses | 258 | 72 confirmed; 48 refuted; 64 blocked; 24 unresolved; 10 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
-| Experiments | 244 | 92 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
+| Hypotheses | 258 | 73 confirmed; 48 refuted; 64 blocked; 24 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 245 | 93 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 124 | 124 registered, 94 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -586,6 +586,8 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [N17 Merge Readiness Review — October 8, 2026](docs/project/reviews/review-2026-10-08-n17-merge-readiness.md) | dated review record | record | retained | — |
+| [Registered Endpoint Frame Refusal](packing/campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/README.md) | typed session record | record | retained | — |
+| [Fresh Exact Explicit-f1 Endpoint Calibration](packing/campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/README.md) | typed session record | record | retained | — |
 | [n17 Strategy: Shared Geometry, Exact Certificates and SOS](docs/project/reviews/review-2026-10-08-n17-strategy-and-exact-sos.md) | dated review record | record | retained | — |
 | [n17 Reported-Pattern Reconciliation](docs/project/reviews/review-2026-10-08-n17-issue-pattern-reconciliation.md) | dated review record | record | retained | — |
 | [PR410 Integration Review for the n17 Continuation](docs/project/reviews/review-2026-10-07-n17-pr410-integration.md) | dated review record | record | retained | — |
@@ -5946,7 +5948,7 @@ round that names the hypothesis, control roles included.
 | [H-321](packing/campaign/hypotheses/H-321-incircle-projection-redundancy.md) | confirmed | Whole-cell incircle projection redundancy | 1 | Exact P8 diagnostic detects 102 proper pair constraints; no ordinary exclusion or LP result |
 | [H-322](packing/campaign/hypotheses/H-322-incircle-disk-projection.md) | confirmed | Exact incircle-disk projection | 1 | Exact disk diagnostic detects 114 proper pair constraints and zero ordinary-impossible pairs |
 | [H-323](packing/campaign/hypotheses/H-323-shared-centre-endpoint-control.md) | unresolved | Exact rational endpoint calibration under the originally registered r3 action | 1 | exp315 refused wrong canonical mask before E/D/H; fresh unstarted; prospective f1 correction only |
-| [H-324](packing/campaign/hypotheses/H-324-shared-centre-explicit-f1-control.md) | open | Separately registered explicit-f1 endpoint calibration with identical inputs and limits | 0 | Original exp315 refusal preserved;43 synthetic controls pass; exp316 unrun at registration |
+| [H-324](packing/campaign/hypotheses/H-324-shared-centre-explicit-f1-control.md) | confirmed | Exact endpoint relaxation calibration under separately registered explicit-f1 | 1 | exp316 fresh verification:17cells136pairs810rows34coordinates; no first8 or bound movement |
 
 ### Confirmed
 
@@ -6294,9 +6296,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 244 rounds registered in `series-000`.
+There are 245 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5827.4 wall-minutes.
+They record 2512.1 agent-minutes and 5827.5 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6582,6 +6584,7 @@ archive beside it.
 | [exp-313](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-313-h-321-incircle-projection-redundancy.md) | 17 | target | H-321 | Exact whole-cell P8 projection diagnostic | 102 proper pair constraints; fresh payload agreement; no ordinary exclusion | accepted |
 | [exp-314](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-314-h-322-incircle-disk-projection.md) | 17 | target | H-322 | Exact whole-cell disk projection diagnostic | 114 proper pair constraints; zero ordinary-impossible pairs; fresh payload agreement | accepted |
 | [exp-315](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-315-h-323-shared-centre-endpoint-refusal.md) | 17 | calibration | H-323 | Registered r3 endpoint frame control | Wrong canonical-mask guard refused; E/D/H and fresh unstarted; no mathematical contradiction | unresolved |
+| [exp-316](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-316-h-324-shared-centre-explicit-f1.md) | 17 | calibration | H-324 | Fresh exact explicit-f1 endpoint control | All810rows/136pairs verified in both processes; endpoint calibration only | accepted |
 
 ### Cost and provenance
 
@@ -6831,10 +6834,11 @@ archive beside it.
 | exp-313 | Exact whole-cell P8 projection diagnostic | 1.458 s | — | criterion | 102 proper pair constraints; diagnostic only |
 | exp-314 | Exact whole-cell disk projection diagnostic | 1.752 s | — | criterion | 114 proper pair constraints; diagnostic only |
 | exp-315 | Construction120s/fresh120s; outerTERM240/KILL250; sampled4GiB per live process | 2.479017708043102 s | — | guard | `a056038e4`; original r3 frame refused, fresh unstarted |
+| exp-316 | Construction120s/fresh120s; outerTERM240/KILL250; sampled4GiB per live process | 4.9302544590318576 s | — | criterion | `0f97f908d`; fresh endpoint calibration, no first8/exclusion/admission |
 
-### What the 244 rounds jointly establish
+### What the 245 rounds jointly establish
 
-The 244 rounds use 2512.1 agent-minutes and 5827.4 wall-minutes under the campaign’s
+The 245 rounds use 2512.1 agent-minutes and 5827.5 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

@@ -69,12 +69,16 @@ hypothesis:
   - H-322
   replication: false
   registered: '2026-10-08'
-  notes: Pre-target separate registration after final Astra source review cleared the explicit
-    r3/f1 delta and all43 unfiltered synthetic controls passed (20.35s pytest;21.28s process;2.566
-    summed test-seconds). OriginalH323/exp315 remains unresolved at its frozenr3 frame. Accepted
-    rawmask3439615 has uniquef1image1900015; r3image3730943. No realf1endpoint orfirst8predicate
-    has run. Legacyr3default retained; actual Git provenance recorded at launch and does not
-    determine verdicts. No unchanged retry or cap expansion.
+  notes: >-
+    Registered before target after final Astra action/custody review and all43 unfiltered
+    synthetic controls passed. The original0f97f908d registration remains in Git.
+    Exp316 now meets the unchanged frozen endpoint criterion with independent fresh
+    verification:17cells136pairs810rows34coordinates,291079/291080 operations and
+    successful4.9302544590318576s supervision. This accepts endpoint relaxation
+    calibration under inherited premises only. OriginalH323/exp315 remains refused
+    and unresolved; its r3 criterion/manifest/receipts are unchanged. Explicitf1 gives
+    canonical1900015 from raw3439615; legacyr3default retained. No first8predicate,
+    exclusion, admission, numerical movement, unchanged retry or cap expansion.
 ---
 # Explicit-f1 Shared-Centre Endpoint Control
 
