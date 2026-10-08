@@ -5,7 +5,7 @@ title: "n17 outstanding-issue followthrough: mathematical disposition and first 
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -24,7 +24,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T16:06:03.560Z
-updated_at: 2026-10-08T21:14:22.230Z
+updated_at: 2026-10-08T21:19:59.287Z
 started_at: 2026-10-08T16:06:44.055Z
 ---
 User requests delegate review and address all other outstanding n17 issues, begin incorporating results into prior work, track all work with beads. Three bounded lanes: Astra mathematical acceptance/disposition of issues358,367,375,400,413,419,445 and next pilot; Sol metadata/custody reconciliation and issue updates; Sol verifier lifecycle/adoption engineering with controls. Preserve bounds and evidence levels. No certificate admission without full verification, no giant bulk acquisition, no idle CI waits. Root publishes clear tracker chronology and integrates reviewed source changes on PRs.
@@ -46,3 +46,5 @@ PR452/453/457 current-head Packing/Pages/mergeability green at retained observed
 Tracker405 durable endpoint-method reference and dated final-source-review comment are prepared for publication with actual receipts, new PR and current qualification limits. Prior comment6066463737 remains historical. All35 contributor classes remain unadmitted; only413row23 reaches1hardorbit and noneP8. Latest21:08 bounded intake450/443/440 found no new post20mathematical report. Fine-net450 reported n19,20,26,27,28,29,31 remains unadmitted/no n17 movement;443 engineering and440 review/dispositions retain admission requirements. Main remainsf0ec5b. Verified bracket4.66044275<s17<=4.6755300936045509516342148538535054; latest362/T093 unchanged.
 
 Disk audit: initial bounded selected targets and fresh21:00 task tmp fdu >=1GiB scan found no eligible safely disposable large generated directory;0trash/no claimed freed space. Preserve source/unique proof evidence/active environments; all bulk scratch remains external. Further mathematical progress, not incidental CI, remains priority.
+
+2026-10-08 publication complete: tracker405 durable description updated and exact readback verified; dated final-source-review comment https://github.com/jlevy/squares/issues/405#issuecomment-6069228392 published once and verified. Full prospective Astra next-pilot review is captured at https://github.com/jlevy/squares/pull/461#issuecomment-6069203070 with exact readback/footer1. Keep frozen first8 order; per-process geometry cache; one phase-I call/state, at most one reconstruction; prospective5HiGHSseconds/10000iterations allocations under unchanged existing guards. Solver-limit states incomplete; nonzero phase-level resource abort stops fresh verification and saved local candidates remain unaccepted. No target calls occurred. PR461 current091f75d585aa64721929e643ffc1b4272042214a mergeability PASS; Packing/Pages absent in latest snapshot, ordinary qualification pending and192MiB cap unchanged. The current primary source checkout/ecb and unique untracked prefix object remain preserved. No new bound/T/admission.
