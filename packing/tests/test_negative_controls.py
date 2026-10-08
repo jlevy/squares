@@ -1332,6 +1332,7 @@ def test_squish_complete_replay_survives_worker_custody_and_private_controls(
     assert (tree / session.relative_to(controls.REPO)).read_bytes() == session.read_bytes()
 
 
+@pytest.mark.slow
 def test_second_squish_complete_replay_survives_native_worker_boundaries(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
