@@ -93,8 +93,14 @@ large-tree memory guarantee.
 
 C2’s 480.468-second RSS-monitor stop, missing bootstrap dependencies, and the cold GMP
 build’s missing-file/getcwd failures are execution failures, not negative mathematical
-results. Native receipt execution remains unverified; the storage/build cause remains
-undiagnosed. Keep those repairs bounded beside research.
+results. The storage/build cause remains undiagnosed.
+After this review, the October 8
+[Linux native gate](https://github.com/jlevy/squares/actions/runs/37819067619/job/113455097005)
+on PR453 at `9aa4a65f` passed all six atomic-receipt controls, 28 kernel unit tests, one
+compiled-world control and the Rust floor, in 74.72 seconds against the unchanged
+90-second ceiling. This qualifies those ordinary-container engineering controls; Windows
+execution, full same-object parity and census adoption remain unqualified.
+Keep supporting repairs bounded beside research.
 Retained engineering evidence:
 [BB lifetime repair, PR452](https://github.com/jlevy/squares/pull/452) and
 [native receipt publication, PR453](https://github.com/jlevy/squares/pull/453).

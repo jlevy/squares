@@ -458,6 +458,7 @@
     "packing/tests/test_read_tier_walls.py": 0.016,
     "packing/tests/test_readme.py": 0.087,
     "packing/tests/test_recent_results.py": 3.05,
+    "packing/tests/test_reconcile_n17_issue_patterns.py": 7.538,
     "packing/tests/test_rectangle_ceiling.py": 1.228,
     "packing/tests/test_rectangle_density.py": 0.669,
     "packing/tests/test_rectangle_density_cli_golden.py": 1.352,
@@ -942,6 +943,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_run_registered_phases.json",
           "provenance": {},
           "tests": 39
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_reconcile_n17_issue_patterns.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-issue-reconciliation-2026-10-08.json",
+          "provenance": {},
+          "tests": 5
         }
       ]
     }
