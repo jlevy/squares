@@ -5478,6 +5478,28 @@ def test_a_result_rows_popover_body_comes_from_one_function(
                 assert term in panel, row.id
 
 
+def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragment(
+    overview: overview_data.Overview,
+) -> None:
+    """Both tables retain each complete claim offline; fetched views keep its context."""
+    for result in overview.results:
+        preview = overview_sections.result_row(result, trigger="row").popover
+        full = overview_sections.result_row_popover_body(result, overview)
+        assert overview_sections.prose_html(result.record["claim"]) in preview, result.id
+        assert (
+            overview_sections.prose_html(result.record["significance"]["rationale"]) in preview
+        ), result.id
+        for link in result.records:
+            assert f'href="{html.escape(link.url, quote=True)}"' in preview, result.id
+            assert f">{html.escape(link.label)}</a>" in preview, result.id
+        assert f'data-novelty="{result.novelty}"' in preview, result.id
+        for key, label in (("composition", "Composition"), ("next_rung", "Next rung")):
+            assert f"<dt>{label}</dt>" not in preview, result.id
+            if result.record.get(key):
+                assert f"<dt>{label}</dt>" in full, result.id
+                assert overview_sections.prose_html(result.record[key]) in full, result.id
+
+
 #: What the two pages that list results may weigh. The result overviews are 4.9 MB
 #: between them; a page that carried them, as both once would have, crosses its ceiling.
 #: The results page was 2.77 MB with 81 results on 3 October 2026, and its significance
@@ -5515,6 +5537,7 @@ def test_no_page_carries_a_result_overview(
         assert "data-result-overview=" not in html_text, name
         assert 'class="site-result"' not in html_text, name
         size = len(html_text.encode("utf-8"))
+        print(f"{name}: {size:,} source bytes / {PAGE_CEILINGS[name]:,} ceiling")
         assert size < PAGE_CEILINGS[name], f"{name} is {size:,} bytes"
     sources = re.findall(r'data-row-pop-src="([^"]+)"', results)
     assert sources == [

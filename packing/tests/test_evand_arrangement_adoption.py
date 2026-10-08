@@ -312,3 +312,115 @@ def test_production_clone_copies_every_scientific_input_and_admits_exact_links(
     )
     assert rejected.returncode != 0
     assert "native exact route" in rejected.stderr
+
+
+@pytest.fixture
+def original_cases(
+    private: Path, monkeypatch: pytest.MonkeyPatch
+) -> tuple[dict[int, str], Path]:
+    original_packet = SOURCE / reports.PACKET.relative_to(reports.REPO)
+    prior = reports.read_xz(original_packet / "acquisition/prior-state.json.xz")
+    frontier = private / "packing/frontier"
+    frontier.mkdir(parents=True, exist_ok=True)
+    originals = {row["n"]: row["complete_case"] for row in prior}
+    for n, text in originals.items():
+        (frontier / f"n-{n:03d}.md").write_text(text)
+    monkeypatch.setattr(adoption, "FRONTIER", frontier)
+    monkeypatch.setattr(adoption.registry.packets, "REPO", private)
+    history = reports.PACKET / "acquisition/prior-state.json.xz"
+    assert not history.exists()
+    return originals, history
+
+
+def test_later_case_preflight_refuses_without_mutation_and_restoration_succeeds(
+    original_cases: tuple[dict[int, str], Path],
+) -> None:
+    originals, history = original_cases
+    later = adoption.FRONTIER / "n-270.md"
+    changed = originals[270].splitlines(keepends=True)
+    later.write_text("".join(line for line in changed if not line.startswith("# ")))
+    before = {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals}
+    with pytest.raises(reports.ReportError, match="existing title"):
+        adoption.record_cases()
+    assert not history.exists()
+    assert {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals} == before
+    later.write_text(originals[270])
+    adoption.record_cases()
+    assert {row["n"]: row["complete_case"] for row in reports.read_xz(history)} == originals
+    for n in originals:
+        current = (adoption.FRONTIER / f"n-{n:03d}.md").read_text()
+        assert (
+            safe_load(current.split("---\n", 2)[1])["packing"]["reported_upper_bound"][
+                "source_key"
+            ]
+            == reports.SOURCE_KEY
+        )
+
+
+def test_interrupted_write_preserves_complete_history_and_retry_is_idempotent(
+    original_cases: tuple[dict[int, str], Path],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    originals, history = original_cases
+    original_save = adoption.registry.save
+
+    def interrupted(path: Path, text: str) -> None:
+        assert {row["n"]: row["complete_case"] for row in reports.read_xz(history)} == originals
+        if path.name == "n-270.md":
+            raise OSError("injected second case write failure")
+        original_save(path, text)
+
+    monkeypatch.setattr(adoption.registry, "save", interrupted)
+    with pytest.raises(OSError, match="second case write"):
+        adoption.record_cases()
+    preserved = history.read_bytes()
+    assert (adoption.FRONTIER / "n-266.md").read_text() != originals[266]
+    assert (adoption.FRONTIER / "n-270.md").read_text() == originals[270]
+    monkeypatch.setattr(adoption.registry, "save", original_save)
+    adoption.record_cases()
+    assert history.read_bytes() == preserved
+    final = {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals}
+    adoption.record_cases()
+    assert history.read_bytes() == preserved
+    assert {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals} == final
+
+
+@pytest.mark.parametrize(
+    "changed", ["incomplete", "duplicate", "wrong-count", "changed-original"]
+)
+def test_existing_history_must_be_complete_and_match_unadopted_originals(
+    original_cases: tuple[dict[int, str], Path],
+    changed: str,
+) -> None:
+    originals, history = original_cases
+    rows = [{"n": n, "complete_case": text} for n, text in originals.items()]
+    if changed == "incomplete":
+        rows.pop()
+    elif changed == "duplicate":
+        rows[-1] = copy.deepcopy(rows[0])
+    elif changed == "wrong-count":
+        rows[-1]["complete_case"] = rows[-1]["complete_case"].replace("  n: 272", "  n: 271", 1)
+    else:
+        rows[-1]["complete_case"] += "\nAn unrelated source mutation.\n"
+    reports.save_xz(history, rows)
+    saved = history.read_bytes()
+    before = {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals}
+    with pytest.raises(
+        reports.ReportError, match=r"roster|original pre-adoption|changed historical"
+    ):
+        adoption.record_cases()
+    assert history.read_bytes() == saved
+    assert {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals} == before
+
+
+def test_adopted_prefix_without_history_cannot_replace_the_original_roster(
+    original_cases: tuple[dict[int, str], Path],
+) -> None:
+    originals, history = original_cases
+    first = adoption.FRONTIER / "n-266.md"
+    first.write_text(adoption.adopt_case(266, originals[266]))
+    before = {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals}
+    with pytest.raises(reports.ReportError, match="lacks complete original history"):
+        adoption.record_cases()
+    assert not history.exists()
+    assert {n: (adoption.FRONTIER / f"n-{n:03d}.md").read_bytes() for n in originals} == before

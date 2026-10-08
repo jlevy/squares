@@ -450,6 +450,20 @@ def inspect_witness(witness: Mapping[str, Any], *, digits: int = 50) -> dict[str
     }
 
 
+def materialize_exact_witness(
+    witness: Mapping[str, Any],
+) -> tuple[list[Square], Scalar]:
+    """Expose exact source corners for presentation without checking feasibility.
+
+    Rational inputs produce Fractions and number-field inputs produce FieldElements.
+    This only parses and expands the recorded representation; it neither runs packing
+    predicates nor assigns assurance. A renderer must retain those exact identities
+    alongside any display projection, and formal callers still use exact_verify.
+    """
+    squares, side, _field = _exact_materialize(witness)
+    return squares, side
+
+
 def materialize_witness(
     witness: Mapping[str, Any], *, digits: int = 60
 ) -> tuple[list[Square], Scalar]:

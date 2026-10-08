@@ -25,6 +25,21 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/ryxu_arrangement_reports.py
+    kind: external-checkout
+    boundary: >-
+      All 25 immutable external ry-xu certificate strings are held against the
+      acquisition pins when acquired and when recovered from copied private facts.
+      These digests bind external source bytes; complete geometry and actual deciding
+      outcomes are separately reconstructed and admitted, never inferred from a hash.
+  - path: packing/devtools/ryxu_radical_n51.py
+    kind: external-checkout
+    boundary: >-
+      The acquired external source root and its full selected n51 record are matched
+      to their reviewed acquisition pins. Complete generated native input/result
+      outcomes are also identified across the private-worker artifact-custody boundary.
+      This retains actual runtime evidence, without pinning this repository's source
+      or commits or replacing source reconstruction and fresh exact replay.
   - path: packing/devtools/probe_n17_raw_row_support.py
     kind: generated-artifact
     boundary: Cold saved-check receipts and witness packets identify generated seed/node objects and their derived raw atoms; these runtime artifacts are not named by Git revisions.
@@ -40,6 +55,14 @@ allowlist:
   - path: packing/src/sqpack/research/unitsquare_precision.py
     kind: download
     boundary: A Kingbird SVG fetched by URL and held against its pinned digest (H2).
+  - path: packing/devtools/evand_arrangement_reports.py
+    kind: download
+    boundary: >-
+      Evan Daniel's three complete issue-399 source certificates at 7eef24f are
+      compared with the acquisition digests pinned at retention, both on import
+      and when reading their complete copied source bytes. Internal exact inputs
+      and all native verdict fields are compared structurally; these source
+      digests neither decide geometry nor bind results to internal code hashes.
   - path: packing/devtools/evand_exact_certificates.py
     kind: download
     boundary: Evan Daniel's exact certificates and checker sources at 13ee36e against the digests the packet pinned at retention, and the controls derived from them against their receipts' digests (#375).

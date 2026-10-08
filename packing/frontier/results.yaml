@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-07'
+last_reviewed: '2026-10-08'
 results:
   - id: T-001
     kind: lower-bound
@@ -12788,3 +12788,124 @@ results:
       but their bindings and full pinned builds have not been independently audited or replayed.
       No rigidity, isolated strict minimum or global lower bound follows. Same-count replacement poses
       receive no transferred theorem.
+  - id: T-125
+    kind: upper-bound
+    registered: '2026-10-08'
+    headline: Complete rational construction reports at 25 counts
+    claim: Complete independently reviewed exact replay confirms finite feasibility of all 25 rational
+      source certificates. Superseded configurations retain their complete inputs and outcomes; no optimality
+      or local-minimum theorem.
+    scope:
+      n_values:
+      - 51
+      - 70
+      - 84
+      - 86
+      - 88
+      - 102
+      - 103
+      - 105
+      - 108
+      - 123
+      - 126
+      - 127
+      - 129
+      - 130
+      - 131
+      - 146
+      - 153
+      - 175
+      - 179
+      - 236
+      - 258
+      - 261
+      - 263
+      - 267
+      - 295
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Rational certificates improve the pre-intake ceilings at 18 counts; 17 are currently
+        selected alongside separate radical n51. No solved case or lower-bound theorem.
+      scored: '2026-10-08'
+      by: think-1cvf source integration
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[ry-xu square packing 2026]'
+      published: '2026-10-08'
+    evidence:
+    - E-ryxu-432-rational-report
+    - E-ryxu-432-rational-feasibility
+    artifacts:
+    - packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
+    - packing/devtools/ryxu_arrangement_reports.py
+    next_rung: C4 requires two distinct accepted confirming adversarial reviews and an actual human
+      oversight record; neither drawing nor admission supplies them.
+    notes: Credit to ry-xu with disclosed LLM assistance. All 25 source inputs retained; no upstream
+      code executed. Exact finite feasibility only.
+    controls:
+    - packing/resources/web/ry-xu-new-packings-2026-10-08/receipts/exact-certification.json.xz
+    - packing/tests/test_ryxu_house_links.py
+    - packing/tests/test_ryxu_arrangement_reports.py
+    reviews:
+    - path: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
+      kind: adversarial
+      reviewer: GPT-6 Astra ry-xu integration reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-08'
+      scope: Complete finite geometry, actual deciding inputs/results, required controls, exact presentation,
+        private-worker custody and safe adoption.
+      verdict: accepted
+      covers:
+      - T-125
+  - id: T-126
+    kind: upper-bound
+    registered: '2026-10-08'
+    headline: Undilated n51 construction over Q(sqrt2)
+    claim: Complete independently reviewed exact replay confirms the undilated 51-square construction
+      ceiling s(51) <= (16+5sqrt(2))/3. This is finite feasibility, not equality with the optimum or
+      the unconfirmed source contact count.
+    scope:
+      n_values:
+      - 51
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: A simpler degree-two exact construction ceiling at 51; no optimum established.
+      scored: '2026-10-08'
+      by: think-1cvf source integration
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[ry-xu square packing 2026]'
+      published: '2026-10-08'
+    evidence:
+    - E-ryxu-432-radical-n51-report
+    - E-ryxu-432-radical-n51-feasibility
+    artifacts:
+    - packing/resources/web/ry-xu-new-packings-2026-10-08/README.md
+    - packing/devtools/ryxu_radical_n51.py
+    next_rung: C4 requires two distinct accepted confirming adversarial reviews and an actual human
+      oversight record; neither drawing nor admission supplies them.
+    notes: Credit to ry-xu with disclosed LLM assistance. All 25 source inputs retained; no upstream
+      code executed. Exact finite feasibility only.
+    controls:
+    - packing/resources/web/ry-xu-new-packings-2026-10-08/receipts/n051-radical-positive.json.xz
+    - packing/tests/test_ryxu_house_links.py
+    - packing/tests/test_ryxu_radical_n51.py
+    reviews:
+    - path: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md
+      kind: adversarial
+      reviewer: GPT-6 Astra ry-xu integration reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-08'
+      scope: Complete finite geometry, actual deciding inputs/results, required controls, exact presentation,
+        private-worker custody and safe adoption.
+      verdict: accepted
+      covers:
+      - T-126

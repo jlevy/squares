@@ -514,6 +514,16 @@ def load_claims(path: pathlib.Path) -> dict[int, str]:
                 raise ValueError(f"n={n}: the certificate's side does not terminate in decimal")
             claims[n] = written
         return claims
+    from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
+
+    if path == ryxu.reports.fact_path():
+        return {
+            n: ryxu.reports.legacy.ceiling_decimal(fact.side, 16)
+            for n, fact in ryxu.reports.read_facts().items()
+        }
+    if path == ryxu.radical.fact_path():
+        ryxu.radical.read_fact()
+        return {51: ryxu.radical_display()}
     record = json.loads(read_retained_text(path))
     if isinstance(record.get("results"), list):
         return {int(entry["n"]): str(entry["offered_side"]) for entry in record["results"]}

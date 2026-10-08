@@ -262,6 +262,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-115](packing/frontier/RESULTS.md) | 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263 | `V3` | `C3` | `S3` | `previously-published` | Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes feasible rational packing upper bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. |
 | [T-116](packing/frontier/RESULTS.md) | 88, 108, 179, 180, 199, 207, 236, 263, 302 | `V3` | `C3` | `S3` | `previously-published` | Nine unchanged rational SQUISH packings establish feasible upper bounds at n = 88, 108, 179, 180, 199, 207, 236, 263 and 302. |
 | [T-119](packing/frontier/RESULTS.md) | 266, 270, 272 | `V3` | `C3` | `S3` | `previously-published` | Complete rational packings establish s(266)<=16.8230287507564760, s(270)<=16.9378072284460292 and s(272)<=16.9681101457696006. |
+| [T-125](packing/frontier/RESULTS.md) | 51, 70, 84, 86, 88, 102, 103, 105, 108, 123, 126, 127, 129, 130, 131, 146, 153, 175, 179, 236, 258, 261, 263, 267, 295 | `V3` | `C3` | `S3` | `previously-published` | Complete independently reviewed exact replay confirms finite feasibility of all 25 rational source certificates. |
+| [T-126](packing/frontier/RESULTS.md) | 51 | `V3` | `C3` | `S3` | `previously-published` | Complete independently reviewed exact replay confirms the undilated 51-square construction ceiling s(51) <= (16+5sqrt(2))/3. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -325,7 +327,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
 | Hypotheses | 209 | 45 confirmed; 33 refuted; 63 blocked; 19 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 187 | 63 accepted; 38 rejected; 58 unresolved; 12 baseline; 11 blocked; 4 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 124 | 124 registered, 94 by others |
+| Frontier results | 126 | 126 registered, 96 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -585,6 +587,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
 | [Refinement Replay Custody and Worker Admission Review](docs/project/reviews/review-2026-10-07-refinement-custody-closure.md) | dated review record | record | retained | — |
 | [Refinement Host Relocation and Rational Feasibility Review](docs/project/reviews/review-2026-10-07-refinement-host-rebind.md) | dated review record | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
@@ -599,6 +602,8 @@ case or experiment separately.
 | [The n = 17 Optimality Proof, Explained](docs/project/n17-optimality-explainer.md) | first-principles tutorial | supporting | maintained | — |
 | [N11: A Three-Paper Explainer Series](docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
+| [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
+| [Review of Ryu’s Quarter-Power and Cube-Root Proof Chains](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md) | dated review record | record | retained | — |
 | [Eleven-Square Threshold-Bound Paper: Exposition Reviews and Their Disposition](docs/project/reviews/review-2026-10-05-n11-threshold-bound-review.md) | dated review record | record | retained | — |
 | [Nagamochi’s Lemma 1 Is False: What T-007 Rests On Now](docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md) | dated review record | record | retained | — |
 | [Review: the Machine Check of Karakuş’s Proposition 5.1 (d7f2c6186)](docs/project/reviews/review-2026-10-06-karakus-proposition-5-1-machine-check.md) | dated review record | record | retained | — |

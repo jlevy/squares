@@ -259,6 +259,7 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     from devtools import confirm_refinement_records as refinement  # noqa: PLC0415
     from devtools import evand_arrangement_reports as evand  # noqa: PLC0415
     from devtools import register_evand_arrangements as evand_adoption  # noqa: PLC0415
+    from devtools import register_ryxu_reports as ryxu  # noqa: PLC0415
     from devtools import render_case_verifiers  # noqa: PLC0415
     from devtools import squish_followup_packets as update  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as confirmation  # noqa: PLC0415
@@ -270,12 +271,19 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     if selected is None:
         return generated
     source = next(row for row in coverage["sources"] if row["id"] == selected["source_id"])
+    is_ryxu = source["source_key"] == ryxu.houses.SOURCE_KEY
     is_refinement = source["source_key"] in {
         item.key for item in refinement.packets.SOURCES.values()
     }
-    if is_refinement or source["source_key"] in (evand.SOURCE_KEY, second.SOURCE_KEY):
+    if (
+        is_ryxu
+        or is_refinement
+        or source["source_key"] in (evand.SOURCE_KEY, second.SOURCE_KEY)
+    ):
         case = safe_load(existing.split("---\n", 2)[1])["packing"]
-        if is_refinement:
+        if is_ryxu:
+            adopter = ryxu.adopt_case
+        elif is_refinement:
             adopter = refinement.adopt_case
         elif source["source_key"] == evand.SOURCE_KEY:
             adopter = evand_adoption.adopt_case

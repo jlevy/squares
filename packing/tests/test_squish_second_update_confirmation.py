@@ -104,24 +104,46 @@ def linked_proofs(private: Path) -> Path:
     return private
 
 
-def test_linked_proof_batch_matches_all_fresh_standalone_checks(linked_proofs: Path) -> None:
-    paths = [
+def test_linked_proof_batch_checks_all_complete_proofs(linked_proofs: Path) -> None:
+    proof_paths = [
         confirmation.certificate_path(n).relative_to(linked_proofs).as_posix()
         for n in confirmation.NUMBERS
     ]
-    paths += [
+    invalid_paths = [
         "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
         "../outside.yaml",
         "/outside.yaml",
     ]
+    paths = proof_paths + invalid_paths
     batched = confirmation.linked_certificate_problems(paths, repository=linked_proofs)
-    assert batched == {
-        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
-        for path in paths
-    }
-    assert all(batched[path] is None for path in paths[:9])
-    assert all(batched[path] for path in paths[9:])
+    assert set(batched) == set(paths)
+    assert all(batched[path] is None for path in proof_paths)
+    assert all(batched[path] for path in invalid_paths)
     assert all(confirmation.linked_certificate_problems(paths, repository=SOURCE).values())
+
+
+def test_linked_proof_standalone_checks_complete_proof_and_invalid_paths(
+    linked_proofs: Path,
+) -> None:
+    # One complete proof exercises the wrapper's full nine-source admission. The
+    # mutation tests below compare both APIs again on misbound and unchanged proofs.
+    proof_path = (
+        confirmation.certificate_path(confirmation.NUMBERS[0])
+        .relative_to(linked_proofs)
+        .as_posix()
+    )
+    assert confirmation.linked_certificate_problem(proof_path, repository=linked_proofs) is None
+    invalid_paths = [
+        "packing/witnesses/squish-422-second-update-2026/n-089-rational.yaml.gz",
+        "../outside.yaml",
+        "/outside.yaml",
+    ]
+    assert confirmation.linked_certificate_problems(
+        invalid_paths, repository=linked_proofs
+    ) == {
+        path: confirmation.linked_certificate_problem(path, repository=linked_proofs)
+        for path in invalid_paths
+    }
 
 
 @pytest.mark.parametrize("mutation", ["misbound", "malformed"])
@@ -273,10 +295,19 @@ def test_xz_trailing_and_schema_contract_refused(private: Path) -> None:
 
 
 def add_house_files(private: Path) -> None:
+    rows = confirmation.admit_certification()
+    metadata = house.admitted_metadata(rows)
+    retained = private.parent / "historical-houses"
+    retained.mkdir(exist_ok=True)
     for n in confirmation.NUMBERS:
         path = house.house_path(n)
         path.parent.mkdir(parents=True, exist_ok=True)
-        source = SOURCE / path.relative_to(private)
+        witness = confirmation.original.to_witness(confirmation.read_fact(n))
+        witness.update(copy.deepcopy(metadata[n]["metadata"]))
+        source = retained / path.name
+        source.write_text(
+            confirmation.witness_document(witness, schema="../witness.schema.yaml")
+        )
         if n in house.LINK_NUMBERS:
             path.symlink_to(source)
         else:

@@ -227,18 +227,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-50.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         51
       ],
       "n": 51,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/n051-undilated-record.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 51,
-      "url": "https://kingbird.myphotos.cc/packing/square-51.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -369,18 +370,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-69.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n070/n070.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         70
       ],
       "n": 70,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 70,
-      "url": "https://kingbird.myphotos.cc/packing/square-70.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n070/n070.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -426,18 +428,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-83.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n084/n084.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         84
       ],
       "n": 84,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 84,
-      "url": "https://kingbird.myphotos.cc/packing/square-84.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n084/n084.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -454,18 +457,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-85b.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n086/n086.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         86
       ],
       "n": 86,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 86,
-      "url": "https://kingbird.myphotos.cc/packing/square-86.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n086/n086.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -526,34 +530,34 @@
       "url": "https://kingbird.myphotos.cc/packing/square-101.svg"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n102/n102.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         102
       ],
       "n": 102,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-102.yaml",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-08",
       "source_n": 102,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n102.txt"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n102/n102.cert.json"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n103/n103.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         103
       ],
       "n": 103,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-103.yaml",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-08",
       "source_n": 103,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n103.txt"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n103/n103.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -570,19 +574,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-104.svg"
     },
     {
-      "attribution": "Seth Rehwaldt after Francisco Couzo, https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n105.json at bc389ddf7d65277cd19a9b08fb285d86346d6806",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n105/n105.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         105
       ],
       "n": 105,
-      "path": "resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
       "retrieved": "2026-10-08",
       "source_n": 105,
-      "url": "https://github.com/lollipoll/couzo-five-exact-certificates/blob/bc389ddf7d65277cd19a9b08fb285d86346d6806/reviewed/witnesses/n105.json"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n105/n105.cert.json"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -614,19 +618,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-107.svg"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n108/n108.cert.json at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n108/n108.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         108
       ],
       "n": 108,
-      "path": "resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-10-07",
+      "retrieved": "2026-10-08",
       "source_n": 108,
-      "url": "https://github.com/itsnaka/squish-certs/blob/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b/n108/n108.cert.json"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n108/n108.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -672,19 +676,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-122.svg"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n123/n123.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n123/n123.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         123
       ],
       "n": 123,
-      "path": "resources/web/squish-401-update-2026-10-07/facts/n-123.json.gz",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-10-07",
+      "retrieved": "2026-10-08",
       "source_n": 123,
-      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n123/n123.cert.json"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n123/n123.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -715,33 +719,34 @@
       "url": "https://kingbird.myphotos.cc/packing/square-125.svg"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n126/n126.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n126/n126.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         126
       ],
       "n": 126,
-      "path": "resources/web/squish-401-update-2026-10-07/facts/n-126.json.gz",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-10-07",
+      "retrieved": "2026-10-08",
       "source_n": 126,
-      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n126/n126.cert.json"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n126/n126.cert.json"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n127/n127.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         127
       ],
       "n": 127,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 127,
-      "url": "https://kingbird.myphotos.cc/packing/square-127.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n127/n127.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -758,19 +763,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-128.svg"
     },
     {
-      "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n129/n129.cert.json at 5e32bbd7028b6e3b869979278079cd37ed6770aa",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n129/n129.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         129
       ],
       "n": 129,
-      "path": "resources/web/squish-401-update-2026-10-07/facts/n-129.json.gz",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-10-07",
+      "retrieved": "2026-10-08",
       "source_n": 129,
-      "url": "https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n129/n129.cert.json"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n129/n129.cert.json"
     },
     {
       "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n130/n130.cert.json at 07fe6dde1e5b67405a3076719b90e58e2882b677",
@@ -788,19 +793,19 @@
       "url": "https://github.com/itsnaka/squish-certs/blob/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06/n130/n130.cert.json"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n131/n131.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         131
       ],
       "n": 131,
-      "path": "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-131.yaml",
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-09-29",
+      "retrieved": "2026-10-08",
       "source_n": 131,
-      "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n131.txt"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n131/n131.cert.json"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -832,18 +837,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-145.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n146/n146.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         146
       ],
       "n": 146,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 146,
-      "url": "https://kingbird.myphotos.cc/packing/square-146.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n146/n146.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1064,18 +1070,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-174.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n175/n175.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         175
       ],
       "n": 175,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 175,
-      "url": "https://kingbird.myphotos.cc/packing/square-175.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n175/n175.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1689,18 +1696,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-260b.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n261/n261.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         261
       ],
       "n": 261,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 261,
-      "url": "https://kingbird.myphotos.cc/packing/square-261.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n261/n261.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1777,18 +1785,19 @@
       "url": "https://github.com/evand/square-packing/blob/7eef24f7221b8c3371d6171dd664b52541bbd479/s12/search/exact/results/sw2/dc1_n266.cert"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n267/n267.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         267
       ],
       "n": 267,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retrieved": "2026-10-08",
       "source_n": 267,
-      "url": "https://kingbird.myphotos.cc/packing/square-267.svg"
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n267/n267.cert.json"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -1954,19 +1963,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-294.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "ry-xu, https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n295/n295.cert.json at 8dc415296f697f5140caea27c7a0193d52deb4e6",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
-        295,
-        296
+        295
       ],
       "n": 295,
+      "path": "resources/web/ry-xu-new-packings-2026-10-08/facts/complete-certificates.json.xz",
       "raw_asset_retained": false,
       "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
-      "source_n": 296,
-      "url": "https://kingbird.myphotos.cc/packing/square-296.svg"
+      "retrieved": "2026-10-08",
+      "source_n": 295,
+      "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/certificates/n295/n295.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
