@@ -83,8 +83,13 @@ def section(n: int, *, confirmed: bool) -> str:
 
 
 def historical_prose(n: int, body: str) -> str:
-    # These existing public transformations scope old numeric statements to their intake.
-    return previous.historical_upper_prose(n, body)
+    """Scope old ceiling and picture comparisons while preserving source names."""
+    historical, separator, current = body.partition(SECTION)
+    historical = previous.historical_upper_prose(n, historical)
+    historical = historical.replace(
+        "Previously, nate Chaoweeraprasit", "Previously, Nate Chaoweeraprasit"
+    ).replace("the atlas pictures", "the atlas pictured at that intake")
+    return historical + separator + current
 
 
 def validate_prior_house(row: dict[str, Any], case: dict[str, Any]) -> None:

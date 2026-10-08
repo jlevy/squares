@@ -211,10 +211,15 @@ def _parsed_facts(n: int) -> CatalogueFacts:
 
 @functools.cache
 def _pre_ryxu_records() -> dict[int, dict[str, Any]]:
-    """Complete retained originals for tests of the source displaced by #432."""
+    """Complete retained originals for tests of sources displaced by later imports."""
+    from devtools import register_gupta_reports as gupta  # noqa: PLC0415
     from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
 
-    return {row["n"]: row for row in read_history()}
+    rows = {row["n"]: row for row in read_history()}
+    if gupta.HISTORY.exists():
+        for row in gupta.read_history():
+            rows.setdefault(row["n"], row)
+    return rows
 
 
 def _before_ryxu(n: int, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> str:
@@ -1173,11 +1178,13 @@ def test_the_register_agrees_with_its_drafts_where_the_capture_moved() -> None:
     assert check_records(cases, args, availability, catalogue) == 0
 
 
-def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(tmp_path: Path) -> None:
+def test_a_refresh_keeps_the_assessment_and_rewrites_only_what_moved(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """The draft's `rigidity: null` would drop an assessed record out of the assessed set."""
     availability = load_availability()
     catalogue = load_drafting_catalogue([179], availability)
-    committed = (FRONTIER / "n-179.md").read_text(encoding="utf-8")
+    committed = _before_ryxu(179, monkeypatch, tmp_path)
     report = safe_load(committed.split("---\n", 2)[1])["packing"]["reported_upper_bound"]
     stale = committed.replace(f"value: '{report['value']}'", "value: '99.0'", 1)
     assert stale != committed
@@ -1262,7 +1269,9 @@ def test_selected_squish_report_restores_stale_geometry_and_lower_lanes(
     assert check_records([n], args, availability, catalogue) == 0
 
 
-def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
+def test_confirmed_squish_draft_rebuilds_and_requires_both_displays(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     """The confirmation phase has a ceiling and a separate original source quotation."""
     from fractions import Fraction  # noqa: PLC0415
 
@@ -1271,7 +1280,7 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
     from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
 
     n = 130
-    existing = record_path(FRONTIER, n).read_text()
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     _, front, body = existing.split("---\n", 2)
     document = safe_load(front)
     case = document["packing"]
@@ -1327,11 +1336,12 @@ def test_confirmed_squish_draft_rebuilds_and_requires_both_displays() -> None:
 
 def test_selected_squish_publication_admits_integer_rational_sides(
     monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
 ) -> None:
     from devtools import source_supersession, squish_upper_bound_packets  # noqa: PLC0415
 
     n = 130
-    existing = record_path(FRONTIER, n).read_text()
+    existing = _before_ryxu(n, monkeypatch, tmp_path)
     availability = load_availability()
     historical = adopt_upper_bound_packet(
         n,

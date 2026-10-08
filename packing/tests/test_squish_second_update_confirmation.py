@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import functools
 import gzip
 import json
 import lzma
@@ -17,6 +18,18 @@ from devtools import squish_second_update_house_links as house
 SOURCE = confirmation.REPO
 PACKET_RELATIVE = confirmation.PACKET.relative_to(SOURCE)
 PROOFS_RELATIVE = confirmation.WITNESSES.relative_to(SOURCE)
+
+
+@functools.cache
+def previous_source_case(n: int) -> str:
+    """Read the complete previous source when Gupta now owns the current case."""
+    from devtools import register_gupta_reports as gupta  # noqa: PLC0415
+
+    if gupta.HISTORY.exists():
+        for row in gupta.read_history():
+            if row["n"] == n:
+                return row["frontier"]
+    return (SOURCE / f"packing/frontier/n-{n:03d}.md").read_text()
 
 
 @pytest.fixture
@@ -404,7 +417,7 @@ def test_confirmed_case_adoption_preserves_lower_and_refutes_older_conjecture(
     private: Path,
 ) -> None:
     assert private == confirmation.REPO
-    current = (SOURCE / "packing/frontier/n-088.md").read_text()
+    current = previous_source_case(88)
     adapted = confirmation.adopt_verified(88, current)
     marker, end = "  rigidity:\n", "  conjectured_optimum:"
     assert (
@@ -434,7 +447,7 @@ def test_confirmed_case_adoption_preserves_lower_and_refutes_older_conjecture(
 
 def test_confirmed_case_cannot_relabel_an_unreviewed_bound(private: Path) -> None:
     assert private == confirmation.REPO
-    current = (SOURCE / "packing/frontier/n-088.md").read_text()
+    current = previous_source_case(88)
     _, front, body = current.split("---\n", 2)
     document = confirmation.safe_load(front)
     document["packing"]["verified_upper_bound"]["exact_form"] = "10"

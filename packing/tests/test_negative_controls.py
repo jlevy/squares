@@ -980,6 +980,7 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     and would put a reader's `attic/` scratch in it (PR 207).
     """
     from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
     from devtools import refinement_house_links as refinements  # noqa: PLC0415
     from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
@@ -1019,6 +1020,9 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     )
     linked_proofs.update(
         path.relative_to(controls.REPO).as_posix() for path in ryxu.snapshot_house_links()
+    )
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix() for path in gupta.snapshot_house_links()
     )
     for relative in linked_proofs:
         assert (tree / relative).is_file()
@@ -1380,13 +1384,28 @@ except packet.original.PacketError as error:
 else:
     raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
 from devtools.register_ryxu_reports import read_history
-historical = next(row['house'] for row in read_history() if row['n'] == 108)
-historical_path = packet.PACKET / 'receipts' / 'worker-historical-n108.yaml'
-historical_path.write_text(historical)
+from devtools import register_gupta_reports as gupta
+historical = {row['n']: row['house'] for row in read_history()}
+if gupta.HISTORY.exists():
+    for row in gupta.read_history():
+        historical.setdefault(row['n'], row['house'])
+    try:
+        house.check_houses([88])
+    except packet.original.PacketError as error:
+        assert 'full geometry or private metadata custody mismatch' in str(error)
+    else:
+        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
+historical_paths = {}
+for n in packet.NUMBERS:
+    if n in historical:
+        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
+        path.write_text(historical[n])
+        historical_paths[n] = path
 current_house_path = house.house_path
-house.house_path = lambda n: historical_path if n == 108 else current_house_path(n)
+house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
 assert tuple(house.check_houses()) == packet.NUMBERS
-historical_path.unlink()
+for path in historical_paths.values():
+    path.unlink()
 house.house_path = current_house_path
 for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
     relative = path.relative_to(packet.REPO).as_posix()
@@ -1399,8 +1418,8 @@ for producer in (atlas.update, lambda: atlas.update_selected([88])):
         assert 'output escapes' in str(error)
     else:
         raise AssertionError('producer accepted a linked output')
-print('all 27 complete inputs admitted; eight current and one historical house reads; '
-      'both output guards passed')
+print('all 27 complete inputs admitted; all nine original houses admitted from '
+      'current or full retained history; current selected owner reads and output guards passed')
 """
     environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
     baseline = subprocess.run(
@@ -1426,3 +1445,104 @@ print('all 27 complete inputs admitted; eight current and one historical house r
         passed, detail = controls.run_one(control, tree)
         assert passed, detail
         assert source.read_bytes() == original
+
+
+def test_gupta_complete_sources_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Use the actual shared copier, all four private inputs and live refusal/restores."""
+    from devtools import gupta_house_links as house  # noqa: PLC0415
+
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    tree, _copied = control_snapshot
+    inputs = house.private_input_paths()
+    assert len(inputs) == 4
+    original_inputs = {path: path.read_bytes() for path in inputs}
+    for source, original in original_inputs.items():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_file()
+        assert not target.is_symlink()
+        assert target.read_bytes() == original
+    for source in house.snapshot_house_links():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_symlink()
+        assert target.resolve() == source.resolve()
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(
+                source.relative_to(ROOT).as_posix(), tree=tree, work=tree / HERE
+            )
+    program = """
+import copy
+from fractions import Fraction
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import gupta_house_links as house
+from devtools import register_gupta_reports as register
+reports = house.reports
+def forbidden(*args, **kwargs):
+    raise AssertionError('custody admission must not call a geometric decider')
+reports.kernel.run_case = reports.run_child = forbidden
+reports.legacy.exact_verify = reports.legacy.independent.check_squares = forbidden
+assert tuple(reports.check_certification()) == reports.NUMBERS
+assert sum(len(c.poses) for c in reports.read_facts().values()) == 3017
+assert len(register.read_history()) == 14
+house.check_houses()
+for relative in (house.house_path(88), house.house_path(239)):
+    name = relative.relative_to(house.REPO).as_posix()
+    assert check_results.repository_file_problem(name) is None
+for kind in ('native-verdict', 'complete-input', 'original', 'comparator'):
+    deciding = kind in ('native-verdict', 'complete-input')
+    target = reports.receipt_path() if deciding else reports.fact_path()
+    original = target.read_bytes()
+    value = copy.deepcopy(reports.kernel.read_xz(target))
+    row = value['cases'][-1]
+    if kind == 'native-verdict':
+        assert row['exact_verify']['verification_passed'] is False
+        row['exact_verify']['verification_passed'] = True
+    elif kind == 'complete-input':
+        x = row['checker_input']['poses'][-1][0]
+        row['checker_input']['poses'][-1][0] = str(Fraction(x) + 1)
+    elif kind == 'original':
+        row['source_certificate'] += '\n'
+    else:
+        row['source_comparator'] += '\n'
+    try:
+        reports.save_xz(target, value)
+        try:
+            house.check_houses()
+        except reports.kernel.ReportError:
+            pass
+        else:
+            raise AssertionError('private deciding input mutant was admitted: ' + kind)
+    finally:
+        target.write_bytes(original)
+    house.check_houses()
+    assert target.read_bytes() == original
+producers = (atlas.update, lambda: atlas.update_selected([88]),
+             lambda: atlas.update_selected([239]))
+for producer in producers:
+    try:
+        producer()
+    except ValueError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked Gupta output')
+print('all 17 sources/3017 poses/51 jobs/four private inputs/14 houses admitted; '
+      'native verdict, complete input, original and comparator mutants refused/restored; '
+      'all producer guards passed without deciders')
+"""
+    completed = subprocess.run(
+        [sys.executable, "-c", program],
+        cwd=tree / HERE,
+        env=controls.control_environment(tree, tree / "gupta-custody-pycache"),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=45,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert "all 17 sources/3017 poses/51 jobs/four private inputs/14 houses" in completed.stdout
+    for source, original in original_inputs.items():
+        assert source.read_bytes() == original
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES

@@ -474,3 +474,18 @@ def test_registry_append_preserves_existing_list_indentation(
     first = path.read_bytes()
     registry.append_rows(path, "entries", [{"id": "new", "value": "9/2"}], "id")
     assert path.read_bytes() == first
+
+
+def test_historical_prose_preserves_names_and_dates_the_compared_atlas_pose() -> None:
+    earlier = (
+        "Nate Chaoweeraprasit, using SQUISH, reports $s(88) \\le 9.9$.\n\n"
+        "Square for square, its pose lies within `2.9e-4` of the binary64 pose "
+        "the atlas pictures for this count.\n\n"
+    )
+    current = register.SECTION + "\n\nThe selected source is current.\n"
+    rewritten = register.historical_prose(88, earlier + current)
+    assert "Previously, Nate Chaoweeraprasit" in rewritten
+    assert "`2.9e-4`" in rewritten
+    assert "the atlas pictured at that intake for this count" in rewritten
+    assert rewritten.endswith(current)
+    assert register.historical_prose(88, rewritten) == rewritten
