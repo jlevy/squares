@@ -1065,10 +1065,28 @@ def snapshot_pruned_targets() -> list[Path]:
     return sorted({*linked_pruned_targets(), *result_pruned_targets()})
 
 
+def snapshot_copy_targets() -> tuple[Path, ...]:
+    """Copy each declared private path once, preserving distinct path aliases.
+
+    A full scientific input can be explicitly carried and separately rescued by its
+    result registration. Both names identify the same destination; copying it twice
+    repeats I/O and counts bytes that are overwritten, rather than additional source.
+    This roster is rebuilt on every invocation and admits no source validity cache.
+    """
+    return tuple(dict.fromkeys((*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())))
+
+
+def snapshot_duplicate_copy_bytes() -> int:
+    """Bytes of repeated writes to identical named destinations at this invocation."""
+    paths = (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+    return sum(path.stat().st_size for path in paths) - sum(
+        path.stat().st_size for path in dict.fromkeys(paths)
+    )
+
+
 def snapshot_source_bytes() -> int:
     """Bytes copied by the portable fallback, excluding build products and caches."""
-    total = sum(path.stat().st_size for path in (*COPY_SEPARATELY, *root_files()))
-    total += sum(target.stat().st_size for target in snapshot_pruned_targets())
+    total = sum(path.stat().st_size for path in snapshot_copy_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
             # `.agents` carries a Python file (`skills/experiment-loop/assets/ledger.py`),
@@ -1145,7 +1163,7 @@ def clone_tree(dest: Path) -> None:
     work = dest / HERE
     _clone_into(ROOT, work)
 
-    for target in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets()):
+    for target in snapshot_copy_targets():
         landing = dest / target.relative_to(REPO)
         landing.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(target, landing)
@@ -1283,6 +1301,11 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--source-bytes",
+        action="store_true",
+        help="report private source bytes and the unchanged cap without running controls",
+    )
+    parser.add_argument(
         "spec",
         nargs="?",
         type=Path,
@@ -1360,6 +1383,19 @@ def timing_provenance() -> dict[str, object]:
 def main(argv: Sequence[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
     options = _parser().parse_args(argv)
+    if options.source_bytes:
+        actual = snapshot_source_bytes()
+        print(
+            json.dumps(
+                {
+                    "source_bytes": actual,
+                    "cap_bytes": SNAPSHOT_MAX_BYTES,
+                    "headroom_bytes": SNAPSHOT_MAX_BYTES - actual,
+                    "duplicate_named_copy_bytes_avoided": snapshot_duplicate_copy_bytes(),
+                }
+            )
+        )
+        return int(actual > SNAPSHOT_MAX_BYTES)
     spec_path = options.spec if options.spec.is_absolute() else ROOT / options.spec
     spec = safe_load(spec_path.read_text(encoding="utf-8"))
     only = options.match
