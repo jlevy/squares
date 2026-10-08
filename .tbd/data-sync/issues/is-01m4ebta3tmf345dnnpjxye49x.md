@@ -5,7 +5,7 @@ title: "n17 PR404: finish reviewed main integration after snapshot-budget decisi
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -17,7 +17,7 @@ parent_id: is-01m4e47f19w8w1d7tyka9raahk
 hold: null
 hold_until: null
 created_at: 2026-10-08T18:18:41.130Z
-updated_at: 2026-10-08T22:33:28.568Z
+updated_at: 2026-10-08T23:43:06.449Z
 started_at: 2026-10-08T18:18:55.250Z
 ---
 Bounded mechanical review of live PR404 head against freshly read main. Identify actual conflicting paths and safe ownership, without changing primary checkout or scientific premises. User previously authorized resolving404 conflicts; substantive mathematical conflict resolutions require Astra review. Preserve research evidence and source.
@@ -31,3 +31,8 @@ Integration is held on a required explicit human decision. Actual metadata-selec
 After direct approval: apply only the approved cap/comment/test adjustment; run cheap budget/refusal controls and metadata audit; root commits normally, checks the native HEAD-dependent control, fast-forwards remote PR404 only if its expected head remains ecb0bf82, and synchronizes the formal 404→454 stack. Preserve primary checkout and existing source heads. Otherwise retain staged integration and document its held disposition. Existing think-t1lk guard-owner and think-7hy3 full certification remain separate.
 
 October8 later ownership update (supersedes stale next-step ref assumptions above): primary404 advanced by one Astra-cleared factual exp303 custody correction to1d1691bf5; formal children now454a7ce4022c and46155842c441, published with parityverified. Fetched main advanced to91ca9b824. Held integration worktree STILL hasHEADecb0bf82 andMERGE_HEADf0ec5b663, no unmerged/unstaged source and unchanged resolved index; do NOTreset orblindly fast-forward primary to that older preparedmerge. After exactcapapproval, reconcile the preserved resolutions with new404/main tips through normal formal-stack integration, retain all science/originalengineIDs/sourcecustodybranch, then actualnewhead CI/fullqualification. Pending192->224MiB decision unchanged; capstill192. Externalfree336MiB latest, heavy localgatespaused. Tracker https://github.com/jlevy/squares/issues/405#issuecomment-6070358282.
+
+October 8 published current-main consolidation:
+Supersedes prior held-source-integration status: root18e3a6f4f20f534e80074131d4947c633cca5ef3 now joins main91ca9b824 after nine conflict resolutions, preserving 0a8b46e13 review repairs and previous source history. Normal hooks pass; upstack heads4545dc4d13bc and4617421e2daf published through gh stack; exact owned blob/raw result parity confirmed. Memory controls8PASS1.06s, actual local-minimum replay1PASS14.03s, source-index controls3PASS3.36s, resolved test static checks clean. Composed edit qualification62/63 plus focused browser/liveness recovery; no full push/checkpoint. Old ecb/f0 held merge/index/MERGE_HEAD remains intact separately and sourcecustody5ad preserved. Current source is mergeable, but complete integration qualification remains open with think-0m0x: required Packing/Pages absent or cancelled,224MiB proposal unapplied and external scratch ENOSPC. No new math result/record and no merge.
+Review: https://github.com/jlevy/squares/blob/18e3a6f4f20f534e80074131d4947c633cca5ef3/docs/project/reviews/review-2026-10-08-n17-merge-readiness.md
+Progress: https://github.com/jlevy/squares/issues/405#issuecomment-6071221013

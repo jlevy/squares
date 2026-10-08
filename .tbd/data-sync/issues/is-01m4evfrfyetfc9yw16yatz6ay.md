@@ -3,9 +3,9 @@ type: is
 id: is-01m4evfrfyetfc9yw16yatz6ay
 title: "n17 PR404 B3: isolate source enumeration from foreign Git environment"
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 2
+version: 4
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: root
 labels:
@@ -15,8 +15,12 @@ parent_id: is-01m4eq9mdaejkedd1b09qqn09p
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:52:32.637Z
-updated_at: 2026-10-08T22:53:01.542Z
+updated_at: 2026-10-08T23:43:06.786Z
 started_at: 2026-10-08T22:53:01.541Z
+closed_at: 2026-10-08T23:43:06.785Z
+close_reason: Bounded B3/D1 repairs published in PR404 0a8b46e13/18e3a6f4f and propagated unchanged to both children; targeted verification and exact-readback dispositions recorded. Current required CI/full qualification remains open under think-0m0x; no merge readiness or new mathematical result claimed.
+resolution: null
+duplicate_of: null
 ---
 PR404 full review B3, pinned head 1d1691bf5e6e1115ad1597b5f72bbd12ad9b0b88.
 
@@ -33,3 +37,10 @@ preservation of the original source index. No snapshot cap or pruning change.
 
 Evidence: attic/n17-merge-readiness-20261008/pr404-foreign-index-reproduction.json
 and reproduce_snapshot_foreign_index.py.
+
+## Notes
+
+October 8 published current-main consolidation:
+B3 bounded repair is committed in 0a8b46e13 and published in integrated PR404 head 18e3a6f4f20f534e80074131d4947c633cca5ef3; retained unchanged through children 5dc4d13bc and 7421e2daf. Both tracked-files Git calls use the sanitized environment, preserving foreign source indexes and snapshot-mutated bytes. Three focused controls pass in 1.20s (87 unrelated deselected); all ten repository-scope controls pass in .66s; the three focused controls pass again after main integration in 3.36s (122 unrelated deselected). Published and exact-readback verified disposition: https://github.com/jlevy/squares/pull/404#issuecomment-6071219969. Close bounded source repair only; current required CI/full qualification remains think-0m0x.
+Review: https://github.com/jlevy/squares/blob/18e3a6f4f20f534e80074131d4947c633cca5ef3/docs/project/reviews/review-2026-10-08-n17-merge-readiness.md
+Progress: https://github.com/jlevy/squares/issues/405#issuecomment-6071221013
