@@ -1312,6 +1312,10 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # a neighbouring test, so the slow marker is the measured classification.
         "test_negative_controls.py": {
             "test_build_caches_leave_the_counted_surface_and_the_worker_trees",  # 8.15s on CI
+            # Hosted run37736038877/job113175670339, 2026-10-08: complete 27-input,
+            # nine-house admission and two live mutants; module-scoped clone is setup,
+            # while these uncached complete-reader transactions are measured call time.
+            "test_second_squish_complete_replay_survives_native_worker_boundaries",  # 16.87s
         },
         # 3s of call time across 1, measured 2026-09-20: `git worktree add --detach` of
         # Session 148's opening commit -- a whole checkout of the tree -- and then
