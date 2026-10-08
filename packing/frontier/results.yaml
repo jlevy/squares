@@ -12098,3 +12098,145 @@ results:
       metadata, complete semantic input, typed coverage and safe decimal ceilings. Explicit --replay
       repeats both decisions. Two accepted scoped AI reviews address shared conversion and semantic
       premises.
+
+  - id: T-116
+    kind: upper-bound
+    registered: '2026-10-07'
+    headline: '`s(n) ≤ S_n` at nine counts, from the second SQUISH update’s new rational packings'
+    claim: Nine unchanged rational SQUISH packings establish feasible upper bounds at n = 88, 108, 179,
+      180, 199, 207, 236, 263 and 302. Both exact local routes accepted all nine and rejected both complete-roster
+      controls per case; two distinct separately prompted AI reviews accepted their complete scientific
+      evidence. Five counts are additional and four replace earlier SQUISH packings. Original and first-update
+      certificates remain retained.
+    scope:
+      n_values:
+      - 88
+      - 108
+      - 179
+      - 180
+      - 199
+      - 207
+      - 236
+      - 263
+      - 302
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: Nine confirmed case-bound improvements, five additional counts and four tighter submitted
+        packings; no exact optimum or general theorem.
+      scored: '2026-10-07'
+      by: think-kqd3 canonical confirmation lane (repository)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[SQUISH second update 2026-10-07]'
+      published: '2026-10-07'
+    evidence:
+    - E-squish-second-update-2026-10-07-report
+    - E-squish-second-update-2026-10-07-exact-replay
+    artifacts:
+    - packing/resources/web/squish-422-second-update-2026-10-07/README.md
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/sources.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/update-claims.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/acquisition/frontier-comparison.json
+    - packing/devtools/squish_second_update_packets.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-088.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-108.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-179.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-180.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-199.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-207.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-236.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-263.json.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/facts/n-302.json.gz
+    - packing/frontier/n-088.md
+    - packing/frontier/n-108.md
+    - packing/frontier/n-179.md
+    - packing/frontier/n-180.md
+    - packing/frontier/n-199.md
+    - packing/frontier/n-207.md
+    - packing/frontier/n-236.md
+    - packing/frontier/n-263.md
+    - packing/frontier/n-302.md
+    - packing/devtools/squish_second_update_confirmation.py
+    - packing/devtools/squish_second_update_house_links.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/certification.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/replay-protocol.json
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/house-atlas-metadata.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/protocol/replay-adapter.py
+    - packing/resources/web/squish-422-second-update-2026-10-07/protocol/witness.schema.yaml
+    - packing/resources/web/squish-422-second-update-2026-10-07/reviews/math-review.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/reviews/receipt-binding-review.json.xz
+    - docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+    - docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+    - packing/witnesses/squish-422-second-update-2026/n-088-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-108-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-179-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-180-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-199-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-207-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-236-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-263-rational.yaml.gz
+    - packing/witnesses/squish-422-second-update-2026/n-302-rational.yaml.gz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-088.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-108.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-179.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-180.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-199.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-207.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-236.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-263.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-302.json.xz
+    next_rung: V4/C4 needs accountable human review of the claims, complete witnesses, shared premises,
+      both deciding implementations and accepted scoped AI reviews. V5/C5 would require proof-assistant
+      verification; this exact feasibility replay establishes neither.
+    notes: Source prints for 179, 207, 236, 263 and 302 lie below their exact sides and remain quotations.
+      Verified displays are least upward sixteen-place ceilings, with zero side inflation. Earlier source
+      facts, certificates, evidence, reviews and finder credit remain historical evidence for their own
+      geometries. Author-reported Kingbird, Couzo and SQUISH seed lineage and human-directed Claude Opus
+      5.5 assistance remain attributed. Historical actual replay metadata is retained unchanged, separately
+      from canonical repository-relative publication metadata.
+    composition: Strict source admission and exact rational half-angle conversion preserve every side
+      and complete roster. The completed 27-job replay inspected every pair through both independently
+      implemented deciding routes. Bounded XZ retains historical full witnesses, inputs, verdicts and
+      custody unchanged; canonical metadata transformations require exact complete ordered geometry equality.
+      Cheap admission binds all 27 jobs and both accepted scientific reviews. Exact leaf custody and private-output
+      guards apply to the eight eligible generated house read links; n263 stays private and indexed. Explicit
+      --replay repeats both geometric decisions.
+    reviews:
+    - path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md
+      kind: adversarial
+      reviewer: GPT-6 Astra mathematics reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: All nine immutable source rosters, independently derived ordered corners, exact sides, all
+        27 full deciding inputs, shapes and containment, pair counts and both complete-roster controls
+        per case.
+      verdict: accepted
+      covers:
+      - T-116
+    - path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md
+      kind: adversarial
+      reviewer: GPT-6 Astra separately prompted semantic-binding reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-07'
+      scope: All 27 actual receipts, full witness and deciding inputs, source custody, observed runtime
+        modules and selected schema, all 54 verdicts and exact pair/control coverage.
+      verdict: accepted
+      covers:
+      - T-116
+    controls:
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-088.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-108.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-179.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-180.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-199.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-207.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-236.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-263.json.xz
+    - packing/resources/web/squish-422-second-update-2026-10-07/receipts/n-302.json.xz
+    - packing/tests/test_squish_second_update_confirmation.py
+    - packing/tests/test_generate_frontier_case.py

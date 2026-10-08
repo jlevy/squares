@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **95** programs: **35** external and **60** first-party; **71** decide claims and **24** check premises.
-- **411** of **441** evidence entries name the programs that verified them: 226 reproduced with the producer’s code, 158 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
+- **96** programs: **35** external and **61** first-party; **71** decide claims and **25** check premises.
+- **412** of **443** evidence entries name the programs that verified them: 226 reproduced with the producer’s code, 159 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -69,8 +69,8 @@ second implementation agrees.
 | [`V-anabologyco-n17-checker`](#v-anabologyco-n17-checker) | scripts/check_certificate.py and its event pipeline | anabologyco-maker | external | decides | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 14 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 17 | 7 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 13 | 11 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 18 | 8 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 14 | 12 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -127,6 +127,7 @@ second implementation agrees.
 | [`V-probe-valid7-fixes`](#v-probe-valid7-fixes) | devtools.probe_valid7_fixes | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
 
 ## By Program
 
@@ -920,6 +921,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
 | `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
 | `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
 
 ### `V-check-rational-witness-independent`
 
@@ -947,6 +949,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
 | `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
 | `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -1905,6 +1908,21 @@ Admits the pinned update source and complete reviewed replay, binds revision-spe
 | evidence | run | code | results |
 | --- | --- | --- | --- |
 | `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
+
+### `V-squish-second-update-confirmation`
+
+**devtools.squish_second_update_confirmation** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits the complete immutable second-update roster, all historical full replay inputs and outcomes, accepted complete review records and the explicit canonical metadata transformation. Checks bounded decoding, full coverage, safe ceilings and exact house witness custody; fresh dual decisions require explicit --replay.
+
+- Source: [`packing/devtools/squish_second_update_confirmation.py`](../../packing/devtools/squish_second_update_confirmation.py), [`packing/devtools/squish_second_update_house_links.py`](../../packing/devtools/squish_second_update_house_links.py), [`packing/devtools/squish_second_update_packets.py`](../../packing/devtools/squish_second_update_packets.py), [`packing/devtools/squish_upper_bound_packets.py`](../../packing/devtools/squish_upper_bound_packets.py), [`packing/devtools/import_half_angle_witness.py`](../../packing/devtools/import_half_angle_witness.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md`](../../docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md)
+- Note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
+
+| evidence | run | code | results |
+| --- | --- | --- | --- |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

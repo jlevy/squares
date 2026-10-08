@@ -1,0 +1,394 @@
+{
+  "cases": [
+    {
+      "n": 88,
+      "new_exact_side": "2776969563275584455838168348247/281000083350790412930283208704",
+      "new_safe_display": "9.8824510304821347",
+      "prior_conjectured_optimum": "9.88815305375857",
+      "prior_reported": {
+        "algebraic_degree": 20,
+        "analytically_optimized": true,
+        "catalogue_pictured": true,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "hand-construction",
+        "evidence": [
+          "E-kingbird-upper-register"
+        ],
+        "exact_form": null,
+        "found_by": [
+          "David Ellsworth"
+        ],
+        "found_year": 2024,
+        "improved_by": [],
+        "minimal_polynomial": "254016s^{20}-43279488s^{19}+3506260608s^{18}-179642577984s^{17}+6530192527760s^{16}-179088304328704s^{15}+3846118270819200s^{14}-66261902137415296s^{13}+930479746642904384s^{12}-10759858027891736896s^{11}+103070340120029179008s^{10}-819709665351861223904s^9+5405590814889373243192s^8-29412949608198679086720s^7+130831566348158107359392s^6-468664620024162429231904s^5+1321046745485882223459068s^4-2825402176181244872057384s^3+4315682289270565775115128s^2-4199847844458434080013540s+1959329723251932809573425=0",
+        "retrieved_date": "2026-08-22",
+        "source_date": null,
+        "source_key": "[Kingbird]",
+        "tilt_angles_deg": null,
+        "value": "9.88815305375857",
+        "witnesses": [
+          "W-known-best-n088"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-evand-exact-ceilings-2026-10-05-exact-replay",
+          "E-evand-exact-ceilings-2026-10-05-source-replay"
+        ],
+        "exact_form": "494407652687929/50000000000000",
+        "value": "9.88815305375858"
+      },
+      "reported_seed": "Kingbird's s(41), grafted into n88's record",
+      "hand_authored_lower": {
+        "reported_lower_bound": {
+          "value": "9.62",
+          "exact_form": "481/50",
+          "kind": "counting",
+          "proved_by": [
+            "wand125"
+          ],
+          "proved_year": 2026,
+          "source_key": "[wand125 mixed bounds evening 2026-10-04]",
+          "note": "wand125's square-packing-bounds (4 October 2026) reports s(88) >= 481/50 from a density of 562 uniform rectangles of total mass 8799999/100000, at core side 9977/10000 on 201 net half-angles, accepted there at every angle by its research copy of Tokoharu's verify.cpp at threshold one. It is above the 769/80 of the source's mixed_n88_L96125 of earlier that day (T-090). sqverify-fast decided it here on 5 October 2026 at all 201 net directions.",
+          "scope": "Unrestricted unit-square packing with independent rotations and disjoint interiors.",
+          "evidence": [
+            "E-n088-wand125-mixed-962-report"
+          ]
+        },
+        "verified_lower_bound": {
+          "value": "9.62",
+          "exact_form": "481/50",
+          "evidence": [
+            "E-n088-wand125-mixed-962-sqverify-fast-replay"
+          ]
+        },
+        "reported_status": "open",
+        "status": "open"
+      }
+    },
+    {
+      "n": 108,
+      "new_exact_side": "6141750256175099/562949953421312",
+      "new_safe_display": "10.9099400734448775",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": 1,
+        "analytically_optimized": null,
+        "catalogue_pictured": false,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-squish-ten-packings-2026-10-07-report"
+        ],
+        "exact_form": "6147784441267127/562949953421312",
+        "found_by": [
+          "Nate Chaoweeraprasit"
+        ],
+        "found_year": 2026,
+        "improved_by": [],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-07",
+        "source_date": "2026-10-07",
+        "source_key": "[SQUISH ten packings 2026-10-07]",
+        "tilt_angles_deg": null,
+        "value": "10.9206589394033085",
+        "witnesses": [
+          "W-known-best-n108"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-squish-ten-packings-2026-10-07-exact-replay"
+        ],
+        "exact_form": "6147784441267127/562949953421312",
+        "value": "10.9206589394033085"
+      },
+      "reported_seed": "SQUISH's own s(110), two squares removed, then nearby search"
+    },
+    {
+      "n": 179,
+      "new_exact_side": "7815882024694857/562949953421312",
+      "new_safe_display": "13.8837954905121866",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": 1,
+        "analytically_optimized": null,
+        "catalogue_pictured": false,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-squish-update-2026-10-07-report"
+        ],
+        "exact_form": "1955028440461153/140737488355328",
+        "found_by": [
+          "Nate Chaoweeraprasit"
+        ],
+        "found_year": 2026,
+        "improved_by": [],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-07",
+        "source_date": "2026-10-07",
+        "source_key": "[SQUISH update 2026-10-07]",
+        "tilt_angles_deg": null,
+        "value": "13.8913125657406980",
+        "witnesses": [
+          "W-known-best-n179"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-squish-update-2026-10-07-exact-replay"
+        ],
+        "exact_form": "1955028440461153/140737488355328",
+        "value": "13.8913125657406980"
+      },
+      "reported_seed": "Francisco Couzo's s(180), one square removed, then nearby search"
+    },
+    {
+      "n": 180,
+      "new_exact_side": "489683896443017/35184372088832",
+      "new_safe_display": "13.9176534174514757",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": 1,
+        "analytically_optimized": null,
+        "catalogue_pictured": false,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-squish-ten-packings-2026-10-07-report"
+        ],
+        "exact_form": "3068446722737763377509947691807/220376842814439473250054438912",
+        "found_by": [
+          "Nate Chaoweeraprasit"
+        ],
+        "found_year": 2026,
+        "improved_by": [],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-07",
+        "source_date": "2026-10-07",
+        "source_key": "[SQUISH ten packings 2026-10-07]",
+        "tilt_angles_deg": null,
+        "value": "13.9236350042524224",
+        "witnesses": [
+          "W-known-best-n180"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-squish-ten-packings-2026-10-07-exact-replay"
+        ],
+        "exact_form": "3068446722737763377509947691807/220376842814439473250054438912",
+        "value": "13.9236350042524224"
+      },
+      "reported_seed": "SQUISH's own s(182), two squares removed, then nearby search"
+    },
+    {
+      "n": 199,
+      "new_exact_side": "8228961574259683/562949953421312",
+      "new_safe_display": "14.6175721735980400",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": null,
+        "analytically_optimized": null,
+        "catalogue_pictured": true,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-report"
+        ],
+        "exact_form": null,
+        "found_by": [
+          "Francisco Couzo"
+        ],
+        "found_year": 2026,
+        "improved_by": [
+          "Evan Daniel"
+        ],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-05",
+        "source_date": "2026-10-05",
+        "source_key": "[evand exact optima 2026-10-05]",
+        "tilt_angles_deg": null,
+        "value": "14.61898895689939842900969151892",
+        "witnesses": [
+          "W-known-best-n199"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-exact-replay",
+          "E-evand-exact-optima-2026-10-05-source-replay"
+        ],
+        "exact_form": "365474723922484960725242287973/25000000000000000000000000000",
+        "value": "14.61898895689939842900969151892"
+      },
+      "reported_seed": "Kingbird's s(37), grafted into n199's record"
+    },
+    {
+      "n": 207,
+      "new_exact_side": "4061010297448552475010401636185/272770849620938037601496989696",
+      "new_safe_display": "14.8879922583077482",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": null,
+        "analytically_optimized": null,
+        "catalogue_pictured": true,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-report"
+        ],
+        "exact_form": null,
+        "found_by": [
+          "Francisco Couzo"
+        ],
+        "found_year": 2026,
+        "improved_by": [
+          "Evan Daniel"
+        ],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-05",
+        "source_date": "2026-10-05",
+        "source_key": "[evand exact optima 2026-10-05]",
+        "tilt_angles_deg": null,
+        "value": "14.893954634237227388391298332204",
+        "witnesses": [
+          "W-known-best-n207"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-exact-replay",
+          "E-evand-exact-optima-2026-10-05-source-replay"
+        ],
+        "exact_form": "3723488658559306847097824583051/250000000000000000000000000000",
+        "value": "14.893954634237227388391298332204"
+      },
+      "reported_seed": "SQUISH's own s(88), grafted into n207's record"
+    },
+    {
+      "n": 236,
+      "new_exact_side": "8932777743453263/562949953421312",
+      "new_safe_display": "15.8678008394255397",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": null,
+        "analytically_optimized": null,
+        "catalogue_pictured": true,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-report"
+        ],
+        "exact_form": null,
+        "found_by": [
+          "Francisco Couzo"
+        ],
+        "found_year": 2026,
+        "improved_by": [
+          "Evan Daniel"
+        ],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-05",
+        "source_date": "2026-10-05",
+        "source_key": "[evand exact optima 2026-10-05]",
+        "tilt_angles_deg": null,
+        "value": "15.87221902560728287835395301986",
+        "witnesses": [
+          "W-known-best-n236"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-exact-replay",
+          "E-evand-exact-optima-2026-10-05-source-replay"
+        ],
+        "exact_form": "793610951280364143917697650993/50000000000000000000000000000",
+        "value": "15.87221902560728287835395301986"
+      },
+      "reported_seed": "SQUISH's own s(88), grafted into n236's record"
+    },
+    {
+      "n": 263,
+      "new_exact_side": "9424018478849569/562949953421312",
+      "new_safe_display": "16.7404196795387766",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": 1,
+        "analytically_optimized": null,
+        "catalogue_pictured": false,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-squish-update-2026-10-07-report"
+        ],
+        "exact_form": "1688127953620802672872096218104440928487712119/100841274193809894793232914114737381771837440",
+        "found_by": [
+          "Nate Chaoweeraprasit"
+        ],
+        "found_year": 2026,
+        "improved_by": [],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-07",
+        "source_date": "2026-10-07",
+        "source_key": "[SQUISH update 2026-10-07]",
+        "tilt_angles_deg": null,
+        "value": "16.7404464800428692",
+        "witnesses": [
+          "W-known-best-n263"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-squish-update-2026-10-07-exact-replay"
+        ],
+        "exact_form": "1688127953620802672872096218104440928487712119/100841274193809894793232914114737381771837440",
+        "value": "16.7404464800428692"
+      },
+      "reported_seed": "Francisco Couzo's s(297), carved down to n263's record, then nearby search and squeeze"
+    },
+    {
+      "n": 302,
+      "new_exact_side": "2516570125647313/140737488355328",
+      "new_safe_display": "17.8813062180958085",
+      "prior_conjectured_optimum": null,
+      "prior_reported": {
+        "algebraic_degree": null,
+        "analytically_optimized": null,
+        "catalogue_pictured": true,
+        "catalogue_rigid": "not-stated",
+        "construction_method": "unknown",
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-report"
+        ],
+        "exact_form": null,
+        "found_by": [
+          "Francisco Couzo"
+        ],
+        "found_year": 2026,
+        "improved_by": [
+          "Evan Daniel"
+        ],
+        "minimal_polynomial": null,
+        "retrieved_date": "2026-10-05",
+        "source_date": "2026-10-05",
+        "source_key": "[evand exact optima 2026-10-05]",
+        "tilt_angles_deg": null,
+        "value": "17.885993892530410666666041882586",
+        "witnesses": [
+          "W-known-best-n302"
+        ]
+      },
+      "prior_verified": {
+        "evidence": [
+          "E-evand-exact-optima-2026-10-05-exact-replay",
+          "E-evand-exact-optima-2026-10-05-source-replay"
+        ],
+        "exact_form": "8942996946265205333333020941293/500000000000000000000000000000",
+        "value": "17.885993892530410666666041882586"
+      },
+      "reported_seed": "SQUISH's own s(88), grafted into n302's record"
+    }
+  ]
+}
