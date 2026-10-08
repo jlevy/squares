@@ -3,9 +3,9 @@ type: is
 id: is-01m4c486bvartgwnk1s2szjz8x
 title: "Import issue422 second SQUISH update: five new counts and four replacements"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 23
+version: 26
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T21:27:58.586Z
-updated_at: 2026-10-08T02:54:01.476Z
+updated_at: 2026-10-08T03:08:26.091Z
 started_at: 2026-10-07T21:37:07.551Z
+closed_at: 2026-10-08T03:08:26.091Z
+close_reason: Exact imported source, independent confirmation, actual deployment/results/renderings and final author reply complete; issue422 closed and all5 actual comments plus resolved ask recorded in reviewed/green merged PR437 on main7a8d9c16. Native timingc63v/later intake6lrh remain separate.
+resolution: null
+duplicate_of: null
 ---
 Pin e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b. New88/199/207/236/302; tighter108/179/180/263, all exact side comparisons strict. Separate nine-certificate layer after frozen PR421 twelve-case5e32 batch; preserve earlier geometries/receipts/credits. Current parser refuses new263 boolean squeezed; explicit bounded metadata decision plus meaningful controls required. Its source print below exact side mustremain quotation and use safe ceiling16.7404196795387766. No feasibility replay/adoption yet; source/README/allnine JSON pinned in squares-new-report-intake.
 
@@ -27,6 +31,19 @@ Source issue: https://github.com/jlevy/squares/issues/422. Author comment6047131
 
 ## Notes
 
+FINAL OWNED PR/IMPORT CLOSEOUT — 2026-10-08 UTC:
+PR427/429MERGEDf747; actualmatchingf747site406/793/1238/48allPASSraw0/visual46figuresPASS/independentAstra0findings, everyoriginalnegative preserved. Final422reply6051191850posted02:52:36 andissueCLOSED02:53:15. PR431checkpointMERGED0170350at02:54:39 after16SUCCESS50SKIP/fullreviews. NEWrequestledgerPR437 ACTUALMERGED7a8d9c16daa267c3a778554036374884194c2c36 at03:07:12 afterfreshCLEAN/exacthead1bb923gate15SUCCESS39SKIP, seniorAstraA5450856645+dedicatedSolBaccepted0findings. Only422ledger71insert7delete; fiveactualcomments/closedstate/readthrough/currentIDs/askDONE recorded, allother15802Gitentries/23issueobjects/science/sourcebudgets unchanged. Rootcheckoutmain7a8 clean; sourcebranches1bb andpriorheads savedGitHub. No force/admin/waiver.
+Issue422answer/import COMPLETE; think-qc6y/think-sfpz canclosewithtrackedledgerDONEonmain. Sourceconfirmationkqd3/engineeringx2gl/lbku/cr0f/yi1c/yquoprepallclosedatactualacceptedscopes. NativeperformanceP2think-c63v OPEN(rawsuiteD1/strictwalls); remaining19unrelatedlive-ledgerdifferencesownedbythink-6lrh OPEN underglobalmsos; otherdraft434/435+repoformalfindings/conflictskeepownowners, no blanketallrepoCIclaim.
+Preservationthink-vz6u finalbackup/dlverificationinprogress only: immutablefinalarchivewillincludeactualsource/PR/merge/CI/review/frozen186sitefiles/nativecomplete/remote/outbox/requestclosure/synthetichistory distinction; oldarchives unchanged. Afteractualupload/download+everymemberhashMATCH, closepreservation andverifyfinalnativeGitremote/outboxes. Lateststartup save stale_baseunsaved/externalnewsetupchatrequired; testedcurrentinstance+GitHubZIPbackup preserved. Exactf747sitepassdoesnotassertlaterdocumentationdeployment; latestdocPagesworkflowisbeingobserved separately.
+
+HISTORICAL RECORD(retained):
+CURRENT PR AND PRESERVATION CLOSEOUT — 2026-10-08 UTC:
+Allsource+checkpointPR427429431MERGED; sourcef747actualsite406/793/1238/48allPASS+aggregate0/Astraaccepted/46figuresvisualPASS, actualfinal422reply6051191850posted02:52:36 andissueCLOSED02:53:15. Checkpoint431MERGED0170350dce57337d1073cf0c3f98c3fd84b63374 at02:54:39, exacthead91c6/16SUCCESS50SKIP/reviewed/freshCLEANgate.
+NEWLEDGERPR437 https://github.com/jlevy/squares/pull/437 source1bb923e12f9dcfb0e204237d2b7bf045f1c51821 parent0170350, clean/nonforceGitHubbranchsavedcodex/close-squish-422-publication/exactPRbodyHEADonefilepathverified. ONLYcampaign/result-requests.yaml71insert7delete, only422semanticschange; all15802otherGitentries/23otherissues unchanged. All5actualcommentURLauthor/date/closedstate/readthrough mapped, finalcorrects4priorcheckpoints; existingT116T115confirmations/evidence resolve/askDONE/closeablenoreplydue. 44existingfocusedtests0.96s plus requestschema/report/pin/hooksraw0; independentexactAstra ReviewA5450856645ACCEPT0findings anddedicatedSoldocumentationBpublished. ActualnewheadhostedCIINPROGRESS atlastread9SUCCESS38SKIP5running; no merge or terminal-greenclaim. Userauthorizedmergeafterallclean/reviewed; rootwillfreshgateandmerge437whenactualCIpasses.
+Nativeanswerqc6y andparent422sfpz stayOPENuntil437trackedledgerlands. Toolingpreparationyquo canclose: metadata/schema/custodyfindings fullyresolved inacceptedcanonicalsource/replays/reviews+actualsite. NativeperformanceP2think-c63v remainsOPEN/rawsuiteD1strictwallsunchanged. Remaining19unrelatedlive-ledgerdifferences explicitlytrackedNEWthink-6lrh underglobalmsos; actualevidencefileactual-live-github-consistency.log inretainedcloseoutfolder, zero422differences. Preserve434/435coowners/scopedacceptedsciencevsremainingCI/otherrepositoryPRfindings; no repo-wideallgreenclaim.
+FinalstatecustodycapturingexactcurrentPR/bead/outbox/remotehead/committedledger+review/source/rawfailures/fullactualdeployment186files/fivepubliccomments/preparationhistory. Preservationvz6uOPENuntilactualGitHubdownload/memberhashproof; finalarchiveimmutableobservationmayprecede437terminalCI, latermerge/nativeclosuregivenownreceipt. Lateststartup save explicitlystale_baseunsaved; currentruntimeGHpush/PR/merge/tbd/bootstrap+strictbrowserexistingNSStrust verified, testedsetupZIPGitHubpreserved; newsetupchatneededforreusableconfigsave, notadditionalcredentials.
+
+HISTORICAL RECORD(retained):
 ACTUAL LIVE ACCEPTANCE AND AUTHOR CLOSEOUT — 2026-10-08 UTC:
 Exactmainf747407a0fa83d80a7894331c770aeb314b23163 sourceclean, Pages37717788426/deployment6925744906SUCCESS, mainPackingvalidation37717788417COMPLETEDSUCCESS. Finalactuallive406/406,supplemental793/793,standard1238/1238,layout48/48PASS; allcurrentstep andaggregateEXIT0. All116results23cases46ordinary/regularizedSVGs+46mainfiguremobile/desktop screenshots,6expandedoverview+2resultsviews visuallyPASS. IndependentAstra finalreceiptACCEPT0findings;186frozenartifactfiles20579425B manifestready. Initialheader/auditor404of406FAIL/browserstandard1230of1238raw1/layoutcallbackabort/raw1/oldaggregate1 preserved distinct. StrictTLSneverdisabled; approvedexecutionusesexistingNSStrust, noCAimport/HOMEproxychange/sourcepatch.
 Finalauthorreply ACTUAL https://github.com/jlevy/squares/issues/422#issuecomment-6051191850 created2026-10-08T02:52:36Z, accurateT116/T115V3C3S3/bothroutes27jobs1141818pairs/feasibilityscope/sharedpremises/sourcecredit/realdeployment. Issue422 ACTUALCLOSED at2026-10-08T02:53:15Z. Earlierpostmergeprogress6051113157 and earlierpendingcheckpointreplies stayhistorical.
