@@ -5,7 +5,7 @@ title: Review current PR reports and plan separate import and verification slice
 kind: task
 status: in_progress
 priority: 1
-version: 26
+version: 27
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -26,13 +26,19 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T19:28:42.875Z
-updated_at: 2026-10-08T03:08:24.154Z
+updated_at: 2026-10-08T03:16:04.283Z
 started_at: 2026-10-07T19:28:52.536Z
 ---
 User requested all comments on recent outstanding and all current PRs, sensible plan to ingest new reports; intake may run alongside first-priority415/416 CI repair. Captured all13 open and16 recent merged PRs, five issue comments, no review/inline/thread content at capture, all pagination complete. Mechanical inventory and plan GPT-6.1 Sol; independent Astra technical review. Evidence /workspace/squares-current-pr-intake. Keep SQUISH latest twelve-bound release under think-oxvk; separately disposition n17 verifier410 independent-implementation vs shared specification, competing RSS407/404, algebraic403 conflict/truncatedbody, exposition412 limited replay, and focused tooling/site PRs. Preserve192MiB snapshot cap;410 contributor offer is data, not consent. Track ownership gaps and exact gates, preserve existing PRs rather than combining unrelated claims.
 
 ## Notes
 
+LATEST CONCURRENT OWNER SNAPSHOT — 2026-10-08 UTC:
+Freshread-onlyGitHubsnapshot supersedesdatedowner-head/CIfailure summaries:434bcff749ce3e34064dc9961e0a33875025e54e1eb DRAFT30SUCCESS26SKIP;435e17685ef36cad388d937a32d5082d5fddc2cb18d DRAFT31SUCCESS26SKIP. Both remainwiththeirexistingowners/currentreview/readiness gates; rootclaimsnofreshscientificacceptanceatthesenewheads andwillnotpromotedraftsfromCIalone. Earlier782/d702/69ebd failures/reviews remainhistorical scopes. Retained434scientificclosure andten425projectjobs/three428upstreamjobs remain distinctfromoriginalfive428projectprotocol preparation.
+Owned427429431437allMERGED/reviewed/green;422source/publication/finalreply/ledgercomplete, answer/importqcy/sfpzandtoolprepyquoclosed/synced. Main7a8containsledger1bb andactualremote refs/pull/437/head retains1bb afterautomaticmerged-featurebranchdeletion; no worklost. Ninefullnative owningnotes matchactualremoteGitrecords, both sourcecheckouts clean/allphysical+trackedoutboxesempty. LaterdocumentationPages37720176696at0170350COMPLETEDSUCCESS; exactsourcef747site406/793/1238/48/visualallPASSscopepreserved.
+Remainingwork: nativeperformanceP2think-c63vOPEN, unrelated19live-ledgerdifferencesOPENthink-6lrh, current434/435ownerreviews/readiness/publication andotherrepoPRfindings/conflicts underexistingowners/globalmsos. Finalpreservationvz6uawaitingarchiveupload/download/memberhashthenclosure. Latestcloudstartup configstale_base remainsunsaved/externalnewsetupchat; testedruntime+GitHubsetupZIP recovery separate.
+
+HISTORICAL RECORD(retained):
 FINAL OWNED PR/IMPORT CLOSEOUT — 2026-10-08 UTC:
 PR427/429MERGEDf747; actualmatchingf747site406/793/1238/48allPASSraw0/visual46figuresPASS/independentAstra0findings, everyoriginalnegative preserved. Final422reply6051191850posted02:52:36 andissueCLOSED02:53:15. PR431checkpointMERGED0170350at02:54:39 after16SUCCESS50SKIP/fullreviews. NEWrequestledgerPR437 ACTUALMERGED7a8d9c16daa267c3a778554036374884194c2c36 at03:07:12 afterfreshCLEAN/exacthead1bb923gate15SUCCESS39SKIP, seniorAstraA5450856645+dedicatedSolBaccepted0findings. Only422ledger71insert7delete; fiveactualcomments/closedstate/readthrough/currentIDs/askDONE recorded, allother15802Gitentries/23issueobjects/science/sourcebudgets unchanged. Rootcheckoutmain7a8 clean; sourcebranches1bb andpriorheads savedGitHub. No force/admin/waiver.
 Issue422answer/import COMPLETE; think-qc6y/think-sfpz canclosewithtrackedledgerDONEonmain. Sourceconfirmationkqd3/engineeringx2gl/lbku/cr0f/yi1c/yquoprepallclosedatactualacceptedscopes. NativeperformanceP2think-c63v OPEN(rawsuiteD1/strictwalls); remaining19unrelatedlive-ledgerdifferencesownedbythink-6lrh OPEN underglobalmsos; otherdraft434/435+repoformalfindings/conflictskeepownowners, no blanketallrepoCIclaim.
