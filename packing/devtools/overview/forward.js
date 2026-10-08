@@ -127,7 +127,8 @@
         return;
       }
     }
-    forward(moved);
+    const fileTarget = document.documentElement.dataset.fileMovedTo;
+    forward(window.location.protocol === "file:" && fileTarget ? fileTarget : moved);
     return;
   }
   const fragment = window.location.hash.slice(1);

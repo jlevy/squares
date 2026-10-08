@@ -157,15 +157,28 @@ def inline_assets(page: str, read: Callable[[str], bytes]) -> str:
     from a built site (`inlined_from`)."""
     from devtools.render_n11_lower_bounds_explainer import inline_face  # noqa: PLC0415
 
+    for tag in _MARKED_STYLESHEET_TAG.finditer(page):
+        if _STYLESHEET_TAG.fullmatch(tag[0]) is None:
+            raise SystemExit(f"unsupported marked math stylesheet: {tag[0]}")
+
+    def checked_read(output: str) -> bytes:
+        if any(part in ("", ".", "..") for part in output.split("/")) or any(
+            character in output for character in "\\?#\x00"
+        ):
+            raise SystemExit(f"invalid shared asset path: {output!r}")
+        return read(output)
+
     def style(match: re.Match[str]) -> str:
-        css = read(match.group(1)).decode("utf-8")
+        css = checked_read(match.group("output")).decode("utf-8")
         css = _STYLESHEET_REFERENCE.sub(
-            lambda face: f'url("{inline_face(face.group(1), read(face.group(1)))}")', css
+            lambda face: f'url("{inline_face(face.group(1), checked_read(face.group(1)))}")',
+            css,
         )
-        return f"<style>{css}</style>"
+        marker = " data-site-math-styles" if match.group("marker") else ""
+        return f"<style{marker}>{css}</style>"
 
     def script(match: re.Match[str]) -> str:
-        return f"<script>{read(match.group(1)).decode('utf-8')}</script>"
+        return f"<script>{checked_read(match.group(1)).decode('utf-8')}</script>"
 
     page = _PRELOAD_TAG.sub("", page)
     page = _STYLESHEET_TAG.sub(style, page)
@@ -218,7 +231,13 @@ def stale_assets(site: Path, files: dict[str, bytes], *, exact: bool = False) ->
     ]
 
 
-_INLINE_STYLE = re.compile(r"<style>(.*?)</style>", re.DOTALL)
+_INLINE_STYLE = re.compile(
+    r"<style(?P<marker> data-site-math-styles)?>(?P<css>.*?)</style>", re.DOTALL
+)
+_MARKED_INLINE_STYLE = re.compile(
+    r"<style\b[^>]*\bdata-site-math-styles(?=\s|=|>)[^>]*>.*?</style>",
+    re.DOTALL,
+)
 _INLINE_SCRIPT = re.compile(r"<script>(.*?)</script>", re.DOTALL)
 _INLINE_FONT = re.compile(r"url\([\"']?data:font/woff2;base64,([A-Za-z0-9+/=]+)[\"']?\)")
 
@@ -232,6 +251,9 @@ def link_inline_assets(
     because they set preferences before first paint. JSON data blocks are untouched.
     Fonts reuse the shared bundle's names wherever their bytes match.
     """
+    for tag in _MARKED_INLINE_STYLE.finditer(page):
+        if _INLINE_STYLE.fullmatch(tag[0]) is None:
+            raise SystemExit(f"unsupported marked inline math stylesheet: {tag[0]}")
     bundle = shared()
     target = assets if assets is not None else bundle.assets
     names = {
@@ -267,8 +289,11 @@ def link_inline_assets(
         return f'url("{target.face(name, data)}")'
 
     def style(match: re.Match[str]) -> str:
-        css = _INLINE_FONT.sub(font, match.group(1))
-        return stylesheet_tag(target.stylesheet("page.css", css), page_path)
+        css = _INLINE_FONT.sub(font, match.group("css"))
+        marker = bool(match.group("marker"))
+        name = "site-math.css" if marker else "page.css"
+        linked = stylesheet_tag(target.stylesheet(name, css), page_path)
+        return linked.replace("<link ", "<link data-site-math-styles ", 1) if marker else linked
 
     page = _INLINE_STYLE.sub(style, page)
     head_end = page.find("</head>")
@@ -315,7 +340,13 @@ _PAGE_REFERENCE = re.compile(rf'(?:href|src)="(?:\.\./)*{ASSETS_DIR}/([^"#?]+)"'
 _STYLESHEET_REFERENCE = re.compile(r'url\("\.\./(fonts/[^"]+)"\)')
 #: The three tags this module writes into a page, as `stylesheet_tag`, `script_tag` and
 #: `preload_tags` write them, each capturing the path under `assets/`.
-_STYLESHEET_TAG = re.compile(rf'<link rel="stylesheet" href="(?:\.\./)*{ASSETS_DIR}/([^"]+)">')
+_STYLESHEET_TAG = re.compile(
+    rf'<link(?P<marker> data-site-math-styles)? rel="stylesheet" '
+    rf'href="(?:\.\./)*{ASSETS_DIR}/(?P<output>[^"]+)">'
+)
+# Only the generated bare math marker is supported; malformed marked links fail
+# instead of silently leaving an external stylesheet in a self-contained export.
+_MARKED_STYLESHEET_TAG = re.compile(r"<link\b[^>]*\bdata-site-math-styles(?=\s|=|>)[^>]*>")
 _SCRIPT_TAG = re.compile(rf'<script src="(?:\.\./)*{ASSETS_DIR}/([^"]+)"></script>')
 _PRELOAD_TAG = re.compile(rf'<link rel="preload" href="(?:\.\./)*{ASSETS_DIR}/[^"]+"[^>]*>\n?')
 

@@ -19,7 +19,8 @@
 // `faces` is every face the document declares (`document.fonts`): family, weight, style,
 // `font-display`, whether its bytes are inlined or a file of the site's shared assets,
 // and whether it loaded. `root` is what
-// the page stamped on `<html>`, `katex` the KaTeX it runs, `publication` whether it
+// the page stamped on `<html>`, `katex` its checked running or prepared renderer,
+// `prepared_katex` the build-time version record, `publication` whether it
 // carries the papers' publication layer, `reading` whether it has a reading column at
 // all (the workbench and a result overview opened alone have none), `sans` and `prose`
 // the faces that lead the two text stacks, and `tokens` what the shared text tokens come
@@ -226,7 +227,7 @@
     /** @type {Map<string, Element>} */
     const found = new Map();
     for (const node of katex.querySelectorAll(".katex-html *")) {
-      if (!ownText(node)) {
+      if (!shown(node) || !ownText(node)) {
         continue;
       }
       const style = getComputedStyle(node);
@@ -259,13 +260,18 @@
     const drawn = drawing(katex);
     const around = drawing(host);
     const glyphs = runs(katex);
-    const tex = katex.querySelector("annotation")?.textContent ?? "";
+    // A prepared formula keeps its one semantic MathML subtree beside the visual
+    // wrapper. Associate only this formula's host, never a surrounding paragraph.
+    const prepared = katex.closest('[data-kpress-math-prepared="true"]');
+    const semantic = prepared?.closest(".kpress-math") ?? prepared ?? katex;
+    const mathml = semantic.querySelectorAll("math");
+    const tex = semantic.querySelector("annotation")?.textContent ?? "";
     const setting = {
       surface: surfaces.find(([selector]) => host.closest(selector))?.[1] ?? "prose",
       layout: display ? "display" : "inline",
       typeset:
         (katex.querySelector(".katex-html") ? "KaTeX HTML" : "no HTML") +
-        (katex.querySelector(".katex-mathml") ? " + MathML" : ""),
+        (mathml.length === 1 ? " + MathML" : mathml.length ? " + duplicate MathML" : ""),
       math: drawn.family,
       glyphs: [...glyphs.keys()].sort().join(" + "),
       weight: drawn.weight,
@@ -282,7 +288,7 @@
       synthesis: drawn.synthesis,
       face_mark:
         katex.closest("[data-kpress-math-face]")?.getAttribute("data-kpress-math-face") ?? "",
-      prepared: katex.closest('[data-kpress-math-prepared="true"]') ? "yes" : "no",
+      prepared: prepared ? "yes" : "no",
     };
     const key = JSON.stringify(setting) + (wanted.has(tex) ? `|${tex}` : "");
     const row = math.get(key);
@@ -384,8 +390,15 @@
   ];
   const tokens = Object.fromEntries(names.map(([name, length]) => [name, token(name, length)]));
   ruler.remove();
+  const runtime = /** @type {{katex?: {version?: string}}} */ (globalThis).katex?.version ?? "";
+  const preparedVersions = [...document.head.querySelectorAll('meta[name="site-math-katex"]')].map(
+    (meta) => meta.getAttribute("content") ?? "",
+  );
+  const preparedKatex = preparedVersions.join(" / ");
   return {
-    katex: /** @type {{katex?: {version?: string}}} */ (globalThis).katex?.version ?? "",
+    katex: runtime || preparedKatex,
+    runtime_katex: runtime,
+    prepared_katex: preparedKatex,
     platform: navigator.platform,
     publication: document.querySelector(".cert-page") !== null,
     reading: document.querySelector(".kpress-prose") !== null,

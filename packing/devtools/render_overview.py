@@ -1440,8 +1440,9 @@ def forwarder_pages() -> list[Page]:
     A forwarder is a few lines and no page of the site: `overview/forward.js`, the script
     the overview already forwards its own old fragments with, reads where the reader is
     sent from the root element and sends them there with the query string and the
-    fragment they came with. For a reader without scripts it carries a refresh and a
-    link, and for a crawler the canonical address of the place it stands for. It has no
+    fragment they came with. File navigation uses the registered physical output;
+    the no-script refresh and link also name that file, so directory indexes open
+    their content in either transport. A crawler sees the canonical address. It has no
     bar, no stamp and no styles, and is not among `PAGES`. A target is written as the
     old path's reader must follow it: relative for a page of the site, climbing out of
     the old path's directory where it has one, and whole for an address off it.
@@ -1461,14 +1462,14 @@ def forwarder_pages() -> list[Page]:
     pages = []
     for old, new in MOVED_PAGES:
         external = new.startswith("https://")
-        target = new if external else posixpath.relpath(new, posixpath.dirname(old))
-        if old == "cases.html":
-            target = "cases/"
+        file_target = new if external else posixpath.relpath(new, posixpath.dirname(old))
+        target = "cases/" if old == "cases.html" else file_target
         meta = None if external else metas.get(new)
         if not external and meta is None:
             raise SystemExit(f"{old} forwards to {new}, which `forwarded_metas` does not name")
         values = {
             "TARGET": html.escape(target, quote=True),
+            "FILE_TARGET": html.escape(file_target, quote=True),
             "TITLE": html.escape(OFF_SITE_TITLES[new] if meta is None else meta.name),
             "HEAD": forwarder_head(new, meta, old=old),
             "FORWARD_SCRIPT": _script_text(FORWARD_SCRIPT),

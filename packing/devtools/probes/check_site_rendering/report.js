@@ -20,8 +20,16 @@
     if (closed && !element.closest("summary")) {
       return false;
     }
-    const held = element.parentElement?.closest("[hidden]");
-    return !held;
+    // Only known optional controls/content may be absent initially. A generic
+    // hidden ancestor is primary content and must remain in the readability sample.
+    const held = element.closest(
+      ".site-atlas-rest[data-atlas-rest][hidden], .site-table tbody tr[hidden], " +
+        ".site-table-tools[hidden], .site-table-tools label[hidden], " +
+        ".cert-figure[data-cert][hidden]",
+    );
+    // CSS may reveal a filtered row (including the no-script view) or certificate
+    // while retaining its hidden attribute. Inspect that content when it has a box.
+    return !held || visible(held);
   });
   const unreadable = shown.filter((element) => {
     const visual = [...element.querySelectorAll(".katex-html")].find(

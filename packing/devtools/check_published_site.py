@@ -153,6 +153,7 @@ SERVED = (
 #: What a forwarder says about where its page is now: the address the script reads, the
 #: refresh a reader without scripts follows, and the link.
 MOVED_TO = re.compile(r'<html\b[^>]*\sdata-moved-to="([^"]*)"')
+FILE_MOVED_TO = re.compile(r'<html\b[^>]*\sdata-file-moved-to="([^"]*)"')
 REFRESH = re.compile(r'<meta\s+http-equiv="refresh"\s+content="0;\s*url=([^"]*)"')
 MOVED_LINK = re.compile(r'<p>[^<]*<a\s+href="([^"]*)"')
 #: The query string and fragment a forwarder is visited with in the browser: the review
@@ -1085,11 +1086,12 @@ def workbench_startup(url: str, project_root: str, *, timeout: float) -> tuple[b
 
 
 def forwarder_says(text: str) -> dict[str, str | None]:
-    """Where a forwarder says its page is now, in each of the four places it says it:
-    its canonical URL, the address its script reads, its refresh, and its link."""
+    """Where a forwarder names its canonical target and physical fallback:
+    its canonical URL, the published and file script targets, its refresh, and its link."""
     places = (
         ("canonical", CANONICAL),
         ("script", MOVED_TO),
+        ("file", FILE_MOVED_TO),
         ("refresh", REFRESH),
         ("link", MOVED_LINK),
     )
@@ -1101,18 +1103,21 @@ def forwarder_says(text: str) -> dict[str, str | None]:
 
 def forwarder_expected(old: str, new: str) -> dict[str, str | None]:
     """What `forwarder_says` has to answer for the page that moved from `old` to `new`:
-    the new address in full as the canonical URL, and relative to the old one elsewhere.
-    An address off the site, as the defect log's on GitHub is, is whole in all four."""
-    new = site_urls.canonical_path(new)
+    the canonical address for publication and the physical output for file navigation
+    and the no-script refresh/link. Each is relative to the old address where local.
+    An address off the site, as the defect log's on GitHub is, is whole in every place."""
     external = new.startswith("https://")
+    file_target = new if external else posixpath.relpath(new, posixpath.dirname(old))
+    new = site_urls.canonical_path(new)
     target = new if external else posixpath.relpath(new, posixpath.dirname(old))
     if not external and new.endswith("/"):
         target += "/"
     return {
         "canonical": new if external else render_overview.canonical_url(new),
         "script": target,
-        "refresh": target,
-        "link": target,
+        "file": file_target,
+        "refresh": file_target,
+        "link": file_target,
     }
 
 

@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import subprocess
+from unittest.mock import patch
+
 import pytest
 from kpress.format.markdown import parse_markdown
 
@@ -110,3 +113,27 @@ def test_complete_shell_receives_the_prepared_fragments_metric_stylesheet() -> N
     assert 'href="../assets/css/site-math.' in page
     assert page.count("<math") == 1
     assert site_math.prepare(page, page_path="cases/11.html") == page
+
+
+def test_full_page_records_the_actual_checked_static_renderer() -> None:
+    page = site_math.prepare(
+        '<html><head><title>Math</title></head><body><span class="tex">x^2</span></body></html>'
+    )
+    from devtools.measure_site_pages import shipped_katex  # noqa: PLC0415
+
+    assert page.count(f'<meta name="site-math-katex" content="{shipped_katex()}">') == 1
+    assert site_math.prepare(page) == page
+
+
+def test_preparation_rejects_an_unpinned_renderer_before_caching_output() -> None:
+    with (
+        patch.object(
+            site_math.subprocess,
+            "run",
+            return_value=subprocess.CompletedProcess(
+                args=[], returncode=0, stdout='{"version":"0.16.9","rendered":[]}', stderr=""
+            ),
+        ),
+        pytest.raises(ValueError, match="does not match its pinned version"),
+    ):
+        site_math.native_math([(r"uniqueRendererGuard", False, "prose", False)])

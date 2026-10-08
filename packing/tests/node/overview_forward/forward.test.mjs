@@ -21,23 +21,27 @@ const EXPLAINER = "papers/n11-lower-bounds-explainer.html";
  * leaves them where they are. `moved` is the page's `data-moved-to`, which only a
  * forwarder page has.
  * @param {string} hash
- * @param {{ search?: string, ids?: readonly string[], moved?: string, caseNumbers?: string }} [options]
+ * @param {{ search?: string, ids?: readonly string[], moved?: string, fileMoved?: string, caseNumbers?: string, protocol?: string }} [options]
  * @returns {string | null}
  */
-function forwarded(hash, { search = "", ids = [], moved, caseNumbers } = {}) {
+function forwarded(
+  hash,
+  { search = "", ids = [], moved, fileMoved, caseNumbers, protocol = "https:" } = {},
+) {
   /** @type {string | null} */
   let target = null;
   const context = vm.createContext({
     URL,
     decodeURIComponent,
     document: {
-      documentElement: { dataset: { movedTo: moved, caseNumbers } },
+      documentElement: { dataset: { movedTo: moved, fileMovedTo: fileMoved, caseNumbers } },
       /** @param {string} id */
       getElementById: (id) => (ids.includes(id) ? {} : null),
     },
     window: {
       location: {
-        href: `https://example.test/squares/cases.html${search}${hash}`,
+        href: `${protocol}//example.test/squares/cases.html${search}${hash}`,
+        protocol,
         hash,
         search,
         /** @param {string} url */
@@ -230,4 +234,25 @@ void test("layout queries establish only whitelisted root attributes before pain
   });
   assert.deepEqual(bootstrapped("?atlas=unknown&size=invalid&view=unknown"), {});
   assert.deepEqual(bootstrapped(""), {});
+});
+
+void test("directory forwarders retain canonical HTTP targets and physical file fallbacks", () => {
+  const options = { moved: "cases/", fileMoved: "cases/index.html", caseNumbers: "11,12" };
+  for (const protocol of ["https:", "file:"]) {
+    const target = protocol === "file:" ? options.fileMoved : options.moved;
+    assert.equal(
+      forwarded("#unknown", { ...options, protocol, search: "?view=embed" }),
+      `${target}?view=embed#unknown`,
+    );
+    assert.equal(forwarded("#n-999", { ...options, protocol }), `${target}#n-999`);
+    assert.equal(
+      forwarded("#bounds", { ...options, protocol, search: "?n=999&view=embed" }),
+      `${target}?n=999&view=embed#bounds`,
+    );
+    assert.equal(
+      forwarded("#bounds", { ...options, protocol, search: "?n=12&view=embed" }),
+      "cases/12.html?view=embed#bounds",
+    );
+    assert.equal(forwarded("#n-11", { ...options, protocol }), "cases/11.html");
+  }
 });

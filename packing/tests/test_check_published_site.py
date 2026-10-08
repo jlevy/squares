@@ -1030,17 +1030,22 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         good = site_pages()[old]
         expected = check_published_site.forwarder_expected(old, new)
         target, canonical = expected["script"], expected["canonical"]
+        file_target = expected["file"]
         assert target is not None
         assert canonical is not None
-        elsewhere = (target + "-elsewhere").encode()
+        assert file_target is not None
+        elsewhere = (file_target + "-elsewhere").encode()
         wrong = {
             "canonical": good.replace(
                 b'rel="canonical" href="' + canonical.encode(),
                 b'rel="canonical" href="https://example.org/',
             ),
             "script": good.replace(b'data-moved-to="' + target.encode(), b'data-moved="'),
-            "refresh": good.replace(b"0; url=" + target.encode(), b"0; url=" + elsewhere),
-            "link": good.replace(b'<a href="' + target.encode(), b'<a href="' + elsewhere),
+            "file": good.replace(
+                b'data-file-moved-to="' + file_target.encode(), b'data-file-moved="'
+            ),
+            "refresh": good.replace(b"0; url=" + file_target.encode(), b"0; url=" + elsewhere),
+            "link": good.replace(b'<a href="' + file_target.encode(), b'<a href="' + elsewhere),
         }
         for place, body in wrong.items():
             assert body != good, place

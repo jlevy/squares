@@ -1189,8 +1189,19 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
     problems: list[str] = []
     if entry["untypeset"]:
         problems.append(f"{entry['untypeset']} formulas are left untypeset")
-    if katex is not None and entry["math"] and entry["katex"] != katex:
-        problems.append(f"the page runs KaTeX {entry['katex'] or 'not at all'}, not {katex}")
+    runtime = entry.get("runtime_katex", entry["katex"])
+    if (
+        katex is not None
+        and any(row.get("prepared") != "yes" for row in entry["math"])
+        and runtime != katex
+    ):
+        problems.append(f"the page runs KaTeX {runtime or 'not at all'}, not {katex}")
+    if katex is not None and any(row.get("prepared") == "yes" for row in entry["math"]):
+        version = entry.get("prepared_katex", "")
+        if version != katex:
+            problems.append(
+                f"the prepared math uses KaTeX {version or 'without provenance'}, not {katex}"
+            )
     problems.extend(
         f"a face is fetched: {url}"
         for url in entry["font_requests"]

@@ -2638,7 +2638,7 @@ def atlas_size_tabs() -> str:
     or Large (think-ht8t): the view tabs' strip, a tablist of three buttons that resize
     the one set of tiles in place, in either view. Medium is selected and is the strip's
     one stop in the tab order; the arrow keys move between the three
-    (`overview/atlas-view.js`), and the strip ships `hidden`, as the view tabs do."""
+    (`overview/atlas-view.js`). The strip is present in the first response."""
     return _atlas_tablist(
         ATLAS_SIZES,
         default=ATLAS_SIZE,
@@ -2658,8 +2658,8 @@ def atlas_legend(*, regularized: bool) -> str:
     regularized drawing is only ever shown labelled as one (the atlas README); the
     Regularized tab keyed the badge until the owner dropped the choice of drawing on
     2026-10-04 (think-k8x9). Each mark's words are a span of their own, as in the
-    tables' legend (`rung_legend`): no shipped face carries the star. It ships `hidden`
-    with the tabs, since it keys tiles only the script places."""
+    tables' legend (`rung_legend`): no shipped face carries the star. The key arrives
+    with the static tiles and their controls."""
     star = (
         f'<span class="site-atlas-legend-item">{atlas_star()} <span>{NEW_RESULT}</span></span>'
     )
@@ -2686,23 +2686,23 @@ def atlas_grid() -> str:
 
     The block is rendered in the grid view (`data-atlas-view`), under tabs that switch
     it to the triangle (`atlas_view_tabs`). Both views are one set of tiles: the triangle
-    places each by properties the script writes, so a tile's markup is the same in both.
+    uses positions supplied by the static markup and stylesheet, so a tile's markup is
+    the same in both.
     A perfect square's tile is marked `data-atlas-square`: it ends its row of the
     triangle, on the right edge, and the triangle numbers it in the text's colour. The
     block is rendered at the medium size (`data-atlas-size`), under tabs beside the view
     tabs that make every tile smaller or larger (`atlas_size_tabs`), in either view.
 
-    The cells, about a megabyte of SVG, sit in two `<template>`s, which the browser
-    parses but does not render. The script places the first `ATLAS_FIRST` when the grid
-    nears the viewport, so the page opens as fast as it did without them, and the rest
-    only when the reader presses the button under the grid, "Show More" with the double
-    chevron down. The button then reads
-    "Show Less" with the chevron up and collapses the grid again; its name for assistive
+    The first `ATLAS_FIRST` cells arrive as static markup with reserved, lazy-loaded
+    SVG images; the rest are already present in a hidden container. The script shows
+    them only when the reader presses the button under the grid, "Show More" with the
+    double chevron down. The button then reads "Show Less" with the chevron up and
+    collapses the grid again; its name for assistive
     technology says what each does and how many cases that is (`data-name-more`,
     `data-name-less`), it controls the box of tiles (`ATLAS_PANEL`), and it is the site's
-    one action under a table or grid (`.site-action`, with "See all results"). Its row
-    ships `hidden`, since without the script it would do nothing. The atlas popover,
-    filled by the script from a JSON of the film's facts, stood after the block until
+    one action under a table or grid (`.site-action`, with "See all results"). Ordinary
+    links give readers without scripting all case records and the frontier survey. The atlas
+    popover, filled by the script from a JSON of the film's facts, stood after the block until
     2026-10-03; the case popover took its place.
 
     A case with a regularized view (`atlas_regularized`) is drawn from it, badged, and

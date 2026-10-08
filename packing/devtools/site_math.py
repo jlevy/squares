@@ -23,6 +23,7 @@ Choice = Literal["prose", "sans", "serif", "katex"]
 MathKey = tuple[str, bool, Profile, bool]
 _DRIVER = Path(__file__).resolve().parent / "node" / "render-site-math.mjs"
 _CACHE: dict[MathKey, str] = {}
+_RENDERER_VERSION: str | None = None
 _STYLES: dict[str, tuple[str, str, str]] = {}
 _CSS = Path(__file__).resolve().parent / "templates" / "site-math.css"
 _PROFILES: tuple[Profile, ...] = ("prose", "sans", "katex")
@@ -243,6 +244,7 @@ def _render(keys: list[MathKey]) -> None:
     """One checked Node call for all previously unseen formulas in a page."""
     from devtools.render_n11_lower_bounds_explainer import kpress_static  # noqa: PLC0415
 
+    global _RENDERER_VERSION  # noqa: PLW0603
     node = shutil.which("node")
     if node is None:
         raise ValueError("Node.js is required to prepare the site's mathematics")
@@ -266,12 +268,19 @@ def _render(keys: list[MathKey]) -> None:
         )
     except subprocess.CalledProcessError as error:
         raise ValueError(f"static mathematics failed: {error.stderr.strip()}") from error
-    rendered = cast(list[str], json.loads(result.stdout))
-    if len(rendered) != len(keys) or not all(
-        isinstance(item, str) and "katex-html" in item for item in rendered
+    output = cast(dict[str, object], json.loads(result.stdout))
+    expected = (static / "VERSION").read_text(encoding="utf-8").split()[-1]
+    if not isinstance(output, dict) or output.get("version") != expected:
+        raise ValueError("the static mathematics renderer does not match its pinned version")
+    rendered = output.get("rendered")
+    if (
+        not isinstance(rendered, list)
+        or len(rendered) != len(keys)
+        or not all(isinstance(item, str) and "katex-html" in item for item in rendered)
     ):
         raise ValueError("the static mathematics renderer returned incomplete output")
-    _CACHE.update(zip(keys, rendered, strict=True))
+    _RENDERER_VERSION = expected
+    _CACHE.update(zip(keys, cast(list[str], rendered), strict=True))
 
 
 def _style_class(styles: tuple[str, str, str]) -> str:
@@ -444,14 +453,17 @@ def native_math(keys: list[MathKey]) -> dict[MathKey, str]:
 
 def clear_cache() -> None:
     """Discard process-local rendered formulas; output remains deterministic."""
+    global _RENDERER_VERSION  # noqa: PLW0603
     _CACHE.clear()
     _STYLES.clear()
+    _RENDERER_VERSION = None
 
 
 def _attach_styles(page: str, page_path: str) -> str:
     if "</head>" not in page:
         return f"<style>{_stylesheet(page)}</style>" + page
-    if re.search(r"<link\b[^>]*\bdata-site-math-styles\b", page):
+    head = page.split("</head>", 1)[0]
+    if re.search(r"<(?:link|style)\b[^>]*\bdata-site-math-styles\b", head):
         return page
     from devtools import site_assets  # noqa: PLC0415
 
@@ -459,7 +471,10 @@ def _attach_styles(page: str, page_path: str) -> str:
     style = site_assets.stylesheet_tag(ref, page_path).replace(
         "<link ", "<link data-site-math-styles ", 1
     )
-    return page.replace("</head>", f"{style}\n</head>", 1)
+    if _RENDERER_VERSION is None:
+        raise ValueError("prepared mathematics has no checked renderer provenance")
+    provenance = f'<meta name="site-math-katex" content="{_RENDERER_VERSION}">'
+    return page.replace("</head>", f"{provenance}\n{style}\n</head>", 1)
 
 
 def prepare(page: str, *, page_path: str = "index.html") -> str:

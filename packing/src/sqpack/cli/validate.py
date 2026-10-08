@@ -3872,6 +3872,8 @@ _WORKBENCH_INPUTS = (
     "packing/devtools/render_n11_lower_bounds_explainer.py",
     # The site's navigation bar the published page carries, from the shared partial.
     "packing/devtools/render_overview.py",
+    # The published workbench bundles share the site's asset builder.
+    "packing/devtools/site_assets.py",
     "packing/devtools/templates/site-nav.html",
     "packing/devtools/templates/site-nav.css",
     "packing/devtools/templates/paper-type.css",

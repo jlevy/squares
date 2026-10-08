@@ -37,10 +37,18 @@ The generator rejects unamended identity collisions and failed history checks be
 writing either generated file.
 Six unpublished bootstrap dates were corrected to the earliest explicit registrations
 reconstructed from main history: `T-080`–`T-082` to 2026-10-02, and `T-113`–`T-115` to
-2026-10-06. A proposed PR cannot serve as its own historical authority.
+2026-10-06. The nine canonical HTML, Markdown and PDF editions of the three papers also
+retain their first publication dates from trusted release history: the lower-bound
+explainer on 2026-09-05, the optimality review on 2026-09-30, and the threshold review
+on 2026-10-05. These dates remain separate from original-proof and revision dates.
+Established registrations remain immutable; a proposed PR cannot serve as its own
+historical authority.
 
 Generic content and the three papers use prepared visual mathematics with retained
 reader font choices.
+Generic pages record the checked build-time KaTeX version; the glyph guard verifies that
+version and each formula’s own single semantic MathML subtree without requiring a
+browser typesetting program.
 Primary content reads without JavaScript.
 Shared immutable assets, local dimensioned drawings, static synopsis chapters and
 separate workbench JSON keep the completed pages within documented path-specific budgets
@@ -49,12 +57,17 @@ and the strict 2 MB ceiling.
 All five producers build, including three PDFs and the workbench.
 The rebuilt site has 484 HTML files within their budgets.
 Three-run browser measurements pass over twelve scenarios at both viewports and themes,
-with a separate no-JavaScript check: maximum median CLS 0.075, LCP 836 ms, longest task
-98 ms and blocking time 48 ms.
+with a separate no-JavaScript check: maximum median CLS 0.075, LCP 1,404 ms, longest
+task 228 ms and blocking time 178 ms.
+These are local unthrottled measurements, not field Core Web Vitals.
 Live case/result popover checks and the workbench’s positive and negative policy checks
 also pass.
 
-Required local checkpoints, exact-head CI, independent review dispositions and their
+Local site checks and the assembled-site check pass.
+The broader Mac run was interrupted under storage pressure; isolated checks reproduce
+three unchanged scientific output comparisons, and two unchanged profiler tests require
+Linux `/proc`. Validation uses the existing hosted 104-step checkpoint on Linux
+alongside pull-request CI. Exact-head CI, independent review dispositions and their
 final evidence are recorded in [PR #395](https://github.com/jlevy/squares/pull/395).
 Deployment and the owner’s Search Console account setup follow merge.
 
@@ -335,8 +348,11 @@ enforces them.
   Two explainer anchors that docs once cited and that no longer exist (`#proof`,
   `#beyond-point-atoms-the-current-bound`) get kept anchors in the explainer.
 - Registered forwarders keep their script redirect beside the `<noscript>` refresh,
-  because only the script carries the `#fragment` across; they are the one exception to
-  the no-redirect rule, and the registry names each one.
+  because only the script carries query and fragment state across; they are the one
+  exception to the no-redirect rule, and the registry names each one.
+  HTTP scripts use the canonical directory URL; file navigation and no-script refreshes
+  use its physical `index.html`, so offline readers reach the page rather than a
+  directory listing.
 
 **The registry.** A new module, `packing/devtools/site_urls.py`, derives every published
 path from the builders’ own declarations (`render_overview.PAGES`, `PAPERS`,

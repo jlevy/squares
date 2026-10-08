@@ -10,6 +10,7 @@ import pytest
 from devtools import (
     check_published_site,
     overview_data,
+    paper_front,
     render_overview,
     render_research_tables,
     site_documents,
@@ -500,3 +501,116 @@ def test_t116_registry_retains_the_complete_historical_source_binding() -> None:
     assert previous["attribution"]["published"] == "2026-10-06"
     assert "E-n039-wand125-mixed-665-sqverify-fast-replay" in previous["evidence"]
     assert "packing/sqverify_fast/SOUNDNESS.md" in previous["artifacts"]
+
+
+@pytest.mark.parametrize(
+    ("published", "proof", "revised"),
+    [
+        ("September 5, 2026", "September 1, 2026", "October 5, 2026"),
+        ("September 30, 2026", "September 29, 2026", "October 7, 2026"),
+        ("October 5, 2026", "September 22, 2026", "October 5, 2026"),
+        ("October 7, 2026", "September 22, 2026", "October 7, 2026"),
+    ],
+)
+def test_paper_history_seed_uses_publication_history_not_original_proof(
+    monkeypatch: pytest.MonkeyPatch, published: str, proof: str, revised: str
+) -> None:
+    declarations = (
+        'PAGES = {"index.html": None}\nDOCUMENT_PAGES = ()\n'
+        "MOVED_PAGES = ()\nMOVED_FILES = ()\n"
+        'PAPERS = (PaperRecord(slug="example", module="devtools.example"),)\n'
+        'SOCIAL_CARD = "preview-card.png"\n'
+    )
+    release = (
+        "REVIEW_HISTORY = ("
+        'PublicationHistoryEntry(version="v0.2.0", first_published="October 7, 2026"),'
+        f'PublicationHistoryEntry(version="v0.1.0", first_published={published!r}),)\n'
+        "REVIEW_VERSION = REVIEW_HISTORY[0].version\n"
+        'REVIEW_EDITION = " ".join(part for part in ("Draft", REVIEW_VERSION) if part)\n'
+        f"REVIEW_REVISED = {revised!r}\nPROOF_PUBLISHED = {proof!r}\n"
+    )
+    # Historical reviews lacked a First published front line. Their version history
+    # records publication; the original proof line describes someone else's work.
+    paper = (
+        "FRONT = paper_front.check(paper_front.PaperFront("
+        "version=REVIEW_EDITION, dates=("
+        'paper_front.Dated("Original proof", PROOF_PUBLISHED),'
+        "paper_front.Dated(paper_front.REVISED, REVIEW_REVISED))))"
+    )
+    sources = {
+        "packing/devtools/render_overview.py": declarations,
+        "packing/src/sqpack/release.py": release,
+        "packing/devtools/example.py": paper,
+        "packing/devtools/render_n11_lower_bounds_explainer.py": "COMPOSITE_ASSETS = ()",
+    }
+    reads: list[tuple[str, str]] = []
+
+    def read(ref: str, path: str) -> str:
+        reads.append((ref, path))
+        return sources[path]
+
+    monkeypatch.setattr(site_urls, "_git_read", read)
+    monkeypatch.setattr(site_urls, "_historical_results", lambda _ref: [])
+    monkeypatch.setattr(
+        site_urls.subprocess,
+        "run",
+        lambda args, **_kwargs: subprocess.CompletedProcess(
+            args, 1 if args[1] == "cat-file" else 0, ""
+        ),
+    )
+    seeded = {entry.path: entry for entry in site_urls.historical_registry("trusted-history")}
+    for extension in (".html", ".md", ".pdf"):
+        paper_row = seeded[f"papers/example{extension}"]
+        assert paper_row.first_published == paper_front.iso_date(published)
+        assert paper_row.first_published != paper_front.iso_date(proof)
+        assert paper_row.lastmod == paper_front.iso_date(revised)
+    assert ("trusted-history", "packing/src/sqpack/release.py") in reads
+    assert all(ref == "trusted-history" for ref, _path in reads)
+
+
+@pytest.mark.parametrize(
+    ("slug", "published"),
+    [
+        ("n11-lower-bounds-explainer", "2026-09-05"),
+        ("n11-optimality-review", "2026-09-30"),
+        ("n11-threshold-bound-review", "2026-10-05"),
+    ],
+)
+def test_paper_registry_declares_first_publication_separately_from_proof(
+    slug: str, published: str
+) -> None:
+    rows = {entry.path: entry for entry in site_urls.derive_registry()}
+    for extension in (".html", ".md", ".pdf"):
+        paper_row = rows[f"papers/{slug}{extension}"]
+        assert paper_row.first_published == published
+        assert paper_row.lastmod >= paper_row.first_published
+
+
+def test_published_registry_dates_remain_authoritative_after_bootstrap_fix(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    accepted = replace(
+        row("papers/example.html"),
+        kind="paper-file",
+        first_published="2026-09-29",
+        lastmod="2026-10-07",
+    )
+    document = site_urls.render_registry([accepted])
+
+    def read(ref: str, path: str) -> str:
+        assert ref == "published-main"
+        assert path == "packing/site-urls.yaml"
+        return document
+
+    monkeypatch.setattr(site_urls, "_git_read", read)
+    monkeypatch.setattr(
+        site_urls.subprocess,
+        "run",
+        lambda args, **_kwargs: subprocess.CompletedProcess(args, 0, b""),
+    )
+    baseline = site_urls.historical_registry("published-main")
+    assert baseline == [accepted]
+    corrected = replace(accepted, first_published="2026-09-30")
+    assert "first publication retained" in failures(
+        site_urls.check_history([corrected], baseline)
+    )

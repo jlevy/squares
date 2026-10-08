@@ -1060,6 +1060,68 @@ def _historical_results(ref: str) -> list[dict[str, Any]]:
     ]
 
 
+def _historical_paper_dates(ref: str, module: str) -> tuple[str, str]:
+    """Read the edition history and revision date without executing historical code.
+
+    A review's original-proof date belongs to its source, not to the review's URL.
+    Older review fronts omitted First published; their own version history retains it.
+    """
+    from devtools.paper_front import iso_date  # noqa: PLC0415
+
+    release = _constants(_git_read(ref, "packing/src/sqpack/release.py"))
+    paper = _constants(_git_read(ref, "packing/" + module.replace(".", "/") + ".py"))
+    front = next(
+        node
+        for node in ast.walk(paper["FRONT"])
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and node.func.attr == "PaperFront"
+    )
+    version = next(keyword.value for keyword in front.keywords if keyword.arg == "version")
+    pending = [version]
+    visited: set[str] = set()
+    histories: list[ast.Tuple] = []
+    while pending:
+        for node in ast.walk(pending.pop()):
+            if not isinstance(node, ast.Name) or node.id not in release or node.id in visited:
+                continue
+            visited.add(node.id)
+            value = release[node.id]
+            if (
+                isinstance(value, ast.Tuple)
+                and value.elts
+                and all(
+                    isinstance(entry, ast.Call)
+                    and isinstance(entry.func, ast.Name)
+                    and entry.func.id == "PublicationHistoryEntry"
+                    for entry in value.elts
+                )
+            ):
+                histories.append(value)
+            else:
+                pending.append(value)
+    if len(histories) != 1:
+        raise ValueError(f"historical {module} has no unique edition history")
+    first = min(
+        iso_date(str(_static(keyword.value, release)))
+        for entry in histories[0].elts
+        if isinstance(entry, ast.Call)
+        for keyword in entry.keywords
+        if keyword.arg == "first_published"
+    )
+    revision = next(
+        node.args[1]
+        for node in ast.walk(front)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and node.func.attr == "Dated"
+        and len(node.args) == 2
+        and isinstance(node.args[0], ast.Attribute)
+        and node.args[0].attr == "REVISED"
+    )
+    return first, max(first, iso_date(str(_static(revision, {**release, **paper}))))
+
+
 def _seed_history(ref: str) -> list[SiteURL]:
     constants = _constants(_git_read(ref, "packing/devtools/render_overview.py"))
     day = FIRST_SITE_DATE
@@ -1101,6 +1163,10 @@ def _seed_history(ref: str) -> list[SiteURL]:
         if not isinstance(paper, ast.Call):
             raise TypeError("historical paper is not a PaperRecord")
         slug = next(_static(kw.value, constants) for kw in paper.keywords if kw.arg == "slug")
+        module = next(
+            _static(kw.value, constants) for kw in paper.keywords if kw.arg == "module"
+        )
+        first, revised = _historical_paper_dates(ref, module)
         for extension in (".html", ".md", ".pdf"):
             rows.append(  # noqa: PERF401 -- each output has its own registration
                 _new_row(
@@ -1108,7 +1174,8 @@ def _seed_history(ref: str) -> list[SiteURL]:
                     "paper-file",
                     "paper:" + slug,
                     "historical:paper",
-                    lastmod=day,
+                    first=first,
+                    lastmod=revised,
                 )
             )
     records = _historical_results(ref)
@@ -1183,7 +1250,8 @@ def _seed_history(ref: str) -> list[SiteURL]:
     return sorted(
         (
             replace(row, first_published=FIRST_SITE_DATE)
-            if row.first_published == REGISTRATION_DATE and row.kind != "result"
+            if row.first_published == REGISTRATION_DATE
+            and row.kind not in ("result", "paper-file")
             else row
             for row in rows
         ),

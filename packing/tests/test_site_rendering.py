@@ -139,3 +139,110 @@ def test_static_readability_refuses_hidden_primary_content(
     finally:
         server.shutdown()
         server.server_close()
+
+
+@pytest.mark.parametrize("override", [False, True], ids=["hidden", "visible-override"])
+def test_generic_hidden_math_wrapper_remains_in_the_readability_sample(
+    browser: Browser, tmp_path: Path, *, override: bool
+) -> None:
+    style = ' style="display:block"' if override else ""
+    (tmp_path / "index.html").write_text(
+        "<main><h1>A visible page title</h1><p>A complete paragraph remains visible "
+        "and readable while the formula's wrapper is checked separately.</p>"
+        f'<p hidden{style}><span class="kpress-math">'
+        '<span class="katex-html">x</span></span></p></main>'
+    )
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        report = check_site_rendering.measure(
+            browser,
+            f"http://127.0.0.1:{server.server_port}/index.html",
+            width=390,
+            scheme="light",
+            javascript=False,
+        )
+        assert report["shownMath"] == 1
+        assert report["unreadableMath"] == (0 if override else 1)
+        found = check_site_rendering.problems(report, javascript=False)
+        assert found == ([] if override else ["visual mathematics missing"])
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.mark.parametrize(
+    ("opening", "closing"),
+    [
+        ('<div class="site-atlas-rest" data-atlas-rest hidden>', "</div>"),
+        ('<table class="site-table"><tbody><tr hidden><td>', "</td></tr></tbody></table>"),
+        ('<div class="site-table-tools" hidden>', "</div>"),
+        ('<div class="site-table-tools"><label hidden>', "</label></div>"),
+        ('<div class="cert-figure" data-cert="alternate" hidden>', "</div>"),
+    ],
+    ids=["atlas-rest", "filtered-row", "filter-tools", "preset-control", "certificate"],
+)
+@pytest.mark.parametrize("override", [False, True], ids=["collapsed", "visible-override"])
+def test_optional_hidden_math_is_exempt_only_while_its_wrapper_is_collapsed(
+    browser: Browser,
+    tmp_path: Path,
+    opening: str,
+    closing: str,
+    *,
+    override: bool,
+) -> None:
+    if override:
+        opening = opening.replace(" hidden", ' hidden style="display:block"')
+    (tmp_path / "index.html").write_text(
+        "<main><h1>A visible page title</h1><p>A complete paragraph remains visible "
+        "and readable while optional interface content is checked separately.</p>"
+        f'{opening}<span class="kpress-math">x</span>{closing}</main>'
+    )
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        report = check_site_rendering.measure(
+            browser,
+            f"http://127.0.0.1:{server.server_port}/index.html",
+            width=390,
+            scheme="light",
+            javascript=False,
+        )
+        assert report["shownMath"] == (1 if override else 0)
+        assert report["unreadableMath"] == (1 if override else 0)
+        found = check_site_rendering.problems(report, javascript=False)
+        assert found == (["visual mathematics missing"] if override else [])
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.mark.parametrize(
+    ("opening", "closing"),
+    [
+        ("<div popover>", "</div>"),
+        ("<details><summary>More formulas</summary>", "</details>"),
+    ],
+    ids=["closed-popover", "closed-details"],
+)
+def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
+    browser: Browser, tmp_path: Path, opening: str, closing: str
+) -> None:
+    (tmp_path / "index.html").write_text(
+        "<main><h1>A visible page title</h1><p>A complete paragraph remains visible "
+        "and readable before the reader opens optional interface content.</p>"
+        f'{opening}<span class="kpress-math">x</span>{closing}</main>'
+    )
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        report = check_site_rendering.measure(
+            browser,
+            f"http://127.0.0.1:{server.server_port}/index.html",
+            width=390,
+            scheme="light",
+            javascript=False,
+        )
+        assert report["shownMath"] == 0
+        assert report["unreadableMath"] == 0
+        assert not check_site_rendering.problems(report, javascript=False)
+    finally:
+        server.shutdown()
+        server.server_close()

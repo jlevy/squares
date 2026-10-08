@@ -86,8 +86,8 @@ def served(name: str) -> str:
 
 def write(root: Path, *names: str) -> dict[str, Path]:
     """Write the pages `names` under `root` as the site serves them, with every shared
-    asset they name under `root`'s `assets/`, and return each page's path: a directory a
-    browser can open the pages from, with nothing they link missing. Pages written into
+    asset they name under `root`'s `assets/` and every declared support file. Return each
+    page's path, with its browser dependencies present. Pages written into
     the same `root` by several calls keep each other's assets."""
     from devtools import site_assets  # noqa: PLC0415
 
@@ -97,6 +97,11 @@ def write(root: Path, *names: str) -> dict[str, Path]:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(html(name), encoding="utf-8")
         written[name] = path
+    support = render_overview.support_files()
+    for output in render_overview.support_file_paths():
+        target = root / output
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(support[output])
     files = site_assets.shared().assets.referenced(html(name) for name in names)
     for output, data in files.items():
         target = root / site_assets.ASSETS_DIR / output

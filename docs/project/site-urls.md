@@ -744,15 +744,15 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | n11-optimality/t-060-explainer.md | papers/n11-optimality-review.md | copy | assembly | 2026-09-29 | 2026-10-02 | live → papers/n11-optimality-review.md |
 | n11-optimality/t-060-explainer.pdf | papers/n11-optimality-review.pdf | copy | assembly | 2026-09-29 | 2026-10-02 | live → papers/n11-optimality-review.pdf |
 | papers.html | papers.html | page | overview | 2026-09-29 | 2026-10-02 | live |
-| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-05 | live |
-| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-05 | live |
-| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-05 | live |
-| papers/n11-optimality-review.html | papers/n11-optimality-review.html | paper-file | paper:n11-optimality-review | 2026-09-29 | 2026-10-07 | live |
-| papers/n11-optimality-review.md | papers/n11-optimality-review.md | paper-file | paper:n11-optimality-review | 2026-09-29 | 2026-10-07 | live |
-| papers/n11-optimality-review.pdf | papers/n11-optimality-review.pdf | paper-file | paper:n11-optimality-review | 2026-09-29 | 2026-10-07 | live |
-| papers/n11-threshold-bound-review.html | papers/n11-threshold-bound-review.html | paper-file | paper:n11-threshold-bound-review | 2026-09-29 | 2026-10-05 | live |
-| papers/n11-threshold-bound-review.md | papers/n11-threshold-bound-review.md | paper-file | paper:n11-threshold-bound-review | 2026-09-29 | 2026-10-05 | live |
-| papers/n11-threshold-bound-review.pdf | papers/n11-threshold-bound-review.pdf | paper-file | paper:n11-threshold-bound-review | 2026-09-29 | 2026-10-05 | live |
+| papers/n11-lower-bounds-explainer.html | papers/n11-lower-bounds-explainer.html | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |
+| papers/n11-lower-bounds-explainer.md | papers/n11-lower-bounds-explainer.md | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |
+| papers/n11-lower-bounds-explainer.pdf | papers/n11-lower-bounds-explainer.pdf | paper-file | paper:n11-lower-bounds-explainer | 2026-09-05 | 2026-10-05 | live |
+| papers/n11-optimality-review.html | papers/n11-optimality-review.html | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-07 | live |
+| papers/n11-optimality-review.md | papers/n11-optimality-review.md | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-07 | live |
+| papers/n11-optimality-review.pdf | papers/n11-optimality-review.pdf | paper-file | paper:n11-optimality-review | 2026-09-30 | 2026-10-07 | live |
+| papers/n11-threshold-bound-review.html | papers/n11-threshold-bound-review.html | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-05 | live |
+| papers/n11-threshold-bound-review.md | papers/n11-threshold-bound-review.md | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-05 | live |
+| papers/n11-threshold-bound-review.pdf | papers/n11-threshold-bound-review.pdf | paper-file | paper:n11-threshold-bound-review | 2026-10-05 | 2026-10-05 | live |
 | readme.html | readme.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | result/t-001.html | result/t-001.html | result | overview | 2026-08-31 | 2026-08-31 | live |
 | result/t-002.html | result/t-002.html | result | overview | 2026-08-31 | 2026-08-31 | live |

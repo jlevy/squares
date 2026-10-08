@@ -127,7 +127,7 @@ def test_every_record_file_is_small(records: dict[str, str]) -> None:
 
 
 def test_a_records_links_are_written_from_its_own_directory(
-    records: dict[str, str],
+    records: dict[str, str], tmp_path: Path
 ) -> None:
     """Every relative link in a record file resolves from `cases/`, where the record
     page that shows it also stands: a site page climbs out (`../frontier.html`), a
@@ -145,11 +145,34 @@ def test_a_records_links_are_written_from_its_own_directory(
         for url in re.findall(r'\s(?:href|src)="([^"]*)"', record)
         if not re.match(r"#|[a-zA-Z][a-zA-Z0-9+.-]*:|/", url)
     ]
-    served = {f"../{name}" for name in render_overview.SITE_PAGES} | {"./", "../"}
+    support_paths = render_overview.support_file_paths()
+    served = {f"../{name}" for name in (*render_overview.SITE_PAGES, *support_paths)} | {
+        "./",
+        "../",
+    }
     cases = {f"{n}.html" for n in site_renders.overview().cases}
     for url in relative:
         target = url.partition("#")[0].partition("?")[0]
         assert target in served or target in cases, url
+
+    linked_images = {
+        name: source
+        for name, source in render_case_pages.CASE_IMAGE_FILES.items()
+        if f'src="../{name}"' in record
+    }
+    assert linked_images
+    render_overview.write_site(
+        tmp_path, [render_overview.Page("cases/11.html", records["cases/11.html"])]
+    )
+    for name, source in linked_images.items():
+        assert name in support_paths
+        written = tmp_path / name
+        assert written.read_bytes() == source.read_bytes()
+        width, height = render_overview.image_dimensions(written)
+        image = re.search(rf'<img\b[^>]*src="\.\./{re.escape(name)}"[^>]*>', record)
+        assert image is not None
+        assert f'width="{width}"' in image[0]
+        assert f'height="{height}"' in image[0]
 
 
 @pytest.mark.parametrize(

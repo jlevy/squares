@@ -132,6 +132,8 @@
   /* Elevation and layers. */
   --z-separator: 2;
   --z-note: 30;
+  /* Startup and loading errors remain above the application and its fixed note. */
+  --z-startup: 1000;
 
   /* Motion. */
   --duration-fast: 150ms;
@@ -1674,11 +1676,11 @@ body #controls.is-sized {
 #workbench-startup {
   position: fixed;
   inset: 5rem 1rem auto;
-  z-index: 1000;
+  z-index: var(--z-startup);
   max-width: 42rem;
   margin-inline: auto;
-  padding: 1rem;
-  border: 1px solid currentColor;
+  padding: var(--space-4);
+  border: var(--border-width) solid currentColor;
   background: var(--bg, #fff);
   color: var(--fg, #222);
 }

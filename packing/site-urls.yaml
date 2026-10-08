@@ -5902,7 +5902,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
-  first_published: '2026-09-29'
+  first_published: '2026-09-05'
   lastmod: '2026-10-05'
   status: live
 - path: papers/n11-lower-bounds-explainer.md
@@ -5910,7 +5910,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
-  first_published: '2026-09-29'
+  first_published: '2026-09-05'
   lastmod: '2026-10-05'
   status: live
 - path: papers/n11-lower-bounds-explainer.pdf
@@ -5918,7 +5918,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
-  first_published: '2026-09-29'
+  first_published: '2026-09-05'
   lastmod: '2026-10-05'
   status: live
 - path: papers/n11-optimality-review.html
@@ -5926,7 +5926,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
-  first_published: '2026-09-29'
+  first_published: '2026-09-30'
   lastmod: '2026-10-07'
   status: live
 - path: papers/n11-optimality-review.md
@@ -5934,7 +5934,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
-  first_published: '2026-09-29'
+  first_published: '2026-09-30'
   lastmod: '2026-10-07'
   status: live
 - path: papers/n11-optimality-review.pdf
@@ -5942,7 +5942,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_optimality_review:main
   producer: paper:n11-optimality-review
-  first_published: '2026-09-29'
+  first_published: '2026-09-30'
   lastmod: '2026-10-07'
   status: live
 - path: papers/n11-threshold-bound-review.html
@@ -5950,7 +5950,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
-  first_published: '2026-09-29'
+  first_published: '2026-10-05'
   lastmod: '2026-10-05'
   status: live
 - path: papers/n11-threshold-bound-review.md
@@ -5958,7 +5958,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
-  first_published: '2026-09-29'
+  first_published: '2026-10-05'
   lastmod: '2026-10-05'
   status: live
 - path: papers/n11-threshold-bound-review.pdf
@@ -5966,7 +5966,7 @@ urls:
   kind: paper-file
   generator: devtools.render_n11_threshold_bound_review:main
   producer: paper:n11-threshold-bound-review
-  first_published: '2026-09-29'
+  first_published: '2026-10-05'
   lastmod: '2026-10-05'
   status: live
 - path: readme.html

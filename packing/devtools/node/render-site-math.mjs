@@ -9,7 +9,7 @@ import { runInNewContext } from "node:vm";
  * @typedef {"prose" | "sans" | "katex"} Profile
  * @typedef {{source: string, display: boolean, profile: Profile, semantic: boolean}} Formula
  * @typedef {Record<string, number[]>} FontMetrics
- * @typedef {{renderToString(source: string, options: object): string, __setFontMetrics(face: string, metrics: FontMetrics): void}} Katex
+ * @typedef {{version: string, renderToString(source: string, options: object): string, __setFontMetrics(face: string, metrics: FontMetrics): void}} Katex
  * @typedef {Record<string, unknown> & {sans: Record<string, FontMetrics>, katex: Record<string, FontMetrics>}} Metrics
  */
 
@@ -50,4 +50,4 @@ const rendered = input.formulas.map((formula) => {
     maxSize: 100,
   });
 });
-process.stdout.write(JSON.stringify(rendered));
+process.stdout.write(JSON.stringify({ version: katex.version, rendered }));

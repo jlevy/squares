@@ -10,11 +10,12 @@ with the negative control beside the rule.
 from __future__ import annotations
 
 import hashlib
+import re
 from pathlib import Path
 
 import pytest
 
-from devtools import check_published_site, render_overview, site_assets
+from devtools import check_published_site, render_overview, site_assets, site_math
 from devtools.render_case_pages import rebase_links
 from tests import site_renders
 
@@ -165,7 +166,19 @@ def test_every_site_page_links_the_shared_design_system(home: tuple[str, str]) -
     assert "@font-face" not in page
     assert 'rel="preload"' in page
     assert katex_js(kpress_static()) not in page
-    assert katex_js(kpress_static()) in served
+    assert katex_js(kpress_static()) not in served
+    bundle = site_assets.shared()
+    for ref in (bundle.kpress_css, bundle.katex_css, bundle.relation_css):
+        inline = bundle.assets.inlined(site_assets.stylesheet_tag(ref, "index.html"))
+        assert inline in served
+    assert 'data-site-math="' in page
+    assert 'data-site-math="' in served
+    assert "<style data-site-math-styles>" in served
+    version = (kpress_static() / "katex/VERSION").read_text(encoding="utf-8").split()[-1]
+    for text in (page, served):
+        assert 'class="katex-html"' in text
+        assert re.search(r"<math(?:\s|>)", text)
+        assert f'<meta name="site-math-katex" content="{version}">' in text
 
 
 def test_asset_publication_refuses_changed_content_at_an_existing_path(tmp_path: Path) -> None:
@@ -192,3 +205,99 @@ def test_linked_inline_assets_preserve_order_fonts_and_json(tmp_path: Path) -> N
     restored = site_assets.read_inline_page(page)
     assert "<script>application</script>" in restored
     assert "base64,d09GMg==" in restored
+
+
+def test_prepared_shared_shell_inlines_metric_css_and_remains_idempotent() -> None:
+    bundle = site_assets.shared()
+    page_path = "papers/example.html"
+    shell = (
+        f"<html><head><title>Prepared mathematics</title>{bundle.head(page_path)}</head>"
+        r'<body><span class="tex">\frac{1}{2}+x</span></body></html>'
+    )
+    prepared = site_math.prepare(shell, page_path=page_path)
+    metric = re.search(
+        r'<link data-site-math-styles rel="stylesheet" href="../assets/([^"]+)">',
+        prepared,
+    )
+    assert metric is not None
+    metric_css = bundle.assets.files()[metric[1]].decode("utf-8")
+    assert "[data-site-math]" in metric_css
+    assert re.search(r"\.sm[0-9a-f]{10}", metric_css)
+    provenance = re.search(r'<meta name="site-math-katex" content="[^"]+">', prepared)
+    assert provenance is not None
+
+    whole = bundle.assets.inlined(prepared)
+    inline_metric = re.search(r"<style data-site-math-styles>(.*?)</style>", whole, re.DOTALL)
+    assert inline_metric is not None
+    assert inline_metric[1] == metric_css
+    assert 'rel="stylesheet"' not in whole
+    assert "<script" not in whole
+    assert not re.search(r'(?:href|src)="(?:\.\./)*assets/', whole)
+    assert bundle.assets.referenced([whole]) == {}
+    assert provenance[0] in whole
+    assert whole.count('name="site-math-katex"') == 1
+    assert site_math.prepare(whole, page_path=page_path) == whole
+
+    relinked, files = site_assets.link_inline_assets(whole, page_path)
+    relinked_metric = re.search(
+        r'<link data-site-math-styles rel="stylesheet" href="../assets/([^"]+)">',
+        relinked,
+    )
+    assert relinked_metric is not None
+    assert "<style data-site-math-styles>" not in relinked
+    assert files[relinked_metric[1]].decode("utf-8") == metric_css
+    assert provenance[0] in relinked
+    assert relinked.count('name="site-math-katex"') == 1
+    assert site_math.prepare(relinked, page_path=page_path) == relinked
+    assert bundle.assets.inlined(relinked) == whole
+
+
+@pytest.mark.parametrize(
+    "tag",
+    [
+        (
+            '<link data-site-math-styles rel="stylesheet" '
+            'href="assets/css/missing.0000000000000000.css">'
+        ),
+        '<link data-site-math-styles rel="stylesheet" href="assets/css/../../outside.css">',
+        '<link data-site-math-styles rel="stylesheet" href="https://example.org/metrics.css">',
+        '<link data-site-math-styles rel="stylesheet" href="//example.org/metrics.css">',
+        '<link data-site-math-styles="wrong" rel="stylesheet" href="assets/css/metrics.css">',
+        (
+            '<link data-site-math-styles media="print" rel="stylesheet" '
+            'href="assets/css/metrics.css">'
+        ),
+    ],
+)
+def test_metric_stylesheet_inlining_refuses_undeclared_or_unsupported_links(tag: str) -> None:
+    with pytest.raises(SystemExit):
+        site_assets.SiteAssets().inlined(f"<head>{tag}</head>")
+
+
+@pytest.mark.parametrize(
+    "output",
+    ["css/../../outside.css", "css/./metrics.css", "css/metrics.css?query=1"],
+)
+def test_metric_stylesheet_inlining_rejects_unsafe_paths_before_read(output: str) -> None:
+    reads: list[str] = []
+
+    def read(path: str) -> bytes:
+        reads.append(path)
+        return b"untrusted contents"
+
+    tag = f'<link data-site-math-styles rel="stylesheet" href="assets/{output}">'
+    with pytest.raises(SystemExit):
+        site_assets.inline_assets(f"<head>{tag}</head>", read)
+    assert reads == []
+
+
+@pytest.mark.parametrize(
+    "tag",
+    [
+        '<style data-site-math-styles="wrong">body { color: black; }</style>',
+        '<style data-site-math-styles media="print">body { color: black; }</style>',
+    ],
+)
+def test_metric_stylesheet_relinking_refuses_unsupported_marked_styles(tag: str) -> None:
+    with pytest.raises(SystemExit):
+        site_assets.link_inline_assets(f"<head>{tag}</head>", "index.html")

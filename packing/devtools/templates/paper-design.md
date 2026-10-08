@@ -1261,8 +1261,9 @@ it.
     40px from the window at 1024 and 768 pixels and 16px at 390, which is 8px
     (`--site-wide-gutter`) inside the page’s content area wherever the page clips.
 
-- **Atlas grid.** The atlas grid holds every tracked case, n = 1 to 324, as a square
-  drawing in the page’s ink with its n beneath.
+- **Atlas grid.** The atlas grid holds every tracked case, n = 1 to 324, as a cached
+  square SVG image with its n beneath.
+  The artwork uses dark ink on a white canvas in both page themes.
   The grid bleeds past the wide track as the window grows, to 140rem less the page
   gutters, and its cells keep a readable size (at least 6.4rem, 4.6rem on a phone, at
   the Medium size; **Atlas sizes**, below), so a wider screen shows more cases per row:
@@ -1271,13 +1272,14 @@ it.
   focus, and is a link to its case’s record file, `cases/11.html`, which opens in the
   page’s one case popover (**Case records**, below).
   The wash is the cell’s background, behind the drawing, and it is the only thing that
-  changes: every line of the drawing keeps the page’s ink at rest, hovered, focused and
+  changes: every line of the artwork keeps its fixed ink at rest, hovered, focused and
   pressed, in both themes.
-  The drawing sets that colour on itself rather than reading the link’s, which KPress
-  lightens on hover (`tests/test_site_drawing_hover.py` reads both in Chromium).
-  The cells ship in a `<template>` and are placed only as the grid nears the viewport
-  (`overview/atlas-grid.js`), so they add nothing to the first paint; each drawing is
-  400 units across, fine enough to show large.
+  `tests/test_site_drawing_hover.py` checks the loaded SVG, its geometry and exact
+  painted colours, and contrast against its own canvas.
+  The first hundred cells arrive as static markup with reserved image dimensions; the
+  remaining cells are already present in a hidden container.
+  Images use native lazy loading, and `overview/atlas-grid.js` changes visibility after
+  reader input. Each drawing has a 1000-unit frame, fine enough to show large.
   The grid is the atlas’s default view; the triangle is the other (**Atlas views**,
   below).
 
@@ -1287,10 +1289,11 @@ it.
   default and the one tab in the page’s tab order, with the arrow keys, Home and End
   moving between the two and selecting the tab the focus lands on
   (`overview/atlas-view.js`). The grid is the stylesheet’s alone, and the page is
-  rendered in it; without scripting the strip stays `hidden`, as the expander’s row
-  does. The triangle sets the cases by the grid bound: row $k$ holds the $2k - 1$ cases
-  $n = (k - 1)^2 + 1$ to $k^2$, the ones that need a square of side $k$, and ends at
-  $k^2$ on the right edge, so the perfect squares $1, 4, 9, 16, \ldots$ run down it;
+  rendered in it; the strip is present in the first response, and scripting handles its
+  controls. Without scripting, ordinary links reach all case records and the complete
+  frontier. The triangle sets the cases by the grid bound: row $k$ holds the $2k - 1$
+  cases $n = (k - 1)^2 + 1$ to $k^2$, the ones that need a square of side $k$, and ends
+  at $k^2$ on the right edge, so the perfect squares $1, 4, 9, 16, \ldots$ run down it;
   those are the cases whose best packing is the $k \times k$ grid itself, and their
   tiles are numbered in the text’s colour at the medium weight.
   Ten rows show the first hundred cases, the last 19 tiles wide; eighteen show all 324,
@@ -2370,7 +2373,7 @@ these tags itself, so the set cannot differ between page kinds.
 
 | Tag | Rule |
 | --- | --- |
-| `<title>` | The page’s own name, a middle dot, then “The Squares Project”; the overview’s is the project’s name alone |
+| `<title>` | Articles use the page’s own name. Other pages append a middle dot and “The Squares Project”; the overview’s is the project’s name alone. |
 | `meta name="description"` | One or two plain sentences about this page and no other, at most 160 characters |
 | `link rel="canonical"` | The address the page is served at, in full, built from `render_overview.SITE_URL`; a directory’s `index.html` is the directory |
 | `og:title`, `twitter:title` | The page’s own name, without the project’s |
@@ -2547,9 +2550,9 @@ The front is, in order:
 
 In the Markdown edition the front is the title as a heading and the credits as a list,
 one item a line, bold and linked as the page is.
-In the head, the title is the paper’s name, a middle dot and the project’s name, and the
-revised day is `article:modified_time`; the explainer’s first publication is
-`article:published_time` too (**Page Metadata and Social Cards**, above).
+In the head, the title is the paper’s name, without a site suffix, and the revised day
+is `article:modified_time`; every paper’s first publication is `article:published_time`
+(**Page Metadata and Social Cards**, above).
 
 The credits are one grid column the width of the page (`.credits`, in the publication
 layer), an address in them may break anywhere, and the three lines’ spaces are `1lh`, on
