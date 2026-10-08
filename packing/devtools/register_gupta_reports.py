@@ -18,6 +18,7 @@ from typing import Any
 from devtools import gupta_house_links as houses
 from devtools import register_ryxu_reports as previous
 from devtools import render_case_verifiers
+from devtools.confirm_refinement_records import replace_row
 from devtools.register_refinement_reports import FOOTER, append_rows, dump, save
 from sqpack.yamlio import safe_load
 
@@ -160,6 +161,22 @@ def read_history() -> list[dict[str, Any]]:
     return validate_history(houses.reports.kernel.read_xz(HISTORY))
 
 
+def pending_blockers(case: dict[str, Any]) -> list[dict[str, Any]]:
+    """Retain earlier blockers and name the unclosed production boundary explicitly."""
+    blockers = copy.deepcopy(case["blockers"])
+    if not any(REPORT in row.get("evidence", []) for row in blockers):
+        blockers.append(
+            {
+                "kind": "source-evidence",
+                "detail": "All 51 complete dual-route native jobs passed; actual "
+                "private-worker "
+                "input/result mutation admission and final production review remain pending.",
+                "evidence": [REPORT],
+            }
+        )
+    return blockers
+
+
 def record_cases() -> None:
     """Preflight all fourteen cases, atomically retain originals, then write any case.
 
@@ -183,6 +200,11 @@ def record_cases() -> None:
         if case["reported_upper_bound"]["source_key"] == houses.reports.SOURCE_KEY:
             if retained is None or case["reported_upper_bound"] != reported_bound(n):
                 raise ValueError("selected case lacks its complete original custody boundary")
+            if houses.reports.EXACT_EVIDENCE not in case["verified_upper_bound"]["evidence"]:
+                blockers = pending_blockers(case)
+                if blockers != case["blockers"]:
+                    case["blockers"] = blockers
+                    plan.append((path, "---\n" + dump(document) + "---\n" + body))
             continue
         original = current if retained is None else originals[n]["frontier"]
         if current != original:
@@ -201,6 +223,7 @@ def record_cases() -> None:
         old = copy.deepcopy(case["reported_upper_bound"])
         case["reported_upper_bound"] = reported_bound(n)
         case["rigidity"] = None
+        case["blockers"] = pending_blockers(case)
         case["source_reviewed"] = DAY
         if REPORT not in case["evidence"]:
             case["evidence"].append(REPORT)
@@ -255,6 +278,8 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
         if confirmed
         else safe_load(old["frontier"].split("---\n", 2)[1])["packing"]["verified_upper_bound"]
     )
+    if not confirmed:
+        case["blockers"] = pending_blockers(case)
     draft = safe_load(generated.split("---\n", 2)[1])["packing"]
     for field in ("reported_lower_bound", "verified_lower_bound", "reported_status", "status"):
         case[field] = draft[field]
@@ -330,7 +355,7 @@ def register() -> None:
                 "evidence": [REPORT],
                 "artifacts": [
                     PACKET_PATH + "/README.md",
-                    PACKET_PATH + "/facts/",
+                    PACKET_PATH + "/facts/complete-certificates-and-comparators.json.xz",
                     "packing/devtools/gupta_refinement_reports.py",
                 ],
                 "next_rung": "Native outcomes, source/house binding, independent review and "
@@ -342,6 +367,64 @@ def register() -> None:
         ],
         "id",
     )
+    result_path = FRONTIER / "results.yaml"
+    result = next(
+        row for row in safe_load(result_path.read_text())["results"] if row["id"] == RESULT
+    )
+    concrete = PACKET_PATH + "/facts/complete-certificates-and-comparators.json.xz"
+    artifacts = []
+    for artifact in result["artifacts"]:
+        if artifact == PACKET_PATH + "/facts/":
+            if concrete not in result["artifacts"] and concrete not in artifacts:
+                artifacts.append(concrete)
+        else:
+            artifacts.append(artifact)
+    if result["artifacts"] != artifacts:
+        replace_row(result_path, "results", {**result, "artifacts": artifacts})
+    append_rows(
+        REPO / "packing/resources/bibliography.yaml",
+        "sources",
+        [
+            {
+                "key": houses.reports.SOURCE_KEY,
+                "authors": ["Gupta"],
+                "year": 2026,
+                "venue": "GitHub",
+                "dated": DAY,
+                "lineage": "independent",
+                "credit": "Gupta after Chaoweeraprasit and Daniel",
+                "short_credit": "Gupta after Chaoweeraprasit et al.",
+                "note": "Siddharth Gupta's seventeen rational precision certificates at "
+                + houses.reports.REVISION
+                + " refine SQUISH constructions and credit Nate "
+                "Chaoweeraprasit and Evan Daniel. Fourteen offers are selected; three are "
+                "withdrawn. Complete factual inputs are retained; unlicensed programs/prose "
+                "are hash-pinned, and the solver MIT notice is not a bundle licence.",
+            }
+        ],
+        "key",
+    )
+    bibliography = REPO / "packing/resources/bibliography.yaml"
+    if "  Siddharth Gupta: Gupta\n" not in bibliography.read_text():
+        save(
+            bibliography,
+            bibliography.read_text().replace(
+                "credited_names:\n", "credited_names:\n  Siddharth Gupta: Gupta\n"
+            ),
+        )
+    index = REPO / "packing/resources/README.md"
+    if "**" + houses.reports.SOURCE_KEY + "**" not in index.read_text():
+        entry = (
+            f"- **{houses.reports.SOURCE_KEY}** — Siddharth Gupta's seventeen complete "
+            f"rational source cases at `{houses.reports.REVISION}`; fourteen selected "
+            "reported improvements and three withdrawals, T-127 at V0/C0. "
+            "[Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md). "
+            "SQUISH credit remains with Nate Chaoweeraprasit, and Evan Daniel's optimizer "
+            "is credited. Full native outcomes exist; private-worker custody and final "
+            "production review remain pending. Unlicensed programs/prose are hash-pinned; "
+            "the solver MIT notice is not treated as a bundle licence.\n\n"
+        )
+        save(index, index.read_text().replace(FOOTER, entry + FOOTER))
     claims = {
         "results": [
             {
