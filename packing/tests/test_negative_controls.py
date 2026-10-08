@@ -1993,8 +1993,38 @@ def test_gupta_complete_sources_survive_native_worker_boundaries(
         pytest.param(
             """
 from devtools import squish_second_update_house_links as house
+# The current n108 house is #432 geometry and must not satisfy the old #422 receipt.
+try:
+    house.check_houses([108])
+except packet.original.PacketError as error:
+    assert 'full geometry or private metadata custody mismatch' in str(error)
+else:
+    raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
+from devtools.register_ryxu_reports import read_history
+historical = {row['n']: row['house'] for row in read_history()}
+if (packet.REPO / 'packing/devtools/register_gupta_reports.py').is_file():
+    from devtools import register_gupta_reports as gupta
+    for row in gupta.read_history():
+        historical.setdefault(row['n'], row['house'])
+    try:
+        house.check_houses([88])
+    except packet.original.PacketError as error:
+        assert 'full geometry or private metadata custody mismatch' in str(error)
+    else:
+        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
+historical_paths = {}
+for n in packet.NUMBERS:
+    if n in historical:
+        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
+        path.write_text(historical[n])
+        historical_paths[n] = path
+current_house_path = house.house_path
+house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
 assert tuple(house.check_houses()) == packet.NUMBERS
-print('nine house reads passed')
+for path in historical_paths.values():
+    path.unlink()
+house.house_path = current_house_path
+print('all nine original houses admitted from current or full retained history')
 """,
             id="house-reads",
         ),
@@ -2031,6 +2061,12 @@ def test_second_squish_consumers_survive_native_worker_boundaries(
 ) -> None:
     """Keep each consumer contract in its own fresh native worker."""
     tree, _copied = control_snapshot
+    gupta_module = "packing/devtools/register_gupta_reports.py"
+    expected_gupta_module = (controls.REPO / gupta_module).is_file()
+    program = (
+        f"assert (packet.REPO / {gupta_module!r}).is_file() is {expected_gupta_module!r}\n"
+        + program
+    )
     _run_second_squish_native_program(tree, program)
 
 
