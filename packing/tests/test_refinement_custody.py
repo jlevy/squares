@@ -150,6 +150,7 @@ def test_n68_certificate_result_cannot_claim_more(private: Path, change: str) ->
         houses.validate_metadata(68, rows[0]["metadata"])
 
 
+@pytest.mark.slow
 def test_production_snapshot_copies_complete_refinement_custody(tmp_path: Path) -> None:
     carried = {*controls.COPY_SEPARATELY, *controls.snapshot_pruned_targets()}
     assert set(houses.private_input_paths()) <= carried
