@@ -5,13 +5,13 @@ title: "Compiled exact kernel checker in Rust (lane X1): row cover sweep and col
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-10-02-n17-cost-reduction-performance.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-03T01:19:45.250Z
-updated_at: 2026-10-08T00:14:05.394Z
+updated_at: 2026-10-08T05:46:45.581Z
 ---
 Owner directive 2026-10-03: pursue primitive tool speedups aggressively and upgrade tooling. Rank 5 of the performance review (estimated 5-10x on the checker's integer parts). Standalone crate and harness in a separate worktree; bar is identical verdicts and counts on W7 and N1 row by row plus refusal of corrupted certificates. Integration as check_n17_subpattern --cover rust after F2's gmpy2 port. Started 2026-10-03 01:15 UTC.
 
@@ -24,6 +24,8 @@ With other measured categories fixed, removing collisions entirely gives about1.
 PR410 is an independent kernel verifier, but its reviewed head has no centered-cap mode and retains16-vertex compression versus our48-hull context. Start with ordinary-U TailA/B full receipt parity before claiming centered applicability. Our direct scientific progress is exp296's25/64 half-angle restriction under fixedowner0; mechanical optimization must remain beside quantitative regional lifting under think-98mg.
 
 Evidence: packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md; docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md; PR404. Global proof, capture and full current-source certification remain open.
+
+Session186 actual update: exact-Y ABBA exp298 interrupted738.166s/6validreplays, no acceptedgain. Fullcheckpointunlaunched due source/disk/lateststart. Two scientific guards interruptedon globalps1s sampler, followupthink-b0ef. PR410 independent Rust kernel verifier at763ecd3 is a serious future acceleration candidate but no current-head localcase-parity or centeredcap/hull48join. Preserve originalRustkernel task open; prefer reviewed parity/adoption over duplicating its implementation. First shared-centreLP pilot think-dvcs proceedsmathematicallyinparallel. Performance/W3/PR410integration review retainexactscope.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
