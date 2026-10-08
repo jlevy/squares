@@ -1871,9 +1871,21 @@ def _guarded_second_squish_admission(packet: ModuleType) -> Callable[[], dict[in
     modules = (packet, packet.original, packet.reported, packet.shared)
     admit = packet.admit_certification
 
+    def frozen(value: Any) -> tuple[type, Any]:
+        kind = type(value)
+        if isinstance(value, dict):
+            return kind, tuple((frozen(key), frozen(item)) for key, item in value.items())
+        if isinstance(value, (list, tuple)):
+            return kind, tuple(frozen(item) for item in value)
+        if isinstance(value, (set, frozenset)):
+            return kind, frozenset(frozen(item) for item in value)
+        if callable(value) or isinstance(value, ModuleType):
+            return kind, id(value)
+        return kind, value
+
     def namespace(module: ModuleType) -> dict[str, Any]:
         return {
-            name: deepcopy(value) if isinstance(value, (dict, list, set, tuple)) else value
+            name: frozen(value)
             for name, value in vars(module).items()
             if name != "__builtins__"
             and not (module is packet and name == "admit_certification")
@@ -1984,6 +1996,7 @@ def guarded_admission_packet(tmp_path: Path) -> Any:
         "input-roster",
         "loaded-function",
         "loaded-constant",
+        "equal-valued-type",
     ],
 )
 def test_guarded_admission_refuses_changed_premises_and_accepts_restoration(
@@ -2001,6 +2014,7 @@ def test_guarded_admission_refuses_changed_premises_and_accepts_restoration(
     previous_paths = packet.private_input_paths
     previous_fact = packet.read_fact
     revision = packet.REVISION
+    source_ceiling = packet.original.MAX_SOURCE_BYTES
     if mutation in {"late-bytes", "trusted-adapter"}:
         path.write_bytes(b"!" + raw[1:])
     elif mutation == "larger-input":
@@ -2016,6 +2030,8 @@ def test_guarded_admission_refuses_changed_premises_and_accepts_restoration(
         packet.private_input_paths = lambda: previous_paths()[:-1]
     elif mutation == "loaded-function":
         packet.read_fact = lambda n: {"changed": n}
+    elif mutation == "equal-valued-type":
+        packet.original.MAX_SOURCE_BYTES = float(source_ceiling)
     else:
         packet.REVISION = "changed-source"
     try:
@@ -2033,6 +2049,7 @@ def test_guarded_admission_refuses_changed_premises_and_accepts_restoration(
         packet.private_input_paths = previous_paths
         packet.read_fact = previous_fact
         packet.REVISION = revision
+        packet.original.MAX_SOURCE_BYTES = source_ceiling
     restored = guarded()
     assert restored == original
     assert restored is not original
