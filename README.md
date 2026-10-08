@@ -527,6 +527,7 @@ for results by others: their scope, credit, import and reply.
 .
 ├── TUTORIAL.md             First-principles orientation for a newcomer
 ├── SYNOPSIS.md             Current research status, roadmap, results, and handoff
+├── packing-methods.md      Construction, search, refinement, and upper-bound certification
 ├── conventions.md          Artifact, identifier, evidence, and correction rules
 ├── epistemics.md           Whole-result verification and confirmation rubric
 ├── operating-rules.md      Session conduct and workflow rules
