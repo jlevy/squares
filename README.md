@@ -102,7 +102,7 @@ refinement, and upper-bound certification
 The independent
 [Exact Side Values for Packing Unit Squares](packing/devtools/templates/exact-side-values-article.md)
 is generated from the [exact-values register](packing/frontier/exact-values.json).
-It assembles 270 exact current sides across $n = 1\ldots324$ and 162 historical
+It assembles 320 exact current sides across $n = 1\ldots324$ and 170 historical
 polynomial entries, with every coefficient, source locator and algebraic certificate.
 Historical examples reach $n = 2135$; source-invalid proposals retain their flags.
 The [web catalogue](https://jlevy.github.io/squares/papers/exact-side-values.html)
@@ -112,7 +112,8 @@ The
 [mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
 states what was independently checked, and the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md) maps
-all 54 remaining numeric-only cases to beads.
+the four remaining numeric-only cases to beads and separates their identification from
+ideal contact-system and exact-witness research.
 Pages builds the paper as HTML, Markdown and PDF.
 
 This repository also contains

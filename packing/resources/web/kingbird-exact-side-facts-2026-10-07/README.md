@@ -30,7 +30,8 @@ hand transcriptions.
 
 ## Numeric SVG Coverage
 
-The current exact-values register has 54 entries whose side is stored as a decimal
+At the initial 2026-10-07 collection, the exact-values register had 54 entries whose
+side was stored as a decimal
 rather than a polynomial. Their current Kingbird catalogue sources divide into four
 groups:
 

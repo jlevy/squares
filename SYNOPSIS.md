@@ -580,18 +580,18 @@ The argument for it, and the measurement registered to kill it if it is wrong, a
 slice, experiment, round, and run—and the mathematical terms used narrowly here.
 Those definitions apply in the campaign artifacts and the beads too, not only here.
 
-### Exact-Side Collection, October 7
+### Exact-Side Collection, October 8
 
-The [exact-values register](packing/frontier/exact-values.json) now assembles 270 exact
-current sides for $n = 1\ldots324$: 176 integer, six rational, 66 radical closed forms
-and 22 minimal-polynomial sides.
+The [exact-values register](packing/frontier/exact-values.json) assembles 320 exact
+current sides for $n = 1\ldots324$: 176 integer, 62 rational, 65 radical closed forms
+and 17 minimal-polynomial sides.
 The degree-672 polynomial at $n = 83$ is retained in full and independently checked; its
 source root index 27 remains stated and uncounted.
 No geometric or optimality rung changes.
 
 The bounded retained-source extraction covers 182 polynomial/side pairs from 201
 occurrences, reaching $n = 2135$, with no undecoded rows.
-The register retains 162 historical entries, including three proposals explicitly
+The register retains 170 historical entries, including three proposals explicitly
 invalidated by their source.
 The
 [independent mathematical review](docs/project/reviews/review-2026-10-07-exact-polynomial-coverage.md)
@@ -604,13 +604,16 @@ Complete archives preserve the full printed catalogue; the bounded
 [payload measurement](packing/benchmarks/exact-catalogue-web/report.md) records the
 initial raw-byte reduction without making a latency claim.
 
-All 54 numeric-only current cases have a specific bead in the
+The four numeric-only current cases are $n = 29,55,71,105$, each with a bead in the
 [continuation plan](docs/project/specs/active/plan-2026-10-06-exact-side-values.md#remaining-work-and-beads).
-The next entry is `think-s6np`: recover or reproduce earlier claimed contact-driver
-outputs, then audit the eleven claimed identifications under `think-ohhz`. The retained
-current systems at $n = 55$ and $71$ support parallel elimination lanes `think-phh8` and
-`think-1blg`. Exact geometric witnesses and independent contact rederivations remain
-open.
+Thirty-two rational identities come from replayed native certificates; the additional
+$n = 292$ identity describes its certified outward decimal ceiling.
+Exact equality with the current reported side is required before either enters the
+register. The retained systems at $n = 29,55,71$ support elimination and real-branch
+selection; $n = 105$ needs a current contact system and confirmed KKT seed.
+Ideal contact-system research continues under `think-s6np` and the batch lanes even when
+the finite certificate side is rational.
+Exact geometric witnesses and independent contact rederivations remain open.
 
 ### Document Map
 

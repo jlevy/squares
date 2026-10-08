@@ -310,6 +310,49 @@ The bounded source extraction remains 201 decoded occurrences and 182 distinct p
 pairs. Upstream rational certificates change the current-value classification without
 expanding that source boundary or claiming additional optimality proofs.
 
+## Verified Rational Projection Review (2026-10-08)
+
+The recovered continuation rebased both layers onto current upstream and found 33
+current decimal rows with certified rational upper bounds but no projected algebraic
+identity. The independent Astra review accepted the parent fix after custody and
+preservation controls.
+Native T-098 certificates supply 32 sides; $n = 292$ supplies its outward ceiling
+$17597249391199519/10^{15}$, above the native certificate side.
+
+Admission requires exact equality among the reported decimal, verified decimal and
+verified exact fraction, matching current source and count, verified exact-algebraic
+upper-bound evidence, passed replay and retained certificate/receipt custody.
+Existing exact source fields take precedence.
+The $n = 105$ unequal ceiling remains numeric.
+Fresh invocations revalidate custody; only one invocation shares a validated input scan.
+
+Independent comparison changed exactly those 33 parent entries.
+Every other row was identical; the changed rows preserved status, sides, lower bounds,
+KKT values and historical polynomial notes.
+The parent has 319 exact identities, degree-only $n = 83$ and four numeric rows.
+The rebuilt child has 320 exact identities and 170 historical entries, with numeric rows
+$n = 29,55,71,105$. Both preserve 77 proved cases.
+Parent exact-register checks, 52 focused tests and the 64-check edit gate passed.
+Child reconstruction, historical audit, publication and final hosted outcomes are
+recorded in the PR’s final validation section.
+
+Two dependency findings were corrected: the actual $n = 292$ input is the September 27
+Couzo packet, and its witness schema must select the exact-register gate.
+Eleven selection controls cover helpers, receipts, certificates, acquisition and that
+schema. The design reuses existing source-packet validators within an invocation and
+retains explicit native-side/ceiling provenance.
+It introduces no second geometry verifier or new proof rung.
+
+The four current gaps and original ideal-contact batches have separate continuation
+maps. W7 `think-s6np` must deliver a reusable active-system adapter and exact half-angle
+export before broader W6 execution, with an $n = 11$ contact-octic control and a bounded
+$n = 102$ target protocol.
+Legacy Bézout, PSLQ and numerical-eliminant assurance labels are quarantined under
+`think-yuqy`; they cannot establish lower bounds on degree/height, exact ideal
+membership or real geometric realization.
+Candidate relations, exact algebraic linkage, geometric realization and
+scoped/operational refusals retain separate outcomes.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

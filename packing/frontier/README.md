@@ -58,7 +58,7 @@ uv run --frozen python -m devtools.render_research_tables --check
 ```
 
 Five reader views are generated this way: [`STATUS.md`](STATUS.md), the open frontier
-(261 rows), the solved cases (63), and the search and proof strategy catalogues (28 and
+(247 rows), the solved cases (77), and the search and proof strategy catalogues (28 and
 30). Editing a fact means editing the data here and re-rendering; editing a generated
 table by hand will be caught.
 
@@ -201,9 +201,16 @@ The ones that carry the most weight:
   register separately rebuilds the irreducibility and root-isolation checks.
   Historical polynomials are checked against their own printed side and source and do
   not borrow the current packing’s KKT comparison.
-  These certificates establish an algebraic identity, not geometric feasibility, local
-  optimality, or global optimality.
-  The
+  For a current decimal without exact source fields, the register can derive a rational
+  identity from `verified_upper_bound.exact_form` only when the reported value, verified
+  value and exact fraction are equal, and retained source custody, count, certificate
+  and replay evidence all pass.
+  Native certificate sides and certified outward decimal ceilings carry distinct
+  provenance. KKT comparisons remain separate diagnostics; an ideal stationary side can
+  differ from the finite certified side.
+  These algebraic certificates establish a side identity.
+  Geometric feasibility, local optimality and global optimality retain their separate
+  evidence and rungs. The
   [exact side values paper](https://jlevy.github.io/squares/papers/exact-side-values.html)
   renders this register alone and prints every coefficient.
   Numeric-only rows and incomplete source facts retain the route and open bead assigned
