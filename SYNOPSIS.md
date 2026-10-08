@@ -577,6 +577,8 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n17 Strategy: Shared Geometry, Exact Certificates and SOS](docs/project/reviews/review-2026-10-08-n17-strategy-and-exact-sos.md) | dated review record | record | retained | — |
+| [n17 Reported-Pattern Reconciliation](docs/project/reviews/review-2026-10-08-n17-issue-pattern-reconciliation.md) | dated review record | record | retained | — |
 | [PR410 Integration Review for the n17 Continuation](docs/project/reviews/review-2026-10-07-n17-pr410-integration.md) | dated review record | record | retained | — |
 | [Session186 storage disposition](docs/project/reviews/review-2026-10-07-n17-session-186-storage.md) | dated review record | record | retained | — |
 | [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
