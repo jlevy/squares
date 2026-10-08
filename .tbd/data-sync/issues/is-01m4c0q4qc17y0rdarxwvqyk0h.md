@@ -3,9 +3,9 @@ type: is
 id: is-01m4c0q4qc17y0rdarxwvqyk0h
 title: Review n17 companion Rust verifier mathematics for PR410 intake
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 9
 delegate: codex@17e132e9b179
 labels: []
 dependencies: []
@@ -17,13 +17,40 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T20:26:14.123Z
-updated_at: 2026-10-07T21:01:31.749Z
+updated_at: 2026-10-08T08:56:26.507Z
 started_at: 2026-10-07T20:26:15.947Z
+closed_at: 2026-10-08T08:56:26.507Z
+close_reason: PR410 merged as e74a82190302a576e312a9daf2780626971454a2 with matched fast/deferred 104-step and Pages qualification; independent reviews and final-head dispositions verified. Intake and merge work complete. Verifier adoption remains open under think-kk7w and atomic publication under think-ifbw; no mathematical assurance promotion.
+resolution: null
+duplicate_of: null
 ---
 Parallel Astra deep technical static review of incoming PR410 proof/verifier scopes and producer independence. No fork code execution or assurance promotion; identify exact blockers and bounded import next steps while original SQUISH merges.
 
 ## Notes
 
-Astra deepstatic review complete at PR410 fullhead6bc6f96e498b12d32a77458edb70a054e83d6cc7:53 custodyverifiedblobs; no unsound fullmodegeometrypredicatefound. M1 OHI success/twoinvalidfixtures have noRusttestcaller; M2 34refusedclaim confuses positive hidden-lens-0control; L1 errorfulltextevidence exceeds prefixchecks; L2 stalebody/unpinnedexternalreceipts/sevencasecustody gap. External scripts independently pinned630cdc47209545e4aa8455223651b19379519e53.24exportedcells equalW7world, sevenfixtureseeds agree. Fourclosed/three stalleddistinct; no forkcode executed/no assurancepromotion. Review /workspace/squares-pr410-math-review/review.md. Intake findings mustbe dispositioned before anyadoption.
+The PR410 mathematical intake and review dispositions are complete.
+Independent Astra correctness review A at `6bc6f96e498b12d32a77458edb70a054e83d6cc7` is
+published as
+[review5448271817](https://github.com/jlevy/squares/pull/410#pullrequestreview-5448271817).
+A1–A4 are fixed and their beads `think-l5xm`, `think-dc8i` and `think-v2ro` are closed.
+The
+[final-head disposition](https://github.com/jlevy/squares/pull/410#issuecomment-6056165354)
+was verified at `58d43cbd0e0ec24a370c0cf36bdd1b60621978d0`. It distinguishes executed
+fixture controls from contributor-reported unpublished corpus custody; the seven-case
+corpus was not replayed here.
 
-Published independent static correctness review A at exact PR4106bc6f96e498b12d32a77458edb70a054e83d6cc7: https://github.com/jlevy/squares/pull/410#pullrequestreview-5448271817. Four findings tracked: A1 think-l5xm; A2 think-dc8i; A3/A4 think-v2ro. No contributor executable/hook ran. Snapshot reply https://github.com/jlevy/squares/pull/410#issuecomment-6046714334 keeps192MiB cap and requires consumer-proven narrower snapshot, not unsafe fixture deletion. Re-read current openPR comments/reviews/inline across10existingPRs, onlyoriginal410authorask atcapture; final review sweep complete. Findings await disposition before adoption.
+Later Astra correctness review B and senior, security, performance and follow-up reviews
+are published.
+B1–B3 are fixed; atomic receipt publication remains explicitly deferred as
+`think-ifbw` under the separate adoption task `think-kk7w`. The
+[PR](https://github.com/jlevy/squares/pull/410) merged as
+`e74a82190302a576e312a9daf2780626971454a2` after matched fast/deferred qualification
+covered all 104 ordinary validation steps and Pages passed.
+Native tests and floor probes also passed.
+This closes intake and merge review, while same-object full parity and operational
+adoption remain open.
+No n17 bound, admission or proof status changed.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

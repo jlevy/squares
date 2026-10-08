@@ -5,7 +5,7 @@ title: "n17: gate PR410 native verifier and establish ordinary-U full parity bef
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ child_order_hints:
   - is-01m4d2mbv5at5v053xsp9s68tg
   - is-01m4d4bwbwwad71djypagwfrra
 created_at: 2026-10-08T05:50:52.317Z
-updated_at: 2026-10-08T06:49:13.851Z
+updated_at: 2026-10-08T08:56:25.556Z
 ---
 ---
 title: PR410 Integration Review for the n17 Continuation
@@ -164,4 +164,36 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 
 ## Notes
 
-Astra final planning review: ordinary-U full TailA/B parity is ready to prepare in parallel with snapshot selection repair once reviewed native build/test setup, external storage, immutable input custody and bounded execution are ready. Neither the unpublished215MB corpus nor broad September rx6p redesign blocks that pilot. Adoption completion still requires current PR snapshot failure resolved, bounded kernel-native CI wired and passing, successful full parity and refusal/EOF/closure-owner controls. No current build, test, replay, speedup or assurance promotion is claimed.
+As of 2026-10-08, [PR410](https://github.com/jlevy/squares/pull/410) is merged as
+`e74a82190302a576e312a9daf2780626971454a2`. Its tree matches qualified head
+`58d43cbd0e0ec24a370c0cf36bdd1b60621978d0` against base
+`7a8d9c16daa267c3a778554036374884194c2c36`. The snapshot-selection and generated Rustdoc
+inventory failures are resolved.
+Matched fast and deferred CI cover all 104 ordinary validation steps; Pages also passes.
+Bounded native CI passes 22 unit tests, one compiled-world control and all five
+quality-floor probes.
+The final native tier measured 71.34 seconds against its unchanged 90-second ceiling,
+with cold preparation at 23 seconds against 600 seconds.
+
+Operational adoption remains open under `think-kk7w`. Prepare ordinary-U full Tail A/B
+parity on identical retained objects, with immutable input custody and external wall and
+memory guards.
+Compare Python and Rust status, canonical IDs, counters, closure and final
+state; retain refusal, EOF and closure-owner controls.
+Complete provenance/admission integration and atomic receipt publication, including
+injected publication failures (`think-ifbw`), before adopting successful receipts.
+The unpublished 215 MB corpus and broad redesign are separate from this bounded pilot.
+Centered U/V/offset and hull-48 support still require a reviewed extension.
+No same-object full parity, speedup, assurance promotion, new bound or census admission
+has been established by the merge.
+
+The earlier full run at `98f476ddc` remains failed, including four shard wall-time
+failures; final qualification uses the documented matched fast and deferred gate.
+Timing investigation remains open as `think-s39y`; ceilings and markers were unchanged.
+The
+[proof tracker update](https://github.com/jlevy/squares/issues/405#issuecomment-6056000685)
+records the merge and the unchanged mathematical state.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
