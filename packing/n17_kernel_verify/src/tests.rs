@@ -282,6 +282,43 @@ fn random_polygon(rng: &mut Random) -> Poly {
         .collect();
     hull(&pts)
 }
+/// The hidden lens of the 2026-10-03 review's `hidden-lens` mutation, on a small domain:
+/// left and right blocks, a lower block with roof y = 1, and an upper piece whose floor is
+/// the V through (1, 1 + 2e), (3/2, 3/4 + 2e), (2, 1 + 2e). With e = 0 the pieces cover the
+/// domain exactly (touching along the roof); with e > 0 a sliver between x = 1 and the
+/// crossing of the V with the roof is uncovered, though both events have covered sections.
+fn lens_pieces(e: &Q) -> Vec<Poly> {
+    let one = Q::from(1);
+    let floor = |y: Q| y + Q::from(2) * e;
+    vec![
+        rect(0, 0, 1, 2),
+        rect(2, 0, 1, 2),
+        rect(1, 0, 1, 1),
+        vec![
+            (one.clone(), floor(one.clone())),
+            (Q::from((3, 2)), floor(Q::from((3, 4)))),
+            (Q::from(2), floor(one.clone())),
+            p(2, 2),
+            p(1, 2),
+        ],
+    ]
+}
+#[test]
+fn hidden_lens_zero_gap_passes_positive_gap_fails() {
+    let domain = rect(0, 0, 3, 2);
+    let zero = Q::new();
+    assert!(covered_by_sweep(&domain, &lens_pieces(&zero)).unwrap().0);
+    assert!(covered_by_area(&domain, &lens_pieces(&zero)).unwrap().0);
+    let tiny = Q::from((Integer::from(1), Integer::from(1) << 40));
+    for e in [tiny, Q::from((1, 1000))] {
+        let (covered, at) = covered_by_sweep(&domain, &lens_pieces(&e)).unwrap();
+        assert!(!covered, "gap {e} reported covered");
+        let x = at.expect("an uncovered abscissa");
+        // The uncovered abscissa lies in the sliver, strictly right of the event x = 1.
+        assert!(x > 1 && x < Q::from((3, 2)), "uncovered at {x}");
+        assert!(!covered_by_area(&domain, &lens_pieces(&e)).unwrap().0);
+    }
+}
 #[test]
 fn sweep_matches_area_random_rationals() {
     let mut rng = Random::new(&7654321.into());
@@ -823,6 +860,63 @@ fn sweep_event_set_matches_all_pairs_rational_reference() {
                 .map(|(n, d)| Q::from((Integer::from(n), Integer::from(d))))
                 .collect();
             assert_eq!(actual, expected.into_iter().collect::<Vec<_>>());
+        }
+    }
+}
+
+/// The `owned_hulls_intersect` fixtures: one closure of that kind, the same node declaring
+/// the other kind, and the kernel point moved out of the other owner's hull.
+#[test]
+fn owned_hulls_intersect_fixtures_all_thread_counts() {
+    let bytes = std::fs::read(data("cells.json")).unwrap();
+    let cells = file_cells(
+        data("cells.json").to_str().unwrap(),
+        &pyjson::digest(&bytes),
+    )
+    .unwrap();
+    for label in ["ohi", "ohi-wrong-kind", "ohi-point-outside"] {
+        let expected = read(&format!("{label}-expected.json"));
+        for threads in [1, 2, 4] {
+            let options = Options {
+                threads,
+                ..Options::default()
+            };
+            let receipt = verify(data(label).to_str().unwrap(), &cells, &options).unwrap();
+            let context = format!("{label} threads {threads}: {receipt}");
+            assert!(
+                pyjson::equal(&receipt["status"], &expected["status"]),
+                "{context}"
+            );
+            match label {
+                "ohi" => {
+                    assert_eq!(receipt["status"], "PASS", "{context}");
+                    assert_eq!(
+                        receipt["closure"]["kind"], "owned_hulls_intersect",
+                        "{context}"
+                    );
+                    assert!(
+                        pyjson::equal(&receipt["closure"], &expected["closure"]),
+                        "{context}"
+                    );
+                    assert!(
+                        pyjson::equal(&receipt["counts"], &expected["counts"]),
+                        "{context}"
+                    );
+                }
+                "ohi-wrong-kind" => assert_eq!(
+                    receipt["failure"], "step 0: the derived closure is not the declared one",
+                    "{context}"
+                ),
+                _ => assert_eq!(receipt["failure"], "no closure derived", "{context}"),
+            }
+            assert!(pyjson::equal(
+                &receipt["failure"],
+                if label == "ohi" {
+                    &Value::Null
+                } else {
+                    &expected["failure"]
+                }
+            ));
         }
     }
 }

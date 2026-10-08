@@ -4,9 +4,17 @@ A second implementation of the standing verifier of saved n = 17 kernel certific
 `packing/devtools/verify_n17_kernel_certificate.py` in
 [jlevy/squares](https://github.com/jlevy/squares).
 It reads the same seed and node (`seed-*.json.gz`, `node-*.json.gz`), performs the same
-checks in the same order, and writes the same receipt: every field agrees with the
-Python verifier’s except `provenance` (this implementation’s own), `directory` (the
-argument as given) and `seconds`.
+checks in the same order, and writes a receipt of the same shape.
+
+- On every recorded case, every field agrees with the Python verifier’s except
+  `provenance` (this implementation’s own), `directory` (the argument as given) and
+  `seconds`.
+- A refused, well-formed certificate gets the same check-specific failure text.
+- Malformed input is refused with a `malformed certificate: …` message in this
+  implementation’s own words.
+  The Python verifier reports the underlying exception instead.
+
+TESTING.md lists what is compared, and how.
 
 It is written from the Python verifier as the specification.
 It shares no code with any certificate generator: the generator (`check_n17_subpattern`,
@@ -56,10 +64,17 @@ Building needs a C toolchain and `m4` for GMP (`build-essential` and `m4` on Ubu
 
 ## Agreement and speed
 
-On seven certificates produced with upstream’s standard procedure (main `4148483da`;
-four closed, three stalled), the receipts agree with the Python verifier’s on every
-field above, at 1 and 16 threads.
-Same machine (16 vCPU, otherwise idle), wall seconds:
+Seven certificates were produced with upstream’s standard procedure (main `4148483da`);
+four are closed and three stalled.
+On all seven, the receipts agree with the Python verifier’s on every field above.
+
+- This revision was checked at 1 and 8 threads.
+- The earlier revision that gave the timings below was checked at 1 and 16 threads.
+
+TESTING.md lists the certificate and build identities.
+
+Timings were taken with that earlier revision on one machine (16 vCPU, otherwise idle),
+in wall seconds:
 
 | certificate | Python | Rust, 1 thread | Rust, 16 threads |
 | --- | ---: | ---: | ---: |
@@ -71,13 +86,17 @@ Same machine (16 vCPU, otherwise idle), wall seconds:
 | BC-428 u4 (closed) | 792 | 82.4 | 47.3 |
 | BC-428 u6 (stall) | 1181 | 198.1 | 97.0 |
 
-Peak memory is at most the Python verifier’s. Steps are checked in order; only the rows
-of one step checked in full run in parallel, so extra threads give about a factor of
-two.
+On that machine, peak memory was at most the Python verifier’s. Steps are checked in
+order; only the rows of one step checked in full run in parallel, so extra threads give
+about a factor of two.
 
-The 34 certificate mutations of upstream’s 2026-10-03 verifier review are refused by
-both verifiers with the same failure text.
-See TESTING.md.
+Upstream’s 2026-10-03 verifier review has 34 named cases.
+
+- Both verifiers refuse the 33 mutations with the same failure text.
+- The zero-gap control `hidden-lens-0-control` passes its coverage check in both.
+  That node is refused later, at its final state, in both.
+
+TESTING.md has the per-case table.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
