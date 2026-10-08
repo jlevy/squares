@@ -23,10 +23,12 @@ status chip; no row carries a result's records, which its popover holds; and eve
 chip on either page is one line high, every kind and standing chip
 one size.
 
-Each page is rendered and loaded once, in a module fixture, with every row showing, its
-math typeset, and then resized for each width; the overview is then loaded as it opens,
-for the one check that needs its own filters. The checks that need no browser, of the
-list a cell holds and of the formulas' TeX, read the same render. The browser is launched
+Each page is rendered and loaded once in a module fixture, with its published rows
+and prepared math, then resized for each width. The overview's recent subset and the
+complete results page are checked against their separate row contracts; the complete
+page also supplies the filtered short-list and worst-case formula fixtures. The checks
+that need no browser, of the list a cell holds and of the formulas' TeX, read the same
+render. The browser is launched
 as `tests.site_browser` launches it: the pinned Chromium, or the one `SQPACK_CHROMIUM`
 names, with its text unhinted so that the pixels pinned here read the same on Linux as on
 macOS, where they were measured; skipped where none can be launched, unless the run
@@ -63,15 +65,14 @@ WIDTHS = (*TABLE_WIDTHS, PHONE)
 #: Where every column is at its floor with every row showing, the result's among them:
 #: the narrowest width the table fits, and the two it scrolls at.
 AT_FLOORS = (FITS, *SCROLLS)
-#: Each page's address with every row of its table showing: the overview opens on what
-#: is recent, significant and current, and its filters' query presets clear all three.
-EVERY_ROW = {"index.html": "?s-min=&age=&current=false", render_overview.RESULTS_PAGE: ""}
-#: The overview as it opens, under its own filters.
+#: Each page's published address: the recent overview and the complete results table.
+EVERY_ROW = dict.fromkeys(PAGES, "")
+#: The overview's published recent selection, also used for cross-table comparisons.
 AS_OPENED = "index.html as it opens"
 #: A view where no long list of cases shows: the results of one kind that each hold a
 #: case or two. (The overview as it opens held only such rows until T-064, a family of
 #: thirteen cases at S4, joined it.)
-SHORT_LISTS = "index.html, one kind of short lists"
+SHORT_LISTS = "all-results.html, one kind of short lists"
 SHORT_LISTS_QUERY = "?s-min=&age=&current=false&kind=rigidity"
 #: The credit column's floor, 11.5rem, in pixels (`site.css`).
 CREDIT_MIN = 184
@@ -152,25 +153,27 @@ def laid(tmp_path_factory: pytest.TempPathFactory) -> Iterator[dict[tuple[str, i
         for name in PAGES:
             path = written[name]
             page = browser.new_page(viewport={"width": FITS, "height": 900})
-            # The overview opens on its recent, significant, current rows; the columns
-            # and chips are measured with every row showing, which the filters' query
-            # presets ask for.
+            # Measure the rows actually published on each page. Broadening the recent
+            # overview is an ordinary navigation to the complete results table.
             page.goto(f"{path.as_uri()}{EVERY_ROW[name]}", wait_until="load")
             settle_math(page)
             for width in WIDTHS:
                 page.set_viewport_size({"width": width, "height": 900})
                 page.wait_for_timeout(150)
                 found[name, width] = _laid(page)
-            if name == "index.html":
+            if name == render_overview.RESULTS_PAGE:
                 page.set_viewport_size({"width": FITS, "height": 900})
-                page.goto(path.as_uri(), wait_until="load")
+                page.goto(written["index.html"].as_uri(), wait_until="load")
                 settle_math(page)
                 found[AS_OPENED, FITS] = _laid(page)
                 page.set_viewport_size({"width": ROOMY, "height": 900})
                 page.wait_for_timeout(150)
                 found[AS_OPENED, ROOMY] = _laid(page)
                 page.set_viewport_size({"width": FITS, "height": 900})
-                page.goto(f"{path.as_uri()}{SHORT_LISTS_QUERY}", wait_until="load")
+                page.goto(
+                    f"{written[render_overview.RESULTS_PAGE].as_uri()}{SHORT_LISTS_QUERY}",
+                    wait_until="load",
+                )
                 settle_math(page)
                 found[SHORT_LISTS, FITS] = _laid(page)
             page.close()
@@ -211,7 +214,19 @@ def test_a_table_of_results_fits_its_track_at_1280(
     assert table["layout"] == "table"
     assert table["scrolls"] == 0, table["table_width"]
     assert table["table_width"] == table["frame_width"] == TABLE_AT_1280
-    assert table["shown_rows"] == len(site_renders.overview().results)
+    overview = site_renders.overview()
+    selected = overview_sections.recent_results(overview)
+    if name == "index.html":
+        reference = overview_sections.reference_date(overview)
+        selected = [
+            result
+            for result in selected
+            if overview_sections.shown_by_default(
+                result, overview_sections.RECENT_DEFAULTS, reference
+            )
+        ]
+    assert table["shown_rows"] == len(selected)
+    assert table["shown_ids"] == [result.id.lower() for result in selected]
     floors = laid[name, SCROLLS[0]].table["table_width"]
     assert TABLE_AT_1280 - floors >= SPARE_AT_1280, floors
 
@@ -253,7 +268,7 @@ def test_a_table_of_results_scrolls_at_1024_and_768_no_further_than_its_floors(
         assert _column(table, "n")["width"] == pytest.approx(CASES_MIN, abs=1)
 
 
-@pytest.mark.parametrize("name", PAGES)
+@pytest.mark.parametrize("name", [render_overview.RESULTS_PAGE])
 def test_a_long_list_of_cases_wraps_in_its_measure(
     laid: dict[tuple[str, int], Laid], name: str
 ) -> None:
@@ -296,19 +311,27 @@ def test_the_n_column_is_as_narrow_as_its_lists_where_none_is_long(
     assert table["scrolls"] == 0
 
 
-@pytest.mark.parametrize("name", PAGES)
+@pytest.mark.parametrize("name", [render_overview.RESULTS_PAGE])
 def test_on_a_phone_a_long_list_of_cases_takes_a_line_of_its_own(
     laid: dict[tuple[str, int], Laid], name: str
 ) -> None:
-    """On a phone the longest list runs the card's width under the id, the significance
-    and the rungs, in four lines at most, where the wide table's column sets it on six
-    or more, and no value of it is cut."""
-    cases = _column(laid[name, PHONE].table, "site-col-n")
-    assert 1 < cases["lines"] <= 4
+    """The complete corpus's longest lists take the card's full width without cuts.
+
+    The main-branch CSS on this same 116-row corpus also takes five lines. The old
+    four-line assertion selected the short-list class and never measured these cells;
+    C7 / think-7fbg now checks the actual wrapping group without changing its layout.
+    """
+    table = laid[name, PHONE].table
+    cases = _column(table, "site-n-wraps")
+    assert table["table_width"] == table["frame_width"] == PHONE - 32
+    assert 1 < cases["lines"] <= 5
+    assert cases["held"] > table["frame_width"] * 0.9
     assert cases["split"] == []
+    assert cases["broken"] == []
+    assert cases["overflows"] == []
 
 
-@pytest.mark.parametrize("name", PAGES)
+@pytest.mark.parametrize("name", [render_overview.RESULTS_PAGE])
 def test_the_result_column_gives_way_to_its_floor(
     laid: dict[tuple[str, int], Laid], name: str
 ) -> None:
@@ -439,16 +462,20 @@ def test_both_tables_lay_out_the_same_columns(
 
 @pytest.mark.parametrize("width", WIDTHS)
 def test_no_row_shows_a_results_records(laid: dict[tuple[str, int], Laid], width: int) -> None:
-    """No row shows a result's records at any width, on the results page or on the
-    overview, which is the same table under other filters: the records are the last
-    entry of the popover the row opens (`think-46fw`). So with every row showing the two
-    tables are laid out the same, column for column and row for row."""
+    """Records belong to each row's popover on both the recent and complete tables.
+
+    The recent rows are a strict subset of the complete page's rows. Their different
+    content can set different column widths and row heights.
+    """
     recent = laid["index.html", width]
     results = laid[render_overview.RESULTS_PAGE, width]
     assert recent.records == results.records == 0
-    assert recent.table["shown_rows"] == results.table["shown_rows"] > 0
-    assert recent.table["columns"] == results.table["columns"]
-    assert recent.table["tallest_row"] == results.table["tallest_row"]
+    assert 0 < recent.table["shown_rows"] < results.table["shown_rows"]
+    assert set(recent.table["shown_ids"]) < set(results.table["shown_ids"])
+    assert recent.table["columns"]
+    assert results.table["columns"]
+    assert recent.table["tallest_row"]["height"] > 0
+    assert results.table["tallest_row"]["height"] > 0
     if (AS_OPENED, width) in laid:
         assert laid[AS_OPENED, width].records == 0
 

@@ -184,28 +184,10 @@ The data layer reuses the register’s own code rather than re-deriving it:
 
 ### URL Layout
 
-As built (amended 2026-09-30, 2026-10-01 and 2026-10-03):
-
-| Path | Page | Nav tab |
-| --- | --- | --- |
-| `/` | the overview (new) | Overview |
-| `/frontier.html` | the frontier atlas, $n = 1\ldots324$ (new) | Frontier |
-| `/all-results.html` | every register entry, the results table (new) | Results |
-| `/cases/` | the record page: the index of every case, and the reader that shows one case’s record in the site’s design, with that record’s own address in the bar (new, 2026-10-03) | none |
-| `/cases/N.html` | one case’s record file per tracked $n$, a plain page with its own title and link preview, which sends a reader with scripts on to `/cases/`; the record page and the case popover on the overview and the frontier atlas fetch it (new, 2026-10-03) | none; opened from the atlas grid and the frontier atlas |
-| `/papers.html` | the papers page: one large card each for the optimality paper, the explainer and the tutorial, each a link that goes to its paper in the same tab (new) | Papers |
-| `/papers/n11-optimality-review.html` | the n = 11 optimality paper, from its own renderer and Pages job, with its Markdown and PDF beside it under the same slug | Papers |
-| `/papers/n11-lower-bounds-explainer.html` | the n = 11 explainer, with its Markdown and PDF beside it under the same slug (moved from `/explainer.html`, and before that from `/`) | Papers |
-| `/tutorial.html` | `TUTORIAL.md`, rendered (new) | Papers |
-| `/visualize.html` | the $n = 1\ldots324$ film at full width, with Film and Workbench tabs (new) | Visualize |
-| `/workbench/` | the workbench, now carrying the site nav and the Workbench tab | Visualize |
-| `/readme.html`, `/epistemics.html`, `/synopsis.html`, `/conventions.html`, `/development.html` | the repository documents, rendered for the documentation cards’ popovers, in the cards’ order | none |
-| `/results.html`, `/status.html`, `/defects.html` | forwarders since 2026-10-01 (`think-bk2e`): `RESULTS.md`, `STATUS.md` and `defects.md` are no longer pages, and their old addresses send a visit to `/all-results.html`, to `/frontier.html` and to `defects.md` on GitHub | none |
-| `/cases.html` | a forwarder since 2026-10-03 (`think-bnw2`): every case record was on this one page at `#n-N`, and a visit lands on `/cases/` with its fragment kept, which shows that case | none |
-| `/result/t-nnn.html` | one result’s overview, a fragment its row’s popover fetches; not a page | none |
-| the composite assets | unchanged, at the root | none |
-| `/explainer.html`, `/n11-optimality/`, `/n11-optimality/t-060-explainer.html` | forwarders at the papers’ old addresses: each sends a reader on to the paper with the query string and fragment they came with | none |
-| `/t-018-explainer.{md,pdf}`, `/n11-optimality/t-060-explainer.{md,pdf}` | copies of the papers’ Markdown and PDF at their old addresses | none |
+The current paths, canonical addresses, producers and retained legacy registrations are
+generated in [Published Site URLs](../../site-urls.md).
+See [The Published Site](../../../../development.md#the-published-site) for adding
+pages, forwarders, file copies and tombstones, and for the required validation commands.
 
 The nav also links the repository on GitHub.
 The planned `/synopsis.html` nav page was dropped for a card (see

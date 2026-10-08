@@ -40,6 +40,9 @@ allowlist:
       outcomes are also identified across the private-worker artifact-custody boundary.
       This retains actual runtime evidence, without pinning this repository's source
       or commits or replacing source reconstruction and fresh exact replay.
+  - path: packages/workbench/tools/workbench_tools/capture_video.py
+    kind: generated-artifact
+    boundary: Cache correctness for the generated published workbench corpus; its payload must match the immutable data/corpus.<hash>.json URL before a video receipt names that corpus edition. No repository source is hashed by this predicate.
   - path: packing/devtools/probe_n17_raw_row_support.py
     kind: generated-artifact
     boundary: Cold saved-check receipts and witness packets identify generated seed/node objects and their derived raw atoms; these runtime artifacts are not named by Git revisions.

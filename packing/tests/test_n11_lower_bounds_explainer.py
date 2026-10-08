@@ -238,7 +238,7 @@ def test_the_page_is_self_contained(page: str) -> None:
     assert_self_contained(page)
     assert re.findall(r"<link[^>]*>", page) == [
         f'<link rel="canonical" href="{PAGE_URL}">',
-        render_overview.favicon_html(),
+        render_overview.favicon_html(inline=True),
     ]
     assert re.search(r"<script[^>]*\ssrc=", page) is None
 
@@ -488,7 +488,7 @@ def test_the_link_preview_is_the_sites_and_its_urls_are_absolute(page: str) -> N
     same check the deployed site gets: one of each tag, each address in full, and the
     canonical link and `og:url` both the page's own address.
     """
-    assert check_published_site.head_problems(page, PAGE_URL) == []
+    assert check_published_site.head_problems(page, PAGE_URL, allow_inline_favicon=True) == []
     head = check_published_site.read_head(page)
     assert head.link("canonical") == head.meta("og:url") == [PAGE_URL]
     assert render_overview.canonical_url(PAGE_URL.removeprefix(SITE_URL)) == PAGE_URL
@@ -564,9 +564,7 @@ def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
         render_n11_lower_bounds_explainer.TITLE
         == "New Lower Bounds for Square Packing for n = 11"
     )
-    assert (
-        title == f"{render_n11_lower_bounds_explainer.TITLE} · {render_overview.PROJECT_NAME}"
-    )
+    assert title == render_n11_lower_bounds_explainer.TITLE
     (description,) = head.meta("description")
     assert head.meta("og:description") == head.meta("twitter:description") == [description]
     assert current.bounded_side_decimal in description
@@ -599,7 +597,16 @@ def test_the_forwarder_at_the_old_address_previews_the_page_as_the_page_does(
         if moved.name == "explainer.html"
     )
     assert dict(render_overview.MOVED_PAGES)["explainer.html"] == SITE_PATH
-    assert check_published_site.forwarder_problems(forwarder, PAGE_URL, page) == []
+    assert (
+        check_published_site.forwarder_problems(
+            forwarder,
+            PAGE_URL,
+            page,
+            allow_inline_favicon=True,
+            page_url=SITE_URL + "explainer.html",
+        )
+        == []
+    )
     head = check_published_site.read_head(forwarder)
     own = check_published_site.read_head(page)
     assert head.titles == own.titles

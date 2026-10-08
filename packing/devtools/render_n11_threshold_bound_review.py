@@ -120,6 +120,7 @@ FRONT = paper_front.check(
         agents=("Fable 5.1", "Opus 5.5"),
         version=THRESHOLD_REVIEW_EDITION,
         dates=(
+            paper_front.Dated("First published", THRESHOLD_REVIEW_HISTORY[-1].first_published),
             paper_front.Dated("Original proof", THRESHOLD_PROOF_PUBLISHED),
             paper_front.Dated(paper_front.REVISED, THRESHOLD_REVIEW_REVISED),
         ),
@@ -271,6 +272,11 @@ RENDER_INPUTS = tuple(
     dict.fromkeys(
         (
             Path(__file__),
+            PACKING / "devtools/site_assets.py",
+            PACKING / "devtools/probes/site_assets/preload_fonts.js",
+            PACKING / "devtools/site_math.py",
+            PACKING / "devtools/node/render-site-math.mjs",
+            PACKING / "devtools/templates/site-math.css",
             ARTICLE,
             SHELL,
             STYLE,
@@ -480,15 +486,20 @@ def expanded_markdown(
 
 
 def page_meta() -> PageMeta:
-    """What the page says of itself in its head (`render_overview.head_tags`): its title,
-    its sentence, the address it is served at, and the day its front says it was last
-    revised. It states no first publication, as Part III does not."""
+    """Use the paper's credits and edition history for publication metadata."""
     return PageMeta(
         name=TITLE,
         description=DESCRIPTION,
         path=SITE_PATH,
         kind="article",
+        published=paper_front.iso_date(THRESHOLD_REVIEW_HISTORY[-1].first_published),
         modified=paper_front.iso_date(paper_front.revised(FRONT)),
+        **render_n11_lower_bounds_explainer.scholarly_metadata(
+            FRONT,
+            TITLE,
+            paper_front.iso_date(THRESHOLD_REVIEW_HISTORY[-1].first_published),
+            paper_front.iso_date(paper_front.revised(FRONT)),
+        ),
     )
 
 
@@ -537,7 +548,7 @@ def render(
         "PAPER_TYPE_CSS": PAPER_TYPE_CSS.read_text(encoding="utf-8"),
         **render_n11_lower_bounds_explainer.publication_layer(),
         "PAPER_CSS": STYLE.read_text(encoding="utf-8"),
-        "SITE_FAVICON": favicon_html(),
+        "SITE_FAVICON": favicon_html(inline=True),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
         "SITE_NAV": nav_html("papers", root=SITE_ROOT),
         # A paper's closing credit carries no version: its own is in its credits, and
@@ -625,12 +636,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         facts=render_all_facts(),
         revision=args.revision or link_revision(),
     )
+    from devtools import site_assets, site_math  # noqa: PLC0415
+
     site = args.site.resolve()
+    html = site_math.prepare(html, page_path=SITE_PATH)
+    html = html.replace(favicon_html(inline=True), favicon_html(root="../"))
+    html, assets = site_assets.link_inline_assets(html, SITE_PATH)
     outputs = output_files(site, html, markdown)
     if args.check:
         if args.pdf:
             parser.error("--check compares HTML and Markdown; use --pdf for a fresh PDF")
-        stale = [
+        stale = [site / path for path in site_assets.stale_assets(site, assets)] + [
             path
             for path, content in outputs.items()
             if not path.is_file() or path.read_text(encoding="utf-8") != content
@@ -642,6 +658,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         path.parent.mkdir(parents=True, exist_ok=True)
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
+    site_assets.write_assets(site, assets)
     if args.pdf:
         _print_pdf(site / SITE_PATH, site / paper_path(SLUG, ".pdf"))
     return 0

@@ -31,6 +31,10 @@
 // neither a relation nor a binary operator, the only places a formula may end a line. `stranded` lists the punctuation that begins a line, such as
 // the comma after a formula that filled its line.
 //
+// Each column also reports its first visible cell's computed font and first image's
+// displayed/intrinsic sizes, margins and maximum width. Page and frame scroll positions
+// accompany the table geometry so the optional scroll check can compare settled states.
+//
 // In the `cards` layout no column has a width and none sets a row's height alone; the
 // table reports its tallest card (`tallest_row`, as it does in either layout) and each
 // cell's class with the most lines it takes, so a cell that wraps badly on a phone shows
@@ -210,13 +214,13 @@
   /** The width inside the nearest ancestor that clips or scrolls `element` sideways,
    * or the page's own layout width where none does.
    * @param {Element} element */
-  const frameWidth = (element) => {
+  const frameFor = (element) => {
     for (let frame = element.parentElement; frame; frame = frame.parentElement) {
       if (getComputedStyle(frame).overflowX !== "visible") {
-        return frame.clientWidth;
+        return frame;
       }
     }
-    return document.documentElement.clientWidth;
+    return document.documentElement;
   };
   /** The heading a table sits under.
    * @param {Element} table */
@@ -240,7 +244,7 @@
       const tools = bar?.classList.contains("site-table-tools") && shown(bar) ? bar : wrap;
       const top = tools.getBoundingClientRect().top;
       const box = table.getBoundingClientRect();
-      const frame = frameWidth(table);
+      const frame = frameFor(table);
       const rows = [...(table.tBodies[0]?.rows ?? [])].filter(shown);
       const heads = [...(table.tHead?.rows[0]?.cells ?? [])];
       const cards = !heads.some(shown);
@@ -249,9 +253,14 @@
         section: section(table),
         layout: cards ? "cards" : "table",
         table_width: round(box.width),
-        frame_width: round(frame),
-        scrolls: Math.max(0, round(box.width - frame)),
+        frame_width: round(frame.clientWidth),
+        scrolls: Math.max(0, round(box.width - frame.clientWidth)),
+        frame_scroll_left: round(frame.scrollLeft),
+        window_scroll_x: round(window.scrollX),
+        window_scroll_y: round(window.scrollY),
+        page_scrolls: document.documentElement.scrollWidth - document.documentElement.clientWidth,
         shown_rows: rows.length,
+        shown_ids: rows.map(key),
         top: Math.round(top + window.scrollY),
         height: Math.round(wrap.getBoundingClientRect().bottom - top),
       };
@@ -300,7 +309,38 @@
           /** @type {(typeof cellsOf)[number] | null} */ (null),
         );
         const head = heads[index];
+        const bodyCell = cards
+          ? rows.flatMap((row) => [...row.cells]).find((cell) => cell.className === name)
+          : rows[0]?.cells[index];
+        const bodyStyle = bodyCell ? getComputedStyle(bodyCell) : null;
+        const image = bodyCell?.querySelector("img");
+        const imageStyle = image ? getComputedStyle(image) : null;
+        const imageBox = image?.getBoundingClientRect();
         return {
+          body_font: bodyStyle
+            ? {
+                family: bodyStyle.fontFamily,
+                size: bodyStyle.fontSize,
+                weight: bodyStyle.fontWeight,
+                line_height: bodyStyle.lineHeight,
+              }
+            : null,
+          first_image:
+            image && imageStyle && imageBox
+              ? {
+                  src: image.getAttribute("src"),
+                  width: round(imageBox.width),
+                  height: round(imageBox.height),
+                  natural_width: image.naturalWidth,
+                  natural_height: image.naturalHeight,
+                  complete: image.complete,
+                  display: imageStyle.display,
+                  inline_size: imageStyle.inlineSize,
+                  max_width: imageStyle.maxWidth,
+                  margin_block_start: imageStyle.marginBlockStart,
+                  margin_block_end: imageStyle.marginBlockEnd,
+                }
+              : null,
           column: name,
           width: cards || !head ? null : round(head.getBoundingClientRect().width),
           lines: Math.max(0, ...cellsOf.map(({ cell }) => cell.lines)),

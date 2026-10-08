@@ -147,9 +147,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
         paper.SLUG == render_overview.N11_THRESHOLD_BOUND_REVIEW == "n11-threshold-bound-review"
     )
     assert paper.SITE_PATH == "papers/n11-threshold-bound-review.html"
-    assert check_published_site.head_problems(html, url) == []
+    assert check_published_site.head_problems(html, url, allow_inline_favicon=True) == []
     head = check_published_site.read_head(html)
-    assert head.titles == (f"{paper.TITLE} · {render_overview.PROJECT_NAME}",)
+    assert head.titles == (paper.TITLE,)
     assert head.meta("og:title") == [paper.TITLE]
     assert head.meta("og:type") == ["article"]
     assert head.meta("description") == [paper.DESCRIPTION]
@@ -157,7 +157,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
     meta = paper.page_meta()
     assert meta.modified == paper_front.iso_date(release.THRESHOLD_REVIEW_REVISED)
     assert head.meta("article:modified_time") == [meta.modified]
-    assert meta.published == ""
+    assert meta.published == paper_front.iso_date(
+        release.THRESHOLD_REVIEW_HISTORY[-1].first_published
+    )
     assert paper_front.revised(paper.FRONT) == release.THRESHOLD_REVIEW_REVISED
 
 
@@ -197,6 +199,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     )
     assert lines[5] == (
         '<span class="publication-date">'
+        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
         f"Last revised {release.THRESHOLD_REVIEW_REVISED}</span>"
     )

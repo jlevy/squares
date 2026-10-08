@@ -1,4 +1,4 @@
-// The atlas's two views, Grid and Triangle, and the move between them.
+// Input response: the atlas's two views, Grid and Triangle, and the move between them.
 //
 // The grid sets the cases in reading order, as many to a line as fit. The triangle sets
 // them by the grid bound: row k holds the 2k - 1 cases n = (k - 1)^2 + 1 to k^2, the ones
@@ -559,6 +559,7 @@
     /** @param {AtlasView} current */
     const mark = (current) => {
       block.dataset.atlasView = current;
+      document.documentElement.dataset.siteAtlasView = current;
       for (const tab of buttons) {
         const on = tab.dataset.atlasTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -572,6 +573,7 @@
     /** @param {AtlasSize} current */
     const markSize = (current) => {
       block.dataset.atlasSize = current;
+      document.documentElement.dataset.siteAtlasSize = current;
       for (const tab of sizeButtons) {
         const on = tab.dataset.atlasSizeTab === current;
         tab.setAttribute("aria-selected", String(on));
@@ -604,8 +606,8 @@
 
     cells.id = tabs.dataset.atlasPanel ?? "";
     cells.setAttribute("role", "tabpanel");
-    mark(viewOf(location.search));
-    markSize(sizeOf(location.search));
+    mark(document.documentElement.dataset.siteAtlasView === "triangle" ? "triangle" : "grid");
+    markSize(asSize(document.documentElement.dataset.siteAtlasSize));
 
     wire(tabs, (tab) => select(tab.dataset.atlasTab === "triangle" ? "triangle" : "grid"));
     if (sizes !== null) {
@@ -617,7 +619,13 @@
     // moving everything.
     if ("ResizeObserver" in window) {
       let waiting = false;
+      let priorWidth = cells.getBoundingClientRect().width;
       new ResizeObserver(() => {
+        const width = cells.getBoundingClientRect().width;
+        if (width === priorWidth) {
+          return;
+        }
+        priorWidth = width;
         if (!waiting) {
           waiting = true;
           requestAnimationFrame(() => {
