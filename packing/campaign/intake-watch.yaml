@@ -173,3 +173,17 @@ repositories:
     read_on: '2026-10-08'
     note: >-
       Both commits after the retained v1.0 pin change only README software and paper DOI links. The retained paper, certificate inputs and verifier programs are unchanged. No new result to import.
+
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: ffd900dfff6d2674ad995359208c2f0714915c82
+    read_on: '2026-10-08'
+    bead: think-1545
+    note: >-
+      Read complete changed-path manifests and README diffs for b10ad36, 74f7e8b and
+      ffd900df. The eight in-horizon certificates and unchanged decimal originals are
+      retained by the issue451 packet; their complete native outcomes remain distinct
+      from source-only T128 and pending current-house adoption. The fourteen earlier
+      supersessions retain issue425 historical custody. Twenty added n>324 pose/diagram
+      pairs, including the n378 update, and other nonselected context are outside the
+      eight-case admission. The named open owner must triage and retain those additional
+      source claims; no all-path retention or transferred verification is asserted.

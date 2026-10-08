@@ -2483,7 +2483,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-08-25'
+  reviewed: '2026-10-08'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2579,13 +2579,13 @@ sources:
 - id: squish-n153-2026-10-07
   title: SQUISH exact-rational n153 upper-bound packing
   role: first-party-release
-  url: https://github.com/jlevy/squares/issues/401#issuecomment-6031977107
+  url: https://github.com/jlevy/squares/issues/401#issuecomment-6043191866
   local: resources/web/squish-401-2026-10-07/
   source_key: '[SQUISH n153 2026-10-07]'
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-07'
+  reviewed: '2026-10-08'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
