@@ -59,7 +59,7 @@ experiment:
   results:
   - shape: determination
     question: Does the complete unsampled C2 verifier pass?
-    outcome: unresolved
+    outcome: invalid
     checked_by: Public acquisition161 objects complete; FULL supervisor stopsINCOMPLETE onpsaxo1squerytimeout
       after480.468s, normalownedcleanup, noFULLreceipt.
   verdict:
@@ -78,7 +78,7 @@ experiment:
       NoFULLPASS/admission/census; stopunchanged withoutretry.'
   effort:
     wall_seconds: 480.46827850001864
-    stopped_by: resource
+    stopped_by: guard
 ---
 # Unsampled C2 Joint-Certificate Replay
 

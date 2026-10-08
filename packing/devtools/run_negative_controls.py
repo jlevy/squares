@@ -205,12 +205,24 @@ PRUNE = frozenset(
         SESSION184_RESULTS / "exp-309-subpattern-relevance/replay.json",
         SESSION184_RESULTS / "exp-312-saved-pose-incircles/certificate.json",
         SESSION184_RESULTS / "exp-312-saved-pose-incircles/replay.json",
+        # Both projection descriptors read accepted308, not these generated outputs.
+        # Keep primary receipts and declared dependency rescue unchanged.
+        SESSION184_RESULTS / "exp-313-incircle-projection-redundancy/certificate.json",
+        SESSION184_RESULTS / "exp-313-incircle-projection-redundancy/replay.json",
+        SESSION184_RESULTS / "exp-314-incircle-disk-projection/certificate.json",
+        SESSION184_RESULTS / "exp-314-incircle-disk-projection/replay.json",
         # Historical scored-quench/trace outputs have no registered worker reader.
         # Keep their primary evidence, metadata, log and dependency rescue unchanged.
         SESSION184_RESULTS / "exp-204-basin-hopping/D-basin-hop.jsonl",
         SESSION184_RESULTS / "exp-204-basin-hopping/D-multistart.jsonl",
         SESSION184_RESULTS / "exp-204-basin-hopping/D-basin-hop.trace.jsonl",
         SESSION184_RESULTS / "exp-204-basin-hopping/D-multistart.trace.jsonl",
+        # These stdout copies are byte-identical to selected scientific JSON
+        # receipts. Omit only redundant stdout; preserve originals and copyback.
+        SESSION184_RESULTS / "agenda-032/exp-140-stdout.jsonl",
+        SESSION184_RESULTS / "agenda-032/exp-142-stdout.jsonl",
+        SESSION184_RESULTS / "agenda-032/exp-143-stdout.jsonl",
+        SESSION184_RESULTS / "agenda-032/exp-144-stdout.jsonl",
         # These historical scored-quench/incomplete-graph outputs have no worker
         # reader. Keep all primary bytes and declared dependency rescue intact.
         SESSION184_RESULTS / "exp-005-basin-entry.jsonl",

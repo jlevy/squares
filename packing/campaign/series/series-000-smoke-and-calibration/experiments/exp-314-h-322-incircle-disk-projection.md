@@ -52,9 +52,14 @@ experiment:
       intermediate rationalguard, descriptor10MiB/acceptedroles64MiB/NEWoutput1MiB. OutputserializationmaystopINCOMPLETE;
       no unchanged retry/cap expansion. Same308inputroles only; no312/313rawreceipt input.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection
-  results: []
+  results:
+  - shape: determination
+    question: Does the complete exact whole-cell pair convexification provide a proper shared-centre constraint?
+    outcome: criterion_met
+    checked_by: Complete fresh payload comparison, all launch source bytes rechecked, sole Astra mathematical
+      review; scope flags all false.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: 'Reconstruct original all24 wall-clipped E_i and EVERY relevant D_ij from same
       accepted308 three byte-bound roles, using313.construct and ONE intake. Primary ANY EXTREME D vertex
       exactnormsquared<1: disk convexification is proper and a stronger model may gain a necessary constraint.
@@ -65,10 +70,16 @@ experiment:
       rechecked AFTER norm stage, fullfresh payload/source match. Per-state/per-pair octagon flags explicitly
       labelled, disk-relaxation witness only when globaldiskredundancy holds. Partial/resource/refusal
       unresolved. No arbitrary newpolygon/LP/forest test/physical packing/globalbound.'
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T05:35:00Z'
-    host: macOS arm64
+    reason: Complete exact diagnostic finds 114 proper pair convexification cuts among228 relevant pairs
+      over95 frozen states/12920 pair incidences. Fresh full payload and all imported source bytes match
+      at0db24daac5ea1be2dd416971b0c78b3dfc087388. Sole Astra mathematical review CLEAR; hand equivalence
+      has no independent mathematical confirmation. This selects a future shared-centre model only. No
+      LP solved, packing, ordinary exclusion, admission, capture or bound proved. All1357 extreme squared
+      norms accounted; zero ordinary impossible-pair candidates. Twelve more pairs are cut than by the
+      fixed rational octagon. Independent pair impossibility cannot exclude a relevant pair.
+  effort:
+    wall_seconds: 1.751898667018395
+    stopped_by: criterion
 ---
 # Exact Disk Convexification Discriminator
 

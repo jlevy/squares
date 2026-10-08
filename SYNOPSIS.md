@@ -315,8 +315,8 @@ hypothesis status and summarizes experiment verdicts, and the
 | Commitments | 436 | 228 complete; 65 stopped; 73 blocked; 25 ready; 21 tentative; 24 in progress |
 | Sessions | 185 | 105 completed; 79 stopped; 1 nonterminal |
 | Explorations | 47 | 28 linked to proposed hypotheses; 19 uncodified |
-| Hypotheses | 254 | 70 confirmed; 47 refuted; 64 blocked; 22 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 2 running; 1 exhausted |
-| Experiments | 241 | 90 accepted; 52 rejected; 61 unresolved; 12 baseline; 18 blocked; 5 abandoned; 2 in progress; 1 exhausted |
+| Hypotheses | 256 | 72 confirmed; 48 refuted; 64 blocked; 23 unresolved; 9 open; 35 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
+| Experiments | 243 | 92 accepted; 53 rejected; 62 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
 | Frontier results | 116 | 116 registered, 86 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
@@ -577,6 +577,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [n17 Shared-Centre LP Readiness](docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md) | research synthesis | supporting | retained | — |
 | [Saved-pose incircle discriminator](packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md) | typed session record | record | retained | — |
 | [n17 Owned-Core Guarded Clauses](docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md) | research synthesis | record | retained | — |
 | [n17 Case-Preserving Owned-Domain Propagation](docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md) | research synthesis | record | retained | — |
@@ -606,6 +607,9 @@ case or experiment separately.
 | [Four-corner n11 cardinality relaxation](packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/README.md) | typed session record | record | retained | — |
 | [Original-cell BB header preflight](packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/README.md) | typed session record | record | retained | — |
 | [Joint-certificate metadata relevance](packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/README.md) | typed session record | record | retained | — |
+| [Unsampled C2 replay: incomplete monitor stop](packing/campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/README.md) | typed session record | record | retained | — |
+| [Exact whole-cell octagon convexification](packing/campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/README.md) | typed session record | record | retained | — |
+| [Exact whole-cell disk convexification](packing/campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/README.md) | typed session record | record | retained | — |
 | [Two Closed Centre Children](packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md) | typed session record | record | retained | — |
 | [n17 Issue Coordination and Certificate Intake](docs/project/reviews/review-2026-10-07-n17-issue-coordination.md) | dated review record | record | retained | — |
 | [Exact Replay Stage Attribution](packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md) | typed session record | record | retained | — |
@@ -5907,8 +5911,10 @@ round that names the hypothesis, control roles included.
 | [H-316](packing/campaign/hypotheses/H-316-n11-corner-cardinality.md) | refuted | Correlated four-corner n11 cardinality | 1 | Complete method miss: all95 survive;216 classifications; no ordinary obstruction |
 | [H-317](packing/campaign/hypotheses/H-317-subpattern-relevance.md) | confirmed | SciPy-free joint-certificate candidate relevance | 1 | Complete fresh-matched metadata projection: C1 14 orbits/104 states, C2 13/84, overlap 6/40, union 21/148; both zero in the 95-orbit distance-two tail. Potential coverage is not admission |
 | [H-318](packing/campaign/hypotheses/H-318-bb-header-preflight.md) | confirmed | Original-cell joint-certificate header preflight | 1 | Both compact headers pass; 4.170 s wall, no FULL tree verification or admission |
-| [H-319](packing/campaign/hypotheses/H-319-c2-full-replay.md) | running | Unsampled C2 joint-certificate replay | 1 | Prospective bounded native acquisition and unsampled FULL replay; no admission verdict |
-| [H-320](packing/campaign/hypotheses/H-320-saved-pose-incircles.md) | running | Saved-pose incircle discriminator | 1 | Prospective full95 fixed-pose diagnostic; no target verdict |
+| [H-319](packing/campaign/hypotheses/H-319-c2-full-replay.md) | unresolved | Unsampled C2 joint-certificate replay | 1 | Acquisition complete; FULL interrupted by the sampled-RSS query guard after 480.468 s; no FULL verdict or admission |
+| [H-320](packing/campaign/hypotheses/H-320-saved-pose-incircles.md) | refuted | Saved-pose incircle discriminator | 1 | All 95 fixed saved poses fail an exact incircle-distance test; no whole-cell exclusion |
+| [H-321](packing/campaign/hypotheses/H-321-incircle-projection-redundancy.md) | confirmed | Whole-cell incircle projection redundancy | 1 | Exact P8 diagnostic detects 102 proper pair constraints; no ordinary exclusion or LP result |
+| [H-322](packing/campaign/hypotheses/H-322-incircle-disk-projection.md) | confirmed | Exact incircle-disk projection | 1 | Exact disk diagnostic detects 114 proper pair constraints and zero ordinary-impossible pairs |
 
 ### Confirmed
 
@@ -6220,7 +6226,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session-155-integration.yaml` | session-155 | 634 | 3.31 h | 3.2 h | 3.2 h | yes |
 | `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
 | `codex-task-tree-session185-final-checkpoint.yaml` | session-185 | 2,405 | 14.34 h | 3.78 h | 3.78 h | yes |
-| `codex-task-tree-session186-checkpoint0148.yaml` | session-186 | 1,344 | 6.2 h | 1.63 h | 1.63 h | yes |
+| `codex-task-tree-session186-checkpoint0535.yaml` | session-186 | 4,128 | 20.28 h | 5.41 h | 5.41 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6232,6 +6238,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session184-through-121500.yaml` | unattributed | 3,620 | 20.64 h | 5.11 h | 5.11 h | yes |
 | `codex-task-tree-session184-through-20261007T141342Z.yaml` | unattributed | 4,891 | 28.9 h | 7.09 h | 7.09 h | yes |
 | `codex-task-tree-session185-checkpoint.yaml` | unattributed | 1,321 | 9.23 h | 2.44 h | 2.45 h | yes |
+| `codex-task-tree-session186-checkpoint0148.yaml` | unattributed | 1,344 | 6.2 h | 1.63 h | 1.63 h | yes |
 
 | Coverage | sessions |
 | --- | ---: |
@@ -6253,9 +6260,9 @@ The relevant generator writes the receipt, and the entry fills in on the next
 
 ## Experiments Conducted
 
-There are 241 rounds registered in `series-000`.
+There are 243 rounds registered in `series-000`.
 
-They record 2512.1 agent-minutes and 5819.3 wall-minutes.
+They record 2512.1 agent-minutes and 5827.4 wall-minutes.
 These totals exclude four historical annealing rounds with unrecorded timing; their wall
 and operator costs are unknown, not zero.
 Exp129 closed as blocked without invocation and contributes zero scientific elapsed
@@ -6536,8 +6543,10 @@ archive beside it.
 | [exp-308](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-308-h-316-n11-corner-cardinality.md) | 17 | target | H-316 | Correlated four-corner n11 cardinality across all95 states | Complete fresh method miss;95 survivors,0 obstructions; endpoint retained | rejected |
 | [exp-309](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-309-h-317-subpattern-relevance.md) | 17 | target | H-317 | Exact named-D4 subset projection of C1/C2 on the accepted current residue | Fresh-matched potential union 21 orbits/148 states; both candidates match zero distance-two orbits. Metadata only, no proof or admission | accepted |
 | [exp-310](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-310-h-318-bb-header-preflight.md) | 17 | target | H-318 | C2-first then C1 original-cell compact-header checks | Both HEADER_ONLY_PASS; no FULL tree verification or admission | accepted |
-| [exp-311](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md) | 17 | target | H-319 | Native C2 acquisition and unsampled FULL replay | Prospective; no FULL or admission verdict | in-progress |
-| [exp-312](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md) | 17 | target | H-320 | Exact saved-pose incircle distances | Prospective; no packing or ordinary exclusion claim | in-progress |
+| [exp-311](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-311-h-319-c2-full-replay.md) | 17 | target | H-319 | Native C2 acquisition and unsampled FULL replay | Acquisition complete; FULL interrupted after 480.468 s by monitor query timeout; no admission | unresolved |
+| [exp-312](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-312-h-320-saved-pose-incircles.md) | 17 | target | H-320 | Exact saved-pose incircle distances | All 95 fixed poses fail; 12920 pairs checked per phase; no ordinary exclusion | rejected |
+| [exp-313](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-313-h-321-incircle-projection-redundancy.md) | 17 | target | H-321 | Exact whole-cell P8 projection diagnostic | 102 proper pair constraints; fresh payload agreement; no ordinary exclusion | accepted |
+| [exp-314](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-314-h-322-incircle-disk-projection.md) | 17 | target | H-322 | Exact whole-cell disk projection diagnostic | 114 proper pair constraints; zero ordinary-impossible pairs; fresh payload agreement | accepted |
 
 ### Cost and provenance
 
@@ -6782,12 +6791,14 @@ archive beside it.
 | exp-308 | Construction60s/fresh60s inside120s;4GiB sampled per live process | 89.487275s | — | criterion | Complete fresh method miss; all95 survive; no census or bound change |
 | exp-309 | Construction30s/fresh30s inside60s;4GiB sampled per live process | 3.0044 s | — | criterion | `d91cc22f`; complete metadata projection with matching fresh payload; no admission or speedup claim |
 | exp-310 | Two30s header phases inside60s;4GiB sampled per live process | 4.170 s | — | criterion | Both HEADER_ONLY_PASS; no FULL or admission |
-| exp-311 | Bounded native acquisition and unsampled FULL replay | — | — | — | Prospective; no measured target effort |
-| exp-312 | Fixed saved-pose incircle discriminator | — | — | — | Prospective; no measured target effort |
+| exp-311 | Bounded native acquisition and unsampled FULL replay | 480.468 s FULL | — | guard | Acquisition separately 78.944 s; monitor interruption, no FULL verdict |
+| exp-312 | Fixed saved-pose incircle discriminator | 2.058 s | — | criterion | All fixed poses rejected; no ordinary exclusion |
+| exp-313 | Exact whole-cell P8 projection diagnostic | 1.458 s | — | criterion | 102 proper pair constraints; diagnostic only |
+| exp-314 | Exact whole-cell disk projection diagnostic | 1.752 s | — | criterion | 114 proper pair constraints; diagnostic only |
 
-### What the 241 rounds jointly establish
+### What the 243 rounds jointly establish
 
-The 241 rounds use 2512.1 agent-minutes and 5819.3 wall-minutes under the campaign’s
+The 243 rounds use 2512.1 agent-minutes and 5827.4 wall-minutes under the campaign’s
 retained effort accounting.
 The never-invoked exp129 adds no scientific result or execution time.
 Exp-114 contributes 2.46 seconds of target/replay effort; its readiness work is recorded

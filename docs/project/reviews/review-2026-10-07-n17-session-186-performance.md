@@ -340,7 +340,12 @@ Published C2 acquisition completed in 78.944 seconds and its single unsampled re
 started at 04:50Z from immutable recovery source `e72c7f3c6`, under the prospectively
 selected 2,400-second ceiling.
 The primary checkout continues separate whole-cell mathematical work.
-No full replay or ordinary admission is claimed while it runs.
+The
+[C2 compact summary](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/mechanical-summary.json)
+records its incomplete stop after 480.468 seconds: the one-second RSS process query
+timed out, the owned group was terminated, and cleanup completed.
+The last 18,000 checked nodes are progress, not a FULL receipt.
+No ordinary exclusion was admitted, and the unchanged run was not retried.
 
 The resulting iteration rule is concrete: use focused source controls and complete
 bounded mathematical discriminators during development, run hosted CI alongside them,

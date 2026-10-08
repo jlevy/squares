@@ -1178,6 +1178,8 @@ def test_session186_historical_prune_has_no_registered_control_consumer(name: st
         "exp-308-n11-corner-cardinality",
         "exp-309-subpattern-relevance",
         "exp-312-saved-pose-incircles",
+        "exp-313-incircle-projection-redundancy",
+        "exp-314-incircle-disk-projection",
     ],
 )
 @pytest.mark.parametrize("name", ["certificate.json", "replay.json"])
@@ -1226,6 +1228,11 @@ def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
         "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
         "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
         *(
+            "campaign/series/series-000-smoke-and-calibration/results/agenda-032/"
+            f"exp-{number}-stdout.jsonl"
+            for number in (140, 142, 143, 144)
+        ),
+        *(
             "campaign/series/series-000-smoke-and-calibration/results/"
             "exp-204-basin-hopping/" + name
             for name in (
@@ -1243,6 +1250,18 @@ def test_session186_diagnostic_output_prune_preserves_declared_copyback(
     source = ROOT / relative
     assert source in PRUNE
     assert source.is_file()
+    if "agenda-032/" in relative:
+        number = source.name.split("-")[1]
+        suffix = (
+            "four-owner-endpoint-full-net-replay"
+            if number == "144"
+            else "four-owner-footprint-cover"
+            if number == "143"
+            else "owner-footprint-cover"
+        )
+        canonical = source.with_name(f"exp-{number}-{suffix}.json")
+        assert canonical not in PRUNE
+        assert canonical.read_bytes() == source.read_bytes()
     if "session-105-validation" in relative:
         identity = source.with_name(source.stem + "-source.json")
         assert identity.is_file()

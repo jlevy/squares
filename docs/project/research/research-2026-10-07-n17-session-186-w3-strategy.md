@@ -23,12 +23,15 @@ a certificate, so it has no mathematical disposition.
 Exp308 completed with all 95 assignments surviving the four-corner cardinality
 relaxation. Exp309 found potential C1/C2 certificate coverage of 21 current orbits in
 union, with no matches in the 95 distance-two orbits or the endpoint assignment.
-Exp310 passed the exact header gate for both manifests; its tree and trigonometric proof
-checks remain unperformed.
-Exp312 rejected all 95 saved pose choices by exact incircle distances; orientation
-realization of those fixed choices is retired.
-The current priority is one bounded C2 FULL replay, whose potential payoff is thirteen
-ordinary orbits, alongside the selected whole-cell octagon redundancy gate below.
+Exp310 passed the exact header gate for both manifests.
+The subsequent C2 FULL attempt stopped operationally after 480.468 seconds when the
+resource sampler timed out; no complete tree or trigonometric proof verdict was
+accepted. Exp312 rejected all 95 saved pose choices by exact incircle distances;
+orientation realization of those fixed choices is retired.
+Exp313 and exp314 subsequently verified 102 proper octagon cuts and 114 proper disk cuts
+among the 228 relevant cell pairs, with no whole-pair impossibility candidate.
+The selected next block is a shared-centre LP with exact rational primal or Farkas
+certificates. Source readiness is retained; no LP target was run in this session.
 No contributed certificate has yet been admitted by these metadata results.
 The original kickoff ranking below is retained as the decision record; later result
 sections record its updates.
@@ -1388,6 +1391,27 @@ Exp313 does not verify these extra norm predicates.
 
 ### Subsequent Decision Boundaries
 
+The actual
+[exp313 result](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/README.md)
+completed generation and matching fresh reconstruction in 1.457636 supervised seconds.
+It reconstructed all 24 centre domains, 228 relevant pairs and 1,357 difference-hull
+extremes, checking 10,856 octagon faces and accounting for all 12,920 state-pair
+incidences. Exactly 102 pairs have proper octagon cuts.
+The
+[exp314 result](../../../packing/campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/README.md)
+completed in 1.751899 supervised seconds, with matching fresh reconstruction of all
+1,357 squared norms.
+It found 114 proper disk cuts and zero whole-difference-in-open-disk candidates.
+The primary receipts are each result directory’s `certificate.json` and `replay.json`;
+neither result claims an LP solution, ordinary exclusion or admission.
+
+These results preserve the shared-centre LP as an informative next test.
+They also show that every relevant pair has some possible centre difference of norm at
+least one, so an independent whole-pair incircle impossibility test cannot exclude these
+pairs. The twelve additional disk-cut pairs show that the octagon is a weaker
+approximation; they do not establish that the stronger cuts make any shared system
+infeasible.
+
 If the gate finds a strict cut, the next bounded proposal is the shared-centre rational
 LP with all 136 pair constraints in each state.
 An exact Farkas multiplier certificate could prove an ordinary cell-assignment
@@ -1398,6 +1422,37 @@ performance predictions.
 Complete feasible results for all 95 assignments would retire this fixed convex
 projection. If the gate finds every pair redundant, it retires that LP before any solver
 implementation, while leaving the stronger disk diagnostic open.
+
+The selected future packet freezes the first eight increasing canonical-mask entries of
+the accepted 95-state roster, plus a separate accepted endpoint-mask calibration.
+It reconstructs all pairs in that union, including any endpoint pair absent from the
+228-pair table. For each pair it builds the rational octagon hull $H_{ij}$ by eight
+closed clips and one hull.
+Degenerate points and segments require their affine equalities and endpoint bounds; they
+must not become an unconstrained plane.
+The same 34 centre variables satisfy all seventeen $E_i$ constraints and all 136 pair
+constraints in a state.
+
+A numerical phase-one proposal may minimize $\rho$ subject to $Ax-\rho\mathbf1\le b$,
+$\rho\ge0$ and free $x$. Its dual has $y\ge0$, $A^Ty=0$ and $\sum y\le1$; a positive
+optimum permits normalization $\sum y=1$. Only exact rational $y\ge0$, $A^Ty=0$,
+$b^Ty<0$ proves infeasibility.
+Alternatively an exact rational 34-vector satisfying every original row proves survival
+of this convex relaxation.
+Floating solver status, a positive floating objective or failed rational reconstruction
+means unresolved. Row scaling must be positive and retained exactly.
+Endpoint calibration requires an exact feasible vector under the same row construction,
+not inherited endpoint metadata alone.
+
+There are at most 88 vertices in a pair hull: at most 72 original difference vertices
+and two intersections per each of the eight clipping lines.
+The raw union has at most $8\times73=584$ vertices.
+Thus 12,580 rows per state cover the current full-dimensional and degenerate limits.
+Existing exact LP helpers provide the algebraic operations and certificate checks, but
+need bounded intermediate arithmetic and deadline handling before an actual consumer can
+claim those assurances.
+The readiness-only packet was selected instead of rushing a solver target into the final
+research minutes.
 
 A stronger subsequent route retains the eight closed outside-face alternatives for
 selected pairs and covers every branch with checked shared-centre constraints.
@@ -1452,6 +1507,45 @@ No actual triple has been selected or evaluated.
 An ordinary clause requires original named-cell and D4 joins and endpoint calibration; a
 complete failed test retires only the declared triple and weights, without triggering a
 denser unregistered search.
+
+### A Global Tilted-Owner Necessary Condition
+
+The following is another sole-Astra hand lemma, without independent mathematical review.
+Every packing of seventeen unit squares in $[0,U]^2$ has at least one owner whose
+orientation satisfies
+
+$$
+|\cos\theta|+|\sin\theta|\ge\frac5U=\frac{1250}{1169}.
+$$
+
+A unit square at angle $\theta$ contains the concentric axis-aligned square of side
+$a_\theta=1/(|\cos\theta|+|\sin\theta|)$. Its interior is contained in the original
+square’s interior.
+If the displayed bound failed for all seventeen owners, they would all
+contain axis-aligned squares of a common side $a>U/5$, by taking the smallest of their
+finitely many $a_\theta$. The centres of these inner squares lie in a square of side
+$U-a<4a$. Partition each coordinate interval into four disjoint intervals, with boundary
+points assigned to one interval, each of width strictly below $a$. Two of seventeen
+centres share one of the sixteen product boxes.
+Their inner squares then overlap in both coordinates with positive interior,
+contradicting the packing.
+
+In the first-quadrant quarter-turn chart, $\tau=\tan(\theta/2)\in[0,1]$, the condition
+is exactly
+
+$$
+2419\tau^2-2338\tau+81\le0.
+$$
+
+It supplies a complete seventeen-way existential owner cover, valid before any
+normalization or cell assignment.
+It does not identify the owner or its centre and does not imply the existing owned-core
+guard or endpoint capture.
+Common tilted orientations still satisfy the relative-angle-only rows, so this condition
+alone does not repair that relaxation.
+No current cell assignment is excluded, and no new bound on $s_{17}$ is claimed.
+A future consumer would need the full owner disjunction, the corresponding centre and
+pair constraints, and an endpoint-retention control.
 
 These proposals do not estimate the time to complete the n17 theorem.
 The current evidence supports bounded decisions between mathematical approaches; it does

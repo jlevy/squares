@@ -54,9 +54,14 @@ experiment:
       rationalguard. Full D serialization may legitimately hitoutputceiling; preserveINCOMPLETE, no unchanged
       retry or capexpansion.
     record: packing/campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy
-  results: []
+  results:
+  - shape: determination
+    question: Does the complete exact whole-cell pair convexification provide a proper shared-centre constraint?
+    outcome: criterion_met
+    checked_by: Complete fresh payload comparison, all launch source bytes rechecked, sole Astra mathematical
+      review; scope flags all false.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: Complete exact unconditioned E_i=originalC_i intersect[1/2,U-1/2]^2 for all24 original
       cells, and D_ij=conv(E_j-E_i) for EVERY pair occurring in the accepted95 roster. Fixed rational
       inscribed octagonP with eight integer face rows(±7,±3)/(±3,±7) dot delta<=7. Primary ANY extreme
@@ -68,10 +73,14 @@ experiment:
       EmptyE/refusal/resource unresolved. Prospective secondary all vertices strictinsideP selects a distinct
       ordinary two-cell consumer, not admission here. Exactdisk-norm checks are a separately registered
       future target, not a313 verdict.
-    reason: Prospective beforetarget; source author/peer/static/math and mechanical readiness complete.
-  lease:
-    expires: '2026-10-08T05:30:00Z'
-    host: macOS arm64
+    reason: Complete exact diagnostic finds 102 proper pair convexification cuts among228 relevant pairs
+      over95 frozen states/12920 pair incidences. Fresh full payload and all imported source bytes match
+      at0db24daac5ea1be2dd416971b0c78b3dfc087388. Sole Astra mathematical review CLEAR; hand equivalence
+      has no independent mathematical confirmation. This selects a future shared-centre model only. No
+      LP solved, packing, ordinary exclusion, admission, capture or bound proved.
+  effort:
+    wall_seconds: 1.4576359579805285
+    stopped_by: criterion
 ---
 # Whole-Cell Incircle Projection Redundancy
 
