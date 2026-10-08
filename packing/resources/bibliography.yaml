@@ -1513,10 +1513,11 @@ sources:
     venue: GitHub
     dated: '2026-10-08'
     lineage: builds-on-project
-    credit: Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel
+    credit: Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel, Levy
     short_credit: Couzo after Xu et al.
     note: Eight complete certificates and decimal context poses at ffd900dfff6d2674ad995359208c2f0714915c82;
-      source credits and tools are attributed. No optimizer/local/global claims. Unlicensed programs/prose
+      source credits and tools are attributed. The source uses Squares Project (Levy) verification code;
+      this project lineage is not independent. No optimizer/local/global claims. Unlicensed programs/prose
       are pinned rather than copied.
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
