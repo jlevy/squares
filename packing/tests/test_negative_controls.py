@@ -2120,8 +2120,6 @@ def test_gupta_complete_sources_survive_native_worker_boundaries(
     assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
 
 
-
-
 @pytest.mark.parametrize(
     ("number", "canonical"),
     [
