@@ -1369,7 +1369,22 @@ def forbidden(*args, **kwargs):
 packet.decide = packet.original.decide = forbidden
 packet.original.exact_verify = packet.original.independent.check = forbidden
 assert tuple(packet.check_certification()) == packet.NUMBERS
+# The current n108 house is #432 geometry and must not satisfy the old #422 receipt.
+try:
+    house.check_houses([108])
+except packet.original.PacketError as error:
+    assert 'full geometry or private metadata custody mismatch' in str(error)
+else:
+    raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
+from devtools.register_ryxu_reports import read_history
+historical = next(row['house'] for row in read_history() if row['n'] == 108)
+historical_path = packet.PACKET / 'receipts' / 'worker-historical-n108.yaml'
+historical_path.write_text(historical)
+current_house_path = house.house_path
+house.house_path = lambda n: historical_path if n == 108 else current_house_path(n)
 assert tuple(house.check_houses()) == packet.NUMBERS
+historical_path.unlink()
+house.house_path = current_house_path
 for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
     relative = path.relative_to(packet.REPO).as_posix()
     assert check_results.repository_file_problem(relative) is None
@@ -1381,7 +1396,8 @@ for producer in (atlas.update, lambda: atlas.update_selected([88])):
         assert 'output escapes' in str(error)
     else:
         raise AssertionError('producer accepted a linked output')
-print('all 27 complete inputs admitted; nine house reads and both output guards passed')
+print('all 27 complete inputs admitted; eight current and one historical house reads; '
+      'both output guards passed')
 """
     environment = controls.control_environment(tree, tree / "second-squish-baseline-pycache")
     baseline = subprocess.run(

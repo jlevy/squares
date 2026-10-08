@@ -46,7 +46,11 @@ def _source() -> dict[str, Any]:
         "square_size": "1",
         "representation": "corners",
         "scalar": {"kind": "decimal"},
-        "coordinates": {"origin": "lower-left", "axes": "x-right-y-up"},
+        "coordinates": {
+            "origin": "lower-left",
+            "axes": "x-right-y-up",
+            "angle_unit": "not-applicable",
+        },
         "squares": [
             {"id": 1, "corners": [list(point) for point in UNIT]},
             {"id": 2, "corners": [list(point) for point in _moved(UNIT, "1.05")]},
@@ -74,7 +78,11 @@ def _view() -> dict[str, Any]:
         "square_size": "1",
         "representation": "corners",
         "scalar": {"kind": "rational"},
-        "coordinates": {"origin": "lower-left", "axes": "x-right-y-up"},
+        "coordinates": {
+            "origin": "lower-left",
+            "axes": "x-right-y-up",
+            "angle_unit": "not-applicable",
+        },
         "squares": [
             {"id": 1, "corners": unit},
             {"id": 2, "corners": [[str(int(x) + 1), y] for x, y in unit]},

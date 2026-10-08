@@ -1035,6 +1035,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
       signal to move the read, not a signal to move the test.
     """
     expected: dict[str, set[str]] = {
+        # Full private snapshot/admission measured406.23s under IO contention;
+        # complete confirmation/idempotence measured24.04s and16.06s per call.
+        # The fast12s and child45s ceilings remain unchanged.
+        "test_ryxu_house_links.py": {
+            "test_actual_worker_keeps_full_scientific_inputs_and_refuses_producers",
+            "test_confirmation_preserves_complete_scope_history_and_lower_lanes",
+        },
         # Hosted run36864534354/job110376645051,2026-10-01:31.66s call time.
         # Exact symbolic reconstruction/normalizations; eight fast controls stay in PR CI.
         "test_n17_endpoint_feasibility.py": {

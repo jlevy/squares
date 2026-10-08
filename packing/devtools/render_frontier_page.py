@@ -185,31 +185,43 @@ def approx_html(value: Any) -> str:
     return f'<span class="site-approx">{"=" if whole else "≈"} {text}</span>'
 
 
+def closed_form_tex(exact: str) -> str | None:
+    """A closed form that fits a table cell, with one rule for both display lines."""
+    if not exact or tables.ROOT_FORM.fullmatch(exact) or is_integer(exact):
+        return None
+    tex = tables.latex(exact)
+    if len(tex) > VALUE_SHOWN:
+        return None
+    value = exact_value(exact)
+    if value.is_Rational and any(
+        len(str(abs(part))) > GAP_DIGITS for part in (value.p, value.q)
+    ):
+        return None
+    return tex
+
+
 def value_html(bound: dict[str, Any]) -> str:
-    """A bound as a reader should see it: integers plain, closed forms as math."""
+    """A bound as a reader should see it: integers plain, readable closed forms as math."""
     exact = bound.get("exact_form")
-    if isinstance(exact, str) and exact and not tables.ROOT_FORM.fullmatch(exact):
+    if isinstance(exact, str) and exact:
         if is_integer(exact):
             return html.escape(exact)
-        tex = tables.latex(exact)
-        if len(tex) <= VALUE_SHOWN:
+        if (tex := closed_form_tex(exact)) is not None:
             return math_html(cell_tex(tex))
-    return f'<span class="site-decimal">{html.escape(decimal_text(bound["value"]))}</span>'
+    title = (
+        f' title="{html.escape(exact)}"'
+        if isinstance(exact, str) and re.fullmatch(r"-?\d+/\d+", exact)
+        else ""
+    )
+    return (
+        f'<span class="site-decimal"{title}>{html.escape(decimal_text(bound["value"]))}</span>'
+    )
 
 
 def bound_approx_html(bound: dict[str, Any]) -> str:
-    """The decimal under a bound the table sets as a closed form, and nothing under a
-    whole number or a bound already set as a decimal. It is read from the closed form,
-    never from the record's own decimal, which a lower bound may hold to fewer places
-    (`15680/3951` is recorded as `3.968615`)."""
+    """The decimal under a displayed closed form, read from that exact form."""
     exact = bound.get("exact_form")
-    if (
-        not isinstance(exact, str)
-        or not exact
-        or tables.ROOT_FORM.fullmatch(exact)
-        or is_integer(exact)
-        or len(tables.latex(exact)) > VALUE_SHOWN
-    ):
+    if not isinstance(exact, str) or closed_form_tex(exact) is None:
         return ""
     value = exact_value(exact)
     return "" if value.is_Integer else approx_html(value)

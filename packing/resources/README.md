@@ -833,6 +833,21 @@ Stead, with register data from the Squares Project (Joshua Levy) under CC BY 4.0
 Claude assistance under Daniel’s direction.
 Source MIT licences and the earlier #375 namespace remain unchanged.
 
+## Ryan Xu’s rational and radical packings
+
+- **[ry-xu square packing 2026]** — Ryan Xu’s complete packing reports, pinned at
+  `8dc415296f697f5140caea27c7a0193d52deb4e6`;
+  [packet](web/ry-xu-new-packings-2026-10-08/README.md).
+  All 25 rational certificates have complete exact finite-feasibility replay (T-125).
+  The separate undilated n = 51 construction in $Q(\sqrt 2)$ is confirmed by T-126. The
+  atlas selects 17 rational packings and that radical construction; eight rational
+  certificates remain as nonselected evidence.
+  Native exact checks find 119 touching pairs at n = 51; the source’s count of 191
+  remains unconfirmed.
+  These results establish finite upper bounds, without local or global optimality.
+  The packet preserves factual inputs and credits Xu’s direction and LLM assistance; it
+  does not treat the unlicensed source programs as a licensed software bundle.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

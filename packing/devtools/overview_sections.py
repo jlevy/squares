@@ -1673,6 +1673,19 @@ def hero() -> str:
 #: every source repository in the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
+        "https://github.com/ry-xu/square_packing",
+        "Ryan Xu",
+        (
+            "Complete rational packings and an undilated radical n = 51 construction; "
+            "finite feasibility is confirmed here (T-125, T-126)."
+        ),
+    ),
+    (
+        "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json",
+        "Ryan Xu",
+        "The complete source report retained for the rational packing comparisons.",
+    ),
+    (
         "https://github.com/wand125/square-packing",
         "wand125",
         "Canonical certificate and checker repository; historical source pins remain valid.",

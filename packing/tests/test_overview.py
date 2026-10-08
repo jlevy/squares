@@ -801,9 +801,26 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         ).read_bytes(), n
         if drawing == frontier.packing_svg(n, units=overview_sections.ATLAS_UNITS):
             identical_thumbnails.add(n)
-    # n155's 337 snaps move at most 8.011e-13, with unchanged shades. Integer
-    # rounding to the 400-unit tile hides these moves while the full SVG differs.
-    assert identical_thumbnails == {155}
+    # The exact #432 houses and n155's 337 sub-picometre snaps have unchanged
+    # tile-scale shades; 400-unit rounding hides moves visible in the full SVG.
+    assert identical_thumbnails == {
+        129,
+        131,
+        261,
+        70,
+        103,
+        295,
+        105,
+        267,
+        108,
+        155,
+        146,
+        84,
+        86,
+        123,
+        126,
+        127,
+    }
     for n in sorted(set(drawn) - set(regularized)):
         open_tag, drawing, number = drawn[n]
         assert "regularized" not in open_tag, n
