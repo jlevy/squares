@@ -37,7 +37,7 @@ import urllib.request
 from collections.abc import Callable, Mapping, Sequence
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import NamedTuple
+from typing import NamedTuple, override
 from urllib.parse import urljoin, urlsplit
 
 from playwright.sync_api import Browser, BrowserContext, sync_playwright
@@ -45,6 +45,7 @@ from playwright.sync_api import Error as PlaywrightError
 
 from devtools import (
     overview_data,
+    overview_sections,
     render_case_pages,
     render_overview,
     result_overview,
@@ -83,7 +84,6 @@ REPOSITORY_LINK = re.compile(re.escape(REPO_URL) + r"/(blob|tree)/([^/\s\"<>)]+)
 CANONICAL = re.compile(r'<link\s+rel="canonical"\s+href="([^"]*)"')
 #: The fuller body a row's popover fetches, as its address beside the page, and how a
 #: result's overview opens: the one block it is, naming its result.
-ROW_SOURCE = re.compile(r'data-row-pop-src="([^"]+)"')
 RESULT_OVERVIEW = re.compile(
     r'<(?:article|div) class="site-result" data-result-overview="(t-\d{3})">'
 )
@@ -183,11 +183,27 @@ OMITTED_TREES = ("packing/resources/", "packing/campaign/")
 #: The pages with a table of results, whose rows' popovers each carry their result's
 #: record links.
 RECORD_LINK_PAGES = ("index.html", render_overview.RESULTS_PAGE)
-#: A result row's popover from its opening tag on, named by its result
-#: (`overview_sections.result_row`), and the line of record links its short form ends
-#: with (`overview_sections._detail`).
-_RESULT_POPOVER = re.compile(r'site-row-pop" id="pop-result-(t-\d{3})"')
-_ROW_RECORDS = re.compile(r'<div class="site-records">(.*?)</div>', re.DOTALL)
+#: Result sources are exact root-relative addresses; never fetch an arbitrary source
+#: found in a served page before validating it.
+_RESULT_SOURCE = re.compile(r"result/t-\d{3}\.html")
+_HTML_VOID = frozenset(
+    {
+        "area",
+        "base",
+        "br",
+        "col",
+        "embed",
+        "hr",
+        "img",
+        "input",
+        "link",
+        "meta",
+        "param",
+        "source",
+        "track",
+        "wbr",
+    }
+)
 
 
 #: Every `<meta>` a page's head carries exactly once, by its `name` or `property`: the
@@ -850,6 +866,9 @@ class RecordLinks(NamedTuple):
     overviews: dict[str, str]
     """The rendered overview of each result of `RECORD_LINK_SAMPLE`, by its address
     beside the pages (`result/t-060.html`)."""
+    page_rows: dict[str, tuple[str, ...]] | None = None
+    """The required row IDs per page, selected from the register by the renderer's
+    predicates. `None` holds complete synthetic tables to every row in `rows`."""
 
 
 def rendered_record_links() -> RecordLinks:
@@ -884,7 +903,19 @@ def rendered_record_links() -> RecordLinks:
         result.id.lower(): "\n".join(link.url for link in result.records)
         for result in overview.results
     }
-    return RecordLinks(rows, overviews)
+    ordered = overview_sections.recent_results(overview)
+    reference = overview_sections.reference_date(overview)
+    page_rows = {
+        "index.html": tuple(
+            result.id.lower()
+            for result in ordered
+            if overview_sections.shown_by_default(
+                result, overview_sections.RECENT_DEFAULTS, reference
+            )
+        ),
+        render_overview.RESULTS_PAGE: tuple(result.id.lower() for result in ordered),
+    }
+    return RecordLinks(rows, overviews, page_rows)
 
 
 def absent_links(rendered: str, published: str) -> list[str]:
@@ -895,18 +926,174 @@ def absent_links(rendered: str, published: str) -> list[str]:
     )
 
 
+class _RecordElement(NamedTuple):
+    tag: str
+    attrs: dict[str, str | None]
+    start: int
+    end: int
+    content: str
+
+
+class _RecordMarkup(HTMLParser):
+    """Completed elements with exact source boundaries: a missing block cannot borrow
+    links from a neighboring row, popover or result article."""
+
+    def __init__(self, text: str) -> None:
+        super().__init__(convert_charrefs=False)
+        self.text = text
+        self.elements: list[_RecordElement] = []
+        self.ids: dict[str, int] = {}
+        self._stack: list[tuple[str, dict[str, str | None], int, int]] = []
+        self._lines = [0]
+        # HTMLParser advances its source line only on literal LF.
+        self._lines.extend(match.end() for match in re.finditer("\n", text))
+        self.feed(text)
+        self.close()
+
+    def _offset(self) -> int:
+        line, column = self.getpos()
+        return self._lines[line - 1] + column
+
+    @override
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        start = self._offset()
+        end = start + len(self.get_starttag_text() or "")
+        # Browser ID lookup includes unclosed and void elements and takes the first
+        # attribute value, even when this checker rejects duplicate attributes below.
+        identifier = next((value for key, value in attrs if key == "id"), None)
+        if identifier:
+            self.ids[identifier] = self.ids.get(identifier, 0) + 1
+        # HTML chooses the first duplicate attribute; treating ambiguity as absent
+        # prevents a later good value from masking a bad source or binding.
+        values: dict[str, str | None] = {}
+        for key, value in attrs:
+            values[key] = None if key in values else value
+        if tag in _HTML_VOID:
+            self.elements.append(_RecordElement(tag, values, start, end, ""))
+        else:
+            self._stack.append((tag, values, start, end))
+
+    @override
+    def handle_endtag(self, tag: str) -> None:
+        matching = next(
+            (i for i in range(len(self._stack) - 1, -1, -1) if self._stack[i][0] == tag),
+            None,
+        )
+        if matching is None:
+            return
+        _, values, start, content_start = self._stack[matching]
+        del self._stack[matching:]
+        content_end = self._offset()
+        end = self.text.find(">", content_end) + 1
+        self.elements.append(
+            _RecordElement(tag, values, start, end, self.text[content_start:content_end])
+        )
+
+    @override
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+        if tag not in _HTML_VOID:
+            _, values, start, end = self._stack.pop()
+            self.elements.append(_RecordElement(tag, values, start, end, ""))
+
+    def find(
+        self, *, tag: str = "", class_name: str = "", within: _RecordElement | None = None
+    ) -> list[_RecordElement]:
+        return [
+            element
+            for element in self.elements
+            if (not tag or element.tag == tag)
+            and (not class_name or class_name in (element.attrs.get("class") or "").split())
+            and (within is None or within.start < element.start < element.end <= within.end)
+        ]
+
+
 def row_records(page: str) -> dict[str, str]:
-    """The line of record links each result row of a page's table of results opens to,
-    in the short form of the row's popover, by the result's name. A popover is read from
-    its own opening tag to the next popover's, so one that lost its line is not given
-    its neighbour's. The rows carried the line in a Details cell until 2026-10-04."""
+    """The inline legacy record line, bounded by its own completed result popover.
+    Current rows fetch their records from a complete result page instead."""
+    markup = _RecordMarkup(page)
     found: dict[str, str] = {}
-    for popover in page.split('<div class="site-popover ')[1:]:
-        named = _RESULT_POPOVER.match(popover)
-        records = _ROW_RECORDS.search(popover)
-        if named is not None and records is not None:
-            found[named.group(1)] = records.group(1)
+    for popover in markup.find(class_name="site-row-pop"):
+        target = popover.attrs.get("id") or ""
+        if not re.fullmatch(r"pop-result-t-\d{3}", target):
+            continue
+        records = markup.find(class_name="site-records", within=popover)
+        if len(records) == 1 and not markup.find(class_name="site-row-pop", within=popover):
+            found[target.removeprefix("pop-result-")] = records[0].content
     return found
+
+
+def _bound_row_records(
+    markup: _RecordMarkup, row: str, articles: Mapping[str, Sequence[_RecordElement]]
+) -> tuple[str, str]:
+    """The records reached by this row, and any broken row-to-record binding."""
+    rows = [
+        element
+        for element in markup.find(tag="tr")
+        if row in (element.attrs.get("id"), element.attrs.get("data-result"))
+    ]
+    target = f"pop-result-{row}"
+    popovers = [
+        element
+        for element in markup.find(class_name="site-row-pop")
+        if element.attrs.get("id") == target
+    ]
+    if len(rows) != 1 or len(popovers) != 1 or markup.ids.get(target, 0) != 1:
+        return "", "requires one row and its own popover"
+    table_row, popover = rows[0], popovers[0]
+    identities = {
+        table_row.attrs[key] for key in ("id", "data-result") if key in table_row.attrs
+    }
+    if (
+        identities != {row}
+        or table_row.attrs.get("data-row-popover", target) != target
+        or markup.find(class_name="site-row-pop", within=popover)
+    ):
+        return "", "row opens the wrong popover"
+    sources = [
+        element
+        for element in markup.find(within=popover)
+        if "data-row-pop-src" in element.attrs
+    ]
+    if not sources:
+        records = markup.find(class_name="site-records", within=popover)
+        return (records[0].content, "") if len(records) == 1 else ("", "missing record body")
+    if table_row.attrs.get("data-row-popover") != target:
+        return "", "missing row-to-popover binding"
+    return _lazy_row_records(markup, row, table_row, popover, articles)
+
+
+def _lazy_row_records(
+    markup: _RecordMarkup,
+    row: str,
+    table_row: _RecordElement,
+    popover: _RecordElement,
+    articles: Mapping[str, Sequence[_RecordElement]],
+) -> tuple[str, str]:
+    address = result_fragment(row)
+    sources = [
+        element
+        for element in markup.find(within=popover)
+        if "data-row-pop-src" in element.attrs
+    ]
+    bodies = markup.find(class_name="site-row-pop-body", within=popover)
+    if len(sources) != 1 or len(bodies) != 1 or sources[0] != bodies[0]:
+        return "", "requires one lazy record body"
+    body = bodies[0]
+    if body.attrs.get("data-row-pop-src") != address:
+        return "", f"record source must be {address}"
+    row_links = markup.find(tag="a", class_name="site-row-open", within=table_row)
+    fallback = markup.find(tag="a", within=body)
+    actions = markup.find(tag="a", class_name="site-popover-action", within=popover)
+    for links in (row_links, fallback, actions):
+        if not links or any(link.attrs.get("href") != address for link in links):
+            return "", f"static record link must be {address}"
+    if address not in articles:
+        return "", f"record page {address} not served"
+    found = articles[address]
+    if len(found) != 1 or found[0].attrs.get("data-result-overview") != row:
+        return "", f"record page {address} holds the wrong result"
+    return found[0].content, ""
 
 
 def checkout_commit() -> str | None:
@@ -930,28 +1117,52 @@ def record_link_checks(
     line where the expectation was not rendered at the deployed commit, since a failure
     may then be the checkout's and not the deploy's."""
     results: list[tuple[bool, str]] = []
+    # Each full result is parsed once and shared by both table checks; no new fetches.
+    articles = (
+        {
+            address: _RecordMarkup(text).find(class_name="site-result")
+            for address, text in overviews.items()
+        }
+        if pages
+        else {}
+    )
     for name, text in pages.items():
-        served = row_records(text)
+        rows = (
+            expected.rows
+            if expected.page_rows is None
+            else {row: expected.rows[row] for row in expected.page_rows[name]}
+        )
+        markup = _RecordMarkup(text)
+        served = {row: _bound_row_records(markup, row, articles) for row in rows}
+        invalid = {row: problem for row, (_, problem) in served.items() if problem}
         lacking = {
             row: absent
-            for row, records in expected.rows.items()
-            if (absent := absent_links(records, served.get(row, "")))
+            for row, records in rows.items()
+            if (absent := absent_links(records, served[row][0]))
         }
-        total = sum(len(branch_paths(records)) for records in expected.rows.values())
+        total = sum(len(branch_paths(records)) for records in rows.values())
         if lacking:
             shown = "; ".join(
                 f"{row} lacks {absent[:3]}" for row, absent in list(lacking.items())[:3]
             )
             line = (
-                f"{name}: {len(lacking)} of {len(expected.rows)} result rows lack record "
+                f"{name}: {len(lacking)} of {len(rows)} result rows lack record "
                 f"links the renderer writes: {shown}{rendered_at}"
+            )
+        elif invalid:
+            line = (
+                f"{name}: {len(invalid)} of {len(rows)} result rows "
+                "have invalid record bindings"
             )
         else:
             line = (
-                f"{name}: each of {len(expected.rows)} result rows carries its record "
+                f"{name}: each of {len(rows)} result rows carries its record "
                 f"links, {total} in all"
             )
-        results.append((not lacking, line))
+        if invalid:
+            shown = "; ".join(f"{row}: {problem}" for row, problem in list(invalid.items())[:3])
+            line += f"; invalid bindings: {shown}{rendered_at}"
+        results.append((not lacking and not invalid, line))
     for address, rendered in expected.overviews.items():
         count = len(branch_paths(rendered))
         if address not in overviews:
@@ -1385,7 +1596,6 @@ def check(
         )
 
     checked_links: set[tuple[str, str, str]] = set()
-    overviews: list[str] = []
     tables: dict[str, str] = {}
     # Every page that can be shared and every forwarder, as served, for the head checks
     # at the end: they are read from the text fetched here and cost no request.
@@ -1403,10 +1613,20 @@ def check(
             checked_links |= repository_links(text)
         if name in RECORD_LINK_PAGES:
             tables[name] = text
-        if name == render_overview.RESULTS_PAGE:
-            overviews = sorted(set(ROW_SOURCE.findall(text)))
         if name == render_case_pages.CASES_PAGE:
             indexed = [int(n) for n, case in CASE_INDEX_LINK.findall(text) if n == case]
+
+    overviews = sorted(
+        {
+            element.attrs["data-row-pop-src"] or ""
+            for text in tables.values()
+            for element in _RecordMarkup(text).find(class_name="site-row-pop-body")
+            if "data-row-pop-src" in element.attrs
+        }
+    )
+    unsafe = [address for address in overviews if not _RESULT_SOURCE.fullmatch(address)]
+    results.extend((False, f"invalid result overview source {address!r}") for address in unsafe)
+    overviews = [address for address in overviews if _RESULT_SOURCE.fullmatch(address)]
 
     # The result overviews are files beside the pages, fetched when a row is opened: a
     # deploy that lost one would show only as a popover that keeps its short detail.
@@ -1417,6 +1637,7 @@ def check(
         )
     )
     bodies = []
+    served_overviews: dict[str, str] = {}
     for address in overviews:
         status, body = read(site + address, timeout=timeout)
         fragment = body.decode("utf-8", errors="replace")
@@ -1430,6 +1651,8 @@ def check(
             )
         )
         bodies.append(fragment)
+        if status == 200 and holds == address:
+            served_overviews[address] = fragment
     if bodies:
         links_main("the result overviews", "\n".join(bodies))
 
@@ -1484,7 +1707,7 @@ def check(
             record_link_checks(
                 expected,
                 tables,
-                dict(zip(overviews, bodies, strict=True)),
+                served_overviews,
                 rendered_at=rendered_at,
             )
         )
