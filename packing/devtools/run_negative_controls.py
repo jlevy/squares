@@ -1081,10 +1081,28 @@ def snapshot_pruned_targets() -> list[Path]:
     return sorted({*linked_pruned_targets(), *result_pruned_targets()})
 
 
+def snapshot_copy_targets() -> tuple[Path, ...]:
+    """Copy each declared private path once, preserving distinct path aliases.
+
+    A full scientific input can be explicitly carried and separately rescued by its
+    result registration. Both names identify the same destination; copying it twice
+    repeats I/O and counts bytes that are overwritten, rather than additional source.
+    This roster is rebuilt on every invocation and admits no source validity cache.
+    """
+    return tuple(dict.fromkeys((*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())))
+
+
+def snapshot_duplicate_copy_bytes() -> int:
+    """Bytes of repeated writes to identical named destinations at this invocation."""
+    paths = (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+    return sum(path.stat().st_size for path in paths) - sum(
+        path.stat().st_size for path in dict.fromkeys(paths)
+    )
+
+
 def snapshot_source_bytes() -> int:
     """Bytes copied by the portable fallback, excluding build products and caches."""
-    total = sum(path.stat().st_size for path in (*COPY_SEPARATELY, *root_files()))
-    total += sum(target.stat().st_size for target in snapshot_pruned_targets())
+    total = sum(path.stat().st_size for path in snapshot_copy_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
             # `.agents` carries a Python file (`skills/experiment-loop/assets/ledger.py`),
@@ -1196,7 +1214,7 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         *COPY_SEPARATELY,
         *(path for path in inventory if path.parent == REPO and path not in named),
     ]
-    selected = [*separate, *rescued]
+    selected = list(dict.fromkeys((*separate, *rescued)))
     for document in ROOT_DOCUMENTS:
         selected.extend(
             path
@@ -1274,7 +1292,7 @@ def clone_tree(dest: Path) -> None:
     work = dest / HERE
     _clone_into(ROOT, work)
 
-    for target in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets()):
+    for target in snapshot_copy_targets():
         landing = dest / target.relative_to(REPO)
         landing.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(target, landing)
