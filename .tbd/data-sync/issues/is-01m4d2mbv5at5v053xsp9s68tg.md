@@ -5,7 +5,7 @@ title: "PR #410 merge: native verifier CI, review and current-main qualification
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md
 delegate: claude-code@spud10.local
 labels: []
@@ -18,11 +18,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T06:18:54.691Z
-updated_at: 2026-10-08T07:30:43.579Z
+updated_at: 2026-10-08T08:19:52.520Z
 started_at: 2026-10-08T06:19:53.922Z
 ---
 User explicitly authorizes merging PR410 if appropriate. W7 native CI and consumer-safe snapshot repair, W2 correctness/senior/security/performance reviews, current source/base fast and deferred checkpoint, then matched-head merge. Additive UNADOPTED verifier; no scientific admission, production-selection or performance-gain claim. Native certificate parity remains mandatory before operational adoption under parent task.
 
 ## Notes
 
-Final reviewed/pushed source98f476ddcb7ca8f2397bf994f62de08821dbff86 currentbase7a8d9c16d tree09b844f5. Canonicalgeneratedcostviews+newbroadexpected-testinventory fixed firstCI issues; focusedtest1PASS5.62 and close_sessioncheckPASS. Fourformaltrusted reviews C5453174005/B5453174178/D5453174374/E5453174548 atfinalhead noBlockerHigh; allknownA/B/C sourcefindings fixed exceptC1deferredopenthink-ifbw. Applicablelatest fast37743213463/full37743244050 pending; firsthostedidenticalnativecrate23tests+5floorprobesPASS,cold90s,warmtier78.28of90. Sourceprojection201301238<201326592margin25354; physicalguard remains. Local--pushREFUSEDsparsebootstrapnoCLIpass/nohookbypass. Finaldisposition publication and matchedheadmerge awaitfullCI. No mathematicalbound/admission/proofpromotion; adoptionparentthink-kk7w staysopen.
+Repaired/pushed58d43cbd0e0ec24a370c0cf36bdd1b60621978d0 currentbase7a8d9c16d tree3e2b563c. Two-file exact native Cargo-target documentation exclusion+regression only; red pre-fix→3PASS3.30s, Ruff/BasedPyright0 with actual projectinterpreter; normalhooks; local--push REFUSED sparsecases/frontier. Full98run37743244050 FAIL1906.79s:86of91integrationstepsPASS,10deferredprerequisitesPASS plusindependentmacOS; native34.045sPASS/cold25s. Four shard failures solely8 quickcallwalls12.19–27.03;7 alsoexceed12onPRadvisory45shang; assertionsPASS. Preservefailedrun; performanceprofilingdebtopen think-s39y, noceilings/markers/workerchanges. Fresh58fast/pages/mergeability plusdocumenteddeep37748761238 inputPR410 pending;91fast+13deep=104ordinarygate. Finalseniorfollow-upF at58 inprogress; C/B/D/E98 nativecoreunchanged. AllknownA/B/C findingsfixed exceptC1deferredopenthink-ifbw; preparedmarkeddispositionsat58 awaitfinalCI. Matchedheadmergeheld. Adoptionthink-kk7w remainsopen; no mathbound/admission/proofpromotion. Latest#413 comment6055253328 reports20verified+11computed, ordinarycontributorfastverifieronlynewrow19, no upstreamadmission.
