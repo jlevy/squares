@@ -800,7 +800,9 @@ def coverage_text(
     coverage = safe_load(text)
     ours = {registration.coverage_id for registration in REGISTRATIONS}
     from devtools.source_supersession import (  # noqa: PLC0415
+        coverage_list_span,
         preserve_other_coverage,
+        replace_coverage_list,
         superseded_counts,
     )
 
@@ -864,17 +866,12 @@ def coverage_text(
                 }
             )
     superseded.sort(key=lambda entry: (entry["n"], entry["source_id"]))
-    text = re.sub(
-        r"^selected_overrides:.*\n(?:(?:  |    ).*\n)*",
-        lambda _match: _entries("selected_overrides", overrides),
-        text,
-        count=1,
-        flags=re.MULTILINE,
+    text = replace_coverage_list(
+        text, "selected_overrides", _entries("selected_overrides", overrides)
     )
-    pattern = re.compile(r"^superseded_reports:.*\n(?:(?:  |    ).*\n)*", re.MULTILINE)
     block = _entries("superseded_reports", superseded)
-    if pattern.search(text):
-        rendered = pattern.sub(lambda _match: block, text, count=1)
+    if coverage_list_span(text, "superseded_reports") is not None:
+        rendered = replace_coverage_list(text, "superseded_reports", block)
     else:
         rendered = text.replace("beyond_horizon_claims:", block + "beyond_horizon_claims:", 1)
     return preserve_other_coverage(original, rendered, set(by_n))

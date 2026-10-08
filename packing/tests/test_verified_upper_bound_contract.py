@@ -99,6 +99,14 @@ DECLARED_CONSUMERS = {
     "packing/tests/test_ryxu_house_links.py": (
         "checks finite upper-bound admission and complete custody, never optimality"
     ),
+    "packing/devtools/register_gupta_reports.py": (
+        "adopts a reported finite construction while preserving the older verified "
+        "ceiling and both lower lanes; no value is read as s(n) or optimality"
+    ),
+    "packing/tests/test_gupta_adoption.py": (
+        "checks historical ceilings and lower lanes survive complete reported adoption "
+        "and interruption; a smaller reported side gains no confirmation"
+    ),
     "packing/devtools/register_refinement_reports.py": (
         "registers rational source reports while preserving earlier verified ceilings; "
         "the reported geometry and a historical ceiling never establish s(n)"
@@ -551,6 +559,15 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
             e.startswith("E-squish-second-update-")
             for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
         )
+    }
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
+
+    pending |= {
+        n
+        for n in gupta.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == gupta.reports.SOURCE_KEY
+        and gupta.reports.EXACT_EVIDENCE
+        not in loaded_cases[n]["verified_upper_bound"]["evidence"]
     }
     interval = (
         {29}
