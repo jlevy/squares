@@ -5024,6 +5024,14 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/build_exact_values.py",
+            "packing/devtools/evand_exact_certificates.py",
+            "packing/devtools/upper_bound_packets.py",
+            "packing/devtools/retained_data.py",
+            # Rational projections are bound to the retained proof and its custody.
+            "packing/witnesses/witness.schema.yaml",
+            "packing/resources/web/evand-square-packing-2026-10-05/*",
+            "packing/resources/web/franciscouzo-square-packing-2026-09-27/*",
+            "packing/witnesses/franciscouzo-2026/*",
             # The records, the register and its schema all live here.
             "packing/frontier/*",
             # The catalogue it reads printed polynomials from, and the KKT batch.
@@ -5955,8 +5963,9 @@ TREE_REUSABLE_FAST_STEPS = frozenset(
         # The same shape: it reads the tracked Markdown under `packing/resources/` and
         # compares three numbers found in those bytes. No clock, no network, no history.
         "archive annotation census agrees with the archive",
-        # The same shape: the tracked frontier records, catalogue transcription and KKT
-        # batch, rebuilt in exact arithmetic. No clock, no network, no history.
+        # Tracked frontier records, catalogue transcription, KKT batch, and retained
+        # bound certificates, source manifests and replay receipts determine the exact
+        # rebuild. No clock, no network or repository history enters its verdict.
         "exact side values register",
         "derivation (needs sympy)",
         "search engine (sqsearch)",

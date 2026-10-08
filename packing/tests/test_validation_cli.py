@@ -3465,6 +3465,31 @@ def test_limit_record_tools_select_the_complete_exact_replay(path: str) -> None:
         assert "exact verification" in {step.name for step in selection.steps}
 
 
+@pytest.mark.parametrize(
+    "path",
+    [
+        "packing/devtools/evand_exact_certificates.py",
+        "packing/devtools/upper_bound_packets.py",
+        "packing/devtools/retained_data.py",
+        "packing/resources/web/evand-square-packing-2026-10-05/acquisition/upstream-subtree.sha256",
+        "packing/resources/web/evand-square-packing-2026-10-05/receipts/first-party-check.json",
+        "packing/resources/web/evand-square-packing-2026-10-05/receipts/source-replay.json",
+        "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-102.cert.gz",
+        "packing/witnesses/witness.schema.yaml",
+        "packing/resources/web/franciscouzo-square-packing-2026-09-27/acquisition/sources.json",
+        "packing/resources/web/franciscouzo-square-packing-2026-09-27/receipts/certification.json.gz",
+        "packing/witnesses/franciscouzo-2026/n-292-rational.yaml.gz",
+    ],
+)
+def test_verified_bound_inputs_select_the_exact_register_replay(path: str) -> None:
+    """A changed bound proof must invalidate the side identity projected from it."""
+    step = next(step for step in validate.STEPS if step.name == "exact side values register")
+    sentinel = validate.Step("unrelated check", lambda _context: "", touches=("other/*",))
+    selection = validate.select_for_paths([path], (step, sentinel))
+    assert not selection.unattributed_paths
+    assert selection.steps == (step,)
+
+
 def test_every_step_is_reachable_from_some_tier() -> None:
     """A step in no tier is a check nobody runs, which is worse than not having it.
 

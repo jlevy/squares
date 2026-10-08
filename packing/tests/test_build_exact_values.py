@@ -12,10 +12,12 @@ offered as the side.
 from __future__ import annotations
 
 import copy
+import gzip
 import json
 from collections.abc import Callable
 from fractions import Fraction
 from functools import cache
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -268,6 +270,292 @@ def test_a_ceiling_needs_the_matching_rational_certificate() -> None:
         _refused(lambda packing=packing: _build(n, packing), "wrong polynomial")
 
 
+def test_a_verified_native_rational_side_is_an_identity_with_an_ideal_route() -> None:
+    packing = copy.deepcopy(exact.load_packing(68))
+    before = copy.deepcopy(packing)
+    entry = _build(68, packing)
+    side = Fraction(packing["verified_upper_bound"]["exact_form"])
+    assert entry["state"] == "rational"
+    assert entry["polynomial"]["coefficients"] == [str(side.denominator), str(-side.numerator)]
+    assert entry["checks"]["root"]["interval"] == [str(side), str(side)]
+    assert entry["checks"]["irreducible"]["method"] == "linear"
+    assert entry["side"]["relation"] == "upper-bound"
+    assert entry["status"] == before["status"]
+    assert entry["kkt"]["value"] == exact.kkt_rows()[68]["S_exact"]
+    assert any(note["kind"] == "verified-witness-side" for note in entry["notes"])
+    assert any("ideal contact" in note["text"] for note in entry["notes"])
+    assert packing == before
+
+
+def test_a_couzo_rational_ceiling_is_distinguished_from_the_native_side() -> None:
+    entry = _build(292)
+    assert entry["state"] == "rational"
+    assert Fraction(entry["exact_form"]) == Fraction(entry["side"]["value"])
+    (note,) = [note for note in entry["notes"] if note["kind"] == "verified-bound-ceiling"]
+    assert "outward ceiling" in note["text"]
+    assert "native witness side" in note["text"]
+    assert any("ideal contact" in note["text"] for note in entry["notes"])
+
+
+def test_verified_rational_fallback_requires_exact_equality_and_missing_identity() -> None:
+    for control in (
+        "fraction",
+        "reported",
+        "verified",
+        "source",
+        "count",
+        "replay",
+        "proved",
+        "origin",
+    ):
+        packing = copy.deepcopy(exact.load_packing(68))
+        if control == "fraction":
+            packing["verified_upper_bound"]["exact_form"] = "1/2"
+        elif control == "reported":
+            packing["reported_upper_bound"]["value"] += "1"
+        elif control == "verified":
+            packing["verified_upper_bound"]["value"] += "1"
+        elif control == "source":
+            packing["reported_upper_bound"]["source_key"] = "[Kingbird]"
+        elif control == "count":
+            packing["n"] = 69
+        elif control == "replay":
+            packing["verified_upper_bound"]["evidence"] = []
+        elif control == "proved":
+            packing["status"] = "proved"
+        else:
+            packing["reported_upper_bound"]["algebraic_source"] = "contact-system"
+        assert _build(68, packing)["state"] == "numeric-only", control
+    for n in (29, 55, 71, 105):
+        assert _build(n)["state"] == "numeric-only", n
+    existing = copy.deepcopy(exact.load_packing(5))
+    existing["verified_upper_bound"]["exact_form"] = "1/2"
+    assert _build(5, existing) == _build(5)
+    degree_only = copy.deepcopy(exact.load_packing(68))
+    degree_only["reported_upper_bound"]["algebraic_degree"] = 3
+    assert _build(68, degree_only)["state"] == "degree-only"
+
+
+VERIFIED_FALLBACK_COUNTS = (
+    68,
+    102,
+    103,
+    106,
+    110,
+    131,
+    132,
+    152,
+    156,
+    172,
+    177,
+    181,
+    182,
+    206,
+    210,
+    211,
+    228,
+    240,
+    241,
+    259,
+    268,
+    269,
+    270,
+    271,
+    272,
+    273,
+    292,
+    297,
+    301,
+    304,
+    305,
+    306,
+    307,
+)
+
+
+def test_all_verified_rationals_keep_ideal_routes_and_share_one_packet_scan(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    scans = []
+    scan = exact.evand.receipt_problems
+
+    def counted_scan() -> list[str]:
+        scans.append(True)
+        return scan()
+
+    monkeypatch.setattr(exact.evand, "receipt_problems", counted_scan)
+    inputs = exact.VerifiedRationalInputs()
+    for n in VERIFIED_FALLBACK_COUNTS:
+        packing = exact.load_packing(n)
+        entry = exact.build_entry(
+            n,
+            packing,
+            exact.catalogue_entries().get(n),
+            exact.kkt_rows().get(n),
+            verified_inputs=inputs,
+        )
+        assert entry["state"] == "rational", n
+        assert entry["exact_form"] == packing["verified_upper_bound"]["exact_form"], n
+        assert entry["status"] == packing["status"] == "open", n
+        assert entry["side"]["value"] == packing["reported_upper_bound"]["value"], n
+        assert entry["lower"]["value"] == packing["verified_lower_bound"]["value"], n
+        assert any(
+            note["kind"] == "route" and "ideal contact" in note["text"]
+            for note in entry["notes"]
+        ), n
+    assert len(scans) == 1
+    # A later build must re-read proof inputs rather than reuse a saved verdict.
+    assert _build(68)["state"] == "rational"
+    assert len(scans) == 2
+
+
+def test_a_verified_rational_requires_matching_formal_evidence(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    packing = exact.load_packing(68)
+    evidence = copy.deepcopy(
+        exact.VerifiedRationalInputs().evidence_row(
+            68,
+            "E-evand-exact-optima-2026-10-05-exact-replay",
+            exact.KKT_KEY,
+        )
+    )
+    for field, value in (
+        ("claim", "lower-bound"),
+        ("source_key", "[Kingbird]"),
+        ("scope", {"n_values": [69]}),
+        ("assurance", "numerically-checked"),
+        ("method", "numerical-f64"),
+        ("replay_status", "failed"),
+        ("replay", ""),
+        ("certificate", "witnesses/wrong-source"),
+    ):
+        bad = {**evidence, field: value}
+        (tmp_path / "evidence.yaml").write_text(json.dumps({"evidence": [bad]}))
+        with monkeypatch.context() as control:
+            control.setattr(exact, "FRONTIER", tmp_path)
+            _refused(lambda: _build(68, packing), "verified rational bound refused")
+
+
+def test_native_rational_admission_refuses_missing_and_stale_replays(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    receipt = json.loads(exact.read_retained_text(exact.evand.FIRST_PARTY_RECEIPT))
+    missing = tmp_path / "missing.json"
+    with monkeypatch.context() as control:
+        control.setattr(exact.evand, "FIRST_PARTY_RECEIPT", missing)
+        _refused(lambda: _build(68), "verified rational bound refused")
+    for change in ("digest", "side", "failed", "source", "count"):
+        bad = copy.deepcopy(receipt)
+        row = next(row for row in bad["rows"] if row["n"] == 68)
+        if change == "digest":
+            row["sha256"] = "0" * 64
+        elif change == "side":
+            row["side"] = "1/2"
+        elif change == "failed":
+            row["exact_verify"]["passed"] = False
+        elif change == "source":
+            bad["source"] = "https://example.invalid/another-source"
+        else:
+            row["n"] = 69
+        path = tmp_path / f"{change}.json"
+        path.write_text(json.dumps(bad))
+        with monkeypatch.context() as control:
+            control.setattr(exact.evand, "FIRST_PARTY_RECEIPT", path)
+            _refused(lambda: _build(68), "verified rational bound refused")
+    source = json.loads(exact.read_retained_text(exact.evand.SOURCE_REPLAY_RECEIPT))
+    next(row for row in source["rows"] if row["n"] == 68)["verify_cert"]["exit_status"] = 1
+    path = tmp_path / "source-failed.json"
+    path.write_text(json.dumps(source))
+    with monkeypatch.context() as control:
+        control.setattr(exact.evand, "SOURCE_REPLAY_RECEIPT", path)
+        _refused(lambda: _build(68), "verified rational bound refused")
+
+
+def test_native_rational_admission_refuses_changed_and_missing_certificates(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    original = exact.evand.certificate_path
+    text = original(exact.evand.CERTS, 68).read_text()
+    for name, content in (("changed.cert", text + "\n"), ("missing.cert", None)):
+        path = tmp_path / name
+        if content is not None:
+            path.write_text(content)
+        with monkeypatch.context() as control:
+            control.setattr(
+                exact.evand,
+                "certificate_path",
+                lambda directory, n, path=path: path if n == 68 else original(directory, n),
+            )
+            _refused(lambda: _build(68), "verified rational bound refused")
+
+
+def test_a_matching_display_cannot_replace_the_native_side_or_packet_ceiling() -> None:
+    for n in (68, 292):
+        packing = copy.deepcopy(exact.load_packing(n))
+        value = packing["reported_upper_bound"]["value"] + "1"
+        packing["reported_upper_bound"]["value"] = value
+        packing["verified_upper_bound"].update(value=value, exact_form=str(Fraction(value)))
+        _refused(
+            lambda n=n, packing=packing: _build(n, packing), "verified rational bound refused"
+        )
+
+
+def test_a_packet_ceiling_requires_the_original_certificate_receipt(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = exact.upper_bound_packets.FRANCISCOUZO
+    receipts = exact.upper_bound_packets.certification(source)
+    for field, value in (
+        ("stored_sha256", "0" * 64),
+        ("exact_form", "1/2"),
+        ("n", 291),
+        ("independent", {"verification_passed": False}),
+    ):
+        bad = copy.deepcopy(receipts)
+        bad[292][field] = value
+        with monkeypatch.context() as control:
+            control.setattr(
+                exact.upper_bound_packets, "certification", lambda _source, bad=bad: bad
+            )
+            _refused(lambda: _build(292), "verified rational bound refused")
+
+
+def test_a_packet_ceiling_refuses_missing_replays_and_changed_certificates(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    source = exact.upper_bound_packets.FRANCISCOUZO
+    read = exact.upper_bound_packets.read_retained_text
+    with monkeypatch.context() as control:
+        control.setattr(
+            exact.upper_bound_packets,
+            "read_retained_text",
+            lambda path: (
+                read(tmp_path / "missing.json") if path == source.certification else read(path)
+            ),
+        )
+        _refused(lambda: _build(292), "verified rational bound refused")
+    certificate = source.certificate(292)
+    original = Path.read_bytes
+    changed = gzip.compress(gzip.decompress(original(certificate)) + b"\n", mtime=0)
+    for replacement in (None, changed):
+
+        def read_certificate(path: Path, replacement: bytes | None = replacement) -> bytes:
+            if path != certificate:
+                return original(path)
+            if replacement is None:
+                raise FileNotFoundError("missing ceiling certificate")
+            return replacement
+
+        with monkeypatch.context() as control:
+            control.setattr(Path, "read_bytes", read_certificate)
+            _refused(lambda: _build(292), "verified rational bound refused")
+
+
 def test_a_perturbed_coefficient_in_a_derived_record_is_refused() -> None:
     packing = copy.deepcopy(exact.load_packing(5))
     assert packing["reported_upper_bound"]["algebraic_source"] == "derived-from-exact-form"
@@ -297,9 +585,12 @@ def test_a_fractional_degree_one_side_is_rational_not_integer() -> None:
 def test_a_superseded_catalogue_polynomial_is_a_note_not_the_side() -> None:
     entry = _build(102)
     assert exact.catalogue_entries()[102].minimal_polynomial is not None
-    assert entry["state"] == "numeric-only"
-    assert entry["polynomial"] is None
-    assert entry["checks"]["irreducible"] is None
+    assert entry["state"] == "rational"
+    assert entry["polynomial"]["coefficients"] != [
+        str(c)
+        for c in normalized_polynomial(exact.catalogue_entries()[102].minimal_polynomial or "")
+    ]
+    assert entry["checks"]["irreducible"]["method"] == "linear"
     (note,) = [n for n in entry["notes"] if n["kind"] == "superseded-catalogue-polynomial"]
     assert note["degree"] == 8
     assert exact.catalogue_entries()[102].side_decimal in note["text"]
@@ -414,7 +705,7 @@ def test_every_numeric_only_count_names_its_route_and_bead() -> None:
         assert routes[0]["bead"], n
         if "No exact KKT point" in routes[0]["text"]:
             without_kkt_point.append(n)
-    assert without_kkt_point == [105, 177, 211, 272, 292]
+    assert without_kkt_point == [105]
     assert _entries()[29]["notes"][0]["bead"] == "think-je8y"
     assert _entries()[83]["notes"][0]["kind"] == "missing-polynomial-text"
 
