@@ -146,6 +146,67 @@ lane, confirming record integration, current generated consumers and exact-head 
 gates remain open. No confirmation or publication-ready disposition follows from this
 review alone.
 
+## Full Production Integration
+
+**Decision: accepted.** This dated addendum closes the source, actual-native-result and
+private-worker custody prerequisites for preparing the confirming record layer.
+It supersedes the earlier statement that the actual worker had not run.
+The confirmation adapter, proposed records and their final hosted checks still require
+separate review; this addendum does not mark that future layer ready.
+
+**G1, closed: complete finite-feasibility evidence.** The preceding review maps the
+complete seventeen-source acquisition and all 51 actual jobs to the retained rational
+inputs, both native results and full-roster duplicate/outside controls.
+Those jobs completed in 255.693 seconds.
+Their complete raw artifacts and deciding aggregate remain unchanged.
+The mapped claim is `E-gupta-438-exact-feasibility`: finite feasibility for the fourteen
+selected rational constructions.
+The three withdrawn cases remain in the source and control scope, without
+selected-upper-bound credit.
+No new geometric replay is claimed by this addendum.
+
+**G2, closed: actual production custody.** Hosted
+[run 37773892849](https://github.com/jlevy/squares/actions/runs/37773892849),
+[job 113299852249](https://github.com/jlevy/squares/actions/runs/37773892849/job/113299852249),
+ran `test_gupta_complete_sources_survive_native_worker_boundaries` successfully.
+Its JUnit receipt records a 15.224-second call, and the completed shard reports 2,426
+passed and 107 skipped tests.
+The transaction uses the actual shared copier, admits all seventeen sources, 3,017
+poses, 51 stored native jobs and fourteen linked houses, and checks all four complete
+ordinary private inputs byte-for-byte.
+Native-verdict, complete-input, original-certificate and comparator mutants are refused
+and restored; current-owner reads and producer escape refusals remain active.
+The child explicitly forbids geometric deciders.
+This is actual custody and refusal evidence, distinct from the earlier native execution
+and from compiling an emitted child.
+
+**G3, closed: capacity and measured lane.** The actual custody source measured
+199,749,734 bytes against the unchanged 201,326,592-byte cap.
+The reviewed consumer and measured-marker successor measures 199,751,988 bytes.
+The complete transaction moves intact to the slow behavioral lane on its observed
+15.224-second call; the 12-second fast-call ceiling, 45-second child deadline, full
+input roster, assertions, mutations and restorations remain unchanged.
+Independent peer review confirmed that the scientific inputs, complete deciding results
+and retained history did not change through the serialization, consumer and lane
+repairs.
+
+These accepted observations permit a separately reviewed V3/C3 finite-upper-bound
+proposal under the project’s retained-execution rules.
+The two deciding routes and their declared shared source and components must remain
+explicit; the custody reader is a premises checker.
+AI review supplies no human oversight, V4/C4 or formalization.
+The proposal must preserve all lower bounds, earlier records and history, all seventeen
+source cases and all three withdrawals.
+Optimizer, rigidity, priority, novelty and global optimality remain outside the accepted
+claim.
+
+The external import evidence directory retains `root-gupta-actual-custody-review.json`
+and `gupta-consumer-screen-marker-peer-bc2639c6.json`, together with the actual shard
+log and JUnit artifact 11549092772. These identify observed execution and independent
+review; no program or verdict is admitted by a Git identity, checksum or this decision
+marker alone. The confirming writer must still freshly validate the complete scientific
+inputs and retained history before its first write.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
