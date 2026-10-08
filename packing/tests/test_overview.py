@@ -5556,14 +5556,15 @@ def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     render_overview.write_site(tmp_path, files)
     assert sorted(
         path.relative_to(tmp_path).as_posix() for path in tmp_path.rglob("*.html")
-    ) == [
-        "404.html",
-        "index.html",
-        "papers/n11-lower-bounds-explainer.html",
-        "result/t-001.html",
-        "result/t-117.html",
-        "result/t-118.html",
-    ]
+    ) == sorted(
+        [
+            "404.html",
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "result/t-001.html",
+            *(row.path for row in site_urls.load_registry() if row.status == "withdrawn"),
+        ]
+    )
     assert (tmp_path / "result" / "t-001.html").read_text(encoding="utf-8") == "<p>one</p>\n"
     monkeypatch.setattr(render_overview, "render_all", lambda: files[:1])
     monkeypatch.setattr(render_overview, "result_fragments", lambda: files[1:])
@@ -5611,22 +5612,27 @@ def test_a_result_row_popover_is_the_same_panel_in_both_tables(
     overview: overview_data.Overview,
 ) -> None:
     """A result's popover is the same panel on both pages, a card's: the id as its caps
-    label and the summary as its headline. It has no button on either: the row pressed
-    is the result's row, and a button from the overview's table to the same row of the
-    results page's would lead nowhere new."""
-    result = overview_sections.recent_results(overview)[0]
-    target = f"pop-result-{result.id.lower()}"
-    away = _row_popover(overview_sections.recent_table(overview), target)
-    here = _row_popover(overview_sections.results_table(overview), target)
-    face = overview_sections.headline_math_face(overview_sections.tex_bounds(result.summary))
-    for panel in (away, here):
-        assert f'<span class="site-card-label">{result.id}</span>' in panel
-        assert f'<p class="site-popover-value"{face} id="{target}-title">' in panel
-        assert 'popovertargetaction="hide" aria-label="Close">' in panel
-    assert ACTION.findall(away)
-    assert ACTION.findall(here)
-    assert "in the results table" not in away
-    assert away == here
+    label and the summary as its headline. Every statically selected recent row opens
+    the same complete-record link, close control and panel in both tables."""
+    entries = _recent_entries(overview)
+    assert entries
+    recent_table = overview_sections.recent_table(overview)
+    results_table = overview_sections.results_table(overview)
+    for result in entries:
+        target = f"pop-result-{result.id.lower()}"
+        away = _row_popover(recent_table, target)
+        here = _row_popover(results_table, target)
+        face = overview_sections.headline_math_face(
+            overview_sections.tex_bounds(result.summary)
+        )
+        for panel in (away, here):
+            assert f'<span class="site-card-label">{result.id}</span>' in panel
+            assert f'<p class="site-popover-value"{face} id="{target}-title">' in panel
+            assert 'popovertargetaction="hide" aria-label="Close">' in panel
+        assert ACTION.findall(away)
+        assert ACTION.findall(here)
+        assert "in the results table" not in away
+        assert away == here
 
 
 def test_a_row_detail_escapes_its_words_and_keeps_its_html() -> None:
@@ -6241,7 +6247,11 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     assert {"explainer.html", "n11-optimality/index.html"} < set(moved)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     crawl, crawl_assets = site_urls.crawl_files()
-    assert set(crawl) == {"404.html", "sitemap.xml", "result/t-117.html", "result/t-118.html"}
+    assert set(crawl) == {
+        "404.html",
+        "sitemap.xml",
+        *(row.path for row in site_urls.load_registry() if row.status == "withdrawn"),
+    }
     assert sorted(
         path.relative_to(tmp_path).as_posix() for path in tmp_path.rglob("*") if path.is_file()
     ) == sorted(
