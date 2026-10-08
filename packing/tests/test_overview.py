@@ -3004,16 +3004,6 @@ def test_the_prose_links_repository_files_on_main(page: str) -> None:
 
 
 @pytest.fixture(scope="module")
-def result_bodies() -> dict[str, str]:
-    """Render complete result bodies during setup, before per-test monkeypatches.
-
-    Each preview still renders afresh; its complete context comes from the same
-    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
-    """
-    return site_renders.result_bodies()
-
-
-@pytest.fixture(scope="module")
 def overview() -> overview_data.Overview:
     return site_renders.overview()
 
