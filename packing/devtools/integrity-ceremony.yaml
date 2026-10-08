@@ -25,6 +25,9 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/check_n17_case_preserving_owned_propagation.py
+    kind: generated-artifact
+    boundary: The three accepted generated two-case receipts bind the exact regional cases and baseline before fresh propagation; source and commit checksums do not decide acceptance.
   - path: packing/devtools/check_n17_n11_envelope_windows.py
     kind: generated-artifact
     boundary: Generated cover, partition and small n11 replay receipts bind finite window premises; the curated theorem registry is identified by its Git revision and path rather than a source checksum.
