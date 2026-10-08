@@ -5,7 +5,7 @@ title: "Session184: complete owed full current-source checkpoint certification"
 kind: task
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
 delegate: claude-code@spud10.local
 labels: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T16:13:12.125Z
-updated_at: 2026-10-07T22:15:51.051Z
+updated_at: 2026-10-08T05:53:48.697Z
 started_at: 2026-10-07T16:40:33.112Z
 ---
 Complete the owed FULL current-source Session184 research checkpoint after final records/source freeze. Preserve the actual isolated ordinary101-step run at predecessor969588d09, its exact selection, failures/skips and source coverage; no whole final-source PASS may be inferred from it. The original negative-control step had37 false failures because PACKING_PROJECT_ROOT leaked into private snapshots; clean262d4a447 scoped unchanged37 reconciliation fired all37 and passed112.6144s, but this repairs only that documented selection.
@@ -36,3 +36,9 @@ See github.com/jlevy/practical-prose and review guidelines before editing.
 The retained checkpoint at0adfe completed101 selected steps in3402.14s:95PASS/5FAIL/1SKIP, exhaustive61PASS andslow175PASS. Compact evidence:packing/campaign/agent-sessions/session-185-frozen-full-checkpoint.json. Cross-worktree import mismatches, Maccontactshade/census, Taylor bytepin drift, and subprocess timing still need scoped diagnosis; record/guard defects have later focused fixes.
 External engine-path probe repair accepts explicit resolvedbinary and preserves oracle/tolerances: author8controlsPASS5.88s/staticszero, independentJUnit8assertionsPASS4.585s but peer wholecommand hung after tests and terminated143/INCOMPLETE. No real productionprobe or fullcurrentPASS follows. Terminal localpush tier reached240s ceiling/exit124/0stepverdicts; scopedargvabsence only, whole-descendantcleanup unproved.
 Final Session185 stopped explicitlyUNCERTIFIED with next_action/certification_pending boththink-7hy3. Required65dbCI passed; intervening8ae1 failedonlystaleledger; final6950generatedviews corrected/directchecked, exactfinalCI trackedonPR404. Preserve all failed/incomplete receipts; repair named causes only; do not weaken bytepins, proof criteria or coverage. Mathematicalregional-lift98mg, coverageoptimizationui2y and independentnormalizationreviewnvkf proceed in parallel in a future authorized block.
+
+Session186 finalization05:53 source9fec: full3600s checkpoint UNLAUNCHED after source/hook and disk/latest-start constraints. Earlier sourcepush955.75s failed and ownedbroadpytest terminated; currentfocused CIrepairs yielded9fecA/B/Dgreen,CsoleREADMEindexfailure,andvalidate95.85s onlyREADME/expiredphase11. Both repairedinworkingtree; latesthostCIwillbecheckedafterfinalseal. Localselected120pushlauncherREFUSED Operationnotpermitted/nochildstep/unknowncleanup; separate90recordsattemptINCOMPLETE90.0526s/normalownedcleanuptrue/zero observedstepverdicts. All originalreceipts preserved; no replacementfullPASS. Futureguardthink-b0ef, LPdvcs and native410adoptionkk7w proceedbeside thiscertification debt; preserveexistingownerandstandingSession184/185requirements.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

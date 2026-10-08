@@ -5,13 +5,13 @@ title: "n17: gate PR410 native verifier and establish ordinary-U full parity bef
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-08T05:50:52.317Z
-updated_at: 2026-10-08T05:50:52.317Z
+updated_at: 2026-10-08T05:53:01.407Z
 ---
 ---
 title: PR410 Integration Review for the n17 Continuation
@@ -158,3 +158,7 @@ admission or global bound is accepted by this review.
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
+
+## Notes
+
+Astra final planning review: ordinary-U full TailA/B parity is ready to prepare in parallel with snapshot selection repair once reviewed native build/test setup, external storage, immutable input custody and bounded execution are ready. Neither the unpublished215MB corpus nor broad September rx6p redesign blocks that pilot. Adoption completion still requires current PR snapshot failure resolved, bounded kernel-native CI wired and passing, successful full parity and refusal/EOF/closure-owner controls. No current build, test, replay, speedup or assurance promotion is claimed.
