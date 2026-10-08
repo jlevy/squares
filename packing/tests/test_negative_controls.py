@@ -1515,6 +1515,7 @@ def test_gupta_worker_program_compiles() -> None:
     compile(_gupta_worker_program(), "gupta-custody-child", "exec")
 
 
+@pytest.mark.slow
 def test_gupta_complete_sources_survive_native_worker_boundaries(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
