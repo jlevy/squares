@@ -1,0 +1,40 @@
+{
+  "assets": {
+    "papers/exact-side-values-browser.js": 18826,
+    "papers/exact-side-values-data/index.json": 261466,
+    "papers/exact-side-values.html": 45140
+  },
+  "candidate_bytes": 325432,
+  "candidate_fraction": 0.06762952721550647,
+  "control_bytes": 4811981,
+  "coverage": {
+    "coefficient_vectors": 445,
+    "current": 324,
+    "historical": 162,
+    "integer_coefficients": 5535
+  },
+  "exclusions": "clicked metadata/coefficient files and archives; no latency claim",
+  "maximum_fraction": 0.25,
+  "metric": "initial_raw_bytes",
+  "passes_acceptance": true,
+  "provenance": {
+    "candidate": "/Volumes/spud-ext1/agent-source/polynomial-catalogue-01a118e4/packing/site/papers/exact-side-values.html",
+    "command": [
+      "/Volumes/spud-ext1/agent-source/polynomial-catalogue-01a118e4/packing/devtools/measure_exact_catalogue_web.py",
+      "--site",
+      "site",
+      "--baseline",
+      "/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/web-baseline/exact-side-values.html",
+      "--output",
+      "/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/validation/web-initial-bytes.json"
+    ],
+    "control": "/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/web-baseline/exact-side-values.html",
+    "dirty": true,
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.7",
+    "recorded": "2026-10-08T06:44:48.281602+00:00",
+    "revision": "1d094ccb114a46d9836581c7ac8157593939817e"
+  },
+  "regime": "default unselected route; local uncompressed automatic assets and index",
+  "validity": "all original metadata and coefficient strings compare exactly"
+}
