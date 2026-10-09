@@ -1373,11 +1373,61 @@ pub fn verify(directory: &str, cells: &Cells, opt: &Options) -> Result<Value> {
     );
     Ok(receipt)
 }
-/// Write the Python-compatible formatted receipt to the requested path.
+/// Atomically replace the receipt after writing its complete Python-compatible JSON.
+///
+/// Staging is in the destination directory. This promises atomic visibility, not
+/// crash durability or preservation of destination metadata; a symlink is replaced.
 pub fn write_receipt(path: &Path, receipt: &Value) -> Result<()> {
-    if let Some(parent) = path.parent().filter(|p| !p.as_os_str().is_empty()) {
-        std::fs::create_dir_all(parent)?;
+    write_receipt_with(
+        path,
+        receipt,
+        std::io::Write::write_all,
+        |staged, destination| staged.persist(destination),
+    )
+}
+
+// Injection seams exercise partial writes and the rename boundary through the same
+// staging and cleanup path used by the CLI, without process-global fault switches.
+pub(crate) fn write_receipt_with(
+    path: &Path,
+    receipt: &Value,
+    write: impl FnOnce(&mut std::fs::File, &[u8]) -> std::io::Result<()>,
+    publish: impl FnOnce(
+        tempfile::TempPath,
+        &Path,
+    ) -> std::result::Result<(), tempfile::PathPersistError>,
+) -> Result<()> {
+    use std::io::Write;
+    let bytes = pyjson::pretty(receipt)?;
+    let directory = path
+        .parent()
+        .filter(|parent| !parent.as_os_str().is_empty())
+        .unwrap_or_else(|| Path::new("."));
+    std::fs::create_dir_all(directory)?;
+    let mut staged = tempfile::NamedTempFile::new_in(directory)?;
+    if let Err(error) =
+        write(staged.as_file_mut(), bytes.as_bytes()).and_then(|()| staged.as_file_mut().flush())
+    {
+        return receipt_publication_error(path, &error, staged.into_temp_path());
     }
-    std::fs::write(path, pyjson::pretty(receipt)?)?;
-    Ok(())
+    // Close the staged file before replacing, including on Windows.
+    match publish(staged.into_temp_path(), path) {
+        Ok(()) => Ok(()),
+        Err(error) => receipt_publication_error(path, &error.error, error.path),
+    }
+}
+
+fn receipt_publication_error(
+    path: &Path,
+    error: &std::io::Error,
+    staged: tempfile::TempPath,
+) -> Result<()> {
+    let context = format!("cannot publish receipt {}: {error}", path.display());
+    let staging_path = staged.display().to_string();
+    match staged.close() {
+        Ok(()) => Err(malformed(context)),
+        Err(cleanup) => Err(malformed(format!(
+            "{context}; staging cleanup failed at {staging_path}: {cleanup}"
+        ))),
+    }
 }
