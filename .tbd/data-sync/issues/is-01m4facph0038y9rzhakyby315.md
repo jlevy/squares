@@ -5,7 +5,7 @@ title: Open the hero case popover and navigate to expanded Atlas cases
 kind: feature
 status: in_progress
 priority: 1
-version: 4
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -17,10 +17,10 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-09T03:13:00.958Z
-updated_at: 2026-10-09T03:38:37.337Z
+updated_at: 2026-10-09T04:19:58.532Z
 started_at: 2026-10-09T03:14:19.707Z
 ---
-Homepage hero opens the existing case popover with an ordinary case-record link as no-JavaScript fallback. Shared case popover has separate actions for Case Record, the matching Frontier table row and the matching Atlas diagram tile, synchronized when stepping cases. Atlas case-target links fully expand the dedicated grid before scrolling to and highlighting the requested case, including cases beyond the initial100. Preserve valid relative URLs from direct case pages, no-JavaScript behavior and invalid-fragment handling. Verify hero53 plus291/324 and relevant history navigation. Coordinate with shared double-chevron convention tracked by think-hyd6.
+Homepage hero contains three native packing SVG examples in order11,26,53 (latest counts supersede17). Side by side and centered, capped width on wide screens; narrow screens fill text width with a small margin. One caption names best packings known for11,26,and53 squares. Each opens its own existing case popover and retains a canonical ordinary case-record link for noJS. Keep social preview case53 unchanged. Shared popover actions for Case Record, Frontier row and Atlas tile follow current case; Atlas target fully expands before reveal. Preserve relative URLs, noJS and history. Verify hero11/26/53 plus existing291/324 navigation; shared expansion tracked by think-hyd6.
 
 ## Notes
 
