@@ -237,6 +237,8 @@
     "packing/tests/test_golden_basins.py": 0.004,
     "packing/tests/test_green17.py": 0.375,
     "packing/tests/test_grid_symmetry_audit.py": 0.015,
+    "packing/tests/test_gupta_adoption.py": 22.924,
+    "packing/tests/test_gupta_refinement_reports.py": 3.352,
     "packing/tests/test_guzhou_r052_native.py": 15.135,
     "packing/tests/test_guzhou_r068_packet.py": 1.579,
     "packing/tests/test_guzhou_r071_packet.py": 2.076,
@@ -1032,6 +1034,31 @@
           "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr443-2026-10-09-run3.json",
           "provenance": {},
           "tests": 23
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_gupta_adoption.py",
+        "packing/tests/test_gupta_refinement_reports.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr448-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 45
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr448-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 45
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr448-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 45
         }
       ]
     }
