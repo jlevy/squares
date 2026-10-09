@@ -1793,7 +1793,9 @@ def _exhaustive_exact_tests(context: Context) -> str:
 
 
 def _soundness_perimeter(context: Context) -> str:
-    output = _module(context, "devtools.check_soundness_perimeter")
+    output = _module(
+        context, "devtools.check_soundness_perimeter", "--binary", str(_engine_path(context))
+    )
     if "skipping engine cells" in output:
         raise StepSkippedError(
             "soundness perimeter did not exercise sqsearch cells",
@@ -2092,7 +2094,9 @@ def _type_floor(context: Context) -> str:
     """
     basedpyright = _required_tool(context, "basedpyright")
     threads = _pytest_workers(context.jobs)
-    command = (basedpyright, "--threads", str(threads)) if threads > 1 else (basedpyright,)
+    command = (basedpyright, "--pythonpath", sys.executable)
+    if threads > 1:
+        command += ("--threads", str(threads))
     output = _commands(context, (command,))
     _require_text(output, "0 errors, 0 warnings, 0 notes")
     return output
@@ -2616,10 +2620,22 @@ def _derivation(context: Context) -> str:
     return output
 
 
+def _engine_path(context: Context) -> Path:
+    """Resolve the runtime artifact from cargo's configured build directory."""
+    configured = context.environment.get("CARGO_TARGET_DIR")
+    if configured is None:
+        return ENGINE
+    target = Path(configured)
+    if not target.is_absolute():
+        target = PROJECT_ROOT / "sqsearch" / target
+    return target / "release" / "sqsearch"
+
+
 def _search_engine(context: Context) -> str:
-    if not ENGINE.is_file():
+    engine = _engine_path(context)
+    if not engine.is_file():
         raise StepSkippedError("sqsearch binary is absent")
-    output = _run(context, (str(ENGINE), "--selftest"))
+    output = _run(context, (str(engine), "--selftest"))
     _require_text(output, "SELFTEST PASSED")
     if "FAIL" in output:
         raise StepFailureError(output)
@@ -2740,11 +2756,29 @@ def _rust_n17_kernel_verifier(context: Context) -> str:
     )
     tests = _run(
         child,
-        (cargo, "test", "--locked", "--release", "--all-targets", "--quiet"),
+        (
+            cargo,
+            "test",
+            "--locked",
+            "--release",
+            "--all-targets",
+            "--quiet",
+            "--",
+            "--format",
+            "pretty",
+        ),
         cwd=N17_KERNEL_CRATE,
     )
-    # Count cargo test itself, not other commands' output. The first target is the
-    # library's 22 controls; the final integration target binds the compiled world.
+    # Count cargo test itself, not other commands' output. Required receipt tests
+    # must actually pass; the final integration target binds the compiled world.
+    for name in (
+        "receipt_publication_replaces_complete_json_and_cleans_staging",
+        "receipt_publication_write_failure_preserves_old_file",
+        "receipt_publication_rename_failure_preserves_old_file",
+        "receipt_publication_refuses_directory_collision",
+    ):
+        if re.search(rf"^test tests::{name} \.\.\. ok$", tests, re.MULTILINE) is None:
+            raise StepFailureError(f"n17 kernel verifier gate requires passing {name}")
     counts = [int(count) for count in re.findall(r"test result: ok\. (\d+) passed", tests)]
     if len(counts) < 2 or counts[0] < 22 or counts[-1] < 1:
         raise StepFailureError(
@@ -3807,11 +3841,14 @@ def _n40_rigidity_bracket(context: Context) -> str:
 
 
 def _differential(context: Context) -> str:
-    if not ENGINE.is_file():
+    engine = _engine_path(context)
+    if not engine.is_file():
         raise StepSkippedError(
             "sqsearch binary is absent; differential geometry was not checked"
         )
-    return _module(context, "devtools.check_search_differential", "20000")
+    return _module(
+        context, "devtools.check_search_differential", "20000", "--binary", str(engine)
+    )
 
 
 def _run_returncode(context: Context, command: Sequence[str]) -> int:
@@ -5787,10 +5824,13 @@ def _push_test_step(base: str) -> Step:
                 # suite-configuration change, so the serial case was the whole non-exhaustive
                 # suite -- quick lane and slow lane together.
                 *_xdist_distribution(context.jobs),
-                *(
-                    ("--pool-workers", str(context.pool_workers))
+                # Explicit resource shapes need the same complementary pool lane as
+                # implicit broad pushes; otherwise each xdist worker inherits a pool.
+                "--pool-workers",
+                str(
+                    context.pool_workers
                     if context.pool_workers is not None
-                    else ()
+                    else context.inner_jobs
                 ),
             ),
         )
@@ -6145,7 +6185,7 @@ def _build_engine(context: Context, selected: Sequence[Step]) -> str:
         (cargo, "build", "--locked", "--release", "--quiet"),
         cwd=PROJECT_ROOT / "sqsearch",
     )
-    suffix = "  built sqsearch/target/release/sqsearch"
+    suffix = f"  built {_engine_path(context)}"
     return f"{output}\n{suffix}".strip()
 
 

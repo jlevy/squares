@@ -363,16 +363,22 @@ def test_the_push_step_forwards_the_distribution_both_lanes_use(
     monkeypatch.setattr(validate, "_run", capture)
     monkeypatch.setattr(validate, "_pytest_workers", lambda jobs: 7 if jobs == 1 else 1)
 
-    def context(jobs: int) -> validate.Context:
+    def context(jobs: int, inner_jobs: int) -> validate.Context:
         return validate.Context(
-            deep=False, strict=False, jobs=jobs, inner_jobs=1, environment=dict(os.environ)
+            deep=False,
+            strict=False,
+            jobs=jobs,
+            inner_jobs=inner_jobs,
+            environment=dict(os.environ),
         )
 
-    step.action(context(1))
-    step.action(context(4))
+    step.action(context(1, 3))
+    step.action(context(4, 2))
 
-    assert seen[0][-2:] == ("-n", "7"), seen[0]
+    assert seen[0][seen[0].index("-n") :][:2] == ("-n", "7"), seen[0]
     assert "-n" not in seen[1], seen[1]
+    assert seen[0][seen[0].index("--pool-workers") :][:2] == ("--pool-workers", "3")
+    assert seen[1][seen[1].index("--pool-workers") :][:2] == ("--pool-workers", "2")
     assert "--run" in seen[0]
     assert "--since" in seen[0]
 

@@ -1,0 +1,579 @@
+{
+  "all_foreign_rows_accounted": 992,
+  "census_admission_proved": false,
+  "cleanup_complete": true,
+  "criterion_met": true,
+  "declared_guard_exclusion_proved": false,
+  "exact_mathematical_payload_agreement": true,
+  "experiment": "exp-296",
+  "fresh_verification_passed": true,
+  "global_optimality_proved": false,
+  "input_byte_joins": {
+    "guard_certificate": true,
+    "guard_descriptor": true,
+    "guard_replay": true,
+    "two_child_certificate": true,
+    "two_child_replay": true
+  },
+  "maximum_sampled_current_rss_bytes_by_pid": {
+    "64436": 28737536,
+    "64438": 335708160,
+    "64560": 351830016
+  },
+  "normal_exit": true,
+  "original_endpoint_control": {
+    "all17_retained": true,
+    "conditional_endpoint_retention_required": false,
+    "family_disjoint": true,
+    "witnesses": [
+      {
+        "label": 1,
+        "owner": 0,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 2,
+        "owner": 4,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 3,
+        "owner": 6,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 4,
+        "owner": 2,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 5,
+        "owner": 1,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 6,
+        "owner": 12,
+        "row_indices": [
+          0,
+          31
+        ]
+      },
+      {
+        "label": 7,
+        "owner": 7,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 8,
+        "owner": 3,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 9,
+        "owner": 14,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 10,
+        "owner": 5,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 11,
+        "owner": 18,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 12,
+        "owner": 20,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 13,
+        "owner": 8,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 14,
+        "owner": 21,
+        "row_indices": [
+          23
+        ]
+      },
+      {
+        "label": 15,
+        "owner": 9,
+        "row_indices": [
+          0,
+          63
+        ]
+      },
+      {
+        "label": 16,
+        "owner": 13,
+        "row_indices": [
+          32
+        ]
+      },
+      {
+        "label": 17,
+        "owner": 11,
+        "row_indices": [
+          0,
+          63
+        ]
+      }
+    ]
+  },
+  "original_rows_inherited": 1056,
+  "overall_working_tree_dirty": true,
+  "owners": [
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 1,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 2,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 3,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 4,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 5,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 6,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 7,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 8,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 9,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 11,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 12,
+      "row_count": 32
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 13,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 14,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ],
+      "lost_length": "25/64",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "19/64"
+        ],
+        [
+          "3/8",
+          "33/64"
+        ],
+        [
+          "53/64",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 18,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 20,
+      "row_count": 64
+    },
+    {
+      "covered_row_indices": [],
+      "lost_length": "0",
+      "new_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "old_closed_interval_union": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "owner": 21,
+      "row_count": 64
+    }
+  ],
+  "parent_custody": {
+    "accepted_parent_premises": {
+      "all49_zero_bounds": {
+        "content_sha256": "dd18810a848d9b060c9844fbe0056e02ac5fd1ad8863a0c2ca2b96788c9679d1",
+        "json_path": "$.intervals",
+        "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"
+      },
+      "frame": {
+        "content_sha256": "eddf1317be0cb46e52d29121dd757d99846c29c04a4ce982b5b0254f3ec6f353",
+        "json_path": "$.custody.parent_replay.frame",
+        "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"
+      },
+      "full17_endpoint_geometry": {
+        "content_sha256": "8134186c0d2b81c3f5917d60f0d1f85b88075f5d620edacb06979f13d0c2d07d",
+        "json_path": "$.custody.input_control.endpoint_roster",
+        "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"
+      },
+      "other_owner_final_geometry": {
+        "content_sha256": "2eee2bb90b7407178c147ad2423d68f8122f5bbd1d998d07243bece46573c046",
+        "json_path": "$.final_state",
+        "node_sha256": "687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82",
+        "saved_node": "packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz",
+        "subset": "cells/groups excluding owner0"
+      },
+      "root": {
+        "content_sha256": "e3b6e37442b24e5e6b90aa0cae03999f3b1502ca469d6c6e4fb8861579b5c48f",
+        "json_path": "$.root",
+        "receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"
+      }
+    },
+    "compressed_sha256": {
+      "packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz": "f2a11e787dc62ae2652734d01c4fbe90fcfc3e85d66aa52b74fd8ff52a02e2f2",
+      "packing/campaign/retained/session-184-n17-numeric-cap-readiness/seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz": "d10a38b312375a21e7aec2ef77726eaa9ae3ea9d8381de9d3e979921877005f4"
+    },
+    "h290_receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json",
+    "h290_receipt_sha256": "ae51c2d231e9b40f4047741e47ff92f71ddb21bcd5d3e442d122cbca17c50a19",
+    "node_sha256": "687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82",
+    "seed_sha256": "375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d",
+    "steps": 16,
+    "typed_reference_context": {
+      "node_id": "n17-capture-pilot",
+      "step_owners": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        14,
+        18,
+        20,
+        21
+      ]
+    }
+  },
+  "phase_wall_seconds": {
+    "construction": 13.698664000025019,
+    "fresh_verification": 14.177407292008866
+  },
+  "point_contradiction_proved": false,
+  "receipt_bytes": {
+    "certificate.json": 6043686,
+    "descriptor.json": 1234,
+    "launch.json": 989,
+    "phase-execution.json": 1861,
+    "replay.json": 6043836,
+    "supervision.json": 1504
+  },
+  "returncode": 0,
+  "rss_scope": "sampled per live process in owned group; not allocation-time hardcap",
+  "schema": "n17-experiment-mechanical-summary/v1",
+  "scientific_geometry_rerun": false,
+  "scientific_source_clean": true,
+  "semantic_review": "Sole Astra actual acceptance CLEAR: exact conditional-domain restriction only; no automatic recovery/iteration.",
+  "source_commit": "65dbccbcaf07b8913ca49f9e2a899bbf5a9ebf54",
+  "status": "angle_union_restricted",
+  "supervisor_wall_seconds": 28.14246100001037,
+  "work": {
+    "generated_clipped_vertices": 0,
+    "minkowski_vertex_products": 139776,
+    "point_in_union_facet_products": 306400,
+    "region_cache_hits": 5888,
+    "region_cache_misses": 672,
+    "sweep_prospective_edge_pairs": 1082023,
+    "sweep_rows": 38,
+    "vertex_negative_rows": 954
+  }
+}

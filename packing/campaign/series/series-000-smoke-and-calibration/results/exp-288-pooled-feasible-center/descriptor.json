@@ -1,0 +1,15 @@
+{
+  "schema": "n17-pooled-feasible-center-context/v1",
+  "union_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/descriptor.json",
+  "union_descriptor_sha256": "60695551b20e1afdfaebbe4d35cd9e53e30afd501bd9705009bc974b83982df4",
+  "union_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/certificate.json",
+  "union_certificate_sha256": "806cd97871fc6fc6fb489260391c2f94b595f19042ca74e09a042b429e445166",
+  "union_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/replay.json",
+  "union_replay_sha256": "c849c7b0326ce3faa2f97cc60a6e3162bf273ac3f7cbab29d99f136477eda9c2",
+  "witness_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/descriptor.json",
+  "witness_descriptor_sha256": "37f3371ebb7e7b9b4b2e7da9bfc86a169c55c8a851d0731e57fdcd1ea022ddd7",
+  "witness_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/certificate.json",
+  "witness_certificate_sha256": "f229adb0ecc4e8a11beb06e24e67204ea3f583c53e63cd2fc3ff1712b2e4d7bb",
+  "witness_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/replay.json",
+  "witness_replay_sha256": "cb5aa3be678eda1dd877528273385883c42a051fc1d044d40ad3b62e497b2104"
+}

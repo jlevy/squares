@@ -1,0 +1,98 @@
+{
+  "schema": "n17-tail-replication-admission-summary/v1",
+  "experiment": "exp-274",
+  "current_certified": {
+    "admitted": 60,
+    "endpoint_survives": true,
+    "orbits": 4683,
+    "surviving_states": 36768
+  },
+  "previous_certified": {
+    "admitted": 59,
+    "endpoint_survives": true,
+    "orbits": 4684,
+    "surviving_states": 36776
+  },
+  "delta": {
+    "admitted": 1,
+    "orbits_excluded": 1,
+    "states_excluded": 8
+  },
+  "selected_mask": 3096315,
+  "full_standing_counts": {
+    "collision_facet_checks": 34004964,
+    "collision_regions": 5791,
+    "cover_checks": 1728,
+    "partner_rows": 26762,
+    "rows_full": 1728,
+    "seed_points": 10,
+    "seed_rows": 1088,
+    "steps": 27
+  },
+  "canonical_identities": {
+    "seed_sha256": "b9d072687d39cc3cc6d3670be61eec2755587139235dd93c72ece0ba66ce59f2",
+    "node_sha256": "2098d790374d452c3b3c35684beea54b72215640d52fd0e12f06f8134b6d83b6"
+  },
+  "closure": {
+    "kind": "all_parent_poses_forbidden",
+    "owner": 11,
+    "step": 26
+  },
+  "source_receipts": {
+    "census": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/current-census.json",
+      "schema": "n17-certified-census/v1",
+      "ledger": "packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml",
+      "provenance": {
+        "dirty": false,
+        "files": {
+          "packing/devtools/census_n17_certified.py": "923813b6ccb71f5092bd81d117d613082724b398"
+        },
+        "ledger": {
+          "dirty": true,
+          "files": {
+            "packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml": "a4c2ee00fcaaf5771461cce32f0ba0e7d063cae4"
+          },
+          "revision": "5694a21f7a1201b8d115c506312b2095b5f0915c"
+        },
+        "revision": "5694a21f7a1201b8d115c506312b2095b5f0915c"
+      }
+    },
+    "independent_partition": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/current-partition.json",
+      "schema": "n17-certified-residue-stratification/v1",
+      "ledger": "packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml",
+      "provenance": {
+        "ledger": {
+          "dirty": true,
+          "files": {
+            "packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml": "a4c2ee00fcaaf5771461cce32f0ba0e7d063cae4"
+          },
+          "revision": "5694a21f7a1201b8d115c506312b2095b5f0915c"
+        },
+        "tool": {
+          "dirty": false,
+          "files": {
+            "packing/devtools/stratify_n17_certified_residue.py": "e6932c71283a791410b4815e670c9eb36493d204"
+          },
+          "revision": "5694a21f7a1201b8d115c506312b2095b5f0915c"
+        }
+      }
+    },
+    "original_standing": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/tail-b-standing-full.json"
+  },
+  "objects": {
+    "manifest": "packing/hosted/n17-session-184-tail-b.yaml",
+    "files": 2,
+    "bytes": 16840952,
+    "published": false
+  },
+  "historical_recovery": {
+    "bytes": 2167361631,
+    "certificates_not_in_place": 58,
+    "files": 204,
+    "full_recheck": "run python -m devtools.hosted_data fetch --manifest hosted/n17-x048-session-168-certificates.yaml from packing/",
+    "note": "the count rests on the committed producer and verification receipts; re-running a verifier needs the hosted certificate objects"
+  },
+  "scope": "Small retained summary of independently joined records; does not reverify geometry or establish a stratum rate/capture/global proof."
+}

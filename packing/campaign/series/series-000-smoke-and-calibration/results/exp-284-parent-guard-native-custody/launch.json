@@ -1,0 +1,41 @@
+{
+  "schema": "n17-parent-guard-owned-hull-launch/v1",
+  "started_at": "2026-10-07T14:18:42.625532+00:00",
+  "source": {
+    "revision": "ccb096d0bfc2d302ac07b412129830e8193694a8",
+    "dirty": false,
+    "files": {
+      "packing/devtools/produce_n17_conditional_owned_hull.py": "0cd5a22384835ba9d09bd089379c027e748b9407",
+      "packing/devtools/verify_n17_conditional_owned_hull.py": "70dac66c25e0e0c060b1bbc9182fec301a1738d6",
+      "packing/devtools/probe_n17_conditional_owned_hull.py": "5d0402637370f5aa7b8cd65ea3092a4f308b42e4",
+      "packing/devtools/pilot_n17_capture.py": "505c01541ac72138615b660983fe3b2d03f3cf9b",
+      "packing/devtools/check_n17_capture_checkpoint.py": "3a2b3ab60de60114323e5f12f69708370d51d1a7",
+      "packing/devtools/verify_n17_kernel_certificate.py": "526548939861b811d1be45f4f28352995434c151",
+      "packing/src/sqpack/hull_kernel/n11.py": "df3aba0a17ddc31fac1f771a0d9d9eb950a5c754",
+      "packing/src/sqpack/hull_kernel/ownership.py": "3a4c135e81014aa64750cd5ac05984bf89c0cab5",
+      "packing/src/sqpack/hull_kernel/rational.py": "c1143fb28e65efdb0f513d2b8d2cb50c33d97c6b",
+      "packing/src/sqpack/hull_kernel/induction.py": "a847b9ab1d11dd85f1fbe606afb1dc247af4a2a6",
+      "packing/src/sqpack/hull_kernel/counting.py": "3cd1b1ae5d75a007e235db34823fcd2004ded855",
+      "packing/src/sqpack/hull_kernel/__init__.py": "21b43f54fbdd95e2c48a10435edb38891f56074b",
+      "packing/src/sqpack/hull_kernel/collision.py": "e01a610c1862b411f092abdcbd942ea1aad415c1",
+      "packing/src/sqpack/hull_kernel/producer.py": "b1936977c0775ab25023e8595b6de7a649d0de5c",
+      "packing/src/sqpack/hull_kernel/sequential.py": "ac5e74cae444f6486e5f2f40f9c7579e4b1c9a6f",
+      "packing/src/sqpack/hull_kernel/frame.py": "1117fec009404ff9d4ffc1cd4f1752e1467e006b",
+      "packing/src/sqpack/hull_kernel/geometry.py": "8c60af724c1940f2dceef8b2ca7fd7f96ca46384",
+      "packing/src/sqpack/hull_kernel/sweep.py": "0f976d2b774d4a6e2252128571bce6435d0e5b77",
+      "packing/src/sqpack/hull_kernel/n17.py": "683e9361b54bb003283103fe6b716828fa13d71a",
+      "packing/src/sqpack/hull_kernel/node.py": "a8df7478b3e38a7bc8d93aa482d65a7c4c04eaff",
+      "packing/src/sqpack/hull_kernel/covers.py": "8f8ef29fda05750f31d7cefa7e2125bb8f32a581"
+    }
+  },
+  "argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/tmp/run-exp284.py"],
+  "registered_arrays": "campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/execution-manifest.json",
+  "combined_wall_seconds": 900,
+  "term_at_seconds": 900,
+  "kill_at_seconds": 910,
+  "sampled_current_rss_mib_per_process": 4096,
+  "no_retry": true,
+  "original_exp283_preserved": true,
+  "orchestration_repair": "Use standard json.loads; original283 unused retained_json.loads never reached after custody refusal."
+}
+

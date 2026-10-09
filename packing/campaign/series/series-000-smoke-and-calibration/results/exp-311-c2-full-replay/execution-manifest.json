@@ -1,0 +1,67 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "C2-FULL-unsampled",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.verify_n17_bb_certificate",
+        "/Volumes/spud-ext1/agent-scratch/n17-six-hour-01a114fb/published-C2-cache/packing/campaign/retained/session-186-n17-issue358-readiness/C2",
+        "--manifest",
+        "505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57",
+        "--progress",
+        "--output",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/full-receipt.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "2400",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/phase-execution.json"
+  ],
+  "resources": {
+    "combined_term_seconds": 2400,
+    "combined_kill_seconds": 2410,
+    "sampled_memory_mib_per_live_process": 4096,
+    "workers": 1,
+    "memory_scope": "per_live_process_in_owned_group"
+  },
+  "criterion": "ONE complete unsampled FULL C2 standing-verifier PASS, modefull, zero failures, all indexed nodes and trigonometric objects verified, closed complete tree, exact canonical manifest505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57 and original default UNIQUE_24cells. Compose ONLY with accepted310 C2HEADER_ONLYPASS and complete original-cell halfplane enclosure on identical compressed manifestd9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d. Published input acquisition must validate ALL161 roster objects112191343compressedB before replay. FULLPASS permits subsequent separately reviewed ordinary clause admission and fresh census; neither acquisition/header/sample/partial nor metadata148union can admit anything. C2 potential13orbits84states/ZERO95tail; no endpointcapture/globaloptimality claim. Stop unchanged on refusal/resource/failure.",
+  "registered_at": "2026-10-08T04:17:35.473465+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch",
+  "scope": "Acquisition and FULL use independent owned supervisors; no nested or escaped proof process group."
+}

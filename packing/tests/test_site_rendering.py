@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import io
+import json
 import math
 import re
 from collections.abc import Iterator
@@ -531,6 +532,66 @@ def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[s
         server.server_close()
 
 
+def native_frontier_failure(
+    report: dict[str, Any], *, width: int, scheme: str, javascript: bool
+) -> str:
+    """Expose the slowest retained timings only when the unchanged budget fails."""
+
+    def timings(key: str, fields: tuple[str, ...], limit: int) -> list[dict[str, Any]]:
+        rows = sorted(
+            report.get(key) or [], key=lambda row: row.get("durationMs", 0), reverse=True
+        )
+        return [{field: row.get(field) for field in fields} for row in rows[:limit]]
+
+    frames = timings(
+        "animationFrames",
+        ("startTime", "durationMs", "renderStart", "styleAndLayoutStart", "scripts"),
+        3,
+    )
+    for frame in frames:
+        scripts = sorted(
+            frame["scripts"] or [], key=lambda row: row.get("durationMs", 0), reverse=True
+        )
+        frame["scripts"] = [
+            {
+                field: str(script.get(field, ""))[:200]
+                if field in {"sourceURL", "sourceFunctionName", "invoker"}
+                else script.get(field)
+                for field in (
+                    "executionStart",
+                    "durationMs",
+                    "forcedStyleAndLayoutDurationMs",
+                    "sourceURL",
+                    "sourceFunctionName",
+                    "invoker",
+                )
+            }
+            for script in scripts[:3]
+        ]
+    return json.dumps(
+        {
+            "scenario": {"width": width, "scheme": scheme, "javascript": javascript},
+            "metrics": {
+                key: report.get(key)
+                for key in (
+                    "supported",
+                    "cls",
+                    "lcpMs",
+                    "longestTaskMs",
+                    "blockingMs",
+                    "shownMath",
+                    "unreadableMath",
+                )
+            },
+            "longTasks": timings("longTasks", ("startTime", "durationMs", "name"), 5),
+            "readabilitySamples": timings("readabilitySamples", ("startTime", "durationMs"), 3),
+            "animationFrames": frames,
+        },
+        indent=2,
+        sort_keys=True,
+    )
+
+
 @pytest.mark.parametrize(
     ("width", "scheme"), [(390, "light"), (390, "dark"), (1280, "light"), (1280, "dark")]
 )
@@ -551,7 +612,9 @@ def test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets(
         )
         assert report["shownMath"] == frontier_math_counts[1]
         assert report["unreadableMath"] == 0
-        assert check_site_rendering.problems(report, javascript=javascript) == [], report
+        assert check_site_rendering.problems(report, javascript=javascript) == [], (
+            native_frontier_failure(report, width=width, scheme=scheme, javascript=javascript)
+        )
 
 
 @pytest.mark.parametrize(
