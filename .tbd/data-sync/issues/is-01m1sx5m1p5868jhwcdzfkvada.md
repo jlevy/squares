@@ -5,7 +5,7 @@ title: The mutation-snapshot cap has 0.9% headroom and the record keeps growing
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 spec_path: docs/project/reviews/review-2026-09-29-validation-parallelism.md
 delegate: claude-code@vm
 labels: []
@@ -15,10 +15,11 @@ child_order_hints:
   - is-01m3qzn1k3708fhtrsw1mqdgvk
   - is-01m45xb9xadcds46ctgqra9aw2
   - is-01m4fzyh9p9bz01rgq7wpx4vwr
+  - is-01m4g0x7a6c93hvg68nnvxp41h
 hold: null
 hold_until: null
 created_at: 2026-09-05T23:06:30.837Z
-updated_at: 2026-10-09T09:29:45.526Z
+updated_at: 2026-10-09T09:46:31.110Z
 started_at: 2026-10-05T11:32:06.787Z
 ---
 Measured 2026-09-05 after pruning packing/site/ and the link-preview card: the snapshot is 66,490,716 bytes against a 67,108,864 cap, 99.1% of it, 618,148 bytes of headroom. SNAPSHOT_MAX_BYTES' own comment says a guard with 2% headroom fires for the wrong reason; 0.9% is worse than the case it warns about, and the next committed artifact of any size trips it.
