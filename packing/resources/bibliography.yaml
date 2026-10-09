@@ -30,6 +30,40 @@ last_reviewed: '2026-10-06'
 # not in the README's Web Sources table, so its `note` says which retained bytes they
 # were read from.
 sources:
+  - key: '[Daniel exact and local reports 2026]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo
+    lineage: independent
+    note: Issue419 reports269 exact side forms, four newly derived forms and258 source Lean feasibility
+      checks. Issue420 reports178 non-strict local minima. Retained f58a017 source metadata and Lean
+      code are reports, without an independent checker or Lean build here; source MIT licences and
+      original credits remain in the packet.
+  - key: '[squarepacker quarter-power 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    lineage: independent
+    note: >-
+      Sungjoon Ryu, quarter-power deficiency preprint v1.0, abbedcf4bba2e4053f0278e669d84966a89c8b73,
+      DOI 10.5281/zenodo.23211207. Primary paper and selected source retained in
+      web/squarepacker-k2-minus-c-quarter-2026-10-07/. The source states extensive
+      Claude (Anthropic) assistance and no human peer review. CC BY 4.0 paper, MIT code.
+  - key: '[squarepacker cube-root 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    lineage: independent
+    note: >-
+      Sungjoon Ryu, cube-root deficiency preprint v1.0, 15045f9c6b74bd52f60394b9be593ebe4fb3debc,
+      DOI 10.5281/zenodo.23212059. Primary paper and selected source retained in
+      web/squarepacker-k2-minus-c-cube-root-2026-10-07/. The source states extensive
+      Claude (Anthropic) assistance and no human peer review. CC BY 4.0 paper, MIT code.
   - key: '[Queuingtheorydotcom n11 optimality 2026]'
     authors: [Queuingtheorydotcom]
     year: 2026
@@ -495,6 +529,25 @@ sources:
       could not reach Zenodo, are kept in its zenodo/ with their digests: 23164302
       (v1.0) is tag v1.0 (0eb29d44) byte for byte, and its preprint PDF is retained;
       23165736 (v1.1) is tag v1.1; and 23165916 is the v1.1 preprint alone.
+  - key: '[squarepacker k2-minus-c v1.2 2026]'
+    authors: [Ryu]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-06'
+    credit: squarepacker after Roth, Vaughan
+    lineage: independent
+    note: >-
+      Sungjoon Ryu's version 1.2 of Packing k^2 - c unit squares, immutable tag
+      e16a5cfa7eed489ea8d84b500e590bf6855a5f2f, committed 2026-10-06T17:11:30Z,
+      DOI 10.5281/zenodo.23194031, reported in issue #368 comment 6022000514.
+      The full 78-file composition is bound in
+      web/squarepacker-k2-minus-c-v12-2026-10-06/: ten changed files retained and
+      68 byte-identical files explicitly linked to retained version 1.1 copies.
+      The source reports extensive Claude assistance and no peer review; paper
+      CC BY 4.0, code and data MIT. Its new numerical consequences are checked
+      independently, separately for nine- and thirteen-overlap routes. The
+      independent per-box labelling obligation remains think-k3tk; source custody
+      and arithmetic do not discharge it. No small-count bound is imported.
   - key: '[squarepacker s12 2026-10-05]'
     authors: [Ryu]
     year: 2026
@@ -1308,11 +1361,106 @@ sources:
       repository's README and NOTICE name; its ATTRIBUTION.md credits AI-produced research
       and Lean formalizations to an AI system, and the repository does not cite this
       project (web/chelokot-nagamochi-counterexample-2026-09-05/README.md).
+  - key: '[SQUISH ten packings 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth
+    lineage: independent
+    note: Nate Chaoweeraprasit (itsnaka), using SQUISH (SQuare-packing Using Iterative Shrink-Hopping).
+      The author credits David Ellsworth’s records and tools, including parse_svg_packing.py, and states
+      that solver, verification and issue were written with Claude Opus 5.5 under his direction, management,
+      review and steering. The repository has no LICENSE, so only derived packing facts and source metadata
+      are retained. Ten rational certificates at revision 07fe6dde1e5b67405a3076719b90e58e2882b677, committed
+      2026-10-07T02:28:19Z, in squish-submission-2026-10-06; issue jlevy/squares#401.
+  - key: '[SQUISH n153 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth
+    lineage: independent
+    note: 'Nate Chaoweeraprasit (itsnaka), using SQUISH (SQuare-packing Using Iterative Shrink-Hopping).
+      The author credits David Ellsworth’s records and tools, including parse_svg_packing.py, and states
+      that solver, verification and issue were written with Claude Opus 5.5 under his direction, management,
+      review and steering. The repository has no LICENSE, so only derived packing facts and source metadata
+      are retained. The n153 rational certificate attachment in issue #401 comment 6031977107, published
+      2026-10-07T05:59:18Z; its digest is in the packet manifest.'
+
+  - key: '[SQUISH update 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Couzo and Ellsworth
+    lineage: independent
+    note: Nate Chaoweeraprasit, using SQUISH, reports thirteen new or smaller certificates at revision
+      5e32bbd7028b6e3b869979278079cd37ed6770aa. The author names Francisco Couzo seeds at ten counts
+      and SQUISH seeds at three; per-count seed attribution is retained. David Ellsworth’s numerical checking tool is credited in the update. Human-directed Claude Opus
+      5.5 assistance is disclosed. No LICENSE is published; only attributed derived geometric facts
+      and brief claim quotations are retained. n153 is identical to the earlier attached certificate.
+
+  - key: '[SQUISH second update 2026-10-07]'
+    authors:
+    - Chaoweeraprasit
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Chaoweeraprasit after Ellsworth, Couzo and SQUISH
+    short_credit: Chaoweeraprasit after Ellsworth et al.
+    lineage: independent
+    note: 'Issue422 pins nine new or smaller rational certificates at e63e4e52b1728b6671b2f263c5e02a4aa79a39d3.
+      Author-reported seeds: Kingbird (David Ellsworth) s(41)/s(37), Couzo s(180)/s(297), and
+      SQUISH own intermediate packings. Human-directed Claude Opus5.5 coding and research assistance
+      disclosed. No root licence; only attributed derived facts and custody metadata retained.
+      Numerical squeeze does not establish rigidity or optimality.'
 # The surname each credited name is cited under, for the names `found_by` and
 # `improved_by` carry. Listed rather than derived from the last word of the name, because
 # a credit can be an organization; a name missing here fails the build instead of being
 # guessed at.
+  - key: '[Rehwaldt Couzo refinements 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at bc389ddf7d65277cd19a9b08fb285d86346d6806,
+      issue 425, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
+  - key: '[Rehwaldt n68 refinement 2026-10-07]'
+    authors:
+    - Rehwaldt
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Rehwaldt after Couzo and earlier contributors
+    lineage: independent
+    note: Seth Rehwaldt’s exact certificate refinement at fded686668e29258dad2eb29d0482fa3fd51bd6b,
+      issue 428, with OpenAI Codex assistance. No new arrangement or unrestricted optimality claim.
+      Normalized geometric facts and attributed source custody are retained; source notices assign no
+      blanket licence.
+  - key: '[Daniel new arrangements 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Levy, Ellsworth, Couzo, Stead
+    short_credit: Daniel after Levy et al.
+    lineage: builds-on-project
+    note: Issue399 supplies three complete changed rational packings at266,270,272. Pinned7eef24f source
+      MIT licences and original lineage remain retained. Exact feasibility is certified independently;
+      source arrangement novelty and local/global optimality are unestablished.
 credited_names:
+  Seth Rehwaldt: Rehwaldt
+  Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang
   David Ellsworth: Ellsworth
   David W. Cantrell: Cantrell

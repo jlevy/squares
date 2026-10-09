@@ -433,10 +433,73 @@ def repository_file_problem(path: str) -> str | None:
     try:
         target.relative_to(REPO.resolve())
     except ValueError:
-        return "resolves outside the repository"
+        return linked_repository_file_problem(path)
     if not target.is_file():
         return "does not name a file"
     return None
+
+
+def linked_repository_file_problem(path: str) -> str | None:
+    """Only separately admitted exact proof and atlas leaves may link outside."""
+    from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import refinement_house_links as refinements  # noqa: PLC0415
+    from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+    from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
+
+    # Route by lexical repository names. Each owner then checks its repository and
+    # custody; unrelated private fixtures must not inherit another owner's live root.
+    proofs = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in second.NUMBERS
+    }
+    houses = {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in house.LINK_NUMBERS}
+    if path in proofs:
+        return second.linked_certificate_problem(path, repository=REPO)
+    if path in houses:
+        return house.linked_house_problem(path, repository=REPO)
+    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in refinements.NUMBERS}:
+        return refinements.linked_house_problem(path, repository=REPO)
+    if path in {f"packing/witnesses/known-best/n-{n:03d}.yaml" for n in evand.NUMBERS}:
+        return evand.linked_house_problem(path, repository=REPO)
+    return linked_certificate_problem(path, repository=REPO)
+
+
+def repository_file_problems(paths: Iterable[str]) -> dict[str, str | None]:
+    """Check one register invocation, sharing each packet's complete linked-proof admission."""
+    from devtools import squish_followup_packets as first  # noqa: PLC0415
+    from devtools.squish_second_update_packets import NUMBERS  # noqa: PLC0415
+
+    selected = dict.fromkeys(paths)
+    declared = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in NUMBERS
+    }
+    linked = [
+        path
+        for path in selected
+        if path in declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    problems: dict[str, str | None] = {}
+    if linked:
+        from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+
+        problems.update(second.linked_certificate_problems(linked, repository=REPO))
+    first_declared = {
+        f"packing/witnesses/squish-401-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in first.RESULT_NUMBERS
+    }
+    first_linked = [
+        path
+        for path in selected
+        if path in first_declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    if first_linked:
+        problems.update(first.linked_certificate_problems(first_linked, repository=REPO))
+    problems.update(
+        (path, repository_file_problem(path)) for path in selected if path not in problems
+    )
+    return problems
 
 
 def _frontmatter(path: Path) -> dict:
@@ -1102,6 +1165,12 @@ def main() -> int:
     problems.extend(superseded_by_cycles(results))
 
     standings: dict[str, Standing] = {}
+    artifact_problems = repository_file_problems(
+        path
+        for record in results
+        for field in ("artifacts", "controls")
+        for path in record.get(field) or []
+    )
     for record in results:
         rid = record["id"]
         scope = record["scope"]
@@ -1121,7 +1190,7 @@ def main() -> int:
             problems.extend(
                 f"{rid}: {field} path {problem}: {path}"
                 for path in record.get(field) or []
-                if (problem := repository_file_problem(path))
+                if (problem := artifact_problems[path])
             )
 
         problems.extend(attribution_problems(record, sources))

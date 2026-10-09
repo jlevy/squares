@@ -53,6 +53,9 @@ Usage:
     uv run --frozen python -m devtools.run_negative_controls
     uv run --frozen python -m devtools.run_negative_controls -k bead
     uv run --frozen python -m devtools.run_negative_controls -j 1
+    uv run --frozen python -m devtools.run_negative_controls --audit-snapshot
+    uv run --frozen python -m devtools.run_negative_controls --audit-snapshot \
+        --prune-candidate packing/campaign/agent-sessions/old-output.log
 """
 
 from __future__ import annotations
@@ -80,6 +83,10 @@ from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
+from devtools import evand_arrangement_houses as evand_houses
+from devtools import refinement_house_links as refinements
+from devtools import squish_second_update_confirmation as second
+from devtools import squish_second_update_house_links as house
 from devtools.repo_scope import tracked_files
 from sqpack.workers import worker_count
 from sqpack.yamlio import safe_load
@@ -98,13 +105,81 @@ HERE = ROOT.relative_to(REPO)
 # repository, or build products. `resources/README.md` is copied separately because the
 # README link checker requires that one path. The virtualenv and cargo target are
 # symlinked back so nothing is rebuilt or resolved again.
+HOUSE_LINK_LEAVES = frozenset(
+    path.relative_to(ROOT)
+    for path in (
+        *house.snapshot_house_links(),
+        *refinements.snapshot_house_links(),
+        *evand_houses.snapshot_house_links(),
+    )
+)
+# C8 / think-rara: exact historical outputs, not their scientific input packets or
+# current producers. The read-only --audit-snapshot --prune-candidate report measured
+# 1,206,869 bytes here; inline rescue keeps 255,877, saving 950,992 in each worker.
+# No controls.yaml target or registered command mentions these paths. The X048
+# packets are opt-in replay outputs (not a source default or test input); retain the
+# J fixed-tuple certificate and B ablation packet that those tools actually consume.
+# The X049 poses predate atlas/known-best/regularized: their current generator/index,
+# original witnesses, family/shade censuses and linked run/shades receipts all stay.
+# PR127's linked README and four raw logs return; its unused per-step telemetry does
+# not. Session105 source identities stay beside the two omitted timing receipts.
+# Keep every output in Git. These exclusions affect disposable mutation copies only;
+# a new inline link or result binding still rescues the exact file automatically.
+HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
+    ROOT / relative
+    for relative in (
+        "benchmarks/results/reachable-walker-2026-09-30/comparison.json",
+        "campaign/agent-sessions/session-105-validation/fast-final-bdc28e89.json",
+        "campaign/agent-sessions/session-105-validation/push-0e766bfd.json",
+        "campaign/explorations/X048-session-177-cached-collision/receipts/profile-packet.json",
+        "campaign/explorations/X048-session-178-full-core-ablation/receipts/endpoint-packet.json",
+        "campaign/explorations/X049-families-data/regularized",
+        "campaign/series/series-000-smoke-and-calibration/results/agenda-030/pr127-checkpoint",
+    )
+)
 PRUNE = frozenset(
     {
+        second.WITNESSES,
+        *(ROOT / relative for relative in HOUSE_LINK_LEAVES),
         # The gate's own marker. A clone that carried it would make the campaign runner
         # refuse to start, and four controls drive the runner expecting a DIFFERENT
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # These five historical stdout copies have identical Git blobs to the
+        # retained scientific receipts beside them (284,187 bytes in total).
+        # No registered control reads them; omit only the duplicate output, keeping
+        # canonical receipts, primary bytes and dynamic declared-input rescue.
+        ROOT
+        / "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+        / "exp-136-stdout.json",
+        *(
+            ROOT
+            / "campaign/series/series-000-smoke-and-calibration/results/agenda-032"
+            / f"exp-{number}-stdout.jsonl"
+            for number in (140, 142, 143, 144)
+        ),
+        # Historical push telemetry has no registered worker consumer. Keep the logs
+        # in Git; linked/result dependencies are still rescued dynamically below.
+        # The exact five-file audit saves 395,235 bytes without pruning scientific
+        # receipts, native journals, facts, witnesses or review-linked push logs.
+        ROOT / "campaign/agent-sessions/session-164-push-initial.log",
+        ROOT / "campaign/agent-sessions/session-153-integrated-push.log",
+        ROOT / "campaign/agent-sessions/session-163-push-recovery.log",
+        ROOT / "campaign/agent-sessions/session-163-push-refinement.log",
+        ROOT / "campaign/agent-sessions/session-163-push-final.log",
+        # Two retained diagnostics have no mutation-control consumer, checked inline
+        # link or registered result dependency: the opt-in Session 177 cached-collision
+        # profile and exp-063's older tight-cell census. Their records and live inputs,
+        # including Session 177's J certificate and compact summary, stay in workers.
+        # These exact files total 798,416 bytes at PR #433's reviewed head; keep them in
+        # Git and let the existing link/result rescue take precedence if a use is added.
+        ROOT
+        / "campaign/explorations/X048-session-177-cached-collision/receipts"
+        / "profile-packet.json",
+        ROOT
+        / "campaign/series/series-000-smoke-and-calibration/results"
+        / "bc-201-n11-tight-cell-census.json",
         # Large, generator-owned rendering outputs are replayed by their dedicated
         # validation steps and are never mutation targets. Copying hundreds of witnesses
         # and renderings into every private worker would exceed the portable snapshot cap.
@@ -198,6 +273,9 @@ PRUNE = frozenset(
         ROOT / "atlas/known-best/known-best-1-324.png",
         ROOT / "atlas/known-best/known-best-1-324.svg",
         ROOT / "atlas/known-best/rendering",
+        # Full generated update certificates remain readable through LINK_BACK.
+        # Receipt/code mutations copy the inputs into their private temporary tree.
+        ROOT / "witnesses/squish-401-update-2026",
         # The regularized layer's 51 drawings (think-bgkz, 2026-10-02), 11 MB of generated
         # SVG that `regularized atlas drawings match their index` re-renders and compares,
         # joined on the same grounds when they took the snapshot to 204,959,999 bytes
@@ -250,6 +328,22 @@ PRUNE = frozenset(
         # register lists return through `snapshot_pruned_targets`, 3,299,132 bytes; the
         # attack folder, which a review links, comes back empty. The trace is at
         # `SNAPSHOT_MAX_BYTES`.
+        # The 7 October follow-up crossed the unchanged 192 MiB snapshot cap.
+        # These three historical validation-output roots hold timing archives,
+        # command journals and publication diagnostics, not source or control targets.
+        # General checker file traces and a finished-worker baseline/mutation replay
+        # found no consumer of their unrescued files. All linked inputs still return:
+        # four baselines pass; the schema baseline's existing missing-resource refusals
+        # are byte-identical with and without these three pruned roots.
+        # both legacy checkpoint manifests and their archives, the integrated log,
+        # the native checkpoint, the instrumentation source, and the PDF comparison
+        # pair with its report and postmortem. No ordinary replay fixture is removed.
+        # At the reviewed tree this omits 1,423,523 bytes after copy-back, leaving
+        # 200,942,507 bytes against 201,326,592; future linked or registered files are
+        # rescued by the same snapshot_pruned_targets contract.
+        ROOT / "benchmarks/validation-efficiency/runs",
+        ROOT / "benchmarks/validation-efficiency/checkpoints",
+        ROOT / "campaign/agent-sessions/session-152-validation",
         ROOT / "benchmarks/gate-cost-at-324/runs",
         ROOT / "benchmarks/measure-verifier/census",
         ROOT / "benchmarks/measure-verifier/census-mixed",
@@ -294,6 +388,13 @@ PRUNE = frozenset(
         / "campaign/series/series-000-smoke-and-calibration/results/agenda-040"
         / "one-spare-inventory-n21-orbits.json.gz",
         ROOT / "campaign/agent-sessions/session-105-validation/full-48a4544f.json",
+        # Two older fast-gate telemetry receipts have no command reader, control,
+        # inline link or registered result dependency. Keep their source-identity
+        # records and the ordinary session document; copy-back takes precedence if
+        # either receipt becomes linked or registered. These exact two files save
+        # 117,584 bytes without omitting any SQUISH proof input or changing the cap.
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-cpu4-bdc28e89.json",
+        ROOT / "campaign/agent-sessions/session-105-validation/fast-native-bdc28e89.json",
         # Agenda 024's commissioning outputs and its two manager roots are retained
         # research evidence, not mutation-control inputs. Long numerical logs and warm
         # states can grow while the gate is running; copying them into every private
@@ -482,6 +583,7 @@ PRUNE = frozenset(
         ROOT / "sqverify_exact/target",
         ROOT / "sqverify_fast/target",
         ROOT / "n17bb_native/target",
+        ROOT / "n17_kernel_verify/target",
         ROOT / "witnesses/prospective",
         # The exact certificates of T-056 and T-057 join on 2026-09-29, when their intake
         # (jlevy/squares#227) put the snapshot at 174,743,423 bytes against the
@@ -501,6 +603,14 @@ PRUNE = frozenset(
         ROOT / "witnesses/franciscouzo-2026-10-03",
     }
 )
+# Generated exact witnesses of the regularized drawing layer, independently
+# replayed by its atlas validation steps and never read by a mutation control.
+# Keep the index/view metadata and original source witnesses in every worker.
+REGULARIZED_WITNESS_PATTERN = "n-*-regularized.yaml*"
+REGULARIZED_WITNESSES = frozenset(
+    (ROOT / "atlas/known-best/regularized").glob(REGULARIZED_WITNESS_PATTERN)
+)
+PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated
@@ -537,11 +647,14 @@ BUILD_CACHES = frozenset(
     {"__pycache__", ".pytest_cache", ".ruff_cache", "dist", "node_modules"}
 )
 LINK_BACK = (
+    second.WITNESSES.relative_to(ROOT),
+    *sorted(HOUSE_LINK_LEAVES),
     Path(".venv"),
     Path("sqsearch/target"),
     Path("sqverify_exact/target"),
     Path("sqverify_fast/target"),
     Path("n17bb_native/target"),
+    "witnesses/squish-401-update-2026",
 )
 # Individual files rescued from `PRUNE` because a check that runs inside a worker reads
 # that exact path. `clone_tree` copies precisely this tuple and `snapshot_source_bytes`
@@ -573,6 +686,9 @@ LINK_BACK = (
 # closeout naming `.github/PULL_REQUEST_TEMPLATE.md`, which only a link could bring
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
+    *second.private_input_paths(),
+    *refinements.private_input_paths(),
+    *evand_houses.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",
@@ -897,7 +1013,7 @@ def _clone_into(src: Path, dst: Path) -> None:
 
 
 INLINE_LINK = re.compile(r"\]\(([^)#\s]+)\)")
-# Omitted sources a checked document may legitimately link into. `.venv` and the three
+# Omitted sources a checked document may legitimately link into. `.venv` and the five
 # cargo `target` directories are symlinked back whole, and `.gate-running` is a
 # marker, so the linked-file copy covers only the content prunes and referenced
 # workflows.
@@ -910,10 +1026,13 @@ LINKED_PRUNE_ROOTS = (
         not in {
             ROOT / ".gate-running",
             ROOT / ".venv",
+            ROOT / "witnesses/squish-401-update-2026",
+            second.WITNESSES,
             ROOT / "sqsearch/target",
             ROOT / "sqverify_exact/target",
             ROOT / "sqverify_fast/target",
             ROOT / "n17bb_native/target",
+            ROOT / "n17_kernel_verify/target",
         }
     ),
     REPO / ".github/workflows",
@@ -960,7 +1079,7 @@ def linked_pruned_directories() -> list[Path]:
     return sorted(directories)
 
 
-def linked_pruned_targets() -> list[Path]:
+def linked_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     """Omitted files the checked documents link to inline, resolved and existing.
 
     The archive and the generator-owned renderings are pruned from every worker
@@ -977,27 +1096,26 @@ def linked_pruned_targets() -> list[Path]:
     left dead for the real checker to refuse.
     """
     targets: set[Path] = set()
-    roots = frozenset(LINKED_PRUNE_ROOTS)
+    selected_roots = frozenset(LINKED_PRUNE_ROOTS if roots is None else roots)
     for document in _linked_documents():
         for raw in INLINE_LINK.findall(document.read_text(errors="ignore")):
             resolved = (document.parent / raw).resolve()
-            if resolved.is_file() and in_pruned_roots(resolved, roots):
+            if resolved.is_file() and in_pruned_roots(resolved, selected_roots):
                 targets.add(resolved)
     return sorted(targets)
 
 
-def result_pruned_targets() -> list[Path]:
+def result_pruned_targets(*, roots: Sequence[Path] | None = None) -> list[Path]:
     """Pruned files named structurally by the results register."""
     register = safe_load((ROOT / "frontier/results.yaml").read_text(encoding="utf-8"))
-    roots = frozenset(LINKED_PRUNE_ROOTS)
     targets: set[Path] = set()
-    roots = frozenset(LINKED_PRUNE_ROOTS)
+    selected_roots = frozenset(LINKED_PRUNE_ROOTS if roots is None else roots)
     for record in register["results"]:
         raw_paths = [*(record.get("artifacts") or []), *(record.get("controls") or [])]
         raw_paths.extend(review["path"] for review in record.get("reviews") or [])
         for raw in raw_paths:
             resolved = (REPO / raw).resolve()
-            if resolved.is_file() and in_pruned_roots(resolved, roots):
+            if resolved.is_file() and in_pruned_roots(resolved, selected_roots):
                 targets.add(resolved)
     return sorted(targets)
 
@@ -1007,23 +1125,45 @@ def snapshot_pruned_targets() -> list[Path]:
     return sorted({*linked_pruned_targets(), *result_pruned_targets()})
 
 
-def snapshot_source_bytes() -> int:
-    """Bytes copied by the portable fallback, excluding build products and caches."""
-    total = sum(path.stat().st_size for path in (*COPY_SEPARATELY, *root_files()))
-    total += sum(target.stat().st_size for target in snapshot_pruned_targets())
+def snapshot_copy_targets() -> tuple[Path, ...]:
+    """Copy each declared private path once, preserving distinct path aliases.
+
+    A full scientific input can be explicitly carried and separately rescued by its
+    result registration. Both names identify the same destination; copying it twice
+    repeats I/O and counts bytes that are overwritten, rather than additional source.
+    This roster is rebuilt on every invocation and admits no source validity cache.
+    """
+    return tuple(dict.fromkeys((*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())))
+
+
+def snapshot_duplicate_copy_bytes() -> int:
+    """Bytes of repeated writes to identical named destinations at this invocation."""
+    paths = (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+    return sum(path.stat().st_size for path in paths) - sum(
+        path.stat().st_size for path in dict.fromkeys(paths)
+    )
+
+
+def snapshot_source_paths() -> list[Path]:
+    """Actual copied source destinations, excluding build products and caches.
+
+    Explicit and dependency-rescued paths share the copier's unique named roster;
+    repeated declarations do not add another physical file to the worker.
+    """
+    paths = list(snapshot_copy_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
             # `.agents` carries a Python file (`skills/experiment-loop/assets/ledger.py`),
             # so this glob can reach a `__pycache__` the moment anything runs it. It holds
             # none today; the exclusion is here so the count does not start drifting on
             # the day something does.
-            total += sum(
-                path.stat().st_size
+            paths.extend(
+                path
                 for path in document.rglob("*")
                 if path.is_file() and not _inside_build_cache(path, below=document)
             )
         elif document.is_file():
-            total += document.stat().st_size
+            paths.append(document)
     for directory, names, files in os.walk(ROOT):
         parent = Path(directory)
         names[:] = [
@@ -1033,8 +1173,222 @@ def snapshot_source_bytes() -> int:
             path = parent / name
             if path in PRUNE or path.is_symlink():
                 continue
-            total += path.stat().st_size
-    return total
+            paths.append(path)
+    return paths
+
+
+def snapshot_source_bytes() -> int:
+    """Bytes copied by the portable fallback, excluding build products and caches."""
+    return sum(path.stat().st_size for path in snapshot_source_paths())
+
+
+def snapshot_audit(
+    candidates: Sequence[Path] = (), *, spec_path: Path = ROOT / "devtools/controls.yaml"
+) -> dict[str, object]:
+    """Read-only byte inventory and proposed prune savings after dependency rescue.
+
+    Command mentions are exact path references, not a claim about transitive readers.
+    Inspect the registered consumers before adopting a candidate; this mode never
+    changes PRUNE, copies source, or runs a control. Candidates overlapping an
+    unconditional copy route are refused: PRUNE only controls the packing tree walk.
+    """
+    proposed = tuple(sorted({(REPO / path).resolve() for path in candidates}))
+    for path in proposed:
+        if not path.is_relative_to(REPO) or not path.exists():
+            raise ValueError(f"prune candidate must exist inside the repository: {path}")
+    if proposed:
+        unconditional = (
+            ("COPY_SEPARATELY", COPY_SEPARATELY),
+            ("root_files", root_files()),
+            ("ROOT_DOCUMENTS", ROOT_DOCUMENTS),
+        )
+        for candidate in proposed:
+            for route, targets in unconditional:
+                for target in targets:
+                    copied = target.resolve()
+                    if copied.exists() and (
+                        candidate.is_relative_to(copied) or copied.is_relative_to(candidate)
+                    ):
+                        retained = (
+                            copied.relative_to(REPO).as_posix()
+                            if copied.is_relative_to(REPO)
+                            else copied.as_posix()
+                        )
+                        raise ValueError(
+                            f"prune candidate {candidate.relative_to(REPO).as_posix()} "
+                            f"overlaps {route} path {retained}, which clone_tree copies "
+                            "regardless of PRUNE; choose a candidate outside that copy "
+                            "route or change its copier first"
+                        )
+    paths = snapshot_source_paths()
+    sizes = {path: path.stat().st_size for path in paths}
+    roots = (*LINKED_PRUNE_ROOTS, *proposed)
+    linked = set(linked_pruned_targets(roots=roots))
+    registered = set(result_pruned_targets(roots=roots))
+    records = safe_load(spec_path.read_text(encoding="utf-8"))["controls"]
+
+    def rows(selected: Sequence[Path] | set[Path]) -> list[dict[str, object]]:
+        return [
+            {"path": path.relative_to(REPO).as_posix(), "bytes": path.stat().st_size}
+            for path in sorted(selected, key=lambda path: (-path.stat().st_size, path))
+        ]
+
+    reports = []
+    for candidate in proposed:
+        below = frozenset((candidate,))
+        copied = [path for path in paths if in_pruned_roots(path, below)]
+        linked_here = {path for path in linked if in_pruned_roots(path, below)}
+        registered_here = {path for path in registered if in_pruned_roots(path, below)}
+        rescued = linked_here | registered_here
+        mentions = []
+        for record in records:
+            target = (ROOT / record["file"]).resolve()
+            tokens = (candidate.relative_to(REPO).as_posix(),)
+            if candidate.is_relative_to(ROOT):
+                tokens += (candidate.relative_to(ROOT).as_posix(),)
+            if in_pruned_roots(target, below) or any(
+                token in record["run"] for token in tokens
+            ):
+                mentions.append({"name": record["name"], "run": record["run"]})
+        reports.append(
+            {
+                "path": candidate.relative_to(REPO).as_posix(),
+                "currently_copied_bytes": sum(sizes[path] for path in copied),
+                "inline_rescue": rows(linked_here),
+                "result_rescue": rows(registered_here),
+                "net_saved_bytes": sum(sizes[path] for path in copied if path not in rescued),
+                "registered_mentions": mentions,
+            }
+        )
+    total = sum(sizes[path] for path in paths)
+    saved = sum(
+        sizes[path]
+        for path in paths
+        if in_pruned_roots(path, frozenset(proposed)) and path not in linked | registered
+    )
+    return {
+        "source_bytes": total,
+        "cap_bytes": SNAPSHOT_MAX_BYTES,
+        "headroom_bytes": SNAPSHOT_MAX_BYTES - total,
+        "copy_operations": len(paths),
+        "copied_files": rows(paths),
+        "candidates": reports,
+        "candidate_net_saved_bytes": saved,
+        "candidate_source_bytes": total - saved,
+    }
+
+
+def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
+    """Project committed worker bytes even when this checkout is sparse.
+
+    This uses the current selector and a named Git tree, including every inline
+    and frontier-declared copyback. It excludes working-tree edits and untracked
+    files; ``snapshot_source_bytes`` remains the live worker guard.
+    """
+    result = subprocess.run(
+        ["git", "ls-tree", "-rlz", revision],
+        cwd=REPO,
+        check=True,
+        capture_output=True,
+        timeout=30,
+    )
+    inventory: dict[Path, tuple[str, int]] = {}
+    for raw in result.stdout.split(b"\0"):
+        if not raw:
+            continue
+        metadata, relative = raw.split(b"\t", 1)
+        mode, kind, oid, size = metadata.split()
+        if kind == b"blob" and mode in {b"100644", b"100755"}:
+            inventory[REPO / os.fsdecode(relative)] = (oid.decode("ascii"), int(size))
+    # The live selector discovers this exact generated-file class by glob. Sparse
+    # checkout absence must not turn that established omission into copied bytes.
+    regularized_root = ROOT / "atlas/known-best/regularized"
+    regularized = frozenset(
+        path
+        for path in inventory
+        if (path.parent == regularized_root and path.match(REGULARIZED_WITNESS_PATTERN))
+    )
+    effective_prune = PRUNE | regularized
+    roots = frozenset(LINKED_PRUNE_ROOTS) | regularized
+    documents = [
+        path
+        for path in inventory
+        if path.suffix == ".md"
+        and (
+            path.is_relative_to(ROOT / "campaign")
+            or any(
+                path == document or path.is_relative_to(document) for document in ROOT_DOCUMENTS
+            )
+        )
+        and BUILD_CACHES.isdisjoint(path.relative_to(REPO).parts)
+    ]
+    register = ROOT / "frontier/results.yaml"
+    readers = [*documents, register]
+    queries = "".join(inventory[path][0] + "\n" for path in readers)
+    contents = subprocess.run(
+        ["git", "cat-file", "--batch"],
+        input=queries.encode("ascii"),
+        cwd=REPO,
+        check=True,
+        capture_output=True,
+        timeout=30,
+    ).stdout
+    texts: dict[Path, str] = {}
+    offset = 0
+    for path in readers:
+        end = contents.index(b"\n", offset)
+        _oid, kind, size = contents[offset:end].split()
+        if kind != b"blob":
+            raise ValueError("worker inventory expected a Git blob")
+        offset = end + 1
+        length = int(size)
+        texts[path] = contents[offset : offset + length].decode("utf-8", errors="ignore")
+        offset += length + 1
+    rescued: set[Path] = set()
+    for document in documents:
+        for raw in INLINE_LINK.findall(texts[document]):
+            path = (document.parent / raw).resolve()
+            if path in inventory and in_pruned_roots(path, roots):
+                rescued.add(path)
+    register_value = safe_load(texts[register])
+    for record in register_value["results"]:
+        paths = [*(record.get("artifacts") or []), *(record.get("controls") or [])]
+        paths.extend(review["path"] for review in record.get("reviews") or [])
+        for raw in paths:
+            path = (REPO / raw).resolve()
+            if path in inventory and in_pruned_roots(path, roots):
+                rescued.add(path)
+    named = {*COPY_SEPARATELY, *ROOT_DOCUMENTS}
+    separate = [
+        *COPY_SEPARATELY,
+        *(path for path in inventory if path.parent == REPO and path not in named),
+    ]
+    selected = list(dict.fromkeys((*separate, *rescued)))
+    for document in ROOT_DOCUMENTS:
+        selected.extend(
+            path
+            for path in inventory
+            if (path == document or path.is_relative_to(document))
+            and BUILD_CACHES.isdisjoint(path.relative_to(REPO).parts)
+        )
+    selected.extend(
+        path
+        for path in inventory
+        if (
+            path.is_relative_to(ROOT)
+            and BUILD_CACHES.isdisjoint(path.relative_to(ROOT).parts)
+            and not in_pruned_roots(path, effective_prune)
+        )
+    )
+    projected: dict[Path, int] = {}
+    for path in selected:
+        projected[path] = projected.get(path, 0) + inventory[path][1]
+    return projected
+
+
+def snapshot_git_source_bytes(revision: str = "HEAD") -> int:
+    """Sum the committed selector projection; the live worker guard is unchanged."""
+    return sum(snapshot_git_source_inventory(revision).values())
 
 
 def _index_tree(root: Path) -> None:
@@ -1087,7 +1441,7 @@ def clone_tree(dest: Path) -> None:
     work = dest / HERE
     _clone_into(ROOT, work)
 
-    for target in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets()):
+    for target in snapshot_copy_targets():
         landing = dest / target.relative_to(REPO)
         landing.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(target, landing)
@@ -1116,6 +1470,12 @@ def clone_tree(dest: Path) -> None:
         if not source.exists():
             continue
         link = work / rel
+        # Existing link/result dependency rescue copies and indexes this consumer.
+        # Never replace a rescued private house leaf with a source link.
+        if rel in HOUSE_LINK_LEAVES and link.exists():
+            if link.is_symlink():
+                raise ValueError("rescued house consumer is not a private file")
+            continue
         link.parent.mkdir(parents=True, exist_ok=True)
         link.symlink_to(source)
 
@@ -1219,6 +1579,11 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--source-bytes",
+        action="store_true",
+        help="report private source bytes and the unchanged cap without running controls",
+    )
+    parser.add_argument(
         "spec",
         nargs="?",
         type=Path,
@@ -1231,6 +1596,18 @@ def _parser() -> argparse.ArgumentParser:
         "--timings",
         type=Path,
         help="create a JSONL timing journal; refuses to overwrite existing evidence",
+    )
+    parser.add_argument(
+        "--audit-snapshot",
+        action="store_true",
+        help="report snapshot bytes as JSON; never clone or run",
+    )
+    parser.add_argument(
+        "--prune-candidate",
+        action="append",
+        type=Path,
+        default=[],
+        help="audit a proposed repository-relative prune, retaining inline/result dependencies",
     )
     return parser
 
@@ -1296,7 +1673,29 @@ def timing_provenance() -> dict[str, object]:
 def main(argv: Sequence[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
     options = _parser().parse_args(argv)
+    if options.source_bytes:
+        actual = snapshot_source_bytes()
+        print(
+            json.dumps(
+                {
+                    "source_bytes": actual,
+                    "cap_bytes": SNAPSHOT_MAX_BYTES,
+                    "headroom_bytes": SNAPSHOT_MAX_BYTES - actual,
+                    "duplicate_named_copy_bytes_avoided": snapshot_duplicate_copy_bytes(),
+                }
+            )
+        )
+        return int(actual > SNAPSHOT_MAX_BYTES)
     spec_path = options.spec if options.spec.is_absolute() else ROOT / options.spec
+    if options.audit_snapshot:
+        try:
+            report = snapshot_audit(options.prune_candidate, spec_path=spec_path)
+        except ValueError as exc:
+            _parser().error(str(exc))
+        print(json.dumps(report, indent=2))
+        return 0
+    if options.prune_candidate:
+        _parser().error("--prune-candidate requires --audit-snapshot")
     spec = safe_load(spec_path.read_text(encoding="utf-8"))
     only = options.match
     controls = [c for c in spec["controls"] if not only or only in c["name"]]
@@ -1441,9 +1840,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"{len(failures)} of {len(controls)} negative controls did not fire",
             file=sys.stderr,
         )
-        return 1
-    print(f"  {len(controls)} negative controls fire as expected")
-    return 0
+    else:
+        print(f"  {len(controls)} negative controls fire as expected")
+    return int(bool(failures))
 
 
 if __name__ == "__main__":

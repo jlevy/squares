@@ -21,6 +21,7 @@ import time
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.probes import probe
 
 if TYPE_CHECKING:
@@ -156,7 +157,7 @@ def measure_ink(driver) -> None:
                 page = browser.new_page(
                     viewport={"width": 1920, "height": 1080}, device_scale_factor=1
                 )
-                page.goto(path.resolve().as_uri(), wait_until="load")
+                open_page(page, path)
                 _prepare_page(page)
                 pages[path] = page
             return pages[path]
@@ -221,7 +222,7 @@ def capture_review(driver, out: Path) -> list[str]:
                     ),
                 )
                 page.on("pageerror", lambda exc: errors.append(f"pageerror: {exc}"))
-                page.goto(path.resolve().as_uri(), wait_until="load")
+                open_page(page, path)
                 _prepare_page(page)
                 pages[path] = page
             return pages[path]
@@ -303,7 +304,7 @@ def main() -> int:
             )
             page.on("pageerror", lambda exc: errors.append(f"pageerror: {exc}"))
             t_load = time.perf_counter()
-            page.goto(page_path.as_uri(), wait_until="load")
+            open_page(page, page_path)
             print(
                 f"loaded {page_path.name} ({page_path.stat().st_size} bytes)"
                 f" in {time.perf_counter() - t_load:.2f} s"

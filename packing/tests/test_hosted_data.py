@@ -25,6 +25,7 @@ from sqpack.hosted_data import (
     publish,
     render_manifest,
     require,
+    require_from_manifest,
     schema_problems,
     stage,
 )
@@ -319,6 +320,34 @@ def test_require_names_the_fetch_command_when_an_object_is_absent(
     (repo / "data" / "alpha.bin").write_bytes(b"stale")
     with pytest.raises(HostedDataError, match="differs from its manifest"):
         require("data/alpha.bin", path)
+
+
+@pytest.mark.parametrize("changed", [b"stale", b"other bytes"])
+def test_loaded_manifest_checks_each_object_and_new_readers_admit_fresh_bytes(
+    repo: Path, changed: bytes
+) -> None:
+    path, admitted = _staged(repo)
+    alpha = repo / "data/alpha.bin"
+    original = alpha.read_bytes()
+    assert require_from_manifest(alpha, admitted, path, repo=repo) == alpha
+    alpha.write_bytes(changed)
+    with pytest.raises(HostedDataError, match="differs from its manifest"):
+        require_from_manifest(alpha, admitted, path, repo=repo)
+    # A new invocation must read the newly admitted manifest, while the existing
+    # transaction continues to enforce the bytes it admitted at its own start.
+    _staged(repo)
+    assert require(alpha, path, repo=repo) == alpha
+    with pytest.raises(HostedDataError, match="differs from its manifest"):
+        require_from_manifest(alpha, admitted, path, repo=repo)
+    alpha.write_bytes(original)
+    assert require_from_manifest(alpha, admitted, path, repo=repo) == alpha
+    with pytest.raises(HostedDataError, match="differs from its manifest"):
+        require(alpha, path, repo=repo)
+    alpha.unlink()
+    with pytest.raises(HostedDataMissingError, match="not in this checkout"):
+        require_from_manifest(alpha, admitted, path, repo=repo)
+    with pytest.raises(HostedDataError, match="is not named"):
+        require_from_manifest("data/unknown.bin", admitted, path, repo=repo)
 
 
 def test_an_upload_refused_by_the_upload_host_names_the_host_and_the_remedy(

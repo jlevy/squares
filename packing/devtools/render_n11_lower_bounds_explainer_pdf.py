@@ -77,7 +77,8 @@ import platform
 import re
 import sys
 import zlib
-from collections.abc import Iterable, Sequence
+from collections.abc import Iterable, Iterator, Sequence
+from contextlib import contextmanager
 from datetime import date, datetime
 from functools import cache
 from importlib.metadata import version
@@ -88,7 +89,7 @@ from typing import TYPE_CHECKING, Never
 from strif import atomic_output_file
 
 from devtools.render_composite_pdf import PDF_TIME, pdf_dates
-from devtools.render_overview import N11_LOWER_BOUNDS_EXPLAINER, paper_path
+from devtools.render_overview import N11_LOWER_BOUNDS_EXPLAINER, SITE_URL, paper_path
 from sqpack.probes import applied, probe
 from sqpack.release import EXPLAINER_REVISED
 
@@ -175,7 +176,7 @@ BROWSER_OVERRIDE = "SQPACK_CHROMIUM"
 #: module. A relative link is resolved against the page's own address (`PAGE_URL`), not
 #: the site's root: the page is served a level below it, so its links to the site's
 #: other pages and to the atlas's files climb one.
-SITE_URL = "https://jlevy.github.io/squares/"
+
 PAGE_URL = SITE_URL + paper_path(N11_LOWER_BOUNDS_EXPLAINER)
 
 #: The page is drawn from a `file://` URL, which is what keeps the render offline and
@@ -1695,8 +1696,32 @@ def fonts() -> None:
         print(line, file=sys.stderr)
 
 
+@contextmanager
+def _publication_site(site: Path | None) -> Iterator[None]:
+    """Scope the CLI's paths while keeping direct library calls at their existing defaults."""
+    global PAGE, OUTPUT  # noqa: PLW0603 - this CLI scope restores both paths on every exit
+    previous = PAGE, OUTPUT
+    if site is not None:
+        root = site.resolve()
+        if root.exists() and not root.is_dir():
+            raise SystemExit(f"{root} is not a site directory")
+        PAGE = root / paper_path(N11_LOWER_BOUNDS_EXPLAINER)
+        OUTPUT = PAGE.with_suffix(".pdf")
+    try:
+        yield
+    finally:
+        PAGE, OUTPUT = previous
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     command = argparse.ArgumentParser(description=__doc__)
+    command.add_argument(
+        "--site",
+        type=Path,
+        metavar="DIRECTORY",
+        help="site root containing papers/ (default: packing/site); "
+        "write the PDF beside its HTML",
+    )
     mode = command.add_mutually_exclusive_group(required=True)
     mode.add_argument(
         "--update",
@@ -1754,27 +1779,31 @@ def main(argv: Sequence[str] | None = None) -> int:
     renders = arguments.renders if arguments.renders is not None else 2
     if renders < 2:
         command.error("--renders must be at least 2, which is one render against another")
-    if not PAGE.is_file():
-        raise SystemExit(f"{PAGE.relative_to(ROOT)} is missing; render the page first")
-    if arguments.update:
-        update()
-    elif arguments.fonts:
-        fonts()
-    elif arguments.check_artifact:
-        if arguments.trace_math:
-            check_artifact(renders, diagnostics_dir=arguments.diagnostics_dir, trace_math=True)
+    with _publication_site(arguments.site):
+        if not PAGE.is_file():
+            label = PAGE.relative_to(ROOT) if PAGE.is_relative_to(ROOT) else PAGE
+            raise SystemExit(f"{label} is missing; render the page first")
+        if arguments.update:
+            update()
+        elif arguments.fonts:
+            fonts()
+        elif arguments.check_artifact:
+            if arguments.trace_math:
+                check_artifact(
+                    renders, diagnostics_dir=arguments.diagnostics_dir, trace_math=True
+                )
+            else:
+                check_artifact(renders, diagnostics_dir=arguments.diagnostics_dir)
+        elif arguments.trace_math:
+            check(
+                renders,
+                diagnostics_dir=arguments.diagnostics_dir,
+                trace_math=True,
+                rebuild_prepared_text=arguments.rebuild_prepared_text,
+            )
         else:
-            check_artifact(renders, diagnostics_dir=arguments.diagnostics_dir)
-    elif arguments.trace_math:
-        check(
-            renders,
-            diagnostics_dir=arguments.diagnostics_dir,
-            trace_math=True,
-            rebuild_prepared_text=arguments.rebuild_prepared_text,
-        )
-    else:
-        check(renders, diagnostics_dir=arguments.diagnostics_dir)
-    return 0
+            check(renders, diagnostics_dir=arguments.diagnostics_dir)
+        return 0
 
 
 if __name__ == "__main__":

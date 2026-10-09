@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import html
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -22,6 +23,8 @@ from devtools import (
     overview_sections,
     render_overview,
     rung_scale,
+    site_documents,
+    site_urls,
     social_card,
 )
 from devtools.check_published_site import (
@@ -47,7 +50,11 @@ from devtools.render_overview import (
     head_tags,
     page_title,
 )
+from sqpack.probes import probe
 from tests import site_renders
+from tests.site_renders import prepared_forwarders
+
+pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 
 RESULTS = PageMeta(
     name="Every Result",
@@ -82,9 +89,10 @@ def test_head_tags_writes_each_tag_once_from_a_page_record() -> None:
     url = SITE_URL + "all-results.html"
     assert head.titles == ("Every Result · The Squares Project",)
     assert head.link("canonical") == [url]
-    assert [key for key, _ in head.metas] == list(REQUIRED_META)
+    assert [key for key, _ in head.metas] == ["description", "robots", *REQUIRED_META[1:]]
     assert dict(head.metas) == {
         "description": RESULTS.description,
+        "robots": "max-image-preview:large",
         "og:type": "website",
         "og:site_name": "The Squares Project",
         "og:locale": "en_US",
@@ -111,9 +119,8 @@ def test_head_tags_writes_each_tag_once_from_a_page_record() -> None:
     assert 'property="twitter:' not in tags
 
 
-def test_the_overview_is_titled_with_the_projects_name_alone() -> None:
-    """A page's title is its own name and then the project's; the overview's name is the
-    project's, so it is written once and not on both sides of the dot."""
+def test_the_title_helper_does_not_repeat_the_formal_project_name() -> None:
+    """Website titles add the project name once, including when it is the page's name."""
     assert page_title("Papers") == "Papers · The Squares Project"
     assert page_title(PROJECT_NAME) == PROJECT_NAME == "The Squares Project"
     head = read_head(
@@ -174,8 +181,8 @@ def test_every_page_of_the_site_carries_the_set_once_at_its_own_address(
     pages: dict[str, str],
 ) -> None:
     """Each page the renderer builds passes the deployed site's own check: one of each
-    tag, the canonical link and `og:url` the address it is served at, the title ending in
-    the project's formal name, the site's name the formal name, and the site's one card."""
+    tag, canonical and `og:url` at the served address, a topical article title or named
+    website title, the formal project name, and the site's card."""
     assert set(pages) == set(render_overview.PAGES)
     for name, page in pages.items():
         assert head_problems(page, canonical_url(name)) == [], name
@@ -183,11 +190,15 @@ def test_every_page_of_the_site_carries_the_set_once_at_its_own_address(
         assert head.lang == "en", name
         (title,) = head.titles
         (shown,) = head.meta("og:title")
-        assert title == page_title(shown), name
+        assert title == (shown if head.meta("og:type") == ["article"] else page_title(shown)), (
+            name
+        )
         assert "Square Packing Project" not in title, name
         # kpress's own four tags are gone, not added to.
         assert len(head.meta("og:type")) == len(head.meta("twitter:card")) == 1, name
-    assert read_head(pages["index.html"]).titles == (PROJECT_NAME,)
+    assert read_head(pages["index.html"]).titles == (
+        "Square Packing: Bounds, Results and Best Packings · The Squares Project",
+    )
     assert read_head(pages["tutorial.html"]).meta("og:type") == ["article"]
     kinds = {name: read_head(page).meta("og:type") for name, page in pages.items()}
     assert [name for name, kind in kinds.items() if kind != ["website"]] == ["tutorial.html"]
@@ -217,13 +228,24 @@ def test_every_page_has_a_description_of_its_own(pages: dict[str, str]) -> None:
     assert described["visualize.html"] == render_overview.VISUALIZE_DESCRIPTION
 
 
-def test_a_document_cards_note_is_its_pages_description(pages: dict[str, str]) -> None:
-    """A reader document's card on the overview and its page's preview say one thing."""
+def test_document_cards_and_expanded_descriptions_name_the_same_documents(
+    pages: dict[str, str],
+) -> None:
+    """Short card notes and richer search descriptions belong to the same documents."""
     notes = [note for _, _, note in overview_sections.DOCUMENTS]
     described = [
         read_head(pages[name]).meta("description")[0] for name in render_overview.DOCUMENT_PAGES
     ]
-    assert described == notes
+    documents = {doc.name: doc for doc in site_documents.DOCUMENTS}
+    assert described == [documents[name].description for name in render_overview.DOCUMENT_PAGES]
+    assert [source for source, _, _ in overview_sections.DOCUMENTS] == [
+        documents[name].source.relative_to(site_documents.REPO).as_posix()
+        for name in render_overview.DOCUMENT_PAGES
+    ]
+    assert all(
+        20 <= len(note) < len(description) <= DESCRIPTION_LIMIT
+        for note, description in zip(notes, described, strict=True)
+    )
 
 
 def broken(change: tuple[str, str]) -> str:
@@ -322,6 +344,73 @@ def test_a_head_is_read_by_a_parser_and_only_to_its_end() -> None:
     ) == check_published_site.PageHead(None, (), (), ())
 
 
+@pytest.mark.parametrize("boundary", [0, (1 << 16) - 3])
+def test_head_markers_in_raw_text_and_attributes_do_not_end_the_head(boundary: int) -> None:
+    """Only the parser's real head boundary ends metadata, including across chunks."""
+    prefix = '<!doctype html><html lang="en"><head>'
+    padding = " " * max(0, boundary - len(prefix))
+    marker = probe(Path(__file__).with_name("probes"), "check_published_site/head_marker")
+    page = (
+        prefix
+        + padding
+        + f"<script>{marker}</script>"
+        + "<style>/* </head><title>Not this</title> */</style>"
+        + "<!-- </head><title>Not this either</title> -->"
+        + '<meta data-note="</head>" name="extra" content="whole">'
+        + head_tags(RESULTS)
+        + favicon_html()
+        + '</head><body><meta property="og:title" content="Body"></body></html>'
+    )
+    head = read_head(page)
+    assert head.titles == ("Every Result · The Squares Project",)
+    assert head.meta("extra") == ["whole"]
+    assert head_problems(page, SITE_URL + RESULTS.path) == []
+
+
+@pytest.mark.parametrize("boundary", [0, (1 << 16) - 3])
+def test_head_reader_does_not_parse_the_math_body(
+    monkeypatch: pytest.MonkeyPatch, boundary: int
+) -> None:
+    """A metadata pass ends at the real boundary, before tokenizing dense body markup."""
+    prefix = '<!doctype html><html lang="en"><head>'
+    padding = " " * max(0, boundary - len(prefix) - len(head_tags(RESULTS)))
+    scanned: list[str] = []
+    original = HTMLParser.parse_starttag
+
+    def observe(reader: HTMLParser, position: int) -> int:
+        tag = re.match(r"<([a-z]+)", reader.rawdata[position:])
+        assert tag is not None
+        scanned.append(tag.group(1))
+        return original(reader, position)
+
+    monkeypatch.setattr(HTMLParser, "parse_starttag", observe)
+    page = (
+        prefix
+        + head_tags(RESULTS)
+        + padding
+        + "</head><body>"
+        + ("<math><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></math>" * 800)
+        + "</body></html>"
+    )
+    assert read_head(page).titles == ("Every Result · The Squares Project",)
+    assert "body" not in scanned
+    assert "math" not in scanned
+
+
+def test_document_detection_stops_at_the_first_document_marker(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Detecting a document does not parse its metadata or the prepared math body."""
+
+    def refuse_head(*_args: object) -> None:
+        raise AssertionError("document detection reached the head")
+
+    monkeypatch.setattr(HTMLParser, "parse_starttag", refuse_head)
+    assert check_published_site.is_document(
+        "<!doctype html><html><head><title>Page</title></head><body></body></html>"
+    )
+
+
 def test_a_long_or_missing_description_is_a_finding() -> None:
     long = "x" * (DESCRIPTION_LIMIT + 1)
     tags = head_tags(RESULTS).replace(RESULTS.description, long)
@@ -369,7 +458,7 @@ def test_a_forwarder_previews_the_page_it_leads_to_and_one_off_the_site_carries_
         assert named[name].startswith("https://"), name
         head = read_head(page)
         if name not in within:
-            assert forwarder_problems(page, named[name]) == [], name
+            assert forwarder_problems(page, named[name], page_url=SITE_URL + name) == [], name
             assert head.link("canonical") == [moved[name]] == [named[name]]
             assert not [key for key, _ in head.metas if key.startswith(("og:", "twitter:"))]
             continue
@@ -377,10 +466,12 @@ def test_a_forwarder_previews_the_page_it_leads_to_and_one_off_the_site_carries_
         assert head.meta("og:url") == head.link("canonical") == [named[name]], name
         assert head.meta("og:image") == [render_overview.social_card_url()], name
         if moved[name] in papers:
-            assert forwarder_problems(page, named[name]) == [], name
+            assert forwarder_problems(page, named[name], page_url=SITE_URL + name) == [], name
             continue
         destination = pages[moved[name]]
-        assert forwarder_problems(page, named[name], destination) == [], name
+        assert (
+            forwarder_problems(page, named[name], destination, page_url=SITE_URL + name) == []
+        ), name
         own = read_head(destination)
         assert head.titles == own.titles, name
         for key in ("og:title", "og:type", "og:description", "description", "twitter:title"):
@@ -392,13 +483,21 @@ def test_a_forwarder_previews_the_page_it_leads_to_and_one_off_the_site_carries_
     assert named["n11-optimality/t-060-explainer.html"] == target
     assert named["explainer.html"] == canonical_url(explainer.SITE_PATH) == explainer.PAGE_URL
     assert explainer.PAGE_URL == SITE_URL + "papers/n11-lower-bounds-explainer.html"
-    assert forwarder_problems(landing, target) == []
+    assert (
+        forwarder_problems(landing, target, page_url=SITE_URL + "n11-optimality/index.html")
+        == []
+    )
     # The landing address named the paper by its file name alone until 2026-10-01.
     relative = landing.replace(
         f'rel="canonical" href="{target}"',
         'rel="canonical" href="../papers/n11-optimality-review.html"',
     )
-    assert any("the canonical link is" in p for p in forwarder_problems(relative, target))
+    assert any(
+        "the canonical link is" in p
+        for p in forwarder_problems(
+            relative, target, page_url=SITE_URL + "n11-optimality/index.html"
+        )
+    )
     assert any("not an address in full" in p for p in forwarder_problems(relative, "a.html"))
 
 
@@ -418,7 +517,7 @@ def _landing() -> tuple[str, str]:
         ('<meta name="twitter:card" content="', "0 twitter:card tags, not one"),
         ('<meta name="description" content="', "0 description tags, not one"),
         ('<meta property="og:url" content="', "0 og:url tags, not one"),
-        ('<link rel="icon" ', "0 icon links, not one"),
+        ('<link rel="icon" ', "1 icon links, expected the SVG/PNG pair"),
     ],
     ids=["og:image", "twitter:card", "description", "og:url", "icon"],
 )
@@ -428,10 +527,10 @@ def test_a_forwarder_to_a_page_of_the_site_that_drops_a_tag_is_named(
     """The negative controls of the forwarders' rule: each tag a preview is drawn from,
     taken out of a forwarder that leads to a paper, is a finding."""
     page, target = _landing()
-    assert forwarder_problems(page, target) == []
+    assert forwarder_problems(page, target, page_url=SITE_URL + LANDING) == []
     start = page.index(tag)
     dropped = page[:start] + page[page.index(">", start) + 1 :]
-    assert finding in forwarder_problems(dropped, target)
+    assert finding in forwarder_problems(dropped, target, page_url=SITE_URL + LANDING)
 
 
 def test_a_forwarder_previewing_its_page_by_another_name_kind_or_sentence_is_named() -> None:
@@ -484,33 +583,53 @@ def test_a_forwarder_previewing_its_page_by_another_name_kind_or_sentence_is_nam
 @pytest.mark.parametrize(
     ("icons", "finding"),
     [
-        ("", "0 icon links, not one"),
-        ("{icon}{icon}", "2 icon links, not one"),
-        ('<link rel="icon" href="data:image/png;base64,AAAA">', "the icon is not the site's"),
+        ("", "0 icon links, expected the SVG/PNG pair"),
+        ("{icon}{icon}", "4 icon links, expected the SVG/PNG pair"),
+        (
+            '<link rel="icon" href="data:image/png;base64,AAAA">',
+            "1 icon links, expected the SVG/PNG pair",
+        ),
+        (
+            favicon_html().replace("favicon.svg", "other.svg"),
+            "the icon is not the site's SVG/PNG pair",
+        ),
     ],
-    ids=["missing", "twice", "another"],
+    ids=["missing", "twice", "inline-substitute", "wrong-pair-member"],
 )
-def test_a_page_without_the_sites_icon_once_is_named(icons: str, finding: str) -> None:
-    """Every page carries the site's icon once: the tab's, and the one a preview may set
-    beside the site's name. The case records were the pages without it until
-    2026-10-03."""
+def test_a_page_without_the_sites_exact_icon_pair_is_named(icons: str, finding: str) -> None:
+    """Missing, duplicate and substituted stable icons fail the complete head check."""
     page = document(head_tags(RESULTS)).replace(
         favicon_html(), icons.format(icon=favicon_html()), 1
     )
     problems = head_problems(page, SITE_URL + RESULTS.path)
     assert any(finding in problem for problem in problems), problems
-    assert render_overview.favicon_url() in favicon_html()
+    head = read_head(document(head_tags(RESULTS)))
+    assert head.link("icon") == ["favicon.svg", "favicon-48.png"]
+    assert head.link("apple-touch-icon") == ["apple-touch-icon.png"]
 
 
-def test_a_results_overview_is_a_fragment_with_no_head() -> None:
-    """A result's overview is fetched into a popover and is no document: it has no head,
-    so it carries no card and no broken one."""
-    fragment = render_overview.result_fragments()[0]
-    assert fragment.html.startswith('<div class="site-result"')
-    assert read_head(fragment.html) == check_published_site.PageHead(None, (), (), ())
-    assert not check_published_site.is_document(fragment.html)
-    assert "<meta" not in fragment.html
-    assert "<title" not in fragment.html
+@pytest.fixture(scope="module")
+def result_pages() -> dict[str, str]:
+    return {page.name: page.html for page in site_renders.result_pages()}
+
+
+@pytest.fixture(scope="module")
+def records() -> dict[str, str]:
+    return site_renders.case_records()
+
+
+def test_result_overviews_are_complete_canonical_documents(
+    result_pages: dict[str, str],
+) -> None:
+    """The canonical document's article can also be fetched into a reader's popover."""
+    assert result_pages
+    for path, page in result_pages.items():
+        assert check_published_site.is_document(page), path
+        assert head_problems(page, canonical_url(path)) == [], path
+        assert len(re.findall(r"<h1\b", page)) == 1, path
+        assert '<article class="site-result"' in page, path
+        assert "<main" in page, path
+        assert 'class="site-nav"' in page, path
 
 
 def test_the_card_is_the_heros_drawing_on_the_pages_background() -> None:
@@ -621,8 +740,8 @@ def test_the_tool_writes_the_card_under_its_served_name_and_checks_it(
     assert social_card.main(["--output-dir", str(tmp_path), "--plain", "--check"]) == 0
 
 
-def test_a_built_site_is_held_to_its_heads_and_its_card(
-    tmp_path: Path, pages: dict[str, str], card: bytes
+def test_a_head_only_build_checks_metadata_but_is_not_complete_publication(
+    tmp_path: Path, pages: dict[str, str], card: bytes, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """The local mode reads a directory as the deploy check reads the site: every page
     there, every forwarder there and the card, with what a build left out reported and
@@ -659,7 +778,9 @@ def test_a_built_site_is_held_to_its_heads_and_its_card(
     assert "papers/n11-threshold-bound-review.html: not in this build, so not checked" in lines
     assert "papers/n11-optimality-review.html: not in this build, so not checked" in lines
     assert "workbench/index.html: not in this build, so not checked" in lines
-    assert check_published_site.main(["--local", str(tmp_path)]) == 0
+    # A metadata-only fixture is not the complete registered publication tree.
+    assert check_published_site.main(["--local", str(tmp_path)]) == 1
+    assert "site cases/11.html: required overview output missing" in capsys.readouterr().out
     # A page under another's head, and a card that is not the card.
     (tmp_path / "papers.html").write_text(pages["index.html"], encoding="utf-8")
     (tmp_path / SOCIAL_CARD).write_bytes(b"not a picture")
@@ -673,48 +794,49 @@ def test_a_built_site_is_held_to_its_heads_and_its_card(
 
 @pytest.fixture(scope="module")
 def published(
-    tmp_path_factory: pytest.TempPathFactory, pages: dict[str, str], card: bytes
+    tmp_path_factory: pytest.TempPathFactory,
+    pages: dict[str, str],
+    card: bytes,
+    result_pages: dict[str, str],
+    records: dict[str, str],
 ) -> Path:
     """Everything the overview's Pages job publishes, as it writes it: the site's pages,
     every case's record file, every forwarder and the card, with a result's overview
-    beside them as the fragment it is. The papers and the workbench are other jobs'
+    beside them as complete documents. The papers and the workbench are other jobs'
     pages, held to the same `head_problems` in their own modules' tests."""
     root = tmp_path_factory.mktemp("published")
     files = [
         *(render_overview.Page(name, text) for name, text in pages.items()),
-        *(
-            render_overview.Page(name, text)
-            for name, text in site_renders.case_records().items()
-        ),
+        *(render_overview.Page(name, text) for name, text in records.items()),
         *render_overview.forwarder_pages(),
-        render_overview.Page(
-            overview_sections.result_fragment("T-018"),
-            '<div class="site-result" data-result-overview="t-018"><p>An overview.</p></div>\n',
-        ),
+        *(render_overview.Page(name, text) for name, text in result_pages.items()),
+        *site_documents.chapter_pages(),
     ]
     render_overview.write_site(root, files)
     (root / SOCIAL_CARD).write_bytes(card)
     return root
 
 
-def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(published: Path) -> None:
+def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(
+    published: Path, result_pages: dict[str, str], records: dict[str, str]
+) -> None:
     """The metadata contract, over every HTML file the overview's build publishes: each
     page and each case's record file carries the whole set at its own address, with the
-    site's icon; each forwarder carries what its rule says; a result's overview, which has
-    no head, is a fragment. Nothing is left unread: the files the check held are every
-    HTML file there."""
+    site's icons; each forwarder carries what its rule says; results and synopsis chapters
+    carry complete heads. The exhaustive output inventory also includes crawl HTML;
+    the not-found and withdrawn pages are excluded from live preview counts."""
     results = local_head_checks(published)
     assert [line for passed, line in results if not passed] == []
     lines = [line for _, line in results]
-    records = site_renders.case_records()
     assert len(records) == 324
     assert (
         f"case records: each of {len(records)} carries one of each identity and card tag, "
         "agreeing with its address"
     ) in lines
-    for name in render_overview.PAGES:
+    chapters = site_documents.chapter_names()
+    for name in (*render_overview.PAGES, *result_pages, *chapters):
         assert f"{name}: one of each identity and card tag, agreeing with its address" in lines
-    pages = len(render_overview.PAGES) + len(records)
+    pages = len(render_overview.PAGES) + len(records) + len(result_pages) + len(chapters)
     assert f"each of {pages} pages has a description of its own" in lines
     # A forwarder to a page this build writes is held to that page's head; the papers'
     # are other builds' pages, held to theirs where the site is assembled.
@@ -728,21 +850,27 @@ def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(published
             "compare"
         )
         assert rule in lines, old
+    crawl_html = {
+        "404.html",
+        *(row.path for row in site_urls.load_registry() if row.status == "withdrawn"),
+    }
     held = {
         *render_overview.PAGES,
         *records,
         *(old for old, _ in render_overview.MOVED_PAGES),
-        overview_sections.result_fragment("T-018"),
+        *result_pages,
+        *chapters,
+        *(name for name in crawl_html if name.endswith(".html")),
     }
     assert {
         path.relative_to(published).as_posix() for path in published.rglob("*.html")
     } == held
     for record in records.values():
-        assert record.count(favicon_html()) == 1
+        assert record.count(favicon_html(root="../")) == 1
 
 
 def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
-    tmp_path: Path, pages: dict[str, str], card: bytes
+    tmp_path: Path, pages: dict[str, str], card: bytes, records: dict[str, str]
 ) -> None:
     """The negative controls: a page no list names that ships with a head and no preview,
     one whose head says nothing at all, a record file that loses its image, one without
@@ -750,11 +878,11 @@ def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
     every forwarder did before 2026-10-03, and one that previews the page beside it by
     another name than the page's own are each a failure of the check the overview's job
     runs."""
-    record = site_renders.case_records()["cases/11.html"]
+    record = records["cases/11.html"]
     good = {
         "index.html": pages["index.html"],
         "cases/11.html": record,
-        "cases/12.html": site_renders.case_records()["cases/12.html"],
+        "cases/12.html": records["cases/12.html"],
     }
     render_overview.write_site(tmp_path, [render_overview.Page(n, t) for n, t in good.items()])
     (tmp_path / SOCIAL_CARD).write_bytes(card)
@@ -783,12 +911,12 @@ def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
     assert image in record
     (tmp_path / "cases/11.html").write_text(record.replace(image, ""), encoding="utf-8")
     (tmp_path / "cases/12.html").write_text(
-        good["cases/12.html"].replace(favicon_html(), ""), encoding="utf-8"
+        good["cases/12.html"].replace(favicon_html(root="../"), ""), encoding="utf-8"
     )
     (failure,) = [line for passed, line in local_head_checks(tmp_path) if not passed]
     assert failure.startswith("case records: 2 of 2 heads wrong: cases/11.html: ")
     assert "cases/11.html: 0 og:image tags, not one" in failure
-    assert "cases/12.html: 0 icon links, not one" in failure
+    assert "cases/12.html: 0 icon links, expected the SVG/PNG pair" in failure
 
     (tmp_path / "cases/11.html").write_text(record, encoding="utf-8")
     (tmp_path / "cases/12.html").write_text(good["cases/12.html"], encoding="utf-8")

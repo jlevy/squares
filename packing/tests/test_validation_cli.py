@@ -780,10 +780,16 @@ def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
         "-q",
         *validate.BEHAVIORAL_TEST_ROOTS,
         f"--ignore={validate.BROWSER_FLOOR_LIVENESS_TESTS}",
-        # The two files that pin the tables' pixels run where Chromium is installed, in
+        # Browser layout and prepared mathematics run where Chromium is installed, in
         # `site table layout in Chromium`; a shard has no browser for them (D-513).
+        "--ignore=tests/test_site_case_records.py",
+        "--ignore=tests/test_site_math_faces.py",
+        "--ignore=tests/test_site_column_measurement.py",
+        "--ignore=tests/test_site_result_filters.py",
         "--ignore=tests/test_site_result_columns.py",
         "--ignore=tests/test_site_frontier_table.py",
+        "--ignore=tests/test_site_rendering.py",
+        "--ignore=tests/test_site_math_preferences.py",
         "-m",
         "not exhaustive_exact and not slow",
         "-n",
@@ -2702,6 +2708,59 @@ def test_whole_escape_screen_uses_its_budget_unless_the_operator_sets_a_cap(
     assert context.timeout_seconds == timeout_seconds
 
 
+@pytest.mark.parametrize("last_n", [100, 200, 324])
+def test_screen_findings_match_the_current_retained_square_motions(last_n: int) -> None:
+    document = json.loads(
+        (validate.PROJECT_ROOT / "atlas/known-best/translation-escape-screen.json").read_text()
+    )["screen"]
+    cases = document["cases"]
+    assert [case["n"] for case in cases] == list(range(1, 325))
+    assert document["excluded"] == []
+    cases = [case for case in cases if case["n"] <= last_n]
+    separating = [
+        sum(square["witness_kind"] == "strict-separating" for square in case["movable_squares"])
+        for case in cases
+    ]
+    moving = [len(case["movable_squares"]) for case in cases]
+    assert separating == [case["separating_square_count"] for case in cases]
+    assert moving == [case["movable_square_count"] for case in cases]
+    assert validate.SCREEN_FINDINGS[f"n=1..{last_n}"] == (
+        sum(count > 0 for count in separating),
+        sum(separating),
+        sum(count > 0 for count in moving),
+        sum(moving),
+    )
+
+
+@pytest.mark.parametrize("sample", [False, True])
+@pytest.mark.parametrize("stale", [False, True])
+def test_screen_output_guards_accept_current_and_refuse_previous_pose_findings(
+    monkeypatch: pytest.MonkeyPatch, *, sample: bool, stale: bool
+) -> None:
+    findings = validate._screen_findings()
+    if stale:
+        findings = (
+            "324 records screened, 120 with a square that separates (1867 squares), "
+            "302 with a square that translates at all (4511 squares), excluded: none"
+        )
+    output = (
+        "translation escape screen sample check passed: 12 of 324 records replayed "
+        f"(every 27th from n=1); retained screen: {findings}"
+        if sample
+        else f"translation escape screen check passed: {findings}"
+    )
+    monkeypatch.setattr(validate, "_module", lambda *_args: output)
+    action = (
+        validate._translation_escape_sample if sample else validate._translation_escape_screen
+    )
+    context = _budget_context(timeout_seconds=900.0, explicit=False)
+    if stale:
+        with pytest.raises(validate.StepFailureError, match="output omitted required text"):
+            action(context)
+    else:
+        assert action(context) == output
+
+
 @pytest.mark.parametrize(
     ("summary", "expected_scope", "expected_budget"),
     [("everything", "whole", validate.FAST_SUITE_BUDGET_SECONDS), ("narrow 7", "subset", None)],
@@ -3753,6 +3812,14 @@ def test_a_verified_merge_repeats_everything_not_positively_tree_reusable() -> N
         "campaign record",
         # An advisory wall's tracking bead is read from the bead store, not the tree.
         "tier ceilings are declared and not slack",
+        # Historical site identity compares with the mutable base, not just this tree.
+        "published URL registry and historical compatibility",
+        # The new native crate is not yet classified as tree-reusable.
+        "n17 kernel verifier (Rust)",
+        # New custody checks repeat until their tree reuse is explicitly classified.
+        "SQUISH update certification binds complete reviewed inputs",
+        "SQUISH second update certification binds complete reviewed inputs",
+        "rational refinement custody binds complete replay inputs",
     }
 
     # Fail closed: a new fast step is repeated until explicitly classified.
@@ -3962,8 +4029,14 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
     for job_name in ("suite-a", "suite-b", "suite-c", "suite-d"):
         assert not _installs_chromium(document["jobs"][job_name], pull_request=True), job_name
     assert set(validate.SITE_LAYOUT_TESTS) == {
+        "tests/test_site_case_records.py",
+        "tests/test_site_math_faces.py",
+        "tests/test_site_column_measurement.py",
+        "tests/test_site_result_filters.py",
         "tests/test_site_result_columns.py",
         "tests/test_site_frontier_table.py",
+        "tests/test_site_rendering.py",
+        "tests/test_site_math_preferences.py",
     }
     for path in validate.SITE_LAYOUT_TESTS:
         assert (validate.PROJECT_ROOT / path).is_file(), path
@@ -3985,18 +4058,16 @@ def test_a_frontend_job_without_chromium_is_detected() -> None:
     assert _installs_chromium(document["jobs"]["validate"], pull_request=False)
 
 
-def test_the_site_layout_step_requires_a_chromium_and_runs_its_two_files(
+def _captured_site_layout_commands(
     monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    """The step fails rather than skips when no Chromium launches: it sets the name
-    `tests.site_browser` reads, for its command alone, and runs exactly the files the
-    quick lane ignores, one to a worker as the quick lane runs its own."""
-    observed: dict[str, Any] = {}
+) -> tuple[list[tuple[str, ...]], list[object], str]:
+    commands: list[tuple[str, ...]] = []
+    environments: list[object] = []
 
     def capture(_context: validate.Context, command: Sequence[str], **options: Any) -> str:
-        observed["command"] = tuple(command)
-        observed["environment"] = options.get("extra_environment")
-        return ""
+        commands.append(tuple(command))
+        environments.append(options.get("extra_environment"))
+        return f"command {len(commands)} passed"
 
     monkeypatch.setattr(validate, "_run", capture)
     monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
@@ -4007,21 +4078,172 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_its_two_files(
         inner_jobs=1,
         environment=os.environ.copy(),
     )
-    validate._site_layout_tests(context)
-    assert observed["command"] == (
-        sys.executable,
-        "-m",
-        "pytest",
-        "-q",
-        "-p",
-        "no:cacheprovider",
-        "-n",
-        "2",
-        "--dist=loadfile",
-        *validate.SITE_LAYOUT_TESTS,
-    )
-    assert observed["environment"] == {validate.REQUIRE_CHROMIUM: "1"}
+    output = validate._site_layout_tests(context)
+    return commands, environments, output
+
+
+def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Keep functional layout parallel and the four load-budget cases serial."""
+    commands, environments, output = _captured_site_layout_commands(monkeypatch)
+    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    assert commands == [
+        (
+            *common,
+            "-n",
+            "2",
+            "--dist=loadfile",
+            *validate.SITE_LAYOUT_TESTS,
+            "-k",
+            "not test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets",
+        ),
+        (
+            *common,
+            "-n",
+            "0",
+            validate.SITE_LOAD_BUDGET_TEST,
+        ),
+    ]
+    assert environments == [{validate.REQUIRE_CHROMIUM: "1"}] * 2
+    assert output == "command 1 passed\ncommand 2 passed"
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
+
+
+def test_site_layout_commands_partition_the_original_collection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Neither phase may drop, repeat, or widen the existing four timing cases."""
+    commands, _environments, _output = _captured_site_layout_commands(monkeypatch)
+    assert len(commands) == 2
+
+    def collect(command: Sequence[str]) -> set[str]:
+        # Collection needs no xdist worker: preserve selection, remove allocation.
+        serial = [
+            argument
+            for index, argument in enumerate(command)
+            if argument != "-n"
+            and not argument.startswith("--dist=")
+            and (index == 0 or command[index - 1] != "-n")
+        ]
+        completed = subprocess.run(
+            (*serial, "-n", "0", "--collect-only"),
+            cwd=validate.PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=30,
+        )
+        return {line for line in completed.stdout.splitlines() if line.startswith("tests/")}
+
+    original = collect(
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "-p",
+            "no:cacheprovider",
+            *validate.SITE_LAYOUT_TESTS,
+        )
+    )
+    parallel, serial = (collect(command) for command in commands)
+    assert serial == {
+        f"tests/test_site_rendering.py::"
+        f"test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets[{case}]"
+        for case in ("390-light", "390-dark", "1280-light", "1280-dark")
+    }
+    assert original == parallel | serial
+    assert not parallel & serial
+
+
+@pytest.mark.parametrize("failure_index", [0, 1])
+@pytest.mark.parametrize("error_type", [validate.StepFailureError, validate.StepTimeoutError])
+def test_site_layout_command_failure_keeps_prior_output_and_stops(
+    monkeypatch: pytest.MonkeyPatch,
+    failure_index: int,
+    error_type: type[validate.StepFailureError],
+) -> None:
+    """A failed layout or timing command cannot become a passing combined step."""
+    calls = 0
+
+    def fail(_context: validate.Context, _command: Sequence[str], **_options: Any) -> str:
+        nonlocal calls
+        index = calls
+        calls += 1
+        if index == failure_index:
+            raise error_type("browser command failed")
+        return "functional layout passed"
+
+    monkeypatch.setattr(validate, "_run", fail)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+    with pytest.raises(error_type, match="browser command failed") as failed:
+        validate._site_layout_tests(context)
+    assert calls == failure_index + 1
+    if failure_index:
+        assert "functional layout passed" in str(failed.value)
+
+
+@pytest.mark.parametrize("timeout_seconds", [7.0, 900.0])
+def test_site_layout_commands_share_the_original_total_timeout(
+    monkeypatch: pytest.MonkeyPatch, timeout_seconds: float
+) -> None:
+    """Splitting the step must not give its second command a fresh hang budget."""
+    clock = iter((100.0, 100.0, 103.0))
+    monkeypatch.setattr(validate.time, "monotonic", lambda: next(clock))
+    timeouts: list[object] = []
+
+    def capture(_context: validate.Context, _command: Sequence[str], **options: Any) -> str:
+        timeouts.append(options.get("timeout_seconds"))
+        return "passed"
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        timeout_seconds=timeout_seconds,
+        environment=os.environ.copy(),
+    )
+    validate._site_layout_tests(context)
+    assert timeouts == [timeout_seconds, timeout_seconds - 3.0]
+
+
+@pytest.mark.parametrize("completed_commands", [0, 1])
+def test_site_layout_exhausted_budget_cannot_start_another_command(
+    monkeypatch: pytest.MonkeyPatch, completed_commands: int
+) -> None:
+    """At the deadline, refuse launching and retain any completed phase's output."""
+    clock = iter((100.0, *((100.0,) * completed_commands), 107.0))
+    monkeypatch.setattr(validate.time, "monotonic", lambda: next(clock))
+    calls = 0
+
+    def capture(_context: validate.Context, _command: Sequence[str], **_options: Any) -> str:
+        nonlocal calls
+        calls += 1
+        return "functional layout passed"
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        timeout_seconds=7.0,
+        environment=os.environ.copy(),
+    )
+    with pytest.raises(validate.StepTimeoutError, match="subprocess budget") as failed:
+        validate._site_layout_tests(context)
+    assert calls == completed_commands
+    if completed_commands:
+        assert "functional layout passed" in str(failed.value)
 
 
 def test_a_commands_extra_environment_reaches_only_that_command(
@@ -4375,6 +4597,7 @@ def test_broad_is_opt_out_so_a_new_step_joins_the_edit_tier() -> None:
         "exact rectangle Rust geometry",  # exact crate lint/tests and Python oracle
         "measure verifier Rust (sqverify-fast)",  # clean-room crate, oracle, controls
         "n17 branch-and-bound native (Rust)",  # native pilot build and bitwise replay
+        "n17 kernel verifier (Rust)",  # standalone ordinary-certificate controls and floor
         # The four record sweeps, split at their measured seams on 2026-09-06 so the pull
         # request's second runner can schedule them. The figures beside them are the
         # 148.50s and 102.56s above, divided by the same measurement that split them:

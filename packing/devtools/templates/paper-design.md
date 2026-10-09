@@ -296,10 +296,9 @@ with these exceptions:
 punctuation face, Source Sans 3, Planetaire Mono Text, the KaTeX faces and KPress’s math
 composites), because every page takes them from the same functions,
 `render_n11_lower_bounds_explainer.kpress_css`, `katex_css` and `relation_face_css`: the
-papers and the workbench inline them, and the site’s pages link them as shared files
-(**Shared Assets**, below).
-`devtools.measure_site_pages faces` compares them block by block, reading a linked
-stylesheet as the page’s own.
+published papers, workbench and site pages link them as shared files (**Shared Assets**,
+below). `devtools.measure_site_pages faces` compares them block by block, reading a
+linked stylesheet as the page’s own.
 KPress leads each family token with an embedding host’s hook, `--kpress-host-font-sans`
 and its siblings, so an application embedding a KPress fragment can supply its own face.
 The site does not honor those hooks: a viewer that injects one would draw the page in a
@@ -409,14 +408,24 @@ fetched them again on every page, since a page’s own bytes were all it could c
 - **Faces.** Every face keeps `font-display: block`, so a face that arrives late holds
   the text it draws invisible.
   The faces a page draws its first screen in, PT Serif’s regular and Source Sans 3’s
-  upright, are preloaded beside the stylesheets (`site_assets.PRELOADED_FACES`), so they
-  are asked for with the stylesheet rather than after layout; the rest are fetched when
-  a page first draws in them, and a face no page draws, a print instance, only when one
-  prints.
+  upright, are declared beside the stylesheets (`site_assets.PRELOADED_FACES`). A small
+  prepaint program activates these hints with anonymous CORS on HTTP and HTTPS, and
+  without CORS for local files; choosing the mode before requesting the fonts avoids
+  WebKit’s file-origin cache failure while preserving shared HTTP font downloads.
+  With JavaScript disabled, the same stylesheets load their faces normally.
+  While regular PT Serif loads, the default prose stack uses metric-adjusted local
+  Georgia or Times New Roman/Liberation Serif aliases to keep opening paragraphs stable.
+  The delayed-face regression checks both fallback families, final PT Serif attribution,
+  paragraph geometry and the existing layout-shift limit; saved sans and system choices
+  retain their more specific stacks.
+  The rest are fetched when a page first draws in them, and a face no page draws, a
+  print instance, only when one prints.
 - **What a build writes.** `render_overview.write_site` writes exactly the files its
-  pages name, with the faces their stylesheets name, and removes any other file under
-  `assets/`; `render_overview --check` compares the directory against that set, and
-  fails a page that names a file no build wrote.
+  pages name, with the faces their stylesheets name.
+  Each producer preserves other producers’ files and refuses different bytes at an
+  existing content-addressed path.
+  Producer checks compare their own files; the assembled-site check validates the
+  complete output.
 - **What the deploy checks.** `check_published_site`, live and with `--local`, holds
   every file a page names, and every face a named stylesheet names, to being served with
   the bytes its name was given for.
@@ -424,20 +433,42 @@ fetched them again on every page, since a page’s own bytes were all it could c
   nothing beside it, puts the shared files back in it: `site_assets.SiteAssets.inlined`
   from a render, `site_assets.inlined_from` from a built site.
 
-The papers and the workbench still inline their assets: the explainer’s math
-preparation, both papers’ PDFs, `compare_math_fonts` and the workbench’s
-content-security policy read them from the page, and each moves to the shared files with
-its own tools. `devtools.measure_site_pages load --network fast-4g --after index.html`
-measures what a reader’s second page costs; on 2026-10-04 it moved 1.0 to 1.3 MB on
-every page before this change.
+Paper renderers retain self-contained output for offline tools.
+Publication prepares math before `site_assets.link_inline_assets` extracts styles, fonts
+and scripts; the lower-bound paper preserves all four measured font contexts.
+A tool that loads a page without its directory uses `site_assets.read_inline_page`,
+resolving resources from the page’s path.
+Paper metadata includes the article title, credits, recorded publication and revision
+dates, scholarly citation tags, and breadcrumbs.
+
+The lower-bound paper has a specific 1,500,000-byte HTML allowance within the site’s
+2,000,000-byte hard limit.
+Its prepared publication measures 1,417,109 bytes: 187,933 bytes before preparation and
+1,229,176 bytes for the measured math across four saved font preferences.
+The 800,000-byte target applies to the other papers.
+This exception keeps each font choice ready before paint without fetching primary
+mathematical content.
+
+The published workbench owns `workbench/assets/` and `workbench/data/`. Its corpus is a
+separate content-addressed JSON file.
+The loader checks the HTTP response and decodes the corpus before starting the
+application; failures remain visible above the viewport.
+Its policy permits same-origin resources and connections.
+The favicon stays inline so the workbench artifact can run independently of the root
+site. The candidate generator continues to produce one self-contained file.
+Browser checks serve published output over HTTP, and the reproducibility check compares
+every emitted file.
+`devtools.measure_site_pages load --network fast-4g --after index.html` measures what a
+reader’s second page costs; on 2026-10-04 it moved 1.0 to 1.3 MB on every page before
+this change.
 
 ## Math Loading
 
-Every page, the optimality paper included, loads its mathematics through the explainer’s
-pipeline, from the same code:
+Published pages carry complete mathematics in their initial HTML. Interactive
+mathematics uses the explainer’s shared runtime:
 
 - **Faces and styles.** KaTeX’s faces pruned to those a page can reach, inlined as data
-  URIs on the papers and published as shared files for the site’s pages, and switched
+  URIs for offline tools and linked from shared files in published pages, and switched
   from `font-display: swap` to `block`, so no formula is drawn in a host face and
   redrawn; KPress’s math composites; the three relation glyphs (`relation_face_css`).
 - **Scripts.** `render_n11_lower_bounds_explainer.katex_js`: KaTeX, KPress’s metric
@@ -451,37 +482,41 @@ pipeline, from the same code:
 - **Batching.** `squaresMath.batch` submits sixteen formulas per task, so a formula that
   is ready shows while later ones are still being submitted.
 
-The explainer adds what only a single published page can: its formulas are typeset,
-measured and written into the HTML at publication
-(`render_n11_lower_bounds_explainer --prepare-math`), so the client hydrates rather than
-lays out, and its queue puts the interactive panels first.
-The KPress pages are rendered without a browser, so they typeset in the client, driven
-by `overview/math.js`: the formulas within two screens of the viewport first, the rest
-as the reader scrolls toward them or opens what hides them, and, once the page has
-loaded, one at a time in the browser’s idle time.
-A formula whose faces missed the runtime’s wait is retried twice after the page and its
-fonts load, which a long page needed when every face decoded at once.
-Both mark the end of their load-time work with `math-ready`. The optimality paper is
-typeset as the KPress pages are, by the same two scripts
-(`render_n11_optimality_review.math_scripts`). It used to inline KPress’s own entry
-points, which neither kern a function’s name ($s(11)$ was set without the one-mu space
-it has on every other page) nor wait for a formula’s faces, so a formula that asked for
-a face the page does not ship (`\mathsf`) was drawn from the reader’s machine.
-Under the shared pipeline such a formula keeps its MathML, and the paper’s PDF refuses
-to print with a formula untypeset.
+The lower-bound paper also measures formula geometry in four font contexts with pinned
+Chromium; its publication command always prepares the formulas, and `--prepare-math`
+remains accepted for existing callers.
+Its client hydrates those boxes and puts interactive panels first in the queue.
+The other papers and ordinary content pages use `site_math.prepare` to render visual
+KaTeX beside semantic MathML without launching a browser.
+Their prose, captions and headings select the matching serif or sans math profile.
+The published papers and content pages remain readable with JavaScript disabled.
+Dense frontier table cells display exactly their existing semantic MathML, once per
+formula, under `data-site-native-math="frontier"`; they omit the visual KaTeX spans.
+The page’s prose still uses prepared KaTeX. Native MathML structures and operators use
+the platform’s math font.
+The text tokens (`mi`, `mn`, `mtext`, and `ms`) use the table’s sans reader font on
+screen and in print.
+The browser readability check requires a visible, nonempty MathML subtree in each marked
+cell, under the ordinary load and layout budgets.
 
-Each client layout costs a style pass over the whole document, 6ms a formula on the
-synopsis against 0.9ms with KPress’s `:has(.kpress-toc)` layout rules removed: those
-selectors make every change inside the column re-match the page’s grid.
-The rules are KPress’s, so the fix belongs upstream (a class stamped by the renderer,
-which KPress already accepts as `.has-toc`, tracked as think-csiv); until then the
-synopsis’s 1,357 formulas cost about eight seconds of idle time in all.
+Interactive formulas use the shared runtime.
+A formula whose faces miss the runtime’s wait is retried twice after the page and its
+fonts load, and the paper marks completion with `math-ready`. The review papers retain
+their runtime for browser and print tools (`render_n11_optimality_review.math_scripts`).
+A formula that asks for a face the page does not ship keeps its MathML, and the paper’s
+PDF refuses to print with a formula untypeset.
+
+In the client-runtime measurements below, each client layout cost a style pass over the
+whole document, 6ms a formula on the synopsis against 0.9ms with KPress’s
+`:has(.kpress-toc)` layout rules removed: those selectors made every change inside the
+column re-match the page’s grid.
+Those measurements concern client typesetting; published prose uses prepared math.
 
 `devtools.measure_site_pages load` measures a built site in cold Chromium contexts
 (median of three loads, milliseconds from navigation start; “visible math” is the first
 frame at which every formula in the first viewport is typeset and showing, “blocking”
-the long tasks’ time over 50ms). Before is the site at `3e8274909`, after is this
-pipeline:
+the long tasks’ time over 50ms). The historical client-runtime comparison below uses
+`3e8274909` as its before-build and the shared runtime as its after-build:
 
 | Page | Width | DOMContentLoaded | Visible math | Load-time math done | Longest task | Blocking |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -513,9 +548,9 @@ That one page was slow before any math ran: it carried every case’s record in 
 document, and parsing and styling that took several seconds on its own (think-cy3a). The
 record page carries the index alone, 1.9MB, and fetches the one record a reader asks for
 (**Case records**, below).
-Publication-time preparation for the KPress pages, which would remove the client layout
-and the fallback-to-KaTeX reflow as it did for the explainer, is not done: it needs a
-browser in the pages’ build (think-89lw).
+Ordinary content pages now prepare their visual math at build time with
+`site_math.prepare`, without a browser; these historical timings do not measure that
+publication contract.
 
 ## Spacing
 
@@ -1240,8 +1275,9 @@ it.
     40px from the window at 1024 and 768 pixels and 16px at 390, which is 8px
     (`--site-wide-gutter`) inside the page’s content area wherever the page clips.
 
-- **Atlas grid.** The atlas grid holds every tracked case, n = 1 to 324, as a square
-  drawing in the page’s ink with its n beneath.
+- **Atlas grid.** The atlas grid holds every tracked case, n = 1 to 324, as a cached
+  square SVG image with its n beneath.
+  The artwork uses dark ink on a white canvas in both page themes.
   The grid bleeds past the wide track as the window grows, to 140rem less the page
   gutters, and its cells keep a readable size (at least 6.4rem, 4.6rem on a phone, at
   the Medium size; **Atlas sizes**, below), so a wider screen shows more cases per row:
@@ -1250,13 +1286,14 @@ it.
   focus, and is a link to its case’s record file, `cases/11.html`, which opens in the
   page’s one case popover (**Case records**, below).
   The wash is the cell’s background, behind the drawing, and it is the only thing that
-  changes: every line of the drawing keeps the page’s ink at rest, hovered, focused and
+  changes: every line of the artwork keeps its fixed ink at rest, hovered, focused and
   pressed, in both themes.
-  The drawing sets that colour on itself rather than reading the link’s, which KPress
-  lightens on hover (`tests/test_site_drawing_hover.py` reads both in Chromium).
-  The cells ship in a `<template>` and are placed only as the grid nears the viewport
-  (`overview/atlas-grid.js`), so they add nothing to the first paint; each drawing is
-  400 units across, fine enough to show large.
+  `tests/test_site_drawing_hover.py` checks the loaded SVG, its geometry and exact
+  painted colours, and contrast against its own canvas.
+  The first hundred cells arrive as static markup with reserved image dimensions; the
+  remaining cells are already present in a hidden container.
+  Images use native lazy loading, and `overview/atlas-grid.js` changes visibility after
+  reader input. Each drawing has a 1000-unit frame, fine enough to show large.
   The grid is the atlas’s default view; the triangle is the other (**Atlas views**,
   below).
 
@@ -1266,10 +1303,11 @@ it.
   default and the one tab in the page’s tab order, with the arrow keys, Home and End
   moving between the two and selecting the tab the focus lands on
   (`overview/atlas-view.js`). The grid is the stylesheet’s alone, and the page is
-  rendered in it; without scripting the strip stays `hidden`, as the expander’s row
-  does. The triangle sets the cases by the grid bound: row $k$ holds the $2k - 1$ cases
-  $n = (k - 1)^2 + 1$ to $k^2$, the ones that need a square of side $k$, and ends at
-  $k^2$ on the right edge, so the perfect squares $1, 4, 9, 16, \ldots$ run down it;
+  rendered in it; the strip is present in the first response, and scripting handles its
+  controls. Without scripting, ordinary links reach all case records and the complete
+  frontier. The triangle sets the cases by the grid bound: row $k$ holds the $2k - 1$
+  cases $n = (k - 1)^2 + 1$ to $k^2$, the ones that need a square of side $k$, and ends
+  at $k^2$ on the right edge, so the perfect squares $1, 4, 9, 16, \ldots$ run down it;
   those are the cases whose best packing is the $k \times k$ grid itself, and their
   tiles are numbered in the text’s colour at the medium weight.
   Ten rows show the first hundred cases, the last 19 tiles wide; eighteen show all 324,
@@ -1872,10 +1910,8 @@ it.
     `tests/test_frontier_page.py` holds every decimal to its closed form’s exact value.
     `devtools.measure_site_pages columns` reports the widths.
 
-- **Result filters.** Every table of results sits under one tools bar, the same on the
-  overview’s recent table and on the results page: the same controls, the same choices
-  and the same order. Only where Significance, Max age and Hide superseded start, and the
-  count at its end, are the table’s own.
+- **Result filters.** The complete results page has a tools bar for every registered
+  result. The overview’s recent table has a static scope label and a link to that page.
   `overview_sections.result_filters` writes it and `overview/table.js` drives it.
   Every table’s bar, the frontier table’s too, is set at the control size,
   `--site-font-size-control`, 0.8 of the sans base and a step under the table’s own
@@ -1961,28 +1997,19 @@ Max age is a number of days, and empty is no limit. There is no date range.
   baseline (`align-items: baseline`): the checkbox’s words, the other labels’ and the
   count read level, on the Frontier page’s bar too.
 
-- **Defaults.** The caller passes them (`FilterDefaults`), and they are the one thing
-  that differs between the two bars.
-  Recent Results on the overview starts at significance S3 and up (S4 until 2026-10-03,
-  `think-x60s`), a maximum age of 180 days and Hide superseded checked
-  (`RECENT_DEFAULTS`); the results page starts at All, no maximum age and the box clear
-  (`RESULTS_DEFAULTS`), so every result shows.
-  Every other control starts at All on both.
-  The bar has no reset control: a control’s default is its state in the HTML, which a
-  fresh load of the page returns to.
-  A row outside its table’s defaults is `hidden` in the HTML, never left out of it, and
-  the count is written there too, so the first paint is already the filtered table and
-  never flashes every row.
-  A control’s state in the HTML is its default, which is all the script knows of it.
+- **Defaults.** Recent Results on the overview contains only results of significance S3
+  and up, at most 180 days old and not superseded (`RECENT_DEFAULTS`). The renderer
+  selects those rows and writes their count and scope into the HTML. The complete
+  results page includes every row and starts at All, no maximum age and Hide superseded
+  clear (`RESULTS_DEFAULTS`). Its other controls start at All too.
+  The bar has no reset control: a fresh page load restores the HTML defaults unless the
+  address presets a supported filter.
 
-- **Age.** On the page an age is measured from the reader’s own day, which the script
-  reads when it loads and at every change, so a default of 180 days moves with the
-  calendar and needs no rebuild.
-  The HTML cannot know that day, and must not read the clock, since two renders of one
-  tree are compared byte for byte.
-  It measures from the newest `registered` date in the register (`reference_date`),
-  which decides only which rows start `hidden` and the count written beside them; the
-  script settles both again on load.
+- **Age.** The renderer measures the overview’s 180-day window from the newest
+  `registered` date in the register (`reference_date`). This keeps two renders of one
+  source tree identical, and the initial subset stays visible without scripts.
+  On the complete results page, an age filter measures from the reader’s own day when
+  the script applies a query preset or responds to a control change.
 
 - **One flat list.** A table of results has no heading row among its rows, on either
   page: every row is a result, in one order, newest first by the date the table shows,
@@ -1996,9 +2023,12 @@ Max age is a number of days, and empty is no limit. There is no date range.
   The script keeps it, and without scripts one rule, `.site-table tr[hidden]:target`,
   shows it.
 
-- **Links.** A link can open either table filtered: each query parameter presets the
-  control it names, `s-min=3`, `source=ours`, `n=17`, `age=30`, `current=true`; an empty
-  value, `s-min=&age=&current=`, clears a default, and so does `current=false`.
+- **Links.** A link can open the complete table filtered: each query parameter presets
+  the control it names, `s-min=3`, `source=ours`, `n=17`, `age=30`, `current=true`; an
+  empty value, `s-min=&age=&current=`, clears a default, and so does `current=false`. On
+  the overview, the ordinary “Browse and filter every result” link reaches the complete
+  table. With scripts, it carries supported query parameters from the current address so
+  a filter for older results reaches the full dataset.
 
 - **A row’s popover** follows it through filtering and sorting, since the row finds it
   by id (**Row popovers**, below).
@@ -2007,9 +2037,9 @@ The bar wraps onto further lines as the page narrows; on a phone each control ta
 about a line. Without scripts a filter cannot be changed, so nothing stays filtered:
 under `@media (scripting: none)` every row shows, and the bar, which would do nothing,
 does not. `tests/node/overview_table/` runs the script’s filters, alone and wired to a
-stand-in table, and `tests/test_overview.py` holds both pages to the identical bar and
-each to its defaults.
-`tests/test_site_result_filters.py` uses Hide superseded in a browser on both pages, by
+stand-in table, and `tests/test_overview.py` checks the static recent subset, its
+complete table link and the complete page’s controls.
+`tests/test_site_result_filters.py` uses Hide superseded on the complete page, by
 pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
 
 - **Row popovers.** The row is the unit: a table row with detail opens one popover for
@@ -2124,15 +2154,15 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `tests/test_overview.py` holds each section’s prose to one paragraph of its own where
   this applies, the cards to their pages, and the three pages to saying each thing once.
 
-- **Recent results.** The overview’s Recent Results section opens with its table, and
-  under the table’s one action, “See all results”, stand two short paragraphs and a key
-  (the owner, 2026-10-02, `think-tgjv`; one paragraph of up to 125 words stood between
-  the heading and the filter bar until then).
+- **Recent results.** The overview’s Recent Results section opens with its scope label
+  and table, and under the table’s one action, “See all results”, stand two short
+  paragraphs and a key (the owner, 2026-10-02, `think-tgjv`; one paragraph of up to 125
+  words stood between the heading and the filter bar until then).
   The first paragraph, 50 to 100 words, is the headline of recent progress, eleven
   squares settled by T-060, seventeen squares bracketed by T-093 and T-065 (T-043 until
   2026-10-05), the new exact values at $n = 21$, $32$ and $45$, each id linked to its
-  row and held to the register by `check_results.READER_TIER`; then one sentence on
-  where the table above starts.
+  row and held to the register by `check_results.READER_TIER`; then one sentence on the
+  scope of the table above and a link to the complete table’s filters.
   The homepage no longer explains the ratings (the owner, 2026-10-03, `think-42dx`): the
   paragraph that said what each rating means and the key of every rung under the table
   are gone, and the Results page carries both.
@@ -2142,23 +2172,22 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   S5; every verification and confirmation chip, V0 to C5, each titled with the rubric’s
   meaning; and the star, “new result”, with a link, “What each rung means”, to the
   Verification Ladders on the Results page.
-  The table is one table, not cards or a list: every result, by the date the table
-  shows, newest first, one row each (`recent_table`). It is the results page’s table,
-  with its columns, its rows, its sorting and its card-per-row form on a phone
-  (**Tables**, above).
+  The table contains the recent subset, by the date the table shows, newest first, one
+  row each (`recent_table`). It shares the results page’s columns, sorting and
+  card-per-row form on a phone (**Tables**, above).
   The ratings, the kinds, the statuses and the dating rule are defined on the Results
   page, and a result’s rungs, review and retained packet are its row’s; the section
   repeats none of them.
   README’s two paragraphs on the same progress opened the section until that day and are
   README’s own now (**Page headings**, above).
-  The results page’s tools bar sits above it (**Result filters**, above), starting at
-  significance S3 and up, a maximum age of 180 days and Hide superseded checked, with
-  the count of rows shown out of the total at the bar’s end.
-  Those three defaults are all that make the table recent and current: no result is left
-  out of it by a date or a status the page fixes, and none is listed anywhere but in it.
+  Its scope label states the number included, significance S3 and up, the 180-day window
+  and the exclusion of superseded results.
+  The homepage offers sorting of that subset; filtering and older results are on the
+  complete results page.
   A result reported and not yet replayed here is a row like any other, its status
   `recorded`. A row shows its records and opens its result’s popover (**Row popovers**,
-  above), as the same row of the results page does, and links nowhere else.
+  above), as the same row of the results page does.
+  Its ordinary result link also reaches the complete result article without scripts.
   The section holds no card or bulleted list, and the “See all results” line, with the
   right arrow, follows the table.
 
@@ -2349,7 +2378,7 @@ these tags itself, so the set cannot differ between page kinds.
 
 | Tag | Rule |
 | --- | --- |
-| `<title>` | The page’s own name, a middle dot, then “The Squares Project”; the overview’s is the project’s name alone |
+| `<title>` | Articles use the page’s own name. Other pages append a middle dot and “The Squares Project”; the overview’s is the project’s name alone. |
 | `meta name="description"` | One or two plain sentences about this page and no other, at most 160 characters |
 | `link rel="canonical"` | The address the page is served at, in full, built from `render_overview.SITE_URL`; a directory’s `index.html` is the directory |
 | `og:title`, `twitter:title` | The page’s own name, without the project’s |
@@ -2503,11 +2532,16 @@ The front is, in order:
   first version has no history to link.
 
 - **The dates line.** One grammar on every paper: `<What> <Month D, YYYY>` parts joined
-  by a middle dot, ending with “Last revised”, the day the article last changed.
-  A paper with a source leads with the day the source published its proof (“Original
-  proof September 29, 2026”); the explainer leads with the day its first edition went
-  live (“First published September 5, 2026”). Every value is `sqpack.release`’s, and
-  `devtools.artifact_dates` holds each to its rule.
+  by a middle dot. When first publication and revision fall on the same day, show
+  “Published October 8, 2026” once.
+  When they differ, show “First published” and end with “Last revised”, the day the
+  article last changed.
+  Source dates such as “Original proof September 29, 2026” keep their labels, even when
+  they share a publication date.
+  `paper_front` applies this display rule to HTML, Markdown, and the page printed as
+  PDF. The source record retains both publication and revision dates for metadata.
+  Every value is `sqpack.release`’s, and `devtools.artifact_dates` holds each to its
+  rule.
 
 - **The series strip.** Under the dates, after a line’s space, which part of the series
   the paper is (“Part II of 3 in the n = 11 series”), then each other part on a line of
@@ -2526,9 +2560,9 @@ The front is, in order:
 
 In the Markdown edition the front is the title as a heading and the credits as a list,
 one item a line, bold and linked as the page is.
-In the head, the title is the paper’s name, a middle dot and the project’s name, and the
-revised day is `article:modified_time`; the explainer’s first publication is
-`article:published_time` too (**Page Metadata and Social Cards**, above).
+In the head, the title is the paper’s name, without a site suffix, and the revised day
+is `article:modified_time`; every paper’s first publication is `article:published_time`
+(**Page Metadata and Social Cards**, above).
 
 The credits are one grid column the width of the page (`.credits`, in the publication
 layer), an address in them may break anywhere, and the three lines’ spaces are `1lh`, on

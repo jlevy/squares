@@ -50,12 +50,13 @@ import html
 import math
 import re
 import sys
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 from dataclasses import replace
 from decimal import Decimal
 from functools import cache
 from pathlib import Path
 from typing import Any, NamedTuple, cast
+from urllib.parse import urlsplit
 
 from devtools import repo_links
 from devtools.overview_data import (
@@ -520,6 +521,41 @@ def case_panel(n: int, overview: Overview, *, label: bool) -> str:
     )
 
 
+def _case_table(rows: Sequence[tuple[int, Sequence[str]]]) -> str:
+    """Native cells share only consecutive, exactly equal bounds or status markup.
+
+    Case identifiers and record links always have their own cell. Row spans retain all
+    six logical cells of each case without repeating identical badges and bounds."""
+    spans = [[1] * 6 for _ in rows]
+    for column in range(1, 5):
+        start = 0
+        while start < len(rows):
+            end = start + 1
+            while end < len(rows) and rows[end][1][column] == rows[start][1][column]:
+                end += 1
+            spans[start][column] = end - start
+            for index in range(start + 1, end):
+                spans[index][column] = 0
+            start = end
+    body = []
+    for (n, cells), counts in zip(rows, spans, strict=True):
+        rendered = []
+        for column, (content, count) in enumerate(zip(cells, counts, strict=True)):
+            if not count:
+                continue
+            rowspan = f' rowspan="{count}"' if count > 1 else ""
+            name = {1: "lower", 2: "upper", 5: "records"}.get(column)
+            classes = f' class="{name}"' if name else ""
+            rendered.append(f"<td{classes}{rowspan}>{content}</td>")
+        body.append(f'<tr data-overview-case="{n}">{"".join(rendered)}</tr>')
+    headings = ("n", "Proved lower", "Best known", "Gap", "Status", "Records")
+    head = "".join(f'<th scope="col">{heading}</th>' for heading in headings)
+    return (
+        '<table class="site-result-cases" aria-label="The cases of this result">'
+        f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table>"
+    )
+
+
 def case_list(cases: Sequence[int], overview: Overview) -> str:
     """A broad result's cases, one compact row each: the film's two bounds and the gap,
     the case's status, and its record on this site, its row in the frontier atlas and
@@ -543,42 +579,28 @@ def case_list(cases: Sequence[int], overview: Overview) -> str:
             else ""
         )
         rows.append(
-            _grid_row(
+            (
+                n,
                 [
-                    _cell(f'<a href="{case_url(n)}">{n}</a>', classes="num"),
-                    _cell(f'<span class="is-lower">{_esc(lower)}</span>{star}', classes="num"),
-                    _cell(
-                        f'<span class="is-upper">{_esc(fact["upper"])}</span>', classes="num"
-                    ),
-                    _cell(_esc(gap), classes="num"),
-                    _cell(case_status_chip(status) + case_badges(n)),
-                    _cell(
+                    f'<a href="{case_url(n)}">{n}</a>',
+                    _esc(lower) + star,
+                    _esc(fact["upper"]),
+                    _esc(gap),
+                    case_status_chip(status) + case_badges(n),
+                    (
                         f'<a href="frontier.html#n-{n}">frontier</a> '
                         f'<a href="{_esc(repo_url(case_file(n)))}">'
-                        f"{_esc(case_file(n).name)}</a>",
-                        classes="site-result-case-records",
+                        f"{_esc(case_file(n).name)}</a>"
                     ),
                 ],
-                f' data-overview-case="{n}"',
             )
         )
-    heads = _grid_row(
-        [
-            _cell("n", "columnheader", "num"),
-            _cell("Proved lower", "columnheader", "num"),
-            _cell("Best known", "columnheader", "num"),
-            _cell("Gap", "columnheader", "num"),
-            _cell("Status", "columnheader"),
-            _cell("Records", "columnheader"),
-        ]
-    )
     return (
         f'<p class="site-result-note">This result concerns {len(cases)} cases, too many '
         "to draw one by one. Each is listed with the film\u2019s bounds, the proved lower "
         "bound and the best known side, and links to its case record, where its packing "
         "and number line are drawn.</p>"
-        '<div class="site-result-case-list"><div class="site-result-cases" role="table" '
-        f'aria-label="The cases of this result">{heads}{"".join(rows)}</div></div>'
+        f'<div class="site-result-case-list">{_case_table(rows)}</div>'
     )
 
 
@@ -662,7 +684,7 @@ def case_section(result: Result, overview: Overview, cases: Sequence[int]) -> st
 
 
 def _link(url: str, label: str, title: str = "") -> str:
-    titled = f' title="{_esc(title)}"' if title else ""
+    titled = f' title="{_esc(title)}"' if title and title not in url else ""
     return f'<a href="{_esc(url)}"{titled}>{label}</a>'
 
 
@@ -778,11 +800,13 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
     shared = [n for n in scope(other) if n in wanted]
     on = ""
     if len(cases) > 1:
-        on = DOT + (
-            math_html("n = " + ", ".join(map(str, shared)))
-            if len(shared) <= CASES_NAMED
-            else f"{len(shared)} of these cases"
-        )
+        if len(shared) > CASES_NAMED:
+            on = DOT + f"{len(shared)} of these cases"
+        elif is_broad(cases):
+            label = "case " if len(shared) == 1 else "cases "
+            on = DOT + label + ", ".join(map(str, shared))
+        else:
+            on = DOT + math_html("n = " + ", ".join(map(str, shared)))
     current_mark, this = "", ""
     if other.id == current.id:
         current_mark = ' data-current=""'
@@ -939,7 +963,23 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         if (resolved := _resolve(path)) is not None
     ]
     shown_artifacts = artifacts
-    if len(artifacts) > ARTIFACTS_OPEN:
+    if len(artifacts) > 20:
+        paths = [
+            resolved
+            for path in [*record["artifacts"], *(record.get("controls") or [])]
+            if (resolved := _resolve(path)) is not None
+        ]
+        directories = sorted({path.parent for path in paths})
+        shown_artifacts = [
+            f"<p>{len(artifacts)} artifacts and controls in {len(directories)} directories. "
+            f"{register_link(result, 'Complete artifact list in the result entry')}. "
+            + " ".join(
+                _link(repo_url(directory, kind="tree"), _esc(repo_links.relative(directory)))
+                for directory in directories
+            )
+            + "</p>"
+        ]
+    elif len(artifacts) > ARTIFACTS_OPEN:
         summary = f"{len(artifacts)} artifacts and controls"
         shown_artifacts = [
             f'<details class="site-result-artifacts"><summary>{summary}</summary>'
@@ -995,6 +1035,7 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
     """Refuse a body with a link to nothing: a repository path the working tree lacks, a
     commit-pinned repository link, a page the site does not serve, or a fragment no row
     or record carries."""
+    from devtools.overview_sections import result_fragment  # noqa: PLC0415
     from devtools.render_case_pages import CASES_HOME, case_url  # noqa: PLC0415
     from devtools.render_overview import SITE_PAGES  # noqa: PLC0415
 
@@ -1010,7 +1051,12 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
         "frontier.html": {f"n-{n}" for n in overview.cases},
         "all-results.html": ids,
     }
-    served = {*SITE_PAGES, CASES_HOME, *(case_url(n) for n in overview.cases)}
+    served = {
+        *SITE_PAGES,
+        CASES_HOME,
+        *(case_url(n) for n in overview.cases),
+        *(result_fragment(result.id) for result in overview.results),
+    }
     for page, fragment in SITE_LINK.findall(body):
         if page not in served:
             missing.append(page)
@@ -1022,12 +1068,62 @@ def check_links(result_id: str, body: str, overview: Overview) -> None:
         )
 
 
-def result_popover_html(result: Result, overview: Overview) -> str:
+def compatibility_notices(
+    result: Result,
+    amendments: Sequence[Mapping[str, Any]],
+    *,
+    registered_paths: Collection[str],
+) -> str:
+    """Explain an amended address inside the article that readers may fetch."""
+    notices = []
+    for amendment in amendments:
+        target = amendment.get("historical_target")
+        if not target:
+            continue
+        if not isinstance(target, str):
+            raise TypeError(f"{result.id}: historical target is not a local path")
+        url = urlsplit(target)
+        if (
+            target not in registered_paths
+            or url.scheme
+            or url.netloc
+            or url.query
+            or url.fragment
+            or target.startswith("/")
+            or any(part in {"", ".", ".."} for part in target.split("/"))
+            or "\\" in target
+        ):
+            raise ValueError(f"{result.id}: unregistered local historical target {target!r}")
+        title = amendment.get("historical_title")
+        if not isinstance(title, str) or not title.strip():
+            raise ValueError(f"{result.id}: historical target has no reader title")
+        kind = str(result.record["kind"]).replace("-", " ")
+        updated = _esc(amendment["date"])
+        notices.append(
+            '<aside class="site-result-section site-result-compatibility" '
+            'aria-label="Earlier result at this address"><p><strong>Earlier result at '
+            "this address.</strong> Earlier links referred to "
+            f'<a href="{_esc(target)}">{_esc(title)}</a>. This page now holds '
+            f"a separate {_esc(kind)} result by {_esc(result.credit)}. "
+            f'<span class="site-cell-quiet">Address updated '
+            f'<time datetime="{updated}">{updated}</time>.</span></p></aside>'
+        )
+    return "".join(notices)
+
+
+def result_popover_html(
+    result: Result,
+    overview: Overview,
+    *,
+    amendments: Sequence[Mapping[str, Any]] = (),
+    registered_paths: Collection[str] = (),
+) -> str:
     """The overview of one registered result, as its popover's body: the head, the case
     or cases, the chain of results on them, and the links, every one checked."""
     cases = scope(result)
     body = (
-        head(result, cases)
+        compatibility_notices(result, amendments, registered_paths=registered_paths)
+        + head(result, cases)
         + case_section(result, overview, cases)
         + chain_section(result, overview, cases)
         + links_section(result, overview, cases)
@@ -1045,13 +1141,13 @@ class LinkAudit(NamedTuple):
 
     results: int
     github: int
-    """Links into this repository, every one of which must name `main`."""
+    """Links into the repository's file tree, every one of which must name `main`."""
     github_paths: int
     """The distinct repository paths those links open."""
     site: int
     """Links to pages of this site, each checked as the body was rendered."""
     external: int
-    """Links off the site and the repository: a source's own home."""
+    """Source citations off the site, including first-party issue/discussion reports."""
     off_main: list[str]
     missing: list[str]
     """Repository paths the tree at `HEAD` does not hold, as `kind/path`."""
@@ -1085,7 +1181,7 @@ def link_audit(overview: Overview, bodies: Mapping[str, str] | None = None) -> L
         body = (bodies or {}).get(result.id) or result_popover_html(result, overview)
         sizes[result.id] = len(body.encode("utf-8"))
         for href in _HREF.findall(body):
-            if href.startswith(on_main):
+            if href.startswith(on_main) and not repo_links.is_report_link(href):
                 github += 1
                 if not branch.match(href):
                     off_main.append(f"{result.id}: {href}")

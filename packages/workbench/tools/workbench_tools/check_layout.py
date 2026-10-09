@@ -72,6 +72,7 @@ import numpy as np
 from PIL import Image
 from playwright.sync_api import FloatRect, Page, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.build_site import build
 from workbench_tools.probes import probe
 
@@ -943,7 +944,7 @@ def check(page_path: Path) -> str:
                 reduced_motion="reduce",
                 viewport={"width": VIEWPORTS[0][0], "height": VIEWPORTS[0][1]},
             )
-            page.goto(page_path.resolve().as_uri())
+            open_page(page, page_path)
             page.wait_for_function(probe("benchmark/page-api-ready"))
             page.evaluate(probe("capture/fonts-ready"))
             return check_open(page)

@@ -1,0 +1,4 @@
+{
+ "status": "FAIL",
+ "failure": "step 0: the derived closure is not the declared one"
+}

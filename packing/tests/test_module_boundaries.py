@@ -17,7 +17,14 @@ from typing import cast
 import pytest
 import yaml
 
-from devtools import evand_exact_certificates, upper_bound_packets
+from devtools import (
+    evand_arrangement_reports,
+    evand_exact_certificates,
+    squish_followup_packets,
+    squish_second_update_packets,
+    squish_upper_bound_packets,
+    upper_bound_packets,
+)
 from devtools.check_readme import meaningful_top_level_entries
 from sqpack.cli import validate
 from sqpack.project import ProjectLayoutError, require_project_root
@@ -561,6 +568,10 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         # jlevy/squares#248's first run.
         "/packing/resources/web/franciscouzo-square-packing-2026-09-27/",
         "/packing/resources/web/de-winter-square-packing-211-2026-09-16/",
+        # The three refinement houses require private full source facts and metadata,
+        # even in the atlas sweep's sparse checkout.
+        "/packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/",
+        "/packing/resources/web/rehwaldt-n68-refinement-2026-10-07/",
         "/packing/resources/papers/kingbird-square-29-provenance.svg",
         # X-049's two censuses compare against JSON retained beside the exploration, and
         # the campaign history is otherwise outside the slice; without this directory the
@@ -582,6 +593,13 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # comparison, so that packet rides in the slice, named by the module that reads it; it
     # was missing on jlevy/squares#369's run 37403920231.
     assert f"/packing/resources/web/{evand_exact_certificates.PACKET.name}/" in sparse
+    # The three T-119 atlas sources require their complete retained fact and receipt.
+    assert f"/packing/resources/web/{evand_arrangement_reports.PACKET.name}/" in sparse
+    # SQUISH's exact rational facts are a separate packet from the ordinary packet
+    # registry; omitting it makes the atlas refuse all eleven newly reported cases.
+    assert f"/packing/resources/web/{squish_upper_bound_packets.PACKET.name}/" in sparse
+    assert f"/packing/resources/web/{squish_followup_packets.PACKET.name}/" in sparse
+    assert f"/packing/resources/web/{squish_second_update_packets.PACKET.name}/" in sparse
     full_step = next(
         _mapping(step)
         for step in validate_steps
@@ -1293,7 +1311,32 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # the source tree into a worker and has no shared builder whose cost can move to
         # a neighbouring test, so the slow marker is the measured classification.
         "test_negative_controls.py": {
+            # Hosted run37739373988/job113186283659, 2026-10-08: complete private
+            # results checker and first-SQUISH custody/mutation transactions.
+            "test_unmutated_results_checker_is_green_inside_a_worker",  # 19.78s
+            # 15.34s complete custody and two actual mutation/restoration transactions.
+            "test_squish_complete_replay_survives_worker_custody_and_private_controls",
             "test_build_caches_leave_the_counted_surface_and_the_worker_trees",  # 8.15s on CI
+            # Hosted run37736038877/job113175670339, 2026-10-08: complete 27-input,
+            # nine-house admission and two live mutants; module-scoped clone is setup,
+            # while these uncached complete-reader transactions are measured call time.
+            "test_second_squish_complete_replay_survives_native_worker_boundaries",  # 16.87s
+        },
+        # Hosted run37739373988/job113186283659: 14.52s; 68 full geometry replays
+        # cover 85,204 pair decisions across the n108 translation/tolerance surface.
+        "test_translation_escape_screen.py": {
+            "test_squish_n108_retains_its_replayed_tolerance_instability",
+        },
+        # Hosted run37743601485/job113199788788, 2026-10-08: 25.04s for the
+        # actual complete clone, all three #399 houses/native custody and two private
+        # producer/native refusal transactions; 45/30/45s child deadlines unchanged.
+        "test_evand_arrangement_adoption.py": {
+            "test_production_clone_copies_every_scientific_input_and_admits_exact_links",
+        },
+        # Hosted run37739373988/job113186283659: actual complete clone, independent
+        # custody bytes and subprocess admission; no clone or assertion is removed.
+        "test_refinement_custody.py": {
+            "test_production_snapshot_copies_complete_refinement_custody",  # 19.36s
         },
         # 3s of call time across 1, measured 2026-09-20: `git worktree add --detach` of
         # Session 148's opening commit -- a whole checkout of the tree -- and then

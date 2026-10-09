@@ -7,6 +7,8 @@ import json
 import time
 from pathlib import Path
 
+import pytest
+
 from benchmarks import profile_n17_kernel_memory as profiler
 from devtools import check_n17_subpattern as tool
 from devtools import verify_n17_kernel_certificate as kernel_verifier
@@ -41,7 +43,10 @@ def test_the_profiler_marks_each_step_of_either_checker(tmp_path: Path) -> None:
     assert saved["status"] == "PASS_SAVED_CLOSED"
     assert saved["node_sha256"] == tool.content_sha256(production.node)
     assert [step["step"] for step in recorder.steps] == list(range(count))
-    assert all(step["rss_mb"] > 0 for step in recorder.steps)
+    if Path("/proc/self/status").is_file():
+        assert all(step["rss_mb"] > 0 for step in recorder.steps)
+    else:
+        assert all(step["rss_mb"] == -1 for step in recorder.steps)
     cells = tmp_path / "cells.json"
     document = {
         "U": "3",
@@ -77,4 +82,39 @@ def test_the_profiler_marks_production_the_save_and_the_check(tmp_path: Path) ->
     count = verdict["steps_checked"]
     assert phases == ["produce"] * count + ["check"] * count
     report = recorder.report()
-    assert report["peak_rss_mb"] >= report["peak_in_check_mb"] > 0
+    # RSS and resettable high-water marks are separate kernel capabilities. A missing
+    # /proc reading remains explicitly unavailable; every checker above still runs.
+    if Path("/proc/self/status").is_file():
+        assert report["peak_rss_mb"] >= report["max_check_step_rss_mb"] > 0
+    else:
+        assert report["peak_rss_mb"] == report["max_check_step_rss_mb"] == -1
+    if recorder.peak_was_reset:
+        assert report["peak_rss_mb"] >= report["peak_in_check_mb"] > 0
+    else:
+        assert report["peak_in_check_mb"] is None
+
+
+@pytest.mark.parametrize(
+    ("rss_mb", "high_water_mb", "can_reset"),
+    [(16, 32, True), (16, 32, False), (-1, -1, False)],
+    ids=["resettable", "read-only", "unavailable"],
+)
+def test_memory_report_distinguishes_kernel_capabilities(
+    monkeypatch: pytest.MonkeyPatch,
+    rss_mb: int,
+    high_water_mb: int,
+    *,
+    can_reset: bool,
+) -> None:
+    """An unavailable or unresettable measurement cannot become a measured zero."""
+    readings = {"VmRSS": rss_mb, "VmHWM": high_water_mb}
+    monkeypatch.setattr(profiler, "status_mb", readings.__getitem__)
+    monkeypatch.setattr(profiler, "reset_peak", lambda: can_reset)
+    recorder = profiler.Recorder(None)
+    recorder.step("check", 0, 1)
+    report = recorder.report()
+    assert recorder.steps[0]["rss_mb"] == rss_mb
+    assert report["peak_rss_mb"] == high_water_mb
+    assert report["peak_before_check_mb"] == high_water_mb
+    assert report["peak_in_check_mb"] == (high_water_mb if can_reset else None)
+    assert report["max_check_step_rss_mb"] == rss_mb
