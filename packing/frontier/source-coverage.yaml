@@ -3127,6 +3127,30 @@ sources:
     native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged. The seven other certificates
     at this commit are byte-identical to the issue451 originals.
+- id: evand-record-hunt-2026-10-09
+  title: Evan Daniel's two record-hunt certificates at e008180, issue465
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/e0081804736a4613c2cf44c693ef1afe92518927/search/packer/candidates
+  local: resources/web/evand-record-hunt-2026-10-09/
+  source_key: '[Daniel record hunt 2026-10-09]'
+  scope:
+    n_values:
+    - 132
+    - 155
+  reviewed: '2026-10-09'
+  source_date: '2026-10-09'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json
+  evidence:
+  - E-evand-465-record-hunt-report
+  notes: Both complete certificates are retained under the source's MIT licence with their KKT points,
+    inputs and solver reports. T-131 records the n132 report. The n155 certificate states exactly the
+    n155 side of Couzo's earlier issue451 certificate (T-128) and shares 152 of its 155 exact poses, so
+    it adds no register entry. All six native jobs have full outcomes. No selected override or superseded
+    claim is created at this source-only stage; current cases and earlier source ownership remain unchanged.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

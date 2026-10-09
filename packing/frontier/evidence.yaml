@@ -29170,3 +29170,32 @@ evidence:
       checker. The second maintained rational-geometry route is a separate deciding implementation;
       both routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
       method. No two independent methods, human oversight or optimality is claimed.'
+  - id: E-evand-465-record-hunt-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 132
+      - 155
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel record hunt 2026-10-09]'
+    certificate: packing/resources/web/evand-record-hunt-2026-10-09/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-09'
+    limitations: 'This atom records the source author''s report of two exact rational certificates
+      at e008180, retained with their KKT points, inputs and solver reports. A separate complete repository
+      replay is retained: two positives and four duplicate-square and outside-container controls passed
+      their required outcomes on both routes, 123486 pair decisions; summed over the six jobs, the receipt
+      records 38.66 route CPU seconds and 38.79 job wall seconds, the longest job 7.72 seconds. Each positive
+      clears every wall by 1/200000000000000000000 and every pair by just under 1e-20. Independent review
+      and confirmation remain pending. The n155 side equals T-128''s n155 side exactly, from Couzo''s
+      issue451 certificate committed nine hours earlier, and the two certificates share 152 of 155 exact
+      poses. The author''s KKT, reduced-Hessian and jamming statements are numerical and not checked.
+      The source checks with its own verify_cert.py and verify_cert2.py, not run here; the two maintained
+      routes share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.'

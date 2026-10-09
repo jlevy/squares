@@ -950,6 +950,20 @@ Independent whole-net replay and controls remain pending.
   Ryan Xu, Evan Daniel and David Ellsworth receive the source’s seed and refinement
   credits; no optimality is asserted.
 
+## Evan Daniel’s record-hunt certificates, 9 October 2026
+
+**[Daniel record hunt 2026-10-09]**: Evan Daniel’s exact rational certificates for n =
+132 and 155 from his `hunt1` record hunt, pinned at
+`e0081804736a4613c2cf44c693ef1afe92518927` and retained under the source’s MIT licence
+with their KKT points, inputs and solver reports;
+[packet](web/evand-record-hunt-2026-10-09/README.md).
+Both project exact routes accept both certificates and refuse all four controls.
+T-131 records the n = 132 side at V0/C0, pending independent review and adoption.
+The n = 155 side equals Couzo’s earlier issue451 certificate (T-128), with which it
+shares 152 of 155 exact poses.
+The source credits Couzo’s and Chaoweeraprasit’s packings as starting points and
+discloses Claude assistance under Daniel’s direction.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

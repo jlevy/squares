@@ -3505,7 +3505,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-05'
+  lastmod: '2026-10-09'
   status: live
 - path: cases/133.html
   canonical: cases/133.html
@@ -11769,6 +11769,33 @@ urls:
     - packing/resources/web/couzo-followup-refinements-2026-10-08/facts/n-270.yaml
     - packing/resources/web/couzo-followup-refinements-2026-10-08/receipts/exact-certification.json.xz
     - packing/devtools/couzo_followup_reports.py
+- path: result/t-131.html
+  canonical: result/t-131.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-09'
+  lastmod: '2026-10-09'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 132
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel record hunt 2026-10-09]'
+      published: '2026-10-09'
+    builds_on: null
+    evidence:
+    - E-evand-465-record-hunt-report
+    artifacts:
+    - packing/resources/web/evand-record-hunt-2026-10-09/README.md
+    - packing/resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json
+    - packing/resources/web/evand-record-hunt-2026-10-09/source/search/packer/candidates/hunt1_n132.cert
+    - packing/resources/web/evand-record-hunt-2026-10-09/receipts/exact-certification.json.xz
+    - packing/devtools/evand_hunt_reports.py
 - path: results.html
   canonical: all-results.html
   kind: forwarder
