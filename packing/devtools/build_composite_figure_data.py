@@ -18,10 +18,11 @@ import argparse
 import json
 import math
 import sys
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from decimal import ROUND_DOWN, ROUND_UP, Decimal
 from functools import cache
 from pathlib import Path
+from typing import Any
 
 import sympy as sp
 from strif import atomic_output_file
@@ -32,7 +33,12 @@ from sympy.parsing.sympy_parser import (
 )
 
 from devtools.build_bound_citations import corrected_lower_bounds, recent_lower_bounds
-from devtools.rigidity_status import rigidity_metadata
+from devtools.rigidity_status import (
+    RigidityContext,
+    context_for_entries,
+    load_context,
+    rigidity_metadata,
+)
 from sqpack import retained_json
 from sqpack.known_best import (
     KNOWN_BEST_COMPOSITES,
@@ -235,11 +241,11 @@ def _legacy_rigidity(n: int, packing: dict) -> dict:
     }
 
 
-def _rigidity(n: int, packing: dict) -> dict:
-    return {**_legacy_rigidity(n, packing), **rigidity_metadata(n, packing)}
+def _rigidity(n: int, packing: dict, *, context: RigidityContext | None = None) -> dict:
+    return {**_legacy_rigidity(n, packing), **rigidity_metadata(n, packing, context=context)}
 
 
-def _entry(n: int) -> dict:
+def _entry(n: int, *, rigidity_context: RigidityContext | None = None) -> dict:
     packing = _packing(n)
     reported = packing.get("reported_upper_bound") or {}
     status = str(packing["status"])
@@ -264,7 +270,7 @@ def _entry(n: int) -> dict:
     else:
         state, degree, degree_provenance = "numeric-only", None, "absent"
 
-    rigidity = _rigidity(n, packing)
+    rigidity = _rigidity(n, packing, context=rigidity_context)
 
     badges: list[dict] = []
     if status == "proved":
@@ -383,8 +389,9 @@ def _totals(entries: list[dict]) -> dict:
     }
 
 
-def build_record() -> dict:
-    entries = [_entry(n) for n in CORPUS.numbers]
+def build_record(*, atlas_entries: Mapping[int, Mapping[str, Any]] | None = None) -> dict:
+    context = load_context() if atlas_entries is None else context_for_entries(atlas_entries)
+    entries = [_entry(n, rigidity_context=context) for n in CORPUS.numbers]
     return {
         "softschema": {
             "contract": CONTRACT,

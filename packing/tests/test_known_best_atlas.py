@@ -10,9 +10,10 @@ import re
 import subprocess
 import zlib
 from collections import Counter
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
 from datetime import date
 from decimal import Decimal
+from functools import partial
 from itertools import pairwise
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -22,7 +23,12 @@ import jsonschema
 import pytest
 import yaml
 
-from devtools import build_bound_citations, build_composite_figure_data, render_composite_pdf
+from devtools import (
+    build_bound_citations,
+    build_composite_figure_data,
+    render_composite_pdf,
+    rigidity_status,
+)
 from devtools import build_known_best_atlas as known_best_builder
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
@@ -3122,7 +3128,9 @@ def test_selected_refresh_publishes_only_after_all_preflight_checks(
         known_best_builder, "_source_index", lambda _plans: {"sources": "updated"}
     )
     monkeypatch.setattr(build_composite_figure_data, "RECORD", figure_path)
-    monkeypatch.setattr(build_composite_figure_data, "build_record", lambda: prospective)
+    monkeypatch.setattr(
+        build_composite_figure_data, "build_record", lambda **_kwargs: prospective
+    )
 
     def selected_build(
         numbers: Sequence[int], workers: int
@@ -3260,3 +3268,157 @@ def test_poster_credits_order_supported_author_dates_without_redating_inherited_
         assert printed.split(", ") == ["Recent", "Day", "Year", "Fallback", "Old", "Unknown"]
     finally:
         read_credits.cache_clear()
+
+
+@pytest.fixture
+def prospective_atlas(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[Path]:
+    """Copy three real grid cases; only the selected case's display spelling will change."""
+    packing = tmp_path / "packing"
+    corpus = CorpusRange(12, 14)
+    retained_manifest = json.loads(known_best_builder.MANIFEST.read_text())
+    retained_manifest["atlas"]["entries"] = [
+        entry for entry in retained_manifest["atlas"]["entries"] if entry["n"] in corpus.numbers
+    ]
+    retained_figure = json.loads(build_composite_figure_data.RECORD.read_text())
+    retained_figure["figure"]["entries"] = [
+        entry for entry in retained_figure["figure"]["entries"] if entry["n"] in corpus.numbers
+    ]
+    copies = {
+        packing / "atlas/known-best/manifest.json": json.dumps(retained_manifest),
+        packing / "atlas/known-best/composite-figure.json": json.dumps(retained_figure),
+        packing / "resources/web/known-best-packings/sources.json": (
+            known_best_builder.SOURCE_MANIFEST.read_text()
+        ),
+    }
+    for n in corpus.numbers:
+        for relative in (
+            f"frontier/n-{n:03d}.md",
+            f"witnesses/known-best/n-{n:03d}.yaml",
+            f"atlas/known-best/rendering/n-{n:03d}.svg",
+        ):
+            copies[packing / relative] = (known_best_builder.ROOT / relative).read_text()
+    for path, text in copies.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text)
+    for module in (known_best_builder, build_composite_figure_data):
+        monkeypatch.setattr(module, "CORPUS", corpus)
+        monkeypatch.setattr(module, "COMPOSITES", ())
+        monkeypatch.setattr(module, "ROOT", packing)
+        monkeypatch.setattr(module, "FRONTIER", packing / "frontier")
+    monkeypatch.setattr(known_best_builder, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(
+        known_best_builder, "MANIFEST", packing / "atlas/known-best/manifest.json"
+    )
+    monkeypatch.setattr(
+        known_best_builder,
+        "SOURCE_MANIFEST",
+        packing / "resources/web/known-best-packings/sources.json",
+    )
+    monkeypatch.setattr(known_best_builder, "WITNESS_ROOT", packing / "witnesses/known-best")
+    monkeypatch.setattr(
+        known_best_builder, "RENDER_ROOT", packing / "atlas/known-best/rendering"
+    )
+    monkeypatch.setattr(
+        build_composite_figure_data,
+        "RECORD",
+        packing / "atlas/known-best/composite-figure.json",
+    )
+    monkeypatch.setattr(rigidity_status, "MANIFEST", known_best_builder.MANIFEST)
+    monkeypatch.setattr(
+        known_best_builder,
+        "composite_findings",
+        lambda: known_best_builder.CompositeFindings((), ()),
+    )
+    rigidity_status.load_context.cache_clear()
+    known_best_builder.clear_build_caches()
+    try:
+        yield packing
+    finally:
+        rigidity_status.load_context.cache_clear()
+        known_best_builder.clear_build_caches()
+
+
+@pytest.mark.parametrize("selected", [False, True], ids=["complete", "selected"])
+@pytest.mark.parametrize("defect", [None, "geometry", "assessment", "catalogue"])
+def test_refresh_uses_prospective_geometry_before_publishing_any_record(
+    prospective_atlas: Path, *, selected: bool, defect: str | None
+) -> None:
+    packing = prospective_atlas
+    retained_context = rigidity_status.load_context()
+    assert retained_context.entries[13]["reported_side"] == "4.0"
+    frontier = packing / "frontier/n-013.md"
+    text = frontier.read_text()
+    old = "  reported_upper_bound:\n    value: '4.0'"
+    assert text.count(old) == 1
+    text = text.replace(old, "  reported_upper_bound:\n    value: '4'")
+    if defect == "geometry":
+        text = text.replace(
+            "  reported_upper_bound:\n    value: '4'",
+            ("  reported_upper_bound:\n    value: '3.5'"),
+        )
+    elif defect == "assessment":
+        text = text.replace("    property: not-rigid", "    property: locally-rigid")
+        text = text.replace("    assurance: numerically-checked", "    assurance: verified")
+        text = text.replace(
+            "    method: numerical-multiprecision", "    method: exact-algebraic"
+        )
+    elif defect == "catalogue":
+        text = text.replace("    catalogue_rigid: not-stated", "    catalogue_rigid: rigid")
+    frontier.write_text(text)
+    before = {path: path.read_bytes() for path in packing.rglob("*") if path.is_file()}
+
+    refresh = (
+        partial(known_best_builder.update_selected, [13])
+        if selected
+        else known_best_builder.update
+    )
+    if defect is not None:
+        expected = {
+            "geometry": "source side 4 disagrees with frontier 3.5",
+            "assessment": "verified rigidity requires at least one verified evidence",
+            "catalogue": "no source assertion matching the selected geometry",
+        }
+        with pytest.raises(ValueError, match=expected[defect]):
+            refresh()
+        assert {
+            path: path.read_bytes() for path in packing.rglob("*") if path.is_file()
+        } == before
+        assert rigidity_status.load_context() is retained_context
+        return
+
+    refresh()
+    manifest = json.loads(known_best_builder.MANIFEST.read_text())
+    entries = {entry["n"]: entry for entry in manifest["atlas"]["entries"]}
+    assert entries[13]["reported_side"] == "4"
+    figure = json.loads(build_composite_figure_data.RECORD.read_text())["figure"]
+    figures = {entry["n"]: entry for entry in figure["entries"]}
+    assert figures[13]["side"]["value"] == "4"
+    assert figures[13]["rigidity"]["assessed_geometry"]["reported_side"] == "4"
+    old_figure = json.loads(before[build_composite_figure_data.RECORD])["figure"]
+    old_figures = {entry["n"]: entry for entry in old_figure["entries"]}
+    assert figures[13]["rigidity"]["assessments"] == old_figures[13]["rigidity"]["assessments"]
+    assert not figures[13]["rigidity"]["known_rigid"]
+    assert figures[13]["lower"] == old_figures[13]["lower"]
+    assert figures[13]["exactness"] == old_figures[13]["exactness"]
+    assert figures[13]["optimality"] == old_figures[13]["optimality"]
+    for n in (12, 13, 14):
+        for relative in (
+            f"witnesses/known-best/n-{n:03d}.yaml",
+            f"atlas/known-best/rendering/n-{n:03d}.svg",
+        ):
+            path = packing / relative
+            assert path.read_bytes() == before[path]
+        if n != 13:
+            assert entries[n] == retained_context.entries[n]
+            assert figures[n] == old_figures[n]
+            path = packing / f"frontier/n-{n:03d}.md"
+            assert path.read_bytes() == before[path]
+    fresh_context = rigidity_status.load_context()
+    assert fresh_context is not retained_context
+    assert fresh_context.entries[13]["reported_side"] == "4"
+    assert rigidity_status.rigidity_metadata(
+        13, yaml.safe_load(frontier.read_text().split("---", 2)[1])["packing"]
+    ) == {
+        key: figures[13]["rigidity"][key]
+        for key in ("known_rigid", "assessed_geometry", "assessments")
+    }

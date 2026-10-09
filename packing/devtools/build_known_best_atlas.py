@@ -66,6 +66,7 @@ from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend, r
 from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.result_status import RecentContributions, recent_contributions_by_case
+from devtools.rigidity_status import load_context as load_rigidity_context
 from sqpack import retained_json
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
@@ -3628,18 +3629,27 @@ def update(workers: int = 1) -> None:
     squish_house.guard_house_outputs(list(CORPUS.numbers))
     refinement_houses.guard_house_outputs(list(CORPUS.numbers))
     evand_houses.guard_house_outputs(list(CORPUS.numbers))
-    # The figure record decides every claim a drawing states, so refresh it first and
-    # drop the memo, or the comparison below would read a stale one.
-    build_composite_figure_data.update()
-    _figure_entries.cache_clear()
     clear_build_caches()
-    outputs, _manifest = expected_outputs(workers)
+    outputs, manifest = expected_outputs(workers)
+    # Derive the figure from the geometry being published, not the old manifest.
+    # Finish both producers and serialization before the first retained-file write.
+    figure = build_composite_figure_data.build_record(
+        atlas_entries={entry["n"]: entry for entry in manifest["atlas"]["entries"]}
+    )
+    outputs = {
+        **outputs,
+        build_composite_figure_data.RECORD: retained_json.dumps(
+            figure, sort_keys=True, ensure_ascii=False
+        ),
+    }
     for path, content in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         path.parent.mkdir(parents=True, exist_ok=True)
         if path.is_file() and path.read_text(encoding="utf-8") == content:
             continue
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
+    _figure_entries.cache_clear()
+    load_rigidity_context.cache_clear()
     print(
         f"known-best atlas updated: {CORPUS.count} witnesses, {CORPUS.count} house "
         f"renderings, {CORPUS.count} frontier links; the {len(COMPOSITES)} "
@@ -3684,7 +3694,11 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
         ):
             raise ValueError(f"unselected n={n} changed; use the complete atlas producer")
     built = built_cases(numbers, workers)
-    prospective_figure = build_composite_figure_data.build_record()
+    replacement: dict[int, dict] = {item.frontier.n: _manifest_entry(item) for item in built}
+    entries = [replacement.get(row["n"], row) for row in retained]
+    prospective_figure = build_composite_figure_data.build_record(
+        atlas_entries={entry["n"]: entry for entry in entries}
+    )
     retained_figure = load_figure_record()
     figure_entries = {}
     for name, figure in (
@@ -3700,8 +3714,6 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
             raise ValueError(
                 f"unselected figure n={n} changed; use the complete atlas producer"
             )
-    replacement: dict[int, dict] = {item.frontier.n: _manifest_entry(item) for item in built}
-    entries = [replacement.get(row["n"], row) for row in retained]
     manifest = _manifest_document(
         entries, [_composite_record(canvas) for canvas in resolved_composites(entries)]
     )
@@ -3725,6 +3737,7 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
         with atomic_output_file(path, make_parents=True) as temporary:
             temporary.write_text(text, encoding="utf-8")
     _figure_entries.cache_clear()
+    load_rigidity_context.cache_clear()
     print(
         f"Selected atlas refreshed: {len(selected)} geometries; "
         f"{CORPUS.count - len(selected)} entries preserved"

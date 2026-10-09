@@ -57,8 +57,7 @@ def _check_reference(reference: str | None) -> None:
         raise ValueError(f"rigidity source reference does not resolve: {reference}")
 
 
-@cache
-def load_context() -> RigidityContext:
+def _load_assessments() -> tuple[Mapping[str, Any], Mapping[str, Mapping[str, Any]]]:
     errors = check_schema(SOURCES)
     if errors:
         raise ValueError("invalid rigidity source index: " + "; ".join(errors))
@@ -74,13 +73,23 @@ def load_context() -> RigidityContext:
         _check_reference(source["date_reference"])
         if source["determined_at"] is not None and source["date_reference"] is None:
             raise ValueError("a rigidity determination date requires a cited date source")
-    entries = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
     evidence = safe_load(EVIDENCE.read_text(encoding="utf-8"))["evidence"]
-    return RigidityContext(
-        audit=audit,
-        evidence={entry["id"]: entry for entry in evidence},
-        entries={entry["n"]: entry for entry in entries},
-    )
+    return audit, {entry["id"]: entry for entry in evidence}
+
+
+def context_for_entries(entries: Mapping[int, Mapping[str, Any]]) -> RigidityContext:
+    """Bind fresh producer entries to current assessment sources, without a manifest read."""
+    if any(n != entry["n"] for n, entry in entries.items()):
+        raise ValueError("rigidity context entry key differs from its selected case")
+    audit, evidence = _load_assessments()
+    return RigidityContext(audit=audit, evidence=evidence, entries=dict(entries))
+
+
+@cache
+def load_context() -> RigidityContext:
+    """The retained selected geometry, for strict read-only consistency checks."""
+    entries = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
+    return context_for_entries({entry["n"]: entry for entry in entries})
 
 
 def _dated_source(source: Mapping[str, Any], context: RigidityContext) -> dict[str, Any]:

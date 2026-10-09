@@ -6,19 +6,27 @@ import json
 import math
 from copy import deepcopy
 from dataclasses import replace
+from pathlib import Path
 from typing import Any
 
 import pytest
 from jsonschema import Draft202012Validator
 
-from devtools import build_bound_citations, build_composite_figure_data, validate_schemas
+from devtools import (
+    build_bound_citations,
+    build_composite_figure_data,
+    rigidity_status,
+    validate_schemas,
+)
 from devtools.rigidity_status import (
     SOURCES,
     RigidityContext,
+    context_for_entries,
     date_precision,
     load_context,
     rigidity_metadata,
 )
+from sqpack import retained_json
 from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import safe_load
 
@@ -199,3 +207,50 @@ def test_the_source_index_and_generated_metadata_satisfy_their_declared_schemas(
         (build_composite_figure_data.RECORD.parent / "composite-figure.schema.yaml").read_text()
     )
     Draft202012Validator(schema).validate(figure)
+
+
+def test_prospective_entries_do_not_read_the_retained_manifest(
+    context: RigidityContext, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    entries = deepcopy(dict(context.entries))
+    entries[13] = {**entries[13], "reported_side": "4"}
+    case = build_bound_citations.load_case(13)
+    case["reported_upper_bound"]["value"] = "4"
+    with pytest.raises(ValueError, match="selected atlas construction differ"):
+        rigidity_metadata(13, case, context=context)
+    monkeypatch.setattr(rigidity_status, "MANIFEST", tmp_path / "absent-manifest.json")
+    fresh = context_for_entries(entries)
+    assessed = rigidity_metadata(13, case, context=fresh)
+    assert assessed["assessed_geometry"]["reported_side"] == "4"
+    assert (
+        assessed["assessments"]
+        == rigidity_metadata(13, build_bound_citations.load_case(13), context=context)[
+            "assessments"
+        ]
+    )
+    assert not assessed["known_rigid"]
+    load_context.cache_clear()
+    try:
+        with pytest.raises(FileNotFoundError):
+            load_context()
+    finally:
+        load_context.cache_clear()
+
+
+def test_prospective_entries_cannot_change_a_selected_case_identity(
+    context: RigidityContext,
+) -> None:
+    entries = deepcopy(dict(context.entries))
+    entries[28] = {**entries[28], "n": 40}
+    with pytest.raises(ValueError, match="entry key differs from its selected case"):
+        context_for_entries(entries)
+
+
+def test_current_prospective_figure_is_identical_to_the_retained_record(
+    context: RigidityContext,
+) -> None:
+    produced = build_composite_figure_data.build_record(atlas_entries=context.entries)
+    assert produced == build_composite_figure_data.build_record()
+    retained = build_composite_figure_data.RECORD.read_text()
+    assert produced == json.loads(retained)
+    assert retained_json.dumps(produced, sort_keys=True, ensure_ascii=False) == retained
