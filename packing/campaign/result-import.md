@@ -271,10 +271,11 @@ register entry with its ratings and `next_rung`. Four rules are the process’s 
   an entry over several certificates, the last of those dates.
 - **The entry’s `scope` is covered** by the scopes of the evidence it cites.
 - **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
-  `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and `s(n) = v` for an
-  exact value, with `v` the value the source certifies, written as a fraction or as
-  decimals that end. A value that is no such number, such as a root of a polynomial, is
-  written by its decimals cut where they are certain and ended with an ellipsis,
+  `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
+  for an exact value, where $v$ is the value the source certifies, written as a fraction
+  or as decimals that end.
+  A value that is no such number, such as a root of a polynomial, is written by its
+  decimals cut where they are certain and ended with an ellipsis,
   `s(106) <= 10.822908044132847555086207…`, which stands for every number that starts
   so. A closed form written with `√` or `sqrt` may stand before them,
   `s(11) >= 38100√(8100042893309449)/899996306539 = 3.8100257…`. Where the case lanes
