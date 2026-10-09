@@ -47,7 +47,7 @@ action, not a prerequisite here.
 From 2026-09-29 the best known packing at 50 counts comes from two repositories that
 publish no licence: Francisco Couzo’s 49 packings for `n = 68…307` and Joost de Winter’s
 packing of 211 squares.
-The same policy applies to them.
+Their packets take the derived-only form of the policy above.
 Each source’s packet keeps the centres and angles as Witness/v2 facts under its own
 `facts/` directory, with the upstream files pinned by digest in its
 `acquisition/sources.json`, and retains no upstream byte:
@@ -58,6 +58,32 @@ the packet’s source key, and [`sources.json`](sources.json) lists each such ca
 `packet-derived-facts` with `raw_asset_retained: false`. At those counts the retained
 Kingbird facts, which described the superseded catalogue packing, are no longer the
 atlas’s witness; Git keeps them.
+
+### Retained Factual Data
+
+Owner decision of 2026-10-09, taken for Francisco Couzo’s eight refinements of
+[issue #451](https://github.com/jlevy/squares/issues/451): a packet that carries a
+source’s packings may also retain that source’s factual data in full, even when the
+source publishes no licence.
+Factual data means the source’s numbers: complete certificates, coordinates and poses,
+and the records that list, compare or check them, such as digest manifests, comparators
+and verification output.
+Each retained file is bound in the packet’s acquisition record to its upstream identity,
+a Git blob and SHA-256 or a release asset’s digest, and its retained copy, however it is
+stored, reproduces those bytes exactly.
+Original prose and programs, other than a licence notice, are never copied into such a
+packet: the source’s READMEs, papers, credits and code are at most pinned by digest, and
+no author program is executed.
+[Ryan Xu’s packet](../ry-xu-new-packings-2026-10-08/README.md) retains the text of the
+source’s 25 certificates this way.
+
+Retaining a file grants no licence and relicenses nothing, and, like the policy above,
+it is not a legal conclusion.
+Every packet records the source’s identity, its pinned revision, its licence status and
+its attribution, whichever form it takes.
+Retention is permitted, never required: derived-only custody remains allowed, and a
+packet may prefer it, as Couzo’s and de Winter’s packets above do.
+The catalogue’s SVG pictures stay under the Kingbird rule.
 
 ## Facts Read From a Pinned Parse
 
