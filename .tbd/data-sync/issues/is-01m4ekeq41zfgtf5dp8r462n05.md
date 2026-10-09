@@ -5,7 +5,7 @@ title: Reconcile resumed intake ledger and dated source follow-ups
 kind: task
 status: in_progress
 priority: 1
-version: 21
+version: 22
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -23,7 +23,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T20:32:09.852Z
-updated_at: 2026-10-09T03:14:11.939Z
+updated_at: 2026-10-09T03:22:04.892Z
 started_at: 2026-10-08T20:33:04.467Z
 ---
 Add missing425/438 mappings and445 engineering disposition; append all observed maintainer replies and dated375 source updates without changing older result scopes or claiming new replay. Preserve all prior rows and prefixes, give newly identified batch certificate custody an explicit child owner, and validate the enforced request contract on the current intake top.
@@ -65,3 +65,15 @@ All remaining8 heads normalmerged with six accepted CSS/cache files; true448test
 Actual current442Pages37873984191SUCCESS, but Packingfrontend113638192725 failed functional site-table command timeout900s after202tests/6skips; nativephase neverstarted,958.02wall consequence.443samefrontendfailure current; Sol+Astradiagnose exact controls/timewait without ceiling relax.449Pages390lightCLS0.251>0.1 genuine failure, complete401math preserved; separate root cause. Later450/460/463 mass rollupfailure-looking entries are actual queued-concurrency CANCELLED runner0/steps0 annotations, not source test failures; latest applicable successors required. No failed/cancelled evidence relabeledgreen.
 
 Source20 Couzo derived-only producer73roles/72blobs fixed immutable roots, raw custodyPASS; derived twentyfacts1,095,147B/21files prepared, scopednegativecontrols in flight, noT/horizon/geometry/native/C3/rawarchiveinGit. Root created think-88r0 for newly observed460externalcomment6070798890 pinned2d32a6e five84/86/105/175/270 reports, sevenoldreportedlybyteidentical; previous105stillvalid, newclaims separateunverified intake. Fourplatformslots fullyoccupied:root,twoSol,Astra. Foreign403eb4DIRTY7conflicts/4356fUNSTABLE owner active; publicC1/staticselector/sourceguard proposals preserved; no competingpush. No newtrash/emptyTrash or uniqueproofdiscard.
+
+2026-10-09 live status continuation: remaining main formal430 stack442,443,448,449,450,459,460,463 is conflict-free; ten intake-labeled PRs total include independent435 and454. Four new actual merges this resumed block434/439/440/441, current main d43ea686d treeADC equals qualified441 exactly. All required fresh science/source/Astra scopes preserved; none of the remaining PRs yet qualifies a fully ready claim.
+
+Confirmed no-JavaScript Playwright add_style_tag waits forever because page JS handlers cannot execute; sole test-file CDP stylesheet repair passed all four controls12.168s, accepted testblob5722150 and main-composed442830/tree683ecf with normal hooks/nonempty DATA pin unchanged. Current442 Pages37877170410 and ten independent fast jobsPASS; fast37877170308 failed ONLY bead tree. Root prematurely closedhh48 after actualissue399closure before trackedledgerlanded; archived exact strictrefusal and original step receipts, reopened/startedsyncedhh48 until ledger reaches main, maintainedchecker at exact442830PASS problems[]warnings[]. Only failed validatejob113648312923 retried, no source or gate waiver; full37877186650 stillrunning.
+
+Normal one-file composition published atomically4432bd8d96a9860657149a1e47ae5ce0bddc34208b3 and44811bef7da1eb7c1817007bf9bcb1013ededcd1735, each complete old-new diff only accepted572 testblob and actual parents/pins/otherbytes independently asserted. Current literal Astra G5465349902 andK5465350209 published; truthful current bodies templatePASS/GHupdated. Once fresh fulls44337878602026/44837878605786 dispatched. Six superseded manual upperfulls37874799287/37875389545/37875392025/37875473498/37875475630/37875477744 cancelled after complete job receipts preserved, all contained independently reproduced test hang; no oldgreen transfer. Remainingfive parentcascade held for owning449 font scope.
+
+449 exact paper-only render from4963 complete7.74s/39files2464454B; maintained optional two-snapshot platform font/box diagnostic in disjoint2files owned Sol think-rxyl, productionfont unchanged until actual source identity/cause/negativecontrols/Astra. Actual Pages CLS0.2512375663>0.1 at390light remains real blocker;401MathML intact/task236ms<300ms, no threshold relaxation. Other fonts/bootstrap guesses disproved by source.
+
+Source20 Couzo final stagedtree0f97490b3a1b5db439e4c048d61eb806eb3bd9ff32paths in full Astra closure. Medium prevalidation outside schema read fixed before any I/O with retained RED/read-sentinel controls; observed numeric-f64 encoding qualified, no author-generation precision claim. Freshrecords49/107stepsPASS180.41/300UNARMED,53controlsPASS/RuffBPy0. VERIFIERS minimaldenominator467->468 only;24newscopedsoftschemaPASS, inheritedaliasdirectCLIrefusal retained. Actual selectedprivate cap200064130/201326592 excluding unchanged resources-pruned22 packetfiles1102850B explicitly; ordinary checkout retainsalltrackedderivedfacts, no newT/privateworker/geometry/native/assurance/horizon upgrade/rawsourceinGit. Sourcecommit awaits Astra finalacceptance; final corrected463parentmerge later.
+
+Main actual source replies3996073318623/4196073319280/4206073319527 posted,399closedcompleted02:56:58Z, lattertwo source-only/no proof replay. Three actual replyledgerappends includedsource20checkpoint; hh48 remainsliveuntilledgerlands. New fiveCouzo reports84/86/105/175/270 pinned2d32a6e from460comment6070798890 tracked88r0OPEN, not acquired or independently verified. All four available agent slots busy=root/twoSol/Astra. No newTrash/emptyTrash/uniqueproofdiscard, no competingforeign403435push, n17 source-cap/parentconflicts stillholdindependentstacks.
