@@ -12,6 +12,14 @@ name: Font delivery diagnostic
 # as a newer run that superseded a starved pull-request run at the same commit. Here it
 # has its own group, and the re-run listener neither subscribes to it nor compares runs
 # across workflow files. `tests/test_font_diagnostic_workflow.py` holds the separation.
+#
+# The tool is the dispatched branch's `devtools/check_site_rendering.py` and its probes,
+# copied aside before the pinned checkout replaces the tree. It imports `sqpack.probes`
+# and `devtools.preview_site`, and at run time those are the pinned revision's copies,
+# not the dispatched branch's, which are the ones its tests ran against. The job
+# compares the two copies of each and records the answer in `diagnostics/helpers.txt`
+# beside the evidence; a tool change that needs a newer helper shows there as a
+# difference, or fails the observation step.
 
 "on":
   workflow_dispatch:
@@ -34,34 +42,27 @@ jobs:
       run:
         working-directory: packing
     steps:
-      - name: Check out the diagnostic branch and exact paper inputs
+      # Only the tool, its probes, and the two repository modules it imports: the paper's
+      # inputs come from the pinned checkout below, which replaces this tree.
+      - name: Check out the diagnostic tool and the helpers it imports
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          submodules: true
           persist-credentials: false
-          fetch-depth: 2
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /*
-            !/packing/resources/*/
-            !/packing/campaign/*/
-            /packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/
-            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz
-            /packing/campaign/agent-sessions/session-153-native-full.rows.jsonl
-            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/full-replay/RESULT.json
-            /packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/independent-audit.json
-            /packing/resources/web/wand125-tools-2026-09-29/README.md
-            /packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full-summary.json
-            /packing/campaign/agent-sessions/session-153-native-full.json
-            /packing/campaign/agent-sessions/session-153-native-reconciliation.json
+            /packing/devtools/check_site_rendering.py
+            /packing/devtools/probes/check_site_rendering/
+            /packing/devtools/preview_site.py
+            /packing/src/sqpack/probes.py
       - name: Preserve the reviewed maintained diagnostic tool
         run: |
-          mkdir -p "$RUNNER_TEMP/font-diagnostic/probes"
+          mkdir -p "$RUNNER_TEMP/font-diagnostic/probes" "$RUNNER_TEMP/font-diagnostic-helpers"
           cp devtools/check_site_rendering.py "$RUNNER_TEMP/font-diagnostic/"
           cp -R devtools/probes/check_site_rendering "$RUNNER_TEMP/font-diagnostic/probes/"
+          cp --parents devtools/preview_site.py src/sqpack/probes.py "$RUNNER_TEMP/font-diagnostic-helpers/"
           git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/font-diagnostic/tool-source.txt"
-          git ls-files -s devtools/check_site_rendering.py devtools/probes/check_site_rendering >> "$RUNNER_TEMP/font-diagnostic/tool-source.txt"
+          git ls-files -s devtools/check_site_rendering.py devtools/probes/check_site_rendering devtools/preview_site.py src/sqpack/probes.py >> "$RUNNER_TEMP/font-diagnostic/tool-source.txt"
       - name: Check out the original immutable paper inputs
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -90,6 +91,14 @@ jobs:
           cp -R "$RUNNER_TEMP/font-diagnostic/." diagnostics/tool/
           git rev-parse HEAD HEAD^{tree} > diagnostics/paper-source.txt
           git ls-tree --full-tree HEAD vendor/kpress >> diagnostics/paper-source.txt
+          git ls-files -s devtools/preview_site.py src/sqpack/probes.py >> diagnostics/paper-source.txt
+          for helper in devtools/preview_site.py src/sqpack/probes.py; do
+            if cmp -s "$RUNNER_TEMP/font-diagnostic-helpers/$helper" "$helper"; then
+              echo "same as the dispatched branch: $helper"
+            else
+              echo "differs from the dispatched branch: $helper"
+            fi
+          done > diagnostics/helpers.txt
           printf '%s\n' 'Controlled font hold; two CDP snapshots; no normal gate credit.' 'Each declared node records every rendered text node below it, with its own fonts, typography and quads, and sums their fonts.' 'Physical fonts are not joined to fetched URLs.' > diagnostics/protocol.txt
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0

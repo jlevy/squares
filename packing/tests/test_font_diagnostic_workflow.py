@@ -7,10 +7,17 @@ could replace a pending push run and lose that push's deploy, and
 `devtools.rerun_starved` counted it as a newer run superseding a starved pull-request
 run at the same commit (review B's B2, review A's A2 on PR 468). These tests hold the
 separation, and the bounds of the one job.
+
+The job runs code from a pinned revision, so what reaches it is pinned too: both
+checkouts drop their credentials, and no expression but the workspace path reaches a
+shell (B1). The pinned checkout keeps a literal copy of the paths the pinned renderer's
+own job kept, not the live job's list (B5), and the tool's repository imports are the
+helpers the job compares between the two revisions (B6).
 """
 
 from __future__ import annotations
 
+import ast
 import os
 import re
 import shutil
@@ -28,6 +35,30 @@ DIAGNOSTIC = WORKFLOWS / "font-diagnostic.yml"
 JOB = "font-diagnostic"
 #: The immutable #449 inputs the diagnostic renders the paper from.
 PINNED_INPUTS = "4963448e33c39002a48593ef79999940b153f2c0"
+#: What the `n11-threshold-bound-review` job of `pages.yml` checked out at that revision,
+#: copied literally. The pinned renderer's inputs cannot change, so this list must not
+#: follow later edits to the live job's list, which could drop a path it reads (B5).
+PINNED_PAPER_INPUTS = (
+    "/*",
+    "!/packing/resources/*/",
+    "!/packing/campaign/*/",
+    "/packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/",
+    "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz",
+    "/packing/campaign/agent-sessions/session-153-native-full.rows.jsonl",
+    (
+        "/packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/"
+        "full-replay/RESULT.json"
+    ),
+    (
+        "/packing/resources/web/external-square-certificates-2026-09-22/receipts/n11/"
+        "independent-audit.json"
+    ),
+    "/packing/resources/web/wand125-tools-2026-09-29/README.md",
+    "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full-summary.json",
+    "/packing/campaign/agent-sessions/session-153-native-full.json",
+    "/packing/campaign/agent-sessions/session-153-native-reconciliation.json",
+)
+TOOL = REPO / "packing/devtools/check_site_rendering.py"
 
 
 def workflow(path: Path) -> dict[str, Any]:
@@ -44,6 +75,24 @@ def diagnostic_job() -> dict[str, Any]:
 
 def checkouts(job: dict[str, Any]) -> list[dict[str, Any]]:
     return [step for step in job["steps"] if "checkout@" in step.get("uses", "")]
+
+
+def tool_helpers() -> list[str]:
+    """The `packing/`-relative files of the repository modules the tool imports."""
+    modules: set[str] = set()
+    for node in ast.walk(ast.parse(TOOL.read_text(encoding="utf-8"))):
+        if isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+            modules.add(node.module)
+        elif isinstance(node, ast.Import):
+            modules.update(alias.name for alias in node.names)
+    files = []
+    for module in sorted(modules):
+        package, *rest = module.split(".")
+        if package == "sqpack":
+            files.append("/".join(("src", package, *rest)) + ".py")
+        elif package == "devtools":
+            files.append("/".join((package, *rest)) + ".py")
+    return sorted(files)
 
 
 def test_the_diagnostic_is_dispatch_only_with_no_inputs_and_one_read_only_job() -> None:
@@ -120,12 +169,10 @@ def test_the_diagnostic_is_one_bounded_paper_only_observation() -> None:
     assert job["timeout-minutes"] == 5
     steps = job["steps"]
     current, pinned = checkouts(job)
-    original_checkout = checkouts(pages_job)[0]
-    assert current["uses"] == pinned["uses"] == original_checkout["uses"]
-    assert current["with"]["sparse-checkout"] == original_checkout["with"]["sparse-checkout"]
-    assert current["with"]["persist-credentials"] is False
+    assert current["uses"] == pinned["uses"] == checkouts(pages_job)[0]["uses"]
+    assert "ref" not in current["with"]
     assert pinned["with"]["ref"] == PINNED_INPUTS
-    assert pinned["with"]["sparse-checkout"] == original_checkout["with"]["sparse-checkout"]
+    assert tuple(pinned["with"]["sparse-checkout"].split()) == PINNED_PAPER_INPUTS
     assert pinned["with"]["submodules"] is True
     commands = [step["run"] for step in steps if "run" in step]
     bounded = [command for command in commands if command.startswith("timeout ")]
@@ -185,3 +232,49 @@ def test_transported_font_diagnostic_cli_keeps_its_declared_probe_root(tmp_path:
     assert result.returncode == 0, result.stderr
     assert "--font-diagnostic" in result.stdout
     assert "--font-scenario" in result.stdout
+
+
+def test_every_checkout_drops_credentials_and_only_the_workspace_reaches_a_shell() -> None:
+    """B1: the pinned checkout's code runs, so its credentials and inputs are pinned too."""
+    job = diagnostic_job()
+    assert len(checkouts(job)) == 2
+    for checkout in checkouts(job):
+        assert checkout["with"]["persist-credentials"] is False
+    assert "env" not in job
+    assert "env" not in workflow(DIAGNOSTIC)
+    expressions: set[str] = set()
+    for step in job["steps"]:
+        values = [str(step.get("run", "")), *map(str, (step.get("env") or {}).values())]
+        for value in values:
+            expressions.update(
+                re.sub(r"\s+", " ", found.strip())
+                for found in re.findall(r"\$\{\{(.*?)\}\}", value, re.DOTALL)
+            )
+            assert "secrets." not in value
+    assert expressions == {"github.workspace"}
+
+
+def test_the_tool_checkout_holds_the_tool_and_exactly_the_helpers_it_imports() -> None:
+    """B5 and B6: the first checkout fetches no paper data, and every repository module
+    the copied tool imports is compared between the two revisions at dispatch."""
+    helpers = tool_helpers()
+    assert helpers == ["devtools/preview_site.py", "src/sqpack/probes.py"]
+    current, _ = checkouts(diagnostic_job())
+    assert "submodules" not in current["with"]
+    assert current["with"]["sparse-checkout"].split() == [
+        "/packing/devtools/check_site_rendering.py",
+        "/packing/devtools/probes/check_site_rendering/",
+        *(f"/packing/{helper}" for helper in helpers),
+    ]
+    commands = {
+        step["name"]: step["run"] for step in diagnostic_job()["steps"] if "run" in step
+    }
+    preserve = commands["Preserve the reviewed maintained diagnostic tool"]
+    assert f"cp --parents {' '.join(helpers)} " in preserve
+    retain = commands["Retain immutable paper inputs and protocol"]
+    assert f"for helper in {' '.join(helpers)}; do" in retain
+    assert 'cmp -s "$RUNNER_TEMP/font-diagnostic-helpers/$helper" "$helper"' in retain
+    assert "> diagnostics/helpers.txt" in retain
+    header = DIAGNOSTIC.read_text(encoding="utf-8").split('"on":')[0]
+    assert "`sqpack.probes`" in header
+    assert "`devtools.preview_site`" in header
