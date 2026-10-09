@@ -92,12 +92,17 @@ Existing merged members are 427 → 429 → 434 → 439 → 440 → 441.
 | [#460](https://github.com/jlevy/squares/pull/460) | `324ff042c0d1412131ea388d100b21739f5881ed` | #459 | Eight Couzo rational reports | Current validate failed; current full pending |
 | [#463](https://github.com/jlevy/squares/pull/463) | `c20e70f85c85bdb47d651cc7878027af436c094c` | #460 | Three dated source-only reports | Current suite A failed; current full pending |
 | [#466](https://github.com/jlevy/squares/pull/466) | `6acce39a0badda1714e796444207f86a0569cd40` | #463 | Twenty outside-horizon source-custody reports | Source accepted; records timing ceiling exceeded; hosted checks failing/unfinished; full and public review binding pending |
+| [#468](https://github.com/jlevy/squares/pull/468) |  |  |  |  |
+| `d0ea1330183d343deaba0e66d66ecdcfcaaf5717` | #466 | Optional font diagnostic checkpoint |  |  |
+| Final source and normal union accepted; no Linux dispatch; current hosted/full |  |  |  |  |
+| qualification pending |  |  |  |  |
 
-All nine are drafts at capture.
+All ten are drafts at capture.
 GitHub reports the existing first eight as mergeable or unstable rather than conflicted;
 this means Git can compose their declared parent, not that they are qualified for merge.
 Read current required checks, full runs and published review bindings separately.
-The optional diagnostic child is recorded below when published.
+The optional diagnostic child #468 is part of the same formal stack; #467 is the
+independent documentation handoff PR.
 
 Current review bridges are actually published at these heads: #442 review5465247373,
 #443 review5465349902, #448 review5465350209, #449 review5465468486, #450
@@ -182,12 +187,28 @@ them; a SourceSans change requires measured Linux face/weight evidence.
 The diagnostic workflow is an explicit manual opt-in; default PR/push/manual-false jobs
 and limits remain unchanged.
 It must render the immutable original #449 inputs, not label the newer inherited data
-with that revision. The worker is preserving the reviewed tool closure before checking
-out the immutable input head in the same CI workspace.
-Both input and tool provenance belong in the diagnostic artifacts.
+with that revision. The committed child is
+[#468](https://github.com/jlevy/squares/pull/468), branch
+`codex/intake-font-diagnostic-449`, source commit
+`926ef8305300e3637bf1c742b9483109111a214e` and final normal merge
+`d0ea1330183d343deaba0e66d66ecdcfcaaf5717` with parents926ef830 and #4666acce39a. Source
+tree0589 and final treee859 were independently accepted by Astra.
+The reviewed tool and four probes are preserved separately before immutable4963 is
+checked out, installed and rendered in the same CI workspace.
+Both input and tool provenance are recorded in artifacts.
+Default jobs are unchanged.
+
+Nine final workflow controls passed with zero failures, errors or skips in 18.895s;
+configured type/lint checks and normal hooks passed.
+The current source20 data pin 6068a049 is unchanged.
+The entire delta from #466 is exactly four approved diagnostic paths; its rendering test
+is the current accepted module plus the diagnostic append.
 No diagnostic was dispatched for this handoff.
-Use its final source receipt and scoped Astra review before dispatching it in the next
-session.
+The final receipts are
+`review-notes/pr449-font-diagnostic-final-d0ea-handoff-composition.json`,
+`review-notes/pr449-four-path-final0589-handoff-source-qualification.json` and
+`review-notes/catalogue-stack-astra-20261008/pr449-d0ea1330-final-diagnostic-union-review.json`.
+Use these source receipts before one deliberate diagnostic dispatch in the next session.
 
 #466 automatic Packing
 [37880910357](https://github.com/jlevy/squares/actions/runs/37880910357) has three
@@ -316,7 +337,10 @@ These are separate from stack430.
    Coordinate the foreign stacks with their owners.
    Close beads only for completed scope.
 
-All source edits made by this team must be committed and pushed before handing off.
+The owned source changes and this handoff are committed and pushed.
+Independent handoff PR #467 preserves this document; source-custody PR #466 and
+diagnostic PR #468 preserve the last two source branches.
+Current hosted checks remain pending or failing as recorded above.
 Raw upstream material and unique logs intentionally remain outside Git; their durable
 paths are part of the handoff, not an assertion of public redistribution.
 
