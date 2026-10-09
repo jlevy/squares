@@ -5,7 +5,7 @@ title: Reconcile resumed intake ledger and dated source follow-ups
 kind: task
 status: in_progress
 priority: 1
-version: 26
+version: 36
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -23,10 +23,20 @@ child_order_hints:
   - is-01m4fc7ct344rsjb3zx66rew0r
   - is-01m4fdxw81pt2v4k29y9n58rn6
   - is-01m4fm98aj8x6nkkakpcaqy6se
+  - is-01m4fhtfpzk93c99z2fj4pkb8y
+  - is-01m4gavej55mf8ak2mqgqmxaxf
+  - is-01m4ffmmj2d5xhzg8axzntn67s
+  - is-01m4fk142s062w9aj65ptbas2d
+  - is-01m4fkxpt2eacwcrz1sc25s00b
+  - is-01m4fkxqcgp6xcf3e98azvvqj7
+  - is-01m4fm98y7e32zd5781fk73fcq
+  - is-01m4fm99hgjjjdmp9w2hpzscga
+  - is-01m4fz21rdxxq44ndvasav3xbf
+  - is-01m4g87cm9khx3rrbg4xg16zc8
 hold: null
 hold_until: null
 created_at: 2026-10-08T20:32:09.852Z
-updated_at: 2026-10-09T06:05:53.874Z
+updated_at: 2026-10-09T20:40:41.763Z
 started_at: 2026-10-08T20:33:04.467Z
 ---
 Add missing425/438 mappings and445 engineering disposition; append all observed maintainer replies and dated375 source updates without changing older result scopes or claiming new replay. Preserve all prior rows and prefixes, give newly identified batch certificate custody an explicit child owner, and validate the enforced request contract on the current intake top.
