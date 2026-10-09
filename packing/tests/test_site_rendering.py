@@ -824,3 +824,157 @@ def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
                 assert painted["bar"], painted
         finally:
             context.close()
+
+
+@pytest.fixture(scope="module")
+def semantic_math_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
+    """A prepared formula beside native and unrendered MathML, without a site build."""
+    root = tmp_path_factory.mktemp("semantic-math")
+    fragment = parse_markdown(
+        r"Copy $x^2 + \frac{1}{2}$ exactly.", title="Semantic mathematics"
+    ).html
+    body = (
+        '<article class="kpress kpress-doc kpress-prose"><h1>Semantic mathematics</h1>'
+        f'<div id="copy-formula">{fragment}</div><div id="fallback-slot"></div>'
+        '<div class="site-frontier"><span data-site-native-math="frontier">'
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math>'
+        "</span></div></article>"
+    )
+    page = render_overview.static_content_page(
+        body,
+        meta=render_overview.PageMeta(
+            "Semantic mathematics", "Accessible static mathematical content.", "index.html"
+        ),
+        current="papers",
+    )
+    fallback = (
+        '<span id="fallback-math" class="kpress-math" data-kpress-math="inline">'
+        '<span class="kpress-math-semantic"><math '
+        'xmlns="http://www.w3.org/1998/Math/MathML"><mi>z</mi></math></span></span>'
+    )
+    assert page.html.count('<div id="fallback-slot"></div>') == 1
+    output = page.html.replace('<div id="fallback-slot"></div>', fallback)
+    (root / "index.html").write_text(output, encoding="utf-8")
+    site_assets.write_assets(root, render_overview.asset_files([page]))
+    server = preview_site.serve(root, 0)
+    try:
+        yield f"http://127.0.0.1:{server.server_port}/index.html"
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+def semantic_math_state(page: Page, *, javascript: bool) -> dict[str, Any]:
+    """Native geometry/accessibility and an intercepted copy, without clipboard writes."""
+    copied = page.evaluate(
+        probe(Path(__file__).parent / "probes", "site_rendering/math_copy"),
+        {"selector": "#copy-formula", "copy": javascript},
+    )
+    assert copied["mode"] == (
+        "native-copy-intercepted" if javascript else "selection-only-nojs"
+    )
+    assert copied["intercepted"] is javascript
+    assert copied["command_succeeded"] is javascript
+    assert copied["text"]
+    assert "Copy" in copied["text"]
+    assert len(copied["mathml"]) == 1
+    assert "<msup><mi>x</mi><mn>2</mn></msup>" in copied["mathml"][0]
+    assert "<mfrac>" in copied["mathml"][0]
+    assert copied["mathml"]
+    assert copied["source_html"]
+    assert all(
+        row["reset"] == row["increment"] == row["set"] == "none"
+        and row["before"] in {"none", "normal"}
+        and row["after"] in {"none", "normal"}
+        for row in copied["semantic_styles"]
+    )
+    session = page.context.new_cdp_session(page)
+    try:
+        dom = session.send("DOMSnapshot.captureSnapshot", {"computedStyles": []})
+        ax = session.send("Accessibility.getFullAXTree")["nodes"]
+    finally:
+        session.detach()
+    document = dom["documents"][0]["nodes"]
+    math_ids = {
+        document["backendNodeId"][index]
+        for index, name in enumerate(document["nodeName"])
+        if dom["strings"][name].lower() == "math"
+    }
+    nodes = {node["nodeId"]: node for node in ax}
+
+    def subtree(node: dict[str, Any]) -> dict[str, Any]:
+        return {key: node.get(key, {}).get("value") for key in ("role", "name", "value")} | {
+            "ignored": node.get("ignored"),
+            "children": [subtree(nodes[key]) for key in node.get("childIds", [])],
+        }
+
+    roots = [node for node in ax if node.get("backendDOMNodeId") in math_ids]
+    assert len(math_ids) == len(roots) == 3
+    assert not any(node["ignored"] for node in roots)
+    boxes = [
+        node.bounding_box()
+        for node in page.locator(".kpress-math, [data-site-native-math]").all()
+    ]
+    assert len(boxes) == 3
+    assert all(box and box["width"] > 0 and box["height"] > 0 for box in boxes)
+    return {"copy": copied, "ax_math": [subtree(node) for node in roots], "boxes": boxes}
+
+
+@pytest.mark.parametrize("javascript", [True, False])
+@pytest.mark.parametrize("width", [390, 1280])
+def test_clipped_semantic_math_keeps_print_nojs_accessibility_and_copy(
+    browser: Browser, semantic_math_site: str, *, javascript: bool, width: int
+) -> None:
+    context = browser.new_context(
+        viewport={"width": width, "height": 900}, java_script_enabled=javascript
+    )
+    try:
+        page = context.new_page()
+        page.goto(semantic_math_site, wait_until="load")
+        page.locator("#fallback-math > .kpress-math-semantic").wait_for(state="visible")
+        session = context.new_cdp_session(page)
+        try:
+            session.send("DOM.enable")
+            session.send("CSS.enable")
+
+            def containment(selector: str) -> str:
+                root = session.send("DOM.getDocument")["root"]["nodeId"]
+                node = session.send("DOM.querySelector", {"nodeId": root, "selector": selector})
+                styles = session.send("CSS.getComputedStyleForNode", {"nodeId": node["nodeId"]})
+                return next(
+                    row["value"] for row in styles["computedStyle"] if row["name"] == "contain"
+                )
+
+            selector = '.kpress-math[data-kpress-math-rendered="true"] > .kpress-math-semantic'
+            frame = session.send("Page.getFrameTree")["frameTree"]["frame"]["id"]
+            override = session.send("CSS.createStyleSheet", {"frameId": frame, "force": True})[
+                "styleSheetId"
+            ]
+            for medium in ("screen", "print"):
+                page.emulate_media(media=medium)
+                check_site_rendering.wait_for_fonts(page)
+                assert containment(selector) == "strict"
+                assert containment("#fallback-math > .kpress-math-semantic") == "none"
+                assert containment('[data-site-native-math="frontier"] > math') == "none"
+                original = semantic_math_state(page, javascript=javascript)
+                # Inspector styles do not wait for disabled page-script load handlers.
+                session.send(
+                    "CSS.setStyleSheetText",
+                    {
+                        "styleSheetId": override,
+                        "text": selector + " { contain: none !important; }",
+                    },
+                )
+                try:
+                    assert containment(selector) == "none"
+                    assert semantic_math_state(page, javascript=javascript) == original
+                finally:
+                    session.send(
+                        "CSS.setStyleSheetText", {"styleSheetId": override, "text": ""}
+                    )
+                assert containment(selector) == "strict"
+                assert semantic_math_state(page, javascript=javascript) == original
+        finally:
+            session.detach()
+    finally:
+        context.close()
