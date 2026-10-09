@@ -24,7 +24,7 @@ the live catalogue of 29 September 2026, and every one certifies exactly here.
 | Licence | None published |
 | Retrieved | 2026-09-29, a full clone |
 | Retained here | Derived facts and metadata only: [`facts/`](facts/), one Witness/v2 witness per count with the source’s centres and angles carried verbatim, and [`acquisition/sources.json.gz`](acquisition/sources.json.gz), which pins all 99 upstream files by SHA-256 and records each count’s commit history with every side it has printed |
-| Not retained | The 49 `nNNN.txt` packing files, their 49 SVG renderings and the README, under the [known-best retention policy](../known-best-packings/README.md): with no licence, no raw asset is kept (`raw_asset_retained: false`) |
+| Not retained | The 49 `nNNN.txt` packing files, their 49 SVG renderings and the README, under the derived-only form of the [known-best retention policy](../known-best-packings/README.md): no raw asset is kept (`raw_asset_retained: false`) |
 
 ## The Claims
 

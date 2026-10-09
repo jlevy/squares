@@ -1,10 +1,13 @@
 """Each result's derived standing agrees with the bounds its own words state.
 
-`render_recent_results.standing` derives a standing from evidence ids and never compares
-a number. `devtools.check_standing` reads the bounds an entry states and holds them
-against the case records, so an entry that is no longer the best is superseded and one
-that still stands is not (think-nr0y). These hold the register to that, the reader to
-the headlines it must read, and the check to refusing each kind of mismatch.
+`render_recent_results.standing` derives whether an entry holds a bound from evidence ids
+and compares no number for it. `devtools.check_standing` reads the bounds an entry states
+and holds them against the case records, so an entry that is no longer the best is
+superseded and one that still stands is not (think-nr0y); for an entry that holds no
+bound, `standing` asks it whether a bound the entry states is better than its case
+record's, and calls that entry pending adoption rather than superseded (think-h0d1).
+These hold the register to that, the reader to the headlines it must read, and the check
+to refusing each kind of mismatch.
 """
 
 from __future__ import annotations
@@ -327,3 +330,49 @@ def test_the_command_fails_on_a_mismatch(
     assert "FAIL  T-093 is superseded, yet at n = 17" in printed.err
     assert "n = 17 lower 18641771/4000000: verified equal, reported equal" in printed.out
     assert "n = 17 lower 116511/25000: verified beaten, reported beaten" in printed.out
+
+
+def test_a_bound_better_than_its_case_record_is_pending_adoption(
+    records: view.Records,
+) -> None:
+    """T-128 states eight sides, each below the reported and the verified ceiling its case
+    holds, and no case bound rests on it. Marked superseded, it is refused at every count,
+    as a report held to the reported lane; pending adoption, it passes, and the summary
+    names where it is better. An entry beaten everywhere is refused the word (think-h0d1)."""
+    record = records.results["T-128"]
+    assert view.standing(record, records) == view.PENDING_ADOPTION
+    assert check_standing.problems(record, view.PENDING_ADOPTION, records) == []
+    cases = "n = 105, 108, 127, 131, 155, 180, 228, 306"
+    (superseded,) = check_standing.problems(record, view.SUPERSEDED, records)
+    assert f"T-128 is superseded, yet at {cases} its stated bound" in superseded
+    assert "no worse than the reported one" in superseded
+    line = check_standing.summary(record, view.PENDING_ADOPTION, records)
+    assert f"better than the case record at {cases}" in line
+    (beaten,) = check_standing.problems(
+        records.results["T-001"], view.PENDING_ADOPTION, records
+    )
+    assert "T-001 is pending adoption, yet no bound it states is better" in beaten
+
+
+def test_a_bound_no_case_record_cites_states_what_it_bounds(records: view.Records) -> None:
+    """A source-only report, one whose evidence no case record cites, is related to the
+    case records by nothing but the bounds its words state, so a bound of that kind states
+    its sides, as T-128's claim does, and `standing` can tell a better report the case
+    records have not taken in from one they have beaten (think-h0d1). The four exact-form
+    reports of 7 October (T-120..T-123) state roots of polynomials, which this does not
+    read, and keep the structural rule; a new one states its sides."""
+    lanes = ("verified_lower_bound", "reported_lower_bound")
+    lanes += ("verified_upper_bound", "reported_upper_bound")
+    cited = set()
+    for case in records.cases.values():
+        cited.update(str(item) for item in case.get("evidence") or [])
+        for lane in lanes:
+            cited.update(str(item) for item in (case.get(lane) or {}).get("evidence") or [])
+    unplaced = [
+        str(record["id"])
+        for record in records.register.results
+        if record["kind"] in BOUND_KINDS
+        and not {str(item) for item in record["evidence"]} & cited
+        and not check_standing.stated_bounds(record)
+    ]
+    assert unplaced == ["T-120", "T-121", "T-122", "T-123"]
