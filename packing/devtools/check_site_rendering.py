@@ -11,17 +11,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import statistics
 import time
 from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any, Literal, cast
 from urllib.parse import unquote, urlsplit
 
 from sqpack.probes import applied, probe
 
 if TYPE_CHECKING:
-    from playwright.sync_api import Browser, BrowserContext, Page
+    from playwright.sync_api import Browser, BrowserContext, CDPSession, Page, Route
 
 PROBES = Path(__file__).parent / "probes"
 INSTRUMENT = applied(probe(PROBES, "check_site_rendering/instrument"))
@@ -214,6 +215,173 @@ def measure(
             context.close()
 
 
+FONT_DIAGNOSTIC_SELECTORS = (".site-nav-inner > a", ".doc-links", ".hero")
+_FONT_URL = re.compile(r"\.(?:woff2?|ttf|otf)(?:[?#].*)?$")
+
+
+def physical_font_snapshot(session: CDPSession) -> list[dict[str, Any]]:
+    """Two diagnostic reads use the same declared nodes and actual shaped fonts."""
+    root = session.send("DOM.getDocument")["root"]["nodeId"]
+    rows: list[dict[str, Any]] = []
+    for selector in FONT_DIAGNOSTIC_SELECTORS:
+        nodes = session.send("DOM.querySelectorAll", {"nodeId": root, "selector": selector})[
+            "nodeIds"
+        ]
+        if not nodes:
+            raise ValueError(f"font diagnostic selector is absent: {selector}")
+        for node in nodes:
+            parameters = {"nodeId": node}
+            computed = session.send("CSS.getComputedStyleForNode", parameters)["computedStyle"]
+            rows.append(
+                {
+                    "selector": selector,
+                    "nodeId": node,
+                    "backendNodeId": session.send("DOM.describeNode", parameters)["node"][
+                        "backendNodeId"
+                    ],
+                    "html": session.send("DOM.getOuterHTML", parameters)["outerHTML"],
+                    "fonts": session.send("CSS.getPlatformFontsForNode", parameters)["fonts"],
+                    "box": session.send("DOM.getBoxModel", parameters)["model"],
+                    "typography": {
+                        row["name"]: row["value"]
+                        for row in computed
+                        if row["name"]
+                        in {
+                            "font-family",
+                            "font-size",
+                            "font-weight",
+                            "font-style",
+                            "font-stretch",
+                            "line-height",
+                            "letter-spacing",
+                        }
+                    },
+                }
+            )
+    return rows
+
+
+def diagnose_font_delivery(
+    browser: Browser,
+    url: str,
+    destination: Path,
+    *,
+    width: int,
+    scheme: Literal["light", "dark"],
+) -> dict[str, Any]:
+    """Hold font delivery once, observe physical fallback/custom faces, retain errors.
+
+    Routing disables the browser cache and native font/style/box reads add synchronous
+    observation overhead. This controlled intervention supplies no normal gate credit.
+    """
+    result: dict[str, Any] = {
+        "complete": False,
+        "gate_credit": False,
+        "url": url,
+        "width": width,
+        "scheme": scheme,
+        "protocol": "fresh context; all network font responses held once; two CDP snapshots",
+        "overhead": "routing disables cache; synchronous font/style/box observation",
+        "held_fonts": [],
+        "failed_fonts": [],
+        "snapshots": [],
+    }
+    # Reserve unique evidence before any browser context or interception.
+    with destination.open("x", encoding="utf-8") as output:
+        context: BrowserContext | None = None
+        session: CDPSession | None = None
+        held: list[Route] = []
+        holding = False
+
+        def hold_font(route: Route) -> None:
+            if holding:
+                held.append(route)
+                result["held_fonts"].append(route.request.url)
+            else:
+                route.continue_()
+
+        def release() -> None:
+            nonlocal holding
+            holding = False
+            assert context is not None
+            try:
+                while held:
+                    held.pop(0).continue_()
+            finally:
+                context.unroute(_FONT_URL, hold_font)
+
+        try:
+            context = browser.new_context(
+                viewport={"width": width, "height": 900}, color_scheme=scheme
+            )
+            try:
+                install_observer(context)
+                context.route(_FONT_URL, hold_font)
+                holding = True
+                page = context.new_page()
+                page.on(
+                    "requestfailed",
+                    lambda request: (
+                        result["failed_fonts"].append(
+                            {"url": request.url, "failure": request.failure}
+                        )
+                        if request.resource_type == "font"
+                        else None
+                    ),
+                )
+                page.on(
+                    "response",
+                    lambda response: (
+                        result["failed_fonts"].append(
+                            {"url": response.url, "status": response.status}
+                        )
+                        if response.request.resource_type == "font" and response.status >= 400
+                        else None
+                    ),
+                )
+                session = context.new_cdp_session(page)
+                session.send("DOM.enable")
+                session.send("CSS.enable")
+                response = page.goto(url, wait_until="domcontentloaded", timeout=30_000)
+                if response is None or not response.ok:
+                    raise ValueError(f"font diagnostic navigation failed: {url}")
+                page.wait_for_timeout(SETTLE_MS)
+                if not held:
+                    raise ValueError("font diagnostic observed no held font requests")
+                result["snapshots"].append(
+                    {"phase": "fonts-held", "nodes": physical_font_snapshot(session)}
+                )
+                release()
+                page.wait_for_load_state("load", timeout=30_000)
+                wait_for_fonts(page)
+                page.wait_for_timeout(SETTLE_MS)
+                result["snapshots"].append(
+                    {"phase": "fonts-settled", "nodes": physical_font_snapshot(session)}
+                )
+                result["native_report"] = read_report(page)
+                if result["failed_fonts"]:
+                    raise ValueError("font diagnostic observed failed font loads")
+                result["complete"] = True
+            finally:
+                try:
+                    if holding:
+                        release()
+                finally:
+                    try:
+                        if session is not None:
+                            session.detach()
+                    finally:
+                        context.close()
+        except BaseException as error:
+            result["complete"] = False
+            result["error"] = {"type": type(error).__name__, "message": str(error)}
+            raise
+        finally:
+            json.dump(result, output, indent=2)
+            output.write("\n")
+    return result
+
+
 def problems(report: dict[str, Any], *, javascript: bool = True) -> list[str]:
     found: list[str] = []
     if not report.get("heading") or report.get("contentChars", 0) < 40:
@@ -267,6 +435,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         default="1280-light",
         help="which existing viewport/theme pair to trace; the full gate still runs",
     )
+    parser.add_argument(
+        "--font-diagnostic",
+        type=Path,
+        help="save two controlled font-delivery snapshots; diagnostic only, no gate credit",
+    )
+    parser.add_argument(
+        "--font-scenario",
+        choices=("1280-light", "1280-dark", "390-light", "390-dark"),
+        default="390-light",
+    )
     args = parser.parse_args(argv)
     if args.runs < 1:
         parser.error("--runs must be positive")
@@ -281,6 +459,31 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("--trace requires exactly one page and one run")
     if args.trace is not None and args.trace.exists():
         parser.error("--trace refuses to overwrite an existing receipt")
+    if args.font_diagnostic is not None:
+        if args.trace is not None or len(names) != 1 or args.runs != 1:
+            parser.error("--font-diagnostic requires one page/run and no --trace")
+        if args.font_diagnostic.exists() or args.font_diagnostic.is_symlink():
+            parser.error("--font-diagnostic refuses to overwrite an existing receipt")
+        width, scheme = args.font_scenario.split("-")
+        server = serve(args.directory, 0, as_pages=True)
+        try:
+            with sync_playwright() as playwright:
+                browser = launch_chromium(playwright)
+                try:
+                    result = diagnose_font_delivery(
+                        browser,
+                        f"http://127.0.0.1:{server.server_port}/{names[0]}",
+                        args.font_diagnostic,
+                        width=int(width),
+                        scheme=cast('Literal["light", "dark"]', scheme),
+                    )
+                finally:
+                    browser.close()
+        finally:
+            server.shutdown()
+            server.server_close()
+        print(json.dumps(result, indent=2))
+        return 0
     failures: list[str] = []
     results: list[dict[str, Any]] = []
     server = serve(args.directory, 0, as_pages=True)

@@ -970,3 +970,146 @@ def test_clipped_semantic_math_keeps_print_nojs_accessibility_and_copy(
             session.detach()
     finally:
         context.close()
+
+
+def test_font_diagnostic_observes_physical_fallback_then_pinned_face(
+    browser: Browser, tmp_path: Path
+) -> None:
+    font = (
+        Path(__file__).parents[2]
+        / "vendor/kpress/src/kpress/format/static/fonts"
+        / "source-sans-3-latin-wght-normal.woff2"
+    )
+    (tmp_path / "font.woff2").write_bytes(font.read_bytes())
+    (tmp_path / "index.html").write_text(
+        '<!doctype html><link rel="preload" href="font.woff2" as="font" crossorigin>'
+        "<style>@font-face{font-family:PinnedSans;src:url(font.woff2);font-display:swap}"
+        "body{font-family:PinnedSans,serif;font-size:24px}</style>"
+        '<nav class="site-nav-inner"><a href="/">A readable navigation link</a></nav>'
+        '<div class="doc-links">The document formats</div>'
+        '<main class="hero"><h1>Pinned font identity</h1><p>A complete readable '
+        "paragraph lets the native diagnostic identify the physical face.</p></main>"
+    )
+    destination = tmp_path / "font-diagnostic.json"
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        result = check_site_rendering.diagnose_font_delivery(
+            browser,
+            f"http://127.0.0.1:{server.server_port}/index.html",
+            destination,
+            width=390,
+            scheme="light",
+        )
+    finally:
+        server.shutdown()
+        server.server_close()
+    assert result == json.loads(destination.read_text())
+    assert result["complete"] is True
+    assert result["gate_credit"] is False
+    assert result["failed_fonts"] == []
+    assert len(result["held_fonts"]) == 1
+    assert [row["phase"] for row in result["snapshots"]] == ["fonts-held", "fonts-settled"]
+    before, after = (row["nodes"] for row in result["snapshots"])
+    assert len(before) == len(after) == 3
+    for fallback, custom in zip(before, after, strict=True):
+        assert fallback["backendNodeId"] == custom["backendNodeId"]
+        assert fallback["html"] == custom["html"]
+        assert fallback["typography"]["font-family"] == custom["typography"]["font-family"]
+        assert fallback["fonts"]
+        assert not any(face["isCustomFont"] for face in fallback["fonts"])
+        assert any(
+            face["isCustomFont"] and face["familyName"].startswith("Source Sans")
+            for face in custom["fonts"]
+        )
+        assert fallback["box"]["width"] > 0
+        assert custom["box"]["width"] > 0
+
+
+@pytest.mark.parametrize("failure", ["no-font", "missing-node", "failed-font"])
+def test_font_diagnostic_retains_incomplete_native_observations(
+    browser: Browser, tmp_path: Path, failure: str
+) -> None:
+    styles = (
+        "<style>@font-face{font-family:MissingFont;src:url(missing.woff2)}"
+        "body{font-family:MissingFont,serif}</style>"
+        if failure != "no-font"
+        else ""
+    )
+    hero = ' class="hero"' if failure != "missing-node" else ""
+    (tmp_path / "index.html").write_text(
+        "<!doctype html>"
+        + styles
+        + '<nav class="site-nav-inner"><a href="/">Navigation text</a></nav>'
+        + '<div class="doc-links">Document formats</div>'
+        + f"<main{hero}><h1>Readable title</h1><p>This complete paragraph remains "
+        + "readable while a native diagnostic rejects an incomplete observation.</p></main>"
+    )
+    destination = tmp_path / "incomplete.json"
+    messages = {
+        "no-font": "no held font requests",
+        "missing-node": "selector is absent",
+        "failed-font": "failed font loads",
+    }
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with pytest.raises(ValueError, match=messages[failure]):
+            check_site_rendering.diagnose_font_delivery(
+                browser,
+                f"http://127.0.0.1:{server.server_port}/index.html",
+                destination,
+                width=390,
+                scheme="light",
+            )
+    finally:
+        server.shutdown()
+        server.server_close()
+    result = json.loads(destination.read_text())
+    assert result["complete"] is False
+    assert result["gate_credit"] is False
+    assert result["error"]["type"] == "ValueError"
+    assert messages[failure] in result["error"]["message"]
+    if failure == "failed-font":
+        assert result["failed_fonts"]
+        assert len(result["snapshots"]) == 2
+
+
+def test_font_diagnostic_refuses_overwrite_before_context(tmp_path: Path) -> None:
+    destination = tmp_path / "retained.json"
+    destination.write_text("retained evidence")
+    driver = Mock()
+    with pytest.raises(FileExistsError):
+        check_site_rendering.diagnose_font_delivery(
+            driver, "http://localhost/index.html", destination, width=390, scheme="light"
+        )
+    driver.new_context.assert_not_called()
+    assert destination.read_text() == "retained evidence"
+
+
+def test_font_diagnostic_retains_context_failure(tmp_path: Path) -> None:
+    driver = Mock()
+    driver.new_context.side_effect = RuntimeError("native context failed")
+    destination = tmp_path / "failed-context.json"
+    with pytest.raises(RuntimeError, match="native context failed"):
+        check_site_rendering.diagnose_font_delivery(
+            driver, "http://localhost/index.html", destination, width=390, scheme="light"
+        )
+    result = json.loads(destination.read_text())
+    assert result["complete"] is False
+    assert result["error"] == {"type": "RuntimeError", "message": "native context failed"}
+
+
+def test_font_diagnostic_cli_refuses_receipt_before_launch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    (tmp_path / "index.html").write_text("<main>Existing page</main>")
+    destination = tmp_path / "retained.json"
+    destination.write_text("retained evidence")
+    launch = Mock()
+    monkeypatch.setattr(preview_site, "launch_chromium", launch)
+    with pytest.raises(SystemExit) as error:
+        check_site_rendering.main(
+            [str(tmp_path), "--page", "index.html", "--font-diagnostic", str(destination)]
+        )
+    assert error.value.code == 2
+    launch.assert_not_called()
+    assert destination.read_text() == "retained evidence"
