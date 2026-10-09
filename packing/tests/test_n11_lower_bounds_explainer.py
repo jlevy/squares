@@ -12,6 +12,7 @@ from __future__ import annotations
 import posixpath
 import re
 from dataclasses import replace
+from datetime import date
 from fnmatch import fnmatchcase
 from fractions import Fraction
 from pathlib import Path
@@ -19,6 +20,7 @@ from urllib.parse import urljoin
 
 import pytest
 import tinycss2
+from PIL import Image
 
 from devtools import (
     build_known_best_atlas,
@@ -69,6 +71,7 @@ from sqpack.release import (
     PUBLICATION_HISTORY,
     PUBLICATION_STAMP,
     PUBLICATION_VERSION,
+    commit_date,
     edition_at,
 )
 from sqpack.yamlio import safe_load
@@ -375,7 +378,7 @@ def test_figure_three_marks_the_verified_lower_bound_beside_the_packing(
     assert recorded["exact_form"] == packing["verified_upper_bound"]["exact_form"]
     assert render_n11_lower_bounds_explainer.n11_solved(verified)
     assert verified.display == "3.8770835…"
-    assert verified.credit == "Ahmed after Levy et al. 2026"
+    assert verified.credit == "Ahmed after Levy, Kleddamag 2026"
 
     best_x = round(
         render_n11_lower_bounds_explainer.line_x(
@@ -391,7 +394,7 @@ def test_figure_three_marks_the_verified_lower_bound_beside_the_packing(
     assert '<line x1="356" y1="76.0"' in figure
 
     caption = " ".join(document.split())
-    assert "T-060, by Ahmed after Levy et al. 2026, closes the remaining gap" in caption
+    assert "T-060, by Ahmed after Levy, Kleddamag 2026, closes the remaining gap" in caption
     assert "the exact algebraic side $T$" in caption
     assert "a truncated decimal display of $T$" in caption
     assert "leaves a gap of $0.0000000" not in caption
@@ -515,28 +518,23 @@ def test_the_card_image_is_the_sites_one_card_at_the_size_it_is_drawn(page: str)
 
 
 def test_the_composite_card_is_the_landscape_crop_and_not_the_portrait_canvas() -> None:
-    """The composite's card, which the overview's atlas card shows and which was this
-    page's link preview until the site took one card for every page, stays a card.
+    """The atlas preview keeps the top of the portrait composite at full width.
 
-    A portrait card is cropped by the platform, and it crops away the title.
-
-    X and Facebook show a landscape card and take a band from the middle of whatever
-    they are handed, so the full 150:181 canvas arrives as four rows out of the middle
-    of the grid with the title, the date and the repository line gone. The atlas builder
-    writes the top of the same drawing at 1.91:1 instead, which is the ratio those
-    platforms want, so they crop nothing.
-
-    What is pinned is the property rather than the number: landscape, and within a
-    pixel of the ratio the croppers use. A future canvas can change the crop height as
-    long as the card stays a card.
+    Its crop follows the atlas specification; the site's shared social card has its
+    own ratio. Matching pixels catches a centre crop or a second drawing that keeps
+    the right dimensions while losing the title.
     """
     width, height = png_size(COMPOSITE_CARD)
-    assert width > height, "a card cropped by the platform is a card without its title"
-    assert abs(width / height - 1.91) < 0.01, (width, height, width / height)
-    # The crop is of the composite, not a second drawing: same width, less height.
+    assert width > height, "the atlas preview must stay landscape"
+    canvas = build_known_best_atlas.PRIMARY_COMPOSITE
+    assert (width, height) == (canvas.width, canvas.spec.card_units)
     full_width, full_height = png_size(COMPOSITE_PNG)
     assert width == full_width
     assert height < full_height
+    with Image.open(COMPOSITE_CARD) as card, Image.open(COMPOSITE_PNG) as full:
+        assert card.convert("RGBA").tobytes() == (
+            full.crop((0, 0, width, height)).convert("RGBA").tobytes()
+        )
 
 
 def test_the_card_and_the_page_say_the_same_thing(page: str) -> None:
@@ -1174,8 +1172,8 @@ def test_every_repository_link_names_main_and_exists_there(page: str, document: 
 
 
 def test_the_atlas_figure_carries_the_shared_version_at_its_own_data_commit() -> None:
-    """A poster names the data it was drawn from, in the site's one spelling at its own
-    data commit, and is not re-stamped when the pin moves (`sqpack.release`, rule 4):
+    """A poster names and dates the data it was drawn from, in the site's one spelling
+    at its own data commit, and is not re-stamped when the pin moves (release rule 4):
     the posters agree with the site's edition in the version and may differ in the six
     characters after it. The posters are the site's assets, so they keep the site's
     version; the paper that shows them does not."""
@@ -1188,14 +1186,9 @@ def test_the_atlas_figure_carries_the_shared_version_at_its_own_data_commit() ->
         identity = build_known_best_atlas.retained_identity(text)
         assert identity.data_revision == drawn_from.group(1)
         assert identity.stamp == edition_at(drawn_from.group(1)), composite.name
-        canvas = next(
-            canvas
-            for canvas in build_known_best_atlas.COMPOSITES
-            if canvas.spec.svg_name == composite.name
-        )
-        expected_footer = (
-            identity.poster_stamp if canvas.information_in_corner else identity.stamp
-        )
+        day = date.fromisoformat(commit_date(REPO, drawn_from.group(1)))
+        assert identity.data_date == day.isoformat(), composite.name
+        expected_footer = f"{day:%B} {day.day}, {day.year} · {edition_at(drawn_from.group(1))}"
         assert footer.group(1) == expected_footer, composite.name
         assert identity.stamp.rsplit("-", 1)[0] == PUBLICATION_EDITION.rsplit("-", 1)[0]
 

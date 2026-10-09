@@ -989,8 +989,8 @@ def _drawing_width(report: dict[str, Any]) -> float:
 def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_small(seen: Readings) -> None:
     """A plain address is at Small, under a second strip on the view tabs' line, in
     their type and at their height: Small, Medium and Large, Small selected and the
-    strip's one stop in the tab order, each controlling the box of tiles. The key to a
-    tile's marks stands under both strips and over the tiles."""
+    strip's one stop in the tab order, each controlling the box of tiles. The color
+    key stands under both strips and over the tiles."""
     small = seen["default"]
     assert (small["size"], small["search"]) == ("small", "")
     sizes = _size_tabs(small)
@@ -1007,53 +1007,36 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_open_on_small(seen: Readin
     assert sizes["small"]["box"]["left"] > views["triangle"]["box"]["right"]
     legend = small["legend"]
     assert legend["shown"]
-    assert "proved optimal (" in legend["text"]
-    assert "recent result, since August, 2026" in legend["text"]
     assert "colors indicate distinct tilt angles" in legend["text"]
     assert "shade indicates number of full-side contacts" in legend["text"]
     assert "half a drawing" not in legend["text"]
     left, right = legend["columns"]
-    assert all(item["text"].endswith("/324)") for item in [*left["items"], right["items"][0]])
-    assert [item["key"] for item in left["items"]] == ["optimal", "exact", "numerical", "rigid"]
-    assert [item["key"] for item in right["items"]] == [
-        "recent",
-        "angles",
-        "contacts",
-        "degree",
-    ]
-    assert right["items"][3]["text"] == "deg is the algebraic degree of that side length"
-    assert right["items"][3]["swatches"] == []
+    assert [item["key"] for item in left["items"]] == ["angles"]
+    assert [item["key"] for item in right["items"]] == ["contacts"]
+    angles, contacts = left["items"][0], right["items"][0]
     for column in (left, right):
         for item in column["items"]:
             assert item["box"]["left"] == pytest.approx(column["box"]["left"], abs=atlas.EDGE)
     for item, values in zip(
-        right["items"][1:3], (["0", "1", "2", "3"], ["4", "3", "2", "1", "0"]), strict=True
+        (angles, contacts), (["0", "1", "2", "3"], ["4", "3", "2", "1", "0"]), strict=True
     ):
         assert [swatch["value"] for swatch in item["swatches"]] == values
         assert len({swatch["fill"] for swatch in item["swatches"]}) == len(values)
         assert all(swatch["width"] > 0 and swatch["height"] > 0 for swatch in item["swatches"])
-    assert [swatch["label"] for swatch in right["items"][1]["swatches"]] == [
+    assert [swatch["label"] for swatch in angles["swatches"]] == [
         "90\N{DEGREE SIGN}",
         "45\N{DEGREE SIGN}",
         "",
         "",
     ]
-    assert [swatch["ink"] for swatch in right["items"][1]["swatches"][:2]] == [
-        "rgb(0, 0, 0)"
-    ] * 2
-    assert [swatch["label"] for swatch in right["items"][2]["swatches"]] == [
-        "4",
-        "3",
-        "2",
-        "1",
-        "0",
-    ]
+    assert [swatch["ink"] for swatch in angles["swatches"][:2]] == ["rgb(0, 0, 0)"] * 2
+    assert [swatch["label"] for swatch in contacts["swatches"]] == ["4", "3", "2", "1", "0"]
     # The note step, as the tables' legend is set, which is the tabs' step too.
     assert legend["font_px"] == 17.48
     assert legend["box"]["top"] >= views["grid"]["box"]["bottom"]
     assert legend["box"]["bottom"] <= small["cells"]["top"]
-    assert small["view_strip"]["left"] == pytest.approx(small["cells"]["left"], abs=atlas.EDGE)
-    assert legend["box"]["left"] == pytest.approx(small["cells"]["left"], abs=atlas.EDGE)
+    assert legend["box"]["left"] >= small["cells"]["left"] - atlas.EDGE
+    assert legend["box"]["right"] <= small["cells"]["right"] + atlas.EDGE
     assert _same_places(small, seen["triangle, small"])
 
 
@@ -1165,12 +1148,16 @@ def test_a_linked_size_is_that_size_before_a_tile_is_drawn(seen: Readings) -> No
     beside = sizes["small"]["box"]["left"] >= views["triangle"]["box"]["right"]
     under = sizes["small"]["box"]["top"] >= views["grid"]["box"]["bottom"]
     assert beside or under
-    assert phone["legend"]["box"]["right"] <= phone["block"]["right"] + atlas.EDGE
-    right = phone["legend"]["columns"][1]
-    degree = right["items"][3]
-    assert degree["text"] == "deg is the algebraic degree of that side length"
-    assert degree["box"]["right"] <= right["box"]["right"] + atlas.EDGE
-    assert degree["box"]["bottom"] <= phone["cells"]["top"] + atlas.EDGE
+    legend = phone["legend"]
+    assert legend["shown"]
+    assert legend["box"]["left"] >= phone["block"]["left"] - atlas.EDGE
+    assert legend["box"]["right"] <= phone["block"]["right"] + atlas.EDGE
+    for column, key in zip(legend["columns"], ("angles", "contacts"), strict=True):
+        assert [item["key"] for item in column["items"]] == [key]
+        item = column["items"][0]
+        assert item["box"]["left"] >= column["box"]["left"] - atlas.EDGE
+        assert item["box"]["right"] <= column["box"]["right"] + atlas.EDGE
+        assert item["box"]["bottom"] <= phone["cells"]["top"] + atlas.EDGE
 
 
 @pytest.mark.parametrize(

@@ -63,8 +63,9 @@ DATES = {
         f"Last revised {release.EXPLAINER_REVISED}"
     ),
     THRESHOLD: (
+        f"First published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published} · "
         f"Original proof {release.THRESHOLD_PROOF_PUBLISHED} · "
-        f"Published {release.THRESHOLD_REVIEW_HISTORY[-1].first_published}"
+        f"Last revised {release.THRESHOLD_REVIEW_REVISED}"
     ),
     REVIEW: (
         f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "

@@ -754,9 +754,26 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(page: st
         274,
         308,
     ]
-    assert 'style="--r:1;--c:0;--g:1;--i:1;--o:0;--site-atlas-side:1.0;' in _atlas_template(
-        page, "first"
+    first = re.search(
+        r'<a\b[^>]* data-atlas-n="1"[^>]* style="([^"]+)"', _atlas_template(page, "first")
     )
+    assert first is not None
+    positions = {
+        key.strip(): float(value)
+        for key, value in (
+            declaration.split(":", 1)
+            for declaration in first[1].split(";")
+            if declaration.strip()
+        )
+    }
+    assert positions == {
+        "--r": 1,
+        "--c": 0,
+        "--g": 1,
+        "--i": 1,
+        "--o": 0,
+        "--site-atlas-side": 1,
+    }
     assert 'class="site-atlas-key"' not in page
 
 

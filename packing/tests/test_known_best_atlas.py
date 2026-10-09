@@ -1027,9 +1027,11 @@ def test_the_poster_canvas_is_what_its_specification_computes() -> None:
     assert (canvas.information_left, canvas.information_right) == (204, 2804)
     assert float(canvas.legend_baseline) == pytest.approx(778.7511853125)
     assert float(canvas.explainer_baseline) == pytest.approx(484.16015625)
-    assert float(canvas.citations_baseline) == pytest.approx(2371.5168103125)
-    assert float(canvas.credit_baseline) == pytest.approx(2110.5636853125)
-    assert float(canvas.stamp_baseline) == pytest.approx(2182.5636853125)
+    # Two lower-bound and four optimality-credit lines precede the closing anchors.
+    # The default canvas reserves the deepest possible date descender.
+    assert float(canvas.citations_baseline) == pytest.approx(2443.3058728125)
+    assert float(canvas.credit_baseline) == pytest.approx(2182.3527478125)
+    assert float(canvas.stamp_baseline) == pytest.approx(2254.3527478125)
     assert (composite.svg_name, composite.pdf_name) == (
         "known-best-1-324.svg",
         "square-packings-324-20261008.pdf",
@@ -2079,7 +2081,35 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
         for item in root.findall("svg:g[@data-feature='packing-card']", SVG)
         if (label := item.find("svg:text[@data-feature='algebraic-degree']", SVG)) is not None
     }
-    assert len(degrees) == 30
+    assert sorted(degrees) == [
+        5,
+        10,
+        11,
+        17,
+        18,
+        19,
+        26,
+        27,
+        28,
+        37,
+        38,
+        39,
+        40,
+        41,
+        51,
+        52,
+        53,
+        54,
+        65,
+        66,
+        67,
+        69,
+        82,
+        83,
+        85,
+        87,
+        89,
+    ]
     assert displayed_degrees == {n: f"deg {degree}" for n, degree in degrees.items()}
     assert entries[68]["exactness"]["degree"] == 1
     assert 68 not in displayed_degrees
@@ -2123,7 +2153,7 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
     assert starred == {n for n, flags in contributions.items() if flags.any}
     legend = root.find(".//svg:g[@data-feature='evidence-legend']", SVG)
     assert legend is not None
-    assert f"recent result, since August, 2026 ({expected_recent}/100)" in [
+    assert f"recent result, since August, 2026 ({expected_recent} of 100)" in [
         node.text for node in legend.findall(".//svg:text[@data-feature='legend-label']", SVG)
     ]
 
@@ -2383,10 +2413,15 @@ def test_poster_closing_block_refuses_a_long_line_overlapping_cards(
 ) -> None:
     canvas = known_best_builder.resolved_composites()[1]
     layout = known_best_builder._information_layout(canvas)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    size = Decimal(known_best_builder.POSTER_BODY_SIZE)
+    baseline = canvas.card_position(canvas.spec.last_n).top + size
+    # The line stays inside its information block and intersects the final card row.
     monkeypatch.setattr(
         known_best_builder,
         "_information_layout",
-        lambda _canvas, _identity=None: replace(layout, diagram_baseline=Decimal(6400)),
+        lambda _canvas, _identity=None: replace(
+            layout, diagram_baseline=baseline, bottom=baseline + size
+        ),
     )
     append = known_best_builder._append_composite_information  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     with pytest.raises(ValueError, match="credit line overlaps a packing card"):
