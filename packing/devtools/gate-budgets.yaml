@@ -748,57 +748,79 @@ tiers:
   # B and C 154 -> 168 s, frontend 150 -> 165 s, checks 140 -> 150 s). The 12 s per-test
   # wall, the suite_files planning capacities 131/154/154/131 (frozen weights of the
   # recorded assignment, not ceilings) and every recorded cost below are unchanged.
-  ceiling_seconds: 143.0
-  measured_seconds: 114.58
-  measured_on: '2026-10-01'
+  # 2026-10-09: 335 s, raised from 143 s for the moment by the owner's decision of
+  # 2026-10-09 ("re quick lane let's raise it for the moment but file a bead for this"),
+  # selected on purpose as `OR-17` requires of anything above a routine ceiling, and
+  # temporary: think-2hm6 owns the structural fix -- a fifth shard, the lane's unavoidably
+  # slow modules moved off the pull-request surface on their own measurement (`OR-13`),
+  # or cheaper modules -- and the four ceilings come back down with it. The lane outgrew
+  # them. Its recorded cost went from 1,213.6 test-seconds on 2026-10-01 to 3,178.9 on
+  # 2026-10-09, and from 2026-10-07T06:25Z to 2026-10-09T20:38Z 1,328 hosted shard
+  # readings with every test green (376 pull-request runs on 49 branches, read by
+  # `devtools.read_tier_walls`) had medians of 167, 218, 186 and 159 s for A to D
+  # against ceilings of 143, 168, 168 and 143 s: 944 were over their ceiling, and three
+  # suite-d walls, 288.47, 295.16 and 300.27 s, were over the 2x hang detector and failed
+  # their jobs. A complete run's four shards summed to a median 725.9 s and at most
+  # 998.6 s against 622 s of ceilings. The rule: the two shards the partition plans alike
+  # share a ceiling, the slowest reading either gave in that window plus at least 10 per
+  # cent, rounded up to five seconds. A and D carry the lighter shares (730.59 recorded
+  # test-seconds each), B and C the heavier (858.86 each).
+  # The lighter pair's slowest reading is suite-d's 300.27 s (run 37853886593, job
+  # 113573308641): 300.27 x 1.10 = 330.3, so 335 s. That is 1.34x this shard's own
+  # slowest, 250.54 s, and 1.85x the record below, inside rule 2's 2.0x (361.7 s).
+  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
+  # assignment; changing them would move files between shards without a measurement),
+  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
+  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
+  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
+  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  ceiling_seconds: 335.0
+  measured_seconds: 180.84
+  measured_on: '2026-10-09'
   measured_where: >-
-    The geometric mean of twelve readings at the reference shape on 2026-10-01, each
-    the one `fast behavioral tests, shard A` step with --jobs 1 and --inner-jobs 1 over
-    the three-shard partition recorded from run 36728602528, every test green and the
-    ceiling held, read from the suite-a job's logs by `devtools.read_tier_walls`:
-    128.65, 99.40, 121.14, 128.16, 113.91, 120.12, 83.91, 120.49, 121.44 and 122.26 s
-    across runs 36932629078, 36928600491, 36924379492, 36922573043, 36920899178,
-    36919917508, 36914863777, 36911610868, 36910543732 and 36898536578, and 128.55 and
-    97.69 s in run 36928600491 attempts 2 and 3 (jobs 110595482960 and 110602459026),
-    which the jobs API's latest-attempt view hides behind the 99.40 s fifth attempt and
-    `read_tier_walls --job-id` reads. Not averaged, and the reason this entry exists:
-    131.58 s and 132.67 s in the same run's attempts 1 and 4 (jobs 110591982989 and
-    110605187146), over the 131 s ceiling with every test passing -- the PR #277
-    failures. A wall the ceiling refused is not a reading of what the ceiling allows,
-    so they are named here and kept out of the band, as the suite_c record of
-    2026-10-01 kept its 170.30 s and 172.45 s; with them the mean is 116.94 s.
-    Observed spread 1.53x. The band is the readings' own range; a run from its low end
-    can grow to the 143 s ceiling (131 s until 2026-10-05), 1.70x its 83.91 s low edge, before any rule fires.
-  measured_band: {low: 83.91, high: 128.65}
+    The geometric mean of 160 readings at the reference shape on 2026-10-09: every suite-a
+    job that started that day, 00:16Z to 20:38Z, in a pull-request run of Packing
+    validation, each the gate's own wall for the one `fast behavioral tests, shard A` step
+    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+    jobs API's filter=all listing, a carried-over job counted once and a job whose step
+    failed a test not counted. Median 197.15 s, p10 127.5 s, p90 223.0 s; from 92.84 s
+    (run 37864114853, job 113606632385) to 250.54 s (run 37939031866, job 113848352236).
+    133 of the 160 were over the 143 s ceiling they ran against. Spread 2.70x, wider than
+    the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
+    no band: the day's runs crossed several revisions of the partition record on thirty
+    branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
+    as well as the runner pool. The day's two complete runs on the re-recorded partition
+    read 184.35 s (run 37975867696, #469 at 600068983) and 246.02 s (run 37988339329, a
+    pull request into main after d3860c97a). The two days before are measured and not
+    averaged in, because the lane grew under them: geometric means of 124.8 s on
+    2026-10-07 (29 readings) and 153.7 s on 2026-10-08 (128), and 163.70 s over all 317
+    readings from 2026-10-07T06:25Z.
   attribution:
     cause: >-
-      The shard grew, and it grew on a stale record. Between the two-shard cohort the
-      partition was recorded from (run 36728602528, 2026-09-30) and the three-shard
-      cohort of run 36924379492 (2026-10-01) the lane went from 433 to 489 test files,
-      7,947 to 9,389 tests and 1,004.6 to 1,213.6 test-seconds, and this shard from
-      2,220 to 2,701 tests and 354.6 to 410.7 test-seconds. Nineteen of its files were
-      absent from the record and took the path hash (429 tests, 32.7 test-seconds),
-      and recorded files grew too: `test_results_register.py` doubled and
-      `test_pages_scope.py` went from 1.7 to 13.5 s. No test reached the per-test
-      backstop. The rest is the runner: the 85.03 s record was two readings, and the
-      twelve here span 1.53x on identical code, with two more over the ceiling. The
-      growth is paid for with a fourth shard rather than a wider ceiling.
+      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+      (600068983). The 162 files the current packing gives shard 1/4 went from 295.57 to
+      730.59 test-seconds; 47 of them were absent from the earlier record (230.70
+      test-seconds), the week's result imports and n17 checks, and recorded files grew as
+      well; the largest growth is listed below. The two records came from different
+      runners, so a recorded file's before and after are not on one clock; an added file's
+      after is. No step was added: the tier is still the one shard step.
     unit: test-seconds
     source: >-
-      python -m devtools.check_gate_budgets --attribute-files BEFORE AFTER over the
-      per-file test-cost reports of jobs suite-a and suite-b in run 36728602528 and
-      suite-a, suite-b and suite-c in run 36924379492, each restricted to the files the
-      recorded three-shard partition assigns to this shard; the walls from python -m
-      devtools.read_tier_walls --tier suite_a over the ten runs and four job ids named
-      in measured_where. The two cohorts ran on different runners, so a recorded file's
-      before and after are not on one clock; an added file's after is.
+      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+      the later record, whose shard totals `python -m devtools.suite_files show` prints
+      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
     grew:
-    - {name: 'packing/tests/test_results_register.py', before: 16.03, after: 33.05}
-    - {name: 'packing/tests/test_pages_scope.py', before: 1.74, after: 13.45}
-    - {name: 'packing/tests/test_site_project_tallies.py', before: 0.0, after: 8.43}
-    - {name: 'packing/tests/test_render_n11_optimality_explainer.py', before: 0.0, after: 5.43}
-    - {name: 'packing/tests/test_site_frontier_table.py', before: 0.0, after: 4.73}
-    - {name: 'packing/tests/test_check_math_markup.py', before: 0.0, after: 4.54}
+    - {name: 'packing/tests/test_overview.py', before: 57.47, after: 167.61}
+    - {name: 'packing/tests/test_case_pages.py', before: 1.94, after: 49.66}
+    - {name: 'packing/tests/test_ryxu_house_links.py', before: 0.00, after: 40.71}
+    - {name: 'packing/tests/test_check_n17_two_child_collective_propagation.py', before: 0.00, after: 32.42}
+    - {name: 'packing/tests/test_census_n17_certified.py', before: 0.00, after: 28.81}
   history:
   - measured_seconds: 150.54
     measured_on: '2026-09-15'
@@ -864,6 +886,57 @@ tiers:
         including the latter's retained calibrated-a.log showing 110.09s tier wall.
       grew:
       - {name: 'fast behavioral tests, shard A', before: 65.67, after: 85.03}
+  - measured_seconds: 114.58
+    measured_on: '2026-10-01'
+    measured_where: >-
+      The geometric mean of twelve readings at the reference shape on 2026-10-01, each the
+      one `fast behavioral tests, shard A` step with --jobs 1 and --inner-jobs 1 over the
+      three-shard partition recorded from run 36728602528, every test green and the
+      ceiling held, read from the suite-a job's logs by `devtools.read_tier_walls`:
+      128.65, 99.40, 121.14, 128.16, 113.91, 120.12, 83.91, 120.49, 121.44 and 122.26 s
+      across runs 36932629078, 36928600491, 36924379492, 36922573043, 36920899178,
+      36919917508, 36914863777, 36911610868, 36910543732 and 36898536578, and 128.55 and
+      97.69 s in run 36928600491 attempts 2 and 3 (jobs 110595482960 and 110602459026),
+      which the jobs API's latest-attempt view hides behind the 99.40 s fifth attempt and
+      `read_tier_walls --job-id` reads. Not averaged, and the reason this entry exists:
+      131.58 s and 132.67 s in the same run's attempts 1 and 4 (jobs 110591982989 and
+      110605187146), over the 131 s ceiling with every test passing -- the PR #277
+      failures. A wall the ceiling refused is not a reading of what the ceiling allows, so
+      they are named here and kept out of the band, as the suite_c record of 2026-10-01
+      kept its 170.30 s and 172.45 s; with them the mean is 116.94 s. Observed spread
+      1.53x. The band is the readings' own range; a run from its low end can grow to the
+      143 s ceiling (131 s until 2026-10-05), 1.70x its 83.91 s low edge, before any rule
+      fires. Superseded on 2026-10-09 by that day's readings of the grown lane; it carried
+      measured_band {low: 83.91, high: 128.65}.
+    attribution:
+      cause: >-
+        The shard grew, and it grew on a stale record. Between the two-shard cohort the
+        partition was recorded from (run 36728602528, 2026-09-30) and the three-shard
+        cohort of run 36924379492 (2026-10-01) the lane went from 433 to 489 test files,
+        7,947 to 9,389 tests and 1,004.6 to 1,213.6 test-seconds, and this shard from
+        2,220 to 2,701 tests and 354.6 to 410.7 test-seconds. Nineteen of its files were
+        absent from the record and took the path hash (429 tests, 32.7 test-seconds),
+        and recorded files grew too: `test_results_register.py` doubled and
+        `test_pages_scope.py` went from 1.7 to 13.5 s. No test reached the per-test
+        backstop. The rest is the runner: the 85.03 s record was two readings, and the
+        twelve here span 1.53x on identical code, with two more over the ceiling. The
+        growth is paid for with a fourth shard rather than a wider ceiling.
+      unit: test-seconds
+      source: >-
+        python -m devtools.check_gate_budgets --attribute-files BEFORE AFTER over the
+        per-file test-cost reports of jobs suite-a and suite-b in run 36728602528 and
+        suite-a, suite-b and suite-c in run 36924379492, each restricted to the files the
+        recorded three-shard partition assigns to this shard; the walls from python -m
+        devtools.read_tier_walls --tier suite_a over the ten runs and four job ids named
+        in measured_where. The two cohorts ran on different runners, so a recorded file's
+        before and after are not on one clock; an added file's after is.
+      grew:
+      - {name: 'packing/tests/test_results_register.py', before: 16.03, after: 33.05}
+      - {name: 'packing/tests/test_pages_scope.py', before: 1.74, after: 13.45}
+      - {name: 'packing/tests/test_site_project_tallies.py', before: 0.0, after: 8.43}
+      - {name: 'packing/tests/test_render_n11_optimality_explainer.py', before: 0.0, after: 5.43}
+      - {name: 'packing/tests/test_site_frontier_table.py', before: 0.0, after: 4.73}
+      - {name: 'packing/tests/test_check_math_markup.py', before: 0.0, after: 4.54}
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Pre-collection shard A of the quick behavioural lane. `devtools.suite_files` packs
@@ -872,8 +945,9 @@ tiers:
     writes a fresh per-file cost report beside its timing artifact. It keeps full Git
     history for history-reading tests but installs no Node toolchain; browser liveness
     belongs to `frontend`. `packing-required` preserves coverage by requiring all shard
-    jobs, and the declared 143-second ceiling (131 s until 2026-10-05) is the absolute bound. Since 2026-10-01
-    the partition is four shards packed by capacity 131/154/154/131, so this shard and
+    jobs, and the declared 335-second ceiling (131 s until 2026-10-05, 143 s until
+    2026-10-09, raised for the moment under think-2hm6) is the absolute bound. Since
+    2026-10-01 the partition is four shards packed by capacity 131/154/154/131, so this shard and
     D carry the lane's two lighter shares; the plugin warns in the job's own log when
     more than a tenth of a shard's files have no recorded cost, which is the state that
     put the day's new files where the hash sent them.
@@ -923,26 +997,79 @@ tiers:
   # B and C 154 -> 168 s, frontend 150 -> 165 s, checks 140 -> 150 s). The 12 s per-test
   # wall, the suite_files planning capacities 131/154/154/131 (frozen weights of the
   # recorded assignment, not ceilings) and every recorded cost below are unchanged.
-  ceiling_seconds: 168.0
-  measured_seconds: 114.38
-  measured_on: '2026-10-01'
+  # 2026-10-09: 360 s, raised from 168 s for the moment by the owner's decision of
+  # 2026-10-09 ("re quick lane let's raise it for the moment but file a bead for this"),
+  # selected on purpose as `OR-17` requires of anything above a routine ceiling, and
+  # temporary: think-2hm6 owns the structural fix -- a fifth shard, the lane's unavoidably
+  # slow modules moved off the pull-request surface on their own measurement (`OR-13`),
+  # or cheaper modules -- and the four ceilings come back down with it. The lane outgrew
+  # them. Its recorded cost went from 1,213.6 test-seconds on 2026-10-01 to 3,178.9 on
+  # 2026-10-09, and from 2026-10-07T06:25Z to 2026-10-09T20:38Z 1,328 hosted shard
+  # readings with every test green (376 pull-request runs on 49 branches, read by
+  # `devtools.read_tier_walls`) had medians of 167, 218, 186 and 159 s for A to D
+  # against ceilings of 143, 168, 168 and 143 s: 944 were over their ceiling, and three
+  # suite-d walls, 288.47, 295.16 and 300.27 s, were over the 2x hang detector and failed
+  # their jobs. A complete run's four shards summed to a median 725.9 s and at most
+  # 998.6 s against 622 s of ceilings. The rule: the two shards the partition plans alike
+  # share a ceiling, the slowest reading either gave in that window plus at least 10 per
+  # cent, rounded up to five seconds. A and D carry the lighter shares (730.59 recorded
+  # test-seconds each), B and C the heavier (858.86 each).
+  # The heavier pair's slowest reading is suite-b's 327.07 s (run 37921107074, job
+  # 113788973088): 327.07 x 1.10 = 359.8, so 360 s. That reading is this shard's own,
+  # and 360 s is 1.67x the record below, inside rule 2's 2.0x (431.6 s).
+  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
+  # assignment; changing them would move files between shards without a measurement),
+  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
+  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
+  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
+  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  ceiling_seconds: 360.0
+  measured_seconds: 215.82
+  measured_on: '2026-10-09'
   measured_where: >-
-    The geometric mean of eleven readings at the reference shape on 2026-10-01, each
-    the one `fast behavioral tests, shard B` step with --jobs 1 and --inner-jobs 1 over
-    the three-shard partition recorded from run 36728602528, every test green, read
-    from the suite-b job's logs by `devtools.read_tier_walls`: 79.30, 101.75, 138.37,
-    119.81, 121.81, 99.12, 114.59 and 91.37 s across runs 36928600491, 36924379492,
-    36922573043, 36920899178, 36919917508, 36914863777, 36910543732 and 36898536578,
-    and 137.09, 135.76 and 139.35 s in run 36928600491 attempts 1, 3 and 4 (jobs
-    110591983006, 110602459073 and 110605187070), which the latest-attempt view hides
-    behind the 79.30 s fifth attempt. Observed spread 1.76x. A rise of 1.09x over the
-    104.65 s single reading, under the ratchet's 1.2x, and the shard did grow: 2,379 to
-    2,721 tests and 325.0 to 339.7 test-seconds between the cohorts of runs 36728602528
-    and 36924379492, twelve of its files unrecorded and placed by the hash (302 tests,
-    60.5 test-seconds, `test_site_head.py` 28.9 s and `test_site_documents.py` 25.8 s
-    among them). The band is the readings' own range; a run from its low end can grow
-    to the 168 s ceiling (154 s until 2026-10-05), 2.12x its 79.30 s low edge, before any rule fires.
-  measured_band: {low: 79.30, high: 139.35}
+    The geometric mean of 171 readings at the reference shape on 2026-10-09: every suite-b
+    job that started that day, 00:09Z to 20:38Z, in a pull-request run of Packing
+    validation, each the gate's own wall for the one `fast behavioral tests, shard B` step
+    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+    jobs API's filter=all listing, a carried-over job counted once and a job whose step
+    failed a test not counted. Median 234.57 s, p10 142.2 s, p90 289.7 s; from 124.82 s
+    (run 37881664173, job 113662498242) to 327.07 s (run 37921107074, job 113788973088).
+    140 of the 171 were over the 168 s ceiling they ran against. Spread 2.62x, wider than
+    the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
+    no band: the day's runs crossed several revisions of the partition record on thirty
+    branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
+    as well as the runner pool. The day's two complete runs on the re-recorded partition
+    read 168.98 s (run 37975867696, #469 at 600068983) and 258.41 s (run 37988339329, a
+    pull request into main after d3860c97a). The two days before are measured and not
+    averaged in, because the lane grew under them: geometric means of 155.9 s on
+    2026-10-07 (36 readings) and 194.1 s on 2026-10-08 (131), and 200.08 s over all 338
+    readings from 2026-10-07T06:25Z.
+  attribution:
+    cause: >-
+      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+      (600068983). The 192 files the current packing gives shard 2/4 went from 322.18 to
+      858.86 test-seconds; 61 of them were absent from the earlier record (208.61
+      test-seconds), the week's result imports and n17 checks, and recorded files grew as
+      well; the largest growth is listed below. The two records came from different
+      runners, so a recorded file's before and after are not on one clock; an added file's
+      after is. No step was added: the tier is still the one shard step.
+    unit: test-seconds
+    source: >-
+      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+      the later record, whose shard totals `python -m devtools.suite_files show` prints
+      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+    grew:
+    - {name: 'packing/tests/test_generate_frontier_case.py', before: 13.85, after: 120.28}
+    - {name: 'packing/tests/test_n17_core_stress.py', before: 0.05, after: 61.88}
+    - {name: 'packing/tests/test_site_documents.py', before: 25.80, after: 71.30}
+    - {name: 'packing/tests/test_bound_citations.py', before: 2.11, after: 46.91}
+    - {name: 'packing/tests/test_refinement_custody.py', before: 0.00, after: 32.83}
   history:
   - measured_seconds: 119.54
     measured_on: '2026-09-15'
@@ -1038,6 +1165,26 @@ tiers:
       declared four-CPU reference shape: 104.65s, 2,380 tests passed. This is
       one observed B-shard wall, not a distribution. Superseded on 2026-10-01 by the
       day's eleven readings of the shard after it grew to 2,721 tests.
+  - measured_seconds: 114.38
+    measured_on: '2026-10-01'
+    measured_where: >-
+      The geometric mean of eleven readings at the reference shape on 2026-10-01, each the
+      one `fast behavioral tests, shard B` step with --jobs 1 and --inner-jobs 1 over the
+      three-shard partition recorded from run 36728602528, every test green, read from the
+      suite-b job's logs by `devtools.read_tier_walls`: 79.30, 101.75, 138.37, 119.81,
+      121.81, 99.12, 114.59 and 91.37 s across runs 36928600491, 36924379492, 36922573043,
+      36920899178, 36919917508, 36914863777, 36910543732 and 36898536578, and 137.09,
+      135.76 and 139.35 s in run 36928600491 attempts 1, 3 and 4 (jobs 110591983006,
+      110602459073 and 110605187070), which the latest-attempt view hides behind the 79.30
+      s fifth attempt. Observed spread 1.76x. A rise of 1.09x over the 104.65 s single
+      reading, under the ratchet's 1.2x, and the shard did grow: 2,379 to 2,721 tests and
+      325.0 to 339.7 test-seconds between the cohorts of runs 36728602528 and 36924379492,
+      twelve of its files unrecorded and placed by the hash (302 tests, 60.5 test-seconds,
+      `test_site_head.py` 28.9 s and `test_site_documents.py` 25.8 s among them). The band
+      is the readings' own range; a run from its low end can grow to the 168 s ceiling
+      (154 s until 2026-10-05), 2.12x its 79.30 s low edge, before any rule fires.
+      Superseded on 2026-10-09 by that day's readings of the grown lane; it carried
+      measured_band {low: 79.30, high: 139.35}.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Pre-collection shard B under the same complete and disjoint assignment as shard A.
@@ -1046,7 +1193,9 @@ tiers:
     per-file report. `packing-required` requires all shards so aggregation cannot hide
     lost coverage. Its ceiling was OR-14's 180-second pull-request wall until 2026-09-21
     and is now its own: a shard job runs beside six others, so a ceiling equal to the
-    whole surface's wall bounds the surface and not the tier.
+    whole surface's wall bounds the surface and not the tier. Since 2026-10-09 it is
+    360 s, twice that wall, for the moment and by the owner's decision, until think-2hm6
+    fits the lane back under a ceiling of its own.
 
 - id: suite_c
   command: packing-validate --suite-c
@@ -1076,52 +1225,79 @@ tiers:
   # B and C 154 -> 168 s, frontend 150 -> 165 s, checks 140 -> 150 s). The 12 s per-test
   # wall, the suite_files planning capacities 131/154/154/131 (frozen weights of the
   # recorded assignment, not ceilings) and every recorded cost below are unchanged.
-  ceiling_seconds: 168.0
-  measured_seconds: 132.05
-  measured_on: '2026-10-01'
+  # 2026-10-09: 360 s, raised from 168 s for the moment by the owner's decision of
+  # 2026-10-09 ("re quick lane let's raise it for the moment but file a bead for this"),
+  # selected on purpose as `OR-17` requires of anything above a routine ceiling, and
+  # temporary: think-2hm6 owns the structural fix -- a fifth shard, the lane's unavoidably
+  # slow modules moved off the pull-request surface on their own measurement (`OR-13`),
+  # or cheaper modules -- and the four ceilings come back down with it. The lane outgrew
+  # them. Its recorded cost went from 1,213.6 test-seconds on 2026-10-01 to 3,178.9 on
+  # 2026-10-09, and from 2026-10-07T06:25Z to 2026-10-09T20:38Z 1,328 hosted shard
+  # readings with every test green (376 pull-request runs on 49 branches, read by
+  # `devtools.read_tier_walls`) had medians of 167, 218, 186 and 159 s for A to D
+  # against ceilings of 143, 168, 168 and 143 s: 944 were over their ceiling, and three
+  # suite-d walls, 288.47, 295.16 and 300.27 s, were over the 2x hang detector and failed
+  # their jobs. A complete run's four shards summed to a median 725.9 s and at most
+  # 998.6 s against 622 s of ceilings. The rule: the two shards the partition plans alike
+  # share a ceiling, the slowest reading either gave in that window plus at least 10 per
+  # cent, rounded up to five seconds. A and D carry the lighter shares (730.59 recorded
+  # test-seconds each), B and C the heavier (858.86 each).
+  # The heavier pair's slowest reading is suite-b's 327.07 s (run 37921107074, job
+  # 113788973088): 327.07 x 1.10 = 359.8, so 360 s. That is 1.22x this shard's own
+  # slowest, 294.60 s, and 1.89x the record below, inside rule 2's 2.0x (380.5 s).
+  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
+  # assignment; changing them would move files between shards without a measurement),
+  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
+  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
+  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
+  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  ceiling_seconds: 360.0
+  measured_seconds: 190.24
+  measured_on: '2026-10-09'
   measured_where: >-
-    The geometric mean of eleven readings at the reference shape on 2026-10-01, after
-    the day's test growth, each the one `fast behavioral tests, shard C` step with
-    --jobs 1 and --inner-jobs 1 over the three-shard partition recorded from run
-    36728602528, every test green, read from the suite-c job's logs by
-    `devtools.read_tier_walls`: 136.19, 146.48, 145.18, 146.79, 96.00, 136.90, 90.34
-    and 146.17 s across runs 36932629078, 36928600491, 36924379492, 36920899178,
-    36914863777, 36911610868, 36910543732 and 36898536578, and 147.16, 136.32 and
-    143.81 s in run 36928600491 attempts 1, 3 and 4 (jobs 110591983179, 110602459042
-    and 110605187305), which the latest-attempt view hides behind the 146.48 s fifth
-    attempt. Observed spread 1.63x. The band is the readings' own range; a run from
-    its low end can grow to the 168 s ceiling (154 s until 2026-10-05), 1.86x its 90.34 s low edge, before any
-    rule fires.
-  measured_band: {low: 90.34, high: 147.16}
+    The geometric mean of 164 readings at the reference shape on 2026-10-09: every suite-c
+    job that started that day, 00:23Z to 20:38Z, in a pull-request run of Packing
+    validation, each the gate's own wall for the one `fast behavioral tests, shard C` step
+    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+    jobs API's filter=all listing, a carried-over job counted once and a job whose step
+    failed a test not counted. Median 210.81 s, p10 133.2 s, p90 237.9 s; from 108.29 s
+    (run 37866241734, job 113613539488) to 294.60 s (run 37975867696, job 113973890841).
+    111 of the 164 were over the 168 s ceiling they ran against. Spread 2.72x, wider than
+    the 2.5x a band may span (drift_ratio / stale_ratio), so this is a point record with
+    no band: the day's runs crossed several revisions of the partition record on thirty
+    branches, stack 430's per-layer admissions and the re-record of 600068983 among them,
+    as well as the runner pool. The day's two complete runs on the re-recorded partition
+    read the two highest: 294.60 s (run 37975867696, #469 at 600068983) and 290.95 s (run
+    37988339329, a pull request into main after d3860c97a). The two days before are
+    measured and not averaged in, because the lane grew under them: geometric means of
+    148.7 s on 2026-10-07 (33 readings) and 167.6 s on 2026-10-08 (136), and 176.30 s over
+    all 333 readings from 2026-10-07T06:25Z.
   attribution:
     cause: >-
-      The shard grew by the path hash. Between the two-shard cohort the partition was
-      recorded from (run 36728602528, 2026-09-30) and the three-shard cohort of run
-      36924379492 (2026-10-01) this shard went from 3,348 to 3,967 tests and 325.0 to
-      463.1 test-seconds, 1.42x, while the lane as a whole grew 1.21x. Twenty-five of
-      its files were absent from the record and `crc32(path) mod 3` put them here (597
-      tests, 106.8 test-seconds), the lane's largest new file among them:
-      `test_overview.py` at 57.5 s, then `test_repo_links.py` at 26.8 s. The packing
-      never saw either, so the balance it reported (325.0 s a shard) was of the record
-      and not of the lane. No test reached the per-test backstop. The rise over the
-      thirty-one-reading record in the history below is 1.28x; its readings were of the
-      shard before the day's files landed, and these are of the shard after.
+      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+      (600068983). The 191 files the current packing gives shard 3/4 went from 307.20 to
+      858.86 test-seconds; 61 of them were absent from the earlier record (355.75
+      test-seconds), the week's result imports and n17 checks, and recorded files grew as
+      well; the largest growth is listed below. The two records came from different
+      runners, so a recorded file's before and after are not on one clock; an added file's
+      after is. No step was added: the tier is still the one shard step.
     unit: test-seconds
     source: >-
-      python -m devtools.check_gate_budgets --attribute-files BEFORE AFTER over the
-      per-file test-cost reports of jobs suite-a and suite-b in run 36728602528 and
-      suite-a, suite-b and suite-c in run 36924379492, each restricted to the files the
-      recorded three-shard partition assigns to this shard; the walls from python -m
-      devtools.read_tier_walls --tier suite_c over the eight runs and three job ids
-      named in measured_where. The two cohorts ran on different runners, so a recorded
-      file's before and after are not on one clock; an added file's after is.
+      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+      the later record, whose shard totals `python -m devtools.suite_files show` prints
+      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
     grew:
-    - {name: 'packing/tests/test_overview.py', before: 0.0, after: 57.47}
-    - {name: 'packing/tests/test_repo_links.py', before: 0.0, after: 26.77}
-    - {name: 'packing/tests/test_result_overview.py', before: 0.0, after: 5.93}
-    - {name: 'packing/tests/test_site_ladders.py', before: 0.0, after: 5.46}
-    - {name: 'packing/tests/test_upper_bound_intervals.py', before: 0.0, after: 5.35}
-    - {name: 'packing/tests/test_pages_workflow.py', before: 1.94, after: 7.18}
+    - {name: 'packing/tests/test_confirm_gupta_records.py', before: 0.00, after: 89.92}
+    - {name: 'packing/tests/test_negative_controls.py', before: 17.59, after: 100.18}
+    - {name: 'packing/tests/test_result_overview.py', before: 5.93, after: 57.24}
+    - {name: 'packing/tests/test_gupta_adoption.py', before: 0.00, after: 43.18}
+    - {name: 'packing/tests/test_repo_links.py', before: 26.77, after: 63.75}
   history:
   - measured_seconds: 88.59
     measured_on: '2026-09-30'
@@ -1155,15 +1331,61 @@ tiers:
       any case. 1.16x of the 88.59 s single reading, under the ratchet's 1.2x, and a
       re-centring rather than a rise. Superseded later on 2026-10-01 by eleven readings
       of the shard after the day's files landed in it.
+  - measured_seconds: 132.05
+    measured_on: '2026-10-01'
+    measured_where: >-
+      The geometric mean of eleven readings at the reference shape on 2026-10-01, after
+      the day's test growth, each the one `fast behavioral tests, shard C` step with
+      --jobs 1 and --inner-jobs 1 over the three-shard partition recorded from run
+      36728602528, every test green, read from the suite-c job's logs by
+      `devtools.read_tier_walls`: 136.19, 146.48, 145.18, 146.79, 96.00, 136.90, 90.34 and
+      146.17 s across runs 36932629078, 36928600491, 36924379492, 36920899178,
+      36914863777, 36911610868, 36910543732 and 36898536578, and 147.16, 136.32 and 143.81
+      s in run 36928600491 attempts 1, 3 and 4 (jobs 110591983179, 110602459042 and
+      110605187305), which the latest-attempt view hides behind the 146.48 s fifth
+      attempt. Observed spread 1.63x. The band is the readings' own range; a run from its
+      low end can grow to the 168 s ceiling (154 s until 2026-10-05), 1.86x its 90.34 s
+      low edge, before any rule fires. Superseded on 2026-10-09 by that day's readings of
+      the grown lane; it carried measured_band {low: 90.34, high: 147.16}.
+    attribution:
+      cause: >-
+        The shard grew by the path hash. Between the two-shard cohort the partition was
+        recorded from (run 36728602528, 2026-09-30) and the three-shard cohort of run
+        36924379492 (2026-10-01) this shard went from 3,348 to 3,967 tests and 325.0 to
+        463.1 test-seconds, 1.42x, while the lane as a whole grew 1.21x. Twenty-five of
+        its files were absent from the record and `crc32(path) mod 3` put them here (597
+        tests, 106.8 test-seconds), the lane's largest new file among them:
+        `test_overview.py` at 57.5 s, then `test_repo_links.py` at 26.8 s. The packing
+        never saw either, so the balance it reported (325.0 s a shard) was of the record
+        and not of the lane. No test reached the per-test backstop. The rise over the
+        thirty-one-reading record in the history below is 1.28x; its readings were of the
+        shard before the day's files landed, and these are of the shard after.
+      unit: test-seconds
+      source: >-
+        python -m devtools.check_gate_budgets --attribute-files BEFORE AFTER over the
+        per-file test-cost reports of jobs suite-a and suite-b in run 36728602528 and
+        suite-a, suite-b and suite-c in run 36924379492, each restricted to the files the
+        recorded three-shard partition assigns to this shard; the walls from python -m
+        devtools.read_tier_walls --tier suite_c over the eight runs and three job ids
+        named in measured_where. The two cohorts ran on different runners, so a recorded
+        file's before and after are not on one clock; an added file's after is.
+      grew:
+      - {name: 'packing/tests/test_overview.py', before: 0.0, after: 57.47}
+      - {name: 'packing/tests/test_repo_links.py', before: 0.0, after: 26.77}
+      - {name: 'packing/tests/test_result_overview.py', before: 0.0, after: 5.93}
+      - {name: 'packing/tests/test_site_ladders.py', before: 0.0, after: 5.46}
+      - {name: 'packing/tests/test_upper_bound_intervals.py', before: 0.0, after: 5.35}
+      - {name: 'packing/tests/test_pages_workflow.py', before: 1.94, after: 7.18}
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Third whole-file shard of the same quick behavioral lane. Its absolute ceiling
-    matches shard B: 154 seconds from its first run, 168 since 2026-10-05. Run 36739024277 was the
+    matches shard B: 154 seconds from its first run, 168 since 2026-10-05, and 360 since
+    2026-10-09 for the moment (think-2hm6). Run 36739024277 was the
     first observed three-way cohort; the thirty readings after it on 2026-09-30 and
     2026-10-01 measured its variability at 2.29x on unchanged tests, which is what the
     102.94 s record in its history carries. Since 2026-10-01 the partition is four
     shards packed by capacity 131/154/154/131; this shard and B carry the lane's two
-    heavier shares under the 168 s ceiling.
+    heavier shares under the 360 s ceiling.
 
 - id: suite_d
   command: packing-validate --suite-d
@@ -1185,18 +1407,94 @@ tiers:
   # B and C 154 -> 168 s, frontend 150 -> 165 s, checks 140 -> 150 s). The 12 s per-test
   # wall, the suite_files planning capacities 131/154/154/131 (frozen weights of the
   # recorded assignment, not ceilings) and every recorded cost below are unchanged.
-  ceiling_seconds: 143.0
-  measured_seconds: 104.95
-  measured_on: '2026-10-01'
+  # 2026-10-09: 335 s, raised from 143 s for the moment by the owner's decision of
+  # 2026-10-09 ("re quick lane let's raise it for the moment but file a bead for this"),
+  # selected on purpose as `OR-17` requires of anything above a routine ceiling, and
+  # temporary: think-2hm6 owns the structural fix -- a fifth shard, the lane's unavoidably
+  # slow modules moved off the pull-request surface on their own measurement (`OR-13`),
+  # or cheaper modules -- and the four ceilings come back down with it. The lane outgrew
+  # them. Its recorded cost went from 1,213.6 test-seconds on 2026-10-01 to 3,178.9 on
+  # 2026-10-09, and from 2026-10-07T06:25Z to 2026-10-09T20:38Z 1,328 hosted shard
+  # readings with every test green (376 pull-request runs on 49 branches, read by
+  # `devtools.read_tier_walls`) had medians of 167, 218, 186 and 159 s for A to D
+  # against ceilings of 143, 168, 168 and 143 s: 944 were over their ceiling, and three
+  # suite-d walls, 288.47, 295.16 and 300.27 s, were over the 2x hang detector and failed
+  # their jobs. A complete run's four shards summed to a median 725.9 s and at most
+  # 998.6 s against 622 s of ceilings. The rule: the two shards the partition plans alike
+  # share a ceiling, the slowest reading either gave in that window plus at least 10 per
+  # cent, rounded up to five seconds. A and D carry the lighter shares (730.59 recorded
+  # test-seconds each), B and C the heavier (858.86 each).
+  # The lighter pair's slowest reading is suite-d's 300.27 s (run 37853886593, job
+  # 113573308641): 300.27 x 1.10 = 330.3, so 335 s. That reading is this shard's own,
+  # and 335 s is 1.83x the record below, inside rule 2's 2.0x (366.2 s).
+  # Unchanged: the 12 s per-test wall and the 45 s per-test hang, `hang_ratio` 2, the
+  # suite_files planning capacities 131/154/154/131 (frozen weights of the recorded
+  # assignment; changing them would move files between shards without a measurement),
+  # and every other tier's ceiling. The suite jobs run on pull requests only, so this
+  # ceiling is judged under `pull_request_ceiling`: advisory, failing above 2x. A shard
+  # ceiling this size is past OR-14's 180 s outer edge for the whole pull-request wall;
+  # that is the cost the owner selected for the moment, and why the raise is tracked.
+  ceiling_seconds: 335.0
+  measured_seconds: 183.08
+  measured_on: '2026-10-09'
   measured_where: >-
-    The overdue first hosted four-shard baseline requested by think-t7k5, read by
-    devtools.read_tier_walls --tier suite_d --job-id 110628224361: run 36939743802
-    attempt 1, head 898553a294bc4ef87bd6e708f17b7ceb9e0532f7. The checkout log records
-    merge 75636e83f of that head into eaa1a4b45c5042888d098f2d302e6a90e5455fec.
-    On 2026-10-01 the successful suite-d job ran one of 88 registered steps at the
-    declared reference shape, jobs 1, inner_jobs 1, cpus 4, with an actual tier wall
-    of 104.95 s. This is one historical baseline reading, with no empirical spread
-    estimate; it is not a measurement of the current enlarged shard.
+    The geometric mean of 167 readings at the reference shape on 2026-10-09: every suite-d
+    job that started that day, 00:09Z to 20:38Z, in a pull-request run of Packing
+    validation, each the gate's own wall for the one `fast behavioral tests, shard D` step
+    with --jobs 1 and --inner-jobs 1, read by `devtools.read_tier_walls --job-id` from the
+    jobs API's filter=all listing, a carried-over job counted once and a job whose step
+    failed a test not counted. Median 189.27 s, p10 125.7 s, p90 250.8 s; from 90.60 s
+    (run 37863896708, job 113605910646) to 288.47 s (run 37932934865, job 113827860288),
+    the cohort the partition was re-recorded from, which failed its job on the 2x hang
+    detector with every test green and is counted: a wall the raised ceiling admits is a
+    reading of what it allows. 145 of the 167 were over the 143 s ceiling they ran
+    against. Spread 3.18x, wider than the 2.5x a band may span (drift_ratio /
+    stale_ratio), so this is a point record with no band: the day's runs crossed several
+    revisions of the partition record on thirty branches, stack 430's per-layer admissions
+    and the re-record of 600068983 among them, as well as the runner pool. The day's two
+    complete runs on the re-recorded partition read 242.23 s (run 37975867696, #469 at
+    600068983) and 189.99 s (run 37988339329, a pull request into main after d3860c97a).
+    The two days before are measured and not averaged in, because the lane grew under
+    them: geometric means of 121.9 s on 2026-10-07 (38 readings) and 146.3 s on 2026-10-08
+    (135), and 160.03 s over all 340 readings from 2026-10-07T06:25Z.
+  attribution:
+    cause: >-
+      The lane grew 2.62x in recorded test-seconds between the record this supersedes and
+      this one: 1,213.56 over 489 files in the partition record of 2026-10-01 (b6ba343c6,
+      from run 36924379492's cohort, the lane the superseded readings ran) to 3,178.91
+      over 708 files in the record re-taken on 2026-10-09 from run 37932934865
+      (600068983). The 163 files the current packing gives shard 4/4 went from 263.17 to
+      730.59 test-seconds; 60 of them were absent from the earlier record (378.32
+      test-seconds), the week's result imports and n17 checks, and recorded files grew as
+      well; the largest growth is listed below. The two records came from different
+      runners, so a recorded file's before and after are not on one clock; an added file's
+      after is. No step was added: the tier is still the one shard step.
+    unit: test-seconds
+    source: >-
+      The per-file costs of devtools/suite-file-costs.json at b6ba343c6 and at
+      600068983, each file placed in the shard `devtools.suite_files.pack` gives it under
+      the later record, whose shard totals `python -m devtools.suite_files show` prints
+      as 730.59, 858.86, 858.86 and 730.59; the walls from `python -m
+      devtools.read_tier_walls --job-id` over the jobs measured_where describes.
+    grew:
+    - {name: 'packing/tests/test_squish_second_update_confirmation.py', before: 0.00, after: 96.73}
+    - {name: 'packing/tests/test_check_n17_one_round_owned_domain_propagation.py', before: 0.00, after: 54.58}
+    - {name: 'packing/tests/test_site_head.py', before: 28.85, after: 72.72}
+    - {name: 'packing/tests/test_squish_update_certification.py', before: 0.00, after: 37.80}
+    - {name: 'packing/tests/test_check_published_site.py', before: 2.47, after: 31.24}
+  history:
+  - measured_seconds: 104.95
+    measured_on: '2026-10-01'
+    measured_where: >-
+      The overdue first hosted four-shard baseline requested by think-t7k5, read by
+      devtools.read_tier_walls --tier suite_d --job-id 110628224361: run 36939743802
+      attempt 1, head 898553a294bc4ef87bd6e708f17b7ceb9e0532f7. The checkout log records
+      merge 75636e83f of that head into eaa1a4b45c5042888d098f2d302e6a90e5455fec.
+      On 2026-10-01 the successful suite-d job ran one of 88 registered steps at the
+      declared reference shape, jobs 1, inner_jobs 1, cpus 4, with an actual tier wall
+      of 104.95 s. This is one historical baseline reading, with no empirical spread
+      estimate; it is not a measurement of the current enlarged shard.
+      Superseded on 2026-10-09 by that day's readings of the grown lane.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Fourth whole-file shard of the quick behavioural lane, added on 2026-10-01 when the
@@ -1219,7 +1517,9 @@ tiers:
     steps. That is 20.63 s over the unchanged 143 s ceiling; its job succeeded under
     the existing pull-request advisory ceiling policy. The different selected shapes
     are not averaged or treated as equivalent. Current performance qualification and
-    broader shard calibration remain open under think-t7k5.
+    broader shard calibration remain open under think-t7k5. Since 2026-10-09 the ceiling
+    is 335 s for the moment (think-2hm6), and the record above is that day's 167
+    readings of the grown lane.
 
 - id: typecheck
   command: packing-validate --typecheck
