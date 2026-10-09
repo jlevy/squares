@@ -2,6 +2,10 @@
 
 `cargo test --release` runs the following, without Python:
 
+- receipt publication with byte-identical JSON, nested/Unicode destinations, partial
+  write and injected rename failures preserving the old receipt, a real directory
+  collision, staging cleanup and cleanup-error reporting; Unix also checks symlink
+  replacement and mode `0600`, while a Windows-only control holds the destination open;
 - the geometry and sweep helpers on exact inputs;
 - the sweep against an exact area-subtraction reference on random rational polygons;
 - the hidden lens of the review’s `hidden-lens` mutation on a small domain: with gap 0
@@ -19,6 +23,12 @@
     - `ohi-wrong-kind` is refused with
       `step 0: the derived closure is not the declared one`;
     - `ohi-point-outside` is refused with `no closure derived`.
+
+Current native CI runs on Ubuntu; the macOS portability job exercises Python.
+Neither job compiles, lints or runs the Windows-only receipt control, which is retained
+for future execution and remains unverified.
+Windows qualification requires native Windows compilation, Clippy and receipt-test
+execution; this change claims no Windows qualification.
 
 The stalled W7 certificate is read from
 `packing/campaign/explorations/X048-session-168-pilots/audit-verifier-rewrites/fixture-w7-bins8/`.
