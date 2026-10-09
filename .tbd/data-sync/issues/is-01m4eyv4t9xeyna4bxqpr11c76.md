@@ -5,7 +5,7 @@ title: Publish an About page for The Squares Project
 kind: feature
 status: in_progress
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md
 delegate: codex@spud10.local
 labels:
@@ -19,7 +19,7 @@ parent_id: is-01m4ewpe4eqqjvrq6henxdzkh9
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:51:11.432Z
-updated_at: 2026-10-09T00:25:38.395Z
+updated_at: 2026-10-09T04:03:39.715Z
 started_at: 2026-10-08T23:52:39.031Z
 ---
-Move the full The Squares Project section's project narrative, approach, attribution and contextual links to a dedicated about.html page. Keep the homepage's problem introduction brief, with a compact The Squares Project card below its intro text that navigates to the About page; the card belongs to the intro area so Atlas remains the second section. Add an About link to the shared top navigation immediately to the left of GitHub, as explicitly confirmed by the owner, on desktop and mobile. Group the homepage's paper cards under Learn More below Atlas. Register about.html in the URL registry, crawl and Pages/build scope, use the shared header shell, and preserve published links and content meaning. Browser acceptance checks the About page content, nav order, homepage card target, and responsive navigation. L3 homepage integration and L6 final verification depend on this issue. See L8 in the spec.
+Keep the Squares Project narrative, contribution invitation and project documentation on about.html, using About navigation immediately before GitHub and a centered homepage project card. Split dense narrative into paragraphs, including before Now several others, and add the H2 Contribute Your Results! above the result-reporting invitation. Move all Reading and Research resources to papers.html: retain existing paper/tutorial cards and incorporate the missing Frontier Survey and Workbench links without duplicate cards. About should no longer contain the Reading and Research card section. Preserve resource coverage and meaning; use the shared shell and card system.
