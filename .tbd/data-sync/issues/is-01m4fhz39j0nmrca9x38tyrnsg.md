@@ -5,18 +5,22 @@ title: Make all open n-17 PRs source-qualified and merge-ready
 kind: task
 status: in_progress
 priority: 1
-version: 8
-delegate: claude-code@spud10.local
+version: 13
+delegate: claude-code@vm
 labels:
   - n-17
 dependencies: []
 child_order_hints:
   - is-01m4fjgn6atbd63aj7rjjznaq4
   - is-01m4fjgnwj97en214yfp53pwwy
+  - is-01m4fwn6dd7672afv1hk0ze57k
+  - is-01m4fwn6tja8wxgg19b5gdw28e
+  - is-01m4fwn779gp286xd9q30nmh8x
+  - is-01m4fwn7nc77zr1hmg8mdv3x5w
 hold: null
 hold_until: null
 created_at: 2026-10-09T05:25:23.889Z
-updated_at: 2026-10-09T08:01:07.991Z
+updated_at: 2026-10-09T08:32:28.190Z
 started_at: 2026-10-09T05:27:42.212Z
 ---
 Coordinate review, source qualification and landing readiness for the twelve open n-17 PRs. The user will hand completion to another agent. Conflict-free declared bases do not establish current-main integration. #404 at 1af586ef passes expected CI with the unchanged 192 MiB cap. Propagation to #454/#461 and scoped #464 repair, follow-up review and full checkpoints remain under think-0m0x. Supporting #452/#453 have current-main full passes. Peer review remains under think-49b6. Catalogue #403/#435 have new full passes, but #403 Pages and current-source review/disposition requirements remain under think-okxn and active owners. #450 current checks pass; inherited review/full qualification belong to think-zjlo. Mathematical next work is think-dvcs, then conditional think-geid. No blanket merge-ready or bound claim. Current status: https://github.com/jlevy/squares/issues/405 . Full handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731
