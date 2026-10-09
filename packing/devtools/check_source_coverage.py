@@ -33,8 +33,10 @@ import pathlib
 import re
 import shlex
 import sys
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
+from datetime import date
 from decimal import Decimal
+from fractions import Fraction
 
 from devtools.retained_data import read_retained_text, retained_exists
 from sqpack.kingbird_catalogue import (
@@ -605,23 +607,8 @@ def selection_errors(
             errors.append(f"{where} names {entry['superseded_by']}, not the selected source")
         elif Decimal(selected["value"]) >= Decimal(entry["value"]):
             errors.append(f"{where} is not beaten by the selected {selected['value']}")
-    inventory: dict[str, set[int]] = {}
-    beyond = [entry["n"] for entry in coverage["beyond_horizon_claims"]]
-    if len(beyond) != len(set(beyond)):
-        errors.append("beyond-horizon n values are not unique")
-    for entry in coverage["beyond_horizon_claims"]:
-        n, source_id = entry["n"], entry["source_id"]
-        if n_min <= n <= n_max:
-            errors.append(f"beyond-horizon claim n={n} lies inside the case corpus")
-        if source_id not in sources:
-            errors.append(f"beyond-horizon n={n} names unknown source {source_id}")
-            continue
-        if not scope_contains(sources[source_id]["scope"], n):
-            errors.append(f"beyond-horizon n={n} is outside {source_id}'s scope")
-        errors.extend(
-            _claim_errors(f"beyond-horizon n={n}", source_id, n, entry["value"], claims)
-        )
-        inventory.setdefault(source_id, set()).add(n)
+    beyond, inventory = beyond_horizon_errors(coverage, claims)
+    errors.extend(beyond)
     for source_id, claimed in sorted(claims.items()):
         held = accounted.get(source_id, set()) | inventory.get(source_id, set())
         if set(claimed) != held:
@@ -645,6 +632,176 @@ def _claim_errors(
     if Decimal(printed) != Decimal(value):
         return [f"{where}: {source_id} prints {printed}, the inventory says {value}"]
     return []
+
+
+#: The disposition of a beyond-horizon row a later report of the same claim beats.
+SUPERSEDED = "superseded"
+
+#: How a later report of each claim beats an earlier one, compared exactly. An exact
+#: value has no direction: two that differ conflict, and neither improves the other.
+_BEATS: dict[str, Callable[[Fraction, Fraction], bool]] = {
+    "upper-bound": lambda later, earlier: later < earlier,
+    "lower-bound": lambda later, earlier: later > earlier,
+}
+
+
+def beyond_horizon_errors(
+    coverage: Mapping, claims: Mapping[str, Mapping[int, str]]
+) -> tuple[list[str], dict[str, set[int]]]:
+    """Hold every dated row beyond the case corpus, and say which claims they account for.
+
+    Rows are keyed on `(n, source_id)`, so a count may carry several: at most one current
+    row, and every earlier report a later one beats, kept as its source printed it, with
+    `disposition: superseded` and `superseded_by` naming the successor's source. Couzo's
+    2d32a6e reports at `n = 375` and `378` beat his ffd900d reports at the same counts,
+    and a register with one row per count could hold only one of the two.
+
+    Each row must lie outside the corpus and inside its source's scope, and read its
+    source's reparsed claim byte for byte: a dated row keeps the facts it was recorded
+    with. Each successor must be a row at the same count, of the same claim, from a
+    source dated no earlier, and strictly better by exact rational comparison of the
+    printed decimals; every chain of successors must end at the count's current row.
+    Returns the errors and, by source, the counts whose claims the rows account for.
+    """
+    errors: list[str] = []
+    n_min = coverage["case_corpus"]["n_min"]
+    n_max = coverage["case_corpus"]["n_max"]
+    sources = {source["id"]: source for source in coverage["sources"]}
+    rows: dict[tuple[int, str], Mapping] = {}
+    current: dict[int, list[str]] = {}
+    inventory: dict[str, set[int]] = {}
+    for entry in coverage["beyond_horizon_claims"]:
+        n, source_id = entry["n"], entry["source_id"]
+        where = f"beyond-horizon n={n} from {source_id}"
+        if (n, source_id) in rows:
+            errors.append(f"{where} is listed twice; a count has one row per source")
+            continue
+        rows[n, source_id] = entry
+        if n_min <= n <= n_max:
+            errors.append(f"beyond-horizon claim n={n} lies inside the case corpus")
+        if entry.get("disposition") == SUPERSEDED:
+            if not entry.get("superseded_by"):
+                errors.append(f"{where} is superseded but names no successor")
+        else:
+            current.setdefault(n, []).append(source_id)
+            if "superseded_by" in entry:
+                errors.append(
+                    f"{where} names successor {entry['superseded_by']} but is not superseded"
+                )
+        if source_id not in sources:
+            errors.append(f"beyond-horizon n={n} names unknown source {source_id}")
+            continue
+        if not scope_contains(sources[source_id]["scope"], n):
+            errors.append(f"beyond-horizon n={n} is outside {source_id}'s scope")
+        errors.extend(_claim_errors(where, source_id, n, entry["value"], claims))
+        printed = claims.get(source_id, {}).get(n)
+        if (
+            printed is not None
+            and printed != entry["value"]
+            and Decimal(printed) == Decimal(entry["value"])
+        ):
+            errors.append(
+                f"{where} reads {entry['value']!r}, not {printed!r} as its source prints "
+                "it; a dated row keeps its source's facts byte for byte"
+            )
+        inventory.setdefault(source_id, set()).add(n)
+    errors.extend(
+        f"beyond-horizon n={n} has {len(held)} current rows ({', '.join(held)}); a count "
+        "has at most one, and each earlier report names the row that supersedes it"
+        for n, held in sorted(current.items())
+        if len(held) > 1
+    )
+    for entry in rows.values():
+        if entry.get("disposition") == SUPERSEDED and entry.get("superseded_by"):
+            errors.extend(_succession_errors(entry, rows, sources, claims))
+    errors.extend(_succession_cycles(rows))
+    return errors, inventory
+
+
+def _succession_errors(
+    entry: Mapping,
+    rows: Mapping[tuple[int, str], Mapping],
+    sources: Mapping[str, Mapping],
+    claims: Mapping[str, Mapping[int, str]],
+) -> list[str]:
+    """What a superseded row's named successor fails to be."""
+    n, source_id, successor_id = entry["n"], entry["source_id"], entry["superseded_by"]
+    where = f"beyond-horizon n={n} from {source_id}"
+    if successor_id == source_id:
+        return [f"{where} names itself as its successor"]
+    successor = rows.get((n, successor_id))
+    if successor is None:
+        elsewhere = sorted(count for count, owner in rows if owner == successor_id)
+        held = f"; its rows are at n={elsewhere}" if elsewhere else ""
+        return [f"{where} names successor {successor_id}, which has no row at n={n}{held}"]
+    errors = [
+        f"{where}: {owner} retains no claims record, and a supersession compares two "
+        "reparsed reports"
+        for owner in (source_id, successor_id)
+        if owner in sources and owner not in claims
+    ]
+    if successor["claim"] != entry["claim"]:
+        errors.append(
+            f"{where} claims {entry['claim']}, and its successor from {successor_id} "
+            f"claims {successor['claim']}"
+        )
+    elif entry["claim"] not in _BEATS:
+        errors.append(
+            f"{where}: an {entry['claim']} claim is never superseded by a different value; "
+            "two that differ are a conflict"
+        )
+    elif not _BEATS[entry["claim"]](Fraction(successor["value"]), Fraction(entry["value"])):
+        errors.append(
+            f"{where}: {entry['value']} is not strictly beaten by {successor['value']} "
+            f"from {successor_id}, compared exactly"
+        )
+    owners = (source_id, successor_id)
+    dates = [sources.get(owner, {}).get("source_date") for owner in owners]
+    if None in dates:
+        undated = [owner for owner, day in zip(owners, dates, strict=True) if day is None]
+        errors.append(
+            f"{where}: {', '.join(undated)} has no source_date, and a supersession orders "
+            "dated reports"
+        )
+    elif date.fromisoformat(str(dates[1])) < date.fromisoformat(str(dates[0])):
+        errors.append(
+            f"{where} is dated {dates[0]}, after its successor from {successor_id}, dated "
+            f"{dates[1]}"
+        )
+    return errors
+
+
+def _succession_cycles(rows: Mapping[tuple[int, str], Mapping]) -> list[str]:
+    """Every chain of successors that returns to a row it already passed, named once."""
+    errors: list[str] = []
+    named: set[frozenset[tuple[int, str]]] = set()
+    for start in rows:
+        path = [start]
+        entry = rows[start]
+        while entry.get("disposition") == SUPERSEDED and entry.get("superseded_by"):
+            step = (start[0], str(entry["superseded_by"]))
+            if step not in rows or step == path[-1]:
+                # A missing or self-named successor is `_succession_errors`'s to report.
+                break
+            if step in path:
+                cycle = path[path.index(step) :]
+                if frozenset(cycle) not in named:
+                    named.add(frozenset(cycle))
+                    chain = " -> ".join(owner for _, owner in (*cycle, step))
+                    errors.append(f"beyond-horizon n={start[0]} supersession cycles: {chain}")
+                break
+            path.append(step)
+            entry = rows[step]
+    return errors
+
+
+def current_beyond_horizon(coverage: Mapping) -> dict[int, Mapping]:
+    """Each count's current beyond-horizon row: the one no later report supersedes."""
+    return {
+        entry["n"]: entry
+        for entry in coverage["beyond_horizon_claims"]
+        if entry.get("disposition") != SUPERSEDED
+    }
 
 
 def main() -> int:
@@ -760,7 +917,8 @@ def main() -> int:
     except CatalogueParseError as error:
         errors.append(f"retained catalogue: {error}")
 
-    inventory = {entry["n"]: entry["value"] for entry in coverage["beyond_horizon_claims"]}
+    beyond = current_beyond_horizon(coverage)
+    dated = len(coverage["beyond_horizon_claims"]) - len(beyond)
     if errors:
         for error in errors:
             print(f"FAIL {error}", file=sys.stderr)
@@ -769,7 +927,8 @@ def main() -> int:
         f"  source coverage reconciled: {n_max - n_min + 1} cases, "
         f"{len(overrides)} newer in-horizon reports from {len(claims)} reparsed claim "
         f"records, {len(coverage['superseded_reports'])} superseded reports, "
-        f"{len(inventory)} tracked beyond horizon, "
+        f"{len(beyond)} tracked beyond horizon with {dated} earlier dated "
+        f"report{'' if dated == 1 else 's'} superseded there, "
         f"{len(pending)} catalogue count{'' if len(pending) == 1 else 's'} pending intake"
     )
     print(
