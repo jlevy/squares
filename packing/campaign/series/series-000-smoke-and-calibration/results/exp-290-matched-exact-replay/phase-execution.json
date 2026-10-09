@@ -1,0 +1,12 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/execution-manifest.json",
+  "manifest_sha256": "c751a77e4b37768cecef92c8914cab07c39475915957aca4a623ba9aa9636d02",
+  "phases": [{"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_exact_replay","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--instrumentation","none","--output","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/none.json"],"name":"uninstrumented_control","returncode":null,"started_at":"2026-10-07T19:23:37.983063Z","status":"running","wall_seconds":null}],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-07T19:23:37.981248Z",
+  "status": "running",
+  "unstarted_phase_names": ["phase_observations"]
+}
+

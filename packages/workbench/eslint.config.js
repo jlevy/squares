@@ -48,6 +48,7 @@ const NOT_OURS = [
   // The rendered site, which `render_overview` writes and Git ignores; its sources are linted.
   "packing/site/**",
   ".claude/**",
+  ".worktrees/**",
 ];
 
 export default [
