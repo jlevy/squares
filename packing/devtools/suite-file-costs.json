@@ -207,6 +207,7 @@
     "packing/tests/test_el_moumni7_case1.py": 0.041,
     "packing/tests/test_emission_precision.py": 0.807,
     "packing/tests/test_evand_arrangement_adoption.py": 9.594,
+    "packing/tests/test_evand_arrangement_houses.py": 1.508,
     "packing/tests/test_evand_arrangement_reports.py": 1.878,
     "packing/tests/test_evand_exact_certificates.py": 11.471,
     "packing/tests/test_evand_mixed_covers.py": 4.203,
@@ -216,7 +217,7 @@
     "packing/tests/test_exact_contracts.py": 0.11,
     "packing/tests/test_exact_jets.py": 0.014,
     "packing/tests/test_exact_lp_infeasibility.py": 0.331,
-    "packing/tests/test_exact_stage_progress.py": 0.058,
+    "packing/tests/test_exact_stage_progress.py": 0.191,
     "packing/tests/test_experiment_assurance_contract.py": 0.02,
     "packing/tests/test_falsify.py": 0.635,
     "packing/tests/test_fetch_external_release_inventory.py": 0.042,
@@ -625,7 +626,7 @@
     "packing/tests/test_site_urls.py": 4.44,
     "packing/tests/test_site_wide_blocks.py": 0.361,
     "packing/tests/test_snapshot_copy_roster.py": 0.048,
-    "packing/tests/test_snapshot_link_consumers.py": 0.112,
+    "packing/tests/test_snapshot_link_consumers.py": 0.673,
     "packing/tests/test_soundness_perimeter.py": 0.045,
     "packing/tests/test_source_coverage.py": 1.367,
     "packing/tests/test_source_supersession.py": 0.007,
@@ -736,6 +737,24 @@
           "report": "packing/devtools/suite-file-cost-admissions/n17-family-cell-audit-2026-10-09.json",
           "provenance": {},
           "tests": 4
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_evand_arrangement_houses.py",
+        "packing/tests/test_exact_stage_progress.py",
+        "packing/tests/test_snapshot_link_consumers.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/polynomial-parent-2026-10-09.json",
+          "provenance": {
+            "PACKING_VALIDATED_SHA": "98367a7484d426287c370c826744c8b22c5149f5"
+          },
+          "tests": 32
         }
       ]
     }
