@@ -18,6 +18,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import unquote, urlsplit
 
+from devtools.retained_data import read_retained_text
+
 _CSS_URL = re.compile(r"url\(\s*['\"]?([^)'\"]+)")
 
 
@@ -181,7 +183,7 @@ def check_projection(register: dict[str, Any], index_path: Path, site: Path) -> 
 def measure(baseline: Path, site: Path, page: Path, register: Path) -> dict[str, Any]:
     """Refuse invalid projections before judging the predeclared byte threshold."""
     assets, index = initial_assets(page.resolve(), site.resolve())
-    document = json.loads(register.read_text(encoding="utf-8"))
+    document = json.loads(read_retained_text(register))
     envelope = document.get("softschema", {}).get("envelope")
     original = document[envelope] if envelope else document
     coverage = check_projection(original, index, site)
