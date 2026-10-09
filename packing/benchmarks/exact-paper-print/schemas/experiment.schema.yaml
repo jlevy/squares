@@ -1,0 +1,41 @@
+type: object
+additionalProperties: false
+required:
+- id
+- hypotheses
+- measurement
+- physical_measurement
+- correctness
+- decision
+- judgment
+properties:
+  id:
+    type: string
+    pattern: ^exp-[0-9]{3}$
+  hypotheses:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      const: H-001
+  measurement:
+    type: string
+    minLength: 1
+  physical_measurement:
+    type:
+    - string
+    - 'null'
+  correctness:
+    enum:
+    - passed
+    - pending
+    - failed
+  decision:
+    enum:
+    - baseline
+    - unresolved
+    - accepted
+    - rejected
+  judgment:
+    type: string
+    minLength: 1
