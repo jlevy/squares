@@ -3092,14 +3092,14 @@ sources:
   evidence:
   - E-couzo-extended-range-report
   notes: The source date is attributed GitHub commit metadata, not authenticated by the Git tree alone. All twenty complete decimal poses and their source identities are retained as derived facts.
+    Read 2026-10-09, the author's later 2d32a6e (2026-10-08T22:12Z) reports smaller sides at n=375
+    (19.907024692022954) and n=378 (19.946861170999796). This ffd900d packet does not retain them, so
+    its n=375 and n=378 rows are dated ffd900d reports rather than the author's latest. think-1545 owns
+    those two reports; one beyond-horizon row per n means importing them needs a supersession design.
     Complete local custody covers 73 current/historical roles across three pinned trees. Raw upstream
     text, diagrams, prose and programs stay outside Git under the existing retention policy. Every claim
     is tracked outside the 1..324 case corpus; no geometry, native replay, selected case, result row or
-    transferred issue451 verification. Read 2026-10-09, the author's later 2d32a6e (2026-10-08T22:12Z)
-    reports smaller sides at n=375 (19.907024692022954) and n=378 (19.946861170999796). This ffd900d
-    packet does not retain them, so its n=375 and n=378 rows are dated ffd900d reports rather than the
-    author's latest. think-1545 owns those two reports; one beyond-horizon row per n means importing
-    them needs a supersession design.
+    transferred issue451 verification.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026
