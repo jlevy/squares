@@ -5,7 +5,7 @@ title: Resume polynomial catalogue recovery, upstream sync and database work map
 kind: task
 status: in_progress
 priority: 1
-version: 26
+version: 28
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex-polynomial-resume-01a11d93
 labels: []
@@ -26,7 +26,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-08T22:26:10.056Z
-updated_at: 2026-10-09T14:37:04.758Z
+updated_at: 2026-10-09T17:48:07.398Z
 started_at: 2026-10-08T22:26:36.377Z
 ---
 W7 continuation of interrupted PR435/stack447. Preserve unpublished local parent and child repairs, reconcile formal stack with latest origin/main, run current record and change-reachable gates, push every validated owning layer and update cost/results/validation in PR descriptions. Reconcile actual current and historical database partitions with every remaining identification/contact/witness bead. Coordinator owns Git, shared records, bead mutations, integration and PR; parallel Sol-medium CI/storage audit, Sol-xhigh coverage reconciliation and Astra-xhigh semantic mathematical review. Preserve unique source and validation evidence outside disposable external scratch. Slice1 recover provenance and assess gates/capacity; slice2 stack integration and local assurance; slice3 PR/CI closeout alongside selected W6 driver readiness work. No PR landing in scope.
@@ -232,3 +232,21 @@ Parent automatic run 37939031866 attempt 1 genuinely failed released CLS 0.13427
 Exactly one purposeful failed-job recurrence check at unchanged parent c1d3 was requested after same-head full and original local font controls passed. Run 37939031866 attempt 2 completed SUCCESS; direct gh run watch --exit-status returned 0. No repeated rerun, source change or additional full dispatch occurred. The earlier attempt 1 failure remains valid historical evidence, and the complete startup excess remains unattributed. Current parent/child automatic Packing, Pages and mergeability checks and both full workflows passed; canceled duplicate child runs retain their canceled status. Final actual recurrence job/phase receipts and exact published PR body readbacks are retained under the existing recovery evidence directory.
 
 Mathematical inventory remains 324 current cases / 321 exact identities / numeric n=29,55,71 and 175 historical records; 77 proved cases unchanged. Source-root geometry/field-to-side/Lean obligations (#419 / think-8sm2), new-pose ideal-contact work and quarantined legacy claims remain open. W7 think-s6np remains OPEN/unclaimed: two native inputs are retained; the contact-system exporter and its roundtrip/refusal controls are planned, then the independent contact-derived n11 octic control, then one bounded n102 attempt. No new solver/search, polynomial, geometry, Lean or bound result is claimed by this stabilization. Keep these feature beads in progress until the corresponding work merges.
+
+Publication amendment checkpoint — 2026-10-09T17:34:50.856737+00:00
+
+The existing child top commit was amended and officially lease-pushed as 10ce3575e09c3d05423d4ce4d615fa966b0c6b22 (PR435), preserving parent c1d3aab9eef04683ea262c9c79ef7d739af2dc50 (PR403), main6a0499ba4ed83e147488b2ee584af500207d9d1f and formal stack447. Both PR descriptions now distinguish current child publication from dated c1/d0 assurance. No PR merged.
+
+The clean web report keeps all 324 current rows/321 polynomials and 14 additional source records. It omits 161 superseded historical rows and 19 redundant current notes only from publication. Canonical source retains all 499 records/175 history/519 vectors/6,273 integer strings. Every retained field and all 339 published vectors/2,152 integer strings reconstruct exactly. Complete HTML is 3,564,533 bytes (33.47% smaller); initial automatic transfer is 259,926 bytes (29.17% smaller), passing the unchanged 10% scoped ceiling. No new large generated files or PDF entered Git. Maintained inventory-only source audit passes at 199,425,515/201,326,592 bytes; all 6,947 copied paths and eight replay inputs remain.
+
+Current automatic Packing37964721209, Pages37964721057 and mergeability37964716714 SUCCESS. Fresh Pages producer passed 52 tests/30.25 s and all eight native-MathML layouts without lost ink, overflow or rendering errors; artifact11632873703 was independently audited. One current-head full37964872139 remains ACTIVE, with no retry or parent dispatch. Local 100 controls/15.81 s, full edit67/109 and strong final source review pass; the 225-file broad local push selection did not execute under the scratch-volume constraint and is not reported as a pass. Publication bead think-ja78 version13 contains exact measurements, guarded URL retirement and current CI status; protected receipts and readbacks remain outside scratch.
+
+Scientific work map is unchanged: numeric 29/55/71; ideal/native-contact branches, new Daniel poses, four source roots awaiting geometry/field-to-side/Lean, and eleven unadmitted legacy claims. Next selected math entry remains W7 think-s6np exporter, independent contact-derived n11 octic control, then one bounded n102 W6 under think-ohhz. No new solver, polynomial, geometry, optimum or proof result belongs to this presentation amendment.
+
+Final report-trim closeout pointer — 2026-10-09T17:47:39.184680+00:00
+
+The amended child 10ce3575e09c3d05423d4ce4d615fa966b0c6b22 now passes automatic Packing 37964721209, Pages 37964721057, mergeability 37964716714 and the single full checkpoint 37964872139, including all twelve prerequisite jobs and aggregate 113946056590. Slow lane passed physical snapshot/replay custody controls. Both PR435 and unchanged parent PR403 have final checked descriptions with exact API readbacks; neither PR merged.
+
+Publication bead think-ja78 carries the complete current checkpoint: 338 published records (324 current and 14 additional), 161 superseded rows and 19 redundant notes omitted only from publication, canonical 499/175/519/6,273 preserved, 33.47% smaller complete HTML, no report PDF or new generated files in Git, actual 10c source footprint 199,425,515 bytes under the unchanged cap, all replay inputs retained. Earlier c1/d0 results and negative receipts remain dated rather than transferred to 10c. CI endpoint 17:39:59Z closes the separate 1 h 0 m 19 s report slice.
+
+Remaining database/math work and startup attribution are unchanged. Continue through W7 think-s6np exporter, independent contact-derived n=11 octic control, then one bounded preregistered n=102 W6 under think-ohhz; preserve three current identity gaps, geometry/Lean prerequisites and unadmitted legacy claims. No new solver or mathematical adoption occurred in this trim. Protected receipts include publication-trim-10c-final-ci-receipt.json and both pr*-final-trim-readback.json files under the existing unique evidence root. Keep recovery and publication beads open while the PRs remain unmerged.
