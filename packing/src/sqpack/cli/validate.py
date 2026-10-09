@@ -136,10 +136,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: imported poses (T-113, T-114) took 364.07s. The twelve T-115 update poses were
 #: re-screened serially in 107.952s; unselected records remain unchanged. All three
 #: corpus tripwires below are the sums over the current retained square motions.
+#: The three T-117/T-118 rational refinements replace the motions at 68, 105 and 292;
+#: these are the corresponding sums from their refreshed retained numerical screen.
+#: The T-119 poses at 266, 270 and 272 were re-screened against their current complete
+#: houses; their motions change only the full-corpus sums.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (27, 102, 86, 570),
-    "n=1..200": (66, 558, 182, 2038),
-    "n=1..324": (121, 1578, 302, 4689),
+    "n=1..100": (27, 94, 86, 570),
+    "n=1..200": (66, 539, 182, 2047),
+    "n=1..324": (120, 1500, 302, 4799),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -250,6 +254,13 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_frontier_table.py",
     "tests/test_site_rendering.py",
     "tests/test_site_math_preferences.py",
+)
+#: The four HTTP load/no-JS cases measure browser timing without competing browser
+#: workers from the functional layout command. Their assertions and budgets stay shared
+#: with the production checker; this changes allocation, not the measured contract.
+SITE_LOAD_BUDGET_TEST = (
+    "tests/test_site_rendering.py::"
+    "test_native_frontier_passes_the_unchanged_http_load_and_nojs_budgets"
 )
 #: Set for the step that owns them, and read by `tests.site_browser`: a Chromium that does
 #: not launch fails the test rather than skipping it.
@@ -1944,30 +1955,50 @@ def _site_url_registry(context: Context) -> str:
 
 
 def _site_layout_tests(context: Context) -> str:
-    """Measure the site's tables in the Chromium the frontend runner installs.
+    """Run functional pixel/layout checks in parallel, then load budgets serially.
 
-    `SITE_LAYOUT_TESTS` pin pixel widths, which no behavioural shard can measure, so they
-    run here, one file to an xdist worker as the quick lane runs its files, and they fail
-    rather than skip when no Chromium launches: `REQUIRE_CHROMIUM` is set for this command
-    alone, and `tests.site_browser` reads it.
+    The four native-frontier timing cases use one browser command after the functional
+    workers exit. Both commands require Chromium and retain the existing assertions;
+    serial allocation removes browser competition within this step, without promising
+    an otherwise idle host. Both phases share the original total subprocess timeout.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
-    return _run(
-        context,
+    common = (sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider")
+    commands = (
         (
-            sys.executable,
-            "-m",
-            "pytest",
-            "-q",
-            "-p",
-            "no:cacheprovider",
+            *common,
             *distribution,
             *loadfile,
             *SITE_LAYOUT_TESTS,
+            "-k",
+            f"not {SITE_LOAD_BUDGET_TEST.rpartition('::')[-1]}",
         ),
-        extra_environment={REQUIRE_CHROMIUM: "1"},
+        (*common, "-n", "0", SITE_LOAD_BUDGET_TEST),
     )
+    outputs: list[str] = []
+    deadline = time.monotonic() + context.timeout_seconds
+    for command in commands:
+        try:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise StepTimeoutError(
+                    "site table layout in Chromium exhausted its "
+                    f"{context.timeout_seconds:g}s subprocess budget"
+                )
+            outputs.append(
+                _run(
+                    context,
+                    command,
+                    timeout_seconds=remaining,
+                    extra_environment={REQUIRE_CHROMIUM: "1"},
+                )
+            )
+        except StepFailureError as error:
+            if outputs:
+                raise type(error)("\n".join((*outputs, str(error)))) from error
+            raise
+    return "\n".join(output for output in outputs if output)
 
 
 def _browser_code_in_files(context: Context) -> str:
@@ -3639,6 +3670,12 @@ def _squish_second_update_certification(context: Context) -> str:
     # Reuse the completed full scientific replay; admit all complete deciding inputs
     # and canonical metadata without repeating either exact feasibility decision.
     return _module(context, "devtools.squish_second_update_confirmation", "check-certification")
+
+
+def _refinement_custody(context: Context) -> str:
+    # Admit the complete retained input/result bindings from the reviewed replay;
+    # publication and this offline check do not repeat a scientific decision.
+    return _module(context, "devtools.refinement_custody", "check")
 
 
 def _results_headline(context: Context) -> str:
@@ -5410,6 +5447,22 @@ STEPS: tuple[Step, ...] = (
             "packing/witnesses/witness.schema.yaml",
             "packing/resources/web/squish-422-second-update-2026-10-07/**",
             "packing/witnesses/squish-422-second-update-2026/**",
+        ),
+    ),
+    Step(
+        "rational refinement custody binds complete replay inputs",
+        _refinement_custody,
+        fast=True,
+        records=True,
+        touches=(
+            *_CORE,
+            "packing/devtools/refinement_*.py",
+            "packing/hosted/refinement-evidence-425-428-v1.yaml",
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/**",
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/**",
+            "packing/witnesses/known-best/n-068.yaml",
+            "packing/witnesses/known-best/n-105.yaml",
+            "packing/witnesses/known-best/n-292.yaml",
         ),
     ),
     Step(

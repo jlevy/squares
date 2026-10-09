@@ -242,8 +242,11 @@ Each file belongs to exactly one shard and each runner imports only its own file
 The shard jobs retain full Git history for history-reading tests, but none installs Node
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
-pinned Node toolchain, and so does `site table layout in Chromium`, the two test files
-that pin the tables’ pixels, on the runner that installs the pinned Chromium.
+pinned Node toolchain.
+`site table layout in Chromium` runs eight test files on the runner that installs the
+pinned Chromium: functional pixel/layout checks run in parallel, then the four
+native-frontier load-budget cases run serially, each with HTTP JavaScript and
+no-JavaScript contexts under the same assertions and budgets.
 They launch it with `--font-render-hinting=none`: the headless shell hints text at
 `HINTING_FULL` by default, which on Linux rounds every glyph’s advance to a whole pixel,
 and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Where no

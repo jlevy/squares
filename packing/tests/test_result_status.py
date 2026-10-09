@@ -267,11 +267,15 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # forty-eight when the check2 certificates of n = 18 and 19 (T-102, T-103) took both
     # lanes there from T-099 and T-100, the one count each held; forty-nine when wand125's
     # mixed certificate of 3 October for n = 52 (T-082), decided here by sqverify-fast,
-    # took the last count T-070 held.
-    assert len(derived) == 49
+    # took the last count T-070 held; fifty when T-117's exact rational refinements
+    # took n = 105 and 292, the last verified ceilings T-056 held.
+    # T-120..T-123 report exact side forms for historical source configurations; no
+    # current frontier lane relies on these unverified catalogue assertions.
+    assert {"T-120", "T-121", "T-122", "T-123"} <= set(derived)
+    assert len(derived) == 54
     assert {
         "T-020", "T-021", "T-030", "T-043", "T-044", "T-047", "T-049", "T-057", "T-072",
-        "T-078", "T-079", "T-087", "T-088", "T-089", "T-092",
+        "T-056", "T-078", "T-079", "T-087", "T-088", "T-089", "T-092",
     } <= set(derived)  # fmt: skip
     assert view.position_marks(records.results["T-088"], view.SUPERSEDED, records) == [
         "superseded by T-101"

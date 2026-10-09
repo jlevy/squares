@@ -62,6 +62,7 @@ TEMPLATES = PACKING / "devtools/templates"
 EXPLAINER_ARTICLE = TEMPLATES / "n11-lower-bounds-explainer-article.md"
 THRESHOLD_ARTICLE = TEMPLATES / "n11-threshold-bound-review-article.md"
 OPTIMALITY_ARTICLE = TEMPLATES / "n11-optimality-review-article.md"
+PACKING_METHODS_ARTICLE = TEMPLATES / "packing-methods-article.md"
 RESULTS = PACKING / "frontier/results.yaml"
 SYNOPSIS = REPO / "SYNOPSIS.md"
 #: The result each review reviews, whose publication is its "Original proof".
@@ -197,6 +198,7 @@ def _paper_rows() -> list[Row]:
     optimality_changed = last_change(OPTIMALITY_ARTICLE)
     threshold_proof, threshold_review = threshold_dates()
     threshold_changed = last_change(THRESHOLD_ARTICLE)
+    methods_changed = last_change(PACKING_METHODS_ARTICLE)
     unknown = "git cannot date the article here"
     return [
         Row(
@@ -268,6 +270,28 @@ def _paper_rows() -> list[Row]:
             "Last revised, at noon UTC",
             held_by="built at deploy; artifact_dates --pdf holds a built file",
         ),
+        Row(
+            "packing methods, First published",
+            release.PACKING_METHODS_FIRST_PUBLISHED,
+            "release.PACKING_METHODS_HISTORY, oldest edition",
+            "the standalone tutorial's first edition",
+            held_by="typed in the paper's own publication history",
+        ),
+        Row(
+            "packing methods, Last revised",
+            release.PACKING_METHODS_REVISED,
+            "release.PACKING_METHODS_REVISED",
+            f"the last commit that changed {PACKING_METHODS_ARTICLE.name}",
+            None if methods_changed is None else long_date(methods_changed),
+            unknown,
+        ),
+        Row(
+            "packing methods PDF CreationDate, ModDate",
+            publication_date_text(written_date(release.PACKING_METHODS_REVISED)),
+            "set by render_packing_methods --pdf",
+            "Last revised, at noon UTC",
+            held_by="built at deploy; artifact_dates --pdf holds a built file",
+        ),
     ]
 
 
@@ -332,6 +356,7 @@ def check_pdf(pdf: Path, paper: str) -> int:
         "explainer": lambda: written_date(release.EXPLAINER_REVISED),
         "threshold": threshold_revised,
         "optimality": optimality_revised,
+        "packing-methods": lambda: written_date(release.PACKING_METHODS_REVISED),
     }[paper]()
     problem = date_problem(pdf.read_bytes(), day)
     if problem is not None:
@@ -349,7 +374,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--pdf", type=Path, help="a built PDF whose dates to hold")
     parser.add_argument(
         "--revised",
-        choices=("explainer", "threshold", "optimality"),
+        choices=("explainer", "threshold", "optimality", "packing-methods"),
         help="with --pdf: the paper whose revised date the PDF's dates must be",
     )
     arguments = parser.parse_args(argv)

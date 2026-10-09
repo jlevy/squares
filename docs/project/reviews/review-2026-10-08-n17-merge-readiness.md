@@ -207,6 +207,68 @@ before declaring merge readiness.
 Progress comments belong on [tracker #405](https://github.com/jlevy/squares/issues/405),
 whose main body carries long-lived proof goals and background.
 
+## Consolidation Addendum — October 8, 2026
+
+The refreshed review keeps six open deliverables: the formal #404 → #454 → #461 research
+stack, and standalone #452, #453 and #464. Their responsibilities are distinct;
+combining the independent fixes with the research would enlarge review without closing a
+mathematical dependency.
+PR #410 is already merged as `e74a82190`.
+
+| PR | Retained contribution | Current disposition |
+| --- | --- | --- |
+| [#404](https://github.com/jlevy/squares/pull/404) | Conditional exclusions, accepted-input context, the ordinary census and maintained research/validation tools | Current-main integration resolves the synopsis, document map, measured suite costs and budget-record conflicts. Required qualification remains open. |
+| [#454](https://github.com/jlevy/squares/pull/454) | Contributor applicability, collision-safe pattern identities and route selection | Retain as the second stack layer; propagate the owning-layer integration before relying on its CI. |
+| [#461](https://github.com/jlevy/squares/pull/461) | Exact endpoint relaxation calibration with explicit frame custody | Retain as the third layer. Astra reviews E/F at `d96a2c383` establish no new source finding; all 49 synthetic controls pass. Required qualification remains open. |
+| [#452](https://github.com/jlevy/squares/pull/452) | Retire decoded BB node records after their selected uses | Existing exact-head senior/security/performance/correctness reviews and required CI are green. The recorded full checkpoint qualifies its stated earlier integration tree. |
+| [#453](https://github.com/jlevy/squares/pull/453) | Publish native kernel receipts atomically | Existing exact-head reviews and required CI are green. Retain its documented platform qualifications and earlier full-checkpoint scope. |
+| [#464](https://github.com/jlevy/squares/pull/464) | Packing/SOS source review, exact forced-face derivation and weighted-vertex screening plan | Current main is integrated; problem/domain/certificate definitions make the review standalone. Mathematical review and final required qualification are separate gates. |
+
+[#457](https://github.com/jlevy/squares/pull/457) is closed as fully superseded by main
+commit `e0792f403`. Its resolved integration is exactly main’s complete tree
+`fa6c26ca328cf3e41b9bc70edc6ac8f99a60d278`: native layout-shift attribution and its
+regression control are retained alongside font-arrival diagnostics.
+No empty integration PR is needed.
+
+The current main input is `3213d651b`. Conflict resolution retains both sets of document
+entries and regenerates the synopsis counts from the integrated records.
+The suite-cost register retains main’s newer complete hosted cohort, adds all 20 older
+module keys missing from that cohort, and retains both sets of whole-module admission
+provenance.
+It contains 645 finite measured module costs; shard capacities and acceptance
+ceilings are unchanged.
+The two historical suite-D shapes are not pooled or presented as current performance
+qualification.
+
+Current failed Packing runs show a shared source-copy refusal, not a mathematical
+counterexample: #404 selects 202,715,130 bytes, #461 selects 203,207,942, and #464
+selects 201,968,306, above the 201,326,592-byte limit.
+Fresh main’s live and committed inventories agree at 200,978,830 bytes.
+A bounded follow-up audit found only 9,013 duplicate bytes, insufficient to cure the
+failure, and no justified new output class to omit.
+Broad schema and campaign readers prevent inferring unused input from absent
+command-line mentions.
+Dependency-selection engineering remains under `think-t1lk`; the earlier 192→224 MiB
+proposal remains unapplied pending the explicit user decision.
+Scientific inputs remain retained.
+
+The selected mathematical entry remains the first-eight shared-centre LP. The new source
+review then selects an exact weighted-vertex screen before an eligible SOS experiment; a
+quadratic-ball variant requires its own preregistration and exact containment check.
+Neither analytical reduction has run on a target.
+Endpoint calibration, a feasible relaxation, a conditional exclusion and a global
+lower-bound movement retain distinct statuses.
+The bracket and latest official movement remain unchanged: PR362, T-093.
+
+The source audit found no unique unpublished n17 commit content: custody commit
+`70e7ab82` agrees with the three corresponding files in current #454. All ten untracked
+execution/acquisition files in the recovery checkout match the corresponding tracked
+exp311 files byte for byte.
+They are already captured on #404; the held older integration index and the primary
+checkout remain preserved.
+`think-foe5` tracks this consolidation; existing qualification owners remain open until
+their exact integrated source passes the required gates.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

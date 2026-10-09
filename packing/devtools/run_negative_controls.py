@@ -83,6 +83,8 @@ from pathlib import Path
 from threading import Lock
 from uuid import uuid4
 
+from devtools import evand_arrangement_houses as evand_houses
+from devtools import refinement_house_links as refinements
 from devtools import squish_second_update_confirmation as second
 from devtools import squish_second_update_house_links as house
 from devtools.repo_scope import tracked_files
@@ -151,7 +153,14 @@ SESSION184_RESULT_ROOTS = frozenset(
 # repository, or build products. `resources/README.md` is copied separately because the
 # README link checker requires that one path. The virtualenv and cargo target are
 # symlinked back so nothing is rebuilt or resolved again.
-HOUSE_LINK_LEAVES = frozenset(path.relative_to(ROOT) for path in house.snapshot_house_links())
+HOUSE_LINK_LEAVES = frozenset(
+    path.relative_to(ROOT)
+    for path in (
+        *house.snapshot_house_links(),
+        *refinements.snapshot_house_links(),
+        *evand_houses.snapshot_house_links(),
+    )
+)
 # C8 / think-rara: exact historical outputs, not their scientific input packets or
 # current producers. The read-only --audit-snapshot --prune-candidate report measured
 # 1,206,869 bytes here; inline rescue keeps 255,877, saving 950,992 in each worker.
@@ -925,6 +934,8 @@ COPY_SEPARATELY = (
     / "campaign/explorations/X048-session-178-full-core-ablation/receipts"
     / "B-ablation-packet.json",
     *second.private_input_paths(),
+    *refinements.private_input_paths(),
+    *evand_houses.private_input_paths(),
     ROOT / "resources/README.md",
     ROOT / "resources/bibliography.yaml",
     ROOT / "resources/bibliography.schema.yaml",
@@ -1361,14 +1372,32 @@ def snapshot_pruned_targets() -> list[Path]:
     return sorted({*linked_pruned_targets(), *result_pruned_targets()})
 
 
-def snapshot_source_paths() -> list[Path]:
-    """Counted copy operations, excluding build products and caches.
+def snapshot_copy_targets() -> tuple[Path, ...]:
+    """Copy each declared private path once, preserving distinct path aliases.
 
-    Keep repeated copies: the portable ceiling has always counted a separately
-    copied file again if an inline link also rescues it. An audit must describe that
-    same conservative count rather than quietly create headroom by deduplicating it.
+    A full scientific input can be explicitly carried and separately rescued by its
+    result registration. Both names identify the same destination; copying it twice
+    repeats I/O and counts bytes that are overwritten, rather than additional source.
+    This roster is rebuilt on every invocation and admits no source validity cache.
     """
-    paths = [*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets()]
+    return tuple(dict.fromkeys((*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())))
+
+
+def snapshot_duplicate_copy_bytes() -> int:
+    """Bytes of repeated writes to identical named destinations at this invocation."""
+    paths = (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets())
+    return sum(path.stat().st_size for path in paths) - sum(
+        path.stat().st_size for path in dict.fromkeys(paths)
+    )
+
+
+def snapshot_source_paths() -> list[Path]:
+    """Actual copied source destinations, excluding build products and caches.
+
+    Explicit and dependency-rescued paths share the copier's unique named roster;
+    repeated declarations do not add another physical file to the worker.
+    """
+    paths = list(snapshot_copy_targets())
     for document in ROOT_DOCUMENTS:
         if document.is_dir():
             # `.agents` carries a Python file (`skills/experiment-loop/assets/ledger.py`),
@@ -1581,7 +1610,7 @@ def snapshot_git_source_inventory(revision: str = "HEAD") -> dict[Path, int]:
         *COPY_SEPARATELY,
         *(path for path in inventory if path.parent == REPO and path not in named),
     ]
-    selected = [*separate, *rescued]
+    selected = list(dict.fromkeys((*separate, *rescued)))
     for document in ROOT_DOCUMENTS:
         selected.extend(
             path
@@ -1683,7 +1712,7 @@ def clone_tree(dest: Path) -> None:
     work = dest / HERE
     _clone_into(ROOT, work)
 
-    for target in (*COPY_SEPARATELY, *root_files(), *snapshot_pruned_targets()):
+    for target in snapshot_copy_targets():
         landing = dest / target.relative_to(REPO)
         landing.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(target, landing)
@@ -1824,6 +1853,11 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--source-bytes",
+        action="store_true",
+        help="report private source bytes and the unchanged cap without running controls",
+    )
+    parser.add_argument(
         "spec",
         nargs="?",
         type=Path,
@@ -1913,6 +1947,19 @@ def timing_provenance() -> dict[str, object]:
 def main(argv: Sequence[str] | None = None) -> int:
     """Run selected controls in isolated source snapshots."""
     options = _parser().parse_args(argv)
+    if options.source_bytes:
+        actual = snapshot_source_bytes()
+        print(
+            json.dumps(
+                {
+                    "source_bytes": actual,
+                    "cap_bytes": SNAPSHOT_MAX_BYTES,
+                    "headroom_bytes": SNAPSHOT_MAX_BYTES - actual,
+                    "duplicate_named_copy_bytes_avoided": snapshot_duplicate_copy_bytes(),
+                }
+            )
+        )
+        return int(actual > SNAPSHOT_MAX_BYTES)
     spec_path = options.spec if options.spec.is_absolute() else ROOT / options.spec
     if options.audit_snapshot:
         try:
@@ -2067,9 +2114,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"{len(failures)} of {len(controls)} negative controls did not fire",
             file=sys.stderr,
         )
-        return 1
-    print(f"  {len(controls)} negative controls fire as expected")
-    return 0
+    else:
+        print(f"  {len(controls)} negative controls fire as expected")
+    return int(bool(failures))
 
 
 if __name__ == "__main__":

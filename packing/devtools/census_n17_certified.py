@@ -123,9 +123,10 @@ from sqpack.hosted_data import (
     HostedDataError,
     HostedDataMissingError,
     HostedObject,
+    Manifest,
     fetch_command,
     load_manifest,
-    require,
+    require_from_manifest,
 )
 from sqpack.yamlio import load_yaml
 
@@ -174,6 +175,7 @@ class Hosted:
 
     manifest: Path | None
     objects: dict[str, HostedObject]
+    parsed: Manifest | None = None
 
 
 @dataclass(frozen=True)
@@ -294,10 +296,10 @@ def certificate_data(root: Path, hosted: Hosted, records: list[HostedObject]) ->
     present file must hold the manifest's bytes, and one that differs is refused."""
     present = 0
     for record in records:
-        if hosted.manifest is None:
+        if hosted.manifest is None or hosted.parsed is None:
             raise RefusedError(f"{record.path}: the ledger declares no data manifest")
         try:
-            _ = require(record.path, hosted.manifest, repo=root)
+            _ = require_from_manifest(record.path, hosted.parsed, hosted.manifest, repo=root)
         except HostedDataMissingError:
             continue
         except HostedDataError as error:
@@ -521,7 +523,7 @@ def hosted_files(root: Path, document: dict[str, Any]) -> Hosted:
     objects = {item.path: item for item in manifest.objects}
     if len(objects) != len(manifest.objects):
         raise RefusedError(f"{where}: an object's path is listed twice")
-    return Hosted(path, objects)
+    return Hosted(path, objects, manifest)
 
 
 def load_ledger(cover: Cover, ledger: Path, root: Path) -> tuple[list[Entry], Hosted]:

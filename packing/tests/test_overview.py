@@ -405,7 +405,7 @@ def _page_card_parts(page: str, href: str) -> tuple[str, str]:
 
 
 def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
-    """The overview's six page cards lead to full pages the site serves, so each card
+    """The overview's seven page cards lead to full pages the site serves, so each card
     is the link itself and goes there in the same tab: an `<a href>` with the page icon
     (`data-go="page"`), no popover, no framed preview and no new tab. Each keeps its
     label, headline, note and size. The three parts of the n = 11 series stand together
@@ -423,6 +423,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(page: str) -> None:
         "papers/n11-lower-bounds-explainer.html",
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
+        "papers/square-packing-methods-survey.html",
         "tutorial.html",
         "workbench/",
     ]
@@ -1235,19 +1236,20 @@ def test_every_card_grid_sits_in_a_frame_it_can_measure(page: str) -> None:
     assert "site-cards-dimensions" not in page, "the rating ladders are no card grid"
 
 
-def test_the_page_cards_stand_one_two_and_two_at_one_column_width(
+def test_the_page_cards_keep_the_series_together_at_one_column_width(
     page: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """The six page cards stand in three lines: the Frontier page alone at the top, then
+    """The seven page cards stand in three lines: the Frontier page alone at the top, then
     the three parts of the n = 11 series in reading order, one card per paper, then the
-    tutorial and the workbench (the series plan, 2026-10-05; one, two and two while the
+    methods tutorial, first-principles tutorial and workbench (the series plan,
+    2026-10-05; one, two and two while the
     site had two papers, the owner, 2026-10-02, `think-ns3d`). A section set in lines of
     its own (`SECTION_CARD_LINES`) is one frame holding a grid per line, a gap apart,
     each marked with its longest line's count, which the stylesheet caps a line of its
     size at, so the lines share one column width and each centres in it. Lines that do
     not count the section's cards are refused."""
-    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 2)}
-    assert len(overview_sections.PAGES) == 6
+    assert overview_sections.SECTION_CARD_LINES == {"pages": (1, 3, 3)}
+    assert len(overview_sections.PAGES) == 7
     frame = page.split('<div class="site-cards-frame site-wide">', 1)[1]
     rows = re.findall(r'<div class="site-cards" data-cards-most="3">(.*?)</div>', frame)
     assert [
@@ -1259,7 +1261,7 @@ def test_the_page_cards_stand_one_two_and_two_at_one_column_width(
             "papers/n11-threshold-bound-review.html",
             "papers/n11-optimality-review.html",
         ],
-        ["tutorial.html", "workbench/"],
+        ["papers/square-packing-methods-survey.html", "tutorial.html", "workbench/"],
     ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     gap = css[css.index(".site-cards + .site-cards {") :]
@@ -1273,7 +1275,7 @@ def test_the_page_cards_stand_one_two_and_two_at_one_column_width(
             in rule[: rule.index("}")]
         ), section
     monkeypatch.setitem(overview_sections.SECTION_CARD_LINES, "pages", (2, 2))
-    with pytest.raises(SystemExit, match="pages: 6 cards in lines of"):
+    with pytest.raises(SystemExit, match="pages: 7 cards in lines of"):
         overview_sections.page_cards()
 
 
@@ -2954,6 +2956,16 @@ def test_the_prose_links_repository_files_on_main(page: str) -> None:
 
 
 @pytest.fixture(scope="module")
+def result_bodies() -> dict[str, str]:
+    """Render complete result bodies during setup, before per-test monkeypatches.
+
+    Each preview still renders afresh; its complete context comes from the same
+    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
+    """
+    return site_renders.result_bodies()
+
+
+@pytest.fixture(scope="module")
 def overview() -> overview_data.Overview:
     return site_renders.overview()
 
@@ -3996,10 +4008,17 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "papers/n11-lower-bounds-explainer.html",
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
+        "papers/square-packing-methods-survey.html",
         "tutorial.html",
     ]
-    assert [paper.label for paper in papers] == ["Part I", "Part II", "Part III", "Tutorial"]
-    assert [paper.href for paper in papers[:3]] == [
+    assert [paper.label for paper in papers] == [
+        "Part I",
+        "Part II",
+        "Part III",
+        "Methods tutorial",
+        "Tutorial",
+    ]
+    assert [paper.href for paper in papers[:-1]] == [
         render_overview.paper_path(record.slug) for record in render_overview.PAPERS
     ]
     assert {paper.size for paper in papers} == {"large"}
@@ -4047,6 +4066,8 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
         ("all-results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
         ("all-results.html#t-060", "T-060"),
+        ("tutorial.html", "square-packing tutorial"),
+        ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
     ]
     for body in re.findall(r"<a\b[^>]*>(.*?)</a>", cards, re.DOTALL):
         assert "<a" not in body
@@ -5433,6 +5454,43 @@ def test_a_result_rows_popover_body_comes_from_one_function(
             assert "<dl" not in panel
 
 
+def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragment(
+    overview: overview_data.Overview, result_bodies: dict[str, str]
+) -> None:
+    """Table previews link to complete records retaining each claim and its context."""
+    for result in overview.results:
+        preview = overview_sections.result_row(result, trigger="row").popover
+        full = result_bodies[result.id]
+        assert f'href="{overview_sections.result_fragment(result.id)}"' in preview, result.id
+        assert "Read the complete result record" in preview, result.id
+        assert (
+            overview_sections.prose_html(
+                result.record["claim"], between='</p><p class="site-result-claim">'
+            )
+            in full
+        ), result.id
+        assert (
+            overview_sections.prose_html(result.record["significance"]["rationale"]) in full
+        ), result.id
+        for link in result.records:
+            assert f'href="{html.escape(link.url, quote=True)}"' in full, result.id
+            label = html.escape(link.label)
+            if link.url == "frontier.html":
+                label = "The frontier survey"
+            elif match := re.fullmatch(r"cases/(\d+)\.html", link.url):
+                label = "Case record, " + overview_data.math_html(f"n = {match.group(1)}")
+            elif match := re.fullmatch(r"evidence (\d+)", link.label):
+                evidence = result.record["evidence"][int(match.group(1)) - 1]
+                label = f"<code>{html.escape(evidence)}</code>"
+            assert f">{label}</a>" in full, result.id
+        assert f'data-novelty="{result.novelty}"' in full, result.id
+        for key, label in (("composition", "Composition"), ("next_rung", "Next rung")):
+            assert f"<dt>{label}</dt>" not in preview, result.id
+            if result.record.get(key):
+                assert f"<dt>{label}</dt>" in full, result.id
+                assert overview_sections.prose_html(result.record[key]) in full, result.id
+
+
 #: What the two pages that list results may weigh. The result overviews are 4.9 MB
 #: between them; a page that carried them, as both once would have, crosses its ceiling.
 #: The results page was 2.77 MB with 81 results on 3 October 2026, and its significance
@@ -5470,6 +5528,7 @@ def test_no_page_carries_a_result_overview(
         assert "data-result-overview=" not in html_text, name
         assert 'class="site-result"' not in html_text, name
         size = len(html_text.encode("utf-8"))
+        print(f"{name}: {size:,} source bytes / {PAGE_CEILINGS[name]:,} ceiling")
         assert size < PAGE_CEILINGS[name], f"{name} is {size:,} bytes"
     sources = re.findall(r'data-row-pop-src="([^"]+)"', results)
     assert sources == [
@@ -5508,14 +5567,15 @@ def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
     render_overview.write_site(tmp_path, files)
     assert sorted(
         path.relative_to(tmp_path).as_posix() for path in tmp_path.rglob("*.html")
-    ) == [
-        "404.html",
-        "index.html",
-        "papers/n11-lower-bounds-explainer.html",
-        "result/t-001.html",
-        "result/t-117.html",
-        "result/t-118.html",
-    ]
+    ) == sorted(
+        [
+            "404.html",
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "result/t-001.html",
+            *(row.path for row in site_urls.load_registry() if row.status == "withdrawn"),
+        ]
+    )
     assert (tmp_path / "result" / "t-001.html").read_text(encoding="utf-8") == "<p>one</p>\n"
     monkeypatch.setattr(render_overview, "render_all", lambda: files[:1])
     monkeypatch.setattr(render_overview, "result_fragments", lambda: files[1:])
@@ -5563,22 +5623,27 @@ def test_a_result_row_popover_is_the_same_panel_in_both_tables(
     overview: overview_data.Overview,
 ) -> None:
     """A result's popover is the same panel on both pages, a card's: the id as its caps
-    label and the summary as its headline. It has no button on either: the row pressed
-    is the result's row, and a button from the overview's table to the same row of the
-    results page's would lead nowhere new."""
-    result = overview_sections.recent_results(overview)[0]
-    target = f"pop-result-{result.id.lower()}"
-    away = _row_popover(overview_sections.recent_table(overview), target)
-    here = _row_popover(overview_sections.results_table(overview), target)
-    face = overview_sections.headline_math_face(overview_sections.tex_bounds(result.summary))
-    for panel in (away, here):
-        assert f'<span class="site-card-label">{result.id}</span>' in panel
-        assert f'<p class="site-popover-value"{face} id="{target}-title">' in panel
-        assert 'popovertargetaction="hide" aria-label="Close">' in panel
-    assert ACTION.findall(away)
-    assert ACTION.findall(here)
-    assert "in the results table" not in away
-    assert away == here
+    label and the summary as its headline. Every statically selected recent row opens
+    the same complete-record link, close control and panel in both tables."""
+    entries = _recent_entries(overview)
+    assert entries
+    recent_table = overview_sections.recent_table(overview)
+    results_table = overview_sections.results_table(overview)
+    for result in entries:
+        target = f"pop-result-{result.id.lower()}"
+        away = _row_popover(recent_table, target)
+        here = _row_popover(results_table, target)
+        face = overview_sections.headline_math_face(
+            overview_sections.tex_bounds(result.summary)
+        )
+        for panel in (away, here):
+            assert f'<span class="site-card-label">{result.id}</span>' in panel
+            assert f'<p class="site-popover-value"{face} id="{target}-title">' in panel
+            assert 'popovertargetaction="hide" aria-label="Close">' in panel
+        assert ACTION.findall(away)
+        assert ACTION.findall(here)
+        assert "in the results table" not in away
+        assert away == here
 
 
 def test_a_row_detail_escapes_its_words_and_keeps_its_html() -> None:
@@ -6032,9 +6097,9 @@ def _old_addresses() -> set[str]:
 
 def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
     """`conventions.md`: a paper has one name, its slug, which says the case, the subject
-    and the kind of paper. The site serves it at `papers/<slug>.html`, and the renderer,
-    its templates, its test and its half of the Pages workflow carry the slug, so a
-    reader of the repository finds a paper by the name the site gives it."""
+    and the kind of paper. The site serves it at `papers/<slug>.html`; the registry
+    connects that address to its renderer, templates, tests and Pages scope. The methods
+    survey retains its private packing_methods module and packing-methods templates."""
     import importlib  # noqa: PLC0415
 
     from devtools.pages_scope import BUILDER_INPUTS, load_workflow  # noqa: PLC0415
@@ -6044,6 +6109,7 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
         "n11-lower-bounds-explainer",
         "n11-threshold-bound-review",
         "n11-optimality-review",
+        "square-packing-methods-survey",
     )
     packing = overview_data.REPO / "packing"
     jobs = load_workflow()["jobs"]
@@ -6054,19 +6120,21 @@ def test_a_paper_is_named_by_its_slug_in_the_source_and_on_the_site() -> None:
     )
     for slug in slugs:
         name = slug.replace("-", "_")
-        assert render_overview.paper_record(slug).module == f"devtools.render_{name}"
-        renderer = importlib.import_module(f"devtools.render_{name}")
+        private_name = "packing_methods" if slug == render_overview.PACKING_METHODS else name
+        assert render_overview.paper_record(slug).module == f"devtools.render_{private_name}"
+        renderer = importlib.import_module(render_overview.paper_record(slug).module)
         assert render_overview.paper_record(slug).title == renderer.TITLE
         assert slug == renderer.SLUG
         assert renderer.SITE_PATH == render_overview.paper_path(slug) == f"papers/{slug}.html"
         assert renderer.SITE_PATH in render_overview.SITE_PAGES
         assert renderer.SITE_ROOT == render_overview.PAPERS_ROOT == "../"
         assert renderer.SITE_PATH in {paper.href for paper in overview_sections.PAPERS}
-        for template in (f"{slug}-article.md", f"{slug}-shell.html"):
+        template_name = private_name.replace("_", "-")
+        for template in (f"{template_name}-article.md", f"{template_name}-shell.html"):
             assert (render_overview.TEMPLATES / template).is_file(), template
         tests = packing / "tests"
-        assert (tests / f"test_render_{name}.py").is_file() or (
-            tests / f"test_{name}.py"
+        assert (tests / f"test_render_{private_name}.py").is_file() or (
+            tests / f"test_{private_name}.py"
         ).is_file(), slug
         assert name in BUILDER_INPUTS, slug
         assert name in {line.split(" ", 1)[0] for line in skip_notices.splitlines()}, slug
@@ -6193,7 +6261,11 @@ def test_the_site_writes_its_forwarders_and_checks_them(
     assert {"explainer.html", "n11-optimality/index.html"} < set(moved)
     assert render_overview.main(["--output", str(tmp_path)]) == 0
     crawl, crawl_assets = site_urls.crawl_files()
-    assert set(crawl) == {"404.html", "sitemap.xml", "result/t-117.html", "result/t-118.html"}
+    assert set(crawl) == {
+        "404.html",
+        "sitemap.xml",
+        *(row.path for row in site_urls.load_registry() if row.status == "withdrawn"),
+    }
     assert sorted(
         path.relative_to(tmp_path).as_posix() for path in tmp_path.rglob("*") if path.is_file()
     ) == sorted(

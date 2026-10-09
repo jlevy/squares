@@ -70,7 +70,8 @@ The site and the atlas posters are at edition `v0.5.0`; each paper carries a ver
 its own; the atlas films are the ones cut for the
 [`v0.4.2` release](https://github.com/jlevy/squares/releases/tag/v0.4.2).
 
-The site’s [papers](https://jlevy.github.io/squares/papers.html) explain the proofs.
+The site’s [papers](https://jlevy.github.io/squares/papers.html) explain constructions,
+search methods, and proofs.
 Three of them form one series on $n = 11$, read in order:
 
 1. [**New Lower Bounds for Square Packing for n = 11**](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html):
@@ -91,6 +92,13 @@ Three of them form one series on $n = 11$, read in order:
    ([PDF](https://jlevy.github.io/squares/papers/n11-optimality-review.pdf),
    [source](packing/devtools/templates/n11-optimality-review-article.md)).
 
+For how record packings are found, read
+[**How Record Square Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html),
+a tutorial on geometric construction, physics-inspired search, annealing, surgery, local
+refinement, and upper-bound certification
+([PDF](https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf),
+[source](packing/devtools/templates/packing-methods-article.md)).
+
 This repository also contains
 **[a set of tools and AI workflows for automated mathematical research](#autonomous-research-process)**:
 the results and the frontier survey are produced and checked by AI agents running a
@@ -109,6 +117,7 @@ The rest of this README is about that work.
 | Where | What |
 | --- | --- |
 | [**Tutorial**](TUTORIAL.md) | First-principles introduction to the objects, bounds, cells, stationary branches, search, and proof obligations |
+| [**How Record Packings Are Found**](https://jlevy.github.io/squares/papers/square-packing-methods-survey.html) | Geometric construction, physics-inspired search, annealing, surgery, local refinement, and upper-bound certification, with sourced record histories |
 | [**Synopsis**](SYNOPSIS.md) | Current research status and roadmap, established results, terminology, workflow contracts, and handoff |
 | [**Results register**](packing/frontier/RESULTS.md) | Whole-result bounds, audits, structural theorems, and errata graded under [`epistemics.md`](epistemics.md) |
 | [**Frontier**](packing/frontier/STATUS.md) | One record per case for $n = 1\ldots324$, with reported and verified bounds kept separate |
