@@ -407,10 +407,12 @@ fetched them again on every page, since a page’s own bytes were all it could c
   URI or a fragment.
 - **Faces.** Every face keeps `font-display: block`, so a face that arrives late holds
   the text it draws invisible.
-  The faces a page draws its first screen in, PT Serif’s regular and Source Sans 3’s
-  upright, are declared beside the stylesheets (`site_assets.PRELOADED_FACES`). A small
-  prepaint program activates these hints with anonymous CORS on HTTP and HTTPS, and
-  without CORS for local files; choosing the mode before requesting the fonts avoids
+  The faces a page draws its first screen in, PT Serif’s regular and italic and Source
+  Sans 3’s upright, are declared beside the stylesheets (`site_assets.PRELOADED_FACES`).
+  The italic face draws prose variables such as $s(n)$, so it starts loading with the
+  surrounding prose rather than after the first math layout.
+  A small prepaint program activates these hints with anonymous CORS on HTTP and HTTPS,
+  and without CORS for local files; choosing the mode before requesting the fonts avoids
   WebKit’s file-origin cache failure while preserving shared HTTP font downloads.
   With JavaScript disabled, the same stylesheets load their faces normally.
   While regular PT Serif loads, the default prose stack uses metric-adjusted local
