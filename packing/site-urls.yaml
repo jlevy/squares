@@ -5979,6 +5979,30 @@ urls:
   first_published: '2026-10-05'
   lastmod: '2026-10-05'
   status: live
+- path: papers/square-packing-methods-survey.html
+  canonical: papers/square-packing-methods-survey.html
+  kind: paper-file
+  generator: devtools.render_packing_methods:main
+  producer: paper:square-packing-methods-survey
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/square-packing-methods-survey.md
+  canonical: papers/square-packing-methods-survey.md
+  kind: paper-file
+  generator: devtools.render_packing_methods:main
+  producer: paper:square-packing-methods-survey
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+- path: papers/square-packing-methods-survey.pdf
+  canonical: papers/square-packing-methods-survey.pdf
+  kind: paper-file
+  generator: devtools.render_packing_methods:main
+  producer: paper:square-packing-methods-survey
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
 - path: readme.html
   canonical: readme.html
   kind: page

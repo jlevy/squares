@@ -2536,11 +2536,16 @@ The front is, in order:
   first version has no history to link.
 
 - **The dates line.** One grammar on every paper: `<What> <Month D, YYYY>` parts joined
-  by a middle dot, ending with “Last revised”, the day the article last changed.
-  A paper with a source leads with the day the source published its proof (“Original
-  proof September 29, 2026”); the explainer leads with the day its first edition went
-  live (“First published September 5, 2026”). Every value is `sqpack.release`’s, and
-  `devtools.artifact_dates` holds each to its rule.
+  by a middle dot. When first publication and revision fall on the same day, show
+  “Published October 8, 2026” once.
+  When they differ, show “First published” and end with “Last revised”, the day the
+  article last changed.
+  Source dates such as “Original proof September 29, 2026” keep their labels, even when
+  they share a publication date.
+  `paper_front` applies this display rule to HTML, Markdown, and the page printed as
+  PDF. The source record retains both publication and revision dates for metadata.
+  Every value is `sqpack.release`’s, and `devtools.artifact_dates` holds each to its
+  rule.
 
 - **The series strip.** Under the dates, after a line’s space, which part of the series
   the paper is (“Part II of 3 in the n = 11 series”), then each other part on a line of

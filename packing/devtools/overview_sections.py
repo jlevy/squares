@@ -44,11 +44,13 @@ from devtools.render_overview import (
     N11_LOWER_BOUNDS_EXPLAINER,
     N11_OPTIMALITY_REVIEW,
     N11_THRESHOLD_BOUND_REVIEW,
+    PACKING_METHODS,
     RESULTS_PAGE,
     SITE_PAGES,
     paper_path,
+    paper_record,
 )
-from devtools.render_overview import PAPERS as SERIES
+from devtools.render_overview import PAPERS as PAPER_RECORDS
 from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
@@ -243,16 +245,17 @@ SECTION_CARD_SIZES: dict[str, CardSize] = {
 }
 
 #: A section set in lines of its own, as counts of its cards in order, where one
-#: wrapping row would not set them as they are meant to read: the six page cards stand
-#: one, three and two, the Frontier page alone at the top, then the three parts of the
+#: wrapping row would not set them as they are meant to read: the seven page cards stand
+#: one, three and three, the Frontier page alone at the top, then the three parts of the
 #: n = 11 series on one line, one card per paper in reading order (the series plan,
-#: 2026-10-05), then the tutorial and the workbench. They stood one, two and two while
+#: 2026-10-05), then the methods tutorial, the first-principles tutorial and the workbench.
+#: They stood one, two and two while
 #: the site had two papers (the owner, 2026-10-02, `think-ns3d`; two over three from
 #: `think-ec5k` the same day, the Frontier page's card last). Each line is a row of its
 #: own, and none sets more cards to a line than the longest line holds, so the lines
 #: share one column width, a third of the frame's. The stylesheet holds each longest
 #: line here to a rule.
-SECTION_CARD_LINES: dict[str, tuple[int, ...]] = {"pages": (1, 3, 2)}
+SECTION_CARD_LINES: dict[str, tuple[int, ...]] = {"pages": (1, 3, 3)}
 
 
 #: Elements with no end tag, which open nothing a parser must later close.
@@ -1607,7 +1610,8 @@ OPTIMALITY_PAPER = paper_path(N11_OPTIMALITY_REVIEW)
 #: The site's papers, in the order the Papers page shows them, one large card each
 #: (`paper_cards`): the three parts of the n = 11 series in reading order, I, II, III,
 #: each labelled by its part (`render_overview.PAPERS`, the one registry a new paper is
-#: entered in), then the tutorial, the background to all three, whose description is
+#: entered in), then the standalone methods tutorial and the first-principles tutorial,
+#: the background to the series, whose description is
 #: `TUTORIAL.md`'s own opening, its audience and what it owns.
 PAPERS: tuple[Paper, ...] = (
     *(
@@ -1617,7 +1621,16 @@ PAPERS: tuple[Paper, ...] = (
             title=SERIES_CARDS[record.slug][0],
             description=SERIES_CARDS[record.slug][1],
         )
-        for record in SERIES
+        for record in PAPER_RECORDS
+        if record.part is not None
+    ),
+    Paper(
+        href=paper_path(PACKING_METHODS),
+        label=paper_record(PACKING_METHODS).label,
+        title="How record square packings are found",
+        description=(
+            "How seeds, search, local refinement and exact checks produce record upper bounds."
+        ),
     ),
     Paper(
         href="tutorial.html",
@@ -1676,10 +1689,7 @@ PAGES: tuple[tuple[str, str, str, str], ...] = (
         "Every case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
     ),
-    *(
-        (paper.href, paper.label, paper.title, paper.description)
-        for paper in (EXPLAINER, THRESHOLD_REVIEW, OPTIMALITY)
-    ),
+    *((paper.href, paper.label, paper.title, paper.description) for paper in PAPERS[:-1]),
     (
         "tutorial.html",
         "Tutorial",
