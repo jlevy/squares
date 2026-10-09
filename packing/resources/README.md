@@ -12,6 +12,19 @@ source gaps. The
 [X-050 audit](../campaign/explorations/X-050-fibonacci-torus-and-boundary-information.md)
 contains the dispositions; no full manuscript or geometric torus inverse was supplied.
 
+**[Berthold et al. 2026b]** — the already retained arXiv:2605.04850v1 PDF and raw
+extraction were rechecked against a fresh download on October 8, 2026. The
+[n17 paper review](../../docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md)
+assesses its Farkas formulation and relevance to exact sum-of-squares certificates.
+It adds no packing bound or optimality result.
+
+**SOS certificate methods** — the
+[October 8 source packet](web/n17-sos-sources-2026-10-08/README.md) records extraction
+quality for the Blekherman–Parrilo–Thomas book and Laplagne’s facial-reduction paper.
+The
+[extended n17 review](../../docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md)
+includes the derived exact weighted-vertex screen and conditional SOS plan.
+
 ## Layout
 
 ```
@@ -60,7 +73,7 @@ formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive normally stores an original
 source, a cleaned `.md` transcription, and a faithful `.raw.md` extraction.
-One hundred and nine entries currently fall short in ways worth naming rather than
+One hundred and ten entries currently fall short in ways worth naming rather than
 hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
@@ -79,6 +92,12 @@ hiding:
   faithful extraction, no cleaned transcription yet.
   All fourteen were read directly from the PDF, and the claims resting on them were
   checked there.
+- `laplagne-2018-facial-reduction-exact-polynomial-sos-1810.04215v1` is **raw-only**:
+  original PDF, unedited text and original TeX, with no cleaned Markdown transcription.
+  The [source packet](web/n17-sos-sources-2026-10-08/README.md) records PDF/TeX checks
+  and glyph artifacts.
+  The book’s full source remains outside Git; its extraction status is also recorded
+  there.
 - The fifteen search-method sources retained on 2026-09-08 for
   [the annealing report](../../docs/project/research/research-2026-09-08-annealing-for-square-packing.md)
   are **raw-only** on the same terms:
