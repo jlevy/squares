@@ -5,7 +5,7 @@ title: "n17 stack A1: qualify current heads with required CI and full checkpoint
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m4eq9mdaejkedd1b09qqn09p
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:52:29.377Z
-updated_at: 2026-10-09T00:16:49.332Z
+updated_at: 2026-10-09T00:24:23.863Z
 started_at: 2026-10-08T22:00:55.817Z
 ---
 Senior review A1 High: current461 only mergeability; current454 Packing/Pages absent;404 current-main conflicts; source snapshot192MiB overcap remains. Older Pages pass/focused controls are not current required CI/full-checkpoint PASS. Pending human192->224MiB decision after auto-review rejection, no cap raise/pruning/retry bypass. Owning-layer repair, formal stack propagation, current-head Packing/Pages and full checkpoint required. Review https://github.com/jlevy/squares/pull/461#pullrequestreview-5463219386.
@@ -31,3 +31,5 @@ Progress: https://github.com/jlevy/squares/issues/405#issuecomment-6071221013
 
 October8 source-qualified CI correction and bounded repair:
 Newer actual checkout/tree evidence supersedes prior absent/cancelled observations: 404Pages37860039643PASS/Packing37860039766FAIL;454Pages37860039795PASS/Packing37860039856FAIL;461Pages37860039410PASS/Packing37860039390FAIL, qualifying18e/5dc/742 source trees. GitHub bodies and existing A1/405 comments corrected/read back. New owning-layer sourcec3dc6027a66fe396f22953a1d29945420198bdda commits isolated CLI controls, scientific dependency/index restoration, bounded frontend diagnostics, measured suite costs and consolidation report. All54 combined producer/refusal/index controlsPASS3.89s;67suite-file controlsPASS3.11s;15successful wholemodule reports413PASS,25.762phase seconds,615historicalweights/ceilings preserved. Unknown shares9.5/9.0/9.5/8.8%. Failed guard module2ENOSPC controls excluded from admission. All47recordsPASS23.54s. Actual historical suiteD101.34s fromgreen37613399745 admitted; current190.63s/different105shape not pooled and current143s compliance remains open. Root committed selectedsource202715130B/1388538over192MiB, including+558148B scientific inputs;224MiB proposalunapplied. Fullworker/browser/push/fullcheckpoint not qualified. Formalupstackpropagation in progress; a clean-worktree occupancy refusal restored originalchildrefs before bounded recovery. No merge/draft promotion/proof result; numericbracket/latest362T093 unchanged. OverallrequiredCI/fullcheckpoint capdecision & followupreviewdecision remain open.
+
+Formal stack455 source publication verified:404c3dc6027a66fe396f22953a1d29945420198bdda→main91ca9b824;45481890a9e93dde012df24917ac6e93672149bc7bb→404;461d96a2c383a98458a02566d472c011a2a68300ad2→454. All3 drafts remaintrue. All3strictcostguardPASS on694/695/696 trackedmodules and630/631/632 recordedcosts, max9.524% unknown under unchanged10%;615baseweights+15rootadmissions+2childadmissions preserved.9/31childownedblobs,22rootnoncostblobs,17raw315/316objects and5adsourcecustody unchanged. Sourcequota metadata202715130/202852792/203207942 bytes remainsabove201326592192MiB;224proposalunapplied. Normalhooks retained, source branches clean, originalprimaryuntrackeduniqueevidencepreserved. CurrentautomaticCIqualification awaitsreadback; no rerun/dispatch/merge/draftflip. FocusedAstrafollowupreviewchoice requested asynchronously per conflict-resolvingbaseupdate signal; no answer/extraformalround inferred. RequiredPacking/fullcheckpoint pending, numericalbracketunchanged. Publication proof final-ci-stack-publication-proof.json.

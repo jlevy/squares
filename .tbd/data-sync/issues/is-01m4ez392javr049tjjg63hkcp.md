@@ -5,7 +5,7 @@ title: "n17 PR404 CI: isolate malformed-input CLI controls from producer imports
 kind: bug
 status: in_progress
 priority: 2
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -16,7 +16,7 @@ parent_id: is-01m4eq9mdaejkedd1b09qqn09p
 hold: null
 hold_until: null
 created_at: 2026-10-08T23:55:37.937Z
-updated_at: 2026-10-09T00:16:49.969Z
+updated_at: 2026-10-09T00:24:24.566Z
 started_at: 2026-10-08T23:56:18.823Z
 ---
 Current-source hosted Packing runs40437860039766,45437860039856 and46137860039390 all fail12 shardB controls: ten nested descriptor path/hash refusals expect "paths and digests" but encounter process-wide "producer/kernel/root import in full-square checker"; two gzip EOF CLI refusals likewise encounter the independent-checker purity guard first. The same controls passed as part of366 affected controls run in separate module processes; that retained result did not qualify a combined shard.
@@ -28,3 +28,5 @@ Original/integrated root head18e3a6f4f20f534e80074131d4947c633cca5ef3; exact che
 ## Notes
 
 Implemented in c3dc; all12 repaired controls pass in the54-control combined process with producer loaded. Productionpurity staysunchanged. Hosted source qualification/merge remains pending.
+
+Formal stack455 source publication verified:404c3dc6027a66fe396f22953a1d29945420198bdda→main91ca9b824;45481890a9e93dde012df24917ac6e93672149bc7bb→404;461d96a2c383a98458a02566d472c011a2a68300ad2→454. All3 drafts remaintrue. All3strictcostguardPASS on694/695/696 trackedmodules and630/631/632 recordedcosts, max9.524% unknown under unchanged10%;615baseweights+15rootadmissions+2childadmissions preserved.9/31childownedblobs,22rootnoncostblobs,17raw315/316objects and5adsourcecustody unchanged. Sourcequota metadata202715130/202852792/203207942 bytes remainsabove201326592192MiB;224proposalunapplied. Normalhooks retained, source branches clean, originalprimaryuntrackeduniqueevidencepreserved. CurrentautomaticCIqualification awaitsreadback; no rerun/dispatch/merge/draftflip. FocusedAstrafollowupreviewchoice requested asynchronously per conflict-resolvingbaseupdate signal; no answer/extraformalround inferred. RequiredPacking/fullcheckpoint pending, numericalbracketunchanged. Publication proof final-ci-stack-publication-proof.json.
