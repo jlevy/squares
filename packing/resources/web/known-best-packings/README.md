@@ -86,6 +86,19 @@ Retention is permitted, never required: derived-only custody remains allowed, an
 packet may prefer it, as Couzo’s and de Winter’s packets above do.
 The catalogue’s SVG pictures stay under the Kingbird rule.
 
+One packet predates this policy and departs from it.
+[Seth Rehwaldt’s $n = 68$ packet](../rehwaldt-n68-refinement-2026-10-07/README.md),
+committed on 2026-10-07 from `lollipoll/certified-square-packing-68`, which publishes no
+licence, retains that source’s two standalone checker programs byte for byte, as
+`source/verify.py.txt` and `source/independent_support_check.py.txt`.
+Its receipt, `receipts/source-geometry.json.gz`, records three jobs that ran both
+programs, and the admission receipt of the
+[issue-425 packet](../rehwaldt-couzo-refinements-2026-10-07/README.md) records the same
+three jobs. Whether those copies stay is open in bead `think-efys`; until it is decided
+the packet is left as it is.
+No other packet this inventory reads from a source without a licence retains that
+source’s programs or prose, or records running one.
+
 ## Facts Read From a Pinned Parse
 
 At $n = 69, 83$ and $87$ the catalogue’s packings of September 2026 (T-088, T-089) were
