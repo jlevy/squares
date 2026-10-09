@@ -5,7 +5,7 @@ title: Stabilize stack 430 on main 3213 and qualify every layer
 kind: task
 status: in_progress
 priority: 1
-version: 25
+version: 26
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -31,7 +31,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-09T04:14:49.601Z
-updated_at: 2026-10-09T06:36:15.375Z
+updated_at: 2026-10-09T07:29:29.388Z
 started_at: 2026-10-09T04:20:32.996Z
 ---
 Cloud continuation of think-yij0 handoff (PR467). Normal-merge origin/main 3213d651b into #442, propagate to #468, fix the recorded failures without weakening limits, obtain exact-head required CI and full checkpoints, bind reviews. Merge only with owner confirmation (github-merge confirm-session).
@@ -47,3 +47,5 @@ Owner in session: 'Once everything is clean and ready to merge, you can merge th
 2026-10-09: tbd update --notes replaces notes; notes of think-zjlo, think-88r0, think-1545 and think-ili1 overwritten earlier this session were restored from the tbd-sync history (all versions concatenated). Appends now go through scratchpad/addnote.sh.
 
 Final propagation (integrator) 2026-10-09: stack linear #442 04767870f -> #443 15a26c096 -> #448 ffed5ac8c (build_known_best_atlas retention dict kept evand+ryxu+gupta) -> #449 1a2781e4f (test_overview took #448's) -> #450 802129175 -> #459 8c75da0a1 -> #460 746010014 -> #463 7126067d1 (merge, T-129 states sides b9431a8e0, re-pin) -> #466 2062dee0f (merge, re-pin) -> #468 6c4e177a4. All mergeable; PR runs created on every head after linearity (unknown mergeability earlier coincided with non-linear stack). Local Playwright expects chromium_headless_shell-1234, absent here; browser tests skip locally.
+
+Owner in session (2026-10-09): 'Follow up on everything, and I'd like you to autonomously make sure you merge everything once it's ready' -> autonomous merge of stack 430 once the merge gate passes (all layers green at final heads, reviews published with dispositions, descriptions updated, stack linear). Status at this point: all 11 PRs in stack 430 and ready-for-review; #442-#468 linear, #469 pending integrator round; #459 typography job failed a timing self-test control (check_math_startup 'delayed control did not record the known 300 ms delay', job 113716869137) in code the stack does not touch; job re-run returns 403 like dispatch. main unchanged at 3213d651b.
