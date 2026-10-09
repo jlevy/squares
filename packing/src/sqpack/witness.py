@@ -42,6 +42,13 @@ def load_witness(path: Path, *, fallback_schema: Path | None = None) -> dict[str
         document = load_yaml(path.read_text(encoding="utf-8"))
     except yaml.YAMLError as error:
         raise WitnessError("malformed-input", f"invalid or ambiguous YAML: {error}") from error
+    return validate_witness_document(document, path=path, fallback_schema=fallback_schema)
+
+
+def validate_witness_document(
+    document: object, *, path: Path, fallback_schema: Path | None = None
+) -> dict[str, Any]:
+    """Validate a parsed Witness/v2 document with the file loader's checks."""
     if not isinstance(document, dict):
         raise WitnessError("malformed-input", "witness document is not an object")
     metadata = document.get("softschema")
@@ -842,11 +849,13 @@ def promote_rational(
     )
 
 
-def witness_document(witness: Mapping[str, Any], *, schema: str = "witness.schema.yaml") -> str:
-    """Serialize one generated witness with its enforced soft-schema envelope."""
+def witness_envelope(
+    witness: Mapping[str, Any], *, schema: str = "witness.schema.yaml"
+) -> dict[str, Any]:
+    """Build the canonical envelope without serializing already parsed geometry."""
     if not schema.strip():
         raise WitnessError("malformed-option", "schema path must be non-empty")
-    document = {
+    return {
         "softschema": {
             "contract": "packing.squares:Witness/v2",
             "schema": schema,
@@ -855,6 +864,11 @@ def witness_document(witness: Mapping[str, Any], *, schema: str = "witness.schem
         },
         "witness": deepcopy(dict(witness)),
     }
+
+
+def witness_document(witness: Mapping[str, Any], *, schema: str = "witness.schema.yaml") -> str:
+    """Serialize one generated witness with its enforced soft-schema envelope."""
+    document = witness_envelope(witness, schema=schema)
     return yaml.safe_dump(document, sort_keys=False, width=100, allow_unicode=True)
 
 
