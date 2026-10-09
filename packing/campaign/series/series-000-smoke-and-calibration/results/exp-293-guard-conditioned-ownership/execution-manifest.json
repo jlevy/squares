@@ -1,0 +1,74 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-07T20:16:44.390366+00:00",
+  "source_freeze": "registrationcommitresolved/recordedatlaunch",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_guard_conditioned_ownership",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_guard_conditioned_ownership",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Construction and fresh reconstruction both return closed_guard_exclusion with criterion_met=true for h1/512 after a completed h0point closure. One original1056/992row reconstruction and all17endpoint/calibration precede both contexts. Every original piece is accounted by exact closed outside-facet union or a proved whole-piece shortcut; Q0positivearea/freshstrictcheck always hold; the shared-point route freshlychecks every recoveredK over all survivingrows, while an exactlyempty fullforeignowner cover closes withoutunusedK recovery. Closure is an all-row empty foreignowner or a shared strictlyownedpoint. Full mathematical/context/alias payloads agree fresh. A complete pointmiss skips regional by monotonicproduct-guard inclusion and missesPRIMARY; point-onlysuccess is secondary. Allcumulativeworkcaps spanbothcontexts, storage131072pieces PERcontext/max2/64MiBoutput. Regional/custody/serialization resourcestops retain pointcandidate only, not acceptedregionalproof. Conditional originalparent scope; no global/census/capture/wholeI claim.",
+  "budget": "One worker; construction180s+fresh180s,combined360s TERM360/KILL370,4096MiB sampled currentRSS PERliveprocess. Original1024pieces/row/1048576vertices; conditional8192pieces/row/131072pieces PERcontext(max2). Across BOTHcontexts cumulatively:2097152conditionalclipoutputvertices (restrictedowner0wall+B+foreignoutside; unconditionalpreflight/Q0/K intermediates excluded/separatelybounded), outside-fastpath16M +recovery16M supportproducts,131072rawMinkowskivertexproducts,2Mstrictvertexpairs/8Mquadraticchecks. Core32/domain1024/commonK2048/intersection4096vertices, forbidden64facets;64MiBoutput and inheritedsourcebit/native/inputcaps unchanged.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "360",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/phase-execution.json"
+  ]
+}

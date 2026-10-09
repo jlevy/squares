@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 182
+count: 185
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 126
+  sessions_measured: 129
   sessions_unmeasured: 56
   attributed:
     rollups: 297
@@ -35,9 +35,9 @@ totals:
     one_off_code: 7280
     wall_hours: 713.93
 codex_receipts:
-  attributed: 79
-  unattributed: 3
-  measured: 82
+  attributed: 82
+  unattributed: 9
+  measured: 91
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -3193,3 +3193,63 @@ sessions:
     native harness data unavailable; Measured, not committed: the harness and sub-agent logs exist, but every rollup this repository's contract writes is keyed by model identifier, which this session's agent may not commit. The owner can add the rollups with close_session --update. The logs, on the run container under /root/.claude/projects/-home-user-squares/: the harness log 6b1ed85f-ba08-5540-8095-4fd66881916f.jsonl, which also spans work before this session, and the run operator's sub-agent log agent-a3c879fa91b776b5e.jsonl under its subagents/ folder, started at 2026-10-06T15:52Z.
   rollups: []
   codex_receipts: []
+- id: session-184
+  title: "n17 Proof Contracts and Instruments"
+  status: stopped
+  primary_bead: think-ipel
+  phases: 20
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T165726Z.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session184-through-20261007T165726Z.yaml
+    model_responses: 6609
+    agent_hours: 39.2
+    active_union_hours: 9.81
+    wall_hours: 9.81
+    snapshot_incomplete: true
+- id: session-185
+  title: "n17 Complete Coupling and Exact Replay"
+  status: stopped
+  primary_bead: think-tvxs
+  phases: 8
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session185-final-checkpoint.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session185-final-checkpoint.yaml
+    model_responses: 2405
+    agent_hours: 14.34
+    active_union_hours: 3.78
+    wall_hours: 3.78
+    snapshot_incomplete: true
+- id: session-186
+  title: "n17 Six-Hour Mathematical and Efficiency Continuation"
+  status: stopped
+  primary_bead: think-2mzl
+  phases: 12
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session186-final-checkpoint.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session186-final-checkpoint.yaml
+    model_responses: 4425
+    agent_hours: 21.42
+    active_union_hours: 5.83
+    wall_hours: 5.83
+    snapshot_incomplete: true

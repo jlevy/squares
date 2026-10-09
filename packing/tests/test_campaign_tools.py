@@ -791,6 +791,62 @@ def test_designated_finalization_phase_may_use_the_reserve(
     assert _session_problems(monkeypatch, session) == []
 
 
+def test_two_finalization_slices_may_share_the_protected_reserve(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    session = _bounded_session(max_cycles=3)
+    cast(dict[str, object], session["budget"])["finalization_minutes"] = 20
+    session["ended_at"] = "2026-08-24T01:00:00+00:00"
+    phases = cast(list[dict[str, object]], session["workflow_phases"])
+    phases[1] = _bounded_phase(
+        2,
+        status="completed",
+        objective="Retain the final evidence.",
+        start_minute=40,
+        clock_role="finalization",
+    )
+    final = _bounded_phase(
+        3,
+        status="stopped",
+        objective="Close the session with the retained evidence.",
+        start_minute=50,
+        clock_role="finalization",
+    )
+    final["deadline_at"] = "2026-08-24T01:00:00+00:00"
+    phases.append(final)
+
+    assert _session_problems(monkeypatch, session) == []
+
+
+def test_work_cannot_resume_after_a_finalization_slice(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    session = _bounded_session(max_cycles=3)
+    cast(dict[str, object], session["budget"])["finalization_minutes"] = 20
+    session["ended_at"] = "2026-08-24T01:00:00+00:00"
+    phases = cast(list[dict[str, object]], session["workflow_phases"])
+    phases[1] = _bounded_phase(
+        2,
+        status="completed",
+        objective="Retain the final evidence.",
+        start_minute=40,
+        clock_role="finalization",
+    )
+    resumed = _bounded_phase(
+        3,
+        status="stopped",
+        objective="Resume research after finalization.",
+        start_minute=50,
+    )
+    resumed["deadline_at"] = "2026-08-24T01:00:00+00:00"
+    phases.append(resumed)
+
+    assert (
+        "session-999-contract-test.md: finalization workflow phase 2 must be in "
+        "a contiguous finalization tail"
+    ) in _session_problems(monkeypatch, session)
+
+
 def test_malformed_phase_clock_is_reported_without_crashing(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

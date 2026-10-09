@@ -1,0 +1,10 @@
+{
+  "schema": "n17-registered-two-phase-execution/v1",
+  "started_at": "2026-10-07T16:02:47.614199+00:00",
+  "phase_runs": [
+    {"phase":"construction","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.probe_n17_pooled_feasible_center","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/descriptor.json","--max-seconds","60","--output","campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/certificate.json"],"returncode":0,"wall_seconds":0.19379937497433275},
+    {"phase":"fresh_verification","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.probe_n17_pooled_feasible_center","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/descriptor.json","--max-seconds","60","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/replay.json"],"returncode":0,"wall_seconds":0.2004212909960188}
+  ],
+  "wall_seconds": 0.39500629203394055
+}
+

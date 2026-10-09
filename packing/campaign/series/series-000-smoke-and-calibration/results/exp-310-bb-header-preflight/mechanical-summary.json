@@ -1,0 +1,74 @@
+{
+  "schema": "n17-bb-header-mechanical-summary/v1",
+  "status": "both_header_only_pass",
+  "source_commit": "2ada1fe11bbc8b929f08f26a61fb588d9ca3ed0d",
+  "source_files": 10,
+  "all_source_bytes_match": true,
+  "outer_seconds": 4.170011084002908,
+  "cleanup_complete": true,
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_bb_header",
+        "--manifest",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/inputs/C2-compact-manifest.json.gz",
+        "--compressed-sha256",
+        "d9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d",
+        "--manifest-id",
+        "505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57",
+        "--max-seconds",
+        "30",
+        "--output",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/c2-header.json"
+      ],
+      "ended_at": "2026-10-08T04:06:54.238823Z",
+      "name": "C2-HEADER_ONLY",
+      "returncode": 0,
+      "started_at": "2026-10-08T04:06:50.731027Z",
+      "status": "completed",
+      "wall_seconds": 3.5077044590143487
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_bb_header",
+        "--manifest",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/inputs/C1-compact-manifest.json.gz",
+        "--compressed-sha256",
+        "68125ef700518c52eb3e0a2c7e5e4b7e3ffed22cf920c64a8dbb3c46f407e560",
+        "--manifest-id",
+        "131e014393e8cc50ea643e38ae8a11d19bb3a1d133f3df23b54225d781a8db64",
+        "--max-seconds",
+        "30",
+        "--output",
+        "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/c1-header.json"
+      ],
+      "ended_at": "2026-10-08T04:06:54.582622Z",
+      "name": "C1-HEADER_ONLY",
+      "returncode": 0,
+      "started_at": "2026-10-08T04:06:54.239564Z",
+      "status": "completed",
+      "wall_seconds": 0.34295387502061203
+    }
+  ],
+  "headers": {
+    "C1": {
+      "status": "HEADER_ONLY_PASS",
+      "compressed_sha256": "68125ef700518c52eb3e0a2c7e5e4b7e3ffed22cf920c64a8dbb3c46f407e560",
+      "manifest_id": "131e014393e8cc50ea643e38ae8a11d19bb3a1d133f3df23b54225d781a8db64",
+      "complete_original_cell_halfplane_enclosure_checked": true
+    },
+    "C2": {
+      "status": "HEADER_ONLY_PASS",
+      "compressed_sha256": "d9260cd3b60570b506c7ace7e7130463f6880f07dddc28bdc63aba5da82b883d",
+      "manifest_id": "505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57",
+      "complete_original_cell_halfplane_enclosure_checked": true
+    }
+  },
+  "full_verification_passed": false,
+  "ordinary_exclusion_admitted": false,
+  "census_admission": false
+}

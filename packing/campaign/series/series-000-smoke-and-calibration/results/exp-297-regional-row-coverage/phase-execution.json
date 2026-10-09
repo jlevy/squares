@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T00:55:08.313479Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/execution-manifest.json",
+  "manifest_sha256": "1f298becfaa3ea969ddcbcb23b3d68e8dfbd0f5e9ba3bfe155b34fd65c984326",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_regional_row_coverage","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/descriptor.json","--max-seconds","180","--output","campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/certificate.json"],"ended_at":"2026-10-08T00:53:38.855300Z","name":"construction","returncode":0,"started_at":"2026-10-08T00:51:14.759561Z","status":"completed","wall_seconds":144.09386891702889},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_regional_row_coverage","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/descriptor.json","--max-seconds","180","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/replay.json"],"ended_at":"2026-10-08T00:55:08.312687Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T00:53:38.857328Z","status":"completed","wall_seconds":89.45411379198777}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T00:51:14.758709Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 233.55119633395225
+}
+

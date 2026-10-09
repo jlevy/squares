@@ -105,6 +105,40 @@ exploration:
 ---
 # X-048: Optimality Routes After n = 11
 
+## Current Selection: 6 October 2026
+
+The
+[W3 consolidation](../../../docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md)
+reconciles Sessions 182 and 183, the diagnostic packets and the current capture review.
+It governs the next selection under BC-418 (`think-tmz6`). The dated sections below
+retain the reasoning and frozen proposals; their snapshot figures and future-work lists
+are historical where the consolidation supplies a later disposition.
+
+The
+[ten-hour continuation plan](../../../docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md)
+and agenda-043 select BC-430 / `think-ipel` as its launch coordinator.
+The overnight session remains planned; no target or session clock starts with this
+consolidation.
+
+The verified bracket is now
+$4.66044275 < s(17) \le 4.6755300936045509516342148538535054$. R071 is replayed, the
+degree-18 side identity and first-order stress are accepted, and the capture-target
+local theorem is reviewed with its stated frame and radius.
+The latest certified residue is 36,784 states in 4,685 orbits under 58 admitted entries,
+with the endpoint surviving.
+H-275’s 26 of 29 counted closures describe its draw frame, not all 4,685 remaining
+orbits.
+
+The selected direction keeps global exclusion and family capture, with three parallel
+questions: proof interfaces and portable replay, a controlled capture discriminator
+alongside cheap widened-projection reconnaissance, and stratification of the actual hard
+exclusion tail. Completed adaptive-row reruns are not future work.
+C2 aimed splits depend on diagnosing the remaining stalls; C5 requires complete
+parent-cover certificates.
+The fixed R071 charge cannot deliver a material further advance.
+
+## Original Exploration and Dated Checkpoints
+
 The n = 11 proof supplies a useful architecture for another optimality proof: cover
 every packing, exclude most possibilities, capture the survivors in a region where a
 short exact argument forces the known side length.

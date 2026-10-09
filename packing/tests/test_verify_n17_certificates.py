@@ -238,14 +238,14 @@ def w7_stall_objects() -> tuple[dict[str, Any], dict[str, Any]]:
 
     The objects are the committed fixture, read rather than produced: the production is
     the test's whole cost, and the verifier's obligation is what a valid certificate holds,
-    not what a fresh one holds. `test_the_w7_fixture_is_what_the_producer_writes` keeps
-    the two equal."""
+    not what a fresh one holds. `test_the_w7_fixture_is_what_the_producer_writes` checks
+    the seed and scientific context match, and independently replays both witnesses."""
     seed, node, _, _ = load_certificate(W7_BINS8)
     return seed, node
 
 
 @pytest.mark.slow
-def test_the_w7_fixture_is_what_the_producer_writes() -> None:
+def test_the_w7_fixture_is_what_the_producer_writes(tmp_path: Path) -> None:
     frame = mask0_tool.n17_unique_frame()
     mask = sorted(frame.cell_names.index(cell) for cell in W7)
     budget = Budget(time.monotonic() + 600, 5_000_000)
@@ -254,7 +254,35 @@ def test_the_w7_fixture_is_what_the_producer_writes() -> None:
     )
     seed, node = w7_stall_objects()
     assert canonical_bytes(production.seed) == canonical_bytes(seed)
-    assert canonical_bytes(production.node) == canonical_bytes(node)
+    # Compression may choose a different valid witness. The historical certificate
+    # remains immutable; the newly proposed witness must pass its own full replay.
+    for key in (
+        "node_id",
+        "mask",
+        "U",
+        "B",
+        "parent",
+        "constraints",
+        "guard_source",
+        "closed",
+        "terminal",
+        "contradiction",
+    ):
+        assert production.node[key] == node[key], key
+    assert production.node["initial"] == node["initial"]
+    assert production.node["final_state"]["world"] == node["final_state"]["world"]
+    saved = tmp_path / "fresh-w7"
+    save_certificate(saved, production.seed, production.node)
+    saved_seed, saved_node, seed_id, node_id = load_certificate(saved)
+    assert canonical_bytes(saved_seed) == canonical_bytes(production.seed)
+    assert canonical_bytes(saved_node) == canonical_bytes(production.node)
+    replay = kernel_verifier.verify_objects(saved, kernel_verifier.cover_cells())
+    assert replay["certificate"] == {"seed_sha256": seed_id, "node_sha256": node_id}
+    assert replay["closed"] is False
+    assert replay["closure"] is None
+    assert replay["mask"] == mask
+    assert replay["bins"] == 8
+    assert replay["counts"]["steps"] == len(production.node["steps"])
     # The control for the partner-row test below: the undoctored fixture verifies, as a
     # stall. It lives here, beside the build, so the fast test pays for one replay.
     assert (

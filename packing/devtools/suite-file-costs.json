@@ -56,6 +56,7 @@
     "packing/tests/test_audit_ds7_lower_bounds.py": 2.122,
     "packing/tests/test_audit_evand_mixed_covers.py": 11.287,
     "packing/tests/test_audit_n11_lean.py": 0.055,
+    "packing/tests/test_audit_n17_certificate_dependencies.py": 2.241,
     "packing/tests/test_audit_n54_source_formula.py": 1.114,
     "packing/tests/test_audit_s12_reweighted.py": 0.071,
     "packing/tests/test_audit_valid7_independent.py": 10.694,
@@ -91,6 +92,7 @@
     "packing/tests/test_check_angle_near45_triangle_control.py": 0.437,
     "packing/tests/test_check_angle_near_axis_control.py": 0.631,
     "packing/tests/test_check_archive_annotations.py": 8.581,
+    "packing/tests/test_check_checkout_imports.py": 0.354,
     "packing/tests/test_check_class_record_claims.py": 0.509,
     "packing/tests/test_check_closed_polygon_cover.py": 0.174,
     "packing/tests/test_check_declared_bounds.py": 1.124,
@@ -107,9 +109,19 @@
     "packing/tests/test_check_math_markup.py": 5.779,
     "packing/tests/test_check_math_spans.py": 0.012,
     "packing/tests/test_check_n11_selection_routing.py": 0.006,
+    "packing/tests/test_check_n17_bb_header.py": 0.263,
     "packing/tests/test_check_n17_capacity_one_cover.py": 0.605,
     "packing/tests/test_check_n17_catalogue_polynomial.py": 0.573,
+    "packing/tests/test_check_n17_centered_cap_standing.py": 10.739,
+    "packing/tests/test_check_n17_global_contact_budget.py": 0.288,
+    "packing/tests/test_check_n17_incircle_disk_projection.py": 0.821,
+    "packing/tests/test_check_n17_incircle_projection_redundancy.py": 1.035,
+    "packing/tests/test_check_n17_n11_envelope_representation.py": 2.797,
+    "packing/tests/test_check_n17_n11_envelope_windows.py": 1.893,
+    "packing/tests/test_check_n17_normalized_contact_rank_filter.py": 0.441,
     "packing/tests/test_check_n17_slider_coverage.py": 1.579,
+    "packing/tests/test_check_n17_two_center_children.py": 1.126,
+    "packing/tests/test_check_n17_widened_apex.py": 3.418,
     "packing/tests/test_check_near45_localization.py": 0.129,
     "packing/tests/test_check_p12_escape_candidate.py": 0.033,
     "packing/tests/test_check_print_layout.py": 0.614,
@@ -243,6 +255,7 @@
     "packing/tests/test_hull_kernel_caches.py": 1.825,
     "packing/tests/test_hull_kernel_case2095.py": 1.037,
     "packing/tests/test_hull_kernel_frame.py": 1.053,
+    "packing/tests/test_hull_kernel_hull_pull.py": 0.004,
     "packing/tests/test_hull_kernel_mask0.py": 1.449,
     "packing/tests/test_hull_kernel_minkowski.py": 0.196,
     "packing/tests/test_hull_kernel_octagon.py": 0.516,
@@ -257,6 +270,7 @@
     "packing/tests/test_independent_ceiling_reader.py": 0.012,
     "packing/tests/test_independent_five_dot_union.py": 0.28,
     "packing/tests/test_index_n11_capture_source.py": 0.034,
+    "packing/tests/test_inspect_n17_subpattern_relevance.py": 0.347,
     "packing/tests/test_intake_sweep.py": 1.875,
     "packing/tests/test_integral_piercing.py": 0.029,
     "packing/tests/test_integrity_ceremony_contract.py": 6.017,
@@ -381,6 +395,7 @@
     "packing/tests/test_n17_root_certificate_producer.py": 0.007,
     "packing/tests/test_n17_scheduled_row_support.py": 0.043,
     "packing/tests/test_n17_selective_halving.py": 0.774,
+    "packing/tests/test_n17_shared_centre_lp.py": 16.098,
     "packing/tests/test_n17_weighted_certificate.py": 0.17,
     "packing/tests/test_n17_weighted_certificate_child.py": 1.423,
     "packing/tests/test_n17_weighted_certificate_parallel.py": 1.65,
@@ -431,8 +446,10 @@
     "packing/tests/test_price_stage1_chunks.py": 0.022,
     "packing/tests/test_probe_valid7_fixes.py": 0.002,
     "packing/tests/test_process_memory.py": 0.053,
+    "packing/tests/test_produce_n17_conditional_owned_hull.py": 0.2,
     "packing/tests/test_produce_threshold_certificate.py": 0.157,
     "packing/tests/test_profile_author_measure_checkers.py": 0.011,
+    "packing/tests/test_profile_n17_exact_replay.py": 1.342,
     "packing/tests/test_profile_n17_kernel_memory.py": 0.989,
     "packing/tests/test_profile_n17_partner_memo.py": 2.116,
     "packing/tests/test_promote_contacts.py": 0.825,
@@ -456,6 +473,7 @@
     "packing/tests/test_read_tier_walls.py": 0.016,
     "packing/tests/test_readme.py": 0.087,
     "packing/tests/test_recent_results.py": 3.05,
+    "packing/tests/test_reconcile_n17_issue_patterns.py": 7.538,
     "packing/tests/test_rectangle_ceiling.py": 1.228,
     "packing/tests/test_rectangle_density.py": 0.669,
     "packing/tests/test_rectangle_density_cli_golden.py": 1.352,
@@ -523,6 +541,7 @@
     "packing/tests/test_run_h124_cover.py": 0.647,
     "packing/tests/test_run_n17_bb_parallel.py": 0.011,
     "packing/tests/test_run_owner_footprint_cover.py": 2.16,
+    "packing/tests/test_run_registered_phases.py": 0.693,
     "packing/tests/test_run_relational_colgen.py": 0.048,
     "packing/tests/test_run_residual_cover_pilot.py": 0.518,
     "packing/tests/test_rung_figures.py": 7.808,
@@ -552,6 +571,7 @@
     "packing/tests/test_site_assets.py": 5.153,
     "packing/tests/test_site_atlas_views.py": 4.692,
     "packing/tests/test_site_browser.py": 0.002,
+    "packing/tests/test_site_case_records.py": 0.427,
     "packing/tests/test_site_documents.py": 70.009,
     "packing/tests/test_site_drawing_hover.py": 10.337,
     "packing/tests/test_site_forwarders.py": 22.204,
@@ -560,9 +580,11 @@
     "packing/tests/test_site_hover_motion.py": 0.696,
     "packing/tests/test_site_ladders.py": 6.627,
     "packing/tests/test_site_math.py": 0.645,
+    "packing/tests/test_site_math_faces.py": 0.39,
     "packing/tests/test_site_merge.py": 0.433,
     "packing/tests/test_site_preview_checks.py": 0.023,
     "packing/tests/test_site_project_tallies.py": 17.607,
+    "packing/tests/test_site_result_filters.py": 0.898,
     "packing/tests/test_site_scripts.py": 0.012,
     "packing/tests/test_site_text_tokens.py": 0.39,
     "packing/tests/test_site_urls.py": 4.776,
@@ -673,6 +695,304 @@
           "report": "packing/devtools/suite-file-cost-admissions/packing-methods-2026-10-08.json",
           "provenance": {},
           "tests": 10
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_known_best_squish.py",
+        "packing/tests/test_source_supersession.py",
+        "packing/tests/test_squish_receipt_binding.py",
+        "packing/tests/test_squish_upper_bound_packets.py",
+        "packing/tests/test_translation_escape_update.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/squish-401-reported-2026-10-07.json",
+          "provenance": {},
+          "tests": 54
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_squish_upper_bound_receipts.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/squish-401-confirmation-2026-10-07.json",
+          "provenance": {},
+          "tests": 16
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_n11_envelope_windows.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/envelope-ci-repair-2026-10-08.json",
+          "provenance": {},
+          "tests": 36
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_inspect_n17_subpattern_relevance.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/relevance-ci-repair-2026-10-08.json",
+          "provenance": {},
+          "tests": 16
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_audit_n17_certificate_dependencies.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_audit_n17_certificate_dependencies.json",
+          "provenance": {},
+          "tests": 44
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_checkout_imports.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_checkout_imports.json",
+          "provenance": {},
+          "tests": 4
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_bb_header.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_bb_header.json",
+          "provenance": {},
+          "tests": 23
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_centered_cap_standing.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_centered_cap_standing.json",
+          "provenance": {},
+          "tests": 45
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_global_contact_budget.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_global_contact_budget.json",
+          "provenance": {},
+          "tests": 34
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_incircle_disk_projection.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_incircle_disk_projection.json",
+          "provenance": {},
+          "tests": 15
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_incircle_projection_redundancy.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_incircle_projection_redundancy.json",
+          "provenance": {},
+          "tests": 24
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_n11_envelope_representation.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_n11_envelope_representation.json",
+          "provenance": {},
+          "tests": 28
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_normalized_contact_rank_filter.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_normalized_contact_rank_filter.json",
+          "provenance": {},
+          "tests": 32
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_two_center_children.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_two_center_children.json",
+          "provenance": {},
+          "tests": 29
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_n17_widened_apex.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_check_n17_widened_apex.json",
+          "provenance": {},
+          "tests": 18
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_hull_kernel_hull_pull.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_hull_kernel_hull_pull.json",
+          "provenance": {},
+          "tests": 6
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_produce_n17_conditional_owned_hull.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_produce_n17_conditional_owned_hull.json",
+          "provenance": {},
+          "tests": 39
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_profile_n17_exact_replay.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_profile_n17_exact_replay.json",
+          "provenance": {},
+          "tests": 33
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_run_registered_phases.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-stack-ci-2026-10-08/test_run_registered_phases.json",
+          "provenance": {},
+          "tests": 39
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_reconcile_n17_issue_patterns.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-issue-reconciliation-2026-10-08.json",
+          "provenance": {},
+          "tests": 5
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_n17_shared_centre_lp.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n17-shared-centre-endpoint-2026-10-08.json",
+          "provenance": {},
+          "tests": 35
         }
       ]
     },

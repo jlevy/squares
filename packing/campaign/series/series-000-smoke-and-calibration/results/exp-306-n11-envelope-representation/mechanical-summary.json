@@ -1,0 +1,35 @@
+{
+  "schema": "n17-finite-discriminator-summary/v1",
+  "source_commit": "5e15b712f94b8950f9e87a5e4838efdc1b4bb2d3",
+  "source_files": 12,
+  "all_source_bytes_match": true,
+  "outer_seconds": 120.13727687502978,
+  "cleanup_complete": true,
+  "ordinary_census_admission": false,
+  "global_optimality": false,
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_envelope_representation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/certificate.json"
+      ],
+      "name": "construction",
+      "returncode": null,
+      "started_at": "2026-10-08T03:05:52.623287Z",
+      "status": "running",
+      "wall_seconds": null
+    }
+  ],
+  "status": "incomplete",
+  "certificate_exists": false,
+  "fresh_phase_started": false,
+  "mathematical_verdict_available": false,
+  "architecture_killed": false
+}

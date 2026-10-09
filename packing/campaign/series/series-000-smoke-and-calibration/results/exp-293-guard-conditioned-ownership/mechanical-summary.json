@@ -1,0 +1,67 @@
+{
+  "status": "criterion_missed",
+  "criterion_met": false,
+  "point_guard_excluded": false,
+  "point_guard_exclusion_proved": false,
+  "regional_context_started": false,
+  "regional_skip_reason": "complete_point_miss_monotonic_inclusion",
+  "declared_guard_exclusion_proved": false,
+  "closure": null,
+  "original_endpoint_control": {"all17_retained":true,"conditional_endpoint_retention_required":false,"family_disjoint":true,"witnesses":[{"label":1,"owner":0,"row_indices":[0,63]},{"label":2,"owner":4,"row_indices":[0,63]},{"label":3,"owner":6,"row_indices":[0,63]},{"label":4,"owner":2,"row_indices":[0,63]},{"label":5,"owner":1,"row_indices":[0,63]},{"label":6,"owner":12,"row_indices":[0,31]},{"label":7,"owner":7,"row_indices":[0,63]},{"label":8,"owner":3,"row_indices":[0,63]},{"label":9,"owner":14,"row_indices":[23]},{"label":10,"owner":5,"row_indices":[23]},{"label":11,"owner":18,"row_indices":[23]},{"label":12,"owner":20,"row_indices":[23]},{"label":13,"owner":8,"row_indices":[23]},{"label":14,"owner":21,"row_indices":[23]},{"label":15,"owner":9,"row_indices":[0,63]},{"label":16,"owner":13,"row_indices":[32]},{"label":17,"owner":11,"row_indices":[0,63]}]},
+  "all_original_rows_checked": 1056,
+  "all_foreign_rows_conditioned": 992,
+  "input_vertices_parsed": 348153,
+  "original_reconstruction_shared": true,
+  "work": {"context_piece_baseline":0,"fastpath_support_products":1226084,"generated_clip_output_vertices":4244,"intersection_vertex_pairs":13230,"minimum_support_products":65616,"raw_minkowski_vertex_products":3072,"retained_conditional_pieces":83412,"strict_quadratic_checks":171888,"strict_vertex_pairs":42972,"subtraction_branches":88800},
+  "resource_assurance": {"conditional_cover_clip_counter_excludes":["unconditional_original_wall_preflight","Q0_clips","common_K_clips"],"conditional_cover_clip_counter_scope":["owner0_restricted_angle_wall","owner0_position_box","foreign_outside_facets"],"required":"outer wall ceiling and sampled current RSS per live owned process","trusted_intersection_internal_operations_capped":false,"unreduced_integer_product_bit_cap":false},
+  "container": {"B":"1","inner_V":"935106018721/200000000000","offset":"93981279/400000000000","outer_U":"1169/250"},
+  "parent_custody": {
+    "accepted_parent_premises": {
+      "all49_zero_bounds": {"content_sha256":"dd18810a848d9b060c9844fbe0056e02ac5fd1ad8863a0c2ca2b96788c9679d1","json_path":"$.intervals","receipt":"packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"},
+      "frame": {"content_sha256":"eddf1317be0cb46e52d29121dd757d99846c29c04a4ce982b5b0254f3ec6f353","json_path":"$.custody.parent_replay.frame","receipt":"packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"},
+      "full17_endpoint_geometry": {"content_sha256":"8134186c0d2b81c3f5917d60f0d1f85b88075f5d620edacb06979f13d0c2d07d","json_path":"$.custody.input_control.endpoint_roster","receipt":"packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"},
+      "other_owner_final_geometry": {"content_sha256":"2eee2bb90b7407178c147ad2423d68f8122f5bbd1d998d07243bece46573c046","json_path":"$.final_state","node_sha256":"687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82","saved_node":"packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz","subset":"cells/groups excluding owner0"},
+      "root": {"content_sha256":"e3b6e37442b24e5e6b90aa0cae03999f3b1502ca469d6c6e4fb8861579b5c48f","json_path":"$.root","receipt":"packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json"}
+    },
+    "compressed_sha256": {"packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz":"f2a11e787dc62ae2652734d01c4fbe90fcfc3e85d66aa52b74fd8ff52a02e2f2","packing/campaign/retained/session-184-n17-numeric-cap-readiness/seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz":"d10a38b312375a21e7aec2ef77726eaa9ae3ea9d8381de9d3e979921877005f4"},
+    "h290_receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-277-numeric-checkpoint-capture/receipt.json",
+    "h290_receipt_sha256": "ae51c2d231e9b40f4047741e47ff92f71ddb21bcd5d3e442d122cbca17c50a19",
+    "node_sha256": "687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82",
+    "seed_sha256": "375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d",
+    "steps": 16,
+    "typed_reference_context": {"node_id":"n17-capture-pilot","step_owners":[0,1,2,3,4,5,6,7,8,9,11,13,14,18,20,21]}
+  },
+  "schema": "n17-guarded-metadata-review/v1",
+  "review_scope": "Retained receipt fields and byte identities only; no geometry calculation or replay.",
+  "fresh_verification_passed": true,
+  "mathematical_payloads_equal": true,
+  "input_byte_joins": {"parent_descriptor":true,"centered_receipt":true,"feasible_descriptor":true,"feasible_certificate":true,"feasible_replay":true},
+  "source_revision": "0f7b96c7a7457c19445de7366d4c77224f7d917f",
+  "relevant_provenance_dirty": false,
+  "owners": {
+    "1": {"recovered_owned_vertices":21,"rows":64,"empty_rows":0,"retained_conditional_pieces":3511},
+    "11": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":11935},
+    "12": {"recovered_owned_vertices":0,"rows":32,"empty_rows":0,"retained_conditional_pieces":32},
+    "13": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":4756},
+    "14": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":3486},
+    "18": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":4693},
+    "2": {"recovered_owned_vertices":21,"rows":64,"empty_rows":0,"retained_conditional_pieces":1810},
+    "20": {"recovered_owned_vertices":34,"rows":64,"empty_rows":0,"retained_conditional_pieces":16527},
+    "21": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":8854},
+    "3": {"recovered_owned_vertices":13,"rows":64,"empty_rows":0,"retained_conditional_pieces":1962},
+    "4": {"recovered_owned_vertices":29,"rows":64,"empty_rows":0,"retained_conditional_pieces":1388},
+    "5": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":4823},
+    "6": {"recovered_owned_vertices":60,"rows":64,"empty_rows":0,"retained_conditional_pieces":457},
+    "7": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":6327},
+    "8": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":8304},
+    "9": {"recovered_owned_vertices":0,"rows":64,"empty_rows":0,"retained_conditional_pieces":4546}
+  },
+  "owner0_owned_vertices": 4,
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_guard_conditioned_ownership","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/descriptor.json","--max-seconds","180","--output","campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/certificate.json"],"ended_at":"2026-10-07T20:29:56.812926Z","name":"construction","returncode":0,"started_at":"2026-10-07T20:28:41.670639Z","status":"completed","wall_seconds":75.14137691701762},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_guard_conditioned_ownership","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/descriptor.json","--max-seconds","180","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/replay.json"],"ended_at":"2026-10-07T20:31:13.075640Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-07T20:29:56.814746Z","status":"completed","wall_seconds":76.25986425002338}
+  ],
+  "supervision": {"status":"COMPLETED","reason":"normal_exit","returncode":0,"wall_seconds":151.7778134580003,"cleanup_complete":true,"samples":534,"maximum_sampled_current_rss_bytes_by_pid":{"639":28475392,"641":576143360,"1796":642056192,"3036":5668864},"rss_enforcement":"sampled per live process in owned group; not allocation-time hardcap"},
+  "receipt_bytes": {"replay.json":9418633,"certificate.json":9418479,"execution-manifest.json":4641,"launch.json":2028,"descriptor.json":1261,"phase-execution.json":1893,"supervision.json":1526}
+}
+
