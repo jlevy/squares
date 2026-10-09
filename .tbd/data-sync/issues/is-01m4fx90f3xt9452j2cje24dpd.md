@@ -5,7 +5,7 @@ title: Publish the exact-side collection as a web-only report
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 spec_path: docs/project/specs/active/plan-2026-10-06-exact-side-values.md
 delegate: codex@spud10.local
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m4eszf0kjvjadgn77f0hy2pc
 hold: null
 hold_until: null
 created_at: 2026-10-09T08:43:03.009Z
-updated_at: 2026-10-09T17:48:07.055Z
+updated_at: 2026-10-09T20:19:01.929Z
 started_at: 2026-10-09T08:43:05.688Z
 ---
 Publish the exact-side collection as a clean HTML report on the Papers page. The user retired PDF packaging and excessive superseded rows from publication. Preserve the complete canonical source: 324 current entries, 175 historical records, 519 coefficient vectors and 6,273 integer strings. Publish all 324 current entries, including 321 current exact polynomials, plus 14 additional source records: seven outside-frontier, three source-invalid and four unreconciled V0/C0. Published payloads contain 339 vectors and 2,152 strings. Omit 161 superseded history rows and 19 redundant current notes only from HTML, Markdown and lazy payloads; preserve all 673 n=83 coefficients and scientific assurance. Keep the responsive searchable catalogue, complete web report and coefficient downloads without report PDF builds. Guard obsolete unpublished payload URL retirement and independently verify every retained field and coefficient. Capture actual amended-head CI on PR435 and beads, preserving dated parent PR403 and full-source qualification separately. No PR merge or mathematical admission belongs to this slice. Remaining contact-system driver, numeric identities and geometry/Lean work stay tracked.
@@ -166,3 +166,7 @@ Maintained inventory-only source audit passes at 199,425,515/201,326,592 bytes, 
 Selected CI endpoint is 2026-10-09T17:39:59Z. This publication slice from 16:39:40Z took 1 h 0 m 19 s, recorded separately from the prior shared recovery interval and not summed across layers or presented as solver CPU. Protected final evidence and exact PR readbacks live under agent-evidence/polynomial-catalogue-01a118e4/recovery-2026-10-08, outside disposable scratch: publication-trim-10c-final-ci-receipt.json, publication-trim-10c-custody-audit-receipt.json, publication-trim-web-measure-10ce3575e.json, trim-10c-web-artifact-audit-receipt.json, pr435-final-trim-readback.json and pr403-final-trim-readback.json.
 
 Remaining scientific work is unchanged: current identities n=29/think-je8y, n=55/think-phh8 and n=71/think-1blg; new-pose ideal/contact routes; four source-only roots awaiting geometry, field-to-side and Lean under #419/think-8sm2; eleven unadmitted legacy claims. Next selected math entry is W7 think-s6np reusable active-contact exporter, then an independently contact-derived n=11 octic control, then one preregistered bounded n=102 W6 under think-ohhz. This presentation amendment delivers no new solver, identity, geometry, optimum or proof result. Keep the feature beads in progress until the corresponding work merges.
+
+Upstream record refresh started — 2026-10-09T20:16:15.292030+00:00
+
+User requested fetching origin/main and updating records after recent merges. Fresh origin/main is d3860c97a7037203701bcf262990ea0dee3a92dc, up from 6a0499ba4ed83e147488b2ee584af500207d9d1f, with 549 changed files including source imports, witness/frontier records and browser/validation contracts. Existing formal stack 447 remains open: PR403 c1d3aab9e parent and PR435 10ce3575e child. Use the official merge-upstream stack sync, reconcile all newly merged source data through maintained producers, retain the web superseded filters and PDF retirement, and qualify actual resulting heads. Root owns integration/records/gates/PR and bead writes; three pinned-ref lanes cover semantic review, producer planning/repairs and CI administration. Earlier head-specific passes and failures remain dated. No PR landing or new solver research is requested. Evidence and the slice plan are protected under upstream-2026-10-09 outside disposable scratch.
