@@ -30,9 +30,17 @@ const atlas = load();
 /**
  * @param {number} n
  * @param {number} per
- * @returns {AtlasTrianglePlace}
+ * @returns {Omit<AtlasTrianglePlace, "gap" | "segmentLine" | "segmentColumn">}
  */
-const place = (n, per) => ({ ...atlas.place(n, per) });
+const place = (n, per) => {
+  const {
+    gap: _gap,
+    segmentLine: _line,
+    segmentColumn: _column,
+    ...position
+  } = atlas.place(n, per);
+  return position;
+};
 
 /**
  * Cases 1 to `last` by line, each line the cases on it from the left with their columns.
@@ -116,6 +124,8 @@ void test("each size fits as many scaled cells as the shared grid minimum allows
   assert.equal(atlas.perLineAt(358, 73.6, 19, 1, 5.6), 4);
   assert.equal(atlas.perLineAt(358, 73.6, 19, 1.5, 5.6), 3);
   assert.equal(atlas.perLineAt(10, 108, 19, 1.5, 8), 1);
+  assert.equal(atlas.perLineAt(4000, 108, Number.POSITIVE_INFINITY, 1, 8), 34);
+  assert.equal(atlas.perLineAt(4200, 108, Number.POSITIVE_INFINITY, 1, 8), 36);
   assert.equal(atlas.perLineAt(1200, 108, 19, Number.NaN, 8), 10);
   for (let width = 300; width <= 2400; width += 7) {
     for (const most of [19, 35]) {
@@ -218,6 +228,85 @@ void test("every perfect square ends its row in the last occupied column, at any
       );
     }
   }
+});
+
+void test("whole grid segments stay inline when they fit, otherwise wrap on the right", () => {
+  const starts = Object.fromEntries(
+    [1, 2, 6, 12, 20, 30, 42, 56, 72, 90, 111, 133, 157, 183, 212, 242, 274, 308].map((n) => [
+      atlas.row(n),
+      n,
+    ]),
+  );
+  // Independent segment pixel layout: 100px tiles, 10px gutters, 80px drawings.
+  for (let per = 1; per <= 40; per += 1) {
+    let firstLine = 1;
+    const occupiedLines = new Set();
+    const width = per * 100 + (per - 1) * 10;
+    for (let k = 1; k <= 18; k += 1) {
+      const first = (k - 1) ** 2 + 1;
+      const boundary = starts[k];
+      assert.ok(boundary !== undefined, "every row has a retained grid threshold");
+      const prefix = boundary - first;
+      const count = 2 * k - 1;
+      const inline = count * 100 + (count - 1) * 10 + (prefix > 0 ? 40 : 0) <= width;
+      const groups = [
+        Array.from({ length: prefix }, (_, i) => first + i),
+        Array.from({ length: k * k - boundary + 1 }, (_, i) => boundary + i),
+      ];
+      let segmentFirstLine = firstLine;
+      for (const [index, group] of groups.entries()) {
+        const localColumns = Math.min(per, group.length);
+        for (let offset = 0; offset < group.length; offset += per) {
+          const line = group.slice(offset, offset + per);
+          for (const [within, n] of line.entries()) {
+            const globalLine = inline ? firstLine : segmentFirstLine + offset / per;
+            occupiedLines.add(atlas.place(n, per, starts).line);
+            const column = inline
+              ? n - first + 1
+              : index === 1
+                ? per - line.length + within + 1
+                : within + 1;
+            assert.deepEqual(
+              { ...atlas.place(n, per, starts) },
+              {
+                row: k,
+                line: globalLine,
+                column,
+                opens: k > 1 && globalLine === firstLine,
+                gap: inline && index === 1 && prefix > 0,
+                segmentLine: offset / per + 1,
+                segmentColumn:
+                  index === 1 && !inline ? localColumns - line.length + within + 1 : within + 1,
+              },
+              `n=${n}, per=${per}`,
+            );
+          }
+        }
+        if (!inline) {
+          segmentFirstLine += Math.ceil(group.length / per);
+        }
+      }
+      firstLine = inline ? firstLine + 1 : segmentFirstLine;
+      if (k < 18) {
+        assert.equal(
+          atlas.place(k * k + 1, per, starts).line,
+          atlas.place(k * k, per, starts).line + 1,
+          `row ${k + 1} follows the prior physical line without spacer lines`,
+        );
+      }
+    }
+    assert.deepEqual(
+      [...occupiedLines],
+      Array.from({ length: firstLine - 1 }, (_, index) => index + 1),
+      `every physical line is occupied at ${per} columns`,
+    );
+  }
+  // Row 8 has six non-grid cases and nine grid cases. No grid case may share
+  // its final non-grid line at four columns; the grid occupies two full right rows.
+  assert.equal(atlas.place(56, 4, starts).column, 1);
+  assert.equal(atlas.place(56, 4, starts).line, atlas.place(55, 4, starts).line + 1);
+  assert.equal(atlas.place(100, 4, starts).column, 4);
+  assert.equal(atlas.place(56, 16, starts).gap, true);
 });
 
 void test("the cases read in order, left to right and top to bottom, one to a place", () => {

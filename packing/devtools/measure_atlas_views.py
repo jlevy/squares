@@ -171,15 +171,27 @@ def is_square(n: int) -> bool:
     return n >= 1 and math.isqrt(n) ** 2 == n
 
 
-def row_lines(k: int, per: int) -> tuple[int, ...]:
-    """How many tiles each line of row k holds when a line holds `per`: one line of
-    2k - 1 where that fits, else full lines and then what is left over, in reading
-    order. Nineteen tiles at eight a line are 8, 8 and 3."""
+def row_lines(k: int, per: int, first_grid: int | None = None) -> tuple[int, ...]:
+    """Tile counts in a bound row, allowing half a drawing before its grid suffix.
+
+    Keep a complete mixed row inline only when its two segments and extra gap fit.
+    Otherwise wrap the non-grid segment first, then the grid segment on separate
+    right-aligned lines. Without a threshold, use ordinary full lines.
+    """
     if k < 1 or per < 1:
         raise ValueError(f"no row {k} at {per} a line")
     tiles = 2 * k - 1
-    lines = -(-tiles // per)
-    return (*([per] * (lines - 1)), tiles - (lines - 1) * per)
+    prefix = tiles if first_grid is None else first_grid - (k - 1) ** 2 - 1
+    grid = tiles - prefix
+    if tiles + int(prefix > 0 and grid > 0) <= per:
+        return (tiles,)
+    lines: list[int] = []
+    for count in (prefix, grid):
+        remaining = count
+        while remaining:
+            lines.append(min(per, remaining))
+            remaining -= lines[-1]
+    return tuple(lines)
 
 
 def _lines(tiles: Sequence[dict[str, Any]]) -> list[list[dict[str, Any]]]:
@@ -195,8 +207,8 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
     """What is wrong with a settled layout, in either view: the page runs past the
     window, a tile stands outside the block or over another, or the cases are out of
     order reading left to right and top to bottom. In the triangle also: a row cut into
-    lines other than `row_lines` gives, or any line that does not start at the block's
-    left edge, including a row that fits and a wrapped row's short last line."""
+    lines other than `row_lines` gives, non-grid lines off the left edge, separate grid
+    lines off the right edge, or a segment separator unlike half a drawing."""
     problems: list[str] = []
     tiles: list[dict[str, Any]] = report["tiles"]
     if not tiles:
@@ -231,24 +243,56 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
     if not per:
         return [*problems, "the triangle has no tiles to a line"]
     last = max(reading)
+    starts = {row_of(tile["n"]): tile["n"] for tile in tiles if tile.get("grid_from")}
     by_row: dict[int, list[list[int]]] = {}
     for line in lines:
         k = row_of(line[0]["n"])
         by_row.setdefault(k, []).append([tile["n"] for tile in line])
         if len({row_of(tile["n"]) for tile in line}) > 1:
             problems.append(f"the line of n = {line[0]['n']} holds two rows")
-        first = line[0]
-        if abs(first["left"] - cells["left"]) > EDGE:
-            problems.append(
-                f"row {k}'s line of n = {first['n']} starts "
-                f"{first['left'] - cells['left']}px in"
-            )
+        separated = 2 * k - 1 + int(starts.get(k, k * k + 1) > (k - 1) ** 2 + 1) > per
+        grid_line = separated and line[0]["n"] >= starts.get(k, k * k + 1)
+        edge = line[-1]["right"] if grid_line else line[0]["left"]
+        expected_edge = cells["right"] if grid_line else cells["left"]
+        if abs(edge - expected_edge) > EDGE:
+            side = "right" if grid_line else "left"
+            if grid_line:
+                problems.append(f"row {k}'s line of n = {line[0]['n']} misses the {side} edge")
+            else:
+                problems.append(
+                    f"row {k}'s line of n = {line[0]['n']} starts {edge - expected_edge}px in"
+                )
     for k, found in sorted(by_row.items()):
         if k * k > last:
             continue
         sizes = tuple(len(line) for line in found)
-        if sizes != row_lines(k, per):
-            problems.append(f"row {k} is set {sizes}, not {row_lines(k, per)}")
+        expected = row_lines(k, per, starts.get(k))
+        if sizes != expected:
+            problems.append(f"row {k} is set {sizes}, not {expected}")
+    if "gap_px" in report:
+        by_n = {tile["n"]: tile for tile in tiles}
+        for k, n in starts.items():
+            first, previous = by_n[n], by_n.get(n - 1)
+            if previous is None or row_of(n - 1) != k:
+                continue
+            if abs(first["top"] - previous["top"]) <= EDGE:
+                continue
+            gap = first["top"] - previous["bottom"]
+            expected_gap = report["gap_px"]
+            if abs(gap - expected_gap) > EDGE:
+                problems.append(
+                    f"the vertical gap before n = {n} is {gap}px, not {expected_gap}px"
+                )
+        for line in lines:
+            for left, right in itertools.pairwise(line):
+                expected_gap = report["gap_px"]
+                if right.get("grid_from"):
+                    expected_gap += right["drawing"]["width"] / 2
+                gap = right["left"] - left["right"]
+                if abs(gap - expected_gap) > EDGE:
+                    problems.append(
+                        f"the gap before n = {right['n']} is {gap}px, not {expected_gap}px"
+                    )
     return problems
 
 

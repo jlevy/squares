@@ -13,7 +13,14 @@
       globalThis.atlasViewsSeen?.push({
         view: root.dataset.siteAtlasView === "triangle" ? "triangle" : "grid",
         size: root.dataset.siteAtlasSize ?? "medium",
-        per_line: String(getComputedStyle(cells).gridTemplateColumns.split(/\s+/).length),
+        per_line: String(
+          Math.round(
+            (cells.getBoundingClientRect().width +
+              Number.parseFloat(getComputedStyle(cells).columnGap)) /
+              ((cells.querySelector(".site-atlas-cell")?.getBoundingClientRect().width ?? 1) +
+                Number.parseFloat(getComputedStyle(cells).columnGap)),
+          ),
+        ),
         tiles: [...cells.querySelectorAll(".site-atlas-cell")].filter(
           (tile) => tile.getClientRects().length > 0,
         ).length,

@@ -371,9 +371,11 @@ FILM_POSTER = REPO / "packages" / "workbench" / "assets" / "ascent-n1-100-poster
 #: than publishing its own, so its poster travels here with the rest.
 OVERVIEW_FILM_POSTER = FILM_POSTER.with_name("ascent-n1-324-poster.png")
 COMPOSITE_ASSETS = (
-    *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    *(COMPOSITE_STEM.with_suffix(f".{ext}") for ext in ("svg", "png")),
+    COMPOSITE_STEM.with_name("square-packings-100-20261008.pdf"),
     COMPOSITE_STEM.with_name(f"{COMPOSITE_STEM.name}-card.png"),
-    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png", "pdf")),
+    *(POSTER_STEM.with_suffix(f".{ext}") for ext in ("svg", "png")),
+    POSTER_STEM.with_name("square-packings-324-20261008.pdf"),
     FILM_POSTER,
     OVERVIEW_FILM_POSTER,
 )

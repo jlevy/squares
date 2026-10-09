@@ -8,7 +8,7 @@
 //
 // And the size it is at: the size tabs as the view tabs are reported, the key to a tile's
 // marks under them, and for each tile its number's box and the boxes of the marks it
-// carries, the new-result star and the regularized drawing's badge, each `null` where
+// carries, the new-result star and any obsolete layer badge, each `null` where
 // the tile has none.
 () => {
   /** @param {number} value */
@@ -63,8 +63,13 @@
   return {
     view: block.dataset.atlasView ?? null,
     size: block.dataset.atlasSize ?? null,
-    per_line: getComputedStyle(cells).gridTemplateColumns.split(/\s+/).length,
+    per_line: Math.round(
+      (cells.getBoundingClientRect().width + Number.parseFloat(getComputedStyle(cells).columnGap)) /
+        ((tiles[0]?.getBoundingClientRect().width ?? 1) +
+          Number.parseFloat(getComputedStyle(cells).columnGap)),
+    ),
     cells: box(cells),
+    gap_px: round(Number.parseFloat(getComputedStyle(cells).columnGap)),
     block: box(block),
     panel: {
       id: cells.id,
@@ -81,10 +86,29 @@
       legend === null
         ? null
         : {
-            text: (legend.textContent ?? "").replace(/\s+/g, " ").trim(),
+            text: [...legend.querySelectorAll("[data-atlas-legend-key]")]
+              .filter((item) => item.getClientRects().length > 0)
+              .map((item) => item.textContent ?? "")
+              .join(" ")
+              .replace(/\s+/g, " ")
+              .trim(),
             shown: legend.getClientRects().length > 0,
             box: box(legend),
             font_px: round(Number.parseFloat(getComputedStyle(legend).fontSize)),
+            columns: [...legend.querySelectorAll(".site-atlas-legend-column")].map((column) => ({
+              box: box(column),
+              items: [...column.querySelectorAll("[data-atlas-legend-key]")].map((item) => ({
+                key: item.getAttribute("data-atlas-legend-key"),
+                text: (item.textContent ?? "").trim(),
+                box: box(item),
+                swatches: [...item.querySelectorAll(".site-atlas-swatch")].map((swatch) => ({
+                  value: swatch.getAttribute("data-value"),
+                  label: swatch.textContent?.trim() ?? "",
+                  fill: getComputedStyle(swatch).backgroundColor,
+                  ...box(swatch),
+                })),
+              })),
+            })),
           },
     expanded: toggle?.getAttribute("aria-expanded") ?? null,
     search: location.search,
@@ -104,8 +128,20 @@
       const number = tile.querySelector(".site-atlas-n");
       const mark = tile.querySelector(".site-atlas-layer-mark");
       const star = tile.querySelector(".site-star");
+      const gridMarker = tile.querySelector(".site-atlas-grid-start");
       return {
         n: Number(tile instanceof HTMLElement ? tile.dataset.atlasN : Number.NaN),
+        grid_from: tile.hasAttribute("data-atlas-grid-from"),
+        grid_marker: (gridMarker?.getClientRects().length ?? 0) > 0,
+        grid_label: gridMarker
+          ? [...gridMarker.children].map((line) => line.textContent.trim()).join(" ")
+          : null,
+        grid_marker_lines: gridMarker
+          ? [...gridMarker.children]
+              .filter((line) => line.getClientRects().length > 0)
+              .map((line) => ({ text: line.textContent.trim(), ...box(line) }))
+          : [],
+        grid_marker_box: gridMarker?.getClientRects().length ? box(gridMarker) : null,
         ...box(tile),
         drawing: drawing ? box(drawing) : null,
         number_px: number ? round(Number.parseFloat(getComputedStyle(number).fontSize)) : null,

@@ -1301,10 +1301,10 @@ it.
   The strip is present in the first response, and scripting handles its controls.
   Without scripting, ordinary links reach all case records and the complete frontier.
   The triangle sets the cases by the grid bound: row $k$ holds the $2k - 1$ cases
-  $n = (k - 1)^2 + 1$ to $k^2$, the ones that need a square of side $k$, starting from
-  the left edge and ending at $k^2$. The perfect squares $1, 4, 9, 16, \ldots$ are the
-  cases whose best packing is the $k \times k$ grid itself, and their tiles are numbered
-  in the text’s colour at the medium weight.
+  $n = (k - 1)^2 + 1$ to $k^2$, the cases covered by the same side-$k$ grid bound,
+  ending at $k^2$. The perfect squares $1, 4, 9, 16, \ldots$ are the cases whose best
+  packing is the $k \times k$ grid itself, and their tiles are numbered in the text’s
+  colour at the medium weight.
   Ten rows show the first hundred cases, the last 19 tiles wide; eighteen show all 324,
   the last 35 wide. A one-line key under the triangle said what the rows are until
   2026-10-02, when the owner dropped it as obvious (`think-l38m`), with the line under
@@ -1320,21 +1320,29 @@ it.
   **Wrapping, by one rule at every width.** Both views use the same scaled cell minimum,
   `--site-atlas-cell-min` (6.4rem, 4.6rem under 40rem), and the same gaps,
   `--site-atlas-cell-gap` (0.5rem, 0.35rem under 40rem). A line holds as many cells and
-  intervening gaps as the block allows, never more than the longest bound row holds.
-  A row wider than a line wraps in reading order, as text does: its first line is full,
-  from the row’s first case at the left edge; further full lines follow, each from the
-  left edge; and what is left over goes on its last line, also starting at the left.
-  So 19 tiles at four to a line are lines of 4, 4, 4, 4 and 3, with $k^2$ in the third
-  column of the last line.
-  A row that fits is one line starting at the left.
-  The triangle’s tile block is left aligned at every width and size.
-  The next row always starts a new line, and where any row wraps the space over a new
-  row is 0.4 of a tile rather than 0.12, so a row’s lines read as one group.
-  Where a case stands, `place(n, per)`, is one pure function of the case and the tiles a
-  line holds, tested in Node (`tests/node/overview_atlas_view`); the script writes each
-  tile’s line and column as custom properties, the stylesheet lays the tiles out from
-  them (`grid-area`), and the placement is redone on the frame after a resize and when
-  the expander opens or closes.
+  intervening gaps as the block allows, matching Grid’s capacity even when that is wider
+  than any bound row. Each bound row retains explicit non-grid and grid segments.
+  A complete row stays inline when both segments fit, with an extra separator of half
+  the displayed drawing’s width.
+  Otherwise the non-grid segment wraps at the left, followed by the whole grid segment
+  on separate lines aligned to the right, including its short last line.
+  The vertical separator between these segments is also half a drawing; internal
+  continuations use ordinary pitch.
+  Rows 1 and 2 have no non-grid prefix and need no separator.
+  The next bound row starts a new line.
+  Where any row wraps, the space over a new bound row is 0.4 of a tile rather than 0.12.
+  The first retained axis-aligned grid packing in each row carries a small “grid” prefix
+  beside its count. Its threshold comes from the manifest’s canonical
+  `source.kind = exact-grid` entries through `sqpack.known_best.grid_transitions`, which
+  checks that each row has an unbroken grid suffix and exposes both half-open segments.
+  This is separate from the derived drawing layer: row 8 starts at $n = 56$, and row 15
+  at $n = 212$. The product legend describes the star without layout mechanics.
+  `place(n, per, starts)` computes each tile’s local segment line and column, tested
+  against an independent layout in Node (`tests/node/overview_atlas_view`). The script
+  writes custom properties; the stylesheet places the tiles within the two segment
+  containers, whose static metadata matches placement before atlas scripts run.
+  Resize and the expander repeat the placement.
+  Grid flattens the segment containers into its ordinary layout and hides grid prefixes.
   A tile shares the block’s width after reserving the gaps, and uses Grid’s drawing
   inset, so switching layouts preserves the drawing size.
   At Medium the first hundred cases wrap at ten tiles to a line at 1280 pixels and four
@@ -1370,8 +1378,8 @@ it.
   It scales the shared cell minimum, `--site-atlas-cell-min`, so both views fit more
   tiles at Small and fewer at Large (`perLineAt`, tested in Node).
   At 1280 pixels a line holds 15 tiles at Small, 10 at Medium and 7 at Large, and on a
-  390-pixel phone 6, 4 and 3. Triangle wraps its long bound rows at those widths, with
-  every line starting at the left edge.
+  390-pixel phone 6, 4 and 3. Triangle wraps the non-grid segments at the left and
+  separated grid segments at the right, preserving the same drawing width.
   A change of size is a change of layout and moves every tile as a change of view does
   (**Atlas views**, above).
   The size is in the address as `?size=small` or `?size=large` (Medium has none),
@@ -1380,37 +1388,36 @@ it.
   `devtools.measure_atlas_views` measures every layout at every size (`layout`), times
   the changes of size in each view (`move`) and pictures them (`shots`).
 
-- **Atlas marks.** A tile carries up to two marks beside its number, each hung out of
-  the flow so the number stays centred: the new-result star after it, and the
-  regularized layer’s badge before it.
-  The star is the site’s one star in its warm ink (`atlas_star`, `.site-star`), on every
-  case whose verified lower bound is a new result, the rule the frontier table’s Recent
-  column stars by (`render_frontier_page.recent_lower_bounds`, think-wwtt); it is hidden
-  from assistive technology, and the tile’s name ends “new result” instead, as a starred
-  row’s does in a table of results.
-  A case that `atlas/known-best/regularized/` keeps a derived view of (X-049) is drawn
-  from that view, the record’s exact frame with its nearly axis-aligned squares
-  straightened, each square shaded by the house rule on the regularized pose, and its
-  tile carries the layer’s badge, a dot in the accent, and says “regularized view” in
-  its name; every other case is drawn from its house rendering.
-  `devtools.render_regularized_atlas` draws those views from the layer’s index, so a
-  view the layer gains joins the atlas at the next render; its `--check` holds the
-  drawings to the index.
-  The tile opens the same case record as any other, whose drawing is the house one: the
-  regularized layer is the atlas’s view, not the record’s. Until 2026-10-04 the house
-  drawing was the default and a **House** and **Regularized** strip swapped a second
-  tile in for each such case; the owner dropped the choice for the regularized drawings
-  alone (think-k8x9), and the page stopped shipping the second set, 264 KB. A key under
-  the two strips, on a line of its own, names both marks in words, each beside its mark
-  as on a tile, “new result” and “regularized view”, the second a link to the atlas
-  README’s section on the layer (`atlas_legend`), in the support colour at the note
-  size, as the tables of results key their star: a star without a key reads as
-  decoration, and a regularized drawing is shown only labelled as one.
-  It ships `hidden` with the strips.
-  At the smallest tile, 26 pixels with a three-figure number, the star is set at 0.8 of
-  the number’s size and both marks stay inside their tile:
-  `devtools.measure_atlas_views` holds every layout to that (`mark_problems`), and
-  `tests/test_site_atlas_views.py` holds which tiles carry which mark to the records.
+- **Atlas marks.** The new-result star hangs after the centered count, outside its flow.
+  It is the site’s one star in warm ink (`atlas_star`, `.site-star`), on every case with
+  a recent upper construction, verified lower proof or optimality contribution, using
+  `result_status.recent_contributions_by_case().any`. Result-register row stars keep
+  their separate lower-proof contract.
+  It is hidden from assistive technology; the tile’s name ends “new result” instead.
+  Triangle’s first-grid marker stacks the dimension, such as “9×9,” above `GRID`. Both
+  lines sit above the ordinary count within the existing caption space, adding no row
+  height. Its accessible name says “first grid packing in row” and names the dimension.
+  The count and star keep their existing size at Small’s phone width; drawing sizes
+  remain the same in both views.
+  Lower-bound statements show five decimal places, and their number-line labels two,
+  truncated downward without changing recorded values or the number line’s positions.
+  The shared key under the tabs has two left-aligned columns: optimal, exact, numerical
+  and one dark rigid mark on the left; recent result since August, 2026, tilt-angle
+  colors and full-side contact shades on the right.
+  The first two tilt swatches label their pinned angles as `90°` and `45°`. Counts cover
+  all 324 displayed cases, with recent contributions counted once per case.
+  The key uses the support colour at the note size (`atlas_legend`) and describes no
+  layout mechanics. A case with a retained derived view in
+  `atlas/known-best/regularized/` (X-049) uses that selected drawing directly, without a
+  website layer badge, label or legend link.
+  The index and atlas documentation keep the provenance.
+  `devtools.render_regularized_atlas` draws the selected views and its `--check`
+  verifies them against the index.
+  Each tile opens the same case record, whose drawing is the house rendering.
+  `devtools.measure_atlas_views` checks count centering, star clearance, first-grid
+  horizontal and vertical separators, wrapping and both segment edges;
+  `tests/test_site_atlas_views.py` checks the selected counts against the canonical
+  manifest and verifies the initial CSS layout too.
 
 - **Action under a table or grid.** Where one control follows a table or a grid, it is
   the site’s one action button, `.site-action`, in a centred `.site-action-row`: the
@@ -1522,10 +1529,15 @@ it.
   (the owner, `think-7aar`, `think-necq`).
 
 - **Case badges.** A case’s properties have one mark on the site, the film’s badges:
-  optimal (O), exact (=), numerical (≈) and rigid (R, outlined when it is the
-  catalogue’s), each its glyph in a small square, solid or outlined
-  (`.site-atlas-badge`, `result_overview.badge_glyph`); a new result is the star and
-  what is open the outlined “?”. The visual summary lists them with their words.
+  optimal (O), exact (=), numerical (≈) and known rigid (one dark R), each its glyph in
+  a small square, solid or outlined (`.site-atlas-badge`,
+  `result_overview.badge_glyph`); a new result is the star and what is open the outlined
+  “?”. The visual summary lists them with their words.
+  Recent upper constructions, verified lower proofs and optimality each have independent
+  flags from `result_status.recent_contributions_by_case`, rendered in the new-result
+  ink. An optimality proof can therefore make O red while the historic upper construction
+  and equality numeral remain in ordinary ink, as for $n = 11$. The displayed bound
+  numeral follows its own contribution flag; R stays dark.
   Where a case is one line, a record’s head beside its status chip, a frontier row and a
   broad result’s list of cases under it, they are the glyphs alone, each named for a
   screen reader and in a tooltip (`result_overview.case_badges`, `.site-case-badges`;

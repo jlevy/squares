@@ -42,7 +42,7 @@ from pathlib import Path
 
 from strif import atomic_output_file
 
-from sqpack.known_best import KNOWN_BEST_COMPOSITES
+from sqpack.known_best import KNOWN_BEST_COMPOSITES, composite_pdf_name
 
 ROOT = Path(__file__).resolve().parent.parent
 ATLAS_ROOT = ROOT / "atlas/known-best"
@@ -76,7 +76,7 @@ def composite_svg(stem: str = DEFAULT_STEM) -> Path:
 
 def composite_pdf(stem: str = DEFAULT_STEM) -> Path:
     """Where that export is written."""
-    return ATLAS_ROOT / f"{stem}.pdf"
+    return ATLAS_ROOT / composite_pdf_name(stem)
 
 
 def _source_digest(stem: str = DEFAULT_STEM) -> str:

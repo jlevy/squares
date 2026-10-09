@@ -358,3 +358,42 @@ def test_each_fault_of_a_tiles_marks_is_named() -> None:
     ]
     found = atlas.summary(right)
     assert (found["size"], found["starred"], found["badged"]) == ("medium", 3, 2)
+
+
+def test_transition_line_counts_and_half_drawing_gap_are_measured() -> None:
+    assert atlas.row_lines(3, 2, 6) == (1, 2, 2)
+    assert atlas.row_lines(8, 4, 56) == (4, 2, 4, 4, 1)
+    assert atlas.row_lines(10, 4, 90) == (4, 4, 4, 4, 3)
+    assert atlas.row_lines(3, 1, 6) == (1, 1, 1, 1, 1)
+    size = WIDTH / 6
+    half_drawing = (size - 4) / 2
+    tiles = [
+        _tile(n, LEFT + (n - 5) * size + (half_drawing if n >= 6 else 0), 0, size)
+        for n in range(5, 10)
+    ]
+    report = _report("triangle", 6, tiles)
+    report["gap_px"] = 0
+    tiles[1]["grid_from"] = True
+    assert atlas.layout_problems(report) == []
+    faults = atlas.layout_problems(_moved(report, 6, by=-10))
+    assert any("gap before n = 6" in problem for problem in faults)
+
+
+def test_a_separate_grid_continuation_must_reach_the_right_edge() -> None:
+    gap = 6.0
+    size = (WIDTH - 2 * gap) / 3
+    height = size + 12
+    grid_top = height + gap
+    tiles = [_tile(5, LEFT, 0, size)]
+    tiles.extend(_tile(n, LEFT + (n - 6) * (size + gap), grid_top, size) for n in range(6, 9))
+    tiles.append(_tile(9, LEFT + 2 * (size + gap), grid_top + height + gap, size))
+    tiles[1]["grid_from"] = True
+    report = _report("triangle", 3, tiles)
+    report["gap_px"] = gap
+    assert atlas.layout_problems(report) == []
+    problems = atlas.layout_problems(_moved(report, 9, by=-10))
+    assert any("misses the right edge" in problem for problem in problems)
+    separated = report
+    for n in range(6, 10):
+        separated = _moved(separated, n, down=10)
+    assert any("vertical gap before n = 6" in p for p in atlas.layout_problems(separated))

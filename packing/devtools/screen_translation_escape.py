@@ -86,6 +86,11 @@ import mpmath as mp
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from devtools.atlas_orientation import (
+    geometry_transform,
+    reflect_escape_case,
+    source_orientation,
+)
 from sqpack import retained_json
 from sqpack.known_best import (
     KNOWN_BEST_CORPUS,
@@ -688,6 +693,27 @@ def _configure_worker() -> None:
     mp.mp.dps = DIGITS
 
 
+def _reflected_record(
+    entry: dict[str, Any], record: dict[str, Any], ancestor_ids: Sequence[int]
+) -> dict[str, Any]:
+    """Map ancestor certificates and replay every slide in the actual selected pose."""
+    witness = load_witness(ROOT / entry["witness"]["path"], fallback_schema=WITNESS_SCHEMA)
+    transform = geometry_transform(witness)
+    if transform is None:
+        raise ValueError("reflected replay requires a recorded geometry transform")
+    image = reflect_escape_case(record, operation=transform["operation"])
+    selected, side, selected_ids = materialize_record(entry)
+    if selected_ids != list(ancestor_ids):
+        raise ValueError("reflected square identities changed")
+    geometry = RecordGeometry(selected, side)
+    for certificate in image["movable_squares"]:
+        if not _replay(geometry, certificate, mp.mpf(PRIMARY_TOLERANCE)):
+            raise ValueError(
+                f"reflected certificate for square {certificate['square_index']} did not replay"
+            )
+    return image
+
+
 def _screen_entry(entry: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
     """Screen one manifest entry: `(True, case)`, or `(False, exclusion)`.
 
@@ -700,7 +726,13 @@ def _screen_entry(entry: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
     """
     mp.mp.dps = DIGITS
     try:
-        squares, side, square_ids = materialize_record(entry)
+        witness = load_witness(ROOT / entry["witness"]["path"], fallback_schema=WITNESS_SCHEMA)
+        transform = geometry_transform(witness)
+        # Keep the original direction-search ordering, then map every certificate
+        # into the displayed pose and replay it against that actual geometry.
+        ancestor = source_orientation(witness)
+        squares, side = materialize_witness(ancestor, digits=DIGITS)
+        square_ids = [square["id"] for square in ancestor["squares"]]
         residual = shape_residual(squares)
         screened = residual <= SHAPE_RESIDUAL_LIMIT
         record = (
@@ -708,6 +740,8 @@ def _screen_entry(entry: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
             if screened
             else _exclusion(entry, residual)
         )
+        if screened and transform is not None:
+            record = _reflected_record(entry, record, square_ids)
     except Exception as error:
         # A pool reports the failure without saying which unit raised it, and several of
         # the messages this can surface name only a square index.  Naming the record here

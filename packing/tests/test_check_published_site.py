@@ -1097,6 +1097,8 @@ def test_check_requires_each_moved_file_at_its_old_address_with_the_same_bytes(
         "t-018-explainer.pdf",
         "n11-optimality/t-060-explainer.md",
         "n11-optimality/t-060-explainer.pdf",
+        "known-best-1-100.pdf",
+        "known-best-1-324.pdf",
     }
     requested: list[str] = []
     assert failures(monkeypatch, fake_site(site_pages(), requested=requested)) == []

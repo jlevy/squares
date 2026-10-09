@@ -1172,9 +1172,11 @@ tiers:
   # same planned cost (278.9 of 1,213.6 recorded test-seconds each, against 327.9 for B
   # and C) and so the same ceiling, and each ceiling is about 1.57x the wall its share
   # predicts at the 0.30 s of wall per test-second the three-shard cohort measured. A new
-  # tier has no hosted reading, so the entry is pending under think-t7k5 as `suite_c` was
-  # under think-o18s on 2026-09-30: the ceiling applies from the first run, and the first
-  # complete pull-request cohort replaces the pending fields with its observed wall.
+  # tier began without a hosted reading; the first complete observation is now recorded
+  # below as history. Current performance remains unqualified under open think-t7k5:
+  # later actual walls of 190.63 s (run 37860039766/job 113593324236, 1 of 105 steps) and
+  # 168.55 s (run 37864114853/job 113606632364, 1 of 106 steps) breach the 143 s ceiling
+  # despite passing their tests. The different shapes are not pooled with this reading.
   # 2026-10-05: 143 s, raised from 131 s by the owner's decision of 2026-10-05 under
   # think-p684, and selected on purpose, as `OR-17` requires of anything above a routine
   # ceiling. PR 347 adds 133.9 recorded test-seconds to the behavioural lane, about 10%:
@@ -1186,11 +1188,19 @@ tiers:
   # wall, the suite_files planning capacities 131/154/154/131 (frozen weights of the
   # recorded assignment, not ceilings) and every recorded cost below are unchanged.
   ceiling_seconds: 143.0
-  measured_seconds: null
-  measured_on: null
-  measured_where: null
-  pending_measurement: think-t7k5
-  pending_until: '2026-10-08'
+  measured_seconds: 101.34
+  measured_on: '2026-10-07'
+  measured_where: >-
+    Complete green Packing validation run 37613399745, attempt 1, suite-d job
+    112765857172: 101.34 s at the reference 4 CPUs, jobs 1, inner jobs 1, with 1 of
+    101 steps selected. Actual checkout 33e96ced9ddf5025e47ecad8420865cf519102b8,
+    tree 23782412f1a268956cd2bb4e323fba72cc9311b1, for PR head
+    75ca11617f32f7b5c87dd5b3ea3ae973325a61de; read by the maintained
+    devtools.read_tier_walls on 2026-10-08. Later actual walls of 190.63 s from run
+    37860039766/job 113593324236 (1 of 105 steps) and 168.55 s from run
+    37864114853/job 113606632364 (1 of 106 steps) breach the 143 s ceiling despite
+    passing their tests. These different shapes are not pooled, current performance
+    remains unqualified, and think-t7k5 stays open.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Fourth whole-file shard of the quick behavioural lane, added on 2026-10-01 when the

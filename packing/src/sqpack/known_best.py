@@ -8,12 +8,13 @@ import re
 from collections.abc import Iterable, Mapping, Sequence
 from copy import deepcopy
 from dataclasses import dataclass
+from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Decimal, localcontext
 from enum import StrEnum
 from fractions import Fraction
 from itertools import pairwise
 from math import isqrt
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 from xml.etree import ElementTree as ET
 
 import mpmath as mp
@@ -74,6 +75,45 @@ than revisiting it.
 """
 
 
+#: The published PDF edition's download date, fixed independently of its data stamp.
+COMPOSITE_PDF_EDITION_DATE = "20261008"
+PUBLISHED_COMPOSITE_PDF_NAMES = {
+    "known-best-1-100": f"square-packings-100-{COMPOSITE_PDF_EDITION_DATE}.pdf",
+    "known-best-1-324": f"square-packings-324-{COMPOSITE_PDF_EDITION_DATE}.pdf",
+}
+
+
+def composite_pdf_name(stem: str) -> str:
+    """The dated published download name, or a generic composite's usual filename."""
+    return PUBLISHED_COMPOSITE_PDF_NAMES.get(stem, f"{stem}.pdf")
+
+
+def display_bound_value(
+    value: str,
+    *,
+    decimal_places: int,
+    direction: Literal["lower", "upper", "exact"] = "lower",
+) -> str:
+    """A compact bound numeral without changing its recorded value.
+
+    Floor lower bounds and ceil upper bounds so their inequalities remain true as
+    written. Exact values use nearest rounding. Whole numbers stay plain, and an
+    isolated decimal context keeps labels independent of other rendering work.
+    """
+    number = Decimal(value)
+    if decimal_places < 0 or not number.is_finite():
+        raise ValueError("bound labels require finite values and nonnegative decimal places")
+    rounding = {"lower": ROUND_FLOOR, "upper": ROUND_CEILING, "exact": ROUND_HALF_UP}[direction]
+    with localcontext() as context:
+        context.prec = max(
+            28, len(number.as_tuple().digits), number.adjusted() + decimal_places + 2
+        )
+        rounded = number.quantize(Decimal(1).scaleb(-decimal_places), rounding=rounding)
+    text = format(rounded, "f")
+    whole, _, fraction = text.partition(".")
+    return whole if not fraction.strip("0") else text
+
+
 @dataclass(frozen=True)
 class CorpusRange:
     """A closed range of case counts, named once so nothing re-spells ``1..100``.
@@ -112,6 +152,30 @@ class CorpusRange:
 
 
 @dataclass(frozen=True)
+class PackingSegment:
+    """A contiguous packing range, half-open so an empty non-grid segment is explicit."""
+
+    first_n: int
+    stop_n: int
+
+    def __post_init__(self) -> None:
+        if self.first_n < 1 or self.stop_n < self.first_n:
+            raise ValueError("a packing segment requires an ordered positive range")
+
+    @property
+    def count(self) -> int:
+        return self.stop_n - self.first_n
+
+    @property
+    def empty(self) -> bool:
+        return self.count == 0
+
+    @property
+    def numbers(self) -> range:
+        return range(self.first_n, self.stop_n)
+
+
+@dataclass(frozen=True)
 class GridTransition:
     """The first retained exact grid in square-bound row ``row``, the one-based side k.
 
@@ -135,8 +199,16 @@ class GridTransition:
         return self.row**2
 
     @property
+    def non_grid(self) -> PackingSegment:
+        return PackingSegment(self.first_n, self.first_grid_n)
+
+    @property
+    def grid(self) -> PackingSegment:
+        return PackingSegment(self.first_grid_n, self.last_n + 1)
+
+    @property
     def has_irregular_prefix(self) -> bool:
-        return self.first_grid_n > self.first_n
+        return not self.non_grid.empty
 
 
 def grid_transitions(entries: Sequence[Mapping[str, Any]]) -> tuple[GridTransition, ...]:
@@ -305,7 +377,7 @@ class CompositeSpec:
 
     @property
     def pdf_name(self) -> str:
-        return f"{self.stem}.pdf"
+        return composite_pdf_name(self.stem)
 
     @property
     def card_png_name(self) -> str:

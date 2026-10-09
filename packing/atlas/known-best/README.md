@@ -5,8 +5,8 @@ through $n = 324$ and renders every record with the repository’s deterministic
 renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
 The range widened from 100 on 2026-09-07 under
 [the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md).
-Two composites are drawn from it: the published figure of the first hundred, unchanged,
-and a poster of the whole corpus beside it.
+Two composites are drawn from it: the published figure of the first hundred, with its
+10-by-10 layout, and a poster of the whole corpus beside it.
 The calibration annotations further down stay pinned to the first hundred by design.
 
 Everything in this directory is generated.
@@ -29,7 +29,7 @@ The composite ships in four forms, all drawn from that one SVG in one build:
 | [`known-best-1-100.svg`](known-best-1-100.svg) | 2400 × 2896 units | the source; scales to anything |
 | [`known-best-1-100.png`](known-best-1-100.png) | 2400 × 2896 px | the GitHub-facing raster preview |
 | [`known-best-1-100@2x.png`](known-best-1-100@2x.png) | 4800 × 5792 px | attaching, or downscaling for social media |
-| [`known-best-1-100.pdf`](known-best-1-100.pdf) | 25 × 30.17 in | printing; vector, so text stays selectable |
+| [`square-packings-100-20261008.pdf`](square-packings-100-20261008.pdf) | 25 × 30.17 in | printing; vector, so text stays selectable |
 
 Each export carries the SHA-256 of its source SVG, so `--check` rejects any one of them
 that has fallen behind the drawing.
@@ -45,28 +45,60 @@ where the 2x export is 1,294,216 for 27.8.
 
 Every case the register holds, at the figure’s card scale, arranged in a triangle: row
 $k$ holds $n = (k-1)^2 + 1$ through $k^2$, beginning in the leftmost column.
-The eighteen rows end at 324; the final row has thirty-five cards.
-GRID and its count mark each row’s first retained regular axis-aligned grid packing.
-Where irregular packings precede it, an extra gap of half a drawing width (79 units)
-separates the groups; rows that are all grid receive no added gap.
+The eighteen logical rows end at 324; the final row has thirty-five cards.
+The first sixteen rows keep both segments inline.
+In the last two rows, beginning at $n = 257$, each complete grid suffix moves onto a
+second right-aligned line while the non-grid prefix stays left-aligned.
+The twenty physical lines fit the width of the row beginning at $n = 226$, with
+unchanged packing drawings and card scale.
+A $k×k$ grid label marks each row’s first retained regular axis-aligned grid packing;
+the two-line label gives its dimensions above `GRID`, and the card retains its ordinary
+count. Where irregular packings precede it, an extra gap of half a drawing width (79
+units) separates the groups horizontally when inline.
+Every physical line uses the same 252-unit pitch, including wrapped grid suffixes; rows
+that are all grid receive no added gap.
 The poster draws 52,650 square polygons from the same witnesses.
-Its title, publication date, repository, complete legend, explanation, citations and
-credit form one right-aligned block in the upper-right whitespace, leaving the bottom
-for the final row of packings.
+Its title, complete legend, explanation, construction credits and closing project
+details form one block in the upper-right whitespace, leaving the bottom for the final
+row of packings. Title and documentation are right-aligned; the legend has two
+left-aligned columns, four status rows beside three recency and color rows.
+The first two tilt-color swatches carry $90^\circ$ and $45^\circ$. The information ends
+at the right edge of the final drawing; at least 120 units of outside clearance keep the
+grid labels inside the page margins.
+One dark $R$ means known rigid; its verification status, dates and sources remain in the
+structured metadata.
 The information uses three times the figure’s type size, with more room between lines
 and sections; the packing drawings and card captions keep their original scale.
-The image above is the raster; the vector it was drawn from is one click away, and the
-PDF is an 85.20-by-48.5-inch page.
+The triangle’s bound captions use five decimal places, one fewer than the figure,
+leaving room for the algebraic degree; a longer degree label can shorten the adjacent
+side caption to four places.
+Upper bounds round upward and lower bounds downward; stored bounds retain their full
+precision. “Best packings due to” begins three balanced lines naming all nineteen
+recorded construction finders and improvers once, with complete canonical names kept
+intact. Full source references remain in the metadata and the separate bibliography.
+A section gap and an additional blank line separate the credits from four closing lines:
+“The Squares Project,” its repository URL, the diagram credit, and the generated edition
+stamp beside the data date.
+The project name and URL are black.
+The poster has no subtitle.
+Its definition reads: “The square packing problem asks for the side $s(n)$ of the
+smallest square that can hold $n$ unit squares, where the squares are free to rotate but
+cannot overlap.” The degree definition follows on its own line.
+Both composites apply the recent accent independently to a new upper bound, lower bound
+or optimality proof: a new proof of an older packing colors its optimality badge, not
+its upper bound.
+The image above is the raster; the vector it was drawn from is one click
+away, and the PDF is a 77.45-by-54.90-inch page.
 
 | File | Size | For |
 | --- | --- | --- |
-| [`known-best-1-324.svg`](known-best-1-324.svg) | 8179 × 4656 units | the source; scales to anything |
-| [`known-best-1-324.png`](known-best-1-324.png) | 8179 × 4656 px | the raster embedded above |
-| [`known-best-1-324.pdf`](known-best-1-324.pdf) | 85.20 × 48.5 in | printing; vector, so text stays selectable |
+| [`known-best-1-324.svg`](known-best-1-324.svg) | 7435 × 5270 units | the source; scales to anything |
+| [`known-best-1-324.png`](known-best-1-324.png) | 7435 × 5270 px | the raster embedded above |
+| [`square-packings-324-20261008.pdf`](square-packings-324-20261008.pdf) | 77.45 × 54.90 in | printing; vector, so text stays selectable |
 
 The poster publishes one raster and a vector PDF. The rectangular poster’s 2x raster
-measured 5,055,264 bytes for 83 megapixels; the triangle uses a wider canvas, while the
-PDF preserves every square at any zoom.
+measured 5,055,264 bytes for 83 megapixels; the poster publishes a single preview, while
+the PDF preserves every square at any zoom.
 The link-preview card is one page’s unfurl, which the figure above supplies.
 
 The poster also draws a square more cheaply than the figure does, because ten times as
@@ -94,7 +126,8 @@ written by `python -m devtools.regularize_axis_components --update-atlas`, check
 digest with `--check-atlas` and re-derived with `--verify-atlas`. A view straightens
 near-axis squares and slides axis-aligned ones into exact contact at the certified side,
 verified twice over the rationals; it never replaces a witness, changes a side or
-promotes a tier, and is drawn only with a “regularized” label.
+promotes a tier. The selected website drawings use these verified views directly; the
+index and source records retain their provenance.
 Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
 explains why and what it changes.

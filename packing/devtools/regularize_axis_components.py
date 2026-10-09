@@ -111,6 +111,11 @@ from strif import atomic_output_file
 
 from devtools import census_atlas_contact_shades as shades
 from devtools import check_rational_witness_independent as independent
+from devtools.atlas_orientation import (
+    geometry_transform,
+    orient_regularized_view,
+    source_orientation,
+)
 from devtools.upper_bound_packets import MAX_SIDE_INCREASE, RATIONAL_DIGITS
 from sqpack import retained_json
 from sqpack.verify import separated, verify_packing
@@ -121,6 +126,7 @@ from sqpack.witness import (
     # builds each candidate itself and verifies it the same way, rather than paying for
     # verdicts it would discard; `--smallest-dilation` walks the same ladder.
     _promoted_candidate,  # pyright: ignore[reportPrivateUsage]
+    exact_verify,
     load_witness,
     witness_document,
 )
@@ -1569,8 +1575,12 @@ def atlas_record(
         },
     }
     before = shades.witness_shades(source)
+    # Compaction chooses lattice targets and breaks ties in the published orientation.
+    # Derive there, then apply the selected isometry to the exact result.
+    ancestor = source_orientation(witness)
+    transform = geometry_transform(witness)
     try:
-        frame = exact_frame(witness, smallest_dilation=smallest_dilation)
+        frame = exact_frame(ancestor, smallest_dilation=smallest_dilation)
     except RegularizeError as error:
         record["status"] = "refused"
         record["refusal"] = {"kind": error.kind, "reason": str(error)}
@@ -1591,7 +1601,22 @@ def atlas_record(
     # whether or not the prototype exists.
     if frame.provenance["center_dilation"] != "1":
         record["exact_frame"]["center_dilation"] = frame.provenance["center_dilation"]
-    report, view = regularize_frame(witness, frame, source_path=layout.relative(source))
+    if transform is not None:
+        record["exact_frame"]["ancestor_matches_retained_certificate"] = (
+            (matching is not None) if certificate else None
+        )
+        record["exact_frame"]["matches_retained_certificate"] = False
+        record["exact_frame"]["geometry_transform"] = transform
+        record["exact_frame"]["derivation"] = (
+            f"{frame.provenance['derivation']}; isometry-derived atlas orientation"
+        )
+    report, view = regularize_frame(ancestor, frame, source_path=layout.relative(source))
+    view = orient_regularized_view(
+        view, witness, parent_certificate=layout.relative(certificate) if certificate else None
+    )
+    # The ancestor's verdict is not a receipt for the reflected rational coordinates.
+    # Both independent implementations verify the actual retained view below.
+    _, transformed_report = exact_verify(view) if transform is not None else (None, None)
     regularization = report["regularization"]
     record["moves"] = {
         key: regularization["moves"][key]
@@ -1626,13 +1651,16 @@ def atlas_record(
         verdict = independent.check(plain)
         after = shades.witness_shades(plain)
     repository = report["exact_verification"]["repository_verifier"]
-    passed = bool(repository["valid"] and verdict["verification_passed"])
+    repository_valid = (
+        transformed_report.valid if transformed_report is not None else repository["valid"]
+    )
+    passed = bool(repository_valid and verdict["verification_passed"])
     record["status"] = "regularized" if passed else "failed-verification"
     record["changed_squares"] = regularization["changed_squares"]
     record["view"] = {"path": layout.relative(layout.view(n)), "sha256": digest(text.encode())}
     record["shades"] = _shade_record(before, after)
     record["exact_verification"] = {
-        "repository_verifier": bool(repository["valid"]),
+        "repository_verifier": bool(repository_valid),
         "independent_checker": bool(verdict["verification_passed"]),
         "pairs_tested_independently": verdict["pairs_tested"],
         "passed": passed,

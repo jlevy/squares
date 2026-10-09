@@ -8,7 +8,31 @@ from typing import Any
 
 import pytest
 
-from sqpack.known_best import GridTransition, grid_transitions
+from sqpack.known_best import (
+    GridTransition,
+    PackingSegment,
+    display_bound_value,
+    grid_transitions,
+)
+
+
+def test_compact_bound_labels_round_in_the_safe_direction_and_keep_integers() -> None:
+    from decimal import Decimal, localcontext  # noqa: PLC0415
+
+    value = "5.12310562562"
+    with localcontext() as context:
+        context.prec = 3
+        lower = display_bound_value(value, decimal_places=5)
+        upper = display_bound_value(value, decimal_places=5, direction="upper")
+        exact = display_bound_value(value, decimal_places=5, direction="exact")
+    assert (lower, upper, exact) == ("5.12310", "5.12311", "5.12311")
+    assert Decimal(lower) <= Decimal(value) <= Decimal(upper)
+    assert display_bound_value("4.67963795966", decimal_places=2) == "4.67"
+    for direction in ("lower", "upper", "exact"):
+        assert display_bound_value("10.000000", decimal_places=5, direction=direction) == "10"
+    for value, places in (("NaN", 5), ("Infinity", 5), ("1.23", -1)):
+        with pytest.raises(ValueError, match="finite values and nonnegative"):
+            display_bound_value(value, decimal_places=places)
 
 
 def _entries() -> list[dict[str, Any]]:
@@ -81,3 +105,19 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
     ]
     assert entries[210]["source"]["kind"] == "packet-derived-facts"
     assert found[14] == GridTransition(15, 212)
+
+
+def test_grid_transitions_expose_explicit_complete_segments_including_empty_prefixes() -> None:
+    rows = grid_transitions(_entries())
+    assert rows[0].non_grid == PackingSegment(1, 1)
+    assert rows[0].non_grid.empty
+    assert rows[0].grid == PackingSegment(1, 2)
+    assert rows[2].non_grid == PackingSegment(5, 6)
+    assert rows[2].grid == PackingSegment(6, 10)
+    for row in rows:
+        assert [*row.non_grid.numbers, *row.grid.numbers] == list(
+            range(row.first_n, row.last_n + 1)
+        )
+        assert row.non_grid.count + row.grid.count == 2 * row.row - 1
+    with pytest.raises(ValueError, match="ordered positive"):
+        PackingSegment(6, 5)

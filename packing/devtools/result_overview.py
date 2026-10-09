@@ -73,6 +73,7 @@ from devtools.overview_data import (
     tex_bounds,
 )
 from devtools.repo_links import path_kind, repo_url
+from sqpack.known_best import display_bound_value
 
 #: The film's gap bar, as every case's visual summary draws it (`gap_bar`; the atlas
 #: popover's script drew its own until 2026-10-03): the inset at each end, in percent of
@@ -274,6 +275,14 @@ def film_facts() -> dict[int, dict[str, Any]]:
     return {cast("int", fact["n"]): cast("dict[str, Any]", fact) for fact in atlas_film_facts()}
 
 
+def contribution_class(n: int, kind: str) -> str:
+    """A bound's role and its independent contribution recency, without assurance changes."""
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    recent = getattr(recent_contributions_by_case()[n], kind)
+    return f"is-{kind}{' is-new-result' if recent else ''}"
+
+
 def grid_floor(n: int) -> int:
     """One below the grid bound, `ceil(sqrt(n)) - 1`: where the film's bar starts."""
     root = math.isqrt(n)
@@ -328,9 +337,20 @@ def gap_bar(fact: dict[str, Any]) -> str:
     crowded = fact["lower"] is not None and end - start < GAP_CROWDED
     if fact["lower"] is not None:
         rail.append(_placed("site-atlas-gap-rule", "", start))
-        values.append(_placed("is-lower", bar_number(lower), start, "end" if crowded else ""))
+        values.append(
+            _placed(
+                contribution_class(n, "lower"),
+                display_bound_value(str(fact["lower"]), decimal_places=2),
+                start,
+                "end" if crowded else "",
+            )
+        )
     rail.append(_placed("site-atlas-gap-rule", "", end))
-    values.append(_placed("is-upper", bar_number(upper), end, "start" if crowded else ""))
+    values.append(
+        _placed(
+            contribution_class(n, "upper"), bar_number(upper), end, "start" if crowded else ""
+        )
+    )
     formulas = "".join(
         _placed("site-atlas-gap-formula", math_html(tex), bar_at(value, low))
         for tex, value in ((r"\sqrt{n}", root), (r"\sqrt{n} + 1", root + 1))
@@ -353,17 +373,29 @@ def film_bound(fact: dict[str, Any]) -> str:
     star = "\u2605" if fact["star"] else ""
     parts = [f'<span class="site-atlas-pop-star" aria-hidden="true">{star}</span>']
     if fact["exact"]:
-        parts.append(math_html(f"s({n}) = {fact['upper']}"))
+        parts.append(math_html(f"s({n}) ={{}}"))
+        parts.append(
+            f'<span class="{contribution_class(n, "upper")} is-exact-value">'
+            f"{math_html(str(fact['upper']))}</span>"
+        )
     else:
         if fact["lower"] is not None:
-            parts.append(f'<span class="is-lower">{math_html(str(fact["lower"]))}</span>')
+            parts.append(
+                f'<span class="{contribution_class(n, "lower")}">'
+                f"{math_html(display_bound_value(str(fact['lower']), decimal_places=5))}</span>"
+            )
         middle = rf"s({n}) \le{{}}" if fact["lower"] is None else rf"{{}}\le s({n}) \le{{}}"
         parts.append(math_html(middle))
-        parts.append(f'<span class="is-upper">{math_html(str(fact["upper"]))}</span>')
+        parts.append(
+            f'<span class="{contribution_class(n, "upper")}">'
+            f"{math_html(str(fact['upper']))}</span>"
+        )
     return f'<p class="site-atlas-pop-bound">{"".join(parts)}</p>'
 
 
-def badge_glyph(glyph: str, style: str, text: str, *, named: bool = False) -> str:
+def badge_glyph(
+    glyph: str, style: str, text: str, *, named: bool = False, recent: bool = False
+) -> str:
     """One of the film's badges, the site's one mark for a property of a case (optimal,
     exact, numerical, rigid, a new result, something open): its glyph in a small square,
     solid or outlined (`.site-atlas-badge`). `named`, where no word follows it, gives it
@@ -373,22 +405,31 @@ def badge_glyph(glyph: str, style: str, text: str, *, named: bool = False) -> st
         if named
         else 'aria-hidden="true"'
     )
+    accent = ' data-recent="true"' if recent else ""
     return (
-        f'<span class="site-atlas-badge" data-style="{_esc(style)}" {name}>{_esc(glyph)}</span>'
+        f'<span class="site-atlas-badge" data-style="{_esc(style)}"{accent} '
+        f"{name}>{_esc(glyph)}</span>"
     )
 
 
-def _badge(glyph: str, style: str, text: str, classes: str = "") -> str:
+def _badge(
+    glyph: str, style: str, text: str, classes: str = "", *, recent: bool = False
+) -> str:
     item = f"site-atlas-pop-item {classes}".strip()
-    return f'<li class="{item}">{badge_glyph(glyph, style, text)}{_esc(text)}</li>'
+    return (
+        f'<li class="{item}">{badge_glyph(glyph, style, text, recent=recent)}{_esc(text)}</li>'
+    )
 
 
 def case_badges(n: int) -> str:
     """Case `n`'s property badges as the film draws them, each named, in a row of their
     own and without their words: the same marks the visual summary lists with words,
     where a case is one line, as in a table's row or a record's head (think-7cbx)."""
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    flags = recent_contributions_by_case()[n]
     marks = "".join(
-        badge_glyph(glyph, style, text, named=True)
+        badge_glyph(glyph, style, text, named=True, recent=text == "optimal" and flags.optimal)
         for glyph, style, text in film_facts()[n]["badges"]
     )
     return f'<span class="site-case-badges">{marks}</span>' if marks else ""
@@ -397,7 +438,19 @@ def case_badges(n: int) -> str:
 def film_facts_html(fact: dict[str, Any]) -> str:
     """The badges, the citation and what is open, as the film lists them (`drawFacts`)."""
     badges = [_badge("\u2605", "star", "new result", "is-new-result")] if fact["star"] else []
-    badges.extend(_badge(glyph, style, text) for glyph, style, text in fact["badges"])
+    from devtools.result_status import recent_contributions_by_case  # noqa: PLC0415
+
+    flags = recent_contributions_by_case()[int(fact["n"])]
+    badges.extend(
+        _badge(
+            glyph,
+            style,
+            text,
+            "is-new-result" if text == "optimal" and flags.optimal else "",
+            recent=text == "optimal" and flags.optimal,
+        )
+        for glyph, style, text in fact["badges"]
+    )
     cites = []
     for which in ("lower", "upper"):
         line = fact["cite"][which]
@@ -416,7 +469,8 @@ def film_facts_html(fact: dict[str, Any]) -> str:
             else ""
         )
         cites.append(
-            f'<p class="site-atlas-pop-cite"><span class="site-atlas-pop-which is-{which}">'
+            f'<p class="site-atlas-pop-cite"><span '
+            f'class="site-atlas-pop-which {contribution_class(int(fact["n"]), which)}">'
             f"{which}</span>{_esc(line['text'])}{corrects}{note}</p>"
         )
     citation = (
@@ -547,9 +601,15 @@ def case_list(cases: Sequence[int], overview: Overview) -> str:
             _grid_row(
                 [
                     _cell(f'<a href="{case_url(n)}">{n}</a>', classes="num"),
-                    _cell(f'<span class="is-lower">{_esc(lower)}</span>{star}', classes="num"),
                     _cell(
-                        f'<span class="is-upper">{_esc(fact["upper"])}</span>', classes="num"
+                        f'<span class="{contribution_class(n, "lower")}">'
+                        f"{_esc(lower)}</span>{star}",
+                        classes="num",
+                    ),
+                    _cell(
+                        f'<span class="{contribution_class(n, "upper")}">'
+                        f"{_esc(fact['upper'])}</span>",
+                        classes="num",
                     ),
                     _cell(_esc(gap), classes="num"),
                     _cell(case_status_chip(status) + case_badges(n)),

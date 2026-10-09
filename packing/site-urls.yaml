@@ -5806,13 +5806,14 @@ urls:
   lastmod: '2026-10-02'
   status: live
 - path: known-best-1-100.pdf
-  canonical: known-best-1-100.pdf
-  kind: asset-file
-  generator: devtools.render_n11_lower_bounds_explainer:write
-  producer: paper:n11-lower-bounds-explainer
+  canonical: square-packings-100-20261008.pdf
+  kind: copy
+  generator: devtools.preview_site:copy_moved_files
+  producer: assembly
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: live
+  target: square-packings-100-20261008.pdf
 - path: known-best-1-100.png
   canonical: known-best-1-100.png
   kind: asset-file
@@ -5830,13 +5831,14 @@ urls:
   lastmod: '2026-10-02'
   status: live
 - path: known-best-1-324.pdf
-  canonical: known-best-1-324.pdf
-  kind: asset-file
-  generator: devtools.render_n11_lower_bounds_explainer:write
-  producer: paper:n11-lower-bounds-explainer
+  canonical: square-packings-324-20261008.pdf
+  kind: copy
+  generator: devtools.preview_site:copy_moved_files
+  producer: assembly
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
   status: live
+  target: square-packings-324-20261008.pdf
 - path: known-best-1-324.png
   canonical: known-best-1-324.png
   kind: asset-file
@@ -10962,6 +10964,22 @@ urls:
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-02'
+  status: live
+- path: square-packings-100-20261008.pdf
+  canonical: square-packings-100-20261008.pdf
+  kind: asset-file
+  generator: devtools.render_n11_lower_bounds_explainer:write
+  producer: paper:n11-lower-bounds-explainer
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
+  status: live
+- path: square-packings-324-20261008.pdf
+  canonical: square-packings-324-20261008.pdf
+  kind: asset-file
+  generator: devtools.render_n11_lower_bounds_explainer:write
+  producer: paper:n11-lower-bounds-explainer
+  first_published: '2026-10-08'
+  lastmod: '2026-10-08'
   status: live
 - path: status.html
   canonical: frontier.html

@@ -908,6 +908,15 @@ def test_the_published_document_says_what_it_is_and_where_the_figures_are(
     assert SITE_URL in document
 
 
+def test_atlas_template_links_use_the_canonical_dated_pdf_assets() -> None:
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
+    article = render_n11_lower_bounds_explainer.MARKDOWN.read_text()
+    links = set(re.findall(r'href="\{\{SITE_ROOT\}\}([^"\s]+\.pdf)"', article))
+    assert links == {composite_pdf_name(f"known-best-1-{last}") for last in (100, 324)}
+    assert all(name in {asset.name for asset in COMPOSITE_ASSETS} for name in links)
+
+
 def test_the_published_document_names_the_sites_files_where_the_site_serves_them(
     document: str,
 ) -> None:
@@ -917,8 +926,8 @@ def test_the_published_document_names_the_sites_files_where_the_site_serves_them
     each of those files by its address on the site, and links nothing relatively."""
     assert f"]({SITE_ROOT}" not in document
     assert f"]({SITE_URL}known-best-1-100.svg)" in document
-    assert f"]({SITE_URL}known-best-1-100.pdf)" in document
-    assert f"]({SITE_URL}known-best-1-324.pdf)" in document
+    assert f"]({SITE_URL}square-packings-100-20261008.pdf)" in document
+    assert f"]({SITE_URL}square-packings-324-20261008.pdf)" in document
     relative = re.findall(r"\]\((?!https?://|#|mailto:)([^)\s]+)\)", document)
     assert relative == []
 

@@ -37,29 +37,31 @@ import urllib.request
 import zlib
 from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date
 from decimal import ROUND_HALF_EVEN, Decimal
 from fractions import Fraction
 from functools import cache
-from itertools import pairwise
+from itertools import combinations, pairwise
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Any
+from typing import Any, Literal
 from xml.etree import ElementTree as ET
 
 import mpmath as mp
 from strif import atomic_output_file
 
-from devtools import build_composite_figure_data, render_composite_pdf
+from devtools import build_bound_citations, build_composite_figure_data, render_composite_pdf
 from devtools import evand_exact_certificates as evand_certificates
 from devtools import squish_followup_packets as squish_followup
 from devtools import squish_second_update_house_links as squish_house
 from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_packets
 from devtools import upper_bound_packets as packets
-from devtools.build_bound_citations import RECENT_SINCE
+from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend, recent_label
+from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
+from devtools.result_status import RecentContributions, recent_contributions_by_case
 from sqpack import retained_json
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
@@ -75,7 +77,9 @@ from sqpack.known_best import (
     CompositeSpec,
     CorpusRange,
     GridTransition,
+    PackingSegment,
     catalogue_source_map,
+    display_bound_value,
     exact_grid_witness,
     grid_transitions,
     kingbird_derived_witness,
@@ -192,8 +196,19 @@ SUMMARY_SIDE_MARGIN = SUMMARY_GRID_LEFT
 SUMMARY_CARD_WIDTH = Decimal(216)
 SUMMARY_CARD_HEIGHT = Decimal(242)
 SUMMARY_PACKING_SIZE = Decimal(158)
-#: Additional separation before the retained regular-grid suffix, in drawing units.
+#: Additional horizontal separation before an inline regular-grid suffix, in drawing units.
 POSTER_GRID_GAP = SUMMARY_PACKING_SIZE / 2
+#: Later logical rows put the complete grid suffix on a second physical line.
+POSTER_INLINE_ROWS = 16
+#: Outside air surrounds the cards and the all-grid labels, without scaling either.
+POSTER_OUTER_MARGIN = Decimal(120)
+POSTER_GRID_LEFT = POSTER_OUTER_MARGIN + SUMMARY_SIDE_MARGIN
+POSTER_GRID_MARKER_SIZE = "15"
+POSTER_GRID_MARKER_BASELINE = Decimal(87)
+POSTER_GRID_MARKER_LINE_PITCH = Decimal(18)
+#: One fewer decimal digit in triangle captions, leaving space beside the degree.
+POSTER_BOUND_DECIMAL_PLACES = 5
+POSTER_BOUND_DEGREE_GAP = Decimal(5)
 SUMMARY_PACKING_INSET_X = Decimal(24)
 SUMMARY_PACKING_INSET_Y = Decimal(12)
 SUMMARY_LABEL_BASELINE = Decimal(203)
@@ -277,6 +292,7 @@ _HELVETICA_BOLD_WIDTHS = {
     "\u2265": 584,
     "\u2248": 584,
     "\u00b0": 400,
+    "\u00d7": 584,
     "a": 556,
     "b": 611,
     "c": 556,
@@ -364,6 +380,10 @@ SUMMARY_REPOSITORY = "github.com/jlevy/squares"
 SUMMARY_CITATIONS = (
     f"Citations for all results are available in the Squares Project: {SUMMARY_REPOSITORY}"
 )
+POSTER_CITATIONS = "The Squares Project"
+POSTER_DIAGRAM_CREDIT = (
+    "Diagram by Joshua Levy with the help of a few billion tokens from Claude and Codex"
+)
 # Set a step above the other small labels so the URL reads as part of the
 # heading block rather than as another footnote.
 #: One size for the two lines under the title: the release line and the repository.
@@ -375,27 +395,41 @@ SUMMARY_RELEASE_GAP = Decimal(11)
 SUMMARY_SUBTITLE_BASELINE = Decimal(148)
 
 #: The information uses the triangle's upper-right whitespace at three times the
-#: figure's type size. Cards and the canvas keep their original scale and positions.
+#: figure's type size. Card scale and relative positions survive added outside air.
 POSTER_INFORMATION_TYPE_SCALE = Decimal(3)
 POSTER_TITLE_SIZE = "144"
-POSTER_SUBTITLE_SIZE = "78"
 POSTER_FOOTER_SIZE = "57"
-POSTER_INFORMATION_WIDTH = Decimal(3400)
-POSTER_INFORMATION_TOP = SUMMARY_SIDE_MARGIN
-POSTER_INFORMATION_BOTTOM = Decimal(2116)
-POSTER_TITLE_BASELINE = Decimal(204)
-POSTER_RELEASE_BASELINE = Decimal(340)
-POSTER_REPOSITORY_BASELINE = Decimal(450)
-POSTER_LEGEND_BASELINE = Decimal(720)
+POSTER_INFORMATION_WIDTH = Decimal(2600)
+POSTER_INFORMATION_TOP = POSTER_OUTER_MARGIN
+POSTER_INFORMATION_BOTTOM = POSTER_INFORMATION_TOP + Decimal(2191)
+POSTER_TITLE_BASELINE = POSTER_INFORMATION_TOP + Decimal(144)
+POSTER_LEGEND_BASELINE = POSTER_INFORMATION_TOP + Decimal(570)
 POSTER_LEGEND_ROW_PITCH = Decimal(96)
-POSTER_GRID_NOTE_BASELINE = POSTER_LEGEND_BASELINE + POSTER_LEGEND_ROW_PITCH * 8
-POSTER_GRID_NOTE = (
-    "GRID marks the first regular grid packing; extra gap = half a drawing width."
-)
-POSTER_EXPLAINER_BASELINE = Decimal(1666)
+POSTER_LEGEND_COLUMN_GAP = Decimal(180)
+POSTER_EXPLAINER_BASELINE = POSTER_INFORMATION_TOP + Decimal(1036)
 POSTER_FOOTER_LINE_PITCH = Decimal(90)
+POSTER_CLOSING_LINE_PITCH = Decimal(105)
+POSTER_PACKING_CREDITS_BASELINE = POSTER_INFORMATION_TOP + Decimal(1366)
+POSTER_PACKING_CREDITS_LINE_COUNT = 3
+POSTER_PACKING_CREDITS_PREFIX = "Best packings due to"
+POSTER_PACKING_CREDITS_SECTION_GAP = Decimal(180)
+POSTER_PROBLEM = (
+    "The square packing problem asks for the side s(n) of the smallest square that can "
+    "hold n unit squares, where the squares are free to rotate but cannot overlap."
+)
 POSTER_EXPLAINER_LINES = (
-    (*SUMMARY_EXPLAINER_RUNS[:-1], (" unit squares", False)),
+    (
+        ("The square packing problem asks for the side ", False),
+        ("s", True),
+        ("(", False),
+        ("n", True),
+        (") of the smallest square", False),
+    ),
+    (
+        ("that can hold ", False),
+        ("n", True),
+        (" unit squares, where the squares are free to rotate but cannot overlap.", False),
+    ),
     (("deg is the algebraic degree of that side length", False),),
 )
 #: Quartz selects upright Helvetica Bold even for italic SVG spans. Arial's italic
@@ -424,10 +458,10 @@ class CompositeIdentity:
     """What one composite was drawn from: the data commit, and that commit's date.
 
     A poster is stamped once, when it is drawn, and is not re-stamped when the data
-    moves (`sqpack.release`, rule 4). So what its footer and its dateline say is held to
-    this record, which the drawing carries in its own metadata, and not to the pin: the
-    footer is the edition as it read at this revision, and the dateline is the day of
-    the data the cards show. A poster that travels alone can be traced to its data by
+    moves (`sqpack.release`, rule 4). Its visible edition and date are held to this
+    record, which the drawing carries in its own metadata, and not to the pin: the
+    edition is as it read at this revision, and the date is the day of the data the
+    cards show. A poster that travels alone can be traced to its data by
     either. The record is a git revision and a date, nothing a second file has to keep
     in step (`OR-16`).
 
@@ -446,10 +480,20 @@ class CompositeIdentity:
         return edition_at(self.data_revision)
 
     @property
-    def dateline(self) -> str:
-        """The line under the title, dated by the data and written as a reader reads it."""
+    def formatted_date(self) -> str:
+        """The data's date, written as a reader reads it."""
         day = date.fromisoformat(self.data_date)
-        return f"Including new results ({day:%B} {day.day}, {day.year})"
+        return f"{day:%B} {day.day}, {day.year}"
+
+    @property
+    def dateline(self) -> str:
+        """The row-major figure's line under the title, dated by its data."""
+        return f"Including new results ({self.formatted_date})"
+
+    @property
+    def poster_stamp(self) -> str:
+        """The triangle's closing line, joining its edition and authoritative data date."""
+        return f"{self.stamp} · {self.formatted_date}"
 
     @property
     def current(self) -> bool:
@@ -569,6 +613,29 @@ def _whole_units(value: Decimal, what: str) -> int:
 
 
 @dataclass(frozen=True)
+class CompositeSegmentLine:
+    """One explicit packing segment on a physical line of a logical square-bound row."""
+
+    numbers: PackingSegment
+    kind: Literal["non-grid", "grid"]
+    physical_row: int
+    left: Decimal
+    top: Decimal
+
+
+@dataclass(frozen=True)
+class CompositeCardPosition:
+    """Logical identity and physical placement, kept separate when a row wraps."""
+
+    row: int
+    column: int
+    physical_row: int
+    left: Decimal
+    top: Decimal
+    segment: Literal["non-grid", "grid", "unsegmented"]
+
+
+@dataclass(frozen=True)
 class CompositeCanvas:
     """Where every part of one composite sits, computed from its specification.
 
@@ -581,42 +648,172 @@ class CompositeCanvas:
     """
 
     spec: CompositeSpec
+    #: Resolved only at the triangle renderer boundary. Geometry remains pure; a
+    #: partial crop can carry full-row thresholds without reading a canonical file.
+    transitions: tuple[GridTransition, ...] = ()
+
+    def with_transitions(self, transitions: Sequence[GridTransition]) -> CompositeCanvas:
+        """Bind canonical row segments to this pure placement calculation."""
+        rows = [transition.row for transition in transitions]
+        if len(set(rows)) != len(rows):
+            raise ValueError("a composite cannot have duplicate grid-transition rows")
+        selected = tuple(
+            transition
+            for transition in transitions
+            if transition.first_n <= self.spec.last_n and transition.last_n >= self.spec.first_n
+        )
+        return replace(self, transitions=selected)
+
+    @property
+    def physical_columns(self) -> int:
+        """The inline envelope; later grid suffixes share its right edge."""
+        if not self.information_in_corner or not self.transitions:
+            return self.spec.columns
+        envelope = min(self.spec.columns, 2 * POSTER_INLINE_ROWS - 1)
+        return max(
+            envelope,
+            *(
+                segment.count
+                for transition in self.transitions
+                for segment in self._selected_segments(transition)
+            ),
+        )
+
+    def _transition(self, row: int) -> GridTransition | None:
+        return next(
+            (transition for transition in self.transitions if transition.row == row), None
+        )
+
+    def _selected_segments(
+        self, transition: GridTransition
+    ) -> tuple[PackingSegment, PackingSegment]:
+        stop = min(transition.last_n, self.spec.last_n) + 1
+        first = max(transition.first_n, self.spec.first_n)
+        boundary = min(max(transition.grid.first_n, first), stop)
+        return PackingSegment(first, boundary), PackingSegment(boundary, stop)
+
+    def split_row(self, row: int, transition: GridTransition | None = None) -> bool:
+        if not self.information_in_corner or row <= POSTER_INLINE_ROWS:
+            return False
+        transition = transition or self._transition(row)
+        if transition is None:
+            # Direct synthetic geometry has no canonical context and retains its
+            # ordinary placement. Production binds all selected row thresholds.
+            return False
+        non_grid, grid = self._selected_segments(transition)
+        return not non_grid.empty and not grid.empty
+
+    def _row_origin(self, row: int) -> tuple[int, Decimal]:
+        split_rows = sum(self.split_row(previous) for previous in range(1, row))
+        physical_row = row - 1 + split_rows
+        return physical_row, self.grid_top + SUMMARY_ROW_PITCH * physical_row
+
+    @property
+    def physical_rows(self) -> int:
+        return self.spec.rows + sum(self.split_row(row) for row in range(1, self.spec.rows + 1))
+
+    def segment_lines(self, transition: GridTransition) -> tuple[CompositeSegmentLine, ...]:
+        """Place selected non-grid and grid segments without changing their logical row."""
+        if not self.information_in_corner:
+            raise ValueError("square-bound segments require a triangle composite")
+        non_grid, grid = self._selected_segments(transition)
+        physical_row, top = self._row_origin(transition.row)
+        split = self.split_row(transition.row, transition)
+        lines = []
+        if not non_grid.empty:
+            lines.append(
+                CompositeSegmentLine(non_grid, "non-grid", physical_row, self.grid_left, top)
+            )
+        if not grid.empty:
+            if split or (transition.row > POSTER_INLINE_ROWS and non_grid.empty):
+                left = (
+                    Decimal(self.width)
+                    - POSTER_OUTER_MARGIN
+                    - SUMMARY_CARD_WIDTH
+                    - SUMMARY_COLUMN_PITCH * (grid.count - 1)
+                )
+            else:
+                left = self.grid_left + SUMMARY_COLUMN_PITCH * non_grid.count
+                if not non_grid.empty:
+                    left += POSTER_GRID_GAP
+            lines.append(
+                CompositeSegmentLine(
+                    grid,
+                    "grid",
+                    physical_row + int(split),
+                    left,
+                    top + (SUMMARY_ROW_PITCH if split else Decimal(0)),
+                )
+            )
+        return tuple(lines)
+
+    def card_position(
+        self, n: int, transition: GridTransition | None = None
+    ) -> CompositeCardPosition:
+        """Resolve one card from explicit segments, retaining its logical coordinates."""
+        row, column = self.spec.card_position(n)
+        transition = transition or self._transition(row + 1)
+        if transition is not None and transition.row != row + 1:
+            raise ValueError("a grid transition must belong to the card's square-bound row")
+        if self.information_in_corner and transition is not None:
+            line = next(
+                line for line in self.segment_lines(transition) if n in line.numbers.numbers
+            )
+            return CompositeCardPosition(
+                row,
+                column,
+                line.physical_row,
+                line.left + SUMMARY_COLUMN_PITCH * (n - line.numbers.first_n),
+                line.top,
+                line.kind,
+            )
+        return CompositeCardPosition(
+            row,
+            column,
+            row,
+            self.grid_left + SUMMARY_COLUMN_PITCH * column,
+            self.grid_top + SUMMARY_ROW_PITCH * row,
+            "unsegmented",
+        )
 
     @property
     def width(self) -> int:
-        """A side margin either side of `columns` cells of one column pitch each."""
-        return _whole_units(
-            SUMMARY_SIDE_MARGIN * 2
-            + SUMMARY_COLUMN_PITCH * self.spec.columns
-            + (POSTER_GRID_GAP if self.information_in_corner else Decimal(0)),
-            f"{self.spec.stem} width",
+        """Outside air around the actual cards, or the legacy row-major pitches."""
+        width = (
+            self.grid_left
+            + SUMMARY_COLUMN_PITCH * (self.physical_columns - 1)
+            + POSTER_GRID_GAP
+            + SUMMARY_CARD_WIDTH
+            + POSTER_OUTER_MARGIN
+            if self.information_in_corner
+            else SUMMARY_SIDE_MARGIN * 2 + SUMMARY_COLUMN_PITCH * self.spec.columns
         )
+        return _whole_units(width, f"{self.spec.stem} width")
 
     @property
     def information_in_corner(self) -> bool:
         return self.spec.placement == CompositePlacement.square_bound_triangle
 
     @property
+    def grid_left(self) -> Decimal:
+        return POSTER_GRID_LEFT if self.information_in_corner else SUMMARY_GRID_LEFT
+
+    @property
     def grid_top(self) -> Decimal:
-        return SUMMARY_SIDE_MARGIN if self.information_in_corner else SUMMARY_GRID_TOP
+        return POSTER_OUTER_MARGIN if self.information_in_corner else SUMMARY_GRID_TOP
 
     def card_left(self, n: int, transition: GridTransition | None = None) -> Decimal:
         """A cell's left edge, with a gap only in a triangle's regular-grid suffix."""
-        row, column = self.spec.card_position(n)
-        if transition is not None and transition.row != row + 1:
-            raise ValueError("a grid transition must belong to the card's square-bound row")
-        gap = (
-            POSTER_GRID_GAP
-            if self.information_in_corner
-            and transition is not None
-            and transition.has_irregular_prefix
-            and n >= transition.first_grid_n
-            else Decimal(0)
-        )
-        return SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column + gap
+        return self.card_position(n, transition).left
 
     @property
     def information_right(self) -> Decimal:
+        """End poster text at the final drawing's edge, inside the card's caption air."""
+        if self.information_in_corner:
+            trailing_card_air = (
+                SUMMARY_CARD_WIDTH - SUMMARY_PACKING_INSET_X - SUMMARY_PACKING_SIZE
+            )
+            return Decimal(self.width) - POSTER_OUTER_MARGIN - trailing_card_air
         return Decimal(self.width) - SUMMARY_SIDE_MARGIN
 
     @property
@@ -626,7 +823,7 @@ class CompositeCanvas:
     @property
     def grid_bottom(self) -> Decimal:
         """One row pitch below the last row's top."""
-        return self.grid_top + SUMMARY_ROW_PITCH * self.spec.rows
+        return self.grid_top + SUMMARY_ROW_PITCH * self.physical_rows
 
     @property
     def legend_baseline(self) -> Decimal:
@@ -643,27 +840,25 @@ class CompositeCanvas:
 
     @property
     def citations_baseline(self) -> Decimal:
-        pitch = (
-            POSTER_FOOTER_LINE_PITCH
-            if self.information_in_corner
-            else SUMMARY_FOOTER_LINE_PITCH
-        )
-        lines = len(POSTER_EXPLAINER_LINES) if self.information_in_corner else 1
-        return self.explainer_baseline + pitch * lines
+        if self.information_in_corner:
+            return (
+                POSTER_PACKING_CREDITS_BASELINE
+                + POSTER_FOOTER_LINE_PITCH * (POSTER_PACKING_CREDITS_LINE_COUNT - 1)
+                + POSTER_PACKING_CREDITS_SECTION_GAP
+                + POSTER_CLOSING_LINE_PITCH
+            )
+        return self.explainer_baseline + SUMMARY_FOOTER_LINE_PITCH
 
     @property
     def credit_baseline(self) -> Decimal:
-        pitch = (
-            POSTER_FOOTER_LINE_PITCH
-            if self.information_in_corner
-            else SUMMARY_FOOTER_LINE_PITCH
-        )
-        return self.citations_baseline + pitch
+        if self.information_in_corner:
+            return self.citations_baseline + 2 * POSTER_CLOSING_LINE_PITCH
+        return self.citations_baseline + SUMMARY_FOOTER_LINE_PITCH
 
     @property
     def stamp_baseline(self) -> Decimal:
         pitch = (
-            POSTER_FOOTER_LINE_PITCH
+            POSTER_CLOSING_LINE_PITCH
             if self.information_in_corner
             else SUMMARY_FOOTER_LINE_PITCH
         )
@@ -672,7 +867,10 @@ class CompositeCanvas:
     @property
     def height(self) -> int:
         bottom = (
-            self.grid_bottom + SUMMARY_SIDE_MARGIN
+            self.grid_top
+            + SUMMARY_ROW_PITCH * (self.physical_rows - 1)
+            + SUMMARY_CARD_HEIGHT
+            + POSTER_OUTER_MARGIN
             if self.information_in_corner
             else self.stamp_baseline + SUMMARY_BOTTOM_MARGIN
         )
@@ -734,8 +932,8 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "n equals 1 through 100. Each tile is normalized to its own container and "
             "labeled with n, the best known upper bound on the container side and, where "
             "the value is not yet settled, the best proved lower bound beneath it. A star "
-            "in crimson marks a recent result, a lower bound proved since August 2026. "
-            "Badges mark "
+            "in crimson marks a recent construction giving an upper bound, a proof of a "
+            "lower bound or an optimality proof since August 2026. Badges mark "
             "which side lengths are proved optimal, and whether a side length is pinned "
             "exactly by a radical or a minimal polynomial rather than only by a decimal. "
             f"{SUMMARY_CITATIONS}."
@@ -747,19 +945,25 @@ SUMMARY_PROSE: dict[str, tuple[str, str]] = {
             "A left-aligned triangular poster of the retained best known unit-square "
             "packings for n equals 1 through 324, the whole audited corpus. Row k holds "
             "n equals (k minus 1) squared plus 1 through k squared, starting in the "
-            "leftmost column. Eighteen rows end at 324, with thirty-five tiles in the "
-            "final row. GRID and a count mark the first retained regular grid packing "
-            "in each row; where an irregular prefix precedes it, an extra half-drawing "
-            "width separates the groups. A right-aligned information block in the "
+            "leftmost column. Eighteen logical rows end at 324. The last two rows put "
+            "their complete grid suffixes on separate right-aligned lines, giving "
+            "twenty physical lines within a thirty-one-column envelope. "
+            "A k by k grid label marks the first retained regular grid packing "
+            "in each row; an extra half-drawing width separates an irregular prefix "
+            "from its grid suffix horizontally when inline. Wrapped segments use the "
+            "same vertical pitch as every other physical line. "
+            f"{POSTER_PROBLEM} "
+            "A right-aligned information block in the "
             "upper-right corner "
             "contains the title, complete legend and publication details. Each tile is "
             "normalized to its own container and labeled with n, the best known upper "
             "bound on the container side and, where the value is not yet settled, the "
-            "best proved lower bound beneath it. A star in crimson marks a recent result, "
-            "a lower bound proved since August 2026. Badges mark which side lengths are "
-            "proved "
+            "best proved lower bound beneath it. A star in crimson marks a recent "
+            "construction giving an upper bound, a proof of a lower bound or an "
+            "optimality proof since August 2026. Badges mark which side lengths are proved "
             "optimal, and whether a side length is pinned exactly by a radical or a "
-            f"minimal polynomial rather than only by a decimal. {SUMMARY_CITATIONS}."
+            f"minimal polynomial rather than only by a decimal. "
+            f"{POSTER_CITATIONS}: {SUMMARY_REPOSITORY}."
         ),
     ),
 }
@@ -1393,58 +1597,144 @@ def _poster_grid_transitions(canvas: CompositeCanvas) -> tuple[GridTransition, .
     """
     if not canvas.information_in_corner:
         return ()
+    if canvas.transitions:
+        return canvas.transitions
     entries = json.loads(MANIFEST.read_text(encoding="utf-8"))["atlas"]["entries"]
     return tuple(
         transition
         for transition in grid_transitions(entries)
-        if transition.first_grid_n in canvas.spec.numbers
+        if transition.first_n <= canvas.spec.last_n and transition.last_n >= canvas.spec.first_n
+    )
+
+
+def resolved_composites(
+    entries: Sequence[Mapping[str, Any]] | None = None,
+) -> tuple[CompositeCanvas, ...]:
+    """Bind triangle segment plans at a production boundary, leaving generic geometry pure.
+
+    Data producers pass their complete entry sequence; retained export consumers read
+    the canonical manifest through the existing triangle preflight. Neither path asks
+    the strict row contract to classify a synthetic row-major or a cropped sequence.
+    """
+    transitions = (
+        grid_transitions(entries)
+        if entries is not None and any(canvas.information_in_corner for canvas in COMPOSITES)
+        else None
+    )
+    return tuple(
+        canvas.with_transitions(
+            tuple(
+                transition
+                for transition in transitions
+                if transition.first_n <= canvas.spec.last_n
+                and transition.last_n >= canvas.spec.first_n
+            )
+            if transitions is not None
+            else _poster_grid_transitions(canvas)
+        )
+        if canvas.information_in_corner
+        else canvas
+        for canvas in COMPOSITES
     )
 
 
 def _append_grid_transition_marker(
     root: ET.Element, transition: GridTransition, *, canvas: CompositeCanvas
 ) -> None:
-    """A compact count in the added gap, or the left margin of an all-grid row."""
+    """Mark the retained grid dimensions inside the separator or all-grid margin."""
     center = (
-        canvas.card_left(transition.first_grid_n, transition) - POSTER_GRID_GAP / 2
+        canvas.card_left(transition.grid.first_n, transition) - POSTER_GRID_GAP / 2
         if transition.has_irregular_prefix
-        else SUMMARY_SIDE_MARGIN / 2
+        else (POSTER_OUTER_MARGIN + canvas.grid_left) / 2
     )
-    row_top = canvas.grid_top + SUMMARY_ROW_PITCH * (transition.row - 1)
+    grid_position = canvas.card_position(transition.grid.first_n, transition)
+    lines = canvas.segment_lines(transition)
+    extra_gap = (
+        POSTER_GRID_GAP
+        if len(lines) == 2 and lines[0].physical_row == lines[1].physical_row
+        else Decimal(0)
+    )
+    row_top = grid_position.top
+    dimensions = f"{transition.row}\u00d7{transition.row}"
+    labels = (dimensions, "GRID")
+    room = (
+        POSTER_GRID_GAP
+        if transition.has_irregular_prefix
+        else canvas.grid_left - POSTER_OUTER_MARGIN
+    )
+    if any(_text_width(label, POSTER_GRID_MARKER_SIZE) > room for label in labels):
+        raise ValueError("a grid transition marker exceeds its separator space")
     marker = sub(
         root,
         "g",
         {
             "data-feature": "grid-transition",
             "data-row": str(transition.row - 1),
+            "data-physical-row": str(grid_position.physical_row),
+            "data-gap-axis": "horizontal" if extra_gap else "none",
             "data-first-grid-n": str(transition.first_grid_n),
-            "data-extra-gap": format_svg_number(
-                POSTER_GRID_GAP if transition.has_irregular_prefix else Decimal(0)
-            ),
-            "aria-label": f"Regular grid packings begin at n={transition.first_grid_n}",
+            "data-grid-side": str(transition.row),
+            "data-extra-gap": format_svg_number(extra_gap),
+            "aria-label": f"{dimensions} grid packings begin at n={transition.first_grid_n}",
         },
     )
-    for feature, content, size, baseline in (
-        ("grid-transition-label", "GRID", "14", row_top + 82),
-        ("grid-transition-count", str(transition.first_grid_n), "20", row_top + 108),
-    ):
-        room = POSTER_GRID_GAP if transition.has_irregular_prefix else SUMMARY_SIDE_MARGIN
-        if _text_width(content, size) > room:
-            raise ValueError("a grid transition marker exceeds its separator space")
+    for index, label in enumerate(labels):
         sub(
             marker,
             "text",
             {
-                "data-feature": feature,
+                "data-feature": "grid-transition-label",
                 "x": format_svg_number(center),
-                "y": format_svg_number(baseline),
+                "y": format_svg_number(
+                    row_top
+                    + POSTER_GRID_MARKER_BASELINE
+                    + POSTER_GRID_MARKER_LINE_PITCH * index
+                ),
                 "text-anchor": "middle",
                 "font-family": SUMMARY_FONT,
-                "font-size": size,
+                "font-size": POSTER_GRID_MARKER_SIZE,
                 "font-weight": "700",
                 "fill": SUMMARY_SMALL_FILL,
             },
-        ).text = content
+        ).text = label
+
+
+def _composite_bound_display(
+    display: str, canvas: CompositeCanvas, *, degree: int | None = None
+) -> str:
+    """Shorten triangle captions without strengthening a stored inequality.
+
+    Five decimals ordinarily fit. A longer degree label can need one fewer digit;
+    measure the two captions with their italic kern before accepting either precision.
+    """
+    if not canvas.information_in_corner:
+        return display
+    head, separator, numeral = display.rpartition(" ")
+    direction: Literal["lower", "upper", "exact"]
+    if head.endswith("≥"):
+        direction = "lower"
+    elif head.endswith("≤"):
+        direction = "upper"
+    elif head.endswith("="):
+        direction = "exact"
+    else:
+        raise ValueError("a composite bound display lacks a supported relation")
+    for decimals in (POSTER_BOUND_DECIMAL_PLACES, POSTER_BOUND_DECIMAL_PLACES - 1):
+        caption = (
+            head
+            + separator
+            + display_bound_value(numeral, decimal_places=decimals, direction=direction)
+        )
+        if degree is None or degree < 2:
+            return caption
+        extent = (
+            _text_width(caption, SUMMARY_SMALL_SIZE)
+            + Decimal(SUMMARY_SMALL_SIZE) * SUMMARY_ITALIC_KERN
+            + _text_width(f"deg {degree}", SUMMARY_SMALL_SIZE)
+        )
+        if extent + POSTER_BOUND_DEGREE_GAP <= SUMMARY_PACKING_SIZE:
+            return caption
+    raise ValueError("a triangle bound caption collides with its algebraic degree")
 
 
 def _append_summary_card(
@@ -1454,11 +1744,12 @@ def _append_summary_card(
     spec: RenderSpec,
     canvas: CompositeCanvas,
     grid_transition: GridTransition | None = None,
+    recent: RecentContributions | None = None,
 ) -> None:
     n = built.frontier.n
-    row, column = canvas.spec.card_position(n)
-    card_x = canvas.card_left(n, grid_transition)
-    card_y = canvas.grid_top + SUMMARY_ROW_PITCH * row
+    position = canvas.card_position(n, grid_transition)
+    row, column = position.row, position.column
+    card_x, card_y = position.left, position.top
     packing_x = card_x + SUMMARY_PACKING_INSET_X
     packing_y = card_y + SUMMARY_PACKING_INSET_Y
     frame = frame_from_witness(built.witness)
@@ -1474,7 +1765,19 @@ def _append_summary_card(
             "data-n": str(n),
             "data-row": str(row),
             "data-column": str(column),
+            **(
+                {
+                    "data-physical-row": str(position.physical_row),
+                    "data-segment": position.segment,
+                }
+                if canvas.information_in_corner
+                else {}
+            ),
             "data-source-id": frame.source_id,
+            "data-known-rigid": str(_figure_entries()[n]["rigidity"]["known_rigid"]).lower(),
+            "data-rigidity": json.dumps(
+                _figure_entries()[n]["rigidity"], ensure_ascii=False, separators=(",", ":")
+            ),
         },
     )
     sub(
@@ -1566,7 +1869,7 @@ def _append_summary_card(
         },
     ).text = str(n)
 
-    badges = _case_badges(built)
+    badges = _case_badges(built, recent=recent)
     left = packing_x
     right = packing_x + SUMMARY_PACKING_SIZE
     top_row = card_y + SUMMARY_LABEL_BASELINE
@@ -1575,7 +1878,17 @@ def _append_summary_card(
     badge_top = top_row - Decimal(29) * SUMMARY_LABEL_CAP_RATIO
     cursor = right - SUMMARY_BADGE_SIZE
     for glyph, style, label in reversed(badges):
-        _append_badge(card, glyph, style, label, x=cursor, top=badge_top)
+        _append_badge(
+            card,
+            glyph,
+            style,
+            label,
+            x=cursor,
+            top=badge_top,
+            accent=FIRST_PARTY_ACCENT_COLOR
+            if recent is not None and recent.optimal and glyph == "O"
+            else None,
+        )
         cursor -= SUMMARY_BADGE_SIZE + Decimal(4)
     bound = sub(
         card,
@@ -1592,7 +1905,16 @@ def _append_summary_card(
     )
     # Only the function name is italic, as in ordinary mathematical setting: the
     # parentheses, the argument, the relation and the numeral stay upright.
-    _append_function_text(bound, _figure_entries()[n]["side"]["display"], SUMMARY_SMALL_SIZE)
+    _append_function_text(
+        bound,
+        _composite_bound_display(
+            _figure_entries()[n]["side"]["display"],
+            canvas,
+            degree=_figure_entries()[n]["exactness"]["degree"],
+        ),
+        SUMMARY_SMALL_SIZE,
+        accent=FIRST_PARTY_ACCENT_COLOR if recent is not None and recent.upper else None,
+    )
 
     # The record carries a degree for all 95 known cases, but printing "deg 1"
     # on the 65 integer sides is noise: a whole number is self-evidently
@@ -1614,10 +1936,25 @@ def _append_summary_card(
             },
         ).text = f"deg {degree}"
 
-    _append_lower_bound(card, n, left=left, baseline=card_y + SUMMARY_LOWER_BASELINE)
+    _append_lower_bound(
+        card,
+        n,
+        left=left,
+        baseline=card_y + SUMMARY_LOWER_BASELINE,
+        recent=None if recent is None else recent.lower,
+        canvas=canvas,
+    )
 
 
-def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: Decimal) -> None:
+def _append_lower_bound(
+    card: ET.Element,
+    n: int,
+    *,
+    left: Decimal,
+    baseline: Decimal,
+    recent: bool | None = None,
+    canvas: CompositeCanvas | None = None,
+) -> None:
     """The certified floor, under the best known side.
 
     A proved case says `s(n) = ...` on the line above and gets nothing here. Where the
@@ -1644,9 +1981,13 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
     )
     _append_function_text(
         lower,
-        entry["display"],
+        entry["display"]
+        if canvas is None
+        else _composite_bound_display(entry["display"], canvas),
         SUMMARY_SMALL_SIZE,
-        accent=FIRST_PARTY_ACCENT_COLOR if entry["recent_result"] else None,
+        accent=FIRST_PARTY_ACCENT_COLOR
+        if (entry["recent_result"] if recent is None else recent)
+        else None,
     )
 
 
@@ -1655,7 +1996,7 @@ def _append_lower_bound(card: ET.Element, n: int, *, left: Decimal, baseline: De
 #: so went out at n = 11 when Kleddamag's 3.875, developed from T-026, became the bound.
 #: The month is read from `RECENT_SINCE`, so the label cannot name another; it is the
 #: old label's width.
-RECENT_LABEL = f"recent result, since {RECENT_SINCE:%b %Y}"
+RECENT_LABEL = recent_label()
 
 
 @cache
@@ -1664,13 +2005,16 @@ def _figure_entries() -> dict[int, dict]:
 
     Every claim the figure states is decided in
     devtools/build_composite_figure_data.py and validated against
-    composite-figure.schema.yaml. Nothing is re-derived here, so the drawing and
-    the record cannot disagree.
+    composite-figure.schema.yaml. These numeric claims and badge meanings come from
+    that record; both composites separately receive contribution-recency flags from
+    the canonical status helper.
     """
     return {entry["n"]: entry for entry in load_figure_record()["entries"]}
 
 
-def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
+def _case_badges(
+    built: BuiltCase, *, recent: RecentContributions | None = None
+) -> tuple[tuple[str, str, str], ...]:
     """The card's icons, the new-result star first where the case carries one.
 
     The star reads as one of the badges rather than as punctuation on the bound line,
@@ -1678,8 +2022,14 @@ def _case_badges(built: BuiltCase) -> tuple[tuple[str, str, str], ...]:
     laid out from the right.
     """
     entry = _figure_entries()[built.frontier.n]
-    badges = [(badge["glyph"], badge["style"], badge["meaning"]) for badge in entry["badges"]]
-    if entry["lower"]["recent_result"]:
+    badges = [
+        (badge["glyph"], badge["style"], badge["meaning"])
+        for badge in entry["badges"]
+        if badge["glyph"] != "R"
+    ]
+    if entry["rigidity"]["known_rigid"]:
+        badges.append(("R", "solid", "known rigid"))
+    if entry["lower"]["recent_result"] if recent is None else recent.any:
         badges.insert(0, ("", "star", RECENT_LABEL))
     return tuple(badges)
 
@@ -1784,6 +2134,7 @@ def _append_badge(
     x: Decimal,
     top: Decimal,
     type_scale: Decimal = Decimal(1),
+    accent: str | None = None,
 ) -> None:
     """Draw one badge at an explicit box top.
 
@@ -1809,6 +2160,11 @@ def _append_badge(
         "ink": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
         "muted": ("none", PAPER_THEME.muted, PAPER_THEME.muted),
     }[style]
+    if accent is not None:
+        if style == "solid":
+            fill = accent
+        else:
+            stroke = glyph_fill = accent
     sub(
         parent,
         "rect",
@@ -1847,6 +2203,7 @@ def _legend_row(
     baseline: Decimal,
     canvas_width: int,
     right_edge: Decimal | None = None,
+    left_edge: Decimal | None = None,
     type_scale: Decimal = Decimal(1),
 ) -> None:
     """Lay one legend row centered on the canvas or ending at a right edge.
@@ -1870,12 +2227,18 @@ def _legend_row(
         mark_width(mark) + mark_gap + _text_width(label, footer_size) for mark, label in entries
     ]
     row_width = sum(widths, Decimal(0)) + gap * Decimal(len(entries) - 1)
-    if right_edge is not None and row_width > POSTER_INFORMATION_WIDTH:
+    if (
+        right_edge is not None or left_edge is not None
+    ) and row_width > POSTER_INFORMATION_WIDTH:
         raise ValueError("a poster legend line exceeds its information block")
     cursor = (
-        (Decimal(canvas_width) - row_width) / 2
-        if right_edge is None
-        else right_edge - row_width
+        left_edge
+        if left_edge is not None
+        else (
+            (Decimal(canvas_width) - row_width) / 2
+            if right_edge is None
+            else right_edge - row_width
+        )
     )
     for (mark, label), width in zip(entries, widths, strict=True):
         if isinstance(mark, tuple):
@@ -1900,15 +2263,19 @@ def _legend_row(
                     },
                 )
                 if numeral:
+                    numeral_size = format_svg_number(Decimal("11.5") * type_scale)
+                    if _text_width(numeral, numeral_size) > badge_size - type_scale:
+                        raise ValueError("a legend swatch label exceeds its square")
                     sub(
                         legend,
                         "text",
                         {
+                            "data-swatch-label": numeral,
                             "x": format_svg_number(run_end + badge_size / 2),
                             "y": format_svg_number(top + Decimal("13.4") * type_scale),
                             "text-anchor": "middle",
                             "font-family": SUMMARY_FONT,
-                            "font-size": format_svg_number(Decimal("11.5") * type_scale),
+                            "font-size": numeral_size,
                             "font-weight": "650",
                             "fill": PAPER_THEME.background
                             if hex_oklch(fill)[0] < 0.62
@@ -1925,7 +2292,9 @@ def _legend_row(
                 ),
                 "y": format_svg_number(baseline),
                 **(
-                    {"text-anchor": "end", "data-feature": "legend-label"}
+                    {"text-anchor": "start", "data-feature": "legend-label"}
+                    if left_edge is not None
+                    else {"text-anchor": "end", "data-feature": "legend-label"}
                     if right_edge is not None
                     else {}
                 ),
@@ -1939,71 +2308,114 @@ def _legend_row(
 
 
 def _append_summary_legend(
-    root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas
+    root: ET.Element,
+    *,
+    spec: RenderSpec,
+    canvas: CompositeCanvas,
+    contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
-    """Badge meanings and color encodings, in rows or a right-aligned column."""
+    """The shared seven meanings, with renderer-specific marks and positioning."""
     record = load_figure_record()
     totals = next(
         composite["totals"]
         for composite in record["composites"]
         if composite["stem"] == canvas.spec.stem
     )
-    tally = {
-        RECENT_LABEL: totals["lower_bound_recent_result"],
-        "proved optimal": totals["proved_optimal"],
-        "exact value known": totals["exact_value_known"],
-        "only known numerically": totals["only_known_numerically"],
-        "rigid (established here)": totals["rigidity_established"],
-        "annotated rigid by the catalogue": totals["rigidity_catalogue_annotated"],
-    }
+    recent_count = (
+        totals["lower_bound_recent_result"]
+        if contributions is None
+        else sum(contributions[n].any for n in canvas.spec.numbers)
+    )
+    descriptor = atlas_legend(
+        AtlasLegendCounts(
+            proved_optimal=totals["proved_optimal"],
+            exact_value_known=totals["exact_value_known"],
+            only_known_numerically=totals["only_known_numerically"],
+            known_rigid=totals["rigidity_known"],
+            recent_results=recent_count,
+        )
+    )
     palette = square_fill_palette(
         hue_count=spec.hue_count,
         shades_per_hue=spec.shades_per_hue,
         lightness_span=spec.shade_lightness_span,
     )
     middle = spec.shades_per_hue // 2
-    legend = sub(root, "g", {"data-feature": "evidence-legend"})
-    badges = [
-        ("O", "solid", "proved optimal"),
-        ("=", "solid", "exact value known"),
-        ("\u2248", "muted", "only known numerically"),
-        ("R", "solid", "rigid (established here)"),
-        # The muted twin is the point of D-385: one glyph used to cover both, so a
-        # source's annotation was rendered indistinguishable from an argument of ours.
-        ("R", "muted", "annotated rigid by the catalogue"),
-        ("", "star", RECENT_LABEL),
-    ]
-    badge_entries: list[tuple[object, str]] = [
-        (badge, f"{badge[2]} ({tally.get(badge[2], 0)})") for badge in badges
-    ]
-    # Color carries the tilt angle, shade the contact count. Four hues stand in
-    # for the twenty; the citron ramp illustrates the shades because that family
-    # shows every contact count in the atlas.
-    hue_run = [(palette[index][middle], "") for index in range(4)]
-    shade_run = [
-        (fill, str(spec.shades_per_hue - 1 - index)) for index, fill in enumerate(palette[1])
-    ]
-    color_entries: list[tuple[object, str]] = [
-        (hue_run, "colors indicate distinct tilt angles"),
-        (shade_run, "shade indicates number of full-side contacts"),
-    ]
-    if canvas.information_in_corner:
-        for index, entry in enumerate([*badge_entries, *color_entries]):
-            _legend_row(
-                legend,
-                [entry],
-                baseline=canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index,
-                canvas_width=canvas.width,
-                right_edge=canvas.information_right,
-                type_scale=POSTER_INFORMATION_TYPE_SCALE,
+
+    def entry(item: LegendItem) -> tuple[object, str]:
+        mark: object
+        if item.marker == "angles":
+            labels = item.marker_labels or ("",) * len(item.marker_values)
+            mark = [
+                (palette[index][middle], label)
+                for index, label in zip(item.marker_values, labels, strict=True)
+            ]
+        elif item.marker == "shades":
+            mark = [
+                (palette[1][index], str(value))
+                for index, value in enumerate(item.marker_values)
+            ]
+        else:
+            mark = (
+                "" if item.marker == "star" else item.marker,
+                "star" if item.marker == "star" else "muted" if item.marker == "≈" else "solid",
+                item.label,
             )
+        return mark, item.text
+
+    legend = sub(root, "g", {"data-feature": "evidence-legend"})
+    if canvas.information_in_corner:
+        badge_size = SUMMARY_BADGE_SIZE * POSTER_INFORMATION_TYPE_SCALE
+        mark_gap = Decimal(8) * POSTER_INFORMATION_TYPE_SCALE
+
+        def row_width(item: LegendItem) -> Decimal:
+            return (
+                badge_size * (len(item.marker_values) if item.marker_values else 1)
+                + mark_gap
+                + _text_width(item.text, POSTER_FOOTER_SIZE)
+            )
+
+        widths = [
+            max(row_width(item) for item in column)
+            for column in (descriptor.left, descriptor.right)
+        ]
+        span = sum(widths, Decimal(0)) + POSTER_LEGEND_COLUMN_GAP
+        if span > POSTER_INFORMATION_WIDTH:
+            raise ValueError("the poster legend columns exceed their information block")
+        cursor = canvas.information_right - span
+        for name, items, width in zip(
+            ("left", "right"), (descriptor.left, descriptor.right), widths, strict=True
+        ):
+            column = sub(
+                legend,
+                "g",
+                {
+                    "data-feature": "legend-column",
+                    "data-column": name,
+                    "data-left": format_svg_number(cursor),
+                    "data-width": format_svg_number(width),
+                },
+            )
+            for index, item in enumerate(items):
+                _legend_row(
+                    column,
+                    [entry(item)],
+                    baseline=canvas.legend_baseline + POSTER_LEGEND_ROW_PITCH * index,
+                    canvas_width=canvas.width,
+                    left_edge=cursor,
+                    type_scale=POSTER_INFORMATION_TYPE_SCALE,
+                )
+            cursor += width + POSTER_LEGEND_COLUMN_GAP
     else:
         _legend_row(
-            legend, badge_entries, baseline=canvas.legend_baseline, canvas_width=canvas.width
+            legend,
+            [entry(item) for item in (*descriptor.left, descriptor.right[0])],
+            baseline=canvas.legend_baseline,
+            canvas_width=canvas.width,
         )
         _legend_row(
             legend,
-            color_entries,
+            [entry(item) for item in descriptor.right[1:]],
             baseline=canvas.legend_baseline + SUMMARY_LEGEND_ROW_PITCH,
             canvas_width=canvas.width,
         )
@@ -2068,7 +2480,12 @@ def _append_summary_explainer(
 
 
 def _append_summary_information(
-    root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas, identity: CompositeIdentity
+    root: ET.Element,
+    *,
+    spec: RenderSpec,
+    canvas: CompositeCanvas,
+    identity: CompositeIdentity,
+    contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
     width = canvas.width
     composite = canvas.spec
@@ -2127,7 +2544,7 @@ def _append_summary_information(
             "fill": PAPER_THEME.ink,
         },
     ).text = SUMMARY_REPOSITORY
-    _append_summary_legend(root, spec=spec, canvas=canvas)
+    _append_summary_legend(root, spec=spec, canvas=canvas, contributions=contributions)
     _append_summary_explainer(root, baseline=canvas.explainer_baseline, canvas_width=width)
     sub(
         root,
@@ -2173,23 +2590,129 @@ def _append_summary_information(
     ).text = identity.stamp
 
 
+@dataclass(frozen=True, slots=True)
+class PackingCredit:
+    """Every named contributor to displayed constructions, grouped by source family."""
+
+    names: tuple[str, ...]
+    source_keys: tuple[str, ...]
+    citation: str
+
+
+@cache
+def _poster_packing_credits(first_n: int, last_n: int) -> tuple[PackingCredit, ...]:
+    """Read construction credits from typed case fields and the canonical bibliography.
+
+    The ordinary citation can shorten three authors to ``et al.``; this list retains
+    every finder and improver. Source families group the metadata, with every complete
+    source key retained in the SVG.
+    """
+    register = build_bound_citations.load_register()
+    groups: dict[str, tuple[list[str], list[str]]] = {}
+    for n in range(first_n, last_n + 1):
+        case = build_bound_citations.load_case(n)
+        citation = build_bound_citations.upper_citation(n, case, register)
+        if citation is None:
+            continue
+        reported = case["reported_upper_bound"]
+        credited = [*(reported.get("found_by") or []), *(reported.get("improved_by") or [])]
+        names = [register.names[name] for name in dict.fromkeys(credited)]
+        source_key = citation["source_key"]
+        if source_key is None:
+            reference = citation["text"]
+            names = names or [build_bound_citations.PROJECT_NAME]
+            source_keys = []
+        else:
+            source = register.sources[source_key]
+            # Repository handles identify the retained packet, while the bibliography
+            # names its author. Group these sources by their canonical author names.
+            family = (
+                ", ".join(source.authors)
+                if source.venue == "GitHub"
+                else source.key.removeprefix("[").removesuffix("]").split()[0]
+            )
+            reference = f"[{family}{f' {source.year}' if source.year is not None else ''}]"
+            names = names or list(source.authors)
+            source_keys = [source.key]
+        group_names, group_sources = groups.setdefault(reference, ([], []))
+        group_names.extend(name for name in names if name not in group_names)
+        group_sources.extend(key for key in source_keys if key not in group_sources)
+    return tuple(
+        PackingCredit(tuple(names), tuple(keys), reference)
+        for reference, (names, keys) in groups.items()
+    )
+
+
+def _poster_credit_lines(packing_credits: Sequence[PackingCredit]) -> tuple[str, ...]:
+    """Balance complete names across three print lines, each author appearing once.
+
+    The introductory phrase shares its first line with names. Among fitting breaks,
+    minimize measured width variance; source keys remain in the SVG metadata.
+    """
+    names = list(dict.fromkeys(name for credit in packing_credits for name in credit.names))
+    if not names:
+        return (POSTER_PACKING_CREDITS_PREFIX,)
+    words = [
+        POSTER_PACKING_CREDITS_PREFIX,
+        *(f"{name}," for name in names[:-1]),
+        f"{names[-1]}.",
+    ]
+    line_count = min(POSTER_PACKING_CREDITS_LINE_COUNT, max(1, len(words) - 1))
+    best_lines: tuple[str, ...] | None = None
+    best_score: Decimal | None = None
+    for breaks in combinations(range(2, len(words)), line_count - 1):
+        boundaries = (0, *breaks, len(words))
+        lines = tuple(" ".join(words[first:last]) for first, last in pairwise(boundaries))
+        widths = tuple(_text_width(line, POSTER_FOOTER_SIZE) for line in lines)
+        if max(widths) > POSTER_INFORMATION_WIDTH:
+            continue
+        mean = sum(widths, Decimal(0)) / line_count
+        score = sum(((width - mean) ** 2 for width in widths), Decimal(0))
+        if best_score is None or score < best_score:
+            best_lines, best_score = lines, score
+    if best_lines is None:
+        raise ValueError("poster packing credits exceed their three-line information block")
+    return best_lines
+
+
 def _append_poster_information(
-    root: ET.Element, *, spec: RenderSpec, canvas: CompositeCanvas, identity: CompositeIdentity
+    root: ET.Element,
+    *,
+    spec: RenderSpec,
+    canvas: CompositeCanvas,
+    identity: CompositeIdentity,
+    contributions: Mapping[int, RecentContributions] | None = None,
 ) -> None:
     right = canvas.information_right
-    document_baselines = [
+    packing_credits = _poster_packing_credits(canvas.spec.first_n, canvas.spec.last_n)
+    credit_lines = _poster_credit_lines(packing_credits)
+    credit_baselines = [
+        POSTER_PACKING_CREDITS_BASELINE + POSTER_FOOTER_LINE_PITCH * index
+        for index in range(len(credit_lines))
+    ]
+    explainer_baselines = [
         canvas.explainer_baseline + POSTER_FOOTER_LINE_PITCH * index
         for index in range(len(POSTER_EXPLAINER_LINES))
-    ] + [canvas.citations_baseline, canvas.credit_baseline, canvas.stamp_baseline]
+    ]
+    repository_baseline = canvas.citations_baseline + POSTER_CLOSING_LINE_PITCH
     font_size = Decimal(POSTER_FOOTER_SIZE)
+    document_lines = [
+        *((baseline, font_size) for baseline in explainer_baselines),
+        *((baseline, font_size) for baseline in credit_baselines),
+        (canvas.citations_baseline, font_size),
+        (repository_baseline, font_size),
+        (canvas.credit_baseline, font_size),
+        (canvas.stamp_baseline, font_size),
+    ]
     if any(
-        above + font_size * Decimal("0.3") > below - font_size
-        for above, below in pairwise(document_baselines)
+        above + above_size * Decimal("0.3") > below - below_size
+        for (above, above_size), (below, below_size) in pairwise(document_lines)
     ):
         raise ValueError("poster documentation lines overlap")
-    if (
-        document_baselines[0] - font_size < POSTER_INFORMATION_TOP
-        or document_baselines[-1] + font_size * Decimal("0.3") > POSTER_INFORMATION_BOTTOM
+    if any(
+        baseline - size < POSTER_INFORMATION_TOP
+        or baseline + size * Decimal("0.3") > POSTER_INFORMATION_BOTTOM
+        for baseline, size in document_lines
     ):
         raise ValueError("poster documentation lies outside its information block")
     block = sub(
@@ -2204,8 +2727,15 @@ def _append_poster_information(
         },
     )
 
+    card_positions = tuple(canvas.card_position(n) for n in canvas.spec.numbers)
+
     def text_line(
-        feature: str, content: str, baseline: Decimal, size: str = POSTER_FOOTER_SIZE
+        feature: str,
+        content: str,
+        baseline: Decimal,
+        size: str = POSTER_FOOTER_SIZE,
+        *,
+        parent: ET.Element | None = None,
     ) -> ET.Element:
         spacing = (
             Decimal("1.5") * POSTER_INFORMATION_TYPE_SCALE
@@ -2215,8 +2745,24 @@ def _append_poster_information(
         extent = _text_width(content, size) + spacing * max(len(content) - 1, 0)
         if extent > POSTER_INFORMATION_WIDTH:
             raise ValueError(f"the poster {feature} line exceeds its information block")
+        if (
+            baseline - Decimal(size) < POSTER_INFORMATION_TOP
+            or baseline + Decimal(size) * Decimal("0.3") > POSTER_INFORMATION_BOTTOM
+        ):
+            raise ValueError(f"the poster {feature} line lies outside its information block")
+        text_left = right - extent
+        text_top = baseline - Decimal(size)
+        text_bottom = baseline + Decimal(size) * Decimal("0.3")
+        if any(
+            text_left < position.left + SUMMARY_CARD_WIDTH
+            and right > position.left
+            and text_top < position.top + SUMMARY_CARD_HEIGHT
+            and text_bottom > position.top
+            for position in card_positions
+        ):
+            raise ValueError(f"the poster {feature} line overlaps a packing card")
         node = sub(
-            block,
+            block if parent is None else parent,
             "text",
             {
                 "data-feature": feature,
@@ -2226,8 +2772,10 @@ def _append_poster_information(
                 "font-family": SUMMARY_FONT,
                 "font-size": size,
                 "font-weight": "700",
-                "fill": PAPER_THEME.ink
-                if feature in {"poster-title", "release", "repository"}
+                "fill": "#000000"
+                if feature in {"citations", "repository"}
+                else PAPER_THEME.ink
+                if feature in {"poster-title", "release"}
                 else SUMMARY_SMALL_FILL,
             },
         )
@@ -2242,38 +2790,45 @@ def _append_poster_information(
         POSTER_TITLE_BASELINE,
         POSTER_TITLE_SIZE,
     )
-    text_line("release", identity.dateline, POSTER_RELEASE_BASELINE, POSTER_SUBTITLE_SIZE)
-    star_span = SUMMARY_STAR_INSET * 2 * _star_scale(POSTER_SUBTITLE_SIZE)
-    release_width = _text_width(identity.dateline, POSTER_SUBTITLE_SIZE)
-    release_gap = SUMMARY_RELEASE_GAP * POSTER_INFORMATION_TYPE_SCALE
-    if release_width + release_gap + star_span > POSTER_INFORMATION_WIDTH:
-        raise ValueError("the poster release line and star exceed its information block")
-    _append_star(
-        block,
-        center_x=right - release_width - release_gap - star_span / 2,
-        center_y=_star_center_y(POSTER_RELEASE_BASELINE, POSTER_SUBTITLE_SIZE),
-        feature="release-star",
-        scale=_star_scale(POSTER_SUBTITLE_SIZE),
-    )
-    text_line(
-        "repository", SUMMARY_REPOSITORY, POSTER_REPOSITORY_BASELINE, POSTER_SUBTITLE_SIZE
-    )
-    _append_summary_legend(block, spec=spec, canvas=canvas)
-    text_line("grid-explainer", POSTER_GRID_NOTE, POSTER_GRID_NOTE_BASELINE)
+    _append_summary_legend(block, spec=spec, canvas=canvas, contributions=contributions)
     for index, runs in enumerate(POSTER_EXPLAINER_LINES):
         _append_summary_explainer(
             block,
-            baseline=document_baselines[index],
+            baseline=explainer_baselines[index],
             canvas_width=canvas.width,
             right_edge=right,
             type_scale=POSTER_INFORMATION_TYPE_SCALE,
             runs=runs,
-            feature="explainer" if index == 0 else "degree-explainer",
+            feature=("explainer", "problem-explainer", "degree-explainer")[index],
             italic_font_family=POSTER_ITALIC_FONT,
         )
-    text_line("citations", SUMMARY_CITATIONS, canvas.citations_baseline)
-    text_line("credit", SUMMARY_CREDIT, canvas.credit_baseline)
-    text_line("release-stamp", identity.stamp, canvas.stamp_baseline)
+    credit_block = sub(
+        block,
+        "g",
+        {
+            "data-feature": "packing-credits",
+            "data-credited-names": json.dumps(
+                list(
+                    dict.fromkeys(name for credit in packing_credits for name in credit.names)
+                ),
+                ensure_ascii=False,
+            ),
+            "data-source-keys": json.dumps(
+                list(
+                    dict.fromkeys(
+                        key for credit in packing_credits for key in credit.source_keys
+                    )
+                ),
+                ensure_ascii=False,
+            ),
+        },
+    )
+    for content, baseline in zip(credit_lines, credit_baselines, strict=True):
+        text_line("packing-credit-line", content, baseline, parent=credit_block)
+    text_line("citations", POSTER_CITATIONS, canvas.citations_baseline)
+    text_line("repository", SUMMARY_REPOSITORY, repository_baseline)
+    text_line("credit", POSTER_DIAGRAM_CREDIT, canvas.credit_baseline)
+    text_line("release-stamp", identity.poster_stamp, canvas.stamp_baseline)
 
 
 @emission_precision()
@@ -2283,7 +2838,7 @@ def render_known_best_summary_svg(
     """Render a complete, zoomable overview of one composite's range of cases.
 
     `identity` is what the drawing says of itself: the data commit it shows, in its
-    metadata and its footer, and that commit's date, in its dateline. The caller says
+    metadata and its footer, and that commit's date, in its visible date. The caller says
     which: `drawable_identity` for a new drawing, the retained one to check an old one.
 
     The pin covers the per-card scale and corner arithmetic in `_append_summary_card`
@@ -2296,6 +2851,9 @@ def render_known_best_summary_svg(
         raise ValueError(
             f"the {composite.stem} composite requires exactly {composite.cases.label} in order"
         )
+    transitions = _poster_grid_transitions(canvas)
+    if canvas.information_in_corner:
+        canvas = canvas.with_transitions(transitions)
     accessible_title, accessible_description = SUMMARY_PROSE[composite.stem]
     width, height = canvas.width, canvas.height
     spec = RenderSpec(overlays=frozenset())
@@ -2333,6 +2891,10 @@ def render_known_best_summary_svg(
                 {
                     "layout": composite.layout,
                     "regular-grid-extra-gap": format_svg_number(POSTER_GRID_GAP),
+                    "physical-columns": str(canvas.physical_columns),
+                    "physical-rows": str(canvas.physical_rows),
+                    "physical-row-pitch": format_svg_number(SUMMARY_ROW_PITCH),
+                    "grid-suffix-second-line-from-row": str(POSTER_INLINE_ROWS + 1),
                 }
                 if composite.placement == CompositePlacement.square_bound_triangle
                 else {}
@@ -2349,19 +2911,29 @@ def render_known_best_summary_svg(
             "fill": PAPER_THEME.background,
         },
     )
+    contributions = recent_contributions_by_case()
     if canvas.information_in_corner:
-        _append_poster_information(root, spec=spec, canvas=canvas, identity=identity)
+        _append_poster_information(
+            root, spec=spec, canvas=canvas, identity=identity, contributions=contributions
+        )
     else:
-        _append_summary_information(root, spec=spec, canvas=canvas, identity=identity)
-    transitions = _poster_grid_transitions(canvas)
+        _append_summary_information(
+            root, spec=spec, canvas=canvas, identity=identity, contributions=contributions
+        )
     by_row = {transition.row: transition for transition in transitions}
     for item in built:
         row, _column = composite.card_position(item.frontier.n)
         _append_summary_card(
-            root, item, spec=spec, canvas=canvas, grid_transition=by_row.get(row + 1)
+            root,
+            item,
+            spec=spec,
+            canvas=canvas,
+            grid_transition=by_row.get(row + 1),
+            recent=contributions.get(item.frontier.n),
         )
     for transition in transitions:
-        _append_grid_transition_marker(root, transition, canvas=canvas)
+        if transition.grid.first_n in composite.numbers:
+            _append_grid_transition_marker(root, transition, canvas=canvas)
     return serialize_svg(root)
 
 
@@ -2547,6 +3119,7 @@ def _composite_pdf_problems(canvas: CompositeCanvas, svg_text: str) -> list[str]
 def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
     case = _frontier_case(n)
     witness = _build_witness(case, plan)
+    witness = orient_atlas_witness(witness)
     problems = check_witness_semantics(witness)
     if problems:
         raise ValueError(f"{witness['id']}: {problems[0]}")
@@ -2760,8 +3333,9 @@ def _raster_record(export: RasterExport, derived_from: str) -> dict:
 def _composite_record(canvas: CompositeCanvas) -> dict:
     """One composite, as the manifest describes it.
 
-    Every number here is computed from the specification, so the record cannot claim a
-    canvas or an export size the drawing does not have.
+    Logical rows and columns come from the specification; canvas dimensions come from
+    its bound segment plan. Production callers resolve that plan before recording it,
+    so the record cannot claim an export size the drawing does not have.
     """
     composite = canvas.spec
     svg_path = f"atlas/known-best/{composite.svg_name}"
@@ -2807,9 +3381,10 @@ def _expected_outputs(workers: int) -> tuple[dict[Path, str], dict]:
         outputs[item.frontier.path] = _frontier_with_witness(
             item.frontier, str(item.witness["id"])
         )
+    entries = [_manifest_entry(item) for item in built]
     manifest = _manifest_document(
-        [_manifest_entry(item) for item in built],
-        [_composite_record(canvas) for canvas in COMPOSITES],
+        entries,
+        [_composite_record(canvas) for canvas in resolved_composites(entries)],
     )
     outputs[MANIFEST] = _manifest_text(manifest)
     return outputs, manifest
@@ -2928,7 +3503,9 @@ def update_selected(numbers: Sequence[int], workers: int = 1) -> None:
     built = built_cases(numbers, workers)
     replacement: dict[int, dict] = {item.frontier.n: _manifest_entry(item) for item in built}
     entries = [replacement.get(row["n"], row) for row in retained]
-    manifest = _manifest_document(entries, [_composite_record(canvas) for canvas in COMPOSITES])
+    manifest = _manifest_document(
+        entries, [_composite_record(canvas) for canvas in resolved_composites(entries)]
+    )
     outputs = {
         MANIFEST: _manifest_text(manifest),
         SOURCE_MANIFEST: _json_text(_source_index(plans)),
@@ -3036,7 +3613,8 @@ def update_composite_records() -> None:
     expected_figure = build_composite_figure_data.build_record()
     expected_entries = [_manifest_entry(case) for case in retained_cases(CORPUS.numbers)]
     expected_manifest = _manifest_document(
-        expected_entries, [_composite_record(canvas) for canvas in COMPOSITES]
+        expected_entries,
+        [_composite_record(canvas) for canvas in resolved_composites(expected_entries)],
     )
     for envelope, retained, expected in (
         ("figure", retained_figure, expected_figure),
@@ -3080,7 +3658,7 @@ def update_composites() -> None:
         )
     cases = retained_cases(CORPUS.numbers)
     rasters = 0
-    for canvas in COMPOSITES:
+    for canvas in resolved_composites():
         svg_text = render_known_best_summary_svg(_cards(cases, canvas), canvas, identity)
         retained = canvas.svg_path
         if not retained.is_file() or retained.read_text(encoding="utf-8") != svg_text:
@@ -3191,7 +3769,7 @@ def _retained_problems(
     composites = (
         list(composite_records)
         if composite_records is not None
-        else [_composite_record(canvas) for canvas in COMPOSITES]
+        else [_composite_record(canvas) for canvas in resolved_composites(entries)]
     )
     rebuilt = _manifest_document(entries, composites)
     if _manifest_text(rebuilt) != retained:
@@ -3335,7 +3913,7 @@ def composite_findings(
     """
     problems: list[str] = []
     notes: list[str] = []
-    for canvas in COMPOSITES:
+    for canvas in resolved_composites():
         path = _relative(canvas.svg_path)
         if not canvas.svg_path.is_file():
             problems.append(f"missing {path}")
@@ -3442,9 +4020,17 @@ def _composite_label_problems(canvas: CompositeCanvas, root: ET.Element) -> list
         entry = entries[n]
         expected = {
             "packing-label": (str(n),),
-            "side-bound": (str(entry["side"]["display"]),),
+            "side-bound": (
+                _composite_bound_display(
+                    str(entry["side"]["display"]),
+                    canvas,
+                    degree=entry.get("exactness", {}).get("degree"),
+                ),
+            ),
             "lower-bound": (
-                (str(entry["lower"]["display"]),) if entry["lower"]["shown"] else ()
+                (_composite_bound_display(str(entry["lower"]["display"]), canvas),)
+                if entry["lower"]["shown"]
+                else ()
             ),
         }
         card = matching[0]
@@ -3464,7 +4050,7 @@ def _composite_label_problems(canvas: CompositeCanvas, root: ET.Element) -> list
 def _composite_edition_problems(
     canvas: CompositeCanvas, root: ET.Element, identity: CompositeIdentity
 ) -> list[str]:
-    """Compare the dateline and the version stamp with the composite's own record.
+    """Compare each mode's visible date and edition with the composite's own record.
 
     Both say which data the drawing shows. They are held to the record the drawing
     carries, not to the pin, so re-pinning the data revision leaves a composite right;
@@ -3473,17 +4059,19 @@ def _composite_edition_problems(
     """
     path = _relative(canvas.svg_path)
     problems: list[str] = []
-    for feature, expected in (
-        ("release", identity.dateline),
-        ("release-stamp", identity.stamp),
-    ):
+    expected_lines = (
+        (("release", ()), ("release-stamp", (identity.poster_stamp,)))
+        if canvas.information_in_corner
+        else (("release", (identity.dateline,)), ("release-stamp", (identity.stamp,)))
+    )
+    for feature, expected in expected_lines:
         actual = tuple(
             "".join(node.itertext())
             for node in root.iter(svg_tag("text"))
             if node.attrib.get("data-feature") == feature
         )
-        if actual != (expected,):
-            problems.append(f"{path} {feature} is {actual!r}; expected {(expected,)!r}")
+        if actual != expected:
+            problems.append(f"{path} {feature} is {actual!r}; expected {expected!r}")
             if feature == "release-stamp" and not any(
                 PUBLICATION_VERSION in text for text in actual
             ):
@@ -3603,7 +4191,7 @@ def report() -> None:
     actually pays for. `--check` is what says they are current.
     """
     print(f"known-best composites: {len(COMPOSITES)}")
-    for canvas in COMPOSITES:
+    for canvas in resolved_composites():
         composite = canvas.spec
         print(f"\n{composite.stem}  {composite.layout}")
         print(f"  encoding: {_encoding_summary(composite)}")
@@ -3698,6 +4286,13 @@ def parser() -> argparse.ArgumentParser:
         ),
     )
     command.add_argument(
+        "--n",
+        type=int,
+        nargs="+",
+        metavar="N",
+        help="with --update, refresh only these counts and preserve the retained remainder",
+    )
+    command.add_argument(
         "--jobs",
         type=int,
         metavar="N",
@@ -3716,6 +4311,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise SystemExit("--refresh requires --fetch")
     if args.sample and not args.check:
         raise SystemExit("--sample narrows --check")
+    if args.n is not None and not args.update:
+        raise SystemExit("--n narrows --update")
     if args.jobs is not None and args.jobs < 1:
         raise SystemExit("--jobs must be positive")
     # The count is resolved here and nowhere else: `worker_count` reads the machine when
@@ -3725,7 +4322,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.fetch:
         fetch_sources(refresh=args.refresh)
     elif args.update:
-        update(workers)
+        update_selected(args.n, workers) if args.n is not None else update(workers)
     elif args.update_composite_records:
         update_composite_records()
     elif args.update_composites:

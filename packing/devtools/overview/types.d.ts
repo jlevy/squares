@@ -53,11 +53,16 @@ type AtlasSize = "small" | "medium" | "large";
  * from the top of the triangle, its column from the left, and whether its line opens a
  * row after the first.
  */
+type AtlasGridStarts = Readonly<Record<number, number>>;
+
 interface AtlasTrianglePlace {
   row: number;
   line: number;
   column: number;
   opens: boolean;
+  gap: boolean;
+  segmentLine: number;
+  segmentColumn: number;
 }
 
 /** As much of a box as a move is worked out from: a `DOMRect` has all three. */
@@ -80,7 +85,7 @@ interface SiteAtlasViewApi {
   widest(last: number): number;
   perLine(width: number, least: number, most: number, gap?: number): number;
   perLineAt(width: number, least: number, most: number, scale: number, gap?: number): number;
-  place(n: number, per: number): AtlasTrianglePlace;
+  place(n: number, per: number, starts?: AtlasGridStarts): AtlasTrianglePlace;
   viewOf(search: string): AtlasView;
   searchFor(search: string, view: AtlasView): string;
   sizeOf(search: string): AtlasSize;

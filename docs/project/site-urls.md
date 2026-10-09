@@ -733,10 +733,10 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | frontier.html | frontier.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | index.html | / | page | overview | 2026-09-29 | 2026-10-02 | live |
 | known-best-1-100-card.png | known-best-1-100-card.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
-| known-best-1-100.pdf | known-best-1-100.pdf | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
+| known-best-1-100.pdf | square-packings-100-20261008.pdf | copy | assembly | 2026-09-29 | 2026-10-02 | live → square-packings-100-20261008.pdf |
 | known-best-1-100.png | known-best-1-100.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
 | known-best-1-100.svg | known-best-1-100.svg | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
-| known-best-1-324.pdf | known-best-1-324.pdf | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
+| known-best-1-324.pdf | square-packings-324-20261008.pdf | copy | assembly | 2026-09-29 | 2026-10-02 | live → square-packings-324-20261008.pdf |
 | known-best-1-324.png | known-best-1-324.png | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
 | known-best-1-324.svg | known-best-1-324.svg | asset-file | paper:n11-lower-bounds-explainer | 2026-09-29 | 2026-10-02 | live |
 | n11-optimality/index.html | papers/n11-optimality-review.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → papers/n11-optimality-review.html |
@@ -875,6 +875,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | results.html | all-results.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → all-results.html |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-07 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-02 | live |
+| square-packings-100-20261008.pdf | square-packings-100-20261008.pdf | asset-file | paper:n11-lower-bounds-explainer | 2026-10-08 | 2026-10-08 | live |
+| square-packings-324-20261008.pdf | square-packings-324-20261008.pdf | asset-file | paper:n11-lower-bounds-explainer | 2026-10-08 | 2026-10-08 | live |
 | status.html | frontier.html | forwarder | overview | 2026-09-29 | 2026-10-02 | forwarded → frontier.html |
 | synopsis.html | synopsis.html | page | overview | 2026-09-29 | 2026-10-02 | live |
 | synopsis/experiments-conducted.html | synopsis/experiments-conducted.html | page | overview | 2026-10-07 | 2026-10-07 | live |

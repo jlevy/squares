@@ -588,7 +588,10 @@ def test_the_retained_composites_agree_with_their_own_records() -> None:
             for node in root.iter("{http://www.w3.org/2000/svg}text")
             if node.attrib.get("data-feature") in {"release", "release-stamp"}
         }
-        assert texts == {"release": identity.dateline, "release-stamp": identity.stamp}
+        expected = {"release-stamp": identity.poster_stamp}
+        if not canvas.information_in_corner:
+            expected = {"release": identity.dateline, "release-stamp": identity.stamp}
+        assert texts == expected
         assert identity.stamp.startswith(release.PUBLICATION_VERSION + "-")
 
 

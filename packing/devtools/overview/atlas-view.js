@@ -2,22 +2,25 @@
 //
 // The grid sets the cases in reading order, as many to a line as fit. The triangle sets
 // them by the grid bound: row k holds the 2k - 1 cases n = (k - 1)^2 + 1 to k^2, the ones
-// a square of side k is known to hold. Each row starts at the left edge and ends at
-// its perfect square, whose packing is the k by k grid itself.
+// a square of side k is known to hold. Each row ends at its perfect square, whose
+// packing is the k by k grid itself.
 //
-// A row wider than the page wraps in reading order. Every line starts at the left edge,
-// every line but its last is full, and the last holds what is left over. The next row
-// starts a new line. So nineteen tiles at eight to a line are lines of 8, 8 and 3, with
-// the square in the third column of the last line. Where every row fits, the same rule
-// draws the plain triangle.
+// Each row retains its non-grid and grid segments. When the row fits, the grid segment
+// follows the non-grid segment with half a drawing of extra space. Otherwise the
+// non-grid segment wraps at the left, then the whole grid segment starts separately,
+// with every grid line aligned right. Every physical line has the same height and
+// ordinary vertical gap, including the next bound row. The first retained grid count
+// comes from each row's markup, independent of derived drawing variants. Enough
+// width draws each row on one line.
 //
 // One set of tiles serves both views. The view is an attribute of the atlas block,
-// `data-atlas-view`, and the layout is the stylesheet's: in the triangle each tile takes
-// its grid line and column from three custom properties this script writes, `place`'s
-// answer for the tiles a line holds, which follows from the block's width and the least
-// cell the stylesheet allows (`--site-atlas-cell-min`) and the gap between cells. These
-// are a tile's only inline styles, written when it is placed and again only when that
-// answer changes, so changing the view is one attribute. Nothing here sizes a tile.
+// `data-atlas-view`, and the layout is the stylesheet's: in the triangle each tile
+// takes its local segment line and column from custom properties this script writes,
+// `place`'s answer for the tiles a line holds. Capacity follows from the block's width,
+// the least cell the stylesheet allows (`--site-atlas-cell-min`) and the gaps. The
+// stylesheet places and separates the segment containers. Placement properties change
+// only when the answer changes, so changing the view is one attribute. Nothing here
+// sizes a tile.
 //
 // The move is a FLIP: every tile's box is read, the layout is changed, every box is read
 // again, and each tile is then animated from where it was to where it is with a
@@ -108,30 +111,52 @@
   /**
    * Where case `n` stands in the triangle when a line holds `per` tiles: its row k, its
    * line counted from the top of the triangle, its column counted from the left, and
-   * whether its line opens a row after the first, which takes the space between rows.
+   * whether its line opens a row after the first. Every physical line has equal pitch.
    *
-   * Every line starts in the first column, including a short last line. A row that
-   * fits is one line; a row that does not fills full lines in reading order, then
-   * places what is left over on its last line. Its perfect square ends that line.
+   * A complete mixed row stays inline only when both segments and half a drawing fit.
+   * Otherwise its non-grid segment wraps left, then its grid segment wraps right on
+   * separate lines. Missing metadata retains ordinary wrapping for synthetic callers.
    * @param {number} n
    * @param {number} per
+   * @param {AtlasGridStarts} starts first retained grid count by one-based row k
    * @returns {AtlasTrianglePlace}
    */
-  function place(n, per) {
+  function place(n, per, starts = {}) {
     const k = row(n);
     const columns = Math.max(1, Math.floor(per));
+    /** @param {number} r */
+    const segments = (r) => {
+      const count = 2 * r - 1;
+      const prefix = starts[r] === undefined ? count : starts[r] - (r - 1) ** 2 - 1;
+      const grid = count - prefix;
+      const inline = count + (prefix > 0 && grid > 0 ? 1 : 0) <= columns;
+      return {
+        prefix,
+        grid,
+        inline,
+        lines: inline ? 1 : Math.ceil(prefix / columns) + Math.ceil(grid / columns),
+      };
+    };
     let above = 0;
     for (let earlier = 1; earlier < k; earlier += 1) {
-      above += Math.ceil((2 * earlier - 1) / columns);
+      above += segments(earlier).lines;
     }
-    const at = n - (k - 1) * (k - 1);
-    const line = Math.ceil(at / columns);
-    const within = at - (line - 1) * columns;
+    const { prefix, grid, inline } = segments(k);
+    const at = n - (k - 1) ** 2;
+    const inGrid = at > prefix;
+    const index = inGrid ? at - prefix : at;
+    const segmentLine = Math.ceil(index / columns);
+    const within = ((index - 1) % columns) + 1;
+    const lineSize = Math.min(columns, (inGrid ? grid : prefix) - (segmentLine - 1) * columns);
+    const line = inline ? 1 : segmentLine + (inGrid ? Math.ceil(prefix / columns) : 0);
     return {
       row: k,
       line: above + line,
-      column: within,
+      column: inline ? at : inGrid ? columns - lineSize + within : within,
       opens: k > 1 && line === 1,
+      gap: inline && inGrid && prefix > 0,
+      segmentLine,
+      segmentColumn: !inline && inGrid ? Math.min(grid, columns) - lineSize + within : within,
     };
   }
 
@@ -334,6 +359,12 @@
   function mount({ block, cells, tabs, sizes }) {
     const buttons = tabsOf(tabs);
     const sizeButtons = sizes === null ? [] : tabsOf(sizes);
+    /** @type {Record<number, number>} */
+    const starts = {};
+    for (const tile of cells.querySelectorAll("[data-atlas-grid-from]")) {
+      const n = Number(tile.getAttribute("data-atlas-n"));
+      starts[row(n)] = n;
+    }
     /** The tiles a line holds and the last case shown, as last arranged. */
     let arranged = "";
     /** @type {Animation[]} */
@@ -348,7 +379,7 @@
     const shown = () =>
       [
         ...cells.querySelectorAll(
-          ":scope > .site-atlas-cell, :scope > :not([hidden]) > .site-atlas-cell",
+          ":scope > .site-atlas-row .site-atlas-cell, :scope > .site-atlas-rest:not([hidden]) .site-atlas-cell",
         ),
       ].filter((tile) => tile instanceof HTMLElement);
 
@@ -370,20 +401,17 @@
       const gap = lengthPx(style.getPropertyValue("--site-atlas-cell-gap"), root);
       const scale = Number.parseFloat(style.getPropertyValue("--site-atlas-scale"));
       const width = cells.getBoundingClientRect().width;
-      const per = perLineAt(width, least, widest(last), scale, gap);
+      const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
+      const per = Number.isFinite(capacity) ? capacity : widest(last) + 1;
       const key = `${per}:${last}`;
       if (key === arranged) {
         return;
       }
       arranged = key;
       cells.style.setProperty("--site-atlas-per-line", String(per));
-      // A triangle some row of which wraps sets its rows further apart (site.css).
-      cells.toggleAttribute("data-atlas-wrapped", per < widest(last));
       for (const tile of tiles) {
-        const at = place(Number(tile.dataset.atlasN), per);
-        tile.style.cssText =
-          `--site-atlas-line: ${at.line}; --site-atlas-column: ${at.column}; ` +
-          `--site-atlas-opens: ${at.opens ? 1 : 0};`;
+        const at = place(Number(tile.dataset.atlasN), per, starts);
+        tile.style.cssText = `--site-atlas-line: ${at.segmentLine}; --site-atlas-column: ${at.segmentColumn};`;
       }
     };
 

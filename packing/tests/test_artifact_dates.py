@@ -19,6 +19,8 @@ import pytest
 
 from devtools import (
     artifact_dates,
+    build_known_best_atlas,
+    render_composite_pdf,
     render_n11_lower_bounds_explainer,
     render_n11_optimality_review,
 )
@@ -49,12 +51,49 @@ def test_no_derived_date_in_the_tree_is_other_than_its_rule_gives() -> None:
     assert [row.artifact for row in found if row.wrong] == []
     derived = {row.artifact for row in found if row.expected is not None}
     assert {
-        "known-best-1-100.pdf CreationDate, ModDate",
-        "known-best-1-324.pdf CreationDate, ModDate",
+        "square-packings-100-20261008.pdf CreationDate, ModDate",
+        "square-packings-324-20261008.pdf CreationDate, ModDate",
         "optimality paper, Original proof",
         "threshold-bound review, Original proof",
     } <= derived
     assert artifact_dates.main(["--check"]) == 0
+
+
+def test_poster_date_report_uses_download_names_and_keeps_the_data_date(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    identity = build_known_best_atlas.CompositeIdentity("1" * 40, "2026-10-07")
+    monkeypatch.setattr(build_known_best_atlas, "ATLAS_ROOT", tmp_path)
+    monkeypatch.setattr(render_composite_pdf, "ATLAS_ROOT", tmp_path)
+    monkeypatch.setattr(build_known_best_atlas, "retained_identity", lambda _svg: identity)
+    monkeypatch.setattr(release, "commit_date", lambda _repo, _revision: "2026-10-07")
+    for canvas in build_known_best_atlas.COMPOSITES:
+        (tmp_path / canvas.spec.svg_name).write_text("<svg/>")
+        render_composite_pdf.composite_pdf(canvas.spec.stem).write_bytes(
+            b"%PDF-1.5\n/CreationDate (20261007120000Z) /ModDate (20261007120000Z)\n"
+        )
+    found = artifact_dates._poster_rows()  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    pdf_rows = [row for row in found if row.artifact.endswith("CreationDate, ModDate")]
+    assert [row.artifact for row in pdf_rows] == [
+        "square-packings-100-20261008.pdf CreationDate, ModDate",
+        "square-packings-324-20261008.pdf CreationDate, ModDate",
+    ]
+    assert all(row.shows == row.expected == "20261007120000Z" for row in pdf_rows)
+    date_rows = [row for row in found if row.artifact.endswith("(SVG, PNG, PDF)")]
+    assert [(row.artifact, row.shows, row.expected) for row in date_rows] == [
+        (
+            "known-best-1-100 dateline (SVG, PNG, PDF)",
+            "Including new results (October 7, 2026)",
+            "Including new results (October 7, 2026)",
+        ),
+        (
+            "known-best-1-324 edition date (SVG, PNG, PDF)",
+            "October 7, 2026",
+            "October 7, 2026",
+        ),
+    ]
+    assert not any(row.wrong for row in found)
 
 
 def test_a_papers_revised_date_is_the_day_its_article_last_changed() -> None:

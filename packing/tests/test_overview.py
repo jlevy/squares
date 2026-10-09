@@ -40,7 +40,6 @@ from devtools.render_n11_lower_bounds_explainer import TEMPLATE as EXPLAINER_SHE
 from devtools.repo_links import (
     DEFAULT_BRANCH,
     REPO_URL,
-    branch_file,
     hash_pinned_links,
     repo_url,
 )
@@ -333,15 +332,27 @@ def test_the_atlas_section_is_named_for_its_packings_and_the_sections_run_in_ord
     ]
 
 
+def test_atlas_download_cards_and_paper_assets_match_the_canonical_pdf_names() -> None:
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
+    names = [composite_pdf_name(f"known-best-1-{last}") for last in (100, 324)]
+    assert [card[0] for card in overview_sections.ATLAS_CARDS[:2]] == names
+    assert [asset.name for asset in COMPOSITE_ASSETS if asset.suffix == ".pdf"] == names
+    assert "44 by 51" not in overview_sections.ATLAS_CARDS[1][-1]
+    assert "triangle" in overview_sections.ATLAS_CARDS[1][-1]
+
+
 def test_the_atlas_posters_are_hero_cards_each_opening_its_pdf(page: str) -> None:
     """Each poster is a card headed by its picture that is itself the link to its PDF,
     typed as PDF and never marked for download, so the browser opens it in place."""
+    from sqpack.known_best import composite_pdf_name  # noqa: PLC0415
+
     cards = dict(_atlas_cards(page))
     for stem, hero in (
         ("known-best-1-100", "known-best-1-100-card.png"),
         ("known-best-1-324", "known-best-1-324.png"),
     ):
-        body = cards[f"{stem}.pdf"]
+        body = cards[composite_pdf_name(stem)]
         assert body.startswith(' type="application/pdf"'), stem
         assert f'<span class="site-card-hero"><img src="{hero}" alt=""' in body, stem
         assert (COMPOSITE_ASSETS[0].parent / hero).is_file(), hero
@@ -366,8 +377,8 @@ def test_the_atlas_film_is_a_hero_card_opening_the_visualize_page(page: str) -> 
     beside the page, opens the Visualize page, which shows the film alone."""
     cards = _atlas_cards(page)
     assert [href for href, _ in cards] == [
-        "known-best-1-100.pdf",
-        "known-best-1-324.pdf",
+        "square-packings-100-20261008.pdf",
+        "square-packings-324-20261008.pdf",
         overview_sections.VISUALIZE_PAGE,
     ]
     body = dict(cards)[overview_sections.VISUALIZE_PAGE]
@@ -476,7 +487,7 @@ def test_a_same_tab_link_card_leads_only_to_a_page_of_the_site() -> None:
     assert "target=" not in same
     assert "rel=" not in same
     assert same.split(">", 1)[1] == made.split(">", 1)[1]
-    for address in ("https://github.com/jlevy/squares", "known-best-1-100.pdf"):
+    for address in ("https://github.com/jlevy/squares", "square-packings-100-20261008.pdf"):
         with pytest.raises(SystemExit, match="only a page of this site"):
             overview_sections.link_card(address, "Label", "Headline", "A note.", new_tab=False)
 
@@ -506,7 +517,7 @@ def test_a_site_page_is_a_page_the_site_serves() -> None:
         "",
         "#recent-results",
         "https://github.com/jlevy/squares",
-        "known-best-1-100.pdf",
+        "square-packings-100-20261008.pdf",
         "nowhere.html",
         "papers/",
         "workbench",
@@ -651,7 +662,7 @@ def test_the_atlas_is_rendered_as_medium_triangle_under_its_view_tabs(
         atlas.index(mark)
         for mark in (
             "data-atlas-views",
-            '<div class="site-atlas-cells" id="atlas-cells">',
+            '<div class="site-atlas-cells" id="atlas-cells"',
             "data-atlas-toggle",
         )
     ]
@@ -684,14 +695,52 @@ def test_the_atlas_is_rendered_as_medium_triangle_under_its_view_tabs(
 
 def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(page: str) -> None:
     """A perfect square ends its left aligned row of the triangle, and its tile says so;
-    that mark is all the triangle adds to a tile's markup. Where a tile stands is the
+    first-grid markers identify the retained grid suffixes. Where a tile stands is the
     script's to write, since it follows from the window's width."""
     grid = page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
-    squares = re.findall(r'data-atlas-n="(\d+)" data-atlas-square ', grid)
+    squares = re.findall(r'data-atlas-n="(\d+)" data-atlas-square(?: |>)', grid)
     assert [int(n) for n in squares] == [k * k for k in range(1, 19)]
     assert grid.count("data-atlas-square") == 18
-    assert 'style="--r:1;--c:0;--o:0"' in _atlas_template(page, "first")
+    first_grids = re.findall(
+        r'data-atlas-n="(\d+)"(?: data-atlas-square)? data-atlas-grid-from', grid
+    )
+    assert [int(n) for n in first_grids] == [
+        1,
+        2,
+        6,
+        12,
+        20,
+        30,
+        42,
+        56,
+        72,
+        90,
+        111,
+        133,
+        157,
+        183,
+        212,
+        242,
+        274,
+        308,
+    ]
+    assert 'style="--r:1;--c:0;--g:1;--i:1;--o:0"' in _atlas_template(page, "first")
     assert 'class="site-atlas-key"' not in page
+
+
+def test_the_grid_marker_has_two_lines_without_replacing_the_case_count() -> None:
+    cell = overview_sections._atlas_cell  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    tile = cell(212, "open", grid_from=212, grid_side=15)
+    marker = (
+        '<span class="site-atlas-grid-start" aria-hidden="true">'
+        '<span class="site-atlas-grid-dimension">15\N{MULTIPLICATION SIGN}15</span>'
+        '<span class="site-atlas-grid-word">GRID</span></span>'
+    )
+    assert f'<span class="site-atlas-n">{marker}212</span>' in tile
+    assert 'data-atlas-n="212" data-atlas-grid-from' in tile
+    assert "first grid packing in row 15 (15\N{MULTIPLICATION SIGN}15 grid)" in tile
+    css = render_overview.SITE_CSS.read_text(encoding="utf-8")
+    assert "display: block;" in _rule(css, ".site-atlas-grid-start > span")
 
 
 def _regularized_index() -> dict:
@@ -706,9 +755,11 @@ def _atlas_template(page: str, which: str) -> str:
     """The static first or remaining tile run in the atlas block."""
     grid = page.split("data-atlas-grid>", 1)[1].split('<p class="site-action-row', 1)[0]
     if which == "first":
-        return grid.split('<div class="site-atlas-cells" id="atlas-cells">', 1)[1].split(
-            '<div class="site-atlas-rest" data-atlas-rest hidden>', 1
-        )[0]
+        return (
+            grid.split('<div class="site-atlas-cells" id="atlas-cells"', 1)[1]
+            .split(">", 1)[1]
+            .split('<div class="site-atlas-rest" data-atlas-rest hidden>', 1)[0]
+        )
     return grid.split('<div class="site-atlas-rest" data-atlas-rest hidden>', 1)[1].rsplit(
         "</div></div>", 1
     )[0]
@@ -739,18 +790,16 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
         "</div>"
     )
     assert page.count(tabs) == 1
-    # The key closes the box; the page's renderer gives its link to GitHub a new tab.
+    # The complete shared legend follows both tab strips and closes their box.
     controls = (
         '<div class="site-atlas-controls" data-atlas-controls>'
-        f'{overview_sections.atlas_view_tabs()}{tabs}<p class="site-atlas-legend" '
+        f"{overview_sections.atlas_view_tabs()}{tabs}{overview_sections.atlas_legend()}"
     )
     assert page.count(controls) == 1
-    key = page.split(controls, 1)[1].split("</p>", 1)[0]
-    assert key.endswith("regularized view</a></span>")
-    following = page.split(controls, 1)[1].split("</p>", 1)[1]
+    following = page.split(controls, 1)[1]
     assert following.startswith('</div><div class="site-atlas-cells"')
     atlas = page.split('id="the-atlas-of-square-packings"', 1)[1].split("<h2", 1)[0]
-    cells = '<div class="site-atlas-cells" id="atlas-cells">'
+    cells = '<div class="site-atlas-cells" id="atlas-cells"'
     assert atlas.index(controls) < atlas.index(cells)
     for gone in ("data-atlas-layers", "data-atlas-layer-tab", "atlas-layer-house", "House"):
         assert gone not in atlas, gone
@@ -783,9 +832,8 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     regularized rendering reduced by `packing_svg`, the code that reduces a house
     rendering, so it differs from the house drawing only where the view moved a square
     or changed a square's shade. At tile resolution, subpixel moves can round to the
-    same drawing; the audited equality set is pinned below. Its name says
-    it is the regularized view and its number carries the layer's badge before it. Every
-    other case is drawn from its house rendering, unbadged. Read from the generator's own
+    same drawing. The website shows the selected drawing without layer labels or
+    badges. Every other case is drawn from its house rendering. Read from the generator's own
     markup, before the page's renderer normalizes it."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
@@ -798,29 +846,24 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         for a, d, n in tile.findall(tiles)
     }
     assert list(drawn) == list(range(1, 325))
-    mark = overview_sections.atlas_layer_mark()
     for n, (open_tag, drawing, number) in drawn.items():
         is_regularized = n in regularized
         assert drawing == frontier.drawing_img(n, regularized=is_regularized, size=400)
-        assert (", regularized view, " in open_tag) == is_regularized
-        assert (mark in number) == is_regularized
+        assert "regularized" not in open_tag
+        assert "site-atlas-layer-mark" not in number
         assert 'width="400" height="400"' in drawing
         assert frontier.drawing_path(n, regularized=is_regularized) in frontier.drawing_paths()
 
     assert "data-atlas-layer" not in tiles
 
 
-def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule() -> None:
-    """A case's tile carries the star after its number exactly where the frontier
-    table's Recent column stars its row (`render_frontier_page.recent_lower_bounds`, its
-    verified lower bound a recent result), and its name ends "new result", as a starred
-    row's name does in a table of results (think-wwtt). The star is the site's one star,
-    `.site-star`, hidden from assistive technology since the name says it."""
-    from devtools import render_frontier_page as frontier  # noqa: PLC0415
-
+def test_a_case_star_marks_any_recent_displayed_contribution() -> None:
+    """Tile stars and accessible names follow upper, lower and optimality recency."""
+    recent = {
+        n: flags.any for n, flags in overview_sections.recent_contributions_by_case().items()
+    }
     star = overview_sections.atlas_star()
     assert star == '<span class="site-star" aria-hidden="true">★</span>'
-    assert overview_sections.STAR in star
     page = overview_sections.atlas_grid()
     tiles = _atlas_template(page, "first") + _atlas_template(page, "rest")
     found = re.findall(
@@ -829,53 +872,84 @@ def test_a_case_with_a_new_result_carries_the_star_by_the_frontier_tables_rule()
         tiles,
     )
     assert [int(n) for n, _, _ in found] == list(range(1, 325))
-    recent = frontier.recent_lower_bounds()
-    frontier_page = site_renders.html("frontier.html")
-    rows = dict(re.findall(r'<tr id="n-(\d+)"[^>]*data-recent="(true|false)"', frontier_page))
-    assert sorted(int(n) for n in rows) == list(range(1, 325))
     for n, name, number in found:
-        starred = recent.get(int(n), False)
-        assert starred == (rows[n] == "true"), n
+        starred = recent[int(n)]
         assert number.endswith(star) == starred, n
-        assert number.count(star) == (1 if starred else 0), n
+        assert number.count(star) == starred, n
         assert name.endswith(f", {overview_sections.NEW_RESULT}") == starred, n
-    assert sum(recent.values()) == len(
-        [1 for _, name, _ in found if name.endswith("new result")]
-    )
-    # A case without a new result: n = 1, the unit square, and n = 25, a perfect square.
-    assert not recent[1]
-    assert not recent[25]
+    assert sum(recent.values()) == sum(name.endswith("new result") for _, name, _ in found)
 
 
-def test_the_atlas_key_names_the_star_and_the_badge_and_ships_hidden() -> None:
-    """The key under the tabs names a tile's two marks in words, each mark beside its
-    words as on the tiles: the star, "new result", and the regularized badge,
-    "regularized view", linked to the atlas README's section on the layer. Without a
-    regularized drawing on the page it names the star alone. It ships `hidden`, with the
-    tabs; `atlas-grid.js` shows it as it places the tiles."""
-    key = overview_sections.atlas_legend(regularized=True)
-    readme = branch_file(overview_sections.ATLAS_REGULARIZED_README, "#the-regularized-views")
-    assert key == (
-        '<p class="site-atlas-legend" role="note" aria-label="What a tile\u2019s marks mean" '
-        "data-atlas-legend>"
-        f'<span class="site-atlas-legend-item">{overview_sections.atlas_star()} '
-        "<span>new result</span></span> "
-        f'<span class="site-atlas-legend-item">{overview_sections.atlas_layer_mark()}'
-        f'<a href="{readme}">regularized view</a></span></p>'
+def test_an_upper_only_recent_contribution_stars_the_tile_and_case_summary(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools.result_status import RecentContributions  # noqa: PLC0415
+
+    # Prime immutable real-case facts before patching the star provider.
+    result_overview.film_facts()
+    flags = {
+        n: RecentContributions(upper=False, lower=False, optimal=False) for n in range(1, 325)
+    }
+    flags[1] = RecentContributions(upper=True, lower=False, optimal=False)
+    monkeypatch.setattr(overview_sections, "recent_contributions_by_case", lambda: flags)
+    page = overview_sections.atlas_grid()
+    first = _atlas_template(page, "first")
+    tile = re.search(r'<a class="site-atlas-cell" [^>]*data-atlas-n="1"[^>]*>.*?</a>', first)
+    assert tile is not None
+    assert ', new result"' in tile.group()
+    assert overview_sections.atlas_star() in tile.group()
+    assert page.count(overview_sections.atlas_star()) == 2  # Legend and this one tile.
+    facts = overview_sections.atlas_film_facts()
+    assert facts[0]["star"] is True
+    assert sum(bool(fact["star"]) for fact in facts) == 1
+
+
+def test_the_atlas_key_names_the_star_and_the_first_grid_marker() -> None:
+    """The product legend explains the star without describing layout mechanics."""
+    key = overview_sections.atlas_legend()
+    columns = key.split('class="site-atlas-legend-column"')[1:]
+    assert len(columns) == 2
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[0]) == [
+        "optimal",
+        "exact",
+        "numerical",
+        "rigid",
+    ]
+    assert re.findall(r'data-atlas-legend-key="([^"]+)"', columns[1]) == [
+        "recent",
+        "angles",
+        "contacts",
+    ]
+    assert "recent result, since August, 2026" in key
+    assert key.count(">R</span>") == 1
+    assert 'data-style="solid" aria-hidden="true">R</span>' in key
+    assert 'data-style="muted" aria-hidden="true">R</span>' not in key
+    assert "regularized" not in key
+    assert "grid-key" not in key
+    assert "half a drawing" not in key
+    swatches = re.findall(
+        r'<span class="site-atlas-swatch" data-value="(\d+)"[^>]*>([^<]*)</span>', key
     )
-    assert readme.endswith("packing/atlas/known-best/README.md#the-regularized-views")
-    readme_text = overview_sections.ATLAS_REGULARIZED_README.read_text(encoding="utf-8")
-    assert "\n## The regularized views\n" in readme_text
-    alone = overview_sections.atlas_legend(regularized=False)
-    assert "regularized" not in alone
-    assert overview_sections.atlas_star() in alone
+    assert swatches == [
+        ("0", "90°"),
+        ("1", "45°"),
+        ("2", ""),
+        ("3", ""),
+        ("4", "4"),
+        ("3", "3"),
+        ("2", "2"),
+        ("1", "1"),
+        ("0", "0"),
+    ]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     legend = _rule(css, ".kpress .site-atlas-grid .site-atlas-legend")
     for declaration in (
         "color: var(--site-support-color);",
         "font-size: var(--site-font-size-note);",
         "flex-basis: 100%;",
-        "justify-content: center;",
+        "grid-template-columns: repeat(2, minmax(0, 1fr));",
+        "justify-content: start;",
+        "text-align: start;",
     ):
         assert declaration in legend, declaration
 
@@ -957,21 +1031,10 @@ def test_the_regularized_set_is_the_layer_index_and_refuses_a_stale_drawing(
         overview_sections.atlas_regularized()
 
 
-def test_the_marks_hang_either_side_of_a_number_that_stays_centred() -> None:
-    """The badge is one dot in the accent, sized in the text it stands with; the star is
-    the site's one star in its warm ink. Every number's box is shrunk to the number and
-    centred, and on a tile each mark is out of the flow beside it, the badge before its
-    start and the star past its end, so a marked number stands where an unmarked one
-    does (`devtools.measure_atlas_views.mark_problems` holds the boxes in a browser)."""
+def test_the_star_hangs_after_the_count_and_grid_marker() -> None:
+    """The star remains outside the centered count; the grid words share its line."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    dot = _rule(css, ".site-atlas-layer-mark")
-    for declaration in (
-        "background: var(--kpress-doc-accent);",
-        "block-size: 0.5em;",
-        "inline-size: 0.5em;",
-        "border-radius: 50%;",
-    ):
-        assert declaration in dot, declaration
+    assert "site-atlas-layer-mark" not in css
     assert "color: var(--site-new-result);" in _rule(css, ".site-star")
     number = _rule(css, ".site-atlas-n")
     for declaration in (
@@ -980,9 +1043,6 @@ def test_the_marks_hang_either_side_of_a_number_that_stays_centred() -> None:
         "position: relative;",
     ):
         assert declaration in number, declaration
-    hung = _rule(css, ".site-atlas-n > .site-atlas-layer-mark")
-    for declaration in ("position: absolute;", "inset-inline-end: calc(100% + 0.3em);"):
-        assert declaration in hung, declaration
     star = _rule(css, ".site-atlas-n > .site-star")
     for declaration in ("position: absolute;", "inset-inline-start: calc(100% + 0.12em);"):
         assert declaration in star, declaration
@@ -1069,29 +1129,46 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
     # after reserving the same gaps Grid uses.
     shared = _rule(css, ".site-atlas-cells")
     assert "--site-atlas-tile: calc(" in shared
-    assert re.search(r"0\.12\s*\+\s*0\.28\s*\*\s*clamp\(", shared)
-    assert "--site-atlas-row-space: 0.4;" in _rule(css, ".site-atlas-cells[data-atlas-wrapped]")
+    compact_shared = " ".join(shared.split())
+    assert (
+        "--site-atlas-number-size: clamp(0.5rem, calc(var(--site-atlas-tile) * 0.25), 0.8rem);"
+        in compact_shared
+    )
+    assert (
+        "--site-atlas-line-height: calc( var(--site-atlas-tile) * 1.04 + 2rem + "
+        "var(--site-atlas-number-size) * 1.15 );" in compact_shared
+    )
+    # Captions reserve the same track height on every physical line, with the ordinary
+    # gap between segment continuations, split segments and consecutive bound rows.
+    triangle = 'html[data-site-atlas-view="triangle"] .site-atlas-grid'
+    row = _rule(css, f"{triangle} .site-atlas-row")
+    segment = _rule(css, f"{triangle} .site-atlas-segment")
+    boundary = _rule(css, f'{triangle} .site-atlas-row:where(:not([data-atlas-row="1"]))')
+    assert "grid-auto-rows: var(--site-atlas-line-height);" in segment
+    for line in (row, segment):
+        assert "row-gap: var(--site-atlas-cell-gap);" in line
+    assert "margin-block-start: var(--site-atlas-cell-gap);" in boundary
+    assert "--site-atlas-row-space" not in css
+    assert "data-atlas-wrapped" not in css
     assert "transform-origin: 0 0;" in _rule(css, ".kpress .site-atlas-cell")
     cells = _rule(
         css,
         'html:not([data-site-atlas-view="grid"]) '
-        '.site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cells',
+        '.site-atlas-grid:where([data-atlas-view="triangle"]) .site-atlas-cells',
     )
     assert "--site-atlas-tile:" not in cells
-    assert "justify-content: start;" in cells
-    assert (
-        "grid-template-columns: repeat(var(--site-atlas-per-line, 1), var(--site-atlas-tile));"
-        in cells
-    )
+    assert "display: block;" in cells
+    assert ".site-atlas-row" in css
+    assert ".site-atlas-segment" in css
     tile = _rule(
         css,
         'html:not([data-site-atlas-view="grid"]) '
-        '.kpress .site-atlas-grid[data-atlas-view="triangle"] .site-atlas-cell',
+        '.kpress .site-atlas-grid:where([data-atlas-view="triangle"]) .site-atlas-cell',
     )
     assert "var(--site-atlas-line, var(--site-atlas-initial-line)) /" in tile
     for rule in (cells, tile):
-        assert "transition" not in rule
-        assert "animation" not in rule
+        assert re.search(r"(?:^|[;\n])\s*transition(?:-[\w-]+)?\s*:", rule) is None
+        assert re.search(r"(?:^|[;\n])\s*animation(?:-[\w-]+)?\s*:", rule) is None
     # Nor does anything in the block transition its place by another sheet's rule: KPress
     # gives every classed element a 0.01ms transition of every property under reduced
     # motion, which laid the triangle out for a frame with the grid's gaps.
@@ -1107,7 +1184,7 @@ def test_the_triangle_is_sized_and_timed_by_tokens_the_script_reads() -> None:
         "--site-atlas-per-line",
     ):
         assert f'"{token}"' in script, token
-    for written in ("--site-atlas-line: ", "--site-atlas-column: ", "--site-atlas-opens: "):
+    for written in ("--site-atlas-line: ", "--site-atlas-column: "):
         assert written in script, written
     # The script moves with transforms and opacity alone, and never sets a size.
     assert "transform: `translate(" in script
@@ -6128,12 +6205,14 @@ def test_each_address_a_paper_had_serves_a_forwarder_to_where_it_is() -> None:
     assert "movedTo" in script
 
 
-def test_each_file_that_moved_is_a_papers_markdown_or_pdf_under_its_slug() -> None:
+def test_each_file_that_moved_keeps_its_canonical_paper_or_atlas_copy() -> None:
     """A file that moved and cannot forward is served at its old address as a copy
-    (`MOVED_FILES`): each paper's Markdown and PDF, which now sit beside the page under
-    its slug. The copies are made when the site is assembled, by the workflow's
+    (`MOVED_FILES`): each paper's Markdown and PDF under its slug, and both atlas PDFs
+    under their dated names. Copies are made when the site is assembled, by the workflow's
     `publish` job and by `preview_site.copy_moved_files`."""
     assert dict(render_overview.MOVED_FILES) == {
+        "known-best-1-100.pdf": "square-packings-100-20261008.pdf",
+        "known-best-1-324.pdf": "square-packings-324-20261008.pdf",
         "t-018-explainer.md": "papers/n11-lower-bounds-explainer.md",
         "t-018-explainer.pdf": "papers/n11-lower-bounds-explainer.pdf",
         "n11-optimality/t-060-explainer.md": "papers/n11-optimality-review.md",
@@ -6142,7 +6221,10 @@ def test_each_file_that_moved_is_a_papers_markdown_or_pdf_under_its_slug() -> No
     pages = {new for _, new in render_overview.MOVED_PAGES}
     for old, new in render_overview.MOVED_FILES:
         assert Path(old).suffix == Path(new).suffix in {".md", ".pdf"}
-        assert str(Path(new).with_suffix(".html")) in pages, new
+        if old.startswith("known-best-1-"):
+            assert new in {asset.name for asset in COMPOSITE_ASSETS}
+        else:
+            assert str(Path(new).with_suffix(".html")) in pages, new
 
 
 def test_no_page_links_an_address_a_paper_used_to_have(

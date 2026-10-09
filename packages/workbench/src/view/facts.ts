@@ -8,7 +8,7 @@ export const BADGE_LABELS: Readonly<Record<string, string>> = {
   "=/solid": "exact",
   "≈/muted": "numerical",
   "R/solid": "rigid",
-  "R/muted": "rigid (catalogue)",
+  "R/muted": "rigid", // Compatibility for previously generated corpus data.
 };
 /** The badge that says the lower bound on the stage is a recent result, whoever proved it. */
 export const NEW_RESULT_BADGE = Object.freeze({ glyph: "★", style: "star" });
@@ -45,7 +45,12 @@ export function planFacts(facts: CorpusFacts, n: number): FactsPlan {
     badges.push({ ...NEW_RESULT_BADGE, label: badgeLabel(NEW_RESULT_BADGE, n) });
   }
   for (const badge of facts.badges) {
-    badges.push({ glyph: badge.glyph, style: badge.style, label: badgeLabel(badge, n) });
+    const label = badgeLabel(badge, n);
+    if (badge.glyph === "R" && badges.some((shown) => shown.glyph === "R")) {
+      continue;
+    }
+    const shown = badge.glyph === "R" ? { ...badge, style: "solid" } : badge;
+    badges.push({ glyph: shown.glyph, style: shown.style, label });
   }
   const open =
     facts.open.length === 0
