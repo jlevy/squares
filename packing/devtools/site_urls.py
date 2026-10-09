@@ -43,9 +43,9 @@ CATALOGUE_BROWSER_PATH = "papers/exact-side-values-browser.js"
 CATALOGUE_ARCHIVE_PATH = "papers/exact-side-values-complete.html"
 ARCHIVE_HTML_LIMIT = 6_000_000
 ARCHIVE_BUDGET_REASON = (
-    "The complete archive measures about 5.18 MB after the print wrapping repair, "
-    "with 324 current and 170 historical records, every coefficient and the "
-    "self-contained math runtime. This download "
+    "The complete web report measures 5,357,841 bytes, with 324 current and 175 "
+    "historical records, every coefficient and the self-contained math runtime. "
+    "This download "
     "has a separate bounded archive classification; the compact browser and every "
     "ordinary HTML page retain their existing limits."
 )

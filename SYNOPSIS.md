@@ -644,6 +644,10 @@ case or experiment separately.
 | [Review: Gupta exact rational refinements, issue #438](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md) | dated review record | record | retained | — |
 | [Review of the ry-xu Rational and Radical Packing Packets](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md) | dated review record | record | retained | — |
 | [n17 Paper Review: Global Optimization and Sum-of-Squares Certificates](docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md) | dated review record | record | retained | — |
+| [Exact Paper Print Readability — Retired](packing/benchmarks/exact-paper-print/ideas.md) | implementation plan | record | retained | — |
+| [Readable Complete-Paper Tables](packing/benchmarks/exact-paper-print/hypotheses/H-001-readable-tables.md) | typed hypothesis record | record | retained | — |
+| [Dated Print Baseline](packing/benchmarks/exact-paper-print/experiments/exp-001-dated-baseline.md) | typed experiment record | record | retained | — |
+| [Refused Print Candidate and Retired PDF Scope](packing/benchmarks/exact-paper-print/experiments/exp-002-refused-layout.md) | typed experiment record | record | retained | — |
 | [N17 Merge Readiness Review — October 8, 2026](docs/project/reviews/review-2026-10-08-n17-merge-readiness.md) | dated review record | record | retained | — |
 | [Registered Endpoint Frame Refusal](packing/campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/README.md) | typed session record | record | retained | — |
 | [Fresh Exact Explicit-f1 Endpoint Calibration](packing/campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/README.md) | typed session record | record | retained | — |
