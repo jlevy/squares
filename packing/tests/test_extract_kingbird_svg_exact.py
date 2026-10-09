@@ -7,8 +7,10 @@ a `Root` object and the other a `FindRoot` system. Nothing here reaches the netw
 
 from __future__ import annotations
 
+import hashlib
 import json
 import random
+from fractions import Fraction
 from pathlib import Path
 
 import pytest
@@ -18,8 +20,10 @@ from devtools.backfill_algebraic_facts import backfilled
 from devtools.derive_kingbird_facts import DerivationRefusedError
 from devtools.extract_kingbird_svg_exact import (
     ExtractionError,
+    IsolatedRoot,
     RecordRefusedError,
     Reference,
+    agreement,
     check_polynomial,
     degree_pattern,
     irreducibility_certificate,
@@ -216,13 +220,57 @@ def test_a_reference_at_a_double_root_isolates_nothing() -> None:
     assert not check.verified
 
 
+def test_the_reported_interval_still_isolates_the_root() -> None:
+    reference = (
+        "1.4142135623730950488016887242096980785696718753769480731766797379907324784621"
+        "0703885038753432764157273501"
+    )
+    check = check_polynomial((1, 0, -2), [Reference("sqrt2", reference)])
+    assert check.verified
+    saved = check.summary()["isolated_root"]
+    assert isinstance(saved, dict)
+    centre = Fraction(str(saved["centre"]))
+    radius = Fraction(str(saved["radius"]))
+    below = (centre - radius) ** 2 - 2
+    above = (centre + radius) ** 2 - 2
+    assert below * above < 0
+
+
+def test_isolates_a_linear_root() -> None:
+    check = check_polynomial((7, -53), [Reference("rational", "7.57142857142857")])
+    assert check.verified
+    assert check.root is not None
+    assert check.root.truncation(14) == "7.57142857142857"
+
+
+def test_isolates_an_integer_linear_root() -> None:
+    check = check_polynomial((1, -7), [Reference("integer", "7.0")])
+    assert check.verified
+    assert check.root is not None
+    assert abs(check.root.centre - 7) <= check.root.radius
+
+
+def test_reported_difference_bound_rounds_outward() -> None:
+    root = IsolatedRoot(112349, 5, 6)
+    item = agreement(root, "test", "1.00")
+    exact = abs(root.centre - 1) + root.radius
+    assert Fraction(item.difference_bound) >= exact
+
+
 # --------------------------------------------------------------------------- the record
 
 
-def _record_83(degree: int) -> str:
+def _record_83(degree: int, side: str = SIDE_11) -> str:
     text = (ROOT / "frontier/n-083.md").read_text(encoding="utf-8")
     assert "    algebraic_degree: 672\n" in text
-    return text.replace("    algebraic_degree: 672\n", f"    algebraic_degree: {degree}\n")
+    assert "    value: '9.63475764863108'\n" in text
+    polynomial_start = text.index("    minimal_polynomial: ")
+    polynomial_end = text.index("    algebraic_source: ", polynomial_start)
+    assert polynomial_end > polynomial_start
+    text = text[:polynomial_start] + "    minimal_polynomial: null\n" + text[polynomial_end:]
+    return text.replace(
+        "    algebraic_degree: 672\n", f"    algebraic_degree: {degree}\n"
+    ).replace("    value: '9.63475764863108'\n", f"    value: '{side}'\n")
 
 
 def test_writes_a_verified_polynomial_as_the_backfill_would() -> None:
@@ -239,6 +287,12 @@ def test_refuses_a_record_whose_degree_differs() -> None:
     check = check_polynomial(COEFFICIENTS_11, [Reference("entity", SIDE_11)], index=2)
     with pytest.raises(RecordRefusedError, match="degree 672"):
         record_with_polynomial(_record_83(672), 83, check)
+
+
+def test_refuses_a_record_whose_side_differs() -> None:
+    check = check_polynomial(COEFFICIENTS_11, [Reference("entity", SIDE_11)], index=2)
+    with pytest.raises(RecordRefusedError, match="does not agree"):
+        record_with_polynomial(_record_83(8, "9.63475764863108"), 83, check)
 
 
 def test_refuses_an_unverified_polynomial_or_a_filled_record() -> None:
@@ -282,3 +336,34 @@ def test_svg_command_reports_a_refused_fetch(
     monkeypatch.setattr(tool, "fetch_picture", refuse)
     assert tool.main(["svg", "83"]) == 2
     assert "403" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("pin", ["missing", "mismatched", "matched"])
+def test_svg_record_write_requires_the_retained_source_pin(
+    pin: str, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    destination = tmp_path / "packing/frontier"
+    destination.mkdir(parents=True)
+    original = (ROOT / "frontier/n-011.md").read_text()
+    start = original.index("    minimal_polynomial:")
+    end = original.index("    algebraic_source:", start)
+    unfilled = original[:start] + "    minimal_polynomial: null\n" + original[end:]
+    record = destination / "n-011.md"
+    record.write_text(unfilled)
+    data = SVG_11.read_bytes()
+    receipt = (
+        None
+        if pin == "missing"
+        else {"sha256": hashlib.sha256(data if pin == "matched" else data + b"\n").hexdigest()}
+    )
+    monkeypatch.setattr(tool, "pinned_reading", lambda _n: receipt)
+    monkeypatch.setattr(tool, "FRONTIER", destination)
+    monkeypatch.setattr(tool, "ROOT", destination.parent)
+    result = tool.main(["svg", "11", "--svg", str(SVG_11), "--write-record"])
+    if pin == "matched":
+        assert result == 0
+        assert _upper(record.read_text())["minimal_polynomial"] == POLYNOMIAL_11
+    else:
+        assert result != 0
+        assert record.read_text() == unfilled
+        assert tool.main(["svg", "11", "--svg", str(SVG_11)]) == 0

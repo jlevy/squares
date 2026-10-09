@@ -1186,17 +1186,19 @@ tiers:
   # wall, the suite_files planning capacities 131/154/154/131 (frozen weights of the
   # recorded assignment, not ceilings) and every recorded cost below are unchanged.
   ceiling_seconds: 143.0
-  measured_seconds: 104.95
-  measured_on: '2026-10-01'
+  measured_seconds: 135.17
+  measured_on: '2026-10-09'
   measured_where: >-
-    The overdue first hosted four-shard baseline requested by think-t7k5, read by
-    devtools.read_tier_walls --tier suite_d --job-id 110628224361: run 36939743802
-    attempt 1, head 898553a294bc4ef87bd6e708f17b7ceb9e0532f7. The checkout log records
-    merge 75636e83f of that head into eaa1a4b45c5042888d098f2d302e6a90e5455fec.
-    On 2026-10-01 the successful suite-d job ran one of 88 registered steps at the
-    declared reference shape, jobs 1, inner_jobs 1, cpus 4, with an actual tier wall
-    of 104.95 s. This is one historical baseline reading, with no empirical spread
-    estimate; it is not a measurement of the current enlarged shard.
+    Geometric mean of the three complete suite_d reference-shape readings in runs
+    37859894227 attempt 1 job 113592848932 (163.63 s),
+    37863305849 attempt 1 job 113603961158 (166.59 s), and
+    37863896708 attempt 1 job 113605910646 (90.60 s), each 1 of 106 steps,
+    4 CPUs, --jobs 1 --inner-jobs 1; grouped by devtools.read_tier_walls,
+    with an observed 1.84x spread. Both slower readings exceeded the unchanged
+    143 s ceiling and are retained, without declaring a passing measured band.
+    Historical run 36939743802 job 110628224361 read 104.95 s at 1 of 88 steps;
+    child run 37863894906 job 113605944518 read 96.25 s at 1 of 108 steps.
+    Both different whole-tier selections are reported separately and excluded from this mean.
   reference: {jobs: 1, inner_jobs: 1, cpus: 4}
   argument: >-
     Fourth whole-file shard of the quick behavioural lane, added on 2026-10-01 when the
@@ -1213,6 +1215,15 @@ tiers:
     Four shards at 131/154/154/131 carry 278.9 and 327.9, predicting 84 and 98 s. The
     partition is complete and disjoint by construction, as for the other three;
     `packing-required` requires this job as it requires them.
+    The first hosted baseline requested by think-t7k5 is retained separately:
+    devtools.read_tier_walls --tier suite_d --job-id 110628224361 read run
+    36939743802 attempt 1, head 898553a294bc4ef87bd6e708f17b7ceb9e0532f7.
+    Its checkout merged that head as 75636e83f into
+    eaa1a4b45c5042888d098f2d302e6a90e5455fec. On 2026-10-01 its successful
+    suite-d job read 104.95 s for one of 88 registered steps at jobs 1,
+    inner_jobs 1, cpus 4. That single historical baseline has no empirical
+    spread estimate and is excluded from the retained 106-step cohort's mean. Later upstream refinements
+    are outside these three observations; their new selection requires fresh hosted checks.
     A separate current reading at head 49903c6d00a7085c65e84726f8074e78150274e1,
     run 37859894227 attempt 1, job 113592848932 on 2026-10-08, read by the same
     maintained tool at the reference shape, cost 163.63 s with one of 106 registered

@@ -62,6 +62,93 @@ def test_changed_release_data_selects_the_release_contract() -> None:
     assert "packing/tests/test_release.py" in selection.tests
 
 
+@pytest.mark.parametrize(
+    ("path", "selected"),
+    [
+        ("packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz", True),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/house-metadata.json.xz",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/prior-state.json",
+            True,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/prior-state.json",
+            True,
+        ),
+        ("packing/witnesses/known-best/n-068.yaml", True),
+        ("packing/witnesses/known-best/n-105.yaml", True),
+        ("packing/witnesses/known-best/n-292.yaml", True),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-106.json.gz",
+            False,
+        ),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz.backup",
+            False,
+        ),
+        ("packing/resources/web/other-packet/receipts/admission.json.xz", False),
+        (
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/sources.json",
+            False,
+        ),
+        ("packing/witnesses/known-best/n-106.yaml", False),
+        ("packing/hosted/refinement-evidence-425-428-v1.yaml", False),
+    ],
+)
+def test_refinement_data_reaches_builder_tests_without_widening_the_suite(
+    path: str, *, selected: bool, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Exercise the real push selector with a tiny import graph and no fixture files."""
+    root = reachable_tests.ROOT
+    tests = root / "tests"
+    files = {
+        "devtools.build_exact_values": root / "devtools/build_exact_values.py",
+        "devtools.exact_consumer": root / "devtools/exact_consumer.py",
+        "tests.test_build_exact_values": tests / "test_build_exact_values.py",
+        "tests.test_exact_consumer": tests / "test_exact_consumer.py",
+        "tests.test_unrelated": tests / "test_unrelated.py",
+    }
+    imports = {
+        files["devtools.build_exact_values"]: set(),
+        files["devtools.exact_consumer"]: {"devtools.build_exact_values"},
+        files["tests.test_build_exact_values"]: {"devtools.build_exact_values"},
+        files["tests.test_exact_consumer"]: {"devtools.exact_consumer"},
+        files["tests.test_unrelated"]: set(),
+    }
+    monkeypatch.setattr(reachable_tests, "TEST_ROOTS", (tests,))
+    monkeypatch.setattr(reachable_tests, "_mapped_files", lambda: files)
+    monkeypatch.setattr(reachable_tests, "_imports_of", lambda file: imports[file])
+    monkeypatch.setattr(reachable_tests, "_walker_evidence", lambda _file: False)
+    monkeypatch.setattr(Path, "read_text", lambda _path, **_options: "def test_case(): pass\n")
+    monkeypatch.setattr(
+        Path,
+        "glob",
+        lambda _path, _pattern: (file for file in files.values() if file.parent == tests),
+    )
+    selection = select_tests([path])
+    assert not selection.everything
+    assert selection.tests == (
+        ("packing/tests/test_build_exact_values.py", "packing/tests/test_exact_consumer.py")
+        if selected
+        else ()
+    )
+
+
 def test_a_changed_test_file_selects_itself() -> None:
     selection = select_tests(["packing/tests/test_reachable_tests.py"])
     assert not selection.everything

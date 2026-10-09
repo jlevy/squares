@@ -94,6 +94,24 @@ SUITE_WIDE = (
 
 PAGES_WORKFLOW = ".github/workflows/pages.yml"
 
+#: These exact inputs determine the current finite refinement identities and the
+#: retained earlier-bound controls. They reach the builder's tests through the same
+#: import closure as its Python source; this does not add a production step to --push.
+REFINEMENT_REGISTER_INPUTS = frozenset(
+    {
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-105.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/facts/n-292.json.gz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/admission.json.xz",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/receipts/house-metadata.json.xz",
+        "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/acquisition/prior-state.json",
+        "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/acquisition/prior-state.json",
+        "packing/witnesses/known-best/n-068.yaml",
+        "packing/witnesses/known-best/n-105.yaml",
+        "packing/witnesses/known-best/n-292.yaml",
+    }
+)
+
 WALKER_MARKERS = ("rglob(", "iterdir(", ".glob(", "listdir(", "importlib", "__import__")
 
 
@@ -401,6 +419,10 @@ def select_tests(changed: list[str]) -> TestSelection:
     ):
         changed_modules.add("sqpack.release")
         changed_dotted.add("sqpack.release")
+
+    if any(path in REFINEMENT_REGISTER_INPUTS for path in changed):
+        changed_modules.add("devtools.build_exact_values")
+        changed_dotted.add("devtools.build_exact_values")
 
     # Transitive closure: grow the changed-module set by everything that imports it.
     grew = True

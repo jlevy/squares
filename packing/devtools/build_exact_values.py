@@ -61,14 +61,23 @@ from typing import Any, cast
 import numpy as np
 import numpy.typing as npt
 import sympy as sp
-from strif import atomic_output_file
 from sympy.polys.domains import ZZ
 from sympy.polys.galoistools import gf_ddf_zassenhaus, gf_from_int_poly, gf_monic, gf_sqf_p
 from sympy.polys.numberfields.galoisgroups import galois_group
 
 from devtools import evand_exact_certificates as evand
-from devtools import upper_bound_packets
-from devtools.retained_data import read_retained_text
+from devtools import (
+    refinement_custody,
+    refinement_house_links,
+    refinement_packets,
+    upper_bound_packets,
+)
+from devtools.retained_data import (
+    compressed_path,
+    read_retained_text,
+    retained_exists,
+    write_retained_text,
+)
 from sqpack import retained_json
 from sqpack.exact_values import (
     CATALOGUE,
@@ -968,6 +977,7 @@ class VerifiedRationalInputs:
         self.native_rows: dict[int, dict] | None = None
         self.source_rows: dict[int, dict] = {}
         self.packet_validated = False
+        self.refinements_validated = False
 
     def evidence_row(self, n: int, identifier: str, source_key: str) -> dict:
         if self.evidence is None:
@@ -1049,6 +1059,31 @@ class VerifiedRationalInputs:
         ):
             raise ValueError("the registered fraction is not the certified outward ceiling")
 
+    def refinement_provenance(
+        self, n: int, rational: Fraction, source: refinement_packets.Source, replay: str
+    ) -> dict:
+        evidence = self.evidence_row(n, replay, source.key)
+        certificate = refinement_packets.fact_path(source, n)
+        if (ROOT.parent / evidence["certificate"]).resolve() != certificate.parent.resolve():
+            raise ValueError("the evidence names a different refinement fact directory")
+        fact = refinement_packets.read_fact(source, n)
+        if rational != refinement_packets.rational(fact["side"]):
+            raise ValueError(
+                "the registered fraction differs from the admitted refinement side"
+            )
+        if not self.refinements_validated:
+            refinement_custody.check_index(refinement_custody.read_index())
+            self.refinements_validated = True
+        refinement_house_links.check_houses([n])
+        return _note(
+            "verified-witness-side",
+            f"This is the verified finite rational refinement witness side, from {source.key}; "
+            f"certificate {certificate.relative_to(ROOT.parent)}, replay {replay}, receipt "
+            f"{refinement_custody.INDEX.relative_to(ROOT.parent)}. "
+            "Its degree-one identity establishes neither stationarity nor global optimality.",
+            degree=1,
+        )
+
     def provenance(self, n: int, rational: Fraction, replay: str, source_key: str) -> dict:
         evidence = self.evidence_row(n, replay, source_key)
         if source_key == KKT_KEY:
@@ -1122,6 +1157,61 @@ def _verified_rational_fallback(
     return rational, note
 
 
+def _explicit_refinement_rational(
+    n: int, packing: dict, inputs: VerifiedRationalInputs
+) -> tuple[Fraction, dict] | None:
+    """Admit only a current finite rational refinement and its retained geometry."""
+    reported = packing["reported_upper_bound"]
+    verified = packing.get("verified_upper_bound", {})
+    source = next(
+        (
+            source
+            for source in refinement_packets.SOURCES.values()
+            if reported.get("source_key") == source.key
+        ),
+        None,
+    )
+    if source is None:
+        return None
+
+    def unavailable() -> None:
+        if reported.get("minimal_polynomial") is not None:
+            raise ExactValuesError(
+                f"n = {n}: refinement rational bound refused: supplied polynomial "
+                "requires matching current rational metadata and derived-from-exact-form origin"
+            )
+
+    replay = f"E-{source.packet_name}-exact-replay"
+    if (
+        n not in source.numbers
+        or packing.get("n") != n
+        or packing.get("status") != "open"
+        or type(reported.get("algebraic_degree")) is not int
+        or reported["algebraic_degree"] != 1
+        or (
+            reported.get("algebraic_source")
+            != (None if reported.get("minimal_polynomial") is None else DERIVED_FROM_EXACT_FORM)
+        )
+        or replay not in verified.get("evidence", [])
+    ):
+        return unavailable()
+    try:
+        rational = refinement_packets.rational(reported.get("exact_form"))
+        if rational != refinement_packets.rational(verified.get("exact_form")) or any(
+            rational != Fraction(str(bound["value"])) for bound in (reported, verified)
+        ):
+            return unavailable()
+    except ValueError, ZeroDivisionError, KeyError:
+        return unavailable()
+    try:
+        note = inputs.refinement_provenance(n, rational, source, replay)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        raise ExactValuesError(
+            f"n = {n}: refinement rational bound refused: {error}"
+        ) from error
+    return rational, note
+
+
 def _certified_rational_ceiling(packing: dict, coefficients: tuple[int, ...]) -> bool:
     """Only a replay-backed rational upper bound may use an upward display ceiling."""
     reported = packing["reported_upper_bound"]
@@ -1155,11 +1245,13 @@ def build_entry(
 ) -> dict:
     """One register entry from one record, its catalogue block and its KKT row."""
     reported = packing["reported_upper_bound"]
-    fallback = _verified_rational_fallback(
-        n, packing, verified_inputs or VerifiedRationalInputs()
-    )
-    if fallback is not None:
-        rational, _provenance = fallback
+    inputs = verified_inputs or VerifiedRationalInputs()
+    fallback = _verified_rational_fallback(n, packing, inputs)
+    refinement = _explicit_refinement_rational(n, packing, inputs)
+    admitted = fallback if fallback is not None else refinement
+    projection = admitted if reported.get("minimal_polynomial") is None else None
+    if projection is not None:
+        rational, _provenance = projection
         reported = {
             **reported,
             "exact_form": f"{rational.numerator}/{rational.denominator}",
@@ -1183,7 +1275,7 @@ def build_entry(
     if kkt_row is not None and kkt_row.get("S_exact"):
         kkt = {"value": str(kkt_row["S_exact"]), "status": str(kkt_row["status"])}
 
-    notes: list[dict] = [] if fallback is None else [fallback[1]]
+    notes: list[dict] = [] if admitted is None else [admitted[1]]
     checks: dict[str, Any] = {
         "irreducible": None,
         "root": None,
@@ -1259,9 +1351,9 @@ def build_entry(
     superseded = _superseded_note(reported, entry)
     if superseded is not None:
         notes.append(superseded)
-    if state == "numeric-only" or fallback is not None:
+    if state == "numeric-only" or admitted is not None:
         for note in _numeric_only_notes(n, kkt_row):
-            if fallback is not None:
+            if admitted is not None:
                 note["text"] = (
                     "The finite rational bound leaves ideal contact research open. "
                     + note["text"]
@@ -1369,7 +1461,7 @@ def build_record() -> dict:
 
 def load_record() -> dict:
     """The register, as committed."""
-    return json.loads(RECORD.read_text(encoding="utf-8"))["register"]
+    return json.loads(read_retained_text(RECORD))["register"]
 
 
 def register_text(record: dict) -> str:
@@ -1378,19 +1470,18 @@ def register_text(record: dict) -> str:
 
 def update() -> None:
     content = register_text(build_record())
-    if RECORD.is_file() and RECORD.read_text(encoding="utf-8") == content:
+    if retained_exists(RECORD) and read_retained_text(RECORD) == content:
         print(f"exact values register already current: {RECORD.name}")
         return
-    with atomic_output_file(RECORD, make_parents=True) as temporary:
-        temporary.write_text(content, encoding="utf-8")
+    write_retained_text(RECORD if RECORD.is_file() else compressed_path(RECORD), content)
     print(f"exact values register updated: {RECORD.name}")
 
 
 def check() -> None:
-    if not RECORD.is_file():
+    if not retained_exists(RECORD):
         raise ValueError(f"missing {RECORD.relative_to(ROOT)}; run with --update")
     record = build_record()
-    if RECORD.read_text(encoding="utf-8") != register_text(record):
+    if read_retained_text(RECORD) != register_text(record):
         raise ValueError(f"stale {RECORD.relative_to(ROOT)}; re-run with --update")
     totals = record["register"]["totals"]
     print(
