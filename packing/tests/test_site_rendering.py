@@ -946,6 +946,10 @@ def test_clipped_semantic_math_keeps_print_nojs_accessibility_and_copy(
                 )
 
             selector = '.kpress-math[data-kpress-math-rendered="true"] > .kpress-math-semantic'
+            frame = session.send("Page.getFrameTree")["frameTree"]["frame"]["id"]
+            override = session.send("CSS.createStyleSheet", {"frameId": frame, "force": True})[
+                "styleSheetId"
+            ]
             for medium in ("screen", "print"):
                 page.emulate_media(media=medium)
                 check_site_rendering.wait_for_fonts(page)
@@ -953,17 +957,21 @@ def test_clipped_semantic_math_keeps_print_nojs_accessibility_and_copy(
                 assert containment("#fallback-math > .kpress-math-semantic") == "none"
                 assert containment('[data-site-native-math="frontier"] > math') == "none"
                 original = semantic_math_state(page, javascript=javascript)
-                override = page.add_style_tag(
-                    content=selector + " { contain: none !important; }"
+                # Inspector styles do not wait for disabled page-script load handlers.
+                session.send(
+                    "CSS.setStyleSheetText",
+                    {
+                        "styleSheetId": override,
+                        "text": selector + " { contain: none !important; }",
+                    },
                 )
-                assert containment(selector) == "none"
-                assert semantic_math_state(page, javascript=javascript) == original
-                root = session.send("DOM.getDocument")["root"]["nodeId"]
-                styles = session.send(
-                    "DOM.querySelectorAll", {"nodeId": root, "selector": "head > style"}
-                )
-                session.send("DOM.removeNode", {"nodeId": styles["nodeIds"][-1]})
-                override.dispose()
+                try:
+                    assert containment(selector) == "none"
+                    assert semantic_math_state(page, javascript=javascript) == original
+                finally:
+                    session.send(
+                        "CSS.setStyleSheetText", {"styleSheetId": override, "text": ""}
+                    )
                 assert containment(selector) == "strict"
                 assert semantic_math_state(page, javascript=javascript) == original
         finally:

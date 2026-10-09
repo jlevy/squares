@@ -1512,7 +1512,7 @@ def test_snapshot_audit_refuses_unconditional_copy_candidates(
         monkeypatch.setattr(controls, "root_files", lambda: (target,))
     else:
         monkeypatch.setattr(controls, route, (target,))
-    # The actual roster contains one unique unconditional destination.
+    # An unconditional copied destination cannot be suppressed by a tree-walk prune.
     monkeypatch.setattr(controls, "snapshot_source_paths", lambda: [copied])
     monkeypatch.setattr(
         controls, "clone_tree", lambda _tree: pytest.fail("audit copied source")
@@ -2111,117 +2111,6 @@ print('all 27 complete inputs admitted; all nine original houses admitted from '
         assert source.read_bytes() == original
 
 
-def _gupta_worker_program() -> str:
-    """The actual custody child; literal escapes must survive serialization."""
-    return r"""
-import copy
-from fractions import Fraction
-from devtools import build_known_best_atlas as atlas
-from devtools import check_results
-from devtools import gupta_house_links as house
-from devtools import register_gupta_reports as register
-reports = house.reports
-def forbidden(*args, **kwargs):
-    raise AssertionError('custody admission must not call a geometric decider')
-reports.kernel.run_case = reports.run_child = forbidden
-reports.legacy.exact_verify = reports.legacy.independent.check_squares = forbidden
-assert tuple(reports.check_certification()) == reports.NUMBERS
-assert sum(len(c.poses) for c in reports.read_facts().values()) == 3017
-assert len(register.read_history()) == 14
-house.check_houses()
-for relative in (house.house_path(88), house.house_path(239)):
-    name = relative.relative_to(house.REPO).as_posix()
-    assert check_results.repository_file_problem(name) is None
-for kind in ('native-verdict', 'complete-input', 'original', 'comparator'):
-    deciding = kind in ('native-verdict', 'complete-input')
-    target = reports.receipt_path() if deciding else reports.fact_path()
-    original = target.read_bytes()
-    value = copy.deepcopy(reports.kernel.read_xz(target))
-    row = value['cases'][-1]
-    if kind == 'native-verdict':
-        assert row['exact_verify']['verification_passed'] is False
-        row['exact_verify']['verification_passed'] = True
-    elif kind == 'complete-input':
-        x = row['checker_input']['poses'][-1][0]
-        row['checker_input']['poses'][-1][0] = str(Fraction(x) + 1)
-    elif kind == 'original':
-        row['source_certificate'] += '\n'
-    else:
-        row['source_comparator'] += '\n'
-    try:
-        reports.save_xz(target, value)
-        try:
-            house.check_houses()
-        except reports.kernel.ReportError:
-            pass
-        else:
-            raise AssertionError('private deciding input mutant was admitted: ' + kind)
-    finally:
-        target.write_bytes(original)
-    house.check_houses()
-    assert target.read_bytes() == original
-producers = (atlas.update, lambda: atlas.update_selected([88]),
-             lambda: atlas.update_selected([239]))
-for producer in producers:
-    try:
-        producer()
-    except ValueError as error:
-        assert 'output escapes' in str(error)
-    else:
-        raise AssertionError('producer accepted a linked Gupta output')
-print('all 17 sources/3017 poses/51 jobs/four private inputs/14 houses admitted; '
-      'native verdict, complete input, original and comparator mutants refused/restored; '
-      'all producer guards passed without deciders')
-"""
-
-
-def test_gupta_worker_program_compiles() -> None:
-    compile(_gupta_worker_program(), "gupta-custody-child", "exec")
-
-
-@pytest.mark.slow
-def test_gupta_complete_sources_survive_native_worker_boundaries(
-    control_snapshot: tuple[Path, set[Path]],
-) -> None:
-    """Use the actual shared copier, all four private inputs and live refusal/restores."""
-    from devtools import gupta_house_links as house  # noqa: PLC0415
-
-    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
-    tree, _copied = control_snapshot
-    inputs = house.private_input_paths()
-    assert len(inputs) == 4
-    original_inputs = {path: path.read_bytes() for path in inputs}
-    for source, original in original_inputs.items():
-        target = tree / source.relative_to(controls.REPO)
-        assert target.is_file()
-        assert not target.is_symlink()
-        assert target.read_bytes() == original
-    for source in house.snapshot_house_links():
-        target = tree / source.relative_to(controls.REPO)
-        assert target.is_symlink()
-        assert target.resolve() == source.resolve()
-        with pytest.raises(ValueError, match="escapes private snapshot"):
-            resolve_control_target(
-                source.relative_to(ROOT).as_posix(), tree=tree, work=tree / HERE
-            )
-    program = _gupta_worker_program()
-    completed = subprocess.run(
-        [sys.executable, "-c", program],
-        cwd=tree / HERE,
-        env=controls.control_environment(tree, tree / "gupta-custody-pycache"),
-        capture_output=True,
-        text=True,
-        check=False,
-        timeout=45,
-    )
-    assert completed.returncode == 0, completed.stdout + completed.stderr
-    assert "all 17 sources/3017 poses/51 jobs/four private inputs/14 houses" in completed.stdout
-    for source, original in original_inputs.items():
-        assert source.read_bytes() == original
-        assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
-    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
-
-
 def _guarded_second_squish_admission(packet: ModuleType) -> Callable[[], dict[int, Any]]:
     """Reuse one actual admission in one child while every admission premise is fixed."""
     from copy import deepcopy  # noqa: PLC0415
@@ -2457,9 +2346,9 @@ except packet.original.PacketError as error:
 else:
     raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
 from devtools.register_ryxu_reports import read_history
+from devtools import register_gupta_reports as gupta
 historical = {row['n']: row['house'] for row in read_history()}
-if (packet.REPO / 'packing/devtools/register_gupta_reports.py').is_file():
-    from devtools import register_gupta_reports as gupta
+if gupta.HISTORY.exists():
     for row in gupta.read_history():
         historical.setdefault(row['n'], row['house'])
     try:
@@ -2581,6 +2470,117 @@ def test_squish_private_mutation_is_detected_and_restored_in_native_worker(
     assert passed, detail
     assert target.read_bytes() == before
     assert source.read_bytes() == source_before
+
+
+def _gupta_worker_program() -> str:
+    """The actual custody child; literal escapes must survive serialization."""
+    return r"""
+import copy
+from fractions import Fraction
+from devtools import build_known_best_atlas as atlas
+from devtools import check_results
+from devtools import gupta_house_links as house
+from devtools import register_gupta_reports as register
+reports = house.reports
+def forbidden(*args, **kwargs):
+    raise AssertionError('custody admission must not call a geometric decider')
+reports.kernel.run_case = reports.run_child = forbidden
+reports.legacy.exact_verify = reports.legacy.independent.check_squares = forbidden
+assert tuple(reports.check_certification()) == reports.NUMBERS
+assert sum(len(c.poses) for c in reports.read_facts().values()) == 3017
+assert len(register.read_history()) == 14
+house.check_houses()
+for relative in (house.house_path(88), house.house_path(239)):
+    name = relative.relative_to(house.REPO).as_posix()
+    assert check_results.repository_file_problem(name) is None
+for kind in ('native-verdict', 'complete-input', 'original', 'comparator'):
+    deciding = kind in ('native-verdict', 'complete-input')
+    target = reports.receipt_path() if deciding else reports.fact_path()
+    original = target.read_bytes()
+    value = copy.deepcopy(reports.kernel.read_xz(target))
+    row = value['cases'][-1]
+    if kind == 'native-verdict':
+        assert row['exact_verify']['verification_passed'] is False
+        row['exact_verify']['verification_passed'] = True
+    elif kind == 'complete-input':
+        x = row['checker_input']['poses'][-1][0]
+        row['checker_input']['poses'][-1][0] = str(Fraction(x) + 1)
+    elif kind == 'original':
+        row['source_certificate'] += '\n'
+    else:
+        row['source_comparator'] += '\n'
+    try:
+        reports.save_xz(target, value)
+        try:
+            house.check_houses()
+        except reports.kernel.ReportError:
+            pass
+        else:
+            raise AssertionError('private deciding input mutant was admitted: ' + kind)
+    finally:
+        target.write_bytes(original)
+    house.check_houses()
+    assert target.read_bytes() == original
+producers = (atlas.update, lambda: atlas.update_selected([88]),
+             lambda: atlas.update_selected([239]))
+for producer in producers:
+    try:
+        producer()
+    except ValueError as error:
+        assert 'output escapes' in str(error)
+    else:
+        raise AssertionError('producer accepted a linked Gupta output')
+print('all 17 sources/3017 poses/51 jobs/four private inputs/14 houses admitted; '
+      'native verdict, complete input, original and comparator mutants refused/restored; '
+      'all producer guards passed without deciders')
+"""
+
+
+def test_gupta_worker_program_compiles() -> None:
+    compile(_gupta_worker_program(), "gupta-custody-child", "exec")
+
+
+@pytest.mark.slow
+def test_gupta_complete_sources_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Use the actual shared copier, all four private inputs and live refusal/restores."""
+    from devtools import gupta_house_links as house  # noqa: PLC0415
+
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    tree, _copied = control_snapshot
+    inputs = house.private_input_paths()
+    assert len(inputs) == 4
+    original_inputs = {path: path.read_bytes() for path in inputs}
+    for source, original in original_inputs.items():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_file()
+        assert not target.is_symlink()
+        assert target.read_bytes() == original
+    for source in house.snapshot_house_links():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_symlink()
+        assert target.resolve() == source.resolve()
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(
+                source.relative_to(ROOT).as_posix(), tree=tree, work=tree / HERE
+            )
+    program = _gupta_worker_program()
+    completed = subprocess.run(
+        [sys.executable, "-c", program],
+        cwd=tree / HERE,
+        env=controls.control_environment(tree, tree / "gupta-custody-pycache"),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=45,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert "all 17 sources/3017 poses/51 jobs/four private inputs/14 houses" in completed.stdout
+    for source, original in original_inputs.items():
+        assert source.read_bytes() == original
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
 
 
 @pytest.mark.parametrize(
@@ -2715,3 +2715,118 @@ def test_snapshot_prunes_leave_native_crate_fixtures_selected() -> None:
     for relative in listed:
         path = controls.REPO / relative
         assert not controls.in_pruned_roots(path, PRUNE)
+
+
+def _couzo_worker_program() -> str:
+    """All source/native mutations happen in the actual private snapshot, without decisions."""
+    return r"""
+import copy
+from fractions import Fraction
+from pathlib import Path
+from devtools import couzo_refinement_reports as reports
+def forbidden(*args, **kwargs):
+    raise AssertionError('custody must not run a native geometric decision')
+reports.kernel.run_case = reports.run_child = forbidden
+reports.legacy.exact_verify = reports.legacy.independent.check_squares = forbidden
+assert tuple(reports.check_certification()) == reports.NUMBERS
+assert sum(len(c.poses) for c in reports.read_facts().values()) == 1340
+assert len(reports.kernel.read_xz(reports.receipt_path())['cases']) == 24
+for kind in ('native-verdict', 'native-limitations', 'complete-input',
+             'original', 'decimal', 'map'):
+    deciding = kind in ('native-verdict', 'native-limitations', 'complete-input')
+    target = reports.receipt_path() if deciding else reports.fact_path()
+    if kind == 'map':
+        target = reports.PACKET / 'acquisition/case-inputs.json'
+    original = target.read_bytes()
+    try:
+        if kind == 'map':
+            target.write_bytes(original + b'\n')
+        else:
+            value = copy.deepcopy(reports.kernel.read_xz(target))
+            row = value['cases'][-1]
+            if kind == 'native-verdict':
+                assert row['exact_verify']['verification_passed'] is False
+                row['exact_verify']['verification_passed'] = True
+            elif kind == 'native-limitations':
+                row['independent']['limitations'] = 'Global optimality is proved.'
+            elif kind == 'complete-input':
+                x = row['checker_input']['poses'][-1][0]
+                row['checker_input']['poses'][-1][0] = str(Fraction(x) + 1)
+            elif kind == 'original':
+                row['source_certificate'] += '\n'
+            else:
+                row['decimal_pose'] += '\n'
+            reports.kernel.save_xz(target, value)
+        try:
+            reports.check_certification()
+        except reports.kernel.ReportError:
+            pass
+        else:
+            raise AssertionError('private deciding mutant was admitted: ' + kind)
+    finally:
+        target.write_bytes(original)
+    assert tuple(reports.check_certification()) == reports.NUMBERS
+    assert target.read_bytes() == original
+outside = reports.REPO.parent / 'couzo-custody-output-target'
+for target, producer in ((reports.fact_path(), reports.import_facts),
+                        (reports.receipt_path(), lambda: reports.certify(Path('unused-jobs')))):
+    original = target.read_bytes()
+    outside.write_bytes(original)
+    target.unlink()
+    target.symlink_to(outside)
+    try:
+        try:
+            producer()
+        except reports.kernel.ReportError as error:
+            assert 'must remain private' in str(error)
+        else:
+            raise AssertionError('producer accepted output outside private snapshot')
+        assert outside.read_bytes() == original
+    finally:
+        target.unlink()
+        target.write_bytes(original)
+        outside.unlink()
+assert tuple(reports.check_certification()) == reports.NUMBERS
+print('all8 sources/1340poses/24jobs/three private inputs admitted; '
+      'six late mutants refused/restored and both producer escapes refused without deciders')
+"""
+
+
+def test_couzo_worker_program_compiles() -> None:
+    compile(_couzo_worker_program(), "couzo-custody-child", "exec")
+
+
+def test_couzo_complete_sources_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The production copier must carry all full deciding inputs as ordinary private files."""
+    from devtools import couzo_refinement_reports as reports  # noqa: PLC0415
+
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+    tree, _copied = control_snapshot
+    inputs = reports.private_input_paths()
+    assert len(inputs) == 3
+    assert set(inputs) <= set(controls.COPY_SEPARATELY)
+    originals = {path: path.read_bytes() for path in inputs}
+    for source, original in originals.items():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_file()
+        assert not target.is_symlink()
+        assert target.read_bytes() == original
+    program = _couzo_worker_program()
+    compile(program, "couzo-custody-child", "exec")
+    completed = subprocess.run(
+        [sys.executable, "-c", program],
+        cwd=tree / HERE,
+        env=controls.control_environment(tree, tree / "couzo-custody-pycache"),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=45,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert "all8 sources/1340poses/24jobs/three private inputs admitted" in completed.stdout
+    for source, original in originals.items():
+        assert source.read_bytes() == original
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES

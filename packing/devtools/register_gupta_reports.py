@@ -63,7 +63,10 @@ def section(n: int, *, confirmed: bool) -> str:
     bound = reported_bound(n)
     assurance = (
         "Complete dual-route native replay, full-roster controls and separately prompted "
-        "source and production review confirm finite feasibility at V3/C3."
+        "source and production review confirm finite feasibility at V3/C3 using independently "
+        "re-implemented deciding code. The repository routes share parsing, half-angle "
+        "conversion, Fraction arithmetic and SAT methodology; the recorded code relation "
+        "is to the source producer's verification, not to each other."
         if confirmed
         else "The registered source claim remains V0/C0 pending independent production "
         "custody review and confirming record integration. Drawing admission is separate."
@@ -207,7 +210,8 @@ def read_history() -> list[dict[str, Any]]:
 def pending_blockers(case: dict[str, Any]) -> list[dict[str, Any]]:
     """Retain earlier blockers and name the unclosed production boundary explicitly."""
     blockers = copy.deepcopy(case["blockers"])
-    if not any(REPORT in row.get("evidence", []) for row in blockers):
+    confirmed = houses.reports.EXACT_EVIDENCE in case["verified_upper_bound"]["evidence"]
+    if not confirmed and not any(REPORT in row.get("evidence", []) for row in blockers):
         blockers.append(
             {
                 "kind": "source-evidence",

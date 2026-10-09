@@ -25,6 +25,15 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/couzo_refinement_reports.py
+    kind: download
+    boundary: >-
+      Couzo's eight complete issue-451 rational certificates and decimal poses
+      are compared with their independently acquired external Git-blob and
+      original-byte roster before parsing. The acquisition map itself is
+      admitted against its frozen external-custody digest. Geometry decisions
+      use complete structural inputs and outcome fields, never source digests
+      or code pins.
   - path: packing/devtools/gupta_refinement_reports.py
     kind: download
     boundary: >-

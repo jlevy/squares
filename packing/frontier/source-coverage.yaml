@@ -2483,7 +2483,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-08-25'
+  reviewed: '2026-10-08'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2579,13 +2579,13 @@ sources:
 - id: squish-n153-2026-10-07
   title: SQUISH exact-rational n153 upper-bound packing
   role: first-party-release
-  url: https://github.com/jlevy/squares/issues/401#issuecomment-6031977107
+  url: https://github.com/jlevy/squares/issues/401#issuecomment-6043191866
   local: resources/web/squish-401-2026-10-07/
   source_key: '[SQUISH n153 2026-10-07]'
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-07'
+  reviewed: '2026-10-08'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2900,8 +2900,11 @@ sources:
   claims_record: resources/web/gupta-square-packing-refinements-2026-10-08/acquisition/claims.json
   evidence:
   - E-gupta-438-rational-report
-  notes: All seventeen originals and comparators retained; fourteen selected, three withdrawn after
-    smaller ry-xu ceilings. Finite feasibility only.
+  - E-gupta-438-exact-feasibility
+  notes: All seventeen complete originals and comparators, 51 actual native jobs and full controls
+    retained; fourteen selected finite upper bounds confirmed by independently re-implemented deciding
+    code, three withdrawn offers fully retained. Actual private custody passed without geometric deciders.
+    No optimality claim.
 - id: rehwaldt-n68-exact-root-v12-2026-10-08
   title: Rehwaldt n68 exact-root feasibility and restricted-family attainment, issue428 v1.2
   role: source-repository
@@ -2924,6 +2927,172 @@ sources:
     custody is preserved outside live Git; no whole-publication license was observed. No numeric selection
     claims_record is supplied because the root expression is not admitted as a frontier value. Independent
     review/replay is queued under think-nv5o; earlier rational T-118 remains unchanged.
+- id: wand125-fine-net-lower-bounds-446-2026-10-08
+  title: Wand125 seven reported fine-net lower bounds, issue446
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-08/
+  source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+  scope:
+    n_values:
+    - 19
+    - 20
+    - 26
+    - 27
+    - 28
+    - 29
+    - 31
+  reviewed: '2026-10-08'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  evidence:
+  - E-wand125-fine-net-lower-bounds-446-report
+  notes: All seven original archives and sealed source/log/member identities retained outside live Git.
+    Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
+    standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget
+    remain pending under think-ndvg.
+- id: couzo-451-exact-refinements
+  title: Francisco Couzo's eight rational refinements, issue451
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/ffd900dfff6d2674ad995359208c2f0714915c82
+  local: resources/web/couzo-exact-refinements-2026-10-08
+  source_key: '[Couzo exact refinements 2026-10-08]'
+  scope:
+    n_values:
+    - 105
+    - 108
+    - 127
+    - 131
+    - 155
+    - 180
+    - 228
+    - 306
+  reviewed: '2026-10-08'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-exact-refinements-2026-10-08/facts/complete-certificates-and-decimal-poses.json.xz
+  evidence:
+  - E-couzo-451-rational-report
+  notes: All eight complete claims and their exact sides remain in pinned factual inputs; T-128 records
+    the aggregate source report. All 24 native jobs have full outcomes. No selected override or superseded
+    claim is created at this source-only stage; current cases and earlier source ownership remain
+    unchanged. Actual private-worker custody passed; historical owner integration, adoption and confirmation
+    remain pending.
+- id: wand125-fine-net-n27-5655-followup-2026-10-08
+  title: Wand125 later reported n27 fine-net lower bound, issue446
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/bf85d6b537a7e854ac2f885c871474ea46db65ac/problems/square-lower-bounds/certificates/mixed_n27_L5655
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-08/
+  source_key: '[wand125 fine-net lower bounds 2026-10-08]'
+  scope:
+    n_values:
+    - 27
+  reviewed: '2026-10-08'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  evidence:
+  - E-wand125-fine-net-n27-5655-followup-report
+  notes: The later reported 1131/200 supersedes the original reported n27 value only. Original seven-case
+    catalogue and all standing claims remain unchanged. Complete archive/candidate/source custody and
+    exact conditional mass/net premises accepted; author full positives and sampled controls over 32 directions
+    do not supply maintained capture or whole-net controls. Source-only work remains under think-ndvg.
+- id: evand-batch-105-130-2026-10-07
+  title: "Evan Daniel's dated certificate reports at 105 and 130, issue #375"
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/7eef24f7221b8c3371d6171dd664b52541bbd479
+  local: resources/web/evand-batch-105-130-2026-10-07
+  claims_record: resources/web/evand-batch-105-130-2026-10-07/source/s12/search/exact/batch/certs
+  source_key: '[Daniel dated certificates 105 and 130 2026-10-07]'
+  scope:
+    n_values:
+    - 105
+    - 130
+  reviewed: '2026-10-08'
+  source_date: '2026-10-07'
+  disposition: superseded-covered
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-batch-105-130-2026-10-07/README.md
+  evidence:
+  - E-daniel-375-dated-105-130-report
+  notes: All named certificates and matching approximate inputs are retained under this exact revision.
+    Source-only historical scope; source wrapper correction is separately pinned, with no acceptance
+    or geometry replay transferred.
+- id: evand-batch-292-2026-10-07
+  title: "Evan Daniel's dated certificate reports at 292, issue #375"
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/f58a01774a733b232a88576470332185d8d11641
+  local: resources/web/evand-batch-292-2026-10-07
+  claims_record: resources/web/evand-batch-292-2026-10-07/source/s12/search/exact/batch/certs
+  source_key: '[Daniel dated certificate 292 2026-10-07]'
+  scope:
+    n_values:
+    - 292
+  reviewed: '2026-10-08'
+  source_date: '2026-10-07'
+  disposition: superseded-covered
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-batch-292-2026-10-07/README.md
+  evidence:
+  - E-daniel-375-dated-292-report
+  notes: All named certificates and matching approximate inputs are retained under this exact revision.
+    Source-only historical scope; source wrapper correction is separately pinned, with no acceptance
+    or geometry replay transferred.
+- id: couzo-extended-range-reports-2026-10-09
+  title: Francisco Couzo's twenty decimal reports beyond the case corpus
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/ffd900dfff6d2674ad995359208c2f0714915c82
+  local: resources/web/couzo-extended-reports-2026-10-09
+  source_key: '[Couzo extended-range reports 2026-10-09]'
+  scope:
+    n_values:
+    - 327
+    - 332
+    - 335
+    - 336
+    - 337
+    - 338
+    - 339
+    - 340
+    - 341
+    - 342
+    - 364
+    - 369
+    - 372
+    - 373
+    - 374
+    - 375
+    - 376
+    - 377
+    - 378
+    - 379
+  reviewed: '2026-10-09'
+  source_date: '2026-10-08'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-extended-reports-2026-10-09/README.md
+  - resources/web/couzo-extended-reports-2026-10-09/acquisition/sources.json
+  claims_record: resources/web/couzo-extended-reports-2026-10-09/acquisition/sources.json
+  evidence:
+  - E-couzo-extended-range-report
+  notes: The source date is attributed GitHub commit metadata, not authenticated by the Git tree alone. All twenty complete decimal poses and their source identities are retained as derived facts.
+    Complete local custody covers 73 current/historical roles across three pinned trees. Raw upstream
+    text, diagrams, prose and programs stay outside Git under the existing retention policy. Every claim
+    is tracked outside the 1..324 case corpus; no geometry, native replay, selected case, result row or
+    transferred issue451 verification.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026
@@ -4809,5 +4978,166 @@ superseded_reports:
   superseded_by: ry-xu-new-packings-2026-10-08
   reason: The withdrawn Gupta rational certificate is larger than the selected ry-xu construction;
     its complete source and replay remain retained.
-beyond_horizon_claims: []
+- n: 105
+  source_id: evand-batch-105-130-2026-10-07
+  value: '10.806077865519704632682966129102'
+  superseded_by: ry-xu-new-packings-2026-10-08
+  reason: The complete dated source certificate has a strictly larger exact rational side than the
+    current verified selected bound; original custody remains historical and does not inherit another
+    packet's geometry verification.
+- n: 130
+  source_id: evand-batch-105-130-2026-10-07
+  value: '11.911187706535762355657987890878'
+  superseded_by: gupta-square-packing-refinements-2026-10-08
+  reason: The complete dated source certificate has a strictly larger exact rational side than the
+    current verified selected bound; original custody remains historical and does not inherit another
+    packet's geometry verification.
+- n: 292
+  source_id: evand-batch-292-2026-10-07
+  value: '17.597249391156465040647414499422'
+  superseded_by: rehwaldt-couzo-refinements-2026-10-07
+  reason: The complete dated source certificate has a strictly larger exact rational side than the
+    current verified selected bound; original custody remains historical and does not inherit another
+    packet's geometry verification.
+beyond_horizon_claims:
+- n: 327
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.597249391205040'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 332
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.740417287559392'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 335
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.822875655543559'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 336
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.825571499868651'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 337
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.858391767640679'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 338
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.908632939046573'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 339
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.930103647693699'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 340
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.939879629586962'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 341
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.951882408731986'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 342
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '18.964706723440020'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 364
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.597249391207239'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 369
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.740417287556077'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 372
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.822875655616990'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 373
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.823062082850335'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 374
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.832356217038534'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 375
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.907052698737502'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 376
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.920279652318701'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 377
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.925720814343350'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 378
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.947426312032292'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
+- n: 379
+  source_id: couzo-extended-range-reports-2026-10-09
+  claim: upper-bound
+  value: '19.957538882118669'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-1545
 pending_catalogue_intake: []

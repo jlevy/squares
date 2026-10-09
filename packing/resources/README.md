@@ -857,13 +857,15 @@ Source MIT licences and the earlier #375 namespace remain unchanged.
 
 - **[Gupta rational refinements 2026-10-08]** — Siddharth Gupta’s seventeen complete
   rational source cases at `9643cb5a78c1d4dcfc867c80a6920c3a6219d05a`; fourteen selected
-  reported improvements and three withdrawals, T-127 at V0/C0.
+  finite upper-bound improvements and three withdrawals, T-127 at V3/C3.
   [Factual packet](web/gupta-square-packing-refinements-2026-10-08/README.md).
+  Independently re-implemented deciding code verified every complete source certificate
+  and full-roster control; actual private custody admitted the complete retained
+  inputs/results without repeating geometry.
+  These results establish finite feasibility, not optimality or human oversight.
   SQUISH credit remains with Nate Chaoweeraprasit, and Evan Daniel’s optimizer is
-  credited. Full native outcomes exist; private-worker custody and final production
-  review remain pending.
-  Unlicensed programs/prose are hash-pinned; the solver MIT notice is not treated as a
-  bundle licence.
+  credited. Unlicensed programs/prose remain hash-pinned; the solver MIT notice is not
+  treated as a bundle licence.
 
 ## Exact-Root Report for n68, v1.2
 
@@ -875,6 +877,49 @@ exact-root feasibility and restricted-family attainment at pinned revision
 earlier finite rational T-118 result remains unchanged.
 Complete original custody is preserved outside live Git; public files contain attributed
 factual metadata and external-byte identities only.
+
+## Reported Fine-Net Lower Bounds
+
+**[wand125 fine-net lower bounds 2026-10-08]**: wand125, using the project’s maintained
+geometric kernel, reports seven finer-net measure certificates for n19, n20, n26, n27,
+n28, n29 and n31. The
+[authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
+records the reported bounds and complete source references.
+Independent whole-net replay and controls remain pending.
+
+- **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
+  certificates and separate decimal context poses; T-128 remains V0/C0 pending
+  historical source-house integration and confirmation.
+  All 24 native jobs completed their finite-feasibility and control outcomes in 6.64
+  wall minutes; actual private-worker custody passed complete stored-input and
+  mutation-restoration checks.
+  [Factual packet](web/couzo-exact-refinements-2026-10-08/README.md).
+  Ryan Xu, Nate Chaoweeraprasit, Siddharth Gupta, David Ellsworth and Evan Daniel
+  receive the source’s construction/refinement credits; no optimality is asserted.
+
+- **[Daniel dated certificates 105 and 130 2026-10-07]** — Evan Daniel’s complete dated
+  certificate reports and matching inputs for Francisco Couzo constructions at 105 and
+  130, pinned at 7eef24f.
+  [Historical source packet](web/evand-batch-105-130-2026-10-07/README.md).
+  T-129 records V0/C0/S1; both sides are superseded by smaller currently verified
+  bounds. Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0.
+  No geometry replay or selected-case change.
+
+- **[Daniel dated certificate 292 2026-10-07]** — Evan Daniel’s complete dated
+  certificate report and matching input for Francisco Couzo’s 292 construction, pinned
+  at f58a017. [Historical source packet](web/evand-batch-292-2026-10-07/README.md).
+  T-129 records V0/C0/S1; its side is superseded by the current verified bound.
+  Code is MIT; batch data credits Joshua Levy and this project under CC BY 4.0. The
+  [separate wrapper correction](web/evand-batch-wrapper-2026-10-07/README.md) is pinned
+  at cca7bf1; its reported rerun earns no replay credit here.
+
+- **[Couzo extended-range reports 2026-10-09]** — Francisco Couzo’s twenty complete
+  decimal poses beyond n324, retained as numerical facts and Git custody metadata.
+  [Source packet](web/couzo-extended-reports-2026-10-09/README.md).
+  All twenty remain author reports outside the standing-case corpus; no result row,
+  geometry replay, selected bound or verification from the separate issue451
+  certificates. Raw upstream text, SVGs, prose and programs remain outside Git under the
+  existing retention policy; no redistribution permission is asserted.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

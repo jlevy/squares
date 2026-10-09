@@ -89,6 +89,7 @@ from threading import Lock
 from typing import Protocol, cast
 from uuid import uuid4
 
+from devtools import couzo_refinement_reports as couzo
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import gupta_house_links as gupta
 from devtools import refinement_house_links as refinements
@@ -697,6 +698,7 @@ LINK_BACK = (
 # closeout naming `.github/PULL_REQUEST_TEMPLATE.md`, which only a link could bring
 # into a worker. Both checkers were red before any mutation was applied.
 COPY_SEPARATELY = (
+    *couzo.private_input_paths(),
     *second.private_input_paths(),
     *refinements.private_input_paths(),
     *ryxu.private_input_paths(),
@@ -710,6 +712,10 @@ COPY_SEPARATELY = (
     ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/README.md",
     ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/reported-catalogue.json",
     ROOT / "resources/web/rehwaldt-n68-exact-root-2026-10-08/source-manifest.json",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json",
+    ROOT / "resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json",
     REPO / ".flowmarkignore",
     REPO / ".gitignore",
     REPO / ".github/PULL_REQUEST_TEMPLATE.md",

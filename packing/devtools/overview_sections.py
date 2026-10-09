@@ -1742,9 +1742,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Siddharth Gupta",
         (
             "Seventeen rational refinements of Nate Chaoweeraprasit's SQUISH packings, "
-            "using Evan Daniel's optimizer; fourteen reports selected here (T-127) and "
-            "three withdrawn. Production confirmation remains pending; optimality is "
-            "not established."
+            "using Evan Daniel's optimizer; fourteen finite upper-bound improvements selected "
+            "here (T-127) and three withdrawn. Exact feasibility is confirmed with "
+            "independently re-implemented code; optimality is not established."
         ),
     ),
     (
@@ -1815,7 +1815,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/franciscouzo/square-packing",
         "Francisco Couzo",
-        "Improved packings for 49 counts from n = 68 to 307.",
+        (
+            "Improved packings for 49 counts from n = 68 to 307. "
+            "Eight complete rational refinements in issue451 have retained "
+            "finite-feasibility results (T-128); selected-case integration remains pending."
+        ),
     ),
     (
         "https://github.com/itsnaka/squish-certs",
@@ -1935,6 +1939,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         "SQUISH packing of 153 squares",
         "Nate Chaoweeraprasit",
         "The supplemental rational certificate submitted with the SQUISH packings.",
+    ),
+    (
+        "https://github.com/jlevy/squares/issues/401#issuecomment-6043191866",
+        "SQUISH dated source follow-up",
+        "Nate Chaoweeraprasit",
+        (
+            "Dated SQUISH update, including a pinned copy of the original rational "
+            "n153 certificate."
+        ),
     ),
     (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",

@@ -66,6 +66,16 @@ def results() -> str:
 
 
 @pytest.fixture(scope="module")
+def result_bodies() -> dict[str, str]:
+    """Render complete result bodies during setup, before per-test monkeypatches.
+
+    Each preview still renders afresh; its complete context comes from the same
+    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
+    """
+    return site_renders.result_bodies()
+
+
+@pytest.fixture(scope="module")
 def register() -> list[dict]:
     return safe_load(overview_data.RESULTS.read_text(encoding="utf-8"))["results"]
 
@@ -2994,16 +3004,6 @@ def test_the_prose_links_repository_files_on_main(page: str) -> None:
 
 
 @pytest.fixture(scope="module")
-def result_bodies() -> dict[str, str]:
-    """Render complete result bodies during setup, before per-test monkeypatches.
-
-    Each preview still renders afresh; its complete context comes from the same
-    shared overview. Rendering all bodies in call time took 12.92 s on run 37785086481.
-    """
-    return site_renders.result_bodies()
-
-
-@pytest.fixture(scope="module")
 def overview() -> overview_data.Overview:
     return site_renders.overview()
 
@@ -4367,7 +4367,7 @@ def test_both_tables_of_results_end_with_the_same_id_column(
     # On a phone the id opens the card, in both tables, and the date, the row's first
     # cell, still follows the credit there.
     assert "  .site-results .site-col-id {\n    font-weight: 650;\n    grid-area: 1 / 1;" in css
-    assert "    grid-column: 3;\n    order: 2;\n    text-align: end;" in css
+    assert "    grid-column: 1 / -1;\n    order: 2;\n    text-align: end;" in css
 
 
 def test_a_date_cell_leads_with_the_date_and_then_says_what_it_dates(

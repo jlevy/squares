@@ -1322,6 +1322,15 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # mutants and restorations; no shared fixture/build or geometric replay.
         # Durable receipt: review-notes/fn1-final-evidence/fn1-actual-worker.log and JUnit
         # outside disposable scratch. Every bounded source/receipt control stays fast.
+        # 2026-10-08 actual private metadata transactions: full fourteen-case
+        # confirmation/repeat/re-registration 18.62s; interrupted writes and
+        # fresh complete-admission retries 21.23s. Scientific inputs stay complete,
+        # geometry is forbidden and no whole-worker clone/shared build is involved.
+        # Receipt: issue438-driver-prep/confirmation-metadata-v2.log outside scratch.
+        "test_confirm_gupta_records.py": {
+            "test_complete_proposal_preserves_all_lower_history_withdrawals_and_unowned_rows",
+            "test_interrupted_atomic_write_resumes_from_the_unchanged_complete_history",
+        },
         "test_fn1_input_bindings.py": {
             "test_actual_worker_carries_every_input_and_refuses_a_receipt_mutant",  # 92.43s
         },

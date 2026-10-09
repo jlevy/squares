@@ -1493,6 +1493,72 @@ sources:
       The release was published 8 October UTC, 7 October in America/Chicago. No whole-publication license
       was observed; authored metadata and external-byte identities are public, with the original publication
       preserved outside live Git.
+  - key: '[wand125 fine-net lower bounds 2026-10-08]'
+    authors:
+    - wand125
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: wand125 after Levy
+    lineage: builds-on-project
+    note: Seven finer-net measure lower-bound reports for n19,20,26,27,28,29,31 at source 61e37d583ad690266da2188ad027ef3f697bf162;
+      original archives/nested source identities retained outside live Git. Conditional maintained measure/net-premise
+      review accepted, native capture/outcomes/adoption pending. Nearest enclosing project MIT notice
+      does not settle nested verifier third-party redistribution. The source adapts this project’s sqverify_fast
+      geometric kernel; the prospective maintained replay is not another independent implementation.
+  - key: '[Couzo exact refinements 2026-10-08]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    lineage: builds-on-project
+    credit: Couzo after Xu, Chaoweeraprasit, Gupta, Ellsworth, Daniel, Levy
+    short_credit: Couzo after Xu et al.
+    note: Eight complete certificates and decimal context poses at ffd900dfff6d2674ad995359208c2f0714915c82;
+      source credits and tools are attributed. The source uses Squares Project (Levy) verification code;
+      this project lineage is not independent. No optimizer/local/global claims. Unlicensed programs/prose
+      are pinned rather than copied.
+  - key: '[Daniel dated certificates 105 and 130 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo, Levy
+    lineage: builds-on-project
+    note: Complete dated certificates and matching inputs at 7eef24f7221b8c3371d6171dd664b52541bbd479,
+      retained in web/evand-batch-105-130-2026-10-07/. Francisco Couzo construction credit, Evan Daniel
+      refinement and source code credit; Joshua Levy and squares register-data lineage. Source discloses
+      Claude assistance. MIT code and CC BY4.0 batch data are distinct. Source-only historical reports;
+      no new maintained geometry replay or selected-bound adoption.
+  - key: '[Daniel dated certificate 292 2026-10-07]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-07'
+    credit: Daniel after Couzo, Levy
+    lineage: builds-on-project
+    note: Complete dated certificates and matching inputs at f58a01774a733b232a88576470332185d8d11641,
+      retained in web/evand-batch-292-2026-10-07/. Francisco Couzo construction credit, Evan Daniel
+      refinement and source code credit; Joshua Levy and squares register-data lineage. Source discloses
+      Claude assistance. MIT code and CC BY4.0 batch data are distinct. Source-only historical reports;
+      no new maintained geometry replay or selected-bound adoption.
+  - key: '[Couzo extended-range reports 2026-10-09]'
+    authors:
+    - Couzo
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-08'
+    credit: Couzo after Levy
+    lineage: builds-on-project
+    note: Twenty author-reported decimal poses beyond n324 at b10ad36, 74f7e8b and ffd900df, reviewed 2026-10-09. The cited final revision is dated 2026-10-08 by GitHub commit metadata.
+      Derived numerical facts and Git custody metadata are retained; upstream text, SVGs and prose are not
+      redistributed. No redistribution permission or licence determination is asserted. The publication
+      includes copied Squares Project verification code and register comparisons for separate in-horizon
+      reports; that project lineage does not establish a checker or verification for these twenty poses.
+      Expanded comparison bounds are derived references rather than surveyed best records.
 credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta
