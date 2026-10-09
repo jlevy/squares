@@ -11,7 +11,7 @@ The author starts from Ryan Xu’s #432 packings at 84, 86, 105 and 175 and from
 Daniel’s #399 packing at 270. Couzo’s basin hopping refined 84, 86, 105 and 270; David
 Ellsworth’s refine_packing followed by Evan Daniel’s fq refined 175. Evan Daniel’s exact
 contact solver wrote the certificates.
-The commit credits Claude under Couzo’s direction.
+The commit names Claude as a co-author, disclosing AI assistance.
 These are source attributions, not independent priority findings.
 
 The author reports that all five pass Evan Daniel’s `verify_cert.py` and a copy of this
