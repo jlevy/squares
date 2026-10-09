@@ -54,6 +54,7 @@ from typing import Any
 
 from strif import atomic_output_file
 
+from devtools.retained_data import read_retained_text
 from sqpack.known_best import (
     calibration_entries,
     declared_calibration_label,
@@ -98,7 +99,7 @@ def manifest(path: pathlib.Path = MANIFEST) -> dict[int, dict[str, Any]]:
 
 
 def band() -> list[dict[str, Any]]:
-    census = json.loads(CENSUS.read_text(encoding="utf-8"))
+    census = json.loads(read_retained_text(CENSUS))
     # The census is the taxonomy's whole input, so its scope is the taxonomy's scope.
     # Without this a widened census would arrive as more rows rather than as an error.
     require_calibration_label(
@@ -175,7 +176,7 @@ def _by_string(counter: Counter[int]) -> dict[str, int]:
 
 def taxonomy() -> dict[str, Any]:
     entries = manifest()
-    allowed = set(json.loads(CENSUS.read_text(encoding="utf-8"))["detector"]["allowed_shapes"])
+    allowed = set(json.loads(read_retained_text(CENSUS))["detector"]["allowed_shapes"])
 
     by_source: dict[str, Counter[str]] = {}
     sizes: dict[str, Counter[int]] = {}

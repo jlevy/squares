@@ -4721,6 +4721,8 @@ STEPS: tuple[Step, ...] = (
             # Any tracked JSON can cross the threshold, and `biome.json` says which are
             # Biome's rather than a retained result's.
             "*.json",
+            "*.json.gz",
+            "packing/devtools/retained_data.py",
             "packing/devtools/check_retained_json.py",
             "packing/devtools/retained-json.yaml",
             "packing/devtools/repo_scope.py",
@@ -5027,6 +5029,20 @@ STEPS: tuple[Step, ...] = (
             "packing/devtools/evand_exact_certificates.py",
             "packing/devtools/upper_bound_packets.py",
             "packing/devtools/retained_data.py",
+            # Finite refinements read complete private facts, replay custody and houses.
+            "packing/devtools/refinement_packets.py",
+            "packing/devtools/refinement_custody.py",
+            "packing/devtools/refinement_house_links.py",
+            "packing/devtools/import_half_angle_witness.py",
+            "packing/devtools/squish_upper_bound_packets.py",
+            "packing/devtools/squish_followup_packets.py",
+            "packing/devtools/squish_second_update_confirmation.py",
+            "packing/devtools/squish_second_update_house_links.py",
+            "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/**",
+            "packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/**",
+            "packing/witnesses/known-best/n-068.yaml",
+            "packing/witnesses/known-best/n-105.yaml",
+            "packing/witnesses/known-best/n-292.yaml",
             # Rational projections are bound to the retained proof and its custody.
             "packing/witnesses/witness.schema.yaml",
             "packing/resources/web/evand-square-packing-2026-10-05/*",
@@ -5201,7 +5217,8 @@ STEPS: tuple[Step, ...] = (
         records=True,
         touches=(
             *_CORE,
-            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/chunk-components.json*",
+            "packing/devtools/retained_data.py",
             "packing/atlas/known-best/contact-assembly-grammar.yaml",
             "packing/atlas/known-best/manifest.json",
             "packing/witnesses/*",
@@ -5217,7 +5234,8 @@ STEPS: tuple[Step, ...] = (
         records=True,
         touches=(
             *_CORE,
-            "packing/atlas/known-best/chunk-components.json",
+            "packing/atlas/known-best/chunk-components.json*",
+            "packing/devtools/retained_data.py",
             "packing/atlas/known-best/manifest.json",
             "packing/witnesses/*",
             "packing/devtools/census_chunk_taxonomy.py",

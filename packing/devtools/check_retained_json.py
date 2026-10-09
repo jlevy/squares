@@ -7,9 +7,12 @@ was 365,916 lines. `sqpack.retained_json.dumps` writes a value on one line when 
 fits in its width and opens it otherwise, so a record is a line and a long vector a block of
 full lines. Converting the writers does not hold the convention on its own: the next tool
 written with `indent=2` brings the next hundred thousand lines back, and nothing says so.
-This sweep does.
+This sweep does. Declared generated gzip is decoded with bounded reads before the same
+layout check. Existing compressed archives are outside the default layout corpus; their
+source custody checks remain separate. Explicit gzip paths are checked when requested.
 
-**The rule.** Every JSON file the repository tracks with more lines than the policy's
+**The rule.** Every plain JSON file the repository tracks, and each logical generated
+JSON record declared by the policy's `generated_gzip` list, with more lines than the policy's
 `threshold_lines` must equal its own re-layout -- `retained_json.dumps` of its parsed value,
 with `ensure_ascii` read off the bytes -- unless the policy exempts it. The comparison is
 exact, so a file re-laid by hand, or written by a writer that passes the wrong arguments,
@@ -52,6 +55,7 @@ import json
 import math
 import re
 import sys
+import zlib
 from collections.abc import Callable, Iterable, Iterator, Sequence
 from dataclasses import dataclass
 from decimal import Decimal
@@ -59,9 +63,8 @@ from functools import cache
 from pathlib import Path
 from typing import Any
 
-from strif import atomic_output_file
-
 from devtools.repo_scope import tracked_files
+from devtools.retained_data import compressed_path, read_retained_bytes, write_retained_text
 from sqpack import retained_json
 from sqpack.yamlio import safe_load
 
@@ -100,6 +103,7 @@ class Exemption:
 class Policy:
     threshold_lines: int
     exemptions: tuple[Exemption, ...]
+    generated_gzip: tuple[str, ...] = ()
 
     def exemption(self, relative: str) -> Exemption | None:
         return next((entry for entry in self.exemptions if entry.matches(relative)), None)
@@ -112,6 +116,7 @@ class Candidate:
     relative: str
     lines: int
     data: bytes
+    problem: str | None = None
 
 
 @cache
@@ -181,7 +186,23 @@ def load_policy(path: Path = POLICY) -> Policy:
     duplicated = sorted({pattern for pattern in patterns if patterns.count(pattern) > 1})
     if duplicated:
         raise ValueError(f"{path.name}: listed twice: {duplicated}")
-    return Policy(threshold, tuple(entries))
+    generated = document.get("generated_gzip", [])
+    if not isinstance(generated, list) or any(
+        not isinstance(value, str)
+        or not value.endswith(".json")
+        or value.endswith(SCHEMA_SUFFIX)
+        or Path(value).is_absolute()
+        or ".." in Path(value).parts
+        or "\\" in value
+        or Path(value).as_posix() != value
+        for value in generated
+    ):
+        raise ValueError(
+            f"{path.name}: generated_gzip needs repository-relative non-schema .json paths"
+        )
+    if len(set(generated)) != len(generated):
+        raise ValueError(f"{path.name}: generated_gzip paths must be unique")
+    return Policy(threshold, tuple(entries), tuple(generated))
 
 
 def biome_owned(root: Path = REPO) -> tuple[re.Pattern[str], ...]:
@@ -209,11 +230,20 @@ def is_retained(relative: str, biome: Iterable[re.Pattern[str]]) -> bool:
     return not any(pattern.fullmatch(relative) for pattern in biome)
 
 
-def _json_files(root: Path) -> list[Path]:
+def _json_files(root: Path, policy: Policy) -> list[Path]:
     found = tracked_files(root, "*.json")
     if found is None:
         found = sorted(path for path in root.rglob("*.json") if not SKIP & set(path.parts))
-    return found
+    biome = biome_owned(root)
+    for relative in policy.generated_gzip:
+        if not is_retained(relative, biome) or policy.exemption(relative) is not None:
+            raise ValueError(f"{relative}: generated gzip must be a nonexempt retained result")
+    # Logical identities are included even when storage is missing: absence must fail.
+    return sorted({*found, *(root / relative for relative in policy.generated_gzip)})
+
+
+def _logical(path: Path) -> Path:
+    return path.with_suffix("") if path.name.endswith(".json.gz") else path
 
 
 def candidates(
@@ -234,12 +264,23 @@ def candidates(
     biome = biome_owned(root)
     top = root.resolve()
     for path in paths:
-        relative = path.resolve().relative_to(top).as_posix()
-        if not is_retained(relative, biome) or path.stat().st_size <= threshold:
+        logical = _logical(path)
+        relative = logical.resolve().relative_to(top).as_posix()
+        packed = path.name.endswith(".json.gz") or compressed_path(path).is_file()
+        if not path.is_file() and not compressed_path(logical).is_file():
+            yield Candidate(relative, 0, b"", "declared retained record is missing")
+            continue
+        if not is_retained(relative, biome) or (
+            not packed and path.stat().st_size <= threshold
+        ):
             continue
         if unread is not None and unread(relative):
             continue
-        data = path.read_bytes()
+        try:
+            data = read_retained_bytes(logical) if packed else path.read_bytes()
+        except (ValueError, OSError, EOFError, zlib.error) as error:
+            yield Candidate(relative, 0, b"", str(error))
+            continue
         lines = data.count(b"\n")
         if lines > threshold:
             yield Candidate(relative, lines, data)
@@ -306,7 +347,7 @@ def check(
     policy is `root`'s own unless one is given.
     """
     policy = policy or _policy_of(root)
-    swept = _json_files(root) if paths is None else list(paths)
+    swept = _json_files(root, policy) if paths is None else list(paths)
     # A glob needs one file over the threshold to be live; past that, the files it
     # exempts -- the whole archive, mostly -- need not be read at all. `candidates`
     # yields as it goes, so a glob is witnessed before the next file is asked about.
@@ -320,6 +361,12 @@ def check(
     held = 0
     exempt_over: dict[str, Candidate] = {}
     for candidate in candidates(root, swept, policy.threshold_lines, unread=unread):
+        if candidate.problem is not None:
+            held += 1
+            failures.append(
+                f"{candidate.relative}: unreadable retained data ({candidate.problem})"
+            )
+            continue
         entry = policy.exemption(candidate.relative)
         if entry is not None:
             exempt_over[candidate.relative] = candidate
@@ -383,7 +430,11 @@ def _stale(root: Path, policy: Policy, exempt_over: dict[str, Candidate]) -> lis
         candidate = exempt_over.get(entry.pattern)
         if candidate is None:
             path = root / entry.pattern
-            state = "is gone" if not path.is_file() else "is not over the threshold"
+            state = (
+                "is gone"
+                if not (path.is_file() or compressed_path(path).is_file())
+                else "is not over the threshold"
+            )
             failures.append(
                 f"{entry.pattern}: exempt ({entry.reason}) but {state}; drop the entry"
             )
@@ -408,7 +459,8 @@ def fix(paths: Sequence[Path], root: Path = REPO, *, policy: Policy | None = Non
     policy = policy or _policy_of(root)
     refusals: list[str] = []
     for path in paths:
-        relative = path.resolve().relative_to(root.resolve()).as_posix()
+        logical = _logical(path)
+        relative = logical.resolve().relative_to(root.resolve()).as_posix()
         entry = policy.exemption(relative)
         if entry is not None and entry.reason != "pending":
             refusals.append(
@@ -416,11 +468,11 @@ def fix(paths: Sequence[Path], root: Path = REPO, *, policy: Policy | None = Non
             )
             continue
         try:
-            text = path.read_bytes().decode("utf-8")
+            text = read_retained_bytes(logical).decode("utf-8")
             before = canonical(parse_exact(text))
             laid = relayout(text)
             after = canonical(parse_exact(laid))
-        except ValueError as error:
+        except (ValueError, OSError, EOFError, zlib.error) as error:
             refusals.append(f"{relative}: {error}; not re-laid")
             continue
         if after != before:
@@ -429,8 +481,11 @@ def fix(paths: Sequence[Path], root: Path = REPO, *, policy: Policy | None = Non
         if laid == text:
             print(f"{relative}: already in the retained layout")
             continue
-        with atomic_output_file(path) as temporary:
-            temporary.write_text(laid, encoding="utf-8")
+        if logical.is_file() and compressed_path(logical).is_file():
+            refusals.append(f"{relative}: both storage copies present; not re-laid")
+            continue
+        stored = logical if logical.is_file() else compressed_path(logical)
+        write_retained_text(stored, laid)
         print(
             f"{relative}: {text.count(chr(10)):,} -> {laid.count(chr(10)):,} lines, "
             f"{len(text.encode()):,} -> {len(laid.encode()):,} bytes, longest line "
@@ -444,9 +499,14 @@ def inventory(root: Path = REPO, *, policy: Policy | None = None) -> list[str]:
     policy = policy or _policy_of(root)
     rows: list[str] = []
     for candidate in sorted(
-        candidates(root, _json_files(root), policy.threshold_lines),
+        candidates(root, _json_files(root, policy), policy.threshold_lines),
         key=lambda item: (-item.lines, item.relative),
     ):
+        if candidate.problem is not None:
+            rows.append(
+                f"{'?':>9}  {'?':>9}  unreadable ({candidate.problem})  {candidate.relative}"
+            )
+            continue
         try:
             text = candidate.data.decode("utf-8")
             laid = relayout(text)

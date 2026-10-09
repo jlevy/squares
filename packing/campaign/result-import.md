@@ -296,7 +296,7 @@ register entry with its ratings and `next_rung`. Four rules are the process’s 
   generator and the upper-bound intakes call it, so a catalogue or packet intake arrives
   complete. A new best known packing with no exact fact writes all four as null, which
   leaves the count numeric-only in the
-  [exact side values register](../frontier/exact-values.json) until an identification
+  [exact side values register](../frontier/exact-values.json.gz) until an identification
   lands.
 
 The record checks pass without a packet, a coverage entry or evidence over the whole
@@ -384,10 +384,10 @@ The pull request that registers or raises a result runs
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
 Where the result changes an exact fact, those views include the exact side values
-register (`devtools.build_exact_values --update`) and its paper
-(`devtools.render_exact_side_values`). The gate’s register check fails until the
-register is regenerated, and the Pages workflow rebuilds the paper from it on every
-change, since the register is one of the paper’s declared inputs.
+register (`devtools.build_exact_values --update`). The gate’s register check fails until
+the register is regenerated.
+The exact side values paper belongs to the later publication layer, which supplies its
+renderer.
 
 ### Verify the Published Result
 

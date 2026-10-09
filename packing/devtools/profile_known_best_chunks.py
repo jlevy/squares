@@ -13,6 +13,7 @@ from typing import Any
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from devtools.retained_data import read_retained_text
 from sqpack.known_best import (
     CALIBRATION_CORPUS,
     calibration_entries,
@@ -584,7 +585,7 @@ def expected_outputs() -> tuple[dict[str, Any], str]:
     require_calibration_label(
         schema_calibration_label(), source="chunk-evidence-profile.schema.yaml scope.range"
     )
-    components = json.loads(COMPONENTS.read_text(encoding="utf-8"))
+    components = json.loads(read_retained_text(COMPONENTS))
     partitions = json.loads(PARTITIONS.read_text(encoding="utf-8"))["atlas"]
     source_entries = _index(list(manifest_entries()), "manifest")
     sweeps = {sweep["name"]: sweep for sweep in components["contact_sweeps"]}

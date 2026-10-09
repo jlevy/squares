@@ -20,6 +20,12 @@ from typing import Any
 
 from strif import atomic_output_file
 
+from devtools.retained_data import (
+    compressed_path,
+    read_retained_text,
+    retained_exists,
+    write_retained_text,
+)
 from sqpack import retained_json
 from sqpack.chunks import (
     EXACT_ADJACENCY_TOLERANCE,
@@ -410,8 +416,7 @@ def update(workers: int | None = None) -> None:
     component_text = _text(expected_document(workers))
     partition_text = _text(expected_partition_document(workers))
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    with atomic_output_file(OUTPUT) as temporary:
-        temporary.write_text(component_text, encoding="utf-8")
+    write_retained_text(OUTPUT if OUTPUT.is_file() else compressed_path(OUTPUT), component_text)
     with atomic_output_file(PARTITION_OUTPUT) as temporary:
         temporary.write_text(partition_text, encoding="utf-8")
     print(
@@ -422,7 +427,7 @@ def update(workers: int | None = None) -> None:
 
 def check(workers: int | None = None) -> None:
     expected = _text(expected_document(workers))
-    if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != expected:
+    if not retained_exists(OUTPUT) or read_retained_text(OUTPUT) != expected:
         raise ValueError("atlas/known-best/chunk-components.json is missing or stale")
     expected_partitions = _text(expected_partition_document(workers))
     if (

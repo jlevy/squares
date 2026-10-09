@@ -85,7 +85,7 @@ import sys
 from collections.abc import Sequence
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
-from decimal import Decimal, InvalidOperation, localcontext
+from decimal import ROUND_CEILING, Decimal, InvalidOperation, localcontext
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -797,7 +797,7 @@ def isolate_root(
             raise ExtractionError("f' vanishes at the centre")
         # 2 r M2 <= |f'(c)| with r = 10^-m and f'(c) = slope / 10^(scale * deg f').
         threshold = twice_m2 * 10 ** (scale * (len(derivative) - 1))
-        needed = max(0, math.ceil(_log10(threshold) - _log10(slope)))
+        needed = 0 if threshold == 0 else max(0, math.ceil(_log10(threshold) - _log10(slope)))
         while slope * 10**needed < threshold:
             needed += 1
         needed = max(needed, decimals)
@@ -836,6 +836,7 @@ def agreement(root: IsolatedRoot, label: str, reference: str) -> Agreement:
         agreeing += 1
     with localcontext() as context:
         context.prec = 3
+        context.rounding = ROUND_CEILING
         bound = Decimal(difference.numerator) / Decimal(difference.denominator)
     return Agreement(
         label=label,
@@ -905,7 +906,7 @@ class PolynomialCheck:
         root: dict[str, object] | None = None
         if self.root is not None:
             root = {
-                "centre": self.root.decimal(60),
+                "centre": self.root.decimal(self.root.scale),
                 "radius": f"1e-{self.root.radius_exponent}",
             }
         return {
@@ -1016,6 +1017,19 @@ def record_with_polynomial(text: str, n: int, check: PolynomialCheck) -> str:
         )
     if upper.get("minimal_polynomial") is not None:
         raise RecordRefusedError(f"n={n}: the record already holds a minimal_polynomial")
+    recorded_side = upper.get("value")
+    if check.root is None or recorded_side is None:
+        raise RecordRefusedError(f"n={n}: record and check do not both hold a side")
+    try:
+        side_agreement = agreement(check.root, "the record's side", str(recorded_side))
+    except ExtractionError as error:
+        raise RecordRefusedError(
+            f"n={n}: the record's side cannot be compared: {error}"
+        ) from error
+    if not side_agreement.within_last_place:
+        raise RecordRefusedError(
+            f"n={n}: the record's side {recorded_side} does not agree with the polynomial root"
+        )
     line = "    minimal_polynomial: null\n"
     if text.count(line) != 1:
         raise RecordRefusedError(f"n={n}: expected one null minimal_polynomial line")
@@ -1145,6 +1159,9 @@ def run_svg(args: argparse.Namespace) -> int:
             Path(temporary).write_text(json.dumps(facts, indent=1) + "\n", encoding="utf-8")
         print(f"wrote {args.out}")
     if args.write_record:
+        if same is not True:
+            print("--write-record: source reading pin missing or mismatched; record unchanged")
+            return 1
         verified = [check for check in checks if check.verified]
         if len(verified) != 1:
             print(

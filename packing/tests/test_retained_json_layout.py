@@ -7,6 +7,7 @@ tree of its own, and hold the repository's own tree to it.
 
 from __future__ import annotations
 
+import gzip
 import json
 import subprocess
 from pathlib import Path
@@ -361,3 +362,138 @@ def test_globs_cross_directories_only_where_they_say_so() -> None:
     archive = _exempt("packing/resources/**", "archive", glob=True)
     assert archive.matches("packing/resources/web/a/b/c.json")
     assert not archive.matches("packing/resourcesx/a.json")
+
+
+def test_gzip_results_are_discovered_checked_and_fixed_without_value_loss(
+    tmp_path: Path,
+) -> None:
+    logical = tmp_path / "results/census.json"
+    logical.parent.mkdir()
+    stored = logical.with_name(logical.name + ".gz")
+    source = _indented()
+    stored.write_bytes(gzip.compress(source.encode(), mtime=0))
+    failures, held = sweep.check(
+        tmp_path, policy=Policy(THRESHOLD, (), ("results/census.json",))
+    )
+    assert held == 1
+    assert len(failures) == 1
+    assert failures[0].startswith("results/census.json:")
+    assert (
+        sweep.fix([stored], tmp_path, policy=Policy(THRESHOLD, (), ("results/census.json",)))
+        == []
+    )
+    laid = gzip.decompress(stored.read_bytes()).decode()
+    assert sweep.canonical(sweep.parse_exact(laid)) == sweep.canonical(
+        sweep.parse_exact(source)
+    )
+    assert laid == _laid()
+    assert not logical.exists()
+    assert _failures(tmp_path, Policy(THRESHOLD, (), ("results/census.json",))) == []
+    assert stored.read_bytes() == gzip.compress(laid.encode(), compresslevel=9, mtime=0)
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "{\n" + "not json\n" * 20,
+        "{\n" + "\n" * 20 + '"a":1,"a":2}\n',
+        "{\n" + "\n" * 20 + '"n":1e400}\n',
+    ],
+)
+def test_gzip_json_refusals_preserve_original_bytes(source: str, tmp_path: Path) -> None:
+    stored = tmp_path / "bad.json.gz"
+    original = gzip.compress(source.encode(), mtime=0)
+    stored.write_bytes(original)
+    assert sweep.check(tmp_path, paths=[stored], policy=_policy())[0]
+    assert sweep.fix([stored], tmp_path, policy=_policy())
+    assert stored.read_bytes() == original
+
+
+def test_gzip_corruption_and_different_siblings_fail_by_logical_name(tmp_path: Path) -> None:
+    logical = tmp_path / "record.json"
+    stored = logical.with_name(logical.name + ".gz")
+    stored.write_bytes(b"invalid gzip")
+    failures = sweep.check(tmp_path, paths=[stored], policy=_policy())[0]
+    assert any("record.json:" in item for item in failures)
+    original = stored.read_bytes()
+    assert sweep.fix([stored], tmp_path, policy=_policy())
+    assert stored.read_bytes() == original
+    stored.write_bytes(gzip.compress(_indented().encode(), mtime=0))
+    logical.write_text(_indented() + "\n")
+    assert any(
+        "differs" in item for item in sweep.check(tmp_path, paths=[stored], policy=_policy())[0]
+    )
+    assert sweep.fix([stored], tmp_path, policy=_policy())
+    logical.write_text(_indented())
+    assert any(
+        "not in the retained layout" in item
+        for item in sweep.check(tmp_path, paths=[stored], policy=_policy())[0]
+    )
+
+
+def test_generated_gzip_contract_refuses_missing_storage_and_ignores_legacy_gzip(
+    tmp_path: Path,
+) -> None:
+    policy = Policy(THRESHOLD, (), ("current.json",))
+    (tmp_path / "legacy.json.gz").write_bytes(b"invalid legacy gzip")
+    [failure] = _failures(tmp_path, policy)
+    assert "current.json: unreadable" in failure
+    logical = _write(tmp_path, "current.json", _laid())
+    assert _failures(tmp_path, policy) == []
+    stored = logical.with_name(logical.name + ".gz")
+    stored.write_bytes(gzip.compress(_laid().encode(), mtime=0))
+    assert _failures(tmp_path, policy) == []
+    logical.unlink()
+    assert _failures(tmp_path, policy) == []
+    stored.write_bytes(gzip.compress(_indented().encode(), mtime=0))
+    assert len(stored.read_bytes()) < len(_indented().encode())
+    assert _failures(tmp_path, policy)
+
+
+@pytest.mark.parametrize(
+    "declared",
+    [
+        ["../outside.json"],
+        ["/absolute.json"],
+        ["x.schema.json"],
+        ["x.json", "x.json"],
+        ["a\\b.json"],
+        ["x.yaml"],
+        "x.json",
+    ],
+)
+def test_generated_gzip_contract_rejects_invalid_paths(
+    declared: object, tmp_path: Path
+) -> None:
+    path = tmp_path / "policy.yaml"
+    path.write_text(
+        json.dumps({"threshold_lines": 1, "generated_gzip": declared, "exempt": []})
+    )
+    with pytest.raises(ValueError, match="generated_gzip"):
+        sweep.load_policy(path)
+
+
+def test_generated_gzip_contract_rejects_biome_and_exempt_paths(tmp_path: Path) -> None:
+    (tmp_path / "biome.json").write_text('{"files":{"includes":["owned.json"]}}')
+    policy = Policy(THRESHOLD, (), ("owned.json",))
+    with pytest.raises(ValueError, match="nonexempt retained"):
+        sweep.check(tmp_path, policy=policy)
+    policy = Policy(THRESHOLD, (_exempt("source.json", "archive"),), ("source.json",))
+    with pytest.raises(ValueError, match="nonexempt retained"):
+        sweep.check(tmp_path, policy=policy)
+
+
+def test_generated_gzip_uses_decoded_lines_when_stored_bytes_are_below_threshold(
+    tmp_path: Path,
+) -> None:
+    text = json.dumps({"rows": [{"value": "x" * 64} for _ in range(300)]}, indent=2) + "\n"
+    packed = gzip.compress(text.encode(), mtime=0)
+    threshold = 512
+    assert len(packed) < threshold < text.count("\n")
+    (tmp_path / "small-storage.json.gz").write_bytes(packed)
+    failures, held = sweep.check(
+        tmp_path, policy=Policy(threshold, (), ("small-storage.json",))
+    )
+    assert held == 1
+    assert len(failures) == 1
+    assert "not in the retained layout" in failures[0]

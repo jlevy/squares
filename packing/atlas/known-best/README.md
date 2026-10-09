@@ -153,8 +153,8 @@ inspected during their design.
 This prevents a taxonomy invented from the corpus from being counted as independent
 confirmation on the same corpus.
 
-[`chunk-components.json`](chunk-components.json) is the exploratory layer that tests the
-assembly intuition without crossing that boundary.
+[`chunk-components.json.gz`](chunk-components.json.gz) is the exploratory layer that
+tests the assembly intuition without crossing that boundary.
 At the registered `1e-6`-radian angle and `1e-3` contact tolerances, 1,782 of 1,860
 squares in the 36 non-grid records belong to a multi-square same-angle contact
 component.

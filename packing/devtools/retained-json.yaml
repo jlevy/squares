@@ -17,6 +17,13 @@
 # threshold is the ratchet once they are decided.
 threshold_lines: 5000
 
+# Complete generated records may be stored as logical.json.gz. Plain-only and equal
+# duplicate storage also read identically; missing or unequal storage is refused.
+# These extend the plain JSON layout corpus, not its exemptions or archive policy.
+generated_gzip:
+- packing/frontier/exact-values.json
+- packing/atlas/known-best/chunk-components.json
+
 exempt:
 
 # --- Archived source -------------------------------------------------------------------

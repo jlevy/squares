@@ -1,0 +1,29 @@
+{
+  "base": "6a9b2876d40ebbc4d709ecfecd1bf107e6db95cb",
+  "rows": [
+    {
+      "logical": "packing/frontier/exact-values.json",
+      "stored": "packing/frontier/exact-values.json.gz",
+      "original_git_blob": "f35e19c1e577ef42037312352c8fe639ff7ea80d",
+      "decoded_bytes": 389739,
+      "stored_bytes": 37809,
+      "complete_bytes_equal": true
+    },
+    {
+      "logical": "packing/atlas/known-best/chunk-components.json",
+      "stored": "packing/atlas/known-best/chunk-components.json.gz",
+      "original_git_blob": "b8e91014aa826d65dc2ae5f16c8402af92a130fa",
+      "decoded_bytes": 3635299,
+      "stored_bytes": 118108,
+      "complete_bytes_equal": true
+    }
+  ],
+  "archived_sources_changed": false,
+  "selector_changed": false,
+  "selector_contract": "Current owner403 selected inputs retained exactly; original958 selection receipt is historical.",
+  "inherited_owner_exclusions": {
+    "paths": 312,
+    "bytes": 3670529,
+    "all_transitive_completeness_claim": false
+  }
+}

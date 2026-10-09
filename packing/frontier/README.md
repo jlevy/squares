@@ -152,12 +152,11 @@ The ones that carry the most weight:
   The catalogue prints either a closed form or a degree with its polynomial, never both,
   so every closed form here carries a derived pair.
   All four are null where nothing exact is known.
-  [`exact-values.json`](exact-values.json) collects them for every case and checks each
-  polynomial: irreducibility, a unique root in a rational interval, and agreement with
-  the record and with Evan Daniel’s independent KKT values.
-  The
-  [exact side values paper](https://jlevy.github.io/squares/papers/exact-side-values.html)
-  presents that register.
+  [`exact-values.json.gz`](exact-values.json.gz) collects them for every case and checks
+  each polynomial: irreducibility, a unique root in a rational interval, and agreement
+  with the record and with Evan Daniel’s independent KKT values.
+  Its storage is documented in [Generated Data Storage](#generated-data-storage).
+  The later publication layer supplies the exact side values paper.
 - `evidence` points into [`evidence.yaml`](evidence.yaml), where assurance, method,
   performer, independence, origin, actual precision, tolerance, certificate, replay,
   proof scope, and limitations remain separate fields.
@@ -639,6 +638,22 @@ AI-assistance sentences; the hand-written records below read neither.
 Tilt angles are recorded only for the handful of cases where this research established
 them. The coverage inventory is dated and named; a newly published source still requires
 a new research survey and disposition.
+
+## Generated Data Storage
+
+The exact values register and chunk component census are stored as deterministic gzip.
+Maintained readers accept their complete data through the logical names
+`exact-values.json` and `chunk-components.json`. The tracked files have an additional
+`.gz` suffix. Plain and compressed copies must agree when both are present.
+The generators still rebuild the complete register and census before checking them.
+
+The conversion preserves every coefficient string, numerical type and metadata field.
+Archived source packets are unchanged.
+The [migration record](../devtools/generated-storage-migration.json) documents the
+complete original files and their stored forms.
+The JSON layout floor declares these two generated records explicitly; schema checks
+also decode the complete register.
+Historical references to their logical names continue to identify the same data.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

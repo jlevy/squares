@@ -28,6 +28,7 @@ import yaml
 from jsonschema_rs import Draft202012Validator
 
 from devtools.check_basic_bounds import check_case_basic_bounds
+from devtools.retained_data import read_retained_text
 from devtools.verifier_registry import problems as verifier_problems
 from sqpack.assurance import (
     check_case_semantics,
@@ -92,7 +93,7 @@ def load_schema(name: str) -> dict:
 
 def payload_and_meta(path: pathlib.Path) -> tuple[dict, dict]:
     """Return (payload, softschema metadata) for either profile."""
-    text = path.read_text(encoding="utf-8")
+    text = read_retained_text(path)
     doc = load_yaml(text.split("---\n")[1]) if path.suffix == ".md" else load_yaml(text)
     meta = doc.get("softschema")
     if meta is None:
@@ -132,7 +133,7 @@ def check(path: pathlib.Path) -> list[str]:
     errs: list[str] = []
     try:
         payload, meta = payload_and_meta(path)
-    except (ValueError, yaml.YAMLError) as error:
+    except (ValueError, OSError, EOFError, yaml.YAMLError) as error:
         return [f"invalid or ambiguous YAML: {error}"]
     errs.extend(
         f"softschema.{key} missing"
@@ -365,9 +366,7 @@ def main() -> int:
         f"  {len(md)} frontmatter-md artifacts + {len(datasets)} pure-yaml datasets "
         f"validate against their declared schemas"
     )
-    declared = {
-        safe_load(d.read_text(encoding="utf-8"))["softschema"]["schema"] for d in datasets
-    }
+    declared = {safe_load(read_retained_text(d))["softschema"]["schema"] for d in datasets}
     print(f"  schemas in use: {sorted(declared | {'square-packing-case.schema.yaml'})}")
     return 0
 
