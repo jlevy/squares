@@ -160,6 +160,7 @@
     "packing/tests/test_count_cell_occupancies.py": 0.017,
     "packing/tests/test_count_grid_symmetry.py": 0.023,
     "packing/tests/test_couzo_custody.py": 1.236,
+    "packing/tests/test_couzo_extended_reports.py": 15.938,
     "packing/tests/test_couzo_refinement_reports.py": 0.214,
     "packing/tests/test_cover.py": 0.006,
     "packing/tests/test_covering_queue.py": 0.134,
@@ -1088,6 +1089,30 @@
           "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr460-2026-10-09-run3.json",
           "provenance": {},
           "tests": 27
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_couzo_extended_reports.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr466-2026-10-09-run1.json",
+          "provenance": {},
+          "tests": 69
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr466-2026-10-09-run2.json",
+          "provenance": {},
+          "tests": 69
+        },
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-stack-430-pr466-2026-10-09-run3.json",
+          "provenance": {},
+          "tests": 69
         }
       ]
     }
