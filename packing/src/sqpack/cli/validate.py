@@ -2743,11 +2743,29 @@ def _rust_n17_kernel_verifier(context: Context) -> str:
     )
     tests = _run(
         child,
-        (cargo, "test", "--locked", "--release", "--all-targets", "--quiet"),
+        (
+            cargo,
+            "test",
+            "--locked",
+            "--release",
+            "--all-targets",
+            "--quiet",
+            "--",
+            "--format",
+            "pretty",
+        ),
         cwd=N17_KERNEL_CRATE,
     )
-    # Count cargo test itself, not other commands' output. The first target is the
-    # library's 22 controls; the final integration target binds the compiled world.
+    # Count cargo test itself, not other commands' output. Required receipt tests
+    # must actually pass; the final integration target binds the compiled world.
+    for name in (
+        "receipt_publication_replaces_complete_json_and_cleans_staging",
+        "receipt_publication_write_failure_preserves_old_file",
+        "receipt_publication_rename_failure_preserves_old_file",
+        "receipt_publication_refuses_directory_collision",
+    ):
+        if re.search(rf"^test tests::{name} \.\.\. ok$", tests, re.MULTILINE) is None:
+            raise StepFailureError(f"n17 kernel verifier gate requires passing {name}")
     counts = [int(count) for count in re.findall(r"test result: ok\. (\d+) passed", tests)]
     if len(counts) < 2 or counts[0] < 22 or counts[-1] < 1:
         raise StepFailureError(
