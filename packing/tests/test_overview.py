@@ -1097,12 +1097,12 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
     )
     assert "display: none;" in _rule(css, hidden)
     assert "font-size" not in placed
-    # The two strips are one row over the tiles, centred, that wraps on a narrow block.
+    # The two strips start at the tile block's left edge and wrap on a narrow block.
     row = _rule(css, ".site-atlas-grid .site-atlas-controls")
     for declaration in (
         "display: flex;",
         "flex-wrap: wrap;",
-        "justify-content: center;",
+        "justify-content: start;",
         "margin-block-end: var(--site-atlas-toggle-space);",
     ):
         assert declaration in row, declaration
