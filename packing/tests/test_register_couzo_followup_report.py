@@ -80,8 +80,6 @@ def test_registered_record_is_complete_and_the_plan_is_idempotent() -> None:
     for path, text in proposed:
         assert path.read_text() == text, path
     evidence, result, source, request = register.rows()
-    results = safe_load((register.REPO / "packing/frontier/results.yaml").read_text())
-    assert [row for row in results["results"] if row["id"] == register.RESULT] == [result]
     assert result["verification"] == "V0"
     assert result["confirmation"] == "C0"
     assert "confirmed" not in result["claim"] + result["next_rung"]
@@ -93,21 +91,40 @@ def test_registered_record_is_complete_and_the_plan_is_idempotent() -> None:
     assert credit["credit"] == "Couzo after Xu, Daniel, Ellsworth, Levy"
 
 
-@pytest.mark.parametrize(
-    ("n", "source_key"),
-    [
-        (84, "[ry-xu square packing 2026]"),
-        (86, "[ry-xu square packing 2026]"),
-        (105, "[ry-xu square packing 2026]"),
-        (175, "[ry-xu square packing 2026]"),
-        (270, "[Daniel new arrangements 2026-10-07]"),
-    ],
-)
-def test_selected_cases_keep_their_current_sources(n: int, source_key: str) -> None:
-    packing = register.reports.legacy.case_record(n)
-    assert packing["reported_upper_bound"]["source_key"] == source_key
+def test_plan_leaves_registered_rows_and_every_case_unchanged() -> None:
+    """An existing row is never rewritten, so later review or adoption survives a re-run."""
+    frontiers = register.REPO / "packing/frontier"
+    cases = {p: p.read_bytes() for p in frontiers.glob("n-[0-9][0-9][0-9].md")}
+    proposed = register.plan()
+    evidence, result, source, _ = register.rows()
+    expected = {
+        "evidence.yaml": ("evidence", "id", evidence),
+        "results.yaml": ("results", "id", result),
+        "source-coverage.yaml": ("sources", "id", source),
+        "bibliography.yaml": ("sources", "key", register.bibliography_row()),
+    }
+    for path, text in proposed:
+        if path.name not in expected:
+            continue
+        field, identity, row = expected[path.name]
+        old = safe_load(path.read_text())
+        new = safe_load(text)
+        if any(item[identity] == row[identity] for item in old[field]):
+            assert new[field] == old[field], path
+        else:
+            assert new[field][:-1] == old[field], path
+            assert new[field][-1] == row, path
+    assert len(cases) == 324
+    assert not {path for path, _ in proposed} & set(cases)
+    assert all(path.read_bytes() == raw for path, raw in cases.items())
+
+
+@pytest.mark.parametrize("n", register.reports.NUMBERS)
+def test_each_side_is_below_its_frozen_ceiling(n: int) -> None:
     certificate = register.reports.read_facts()[n]
-    assert certificate.side < Fraction(packing["verified_upper_bound"]["exact_form"])
+    prior = register.reports.prior_houses()[n]
+    assert certificate.side < Fraction(prior["verified_exact"])
+    assert certificate.side < Fraction(prior["selected_exact"])
 
 
 def test_request_edit_adds_one_result_and_the_import_bead_only() -> None:
@@ -134,6 +151,37 @@ def test_watch_edit_moves_only_the_franciscouzo_read() -> None:
     assert "think-1545" in read["note"]
     assert "Earlier reads" in read["note"]
     assert register.watch_text(updated) == updated
+
+
+def test_watch_edit_never_moves_a_later_read_back() -> None:
+    later = WATCH.replace(
+        "    read_through: ffd900dfff6d2674ad995359208c2f0714915c82\n"
+        "    read_on: '2026-10-09'\n",
+        "    read_through: " + "c" * 40 + "\n    read_on: '2026-10-12'\n",
+    )
+    assert later != WATCH
+    assert register.watch_text(later) == later
+    same_day = later.replace("'2026-10-12'", "'2026-10-09'")
+    assert register.watch_text(same_day) == same_day
+
+
+@pytest.mark.parametrize(
+    ("read_through", "read_on"),
+    [
+        ("74f7e8b3f8df9cd5c2277b54d3cd7fe00769a998", "2026-10-09"),
+        ("b10ad360f80ee82580e75330417e0171d1a9fb81", "2026-10-08"),
+        ("c" * 40, "2026-10-08"),
+    ],
+)
+def test_watch_edit_refuses_a_read_behind_the_parent(read_through: str, read_on: str) -> None:
+    behind = WATCH.replace(
+        "    read_through: ffd900dfff6d2674ad995359208c2f0714915c82\n"
+        "    read_on: '2026-10-09'\n",
+        f"    read_through: {read_through}\n    read_on: '{read_on}'\n",
+    )
+    assert behind != WATCH
+    with pytest.raises(ValueError, match="behind the parent"):
+        register.watch_text(behind)
 
 
 def test_review_date_never_moves_backwards() -> None:

@@ -51,6 +51,8 @@ from devtools import couzo_extended_reports as extended
 from devtools import couzo_refinement_reports as earlier
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
+from devtools import ryxu_arrangement_reports as ryxu
+from devtools import ryxu_house_links as ryxu_links
 from devtools.upper_bound_packets import parse_couzo
 from sqpack.witness import (
     WitnessError,
@@ -72,6 +74,8 @@ COMMITTED = "2026-10-08T22:12:27Z"
 RETRIEVED = "2026-10-09"
 COMMENT = "https://github.com/jlevy/squares/pull/460#issuecomment-6070798890"
 NUMBERS = (84, 86, 105, 175, 270)
+#: The counts whose compared house is Ryan Xu's #432; 270's is Evan Daniel's #399.
+RYXU_COUNTS = (84, 86, 105, 175)
 UNCHANGED = (108, 127, 131, 155, 180, 228, 306)
 SOURCE_ID = "couzo-followup-refinements-2026-10-08"
 SOURCE_KEY = "[Couzo follow-up refinements 2026-10-08]"
@@ -367,27 +371,47 @@ def printed_side(text: str, n: int) -> str:
     return side
 
 
-def prior_state(n: int) -> dict[str, Any]:
-    """The selected and verified ceilings this certificate is compared with, frozen."""
-    packing = legacy.case_record(n)
-    reported, verified = packing["reported_upper_bound"], packing["verified_upper_bound"]
-    prior: dict[str, Any] = {
-        "selected_source_key": reported["source_key"],
-        "selected_exact": reported["exact_form"],
-        "verified_exact": verified["exact_form"],
-        "verified_evidence": list(verified["evidence"]),
-    }
-    if n == 105:
-        prior["earlier_couzo_451_exact"] = legacy.literal(earlier.read_facts()[105].side)
-    return prior
+def prior_houses() -> dict[int, dict[str, Any]]:
+    """The frozen comparison each count carries, rebuilt from its house's retained facts.
+
+    When 2d32a6e was acquired, Ryan Xu's #432 rational certificates were the selected and
+    verified ceilings at 84, 86, 105 and 175 and Evan Daniel's #399 certificate was both
+    at 270. Each comparison is rebuilt from that house's own retained exact certificate
+    and evidence atom, and n=105 also from the issue451 packet, so a tampered prior is
+    refused however selection later moves.
+    """
+    xu, daniel = ryxu.read_facts(), kernel.read_facts()
+    priors = {}
+    for n in NUMBERS:
+        if n in RYXU_COUNTS:
+            source_key, evidence, side = ryxu_links.SOURCE_KEY, ryxu.EXACT_EVIDENCE, xu[n].side
+        else:
+            source_key, evidence, side = (
+                kernel.SOURCE_KEY,
+                kernel.EXACT_EVIDENCE,
+                daniel[n].side,
+            )
+        ceiling = legacy.literal(side)
+        prior: dict[str, Any] = {
+            "selected_source_key": source_key,
+            "selected_exact": ceiling,
+            "verified_exact": ceiling,
+            "verified_evidence": [evidence],
+        }
+        if n == 105:
+            prior["earlier_couzo_451_exact"] = legacy.literal(earlier.read_facts()[105].side)
+        priors[n] = prior
+    return priors
 
 
-def check_prior(n: int, side: Fraction, prior: Any) -> None:
+def check_prior(n: int, side: Fraction, prior: Any, houses: dict[int, dict[str, Any]]) -> None:
     keys = {"selected_source_key", "selected_exact", "verified_exact", "verified_evidence"}
     if n == 105:
         keys.add("earlier_couzo_451_exact")
     if type(prior) is not dict or set(prior) != keys:
         raise ReportError(f"n={n}: incomplete frozen comparison")
+    if prior != houses[n]:
+        raise ReportError(f"n={n}: frozen comparison differs from its retained house")
     for key in keys - {"selected_source_key", "verified_evidence"}:
         if not side < exact(prior[key], f"n={n} {key}"):
             raise ReportError(f"n={n}: certificate side is not below its comparison {key}")
@@ -414,6 +438,7 @@ def acquire_contents(git_dir: Path) -> dict[str, bytes]:
     """Preflight complete custody and every derived fact before producing any output."""
     read_commit(git_dir)
     leaves = read_tree(git_dir)
+    houses = prior_houses()
     cases = []
     outputs: dict[str, bytes] = {}
     for n in NUMBERS:
@@ -428,8 +453,8 @@ def acquire_contents(git_dir: Path) -> dict[str, bytes]:
         )
         outputs[f"facts/n-{n:03d}.yaml"] = text.encode()
         pose = leaves[f"n{n}.txt"]
-        prior = prior_state(n)
-        check_prior(n, certificate.side, prior)
+        prior = houses[n]
+        check_prior(n, certificate.side, prior, houses)
         cases.append(
             {
                 "n": n,
@@ -618,6 +643,7 @@ def read_facts(destination: Path | None = None) -> dict[int, legacy.Certificate]
         NUMBERS
     ):
         raise ReportError("complete derived count roster differs")
+    houses = prior_houses()
     certificates = {}
     for n, row in zip(NUMBERS, cases, strict=True):
         if (
@@ -670,7 +696,7 @@ def read_facts(destination: Path | None = None) -> dict[int, legacy.Certificate]
             raise ReportError(f"n={n}: decimal pose identity differs")
         if row["side"] != legacy.literal(certificate.side):
             raise ReportError(f"n={n}: recorded exact side differs")
-        check_prior(n, certificate.side, row["prior"])
+        check_prior(n, certificate.side, row["prior"], houses)
         certificates[n] = certificate
     return certificates
 

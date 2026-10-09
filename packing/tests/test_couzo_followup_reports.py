@@ -20,10 +20,16 @@ from sqpack.yamlio import load_yaml
 
 @pytest.fixture
 def private_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
-    """A private copy of the packet that a mutation cannot reach back from."""
+    """A private copy of the packet that a mutation cannot reach back from.
+
+    The compared houses are other retained packets, read from this repository before
+    the kernel's write root moves to the copy.
+    """
     repo = tmp_path / "private"
     packet = repo / reports.PACKET.relative_to(reports.REPO)
     shutil.copytree(reports.PACKET, packet)
+    houses = reports.prior_houses()
+    monkeypatch.setattr(reports, "prior_houses", lambda: deepcopy(houses))
     monkeypatch.setattr(reports, "REPO", repo)
     monkeypatch.setattr(reports, "PACKET", packet)
     monkeypatch.setattr(kernel, "REPO", repo)
@@ -72,6 +78,24 @@ def test_every_new_side_is_strictly_below_its_frozen_comparisons() -> None:
         earlier.read_facts()[105].side
     )
     assert certificates[105].side < earlier.read_facts()[105].side
+
+
+def test_frozen_comparisons_are_the_retained_houses() -> None:
+    """Each prior is its house's retained certificate, and the live record while unadopted."""
+    houses = reports.prior_houses()
+    cases = {row["n"]: row for row in reports.read_record(reports.sources_path())["cases"]}
+    xu = reports.ryxu.read_facts()
+    for n in reports.NUMBERS:
+        prior = cases[n]["prior"]
+        assert prior == houses[n]
+        retained = kernel.read_facts()[n] if n == 270 else xu[n]
+        assert Fraction(prior["selected_exact"]) == retained.side
+        packing = reports.legacy.case_record(n)
+        if packing["reported_upper_bound"]["source_key"] != reports.SOURCE_KEY:
+            assert prior["selected_source_key"] == packing["reported_upper_bound"]["source_key"]
+            assert prior["selected_exact"] == packing["reported_upper_bound"]["exact_form"]
+            assert prior["verified_exact"] == packing["verified_upper_bound"]["exact_form"]
+            assert prior["verified_evidence"] == packing["verified_upper_bound"]["evidence"]
 
 
 def test_seven_unchanged_certificates_match_the_issue451_originals() -> None:
@@ -126,7 +150,18 @@ def test_late_fact_mutations_refuse(private_packet: Path, mutation: str) -> None
 
 @pytest.mark.parametrize(
     "mutation",
-    ["raw-retained", "tree-leaf", "unchanged", "prior", "scope", "licence", "outside"],
+    [
+        "raw-retained",
+        "tree-leaf",
+        "unchanged",
+        "prior",
+        "prior-inflated",
+        "prior-house",
+        "prior-earlier",
+        "scope",
+        "licence",
+        "outside",
+    ],
 )
 def test_acquisition_record_mutations_refuse(private_packet: Path, mutation: str) -> None:
     original = _record(private_packet)
@@ -142,6 +177,15 @@ def test_acquisition_record_mutations_refuse(private_packet: Path, mutation: str
         source["unchanged"][0]["certificate_blob"] = "0" * 40
     elif mutation == "prior":
         source["cases"][0]["prior"]["selected_exact"] = source["cases"][0]["side"]
+    elif mutation == "prior-inflated":
+        prior = source["cases"][0]["prior"]
+        for key in ("selected_exact", "verified_exact"):
+            prior[key] = reports.legacy.literal(Fraction(prior[key]) + 1)
+    elif mutation == "prior-house":
+        source["cases"][-1]["prior"]["selected_source_key"] = "[ry-xu square packing 2026]"
+    elif mutation == "prior-earlier":
+        prior = source["cases"][2]["prior"]
+        prior["earlier_couzo_451_exact"] = prior["selected_exact"]
     elif mutation == "scope":
         source["subtree_scope"].append("n84.txt")
     elif mutation == "licence":

@@ -16,6 +16,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+from devtools import couzo_extended_reports as extended
 from devtools import couzo_followup_reports as reports
 from devtools.register_couzo_refinement_report import append, validate
 from devtools.register_refinement_reports import FOOTER, dump, save
@@ -260,9 +261,30 @@ WATCH_NOTE = (
 )
 
 
+#: Pinned franciscouzo commits behind the parent, from the outside-horizon packet's chain.
+BEHIND = frozenset(
+    {*extended.COMMITS, *(parent for _tree, parent in extended.PINS.values())}
+    - {reports.PARENT}
+)
+
+
 def watch_text(text: str) -> str:
-    """Move the franciscouzo read to the pinned commit, keeping its open owner."""
+    """Move the franciscouzo read forward from the parent to the pinned commit, never back.
+
+    A read already at the pinned commit is returned unchanged, and so is a later read: an
+    unpinned commit read on or after this registration's day. A pinned read behind the
+    parent, or an unpinned one dated before this registration, is refused, since moving
+    it would skip a commit this generator never read.
+    """
     before = safe_load(text)
+    current = next(row for row in before["repositories"] if row["url"] == WATCH_URL)
+    read = current["read_through"]
+    if read == reports.REVISION:
+        return text
+    if read != reports.PARENT:
+        if read in BEHIND or str(current["read_on"]) < DAY:
+            raise ValueError("franciscouzo read is behind the parent; refusing to skip it")
+        return text
     start = text.index(f"  - url: {WATCH_URL}\n")
     following = re.search(r"^\n  - url: |^  # ", text[start + 1 :], re.MULTILINE)
     end = len(text) if following is None else start + 1 + following.start()
