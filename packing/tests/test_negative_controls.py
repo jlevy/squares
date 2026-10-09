@@ -1070,17 +1070,38 @@ def test_retained_receipts_leave_workers_but_registered_and_linked_ones_return(
 def test_unread_worker_outputs_leave_workers_while_declared_files_return(
     control_snapshot: tuple[Path, set[Path]],
 ) -> None:
-    """The 2026-10-09 selection: traced non-inputs leave; linked dependencies return."""
+    """The 2026-10-09 selection, partitioned file by file as the 2026-10-06 prune is.
+
+    No control reaches an entry, as a mutation target or by naming one in a command.
+    Every file under each entry is either absent from the worker or, when a checked
+    document links it or the results register lists it, present byte for byte; and
+    every entry still sends something out of the worker. The linked audit directories
+    arrive even where their contents do not, so the ledger's link scan still finds them.
+    """
     tree, copied_targets = control_snapshot
     assert controls.UNREAD_WORKER_OUTPUTS <= PRUNE
     spec = safe_load((ROOT / "devtools/controls.yaml").read_text(encoding="utf-8"))
-    for source in controls.UNREAD_WORKER_OUTPUTS:
-        assert source.exists(), "evidence must remain in the source checkout"
-        packing_relative = source.relative_to(ROOT).as_posix()
+    for entry in sorted(controls.UNREAD_WORKER_OUTPUTS):
+        assert entry.exists(), "evidence must remain in the source checkout"
+        packing_relative = entry.relative_to(ROOT).as_posix()
         for control in spec["controls"]:
             target = (ROOT / control["file"]).resolve()
-            assert not controls.in_pruned_roots(target, frozenset({source}))
+            assert not controls.in_pruned_roots(target, frozenset({entry}))
             assert packing_relative not in control["run"]
+        sources = [entry] if entry.is_file() else sorted(entry.rglob("*"))
+        sources = [path for path in sources if path.is_file()]
+        assert sources
+        left = 0
+        for source in sources:
+            relative = source.relative_to(controls.REPO)
+            copied = tree / relative
+            if relative in copied_targets:
+                assert copied.read_bytes() == source.read_bytes()
+            else:
+                assert not copied.exists(), relative
+                left += 1
+        assert left, f"{packing_relative}: every file returns, so the entry prunes nothing"
+
     results = ROOT / "campaign/series/series-000-smoke-and-calibration/results"
     for relative in (
         "exp-249-n17-first-certified-sub-patterns/census.json",
@@ -1100,19 +1121,6 @@ def test_unread_worker_outputs_leave_workers_while_declared_files_return(
         "exp-247-n17-unique-state-cover/audit",
     ):
         assert (tree / (results / relative).relative_to(controls.REPO)).is_dir()
-    for source in (
-        results / "exp-295-two-center-children/certificate.json",
-        results / "exp-251-n17-overnight-flag-certification/census.json",
-        results / "chelokot-lean-replay/build.log",
-        ROOT
-        / "campaign/retained/session-186-n17-issue358-readiness"
-        / "C2-external-release-inventory.json",
-        ROOT / "campaign/results/annealing/summaries.json",
-        ROOT / "atlas/rendering/free-quench-n1-trace.json",
-    ):
-        assert source.is_file()
-        assert source.relative_to(controls.REPO) not in copied_targets
-        assert not (tree / source.relative_to(controls.REPO)).exists()
     # The annealing record itself stays; only its bulk summary leaves.
     record = ROOT / "campaign/results/annealing/README.md"
     assert (tree / record.relative_to(controls.REPO)).read_bytes() == record.read_bytes()
