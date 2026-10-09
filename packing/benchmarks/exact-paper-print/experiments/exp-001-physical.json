@@ -1,0 +1,159 @@
+{
+  "recorded": "2026-10-09T06:31:11.091224+00:00",
+  "scope": "Dated hosted PDF qualification; this does not qualify the final cascaded head or live deployment.",
+  "revision": "1666a7490b882635ff3ec373df9b031ed500d33d",
+  "run": {
+    "id": 37888714875,
+    "url": "https://github.com/jlevy/squares/actions/runs/37888714875",
+    "conclusion": "success"
+  },
+  "producer_job": {
+    "id": 113684650328,
+    "url": "https://github.com/jlevy/squares/actions/runs/37888714875/job/113684650328",
+    "conclusion": "success"
+  },
+  "artifact": {
+    "id": 11597149165,
+    "name": "exact-side-values-page",
+    "zip_bytes": 5194737,
+    "expired_when_checked": false,
+    "created": "2026-10-09T05:30:56Z",
+    "verified_head_and_run": true
+  },
+  "pdf": {
+    "path": "/Volumes/spud-ext1/agent-evidence/polynomial-catalogue-01a118e4/recovery-2026-10-08/exact-side-values-run37888714875-head1666a749.pdf",
+    "bytes": 2810786,
+    "pages": 546,
+    "metadata": {
+      "/Title": "Exact Side Values for Packing Unit Squares",
+      "/Creator": "Chromium",
+      "/Producer": "Skia/PDF m151",
+      "/CreationDate": "D:20261008120000+00'00'",
+      "/ModDate": "D:20261008120000+00'00'"
+    },
+    "page_dimensions_points": [
+      {
+        "width": 612.0,
+        "height": 792.0,
+        "pages": 455
+      },
+      {
+        "width": 792.0,
+        "height": 612.0,
+        "pages": 91
+      }
+    ]
+  },
+  "content_observations": {
+    "first_page_declares": {
+      "current_records": 324,
+      "current_polynomials": 321,
+      "historical_side_polynomial_pairs": 175,
+      "degree_only": 0,
+      "numeric_only": 3
+    },
+    "current_polynomial_headings": 321,
+    "historical_polynomial_headings": 175,
+    "independently_checked_source_claim_occurrences": 4,
+    "geometry_and_lean_awaiting_V0C0_occurrences": 4,
+    "n83_coefficients": {
+      "degree": 672,
+      "rows": 673,
+      "all_strings_equal_to_dated_json_payload": true,
+      "source_payload": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/publication-final-site/papers/exact-side-values-data/coefficients/current-n83.json",
+      "pdf_pages": {
+        "first": 400,
+        "last": 492
+      },
+      "longest_integer_digits": 724,
+      "longest_integer_power": 38,
+      "longest_integer_page": 485
+    },
+    "coverage_limit": "The separate dated HTML/JSON receipt reconstructs all499records,519vectors and6273integers. This PDF audit confirms declared coverage, polynomial-section counts, four source claim controls and the complete n83 vector; it does not claim an independent PDF reconstruction of every vector.",
+    "exact_form_summary_scope": "The five-column exact-form table deliberately selects entries with exact_form_latex, so it is not a324-row register census. Its filtered row count is not credited as full-record coverage. The321current and175historical polynomial-section counts and first-page declared coverage are recorded separately."
+  },
+  "visual_inspection": {
+    "method": "pdftoppm -r144 -png -singlefile, then view_image with original detail; whole pages at native aspect ratio, no crops",
+    "pages": [
+      {
+        "number": 1,
+        "purpose": "Title, credits, edition, coverage, source identities"
+      },
+      {
+        "number": 80,
+        "purpose": "Densest current-register landscape summary table"
+      },
+      {
+        "number": 117,
+        "purpose": "Densest historical landscape summary table by extracted character count"
+      },
+      {
+        "number": 382,
+        "purpose": "Start of n17 equation and page-boundary continuation"
+      },
+      {
+        "number": 383,
+        "purpose": "Long n17 equation continuation, with n18/n19/n20 equations"
+      },
+      {
+        "number": 399,
+        "purpose": "n83 degree672 introduction and sum notation"
+      },
+      {
+        "number": 485,
+        "purpose": "n83 724digit coefficient, power38"
+      }
+    ],
+    "no_clipping_or_overlap_observed_in_selected_pages": true,
+    "readability_limit": "Current and historical landscape summary tables use approximately5.40point body text; zoom is needed for comfortable reading. Main prose, equation continuation and coefficient-code tables were clear in the selected pages.",
+    "table_font_sample": {
+      "PDF_font_size": 9.0600004,
+      "current_transformation_scale": 0.595618151182576,
+      "effective_points": 5.396300687961399
+    },
+    "scratch_images": [
+      {
+        "path": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/tmp/pdf-qa-1666/page-001-title.png",
+        "bytes": 176787
+      },
+      {
+        "path": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/tmp/pdf-qa-1666/page-080-densest-current-table.png",
+        "bytes": 162373
+      },
+      {
+        "path": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/tmp/pdf-qa-1666/page-117-densest-history-table.png",
+        "bytes": 257587
+      },
+      {
+        "path": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/tmp/pdf-qa-1666/page-382-dense-math.png",
+        "bytes": 132389
+      },
+      {
+        "path": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/tmp/pdf-qa-1666/page-383-dense-math-continuation.png",
+        "bytes": 114047
+      },
+      {
+        "path": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/tmp/pdf-qa-1666/page-399-n83-heading.png",
+        "bytes": 66952
+      },
+      {
+        "path": "/Volumes/spud-ext1/agent-scratch/polynomial-catalogue-01a118e4/tmp/pdf-qa-1666/page-485-n83-largest-integer.png",
+        "bytes": 335256
+      }
+    ]
+  },
+  "hosted_print_fit": {
+    "producer_log_api_exit": 0,
+    "producer_log_bytes_read_into_RAM": 1124595,
+    "matching_count_overflow_quietphase_or_pagecount_lines": 0,
+    "display_count": null,
+    "overflow_count": null,
+    "quiet_phase": null,
+    "limitation": "Successful producer status is verified, but its log provides no explicit print-fit measurements. The local1364DOMfit count is not credited as hosted evidence."
+  },
+  "tools": {
+    "pypdf_python": "/Users/levy/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "pdftoppm": "/Users/levy/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override/pdftoppm"
+  },
+  "no_source_changes_or_pdf_rebuild_or_new_pdf_copy": true
+}

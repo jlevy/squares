@@ -1,0 +1,39 @@
+type: object
+additionalProperties: false
+required:
+- id
+- claim
+- registered
+- criterion
+- minimum_physical_font_pt
+- target_font_pt
+- maximum_overflow_px
+- current_records
+- historical_records
+- n83_coefficients
+- bead
+properties:
+  id:
+    const: H-001
+  claim:
+    type: string
+    minLength: 1
+  registered:
+    type: string
+    minLength: 1
+  criterion:
+    const: print_readability
+  minimum_physical_font_pt:
+    const: 8
+  target_font_pt:
+    const: 9
+  maximum_overflow_px:
+    const: 1
+  current_records:
+    const: 324
+  historical_records:
+    const: 175
+  n83_coefficients:
+    const: 673
+  bead:
+    const: think-yon5
